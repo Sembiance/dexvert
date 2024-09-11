@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,992)
+# Unsupported File Formats (1,995)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -180,7 +180,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (64)
+## Audio (65)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -216,6 +216,7 @@ Family/Format | Name | Extensions | Notes
 [audio/maxonMagicSoundSample](https://discmaster.textfiles.com/search?formatid=maxonMagicSoundSample) | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://sembiance.com/fileFormatSamples/audio/maxonMagicSoundSample/)
 [audio/medSynthSound](https://discmaster.textfiles.com/search?formatid=medSynthSound) | MED Synth Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/medSynthSound/)
 [audio/microsoftSpeechData](https://discmaster.textfiles.com/search?formatid=microsoftSpeechData) | Microsoft Speech Data |  | 
+[audio/mmfwSounds](https://discmaster.textfiles.com/search?formatid=mmfwSounds) | MMFW Sounds | .mma | 
 [audio/musicStudioSound](https://discmaster.textfiles.com/search?formatid=musicStudioSound) | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://sembiance.com/fileFormatSamples/audio/musicStudioSound/)
 [audio/musiclineInstrument](https://discmaster.textfiles.com/search?formatid=musiclineInstrument) | [Musicline Instrument](https://www.musicline.org/) |  | [7 sample files](https://sembiance.com/fileFormatSamples/audio/musiclineInstrument/)
 [audio/outcastSoundEffects](https://discmaster.textfiles.com/search?formatid=outcastSoundEffects) | [Outcast Sound effects](https://playtechs.blogspot.com/2010/05/reading-outcast-sfx-files.html) | .sfx | 
@@ -503,7 +504,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (145)
+## Image (146)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -587,6 +588,7 @@ Family/Format | Name | Extensions | Notes
 [image/microIllustrator](https://discmaster.textfiles.com/search?formatid=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 [image/micrografxIcon](https://discmaster.textfiles.com/search?formatid=micrografxIcon) | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://sembiance.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
 [image/microsoftBorderArt](https://discmaster.textfiles.com/search?formatid=microsoftBorderArt) | Microsoft Border Art | .bdr | 
+[image/mmfwPictures](https://discmaster.textfiles.com/search?formatid=mmfwPictures) | MMFW Pictures | .mmp | 
 [image/mvpPaintAnimation](https://discmaster.textfiles.com/search?formatid=mvpPaintAnimation) | MVP Paint Animation | .af | 
 [image/needForSpeedTextures](https://discmaster.textfiles.com/search?formatid=needForSpeedTextures) | Need For Speed textures | .fam | 
 [image/neoPaintPattern](https://discmaster.textfiles.com/search?formatid=neoPaintPattern) | NeoPaint Pattern | .pat | [2 sample files](https://sembiance.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
@@ -791,7 +793,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,148)
+## Other (1,149)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1168,6 +1170,7 @@ Family/Format | Name | Extensions | Notes
 [other/ensoniqVFXPatchFile](https://discmaster.textfiles.com/search?formatid=ensoniqVFXPatchFile) | Ensoniq VFX Patch File | .vfx | 
 [other/enviromentalAudioLibraryData](https://discmaster.textfiles.com/search?formatid=enviromentalAudioLibraryData) | Enviromental Audio Library data | .eal | 
 [other/erdasImagineHierarchicalFileArchitecture](https://discmaster.textfiles.com/search?formatid=erdasImagineHierarchicalFileArchitecture) | ERDAS Imagine Hierarchical File Architecture |  | 
+[other/esriArcInfoBinaryGrid](https://discmaster.textfiles.com/search?formatid=esriArcInfoBinaryGrid) | ESRI Arc/Info Binary Grid | .adf | 
 [other/esriCoverageAnnotation](https://discmaster.textfiles.com/search?formatid=esriCoverageAnnotation) | ESRI ArcInfo Coverage Annotation |  | 
 [other/esriGridNIT](https://discmaster.textfiles.com/search?formatid=esriGridNIT) | ESRI ArcInfo Grid NIT | .nit | 
 [other/esriAttributeIndexFiles](https://discmaster.textfiles.com/search?formatid=esriAttributeIndexFiles) | ESRI Attribute Index Files | .ain | 

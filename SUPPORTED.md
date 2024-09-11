@@ -1,4 +1,4 @@
-# Supported File Formats (2,354)
+# Supported File Formats (2,356)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -371,7 +371,7 @@ archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_res
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)
 archive | X68000 Floppy Disk Image | .xdf | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/x68000FloppyDiskImage/)
-archive | XPACK/LZCOM Packed | .exe .com | cup386 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/xpackLZCOMPacked/)
+archive | XPACK/LZCOM Packed | .exe .com | cup386 | [7 sample files](https://sembiance.com/fileFormatSamples/archive/xpackLZCOMPacked/)
 archive | [XX34](http://fileformats.archiveteam.org/wiki/XX34) |  | [xx34](https://www.sac.sk/download/utilfile/xx3402.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/xx34/)
 archive | [XZ Archive](http://fileformats.archiveteam.org/wiki/XZ) | .xz | [xz](https://tukaani.org/xz/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [UniExtract](https://www.legroom.net/software/uniextract) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xz/)
 archive | YBS Archive | .ybs | [ybs](https://www.sac.sk/download/pack/ybs003fd.zip) | 
@@ -1008,7 +1008,7 @@ image | [HP Palmtop Icon](http://fileformats.archiveteam.org/wiki/HP_100LX/200LX
 image | [HRU](http://fileformats.archiveteam.org/wiki/HRU) | .hru | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/hru/)
 image | [HS2 Postering](http://fileformats.archiveteam.org/wiki/HS2_(POSTERING)) | .hs2 | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/hs2/)
 image | [HSI Raw](http://fileformats.archiveteam.org/wiki/HSI_Raw) | .raw .hst | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [10 sample files](https://sembiance.com/fileFormatSamples/image/hsiRaw/)
-image | [Husqvarna Viking Embroidery](http://fileformats.archiveteam.org/wiki/HUS) | .hus | [konvertor](https://www.logipole.com/konvertor-en.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/image/husqvarnaViking/)
+image | [Husqvarna Viking Embroidery](http://fileformats.archiveteam.org/wiki/HUS) | .hus | [konvertor](https://www.logipole.com/konvertor-en.htm) | [12 sample files](https://sembiance.com/fileFormatSamples/image/husqvarnaViking/)
 image | I Paint | .ip | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/image/iPaint/)
 image | [IBM KIPS Bitmap](http://fileformats.archiveteam.org/wiki/IBM_KIPS_bitmap) | .kps | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/ibmKIPS/)
 image | [IBM Storyboard PIC](http://fileformats.archiveteam.org/wiki/Storyboard_PIC/CAP) | .pic .cap | [deark](https://entropymine.com/deark/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [storyboardLiveShowPic](https://winworldpc.com/product/ibm-storyboard/live-20) | [28 sample files](https://sembiance.com/fileFormatSamples/image/ibmStoryboardPic/) - Unable to use SBLIVE/PICTYPE.EXE to determine if it's valid due to that program not working with shell redirection (see sandbox/legacy/programs_and_formats/storyboardLivePicType.js) Several encountered .PIC files that PICTYPE does say are valid don't show in SHOWPIC.EXE for whatever reason.
@@ -1277,7 +1277,7 @@ image | [Synthetic Arts](http://fileformats.archiveteam.org/wiki/Synthetic_Arts)
 image | [Synthetic Universe Image](http://fileformats.archiveteam.org/wiki/Synu) | .synu .syn | [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/synu/)
 image | [Syslinux LSS16](http://fileformats.archiveteam.org/wiki/LSS16) | .lss .16 | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/lss16/)
 image | [Tagged Image File Format](http://fileformats.archiveteam.org/wiki/TIFF) | .tif .tiff | [deark](https://entropymine.com/deark/) [convert](https://www.imagemagick.org/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [iio2png](http://github.com/Sembiance/iio2png/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [hiJaakExpress](https://archive.org/details/hijaak-express) [imjview](https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/IMPACJ11.ZIP) [gimp](https://gimp.org) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [keyViewPro](https://archive.org/details/KeyViewPro/) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [72 sample files](https://sembiance.com/fileFormatSamples/image/tiff/)
-image | Tajima Stitch | .dst | [konvertor](https://www.logipole.com/konvertor-en.htm) | [4 sample files](https://sembiance.com/fileFormatSamples/image/tajimaStich/)
+image | Tajima Stitch | .dst | [konvertor](https://www.logipole.com/konvertor-en.htm) | [13 sample files](https://sembiance.com/fileFormatSamples/image/tajimaStich/)
 image | [Taquart Interlace Picture](http://fileformats.archiveteam.org/wiki/Taquart_Interlace_Picture) | .tip | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/taquart/)
 image | [Technicolor Dream](http://fileformats.archiveteam.org/wiki/Technicolor_Dream) | .lum .col | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/technicolorDream/)
 image | [Telepaint](http://fileformats.archiveteam.org/wiki/TelePaint/Splash_graphics) | .ss .st | [telepaintConvert](https://vetusware.com/download/TelePaint%203.0/?id=6656) | [29 sample files](https://sembiance.com/fileFormatSamples/image/telepaint/)
@@ -1833,7 +1833,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (527)
+## Text (529)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -1904,7 +1904,7 @@ text | Canoma scene | .3dv |  |
 text | Cartoon Studio Script | .css |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cartoonStudioScript/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets) | .css |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/css/)
 text | Cashflow Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cashflowHelp/)
-text | CauseWay DOS Extender exception | .err |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
+text | CauseWay DOS Extender exception | .err |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
 text | [CDRDAO TOC File](http://fileformats.archiveteam.org/wiki/TOC) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/text/toc/)
 text | Celestia script | .cel |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/celestiaScript/)
 text | Celestia Sphere displacement Mesh | .cms |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/celestiaSphereDisplacementMesh/)
@@ -1914,7 +1914,7 @@ text | ChiWriter document | .chi |  | [4 sample files](https://sembiance.com/fil
 text | Chord text file | .crd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/chordTextFile/)
 text | CIRCAD data | .tpc .tsa .tpb .tsc .pcb .tpa .tpd .tda .tsd .tdc .tsb .sch .tdb .tdd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/circadData/)
 text | CircuitMaker schematic | .ckt |  | 
-text | Clarion Project | .prj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/clarionProject/)
+text | Clarion Project | .prj |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/clarionProject/)
 text | ClariSSA saved work/session |  |  | 
 text | CLISP byte-compiled Lisp program | .fas |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/clispByteCompiled/)
 text | Clustal Alignment format | .nbrf .aln |  | 
@@ -1949,9 +1949,10 @@ text | Doom Configuration | .cfg |  | [10 sample files](https://sembiance.com/fi
 text | DoomEd ASCII map | .dwd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/doomEdASCIIMap/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/Batch_file) | .bat |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/batDOS/)
 text | DosCapture video card Modes info | .mod |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/dosCaptureVideoCardModesInfo/)
-text | Doxygen configuration settings | .cfg |  | 
+text | Doxygen configuration settings | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/doxygenConfigurationSettings/)
 text | dtread Type Descriptor | .dtyp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dtreadTypeDescriptor/)
 text | EASIGRAF Graph Parameters | .grp |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/easigrafGraphParameters/)
+text | Easy SFV Creator checksum | .sfv |  | 
 text | EasyBase data base |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/easyBaseDataBase/)
 text | EasyBase DB Configuration | .config |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/easyBaseDBConfiguration/)
 text | Eclipse Preferences | .prefs |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/eclipsePreferences/)
@@ -1970,8 +1971,8 @@ text | EMBL sequence data | .embl .emb .dna |  |
 text | Enriched Text Document |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
 text | ESRI Arc/Info Export | .e00 |  | 
 text | ESRI Arc/Info interchange format | .e00 .x00 |  | 
-text | ESRI Arc/View Project | .apr |  | 
-text | ESRI ArcInfo DAT File (External) | .dat |  | 
+text | ESRI Arc/View Project | .apr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
+text | ESRI ArcInfo DAT File (External) | .dat |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExternalDAT/)
 text | ESRI Shapefile Projection | .prj |  | 
 text | ESS-Code Filter | .flt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/essCodeFilter/)
 text | Eureka/Mercury Report | .rpt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/eurekaMercuryReport/)
@@ -1982,7 +1983,7 @@ text | ExpressGraph Graph | .grf |  | [12 sample files](https://sembiance.com/fi
 text | Expression Design drawing | .xpr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/expressionDesignDrawing/)
 text | Expression Strokes | .sks |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/expressionStrokes/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
-text | FAR help | .hlf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
+text | FAR help | .hlf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
 text | FGDC metadata | .met |  | 
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
 text | Flight Sim Toolkit airplane parameters |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitAirplaneParameters/)
@@ -2040,7 +2041,7 @@ text | Impatica OnCue Project | .ipj |  | [7 sample files](https://sembiance.com
 text | IndyCar Racing drivers info | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingDriversInfo/)
 text | IndyCar Racing track info | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingTrackInfo/)
 text | IndyCar Racing track record info | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingTrackRecordInfo/)
-text | Inform source | .inf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/informSource/)
+text | Inform source | .inf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/informSource/)
 text | Information Presentation Facility markup | .ipf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/informationPresentationFacilityMarkup/)
 text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/ini/)
 text | Initial Graphics Exchange Specification | .igs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/iges/)
@@ -2128,7 +2129,7 @@ text | Microsoft Programmer's Workbench Status | .sts |  | [10 sample files](htt
 text | Microsoft PRX |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftPRX/)
 text | Microsoft Visual C++ Workspace | .vcw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftVisualCPPWorkspace/)
 text | Microsoft Visual Studio Solution | .sln |  | [24 sample files](https://sembiance.com/fileFormatSamples/text/microsoftVisualStudioSolution/)
-text | Microsoft VisualStudio Solution User Options | .suo |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/microsoftVisualStudioSolutionUserOptions/)
+text | Microsoft VisualStudio Solution User Options | .suo |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/microsoftVisualStudioSolutionUserOptions/)
 text | MindReader Dictionary | .dic |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/mindReaderDictionary/)
 text | MinerVGA sprites Library | .lbr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/minerVGASpritesLibrary/)
 text | Modula Definition | .def |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/modulaDefinition/)
@@ -2257,6 +2258,7 @@ text | Span-It! Personality definition | .per |  | [10 sample files](https://sem
 text | Speedo font Typeface Definition | .tdf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/speedoFontTypefaceDefinition/)
 text | SPSS Portable Data Format | .por |  | 
 text | ST-6 color Table | .tbl |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/st6ColorTable/)
+text | Standard ACIS Text | .sat |  | 
 text | Starcat disks catalogue | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/starcatDisksCatalogue/)
 text | Starry Night Document | .sno .snf |  | 
 text | StarWriter keyboard Macro | .mac |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/starWriterKeyboardMacro/)
@@ -2351,7 +2353,7 @@ text | Windows URL shortcut | .url |  | [11 sample files](https://sembiance.com/
 text | Wine Registry |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/wineRegistry/)
 text | WinFlash Flashcard Source | .fls |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/winFlashFlashcardSource/)
 text | WinJack for MS Win | .bj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/winJackForMSWin/)
-text | WinUAE Configuration | .uae |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/winUAEConfiguration/)
+text | WinUAE Configuration | .uae |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/winUAEConfiguration/)
 text | Wise Installer log | .log |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/wiseInstallerLog/)
 text | Wise script | .wse |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)
 text | Xantippe project | .xan |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/xantippeProject/)

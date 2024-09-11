@@ -13,6 +13,6 @@ dra testMany.js --format=poly		# 25m 23s?
 dra testMany.js --format=music		# 38m 50s
 dra testMany.js --format=document	# 44m 46s
 dra testMany.js --format=image		# 59m 19s
-dra testMany.js --format=archive	# 69m 50s?
+dra testMany.js --format=archive	# 78m 34s
 
 # dra testMany.js --format=all		#  3h  53m 19s

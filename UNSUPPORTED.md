@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,995)
+# Unsupported File Formats (2,001)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -504,7 +504,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (146)
+## Image (147)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -526,6 +526,7 @@ Family/Format | Name | Extensions | Notes
 [image/autoCADShape](https://discmaster.textfiles.com/search?formatid=autoCADShape) | AutoCAD Shape | .shx | [6 sample files](https://sembiance.com/fileFormatSamples/image/autoCADShape/)
 [image/autoSketchDrawing](https://discmaster.textfiles.com/search?formatid=autoSketchDrawing) | AutoSketch Drawing | .skd | [5 sample files](https://sembiance.com/fileFormatSamples/image/autoSketchDrawing/)
 [image/bbcDisplayRAM](https://discmaster.textfiles.com/search?formatid=bbcDisplayRAM) | BBC Display RAM Dump |  | [1 sample file](https://sembiance.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+[image/beamSoftwareSIFFImage](https://discmaster.textfiles.com/search?formatid=beamSoftwareSIFFImage) | Beam Software SIFF sprite/image | .pim | 
 [image/blueScanDrawing](https://discmaster.textfiles.com/search?formatid=blueScanDrawing) | Blue Scan Drawing | .blsc | 
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?formatid=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
 [image/cadlogicInstinctDrawing](https://discmaster.textfiles.com/search?formatid=cadlogicInstinctDrawing) | Cadlogic Instinct Drawing | .dp | 
@@ -793,7 +794,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,149)
+## Other (1,153)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1490,6 +1491,7 @@ Family/Format | Name | Extensions | Notes
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?formatid=mySQLTableDefinition) | MySQL Table Definition | .frm | 
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?formatid=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?formatid=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
+[other/navisWorksDocument](https://discmaster.textfiles.com/search?formatid=navisWorksDocument) | NavisWorks Document | .nwd | 
 [other/needForSpeed2TrackData](https://discmaster.textfiles.com/search?formatid=needForSpeed2TrackData) | Need For Speed 2 Track data | .trk | 
 [other/needForSpeedCarData](https://discmaster.textfiles.com/search?formatid=needForSpeedCarData) | Need for Speed car data | .pdn | 
 [other/needForSpeedCarExterior](https://discmaster.textfiles.com/search?formatid=needForSpeedCarExterior) | Need for Speed car exterior | .cfm | 
@@ -1684,6 +1686,7 @@ Family/Format | Name | Extensions | Notes
 [other/scorchedEarthMountainData](https://discmaster.textfiles.com/search?formatid=scorchedEarthMountainData) | Scorched Earth Mountain Data | .mtn | 
 [other/scorePerfectProfessionalFont](https://discmaster.textfiles.com/search?formatid=scorePerfectProfessionalFont) | Score Perfect Professional Font | .spf | 
 [other/screamTrackerInstrumentsLibrary](https://discmaster.textfiles.com/search?formatid=screamTrackerInstrumentsLibrary) | Scream Tracker Instruments Library | .015 .014 .016 .017 | 
+[other/scriptMagicArchive](https://discmaster.textfiles.com/search?formatid=scriptMagicArchive) | ScriptMagic archive |  | 
 [other/sculpt3DTake](https://discmaster.textfiles.com/search?formatid=sculpt3DTake) | Sculpt 3D Take | .take | 
 [other/scummMainData](https://discmaster.textfiles.com/search?formatid=scummMainData) | SCUMM main data container |  | 
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
@@ -1750,6 +1753,7 @@ Family/Format | Name | Extensions | Notes
 [other/superbaseForm](https://discmaster.textfiles.com/search?formatid=superbaseForm) | Superbase Form | .sbv | 
 [other/superFlowTemplate](https://discmaster.textfiles.com/search?formatid=superFlowTemplate) | SuperFlow Template | .stp | 
 [other/superJamFile](https://discmaster.textfiles.com/search?formatid=superJamFile) | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
+[other/superscapeDo3DTemplate](https://discmaster.textfiles.com/search?formatid=superscapeDo3DTemplate) | Superscape Do 3D Template | .vrt | 
 [other/surrealSoftwareGameArchive](https://discmaster.textfiles.com/search?formatid=surrealSoftwareGameArchive) | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | 
 [other/swishEIndex](https://discmaster.textfiles.com/search?formatid=swishEIndex) | Swish-e index | .swi | 
 [other/symantecInternetToolsData](https://discmaster.textfiles.com/search?formatid=symantecInternetToolsData) | Symantec Internet Tools Data | .ve2 .vep | 
@@ -1769,6 +1773,7 @@ Family/Format | Name | Extensions | Notes
 [other/termInfo](https://discmaster.textfiles.com/search?formatid=termInfo) | TermInfo |  | 
 [other/terraGenLightAndAtmosphere](https://discmaster.textfiles.com/search?formatid=terraGenLightAndAtmosphere) | TerraGen Light and Atmosphere | .atm | 
 [other/terragenSurfaceMap](https://discmaster.textfiles.com/search?formatid=terragenSurfaceMap) | Terragen Surface Map | .srf | 
+[other/terragenWorld](https://discmaster.textfiles.com/search?formatid=terragenWorld) | Terragen World | .tgw | 
 [other/testDriveOffRoadGraphics](https://discmaster.textfiles.com/search?formatid=testDriveOffRoadGraphics) | Test Drive: Off-Road graphics | .tmf | 
 [other/texFontMetricData](https://discmaster.textfiles.com/search?formatid=texFontMetricData) | TeX Font Metric Data | .tfm | 
 [other/texVirtualFont](https://discmaster.textfiles.com/search?formatid=texVirtualFont) | TeX Virtual Font | .vf | 
@@ -1948,7 +1953,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (51)
+## Poly (52)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1996,6 +2001,7 @@ Family/Format | Name | Extensions | Notes
 [poly/solidWorksPart](https://discmaster.textfiles.com/search?formatid=solidWorksPart) | SolidWorks Part | .sldprt | [10 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksPart/)
 [poly/strata3DShape](https://discmaster.textfiles.com/search?formatid=strata3DShape) | Strata 3D Shape | .ssh | 
 [poly/strataStudioProVis](https://discmaster.textfiles.com/search?formatid=strataStudioProVis) | Strata StudioPro Vis |  | 
+[poly/superscapeDo3DObject](https://discmaster.textfiles.com/search?formatid=superscapeDo3DObject) | Superscape Do 3D VCA | .vca | I was able to open these in Superscape VRT, but exporting to VRML didn't produce a usable result. The 'Do 3D' program doesn't work any better (also requires CD in drive)
 [poly/superScapeVR](https://discmaster.textfiles.com/search?formatid=superScapeVR) | SuperScape Virtual Reality | .svr | 
 [poly/tornado3DModel](https://discmaster.textfiles.com/search?formatid=tornado3DModel) | Tornado 3D model | .tor | 
 [poly/valveModelVertices](https://discmaster.textfiles.com/search?formatid=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.

@@ -23,6 +23,7 @@ export class rayDreamDesignerStudio55 extends Program
 		script : `
 			Sleep(4000)	; give it some time for the error windows to pop up
 			Func PreOpenWindows()
+				WindowFailure("", "Not the right kind of document", -1, "{ENTER}")
 				WindowDismiss("Unknown Component", "", "{TAB}{TAB}{TAB}{ENTER}")
 				return WinActive("Ray Dream Studio", "")
 			EndFunc

@@ -14,6 +14,7 @@ export class superscapeVRT extends Program
 			; The file information window doesn't always appear, but if it does, it's not always the 'active' window and so we need to click it to dismiss it
 			Func WaitForFileInfo()
 				WindowFailure("", "Erroring Decompressing", -1, "{ENTER}")
+				WindowFailure("", "ERROR: Configuration file", -1, "{ENTER}")
 				WindowFailure("", "Failed to create empty document", -1, "{ENTER}")
 				If WinActive("${path.basename(r.inFile())} - Superscape VRT", "") Then
 					$mainWindowActive = 1

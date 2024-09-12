@@ -1564,6 +1564,7 @@ export const WEAK_VALUES =
 	/^PCjr Speech Adapter CVSD audio$/,
 	/^Peak audio info$/,
 	/^Pepakura Designer work$/,
+	/^Perfect Keyboard macro set$/,
 	/^PERQemu Hard Disk image$/,
 	/^Personal Paint encrypted bitmap$/,	// Found these in the wild, distrubuted with demo version of program, but it's weak magic and can't decrypt them easily anyways
 	/^PFS File database$/,
@@ -1705,6 +1706,7 @@ export const WEAK_VALUES =
 	/^Windows Media Player skin$/,
 	/^Windows NTBackup archive$/,
 	/^Windows Script File$/,
+	/^Windows Shadow spooler \(2003\)$/,
 	/^Windows SDK Setup Transform script$/,
 	/^WindowBlinds skin-theme$/,
 	/^WinGenea Data File$/,

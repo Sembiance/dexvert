@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,001)
+# Unsupported File Formats (2,003)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (169)
+## Archive (170)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -106,6 +106,7 @@ Family/Format | Name | Extensions | Notes
 [archive/newtonPackage](https://discmaster.textfiles.com/search?formatid=newtonPackage) | Newton Package | .pkg | 
 [archive/nortonBackupFile](https://discmaster.textfiles.com/search?formatid=nortonBackupFile) | Norton Backup file | .001 | 
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?formatid=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 
+[archive/nosPackerPacked](https://discmaster.textfiles.com/search?formatid=nosPackerPacked) | NOS Packer Packed | .exe | 
 [archive/nsPacKPacked](https://discmaster.textfiles.com/search?formatid=nsPacKPacked) | NsPacK Packed |  | 
 [archive/ntShellProtected](https://discmaster.textfiles.com/search?formatid=ntShellProtected) | NTShell protected | .exe | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?formatid=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
@@ -251,7 +252,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (111)
+## Document (112)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -275,6 +276,7 @@ Family/Format | Name | Extensions | Notes
 [document/asyncProfessionalFax](https://discmaster.textfiles.com/search?formatid=asyncProfessionalFax) | [Async Profesional Fax](http://fileformats.archiveteam.org/wiki/Async_Professional_Fax) | .apf | [2 sample files](https://sembiance.com/fileFormatSamples/document/asyncProfessionalFax/)
 [document/bdcHelpSystem](https://discmaster.textfiles.com/search?formatid=bdcHelpSystem) | BDC HelpSystem | .hlp | 
 [document/blackMagicHypertext](https://discmaster.textfiles.com/search?formatid=blackMagicHypertext) | Black Magic hypertext document | .mag | 
+[document/bookBrowserEBook](https://discmaster.textfiles.com/search?formatid=bookBrowserEBook) | BookBrowser eBook | .ebk | 
 [document/borlandSprint](https://discmaster.textfiles.com/search?formatid=borlandSprint) | [Borland Sprint](https://winworldpc.com/product/borland-sprint) | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/document/borlandSprint/) - DOS based word processor. Haven't investigated it for magic. Not 100% sure my sample file is Borland Sprint, but couldn't find another WordProcessor called sprint.
 [document/calamusDocument](https://discmaster.textfiles.com/search?formatid=calamusDocument) | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://sembiance.com/fileFormatSamples/document/calamusDocument/)
 [document/canDoDeck](https://discmaster.textfiles.com/search?formatid=canDoDeck) | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://sembiance.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/

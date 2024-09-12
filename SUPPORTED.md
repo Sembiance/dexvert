@@ -78,7 +78,7 @@ archive | CEBE Compress Expand Packed | .exe .com | [unp](https://sites.google.c
 archive | Chasm Game Archive | .bin | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/chasmGameArchive/)
 archive | Cheat Packer Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/cheatPackerPacked/)
 archive | [ChiefLZ LZA Archive](http://fileformats.archiveteam.org/wiki/ChiefLZ) | .lza .lzz | [lzaArchive](https://www.sac.sk/download/pack/lza101.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/chiefLZArchive/)
-archive | [ChiefLZ LZA Compressed](http://fileformats.archiveteam.org/wiki/ChiefLZ) | _ | [lza](https://www.sac.sk/download/pack/lza101.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/chiefLZ/)
+archive | [ChiefLZ LZA Compressed](http://fileformats.archiveteam.org/wiki/ChiefLZ) | _ | [lza](https://www.sac.sk/download/pack/lza101.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/chiefLZ/)
 archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/cso/)
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
 archive | com RLE packer Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
@@ -617,7 +617,7 @@ document | PageSetter Document | .ps | [strings](https://www.gnu.org/software/bi
 document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://sembiance.com/fileFormatSamples/document/pageStreamDocument/)
 document | Palm MobileDB Database | .pdb | [pdb2csv](https://sourceforge.net/projects/palm-db-tools/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/mobildDBDatabase/)
 document | Palm PeanutReader e-book | .pdb | [ebook_convert](https://calibre-ebook.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/palmPeanutReaderEBook/)
-document | Palm SuperMemo | .pdb | [strings](https://www.gnu.org/software/binutils/) | 
+document | Palm SuperMemo | .pdb | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/document/palmSuperMemo/)
 document | Palm TealMeal Document | .pdb | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/palmTealMeal/)
 document | Palm ThoughtManager | .pdb | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/palmThoughtManager/)
 document | [PalmDOC](http://fileformats.archiveteam.org/wiki/PalmDOC) | .pdb .prc | [ebook_convert](https://calibre-ebook.com/) [soffice](https://www.libreoffice.org) | [11 sample files](https://sembiance.com/fileFormatSamples/document/palmDOC/)
@@ -2117,7 +2117,7 @@ text | MediaPoint script |  |  |
 text | Menubar toolbar config | .mbr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/menubarToolbarConfig/)
 text | METAFONT transcript | .log |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/metafontTranscript/)
 text | MFC ClassWizard info | .clw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mfcClassWizardInfo/)
-text | MGI VideoWave Storyboard | .sbd |  | 
+text | MGI VideoWave Storyboard | .sbd |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/mgiVideoWaveStoryboard/)
 text | Micro-Channel Architecture Adapter Description Library | .adl |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/microChannelArchitectureADL/)
 text | MicroFiche Filer Plus database | .mff |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microFicheFilerPlusDatabase/)
 text | Micrografx Graph data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/micrografxGraphData/)
@@ -2218,7 +2218,7 @@ text | QAPlus Keyboard Map | .kbd |  |
 text | [QRT Ray Tracer scene description](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_scene_description) | .qrt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qrtRayTracerSceneDescription/)
 text | Quake I save | .sav |  | 
 text | Quicken Interchange Format | .qif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickenInterchangeFormat/)
-text | QuizPro Quiz data | .qzs .qzd .qze |  | 
+text | QuizPro Quiz data | .qzs .qzd .qze |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quizProQuizData/)
 text | RAR registration data | .key |  | 
 text | REAL Numbers Tape | .tap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/realNumbersTape/)
 text | RealMedia meta file | .ram |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/realMediaMetaFile/)
@@ -2269,7 +2269,7 @@ text | StarWriter keyboard Macro | .mac |  | [3 sample files](https://sembiance.
 text | Storm Shell project/makefile | .¶ .image |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/stormShellProjectMakefile/)
 text | StormEd settings | .ed |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/stormEdSettings/)
 text | Studio Printer Dither method | .dit |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/studioPrinterDitherMethod/)
-text | SubStation Alpha Subtitle | .ssa .ass |  | 
+text | SubStation Alpha Subtitle | .ssa .ass |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/subStationAlphaSubtitle/)
 text | SuperDOS Adapter File | .adf |  | 
 text | SuperKey Macro | .mac |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/superKeyMacro/)
 text | SuperTux Level | .stl |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/superTuxLevel/)

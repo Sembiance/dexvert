@@ -89,6 +89,7 @@ export class Program
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
 			renameIn         : {type : "boolean"},
+			skipVerify       : {type : "boolean"},
 			verify           : {type : "function", length : [0, 2]}
 		});
 

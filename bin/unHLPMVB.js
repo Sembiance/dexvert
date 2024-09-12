@@ -140,14 +140,15 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 				if(r.created.files.output.length>1)
 					xlog.warn`Only expected 1 result for match ${m} from import file ${filename} at ${importFilePath} conversion, but got several: ${r.created.files.output}`;
 
-				const importOutputFile = r.created.files.output[0];
-				if(importOutputFile.ext.toLowerCase()===".svg")
+				const importOutputFile = r.created.files.output[0].toLowerCase();
+				const importOutputFileAbsolute = path.join(r.created.root, importOutputFile);
+				if(importOutputFile.endsWith(".svg"))
 				{
 					// svg files (usually from a .wmf conversion) should be converted to PNG and embedded into the RTF
 					const svgWidth = r?.phase?.meta?.width || r?.phase?.meta?.canvasWidth || 100;
 					const svgHeight = r?.phase?.meta?.height || r?.phase?.meta?.canvasHeight || 100;
 					const tmpPNGFilePath = await fileUtil.genTempPath(tmpDirPath, ".png");
-					const {stdout : stdoutSVG, stderr : stderrSVG} = await runUtil.run("resvg", ["--width", svgWidth.toString(), "--height", svgHeight.toString(), importOutputFile.absolute, tmpPNGFilePath], {timeout : xu.MINUTE});
+					const {stdout : stdoutSVG, stderr : stderrSVG} = await runUtil.run("resvg", ["--width", svgWidth.toString(), "--height", svgHeight.toString(), importOutputFileAbsolute, tmpPNGFilePath], {timeout : xu.MINUTE});
 					if(!(await fileUtil.exists(tmpPNGFilePath)))
 					{
 						xlog.error`Failed to convert SVG for match ${m} result with resvg from ${filename} to PNG with stdout ${stdoutSVG} and stderr ${stderrSVG}`;
@@ -158,20 +159,20 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					cachedPNGData[availableFilename] = (await Deno.readFile(tmpPNGFilePath)).asHex();
 					return rtfPNG(cachedPNGData[availableFilename]);
 				}
-				else if(importOutputFile.ext.toLowerCase()===".png")
+				else if(importOutputFile.endsWith(".png"))
 				{
 					// PNG files can be directly embedded into the file
 					availableFilenames.delete(availableFilename);
-					cachedPNGData[availableFilename] = (await Deno.readFile(importOutputFile.absolute)).asHex();
+					cachedPNGData[availableFilename] = (await Deno.readFile(importOutputFileAbsolute)).asHex();
 					return rtfPNG(cachedPNGData[availableFilename]);
 				}
-				else if(importOutputFile.ext.toLowerCase()===".mp4")
+				else if(importOutputFile.endsWith(".mp4"))
 				{
 					// MP4 files usually result from embedded .AVI movies in multimedia view book files. let's grab a thumbnail and embed that and NOT remove the file from the available names so it will get copied over if --extractExtra is set
 					const vidWidth = r?.phase?.meta?.width || 100;
 					const vidHeight = r?.phase?.meta?.height || 100;
 					const tmpPNGFilePath = await fileUtil.genTempPath(tmpDirPath, ".png");
-					const {stdout : stdoutVid, stderr : stderrVid} = await runUtil.run("ffmpeg", ["-i", `file:${importOutputFile.absolute}`, "-frames:v", "1", "-an", "-s", `${vidWidth}x${vidHeight}`, "-ss", "0", "-f", "image2", "-c", "png", `file:${tmpPNGFilePath}`]);
+					const {stdout : stdoutVid, stderr : stderrVid} = await runUtil.run("ffmpeg", ["-i", `file:${importOutputFileAbsolute}`, "-frames:v", "1", "-an", "-s", `${vidWidth}x${vidHeight}`, "-ss", "0", "-f", "image2", "-c", "png", `file:${tmpPNGFilePath}`]);
 					if(!(await fileUtil.exists(tmpPNGFilePath)))
 					{
 						xlog.error`Failed to generate thumb for match ${m} for MP4 result with ffmpeg from ${filename} with dimensions ${vidWidth}x${vidHeight} with stdout ${stdoutVid} and stderr ${stderrVid}`;

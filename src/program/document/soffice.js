@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {Program, RUNTIME} from "../../Program.js";
+import {fileUtil} from "xutil";
 
 export class soffice extends Program
 {
@@ -15,10 +16,12 @@ export class soffice extends Program
 	
 	bin        = "soffice";
 	runOptions = ({virtualX : true});
-	exclusive  = "soffice";
-	args       = r =>
+	//exclusive  = "soffice";
+	args       = async r =>
 	{
-		const args = [];
+		const userInstallationDirPath = await fileUtil.genTempPath(r.cwd, "soffice");
+		await Deno.mkdir(userInstallationDirPath, {recursive : true});
+		const args = [`--accept=pipe,name=soffice${xu.randStr()};urp`, `-env:UserInstallation=file://${userInstallationDirPath}`, "--quickstart=no", "--norestore", "--nologo", "--headless"];
 
 		if(["csv", "pdf"].includes(r.flags.outType || "pdf"))
 		{
@@ -34,7 +37,7 @@ export class soffice extends Program
 			args.push(`--infilter=${format}:${charset}`);
 		}
 		
-		return [...args, "--headless", "--convert-to", (r.flags.outType || "pdf"), "--outdir", r.outDir(), r.inFile()];
+		return [...args, "--convert-to", (r.flags.outType || "pdf"), "--outdir", r.outDir(), r.inFile()];
 	};
 	osData    = ({timeout : xu.MINUTE*2});
 	chain     = r => (r.flags.outType==="svg" ? `deDynamicSVG${r.flags.autoCropSVG ? "[autoCrop]" : ""}` : null);

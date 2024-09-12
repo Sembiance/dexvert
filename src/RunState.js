@@ -130,9 +130,9 @@ export class RunState
 			r.push(`\n${pre}\t${xu.colon("  meta")}${printUtil.inspect(this.meta).squeeze()}`);
 
 		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stdout || "").trim().length>0))
-			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "")[this.xlog.atLeast("trace") ? "toString" : "squeeze"]().innerTruncate(this.xlog.atLeast("trace") ? Number.MAX_SAFE_INTEGER : 200)}`);
+			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "")[this.xlog.atLeast("trace") ? "toString" : "squeeze"]().innerTruncate(this.xlog.atLeast("debug") ? Number.MAX_SAFE_INTEGER : 200)}`);
 		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stderr || "").trim().length>0))
-			r.push(`\n${pre}\t${xu.colon("stderr")}${(this.stderr || "")[this.xlog.atLeast("trace") ? "toString" : "squeeze"]().innerTruncate(this.xlog.atLeast("trace") ? Number.MAX_SAFE_INTEGER : 200)}`);
+			r.push(`\n${pre}\t${xu.colon("stderr")}${(this.stderr || "")[this.xlog.atLeast("trace") ? "toString" : "squeeze"]().innerTruncate(this.xlog.atLeast("debug") ? Number.MAX_SAFE_INTEGER : 200)}`);
 			
 		return r.join("");
 	}

@@ -10,8 +10,8 @@ dra testMany.js --format=text		# 11m  8s
 dra testMany.js --format=video		# 14m 38s
 dra testMany.js --format=audio		# 16m 26s
 dra testMany.js --format=poly		# 25m 23s?
+dra testMany.js --format=document	# 27m 57s
 dra testMany.js --format=music		# 38m 50s
-dra testMany.js --format=document	# 44m 46s
 dra testMany.js --format=image		# 59m 19s
 dra testMany.js --format=archive	# 78m 34s
 

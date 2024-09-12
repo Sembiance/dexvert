@@ -29,6 +29,7 @@ export class latex2html extends Program
 	args = r => ["-tmp", r.f.root, "-noinfo", "-html_version", "3.2,unicode,frame,math", "-image_type", "png", "-dir", r.outDir(), r.inFile()];
 
 	// If latex2html craps out, it leaves just a single TMP dir behind. Delete it so that other converters can try converting. Also delete some other junk files it may leave
-	verify    = (r, dexFile) => !((dexFile.dir===r.outDir({absolute : true}) && ["images.log", "images.tex", "images.pdf", "images.bbl", "images.pl", "images.aux", "WARNINGS"].includes(dexFile.base)) || dexFile.rel.startsWith(`${r.outDir()}/TMP`));
-	renameOut = false;
+	verify     = (r, dexFile) => !((dexFile.dir===r.outDir({absolute : true}) && ["images.log", "images.tex", "images.pdf", "images.bbl", "images.pl", "images.aux", "WARNINGS"].includes(dexFile.base)) || dexFile.rel.startsWith(`${r.outDir()}/TMP`));
+	skipVerify = true;
+	renameOut  = false;
 }

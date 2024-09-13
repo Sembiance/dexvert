@@ -274,6 +274,7 @@ export default
 		esriShapefileProjection                 : {name : "ESRI Shapefile Projection", ext : [".prj"], magic : ["Shapefile Projection", /^fmt\/320( |$)/]},
 		eurekaMercuryReport                     : {name : "Eureka/Mercury Report", ext : [".rpt"], magic : ["Eureka/Mercury Report"], weakMagic : true},
 		executorConfigurationFile               : {name : "Executor Configuration File", ext : [".ecf"], magic : ["Executor Configuration File"], weakMagic : true},
+		expertAstronomerIConfiguration          : {name : "Expert Astronomer I Configuration", ext : [".cfg"], magic : ["Expert Astronomer I Configuration"]},
 		explodExplosionData                     : {name : "EXPLOD explosion Data", ext : [".tra", ".dat"], magic : ["EXPLOD explosion Data"]},
 		expressCalcSpreadsheet                  : {name : "ExpressCalc spreadsheet", ext : [".cal"], magic : ["ExpressCalc spreadsheet"], weakMagic : true},
 		expressGraphGraph                       : {name : "ExpressGraph Graph", ext : [".grf"], magic : ["ExpressGraph Graph"]},

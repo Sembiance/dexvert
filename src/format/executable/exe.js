@@ -69,8 +69,6 @@ export class exe extends Format
 		// Try some general EXE extractors
 		r.push("sevenZip[type:PE][rsrcOnly]", "deark[module:exe]");
 
-		dexState.xlog.info`EXE converterS: ${r}`;
-
 		return r;
 	};
 

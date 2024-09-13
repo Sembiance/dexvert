@@ -6,5 +6,5 @@ export class selfDissolvingArchive extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SDA";
 	ext        = [".sda"];
 	magic      = ["Self-Dissolving compressed Archive", /^Arc CBM SFX$/];
-	converters = ["unar", "DirMaster"];
+	converters = ["unar", "DirMaster[matchType:magic]"];
 }

@@ -24,6 +24,7 @@ rm -rf ./*
 
 cd /tmp || exit
 rm -f .X*lock
+rm -f OSL_PIPE*
 fd magick -x rm {} \;
 rm -rf Ay_Emul* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
 rm -f ./*.crash.txt

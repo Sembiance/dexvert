@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,003)
+# Unsupported File Formats (2,009)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (170)
+## Archive (169)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -80,7 +80,6 @@ Family/Format | Name | Extensions | Notes
 [archive/interfaze](https://discmaster.textfiles.com/search?formatid=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/internetExplorerCache](https://discmaster.textfiles.com/search?formatid=internetExplorerCache) | Internet Explorer cache |  | 
 [archive/izPackArchive](https://discmaster.textfiles.com/search?formatid=izPackArchive) | IzPack Archive |  | 
-[archive/jupiterAceTapeImage](https://discmaster.textfiles.com/search?formatid=jupiterAceTapeImage) | Jupiter Ace Tape image | .tap | 
 [archive/kudoDataBaseCatalog](https://discmaster.textfiles.com/search?formatid=kudoDataBaseCatalog) | Kudo Data Base catalog | .kdb | 
 [archive/leadTechnologiesCompressedArchive](https://discmaster.textfiles.com/search?formatid=leadTechnologiesCompressedArchive) | Lead Technologies compressed Archive | .lta | 
 [archive/legoRacersGameDataArchive](https://discmaster.textfiles.com/search?formatid=legoRacersGameDataArchive) | Lego Racers game data archive | .jam | 
@@ -796,7 +795,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,153)
+## Other (1,160)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1002,6 +1001,7 @@ Family/Format | Name | Extensions | Notes
 [other/caVisualObjectsModuleExportFile](https://discmaster.textfiles.com/search?formatid=caVisualObjectsModuleExportFile) | CA Visual Objects Module Export File | .mef | 
 [other/caVisualObjectsPrefix](https://discmaster.textfiles.com/search?formatid=caVisualObjectsPrefix) | CA Visual Objects Prefix | .pfx | 
 [other/caVisualObjectsSysAtomTable](https://discmaster.textfiles.com/search?formatid=caVisualObjectsSysAtomTable) | CA Visual Objects sys atom table | .vo | 
+[other/caCompeteModel](https://discmaster.textfiles.com/search?formatid=caCompeteModel) | CA-Compete! Model | .mdl | 
 [other/cadDrawLibrary](https://discmaster.textfiles.com/search?formatid=cadDrawLibrary) | CAD/Draw Library | .tbl | 
 [other/cadDrawSettings](https://discmaster.textfiles.com/search?formatid=cadDrawSettings) | CAD/Draw Settings | .mpi | 
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?formatid=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
@@ -1615,8 +1615,13 @@ Family/Format | Name | Extensions | Notes
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?formatid=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
+[other/printShopDeluxeAutograph](https://discmaster.textfiles.com/search?formatid=printShopDeluxeAutograph) | Print Shop Deluxe Autograph | .pau | 
+[other/printShopDeluxeCardTimepieces](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCardTimepieces) | Print Shop Deluxe Card Timepieces | .pct | 
+[other/printShopDeluxeCertificate](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCertificate) | Print Shop Deluxe Certificate | .prm | 
+[other/printShopDeluxeCertificateBorders](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCertificateBorders) | Print Shop Deluxe Certificate Borders | .cbr | 
 [other/printShopDeluxeLayout](https://discmaster.textfiles.com/search?formatid=printShopDeluxeLayout) | Print Shop Deluxe Layout |  | 
 [other/printShopDeluxeRule](https://discmaster.textfiles.com/search?formatid=printShopDeluxeRule) | Print Shop Deluxe Rule | .prl | 
+[other/printShopDeluxeSealExteriors](https://discmaster.textfiles.com/search?formatid=printShopDeluxeSealExteriors) | Print Shop Deluxe Seal Exteriors | .pse | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?formatid=printerFontMetrics) | Printer Font Metrics | .pfm | 
 [other/proThrottleConfiguration](https://discmaster.textfiles.com/search?formatid=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
@@ -1696,6 +1701,7 @@ Family/Format | Name | Extensions | Notes
 [other/sentinelReturnsGameData](https://discmaster.textfiles.com/search?formatid=sentinelReturnsGameData) | Sentinel Returns game data | .db | 
 [other/sentrySpellingEngineLexicon](https://discmaster.textfiles.com/search?formatid=sentrySpellingEngineLexicon) | Sentry Spelling-Checker Engine Lexicon | .clx | 
 [other/settlers2Map](https://discmaster.textfiles.com/search?formatid=settlers2Map) | Settlers II Map | .swd .wld | 
+[other/seuFormatDefinitionFile](https://discmaster.textfiles.com/search?formatid=seuFormatDefinitionFile) | SEU Format Definition File | .fdf | 
 [other/sfxDocumentTemplateDirectory](https://discmaster.textfiles.com/search?formatid=sfxDocumentTemplateDirectory) | Sfx Document Template Directory |  | 
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?formatid=sgmlCompiled) | SGML Compiled | .mtl | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?formatid=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 

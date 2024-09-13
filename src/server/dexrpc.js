@@ -91,6 +91,7 @@ xlog.info`Starting web RPC...`;
 const routes = new Map();
 
 routes.set("/agentCount", () => new Response(DEXVERT_AGENT_COUNT.toString()));
+routes.set("/status", () => new Response(JSON.stringify({idPool : idPool.status({simpleLog : true}), dexPool : dexPool.status({simpleLog : true})})));
 
 routes.set("/dex", async request =>
 {

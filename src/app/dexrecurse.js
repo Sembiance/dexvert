@@ -1,8 +1,9 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil, urlUtil} from "xutil";
 import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {OS_SERVER_HOST, OS_SERVER_PORT} from "../osUtil.js";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES, WEAK_PRODOS_TYPES} from "../WEAK.js";
@@ -269,14 +270,21 @@ let webServer = null;
 if(argv.headless)
 {
 	const routes = new Map();
-	routes.set("/status", async () =>	// eslint-disable-line require-await
+	routes.set("/status", async request =>
 	{
+		const query = urlUtil.urlToQueryObject(request?.url);
 		const r = {duration : performance.now()-startedAt, taskQueueCount : taskQueue.length, taskActiveCount : taskActive.size, taskFinishedCount, taskHandledCount};
 		const oldestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
 		if(oldestTask)
 		{
 			r.oldestTask = oldestTask;
 			r.oldestTask.duration = performance.now()-oldestTask.startedAt;
+		}
+
+		if(query?.verbose)
+		{
+			r.rpcStatus = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/status`, {asJSON : true});
+			r.osStatus = await xu.fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/status`, {asJSON : true});
 		}
 
 		return new Response(JSON.stringify(r));

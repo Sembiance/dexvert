@@ -49,11 +49,14 @@ const SUPPORTING_DIR_PATHS =
 	"music/Instruments"
 ];
 
-// these formats have files that won't identify due to not being in the proper disk locations, so we force the format
 const FORCE_FORMAT_AS =
 [
+	// these formats have files that won't identify due to not being in the proper disk locations, so we force the format
 	"font/amigaBitmapFontContent",
-	"document/applesoftBASIC"
+	"document/applesoftBASIC",
+
+	// these formats first get matched to something else which slows down big time the testing process
+	"image/dynamicPublisherStamp"
 ];
 
 const FORMAT_FILE_META =

@@ -2,10 +2,11 @@ import {Format} from "../../Format.js";
 
 export class lha extends Format
 {
-	name       = "LHArc Archive";
-	website    = "http://fileformats.archiveteam.org/wiki/LHA";
-	ext        = [".lha", ".lhz", ".lzs", ".exe", ".lzh", ".car"];
-	idMeta     = ({macFileType}) => macFileType==="LHA ";
+	name           = "LHArc Archive";
+	website        = "http://fileformats.archiveteam.org/wiki/LHA";
+	ext            = [".lha", ".lhz", ".lzs", ".exe", ".lzh", ".car"];
+	forbidExtMatch = [".exe"];
+	idMeta         = ({macFileType}) => macFileType==="LHA ";
 
 	// If it's a self-extracting archive, ensure it has a .exe extension
 	safeExt = dexState => (dexState.hasMagics("LHA self-extracting") ? ".exe" : ".lha");

@@ -16,7 +16,6 @@ export class soffice extends Program
 	
 	bin        = "soffice";
 	runOptions = ({virtualX : true});
-	//exclusive  = "soffice";
 	args       = async r =>
 	{
 		const userInstallationDirPath = await fileUtil.genTempPath(r.cwd, "soffice");

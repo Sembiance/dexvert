@@ -15,7 +15,7 @@ export class xwd extends Format
 	// iio2png also does great
 	// nconvert handles the color of MARBLE.XPM well but messes up bettyboop and woman-with-ban.
 	// All the other converters do less well
-	converters = ["gimp", "iio2png", "imconv[format:xwd]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress[matchType:magic][hasExtMatch]"];
+	converters = ["gimp", "iio2png", "imconv[format:xwd][matchType:magic]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress[matchType:magic][hasExtMatch]"];
 
 	// Some files are confused for XWD files and produce just a black image
 	verify = ({meta}) => meta.colorCount>1;

@@ -6,4 +6,5 @@ export class dynamicPublisherStamp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Dynamic_Publisher";
 	ext        = [".stp"];
 	converters = ["recoil2png"];
+	verify     = ({meta}) => meta.height>3 && meta.width>3 && meta.width<2000 && meta.height<2000;
 }

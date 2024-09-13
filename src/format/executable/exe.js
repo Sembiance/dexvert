@@ -1,5 +1,17 @@
 import {Format} from "../../Format.js";
 
+const _INSTALLER_MAGICS = [
+	// installers: These actually do convert ok already with things like cmdTotal below
+	"Installer: Vise",
+
+	// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
+	"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
+	"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/,
+	"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer", "Installer: RNsetup",
+	"Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer", "Installer: Ghost Installer", "Installer: Tarma Installer",
+	"Installer: Pantaray QSetup", "Installer: STATICSUP"
+];
+
 export class exe extends Format
 {
 	name    = "MS-DOS/Windows or OS/2 Executable";
@@ -19,15 +31,7 @@ export class exe extends Format
 		/^Microsoft Pascal (v[\d.]+ )?16-bit executable/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable", "16bit DOS EXE BasicBasic", "Turbo Pascal for Windows 1.0 executable", "MinGW32 C/C++ Executable", "Generic CIL Executable",
 		"DOS Metaware Professional Pascal Executable", "Win32 Cygwin executable", "WIN32 Executable PowerBASIC",
 
-		// installers: These actually do convert ok already with things like cmdTotal below
-		"Installer: Vise",
-
-		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
-		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
-		"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/,
-		"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer", "Installer: RNsetup",
-		"Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer", "Installer: Ghost Installer", "Installer: Tarma Installer",
-		"Installer: Pantaray QSetup", "Installer: STATICSUP"
+		..._INSTALLER_MAGICS
 	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
@@ -41,24 +45,34 @@ export class exe extends Format
 
 	// We throw MSDOS/Win EXESs at various programs to try and get something useful out of them like embedded director files, cursors, icons, images, etc
 	// Could also 'decompress' packed EXEs by adding "deark[module:exepack]" but that doesn't really provide us with any actual content, so meh.
-	converters = dexState => (Object.keys(dexState.meta).length>0 ? [
-		// Is it just a ZIP file of some sort?
-		"sevenZip[type:zip]",
+	converters = dexState =>
+	{
+		if(!Object.keys(dexState.meta).length)
+			return [];
 		
-		// What about an NSIS installer?
-		"sevenZip[type:nsis]",
-		"unar[type:nsis]",
+		const r= [
+			// Is it just a ZIP file of some sort?
+			"sevenZip[type:zip]",
+			
+			// What about an NSIS installer?
+			"sevenZip[type:nsis]",
+			"unar[type:nsis]",
 
-		// Is it a Projector executable hiding a director file?
-		"director_files_extract",
+			// Is it a Projector executable hiding a director file?
+			"director_files_extract"
+		];
 
 		// generic installer extractor
-		"cmdTotal[wcx:InstExpl.wcx]",
+		if(dexState.hasMagics(_INSTALLER_MAGICS))
+			r.push("cmdTotal[wcx:InstExpl.wcx]");
 
 		// Try some general EXE extractors
-		"sevenZip[type:PE][rsrcOnly]",
-		"deark[module:exe]"
-	] : []);
+		r.push("sevenZip[type:PE][rsrcOnly]", "deark[module:exe]");
+
+		dexState.xlog.info`EXE converterS: ${r}`;
+
+		return r;
+	};
 
 	post = dexState =>
 	{

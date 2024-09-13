@@ -1172,6 +1172,7 @@ export default
 		axialisProScreensaverProducerProject     : {name : "Axialis Professional Screensaver Producer project", ext : [".ssp"], magic : ["Axialis Professional Screensaver Producer project"]},
 		babbleData                               : {name : "Babble! Data", ext : [".bab"], magic : ["Babble! text data"]},
 		babylonGlossary                          : {name : "Babylon Glossary", ext : [".bgl"], magic : ["Babylon Glossary"], weakMagic : true},
+		bankMateActivityData                     : {name : "BankMate Activity data", ext : [".ix1", ".ixp"], magic : ["BankMate Activity data"]},
 		barsAndPipesFile                         : {name : "Bars and Pipes File", ext : [".gchone", ".gchord", ".song"], magic : ["Bars and Pipes"]},
 		berkeleyDB                               : {name : "Berkeley DB", ext : [".db"], magic : ["Berkeley DB"]},
 		billOfMaterials                          : {name : "Bill of Materials", ext : [".bom"], magic : ["Bill Of Materials", "Mac OS X bill of materials"]},

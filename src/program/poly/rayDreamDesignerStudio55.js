@@ -34,15 +34,15 @@ export class rayDreamDesignerStudio55 extends Program
 			
 			Sleep(3000)
 			Send("!f")
+			Sleep(1000)
 			Send("a")
 			$saveWindow = WindowRequire("Save As", "", 10)
-			
-			Send("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].dropdownKeys}")
+			SendSlow("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].dropdownKeys}")
 			Send("+{TAB}c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}")
 			
 			WinWaitClose($saveWindow, "", 15)
 			WindowDismissWait("Ray Dream Studio", "You may lose information", 10, "{ENTER}")
-			WaitForStableFileSize("c:\\out\\out.3ds", ${xu.SECOND*3}, ${xu.MINUTE*5})	; can take a while, see APACHE as quickDraw3D outType
+			WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*5}, ${xu.MINUTE*5})	; can take a while, see APACHE as quickDraw3D outType
 			Send("!f")
 			Send("x")`
 	});

@@ -1,4 +1,4 @@
-# Supported File Formats (2,366)
+# Supported File Formats (2,369)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1835,7 +1835,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (537)
+## Text (540)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -1946,6 +1946,8 @@ text | DEC-WSE Object File | .aof .aoff |  | [17 sample files](https://sembiance
 text | Delphi Package | .dpk |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/delphiPackage/)
 text | Descent Mission | .msn |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/descentMission/)
 text | DFAddress data base | .file |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/dfAddressDataBase/)
+text | Diagram! Diagram | .diagram .dia |  | 
+text | Diagram! Palette | .dpalette |  | 
 text | Dice C project | .dice |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/diceCProject/)
 text | Digital Integration mission info | .mis |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/digitalIntegrationMissionInfo/)
 text | Digital Integration mission Tasks | .dta |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/digitalIntegrationMissionTasks/)
@@ -1992,6 +1994,7 @@ text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML)
 text | FAR help | .hlf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
 text | FGDC metadata | .met |  | 
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
+text | File-Type Rule | .ftr |  | 
 text | Flight Sim Toolkit airplane parameters |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitAirplaneParameters/)
 text | Flight Sim Toolkit Gauges | .fgd |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitGauges/)
 text | Flight Sim Toolkit Model | .fmd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitModel/)
@@ -2003,7 +2006,7 @@ text | FormWorx Printer driver | .prx |  | [6 sample files](https://sembiance.co
 text | FORTH Source | .f .fth .forth .4th .fs |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/forthSource/)
 text | Fractal Design Painter Colors Set | .pcs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/fractalDesignPainterColorsSet/)
 text | FrameMaker Dictionary text | .brt |  | 
-text | FrameMaker hyphens dictionary | .brt |  | 
+text | FrameMaker hyphens dictionary | .brt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/frameMakerHyphensDictionary/)
 text | FrameMaker Maker Markup Language | .mml |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/frameMakerMakerMarkupLanguage/)
 text | Fred Fish's Product-Info |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/fredFishProductInfo/)
 text | FreeMind mind map | .mm |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/freeMindMindMap/)
@@ -2208,7 +2211,7 @@ text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/
 text | Poswiz! Report | .rpt |  | 
 text | PowerBase database | .pb |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/powerBaseDatabase/)
 text | Prolog Source | .pro |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/prologSource/)
-text | Protein DataBank | .pdb |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/proteinDataBank/)
+text | Protein DataBank | .pdb |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/proteinDataBank/)
 text | Protel PAD macro | .pad |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/protelPADMacro/)
 text | ProtoGen Application configuration | .pva |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/protoGenApplicationConfiguration/)
 text | Proxy Auto-Config | .pac |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
@@ -2245,7 +2248,7 @@ text | sc Spreadsheet Calculator spreadsheet | .sc .ast |  | [10 sample files](h
 text | Scala Multimedia Script | .script |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/scalaMultimediaScript/)
 text | Scooter circuit layout | .plt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/scooterCircuitLayout/)
 text | sendmail m4 | .m4 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sendmailM4/)
-text | Session Description Protocol | .sdp .txt |  | 
+text | Session Description Protocol | .sdp .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/sessionDescriptionProtocol/)
 text | [SGML Document](http://fileformats.archiveteam.org/wiki/SGML) | .sgml |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sgml/)
 text | Shapefile Projection metadata Geographic Coords | .prj |  | 
 text | Shareware Information File | .sif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sharewareInformationFile/)

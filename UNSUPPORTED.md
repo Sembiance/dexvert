@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,012)
+# Unsupported File Formats (2,016)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -251,7 +251,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (112)
+## Document (113)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -325,6 +325,7 @@ Family/Format | Name | Extensions | Notes
 [document/lotusSymphony](https://discmaster.textfiles.com/search?formatid=lotusSymphony) | Lotus Symphony Worksheet | .wk1 .wr1 | 
 [document/masterCook](https://discmaster.textfiles.com/search?formatid=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 [document/mediaPaqDCF](https://discmaster.textfiles.com/search?formatid=mediaPaqDCF) | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
+[document/mediaViewDocument](https://discmaster.textfiles.com/search?formatid=mediaViewDocument) | MediaView document | .mdvw .mdv | 
 [document/microsoftAdvisorHelp](https://discmaster.textfiles.com/search?formatid=microsoftAdvisorHelp) | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 [document/microsoftISAMDatabase](https://discmaster.textfiles.com/search?formatid=microsoftISAMDatabase) | Microsoft ISAM database | .db3 .mdb | 
 [document/microsoftOneNote](https://discmaster.textfiles.com/search?formatid=microsoftOneNote) | Microsoft OneNote | .one | 
@@ -369,7 +370,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (42)
+## Executable (44)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -390,13 +391,14 @@ Family/Format | Name | Extensions | Notes
 [executable/linux386Exe](https://discmaster.textfiles.com/search?formatid=linux386Exe) | Linux i386 Executable |  | 
 [executable/omagic](https://discmaster.textfiles.com/search?formatid=omagic) | Linux OMAGIC Executable |  | 
 [executable/zmagicExe](https://discmaster.textfiles.com/search?formatid=zmagicExe) | Linux ZMAGIC Exectutable |  | 
-[executable/macOSXUniversalBinary](https://discmaster.textfiles.com/search?formatid=macOSXUniversalBinary) | Mac OS X Universal Binary |  | 
 [executable/macOSXUniversalLibrary](https://discmaster.textfiles.com/search?formatid=macOSXUniversalLibrary) | Mac OS X Universal Shared Library | .dylib | 
 [executable/machOHPPAExe](https://discmaster.textfiles.com/search?formatid=machOHPPAExe) | Mach-O HPPA Executable |  | 
 [executable/machOIntelExe](https://discmaster.textfiles.com/search?formatid=machOIntelExe) | Mach-O Intel Executable |  | 
 [executable/machOm68kExe](https://discmaster.textfiles.com/search?formatid=machOm68kExe) | Mach-O m68k Executable |  | 
 [executable/machOPPCExe](https://discmaster.textfiles.com/search?formatid=machOPPCExe) | Mach-O PPC Executable |  | 
+[executable/machOSharedLibrary](https://discmaster.textfiles.com/search?formatid=machOSharedLibrary) | Mach-O Shared Library | .shlib .dylib | 
 [executable/machOSPARCExe](https://discmaster.textfiles.com/search?formatid=machOSPARCExe) | Mach-O SPARC Executable |  | 
+[executable/machOx86Exe](https://discmaster.textfiles.com/search?formatid=machOx86Exe) | Mach-O x86 Executable |  | 
 [executable/macPPCPEFExe](https://discmaster.textfiles.com/search?formatid=macPPCPEFExe) | MacOS PPC PEF Executable |  | 
 [executable/microsoftCompiledHelp2](https://discmaster.textfiles.com/search?formatid=microsoftCompiledHelp2) | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki/Microsoft_Help_2) | .HxS .HxI | 
 [executable/mipsECOFFExe](https://discmaster.textfiles.com/search?formatid=mipsECOFFExe) | MIPSL ECOFF Executable |  | 
@@ -410,6 +412,7 @@ Family/Format | Name | Extensions | Notes
 [executable/sonyPlaystationExe](https://discmaster.textfiles.com/search?formatid=sonyPlaystationExe) | Sony Playstation Executable | .exe | 
 [executable/sparcDemandExe](https://discmaster.textfiles.com/search?formatid=sparcDemandExe) | SPARC Demand Paged Exe |  | 
 [executable/superbaseProgram](https://discmaster.textfiles.com/search?formatid=superbaseProgram) | Superbase Program | .sbp | 
+[executable/systemV64BitLibrary](https://discmaster.textfiles.com/search?formatid=systemV64BitLibrary) | System V 64-bit library | .a | 
 [executable/tiCalcProgram](https://discmaster.textfiles.com/search?formatid=tiCalcProgram) | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p | 
 [executable/vmsVAXExecutable](https://discmaster.textfiles.com/search?formatid=vmsVAXExecutable) | VMS VAX executable | .vxe | 
 [executable/windowsAudioCompressionManagerDriver](https://discmaster.textfiles.com/search?formatid=windowsAudioCompressionManagerDriver) | Windows Audio Compression Manager driver | .acm | 
@@ -796,7 +799,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,162)
+## Other (1,163)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1334,6 +1337,7 @@ Family/Format | Name | Extensions | Notes
 [other/kaperskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?formatid=kaperskyAntiVirusLicenseKey) | Kapersky Anti-Virus License Key | .key | 
 [other/karmaAsset](https://discmaster.textfiles.com/search?formatid=karmaAsset) | Karma Asset | .ka | 
 [other/kasparovSGambitConfiguration](https://discmaster.textfiles.com/search?formatid=kasparovSGambitConfiguration) | Kasparov's Gambit Configuration | .cfg | 
+[other/kbdMapFile](https://discmaster.textfiles.com/search?formatid=kbdMapFile) | kbd map file |  | 
 [other/keyWalletObjectEncryptedData](https://discmaster.textfiles.com/search?formatid=keyWalletObjectEncryptedData) | KeyWallet Object - encrypted data | .kwo | 
 [other/keyWalletSkin](https://discmaster.textfiles.com/search?formatid=keyWalletSkin) | KeyWallet Skin | .kws | 
 [other/kickPascalUnitInterface](https://discmaster.textfiles.com/search?formatid=kickPascalUnitInterface) | KICK-Pascal Unit Interface | .u | 
@@ -1924,7 +1928,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectDisplayResource](https://discmaster.textfiles.com/search?formatid=wordPerfectDisplayResource) | WordPerfect Display Resource | .drs | 
 [other/wordPerfectDriver](https://discmaster.textfiles.com/search?formatid=wordPerfectDriver) | WordPerfect Driver | .vrs | 
 [other/wordPerfectButtonBar](https://discmaster.textfiles.com/search?formatid=wordPerfectButtonBar) | WordPerfect for Windows Button Bar | .wwb | 
-[other/wordPerfectHyphenation](https://discmaster.textfiles.com/search?formatid=wordPerfectHyphenation) | WordPerfect Hyphenation | .hyc .hyl | 
+[other/wordPerfectHyphenation](https://discmaster.textfiles.com/search?formatid=wordPerfectHyphenation) | WordPerfect Hyphenation | .hyc .hyl .us | 
 [other/wordPerfectInputResource](https://discmaster.textfiles.com/search?formatid=wordPerfectInputResource) | WordPerfect Input Resource | .irs | 
 [other/wordPerfectInstallOptions](https://discmaster.textfiles.com/search?formatid=wordPerfectInstallOptions) | WordPerfect Install options | .ins | 
 [other/wordPerfectKeyboardFile](https://discmaster.textfiles.com/search?formatid=wordPerfectKeyboardFile) | WordPerfect keyboard file | .wpk | 
@@ -1933,7 +1937,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectPrinterData](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterData) | WordPerfect Printer Data | .all .prd | 
 [other/wordPerfectPrinterResource](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterResource) | WordPerfect Printer Resource | .prs | 
 [other/wordPerfectRectangularBlockData](https://discmaster.textfiles.com/search?formatid=wordPerfectRectangularBlockData) | WordPerfect Rectangular Block Data | .mst | 
-[other/wordPerfectSettings](https://discmaster.textfiles.com/search?formatid=wordPerfectSettings) | WordPerfect settings | .wcl | 
+[other/wordPerfectSettings](https://discmaster.textfiles.com/search?formatid=wordPerfectSettings) | WordPerfect settings | .wcl .set | 
 [other/wordPerfectSetupData](https://discmaster.textfiles.com/search?formatid=wordPerfectSetupData) | WordPerfect Setup Data | .set | 
 [other/wordPerfectThesaurus](https://discmaster.textfiles.com/search?formatid=wordPerfectThesaurus) | WordPerfect Thesaurus | .ths | 
 [other/wordPerfectVideoResource](https://discmaster.textfiles.com/search?formatid=wordPerfectVideoResource) | WordPerfect Video Resource | .vrs | 

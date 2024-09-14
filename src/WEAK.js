@@ -60,6 +60,9 @@ export const WEAK_MAC_TYPES =
 // these magics should be ignored in terms of reporting 'new magic' discoveries in things like dexrecurse, but are used by various formats so should not explictly be marked as weak
 export const IGNORE_MAGICS =
 [
+	// detectItEasy
+	/^Archive: SW/,	// These are paired with .idb files which we DO support
+
 	// dexmagic
 	/^Generic RIFF file /,
 
@@ -81,7 +84,7 @@ export const IGNORE_MAGICS =
 export const WEAK_VALUES =
 [
 	// siegfried
-	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1241|1260|1276|1280|1381|1385|1461|1488|1489|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1703|1704|1708|1740|1751|1812|1874|1902)( |$)/,
+	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|691|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1241|1260|1276|1280|1381|1385|1461|1488|1489|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1703|1704|1708|1740|1751|1812|1874|1902)( |$)/,
 	/^x-fmt\/(8|10|53|157|168|195|324|342)( |$)/,
 
 	// ancientID
@@ -94,6 +97,7 @@ export const WEAK_VALUES =
 	/^Copyright string: /,
 	/^CRC32 polynomial table/,
 	/^DES PC\d table$/,
+	/^ELF, 64-bit/,
 	/^ESP Image \(ESP/,
 	/^Executable script, /,
 	/^IMG0 \(VxWorks\) header/,
@@ -293,7 +297,7 @@ export const WEAK_VALUES =
 	/^Apple QuickTime$/,
 	/^Apple QuickTime multiple URLs$/,
 	/^Applesoft BASIC program data/,
-	/^application\/(octet-stream|postscript);(, ASCII text)?$/,
+	/^application\/(octet-stream|postscript|x-nextmail)((;(, (ASCII|ISO-8859) text)?$)|$)/,
 	/^Applixware/,
 	/^Arhangel archive data/,
 	/^aria2 control file/,
@@ -356,6 +360,7 @@ export const WEAK_VALUES =
 	/^Convex SOFF/,
 	/^Corel Calendar data file/,
 	/^Corel (DrawPerfect|Printer|WordPerfect)( Office)?: Unknown filetype/,
+	/^Corel loadable file/,
 	/^Corel Macro editor macro/,
 	/^Corel Terminal resource data/,
 	/^Corel PlanPerfect macro/,
@@ -514,6 +519,7 @@ export const WEAK_VALUES =
 	/^MacBinary II,/,
 	/^Macintosh MFS data/,
 	/^Mach-O architecture/,
+	/^Mach-O universal binary/,
 	/^magic text fragment/,
 	/^mail forwarding/,
 	/^Map file for the AssaultCube FPS game/,
@@ -1488,6 +1494,7 @@ export const WEAK_VALUES =
 	/^Litestep theme$/,
 	/^Mac font$/,
 	/^Mac ICOL colors LUT$/,
+	/^Mac OS X Universal Binary \(generic\)$/,
 	/^Macromedia Director Java Resource - Video$/,
 	/^Magic and Mayhem sprites$/,
 	/^MAGIX music studio (Drum kit|Window layout)$/,	// So these have weak magics, and their extensions are very close to the magic, so it could have mis-identifications so just skip it since there isn't much we can do with them anyways

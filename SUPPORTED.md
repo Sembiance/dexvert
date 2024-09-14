@@ -1,4 +1,4 @@
-# Supported File Formats (2,364)
+# Supported File Formats (2,366)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -868,11 +868,11 @@ image | [CompuServe RLE](http://fileformats.archiveteam.org/wiki/CompuServe_RLE)
 image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | [convert](https://www.imagemagick.org/) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [11 sample files](https://sembiance.com/fileFormatSamples/image/cals/)
 image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [viewCompanion](http://www.softwarecompanions.com/viewcomp.html) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [keyViewPro](https://archive.org/details/KeyViewPro/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [irfanView](https://www.irfanview.com/) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [14 sample files](https://sembiance.com/fileFormatSamples/image/cgm/)
 image | [ComputerEyes](http://fileformats.archiveteam.org/wiki/ComputerEyes) | .ce1 .ce2 .ce3 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/computerEyes/)
-image | [Corel Clipart](http://fileformats.archiveteam.org/wiki/CCX_(Corel)) | .ccx | [uniconvertor](https://sk1project.net/uc2/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/corelClipart/)
+image | [Corel Clipart](http://fileformats.archiveteam.org/wiki/CCX_(Corel)) | .ccx .cdr | [uniconvertor](https://sk1project.net/uc2/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/corelClipart/)
 image | Corel Color Palette | .cpl | [uniconvertor](https://sk1project.net/uc2/) | [42 sample files](https://sembiance.com/fileFormatSamples/image/corelColorPalette/)
 image | [Corel Draw Pattern](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .pat | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/corelDrawPattern/) - Only the preview image is supported at the moment.
 image | [Corel Gallery](http://fileformats.archiveteam.org/wiki/Corel_Gallery) | .bmf .gal | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/corelGallery/) - Only the thumbnail is extracted, the actual vector file doesn't have a known converter (except Corel Gallery itself of course).
-image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [soffice](https://www.libreoffice.org) [uniconvertor](https://sk1project.net/uc2/) [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [13 sample files](https://sembiance.com/fileFormatSamples/image/cmx/)
+image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [soffice](https://www.libreoffice.org) [uniconvertor](https://sk1project.net/uc2/) [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [14 sample files](https://sembiance.com/fileFormatSamples/image/cmx/)
 image | [Corel Photo-Paint Image](http://fileformats.archiveteam.org/wiki/Corel_Photo-Paint_image) | .cpt | [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [nconvert](https://www.xnview.com/en/nconvert/) [irfanView](https://www.irfanview.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/corelPhotoPaint/)
 image | [Corel Wavelet](http://fileformats.archiveteam.org/wiki/Corel_Wavelet) | .wi .wvl | [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [11 sample files](https://sembiance.com/fileFormatSamples/image/corelWavelet/)
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [scribus](https://www.scribus.net/) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [15 sample files](https://sembiance.com/fileFormatSamples/image/cdr/)
@@ -1648,7 +1648,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (121)
+## Other (122)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1742,6 +1742,7 @@ other | Ray Dream BRW | .brw | [strings](https://www.gnu.org/software/binutils/)
 other | ReSource Control Language | .rcl | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/other/reSourceControlLanguage/)
 other | RM/Quest Module | .qrm | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://sembiance.com/fileFormatSamples/other/rmQuestModule/)
 other | SCUMM room name list | .la0 .000 | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/other/scummRoomNameList/)
+other | Softdisk Crossword | .sxg .sxp | [strings](https://www.gnu.org/software/binutils/) | 
 other | Storm C++ Debug strings | .debug | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/stormCPPDebugStrings/)
 other | Sybase iAnywhere Index | .cdx | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/sybaseIAnywhereIndex/)
 other | SYMDEF File | .symdef | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/other/symDef/)
@@ -1834,7 +1835,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (536)
+## Text (537)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -1929,7 +1930,8 @@ text | COMit modems configuration | .dat .dos |  | [1 sample file](https://sembi
 text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/csv/)
 text | Compo preferences |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/compoPreferences/)
 text | ConTeXt document | .tex |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/conTeXtDocument/)
-text | Corel/WordPerfect Setup information | .csw |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/corelWordPerfectSetupInformation/)
+text | Corel/WordPerfect Setup information | .csw |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/corelWordPerfectSetupInformation/)
+text | CorelCAD Material | .mat |  | 
 text | CPBackup info | .set |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cPBackupInfo/)
 text | CPBackup Settings | .set |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cpBackupSettings/)
 text | Crossword Creator Puzzle | .puz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/crosswordCreatorPuzzle/)
@@ -2014,7 +2016,7 @@ text | [GEDCOM Genealogy Text](http://fileformats.archiveteam.org/wiki/GEDCOM) |
 text | GEM Driver Definition | .ddf |  | 
 text | Gen Surf map | .map |  | 
 text | GenBank Flat File | .gb .gbk |  | 
-text | GenBank sequence record | .dna |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/genBankSequenceRecord/)
+text | GenBank sequence record | .dna |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/genBankSequenceRecord/)
 text | Generic Printer Description | .gdl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/genericPrinterDescription/)
 text | Gerber | .gbx .gbr |  | 
 text | Gettext Portable Object | .po |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gettextPortableObject/)
@@ -2285,7 +2287,7 @@ text | Terminate Smartnote | .not |  | [6 sample files](https://sembiance.com/fi
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [82 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [84 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
 text | The Need For Speed windshield shape | .fmm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedWindshieldShape/)
 text | The Software Toolworks' Hyperbase Data | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/softwareToolworksHyperbaseData/)

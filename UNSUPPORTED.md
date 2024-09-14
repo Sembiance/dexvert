@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,009)
+# Unsupported File Formats (2,012)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -505,7 +505,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (147)
+## Image (148)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -537,6 +537,7 @@ Family/Format | Name | Extensions | Notes
 [image/comicSetterProject](https://discmaster.textfiles.com/search?formatid=comicSetterProject) | Comic Setter project |  | 
 [image/condensedEmbroidery](https://discmaster.textfiles.com/search?formatid=condensedEmbroidery) | Condensed embroidery format | .cnd | 
 [image/continuousEdge](https://discmaster.textfiles.com/search?formatid=continuousEdge) | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://sembiance.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
+[image/corel10Texture](https://discmaster.textfiles.com/search?formatid=corel10Texture) | Corel 10 Texture | .tex | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?formatid=crayolaArtStudio) | Crayola Art Studio | .art | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?formatid=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
 [image/designWorks](https://discmaster.textfiles.com/search?formatid=designWorks) | DesignWorks Drawing |  | [2 sample files](https://sembiance.com/fileFormatSamples/image/designWorks/)
@@ -795,7 +796,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,160)
+## Other (1,162)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -946,6 +947,7 @@ Family/Format | Name | Extensions | Notes
 [other/axisGameEnhancementModules](https://discmaster.textfiles.com/search?formatid=axisGameEnhancementModules) | Axis Game Enhancement Modules | .fil | 
 [other/babbleData](https://discmaster.textfiles.com/search?formatid=babbleData) | Babble! Data | .bab | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?formatid=babylonGlossary) | Babylon Glossary | .bgl | 
+[other/bankMateActivityData](https://discmaster.textfiles.com/search?formatid=bankMateActivityData) | BankMate Activity data | .ix1 .ixp | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
 [other/basVBDOSPro10Source](https://discmaster.textfiles.com/search?formatid=basVBDOSPro10Source) | BAS VBDOS Pro 1.0 Source | .bas | 
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
@@ -1857,6 +1859,7 @@ Family/Format | Name | Extensions | Notes
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?formatid=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 [other/virToolsFiles](https://discmaster.textfiles.com/search?formatid=virToolsFiles) | Virtools files | .cmo .nmo .vmo .nms | 
 [other/virtualChess2Game](https://discmaster.textfiles.com/search?formatid=virtualChess2Game) | Virtual Chess 2 game | .eck | 
+[other/virtualFireScene](https://discmaster.textfiles.com/search?formatid=virtualFireScene) | Virtual Fire Scene | .sce | 
 [other/virtualPascalUnit](https://discmaster.textfiles.com/search?formatid=virtualPascalUnit) | Virtual Pascal Unit | .vpi | 
 [other/virtualDubDebugInfo](https://discmaster.textfiles.com/search?formatid=virtualDubDebugInfo) | VirtualDub Debug Info | .vdi | 
 [other/virusExecutorPatchBrain](https://discmaster.textfiles.com/search?formatid=virusExecutorPatchBrain) | VirusExecutor Patch Brain | .patchbrain | 

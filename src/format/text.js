@@ -239,6 +239,7 @@ export default
 		comitModemsConfiguration                : {name : "COMit modems configuration", ext : [".dat", ".dos"], magic : ["COMit modems configuration"], weakMagic : true},
 		compoPreferences                        : {name : "Compo preferences", magic : ["Compo preferences"]},
 		conTeXtDocument                         : {name : "ConTeXt document", ext : [".tex"], magic : ["ConTeXt document text"], weakMagic : true},
+		corelCADMaterial                        : {name : "CorelCAD Material", ext : [".mat"], magic : ["CorelCAD Material"]},
 		corelWordPerfectSetupInformation        : {name : "Corel/WordPerfect Setup information", ext : [".csw"], magic : ["Corel/WordPerfect Setup information"], weakMagic : true},
 		cPBackupInfo                            : {name : "CPBackup info", ext : [".set"], magic : ["CPBackup info"]},
 		cpBackupSettings                        : {name : "CPBackup Settings", ext : [".set"], magic : ["CPBackup backup Settings"], weakMagic : true},

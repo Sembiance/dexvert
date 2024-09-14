@@ -200,6 +200,7 @@ export default
 		rmQuestModule                   : {name : "RM/Quest Module", ext : [".qrm"], magic : ["RM/Quest module"]},
 		scummRoomNameList               : {name : "SCUMM room name list", ext : [".la0", ".000"], magic : ["SCUMM room name list"]},
 		sixtyFourNetContainer           : {name : "64Net Container", ext : [".n64"], magic : ["64NET container"], weakMagic : true},
+		softdiskCrossword               : {name : "Softdisk Crossword", ext : [".sxg", ".sxp"], magic : ["Softdisk Crossword"]},
 		stormCPPDebugStrings            : {name : "Storm C++ Debug strings", ext : [".debug"], magic : ["Storm C++ Debug strings"]},
 		sybaseIAnywhereIndex            : {name : "Sybase iAnywhere Index", ext : [".cdx"], magic : ["Sybase iAnywhere index files", "xBase compound index"], weakMagic : ["xBase compound index"]},
 		telemateCompiledScript          : {name : "Telemate Compiled Script", ext : [".tms"], magic : ["Telemate compiled script"]},

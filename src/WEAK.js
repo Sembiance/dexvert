@@ -1671,6 +1671,7 @@ export const WEAK_VALUES =
 	/^Ultimo Primo SnapShot$/,
 	/^UltraEdit Wordfile$/,
 	/^UNIMod created by APlayer$/,
+	/^Universal Data Format$/,
 	/^Universe Sandbox simulation$/,
 	/^Universal Data Format \(lower case\)$/,
 	/^Universal Scene Description Zipped AR format \(generic\)$/,

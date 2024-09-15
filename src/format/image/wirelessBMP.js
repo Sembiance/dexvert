@@ -7,5 +7,5 @@ export class wirelessBMP extends Format
 	ext          = [".wbmp", ".wap", ".wbm"];
 	mimeType     = "image/vnd.wap.wbmp";
 	metaProvider = ["image"];
-	converters   = ["convert", "canvas", "tomsViewer"];
+	converters   = ["convert", "wuimg", "canvas", "tomsViewer"];
 }

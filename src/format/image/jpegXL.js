@@ -7,5 +7,5 @@ export class jpegXL extends Format
 	ext        = [".jxl"];
 	mimeType   = "image/jxl";
 	magic      = ["JPEG XL codestream", "JPEG XL bitmap", "JPEG XL container", /^fmt\/(1484|1485)( |$)/];
-	converters = ["gimp"];	// ["djxl", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["gimp", "wuimg"];	// ["djxl", `abydosconvert[format:${this.mimeType}]`];
 }

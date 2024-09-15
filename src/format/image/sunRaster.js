@@ -12,7 +12,7 @@ export class sunRaster extends Format
 
 	// abydosconvert also supports this format, but it hangs in an infinite loop when passing it an invalid image, so we don't bother including it below
 	converters = [
-		"deark[module:sunras]", "gimp", "nconvert", "imconv[format:ras][matchType:magic]",
+		"deark[module:sunras]", "gimp", "nconvert", "wuimg", "imconv[format:ras][matchType:magic]",
 		"canvas[matchType:magic]", "picturePublisher[matchType:magic]", "pv[matchType:magic]", "keyViewPro[matchType:magic]"
 	];
 }

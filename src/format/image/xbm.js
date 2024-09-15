@@ -10,7 +10,7 @@ export class xbm extends Format
 	mimeType     = "image/x-xbitmap";
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "gimp", "imconv[format:xbm][matchType:magic]",
+		"convert", "gimp", "imconv[format:xbm][matchType:magic]", "wuimg",
 		"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
 }

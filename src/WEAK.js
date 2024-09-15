@@ -61,6 +61,7 @@ export const WEAK_MAC_TYPES =
 export const IGNORE_MAGICS =
 [
 	// detectItEasy
+	/^Archive: BAGF$/,
 	/^Archive: SW/,	// These are paired with .idb files which we DO support
 
 	// dexmagic
@@ -465,6 +466,7 @@ export const WEAK_VALUES =
 	/^HPA archive data/,
 	/^hp\d00/,
 	/^HP s\d+ ((demand-load|relocatable|pure|old) )?executable/,
+	/^HP NLS message catalog/,
 	/^huf output/,
 	/^HYP archive data/,
 	/^i386 COFF object$/,
@@ -552,6 +554,7 @@ export const WEAK_VALUES =
 	/^MIPSE[BL][ -]/,
 	/^MIT scheme/,
 	/^MMDF mailbox/,
+	/^modulefile/,
 	/^Motorola S-Record; binary data in text format/,
 	/^MPEG ADTS, layer I(,|$)/,
 	/^MPEG sequence$/,
@@ -613,6 +616,7 @@ export const WEAK_VALUES =
 	/^PARity archive data - file number \d+$/,
 	/^PBF image \(deflate compression\)/,
 	/^PCP compiled namespace/,
+	/^PCP Help/,
 	/^PCX for Windows image data/,
 	/^PCP memory mapped values/,
 	/^PDP-11/,
@@ -912,6 +916,7 @@ export const WEAK_VALUES =
 	/^Graham Systems Disk Sqeezer disk image$/,
 	/^GraphiCode Programmable Device Format$/,
 	/^Hi-MD Minidisc ATRAC3\+ audio data container$/,
+	/^HP Xine compressed$/,
 	/^Hrust [12] packed/,
 	/^Human Readable Archive$/,
 	/^HyperBase data base$/,
@@ -1417,6 +1422,7 @@ export const WEAK_VALUES =
 	/^EngineX Sound effects$/,
 	/^ENVI n-D visualizer state$/,
 	/^EPOC\/Psion Sheet spreadsheet$/,
+	/^Esri grid \(ASCII\)$/,
 	/^Eudora Address Book$/,
 	/^EVE Online data \(generic\)$/,
 	/^Faery Tale Adventure 2 Resources$/,
@@ -1489,6 +1495,7 @@ export const WEAK_VALUES =
 	/^LEN Exchange Format$/,
 	/^Lexicon Interchange FormaT$/,
 	/^LibGDX 3d model$/,
+	/^Lightscape Radiosity$/,
 	/^LightWave Envelope data$/,	// Found files that ARE this format, but with no extension and the magic is pretty weak otherwise
 	/^LightWave Motion data$/,
 	/^Litestep theme$/,
@@ -1512,6 +1519,7 @@ export const WEAK_VALUES =
 	/^MegaZeux game$/,
 	/^MetaQuote \/ MetaTrader indicator$/,
 	/^MetaQuotes Language 5 compiled program$/,
+	/^MG!2 compressed$/,
 	/^Microbee tape image$/,
 	/^Microsoft Help compiler Project \(with rem\)$/,
 	/^Microsoft resource data \(old\)$/,
@@ -1724,6 +1732,7 @@ export const WEAK_VALUES =
 	/^WinImage disk image$/,
 	/^Wii Model Animation$/,
 	/^WordPerfect Executive Spreadsheet$/,
+	/^WorldWide Telescope collection$/,
 	/^wxWindows - wxPython Resource$/,
 	/^X-CAD Screen Menu$/,
 	/^XBaze data base$/,

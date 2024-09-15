@@ -8,5 +8,5 @@ export class heic extends Format
 	mimeType     = "image/heic";
 	magic        = ["HEIF bitmap", "High Efficiency Image File Format", "ISO Media, HEIF Image", /^fmt\/1101( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "iconvert", "gimp"];
+	converters   = ["convert", "iconvert", "gimp", "wuimg"];
 }

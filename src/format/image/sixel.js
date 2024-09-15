@@ -16,6 +16,6 @@ export class sixel extends Format
 		return headerBuf.indexOfX([0x1B, 0x50])!==-1 || headerBuf.indexOfX([0x1B, 0x5B])!==-1 || headerBuf.indexOfX([0x90])===0;
 	};
 	metaProvider = ["image"];
-	converters   = ["sixel2png", "convert[format:SIXEL]", `abydosconvert[format:${this.mimeType}]`];
+	converters   = ["sixel2png", "convert[format:SIXEL]", "wuimg", `abydosconvert[format:${this.mimeType}]`];
 	verify       = ({meta}) => meta.colorCount>1;
 }

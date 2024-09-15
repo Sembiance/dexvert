@@ -6,5 +6,5 @@ export class pc88PI extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Pi_(image_format)";
 	ext        = [".pi"];
 	magic      = ["Pi bitmap", "Yanagisawa Pi 16 color picture"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "wuimg"];
 }

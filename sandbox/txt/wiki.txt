@@ -35,6 +35,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [https://fontforge.org/ FontForge]
 * [https://www.winuae.net/download/ uaeunp]
 * [https://github.com/assimp/assimp assimp]
+* [https://codeberg.org/kaleido/wuimg wuimg]
 
 == Sample files ==
 * {{DexvertSamples|image/dpx}}

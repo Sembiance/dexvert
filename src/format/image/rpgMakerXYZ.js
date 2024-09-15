@@ -6,5 +6,5 @@ export class rpgMakerXYZ extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/XYZ_(RPG_Maker)";
 	ext        = [".xyz"];
 	magic      = ["XYZ Graphics bitmap"];
-	converters = ["xyz2png", "nconvert"];
+	converters = ["xyz2png", "wuimg", "nconvert"];
 }

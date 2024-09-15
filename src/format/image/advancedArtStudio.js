@@ -25,5 +25,5 @@ export class advancedArtStudio extends Format
 
 	untouched       = ({f}) => f.input.ext.toLowerCase()===".pal";
 	verifyUntouched = false;
-	converters      = ["recoil2png"];
+	converters      = ["recoil2png", "wuimg"];
 }

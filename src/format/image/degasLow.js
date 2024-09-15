@@ -8,6 +8,6 @@ export class degasLow extends Format
 	mimeType   = "image/x-pc1";
 	magic      = ["DEGAS low-res compressed bitmap"];
 	byteCheck  = [{offset : 0, match : [0x80, 0x00]}];
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters = ["recoil2png", "wuimg", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 	classify   = true;
 }

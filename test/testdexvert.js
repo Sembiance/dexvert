@@ -274,7 +274,8 @@ const FLEX_SIZE_FORMATS =
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		grabber            : 7,
-		gifexe             : 50,
+		gifexe             : 70,
+		krisCard           : 10,
 		naplps             : 20,
 		theDrawCOM         : 5,
 		threeDCK           : 20,
@@ -431,6 +432,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/pfsFirstPublisher\/.+$/, "image", "gfaArtist"],
 
 	// Unsupported files that end up getting matched to other stuff
+	[/archive\/packedC64PRG\/turrican part 2_$/, "document", "cbmBasic"],
 	[/audio\/aviAudio\/04mwwk00\.avi/, "archive", "riff"],
 	[/audio\/dataShowSound\/.+/i, "text", true],
 	[/document\/hancomWord\/.+/i, "archive", true],

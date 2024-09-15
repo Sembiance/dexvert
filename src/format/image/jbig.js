@@ -8,5 +8,5 @@ export class jbig extends Format
 	magic        = ["JBIG raster bitmap"];
 	notes        = "Sample file mx.jbg converts to garbage, not sure why.";
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "wuimg"];
 }

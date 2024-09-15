@@ -11,7 +11,7 @@ export class sgi extends Format
 	idMeta         = ({macFileType}) => macFileType==="SGI ";
 	metaProvider   = ["image"];
 	converters     = [
-		"convert", "deark[module:sgiimage]", "nconvert", "iconvert", "iio2png", "gimp", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[format:sgi_pipe][outType:png]", "imconv[format:rgb][matchType:magic]",
+		"convert", "deark[module:sgiimage]", "nconvert", "iconvert", "iio2png", "gimp", "wuimg", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[format:sgi_pipe][outType:png]", "imconv[format:rgb][matchType:magic]",
 		"hiJaakExpress[strongMatch]", "canvas[strongMatch]", "tomsViewer[strongMatch]", "keyViewPro[strongMatch]"
 	];
 }

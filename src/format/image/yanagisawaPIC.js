@@ -7,5 +7,5 @@ export class yanagisawaPIC extends Format
 	ext        = [".pic"];
 	magic      = ["Yanagisawa PIC image file", "PIC bitmap"];
 	weakMagic  = true;
-	converters = ["recoil2png"];
+	converters = ["wuimg", "recoil2png"];
 }

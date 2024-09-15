@@ -7,5 +7,5 @@ export class flif extends Format
 	ext        = [".flif"];
 	mimeType   = "image/x-flif";
 	magic      = ["Free Lossless Image Format", "FLIF", /^fmt\/872( |$)/];
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = [`abydosconvert[format:${this.mimeType}]`, "wuimg"];
 }

@@ -10,9 +10,9 @@ const _XML_MAGIC = [
 	"Visual Studio Project User Options", "Visual Studio C++ project Filters (UTF-8)", "Visual Studio Visual C++ Project (UTF-8)", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes",
 	"Tag Library Descriptor", "Channel Definition Format", "QuickTime Media Link", "Interface Builder UI resource data (archive)", "Mozilla XML User interface Language", "GPS eXchange format", "Glade UI design", "Internet Archive book scan data",
 	"RoboHelp / FlashHelp skin", "Entity and Attribute Information", "Shapefile Geospatial metadata", "NuGet Specification", "Microsoft Management Console Snap-in control file", "Microsoft Extensible Application Markup Language",
-	"Native Instruments Battery drumKit", "Dia shape", "Dia sheet", "Dia drawing (uncompressed)", "RELAX NG", "XSL Formatting Objects", "DISCO Dynamic Discovery file", "XML sitemap",
+	"Native Instruments Battery drumKit", "Dia shape", "Dia sheet", "Dia drawing (uncompressed)", "RELAX NG", "XSL Formatting Objects", "DISCO Dynamic Discovery file", "XML sitemap", "GNUMERIC spreedshet (XML",
 	/^Tiled Tiles (Map|Set) XML$/,
-	/^fmt\/(475|979|983|1677|1729|1796)( |$)/
+	/^fmt\/(205|475|979|983|1219|1677|1729|1796)( |$)/
 ];
 export {_XML_MAGIC};
 

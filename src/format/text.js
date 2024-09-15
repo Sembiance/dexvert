@@ -151,6 +151,7 @@ export default
 		prologSource                             : {name : "Prolog Source", ext : [".pro"], magic : ["Prolog Source Code"], weakMagic : true},
 		pythonEggPackageInfo                     : {name : "Python egg package info", ext : [".egg-info"], magic : ["Python egg package info"]},
 		pythonSource                             : {name : "Python Source", ext : [".py"], magic : [/^a python.* script text executable$/, /^Python script/], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Python"},
+		rDocumentation                           : {name : "R documentation", ext : [".Rd"], magic : ["R documentation"], weakMagic : true},
 		redcodeSource                            : {name : "Redcode source", ext : [".red"], magic : ["Redcode source"]},
 		rexx                                     : {name : "OS/2 REXX Batch file", website : "https://www.tutorialspoint.com/rexx/index.htm", ext : [".rexx", ".rex"], magic : [/OS\/2 REXX batch file/, ...TEXT_MAGIC], weakMagic : true},
 		rubySource                               : {name : "Ruby Source", ext : [".rb"], magic : ["Ruby script"], weakMagic : true},
@@ -181,6 +182,7 @@ export default
 		// Other //
 		///////////
 		autoCADPlotterConfiguration             : {name : "AutoCAD Plotter Configuration", ext : [".pcp"], magic : ["AutoCAD Plotter Configuration"], weakMagic : true},
+		acegrFitDescriptionFile                 : {name : "ACE/gr fit description file", ext : [".fit"], magic : [/^ACE\/gr fit description file/]},
 		acrobatDistillerJobOptions              : {name : "Acrobat Distiller Job Options", ext : [".joboptions1", ".joboptions", ".joboption2", ".joboptions2", ".joboption", ".joboptions12"], magic : ["Acrobat Distiller Job Options"]},
 		acrobatFormsData                        : {name : "Acrobat Forms Data", ext : [".fdf", ".acrodata"], magic : ["Acrobat Forms Data Format", "Adobe PDF Form Daten Datei", /^FDF document/, /^fmt\/1500( |$)/], website : "http://fileformats.archiveteam.org/wiki/FDF"},
 		activeXLicensePackageFile               : {name : "ActiveX License Package file", ext : [".lpk"], magic : [/^fmt\/498( |$)/]},
@@ -307,6 +309,7 @@ export default
 		gerber                                  : {name : "Gerber", ext : [".gbx", ".gbr"], magic : ["Gerber format"], weakMagic : true},
 		gimpParametricBrush                     : {name : "GIMP parametric Brush", ext : [".vbr"], magic : ["GIMP parametric Brush"]},
 		gnuInfo                                 : {name : "GNU Info File", ext : [".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                          	// We do NOT include Trid's "GNU Info document" because it's too loose
+		graceProjectFile                        : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
 		graphmaticaGraph                        : {name : "Graphmatica Graph", ext : [".gr"], magic : ["Graphmatica Graph"], weakMagic : true},
 		gravisFirebird2Configuration            : {name : "Gravis Firebird 2 configuration", ext : [".fbd"], magic : ["Gravis Firebird 2 configuration"]},
 		hardDiskMenuSystemMenu                  : {name : "Hard Disk Menu System menu", ext : [".999", ".000"], magic : ["Hard Disk Menu System menu"], weakMagic : true},
@@ -402,6 +405,9 @@ export default
 		pcbASCIIPrintedCircuitBoard             : {name : "PCB ASCII Printed Circuit Board", ext : [".pcb"], magic : ["PCB ASCII Printed Circuit Board"], weakMagic : true},
 		pcBoardConfigData                       : {name : "PCBoard config data", ext : [".dat"], magic : ["PCBoard config data"]},
 		pcCalcSpreadsheet                       : {name : "PC-Calc spreadsheet", magic : [/^PC-Calc spreadsheet \([v\d.]+\)/]},
+		pcppimieconfRules                       : {name : "PCP pmieconf rules", magic : [/^PCP pmieconf rules/]},
+		pcpConfig                               : {name : "PCP config ", magic : [/^PCP (pmlogger|pmdahotproc|pmview) config/]},
+		pcppmchartView                          : {name : "PCP pmchart view ", magic : [/^PCP pmchart view/]},
 		pcTypeMacro                             : {name : "PC-Type Macro", ext : [".mac"], magic : ["PC-Type Macro"]},
 		pcTypePrinterEscapeCodes                : {name : "PC-Type Printer escape codes", ext : [".prn"], magic : ["PC-Type Printer escape codes"]},
 		pdmenuConfiguration                     : {name : "Pdmenu configuration", magic : [/^Pdmenu configuration file text/]},
@@ -455,6 +461,7 @@ export default
 		sendmailM4                              : {name : "sendmail m4", ext : [".m4"], magic : ["sendmail m4 text file, ASCII text"]},
 		sequencerScript                         : {name : "32-Bit Sequencer Script", ext : [".scr"], magic : ["32-Bit Sequencer Script"]},
 		sessionDescriptionProtocol              : {name : "Session Description Protocol", ext : [".sdp", ".txt"], magic : ["Session Description Protocol"], weakMagic : true},
+		sgiSoundTrackProjectFile                : {name : "SGI SoundTrack project file", ext : [".st"], magic : [/^SGI SoundTrack project file/]},
 		shapefileProjectionMetadataGeoCoords    : {name : "Shapefile Projection metadata Geographic Coords", ext : [".prj"], magic : ["Shapefile Projection metadata (geographic coords)"]},
 		sharewareInformationFile                : {name : "Shareware Information File", ext : [".sif"], magic : ["Shareware Information File"]},
 		siagSpreadsheet                         : {name : "Siag spreadsheet", ext : [".siag"], magic : ["Siag spreadsheet"], weakMagic : true},

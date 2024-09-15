@@ -8,6 +8,6 @@ export class makichan extends Format
 	forbidExtMatch = true;
 	magic          = [/^MAKI v1-[ab] bitmap$/, "MAG v2 bitmap", "Maki-chan v2 image", /^Maki-chan v1.[ab] image/, /^fmt\/1469( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="MAG!" && macFileCreator==="xPIC";
-	converters     = ["recoil2png", "deark[module:makichan]"];					// deark gets some dimensions wrong
+	converters     = ["recoil2png", "wuimg", "deark[module:makichan]"];		// deark & wuimg gets some dimensions wrong
 	verify         = ({meta}) => meta.height>1 && meta.width>1;	// deark is a little too aggressive in converting things so we check height/width and forbid ext matches
 }

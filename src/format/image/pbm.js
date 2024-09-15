@@ -9,7 +9,7 @@ export class pbm extends Format
 	magic        = ["Portable BitMap", "Portable Bitmap Image", /^Netpbm image data,? .*bitmap/, /^fmt\/409( |$)/, /^x-fmt\/164( |$)/];
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "iio2png", "gimp", "imconv[format:pbm][matchType:magic]",
+		"convert", "iio2png", "gimp", "wuimg", "imconv[format:pbm][matchType:magic]",
 		"paintDotNet", "hiJaakExpress", "canvas", "tomsViewer"
 	];
 }

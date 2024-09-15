@@ -9,7 +9,7 @@ export class degasMed extends Format
 	magic     = ["DEGAS med-res compressed bitmap"];
 	byteCheck = [{offset : 0, match : [0x80, 0x01]}];
 
-	// nconvert properly handles aspect ratio
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "recoil2png"];
+	// nconvert & wuimg properly handles aspect ratio
+	converters = ["nconvert", "wuimg", `abydosconvert[format:${this.mimeType}]`, "recoil2png"];
 	classify   = true;
 }

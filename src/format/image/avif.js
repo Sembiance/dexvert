@@ -7,5 +7,5 @@ export class avif extends Format
 	ext        = [".avif", ".avifs"];
 	mimeType   = "image/avif";
 	magic      = ["AV1 Image File Format bitmap", "ISO Media, AVIF Image"];
-	converters = ["avifdec", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["avifdec", "wuimg", `abydosconvert[format:${this.mimeType}]`];
 }

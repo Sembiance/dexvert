@@ -1,0 +1,10 @@
+import {Format} from "../../Format.js";
+
+export class jpegLS extends Format
+{
+	name       = "JPEG-LS";
+	website    = "http://fileformats.archiveteam.org/wiki/JPEG-LS";
+	ext        = [".jls"];
+	magic      = ["JPEG-LS bitmap", /^JPEG-LS image data/];
+	converters = ["wuimg", "ffmpeg[format:jpegls_pipe][outType:png]"];
+}

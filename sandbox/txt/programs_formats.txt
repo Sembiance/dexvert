@@ -17004,3 +17004,61 @@ RollerCoaster Tycoon RidePicture (*.TP4)
 TGA (*.tga)
 TIFF (*.tiff, *.tif)
 WebP (*.webp)
+
+
+>>> wuimg   linux  (run 'meson configure' for list of formats)  https://codeberg.org/kaleido/wuimg
+Lerc               via liblerc
+avif               via libavif
+avs                avs
+bmz                GSD engine compressed BMP, requires DIB
+c64                C64 image formats
+degas              DEGAS image formats
+dib                DIB family (BMP, ICO, and CUR)
+dpx                dpx
+farbfeld           farbfeld
+flif               via libflif
+g00                RealLive engine image
+gif                via libgif
+heif               via libheif, supports avif if libavif is not used
+hg3                CatSystem engine image
+ilbm               IFF/ILBM image
+jbig               via libjbig
+jpeg               via libjpeg
+jpeg2000           via libopenjp2
+jpegls             via libcharls
+jpegxl             via libjxl
+mac                MacPaint image
+mag                MAG/MAKI02 image
+maki               MAKI01 image
+msx                MSX-BASIC image family
+pcf                PCF bitmap fonts
+pcx                pcx
+pdt                RealLive engine image
+pgx                GLib2 engine image
+pi                 Yanagisawa's Pi image
+pi1                Pi1 DEGAS image
+pic                Yanagisawa's PIC image
+pic2               Yanagisawa's PIC2 image
+pictor             pictor
+png                via libpng
+pnm                PNM family
+prt                Kid engine image
+px                 Leaf PX image
+q4                 XLD4(Q4) image
+qoi                qoi
+raw                via libraw
+sgi                sgi
+sixel              sixel
+sun                sun
+svg                via librsvg
+tga                tga
+tiff               via libtiff
+tim                PlayStation image
+tlg                KiriKiri engine image
+wbmp               wbmp
+webp               via libwebp and libwebpdemux
+wpx                Wild-Bug engine image
+xbm                xbm
+xcursor            xcursor
+xwd                xwd
+xyz                RPG Maker image

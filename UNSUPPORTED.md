@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,016)
+# Unsupported File Formats (2,018)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -383,7 +383,7 @@ Family/Format | Name | Extensions | Notes
 [executable/atariSTExe](https://discmaster.textfiles.com/search?formatid=atariSTExe) | Atari ST Executable |  | [11 sample files](https://sembiance.com/fileFormatSamples/executable/atariSTExe/)
 [executable/blackberryExecutable](https://discmaster.textfiles.com/search?formatid=blackberryExecutable) | BlackBerry Executable | .cod | 
 [executable/digiPAKAudioDriver](https://discmaster.textfiles.com/search?formatid=digiPAKAudioDriver) | DIGIPAK audio driver | .com | 
-[executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
+[executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable/Library |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
 [executable/fmTownsOSApp](https://discmaster.textfiles.com/search?formatid=fmTownsOSApp) | FM-TownsOS App | .exp | [9 sample files](https://sembiance.com/fileFormatSamples/executable/fmTownsOSApp/)
 [executable/geoWorksGEOSApplication](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSApplication) | GeoWorks GEOS application | .geo | 
 [executable/hpPalmtopExecutable](https://discmaster.textfiles.com/search?formatid=hpPalmtopExecutable) | HP Palmtop Executable | .exm | [2 sample files](https://sembiance.com/fileFormatSamples/executable/hpPalmtopExecutable/)
@@ -508,7 +508,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (148)
+## Image (147)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -656,7 +656,6 @@ Family/Format | Name | Extensions | Notes
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?formatid=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?formatid=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
 [image/xCarGraphics](https://discmaster.textfiles.com/search?formatid=xCarGraphics) | XCar Graphics | .gxa | 
-[image/yanagisawaPIC2](https://discmaster.textfiles.com/search?formatid=yanagisawaPIC2) | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://sembiance.com/fileFormatSamples/image/yanagisawaPIC2/) - A request was made to add support to recoil, but that is looking unlikely: https://sourceforge.net/p/recoil/bugs/73/ 		There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c
 [image/zSoftPalette](https://discmaster.textfiles.com/search?formatid=zSoftPalette) | ZSoft Palette | .pal | 
 [image/zyxelFAXFormat](https://discmaster.textfiles.com/search?formatid=zyxelFAXFormat) | Zyxel FAX format | .fax | 
 
@@ -799,7 +798,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,163)
+## Other (1,166)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1584,6 +1583,9 @@ Family/Format | Name | Extensions | Notes
 [other/pcLabelLabel](https://discmaster.textfiles.com/search?formatid=pcLabelLabel) | PC-Label Label | .lbl | 
 [other/pcTalkIIIData](https://discmaster.textfiles.com/search?formatid=pcTalkIIIData) | PC-Talk III data | .dir | 
 [other/pcAnywhere](https://discmaster.textfiles.com/search?formatid=pcAnywhere) | PCAnywhere Data | .bhf | 
+[other/pcpArchiveIndex](https://discmaster.textfiles.com/search?formatid=pcpArchiveIndex) | PCP archive index | .index | 
+[other/pcpArchiveLog](https://discmaster.textfiles.com/search?formatid=pcpArchiveLog) | PCP archive log | .0 | 
+[other/pcpArchiveMetadata](https://discmaster.textfiles.com/search?formatid=pcpArchiveMetadata) | PCP archive metadata | .meta | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?formatid=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?formatid=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
 [other/pgaTourVideoAnimation](https://discmaster.textfiles.com/search?formatid=pgaTourVideoAnimation) | PGA Tour Video Animation file format | .van | 

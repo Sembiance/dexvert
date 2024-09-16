@@ -1316,6 +1316,7 @@ export default
 		erdasImagineHierarchicalFileArchitecture : {name : "ERDAS Imagine Hierarchical File Architecture", magic : ["ERDAS Imagine Hierarchical File Architecture", /^fmt\/1215( |$)/]},
 		expresswarePrinterDefFile                : {name : "Expressware Printer Definition File", ext : [".pdf"], magic : ["Expressware Printer Definition File"]},
 		extensibleStorageEngineDataBase          : {name : "Extensible Storage Engine DataBase", ext : [".edb", ".sdb"], magic : [/^Extensible [Ss]torage [Ee]ngine DataBase/], weakMagic : true},
+		estFlatBinary                            : {name : "EST flat binary", ext : [".bin"], magic : ["EST flat binary"]},
 		extraForWindowsAPLKeymap                 : {name : "Extra! for Windows APL keymap", ext : [".apl"], magic : ["Extra! for Windows APL keymap"]},
 		extraForWindowsBinaryCompiledMacro       : {name : "Extra! for Windows Binary/compiled Macro", ext : [".ebm"], magic : ["Extra! for Windows Binary/compiled Macro"], weakMagic : true},
 		extraForWindowsSmartpadDefinition        : {name : "Extra! for Windows smartpad definition", ext : [".ewp"], magic : ["Extra! for Windows smartpad definition"]},

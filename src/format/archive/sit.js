@@ -8,5 +8,5 @@ export class sit extends Format
 	magic      = ["StuffIt compressed archive", "Macintosh StuffIt Archive", /^Archive: SIT$/, /^StuffIt( \d)?$/, /^StuffIt Archive/, /^fmt\/1459|1460( |$)/];
 	weakMagic  = [/^StuffIt Archive/];
 	idMeta     = ({macFileType}) => ["SIT!", "SIT5", "SITD"].includes(macFileType);
-	converters = ["unar[mac]", "deark[module:stuffit][mac]", "macunpack"];
+	converters = ["unar[mac]", "deark[module:stuffit][mac]", "macunpack", "maconv"];
 }

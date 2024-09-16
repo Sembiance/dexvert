@@ -1,4 +1,4 @@
-# Supported File Formats (2,380)
+# Supported File Formats (2,385)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -329,7 +329,7 @@ archive | [Stargunner Game Archive](https://moddingwiki.shikadi.net/wiki/DLT_For
 archive | Starsiege Game Archive | .vol | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/starsiegeGameArchive/)
 archive | [Stellar 7 Game Archive](https://moddingwiki.shikadi.net/wiki/RES_Format_(Stellar_7)) | .res | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/stellar7GameArchive/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [42 sample files](https://sembiance.com/fileFormatSamples/archive/stc/)
-archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/StuffIt) | .sit | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) [macunpack](https://github.com/wnayes/macutils) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/sit/)
+archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/StuffIt) | .sit | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) [macunpack](https://github.com/wnayes/macutils) [maconv](https://github.com/ParksProjets/Maconv) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/sit/)
 archive | Sun Package Data Stream | .pkg | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sunPackageDataStream/)
 archive | [Superscape World](https://archive.superscape.org/About%20Superscape.txt) | .vrt .xvr .svr | [superscapeVRT](https://archive.superscape.org/Software/VRT/VRT_5.60.0.4112.iso) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/superscapeWorld/)
 archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [swagReader](http://fileformats.archiveteam.org/wiki/SWG) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/swagPacket/)
@@ -628,7 +628,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [pco](https://vetusware.com/download/PC%20Outline%20for%20Windows%20PC%20Outline%201.0.a/?id=4597) | [10 sample files](https://sembiance.com/fileFormatSamples/document/pco/)
 document | PC-Type Document | .pct | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/pcTypeDocument/)
 document | [PCBoard Programming Language Executable](https://en-academic.com/dic.nsf/enwiki/3064510) | .ppe | [pplx](http://files.mpoli.fi/unpacked/tlr/pcboard_bbs_utilities/agsppx20.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/pcBoardPPE/)
-document | PCP Help Text | .pag | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/pcpHelpText/)
+document | PCP Help Text | .pag | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/pcpHelpText/)
 document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/peterNortonHelp/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [6 sample files](https://sembiance.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/PostScript) | .ps | [ps2pdf](https://ghostscript.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/ps/)
@@ -1672,7 +1672,7 @@ other | Atari ST Guide REF Links | .ref | [strings](https://www.gnu.org/software
 other | Avery Design clipart index | .zdx | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/other/averyDesignClipartIndex/)
 other | bbX File |  | [strings](https://www.gnu.org/software/binutils/) | [18 sample files](https://sembiance.com/fileFormatSamples/other/bbxFile/)
 other | Borland C/C++ Project | .prj | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/borlandCProject/)
-other | Borland Reflex Database | .rxd | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/other/borlandReflexDatabase/)
+other | Borland Reflex Database | .rxd | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/other/borlandReflexDatabase/)
 other | Borland Turbo Vision Resource | .res .tvr | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/borlandTurboVisionResource/)
 other | Brief Compiled Macro | .cm | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/briefCompiledMacro/)
 other | C-Worthy Error Librarian Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/cWorthyErrorLibrarian/)
@@ -1839,7 +1839,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (547)
+## Text (552)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -1934,7 +1934,7 @@ text | Colton Software Fireworkz document | .fwk |  |
 text | COMit modems configuration | .dat .dos |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/comitModemsConfiguration/)
 text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/csv/)
 text | Compo preferences |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/compoPreferences/)
-text | ConTeXt document | .tex |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/conTeXtDocument/)
+text | ConTeXt document | .tex |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/conTeXtDocument/)
 text | Corel/WordPerfect Setup information | .csw |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/corelWordPerfectSetupInformation/)
 text | CorelCAD Material | .mat |  | 
 text | CPBackup info | .set |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cPBackupInfo/)
@@ -1980,7 +1980,7 @@ text | Elastic Reality project data | .er |  | [10 sample files](https://sembian
 text | Emacs RMAIL |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emacsRMAIL/)
 text | eMbedded Visual Basic Project | .ebp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/eMbeddedVisualBasicProject/)
 text | EMBL sequence data | .embl .emb .dna |  | 
-text | Enriched Text Document |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
+text | Enriched Text Document |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
 text | ESRI Arc/Info Export | .e00 |  | 
 text | ESRI Arc/Info interchange format | .e00 .x00 |  | 
 text | ESRI Arc/View Project | .apr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
@@ -2051,6 +2051,7 @@ text | HTML Help Collection | .col |  | [1 sample file](https://sembiance.com/fi
 text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hyperReaderVideodiscPlayerDriver/)
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc .hts .htx .shtml .phtml |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/html/) - I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. More than that is too CPU intensive.
 text | IAFA Package info | .pkg .age |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/iafaPackageInfo/)
+text | iCalendar/vCalendar | .ics .vcf |  | 
 text | IESNA Photometric data | .ies |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iesnaPhotometricData/)
 text | ImgBurn Graph data | .ibg |  | 
 text | Impatica OnCue Project | .ipj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/impaticaOnCueProject/)
@@ -2208,7 +2209,7 @@ text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps .p
 text | PICS Rating System | .rat |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/picsRatingSystem/)
 text | PipeDream document | .pd .pdd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pipeDreamDocument/)
 text | PiXCL source | .pxl .px |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/piXCLSource/)
-text | Plan 9 rc shell script |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/plan9RCShellScript/)
+text | Plan 9 rc shell script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/plan9RCShellScript/)
 text | Playmation sculpture/model | .seg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/playmationSculptureModel/)
 text | PLBM Games Data Base index | .dbk |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/plbmGamesDataBaseIndex/)
 text | PLBM Games Rhythm loop Data base | .drl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/plbmGamesRhythmLoopDataBase/)
@@ -2232,6 +2233,8 @@ text | Python egg package info | .egg-info |  |
 text | [Python Source](http://fileformats.archiveteam.org/wiki/Python) | .py |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/pythonSource/)
 text | QAPlus Keyboard Map | .kbd |  | 
 text | [QRT Ray Tracer scene description](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_scene_description) | .qrt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qrtRayTracerSceneDescription/)
+text | Qt Translation Source | .ts |  | 
+text | Qt User Interface | .ui |  | 
 text | Quake I save | .sav |  | 
 text | Quicken Interchange Format | .qif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickenInterchangeFormat/)
 text | QuizPro Quiz data | .qzs .qzd .qze |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quizProQuizData/)
@@ -2258,6 +2261,7 @@ text | sc Spreadsheet Calculator spreadsheet | .sc .ast |  | [10 sample files](h
 text | Scala Multimedia Script | .script |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/scalaMultimediaScript/)
 text | Scooter circuit layout | .plt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/scooterCircuitLayout/)
 text | sendmail m4 | .m4 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sendmailM4/)
+text | Serial Vector Format | .svf |  | 
 text | Session Description Protocol | .sdp .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/sessionDescriptionProtocol/)
 text | SGI SoundTrack project file | .st |  | 
 text | [SGML Document](http://fileformats.archiveteam.org/wiki/SGML) | .sgml |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sgml/)
@@ -2279,6 +2283,7 @@ text | SoftICE initialization data | .dat |  | [2 sample files](https://sembianc
 text | Span-It! Personality definition | .per |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/spanItPersonalityDefinition/)
 text | Speedo font Typeface Definition | .tdf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/speedoFontTypefaceDefinition/)
 text | SPSS Portable Data Format | .por |  | 
+text | SSH-RSA Public key | .pub |  | 
 text | ST-6 color Table | .tbl |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/st6ColorTable/)
 text | Standard ACIS Text | .sat |  | 
 text | Starcat disks catalogue | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/starcatDisksCatalogue/)

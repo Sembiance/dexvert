@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,018)
+# Unsupported File Formats (2,019)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -798,7 +798,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,166)
+## Other (1,167)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1184,6 +1184,7 @@ Family/Format | Name | Extensions | Notes
 [other/esriShapefileHeaderIndex](https://discmaster.textfiles.com/search?formatid=esriShapefileHeaderIndex) | ESRI Shapefile Header Index | .aih | 
 [other/esriSpatialIndex](https://discmaster.textfiles.com/search?formatid=esriSpatialIndex) | ESRI Spatial Index |  | 
 [other/esriDataBaseIndex](https://discmaster.textfiles.com/search?formatid=esriDataBaseIndex) | ESRI/ArcView DataBase Index | .shx | 
+[other/estFlatBinary](https://discmaster.textfiles.com/search?formatid=estFlatBinary) | EST flat binary | .bin | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?formatid=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
 [other/extensibleStorageEngineDataBase](https://discmaster.textfiles.com/search?formatid=extensibleStorageEngineDataBase) | Extensible Storage Engine DataBase | .edb .sdb | 
 [other/extraForWindowsAPLKeymap](https://discmaster.textfiles.com/search?formatid=extraForWindowsAPLKeymap) | Extra! for Windows APL keymap | .apl | 

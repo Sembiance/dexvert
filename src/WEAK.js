@@ -576,6 +576,7 @@ export const WEAK_VALUES =
 	/^(MySQL ISAM compressed data|MySQL Maria index) file Version [\d.-]+$/,
 	/^MySQL table definition file Version 0/,
 	/^MySQL table definition file.* type UNKNOWN, MySQL version 0/,
+	/^MySQL replication log, server id 1, MySQL V3\.2\.3, server version 3\.23\.32-debug-log$/,
 	/^National Instruments,/,
 	/^NekoVM bytecode/,
 	/^Netscape Communicator address book/,

@@ -66,6 +66,7 @@ const DEXMAGIC_CHECKS =
 	"DOC2COM (Dan K. Nelson)"                 : [{offset : 0, match : [0xE9, 0x93, 0x00]}, {offset : 25, match : "< Press  Home  PgDn  PgUp  Down Arrow  End >"}],
 	"DOC2COM (Dan K. Nelson) Variant"         : [{offset : 18, match : "<Press  Home  PgDn  PgUp  Down Arrow  End  Q=Print>"}],
 	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],
+	"FL2COM"                                  : [{offset : 3, match : "FL2COM"}],
 	"GNU Info"                                : [{offset : 0, match : "This is Info file"}],
 	"GTXT"                                    : [{offset : 105, match : "GTXT1.1"}],
 	"GTXT (CP/M Variant)"                     : [{offset : 107, match : "GTXT1.1"}],

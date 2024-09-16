@@ -42,6 +42,7 @@ export default
 		epocDatabase             : {name : "EPOC Database", magic : ["Psion Series 5 database Data file", "EPOC Data database"]},
 		expressPublisher         : {name : "Express Publisher Document", ext : [".epd"], magic : ["Express Publisher document"]},
 		firstChoiceDatabase      : {name : "First Choice Database", ext : [".fol", ".pfs"], magic : ["First Choice database", /^fmt\/1284( |$)/], weakMagic : true},
+		fl2com                   : {name : "FL2COM", ext : [".com"], magic : ["FL2COM"], website : "http://fileformats.archiveteam.org/wiki/FL2COM"},
 		formMasterForm           : {name : "Form Master Form", ext : [".frm"], magic : ["Form Master Form"]},
 		fourDWriteDocument       : {name : "4D Write document", magic : ["4D Write document"]},
 		frameMakerBook           : {name : "FrameMaker Book", ext : [".book"], magic : ["FrameMaker book"]},

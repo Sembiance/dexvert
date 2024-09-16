@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,019)
+# Unsupported File Formats (2,025)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (169)
+## Archive (170)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -55,6 +55,7 @@ Family/Format | Name | Extensions | Notes
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/distributionPackageArchive](https://discmaster.textfiles.com/search?formatid=distributionPackageArchive) | Distribution Package archive | .pac | 
+[archive/djarcArchive](https://discmaster.textfiles.com/search?formatid=djarcArchive) | DJarc archive | .dja | [1 sample file](https://sembiance.com/fileFormatSamples/archive/djarcArchive/)
 [archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
@@ -289,7 +290,7 @@ Family/Format | Name | Extensions | Notes
 [document/dbVISTADB](https://discmaster.textfiles.com/search?formatid=dbVISTADB) | db_VISTA Database | .dbd | 
 [document/dBaseCompiledForm](https://discmaster.textfiles.com/search?formatid=dBaseCompiledForm) | dBase Compiled Form | .fro .fmo | 
 [document/dBaseIVDesign](https://discmaster.textfiles.com/search?formatid=dBaseIVDesign) | dBase IV design | .frm .scr | 
-[document/wpsPlus](https://discmaster.textfiles.com/search?formatid=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | VAX based word processor. Haven't investigated it for magic.
+[document/wpsPlus](https://discmaster.textfiles.com/search?formatid=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | [1 sample file](https://sembiance.com/fileFormatSamples/document/wpsPlus/) - VAX based word processor. Haven't investigated it for magic.
 [document/dvcDataBase](https://discmaster.textfiles.com/search?formatid=dvcDataBase) | DVC data base | .d | 
 [document/dynaDocElectricExchangeDocument](https://discmaster.textfiles.com/search?formatid=dynaDocElectricExchangeDocument) | DynaDoc Electric Exchange Document | .wdl | 
 [document/envisionPublisherDoc](https://discmaster.textfiles.com/search?formatid=envisionPublisherDoc) | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://sembiance.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
@@ -508,7 +509,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (147)
+## Image (149)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -551,6 +552,7 @@ Family/Format | Name | Extensions | Notes
 [image/drawStudio](https://discmaster.textfiles.com/search?formatid=drawStudio) | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://sembiance.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 [image/eaSeattlePictureGameData](https://discmaster.textfiles.com/search?formatid=eaSeattlePictureGameData) | EA Seattle picture game data | .pic | 
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?formatid=easyCADDrawing) | EasyCAD Drawing | .fcd | 
+[image/eclipseTILEBitmap](https://discmaster.textfiles.com/search?formatid=eclipseTILEBitmap) | Eclipse TILE bitmap | .tile | 
 [image/elecbyteMUGENSprites](https://discmaster.textfiles.com/search?formatid=elecbyteMUGENSprites) | Elecbyte M.U.G.E.N. sprites | .sff | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?formatid=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?formatid=fastRayMaterial) | FastRay material/surface |  | 
@@ -583,6 +585,7 @@ Family/Format | Name | Extensions | Notes
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?formatid=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 [image/lightningStrikeBitmap](https://discmaster.textfiles.com/search?formatid=lightningStrikeBitmap) | Lightning Strike bitmap | .cod | 
 [image/lightWaveSurface](https://discmaster.textfiles.com/search?formatid=lightWaveSurface) | LightWave Surface | .srf | 
+[image/lightWorkImageBitmap](https://discmaster.textfiles.com/search?formatid=lightWorkImageBitmap) | LightWork Image bitmap | .lwi | 
 [image/logoWriterPage](https://discmaster.textfiles.com/search?formatid=logoWriterPage) | Logo Writer page | .lwr | 
 [image/logoArtDrawing](https://discmaster.textfiles.com/search?formatid=logoArtDrawing) | LogoArt drawing | .art | 
 [image/lotusSmartIcon](https://discmaster.textfiles.com/search?formatid=lotusSmartIcon) | Lotus Smart Icon | .smi | 
@@ -661,7 +664,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (131)
+## Music (132)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -707,6 +710,7 @@ Family/Format | Name | Extensions | Notes
 [music/famiTracker](https://discmaster.textfiles.com/search?formatid=famiTracker) | FamiTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/famiTracker/) - I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...
 [music/ffmModule](https://discmaster.textfiles.com/search?formatid=ffmModule) | FFM module | .ffm | 
 [music/finaleMusicScore](https://discmaster.textfiles.com/search?formatid=finaleMusicScore) | Finale Music Score | .mus | 
+[music/fmTrackerModule](https://discmaster.textfiles.com/search?formatid=fmTrackerModule) | FM Tracker module | .fmt | [1 sample file](https://sembiance.com/fileFormatSamples/music/fmTrackerModule/)
 [music/fmTracker](https://discmaster.textfiles.com/search?formatid=fmTracker) | FMTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmTracker/)
 [music/forgottenWorldsMusic](https://discmaster.textfiles.com/search?formatid=forgottenWorldsMusic) | Forgotten Worlds music | .fw | 
 [music/fredEditorSoundTrack](https://discmaster.textfiles.com/search?formatid=fredEditorSoundTrack) | Fred Editor Soundtrack |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/fredEditorSoundTrack/)
@@ -798,7 +802,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,167)
+## Other (1,168)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1064,6 +1068,7 @@ Family/Format | Name | Extensions | Notes
 [other/corelPhotoPaintToneCurve](https://discmaster.textfiles.com/search?formatid=corelPhotoPaintToneCurve) | Corel PhotoPaint Tone Curve | .crv | 
 [other/corelShellMacro](https://discmaster.textfiles.com/search?formatid=corelShellMacro) | Corel Shell Macro | .shm | 
 [other/corelWritingToolsUserWordList](https://discmaster.textfiles.com/search?formatid=corelWritingToolsUserWordList) | Corel Writing Tools User Word List | .sav .hwl | 
+[other/corelDRAWCharacterSet](https://discmaster.textfiles.com/search?formatid=corelDRAWCharacterSet) | CorelDRAW Character Set | .csd | 
 [other/corncob3DData](https://discmaster.textfiles.com/search?formatid=corncob3DData) | Corncob 3D Data File | .cct | 
 [other/cornelHuthComprssedLibrary](https://discmaster.textfiles.com/search?formatid=cornelHuthComprssedLibrary) | Cornel Huth Compressed Library | .li_ | 
 [other/cracklibPasswordIndex](https://discmaster.textfiles.com/search?formatid=cracklibPasswordIndex) | Cracklib Password Index | .pwi | 
@@ -1971,7 +1976,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (52)
+## Poly (53)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1984,6 +1989,7 @@ Family/Format | Name | Extensions | Notes
 [poly/autoShadeRenderingSlide](https://discmaster.textfiles.com/search?formatid=autoShadeRenderingSlide) | AutoShade Rendering Slide | .rnd | 
 [poly/blizzard3DModelBinary](https://discmaster.textfiles.com/search?formatid=blizzard3DModelBinary) | Blizzard 3D Model (binary) | .mdx | 
 [poly/createShade3DScene](https://discmaster.textfiles.com/search?formatid=createShade3DScene) | Create+Shade 3D Scene | .3d | 
+[poly/cyberwareDigitizerData](https://discmaster.textfiles.com/search?formatid=cyberwareDigitizerData) | Cyberware Digitizer Data |  | 
 [poly/deathDrome3DModel](https://discmaster.textfiles.com/search?formatid=deathDrome3DModel) | Death Drome 3D model | .gam | 
 [poly/designIt3DObjectLibrary](https://discmaster.textfiles.com/search?formatid=designIt3DObjectLibrary) | Design It! 3-D object Library | .wlb | 
 [poly/digitalElevationMap](https://discmaster.textfiles.com/search?formatid=digitalElevationMap) | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)

@@ -34,7 +34,7 @@ done
 
 echo -e "\nDexserver started!!\n\nIt will remain running in background, run stopDexserver to stop it cleanly"
 
-if [ "$(hostname)" == "ridgeport" ]; then
+if [ "$(hostname)" == "ridgeport" ] || [ "$(hostname)" == "crystalsummit" ]; then
 	KIDPIDS=()
 	tail -n 0 -f /mnt/dexvert/log/dexserver.out &
 	KIDPIDS+=($!)

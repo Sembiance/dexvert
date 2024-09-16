@@ -1423,6 +1423,7 @@ export const WEAK_VALUES =
 	/^EngineX Sound effects$/,
 	/^ENVI n-D visualizer state$/,
 	/^EPOC\/Psion Sheet spreadsheet$/,
+	/^Espanso Package \(with rem\)$/,
 	/^Esri grid \(ASCII\)$/,
 	/^Eudora Address Book$/,
 	/^EVE Online data \(generic\)$/,

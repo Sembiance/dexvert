@@ -18,16 +18,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Create a Duke Nukem 3D ART extractor/convertor, see sandbox/wip/dukeART
-  The BAFed jar (java -jar BAFed.jar) can load and show the ART files, with animation, but can't really export
-  The 'test.py' script comes from: http://justsolve.archiveteam.org/wiki/ART_(Duke_Nukem_3D)
-  That link also has a brief overview of the format.
-  The test.py script claims it can extract the files, and it does extract SOME of the PNGs from: TILES005.ART
-  But I could use that as the starting point for my own deno based script. It should also create animated GIFs for animated tiles
-  Can convert these: http://dev.discmaster2.textfiles.com/browse/849/boot-disc-1996-08.iso/content/demos/games/duke3d/duke3d.grp
-  http://dev.discmaster2.textfiles.com/browse/98/EPISODE_17_SEP_1995.iso/demos/tekw
-  http://dev.discmaster2.textfiles.com/search?q=TILES000.ART&qfields=name
-  Have dexvert match *.art extension, with auxFiles req that palette.dat exists in dir and idCheck that file starts with 0x01 00 00 00
 
 
 /-----------------\
@@ -74,7 +64,7 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
 
-* Add some of these video game video formats: https://nihav.org/game_tool.html   (v0.1.0 in sandbox/app/na_game_tool-0.1.0.tar.bz2)
+* Add some of these video game video formats: https://nihav.org/game_tool.html   (v0.2.0 in sandbox/app/)
 
 * Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
@@ -84,12 +74,6 @@
 * Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
-* With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'
-  There are only a handful of these files (14), so it's not a high priority
-
-* Might be fun to detect MacOS kalideoscope themes and grab the individual images and render some sort of 'preview' of it: http://discmaster.textfiles.com/search?q=%22Minimum+Kaleidoscope+version%22&qfields=content&family=text&dedup=dedup
-  If I name the preview something like kalideoscope_preview_dexvert.png then I can find them more easily
-
 * Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
 
 * Could create a DOOM TITLEPIC converter for files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
@@ -98,16 +82,32 @@
 * See about converting this Java code to javascript to extract archive/innoSetupArchive: https://github.com/d0k/ednaunpack
   Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://dev.discmaster2.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
 
+* With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'
+  There are only a handful of these files (14), so it's not a high priority
+
 
 /--------------\
 | Low Priority |
 \--------------/
+* Might be fun to detect MacOS kalideoscope themes and grab the individual images and render some sort of 'preview' of it: http://discmaster.textfiles.com/search?q=%22Minimum+Kaleidoscope+version%22&qfields=content&family=text&dedup=dedup
+  If I name the preview something like kalideoscope_preview_dexvert.png then I can find them more easily
+
+* Create a Duke Nukem 3D ART extractor/convertor, see sandbox/wip/dukeART
+  The BAFed jar (java -jar BAFed.jar) can load and show the ART files, with animation, but can't really export
+  The 'test.py' script comes from: http://justsolve.archiveteam.org/wiki/ART_(Duke_Nukem_3D)
+  That link also has a brief overview of the format.
+  The test.py script claims it can extract the files, and it does extract SOME of the PNGs from: TILES005.ART
+  But I could use that as the starting point for my own deno based script. It should also create animated GIFs for animated tiles
+  Can convert these: http://dev.discmaster2.textfiles.com/browse/849/boot-disc-1996-08.iso/content/demos/games/duke3d/duke3d.grp
+  http://dev.discmaster2.textfiles.com/browse/98/EPISODE_17_SEP_1995.iso/demos/tekw
+  http://dev.discmaster2.textfiles.com/search?q=TILES000.ART&qfields=name
+  Have dexvert match *.art extension, with auxFiles req that palette.dat exists in dir and idCheck that file starts with 0x01 00 00 00
+
 * Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
   archive/halfLifeModel					Crowbar program seems to be sensisitve
   archive/hypercard						Sometimes certain cards/bitmaps don't render
   archive/windowsResource				Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
   audio/downloadableSoundBank			Sometimes not all .mp3 files are produced (shell.dls)
-  document/hlp & multimediaViewerBook	Sometimes things don't convert under CPU load, several files just don't show up
   document/pageMaker					The program (especially pagemaker7) may be sensitive as often it will end up converting with older converters
   font/amigaBitmapFont					Program Fony appears to be sensitive, sometimes it converts, sometimes not.
   image/harvardGraphicsChart			When running tests, I only get an output image about 50% of the time

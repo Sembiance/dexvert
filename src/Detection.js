@@ -5,6 +5,7 @@ import {Program} from "./Program.js";
 import {WEAK_VALUES} from "./WEAK.js";
 
 export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2", "disktype", "unp64ID", "detectItEasy", "binwalkID"];
+// Don't include: xdgMime (it mostly just uses file extension which dexvert already does and if we included it then now we'd have strong "magic" matches when it's really just an extension match)
 
 export const TEXT_MAGIC_STRONG =
 [

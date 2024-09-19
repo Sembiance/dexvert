@@ -50,7 +50,7 @@ export class file extends Program
 		[
 			[["Apollo", "dBase", "FoxBase", "Visual FoxPro", "VISUAL OBJECTS", "xBase"], ["DBF", "MDX", "DataBaseContainer"]],
 			["BIOS", "device="],
-			[["Mach-O", "] ["], ["bundle", "executable", "dynamic linker", "dynamically linked", "fixed", "hppa", "i386", "i486", "object", "ppc", "preload", "SPARC", "x86"]],
+			[["Mach-O", "] ["], ["bundle", "executable", "dynamic linker", "dynamically linked", "fixed", "hppa", "i386", "i486", "object", "m68k", "ppc", "preload", "SPARC", "x86"]],
 			["PGP symmetric key encrypted data", "salted"],
 			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]]
 		];

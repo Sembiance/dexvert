@@ -1,0 +1,1273 @@
+
+
+
+
+
+
+
+           MSLI             SL              SLIMSL        IM          IM
+         IMSLIMSL           LI              LIMSLI        MS          MS
+        IMS    LIM          IM                SL          SL          SL
+        MS      MS          MS                LI          LIM        SLI
+        SL                  SL                IM          IMSL      SLIM
+        LI                  LI                MS          MSLIM    SLIMS
+        IM                  IM                SL          SL MSL  SLI SL
+        MSL                 MS                LI          LI  LIMSLI  LI
+         LIMSLIM            SL                IM          IM   MSLI   IM
+          MSLIMSL           LI                MS          MS    LI    MS
+               LIM          IM                SL          SL          SL
+                MS          MS                LI          LI          LI
+                SL          SL                IM          IM          IM
+                LI          LI                MS          MS          MS
+        IM      IM          IM                SL          SL          SL
+        MSL    IMS          MS                LI          LI          LI
+         LIMSLIMS           SLIMSLIMSL      SLIMSL        IM          IM
+          MSLIMS            LIMSLIMSLI      LIMSLI        MS          MS
+
+
+
+
+          _______     _______     _____________________     ___________
+
+          S L I M     F i l e     C o m p r e s s i o n     S y s t e m 
+          _______     _______     _____________________     ___________ 
+
+
+
+                              U s e r   M a n u a l
+
+
+
+                                  Version 1.10A
+
+
+
+
+
+
+
+
+
+                        Copyright (C) Dominic Herity 1988,1991
+                                             _______
+                                        ____|__     |                (R)
+                                     --|       |    |-------------------
+                                       |   ____|__  |  Association of
+                                       |  |       |_|  Shareware
+                                       |__|   o   |    Professionals
+                                     -----|   |   |---------------------
+                                          |___|___|    MEMBER
+                        S L I M   U s e r   M a n u a l         Pg 1
+
+
+
+
+
+
+
+                        Copyright (C) Dominic Herity 1988,1991
+                               All rights reserved
+
+        This  software  and  manual  are supplied  "as  is"  and  without 
+        warranties as to performance or merchantability. This software is 
+        supplied without any expressed or implied warranties  whatsoever. 
+        No  warranty of fitness for a particular purpose is offered.  Any 
+        liability  of seller or manufacturer will be limited  exclusively 
+        to  product replacement or refund of the purchase price.  Dominic 
+        Herity further reserves the right to alter the specifications  of 
+        the  software  and contents of the manual without  obligation  to 
+        notify any person or organization of such alterations.
+
+        SLIM  is a "shareware program", and is provided at no  charge  to 
+        the user for evaluation. Feel free to share it with your friends, 
+        but  please  do  no give it away altered or as  part  of  another 
+        system. If you find SLIM useful, and that you continue to use  it 
+        after  a  reasonable trial period, you must make  a  registration 
+        payment  to the author. All registered users will receive a  copy 
+        of  the latest version of SLIM, along with the other benefits  of 
+        registration. See Section 10 of this manual for more information.
+
+        Commercial  users of SLIM must register and pay for their  copies 
+        of  SLIM  within  30  days of first  use,  or  their  license  is 
+        withdrawn.  Site license arrangements may be made  by  contacting 
+        Dominic Herity.
+
+        Anyone  distributing SLIM for any kind of remuneration must  have 
+        authorization   from  Dominic  Herity  at  the   address   below. 
+        Authorization will be automatically granted to associate  members 
+        of   the  Association  of  Shareware  Professionals.   Authorized 
+        distributors will receive prompt upgrades.
+
+        Dominic Herity, PO Box 3038, Dublin 4, Ireland.
+        CompuServe: 100016,3477      Internet: 100016.3477@compuserve.com
+
+        This program is produced by a member of the Association of
+        Shareware Professionals (ASP).  ASP wants to make sure that the
+        shareware principle works for you.  If you are unable to resolve a
+        shareware-related problem with an ASP member by contacting the
+        member directly, ASP may be able to help.  The ASP Ombudsman can
+        help you resolve a dispute or problem with an ASP member, but does
+        not provide technical support for members' products.  Please write
+        to the ASP Ombudsman at P.O. Box 5786, Bellevue, WA 98006 or send
+        a Compuserve message via easyplex to ASP Ombudsman 70007,3536
+                        S L I M   U s e r   M a n u a l         Pg 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         A C K N O W L E D G E M E N T S
+
+
+        Thanks  to  LJF Berenson, Adrian Bivar, John  Cockings,  Kam  Ho, 
+        Panos  Milonas,  Alan  Pink, Sam  Smale,  Charles  Stross,  Peter 
+        Tetley, Bertold Tromm and Charles P White, for bug reports and/or 
+        suggestions  for improvement of SLIM. I was encouraged  by  their 
+        enthusiasm and constructive criticism.
+
+        Many  thanks  to Brian Doody, Kevin  McGoldrick,  Imelda  Herity, 
+        Michael  Feehily,  Tony McGinty and Kieran Boyce,  each  of  whom 
+        contributed helpful suggestions and observations to this product.
+
+        All  thanks  to  my  wife, Teresa, for  all  her  help,  support, 
+        encouragement and faith when I spent evenings and weekends  stuck 
+        in front of a computer with no visible results.
+                        S L I M   U s e r   M a n u a l         Pg 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                 C O N T E N T S
+
+
+
+                   Section  Subject                    Page
+                   
+                   
+                     1.0    Introduction                 4
+
+                     2.0    Getting Started              5
+
+                     3.0    Compressing Files            8
+
+                     4.0    Accessing Compressed Files  11
+
+                     5.0    De-compressing Files        15
+
+                     6.0    Technical Information       16
+
+                     7.0    Error and other Messages    17
+
+                     8.0    Technical Support           19
+
+                     9.0    Version History             20
+
+                    10.0    Registration                21
+                        S L I M   U s e r   M a n u a l         Pg 4
+
+
+         1.0                 I N T R O D U C T I O N
+
+
+        SLIM is a powerful file compressor with RAM resident  transparent 
+        expander,  which gives painless access to compressed files.  This 
+        is done by intercepting DOS calls, allowing applications to  read 
+        compressed  files  just as before. So there is no need  to  worry 
+        about  technicalities like archives. Just put a command  to  load 
+        SLIM into the AUTOEXEC.BAT file and forget it.
+
+        A  proprietary algorithm significantly compresses almost all  the 
+        files  found  on PCs and gives big savings on disk  space.   More 
+        than  half  of SLIM Ver 1.00 and 1.01 users who  responded  to  a 
+        questionnaire said that SLIM allowed them to postpone or cancel a 
+        hard disk upgrade. 
+
+        A report facility shows which of a group of files are compressed, 
+        by how much and with what total savings.
+
+        SLIM's  compact  size  (less than 24KB) makes  it  practical  for 
+        floppy as well as hard disk machines. 
+
+        The RAM resident part of SLIM uses 73KB of main memory.
+
+        System  Requirements:  IBM PC or MSDOS machine,  MSDOS Ver 2.00+, 
+        256K+ RAM
+                        S L I M   U s e r   M a n u a l         Pg 5
+
+
+         2.0              G E T T I N G   S T A R T E D
+
+        This  is for people who want to get on with using SLIM  and  read 
+        about  it  later.  If you are new to SLIM, read on.  If  you  are 
+        upgrading from an older version of SLIM, go to section 2.2.
+
+         2.1 NEW USERS OF SLIM
+             _________________
+
+        To  get SLIM up and running,  you need only one  file,  SLIM.EXE. 
+        This  contains  all  the functions  of  a  working  system.  Copy 
+        SLIM.EXE your hard disk. The root directory is recommended.
+
+        If  you  do not have a hard disk,  copy SLIM.EXE onto any  system 
+        (boot)  disks you will use to boot your machine before  accessing 
+        compressed  files.  It  is not necessary to have SLIM.EXE on  all 
+        disks with compressed files, if you only need to read the files.
+
+        If  your system disk has a file AUTOEXEC.BAT,  add a line to  the 
+        file,  with  the text :  "SLIM ON".  This ensures that every time 
+        your  computer is powered on,  compressed files can  be  accessed 
+        normally. If you do not have a file AUTOEXEC.BAT, create one with 
+        the same line.
+
+          C>TYPE AUTOEXEC.BAT
+          SLIM ON
+          C>
+
+        Re-boot  your system (Ctrl-Alt-Del).  The following message  will 
+        appear when AUTOEXEC.BAT runs.
+
+          C>SLIM ON
+          S L I M   F i l e   C o m p r e s s i o n   S y s t e m   V1.10
+
+                    Copyright (C) 1988,1991 Dominic Herity.
+
+          Loading SLIM de-compressor
+          C>
+
+        This  indicates that the RAM resident part of SLIM is now loaded. 
+        This  is needed to allow you to access compressed  files.  It  is 
+        also  needed to de-compress compressed files (see section 5).  As 
+        SLIM now occupies 72KB of RAM which was previously available  for 
+        programs, some larger programs may not run with SLIM loaded. This 
+        is  more  of a problem with systems containing 256K RAM,  but  if 
+        your  machine  has 512K or more, you should have  no  difficulty. 
+        Watch  out  for  applications  reporting  "insufficient  memory", 
+        "program  too big to fit in memory" or not running after SLIM  is 
+        loaded. Lack of RAM is the most likely cause of such a failure.
+
+        Now your system is ready to handle compressed files. All you have 
+        to  do  now is compress some,  and start saving  disk  space  (or 
+        expanding your disk, if you prefer to see it that way).
+                        S L I M   U s e r   M a n u a l         Pg 6
+
+
+        Pick   one  or  more  files  for  compression.   As  this  is   a 
+        familiarization exercise, take a small one (say, between 5000 and 
+        30000 bytes), since compressing large files takes a lot of  time. 
+        The  file  selected should also be one that you read  often,  but 
+        write to seldom or never. An EXE or COM file is a good  candidate 
+        on  this  basis,  but these don't compress as  well  as  text  or 
+        program  source  code. Spreadsheets and database  files  compress 
+        best,  but  they tend to be too large for our  present  purposes. 
+        DON'T select a file that you need before SLIM is turned on,  e.g. 
+        COMMAND.COM  or SLIM.EXE, as SLIM will refuse to compress  these. 
+        (See  section 3 for more details.) Also, ensure that you have  at 
+        least  as  many bytes free on your disk as the file you  wish  to 
+        compress, because SLIM needs workspace to compress a file. 
+
+        Let's  assume  you  chose to compress  the  DOS  utility  program 
+        FIND.EXE. (I suggest this because it gives unusually good results, 
+        at least in PC-DOS Version 3.00.) Type :
+
+          C>SLIM FIND.EXE
+
+        SLIM  displays  a  byte  counter when compressing  the  file  and 
+        reports the saving when it is finished.
+
+          C>SLIM FIND.EXE
+
+          S L I M   F i l e   C o m p r e s s i o n   S y s t e m   V1.10
+
+                    Copyright (C) 1988,1991 Dominic Herity.
+
+             Original  Compressed  Save
+                Bytes       Bytes   (%) File     (Press any key to abort)
+          
+                 6363        1019   83% C:FIND.EXE
+
+          6363 bytes reduced to 1019 in 1 files saving 5344 (83%)
+
+          360448 bytes free out of 20971520. SLIM is RESIDENT and ACTIVE.
+          C>
+
+        In  the unlikely event that SLIM cannot compress the  file,  pick 
+        another one. Most files are compressible.
+
+        So you have liberated some disk space from FIND.EXE.  Now try  to 
+        use the compressed file.
+
+             C>FIND "SLIM" <AUTOEXEC.BAT
+             SLIM ON
+             C>
+
+        As you can see,  FIND.EXE works just as before. SLIM works on all 
+        sorts  of  files  just  as  easily,   word  processor  documents, 
+        spreadsheets,  ASCII  files,  and peculiar unique files  used  by 
+        various  software  packages.
+                        S L I M   U s e r   M a n u a l         Pg 7
+
+
+        To see if a file or set of files is compressed,  and by how much, 
+        use the SLIM R command. For example :
+
+
+          C>SLIM R DOS\*.*
+
+          S L I M   F i l e   C o m p r e s s i o n   S y s t e m   V1.10
+
+                    Copyright (C) 1988,1991 Dominic Herity.
+
+             Original  Compressed  Save
+                Bytes       Bytes   (%) File     (Press any key to abort)
+
+                 6363        1019   83% DOS\FIND.EXE
+                 8544        4044   52% DOS\SHARE.EXE
+                15123        9882   34% DOS\ATTRIB.EXE
+                 3629        2539   30% DOS\SYS.COM
+
+          33659 bytes reduced to 17484 in 4 files saving 16175 (48%)
+
+          96256 bytes free out of 20971520. SLIM is RESIDENT and ACTIVE.
+          C>
+
+        But before you get carried away,  glance through the rest of this 
+        manual.  You  could read it while SLIM crunches up some of  those 
+        monstrous files that have been hogging your disk. 
+
+         2.2 UPGRADING FROM AN EARLIER VERSION OF SLIM
+             _________________________________________
+
+        SLIM  V1.10  behaves pretty much the same as  versions  1.00  and 
+        1.01.  It just does it faster and better. Files  compressed  with 
+        the  earlier  versions can be used the same as  before.  However, 
+        SLIM  V1.10 compresses somewhat better than its predecessors,  so 
+        you  might find it worthwhile to expand and re-compress  the  old 
+        files. See Section 9 for more information on changes.
+
+        All copies of your earlier version of SLIM should be removed from 
+        where  they might be used inadvertently. If you have stray  extra 
+        copies of SLIM.EXE lying around, now would be a good time to  get 
+        rid of them. The main reason for this is to avoid one version  of 
+        SLIM  being  loaded  and another being used  afterwards.  If  two 
+        versions  of  SLIM  from V1.10 on are mixed  in  this  way,  SLIM 
+        outputs  an error message and refuses to work. The message  reads 
+        "A different version of SLIM has been loaded. Use one only".
+
+        Removal  of old versions is particularly important  for  versions 
+        1.00 and 1.01. This is because the method of communicating with a 
+        previously  loaded  RAM resident part (loaded by 'SLIM  ON')  has 
+        been  changed  in  Version 1.10. So, for  example,  a  V1.00  RAM 
+        resident  part will not realize that SLIM V1.10 is  'family'  and 
+        will  expand files when an access is attempted. This  would  make 
+        SLIM V1.10 take compressed files to be uncompressed. So confusion 
+        results.
+
+        See  Section 4 for more information on the function and  behavior 
+        of the RAM resident part of SLIM.
+                        S L I M   U s e r   M a n u a l         Pg 8
+
+
+         3.0            C O M P R E S S I N G   F I L E S
+
+
+         3.1 BASIC OPERATION
+             _______________
+
+        Before files can be compressed, SLIM must have been loaded by the 
+        SLIM ON command. This is because the compression process performs 
+        a  check using the RAM resident de-compressor,  to guard  against 
+        internal  bugs  which might prevent later access to a  compressed 
+        file.
+
+        Files can be compressed by entering :
+
+          C>SLIM [n] filespec
+
+        where 'filespec' is a filename including optional path. More than 
+        one file can be compressed if wildcards ('*' or '?') are included 
+        in  the filespec.  SLIM will take each file matching the filespec 
+        and  attempt to compress it.  '[n]' is an optional number 0 to  9 
+        which  alters the 'thoroughness' of the attempt to  compress  the 
+        file(s).  This  will  not normally be used,  but see section  3.3 
+        below for more information.
+
+        As SLIM compresses each file, it displays a byte count indicating 
+        the  progress  of compression.  If you want SLIM to skip a  file, 
+        press any key and SLIM will abandon the file on the next  counter 
+        update and proceed to the next file.
+
+        When  a  file has been compressed,  the original  and  compressed 
+        sizes are displayed on screen, as in the SLIM R command.
+
+        If  SLIM encounters a file which is already compressed,  it  will 
+        bypass it.
+
+        When  all files have been processed,  SLIM displays a summary  of 
+        bytes  saved  and  total bytes and bytes free on  the  disk.  See 
+        example below.
+
+          C>SLIM DOS\*.*
+
+          S L I M   F i l e   C o m p r e s s i o n   S y s t e m   V1.10
+
+                    Copyright (C) 1988,1991 Dominic Herity.
+
+             Original  Compressed  Save
+                Bytes       Bytes   (%) File     (Press any key to abort)
+
+                 6363        1019   83% DOS\FIND.EXE
+                 8544        4044   52% DOS\SHARE.EXE
+                15123        9882   34% DOS\ATTRIB.EXE
+                 3629        2539   30% DOS\SYS.COM
+
+          33659 bytes reduced to 17484 in 4 files saving 16175 (48%)
+
+          96256 bytes free out of 20971520. SLIM is RESIDENT and ACTIVE.
+          C>
+                        S L I M   U s e r   M a n u a l         Pg 9
+
+
+         3.2 DISK SPACE REQUIRED
+             ___________________
+
+        SLIM  needs  some  workspace on  disk  to  compress  files.  When 
+        compressing,  it  reads  the  original  file  and  produces   the 
+        compressed  file, before deleting the original. To do this,  SLIM 
+        needs  up  to as much free disk space as the largest file  to  be 
+        compressed.  If SLIM runs out of disk space while  compressing  a 
+        file,   it  will  output  an  error  message,  leave   the   file 
+        uncompressed  and proceed to the next file. If you are  short  of 
+        free  disk  space and wish to compress a number  of  files,  some 
+        small and some large, compressing the small files first may  free 
+        enough disk space to allow the large files to be compressed.
+
+         3.3 COMPRESSION THOROUGHNESS
+             ________________________
+
+        When compressing files, SLIM can be instructed to 'try harder' or 
+        'hurry  up' by specifying a compression  thoroughness  parameter. 
+        This  is  done by inserting a number between 0 and 9  before  the 
+        filespec. For example :
+
+          C>SLIM 7 *.EXE
+
+        will  compress  all  .EXE files in the current directory  with  a 
+        thoroughness parameter of 7.  The parameter defaults to 5 if  not 
+        specified.  A  higher value means a longer runtime and (possibly) 
+        better  compression  performance.  A lower  value  means  shorter 
+        runtime  and (possibly) worse compression.  These results are not 
+        guaranteed,  however,  and  it may happen that a file  compressed 
+        with a parameter of 6 is actually larger than one compressed with 
+        a  parameter  of  5.  In addition for  larger  parameter  values, 
+        runtime  tends to double for each increment in  parameter  value, 
+        with little or no improvement in compression.  For these reasons, 
+        it  is usually best to leave this parameter alone.  It should  be 
+        reserved  for  when  you  badly  need  better  compression  on  a 
+        particular file, or use a low value to quickly squash a few files 
+        to give you some temporary disk space. 
+
+         3.4 INCOMPRESSIBLE FILES
+             ____________________
+
+        Occasionally,  SLIM  will  encounter a  file  whose  'compressed' 
+        size  is  actually larger than the original.  When this  happens, 
+        SLIM  leaves the file uncompressed and outputs a  message  saying 
+        that it cannot compress the file.
+
+         3.5 RUNTIME
+             _______
+
+        File compression take a long time compared to the small delay  on 
+        access.  Fortunately, compression is an infrequent task and  only 
+        needs to be repeated when new files are added to the disk or when 
+        files have been written to. Files which are frequently written to 
+        should  not be compressed. The short term gain of disk  space  is 
+        outweighed  by  the time taken to re-compress the  file  and  the 
+        inconvenience of running compression often.
+                        S L I M   U s e r   M a n u a l         Pg 10
+
+
+
+        Large  quantities  of files can be compressed overnight  using  a 
+        batch file.  If the batch file is still running when you need the 
+        machine  again,  it can be safely interrupted by  pressing  Ctrl-
+        Break.  The  batch  file can be re-started later  and  SLIM  will 
+        quickly skip over files already compressed. Here are some example 
+        batch files for compressing large numbers of files.
+
+          C>TYPE SLIM1.BAT
+          REM COMPRESS ALL FILES IN WS DIRECTORY
+          C:\SLIM C:\WS\*.*
+          C>
+          C>TYPE SLIM2.BAT
+          REM COMPRESS ALL FILES IN :
+          REM WS, WS\DATA, SYMPH, SYMPH\DATA, DBASE, DOS ETC.
+          C:\SLIM \WS\*.*
+          C:\SLIM \WS\DATA\*.*
+          C:\SLIM \SYMPH\*.*
+          C:\SLIM \SYMPH\DATA\*.*
+          C:\SLIM \WS\*.*
+          C:\SLIM \DBASE\*.*
+          C:\SLIM \DOS\*.*
+          C:\SLIM \XTREE\*.*
+          C>
+          C>TYPE SLIM3.BAT
+          REM COMPRESS ALL FILES IN :
+          REM WS, WS\DATA, SYMPH, SYMPH\DATA, ETC.
+          FOR %%X IN ( WS WS\DATA SYMPH ) DO C:\SLIM \%%X\*.*
+          FOR %%X IN ( SYMPH\DATA DBASE DOS XTREE ) DO C:\SLIM \%%X\*.*
+          C>
+
+        The  last  of these examples is the most useful.  By  customizing 
+        SLIM3.BAT  to  your own machine's directory  structure,  you  can 
+        compress  all the files in some or all of your  directories.  The 
+        batch  file  can  be  re-run at intervals to  catch  any  new  or 
+        rewritten  files. When you change your directory structure,  edit 
+        the batch file accordingly.
+
+         3.6 FORBIDDEN FILES
+             _______________
+
+        Compressed  files  can  only  be  correctly  read  when  SLIM  is 
+        activated,  using  the  SLIM  ON  command.  This  command   would 
+        typically be in the AUTOEXEC.BAT file. But certain files must  be 
+        read  on  power  up,  before  SLIM  is  activated.  Examples  are 
+        COMMAND.COM, CONFIG.SYS and of course, SLIM.EXE. If any of  these 
+        files were compressed, the computer could not power up  properly. 
+        To prevent this, SLIM refuses to compress any files with a ".SYS" 
+        extension   and   any  files  called   COMMAND.COM,   IBMBIO.COM, 
+        IBMDOS.COM,  AUTOEXEC.BAT or SLIM.EXE. If SLIM encounters any  of 
+        these  files during compression, it outputs a message saying  the 
+        file should not be compressed.
+                        S L I M   U s e r   M a n u a l         Pg 11
+
+
+         4.0   A C C E S S I N G   C O M P R E S S E D   F I L E S
+
+
+         4.1 CONFIGURING YOUR SYSTEM WITH SLIM
+             _________________________________
+
+        To ensure access to compressed files, enter the command 'SLIM ON' 
+        in  your  AUTOEXEC.BAT file.  Make sure that this command  occurs 
+        before any commands that access compressed files. For example, if 
+        you compress SK.COM, and you have the command SK in AUTOEXEC.BAT, 
+        you must place the 'SLIM ON' command before the 'SK' command.
+
+        If you do not wish to have SLIM permanently loaded, which may  be 
+        the  case if you have an application that needs lots  of  memory, 
+        make  sure to enter the SLIM ON command before attempting  access 
+        to  any compressed files. Once SLIM is loaded into memory by  the 
+        SLIM  ON command, it cannot be removed, except by restarting  the 
+        computer (Ctrl-Alt-Del).
+
+         4.2 HOW COMPRESSED FILES ARE ACCESSED
+             _________________________________
+
+        Once loaded,  SLIM gives automatic access on demand to compressed 
+        files.   It  does  this  by  intercepting  any  calls  a  program 
+        (including COMMAND.COM) makes to DOS. Normally, SLIM passes these 
+        calls straight on to DOS, but when a call is detected which opens 
+        a compressed file, SLIM reads the file and makes a full size copy 
+        on disk for the program to use.  It then changes the name of  the 
+        compressed  file  to a name it recognizes itself and renames  the 
+        new full size file to the original file name.  Only then does  it 
+        pass  the call on to DOS.  Neither DOS nor the program know  that 
+        this is happening,  so operation is completely automatic. When an 
+        expanded  file  is closed without being modified,  SLIM  (equally 
+        quietly)  deletes  the  expanded copy and  renames  the  original 
+        compressed  file to its original name.  If a program modifies  an 
+        expanded copy of a file, SLIM deletes the compressed original and 
+        leaves the expanded new file on disk.
+
+        Compressed  files  may  be  renamed  without  affecting   access. 
+        Compressed  files  can also be deleted.  If a compressed file  is 
+        copied to another file with SLIM ON,  the new file will be a full 
+        size, not a compressed, copy of the original. 
+
+         4.3 COPYING AND BACKING UP COMPRESSED FILES
+             _______________________________________
+
+        In some circumstances,  you may wish to manipulate files  without 
+        expanding   them.   Copying   and  backing  up  files  are   such 
+        circumstances. The command SLIM OFF is provided for this  reason. 
+        It  prevents SLIM from expanding files when opened, but does  not 
+        remove SLIM from memory or prevent it expanding a COM or EXE file 
+        when it is run.
+                        S L I M   U s e r   M a n u a l         Pg 12
+
+
+        Do not forget to turn SLIM ON again when the copying or backup is 
+        complete. If in doubt, an extra SLIM ON command will not hurt. To 
+        see  if  SLIM is ON or OFF enter the command SLIM and the  status 
+        will displayed, INACTIVE meaning OFF and ACTIVE meaning ON.
+
+        If you mistakenly access a file with SLIM OFF or not loaded,  the 
+        file  will not make sense,  but the error will be  obvious.  Most 
+        programs  report in a fairly civilized manner when a file is  not 
+        what they expect.  If the compressed file is accessed as an ASCII 
+        or text file,  the file will seem to contain the message '= sLiM' 
+        and  nothing  else.  If  a program in a compressed  COM  file  is 
+        mistakenly  run  without  SLIM  loaded,  the  program  will  stop 
+        immediately.
+
+         4.4 DISK SPACE
+             __________
+
+        Because  SLIM  makes  a  full size copy  of  each  file  that  is 
+        accessed, there must be enough disk space free to accommodate all 
+        the full size copies that will be need at any one time. This does 
+        not,  however, include full size copies of COM or EXE files  that 
+        are  being  run,  as these are  deleted  immediately  when  their 
+        contents are loaded into memory.
+
+        This can be illustrated by the following example.
+
+          C>SLIM R *.*
+
+          S L I M   F i l e   C o m p r e s s i o n   S y s t e m   V1.10
+
+                    Copyright (C) 1988,1991 Dominic Herity.
+
+             Original  Compressed  Save
+                Bytes       Bytes   (%) File
+
+                46080       39720   13% WSOVLY1.OVR
+                25600       19563   23% WS.COM
+                32256       18004   44% WSMSGS.OVR
+                19840        8473   57% DOCUMENT.TXT
+
+          123776 bytes reduced to 85760 in 4 files saving 38016 (30%)
+
+          106596 bytes free out of 20971520. SLIM is RESIDENT and ACTIVE.
+          C>
+
+        I  will run WS.COM (a well known word processor) to edit the file 
+        DOCUMENT.TXT.  The files WS.COM,  WSOVLY1.OVR and WSMSGS.OVR  are 
+        compressed,  as is DOCUMENT.TXT.  WS.COM uses data in WSOVLY1.OVR 
+        and  WSMSGS.OVR,  so it accesses these.  So my disk must have  at 
+        least 46080 + 32256 + 19840 = 98176 bytes free. (More accurately, 
+        it  must  have 48K + 32K + 20K = 100K bytes free, since  data  is 
+        stored  on  the disk in units no smaller then 2K.) I  don't  need 
+        25600  bytes  for WS.COM as this is  only  expanded  transiently, 
+        until loaded into memory. But I do need to have 25600 bytes  free 
+        just to run WS.COM.
+                        S L I M   U s e r   M a n u a l         Pg 13
+
+
+        Don't panic!  You do NOT need a calculator to use SLIM. The above 
+        information  is  provided  so  that you will  know  (a)  what  is 
+        happening,  if  it happens,  and (b) what must be done to stop it 
+        happening.  If you prefer,  do what you did last time you ran out 
+        of disk space - start deleting files.
+
+        When  SLIM  runs out of disk space on expansion,  it  returns  an 
+        'Access  denied'  error as a response to the DOS  call,  but  the 
+        message on screen may not make this obvious.  For example, if you 
+        try to execute a compressed .EXE file,  and SLIM fails to  expand 
+        it,  the  message that appears on screen is 'Bad command or  file 
+        name'.
+
+        SLIM  will also be unable to expand a file if the file is in  the 
+        root directory of a disk and the root directory is full. A little 
+        known  peculiarity  of DOS is that the root directory of  a  disk 
+        (for  example A:\) can store only a limited number  of  directory 
+        entries (filenames). The limit is normally 112 for a 360K  floppy 
+        disk and 512 for a hard disk. Since the volume label occupies one 
+        directory entry, the practical limit is 111 and 511 respectively. 
+        Sometimes  people  find this out the hard way when they  try  for 
+        example to copy 200 1K files onto a floppy disk.
+        If a compressed file is in a full root directory, SLIM will  fail 
+        to  produce  an expanded copy. To check if this is the  cause  of 
+        failure,  try  copying files (with SLIM turned OFF) and  if  this 
+        fails even though enough disk space is free, a full directory  is 
+        the probable cause. A remedy to a full root directory is to  copy 
+        all  or  some files into a sub-directory  (after  freeing  enough 
+        space  to create the sub-directory). Even if you do not need  the 
+        files to be compressed, a nearly full root directory is likely to 
+        cause further trouble.
+
+        Do  not put a  write protect tab on a floppy disk if you want  to 
+        access compressed files on that disk, as this prevents generation 
+        of an expanded copy.  This is not a problem, however, if you only 
+        use  the disk for file storage.  The file may be copied from  the 
+        write protected disk with SLIM turned OFF,  and then accessed  on 
+        an unprotected disk, with SLIM turned ON.
+
+         4.5 TRANSPARENCY FAILURES
+         _________________________
+
+        SLIM gives programs the illusion that small files are big  files. 
+        It does this very successfully and almost all of the software  is 
+        fooled  all  of  the time. But there are  some  cases  where  the 
+        illusion  cannot  be maintained and compression  must  be  either 
+        avoided or done carefully.
+
+        The first case is where a program obtains the size of a file from 
+        its  directory entry and then reads that number of bytes when  it 
+        opens  the file. The intention is to read the whole file, but  if 
+        the  file  is  compressed,  only the number  of  bytes  that  the 
+        compressed  file occupies are read. This behavior has  been  seen 
+        with  the  DOS XCOPY command (Ver 3.21 at least) and  PKZIP  (Ver 
+        1.01 at least) from PKWARE.
+
+        A  solution  is to change the name of the offending  program  and 
+                        S L I M   U s e r   M a n u a l         Pg 14
+
+
+        replace  it  with  a batch file that turns  SLIM  off,  runs  the 
+        program, and turns SLIM on again. For example :
+
+          C>TYPE XCOPY.BAT
+          REM
+          REM XCOPY WITH SLIM OFF.
+          REM PREVENTS TRUNCATION AND PRESERVES COMPRESSION.
+          REM
+          SLIM OFF
+          OLDXCOPY %1 %2 %3 %4 %5 %6 %7 %8 %9
+          SLIM ON
+          C>
+
+        The  second  case  where  SLIM  confuses  other  software  is   a 
+        particular  copy  protection method. The method bypasses  DOS  to 
+        read the disk area in which the program is presumed to be stored, 
+        to  check it is still there. The details of where this is on  the 
+        user's  disk  is  written into the  program  by  an  installation 
+        program.  If an ordinary copy of the program is run, it will  see 
+        that  its own code is not in the expected place on disk. It  then 
+        'knows'  that an unauthorized copy is being used.  Variations  on 
+        this  theme use other files apart from the program file or  check 
+        the  file allocation table instead of the data area of the  disk. 
+        Programs  copy protected by these means tend to have warnings  in 
+        the documentation against copying the program file or files.
+
+        When SLIM compresses a file, it reads the original, writes a  new 
+        file  on a different area of disk and deletes the original.  This 
+        causes the copy protection method to be activated. 
+
+        The obvious remedy here is to not compress files subject to  such 
+        a copy protection scheme. If you must compress such files, it may 
+        be  possible to get an unprotected copy of the software from  the 
+        vendor.  Since  copy protection has become unpopular, it  is  not 
+        likely  that this problem will happen with any new  software  you 
+        acquire.
+                        S L I M   U s e r   M a n u a l         Pg 15
+
+
+         5.0         D E - C O M P R E S S I N G   F I L E S
+
+
+         5.1 BASIC OPERATION
+             _______________
+
+        The SLIM X (eXpand) command de-compresses a file or set of files. 
+        This command can only be used if SLIM has been made RAM  resident 
+        with the SLIM ON command. Example :
+
+          C>SLIM X DOCUMENT.TXT
+
+          S L I M   F i l e   C o m p r e s s i o n   S y s t e m   V1.10
+
+                    Copyright (C) 1988,1991 Dominic Herity.
+
+             Original  Compressed  Save
+                Bytes       Bytes   (%) File
+
+                19840        8473   57% DOCUMENT.TXT
+
+          19840 bytes were reduced to 8473 in 1 files saving 11367 (57%)
+
+          83968 bytes free out of 20971520. SLIM is RESIDENT and INACTIVE.
+          C>
+
+         5.2 DISK SPACE REQUIRED
+             ___________________
+
+        For  SLIM X to execute correctly,  enough free disk space must be 
+        available  to  store an expanded file as well as  the  compressed 
+        file,  because the compressed file is only deleted after the  de-
+        compressed file is produced.
+                        S L I M   U s e r   M a n u a l         Pg 16
+
+
+         6.0        T E C H N I C A L   I N F O R M A T I O N
+
+
+         6.1 FILES USED BY SLIM
+             __________________
+
+        Using  SLIM,  you  will occasionally glimpse files  with  strange 
+        names   lurking   on   your  disk.   SLIM   uses   files   called 
+        'SLIMnnnn.$$$'  where  nnnn is a four digit decimal  number.  The 
+        other  files  are  the compressed originals of  open  files  (See 
+        Section  4.2). These will be seen if, for example, you call up  a 
+        directory  display  in a word processor whose working  files  are 
+        compressed.
+
+        If you see any files of the type 'SLIMnnnn.$$$' when you are SURE 
+        that  you do not have any compressed files open (for example,  on 
+        power  up),  this indicates power loss or other failure when  the 
+        file was being accessed.  Rename the file to something else (e.g. 
+        WHATISIT.FOR) and use the SLIM R command to see the original file 
+        size.  If  that size is the same as that of another file  in  the 
+        same  directory,  then  WHATISIT.FOR is probably  the  compressed 
+        original  of that file.  If you are sure that WHATISIT.FOR is not 
+        an older version of a revised file,  rename it to the filename of 
+        your choice and continue to use it. Otherwise, delete it.
+
+         6.2 RAM RESIDENT INTERFACE
+             ______________________
+
+        When SLIM is loaded, the RAM resident part is kept in memory.  It 
+        is necessary for the non-resident part to communicate with it for 
+        a number of reasons. One reason is to turn it on and off. Another 
+        is  to  verify  (after compressing a file) that  a  file  can  be 
+        accessed.  This is a safety measure to protect against a  bug  in 
+        SLIM, which virtually guarantees that SLIM will never cause  loss 
+        of data. A third reason is to use the RAM resident part to expand 
+        a compressed file (X command).
+
+        The   interface  to  SLIM's  RAM  resident  part   supports   the  
+        TesSeRact(TM)  Standard  for  Ram-Resident Program Communication.   
+        For    information   about  TesSeRact,  contact   the   TesSeRact 
+        Development Team at:
+
+             TesSeRact Development Team
+             c/o Chip Rabinowitz
+             2084 Woodlawn Avenue
+             Glenside, PA 19038
+             1-215-884-3373
+
+             Compuserve:         70731,20
+             MCIMAIL:  315-5415
+
+        This  MCIMAIL   Account  has  been  provided   to  the  TesSeRact 
+        Development  Team by Borland International, Inc.   The  TesSeRact 
+        Development   Team  is  in  no   way  associated   with   Borland 
+        International,  Inc.  TesSeRact is a trademark of  the  TesSeRact 
+        Development Team.
+                        S L I M   U s e r   M a n u a l         Pg 17
+
+
+         7.0     E R R O R   A N D   O T H E R   M E S S A G E S
+
+
+        There  follows  an alphabetically sorted list of  error  messages 
+        produced  by  SLIM,  with  (as appropriate) some  information  on 
+        probable  cause  and  references  to  this  manual  for   further 
+        information. 
+
+        MESSAGE : A different version of SLIM has been loaded.
+             CONTEXT : At startup
+             CAUSE : Two versions (at least) of SLIM.EXE are present. One 
+                     was loaded earlier (SLIM ON) and the other has  been 
+                     run.
+             FURTHER INFORMATION : Section 2.2
+
+
+        MESSAGE : aborted
+             CONTEXT : After failed compression of a file
+             CAUSE : User hit a key, abandoning compression
+             FURTHER INFORMATION : Section 3.1
+
+        MESSAGE : Can't compress this file
+             CONTEXT : After failed compression of a file
+             CAUSE : File size can't be reduced
+             FURTHER INFORMATION : Section 3.4
+
+        MESSAGE : Can't expand this file
+             CONTEXT : Failed expansion of compressed file
+             CAUSE : Not enough free disk space to make expanded copy.
+             FURTHER INFORMATION : 5.2
+
+        MESSAGE : Can't open (filename)
+             CONTEXT : During compression, expansion or reporting
+             CAUSE : File was found but could not be opened.
+             FURTHER INFORMATION : 
+
+        MESSAGE : Can't open new file
+             CONTEXT : At start of file compression
+             CAUSE : Full disk or directory
+             FURTHER INFORMATION : Section 3.2
+
+        MESSAGE : Can't write to output file
+             CONTEXT : During file compression
+             CAUSE : Disk full
+             FURTHER INFORMATION : Section 3.2
+
+        MESSAGE : Insufficient Memory
+             CONTEXT : At SLIM startup
+             CAUSE : Not enough memory available for SLIM to run
+             FURTHER INFORMATION : Section 1
+
+        MESSAGE : Internal Error : Can't compress this file
+             CONTEXT : At end of file compression
+             CAUSE : SLIM internal error. Should not occur
+             FURTHER INFORMATION : Section 8 - Please contact the author
+                        S L I M   U s e r   M a n u a l         Pg 18
+
+
+        MESSAGE : Loading SLIM de-compressor
+             FURTHER INFORMATION : Section 4.1
+
+        MESSAGE : No files
+             CONTEXT : At SLIM startup, compressing, expanding 
+                       or reporting on files.
+             CAUSE : No files were specified for processing.
+             FURTHER INFORMATION : Section 2.0, 3.1, 5.1
+
+        MESSAGE : Should not compress this file
+             CONTEXT : At start of file compression.
+             CAUSE : SLIM refuses to compress file.
+             FURTHER INFORMATION : Section 3.6
+
+        MESSAGE : SLIM de-compressor already off
+             FURTHER INFORMATION : Section 4.3
+
+        MESSAGE : SLIM de-compressor already on
+             FURTHER INFORMATION : Section 3.1, 4.3
+
+        MESSAGE : SLIM de-compressor not loaded
+             FURTHER INFORMATION : Section 4.3
+
+        MESSAGE : SLIM de-compressor turned off
+             FURTHER INFORMATION : Section 4.3
+
+        MESSAGE : SLIM de-compressor turned on
+             FURTHER INFORMATION : Section 3.1, 4.3
+
+        MESSAGE : SLIM must be loaded to do compression or expansion.
+             CONTEXT : Attempt to expand or compress files.
+             CAUSE : For these commands to be used,  it is necessary for 
+                     SLIM to be RAM resident first. (SLIM ON command.)
+             FURTHER INFORMATION : Sections 3.1, 5.1
+
+        MESSAGE : PC-DOS or MS-DOS Version 2.00 or greater required
+             CONTEXT : SLIM startup.
+             CAUSE : You are using an old version of DOS (Ver1.xx).
+             FURTHER INFORMATION : Section 1
+
+        MESSAGE : Write error on output
+             CONTEXT : After file compression.
+             CAUSE : Disk full.
+             FURTHER INFORMATION : Section 3.1
+                        S L I M   U s e r   M a n u a l         Pg 19
+
+
+         8.0                T E C H N I C A L   S U P P O R T
+
+
+         8.1 SUPPORT POLICY
+             ______________
+
+        I  have good reason to believe that my software is more  reliable 
+        than most in the computer industry, and I intend to keep it  that 
+        way.  If  you have a problem with SLIM, that  means  that  either 
+        there  is a bug in the software or the manual is  misleading.  In 
+        either  case,  I  want to know about it. I gladly  offer  a  free 
+        upgrade  of SLIM to any registered user for a usable  bug  report 
+        (whether it was reported previously or not).
+
+        If  you don't have a problem, but have suggestions  or  comments, 
+        I'd like to see them.
+
+         8.2 WHAT TO SEND
+             ____________
+
+        If  you  are  reporting some abnormal behavior by  SLIM,  I  will 
+        probably need to see it to be of any help. The more complete  the 
+        information you provide, the quicker and more helpful my response 
+        can be. Ideally, you should send a floppy disk with a README file 
+        containing  your  explanation  of the  problem.  It  should  also 
+        include  copies  of all files involved. If I can see a  bug,  I'm 
+        most  of  the  way to fixing it. I undertake  to  use  any  files 
+        received in this way for debugging only and to destroy all copies 
+        when that is done.
+
+        Please  make  sure the problem still happens when you  boot  your 
+        system  without  an AUTOEXEC.BAT or CONFIG.SYS file. If  you  can 
+        make  it happen using only the files on the floppy disk  you  are 
+        sending,  and not your hard disk, then it is fairly sure  that  I 
+        can reproduce the problem.
+
+        It is usually easier to include a batch file than to explain what 
+        to type. Please mention what DOS version you use (MSDOS or  PCDOS 
+        with numbers), your machine (manufacturer, CPU type, RAM.  etc.), 
+        and anything else you think may be relevant.
+                        S L I M   U s e r   M a n u a l         Pg 20
+
+
+         9.0                  V E R S I O N   H I S T O R Y
+
+
+        Version : 1.00           Released : November 1988
+
+        This is the initial release of SLIM.
+
+
+        Version : 1.01           Released : April 1989
+
+        The  shareware version previously demonstrated compressibility of 
+        files  larger than 64K.  Since this can be time-consuming,  large 
+        files are now skipped over. Licensed version behaves as before.
+
+
+        Version : 1.10           Released : February 1991
+
+        Compression is typically many times faster for large files  (over 
+        64KB approx.).
+        Expansion is at least 50% faster for large files. Bigger  savings 
+        for small files.
+        Compression is improved significantly. Users of earlier  versions 
+        should re-compress their files when convenient.
+        Work space on disk used when compressing files reduced to half. 
+        SLIM.EXE is reduced from over 30KB to less than 22KB.
+        Shareware edition of SLIM now compresses files of unlimited size.
+        Various bugs fixed. 
+                        S L I M   U s e r   M a n u a l         Pg 21
+
+
+        10.0                     R E G I S T R A T I O N
+
+
+        10.1 THE PITCH
+             _________
+
+        Registration of SLIM will entitle you to :
+
+            * A licensed copy of the version current at registration time
+
+            * A printed manual for same
+
+            * Application support from the author
+
+            * Notification of future upgrades
+
+            * The chance to order these upgrades at a large discount
+
+            * Free upgrade if released within 3 months of registration
+
+        If  you believe that SLIM enhances your computer, or if you  want 
+        the  latest update, or if you would like first refusal of  future 
+        enhancements  at a special price, please register now.  The  next 
+        page contains an order form and optional questionnaire which  you 
+        should print out, fill in and mail to me. You can also order  via 
+        e-mail on CompuServe or Internet, with a credit card.
+
+        SLIM  registration costs 45 US dollars per machine with no  funny 
+        business. That means that disk, manual and shipping worldwide  by 
+        airmail are included in the price.
+
+        I rely on your support.
+
+        Inquiries about site licenses are welcome. If you are a  software 
+        developer worrying about the size of files your application uses, 
+        SLIM could save your time, your money and your sanity.
+                        S L I M   U s e r   M a n u a l         Pg 22
+
+
+        10.2 SLIM ORDER FORM
+             _______________
+
+        (PLEASE USE BLOCK CAPITALS)
+
+         Title (Mr/Ms) : ____   
+
+              Surname : __________________
+
+        Personal Name : __________________
+
+              Company : __________________
+                      (if license for company, rather than personal use.)
+
+        Address : _________________________________________ 
+
+                  _________________________________________
+
+                  _________________________________________
+
+                  _________________________________________
+
+                  _________________________________________
+
+
+         Number of licensed copies of SLIM required at $45.00 each : ____
+
+          Disk (please tick one, 5.25" by default) : 5.25" ____ 3.5" ____
+
+        Method of payment (please tick one) :
+
+           Access/EuroCard/Mastercard/Visa ____     American Express ____
+
+          Cheque (your country's currency) ____     Bank Draft (US$) ____
+
+        If payment by credit card, please supply following information :
+
+           Card number ____________________    Expiry Date ______________
+
+             Signature (if order on paper) ______________________________
+
+        Charge  per  copy  is 45 U.S. dollars  or  equivalent,  including 
+        registration, printed manual, postage and packing.
+
+        If payment is by cheque in your country's currency, please ensure 
+        that payment is sufficient and allow for exchange rate variation. 
+
+        Please do NOT send a eurocheque for U.S. dollars OR a U.S. dollar 
+        cheque drawn on a non-U.S. bank.
+
+        This order may be mailed to :
+                       Mr Dominic Herity, PO Box 3038, Dublin 4, Ireland.
+
+        Electronic credit card orders may be sent to :
+           CompuServe 100016,3477 or internet 100016.3477@compuserve.com.
+
+        Thank you. Please see questionnaire on following pages.
+                        S L I M   U s e r   M a n u a l         Pg 23
+
+
+        10.3 QUESTIONNAIRE
+             _____________
+
+        This  questionnaire  is entirely optional.  You may ignore it  or 
+        fill it in partially or fully and return it with your order.  But 
+        I  would  be obliged if you would take a few minutes over  it  to 
+        help me improve SLIM to meet your needs better.
+
+        10.3.1 YOU
+               What is your profession ? ___________________
+
+               How often do you use your computer ? (Please tick one)
+
+                  Occasionally____    Daily____     Much of time____
+
+        10.3.2 YOUR COMPUTER
+               Manufacturer ___________________ Model ___________________
+               CPU (Circle one) 8088 8086 80286 80386 V20 V30
+                               Other (please specify) ___________________
+
+               Speed(MHz) ___________________ RAM(KB) ___________________
+
+               Hard Disk Capacity (MB) ___________________
+
+               Floppy drives : Number ____ Capacity (KB) ____
+                                      Form Factor (Circle one) 5.25" 3.5"
+
+        10.3.3 YOUR APPLICATION
+               What do you mainly use your computer for ? 
+                  (Circle one or more) Word processing  Spreadsheets  CAD
+                  Database  Accounts  Software Dev't  Desktop Publishing
+                  Games        Other (please specify) ___________________
+
+               List the software packages that you use most often
+
+                  1 ___________________      4 ___________________
+
+                  2 ___________________      5 ___________________
+
+                  3 ___________________      6 ___________________
+
+        10.3.4 YOUR USE OF SLIM
+               How did you acquire your shareware copy of SLIM ?
+               e.g. friend, shareware company (please specify) 
+
+                  ___________________
+
+               Approximately how much disk space do you expect to save ?
+
+                  ___________________bytes reduced to ___________________
+
+               What types of files do you expect to make the savings on ?
+                  (Circle one or more)  Word processor  ASCII text
+                  EXE and COM files  Database  Spreadsheets  Graphics
+
+                  Other (please specify) ___________________
+                        S L I M   U s e r   M a n u a l         Pg 24
+
+
+               Approximately  what  range of file sizes do  you  wish  to 
+               compress ?
+                  From ___________________ to ___________________ bytes
+
+               Please rank these potential improvements for SLIM in your
+               order of choice
+
+                  __ Faster compression    
+
+                  __ Faster expansion/access
+
+                  __ Automatic re-compression of files written to
+
+                  __ More compression/smaller compressed files
+
+                  __ Less disk workspace used by SLIM when compressed
+                     files are being accessed.
+
+                  __ Other (please specify) ___________________
+
+                  __ Other (please specify) ___________________
+
+               How do you rate this manual (Circle one)
+                  Very Bad  Bad  Fair  Good  Excellent
+
+               Please Indicate any parts of this manual which are unclear 
+               or difficult :
+
+               __________________________________________________________
+
+               Has SLIM enabled you to postpone or cancel upgrading your
+               hard disk ? (Circle one) Yes No
+               
+               Please list any other file compression utilities you know, 
+               whether you have used them,  and any comments you have  on 
+               them.
+
+               __________________________________________________________
+
+               __________________________________________________________
+
+               __________________________________________________________
+
+
+        10.3.5 YOUR COMMENTS
+               Any suggestions for product improvement,  complaints about 
+               shortcomings,  etc.  would be  much  appreciated,  however 
+               small  you may consider them. Attach a separate  sheet  if 
+               necessary.
+
+               __________________________________________________________
+
+               __________________________________________________________
+
+               __________________________________________________________
+    _____________________________

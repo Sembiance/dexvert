@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,025)
+# Unsupported File Formats (2,043)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (170)
+## Archive (172)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -48,6 +48,7 @@ Family/Format | Name | Extensions | Notes
 [archive/comPackPacked](https://discmaster.textfiles.com/search?formatid=comPackPacked) | COM-Pack Packed | .com | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?formatid=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?formatid=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
+[archive/corkCompressedData](https://discmaster.textfiles.com/search?formatid=corkCompressedData) | Cork compressed data | $ | 
 [archive/cpmHUFArchive](https://discmaster.textfiles.com/search?formatid=cpmHUFArchive) | [CP/M HUF Archive](http://fileformats.archiveteam.org/wiki/HUF_(CP/M)) | .huf | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cpmHUFArchive/)
 [archive/cackrightPacked](https://discmaster.textfiles.com/search?formatid=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
@@ -176,6 +177,7 @@ Family/Format | Name | Extensions | Notes
 [archive/yodasCrypterProtected](https://discmaster.textfiles.com/search?formatid=yodasCrypterProtected) | Yoda's Crypte Protected | .exe | 
 [archive/zipscrubPacked](https://discmaster.textfiles.com/search?formatid=zipscrubPacked) | ZIPSCRUB Packed |  | 
 [archive/zoomDiskImage](https://discmaster.textfiles.com/search?formatid=zoomDiskImage) | ZOOM Disk Image | .zom | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
+[archive/zPackageCompressedArchive](https://discmaster.textfiles.com/search?formatid=zPackageCompressedArchive) | ZPackage compressed archive | .zpk | 
 [archive/zSoftPackageFormat2](https://discmaster.textfiles.com/search?formatid=zSoftPackageFormat2) | ZSoft Package format 2 | $ | 
 [archive/zxSpectrumTZXTape](https://discmaster.textfiles.com/search?formatid=zxSpectrumTZXTape) | ZX Spectrum TZX Tape | .tzx | 
 
@@ -371,7 +373,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (44)
+## Executable (46)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -393,6 +395,8 @@ Family/Format | Name | Extensions | Notes
 [executable/omagic](https://discmaster.textfiles.com/search?formatid=omagic) | Linux OMAGIC Executable |  | 
 [executable/zmagicExe](https://discmaster.textfiles.com/search?formatid=zmagicExe) | Linux ZMAGIC Exectutable |  | 
 [executable/macOSXUniversalLibrary](https://discmaster.textfiles.com/search?formatid=macOSXUniversalLibrary) | Mac OS X Universal Shared Library | .dylib | 
+[executable/machOBundle](https://discmaster.textfiles.com/search?formatid=machOBundle) | Mach-O Bundle | .bundle | 
+[executable/machODynamicLinker](https://discmaster.textfiles.com/search?formatid=machODynamicLinker) | Mach-O Dynamic Linker | .dyld | 
 [executable/machOHPPAExe](https://discmaster.textfiles.com/search?formatid=machOHPPAExe) | Mach-O HPPA Executable |  | 
 [executable/machOIntelExe](https://discmaster.textfiles.com/search?formatid=machOIntelExe) | Mach-O Intel Executable |  | 
 [executable/machOm68kExe](https://discmaster.textfiles.com/search?formatid=machOm68kExe) | Mach-O m68k Executable |  | 
@@ -509,7 +513,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (149)
+## Image (150)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -545,6 +549,7 @@ Family/Format | Name | Extensions | Notes
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?formatid=crayolaArtStudio) | Crayola Art Studio | .art | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?formatid=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
 [image/designWorks](https://discmaster.textfiles.com/search?formatid=designWorks) | DesignWorks Drawing |  | [2 sample files](https://sembiance.com/fileFormatSamples/image/designWorks/)
+[image/deskMateDrawDrawing](https://discmaster.textfiles.com/search?formatid=deskMateDrawDrawing) | DeskMate Draw drawing | .fig | [1 sample file](https://sembiance.com/fileFormatSamples/image/deskMateDrawDrawing/)
 [image/drafixWindowsCADDrawing](https://discmaster.textfiles.com/search?formatid=drafixWindowsCADDrawing) | Drafix Windows CAD Drawing | .cad .slb | 
 [image/draftChoice](https://discmaster.textfiles.com/search?formatid=draftChoice) | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://sembiance.com/fileFormatSamples/image/draftChoice/)
 [image/draw256](https://discmaster.textfiles.com/search?formatid=draw256) | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://sembiance.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
@@ -802,7 +807,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,168)
+## Other (1,181)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -954,6 +959,8 @@ Family/Format | Name | Extensions | Notes
 [other/babbleData](https://discmaster.textfiles.com/search?formatid=babbleData) | Babble! Data | .bab | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?formatid=babylonGlossary) | Babylon Glossary | .bgl | 
 [other/bankMateActivityData](https://discmaster.textfiles.com/search?formatid=bankMateActivityData) | BankMate Activity data | .ix1 .ixp | 
+[other/bannerBlueMovieGuideLibraryAuxiliaryFile](https://discmaster.textfiles.com/search?formatid=bannerBlueMovieGuideLibraryAuxiliaryFile) | Banner Blue Movie Guide Library Auxiliary File | .nts .cst .syn | 
+[other/bannerBlueMovieGuideLibraryData](https://discmaster.textfiles.com/search?formatid=bannerBlueMovieGuideLibraryData) | Banner Blue Movie Guide Library data |  | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
 [other/basVBDOSPro10Source](https://discmaster.textfiles.com/search?formatid=basVBDOSPro10Source) | BAS VBDOS Pro 1.0 Source | .bas | 
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
@@ -1099,6 +1106,7 @@ Family/Format | Name | Extensions | Notes
 [other/darkLegionsColorPalaette](https://discmaster.textfiles.com/search?formatid=darkLegionsColorPalaette) | Dark Legions Color palaette | .col | 
 [other/darkReignMap](https://discmaster.textfiles.com/search?formatid=darkReignMap) | Dark Reign Map | .map | 
 [other/darkReignPalette](https://discmaster.textfiles.com/search?formatid=darkReignPalette) | Dark Reign Palette | .pal | 
+[other/dasBootGameDataArchive](https://discmaster.textfiles.com/search?formatid=dasBootGameDataArchive) | Das Boot game data archive | .d02 .d03 .d01 | 
 [other/databenchForm](https://discmaster.textfiles.com/search?formatid=databenchForm) | Databench form | .msk | 
 [other/datAGIDataBase](https://discmaster.textfiles.com/search?formatid=datAGIDataBase) | DatAGI data base |  | 
 [other/dataStoreDatabase](https://discmaster.textfiles.com/search?formatid=dataStoreDatabase) | Datastore Database |  | 
@@ -1291,6 +1299,8 @@ Family/Format | Name | Extensions | Notes
 [other/hyperPadPad](https://discmaster.textfiles.com/search?formatid=hyperPadPad) | HyperPAD Pad | .pad | 
 [other/iHaveNoMouthAndIMustScreamSaveGame](https://discmaster.textfiles.com/search?formatid=iHaveNoMouthAndIMustScreamSaveGame) | I Have No Mouth, and I Must Scream save game | .sav | 
 [other/i8086RelocatableObjectCode](https://discmaster.textfiles.com/search?formatid=i8086RelocatableObjectCode) | i8086 relocatable Object code | .o | 
+[other/ibCardsCard](https://discmaster.textfiles.com/search?formatid=ibCardsCard) | IBCards card | .ibc | 
+[other/ibCardsTemplate](https://discmaster.textfiles.com/search?formatid=ibCardsTemplate) | IBCards template | .ibt | 
 [other/ibmAntiVirusVirusSignatures](https://discmaster.textfiles.com/search?formatid=ibmAntiVirusVirusSignatures) | IBM AntiVirus virus signatures | .lst | 
 [other/ibmBookManagerBook](https://discmaster.textfiles.com/search?formatid=ibmBookManagerBook) | IBM BookManager Book | .boo | 
 [other/iBrowseGlobalCache](https://discmaster.textfiles.com/search?formatid=iBrowseGlobalCache) | iBrowse Global Cache |  | 
@@ -1330,6 +1340,7 @@ Family/Format | Name | Extensions | Notes
 [other/jeepersConfiguration](https://discmaster.textfiles.com/search?formatid=jeepersConfiguration) | Jeepers Configuration | .cfg | 
 [other/jeepersKeyIndex](https://discmaster.textfiles.com/search?formatid=jeepersKeyIndex) | Jeepers Key/index | .jpk | 
 [other/jeepersReferenceDB](https://discmaster.textfiles.com/search?formatid=jeepersReferenceDB) | Jeepers Reference DB | .jpr | 
+[other/jetAudioTheme](https://discmaster.textfiles.com/search?formatid=jetAudioTheme) | jetAudio theme | .uib | 
 [other/jetPilotScenery](https://discmaster.textfiles.com/search?formatid=jetPilotScenery) | JETPilot scenery |  | 
 [other/jetPilotScreen](https://discmaster.textfiles.com/search?formatid=jetPilotScreen) | JETPilot screen | .pssl | 
 [other/jetPilotSegmentData](https://discmaster.textfiles.com/search?formatid=jetPilotSegmentData) | JETPilot segment data |  | 
@@ -1493,6 +1504,7 @@ Family/Format | Name | Extensions | Notes
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?formatid=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
 [other/msplotPlotterDriverMinidriver](https://discmaster.textfiles.com/search?formatid=msplotPlotterDriverMinidriver) | MSPLOT Plotter Driver Minidriver | .pcd | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
+[other/multimediaBuilderData](https://discmaster.textfiles.com/search?formatid=multimediaBuilderData) | Multimedia Builder Data | .mbd | 
 [other/musicXKeymap](https://discmaster.textfiles.com/search?formatid=musicXKeymap) | Music-X Keymap | .kmap | 
 [other/musicXPatchEditor](https://discmaster.textfiles.com/search?formatid=musicXPatchEditor) | Music-X patch Editor | .editor | 
 [other/musicXPatchLibrary](https://discmaster.textfiles.com/search?formatid=musicXPatchLibrary) | Music-X patch Library | .libr | 
@@ -1626,6 +1638,7 @@ Family/Format | Name | Extensions | Notes
 [other/powerBASICResource](https://discmaster.textfiles.com/search?formatid=powerBASICResource) | PowerBASIC resource | .pbr | 
 [other/powerBASICDOSConfigurationFile](https://discmaster.textfiles.com/search?formatid=powerBASICDOSConfigurationFile) | PowerBASIC/DOS configuration file | .pb | 
 [other/powerBuilderDynamicLibrary](https://discmaster.textfiles.com/search?formatid=powerBuilderDynamicLibrary) | PowerBuilder Dynamic Library | .pbd | 
+[other/powerSoftDataWindowDataStore](https://discmaster.textfiles.com/search?formatid=powerSoftDataWindowDataStore) | PowerSoft DataWindow - DataStore | .psr | 
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?formatid=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
@@ -1638,6 +1651,7 @@ Family/Format | Name | Extensions | Notes
 [other/printShopDeluxeSealExteriors](https://discmaster.textfiles.com/search?formatid=printShopDeluxeSealExteriors) | Print Shop Deluxe Seal Exteriors | .pse | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?formatid=printerFontMetrics) | Printer Font Metrics | .pfm | 
 [other/proThrottleConfiguration](https://discmaster.textfiles.com/search?formatid=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
+[other/proCiteData](https://discmaster.textfiles.com/search?formatid=proCiteData) | ProCite data | .pdt .pos | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
 [other/programmingObjectFile](https://discmaster.textfiles.com/search?formatid=programmingObjectFile) | Programming Object File | .pof | 
 [other/protextConfiguration](https://discmaster.textfiles.com/search?formatid=protextConfiguration) | Protext Configuration | .cfg | 
@@ -1741,6 +1755,7 @@ Family/Format | Name | Extensions | Notes
 [other/snoopCapture](https://discmaster.textfiles.com/search?formatid=snoopCapture) | Snoop Capture | .snoop | 
 [other/snxSnapshot](https://discmaster.textfiles.com/search?formatid=snxSnapshot) | SNX Snapshot | .snx | 
 [other/softDiskLibrary](https://discmaster.textfiles.com/search?formatid=softDiskLibrary) | SoftDisk Library | .shl | 
+[other/softwareDesignCryptoEncryptedData](https://discmaster.textfiles.com/search?formatid=softwareDesignCryptoEncryptedData) | Software Design Crypto encrypted data |  | 
 [other/solitaireSettyProject](https://discmaster.textfiles.com/search?formatid=solitaireSettyProject) | Solitaire Setty Project | .ss | 
 [other/sonixMIDIInstrument](https://discmaster.textfiles.com/search?formatid=sonixMIDIInstrument) | Sonix MIDI Instrument | .instr | 
 [other/soundForgePeakData](https://discmaster.textfiles.com/search?formatid=soundForgePeakData) | Sound Forge Peak Data | .sfk | 
@@ -1885,6 +1900,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualBasicTokenizedSource](https://discmaster.textfiles.com/search?formatid=visualBasicTokenizedSource) | Visual Basic Tokenized Source | .bas | 
 [other/visualCPPExportLibrary](https://discmaster.textfiles.com/search?formatid=visualCPPExportLibrary) | Visual C++ Export Library | .exp | 
 [other/visualFoxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=visualFoxProCompoundIndex) | Visual FoxPro Compound Index | .cdx | 
+[other/visualLISPApplication](https://discmaster.textfiles.com/search?formatid=visualLISPApplication) | Visual LISP Application | .vlx | 
 [other/visualSciencesResource](https://discmaster.textfiles.com/search?formatid=visualSciencesResource) | Visual Sciences Resource | .vsr | 
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?formatid=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 
 [other/visualSourceSafeControlFile](https://discmaster.textfiles.com/search?formatid=visualSourceSafeControlFile) | Visual SourceSafe Control File | .scc | 
@@ -1969,7 +1985,9 @@ Family/Format | Name | Extensions | Notes
 [other/zInstallFormsDialogs](https://discmaster.textfiles.com/search?formatid=zInstallFormsDialogs) | Z/Install forms/Dialogs | .vvd | 
 [other/zapperInNeverwhereSavedGame](https://discmaster.textfiles.com/search?formatid=zapperInNeverwhereSavedGame) | Zapper In Neverwhere saved game | .pos | 
 [other/zbasic](https://discmaster.textfiles.com/search?formatid=zbasic) | ZBASIC | .bas | [6 sample files](https://sembiance.com/fileFormatSamples/other/zbasic/)
+[other/zodbFileStorage](https://discmaster.textfiles.com/search?formatid=zodbFileStorage) | ZODB File Storage | .fs | 
 [other/zoopGameGraphics](https://discmaster.textfiles.com/search?formatid=zoopGameGraphics) | Zoop game graphics | .imx | 
+[other/zopeBinaryExportFile](https://discmaster.textfiles.com/search?formatid=zopeBinaryExportFile) | Zope binary export file | .zexp | 
 [other/zsnesSaveSate](https://discmaster.textfiles.com/search?formatid=zsnesSaveSate) | ZSNES Save State | .zst | 
 [other/zycluntConfiguration](https://discmaster.textfiles.com/search?formatid=zycluntConfiguration) | Zyclunt Configuration | .cfg | 
 [other/zycluntGameArchive](https://discmaster.textfiles.com/search?formatid=zycluntGameArchive) | Zyclunt game data archive | .jam | 

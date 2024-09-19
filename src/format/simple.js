@@ -189,6 +189,7 @@ export default
 		nsFileWrapperSerializedData     : {name : "NSFileWrapper Serialized Data", magic : ["NSFileWrapper serialized data"]},
 		omnisStudioDatabase             : {name : "Omnis Studio Database", ext : [".df1", ".lbr"], magic : ["Omnis Studio Database"]},
 		objectVisionDatafile            : {name : "ObjectVision Datafile", ext : [".ovd"], magic : ["ObjectVision Datafile"]},
+		perFORMMessages                 : {name : "PerFORM Messages", ext : [".msg"], magic : ["PerFORM Messages"]},
 		polytronVCSLogfile              : {name : "Polytron VCS logfile", ext : [".pmv"], magic : ["Polytron VCS logfile"]},
 		parsonsTechnologyResourceData   : {name : "Parsons Technology resource data", ext : [".us5", ".ovl", ".cfg", ".wrk"], magic : ["Parsons Technology resource data"]},
 		playStationRSD3DModelInfo       : {name : "PlayStation RSD 3D model info", ext : [".rsd"], magic : ["PlayStation RSD 3D model info"], weakMagic : true},

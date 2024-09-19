@@ -1,0 +1,128 @@
+
+Distribution
+------------
+
+     Programs LBPlay.exe and LBWin.exe is absolutely
+freeware. You can freely redistribute LBPlay.exe and
+LBWin.exe to anybody, unless you change name of programs
+or modify it's contents. Nothing else from archive is
+needed to run (you may wish to include documentation).
+
+     LBPack.exe is a shareware program. This mean that
+you may use LBPack.exe only in your evaluation purposes
+and only within period of 30 days. After that you must
+register it or stop using it.
+
+     You may redistribute LBPack only as a part of
+archive lbitXXX.zip (XXX is a version number). You
+must not modify contents of this archive.
+
+
+How to pay the registration fee
+-------------------------------
+
+You may register either via ShareIt or via RegNet registration services.
+Registration fee: $18
+
+-----------------------------------------------------------------------------
+ShareIt registration
+---------------------
+
+If you would like to register Low Bitrate Packer/Player, you can do the
+registration online on the Internet at
+http://www.shareit.com/programs/100085.htm. Alternatively, you can go to
+http://www.shareit.com and enter the program number there: 100085.
+
+If you do not have access to the Internet, you can register via phone, fax or
+postal mail. Please print out the following form, and fax or mail it to:
+
+Reimold&Schumann Internet Services
+ShareIt!
+Jahnstrasse 24
+50676 Koeln
+Germany
+
+Phone:          +49-221-2407279
+                +49-172-7229837
+Fax:            +49-221-2407278
+E-Mail:         register@shareit.com
+
+----- cut here ---------------------------------------- cut here --------------
+
+         Registration form for Low Bitrate Packer/Player
+
+
+Program No.: 100085
+
+Last name: ___________________________________
+
+First name: ____________________________________
+
+Street and #: ______________________________________
+
+City, State, postal code: ________________________________
+
+Country: _______________________________________
+
+Phone: _____________________________________
+
+Fax: ________________________________________
+
+E-Mail: ______________________________________
+
+
+How would like to receive the registration key ?
+
+e-mail  - fax   - postal mail
+
+
+How would you like to pay the registration fee of $18:
+
+credit card - money order - EuroCheque - cash
+
+
+Credit card information (if applicable)
+
+Credit card: Visa - Eurocard/Mastercard - American Express - Diners Club
+
+Card holder: ________________________________
+
+Card No.: ___________________________________
+
+Date of Expiration : ___________________________________
+
+
+
+Date / Signature ___________________________
+
+
+
+----- cut here ---------------------------------------- cut here --------------
+
+
+-----------------------------------------------------------------------------
+RegNet registration
+-------------------
+
+RegNet #:   846, 847
+
+   This program can be registered through RegNet - The Registration Network.
+        RegNet can be reached on the World Wide Web at the following URL:
+                           http://www.swregnet.com
+        or by calling 1 800 WWW2REG (1 800 999-2734) or (805) 288-1827.
+
+-----------------------------------------------------------------------------
+
+     As a registered user, you will receive a
+registration code. The registration is valid for all
+future versions. You also will be informed about all
+new versions through email.
+
+
+Warranty
+--------
+
+NO WARRANTY associated with this product.
+
+
+(C) Copyright 1997 by HeXoft

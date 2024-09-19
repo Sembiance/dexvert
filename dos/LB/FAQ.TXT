@@ -1,0 +1,32 @@
+Frequently Asked Questions for version 1.57
+-------------------------------------------
+
+Q: (DOS version) When it try to play file onto my blaster/speaker etc ...
+   program just show equalizer on blue background and then hang.
+A: The problem might be in your mouse driver. Try -k option
+   within command line or try another mouse driver. I know that player
+   will hang quite nicely with Microsoft Mouse Driver v 8.20 and
+   may be with some other drivers.
+
+Q: Where can I download sound samples in .lb format ?
+A: See lbplay home page: http://www.inp.nsk.su/~shmunk/.
+
+Q: (DOS version) Why lbplay can't play onto my internal speaker
+   or plays with a lot of noise or program just hangs ?
+A: If you want gat most clear sound from your speaker you
+   must boot as clean as possible: no multitaskers such as Windows,
+   no EMM386, so that your machine stays in Real Mode.
+   On some machines (mostly Pentium mother boards) LBplay can't
+   produce sound to internal speaker :-(
+
+Q: Sound comes from my speakers uncontinuously.
+A: Try lower output rates (-r# for DOS version, options dialog in Win95/NT)
+   or downmix to mono (-m for DOS).
+
+Q: I still have some questions.
+A: Feel free to contact:
+   E-mail:     shmunk@csd.inp.nsk.su
+   Snail Mail: PO Box 86
+               Novosibirsk
+               630058
+               RUSSIA

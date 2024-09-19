@@ -6,6 +6,6 @@ export class innoSetupInstaller extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["Inno Setup installer", "Installer: Inno Setup Module"];
+	magic          = ["Inno Setup installer", "Installer: Inno Setup Module", "zlib-komprimierte Inno Setup Daten"];
 	converters     = ["innounp", "cmdTotal[wcx:InstExpl.wcx]"];
 }

@@ -1,0 +1,23 @@
+        New in 1.57:
+        ------------
+
+      LBplay:
+      - win95/NT version of player added
+      - -rs removed in DOS version
+      - -k option (no mouse, keyboard only control)
+      - downsampling to mono patched (caused quality lossing)
+      - player now is 1.5 times faster (radix-4 FFT implementation)
+      LBPack:
+      - quality improved (attack detection, 16bit files improvments)
+      - packer is about 1.3 times faster (radix-4 FFT implementation)
+
+
+        New in 1.56:
+        ------------
+
+      LBplay:
+      - bug with interrupt's stack which caused problems with QEMM and
+        some other DPMI hosts - fixed
+      - doc reviewed
+      LBPack:
+      - lbpack.ini changed (error messages)

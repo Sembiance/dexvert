@@ -1,0 +1,27 @@
+        Low Bitrate player for Win32   v 1.03
+        -------------------------------------
+
+  It's a Windows 95/Windows NT player/unpacker for files
+  packed with LBpack (for more information see
+  http://www.inp.nsk.su/~shmunk/ or download lbit157.zip
+  from ftp://ftp.simtel.net/pub/simtelnet/msdos/sound/).
+
+  FreeWare.
+
+Some tips
+---------
+Priority: recommended to set to high if you use DOS sesions
+If sound plays non-continously: select menu item Window|Options
+and set lower output rates, downmix to mono, higher priority.
+
+Known bugs:
+-----------
+  - walking among controls in main window, list and equalizer
+    using TAB key don't work (not implemented yet).
+
+
+How to contact
+--------------
+
+    Feel free to e-mail your suggestions to shmunk@csd.inp.nsk.su
+    LBplay home page: http://www.inp.nsk.su/~shmunk/

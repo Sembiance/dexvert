@@ -86,7 +86,7 @@ export const WEAK_VALUES =
 [
 	// siegfried
 	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|691|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1241|1260|1276|1280|1381|1385|1461|1488|1489|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1703|1704|1708|1740|1751|1812|1874|1902)( |$)/,
-	/^x-fmt\/(8|10|53|157|168|195|324|342)( |$)/,
+	/^x-fmt\/(8|10|53|101|157|168|195|324|342)( |$)/,
 
 	// ancientID
 	/^<invalid>$/,
@@ -166,6 +166,7 @@ export const WEAK_VALUES =
 
 	// GT2
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,
+	/^ARM64EC COFF object/,
 	/^BMF $\.F Bild/,
 	/^Bitmap BildException/,
 	/^Borland Object Datei/,
@@ -408,6 +409,7 @@ export const WEAK_VALUES =
 	/^EBU-STL subtitles/,
 	/ECOFF executable/,
 	/^EDID data/,
+	/^EdLib, $/,
 	/^eCos RTOS string reference/,
 	/^ELI 5750 (compressed )?archive/,
 	/^Encore( -)?$/,
@@ -1213,6 +1215,7 @@ export const WEAK_VALUES =
 	/^Music Craft Score$/,
 	/^MusicMaker Song Data$/,
 	/^MS 2\.5 module$/,
+	/^MSX sound performance system Player XPL-A song$/,
 	/^MSX-DOS disk Image$/,	// Found 1 of these in the wild, but the extension is not reliable and it's only checking 3 generic bytes
 	/^NIfTI-2 data format/,
 	/^Open Minecraft Note Block Studio Song/,
@@ -1402,6 +1405,7 @@ export const WEAK_VALUES =
 	/^Dragon Age: Origins game data$/,
 	/^Drive SnapShot Disk Image$/,
 	/^DuckDB database$/,
+	/^DNG Camera Profile \((big|little)-endian\)$/,
 	/^DVD-Audio Audio Object$/,
 	/^Dynamix Music data container$/,
 	/^Dynamix Screen data container$/,
@@ -1436,6 +1440,7 @@ export const WEAK_VALUES =
 	/^File-Type Image$/,
 	/^FileGateway Server configuration$/,
 	/^Fine Artist Chunked format/,
+	/^FireDAC database$/,
 	/^Flash Shared Object file$/,
 	/^foobar2000 component$/,
 	/^FSEvents Disk Log Stream format \(v1\)$/,
@@ -1451,6 +1456,7 @@ export const WEAK_VALUES =
 	/^Generic IFF container$/,
 	/^Gerber format$/,
 	/^GetRight Skin$/,
+	/^GFA Raytrace (compressed )?(Animation|image|project data) \((low|hi)res\)$/,
 	/^Gigatron Compiled Low-Level Language \(v2, with rem\)$/,
 	/^git index$/,
 	/^GoBe Productive Document \(gen\)$/,
@@ -1548,6 +1554,7 @@ export const WEAK_VALUES =
 	/^NINJA 2\.0 Patch$/,
 	/^Nintendo Binary Revolution SEQuence$/,
 	/^Nintendo Yaz0 compressed data$/,
+	/^Nitro game data archive$/,
 	/^NTFS Master File Table$/,
 	/^Norton Textra Writer Document \(v2\.x\)$/,
 	/^Novastorm Media audio$/,
@@ -1615,6 +1622,7 @@ export const WEAK_VALUES =
 	/^Red Baron 3D game data archive$/,
 	/^Red Sector Demo-Maker vector/,
 	/^Relocatable object file format$/,
+	/^ReplaceEm fileset$/,
 	/^ReqAttack Image$/,
 	/^ROOT format$/,
 	/^Rumble Roses game data archive$/,

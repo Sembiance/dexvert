@@ -1,0 +1,47 @@
+		DESCRIPTION OF SLIM
+
+SLIM is a powerful file compressor with RAM resident transparent expander,
+which gives painless access to compressed files. This is done by intercepting
+DOS calls, allowing applications to read compressed files just as before.
+So there is no need to worry about technicalities like archives. Just put a
+command to load SLIM into the AUTOEXEC.BAT file and forget it.
+
+A proprietary algorithm significantly compresses almost all the files found
+on PCs and gives big savings on disk space. More than half of SLIM Ver 1.00
+and 1.01 users who responded to a questionnaire said that SLIM allowed them
+to postpone or cancel a hard disk upgrade. 
+
+SLIM's compact size (less than 24KB) makes it practical for floppy as well as
+hard disk machines. The RAM resident part of SLIM uses 73KB of main memory.
+System Requirements: IBM PC or MSDOS machine, MSDOS Ver 2.00+, 256K+ RAM
+
+		DISTRIBUTION OF SLIM
+
+SLIM is a "shareware program", and is provided at no charge to the user for
+evaluation. Feel free to share it with your friends, but it must not be
+given away altered or as part of another system. If you find SLIM useful,
+and that you continue to use it after a reasonable trial period, you must
+make a registration payment to the author. All registered users will receive
+a copy of the latest version of SLIM, along with the other benefits of 
+registration. See Section 10 of the manual SLIM.DOC for more information.
+
+Commercial users of SLIM must register and pay for their copies of SLIM
+within 30 days of first use, or their license is withdrawn. Site license
+arrangements may be made by contacting Dominic Herity.
+
+Anyone distributing SLIM for any kind of remuneration must have authorization
+from Dominic Herity at the address below. Authorization will be automatically
+granted to associate members of the Association of Shareware Professionals.
+Authorized distributors will receive prompt upgrades.
+
+To obtain authorization, just mail a copy of your catalog or similar evidence
+of your business, with a note indicating intent to distribute SLIM.
+                                                   _______
+Dominic Herity,PO Box 3038,Dublin 4,Ireland   ____|__     |               (tm)
+  CompuServe: 100016,3477                  --|       |    |-------------------
+    Internet: 100016.3477@compuserve.com     |   ____|__  |  Association of
+                                             |  |       |_|  Shareware
+                                             |__|   o   |    Professionals
+                                           -----|   |   |---------------------
+                                                |___|___|    MEMBER
+

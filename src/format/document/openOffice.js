@@ -6,6 +6,6 @@ export class openOffice extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/OpenOffice.org_XML";
 	ext            = [".sxw", ".stw", ".stc", ".sti", ".sxc"];
 	forbidExtMatch = true;
-	magic          = [/^OpenOffice(\.org ) ?([\dx.]+ )?(Calc|Impress|Writer)/, /^fmt\/(128|130|136|137)( |$)/];
+	magic          = [/^OpenOffice(\.org ) ?([\dx.]+ )?(Calc|Impress|Writer)/, "application/vnd.sun.xml.writer", /^fmt\/(128|130|136|137)( |$)/];
 	converters     = ["soffice[matchType:magic]"];
 }

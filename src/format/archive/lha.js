@@ -13,7 +13,7 @@ export class lha extends Format
 
 	magic = [
 		// generic LHA
-		"LHARC/LZARK compressed archive", /^LHa .*archive data/, "LHA File Format", "LHARK compressed archive", "LHA self-extracting", "LHarc self-extracting archive", "LZH Archiv gefunden", "Self-extracting Amiga LhA",
+		"LHARC/LZARK compressed archive", /^LHa .*archive data/, "LHA File Format", "LHARK compressed archive", "LHA self-extracting", "LHarc self-extracting archive", "LZH Archiv gefunden", "Self-extracting Amiga LhA", "application/x-lha",
 		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^MS-DOS .*LHarc self-extracting archive/, /^Self-extracting LZH$/, /^LZH$/, /^fmt\/626( |$)/,
 
 		// app specific LHA

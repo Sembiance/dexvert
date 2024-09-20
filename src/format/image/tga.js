@@ -6,7 +6,7 @@ export class tga extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/TGA";
 	ext          = [".tga", ".targa", ".tpic", ".icb", ".vda", ".vst"];
 	mimeType     = "image/x-tga";
-	magic        = ["Truevision TGA", "Targa image data", /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
+	magic        = ["Truevision TGA", "Targa image data", "image/x-tga", /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="TPIC" && macFileCreator==="8BIM") || (macFileType==="TARG" && macFileCreator==="GKON");
 	metaProvider = ["image"];
 	

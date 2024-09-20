@@ -6,7 +6,7 @@ export class pgm extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Netpbm_formats";
 	ext          = [".pgm", ".pnm"];
 	mimeType     = "image/x-portable-graymap";
-	magic        = ["Portable GrayMap bitmap", "Portable Grey Map", /^Netpbm image data.*greymap/, /^fmt\/(406|407)( |$)/];
+	magic        = ["Portable GrayMap bitmap", "Portable Grey Map", "image/x-portable-graymap", /^Netpbm image data.*greymap/, /^fmt\/(406|407)( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "iio2png", "gimp", "wuimg", "paintDotNet", "hiJaakExpress", "canvas", "tomsViewer"];
 	verify       = ({meta}) => meta.width>2 && meta.height>2;

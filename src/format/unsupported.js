@@ -1177,6 +1177,7 @@ export default
 		asciiFontMetrics                         : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric", "Adobe/Outline Font Metric"]},
 		astoundActor                             : {name : "Astound Actor", ext : [".act"], magic : ["Astound Actor"]},
 		atariCTBFile                             : {name : "Atari CTB File", ext : [".ctb"], magic : ["Atari CTB File"]},
+		atokDictionary                           : {name : "ATOK Dictionary", magic : ["ATOK Dictionary"]},
 		audfprintPeak                            : {name : "audfprint peak", ext : [".afpk"], magic : ["audfprint peak"]},
 		audioOverview                            : {name : "Audio Overview", ext : [".ovw"], magic : ["Audio Overview"], weakMagic : true},
 		auroraEditorCompiledMacro                : {name : "Aurora Editor compiled macro", ext : [".x"], magic : ["Aurora Editor compiled macro"], weakMagic : true},

@@ -6,7 +6,7 @@ export class bink extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Bink_Video";
 	ext            = [".bik", ".bik2", ".bk2"];
 	forbidExtMatch = true;
-	magic          = [/^Bink2? [Vv]ideo/, /^fmt\/731( |$)/];
+	magic          = [/^Bink2? [Vv]ideo/, "video/vnd.radgamettools.bink", /^fmt\/731( |$)/];
 	metaProvider   = ["mplayer"];
 	converters     = ["ffmpeg"];
 }

@@ -5,7 +5,7 @@ export class errorCodeModeler extends Format
 	name       = "Error Code Modeler";
 	website    = "http://fileformats.archiveteam.org/wiki/Error_Code_Modeler";
 	ext        = [".ecm"];
-	magic      = ["Error Code Modeler"];
+	magic      = ["Error Code Modeler", "application/x-ecm"];
 	weakMagic  = true;
 	converters = ["unecm"];
 }

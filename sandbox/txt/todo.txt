@@ -1,6 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Try adding ffprobeID 'detect' program:
+  ffprobe -v quiet -show_entries format=format_name,format_long_name -of default=noprint_wrappers=1:nokey=1 -analyzeduration 2000000 dragon.ppm
+  After, run: cd util && dra checkDetector.js --program=ffprobeID --format=image/p   (then later, --format=all)
+
+* Try adding puremagic 'detect' program: https://github.com/cdgriffith/puremagic
+  After, run: cd util && dra checkDetector.js --program=puremagic --format=image/p   (then later, --format=all)  
+
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD

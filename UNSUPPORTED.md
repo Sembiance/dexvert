@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,043)
+# Unsupported File Formats (2,044)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -807,7 +807,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,181)
+## Other (1,182)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -937,6 +937,7 @@ Family/Format | Name | Extensions | Notes
 [other/atari7800ROM](https://discmaster.textfiles.com/search?formatid=atari7800ROM) | Atari 7800 ROM | .a78 | 
 [other/atariCTBFile](https://discmaster.textfiles.com/search?formatid=atariCTBFile) | Atari CTB File | .ctb | [5 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCTBFile/)
 [other/atariGEMOBM](https://discmaster.textfiles.com/search?formatid=atariGEMOBM) | Atari GEM OBM File | .obm | [15 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariGEMOBM/)
+[other/atokDictionary](https://discmaster.textfiles.com/search?formatid=atokDictionary) | ATOK Dictionary |  | 
 [other/atomicBombermanAnimation](https://discmaster.textfiles.com/search?formatid=atomicBombermanAnimation) | Atomic Bomberman Animation | .ani | 
 [other/audfprintPeak](https://discmaster.textfiles.com/search?formatid=audfprintPeak) | audfprint peak | .afpk | 
 [other/ailDigitalAudioDriver](https://discmaster.textfiles.com/search?formatid=ailDigitalAudioDriver) | Audio Interface Library 3 Digital audio driver | .dig | 

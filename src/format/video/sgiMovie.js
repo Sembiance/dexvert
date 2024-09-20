@@ -6,7 +6,7 @@ export class sgiMovie extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SGI_movie";
 	ext            = [".mv", ".movie", ".sgi"];
 	forbidExtMatch = [".movie"];
-	magic          = ["SGI video", "Silicon Graphics movie file", /^fmt\/1901( |$)/];
+	magic          = ["SGI video", "Silicon Graphics movie file", "video/x-sgi-movie", /^fmt\/1901( |$)/];
 	metaProvider   = ["mplayer"];
 	converters     = ["ffmpeg", "xanim"];
 }

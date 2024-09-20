@@ -5,7 +5,7 @@ export class tar extends Format
 	name           = "Tape Archive";
 	website        = "http://fileformats.archiveteam.org/wiki/Tape_Archive";
 	ext            = [".tar", ".gtar"];
-	magic          = ["TAR - Tape ARchive", "LZMA compressed Tape ARchive", "TAR Archiv gefunden", "Archive: tar", /.* tar archive/, /^tar archive/, /^Tar$/, /^x-fmt\/265( |$)/];
+	magic          = ["TAR - Tape ARchive", "LZMA compressed Tape ARchive", "TAR Archiv gefunden", "Archive: tar", "application/x-tar", /.* tar archive/, /^tar archive/, /^Tar$/, /^x-fmt\/265( |$)/];
 	weakMagic      = [/^Tar$/];
 	idMeta         = ({macFileType}) => macFileType==="TARF";
 	forbiddenMagic = ["TFMX module sound data tar archive"];

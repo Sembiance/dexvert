@@ -6,6 +6,6 @@ export class tnef extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Transport_Neutral_Encapsulation_Format";
 	ext            = [".tnef", ".dat"];
 	forbidExtMatch = [".dat"];
-	magic          = ["Transport Neutral Encapsulation Format", "TNEF"];
+	magic          = ["Transport Neutral Encapsulation Format", "TNEF", "application/vnd.ms-tnef"];
 	converters     = ["ytnef"];
 }

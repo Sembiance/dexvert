@@ -6,6 +6,6 @@ export class sylkSpreadsheet extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SYLK";
 	ext            = [".slk", ".sylk"];
 	forbidExtMatch = true;
-	magic          = ["spreadsheet interchange document", "SYLK - SYmbolic LinK data", "Microsoft SYLK", /^x-fmt\/106( |$)/];
+	magic          = ["spreadsheet interchange document", "SYLK - SYmbolic LinK data", "Microsoft SYLK", "text/spreadsheet", /^x-fmt\/106( |$)/];
 	converters     = ["soffice[format:SYLK]", "excel97"];
 }

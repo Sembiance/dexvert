@@ -6,6 +6,6 @@ export class lzip extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Lzip";
 	ext        = [".lz"];
 	packed     = true;
-	magic      = ["LZIP compressed archive", /^lzip compressed data/];
+	magic      = ["LZIP compressed archive", "application/x-lzip", /^lzip compressed data/];
 	converters = ["lzip", "xz", "sevenZip[renameOut]"];
 }

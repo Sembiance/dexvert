@@ -6,6 +6,6 @@ export class eXtendedInstrument extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Extended_instrument";
 	ext            = [".xi"];
 	forbidExtMatch = true;
-	magic          = ["eXtended Instrument", "Fast Tracker II Instrument"];
+	magic          = ["eXtended Instrument", "Fast Tracker II Instrument", "audio/x-xi"];
 	converters     = ["awaveStudio"];
 }

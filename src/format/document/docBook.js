@@ -6,6 +6,6 @@ export class docBook extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DocBook";
 	ext            = [".dbk", ".xml"];
 	forbidExtMatch = true;
-	magic          = ["DocBook"];
+	magic          = ["DocBook", "application/x-docbook+xml"];
 	converters     = ["dblatex"];
 }

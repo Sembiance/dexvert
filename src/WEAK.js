@@ -236,6 +236,35 @@ export const WEAK_VALUES =
 
 	// pc98ripperID
 	/^PC-98 ElfDOS$/,
+
+	// xdgMime
+	/^application\/vnd\.fastcopy-disk-image$/,
+	/^application\/vnd\.framemaker$/,
+	/^application\/vnd\.microsoft\.portable-executable$/,
+	/^application\/vnd\.ms-excel$/,
+	/^application\/vnd\.wordperfect$/,
+	/^application\/x-dosexec$/,
+	/^application\/x-executable$/,
+	/^application\/x-gbi$/,
+	/^application\/x-iff$/,
+	/^application\/x-lz4$/,
+	/^application\/x-ms-ne-executable$/,
+	/^application\/x-msdownload$/,
+	/^application\/x-navi-animation$/,
+	/^application\/x-ole-storage$/,
+	/^application\/x-shellscript$/,
+	/^application\/x-wii-wad$/,
+	/^image\/x-win-bitmap$/,
+	/^audio\/x-mod$/,
+	/^image\/x-3ds$/,
+	/^image\/x-pic$/,
+	/^text\/x-csrc$/,
+	/^text\/x-devicetree-source$/,
+	/^text\/x-matlab$/,
+	/^text\/x-mpsub$/,
+	/^text\/x-patch$/,
+	/^text\/x-vb$/,
+	/^video\/mpeg$/,
 	
 	// FILE: Improper parsing of output or other file errors
 	/^[\d."'\s)(-]+$/,

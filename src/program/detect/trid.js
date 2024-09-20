@@ -16,7 +16,7 @@ export class trid extends Program
 		try
 		{
 			if(await fileUtil.exists(r.inFile({absolute : true})))
-				await Deno.copyFile(r.inFile({absolute : true}), r.tridTmpFilePath);
+				await Deno.copyFile(r.inFile({absolute : true}), r.tridTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
 		}
 		catch(err)
 		{

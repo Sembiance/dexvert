@@ -6,7 +6,7 @@ export class dpx extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/DPX";
 	ext          = [".dpx"];
 	mimeType     = "image/x-digital-picture-exchange";
-	magic        = [/^Digital Moving Picture Exchange [Bb]itmap/, "DPX image data", /^fmt\/(193|541)( |$)/];
+	magic        = [/^Digital Moving Picture Exchange [Bb]itmap/, "DPX image data", "image/dpx", /^fmt\/(193|541)( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "wuimg", `abydosconvert[format:${this.mimeType}]`, "nconvert"];	// iconvert also supports it but produces bad output
 }

@@ -9,7 +9,7 @@ export class tiff extends Format
 	mimeType     = "image/tiff";
 	magic        = [
 		// Generic TIFF files
-		"Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", /^fmt\/(155|353)( |$)/, /^x-fmt\/388( |$)/,
+		"Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", "image/tiff", /^fmt\/(155|353)( |$)/, /^x-fmt\/388( |$)/,
 
 		// App-Specific TIFF files
 		"CorelChart chart", "QuickLink II Fax bitmap (new)", /^fmt\/1312( |$)/

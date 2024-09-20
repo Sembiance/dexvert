@@ -8,7 +8,7 @@ export class svg extends Format
 	ext            = [".svg", ".svgz"];
 	forbidExtMatch = true;
 	mimeType       = "image/svg+xml";
-	magic          = ["SVG Scalable Vector Graphics image", "Scalable Vector Graphics", "SVG XML document", /^fmt\/(91|92|413)( |$)/];
+	magic          = ["SVG Scalable Vector Graphics image", "Scalable Vector Graphics", "SVG XML document", "image/svg+xml", /^fmt\/(91|92|413)( |$)/];
 	untouched      = dexState => dexState.meta.width && dexState.meta.height;
 	meta           = async (inputFile, dexState) => (await Program.runProgram("svgInfo", inputFile, {xlog : dexState.xlog, autoUnlink : true})).meta;
 }

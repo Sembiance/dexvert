@@ -8,7 +8,7 @@ export class gz extends Format
 	keepFilename = true;
 	magic        = [
 		// general gzip
-		"gzip compressed data", "GZipped data", "gzip: Deflate", "GZip Archiv gefunden", "gzip-compressed data", "Archive: GZIP", "Gzip (Self-extracting)", /^Gzip$/, /^x-fmt\/266( |$)/,
+		"gzip compressed data", "GZipped data", "gzip: Deflate", "GZip Archiv gefunden", "gzip-compressed data", "Archive: GZIP", "Gzip (Self-extracting)", "application/gzip", /^Gzip$/, /^x-fmt\/266( |$)/,
 
 		// app specific gzip
 		"bar archive gzip-compressed data", "MFS file system gzip-compressed data"

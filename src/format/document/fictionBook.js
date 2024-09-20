@@ -6,6 +6,6 @@ export class fictionBook extends Format
 	website        = "https://en.wikipedia.org/wiki/FictionBook";
 	ext            = [".fb2"];
 	forbidExtMatch = true;
-	magic          = ["FictionBook"];
+	magic          = ["FictionBook", "application/x-fictionbook+xml"];
 	converters     = ["ebook_convert"];
 }

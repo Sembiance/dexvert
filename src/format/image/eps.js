@@ -3,7 +3,7 @@ import {_MACBINARY_MAGIC} from "../archive/macBinary.js";
 
 const _EPS_MAGIC = [
 	// generic EPS
-	"Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File", "Macintosh Encapsulated Postscript (MacBinary)", /^fmt\/(122|123|124|417)( |$)/, /^x-fmt\/20( |$)/,
+	"Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File", "Macintosh Encapsulated Postscript (MacBinary)", "image/x-eps", /^fmt\/(122|123|124|417)( |$)/, /^x-fmt\/20( |$)/,
 
 	// app specific
 	"PageDraw document", "Mayura Draw document"

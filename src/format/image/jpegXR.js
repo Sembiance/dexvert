@@ -6,6 +6,6 @@ export class jpegXR extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/JPEG_XR";
 	ext        = [".jxr", ".hdp", ".wdp", ".wmp"];
 	mimeType   = "image/vnd.ms-photo";
-	magic      = ["JPEG XR bitmap", "JPEG Extended Range", "JPEG-XR Image", /^fmt\/590( |$)/];
+	magic      = ["JPEG XR bitmap", "JPEG Extended Range", "JPEG-XR Image", "image/jxr", /^fmt\/590( |$)/];
 	converters = ["nconvert"];
 }

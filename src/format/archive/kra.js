@@ -6,7 +6,7 @@ export class kra extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Krita";
 	ext        = [".kra"];
 	mimeType   = "application/x-krita";
-	magic      = [/^Krita [Dd]ocument/, /^fmt\/999( |$)/];
+	magic      = [/^Krita [Dd]ocument/, "application/x-krita", /^fmt\/999( |$)/];
 	converters = ["deark[module:zip]"];
 }
 

@@ -6,6 +6,6 @@ export class ora extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/OpenRaster";
 	ext        = [".ora"];
 	mimeType   = "image/openraster";
-	magic      = ["OpenRaster Image Format", "OpenRaster bitmap", /^fmt\/998( |$)/];
+	magic      = ["OpenRaster Image Format", "OpenRaster bitmap", "image/openraster", /^fmt\/998( |$)/];
 	converters = ["deark[module:zip]", "gimp"];
 }

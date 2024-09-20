@@ -396,6 +396,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/rawBitmap\/MMAP14.RAW$/, "text", "txt"],
 	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
+	[/text\/appleIIgsSourceCode\/(CNFG|teachfilter)\.txt/, "text", "txt"],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],

@@ -6,6 +6,6 @@ export class icns extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ICNS";
 	ext        = [".icns"];
 	mimeType   = "image/x-icns";
-	magic      = ["Mac OS X icon", "Apple Icon Image Format", /^fmt\/1185( |$)/];
+	magic      = ["Mac OS X icon", "Apple Icon Image Format", "image/x-icns", /^fmt\/1185( |$)/];
 	converters = ["deark[module:icns]", "iio2png", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,044)
+# Unsupported File Formats (2,045)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -2054,7 +2054,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (49)
+## Video (50)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2086,6 +2086,7 @@ Family/Format | Name | Extensions | Notes
 [video/novastormMediaVideo](https://discmaster.textfiles.com/search?formatid=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/iffVAXL](https://discmaster.textfiles.com/search?formatid=iffVAXL) | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
+[video/palmTealMovieVideo](https://discmaster.textfiles.com/search?formatid=palmTealMovieVideo) | Palm TealMovie Video | .pdb | [1 sample file](https://sembiance.com/fileFormatSamples/video/palmTealMovieVideo/)
 [video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?formatid=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 
 [video/pcAnimationVideo](https://discmaster.textfiles.com/search?formatid=pcAnimationVideo) | PC-Animation video | .ani | 
 [video/phVideo](https://discmaster.textfiles.com/search?formatid=phVideo) | PH Video | .ph | [4 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/) - No known converter or modern player. Could be kinda supported by using 'tmmplay.exe <filename>' in DOS to play the video. But it'll play in real time and sound capture will be hard to do.

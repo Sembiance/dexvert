@@ -602,6 +602,7 @@ export default
 		movieSetterSet                : {name : "MovieSetter Set", ext : [".set"], magic : ["Movie Setter Set"]},
 		networkQRACRallyFMV           : {name : "Network Q RAC Rally full motion video", magic : ["Network Q RAC Rally full motion video"]},
 		novastormMediaVideo           : {name : "Novastorm Media video", ext : [".fa", ".fza", ".mza"], magic : ["Novastorm Media video"]},
+		palmTealMovieVideo            : {name : "Palm TealMovie Video", ext : [".pdb"], magic : ["Palm TealMovie video+audio"]},
 		pcAnimatePlusAnimation        : {name : "PC Animate Plus Animation", ext : [".ani"], magic : ["PC Animate Plus Animation"], weakMagic : true},
 		pcAnimationVideo              : {name : "PC-Animation video", ext : [".ani"], magic : ["PC-Animation video"]},
 		ratvidVideo                   : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},

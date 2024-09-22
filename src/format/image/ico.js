@@ -9,6 +9,6 @@ export class ico extends Format
 	idMeta     = ({macFileType}) => macFileType==="ICO ";
 	trustMagic = true;
 
-	// ICO file has multiple sub icons, which deark handles well and iio2png also supports. Fallback to nconvert. pv can also convert, but often produces garbage.
-	converters = ["deark[module:ico]", "iio2png", "deark[module:win1ico]", "iconvert", "nconvert", "gimp", "imconv[format:ico][matchType:magic]", "wuimg", "hiJaakExpress[matchType:magic]", "canvas5[strongMatch]"];
+	// ICO file has multiple sub icons, which deark handles well and iio2png also supports. Fallback to nconvert. pv and canvas5 can also convert, but produces garbage with random files.
+	converters = ["deark[module:ico]", "iio2png", "deark[module:win1ico]", "iconvert", "nconvert", "gimp", "imconv[format:ico][matchType:magic]", "wuimg", "hiJaakExpress[matchType:magic]"];
 }

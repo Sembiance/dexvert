@@ -79,6 +79,7 @@ export default
 		os2Message               : {name : "OS/2 Message File", ext : [".msg"], magic : [/^OS\/2 help [Mm]essage/], website : "http://fileformats.archiveteam.org/wiki/MSG_(OS/2)"},
 		ovationPro               : {name : "Ovation Pro Document", ext : [".dpd"], magic : ["Ovation Pro", "OvationPro document"]},
 		pageSetter               : {name : "PageSetter Document", ext : [".ps"], magic : [/^PageSetter I{0,3} ?document/]},
+		palmJFileProDatabase     : {name : "Palm JFile Pro database", ext : [".pdb"], magic : ["Palm JFile Pro database", /^JFile Pro PalmOS document/]},
 		palmSuperMemo            : {name : "Palm SuperMemo", ext : [".pdb"], magic : ["Palm SuperMemo", /^SuperMemo PalmOS document/]},
 		palmTealMeal             : {name : "Palm TealMeal Document", ext : [".pdb"], magic : ["Palm TealMeal", "TealMeal PalmOS document"]},
 		palmThoughtManager       : {name : "Palm ThoughtManager", ext : [".pdb"], magic : ["Palm ThoughtManager"]},

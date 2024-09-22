@@ -428,7 +428,7 @@ export default
 		personalFontMakerPreferences            : {name : "Personal Font Maker Preferences", ext : [".prf"], magic : ["Personal Font Maker Preferences"]},
 		picsRatingSystem                        : {name : "PICS Rating System", ext : [".rat"], magic : ["PICS Rating System"], weakMagic : true},
 		pipeDreamDocument                       : {name : "PipeDream document", ext : [".pd", ".pdd"], magic : ["PipeDream document"], weakMagic : true},
-		pgpPublicKey                            : {name : "PGP Public Key", website : "http://fileformats.archiveteam.org/wiki/PGP_public_key", ext : [".asc", ".aexpk", ".pgp", ".pub"], magic : ["PGP public key block", "PGP armored data, public key block", "application/pgp-keys"]},
+		pgpPublicKey                            : {name : "PGP Public Key", website : "http://fileformats.archiveteam.org/wiki/PGP_public_key", ext : [".asc", ".aexpk", ".pgp", ".pub"], magic : ["PGP public key block", "PGP armored data, public key block", "application/pgp-keys"], weakMagic : ["application/pgp-keys"]},
 		pgpMessage                              : {name : "PGP Message", website : "http://fileformats.archiveteam.org/wiki/PGP", magic : ["PGP ASCII-Armor", "PGP armored data", "PGP signature", "PGP Nachricht", "application/pgp-encrypted", /^PGP (clear text )?(signed )?message/, /^PGP armored data, (signed )?message/]},
 		plbmGamesSpriteIndex                    : {name : "PLBM Games Sprite index", ext : [".gsk"], magic : ["PLBM Games Sprite index"], weakMagic : true},
 		plbmGamesRhythmLoopDataBase             : {name : "PLBM Games Rhythm loop Data base", ext : [".drl"], magic : ["PLBM Games Rhythm loop Data base"]},

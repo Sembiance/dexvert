@@ -225,6 +225,7 @@ export default
 		visualBasicForm                 : {name : "Visual Basic Form", ext : [".frm", ".frx"], magic : ["Visual Basic Form", "VisualBasic Form", "Microsoft Visual Basic Form", "eMbedded Visual Basic Form", /^fmt\/(1541|1542)( |$)/], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_form"},
 		visualBasicProject              : {name : "Visual Basic Project", ext : [".mak"], magic : ["Visual Basic project"], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_project"},
 		windowsHelpFileContent          : {name : "Microsoft Windows Help File Content", ext : [".cnt"], magic : ["Help File Contents", "MS Windows help file Content", /^fmt\/1656( |$)/], weakMagic : ["Help File Contents"]},
+		windowsShortcut                 : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut", "Format: Windows Shortcut", /^x-fmt\/428( |$)/, "application/x-ms-shortcut"]},
 		wingzScript                     : {name : "Wingz Script", ext : [".scz"], magic : ["Wingz script", "Wingz compiled script"]},
 		wordSearchManiaPuzzle           : {name : "Wordsearch Mania! Puzzle", ext : [".wsp"], magic : ["Wordsearch Mania! Puzzle"]},
 		wordStarMacro                   : {name : "WordStar Macro", ext : [".wsm"], magic : ["WordStar Macro"]},

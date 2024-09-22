@@ -891,6 +891,7 @@ Family/Format | Name | Extensions | Notes
 [other/alteraWaveformDesignFile](https://discmaster.textfiles.com/search?formatid=alteraWaveformDesignFile) | Altera Waveform Design File | .wdf | 
 [other/amapiShader](https://discmaster.textfiles.com/search?formatid=amapiShader) | Amapi Shader | .xsh | 
 [other/americanConquestGameArchive](https://discmaster.textfiles.com/search?formatid=americanConquestGameArchive) | American Conquest game archive | .gp | 
+[other/americanSMcGeeSAliceSavedGameFile](https://discmaster.textfiles.com/search?formatid=americanSMcGeeSAliceSavedGameFile) | American's McGee's Alice Saved Game File | .pth | 
 [other/amiAtlasFile](https://discmaster.textfiles.com/search?formatid=amiAtlasFile) | AmiAtlas File | .borders .coasts .index .islands .prefs .rivers .route .town .countries .country | 
 [other/amigaActionReplay3](https://discmaster.textfiles.com/search?formatid=amigaActionReplay3) | Amiga Action Replay 3 Freeze File |  | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/amigaActionReplay3/)
 [other/amigaBlkDev](https://discmaster.textfiles.com/search?formatid=amigaBlkDev) | Amiga ADF BlkDev File | .blkdev | 
@@ -1261,7 +1262,7 @@ Family/Format | Name | Extensions | Notes
 [other/geoWorksGEOSPreferences](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSPreferences) | GeoWorks GEOS preferences | .geo | 
 [other/geoWorksGEOSScreenSaver](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSScreenSaver) | GeoWorks GEOS screen saver | .geo | 
 [other/geoWorksWriterScrapbook](https://discmaster.textfiles.com/search?formatid=geoWorksWriterScrapbook) | GeoWorks Writer scrapbook | .000 | 
-[other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo | 
+[other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo .mo | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?formatid=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
 [other/gfxLab24Filter](https://discmaster.textfiles.com/search?formatid=gfxLab24Filter) | GfxLab24 Filter |  | 
 [other/glamusStructure](https://discmaster.textfiles.com/search?formatid=glamusStructure) | GLAMUS Structure | .doi .001 | 
@@ -1941,7 +1942,6 @@ Family/Format | Name | Extensions | Notes
 [other/windowsLogoDrawingCode](https://discmaster.textfiles.com/search?formatid=windowsLogoDrawingCode) | Windows LOGO Drawing Code | .lgo .lg | 
 [other/windowsNTLDRBootLoader](https://discmaster.textfiles.com/search?formatid=windowsNTLDRBootLoader) | Windows NTLDR boot loader |  | 
 [other/windowsShimDatabase](https://discmaster.textfiles.com/search?formatid=windowsShimDatabase) | Windows Shim Database | .sdb | 
-[other/windowsShortcut](https://discmaster.textfiles.com/search?formatid=windowsShortcut) | Windows Shortcut | .lnk | 
 [other/windowsTerminalConfiguration](https://discmaster.textfiles.com/search?formatid=windowsTerminalConfiguration) | Windows Terminal Configuration | .trm | 
 [other/winStormStormInfo](https://discmaster.textfiles.com/search?formatid=winStormStormInfo) | WinStorm Storm info | .sto | 
 [other/wintertreeThesaurusEngineDB](https://discmaster.textfiles.com/search?formatid=wintertreeThesaurusEngineDB) | Wintertree Thesaurus Engine DB | .tdb | 

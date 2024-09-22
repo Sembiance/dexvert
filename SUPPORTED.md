@@ -1,4 +1,4 @@
-# Supported File Formats (2,399)
+# Supported File Formats (2,401)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -339,7 +339,7 @@ archive | [SWiSH Movie](http://fileformats.archiveteam.org/wiki/SWiSH_Movie) | .
 archive | T-PACK Packed | .exe .com | cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/tpackPacked/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tape_Archive) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/tar/)
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [td02imd](https://github.com/Sembiance/td02imd) [dskconv](http://www.seasip.info/Unix/LibDsk/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/teledisk/)
-archive | Tenth Planet Soft Packer Packed | .exe .com | cup386 | 
+archive | Tenth Planet Soft Packer Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/tenthPlanetSoftPackerPacked/)
 archive | [The Lost Vikings Game Archive](https://moddingwiki.shikadi.net/wiki/The_Lost_Vikings) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lostVikingsGameArchive/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [deark](https://entropymine.com/deark/) [tscomp](http://fileformats.archiveteam.org/wiki/TSComp) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tscomp/)
 archive | [ThumbsUp/ThumbsPlus! Database](http://fileformats.archiveteam.org/wiki/ThumbsPlus_database) | .tud | [deark](https://entropymine.com/deark/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/thumbsUpDatabase/)
@@ -620,7 +620,7 @@ document | [Outlook Message](http://fileformats.archiveteam.org/wiki/Outlook_Ite
 document | Ovation Pro Document | .dpd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/ovationPro/)
 document | PageSetter Document | .ps | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/document/pageSetter/)
 document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://sembiance.com/fileFormatSamples/document/pageStreamDocument/)
-document | Palm JFile Pro database | .pdb | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/palmJFileProDatabase/)
+document | Palm JFile Pro database | .pdb | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/palmJFileProDatabase/)
 document | Palm MobileDB Database | .pdb | [pdb2csv](https://sourceforge.net/projects/palm-db-tools/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/mobildDBDatabase/)
 document | Palm PeanutReader e-book | .pdb | [ebook_convert](https://calibre-ebook.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/palmPeanutReaderEBook/)
 document | Palm SuperMemo | .pdb | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/document/palmSuperMemo/)
@@ -1659,7 +1659,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (123)
+## Other (124)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1780,6 +1780,7 @@ other | [Visual Basic Form](http://fileformats.archiveteam.org/wiki/VisualBasic_
 other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/VisualBasic_project) | .mak | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/visualBasicProject/)
 other | [Windows Program Group](http://fileformats.archiveteam.org/wiki/Windows_program_group) | .grp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/windowsProgramGroup/)
 other | Windows Registry Hive | .hiv .dat | [hivexml](https://libguestfs.org) | [10 sample files](https://sembiance.com/fileFormatSamples/other/registryHive/)
+other | Windows Shortcut | .lnk | [strings](https://www.gnu.org/software/binutils/) | 
 other | Wingz Script | .scz | [strings](https://www.gnu.org/software/binutils/) | [14 sample files](https://sembiance.com/fileFormatSamples/other/wingzScript/)
 other | Wordsearch Mania! Puzzle | .wsp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/wordSearchManiaPuzzle/)
 other | WordStar Macro | .wsm | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/wordStarMacro/)
@@ -1847,7 +1848,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (558)
+## Text (559)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -1881,7 +1882,7 @@ text | Anacreon: Reconstruction Scenery | .scn |  | [6 sample files](https://sem
 text | Apache mission Data | .dta |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
 text | Apple IIgs Source Code |  |  | 
 text | Apple Project Builder Xcode Project | .pbxproj |  | 
-text | Apple Xcode User data | .pbxuser |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
+text | Apple Xcode User data | .pbxuser |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
 text | Applix spreadsheet | .as |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/applixSpreadsheet/)
 text | ARB Vertex shader | .vp |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/arbVertexShader/)
 text | ASCII Color Format | .acf |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/asciiColorFormat/)
@@ -2264,6 +2265,7 @@ text | Renderman compiled Shader object | .slo |  | [12 sample files](https://se
 text | Rexx-Adventure game source | .rad |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rexxAdventureGameSource/)
 text | [Rexx-Adventure Saved game](http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game) | .ras |  | 
 text | RoboHelp Topic Export | .hpt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/roboHelpTopicExport/)
+text | RPM Spec | .in |  | 
 text | RTFGEN Topic data | .tpc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rtfGENTopicData/)
 text | RTPatch Documentation | .rtd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/rtPatchDocumentation/)
 text | Ruby Source | .rb |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/rubySource/)

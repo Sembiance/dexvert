@@ -312,7 +312,7 @@ export default
 		genericPrinterDescription               : {name : "Generic Printer Description", ext : [".gdl"], magic : ["Generic Printer Description"], weakMagic : true},
 		gerber                                  : {name : "Gerber", ext : [".gbx", ".gbr"], magic : ["Gerber format"], weakMagic : true},
 		gimpParametricBrush                     : {name : "GIMP parametric Brush", ext : [".vbr"], magic : ["GIMP parametric Brush"]},
-		gnuInfo                                 : {name : "GNU Info File", ext : [".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                          	// We do NOT include Trid's "GNU Info document" because it's too loose
+		gnuInfo                                 : {name : "GNU Info File", ext : [".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                              	// We do NOT include Trid's "GNU Info document" because it's too loose
 		graceProjectFile                        : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
 		graphmaticaGraph                        : {name : "Graphmatica Graph", ext : [".gr"], magic : ["Graphmatica Graph"], weakMagic : true},
 		gravisFirebird2Configuration            : {name : "Gravis Firebird 2 configuration", ext : [".fbd"], magic : ["Gravis Firebird 2 configuration"]},
@@ -458,6 +458,7 @@ export default
 		renderizeProject                        : {name : "Renderize Project", ext : [".bin", ".eye"], magic : ["Renderize Project", "Renderize Live project"]},
 		rendermanCompiledShaderObject           : {name : "Renderman compiled Shader object", ext : [".slo"], magic : ["Renderman compiled Shader object"]},
 		roboHelpTopicExport                     : {name : "RoboHelp Topic Export", ext : [".hpt"], magic : ["RoboHelp Topic Export"]},
+		rpmSpec                                 : {name : "RPM Spec", ext : [".in"], magic : ["text/x-rpm-spec"], weakMagic : true},
 		rtfGENTopicData                         : {name : "RTFGEN Topic data", ext : [".tpc"], magic : ["RTFGEN Topic data"]},
 		rtPatchDocumentation                    : {name : "RTPatch Documentation", ext : [".rtd"], magic : ["RTPatch Documentation"]},
 		samiCaptions                            : {name : "SAMI captions", ext : [".smi"], magic : ["SAMI captions", "application/x-sami"]},
@@ -547,7 +548,7 @@ export default
 		windowsMediaPlayerPlaylist              : {name : "Windows Media Player playlist", ext : [".wpl"], magic : ["Windows Media Player playlist", "application/vnd.ms-wpl", /^fmt\/589( |$)/]},
 		windowsSetupINFormation                 : {name : "Windows Setup INFormation", website : "http://fileformats.archiveteam.org/wiki/INF_(Windows)", magic : ["Windows setup INFormation", "Windows driver setup Information", "INF Datei [Version]", /^x-fmt\/420( |$)/]},
 		windowsSetupTableFile                   : {name : "Windows Setup Table File", ext : [".stf"], magic : ["Windows Setup Table File"]},
-		windowsURLShortcut                      : {name : "Windows URL shortcut", ext : [".url"], magic : ["Windows URL shortcut", "URL Datei", "MS Windows 95 Internet shortcut", "application/x-mswinurl", /^x-fmt\/(428|454)( |$)/], weakMagic : ["Windows URL shortcut"]},
+		windowsURLShortcut                      : {name : "Windows URL shortcut", ext : [".url"], magic : ["Windows URL shortcut", "URL Datei", "MS Windows 95 Internet shortcut", "application/x-mswinurl", /^x-fmt\/454( |$)/], weakMagic : ["Windows URL shortcut"]},
 		wineRegistry                            : {name : "Wine Registry", magic : ["Wine Registry", /^WINE registry text/]},
 		winJackForMSWin                         : {name : "WinJack for MS Win", ext : [".bj"], magic : ["WinJack for MS Win game variant"]},
 		winMorphProject                         : {name : "WinMorph project", ext : [".mrf"], magic : ["WinMorph project"]},

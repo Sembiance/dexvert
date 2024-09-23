@@ -1,6 +1,17 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* cmdTotal launches explorer.exe and that sometimes keeps running after cmdTotal exits, causing things to get backed up
+  I just added a 'killChildren' setting to wineUtil.run that may fix it.
+  If it doesn't, I'm gonna have to add a custom ENV var like WINEID=xu.randStr() and after the program is done find pids of explorer.exe
+  Then check the /proc/<pid>/environ for my WINEID and kill that pid
+  Maybe make this always happen, even though it'll slow down all wine runs. Alternatively I could opt-in with a new wineUtil.run flag
+
+* Once tgif fixed on gentoo, see if these can be converted with it:
+  http://dev.discmaster2.textfiles.com/view/9411/MACPEOPLE-2003-07-15.ISO.7z/MACPEOPLE-2003-07-15.ISO/%E9%80%A3%E8%BC%89%E3%83%87%E3%83%BC%E3%82%BF/Load%20Test_PowerBook%20G4/linux-wlan-ng-0.2.1-pre5.tar.gz/linux-wlan-ng-0.2.1-pre5.tar/linux-wlan-ng-0.2.1-pre5/doc/impnotes/l8s_uses.obj
+  http://dev.discmaster2.textfiles.com/view/9411/MACPEOPLE-2003-07-15.ISO.7z/MACPEOPLE-2003-07-15.ISO/%E9%80%A3%E8%BC%89%E3%83%87%E3%83%BC%E3%82%BF/Load%20Test_PowerBook%20G4/linux-wlan-ng-0.2.1-pre5.tar.gz/linux-wlan-ng-0.2.1-pre5.tar/linux-wlan-ng-0.2.1-pre5/doc/impnotes/structptr.obj
+  If so, add to dexdrones and reprocess these items: 8928 9411
+
 * Try adding ffprobeID 'detect' program:
   ffprobe -v quiet -show_entries format=format_name,format_long_name -of default=noprint_wrappers=1:nokey=1 -analyzeduration 2000000 dragon.ppm
   After, run: cd util && dra checkDetector.js --program=ffprobeID --format=image/p   (then later, --format=all)

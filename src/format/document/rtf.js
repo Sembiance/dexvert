@@ -10,5 +10,14 @@ export class rtf extends Format
 	idMeta         = ({macFileType}) => macFileType==="RTF ";
 
 	// fileMerlin will convert RTF too, but it produces artifacts (page 30, 31, etc in document/rtf/DIGITIZE.RTF)
-	converters     = ["soffice[format:Rich Text Format]", "soffice[format:Rich Text Format StarCalc]"];
+	converters     = [
+		// handles most RTF files
+		"soffice[format:Rich Text Format]", "soffice[format:Rich Text Format StarCalc]",
+		
+		// handles tricky ones like EOExpressionContext.rtf
+		"fileMerlin[matchType:magic][hasExtMatch]",
+		
+		// handles really tricky ones like 1368_printer_voice_alerts.rtf
+		"wordForWord[matchType:magic][hasExtMatch]"	// this actually outputs RTF, but it can open badly formed RTF files and output good ones that soffice can handle
+	];
 }

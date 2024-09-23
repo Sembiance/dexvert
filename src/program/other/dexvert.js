@@ -9,7 +9,7 @@ export class dexvert extends Program
 	website = "https://github.com/Sembiance/dexvert";
 	flags   = {
 		asFormat      : "Which format to convert as",
-		forbidProgram : "Specify a program to forbid being ran",
+		forbidProgram : "Specify a program to forbid being ran. Parent programs (if this is chained to) are automatically forbidden",
 		skipVerify    : "Don't verify output file"
 	};
 	unsafe = true;

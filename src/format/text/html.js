@@ -17,9 +17,10 @@ export class html extends Format
 		// app specific HTML
 		"IBrowse Hotlist / bookmark (v2)", "Netscape Bookmark", "Internet Explorer bookmark"
 	];
-	weakMagic      = true;
-	trustMagic     = true;
-	untouched      = true;
-	metaProvider   = ["text"];
-	notes          = "I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. More than that is too CPU intensive.";
+	weakMagic        = true;
+	trustMagic       = true;
+	confidenceAdjust = () => -10;	// Reduce by 10 since our magic is pretty weak, this allows other text formats that are less weak to match first, such as text/awk for sample text/awk/mib2html.awk
+	untouched        = true;
+	metaProvider     = ["text"];
+	notes            = "I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. It is also CPU intensive.";
 }

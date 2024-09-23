@@ -37,7 +37,7 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		await Deno.mkdir(wineOutDirPath);
 	}
 
-	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, timeoutSignal};
+	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, timeoutSignal, killChildren : true};
 	if(!keepOutput)
 		runOptions.xlog = xlog;
 	if(runOptions.cwd?.startsWith("wine://"))

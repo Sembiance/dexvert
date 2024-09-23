@@ -8,5 +8,5 @@ export class yanagisawaPIC extends Format
 	magic      = ["Yanagisawa PIC image file", "PIC bitmap"];
 	idMeta      = ({macFileType, macFileCreator}) => macFileType==="xPIC" && macFileCreator==="xPIC";
 	weakMagic  = true;
-	converters = ["wuimg", "recoil2png"];
+	converters = ["wuimg[matchType:magic]", "recoil2png"];
 }

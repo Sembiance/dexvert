@@ -7,6 +7,7 @@ const _FORMATS =
 	doom3Mesh   : {menuY : 520},
 	dxf         : {menuY : 324, window : {name : "MilkShape 3D 1.8.4", text : "Do you want to delete", dismiss : "Y"}},
 	fbx         : {menuY : 342, window : {name : "FBX Import", dismiss : "{ENTER}"}},
+	ghoul2      : {menuY : 451, window : {name : "Ghoul2 Model Import Options", dismiss : "{ENTER}"}},
 	lightWave   : {menuY : 307, window : {name : "LightWave LWO Import", dismiss : `${"{TAB}".repeat(9)}{SPACE}{TAB}{SPACE}{TAB}{SPACE}{ENTER}`}},
 	mayaASCII   : {menuY : 504},
 	quake2Model : {menuY : 44},

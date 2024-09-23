@@ -291,7 +291,7 @@ const FLEX_SIZE_FORMATS =
 	poly :
 	{
 		// .glb files produced differ each time, probably some meta data timestamp or something
-		"*"              : 0.5,
+		"*"              : 3,
 		cyberStudioCAD3D : 95,
 		keyCAD3DModel    : 40
 	},

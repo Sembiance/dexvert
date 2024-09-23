@@ -57,7 +57,7 @@ export const WEAK_MAC_TYPES =
 	"thng"		// Extension (Component)
 ];
 
-// these magics should be ignored in terms of reporting 'new magic' discoveries in things like dexrecurse, but are used by various formats so should not explictly be marked as weak
+// these magics should be ignored in terms of reporting 'new magic' discoveries in things like dexrecurse, but are may be legitimate matches by various formats so should not explictly be marked as weak
 export const IGNORE_MAGICS =
 [
 	// detectItEasy
@@ -76,8 +76,10 @@ export const IGNORE_MAGICS =
 	/^a .+ script text executable$/,
 	/^Apple Driver Map/,
 	/^IFF data, /,
+	/^DBF,/,
 	/^RIFF \((big|little)-endian\) data$/,
-	/^text\/isl/
+	/^text\/isl/,
+	/^Unknown Corel\/Wordperfect product/
 ];
 
 // These magics are untrustworthy and any detections against them should be noted as such
@@ -238,6 +240,10 @@ export const WEAK_VALUES =
 	/^PC-98 ElfDOS$/,
 
 	// xdgMime
+	/^application\/its\+xml$/,
+	/^application\/msword$/,
+	/^application\/smil\+xml$/,
+	/^application\/sparql-query$/,
 	/^application\/vnd\.fastcopy-disk-image$/,
 	/^application\/vnd\.framemaker$/,
 	/^application\/vnd\.microsoft\.portable-executable$/,
@@ -249,6 +255,7 @@ export const WEAK_VALUES =
 	/^application\/x-font-sunos-news$/,
 	/^application\/x-font-vfont$/,
 	/^application\/x-gbi$/,
+	/^application\/x-gdbm$/,
 	/^application\/x-gtk-builder$/,
 	/^application\/x-iff$/,
 	/^application\/x-ips-patch$/,
@@ -257,14 +264,18 @@ export const WEAK_VALUES =
 	/^application\/x-ms-ne-executable$/,
 	/^application\/x-msdownload$/,
 	/^application\/x-navi-animation$/,
+	/^application\/x-object$/,
 	/^application\/x-ole-storage$/,
+	/^application\/x-sharedlib$/,
 	/^application\/x-shellscript$/,
+	/^application\/x-subrip$/,
 	/^application\/x-wii-wad$/,
 	/^application\/xhtml\+xml$/,	// only cheks for the top header which oddly is all that's in some text files out there that should remain as text
 	/^image\/x-win-bitmap$/,
 	/^audio\/x-mod$/,
 	/^image\/x-3ds$/,
 	/^image\/x-pic$/,
+	/^text\/vnd\.graphviz$/,
 	/^text\/x-csrc$/,
 	/^text\/x-devicetree-source$/,
 	/^text\/x-emacs-lisp$/,
@@ -276,9 +287,11 @@ export const WEAK_VALUES =
 	/^text\/x-mpsub$/,
 	/^text\/x-objcsrc$/,
 	/^text\/x-patch$/,
+	/^text\/x-systemd-unit$/,	// similar to INI but not the same as an INI (gets matched to INI anyways, but that's ok)
 	/^text\/x-todo-txt$/,
 	/^text\/x-vb$/,
 	/^video\/mpeg$/,
+	/^video\/x-flic$/,
 	
 	// FILE: Improper parsing of output or other file errors
 	/^[\d."'\s)(-]+$/,
@@ -566,6 +579,7 @@ export const WEAK_VALUES =
 	/^MacBinary II,/,
 	/^Macintosh MFS data/,
 	/^Mach-O (architecture|i\d86 object|universal binary)/,
+	/^Mach-O m68k filetype=\d+/,
 	/^magic text fragment/,
 	/^mail forwarding/,
 	/^Map file for the AssaultCube FPS game/,
@@ -667,6 +681,7 @@ export const WEAK_VALUES =
 	/^PDP-11/,
 	/^PE Unknown /,
 	/^Perkin-Elmer executable/,
+	/^perl Storable/,
 	/^PEX Binary Archive$/,
 	/^PFS HDR image data/,
 	/^PFT archive data/,
@@ -769,8 +784,6 @@ export const WEAK_VALUES =
 	/^unicos \(cray\) executable/,
 	/^unified diff output/,
 	/^Unix-like shebang/,
-	/^Unknown Corel\/Wordperfect product 24, file type 17/,
-	/^Unknown Corel\/Wordperfect product (26|36), file type 65/,
 	/^unknown demand paged pure executable/,
 	/^unknown readable demand paged pure executable/,
 	/^v8 bytecode/,
@@ -1789,6 +1802,7 @@ export const WEAK_VALUES =
 	/^WorldWide Telescope collection$/,
 	/^wxWindows - wxPython Resource$/,
 	/^X-CAD Screen Menu$/,
+	/^X-CAD SoftFont$/,
 	/^XBaze data base$/,
 	/^Xbox 360 (CON|LIVE) container data file$/,
 	/^Xbox Game Profile Data$/,

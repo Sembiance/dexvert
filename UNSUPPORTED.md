@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,045)
+# Unsupported File Formats (2,049)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -807,7 +807,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,182)
+## Other (1,185)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -925,6 +925,7 @@ Family/Format | Name | Extensions | Notes
 [other/appleIIgsNewDeskAccessory](https://discmaster.textfiles.com/search?formatid=appleIIgsNewDeskAccessory) | Apple IIgs New Desk Accessory |  | 
 [other/appleIIgsTool](https://discmaster.textfiles.com/search?formatid=appleIIgsTool) | Apple IIgs Tool |  | 
 [other/appliedBiosystemsIncFormat](https://discmaster.textfiles.com/search?formatid=appliedBiosystemsIncFormat) | Applied Biosystems Inc. Format (ABIF) | .s1 .ab1 .fsa | 
+[other/aptCacheData](https://discmaster.textfiles.com/search?formatid=aptCacheData) | APT cache data | .bin | 
 [other/arcMasterColorSet](https://discmaster.textfiles.com/search?formatid=arcMasterColorSet) | ArcMaster color Set | .set | 
 [other/arConProject](https://discmaster.textfiles.com/search?formatid=arConProject) | ArCon project | .acp | 
 [other/arcSoftAlbumOrSlideshow](https://discmaster.textfiles.com/search?formatid=arcSoftAlbumOrSlideshow) | ArcSoft Album | .abm .sld | 
@@ -1669,6 +1670,7 @@ Family/Format | Name | Extensions | Notes
 [other/puzzleBusterPuzzle](https://discmaster.textfiles.com/search?formatid=puzzleBusterPuzzle) | Puzzle Buster Puzzle | .puz | 
 [other/qlPluginROM](https://discmaster.textfiles.com/search?formatid=qlPluginROM) | QL Plugin-ROM |  | 
 [other/qtMessage](https://discmaster.textfiles.com/search?formatid=qtMessage) | Qt Message | .qm | 
+[other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?formatid=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
 [other/quake2Map](https://discmaster.textfiles.com/search?formatid=quake2Map) | Quake II Map | .bsp | 
 [other/quake2SpriteReference](https://discmaster.textfiles.com/search?formatid=quake2SpriteReference) | Quake II Sprite Reference | .sp2 | 
 [other/quake3Map](https://discmaster.textfiles.com/search?formatid=quake3Map) | Quake III Map | .bsp | 
@@ -1767,6 +1769,7 @@ Family/Format | Name | Extensions | Notes
 [other/spelToolSupplementalDictionary](https://discmaster.textfiles.com/search?formatid=spelToolSupplementalDictionary) | SpelTool Supplemental Dictionary (v1.0) | .spl | 
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?formatid=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
 [other/sqlite2Database](https://discmaster.textfiles.com/search?formatid=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
+[other/starWarsJediKnightBotNavigationRoutes](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightBotNavigationRoutes) | Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info | .nav | 
 [other/starWarsJediKnightJediAcademyMap](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightJediAcademyMap) | Star Wars Jedi Knight: Jedi Academy map | .bsp | 
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?formatid=starAmPlanGraphData) | StarAm Plan graph data | .gein | 
 [other/starCraftMap](https://discmaster.textfiles.com/search?formatid=starCraftMap) | StarCraft Map | .scm .scx | 
@@ -1995,7 +1998,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (53)
+## Poly (54)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -2031,6 +2034,7 @@ Family/Format | Name | Extensions | Notes
 [poly/objectsToSee3DObject](https://discmaster.textfiles.com/search?formatid=objectsToSee3DObject) | Objects to See 3D object | .o2c | 
 [poly/polyfilm](https://discmaster.textfiles.com/search?formatid=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/) - Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.
 [poly/povRay](https://discmaster.textfiles.com/search?formatid=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format. assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
+[poly/racer3DModel](https://discmaster.textfiles.com/search?formatid=racer3DModel) | Racer 3D model | .dof | 
 [poly/radCadDrawing](https://discmaster.textfiles.com/search?formatid=radCadDrawing) | Rad Cad Drawing | .cad | 
 [poly/ravenObjectFileFormat](https://discmaster.textfiles.com/search?formatid=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | [4 sample files](https://sembiance.com/fileFormatSamples/poly/ravenObjectFileFormat/)
 [poly/real3D](https://discmaster.textfiles.com/search?formatid=real3D) | Real 3D | .real .obj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.

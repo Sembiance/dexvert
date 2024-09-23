@@ -1,13 +1,15 @@
 import {Format} from "../../Format.js";
 import {RUNTIME} from "../../Program.js";
+import {TEXT_MAGIC_STRONG} from "../../Detection.js";
 
 export class printfox extends Format
 {
-	name       = "Printfox/Pagefox Bitmap";
-	website    = "http://fileformats.archiveteam.org/wiki/Printfox_bitmap";
-	ext        = [".gb", ".bs", ".pg"];
-	magic      = ["PrintFox/Pagefox bitmap"];
-	trustMagic = true;
+	name           = "Printfox/Pagefox Bitmap";
+	website        = "http://fileformats.archiveteam.org/wiki/Printfox_bitmap";
+	ext            = [".gb", ".bs", ".pg"];
+	magic          = ["PrintFox/Pagefox bitmap"];
+	trustMagic     = true;
+	forbiddenMagic = TEXT_MAGIC_STRONG;
 
 	// Since this is such a weak match, only allow if we are an extMatch OR we have explicitly set an environment variable as commodore
 	idCheck = (inputFile, detections, {extMatch}) => extMatch || RUNTIME.globalFlags?.osHint?.commodore;

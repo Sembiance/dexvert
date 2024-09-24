@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,049)
+# Unsupported File Formats (2,048)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -513,7 +513,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (150)
+## Image (149)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -527,6 +527,7 @@ Family/Format | Name | Extensions | Notes
 [image/a2Sprites](https://discmaster.textfiles.com/search?formatid=a2Sprites) | Apple II Sprites | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
 [image/appleIIgsObjectOrientedGraphic](https://discmaster.textfiles.com/search?formatid=appleIIgsObjectOrientedGraphic) | Apple IIgs Object Oriented Graphic |  | 
 [image/applixBitmap](https://discmaster.textfiles.com/search?formatid=applixBitmap) | Applix bitmap | .im | 
+[image/applixwareGraphic](https://discmaster.textfiles.com/search?formatid=applixwareGraphic) | Applixware Graphic | .ag | 
 [image/artsAndLettersGraphic](https://discmaster.textfiles.com/search?formatid=artsAndLettersGraphic) | Arts and Letters Graphic | .ged | 
 [image/artWorks](https://discmaster.textfiles.com/search?formatid=artWorks) | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://sembiance.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
 [image/artworxDrawing](https://discmaster.textfiles.com/search?formatid=artworxDrawing) | Artworx Drawing | .cwg | 
@@ -576,7 +577,6 @@ Family/Format | Name | Extensions | Notes
 [image/greenstreetDrawing](https://discmaster.textfiles.com/search?formatid=greenstreetDrawing) | Greenstreet Drawing | .art | [6 sample files](https://sembiance.com/fileFormatSamples/image/greenstreetDrawing/)
 [image/homeBrewIcon](https://discmaster.textfiles.com/search?formatid=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
 [image/ibmAVCStillVideoImage](https://discmaster.textfiles.com/search?formatid=ibmAVCStillVideoImage) | IBM Audio Visual Connection Still Video Image | .dsp ._im | 
-[image/idSoftwareSprite](https://discmaster.textfiles.com/search?formatid=idSoftwareSprite) | ID Software Sprite | .spr | [3 sample files](https://sembiance.com/fileFormatSamples/image/idSoftwareSprite/)
 [image/iffChunkyBitmap](https://discmaster.textfiles.com/search?formatid=iffChunkyBitmap) | IFF Chunky bitmap | .ciff | 
 [image/imagineTexture](https://discmaster.textfiles.com/search?formatid=imagineTexture) | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
 [image/inAVisionDrawing](https://discmaster.textfiles.com/search?formatid=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/) - In-a-Vision and the Micrografx Windows Convet program (both on winworld) are both Windows 1.x/2.x programs that don't work in Win2k. Not aware of anything else that can convert these, as Micrografx Designer 4 does not.
@@ -638,7 +638,6 @@ Family/Format | Name | Extensions | Notes
 [image/quickLinkFaxCover](https://discmaster.textfiles.com/search?formatid=quickLinkFaxCover) | QuickLink Fax Cover | .cvr | 
 [image/quickLinkIIFaxBitmap](https://discmaster.textfiles.com/search?formatid=quickLinkIIFaxBitmap) | QuickLink II Fax bitmap | .qfx | 
 [image/reflectionsMonzoom](https://discmaster.textfiles.com/search?formatid=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
-[image/rleTRE](https://discmaster.textfiles.com/search?formatid=rleTRE) | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
 [image/satoriPaint](https://discmaster.textfiles.com/search?formatid=satoriPaint) | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 [image/secondNatureSlideShow](https://discmaster.textfiles.com/search?formatid=secondNatureSlideShow) | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 [image/signumBitmap](https://discmaster.textfiles.com/search?formatid=signumBitmap) | Signum! bitmap | .imc .pac | 

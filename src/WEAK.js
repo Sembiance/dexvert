@@ -249,6 +249,7 @@ export const WEAK_VALUES =
 	/^application\/vnd\.microsoft\.portable-executable$/,
 	/^application\/vnd\.ms-excel$/,
 	/^application\/vnd\.wordperfect$/,
+	/^application\/x-atari-lynx-rom$/,
 	/^application\/x-dar$/,
 	/^application\/x-dosexec$/,
 	/^application\/x-executable$/,
@@ -287,9 +288,11 @@ export const WEAK_VALUES =
 	/^text\/x-mpsub$/,
 	/^text\/x-objcsrc$/,
 	/^text\/x-patch$/,
+	/^text\/x-qml$/,
 	/^text\/x-systemd-unit$/,	// similar to INI but not the same as an INI (gets matched to INI anyways, but that's ok)
 	/^text\/x-todo-txt$/,
 	/^text\/x-vb$/,
+	/^video\/dv$/,
 	/^video\/mpeg$/,
 	/^video\/x-flic$/,
 	
@@ -1512,7 +1515,7 @@ export const WEAK_VALUES =
 	/^Generic IFF container$/,
 	/^Gerber format$/,
 	/^GetRight Skin$/,
-	/^GFA Raytrace (compressed )?(Animation|image|project data) \((low|hi)res\)$/,
+	/^GFA Raytrace (compressed )?(Animation|image|project data) \((low|hi)-res\)$/,
 	/^Gigatron Compiled Low-Level Language \(v2, with rem\)$/,
 	/^git index$/,
 	/^GoBe Productive Document \(gen\)$/,
@@ -1646,6 +1649,7 @@ export const WEAK_VALUES =
 	/^Peak audio info$/,
 	/^Pepakura Designer work$/,
 	/^Perfect Keyboard macro set$/,
+	/^PerFROM Pro Form$/,
 	/^PERQemu Hard Disk image$/,
 	/^Personal Paint encrypted bitmap$/,	// Found these in the wild, distrubuted with demo version of program, but it's weak magic and can't decrypt them easily anyways
 	/^PFS File database$/,

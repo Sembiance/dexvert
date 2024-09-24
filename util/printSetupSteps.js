@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {programs, init as initPrograms} from "../src/program/programs.js";
 await initPrograms();
 
+console.log("Follow ipmi.txt and bios.txt to connect and get the server booting from my custom gentooInstall ISO");
 console.log("Install gentoo with: gentooInstall --phase=2 --scrubPartitionMap --withX --withQEMU --withNode --withSound --gateway=<gateway> <ip> <hostname>");
 console.log("Run the following as root on a fresh Gentoo system to be able to run dexvert:\n");
 
@@ -94,5 +95,6 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
 	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
 	`# Ensure 'startDexserver' works. May need to run it twice in order for the deno JSR packages to download properly.`,
-	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
+	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
+	"# Now add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
 ].forEach(line => console.log(line));

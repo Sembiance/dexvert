@@ -11,7 +11,7 @@ const _XML_MAGIC = [
 	"Tag Library Descriptor", "Channel Definition Format", "QuickTime Media Link", "Interface Builder UI resource data (archive)", "Mozilla XML User interface Language", "GPS eXchange format", "Glade UI design", "Internet Archive book scan data",
 	"RoboHelp / FlashHelp skin", "Entity and Attribute Information", "Shapefile Geospatial metadata", "NuGet Specification", "Microsoft Management Console Snap-in control file", "Microsoft Extensible Application Markup Language",
 	"Native Instruments Battery drumKit", "Dia shape", "Dia sheet", "Dia drawing (uncompressed)", "RELAX NG", "XSL Formatting Objects", "DISCO Dynamic Discovery file", "XML sitemap", "GNUMERIC spreedshet (XML", "Open Source Metadata Framework",
-	"Outline Processor Markup Language", "application/atom+xml", "application/x-designer", "application/xslt+xml", "AppleScript Terminology",
+	"Outline Processor Markup Language", "application/atom+xml", "application/x-designer", "application/xslt+xml", "AppleScript Terminology", "application/x-dia-shape", "application/x-gnumeric", "application/x-dia-diagram", "text/x-opml+xml",
 	/^Tiled Tiles (Map|Set) XML$/,
 	/^fmt\/(205|475|979|983|1219|1677|1729|1796)( |$)/
 ];

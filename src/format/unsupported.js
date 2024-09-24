@@ -396,6 +396,7 @@ export default
 		applausePalette                : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
 		appleIIgsObjectOrientedGraphic : {name : "Apple IIgs Object Oriented Graphic", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="DRW"},
 		applixBitmap                   : {name : "Applix bitmap", ext : [".im"], magic : ["Applix bitmap", /^x-fmt\/228( |$)/]},
+		applixwareGraphic              : {name : "Applixware Graphic", ext : [".ag"], magic : ["Applixware Graphic", "image/x-applix-graphics"], weakMagic : true},
 		artsAndLettersGraphic          : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},
 		autoFXPhotoGraphicEdgesImage   : {name : "Auto FX PhotoGraphic Edges image", ext : [".afx"], magic : ["Auto FX PhotoGraphic Edges image", /^fmt\/1939( |$)/]},
 		beamSoftwareSIFFImage          : {name : "Beam Software SIFF sprite/image", ext : [".pim"], magic : ["Beam Software SIFF sprite/image"], weakMagic : true},

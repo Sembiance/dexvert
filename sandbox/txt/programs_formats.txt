@@ -17021,6 +17021,7 @@ g00                RealLive engine image
 gif                via libgif
 heif               via libheif, supports avif if libavif is not used
 hg3                CatSystem engine image
+idsp               id Software Sprite
 ilbm               IFF/ILBM image
 jbig               via libjbig
 jpeg               via libjpeg
@@ -17049,6 +17050,7 @@ qoi                qoi
 raw                via libraw
 sgi                sgi
 sixel              sixel
+spooky             Spooky Sprites TRS and TRE
 sun                sun
 svg                via librsvg
 tga                tga
@@ -17062,6 +17064,10 @@ xbm                xbm
 xcursor            xcursor
 xwd                xwd
 xyz                RPG Maker image
+
+
+
+
 
 
 >>> NConvert (wine)

@@ -2,8 +2,9 @@ import {Format} from "../../Format.js";
 
 export class idSoftwareSprite extends Format
 {
-	name        = "ID Software Sprite";
-	ext         = [".spr"];
-	magic       = ["ID Software Sprite format"];
-	unsupported = true;
+	name           = "ID Software Sprite";
+	ext            = [".spr", ".spr32"];
+	forbidExtMatch = true;
+	magic          = ["ID Software Sprite format"];
+	converters     = ["wuimg"];
 }

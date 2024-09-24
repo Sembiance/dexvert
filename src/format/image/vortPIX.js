@@ -7,5 +7,5 @@ export class vortPIX extends Format
 	ext            = [".vort", ".pix"];
 	forbidExtMatch = [".pix"];
 	magic          = ["Very Ordinary Raster file format bitmap"];
-	converters     = ["deark[module:vort]"];
+	converters     = ["vort2ppm", "deark[module:vort]"];
 }

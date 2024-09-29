@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,048)
+# Unsupported File Formats (2,047)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -513,7 +513,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (149)
+## Image (148)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -628,7 +628,6 @@ Family/Format | Name | Extensions | Notes
 [image/printShopDeluxeBorder](https://discmaster.textfiles.com/search?formatid=printShopDeluxeBorder) | Print Shop Deluxe Border | .pbr | 
 [image/printShopDeluxeColumnsGraphic](https://discmaster.textfiles.com/search?formatid=printShopDeluxeColumnsGraphic) | Print Shop Deluxe Columns Graphic | .pcg | 
 [image/printShopDeluxeRowsGraphic](https://discmaster.textfiles.com/search?formatid=printShopDeluxeRowsGraphic) | Print Shop Deluxe Rows Graphic | .prg | 
-[image/printShopGSGraphic](https://discmaster.textfiles.com/search?formatid=printShopGSGraphic) | Print Shop GS Graphic |  | 
 [image/printMasterDocument](https://discmaster.textfiles.com/search?formatid=printMasterDocument) | PrintMaster Document | .car | 
 [image/printPartnerBorder](https://discmaster.textfiles.com/search?formatid=printPartnerBorder) | PrintPartner Border | .bdr | 
 [image/professionalDraw](https://discmaster.textfiles.com/search?formatid=professionalDraw) | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://sembiance.com/fileFormatSamples/image/professionalDraw/) - No known converter.

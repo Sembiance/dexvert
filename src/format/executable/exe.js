@@ -28,7 +28,7 @@ export class exe extends Format
 
 		// specific exe types
 		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable",
-		"Graphic Workshop self-displaying picture executable", "MOZART tune", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)",
+		"Graphic Workshop self-displaying picture executable", "MOZART tune", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)", "WIFE Font Driver",
 
 		// created by
 		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
@@ -67,8 +67,7 @@ export class exe extends Format
 		];
 
 		// generic installer extractor
-		if(dexState.hasMagics(_INSTALLER_MAGICS))
-			r.push("cmdTotal[wcx:InstExpl.wcx]");
+		r.push("cmdTotal[wcx:InstExpl.wcx]");
 
 		// Try some general EXE extractors
 		r.push("sevenZip[type:PE][rsrcOnly]", "deark[module:exe]");

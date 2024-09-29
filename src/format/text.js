@@ -559,6 +559,7 @@ export default
 		wiseInstallerLog                        : {name : "Wise Installer log", ext : [".log"], magic : ["Wise Installer log"]},
 		wiseScript                              : {name : "Wise script", ext : [".wse"], magic : ["Wise script"]},
 		wiziTeXEquation                         : {name : "WiziTeX equation", ext : [".tex"], magic : ["WiziTeX equation"]},
+		x509Certificate                         : {name : "X.509 Certificate", magic : ["application/pkix-cert"]},
 		xantippeProject                         : {name : "Xantippe project", ext : [".xan"], magic : ["Xantippe project"]},
 		xaosPositionFile                        : {name : "XaoS Position File", ext : [".z", ".xpf"], magic : ["XaoS Position File"], weakMagic : true},
 		xaraResourcesIndex                      : {name : "Xara resources index", ext : [".txt"], magic : ["Xara resources index"], weakMagic : true},

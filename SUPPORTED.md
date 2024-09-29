@@ -1,4 +1,4 @@
-# Supported File Formats (2,406)
+# Supported File Formats (2,408)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -718,7 +718,7 @@ Family | Name | Extensions | Converters | Notes
 executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/executable/epocExecutable/)
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/executable/macOSExecutable/)
 executable | [Microsoft Windows Dynamic Link Library](http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)) | .dll | [director_files_extract](https://github.com/n0samu/director-files-extract) [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [22 sample files](https://sembiance.com/fileFormatSamples/executable/dll/)
-executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [director_files_extract](https://github.com/n0samu/director-files-extract) [deark](https://entropymine.com/deark/) | [34 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
+executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [director_files_extract](https://github.com/n0samu/director-files-extract) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) [deark](https://entropymine.com/deark/) | [34 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
 executable | [Psion IMG/APP](http://fileformats.archiveteam.org/wiki/Psion_IMG/APP) | .app .img | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionAPP/)
 executable | [Psion OPO/OPA Executable](http://fileformats.archiveteam.org/wiki/Psion_OPO/OPA) | .opo .opa .app | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionOPL/)
 executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/windowsSCR/) - Could be fun to 'run' these in Wine and record the output into a preview.mp4 video
@@ -764,7 +764,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (609)
+## Image (610)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -791,7 +791,7 @@ image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [a
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/a4r/)
 image | [ANSi Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice .ansi .asc .gbs | [ansilove](https://www.ansilove.org/) [ffmpeg](https://ffmpeg.org/) [deark](https://entropymine.com/deark/) | [51 sample files](https://sembiance.com/fileFormatSamples/image/ans/) - Animated ANSI sequences such as KM-TRANSPORTER.ANS only get converted into a single image with ansilove. It would be nice to 'detect' that it's animated and use ffmpeg instead to convert it into an animated MP4
 image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [aolart2ppm2015](https://github.com/Sembiance/dexvert/base/dexvert/aolart2ppm/) [aolart2ppm2007](https://github.com/Sembiance/dexvert/base/dexvert/aolart2ppm/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [40 sample files](https://sembiance.com/fileFormatSamples/image/aolART/)
-image | Apple 2 Icons Archive |  | [unApple2Icons](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/apple2Icons/)
+image | Apple 2 Icons Archive |  | [deark](https://entropymine.com/deark/) [unApple2Icons](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/apple2Icons/)
 image | [Apple II High Res](http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats) | .hgr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2HighRes/)
 image | [Apple IIe Double High-Resolution](http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats) | .dhgr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2eDoubleHighRes/)
 image | [Apple IIGS 3200/3201](http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats) | .3200 .3201 | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/a2gs320x/)
@@ -1022,7 +1022,7 @@ image | [IBM KIPS Bitmap](http://fileformats.archiveteam.org/wiki/IBM_KIPS_bitma
 image | [IBM Storyboard PIC](http://fileformats.archiveteam.org/wiki/Storyboard_PIC/CAP) | .pic .cap | [deark](https://entropymine.com/deark/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [storyboardLiveShowPic](https://winworldpc.com/product/ibm-storyboard/live-20) | [28 sample files](https://sembiance.com/fileFormatSamples/image/ibmStoryboardPic/) - Unable to use SBLIVE/PICTYPE.EXE to determine if it's valid due to that program not working with shell redirection (see sandbox/legacy/programs_and_formats/storyboardLivePicType.js) Several encountered .PIC files that PICTYPE does say are valid don't show in SHOWPIC.EXE for whatever reason.
 image | [ICDRAW Icon](http://fileformats.archiveteam.org/wiki/ICDRAW_icon) | .ib3 .ibi | [recoil2png](http://recoil.sourceforge.net) | [18 sample files](https://sembiance.com/fileFormatSamples/image/icdrawIcon/)
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | [ansilove](https://www.ansilove.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/iCEDraw/)
-image | ID Software Sprite | .spr .spr32 | [wuimg](https://codeberg.org/kaleido/wuimg) | [9 sample files](https://sembiance.com/fileFormatSamples/image/idSoftwareSprite/)
+image | ID Software Sprite | .spr .spr32 | [wuimg](https://codeberg.org/kaleido/wuimg) | [16 sample files](https://sembiance.com/fileFormatSamples/image/idSoftwareSprite/)
 image | [IFF Amiga Contiguous Bitmap](http://fileformats.archiveteam.org/wiki/ILBM#ACBM) | .lbm .ilbm .iff .acbm | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/iffACBM/)
 image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff .beam .dhr .dr .mp .dctv | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [ffmpeg](https://ffmpeg.org/) [convert](https://www.imagemagick.org/) [iio2png](http://github.com/Sembiance/iio2png/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [89 sample files](https://sembiance.com/fileFormatSamples/image/iffILBM/) - ILBM files are only converted to static PNG images. Color cyclying animated GIFs are not produced. This is because a HUGE number of ILBM files from back in the day have wacky color cycle data that yield extensive strobing or almost no change at all. Additionally, the animation support isn't fully working as some have REAL cycle data, but I haven't found ANY program that can handle them: V05AM.LBM V12.LBM V18.LBM V21.LBM V22.LBM V26.LBM Some ILBM files were only used to hold a palette and nothing more. This won't convert those. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort
 image | [IFF Retargetable Graphic](http://fileformats.archiveteam.org/wiki/RGFX) | .rgfx .rgx | [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/rgfx/)
@@ -1205,6 +1205,7 @@ image | [Portfolio Graphics](http://fileformats.archiveteam.org/wiki/PGF_(Portfo
 image | [Portfolio Graphics Compressed](http://fileformats.archiveteam.org/wiki/PGC_(Portfolio_Graphics_Compressed)) | .pgc | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/pgc/)
 image | [Portfolio PGX](http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)) | .pgx | [deark](https://entropymine.com/deark/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/pgx/) - Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an GIF. Each PGC file within the PGX specifies have how long to delay between each frame, so we could make a better GIF: https://www.idealine.info/portfolio/library/text/pgxspec.txt
 image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/pgr/)
+image | Print Shop GS Graphic |  | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/printShopGSGraphic/)
 image | [Print-Technik HIR Image](http://fileformats.archiveteam.org/wiki/Print-Technik) | .hir | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/hir/)
 image | [Printfox/Pagefox Bitmap](http://fileformats.archiveteam.org/wiki/Printfox_bitmap) | .gb .bs .pg | [nconvert](https://www.xnview.com/en/nconvert/) | [35 sample files](https://sembiance.com/fileFormatSamples/image/printfox/)
 image | [PrintMaster Shape](http://fileformats.archiveteam.org/wiki/PrintMaster) | .shp | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/printMasterShape/)
@@ -1851,7 +1852,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (561)
+## Text (562)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -2406,6 +2407,7 @@ text | WinUAE Configuration | .uae |  | [11 sample files](https://sembiance.com/
 text | Wise Installer log | .log |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/wiseInstallerLog/)
 text | Wise script | .wse |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)
 text | WiziTeX equation | .tex |  | 
+text | X.509 Certificate |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/x509Certificate/)
 text | Xantippe project | .xan |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/xantippeProject/)
 text | XaoS Position File | .z .xpf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/xaosPositionFile/)
 text | Xara graphics | .wix |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xaraGraphics/)

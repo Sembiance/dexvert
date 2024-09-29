@@ -69,9 +69,13 @@ const FORMAT_FILE_META =
 	{
 		"title" : {proDOSTypeCode : "PNT"}
 	},
-	"image/apple2Icons":
+	"image/apple2Icons" :
 	{
 		"Softdisk.Icon" : {proDOSTypeCode : "ICN"}
+	},
+	"image/printShopGSGraphic" :
+	{
+		"*" : {proDOSType : "F8", proDOSTypeAux : "C323"}
 	}
 };
 
@@ -906,8 +910,13 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 		o.dexvertOptions.programFlag.osHint[FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]] = true;
 	}
 
-	if(Object.isObject(FORMAT_FILE_META[diskFormatid]) && FORMAT_FILE_META[diskFormatid][path.basename(sampleFilePath)])
-		o.fileMeta = FORMAT_FILE_META[diskFormatid][path.basename(sampleFilePath)];
+	if(Object.isObject(FORMAT_FILE_META[diskFormatid]))
+	{
+		if(FORMAT_FILE_META[diskFormatid][path.basename(sampleFilePath)])
+			o.fileMeta = FORMAT_FILE_META[diskFormatid][path.basename(sampleFilePath)];
+		else if(FORMAT_FILE_META[diskFormatid]["*"])
+			o.fileMeta = FORMAT_FILE_META[diskFormatid]["*"];
+	}
 
 	if(Object.isObject(FORMAT_PROGRAM_FLAG[diskFormatid]) && FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)])
 		Object.assign(o.dexvertOptions.programFlag, FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)]);

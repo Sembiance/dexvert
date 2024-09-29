@@ -72,7 +72,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
-	`# pablodraw below usually fails to merge the first time. After the following line, just run again: emerge media-gfx/pablodraw`,
+	`# pablodraw and Aaru below usually fails to merge the first time. After the following line, just run emerge for that package like: emerge media-gfx/pablodraw`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
 	`depmod -a`,
 	`modinfo vhba`,
@@ -94,7 +94,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
 	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
-	`# Ensure 'startDexserver' works. May need to run it twice in order for the deno JSR packages to download properly.`,
+	`# Ensure 'startDexserver' works`,
 	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
 	"# Now add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
 ].forEach(line => console.log(line));

@@ -37,7 +37,9 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		await Deno.mkdir(wineOutDirPath);
 	}
 
-	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, timeoutSignal, killChildren : true};
+	const wineid = xu.randStr();
+
+	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch, WINEID : wineid}, cwd, timeout, timeoutSignal, killChildren : true};
 	if(!keepOutput)
 		runOptions.xlog = xlog;
 	if(runOptions.cwd?.startsWith("wine://"))
@@ -77,6 +79,19 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 			await runUtil.run("rsync", runUtil.rsyncArgs(path.join(wineOutDirPath, "/"), path.join(f.outDir.absolute, "/")));
 		await fileUtil.unlink(wineOutDirPath, {recursive : true});
 		await fileUtil.unlink(wineInDirPath, {recursive : true});
+	}
+
+	// some processes like cmdTotal spin up an explorer.exe plugin which then 'hangs around' forever, so make sure to kill it
+	const explorerPIDsRaw = ((await runUtil.run("pidof", ["C:\\windows\\system32\\explorer.exe"]))?.stdout || "").trim();
+	if(explorerPIDsRaw?.length)
+	{
+		for(const explorerPID of explorerPIDsRaw.split(" ").map(v => +v))
+		{
+			const envionRaw = await fileUtil.readTextFile(path.join("/proc", explorerPID.toString(), "environ"));
+			const environ = Object.fromEntries(envionRaw.split("\0").map(v => v.split("=")));
+			if(environ.WINEID===wineid)
+				await runUtil.run("kill", [explorerPID.toString()]);
+		}
 	}
 
 	return r;

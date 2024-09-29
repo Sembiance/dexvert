@@ -17,7 +17,7 @@ export class ini extends Format
 		"CloneCD CDImage (description)", "MOdule (play)List", "Exchange Extended Configuration File - Office Add-in", "JBuilder Beans Descriptor", "Premiere Motion settings", "Microsoft ODBC Data Source", "Premiere project", "Bloodshed Dev-C++ project",
 		"3ds UI colors", "NextSTART Theme", "The Chessmaster 4000 layout", "MS Flight Simulator aircraft configuration file", "Spring Engine unit Info", "Total Annihilation Main Unit Definition", "Winamp Signal Processing Studio DSP-Effect", "WinZip Job File",
 		"SpyBot-Search-and-Destroy malware info", "ArcExplorer Project", "PaintTool SAI Tool parameters", "J.River Media Center plugin", "NetCaptor's CaptorGroup", "Delphi project Desktop", "Symantec Guard Header", "Turbo Fractal Generator settings",
-		"DrumSynth Preset", "WinRIX configuration", "TsiLang translation data",
+		"DrumSynth Preset", "WinRIX configuration", "TsiLang translation data", "audio/x-scpls",
 		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, /^fmt\/(1614|1760)( |$)/
 	];
 	priority       = this.PRIORITY.LOWEST;

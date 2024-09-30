@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,047)
+# Unsupported File Formats (2,061)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (172)
+## Archive (175)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -55,6 +55,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE encrypted | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
+[archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?formatid=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
 [archive/distributionPackageArchive](https://discmaster.textfiles.com/search?formatid=distributionPackageArchive) | Distribution Package archive | .pac | 
 [archive/djarcArchive](https://discmaster.textfiles.com/search?formatid=djarcArchive) | DJarc archive | .dja | [1 sample file](https://sembiance.com/fileFormatSamples/archive/djarcArchive/)
 [archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
@@ -65,6 +66,7 @@ Family/Format | Name | Extensions | Notes
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?formatid=exePackerPacked) | EXE Packer Packed |  | 
 [archive/exe32PackPacked](https://discmaster.textfiles.com/search?formatid=exe32PackPacked) | Exe32Pack Packed | .exe | 
 [archive/ezipPacked](https://discmaster.textfiles.com/search?formatid=ezipPacked) | EZip Packed | .exe | 
+[archive/finearCompressedData](https://discmaster.textfiles.com/search?formatid=finearCompressedData) | FINEAR compressed data | _ | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/flinkGameDataArchive](https://discmaster.textfiles.com/search?formatid=flinkGameDataArchive) | Flink game data archive | .wld | 
 [archive/foxProArchive](https://discmaster.textfiles.com/search?formatid=foxProArchive) | FoxPro Archive | .pak | 
@@ -86,6 +88,7 @@ Family/Format | Name | Extensions | Notes
 [archive/leadTechnologiesCompressedArchive](https://discmaster.textfiles.com/search?formatid=leadTechnologiesCompressedArchive) | Lead Technologies compressed Archive | .lta | 
 [archive/legoRacersGameDataArchive](https://discmaster.textfiles.com/search?formatid=legoRacersGameDataArchive) | Lego Racers game data archive | .jam | 
 [archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
+[archive/lingvooArc1InstallData](https://discmaster.textfiles.com/search?formatid=lingvooArc1InstallData) | lingvooArc1 install data |  | 
 [archive/macOSInstallTome](https://discmaster.textfiles.com/search?formatid=macOSInstallTome) | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/) - Deark is working on adding this format.
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?formatid=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?formatid=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
@@ -513,7 +516,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (148)
+## Image (149)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -540,6 +543,7 @@ Family/Format | Name | Extensions | Notes
 [image/blueScanDrawing](https://discmaster.textfiles.com/search?formatid=blueScanDrawing) | Blue Scan Drawing | .blsc | 
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?formatid=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
 [image/cadlogicInstinctDrawing](https://discmaster.textfiles.com/search?formatid=cadlogicInstinctDrawing) | Cadlogic Instinct Drawing | .dp | 
+[image/cadStdDrawing](https://discmaster.textfiles.com/search?formatid=cadStdDrawing) | CadStd drawing | .cad | 
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?formatid=calamusVectorDocument) | Calamus Vector Document | .cvd | 
 [image/chompstersSprite](https://discmaster.textfiles.com/search?formatid=chompstersSprite) | Chompsters Sprite | .spr | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?formatid=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
@@ -667,7 +671,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (132)
+## Music (133)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -751,6 +755,7 @@ Family/Format | Name | Extensions | Notes
 [music/noiseRunner](https://discmaster.textfiles.com/search?formatid=noiseRunner) | NoiseRunner Module | .nr | [1 sample file](https://sembiance.com/fileFormatSamples/music/noiseRunner/)
 [music/noiseTrekker](https://discmaster.textfiles.com/search?formatid=noiseTrekker) | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://sembiance.com/fileFormatSamples/music/noiseTrekker/)
 [music/notatorXScore](https://discmaster.textfiles.com/search?formatid=notatorXScore) | Notator-X Score | .ntrx | 
+[music/noteWorthyComposerSong](https://discmaster.textfiles.com/search?formatid=noteWorthyComposerSong) | NoteWorthy Composer song | .nwc | 
 [music/onyxMusicFile](https://discmaster.textfiles.com/search?formatid=onyxMusicFile) | Onyx Music File Module | .omf | [4 sample files](https://sembiance.com/fileFormatSamples/music/onyxMusicFile/)
 [music/organya](https://discmaster.textfiles.com/search?formatid=organya) | Organya Module | .org | [8 sample files](https://sembiance.com/fileFormatSamples/music/organya/)
 [music/palladix](https://discmaster.textfiles.com/search?formatid=palladix) | Palladix | .plx | [3 sample files](https://sembiance.com/fileFormatSamples/music/palladix/)
@@ -805,7 +810,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,185)
+## Other (1,194)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -833,6 +838,7 @@ Family/Format | Name | Extensions | Notes
 [other/abuseDemoData](https://discmaster.textfiles.com/search?formatid=abuseDemoData) | Abuse demo Data | .dat | 
 [other/abuseLevel](https://discmaster.textfiles.com/search?formatid=abuseLevel) | Abuse Level | .lvl .spe | 
 [other/accelProtelPrintedCircuitBoard](https://discmaster.textfiles.com/search?formatid=accelProtelPrintedCircuitBoard) | ACCEL/Protel Printed Circuit Board | .pcb | 
+[other/aceNotesPIMData](https://discmaster.textfiles.com/search?formatid=aceNotesPIMData) | AceNotes PIM data | .an2 | 
 [other/actContactLayoutV30](https://discmaster.textfiles.com/search?formatid=actContactLayoutV30) | ACT! Contact Layout | .cly | 
 [other/actContactMapV30](https://discmaster.textfiles.com/search?formatid=actContactMapV30) | ACT! contact Map | .map | 
 [other/actDataBaseBlobV30](https://discmaster.textfiles.com/search?formatid=actDataBaseBlobV30) | ACT! data base Blob | .blb | 
@@ -1077,6 +1083,7 @@ Family/Format | Name | Extensions | Notes
 [other/corelShellMacro](https://discmaster.textfiles.com/search?formatid=corelShellMacro) | Corel Shell Macro | .shm | 
 [other/corelWritingToolsUserWordList](https://discmaster.textfiles.com/search?formatid=corelWritingToolsUserWordList) | Corel Writing Tools User Word List | .sav .hwl | 
 [other/corelDRAWCharacterSet](https://discmaster.textfiles.com/search?formatid=corelDRAWCharacterSet) | CorelDRAW Character Set | .csd | 
+[other/corelTRACEConfiguration](https://discmaster.textfiles.com/search?formatid=corelTRACEConfiguration) | CorelTRACE configuration | .bin | 
 [other/corncob3DData](https://discmaster.textfiles.com/search?formatid=corncob3DData) | Corncob 3D Data File | .cct | 
 [other/cornelHuthComprssedLibrary](https://discmaster.textfiles.com/search?formatid=cornelHuthComprssedLibrary) | Cornel Huth Compressed Library | .li_ | 
 [other/cracklibPasswordIndex](https://discmaster.textfiles.com/search?formatid=cracklibPasswordIndex) | Cracklib Password Index | .pwi | 
@@ -1235,6 +1242,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalDesignPaperTexture](https://discmaster.textfiles.com/search?formatid=fractalDesignPaperTexture) | Fractal Design Painter Paper Texture | .pap | 
 [other/fractalDesignPainterResource](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterResource) | Fractal Design Painter Resource | .rsr | 
 [other/fractalDesignPainterSession](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterSession) | Fractal Design Painter Session | .ssk | 
+[other/fractalForgeParameters](https://discmaster.textfiles.com/search?formatid=fractalForgeParameters) | Fractal Forge parameters | .mnd | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
 [other/freelanceGraphicsSmartmaster](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsSmartmaster) | Freelance Graphics Smartmaster | .mas .pre | 
 [other/frontPageBTreeIndex](https://discmaster.textfiles.com/search?formatid=frontPageBTreeIndex) | Front Page Binary-Tree Index | .btr | 
@@ -1326,6 +1334,7 @@ Family/Format | Name | Extensions | Notes
 [other/intellCOFFObject](https://discmaster.textfiles.com/search?formatid=intellCOFFObject) | Intel Common Object File Format Object | .obj | 
 [other/intelligentGamesResourceData](https://discmaster.textfiles.com/search?formatid=intelligentGamesResourceData) | Intelligent Games resource data | .res | 
 [other/interactiveAVIData](https://discmaster.textfiles.com/search?formatid=interactiveAVIData) | Interactive AVI data | .ivd | 
+[other/interactivePhysicsData](https://discmaster.textfiles.com/search?formatid=interactivePhysicsData) | Interactive Physics data | .ip | 
 [other/interBaseEnvironment](https://discmaster.textfiles.com/search?formatid=interBaseEnvironment) | InterBase Environment | .mil | 
 [other/interBaseLayout](https://discmaster.textfiles.com/search?formatid=interBaseLayout) | InterBase Layout | .lot | 
 [other/interBasePacking](https://discmaster.textfiles.com/search?formatid=interBasePacking) | InterBase Packing | .pkt | 
@@ -1413,6 +1422,7 @@ Family/Format | Name | Extensions | Notes
 [other/madden2004DataFile](https://discmaster.textfiles.com/search?formatid=madden2004DataFile) | Madden 2004 data file | .dat | 
 [other/madeProjectGame](https://discmaster.textfiles.com/search?formatid=madeProjectGame) | MADE Project/game | .prj | 
 [other/maestroMusic](https://discmaster.textfiles.com/search?formatid=maestroMusic) | Maestro Music |  | 
+[other/maggiData](https://discmaster.textfiles.com/search?formatid=maggiData) | MAGGI data | .hhh | 
 [other/magicBinaryFile](https://discmaster.textfiles.com/search?formatid=magicBinaryFile) | magic binary file | .mgc | 
 [other/magicC64Preferences](https://discmaster.textfiles.com/search?formatid=magicC64Preferences) | MagiC64 Preferences | .prefs | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?formatid=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
@@ -1467,6 +1477,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftMoneyAutoSavedData](https://discmaster.textfiles.com/search?formatid=microsoftMoneyAutoSavedData) | Microsoft Money auto saved data | .mny | 
 [other/microsoftPrinterDefinition](https://discmaster.textfiles.com/search?formatid=microsoftPrinterDefinition) | Microsoft Printer Definition | .prd | 
 [other/microsoftPrivateKey](https://discmaster.textfiles.com/search?formatid=microsoftPrivateKey) | Microsoft Private Key | .pkv | 
+[other/microsoftProfilerData](https://discmaster.textfiles.com/search?formatid=microsoftProfilerData) | Microsoft Profiler Data | .pbi .pbt .pbo | 
 [other/microsoftProgramDatabase](https://discmaster.textfiles.com/search?formatid=microsoftProgramDatabase) | Microsoft Program Database | .pdb .ncb .idb | 
 [other/microsoftProjectProject](https://discmaster.textfiles.com/search?formatid=microsoftProjectProject) | Microsoft Project Project | .mpp | 
 [other/microsoftProjectView](https://discmaster.textfiles.com/search?formatid=microsoftProjectView) | Microsoft Project View | .mpv | 
@@ -1709,6 +1720,7 @@ Family/Format | Name | Extensions | Notes
 [other/robouldixLevelData](https://discmaster.textfiles.com/search?formatid=robouldixLevelData) | Robouldix level data |  | 
 [other/rogueTheAdventureGameSavedGame](https://discmaster.textfiles.com/search?formatid=rogueTheAdventureGameSavedGame) | Rogue: The Adventure Game Saved game | .sav | 
 [other/rollerCoasterTycoonScenario](https://discmaster.textfiles.com/search?formatid=rollerCoasterTycoonScenario) | RollerCoaster Tycoon Scenario | .sc4 | 
+[other/rosegardenMusicalNotation](https://discmaster.textfiles.com/search?formatid=rosegardenMusicalNotation) | Rosegarden musical notation | .rose | 
 [other/rotObject3DAction](https://discmaster.textfiles.com/search?formatid=rotObject3DAction) | ROT Object 3D Action | .rotact | 
 [other/rpgMakerDB](https://discmaster.textfiles.com/search?formatid=rpgMakerDB) | RPG Maker Database | .ldb | 
 [other/rpgMakerMap](https://discmaster.textfiles.com/search?formatid=rpgMakerMap) | RPG Maker Map | .lmu | EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work
@@ -1891,6 +1903,7 @@ Family/Format | Name | Extensions | Notes
 [other/virtualChess2Game](https://discmaster.textfiles.com/search?formatid=virtualChess2Game) | Virtual Chess 2 game | .eck | 
 [other/virtualFireScene](https://discmaster.textfiles.com/search?formatid=virtualFireScene) | Virtual Fire Scene | .sce | 
 [other/virtualPascalUnit](https://discmaster.textfiles.com/search?formatid=virtualPascalUnit) | Virtual Pascal Unit | .vpi | 
+[other/virtualTIEmulatorSkin](https://discmaster.textfiles.com/search?formatid=virtualTIEmulatorSkin) | Virtual TI emulator skin | .skn | 
 [other/virtualDubDebugInfo](https://discmaster.textfiles.com/search?formatid=virtualDubDebugInfo) | VirtualDub Debug Info | .vdi | 
 [other/virusExecutorPatchBrain](https://discmaster.textfiles.com/search?formatid=virusExecutorPatchBrain) | VirusExecutor Patch Brain | .patchbrain | 
 [other/virusZIIArchiversInfo](https://discmaster.textfiles.com/search?formatid=virusZIIArchiversInfo) | VirusZ II Archivers info | .archivers | 
@@ -1976,6 +1989,7 @@ Family/Format | Name | Extensions | Notes
 [other/wreckinCrewLevelMap](https://discmaster.textfiles.com/search?formatid=wreckinCrewLevelMap) | Wreckin Crew level Map | .map | 
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?formatid=xCADModifierTable) | X-CAD Modifier Table | .obj | 
 [other/xCADOverlay](https://discmaster.textfiles.com/search?formatid=xCADOverlay) | X-CAD Overlay |  | 
+[other/xPlaneAirfoils](https://discmaster.textfiles.com/search?formatid=xPlaneAirfoils) | X-Plane Airfoils | .afl | 
 [other/x11XauthorityData](https://discmaster.textfiles.com/search?formatid=x11XauthorityData) | X11 Xauthority data |  | 
 [other/xlr8SentryChipComposorInstrument](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorInstrument) | XLR8 - Sentry Chip Composor Instrument | .xin | 
 [other/xlr8SentryChipComposorVoiceSet](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorVoiceSet) | XLR8 - Sentry Chip Composor VoiceSet | .xvs | 

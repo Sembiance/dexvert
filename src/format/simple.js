@@ -173,6 +173,7 @@ export default
 		innoSetupMessages               : {name : "Inno Setup Messages", ext : [".msg"], magic : ["Inno Setup Messages", "InnoSetup messages"]},
 		innoSetupScript                 : {name : "Inno Setup Script", ext : [".iss", ".dbg"], magic : ["Inno Setup Script (with rem)"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Inno_Setup_Script"},
 		installShieldPackage            : {name : "InstallShield Package", ext : [".pkg"], magic : ["InstallShield compiled setup Package", "installShield Paketdatei"]},
+		integerBASICProgram             : {name : "Integer BASIC Program", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="INT"},
 		jamMessageAreaHeaderFile        : {name : "JAM Message Area Header File", ext : [".jhr"], magic : ["JAM message area header file", "JAM message Header"], weakMagic : true},
 		javelinCaseStudy                : {name : "Javelin Case Study", ext : [".cas"], magic : ["Javelin Case study"]},
 		lapLinkHelp                     : {name : "LapLink Help", ext : [".hlp"], magic : ["LapLink Editor Help", "LapLink Pro 4 Help"]},

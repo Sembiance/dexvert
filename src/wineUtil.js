@@ -52,6 +52,27 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 
 	cmd = ((/^[A-Za-z]:/).test(cmd) || cmd.startsWith("/")) ? cmd : `c:\\dexvert\\${cmd}`;
 	
+	let killExplorerTimeout = null;
+	const killExplorer = async () =>
+	{
+		killExplorerTimeout = null;
+
+		// some processes like cmdTotal spin up an explorer.exe plugin which then 'hangs around' forever, so make sure to kill it
+		const explorerPIDsRaw = ((await runUtil.run("pidof", ["C:\\windows\\system32\\explorer.exe"]))?.stdout || "").trim();
+		if(explorerPIDsRaw?.length)
+		{
+			for(const explorerPID of explorerPIDsRaw.split(" ").map(v => +v))
+			{
+				const envionRaw = await fileUtil.readTextFile(path.join("/proc", explorerPID.toString(), "environ"));
+				const environ = Object.fromEntries(envionRaw.split("\0").map(v => v.split("=")));
+				if(environ.WINEID===wineid)
+					await runUtil.run("kill", [explorerPID.toString()]);
+			}
+		}
+	};
+
+	killExplorerTimeout = setTimeout(killExplorer, timeout);
+	
 	const {cb} = await runUtil.run(console ? "wineconsole" : "wine", [cmd, ...args], runOptions);
 	if(script)
 	{
@@ -81,17 +102,10 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		await fileUtil.unlink(wineInDirPath, {recursive : true});
 	}
 
-	// some processes like cmdTotal spin up an explorer.exe plugin which then 'hangs around' forever, so make sure to kill it
-	const explorerPIDsRaw = ((await runUtil.run("pidof", ["C:\\windows\\system32\\explorer.exe"]))?.stdout || "").trim();
-	if(explorerPIDsRaw?.length)
+	if(killExplorerTimeout!==null)
 	{
-		for(const explorerPID of explorerPIDsRaw.split(" ").map(v => +v))
-		{
-			const envionRaw = await fileUtil.readTextFile(path.join("/proc", explorerPID.toString(), "environ"));
-			const environ = Object.fromEntries(envionRaw.split("\0").map(v => v.split("=")));
-			if(environ.WINEID===wineid)
-				await runUtil.run("kill", [explorerPID.toString()]);
-		}
+		clearTimeout(killExplorerTimeout);
+		await killExplorer();
 	}
 
 	return r;

@@ -137,6 +137,7 @@ export default
 		unrealPackage                               : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]},
 		wordPerfectInstallArchive                   : {name : "WordPerfect install archive", magic : ["WordPerfect compressed install archive"]},
 		wwarpDiskImage                              : {name : "WWarp Disk Image", ext : [".wwp"], magic : ["WWarp disk image"]},
+		x64DiskImage    							: {name : "X64 Disk Image", ext : [".x64"], magic : ["X64 Image", "X64 and VICE emulators disk image"], weakMagic : true},
 		xelaSoftArchive                             : {name : "XelaSoft Archive", ext : [".xsa"], magic : ["XelaSoft Archive compressed data"]},
 		xldjDiskImage                               : {name : "XLDJ/XL/ST link Disk Image", ext : [".di"], magic : ["XL/ST link / XLDJ Disk Image"], weakMagic : true},
 		zPackageCompressedArchive                   : {name : "ZPackage compressed archive", ext : [".zpk"], magic : ["ZPackage compressed archive"], weakMagic : true},

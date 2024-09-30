@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,061)
+# Unsupported File Formats (2,062)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (175)
+## Archive (176)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -174,6 +174,7 @@ Family/Format | Name | Extensions | Notes
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?formatid=wordPerfectInstallArchive) | WordPerfect install archive |  | 
 [archive/wraptor](https://discmaster.textfiles.com/search?formatid=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?formatid=wwarpDiskImage) | WWarp Disk Image | .wwp | 
+[archive/x64DiskImage](https://discmaster.textfiles.com/search?formatid=x64DiskImage) | X64 Disk Image | .x64 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/x64DiskImage/)
 [archive/xelaSoftArchive](https://discmaster.textfiles.com/search?formatid=xelaSoftArchive) | XelaSoft Archive | .xsa | 
 [archive/xldjDiskImage](https://discmaster.textfiles.com/search?formatid=xldjDiskImage) | XLDJ/XL/ST link Disk Image | .di | 
 [archive/xpackPacked](https://discmaster.textfiles.com/search?formatid=xpackPacked) | XPACK Packed |  | 

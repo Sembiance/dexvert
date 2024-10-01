@@ -5,7 +5,7 @@ export class avr extends Format
 	name         = "Audio Visual Research";
 	website      = "http://fileformats.archiveteam.org/wiki/AVR";
 	ext          = [".avr"];
-	magic        = [/^Audio Visual Research (file|sample)/];
+	magic        = [/^Audio Visual Research (file|sample)/, "AVR (Audio Visual Research) (avr)"];
 	metaProvider = ["soxi"];
 	converters   = ["sox", "ffmpeg[outType:mp3]"];
 }

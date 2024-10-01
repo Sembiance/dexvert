@@ -6,7 +6,7 @@ export class mkv extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/MKV";
 	ext          = [".mkv"];
 	priority     = this.PRIORITY.LOW;
-	magic        = ["Matroska Video stream", "Matroska data", "EBML file, creator matroska", "Extensible Binary Meta Language / Matroska stream", "EBML file, Matroska data", "application/x-matroska", /^fmt\/569( |$)/];
+	magic        = ["Matroska Video stream", "Matroska data", "EBML file, creator matroska", "Extensible Binary Meta Language / Matroska stream", "EBML file, Matroska data", "application/x-matroska", "Matroska / WebM (matroska,webm)", /^fmt\/569( |$)/];
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg"];
 }

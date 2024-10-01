@@ -7,7 +7,7 @@ export class pfm extends Format
 	ext            = [".pfm"];
 	forbidExtMatch = true;
 	mimeType       = "image/x-portable-floatmap";
-	magic          = ["Portable Float Map color bitmap"];
+	magic          = ["Portable Float Map color bitmap", "piped pfm sequence (pfm_pipe)"];
 	metaProvider   = ["image"];
 	converters     = ["convert", "wuimg", `abydosconvert[format:${this.mimeType}]`, "nconvert", "tomsViewer[hasExtMatch]"];
 }

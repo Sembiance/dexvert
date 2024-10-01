@@ -6,6 +6,6 @@ export class brenderPIX extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/BRender_PIX";
 	ext        = [".pix"];
 	weakExt    = true;
-	magic      = ["BRender PIX bitmap"];
+	magic      = ["BRender PIX bitmap", "BRender PIX image (brender_pix)"];
 	converters = ["ffmpeg[outType:png]"];
 }

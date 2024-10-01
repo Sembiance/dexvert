@@ -5,7 +5,7 @@ export class shorten extends Format
 	name         = "Shorten Losless Audio";
 	website      = "http://fileformats.archiveteam.org/wiki/Shorten";
 	ext          = [".shn"];
-	magic        = ["Shorten lossless compressed audio", "application/x-shorten"];
+	magic        = ["Shorten lossless compressed audio", "application/x-shorten", "raw Shorten (shn)"];
 	metaProvider = ["ffprobe"];
 	converters   = ["ffmpeg[outType:mp3]"];
 }

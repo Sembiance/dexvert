@@ -7,7 +7,10 @@ export class png extends Format
 	ext              = [".png"];
 	forbidExtMatch   = true;
 	mimeType         = "image/png";
-	magic            = ["Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "Fireworks PNG bitmap", "image/png", "image/apng", /^fmt\/(11|12|13|935)( |$)/];
+	magic            = [
+		"Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "Fireworks PNG bitmap", "image/png", "image/apng", "piped png sequence (png_pipe)",
+		"Animated Portable Network Graphics (apng)", /^fmt\/(11|12|13|935)( |$)/
+	];
 	idMeta           = ({macFileType}) => macFileType==="PNGf";
 	untouched        = dexState => dexState.meta.width && dexState.meta.height;
 	verifyUntouched  = dexState =>

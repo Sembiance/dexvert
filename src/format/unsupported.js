@@ -477,7 +477,6 @@ export default
 		stCADDrawing                   : {name : "ST-CAD Drawing", ext : [".dvg", ".ptp"], magic : ["ST-CAD Drawing"]},
 		superFlowDiagram               : {name : "SuperFlow diagram", ext : [".sf1"], magic : ["SuperFlow diagram (v1.00)"]},
 		teenyWeenyGamesGraphic         : {name : "Teeny Weeny Games Graphic", ext : [".gra"], magic : ["Teeny Weeny Games Graphics data"], weakMagic : true},
-		tgif                           : {name : "TGIF", ext : [".obj"], magic : [/^Tgif file/, /^fmt\/1588( |$)/], weakMagic : true, notes : "These open in media-gfx/tgif but no CLI conversion supported"},
 		theCivilWarSpriteLibrary       : {name : "The Civil War Sprite library", ext : [".spr"], magic : ["The Civil War Sprite library"]},
 		theDrawPascalScreenImage       : {name : "TheDraw Pascal screen Image", ext : [".pas"], magic : ["TheDraw Pascal screen Image"]},
 		threeDStudio2DShape            : {name : "3D Studio 2D Shape", ext : [".shp"], magic : [/^x-fmt\/102( |$)/], weakMagic : true},

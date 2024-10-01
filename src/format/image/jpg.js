@@ -7,7 +7,9 @@ export class jpg extends Format
 	website          = "http://fileformats.archiveteam.org/wiki/JPEG";
 	ext              = [".jpg", ".jpeg", ".jpe", ".jfif"];
 	mimeType         = "image/jpeg";
-	magic            = ["JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", /^fmt\/(41|42|43|44|645|1507)( |$)/, /^x-fmt\/(390|391|398)( |$)/];
+	magic            = ["JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", "piped jpeg sequence (jpeg_pipe)",
+		/^fmt\/(41|42|43|44|645|1507)( |$)/, /^x-fmt\/(390|391|398)( |$)/];
+	weakMagic        = ["piped jpeg sequence (jpeg_pipe)"];
 	idMeta           = ({macFileType}) => macFileType==="JPEG";
 	fallback         = true;	// Some other formats such as image/a4r can be mistaken for JPEG data by 'file' command, so we ensure we try other formats first before falling back to this
 	confidenceAdjust = () => 25;	// Adjust confidence so it's above fileSize matches, since being an image many things can convert with the same tools

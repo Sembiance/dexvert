@@ -7,7 +7,7 @@ export class xwd extends Format
 	ext          = [".xwd", ".dmp", ".xdm"];
 	safeExt      = ".xwd";
 	mimeType     = "image/x-xwindowdump";
-	magic        = ["X-Windows Screen Dump", "X-Window screen dump image data", "XWD X Windows Dump image data", /^fmt\/401( |$)/];
+	magic        = ["X-Windows Screen Dump", "X-Window screen dump image data", "XWD X Windows Dump image data", "piped xwd sequence (xwd_pipe)", /^fmt\/401( |$)/];
 	weakMagic    = ["X-Windows Screen Dump"];
 	metaProvider = ["image"];
 
@@ -15,7 +15,7 @@ export class xwd extends Format
 	// iio2png also does great
 	// nconvert handles the color of MARBLE.XPM well but messes up bettyboop and woman-with-ban.
 	// All the other converters do less well
-	converters = ["gimp", "iio2png", "wuimg", "imconv[format:xwd][matchType:magic]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress[matchType:magic][hasExtMatch]"];
+	converters = ["gimp", "iio2png", "wuimg", "imconv[format:xwd][matchType:magic]", "nconvert", "ffmpeg[format:xwd_pipe][outType:png]", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress[matchType:magic][hasExtMatch]"];
 
 	// Some files are confused for XWD files and produce just a black image
 	verify = ({meta}) => meta.colorCount>1;

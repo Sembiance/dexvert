@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,064)
+# Unsupported File Formats (2,063)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -517,7 +517,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (149)
+## Image (148)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -653,7 +653,6 @@ Family/Format | Name | Extensions | Notes
 [image/superFlowDiagram](https://discmaster.textfiles.com/search?formatid=superFlowDiagram) | SuperFlow diagram | .sf1 | 
 [image/teenyWeenyGamesGraphic](https://discmaster.textfiles.com/search?formatid=teenyWeenyGamesGraphic) | Teeny Weeny Games Graphic | .gra | 
 [image/teletext](https://discmaster.textfiles.com/search?formatid=teletext) | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://sembiance.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
-[image/tgif](https://discmaster.textfiles.com/search?formatid=tgif) | TGIF | .obj | These open in media-gfx/tgif but no CLI conversion supported
 [image/theCivilWarSpriteLibrary](https://discmaster.textfiles.com/search?formatid=theCivilWarSpriteLibrary) | The Civil War Sprite library | .spr | 
 [image/theDrawPascalScreenImage](https://discmaster.textfiles.com/search?formatid=theDrawPascalScreenImage) | TheDraw Pascal screen Image | .pas | 
 [image/topDrawDrawing](https://discmaster.textfiles.com/search?formatid=topDrawDrawing) | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tdr .td | [3 sample files](https://sembiance.com/fileFormatSamples/image/topDrawDrawing/)

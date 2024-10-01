@@ -6,6 +6,6 @@ export class jpegXL extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/JPEG_XL";
 	ext        = [".jxl"];
 	mimeType   = "image/jxl";
-	magic      = ["JPEG XL codestream", "JPEG XL bitmap", "JPEG XL container", "image/jxl", /^fmt\/(1484|1485)( |$)/];
+	magic      = ["JPEG XL codestream", "JPEG XL bitmap", "JPEG XL container", "image/jxl", "piped jpegxl sequence (jpegxl_pipe)", "Animated JPEG XL (jpegxl_anim)", /^fmt\/(1484|1485)( |$)/];
 	converters = ["gimp", "wuimg"];	// ["djxl", `abydosconvert[format:${this.mimeType}]`];
 }

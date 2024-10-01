@@ -72,7 +72,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
-	`# pablodraw and Aaru below usually fails to merge the first time. After the following line, just run emerge for that package like: emerge media-gfx/pablodraw`,
+	`# pablodraw and Aaru below often fail to merge the first time. Just try again`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
 	`depmod -a`,
 	`modinfo vhba`,

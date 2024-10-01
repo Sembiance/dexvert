@@ -7,9 +7,9 @@ export class iCEDraw extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ICEDraw";
 	ext            = [".idf"];
 	mimeType       = "image/x-icedraw";
-	magic          = ["iCEDraw graphic"];
+	magic          = ["iCEDraw graphic", "iCE Draw File (idf)"];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["ansiloveInfo"];
-	converters     = ["ansilove[format:idf]", `abydosconvert[format:${this.mimeType}]`];
+	converters     = ["ansilove[format:idf]", "ffmpeg[format:idf][outType:png]", `abydosconvert[format:${this.mimeType}]`];
 	verify         = ({meta}) => meta.width>=16 && meta.height>=16;
 }

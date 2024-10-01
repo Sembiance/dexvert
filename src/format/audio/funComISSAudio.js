@@ -6,6 +6,6 @@ export class funComISSAudio extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Funcom_ISS";
 	ext            = [".iss"];
 	forbidExtMatch = true;
-	magic          = ["FunCom ISS audio"];
+	magic          = ["FunCom ISS audio", "Funcom ISS (iss)"];
 	converters     = ["ffmpeg[outType:mp3]"];
 }

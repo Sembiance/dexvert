@@ -6,13 +6,17 @@ export class gem extends Format
 	website  = "http://fileformats.archiveteam.org/wiki/GEM_Raster";
 	ext      = [".img", ".ximg", ".timg"];
 	mimeType = "image/x-gem";
-	magic    = ["GEM bitmap", "GEM HYPERPAINT Image data", "GEM Image data", "Extended GEM bitmap", "Digital Research GEM VDI bitmap", /^GEM .{4} Image data/, /^fmt\/1657( |$)/, /^x-fmt\/159( |$)/];
+	magic    = ["GEM bitmap", "GEM HYPERPAINT Image data", "GEM Image data", "Extended GEM bitmap", "Digital Research GEM VDI bitmap", "piped gem sequence (gem_pipe)", /^GEM .{4} Image data/, /^fmt\/1657( |$)/, /^x-fmt\/159( |$)/];
 
-	// Recoil seems to handle all the files
-	// Abydos and nconvert handle the color in flag_b24 and tru256
-	// nconvert messes up some other images colorspaces (as usual for nconvert)
 	converters = [
-		"recoil2png[matchType:magic]", "deark[module:gemras]", `abydosconvert[format:${this.mimeType}]`, "nconvert",
+		// ffmpeg handles everythign the best, like teststtt.img and COLUMNS4.IMG
+		"ffmpeg[format:gem_pipe][outType:png]",
+
+		// Recoil does second bes
+		"recoil2png[matchType:magic]", "deark[module:gemras]",
+		
+		// Abydos and nconvert handle the color in flag_b24 and tru256 (nconvert messes up some other images colorspaces (as usual for nconvert))
+		`abydosconvert[format:${this.mimeType}]`, "nconvert",
 		"canvas5[strongMatch][matchType:magic][hasExtMatch]", "hiJaakExpress[strongMatch]", "pv[strongMatch]", "corelPhotoPaint[strongMatch]"
 	];
 }

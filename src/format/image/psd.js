@@ -4,7 +4,7 @@ export class psd extends Format
 {
 	name         = "Adobe Photoshop";
 	website      = "http://fileformats.archiveteam.org/wiki/PSD";
-	magic        = [/^Adobe Photoshop [Ii]mage/, /^Adobe Photoshop$/, "Photoshop Bild", "image/vnd.adobe.photoshop", /^x-fmt\/92( |$)/];
+	magic        = [/^Adobe Photoshop [Ii]mage/, /^Adobe Photoshop$/, "Photoshop Bild", "image/vnd.adobe.photoshop", "piped psd sequence (psd_pipe)", /^x-fmt\/92( |$)/];
 	idMeta       = ({macFileType}) => macFileType==="8BPS";
 	ext          = [".psd"];
 	mimeType     = "image/vnd.adobe.photoshop";

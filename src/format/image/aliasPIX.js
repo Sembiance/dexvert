@@ -7,7 +7,7 @@ export class aliasPIX extends Format
 	ext        = [".pix", ".alias", ".img", ".als"];
 	weakExt    = [".pix", ".img"];
 	mimeType   = "image/x-alias-pix";
-	magic      = ["Alias PIX", "Esm Software PIX bitmap", /^fmt\/1092( |$)/];
+	magic      = ["Alias PIX", "Esm Software PIX bitmap", "Alias/Wavefront PIX image (alias_pix)", /^fmt\/1092( |$)/];
 	converters = ["nconvert", "deark[module:alias_pix]", "gimp", "imconv[format:pix][matchType:magic]", "canvas[matchType:magic]"];
 	verify     = ({meta}) => meta.width<12000 && meta.height<12000;
 }

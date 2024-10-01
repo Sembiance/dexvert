@@ -7,6 +7,8 @@ export class binaryText extends Format
 	name           = "Binary Text";
 	website        = "http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)";
 	ext            = [".bin"];
+	magic          = ["Binary text (bin)"];
+	weakMagic      = true;
 	fallback       = true;
 	mimeType       = "text/x-binary";
 	forbiddenMagic = TEXT_MAGIC_STRONG;

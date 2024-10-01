@@ -9,7 +9,7 @@ export class pageMaker7 extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 10)
+			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 15)
 			Func PreOpenWindows()
 				WindowFailure("Adobe PageMaker", "Cannot open file", -1, "{ENTER}")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Cannot load your target printer", "{ENTER}")
@@ -17,7 +17,7 @@ export class pageMaker7 extends Program
 				WindowDismiss("Lost Link", "", "!a")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "HyperContent Manager error", "{ENTER}")
 			EndFunc
-			CallUntil("PreOpenWindows", ${xu.SECOND*4})
+			CallUntil("PreOpenWindows", ${xu.SECOND*5})
 
 			Send("^S")
 

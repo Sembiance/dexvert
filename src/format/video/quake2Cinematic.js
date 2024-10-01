@@ -6,8 +6,8 @@ export class quake2Cinematic extends Format
 	website      = "https://multimedia.cx/mirror/idcin.html";
 	ext          = [".cin"];
 	weakExt      = true;
-	magic        = ["Id Software Quake II Cinematic video"];
+	magic        = ["Id Software Quake II Cinematic video", "id Cinematic (idcin)"];
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg"];
+	converters   = ["ffmpeg[format:idcin]"];
 }

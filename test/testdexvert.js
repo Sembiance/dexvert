@@ -73,10 +73,9 @@ const FORMAT_FILE_META =
 	{
 		"Softdisk.Icon" : {proDOSTypeCode : "ICN"}
 	},
-	"image/printShopGSGraphic" :
-	{
-		"*" : {proDOSType : "F8", proDOSTypeAux : "C323"}
-	}
+	"image/printShopGSGraphic"   : { "*" : {proDOSType : "F8", proDOSTypeAux : "C323"} },
+	"other/appleIIgsShellScript" : { "*" : {proDOSTypeCode : "EXE"} },
+	"other/integerBASICProgram"  : { "*" : {proDOSTypeCode : "INT"} }
 };
 
 const FORMAT_OS_HINT =

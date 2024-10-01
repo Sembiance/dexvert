@@ -6,7 +6,7 @@ export class webp extends Format
 	website       = "http://fileformats.archiveteam.org/wiki/WebP";
 	ext           = [".webp"];
 	mimeType      = "image/webp";
-	magic         = ["WebP bitmap", /^WebP$/, /^RIFF.* Web\/P image/, "RIFF Datei: unbekannter Typ 'WEBP'", "Format: WebP", "image/webp", /^fmt\/(566|567|568)( |$)/];
+	magic         = ["WebP bitmap", /^WebP$/, /^RIFF.* Web\/P image/, "RIFF Datei: unbekannter Typ 'WEBP'", "Format: WebP", "image/webp", "piped webp sequence (webp_pipe)", /^fmt\/(566|567|568)( |$)/];
 	untouched     = true;
 	metaProvider = ["image", "webpinfo"];
 }

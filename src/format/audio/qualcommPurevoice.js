@@ -5,6 +5,6 @@ export class qualcommPurevoice extends Format
 	name         = "Qualcomm Purevoice Audio";
 	website      = "http://fileformats.archiveteam.org/wiki/Qualcomm_QCP";
 	ext          = [".qcp"];
-	magic        = ["QualComm PureVoice", "RIFF Datei: unbekannter Typ 'QLCM'", /^fmt\/962( |$)/];
+	magic        = ["QualComm PureVoice", "RIFF Datei: unbekannter Typ 'QLCM'", "QCP (qcp)", /^fmt\/962( |$)/];
 	converters   = ["PVConverter"];
 }

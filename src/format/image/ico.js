@@ -5,7 +5,7 @@ export class ico extends Format
 	name       = "Microsoft Windows Icon File";
 	website    = "http://fileformats.archiveteam.org/wiki/ICO";
 	ext        = [".ico"];
-	magic      = [/^Windows Icon$/, /^Windows Icon \(even big\)$/, "MS Windows icon resource", "Icon File Format", "image/vnd.microsoft.icon", /^x-fmt\/418( |$)/];
+	magic      = [/^Windows Icon$/, /^Windows Icon \(even big\)$/, "MS Windows icon resource", "Icon File Format", "image/vnd.microsoft.icon", "Microsoft Windows ICO (ico)", /^x-fmt\/418( |$)/];
 	idMeta     = ({macFileType}) => macFileType==="ICO ";
 	trustMagic = true;
 

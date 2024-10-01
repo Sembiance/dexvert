@@ -9,7 +9,7 @@ export class gif extends Format
 	mimeType     = "image/gif";
 	magic        = [
 		// generic GIF
-		"GIF image data", "GIF animated bitmap", "image/gif", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, /^fmt\/(3|4)( |$)/,
+		"GIF image data", "GIF animated bitmap", "image/gif", "CompuServe Graphics Interchange Format (GIF) (gif)", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, /^fmt\/(3|4)( |$)/,
 
 		// app specific
 		"Mac PageMill's GIF bitmap (MacBinary)", "Fractint saved bitmap", "Fractint Continuous Potential Image"

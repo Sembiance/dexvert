@@ -5,7 +5,7 @@ export class wavPack extends Format
 	name         = "WavPack";
 	website      = "http://fileformats.archiveteam.org/wiki/WavPack";
 	ext          = [".wv", ".wvc"];
-	magic        = ["WavPack Lossless Audio", "WavPack compressed audio correction data", "WavPack compressed audio", "audio/x-wavpack"];
+	magic        = ["WavPack Lossless Audio", "WavPack compressed audio correction data", "WavPack compressed audio", "audio/x-wavpack", "WavPack (wv)"];
 	metaProvider = ["soxi"];
 	converters   = ["sox"];
 }

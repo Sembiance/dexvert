@@ -1,30 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* cmdTotal launches explorer.exe and that sometimes keeps running after cmdTotal exits, causing things to get backed up
-  killChildren didn't work, and attempting to kill the specific launched explorer.exe after wine runs the program didn't work either
-  Just added tocde to kill the specific explorer on a timer, to see if that fixes it.
-  If that doesn't, add an 'alsoKill' setting for wineData and use killall on: "C:\\windows\\system32\\explorer.exe"
-
-* Try latest magika model release: https://github.com/google/magika/tree/main/assets/models/standard_v2_1
-  See if I already have legacy code for it or not. Ensure it runs in CPU mode, and probably as a webserver I can send reqs to
-  Then run it against all samples using my util script
-  Then file bugs for misdirections 
-
-* Try adding ffprobeID 'detect' program:
-  ffprobe -v quiet -show_entries format=format_name,format_long_name -of default=noprint_wrappers=1:nokey=1 -analyzeduration 2000000 dragon.ppm
-  After, run: cd util && dra checkDetector.js --program=ffprobeID --format=image/p   (then later, --format=all)
-
-* Try adding puremagic 'detect' program: https://github.com/cdgriffith/puremagic
-  After, run: cd util && dra checkDetector.js --program=puremagic --format=image/p   (then later, --format=all)  
 
 * See if these would be useful to adopt for Filemaker files: https://github.com/evanmiller/fmptools
-
-* Once tgif fixed on gentoo (https://bugs.gentoo.org/940172), see if these can be converted with it:
-  http://dev.discmaster2.textfiles.com/view/9411/MACPEOPLE-2003-07-15.ISO.7z/MACPEOPLE-2003-07-15.ISO/%E9%80%A3%E8%BC%89%E3%83%87%E3%83%BC%E3%82%BF/Load%20Test_PowerBook%20G4/linux-wlan-ng-0.2.1-pre5.tar.gz/linux-wlan-ng-0.2.1-pre5.tar/linux-wlan-ng-0.2.1-pre5/doc/impnotes/l8s_uses.obj
-  http://dev.discmaster2.textfiles.com/view/9411/MACPEOPLE-2003-07-15.ISO.7z/MACPEOPLE-2003-07-15.ISO/%E9%80%A3%E8%BC%89%E3%83%87%E3%83%BC%E3%82%BF/Load%20Test_PowerBook%20G4/linux-wlan-ng-0.2.1-pre5.tar.gz/linux-wlan-ng-0.2.1-pre5.tar/linux-wlan-ng-0.2.1-pre5/doc/impnotes/structptr.obj
-  https://dev.discmaster2.textfiles.com/view/2029/Amiga_Dream_45.iso/Linux/Xwindow/applications/tgif/tgif-2.16-p12.tar.gz/tgif-2.16-p12.tar/tgif-2.16-p12/keys.obj
-  If so, add to dexdrones and reprocess these items: 8928 9411
 
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
@@ -114,6 +92,14 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Consider adding other detectors:
+  - Try latest magika model release: https://github.com/google/magika/tree/main/assets/models/standard_v2_1
+	See if I already have legacy code for it or not. Ensure it runs in CPU mode, and probably as a webserver I can send reqs to
+	Then run it against all samples using my util script
+	Then file bugs for misdirections 
+  - Try adding puremagic 'detect' program: https://github.com/cdgriffith/puremagic
+	After, run: cd util && dra checkDetector.js --program=puremagic --format=image/p   (then later, --format=all)  
+
 * Might be fun to detect MacOS kalideoscope themes and grab the individual images and render some sort of 'preview' of it: http://discmaster.textfiles.com/search?q=%22Minimum+Kaleidoscope+version%22&qfields=content&family=text&dedup=dedup
   If I name the preview something like kalideoscope_preview_dexvert.png then I can find them more easily
 

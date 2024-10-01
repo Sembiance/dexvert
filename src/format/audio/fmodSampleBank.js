@@ -5,6 +5,6 @@ export class fmodSampleBank extends Format
 	name       = "FMOD Sample Bank";
 	website    = "http://fileformats.archiveteam.org/wiki/FMOD_Sample_Bank";
 	ext        = [".fsb"];
-	magic      = ["FMOD Sample Bank format"];
+	magic      = ["FMOD Sample Bank format", "FMOD Sample Bank (fsb)"];
 	converters = ["vgmstream[extractAll]", "zxtune123"];
 }

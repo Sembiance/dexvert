@@ -7,7 +7,7 @@ export class xb extends Format
 	ext            = [".xb"];
 	forbidExtMatch = true;
 	mimeType       = "image/x-xbin";
-	magic          = ["XBIN image", /^fmt\/1612( |$)/];
+	magic          = ["XBIN image", "eXtended BINary text (XBIN) (xbin)", /^fmt\/1612( |$)/];
 	metaProvider   = ["ansiloveInfo"];
 	converters     = ["ansilove[format:xb]", "deark[module:xbin]", `abydosconvert[format:${this.mimeType}]`];
 }

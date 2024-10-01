@@ -30,6 +30,7 @@ export class pict extends Format
 		r.push(
 			"deark[module:pict][mac][recombine]",
 			"iio2png",
+			"ffmpeg[format:qdraw_pipe][outType:png]",
 			"recoil2png"
 		);
 

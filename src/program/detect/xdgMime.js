@@ -29,8 +29,9 @@ export class xdgMime extends Program
 	{
 		await fileUtil.unlink(r.xdgMimeTmpFilePath);
 
-		const mimeType = r.stdout.trim() || "";
 		r.meta.detections = [];
+
+		const mimeType = r.stdout.trim() || "";
 		if(mimeType?.length && !["application/octet-stream", "text/plain"].includes(mimeType))
 			r.meta.detections.push(Detection.create({value : mimeType, from : "xdgMime", file : r.f.input}));
 	};

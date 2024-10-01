@@ -6,7 +6,7 @@ export class argonautVideoSequence extends Format
 	website        = "https://wiki.multimedia.cx/index.php/AVS";
 	ext            = [".avs"];
 	forbidExtMatch = true;
-	magic          = ["Argonaut Video Sequence video"];
+	magic          = ["Argonaut Video Sequence video", "Argonaut Games Creature Shock (avs)"];
 	metaProvider   = ["mplayer"];
 	converters     = ["ffmpeg"];
 }

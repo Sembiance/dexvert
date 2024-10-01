@@ -92,6 +92,10 @@ const FORMAT_OS_HINT =
 		"MACPEOPLE-2001-06-01.ISO"            : "macintoshjp",
 		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp"
 	},
+	"archive/appleDiskCopy" :
+	{
+		"Sidescape1.00J.image" : "macintoshjp"
+	},
 	"archive/sit" :
 	{
 		"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp",

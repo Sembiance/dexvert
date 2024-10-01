@@ -20,7 +20,7 @@
 
 * See if these would be useful to adopt for Filemaker files: https://github.com/evanmiller/fmptools
 
-* Once tgif fixed on gentoo, see if these can be converted with it:
+* Once tgif fixed on gentoo (https://bugs.gentoo.org/940172), see if these can be converted with it:
   http://dev.discmaster2.textfiles.com/view/9411/MACPEOPLE-2003-07-15.ISO.7z/MACPEOPLE-2003-07-15.ISO/%E9%80%A3%E8%BC%89%E3%83%87%E3%83%BC%E3%82%BF/Load%20Test_PowerBook%20G4/linux-wlan-ng-0.2.1-pre5.tar.gz/linux-wlan-ng-0.2.1-pre5.tar/linux-wlan-ng-0.2.1-pre5/doc/impnotes/l8s_uses.obj
   http://dev.discmaster2.textfiles.com/view/9411/MACPEOPLE-2003-07-15.ISO.7z/MACPEOPLE-2003-07-15.ISO/%E9%80%A3%E8%BC%89%E3%83%87%E3%83%BC%E3%82%BF/Load%20Test_PowerBook%20G4/linux-wlan-ng-0.2.1-pre5.tar.gz/linux-wlan-ng-0.2.1-pre5.tar/linux-wlan-ng-0.2.1-pre5/doc/impnotes/structptr.obj
   https://dev.discmaster2.textfiles.com/view/2029/Amiga_Dream_45.iso/Linux/Xwindow/applications/tgif/tgif-2.16-p12.tar.gz/tgif-2.16-p12.tar/tgif-2.16-p12/keys.obj

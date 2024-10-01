@@ -65,7 +65,7 @@ export class FileSet
 		const absolutePath = file instanceof DexFile ? file.absolute : file;
 		(this.files[type] || []).filterInPlace(v => v.absolute!==absolutePath);
 		if(unlink)
-			await fileUtil.unlink(absolutePath, {recursive : true});
+			await fileUtil.unlink(absolutePath, {recursive : !!file.isDirectory});
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it
@@ -108,12 +108,25 @@ export class FileSet
 		if(relativeFrom)
 			newFileSet.changeRoot(relativeFrom);
 
-		const missingFilePaths = [];
-		await (type ? (this.files[type] || []) : this.all).parallelMap(async file =>
+		const filesToRsync = (type ? (this.files[type] || []) : this.all);
+		
+		// first we need to make sure target directory paths exist. We utilize fileUtil.mkdir with 'force' option set to ensure that if there are any parent 'files' that are now directories, that they are removed so the dir can be created
+		const targetDirPaths = [];
+		for(const file of filesToRsync)
 		{
 			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
 			if(fileRel.includes("/"))
-				await Deno.mkdir(path.join(targetRoot, path.dirname(fileRel)), {recursive : true});
+				targetDirPaths.pushUnique(path.join(targetRoot, path.dirname(fileRel)));
+		}
+		targetDirPaths.sortMulti();
+		for(const targetDirPath of targetDirPaths)
+			await fileUtil.mkdir(targetDirPath, {recursive : true, force : true});
+
+		// now safe to rsync over all our files
+		const missingFilePaths = [];
+		await filesToRsync.parallelMap(async file =>
+		{
+			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
 			const targetPath = path.join(targetRoot, file.isDirectory ? path.dirname(fileRel) : fileRel);
 			await runUtil.run("rsync", ["-sa", path.join(relativeFrom || file.root, fileRel), targetPath]);
 

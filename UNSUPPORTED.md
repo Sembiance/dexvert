@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,062)
+# Unsupported File Formats (2,064)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -811,7 +811,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,194)
+## Other (1,196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1437,6 +1437,7 @@ Family/Format | Name | Extensions | Notes
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?formatid=masiMusicDriver) | MASI Music Driver | .mus | 
 [other/masterCookCookbookFile](https://discmaster.textfiles.com/search?formatid=masterCookCookbookFile) | MasterCook Cookbook file | .mcf | 
 [other/mathCadDocument](https://discmaster.textfiles.com/search?formatid=mathCadDocument) | MathCad Document | .mcd | 
+[other/maxonCinema4DPreferences](https://discmaster.textfiles.com/search?formatid=maxonCinema4DPreferences) | Maxon Cinema 4D Preferences | .prf | 
 [other/maxonResourceCreationData](https://discmaster.textfiles.com/search?formatid=maxonResourceCreationData) | Maxon Resource Creation Tool Data | .rct | 
 [other/maxonCADHatchPatterns](https://discmaster.textfiles.com/search?formatid=maxonCADHatchPatterns) | MaxonCAD hatch patterns |  | 
 [other/maxonCADLibrary](https://discmaster.textfiles.com/search?formatid=maxonCADLibrary) | MaxonCAD Library | .mclib | 
@@ -1623,6 +1624,7 @@ Family/Format | Name | Extensions | Notes
 [other/pgpKeyRing](https://discmaster.textfiles.com/search?formatid=pgpKeyRing) | PGP Key Ring | .key .pgp | 
 [other/pgpRSAEncryptedSessionKey](https://discmaster.textfiles.com/search?formatid=pgpRSAEncryptedSessionKey) | PGP RSA encrypted session key | .pgp | 
 [other/photoImpressionsAlbum](https://discmaster.textfiles.com/search?formatid=photoImpressionsAlbum) | PhotoImpressions Album | .abm | 
+[other/photoLineBrowseIndex](https://discmaster.textfiles.com/search?formatid=photoLineBrowseIndex) | PhotoLine browse index | .plb | 
 [other/photoLine32Document](https://discmaster.textfiles.com/search?formatid=photoLine32Document) | PhotoLine32 Document | .pld | 
 [other/photoStylerColorsDefinition](https://discmaster.textfiles.com/search?formatid=photoStylerColorsDefinition) | PhotoStyler Colors definition | .clr | 
 [other/pixelBenderBytecode](https://discmaster.textfiles.com/search?formatid=pixelBenderBytecode) | Pixel Bender bytecode |  | 

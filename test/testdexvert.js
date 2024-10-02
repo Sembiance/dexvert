@@ -210,6 +210,7 @@ const FLEX_SIZE_FORMATS =
 		swfEXE : 75,
 
 		// different generation per host/version
+		"swish:.swi"          : 0.1,
 		"amosMemoryBank:.mp3" : 1,
 		"iso:.mp3"            : 1,
 		"tnef:.pdf"           : 40,

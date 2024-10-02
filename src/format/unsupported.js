@@ -1053,7 +1053,6 @@ export default
 		ailMidiDriver                      : {name : "Audio Interface Library 3 Music/MIDI driver", ext : [".mdi"], magic : ["Audio Interface Library 3 Music/MIDI driver"]},
 		ailDigitalAudioDriver              : {name : "Audio Interface Library 3 Digital audio driver", ext : [".dig"], magic : ["Audio Interface Library 3 Digital audio driver"]},
 		alchemyMindworksDriver             : {name : "Alchemy Mindworks Driver", ext : [".drv", ".pdr"], magic : ["Alchemy Mindworks video Driver", "Alchemy Mindworks Printer Driver"]},
-		allwaysPrinterDriver               : {name : "Allways Printer Driver", ext : [".apc", ".apd", ".apf"], magic : ["Allways Printer driver"]},
 		autoCADDOSRealModeADIDriver        : {name : "Autocad DOS Real Mode ADI Driver", ext : [".exp", ".ex%"], magic : ["Autocad DOS real mode ADI driver"]},
 		borlandDriver                      : {name : "Borland Graphics Interface Driver", ext : [".bgi"], magic : ["Borland Graphics Interface driver", "Borland device BGI", "Borland Graphics printer driver", "Borland BGI Treiber", "TurboC BGI file"]},
 		broderbundAudioDriver              : {name : "Broderbund audio Driver", ext : [".drv"], magic : ["Broderbund audio Driver"]},

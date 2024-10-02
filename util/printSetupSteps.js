@@ -50,6 +50,9 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		// needed for fontforge, see package.env/fontforge
 		"sys-devel/clang",
 
+		// needed for inkscape
+		"dev-python/tinycss2",
+
 		// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
 		"dev-lang/perl"
 	].join(" ")}`

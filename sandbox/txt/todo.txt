@@ -1,8 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
-* See if these would be useful to adopt for Filemaker files: https://github.com/evanmiller/fmptools
+* "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
+  Setting exclusive = "wuimg"; didn't help. May have to due with virtualX, I submitted a bug to remove that: https://codeberg.org/kaleido/wuimg/issues/3
 
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
@@ -21,6 +21,7 @@
 /---------------\
 | High Priority |
 \---------------/
+* See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools
 
 
 /-----------------\

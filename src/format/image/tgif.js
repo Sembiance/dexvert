@@ -6,6 +6,6 @@ export class tgif extends Format
 	website        = "https://bourbon.usc.edu/tgif/faq/format.html";
 	ext            = [".obj"];
 	forbidExtMatch = true;
-	magic          = [/^Tgif file/, /^fmt\/1588( |$)/];
+	magic          = [/^Tgif file/, "application/x-tgif", /^fmt\/1588( |$)/];
 	converters     = ["tgif"];
 }

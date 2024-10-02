@@ -1262,6 +1262,7 @@ export default
 		checksAndBalances                        : {name : "Checks and Balances data", magic : ["Checks and Balances data"]},
 		checkItProData                           : {name : "CheckIt Pro Data", ext : [".ckd"], magic : ["CheckIt Pro Data"]},
 		chem3DFormat                             : {name : "Chem3D Format", ext : [".c3"], magic : ["Chem3D Format"]},
+		chemDrawTemplate                         : {name : "ChemDraw Template", ext : [".ctr"], magic : ["ChemDraw Template"], weakMagic : true},
 		chemViewAnimationData                    : {name : "Chemview Animation Data", ext : [".d"], magic : ["CHEMVIEW animation Data"]},
 		cineMorphProject                         : {name : "CineMorph Project", ext : [".project"], magic : ["CineMorph Project"], weakMagic : true},
 		clariSSAPreferences                      : {name : "ClariSSA preferences", magic : ["ClariSSA preferences"]},

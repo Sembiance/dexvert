@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
@@ -13,7 +14,8 @@ export class ffdec extends Program
 		"-exportTimeout", "120",	// Limit export time to 2 minutes. Any longer is likely due to tons of 'dynamic' shapes or large individual frames, don't need to extract all that stuff
 		"-select", "1-500",
 		"-export", "script,image,shape,morphshape,movie,font,frame,button,sound,binaryData,text", r.outDir(), r.inFile()];
-	postExec = async r =>
+	runOptions = ({timeout : xu.MINUTE*5, killChildren : true});
+	postExec   = async r =>
 	{
 		// we manually join our frames before Program encounters our output files
 		const framesDirPath = path.join(r.outDir({absolute : true}), "frames");

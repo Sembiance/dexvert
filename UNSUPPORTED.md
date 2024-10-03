@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,063)
+# Unsupported File Formats (2,069)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -671,7 +671,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (133)
+## Music (134)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -795,6 +795,7 @@ Family/Format | Name | Extensions | Notes
 [music/sweetSixteenSong](https://discmaster.textfiles.com/search?formatid=sweetSixteenSong) | Sweet Sixteen Song | .sng | 
 [music/synderSNG](https://discmaster.textfiles.com/search?formatid=synderSNG) | Synder SNG-Player Module | .sng | [5 sample files](https://sembiance.com/fileFormatSamples/music/synderSNG/) - An old 32bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install: https://soft.lafibre.info/
 [music/synderTrackerModule](https://discmaster.textfiles.com/search?formatid=synderTrackerModule) | Synder Tracker Module | .sng | [2 sample files](https://sembiance.com/fileFormatSamples/music/synderTrackerModule/)
+[music/synthPackModule](https://discmaster.textfiles.com/search?formatid=synthPackModule) | Synth Pack module | .osp | 
 [music/tss](https://discmaster.textfiles.com/search?formatid=tss) | T'SoundSystem Source Module | .tss | [4 sample files](https://sembiance.com/fileFormatSamples/music/tss/)
 [music/technoSoundTurbo2Track](https://discmaster.textfiles.com/search?formatid=technoSoundTurbo2Track) | TechnoSound Turbo 2 Track | .track | [1 sample file](https://sembiance.com/fileFormatSamples/music/technoSoundTurbo2Track/)
 [music/t0ast](https://discmaster.textfiles.com/search?formatid=t0ast) | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https://sembiance.com/fileFormatSamples/music/t0ast/)
@@ -810,7 +811,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,196)
+## Other (1,199)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -884,7 +885,6 @@ Family/Format | Name | Extensions | Notes
 [other/aliceThePersonalPascalProgram](https://discmaster.textfiles.com/search?formatid=aliceThePersonalPascalProgram) | ALICE: The Personal Pascal Program | .ap | 
 [other/alienTrilogyMap](https://discmaster.textfiles.com/search?formatid=alienTrilogyMap) | Alien Trilogy Map | .map | 
 [other/alienTrilogyTextures](https://discmaster.textfiles.com/search?formatid=alienTrilogyTextures) | Alien Trilogytextures | .b16 .bin .bnd .16 | 
-[other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?formatid=allwaysPrinterDriver) | Allways Printer Driver | .apc .apd .apf | 
 [other/alphaFourFieldRules](https://discmaster.textfiles.com/search?formatid=alphaFourFieldRules) | Alpha Four field rules | .rln | 
 [other/alphaFourHelp](https://discmaster.textfiles.com/search?formatid=alphaFourHelp) | Alpha Four Help | .hlp | 
 [other/alphaFourIndexDefinition](https://discmaster.textfiles.com/search?formatid=alphaFourIndexDefinition) | Alpha Four Index Definition | .idn | 
@@ -961,6 +961,7 @@ Family/Format | Name | Extensions | Notes
 [other/autodeskExternalMessage](https://discmaster.textfiles.com/search?formatid=autodeskExternalMessage) | Autodesk External Message | .xmx | 
 [other/aviraAntiVirVirusDatabase](https://discmaster.textfiles.com/search?formatid=aviraAntiVirVirusDatabase) | Avira AntiVir Virus Database | .vdf | 
 [other/avsVideoEditorProject](https://discmaster.textfiles.com/search?formatid=avsVideoEditorProject) | AVS Video Editor Project | .vep | 
+[other/aweGamesGameDataContainer](https://discmaster.textfiles.com/search?formatid=aweGamesGameDataContainer) | AWE Games game data container | .omt | 
 [other/axialisProScreensaverProducerProject](https://discmaster.textfiles.com/search?formatid=axialisProScreensaverProducerProject) | Axialis Professional Screensaver Producer project | .ssp | 
 [other/axisGameEnhancementModules](https://discmaster.textfiles.com/search?formatid=axisGameEnhancementModules) | Axis Game Enhancement Modules | .fil | 
 [other/babbleData](https://discmaster.textfiles.com/search?formatid=babbleData) | Babble! Data | .bab | 
@@ -1054,6 +1055,7 @@ Family/Format | Name | Extensions | Notes
 [other/checkItProData](https://discmaster.textfiles.com/search?formatid=checkItProData) | CheckIt Pro Data | .ckd | 
 [other/checksAndBalances](https://discmaster.textfiles.com/search?formatid=checksAndBalances) | Checks and Balances data |  | 
 [other/chem3DFormat](https://discmaster.textfiles.com/search?formatid=chem3DFormat) | Chem3D Format | .c3 | 
+[other/chemDrawTemplate](https://discmaster.textfiles.com/search?formatid=chemDrawTemplate) | ChemDraw Template | .ctr | 
 [other/chemViewAnimationData](https://discmaster.textfiles.com/search?formatid=chemViewAnimationData) | Chemview Animation Data | .d | 
 [other/chessAssistant](https://discmaster.textfiles.com/search?formatid=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 [other/cineMorphProject](https://discmaster.textfiles.com/search?formatid=cineMorphProject) | CineMorph Project | .project | 
@@ -1436,7 +1438,9 @@ Family/Format | Name | Extensions | Notes
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?formatid=masiMusicDriver) | MASI Music Driver | .mus | 
 [other/masterCookCookbookFile](https://discmaster.textfiles.com/search?formatid=masterCookCookbookFile) | MasterCook Cookbook file | .mcf | 
 [other/mathCadDocument](https://discmaster.textfiles.com/search?formatid=mathCadDocument) | MathCad Document | .mcd | 
+[other/maxonCinema4DCOFFEEBinary](https://discmaster.textfiles.com/search?formatid=maxonCinema4DCOFFEEBinary) | Maxon Cinema 4D COFFEE Binary | .cob | 
 [other/maxonCinema4DPreferences](https://discmaster.textfiles.com/search?formatid=maxonCinema4DPreferences) | Maxon Cinema 4D Preferences | .prf | 
+[other/maxonCinema4DShader](https://discmaster.textfiles.com/search?formatid=maxonCinema4DShader) | Maxon Cinema 4D Shader | .shc .shv | 
 [other/maxonResourceCreationData](https://discmaster.textfiles.com/search?formatid=maxonResourceCreationData) | Maxon Resource Creation Tool Data | .rct | 
 [other/maxonCADHatchPatterns](https://discmaster.textfiles.com/search?formatid=maxonCADHatchPatterns) | MaxonCAD hatch patterns |  | 
 [other/maxonCADLibrary](https://discmaster.textfiles.com/search?formatid=maxonCADLibrary) | MaxonCAD Library | .mclib | 
@@ -2012,7 +2016,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (54)
+## Poly (55)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -2035,6 +2039,7 @@ Family/Format | Name | Extensions | Notes
 [poly/fastRayScene](https://discmaster.textfiles.com/search?formatid=fastRayScene) | FastRay scene |  | 
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?formatid=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
 [poly/ghoulEngineModel](https://discmaster.textfiles.com/search?formatid=ghoulEngineModel) | GHOUL Engine model | .ghb | 
+[poly/granny3DModel](https://discmaster.textfiles.com/search?formatid=granny3DModel) | [Granny 3D Model](http://fileformats.archiveteam.org/wiki/COLLADA) | .gr2 | I tried using https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x but it didn't work for any of the old GR2 models I gave it. Found another imported but it says it only works for Metin2 game models
 [poly/hardTruck3DModel](https://discmaster.textfiles.com/search?formatid=hardTruck3DModel) | Hard Truck 3D model | .b3d | 
 [poly/ibmCAD3XDrawing](https://discmaster.textfiles.com/search?formatid=ibmCAD3XDrawing) | IBM CAD/3X drawing | .dwg | 
 [poly/infiniDScene](https://discmaster.textfiles.com/search?formatid=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
@@ -2072,7 +2077,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (50)
+## Video (51)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2120,6 +2125,7 @@ Family/Format | Name | Extensions | Notes
 [video/completeAnimatorFilm](https://discmaster.textfiles.com/search?formatid=completeAnimatorFilm) | The Complete Animator Film | .tca | 
 [video/theDirector](https://discmaster.textfiles.com/search?formatid=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?formatid=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
+[video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?formatid=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 
 [video/vis5DDatasetObject](https://discmaster.textfiles.com/search?formatid=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
 [video/vpx1VideoPackage](https://discmaster.textfiles.com/search?formatid=vpx1VideoPackage) | VPX1 Video Package | .vpx | 
 [video/xbvVideo](https://discmaster.textfiles.com/search?formatid=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php?title=XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)

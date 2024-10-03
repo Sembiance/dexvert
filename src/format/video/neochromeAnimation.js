@@ -8,6 +8,7 @@ export class neochromeAnimation extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/NEOchrome_Animation";
 	ext            = [".ani"];
 	forbidExtMatch = true;
+	idCheck        = inputFile => inputFile.size>48;
 	magic          = ["Atari NEOchrome animation"];
 	meta           = async inputFile =>
 	{

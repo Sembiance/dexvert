@@ -231,8 +231,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			{
 				if(Array.isArray(format.fileSize) || typeof format.fileSize==="number")
 				{
-					hasExpectedFileSize = true;
 					fileSizeMatch = Array.force(format.fileSize).includes(f.input.size);
+					if(fileSizeMatch)
+						hasExpectedFileSize = true;
 				}
 				else if(extMatch)
 				{

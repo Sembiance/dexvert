@@ -1,6 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Identify doesn't appear to enforce that fileSize is matched. Probably got lost in the re-factor. Should I enforce this?
+  Would certainly need to run the whole test suite again
+
 * "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
   Setting exclusive = "wuimg"; didn't help. May have to due with virtualX, I submitted a bug to remove that: https://codeberg.org/kaleido/wuimg/issues/3
 

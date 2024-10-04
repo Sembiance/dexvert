@@ -26,6 +26,9 @@
 /---------------\
 | High Priority |
 \---------------/
+* Could improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
+  Some things can't be handled this way though, such as recoil2png and imagemagic convert font handling, so this sort of change may require a bunch of reverse engineering work to properly convert old fonts into new fonts (rather than just getting preview images)
+
 * See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools
 
 

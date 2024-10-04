@@ -30,8 +30,10 @@ const EXCLUDED_SAMPLE_FORMATS =
 
 	// names have to be generic/specific, so can't have more files in the same samples directory
 	"archive/installShieldCAB",
+	"font/riscOSFont",
 	"other/desktopDB",
 	"other/desktopDF",
+	"other/riscOSFontMetrics",
 	"text/debBuildControl",
 	"text/flightSimToolkitAirplaneParameters",
 	"text/lingoScript",

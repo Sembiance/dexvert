@@ -429,7 +429,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (83)
+## Font (82)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -494,7 +494,6 @@ Family/Format | Name | Extensions | Notes
 [font/professionalDrawFont](https://discmaster.textfiles.com/search?formatid=professionalDrawFont) | Professional Draw Font | .pdfont | 
 [font/psionFont](https://discmaster.textfiles.com/search?formatid=psionFont) | Psion Font | .fon | 
 [font/ripTermFont](https://discmaster.textfiles.com/search?formatid=ripTermFont) | RIPterm Font | .fnt | 
-[font/riscOSFontData](https://discmaster.textfiles.com/search?formatid=riscOSFontData) | RISC OS Outline Font Data | .outlines .fnt | 
 [font/signumFont](https://discmaster.textfiles.com/search?formatid=signumFont) | Signum Font | .e24 | 
 [font/speedo](https://discmaster.textfiles.com/search?formatid=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 [font/telepaintFont](https://discmaster.textfiles.com/search?formatid=telepaintFont) | Telepaint Font | .fnt | 
@@ -672,7 +671,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (134)
+## Music (133)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -733,7 +732,6 @@ Family/Format | Name | Extensions | Notes
 [music/klystrack](https://discmaster.textfiles.com/search?formatid=klystrack) | [Klystrack Module](http://fileformats.archiveteam.org/wiki/Klystrack_module) | .kt | [6 sample files](https://sembiance.com/fileFormatSamples/music/klystrack/)
 [music/korgSong](https://discmaster.textfiles.com/search?formatid=korgSong) | Korg Song | .sng | 
 [music/koustrackerModule](https://discmaster.textfiles.com/search?formatid=koustrackerModule) | Koustracker Module | .sok | 
-[music/legoRacersTuneMusic](https://discmaster.textfiles.com/search?formatid=legoRacersTuneMusic) | Lego Racers Tune/music data | .tun | 
 [music/logicSong](https://discmaster.textfiles.com/search?formatid=logicSong) | Logic Song | .lso | 
 [music/lucasfilmGamesMIDIMusic](https://discmaster.textfiles.com/search?formatid=lucasfilmGamesMIDIMusic) | Lucasfilm Games MIDI music | .gmd | 
 [music/mMusic](https://discmaster.textfiles.com/search?formatid=mMusic) | M music |  | 
@@ -812,7 +810,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,201)
+## Other (1,202)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1686,6 +1684,7 @@ Family/Format | Name | Extensions | Notes
 [other/pureCProjectDB](https://discmaster.textfiles.com/search?formatid=pureCProjectDB) | Pure C Project DB | .pdb | 
 [other/pureBasicResidentData](https://discmaster.textfiles.com/search?formatid=pureBasicResidentData) | PureBasic resident data |  | 
 [other/puzzleBusterPuzzle](https://discmaster.textfiles.com/search?formatid=puzzleBusterPuzzle) | Puzzle Buster Puzzle | .puz | 
+[other/qbxMSBasicKeyboardDefinition](https://discmaster.textfiles.com/search?formatid=qbxMSBasicKeyboardDefinition) | QBX (MS Basic 7.x) Editor keyboard definition | .key | 
 [other/qlPluginROM](https://discmaster.textfiles.com/search?formatid=qlPluginROM) | QL Plugin-ROM |  | 
 [other/qtMessage](https://discmaster.textfiles.com/search?formatid=qtMessage) | Qt Message | .qm | 
 [other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?formatid=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
@@ -2080,7 +2079,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (51)
+## Video (52)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2091,6 +2090,7 @@ Family/Format | Name | Extensions | Notes
 [video/animationMagicAnimation](https://discmaster.textfiles.com/search?formatid=animationMagicAnimation) | Animation Magic video/Animation | .ani | 
 [video/animationWorks](https://discmaster.textfiles.com/search?formatid=animationWorks) | Animation Works Movie | .awm | [5 sample files](https://sembiance.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
 [video/astoundAnimation](https://discmaster.textfiles.com/search?formatid=astoundAnimation) | Astound Animation | .awa | 
+[video/avssVideo](https://discmaster.textfiles.com/search?formatid=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
 [video/iffSSA](https://discmaster.textfiles.com/search?formatid=iffSSA) | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [7 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
 [video/comancheVideoDataArchive](https://discmaster.textfiles.com/search?formatid=comancheVideoDataArchive) | Comanche Video Data archive | .kdv | 
 [video/delphineCIN](https://discmaster.textfiles.com/search?formatid=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files

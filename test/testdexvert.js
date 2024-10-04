@@ -476,10 +476,12 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
 	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", "pogNames"],
+	[/font\/riscOSFont\/intmetric.*$/i, "other", "riscOSFontMetrics"],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],
 	[/music\/tfmx\/smpl\..+$/i, true, true],
-	[/other\/installShieldHDR\/.+\.(cab|hdr)/i, "archive", true]
+	[/other\/installShieldHDR\/.+\.(cab|hdr)/i, "archive", true],
+	[/other\/riscOSFontMetrics\/outline.*$/i, "font", "riscOSFont"]
 ];
 
 // These are sensitive files that sometimes convert, sometimes don't

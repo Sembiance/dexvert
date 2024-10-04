@@ -27,6 +27,7 @@ export const cup386 =
 		cruncherPacked              : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
 		exeLITEPacked               : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable"]},
 		fourKZIPPacked              : {name : "4kZIP Packed", magic : ["Packer: 4kZIP[by pascal //Digital Nightmare]"]},
+		jamPacked                   : {name : "JAM Packed", magic : ["JAM compressed 16bit DOS executable"]},
 		lglzPacked                  : {name : "LGLZ Packed", magic : ["Packer: LGLZ", "16bit DOS EXE LGLZ compressed"]},
 		packerJESCOREPacked         : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]"]},
 		packerPacked                : {name : "Packer Packed", magic : ["Packer: Packer"]},

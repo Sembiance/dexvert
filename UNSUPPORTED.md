@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,069)
+# Unsupported File Formats (2,072)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -429,12 +429,13 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (82)
+## Font (83)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
 [font/amigaOSOutlineFont](https://discmaster.textfiles.com/search?formatid=amigaOSOutlineFont) | AmigaOS Outline Font | .ofnt .font | 
 [font/amiWriteFont](https://discmaster.textfiles.com/search?formatid=amiWriteFont) | AmiWrite Font |  | 
+[font/angelCodeBitmapFont](https://discmaster.textfiles.com/search?formatid=angelCodeBitmapFont) | AngelCode Bitmap Font | .fnt | 
 [font/appleIIgsFont](https://discmaster.textfiles.com/search?formatid=appleIIgsFont) | Apple IIgs Font |  | 
 [font/appleIIIFont](https://discmaster.textfiles.com/search?formatid=appleIIIFont) | Apple III Font |  | 
 [font/averyFont](https://discmaster.textfiles.com/search?formatid=averyFont) | Avery Font | .ff1 | 
@@ -811,7 +812,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,199)
+## Other (1,201)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -885,6 +886,7 @@ Family/Format | Name | Extensions | Notes
 [other/aliceThePersonalPascalProgram](https://discmaster.textfiles.com/search?formatid=aliceThePersonalPascalProgram) | ALICE: The Personal Pascal Program | .ap | 
 [other/alienTrilogyMap](https://discmaster.textfiles.com/search?formatid=alienTrilogyMap) | Alien Trilogy Map | .map | 
 [other/alienTrilogyTextures](https://discmaster.textfiles.com/search?formatid=alienTrilogyTextures) | Alien Trilogytextures | .b16 .bin .bnd .16 | 
+[other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?formatid=allwaysPrinterDriver) | Allways Printer driver | .apc | 
 [other/alphaFourFieldRules](https://discmaster.textfiles.com/search?formatid=alphaFourFieldRules) | Alpha Four field rules | .rln | 
 [other/alphaFourHelp](https://discmaster.textfiles.com/search?formatid=alphaFourHelp) | Alpha Four Help | .hlp | 
 [other/alphaFourIndexDefinition](https://discmaster.textfiles.com/search?formatid=alphaFourIndexDefinition) | Alpha Four Index Definition | .idn | 
@@ -1049,6 +1051,7 @@ Family/Format | Name | Extensions | Notes
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?formatid=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
 [other/centralPointSoftwareLibrary](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareLibrary) | Central Point Software Library | .dlo | 
 [other/centurionDefenderOfRomeGameData](https://discmaster.textfiles.com/search?formatid=centurionDefenderOfRomeGameData) | Centurion: Defender of Rome game data | .dat .cat | 
+[other/chalkGameDataArchive](https://discmaster.textfiles.com/search?formatid=chalkGameDataArchive) | Chalk game data archive | .wgm | 
 [other/chaosToyUniversePalette](https://discmaster.textfiles.com/search?formatid=chaosToyUniversePalette) | CHAOS Toy Universe Palette | .frt | 
 [other/chaosultdGEMParameters](https://discmaster.textfiles.com/search?formatid=chaosultdGEMParameters) | CHAOSultdGEM Parameters | .chs | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 [other/characterTableLibrary](https://discmaster.textfiles.com/search?formatid=characterTableLibrary) | Character Table Library | .tlb | 

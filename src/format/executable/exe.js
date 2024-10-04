@@ -12,6 +12,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: Gentee Installer", "Installer: Eschalon Installer", "Installer: AOLSetup", "Installer: Pantaray QSetup", "Installer: STATICSUP", "Installer: O'Setup95", "Installer: Setup Factory", "Installer: Tarma Installer",
 	"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "Installer: CSDD's installer", "Installer: RNsetup",
 	"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer", "Installer: Ghost Installer",
+	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer",
 	
 	/^Installer: Wise Installer$/, /^NSIS$/
 ];

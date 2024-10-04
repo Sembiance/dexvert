@@ -1,11 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Identify doesn't appear to enforce that fileSize is matched. Probably got lost in the re-factor. Should I enforce this?
-  Would certainly need to run the whole test suite again
-
 * "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
   Setting exclusive = "wuimg"; didn't help. May have to due with virtualX, I submitted a bug to remove that: https://codeberg.org/kaleido/wuimg/issues/3
+
+* Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
+  Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
+  After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
+  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://dev.discmaster2.textfiles.com/admin/item?itemid=10456
 
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
@@ -260,6 +262,7 @@
   Due to the overhead with DOSBox, would want to use 'dosemu2' to run this directrly from the linux console: https://github.com/dosemu2/dosemu2
   I got it to install and compile, but the freedos (fdpp) linking wasn't correct yet and it failed to run IDARCH.EXE
 
+* There are several 'detected' installer 'magic' in the 'exe.js' format, I could look into each of these and write extractors for them
 
 /----------------\
 | Probably Never |

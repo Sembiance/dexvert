@@ -315,6 +315,7 @@ export default
 	{
 		amigaOSOutlineFont         : {name : "AmigaOS Outline Font", ext : [".ofnt", ".font"], magic : ["AmigaOS outline font", "IFF Outline Font"]},
 		amiWriteFont               : {name : "AmiWrite Font", magic : ["Ami Write printer font"]},
+		angelCodeBitmapFont        : {name : "AngelCode Bitmap Font", ext : [".fnt"], magic : ["AngelCode Bitmap Font"]},
 		appleIIgsFont              : {name : "Apple IIgs Font", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="FON"},
 		appleIIIFont               : {name : "Apple III Font", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="FNT"},
 		averyFont                  : {name : "Avery Font", ext : [".ff1"], magic : ["Avery Font"]},
@@ -664,6 +665,7 @@ export default
 		cavewarsDialog                        : {name : "Cavewars dialog", ext : [".fdg"], magic : ["Cavewars dialog"]},
 		cedarLakeSoftwareGameData             : {name : "Cedar Lake Software game data", ext : [".cl1"], magic : ["Cedar Lake Software game data"], weakMagic : true},
 		centurionDefenderOfRomeGameData       : {name : "Centurion: Defender of Rome game data", ext : [".dat", ".cat"], magic : ["Centurion: Defender of Rome game data"], weakMagic : true},
+		chalkGameDataArchive                  : {name : "Chalk game data archive", ext : [".wgm"], magic : ["Chalk game data archive"]},
 		chessAssistant                        : {name : "Chess Assistant File", ext : [".bic", ".bid", ".bim", ".bis", ".lib", ".bfi", ".dsc", ".ndx", ".bdy"], magic : ["Chess Assistant "]},
 		chessmasterClassicGamesLibrary        : {name : "The Chessmaster classic games library", ext : [".cml", ".dat"], magic : [/^The Chessmaster \d+ classic games library/]},
 		chessmasterOpeningBook                : {name : "The Chessmaster opening book", ext : [".dat"], magic : [/^The Chessmaster \d+ opening book/]},
@@ -1056,6 +1058,7 @@ export default
 		ailMidiDriver                      : {name : "Audio Interface Library 3 Music/MIDI driver", ext : [".mdi"], magic : ["Audio Interface Library 3 Music/MIDI driver"]},
 		ailDigitalAudioDriver              : {name : "Audio Interface Library 3 Digital audio driver", ext : [".dig"], magic : ["Audio Interface Library 3 Digital audio driver"]},
 		alchemyMindworksDriver             : {name : "Alchemy Mindworks Driver", ext : [".drv", ".pdr"], magic : ["Alchemy Mindworks video Driver", "Alchemy Mindworks Printer Driver"]},
+		allwaysPrinterDriver               : {name : "Allways Printer driver", ext : [".apc"], magic : ["Allways Printer driver"]},
 		autoCADDOSRealModeADIDriver        : {name : "Autocad DOS Real Mode ADI Driver", ext : [".exp", ".ex%"], magic : ["Autocad DOS real mode ADI driver"]},
 		borlandDriver                      : {name : "Borland Graphics Interface Driver", ext : [".bgi"], magic : ["Borland Graphics Interface driver", "Borland device BGI", "Borland Graphics printer driver", "Borland BGI Treiber", "TurboC BGI file"]},
 		broderbundAudioDriver              : {name : "Broderbund audio Driver", ext : [".drv"], magic : ["Broderbund audio Driver"]},

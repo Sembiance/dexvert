@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,072)
+# Unsupported File Formats (2,079)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -429,7 +429,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (82)
+## Font (83)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -441,6 +441,7 @@ Family/Format | Name | Extensions | Notes
 [font/averyFont](https://discmaster.textfiles.com/search?formatid=averyFont) | Avery Font | .ff1 | 
 [font/bannerManiaFont](https://discmaster.textfiles.com/search?formatid=bannerManiaFont) | Banner Mania Font | .fnt | [19 sample files](https://sembiance.com/fileFormatSamples/font/bannerManiaFont/)
 [font/bannerManiaBanner](https://discmaster.textfiles.com/search?formatid=bannerManiaBanner) | BannerMania banner | .brm | 
+[font/bitImagesFont](https://discmaster.textfiles.com/search?formatid=bitImagesFont) | BitImages Font | .fnt | 
 [font/bitmappedSignumFont](https://discmaster.textfiles.com/search?formatid=bitmappedSignumFont) | Bitmapped Signum! Font | .p24 .e24 .p9 .l30 | 
 [font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 [font/bradfordFont](https://discmaster.textfiles.com/search?formatid=bradfordFont) | Bradford Font | .bf2 | 
@@ -517,7 +518,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (148)
+## Image (149)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -659,6 +660,7 @@ Family/Format | Name | Extensions | Notes
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/unrealTexture](https://discmaster.textfiles.com/search?formatid=unrealTexture) | Unreal Texture | .utx .u .unr | 
 [image/venturaPublisher](https://discmaster.textfiles.com/search?formatid=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
+[image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?formatid=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?formatid=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
 [image/visualCADDSymbol](https://discmaster.textfiles.com/search?formatid=visualCADDSymbol) | Visual CADD Symbol | .vcs | 
 [image/wgtSprite](https://discmaster.textfiles.com/search?formatid=wgtSprite) | [WGT Sprite](http://fileformats.archiveteam.org/wiki/WGT_Sprite) | .spr | 
@@ -810,7 +812,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,202)
+## Other (1,208)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1237,6 +1239,7 @@ Family/Format | Name | Extensions | Notes
 [other/fontDescriptor](https://discmaster.textfiles.com/search?formatid=fontDescriptor) | Font descriptor | .ntf14 .ntf16 .ntf4 | 
 [other/foreignLanguageMasterConfig](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterConfig) | Foreign Language Master Configuration | .config | 
 [other/foreignLanguageMasterDictionary](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterDictionary) | Foreign Language Master dictionary | .flm | 
+[other/formulaDocument](https://discmaster.textfiles.com/search?formatid=formulaDocument) | Formula document | .frm | 
 [other/fortuneCiteData](https://discmaster.textfiles.com/search?formatid=fortuneCiteData) | Fortune Cite data | .cit | 
 [other/foxBaseMultipleIndex](https://discmaster.textfiles.com/search?formatid=foxBaseMultipleIndex) | FoxBase Multiple Index | .mdx | 
 [other/foxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=foxProCompoundIndex) | FoxPro Compound Index | .tdx .edx | 
@@ -1573,6 +1576,7 @@ Family/Format | Name | Extensions | Notes
 [other/novastormMediaAnimation](https://discmaster.textfiles.com/search?formatid=novastormMediaAnimation) | Novastorm Media animation | .flm | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?formatid=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?formatid=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
+[other/noxMap](https://discmaster.textfiles.com/search?formatid=noxMap) | NoX Map | .map .nxz | 
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?formatid=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?formatid=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
 [other/nWiperShow](https://discmaster.textfiles.com/search?formatid=nWiperShow) | NWiper Show | .nw | 
@@ -1597,6 +1601,7 @@ Family/Format | Name | Extensions | Notes
 [other/outlookExpressDatabase](https://discmaster.textfiles.com/search?formatid=outlookExpressDatabase) | Outlook Express Database |  | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
 [other/pageFocusData](https://discmaster.textfiles.com/search?formatid=pageFocusData) | PageFocus Data | .1 | 
+[other/pageMakerTable](https://discmaster.textfiles.com/search?formatid=pageMakerTable) | PageMaker Table | .tbl | 
 [other/paiVirtuosoResourceData](https://discmaster.textfiles.com/search?formatid=paiVirtuosoResourceData) | PAI Virtuoso Resource data | .rsc .rsi | 
 [other/paintersApprenticePrintInfo](https://discmaster.textfiles.com/search?formatid=paintersApprenticePrintInfo) | Painter's Apprentice Printer Info | .pri | 
 [other/paintWorksAnimation](https://discmaster.textfiles.com/search?formatid=paintWorksAnimation) | PaintWorks Animation |  | 
@@ -1866,6 +1871,9 @@ Family/Format | Name | Extensions | Notes
 [other/tmmScreen](https://discmaster.textfiles.com/search?formatid=tmmScreen) | TMM Screen | .scr | 
 [other/tmtPascalForOS2ObjectCode](https://discmaster.textfiles.com/search?formatid=tmtPascalForOS2ObjectCode) | TMT Pascal for OS/2 object code | .fpd .fpl .fpu | 
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 
+[other/trackAttackBitmapsFrames](https://discmaster.textfiles.com/search?formatid=trackAttackBitmapsFrames) | Track Attack bitmaps/frames | .raw .rle | 
+[other/trackAttackCockpit](https://discmaster.textfiles.com/search?formatid=trackAttackCockpit) | Track Attack cockpit | .rle | 
+[other/trackAttackTrackData](https://discmaster.textfiles.com/search?formatid=trackAttackTrackData) | Track Attack track Data | .dat | 
 [other/triTrystGameData](https://discmaster.textfiles.com/search?formatid=triTrystGameData) | TriTryst game Data | .dat | 
 [other/triviaShellData](https://discmaster.textfiles.com/search?formatid=triviaShellData) | Trivia Shell Data | .tsd | 
 [other/triviaShellIndex](https://discmaster.textfiles.com/search?formatid=triviaShellIndex) | Trivia Shell Index | .tsi | 
@@ -2079,7 +2087,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (52)
+## Video (51)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2100,7 +2108,6 @@ Family/Format | Name | Extensions | Notes
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?formatid=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?formatid=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?formatid=iavfVideo) | IAVF video | .avi .iavf | 
-[video/idRoQ](https://discmaster.textfiles.com/search?formatid=idRoQ) | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [3 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 [video/intelligentGamesVideoCutscene](https://discmaster.textfiles.com/search?formatid=intelligentGamesVideoCutscene) | Intelligent Games Video/cutscene | .mov | 
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 

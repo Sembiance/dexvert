@@ -11,6 +11,8 @@ export class ffmpeg extends Program
 		codec       : "Specify which codec to treat the input file as. Run `ffmpeg -codecs` for a list. Default: Let ffmpeg decide",
 		fps         : "What frame rate to specify for conversion. Default: Let ffmpeg decide",
 		rate        : "What rate to set for the output. Default: Let ffmpeg decide",
+		numStreams  : "Total number of sterams available",
+		streamNum   : "Which stream num to extract. Default: Let ffmpeg decide",
 		maxDuration : "Maximum duration (in seconds) to allow the output file to be"
 	};
 	bruteFlags = { archive : {}, audio : { outType : "mp3" }, image : { outType : "png" }, music : { outType : "mp3" } };
@@ -44,7 +46,6 @@ export class ffmpeg extends Program
 			a.push("-r", r.flags.fps);
 		if(r.flags.maxDuration)
 			a.push("-t", r.flags.maxDuration);
-
 		if(inFilePaths.length>1)
 			a.push("-f", "concat", "-safe", "0");
 
@@ -56,6 +57,8 @@ export class ffmpeg extends Program
 
 			case "wav":
 				a.push(...inFileArgs);
+				if(r.flags.streamNum)
+					a.push("-map", `0:a:${r.flags.streamNum}`);
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);
 				a.push("-c:a", "pcm_u8", ...noMeta, await r.outFile("out.wav"));
@@ -63,13 +66,18 @@ export class ffmpeg extends Program
 
 			case "mp3":
 				a.push(...inFileArgs);
+				if(r.flags.streamNum)
+					a.push("-map", `0:a:${r.flags.streamNum}`);
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);
 				a.push("-c:a", "libmp3lame", "-b:a", "192k", ...noMeta, await r.outFile("out.mp3"));
 				break;
 
 			case "flac":
-				a.push(...inFileArgs, "-c:a", "flac", "-compression_level", "12", ...noMeta, await r.outFile("out.flac"));
+				a.push(...inFileArgs);
+				if(r.flags.streamNum)
+					a.push("-map", `0:a:${r.flags.streamNum}`);
+				a.push("-c:a", "flac", "-compression_level", "12", ...noMeta, await r.outFile("out.flac"));
 				break;
 			
 			case "gif":
@@ -102,5 +110,8 @@ export class ffmpeg extends Program
 			await fileUtil.unlink(r.imagesListFilePath, {recursive : true});
 	};
 
-	renameOut = true;
+	renameOut = {
+		alwaysRename : true,
+		renamer      : [({r, newName, newExt}) => (Object.hasOwn(r.flags, "streamNum") ? [newName, r.flags.streamNum.toString().padStart(r.flags.numStreams.toString().length, "0"), newExt] : [newName, newExt])]
+	};
 }

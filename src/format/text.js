@@ -46,6 +46,7 @@ export default
 		rexxAdventureSavedGame             : {name : "Rexx-Adventure Saved game", ext : [".ras"], magic : ["Rexx-Adventure Saved game"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game"},
 		simCity3000FreshnessScore          : {name : "SimCity 3000 Freshness Score", ext : [".fsc"], magic : ["SimCity 3000 Freshness Score"], weakMagic : true},
 		smartGameFormat                    : {name : "Smart Game Format", ext : [".sgf"], magic : ["Smart Game Format"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Smart_Game_Format"},
+		starTrekArmadaSpriteTable          : {name : "Star Trek: Armada Sprite table", ext : [".spr"], magic : ["Star Trek: Armada Sprite table"], weakMagic : true},
 		theNeedForSpeedCarPerformanceSpecs : {name : "The Need for Speed car Performance Specs", ext : [".pbs"], magic : ["The Need for Speed car Performance Specs"], weakMagic : true},
 		theNeedForSpeedWindshieldShape     : {name : "The Need For Speed windshield shape", ext : [".fmm"], magic : ["The Need For Speed windshield shape"], weakMagic : true},
 		tornadoMissionInfo                 : {name : "Tornado Mission info", ext : [".mis"], magic : ["Tornado Mission info"], weakMagic : true},
@@ -319,7 +320,7 @@ export default
 		genericPrinterDescription               : {name : "Generic Printer Description", ext : [".gdl"], magic : ["Generic Printer Description"], weakMagic : true},
 		gerber                                  : {name : "Gerber", ext : [".gbr", ".gbx", ".gb"], magic : ["Gerber format", "application/vnd.gerber"], weakMagic : true},
 		gimpParametricBrush                     : {name : "GIMP parametric Brush", ext : [".vbr"], magic : ["GIMP parametric Brush"]},
-		gnuInfo                                 : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                      	// We do NOT include Trid's "GNU Info document" because it's too loose
+		gnuInfo                                 : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                             	// We do NOT include Trid's "GNU Info document" because it's too loose
 		graceProjectFile                        : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
 		graphmaticaGraph                        : {name : "Graphmatica Graph", ext : [".gr"], magic : ["Graphmatica Graph"], weakMagic : true},
 		gravisFirebird2Configuration            : {name : "Gravis Firebird 2 configuration", ext : [".fbd"], magic : ["Gravis Firebird 2 configuration"]},
@@ -346,6 +347,7 @@ export default
 		introCADPrinterDefinition               : {name : "IntroCAD Printer Definition", magic : ["IntroCAD Printer Definition"]},
 		islandWriteDocument                     : {name : "IslandWrite document", ext : [".iwrite"], magic : [/^IslandWrite document/]},
 		it871TargetDescriptor                   : {name : "IT8.7/1 target descriptor", magic : ["IT8.7/1 target descriptor"]},
+		jacosub                                 : {name : "JACOsub subtitle format (jacosub)", ext : [".js"], magic : ["JACOsub subtitle format (jacosub)"], weakMagic : true},
 		kdeConfigFile                           : {name : "KDE config file", ext : [".kdelnk"], magic : ["KDE config file", "KDE desktop Link", "KDevelop Project (with rem)", "application/x-desktop"]},
 		keyNoteNotes                            : {name : "KeyNote notes", ext : [".knt"], magic : ["KeyNote notes"]},
 		keyTronicTrakballProfile                : {name : "KeyTronic Trakball profile", ext : [".pro", ".fil"], magic : ["KeyTronic Trakball profile"], weakMagic : true},

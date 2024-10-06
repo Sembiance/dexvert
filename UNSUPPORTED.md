@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,079)
+# Unsupported File Formats (2,089)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (176)
+## Archive (177)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -74,6 +74,7 @@ Family/Format | Name | Extensions | Notes
 [archive/fsgPacked](https://discmaster.textfiles.com/search?formatid=fsgPacked) | FSG Packed | .exe | 
 [archive/gamosPackedGameDataArchive](https://discmaster.textfiles.com/search?formatid=gamosPackedGameDataArchive) | Gamos Packed game data archive | .gpf .vga .snd .ega | 
 [archive/hackStopProtected](https://discmaster.textfiles.com/search?formatid=hackStopProtected) | HackStop Protected | .exe | 
+[archive/hToolCompressedArchive](https://discmaster.textfiles.com/search?formatid=hToolCompressedArchive) | HTool compressed archive |  | 
 [archive/humongousEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?formatid=humongousEntertainmentGameDataArchive) | Humongous Entertainment game data archive | .he2 | 
 [archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?formatid=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
@@ -429,7 +430,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (83)
+## Font (84)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -482,6 +483,7 @@ Family/Format | Name | Extensions | Notes
 [font/macAdobeType1Font](https://discmaster.textfiles.com/search?formatid=macAdobeType1Font) | Mac Adobe Type 1 Font |  | 
 [font/maxonCADFont](https://discmaster.textfiles.com/search?formatid=maxonCADFont) | MaconCAD Font | .mcfont | 
 [font/matroxFont](https://discmaster.textfiles.com/search?formatid=matroxFont) | Matrox Font | .fnt | 
+[font/megaPaintFont](https://discmaster.textfiles.com/search?formatid=megaPaintFont) | MegaPaint Font | .fnt | 
 [font/metagraphicsFont](https://discmaster.textfiles.com/search?formatid=metagraphicsFont) | Metagraphics Font | .fnt | 
 [font/micrografxFont](https://discmaster.textfiles.com/search?formatid=micrografxFont) | Micrografx Font | .mgf | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?formatid=msxKanjiFont) | MSX Kanji Font |  | 
@@ -518,7 +520,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (149)
+## Image (150)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -650,6 +652,7 @@ Family/Format | Name | Extensions | Notes
 [image/skyRoadsBitmap](https://discmaster.textfiles.com/search?formatid=skyRoadsBitmap) | SkyRoads Bitmap | .lzs | 
 [image/slpImage](https://discmaster.textfiles.com/search?formatid=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 [image/someraGraphicFormat](https://discmaster.textfiles.com/search?formatid=someraGraphicFormat) | Somera Graphic Format | .sgf | 
+[image/spriteArtistSprite](https://discmaster.textfiles.com/search?formatid=spriteArtistSprite) | Sprite Artist Sprite | .spr | 
 [image/stCADDrawing](https://discmaster.textfiles.com/search?formatid=stCADDrawing) | ST-CAD Drawing | .dvg .ptp | 
 [image/superFlowDiagram](https://discmaster.textfiles.com/search?formatid=superFlowDiagram) | SuperFlow diagram | .sf1 | 
 [image/teenyWeenyGamesGraphic](https://discmaster.textfiles.com/search?formatid=teenyWeenyGamesGraphic) | Teeny Weeny Games Graphic | .gra | 
@@ -673,7 +676,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (133)
+## Music (134)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -790,6 +793,7 @@ Family/Format | Name | Extensions | Notes
 [music/squirrelModule](https://discmaster.textfiles.com/search?formatid=squirrelModule) | Squirrel Module | .sqm | [1 sample file](https://sembiance.com/fileFormatSamples/music/squirrelModule/)
 [music/star3MIDIKaraoke](https://discmaster.textfiles.com/search?formatid=star3MIDIKaraoke) | [Star 3 MIDI Karaoke](https://wiki.multimedia.cx/index.php?title=Star_3) | .st3 | [3 sample files](https://sembiance.com/fileFormatSamples/music/star3MIDIKaraoke/)
 [music/starkos](https://discmaster.textfiles.com/search?formatid=starkos) | STarKos Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/starkos/)
+[music/pro24SNG](https://discmaster.textfiles.com/search?formatid=pro24SNG) | [Steinberg Pro Song](https://www.atarimania.com/utility-atari-st-pro-24-iii_29596.html) | .sng | [9 sample files](https://sembiance.com/fileFormatSamples/music/pro24SNG/) - I could emulate Atari ST in Win7, pre-generate a floppy with the song on it, use autoit to send keystrokes to Hatari emulator to load the song and then export as MIDI to the floppy and copy the floppy to c:\out
 [music/stoneTracker](https://discmaster.textfiles.com/search?formatid=stoneTracker) | StoneTracker Module | .spm .sps | [6 sample files](https://sembiance.com/fileFormatSamples/music/stoneTracker/)
 [music/sunVox](https://discmaster.textfiles.com/search?formatid=sunVox) | SunVox Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/sunVox/)
 [music/svarTracker](https://discmaster.textfiles.com/search?formatid=svarTracker) | [SVArTracker Module](https://www.kvraudio.com/product/svartracker-by-svar-software) | .svar | [3 sample files](https://sembiance.com/fileFormatSamples/music/svarTracker/) - I tried using sandbox/app/svartracker_1_22_free_inst.exe under win2k but got lots of errors and couldn't even figure out how to 'render' the file to WAV, VERY clumsy program and only a tiny handful of songs seem to exist for it.
@@ -812,7 +816,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,208)
+## Other (1,214)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -886,6 +890,7 @@ Family/Format | Name | Extensions | Notes
 [other/aliceThePersonalPascalProgram](https://discmaster.textfiles.com/search?formatid=aliceThePersonalPascalProgram) | ALICE: The Personal Pascal Program | .ap | 
 [other/alienTrilogyMap](https://discmaster.textfiles.com/search?formatid=alienTrilogyMap) | Alien Trilogy Map | .map | 
 [other/alienTrilogyTextures](https://discmaster.textfiles.com/search?formatid=alienTrilogyTextures) | Alien Trilogytextures | .b16 .bin .bnd .16 | 
+[other/allFusionERwinData](https://discmaster.textfiles.com/search?formatid=allFusionERwinData) | AllFusion ERwin data | .er1 .erx | 
 [other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?formatid=allwaysPrinterDriver) | Allways Printer driver | .apc | 
 [other/alphaFourFieldRules](https://discmaster.textfiles.com/search?formatid=alphaFourFieldRules) | Alpha Four field rules | .rln | 
 [other/alphaFourHelp](https://discmaster.textfiles.com/search?formatid=alphaFourHelp) | Alpha Four Help | .hlp | 
@@ -1287,6 +1292,8 @@ Family/Format | Name | Extensions | Notes
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?formatid=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
+[other/grandTheftAuto2StyleData](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2StyleData) | Grand Theft Auto 2 Style data | .sty | 
+[other/grandTheftAuto2TextData](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2TextData) | Grand Theft Auto 2 Text data | .gxt | 
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?formatid=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/gravisGrIPLibrary](https://discmaster.textfiles.com/search?formatid=gravisGrIPLibrary) | Gravis GrIP Library | .vol | 
 [other/greatValleyProductsEGSSettings](https://discmaster.textfiles.com/search?formatid=greatValleyProductsEGSSettings) | Great Valley Products EGS settings | .map2video | 
@@ -1510,6 +1517,7 @@ Family/Format | Name | Extensions | Notes
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?formatid=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
 [other/missionCriticalVideoAnimation](https://discmaster.textfiles.com/search?formatid=missionCriticalVideoAnimation) | Mission Critical video/animation | .q | 
 [other/missionPatch](https://discmaster.textfiles.com/search?formatid=missionPatch) | Mission Patch | .pat | 
+[other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moriaSavedGame](https://discmaster.textfiles.com/search?formatid=moriaSavedGame) | Moria Saved game |  | 
 [other/mortalKombat3GameArchive](https://discmaster.textfiles.com/search?formatid=mortalKombat3GameArchive) | Mortal Kombat 3 game archive | .ftr | 
@@ -1807,6 +1815,7 @@ Family/Format | Name | Extensions | Notes
 [other/starWriterVideoDriver](https://discmaster.textfiles.com/search?formatid=starWriterVideoDriver) | StarWriter Video Driver | .hgd | 
 [other/steelPanthersShapesData](https://discmaster.textfiles.com/search?formatid=steelPanthersShapesData) | Steel Panthers Shapes data | .shp | 
 [other/stormWizardResource](https://discmaster.textfiles.com/search?formatid=stormWizardResource) | StormWizard Resource | .wizard .wizard-all | 
+[other/stosVarData](https://discmaster.textfiles.com/search?formatid=stosVarData) | STOS Var data | .var | 
 [other/strikeCommanderMap](https://discmaster.textfiles.com/search?formatid=strikeCommanderMap) | Strike Commander map | .pak | 
 [other/strongNameKey](https://discmaster.textfiles.com/search?formatid=strongNameKey) | Strong Name Key | .snk | 
 [other/stuntIslandTake](https://discmaster.textfiles.com/search?formatid=stuntIslandTake) | Stunt Island Take | .tke | 
@@ -1932,6 +1941,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualBasicTokenizedSource](https://discmaster.textfiles.com/search?formatid=visualBasicTokenizedSource) | Visual Basic Tokenized Source | .bas | 
 [other/visualCPPExportLibrary](https://discmaster.textfiles.com/search?formatid=visualCPPExportLibrary) | Visual C++ Export Library | .exp | 
 [other/visualFoxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=visualFoxProCompoundIndex) | Visual FoxPro Compound Index | .cdx | 
+[other/visualHomeObject](https://discmaster.textfiles.com/search?formatid=visualHomeObject) | Visual Home object | .bte | 
 [other/visualLISPApplication](https://discmaster.textfiles.com/search?formatid=visualLISPApplication) | Visual LISP Application | .vlx | 
 [other/visualSciencesResource](https://discmaster.textfiles.com/search?formatid=visualSciencesResource) | Visual Sciences Resource | .vsr | 
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?formatid=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 

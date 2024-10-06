@@ -121,7 +121,8 @@ const FORMAT_PROGRAM_FLAG =
 {
 	"archive/iso" :
 	{
-		"PanicDisc (PANIC.COM).bin" : {bchunk : {forceMode1 : true}}
+		"PanicDisc (PANIC.COM).bin" : {bchunk : {forceMode1 : true}},
+		"PC Review CD-ROM Issue 48 - CD-ROM Number 16 (October 1995).bin" : {bchunk : {forceMode1 : true}}
 	}
 };
 

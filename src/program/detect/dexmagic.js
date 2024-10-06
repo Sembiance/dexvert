@@ -150,6 +150,7 @@ const DEXMAGIC_CHECKS =
 	"Pha Packer"                       : [{offset : 8, match : [0x00, 0x00, 0x03, 0xC0]}],
 	"The Player 2.2A"                  : [{offset : 0, match : "P22A"}],
 	"The Player 3.0A"                  : [{offset : 0, match : "P30A"}],
+	"Pro 24 MIDI SNG"                  : [{offset : 752, match : "TWENTY"}, {offset : 759, match : "FOUR"}],
 	"Promizer 1.0c/1.8"                : [{offset : 0, match : [0x60, 0x38, 0x60, 0x00, 0x00, 0xA0, 0x60, 0x00, 0x01, 0x3E, 0x60, 0x00, 0x01, 0x0C, 0x48, 0xE7]}],
 	"Promizer 2.0"                     : [{offset : 0, match : [0x60, 0x00, 0x00, 0x16, 0x60, 0x00, 0x01, 0x40, 0x60, 0x00, 0x00, 0xF0, 0x3F, 0x00, 0x10, 0x3A]}],
 	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],

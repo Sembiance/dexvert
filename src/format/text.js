@@ -91,6 +91,7 @@ export default
 		appleIIgsSourceCode                      : {name : "Apple IIgs Source Code", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="SRC"},
 		appleProjectBuilderXcodeProject          : {name : "Apple Project Builder Xcode Project", ext : [".pbxproj"], magic : ["Apple Project Builder Xcode Project"]},
 		asm                                      : {name : "Assembly Source File", website : "http://fileformats.archiveteam.org/wiki/Assembly_language", ext : [".asm"], magic : [...TEXT_MAGIC, "C source"], weakMagic : true},
+		auMenuScript                             : {name : "AUMenu script", ext : [".mdf"], magic : ["AUMenu script"], weakMagic : true},
 		awk                                      : {name : "AWK Script", ext : [".awk"], magic : ["a /bin/awk", "Shell Skript: '/bin/awk", /^Executable script, shebang: "(\/usr)?(\/local)?\/bin\/awk/, "awk or perl script", /^a awk script/, /^((new|GNU) )?awk script text executable/, "application/x-awk"], weakMagic : ["awk or perl script"], website : "http://fileformats.archiveteam.org/wiki/AWK"},
 		bas                                      : {name : "BASIC Source File", website : "http://fileformats.archiveteam.org/wiki/BASIC", ext : [".bas"], magic : TEXT_MAGIC, weakMagic : true},
 		batDOS                                   : {name : "DOS Batch File", website : "http://fileformats.archiveteam.org/wiki/Batch_file", ext : [".bat"], magic : ["DOS batch file", "BAT/CMD Batch Datei", ...TEXT_MAGIC, /^data$/], weakMagic : true},

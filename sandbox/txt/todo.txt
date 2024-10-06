@@ -2,7 +2,20 @@
 | TOP Priority |
 \--------------/
 * "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
-  Setting exclusive = "wuimg"; didn't help. May have to due with virtualX, I submitted a bug to remove that: https://codeberg.org/kaleido/wuimg/issues/3
+  Setting exclusive = "wuimg"; didn't help. May have to due with virtualX.
+  I was able to reproduce it with a bash script (/mnt/compendium/DevLab/dexvert/sandbox/convertCat.sh)
+  I didn't submit a bug about it because I'm not certain it's a wuimg bug vs creating multiple fake GLX contexts bug/xvfb
+
+* Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js)
+  Then re-process those in: https://dev.discmaster2.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
+  Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
+  These are the possible prefixes I've found, so look for these in 'detections':
+	0006AAD4
+	0006729A
+	0008FE2C
+	0007D950
+	00076D20
+	00078C80
 
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it

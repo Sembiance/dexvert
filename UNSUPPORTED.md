@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,089)
+# Unsupported File Formats (2,097)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -259,10 +259,11 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (113)
+## Document (115)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
+[document/abcFlowCharterDocument](https://discmaster.textfiles.com/search?formatid=abcFlowCharterDocument) | ABC FlowCharter document | .abc | 
 [document/adobeInDesignDocument](https://discmaster.textfiles.com/search?formatid=adobeInDesignDocument) | Adobe InDesign Document | .indd .ind | 
 [document/alanInteractiveFiction](https://discmaster.textfiles.com/search?formatid=alanInteractiveFiction) | Alan Interactive Fiction | .acd | 
 [document/amigaVisionFlow](https://discmaster.textfiles.com/search?formatid=amigaVisionFlow) | Amiga Vision Flow | .avf | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaVisionFlow/)
@@ -332,6 +333,7 @@ Family/Format | Name | Extensions | Notes
 [document/justWriteDocument](https://discmaster.textfiles.com/search?formatid=justWriteDocument) | JustWrite document | .jw jwt .qw .qwt | 
 [document/lotusSymphony](https://discmaster.textfiles.com/search?formatid=lotusSymphony) | Lotus Symphony Worksheet | .wk1 .wr1 | 
 [document/masterCook](https://discmaster.textfiles.com/search?formatid=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
+[document/matrixSpreadsheet](https://discmaster.textfiles.com/search?formatid=matrixSpreadsheet) | Matrix spreadsheet | .mtx | 
 [document/mediaPaqDCF](https://discmaster.textfiles.com/search?formatid=mediaPaqDCF) | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 [document/mediaViewDocument](https://discmaster.textfiles.com/search?formatid=mediaViewDocument) | MediaView document | .mdvw .mdv | 
 [document/microsoftAdvisorHelp](https://discmaster.textfiles.com/search?formatid=microsoftAdvisorHelp) | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
@@ -520,7 +522,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (150)
+## Image (153)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -557,6 +559,7 @@ Family/Format | Name | Extensions | Notes
 [image/corel10Texture](https://discmaster.textfiles.com/search?formatid=corel10Texture) | Corel 10 Texture | .tex | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?formatid=crayolaArtStudio) | Crayola Art Studio | .art | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?formatid=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
+[image/desiIIIDrawing](https://discmaster.textfiles.com/search?formatid=desiIIIDrawing) | DESI-III drawing | .bin .din | 
 [image/designWorks](https://discmaster.textfiles.com/search?formatid=designWorks) | DesignWorks Drawing |  | [2 sample files](https://sembiance.com/fileFormatSamples/image/designWorks/)
 [image/deskMateDrawDrawing](https://discmaster.textfiles.com/search?formatid=deskMateDrawDrawing) | DeskMate Draw drawing | .fig | [1 sample file](https://sembiance.com/fileFormatSamples/image/deskMateDrawDrawing/)
 [image/drafixWindowsCADDrawing](https://discmaster.textfiles.com/search?formatid=drafixWindowsCADDrawing) | Drafix Windows CAD Drawing | .cad .slb | 
@@ -599,6 +602,7 @@ Family/Format | Name | Extensions | Notes
 [image/lightningStrikeBitmap](https://discmaster.textfiles.com/search?formatid=lightningStrikeBitmap) | Lightning Strike bitmap | .cod | 
 [image/lightWaveSurface](https://discmaster.textfiles.com/search?formatid=lightWaveSurface) | LightWave Surface | .srf | 
 [image/lightWorkImageBitmap](https://discmaster.textfiles.com/search?formatid=lightWorkImageBitmap) | LightWork Image bitmap | .lwi | 
+[image/littleDrawDrawing](https://discmaster.textfiles.com/search?formatid=littleDrawDrawing) | Little Draw Drawing | .ldw | Only known samples are those that came with the program. Simple format, but not really even worth supporting.
 [image/logoWriterPage](https://discmaster.textfiles.com/search?formatid=logoWriterPage) | Logo Writer page | .lwr | 
 [image/logoArtDrawing](https://discmaster.textfiles.com/search?formatid=logoArtDrawing) | LogoArt drawing | .art | 
 [image/lotusSmartIcon](https://discmaster.textfiles.com/search?formatid=lotusSmartIcon) | Lotus Smart Icon | .smi | 
@@ -646,6 +650,7 @@ Family/Format | Name | Extensions | Notes
 [image/quickLinkIIFaxBitmap](https://discmaster.textfiles.com/search?formatid=quickLinkIIFaxBitmap) | QuickLink II Fax bitmap | .qfx | 
 [image/reflectionsMonzoom](https://discmaster.textfiles.com/search?formatid=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
 [image/satoriPaint](https://discmaster.textfiles.com/search?formatid=satoriPaint) | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
+[image/seam3DMaterial](https://discmaster.textfiles.com/search?formatid=seam3DMaterial) | SEAM 3D Material | .mat | 
 [image/secondNatureSlideShow](https://discmaster.textfiles.com/search?formatid=secondNatureSlideShow) | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 [image/signumBitmap](https://discmaster.textfiles.com/search?formatid=signumBitmap) | Signum! bitmap | .imc .pac | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?formatid=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
@@ -816,7 +821,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,214)
+## Other (1,216)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1759,6 +1764,7 @@ Family/Format | Name | Extensions | Notes
 [other/scriptMagicArchive](https://discmaster.textfiles.com/search?formatid=scriptMagicArchive) | ScriptMagic archive |  | 
 [other/sculpt3DTake](https://discmaster.textfiles.com/search?formatid=sculpt3DTake) | Sculpt 3D Take | .take | 
 [other/scummMainData](https://discmaster.textfiles.com/search?formatid=scummMainData) | SCUMM main data container |  | 
+[other/seam3DProject](https://discmaster.textfiles.com/search?formatid=seam3DProject) | SEAM 3D Project | .s3d | 
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?formatid=segaMasterSystemROM) | Sega Master System ROM | .sms | 
 [other/sentinelReturnsGameData](https://discmaster.textfiles.com/search?formatid=sentinelReturnsGameData) | Sentinel Returns game data | .db | 
@@ -1871,6 +1877,7 @@ Family/Format | Name | Extensions | Notes
 [other/theNortonAntiVirusSignatures](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusSignatures) | The Norton AntiVirus Virus Signatures | .dat | 
 [other/thePerfectGeneralFile](https://discmaster.textfiles.com/search?formatid=thePerfectGeneralFile) | The Perfect General File | .scn .cfg .mdt .mgr | 
 [other/printShopProject](https://discmaster.textfiles.com/search?formatid=printShopProject) | The Print Shop Project | .qvc .grc .lnc .woc .bgc .agc .nbc | 
+[other/ravenProjectGameAudio](https://discmaster.textfiles.com/search?formatid=ravenProjectGameAudio) | The Raven Project game audio data | .ddp | 
 [other/theSoftwareToolworksResourcesArchive](https://discmaster.textfiles.com/search?formatid=theSoftwareToolworksResourcesArchive) | The Software Toolworks resources archive | .vgh .lst .v2l .res | 
 [other/theirFinestHourMission](https://discmaster.textfiles.com/search?formatid=theirFinestHourMission) | Their Finest Hour: The Battle of Britain mission | .flt | 
 [other/thunderbyteAV](https://discmaster.textfiles.com/search?formatid=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .key .sig | 
@@ -2097,7 +2104,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (51)
+## Video (52)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2115,6 +2122,7 @@ Family/Format | Name | Extensions | Notes
 [video/eaMADVideo](https://discmaster.textfiles.com/search?formatid=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?formatid=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/dkAnimation](https://discmaster.textfiles.com/search?formatid=dkAnimation) | DK Multimedia Animation | .ani | [7 sample files](https://sembiance.com/fileFormatSamples/video/dkAnimation/)
+[video/dvmVideo](https://discmaster.textfiles.com/search?formatid=dvmVideo) | [DVM video](http://fileformats.archiveteam.org/wiki/DVM) | .dvm | 
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?formatid=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?formatid=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?formatid=iavfVideo) | IAVF video | .avi .iavf | 

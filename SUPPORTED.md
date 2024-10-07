@@ -1,11 +1,11 @@
-# Supported File Formats (2,437)
+# Supported File Formats (2,439)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (378)
+## Archive (379)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -20,7 +20,7 @@ archive | Adobe Photoshop Patterns | .pat | [nconvert](https://www.xnview.com/en
 archive | [AIN Archive](http://fileformats.archiveteam.org/wiki/AIN) | .ain | [ain](https://www.sac.sk/download/pack/ain232.exe) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/ain/)
 archive | AINEXE Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ainexePacked/)
 archive | [AKT Archive](http://fileformats.archiveteam.org/wiki/AKT) | .akt | [akt](https://www.sac.sk/download/pack/akt070b5.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/akt/)
-archive | Albion game data archive | .xld | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/albionGameDataArchive/)
+archive | Albion game data archive | .xld | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/albionGameDataArchive/)
 archive | [Alchemy Mindworks Image Gallery](http://fileformats.archiveteam.org/wiki/Image_Gallery_(Alchemy_Mindworks)) | .gal | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/alchemyMindworksGallery/)
 archive | [Alcohol 120% MDF Image](http://fileformats.archiveteam.org/wiki/MDF_and_MDS) | .mdf | [uniso](https://github.com/Sembiance/dexvert/) [dexvert](https://github.com/Sembiance/dexvert) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [MDFtoISO](http://www.mdftoiso.com/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/mdf/)
 archive | [Allegro Packfile](http://fileformats.archiveteam.org/wiki/Allegro_packfile) | .dat | [pack](https://liballeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/allegroPackfile/)
@@ -57,7 +57,7 @@ archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/stDiskImage/)
 archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atomikCruncher/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
-archive | AVPACK Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
+archive | AVPACK Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
 archive | Bank Game Archive | .bnk | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/bankGameArchive/)
 archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
@@ -114,6 +114,7 @@ archive | [Disk Doubler](http://justsolve.archiveteam.org/wiki/DiskDoubler) | .d
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) | .img | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/diskImage/)
 archive | [DiskDupe Disk Image](http://fileformats.archiveteam.org/wiki/DDI) | .ddi | [sevenZip](http://p7zip.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/diskDupeDiskImage/)
 archive | DIV GamesStudio Graphcis Library | .fpg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
+archive | Dn.COM Cruncher Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/dnCOMCruncherPacked/)
 archive | [DOS BACKUP file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-DOS)) |  | [unDOSBACKUP](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/dosBackupFile/)
 archive | [DOSIMG Disk Image](http://fileformats.archiveteam.org/wiki/IMG_(DOSIMG)) | .img | [aaru](https://github.com/aaru-dps/Aaru) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/dosimg/)
 archive | [Dr. Riptide Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/drRiptideGameArchive/)
@@ -436,7 +437,7 @@ audio | [IRCAM Sound Format](http://fileformats.archiveteam.org/wiki/Berkeley/IR
 audio | Knowledge Adventure Sound | .snd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/knowledgeAdventureSound/)
 audio | kRAW Audio Stream | .kRAW | [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/kRAWAudio/)
 audio | Lego Racers ALP Audio | .tun | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/legoRacersALP/)
-audio | [Low- Bitrate Packed Audio](https://www.rarewares.org/rrw/lbpack.php) | .lb | [lbplay](https://www.rarewares.org/rrw/lbpack.php) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/lowBitrateAudio/)
+audio | [Low- Bitrate Packed Audio](https://www.rarewares.org/rrw/lbpack.php) | .lb | [lbplay](https://www.rarewares.org/rrw/lbpack.php) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/lowBitrateAudio/)
 audio | [MacroSystem Audio](http://fileformats.archiveteam.org/wiki/IFF-MAUD) | .maud | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/maud/)
 audio | [Matroska Audio](http://fileformats.archiveteam.org/wiki/Matroska_Audio) | .mka | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/mka/)
 audio | [Maxis XA Audio](https://wiki.multimedia.cx/index.php/Maxis_XA) | .xa | [sox](http://sox.sourceforge.net) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/maxisXA/)
@@ -1279,7 +1280,7 @@ image | SPIDER | .spi .spider | [abydosconvert](https://github.com/Sembiance/aby
 image | SprEd Sprite | .spr | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/sprEd/)
 image | [SpritePad](http://fileformats.archiveteam.org/wiki/SpritePad) | .spd | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/spritePad/)
 image | SSI Packed Library Image | .tlb | [tlb2bmp](http://frua.rosedragon.org/pc/misc/tlb2bmp.txt) | [10 sample files](https://sembiance.com/fileFormatSamples/image/ssiTLB/)
-image | [ST-6 compressed astrocamera bitmap](https://web.archive.org/web/20210610121116/https://hwiegman.home.xs4all.nl/fileformats/sbig/sbig.txt) | .st6 | [nconvert](https://www.xnview.com/en/nconvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/st6CompressedAstrocameraBitmap/)
+image | [ST-6 compressed astrocamera bitmap](https://web.archive.org/web/20210610121116/https://hwiegman.home.xs4all.nl/fileformats/sbig/sbig.txt) | .st6 | [nconvert](https://www.xnview.com/en/nconvert/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/st6CompressedAstrocameraBitmap/)
 image | [STAD PAC](http://fileformats.archiveteam.org/wiki/STAD_PAC) | .pac .seq | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/stadPAC/)
 image | [Star Painter](http://fileformats.archiveteam.org/wiki/Star_Painter) | .gr .cs .zs | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/starPainter/)
 image | [Stardent AVS X](http://fileformats.archiveteam.org/wiki/AVS_X_image) | .avs .mbfavs .x | [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tomsViewer](https://tomseditor.com/blog/viewer) | [10 sample files](https://sembiance.com/fileFormatSamples/image/avsx/)
@@ -1739,7 +1740,7 @@ other | Microsoft Developer Studio Project | .mdp | [strings](https://www.gnu.or
 other | Microsoft Project exported data | .mpx | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/microsoftProjectExportedData/)
 other | Microsoft QuickPascal Unit | .qpu | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/other/quickPascalUnit/)
 other | Microsoft Visual C Binary Resource | .aps | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/other/microsoftVisualCBinaryResource/)
-other | Microsoft Visual C/C++ Precompiled Header file | .pch .dbg | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/other/msvcPCH/)
+other | Microsoft Visual C/C++ Precompiled Header file | .pch .dbg | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/msvcPCH/)
 other | Microsoft WinCE Install Header | .000 | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/msWinCEInstallHeader/)
 other | Microsoft Windows Help File Content | .cnt | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/windowsHelpFileContent/)
 other | MicroStation Resource Data | .dat .ma | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/microStationResource/)
@@ -1865,10 +1866,10 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (574)
+## Text (575)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-text | 22DISK | .def |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
+text | 22DISK | .def |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
 text | 32-Bit Sequencer Script | .scr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/sequencerScript/)
 text | 3D Studio Help | .hlp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/threeDStudioHelp/)
 text | 3D Studio Quad colors |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/threeDSQuadColors/)
@@ -1913,7 +1914,7 @@ text | Atari CardFile PIM data | .dat |  | [1 sample file](https://sembiance.com
 text | ATK Data Flow Diagram | .dfd |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/atkDataFlowDiagram/)
 text | Audacity Nyquits plug-in | .ny |  | [18 sample files](https://sembiance.com/fileFormatSamples/text/audacityNyquitsPlugIn/)
 text | AudoCAD Menu | .mnu |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/audoCADMenu/)
-text | AUMenu script | .mdf |  | 
+text | AUMenu script | .mdf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/auMenuScript/)
 text | Authorware Shocked Map | .aam |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/authorwareShockedMap/)
 text | AutoCAD Color Palette | .ccp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/autoCADColorPalette/)
 text | AutoCAD Hatch Pattern | .pat |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/autoCADHatchPattern/)
@@ -2172,6 +2173,7 @@ text | MGI VideoWave Storyboard | .sbd |  | [6 sample files](https://sembiance.c
 text | Micro-Channel Architecture Adapter Description Library | .adl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/microChannelArchitectureADL/)
 text | MicroFiche Filer Plus database | .mff |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microFicheFilerPlusDatabase/)
 text | Micrografx Graph data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/micrografxGraphData/)
+text | MicroHof Code encoded message | .cde |  | 
 text | MicroSim PSpice schematic | .sch |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/microSimPSpiceSchematic/)
 text | Microsoft Developer Studio Workspace | .dsw |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/microsoftDeveloperStudioWorkspace/)
 text | Microsoft eMbedded Visual Tools Project | .vcp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftEmbeddedVisualToolsProject/)
@@ -2210,7 +2212,7 @@ text | Nota Bene Printer definition | .prn |  | [4 sample files](https://sembian
 text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/novell16BitLANDriverInstallerData/)
 text | NSIS script | .nsi |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/nsisScript/)
 text | Oberon System 3 text document | .text .tool .mod |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/oberonSystem3TextDocument/)
-text | OGRE Material | .material |  | 
+text | OGRE Material | .material |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/ogreMaterial/)
 text | Oleo spreadsheet | .oleo |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/oleoSpreadsheet/)
 text | Omnis Studio Library | .lbs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/omnisStudioLibrary/)
 text | Opera Hotlist/bookmark | .adr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/operaHotlist/)
@@ -2351,7 +2353,7 @@ text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/file
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [84 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
-text | Text602 document | .602 |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
+text | Text602 document | .602 |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
 text | The Need For Speed windshield shape | .fmm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedWindshieldShape/)
 text | The Software Toolworks' Hyperbase Data | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/softwareToolworksHyperbaseData/)

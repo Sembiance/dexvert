@@ -332,6 +332,31 @@ const DEXMAGIC_CUSTOMS =
 			return;
 
 		return "WATCOM Install Archive";
+	},
+
+	async function checkZPPacked(r)
+	{
+		if(r.f.input.size<10)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 10);
+		if(header[0]!==0x11 || header[1]!==0x00)
+			return;
+
+		const compressedSize = header.getUInt32LE(2);
+		if((compressedSize+10)>r.f.input.size)
+			return;
+		
+		const uncompressedSize = header.getUInt32LE(6);
+		if(uncompressedSize<compressedSize)
+			return;
+		
+		// Can't figure out the rest of this exactly. The filename appears at offset 23 but can't guarantee it
+		// But since we don't want to match too loose we'll check to see if the header size is what we expect
+		if(r.f.input.size!==(compressedSize+34))
+			return;
+
+		return "ZP Packed";
 	}
 ];
 

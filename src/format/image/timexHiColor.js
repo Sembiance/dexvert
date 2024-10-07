@@ -6,5 +6,6 @@ export class timexHiColor extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)";
 	ext        = [".scr"];
 	fileSize   = 12288;
+	idCheck    = inputFile => !["custom", "gr", "strings"].includes(inputFile.name.toLowerCase());	// These are false positives that recur in the wild
 	converters = ["recoil2png"];
 }

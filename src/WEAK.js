@@ -284,6 +284,7 @@ export const WEAK_VALUES =
 	/^application\/vnd\.ms-excel$/,
 	/^application\/vnd\.wordperfect$/,
 	/^application\/x-atari-lynx-rom$/,
+	/^application\/x-ccd$/,
 	/^application\/x-daa$/,
 	/^application\/x-dar$/,
 	/^application\/x-dosexec$/,
@@ -1233,6 +1234,7 @@ export const WEAK_VALUES =
 	/^ZX Microdrive cartridge image$/,
 	
 	// TRID: Checks for almost all zeroes or repeating values/patterns:
+	/^\.NET binary serialized data$/,
 	/^3D Studio Shape$/,
 	/^A-Robots Fighting Robot Object$/,
 	/^Acorn RISC OS font/,
@@ -1847,7 +1849,7 @@ export const WEAK_VALUES =
 	/^Windows Media Player skin$/,
 	/^Windows NTBackup archive$/,
 	/^Windows Script File$/,
-	/^Windows Shadow spooler \(2003\)$/,
+	/^Windows Shadow spooler/,
 	/^Windows SDK Setup Transform script$/,
 	/^WindowBlinds skin-theme$/,
 	/^WinGenea Data File$/,

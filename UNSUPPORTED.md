@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,097)
+# Unsupported File Formats (2,101)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (177)
+## Archive (178)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -95,13 +95,14 @@ Family/Format | Name | Extensions | Notes
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?formatid=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
 [archive/massiveGameDataArchive](https://discmaster.textfiles.com/search?formatid=massiveGameDataArchive) | Massive game data archive | .pak | 
 [archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?formatid=maximusInstallerArchive) | Maximus installer archive | .fiz | 
-[archive/mbpSHRINK](https://discmaster.textfiles.com/search?formatid=mbpSHRINK) | mbp SHRINK Packed | .exe | 
+[archive/mbpSHRINKPacked](https://discmaster.textfiles.com/search?formatid=mbpSHRINKPacked) | mbp SHRINK Packed | .exe | 
 [archive/mechWarrior2GameData](https://discmaster.textfiles.com/search?formatid=mechWarrior2GameData) | MechWarrior 2 game data | .prj | 
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard/Revolution Stack | .rev | [4 sample files](https://sembiance.com/fileFormatSamples/archive/metaCardStack/)
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
 [archive/microsoftOutLookPersonalFolder](https://discmaster.textfiles.com/search?formatid=microsoftOutLookPersonalFolder) | Microsoft OutLook Personal Folder | .pst | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?formatid=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
+[archive/moleBoxPacked](https://discmaster.textfiles.com/search?formatid=moleBoxPacked) | MoleBox Packed | .exe | 
 [archive/mpq](https://discmaster.textfiles.com/search?formatid=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/mskn2Archive](https://discmaster.textfiles.com/search?formatid=mskn2Archive) | MSKN 2 Archive | .mskn | 
 [archive/msxCassetteTape](https://discmaster.textfiles.com/search?formatid=msxCassetteTape) | MSX Cassette Tape | .cas | 
@@ -681,7 +682,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (134)
+## Music (135)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -793,6 +794,7 @@ Family/Format | Name | Extensions | Notes
 [music/sibeliusMusicScore](https://discmaster.textfiles.com/search?formatid=sibeliusMusicScore) | Sibelius Music / Score | .sib .lib | 
 [music/skaleTracker](https://discmaster.textfiles.com/search?formatid=skaleTracker) | Skale Tracker Module | .skm | [5 sample files](https://sembiance.com/fileFormatSamples/music/skaleTracker/)
 [music/soundClub](https://discmaster.textfiles.com/search?formatid=soundClub) | Sound Club Module | .sn .sn2 | [9 sample files](https://sembiance.com/fileFormatSamples/music/soundClub/)
+[music/soundSmithSequence](https://discmaster.textfiles.com/search?formatid=soundSmithSequence) | SoundSmith sequence |  | 
 [music/soundtrakker128](https://discmaster.textfiles.com/search?formatid=soundtrakker128) | [Soundtrakker 128](http://fileformats.archiveteam.org/wiki/Soundtrakker_128_module) | .128 | [3 sample files](https://sembiance.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
 [music/spispopdSong](https://discmaster.textfiles.com/search?formatid=spispopdSong) | SPISPOPD Song | .sng | 
 [music/squirrelModule](https://discmaster.textfiles.com/search?formatid=squirrelModule) | Squirrel Module | .sqm | [1 sample file](https://sembiance.com/fileFormatSamples/music/squirrelModule/)
@@ -821,7 +823,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,216)
+## Other (1,219)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1171,6 +1173,7 @@ Family/Format | Name | Extensions | Notes
 [other/diveFileFormat](https://discmaster.textfiles.com/search?formatid=diveFileFormat) | Dive File Format | .dff | 
 [other/doomSaveGame](https://discmaster.textfiles.com/search?formatid=doomSaveGame) | DOOM Save Game | .dsg | 
 [other/dosNavigator2Settings](https://discmaster.textfiles.com/search?formatid=dosNavigator2Settings) | Dos Navigator 2 settings | .cfg | 
+[other/dProtelForWindowsSchematic](https://discmaster.textfiles.com/search?formatid=dProtelForWindowsSchematic) | DProtel for Windows schematic | .sch .dot .prj | 
 [other/drDOSCodePage](https://discmaster.textfiles.com/search?formatid=drDOSCodePage) | DR-DOS code page | .cpi | 
 [other/drHaloPrinterDefinition](https://discmaster.textfiles.com/search?formatid=drHaloPrinterDefinition) | Dr. Halo Printer definition | .prn | 
 [other/drHardwareSysInfo](https://discmaster.textfiles.com/search?formatid=drHardwareSysInfo) | Dr. Hardware Sysinfo | .dat | 
@@ -1574,6 +1577,7 @@ Family/Format | Name | Extensions | Notes
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
 [other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
+[other/nid32AntivirusUpdateFile](https://discmaster.textfiles.com/search?formatid=nid32AntivirusUpdateFile) | NOD32 Antivirus Update file | .nup | 
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
 [other/nortonDiskDoctorUnDoFile](https://discmaster.textfiles.com/search?formatid=nortonDiskDoctorUnDoFile) | Norton Disk Doctor UnDo file | .dat | 
@@ -1627,6 +1631,7 @@ Family/Format | Name | Extensions | Notes
 [other/papyrusPrinterInformation](https://discmaster.textfiles.com/search?formatid=papyrusPrinterInformation) | Papyrus Printer Information | .pri | 
 [other/paradoxLock](https://discmaster.textfiles.com/search?formatid=paradoxLock) | Paradox Lock | .lck | 
 [other/paradoxSortDefinition](https://discmaster.textfiles.com/search?formatid=paradoxSortDefinition) | Paradox sort definition | .sor | 
+[other/parityArchiveVolumeSet](https://discmaster.textfiles.com/search?formatid=parityArchiveVolumeSet) | Parity Archive Volume Set | .par2 | 
 [other/partoutResourceData](https://discmaster.textfiles.com/search?formatid=partoutResourceData) | PartoutResource Data | .dat | 
 [other/pascalCompiledUnit](https://discmaster.textfiles.com/search?formatid=pascalCompiledUnit) | Pascal Compiled Unit | .tpu .ppu | 
 [other/pascalScriptBinary](https://discmaster.textfiles.com/search?formatid=pascalScriptBinary) | Pascal Script binary | .bin | 
@@ -2104,7 +2109,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (52)
+## Video (51)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2146,7 +2151,6 @@ Family/Format | Name | Extensions | Notes
 [video/riffANIM](https://discmaster.textfiles.com/search?formatid=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 [video/roxanneAnimation](https://discmaster.textfiles.com/search?formatid=roxanneAnimation) | Roxanne animation | .rox | 
 [video/screenCamVideo](https://discmaster.textfiles.com/search?formatid=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
-[video/segaCPKVideo](https://discmaster.textfiles.com/search?formatid=segaCPKVideo) | Sega CPK video | .cpk .cak .film | 
 [video/sierraRobotAnimation](https://discmaster.textfiles.com/search?formatid=sierraRobotAnimation) | Sierra Robot Animation | .rbt | 
 [video/sonyVegas](https://discmaster.textfiles.com/search?formatid=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
 [video/stngAFinalUnityFMVCutscene](https://discmaster.textfiles.com/search?formatid=stngAFinalUnityFMVCutscene) | STNG 'A Final Unity' Fullmotion Video cutscene | .fvf | 

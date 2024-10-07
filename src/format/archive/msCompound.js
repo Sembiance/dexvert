@@ -13,7 +13,7 @@ export class msCompound extends Format
 		"Creative Witer document", "3D Studio Max Material Library", "Windows Movie Maker project", "Roxio/MGI PhotoSuite Album", "Roxio/MGI PhotoSuite Project", "Avery DesignPro Label design", "Micrografx Simply 3D project", "Micrografx clipart index",
 		"WordPerfect Slide Show", "ArcGIS Map project", "JewelCase Maker project", "Corel Gallery", "Serif PhotoPlus Picture (OLE)", "Neato MediaFACE label template", "EMB Wilcom Design embroidery file", "Melco DesignShop Project",
 		"Perfect Keyboard macro set", "CorelCAD Drawing", "CorelCAD Drawing Template", "CorelCAD Custom Views", "Corel Flow Smart Library",
-		/^fmt\/(877|916|1213|1303|1360|1648)( |$)/, /^x-fmt\/(151|243)( |$)/
+		/^fmt\/(877|916|1213|1303|1360|1648|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these
 	confidenceAdjust = (input, matchType, curConfidence) => -(curConfidence-40);	// MS Word/Excel files and Thumbs.db are also Compound Documents. Usually archive/* goes first, but let's reduce confidence here so others can go first instead like document/wordDoc

@@ -17,6 +17,12 @@
 	00076D20
 	00078C80
 
+* Use /mnt/compendium/DevLab/dexvert/sandbox/wip/demoleition.exe to handle 'MoleBox' packed files:
+  https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/erotik_poker.exe
+  https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/shop.exe
+  https://dev.discmaster2.textfiles.com/view/10903/Erotische%20Spiele.iso/DATA/_fertig%20puzzle/epuzzle.exe
+  https://dev.discmaster2.textfiles.com/view/10903/Erotische%20Spiele.iso/DATA/_fertig%20mahjongg/mpgplay.exe
+
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.

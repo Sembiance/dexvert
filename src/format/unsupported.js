@@ -608,20 +608,17 @@ export default
 		animationMagicAnimation       : {name : "Animation Magic video/Animation", ext : [".ani"], magic : ["Animation Magic video/Animation"]},
 		astoundAnimation              : {name : "Astound Animation", ext : [".awa"], magic : ["Astound Animation"]},
 		avssVideo                     : {name : "AVSS Video", ext : [".avs"], magic : ["AVSS Video"], weakMagic : true, website : "http://ohlandl.ipv7.net/video/actionmedia.html"},
-		comancheVideoDataArchive      : {name : "Comanche Video Data archive", ext : [".kdv"], magic : ["Comanche Video Data archive"], weakMagic : true},
 		completeAnimatorFilm          : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
 		dvmVideo                      : {name : "DVM video", ext : [".dvm"], magic : ["DVM video"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/DVM"},
 		fmTownsMovieVideo             : {name : "FM Towns Movie video", ext : [".mov"], magic : ["FM Towns Movie video"]},
 		fujitsuMovie                  : {name : "Fujitsu Movie", ext : [".mve"], magic : ["Fujitsu Movie format video", "Generic RIFF file FJMV"]},
 		hannaBarberaAnimationWorkshop : {name : "The Hanna-Barbera Animation Workshop animation", ext : [".xsh"], magic : ["The Hanna-Barbera Animation Workshop animation data"]},
 		iavfVideo                     : {name : "IAVF video", ext : [".avi", ".iavf"], magic : ["IAVF video"]},
-		intelligentGamesVideoCutscene : {name : "Intelligent Games Video/cutscene", ext : [".mov"], magic : ["Intelligent Games Video/cutscene"], weakMagic : true},
 		invisionDeltaAnimation        : {name : "Invision Delta Animation", ext : [".a01"], magic : ["Invision delta Animation"]},
 		knowledgeAdventureMovie       : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV"},
 		magicCarpetFlicVideo          : {name : "Magic Carpet Flic video", ext : [".dat"], magic : ["Magic Carpet Flic video"]},
 		metaStream3DObject            : {name : "MetaStream 3D object", ext : [".mts"], magic : ["MetaStream 3D object"], weakMagic : true},
 		movieSetterSet                : {name : "MovieSetter Set", ext : [".set"], magic : ["Movie Setter Set"]},
-		networkQRACRallyFMV           : {name : "Network Q RAC Rally full motion video", magic : ["Network Q RAC Rally full motion video"]},
 		novastormMediaVideo           : {name : "Novastorm Media video", ext : [".fa", ".fza", ".mza"], magic : ["Novastorm Media video"]},
 		palmTealMovieVideo            : {name : "Palm TealMovie Video", ext : [".pdb"], magic : ["Palm TealMovie video+audio"]},
 		pcAnimatePlusAnimation        : {name : "PC Animate Plus Animation", ext : [".ani"], magic : ["PC Animate Plus Animation"], weakMagic : true},
@@ -632,9 +629,7 @@ export default
 		sierraRobotAnimation          : {name : "Sierra Robot Animation", ext : [".rbt"], magic : ["Sierra Robot Animation"]},
 		stngAFinalUnityFMVCutscene    : {name : "STNG 'A Final Unity' Fullmotion Video cutscene", ext : [".fvf"], magic : ["STNG 'A Final Unity' Fullmotion Video cutscene File"], weakMagic : true},
 		toonBoomStudioAnimation       : {name : "Toon Boom Studio animation", ext : [".tbd", ".tbp"], magic : ["Toon Boom Studio animation"], weakMagic : true},
-		vis5DDatasetObject            : {name : "Vis5D dataset object", ext : [".v5d"], magic : ["Vis5D dataset object"], weakMagic : true},
-		vpx1VideoPackage              : {name : "VPX1 Video Package", ext : [".vpx"], magic : ["VPX1 Video Package"]},
-		zorkRLFVideo                  : {name : "Zork RLF video", ext : [".rlf"], magic : ["Zork RLF video"]}
+		vis5DDatasetObject            : {name : "Vis5D dataset object", ext : [".v5d"], magic : ["Vis5D dataset object"], weakMagic : true}
 	},
 	
 	other :

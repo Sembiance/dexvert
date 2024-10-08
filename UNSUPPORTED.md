@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,101)
+# Unsupported File Formats (2,094)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -2109,7 +2109,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (51)
+## Video (44)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2122,30 +2122,25 @@ Family/Format | Name | Extensions | Notes
 [video/astoundAnimation](https://discmaster.textfiles.com/search?formatid=astoundAnimation) | Astound Animation | .awa | 
 [video/avssVideo](https://discmaster.textfiles.com/search?formatid=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
 [video/iffSSA](https://discmaster.textfiles.com/search?formatid=iffSSA) | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [7 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
-[video/comancheVideoDataArchive](https://discmaster.textfiles.com/search?formatid=comancheVideoDataArchive) | Comanche Video Data archive | .kdv | 
 [video/delphineCIN](https://discmaster.textfiles.com/search?formatid=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?formatid=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?formatid=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
-[video/dkAnimation](https://discmaster.textfiles.com/search?formatid=dkAnimation) | DK Multimedia Animation | .ani | [7 sample files](https://sembiance.com/fileFormatSamples/video/dkAnimation/)
 [video/dvmVideo](https://discmaster.textfiles.com/search?formatid=dvmVideo) | [DVM video](http://fileformats.archiveteam.org/wiki/DVM) | .dvm | 
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?formatid=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?formatid=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?formatid=iavfVideo) | IAVF video | .avi .iavf | 
-[video/intelligentGamesVideoCutscene](https://discmaster.textfiles.com/search?formatid=intelligentGamesVideoCutscene) | Intelligent Games Video/cutscene | .mov | 
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?formatid=metaStream3DObject) | MetaStream 3D object | .mts | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?formatid=movieSetterSet) | MovieSetter Set | .set | 
-[video/networkQRACRallyFMV](https://discmaster.textfiles.com/search?formatid=networkQRACRallyFMV) | Network Q RAC Rally full motion video |  | 
 [video/novastormMediaVideo](https://discmaster.textfiles.com/search?formatid=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/iffVAXL](https://discmaster.textfiles.com/search?formatid=iffVAXL) | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
 [video/palmTealMovieVideo](https://discmaster.textfiles.com/search?formatid=palmTealMovieVideo) | Palm TealMovie Video | .pdb | [1 sample file](https://sembiance.com/fileFormatSamples/video/palmTealMovieVideo/)
 [video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?formatid=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 
 [video/pcAnimationVideo](https://discmaster.textfiles.com/search?formatid=pcAnimationVideo) | PC-Animation video | .ani | 
-[video/phVideo](https://discmaster.textfiles.com/search?formatid=phVideo) | PH Video | .ph | [4 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/) - No known converter or modern player. Could be kinda supported by using 'tmmplay.exe <filename>' in DOS to play the video. But it'll play in real time and sound capture will be hard to do.
 [video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?formatid=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 [video/ratvidVideo](https://discmaster.textfiles.com/search?formatid=ratvidVideo) | RATVID Video | .vdo | 
 [video/riffANIM](https://discmaster.textfiles.com/search?formatid=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
@@ -2159,8 +2154,6 @@ Family/Format | Name | Extensions | Notes
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?formatid=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?formatid=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 
 [video/vis5DDatasetObject](https://discmaster.textfiles.com/search?formatid=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
-[video/vpx1VideoPackage](https://discmaster.textfiles.com/search?formatid=vpx1VideoPackage) | VPX1 Video Package | .vpx | 
 [video/xbvVideo](https://discmaster.textfiles.com/search?formatid=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php?title=XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?formatid=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
-[video/zorkRLFVideo](https://discmaster.textfiles.com/search?formatid=zorkRLFVideo) | Zork RLF video | .rlf | 
 

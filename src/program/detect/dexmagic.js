@@ -183,10 +183,24 @@ const DEXMAGIC_CHECKS =
 	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
 
 	// video
+	"Adeline XCF Video"                        : [{offset : 0, match : "FrameLen"}],
+	"AVF Video (old)"                          : [{offset : 0, match : "ALG"}],
+	"CRH Video"                                : [{offset : 0, match : [0x01, 0x00, 0x22, 0x56]}],
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
+	"Dorling Kindersley Animation"             : [{offset : 0, match : [0x01, 0x00]}, {offset : 52, match : "funky!"}],
 	"IFF SSAd file"                            : [{offset : 0, match : "FORM"}, {offset : 8, match : "SSAd"}],
+	"JAM Video"                                : [{offset : 0, match : "JAM\0"}],
+	"KDV Video"                                : [{offset : 0, match : "xVDK"}],
+	"Little Big Adventure FLA Video"           : [{offset : 0, match : "V1.3"}],
+	"Machine Hunter FMV Video"                 : [{offset : 0, match : "AFMV"}],
+	"NXL Video v1"                             : [{offset : 0, match : [0x01]}, {offset : 16, match : "NXL1"}],
+	"NXL Video v2"                             : [{offset : 0, match : [0x01]}, {offset : 16, match : "NXL2"}],
+	"PTF Video"                                : [{offset : 4, match : [0x2E]}, {offset : 5, match : "PTF"}],
+	"Pray for Death CDA Video"                 : [{offset : 0, match : "LSANM\x01"}],
 	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
+	"Talisman ANI"                             : [{offset : 0, match : [0x34, 0x12, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00]}, {offset : 28, match : [0x21, 0x43, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00]}],
 	"VPX1 Video Package"                       : [{offset : 0, match : "VPX1  video interflow packing exalter"}],
+	"Zork PMV Video"                           : [{offset : 0, match : "MOVE"}, {offset : 8, match : "MHED"}],
 
 	// unsupported
 	"Amiga Action Reply 3 Freeze File" : [{offset : 0, match : [0x41, 0x52, 0x50, 0x33, 0x00]}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00]}, {offset : 22, match : Array(10).fill(0x00)}],

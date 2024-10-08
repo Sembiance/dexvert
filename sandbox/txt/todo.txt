@@ -1,21 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
-  Setting exclusive = "wuimg"; didn't help. May have to due with virtualX.
-  I was able to reproduce it with a bash script (/mnt/compendium/DevLab/dexvert/sandbox/convertCat.sh)
-  I didn't submit a bug about it because I'm not certain it's a wuimg bug vs creating multiple fake GLX contexts bug/xvfb
-
-* Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js)
-  Then re-process those in: https://dev.discmaster2.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
-  Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
-  These are the possible prefixes I've found, so look for these in 'detections':
-	0006AAD4
-	0006729A
-	0008FE2C
-	0007D950
-	00076D20
-	00078C80
+* Continue implementing formats from na_game_tool
 
 * Use /mnt/compendium/DevLab/dexvert/sandbox/wip/demoleition.exe to handle 'MoleBox' packed files:
   https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/erotik_poker.exe
@@ -61,6 +47,22 @@
 	image/pmDraw
 	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
 
+* Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js)
+  Then re-process those in: https://dev.discmaster2.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
+  Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
+  These are the possible prefixes I've found, so look for these in 'detections':
+	0006AAD4
+	0006729A
+	0008FE2C
+	0007D950
+	00076D20
+	00078C80
+
+* "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
+  Setting exclusive = "wuimg"; didn't help. May have to due with virtualX.
+  I was able to reproduce it with a bash script (/mnt/compendium/DevLab/dexvert/sandbox/convertCat.sh)
+  I didn't submit a bug about it because I'm not certain it's a wuimg bug vs creating multiple fake GLX contexts bug/xvfb
+
 * image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
   It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
   Perhaps get deark to add support for this format.
@@ -94,8 +96,6 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-1.0
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
-
-* Add some of these video game video formats: https://nihav.org/game_tool.html   (v0.2.0 in sandbox/app/)
 
 * Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within

@@ -17560,3 +17560,51 @@ xyz                RPG Maker image
 [dcx]      Zsoft Multi-page Paintbrush              dcx 
 [pcx]      Zsoft Publisher's Paintbrush             pcx pcc dcx 
 [bif]      byLight                                  bif 
+
+>>> na_game_tool 0.2.0  Linux https://nihav.org/game_tool.html
+  acf        Time Commando ACF
+  ark-an     Ark of Time animation
+  avf        American Laser Games / Her Interactive Video
+  avx        Jack Orlando AVX
+  azmov      Azrael's Tear MOV
+  ca2        Microcosm CA2
+  cda        Pray for Death CDA
+  ci2        Arxel Tribe CI2
+  cnm        Arxel Tribe CNM
+  crh-de     Dark Earth CRH
+  crh-nc     Nightmare Creatures CRH
+  defcon5    Defcon 5 video
+  dkanim     DK animation
+  dpeg       DPEG
+  duck-uqm   TrueMotion video for 3DO version of SC2
+  fla        Little Big Adventure FLA
+  flh        Conquest Earth FLH
+  fli        FLIC
+  guilty     Innocent Until Caught 1/2 cutscenes
+  h2o        The Pandora Directive video
+  hl-fmv     Highlander cutscenes
+  imx        Fable video
+  jam        JAM video
+  kdv24      Comanche video
+  kdv-c      Comanche video
+  kdv-af     Armored Fist video
+  kdv-cg     Comanche Gold video
+  kdv-wc     Werewolf vs. Comanche video
+  lotr-av    Lord of the Rings AV
+  mh-fmv     Machine Hunter FMV
+  mux        Infogrames MUX video
+  nl-fmv     Nightlong FMV (320x180)
+  nl-fmv2    Nightlong FMV2 (640x360)
+  nxl        The Lawnmower Man NXL
+  ph         Total Multimedia PH video
+  pmv        Infocom PMV
+  ptf        Under a Killing Moon PTF
+  qrac-fmv   Network Q RAC Rally FMV
+  rlf        Zork RLF
+  talisman   Talisman animation
+  tvi        Terminal Velocity video
+  umv-afraid Are You Afraid of the Dark UMV
+  umv-dracula Dracula Unleashed UMV
+  vdo        Harrow Media VDO
+  vpx1       reLINE VPX1
+  xanth      Companions of Xanth cutscenes

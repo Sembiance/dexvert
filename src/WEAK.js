@@ -183,6 +183,7 @@ export const WEAK_VALUES =
 	/^ModPlug demuxer \(libmodplug\)$/,
 	/^MP2\/3 \(MPEG audio layer 2\/3\) \(mp3\)$/,
 	/^MPlayer subtitles \(mpsub\)$/,
+	/^NC camera feed \(nc\)$/,
 	/^Nullsoft Streaming Video \(nsv\)$/,
 	/^Ogg \(ogg\)$/,
 	/^PJS \(Phoenix Japanimation Society\) subtitles \(pjs\)$/,

@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Continue implementing formats from na_game_tool
-
 * Use /mnt/compendium/DevLab/dexvert/sandbox/wip/demoleition.exe to handle 'MoleBox' packed files:
   https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/erotik_poker.exe
   https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/shop.exe

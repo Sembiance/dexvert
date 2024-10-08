@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,094)
+# Unsupported File Formats (2,097)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -823,7 +823,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,219)
+## Other (1,222)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -963,6 +963,7 @@ Family/Format | Name | Extensions | Notes
 [other/ailDigitalAudioDriver](https://discmaster.textfiles.com/search?formatid=ailDigitalAudioDriver) | Audio Interface Library 3 Digital audio driver | .dig | 
 [other/ailMidiDriver](https://discmaster.textfiles.com/search?formatid=ailMidiDriver) | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 [other/audioOverview](https://discmaster.textfiles.com/search?formatid=audioOverview) | Audio Overview | .ovw | 
+[other/aufschwungOstGraphics](https://discmaster.textfiles.com/search?formatid=aufschwungOstGraphics) | Aufschwung Ost graphics | .bpl | 
 [other/auroraEditorCompiledMacro](https://discmaster.textfiles.com/search?formatid=auroraEditorCompiledMacro) | Aurora Editor compiled macro | .x | 
 [other/aeSGMLBinaryStyle](https://discmaster.textfiles.com/search?formatid=aeSGMLBinaryStyle) | Author/Editor SGML Binary Style | .stl | 
 [other/authorwareLibrary](https://discmaster.textfiles.com/search?formatid=authorwareLibrary) | Authorware Library | .apl | 
@@ -1080,6 +1081,7 @@ Family/Format | Name | Extensions | Notes
 [other/clispMemoryImageData](https://discmaster.textfiles.com/search?formatid=clispMemoryImageData) | CLISP memory image data | .mem | 
 [other/cloneCDSubChannelData](https://discmaster.textfiles.com/search?formatid=cloneCDSubChannelData) | CloneCD CDImage SubChannel Data | .sub | 
 [other/cloneCDLanguageFile](https://discmaster.textfiles.com/search?formatid=cloneCDLanguageFile) | CloneCD Language File | .lng | 
+[other/cocktailFileModule](https://discmaster.textfiles.com/search?formatid=cocktailFileModule) | Cocktail File Module |  | 
 [other/codeViewColors](https://discmaster.textfiles.com/search?formatid=codeViewColors) | CodeView colors | .cvw | 
 [other/codeWarriorProject](https://discmaster.textfiles.com/search?formatid=codeWarriorProject) | CodeWarrior Project | .mcp | 
 [other/codeWarriorTargetData](https://discmaster.textfiles.com/search?formatid=codeWarriorTargetData) | CodeWarrior Target Data | .tdt | 
@@ -1224,6 +1226,7 @@ Family/Format | Name | Extensions | Notes
 [other/esriSpatialIndex](https://discmaster.textfiles.com/search?formatid=esriSpatialIndex) | ESRI Spatial Index |  | 
 [other/esriDataBaseIndex](https://discmaster.textfiles.com/search?formatid=esriDataBaseIndex) | ESRI/ArcView DataBase Index | .shx | 
 [other/estFlatBinary](https://discmaster.textfiles.com/search?formatid=estFlatBinary) | EST flat binary | .bin | 
+[other/examViewQuestionBank](https://discmaster.textfiles.com/search?formatid=examViewQuestionBank) | ExamView Question Bank | .bnk | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?formatid=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
 [other/extensibleStorageEngineDataBase](https://discmaster.textfiles.com/search?formatid=extensibleStorageEngineDataBase) | Extensible Storage Engine DataBase | .edb .sdb | 
 [other/extraForWindowsAPLKeymap](https://discmaster.textfiles.com/search?formatid=extraForWindowsAPLKeymap) | Extra! for Windows APL keymap | .apl | 

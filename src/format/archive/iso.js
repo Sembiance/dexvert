@@ -158,7 +158,7 @@ export class iso extends Format
 			{
 				const r = [];
 				if(multipleMode1Tracks)		// Some CD's (Game_Killer.bin) have a ton of MODE1 tracks, not sure why, but the stuff below kinda chokes on them, but aaru/unar/fuseiso all seem to handle it ok, but we just pick aaru and fuseiso for now
-					r.push("aaru", "fusiso");
+					r.push("aaru", "fuseiso");
 				r.push("uniso[checkMount]");	// Will only copy files if there are no input/output errors getting a directory listing (The PC-SIG Library on CD ROM - Ninth Edition.iso)
 
 				// some multi-bin groups (sample/archive/iso/Oh!X 2001 Spring Special CD-ROM (Japan) (Track 1).bin) get messed up with bchunk, so if we have multiple bins, try fuseiso first

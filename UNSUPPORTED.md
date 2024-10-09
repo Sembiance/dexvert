@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,097)
+# Unsupported File Formats (2,100)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (178)
+## Archive (180)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -85,6 +85,7 @@ Family/Format | Name | Extensions | Notes
 [archive/interfaze](https://discmaster.textfiles.com/search?formatid=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/internetExplorerCache](https://discmaster.textfiles.com/search?formatid=internetExplorerCache) | Internet Explorer cache |  | 
 [archive/izPackArchive](https://discmaster.textfiles.com/search?formatid=izPackArchive) | IzPack Archive |  | 
+[archive/kkcrunchPacked](https://discmaster.textfiles.com/search?formatid=kkcrunchPacked) | kkrunchy Packed | .exe | 
 [archive/kudoDataBaseCatalog](https://discmaster.textfiles.com/search?formatid=kudoDataBaseCatalog) | Kudo Data Base catalog | .kdb | 
 [archive/leadTechnologiesCompressedArchive](https://discmaster.textfiles.com/search?formatid=leadTechnologiesCompressedArchive) | Lead Technologies compressed Archive | .lta | 
 [archive/legoRacersGameDataArchive](https://discmaster.textfiles.com/search?formatid=legoRacersGameDataArchive) | Lego Racers game data archive | .jam | 
@@ -160,6 +161,7 @@ Family/Format | Name | Extensions | Notes
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/syneticAArchive](https://discmaster.textfiles.com/search?formatid=syneticAArchive) | Synetic Archive | .syn | 
 [archive/ted5Archive](https://discmaster.textfiles.com/search?formatid=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
+[archive/telockPacked](https://discmaster.textfiles.com/search?formatid=telockPacked) | tElock Packed | .exe | 
 [archive/theBuilderPacked](https://discmaster.textfiles.com/search?formatid=theBuilderPacked) | The Builder Packed | .exe | 
 [archive/duplicatorToolkitDiskImage](https://discmaster.textfiles.com/search?formatid=duplicatorToolkitDiskImage) | The Duplicator Toolkit disk image | .img | 
 [archive/thePatcherPacked](https://discmaster.textfiles.com/search?formatid=thePatcherPacked) | The Patcher Packed | .exe | 
@@ -823,7 +825,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,222)
+## Other (1,223)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1058,6 +1060,7 @@ Family/Format | Name | Extensions | Notes
 [other/cartoonersActor](https://discmaster.textfiles.com/search?formatid=cartoonersActor) | Cartooners Actor | .act | 
 [other/casioDiscTitlePrinterLabel](https://discmaster.textfiles.com/search?formatid=casioDiscTitlePrinterLabel) | Casio Disc Title Printer label | .ctw | 
 [other/castleOfTheWindsSavedGame](https://discmaster.textfiles.com/search?formatid=castleOfTheWindsSavedGame) | Castle of the Winds saved Game | .cwg | 
+[other/caveStorySaveGame](https://discmaster.textfiles.com/search?formatid=caveStorySaveGame) | CaveStory save game | .dat | 
 [other/cavewarsDialog](https://discmaster.textfiles.com/search?formatid=cavewarsDialog) | Cavewars dialog | .fdg | 
 [other/cBASICIntermediateCode](https://discmaster.textfiles.com/search?formatid=cBASICIntermediateCode) | CBASIC Intermediate code | .int | 
 [other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?formatid=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 

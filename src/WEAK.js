@@ -114,6 +114,7 @@ export const WEAK_VALUES =
 	/^Ubiquiti firmware header/,
 	/^Unix path: /,
 	/^WMA audio data$/,
+	/^ZBOOT firmware header/,
 
 	// Detect-It-Easy
 	/^Archive: André Osterhues's Code Compression Algorithm \(ACCA\.\)$/,
@@ -739,7 +740,7 @@ export const WEAK_VALUES =
 	/^Private key in DER format/,
 	/^ps database/,
 	/^Psion Series 5$/,
-	/^Psion Series 5 (([Ee]xecutable)|(ini file)|(ROM multi-bitmap image)|(Sheet spreadsheet))$/,
+	/^Psion Series 5 (([Ee]xecutable)|(ini file)|(ROM multi-bitmap image)|(Sheet file)|(Sheet spreadsheet))$/,
 	/^Psion Series 5 database Agenda file$/,
 	/^(pure )?object file \(z8000 a\.out\)$/,
 	/^pxelinux loader/,
@@ -1505,6 +1506,7 @@ export const WEAK_VALUES =
 	/^Digitals\/Delta Map$/,
 	/^DirectShow filter$/,
 	/^Dired ls-like directory listing/,
+	/^Dirk Bialluch TPU samples$/,
 	/^Dis bytecode \(not signed\)$/,
 	/^Disk Imploder compressed disk image$/,
 	/^Disney Animation Studio eXposure Sheet$/,

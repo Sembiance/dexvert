@@ -84,7 +84,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`mkdir /mnt/dexvert`,
 	`chown sembiance:sembiance /mnt/dexvert`,
 	`usermod -aG vboxusers sembiance`,
-	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0`,	// required for uniconvertor
+	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0 && cd`,	// required for uniconvertor
 	`echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<oor:data xmlns:oor="http://openoffice.org/2001/registry">\n  <dependency file="main"/>\n  <oor:component-data oor:package="org.openoffice.Office" oor:name="Common">\n    <node oor:name="Misc">\n      <prop oor:name="UseLocking">\n        <value>false</value>\n      </prop>\n    </node>\n  </oor:component-data>\n</oor:data>' > /usr/lib64/libreoffice/share/registry/disable-file-locking.xcd`,
 	`find /usr/portage/distfiles/ -mindepth 1 -delete`,
 	`emerge --depclean`,
@@ -92,7 +92,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`eix-update`,
 	`mkdir -p /mnt/dexdrone`,
 	`chown sembiance:sembiance /mnt/dexdrone`,
-	`sudo su - sembiance`,
+	`su - sembiance`,
 	`# Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,

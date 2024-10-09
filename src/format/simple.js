@@ -177,6 +177,7 @@ export default
 		jamMessageAreaHeaderFile        : {name : "JAM Message Area Header File", ext : [".jhr"], magic : ["JAM message area header file", "JAM message Header"], weakMagic : true},
 		javelinCaseStudy                : {name : "Javelin Case Study", ext : [".cas"], magic : ["Javelin Case study"]},
 		lapLinkHelp                     : {name : "LapLink Help", ext : [".hlp"], magic : ["LapLink Editor Help", "LapLink Pro 4 Help"]},
+		magneticHint                    : {name : "Magnetic Hint", ext : [".hnt"], magic : ["Magnetic Hint"], weakMagic : true},
 		maxonMultimediaScript           : {name : "Maxon Multimedia Script", magic : ["MaxonMULTIMEDIA script"]},
 		metaEditMethodDefinition        : {name : "MetaEdit Method Definition", ext : [".mof"], magic : ["MetaEdit Method definition"]},
 		microsoftProjectExportedData    : {name : "Microsoft Project exported data", ext : [".mpx"], magic : ["Microsoft Project exported data", /^Microsoft Project$/, /^fmt\/342( |$)/, /^x-fmt\/243( |$)/]},

@@ -10,6 +10,6 @@ export class iCEDraw extends Format
 	magic          = ["iCEDraw graphic", "iCE Draw File (idf)"];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["ansiloveInfo"];
-	converters     = ["ansilove[format:idf]", "ffmpeg[format:idf][outType:png]", `abydosconvert[format:${this.mimeType}]`];
+	converters     = ["ansilove[format:idf]", "ffmpeg[format:idf][outType:png][matchType:magic]", `abydosconvert[format:${this.mimeType}]`];
 	verify         = ({meta}) => meta.width>=16 && meta.height>=16;
 }

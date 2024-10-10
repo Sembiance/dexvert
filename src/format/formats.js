@@ -115,7 +115,7 @@ async function loadSimple({reload}={})
 		for(const [formatid, o] of Object.entries(simpleFormats))
 		{
 			if(formats[formatid])
-				throw new Error(`format [\${formatid}] in simple.js is a duplicate`);
+				throw new Error(`format [${formatid}] in simple.js is a duplicate`);
 
 			const supportedKeys = ["ext", "filename", "forbiddenMagic", "idMeta", "magic", "name", "trustMagic", "weakFilename", "weakMagic", "website"];
 			const extraKeys = Object.keys(o).subtractAll(supportedKeys);
@@ -165,7 +165,7 @@ async function loadGameArchive({reload}={})
 			for(const [formatid, o] of Object.entries(gameArchiveFormats))
 			{
 				if(formats[formatid])
-					throw new Error(`format [\${formatid}] in gameArchive.js is a duplicate`);
+					throw new Error(`format [${formatid}] in gameArchive.js is a duplicate`);
 
 				const allowExtMatch = !!o.allowExtMatch;
 				delete o.allowExtMatch;
@@ -223,7 +223,7 @@ async function loadPacked({reload}={})
 			for(const [formatid, o] of Object.entries(packedFormats))
 			{
 				if(formats[formatid])
-					throw new Error(`format [\${formatid}] in packed.js is a duplicate`);
+					throw new Error(`format [${formatid}] in packed.js is a duplicate`);
 
 				const supportedKeys = ["filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
 				const extraKeys = Object.keys(o).subtractAll(supportedKeys);

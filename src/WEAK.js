@@ -1103,6 +1103,7 @@ export const WEAK_VALUES =
 	/^OpenStreetMap Binary map data$/,
 	/^Organize! Environment$/,
 	/^Orao Tape image$/,
+	/^Oric Raw Tape format$/,
 	/^Ortho 3D Model$/,
 	/^OS\/2 Bitmap Graphics Array \(generic\)$/,
 	/^PA-RISC .*/,

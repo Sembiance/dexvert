@@ -37,6 +37,7 @@ export default
 		kasparovsGambitSavedGame           : {name : "Kasparov's Gambit saved Game", ext : [".gam"], magic : ["Kasparov's Gambit saved Game"], weakMagic : true},
 		lifeCellularAutomataFormat         : {name : "Life cellular automata format", ext : [".lif"], magic : ["Life cellular automata format"], weakMagic : true},
 		ogreMaterial                       : {name : "OGRE Material", ext : [".material"], magic : ["OGRE Material"], weakMagic : true},
+		operationFlashpointMission         : {name : "Operation Flashpoint mission", ext : [".sqm"], magic : ["Operation Flashpoint mission"], weakMagic : true},
 		plbmGamesDataBaseIndex             : {name : "PLBM Games Data Base index", ext : [".dbk"], magic : ["PLBM Games Data Base index"], weakMagic : true},
 		portableBridgeNotation             : {name : "Portable Bridge Notation", ext : [".pbn"], magic : ["Portable Bridge Notation"], weakMagic : true},
 		portableDraughtsNotation           : {name : "Portable Draughts Notation", ext : [".pdn"], magic : ["Portable Draughts Notation"], website : "http://fileformats.archiveteam.org/wiki/Portable_Draughts_Notation#Sample_files"},

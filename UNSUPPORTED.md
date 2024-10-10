@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,111)
+# Unsupported File Formats (2,126)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -525,7 +525,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (153)
+## Image (154)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -561,6 +561,7 @@ Family/Format | Name | Extensions | Notes
 [image/continuousEdge](https://discmaster.textfiles.com/search?formatid=continuousEdge) | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://sembiance.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 [image/corel10Texture](https://discmaster.textfiles.com/search?formatid=corel10Texture) | Corel 10 Texture | .tex | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?formatid=crayolaArtStudio) | Crayola Art Studio | .art | 
+[image/croteamTextureFile](https://discmaster.textfiles.com/search?formatid=croteamTextureFile) | Croteam texture file | .tex .tbn | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?formatid=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
 [image/desiIIIDrawing](https://discmaster.textfiles.com/search?formatid=desiIIIDrawing) | DESI-III drawing | .bin .din | 
 [image/designWorks](https://discmaster.textfiles.com/search?formatid=designWorks) | DesignWorks Drawing |  | [2 sample files](https://sembiance.com/fileFormatSamples/image/designWorks/)
@@ -825,7 +826,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,234)
+## Other (1,248)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1004,6 +1005,7 @@ Family/Format | Name | Extensions | Notes
 [other/bioForgeSkin](https://discmaster.textfiles.com/search?formatid=bioForgeSkin) | BioForge Skin | .skn | 
 [other/biovisionAction](https://discmaster.textfiles.com/search?formatid=biovisionAction) | Biovision Action data | .vpm .bva | 
 [other/biovisionHierarchyCharacterAnimation](https://discmaster.textfiles.com/search?formatid=biovisionHierarchyCharacterAnimation) | Biovision Hierarchy character animation format | .bvh | 
+[other/bisraPEncoded](https://discmaster.textfiles.com/search?formatid=bisraPEncoded) | BIS raP encoded format | .sqm .bin | 
 [other/blackAndWhiteSoundsData](https://discmaster.textfiles.com/search?formatid=blackAndWhiteSoundsData) | Black and White sounds data | .sad | 
 [other/blockBreakerPattern](https://discmaster.textfiles.com/search?formatid=blockBreakerPattern) | Block Breaker Pattern | .blc | 
 [other/bnuportPatchTable](https://discmaster.textfiles.com/search?formatid=bnuportPatchTable) | BNUPORT Patch Table | .pat | 
@@ -1168,6 +1170,7 @@ Family/Format | Name | Extensions | Notes
 [other/desktopDF](https://discmaster.textfiles.com/search?formatid=desktopDF) | Desktop DF |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDF/)
 [other/dexDriveMemoryCardSaveGame](https://discmaster.textfiles.com/search?formatid=dexDriveMemoryCardSaveGame) | DexDrive memory card save game | .gme | 
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
+[other/diablo2SavedGame](https://discmaster.textfiles.com/search?formatid=diablo2SavedGame) | Diablo II Saved Game | .d2s | 
 [other/diagsoftSpaceShuttlePlotData](https://discmaster.textfiles.com/search?formatid=diagsoftSpaceShuttlePlotData) | Diagsoft Space Shuttle Plot data | .cad | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 
@@ -1185,7 +1188,9 @@ Family/Format | Name | Extensions | Notes
 [other/drHaloPrinterDefinition](https://discmaster.textfiles.com/search?formatid=drHaloPrinterDefinition) | Dr. Halo Printer definition | .prn | 
 [other/drHardwareSysInfo](https://discmaster.textfiles.com/search?formatid=drHardwareSysInfo) | Dr. Hardware Sysinfo | .dat | 
 [other/drSolomonsAntivirusMessages](https://discmaster.textfiles.com/search?formatid=drSolomonsAntivirusMessages) | Dr. Solomon's Antivirus messages | .dat | 
+[other/drWebLanguageData](https://discmaster.textfiles.com/search?formatid=drWebLanguageData) | Dr. Web Language data | .dwl | 
 [other/drWebAntiVirusDatabas](https://discmaster.textfiles.com/search?formatid=drWebAntiVirusDatabas) | Dr.Web Anti-Virus Database | .vdb | 
+[other/dragonUnPACKerHTMLTemplate](https://discmaster.textfiles.com/search?formatid=dragonUnPACKerHTMLTemplate) | Dragon UnPACKer HTML Template | .uht | 
 [other/drawStudioGradient](https://discmaster.textfiles.com/search?formatid=drawStudioGradient) | DrawStudio Gradient |  | 
 [other/drawStudioPattern](https://discmaster.textfiles.com/search?formatid=drawStudioPattern) | DrawStudio Pattern |  | 
 [other/dreamcastDisc](https://discmaster.textfiles.com/search?formatid=dreamcastDisc) | Dreamcast Disc | .bin | 
@@ -1241,6 +1246,8 @@ Family/Format | Name | Extensions | Notes
 [other/fabricDesign](https://discmaster.textfiles.com/search?formatid=fabricDesign) | Fabric design | .fab | 
 [other/faeryTaleAdventure2SaveGame](https://discmaster.textfiles.com/search?formatid=faeryTaleAdventure2SaveGame) | Faery Tale Adventure 2 save game | .sav | 
 [other/falloutCompiledScript](https://discmaster.textfiles.com/search?formatid=falloutCompiledScript) | Fallout compiled script | .int | 
+[other/falloutTacticsEntity](https://discmaster.textfiles.com/search?formatid=falloutTacticsEntity) | Fallout Tactics Entity | .ent | 
+[other/falloutTacticsImage](https://discmaster.textfiles.com/search?formatid=falloutTacticsImage) | Fallout Tactics image | .zar | 
 [other/fastLynxHelp](https://discmaster.textfiles.com/search?formatid=fastLynxHelp) | FastLynx Help | .hlp | 
 [other/ferrariFormulaOneTrackData](https://discmaster.textfiles.com/search?formatid=ferrariFormulaOneTrackData) | Ferrari Formula One track data | .tkb4 .tkb | 
 [other/fiascoDatabaseFile](https://discmaster.textfiles.com/search?formatid=fiascoDatabaseFile) | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
@@ -1251,6 +1258,7 @@ Family/Format | Name | Extensions | Notes
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?formatid=firstBasicHelp) | FirstBasic Help | .fbh | 
 [other/fLStudioScore](https://discmaster.textfiles.com/search?formatid=fLStudioScore) | FL Studio Score | .fsc | 
 [other/flStudioTrack](https://discmaster.textfiles.com/search?formatid=flStudioTrack) | FL Studio Track | .flp .fst | 
+[other/flanker2MissionData](https://discmaster.textfiles.com/search?formatid=flanker2MissionData) | Flanker 2 Mission data | .mis .trk | 
 [other/flashbackObject](https://discmaster.textfiles.com/search?formatid=flashbackObject) | Flashback Object | .obj | 
 [other/flexidumpCustomPrinterDriver](https://discmaster.textfiles.com/search?formatid=flexidumpCustomPrinterDriver) | Flexidump Custom printer driver | .cus | 
 [other/flightCommander2BattleData](https://discmaster.textfiles.com/search?formatid=flightCommander2BattleData) | Flight Commander 2 Battle data | .btl | 
@@ -1309,6 +1317,7 @@ Family/Format | Name | Extensions | Notes
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?formatid=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
+[other/grandTheftAuto2MapLayout](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2MapLayout) | Grand Theft Auto 2 Map Layout | .gmp | 
 [other/grandTheftAuto2StyleData](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2StyleData) | Grand Theft Auto 2 Style data | .sty | 
 [other/grandTheftAuto2TextData](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2TextData) | Grand Theft Auto 2 Text data | .gxt | 
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?formatid=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
@@ -1319,6 +1328,7 @@ Family/Format | Name | Extensions | Notes
 [other/guitarProTablature](https://discmaster.textfiles.com/search?formatid=guitarProTablature) | Guitar Pro tablature | .gp3 | 
 [other/hbedvAVAVIRAProductKey](https://discmaster.textfiles.com/search?formatid=hbedvAVAVIRAProductKey) | H-BEDV - AVIRA product key | .key | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
+[other/halfLifeDemo](https://discmaster.textfiles.com/search?formatid=halfLifeDemo) | Half-Life Demo | .dem | 
 [other/halionSamplerPatchBank](https://discmaster.textfiles.com/search?formatid=halionSamplerPatchBank) | HALion Sampler patch - bank | .fxb | 
 [other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
 [other/hammerHeadRhythmStationPattern](https://discmaster.textfiles.com/search?formatid=hammerHeadRhythmStationPattern) | HammerHead Rhythm Station pattern | .hh | 
@@ -1390,9 +1400,10 @@ Family/Format | Name | Extensions | Notes
 [other/junglevisionData](https://discmaster.textfiles.com/search?formatid=junglevisionData) | Junglevision data | .op3 | 
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?formatid=junoClientLicenseKey) | Juno client license Key | .key | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?formatid=kChessSavedGame) | K-Chess saved game | .kch .kc | 
-[other/kaperskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?formatid=kaperskyAntiVirusLicenseKey) | Kapersky Anti-Virus License Key | .key | 
+[other/kapeerskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?formatid=kapeerskyAntiVirusLicenseKey) | Kaperesky Anti-Virus License Key | .key | 
 [other/karmaAsset](https://discmaster.textfiles.com/search?formatid=karmaAsset) | Karma Asset | .ka | 
 [other/kasparovSGambitConfiguration](https://discmaster.textfiles.com/search?formatid=kasparovSGambitConfiguration) | Kasparov's Gambit Configuration | .cfg | 
+[other/kasperskyAntiVirusDatabase](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusDatabase) | Kaspersky Anti-virus data base | .avc | 
 [other/kbdMapFile](https://discmaster.textfiles.com/search?formatid=kbdMapFile) | kbd map file |  | 
 [other/keyWalletObjectEncryptedData](https://discmaster.textfiles.com/search?formatid=keyWalletObjectEncryptedData) | KeyWallet Object - encrypted data | .kwo | 
 [other/keyWalletSkin](https://discmaster.textfiles.com/search?formatid=keyWalletSkin) | KeyWallet Skin | .kws | 
@@ -1564,6 +1575,7 @@ Family/Format | Name | Extensions | Notes
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?formatid=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?formatid=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
 [other/navisWorksDocument](https://discmaster.textfiles.com/search?formatid=navisWorksDocument) | NavisWorks Document | .nwd | 
+[other/necromancersDosNavigatorHelp](https://discmaster.textfiles.com/search?formatid=necromancersDosNavigatorHelp) | Necromancer's Dos Navigator Help | .hlp | 
 [other/needForSpeed2TrackData](https://discmaster.textfiles.com/search?formatid=needForSpeed2TrackData) | Need For Speed 2 Track data | .trk | 
 [other/needForSpeedCarData](https://discmaster.textfiles.com/search?formatid=needForSpeedCarData) | Need for Speed car data | .pdn | 
 [other/needForSpeedCarExterior](https://discmaster.textfiles.com/search?formatid=needForSpeedCarExterior) | Need for Speed car exterior | .cfm | 
@@ -1664,6 +1676,7 @@ Family/Format | Name | Extensions | Notes
 [other/photoLineBrowseIndex](https://discmaster.textfiles.com/search?formatid=photoLineBrowseIndex) | PhotoLine browse index | .plb | 
 [other/photoLine32Document](https://discmaster.textfiles.com/search?formatid=photoLine32Document) | PhotoLine32 Document | .pld | 
 [other/photoStylerColorsDefinition](https://discmaster.textfiles.com/search?formatid=photoStylerColorsDefinition) | PhotoStyler Colors definition | .clr | 
+[other/picturePumpProjectFile](https://discmaster.textfiles.com/search?formatid=picturePumpProjectFile) | Picture Pump Project File | .ppp | 
 [other/pixelBenderBytecode](https://discmaster.textfiles.com/search?formatid=pixelBenderBytecode) | Pixel Bender bytecode |  | 
 [other/pkcsCryptographicMessageFile](https://discmaster.textfiles.com/search?formatid=pkcsCryptographicMessageFile) | PKCS Cryptographic Message File |  | 
 [other/platinenLayoutLayout](https://discmaster.textfiles.com/search?formatid=platinenLayoutLayout) | Platinen Layout Program Layout | .pla | 
@@ -1774,6 +1787,7 @@ Family/Format | Name | Extensions | Notes
 [other/rtPatchFile](https://discmaster.textfiles.com/search?formatid=rtPatchFile) | RTPatch File | .rtp | 
 [other/samplitudeProject](https://discmaster.textfiles.com/search?formatid=samplitudeProject) | Samplitude Project | .rap .vip | 
 [other/sangoFighterConfiguration](https://discmaster.textfiles.com/search?formatid=sangoFighterConfiguration) | Sango Fighter Configuration | .cfg | 
+[other/sanityAikensArtifactSavedGame](https://discmaster.textfiles.com/search?formatid=sanityAikensArtifactSavedGame) | Sanity: Aiken's Artifact Saved Game | .sav | 
 [other/saveRam2CompressedData](https://discmaster.textfiles.com/search?formatid=saveRam2CompressedData) | SaveRam2 compressed data | .fls | 
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?formatid=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
 [other/sciTechDriver](https://discmaster.textfiles.com/search?formatid=sciTechDriver) | SciTech Driver | .drv | 
@@ -1979,6 +1993,7 @@ Family/Format | Name | Extensions | Notes
 [other/vocalEyesSet](https://discmaster.textfiles.com/search?formatid=vocalEyesSet) | Vocal-Eyes Set | .set | 
 [other/volkovCommanderConfiguration](https://discmaster.textfiles.com/search?formatid=volkovCommanderConfiguration) | Volkov Commander configuration | .ini | 
 [other/vortexATonceConfiguration](https://discmaster.textfiles.com/search?formatid=vortexATonceConfiguration) | Vortex ATonce Configuration | .cfg | 
+[other/voxelAnimation](https://discmaster.textfiles.com/search?formatid=voxelAnimation) | Voxel Animation | .vxl | 
 [other/vpExpertHelpSystem](https://discmaster.textfiles.com/search?formatid=vpExpertHelpSystem) | VP-Expert Help System | .chp | 
 [other/vSamplerSoundBank](https://discmaster.textfiles.com/search?formatid=vSamplerSoundBank) | VSampler Sound Bank | .vsb | 
 [other/vsoLanguageData](https://discmaster.textfiles.com/search?formatid=vsoLanguageData) | VSO language data | .spk | 

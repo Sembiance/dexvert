@@ -148,7 +148,7 @@ const FLEX_SIZE_PROGRAMS =
 	gimp                        : 5,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
-	soundFont2tomp3             : 0.1,
+	soundFont2tomp3             : 20,
 	unp                         : 0.1,
 	zxtune123                   : 0.1
 };
@@ -211,7 +211,7 @@ const FLEX_SIZE_FORMATS =
 		swfEXE : 75,
 
 		// different generation per host/version
-		"swish:.swi"          : 0.1,
+		"swish:.ttf"          : 0.1,
 		"amosMemoryBank:.mp3" : 1,
 		"iso:.mp3"            : 1,
 		"tnef:.pdf"           : 40,
@@ -394,6 +394,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
 	[/document\/wordDocDOS\/.+\.(DOC|doc|MSW)$/, "document", "wri"],
+	[/document\/wordDocDOS\/horse$/, "document", "wri"],
 	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],

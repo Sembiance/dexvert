@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,100)
+# Unsupported File Formats (2,111)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -825,7 +825,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,223)
+## Other (1,234)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1120,6 +1120,7 @@ Family/Format | Name | Extensions | Notes
 [other/crosstalkFilter](https://discmaster.textfiles.com/search?formatid=crosstalkFilter) | Crosstalk Filter | .xtf | 
 [other/crosstalkProtocol](https://discmaster.textfiles.com/search?formatid=crosstalkProtocol) | Crosstalk Protocol | .xtp | 
 [other/crosstalkTerminal](https://discmaster.textfiles.com/search?formatid=crosstalkTerminal) | Crosstalk Terminal | .xtt | 
+[other/crosswordPuzzle](https://discmaster.textfiles.com/search?formatid=crosswordPuzzle) | Crossword Puzzle | .gpm | 
 [other/cryoInteractiveGameData](https://discmaster.textfiles.com/search?formatid=cryoInteractiveGameData) | Cryo Interactive game data | .3da .3dc .3dm | 
 [other/crystalAtariBrowserModule](https://discmaster.textfiles.com/search?formatid=crystalAtariBrowserModule) | Crystal Atari Browser Module | .mdl | 
 [other/ctVOICEDriver](https://discmaster.textfiles.com/search?formatid=ctVOICEDriver) | CT-VOICE Driver | .drv | 
@@ -1165,6 +1166,7 @@ Family/Format | Name | Extensions | Notes
 [other/designIt3D2DObjectLibrary](https://discmaster.textfiles.com/search?formatid=designIt3D2DObjectLibrary) | Design It! 3-D 2D object Library | .wlb | 
 [other/desktopDB](https://discmaster.textfiles.com/search?formatid=desktopDB) | Desktop DB |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDB/)
 [other/desktopDF](https://discmaster.textfiles.com/search?formatid=desktopDF) | Desktop DF |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDF/)
+[other/dexDriveMemoryCardSaveGame](https://discmaster.textfiles.com/search?formatid=dexDriveMemoryCardSaveGame) | DexDrive memory card save game | .gme | 
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/diagsoftSpaceShuttlePlotData](https://discmaster.textfiles.com/search?formatid=diagsoftSpaceShuttlePlotData) | Diagsoft Space Shuttle Plot data | .cad | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
@@ -1237,6 +1239,7 @@ Family/Format | Name | Extensions | Notes
 [other/extraForWindowsSmartpadDefinition](https://discmaster.textfiles.com/search?formatid=extraForWindowsSmartpadDefinition) | Extra! for Windows smartpad definition | .ewp | 
 [other/f1gpEdData](https://discmaster.textfiles.com/search?formatid=f1gpEdData) | F1GP-Ed Data | .events .settings | 
 [other/fabricDesign](https://discmaster.textfiles.com/search?formatid=fabricDesign) | Fabric design | .fab | 
+[other/faeryTaleAdventure2SaveGame](https://discmaster.textfiles.com/search?formatid=faeryTaleAdventure2SaveGame) | Faery Tale Adventure 2 save game | .sav | 
 [other/falloutCompiledScript](https://discmaster.textfiles.com/search?formatid=falloutCompiledScript) | Fallout compiled script | .int | 
 [other/fastLynxHelp](https://discmaster.textfiles.com/search?formatid=fastLynxHelp) | FastLynx Help | .hlp | 
 [other/ferrariFormulaOneTrackData](https://discmaster.textfiles.com/search?formatid=ferrariFormulaOneTrackData) | Ferrari Formula One track data | .tkb4 .tkb | 
@@ -1423,6 +1426,7 @@ Family/Format | Name | Extensions | Notes
 [other/lithTechResourceData](https://discmaster.textfiles.com/search?formatid=lithTechResourceData) | LithTech Resource data | .rez | 
 [other/logicSimCircuit](https://discmaster.textfiles.com/search?formatid=logicSimCircuit) | LogicSim Circuit |  | 
 [other/logitechModula2LoadableSymbols](https://discmaster.textfiles.com/search?formatid=logitechModula2LoadableSymbols) | Logitech Modula-2 Loadable Symbols | .sym | 
+[other/logosLibronixData](https://discmaster.textfiles.com/search?formatid=logosLibronixData) | Logos Libronix data | .lbx .lbxdat .LBXLLS | 
 [other/lomaxGameData](https://discmaster.textfiles.com/search?formatid=lomaxGameData) | Lomax game data | .lmx | 
 [other/lomaxWorldGameData](https://discmaster.textfiles.com/search?formatid=lomaxWorldGameData) | Lomax World game data | .wld | 
 [other/lotus123AddInApplication](https://discmaster.textfiles.com/search?formatid=lotus123AddInApplication) | Lotus 1-2-3 Add-In Application | .adn | 
@@ -1665,6 +1669,7 @@ Family/Format | Name | Extensions | Notes
 [other/platinenLayoutLayout](https://discmaster.textfiles.com/search?formatid=platinenLayoutLayout) | Platinen Layout Program Layout | .pla | 
 [other/platinenLayoutBibliotheken](https://discmaster.textfiles.com/search?formatid=platinenLayoutBibliotheken) | Platinen Layout Programm Bibliotheken/library | .bib | 
 [other/platinenLayoutProgrammMacro](https://discmaster.textfiles.com/search?formatid=platinenLayoutProgrammMacro) | Platinen Layout Programm Macro | .mac | 
+[other/playstationSingleGameSave](https://discmaster.textfiles.com/search?formatid=playstationSingleGameSave) | Playstation single game save | .psx | 
 [other/plbmGamesConfiguration](https://discmaster.textfiles.com/search?formatid=plbmGamesConfiguration) | PLBM Games Configuration | .cfg | 
 [other/plbmGamesGameData](https://discmaster.textfiles.com/search?formatid=plbmGamesGameData) | PLBM Games game data | .lcr | 
 [other/plbmGamesHighScores](https://discmaster.textfiles.com/search?formatid=plbmGamesHighScores) | PLBM Games high scores | .dat | 
@@ -1691,6 +1696,7 @@ Family/Format | Name | Extensions | Notes
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?formatid=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
 [other/printShopDeluxeAutograph](https://discmaster.textfiles.com/search?formatid=printShopDeluxeAutograph) | Print Shop Deluxe Autograph | .pau | 
+[other/printShopDeluxeCardLayout](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCardLayout) | Print Shop Deluxe Card Layout | .cly | 
 [other/printShopDeluxeCardTimepieces](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCardTimepieces) | Print Shop Deluxe Card Timepieces | .pct | 
 [other/printShopDeluxeCertificate](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCertificate) | Print Shop Deluxe Certificate | .prm | 
 [other/printShopDeluxeCertificateBorders](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCertificateBorders) | Print Shop Deluxe Certificate Borders | .cbr | 
@@ -1698,6 +1704,7 @@ Family/Format | Name | Extensions | Notes
 [other/printShopDeluxeRule](https://discmaster.textfiles.com/search?formatid=printShopDeluxeRule) | Print Shop Deluxe Rule | .prl | 
 [other/printShopDeluxeSealExteriors](https://discmaster.textfiles.com/search?formatid=printShopDeluxeSealExteriors) | Print Shop Deluxe Seal Exteriors | .pse | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?formatid=printerFontMetrics) | Printer Font Metrics | .pfm | 
+[other/printPowerProData](https://discmaster.textfiles.com/search?formatid=printPowerProData) | PrintPower Pro data | .pvl | 
 [other/proThrottleConfiguration](https://discmaster.textfiles.com/search?formatid=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
 [other/proCiteData](https://discmaster.textfiles.com/search?formatid=proCiteData) | ProCite data | .pdt .pos | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
@@ -1747,6 +1754,7 @@ Family/Format | Name | Extensions | Notes
 [other/reportSmithReport](https://discmaster.textfiles.com/search?formatid=reportSmithReport) | ReportSmith report | .rpt | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?formatid=rfFlowDiagram) | RFFlow Diagram | .flo | 
 [other/rHIDEProject](https://discmaster.textfiles.com/search?formatid=rHIDEProject) | RHIDE Project | .gpr | 
+[other/richMapFormat](https://discmaster.textfiles.com/search?formatid=richMapFormat) | Rich Map Format | .rmf | 
 [other/riffMSXF](https://discmaster.textfiles.com/search?formatid=riffMSXF) | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
 [other/riffMxSt](https://discmaster.textfiles.com/search?formatid=riffMxSt) | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
 [other/riffPalette](https://discmaster.textfiles.com/search?formatid=riffPalette) | RIFF Palette | .pal | 
@@ -1809,6 +1817,7 @@ Family/Format | Name | Extensions | Notes
 [other/softDiskLibrary](https://discmaster.textfiles.com/search?formatid=softDiskLibrary) | SoftDisk Library | .shl | 
 [other/softwareDesignCryptoEncryptedData](https://discmaster.textfiles.com/search?formatid=softwareDesignCryptoEncryptedData) | Software Design Crypto encrypted data |  | 
 [other/solitaireSettyProject](https://discmaster.textfiles.com/search?formatid=solitaireSettyProject) | Solitaire Setty Project | .ss | 
+[other/soniqueSkin](https://discmaster.textfiles.com/search?formatid=soniqueSkin) | Sonique skin | .sgf | 
 [other/sonixMIDIInstrument](https://discmaster.textfiles.com/search?formatid=sonixMIDIInstrument) | Sonix MIDI Instrument | .instr | 
 [other/soundForgePeakData](https://discmaster.textfiles.com/search?formatid=soundForgePeakData) | Sound Forge Peak Data | .sfk | 
 [other/soundImagesSoundDriver](https://discmaster.textfiles.com/search?formatid=soundImagesSoundDriver) | Sound Images Sound Driver | .bin | 
@@ -1822,6 +1831,7 @@ Family/Format | Name | Extensions | Notes
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?formatid=starAmPlanGraphData) | StarAm Plan graph data | .gein | 
 [other/starCraftMap](https://discmaster.textfiles.com/search?formatid=starCraftMap) | StarCraft Map | .scm .scx | 
 [other/starCraftReplay](https://discmaster.textfiles.com/search?formatid=starCraftReplay) | StarCraft Replay | .rep | 
+[other/stareEOWorkshopConfig](https://discmaster.textfiles.com/search?formatid=stareEOWorkshopConfig) | Stare-EO Workshop configuration | .cfg | 
 [other/starlancerForceData](https://discmaster.textfiles.com/search?formatid=starlancerForceData) | Starlancer Force data | .frc | 
 [other/starSiegeMission](https://discmaster.textfiles.com/search?formatid=starSiegeMission) | StarSiege Mission | .mis | 
 [other/starTrekkerModuleInfo](https://discmaster.textfiles.com/search?formatid=starTrekkerModuleInfo) | Startrekker Module Info | .nt | 
@@ -1953,6 +1963,7 @@ Family/Format | Name | Extensions | Notes
 [other/virusZIIIBootblocksData](https://discmaster.textfiles.com/search?formatid=virusZIIIBootblocksData) | VirusZ III Bootblocks data | .bootblocks | 
 [other/visionaireMesh](https://discmaster.textfiles.com/search?formatid=visionaireMesh) | Visionaire Mesh | .mesh | 
 [other/visionaireProject](https://discmaster.textfiles.com/search?formatid=visionaireProject) | Visionaire Project | .vis | 
+[other/vistaDataFormat](https://discmaster.textfiles.com/search?formatid=vistaDataFormat) | [Vista data format](http://fileformats.archiveteam.org/wiki/Vista_data_file) | .v | 
 [other/vistaMakepathSession](https://discmaster.textfiles.com/search?formatid=vistaMakepathSession) | Vista Makepath Session | .ses | 
 [other/visualBasicExtension](https://discmaster.textfiles.com/search?formatid=visualBasicExtension) | Visual Basic Extension | .vbx | 
 [other/visualBasicProjectWorkspace](https://discmaster.textfiles.com/search?formatid=visualBasicProjectWorkspace) | Visual Basic Project Workspace | .frm | 

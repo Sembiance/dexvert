@@ -43,6 +43,14 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 			throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
 	}
 
+	if(format.ext)
+	{
+		const invalidExtensions = format.ext.filter(ext => ext!==ext.toLowerCase());
+		if(invalidExtensions.length>0)
+			throw new Error(`format ${formatid} has invalid extensions (SHOULD always be LOWERCASE): ${invalidExtensions}`);
+	}
+
+
 	if(Object.hasOwn(format, "forbidExtMatch") && !Object.hasOwn(format, "ext"))
 		throw new Error(`format ${formatid} has forbidExtMatch, but no ext`);
 

@@ -1,6 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Look into why these 2 files fail on dexdrone11 and dexdrone12 (may be due to latest libre office):
+  [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
+  [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
+  Do this AFTER updating laptop/workstation to latest software versions
+
 * Adopt program (try in win2k, otherwise probably win7): https://game-viewer.org/download.php
   Use it with plugin: https://game-viewer.org/plugin.php?id=90
   To view resources *.gfx: https://dev.discmaster2.textfiles.com/browse/11205/Gamer%20Collector%203:%20Action.iso/FUGA_192/data/plate-forme/Gold%20Miner%20Joe/GoldMiner.exe/%23setuppath%23/Graphics

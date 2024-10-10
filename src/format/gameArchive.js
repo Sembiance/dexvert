@@ -26,6 +26,7 @@ export const gameextractor =
 		hmmPackfileGameArchive             : {name : "HMM Packfile Game Archive", ext : [".wdt"], magic : ["Rising Kingdoms game data archive", /^fmt\/1876( |$)/]},
 		interstateGameArchive              : {name : "Interstate Series Game Archive", ext : [".zfs"], magic : ["Interstate serie game data archive", "Zork FileSystem game data archive"], weakMagic : true},
 		janesLongbow2GameArchive           : {name : "Jane's Longbow 2 Game Archive", ext : [".tre"], magic : ["Jane's Longbow 2 game data archive"]},
+		lemmingsRevolutionGameArchive      : {name : "Lemmings Revolution game archive", ext : [".box"], magic : ["Lemmings Revolution game data archive"]},
 		lookingGlassGameArchive            : {name : "Looking Glass Game Archive", ext : [".res"], magic : ["Looking Glass Resource data", "LG Archiv gefunden"]},
 		lucasArtsGameArchive               : {name : "Lucas Arts Game Archive", ext : [".gob"], magic : ["LucasArts Game data archive", "Dark Forces Game data archive"]},
 		madsHAGGameArchive                 : {name : "MADS HAG Game Archive", ext : [".hag"], magic : ["MADS HAG game data archive"]},
@@ -47,6 +48,7 @@ export const gameextractor =
 		volitionPackageGameArchive         : {name : "Volition Package game archive", ext : [".vp"], magic : ["Volition Package game archive data"], weakMagic : true},
 		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true},
 		wad2GameArchive                    : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
+		xcrArchive                         : {name : "XCR archive", ext : [".xcr"], magic : ["XCR archive"]},
 		youDontKnowJackGameArchive         : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"]}
 	}
 };

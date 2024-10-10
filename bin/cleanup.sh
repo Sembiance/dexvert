@@ -17,6 +17,16 @@ cd /mnt/ram/tmp || exit
 sudo umount ./*uniso
 sudo umount ./*photocd-info
 sudo umount ./*iso/*fuseiso
+sudo umount ./*/*
+sudo umount ./*
+sudo umount -f ./*/*
+sudo umount -f ./*
+sudo killall mount
+sudo killall -9 mount
+sudo umount ./*/*
+sudo umount ./*
+sudo umount -f ./*/*
+sudo umount -f ./*
 rm -rf ./*
 sudo umount ./*/*
 sudo umount ./*

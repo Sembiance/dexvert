@@ -8,7 +8,7 @@ export class iCEDraw extends Format
 	ext            = [".idf"];
 	mimeType       = "image/x-icedraw";
 	magic          = ["iCEDraw graphic", "iCE Draw File (idf)"];
-	forbiddenMagic = TEXT_MAGIC_STRONG;
+	forbiddenMagic = [...TEXT_MAGIC_STRONG, "1nsane game data archive"];
 	metaProvider   = ["ansiloveInfo"];
 	converters     = ["ansilove[format:idf]", "ffmpeg[format:idf][outType:png][matchType:magic]", `abydosconvert[format:${this.mimeType}]`];
 	verify         = ({meta}) => meta.width>=16 && meta.height>=16;

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,126)
+# Unsupported File Formats (2,139)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -262,7 +262,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (115)
+## Document (116)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -329,6 +329,7 @@ Family/Format | Name | Extensions | Notes
 [document/hyperSlidePresentation](https://discmaster.textfiles.com/search?formatid=hyperSlidePresentation) | HyperSlide presentation | .hsl | 
 [document/iesHyperText](https://discmaster.textfiles.com/search?formatid=iesHyperText) | I.E.S. HyperText | .hyp | [6 sample files](https://sembiance.com/fileFormatSamples/document/iesHyperText/)
 [document/ibmDisplayWriteDocument](https://discmaster.textfiles.com/search?formatid=ibmDisplayWriteDocument) | IBM DisplayWrite Document | .doc | 
+[document/iceBookReaderEBook](https://discmaster.textfiles.com/search?formatid=iceBookReaderEBook) | ICE Book Reader eBook | .book | 
 [document/improvSpreadsheet](https://discmaster.textfiles.com/search?formatid=improvSpreadsheet) | Improv spreadsheet | .imp | 
 [document/installShieldCompiledScript](https://discmaster.textfiles.com/search?formatid=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
 [document/interBaseDB](https://discmaster.textfiles.com/search?formatid=interBaseDB) | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
@@ -826,7 +827,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,248)
+## Other (1,260)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1009,6 +1010,7 @@ Family/Format | Name | Extensions | Notes
 [other/blackAndWhiteSoundsData](https://discmaster.textfiles.com/search?formatid=blackAndWhiteSoundsData) | Black and White sounds data | .sad | 
 [other/blockBreakerPattern](https://discmaster.textfiles.com/search?formatid=blockBreakerPattern) | Block Breaker Pattern | .blc | 
 [other/bnuportPatchTable](https://discmaster.textfiles.com/search?formatid=bnuportPatchTable) | BNUPORT Patch Table | .pat | 
+[other/bohemiaGameArchive](https://discmaster.textfiles.com/search?formatid=bohemiaGameArchive) | Bohemia game archive | .pbo | 
 [other/boloMap](https://discmaster.textfiles.com/search?formatid=boloMap) | Bolo Map |  | 
 [other/boogleLexicon](https://discmaster.textfiles.com/search?formatid=boogleLexicon) | Boogle Lexicon | .boo | 
 [other/boomBoxProject](https://discmaster.textfiles.com/search?formatid=boomBoxProject) | Boom Box projec | .box | 
@@ -1080,6 +1082,7 @@ Family/Format | Name | Extensions | Notes
 [other/chemViewAnimationData](https://discmaster.textfiles.com/search?formatid=chemViewAnimationData) | Chemview Animation Data | .d | 
 [other/chessAssistant](https://discmaster.textfiles.com/search?formatid=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 [other/cineMorphProject](https://discmaster.textfiles.com/search?formatid=cineMorphProject) | CineMorph Project | .project | 
+[other/civilizationIIISaveGame](https://discmaster.textfiles.com/search?formatid=civilizationIIISaveGame) | Civilization III save game | .bic .bix | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?formatid=clariSSAPreferences) | ClariSSA preferences |  | 
 [other/clawCustomLevel](https://discmaster.textfiles.com/search?formatid=clawCustomLevel) | Claw custom level | .wwd | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
@@ -1172,6 +1175,7 @@ Family/Format | Name | Extensions | Notes
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/diablo2SavedGame](https://discmaster.textfiles.com/search?formatid=diablo2SavedGame) | Diablo II Saved Game | .d2s | 
 [other/diagsoftSpaceShuttlePlotData](https://discmaster.textfiles.com/search?formatid=diagsoftSpaceShuttlePlotData) | Diagsoft Space Shuttle Plot data | .cad | 
+[other/digglesSavedGameFile](https://discmaster.textfiles.com/search?formatid=digglesSavedGameFile) | Diggles Saved Game File | .sav | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 
 [other/directoryOpusEnvironment](https://discmaster.textfiles.com/search?formatid=directoryOpusEnvironment) | Directory Opus environment |  | 
@@ -1198,6 +1202,7 @@ Family/Format | Name | Extensions | Notes
 [other/driDisplayManagerDisplay](https://discmaster.textfiles.com/search?formatid=driDisplayManagerDisplay) | DRI Display Manager Display | .dis | 
 [other/dtvShot](https://discmaster.textfiles.com/search?formatid=dtvShot) | DTV Shot | .sht | 
 [other/duneIISavedGame](https://discmaster.textfiles.com/search?formatid=duneIISavedGame) | Dune II Saved Game | .dat | 
+[other/dungeonSiegeResourceGameData](https://discmaster.textfiles.com/search?formatid=dungeonSiegeResourceGameData) | Dungeon Siege Resource game data | .dsres | 
 [other/dustyDOTsSavedGame](https://discmaster.textfiles.com/search?formatid=dustyDOTsSavedGame) | DustyDOTs saved game | .dsv | 
 [other/dvdInfoFile](https://discmaster.textfiles.com/search?formatid=dvdInfoFile) | DVD Info File | .ifo .bup | 
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?formatid=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
@@ -1248,6 +1253,7 @@ Family/Format | Name | Extensions | Notes
 [other/falloutCompiledScript](https://discmaster.textfiles.com/search?formatid=falloutCompiledScript) | Fallout compiled script | .int | 
 [other/falloutTacticsEntity](https://discmaster.textfiles.com/search?formatid=falloutTacticsEntity) | Fallout Tactics Entity | .ent | 
 [other/falloutTacticsImage](https://discmaster.textfiles.com/search?formatid=falloutTacticsImage) | Fallout Tactics image | .zar | 
+[other/farscapeTheGameAnimationData](https://discmaster.textfiles.com/search?formatid=farscapeTheGameAnimationData) | Farscape: The Game Animation data | .fsa | 
 [other/fastLynxHelp](https://discmaster.textfiles.com/search?formatid=fastLynxHelp) | FastLynx Help | .hlp | 
 [other/ferrariFormulaOneTrackData](https://discmaster.textfiles.com/search?formatid=ferrariFormulaOneTrackData) | Ferrari Formula One track data | .tkb4 .tkb | 
 [other/fiascoDatabaseFile](https://discmaster.textfiles.com/search?formatid=fiascoDatabaseFile) | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
@@ -1404,6 +1410,7 @@ Family/Format | Name | Extensions | Notes
 [other/karmaAsset](https://discmaster.textfiles.com/search?formatid=karmaAsset) | Karma Asset | .ka | 
 [other/kasparovSGambitConfiguration](https://discmaster.textfiles.com/search?formatid=kasparovSGambitConfiguration) | Kasparov's Gambit Configuration | .cfg | 
 [other/kasperskyAntiVirusDatabase](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusDatabase) | Kaspersky Anti-virus data base | .avc | 
+[other/kasperskyLabKeyFile](https://discmaster.textfiles.com/search?formatid=kasperskyLabKeyFile) | Kaspersky Lab Key file | .key | 
 [other/kbdMapFile](https://discmaster.textfiles.com/search?formatid=kbdMapFile) | kbd map file |  | 
 [other/keyWalletObjectEncryptedData](https://discmaster.textfiles.com/search?formatid=keyWalletObjectEncryptedData) | KeyWallet Object - encrypted data | .kwo | 
 [other/keyWalletSkin](https://discmaster.textfiles.com/search?formatid=keyWalletSkin) | KeyWallet Skin | .kws | 
@@ -1541,6 +1548,7 @@ Family/Format | Name | Extensions | Notes
 [other/windowsProgramInfo](https://discmaster.textfiles.com/search?formatid=windowsProgramInfo) | Microsoft Windows Program Information File | .pif | 
 [other/microsoftWordGlossary](https://discmaster.textfiles.com/search?formatid=microsoftWordGlossary) | Microsoft Word Glossary | .gly | 
 [other/microsoftWordStyleSheet](https://discmaster.textfiles.com/search?formatid=microsoftWordStyleSheet) | Microsoft Word Style Sheet | .sty | 
+[other/microsoftZooTycoonSavedGame](https://discmaster.textfiles.com/search?formatid=microsoftZooTycoonSavedGame) | Microsoft Zoo Tycoon saved game | .zoo | 
 [other/midiDrumMachine](https://discmaster.textfiles.com/search?formatid=midiDrumMachine) | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
 [other/midiMazeIIMaze](https://discmaster.textfiles.com/search?formatid=midiMazeIIMaze) | MIDI-MAZE II Maze | .mze | 
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?formatid=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
@@ -1549,6 +1557,7 @@ Family/Format | Name | Extensions | Notes
 [other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moriaSavedGame](https://discmaster.textfiles.com/search?formatid=moriaSavedGame) | Moria Saved game |  | 
+[other/morrowindPlugin](https://discmaster.textfiles.com/search?formatid=morrowindPlugin) | Morrowind plugin | .esp | 
 [other/mortalKombat3GameArchive](https://discmaster.textfiles.com/search?formatid=mortalKombat3GameArchive) | Mortal Kombat 3 game archive | .ftr | 
 [other/movieSetterProject](https://discmaster.textfiles.com/search?formatid=movieSetterProject) | Movie Setter Project | .ms | 
 [other/moviePlusProject](https://discmaster.textfiles.com/search?formatid=moviePlusProject) | MoviePlus Project |  | 
@@ -1574,6 +1583,7 @@ Family/Format | Name | Extensions | Notes
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?formatid=mySQLTableDefinition) | MySQL Table Definition | .frm | 
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?formatid=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?formatid=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
+[other/nascarSimRacingGameArchive](https://discmaster.textfiles.com/search?formatid=nascarSimRacingGameArchive) | NASCAR SimRacing game archive | .mas | 
 [other/navisWorksDocument](https://discmaster.textfiles.com/search?formatid=navisWorksDocument) | NavisWorks Document | .nwd | 
 [other/necromancersDosNavigatorHelp](https://discmaster.textfiles.com/search?formatid=necromancersDosNavigatorHelp) | Necromancer's Dos Navigator Help | .hlp | 
 [other/needForSpeed2TrackData](https://discmaster.textfiles.com/search?formatid=needForSpeed2TrackData) | Need For Speed 2 Track data | .trk | 
@@ -1589,6 +1599,7 @@ Family/Format | Name | Extensions | Notes
 [other/net2phone](https://discmaster.textfiles.com/search?formatid=net2phone) | Net2phone |  | 
 [other/netActiveContainer](https://discmaster.textfiles.com/search?formatid=netActiveContainer) | NetActive Container | .nac | 
 [other/netCDF](https://discmaster.textfiles.com/search?formatid=netCDF) | NetCDF | .nc | 
+[other/netImmerseAnimation](https://discmaster.textfiles.com/search?formatid=netImmerseAnimation) | NetImmerse animation | .kf | 
 [other/netscapeAddressBook](https://discmaster.textfiles.com/search?formatid=netscapeAddressBook) | Netscape Address Book | .nab | 
 [other/netShieldConfiguration](https://discmaster.textfiles.com/search?formatid=netShieldConfiguration) | NetShield configuration | .dat | 
 [other/netShieldVirusPattern](https://discmaster.textfiles.com/search?formatid=netShieldVirusPattern) | NetShield Virus Pattern Library | .dat | 
@@ -1765,6 +1776,7 @@ Family/Format | Name | Extensions | Notes
 [other/rend386VideoDriver](https://discmaster.textfiles.com/search?formatid=rend386VideoDriver) | Rend386 video driver | .rvd | 
 [other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?formatid=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 
 [other/reportSmithReport](https://discmaster.textfiles.com/search?formatid=reportSmithReport) | ReportSmith report | .rpt | 
+[other/retro64GameData](https://discmaster.textfiles.com/search?formatid=retro64GameData) | Retro64 game data | .wld | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?formatid=rfFlowDiagram) | RFFlow Diagram | .flo | 
 [other/rHIDEProject](https://discmaster.textfiles.com/search?formatid=rHIDEProject) | RHIDE Project | .gpr | 
 [other/richMapFormat](https://discmaster.textfiles.com/search?formatid=richMapFormat) | Rich Map Format | .rmf | 
@@ -1881,6 +1893,7 @@ Family/Format | Name | Extensions | Notes
 [other/tads](https://discmaster.textfiles.com/search?formatid=tads) | TADS | .t .gam | 
 [other/tascChessSavedGame](https://discmaster.textfiles.com/search?formatid=tascChessSavedGame) | Tasc Chess saved game | .gmd | 
 [other/tcpdumpCapture](https://discmaster.textfiles.com/search?formatid=tcpdumpCapture) | TCPDUMP Style Capture | .dmp .pcap | 
+[other/teamBGInfinityEngineDataFormat](https://discmaster.textfiles.com/search?formatid=teamBGInfinityEngineDataFormat) | TeamBG Infinity Engine data format | .tbg | 
 [other/teenageMutantNinjaTurtlesLevelData](https://discmaster.textfiles.com/search?formatid=teenageMutantNinjaTurtlesLevelData) | Teenage Mutant Ninja Turtles Level data | .lev | 
 [other/telepaintMenu](https://discmaster.textfiles.com/search?formatid=telepaintMenu) | Telepaint Menu | .mnu | 
 [other/telepaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=telepaintPrinterDriver) | Telepaint printer Driver | .drv | 

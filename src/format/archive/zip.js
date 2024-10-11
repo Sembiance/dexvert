@@ -16,7 +16,7 @@ export class zip extends Format
 		/^PKZIP (mini-)?self-extracting 16bit DOS executable$/, "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", /^Quake 3 game data$/, "WinAmp 2.x Skin", "DivX Skin", "DesktopX Theme", "SPSS Extension", "Opera Widget",
 		"Adventure Game Toolkit game package", "Installer: Alchemy Mindworks installer", "Installer: Wise Installer[ZIP]", "QWK offline mail packet (ZIP compressed)", "Q-emuLator Package", "Fritzing shareable project", "WinImage 32bit SFX disk image",
 		"Universal Scene Description Zipped AR format (USDA)", "Konfabulator widget", "TorrentZip compressed archive", "Adobe Zipped Extension Package", "Java Web Archive", "Arkos Tracker Song (zipped)", "Installer: Acronis installer[ZIP]",
-		"Speckie Dictionary Installation", "Apache OpenOffice AutoText configuration", "OpenDocument Database", "OpenOffice.org 1.x Database file", "Adobe Integrated Runtime", "TeamSpeak 3 Soundpack", "BSplayer Skin"
+		"Speckie Dictionary Installation", "Apache OpenOffice AutoText configuration", "OpenDocument Database", "OpenOffice.org 1.x Database file", "Adobe Integrated Runtime", "TeamSpeak 3 Soundpack", "BSplayer Skin", "WinAmp 3.x / modern skin"
 	];
 	weakMagic = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);

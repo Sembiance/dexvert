@@ -21,6 +21,7 @@ const DEXMAGIC_CHECKS =
 	"Anna-Marie Archive (alt)"       : [{offset : -160, match : "Anna-Marie"}],
 	"Authorware APR Archive"         : [{offset : 0, match : "WPLI"}],
 	"EDI Split File Archive"         : [{offset : 0, match : "EDISPLI"}, {offset : 7, match : [["T", "0"]]}],
+	"Empire Earth Game Archive"      : [{offset : 0, match : [0x72, 0x61, 0x73, 0x73, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
 	"HTTP Response"                  : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
 	"IFF CAT file"                   : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"                  : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],

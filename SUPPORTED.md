@@ -1,11 +1,11 @@
-# Supported File Formats (2,478)
+# Supported File Formats (2,482)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (387)
+## Archive (388)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -128,6 +128,7 @@ archive | [EDI Install Archive](http://fileformats.archiveteam.org/wiki/EDI_Inst
 archive | [EDI Install LZS Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/os/aux/win2k/app/UNPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | [EDI Install LZSS2 Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZSS2/)
 archive | Electronic Arts LIB Game Archive | .lib | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/electronicArtsLibGameArchive/)
+archive | Empire Earth 1 Game Archive | .ssa | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/empireEarth1GameArchive/)
 archive | Ensemble Studios Game Archive | .drs | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ensembleStudiosGameArchive/)
 archive | [EPF Game Archive](https://moddingwiki.shikadi.net/wiki/EPF_Format) | .epf | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/epfGameArchive/)
 archive | [EPOC Application Information File](http://fileformats.archiveteam.org/wiki/EPOC_AIF) | .aif | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/epocAIF/)
@@ -370,7 +371,7 @@ archive | [Vinyl Goddess from Mars Game Archive](https://moddingwiki.shikadi.net
 archive | [Visual Novel DPK Archive](http://fileformats.archiveteam.org/wiki/DPK) | .dpk | [undpk](http://fileformats.archiveteam.org/wiki/DPK) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/visualNovelDPK/)
 archive | [VIV/BIGF EA Game Archive](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/vivBIGF/)
 archive | ViX images catalog | .vix | [foremost](http://foremost.sourceforge.net/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/vixImagesCatalog/)
-archive | Volition Package game archive | .vp | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/volitionPackageGameArchive/)
+archive | Volition Package game archive | .vpp .vp | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/volitionPackageGameArchive/)
 archive | [Wacky Wheels Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Wacky_Wheels)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/wackyWheelsGameArchive/)
 archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [deark](https://entropymine.com/deark/) [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/wad/)
 archive | [WAD2 Game Archive](http://fileformats.archiveteam.org/wiki/Quake_WAD) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/wad2GameArchive/)
@@ -398,7 +399,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (87)
+## Audio (88)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | [3GP/3GPP2 Audio](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/threeGAudio/)
@@ -474,6 +475,7 @@ audio | Scream Tracker Sample | .snd .s3i .smp | [awaveStudio](https://archive.o
 audio | [ShockWave Audio](http://fileformats.archiveteam.org/wiki/SWA) | .swa | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [16 sample files](https://sembiance.com/fileFormatSamples/audio/shockWaveAudio/)
 audio | [Shorten Losless Audio](http://fileformats.archiveteam.org/wiki/Shorten) | .shn | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/shorten/)
 audio | [Sierra Audio](https://wiki.multimedia.cx/index.php/Sierra_Audio) | .sfx .sol | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sierraAudio/)
+audio | Simon & Schuster Interactive VAG | .vag | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/simonSchusterVAG/)
 audio | Single Stream RWSD | .rwsd | [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/singleStreamRWSD/)
 audio | [Sonarc Compressed WAV](http://fileformats.archiveteam.org/wiki/Sonarc) | .wv .vc .snc | [sonarcx](https://www.rarewares.org/rrw/sonarc.php) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/sonarc/)
 audio | Sonic Foundry Sample Resource | .sfr | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sonicFoundrySampleResource/)
@@ -1299,7 +1301,7 @@ image | [STJ Sterescopic Image](https://stereo.jpn.org/eng/stphmkr/) | .stj | [k
 image | [STOS Memory Bank](http://fileformats.archiveteam.org/wiki/STOS_memory_bank) | .mbk .mbs | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/stosBank/)
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp3 .pp2 .pp1 | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [19 sample files](https://sembiance.com/fileFormatSamples/image/picturePacker/)
 image | [STOS Picture Packer (DAJ Variant)](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .daj | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [4 sample files](https://sembiance.com/fileFormatSamples/image/picturePackerDAJ/)
-image | [Structured Fax](http://fileformats.archiveteam.org/wiki/Acorn_Draw) | .sff | [nconvertWine](https://discmaster.textfiles.com/browse/23608/PCWorld0410.iso/redakcyjne/programy/XnView%201.97/XnView-win-full.zip) [irfanView](https://www.irfanview.com/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/structuredFax/)
+image | [Structured Fax](http://fileformats.archiveteam.org/wiki/Acorn_Draw) | .sff | [nconvertWine](https://discmaster.textfiles.com/browse/23608/PCWorld0410.iso/redakcyjne/programy/XnView%201.97/XnView-win-full.zip) [irfanView](https://www.irfanview.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/structuredFax/)
 image | [Sun Icon](http://fileformats.archiveteam.org/wiki/Sun_icon) | .ico .icon | [nconvert](https://www.xnview.com/en/nconvert/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) | [11 sample files](https://sembiance.com/fileFormatSamples/image/sunIcon/) - Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.
 image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) | .ras .rast .rs .scr .sr .sun .im1 .im8 .im24 .im32 | [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [keyViewPro](https://archive.org/details/KeyViewPro/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/sunRaster/)
 image | [Sun TAAC Bitmap](http://fileformats.archiveteam.org/wiki/Sun_TAAC_image) | .iff .vff .suniff taac | [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/sunTAACBitmap/)
@@ -1821,7 +1823,7 @@ Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 poly | [3D Manufacturing Format](http://fileformats.archiveteam.org/wiki/3MF) | .3mf | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [4 sample files](https://sembiance.com/fileFormatSamples/poly/threeMF/)
 poly | [3D Studio](http://fileformats.archiveteam.org/wiki/3DS) | .3ds .max .asc | [blender](https://www.blender.org) [polyTrans64](https://www.okino.com/conv/conv.htm) [assimp](https://github.com/assimp/assimp) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/threeDStudio/)
-poly | [3D Studio ASCII Export](http://fileformats.archiveteam.org/wiki/3DS) | .ase | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [8 sample files](https://sembiance.com/fileFormatSamples/poly/threeDStudioASE/)
+poly | [3D Studio ASCII Export](http://fileformats.archiveteam.org/wiki/3DS) | .ase | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [14 sample files](https://sembiance.com/fileFormatSamples/poly/threeDStudioASE/)
 poly | [AC3D Model](http://fileformats.archiveteam.org/wiki/AC3D_Model) | .ac .ac3d | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [17 sample files](https://sembiance.com/fileFormatSamples/poly/ac3d/)
 poly | [Blender 3D Blend File](http://fileformats.archiveteam.org/wiki/BLEND) | .blend | [blender](https://www.blender.org) | [14 sample files](https://sembiance.com/fileFormatSamples/poly/blend/)
 poly | [Blitz3D Object](http://fileformats.archiveteam.org/wiki/Blitz3D_Model) | .b3d | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/blitz3DObject/)
@@ -1837,7 +1839,7 @@ poly | [Electric Image 3D File](http://fileformats.archiveteam.org/wiki/FACT) | 
 poly | [ESRI/ArcView Shape](http://fileformats.archiveteam.org/wiki/Shapefile) | .shp | [polyTrans64](https://www.okino.com/conv/conv.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/esriShape/)
 poly | [Extensible 3D](http://fileformats.archiveteam.org/wiki/X3D) | .x3d .x3db .x3dv .x3dz .x3dbz .x3dvz | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/poly/x3d/)
 poly | [Geomview Object File Format](http://fileformats.archiveteam.org/wiki/OFF_(Geomview_Object_File_Format)) | .off | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/objectFileFormat/)
-poly | [Ghoul 2 Model](http://fileformats.archiveteam.org/wiki/GLM) | .glm | [milkShape3D](http://www.milkshape3d.com/) | [7 sample files](https://sembiance.com/fileFormatSamples/poly/ghoul2Model/)
+poly | [Ghoul 2 Model](http://fileformats.archiveteam.org/wiki/GLM) | .glm | [milkShape3D](http://www.milkshape3d.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/ghoul2Model/)
 poly | [GL Transmission Format](http://fileformats.archiveteam.org/wiki/GlTF) | .glb .gltf |  | [4 sample files](https://sembiance.com/fileFormatSamples/poly/glTF/)
 poly | [Industry Foundation Classes](http://fileformats.archiveteam.org/wiki/IFC) | .ifc | [polyTrans64](https://www.okino.com/conv/conv.htm) [assimp](https://github.com/assimp/assimp) | [2 sample files](https://sembiance.com/fileFormatSamples/poly/industryFoundationClasses/)
 poly | [Inter-Quake Model](http://sauerbraten.org/iqm/) | .iqm | [assimp](https://github.com/assimp/assimp) | [1 sample file](https://sembiance.com/fileFormatSamples/poly/interQuakeModel/)
@@ -1860,7 +1862,7 @@ poly | [Quake Model](http://tfc.duke.free.fr/coding/mdl-specs-en.html) | .mdl | 
 poly | [QuickDraw 3D Metafile](http://fileformats.archiveteam.org/wiki/3DMF) | .3dmf .q3d | [polyTrans64](https://www.okino.com/conv/conv.htm) [AccuTrans3D](http://www.micromouse.ca/) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/quickDraw3D/) - Programs that didn't work: Quesa: https://github.com/jwwalker/Quesa Old program, but has recent updates, but still can't build on linux and is just a viewer. It could be used as groundwork for a blender or an assimp plugin: https://github.com/assimp/assimp/issues/2362"; Ayam: https://ayam.sourceforge.net/features.html It says it supports 3DMF but only version 1.0. I tried importing a few 3dmf files I have, none of them loaded.
 poly | [Ray Dream Designer Scene](http://fileformats.archiveteam.org/wiki/COLLADA) | .rds .rd4 .rd3 | [rayDreamDesignerStudio55](https://archive.org/details/Ray_Dream_Studio_5.5_MetaCreations_1999) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/rayDreamDesignerScene/)
 poly | [RenderWare 3D Model](http://fileformats.archiveteam.org/wiki/RenderWare_object) | .rwx | [AccuTrans3D](http://www.micromouse.ca/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/renderWare/)
-poly | [Return to Castle Wolfenstein MDC](https://mino-git.github.io/rtcw-wet-blender-model-tools/publications/MDCFileFormat.pdf) | .mdc | [assimp](https://github.com/assimp/assimp) [milkShape3D](http://www.milkshape3d.com/) | [4 sample files](https://sembiance.com/fileFormatSamples/poly/rtcwMDC/)
+poly | [Return to Castle Wolfenstein MDC](https://mino-git.github.io/rtcw-wet-blender-model-tools/publications/MDCFileFormat.pdf) | .mdc | [assimp](https://github.com/assimp/assimp) [milkShape3D](http://www.milkshape3d.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/rtcwMDC/)
 poly | [Rhino OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [polyTrans64](https://www.okino.com/conv/conv.htm) | [8 sample files](https://sembiance.com/fileFormatSamples/poly/openNURBS/)
 poly | Sculpt 3D Scene | .scene | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/sculpt3DScene/)
 poly | SGI Open Inventor Scene Graph | .iv | [polyTrans64](https://www.okino.com/conv/conv.htm) [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/openInventor/)
@@ -1878,7 +1880,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (577)
+## Text (579)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -2037,7 +2039,7 @@ text | ExpressGraph Graph | .grf |  | [12 sample files](https://sembiance.com/fi
 text | Expression Design drawing | .xpr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/expressionDesignDrawing/)
 text | Expression Strokes | .sks |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/expressionStrokes/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
-text | FAR help | .hlf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
+text | FAR help | .hlf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
 text | FastFont Symbol Set | .sym |  | 
 text | FGDC metadata | .met |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/fgdcMetadata/)
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
@@ -2064,7 +2066,7 @@ text | ftncheck project file | .prj |  | [1 sample file](https://sembiance.com/f
 text | GAPFile | .gap |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/gapfile/)
 text | [GEDCOM Genealogy Text](http://fileformats.archiveteam.org/wiki/GEDCOM) | .ged |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gedcom/)
 text | GEM Driver Definition | .ddf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/gemDriverDefinition/)
-text | Gen Surf map | .map |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/genSurfMap/)
+text | Gen Surf map | .map |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/genSurfMap/)
 text | GenBank Flat File | .gb .gbk |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/genBankFlat/)
 text | GenBank sequence record | .dna |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/genBankSequenceRecord/)
 text | Generic Printer Description | .gdl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/genericPrinterDescription/)
@@ -2078,6 +2080,7 @@ text | GNAT Ada Library Information | .ali |  | [18 sample files](https://sembia
 text | GNU Bison Grammar | .yy .y |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gnuBisonGrammar/)
 text | GNU Info File | .info .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info-7 .info-8 .info-9 |  | [21 sample files](https://sembiance.com/fileFormatSamples/text/gnuInfo/)
 text | Grace project file | .agr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/graceProjectFile/)
+text | Grand Theft Auto III model IDs and properties | .ide |  | 
 text | Grand Theft Auto keyboard Configuration | .cfg |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/grandTheftAutoKeyboardConfig/)
 text | Graphmatica Graph | .gr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/graphmaticaGraph/)
 text | Gravis Firebird 2 configuration | .fbd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/gravisFirebird2Configuration/)
@@ -2182,6 +2185,7 @@ text | METAFONT transcript | .log |  | [10 sample files](https://sembiance.com/f
 text | MFC ClassWizard info | .clw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mfcClassWizardInfo/)
 text | MGI VideoWave Storyboard | .sbd |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/mgiVideoWaveStoryboard/)
 text | Micro-Channel Architecture Adapter Description Library | .adl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/microChannelArchitectureADL/)
+text | MicroDVD subtitle format | .msg |  | 
 text | MicroFiche Filer Plus database | .mff |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microFicheFilerPlusDatabase/)
 text | Micrografx Graph data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/micrografxGraphData/)
 text | MicroHof Code encoded message | .cde |  | 
@@ -2376,7 +2380,7 @@ text | Timeworks Word Writer document |  |  | [1 sample file](https://sembiance.
 text | TMPEGEnc config file | .mcf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tMPEGEncConfigFile/)
 text | Tornado 3D Project | .prj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/tornado3DProject/)
 text | Tornado Mission info | .mis |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tornadoMissionInfo/)
-text | Total Commander button Bar config | .bar |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)
+text | Total Commander button Bar config | .bar |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)
 text | TPLOT graph source | .plt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tplotGraphSource/)
 text | Track Row Column markers data format | .trc |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trackRowColumnMarkersDataFormat/)
 text | Tracon Sector info | .sec |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
@@ -2499,7 +2503,7 @@ video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/fli/)
 video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [grasp4](https://winworldpc.com/product/fantavision/1x-dos) | [30 sample files](https://sembiance.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
 video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Digital_Video) | .gdv | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/gremlinDigitalVideo/)
-video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
+video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/video/iffYAFA/)
 video | [Intelligent Games Video/cutscene](https://wiki.multimedia.cx/index.php/Intelligent_Games_MOV) | .mov | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/intelligentGamesVideoCutscene/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/iffANIM/)

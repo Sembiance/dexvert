@@ -9,6 +9,6 @@ export class swf extends Format
 	magic          = [
 		"Macromedia Flash data", "Macromedia Flash Player Movie", "Macromedia Flash Datei", "Macromedia Flash Player Compressed Movie", "Format: Small Web Format", "Uncompressed Adobe Flash SWF", "application/vnd.adobe.flash.movie",
 		"SWF (ShockWave Flash) (swf)",
-		/^SWF$/, /^fmt\/(104|105|106|107|108|109|110|505|506|507|757|759|761)( |$)/];
+		/^SWF$/, /^fmt\/(104|105|106|107|108|109|110|505|506|507|757|759|760|761|762)( |$)/];
 	converters     = ["ffdec", "swfextract", "ffmpeg"];
 }

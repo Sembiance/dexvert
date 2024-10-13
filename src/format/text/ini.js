@@ -18,7 +18,8 @@ export class ini extends Format
 		"3ds UI colors", "NextSTART Theme", "The Chessmaster 4000 layout", "MS Flight Simulator aircraft configuration file", "Spring Engine unit Info", "Total Annihilation Main Unit Definition", "Winamp Signal Processing Studio DSP-Effect", "WinZip Job File",
 		"SpyBot-Search-and-Destroy malware info", "ArcExplorer Project", "PaintTool SAI Tool parameters", "J.River Media Center plugin", "NetCaptor's CaptorGroup", "Delphi project Desktop", "Symantec Guard Header", "Turbo Fractal Generator settings",
 		"DrumSynth Preset", "WinRIX configuration", "TsiLang translation data", "audio/x-scpls", "Entrust Entelligence Profile", "Inno Setup Script", "application/x-netshow-channel", "Windows CONTROL.INI", "CDROM Drive Analyzer configuration (v2.x)",
-		"RivaTuner data base Build", "VIA setup configuration", "Soldat Bot Information", "blueMSX machine settings", "WinAPE configuration", "text/x-dbus-service",
+		"RivaTuner data base Build", "VIA setup configuration", "Soldat Bot Information", "blueMSX machine settings", "WinAPE configuration", "text/x-dbus-service", "Windows IOS.INI", "MPLAB IDE Project", "yum Repository configuration",
+		"Windows system Initialization settings",
 		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, /^fmt\/(1614|1760)( |$)/
 	];
 	priority       = this.PRIORITY.LOWEST;

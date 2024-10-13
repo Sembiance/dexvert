@@ -11,5 +11,5 @@ export class degasHi extends Format
 	classify  = true;
 
 	// nconvert fails to properly convert some files
-	converters = ["wuimg", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters = ["wuimg[hasExtMatch]", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 }

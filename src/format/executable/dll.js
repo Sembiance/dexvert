@@ -19,7 +19,7 @@ export class dll extends Format
 		"Photoshop filter plug-in", "PhotoShop plug-in", "NT5 Migrate DLL", "DLL PowerBASIC PB/DLL 6.x", "OllyDbg plugin", "Borland component", "Python Dynamic module", "Adobe Acrobat Reader Plugin", "BRender Device Driver",	// BR not a typo
 		"Borland Package Library", "WinAmp 2.x Input plugin", "WinAmp 2.x Output plugin", "Winconv conversion module",  "Generic .NET DLL/Assembly", "FileMaker Pro 32-bit plug-in", "MS Flight Simulator Gauge", "VirtualDub Filter Plug-in",
 		"Pixia filter plugin", "Psycle plugin", "Ultimate Paint Graphics Editor plugin/effect", "Miranda IM plugin", "ACDSee plugin", "DLL PowerBASIC", "Microsoft Input Method Editor", "Quintessential Player input plugin",
-		"ZoneLabs Zone Alarm data", "Aston Shell plugin", /^foobar 2000 (Diskwriter output|Input|generic) component/
+		"ZoneLabs Zone Alarm data", "Aston Shell plugin", /^foobar 2000 (Diskwriter output|Input|generic) component/, "Take Command plugin"
 	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

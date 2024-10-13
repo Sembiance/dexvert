@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,202)
+# Unsupported File Formats (2,214)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (194)
+## Archive (195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/winUpackPacked](https://discmaster.textfiles.com/search?formatid=winUpackPacked) | (Win)Upack Packed | .exe | 
@@ -166,6 +166,7 @@ Family/Format | Name | Extensions | Notes
 [archive/simis](https://discmaster.textfiles.com/search?formatid=simis) | Simis | .s .ace .t .dat .mis | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?formatid=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
 [archive/spisTCompress](https://discmaster.textfiles.com/search?formatid=spisTCompress) | SPIS TCompress |  | 
+[archive/spoonStudioPacked](https://discmaster.textfiles.com/search?formatid=spoonStudioPacked) | Spoon Studio Packed | .exe | 
 [archive/sqwezArchive](https://discmaster.textfiles.com/search?formatid=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
 [archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?formatid=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
 [archive/starWarsBattlefrontGameDataArchive](https://discmaster.textfiles.com/search?formatid=starWarsBattlefrontGameDataArchive) | Star Wars Battlefront game data archive | .lvl | 
@@ -277,7 +278,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (117)
+## Document (118)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -371,6 +372,7 @@ Family/Format | Name | Extensions | Notes
 [document/persuasionPresentation](https://discmaster.textfiles.com/search?formatid=persuasionPresentation) | Persuasion presentation | .at2 .at3 .at4 .pr3 .pn4 | 
 [document/popupDOSHelp](https://discmaster.textfiles.com/search?formatid=popupDOSHelp) | POP-UP DOS Help | .hlp | 
 [document/pPrintPage](https://discmaster.textfiles.com/search?formatid=pPrintPage) | PPrint Page | .pag | 
+[document/printShopDeluxeDocument](https://discmaster.textfiles.com/search?formatid=printShopDeluxeDocument) | Print Shop Deluxe Document | .pdg | 
 [document/purePascalHelp](https://discmaster.textfiles.com/search?formatid=purePascalHelp) | Pure Pascal Help | .hlp | 
 [document/quattroForDOSSpreadsheet](https://discmaster.textfiles.com/search?formatid=quattroForDOSSpreadsheet) | Quattro for DOS spreadsheet | .wkq | 
 [document/quickHelp](https://discmaster.textfiles.com/search?formatid=quickHelp) | Quick Help | .hlp | 
@@ -846,7 +848,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,301)
+## Other (1,311)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1107,6 +1109,7 @@ Family/Format | Name | Extensions | Notes
 [other/chessAssistant](https://discmaster.textfiles.com/search?formatid=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 [other/cineMorphProject](https://discmaster.textfiles.com/search?formatid=cineMorphProject) | CineMorph Project | .project | 
 [other/civilizationIIISaveGame](https://discmaster.textfiles.com/search?formatid=civilizationIIISaveGame) | Civilization III save game | .bic .bix | 
+[other/clarisWorksPaletteFiles](https://discmaster.textfiles.com/search?formatid=clarisWorksPaletteFiles) | Claris Works palette files | .pl .plt | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?formatid=clariSSAPreferences) | ClariSSA preferences |  | 
 [other/clawCustomLevel](https://discmaster.textfiles.com/search?formatid=clawCustomLevel) | Claw custom level | .wwd | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
@@ -1336,6 +1339,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameMaker](https://discmaster.textfiles.com/search?formatid=gameMaker) | Game Maker | .gmr | 
 [other/gammaCAD](https://discmaster.textfiles.com/search?formatid=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gammaCADSymbolLibrary](https://discmaster.textfiles.com/search?formatid=gammaCADSymbolLibrary) | GammaCAD Symbol Library | .syl | 
+[other/gconvModuleConfigurationCache](https://discmaster.textfiles.com/search?formatid=gconvModuleConfigurationCache) | gconv module configuration cache | .cache | 
 [other/gcsWorldData](https://discmaster.textfiles.com/search?formatid=gcsWorldData) | GCS World data | .wld | 
 [other/gdsIIStream](https://discmaster.textfiles.com/search?formatid=gdsIIStream) | GDSII stream | .gds | 
 [other/geePrinterDriver](https://discmaster.textfiles.com/search?formatid=geePrinterDriver) | Gee! Printer Driver | .pdr | 
@@ -1431,6 +1435,7 @@ Family/Format | Name | Extensions | Notes
 [other/invisionBrushes](https://discmaster.textfiles.com/search?formatid=invisionBrushes) | Invision Brushes | .bru | 
 [other/ispellHashFile](https://discmaster.textfiles.com/search?formatid=ispellHashFile) | ispell hash file | .dic | 
 [other/javaClass](https://discmaster.textfiles.com/search?formatid=javaClass) | Java Class File | .class | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/javaClass/)
+[other/javaRuntimeCurrencyData](https://discmaster.textfiles.com/search?formatid=javaRuntimeCurrencyData) | Java runtime Currency Data | .data | 
 [other/javelinPrinterDriver](https://discmaster.textfiles.com/search?formatid=javelinPrinterDriver) | Javelin Printer Driver | .pr .pr2 | 
 [other/jazzJackrabbitFile](https://discmaster.textfiles.com/search?formatid=jazzJackrabbitFile) | Jazz Jackrabbit File | .0sc .0fn | 
 [other/jeepersConfiguration](https://discmaster.textfiles.com/search?formatid=jeepersConfiguration) | Jeepers Configuration | .cfg | 
@@ -1616,6 +1621,7 @@ Family/Format | Name | Extensions | Notes
 [other/mpEntertainmentSVGAAnimation](https://discmaster.textfiles.com/search?formatid=mpEntertainmentSVGAAnimation) | MP Entertainment SVGA Animation | .ani | 
 [other/dosCodePage](https://discmaster.textfiles.com/search?formatid=dosCodePage) | MS-DOS Code Page Info | .cp .cpi | 
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?formatid=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
+[other/msnMessengerLogFile](https://discmaster.textfiles.com/search?formatid=msnMessengerLogFile) | MSN/Windows Live Messenger Log file | .sgm .dat | 
 [other/msplotPlotterDriverMinidriver](https://discmaster.textfiles.com/search?formatid=msplotPlotterDriverMinidriver) | MSPLOT Plotter Driver Minidriver | .pcd | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
 [other/multimediaBuilderData](https://discmaster.textfiles.com/search?formatid=multimediaBuilderData) | Multimedia Builder Data | .mbd | 
@@ -1649,6 +1655,7 @@ Family/Format | Name | Extensions | Notes
 [other/netActiveContainer](https://discmaster.textfiles.com/search?formatid=netActiveContainer) | NetActive Container | .nac | 
 [other/netCDF](https://discmaster.textfiles.com/search?formatid=netCDF) | NetCDF | .nc | 
 [other/netImmerseAnimation](https://discmaster.textfiles.com/search?formatid=netImmerseAnimation) | NetImmerse animation | .kf | 
+[other/netMonCapture](https://discmaster.textfiles.com/search?formatid=netMonCapture) | NetMon capture | .cap | 
 [other/netscapeAddressBook](https://discmaster.textfiles.com/search?formatid=netscapeAddressBook) | Netscape Address Book | .nab | 
 [other/netShieldConfiguration](https://discmaster.textfiles.com/search?formatid=netShieldConfiguration) | NetShield configuration | .dat | 
 [other/netShieldVirusPattern](https://discmaster.textfiles.com/search?formatid=netShieldVirusPattern) | NetShield Virus Pattern Library | .dat | 
@@ -1797,6 +1804,7 @@ Family/Format | Name | Extensions | Notes
 [other/puzzleBusterPuzzle](https://discmaster.textfiles.com/search?formatid=puzzleBusterPuzzle) | Puzzle Buster Puzzle | .puz | 
 [other/qbxMSBasicKeyboardDefinition](https://discmaster.textfiles.com/search?formatid=qbxMSBasicKeyboardDefinition) | QBX (MS Basic 7.x) Editor keyboard definition | .key | 
 [other/qlPluginROM](https://discmaster.textfiles.com/search?formatid=qlPluginROM) | QL Plugin-ROM |  | 
+[other/qtBinaryResource](https://discmaster.textfiles.com/search?formatid=qtBinaryResource) | Qt Binary Resource | .rcc | 
 [other/qtMessage](https://discmaster.textfiles.com/search?formatid=qtMessage) | Qt Message | .qm | 
 [other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?formatid=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
 [other/quake2Map](https://discmaster.textfiles.com/search?formatid=quake2Map) | Quake II Map | .bsp | 
@@ -2018,6 +2026,7 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?formatid=typeLibrary) | Type Library | .tlb | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
+[other/uniCodeExtensions](https://discmaster.textfiles.com/search?formatid=uniCodeExtensions) | UniCode Extensions | .uce | 
 [other/unknown](https://discmaster.textfiles.com/search?formatid=unknown) | Unknown File |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?formatid=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealMap](https://discmaster.textfiles.com/search?formatid=unrealMap) | Unreal Map | .unr | 
@@ -2050,6 +2059,7 @@ Family/Format | Name | Extensions | Notes
 [other/visionaireMesh](https://discmaster.textfiles.com/search?formatid=visionaireMesh) | Visionaire Mesh | .mesh | 
 [other/visionaireProject](https://discmaster.textfiles.com/search?formatid=visionaireProject) | Visionaire Project | .vis | 
 [other/vistaDataFormat](https://discmaster.textfiles.com/search?formatid=vistaDataFormat) | [Vista data format](http://fileformats.archiveteam.org/wiki/Vista_data_file) | .v | 
+[other/vistaEventLog](https://discmaster.textfiles.com/search?formatid=vistaEventLog) | Vista Event Log | .evtx | 
 [other/vistaMakepathSession](https://discmaster.textfiles.com/search?formatid=vistaMakepathSession) | Vista Makepath Session | .ses | 
 [other/visualBasicExtension](https://discmaster.textfiles.com/search?formatid=visualBasicExtension) | Visual Basic Extension | .vbx | 
 [other/visualBasicProjectWorkspace](https://discmaster.textfiles.com/search?formatid=visualBasicProjectWorkspace) | Visual Basic Project Workspace | .frm | 
@@ -2091,12 +2101,14 @@ Family/Format | Name | Extensions | Notes
 [other/windows98Passwords](https://discmaster.textfiles.com/search?formatid=windows98Passwords) | Windows 98 passwords | .pwl | 
 [other/windows9XBootLoader](https://discmaster.textfiles.com/search?formatid=windows9XBootLoader) | Windows 9X boot loader |  | 
 [other/windowsCalendar](https://discmaster.textfiles.com/search?formatid=windowsCalendar) | Windows Calendar | .cal | 
+[other/windowsEventViewerLog](https://discmaster.textfiles.com/search?formatid=windowsEventViewerLog) | Windows Event Viewer Log | .evt | 
 [other/windowsHelpSearchIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpSearchIndex) | Windows Help Full Text Search Index | .fts | 
 [other/windowsHelpFullTextSearchGroup](https://discmaster.textfiles.com/search?formatid=windowsHelpFullTextSearchGroup) | Windows Help Full-Text search Group | .ftg | 
 [other/windowsHelpGIDIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpGIDIndex) | Windows Help Global Index Data | .gid | 
 [other/windowsHelpIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpIndex) | Windows Help index | .hlp | 
 [other/windowsLogoDrawingCode](https://discmaster.textfiles.com/search?formatid=windowsLogoDrawingCode) | Windows LOGO Drawing Code | .lgo .lg | 
 [other/windowsNTLDRBootLoader](https://discmaster.textfiles.com/search?formatid=windowsNTLDRBootLoader) | Windows NTLDR boot loader |  | 
+[other/windowsPolicyData](https://discmaster.textfiles.com/search?formatid=windowsPolicyData) | Windows Policy data | .pol | 
 [other/windowsShimDatabase](https://discmaster.textfiles.com/search?formatid=windowsShimDatabase) | Windows Shim Database | .sdb | 
 [other/windowsTerminalConfiguration](https://discmaster.textfiles.com/search?formatid=windowsTerminalConfiguration) | Windows Terminal Configuration | .trm | 
 [other/winStormStormInfo](https://discmaster.textfiles.com/search?formatid=winStormStormInfo) | WinStorm Storm info | .sto | 

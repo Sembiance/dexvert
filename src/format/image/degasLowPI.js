@@ -10,5 +10,5 @@ export class degasLowPI extends Format
 
 	// abydosconvert hangs on KENSHIN.PI1
 	// nconvert fails to handle certain files properly such as alf23.pi1
-	converters = ["recoil2png", "wuimg", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters = ["recoil2png", "wuimg[hasExtMatch]", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 }

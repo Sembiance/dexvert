@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {cmdUtil, printUtil, fileUtil} from "xutil";
+import {cmdUtil, printUtil, runUtil, fileUtil} from "xutil";
 import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 import {XLog} from "xlog";
@@ -22,6 +22,20 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 const xlog = new XLog(argv.json && !argv.jsonFile ? "none" : argv.logLevel);
+
+const tailProcs = [];
+if(!argv.logFile && xlog.atLeast("debug"))
+{
+	tailProcs.push(await runUtil.run("tail", ["-n", "0", "-f", "/mnt/dexvert/log/dexserver.out"], {detached : true, liveOutput : true}));
+	tailProcs.push(await runUtil.run("tail", ["-n", "0", "-f", "/mnt/dexvert/log/dexserver.err"], {detached : true, liveOutput : true}));
+}
+
+async function handleExit(ignored)
+{
+	await xlog.flush();
+	await tailProcs.parallelMap(async o => await runUtil.kill(o.p));
+	Deno.exit(0);
+}
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)
@@ -56,10 +70,16 @@ for(const inputFilePath of inputFilePaths)
 		const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
 		const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 		if(err)
+		{
+			await handleExit();
 			Deno.exit(console.error(`${log.join("\n")}\n${err}`.trim()));
+		}
 
 		if(!r && !log)
+		{
+			await handleExit();
 			Deno.exit(console.error(`Failed to retrieve dexid data from dexrpc server. Is it running?`));
+		}
 
 		({ids : rows, idMeta} = r);
 
@@ -73,6 +93,7 @@ for(const inputFilePath of inputFilePaths)
 	if(argv.json)
 	{
 		console.log(JSON.stringify(rows));
+		await handleExit();
 		Deno.exit(0);
 	}
 
@@ -98,3 +119,5 @@ for(const inputFilePath of inputFilePaths)
 		colNameMap : {confidence : "%"},
 		color      : {confidence : "white"}}));
 }
+
+await handleExit();

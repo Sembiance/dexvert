@@ -4,6 +4,12 @@ export class plist extends Format
 {
 	name       = "Apple Property List";
 	ext        = [".nib"];
-	magic      = ["Apple binary property list", "Mac OS X Binary-format PList", "CoreFoundation binary property list data", /^fmt\/984( |$)/];
+	magic      = [
+		// general
+		"Apple binary property list", "Mac OS X Binary-format PList", /^fmt\/984( |$)/,
+		
+		// app specific
+		"CoreFoundation binary property list data", "Quartz Composer data"
+	];
 	converters = ["deark[module:plist] & plistutil"];
 }

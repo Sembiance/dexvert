@@ -17,7 +17,9 @@ export class zip extends Format
 		"Adventure Game Toolkit game package", "Installer: Alchemy Mindworks installer", "Installer: Wise Installer[ZIP]", "QWK offline mail packet (ZIP compressed)", "Q-emuLator Package", "Fritzing shareable project", "WinImage 32bit SFX disk image",
 		"Universal Scene Description Zipped AR format (USDA)", "Konfabulator widget", "TorrentZip compressed archive", "Adobe Zipped Extension Package", "Java Web Archive", "Arkos Tracker Song (zipped)", "Installer: Acronis installer[ZIP]",
 		"Speckie Dictionary Installation", "Apache OpenOffice AutoText configuration", "OpenDocument Database", "OpenOffice.org 1.x Database file", "Adobe Integrated Runtime", "TeamSpeak 3 Soundpack", "BSplayer Skin", "WinAmp 3.x / modern skin",
-		"HoN Modification Manager package", /^Quintessential Player (Family|Kid) Skin/, "CursorXP theme", "BootSkin theme", "LogonStudio theme", "IconPackager theme", "JetFighter 2015 savegame", "iOS Application"
+		"HoN Modification Manager package", /^Quintessential Player (Family|Kid) Skin/, "CursorXP theme", "BootSkin theme", "LogonStudio theme", "IconPackager theme", "JetFighter 2015 savegame", "iOS Application", "Flash Component distribution archive",
+		"WinImage compressed disk image", "macOS application in a Zip container", "NuGet Package", "Microsoft Silverlight Application", "Silverlight Application Package", "Mozilla archive omni.ja", "Excel Macro-enabled Open XML add-in",
+		/^fmt\/(524|595|627)( |$)/
 	];
 	weakMagic = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);

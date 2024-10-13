@@ -10,5 +10,5 @@ export class degasHiPI extends Format
 	byteCheck = [{offset : 0, match : [0x00, 0x02]}];
 
 	// nconvert messes up with certain files such as vanna5.pi3
-	converters = ["recoil2png", "wuimg", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters = ["recoil2png", "wuimg[hasExtMatch]", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 }

@@ -39,6 +39,8 @@
   To view resources *.gfx:
   	https://dev.discmaster2.textfiles.com/browse/11205/Gamer%20Collector%203:%20Action.iso/FUGA_192/data/plate-forme/Gold%20Miner%20Joe/GoldMiner.exe/%23setuppath%23/Graphics
 	https://dev.discmaster2.textfiles.com/browse/11534/Igromania_02.iso/Demos/Marbles_Deluxe/marbles.rar/marbles.exe/%7Bapp%7D/Graphics
+	https://dev.discmaster2.textfiles.com/browse/11546/Igromania_02.ISO/Funnies/DigiPool/digi_pool_trial.exe/%7Bapp%7D/Graphics
+	https://dev.discmaster2.textfiles.com/browse/11547/Igromania_04.ISO/Funnies/SuperstarChefs/InstallSuperstarChefs.exe/%25MAINDIR%25/product/Graphics
   Then look at other formats it supports:
 	https://game-viewer.org/games.php
 	https://game-viewer.org/plugins.php

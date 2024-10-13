@@ -329,16 +329,16 @@ async function processNextQueue()
 	//const taskLogPrefix = `\n${xu.bracket(`${xu.colon("TASK")}${task.relFilePath}`)}`;
 	//xlog.debug`${taskLogPrefix} dexverting...`;
 
-	task.relDirPath = path.dirname(task.relFilePath)==="." ? "" : path.dirname(task.relFilePath);
-	task.fileOutDirPath = path.join(fileDirPath, task.relDirPath, `${path.basename(task.relFilePath)}${argv.suffix}`);
-	await Deno.mkdir(task.fileOutDirPath, {recursive : true});
-
-	task.metaFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.json`);
-	task.logFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.txt`);
-	await Deno.mkdir(path.dirname(task.metaFilePath), {recursive : true});
-
 	try
 	{
+		task.relDirPath = path.dirname(task.relFilePath)==="." ? "" : path.dirname(task.relFilePath);
+		task.fileOutDirPath = path.join(fileDirPath, task.relDirPath, `${path.basename(task.relFilePath)}${argv.suffix}`);
+		await Deno.mkdir(task.fileOutDirPath, {recursive : true});
+
+		task.metaFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.json`);
+		task.logFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.txt`);
+		await Deno.mkdir(path.dirname(task.metaFilePath), {recursive : true});
+
 		const inputFilePath = path.join(fileDirPath, task.relFilePath);
 		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, dexvertOptions : xu.clone(dexvertOptions)};
 		if(taskProps.fileMeta)

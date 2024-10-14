@@ -10,9 +10,12 @@ export class scribus extends Program
 {
 	website = "https://www.scribus.net/";
 	package = "app-office/scribus";
+	flags   = {
+		outType     : `Which format to output: svg | pdf. Default is svg`
+	};
 	unsafe  = true;
 	bin     = "scribus-1.6";
-	outExt  = ".eps";
+	outExt  = r => ((r.flags.outType || "svg")==="pdf" ? ".pdf" : ".eps");
 
 	pre = async r =>
 	{
@@ -35,16 +38,25 @@ export class scribus extends Program
 		await fileUtil.writeTextFile(path.join(r.scribusDirPath, "conv.py"), `from scribus import *
 import scribus
 
+${(r.flags.outType || "svg")==="pdf" ? `
+scribus.openDoc("${r.inFile()}")
+pdf = scribus.PDFfile()
+pdf.file = "${await r.outFile("out.pdf")}"
+pdf.save()
+` : `
 scribus.newDocument((50000, 50000), (0, 0, 0, 0), scribus.PORTRAIT, 1, scribus.UNIT_POINTS, scribus.PAGE_1, 0, 1)
 scribus.setUnit(scribus.UNIT_POINTS)
 scribus.placeVectorFile("${r.inFile()}", 0, 0)
 scribus.savePageAsEPS("${await r.outFile("out.eps")}")
+`}
+
 scribus.closeDoc()
 scribus.fileQuit()`);
 	};
 
-	args       = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()];
+	args       = r => ["--no-gui", "--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()];
 	runOptions = ({timeout : xu.MINUTE, virtualX : true});
 	renameOut  = true;
-	chain      = "inkscape";	// if I also wanted .png output, I could change inkscape to: dexvert[asFormat:image/eps]
+	chain      = "?inkscape";
+	chainCheck = r => ((r.flags.outType || "svg")==="svg");
 }

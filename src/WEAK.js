@@ -89,7 +89,7 @@ export const IGNORE_MAGICS =
 export const WEAK_VALUES =
 [
 	// siegfried
-	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|691|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1874|1902)( |$)/,
+	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|691|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491|1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1874|1902)( |$)/,
 	/^x-fmt\/(8|10|53|101|157|168|195|222|324|342)( |$)/,
 
 	// ancientID
@@ -736,7 +736,7 @@ export const WEAK_VALUES =
 	/^OpenSSL encryption/,
 	/^OS\/2 Boot Manager/,
 	/^OS\/2, hotspot/,
-	/^OS9\/(68K|6809) module$/,
+	/^OS9\/(68K|6809) module/,
 	/^overlay object file/,
 	/^PA-RISC\d/,
 	/^PAK archive data$/,
@@ -1498,6 +1498,7 @@ export const WEAK_VALUES =
 	/^Axon Raw Format bitmap \(big endian\)$/,
 	/^Axon Text File format$/,
 	/^Balance of Power: The 1990 Ed\. saved game$/,
+	/^Beam Software SIFF container \(generic\)$/,
 	/^Beetris high scores$/,	// Other files use the same magic from this publisher
 	/^Berkeley Logic Interchange Format$/,
 	/^Better Working Eight-In-One Document$/,
@@ -1698,6 +1699,7 @@ export const WEAK_VALUES =
 	/^Mechwarrior FIT data$/,
 	/^MegaCAD Project$/,
 	/^MegaZeux game$/,
+	/^MEMU Floppy image$/,
 	/^MetaQuote \/ MetaTrader indicator$/,
 	/^MetaQuotes Language 5 compiled program$/,
 	/^MG!2 compressed$/,
@@ -1739,6 +1741,7 @@ export const WEAK_VALUES =
 	/^Novastorm Media audio$/,
 	/^NPS Image Editor Script$/,
 	/^OctaMED MCNT multi-module$/,
+	/^OGG stream \(generic\)$/,
 	/^Open Packaging Conventions container$/,
 	/^OpenSceneGraph (legacy|native) binary format$/,
 	/^OpenSSL encrypted data$/,
@@ -1792,6 +1795,7 @@ export const WEAK_VALUES =
 	/^Portable Image File bitmap$/,
 	/^Portfolio BASIC compiled 16 bit MS-DOS binary$/,
 	/^Poser (Hair data|pose)$/,
+	/^Primary Interop Assembly \(generic\)$/,
 	/^Prisoner Of Ice game data archive$/,
 	/^PRO-NTO Application$/,
 	/^ProductView Packaged Structure and Drawing$/,
@@ -1966,5 +1970,6 @@ export const WEAK_VALUES =
 	/^Zing! directory tree$/,
 	/^Zip Chunker fragment$/,
 	/^Zoot information processor database$/,
+	/^Zzip compressed archive$/,
 	/^ZZT Game Creation System/
 ];

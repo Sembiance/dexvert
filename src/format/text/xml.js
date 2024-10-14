@@ -19,8 +19,8 @@ const _XML_MAGIC = [
 	/^Tiled Tiles (Map|Set) XML$/, "Additive Manufacturing Format", "Microsoft Windows library description", "Microsoft Vista Saved Search", "Windows Mail Account", "Windows Contact", "OS X Flat Package Packageinfo", "OS X Installer GUI script",
 	"Continuous Media Markup Language", "GraphML graph", "Kate language syntax", "Class Diagram", "SQL Server Reporting Services Report Definition Language", "JasperReports JRXML report definition", "Borland Developer Studio Project",
 	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Delphi Project", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document",
-	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report",
-	/^fmt\/(205|475|979|983|986|1219|1474|1677|1729|1796)( |$)/
+	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report", "XML Bookmark Exchange Language", "ttx font format", "Eclipse Extension Point Schema",
+	/^fmt\/(205|475|979|983|986|1219|1474|1677|1729|1776|1796)( |$)/
 ];
 export {_XML_MAGIC};
 
@@ -30,6 +30,7 @@ export class xml extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/XML";
 	ext            = [".xml"];
 	forbidExtMatch = true;
+	priority       = this.PRIORITY.LOW;
 	mimeType       = "application/xml";
 	magic          = _XML_MAGIC;
 	untouched      = true;

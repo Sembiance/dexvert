@@ -53,7 +53,7 @@ export const gameextractor =
 		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package", /^Rune map$/], forbiddenMagic : ["Unreal Music"]},
 		vampireEngineMageSlayerGameArchive : {name : "Vampire Engine MageSlayer game archive", ext : [".vpk"], magic : ["Vampire Engine MageSlayer game data archive"]},
 		vivBIGF                            : {name : "VIV/BIGF/BIG4 EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF", "BIG4 Electronic Arts game data archive"], website : "http://fileformats.archiveteam.org/wiki/VIV"},
-		volitionPackageGameArchive         : {name : "Volition Package game archive", ext : [".vpp", ".vp"], magic : ["Volition Package - Red Faction game data archive"]},
+		volitionPackageGameArchive         : {name : "Volition Package game archive", ext : [".vpp", ".vp"], magic : ["Volition Package - Red Faction game data archive", "Volition Package game archive data"]},
 		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true},
 		wad2GameArchive                    : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
 		xcrArchive                         : {name : "XCR archive", ext : [".xcr"], magic : ["XCR archive"]},

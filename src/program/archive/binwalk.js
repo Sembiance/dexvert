@@ -5,14 +5,16 @@ import {fileUtil} from "xutil";
 
 export class binwalk extends Program
 {
-	website   = "https://github.com/OSPG/binwalk";
-	package   = "app-misc/binwalk";
+	website = "https://github.com/OSPG/binwalk";
+	package = "app-misc/binwalk";
 	flags   = {
 		"all" : "Set this flag to extract all files found within the file"
 	};
-	bin       = "binwalk";
-	args      = r => [...(r.flags.all ? ["-D", ".*"] : ["-e"]), `--directory=${r.outDir()}`, r.inFile()];
-	postExec  = async r =>
+	bin          = "binwalk";
+	args         = r => [...(r.flags.all ? ["-D", ".*"] : ["-e"]), `--directory=${r.outDir()}`, r.inFile()];
+	checkForDups = true;
+	
+	postExec = async r =>
 	{
 		// if we just have a single output dir at the bas level, move it on up
 		const outDirPath = r.outDir({absolute : true});

@@ -8,7 +8,7 @@ export class pdf extends Format
 	mimeType     = "application/pdf";
 	magic        = [
 		"Adobe Portable Document Format", "PDF document", "Adobe Portable Document (PDF) Datei", "Format: PDF", "application/pdf", /^PDF$/, /Acrobat PDF.* Portable Document Format$/,
-		/^fmt\/(14|15|16|17|18|19|20|95|157|158|276|354|477|480|558|559|560|562|564|565)( |$)/
+		/^fmt\/(14|15|16|17|18|19|20|95|157|158|276|354|477|480|558|559|560|561|562|564|565)( |$)/
 	];
 	idMeta       = ({macFileType, macFileCreator}) => [" PDF", "PDF "].includes(macFileType) && macFileCreator==="CARO";
 	untouched    = true;

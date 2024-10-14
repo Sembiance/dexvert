@@ -7,7 +7,13 @@ export class json extends Format
 	name             = "JavaScript Object Notation";
 	website          = "http://fileformats.archiveteam.org/wiki/JSON";
 	ext              = [".json"];
-	magic            = ["JSON text data", "Chrome Bookmarks"];
+	magic            = [
+		// generic
+		"JSON text data",
+
+		// specific
+		"Chrome Bookmarks", "Firefox bookmark (JavaScript Object Notation)"
+	];
 	weakMagic        = true;
 	mimeType         = "application/json";
 	untouched        = dexState => !!dexState.meta.type;

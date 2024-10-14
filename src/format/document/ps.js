@@ -1,7 +1,7 @@
 import {Format} from "../../Format.js";
 import {_EPS_MAGIC, _EPS_EXT} from "../image/eps.js";
 
-const _PS_MAGIC = [/^PostScript$/, /^PostScript document/, "PJL encapsulated PostScript document", "Adobe Postscript Datei", "HP Printer Job Language data", "Encapsulated PostScript Interchange", /^x-fmt\/(91|406|407|408)( |$)/];
+const _PS_MAGIC = [/^PostScript$/, /^PostScript document/, "PJL encapsulated PostScript document", "Adobe Postscript Datei", "HP Printer Job Language data", "Encapsulated PostScript Interchange", /^fmt\/501( |$)/, /^x-fmt\/(91|406|407|408)( |$)/];
 const _PS_EXT = [".ps"];
 export {_PS_MAGIC, _PS_EXT};
 

@@ -6,7 +6,7 @@ export class crLZH extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/CrLZH";
 	ext            = [".yyy"];
 	forbidExtMatch = true;
-	magic          = ["CrLZH compressed", "LZH compressed data"];
+	magic          = ["CrLZH compressed", "LZH compressed data", "Crunch-LZHUF"];
 	packed         = true;
 	converters     = ["unar", "deark[module:crlzh]", "lbrate"];
 }

@@ -10,7 +10,7 @@ export class rawPartition extends Format
 	magic          = [
 		/^DOS\/MBR boot sector/, ...HFS_MAGICS, "UDF filesystem data", "romfs image", "romfs filesystem", "LILO boot loader Minix file system", "Linux romfs", "LILO boot loader", "Linux/i386 LILO", "DOS/MBR partition map", "SysV file system",
 		"FAT16 file system", "eXtended Density Format disk image", "LILO bootloader disk image", /^GPT partition table/, /^SYSLINUX boot loader/, /^Syslinux bootloader/, "U-Boot uImage", /^u-boot legacy uImage/, "Format: U-Boot", "uImage header",
-		"XENIX file system",
+		"XENIX file system", "System Deployment Image",
 		/^fmt\/(468|1087|1105|1739)( |$)/
 	];
 	converters = dexState =>

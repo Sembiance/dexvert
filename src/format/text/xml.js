@@ -7,17 +7,20 @@ const _XML_MAGIC = [
 	// specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
 	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Visual Studio .NET Visual C Project",
-	"Visual Studio Project User Options", "Visual Studio C++ project Filters (UTF-8)", "Visual Studio Visual C++ Project (UTF-8)", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes",
+	"Visual Studio Project User Options", "Visual Studio C++ project Filters", "Visual Studio Visual C++ Project", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes", "Xcode Scheme",
 	"Tag Library Descriptor", "Channel Definition Format", "QuickTime Media Link", "Interface Builder UI resource data (archive)", "Mozilla XML User interface Language", "GPS eXchange format", "Glade UI design", "Internet Archive book scan data",
 	"RoboHelp / FlashHelp skin", "Entity and Attribute Information", "Shapefile Geospatial metadata", "NuGet Specification", "Microsoft Management Console Snap-in control file", "Microsoft Extensible Application Markup Language", "XSI Addon",
 	"Native Instruments Battery drumKit", "Dia shape", "Dia sheet", "Dia drawing (uncompressed)", "RELAX NG", "XSL Formatting Objects", "DISCO Dynamic Discovery file", "XML sitemap", "GNUMERIC spreedshet (XML", "Open Source Metadata Framework",
 	"Outline Processor Markup Language", "application/atom+xml", "application/xslt+xml", "AppleScript Terminology", "application/x-dia-shape", "application/x-gnumeric", "application/x-dia-diagram", "text/x-opml+xml", "C++ Builder XML Project",
-	"Death Village stage data", "Atom web feed", "SOAP message", "Lazarus Project Information", "XML Localization Interchange File Format", "application/xliff+xml", "application/rss+xml", "Windows Update Package", "Xcode project data",
+	"Death Village stage data", "Atom web feed", "SOAP message", "Lazarus Project Information", "XML Localization Interchange File Format", "application/xliff+xml", "application/rss+xml", "Windows Update Package", "Xcode project data", "Delphi Project",
 	"application/x-glade", "Open Office XML Relationships", "Visual Studio C# Project", "Visual Studio Visual Basic Project", "Game Definition File", "Windows Composite Font", "WCF Configuration Snapshot", "Saved WCF Configuration Information",
-	"Maven Project Object Model", "Visual Studio Settings", "ADO.NET Conceptual Schema Definition Language", "ADO.NET Store Schema Definition Language", "Entity Data Model", "VisualStudio MyApp", "JetBrains solution Settings",
+	"Maven Project Object Model", "Visual Studio Settings", "ADO.NET Conceptual Schema Definition Language", "ADO.NET Store Schema Definition Language", "Entity Data Model", "VisualStudio MyApp", "JetBrains solution Settings", "LandXML",
 	"Java Flight Recorder event settings", "DISCO Discovery Document", "DISCO Discovery Output", "Windows Installer XML Source", "OS X system data", "HRC Language", "Far settings", "Mozilla blocklist", "JAXB Bindings", "ClickOnce Deployment Manifest",
-	/^Tiled Tiles (Map|Set) XML$/,
-	/^fmt\/(205|475|979|983|986|1219|1677|1729|1796)( |$)/
+	/^Tiled Tiles (Map|Set) XML$/, "Additive Manufacturing Format", "Microsoft Windows library description", "Microsoft Vista Saved Search", "Windows Mail Account", "Windows Contact", "OS X Flat Package Packageinfo", "OS X Installer GUI script",
+	"Continuous Media Markup Language", "GraphML graph", "Kate language syntax", "Class Diagram", "SQL Server Reporting Services Report Definition Language", "JasperReports JRXML report definition", "Borland Developer Studio Project",
+	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Delphi Project", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document",
+	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report",
+	/^fmt\/(205|475|979|983|986|1219|1474|1677|1729|1796)( |$)/
 ];
 export {_XML_MAGIC};
 

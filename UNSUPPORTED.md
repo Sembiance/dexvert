@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,269)
+# Unsupported File Formats (2,275)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -858,7 +858,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,356)
+## Other (1,361)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1567,6 +1567,8 @@ Family/Format | Name | Extensions | Notes
 [other/mapInfoMapBasicDataIndex](https://discmaster.textfiles.com/search?formatid=mapInfoMapBasicDataIndex) | MapInfo MapBasic data Index | .ind | 
 [other/mapInfoMapBasicMapData](https://discmaster.textfiles.com/search?formatid=mapInfoMapBasicMapData) | MapInfo MapBasic map data | .map | 
 [other/mapleCommonBinary](https://discmaster.textfiles.com/search?formatid=mapleCommonBinary) | Maple Common Binary | .m | 
+[other/mapleHelpDatabase](https://discmaster.textfiles.com/search?formatid=mapleHelpDatabase) | Maple Help Database | .hdb | 
+[other/mapleLibrary](https://discmaster.textfiles.com/search?formatid=mapleLibrary) | Maple Library | .lib | 
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?formatid=masiMusicDriver) | MASI Music Driver | .mus | 
 [other/masterCookCookbookFile](https://discmaster.textfiles.com/search?formatid=masterCookCookbookFile) | MasterCook Cookbook file | .mcf | 
 [other/mathCadDocument](https://discmaster.textfiles.com/search?formatid=mathCadDocument) | MathCad Document | .mcd | 
@@ -1577,6 +1579,7 @@ Family/Format | Name | Extensions | Notes
 [other/maxonCADHatchPatterns](https://discmaster.textfiles.com/search?formatid=maxonCADHatchPatterns) | MaxonCAD hatch patterns |  | 
 [other/maxonCADLibrary](https://discmaster.textfiles.com/search?formatid=maxonCADLibrary) | MaxonCAD Library | .mclib | 
 [other/mcAfeeAntiVirusData](https://discmaster.textfiles.com/search?formatid=mcAfeeAntiVirusData) | McAfee AntiVirus data | .dat | 
+[other/mcAfeeAVPatternUpdate](https://discmaster.textfiles.com/search?formatid=mcAfeeAVPatternUpdate) | McAfee AV Pattern update | .gem | 
 [other/mcAfeeVirusScanData](https://discmaster.textfiles.com/search?formatid=mcAfeeVirusScanData) | McAfee VirusScan data | .dat | 
 [other/mcAfeeVShieldData](https://discmaster.textfiles.com/search?formatid=mcAfeeVShieldData) | McAfee VShield data | .dat | 
 [other/mdiffPatchFile](https://discmaster.textfiles.com/search?formatid=mdiffPatchFile) | MDIFF Patch File | .mdf | 
@@ -1701,6 +1704,8 @@ Family/Format | Name | Extensions | Notes
 [other/netwareMessage](https://discmaster.textfiles.com/search?formatid=netwareMessage) | Netware Message | .msg | 
 [other/netwareServerLicense](https://discmaster.textfiles.com/search?formatid=netwareServerLicense) | Netware Server license | .mls | 
 [other/networkAssociatesVirusScanData](https://discmaster.textfiles.com/search?formatid=networkAssociatesVirusScanData) | Network Associates VirusScan data | .dat | 
+[other/newtonToolkitLayoutSettings](https://discmaster.textfiles.com/search?formatid=newtonToolkitLayoutSettings) | Newton Toolkit Layout settings | .lyt | 
+[other/newtonToolkitProject](https://discmaster.textfiles.com/search?formatid=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
 [other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
@@ -2284,7 +2289,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (44)
+## Video (45)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2329,6 +2334,7 @@ Family/Format | Name | Extensions | Notes
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?formatid=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?formatid=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 
 [video/vis5DDatasetObject](https://discmaster.textfiles.com/search?formatid=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
+[video/webExRecording](https://discmaster.textfiles.com/search?formatid=webExRecording) | WebEx Recording | .wrf .wot | 
 [video/xbvVideo](https://discmaster.textfiles.com/search?formatid=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php?title=XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?formatid=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
 

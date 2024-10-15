@@ -20,6 +20,7 @@ const _XML_MAGIC = [
 	"Continuous Media Markup Language", "GraphML graph", "Kate language syntax", "Class Diagram", "SQL Server Reporting Services Report Definition Language", "JasperReports JRXML report definition", "Borland Developer Studio Project",
 	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Delphi Project", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document",
 	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report", "XML Bookmark Exchange Language", "ttx font format", "Eclipse Extension Point Schema",
+	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile",
 	/^fmt\/(205|475|979|983|986|1219|1474|1677|1729|1776|1796)( |$)/
 ];
 export {_XML_MAGIC};

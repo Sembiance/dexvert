@@ -47,7 +47,7 @@ export default
 		nsPacKPacked                  : {name : "NsPacK Packed", magic : ["Packer: NsPacK"]},
 		ntShellProtected              : {name : "NTShell protected", ext : [".exe"], magic : ["16bit DOS EXE NTShell protected"]},
 		packMasterPacked              : {name : "Pack MasterPacked", ext : [".exe"], magic : ["Packer: Pack Master"]},
-		peCompactPacked               : {name : "PECompact Packed", ext : [".scr"], magic : ["Packer: PECompact"]},
+		peCompactPacked               : {name : "PECompact Packed", ext : [".scr"], magic : ["Packer: PECompact", "Win32 EXE PECompact compressed"]},
 		peDiminisherPacked            : {name : "PE Diminisher Packed", ext : [".exe"], magic : [/^PE Diminisher [v\d.]+ compressed Win32 Executable/]},
 		pePackPacked                  : {name : "PE-PACK Packed", magic : ["Packer: PE-PACK"]},
 		petitePacked                  : {name : "Petite Packed", ext : [".exe"], magic : ["Packer: Petite", "Petite compressed Win32 executable"]},
@@ -79,7 +79,7 @@ export default
 		actionPresentation                          : {name : "Action! presentation", ext : [".acp", ".act", ".sta"], magic : ["Action! presentation"]},
 		afterlifeGameData                           : {name : "Afterlife game data", ext : [".000"], magic : ["Afterlife game data"]},
 		afxCompressedData                           : {name : "AFX compressed data", magic : ["AFX compressed data", /^AFX compressed file data/]},
-		aixBackupRestore                            : {name : "AIX/BFF backup/restore", ext : [".img", ".bff"], magic : ["AIX backup/restore format file", "Archive: BFF", "BFF volume header"]},
+		aixBackupRestore                            : {name : "AIX/BFF backup/restore", ext : [".img", ".bff"], magic : ["AIX backup/restore format file", "AIX Backup File Format", "Archive: BFF", "BFF volume header"]},
 		aldusLZWCompressedData                      : {name : "Aldus LZW compressed data", magic : ["Aldus LZW compressed data"]},
 		amigaKickstartDiskImage                     : {name : "Amiga Kickstart disk image", ext : [".adf"], magic : ["Amiga Kickstart disk"]},
 		amigaRigidDiskBlockImage                    : {name : "Amiga Rigid Disk block / Hard Disk File image", ext : [".rdb", ".hdf"], magic : ["Amiga Rigid Disk block / Hard Disk File image", "Amiga Rigid Disk partition map", /^Rigid Disk Block/], weakMagic : true},
@@ -669,7 +669,8 @@ export default
 		sierraRobotAnimation          : {name : "Sierra Robot Animation", ext : [".rbt"], magic : ["Sierra Robot Animation"]},
 		stngAFinalUnityFMVCutscene    : {name : "STNG 'A Final Unity' Fullmotion Video cutscene", ext : [".fvf"], magic : ["STNG 'A Final Unity' Fullmotion Video cutscene File"], weakMagic : true},
 		toonBoomStudioAnimation       : {name : "Toon Boom Studio animation", ext : [".tbd", ".tbp"], magic : ["Toon Boom Studio animation"], weakMagic : true},
-		vis5DDatasetObject            : {name : "Vis5D dataset object", ext : [".v5d"], magic : ["Vis5D dataset object"], weakMagic : true}
+		vis5DDatasetObject            : {name : "Vis5D dataset object", ext : [".v5d"], magic : ["Vis5D dataset object"], weakMagic : true},
+		webExRecording                : {name : "WebEx Recording", ext : [".wrf", ".wot"], magic : ["WebEx Recording"], weakMagic : true}
 	},
 	
 	other :
@@ -1094,6 +1095,8 @@ export default
 		machOHPPAObject                    : {name : "Mach-O HPPA Object", ext : [".o"], magic : [/^Mach-O hppa .*object/]},
 		machOSparcObject                   : {name : "Mach-O SPARC Object", ext : [".o"], magic : [/^Mach-O SPARC .*object/]},
 		mapleCommonBinary                  : {name : "Maple Common Binary", ext : [".m"], magic : ["Maple Common Binary"], weakMagic : true},
+		mapleHelpDatabase                  : {name : "Maple Help Database", ext : [".hdb"], magic : ["Maple Help Database"], weakMagic : true},
+		mapleLibrary                       : {name : "Maple Library", ext : [".lib"], magic : [/^Maple V ?[Rr]\d [Ll]ibrary/], weakMagic : true},
 		metaEditOODAClassDiagram           : {name : "MetaEdit OODA Class Diagram", ext : [".ocd"], magic : ["MetaEdit OODA Class Diagram"]},
 		metaSoftwareDesignDiagram          : {name : "Meta Software Design Diagram", ext : [".dsd"], magic : ["Meta Software Design Diagram"]},
 		mdiffPatchFile                     : {name : "MDIFF Patch File", ext : [".mdf"], magic : ["MDIFF patch"]},
@@ -1109,6 +1112,8 @@ export default
 		mySQLIndexFile                     : {name : "MySQL Index", ext : [".myi"], magic : ["MySQL MyISAM index file", "MySQL MyISAM tables index", "MySQL MISAM compressed data file", /^fmt\/1197( |$)/]},
 		mySQLTableDefinition               : {name : "MySQL Table Definition", ext : [".frm"], magic : ["MySQL table Format", /^MySQL table definition/, /^MySQL Database.* Dictionary/, /^fmt\/868( |$)/], weakMagic : [/^MySQL table definition/]},
 		netwareLoadableModule              : {name : "Netware Loadable Module", ext : [".nlm"], magic : ["Novell NetWare Namespace module", /^Net[Ww]are Loadable Module/, /^fmt\/1551( |$)/]},
+		newtonToolkitLayoutSettings        : {name : "Newton Toolkit Layout settings", ext : [".lyt"], magic : ["Newton Toolkit Layout settings"]},
+		newtonToolkitProject               : {name : "Newton Toolkit Project", ext : [".ntk"], magic : ["Newton Toolkit Project"]},
 		oCamlInterface                     : {name : "OCaml bytecode", ext : [".cmi"], magic : ["OCaml bytecode (compiled interface)", "OCaml interface file"], weakMagic : true},
 		oCamlLibrary                       : {name : "OCaml library", ext : [".cma"], magic : ["OCaml library", "OCaml bytecode (library)"], weakMagic : true},
 		oCamlNativeLibrary                 : {name : "OCaml native library", ext : [".cmxa"], magic : ["OCaml native library", "OCaml bytecode (native library)"]},
@@ -1668,6 +1673,7 @@ export default
 		maxonCinema4DShader                      : {name : "Maxon Cinema 4D Shader", ext : [".shc", ".shv"], magic : [/^Maxon Cinema 4D (2D|3D|Coffee) [Ss]hader$/]},
 		maxonResourceCreationData                : {name : "Maxon Resource Creation Tool Data", ext : [".rct"], magic : ["Maxon Resource Creation Tool data"]},
 		mcAfeeAntiVirusData                      : {name : "McAfee AntiVirus data", ext : [".dat"], magic : ["McAfee AntiVirus data"]},
+		mcAfeeAVPatternUpdate                    : {name : "McAfee AV Pattern update", ext : [".gem"], magic : ["McAfee AV Pattern update"]},
 		mcAfeeVirusScanData                      : {name : "McAfee VirusScan data", ext : [".dat"], magic : ["McAfee VirusScan data (generic)", "McAfee VirusScan virus strings data"]},
 		mcAfeeVShieldData                        : {name : "McAfee VShield data", ext : [".dat"], magic : ["McAfee VShield data"]},
 		mealMasterPrinterDefinition              : {name : "Meal-Master Printer definition", ext : [".mmp"], magic : ["Meal-Master Printer definition"], weakMagic : true},

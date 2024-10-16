@@ -198,6 +198,7 @@ const newSampleFiles = {};
 const newMagics = {};
 const improvedMagics = {};
 const newMacTypeCreators = {};
+const newMacTypeCreatorsFormatids = {};
 const newProDOSTypes = {};
 const idMetaCheckers = [];
 
@@ -366,15 +367,13 @@ async function processNextQueue()
 
 		if(argv.report)
 		{
+			const dexformatid = dexid ? `${dexid.family}/${dexid.formatid}` : null;
+
 			//xlog.debug`${taskLogPrefix} Gathering data for report...`;
-			if(dexid)
+			if(dexid && !dexid.unsupported && await isNewSampleFile(dexformatid, inputFilePath))
 			{
-				const dexformatid = `${dexid.family}/${dexid.formatid}`;
-				if(!dexid.unsupported && await isNewSampleFile(dexformatid, inputFilePath))
-				{
-					newSampleFiles[dexformatid] ||= [];
-					newSampleFiles[dexformatid].push(task.relFilePath);
-				}
+				newSampleFiles[dexformatid] ||= [];
+				newSampleFiles[dexformatid].push(task.relFilePath);
 			}
 			
 			if(dexData.ids?.length)
@@ -400,6 +399,13 @@ async function processNextQueue()
 				{
 					newMacTypeCreators[macFileTypeCreator] ||= [];
 					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
+
+					if(dexid && !dexid.unsupported)
+					{
+						newMacTypeCreatorsFormatids[macFileTypeCreator] ||= {};
+						newMacTypeCreatorsFormatids[macFileTypeCreator][dexformatid] ||= 0;
+						newMacTypeCreatorsFormatids[macFileTypeCreator][dexformatid]++;
+					}
 				}
 			}
 
@@ -484,7 +490,7 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 if(argv.report)
 {
 	xlog.debug`Preparing reportData...`;
-	const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newProDOSTypes};
+	const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newMacTypeCreatorsFormatids, newProDOSTypes};
 
 	xlog.debug`Writing reportData to: ${path.join(workDirPath, "report.json")}`;
 	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));

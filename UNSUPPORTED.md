@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,275)
+# Unsupported File Formats (2,286)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (197)
+## Archive (203)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/winUpackPacked](https://discmaster.textfiles.com/search?formatid=winUpackPacked) | (Win)Upack Packed | .exe | 
@@ -48,6 +48,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cExeCompressedWin32Executable](https://discmaster.textfiles.com/search?formatid=cExeCompressedWin32Executable) | CExe compressed Win32 executable | .exe | 
 [archive/ciphatorProtectedV46](https://discmaster.textfiles.com/search?formatid=ciphatorProtectedV46) | cIPHATOR Protected | .exe | 
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
+[archive/colourGenieTapeImage](https://discmaster.textfiles.com/search?formatid=colourGenieTapeImage) | Colour Genie tape image | .cas | 
 [archive/comPackPacked](https://discmaster.textfiles.com/search?formatid=comPackPacked) | COM-Pack Packed | .com | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?formatid=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?formatid=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
@@ -84,6 +85,7 @@ Family/Format | Name | Extensions | Notes
 [archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?formatid=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?formatid=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
+[archive/imageForWindowsDiskImage](https://discmaster.textfiles.com/search?formatid=imageForWindowsDiskImage) | Image for Windows Disk Image | .tbi | 
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?formatid=imageLibrarianArchive) | Image Librarian archive | .ril | 
 [archive/innoSetupArchive](https://discmaster.textfiles.com/search?formatid=innoSetupArchive) | Inno Setup Archive | .bin | [1 sample file](https://sembiance.com/fileFormatSamples/archive/innoSetupArchive/) - Could maybe write my own extractor, see sandbox/app/ednaunpack
 [archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
@@ -112,6 +114,7 @@ Family/Format | Name | Extensions | Notes
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
 [archive/microsoftOutLookPersonalFolder](https://discmaster.textfiles.com/search?formatid=microsoftOutLookPersonalFolder) | Microsoft OutLook Personal Folder | .pst | 
+[archive/microtan65Dump](https://discmaster.textfiles.com/search?formatid=microtan65Dump) | Microtan 65 dump | .m65 | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?formatid=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/moleBoxPacked](https://discmaster.textfiles.com/search?formatid=moleBoxPacked) | MoleBox Packed | .exe | 
 [archive/mpq](https://discmaster.textfiles.com/search?formatid=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
@@ -181,6 +184,7 @@ Family/Format | Name | Extensions | Notes
 [archive/printShopDAT](https://discmaster.textfiles.com/search?formatid=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 [archive/simsCompactedResourceFile](https://discmaster.textfiles.com/search?formatid=simsCompactedResourceFile) | The Sims Compacted Resource file | .sims2pack | 
 [archive/softwareToolworksInstallArchive](https://discmaster.textfiles.com/search?formatid=softwareToolworksInstallArchive) | The Software Toolworks installation archive | .tzf | 
+[archive/ti99SectorDump](https://discmaster.textfiles.com/search?formatid=ti99SectorDump) | TI-99 V9T9 Sector Dump | .dsk .tidisk | 
 [archive/tifiles](https://discmaster.textfiles.com/search?formatid=tifiles) | TIFILES | .tfu .tifile .tifiles | 
 [archive/tinyProtProtected](https://discmaster.textfiles.com/search?formatid=tinyProtProtected) | TinyProt Protected | .exe | 
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
@@ -190,8 +194,10 @@ Family/Format | Name | Extensions | Notes
 [archive/viacomNewMedia](https://discmaster.textfiles.com/search?formatid=viacomNewMedia) | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 [archive/vmsSaveset](https://discmaster.textfiles.com/search?formatid=vmsSaveset) | VMS SaveSet |  | 
 [archive/vmwareDiskImage](https://discmaster.textfiles.com/search?formatid=vmwareDiskImage) | VMware disk image | .vmdk | 
+[archive/vz200300Image](https://discmaster.textfiles.com/search?formatid=vz200300Image) | VZ200/300 image | .vz | 
 [archive/warhammer40KTextures](https://discmaster.textfiles.com/search?formatid=warhammer40KTextures) | Warhammer 40K textures | .rsh | 
 [archive/wrp](https://discmaster.textfiles.com/search?formatid=wrp) | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/) - uaeunp says it supports it, and it will take an input .wrp and output a 'zipped.wrp' but that never converts to anything useful UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
+[archive/warpINInstaller](https://discmaster.textfiles.com/search?formatid=warpINInstaller) | WarpIN Installer | .wpi | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?formatid=wordPerfectInstallArchive) | WordPerfect install archive |  | 
 [archive/wraptor](https://discmaster.textfiles.com/search?formatid=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?formatid=wwarpDiskImage) | WWarp Disk Image | .wwp | 
@@ -463,7 +469,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (85)
+## Font (86)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -530,6 +536,7 @@ Family/Format | Name | Extensions | Notes
 [font/printPartnerFont](https://discmaster.textfiles.com/search?formatid=printPartnerFont) | PrintPartner Font | .font | 
 [font/professionalDrawFont](https://discmaster.textfiles.com/search?formatid=professionalDrawFont) | Professional Draw Font | .pdfont | 
 [font/psionFont](https://discmaster.textfiles.com/search?formatid=psionFont) | Psion Font | .fon | 
+[font/qCadFont](https://discmaster.textfiles.com/search?formatid=qCadFont) | QCad Font | .cxf | 
 [font/ripTermFont](https://discmaster.textfiles.com/search?formatid=ripTermFont) | RIPterm Font | .fnt | 
 [font/signumFont](https://discmaster.textfiles.com/search?formatid=signumFont) | Signum Font | .e24 | 
 [font/speedo](https://discmaster.textfiles.com/search?formatid=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
@@ -858,7 +865,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,361)
+## Other (1,365)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1033,6 +1040,7 @@ Family/Format | Name | Extensions | Notes
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
 [other/berkeleyDB](https://discmaster.textfiles.com/search?formatid=berkeleyDB) | Berkeley DB | .db | 
 [other/bethesdaGameMap](https://discmaster.textfiles.com/search?formatid=bethesdaGameMap) | Bethesda game Map | .mif | 
+[other/biewXlatTable](https://discmaster.textfiles.com/search?formatid=biewXlatTable) | Biew Xlat Table | .xlt | 
 [other/bigRedRacingLevel](https://discmaster.textfiles.com/search?formatid=bigRedRacingLevel) | Big Red Racing Level | .lev | 
 [other/billOfMaterials](https://discmaster.textfiles.com/search?formatid=billOfMaterials) | Bill of Materials | .bom | 
 [other/binaryColorFormat](https://discmaster.textfiles.com/search?formatid=binaryColorFormat) | Binary Color Format | .bcf | 
@@ -1220,6 +1228,7 @@ Family/Format | Name | Extensions | Notes
 [other/demoShieldDemo](https://discmaster.textfiles.com/search?formatid=demoShieldDemo) | DemoShield Demo | .dbd .bdd | 
 [other/depthDwellersGameData](https://discmaster.textfiles.com/search?formatid=depthDwellersGameData) | Depth Dwellers Resource/game data | .res | 
 [other/derEncodedData](https://discmaster.textfiles.com/search?formatid=derEncodedData) | DER Encoded Data | .rsa | 
+[other/descent2AlternativeTextureSet](https://discmaster.textfiles.com/search?formatid=descent2AlternativeTextureSet) | Descent 2 alternative texture set | .pog | 
 [other/descentGameSave](https://discmaster.textfiles.com/search?formatid=descentGameSave) | Descent Game Save | .sg0 | 
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
 [other/descentPlayer](https://discmaster.textfiles.com/search?formatid=descentPlayer) | Descent Player | .plr | 
@@ -1354,6 +1363,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalDesignPainterSession](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterSession) | Fractal Design Painter Session | .ssk | 
 [other/fractalForgeParameters](https://discmaster.textfiles.com/search?formatid=fractalForgeParameters) | Fractal Forge parameters | .mnd | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
+[other/freeDOSKEYBoardLayoutCollection](https://discmaster.textfiles.com/search?formatid=freeDOSKEYBoardLayoutCollection) | FreeDOS KEYBoard layout collection | .sys | 
 [other/freelanceGraphicsSmartmaster](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsSmartmaster) | Freelance Graphics Smartmaster | .mas .pre | 
 [other/frontPageBTreeIndex](https://discmaster.textfiles.com/search?formatid=frontPageBTreeIndex) | Front Page Binary-Tree Index | .btr | 
 [other/frontierFirstEncountersSavedCommander](https://discmaster.textfiles.com/search?formatid=frontierFirstEncountersSavedCommander) | Frontier: First Encounters saved commander | ._01 | 
@@ -1707,7 +1717,7 @@ Family/Format | Name | Extensions | Notes
 [other/newtonToolkitLayoutSettings](https://discmaster.textfiles.com/search?formatid=newtonToolkitLayoutSettings) | Newton Toolkit Layout settings | .lyt | 
 [other/newtonToolkitProject](https://discmaster.textfiles.com/search?formatid=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
-[other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 | 
+[other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 .z64 | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
 [other/nid32AntivirusUpdateFile](https://discmaster.textfiles.com/search?formatid=nid32AntivirusUpdateFile) | NOD32 Antivirus Update file | .nup | 
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
@@ -1729,6 +1739,7 @@ Family/Format | Name | Extensions | Notes
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?formatid=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?formatid=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
 [other/nWiperShow](https://discmaster.textfiles.com/search?formatid=nWiperShow) | NWiper Show | .nw | 
+[other/oberonObject](https://discmaster.textfiles.com/search?formatid=oberonObject) | Oberon Object | .obj | 
 [other/oberonSymbol](https://discmaster.textfiles.com/search?formatid=oberonSymbol) | Oberon Symbol | .sym | 
 [other/oCamlInterface](https://discmaster.textfiles.com/search?formatid=oCamlInterface) | OCaml bytecode | .cmi | 
 [other/oCamlLibrary](https://discmaster.textfiles.com/search?formatid=oCamlLibrary) | OCaml library | .cma | 

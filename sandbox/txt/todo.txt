@@ -1,22 +1,10 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Once dexdrone1 is available, sync up to dexdrone1 and test all formats
-  I made a change in identify to no longer reduce confidence based on how many other matches of same family
-  This might cause a big problem. Look into it.
-  Once I've fully tested, I can sync to all other dexdrones, schedule all dexdrones to reload and re-queue for processing items at bottom
-
 * Look into why these 2 files fail on dexdrone11 and dexdrone12 (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   Do this AFTER updating laptop/workstation to latest software versions
-
-* Use /mnt/compendium/DevLab/dexvert/sandbox/wip/demoleition.exe to handle 'MoleBox' packed files:
-  https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/erotik_poker.exe
-  https://dev.discmaster2.textfiles.com/view/10900/Erotik%20Poker.iso/DATA/shop.exe
-  https://dev.discmaster2.textfiles.com/view/10903/Erotische%20Spiele.iso/DATA/_fertig%20puzzle/epuzzle.exe
-  https://dev.discmaster2.textfiles.com/view/10903/Erotische%20Spiele.iso/DATA/_fertig%20mahjongg/mpgplay.exe
-  Search detections for 'MoleBox' to find more items
 
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it

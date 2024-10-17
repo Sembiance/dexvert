@@ -69,6 +69,7 @@ export const IGNORE_MAGICS =
 	/^Generic RIFF file /,
 
 	// GT2
+	/^Ausf.*hrbare Sony PlayStation Datei$/,
 	/^BMF A\.i Bild/,
 	/^DPA Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^NSIS 1\.60-2\.0 Archiv gefunden \(Auflistung ist deaktiviert\)$/,		// The installer itself is properly extracted, but some sort of 'meta' file is left behind that is identifed as this, but it's always pretty small thus we just ignore it
@@ -85,7 +86,7 @@ export const IGNORE_MAGICS =
 ];
 
 // These magics are untrustworthy and any detections against them should be noted as such
-// Note: Some may not be especially weak, they may just be so application-specific that I didn't want to deal with them anymore as they wouldn't be useful to support. Probably should have created an ignored.js file for these, but too late now
+// Note: Some may not be especially weak, they may just be so application-specific that I didn't want to deal with them anymore as they wouldn't be useful to support
 export const WEAK_VALUES =
 [
 	// siegfried
@@ -181,6 +182,7 @@ export const WEAK_VALUES =
 	/^Electronic Arts cdata \(ea_cdata\)$/,
 	/^Electronic Arts Multimedia \(ea\)$/,
 	/^Game Music Emu demuxer \(libgme\)$/,
+	/^IEC 61937 \(compressed data in S\/PDIF\) \(spdif\)$/,
 	/^IFF \(Interchange File Format\) \(iff\)$/,
 	/^image2 sequence \(image2\)$/,
 	/^LOAS AudioSyncStream \(loas\)$/,
@@ -203,6 +205,7 @@ export const WEAK_VALUES =
 	/^RealText subtitle format \(realtext\)$/,
 	/^Sega DC STR \(dcstr\)$/,
 	/^Sony Playstation STR \(psxstr\)$/,
+	/^SDP \(sdp\)$/,
 	/^Tele-typewriter \(tty\)$/,
 	/^THP \(thp\)$/,
 	/^Tiertex Limited SEQ \(tiertexseq\)$/,
@@ -311,6 +314,9 @@ export const WEAK_VALUES =
 	/^application\/x-iff$/,
 	/^application\/x-ips-patch$/,
 	/^application\/x-it87$/,
+	/^application\/x-kchart$/,
+	/^application\/x-kformula$/,
+	/^application\/x-kivio$/,
 	/^application\/x-lz4$/,
 	/^application\/x-mozilla-bookmarks$/,
 	/^application\/x-ms-ne-executable$/,
@@ -539,6 +545,7 @@ export const WEAK_VALUES =
 	/^Encore unsupported executable/,
 	/^EPOC\/Symbian exported MultiBitMap$/,
 	/^Epson ESC\/Page language printer data$/,	// actually found these (LSxx_129) but kinda weak and not much we can do with em
+	/^Erlang BEAM file$/,
 	/^ERROR: \(null\)/,
 	/^ESP archive data/,
 	/^ESP Image segment/,
@@ -812,6 +819,7 @@ export const WEAK_VALUES =
 	/^separate object file/,
 	/^Sequence Alignment\/Map \(SAM\)/,
 	/^SHARC COFF binary/,
+	/^sim65 executable/,
 	/^Spectrum \+3 data - memory block$/,
 	/^Spectrum \.SCL Betadisk image/,
 	/^SHARC architecture file/,
@@ -883,6 +891,7 @@ export const WEAK_VALUES =
 	/^WE32000 COFF/,
 	/^WebAssembly \(wasm\)/,
 	/^Windows boot log/,
+	/^Windows Embedded CE binary image$/,
 	/^Windows NTbackup archive NT/,
 	/^Windows Precompiled iNF/,
 	/^Windows Recycle Bin INFO2 file/,
@@ -1251,7 +1260,6 @@ export const WEAK_VALUES =
 	/^Trilo ?Tracker (chiptune|Macro|Sample)$/,
 	/^TRS-80 Level II BASIC tokenized source$/,
 	/^TRSI Sound Monitor song$/,
-	/^TTA True Audio lossless compressed audio$/,
 	/^TTComp archive/,
 	/^tzip compressed file$/,
 	/^V9990 font format$/,
@@ -1596,6 +1604,7 @@ export const WEAK_VALUES =
 	/^Eldritch Packed game data$/,
 	/^Electronic Arts audio Bank$/,
 	/^Emacs Muse project$/,
+	/^Embedded JCL debug info$/,
 	/^Encrypted Blender 3D data$/,
 	/^Encrypted Multi-Picture Object bitmap$/,
 	/^EngineX Sound effects$/,
@@ -1690,6 +1699,7 @@ export const WEAK_VALUES =
 	/^Lightscape Radiosity$/,
 	/^LightWave Envelope data$/,	// Found files that ARE this format, but with no extension and the magic is pretty weak otherwise
 	/^LightWave Motion data$/,
+	/^Lingoes Dictionary$/,
 	/^Litestep theme$/,
 	/^LLVM IR bitcode$/,
 	/^Mac font$/,
@@ -1936,6 +1946,7 @@ export const WEAK_VALUES =
 	/^WeatherLink Binary Weather data$/,
 	/^WebAssembly module \(binary\)$/,
 	/^WebP2 bitmap$/,
+	/^Weston CAPture video \(LE\)$/,
 	/^Westwood game data Archive$/,
 	/^White Birds Productions game data archive$/,
 	/^Wii Effect controls$/,
@@ -1945,6 +1956,7 @@ export const WEAK_VALUES =
 	/^Win32 EXE PECompact compressed \(generic\)$/,
 	/^Winamp EQ Settings File$/,
 	/^WinArcadia Recording\/macro$/,
+	/^WINDEV data \(generic\)$/,
 	/^Windows 95 passwords$/,
 	/^Windows ActiveX control$/,
 	/^Windows Control Panel Item \(generic\)$/,

@@ -18,9 +18,9 @@ const _XML_MAGIC = [
 	"Java Flight Recorder event settings", "DISCO Discovery Document", "DISCO Discovery Output", "Windows Installer XML Source", "OS X system data", "HRC Language", "Far settings", "Mozilla blocklist", "JAXB Bindings", "ClickOnce Deployment Manifest",
 	/^Tiled Tiles (Map|Set) XML$/, "Additive Manufacturing Format", "Microsoft Windows library description", "Microsoft Vista Saved Search", "Windows Mail Account", "Windows Contact", "OS X Flat Package Packageinfo", "OS X Installer GUI script",
 	"Continuous Media Markup Language", "GraphML graph", "Kate language syntax", "Class Diagram", "SQL Server Reporting Services Report Definition Language", "JasperReports JRXML report definition", "Borland Developer Studio Project",
-	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document",
+	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document", "RealProducer Profile",
 	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report", "XML Bookmark Exchange Language", "ttx font format", "Eclipse Extension Point Schema",
-	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile",
+	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile", "Artweaver Brush",
 	/^fmt\/(205|475|979|983|986|1219|1474|1677|1729|1776|1796)( |$)/
 ];
 export {_XML_MAGIC};

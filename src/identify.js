@@ -407,17 +407,17 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			else
 				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => (m.hasWeakMagic ? 1 : 0)]);
 
-			familyMatches[matchType].forEach((m, i) =>
+			for(const m of familyMatches[matchType])
 			{
-				m.confidence = Math.max(startConfidence-i, 0);
+				if(m.unsupported)
+					m.confidence = 1 + (m.matchesExt ? 1 : 0);
+				else if(m.weak && !m.trustMagic && !m.extMatch && !m.idMetaMatch && !m.filenameMatch)
+					m.confidence = 10;
+				else
+					m.confidence = Math.max(startConfidence, 0);	// I used to reduce confidence by 1 per additional match in the same type, but since we sort on confidence first (before family) this causes problems (for example archive/moleBoxPacked/erotic_poker.exe should always process as archive/moleBoxPacked before executable/exe when confidence is 100)
+
 				//delete m.priority;
 				delete m.originalConfidence;
-
-				if(m.weak && !m.trustMagic && !m.extMatch && !m.idMetaMatch && !m.filenameMatch)
-				{
-					xlog.trace`Reducing confidence of weak match ${m} to 10`;
-					m.confidence = 10;
-				}
 				
 				if(m.confidenceAdjust)
 				{
@@ -427,7 +427,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				}
 
 				matchesByFamily[matchType].push(m);
-			});
+			}
 		});
 	}
 
@@ -436,13 +436,6 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 		...matchesByFamily.ext.filter(em => ![...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
 		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
 		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
-
-	// Unsupported matches haven't gone through enough testing to warrant any additional confidence than 1
-	matches.forEach(match =>
-	{
-		if(match.unsupported)
-			match.confidence = 1 + (match.matchesExt ? 1 : 0);
-	});
 
 	// Stick any fallback matches>=10 here first, before we sort
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence>=10));

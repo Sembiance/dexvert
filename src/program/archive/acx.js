@@ -54,16 +54,17 @@ export class acx extends Program
 				continue;
 			}
 
-			const {filename, proDOSType, month, day, year, proDOSTypeAux} = line.match(/^\*?\s+(?<filename>\S+)\s+(?<proDOSType>\S+)\s+\S+\s+(?<month>\d+)\/(?<day>\d+)\/(?<year>\d+)\s\d+\/\d+\/\d+\s+\S+(?:\s+A=\$(?<proDOSTypeAux>[\dA-F]{4}))?.*$/)?.groups || {};
+			const {filename, proDOSTypeCode, month, day, year, proDOSTypeAux} = line.match(/^\*?\s+(?<filename>\S+)\s+(?<proDOSTypeCode>\S+)\s+\S+\s+(?<month>\d+)\/(?<day>\d+)\/(?<year>\d+)\s\d+\/\d+\/\d+\s+\S+(?:\s+A=\$(?<proDOSTypeAux>[\dA-F]{4}))?.*$/)?.groups || {};
 			if(!filename)
 				continue;
 			
 			const meta = {};
 			
-			if(proDOSType)
+			//r.xlog.debug`acx parsing line: ${line}\n\t${{proDOSTypeCode, proDOSTypeAux}}`;
+			if(proDOSTypeCode)
 			{
-				meta.proDOSType = proDOSType;
-				meta.proDOSTypePretty = _proDOSTypeCodeToPretty(proDOSType);
+				meta.proDOSTypeCode = proDOSTypeCode;
+				meta.proDOSTypePretty = _proDOSTypeCodeToPretty(proDOSTypeCode);
 			}
 			if(proDOSTypeAux)
 				meta.proDOSTypeAux = proDOSTypeAux;

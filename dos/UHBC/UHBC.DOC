@@ -1,0 +1,106 @@
+
+ UHBC 1.0  ----   high performance blocksorting compressor   ----  BETA version
+ Copyright(c) 2002-2003 by Uwe Herklotz     All rights reserved     Jun 30 2003
+ >>>> **** FOR TESTING AND EVALUATION ONLY *** NOT FOR COMMERCIAL USE **** <<<<
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !!!!!!     THIS IS A BETA VERSION AND MAY CONTAIN BUGS. USE THIS      !!!!!!
+ !!!!!!      COMPRESSOR AT YOUR OWN RISK. UWE HERKLOTZ, THE AUTHOR       !!!!!!
+ !!!!!!        OF UHBC, WILL NOT TAKE ANY RESPONSIBILITY FOR ANY         !!!!!!
+  !!!!!!       DAMAGE CAUSED BY USING OR MISUSING THIS SOFTWARE.        !!!!!!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+ ===< About UHBC >=============================================================
+
+  UHBC is a blocksorting compressor optimized for high compression ratios. The
+  current version is still in an experimental state, but because the results
+  are close to the world's best, I decided to release this program as public
+  BETA version. It is still under development, so you use this program at your
+  own risk. UHBC doesn't use any data filters or transformations before BWT.
+
+  UHBC is a file-to-file-compressor, not an archiver. So it doesn't store
+  name, time/date or attributes of the original file. There is no check for
+  existing files and there is also no file verification after decompression.
+
+
+ ===< Usage >==================================================================
+
+  Command-line:  UHBC command infile outfile [switches..]
+
+  Commands:  e        encode infile to outfile
+             d        decode infile to outfile
+
+  Switches: -b<size>  specify maximum block size in bytes, kilobytes (k) or
+                      megabytes (m), e.g. -b16m or -b900k or -b4096
+                      default: -b5m, maximum: -b128m, size is rounded to 1kb
+            -m<mode>  choose second stage algorithms, default: -m2
+                      -m0   RLE + direct entropy coding
+                      -m1   RLE + MTF + entropy coding
+                      -m2   RLE + WFC + entropy coding
+                      -m3   RLE + DWFC + entropy coding
+            -s        process input with second stage algorithms only (don't
+                      perform BWT); input should already be processed by BWT
+                      but it will work for any data
+            -d        disable adaptive switching between MTF/WFC and direct
+                      coding; it is faster and maybe useful for comparisons
+            -c<ctxt>  choose contexts for BWT sorting, default: auto-selection
+                      -cf   use following contexts
+                      -cp   use preceding contexts
+
+  Examples: UHBC e book.txt book.cmp
+            UHBC d book.cmp book.txt
+            UHBC e large.dat large.max -b32m -m3
+
+  Memory requirements:
+    compression       8*blocksize + 256kb
+    decompression     5*blocksize
+
+
+ ===< History >================================================================
+
+  Date        Version
+  ~~~~        ~~~~~~~
+  30.06.2003    1.0   Initial public release.
+
+  Aug/Sep 02          First BWCA experiments. 3 versions of BWT output coders
+                      implemented (MTF-based second-stage-algorithms only).
+
+
+ ===< Legal info >=============================================================
+
+  Disclaimer:
+  ~~~~~~~~~~~
+  Uwe Herklotz, the author of UHBC, disclaims any liability for any damage
+  caused by using or misusing this software. The author cannot be held
+  responsible for data loss or other damages and any consequences from this
+  loss or damages.
+
+  !!  U S E   T H I S   P R O G R A M   A T   Y O U R   O W N   R I S K  !!
+
+  ----------------------------------------------------------------------------
+  This software is Copyright(c) 2002-2003 by Uwe Herklotz. All rights reserved
+  ----------------------------------------------------------------------------
+
+  PERMISSION IS GRANTED FOR TESTING AND EVALUATION ONLY, NOT FOR COMMERCIAL
+  USE. YOU MAY FREELY DISTRIBUTE THIS PROGRAM PROVIDED THAT ALL FILES ARE
+  DISTRIBUTED WITHOUT ANY CHANGES AND NO CHARGE IS MADE.
+
+  If you disagree with the above please delete UHBC.
+
+
+ ===< Contact Info >===========================================================
+
+  If you have any advice, comments, bug reports or requests for info,
+  you can send e-mail to:
+
+                   Uwe.Herklotz@gmx.de
+
+  or mail to:      Uwe Herklotz
+                   Irkutsker Str. 111
+                   09119 Chemnitz
+                   Germany
+
+
+ ##############################################################################
+ UHBC Copyright(c) 2002-2003 by Uwe Herklotz                All rights reserved

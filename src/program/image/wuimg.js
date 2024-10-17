@@ -9,4 +9,5 @@ export class wuimg extends Program
 	args       = r => ["write", "-d", r.outDir(), r.inFile()];
 	renameOut  = true;
 	chain      = "convert";
+	notes      = "This program is 'sensitive'. See todo.txt for more details as to what I may do about it.";
 }

@@ -160,6 +160,7 @@ export default
 		developerStudioProject          : {name : "Microsoft Developer Studio Project", ext : [".mdp"], magic : ["Microsoft Developer Studio Project"]},
 		directorSTXT                    : {name : "Director STXT", ext : [".stxt"], magic : ["Director STXT"], weakMagic : true},
 		eaLocalizedStringsGameData      : {name : "EA Localized Strings game data", ext : [".loc"], magic : ["EA Localized Strings game data"]},
+		frameMakerHelp                  : {name : "FrameMaker Help", ext : [".prd", ".hlp", ".api"], magic : ["FrameMaker Help"]},
 		frontRunnerBinaryModule         : {name : "FrontRunner Binary Module", ext : [".frb"], magic : ["FrontRunner Binary module"]},
 		geosConvert                     : {name : "GEOS ConVerT", ext : [".cvt"], magic : ["GEOS ConVerT container format", "GEOS Convert archive"], website : "http://fileformats.archiveteam.org/wiki/GEOS_Convert"},
 		gfaBASICAmiga                   : {name : "GFA-BASIC Amiga", ext : [".gfa", ".bas"], magic : ["GFA-BASIC Amiga"]},

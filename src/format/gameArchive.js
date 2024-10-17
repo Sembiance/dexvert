@@ -9,7 +9,6 @@ export const gameextractor =
 {
 	archive :
 	{
-		albionGameDataArchive              : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive"]},
 		allods2RageOfMagesGameArchive      : {name : "Allods 2 Rage Of Mages game archive", ext : [".res"], magic : ["Allods 2 Rage Of Mages game data archive"]},
 		americanConquest2GameArchvie       : {name : "American Conquest 2 game archvie", ext : [".gs1", ".gsc"], magic : ["American Conquest 2 game data archvie"]},
 		bankGameArchive                    : {name : "Bank Game Archive", ext : [".bnk"], magic : ["Bank game data archive"]},
@@ -48,6 +47,7 @@ export const gameextractor =
 		redengineGameArchive               : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},
 		riffBACKGameArchive                : {name : "RIFF BACK Game Archive", ext : [".res"], magic : ["Generic RIFF file BACK"]},
 		scummDigitizedSoundsGameArchive    : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)", "Lucasfilm Games VOC Sound"]},
+		simsArchive                        : {name : "The Sims Archive", ext : [".far"], magic : ["The Sims Archive"]},
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
 		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package", /^Rune map$/], forbiddenMagic : ["Unreal Music"]},

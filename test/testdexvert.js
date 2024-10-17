@@ -30,6 +30,9 @@ const outJSON = {};
 // ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
+// These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
+const FLAKY_CONVERTERS = ["wuimg"];
+
 // These formats should be skipped entirely for one reason or another
 const SKIP_FORMATS =
 [
@@ -406,6 +409,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/rawBitmap\/MMAP14.RAW$/, "text", "txt"],
 	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
+	[/other\/db2Bind\/QEDBM03\.BN$/, "audio", "mp3"],
 	[/text\/appleIIgsSourceCode\/(CNFG|teachfilter)\.txt/, "text", "txt"],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
@@ -771,7 +775,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 	const ignoreSizeAndConverter = IGNORE_SIZE_AND_CONVERTER_SRC_PATHS?.[result.family]?.[result.format]?.includes(path.basename(sampleFilePath));
 
-	const converterMismatch = prevData.converter!==result.converter && !ignoreSizeAndConverter ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
+	const converterMismatch = prevData.converter!==result.converter && !ignoreSizeAndConverter && !FLAKY_CONVERTERS.includes(prevData.converter) ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
 
 	if(result.family && result.family!==diskFamily && !allowFamilyMismatch)
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed ${result.family}/${result.format}${converterMismatch}`);

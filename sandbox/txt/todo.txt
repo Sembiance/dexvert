@@ -6,6 +6,13 @@
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   Do this AFTER updating laptop/workstation to latest software versions
 
+* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
+  SFPack tool exe is pretty available
+
+
+/---------------\
+| High Priority |
+\---------------/
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
@@ -25,9 +32,6 @@
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
-/---------------\
-| High Priority |
-\---------------/
 * Adopt Game-Viewer program (try in win2k, otherwise probably win7): https://game-viewer.org/download.php
   Use it with plugin: https://game-viewer.org/plugin.php?id=90
   To view resources *.gfx:
@@ -68,11 +72,6 @@
 	0007D950
 	00076D20
 	00078C80
-
-* "wuimg" is sensitive, not sure why yet (run over and over: testdexvert --format=image/yanagisawaPIC2)
-  Setting exclusive = "wuimg"; didn't help. May have to due with virtualX.
-  I was able to reproduce it with a bash script (/mnt/compendium/DevLab/dexvert/sandbox/convertCat.sh)
-  I didn't submit a bug about it because I'm not certain it's a wuimg bug vs creating multiple fake GLX contexts bug/xvfb
 
 * image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
   It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures

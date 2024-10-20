@@ -27,13 +27,19 @@ sudo umount ./*/*
 sudo umount ./*
 sudo umount -f ./*/*
 sudo umount -f ./*
-rm -rf ./*
+if [[ "$(hostname)" == dexdrone* ]]; then
+	rm -rf ./*
+fi
 sudo umount ./*/*
 sudo umount ./*
-rm -rf ./*
+if [[ "$(hostname)" == dexdrone* ]]; then
+	rm -rf ./*
+fi
 
 cd /tmp || exit
-rm -f .X*lock
+if [[ "$(hostname)" == dexdrone* ]]; then
+	rm -f .X*lock
+fi
 rm -f OSL_PIPE*
 fd magick -x rm {} \;
 rm -rf Ay_Emul* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
@@ -43,11 +49,15 @@ rm -rf .vbox-sembiance-ipc system-commandline-sentinel-files gimp blender* .wine
 umount --quiet .mount_ink* 2> /dev/null
 rm -rf .mount_ink*
 
-cd .X11-unix || exit
-rm -f ./*
+if [[ "$(hostname)" == dexdrone* ]]; then
+	cd .X11-unix || exit
+	rm -f ./*
+fi
 
 cd /mnt/ram || exit
 /mnt/compendium/bin/fixPerms
 rm -rf dexvert
 
-fd . /home/"$whoami"/.dbus/session-bus/ --type=file -x rm {} \;
+if [[ "$(hostname)" == dexdrone* ]]; then
+	fd . /home/"$whoami"/.dbus/session-bus/ --type=file -x rm {} \;
+fi

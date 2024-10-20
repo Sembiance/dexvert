@@ -20,8 +20,11 @@ const _XML_MAGIC = [
 	"Continuous Media Markup Language", "GraphML graph", "Kate language syntax", "Class Diagram", "SQL Server Reporting Services Report Definition Language", "JasperReports JRXML report definition", "Borland Developer Studio Project",
 	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document", "RealProducer Profile",
 	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report", "XML Bookmark Exchange Language", "ttx font format", "Eclipse Extension Point Schema",
-	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile", "Artweaver Brush",
-	/^fmt\/(205|475|979|983|986|1219|1474|1677|1729|1776|1796)( |$)/
+	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile", "Artweaver Brush", "IFC-XML",
+	"MeshMixer Part data", "Software Ideas Modeler Template", "Navigation Control file for XML", "OpenOffice/LibreOffice type library database (XML)", "OpenCV XML storage", "Mono Mconfig configuration", "Uniform Office Format (generic)",
+	"Fabmetheus model format", "Qt Help Collection Project", "MusicXML", "SOAP Envelope", "Windows 7 Task Scheduler job", "GnuCash data", "GnuCash file", "AlgoBox Algorithm", "Visual Studio Tools for Office add-in", "Anjuta IDE project",
+	"ConvertXtoDVD project", "Eclipse CDT Project settings", "Koda Form Designer Form",
+	/^fmt\/(205|475|896|979|983|986|1219|1474|1677|1729|1776|1796)( |$)/
 ];
 export {_XML_MAGIC};
 

@@ -17006,64 +17006,82 @@ TIFF (*.tiff, *.tif)
 WebP (*.webp)
 
 
->>> wuimg   linux  (run 'meson configure' for list of formats)  https://codeberg.org/kaleido/wuimg
-Lerc               via liblerc
-avif               via libavif
-avs                avs
-bmz                GSD engine compressed BMP, requires DIB
-c64                C64 image formats
-degas              DEGAS image formats
-dib                DIB family (BMP, ICO, and CUR)
-dpx                dpx
-farbfeld           farbfeld
-flif               via libflif
-g00                RealLive engine image
-gif                via libgif
-heif               via libheif, supports avif if libavif is not used
-hg3                CatSystem engine image
-idsp               id Software Sprite
-ilbm               IFF/ILBM image
-jbig               via libjbig
-jpeg               via libjpeg
-jpeg2000           via libopenjp2
-jpegls             via libcharls
-jpegxl             via libjxl
-mac                MacPaint image
-mag                MAG/MAKI02 image
-maki               MAKI01 image
-msx                MSX-BASIC image family
-pcf                PCF bitmap fonts
-pcx                pcx
-pdt                RealLive engine image
-pgx                GLib2 engine image
-pi                 Yanagisawa's Pi image
-pi1                Pi1 DEGAS image
-pic                Yanagisawa's PIC image
-pic2               Yanagisawa's PIC2 image
-pictor             pictor
-png                via libpng
-pnm                PNM family
-prt                Kid engine image
-px                 Leaf PX image
-q4                 XLD4(Q4) image
-qoi                qoi
-raw                via libraw
-sgi                sgi
-sixel              sixel
-spooky             Spooky Sprites TRS and TRE
-sun                sun
-svg                via librsvg
-tga                tga
-tiff               via libtiff
-tim                PlayStation image
-tlg                KiriKiri engine image
-wbmp               wbmp
-webp               via libwebp and libwebpdemux
-wpx                Wild-Bug engine image
-xbm                xbm
-xcursor            xcursor
-xwd                xwd
-xyz                RPG Maker image
+>>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
+avif:	AV1 Image File Format
+avs:	AVS X
+bmp:	Microsoft Bitmap
+bmz:	GSD engine BMZ
+bru:	Degas Brush
+c64:	KoalaPainter (KOA) and Advanced Art Studio (OCP)
+coke:	COKE (Atari Falcon)
+da4:	PaintShop (Atari ST)
+dcx:	Multi-image PCX
+degas:	DEGAS bitmaps
+dib:	Microsoft DIB
+doo:	Atari Doodle
+dpx:	Digital Picture Exchange
+eggpaint:	EggPaint
+farbfeld:	farbfeld
+flif:	Free Lossless Image Format
+ftc:	Falcon True Color
+g00:	RealLive's G00
+gemview:	GEM View-Dither
+gif:	Graphics Interchange Format
+god:	GodPaint
+heif:	High Efficiency Image File Format
+hg3:	CatSystem engine HG3
+hpicon:	HP Palmtop Icon
+ico:	Microsoft Icon
+idsp:	id Software Sprite
+ilbm:	Interleaved Bitmap
+j2k:	JPEG 2000 codestream
+jbig:	JBIG
+jbig2:	JBIG2
+jp2:	JPEG 2000
+jpeg:	JPEG
+jpegls:	JPEG-LS
+jpegxl:	JPEG-XL
+lerc:	Limited Error Raster Compression
+mac:	MacPaint
+mag:	MAG (MAKI02)
+maki:	MAKIchan (MAKI01)
+msx:	MSX-BASIC dump
+nlm:	Nokia Logo Manager
+pcf:	PCF bitmap font
+pcx:	PC Paintbrush's PCX
+pdt:	RealLive's PDT
+pgx:	Glib2 engine's PGX
+pi:	Yanagisawa's Pi
+pic:	Yanagisawa's PIC
+pic2:	Yanagisawa's PIC2
+pictor:	PCPaint PICtor
+png:	Portable Network Graphics
+pnm:	PNM format family
+prt:	Kid engine's PRT
+px:	Leaf's PX
+q4:	MAJYO's Q4 (XLD4)
+qoi:	QuiteOK image
+raw:	Raw camera formats
+sgi:	Silicon Graphics Image
+sixel:	Sixel
+sun:	Sun Raster
+svg:	Scalable Vector Graphics
+tga:	Truevision TGA
+tiff:	Tag Image File Format
+tim:	PlayStation image
+tlg:	KiriKiri engine's image
+tre:	Spooky Sprites Run-Length Encoded
+trp:	Spooky Sprites uncompressed
+trs:	Spooky Sprites Sprite
+wbm:	Wild-Bug engine image
+wbmp:	Wireless Bitmap
+webp:	WebP
+wia:	Wild-Bug image sequence
+xbm:	X Bitmap
+xcursor:	Xcursor
+xwd:	X Window Dump
+xyz:	RPG Maker
+
 
 
 >>> NConvert (wine)

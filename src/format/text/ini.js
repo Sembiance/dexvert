@@ -20,7 +20,8 @@ export class ini extends Format
 		"DrumSynth Preset", "WinRIX configuration", "TsiLang translation data", "audio/x-scpls", "Entrust Entelligence Profile", "Inno Setup Script", "application/x-netshow-channel", "Windows CONTROL.INI", "CDROM Drive Analyzer configuration (v2.x)",
 		"RivaTuner data base Build", "VIA setup configuration", "Soldat Bot Information", "blueMSX machine settings", "WinAPE configuration", "text/x-dbus-service", "Windows IOS.INI", "MPLAB IDE Project", "yum Repository configuration",
 		"Windows system Initialization settings", "EightyOne snapshot", "Icon Theme index", "Cisco VPN Profile Configuration File", /^Avatar Studio (Deformations|data \(generic\)|SAP|Save|Animation|BRZ|Bank descriptor)/, "Room Arranger design",
-		"AGS game configuration", "Picasa info (generic)",
+		"AGS game configuration", "Picasa info (generic)", "Adblock Plus 2.0 rules file", "KLH10 RAW tape image directory", "Marble map description", "Advanced Renamer method", "D-Fend Reloaded Profile", "RawTherapee Postprocessing Profile",
+		"Psycle display preset", "cdrtfe tools configuration",
 		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, /^fmt\/(1614|1760)( |$)/
 	];
 	priority       = this.PRIORITY.LOWEST;

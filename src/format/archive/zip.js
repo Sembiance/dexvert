@@ -20,8 +20,9 @@ export class zip extends Format
 		"HoN Modification Manager package", /^Quintessential Player (Family|Kid) Skin/, "CursorXP theme", "BootSkin theme", "LogonStudio theme", "IconPackager theme", "JetFighter 2015 savegame", "iOS Application", "Flash Component distribution archive",
 		"WinImage compressed disk image", "macOS application in a Zip container", "NuGet Package", "Microsoft Silverlight Application", "Silverlight Application Package", "Mozilla archive omni.ja", "Excel Macro-enabled Open XML add-in",
 		"AutoCAD Custom User Interface", "Archive: CRX", /^Google Chrome [Ee]xtension/, "Movavi Video Editor Plus Project", "Titanium Backup Easy Backup saved data", "Compressed Google KML Document", "Mellel document", "Apple Mac OS X Dashboard Widget",
-		"DashXL Dashboard", "Zip document container (generic)",
-		/^fmt\/(524|595|627)( |$)/
+		"DashXL Dashboard", "Zip document container (generic)", "Fade In document", /^Python Egg$/, "MakerBot Thing", "Autodesk material Library", "Python Wheel package", "OpenOffice Extension (Dictionary)", "Microsoft Vista Sidebar Gadget (Zip)",
+		"Balabolka Text document (compressed)", "Eclipse Project settings", "KMPlayer Skin File",
+		/^fmt\/(424|524|595|627)( |$)/
 	];
 	weakMagic = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);

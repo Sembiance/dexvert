@@ -8,7 +8,7 @@ export class wav extends Format
 	mimeType     = "audio/x-wav";
 	magic        = [
 		/^RIFF.*WAV[Ee].*[aA]udio/, "Waveform Audio (PCMWAVEFORMAT)", "Wave Musikdatei (WAV)", "Broadcast Wave File audio", "RIFF audio data (WAV)", "Rockwell ADPCM audio", "audio/vnd.wave", "WAV / WAVE (Waveform Audio) (wav)",
-		/^fmt\/(2|6|141|142|143|703)( |$)/
+		/^fmt\/(2|6|141|142|143|703|704)( |$)/
 	];
 	idMeta       = ({macFileType}) => macFileType==="WAVE";
 	metaProvider = ["soxi"];

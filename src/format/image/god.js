@@ -6,5 +6,5 @@ export class god extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GodPaint";
 	ext        = [".god"];
 	fileSize   = 153_606;
-	converters = ["deark[module:godpaint]", "recoil2png"];
+	converters = ["deark[module:godpaint]", "wuimg", "recoil2png"];
 }

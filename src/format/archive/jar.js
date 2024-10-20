@@ -10,7 +10,7 @@ export class jar extends Format
 		"Java archive data", "Java Archive", "Java Enterprise Archive", /^x-fmt\/412( |$)/,
 		
 		// specific
-		"Android Package", "Android package (APK)"
+		"Android Package", "Android package (APK)", "SPSS output document", "Pocket Code/Catroid Catrobat Project", /^fmt\/274( |$)/
 	];
 	converters = ["unzip", "sevenZip", "unar"];
 }

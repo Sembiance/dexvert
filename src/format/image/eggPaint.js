@@ -6,5 +6,5 @@ export class eggPaint extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/EggPaint";
 	ext        = [".trp"];
 	magic      = ["EggPaint bitmap", "True Colour Picture bitmap", /^fmt\/(1604|1607)( |$)/];
-	converters = ["deark[module:eggpaint]", "recoil2png"];
+	converters = ["deark[module:eggpaint]", "wuimg", "recoil2png"];
 }

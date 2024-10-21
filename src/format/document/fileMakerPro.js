@@ -7,6 +7,6 @@ export class fileMakerPro extends Format
 	ext            = [".fp3"];
 	forbidExtMatch = true;
 	magic          = ["FileMaker Pro 3 database", "Filemaker Pro (generic)", "FileMaker Pro database", /^x-fmt\/(318|319)( |$)/, /^fmt\/(194|1059|1072)( |$)/];
-	idMeta         = ({macFileType}) => macFileType==="FMP3";
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="FMP3" || (macFileType==="FMPR" && macFileCreator==="FMPR");
 	converters     = ["strings"];
 }

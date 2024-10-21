@@ -149,6 +149,7 @@ const FLEX_SIZE_PROGRAMS =
 	fontforge                   : 2,
 	fontographer                : 3,
 	gimp                        : 5,
+	sapfs                       : 25,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
 	soundFont2tomp3             : 20,

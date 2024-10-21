@@ -21,8 +21,9 @@ export class ini extends Format
 		"RivaTuner data base Build", "VIA setup configuration", "Soldat Bot Information", "blueMSX machine settings", "WinAPE configuration", "text/x-dbus-service", "Windows IOS.INI", "MPLAB IDE Project", "yum Repository configuration",
 		"Windows system Initialization settings", "EightyOne snapshot", "Icon Theme index", "Cisco VPN Profile Configuration File", /^Avatar Studio (Deformations|data \(generic\)|SAP|Save|Animation|BRZ|Bank descriptor)/, "Room Arranger design",
 		"AGS game configuration", "Picasa info (generic)", "Adblock Plus 2.0 rules file", "KLH10 RAW tape image directory", "Marble map description", "Advanced Renamer method", "D-Fend Reloaded Profile", "RawTherapee Postprocessing Profile",
-		"Psycle display preset", "cdrtfe tools configuration", "SynWrite Output Preset", "Midnight Commander skin", "NPS Image Editor Palette", "Silverpoint Skin", "SlickRun MagicWord Pack",
-		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, /^fmt\/(1614|1760)( |$)/
+		"Psycle display preset", "cdrtfe tools configuration", "SynWrite Output Preset", "Midnight Commander skin", "NPS Image Editor Palette", "Silverpoint Skin", "SlickRun MagicWord Pack", "Krita Color scheme", "Compaq Diagnostics",
+		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/,
+		/^fmt\/(1614|1760)( |$)/
 	];
 	priority       = this.PRIORITY.LOWEST;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;

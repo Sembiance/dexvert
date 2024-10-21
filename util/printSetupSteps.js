@@ -75,7 +75,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
-	`# pablodraw and Aaru below often fail to merge the first time. Just try again`,
+	`# If pablodraw or Aaru below fail to merge, just try again (often works 2nd time)`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
 	`depmod -a`,
 	`modinfo vhba`,

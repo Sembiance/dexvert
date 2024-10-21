@@ -8,8 +8,12 @@ export class png extends Format
 	forbidExtMatch   = true;
 	mimeType         = "image/png";
 	magic            = [
-		"Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "Fireworks PNG bitmap", "image/png", "image/apng", "piped png sequence (png_pipe)",
-		"Animated Portable Network Graphics (apng)", /^fmt\/(11|12|13|935)( |$)/
+		// generic
+		"Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "image/png", "image/apng", "piped png sequence (png_pipe)", "Animated Portable Network Graphics (apng)",
+		/^fmt\/(11|12|13|935)( |$)/,
+
+		// specific
+		"Fireworks PNG bitmap", "Krita Paint Op Preset"
 	];
 	idMeta           = ({macFileType}) => macFileType==="PNGf";
 	untouched        = dexState => dexState.meta.width && dexState.meta.height;

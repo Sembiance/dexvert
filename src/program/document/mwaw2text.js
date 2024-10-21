@@ -8,6 +8,6 @@ export class mwaw2text extends Program
 	unsafe     = true;
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
-	verify     = (r, dexFile) => dexFile.size>2;
+	verify     = (r, dexFile) => dexFile.size>2 && dexFile.size!==32;	// 32 byte long file is just text: ERROR: Unsupported file format!
 	renameOut  = true;
 }

@@ -32,13 +32,13 @@ export class exe extends Format
 		// specific exe types
 		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable",
 		"Graphic Workshop self-displaying picture executable", "MOZART tune", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)", "WIFE Font Driver",
-		"Total Commander Content plugin", "Total Commander File system extension (plugin)", "PhotoFilter plugin",
+		"Total Commander Content plugin", "Total Commander File system extension (plugin)", "PhotoFilter plugin", "Lavasoft Ad-aware 6 plugin",
 
 		// created by
 		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
 		/^Microsoft Pascal (v[\d.]+ )?16-bit executable/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable", "16bit DOS EXE BasicBasic", "Turbo Pascal for Windows 1.0 executable", "MinGW32 C/C++ Executable", "Generic CIL Executable",
 		"DOS Metaware Professional Pascal Executable", "Win32 Cygwin executable", "WIN32 Executable PowerBASIC", "DOS Pacific C Compiler executable", "Win32 EXE TMT Pascal (generic)", "Format: AutoIt", "Format: Compiled AutoHotKey",
-		"AutoIt3 compiled script executable", "TCC Win32 executable", "Win32 EXE Euphoria (Watcom compiled)",
+		"AutoIt3 compiled script executable", "TCC Win32 executable", "Win32 EXE Euphoria (Watcom compiled)", "Win32 IBasic executable", "DIZ2EXE Win32 executable",
 
 		..._INSTALLER_MAGICS
 	];

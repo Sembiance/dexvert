@@ -12,6 +12,7 @@ export const gameextractor =
 		allods2RageOfMagesGameArchive      : {name : "Allods 2 Rage Of Mages game archive", ext : [".res"], magic : ["Allods 2 Rage Of Mages game data archive"]},
 		americanConquest2GameArchvie       : {name : "American Conquest 2 game archvie", ext : [".gs1", ".gsc"], magic : ["American Conquest 2 game data archvie"]},
 		bankGameArchive                    : {name : "Bank Game Archive", ext : [".bnk"], magic : ["Bank game data archive"]},
+		battlezone2GameDataPackage         : {name : "Battlezone 2 game data package", ext : [".pak"], magic : ["Battlezone 2 game data package"], weakMagic : true},
 		bioWareEntityResourceFile          : {name : "BioWare Entity Resource File", ext : [".erf"], magic : ["BioWare Entity Resource File"]},
 		bloodrayneGameDataArchive          : {name : "Bloodrayne game data archive", ext : [".pod"], magic : ["Bloodrayne game data archive"], weakMagic : true},
 		boltGameArchive                    : {name : "BOLT Game Archive", ext : [".blt"], magic : ["BOLT game data archive"]},

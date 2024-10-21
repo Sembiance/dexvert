@@ -9,6 +9,7 @@ export class paintDotNet extends Program
 	bin     = "c:\\Program Files\\paint.net\\paintdotnet.exe";
 	args    = r => [r.inFile()];
 	osData  = r => ({
+		timeout : xu.MIUNTE*2,
 		script : `
 			Func MainWindowOrFailure()
 				WindowFailure("paint.net", "There was an error", -1, "{ENTER}")

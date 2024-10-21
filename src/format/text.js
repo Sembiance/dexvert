@@ -59,12 +59,21 @@ export default
 		smartGameFormat                    : {name : "Smart Game Format", ext : [".sgf"], magic : ["Smart Game Format"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Smart_Game_Format"},
 		sourceEngineCompiledAINodegraph    : {name : "Source Engine Compiled AI Nodegraph", ext : [".ain"], magic : ["Source Engine Compiled AI Nodegraph"], weakMagic : true},
 		starTrekArmadaSpriteTable          : {name : "Star Trek: Armada Sprite table", ext : [".spr"], magic : ["Star Trek: Armada Sprite table"], weakMagic : true},
+		superTuxFontMeta                   : {name : "SuperTux Font Meta", ext : [".stf"], magic : ["SuperTux Font"], weakMagic : true},
+		superTuxMusicMeta                  : {name : "SuperTux Music Meta", ext : [".music"], magic : ["SuperTux Music"], weakMagic : true},
+		superTuxSpriteMeta                 : {name : "SuperTux Sprite Meta", ext : [".sprite"], magic : ["SuperTux Sprite"], weakMagic : true},
 		theNeedForSpeedCarPerformanceSpecs : {name : "The Need for Speed car Performance Specs", ext : [".pbs"], magic : ["The Need for Speed car Performance Specs"], weakMagic : true},
 		theNeedForSpeedWindshieldShape     : {name : "The Need For Speed windshield shape", ext : [".fmm"], magic : ["The Need For Speed windshield shape"], weakMagic : true},
 		tornadoMissionInfo                 : {name : "Tornado Mission info", ext : [".mis"], magic : ["Tornado Mission info"], weakMagic : true},
+		urbanChaosStoryScript              : {name : "Urban Chaos Story Script", ext : [".sty"], magic : ["Urban Chaos Story Script"]},
 		valveChoreography                  : {name : "Valve Choreography Data format", ext : [".vcd"], magic : ["Valve Choreography Data format"], weakMagic : true},
 		valveMapFormat                     : {name : "Valve Map Format", ext : [".vmf", ".vmx"], magic : ["Valve Map Format"], weakMagic : true},
 		valveMaterialType                  : {name : "Valve Material Type", ext : [".vmt"], magic : ["Valve Material Type"], weakMagic : true},
+		ysFlightAircraftData               : {name : "YSFlight aircraft Data", ext : [".dat"], magic : ["YSFlight aircraft Data"], weakMagic : true},
+		ysFlightDynaModel                  : {name : "YSFlight DynaModel", ext : [".dnm"], magic : ["YSFlight DynaModel"], weakMagic : true},
+		ysFlightInstrumentPane             : {name : "YSFlight Instrument panel", ext : [".ist"], magic : ["YSFlight Instrument panel"], weakMagic : true},
+		ysFlightObjectsIdData              : {name : "YSFlight objects id data", ext : [".dat"], magic : ["YSFlight objects id data"], weakMagic : true},
+		ysFlightSceneryField               : {name : "YSFlight scenery Field", ext : [".fld"], magic : ["YSFlight scenery Field"], weakMagic : true},
 
 		/////////////////////////////////////
 		// Image or Poly or other 'Visual' //	Could potentially try and render/convert these into something visual in the future
@@ -180,6 +189,7 @@ export default
 		protonLanguageSchema                     : {name : "Proton language Schema", ext : [".sch"], magic : ["Proton language Schema"], weakMagic : true},
 		pythonEggPackageInfo                     : {name : "Python egg package info", ext : [".egg-info"], magic : ["Python egg package info"]},
 		pythonSource                             : {name : "Python Source", ext : [".py"], magic : [/^a python.* script text executable$/, /^Python script/, "text/x-python"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Python"},
+		qtAssistantContentFile                   : {name : "Qt Assistant Content File", ext : [".dcf"], magic : ["Qt Assistant Content File"], weakMagic : true},
 		qtResourceCollectionFile                 : {name : "Qt Resource Collection file", ext : [".qrc"], magic : ["Qt Resource Collection file"], weakMagic : true},
 		qtTranslationSource                      : {name : "Qt Translation Source", ext : [".ts"], magic : ["Qt Translation Source", "text/vnd.trolltech.linguist"], weakMagic : true},
 		qtUserInterface                          : {name : "Qt User Interface", ext : [".ui"], magic : ["application/x-designer", "Qt User Interface"], weakMagic : true},
@@ -400,6 +410,7 @@ export default
 		islandWriteDocument                     : {name : "IslandWrite document", ext : [".iwrite"], magic : [/^IslandWrite document/]},
 		it871TargetDescriptor                   : {name : "IT8.7/1 target descriptor", magic : ["IT8.7/1 target descriptor"]},
 		jacosub                                 : {name : "JACOsub subtitle format (jacosub)", ext : [".js"], magic : ["JACOsub subtitle format (jacosub)"], weakMagic : true},
+		jeskolaBuzzTheme                        : {name : "Jeskola Buzz theme", ext : [".col"], magic : ["Jeskola Buzz theme"], weakMagic : true},
 		kdeConfigFile                           : {name : "KDE config file", ext : [".kdelnk"], magic : ["KDE config file", "KDE desktop Link", "KDevelop Project (with rem)", "application/x-desktop"]},
 		keyNoteNotes                            : {name : "KeyNote notes", ext : [".knt"], magic : ["KeyNote notes"]},
 		keyTronicTrakballProfile                : {name : "KeyTronic Trakball profile", ext : [".pro", ".fil"], magic : ["KeyTronic Trakball profile"], weakMagic : true},
@@ -484,6 +495,7 @@ export default
 		omnisStudioLibrary                      : {name : "Omnis Studio Library", ext : [".lbs"], magic : ["Omnis Studio Library"], weakMagic : true},
 		openColorIOProfile                      : {name : "OpenColorIO profile", ext : [".ocio"], magic : ["OpenColorIO profile"], weakMagic : true},
 		openMPTKeyBinding                       : {name : "OpenMPT Key Binding", ext : [".mkb"], magic : ["OpenMPT Key Binding"]},
+		openSceneGraphText                      : {name : "OpenSceneGraph Text Format", ext : [".osg"], magic : ["OpenSceneGraph legacy text format"], weakMagic : true},
 		operaHotlist                            : {name : "Opera Hotlist/bookmark", ext : [".adr"], magic : ["Opera Hotlist (v2.0) / bookmark"]},
 		os2InstallCatalogFile                   : {name : "OS/2 Install Catalog File", ext : [".icf"], magic : ["OS/2 Install Catalog File"], weakMagic : true},
 		oS2InstallPackage                       : {name : "OS/2 install Package", ext : [".pkg"], magic : ["OS/2 install Package"], weakMagic : true},
@@ -636,6 +648,7 @@ export default
 		videoCreatorCD32Project                 : {name : "Video Creator CD32 project", ext : [".vid"], magic : ["Video Creator CD32 project"]},
 		videoFX2Script                          : {name : "VideoFX2 Script", ext : [".script"], magic : ["VideoFX2 Script"]},
 		vistaScript                             : {name : "Vista Script", ext : [".prefs", ".script"], magic : ["Vista Script", "Vista camera Script"]},
+		visualThoughtDiagram                    : {name : "Visual Thought diagram", ext : [".vthought"], magic : ["Visual Thought diagram"]},
 		warpINScript                            : {name : "WarpIN Script", ext : [".wis"], magic : ["WarpIN Script"]},
 		waxProject                              : {name : "Wax Project", ext : [".wxp"], magic : ["Wax Project"]},
 		webBrowserCookies                       : {name : "Web browser cookies", ext : [".txt"], magic : ["HTTP cookies", /^Web browser cookie/]},
@@ -666,6 +679,7 @@ export default
 		xilinxASCIIBitstream                    : {name : "Xilinx ASCII Bitstream", ext : [".rbt"], magic : ["Xilinx ASCII Bitstream"]},
 		xmcdCDInformation                       : {name : "XMCD CD information", ext : [".db", ".z", ".xmcd"], magic : [/^xmcd database file/, /^CDDB\(tm\) format CD text data/, "XMCD CD information", "text/xmcd"]},
 		xSetupPlugin                            : {name : "XSetup plugin", ext : [".xpl"], magic : ["XSetup - plugin"]},
-		yamahaPSRDiskManagerFile                : {name : "Yamaha PSR Disk Manager File", ext : [".mng"], magic : [/^fmt\/1870( |$)/], weakMagic : true}
+		yamahaPSRDiskManagerFile                : {name : "Yamaha PSR Disk Manager File", ext : [".mng"], magic : [/^fmt\/1870( |$)/], weakMagic : true},
+		zimWiki                                 : {name : "ZIM Wiki", magic : ["text/x-zim-wiki"]}
 	}
 };

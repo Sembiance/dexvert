@@ -9,7 +9,7 @@ export class zip extends Format
 	forbidExtMatch = [".exe"];
 	magic          = [
 		// general zip magic
-		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /ZIP self-extracting archive/, "Zip multi-volume archive data", /^Zip$/,
+		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /ZIP self-extracting archive/, "Zip multi-volume archive data", "application/zip", /^Zip$/,
 		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", "End of Zip archive", /^x-fmt\/263( |$)/,
 
 		// app specific zip magic
@@ -21,8 +21,9 @@ export class zip extends Format
 		"WinImage compressed disk image", "macOS application in a Zip container", "NuGet Package", "Microsoft Silverlight Application", "Silverlight Application Package", "Mozilla archive omni.ja", "Excel Macro-enabled Open XML add-in",
 		"AutoCAD Custom User Interface", "Archive: CRX", /^Google Chrome [Ee]xtension/, "Movavi Video Editor Plus Project", "Titanium Backup Easy Backup saved data", "Compressed Google KML Document", "Mellel document", "Apple Mac OS X Dashboard Widget",
 		"DashXL Dashboard", "Zip document container (generic)", "Fade In document", /^Python Egg$/, "MakerBot Thing", "Autodesk material Library", "Python Wheel package", "OpenOffice Extension (Dictionary)", "Microsoft Vista Sidebar Gadget (Zip)",
-		"Balabolka Text document (compressed)", "Eclipse Project settings", "KMPlayer Skin File",
-		/^fmt\/(424|524|595|627)( |$)/
+		"Balabolka Text document (compressed)", "Eclipse Project settings", "KMPlayer Skin File", "Nokia S60 Web Runtime Widget Package", "PotPlayer Skin", "Messenger Plus! Skin Pack", "MuseScore compressed music score", "Wise Care 365 Skin",
+		"application/x-zip-compressed-fb2", "FreeCAD Standard document",
+		/^fmt\/(424|524|595|627|937|943)( |$)/
 	];
 	weakMagic = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);

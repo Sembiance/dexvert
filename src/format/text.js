@@ -91,7 +91,7 @@ export default
 		videoFX2Effect                         : {name : "VideoFX2 Effect", ext : [".vfx"], magic : ["VideoFX2 Effect"]},
 		wavefrontMaterial                      : {name : "Wavefront Material", website : "http://fileformats.archiveteam.org/wiki/Wavefront_MTL", ext : [".mtl"], magic : ["Alias|Wavefront material", "model/mtl", /^fmt\/1211( |$)/]},
 		wgt3DModel                             : {name : "WGT 3D model", ext : [".3d"], magic : ["WGT 3D model"]},
-		windowsDesktopTheme                    : {name : "Windows Desktop Theme", ext : [".theme"], magic : ["Windows 98-7 Desktop Theme", "Windows Desktop Theme"]},
+		windowsDesktopTheme                    : {name : "Windows Desktop Theme", ext : [".theme"], magic : [/^Windows [\d-]+ Desktop Theme/, "Windows Desktop Theme"]},
 		xaraGraphics                           : {name : "Xara graphics", ext : [".wix"], magic : [/^Xara graphics$/]},
 
 		/////////////////
@@ -125,6 +125,7 @@ export default
 		delphiPackage                            : {name : "Delphi Package", ext : [".dpk"], magic : ["Delphi Package"], weakMagic : true},
 		devExpressReportLayout                   : {name : "DevExpress Report layout", ext : [".repx"], magic : ["DevExpress Report layout"], weakMagic : true},
 		diceCProject                             : {name : "Dice C project", ext : [".dice"], magic : ["Dice C project"], weakMagic : true},
+		eclipseProductMarker                     : {name : "Eclipse product marker", magic : ["Eclipse product marker"]},
 		editPlusAutoCompletion                   : {name : "EditPlus Auto Completion", ext : [".acp"], magic : ["EditPlus Auto Completion"], weakMagic : true},
 		editPlusSyntax                           : {name : "EditPlus Syntax", ext : [".stx"], magic : ["EditPlus Syntax file"], weakMagic : true},
 		eMbeddedVisualBasicProject               : {name : "eMbedded Visual Basic Project", ext : [".ebp"], magic : ["eMbedded Visual Basic Project"]},
@@ -351,7 +352,7 @@ export default
 		frameMakerDictionary                    : {name : "FrameMaker Dictionary text", ext : [".brt"], magic : ["FrameMaker Dictionary text", "FrameMaker hyphens dictionary"]},
 		frameMakerMakerMarkupLanguage           : {name : "FrameMaker Maker Markup Language", ext : [".mml"], magic : ["FrameMaker Maker Markup Language", /^FrameMaker MML file/], weakMagic : true},
 		fredFishProductInfo                     : {name : "Fred Fish's Product-Info", magic : ["Fred Fish's Product-Info"]},
-		freeMindMindMap                         : {name : "FreeMind mind map", ext : [".mm"], magic : ["FreeMind mind map", /^Freemind document/]},
+		freeMindMindMap                         : {name : "FreeMind mind map", ext : [".mm"], magic : ["FreeMind mind map", "Freeplane MindMap", /^(Freemind|Freeplane) document/]},
 		freePCBNetlist                          : {name : "FreePCB Netlist", ext : [".asc"], magic : ["FreePCB Netlist"]},
 		frodoPreferences                        : {name : "Frodo Preferences", magic : ["Frodo Preferences"]},
 		ftnchekProjectFile                      : {name : "ftncheck project file", ext : [".prj"], magic : [/^project file for ftnchek/], weakMagic : true},
@@ -453,6 +454,7 @@ export default
 		microsoftFrontPageServerExtensionConfig : {name : "Microsoft Front Page Server Extension Configuration", magic : ["FrontPage _VTI_ log/info", /^fmt\/288( |$)/]},
 		microsoftMapData                        : {name : "Microsoft Map Data", ext : [".map"], magic : ["Microsoft Map Datei"], weakMagic : true},
 		microsoftPRX                            : {name : "Microsoft PRX", magic : ["Windows Media stream Profile", /^fmt\/1043( |$)/]},
+		milkDropPreset                          : {name : "MilkDrop preset", ext : [".milk"], magic : ["MilkDrop preset"], weakMagic : true},
 		mindReaderDictionary                    : {name : "MindReader Dictionary", ext : [".dic"], magic : ["MindReader Dictionary"], weakMagic : true},
 		minerVGASpritesLibrary                  : {name : "MinerVGA sprites Library", ext : [".lbr"], magic : ["MinerVGA sprites Library"]},
 		mirrormaticSiteDescription              : {name : "Mirrormatic site description", ext : [".desc"], magic : ["Mirrormatic site description"]},

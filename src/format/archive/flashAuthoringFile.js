@@ -4,7 +4,7 @@ export class flashAuthoringFile extends Format
 {
 	name           = "Flash Authoring File";
 	website        = "http://fileformats.archiveteam.org/wiki/FLA";
-	magic          = ["Flash Authoring / source material"];
+	magic          = ["Flash Authoring / source material", "Flash authoring source"];
 	weakMagic      = true;
 	ext            = [".fla"];
 	forbidExtMatch = true;

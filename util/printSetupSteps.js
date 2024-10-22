@@ -92,12 +92,16 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`eix-update`,
 	`mkdir -p /mnt/dexdrone`,
 	`chown sembiance:sembiance /mnt/dexdrone`,
+	`grep dexvert ~/.ssh/authorized_keys >> /home/sembiance/.ssh/authorized_keys`,
+	`chown sembiance:sembiance /home/sembiance/.ssh/authorized_keys`,
+	`chmod 600 /home/sembiance/.ssh/authorized_keys`,
 	`su - sembiance`,
 	`# Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
 	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
-	`# Ensure 'startDexserver' works`,
+	`reboot`,
+	`# After reboot, as sembiance@host run and ensure works: startDexserver`,
 	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
 	"# Now add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
 ].forEach(line => console.log(line));

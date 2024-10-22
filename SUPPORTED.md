@@ -1,11 +1,11 @@
-# Supported File Formats (2,607)
+# Supported File Formats (2,606)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (400)
+## Archive (399)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -199,7 +199,6 @@ archive | Jane's Longbow 2 Game Archive | .tre | [gameextractor](http://www.watt
 archive | [JAR Archive](http://fileformats.archiveteam.org/wiki/Jar) | .jar .j | [unzip](http://infozip.sourceforge.net/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/jar/)
 archive | [JAR Archive (ARJ Software)](http://fileformats.archiveteam.org/wiki/JAR_(ARJ_Software)) | .j | [jar32](http://www.arjsoftware.com/jar.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/jarARJ/)
 archive | JFFS2 Filesystem Image |  | [jefferson](https://github.com/onekey-sec/jefferson/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/jffs2Image/)
-archive | [Krita](http://fileformats.archiveteam.org/wiki/Krita) | .kra | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/kra/)
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [deark](https://entropymine.com/deark/) [lbrate](http://www.svgalib.org/rus/lbrate.html) [unar](https://github.com/incbee/Unarchiver) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lbr/)
 archive | Lemmings Revolution game archive | .box | [gameextractor](http://www.watto.org/game_extractor.html) | 
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [uaeunp](https://www.winuae.net/download/) [unar](https://github.com/incbee/Unarchiver) [unlzx](http://xavprods.free.fr/lzx/) [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/lzx/)
@@ -1406,7 +1405,7 @@ image | Z's Staff Kid98 | .zim | [recoil2png](http://recoil.sourceforge.net) | [
 image | [Zoner Bitmap](http://fileformats.archiveteam.org/wiki/BMI_(Zoner)) | .bmi | [deark](https://entropymine.com/deark/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/zonerBitmap/)
 image | [Zoner Zebra](http://fileformats.archiveteam.org/wiki/ZBR_(Zoner_Zebra)) | .zbr | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/zbr/) - reaConverter is the only program I know of that can convert to SVG but it fails to do so with QEMU WinXP 32bit (used to work in wine). So for now, we just convert to PNG.
 image | Zoom-4 | .zm4 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/zoom4/)
-image | [ZoomBrowser Ex thumbnail cache](http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache) | .info | [foremost](http://foremost.sourceforge.net/) | 
+image | [ZoomBrowser Ex thumbnail cache](http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache) | .info | [foremost](http://foremost.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/zoomBrowserExThumbnailCache/)
 image | [ZX Monochrome](http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)) | .scr | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/zxMonochrome/)
 image | [ZX Spectrum - Tricolor RGB](http://fileformats.archiveteam.org/wiki/Tricolor_RGB) | .3 | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://sembiance.com/fileFormatSamples/image/zx3/)
 image | [ZX Spectrum Attributes Gigascreen](http://fileformats.archiveteam.org/wiki/HLR) | .hlr | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/image/hlr/) - File is detected as garbage, but it's actually supposed to look that, but because it looks like garbage, we actually want classify to keep identifying it as such: ht - Id-02 (2010) (Hackers Top 2010 Autumn Edition, 7).hlr
@@ -2166,7 +2165,7 @@ text | IndyCar Racing track info | .txt |  | [11 sample files](https://sembiance
 text | IndyCar Racing track record info | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingTrackRecordInfo/)
 text | Inform source | .inf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/informSource/)
 text | Information Presentation Facility markup | .ipf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/informationPresentationFacilityMarkup/)
-text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/ini/)
+text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/ini/)
 text | Initial Graphics Exchange Specification | .igs |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iges/)
 text | Inkscape extension descriptor | .inx |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/inkscapeExtensionDescriptor/)
 text | INSTALL Professional project | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/installProfessionalProject/)
@@ -2415,7 +2414,7 @@ text | Scala Multimedia Script | .script |  | [14 sample files](https://sembianc
 text | Scooter circuit layout | .plt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/scooterCircuitLayout/)
 text | sendmail m4 | .m4 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sendmailM4/)
 text | Serial Vector Format | .svf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/serialVectorFormat/)
-text | Session Description Protocol | .sdp .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sessionDescriptionProtocol/)
+text | Session Description Protocol | .sdp .txt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/sessionDescriptionProtocol/)
 text | SGI SoundTrack project file | .st |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/sgiSoundTrackProjectFile/)
 text | [SGML Document](http://fileformats.archiveteam.org/wiki/SGML) | .sgml |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sgml/)
 text | Shareware Information File | .sif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sharewareInformationFile/)
@@ -2468,7 +2467,7 @@ text | Team Developer / SQLWindows application | .apt |  | [3 sample files](http
 text | Terminate Smartnote | .not |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/terminateSmartnote/)
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
-text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
+text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [85 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
@@ -2555,7 +2554,7 @@ text | Windows Media Player playlist | .wpl |  | [10 sample files](https://sembi
 text | Windows Policy Administrative Template | .adm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsPolicyAdminTemplateText/)
 text | Windows Policy Administrative Template - Unicode | .adm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsPolicyAdminTemplate/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/reg/)
-text | [Windows Setup INFormation](http://fileformats.archiveteam.org/wiki/INF_(Windows)) |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/windowsSetupINFormation/)
+text | [Windows Setup INFormation](http://fileformats.archiveteam.org/wiki/INF_(Windows)) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsSetupINFormation/)
 text | Windows Setup Table File | .stf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/windowsSetupTableFile/)
 text | Windows URL shortcut | .url |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/windowsURLShortcut/)
 text | Wine Registry |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/wineRegistry/)

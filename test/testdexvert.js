@@ -314,6 +314,9 @@ const FLEX_SIZE_FORMATS =
 		"*:.mp4"           : 5,
 		"movieSetter:.mp4" : 40,
 
+		// these produce gif frames and stich them together and can change per host
+		iffYAFA : 20,
+
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 25,
 		fantavision : 60,
@@ -423,7 +426,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These files have garbage on the end that prevent them from detected as what they should be. I used to 'trim' files on a 2nd and 3rd attempt to detect, but now with perlTextCheck, this can't be done and isn't needed
 	[/text\/c\/.+\.C/i, "text", "txt"],
-	[/text\/latexAUXFile\/LCAU\.AUX$/i, "text", "txt"],
+	[/text\/latexAUXFile\/(LCAU\.AUX|LATEX\.BUG)$/i, "text", "txt"],
 
 	// These files don't convert with my converters and get identified to other things
 	[/audio\/quickTimeAudio\/Demo Music File$/i, "archive", "macBinary"],

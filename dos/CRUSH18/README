@@ -1,0 +1,250 @@
+   __________________________________________________________________________
+
+			    CRUSH v1.8   Readme File
+   __________________________________________________________________________
+
+   CRUSH  is  a new shareware product  from the same author as  the  awarding
+   winning  DOS file manager PocketD Plus (Ziff-Davis "BEST UTILITY 1995"  at
+   Two BBSCON  (UK section),  "BEST UTILITY 1992"  PsL  and  joint  runner-up
+   WHAT PC's  "BEST UTILITY 1994"  with Stacker  v4.0 and Dr Solomon's  Virus
+   Toolkit). PocketD Plus v4.1 and later all support CRUSH.
+
+
+   >>>>>>>> WHAT IS CRUSH ?
+
+	CRUSH is a compression tool that can work with your existing archiver
+	to  dramatically  reduce  the  size  of  archives  created.  In  many
+	instances  CRUSH achieves an average 2:1 advantage over PKZIP and 8:1
+	over   uncompressed   files.  However  CRUSH  is  neither  slow   nor
+	inconvenient  to use. The command-line syntax is essentially  similar
+	to PKZIP, but with many powerful extensions.
+
+	CRUSH  will work with PKZIP, ARJ, LHA, ZOO, UC2 and HA; or the user's
+	preferred  archiver.  PKZIP, UC2  and ARJ are Shareware  and  require
+	registration payments. LHA, ZOO and HA are Copyrighted Freeware.
+
+
+   >>>>>>>> HOW DOES IT WORK ?
+
+	The principal behind CRUSH is not new, but is not exploited by common
+	archivers.  It  takes  advantage  of  the fact that  big  files  will
+	generally  compress better than small files, a property used by  Unix
+	users  who  follow  the maxim  "always tar before compress"  (joining
+	files  together before compressing). CRUSH will automatically do this
+	for  you,  generating a single  file with an extension "CRU" that  it
+	compresses  using your chosen archiver (default PKZIP). Extraction of
+	files is then very easy: UNCRUSH works in the same way as PKUNZIP.
+
+	CRUSH gets the most from this compression trick by taking it one step
+	further  and intelligently ordering the files before joining them. It
+	does  this by recognising file  types, reading them where needed  (to
+	recognise  7  different  compressed  header types), and  orders  them
+	accordingly. This yields a very good default fast compression.
+
+	Given more time CRUSH can do better by optionally performing a series
+	of  trials to squeeze out  extra compression. The algorithm for  this
+	uses  an intelligent re-ordering mechanism which analyses the results
+	of each intermediate test in order to determine which ordering to try
+	next.  This  was  developed over  a  period of 2 years where  it  was
+	successfully  used  to reduce the  file size of PocketD Plus  to  the
+	absolute  minimum. This technique  allows CRUSH to find near  optimum
+	compression  in a few minutes that might take hundreds of years using
+	more brute-force methods!
+
+
+   >>>>>>>> HOW GOOD IS IT?
+
+	Using  CRUSH would not be worthwhile if it yielded a narrow advantage
+	over  existing  archivers, but in  many situations it is  capable  of
+	delivering  dramatically  better  compression. The results below  are
+	genuine  random  tests performed on  files taken from a  250-user  PC
+	server and from a publically available CD-ROM.
+
+	All  archivers were run with maximum compression, except CRUSH  which
+	was  set  to minimum.  The  figures for Stacker and  DoubleSpace  are
+	commercially  quoted  performance  figures for comparison,  not  test
+	results. All the figures quote the compression ratio in terms of disk
+	space  used  rather than actual  file sizes (8k cluster  assumed)  to
+	allow comparison with Stacker 4.0. This does not significantly affect
+	the  comparison between the other archivers (Figures for ZOO are  not
+	quoted  as it uses the same compression algorithm as LHA. Figures for
+	UC2 are not quoted as support for this has only just been added).
+
+   >>>>>>>> (1) CRUSH at its BEST -- Working with small data files
+
+   CRUSH  works best with collections of similar small files. In a block test
+   of  128 directories (each compressed  to its own archive) containing  2349
+   wordprocessing files (total 33 Megabytes), CRUSH with minimum optimisation
+   generated the following average compression ratio, calculated by:
+
+   Ratio = (disk space used by uncompressed files)/(space after compression)
+
+									Ratio
+   CRUSH+HA    ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±  7.95
+   CRUSH+PKZIP ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±   7.82
+   CRUSH+ARJ   ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±               6.16
+   CRUSH+LHA   ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                    5.46
+
+   HA 0.98     ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                            4.32
+   PKZIP 2.04g ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                             4.11
+   ARJ 2.3     ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                             4.18
+   LHA 2.11    ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                             4.12
+
+   Stacker 4.0 ±±±±±±±±±±±±±±±±±±                                        2.50
+   DoubleSpace ±±±±±±±±±±±±±                                             1.90
+   Orig Files  ±±±±±±±                                                   1.00
+
+   CRUSH  clearly  yields a substantial  improvement in all cases. Its  worst
+   result  is  with LHA, but  this  is still much better than  any  non-CRUSH
+   compression.
+
+   >>>>>>>> HOW FAST IS CRUSH ?
+
+   These  results  might  be  of  limited  value  if the  cost  in  time  for
+   compression  was great. The chart below shows the compression times for  6
+   wordprocessing files, totalling 150k on a 486SX25 with a ramdrive:
+								      Seconds
+   CRUSH+HA  ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±± 11.04
+   CRUSH+ZIP ±±±±±±±±±±±±±±±±±±                                          3.51
+   CRUSH+ARJ ±±±±±±±±±±±±±±±±±                                           3.30
+   CRUSH+LHA ±±±±±±±±±±±±±±±±±±±                                         3.68
+   CRUSH+ZOO ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±               8.57
+
+   HA 0.98   ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±± 10.98
+   PKZIP 2.04±±±±±±±±±±±±                                                2.26
+   ARJ 2.3   ±±±±±±±±±±±±±±±±                                            3.02
+   LHA 2.11  ±±±±±±±±±±±±±±±±±                                           3.30
+   ZOO 2.1   ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                   7.85
+
+   From these compression and speed results it can be seem that CRUSH with HA
+   0.98 offers the best overall compression, but that CRUSH with PKZIP or ARJ
+   does nearly as well, but are both over 3 times faster.
+
+   >>>>>>>> (2) CRUSH at its WORST -- Working with large or dissimilar files
+
+   CRUSH has the most difficulty when given large or dissimilar files. A good
+   example of this might be a Shareware release file which contains a mixture
+   of documents, executable and other files. A test with minimum optimisation
+   on  40 random archive files from the ASP-CD ROM (17 Megabytes) yielded the
+   following results:
+
+									Ratio
+   CRUSH+HA    ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±  2.84
+   CRUSH+ZIP   ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±   2.80
+
+   HA 0.98     ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±    2.76
+   PKZIP 2.04g ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±     2.70
+   ARJ 2.3     ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±     2.70
+   LHA 2.11    ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±      2.66
+
+   Stacker 4.0 ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±        (2.50)
+   Doublespace ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±                    (1.90)
+   Orig Files  ±±±±±±±±±±±±±±±±±±±±                                      1.00
+
+
+   Here,  improved  performance is  somewhat less than the previous  example,
+   corresponding  to a 3.7% improvement with PKZIP. Many of the  compressions
+   yielded  a 0% improvement because  although the newly compressed file  may
+   have  been smaller, it still  occupied the same number of disk  allocation
+   units  (clusters). The average improvement in actual file size  (important
+   for file downloads) was 5.6% for PKZIP, with a low of 1% and high of 28%.
+
+   The  figures  for Stacker  and  DoubleSpace are bracketed as  they  almost
+   certainly greatly overestimate their performances in these cases.
+
+
+   >>>>>>>> I USE STACKER/DOUBLESPACE. IS THERE MERIT IN USING CRUSH ?
+
+   On-the-fly  compression  provided  by  products  such  as  Stacker  offers
+   convenient  but low performance compression. Stacker may make your 100  Mb
+   drive look like 250 Mb, but CRUSH may make it look like 800 Mb. On-the-fly
+   compression  also has performance penalties  and there is a question  mark
+   over  its safety. Of course, CRUSH can safely be used in conjunction  with
+   Stacker to obtain the highest possible net space saving. The new option -U
+   allows products such as Stacker to yield the best possible compression.
+
+
+   >>>>>>>> IS IT WORTH MY WHILE USING CRUSH ?
+
+   If  your PC is loaded with  applications, but little data, then CRUSH  may
+   not  help that much. If your  PC or PC server typically holds many  source
+   files,  database  files or  wordprocessing documents, then the  advantages
+   might  be  enormous.  A beta  test  site  for CRUSH had  vast  numbers  of
+   wordprocessing  files  for which CRUSH  was able to achieve a  compression
+   ratio of 16:1 where PKZIP had only yielded 6:1.
+
+
+   >>>>>>>> ARE THERE ANY DRAWBACKS IN USING CRUSH ?
+
+   CRUSH  requires  a  significant  quantity  of temporary  filespace  whilst
+   compressing.  In  the  default  mode  it  will typically  need  3.0 Mb  of
+   temporary  disk space available in order to compress 2.0 Mb of files.  The
+   same  is  true when uncompressing.  To  extract a single 1k file  from  an
+   archive that contains 1 Mb will require 1 Mb of temporary file space.
+
+   CRUSH  will not allow the user to  update a single file or group of  files
+   within  a  CRUSH archive. The  entire archive must be re-created. It  will
+   therefore  be less useful to users  who want to regularly update the  same
+   archive to reflect frequent changes.
+
+   CRUSH is new and therefore many 3rd party programs will not yet be able to
+   search  or  view CRUSHed files.  However these will appear, and  the  very
+   capable  PocketD Plus v4.1 can already do this, allowing viewing of  files
+   inside CRUSH archives with the same ease as any other archive type.
+
+
+   >>>>>>>> ARE THERE ANY OTHER ADVANTAGES IN USING CRUSH ?
+
+   CRUSH  supports features such as recursive directory searching, storing of
+   paths,  archive  comments, file  inclusion/exclusion by name and date,  as
+   other archivers. However CRUSH also adds its own special facilities.
+
+   1. On-line Selection of Files
+	CRUSH  allows the user to select files for archiving from an  on-line
+	prompt,  rather than forcing files to be always explicitly  specified
+	in  the command-line. This allows the user to issue commands such  as
+	"Search  the drive for files matching *.C modified during the last  6
+	days and present each matching name for acceptance or rejection".
+
+   2. Automatic Archive Name Generation
+	CRUSH  has an option  to automatically generate unique archive  names
+	based  on the current date and  time. This is an ideal mechanism  for
+	creating multiple generation backups.
+
+   3. Relative and Backup Date Testing
+	Unlike programs such as ARJ and PKZIP, CRUSH allows relative dates to
+	be  specified, e.g. "CRUSH -r:-4 BACKUP" will search for and compress
+	files modified today or during the previous 4 days. CRUSH also allows
+	a  "compress-since-last-backup"  feature  by allowing the  comparison
+	with  a named file date and time, e.g. "CRUSH -:.LASTBAC BACKUP" will
+	compress files modified since the date and time of the file LASTBAC.
+
+   4. Safer Decompression
+	UNCRUSH  will  helpfully tell  you  that a file to  be  de-compressed
+	already exists, and also if it is older, newer or identical.
+
+   5. CRUSH Supports Proper Wildcards
+	Unlike  DOS (and PKZIP  etc.), CRUSH supports proper wildcards.  e.g.
+	the  DOS  wildcard  *FRED.*  would  match a file  called  JOE!  CRUSH
+	correctly  implements  "*" as  any sequence of characters  (including
+	none) and "?" as a single character.
+
+   6. User-specified Thresholds
+	CRUSH  can  be set to  create a conventional archive where it  cannot
+	improve by a specified percentage improved compression.
+
+   >>>>>>>> HOW DO I COMPARE CRUSH AND PKZIP (OR OTHER) PERFORMANCE ?
+
+	CRUSH has a convenient option "-c" which will run the chosen archiver
+	as  well as performing a CRUSH archive operation. The results of this
+	are displayed as a bar graph (or table, if required).
+
+   >>>>>>>> HOW MUCH EXTRA WILL MAXIMUM CRUSH COMPRESSION GIVE ?
+
+	The cost in time for turning on extra optimisation in CRUSH is large.
+	Adding  the  -f option will  probably increase compression time by  a
+	factor  of 5-10 times the default minimum, probably yielding  between
+	1%-10%  extra  compression.  However if  you want to compress to  the
+	minimum, then you may be happy to leave it overnight with -f200!
+
+

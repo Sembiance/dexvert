@@ -1,0 +1,38 @@
+CRUSH v1.0 - released 18th June 1994
+
+  First version of CRUSH
+
+CRUSH v1.1 - released 1st August 1994
+
+  Bug fix for -f "optimiser" which sometimes prevented the very best archive
+  being saved. Bug fix which cause CRUSH occasionally to overrun the required
+  number of trials. Also a minor optimisation added to -f that almost always
+  improves compression. v1.0 and v1.1 are completely cross-compatible and
+  neither of the v1.0 bugs would cause invalid archives to be created.
+
+CRUSH v1.2 - released 22nd August 1994
+
+  Bug fix for -f when using CRUSH to create archives on a different drive
+  than the current one. CRUSH v1.1 would report a invalid error and give up.
+  Also when using CRUSH v1.1 to compress a group of zero-length files it
+  would report a spurious percentage improvement. CRUSH no longer allows
+  extension .CRU for external archive name (an invalid choice anyway).
+  Extra optimisation added to -f when used with larger values (e.g. -f40).
+  As before, all v1.0 and v1.1 archives are still valid and v1.2 compatible.
+
+CRUSH v1.3 - released 30th October 1994
+
+  Support for the new UC2 compressor added. UC2 outperforms ARJ and PKZIP
+  for most applications.
+
+CRUSH v1.4 - released 10th January 1995
+
+  Problem fixed when recursing a large number of subdirectories.
+
+CRUSH v1.8 - released 19th February 1995
+
+  User can now compress up to 10,000,000 files in a single command rather
+  than the previous 1,000 file limit. Options added to allow files/archive
+  to be specified and the user can now define their own chosen archiver.
+  The new -U option allows CRUSH to work more efficiently with Stacker and
+  DoubleSpace.

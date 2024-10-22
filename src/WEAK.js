@@ -1653,7 +1653,7 @@ export const WEAK_VALUES =
 	/^FSEvents Disk Log Stream format \(v1\)$/,
 	/^Foundation Stack$/,
 	/^Fountain Script$/,
-	/^Fox Engine DeForm$/,
+	/^Fox Engine (DeForm|Texture)$/,
 	/^FreeDOS Code Page Information$/,
 	/^Furnace Instrument \(new\)$/,
 	/^Game Boy Advance ROM$/,

@@ -1,11 +1,11 @@
-# Supported File Formats (2,606)
+# Supported File Formats (2,607)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (399)
+## Archive (400)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -106,6 +106,7 @@ archive | [CrLZH Compressed](http://fileformats.archiveteam.org/wiki/CrLZH) | .y
 archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | [unar](https://github.com/incbee/Unarchiver) [lbrate](http://www.svgalib.org/rus/lbrate.html) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crunch/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunch-Mania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/crunchMania/)
 archive | Cruncher Packed | .exe .com | cup386 | [8 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
+archive | [Crush Archive](http://fileformats.archiveteam.org/wiki/CRUSH) | .cru | [uncrush](http://cd.textfiles.com/pdos9606/ARCHIVER/TOOLS/CRUSH18.ZIP) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/crush/)
 archive | [Daemon Tools Media Data eXtended Image](http://fileformats.archiveteam.org/wiki/MDX_(Daemon_Tools)) | .mdx | [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mdx/)
 archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark_Ages_Map_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkAgesMapGameArchive/)
 archive | Dark Reign 2 game data archive | .zwp | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/darkReign2GameDataArchive/)

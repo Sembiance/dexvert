@@ -7,5 +7,6 @@ export class printArtist extends Format
 	ext            = [".gfx"];
 	forbidExtMatch = true;
 	magic          = ["Print / Instant Artist"];
+	slow           = true;
 	converters     = ["printArtist"];
 }

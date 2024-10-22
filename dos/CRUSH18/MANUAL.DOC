@@ -1,0 +1,998 @@
+
+
+
+
+
+
+
+
+
+
+
+                       _________________________________
+
+                                   CRUSH v1.8
+
+                           **** Shareware Manual ****
+
+                       __________________________________
+
+
+
+                             File Compression Tool
+            CRUSH (TM) Copyright Jeff Rollason, PocketWare (TM) 1994
+                              All Rights Reserved
+
+
+
+
+                        All Trademarks Are Acknowledged
+
+
+
+
+
+
+
+
+          No part of this publication may be reproduced, transmitted,
+          transcribed,  stored in  a retrieval system, or  translated
+          into any other language in whole or in part, in any form or
+          by  any  means,  whether  it  be  electronic,   mechanical,
+          magnetic,  optical,  manual  or  otherwise,  without  prior
+          written consent of PocketWare.
+
+            PocketWare PO Box 2369, Hendon, London NW4 1NR, England.
+             CIS 100031,3537.  Internet 100031.3537@compuserve.com
+
+
+   __________________________________________________________________________
+   Contents:
+
+
+   CONTENTS:                                                             Page
+
+   Getting Started: . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+
+   The CRUSH program: . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+
+        Default use of PKZIP  . . . . . . . . . . . . . . . . . . . . . . . 3
+        -j    Use ARJ . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+        -o    Use ZOO . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+        -l    Use LHA . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+        -h    Use HA  . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+        -u    Use UC2 . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+        -U    Create CRU files only . . . . . . . . . . . . . . . . . . . . 3
+        -m    Moves file to archive . . . . . . . . . . . . . . . . . . . . 4
+        -c    Compare with and without CRUSH  . . . . . . . . . . . . . . . 4
+        -f    Optimise until 5 failed attempts to improve compression . . . 4
+        -f<n> Optimise until "n" failed attempts to improve compression . . 4
+        -t    Only create CRUSH archive if 5% improvement . . . . . . . . . 4
+        -t<n> Only create CRUSH archive if "n"% improvement . . . . . . . . 4
+        -r    Recurse subdirectories  . . . . . . . . . . . . . . . . . . . 4
+        -:    Set range(s) of dates . . . . . . . . . . . . . . . . . . . . 5
+        -x    Exclude pathspecs . . . . . . . . . . . . . . . . . . . . . . 6
+        -y    Answer YES to all questions . . . . . . . . . . . . . . . . . 6
+        -z    Add CRUSH archive comment . . . . . . . . . . . . . . . . . . 6
+        -v    Show files for adding without CRUSHing  . . . . . . . . . . . 6
+        -Ln   Set limit for files per archive . . . . . . . . . . . . . . . 7
+        -n    Store files without paths . . . . . . . . . . . . . . . . . . 7
+        -Q    Query each file to be archived. . . . . . . . . . . . . . . . 7
+        -q    QUIET mode, no output . . . . . . . . . . . . . . . . . . . . 7
+        -a    Create an additional index  . . . . . . . . . . . . . . . . . 7
+        -e    Use the existing archive for comparison . . . . . . . . . . . 8
+        -C    Colour off  . . . . . . . . . . . . . . . . . . . . . . . . . 8
+        -C<n> Set colour  . . . . . . . . . . . . . . . . . . . . . . . . . 8
+        -s    Minimise temporary disk space (slow!) . . . . . . . . . . . . 8
+        -i<n> Control information type  . . . . . . . . . . . . . . . . . . 8
+        -2    Set display of times to 24 hour clock . . . . . . . . . . . . 8
+
+
+   The UNCRUSH Program: . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+        -v    Display without uncompressing . . . . . . . . . . . . . . . .10
+        -V    Display archive comment only  . . . . . . . . . . . . . . . .10
+        -o    Overwrite files without query . . . . . . . . . . . . . . . .10
+        -u    Uncompress NEWER or NEW files . . . . . . . . . . . . . . . .10
+        -a    Uncompress NEW files  . . . . . . . . . . . . . . . . . . . .10
+        -i    Ignore paths in CRUSH file  . . . . . . . . . . . . . . . . .10
+        -I    Only ignore drives in paths . . . . . . . . . . . . . . . . .10
+        -q    Quiet mode: No output at all  . . . . . . . . . . . . . . . .11
+        -z    Only suppress output of archiver  . . . . . . . . . . . . . .11
+        -e    Extract even if not CRUSH archive . . . . . . . . . . . . . .11
+        -l    Only display a simple file list . . . . . . . . . . . . . . .11
+        -2    Display times as 24-hour clock  . . . . . . . . . . . . . . .11
+
+   Worked Examples: . . . . . . . . . . . . . . . . . . . . . . . . . . . .12
+   The UNDO and UNDO2 Programs: . . . . . . . . . . . . . . . . . . . . . .13
+   Configuration (including using other archivers): . . . . . . . . . . . .14
+   Technical Details: . . . . . . . . . . . . . . . . . . . . . . . . . . .15
+
+   _________________________________________________________________________
+   Getting Started                                                   Page  1
+
+   ____________________________________
+   Installation
+
+   CRUSH installation is very simple. The user need only copy the contents of
+   the  release disk to the desired directory. A file INSTALL.BAT is provided
+   to  do  this for you. Your  chosen directory should be within your  search
+   path (See the PATH variable in your DOS documentation).
+
+   In  order  to be able to  use  CRUSH, you must have one of  the  archivers
+   PKZIP, ARJ, LHA, ZOO, HA and UC; or your own particular archiver.
+
+   ____________________________________
+   What is CRUSH?
+
+   CRUSH  is a command-line tool that uses your existing archiver PKZIP, ARJ,
+   LHA,  ZOO, HA or UC to generate smaller archives than it could alone. With
+   many  applications  this improvement  may  be less than 5%,  but  dramatic
+   improvements  of  10%-70%  are  much  more typical. A block  test  of  128
+   archives  totalling 2349 wordprocessing files (see README) averaged a  47%
+   improvement  (100k ZIP reduced to 53k CRUSH!). CRUSH is ideally suited  to
+   users  who regularly archive material or who just need to save disk space.
+   There  is  no other compression tool  for DOS (as of June 1994)  that  can
+   match the compression performance of CRUSH, and most do not come close.
+
+   ____________________________________
+   CRUSH and other Archivers
+
+   CRUSH is used from the command-line in much the same way as archivers such
+   as  PKZIP and ARJ. If you are already familiar with these, then you should
+   be  able to adapt to CRUSH with very little difficulty. If you are a  ZOO,
+   LHA  or  HA user, then you  will observe some changes, but will  find  the
+   basic operation of CRUSH very similar.
+
+   ____________________________________
+   Simple use of CRUSH
+
+   To  create a CRUSH archive called  BACKUP containing all the files in  the
+   current directory requires the following simple command:
+
+        CRUSH BACKUP
+
+   This  will create the file BACKUP.ZIP (PKZIP must be available). The  user
+   can be more selective by adding filespecs, as follows:
+
+        CRUSH BACKUP *.DOC README MAN*.*
+
+   This  will only save files with the specified filespecs. The user may also
+   want  to  receive some feedback about  how much space is being saved.  The
+   "-c" (compare) option will allow a comparison to be made:
+
+        CRUSH -c BACKUP *.DOC README MAN*.*
+
+   Once  created, a CRUSH archive  can be uncompressed using UNCRUSH in  much
+   the  same  way as PKUNZIP  is used. e.g.  UNCRUSH BACKUP *.DOC. This  only
+   extracts  files  matching *.DOC. The  user is advised to read the  "Worked
+   Examples"  section  for more details  of CRUSH usage, and also the  README
+   file.  Simply type "CRUSH" to obtain on-line help.
+
+
+   _________________________________________________________________________
+   The CRUSH program                                                 Page  2
+
+
+   This  is the program that will replace the use of PKZIP, LHA, ARJ, ZOO, HA
+   and UC. Whichever of these you already use will still be needed, but CRUSH
+   will  run it for you. The command-line syntax of CRUSH is, for most cases,
+   identical to PKZIP usage. CRUSH preserves dates, times and attributes.
+
+   USAGE:    CRUSH [opts] archive [pathspecs] [@lists] [>outfile]
+
+   Where:
+
+   [opts]         These  are options that control CRUSH's behaviour. e.g.  -r
+                  causes CRUSH to search subdirectories. These can be grouped
+                  together for brevity or specified one-by-one, e.g.
+
+                  -rca      is equivalent to:      -r -c -a
+
+                  The  user  can  choose  to  use  "/" in place  of  "-"  for
+                  preference. e.g. -r and /r are equivalent.
+
+   archive        This  is the name of the archive to be created e.g.  BACKUP
+                  or  BACKUP.001 etc. If no extension is specified, then  the
+                  default  extension  for the  archiver used will be  adopted
+                  (default  PKZIP). If the  special name "[]" is given  (e.g.
+                  CRUSH []),  then CRUSH will generate a unique archive  name
+                  based  on the current date and time (assuming that archives
+                  are not created within 2 seconds of each other).
+
+   [pathspecs]    These  are  the files  to be compressed (defaulting to  all
+                  files in the current directory). e.g.
+
+                       CRUSH SAVE \WP\*.DOC *.TXT
+
+                  This  will compress into SAVE.ZIP all files matching  *.DOC
+                  from  the directory \WP  and all files matching *.TXT  from
+                  the current directory. The path \WP\ will also be stored in
+                  the  archive,  to  be  re-created by UNCRUSH.  UNCRUSH  can
+                  optionally ignore stored pathnames.
+
+                  CRUSH  uses proper rather than DOS wildcards. e.g. the  DOS
+                  wildcard  *FRED.*  will  match  a file called  JOE  because
+                  *FRED.*  and  *.* are  treated by DOS as equivalent.  CRUSH
+                  interprets  "*"  as  any sequence of characters,  including
+                  zero length.  See also the "-x" EXCLUSION filespecs.
+
+   [@lists]       CRUSH  will accept response files containing lists of files
+                  to be processed. These should contain one pathspec per line
+                  and can contain comments starting with ";" e.g.
+
+                       *.EXE
+                       \WP\*.DOC ; save my docs
+                       ; Fred's stuff here onwards
+                       \BIN\*.EXE
+
+                  Unlike PKZIP, the response file can be of any length (PKZIP
+                  limits the user to 500 filespecs).
+
+   [>outfile]     CRUSH  can  generate a  response file by  re-directing  the
+                  output to a file for later use e.g. CRUSH DOCS >SAVE
+
+
+   __________________________________________________________________________
+   CRUSH Options                                                      Page  3
+
+
+   CRUSH  will  default  to  using  PKZIP  unless  -j, -o, -l, -h  or  -u  is
+   specified.  PKZIP is the world's best known archiver, written by Paul Katz
+   and  marketed as Shareware by PKWARE. CRUSH will work with any version  of
+   PKZIP,  but  the user is recommended  to use PKZIP v2.04 or  later,  which
+   achieves significantly better compression than v1.x.
+
+   ____________________________________
+   -j    Use ARJ
+
+        This  instructs CRUSH to use Robert K Jung's "ARJ" program instead of
+        PKZIP.  This  can be specified  as a general default using the  CRUSH
+        environment variable e.g. SET CRUSH=-j
+
+   ____________________________________
+   -o    Use ZOO
+
+        This will use the ZOO program, creating ZOO files.
+
+   ____________________________________
+   -l    Use LHA
+
+        This will use Haruyasu Yoshizaki's "LHA" program, creating LZH files.
+
+   ____________________________________
+   -h    Use HA
+
+        This  will  use Harri Hirvola's  "HA" program, creating HA files.  HA
+        produces very small archives, but is quite slow.
+
+   ____________________________________
+   -u    Use UC2
+
+        This  uses Ad Infinitum Programs's "UC" program. This uses a great of
+        DOS  memory  and will probably  require the added program  US.EXE  to
+        allow CRUSH access to the 80k it needs. e.g. US CRUSH -u SAVE
+
+   ____________________________________
+   -U    Create CRU file only
+
+        This  will only create a CRU file rather than go on to compress using
+        PKZIP  or  similar. This is  of benefit to Stacker,  DoubleSpace  and
+        SuperStore users which will result the the best possible compression.
+
+   ____________________________________
+   -m    Moves file to archive
+
+        This deletes the files after they have been successfully compressed.
+
+   ____________________________________
+   -c    Compare with and without CRUSH
+
+        This  allows CRUSH to show how much filespace has been saved over the
+        archiver  alone.  This  will  make  CRUSH  slower  as  an  additional
+        compression  is  needed in order  to make a comparison (unless -e  is
+        also  used).  The  results  are  displayed as a bar  graph,  plotting
+        archive  and CRUSH sizes. The original file size can also be  plotted
+        by adding the option -i2.
+
+   __________________________________________________________________________
+   CRUSH Options                                                      Page  4
+
+   ____________________________________
+   -f    Optimise until 5 failed attempts to improve compression
+
+        This  will make CRUSH experiment with different orderings to  improve
+        the compression. CRUSH will end when it has failed 5 times to find an
+        improvement.  This will increase the run time of CRUSH by at least  5
+        times.   Each  time  it  provides  an  improvement,  the  time  taken
+        increases.  CRUSH is unlikely to  take more than 15 times the  normal
+        compress time.
+
+        The  results of this trial  are displayed as two bar graphs,  showing
+        the size of the first and best CRUSH compression. (See option "-s").
+
+   ____________________________________
+   -f<n> Optimise until "n" failed attempts to improve compression
+
+        As  "-f",  but  allowing the  user  to specify how long CRUSH  is  to
+        continue the trial before giving up e.g.
+
+             CRUSH -f2 BACKUP         will give up after only 2 failures.
+
+             CRUSH -f100 BACKUP       will give up after 100 failures.
+
+   ____________________________________
+   -t    Only create CRUSH archive if 5% improvement
+
+        This  creates a CRUSH archive only if it can improve the archive size
+        by 5%, otherwise it creates a conventional archive. It invokes the -c
+        option,  which adds to the run time, as it needs to run the  archiver
+        without CRUSH for comparison.
+
+   ____________________________________
+   -t<n> Only create CRUSH archive if "n"% improvement
+
+        As "-t", but allowing the user to set the threshold e.g.
+
+             CRUSH -t10 BACKUP        CRUSH only if 10% better
+
+   ____________________________________
+   -r    Recurse subdirectories
+
+        This  will search subdirectories from the specified directories, also
+        storing paths in the archive. Unlike PKZIP, CRUSH defaults to storing
+        pathnames  with the files. However  this is done in a very  efficient
+        manner and so does not significantly increase the archive size (PKZIP
+        uses  a space-consuming format for this e.g. searching a subdirectory
+        DOCUMENT\MYDOCS  with  100 files  would require an extra 1660  bytes,
+        whereas CRUSH would require just 16). Example:
+
+             CRUSH -r BACKUP \WP\DOCS\*.WP *.TXT
+
+        This will search \WP\DOCS and all its subdirectories for the filespec
+        *.WP,  and  the current  directory and its subdirectories for  *.TXT.
+        CRUSH will store the full path e.g. \WP\DOCS\HOME\DOC.WP etc.
+
+        See  also the CRUSH option "-n" and UNCRUSH options "-i" and "-I" for
+        ignoring paths and drives.
+
+
+   __________________________________________________________________________
+   CRUSH Options                                                      Page  5
+
+   ____________________________________
+   -:    Set range(s) of dates
+
+        DATE  OPTIONS.  These  are  used  to specify a date  range  for  file
+        matching.  If  a  single  date  is specified then this  will  be  the
+        earliest  date  to be included.  If a second date is specified,  then
+        this  is  taken  as  the  as  the  end date. Dates can  be  mixed  in
+        "absolute" and "relative" format. The full syntax is:
+
+                 [!]:[=]<date>
+
+         Where:  !   inverts  the  meaning  of  the  range set.  e.g.  "range
+                     1st-2nd" becomes "outside 1st-2nd"
+
+                 =   sets both the start and end date to the date following.
+
+         and <date> can be:
+                                                                Example:
+           DD/MM/YY  absolute UK date                           21/2/94
+           MM/DD/YY  absolute US date (CRUSH determines which)  2/21/94
+           YY/MM/DD  absolute JAPAN date ( " )                  94/2/21
+           DDMonYY   absolute date in alternative format        21feb94
+           DDMon     absolute date (current year)               21feb
+           -DD       number of days before current date, OR     -3
+           m-MM      number of months OR                        m-2
+           y-YY      number of years (truncates to 83 years)    y-1
+           .name     where date is taken from file/dir "name"   .LASTBAC
+
+        The  four  date  formats  can be mixed, e.g.  -:y-2:-5  (or /:y-2:-5)
+        specifies  files  created/modified between  2 years and 5  days  ago.
+        -:y-99:5jan  will  select  all  files  created on or  before  5th Jan
+        (current  year).  -!:=-1 selects  all files except  yesterday's.  The
+        ".name"  option allows compression of files relative to the date  and
+        time of an existing file. The latter feature allows the user to issue
+        commands  such  as "compress  all files modified/created  since  last
+        backup", using commands such as:
+
+             CRUSH -:.BACKTAG BACKUP
+             REM>BACKTAG
+
+        The  REM>BACKTAG will create an empty file with the current date  and
+        time,  so that the next backup  will start with the date and time  of
+        that file.
+
+        General Examples: (all use the archive name "BACK")
+
+        CRUSH -:11feb BACK       Compressing  files  modified/created  on  or
+                                 after February 11th of this year.
+
+        CRUSH -:-3 BACK          Files modified/created today or during the 3
+                                 previous days.
+
+        CRUSH -:-0 BACK          As above, but today only.
+
+        CRUSH -!:y-3 BACK        Not files created during the last 3 years.
+
+        CRUSH -:m-4:m-3 BACK     Will compress files modified/created between
+                                 4 and 3 months ago.
+
+   __________________________________________________________________________
+   CRUSH Options                                                      Page  6
+
+   ____________________________________
+   -x    Exclude pathspecs
+
+        In programs such as PKZIP and ARJ, the exclusion pathspecs can appear
+        in  any  position in the  command-line. With CRUSH they  MUST  appear
+        AFTER  the  archive name with  the other pathspecs. CRUSH limits  the
+        user to 300 exclusion filespecs.
+
+        Examples: (pathspecs are all case-insensitive)
+
+        CRUSH BACKUP *.EXE -xTEST*.* *.COM
+
+        This  will compress all files matching *.EXE and *.COM, but not those
+        matching TEST*.*. The order of these filespecs is irrelevant.
+
+        CRUSH -r BACKUP -xDOC\*.BAK -x*.TMP
+
+        This  will  recurse, searching  for files to compress, but  excluding
+        files  that match the path and  name DOC\*.BAK, or the name *.TMP  in
+        any subdirectory.
+
+        CRUSH -r BACKUP -x@NOTTHIS -x@ORTHIS
+
+        This  will recurse, searching for file to compress, but excluding any
+        pathspecs in the response files NOTTHIS or ORTHIS.
+
+   ____________________________________
+   -y    Answer YES to all questions
+
+        This  will allow CRUSH to compress without pausing for queries,  such
+        as permission to overwrite an existing file.
+
+   ____________________________________
+   -z    Add CRUSH archive comment
+
+        This  will prompt the user for an archive comment to add to the CRUSH
+        file.  Ths will be displayed by UNCRUSH when uncrushing or  verifying
+        an archive.
+
+        The  user  can  automatically  provide  a CRUSH comment  without  the
+        program pausing for input by using the DOS echo command. e.g.
+
+             ECHO My Comment|CRUSH -z BACKUP
+
+        which will give the archive the comment "My Comment".
+
+   ____________________________________
+   -v    Show files for adding without CRUSHing
+
+        This  will  show which  files CRUSH would compress  without  actually
+        compressing,  with a summary at the end. If the output is re-directed
+        to a file, then the re-directed file will hold a simple list of files
+        (equivalent to PKZIP option "-@") e.g.
+
+             CRUSH -v BACK > LIST          Creating  a list of matching files
+                                           that would be archived.
+
+        The archive name specified will be ignored.
+
+   __________________________________________________________________________
+   CRUSH Options                                                      Page  7
+
+   ____________________________________
+   -Ln   Set limit for files per archive
+
+        This will allow the user to limit the number of files per archive. By
+        default CRUSH will limit each file to 1000 files, after which it will
+        create  multiple  archives. The user  can force CRUSH to set a  lower
+        limit.  This  has  the  advantage  of reducing  the  temporary  space
+        required  when  compressing  many  files.  It  also  creates  smaller
+        archives that can be more easily copied to floppy disk.
+
+   ____________________________________
+   -n    Store files without paths
+
+        This allows the user to prevent pathnames from being stored e.g.
+
+             CRUSH -n BACKUP MYDOC\*.DOC
+
+        would store files matching *.DOC, but without the path MYDOC\.
+
+   ____________________________________
+   -Q    Query each file to be archived
+
+        This allows the user to choose on-line which files are to be included
+        in the archive e.g.
+
+             CRUSH -Qr DOC *.WP
+
+        will  search recursively (-r) for  all files matching *.WP and  query
+        whether  each is to be added to the archive. The user has the  option
+        to accept or reject all the remaining files at any point, or to abort
+        the  compression.  This option provides  an easy way to  construct  a
+        response file, e.g. the following expanded example:
+
+             CRUSH -Qr DOC *.WP *.TXT > SAVE
+
+        would  allow  the user  to  select files for compression  while  also
+        creating a response file SAVE for future use, e.g. CRUSH DOC @SAVE.
+
+   ____________________________________
+   -q    QUIET mode, no output
+
+        This will run CRUSH without any display output, unless CRUSH needs to
+        prompt  the  user with a  question (inhibited by -y). This is  useful
+        where CRUSH is called within BAT scripts or another program.
+
+   ____________________________________
+   -a    Create an additional index
+
+        The price paid for creating CRUSH archives is that, although programs
+        such  as PocketD Plus can still browse the contents of the  archives,
+        searching for files inside CRUSH archives would be prohibitively slow
+        if  each  CRUSH  archive  had to be temporarily  decompressed  whilst
+        scanning.  The  -a option will  force CRUSH to create  an  additional
+        external  index with the extension ".CRI". PocketD Plus will use this
+        for  searching (and also browsing)  to allow files to be searched  or
+        selected  very  quickly. This  will  have  an associated  disk  space
+        overhead, but this would not be significant where the CRUSH saving is
+        already substantial (i.e. more than 10%)
+
+   __________________________________________________________________________
+   CRUSH Options                                                      Page  8
+   ____________________________________
+   -e    Use the existing archive for comparison
+
+        This  will allow the user to test the compression improvement without
+        re-creating  the  original archive  for comparison. CRUSH will  still
+        need  the files for compression to be available in uncompressed form.
+        The  option  -c must also be  used. Make sure that the archive to  be
+        compared is not already a CRUSH archive!
+   ____________________________________
+   -C    Colour off
+
+        This will use whatever colour is currently in use rather than forcing
+        white on blue. This normally means white on black.
+
+   ____________________________________
+   -C<n> Set colour
+
+        This  will  allow the user to  override the colour of the  bar  graph
+        displayed  during compression. "n" is the normal colour attribute  in
+        the range 0 to 7.
+   ____________________________________
+   -s    Minimise temporary disk space (slow!)
+
+        CRUSH  will  normally use about  25% extra temporary disk space  when
+        running  with the -f optimise  option. If you do not have  sufficient
+        space  to run CRUSH with this option, then "-s" will reduce the space
+        CRUSH uses, but at the cost of a longer compression time. This option
+        is  not  recommended for routine  use unless you are normally  always
+        short  of disk space. CRUSH does not make use of extended or expanded
+        memory.
+   ____________________________________
+   -i<n>  Control information type
+
+        By default, CRUSH will display a bar graph.
+
+        If -i1  is  specified,  a  more  comprehensive table  will  be  shown
+        instead, giving more information.
+
+        If -i2  is specified, CRUSH will still show a bar graph, but when  -c
+        is  selected it will simultaneously plot the file size, archive  size
+        and  CRUSH size, rather than just archive and CRUSH. This will  allow
+        all  three sizes to be compared, but will give limited resolution  of
+        the difference between just the archive and CRUSH.
+
+        Note: CRUSH plots to a resolution of 1 in 114 (using the special half
+        width character "221")
+
+   ____________________________________
+   -2    Set display of times to 24 hour clock
+
+        This will force the display of 24 hour clock times instead of 12 hour
+        during browsing.
+
+
+   __________________________________________________________________________
+   The UNCRUSH Program                                                Page  9
+
+
+   The  UNCRUSH program is used for uncompressing or viewing CRUSH  archives.
+   It requires access to the corresponding uncompressing programs used by the
+   base  archiver e.g. PKUNZIP for PKZIP files and ARJ for ARJ files.  Unlike
+   CRUSH,  UNCRUSH is copyrighted FREEWARE. You may use and distribute freely
+   providing  that  its intended  use  is not mis-represented and it  is  not
+   modified in any way.
+
+   USAGE:    UNCRUSH [opts] archive [destination] [pathspecs] [>outfile]
+
+   Where:
+
+   [opts]         These are options that control UNCRUSH's behaviour. e.g. -v
+                  causes  CRUSH to display the names of the compressed  files
+                  without  uncompressing them. These can be grouped  together
+                  for brevity or specified one-by-one, e.g.
+
+                  -ioq      is equivalent to:      -i -o -q
+
+                  The  user  can  choose  to  use  "/" in place  of  "-"  for
+                  preference e.g. -i and /i are equivalent.
+
+   archive        This  is  the name of  the archive to be uncompressed  e.g.
+                  BACKUP  or  BACKUP.001 etc.  If no extension is  specified,
+                  then  UNCRUSH will look  for known extensions that use  the
+                  specified  name in the order CRU, CRI, ZIP, ARJ, LZH,  ZOO,
+                  HA   then  UC2.  UNCRUSH  cannot  uncompress   files   with
+                  non-standard  extensions.  Such  files  will  need  to   be
+                  re-named  before using UNCRUSH, or uncompressed first using
+                  PKUNZIP etc.
+
+   [destination]  This  is  the  destination  path  where  files  are  to  be
+                  uncompressed.  This  must be  terminated by ":" or  "\"  to
+                  allow  it to be  distinguished from normal pathspecs  (same
+                  operation  as  PKUNZIP). Paths  within the archive will  be
+                  combined with any specified destination path, e.g.
+
+                       CRUSH BACKUP \WP\*.DOC            followed by:
+
+                       UNCRUSH BACKUP MYDOC\HOME\
+
+                  will uncompress to MYDOC\HOME\WP\*.DOC
+
+   [pathspecs]    These  are the files to be uncompressed (defaulting to  all
+                  files). These can include paths e.g.
+
+                       UNCRUSH SAVE \WP\*.DOC *.TXT
+
+                  This will uncompress pathspecs from SAVE matching \WP\*.DOC
+                  and  any pathspecs with the filespec *.TXT. i.e. *.TXT will
+                  match  *.TXT and \WP\*.TXT,  but \WP\*.DOC would not  match
+                  *.DOC.  UNCRUSH  can  be  set to optionally  ignore  stored
+                  pathnames. As  with CRUSH, UNCRUSH uses proper rather  than
+                  DOS wildcards (See CRUSH for details).
+
+   [>outfile]     UNCRUSH  will allow the user to create response or  summary
+                  files using re-directed output. See -v, -V and -l.
+
+
+   __________________________________________________________________________
+   UNCRUSH Options:                                                   Page 10
+
+   ____________________________________
+   -v    Display without uncompressing
+
+        This  will cause UNCRUSH to  report the pathspecs inside the  archive
+        without  uncompressing.  This gives  a sorted output reporting  size,
+        date  and time of the file stored. Attributes are not displayed, even
+        though stored.
+
+   ____________________________________
+   -V    Display archive comment only
+
+        This  will  simply display the  archive comment and the name  of  the
+        archive.  This  is  useful  for  cataloging purposes,  allowing  this
+        information to be appended to a reference file e.g.
+
+             UNCRUSH -V FRED >> REFFILE
+
+   ____________________________________
+   -o    Overwrite files without query
+
+        This  will force UNCRUSH to overwrite files regardless of whether the
+        file  already exists. UNCRUSH would normally inform the user if files
+        already  exist with an option to skip or overwrite the file.  UNCRUSH
+        helpfully also informs the user whether the file to be overwritten is
+        NEWER, OLDER, IDENTICAL or SAME DATE, DIFFERENT SIZE.
+
+   ____________________________________
+   -u    Uncompress NEWER or NEW files
+
+        This will only uncompress NEW or NEWER files from within the archive.
+        This will still prompt for overwrites, unless -o is also specified.
+
+   ____________________________________
+   -a    Uncompress NEW files
+
+        This will only uncompress NEW files.
+
+   ____________________________________
+   -i    Ignore paths in CRUSH file
+
+        This  will  ignore all  paths inside the archive, therefore  possibly
+        generating  an  overwrite  warning if WP\FRED.DOC and  \DOC2\FRED.DOC
+        exist in the same CRUSH file.
+   ____________________________________
+   -I    Only ignore drives in paths
+
+        As "-i", but only ignoring drive names stored in the CRUSH file. This
+        accommodates situations where a CRUSH command such as:
+
+             CRUSH BACKUP S:\WP\*.DOC
+
+        is  run,  storing a network drive  letter with the path. A user on  a
+        non-networked  PC would then be  unable to uncompress the CRUSH  file
+        without losing the path. The -I option allows this to be overridden.
+
+
+
+   __________________________________________________________________________
+   UNCRUSH Options                                                    Page 11
+
+   ____________________________________
+   -q    Quiet mode: No output at all
+
+        This  will  inhibit  all  output from UNCRUSH, except  where  UNCRUSH
+        queries an overwrite.
+
+   ____________________________________
+   -z    Only suppress output of archiver
+
+        This  will only suppress the output of the unarchiver run by UNCRUSH.
+        e.g.  UNCRUSH  may call  PKUNZIP which normally displays  information
+        while  uncompressing.  This option  will inhibit this. This  may  not
+        always  be  safe if the  unarchiver has an unusual problem, in  which
+        case the error message the archiver displays will not be visible.
+
+   ____________________________________
+   -e    Extract even if not CRUSH archive
+
+        This  is convenient if the user  wants to use UNCRUSH to process  any
+        archives,  whether  CRUSH  or  not. This will support  any  pathspecs
+        given, but will not support specified destination directories.
+
+   ____________________________________
+   -l    Only display a simple file list
+
+        This  will replace the normal display  by a simple list of files  and
+        pathnames.  This is most usefully used with -v to generate a response
+        file.
+
+   ____________________________________
+   -2    Display times as 24-hour clock
+
+        This  is only a cosmetic detail, but many users are firmly  committed
+        to 12 or 24 hour clocks, in which case UNCRUSH will allow the default
+        12 hour clock file times to be replaced by a 24 hour clock times.
+
+
+   __________________________________________________________________________
+   Worked Examples                                                    Page 12
+
+
+   There  are many routine archiving tasks that CRUSH could be used for.  The
+   following  selects  a few that  either take particular advantage of  CRUSH
+   facilities,  or that may be particularly relevant when first using  CRUSH.
+   For simple examples see "Getting Started" at the beginning of this manual.
+
+   ____________________________________
+   Generating a Response File for Future Backups
+
+   Most archivers allow the user to use a "response" file containing file and
+   path  specifications  to  be  used  in addition to (or instead  of)  CRUSH
+   command-line  parameters.  This is convenient  when a list is very  large.
+   CRUSH  allows the user to choose files for archiving on-line using the  -Q
+   option. e.g.
+
+        CRUSH -rQv TEST *.C *.ASM >RESPLIST
+
+   This  will search all subdirectories (-r), querying each file found  (-Q),
+   but  without actually creating an archive (-v). The output is directed  to
+   the  file RESPLIST. The user can then use this for future CRUSH  archiving
+   in a command of the form:
+
+        CRUSH BACKUP @RESPLIST
+
+   ____________________________________
+   Backing up to multiple disks
+
+   Because  of  the  way  that  CRUSH works, the incremental  creation  of  a
+   multi-disk  archive is not practical. However you can store a large  CRUSH
+   archive  on multiple disks by using the facilities of your archiver,  e.g.
+   PKZIP -& -e0 A:MULTI CRUSHED.ZIP   This will create a multi-part archive.
+
+   ____________________________________
+   Performing Archival Backups
+
+   CRUSH's  option  to  backup files  dated  on or after a  named  file  (not
+   supported  by PKZIP etc.) makes it possible to create backups of all files
+   modified  since  the previous backup.  This can be combined  with  CRUSH's
+   ability to automatically generate a unique filename, as follows:
+
+   BACK.BAT containing:
+
+        CRUSH -r:.LASTBAC [] *.DOC *.C *.H
+        IF ERRORLEVEL 1 ECHO Error occurred!
+        IF ERRORLEVEL 1 GOTO EXIT
+        REM>LASTBAC
+        :EXIT
+
+   The  "[]"  parameter replaces  the  normal archive name by a  unique  name
+   generated  using the current date and time (e.g. 1CD29E33.ZIP, which  uses
+   the  hexadecimal value of the  combined 32-bit date and time). CRUSH  will
+   then  search  all subdirectories for  all files matching *.DOC *.C or  *.H
+   modified  since the date and time of the file LASTBAC and add them to  the
+   archive. If the archive step fails (e.g. out of memory etc.), the error is
+   reported and the command sequence ended. If successful, then "REM>LASTBAC"
+   will  create an empty file with the current date and time for reference by
+   the  next  backup. On the next  occasion that the command "BACK"  is  run,
+   CRUSH will only search for files modified since the last backup.
+
+
+   __________________________________________________________________________
+   Worked Examples                                                    Page 13
+
+
+   ____________________________________
+   Converting all Existing Archives to CRUSH
+
+   This  would  be a potentially  mammoth task that would benefit  from  some
+   automation, unless you are willing to convert each file one-by-one. A good
+   choice for this task would be PocketD Plus v4.1 (D.EXE), as follows:
+
+        MD TMP
+        CD TMP
+        D .ZIP/W[PKUNZIP -d $w//CRUSH -ert $w//PAUSE//D /zd]Rq
+
+   This  example  converts ZIP  files  by running a command sequence  of  the
+   following type for each archive found:
+
+        PKUNZIP -d \C\BATS.ZIP       Uncompress with subdirectories into TMP.
+        CRUSH -ert \C\BATS.ZIP       (See below).
+        PAUSE                        Allow inspection of result.
+        D /zd                        Delete uncompressed files/dirs from TMP.
+
+   The CRUSH command compares the new CRUSH archive with the existing archive
+   (-e),  but  will  not replace  it  unless the new archive is at  least  5%
+   smaller  (-t). The files originally compressed may also include paths, and
+   so  CRUSH uses -r to search all uncompressed subdirectories created by the
+   "PKUNZIP -d"  command.  For those  with a cautious disposition, the  D.EXE
+   command-line  includes  the "q" option,  allowing the user to  confirm  or
+   select  each archive to be processed. The PAUSE command allows the user to
+   examine  the output of CRUSH before the command "D /zd" deletes the  files
+   and subdirectories temporarily uncompressed.
+
+
+   ____________________________________
+   The UNDO and UNDO2 Programs
+
+   The  registered version of  CRUSH.EXE comes with two additional  programs,
+   UNDO.EXE and UNDO2.EXE, which provide tiny alternatives to UNCRUSH.EXE for
+   unpacking an uncompressed CRUSH archive.
+
+   USAGE:    UNDO crushname
+             UNDO2 crushname
+
+
+   UNDO.EXE  is 3.8k and ignores any path information. UNDO2.EXE is 4.3k  and
+   will  also  re-construct embedded  paths. These programs can  be  included
+   within  distribution  archives  that  hold CRUSH archives,  providing  the
+   smallest  package that will allow UNCRUSHing without additional  programs.
+   Ideally  UNDO.EXE  and  a  CRU  archive could be embedded  inside  an  SFX
+   archive, e.g. using LHA:
+
+        CRUSH -l DEMO ! *.DOC
+        LHA A DEMO UNDO.EXE
+        LHA S DEMO
+
+   The "!" parameter above is the file "!" which contains a message displayed
+   when  the  archive DEMO.EXE is  run.  This can contain details of  how  to
+   uncompress  the  CRUSH archive, e.g.  "Unpack the CRUSH archive by  typing
+   UNDO DEMO.CRU after the DEMO.EXE executable has finished decompression."
+
+   The  user  may  choose  to  rename  UNDO2.EXE to UNDO.EXE  or  some  other
+   convenient  name.  Note  that  distribution of CRUSH archives  requires  a
+   distribution licence (see REGISTER.DOC).
+
+
+   __________________________________________________________________________
+   Configuration                                                      Page 14
+
+
+   __________________________________
+   Configuration of CRUSH and UNCRUSH
+
+   CRUSH  and  UNCRUSH  can  be  configured using environment  variables,  as
+   follows:
+
+   The CRUSH variable:
+
+        This  is particularly important if you decide not to use the  default
+        PKZIP used by CRUSH e.g.
+
+             SET CRUSH=-j
+
+        will force CRUSH to always use ARJ by default. Other options can also
+        be added e.g.
+
+             SET CRUSH=-jCc
+
+        will  also  force  the  normal  display  colour and  always  force  a
+        comparison between ARJ and CRUSH when creating a CRUSH file.
+
+
+   The UNCRUSH variable:
+
+        This is less critical, but an example usage might be:
+
+             SET UNCRUSH=-2e
+
+        which  would use the 24 hour clock and also allow UNCRUSH to be  used
+        for uncompressing ordinary PKZIP, ARJ, LHA, ZOO, HA and UC archives.
+
+
+   Using CRUSH with other archivers:
+
+        The  user can allow CRUSH to use other archivers by configuring using
+        environment variables, as follows:
+
+             SET CRADD=pkzip -ex %s %s %s} nul
+             SET CRMOV=pkzip -mex %s %s} nul
+             SET CREXT=.ZIP
+
+        These examples show how PKZIP would be added to CRUSH, if it were not
+        already  supported.  This  overrides  the default archiver.  The  "}"
+        symbol  is  replaced  by  ">"  when running. The user  can  use  this
+        facility to change the default options used by the archiver they wish
+        to use, e.g. to turn off full compression etc.
+
+        UNCRUSH is configured in much the same way, as follows:
+
+             SET CRUN=pkunzip %s
+
+
+   Environment  variables should be set in your AUTOEXEC.BAT, otherwise  they
+   will be lost next time the system is re-booted.
+
+   __________________________________________________________________________
+   Technical Details                                                  Page 15
+
+
+   This  information is only of interest to 3rd party developers who may want
+   to provide support for CRUSH archives.
+
+   __________________________________
+   Structure of CRUSH file (.CRU)
+
+   Address Length in Bytes   Description
+
+   000000  14               CRUSH v1.8
+   00000E  2                Chksum
+   000010  2                Number of paths (only 0-255 supported)
+   000012  2                Number of files
+   000014  2                Reserved
+   000016  4                Totalsize of files + header length(26)
+   00001A  "totalsize"      Data
+
+   ; directory held at offset "Totalsize of files + header length(26)"
+   000000  1                Path number
+   000001  1                Attribute
+   000002  2                Time
+   000004  2                Date
+   000006  4                Size
+   00000A  13               Name
+   000017  1                Reserved
+   (above repeated "Number of files" times)
+
+   ; "n" Paths
+   path1                    Each terminated by NULL
+   path2
+   ..
+
+   ; Archive comment
+   comment                  Terminated by NULL
+
+   __________________________________
+   Structure of CRUSH fast Index (.CRI)
+
+   As CRU but with Totalsize field set to 0 + Headerlen(26)
+
+   000016  4                Header length(26)
+
+
+

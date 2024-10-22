@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,407)
+# Unsupported File Formats (2,414)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (218)
+## Archive (221)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -17,7 +17,7 @@ Family/Format | Name | Extensions | Notes
 [archive/acornCPMDiskImage](https://discmaster.textfiles.com/search?formatid=acornCPMDiskImage) | Acorn CP/M disk image | .dsk | 
 [archive/actionPresentation](https://discmaster.textfiles.com/search?formatid=actionPresentation) | Action! presentation | .acp .act .sta | 
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?formatid=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
-[archive/adysGLUEPacked](https://discmaster.textfiles.com/search?formatid=adysGLUEPacked) | Ady's GLUE Packed) | .exe | 
+[archive/adysGLUEPacked](https://discmaster.textfiles.com/search?formatid=adysGLUEPacked) | Ady's GLUE Packed | .exe | 
 [archive/afterlifeGameData](https://discmaster.textfiles.com/search?formatid=afterlifeGameData) | Afterlife game data | .000 | 
 [archive/afxCompressedData](https://discmaster.textfiles.com/search?formatid=afxCompressedData) | AFX compressed data |  | 
 [archive/aixBackupRestore](https://discmaster.textfiles.com/search?formatid=aixBackupRestore) | AIX/BFF backup/restore | .img .bff | 
@@ -47,7 +47,7 @@ Family/Format | Name | Extensions | Notes
 [archive/causeWayCompressorPacked](https://discmaster.textfiles.com/search?formatid=causeWayCompressorPacked) | CauseWay Compressor Packed | .exe | 
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?formatid=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
 [archive/cExeCompressedWin32Executable](https://discmaster.textfiles.com/search?formatid=cExeCompressedWin32Executable) | CExe compressed Win32 executable | .exe | 
-[archive/ciphatorProtectedV46](https://discmaster.textfiles.com/search?formatid=ciphatorProtectedV46) | cIPHATOR Protected | .exe | 
+[archive/ciphatorProtected](https://discmaster.textfiles.com/search?formatid=ciphatorProtected) | cIPHATOR Protected | .exe | 
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
 [archive/colourGenieTapeImage](https://discmaster.textfiles.com/search?formatid=colourGenieTapeImage) | Colour Genie tape image | .cas | 
 [archive/comPackPacked](https://discmaster.textfiles.com/search?formatid=comPackPacked) | COM-Pack Packed | .com | 
@@ -59,6 +59,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cpcPlusCartridgeImage](https://discmaster.textfiles.com/search?formatid=cpcPlusCartridgeImage) | CPC Plus Cartridge image | .cpr | 
 [archive/cackrightPacked](https://discmaster.textfiles.com/search?formatid=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
+[archive/crypackProtected](https://discmaster.textfiles.com/search?formatid=crypackProtected) | CRYPACK Protected | .exe | 
 [archive/cryptLightShowProtected](https://discmaster.textfiles.com/search?formatid=cryptLightShowProtected) | Crypt Light Show Protected | .exe | 
 [archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE Proterctd | .exe | 
 [archive/darkstopProtected](https://discmaster.textfiles.com/search?formatid=darkstopProtected) | DaRKSToP Proterctd | .exe | 
@@ -71,9 +72,10 @@ Family/Format | Name | Extensions | Notes
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?formatid=emmaCompress) | EmmaCompress |  | 
-[archive/exeManagerProtected](https://discmaster.textfiles.com/search?formatid=exeManagerProtected) | EXE Manager protected | .exe | 
+[archive/exeManagerProtected](https://discmaster.textfiles.com/search?formatid=exeManagerProtected) | EXE Manager Protected | .exe | 
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?formatid=exePackerPacked) | EXE Packer Packed |  | 
 [archive/exe32PackPacked](https://discmaster.textfiles.com/search?formatid=exe32PackPacked) | Exe32Pack Packed | .exe | 
+[archive/exetoolsProtected](https://discmaster.textfiles.com/search?formatid=exetoolsProtected) | EXETOOLS Protected | .exe | 
 [archive/ezipPacked](https://discmaster.textfiles.com/search?formatid=ezipPacked) | EZip Packed | .exe | 
 [archive/finearCompressedData](https://discmaster.textfiles.com/search?formatid=finearCompressedData) | FINEAR compressed data | _ | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
@@ -117,6 +119,7 @@ Family/Format | Name | Extensions | Notes
 [archive/maxisGameDataArchive](https://discmaster.textfiles.com/search?formatid=maxisGameDataArchive) | Maxis game data archive | .package | 
 [archive/mbpSHRINKPacked](https://discmaster.textfiles.com/search?formatid=mbpSHRINKPacked) | mbp SHRINK Packed | .exe | 
 [archive/mechWarrior2GameData](https://discmaster.textfiles.com/search?formatid=mechWarrior2GameData) | MechWarrior 2 game data | .prj | 
+[archive/megalitePacked](https://discmaster.textfiles.com/search?formatid=megalitePacked) | MEGALITE Packed | .exe | 
 [archive/messProtected](https://discmaster.textfiles.com/search?formatid=messProtected) | Mess Protected | .exe | 
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard/Revolution Stack | .rev | [4 sample files](https://sembiance.com/fileFormatSamples/archive/metaCardStack/)
 [archive/mewPacked](https://discmaster.textfiles.com/search?formatid=mewPacked) | Mew Packed | .exe | 
@@ -138,7 +141,7 @@ Family/Format | Name | Extensions | Notes
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?formatid=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 
 [archive/nosPackerPacked](https://discmaster.textfiles.com/search?formatid=nosPackerPacked) | NOS Packer Packed | .exe | 
 [archive/nsPacKPacked](https://discmaster.textfiles.com/search?formatid=nsPacKPacked) | NsPacK Packed |  | 
-[archive/ntShellProtected](https://discmaster.textfiles.com/search?formatid=ntShellProtected) | NTShell protected | .exe | 
+[archive/ntShellProtected](https://discmaster.textfiles.com/search?formatid=ntShellProtected) | NTShell Protected | .exe | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?formatid=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
 [archive/oricDisk](https://discmaster.textfiles.com/search?formatid=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 [archive/oricTape](https://discmaster.textfiles.com/search?formatid=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
@@ -164,7 +167,7 @@ Family/Format | Name | Extensions | Notes
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
-[archive/protectIt2Encrypted](https://discmaster.textfiles.com/search?formatid=protectIt2Encrypted) | ProtectIt/2 Encrypted | .zie | 
+[archive/protectIt2Protected](https://discmaster.textfiles.com/search?formatid=protectIt2Protected) | ProtectIt/2 Protected | .zie | 
 [archive/protectorProtected](https://discmaster.textfiles.com/search?formatid=protectorProtected) | protector Protected | .exe | 
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?formatid=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
@@ -304,7 +307,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (129)
+## Document (130)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -419,6 +422,7 @@ Family/Format | Name | Extensions | Notes
 [document/storybookWeaver](https://discmaster.textfiles.com/search?formatid=storybookWeaver) | Storybook Weaver Story | .swd .sts | 
 [document/sureThingCDLabelerDocument](https://discmaster.textfiles.com/search?formatid=sureThingCDLabelerDocument) | SureThing CD Labeler document | .std .dsn | 
 [document/symantecDOSSoftwareHelp](https://discmaster.textfiles.com/search?formatid=symantecDOSSoftwareHelp) | Symantec DOS software help | .hlp | 
+[document/textExeLRC](https://discmaster.textfiles.com/search?formatid=textExeLRC) | [TextExe (LRC Computing)](http://fileformats.archiveteam.org/wiki/TextExe_(LRC_Computing)) | .exe | [2 sample files](https://sembiance.com/fileFormatSamples/document/textExeLRC/)
 [document/theDataMasterDataBase](https://discmaster.textfiles.com/search?formatid=theDataMasterDataBase) | The DataMaster Data Base | .tdb | 
 [document/tomeRaider](https://discmaster.textfiles.com/search?formatid=tomeRaider) | TomeRaider e-book/document | .tr | 
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?formatid=trueBASICCompiledCode) | True BASIC compiled code |  | 
@@ -894,7 +898,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,450)
+## Other (1,453)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1205,6 +1209,7 @@ Family/Format | Name | Extensions | Notes
 [other/compiledMSVCResources](https://discmaster.textfiles.com/search?formatid=compiledMSVCResources) | Compiled MSVC Resources | .resources | 
 [other/compiledXKeyMap](https://discmaster.textfiles.com/search?formatid=compiledXKeyMap) | Compiled X KeyMap | .xkm | 
 [other/componentConfigurationFile](https://discmaster.textfiles.com/search?formatid=componentConfigurationFile) | Component Configuration File | .ccf | 
+[other/concurrentDOSSerialTerminalConfiguration](https://discmaster.textfiles.com/search?formatid=concurrentDOSSerialTerminalConfiguration) | Concurrent DOS Serial Terminal Configuration | .dat | 
 [other/calCompressedData](https://discmaster.textfiles.com/search?formatid=calCompressedData) | Confusion and Light Compressed Data | .cal | 
 [other/coolEditAuditionSession](https://discmaster.textfiles.com/search?formatid=coolEditAuditionSession) | Cool Edit / Audition Session | .ses | 
 [other/coolPageProject](https://discmaster.textfiles.com/search?formatid=coolPageProject) | Cool Page Project | .cpg | 
@@ -1871,6 +1876,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcpArchiveMetadata](https://discmaster.textfiles.com/search?formatid=pcpArchiveMetadata) | PCP archive metadata | .meta | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?formatid=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?formatid=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
+[other/personalPearlDataBase](https://discmaster.textfiles.com/search?formatid=personalPearlDataBase) | Personal Pearl data base | .d00 .d01 | 
 [other/pgaTourVideoAnimation](https://discmaster.textfiles.com/search?formatid=pgaTourVideoAnimation) | PGA Tour Video Animation file format | .van | 
 [other/pgpKeyRing](https://discmaster.textfiles.com/search?formatid=pgpKeyRing) | PGP Key Ring | .key .pgp | 
 [other/pgpRSAEncryptedSessionKey](https://discmaster.textfiles.com/search?formatid=pgpRSAEncryptedSessionKey) | PGP RSA encrypted session key | .pgp | 
@@ -2092,6 +2098,7 @@ Family/Format | Name | Extensions | Notes
 [other/subZeroGameFileMap](https://discmaster.textfiles.com/search?formatid=subZeroGameFileMap) | SubZero Game File map | .gmf | 
 [other/suncomF15EEagleKeysConfig](https://discmaster.textfiles.com/search?formatid=suncomF15EEagleKeysConfig) | Suncom F-15E Eagle Keys config | .key | 
 [other/sunVoxSynthesizer](https://discmaster.textfiles.com/search?formatid=sunVoxSynthesizer) | SunVox Synthesizer | .sunsynth | 
+[other/superNintendoROM](https://discmaster.textfiles.com/search?formatid=superNintendoROM) | Super Nintendo ROM | .sfc .smc | 
 [other/superSolversGizmosGadgetsPlayers](https://discmaster.textfiles.com/search?formatid=superSolversGizmosGadgetsPlayers) | Super Solvers: Gizmos and Gadgets! players | .dat | 
 [other/superZZTFile](https://discmaster.textfiles.com/search?formatid=superZZTFile) | Super ZZT File | .szt | 
 [other/superbaseForm](https://discmaster.textfiles.com/search?formatid=superbaseForm) | Superbase Form | .sbv | 

@@ -1,0 +1,180 @@
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³                    CRUSH Compression Tool v1.8                     ³
+³                 SEE BELOW FOR PRODUCT INFORMATION                  ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³           This is a VENDINFO Product Information Record            ³
+³                                                                    ³
+³ This record is a means of conveying information about a software   ³
+³ product from the author to distributors and users.  It contains a  ³
+³ normal, "human-readable" section (you're reading it now), followed ³
+³ by a compressed data record.  The data record contains a great     ³
+³ deal of information in a form useable by automated tools.  This    ³
+³ allows BBSes, disk vendors, etc. to test automatically for         ³
+³ permission to distribute, and to automatically extract product     ³
+³ information for use in BBS files databases, vendor catalogs, etc.  ³
+³                                                                    ³
+³ The VENDINFO file standard is published and is freely useable.     ³
+³                                                                    ³
+³ The VENDINFO toolset includes a free end-user viewer, processing   ³
+³ tools for use by distributors (BBSes, shareware disk vendors,      ³
+³ etc.), and the editor used by author/publishers to produce these   ³
+³ records.  These tools are either free or very-low cost shareware.  ³
+³ The toolset can be obtained from many sources, including the       ³
+³ originators of VENDINFO:                                           ³
+³                                                                    ³
+³ Rams' Island Software   Voice: 303-841-2848  CompuServe: 76244,324 ³
+³ 7644 E. Lakecliff Way     BBS: 303-841-6269     FidoNet: 1:104/333 ³
+³ Parker, CO 80134-5904 USA                          RIME: RAMSISLE  ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+VENDINFO standard v1.00, produced by VendEdit v1.00, 7-Mar-1995
+
+===== Product Information ==============================
+   Product:             CRUSH Compression Tool
+   Version:             1.8
+   Version Date:        28-Feb-1995
+   Product Type:        Software
+   Basic Distribution Policy (see License, below, for details):
+      Shareware, freely distributable by all channels
+
+   Product Description: CRUSH v1.8 - <ASP> Super-compressor for DOS. 
+                        Fed up with limited compression performance 
+                        of Stacker, PKZIP, UC2, ZOO, ARJ and LHA? 
+                        CRUSH will usually give 5%-50% improved 
+                        compression over any other DOS compression 
+                        tool, & yet allows the user to continue using
+                        the archiver already in use. CRUSH is fast & 
+                        the ideal choice for users keen to save disk 
+                        space. Too good to be true? No! Try it! New! 
+                        No 1000 file limit. Registration $29+
+
+   Category:            File archiving & compression
+   Keywords:            CRUSH PKZIP ZIP UC2 ARJ LHA HA ZOO POCKETD 
+                        COMPRESS
+   Required Packages:   CRUSH18
+   This Package:        CRUSH18
+
+   Required Configuration
+      Processor Family: Intel 80x86 (minimum 8086/8088)
+      Minimum OS:       MS-DOS 2.0
+      Standard RAM:     80K
+      Hard Drive Space: 35K
+      Req'd Software:   One of PKZIP, LHA, UC2, ARJ, ZOO or HA; or 
+                        any user-specified archiver
+
+   Orders:
+      Address:          PocketWare
+                        PO Box 2369
+                        Hendon
+                        London NW4 1NR
+                        England
+
+   Support:
+      Address:          PocketWare
+                        PO Box 2369
+                        Hendon
+                        London NW4 1NR
+                        England
+      Phone:            +44 181 203 3731
+      CompuServe:       100031,3537
+      Internet:         100031.3537@compuserve.com
+
+
+===== Information for Users ("READ-ME") ================
+
+This package contains the CRUSH Super-compressor v1.3 by PocketWare.
+This document contains only a brief description of the package and its
+features, along with instructions for its installation.The user should
+refer to REGISTER.DOC for details of ordering by VISA etc. and examine
+README and MANUAL.DOC for details of how to use the program.
+
+
+===== Packing List =====================================
+
+As released by the author or publisher, this package contained the
+following files in addition to this VENDINFO.DIZ:
+
+        Filename      Size     Date       Time     CRC32
+       README.       13320  28-Feb-1995  01:00a   B04700C9
+       README.1ST      360  28-Feb-1995  01:00a   12850A5E
+      INSTALL.BAT      485  28-Feb-1995  01:00a   C69D3A73
+      FILE_ID.DIZ      446  28-Feb-1995  01:00a   B883D135
+      HISTORY.DOC     1644  28-Feb-1995  01:00a   DA6A9BBE
+       MANUAL.DOC    44616  28-Feb-1995  01:00a   9793789E
+     QUESTION.DOC     6916  28-Feb-1995  01:00a   B3CD4895
+     REGISTER.DOC     9287  28-Feb-1995  01:00a   F2BEB541
+        CRUSH.EXE    26412  28-Feb-1995  01:00a   B3194E6A
+      UNCRUSH.EXE    10236  28-Feb-1995  01:00a   99F44E0E
+        ORDER.FRM     1859  28-Feb-1995  01:00a   C673525A
+     PRODUCTS.OTH     1737  28-Feb-1995  01:00a   A5C322BE
+
+
+===== Installation =====================================
+
+The installation procedure for CRUSH is very simple.  The package
+includes a program, "INSTALL.BAT", which copies all the files to a
+specified directory. You will need 114k for all the distribution files
+or about 35k for the basic essential CRUSH and UNCRUSH files.
+
+Once you've complete the installation, you should consult the document
+README.1ST.
+
+
+===== Warranty =========================================
+
+LIMITED WARRANTY
+
+THIS SOFTWARE AND MANUAL ARE PROVIDED FOR EVALUATION ONLY, ON AN "AS
+IS" BASIS.  PocketWare DISCLAIMS ALL WARRANTIES RELATING
+TO THIS SOFTWARE, WHETHER EXPRESSED  OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR
+A PARTICULAR PURPOSE. NEITHER PocketWare NOR ANYONE ELSE
+WHO HAS BEEN INVOLVED IN THE CREATION, PRODUCTION, OR DELIVERY OF
+THIS SOFTWARE SHALL BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, OR
+INCIDENTAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE SUCH
+SOFTWARE, EVEN IF PocketWare HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES OR CLAIMS.  THE PERSON USING THE SOFTWARE
+BEARS ALL RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE.
+
+
+===== License for Use and Distribution =================
+
+TRIAL USE LICENSE
+
+PocketD Plus is NOT a public domain program.  It is copyrighted by
+PocketWare.  This software and accompanying documentation are
+protected by United States copyright law and also by international
+treaty provisions.
+
+PocketWare grants you a limited license to use this software
+for evaluation purposes for a period not to exceed thirty days.  If you
+continue using this software after the thirty-day evaluation period,
+you MUST make a registration payment to PocketWare.
+
+You may not use, copy, rent, lease, sell, modify, decompile,
+disassemble, otherwise reverse engineer, or transfer the licensed
+program except as provided in this agreement.  Any such unauthorized
+use shall result in immediate and automatic termination of this license.
+All rights not expressly granted here are reserved to PocketWare.
+
+U.S. Government Information:  Use, duplication, or disclosure by the
+U.S. Government of the computer software and documentation in this
+package shall be subject to the restricted rights applicable to
+commercial computer software as set forth in subdivision (b)(3)(ii) of
+the Rights in Technical Data and Computer Software clause at
+252.227-7013 (DFARS 52.227-7013).  The Contractor/manufacturer is
+PocketWare, P.O. Box 2369, Hendon, London NW4 1NR, England.
+
+
+
+===== Compressed Data Record Follows ===================
+
+PK
+   $wg—£¢gU  ô(  	   VENDDATA.y	
+			N	%	5	&?&	$O	?		//	Ï		o	¯	/	ÿ¯	ÿ	¯(	W]''÷—g‘òsòr£ç?„‚ê0-^8ÿ¾ß‰è Çºï-GÒ'XĞã+F`rfG®GcªpM©,ouûYëºCõKî;Ôx¹ë¿z½ŞO?ö÷÷#å˜ú?÷%ıútÖ"¾%hk9cõÊY{.W*ë29%,µ¥<§^V=¡A\âBL½NnÀıFı‡•uüÕvj~2ÿƒRTo„óëåÊ[5s×ëòÓ¾ §7ªÿÏíW—3åœÚ¹ï‰£ñôkòû5^Skúo„Z^cø‹²£äÂîğG‰V4ü¡åäüs«bÜ¸ñáå'}øñ£±ü·Àñ¡¯à&ú«şrå'S*…lï^î±>åÜjo4ÖÏF²2¸è'È,q‡ˆa£f…zÒ±ï¿<—Yãi‡inÅ´zqˆ#VGcä“ßbø‰RŸPİ¢Âh<áJìŸø¦OúkÒü¡ø±~Z­~›­r-ëmş\j©ë¾/ï¬âú›×õ¶êÇüÓÏyú±µ¶£úÎı×R×ƒ^)¥½óøŞ|çS°W9âh<ë¨ö¹UÚºVunÆûÓR~aÿŸ»ÆıY‹õOqGcYuÜO®döK;æia·é{0ºÅ1ã:ú-ï'®åŸ.éÊ²ÆœùšNùí~OÔõÕí÷Úiá¡:e8#û´Nı²NX—„¶¬ËëF|iÒ·Fë´êåûä·o›0/Ò7	]È]İ!>ºÃÆê®99İ	<O¿±—çŸÜî_q[œ3¶obì-p0¹ur "ªÍ¬ƒ,½.çŸ‘øgòÎBYĞql<Õ¶ÚgÍºÂ±şùÛİhJñWzîÅçá:'›¨àŸ¿æG+êÿL[ï©¹¿}?Ò\Ûu©¾ÿz·Órœ»PŞÓÖÅêS†j.L‰OJ]sË…Hê¹§ãÕç#$ó)u²ÓVÅn-x–”ú¬ãUf³”ò>Ğ>§¸¾LZE°kæí–6üóZ^œ­Ëh\=§“&ÆñÜçõ//”òa”ÿ9ıı©y×í™2IÛ"•–ô™|û)%/BKK¼5Û¨%ÃQçg
+)÷U«àİ‚ÀÙ‚DPcÍ¤2{œù„BÃ†/9İpXó^T‡¾¦ƒ¨º’,ˆË*‡S&#ÊÎ);¬ìPÄÕ”=¨—™Q nsåÕôÃœ¿4WÄä+W~^#.Áğ8ì<Üƒä	×.£ÚÄ¥Kğ®i#§0Ìü¬‚_˜F#;¿^Gõ¥§ÿìußÏyİÈ1äyæ¹<—óc¬!ÿn§´˜gímUéqQVûs3ÛÿÊÍæ™˜¯È›3ßğÿÙ;f»ıK®ßíu~§Ù¹È6“9§	·ÀÉÛ¹†V§‰8²xƒÌË))¿É¯Oñ€È-p€Â'=æ#­“u,Uu\n¥´À-­Ã{ˆÌ8	îzfv~X„ÏQÌ‰t¤¼ºåE)/äá/8æš)­ 
+´´Åä7{¿NEz0ÿU:èõ×5ôOä':Æ¹E¤¼¶NÔºÔ¿W“k©\¬W:>!+¸÷=^øA –[X0ÈÎ	C‰ÖÚZŞ&]âs¶Íë<ÕkËQ‘ ´(§$dÂí…ñ„…hæÈö>îäÀwÊ-p"×ƒ2bBƒÙbY²nãáÎ«2dr›×/iv~·¤ui²âœ¹Ü¡æ¡7¯·À‘¨§ÂH'üŸ§sÅ>¥Ì‡µ<ö5H¬Ğ#ä†ü÷áØğ×rm™>şÀÇøøÌ„…çvVOKRÜ@è!
+³ÔuæĞÏ?o«‘’LCÖNûj—º2v‘áï4a¯O}‘ëg:ÁÎó¹$ÊråñPØ³:…¿“Ùå'Ê[âO¿´´3¸dÈU[Šìn»3èvŠ;&s¥äå.P*s]öª<Ç™R¦Ïæ9;·À@Á±ÒÈÈõ"I:3Gá™éçô-éŞi5{-I:¿B0_·áÏ
+ı7›İNkÀ4Ù~Œj ¯–n·İ´›Móõ5h^A«Û”vŠÛ&s%&[%\tÔX8>¾€M}qêğÇx{ÚQNù±zHo¡¡YA¼û/ÜËîåbôıßl·†,Á"ê¿q.)Œ ¦¸¤Vqi«ù#¹ş¶W† ¾ èEs-Ešz€où˜íâ«Wrµ»áıV÷’öMFl—şö% àPK
+ 
+   $wg—£¢gU  ô(  	                 VENDDATA.PK     *   |    

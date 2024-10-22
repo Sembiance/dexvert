@@ -1,0 +1,133 @@
+   This is a list of frequently asked questions about CRUSH.
+   The following are covered:
+
+   1.  Can CRUSH archive across multiple floppies?
+   2.  I run out of temporary disk space while compressing, what can I do?
+   3.  I use Stacker (or DoubleSpace). How can I use CRUSH?
+   4.  I find that my archives are corrupt. What can I do?
+   5.  I want to use a different archiver to one in the list provided?
+   6.  Can I add files to existing CRUSH archives?
+   7.  Does CRUSH support normal PKZIP options?
+   8.  CRUSH  pauses  after  1000  files  to say it will  generate  multiple
+       archives. What does this mean?
+   9.  What does the auto-name generating option "[]" do with multi-archives?
+   10. If CRUSH runs UC it generates an error. What is wrong?
+   11. CRUSH uses enviroment variables. Why does it not use TEMP?
+   12. The options I pass directly to the archiver do not work. What is wrong?
+
+
+   1.  Can CRUSH archive across multiple floppies?
+
+        CRUSH  does  not directly support  this facility as it  cannot  know
+        where  file boundaries are to  be made until the secondary  archiver
+        has  already  run.  However  the  user can easily do this  by  first
+        creating  the  archive(s)  on  the  hard disk and then  using  their
+        archiver to pack them to floppy, e.g.
+
+             CRUSH MYFILES
+             PKZIP -& -e0 A:MYFILES MYFILES.ZIP ANYOTHER.ZIP
+
+        This will be fast as PKZIP will simply break-up MYFILES.ZIP (and any
+        other ZIPs) without attempting further compression.
+
+   2.  I run out of temporary disk space while compressing, what can I do?
+
+        You can use the -s "minimise disk space option" to allow saving when
+        using  -f (see item 11 below). A more radical appoach is to use  -Ln
+        to limit the number of files per archive, e.g.
+
+             CRUSH -L100 SAVE
+
+        This  will  create  archives  with  names SAVE.ZIP,  SAVE01.ZIP  and
+        SAVE02.ZIP  etc. Splitting a  compression into 10 files will  reduce
+        the  temporary space required by a factor of 10. These can be  later
+        uncompressed  using a command such as UNCRUSH SAVE*.ZIP (Note:  Only
+        UNCRUSH v1.8 or later supports wildcards in archive names).
+
+   3.  I use Stacker (or DoubleSpace). How can I use CRUSH?
+
+        Version  1.8  has added the  -U option to help here. PKZIP  provides
+        poor  returns for Stacker  users, but CRUSH can provide  substantial
+        saving  by  simply  creating  CRU  files without using  a  secondary
+        compression program.
+
+   4.  I find that my archives are corrupt. What can I do?
+
+        PKZIP can sometimes create corrupt archives, even though it appeared
+        to  run normally. PKWARE provides PKZIPFIX to repair such  failures.
+        You  should check the integrity of archives created using PKZIP when
+        archiving  critical  files. There  have been no known  instances  of
+        CRUSH creating corrupt CRU files.
+
+   5.  I want to use a different archiver to one in the list provided?
+
+        Version  1.8 allows the user to configure their own chosen  archiver
+        using envionment variables. See MANUAL.DOC for details.
+
+   6.  Can I add files to existing CRUSH archives?
+
+        CRUSH  does  not  support  the incremental adding to  archives.  The
+        archive must be completely re-created.
+
+   7.  Does CRUSH support normal PKZIP options?
+
+        Many of PKZIP's options are directly supported by CRUSH. In addition
+        CRUSH provides more versatile date options and the ability to choose
+        files  on-the-fly.  These  and  other extensions are listed  in  the
+        README file.
+
+   8.  CRUSH  pauses  after  1000  files  to say it will  generate  multiple
+       archives. What does this mean?
+
+        CRUSH  limits the user to  1000 files per archive. After that  CRUSH
+        will generate numerically sequenced archives, e.g. the CRUSH command
+        "CRUSH MYDATA"  might create MYDATA.ZIP, MYDATA01.ZIP,  MYDATA02.ZIP
+        etc.  If more than 99 archives are created, then the next name  will
+        be  the truncated MYDAT100.ZIP etc.  This limits the user to  10,000
+        archives,  finally giving the name MYDA9999.ZIP in this instance. If
+        you  expect to generate more than 100 archives (100,000 files), then
+        you  should ensure that your archive name does not contain  trailing
+        digits in its name, otherwise an early archive may overwrite a later
+        one.
+
+   9.  What does the auto-name generating option "[]" do with multi-archives?
+
+        This  will force the last 4  digits of the name to start with  0000.
+        This will reduce the uniqueness of the name, but archives created on
+        different days will still guarantee to have different names.
+
+   10. If CRUSH runs UC it generates an error. What is wrong?
+
+        UC2  requires a full 530k of DOS memory to run, consequently  unless
+        you  have 610k of DOS memory free then CRUSH cannot be run with  it.
+        This  can be overcome by using the US (Ultra-stealth) program to run
+        it, e.g. us crush -u save.
+
+   11. CRUSH uses enviroment variables. Why does it not use TEMP?
+
+        CRUSH  can  require substantial  temporary disk space, but  this  is
+        added  to  whatever disk  space  the archiver calls uses.  For  this
+        reason  it  is  not  necessarily  wise to encourage  CRUSH  and  the
+        archiver  to  use the same drive.  A simple solution to this  is  to
+        force  CRUSH to use the current directory, thus allowing the user to
+        force  CRUSH  to  use  a  different temporary disk  drive  than  the
+        archiver. The other consideration is that temporary drives are often
+        directed  to small ram drives,  which would almost certainly be  too
+        small for CRUSH to use (see item 2 above).
+
+   12. The options I pass directly to the archiver do not work. What is wrong?
+
+        CRUSH  allows  the  user  to  pass options directly through  to  the
+        archiver being run, but this does not guarantee that it will do what
+        you  might  expect. For  example  the ARJ and PKZIP  file  splitting
+        operations cause problems because CRUSH fails to predict the archive
+        name  being  created.  CRUSH  cannot  realistically be  expected  to
+        accomodate  the vast number of options already supplied, and  future
+        options  to  be added,  to  the archivers it supports. Use  of  this
+        facility should be confined to experienced users only.
+
+        The  user  can use the option  -U to prevent CRUSH from running  the
+        archiver,  thus  allowing the  user to completely control how  their
+        chosen  archiver  is run. In  this case CRUSH simply creates  a  CRU
+        file.
+

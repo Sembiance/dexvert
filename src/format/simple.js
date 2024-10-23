@@ -156,6 +156,8 @@ export default
 		databenchData                   : {name : "Databench Data", magic : ["Databench data"]},
 		db2Bind                         : {name : "DB2 Bind", ext : [".bnd"], magic : ["DB2 Bind"]},
 		dBaseLabelDesign                : {name : "dBase Label Design", ext : [".lbl"], magic : ["dBASE IV Label design"]},
+		dBaseQuery                      : {name : "dBase Query", ext : [".qbe"], magic : ["dBASE IV Query", "dBASE 5.0 Query"], weakMagic : true},
+		dBaseUpdate                     : {name : "dBase Update", ext : [".upd"], magic : ["dBASE IV Update", "dBASE 5.0 Update"], weakMagic : true},
 		deluxePrint                     : {name : "Deluxe Print Document/Project", ext : [".bnr2", ".lbl2", ".lhd2", ".sgn2", ".bnnr", ".labl", ".lthd", ".sign"], magic : ["Deluxe Print"]},
 		developerStudioProject          : {name : "Microsoft Developer Studio Project", ext : [".mdp"], magic : ["Microsoft Developer Studio Project"]},
 		directorSTXT                    : {name : "Director STXT", ext : [".stxt"], magic : ["Director STXT"], weakMagic : true},

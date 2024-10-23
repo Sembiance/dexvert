@@ -13,7 +13,7 @@ export class msCompound extends Format
 		"Creative Witer document", "3D Studio Max Material Library", "Windows Movie Maker project", "Roxio/MGI PhotoSuite Album", "Roxio/MGI PhotoSuite Project", "Avery DesignPro Label design", "Micrografx Simply 3D project", "Micrografx clipart index",
 		"WordPerfect Slide Show", "ArcGIS Map project", "JewelCase Maker project", "Corel Gallery", "Serif PhotoPlus Picture (OLE)", "Neato MediaFACE label template", "EMB Wilcom Design embroidery file", "Melco DesignShop Project",
 		"Perfect Keyboard macro set", "CorelCAD Drawing", "CorelCAD Drawing Template", "CorelCAD Custom Views", "Corel Flow Smart Library", "MPLAB IDE Workspace", "Crystal Reports output file (Report)", "Minitab Worksheet (V12 1998)",
-		"Minitab Portable Worksheet", "Windows 7 Jump List", "Microsoft RSS Feeds Store", "Combit List and Label printer setup file", "Visual Pinball Table", "AutoRoute Export file",
+		"Minitab Portable Worksheet", "Windows 7 Jump List", "Microsoft RSS Feeds Store", "Combit List and Label printer setup file", "Visual Pinball Table", "AutoRoute Export file", "Lotus Approach (generic)",
 		/^fmt\/(877|916|971|1213|1303|1360|1362|1431|1432|1648|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these

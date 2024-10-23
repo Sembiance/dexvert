@@ -24,9 +24,11 @@ export class rawPartition extends Format
 		}
 
 		const isHFS = dexState.hasMagics(HFS_MAGICS);
-		const converters = [`uniso${isHFS ? "[hfs]" : ""}`];
+		const converters = [];
 		if(isHFS)
-			converters.push("deark[module:hfs]");
+			converters.push("uniso[hfsplus]", "uniso[hfs]", "deark[module:hfs]");
+		else
+			converters.push("uniso");
 		converters.push("sevenZip");
 		return converters;
 	};

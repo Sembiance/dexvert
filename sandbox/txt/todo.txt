@@ -44,6 +44,9 @@
 	https://game-viewer.org/plugins.php
   I don't think it has an 'identification' capability, so I'd have to handle that on the dexvert side
 
+* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
+  Maybe see if I can just 'run' them and install to c:\out or something
+
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
 * See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools

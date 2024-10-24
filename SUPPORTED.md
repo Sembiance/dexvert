@@ -1,4 +1,4 @@
-# Supported File Formats (2,619)
+# Supported File Formats (2,622)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -89,7 +89,7 @@ archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(
 archive | com RLE packer Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [deark](https://entropymine.com/deark/) [DirMaster](https://style64.org/dirmaster) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreDiskImage/)
-archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [deark](https://entropymine.com/deark/) [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreTapeImage/)
+archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [DirMaster](https://style64.org/dirmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | COMPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/compackPacked/)
 archive | [Compact Compressed (Unix)](http://fileformats.archiveteam.org/wiki/Compact_(Unix)) | .c | [ancient](https://github.com/temisu/ancient_format_decompressor) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/compact/)
 archive | [Compaq Quick Release Sector Transfer Disk Image](http://fileformats.archiveteam.org/wiki/Quick_Release_Sector_Transfer) |  | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/qrst/)
@@ -1911,7 +1911,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (682)
+## Text (685)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -2082,7 +2082,7 @@ text | EMBL sequence data | .embl .emb .dna |  | [1 sample file](https://sembian
 text | Emergency 3D model | .v3o |  | 
 text | eMule Web Interface template | .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/eMuleWebInterfaceTemplate/)
 text | Enriched Text Document |  |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
-text | ESRI Arc/Info Export | .e00 .x00 |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
+text | ESRI Arc/Info Export | .e00 .x00 |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
 text | ESRI Arc/View Project | .apr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
 text | ESRI ArcInfo DAT File (External) | .dat |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExternalDAT/)
 text | ESRI Shapefile Projection | .prj |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/esriShapefileProjection/)
@@ -2204,6 +2204,7 @@ text | KDE config file | .kdelnk |  | [14 sample files](https://sembiance.com/fi
 text | KDE KXML GUI RC | .rc |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeKXMLGUIRC/)
 text | KeyNote notes | .knt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/keyNoteNotes/)
 text | KeyTronic Trakball profile | .pro .fil |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/keyTronicTrakballProfile/)
+text | Kinemage protein language | .kin |  | 
 text | Konqueror cookie |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
 text | Korn shell script |  |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/kornShellScript/)
 text | KSS: Author presentation settings |  |  | 
@@ -2311,6 +2312,7 @@ text | NSIS script | .nsi |  | [10 sample files](https://sembiance.com/fileForma
 text | NUnit project | .nunit |  | 
 text | Oberon System 3 text document | .text .tool .mod |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/oberonSystem3TextDocument/)
 text | ODI link driver configuration | .cfg |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/odiLinkDriverConfiguration/)
+text | Office Upgrade Control | .opc |  | 
 text | OGRE Material | .material |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/ogreMaterial/)
 text | Oleo spreadsheet | .oleo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/oleoSpreadsheet/)
 text | Omnis Studio Library | .lbs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/omnisStudioLibrary/)
@@ -2405,6 +2407,7 @@ text | RealMedia meta file | .ram |  | [11 sample files](https://sembiance.com/f
 text | Rebel spreadsheet (v2) | .rb2 |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/rebelSpreadsheet/)
 text | Receiver Independent Exchange Format | .rxo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/receiverIndependentExchangeFormat/)
 text | Redcode source | .red |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/redcodeSource/)
+text | ReDIF template | .rdf .redif |  | 
 text | Reflections/Monzoom script | .skr .men |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/reflectionsMonzoomScript/)
 text | Renderize Project | .bin .eye |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/renderizeProject/)
 text | Renderman compiled Shader object | .slo |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rendermanCompiledShaderObject/)

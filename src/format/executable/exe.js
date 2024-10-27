@@ -14,7 +14,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer", "Installer: Ghost Installer",
 	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer", "Installer: Blizzard PrePatch(2.xx)", "Installer: Box Stub", "Installer: WiX Toolset installer", "Installer: BitRock Installer",
 	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: Bytessence Install Maker", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer",
-	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Actual Installer", "Installer: Sony Windows Installer",
+	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Actual Installer", "Installer: Sony Windows Installer", "Installer: Tarma InstallMate",
 	
 	/^Installer: Wise Installer$/, /^NSIS$/
 ];

@@ -8,7 +8,9 @@ export class mp4 extends Format
 	mimeType         = "video/mp4";
 	magic            = [
 		// generic
-		/MP4 Base Media/, "MPEG-4 Media File", /^ISO Media.*M4V/, "ISO Media, MP4", "video/mp4", "ISO Media, MPEG v4 system", "MP4 v2 container video", /^Format: MP4 Video\[.*mp4[12]/, /^fmt\/199( |$)/,
+		/MP4 Base Media/, "MPEG-4 Media File", /^ISO Media.*M4V/, "ISO Media, MP4", "video/mp4", "ISO Media, MPEG v4 system", "MP4 v2 container video",
+		/^Format: MP4 Video\[.*mp4[12]/, /^Format: MP4 Video\[isom/,
+		/^fmt\/199( |$)/,
 		
 		// specific
 		"iTunes Apple TV Video"

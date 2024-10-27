@@ -18,13 +18,15 @@ export class ini extends Format
 		"3ds UI colors", "NextSTART Theme", "The Chessmaster 4000 layout", "MS Flight Simulator aircraft configuration file", "Spring Engine unit Info", "Total Annihilation Main Unit Definition", "Winamp Signal Processing Studio DSP-Effect", "WinZip Job File",
 		"SpyBot-Search-and-Destroy malware info", "ArcExplorer Project", "PaintTool SAI Tool parameters", "J.River Media Center plugin", "NetCaptor's CaptorGroup", "Delphi project Desktop", "Symantec Guard Header", "Turbo Fractal Generator settings",
 		"DrumSynth Preset", "WinRIX configuration", "TsiLang translation data", "audio/x-scpls", "Entrust Entelligence Profile", "Inno Setup Script", "application/x-netshow-channel", "Windows CONTROL.INI", "CDROM Drive Analyzer configuration (v2.x)",
-		"RivaTuner data base Build", "VIA setup configuration", "Soldat Bot Information", "blueMSX machine settings", "WinAPE configuration", "text/x-dbus-service", "Windows IOS.INI", "MPLAB IDE Project", "yum Repository configuration",
+		"RivaTuner data base Build", "VIA setup configuration", "Soldat Bot Information", "blueMSX machine settings", "WinAPE configuration", "text/x-dbus-service", "Windows IOS.INI", "MPLAB IDE Project", "yum Repository configuration", "Molden Format",
 		"Windows system Initialization settings", "EightyOne snapshot", "Icon Theme index", "Cisco VPN Profile Configuration File", /^Avatar Studio (Deformations|data \(generic\)|SAP|Save|Animation|BRZ|Bank descriptor)/, "Room Arranger design",
 		"AGS game configuration", "Picasa info (generic)", "Adblock Plus 2.0 rules file", "KLH10 RAW tape image directory", "Marble map description", "Advanced Renamer method", "D-Fend Reloaded Profile", "RawTherapee Postprocessing Profile",
-		"Psycle display preset", "cdrtfe tools configuration", "SynWrite Output Preset", "Midnight Commander skin", "NPS Image Editor Palette", "Silverpoint Skin", "SlickRun MagicWord Pack", "Krita Color scheme", "Compaq Diagnostics",
-		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/,
-		/^fmt\/(1456|1614|1760)( |$)/
+		"Psycle display preset", "cdrtfe tools configuration", "SynWrite Output Preset", "Midnight Commander skin", "NPS Image Editor Palette", "Silverpoint Skin", "SlickRun MagicWord Pack", "Krita Color scheme", "Compaq Diagnostics", "EEPROM Template",
+		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, "KDevelop Project", "Xcode perspective",
+		"Zilog Developer Studio II Workstate", "IBM i Access Client Poppad", "IBM i (Client) Access Keyboard Map", "IBM iSeries Client Access WorkStation profile", "Microsoft Zone Identifier", "Citrix Independent Computer Architecture",
+		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
+	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && macFileCreator==="NSIn") || (macFileType==="mINF" && macFileCreator==="T$2c");
 	priority       = this.PRIORITY.LOWEST;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;
 	metaProvider   = ["text", "iniInfo"];

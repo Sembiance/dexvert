@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,470)
+# Unsupported File Formats (2,478)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (221)
+## Archive (222)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -147,6 +147,7 @@ Family/Format | Name | Extensions | Notes
 [archive/oricTape](https://discmaster.textfiles.com/search?formatid=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 [archive/originSystemsSetupArchive](https://discmaster.textfiles.com/search?formatid=originSystemsSetupArchive) | Origin Systems's setup Archive | .a01 .cam .flx | 
 [archive/os2FTCOMP](https://discmaster.textfiles.com/search?formatid=os2FTCOMP) | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a OS emulated OS/2 machine. Maybe some day.
+[archive/outlookExchangeOfflineStorage](https://discmaster.textfiles.com/search?formatid=outlookExchangeOfflineStorage) | Outlook Exchange Offline Storage | .ost | 
 [archive/bvrpPAC](https://discmaster.textfiles.com/search?formatid=bvrpPAC) | PAC (BVRP Software) | .pac | 
 [archive/packMasterPacked](https://discmaster.textfiles.com/search?formatid=packMasterPacked) | Pack MasterPacked | .exe | 
 [archive/palmMemoPadArchive](https://discmaster.textfiles.com/search?formatid=palmMemoPadArchive) | Palm Memo Pad Archive | .mpa | 
@@ -307,7 +308,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (131)
+## Document (133)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -348,6 +349,7 @@ Family/Format | Name | Extensions | Notes
 [document/dBaseCompiledForm](https://discmaster.textfiles.com/search?formatid=dBaseCompiledForm) | dBase Compiled Form | .fro .fmo | 
 [document/dBaseIVDesign](https://discmaster.textfiles.com/search?formatid=dBaseIVDesign) | dBase IV design | .frm .scr | 
 [document/wpsPlus](https://discmaster.textfiles.com/search?formatid=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | [1 sample file](https://sembiance.com/fileFormatSamples/document/wpsPlus/) - VAX based word processor. Haven't investigated it for magic.
+[document/digitalDocumentInterchangeFormat](https://discmaster.textfiles.com/search?formatid=digitalDocumentInterchangeFormat) | DIGITAL Document Interchange Format | .ddif .doc_decwrite | 
 [document/dvcDataBase](https://discmaster.textfiles.com/search?formatid=dvcDataBase) | DVC data base | .d | 
 [document/dynaDocElectricExchangeDocument](https://discmaster.textfiles.com/search?formatid=dynaDocElectricExchangeDocument) | DynaDoc Electric Exchange Document | .wdl | 
 [document/endNoteConnection](https://discmaster.textfiles.com/search?formatid=endNoteConnection) | EndNote Connection | .enz | 
@@ -380,6 +382,7 @@ Family/Format | Name | Extensions | Notes
 [document/iesHyperText](https://discmaster.textfiles.com/search?formatid=iesHyperText) | I.E.S. HyperText | .hyp | [6 sample files](https://sembiance.com/fileFormatSamples/document/iesHyperText/)
 [document/ibmDisplayWriteDocument](https://discmaster.textfiles.com/search?formatid=ibmDisplayWriteDocument) | IBM DisplayWrite Document | .doc | 
 [document/iceBookReaderEBook](https://discmaster.textfiles.com/search?formatid=iceBookReaderEBook) | ICE Book Reader eBook | .book | 
+[document/ichitaroDocument](https://discmaster.textfiles.com/search?formatid=ichitaroDocument) | Ichitaro document | .jtd .jaw .jsw .jbw | 
 [document/improvSpreadsheet](https://discmaster.textfiles.com/search?formatid=improvSpreadsheet) | Improv spreadsheet | .imp | 
 [document/installShieldCompiledScript](https://discmaster.textfiles.com/search?formatid=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
 [document/interBaseDB](https://discmaster.textfiles.com/search?formatid=interBaseDB) | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
@@ -444,7 +447,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (46)
+## Executable (47)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -492,6 +495,7 @@ Family/Format | Name | Extensions | Notes
 [executable/tiCalcProgram](https://discmaster.textfiles.com/search?formatid=tiCalcProgram) | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p | 
 [executable/vmsVAXExecutable](https://discmaster.textfiles.com/search?formatid=vmsVAXExecutable) | VMS VAX executable | .vxe | 
 [executable/windowsAudioCompressionManagerDriver](https://discmaster.textfiles.com/search?formatid=windowsAudioCompressionManagerDriver) | Windows Audio Compression Manager driver | .acm | 
+[executable/wiNGsOSExecutable](https://discmaster.textfiles.com/search?formatid=wiNGsOSExecutable) | WiNGs OS executable |  | 
 [executable/xBoxExecutable](https://discmaster.textfiles.com/search?formatid=xBoxExecutable) | Xbox Executable | .xbe | [2 sample files](https://sembiance.com/fileFormatSamples/executable/xBoxExecutable/)
 
 
@@ -910,7 +914,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,495)
+## Other (1,499)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1338,6 +1342,7 @@ Family/Format | Name | Extensions | Notes
 [other/directXPreCompiledPixelVertexShader](https://discmaster.textfiles.com/search?formatid=directXPreCompiledPixelVertexShader) | DirectX pre-compiled pixel/vertex shader | .fxo | 
 [other/disGCLScript](https://discmaster.textfiles.com/search?formatid=disGCLScript) | DISGCL script | .gcl | 
 [other/diveFileFormat](https://discmaster.textfiles.com/search?formatid=diveFileFormat) | Dive File Format | .dff | 
+[other/dnaSequenceChromatogram](https://discmaster.textfiles.com/search?formatid=dnaSequenceChromatogram) | DNA Sequence Chromatogram | .scf | 
 [other/doomSaveGame](https://discmaster.textfiles.com/search?formatid=doomSaveGame) | DOOM Save Game | .dsg | 
 [other/dosNavigator2Settings](https://discmaster.textfiles.com/search?formatid=dosNavigator2Settings) | Dos Navigator 2 settings | .cfg | 
 [other/dProtelForWindowsSchematic](https://discmaster.textfiles.com/search?formatid=dProtelForWindowsSchematic) | DProtel for Windows schematic | .sch .dot .prj | 
@@ -1362,6 +1367,7 @@ Family/Format | Name | Extensions | Notes
 [other/dustyDOTsSavedGame](https://discmaster.textfiles.com/search?formatid=dustyDOTsSavedGame) | DustyDOTs saved game | .dsv | 
 [other/dvdInfoFile](https://discmaster.textfiles.com/search?formatid=dvdInfoFile) | DVD Info File | .ifo .bup | 
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?formatid=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
+[other/dynamicallyLinkedDeviceInterface](https://discmaster.textfiles.com/search?formatid=dynamicallyLinkedDeviceInterface) | Dynamically Linked Device Interface | .dldi | 
 [other/dynamixBitmap](https://discmaster.textfiles.com/search?formatid=dynamixBitmap) | Dynamix Bitnmap | .bmp | 
 [other/dynamixFontDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixFontDataContainer) | Dynamix Font data container | .fnt | 
 [other/dynamixPalette](https://discmaster.textfiles.com/search?formatid=dynamixPalette) | Dynamix Palette | .pal | 
@@ -1720,7 +1726,8 @@ Family/Format | Name | Extensions | Notes
 [other/metaEditOODAClassDiagram](https://discmaster.textfiles.com/search?formatid=metaEditOODAClassDiagram) | MetaEdit OODA Class Diagram | .ocd | 
 [other/metasequoiaBrush](https://discmaster.textfiles.com/search?formatid=metasequoiaBrush) | Metasequoia Brush | .mqb | 
 [other/mgpaFileGameArchive](https://discmaster.textfiles.com/search?formatid=mgpaFileGameArchive) | MGPA-file game archive | .dat | 
-[other/microFocusCobolLibrary](https://discmaster.textfiles.com/search?formatid=microFocusCobolLibrary) | Micro Focus Cobol library | .lbr | 
+[other/microFocusCOBOLGeneratedCode](https://discmaster.textfiles.com/search?formatid=microFocusCOBOLGeneratedCode) | Micro Focus COBOL generated code | .gnt | 
+[other/microFocusCobolLibrary](https://discmaster.textfiles.com/search?formatid=microFocusCobolLibrary) | Micro Focus COBOL library | .lbr | 
 [other/microFocusCOBOLLibrary](https://discmaster.textfiles.com/search?formatid=microFocusCOBOLLibrary) | Micro Focus COBOL Library | .lbr | 
 [other/microFocusIndexFile](https://discmaster.textfiles.com/search?formatid=microFocusIndexFile) | Micro Focus Index File | .idx | 
 [other/microLatheObject](https://discmaster.textfiles.com/search?formatid=microLatheObject) | Micro Lathe Object | .lat | 
@@ -1835,6 +1842,7 @@ Family/Format | Name | Extensions | Notes
 [other/newtonToolkitProject](https://discmaster.textfiles.com/search?formatid=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
 [other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 .z64 | 
+[other/nintendoDSROM](https://discmaster.textfiles.com/search?formatid=nintendoDSROM) | Nintendo DS ROM | .nds | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
 [other/nid32AntivirusUpdateFile](https://discmaster.textfiles.com/search?formatid=nid32AntivirusUpdateFile) | NOD32 Antivirus Update file | .nup | 
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 

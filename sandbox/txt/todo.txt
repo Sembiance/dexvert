@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Troubleshoot why this doesn't fully extract: http://dev.discmaster2.textfiles.com/admin/item?itemid=12398
+
 * Look into why these 2 files fail on dexdrone11 and dexdrone12 (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
@@ -313,7 +315,7 @@
   I tried DM2VRML.EXE a little bit, it crashes a lot. Also, I had trouble locating Doom 1 WADs, but found lots of DOOM 2 wads.
 
 * Add this detection program: https://github.com/google/magika
-  It only detects a small handful of file formats, more modern ones too.
+  It only detects a small handful of file formats, more modern ones too (v2 game out in 2024 and has a few hundred, but still not many)
   For that one, I'll need to spin up a server in dexvert that runs in the background as python and responses to web requests
   Make sure I also put it on info.txt App Updates section
 

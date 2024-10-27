@@ -20,7 +20,7 @@ export class dll extends Format
 		"Borland Package Library", "WinAmp 2.x Input plugin", "WinAmp 2.x Output plugin", "Winconv conversion module",  "Generic .NET DLL/Assembly", "FileMaker Pro 32-bit plug-in", "MS Flight Simulator Gauge", "VirtualDub Filter Plug-in",
 		"Pixia filter plugin", "Psycle plugin", "Ultimate Paint Graphics Editor plugin/effect", "Miranda IM plugin", "ACDSee plugin", "DLL PowerBASIC", "Microsoft Input Method Editor", "Quintessential Player input plugin",
 		"ZoneLabs Zone Alarm data", "Aston Shell plugin", /^foobar 2000 (Diskwriter output|Input|generic) component/, "Take Command plugin", "MATLAB Windows 32bit compiled function", "JAJC plugin", "DeliPlayer player plugin",
-		"Microsoft Windows Defender Virus Definition Module", "DeliPlayer genie", "Classic/Open-Shell Windows style skin", "ZX Spin Render Plugin", "AkelPad plugin"
+		"Microsoft Windows Defender Virus Definition Module", "DeliPlayer genie", "Classic/Open-Shell Windows style skin", "ZX Spin Render Plugin", "AkelPad plugin", "Microsoft Resource Library (x64)"
 	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,478)
+# Unsupported File Formats (2,486)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -914,7 +914,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,499)
+## Other (1,507)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1564,6 +1564,7 @@ Family/Format | Name | Extensions | Notes
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?formatid=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?formatid=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
 [other/infinityEngineFile](https://discmaster.textfiles.com/search?formatid=infinityEngineFile) | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
+[other/infoComicsGameData](https://discmaster.textfiles.com/search?formatid=infoComicsGameData) | InfoComics game data | .img .dat | 
 [other/infoSpotterTemplate](https://discmaster.textfiles.com/search?formatid=infoSpotterTemplate) | InfoSpotter Template | .spt | 
 [other/installShieldHDR](https://discmaster.textfiles.com/search?formatid=installShieldHDR) | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://sembiance.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
 [other/installShieldSupportingFile](https://discmaster.textfiles.com/search?formatid=installShieldSupportingFile) | InstallShield Supporting File | .installscript | 
@@ -1647,6 +1648,7 @@ Family/Format | Name | Extensions | Notes
 [other/linuxSwapFile](https://discmaster.textfiles.com/search?formatid=linuxSwapFile) | Linux Swap File |  | 
 [other/listProData](https://discmaster.textfiles.com/search?formatid=listProData) | ListPro data |  | 
 [other/lithTechResourceData](https://discmaster.textfiles.com/search?formatid=lithTechResourceData) | LithTech Resource data | .rez | 
+[other/llvmIRBitcode](https://discmaster.textfiles.com/search?formatid=llvmIRBitcode) | LLVM IR Bitcode | .bc | 
 [other/logicSimCircuit](https://discmaster.textfiles.com/search?formatid=logicSimCircuit) | LogicSim Circuit |  | 
 [other/logitechModula2LoadableSymbols](https://discmaster.textfiles.com/search?formatid=logitechModula2LoadableSymbols) | Logitech Modula-2 Loadable Symbols | .sym | 
 [other/logosLibronixData](https://discmaster.textfiles.com/search?formatid=logosLibronixData) | Logos Libronix data | .lbx .lbxdat .LBXLLS | 
@@ -1670,6 +1672,7 @@ Family/Format | Name | Extensions | Notes
 [other/mProject](https://discmaster.textfiles.com/search?formatid=mProject) | M project | .mst .set | 
 [other/maxGameDataArchive](https://discmaster.textfiles.com/search?formatid=maxGameDataArchive) | M.A.X. game data archive | .res | 
 [other/macOSAlias](https://discmaster.textfiles.com/search?formatid=macOSAlias) | Mac OS Alias |  | 
+[other/macOSXKeychainFile](https://discmaster.textfiles.com/search?formatid=macOSXKeychainFile) | Mac OS X Keychain File | .keychain | 
 [other/maceUtilitiesRXBAKInfo](https://discmaster.textfiles.com/search?formatid=maceUtilitiesRXBAKInfo) | Mace Utilities RXBAK info | .m_u | 
 [other/machOHPPAObject](https://discmaster.textfiles.com/search?formatid=machOHPPAObject) | Mach-O HPPA Object | .o | 
 [other/machOM68kObject](https://discmaster.textfiles.com/search?formatid=machOM68kObject) | Mach-O m68k Object | .o | 
@@ -1862,6 +1865,7 @@ Family/Format | Name | Extensions | Notes
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?formatid=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?formatid=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
 [other/noxMap](https://discmaster.textfiles.com/search?formatid=noxMap) | NoX Map | .map .nxz | 
+[other/ntv2StandardBinaryGridShift](https://discmaster.textfiles.com/search?formatid=ntv2StandardBinaryGridShift) | NTv2 Standard Binary Grid Shift | .gsb | 
 [other/nullsoftInstallData](https://discmaster.textfiles.com/search?formatid=nullsoftInstallData) | Nullsoft Install data |  | 
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?formatid=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?formatid=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
@@ -2078,6 +2082,7 @@ Family/Format | Name | Extensions | Notes
 [other/sculpt3DTake](https://discmaster.textfiles.com/search?formatid=sculpt3DTake) | Sculpt 3D Take | .take | 
 [other/scummMainData](https://discmaster.textfiles.com/search?formatid=scummMainData) | SCUMM main data container |  | 
 [other/seam3DProject](https://discmaster.textfiles.com/search?formatid=seam3DProject) | SEAM 3D Project | .s3d | 
+[other/secureCapsuleFirmwareUpdate](https://discmaster.textfiles.com/search?formatid=secureCapsuleFirmwareUpdate) | Secure Capsule firmware update | .scap | 
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?formatid=segaMasterSystemROM) | Sega Master System ROM | .sms | 
 [other/sentinelReturnsGameData](https://discmaster.textfiles.com/search?formatid=sentinelReturnsGameData) | Sentinel Returns game data | .db | 
@@ -2145,6 +2150,7 @@ Family/Format | Name | Extensions | Notes
 [other/starWriterFormula](https://discmaster.textfiles.com/search?formatid=starWriterFormula) | StarWriter Formula | .frm | 
 [other/starWriterPrinterDriver](https://discmaster.textfiles.com/search?formatid=starWriterPrinterDriver) | StarWriter Printer Driver | .gpm | 
 [other/starWriterVideoDriver](https://discmaster.textfiles.com/search?formatid=starWriterVideoDriver) | StarWriter Video Driver | .hgd | 
+[other/statisticalAnalysisSystemData](https://discmaster.textfiles.com/search?formatid=statisticalAnalysisSystemData) | Statistical Analysis System Data | .sas7bdat .sd7 | 
 [other/steelPanthersShapesData](https://discmaster.textfiles.com/search?formatid=steelPanthersShapesData) | Steel Panthers Shapes data | .shp | 
 [other/stepManiaCourse](https://discmaster.textfiles.com/search?formatid=stepManiaCourse) | StepMania Course | .crs | 
 [other/stormWizardResource](https://discmaster.textfiles.com/search?formatid=stormWizardResource) | StormWizard Resource | .wizard .wizard-all | 
@@ -2258,6 +2264,7 @@ Family/Format | Name | Extensions | Notes
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
 [other/uniCodeExtensions](https://discmaster.textfiles.com/search?formatid=uniCodeExtensions) | UniCode Extensions | .uce | 
+[other/universalCommunicationsFormat](https://discmaster.textfiles.com/search?formatid=universalCommunicationsFormat) | Universal Communications Format | .ucf | 
 [other/unknown](https://discmaster.textfiles.com/search?formatid=unknown) | Unknown File |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?formatid=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealMap](https://discmaster.textfiles.com/search?formatid=unrealMap) | Unreal Map | .unr | 
@@ -2404,6 +2411,7 @@ Family/Format | Name | Extensions | Notes
 [other/yabBaseballGameData](https://discmaster.textfiles.com/search?formatid=yabBaseballGameData) | YAB! Baseball game data | .dat | 
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?formatid=yafaCompressionOptions) | YAFA Compression Options |  | 
 [other/yamahaSysExPresetCommand](https://discmaster.textfiles.com/search?formatid=yamahaSysExPresetCommand) | Yamaha SysEx preset command | .syx .dx7 | 
+[other/yangDataModel](https://discmaster.textfiles.com/search?formatid=yangDataModel) | YANG data model | .yang | 
 [other/zInstallFormsDialogs](https://discmaster.textfiles.com/search?formatid=zInstallFormsDialogs) | Z/Install forms/Dialogs | .vvd | 
 [other/zapperInNeverwhereSavedGame](https://discmaster.textfiles.com/search?formatid=zapperInNeverwhereSavedGame) | Zapper In Neverwhere saved game | .pos | 
 [other/zbasic](https://discmaster.textfiles.com/search?formatid=zbasic) | ZBASIC | .bas | [6 sample files](https://sembiance.com/fileFormatSamples/other/zbasic/)

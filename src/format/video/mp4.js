@@ -9,7 +9,7 @@ export class mp4 extends Format
 	magic            = [
 		// generic
 		/MP4 Base Media/, "MPEG-4 Media File", /^ISO Media.*M4V/, "ISO Media, MP4", "video/mp4", "ISO Media, MPEG v4 system", "MP4 v2 container video",
-		/^Format: MP4 Video\[.*mp4[12]/, /^Format: MP4 Video\[isom/,
+		/^Format: MP4 Video\[.*mp4[12]/, /^Format: MP4 Video\[isom/, /^ISO Media, MPEG-4 \(\.MP4\)/,
 		/^fmt\/199( |$)/,
 		
 		// specific

@@ -181,7 +181,7 @@ export default
 		tifiles                                     : {name : "TIFILES", ext : [".tfu", ".tifile", ".tifiles"], magic : ["TI-99 TIFILES file image"]},
 		unrealPackage                               : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]},
 		vmsSaveset                                  : {name : "VMS SaveSet", magic : ["Archive: VMS SaveSet", "OpenVMS backup saveset data"]},
-		vmwareDiskImage                             : {name : "VMware disk image", ext : [".vmdk"], magic : ["VMware 4 Virtual Disk", "VMware4 disk image"], weakMagic : true},
+		vmwareDiskImage                             : {name : "VMware disk image", ext : [".vmdk"], magic : ["VMware 4 Virtual Disk", "VMware4 disk image", "Format: VMWare image", "application/x-vmdk-disk"], weakMagic : true},
 		vz200300Image                               : {name : "VZ200/300 image", ext : [".vz"], magic : ["VZ200/300 image"], weakMagic : true},
 		warpINInstaller                             : {name : "WarpIN Installer", ext : [".wpi"], magic : ["WarpIN Installer"]},
 		windevCompressedArchive                     : {name : "WINDEV compressed archive", ext : [".wdz"], magic : ["WINDEV compressed archive"], weakMagic : true},
@@ -892,6 +892,7 @@ export default
 		iccAnimation                                 : {name : "ICC Animation", ext : [".icc"], magic : ["ICC Animation"]},
 		iHaveNoMouthAndIMustScreamSaveGame           : {name : "I Have No Mouth, and I Must Scream save game", ext : [".sav"], magic : ["I Have No Mouth, and I Must Scream save game"], weakMagic : true},
 		infinityEngineFile                           : {name : "Infinity Engine File", ext : [".dlg", ".cre", ".itm", ".are", ".tlk", ".spl", ".sto"], magic : ["Infinity Engine "]},
+		infoComicsGameData                           : {name : "InfoComics game data", ext : [".img", ".dat"], magic : ["InfoComics game data"]},
 		intelligentGamesResourceData                 : {name : "Intelligent Games resource data", ext : [".res"], magic : ["Intelligent Games Ltd resource data"]},
 		invictusGameData                             : {name : "Invictus game data", ext : [".ics"], magic : ["Invictus game data"], weakMagic : true},
 		jazzJackrabbitFile                           : {name : "Jazz Jackrabbit File", ext : [".0sc", ".0fn"], magic : ["Jazz Jackrabbit font/cutscene", "Jazz Jackrabbit map"]},
@@ -1181,6 +1182,7 @@ export default
 		kylix3CompiledUnit                 : {name : "Kylix 3 Compiled Unit", ext : [".dpu", ".dcu"], magic : ["Kylix 3 Compiled Unit"], weakMagic : true},
 		linux8086ObjectFile                : {name : "Linux 8086 Object File", ext : [".o"], magic : ["Linux-8086 object file"]},
 		linuxi386ObjectFile                : {name : "Linux i386 Object File", ext : [".o"], magic : ["Linux/i386 object file"]},
+		llvmIRBitcode                      : {name : "LLVM IR Bitcode", ext : [".bc"], magic : [/^LLVM IR [Bb]itcode$/], weakMagic : true},
 		logitechModula2LoadableSymbols     : {name : "Logitech Modula-2 Loadable Symbols", ext : [".sym"], magic : ["Logitech Modula-2 Loadable Symbols"], weakMagic : true},
 		luaBytecode                        : {name : "Lua bytecode", magic : ["Format: Lua Bytecode", /^Lua ([\d.]+ )?bytecode/]},
 		machOObject                        : {name : "Mach-O Object", ext : [".o"], magic : [/^Mach-O (m68k )?object$/], weakMagic : true},
@@ -1275,7 +1277,7 @@ export default
 		zbasic                             : {name : "ZBASIC", ext : [".bas"], magic : ["ZBasic DOS source code"], weakMagic : true},
 		zInstallFormsDialogs               : {name : "Z/Install forms/Dialogs", ext : [".vvd"], magic : ["Z/Install forms/Dialogs"]},
 		zodbFileStorage                    : {name : "ZODB File Storage", ext : [".fs"], magic : ["ZODB File Storage"]},
-		zopeBinaryExportFile               : {name : "Zope binary export file", ext : [".zexp"], magic : ["Zope binary export file"], weakMagic : true},
+		zopeBinaryExportFile               : {name : "Zope binary export file", ext : [".zexp"], magic : ["Zope binary export file", /^fmt\/756( |$)/], weakMagic : true},
 
 
 		/////////////
@@ -1817,6 +1819,7 @@ export default
 		macromediaFlashColorTableFile            : {name : "Macromedia Flash Color Table File", ext : [".clr"], magic : ["Macromedia Flash Color Table File"]},
 		macromediaXtraCache                      : {name : "Macromedia Xtra Cache", ext : [".mch"], magic : ["Macromedia Xtra Cache"]},
 		macOSAlias                               : {name : "Mac OS Alias", magic : ["Mac OS Alias", "MacOS Alias file"]},
+		macOSXKeychainFile                       : {name : "Mac OS X Keychain File", ext : [".keychain"], magic : ["Mac OS X Keychain File"], weakMagic : true},
 		maestroMusic                             : {name : "Maestro Music", magic : ["Maestro music", /^fmt\/1464( |$)/]},
 		maggiData                                : {name : "MAGGI data", ext : [".hhh"], magic : ["MAGGI data"]},
 		magicBinaryFile                          : {name : "magic binary file", ext : [".mgc"], magic : [/^magic binary file/, "magic compiled data"], weakMagic : true},
@@ -2068,6 +2071,7 @@ export default
 		scratchProject                           : {name : "Scratch project", ext : [".sb"], magic : ["Scratch project"], weakMagic : true},
 		screamTrackerInstrumentsLibrary          : {name : "Scream Tracker Instruments Library", ext : [".015", ".014", ".016", ".017"], magic : ["Scream Tracker Instruments Library"]},
 		seam3DProject                            : {name : "SEAM 3D Project", ext : [".s3d"], magic : ["SEAM 3D Project"]},
+		secureCapsuleFirmwareUpdate              : {name : "Secure Capsule firmware update", ext : [".scap"], magic : ["Secure Capsule firmware update", "EFI capsule"], weakMagic : true},
 		sentrySpellingEngineLexicon              : {name : "Sentry Spelling-Checker Engine Lexicon", ext : [".clx"], magic : ["Sentry Spelling-Checker Engine Lexicon", /^W.*rterbuch Datei \(Wintertree Software\)$/]},
 		showPartnerMasteredShow                  : {name : "Show Partner Mastered Show", ext : [".pro"], magic : ["Show Partner mastered show"]},
 		siegfriedAntiviruData                    : {name : "Siegfried Antivirus Professional virus data", ext : [".brainfile"], magic : ["Siegfried Antivirus Professional virus data (v1.x)"]},
@@ -2100,6 +2104,7 @@ export default
 		sysSpeedModule                           : {name : "SysSpeed Module", magic : ["SysSpeed Module"]},
 		starAmPlanGraphData                      : {name : "StarAm Plan graph data", ext : [".gein"], magic : ["StarAm Plan graph data"]},
 		stareEOWorkshopConfig                    : {name : "Stare-EO Workshop configuration", ext : [".cfg"], magic : ["Stare-EO Workshop configuration"]},
+		statisticalAnalysisSystemData            : {name : "Statistical Analysis System Data", ext : [".sas7bdat", ".sd7"], magic : ["SAS v8+ data", /^SAS 7\+/, /^fmt\/1021( |$)/]},
 		starForceProtectionContainer             : {name : "StarForce protection container", ext : [".dat"], magic : ["StarForce protection container"], weakMagic : true},
 		starTrekkerModuleInfo                    : {name : "Startrekker Module Info", ext : [".nt"], magic : [/^Startrekker .*module info$/]},
 		starViewMetafile                         : {name : "StarView Metafile", ext : [".svm"], magic : ["StarView Metafile"], weakMagic : true},
@@ -2154,6 +2159,7 @@ export default
 		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", /^Type Library \(Type[12]\)$/, /^fmt\/(1601|1602)( |$)/]},
 		uleadImageiioThumbnailInfo               : {name : "Ulead Imageioo Thumbnail Info", ext : [".pe3", ".pe4"], magic : ["Ulead Imageiio/Imaginfo thumbnail", "Ulead Imaginfo thumbnail", "Ulead Gallery", /^Ulead Photo Explorer \d/]},
 		uniCodeExtensions                        : {name : "UniCode Extensions", ext : [".uce"], magic : ["UniCode Extensions"], weakMagic : true},
+		universalCommunicationsFormat            : {name : "Universal Communications Format", ext : [".ucf"], magic : ["Universal Communications Format"], weakMagic : true},
 		vbDOSForm                                : {name : "VBDOS Form", ext : [".frm"], magic : ["VBDOS 1.0 Form"]},
 		vcdEntries                               : {name : "VCD Entries File", ext : [".vcd"], filename : [/^entries\.vcd$/i], magic : ["VCD Entries File"]},
 		vcgGraph                                 : {name : "VCG graph", ext : [".vcg"], magic : ["VCG graph"], weakMagic : true},
@@ -2255,6 +2261,7 @@ export default
 		xilinxBitstream                          : {name : "Xilinx Bitstream", ext : [".bit"], magic : ["Xilinx Bitstream", "Xilinx BIT data"], weakMagic : true},
 		xlr8SentryChipComposorInstrument         : {name : "XLR8 - Sentry Chip Composor Instrument", ext : [".xin"], magic : ["XLR8 - Sentry Chip Composor Instrument"], weakMagic : true},
 		xlr8SentryChipComposorVoiceSet           : {name : "XLR8 - Sentry Chip Composor VoiceSet", ext : [".xvs"], magic : ["XLR8 - Sentry Chip Composor VoiceSet"], weakMagic : true},
+		yangDataModel                            : {name : "YANG data model", ext : [".yang"], magic : ["YANG data model"], weakMagic : true},
 		zBrushMatCap                             : {name : "ZBrush MatCap", ext : [".ztl"], magic : ["ZBrush ZTool native format", /^fmt\/1673( |$)/]},
 		zTXTeBook                                : {name : "zTXT e-book", ext : [".pdb"], magic : ["A GutenPalm zTXT e-book", "zTXT eBook"]}
 	}

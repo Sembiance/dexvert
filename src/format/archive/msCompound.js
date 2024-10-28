@@ -12,8 +12,9 @@ export class msCompound extends Format
 		"Shell Scrap object", "StormFront skin", "Ulead PhotoImpact Object(s)", "Designworks Template (v3.5)", "Easy CD Creator's Jewel case", "STATISTICA Workbook", "Ulead iPhoto Template", "iPublish document", "Quattro Pro 7 spreadsheet",
 		"Creative Witer document", "3D Studio Max Material Library", "Windows Movie Maker project", "Roxio/MGI PhotoSuite Album", "Roxio/MGI PhotoSuite Project", "Avery DesignPro Label design", "Micrografx Simply 3D project", "Micrografx clipart index",
 		"WordPerfect Slide Show", "ArcGIS Map project", "JewelCase Maker project", "Corel Gallery", "Serif PhotoPlus Picture (OLE)", "Neato MediaFACE label template", "EMB Wilcom Design embroidery file", "Melco DesignShop Project", "CDFV2 QuickBooks",
-		"Perfect Keyboard macro set", "CorelCAD Drawing", "CorelCAD Drawing Template", "CorelCAD Custom Views", "Corel Flow Smart Library", "MPLAB IDE Workspace", "Crystal Reports output file (Report)", "Minitab Worksheet (V12 1998)",
+		"Perfect Keyboard macro set", "CorelCAD Drawing", "CorelCAD Drawing Template", "CorelCAD Custom Views", "Corel Flow Smart Library", "MPLAB IDE Workspace", "Crystal Reports output file (Report)", "Minitab Worksheet (V12 1998)", "ArcGIS Layer",
 		"Minitab Portable Worksheet", "Windows 7 Jump List", "Microsoft RSS Feeds Store", "Combit List and Label printer setup file", "Visual Pinball Table", "AutoRoute Export file", "Lotus Approach (generic)", "Outlook Send-Receive Settings",
+		"MSN Messenger Wink",
 		/^fmt\/(877|916|971|1213|1303|1360|1362|1431|1432|1648|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these

@@ -1,4 +1,4 @@
-# Supported File Formats (2,634)
+# Supported File Formats (2,636)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -43,7 +43,7 @@ archive | Anna-Marie Archive | .dat | [foremost](http://foremost.sourceforge.net
 archive | aPACK Packed | .exe .com | cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/aPACKPacked/)
 archive | [Apple 2MG Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .2mg | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/apple2MG/)
 archive | Apple Disk Copy Image | .img .image .bin | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/diskCopyImage/)
-archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .dmg | [dmg2img](http://vu1tur.eu.org/tools) [sevenZip](http://p7zip.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/dmg/)
+archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .dmg | [dmg2img](http://vu1tur.eu.org/tools) [sevenZip](http://p7zip.sourceforge.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/dmg/)
 archive | [Apple DiskCopy](https://www.discferret.com/wiki/Apple_DiskCopy_4.2) |  | [dd](https://www.gnu.org/software/coreutils/) [IsoBuster](https://www.isobuster.com/isobuster.php) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopy/)
 archive | [Apple DOS Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Apple_II)) | .dsk .po .hdv | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/appleDOSDiskImage/)
 archive | Apple II Pascal Disk Image | .dsk | [acx](https://github.com/AppleCommander/AppleCommander) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/apple2PascalDiskImage/)
@@ -677,7 +677,7 @@ document | PCP Help Text | .pag | [strings](https://www.gnu.org/software/binutil
 document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/peterNortonHelp/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [6 sample files](https://sembiance.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/PostScript) | .ps | [ps2pdf](https://ghostscript.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/ps/)
-document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx | [soffice](https://www.libreoffice.org) | [20 sample files](https://sembiance.com/fileFormatSamples/document/powerPoint/)
+document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx .potx | [soffice](https://www.libreoffice.org) | [21 sample files](https://sembiance.com/fileFormatSamples/document/powerPoint/)
 document | Professional Page Document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/professionalPage/)
 document | [Professional Write Document](http://fileformats.archiveteam.org/wiki/Pfs:Write) | .pfs | [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/document/pfsWrite/)
 document | ProText Document |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/proText/)
@@ -1915,7 +1915,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (693)
+## Text (695)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | 
@@ -2084,13 +2084,14 @@ text | EISA add-on card Configuration | .cfg |  | [12 sample files](https://semb
 text | Elastic Reality project data | .er |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/elasticRealityProjectData/)
 text | Emacs RMAIL |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emacsRMAIL/)
 text | eMbedded Visual Basic Project | .ebp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/eMbeddedVisualBasicProject/)
-text | EMBL sequence data | .embl .emb .dna |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/emblSequenceData/)
+text | EMBL sequence data | .embl .emb .dna |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/emblSequenceData/)
 text | Emergency 3D model | .v3o |  | 
 text | eMule Web Interface template | .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/eMuleWebInterfaceTemplate/)
 text | Enriched Text Document |  |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
-text | ESRI Arc/Info Export | .e00 .x00 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
+text | ENVI Header | .hdr |  | 
+text | ESRI Arc/Info Export | .e00 .x00 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
 text | ESRI Arc/View Project | .apr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
-text | ESRI ArcInfo DAT File (External) | .dat |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExternalDAT/)
+text | ESRI ArcInfo DAT File (External) | .dat |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExternalDAT/)
 text | ESRI Shapefile Projection | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriShapefileProjection/)
 text | ESS-Code Filter | .flt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/essCodeFilter/)
 text | Eureka/Mercury Report | .rpt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/eurekaMercuryReport/)
@@ -2134,7 +2135,7 @@ text | gEDA Symbol | .sym |  |
 text | [GEDCOM Genealogy Text](http://fileformats.archiveteam.org/wiki/GEDCOM) | .ged |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gedcom/)
 text | GEM Driver Definition | .ddf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/gemDriverDefinition/)
 text | Gen Surf map | .map |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/genSurfMap/)
-text | GenBank Flat File | .gb .gbk |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/genBankFlat/)
+text | GenBank Flat File | .gb .gbk |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/genBankFlat/)
 text | GenBank sequence record | .dna |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/genBankSequenceRecord/)
 text | Generic Printer Description | .gdl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/genericPrinterDescription/)
 text | GENSCAN output results | .genscan |  | 
@@ -2294,12 +2295,13 @@ text | MilkDrop preset | .milk |  |
 text | MindReader Dictionary | .dic |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mindReaderDictionary/)
 text | MinerVGA sprites Library | .lbr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/minerVGASpritesLibrary/)
 text | Mirrormatic site description | .desc |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/mirrormaticSiteDescription/)
+text | Mobirise project | .mobirise |  | 
 text | Modula Definition | .def |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/modulaDefinition/)
 text | Modula Implementation | .mod |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/modulaImplementation/)
 text | [Module Description File](http://fileformats.archiveteam.org/wiki/MDZ) | .mdz |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/moduleDescriptionFile/)
 text | Mosaic Hotlist | .hot |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/mosaicHotlist/)
 text | Mozilla (Netscape) settings | .js |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mozillaNetscapeSettings/)
-text | Mozilla Mork database | .dat |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/mozillaMorkDatabase/)
+text | Mozilla Mork database | .dat |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/mozillaMorkDatabase/)
 text | Mozilla Spam Filter Definition | .sfd |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/mozillaSpamFilterDefinition/)
 text | MPlayer font Description | .desc |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/mPlayerFontDescription/)
 text | MS Developer Studio Project | .dsp |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/msDeveloperStudioProject/)
@@ -2354,7 +2356,7 @@ text | PCP config  |  |  | [11 sample files](https://sembiance.com/fileFormatSam
 text | PCP pmchart view  |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/pcppmchartView/)
 text | PCP pmieconf rules |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/pcppimieconfRules/)
 text | PCSX2 Patch | .pnach |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/pcsx2Patch/)
-text | Pdmenu configuration |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/pdmenuConfiguration/)
+text | Pdmenu configuration |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/pdmenuConfiguration/)
 text | PDS Panel | .pnl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pdsPanel/)
 text | PDT structure definition | .pdt .dat |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/pdtStructureDefinition/)
 text | [PEM Certificate/Request](http://fileformats.archiveteam.org/wiki/PEM_encoded_certificate) | .cer .pem |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/pemCertificate/)
@@ -2401,7 +2403,7 @@ text | [Python Source](http://fileformats.archiveteam.org/wiki/Python) | .py |  
 text | QAPlus Keyboard Map | .kbd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/qaPlusKeyboardMap/)
 text | [QRT Ray Tracer scene description](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_scene_description) | .qrt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qrtRayTracerSceneDescription/)
 text | Qt Assistant Content File | .dcf |  | 
-text | Qt Resource Collection file | .qrc |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/qtResourceCollectionFile/)
+text | Qt Resource Collection file | .qrc |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/qtResourceCollectionFile/)
 text | Qt Translation Source | .ts |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qtTranslationSource/)
 text | Qt User Interface | .ui |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/qtUserInterface/)
 text | Quake I save | .sav |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quakeISave/)
@@ -2564,7 +2566,7 @@ text | Watcom C/C++ Project | .wpj |  | [16 sample files](https://sembiance.com/
 text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/watcomCTarget/)
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
-text | Web browser cookies | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
+text | Web browser cookies | .txt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
 text | Web Video Text Tracks | .vtt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)
 text | Wheel binary package format info |  |  | 

@@ -28,7 +28,8 @@ const _XML_MAGIC = [
 	"Group Policy Administrative Template", "Group Policy Language-Specific Administrative Template", "Mixxx MIDI preset", "TreeDBNotes syntax config", "application/vnd.kde.kcfg", "Mixxx controller preset", "Code::Blocks Project", "QTI document",
 	"MAME ListXML format", "AutoCAD drawing lock", "EDraw Max drawing", "Citation Style Language", "Friend of a Friend (FOAF) Resource Description Framework", "Gnumeric spreadsheet", "OEB Package Format eBook", "Find and Run Robot (FARR) alias",
 	"Kingsoft Antivirus component install info", "PC AntiVirus Virus DB collection info", "KDevelop Session", "Final Cut Pro XML Interchange Format", "Zilog Developer Studio II Target", "Zilog Developer Studio II Project", "mzXML format",
-	"XML BLAST Output", "Windows Search Connector", "Bayesian Networks Interchange Format", "Geography Markup Language", "Ivy module descriptor", "LEGO Digital Designer XML data", "SQL Server Integration Services package",
+	"XML BLAST Output", "Windows Search Connector", "Bayesian Networks Interchange Format", "Geography Markup Language", "Ivy module descriptor", "LEGO Digital Designer XML data", "SQL Server Integration Services package", "KWordQuiz learning file",
+	/^uVision v[245] Project( Options)?/, "CMSIS System View Description format", /^IAR Embedded Workbench (Project|Workspace)/,
 	/^fmt\/(205|243|475|570|896|979|983|986|1134|1219|1474|1677|1729|1776|1796)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

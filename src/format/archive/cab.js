@@ -12,7 +12,8 @@ export class cab extends Format
 		
 		// app specific cabs
 		"IncrediMail data (generic)", "IncrediMail Animation", "IncrediMail letter/ecard Flavor", "IncrediMail Image", "IncrediMail sound", "IncrediMail Notifier", "IncrediMail Skin",
-		"Diagnostic Cabinet", "Skin / Theme for Pocket PC PDAs", "Windows Device Metadata", "Microsoft Vista Sidebar Gadget (CAB",
+		"Diagnostic Cabinet", "Skin / Theme for Pocket PC PDAs", "Windows Device Metadata", "Microsoft Vista Sidebar Gadget (CAB", "InfoPath Dynamic Form - Template",
+		/^fmt\/987( |$)/,
 
 		// installer related cabs
 		"Microsoft Update - Self Extracting Cabinet", "Microsoft Windows CE installation Cabinet Archive", "Windows Installer Merge Module (CAB)", "MS generic-sfx Cabinet File Unpacker",

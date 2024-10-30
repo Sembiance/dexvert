@@ -6,13 +6,13 @@ const _XML_MAGIC = [
 	
 	// specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
-	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Visual Studio .NET Visual C Project",
+	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Eclipse JAR settings",
 	"Visual Studio Project User Options", "Visual Studio C++ project Filters", "Visual Studio Visual C++ Project", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes", "Xcode Scheme",
 	"Tag Library Descriptor", "Channel Definition Format", "QuickTime Media Link", "Interface Builder UI resource data (archive)", "Mozilla XML User interface Language", "GPS eXchange format", "Glade UI design", "Internet Archive book scan data",
 	"RoboHelp / FlashHelp skin", "Entity and Attribute Information", "Shapefile Geospatial metadata", "NuGet Specification", "Microsoft Management Console Snap-in control file", "Microsoft Extensible Application Markup Language", "XSI Addon",
 	"Native Instruments Battery drumKit", "Dia shape", "Dia sheet", "Dia drawing (uncompressed)", "RELAX NG", "XSL Formatting Objects", "DISCO Dynamic Discovery file", "XML sitemap", "GNUMERIC spreedshet (XML", "Open Source Metadata Framework",
 	"Outline Processor Markup Language", "application/atom+xml", "application/xslt+xml", "AppleScript Terminology", "application/x-dia-shape", "application/x-gnumeric", "application/x-dia-diagram", "text/x-opml+xml", "C++ Builder XML Project",
-	"Death Village stage data", "Atom web feed", "SOAP message", "Lazarus Project Information", "XML Localization Interchange File Format", "application/xliff+xml", "application/rss+xml", "Windows Update Package", "Xcode project data",
+	"Death Village stage data", "Atom web feed", "SOAP message", "Lazarus Project Information", "XML Localization Interchange File Format", "application/xliff+xml", "application/rss+xml", "Windows Update Package", "Xcode project data", "TEI document",
 	"application/x-glade", "Open Office XML Relationships", "Visual Studio C# Project", "Visual Studio Visual Basic Project", "Game Definition File", "Windows Composite Font", "WCF Configuration Snapshot", "Saved WCF Configuration Information",
 	"Maven Project Object Model", "Visual Studio Settings", "ADO.NET Conceptual Schema Definition Language", "ADO.NET Store Schema Definition Language", "Entity Data Model", "VisualStudio MyApp", "JetBrains solution Settings", "LandXML",
 	"Java Flight Recorder event settings", "DISCO Discovery Document", "DISCO Discovery Output", "Windows Installer XML Source", "OS X system data", "HRC Language", "Far settings", "Mozilla blocklist", "JAXB Bindings", "ClickOnce Deployment Manifest",
@@ -22,15 +22,16 @@ const _XML_MAGIC = [
 	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report", "XML Bookmark Exchange Language", "ttx font format", "Eclipse Extension Point Schema",
 	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile", "Artweaver Brush", "IFC-XML",
 	"MeshMixer Part data", "Software Ideas Modeler Template", "Navigation Control file for XML", "OpenOffice/LibreOffice type library database (XML)", "OpenCV XML storage", "Mono Mconfig configuration", "Uniform Office Format (generic)",
-	"Fabmetheus model format", "Qt Help Collection Project", "MusicXML", "SOAP Envelope", "Windows 7 Task Scheduler job", "GnuCash data", "GnuCash file", "AlgoBox Algorithm", "Visual Studio Tools for Office add-in", "Anjuta IDE project",
+	"Fabmetheus model format", "Qt Help Collection Project", "MusicXML", "SOAP Envelope", "Windows 7 Task Scheduler job", "GnuCash data", "GnuCash file", "AlgoBox Algorithm", "Visual Studio Tools for Office add-in", "Anjuta IDE project", "ISE XReport",
 	"ConvertXtoDVD project", "Eclipse CDT Project settings", "Koda Form Designer Form", "Synfig project", /^Delphi Project$/, "Notepad++ session", "wxFormBuilder Project", "Scribus palette", "FET Timetable", "LMMS Preset", "LMMS Project",
 	"Microsoft security certificate", "Expression Design swatch (v4)", "Microsoft security certificate", "GanttProject project", "SMath Studio worksheet", "MuseScore music score", "NewsML file", "DcUpdater local configuration", "WxGlade project",
 	"Group Policy Administrative Template", "Group Policy Language-Specific Administrative Template", "Mixxx MIDI preset", "TreeDBNotes syntax config", "application/vnd.kde.kcfg", "Mixxx controller preset", "Code::Blocks Project", "QTI document",
 	"MAME ListXML format", "AutoCAD drawing lock", "EDraw Max drawing", "Citation Style Language", "Friend of a Friend (FOAF) Resource Description Framework", "Gnumeric spreadsheet", "OEB Package Format eBook", "Find and Run Robot (FARR) alias",
 	"Kingsoft Antivirus component install info", "PC AntiVirus Virus DB collection info", "KDevelop Session", "Final Cut Pro XML Interchange Format", "Zilog Developer Studio II Target", "Zilog Developer Studio II Project", "mzXML format",
 	"XML BLAST Output", "Windows Search Connector", "Bayesian Networks Interchange Format", "Geography Markup Language", "Ivy module descriptor", "LEGO Digital Designer XML data", "SQL Server Integration Services package", "KWordQuiz learning file",
-	/^uVision v[245] Project( Options)?/, "CMSIS System View Description format", /^IAR Embedded Workbench (Project|Workspace)/,
-	/^fmt\/(205|243|475|570|896|979|983|986|1134|1219|1474|1677|1729|1776|1796)( |$)/, /^x-fmt\/227( |$)/
+	/^uVision v[245] Project( Options)?/, "CMSIS System View Description format", /^IAR Embedded Workbench (Project|Workspace)/, "GDAL Virtual Format (vector)", /^Programmer's Notepad (Scheme|text Clips|user preset)/, "Adobe Premiere Title",
+	"IAR Embedded Workbench Debug info", "Xilinx ISE Messages", "Visual Studio .NET Visual C Project", "VMware supplemental team member configuration", "Microsoft Visual Studio project template",
+	/^fmt\/(205|243|475|570|896|979|983|986|1134|1219|1357|1474|1677|1729|1776|1796)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};
 

@@ -90,7 +90,8 @@ export const IGNORE_MAGICS =
 export const WEAK_VALUES =
 [
 	// siegfried
-	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|659|683|691|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
+	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|659|683|691|692|819|869|973)( |$)/,
+	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
 	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1874|1902|1904)( |$)/,
 	/^x-fmt\/(8|10|53|101|157|168|195|222|324|342)( |$)/,
 
@@ -111,6 +112,7 @@ export const WEAK_VALUES =
 	/^JBOOT STAG header/,
 	/^LZ4 compressed data$/,
 	/^Linux kernel version [\d.]+$/,
+	/^Marvell Libertas firmware$/,
 	/^MLD sequence date,$/,
 	/^MySQL MISAM index file Version 1$/,
 	/^Neighborly text/,
@@ -293,7 +295,7 @@ export const WEAK_VALUES =
 	/^ZipIt SEA$/,
 
 	// pc98ripperID
-	/^PC-98 ElfDOS$/,
+	/^PC-98 ElfDOS/,
 
 	// xdgMime
 	/^application\/its\+xml$/,
@@ -853,6 +855,7 @@ export const WEAK_VALUES =
 	/^shared library TTComp archive data/,
 	/^SIMH tape data/,
 	/^Sky archive data/,
+	/^Smile binary data/,
 	/^Solitaire Image Recorder format/,
 	/^SoftQuad DESC or font file binary/,
 	/^SoftQuad troff Context intermediate/,
@@ -902,6 +905,7 @@ export const WEAK_VALUES =
 	/^Unicode text, UTF-32, (big|little-endian)/,
 	/^unicos \(cray\) executable/,
 	/^unified diff output/,
+	/^Universal EFI binary/,
 	/^Unix-like shebang/,
 	/^unknown demand paged pure executable/,
 	/^unknown readable demand paged pure executable/,
@@ -1573,6 +1577,7 @@ export const WEAK_VALUES =
 	/^Borland Reflex Screen driver$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,
 	/^Carrara Environment$/,
+	/^CATIA V5 data \(generic\)$/,
 	/^Cavewars sprite$/,
 	/^Chain format$/,
 	/^Chasys Draw IES convolution Matrix$/,
@@ -1596,6 +1601,7 @@ export const WEAK_VALUES =
 	/^Compressed Alignment format$/,
 	/^Compressed File Library 3 compressed data$/,
 	/^context diff output/,
+	/^Conquest: Frontier Wars game data$/,
 	/^Cookeo recipe$/,
 	/^Copper Colourz! File$/,	// Found correct matches, but magic 'CCF' (and string 'CCF FILE') are too generic given that the extension is .ccf
 	/^CryEngine Project \(generic\)$/,
@@ -1715,6 +1721,7 @@ export const WEAK_VALUES =
 	/^HS2 zipped bitmap\(s\) archive$/,
 	/^HTTP Archive format$/,
 	/^Hugin Project$/,
+	/^ICE ECC data \(v2\.x\)$/,
 	/^IFF Color Map$/,	// Just because it has a CMAP as the first entry, doesn't mean that's what this file is, it's often a Movie Setter file with FACE and BODY elements. If it is a CMAP, IFF ILBM ends up handling it and creates a png
 	/^IFF document storage$/,
 	/^IFC-(SPF|ZIP)$/,
@@ -1758,6 +1765,7 @@ export const WEAK_VALUES =
 	/^LightWave Motion data$/,
 	/^Lingoes Dictionary$/,
 	/^Litestep theme$/,
+	/^LMMC encoded router config$/,
 	/^LogonStudio Vista logon image$/,
 	/^lpaq compressed data \(generic\)$/,
 	/^LZS\/Stac compressed data$/,
@@ -1936,6 +1944,7 @@ export const WEAK_VALUES =
 	/^Slayer engine Texture$/,
 	/^SMAC compressed data$/,
 	/^smARTWORK Printed Circuit Board project$/,
+	/^Smile data interchange format$/,
 	/^SMS Coastline data$/,
 	/^SMS Super File$/,
 	/^SMS XYZ data$/,
@@ -1991,6 +2000,7 @@ export const WEAK_VALUES =
 	/^TriSound Voice Set$/,
 	/^TurboCALC SpreadSheet$/,
 	/^Trilobyte SVGA FLICK\/Groovie Player Script$/,
+	/^TS Online Dialing Directory$/,
 	/^TV-SHOW Script$/,
 	/^Twist Update script$/,
 	/^Ultimo Primo SnapShot$/,
@@ -2032,6 +2042,7 @@ export const WEAK_VALUES =
 	/^WinArcadia Recording\/macro$/,
 	/^WINDEV data \(generic\)$/,
 	/^Windows 95 passwords$/,
+	/^Windows 98 MSBackup backup set$/,
 	/^Windows ActiveX control$/,
 	/^Windows Control Panel Item \(generic\)$/,
 	/^Windows Installer Merge Module$/,

@@ -7,6 +7,7 @@ export class deviceIndependentFile extends Format
 	ext            = [".dvi"];
 	forbidExtMatch = true;
 	magic          = ["TeX DVI file", "Device Independent Document", "DVI Datei (TeX)", "Format: Device Independent Document", "application/x-dvi", /^fmt\/160( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="ODVI" && macFileCreator==="OTEX";
 	converters     = ["dvi2pdf"];
 	metaProvider   = ["dviinfox"];
 }

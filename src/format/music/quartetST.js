@@ -3,7 +3,8 @@ import {Format} from "../../Format.js";
 export class quartetST extends Format
 {
 	name          = "Quartet ST Module";
-	ext           = [".qts", ".smp"];
+	ext           = [".qts", ".smp", ".4sq"];
+	magic         = ["Quartet ST module"];
 	matchPreExt   = true;
 	keepFilename  = true;
 	metaProvider  = ["musicInfo"];
@@ -20,4 +21,5 @@ export class quartetST extends Format
 	untouched = ({f}) => (f.input.ext.toLowerCase() || f.input.preExt.toLowerCase())===".smp";
 
 	converters = ["uade123[player:Quartet_ST]"];
+	notes      = "Are there 2 seperate formats I'm dealing with here?";
 }

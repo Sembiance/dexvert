@@ -60,7 +60,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			const otherFiles = (await Promise.all((await fileUtil.tree(inputFile.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==inputFile.absolute);
 			const otherDirs = await Promise.all((await fileUtil.tree(inputFile.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));
 			const auxFiles = await asFormatFormat.auxFiles(inputFile, otherFiles, otherDirs, {xlog});
-			if(auxFiles)
+			if(auxFiles?.length)
 				asFormatId.auxFiles = auxFiles;
 		}
 

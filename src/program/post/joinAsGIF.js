@@ -8,7 +8,7 @@ export class joinAsGIF extends Program
 		frameDelay : "Amount of delay between GIF frames. Default: 12"
 	};
 
-	bin       = "convert";
+	bin       = "magick";
 	args      = async r => ["-strip", "-delay", `${r.flags.frameDelay || 12}`, "-loop", "0", "-dispose", "previous", ...r.inFiles(), await r.outFile("out.gif")];
 	renameOut = true;
 }

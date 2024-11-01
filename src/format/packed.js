@@ -11,7 +11,7 @@ export const unp =
 		compackPacked  : {name : "COMPACK Packed", magic : ["Packer: COMPACK", "16bit DOS EXE COMPACK compressed"]},
 		icePacked      : {name : "ICE Packed", magic : ["ICE compressed/scrambled DOS Command", "Packer: ICE"]},
 		optlinkPacked  : {name : "OPTLINK Packed", magic : ["Packer: Optlink"]},
-		tinyProgPacked : {name : "TinyProg Packed", magic : ["16bit DOS EXE TinyProg compressed"]}
+		tinyProgPacked : {name : "TinyProg Packed", magic : ["16bit DOS EXE TinyProg compressed", "Packer: TinyProg"]}
 	}
 };
 
@@ -27,7 +27,7 @@ export const cup386 =
 		cruncherPacked              : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
 		dnCOMCruncherPacked         : {name : "Dn.COM Cruncher Packed", magic : ["Packer: Dn.COM Cruncher"]},
 		envelopePacked              : {name : "Envelope Packed", magic : ["Packer: envelope"]},
-		exeLITEPacked               : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable"]},
+		exeLITEPacked               : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable", "Packer: ExeLITE"]},
 		fourKZIPPacked              : {name : "4kZIP Packed", magic : ["Packer: 4kZIP[by pascal //Digital Nightmare]"]},
 		jamPacked                   : {name : "JAM Packed", magic : ["JAM compressed 16bit DOS executable"]},
 		lglzPacked                  : {name : "LGLZ Packed", magic : ["Packer: LGLZ", "16bit DOS EXE LGLZ compressed", "LGLZ compressed DOS command"]},
@@ -36,7 +36,7 @@ export const cup386 =
 		packerPacked                : {name : "Packer Packed", magic : ["Packer: Packer"]},
 		pktinyPacked                : {name : "PKTINY Packed", magic : ["16bit DOS EXE PKTINY compressed"]},
 		rdtCompressorPacked         : {name : "RDT Compressor Packed", magic : ["Packer: RDT_Compressor"]},
-		rjCrushPacked               : {name : "RJCrush Packed", magic : ["RJCrush compressed 16bit DOS executable"]},
+		rjCrushPacked               : {name : "RJCrush Packed", magic : ["RJCrush compressed 16bit DOS executable", "Packer: RJcrush"]},
 		rleCOMPackerPacked          : {name : "RLE com-packer Packed", magic : ["Packer: RLE com-packer"]},
 		sixTwoFourPacked            : {name : "624 Packed", magic : ["Packer: Six-2-Fou", "Six-2-Four (624) packed DOS Command"]},
 		spaceMakerPacked            : {name : "SpaceMaker Packed", magic : ["16bit DOS EXE Spacemaker compressed"]},
@@ -51,7 +51,7 @@ export const both =
 {
 	archive :
 	{
-		axePacked                : {name : "AXE Packed", magic : ["16bit DOS AXE compressed Executable", "16bit DOS EXE AXE compressed"]},
+		axePacked                : {name : "AXE Packed", magic : ["16bit DOS AXE compressed Executable", "16bit DOS EXE AXE compressed", "Packer: SEA-AXE"]},
 		cebeCompressExpandPacked : {name : "CEBE Compress Expand Packed", magic : ["CEBE Compress Expand compressed DOS executable"]},
 		cheatPackerPacked        : {name : "Cheat Packer Packed", magic : ["Packer: Cheat packer"]},
 		dietPacked               : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed"]},

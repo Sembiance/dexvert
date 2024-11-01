@@ -11,5 +11,5 @@ export class appleSingle extends Format
 	forbidExtMatch = true;
 	magic          = _APPLESINGLE_MAGIC;
 	fallback       = true;
-	converters     = ["unar[mac][skipMacBinaryConversion]", "deark[module:macrsrc]", "deark[module:applesd]"];
+	converters     = ["unar[mac][skipMacBinaryConversion]", "deark[module:macrsrc]", "deark[module:applesd] -> deark[module:applesd][opt:applesd:extractrsrc=1]"];
 }

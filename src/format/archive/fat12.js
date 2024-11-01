@@ -7,6 +7,6 @@ export class fat12 extends Format
 	ext            = [".hdi", ".fdd", ".fdi", ".vhd"];
 	forbidExtMatch = true;
 	priority       = this.PRIORITY.LOW;	// allow other more specialized formats like stDiskImage and rawPartition to take precedence
-	magic          = ["PC-98 FAT8", "PC-98 FAT12", "PC-98 FAT16", "Anex86 PC98 floppy image"];
+	magic          = ["PC-98 FAT8", "PC-98 FAT12", "PC-98 FAT16", "Anex86 PC98 floppy image", "Virtual Floppy Disk image"];
 	converters     = ["pc98ripper", "uaeunp"];
 }

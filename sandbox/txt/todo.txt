@@ -1,12 +1,17 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add new formats from:
+	deark (since 2024-09-30)
+	recoil (since 2024-05-18)
+
 * Troubleshoot why this doesn't fully extract: http://dev.discmaster2.textfiles.com/admin/item?itemid=12398
 
-* Look into why these 2 files fail on dexdrone11 and dexdrone12 (may be due to latest libre office):
+* This seems to keep a random named file each time, look into fixing this:
+  [] archive/appleDOSDiskImage/PRO.BYTER Created files are different: [ "17mo1pjs7gc.txt", "6ly49vxyv7.txt" ]
+* Look into why these 2 files fail (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
-  Do this AFTER updating laptop/workstation to latest software versions
 
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
@@ -17,6 +22,10 @@
 \---------------/
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
+    Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
+    Ask how hard it would be to leverage the SCUMMVM code to create a CLI tool that when given any director file can extract all assets
+	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
+	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
   Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://dev.discmaster2.textfiles.com/admin/item?itemid=10456
 

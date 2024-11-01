@@ -7,7 +7,7 @@ export class machineHunterFMVVideo extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Machine_Hunter_FMV";
 	ext            = [".fmv"];
 	forbidExtMatch = true;
-	magic          = ["Machine Hunter FMV Video"];
+	magic          = ["Machine Hunter FMV Video", "Machine Hunter Full Motion Video"];
 	weakMagic      = true;
 	converters     = ["na_game_tool[format:mh-fmv]"];
 }

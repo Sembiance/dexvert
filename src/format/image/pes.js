@@ -6,7 +6,7 @@ export class pes extends Format
 	name         = "PES Embroidery File";
 	website      = "http://fileformats.archiveteam.org/wiki/PES";
 	ext          = [".pes"];
-	magic        = ["Brother/Babylock/Bernina Home Embroidery Format"];
+	magic        = ["Brother/Babylock/Bernina Home Embroidery Format", /^fmt\/1957( |$)/];
 	metaProvider = ["image"];
 	notes        = xu.trim`
 		It's a vector format, but uniconvertor just embeds a PNG into the resulting SVG file.

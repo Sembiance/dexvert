@@ -53,7 +53,7 @@ export const gameextractor =
 		simsArchive                        : {name : "The Sims Archive", ext : [".far"], magic : ["The Sims Archive"]},
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
-		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package", /^Rune map$/], forbiddenMagic : ["Unreal Music"]},
+		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", /^Unreal (Audio|Engine) package/, /^Rune map$/], forbiddenMagic : ["Unreal Music"]},
 		vampireEngineMageSlayerGameArchive : {name : "Vampire Engine MageSlayer game archive", ext : [".vpk"], magic : ["Vampire Engine MageSlayer game data archive"]},
 		vivBIGF                            : {name : "VIV/BIGF/BIG4 EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF", "BIG4 Electronic Arts game data archive"], website : "http://fileformats.archiveteam.org/wiki/VIV"},
 		volitionPackageGameArchive         : {name : "Volition Package game archive", ext : [".vpp", ".vp"], magic : ["Volition Package - Red Faction game data archive", "Volition Package game archive data"]},

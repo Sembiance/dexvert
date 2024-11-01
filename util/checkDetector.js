@@ -110,5 +110,5 @@ async function checkDetector(detectorid)
 	console.log(printUtil.columnizeObjects(matches.sortMulti([o => o.formatid.split("/")[0], o => o.formatid.split("/")[1]]), {prefix : "\n\n"}));
 }
 
-for(const detectorid of detectorsToTest)
+for(const detectorid of detectorsToTest.sortMulti())
 	await checkDetector(detectorid);

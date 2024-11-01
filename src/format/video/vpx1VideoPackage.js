@@ -7,6 +7,6 @@ export class vpx1VideoPackage extends Format
 	website        = "https://wiki.multimedia.cx/index.php/VPX1";
 	ext            = [".vpx"];
 	forbidExtMatch = true;
-	magic          = ["VPX1 Video Package"];
+	magic          = ["VPX1 Video Package", "VPX1 video"];
 	converters     = ["na_game_tool[format:vpx1]"];
 }

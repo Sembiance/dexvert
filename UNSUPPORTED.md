@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,508)
+# Unsupported File Formats (2,506)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -598,7 +598,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (168)
+## Image (166)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -631,7 +631,6 @@ Family/Format | Name | Extensions | Notes
 [image/cadStdDrawing](https://discmaster.textfiles.com/search?formatid=cadStdDrawing) | CadStd drawing | .cad | 
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?formatid=calamusVectorDocument) | Calamus Vector Document | .cvd | 
 [image/chasysDrawIESDrawing](https://discmaster.textfiles.com/search?formatid=chasysDrawIESDrawing) | Chasys Draw IES drawing | .cd5 | 
-[image/chompstersSprite](https://discmaster.textfiles.com/search?formatid=chompstersSprite) | Chompsters Sprite | .spr | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?formatid=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
 [image/comicSetterProject](https://discmaster.textfiles.com/search?formatid=comicSetterProject) | Comic Setter project |  | 
 [image/commandSimulationsGameGraphic](https://discmaster.textfiles.com/search?formatid=commandSimulationsGameGraphic) | Command Simulations game graphic |  | I tried reverseing chunk names (sandbox/legacy/commandSimulation2iff.js) but it didn't work (probably more sub-chunk reversals)
@@ -762,7 +761,6 @@ Family/Format | Name | Extensions | Notes
 [image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?formatid=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?formatid=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
 [image/visualCADDSymbol](https://discmaster.textfiles.com/search?formatid=visualCADDSymbol) | Visual CADD Symbol | .vcs | 
-[image/wgtSprite](https://discmaster.textfiles.com/search?formatid=wgtSprite) | [WGT Sprite](http://fileformats.archiveteam.org/wiki/WGT_Sprite) | .spr | 
 [image/windowsFAXCover](https://discmaster.textfiles.com/search?formatid=windowsFAXCover) | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?formatid=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?formatid=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)

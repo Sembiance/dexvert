@@ -7,6 +7,6 @@ export class gtxt extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	idCheck        = inputFile => inputFile.size>190;
-	magic          = ["GTXT"];
+	magic          = ["GTXT", "16bit COM GTXT/MakeScroll reader"];
 	converters     = ["deark[module:gtxt][opt:text:encconv=0][opt:text:fmtconv=0]"];
 }

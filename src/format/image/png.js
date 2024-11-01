@@ -9,7 +9,8 @@ export class png extends Format
 	mimeType         = "image/png";
 	magic            = [
 		// generic
-		"Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "image/png", "image/apng", "piped png sequence (png_pipe)", "Animated Portable Network Graphics (apng)",
+		"Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "image/png", "piped png sequence (png_pipe)",
+		"image/apng", "Animated Portable Network Graphics (apng)", "Animated Portable Network Graphics",
 		/^fmt\/(11|12|13|935)( |$)/,
 
 		// specific

@@ -5,6 +5,6 @@ export class konicaQualityPhoto extends Format
 	name       = "Konica Quality Photo aka Pegaus PIC";
 	website    = "http://fileformats.archiveteam.org/wiki/KQP";
 	ext        = [".kqp", ".pic"];
-	magic      = ["Konica Quality Photo"];
+	magic      = ["Konica Quality Photo", "Pegasus PIC bitmap"];
 	converters = ["deark[module:picjpeg]", "nconvert[matchType:magic]"];
 }

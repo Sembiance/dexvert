@@ -96,6 +96,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`chown sembiance:sembiance /home/sembiance/.ssh/authorized_keys`,
 	`chmod 600 /home/sembiance/.ssh/authorized_keys`,
 	`su - sembiance`,
+	`mkdir -p /mnt/dexvert/oldLogs`,
 	`# Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,

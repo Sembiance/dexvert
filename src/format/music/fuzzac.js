@@ -6,6 +6,7 @@ export class fuzzac extends Format
 	name         = "Fuzzac Packer Module";
 	website      = "http://fileformats.archiveteam.org/wiki/Fuzzac_Packer_module";
 	ext          = [".fuzzac"];
+	magic        = ["Fuzzac Packer module"];
 	metaProvider = ["musicInfo"];
 	priority     = this.PRIORITY.LOWEST;
 	converters   = ["uade123", "xmp"];

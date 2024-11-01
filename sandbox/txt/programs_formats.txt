@@ -17076,6 +17076,7 @@ trs:	Spooky Sprites Sprite
 wbm:	Wild-Bug engine image
 wbmp:	Wireless Bitmap
 webp:	WebP
+wgtspr:	WGT Sprite
 wia:	Wild-Bug image sequence
 xbm:	X Bitmap
 xcursor:	Xcursor

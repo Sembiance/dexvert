@@ -6,5 +6,5 @@ export class photoImpact3Album extends Format
 	ext            = [".ab3"];
 	forbidExtMatch = true;
 	magic          = ["PhotoImpact 3 Album"];
-	converters     = ["foremost"];
+	converters     = ["foremost -> rotateImage[degrees:180]"];
 }

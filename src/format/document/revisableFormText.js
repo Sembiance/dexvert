@@ -6,6 +6,6 @@ export class revisableFormText extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/RFT";
 	ext            = [".rft", ".dca", ".fft"];
 	forbidExtMatch = true;
-	magic          = [/Revisable Form Text/];
+	magic          = [/Revisable Form Text/, /^x-fmt\/148( |$)/];
 	converters     = ["fileMerlin", "word97"];
 }

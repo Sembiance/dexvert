@@ -7,7 +7,7 @@ export class printfox extends Format
 	name           = "Printfox/Pagefox Bitmap";
 	website        = "http://fileformats.archiveteam.org/wiki/Printfox_bitmap";
 	ext            = [".gb", ".bs", ".pg"];
-	magic          = ["PrintFox/Pagefox bitmap"];
+	magic          = ["PrintFox/Pagefox bitmap", "PrintFox/Pagefox WEAK"];
 	trustMagic     = true;
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 

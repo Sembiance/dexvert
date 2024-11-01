@@ -79,7 +79,7 @@ export class stackimport extends Program
 		await otherPBMFilePaths.parallelMap(async imageFilePath =>
 		{
 			const pngFilePath = path.join(outDirPath, `${path.basename(imageFilePath, ".pbm")}.png`);
-			await runUtil.run("convert", [imageFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
+			await runUtil.run("magick", [imageFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
 			if(await fileUtil.exists(pngFilePath))
 				await fileUtil.unlink(imageFilePath);
 		}, await sysUtil.optimalParallelism(otherPBMFilePaths.length));

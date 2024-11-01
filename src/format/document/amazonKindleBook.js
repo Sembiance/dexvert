@@ -6,6 +6,6 @@ export class amazonKindleBook extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/AZW";
 	ext            = [".azw", ".azw3", ".azw4"];
 	forbidExtMatch = true;
-	magic          = [/^Amazon Kindle .*eBook/];
+	magic          = [/^Amazon Kindle .*eBook/, /^fmt\/1937( |$)/];
 	converters     = ["ebook_convert"];
 }

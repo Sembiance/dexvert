@@ -30,11 +30,11 @@ export async function quickConvertImages(r, fileOutputPaths)
 		const extMatches = [ext.toLowerCase(), ...(r.flags.convertAsExt ? [r.flags.convertAsExt] : [])];
 		if([".bmp", ".jp2"].includesAny(extMatches))
 		{
-			await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
+			await runUtil.run("magick", [fileOutputPath, ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
 		}
 		else if([".tif", ".tiff"].includesAny(extMatches))
 		{
-			await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
+			await runUtil.run("magick", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
 		}
 		else if([".qtif"].includesAny(extMatches))
 		{
@@ -82,7 +82,7 @@ export async function quickConvertImages(r, fileOutputPaths)
 		}
 		else if(r.flags.alwaysConvert)
 		{
-			await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
+			await runUtil.run("magick", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
 		}
 		else
 		{

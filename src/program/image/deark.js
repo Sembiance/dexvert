@@ -132,7 +132,7 @@ export class deark extends Program
 			{
 				r.xlog.debug`${imgInfo}`;
 				const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
-				await runUtil.run("convert", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);
+				await runUtil.run("magick", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);
 				for(const part of imgInfo.parts)
 				{
 					const srcFilePath = fileOutputPaths.find(fileOutputPath => fileOutputPath.endsWith(path.basename(part.filename)));
@@ -147,7 +147,7 @@ export class deark extends Program
 					}
 				}
 
-				await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(outDirPath, `${r.originalInput.name}.png`)]);
+				await runUtil.run("magick", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(outDirPath, `${r.originalInput.name}.png`)]);
 			}
 		}
 
@@ -342,7 +342,7 @@ export class deark extends Program
 			}
 
 			const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
-			await runUtil.run("convert", ["-size", `${maxWidth}x${maxHeight}`, "xc:white", `PNG32:${combinedFilePath}`]);
+			await runUtil.run("magick", ["-size", `${maxWidth}x${maxHeight}`, "xc:white", `PNG32:${combinedFilePath}`]);
 
 			for(const file of dearkData.files)
 			{
@@ -365,7 +365,7 @@ export class deark extends Program
 			}
 
 			await fileUtil.move(combinedFilePath, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input).name}.png`));
-			//await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input.name).name}.png`)]);
+			//await runUtil.run("magick", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input.name).name}.png`)]);
 
 			//r.xlog.info`${dearkData}`;
 			//r.xlog.info`${{combinedFilePath, maxWidth, maxHeight}}`;

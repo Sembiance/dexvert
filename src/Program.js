@@ -598,6 +598,7 @@ export class Program
 
 				if(this.chainPost)
 				{
+					xlog.debug`Running ${this.programid}.chainPost()...`;
 					try { await this.chainPost(r); }
 					catch(err) { xlog.error`Program chainPost ${fg.orange(this.programid)} threw error ${err}`; }
 				}

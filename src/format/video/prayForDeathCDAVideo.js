@@ -7,6 +7,6 @@ export class prayForDeathCDAVideo extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Pray_for_Death_CDA";
 	ext            = [".cda"];
 	forbidExtMatch = true;
-	magic          = ["Pray for Death CDA Video"];
+	magic          = ["Pray for Death CDA Video", "Pray for Death cutscene"];
 	converters     = ["na_game_tool[format:cda]"];
 }

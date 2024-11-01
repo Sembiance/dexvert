@@ -104,7 +104,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 				if(importExt===".bmp")
 				{
 					const outPngFilePath = await fileUtil.genTempPath(convertDirPath, ".png");
-					await runUtil.run("convert", [importFilePath, ...CONVERT_PNG_ARGS, outPngFilePath], {timeout : xu.MINUTE*2});
+					await runUtil.run("magick", [importFilePath, ...CONVERT_PNG_ARGS, outPngFilePath], {timeout : xu.MINUTE*2});
 					
 					if(await fileUtil.exists(outPngFilePath))
 					{

@@ -6,6 +6,6 @@ export class zorkPMVVideo extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Zork_PMV";
 	ext            = [".pmv"];
 	forbidExtMatch = true;
-	magic          = ["Zork PMV Video"];
+	magic          = ["Zork PMV Video", "MADE Engine Video"];
 	converters     = ["na_game_tool[format:pmv]"];
 }

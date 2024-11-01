@@ -64,21 +64,13 @@ const FORCE_FORMAT_AS =
 
 const FORMAT_FILE_META =
 {
-	"document/wordMac" :
-	{
-		"Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"}
-	},
-	"image/a2gsSHStar" :
-	{
-		"title" : {proDOSTypeCode : "PNT"}
-	},
-	"image/apple2Icons" :
-	{
-		"Softdisk.Icon" : {proDOSTypeCode : "ICN"}
-	},
+	"document/wordMac"           : { "Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"} },
+	"image/a2gsSHStar"           : { "title" : {proDOSTypeCode : "PNT"} },
+	"image/apple2Icons"          : { "Softdisk.Icon" : {proDOSTypeCode : "ICN"} },
 	"image/printShopGSGraphic"   : { "*" : {proDOSType : "F8", proDOSTypeAux : "C323"} },
 	"other/appleIIgsShellScript" : { "*" : {proDOSTypeCode : "EXE"} },
-	"other/integerBASICProgram"  : { "*" : {proDOSTypeCode : "INT"} }
+	"other/integerBASICProgram"  : { "*" : {proDOSTypeCode : "INT"} },
+	"text/appleIIgsSourceCode"   : { "*" : {proDOSTypeCode : "SRC"} }
 };
 
 const FORMAT_OS_HINT =
@@ -403,6 +395,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/wordDocDOS\/.+\.(DOC|doc|MSW)$/, "document", "wri"],
 	[/document\/wordDocDOS\/horse$/, "document", "wri"],
 	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],
+	[/document\/xls\/LOANAMORTIZATION_TP10073881\.XLTX_3082$/, "archive", "zip"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
@@ -414,7 +407,6 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/other\/db2Bind\/QEDBM03\.BN$/, "audio", "mp3"],
-	[/text\/appleIIgsSourceCode\/(CNFG|teachfilter)\.txt/, "text", "txt"],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],
@@ -430,6 +422,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These files don't convert with my converters and get identified to other things
 	[/audio\/quickTimeAudio\/Demo Music File$/i, "archive", "macBinary"],
+	[/document\/scribus\/(arkanoid|robocop)\.sla$/, "text", "txt"],
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
 	[/poly\/ac3d\/forza\.acc$/i, "text", "txt"],
 	[/poly\/cinema4D\/bomb\.xml$/i, "text", "xml"],

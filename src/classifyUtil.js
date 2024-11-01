@@ -24,19 +24,19 @@ async function cropImage({modelName, inPath, outPath, method="centerCrop"}={})
 	if(method==="smartCrop")
 		await runUtil.run("smartcrop", [inPath, outPath, MODEL_DIM[modelName].join("x")], RUN_OPTIONS);
 	else if(method==="scaleDown")
-		await runUtil.run("convert", [inPath, "-background", "transparent", "-gravity", "center", "-resize", `${MODEL_DIM[modelName].join("x")}>`, "-extent", MODEL_DIM[modelName].join("x"), "+repage", outPath], RUN_OPTIONS);
+		await runUtil.run("magick", [inPath, "-background", "transparent", "-gravity", "center", "-resize", `${MODEL_DIM[modelName].join("x")}>`, "-extent", MODEL_DIM[modelName].join("x"), "+repage", outPath], RUN_OPTIONS);
 	else if(method==="centerCrop")
-		await runUtil.run("convert", [inPath, "-background", "transparent", "-gravity", "center", "-crop", `${MODEL_DIM[modelName].join("x")}+0+0`, "-extent", MODEL_DIM[modelName].join("x"), "+repage", outPath], RUN_OPTIONS);
+		await runUtil.run("magick", [inPath, "-background", "transparent", "-gravity", "center", "-crop", `${MODEL_DIM[modelName].join("x")}+0+0`, "-extent", MODEL_DIM[modelName].join("x"), "+repage", outPath], RUN_OPTIONS);
 }
 
 export async function preProcessPNG(modelName, imagePath, outDir)
 {
 	await Deno.mkdir(path.join(CLASSIFY_PATH, "tmp"), {recursive : true});
 	const pngTrimmedPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
-	await runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
+	await runUtil.run("magick", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 	
 	const tmpTrimPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
-	await runUtil.run("convert", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
+	await runUtil.run("magick", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
 	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
 	for(const CROP_METHOD of CROP_METHODS)
@@ -56,10 +56,10 @@ export async function classifyImage(imagePath, modelName, xlog)
 	if(fileR?.meta?.detections?.some(o => o.value.startsWith("SVG Scalable Vector Graphics image")))	// eslint-disable-line unicorn/prefer-ternary
 		await runUtil.run("inkscape", ["--export-area-drawing", "-o", pngTrimmedPath, `./${path.basename(imagePath)}`], {...RUN_OPTIONS, virtualX : true, cwd : path.dirname(imagePath)});
 	else
-		await runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
+		await runUtil.run("magick", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 
 	const tmpTrimPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
-	await runUtil.run("convert", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
+	await runUtil.run("magick", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
 	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
 	const confidences = [];

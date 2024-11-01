@@ -26,7 +26,7 @@ export class ffdec extends Program
 		const frameDelay = swfdumpR.meta.frameRate ? (100/swfdumpR.meta.frameRate) : 20;
 		const gifFilePath = await r.outFile(`${r.originalInput ? r.originalInput.name : "out"}.gif`, {absolute : true});
 		
-		await runUtil.run("convert", ["-delay", frameDelay.toString(), "-loop", "0", "-dispose", "previous", ...frameFilePaths, "-strip", gifFilePath], {cwd : framesDirPath});
+		await runUtil.run("magick", ["-delay", frameDelay.toString(), "-loop", "0", "-dispose", "previous", ...frameFilePaths, "-strip", gifFilePath], {cwd : framesDirPath});
 		await fileUtil.unlink(framesDirPath, {recursive : true});
 	};
 

@@ -6,6 +6,6 @@ export class kdvVideo extends Format
 	website        = "https://wiki.multimedia.cx/index.php/KDV";
 	ext            = [".kdv"];
 	forbidExtMatch = true;
-	magic          = ["KDV Video"];
+	magic          = ["KDV Video", "Novalogic KDV Video"];
 	converters     = ["na_game_tool"];
 }

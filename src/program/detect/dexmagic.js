@@ -120,6 +120,7 @@ const DEXMAGIC_CHECKS =
 	"PaintWorks"                      : [{offset : 54, match : "ANvisionA"}],
 	"PCR Image"                       : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x10]}],
 	"Picasso 64 Image"                : [{offset : 0, match : [0x00, 0x18]}],
+	"PrintFox/Pagefox WEAK" 		  : [{offset : 0, match : [[0x42, 0x47, 0x50]]}],
 	"QPC Image"                       : [{offset : 0, match : "QPC Graphic Data Headder Block"}],
 	"Quickstart Icon"                 : [{offset : 0, match : [[0x37, 0x38], 0x00, 0x1F, 0x00]}],
 	"Reko CardSet - RKP"              : [{offset : 0, match : "PCRKP"}],

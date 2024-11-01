@@ -24,7 +24,7 @@ export class hypercard_dasm extends Program
 		await bmpFilePaths.parallelMap(async bmpFilePath =>
 		{
 			const pngFilePath = path.join(outDirPath, `${path.basename(bmpFilePath, ".bmp")}.png`);
-			await runUtil.run("convert", [bmpFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
+			await runUtil.run("magick", [bmpFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
 			if(await fileUtil.exists(pngFilePath))
 			{
 				await fileUtil.unlink(bmpFilePath);

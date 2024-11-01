@@ -47,7 +47,7 @@ export class acx extends Program
 			const {dirName, indents} = line.match(/^\*?(?<indents>\s+)(?<dirName>\S+)\s+DIR.+$/)?.groups || {};
 			if(dirName)
 			{
-				while(dirChain.length>((indents.length/2)-1))
+				while(dirChain.length>Math.max(((indents.length/2)-1), 0))
 					dirChain.pop();
 				dirChain.push(dirName);
 				

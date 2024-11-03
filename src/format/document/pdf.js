@@ -10,7 +10,7 @@ export class pdf extends Format
 		"Adobe Portable Document Format", "PDF document", "Adobe Portable Document (PDF) Datei", "Format: PDF", "application/pdf", /^PDF$/, /Acrobat PDF.* Portable Document Format$/,
 		/^fmt\/(14|15|16|17|18|19|20|95|157|158|276|354|477|480|558|559|560|561|562|563|564|565|1862)( |$)/		// 1862 is actually an Adobe Illustrator format but modern and can't convert but it has a built in PDF preview, so this works
 	];
-	idMeta       = ({macFileType, macFileCreator}) => [" PDF", "PDF "].includes(macFileType) && ["8BIM", "CARO"].includes(macFileCreator);
+	idMeta       = ({macFileType, macFileCreator}) => [" PDF", "PDF "].includes(macFileType) && ["8BIM", "CARO", "LMAN"].includes(macFileCreator);
 	untouched    = true;
 	metaProvider = ["pdfinfo"];
 }

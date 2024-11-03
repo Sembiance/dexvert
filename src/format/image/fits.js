@@ -7,5 +7,6 @@ export class fits extends Format
 	ext        = [".fit", ".fits", ".fts", ".fz"];
 	mimeType   = "image/fits";
 	magic      = ["Flexible Image Transport System", "FITS image data", "application/fits", /^x-fmt\/383( |$)/];
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="FITS" && macFileCreator==="VIST";
 	converters = ["nconvert", "iconvert", `abydosconvert[format:${this.mimeType}]`, "gimp"];
 }

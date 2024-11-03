@@ -6,7 +6,7 @@ export class quickDraw3D extends Format
 	name       = "QuickDraw 3D Metafile";
 	website    = "http://fileformats.archiveteam.org/wiki/3DMF";
 	ext        = [".3dmf", ".q3d"];
-	magic      = ["QuickDraw 3D Metafile", /^fmt\/(1049|1050)( |$)/];
+	magic      = ["QuickDraw 3D Metafile", /^fmt\/(1049|1050|1203)( |$)/];
 	idMeta     = ({macFileType}) => macFileType==="3DMF";
 	converters = ["polyTrans64[format:quickDraw3D]", "AccuTrans3D"];
 	notes      = xu.trim`

@@ -7,6 +7,6 @@ export class rayDreamDesignerScene extends Format
 	ext        = [".rds", ".rd4", ".rd3"];
 	safeExt    = ".rds";
 	magic      = ["Ray Dream Designer scene", "Ray Dream Studio"];
-	idMeta     = ({macFileType, macFileCreator}) => macFileType==="RD4F" && macFileCreator==="RD4A";
+	idMeta     = ({macFileType, macFileCreator}) => ["RD3F", "RD4F", "RDSF"].includes(macFileType) && ["RD3A", "RD4A", "RD5A"].includes(macFileCreator);
 	converters = ["rayDreamDesignerStudio55"];
 }

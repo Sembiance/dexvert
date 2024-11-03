@@ -130,6 +130,10 @@ const FLEX_SIZE_PROGRAMS =
 {
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
+
+	// Produces different data per host
+	acorn2sfd       : 10,
+	soundFont2tomp3 : 25,
 	
 	// Can sometimes produce different data each time
 	amigaBitmapFontContentToOTF : 0.1,
@@ -144,7 +148,6 @@ const FLEX_SIZE_PROGRAMS =
 	sapfs                       : 25,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
-	soundFont2tomp3             : 20,
 	unp                         : 0.1,
 	zxtune123                   : 0.1
 };
@@ -212,8 +215,9 @@ const FLEX_SIZE_FORMATS =
 		"iso:.mp3"            : 1,
 		"tnef:.pdf"           : 40,
 
-		// the PBMs generated are different each time
-		hypercard : 2,
+		// can differ per host or per run
+		"hypercard:.xml" : 50,
+		"hypercard:.png" : 2,
 		
 		// these can differ a lot
 		"rsrc:.png" : 999_999_999,

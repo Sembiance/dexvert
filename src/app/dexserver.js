@@ -37,9 +37,12 @@ await runUtil.run("/mnt/compendium/bin/fixPerms", [], {cwd : DEXVERT_RAM_DIR});
 await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 
-// if we don't empty this out on startup, this directory can get really big since testdexvert and testMany both write their results here instead of RAM
-await fileUtil.unlink("/mnt/dexvert/test", {recursive : true});
-await Deno.mkdir("/mnt/dexvert/test", {recursive : true});
+// we need to empty these on startup otherwise these get really big and take a lot of space
+for(const dir of ["test", "sample"])
+{
+	await fileUtil.unlink(path.join("/mnt/dexvert", dir), {recursive : true});
+	await Deno.mkdir(path.join("/mnt/dexvert", dir), {recursive : true});
+}
 
 const serverStatusDirPath = await fileUtil.genTempPath(undefined, "dexserver-serverStatus");
 await Deno.mkdir(serverStatusDirPath);

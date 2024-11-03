@@ -9,9 +9,15 @@
 
 * This seems to keep a random named file each time, look into fixing this:
   [] archive/appleDOSDiskImage/PRO.BYTER Created files are different: [ "17mo1pjs7gc.txt", "6ly49vxyv7.txt" ]
+
 * Look into why these 2 files fail (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
+
+* See why this seems to be different each time with seemingly random files:
+  [FAIL] audio/aurealAspenSoundBank/au30gm.arl Created files are different: [ "Orcsnr.aif.mp3", "Piatti.aif.mp3" ]
+
+* See why image/paintDotNetImage format fails
 
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available

@@ -6,5 +6,6 @@ export class nuFX extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/NuFX";
 	ext        = [".bxy", ".shk"];
 	magic      = ["NuFile archive", "NuFX archive", /^fmt\/850( |$)/];
+	idMeta     = ({proDOSTypeCode, proDOSTypeAux}) => proDOSTypeCode==="LBR" && proDOSTypeAux==="8002";
 	converters = ["nulib2", "acx"];
 }

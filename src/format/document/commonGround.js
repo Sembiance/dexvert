@@ -7,6 +7,7 @@ export class commonGround extends Format
 	ext            = [".dp"];
 	forbidExtMatch = true;
 	magic          = ["Common Ground Digital Paper document"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="CGDC" && macFileCreator==="CGVM";
 	notes          = "Can probably only be converted properly with the Common Ground software itself, which I was unable to locate.";
 	converters     = ["strings"];
 }

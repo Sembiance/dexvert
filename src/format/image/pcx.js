@@ -6,7 +6,7 @@ export class pcx extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/PCX";
 	ext          = [".pcx", ".pcc"];
 	mimeType     = "image/x-pcx";
-	idMeta       = ({macFileType}) => [".PCX", "PCX "].includes(macFileType);
+	idMeta       = ({macFileType}) => [".PCX", "PCX ", "PCXx"].includes(macFileType);
 	magic        = ["PCX bitmap", "image/vnd.zbrush.pcx", /^PCX ver.* image data/, /^PCX$/, "piped pcx sequence (pcx_pipe)", /^fmt\/(86|87|88|89|90)( |$)/];
 	metaProvider = ["image"];
 	converters   = [

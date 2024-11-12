@@ -77,7 +77,7 @@ export class image extends Family
 			return false;
 		}
 
-		if(dexid.formatid==="svg" && meta.colorCount<2)
+		if(dexid.formatid==="svg" && meta.colorCount<2 && !dexState.format.allow2ColorSVG)
 		{
 			xlog.warn`Image failed verification due to being unsafe an SVG with less than 2 colors.`;
 			return false;

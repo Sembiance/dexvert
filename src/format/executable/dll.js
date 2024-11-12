@@ -14,6 +14,7 @@ export class dll extends Format
 	magic        = [
 		// general DLL type
 		"Win32 Dynamic Link Library", "PE32 executable (DLL)", "PE32+ executable (DLL)", /^MS-DOS executable, NE for MS Windows .*\(DLL or font\)/, "PE Unknown PE signature 0 (DLL)",
+		"OLE Custom / ActiveX Control", "OLE Custom Control",
 
 		// specific DLL types
 		"Photoshop filter plug-in", "PhotoShop plug-in", "NT5 Migrate DLL", "DLL PowerBASIC PB/DLL 6.x", "OllyDbg plugin", "Borland component", "Python Dynamic module", "Adobe Acrobat Reader Plugin", "BRender Device Driver",	// BR not a typo

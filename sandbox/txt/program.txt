@@ -42,9 +42,6 @@ Set to true if this program can produce an output file identical to the original
 >>> forbidChildRun = true
 Set to true if this program should never be ran again directly on the children it produces because of potential infinite loops
 
->>> skipClassify = true
-Don't classify. Useful on specific formats where the output tends to be confused as 'garbage'
-
 >>> ******** Execute Properties
 >>> bin = "binary_program"
 The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("subDir/binname") to get a local dexvert/bin/*

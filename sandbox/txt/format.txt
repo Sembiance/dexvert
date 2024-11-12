@@ -125,6 +125,12 @@ If this is set on a an image format, then the image will be classified as 'garba
 This uses a image classification model trained against a bunch of static and non-static images.
 If the image classifies as garbage, it will be deleted.
 
+>>> skipClassify = true
+Don't classify. Useful on specific formats where the output tends to be confused as 'garbage'
+
+>>> allow2ColorSVG = true
+Set this to allow 2-color SVG output (normally it's forbidden due to being too lax and letting garbage out)
+
 >>> meta = async inputFile => { return {}; }
 Format specific function that takes in an input DexFile and should return meta about the input file
 

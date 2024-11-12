@@ -5,7 +5,7 @@ export class nrg extends Format
 	name       = "Nero CD Image";
 	website    = "http://fileformats.archiveteam.org/wiki/NRG";
 	ext        = [".nrg"];
-	magic      = ["Nero CD image", "Nero 4 Archiv gefunden", "Nero Burning ROM CD Image", /^fmt\/1743( |$)/];
+	magic      = ["Nero CD image", /^Nero [45] Archiv gefunden/, "Nero Burning ROM CD Image", /^fmt\/1743( |$)/];
 	weakMagic  = ["Nero Burning ROM CD Image"];	// This file is mis-identified as Nero and is actually an .iso: archive/iso/Atari Forever 1.iso
 	priority   = this.PRIORITY.TOP;	// NRG is often mis-identified as ISO
 	

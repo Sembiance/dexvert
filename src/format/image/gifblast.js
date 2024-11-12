@@ -6,5 +6,6 @@ export class gifblast extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GIFBLAST";
 	ext        = [".gfb"];
 	magic      = ["GIFBLAST bitmap"];
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="GFBf" && macFileCreator==="MGFB";
 	converters = ["gifblast"];
 }

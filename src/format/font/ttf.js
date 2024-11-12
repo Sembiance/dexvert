@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {imageUtil} from "xutil";
 
 export class ttf extends Format
 {
@@ -13,4 +14,5 @@ export class ttf extends Format
 	weakMagic    = ["Format: TrueType font", "font/ttf"];
 	metaProvider = ["fc_scan"];
 	converters   = ["convert[format:TTF][background:#C0C0C0][matchType:magic]"];
+	verify       = async ({newFile}) => (await imageUtil.getInfo(newFile.absolute))?.colorCount>1;
 }

@@ -31,6 +31,7 @@ const _XML_MAGIC = [
 	"XML BLAST Output", "Windows Search Connector", "Bayesian Networks Interchange Format", "Geography Markup Language", "Ivy module descriptor", "LEGO Digital Designer XML data", "SQL Server Integration Services package", "KWordQuiz learning file",
 	/^uVision v[245] Project( Options)?/, "CMSIS System View Description format", /^IAR Embedded Workbench (Project|Workspace)/, "GDAL Virtual Format (vector)", /^Programmer's Notepad (Scheme|text Clips|user preset)/, "Adobe Premiere Title",
 	"IAR Embedded Workbench Debug info", "Xilinx ISE Messages", "Visual Studio .NET Visual C Project", "VMware supplemental team member configuration", "Microsoft Visual Studio project template", "PRONOM file format report",
+	"Windows application Manifest",
 	/^fmt\/(205|243|475|570|896|979|983|986|1134|1219|1357|1474|1677|1729|1776|1796)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

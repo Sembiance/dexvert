@@ -1,8 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add new formats from:
-	deark (since 2024-09-30)
+* Update these programs to their latest versions, then add new formats since:
+	deark (since 2024-09-30)  (ESPECIALLY readmake: https://dev.discmaster2.textfiles.com/admin/item?itemid=13161)
 	recoil (since 2024-05-18)
 
 * Troubleshoot why this doesn't fully extract: http://dev.discmaster2.textfiles.com/admin/item?itemid=12398

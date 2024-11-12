@@ -6,5 +6,6 @@ export class a2HighRes extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats";
 	ext        = [".hgr"];
 	fileSize   = 8192;
+	idMeta     = ({proDOSTypeCode}) => proDOSTypeCode==="FOT";
 	converters = ["recoil2png"];
 }

@@ -52,7 +52,8 @@ export class file extends Program
 			["BIOS", "device="],
 			[["Mach-O", "] ["], ["armv7", "bundle", "current ar", "executable", "dSYM", "dynamic linker", "dynamically linked", "fixed", "hppa", "i386", "i486", "kext", "object", "m68k", "ppc", "preload", "SPARC", "x86"]],
 			["PGP symmetric key encrypted data", "salted"],
-			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]]
+			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]],
+			["Apple QuickTime move", "non-streamed"]
 		];
 		for(const [prefixes, subfixes] of MULTI_LINE_PREFIXES)
 		{

@@ -66,6 +66,7 @@ const FORMAT_FILE_META =
 {
 	"document/wordMac"           : { "Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"} },
 	"image/a2gsSHStar"           : { "title" : {proDOSTypeCode : "PNT"} },
+	"image/a2HighRes"            : { "Gs.256k" : {proDOSTypeCode : "FOT"} },
 	"image/apple2Icons"          : { "Softdisk.Icon" : {proDOSTypeCode : "ICN"} },
 	"image/printShopGSGraphic"   : { "*" : {proDOSType : "F8", proDOSTypeAux : "C323"} },
 	"other/appleIIgsShellScript" : { "*" : {proDOSTypeCode : "EXE"} },

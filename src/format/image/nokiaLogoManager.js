@@ -1,5 +1,5 @@
 import {Format} from "../../Format.js";
-import {TEXT_MAGIC_STRONG} from "../../Detection.js";
+import {TEXT_MAGIC} from "../../Detection.js";
 
 export class nokiaLogoManager extends Format
 {
@@ -7,6 +7,6 @@ export class nokiaLogoManager extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Nokia_Logo_Manager_bitmap";
 	ext            = [".nlm"];
 	magic          = ["Nokia Logo Manager bitmap"];
-	forbiddenMagic = TEXT_MAGIC_STRONG;
+	forbiddenMagic = TEXT_MAGIC;
 	converters     = ["deark[module:nlm][matchType:magic]", "nconvert", "wuimg[matchType:magic]"];
 }

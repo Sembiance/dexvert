@@ -75,7 +75,7 @@ export default
 		novellDOSClientMessage   : {name : "Novell DOS Client Message", ext : [".msg"], magic : ["Novell DOS client message"]},
 		novellHelpLibrarian      : {name : "Novell Help Librarian", ext : [".hlp"], magic : ["Novell Help Librarian Data"]},
 		oberonDocument           : {name : "Oberon Document", ext : [".odc"], magic : ["Oberon/F Document"]},
-		oberonText               : {name : "Oberon Text", ext : [".mod"], magic : ["Oberon V4 text format"], idMeta : ({macFileType, macFileCreator}) => macFileType===".Ob." && macFileCreator===".Ob2"},
+		oberonText               : {name : "Oberon Text", ext : [".mod"], magic : ["Oberon V4 text format"], idMeta : ({macFileType, macFileCreator}) => macFileType===".Ob." && [".Ob2", ".Ob4"].includes(macFileCreator)},
 		os2Message               : {name : "OS/2 Message File", ext : [".msg"], magic : [/^OS\/2 help [Mm]essage/], website : "http://fileformats.archiveteam.org/wiki/MSG_(OS/2)"},
 		ovationPro               : {name : "Ovation Pro Document", ext : [".dpd"], magic : ["Ovation Pro", "OvationPro document"]},
 		pageSetter               : {name : "PageSetter Document", ext : [".ps"], magic : [/^PageSetter I{0,3} ?document/]},
@@ -119,8 +119,8 @@ export default
 		vxRexxInfo               : {name : "VX-REXX Windows/Object Info", ext : [".vry", ".vrw"], magic : ["VX-REXX windows/object info"]},
 		winAsksQuestionaire      : {name : "WinAsks Questionnaire", ext : [".wap", ".wa"], magic : ["WinAsks Editor Questionnaire"]},
 		windows31Registry        : {name : "Windows 3.1 Registry", magic : ["MS Windows 3.1 registry file"]},
-		wingzHelp                : {name : "Wingz Help", magic : [/^Wingz [Hh]elp/]},
-		wingzSpreadsheet         : {name : "Wingz Spreadsheet", ext : [".wkz"], magic : ["Wingz spreadsheet"]},
+		wingzHelp                : {name : "Wingz Help", magic : [/^Wingz [Hh]elp/], idMeta : ({macFileType, macFileCreator}) => macFileType==="WZHP" && macFileCreator==="WNGZ"},
+		wingzSpreadsheet         : {name : "Wingz Spreadsheet", ext : [".wkz"], magic : ["Wingz spreadsheet"], idMeta : ({macFileType, macFileCreator}) => macFileType==="WZSS" && macFileCreator==="WNGZ"},
 		winWorks                 : {name : "WinWorks Document", ext : [".wpd"], magic : ["WinWorks text Document"]},
 		zincData                 : {name : "Zinc Data", ext : [".dat", ".znc", ".z_t"], magic : ["Zinc Data", "Format: Zinc Data"], website : "https://en.wikipedia.org/wiki/Zinc_Application_Framework"},
 		zxSpectrumDOSBASICSource : {name : "ZX Spectrum DOS BASIC Source Code", ext : [".bas"], magic : ["ZX spectrum +3 DOS BASIC source", "Spectrum +3 data - BASIC program"]}
@@ -232,7 +232,7 @@ export default
 		visualBasicProject              : {name : "Visual Basic Project", ext : [".mak"], magic : ["Visual Basic project"], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_project"},
 		windowsHelpFileContent          : {name : "Microsoft Windows Help File Content", ext : [".cnt"], magic : ["Help File Contents", "MS Windows help file Content", /^fmt\/1656( |$)/], weakMagic : ["Help File Contents"]},
 		windowsShortcut                 : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut", "Format: Windows Shortcut", /^x-fmt\/428( |$)/, "application/x-ms-shortcut"]},
-		wingzScript                     : {name : "Wingz Script", ext : [".scz"], magic : ["Wingz script", "Wingz compiled script"]},
+		wingzScript                     : {name : "Wingz Script", ext : [".scz"], magic : ["Wingz script", "Wingz compiled script"], idMeta : ({macFileType, macFileCreator}) => macFileType==="WZSC" && macFileCreator==="WNGZ"},
 		wordSearchManiaPuzzle           : {name : "Wordsearch Mania! Puzzle", ext : [".wsp"], magic : ["Wordsearch Mania! Puzzle"]},
 		wordStarMacro                   : {name : "WordStar Macro", ext : [".wsm"], magic : ["WordStar Macro"]},
 		zingDirectoryInfo               : {name : "Zing! Directory Info", ext : [".zing"], magic : ["Zing! directory info"]}

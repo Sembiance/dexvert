@@ -12,7 +12,7 @@ export class mpeg2 extends Format
 		/^fmt\/(425|585|640|1055)( |$)/, /^x-fmt\/386( |$)/
 	];
 	weakMagic    = ["MPEG-PS (MPEG-2 Program Stream) (mpeg)", "MPEG-TS (MPEG-2 Transport Stream) (mpegts)"];
-	idMeta       = ({macFileType}) => macFileType==="MPG2";
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="MPG2" || (macFileType==="MPEG" && macFileCreator==="TVOD");
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg", "xanim"];
 }

@@ -2,7 +2,10 @@
 | TOP Priority |
 \--------------/
 * Update these programs to their latest versions, then add new formats since:
-	deark (since 2024-09-30)  (ESPECIALLY readmake: https://dev.discmaster2.textfiles.com/admin/item?itemid=13161)
+	deark (since 2024-09-30)  (ESPECIALLY readmake, get samples from:
+		https://dev.discmaster2.textfiles.com/admin/item?itemid=13161
+		https://dev.discmaster2.textfiles.com/admin/item?itemid=13301
+		https://dev.discmaster2.textfiles.com/admin/item?itemid=13613
 	recoil (since 2024-05-18)
 
 * Troubleshoot why this doesn't fully extract: http://dev.discmaster2.textfiles.com/admin/item?itemid=12398
@@ -227,11 +230,7 @@
 	document/envisionPublisherDoc
 	document/ibmStoryboardDocument
 
-* So 'xv' claims to have supprt for image/yanagisawaPIC2
-  I compiled the latest version from: https://github.com/jasper-software/xv   (archived copy in sandbox/app/xv.tar.gz)
-  The version above has all the patches that are out there, including the jumbo patches and makes it so it builds on modern linux
-  But it couldn't open any of my sample PIC2 files.
-  If I were to get it to load them, I'd also have to add a command line '-convert' flag to auto convert the picture to .ppm
+* Was never able to get support for this ISO: https://archive.org/details/CitroenC5-2001
 
 * Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
   Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on
@@ -277,7 +276,7 @@
   Probably spin up fresh mac instances each time with a custom HD image with the script and in/out folders pre-prepared
   After it's working, I can then support 'Graphic Converter' and these formats:
 	These seem to be Disk Copy 5/6, which I may be able to extract/convert with: http://macintoshgarden.org/apps/disk-copy-6
-	  https://archive.org/details/GigaROM2.0.img
+	  https://archive.org/details/GigaROM2.0.img   (https://dev.discmaster2.textfiles.com/admin/item?itemid=13263)
 	  https://archive.org/details/InfoMac5Disk1.img
 	  https://archive.org/details/InfoMac5Disk2.img
 	  http://dev.discmaster2.textfiles.com/view/5525/Apple%20Media%20Image%20Disc%20Vol.%205.smi.bin

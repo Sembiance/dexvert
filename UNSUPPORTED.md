@@ -2724,6 +2724,6 @@ Family/Format | Name | Extensions | Notes
 [video/vis5DDatasetObject](https://discmaster.textfiles.com/search?formatid=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
 [video/webExRecording](https://discmaster.textfiles.com/search?formatid=webExRecording) | WebEx Recording | .wrf .wot | 
 [video/xbvVideo](https://discmaster.textfiles.com/search?formatid=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php?title=XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
-[video/xilamDERFVideo](https://discmaster.textfiles.com/search?formatid=xilamDERFVideo) | [Xilam DERF Video](https://wiki.multimedia.cx/index.php/Xilam_DERF) | .vds .vdo | 
+[video/xilamDERFVideo](https://discmaster.textfiles.com/search?formatid=xilamDERFVideo) | [Xilam DERF Video](https://wiki.multimedia.cx/index.php/Xilam_DERF) | .vds .vdo | [3 sample files](https://sembiance.com/fileFormatSamples/video/xilamDERFVideo/)
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?formatid=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
 

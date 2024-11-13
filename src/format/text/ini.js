@@ -24,10 +24,11 @@ export class ini extends Format
 		"Psycle display preset", "cdrtfe tools configuration", "SynWrite Output Preset", "Midnight Commander skin", "NPS Image Editor Palette", "Silverpoint Skin", "SlickRun MagicWord Pack", "Krita Color scheme", "Compaq Diagnostics", "EEPROM Template",
 		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, "KDevelop Project", "Xcode perspective",
 		"Zilog Developer Studio II Workstate", "IBM i Access Client Poppad", "IBM i (Client) Access Keyboard Map", "IBM iSeries Client Access WorkStation profile", "Microsoft Zone Identifier", "Citrix Independent Computer Architecture", "Steem Patch",
-		/^Altium Designer ((integrated Library Package)|Project|Workspace)/, "TeXnicCenter Project", "application/x-kourse", "application/x-kolf",
+		/^Altium Designer ((integrated Library Package)|Project|Workspace)/, "TeXnicCenter Project", "application/x-kourse", "application/x-kolf", "Photofinish Calibration Map (v1.00)", "Grand Theft Auto 2 Multiplayer Map Metadata", "mIRC Theme",
+		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
-	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && macFileCreator==="NSIn") || (macFileType==="mINF" && macFileCreator==="T$2c");
+	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");
 	priority       = this.PRIORITY.LOWEST;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;
 	metaProvider   = ["text", "iniInfo"];

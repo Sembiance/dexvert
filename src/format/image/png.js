@@ -16,7 +16,7 @@ export class png extends Format
 		// specific
 		"Fireworks PNG bitmap", "Krita Paint Op Preset"
 	];
-	idMeta           = ({macFileType}) => macFileType==="PNGf";
+	idMeta           = ({macFileType, macFileCreator}) => macFileType==="PNGf" || (macFileType==="PiNG" && macFileCreator==="HTVW");
 	untouched        = dexState => dexState.meta.width && dexState.meta.height;
 	verifyUntouched  = dexState =>
 	{

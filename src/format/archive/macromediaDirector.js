@@ -11,10 +11,9 @@ export class macromediaDirector extends Format
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
 	weakMagic      = ["Generic RIFX container"];
-	idMeta         = ({macFileType, macFileCreator}) => ([3, 4, 5, 6, 7].some(num => ([`M*9${num}`, `M!9${num}`, `MV9${num}`, `MC9${num}`].includes(macFileType) && macFileCreator===`MD9${num}`)) ||
-		(["M*07", "M!07", "MC07", "MV07", "M*08", "M!08", "MV85", "FGDM"].includes(macFileType) && ["MD00", "MD01", "MD03"].includes(macFileCreator)) ||
-		(macFileType==="M!85" && macFileCreator==="MD03")
-	);
+	idMeta         = ({macFileType, macFileCreator}) => (
+		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MV${suffix}`].includes(macFileType) && ["MD00", "MD01", "MD03", ...[3, 4, 5, 6, 7].map(v => `MD9${v}`)].includes(macFileCreator))) ||
+		(["FGDC", "FGDM"].includes(macFileType) && ["MD00", "MD01", "MD03", "AFTB"].includes(macFileCreator)));
 	slow           = true;
 	converters     = [
 		// Director CastRipper has fully replaced macromediaDirector.js

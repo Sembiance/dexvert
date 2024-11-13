@@ -6,9 +6,8 @@
 		https://dev.discmaster2.textfiles.com/admin/item?itemid=13161
 		https://dev.discmaster2.textfiles.com/admin/item?itemid=13301
 		https://dev.discmaster2.textfiles.com/admin/item?itemid=13613
+		https://dev.discmaster2.textfiles.com/admin/item?itemid=13995
 	recoil (since 2024-05-18)
-
-* Troubleshoot why this doesn't fully extract: http://dev.discmaster2.textfiles.com/admin/item?itemid=12398
 
 * This seems to keep a random named file each time, look into fixing this:
   [] archive/appleDOSDiskImage/PRO.BYTER Created files are different: [ "17mo1pjs7gc.txt", "6ly49vxyv7.txt" ]
@@ -20,11 +19,10 @@
 * See why this seems to be different each time with seemingly random files:
   [FAIL] audio/aurealAspenSoundBank/au30gm.arl Created files are different: [ "Orcsnr.aif.mp3", "Piatti.aif.mp3" ]
 
-* See why image/paintDotNetImage format fails
-
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
 
+* After above done: Re-run test suite on dexdrone1
 
 /---------------\
 | High Priority |
@@ -70,6 +68,8 @@
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
 * See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools
+
+* See why image/paintDotNetImage format fails
 
 
 /-----------------\
@@ -230,7 +230,10 @@
 	document/envisionPublisherDoc
 	document/ibmStoryboardDocument
 
-* Was never able to get support for this ISO: https://archive.org/details/CitroenC5-2001
+* Was never able to properly extract these ISOs (might be bad rips):
+	https://archive.org/details/CitroenC5-2001
+	https://archive.org/details/LionShare
+	https://archive.org/details/cdrom-megabytemonster
 
 * Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
   Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on

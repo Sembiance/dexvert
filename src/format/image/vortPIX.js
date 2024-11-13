@@ -7,5 +7,6 @@ export class vortPIX extends Format
 	ext            = [".vort", ".pix"];
 	forbidExtMatch = [".pix"];
 	magic          = ["Very Ordinary Raster file format bitmap"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="Vort" && macFileCreator==="Vort";
 	converters     = ["vort2ppm", "deark[module:vort]"];
 }

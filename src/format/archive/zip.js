@@ -24,10 +24,11 @@ export class zip extends Format
 		"Balabolka Text document (compressed)", "Eclipse Project settings", "KMPlayer Skin File", "Nokia S60 Web Runtime Widget Package", "PotPlayer Skin", "Messenger Plus! Skin Pack", "MuseScore compressed music score", "Wise Care 365 Skin",
 		"application/x-zip-compressed-fb2", "FreeCAD Standard document", "NumPy compressed data archive format", "Mozilla Firebird theme", /^Krita [Dd]ocument/, "application/x-krita", "osu! compressed beatmap data", "Wrapster archive (v1.0)",
 		"LEGO Exchange Format - Digital Designer", "Minecraft LiteLoader Mod", "application/vnd.sun.xml.draw", "Samurize package", "OpenIV mod package", "Power BI report", "Sublime Text Package (generic)", "Maxthon skin (MX1)", "Pencil template",
+		"Zoner Draw (container with preview)", "MediaForge Runtime Player Distribution Project", "Desktop Sidebar Panel",
 		/^fmt\/(424|524|595|627|628|937|943|999)( |$)/
 	];
 	weakMagic      = ["Zip archive, with extra data prepended"];
-	idMeta         = ({macFileType, macFileCreator}) => ["pZIP", "ZIP "].includes(macFileType) || (macFileType==="xpi " && macFileCreator==="NSIn");
+	idMeta         = ({macFileType, macFileCreator}) => ["pZIP", "ZIP "].includes(macFileType) || (macFileType==="xpi " && ["MzIn", "NSIn"].includes(macFileCreator));
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters     = () =>
 	{

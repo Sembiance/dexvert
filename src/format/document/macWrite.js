@@ -7,6 +7,6 @@ export class macWrite extends Format
 	ext            = [".mcw", ".doc"];
 	forbidExtMatch = true;
 	magic          = [/^MacWrite .*[Dd]ocument/];
-	idMeta         = ({macFileType, macFileCreator}) => macFileType==="MW2D" && macFileCreator==="MWII";
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="MW2D" && ["MSWD", "MWII"].includes(macFileCreator);
 	converters     = ["soffice[format:MacWrite]", "wordForWord"];
 }

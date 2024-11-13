@@ -5,13 +5,13 @@ import {path} from "std";
 
 export class aaru extends Program
 {
-	website = "https://github.com/aaru-dps/Aaru";
-	package   = "app-arch/Aaru";
-	bin       = "aaru";
-	args      = r => ["filesystem", "extract", r.inFile(), r.outDir()];
+	website    = "https://github.com/aaru-dps/Aaru";
+	package    = "app-arch/Aaru";
+	bin        = "aaru";
+	args       = r => ["filesystem", "extract", r.inFile(), r.outDir()];
 	runOptions = ({env : {DOTNET_ROOT : "/opt/dotnet-sdk-bin-8.0"}});
-	pre = async r => await fileUtil.unlink(r.outDir({absolute : true}), {recursive : true});	// aaru requires no output dir present, it creates it
-	postExec  = async r =>
+	pre        = async r => await fileUtil.unlink(r.outDir({absolute : true}), {recursive : true});	// aaru requires no output dir present, it creates it
+	postExec   = async r =>
 	{
 		// aaru outputs files in a single subdir and another within that, move em all up 1 level
 		const outDirPath = r.outDir({absolute : true});

@@ -11,12 +11,13 @@ export const gameextractor =
 	{
 		allods2RageOfMagesGameArchive      : {name : "Allods 2 Rage Of Mages game archive", ext : [".res"], magic : ["Allods 2 Rage Of Mages game data archive"]},
 		americanConquest2GameArchvie       : {name : "American Conquest 2 game archvie", ext : [".gs1", ".gsc"], magic : ["American Conquest 2 game data archvie"]},
+		ascaronEntertainmentGameArchive    : {name : "ASCARON Entertainment game archive", ext : [".cpr"], magic : ["ASCARON Entertainment game data archive"]},
 		bankGameArchive                    : {name : "Bank Game Archive", ext : [".bnk"], magic : ["Bank game data archive"]},
 		battlezone2GameDataPackage         : {name : "Battlezone 2 game data package", ext : [".pak"], magic : ["Battlezone 2 game data package"], weakMagic : true},
 		bioWareEntityResourceFile          : {name : "BioWare Entity Resource File", ext : [".erf"], magic : ["BioWare Entity Resource File"]},
 		bloodrayneGameDataArchive          : {name : "Bloodrayne game data archive", ext : [".pod"], magic : ["Bloodrayne game data archive"], weakMagic : true},
 		boltGameArchive                    : {name : "BOLT Game Archive", ext : [".blt"], magic : ["BOLT game data archive"]},
-		broderbundMohawkGameArchive        : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive"]},
+		broderbundMohawkGameArchive        : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="MHK_" && macFileCreator==="MoRs"},
 		chasmGameArchive                   : {name : "Chasm Game Archive", ext : [".bin"], magic : ["Chasm BIN archive"]},
 		ciGAMESGameDataArchive             : {name : "CI GAMES game data archive", ext : [".dpk"], magic : ["CI GAMES game data archive"], weakMagic : true},
 		darkReignGameArchive               : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)"},
@@ -32,6 +33,7 @@ export const gameextractor =
 		finalLiberationGameArchive         : {name : "Final Liberation: Warhammer Epic 40K game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive"]},
 		gabrielKnight3BarnGameArchive      : {name : "Gabriel Knight 3 barn game archive", ext : [".brn"], magic : ["Gabriel Knight 3 barn game data"]},
 		h2oGameDataArchive                 : {name : "Liquid Entertainment H2O game data archive", ext : [".h2o"], magic : ["Liquid Entertainment H2O game data archive"]},
+		highwayPursuitGameDataArchive      : {name : "Highway Pursuit game data archive", ext : [".hvd", ".hfd", ".hod", ".hsd", ".hmd", ".hgd"], magic : ["Highway Pursuit game data archive"], weakMagic : true},
 		hmmPackfileGameArchive             : {name : "HMM Packfile Game Archive", ext : [".wdt"], magic : ["Rising Kingdoms game data archive", /^fmt\/1876( |$)/]},
 		interstateGameArchive              : {name : "Interstate Series Game Archive", ext : [".zfs"], magic : ["Interstate serie game data archive", "Zork FileSystem game data archive"], weakMagic : true},
 		janesLongbow2GameArchive           : {name : "Jane's Longbow 2 Game Archive", ext : [".tre"], magic : ["Jane's Longbow 2 game data archive"]},
@@ -94,7 +96,7 @@ export const both =
 	archive :
 	{
 		buildEngineGroupGameArchive : {name : "Build Engine Group Game Archive", ext : [".grp", ".dat"], magic : ["Build engine group file", "Build Engine GRP container"], website : "http://fileformats.archiveteam.org/wiki/GRP_(Duke_Nukem_3D)"},
-		descentGameArchive          : {name : "Descent Game Archive", ext : [".hog"], magic : ["Descent game data archive"]},
+		descentGameArchive          : {name : "Descent Game Archive", ext : [".hog"], magic : ["Descent game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="HOG " && macFileCreator==="DCNT"},
 		epfGameArchive 			    : {name : "EPF Game Archive", ext : [".epf"], magic : ["EPF game data archive"], website : "https://moddingwiki.shikadi.net/wiki/EPF_Format"}
 	}
 };

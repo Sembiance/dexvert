@@ -170,7 +170,7 @@ async function loadGameArchive({reload}={})
 				const allowExtMatch = !!o.allowExtMatch;
 				delete o.allowExtMatch;
 
-				const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
+				const supportedKeys = ["ext", "filename", "forbiddenMagic", "idMeta", "magic", "name", "trustMagic", "weakMagic", "website"];
 				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 				if(extraKeys.length>0)
 					throw new Error(`gameArchive format ${familyid}/${formatid} has extra keys that are not currently copied over to the GameArchive class, add them: ${extraKeys}`);

@@ -6,5 +6,5 @@ export class whyPic extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/WhyPic";
 	ext        = [".ypc"];
 	magic      = ["WhyPic bitmap"];
-	converters = ["konvertor"];
+	converters = ["konvertor[matchType:magic][hasExtMatch]"];
 }

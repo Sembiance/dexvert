@@ -21,8 +21,8 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog("info");
 
-if(path.resolve(Deno.cwd())!=="/home/sembiance/Downloads")
-	Deno.exit(1, xlog.error`This script is only meant to be run from /home/sembiance/Downloads`);
+//if(path.resolve(Deno.cwd())!=="/home/sembiance/Downloads")
+//	Deno.exit(1, xlog.error`This script is only meant to be run from /home/sembiance/Downloads`);
 
 if(!argv.familyFormat.includes("/"))
 	Deno.exit(xlog.error`Invalid family/format: ${argv.familyFormat}`);

@@ -6,5 +6,5 @@ export class iffRGBN extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ILBM";
 	ext        = [".iff", ".rgbn"];
 	magic      = [/^IFF data, RGB.* image$/, /^IFF .* RGB bitmap$/];
-	converters = ["iio2png", "recoil2png"];
+	converters = ["deark", "iio2png", "recoil2png"];
 }

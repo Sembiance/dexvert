@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,678)
+# Unsupported File Formats (2,685)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (229)
+## Archive (230)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -28,6 +28,7 @@ Family/Format | Name | Extensions | Notes
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?formatid=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
 [archive/apple2DiskImage](https://discmaster.textfiles.com/search?formatid=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
 [archive/sparseImage](https://discmaster.textfiles.com/search?formatid=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
+[archive/PizazzCompressed](https://discmaster.textfiles.com/search?formatid=PizazzCompressed) | Application Techniques Pizazz compressed | ~ | 
 [archive/apriDisk](https://discmaster.textfiles.com/search?formatid=apriDisk) | [ApriDisk](http://fileformats.archiveteam.org/wiki/ApriDisk) | .dsk | [3 sample files](https://sembiance.com/fileFormatSamples/archive/apriDisk/) - The apridisk.exe program can write these to a real floppy, so maybe I could use DOSBOX and an inserted blank floppy to try and write these and then convert, but meh.
 [archive/artisoftInstallationPackage](https://discmaster.textfiles.com/search?formatid=artisoftInstallationPackage) | Artisoft installation Package | .pak | 
 [archive/artsAndLettersClipArtLibrary](https://discmaster.textfiles.com/search?formatid=artsAndLettersClipArtLibrary) | Arts and Letters Clip Art Library | .yal | 
@@ -113,7 +114,6 @@ Family/Format | Name | Extensions | Notes
 [archive/kudoDataBaseCatalog](https://discmaster.textfiles.com/search?formatid=kudoDataBaseCatalog) | Kudo Data Base catalog | .kdb | 
 [archive/leadTechnologiesCompressedArchive](https://discmaster.textfiles.com/search?formatid=leadTechnologiesCompressedArchive) | Lead Technologies compressed Archive | .lta | 
 [archive/legoRacersGameDataArchive](https://discmaster.textfiles.com/search?formatid=legoRacersGameDataArchive) | Lego Racers game data archive | .jam | 
-[archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
 [archive/lingvooArc1InstallData](https://discmaster.textfiles.com/search?formatid=lingvooArc1InstallData) | lingvooArc1 install data |  | 
 [archive/lzk00Archive](https://discmaster.textfiles.com/search?formatid=lzk00Archive) | LZK00 Archive | .lng | 
 [archive/macOSInstallTome](https://discmaster.textfiles.com/search?formatid=macOSInstallTome) | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/) - Deark is working on adding this format.
@@ -213,6 +213,7 @@ Family/Format | Name | Extensions | Notes
 [archive/tifiles](https://discmaster.textfiles.com/search?formatid=tifiles) | TIFILES | .tfu .tifile .tifiles | 
 [archive/tinyProtProtected](https://discmaster.textfiles.com/search?formatid=tinyProtProtected) | TinyProt Protected | .exe | 
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
+[archive/trzZipCompressed](https://discmaster.textfiles.com/search?formatid=trzZipCompressed) | TRCZip compressed | .trc | 
 [archive/turboBatPacked](https://discmaster.textfiles.com/search?formatid=turboBatPacked) | TurboBat Packed | .com | 
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?formatid=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?formatid=unrealPackage) | Unreal Package | .ut2 .uasset | 
@@ -524,7 +525,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (94)
+## Font (95)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -593,6 +594,7 @@ Family/Format | Name | Extensions | Notes
 [font/personalFontMakerFont](https://discmaster.textfiles.com/search?formatid=personalFontMakerFont) | Personal Font Maker Font/Character Set | .fnt .set | 
 [font/portableFontResource](https://discmaster.textfiles.com/search?formatid=portableFontResource) | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://sembiance.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
 [font/postalFont](https://discmaster.textfiles.com/search?formatid=postalFont) | Postal Font | .fnt | 
+[font/printMagicFont](https://discmaster.textfiles.com/search?formatid=printMagicFont) | Print Magic Font | .pmf | 
 [font/printPartnerFont](https://discmaster.textfiles.com/search?formatid=printPartnerFont) | PrintPartner Font | .font | 
 [font/processingFont](https://discmaster.textfiles.com/search?formatid=processingFont) | Processing Font | .vlw | 
 [font/professionalDrawFont](https://discmaster.textfiles.com/search?formatid=professionalDrawFont) | Professional Draw Font | .pdfont | 
@@ -951,7 +953,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,654)
+## Other (1,659)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1265,6 +1267,7 @@ Family/Format | Name | Extensions | Notes
 [other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?formatid=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 
 [other/cdAudioTrackShortcut](https://discmaster.textfiles.com/search?formatid=cdAudioTrackShortcut) | CD Audio track shortcut | .cda | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?formatid=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
+[other/centralPointSoftwareDirectoryTreeInfo](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareDirectoryTreeInfo) | Central Point Software directory Tree info | .tre | 
 [other/centralPointSoftwareLibrary](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareLibrary) | Central Point Software Library | .dlo | 
 [other/centurionDefenderOfRomeGameData](https://discmaster.textfiles.com/search?formatid=centurionDefenderOfRomeGameData) | Centurion: Defender of Rome game data | .dat .cat | 
 [other/chalkGameDataArchive](https://discmaster.textfiles.com/search?formatid=chalkGameDataArchive) | Chalk game data archive | .wgm | 
@@ -1542,6 +1545,7 @@ Family/Format | Name | Extensions | Notes
 [other/foreignLanguageMasterDictionary](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterDictionary) | Foreign Language Master dictionary | .flm | 
 [other/formFloworm](https://discmaster.textfiles.com/search?formatid=formFloworm) | FormFlow form | .frz .frl | 
 [other/formulaDocument](https://discmaster.textfiles.com/search?formatid=formulaDocument) | Formula document | .frm | 
+[other/formWorxForWindowsForm](https://discmaster.textfiles.com/search?formatid=formWorxForWindowsForm) | FormWorx for Windows Form | .fpx | 
 [other/forteAgentCharmap](https://discmaster.textfiles.com/search?formatid=forteAgentCharmap) | Forte Agent Charmap | .cod | 
 [other/fortuneCiteData](https://discmaster.textfiles.com/search?formatid=fortuneCiteData) | Fortune Cite data | .cit | 
 [other/foxBaseMultipleIndex](https://discmaster.textfiles.com/search?formatid=foxBaseMultipleIndex) | FoxBase Multiple Index | .mdx | 
@@ -1866,6 +1870,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftAgentCharacter](https://discmaster.textfiles.com/search?formatid=microsoftAgentCharacter) | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://sembiance.com/fileFormatSamples/other/microsoftAgentCharacter/) - Step 1 would just be extracting the embedded images and audio. Full file format details available in sandbox/txt/MSAgentDataSpecification_v1_4.htm 		Bonus points: Animate the character in a couple poses/animations and create animated GIFs
 [other/microsoftAnswerWizard](https://discmaster.textfiles.com/search?formatid=microsoftAnswerWizard) | Microsoft Answer Wizard |  | 
 [other/microsoftBasicQuickLibrary](https://discmaster.textfiles.com/search?formatid=microsoftBasicQuickLibrary) | Microsoft Basic Quick library | .qlb | 
+[other/microsoftCueCardsData](https://discmaster.textfiles.com/search?formatid=microsoftCueCardsData) | Microsoft Cue Cards data | .cue | 
 [other/microsoftDirectInputFFE](https://discmaster.textfiles.com/search?formatid=microsoftDirectInputFFE) | Microsoft DirectInput Force Feedback Effect | .ffe | 
 [other/microsoftDierctMusicSegments](https://discmaster.textfiles.com/search?formatid=microsoftDierctMusicSegments) | Microsoft DirectMusic Segments Type | .sgt | 
 [other/microsoftFastFindIndex](https://discmaster.textfiles.com/search?formatid=microsoftFastFindIndex) | Microsoft FastFind Index | .ffx | 
@@ -2055,6 +2060,7 @@ Family/Format | Name | Extensions | Notes
 [other/pathMinderConfiguration](https://discmaster.textfiles.com/search?formatid=pathMinderConfiguration) | PathMinder configuration | .pm4 .cnf | 
 [other/paxImperiaSavedGame](https://discmaster.textfiles.com/search?formatid=paxImperiaSavedGame) | Pax Imperia Saved Game |  | 
 [other/pcAntiVirusVirusDBUpdate](https://discmaster.textfiles.com/search?formatid=pcAntiVirusVirusDBUpdate) | PC AntiVirus Virus DB update | .vdb | 
+[other/pcToolsMenu](https://discmaster.textfiles.com/search?formatid=pcToolsMenu) | PC Tools Menu | .mnc .mna .mnd | 
 [other/pcDragonCartridgeImage](https://discmaster.textfiles.com/search?formatid=pcDragonCartridgeImage) | PC-Dragon cartridge image | .dgn | 
 [other/pcLabelLabel](https://discmaster.textfiles.com/search?formatid=pcLabelLabel) | PC-Label Label | .lbl | 
 [other/pcTalkIIIData](https://discmaster.textfiles.com/search?formatid=pcTalkIIIData) | PC-Talk III data | .dir | 
@@ -2431,6 +2437,7 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?formatid=typeLibrary) | Type Library | .tlb | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?formatid=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
+[other/potoImpactPresets](https://discmaster.textfiles.com/search?formatid=potoImpactPresets) | Ulead Photo Impact Presets | .smp | 
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
 [other/uniCodeExtensions](https://discmaster.textfiles.com/search?formatid=uniCodeExtensions) | UniCode Extensions | .uce | 
 [other/universalCommunicationsFormat](https://discmaster.textfiles.com/search?formatid=universalCommunicationsFormat) | Universal Communications Format | .ucf | 

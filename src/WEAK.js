@@ -1604,6 +1604,7 @@ export const WEAK_VALUES =
 	/^BioForge IFF objects$/,	// Found these, but it's just for a game, so mark as weak as it's kinda weak
 	/^BIS Binarized Rtm animation$/,
 	/^BitCom Emulation settings$/,
+	/^Bitstream Compressed Outline font$/,
 	/^BlackBarry encrypted REM format$/,
 	/^Bleach game data archive$/,
 	/^BlueEyes Animation$/,
@@ -1736,6 +1737,7 @@ export const WEAK_VALUES =
 	/^Fox Engine (DeForm|Texture)$/,
 	/^Framework Terminal type$/,
 	/^FreeDOS Code Page Information$/,
+	/^FSEvents Disk Log Stream format \(v2\)$/,
 	/^Furnace Instrument \(new\)$/,
 	/^Game Boy Advance ROM$/,
 	/^Game Music$/,

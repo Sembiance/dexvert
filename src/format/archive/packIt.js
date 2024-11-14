@@ -7,5 +7,5 @@ export class packIt extends Format
 	ext        = [".pit"];
 	magic      = ["PackIt compressed archive", "PMWLite", /^PackIt$/];
 	idMeta     = ({macFileType}) => macFileType==="PIT ";
-	converters = ["unar", "macunpack"];
+	converters = ["unar", "macunpack", "deark[module:packit]"];
 }

@@ -1,32 +1,24 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update these programs to their latest versions, then add new formats since:
-	deark (since 2024-09-30)  (ESPECIALLY readmake, get samples from:
-		https://dev.discmaster2.textfiles.com/admin/item?itemid=13161
-		https://dev.discmaster2.textfiles.com/admin/item?itemid=13301
-		https://dev.discmaster2.textfiles.com/admin/item?itemid=13613
-		https://dev.discmaster2.textfiles.com/admin/item?itemid=13995
-	recoil (since 2024-05-18)
 
-* This seems to keep a random named file each time, look into fixing this:
-  [] archive/appleDOSDiskImage/PRO.BYTER Created files are different: [ "17mo1pjs7gc.txt", "6ly49vxyv7.txt" ]
+
+/---------------\
+| High Priority |
+\---------------/
+* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
+  SFPack tool exe is pretty available
 
 * Look into why these 2 files fail (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
 
+* This seems to keep a random named file each time, look into fixing this:
+  [] archive/appleDOSDiskImage/PRO.BYTER Created files are different: [ "17mo1pjs7gc.txt", "6ly49vxyv7.txt" ]
+
 * See why this seems to be different each time with seemingly random files:
   [FAIL] audio/aurealAspenSoundBank/au30gm.arl Created files are different: [ "Orcsnr.aif.mp3", "Piatti.aif.mp3" ]
 
-* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
-  SFPack tool exe is pretty available
-
-* After above done: Re-run test suite on dexdrone1
-
-/---------------\
-| High Priority |
-\---------------/
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
     Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly

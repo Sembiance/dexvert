@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,664)
+# Unsupported File Formats (2,678)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -801,7 +801,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (142)
+## Music (144)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -815,6 +815,7 @@ Family/Format | Name | Extensions | Notes
 [music/appleIIgsMusic](https://discmaster.textfiles.com/search?formatid=appleIIgsMusic) | Apple IIgs Music |  | 
 [music/appleIIgsMusicStudioSong](https://discmaster.textfiles.com/search?formatid=appleIIgsMusicStudioSong) | Apple IIgs Music Studio song | .sng | [5 sample files](https://sembiance.com/fileFormatSamples/music/appleIIgsMusicStudioSong/)
 [music/aProSys](https://discmaster.textfiles.com/search?formatid=aProSys) | AProSys Module | .amx .aps | [2 sample files](https://sembiance.com/fileFormatSamples/music/aProSys/)
+[music/atariExecutableMSXMusic](https://discmaster.textfiles.com/search?formatid=atariExecutableMSXMusic) | Atari executable MSX music | .xex .com | 
 [music/axsModule](https://discmaster.textfiles.com/search?formatid=axsModule) | AXS Module | .axs | [2 sample files](https://sembiance.com/fileFormatSamples/music/axsModule/)
 [music/aySTRC](https://discmaster.textfiles.com/search?formatid=aySTRC) | AY STRC Module | .strc | [1 sample file](https://sembiance.com/fileFormatSamples/music/aySTRC/)
 [music/beepola](https://discmaster.textfiles.com/search?formatid=beepola) | Beepola Module | .bbsong | [3 sample files](https://sembiance.com/fileFormatSamples/music/beepola/)
@@ -875,6 +876,7 @@ Family/Format | Name | Extensions | Notes
 [music/maxYMiserSongModule](https://discmaster.textfiles.com/search?formatid=maxYMiserSongModule) | maxYMiser Song/module | .mys | 
 [music/melodyMakerSong](https://discmaster.textfiles.com/search?formatid=melodyMakerSong) | Melody Maker Sing | .mm | 
 [music/mod8BitModule](https://discmaster.textfiles.com/search?formatid=mod8BitModule) | MOD 8-bit module | .md8 | 
+[music/moonBlasterForMoonSoundSong](https://discmaster.textfiles.com/search?formatid=moonBlasterForMoonSoundSong) | MoonBlaster for MoonSound song | .mwm .mfm .mwk .mwv | 
 [music/mozartMusicDocument](https://discmaster.textfiles.com/search?formatid=mozartMusicDocument) | MOZART Music Document | .mz | 
 [music/ms3Music](https://discmaster.textfiles.com/search?formatid=ms3Music) | MS3 music | .ms3 | 
 [music/msxMBM](https://discmaster.textfiles.com/search?formatid=msxMBM) | MSX Moon Blaster Music | .mbm | [6 sample files](https://sembiance.com/fileFormatSamples/music/msxMBM/) - Conversion works great, but kss2wav will take almost any .mbm file and convert it to garbage. No magic I can find and no current way to check output audio, so since the format is so rare, sadly need to mark it unsupported.
@@ -949,7 +951,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,642)
+## Other (1,654)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1116,6 +1118,7 @@ Family/Format | Name | Extensions | Notes
 [other/atari7800ROM](https://discmaster.textfiles.com/search?formatid=atari7800ROM) | Atari 7800 ROM | .a78 | 
 [other/atariCTBFile](https://discmaster.textfiles.com/search?formatid=atariCTBFile) | Atari CTB File | .ctb | [5 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCTBFile/)
 [other/atariGEMOBM](https://discmaster.textfiles.com/search?formatid=atariGEMOBM) | Atari GEM OBM File | .obm | [15 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariGEMOBM/)
+[other/atariLynxROM](https://discmaster.textfiles.com/search?formatid=atariLynxROM) | Atari Lynx ROM | .lnx | 
 [other/atokDictionary](https://discmaster.textfiles.com/search?formatid=atokDictionary) | ATOK Dictionary |  | 
 [other/atomicBombermanAnimation](https://discmaster.textfiles.com/search?formatid=atomicBombermanAnimation) | Atomic Bomberman Animation | .ani | 
 [other/audfprintPeak](https://discmaster.textfiles.com/search?formatid=audfprintPeak) | audfprint peak | .afpk | 
@@ -1183,6 +1186,8 @@ Family/Format | Name | Extensions | Notes
 [other/bisRtmAnimation](https://discmaster.textfiles.com/search?formatid=bisRtmAnimation) | BIS Rtm animation | .rtm | 
 [other/bitDefenderPlugIn](https://discmaster.textfiles.com/search?formatid=bitDefenderPlugIn) | BitDefender plug-in | .xmd | 
 [other/blackAndWhiteSoundsData](https://discmaster.textfiles.com/search?formatid=blackAndWhiteSoundsData) | Black and White sounds data | .sad | 
+[other/blackjackLabGame](https://discmaster.textfiles.com/search?formatid=blackjackLabGame) | Blackjack Lab game |  | 
+[other/blackjackLabRules](https://discmaster.textfiles.com/search?formatid=blackjackLabRules) | Blackjack Lab rules |  | 
 [other/blindWriteTOC](https://discmaster.textfiles.com/search?formatid=blindWriteTOC) | BlindWrite TOC | .b6t .b5t | 
 [other/blockBreakerPattern](https://discmaster.textfiles.com/search?formatid=blockBreakerPattern) | Block Breaker Pattern | .blc | 
 [other/bluRayClipAVStream](https://discmaster.textfiles.com/search?formatid=bluRayClipAVStream) | Blu-ray Clip AV stream | .clpi | 
@@ -1192,6 +1197,7 @@ Family/Format | Name | Extensions | Notes
 [other/blueMaxGameData](https://discmaster.textfiles.com/search?formatid=blueMaxGameData) | Blue Max game data | .d01 .d02 .d03 .d04 | 
 [other/bnuportPatchTable](https://discmaster.textfiles.com/search?formatid=bnuportPatchTable) | BNUPORT Patch Table | .pat | 
 [other/bohemiaGameArchive](https://discmaster.textfiles.com/search?formatid=bohemiaGameArchive) | Bohemia game archive | .pbo | 
+[other/bohemiaInteractivePAA](https://discmaster.textfiles.com/search?formatid=bohemiaInteractivePAA) | Bohemia Interactive PAA | .paa | 
 [other/boloMap](https://discmaster.textfiles.com/search?formatid=boloMap) | Bolo Map |  | 
 [other/boogleLexicon](https://discmaster.textfiles.com/search?formatid=boogleLexicon) | Boogle Lexicon | .boo | 
 [other/boomBoxProject](https://discmaster.textfiles.com/search?formatid=boomBoxProject) | Boom Box projec | .box | 
@@ -1233,6 +1239,7 @@ Family/Format | Name | Extensions | Notes
 [other/cadDrawLibrary](https://discmaster.textfiles.com/search?formatid=cadDrawLibrary) | CAD/Draw Library | .tbl | 
 [other/cadDrawSettings](https://discmaster.textfiles.com/search?formatid=cadDrawSettings) | CAD/Draw Settings | .mpi | 
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?formatid=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
+[other/cakewalkGroove](https://discmaster.textfiles.com/search?formatid=cakewalkGroove) | Cakewalk Groove | .bin | 
 [other/cakewalkMacroDOS](https://discmaster.textfiles.com/search?formatid=cakewalkMacroDOS) | Cakewalk Macro (DOS) | .ma | 
 [other/cakewalkSONARProject](https://discmaster.textfiles.com/search?formatid=cakewalkSONARProject) | Cakewalk SONAR project | .cwp | 
 [other/cakewalkStudioWarePanel](https://discmaster.textfiles.com/search?formatid=cakewalkStudioWarePanel) | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
@@ -1451,6 +1458,7 @@ Family/Format | Name | Extensions | Notes
 [other/easyCDCreatorLayout](https://discmaster.textfiles.com/search?formatid=easyCDCreatorLayout) | Easy CD Creator Layout | .cl5 | 
 [other/easyCDProProjec](https://discmaster.textfiles.com/search?formatid=easyCDProProjec) | Easy CD Pro Project | .ecd | 
 [other/easyLanguageStorage](https://discmaster.textfiles.com/search?formatid=easyLanguageStorage) | EasyLanguage Storage | .ela .els | 
+[other/easyPhotoGallery](https://discmaster.textfiles.com/search?formatid=easyPhotoGallery) | EasyPhoto Gallery | .gal | 
 [other/eclipseErrors](https://discmaster.textfiles.com/search?formatid=eclipseErrors) | Eclipse Errors | .err | 
 [other/eclipseHelp](https://discmaster.textfiles.com/search?formatid=eclipseHelp) | Eclipse Help | .hlp | 
 [other/eclipseImage](https://discmaster.textfiles.com/search?formatid=eclipseImage) | Eclipse Image | .img | 
@@ -1467,6 +1475,7 @@ Family/Format | Name | Extensions | Notes
 [other/empire2TheArtOfWarSavedGame](https://discmaster.textfiles.com/search?formatid=empire2TheArtOfWarSavedGame) | Empire II: The Art of War Saved Game | .svg | 
 [other/empireScenario](https://discmaster.textfiles.com/search?formatid=empireScenario) | Empire Scenario | .scn | 
 [other/encartaEncyclopediaLinksUpdate](https://discmaster.textfiles.com/search?formatid=encartaEncyclopediaLinksUpdate) | Encarta Encyclopedia Yearbook and Web Links update | .eyb | 
+[other/ensoniqEPSExtractedFile](https://discmaster.textfiles.com/search?formatid=ensoniqEPSExtractedFile) | Ensoniq EPS Extracted File | .efe | 
 [other/ensoniqVFXPatchFile](https://discmaster.textfiles.com/search?formatid=ensoniqVFXPatchFile) | Ensoniq VFX Patch File | .vfx | 
 [other/enviromentalAudioLibraryData](https://discmaster.textfiles.com/search?formatid=enviromentalAudioLibraryData) | Enviromental Audio Library data | .eal | 
 [other/erdasImagineHierarchicalFileArchitecture](https://discmaster.textfiles.com/search?formatid=erdasImagineHierarchicalFileArchitecture) | ERDAS Imagine Hierarchical File Architecture |  | 
@@ -1504,6 +1513,7 @@ Family/Format | Name | Extensions | Notes
 [other/falloutTacticsSprite](https://discmaster.textfiles.com/search?formatid=falloutTacticsSprite) | Fallout Tactics Sprite | .spr | 
 [other/familyTreeMakerFamilyTree](https://discmaster.textfiles.com/search?formatid=familyTreeMakerFamilyTree) | Family Tree Maker Family Tree | .fbk .ftw | 
 [other/farscapeTheGameAnimationData](https://discmaster.textfiles.com/search?formatid=farscapeTheGameAnimationData) | Farscape: The Game Animation data | .fsa | 
+[other/fasaInteractiveGameDataArchive](https://discmaster.textfiles.com/search?formatid=fasaInteractiveGameDataArchive) | FASA Interactive game data archive | .fst | 
 [other/fastLynxHelp](https://discmaster.textfiles.com/search?formatid=fastLynxHelp) | FastLynx Help | .hlp | 
 [other/fdmDownloadsData](https://discmaster.textfiles.com/search?formatid=fdmDownloadsData) | FDM downloads data | .sav | 
 [other/ferrariFormulaOneTrackData](https://discmaster.textfiles.com/search?formatid=ferrariFormulaOneTrackData) | Ferrari Formula One track data | .tkb4 .tkb | 
@@ -1625,6 +1635,7 @@ Family/Format | Name | Extensions | Notes
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?formatid=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?formatid=homeBrewPalette) | HomeBrew Palette | .hpa | 
 [other/homeBrewTile](https://discmaster.textfiles.com/search?formatid=homeBrewTile) | HomeBrew Tile | .hti | 
+[other/homeworldCataclysmGameDataArchive](https://discmaster.textfiles.com/search?formatid=homeworldCataclysmGameDataArchive) | Homeworld: Cataclysm game data archive | .vce | 
 [other/hotbarSkin](https://discmaster.textfiles.com/search?formatid=hotbarSkin) | Hotbar skin | .xip | 
 [other/hotDocsComponent](https://discmaster.textfiles.com/search?formatid=hotDocsComponent) | HotDocs Component | .cmp | 
 [other/hotMapRegionsDescription](https://discmaster.textfiles.com/search?formatid=hotMapRegionsDescription) | HotMap VBX Regions Description | .hmd | 
@@ -1733,6 +1744,7 @@ Family/Format | Name | Extensions | Notes
 [other/kylix3CompiledUnit](https://discmaster.textfiles.com/search?formatid=kylix3CompiledUnit) | Kylix 3 Compiled Unit | .dpu .dcu | 
 [other/labelDesignerPlusDeluxeTemplate](https://discmaster.textfiles.com/search?formatid=labelDesignerPlusDeluxeTemplate) | Label Designer Plus Deluxe Template | .cct | 
 [other/labelerTemplate](https://discmaster.textfiles.com/search?formatid=labelerTemplate) | Labeler/Labels Unlimited Template | .tpl | 
+[other/labVIEWControlData](https://discmaster.textfiles.com/search?formatid=labVIEWControlData) | LabVIEW Control data | .ctl | 
 [other/labVIEWData](https://discmaster.textfiles.com/search?formatid=labVIEWData) | LabVIEW data | .lsb | 
 [other/labViewVirtualInstrument](https://discmaster.textfiles.com/search?formatid=labViewVirtualInstrument) | LabView Virtual Instrument | .vi | 
 [other/ldSoHintsFile](https://discmaster.textfiles.com/search?formatid=ldSoHintsFile) | ld.so hints file | .hints | 
@@ -2142,6 +2154,7 @@ Family/Format | Name | Extensions | Notes
 [other/qualitasBIOSCompressionFeatureInfo](https://discmaster.textfiles.com/search?formatid=qualitasBIOSCompressionFeatureInfo) | Qualitas BIOS Compression Feature info | .bcf | 
 [other/qualitasHelp](https://discmaster.textfiles.com/search?formatid=qualitasHelp) | Qualitas Help | .hlp | 
 [other/quarterInchCartridgeHostInterchange](https://discmaster.textfiles.com/search?formatid=quarterInchCartridgeHostInterchange) | Quarter Inch Cartridge Host Interchange Format | .qic | 
+[other/quartetSamplesSet](https://discmaster.textfiles.com/search?formatid=quartetSamplesSet) | Quartet samples set | .set | 
 [other/quattroProAddInFunctionsLibrary](https://discmaster.textfiles.com/search?formatid=quattroProAddInFunctionsLibrary) | Quattro Pro add-in functions library | .qll | 
 [other/questAdventure](https://discmaster.textfiles.com/search?formatid=questAdventure) | Quest adventure | .cas | 
 [other/quest3DData](https://discmaster.textfiles.com/search?formatid=quest3DData) | Quest3D data | .cgr | 
@@ -2336,6 +2349,7 @@ Family/Format | Name | Extensions | Notes
 [other/telepaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=telepaintPrinterDriver) | Telepaint printer Driver | .drv | 
 [other/teleportProProject](https://discmaster.textfiles.com/search?formatid=teleportProProject) | Teleport Pro Project | .tpp | 
 [other/telixCompiledScript](https://discmaster.textfiles.com/search?formatid=telixCompiledScript) | Telix Compiled Script | .slc | 
+[other/term95Script](https://discmaster.textfiles.com/search?formatid=term95Script) | Term95 Script | .scx | 
 [other/termInfo](https://discmaster.textfiles.com/search?formatid=termInfo) | TermInfo |  | 
 [other/terraGenLightAndAtmosphere](https://discmaster.textfiles.com/search?formatid=terraGenLightAndAtmosphere) | TerraGen Light and Atmosphere | .atm | 
 [other/terragenSurfaceMap](https://discmaster.textfiles.com/search?formatid=terragenSurfaceMap) | Terragen Surface Map | .srf | 

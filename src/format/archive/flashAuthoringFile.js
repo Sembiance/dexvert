@@ -8,7 +8,7 @@ export class flashAuthoringFile extends Format
 	weakMagic      = true;
 	ext            = [".fla"];
 	forbidExtMatch = true;
-	idMeta         = ({macFileType, macFileCreator}) => macFileType==="SPA " && macFileCreator==="MFL2";
+	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="SPA " && macFileCreator==="MFL2") || (macFileType==="MFL2" && macFileCreator==="SPA ");
 	notes          = "This can be VASTLY improved by opening these in the original Flash programs that made them, then exporting to SWF and extracting from that. But I tried with Flash 5 and it only opened like 1 out of 5 files, so I'd need to research others.";
 	converters     = ["sevenZip", "unar", "deark[module:cfb][opt:cfb:extractstreams]"];
 }

@@ -96,7 +96,7 @@ export const both =
 	archive :
 	{
 		buildEngineGroupGameArchive : {name : "Build Engine Group Game Archive", ext : [".grp", ".dat"], magic : ["Build engine group file", "Build Engine GRP container"], website : "http://fileformats.archiveteam.org/wiki/GRP_(Duke_Nukem_3D)"},
-		descentGameArchive          : {name : "Descent Game Archive", ext : [".hog"], magic : ["Descent game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="HOG " && macFileCreator==="DCNT"},
+		descentGameArchive          : {name : "Descent Game Archive", ext : [".hog"], magic : ["Descent game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="HOG " && ["DCNT", "DCT2"].includes(macFileCreator)},
 		epfGameArchive 			    : {name : "EPF Game Archive", ext : [".epf"], magic : ["EPF game data archive"], website : "https://moddingwiki.shikadi.net/wiki/EPF_Format"}
 	}
 };

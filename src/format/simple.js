@@ -191,6 +191,7 @@ export default
 		msvcPCH                         : {name : "Microsoft Visual C/C++ Precompiled Header file", ext : [".pch", ".dbg"], magic : ["Microsoft Visual C .pch", "Microsoft Precompiled Header Datei", "MS Visual C++ precompiled header"]},
 		msVisualFoxProApp               : {name : "MS Visual FoxPro App", ext : [".app", ".fxp"], magic : ["Generated application MS Visual FoxPro 7"]},
 		msWinCEInstallHeader            : {name : "Microsoft WinCE Install Header", ext : [".000"], magic : ["Microsoft WinCE install header", "Microsoft WinCE installer"]},
+		nortonCommanderModuleMessage    : {name : "Norton Commander module message", ext : [".msg"], magic : ["Norton Commander module message"], weakMagic : true},
 		noteWorthyComposure             : {name : "NoteWorthy Composure", ext : [".nw"], magic : ["NoteWorthy song"]},
 		novellErrorLibrarian            : {name : "Novell Error Librarian", ext : [".dat", ".idx"], magic : ["Novell Error Librarian Data"]},
 		nsFileWrapperSerializedData     : {name : "NSFileWrapper Serialized Data", magic : ["NSFileWrapper serialized data"]},

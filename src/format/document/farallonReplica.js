@@ -8,5 +8,6 @@ export class farallonReplica extends Format
 	ext            = [".rpl"];
 	magic          = ["Farallon Replica document"];
 	forbiddenMagic = TEXT_MAGIC;
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="FRL!" && macFileCreator==="REP!";
 	converters     = ["replica"];
 }

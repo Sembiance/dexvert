@@ -6,7 +6,7 @@ export class flv extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/FLV";
 	ext          = [".flv"];
 	magic        = ["Macromedia Flash Video", "Flash Video", "Format: Flash Video", "video/x-flv", "FLV (Flash Video) (flv)", /^x-fmt\/382( |$)/];
-	idMeta       = ({macFileType}) => macFileType==="MFLV";
+	idMeta       = ({macFileType}) => ["FLV1", "MFLV"].includes(macFileType);
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg[format:flv]"];
 }

@@ -14,7 +14,7 @@ export class mp3 extends Format
 		// specific app-generate MP3 magic
 		"GoGo encoded MP3 audio", "Plugger encoded MP3 audio", "Xing encoded MP3 audio", "MP3 Xing Encoder"
 	];
-	idMeta     = ({macFileType, macFileCreator}) => macFileType==="Mp3 " && macFileCreator==="TVOD";
+	idMeta     = ({macFileType, macFileCreator}) => (macFileType==="Mp3 " && macFileCreator==="TVOD") || (macFileType==="MPEG" && macFileCreator==="MAmp") || (macFileType==="MPG3" && macFileCreator==="hook");
 	weakMagic      = ["LAME encoded MP3 audio", "MPEG ADTS, layer III"];
 	untouched      = true;
 	metaProvider   = ["soxi"];

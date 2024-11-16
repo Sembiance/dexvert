@@ -13,7 +13,7 @@ export class xls extends Format
 		"Visual Tools Spreadsheet"	// this is actually a sperate format, but only ever encountered one of these and it also matches against excel magics, so just stick it in here since these converters seem to handle it ok
 	];
 	weakMagic  = ["Microsoft Excel sheet", "Microsoft Excel worksheet (generic older format)"];	// see poly/solidWorksDrawing/kloub.SLDDRW
-	idMeta     = ({macFileType, macFileCreator}) => ["sLC3", "sLS3", "XLA5", "XLC3", "XLM ", "XLM3", "XLS ", "XLS3", "XLS4", "XLS5", "XLS8", "XLW4"].includes(macFileType) && macFileCreator==="XCEL";
+	idMeta     = ({macFileType, macFileCreator}) => ["sLC3", "sLS3", "XLA ", "XLA5", "XLC3", "XLM ", "XLM3", "XLS ", "XLS3", "XLS4", "XLS5", "XLS8", "XLW4"].includes(macFileType) && macFileCreator==="XCEL";
 	converters = [
 		"soffice[format:MS Excel 2003 XML]", "soffice[format:MS Excel 97]", "soffice[format:MS Excel 95]", "soffice[format:MS Excel 5.0/95]", "soffice[format:MS Excel 4.0]", "excel97[matchType:magic]",
 	

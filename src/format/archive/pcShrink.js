@@ -5,6 +5,6 @@ export class pcShrink extends Format
 	name       = "PC-Shrink Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/PC-Shrink";
 	ext        = [".shr"];
-	magic      = ["PC-Shrink compressed archive"];
+	magic      = ["PC-Shrink compressed archive", "Archive: PCInstall"];
 	converters = ["deark[module:pcshrink]"];
 }

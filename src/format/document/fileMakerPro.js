@@ -10,6 +10,8 @@ export class fileMakerPro extends Format
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="FMP3" ||
 		(macFileType==="FMPR" && ["FMPR", "FMPU"].includes(macFileCreator)) ||
 		(macFileType==="FMKD" && macFileCreator==="FMKR") ||
-		(macFileType==="FMPJ" && macFileCreator==="FMPJ") || (macFileType==="FMK$" && macFileCreator==="FMK4");
+		(macFileType==="FMPJ" && macFileCreator==="FMPJ") ||
+		(macFileType==="FMK$" && macFileCreator==="FMK4") ||
+		(macFileType==="FMP5" && macFileCreator==="FMP5");
 	converters     = ["strings"];
 }

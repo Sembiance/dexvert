@@ -47,6 +47,7 @@ export const gameextractor =
 		novalogicGameArchive               : {name : "Novalogic Game Archive", ext : [".pff"], allowExtMatch : true, magic : ["Novalogic game data archive"]},
 		paxImperiaEminentDomainGameArchive : {name : "Pax Imperia: Eminent Domain Game Archive", ext : [".img"], magic : ["Pax Imperia: Eminent Domain game data archive"]},
 		postalGameArchive                  : {name : "Postal game Archive", ext : [".sak"], magic : ["Postal game data Archive"]},
+		projectIGIResourceData             : {name : "Project IGI Resource data", ext : [".res"], magic : ["Project IGI Resource data"], weakMagic : true},
 		quakePAK                           : {name : "Quake PAK", ext : [".pak"], allowExtMatch : true, magic : ["Quake archive", "Quake I or II world or extension", /^Archive: PACK$/], website : "http://fileformats.archiveteam.org/wiki/Quake_PAK"},
 		realityBytesGameArchive            : {name : "Reality Bytes game archive", ext : [".rbd"], magic : ["Reality Bytes game Data archive"]},
 		redengineGameArchive               : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},

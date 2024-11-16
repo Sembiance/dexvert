@@ -43,12 +43,13 @@
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
 * Adopt Game-Viewer program (try in win2k, otherwise probably win7): https://game-viewer.org/download.php
-  Use it with plugin: https://game-viewer.org/plugin.php?id=90
+  Use it with plugins: https://game-viewer.org/plugin.php?id=90
   To view resources *.gfx:
   	https://dev.discmaster2.textfiles.com/browse/11205/Gamer%20Collector%203:%20Action.iso/FUGA_192/data/plate-forme/Gold%20Miner%20Joe/GoldMiner.exe/%23setuppath%23/Graphics
 	https://dev.discmaster2.textfiles.com/browse/11534/Igromania_02.iso/Demos/Marbles_Deluxe/marbles.rar/marbles.exe/%7Bapp%7D/Graphics
 	https://dev.discmaster2.textfiles.com/browse/11546/Igromania_02.ISO/Funnies/DigiPool/digi_pool_trial.exe/%7Bapp%7D/Graphics
 	https://dev.discmaster2.textfiles.com/browse/11547/Igromania_04.ISO/Funnies/SuperstarChefs/InstallSuperstarChefs.exe/%25MAINDIR%25/product/Graphics
+	https://dev.discmaster2.textfiles.com/view/15626/PCM_0202.iso/media/igre/marbles.exe/%7Bapp%7D/Graphics/Sprites.gfx
   Then look at other formats it supports:
 	https://game-viewer.org/games.php
 	https://game-viewer.org/plugins.php

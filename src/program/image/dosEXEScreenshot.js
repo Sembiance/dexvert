@@ -9,10 +9,11 @@ export class dosEXEScreenshot extends Program
 	unsafe    = true;
 	loc       = "dos";
 	flags   = {
-		timeout  : "Timeout after X ms. Default: 1 minute",
-		frameLoc : "Frame location (percentage of max) to take screenshot at. Default: 30"
+		timeout       : "Timeout after X ms. Default: 1 minute",
+		frameLoc      : "Frame location (percentage of max) to take screenshot at. Default: 30",
+		sleepDuration : "Number of seconds to sleep before taking screenshot. Default: 3"
 	};
-	pre       = async r => await fileUtil.writeTextFile(path.join(r.cwd, "DOSEXE.bat"), ["@ECHO OFF", r.inFile(), "SLEEP 2"].join("\n"));
+	pre       = async r => await fileUtil.writeTextFile(path.join(r.cwd, "DOSEXE.bat"), ["@ECHO OFF", r.inFile(), `SLEEP ${r.flags.sleepDuration || 3}`].join("\n"));
 	bin       = "DOSEXE.bat";
 	dosData   = async r => ({runIn : "absolute", timeout : r.flags.timeout || xu.MINUTE, screenshot : {filePath : await r.outFile("out.png", {absolute : true}), frameLoc : r.flags.frameLoc || 30}});
 	renameOut = true;

@@ -10,6 +10,7 @@ export class printArtist extends Program
 	osData   = ({
 		script : `
 			#include <GuiListBox.au3>
+			#include <Math.au3>
 			
 			$mainWindow = WindowRequire("Print Artist", "", 15)
 			Sleep(5000)
@@ -33,6 +34,9 @@ export class printArtist extends Program
 			If $graphicCount = 0 Then
 				Exit 0
 			EndIf
+
+			; We arbitrarily limit to 100 graphics because this process takes FOREVER and some of these packs have like 1,000+ graphics and just takes hours and hours
+			$graphicCount = _Min($graphicCount, 100)
 
 			For $graphicNum = 0 To $graphicCount-1 Step 1
 				SendSlow("^c{TAB}{ENTER}")
@@ -68,5 +72,5 @@ export class printArtist extends Program
 	});
 	renameOut = false;
 	verify    = (r, dexFile) => dexFile.base!=="Blank.eps";
-	chain = "ps2pdf[fromEPS][svg]";
+	chain     = "ps2pdf[fromEPS][svg]";
 }

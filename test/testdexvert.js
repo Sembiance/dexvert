@@ -39,9 +39,6 @@ const SKIP_FORMATS =
 	// these take AGES to extract, just WAY too long
 	"archive/printArtist",
 
-	// sample files are hundreds of megabytes, so we don't have any samples, so skip it
-	"archive/hmmPackfileGameArchive",
-
 	// these don't make sense to test
 	"other/symlink"
 ];
@@ -284,7 +281,7 @@ const FLEX_SIZE_FORMATS =
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		grabber            : 7,
-		gifexe             : 70,
+		gifexe             : 50,
 		krisCard           : 10,
 		naplps             : 20,
 		theDrawCOM         : 5,
@@ -380,6 +377,7 @@ const FLEX_DIFF_FILES =
 	/image\/teletextPackets\/TETRIS\.T42$/,
 
 	// other
+	/archive\/iso\/WIKINGOWIE\.iso$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/
 ];
 
@@ -427,6 +425,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These files don't convert with my converters and get identified to other things
 	[/audio\/quickTimeAudio\/Demo Music File$/i, "archive", "macBinary"],
+	[/document\/openDocument\/(aw-9colorful|cnt-04)\.ott$/, "archive", "zip"],
 	[/document\/scribus\/(arkanoid|robocop)\.sla$/, "text", "txt"],
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
 	[/poly\/ac3d\/forza\.acc$/i, "text", "txt"],
@@ -527,13 +526,14 @@ const ALLOW_METADATA_DIFFERENCES =
 	}
 };
 
-// Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match
+// Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match or a version of format that I can't id or process
 // So in the future I could look at these files and see if I can determine a pattern to them or in some better way id them
 const UNPROCESSED_ALLOW_NO_IDS =
 [
 	"archive/drRiptideGameArchive",
 	"archive/irixIDBArchive",
 	"archive/lostVikingsGameArchive",
+	"archive/nsaArchive",
 	"archive/pixfolioCatalog",
 	"archive/rar",
 	"audio/impulseTrackerSample",

@@ -15,6 +15,9 @@ export class qrt extends Format
 		if(meta.height<2 || meta.width<2)
 			return false;
 
+		if(meta.height<10 && meta.width>1000)
+			return false;
+
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 6);
 		// 2 bytes width  2 bytes height  2 bytes row 0 prefix
 		if(meta.width!==header.getUInt16LE(0) || meta.height!==header.getUInt16LE(2) || header.getUInt16LE(4)!==0)

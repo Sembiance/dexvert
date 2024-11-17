@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,711)
+# Unsupported File Formats (2,721)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (230)
+## Archive (231)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -32,6 +32,7 @@ Family/Format | Name | Extensions | Notes
 [archive/apriDisk](https://discmaster.textfiles.com/search?formatid=apriDisk) | [ApriDisk](http://fileformats.archiveteam.org/wiki/ApriDisk) | .dsk | [3 sample files](https://sembiance.com/fileFormatSamples/archive/apriDisk/) - The apridisk.exe program can write these to a real floppy, so maybe I could use DOSBOX and an inserted blank floppy to try and write these and then convert, but meh.
 [archive/artisoftInstallationPackage](https://discmaster.textfiles.com/search?formatid=artisoftInstallationPackage) | Artisoft installation Package | .pak | 
 [archive/artsAndLettersClipArtLibrary](https://discmaster.textfiles.com/search?formatid=artsAndLettersClipArtLibrary) | Arts and Letters Clip Art Library | .yal | 
+[archive/asarElectronArchive](https://discmaster.textfiles.com/search?formatid=asarElectronArchive) | asar Electron Archive | .asar | 
 [archive/asdgFileSplit](https://discmaster.textfiles.com/search?formatid=asdgFileSplit) | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 [archive/aSetup](https://discmaster.textfiles.com/search?formatid=aSetup) | ASetup Installer Archive | .arv | [4 sample files](https://sembiance.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
 [archive/asPackPacked](https://discmaster.textfiles.com/search?formatid=asPackPacked) | ASPack Packed |  | 
@@ -317,7 +318,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (149)
+## Document (151)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -430,6 +431,7 @@ Family/Format | Name | Extensions | Notes
 [document/powerCADD](https://discmaster.textfiles.com/search?formatid=powerCADD) | PowerCADD | .pd6 | 
 [document/powerDraw](https://discmaster.textfiles.com/search?formatid=powerDraw) | PowerDraw | .pcadd | 
 [document/pPrintPage](https://discmaster.textfiles.com/search?formatid=pPrintPage) | PPrint Page | .pag | 
+[document/printMagicPage](https://discmaster.textfiles.com/search?formatid=printMagicPage) | Print Magic Page | .pmp | 
 [document/printShopDeluxeDocument](https://discmaster.textfiles.com/search?formatid=printShopDeluxeDocument) | Print Shop Deluxe Document | .pdg | 
 [document/printShopGraphic](https://discmaster.textfiles.com/search?formatid=printShopGraphic) | Print Shop graphic | .pdg | 
 [document/purePascalHelp](https://discmaster.textfiles.com/search?formatid=purePascalHelp) | Pure Pascal Help | .hlp | 
@@ -444,6 +446,7 @@ Family/Format | Name | Extensions | Notes
 [document/storybookWeaver](https://discmaster.textfiles.com/search?formatid=storybookWeaver) | Storybook Weaver Story | .swd .sts | 
 [document/sureThingCDLabelerDocument](https://discmaster.textfiles.com/search?formatid=sureThingCDLabelerDocument) | SureThing CD Labeler document | .std .dsn | 
 [document/symantecDOSSoftwareHelp](https://discmaster.textfiles.com/search?formatid=symantecDOSSoftwareHelp) | Symantec DOS software help | .hlp | 
+[document/tagDocument](https://discmaster.textfiles.com/search?formatid=tagDocument) | TAG document | .tag .mtg | 
 [document/textExeLRC](https://discmaster.textfiles.com/search?formatid=textExeLRC) | [TextExe (LRC Computing)](http://fileformats.archiveteam.org/wiki/TextExe_(LRC_Computing)) | .exe | [2 sample files](https://sembiance.com/fileFormatSamples/document/textExeLRC/)
 [document/theDataMasterDataBase](https://discmaster.textfiles.com/search?formatid=theDataMasterDataBase) | The DataMaster Data Base | .tdb | 
 [document/printShopDeluxeBanner](https://discmaster.textfiles.com/search?formatid=printShopDeluxeBanner) | The Print Shop Deluxe Banner | .pdb | 
@@ -954,7 +957,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,684)
+## Other (1,691)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1108,6 +1111,8 @@ Family/Format | Name | Extensions | Notes
 [other/arcSoftAlbumOrSlideshow](https://discmaster.textfiles.com/search?formatid=arcSoftAlbumOrSlideshow) | ArcSoft Album | .abm .sld | 
 [other/arcSoftUI](https://discmaster.textfiles.com/search?formatid=arcSoftUI) | ArcSoft UI | .aui | 
 [other/area51GameDataArchive](https://discmaster.textfiles.com/search?formatid=area51GameDataArchive) | Area 51 game data archive | .dfs | 
+[other/armorCommandMission](https://discmaster.textfiles.com/search?formatid=armorCommandMission) | Armor Command mission | .hpj | 
+[other/armorCommandPicture](https://discmaster.textfiles.com/search?formatid=armorCommandPicture) | Armor Command Picture | .pic | 
 [other/armSISpeedIndexTimingsData](https://discmaster.textfiles.com/search?formatid=armSISpeedIndexTimingsData) | ArmSI Speed Index timings data |  | 
 [other/artEffectBrush](https://discmaster.textfiles.com/search?formatid=artEffectBrush) | ArtEffect Brush |  | 
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?formatid=artEffectConvolution) | ArtEffect Convolution |  | 
@@ -1614,6 +1619,7 @@ Family/Format | Name | Extensions | Notes
 [other/gnuGprofPerformanceData](https://discmaster.textfiles.com/search?formatid=gnuGprofPerformanceData) | GNU gprof performance data | .out | 
 [other/gObjectIntrospectionTypeLibrayData](https://discmaster.textfiles.com/search?formatid=gObjectIntrospectionTypeLibrayData) | GObject introspection Type Libray data | .typelib | 
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
+[other/goldParserTables](https://discmaster.textfiles.com/search?formatid=goldParserTables) | GOLD Parser Tables | .cgt | 
 [other/goldenSectionOrganizerDatabase](https://discmaster.textfiles.com/search?formatid=goldenSectionOrganizerDatabase) | GoldenSection Organizer database | .gso | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?formatid=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
@@ -1669,6 +1675,7 @@ Family/Format | Name | Extensions | Notes
 [other/iccAnimation](https://discmaster.textfiles.com/search?formatid=iccAnimation) | ICC Animation | .icc | 
 [other/iccColorProfile](https://discmaster.textfiles.com/search?formatid=iccColorProfile) | ICC Color Profile | .icc | 
 [other/iconAuthorFlowchart](https://discmaster.textfiles.com/search?formatid=iconAuthorFlowchart) | IconAuthor Flowchart | .iw .iwm | 
+[other/icuData](https://discmaster.textfiles.com/search?formatid=icuData) | ICU Data | .dat | 
 [other/idaSerialKey](https://discmaster.textfiles.com/search?formatid=idaSerialKey) | IDA serial key | .key | 
 [other/idaSignatures](https://discmaster.textfiles.com/search?formatid=idaSignatures) | IDA Signatures | .sig | 
 [other/idMASConfiguration](https://discmaster.textfiles.com/search?formatid=idMASConfiguration) | idMAS Configuration | .cfg | 
@@ -1682,6 +1689,7 @@ Family/Format | Name | Extensions | Notes
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?formatid=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?formatid=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
 [other/infinityEngineFile](https://discmaster.textfiles.com/search?formatid=infinityEngineFile) | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
+[other/infobaseNextPage](https://discmaster.textfiles.com/search?formatid=infobaseNextPage) | Infobase (NextPage) | .nfo | 
 [other/infoComicsGameData](https://discmaster.textfiles.com/search?formatid=infoComicsGameData) | InfoComics game data | .img .dat | 
 [other/infoSpotterTemplate](https://discmaster.textfiles.com/search?formatid=infoSpotterTemplate) | InfoSpotter Template | .spt | 
 [other/infoViewPalmOSDocument](https://discmaster.textfiles.com/search?formatid=infoViewPalmOSDocument) | InfoView PalmOS document | .pdb | 
@@ -2001,6 +2009,7 @@ Family/Format | Name | Extensions | Notes
 [other/noLimitsTrack](https://discmaster.textfiles.com/search?formatid=noLimitsTrack) | NoLimits Track | .nltrack | 
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
+[other/nortonCommanderConfiguration](https://discmaster.textfiles.com/search?formatid=nortonCommanderConfiguration) | Norton Commander configuration | .ini | 
 [other/nortonDesktopForDOSPrinterConfig](https://discmaster.textfiles.com/search?formatid=nortonDesktopForDOSPrinterConfig) | Norton Desktop for DOS Printer Configuration | .npc | 
 [other/nortonDiskDoctorUnDoFile](https://discmaster.textfiles.com/search?formatid=nortonDiskDoctorUnDoFile) | Norton Disk Doctor UnDo file | .dat | 
 [other/nortonDiskreetEncryptedData](https://discmaster.textfiles.com/search?formatid=nortonDiskreetEncryptedData) | Norton Diskreet encrypted data | .sec | 
@@ -2154,6 +2163,7 @@ Family/Format | Name | Extensions | Notes
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
 [other/profiInstallProject](https://discmaster.textfiles.com/search?formatid=profiInstallProject) | Profi Install Project | .ipj | 
 [other/programmingObjectFile](https://discmaster.textfiles.com/search?formatid=programmingObjectFile) | Programming Object File | .pof | 
+[other/projectIGIResourceData](https://discmaster.textfiles.com/search?formatid=projectIGIResourceData) | Project IGI Resource data | .res | 
 [other/projectSpaceStationSavedMission](https://discmaster.textfiles.com/search?formatid=projectSpaceStationSavedMission) | Project: Space Station saved Mission | .msn | 
 [other/protextConfiguration](https://discmaster.textfiles.com/search?formatid=protextConfiguration) | Protext Configuration | .cfg | 
 [other/proximityTechLexicon](https://discmaster.textfiles.com/search?formatid=proximityTechLexicon) | Proximity Technology Lexicon/Thesaurus | .lex .ths | 

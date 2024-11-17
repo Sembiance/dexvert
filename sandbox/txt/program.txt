@@ -12,14 +12,17 @@ An object of key/value pairs of various flag properties you can set when running
 There are a few 'global' flags that can be specified for any program:
 	bulkCopyOut				If a chain is likely to produce a ton of files, set this. I think it's safe? rofl
 	filenameEncoding		Which encoding the filenames are likely to be in for proper conversion by convmv
+	forbidChildRun			Forbid this program from ever being ran as a child
 	forbiddenMagic			If set, this program won't run if any of the identifications magic values start with this value
 	hasExtMatch				If set, only run this program if we have a match to one of our extensions (even if a magic match overall). This is a way to kind fake 'weakMagic' if you combine with [matchType:magic] without specifying weakMagic, useful if one program is troublesome with a format
 	matchType               If set, this program won't run unless the match type matches the specified value. Only valid in format 'converters' list.
-	strongMatch				If set, this program won't run unless we have a non-weak MAGIC match
 	noAux                   Don't include any aux files in this running of the program
 	osHint					Can set various platforms like commodore:true in order to enable a slightly wider identification scope for matching and converting files
+	osPriority				This program should have priority when being ran on an OS (really only used internally to fast-track stuff)
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename
 	renameOut				A way to override the renameOut of a program
+	skipVerify				Will skip verification of output files
+	strongMatch				If set, this program won't run unless we have a non-weak MAGIC match
 	subOutDir				Will cause all program output files to go in a newly created subdirectory
 
 >>> notes = "Blah blah"
@@ -123,6 +126,9 @@ However you can return true here to force it to keep the previous file.
 
 >>> chainPost = async (r) => {}
 Called AFTER all chaining is complete
+
+>>> skipSafeRename = true
+Set this to skip renaming the input file to a 'safe' name
 
 >>> classify = true
 If this is set on a program and it's working with an image format, then the image will be classified as 'garbage' or 'not garbage'

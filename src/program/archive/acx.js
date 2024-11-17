@@ -10,7 +10,6 @@ export class acx extends Program
 	package   = "app-arch/AppleCommander";
 	bin       = "acx";
 	args      = r => ["x", "--suggested", "-d", r.inFile(), "-o", r.outDir()];
-
 	renameOut = false;
 	chain     = "unHexACX";
 

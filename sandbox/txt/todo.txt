@@ -1,24 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
+  SFPack tool exe is pretty available
 
 
 /---------------\
 | High Priority |
 \---------------/
-* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
-  SFPack tool exe is pretty available
-
-* Look into why these 2 files fail (may be due to latest libre office):
-  [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
-  [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
-
-* This seems to keep a random named file each time, look into fixing this:
-  [] archive/appleDOSDiskImage/PRO.BYTER Created files are different: [ "17mo1pjs7gc.txt", "6ly49vxyv7.txt" ]
-
-* See why this seems to be different each time with seemingly random files:
-  [FAIL] audio/aurealAspenSoundBank/au30gm.arl Created files are different: [ "Orcsnr.aif.mp3", "Piatti.aif.mp3" ]
-
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
     Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
@@ -68,6 +57,10 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Look into why these 2 files fail (may be due to latest libre office):
+  [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
+  [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
+
 * Could improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
   Some things can't be handled this way though, such as recoil2png and imagemagic convert font handling, so this sort of change may require a bunch of reverse engineering work to properly convert old fonts into new fonts (rather than just getting preview images)
 

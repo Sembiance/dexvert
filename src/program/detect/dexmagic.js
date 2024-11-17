@@ -228,9 +228,12 @@ const DEXMAGIC_CUSTOMS =
 	{
 		if(r.f.input.ext?.toLowerCase()!==".bin")
 			return;
-		
-		if(await fileUtil.exists(path.join(r.f.input.dir, `${r.f.input.name}.cue`)))
-			return "BIN with CUE";
+
+		for(const ext of [".cue", ".CUE", ".Cue"])
+		{
+			if(await fileUtil.exists(path.join(r.f.input.dir, `${r.f.input.name}${ext}`)))
+				return "BIN with CUE";
+		}
 	},
 	
 	async function checkInstallIt(r)

@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_SHOCKWAVE_AUDIO_MAGIC} from "./shockWaveAudio.js?hirm";
 
 export class mp3 extends Format
 {
@@ -14,8 +15,9 @@ export class mp3 extends Format
 		// specific app-generate MP3 magic
 		"GoGo encoded MP3 audio", "Plugger encoded MP3 audio", "Xing encoded MP3 audio", "MP3 Xing Encoder"
 	];
-	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="Mp3 " && macFileCreator==="TVOD") || (macFileType==="MPEG" && macFileCreator==="MAmp") || (macFileType==="MPG3" && macFileCreator==="hook");
-	weakMagic    = ["LAME encoded MP3 audio", "MPEG ADTS, layer III", "MP2/3 (MPEG audio layer 2/3) (mp3)"];
-	untouched    = true;
-	metaProvider = ["soxi"];
+	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="Mp3 " && macFileCreator==="TVOD") || (macFileType==="MPEG" && macFileCreator==="MAmp") || (macFileType==="MPG3" && macFileCreator==="hook");
+	weakMagic      = ["LAME encoded MP3 audio", "MPEG ADTS, layer III", "MP2/3 (MPEG audio layer 2/3) (mp3)"];
+	forbiddenMagic = _SHOCKWAVE_AUDIO_MAGIC;	// I believe Shockwave Audio is actually just MP3 underneath but with some extra metadata, still it's format handles converting it and this ensure we properly identify as that
+	untouched      = true;
+	metaProvider   = ["soxi"];
 }

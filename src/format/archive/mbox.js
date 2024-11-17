@@ -6,7 +6,7 @@ export class mbox extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Mbox";
 	ext        = [".mbox"];
 	priority   = this.PRIORITY.LOW;
-	magic      = ["Standard Unix Mailbox", "message/rfc822", "application/mbox", "multipart/related;", /^MIME entity/, /^fmt\/950( |$)/];
+	magic      = ["Standard Unix Mailbox", "message/rfc822", "application/mbox", "multipart/form-data", "multipart/related;", /^MIME entity/, /^fmt\/950( |$)/];
 	weakMagic  = ["message/rfc822", "application/mbox"];
 	converters = ["ripmime"];		// alternatives: my own "unmbox" munpack (https://manpages.ubuntu.com/manpages/focal/man1/munpack.1.html)   NOTE: (mu extract from package 'mu' doesn't work well, I tried it)
 }

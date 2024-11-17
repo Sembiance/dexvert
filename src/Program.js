@@ -64,7 +64,7 @@ export class Program
 			unsafe     : {type : "boolean"},
 			website    : {type : "string", url : true},
 
-			// execution
+			// flags & execution
 			args             : {type : "function", length : [0, 1]},
 			allowDupOut      : {type : "boolean"},
 			bin              : {types : ["function", "string"]},
@@ -74,23 +74,24 @@ export class Program
 			chainFailKeep    : {type : "function", length : [0, 4]},
 			chainPost        : {type : "function", length : [0, 1]},
 			checkForDups     : {type : "boolean"},
-			failOnDups       : {type : "boolean"},
-			forbidChildRun   : {type : "boolean"},
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {types : ["function", "number"]},
 			dosData          : {types : ["function", Object]},
-			wineData         : {types : ["function", Object]},
-			osData           : {types : ["function", Object]},
 			exec             : {type : "function", length : [0, 1]},
+			failOnDups       : {type : "boolean"},
 			filenameEncoding : {types : ["function", "string"]},
+			forbidChildRun   : {type : "boolean"},
 			mirrorInToCWD    : {types : ["boolean", "string"]},
+			osData           : {types : ["function", Object]},
 			outExt           : {types : ["function", "string"]},
 			post             : {type : "function", length : [0, 2]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
 			renameIn         : {type : "boolean"},
+			skipSafeRename   : {type : "boolean"},
 			skipVerify       : {type : "boolean"},
-			verify           : {type : "function", length : [0, 2]}
+			verify           : {type : "function", length : [0, 2]},
+			wineData         : {types : ["function", Object]}
 		});
 
 		if(program.renameOut && Object.isObject(program.renameOut))
@@ -669,7 +670,7 @@ export class Program
 			};
 
 			srcFiles = Array.force(fRaw);
-			if(program.renameIn!==false && !progOptions.skipSafeRename)
+			if(program.renameIn!==false && !progOptions.skipSafeRename && !program.skipSafeRename)
 			{
 				safeFiles = await srcFiles.parallelMap(async srcFile =>
 				{

@@ -2,7 +2,7 @@ import {Format} from "../../Format.js";
 
 export class nsaArchive extends Format
 {
-	name           = "BSA Archive";
+	name           = "NSA Archive";
 	ext            = [".nsa"];
 	forbidExtMatch = true;
 	magic          = [/^NSA$/];

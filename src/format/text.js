@@ -317,6 +317,7 @@ export default
 		brutusApplicationDefinition             : {name : "Brutus Application Definition", ext : [".bad"], magic : ["Brutus Application Definition"]},
 		bubbleGEMHelp                           : {name : "BubbleGEM Help", ext : [".bgh"], magic : ["BubbleGEM Help"]},
 		bucketOTabTablature                     : {name : "Bucket 'o Tab tablature", ext : [".tbs", ".bot"], magic : ["Bucket 'o Tab tablature"]},
+		cableNutCustomSettings                  : {name : "CableNut Custom Settings", ext : [".ccs"], magic : ["CableNut Custom Settings"]},
 		canomaScene                             : {name : "Canoma scene", ext : [".3dv"], magic : ["Canoma scene"], weakMagic : true},
 		cartoonStudioScript                     : {name : "Cartoon Studio Script", ext : [".css"], magic : ["Cartoon Studio Script"]},
 		cashflowHelp                            : {name : "Cashflow Help", ext : [".hlp"], magic : ["Cashflow Help"]},
@@ -427,7 +428,7 @@ export default
 		gimpDynamics                            : {name : "GIMP Dynamics", ext : [".gdyn"], magic : ["GIMP Dynamics"]},
 		gimpParametricBrush                     : {name : "GIMP parametric Brush", ext : [".vbr"], magic : ["GIMP parametric Brush"]},
 		gimpToolPreset                          : {name : "GIMP Tool Preset", ext : [".gtp"], magic : ["GIMP Tool Preset"]},
-		gnuInfo                                 : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                  	// We do NOT include Trid's "GNU Info document" because it's too loose
+		gnuInfo                                 : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                       	// We do NOT include Trid's "GNU Info document" because it's too loose
 		graceProjectFile                        : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
 		graphletFileFormat                      : {name : "Graphlet File Format", ext : [".gml"], magic : ["Graphlet File Format"], weakMagic : true},
 		graphmaticaGraph                        : {name : "Graphmatica Graph", ext : [".gr"], magic : ["Graphmatica Graph"], weakMagic : true},

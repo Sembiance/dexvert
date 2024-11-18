@@ -22,7 +22,7 @@ export const cup386 =
 		ainexePacked                : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE"]},
 		amisetupPacked              : {name : "Amisetup Packed", magic : ["Packer: Amisetup loader[by Robert Muchsel]"]},
 		aPACKPacked                 : {name : "aPACK Packed", magic : ["Packer: aPACK", "16bit DOS EXE aPACK compressed"]},
-		avPackPacked                : {name : "AVPACK Packed", magic : ["Packer: AVPACK(1.22)[Andrei Volkov]"]},
+		avPackPacked                : {name : "AVPACK Packed", magic : ["Packer: AVPACK"]},
 		comRLEPackerPacked          : {name : "com RLE packer Packed", magic : ["Packer: com RLE packer[by NOP/PC]"]},
 		cruncherPacked              : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
 		dnCOMCruncherPacked         : {name : "Dn.COM Cruncher Packed", magic : ["Packer: Dn.COM Cruncher"]},
@@ -42,6 +42,7 @@ export const cup386 =
 		spaceMakerPacked            : {name : "SpaceMaker Packed", magic : ["16bit DOS EXE Spacemaker compressed"]},
 		tenthPlanetSoftPackerPacked : {name : "Tenth Planet Soft Packer Packed", magic : ["Packer: Tenth Planet Soft packer[1996]"]},
 		tpackPacked                 : {name : "T-PACK Packed", magic : ["Packer: TPACK", "16bit DOS COM T-PACK compressed"]},
+		tscrunchPacked              : {name : "TSCRUNCH Packed", magic : ["Packer: TSCRUNCH[by Clarion software]"]},
 		xpackLZCOMPacked            : {name : "XPACK/LZCOM Packed", magic : ["Packer: XPACK/LZCOM"]}
 	}
 	

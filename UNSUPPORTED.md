@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,721)
+# Unsupported File Formats (2,730)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -957,7 +957,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,691)
+## Other (1,699)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1118,9 +1118,13 @@ Family/Format | Name | Extensions | Notes
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?formatid=artEffectConvolution) | ArtEffect Convolution |  | 
 [other/artlineSymbolFile](https://discmaster.textfiles.com/search?formatid=artlineSymbolFile) | Artline Symbol File | .syf | 
 [other/asciiFontMetrics](https://discmaster.textfiles.com/search?formatid=asciiFontMetrics) | ASCII Font Metrics | .afm | 
+[other/ashampooPhotoCommanderDocument](https://discmaster.textfiles.com/search?formatid=ashampooPhotoCommanderDocument) | Ashampoo Photo Commander Document | .apcdoc | 
+[other/ashampooProductsTranslation](https://discmaster.textfiles.com/search?formatid=ashampooProductsTranslation) | Ashampoo products translation | .ashlang | 
 [other/ashtonTateHelpData](https://discmaster.textfiles.com/search?formatid=ashtonTateHelpData) | Ashton-Tate Help data | .hlp | 
 [other/asicCompilerDebugInfo](https://discmaster.textfiles.com/search?formatid=asicCompilerDebugInfo) | ASIC compiler debug info | .dbg | 
 [other/aspellDictionary](https://discmaster.textfiles.com/search?formatid=aspellDictionary) | Aspell dictionary | .rws | 
+[other/assaultWingLevel](https://discmaster.textfiles.com/search?formatid=assaultWingLevel) | Assault Wing level | .lev | 
+[other/assaultWingSprite](https://discmaster.textfiles.com/search?formatid=assaultWingSprite) | Assault Wing Sprite | .spr | 
 [other/astoundActor](https://discmaster.textfiles.com/search?formatid=astoundActor) | Astound Actor | .act | 
 [other/asuraEngineResourcesPackageGeneric](https://discmaster.textfiles.com/search?formatid=asuraEngineResourcesPackageGeneric) | Asura engine Resources package | .asr | 
 [other/atari7800ROM](https://discmaster.textfiles.com/search?formatid=atari7800ROM) | Atari 7800 ROM | .a78 | 
@@ -1504,6 +1508,7 @@ Family/Format | Name | Extensions | Notes
 [other/eurekaMercuryConfiguration](https://discmaster.textfiles.com/search?formatid=eurekaMercuryConfiguration) | Eureka/Mercury Configuration | .cfg .eka | 
 [other/eveOnlineGameContentsArchive](https://discmaster.textfiles.com/search?formatid=eveOnlineGameContentsArchive) | EVE Online Game Contents archive | .stuff | 
 [other/everythingIndex](https://discmaster.textfiles.com/search?formatid=everythingIndex) | Everything index | .db | 
+[other/evilGeniusGameDataArchive](https://discmaster.textfiles.com/search?formatid=evilGeniusGameDataArchive) | Evil Genius game data archive | .erb | 
 [other/examViewQuestionBank](https://discmaster.textfiles.com/search?formatid=examViewQuestionBank) | ExamView Question Bank | .bnk | 
 [other/expePointSet](https://discmaster.textfiles.com/search?formatid=expePointSet) | Expe PointSet | .pts | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?formatid=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
@@ -1962,6 +1967,7 @@ Family/Format | Name | Extensions | Notes
 [other/musicXPatchEditor](https://discmaster.textfiles.com/search?formatid=musicXPatchEditor) | Music-X patch Editor | .editor | 
 [other/musicXPatchLibrary](https://discmaster.textfiles.com/search?formatid=musicXPatchLibrary) | Music-X patch Library | .libr | 
 [other/musicXVoices](https://discmaster.textfiles.com/search?formatid=musicXVoices) | Music-X Voices | .voices | 
+[other/musicboxSound](https://discmaster.textfiles.com/search?formatid=musicboxSound) | Musicbox Sound | .syp | 
 [other/musicMatchJukeBoxVisualization](https://discmaster.textfiles.com/search?formatid=musicMatchJukeBoxVisualization) | MusicMatch JukeBox Visualization | .mvs | 
 [other/musikTrainerNotation](https://discmaster.textfiles.com/search?formatid=musikTrainerNotation) | Musik-Trainer Notation | .mtn | 
 [other/myFamilyTreeData](https://discmaster.textfiles.com/search?formatid=myFamilyTreeData) | My Family Tree data | .tre | 
@@ -2468,6 +2474,7 @@ Family/Format | Name | Extensions | Notes
 [other/twistedMetal3DModelsContainer](https://discmaster.textfiles.com/search?formatid=twistedMetal3DModelsContainer) | Twisted Metal 3D models container | .tpc | 
 [other/twistedMetalTexture](https://discmaster.textfiles.com/search?formatid=twistedMetalTexture) | Twisted Metal texture | .dpc | 
 [other/typeLibrary](https://discmaster.textfiles.com/search?formatid=typeLibrary) | Type Library | .tlb | 
+[other/urbanTheCyborgProjectGameData](https://discmaster.textfiles.com/search?formatid=urbanTheCyborgProjectGameData) | U.R.B.A.N The Cyborg Project game data | .dat | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?formatid=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/potoImpactPresets](https://discmaster.textfiles.com/search?formatid=potoImpactPresets) | Ulead Photo Impact Presets | .smp | 
@@ -2643,6 +2650,7 @@ Family/Format | Name | Extensions | Notes
 [other/zBrushMatCap](https://discmaster.textfiles.com/search?formatid=zBrushMatCap) | ZBrush MatCap | .ztl | 
 [other/zCTSystemsGroupVideoDriver](https://discmaster.textfiles.com/search?formatid=zCTSystemsGroupVideoDriver) | ZCT Systems Group video Driver | .drv | 
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?formatid=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
+[other/zickyZicksMilkcapsGameData](https://discmaster.textfiles.com/search?formatid=zickyZicksMilkcapsGameData) | Zicky Zick's Milkcaps game data | .tub | 
 [other/zodbFileStorage](https://discmaster.textfiles.com/search?formatid=zodbFileStorage) | ZODB File Storage | .fs | 
 [other/zoopGameGraphics](https://discmaster.textfiles.com/search?formatid=zoopGameGraphics) | Zoop game graphics | .imx | 
 [other/zopeBinaryExportFile](https://discmaster.textfiles.com/search?formatid=zopeBinaryExportFile) | Zope binary export file | .zexp | 
@@ -2733,7 +2741,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (47)
+## Video (48)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -2758,6 +2766,7 @@ Family/Format | Name | Extensions | Notes
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
+[video/magixVideo](https://discmaster.textfiles.com/search?formatid=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?formatid=metaStream3DObject) | MetaStream 3D object | .mts | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?formatid=movieSetterSet) | MovieSetter Set | .set | 
 [video/novastormMediaVideo](https://discmaster.textfiles.com/search?formatid=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 

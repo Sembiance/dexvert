@@ -8,6 +8,14 @@
 /---------------\
 | High Priority |
 \---------------/
+* Learn how to crack old windows programs, specifically the decode.exe's from:
+	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
+	https://dev.discmaster2.textfiles.com/browse/6923/cd.iso/charme/hard
+	https://dev.discmaster2.textfiles.com/browse/6928/CDROSE2.iso/hard
+    https://dev.discmaster2.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
+  Should be able to find some cracking tutotorials from back in the day and go through them. Idea is find the assembly where the password button checks validity and crack that to just be NOP or something or change from BEQ to BNE or something
+  Then add support for these files. Should be fun :)
+
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
     Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly

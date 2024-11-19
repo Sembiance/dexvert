@@ -8,7 +8,7 @@ export class sgi extends Format
 	mimeType       = "image/x-sgi";
 	magic          = [/^Silicon Graphics.* bitmap/, "SGI image data", "piped sgi sequence (sgi_pipe)", /^x-fmt\/140( |$)/];
 	forbiddenMagic = [/^SGI image data.*\d{5,6} x \d{5,6}/];
-	idMeta         = ({macFileType}) => macFileType==="SGI ";
+	idMeta         = ({macFileType}) => ["SGI ", ".SGI"].includes(macFileType);
 	metaProvider   = ["image"];
 	converters     = [
 		"convert", "deark[module:sgiimage]", "nconvert", "iconvert", "iio2png", "gimp", "wuimg", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[format:sgi_pipe][outType:png]", "imconv[format:rgb][matchType:magic]",

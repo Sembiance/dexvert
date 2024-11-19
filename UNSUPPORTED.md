@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,730)
+# Unsupported File Formats (2,740)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -529,7 +529,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (95)
+## Font (96)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -608,6 +608,7 @@ Family/Format | Name | Extensions | Notes
 [font/rixSoftWorksFont](https://discmaster.textfiles.com/search?formatid=rixSoftWorksFont) | RIX SoftWorks Font | .fnt | 
 [font/signumFont](https://discmaster.textfiles.com/search?formatid=signumFont) | Signum Font | .e24 | 
 [font/speedo](https://discmaster.textfiles.com/search?formatid=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
+[font/takeTwoInteractiveSoftwareFont](https://discmaster.textfiles.com/search?formatid=takeTwoInteractiveSoftwareFont) | Take-Two Interactive Software Font | .fnt | 
 [font/telepaintFont](https://discmaster.textfiles.com/search?formatid=telepaintFont) | Telepaint Font | .fnt | 
 [font/texPackedFont](https://discmaster.textfiles.com/search?formatid=texPackedFont) | TeX Packed Font | .pf | 
 [font/texFont](https://discmaster.textfiles.com/search?formatid=texFont) | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [6 sample files](https://sembiance.com/fileFormatSamples/font/texFont/) - Using sandbox/app/glut-master/progs/texfont/showtxf.c I can render it to a cube. Could write C code to render the whole test alphabet letters and then save that to an image, but MEH.
@@ -630,7 +631,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (171)
+## Image (172)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -726,6 +727,7 @@ Family/Format | Name | Extensions | Notes
 [image/logoWriterPage](https://discmaster.textfiles.com/search?formatid=logoWriterPage) | Logo Writer page | .lwr | 
 [image/logoArtDrawing](https://discmaster.textfiles.com/search?formatid=logoArtDrawing) | LogoArt drawing | .art | 
 [image/lotusSmartIcon](https://discmaster.textfiles.com/search?formatid=lotusSmartIcon) | Lotus Smart Icon | .smi | 
+[image/macDraftDrawing](https://discmaster.textfiles.com/search?formatid=macDraftDrawing) | MacDraft drawing | .mdd | 
 [image/maxonCADDrawing](https://discmaster.textfiles.com/search?formatid=maxonCADDrawing) | MaconCAD Drawing | .mc2 | [1 sample file](https://sembiance.com/fileFormatSamples/image/maxonCADDrawing/)
 [image/madStudio](https://discmaster.textfiles.com/search?formatid=madStudio) | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [12 sample files](https://sembiance.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
 [image/magneticGraphics](https://discmaster.textfiles.com/search?formatid=magneticGraphics) | Magnetic Graphics | .gfx | 
@@ -957,7 +959,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,699)
+## Other (1,707)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1039,6 +1041,7 @@ Family/Format | Name | Extensions | Notes
 [other/afsGameArchive](https://discmaster.textfiles.com/search?formatid=afsGameArchive) | AFS game archive | .afs | 
 [other/afterDarkForDOSResourceData](https://discmaster.textfiles.com/search?formatid=afterDarkForDOSResourceData) | After Dark for DOS Resource data | .rsc | 
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?formatid=afterlifeSavedGame) | Afterlife saved game |  | 
+[other/agesGameScript](https://discmaster.textfiles.com/search?formatid=agesGameScript) | AGES Game Script | .aex | 
 [other/agfaCompugraphicFontCache](https://discmaster.textfiles.com/search?formatid=agfaCompugraphicFontCache) | AGFA/Compugraphic Font Cache |  | 
 [other/aheadNeroCoverDesignerTemplate](https://discmaster.textfiles.com/search?formatid=aheadNeroCoverDesignerTemplate) | Ahead Nero CoverDesigner Template | .nct | 
 [other/aibbLoadModule](https://discmaster.textfiles.com/search?formatid=aibbLoadModule) | AIBB load Module | .module .aibb | 
@@ -1658,6 +1661,8 @@ Family/Format | Name | Extensions | Notes
 [other/hiddenAndDangerousGameDataArchive](https://discmaster.textfiles.com/search?formatid=hiddenAndDangerousGameDataArchive) | Hidden and Dangerous game data archive | .cnt .dta | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?formatid=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
 [other/hmvsAntivirusDOSPlugIn](https://discmaster.textfiles.com/search?formatid=hmvsAntivirusDOSPlugIn) | HMVS antivirus DOS PlugIn | .pnp .lng | 
+[other/homePlanPro5Clip](https://discmaster.textfiles.com/search?formatid=homePlanPro5Clip) | Home Plan Pro 5 Clip | .clp | 
+[other/homePlanPro5Plan](https://discmaster.textfiles.com/search?formatid=homePlanPro5Plan) | Home Plan Pro 5 Plan | .pln | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?formatid=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?formatid=homeBrewPalette) | HomeBrew Palette | .hpa | 
 [other/homeBrewTile](https://discmaster.textfiles.com/search?formatid=homeBrewTile) | HomeBrew Tile | .hti | 
@@ -2321,8 +2326,10 @@ Family/Format | Name | Extensions | Notes
 [other/soundChipSynthPatch](https://discmaster.textfiles.com/search?formatid=soundChipSynthPatch) | Sound Chip Synth patch | .syn | 
 [other/soundForgePeakData](https://discmaster.textfiles.com/search?formatid=soundForgePeakData) | Sound Forge Peak Data | .sfk | 
 [other/soundImagesSoundDriver](https://discmaster.textfiles.com/search?formatid=soundImagesSoundDriver) | Sound Images Sound Driver | .bin | 
+[other/sourceEditLanguageDefinition](https://discmaster.textfiles.com/search?formatid=sourceEditLanguageDefinition) | SourceEdit Language Definition | .lng | 
 [other/spectreVRMatrix](https://discmaster.textfiles.com/search?formatid=spectreVRMatrix) | Spectre VR Matrix | .mat | 
 [other/speculatorSnapshot](https://discmaster.textfiles.com/search?formatid=speculatorSnapshot) | Speculator Snapshot | .zx82 .zx | 
+[other/speedTreeFormat](https://discmaster.textfiles.com/search?formatid=speedTreeFormat) | SpeedTree format | .spt | 
 [other/spellGuardDictionary](https://discmaster.textfiles.com/search?formatid=spellGuardDictionary) | SpellGuard Dictionary | .dic | 
 [other/spelToolSupplementalDictionary](https://discmaster.textfiles.com/search?formatid=spelToolSupplementalDictionary) | SpelTool Supplemental Dictionary (v1.0) | .spl | 
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?formatid=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
@@ -2417,6 +2424,7 @@ Family/Format | Name | Extensions | Notes
 [other/theDataMasterFieldsDefinition](https://discmaster.textfiles.com/search?formatid=theDataMasterFieldsDefinition) | The DataMaster Fields Definition | .fld | 
 [other/theDataMasterForm](https://discmaster.textfiles.com/search?formatid=theDataMasterForm) | The DataMaster Form | .form | 
 [other/theDataMasterPreferences](https://discmaster.textfiles.com/search?formatid=theDataMasterPreferences) | The DataMaster Preferences | .pre | 
+[other/elderScrolls4Plugin](https://discmaster.textfiles.com/search?formatid=elderScrolls4Plugin) | The Elder Scrolls IV: Oblivion Plugin | .esp | 
 [other/theGamesFactoryGame](https://discmaster.textfiles.com/search?formatid=theGamesFactoryGame) | The Games Factory Game | .gam | 
 [other/houseOfTheDeadGameDataContainer](https://discmaster.textfiles.com/search?formatid=houseOfTheDeadGameDataContainer) | The House of the Dead game data container | .rbh | 
 [other/houseOfTheDeadTextures](https://discmaster.textfiles.com/search?formatid=houseOfTheDeadTextures) | The House of the Dead textures | .vmc | 
@@ -2478,6 +2486,7 @@ Family/Format | Name | Extensions | Notes
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?formatid=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/potoImpactPresets](https://discmaster.textfiles.com/search?formatid=potoImpactPresets) | Ulead Photo Impact Presets | .smp | 
+[other/ultimateFootball95Playbook](https://discmaster.textfiles.com/search?formatid=ultimateFootball95Playbook) | Ultimate Football '95 Playbook | .pbk | 
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
 [other/uniCodeExtensions](https://discmaster.textfiles.com/search?formatid=uniCodeExtensions) | UniCode Extensions | .uce | 
 [other/universalCommunicationsFormat](https://discmaster.textfiles.com/search?formatid=universalCommunicationsFormat) | Universal Communications Format | .ucf | 
@@ -2652,6 +2661,7 @@ Family/Format | Name | Extensions | Notes
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?formatid=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
 [other/zickyZicksMilkcapsGameData](https://discmaster.textfiles.com/search?formatid=zickyZicksMilkcapsGameData) | Zicky Zick's Milkcaps game data | .tub | 
 [other/zodbFileStorage](https://discmaster.textfiles.com/search?formatid=zodbFileStorage) | ZODB File Storage | .fs | 
+[other/zonerDraw](https://discmaster.textfiles.com/search?formatid=zonerDraw) | Zoner Draw | .zmf | 
 [other/zoopGameGraphics](https://discmaster.textfiles.com/search?formatid=zoopGameGraphics) | Zoop game graphics | .imx | 
 [other/zopeBinaryExportFile](https://discmaster.textfiles.com/search?formatid=zopeBinaryExportFile) | Zope binary export file | .zexp | 
 [other/zsnesSaveSate](https://discmaster.textfiles.com/search?formatid=zsnesSaveSate) | ZSNES Save State | .zst | 

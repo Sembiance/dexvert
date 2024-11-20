@@ -27,7 +27,8 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"BINA/????",
 	"BINA/mdos",
 	"BINA/hDmp",
-	"DEXE/LMAN"
+	"DEXE/LMAN",
+	"mdos/BINA"
 ];
 
 export const WEAK_PRODOS_TYPES =
@@ -828,7 +829,7 @@ export const WEAK_VALUES =
 	/^Protege Project$/,
 	/^ps database/,
 	/^Psion Series 5( binary:)?$/,
-	/^Psion Series 5 (([Ee]xecutable)|(ini file)|(ROM multi-bitmap image)|(Sheet file)|(Sheet spreadsheet))$/,
+	/^Psion Series 5 (clipboard|Comms settings|database Jotter file|([Ee]xecutable)|ini file|(ROM multi-bitmap image)|Sheet (file|spreadsheet))$/,
 	/^Psion Series 5 database Agenda file$/,
 	/^Public Suffix List data/,
 	/^(pure )?object file \(z8000 a\.out\)$/,
@@ -1111,7 +1112,6 @@ export const WEAK_VALUES =
 	/^Flexible Line Interpretation bitmap$/,
 	/^Foenix eXecutable binary/,
 	/^Fold\(ed\) compressed archive$/,
-	/^FONTASY Preview$/,
 	/^Footprint\/IBM Works Data Filer DataBase$/,
 	/^FormWorx for DOS Foreign Language table$/,
 	/^F\.R\.A\.C\. project$/,
@@ -1330,6 +1330,7 @@ export const WEAK_VALUES =
 	/^VersaCAD Shade \(MS-DOS\)$/,
 	/^VGAPaint 386 module$/,
 	/^Videoscape GEO mesh/,
+	/^Video Station Metadata \(v\d\)$/,
 	/^VisiCalc spreadsheet$/,
 	/^WGT Map \(v[2-5](\.\d)?\)$/,
 	/^WhatsApp encrypted database$/,
@@ -1987,6 +1988,7 @@ export const WEAK_VALUES =
 	/^ReplaceEm fileset$/,
 	/^ReqAttack Image$/,
 	/^RichView Format \(Unicode\)$/,
+	/^Rigol Binary waveform \(generic\)$/,
 	/^ROOT format$/,
 	/^RPG Maker VX Ace Project$/,
 	/^rres resource package$/,

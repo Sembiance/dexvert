@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,740)
+# Unsupported File Formats (2,754)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -318,7 +318,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (151)
+## Document (153)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -458,6 +458,8 @@ Family/Format | Name | Extensions | Notes
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?formatid=trueBASICCompiledCode) | True BASIC compiled code |  | 
 [document/turboBaseDB](https://discmaster.textfiles.com/search?formatid=turboBaseDB) | TurboBase DB | .tbp | 
 [document/turboCalc](https://discmaster.textfiles.com/search?formatid=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
+[document/txt2exeJohnPalma](https://discmaster.textfiles.com/search?formatid=txt2exeJohnPalma) | [TXT2EXE (John De Palma)](http://fileformats.archiveteam.org/wiki/TXT2EXE.COM_(John_De_Palma)) | .exe .com | [2 sample files](https://sembiance.com/fileFormatSamples/document/txt2exeJohnPalma/)
+[document/txt2exePFischer](https://discmaster.textfiles.com/search?formatid=txt2exePFischer) | [TXT2EXE (P. Fischer-Haaser)](http://fileformats.archiveteam.org/wiki/TXT2EXE_(P._Fischer-Haaser)) | .exe | [2 sample files](https://sembiance.com/fileFormatSamples/document/txt2exePFischer/)
 [document/typePlusFontWorksDocument](https://discmaster.textfiles.com/search?formatid=typePlusFontWorksDocument) | TypePlus / FontWorks document | .tpp | 
 [document/tz3MSWorksFile](https://discmaster.textfiles.com/search?formatid=tz3MSWorksFile) | tz3 Microsoft Works File file | .tz3 | 
 [document/upShotManual](https://discmaster.textfiles.com/search?formatid=upShotManual) | UpShot Manual | .mnl | 
@@ -529,7 +531,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (96)
+## Font (97)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -565,6 +567,7 @@ Family/Format | Name | Extensions | Notes
 [font/elecbyteMUGENFont](https://discmaster.textfiles.com/search?formatid=elecbyteMUGENFont) | Elecbyte M.U.G.E.N. font | .fnt | 
 [font/electronicArtsFont](https://discmaster.textfiles.com/search?formatid=electronicArtsFont) | Electronic Arts Font | .ffn | 
 [font/envisionPublisherFont](https://discmaster.textfiles.com/search?formatid=envisionPublisherFont) | Envision Publisher Font | .svf | [3 sample files](https://sembiance.com/fileFormatSamples/font/envisionPublisherFont/)
+[font/epocFont](https://discmaster.textfiles.com/search?formatid=epocFont) | EPOC/Psion Font | .gdr | 
 [font/expertDrawFont](https://discmaster.textfiles.com/search?formatid=expertDrawFont) | ExpertDraw Font | .expf | 
 [font/f3Font](https://discmaster.textfiles.com/search?formatid=f3Font) | [F3 Font](http://fileformats.archiveteam.org/wiki/F3_font) | .f3b | 
 [font/fontLabFont](https://discmaster.textfiles.com/search?formatid=fontLabFont) | FontLab Font | .vfb | 
@@ -631,7 +634,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (172)
+## Image (173)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -695,6 +698,7 @@ Family/Format | Name | Extensions | Notes
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?formatid=fastRayMaterial) | FastRay material/surface |  | 
 [image/flashbackSprite](https://discmaster.textfiles.com/search?formatid=flashbackSprite) | Flashback Sprite | .spr | 
 [image/fpr](https://discmaster.textfiles.com/search?formatid=fpr) | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
+[image/fontasyPreview](https://discmaster.textfiles.com/search?formatid=fontasyPreview) | [Fontasy Preview](http://fileformats.archiveteam.org/wiki/FONTASY_graphics) | .pv | [3 sample files](https://sembiance.com/fileFormatSamples/image/fontasyPreview/)
 [image/fractalDesignPainterPaperGrain](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterPaperGrain) | Fractal Design Painter Paper grain | .pap | 
 [image/fractalDesignPreviewBitmap](https://discmaster.textfiles.com/search?formatid=fractalDesignPreviewBitmap) | Fractal Design Preview bitmap | .pix | 
 [image/freelanceGraphicsDrawing](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsDrawing) | Freelance Graphics Drawing | .drw | 
@@ -959,7 +963,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,707)
+## Other (1,715)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1032,6 +1036,7 @@ Family/Format | Name | Extensions | Notes
 [other/advancedCalculatorSpreadsheet](https://discmaster.textfiles.com/search?formatid=advancedCalculatorSpreadsheet) | Advanced Calculator spreadsheet | .calc | 
 [other/advancedLayouterModel](https://discmaster.textfiles.com/search?formatid=advancedLayouterModel) | Advanced Layouter model | .mus | 
 [other/advancedLayouterProject](https://discmaster.textfiles.com/search?formatid=advancedLayouterProject) | Advanced Layouter project | .lay | 
+[other/advantageDataServerTable](https://discmaster.textfiles.com/search?formatid=advantageDataServerTable) | Advantage Data Server table | .adt | 
 [other/adventureGameStudio](https://discmaster.textfiles.com/search?formatid=adventureGameStudio) | Adventure Game Studio | .dat | 
 [other/adventureGameToolkitStrings](https://discmaster.textfiles.com/search?formatid=adventureGameToolkitStrings) | Adventure Game Toolkit Strings | .d$$ | 
 [other/aegisImpactGraph](https://discmaster.textfiles.com/search?formatid=aegisImpactGraph) | Aegis Impact! Graph | .gph | 
@@ -1325,6 +1330,7 @@ Family/Format | Name | Extensions | Notes
 [other/commanderKeen6Config](https://discmaster.textfiles.com/search?formatid=commanderKeen6Config) | Commander Keen 6 config | .ck6 | 
 [other/appleScriptCompiled](https://discmaster.textfiles.com/search?formatid=appleScriptCompiled) | Compiled AppleScript Script |  | [2 sample files](https://sembiance.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 [other/compiledErlangCode](https://discmaster.textfiles.com/search?formatid=compiledErlangCode) | Compiled Erlang code |  | 
+[other/compiledMediaBasicProject](https://discmaster.textfiles.com/search?formatid=compiledMediaBasicProject) | Compiled MediaBasic Project | .ebc | 
 [other/compiledMSVCResources](https://discmaster.textfiles.com/search?formatid=compiledMSVCResources) | Compiled MSVC Resources | .resources | 
 [other/compiledXKeyMap](https://discmaster.textfiles.com/search?formatid=compiledXKeyMap) | Compiled X KeyMap | .xkm | 
 [other/componentConfigurationFile](https://discmaster.textfiles.com/search?formatid=componentConfigurationFile) | Component Configuration File | .ccf | 
@@ -1388,6 +1394,7 @@ Family/Format | Name | Extensions | Notes
 [other/dasBootGameDataArchive](https://discmaster.textfiles.com/search?formatid=dasBootGameDataArchive) | Das Boot game data archive | .d02 .d03 .d01 | 
 [other/databenchForm](https://discmaster.textfiles.com/search?formatid=databenchForm) | Databench form | .msk | 
 [other/datAGIDataBase](https://discmaster.textfiles.com/search?formatid=datAGIDataBase) | DatAGI data base |  | 
+[other/dataRescueIDADLLDescription](https://discmaster.textfiles.com/search?formatid=dataRescueIDADLLDescription) | DataRescue IDA DLL IDS Description File | .ids | 
 [other/dataStoreDatabase](https://discmaster.textfiles.com/search?formatid=dataStoreDatabase) | Datastore Database |  | 
 [other/dateBookArchive](https://discmaster.textfiles.com/search?formatid=dateBookArchive) | DateBook Archive | .dba | 
 [other/datelActionReplay](https://discmaster.textfiles.com/search?formatid=datelActionReplay) | Datel Action Replay cheat data | .dc | 
@@ -1562,6 +1569,7 @@ Family/Format | Name | Extensions | Notes
 [other/fontDescriptor](https://discmaster.textfiles.com/search?formatid=fontDescriptor) | Font descriptor | .ntf14 .ntf16 .ntf4 | 
 [other/foreignLanguageMasterConfig](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterConfig) | Foreign Language Master Configuration | .config | 
 [other/foreignLanguageMasterDictionary](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterDictionary) | Foreign Language Master dictionary | .flm | 
+[other/forgeFileSystemGameDataArchive](https://discmaster.textfiles.com/search?formatid=forgeFileSystemGameDataArchive) | Forge File System game data archive | .ffs | 
 [other/formFloworm](https://discmaster.textfiles.com/search?formatid=formFloworm) | FormFlow form | .frz .frl | 
 [other/formulaDocument](https://discmaster.textfiles.com/search?formatid=formulaDocument) | Formula document | .frm | 
 [other/formWorxForWindowsForm](https://discmaster.textfiles.com/search?formatid=formWorxForWindowsForm) | FormWorx for Windows Form | .fpx | 
@@ -1577,6 +1585,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalDesignPainterResource](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterResource) | Fractal Design Painter Resource | .rsr | 
 [other/fractalDesignPainterSession](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterSession) | Fractal Design Painter Session | .ssk | 
 [other/fractalDesignPainterWeavingLib](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterWeavingLib) | Fractal Design Painter Weaving Lib | .wev | 
+[other/fractalExplorerViewData](https://discmaster.textfiles.com/search?formatid=fractalExplorerViewData) | Fractal Explorer View data | .fev | 
 [other/fractalForgeParameters](https://discmaster.textfiles.com/search?formatid=fractalForgeParameters) | Fractal Forge parameters | .mnd | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
 [other/freeDOSKEYBoardLayoutCollection](https://discmaster.textfiles.com/search?formatid=freeDOSKEYBoardLayoutCollection) | FreeDOS KEYBoard layout collection | .sys | 
@@ -1674,6 +1683,7 @@ Family/Format | Name | Extensions | Notes
 [other/humanMachineInterfacesDriver](https://discmaster.textfiles.com/search?formatid=humanMachineInterfacesDriver) | Human Machine Interfaces Sound Driver | .386 | 
 [other/hyperACCESSOS2Data](https://discmaster.textfiles.com/search?formatid=hyperACCESSOS2Data) | HyperACCESS OS/2 data | .hho | 
 [other/hyperPadPad](https://discmaster.textfiles.com/search?formatid=hyperPadPad) | HyperPAD Pad | .pad | 
+[other/hyperspeedAnimation](https://discmaster.textfiles.com/search?formatid=hyperspeedAnimation) | Hyperspeed Animation | .pan | 
 [other/iHaveNoMouthAndIMustScreamSaveGame](https://discmaster.textfiles.com/search?formatid=iHaveNoMouthAndIMustScreamSaveGame) | I Have No Mouth, and I Must Scream save game | .sav | 
 [other/i8086RelocatableObjectCode](https://discmaster.textfiles.com/search?formatid=i8086RelocatableObjectCode) | i8086 relocatable Object code | .o | 
 [other/ibCardsCard](https://discmaster.textfiles.com/search?formatid=ibCardsCard) | IBCards card | .ibc | 
@@ -2185,6 +2195,7 @@ Family/Format | Name | Extensions | Notes
 [other/psionPrinterDriver](https://discmaster.textfiles.com/search?formatid=psionPrinterDriver) | Psion Printer Driver | .wdr | 
 [other/psm2Configuration](https://discmaster.textfiles.com/search?formatid=psm2Configuration) | PSM 2 configuration | .dat | 
 [other/pureCProjectDB](https://discmaster.textfiles.com/search?formatid=pureCProjectDB) | Pure C Project DB | .pdb | 
+[other/pureBasicLibrary](https://discmaster.textfiles.com/search?formatid=pureBasicLibrary) | PureBasic library |  | 
 [other/pureBasicResidentData](https://discmaster.textfiles.com/search?formatid=pureBasicResidentData) | PureBasic resident data |  | 
 [other/puzzleBusterPuzzle](https://discmaster.textfiles.com/search?formatid=puzzleBusterPuzzle) | Puzzle Buster Puzzle | .puz | 
 [other/qarbonViewlet](https://discmaster.textfiles.com/search?formatid=qarbonViewlet) | Qarbon Viewlet | .viewlet | 
@@ -2537,6 +2548,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?formatid=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 
 [other/visualSourceSafeControlFile](https://discmaster.textfiles.com/search?formatid=visualSourceSafeControlFile) | Visual SourceSafe Control File | .scc | 
 [other/visualToolsVTSpellDictionary](https://discmaster.textfiles.com/search?formatid=visualToolsVTSpellDictionary) | VisualTools VT Spell Dictionary | .vtd .vt | 
+[other/vizastarSpreadsheet](https://discmaster.textfiles.com/search?formatid=vizastarSpreadsheet) | Vizastar spreadsheet | .wks .seq | 
 [other/vmWareNVRAM](https://discmaster.textfiles.com/search?formatid=vmWareNVRAM) | VMware NVRAM | .nvram | 
 [other/vocalEyesHelp](https://discmaster.textfiles.com/search?formatid=vocalEyesHelp) | Vocal-Eyes Help | .hlp | 
 [other/vocalEyesSet](https://discmaster.textfiles.com/search?formatid=vocalEyesSet) | Vocal-Eyes Set | .set | 
@@ -2751,9 +2763,10 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (50)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
+[video/threeDOSTRVideo](https://discmaster.textfiles.com/search?formatid=threeDOSTRVideo) | 3DO STR video |  | 
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
 [video/accentShowSequence](https://discmaster.textfiles.com/search?formatid=accentShowSequence) | Accent Software Show Sequence | .seq | [11 sample files](https://sembiance.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 [video/adorageAnimation](https://discmaster.textfiles.com/search?formatid=adorageAnimation) | Adorage Animation | .awm | [1 sample file](https://sembiance.com/fileFormatSamples/video/adorageAnimation/)
@@ -2763,6 +2776,7 @@ Family/Format | Name | Extensions | Notes
 [video/animationWorks](https://discmaster.textfiles.com/search?formatid=animationWorks) | Animation Works Movie | .awm | [5 sample files](https://sembiance.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
 [video/astoundAnimation](https://discmaster.textfiles.com/search?formatid=astoundAnimation) | Astound Animation | .awa | 
 [video/avssVideo](https://discmaster.textfiles.com/search?formatid=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
+[video/callahansCrosstimeSaloonVideo](https://discmaster.textfiles.com/search?formatid=callahansCrosstimeSaloonVideo) | Callahans Crosstime Saloon video | .q | [2 sample files](https://sembiance.com/fileFormatSamples/video/callahansCrosstimeSaloonVideo/)
 [video/iffSSA](https://discmaster.textfiles.com/search?formatid=iffSSA) | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [7 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
 [video/delphineCIN](https://discmaster.textfiles.com/search?formatid=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?formatid=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)

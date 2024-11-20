@@ -10468,24 +10468,25 @@ Video codecs
     .TIF       Yes     R     Aldus/Microsoft Tag Image Format
 
 
->>> ICONVERT 1.49 (DOS) http://fileformats.archiveteam.org/wiki/Iconvert  (sandbox/app/iconvrt2.zip)
-ASCII            (8x8 and 8x14)
-BASICA BLOAD     (Color and Hires)
-DOODLE           (CBM)
-Dr Halo II
-First Publisher  (ART and MAC)
-FONTASY          (Block and Pic)
-GEM
-GIF
-IFF
-NEWSMASTER
-NEWSROOM
-MACPAINT
-PC PAINTBRUSH    (Clip and Pic)
-PRINTMASTER      (IBM and CBM)
-PRINT SHOP       (IBM and CBM)
-RLE
-WINDOWS PAINT
+>>> ICONVERT 1.52a (DOS) http://fileformats.archiveteam.org/wiki/Iconvert
+ASCII           	(8x8, 8x14)
+BASICA BLOAD    	(2 color, 4 color)
+Compuserve			(GIF, RLE)
+Dr Halo II			(CUT)
+Doodle				(CBM)
+First Publisher		(ART, MAC)
+Fontasy				(BLK, PIC, PV)
+GEM					(IMG)
+IFF					(IFF)
+MacPaint			(MAC)
+NewsMaster			(SHP)
+Newsroom			(CA)
+PC Paint            (CLP, PIC)
+PC PaintBrush       (PCC, PCX)
+PrintMaster		    (SHP, GRA)
+Print Shop		  	(DAT, PS)
+TIFF				(TIF)
+Windows Paint		(MSP)
 
 
 >>> Micrografx Picture Publisher 7.0 (https://winworldpc.com/product/micrografx-graphics-suite/2)

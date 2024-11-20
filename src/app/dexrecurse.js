@@ -18,6 +18,7 @@ const RECURSE_WORK_DIR_PATH = "/mnt/dexvert/recurse";
 const EXCLUDED_SAMPLE_FORMATS =
 [
 	// too big
+	"archive/aaruDiskImage",
 	"archive/cdi",
 	"archive/hemeraThumbnailsArchive",
 	"archive/iso",

@@ -16,6 +16,7 @@ export class msCompound extends Format
 		"Minitab Portable Worksheet", "Windows 7 Jump List", "Microsoft RSS Feeds Store", "Combit List and Label printer setup file", "Visual Pinball Table", "AutoRoute Export file", "Lotus Approach (generic)", "Outlook Send-Receive Settings",
 		"MSN Messenger Wink", "Protel for Windows schematic capture (binary)", "Protel PCB 5.0 Binary Library", "Altium Designer PCB Document", "Lotus Approach v3.0", "ACT! Macro (v3.0)", "AutoCAD VBA macro", "Font FX Material", "Font FX Path",
 		"Easy CD Creator Layout", "Oracle Data base Diagram", "CeledyDraw drawing", "Microsoft Access Wizard template", "Office Binder Document", "Microsoft Access Project", "ASAP Presentation", "Microsoft Clip Art Gallery Catalog", "Samsung document",
+		"Drafix Symbol Library",
 		/^fmt\/(240|877|916|971|1213|1303|1331|1360|1362|1431|1432|1493|1517|1648|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these

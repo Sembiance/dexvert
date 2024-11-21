@@ -12,7 +12,7 @@ export class mid extends Format
 		// app specific
 		"Yamaha General Style"
 	];
-	idMeta       = ({macFileType}) => ["Midi", "MIDI"].includes(macFileType);
+	idMeta       = ({macFileType, proDOSTypeCode}) => ["Midi", "MIDI"].includes(macFileType) || proDOSTypeCode==="MDI";
 	notes        = "Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows";
 	metaProvider = ["musicInfo"];
 	converters   = ["timidity", "gamemus[format:mid-type0]"];

@@ -36,9 +36,11 @@ export const WEAK_PRODOS_TYPES =
 	// these are very generic or system level stuff and are not useful to act on
 	"BAT",		// [F5] User Defined 5
 	"BIN",		// [06] Binary File
+	"BIO",		// [6B] PC BIOS
 	"CFG",		// [5A] Configuration
 	"CMD",		// [F0] ProDOS Command File
 	"DRV",		// [BB] Apple IIgs Device Driver
+	"DVR",		// [6D] PC Driver
 	"ENT",		// [5D] Entertainment
 	"FND",		// [C9] Apple IIgs Finder Data
 	"FST", 		// [BD] Apple IIgs File System Translator
@@ -47,11 +49,14 @@ export const WEAK_PRODOS_TYPES =
 	"LDF",		// [BC] Apple IIgs Generic Load File
 	"P16",		// [F9] ProDOS-16 System File
 	"PIF",		// [B6] Apple IIgs Permanent INIT
+	"PRE",		// [6E] PC Pre-Boot
 	"PRG",		// [F8] User Defined 8
+	"SOS",		// [0C] SOS System File
 	"SYS", 		// [FF] ProDOS-8 System File
 	"TIF",		// [B7] Apple IIgs Temporary INIT
 	"UD2",		// [F2] User Defined 2
 	"UD4",		// [F4] User Defined 4
+	"UD7",		// [F7] User Defined 7
 	"UNK",		// [00] Unknown
 	"VAR"		// [FD] Applesoft BASIC Variables
 ];
@@ -441,6 +446,7 @@ export const WEAK_VALUES =
 	/^Apollo DBF/,
 	/^Apollo, with SQL table with memo/,
 	/^Apple DiskCopy 4.2 image/,
+	/^Apple Mechanic font$/,	// Usually actually are these, but don't know a way to convert them and magic isn't super strong
 	/^Apple QuickTime$/,
 	/^Apple QuickTime multiple URLs$/,
 	/^Applesoft BASIC program data/,
@@ -1131,6 +1137,7 @@ export const WEAK_VALUES =
 	/^GLF 3D Font File Format$/,
 	/^GNU Info document/,
 	/^GNU Privacy Guard public keyring \(generic\)$/,
+	/^GP32 Free eXecutable Encrypted$/,
 	/^Graham Systems Disk Sqeezer disk image$/,
 	/^GraphiCode Programmable Device Format$/,
 	/^Hi-MD Minidisc ATRAC3\+? audio data container$/,
@@ -1207,6 +1214,7 @@ export const WEAK_VALUES =
 	/^NeoC Explorer train \/ input patterns$/,
 	/^NEW-DOS COMPRESS compressed data$/,
 	/^Nice-Install Data$/,
+	/^Nintendo 3DS Flipnote Studio 3D video$/,
 	/^Nokia 3D Map$/,
 	/^Nokia Logo Manager bitmap$/,
 	/^NoteCenter encrypted notes$/,
@@ -1452,7 +1460,7 @@ export const WEAK_VALUES =
 	/^MusicMaker Song Data$/,
 	/^MS 2\.5 module$/,
 	/^MSX sound performance system Player XPL-A song$/,
-	/^MSX-DOS disk Image$/,	// Found 1 of these in the wild, but the extension is not reliable and it's only checking 3 generic bytes
+	/^MSX-DOS( 2)? disk [Ii]mage$/,	// Found 2 of these in the wild, but the extension is not reliable and it's only checking 3 generic bytes
 	/^NIfTI-2 data format/,
 	/^Nihilistic Object Data$/,
 	/^NK - BMP\/TV lossless compressed bitmap$/,

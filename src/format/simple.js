@@ -44,7 +44,7 @@ export default
 		firstChoiceDatabase      : {name : "First Choice Database", ext : [".fol", ".pfs"], magic : ["First Choice database", /^fmt\/1284( |$)/], weakMagic : true},
 		fl2com                   : {name : "FL2COM", ext : [".com"], magic : ["FL2COM", "16bit COM FL2COM reader"], website : "http://fileformats.archiveteam.org/wiki/FL2COM"},
 		formMasterForm           : {name : "Form Master Form", ext : [".frm"], magic : ["Form Master Form"]},
-		fourDWriteDocument       : {name : "4D Write document", magic : ["4D Write document"], idMeta : ({macFileType, macFileCreator}) => macFileType==="4WRT" && ["Twri", "B.G."].includes(macFileCreator)},
+		fourDWriteDocument       : {name : "4D Write document", magic : ["4D Write document"], idMeta : ({macFileType, macFileCreator}) => macFileType==="4WRT" && ["Twri", "B.G.", "BGCV"].includes(macFileCreator)},
 		frameMakerBook           : {name : "FrameMaker Book", ext : [".book"], magic : ["FrameMaker book"], idMeta : ({macFileType, macFileCreator}) => macFileType==="FBok" && macFileCreator==="Fram"},
 		geoWorksGeoWriteDocument : {name : "GeoWorks GeoWrite document", ext : [".000"], magic : ["GeoWorks GeoWrite document"]},
 		goldDiskSpreadsheet      : {name : "Gold Disk Spreadsheet", ext : [".adv", ".pcf"], magic : ["Gold Disk Office Calc/Graph spreadsheet"]},

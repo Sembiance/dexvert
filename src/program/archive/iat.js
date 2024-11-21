@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class iat extends Program
@@ -8,6 +9,7 @@ export class iat extends Program
 	unsafe     = true;
 	args       = r => ["-i", r.inFile(), "--cue", "-o", "out"];
 	cwd        = r => r.outDir();
+	runOptions = ({timeout : xu.MINUTE*10});	// can hang on things
 	renameOut  = false;
 	chain      = "?dexvert";
 	chainCheck = (r, chainFile) => [".bin"].includes(chainFile.ext.toLowerCase());

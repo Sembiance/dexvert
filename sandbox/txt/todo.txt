@@ -115,7 +115,6 @@
 	https://archive.org/details/installshield1150premier
 
 * ISOs I was unable to process:
-	No idea what format this is in: https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
 	These don't convert for some reason, they both appear to be Mac CDs
 		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
 		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one
@@ -123,6 +122,11 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-1.0
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
+	Could not figure these out (may be bad rips)
+		https://archive.org/details/CitroenC5-2001
+		https://archive.org/details/LionShare
+		https://archive.org/details/cdrom-megabytemonster
+		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
 
 * Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
@@ -223,11 +227,6 @@
 	document/dartHypertext
 	document/envisionPublisherDoc
 	document/ibmStoryboardDocument
-
-* Was never able to properly extract these ISOs (might be bad rips):
-	https://archive.org/details/CitroenC5-2001
-	https://archive.org/details/LionShare
-	https://archive.org/details/cdrom-megabytemonster
 
 * Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
   Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on

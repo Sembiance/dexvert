@@ -79,8 +79,8 @@ export default
 		valveMapFormat                      : {name : "Valve Map Format", ext : [".vmf", ".vmx"], magic : ["Valve Map Format"], weakMagic : true},
 		valveMaterialType                   : {name : "Valve Material Type", ext : [".vmt"], magic : ["Valve Material Type"], weakMagic : true},
 		worldConstructionSetCloudMap        : {name : "World Construction Set Cloud map", ext : [".cld"], magic : ["World Construction Set Cloud map"], weakMagic : true},
-		worldConstructionSetDatabase        : {name : "World Construction Set database", magic : ["World Construction Set database"], weakMagic : true},
-		worldConstructionSetModel           : {name : "World Construction Set model", magic : ["World Construction Set model"], weakMagic : true},
+		worldConstructionSetDatabase        : {name : "World Construction Set database", magic : ["World Construction Set database"]},
+		worldConstructionSetModel           : {name : "World Construction Set model", magic : ["World Construction Set model"]},
 		worldConstructionSetPreferences     : {name : "World Construction Set Preferences", ext : [".prefs"], magic : ["World Construction Set Preferences"], weakMagic : true},
 		worldConstructionSetProject         : {name : "World Construction Set Project", ext : [".prefs", ".proj"], magic : ["World Construction Set Project"], weakMagic : true},
 		worldConstructionSetWave            : {name : "World Construction Set Wave", ext : [".wve"], magic : ["World Construction Set Wave"], weakMagic : true},
@@ -258,6 +258,7 @@ export default
 		///////////
 		// Other //
 		///////////
+		acclaimSkeletonFile                     : {name : "Acclaim Skeleton File", ext : [".asf"], magic : ["Acclaim Skeleton File"], weakMagic : true},
 		acegrFitDescriptionFile                 : {name : "ACE/gr fit description file", ext : [".fit"], magic : [/^ACE\/gr fit description file/]},
 		acrobatDistillerJobOptions              : {name : "Acrobat Distiller Job Options", magic : ["Acrobat Distiller Job Options"]},
 		acrobatFormsData                        : {name : "Acrobat Forms Data", ext : [".fdf", ".acrodata"], magic : ["Acrobat Forms Data Format", "Adobe PDF Form Daten Datei", /^FDF document/, /^fmt\/1500( |$)/], website : "http://fileformats.archiveteam.org/wiki/FDF"},
@@ -444,7 +445,7 @@ export default
 		hardDiskMenuSystemMenu                  : {name : "Hard Disk Menu System menu", ext : [".999", ".000"], magic : ["Hard Disk Menu System menu"], weakMagic : true},
 		helpScribbleProject                     : {name : "HelpScribble Project", ext : [".hsc"], magic : ["HelpScribble Project"]},
 		highVoltageSIDCollectionUpdateInfo      : {name : "High Voltage SID Collection update info", ext : [".hvs"], magic : ["High Voltage SID Collection update info"]},
-		hiJaakVideoCardConfiguration            : {name : "HiJaak video card configuration", ext : [".cfg"], magic : ["HiJaak video card configuration"], weakMagic : true},
+		hiJaakVideoCardConfiguration            : {name : "HiJaak video card configuration", ext : [".cfg", ".bin"], magic : ["HiJaak video card configuration"], weakMagic : true},
 		hmiSoundOSConfiguration                 : {name : "HMI Sound OS Configuration", ext : [".cfg"], magic : ["HMI Sound Operating System Configuration"]},
 		hpME10Database                          : {name : "HP ME10 database", ext : [".mi"], magic : ["HP ME10 database (ASCII)"], weakMagic : true},
 		htmlComponent                           : {name : "HTML Component", ext : [".htc"], magic : ["HTML Component"], weakMagic : true},
@@ -631,6 +632,7 @@ export default
 		qaPlusKeyboardMap                       : {name : "QAPlus Keyboard Map", ext : [".kbd"], magic : ["QAPlus Keyboard Map"]},
 		quakeISave                              : {name : "Quake I save", ext : [".sav"], magic : [/^Quake I save/], weakMagic : true},
 		quickenInterchangeFormat                : {name : "Quicken Interchange Format", ext : [".qif"], magic : ["Quicken Interchange Format", /^fmt\/307( |$)/], weakMagic : true},
+		quickMenuMenu                           : {name : "QuickMenu Menu", ext : [".inf"], magic : ["QuickMenu Menu"], weakMagic : true},
 		quickSFVChecksum                        : {name : "QuickSFV checksum", ext : [".sfv"], magic : ["QuickSFV checksum"]},
 		quickTimeTextSubtitles                  : {name : "QuickTime Text subtitles", magic : ["QuickTime Text subtitles"]},
 		rarRegistrationData                     : {name : "RAR registration data", ext : [".key", ".cfg"], magic : ["RAR registration data"]},

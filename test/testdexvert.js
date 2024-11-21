@@ -414,6 +414,8 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],
 	[/text\/forthSource\/.*\.txt$/i, "text", "txt"],
+	[/text\/playmationAction\/.*\.txt$/i, "text", "txt"],
+	[/text\/playmationSpine\/.*\.txt$/i, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
@@ -560,7 +562,8 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"music/thePlayer",
 	"music/titanics",
 	"other/iBrowseCookies",
-	"unsupported/binPatch"
+	"unsupported/binPatch",
+	"video/vdoVideo"
 ];
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath("/mnt/dexvert/test", "_dextest");

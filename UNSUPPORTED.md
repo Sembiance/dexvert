@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,774)
+# Unsupported File Formats (2,779)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -318,7 +318,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (153)
+## Document (154)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -373,6 +373,7 @@ Family/Format | Name | Extensions | Notes
 [document/fBaseDataBase](https://discmaster.textfiles.com/search?formatid=fBaseDataBase) | F-Base data base |  | 
 [document/facilNCDocument](https://discmaster.textfiles.com/search?formatid=facilNCDocument) | Facil NC document | .fwt .fwm | 
 [document/fhspreadSpreadsheet](https://discmaster.textfiles.com/search?formatid=fhspreadSpreadsheet) | FHSpread spreadsheet | .fhs | 
+[document/finalDraftDocument](https://discmaster.textfiles.com/search?formatid=finalDraftDocument) | Final Draft document | .fdt .fdr | 
 [document/finalCalcSpreadsheet](https://discmaster.textfiles.com/search?formatid=finalCalcSpreadsheet) | FinalCalc Spreadsheet | .sheet | [1 sample file](https://sembiance.com/fileFormatSamples/document/finalCalcSpreadsheet/)
 [document/firstChoicePublication](https://discmaster.textfiles.com/search?formatid=firstChoicePublication) | First Choice Publication | .pub | 
 [document/firstChoiceSpreadSheet](https://discmaster.textfiles.com/search?formatid=firstChoiceSpreadSheet) | First Choice SpreadSheet | .ss | 
@@ -964,7 +965,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,734)
+## Other (1,737)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -977,6 +978,7 @@ Family/Format | Name | Extensions | Notes
 [other/threeDProfessionalLight](https://discmaster.textfiles.com/search?formatid=threeDProfessionalLight) | 3-D Professional light |  | 
 [other/threeByFiveIndex](https://discmaster.textfiles.com/search?formatid=threeByFiveIndex) | 3by5 Index | .map | 
 [other/threeByFiveSource](https://discmaster.textfiles.com/search?formatid=threeByFiveSource) | 3by5 source | .3x5 | 
+[other/threeDCKVirtualRealityStudioDriver](https://discmaster.textfiles.com/search?formatid=threeDCKVirtualRealityStudioDriver) | 3D Construction Kit / Virtual Reality Studio driver | .drv | 
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
 [other/threeDCKBrushes](https://discmaster.textfiles.com/search?formatid=threeDCKBrushes) | 3D Construction Kit Brushes | .3bd | 
 [other/threeDCKObject](https://discmaster.textfiles.com/search?formatid=threeDCKObject) | 3D Construction Kit Object | .3od .obj | 
@@ -1763,6 +1765,8 @@ Family/Format | Name | Extensions | Notes
 [other/jetPilotSUPData](https://discmaster.textfiles.com/search?formatid=jetPilotSUPData) | JETPilot SUP data |  | 
 [other/jniLibrary](https://discmaster.textfiles.com/search?formatid=jniLibrary) | JNI Library | .jnilib | 
 [other/joy2KeySettings](https://discmaster.textfiles.com/search?formatid=joy2KeySettings) | Joy2Key settings | .j2k .ini | 
+[other/juggleKrazyLadderDiagram](https://discmaster.textfiles.com/search?formatid=juggleKrazyLadderDiagram) | JuggleKrazy Ladder diagram | .lad | 
+[other/juggleKrazyTutorial](https://discmaster.textfiles.com/search?formatid=juggleKrazyTutorial) | JuggleKrazy Tutorial | .tut | 
 [other/junglevisionData](https://discmaster.textfiles.com/search?formatid=junglevisionData) | Junglevision data | .op3 | 
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?formatid=junoClientLicenseKey) | Juno client license Key | .key | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?formatid=kChessSavedGame) | K-Chess saved game | .kch .kc | 
@@ -2704,7 +2708,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (73)
+## Poly (74)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -2725,6 +2729,7 @@ Family/Format | Name | Extensions | Notes
 [poly/blizzard3DModelBinary](https://discmaster.textfiles.com/search?formatid=blizzard3DModelBinary) | Blizzard 3D Model (binary) | .mdx | 
 [poly/brlCADGeometry](https://discmaster.textfiles.com/search?formatid=brlCADGeometry) | BRL-CAD geometry | .g | 
 [poly/catiaModel](https://discmaster.textfiles.com/search?formatid=catiaModel) | CATIA model | .model | 
+[poly/coordinate3DFormat](https://discmaster.textfiles.com/search?formatid=coordinate3DFormat) | Coordinate 3D format | .c3d | 
 [poly/createShade3DScene](https://discmaster.textfiles.com/search?formatid=createShade3DScene) | Create+Shade 3D Scene | .3d | 
 [poly/cult3DObject](https://discmaster.textfiles.com/search?formatid=cult3DObject) | Cult3D object | .co .c3p .c3d | 
 [poly/cyberwareDigitizerData](https://discmaster.textfiles.com/search?formatid=cyberwareDigitizerData) | Cyberware Digitizer Data |  | 

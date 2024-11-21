@@ -8,6 +8,9 @@ import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
+// NOTE: This isn't strictly 'just ISO files'. There are some disk images in here too because the converters are the same, but technically those should probably be in rawPartition.js but meh
+
+const MFS_MAGICS = ["MFS file system", /^Macintosh MFS data/];
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image",
 	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/1757( |$)/
 ];
@@ -39,7 +42,7 @@ export class iso extends Format
 		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS",
 		/^ISO 9660$/, /^UDF recognition sequence.*ISO9660/, /^fmt\/(468|1738)( |$)/,
 		/^First .*are blank$/,
-		...HFS_MAGICS
+		...HFS_MAGICS, ...MFS_MAGICS
 	];
 	weakMagic      = [/^First .* are blank$/, /^Apple HFS Plus/, /^HFS Plus/];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
@@ -157,8 +160,11 @@ export class iso extends Format
 			subState =>
 			{
 				const r = [];
+				if(dexState.hasMagics(MFS_MAGICS))
+					r.push("aaru");
+
 				if(multipleMode1Tracks)		// Some CD's (Game_Killer.bin) have a ton of MODE1 tracks, not sure why, but the stuff below kinda chokes on them, but aaru/unar/fuseiso all seem to handle it ok, but we just pick aaru and fuseiso for now
-					r.push("aaru", "fuseiso");
+					r.pushUnique("aaru", "fuseiso");
 				r.push("uniso[checkMount]");	// Will only copy files if there are no input/output errors getting a directory listing (The PC-SIG Library on CD ROM - Ninth Edition.iso)
 
 				// some multi-bin groups (sample/archive/iso/Oh!X 2001 Spring Special CD-ROM (Japan) (Track 1).bin) get messed up with bchunk, so if we have multiple bins, try fuseiso first

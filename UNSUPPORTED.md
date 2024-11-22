@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,779)
+# Unsupported File Formats (2,787)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -318,7 +318,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (154)
+## Document (156)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -415,6 +415,7 @@ Family/Format | Name | Extensions | Notes
 [document/microsoftOneNote](https://discmaster.textfiles.com/search?formatid=microsoftOneNote) | Microsoft OneNote | .one .onetoc2 | 
 [document/movieMagicScreenwriterDocument](https://discmaster.textfiles.com/search?formatid=movieMagicScreenwriterDocument) | Movie Magic Screenwriter document | .scw .ini .tmb | 
 [document/multiplanForMacSpreadsheet](https://discmaster.textfiles.com/search?formatid=multiplanForMacSpreadsheet) | Multiplan for Mac spreadsheet | .86multiplan | 
+[document/multiplanSpreadsheet](https://discmaster.textfiles.com/search?formatid=multiplanSpreadsheet) | Multiplan spreadsheet | .mod | 
 [document/navyDIF](https://discmaster.textfiles.com/search?formatid=navyDIF) | [NAVY DIF](https://www.govinfo.gov/content/pkg/GOVPUB-C13-54457a38751dd2826804944b2be585f3/pdf/GOVPUB-C13-54457a38751dd2826804944b2be585f3.pdf) | .dif | [1 sample file](https://sembiance.com/fileFormatSamples/document/navyDIF/) - A format from the US NAVY for interchanging word processing files. Haven't investigated it for magic.
 [document/textraWriter](https://discmaster.textfiles.com/search?formatid=textraWriter) | Norton Textra Writer | .doc | 
 [document/omniPageDocument](https://discmaster.textfiles.com/search?formatid=omniPageDocument) | OmniPage Document | .opd | 
@@ -474,6 +475,7 @@ Family/Format | Name | Extensions | Notes
 [document/wordMARC](https://discmaster.textfiles.com/search?formatid=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/) - VAX based word processor. Haven't investigated it for magic.
 [document/wordPerfectHelp](https://discmaster.textfiles.com/search?formatid=wordPerfectHelp) | WordPerfect help | .fil .hlp | 
 [document/wordPerfectNotebook](https://discmaster.textfiles.com/search?formatid=wordPerfectNotebook) | WordPerfect Notebook | .nb | 
+[document/wordUpDocument](https://discmaster.textfiles.com/search?formatid=wordUpDocument) | WordUp document | .wup | 
 [document/xTextCompiledHypertext](https://discmaster.textfiles.com/search?formatid=xTextCompiledHypertext) | xText compiled Hypertext/Help | .xdb .hlp | 
 
 
@@ -965,7 +967,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,737)
+## Other (1,743)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -999,6 +1001,7 @@ Family/Format | Name | Extensions | Notes
 [other/ninetyFourBSoundBank](https://discmaster.textfiles.com/search?formatid=ninetyFourBSoundBank) | 94B sound bank | .94b | 
 [other/aSquaredAntiMalwareSignature](https://discmaster.textfiles.com/search?formatid=aSquaredAntiMalwareSignature) | a-squared Anti-Malware signature | .sig | 
 [other/aeSGMLDocumentBinary](https://discmaster.textfiles.com/search?formatid=aeSGMLDocumentBinary) | A/E SGML DocumentBinary | .ae | 
+[other/abbyLingvoDictionary](https://discmaster.textfiles.com/search?formatid=abbyLingvoDictionary) | ABBYY Lingvo dictionary | .dic .lsd | 
 [other/abcFlowCharterShapesPalette](https://discmaster.textfiles.com/search?formatid=abcFlowCharterShapesPalette) | ABC FlowCharter shapes Palette | .afp | 
 [other/abcFlowCharterTemplate](https://discmaster.textfiles.com/search?formatid=abcFlowCharterTemplate) | ABC FlowCharter Template | .aft | 
 [other/abcSnapGraphicsPalette](https://discmaster.textfiles.com/search?formatid=abcSnapGraphicsPalette) | ABC SnapGraphics Palette | .sgp | 
@@ -1903,7 +1906,9 @@ Family/Format | Name | Extensions | Notes
 [other/medi8orProject](https://discmaster.textfiles.com/search?formatid=medi8orProject) | Medi8or Project | .md8 | 
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?formatid=mediaDescriptorFile) | Media Descriptor File | .mds | 
 [other/megaPaintKeyboardLayout](https://discmaster.textfiles.com/search?formatid=megaPaintKeyboardLayout) | MegaPaint keyboard layout | .ttb | 
+[other/megaPaintPrinterDefinition](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDefinition) | MegaPaint Printer definition | .prt | 
 [other/megaPaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDriver) | MegaPaint Printer Driver | .trb | 
+[other/megaPaintVectorSymbolsLibrary](https://discmaster.textfiles.com/search?formatid=megaPaintVectorSymbolsLibrary) | MegaPaint Vector symbols Library | .vlb | 
 [other/megaZeuxBoard](https://discmaster.textfiles.com/search?formatid=megaZeuxBoard) | MegaZeux Board | .mzb | 
 [other/megaZeuxSave](https://discmaster.textfiles.com/search?formatid=megaZeuxSave) | MegaZeux Save | .sav | 
 [other/megaZeuxWorld](https://discmaster.textfiles.com/search?formatid=megaZeuxWorld) | MegaZeux World | .mzx | [3 sample files](https://sembiance.com/fileFormatSamples/other/megaZeuxWorld/)
@@ -2308,6 +2313,7 @@ Family/Format | Name | Extensions | Notes
 [other/scummNUTCharset](https://discmaster.textfiles.com/search?formatid=scummNUTCharset) | SCUMM NUT charset | .nut .anm .san | 
 [other/seaGraphicsViewerData](https://discmaster.textfiles.com/search?formatid=seaGraphicsViewerData) | Sea Graphics Viewer data | .dat | 
 [other/seam3DProject](https://discmaster.textfiles.com/search?formatid=seam3DProject) | SEAM 3D Project | .s3d | 
+[other/searchNDestroyConfigurationDataBase](https://discmaster.textfiles.com/search?formatid=searchNDestroyConfigurationDataBase) | Search'n'Destroy Configuration Data Base | .cdb | 
 [other/secureCapsuleFirmwareUpdate](https://discmaster.textfiles.com/search?formatid=secureCapsuleFirmwareUpdate) | Secure Capsule firmware update | .scap | 
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?formatid=segaMasterSystemROM) | Sega Master System ROM | .sms | 
@@ -2363,6 +2369,7 @@ Family/Format | Name | Extensions | Notes
 [other/spellGuardDictionary](https://discmaster.textfiles.com/search?formatid=spellGuardDictionary) | SpellGuard Dictionary | .dic | 
 [other/spelToolSupplementalDictionary](https://discmaster.textfiles.com/search?formatid=spelToolSupplementalDictionary) | SpelTool Supplemental Dictionary (v1.0) | .spl | 
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?formatid=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
+[other/spilImageLibrary](https://discmaster.textfiles.com/search?formatid=spilImageLibrary) | SPIL Image Library | .ilb .slb | 
 [other/spssForWindowsData](https://discmaster.textfiles.com/search?formatid=spssForWindowsData) | SPSS for Windows Data | .sav | 
 [other/spyBotSearchAndDestroySignature](https://discmaster.textfiles.com/search?formatid=spyBotSearchAndDestroySignature) | SpyBot-Search-and-Destroy Signature | .sig | 
 [other/sqkServerCompactEditionDatabase](https://discmaster.textfiles.com/search?formatid=sqkServerCompactEditionDatabase) | SQL Server Compact Edition database | .sdf | 
@@ -2694,6 +2701,7 @@ Family/Format | Name | Extensions | Notes
 [other/zBrushMatCap](https://discmaster.textfiles.com/search?formatid=zBrushMatCap) | ZBrush MatCap | .ztl | 
 [other/zCTSystemsGroupVideoDriver](https://discmaster.textfiles.com/search?formatid=zCTSystemsGroupVideoDriver) | ZCT Systems Group video Driver | .drv | 
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?formatid=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
+[other/zeroXBeatSlicerGroove](https://discmaster.textfiles.com/search?formatid=zeroXBeatSlicerGroove) | Zero-X BeatSlicer Groove | .zgr | 
 [other/zickyZicksMilkcapsGameData](https://discmaster.textfiles.com/search?formatid=zickyZicksMilkcapsGameData) | Zicky Zick's Milkcaps game data | .tub | 
 [other/zodbFileStorage](https://discmaster.textfiles.com/search?formatid=zodbFileStorage) | ZODB File Storage | .fs | 
 [other/zonerDraw](https://discmaster.textfiles.com/search?formatid=zonerDraw) | Zoner Draw | .zmf | 

@@ -77,11 +77,13 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge -uDN world`,
 	`# If pablodraw or Aaru below fail to merge, just try again (often works 2nd time)`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
+	"eselect news read --quiet all",
+	"eselect news purge",
 	`depmod -a`,
 	`modinfo vhba`,
 	`modprobe vhba`,
 	`lsmod`,
-	`mkdir /mnt/dexvert`,
+	`mkdir -p /mnt/dexvert`,
 	`chown sembiance:sembiance /mnt/dexvert`,
 	`usermod -aG vboxusers sembiance`,
 	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0 && cd`,	// required for uniconvertor
@@ -101,7 +103,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
 	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
-	`reboot`,
+	`sudo reboot`,
 	`# After reboot, as sembiance@host run and ensure works: startDexserver`,
 	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
 	"# Now add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"

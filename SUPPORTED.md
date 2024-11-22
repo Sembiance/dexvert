@@ -1,4 +1,4 @@
-# Supported File Formats (2,748)
+# Supported File Formats (2,751)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -452,7 +452,7 @@ audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/Di
 audio | [Digital Speech Standard](http://justsolve.archiveteam.org/wiki/Digital_Speech_Standard) | .dss | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/digitalSpeechStandard/)
 audio | DirectMusic Segment | .dmsg | [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/directMusicSegment/)
 audio | [Dolby Digital AC-3 ATSC A/52](https://wiki.multimedia.cx/index.php/A52) | .ac3 | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/ac3/)
-audio | [Dolby Lossless Predictive Audio](https://wiki.multimedia.cx/index.php?title=Lossless_Predictive_Audio_Coding) | .mlp | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/mlpAudio/)
+audio | [Dolby Lossless Predictive Audio](https://wiki.multimedia.cx/index.php?title=Lossless_Predictive_Audio_Coding) | .mlp | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/mlpAudio/)
 audio | [Downloadable Sound Bank](http://fileformats.archiveteam.org/wiki/Downloadable_Sounds_Banks) | .dls | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/downloadableSoundBank/)
 audio | Elecbyte M.U.G.E.N. Sound | .snd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/elecbyteMUGENSound/) - awaveStudio doesn't reallly support this format, but it happens to produce some understandable output, but it messes up some parts for sure
 audio | [Electronic Arts ASF](http://fileformats.archiveteam.org/wiki/Electronic_Arts_AS4_/_ASF_Music) | .asf .as4 | [vgmstream](https://github.com/vgmstream/vgmstream) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/eaASF/)
@@ -1825,7 +1825,7 @@ other | Money Matters Data | .mm | [strings](https://www.gnu.org/software/binuti
 other | MS Visual FoxPro App | .app .fxp | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/other/msVisualFoxProApp/)
 other | NewWord messages Overlay | .ovr | [strings](https://www.gnu.org/software/binutils/) | 
 other | NeXT TypedStream Data |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/typedStreamData/)
-other | Norton Commander module message | .msg | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/nortonCommanderModuleMessage/)
+other | Norton Commander module message | .msg | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/nortonCommanderModuleMessage/)
 other | NoteWorthy Composure | .nw | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/noteWorthyComposure/)
 other | Novell Error Librarian | .dat .idx | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/other/novellErrorLibrarian/)
 other | NSFileWrapper Serialized Data |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/nsFileWrapperSerializedData/)
@@ -1945,7 +1945,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (776)
+## Text (779)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -1954,7 +1954,7 @@ text | 3-D Professional script |  |  | [3 sample files](https://sembiance.com/fi
 text | 32-Bit Sequencer Script | .scr |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/sequencerScript/)
 text | 3D Studio Help | .hlp |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/threeDStudioHelp/)
 text | 3D Studio Quad colors |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/threeDSQuadColors/)
-text | Acclaim Skeleton File | .asf |  | 
+text | Acclaim Skeleton File | .asf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/acclaimSkeletonFile/)
 text | ACE/gr fit description file | .fit |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/acegrFitDescriptionFile/)
 text | Acrobat Distiller Job Options |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/acrobatDistillerJobOptions/)
 text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
@@ -2162,6 +2162,7 @@ text | Expression Design Item List | .itl |  | [1 sample file](https://sembiance
 text | Expression Strokes | .sks |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/expressionStrokes/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
 text | FAR help | .hlf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
+text | FastBack Plus setup | .fb |  | 
 text | FastFont Symbol Set | .sym |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fastFontSymbolSet/)
 text | FGDC metadata | .met |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/fgdcMetadata/)
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
@@ -2191,7 +2192,7 @@ text | Fred Fish's Product-Info |  |  | [13 sample files](https://sembiance.com/
 text | FreeMind mind map | .mm |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/freeMindMindMap/)
 text | FreePCB Netlist | .asc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/freePCBNetlist/)
 text | Frodo Preferences |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/frodoPreferences/)
-text | FruityLoops Humanize Preset | .fpr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/fruityLoopsHumanizePreset/)
+text | FruityLoops Humanize Preset | .fpr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fruityLoopsHumanizePreset/)
 text | ftncheck project file | .prj |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ftnchekProjectFile/)
 text | Furcadia DragonSpeak Script | .ds |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/furcadiaDragonSpeakScript/)
 text | fxPAINT pen |  |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/fxPAINTPen/)
@@ -2390,8 +2391,10 @@ text | Neil Brown's ash script |  |  | [10 sample files](https://sembiance.com/f
 text | NeoBook Document | .pub |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/neoBookDocument/)
 text | NeoBook Settings | .set |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/neoBookSettings/)
 text | NeoPaint Help | .hlp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/neoPaintHelp/)
+text | NETRUN ASCII-encoded COM/EXE | .ntr |  | 
 text | Netscape cookies | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/netscapeCookies/)
 text | NEXUS format | .nex .nxs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
+text | NMAKE | .msc .mak |  | 
 text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
 text | Nota Bene Printer definition | .prn |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/notaBenePrinterDefinition/)
 text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/novell16BitLANDriverInstallerData/)
@@ -2482,7 +2485,7 @@ text | Prolog Source | .pro |  | [12 sample files](https://sembiance.com/fileFor
 text | Protein DataBank | .pdb |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/proteinDataBank/)
 text | Protel PAD macro | .pad |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/protelPADMacro/)
 text | ProtoGen Application configuration | .pva |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/protoGenApplicationConfiguration/)
-text | Proton language Schema | .sch |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
+text | Proton language Schema | .sch |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
 text | Proxy Auto-Config | .pac |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
 text | PS/2 MicroChannel Adapter Description | .adf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/ps2MicroChannelAdapterDescription/)
 text | PV3D Effect | .eff |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pv3DEffect/)
@@ -2490,7 +2493,7 @@ text | PV3D scene description | .pvd |  | [8 sample files](https://sembiance.com
 text | PV3D Value data | .val |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/pv3DValueData/)
 text | Python egg package info | .egg-info |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pythonEggPackageInfo/)
 text | [Python Source](http://fileformats.archiveteam.org/wiki/Python) | .py |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/pythonSource/)
-text | QAPlus Keyboard Map | .kbd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/qaPlusKeyboardMap/)
+text | QAPlus Keyboard Map | .kbd |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/qaPlusKeyboardMap/)
 text | [QRT Ray Tracer scene description](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_scene_description) | .qrt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qrtRayTracerSceneDescription/)
 text | Qt Assistant Content File | .dcf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/qtAssistantContentFile/)
 text | Qt Resource Collection file | .qrc |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/qtResourceCollectionFile/)
@@ -2787,7 +2790,7 @@ video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mp
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v .f4v |  | [11 sample files](https://sembiance.com/fileFormatSamples/video/mp4/)
 video | [MTV Movie](http://fileformats.archiveteam.org/wiki/MTV_Movie_(.MTV)) | .mtv | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/mtvMovie/)
 video | [MTV Video](http://fileformats.archiveteam.org/wiki/MTV_Video_(.AMV)) | .amv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/mtvVideo/)
-video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/video/neochromeAnimation/)
+video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/neochromeAnimation/)
 video | [Network Q RAC Rally full motion video](https://wiki.multimedia.cx/index.php/Network_Q_RAC_Rally_FMV) |  | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/networkQRACRallyFMV/)
 video | [Nullsoft Video](https://wiki.multimedia.cx/index.php/Nullsoft_Video) | .nsv | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/nullsoftVideo/)
 video | [NXL Video](https://wiki.multimedia.cx/index.php/NXL) | .nxl | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/nxlVideo/)

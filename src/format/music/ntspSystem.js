@@ -7,6 +7,7 @@ export class ntspSystem extends Format
 	ext          = [".two"];
 	matchPreExt  = true;
 	magic        = ["NTSP-system"];
+	weakMagic    = true;
 	idCheck      = inputFile => inputFile.name!=="Funy_128";
 	metaProvider = ["musicInfo"];
 	converters   = ["uade123[player:NTSP-system]"];

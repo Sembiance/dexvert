@@ -26,7 +26,7 @@ export class ini extends Format
 		"Zilog Developer Studio II Workstate", "IBM i Access Client Poppad", "IBM i (Client) Access Keyboard Map", "IBM iSeries Client Access WorkStation profile", "Microsoft Zone Identifier", "Citrix Independent Computer Architecture", "Steem Patch",
 		/^Altium Designer ((integrated Library Package)|Project|Workspace)/, "TeXnicCenter Project", "application/x-kourse", "application/x-kolf", "Photofinish Calibration Map (v1.00)", "Grand Theft Auto 2 Multiplayer Map Metadata", "mIRC Theme",
 		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)", "Photofinish Output Device info", "Microsoft Project settings (v1.0)", "Atlantis Word Processor SpellCheck settings", "DemoShield project", "Yape configuration",
-		"NLMSX machine configuration", "FL Studio Speech Preset",
+		"NLMSX machine configuration", "FL Studio Speech Preset", "FL Studio Dashboard component Initializaton", "Zero-X Color scheme", "FL Keys Initialization",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

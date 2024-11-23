@@ -195,6 +195,10 @@ export class deark extends Program
 
 	verify = (r, dexFile) =>
 	{
+		// ZSQ is a little loosey goosey with it's magic, so we have to check the output to make sure it's valid
+		if(r.stdout.includes("Module: zsq") && r.stdout.includes("Checksum error. Decompression probably failed"))
+			return false;
+
 		// Deark's newprintshop module can convert almost any file into a bunch of garbage. So if that was used with anything other than a .pog, nothing from it is worth keeping
 		if(r.stdout.includes("Module: newprintshop") && r.f.input.ext.toLowerCase()!==".pog")
 			return false;
@@ -235,140 +239,4 @@ export class deark extends Program
 		return (chainFormat ? {asFormat : `image/${chainFormat}`} : false);
 	};
 	chainFailKeep = (r, chainInputFiles, chainResult, programid) => programid==="dexvert";
-
-	/*chainPost = async r =>
-	{
-		if(r.flags.recombine)
-		{
-			const fileOutputPaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true});
-
-			const dearkData = {opCodes : [], files : []};
-			let activeData = dearkData;
-			let activeOpCode = null;
-			let curFile = null;
-			for(const line of r.stdout.split("\n"))
-			{
-				const {writing} = (/Writing (?<writing>.+)$/).exec(line)?.groups || {};
-				if(writing?.length)
-				{
-					curFile = path.relative(r.outDir(), writing);
-					curFile = r.quickConvertMap[curFile] || curFile;
-					curFile = r.renameMap[curFile] || curFile;
-					activeData = {filename : curFile, opCodes : []};
-					dearkData.files.push(activeData);
-					continue;
-				}
-				
-				const {lineContent} = (/^DEBUG: (?<lineContent>.+)$/).exec(line)?.groups || {};
-				if(!lineContent?.length)
-					continue;
-
-				//r.xlog.info`${lineContent}`;
-
-				const {opCode, opCodeDesc} = (/^opcode (?<opCode>[\dxabcdef]+) \((?<opCodeDesc>[^)]+)\)/).exec(lineContent)?.groups || {};
-				if(opCode)
-				{
-					if(activeOpCode)
-						activeData.opCodes.push(activeOpCode);
-					activeOpCode = {code : parseInt(opCode, 16), desc : opCodeDesc};
-					continue;
-				}
-
-				const matchers =
-				[
-					{key : "inputFile", m : "Input file"},
-					{key : "size", m : "picSize", type : "number"},
-					{key : "version", m : "[Vv]ersion", type : "number"},
-					{key : "extended", m : "extended v2", type : "boolean"},
-					{key : "frame", m : "picFrame", type : "xywh"},
-					{key : "src", m : "srcRect", type : "xywh"},
-					{key : "dest", m : "dstRect", type : "xywh"},
-					{key : "rect", m : "rect", type : "xywh"},
-					{key : "regionSize", m : "region size", type : "number"},
-					{key : "compressionType", m : "compression type", type : "string"},
-					{key : "rowBytes", m : "rowBytes", type : "number"},
-					{key : "pixmapFlag", m : "pixmap flag", type : "number"},
-					{key : "dpi", m : "dpi", type : "wh"},
-					{key : "transferMode", m : "transfer mode", type : "number"},
-					{key : "pixDataSize", m : "PixData size", type : "number"},
-					{key : "payload", m : "payload", type : "poslen"},
-					{key : "idsc", m : "idsc", type : "poslen"},
-					{key : "idat", m : "idat", type : "poslen"}
-				];
-
-				const active = activeOpCode || activeData;
-				let handled = false;
-
-				for(const {key, m, type} of matchers)
-				{
-					const val = (new RegExp(`\\s*${m}:\\s+(?<val>.+)$`)).exec(lineContent)?.groups?.val;
-					if(!val?.length)
-						continue;
-
-					let valResult = null;
-					if(type==="xywh")
-						valResult = Object.map({...(val.match(/^\((?<x>[\d.-]+),(?<y>[\d.-]+)\)-\((?<w>[\d.-]+),(?<h>[\d.-]+)\)$/) || {})?.groups}, (k, v) => (+v));
-					else if(type==="wh")
-						valResult = Object.map({...(val.match(/^\((?<w>[\d.-]+)×(?<h>[\d.-]+)\)$/) || {})?.groups}, (k, v) => (+v));
-					else if(type==="poslen")
-						valResult = Object.map({...(val.match(/^pos=(?<pos>[\d.-]+),\s+len=(?<len>[\d.-]+)$/) || {})?.groups}, (k, v) => (+v));
-					else
-						valResult = type==="number" ? +val : (type==="boolean" ? val==="yes" : (type==="string" ? xu.parseJSON(val) : val));
-
-					active[key] = valResult;
-					handled = true;
-					break;
-				}
-
-				if(handled)
-					continue;
-
-				active.unhandled ||= [];
-				active.unhandled.push(lineContent);
-			}
-
-			let maxWidth = 0;
-			let maxHeight = 0;
-			for(const file of dearkData.files)
-			{
-				for(const opCode of file.opCodes)
-				{
-					if([0x98].includes(opCode.code))
-					{
-						maxWidth = Math.max(maxWidth, opCode.src.w);
-						maxHeight = Math.max(maxHeight, opCode.src.h);
-					}
-				}
-			}
-
-			const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
-			await runUtil.run("magick", ["-size", `${maxWidth}x${maxHeight}`, "xc:white", `PNG32:${combinedFilePath}`]);
-
-			for(const file of dearkData.files)
-			{
-				for(const opCode of file.opCodes)
-				{
-					if([0x98].includes(opCode.code))
-					{
-						const srcFilePath = fileOutputPaths.find(fileOutputPath => fileOutputPath.endsWith(path.basename(file.filename)));
-						if(!srcFilePath)
-						{
-							r.xlog.warn`Unable to find deark sub image part ${file.filename} from possibles: [${fileOutputPaths.join("] [")}]`;
-							continue;
-						}
-
-						//r.xlog.info`${{srcFilePath, opCode}}`;
-						await runUtil.run("composite", ["-gravity", "NorthWest", "-geometry", `+${opCode.src.x}+${opCode.src.y}`, srcFilePath, combinedFilePath, combinedFilePath]);
-						await fileUtil.unlink(srcFilePath);
-					}
-				}
-			}
-
-			await fileUtil.move(combinedFilePath, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input).name}.png`));
-			//await runUtil.run("magick", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input.name).name}.png`)]);
-
-			//r.xlog.info`${dearkData}`;
-			//r.xlog.info`${{combinedFilePath, maxWidth, maxHeight}}`;
-		}
-	};*/
 }

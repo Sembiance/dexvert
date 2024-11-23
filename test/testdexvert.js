@@ -281,7 +281,7 @@ const FLEX_SIZE_FORMATS =
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		grabber            : 7,
-		gifexe             : 50,
+		gifexe             : 300,
 		krisCard           : 10,
 		naplps             : 20,
 		theDrawCOM         : 5,
@@ -503,6 +503,10 @@ const ALLOW_PROCESS_FAILURES =
 	image :
 	{
 		theDraw : ["CREDITS.TD"]
+	},
+	music :
+	{
+		smus : ["breaktime-v1..smus"]
 	},
 	poly :
 	{

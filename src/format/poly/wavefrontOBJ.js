@@ -12,7 +12,8 @@ export class wavefrontOBJ extends Format
 		// specific
 		"CADRazor 3d model"
 	];
-	auxFiles   = (input, otherFiles) =>
+	idMeta   = ({macFileType, macFileCreator}) => macFileType==="PCFL" && macFileCreator==="SWIN";
+	auxFiles = (input, otherFiles) =>
 	{
 		const supportFiles = otherFiles.filter(o => [".mtl", ".tiff", ".tif"].includes(o.ext.toLowerCase()));
 		return supportFiles.length===0 ? false : supportFiles;

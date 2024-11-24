@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,802)
+# Unsupported File Formats (2,809)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (232)
+## Archive (233)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -200,6 +200,7 @@ Family/Format | Name | Extensions | Notes
 [archive/sqwezArchive](https://discmaster.textfiles.com/search?formatid=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
 [archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?formatid=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
 [archive/starWarsBattlefrontGameDataArchive](https://discmaster.textfiles.com/search?formatid=starWarsBattlefrontGameDataArchive) | Star Wars Battlefront game data archive | .lvl | 
+[archive/stardockEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?formatid=stardockEntertainmentGameDataArchive) | Stardock Entertainment game data archive | .emp .mtd | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/syneticAArchive](https://discmaster.textfiles.com/search?formatid=syneticAArchive) | Synetic Archive | .syn | 
 [archive/ted5Archive](https://discmaster.textfiles.com/search?formatid=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
@@ -536,7 +537,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (98)
+## Font (99)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -568,6 +569,7 @@ Family/Format | Name | Extensions | Notes
 [font/divGamesStudioFont](https://discmaster.textfiles.com/search?formatid=divGamesStudioFont) | DIV Games Studio Font | .fnt | 
 [font/dosCodePageFont](https://discmaster.textfiles.com/search?formatid=dosCodePageFont) | DOS Code Page Font |  | 
 [font/dosFONT2](https://discmaster.textfiles.com/search?formatid=dosFONT2) | DOSFONT2 | .df2 | 
+[font/dotmagicNLQFont](https://discmaster.textfiles.com/search?formatid=dotmagicNLQFont) | DOT_MAGIC! NLQ font | .nlq | 
 [font/dynaCADDVectorFont](https://discmaster.textfiles.com/search?formatid=dynaCADDVectorFont) | DynaCADD Vector Font | .fnt | 
 [font/elecbyteMUGENFont](https://discmaster.textfiles.com/search?formatid=elecbyteMUGENFont) | Elecbyte M.U.G.E.N. font | .fnt | 
 [font/electronicArtsFont](https://discmaster.textfiles.com/search?formatid=electronicArtsFont) | Electronic Arts Font | .ffn | 
@@ -630,7 +632,7 @@ Family/Format | Name | Extensions | Notes
 [font/westwoodFont](https://discmaster.textfiles.com/search?formatid=westwoodFont) | Westwood Font | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/westwoodFont/)
 [font/wildfire3DFont](https://discmaster.textfiles.com/search?formatid=wildfire3DFont) | Wildfire 3D Font | .3dfont | 
 [font/wordPerfectFont](https://discmaster.textfiles.com/search?formatid=wordPerfectFont) | WordPerfect Font | .wfa | 
-[font/wordStarScreenFontAward](https://discmaster.textfiles.com/search?formatid=wordStarScreenFontAward) | WordStar Screen Font (Award) | .wsf | 
+[font/wordStarScreenFont](https://discmaster.textfiles.com/search?formatid=wordStarScreenFont) | WordStar Screen Font | .wsf | 
 [font/wordUpToolkitFont](https://discmaster.textfiles.com/search?formatid=wordUpToolkitFont) | WordUp Graphics Toolkit Font | .wfn | 
 [font/xCADFont](https://discmaster.textfiles.com/search?formatid=xCADFont) | X-CAD Font |  | 
 [font/serverNaturalFormatFont](https://discmaster.textfiles.com/search?formatid=serverNaturalFormatFont) | X11 Server Natural Format font | .snf | 
@@ -640,7 +642,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (173)
+## Image (174)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -710,6 +712,7 @@ Family/Format | Name | Extensions | Notes
 [image/freelanceGraphicsDrawing](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsDrawing) | Freelance Graphics Drawing | .drw | 
 [image/fxgBitmap](https://discmaster.textfiles.com/search?formatid=fxgBitmap) | FXG Bitmap | .fxg | [3 sample files](https://sembiance.com/fileFormatSamples/image/fxgBitmap/)
 [image/genericCADD](https://discmaster.textfiles.com/search?formatid=genericCADD) | Generic CADD | .gcd | 
+[image/genuineFractalsSTINGImage](https://discmaster.textfiles.com/search?formatid=genuineFractalsSTINGImage) | Genuine Fractals STING image | .stn | 
 [image/geoWorksGeoDrawDrawing](https://discmaster.textfiles.com/search?formatid=geoWorksGeoDrawDrawing) | GeoWorks GeoDraw drawing | .000 | 
 [image/geoWorksGEOSBackground](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSBackground) | GeoWorks GEOS background | .000 .geo | 
 [image/gfaRaytraceBitmap](https://discmaster.textfiles.com/search?formatid=gfaRaytraceBitmap) | GFA Raytrace bitmap | .sul .scl .suh .sch | 
@@ -969,7 +972,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,756)
+## Other (1,759)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1435,6 +1438,7 @@ Family/Format | Name | Extensions | Notes
 [other/descentPlayer](https://discmaster.textfiles.com/search?formatid=descentPlayer) | Descent Player | .plr | 
 [other/deScribeMacro](https://discmaster.textfiles.com/search?formatid=deScribeMacro) | DeScribe Macro |  | 
 [other/designIt3D2DObjectLibrary](https://discmaster.textfiles.com/search?formatid=designIt3D2DObjectLibrary) | Design It! 3-D 2D object Library | .wlb | 
+[other/deskMateFilerDatabase](https://discmaster.textfiles.com/search?formatid=deskMateFilerDatabase) | DeskMate Filer database | .fil .hlp | 
 [other/desktopDB](https://discmaster.textfiles.com/search?formatid=desktopDB) | Desktop DB |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDB/)
 [other/desktopDF](https://discmaster.textfiles.com/search?formatid=desktopDF) | Desktop DF |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDF/)
 [other/devExpressDxSkinSkin](https://discmaster.textfiles.com/search?formatid=devExpressDxSkinSkin) | DevExpress dxSkin Skin |  | 
@@ -1653,6 +1657,7 @@ Family/Format | Name | Extensions | Notes
 [other/goldenSectionOrganizerDatabase](https://discmaster.textfiles.com/search?formatid=goldenSectionOrganizerDatabase) | GoldenSection Organizer database | .gso | 
 [other/goldMineReport](https://discmaster.textfiles.com/search?formatid=goldMineReport) | GoldMine report | .fp | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
+[other/grandPrix5002GameData](https://discmaster.textfiles.com/search?formatid=grandPrix5002GameData) | Grand Prix 500 2 game data | .cpv | 
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?formatid=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
 [other/grandTheftAuto2MapLayout](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2MapLayout) | Grand Theft Auto 2 Map Layout | .gmp | 
 [other/grandTheftAuto2StyleData](https://discmaster.textfiles.com/search?formatid=grandTheftAuto2StyleData) | Grand Theft Auto 2 Style data | .sty | 
@@ -1868,7 +1873,7 @@ Family/Format | Name | Extensions | Notes
 [other/macromediaFlashColorTableFile](https://discmaster.textfiles.com/search?formatid=macromediaFlashColorTableFile) | Macromedia Flash Color Table File | .clr | 
 [other/macromediaXtraCache](https://discmaster.textfiles.com/search?formatid=macromediaXtraCache) | Macromedia Xtra Cache | .mch | 
 [other/madden2004DataFile](https://discmaster.textfiles.com/search?formatid=madden2004DataFile) | Madden 2004 data file | .dat | 
-[other/madeProjectGame](https://discmaster.textfiles.com/search?formatid=madeProjectGame) | MADE Project/game | .prj | 
+[other/madeProjectGame](https://discmaster.textfiles.com/search?formatid=madeProjectGame) | MADE Engine/Project/game | .prj | 
 [other/maestroMusic](https://discmaster.textfiles.com/search?formatid=maestroMusic) | Maestro Music |  | 
 [other/maggiData](https://discmaster.textfiles.com/search?formatid=maggiData) | MAGGI data | .hhh | 
 [other/magicBinaryFile](https://discmaster.textfiles.com/search?formatid=magicBinaryFile) | magic binary file | .mgc | 
@@ -2511,6 +2516,7 @@ Family/Format | Name | Extensions | Notes
 [other/translandMap](https://discmaster.textfiles.com/search?formatid=translandMap) | Transland Map | .map | 
 [other/treeDBNotesDocument](https://discmaster.textfiles.com/search?formatid=treeDBNotesDocument) | TreeDBNotes document | .treedb | 
 [other/treePADDocument](https://discmaster.textfiles.com/search?formatid=treePADDocument) | TreePAD document | .hjt | 
+[other/trendMicroCleanerDatabase](https://discmaster.textfiles.com/search?formatid=trendMicroCleanerDatabase) | TrendMicro Cleaner database | .ptn | 
 [other/triTrystGameData](https://discmaster.textfiles.com/search?formatid=triTrystGameData) | TriTryst game Data | .dat | 
 [other/triviaShellData](https://discmaster.textfiles.com/search?formatid=triviaShellData) | Trivia Shell Data | .tsd | 
 [other/triviaShellIndex](https://discmaster.textfiles.com/search?formatid=triviaShellIndex) | Trivia Shell Index | .tsi | 
@@ -2811,7 +2817,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (50)
+## Video (51)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?formatid=threeDOSTRVideo) | 3DO STR video |  | 
@@ -2854,6 +2860,7 @@ Family/Format | Name | Extensions | Notes
 [video/screenCamVideo](https://discmaster.textfiles.com/search?formatid=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
 [video/sierraRobotAnimation](https://discmaster.textfiles.com/search?formatid=sierraRobotAnimation) | Sierra Robot Animation | .rbt | 
 [video/sonyVegas](https://discmaster.textfiles.com/search?formatid=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
+[video/stardockEntertainmentVideo](https://discmaster.textfiles.com/search?formatid=stardockEntertainmentVideo) | Stardock Entertainment Video | .vdo | [2 sample files](https://sembiance.com/fileFormatSamples/video/stardockEntertainmentVideo/)
 [video/stngAFinalUnityFMVCutscene](https://discmaster.textfiles.com/search?formatid=stngAFinalUnityFMVCutscene) | STNG 'A Final Unity' Fullmotion Video cutscene | .fvf | 
 [video/completeAnimatorFilm](https://discmaster.textfiles.com/search?formatid=completeAnimatorFilm) | The Complete Animator Film | .tca | 
 [video/theDirector](https://discmaster.textfiles.com/search?formatid=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,809)
+# Unsupported File Formats (2,821)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -320,7 +320,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (157)
+## Document (158)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -425,6 +425,7 @@ Family/Format | Name | Extensions | Notes
 [document/orCADSchematic](https://discmaster.textfiles.com/search?formatid=orCADSchematic) | OrCAD Schematic | .sch .sht .dsn .dbk | 
 [document/pSuite](https://discmaster.textfiles.com/search?formatid=pSuite) | P-Suite |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/pSuite/)
 [document/palmListDatabase](https://discmaster.textfiles.com/search?formatid=palmListDatabase) | Palm List database | .pdb | 
+[document/palmQuicksheet](https://discmaster.textfiles.com/search?formatid=palmQuicksheet) | Palm Quicksheet | .pdb | 
 [document/peachCalcSpreadsheet](https://discmaster.textfiles.com/search?formatid=peachCalcSpreadsheet) | PeachCalc spreadsheet | .cal | 
 [document/penPalDatabase](https://discmaster.textfiles.com/search?formatid=penPalDatabase) | Pen Pal Database | .flr | 
 [document/penPalDocument](https://discmaster.textfiles.com/search?formatid=penPalDocument) | Pen Pal Document | .wtr | 
@@ -528,7 +529,7 @@ Family/Format | Name | Extensions | Notes
 [executable/sparcDemandExe](https://discmaster.textfiles.com/search?formatid=sparcDemandExe) | SPARC Demand Paged Exe |  | 
 [executable/superbaseProgram](https://discmaster.textfiles.com/search?formatid=superbaseProgram) | Superbase Program | .sbp | 
 [executable/systemV64BitLibrary](https://discmaster.textfiles.com/search?formatid=systemV64BitLibrary) | System V 64-bit library | .a | 
-[executable/tiCalcProgram](https://discmaster.textfiles.com/search?formatid=tiCalcProgram) | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p | 
+[executable/tiCalcProgram](https://discmaster.textfiles.com/search?formatid=tiCalcProgram) | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p .8Xk .8xk | 
 [executable/vmsVAXExecutable](https://discmaster.textfiles.com/search?formatid=vmsVAXExecutable) | VMS VAX executable | .vxe | 
 [executable/windowsAudioCompressionManagerDriver](https://discmaster.textfiles.com/search?formatid=windowsAudioCompressionManagerDriver) | Windows Audio Compression Manager driver | .acm | 
 [executable/wiNGsOSExecutable](https://discmaster.textfiles.com/search?formatid=wiNGsOSExecutable) | WiNGs OS executable |  | 
@@ -642,7 +643,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (174)
+## Image (175)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -749,6 +750,7 @@ Family/Format | Name | Extensions | Notes
 [image/microIllustrator](https://discmaster.textfiles.com/search?formatid=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 [image/micrografxIcon](https://discmaster.textfiles.com/search?formatid=micrografxIcon) | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://sembiance.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
 [image/microsoftBorderArt](https://discmaster.textfiles.com/search?formatid=microsoftBorderArt) | Microsoft Border Art | .bdr | 
+[image/microsoftDocumentImagingFormat](https://discmaster.textfiles.com/search?formatid=microsoftDocumentImagingFormat) | Microsoft Document Imaging format | .mdi | 
 [image/xboxXPR0Texture](https://discmaster.textfiles.com/search?formatid=xboxXPR0Texture) | Microsoft Xbox XPR0 texture | .xbx | 
 [image/mmfwPictures](https://discmaster.textfiles.com/search?formatid=mmfwPictures) | MMFW Pictures | .mmp | 
 [image/mvpPaintAnimation](https://discmaster.textfiles.com/search?formatid=mvpPaintAnimation) | MVP Paint Animation | .af | 
@@ -972,7 +974,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,759)
+## Other (1,769)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2120,6 +2122,7 @@ Family/Format | Name | Extensions | Notes
 [other/paintersApprenticePrintInfo](https://discmaster.textfiles.com/search?formatid=paintersApprenticePrintInfo) | Painter's Apprentice Printer Info | .pri | 
 [other/paintWorksAnimation](https://discmaster.textfiles.com/search?formatid=paintWorksAnimation) | PaintWorks Animation |  | 
 [other/palladixMusicSystemDriver](https://discmaster.textfiles.com/search?formatid=palladixMusicSystemDriver) | Palladix Music System Driver | .drv | 
+[other/palmDesktopDateBook](https://discmaster.textfiles.com/search?formatid=palmDesktopDateBook) | Palm Desktop DateBook | .mpa .dat | 
 [other/palmDictionaryReader](https://discmaster.textfiles.com/search?formatid=palmDictionaryReader) | Palm Dictionary Reader | .pdb | 
 [other/palmJFileDatabase](https://discmaster.textfiles.com/search?formatid=palmJFileDatabase) | Palm JFile database | .pdb | 
 [other/palmPilotDBDatabase](https://discmaster.textfiles.com/search?formatid=palmPilotDBDatabase) | Palm Pilot-DB database | .pdb | 
@@ -2468,7 +2471,15 @@ Family/Format | Name | Extensions | Notes
 [other/testDriveOffRoadGraphics](https://discmaster.textfiles.com/search?formatid=testDriveOffRoadGraphics) | Test Drive: Off-Road graphics | .tmf | 
 [other/texFontMetricData](https://discmaster.textfiles.com/search?formatid=texFontMetricData) | TeX Font Metric Data | .tfm | 
 [other/texVirtualFont](https://discmaster.textfiles.com/search?formatid=texVirtualFont) | TeX Virtual Font | .vf | 
+[other/tiCalcAssembler](https://discmaster.textfiles.com/search?formatid=tiCalcAssembler) | Texas Instruments Calculator Assembler | .89z .9xz | 
 [other/tiCalcBackup](https://discmaster.textfiles.com/search?formatid=tiCalcBackup) | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
+[other/tiCalcData](https://discmaster.textfiles.com/search?formatid=tiCalcData) | Texas Instruments Calculator Data | .89c .9xc | 
+[other/tiCalcExpression](https://discmaster.textfiles.com/search?formatid=tiCalcExpression) | Texas Instruments Calculator Expression | .89e .89z | 
+[other/tiCalcFunction](https://discmaster.textfiles.com/search?formatid=tiCalcFunction) | Texas Instruments Calculator Function | .9xf .92f .89f | 
+[other/tiCalcGraphicDB](https://discmaster.textfiles.com/search?formatid=tiCalcGraphicDB) | Texas Instruments Calculator Graphic DB | .89d | 
+[other/tiCalcMatrix](https://discmaster.textfiles.com/search?formatid=tiCalcMatrix) | Texas Instruments Calculator Matrix | .9xm .89m | 
+[other/tiCalcString](https://discmaster.textfiles.com/search?formatid=tiCalcString) | Texas Instruments Calculator String | .9xs .9xy .89s | 
+[other/tiCalcZipped](https://discmaster.textfiles.com/search?formatid=tiCalcZipped) | Texas Instruments Calculator Zipped | .9xy .89y | 
 [other/americanHeritageDictionaryIndex](https://discmaster.textfiles.com/search?formatid=americanHeritageDictionaryIndex) | The American Heritage Dictionary Index | .wx | 
 [other/catacombAbyssSavedGame](https://discmaster.textfiles.com/search?formatid=catacombAbyssSavedGame) | The Catacomb Abyss saved game | .sav | 
 [other/chessmasterSavedGame](https://discmaster.textfiles.com/search?formatid=chessmasterSavedGame) | The Chessmaster 2000 saved game |  | 
@@ -2649,6 +2660,7 @@ Family/Format | Name | Extensions | Notes
 [other/windowsCalendar](https://discmaster.textfiles.com/search?formatid=windowsCalendar) | Windows Calendar | .cal | 
 [other/windowsCommonLogFileSystemData](https://discmaster.textfiles.com/search?formatid=windowsCommonLogFileSystemData) | Windows Common Log File System data | .blf | 
 [other/windowsEventViewerLog](https://discmaster.textfiles.com/search?formatid=windowsEventViewerLog) | Windows Event Viewer Log | .evt | 
+[other/windowsExplorerSavedSearch](https://discmaster.textfiles.com/search?formatid=windowsExplorerSavedSearch) | Windows Explorer saved search | .fnd | 
 [other/windowsHelpSearchIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpSearchIndex) | Windows Help Full Text Search Index | .fts | 
 [other/windowsHelpFullTextSearchGroup](https://discmaster.textfiles.com/search?formatid=windowsHelpFullTextSearchGroup) | Windows Help Full-Text search Group | .ftg | 
 [other/windowsHelpGIDIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpGIDIndex) | Windows Help Global Index Data | .gid | 

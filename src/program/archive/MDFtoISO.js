@@ -35,5 +35,5 @@ export class MDFtoISO extends Program
 			ProcessWaitClose("mdftoiso.exe", 10)`
 	});
 	renameOut = false;
-	chain     = "dexvert";
+	chain     = "dexvert[skipVerify][bulkCopyOut]";
 }

@@ -802,9 +802,14 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 	if(result.files)
 	{
-		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
+		const beforeKeys = Object.keys(prevData.files).sortMulti(v => v);
+		const afterKeys = Object.keys(result.files).sortMulti(v => v);
+		const diffFiles = diffUtil.diff(beforeKeys, afterKeys);
 		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
-			return await fail(`Created files are different: ${diffFiles.innerTruncate(3000)}${converterMismatch}`);
+		{
+			const caseInsensitiveDiff = diffUtil.diff(beforeKeys.map(v => v.toLowerCase()), afterKeys.map(v => v.toLowerCase()));
+			return await fail(`Created files are different: ${diffFiles.innerTruncate(3000)} (before: ${beforeKeys.length.toLocaleString()} files) (after: ${afterKeys.length.toLocaleString()} files) caseInsensitiveDiff: ${caseInsensitiveDiff.length ? `${caseInsensitiveDiff}` : "no differences"}${converterMismatch}`);
+		}
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[dexData?.phase?.ran?.at(-1)?.programid] || 0));

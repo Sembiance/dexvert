@@ -10,8 +10,16 @@ export class mdf extends Format
 	weakMagic      = true;
 	forbiddenMagic = TEXT_MAGIC;
 	priority       = this.PRIORITY.TOP;
-	// First try uniso, that correctly handles things like: Earthcare Interactve
-	// Second try processing AS an ISO, this correctly handles: DOKAN23
-	// Third, iat can often just produce a .cue and no bin. This happens if the file is actually just an ISO or raw parititon
-	converters = ["uniso", "dexvert[asFormat:archive/iso][forbidProgram:IsoBuster]", "iat", "MDFtoISO"];
+	converters     = dexState =>
+	{
+		const r = ["uniso"];	// Try uniso first, so files like 'Earthcare Interactive' are handled correctly
+		
+		if(dexState.hasMagics("Raw CD image, Mode 2"))	// mode 2 detected files (bluelight.mdf) are best sent directly to dexvert as an ISO
+			r.push("dexvert[asFormat:archive/iso][forbidProgram:IsoBuster]", "iat");
+		else
+			r.push("iat", "dexvert[asFormat:archive/iso][forbidProgram:IsoBuster]");	// otherwise try iat first but then try as an ISO to handle DOKAN23
+		r.push("MDFtoISO");
+
+		return r;
+	};
 }

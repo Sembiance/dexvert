@@ -1,4 +1,4 @@
-# Supported File Formats (2,761)
+# Supported File Formats (2,765)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -21,7 +21,7 @@ archive | [AIN Archive](http://fileformats.archiveteam.org/wiki/AIN) | .ain | [a
 archive | AINEXE Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ainexePacked/)
 archive | [AKT Archive](http://fileformats.archiveteam.org/wiki/AKT) | .akt | [akt](https://www.sac.sk/download/pack/akt070b5.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/akt/)
 archive | [Alchemy Mindworks Image Gallery](http://fileformats.archiveteam.org/wiki/Image_Gallery_(Alchemy_Mindworks)) | .gal | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/alchemyMindworksGallery/)
-archive | [Alcohol 120% MDF Image](http://fileformats.archiveteam.org/wiki/MDF_and_MDS) | .mdf | [uniso](https://github.com/Sembiance/dexvert/) [dexvert](https://github.com/Sembiance/dexvert) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [MDFtoISO](http://www.mdftoiso.com/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/mdf/)
+archive | [Alcohol 120% MDF Image](http://fileformats.archiveteam.org/wiki/MDF_and_MDS) | .mdf | [uniso](https://github.com/Sembiance/dexvert/) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [dexvert](https://github.com/Sembiance/dexvert) [MDFtoISO](http://www.mdftoiso.com/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/mdf/)
 archive | [Allegro Packfile](http://fileformats.archiveteam.org/wiki/Allegro_packfile) | .dat | [pack](https://liballeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/allegroPackfile/)
 archive | Allods 2 Rage Of Mages game archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/allods2RageOfMagesGameArchive/)
 archive | American Conquest 2 game archvie | .gs1 .gsc | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/americanConquest2GameArchvie/)
@@ -1374,7 +1374,7 @@ image | [Technicolor Dream](http://fileformats.archiveteam.org/wiki/Technicolor_
 image | [Telepaint](http://fileformats.archiveteam.org/wiki/TelePaint/Splash_graphics) | .ss .st | [telepaintConvert](https://vetusware.com/download/TelePaint%203.0/?id=6656) | [29 sample files](https://sembiance.com/fileFormatSamples/image/telepaint/)
 image | Teletext Packets | .t42 | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [3 sample files](https://sembiance.com/fileFormatSamples/image/teletextPackets/)
 image | [Tencent TAP](http://fileformats.archiveteam.org/wiki/TAP_(Tencent)) | .tap | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/tencentTAP/)
-image | [Texas Instruments Calculator Image](http://fileformats.archiveteam.org/wiki/TI_picture_file) | .82i .8ca .8ci .92i .73i .83i .8xi .85i .86i .89i .9xi .v2i | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [tomsViewer](https://tomseditor.com/blog/viewer) | [13 sample files](https://sembiance.com/fileFormatSamples/image/tiCalc/)
+image | [Texas Instruments Calculator Image](http://fileformats.archiveteam.org/wiki/TI_picture_file) | .82i .8ca .8ci .92i .73i .83i .8xi .85i .86i .89i .9xi .v2i | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [tomsViewer](https://tomseditor.com/blog/viewer) | [16 sample files](https://sembiance.com/fileFormatSamples/image/tiCalc/)
 image | Texture Editor by Mikey | .txe | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/txe/)
 image | [Texture Maker0](http://fileformats.archiveteam.org/wiki/Texture_Maker0) | .tx0 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/tx0/)
 image | [TGIF](https://bourbon.usc.edu/tgif/faq/format.html) | .obj | [tgif](http://bourbon.usc.edu/tgif/index.html) | [13 sample files](https://sembiance.com/fileFormatSamples/image/tgif/)
@@ -1744,7 +1744,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (134)
+## Other (137)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1783,8 +1783,8 @@ other | Databench Data |  | [strings](https://www.gnu.org/software/binutils/) | 
 other | David's Readme Compiler Executable | .exe | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/davidSReadmeCompiler/)
 other | DB2 Bind | .bnd | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://sembiance.com/fileFormatSamples/other/db2Bind/)
 other | dBase Label Design | .lbl | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/dBaseLabelDesign/)
-other | dBase Query | .qbe | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/other/dBaseQuery/)
-other | dBase Update | .upd | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/dBaseUpdate/)
+other | dBase Query | .qbe | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/dBaseQuery/)
+other | dBase Update | .upd | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/other/dBaseUpdate/)
 other | Deluxe Print Document/Project | .bnr2 .lbl2 .lhd2 .sgn2 .bnnr .labl .lthd .sign | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/other/deluxePrint/)
 other | [DER Encoded Certificate](http://fileformats.archiveteam.org/wiki/DER_encoded_certificate) | .cer .der .crt | [openssl](https://www.openssl.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/other/derCertificate/)
 other | Director STXT | .stxt | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/directorSTXT/)
@@ -1856,6 +1856,9 @@ other | SYMDEF File | .symdef | [strings](https://www.gnu.org/software/binutils/
 other | symlink |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/other/symlink/) - This format is a hardcoded match at the beginning of identify.js
 other | Telemate Compiled Script | .tms | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/telemateCompiledScript/)
 other | Telix Phonebook | .fbk | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/other/telixPhonebook/)
+other | Texas Instruments Calculator Group | .89g .9xg .92g | [strings](https://www.gnu.org/software/binutils/) | 
+other | Texas Instruments Calculator List | .9xl .89l .92l | [strings](https://www.gnu.org/software/binutils/) | 
+other | Texas Instruments Calculator Text | .89t .9xt .92t | [strings](https://www.gnu.org/software/binutils/) | 
 other | Turbo Basic Chain module | .tbc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/turboBASICChainModule/)
 other | Turbo C Configuration | .tc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/turboCConfiguration/)
 other | Turbo C Context File | .dsk | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/turboCContextFile/)
@@ -1947,7 +1950,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (787)
+## Text (788)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2242,6 +2245,7 @@ text | HP ME10 database | .mi |  | [4 sample files](https://sembiance.com/fileFo
 text | HSQLDB configuration | .properties |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/hsqlDBConfiguration/)
 text | HTML Component | .htc |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/htmlComponent/)
 text | HTML Help Collection | .col |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/htmlHelpCollection/)
+text | HTTrack Website Copier cookies | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/htTrackWebsiteCopierCookies/)
 text | HyperChem molecule format | .hin |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/hyperChemMoleculeFormat/)
 text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hyperReaderVideodiscPlayerDriver/)
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc .hts .htx .shtml .phtml |  | [18 sample files](https://sembiance.com/fileFormatSamples/text/html/) - I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. It is also CPU intensive.
@@ -2288,7 +2292,7 @@ text | KDE config file | .kdelnk |  | [14 sample files](https://sembiance.com/fi
 text | KDE KXML GUI RC | .rc |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeKXMLGUIRC/)
 text | KEGS configuration | .kegs |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/kegsConfiguration/)
 text | KeyNote notes | .knt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/keyNoteNotes/)
-text | KeyTronic Trakball profile | .pro .fil |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/keyTronicTrakballProfile/)
+text | KeyTronic Trakball profile | .pro .fil |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/keyTronicTrakballProfile/)
 text | Kinemage protein language | .kin |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/kinemageProteinLanguage/)
 text | Konqueror cookie |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
 text | Korn shell script |  |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/kornShellScript/)
@@ -2400,7 +2404,7 @@ text | NeoPaint Help | .hlp |  | [1 sample file](https://sembiance.com/fileForma
 text | NETRUN ASCII-encoded COM/EXE | .ntr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/netrunASCIIEncodedCOMEXE/)
 text | Netscape cookies | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/netscapeCookies/)
 text | NEXUS format | .nex .nxs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
-text | NMAKE | .msc .mak |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
+text | NMAKE | .msc .mak |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
 text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
 text | Nota Bene Printer definition | .prn |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/notaBenePrinterDefinition/)
 text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/novell16BitLANDriverInstallerData/)
@@ -2605,7 +2609,7 @@ text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFo
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [89 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
-text | Text602 printer Driver | .dst |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
+text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
 text | The Need For Speed windshield shape | .fmm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedWindshieldShape/)
 text | The Software Toolworks' Hyperbase Data | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/softwareToolworksHyperbaseData/)
@@ -2649,10 +2653,10 @@ text | Verilog source code | .v |  | [10 sample files](https://sembiance.com/fil
 text | Verity Collection Document Index Descriptor Style Set | .did |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/verityCollectionDocumentIndex/)
 text | Verity Collection Index About | .abt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexAbout/)
 text | Verity Collection Index Pending Transaction | .trn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexPendingTransaction/)
-text | Verity Collection Index Style Policy | .plc |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexStylePolicy/)
+text | Verity Collection Index Style Policy | .plc |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexStylePolicy/)
 text | Verity Collection Partition Definition Descriptor Style Set | .pdd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/verityCollectionPartitionDefinition/)
 text | Verity Collection Stop List | .stp |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionStopList/)
-text | Verity Collection Word List Descriptor Style Set | .wld |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionWordList/)
+text | Verity Collection Word List Descriptor Style Set | .wld |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionWordList/)
 text | VICAR label file | .pal |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/vicarLabelFile/)
 text | Vice Palette | .vpl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/vicePalette/)
 text | VICE Rom Set | .vrs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/viceRomSet/)
@@ -2680,7 +2684,7 @@ text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/f
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
 text | Web browser cookies | .txt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
-text | Web Video Text Tracks | .vtt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
+text | Web Video Text Tracks | .vtt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)
 text | Wheel binary package format info |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatInfo/)
 text | Wheel binary package format Metadata |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatMetadata/)
@@ -2805,7 +2809,7 @@ video | [Network Q RAC Rally full motion video](https://wiki.multimedia.cx/index
 video | [Nullsoft Video](https://wiki.multimedia.cx/index.php/Nullsoft_Video) | .nsv | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/nullsoftVideo/)
 video | [NXL Video](https://wiki.multimedia.cx/index.php/NXL) | .nxl | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/nxlVideo/)
 video | [Ogg Theora Video](http://fileformats.archiveteam.org/wiki/Theora) | .ogg .ogv | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/oggTheoraVideo/)
-video | [On2 VP6 encoded video](https://wiki.multimedia.cx/index.php/On2_VP6) | .vp6 | [ffmpeg](https://ffmpeg.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/video/vp6EncodedVideo/)
+video | [On2 VP6 encoded video](https://wiki.multimedia.cx/index.php/On2_VP6) | .vp6 | [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/video/vp6EncodedVideo/)
 video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
 video | [PH Video](https://wiki.multimedia.cx/index.php/PH_Video) | .ph | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/)
 video | [Pray for Death CDA Video](https://wiki.multimedia.cx/index.php/Pray_for_Death_CDA) | .cda | [na_game_tool](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/video/prayForDeathCDAVideo/)

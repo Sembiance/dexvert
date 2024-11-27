@@ -91,9 +91,10 @@ export const IGNORE_MAGICS =
 	/^a .+ script text executable$/,
 	/^Apple Driver Map/,
 	/^IFF data, /,
-	/^DBF,/,
+	/^(FoxBase )?DBF,/,
 	/^RIFF \((big|little)-endian\) data$/,
 	/^text\/isl/,
+	/^TI-.* Graphing Calculator( \(data\))?, ASCII text/,
 	/^Unknown Corel\/Wordperfect product/
 ];
 
@@ -114,6 +115,7 @@ export const WEAK_VALUES =
 
 	// binwalkID
 	/^Base64 standard index table$/,
+	/^BIN-Header,/,
 	/^Boot section Start/,
 	/^Copyright string: /,
 	/^CRC32 polynomial table/,
@@ -1853,6 +1855,7 @@ export const WEAK_VALUES =
 	/^MAME TACO tape image$/,
 	/^MapInfo Sea Chart$/,
 	/^MapLinx Data File \(generic\)$/,
+	/^MapTrip data \(generic\)$/,
 	/^Mariner Write Document$/,
 	/^MasterSound sequence$/,
 	/^Mathematical Markup Language$/,

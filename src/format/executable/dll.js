@@ -24,6 +24,7 @@ export class dll extends Format
 		"Microsoft Windows Defender Virus Definition Module", "DeliPlayer genie", "Classic/Open-Shell Windows style skin", "ZX Spin Render Plugin", "AkelPad plugin", "Microsoft Resource Library (x64)", "Maya plug-in (generic)",
 		"OLE Custom / ActiveX Control (32bit)", "OLE Custom Control (16bit)", "Imagine for Windows Texture", "Imagine for Windows Effect"
 	];
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="iDLL" && macFileCreator==="CWIE";
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 

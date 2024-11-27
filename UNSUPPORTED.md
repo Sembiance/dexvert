@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,825)
+# Unsupported File Formats (2,837)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -825,7 +825,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (144)
+## Music (145)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -922,6 +922,7 @@ Family/Format | Name | Extensions | Notes
 [music/palladix](https://discmaster.textfiles.com/search?formatid=palladix) | Palladix | .plx | [3 sample files](https://sembiance.com/fileFormatSamples/music/palladix/)
 [music/gameboyTracker](https://discmaster.textfiles.com/search?formatid=gameboyTracker) | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://sembiance.com/fileFormatSamples/music/gameboyTracker/)
 [music/pistonCollage](https://discmaster.textfiles.com/search?formatid=pistonCollage) | Piston Collage Module | .ptcop | [6 sample files](https://sembiance.com/fileFormatSamples/music/pistonCollage/)
+[music/piyoPiyoMusic](https://discmaster.textfiles.com/search?formatid=piyoPiyoMusic) | PiyoPiyo Music | .pmd | 
 [music/playerPro](https://discmaster.textfiles.com/search?formatid=playerPro) | PlayerPro Module | .mad | [6 sample files](https://sembiance.com/fileFormatSamples/music/playerPro/)
 [music/pollyTracker](https://discmaster.textfiles.com/search?formatid=pollyTracker) | PollyTracker Module | .mod | [4 sample files](https://sembiance.com/fileFormatSamples/music/pollyTracker/)
 [music/proTrekkr](https://discmaster.textfiles.com/search?formatid=proTrekkr) | Pro Trekkr Module | .ixs | [6 sample files](https://sembiance.com/fileFormatSamples/music/proTrekkr/)
@@ -975,7 +976,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,772)
+## Other (1,782)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1127,6 +1128,7 @@ Family/Format | Name | Extensions | Notes
 [other/appleIIgsTool](https://discmaster.textfiles.com/search?formatid=appleIIgsTool) | Apple IIgs Tool |  | 
 [other/appleInterfaceBuilderNIBArchive](https://discmaster.textfiles.com/search?formatid=appleInterfaceBuilderNIBArchive) | Apple Interface Builder NIB archive | .nib | 
 [other/appleITunesPhotoDatabase](https://discmaster.textfiles.com/search?formatid=appleITunesPhotoDatabase) | Apple iTunes Photo Database |  | 
+[other/applicationObjectTemplate](https://discmaster.textfiles.com/search?formatid=applicationObjectTemplate) | Application Object Template | .aot | 
 [other/appliedBiosystemsIncFormat](https://discmaster.textfiles.com/search?formatid=appliedBiosystemsIncFormat) | Applied Biosystems Inc. Format (ABIF) | .s1 .ab1 .fsa | 
 [other/aptCacheData](https://discmaster.textfiles.com/search?formatid=aptCacheData) | APT cache data | .bin | 
 [other/archiCADLibraryObject](https://discmaster.textfiles.com/search?formatid=archiCADLibraryObject) | ArchiCAD Project/Library Object | .gsm | 
@@ -1572,6 +1574,7 @@ Family/Format | Name | Extensions | Notes
 [other/fileExpressIndexHeader](https://discmaster.textfiles.com/search?formatid=fileExpressIndexHeader) | File Express Index Header | .ixh | 
 [other/fileExpressQuickScan](https://discmaster.textfiles.com/search?formatid=fileExpressQuickScan) | File Express Quick Scan | .qss | 
 [other/fileStar2ToolBar](https://discmaster.textfiles.com/search?formatid=fileStar2ToolBar) | FileStar/2 toolBar | .bar | 
+[other/finalCutProject](https://discmaster.textfiles.com/search?formatid=finalCutProject) | Final Cut project | .fcp | 
 [other/finaleEnigmaBinaryFormat](https://discmaster.textfiles.com/search?formatid=finaleEnigmaBinaryFormat) | Finale Enigma Binary Format | .bin | 
 [other/finaleNotePad](https://discmaster.textfiles.com/search?formatid=finaleNotePad) | Finale NotePad | .mus | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?formatid=firstBasicHelp) | FirstBasic Help | .fbh | 
@@ -2161,6 +2164,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcpArchiveMetadata](https://discmaster.textfiles.com/search?formatid=pcpArchiveMetadata) | PCP archive metadata | .meta | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?formatid=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?formatid=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
+[other/perFORMCompressedDatabase](https://discmaster.textfiles.com/search?formatid=perFORMCompressedDatabase) | PerFORM compressed database | .frp | 
 [other/personalPearlDataBase](https://discmaster.textfiles.com/search?formatid=personalPearlDataBase) | Personal Pearl data base | .d00 .d01 | 
 [other/pgaTourVideoAnimation](https://discmaster.textfiles.com/search?formatid=pgaTourVideoAnimation) | PGA Tour Video Animation file format | .van | 
 [other/pgpKeyRing](https://discmaster.textfiles.com/search?formatid=pgpKeyRing) | PGP Key Ring | .key .pgp | 
@@ -2341,6 +2345,7 @@ Family/Format | Name | Extensions | Notes
 [other/secureCapsuleFirmwareUpdate](https://discmaster.textfiles.com/search?formatid=secureCapsuleFirmwareUpdate) | Secure Capsule firmware update | .scap | 
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?formatid=segaMasterSystemROM) | Sega Master System ROM | .sms | 
+[other/SegaSaturnROM](https://discmaster.textfiles.com/search?formatid=SegaSaturnROM) | Sega Saturn ROM | .bin | 
 [other/sentinelReturnsGameData](https://discmaster.textfiles.com/search?formatid=sentinelReturnsGameData) | Sentinel Returns game data | .db | 
 [other/sentrySpellingEngineLexicon](https://discmaster.textfiles.com/search?formatid=sentrySpellingEngineLexicon) | Sentry Spelling-Checker Engine Lexicon | .clx | 
 [other/settlers2Map](https://discmaster.textfiles.com/search?formatid=settlers2Map) | Settlers II Map | .swd .wld | 
@@ -2400,6 +2405,7 @@ Family/Format | Name | Extensions | Notes
 [other/sqlite2Database](https://discmaster.textfiles.com/search?formatid=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
 [other/stCADSymbol](https://discmaster.textfiles.com/search?formatid=stCADSymbol) | ST-CAD Symbol | .sym | 
 [other/stacElectronicsArchiveFormat](https://discmaster.textfiles.com/search?formatid=stacElectronicsArchiveFormat) | Stac Electronics Archive Format | .saf | 
+[other/standardACISBinary](https://discmaster.textfiles.com/search?formatid=standardACISBinary) | Standard ACIS Binary | .sab | 
 [other/stanfordGraphicsGallery](https://discmaster.textfiles.com/search?formatid=stanfordGraphicsGallery) | Stanford Graphics Gallery | .grf | 
 [other/starWarsJediKnightBotNavigationRoutes](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightBotNavigationRoutes) | Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info | .nav | 
 [other/starWarsJediKnightJediAcademyMap](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightJediAcademyMap) | Star Wars Jedi Knight: Jedi Academy map | .bsp | 
@@ -2478,10 +2484,12 @@ Family/Format | Name | Extensions | Notes
 [other/tiCalcAssembler](https://discmaster.textfiles.com/search?formatid=tiCalcAssembler) | Texas Instruments Calculator Assembler | .89z .9xz | 
 [other/tiCalcBackup](https://discmaster.textfiles.com/search?formatid=tiCalcBackup) | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
 [other/tiCalcData](https://discmaster.textfiles.com/search?formatid=tiCalcData) | Texas Instruments Calculator Data | .89c .9xc | 
+[other/tiCalcEquation](https://discmaster.textfiles.com/search?formatid=tiCalcEquation) | Texas Instruments Calculator Equation | .85e | 
 [other/tiCalcExpression](https://discmaster.textfiles.com/search?formatid=tiCalcExpression) | Texas Instruments Calculator Expression | .89e .89z | 
+[other/tiCalcFigure](https://discmaster.textfiles.com/search?formatid=tiCalcFigure) | Texas Instruments Calculator Figure | .92a | 
 [other/tiCalcFunction](https://discmaster.textfiles.com/search?formatid=tiCalcFunction) | Texas Instruments Calculator Function | .9xf .92f .89f | 
-[other/tiCalcGraphicDB](https://discmaster.textfiles.com/search?formatid=tiCalcGraphicDB) | Texas Instruments Calculator Graphic DB | .89d | 
-[other/tiCalcMatrix](https://discmaster.textfiles.com/search?formatid=tiCalcMatrix) | Texas Instruments Calculator Matrix | .9xm .89m | 
+[other/tiCalcGraphicDB](https://discmaster.textfiles.com/search?formatid=tiCalcGraphicDB) | Texas Instruments Calculator Graphic DB | .82d .83d .8xd .86d .89d | 
+[other/tiCalcMatrix](https://discmaster.textfiles.com/search?formatid=tiCalcMatrix) | Texas Instruments Calculator Matrix | .9xm .86m .89m | 
 [other/tiCalcString](https://discmaster.textfiles.com/search?formatid=tiCalcString) | Texas Instruments Calculator String | .9xs .9xy .89s | 
 [other/tiCalcZipped](https://discmaster.textfiles.com/search?formatid=tiCalcZipped) | Texas Instruments Calculator Zipped | .9xy .89y | 
 [other/americanHeritageDictionaryIndex](https://discmaster.textfiles.com/search?formatid=americanHeritageDictionaryIndex) | The American Heritage Dictionary Index | .wx | 
@@ -2559,7 +2567,7 @@ Family/Format | Name | Extensions | Notes
 [other/urbanTheCyborgProjectGameData](https://discmaster.textfiles.com/search?formatid=urbanTheCyborgProjectGameData) | U.R.B.A.N The Cyborg Project game data | .dat | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?formatid=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
-[other/potoImpactPresets](https://discmaster.textfiles.com/search?formatid=potoImpactPresets) | Ulead Photo Impact Presets | .smp | 
+[other/photoImpactPresets](https://discmaster.textfiles.com/search?formatid=photoImpactPresets) | Ulead Photo Impact Presets | .smp | 
 [other/ultimateFootball95Playbook](https://discmaster.textfiles.com/search?formatid=ultimateFootball95Playbook) | Ultimate Football '95 Playbook | .pbk | 
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
 [other/uniCodeExtensions](https://discmaster.textfiles.com/search?formatid=uniCodeExtensions) | UniCode Extensions | .uce | 
@@ -2568,11 +2576,13 @@ Family/Format | Name | Extensions | Notes
 [other/unknown](https://discmaster.textfiles.com/search?formatid=unknown) | Unknown File |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?formatid=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealMap](https://discmaster.textfiles.com/search?formatid=unrealMap) | Unreal Map | .unr | 
+[other/upsPatchFile](https://discmaster.textfiles.com/search?formatid=upsPatchFile) | UPS patch file | .ups | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?formatid=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?formatid=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 
 [other/vbISAMIndex](https://discmaster.textfiles.com/search?formatid=vbISAMIndex) | VB/ISAM Index | .ism | 
 [other/vbDOSForm](https://discmaster.textfiles.com/search?formatid=vbDOSForm) | VBDOS Form | .frm | 
 [other/vcdEntries](https://discmaster.textfiles.com/search?formatid=vcdEntries) | VCD Entries File | .vcd | 
+[other/vcdiffFormat](https://discmaster.textfiles.com/search?formatid=vcdiffFormat) | VCDIFF format | .xdelta3 .xdt .vcdiff | 
 [other/vcgGraph](https://discmaster.textfiles.com/search?formatid=vcgGraph) | VCG graph | .vcg | 
 [other/vclStyle](https://discmaster.textfiles.com/search?formatid=vclStyle) | VCL Style | .vsf | 
 [other/vectrexROM](https://discmaster.textfiles.com/search?formatid=vectrexROM) | Vectrex ROM | .vec .gam .bin | 
@@ -2732,6 +2742,7 @@ Family/Format | Name | Extensions | Notes
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?formatid=yafaCompressionOptions) | YAFA Compression Options |  | 
 [other/yamahaSysExPresetCommand](https://discmaster.textfiles.com/search?formatid=yamahaSysExPresetCommand) | Yamaha SysEx preset command | .syx .dx7 | 
 [other/yangDataModel](https://discmaster.textfiles.com/search?formatid=yangDataModel) | YANG data model | .yang | 
+[other/zarNavigatorConfiguration](https://discmaster.textfiles.com/search?formatid=zarNavigatorConfiguration) | Z.A.R. Navigator Configuration | .cfg | 
 [other/zInstallFormsDialogs](https://discmaster.textfiles.com/search?formatid=zInstallFormsDialogs) | Z/Install forms/Dialogs | .vvd | 
 [other/zapperInNeverwhereSavedGame](https://discmaster.textfiles.com/search?formatid=zapperInNeverwhereSavedGame) | Zapper In Neverwhere saved game | .pos | 
 [other/zbasic](https://discmaster.textfiles.com/search?formatid=zbasic) | ZBASIC | .bas | [6 sample files](https://sembiance.com/fileFormatSamples/other/zbasic/)
@@ -2753,7 +2764,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (74)
+## Poly (75)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -2822,6 +2833,7 @@ Family/Format | Name | Extensions | Notes
 [poly/strataStudioProVis](https://discmaster.textfiles.com/search?formatid=strataStudioProVis) | Strata StudioPro Vis |  | 
 [poly/superscapeDo3DObject](https://discmaster.textfiles.com/search?formatid=superscapeDo3DObject) | Superscape Do 3D VCA | .vca | I was able to open these in Superscape VRT, but exporting to VRML didn't produce a usable result. The 'Do 3D' program doesn't work any better (also requires CD in drive)
 [poly/superScapeVR](https://discmaster.textfiles.com/search?formatid=superScapeVR) | SuperScape Virtual Reality | .svr | 
+[poly/swift3D3DGraphic](https://discmaster.textfiles.com/search?formatid=swift3D3DGraphic) | Swift 3D 3D Graphic | .txt .t3d | 
 [poly/tornado3DModel](https://discmaster.textfiles.com/search?formatid=tornado3DModel) | Tornado 3D model | .tor | 
 [poly/valveModelVertices](https://discmaster.textfiles.com/search?formatid=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.
 [poly/vertexBinary](https://discmaster.textfiles.com/search?formatid=vertexBinary) | Vertex Binary 3D Object | .3d | Only 5 uniques of these files are on discmaster, all samples from an Amiga app called Vertex.

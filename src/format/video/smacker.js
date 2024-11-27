@@ -6,6 +6,7 @@ export class smacker extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Smacker";
 	ext          = [".smk"];
 	magic        = ["Smacker movie/video", "Smacker Video", "video/vnd.radgamettools.smacker", "Smacker (smk)", /^RAD Game Tools Smacker Multimedia .* frames$/, /^fmt\/1234( |$)/];
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="DDat" && macFileCreator==="DLCK";
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg[format:smk]"];
 }

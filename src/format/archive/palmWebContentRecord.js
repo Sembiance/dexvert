@@ -5,6 +5,7 @@ export class palmWebContentRecord extends Format
 	name        = "Palm Web Content Record";
 	website     = "http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language";
 	magic       = ["Palm Web Content Record"];
+	weakMagic   = true;
 	packed      = true;
 	unsupported = true;
 	notes       = `

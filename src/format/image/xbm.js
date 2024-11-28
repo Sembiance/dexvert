@@ -1,16 +1,20 @@
 import {Format} from "../../Format.js";
 
+const _XBM_MAGIC = ["X Bitmap", "xbm image", "piped xbm sequence (xbm_pipe)", /^x-fmt\/(207|299)( |$)/];
+export {_XBM_MAGIC};
+
 export class xbm extends Format
 {
 	name         = "X11 Bitmap";
 	website      = "http://fileformats.archiveteam.org/wiki/XBM";
 	ext          = [".xbm", ".bm"];
-	magic        = ["X Bitmap", "xbm image", "piped xbm sequence (xbm_pipe)", /^x-fmt\/207( |$)/];
+	magic        = _XBM_MAGIC;
 	idMeta       = ({macFileType}) => macFileType==="XBM ";
 	mimeType     = "image/x-xbitmap";
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "gimp", "imconv[format:xbm][matchType:magic]", "wuimg",
+		"wuimg",	// only one that handles 3270.icon and iv.X correctly
+		"convert", "gimp", "imconv[format:xbm][matchType:magic]",
 		"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
 }

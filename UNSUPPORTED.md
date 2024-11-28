@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,837)
+# Unsupported File Formats (2,847)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -320,7 +320,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (159)
+## Document (160)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -410,6 +410,7 @@ Family/Format | Name | Extensions | Notes
 [document/lotusSymphony](https://discmaster.textfiles.com/search?formatid=lotusSymphony) | Lotus Symphony Worksheet | .wk1 .wr1 | 
 [document/masterCook](https://discmaster.textfiles.com/search?formatid=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 [document/matrixSpreadsheet](https://discmaster.textfiles.com/search?formatid=matrixSpreadsheet) | Matrix spreadsheet | .mtx | 
+[document/maxiPlanSpreadsheet](https://discmaster.textfiles.com/search?formatid=maxiPlanSpreadsheet) | MaxiPlan spreadsheet | .plan | 
 [document/mediaPaqDCF](https://discmaster.textfiles.com/search?formatid=mediaPaqDCF) | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 [document/mediaViewDocument](https://discmaster.textfiles.com/search?formatid=mediaViewDocument) | MediaView document | .mdvw .mdv | 
 [document/microsoftAdvisorHelp](https://discmaster.textfiles.com/search?formatid=microsoftAdvisorHelp) | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
@@ -976,7 +977,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,782)
+## Other (1,791)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1059,6 +1060,7 @@ Family/Format | Name | Extensions | Notes
 [other/aegisImpactGraph](https://discmaster.textfiles.com/search?formatid=aegisImpactGraph) | Aegis Impact! Graph | .gph | 
 [other/aegisImpactSlideshow](https://discmaster.textfiles.com/search?formatid=aegisImpactSlideshow) | Aegis Impact! Slideshow | .sld | 
 [other/aegisProMotionGeometry](https://discmaster.textfiles.com/search?formatid=aegisProMotionGeometry) | Aegis Pro Motion Geometry | .geo | 
+[other/aegisSonixMusic](https://discmaster.textfiles.com/search?formatid=aegisSonixMusic) | Aegis Sonix music | .snx | 
 [other/aesopEngineResourceData](https://discmaster.textfiles.com/search?formatid=aesopEngineResourceData) | AESOP engine Resource data | .res | 
 [other/afsGameArchive](https://discmaster.textfiles.com/search?formatid=afsGameArchive) | AFS game archive | .afs | 
 [other/afterDarkForDOSResourceData](https://discmaster.textfiles.com/search?formatid=afterDarkForDOSResourceData) | After Dark for DOS Resource data | .rsc | 
@@ -1631,6 +1633,7 @@ Family/Format | Name | Extensions | Notes
 [other/gconvModuleConfigurationCache](https://discmaster.textfiles.com/search?formatid=gconvModuleConfigurationCache) | gconv module configuration cache | .cache | 
 [other/gcsWorldData](https://discmaster.textfiles.com/search?formatid=gcsWorldData) | GCS World data | .wld | 
 [other/gdsIIStream](https://discmaster.textfiles.com/search?formatid=gdsIIStream) | GDSII stream | .gds | 
+[other/geeBeeAirRallySceneryData](https://discmaster.textfiles.com/search?formatid=geeBeeAirRallySceneryData) | Gee Bee Air Rally scenery data |  | 
 [other/geePrinterDriver](https://discmaster.textfiles.com/search?formatid=geePrinterDriver) | Gee! Printer Driver | .pdr | 
 [other/gemGraph](https://discmaster.textfiles.com/search?formatid=gemGraph) | GEM Graph | .grf | 
 [other/gemViewLoadModule](https://discmaster.textfiles.com/search?formatid=gemViewLoadModule) | GEM-View Load module | .gvl | 
@@ -1662,6 +1665,7 @@ Family/Format | Name | Extensions | Notes
 [other/gnuSmallTalkmage](https://discmaster.textfiles.com/search?formatid=gnuSmallTalkmage) | GNU SmallTalk image | .im | 
 [other/gObjectIntrospectionTypeLibrayData](https://discmaster.textfiles.com/search?formatid=gObjectIntrospectionTypeLibrayData) | GObject introspection Type Libray data | .typelib | 
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
+[other/godotResourceData](https://discmaster.textfiles.com/search?formatid=godotResourceData) | Godot Resource data | .res | 
 [other/goldParserTables](https://discmaster.textfiles.com/search?formatid=goldParserTables) | GOLD Parser Tables | .cgt | 
 [other/goldenSectionOrganizerDatabase](https://discmaster.textfiles.com/search?formatid=goldenSectionOrganizerDatabase) | GoldenSection Organizer database | .gso | 
 [other/goldMineReport](https://discmaster.textfiles.com/search?formatid=goldMineReport) | GoldMine report | .fp | 
@@ -1955,6 +1959,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftCueCardsData](https://discmaster.textfiles.com/search?formatid=microsoftCueCardsData) | Microsoft Cue Cards data | .cue | 
 [other/microsoftDirectInputFFE](https://discmaster.textfiles.com/search?formatid=microsoftDirectInputFFE) | Microsoft DirectInput Force Feedback Effect | .ffe | 
 [other/microsoftDierctMusicSegments](https://discmaster.textfiles.com/search?formatid=microsoftDierctMusicSegments) | Microsoft DirectMusic Segments Type | .sgt | 
+[other/microsoftFastFindStatus](https://discmaster.textfiles.com/search?formatid=microsoftFastFindStatus) | Microsoft Fast Find status | .ffa | 
 [other/microsoftFastFindIndex](https://discmaster.textfiles.com/search?formatid=microsoftFastFindIndex) | Microsoft FastFind Index | .ffx | 
 [other/microsoftGolfReplay](https://discmaster.textfiles.com/search?formatid=microsoftGolfReplay) | Microsoft Golf Replay | .rpl | 
 [other/microsoftIncrementalLinker](https://discmaster.textfiles.com/search?formatid=microsoftIncrementalLinker) | Microsoft Incremental Linker Data | .ilk | 
@@ -2316,6 +2321,7 @@ Family/Format | Name | Extensions | Notes
 [other/rosegardenMusicalNotation](https://discmaster.textfiles.com/search?formatid=rosegardenMusicalNotation) | Rosegarden musical notation | .rose | 
 [other/rotObject3DAction](https://discmaster.textfiles.com/search?formatid=rotObject3DAction) | ROT Object 3D Action | .rotact | 
 [other/roundRobinDatabase](https://discmaster.textfiles.com/search?formatid=roundRobinDatabase) | Round-Robin Database | .rrd | 
+[other/rpgMakerData](https://discmaster.textfiles.com/search?formatid=rpgMakerData) | RPG Maker data | .rxdata .rvdata .rvdata2 | 
 [other/rpgMakerDB](https://discmaster.textfiles.com/search?formatid=rpgMakerDB) | RPG Maker Database | .ldb | 
 [other/rpgMakerMap](https://discmaster.textfiles.com/search?formatid=rpgMakerMap) | RPG Maker Map | .lmu | EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work
 [other/rpgMakerSaveData](https://discmaster.textfiles.com/search?formatid=rpgMakerSaveData) | RPG Maker Save Data | .lsd | 
@@ -2401,6 +2407,7 @@ Family/Format | Name | Extensions | Notes
 [other/spilImageLibrary](https://discmaster.textfiles.com/search?formatid=spilImageLibrary) | SPIL Image Library | .ilb .slb | 
 [other/spssForWindowsData](https://discmaster.textfiles.com/search?formatid=spssForWindowsData) | SPSS for Windows Data | .sav | 
 [other/spyBotSearchAndDestroySignature](https://discmaster.textfiles.com/search?formatid=spyBotSearchAndDestroySignature) | SpyBot-Search-and-Destroy Signature | .sig | 
+[other/spyneContainer](https://discmaster.textfiles.com/search?formatid=spyneContainer) | SPYne Container |  | 
 [other/sqkServerCompactEditionDatabase](https://discmaster.textfiles.com/search?formatid=sqkServerCompactEditionDatabase) | SQL Server Compact Edition database | .sdf | 
 [other/sqlite2Database](https://discmaster.textfiles.com/search?formatid=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
 [other/stCADSymbol](https://discmaster.textfiles.com/search?formatid=stCADSymbol) | ST-CAD Symbol | .sym | 
@@ -2427,6 +2434,9 @@ Family/Format | Name | Extensions | Notes
 [other/statisticalAnalysisSystemData](https://discmaster.textfiles.com/search?formatid=statisticalAnalysisSystemData) | Statistical Analysis System Data | .sas7bdat .sd7 | 
 [other/steamRegistry](https://discmaster.textfiles.com/search?formatid=steamRegistry) | Steam Registry | .blob | 
 [other/steelPanthersShapesData](https://discmaster.textfiles.com/search?formatid=steelPanthersShapesData) | Steel Panthers Shapes data | .shp | 
+[other/steinbergResourceFile](https://discmaster.textfiles.com/search?formatid=steinbergResourceFile) | Steinberg Resource File | .srf | 
+[other/steinbergStudioModuleDriver](https://discmaster.textfiles.com/search?formatid=steinbergStudioModuleDriver) | Steinberg Studio Module Driver | .d | 
+[other/steinbergVSTSoundLibrary](https://discmaster.textfiles.com/search?formatid=steinbergVSTSoundLibrary) | Steinberg VST Sound library | .vstsound | 
 [other/stepManiaCourse](https://discmaster.textfiles.com/search?formatid=stepManiaCourse) | StepMania Course | .crs | 
 [other/stormWizardResource](https://discmaster.textfiles.com/search?formatid=stormWizardResource) | StormWizard Resource | .wizard .wizard-all | 
 [other/stosVarData](https://discmaster.textfiles.com/search?formatid=stosVarData) | STOS Var data | .var | 

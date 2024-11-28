@@ -33,7 +33,7 @@ const _XML_MAGIC = [
 	"IAR Embedded Workbench Debug info", "Xilinx ISE Messages", "Visual Studio .NET Visual C Project", "VMware supplemental team member configuration", "Microsoft Visual Studio project template", "PRONOM file format report", "Flex configuration",
 	"Windows application Manifest", "OSTA.org MusicPhotoVideo", "BlackBerry Application Loader", "Viewpoint MetaStream scene", "FlashDevelop ActionScript 3 Project", "Windows application Manifest (generic)", "Morpheus layout - project", "XML Grammar",
 	"Wink Flash Preloader", "Wink Flash Control bar", "MAME Hash", "openMSX machine/device configuration", "ActiveReports Report (UTF-8)", "Papyrus X DB XML", /^VOTable$/, "Audacity Project", "XML Shareable Playlist Format", "application/xspf+xml",
-	"application/x-quicktime-media-link", /^Metalink \([^)]+\)$/, "NVDL script", ".NET assembly uninstaller info",
+	"application/x-quicktime-media-link", /^Metalink \([^)]+\)$/, "NVDL script", ".NET assembly uninstaller info", "ArcPad configuration", "Predictive Model Markup Language",
 	/^fmt\/(205|243|475|570|896|979|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1825)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

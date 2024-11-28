@@ -1,5 +1,5 @@
 import {Format} from "../../Format.js";
-import {_SHOCKWAVE_AUDIO_MAGIC} from "./shockWaveAudio.js?hirm";
+import {_SHOCKWAVE_AUDIO_MAGIC} from "./shockWaveAudio.js";
 
 export class mp3 extends Format
 {

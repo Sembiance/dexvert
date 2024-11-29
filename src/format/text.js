@@ -373,6 +373,7 @@ export default
 		doxygenConfigurationSettings             : {name : "Doxygen configuration settings", ext : [".cfg"], magic : ["Doxygen configuration settings"]},
 		dfAddressDataBase                        : {name : "DFAddress data base", ext : [".file"], magic : ["DFAddress data base"]},
 		dtreadTypeDescriptor                     : {name : "dtread Type Descriptor", ext : [".dtyp"], magic : ["dtread Type Descriptor"]},
+		dynamicPublisherText                     : {name : "Dynamic Publisher Text", ext : [".txt"], magic : ["Dynamic Publisher Text"]},
 		easigrafGraphParameters                  : {name : "EASIGRAF Graph Parameters", ext : [".grp"], magic : ["EASIGRAF Graph Parameters"]},
 		easyBaseDataBase                         : {name : "EasyBase data base", magic : ["EasyBase data base"]},
 		easyBaseDBConfiguration                  : {name : "EasyBase DB Configuration", ext : [".config"], magic : ["EasyBase DB Configuration"]},

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,847)
+# Unsupported File Formats (2,870)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -320,7 +320,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (160)
+## Document (161)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -365,6 +365,7 @@ Family/Format | Name | Extensions | Notes
 [document/dramaticaStory](https://discmaster.textfiles.com/search?formatid=dramaticaStory) | Dramatica story | .dsf .ssi .dcf .dr5 | 
 [document/dvcDataBase](https://discmaster.textfiles.com/search?formatid=dvcDataBase) | DVC data base | .d | 
 [document/dynaDocElectricExchangeDocument](https://discmaster.textfiles.com/search?formatid=dynaDocElectricExchangeDocument) | DynaDoc Electric Exchange Document | .wdl | 
+[document/dynamicPublisherDocument](https://discmaster.textfiles.com/search?formatid=dynamicPublisherDocument) | Dynamic Publisher Document | .doc | 
 [document/endNoteConnection](https://discmaster.textfiles.com/search?formatid=endNoteConnection) | EndNote Connection | .enz | 
 [document/endNoteFilter](https://discmaster.textfiles.com/search?formatid=endNoteFilter) | EndNote Filter | .enf | 
 [document/endNoteStyle](https://discmaster.textfiles.com/search?formatid=endNoteStyle) | EndNote Style | .ens | 
@@ -540,7 +541,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (99)
+## Font (100)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -603,6 +604,7 @@ Family/Format | Name | Extensions | Notes
 [font/megaPaintFont](https://discmaster.textfiles.com/search?formatid=megaPaintFont) | MegaPaint Font | .fnt | 
 [font/metagraphicsFont](https://discmaster.textfiles.com/search?formatid=metagraphicsFont) | Metagraphics Font | .fnt | 
 [font/micrografxFont](https://discmaster.textfiles.com/search?formatid=micrografxFont) | Micrografx Font | .mgf | 
+[font/msxFont](https://discmaster.textfiles.com/search?formatid=msxFont) | MSX Font | .alf | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?formatid=msxKanjiFont) | MSX Kanji Font |  | 
 [font/olitextFont](https://discmaster.textfiles.com/search?formatid=olitextFont) | Olitext Font | .fnt | 
 [font/overlayFont](https://discmaster.textfiles.com/search?formatid=overlayFont) | Overlay Font | .olf | 
@@ -826,7 +828,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (145)
+## Music (151)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -904,13 +906,17 @@ Family/Format | Name | Extensions | Notes
 [music/moonBlasterForMoonSoundSong](https://discmaster.textfiles.com/search?formatid=moonBlasterForMoonSoundSong) | MoonBlaster for MoonSound song | .mwm .mfm .mwk .mwv | 
 [music/mozartMusicDocument](https://discmaster.textfiles.com/search?formatid=mozartMusicDocument) | MOZART Music Document | .mz | 
 [music/ms3Music](https://discmaster.textfiles.com/search?formatid=ms3Music) | MS3 music | .ms3 | 
+[music/msxItinerantOrchestraMusic](https://discmaster.textfiles.com/search?formatid=msxItinerantOrchestraMusic) | MSX Itinerant Orchestra music | .mio | 
 [music/msxMBM](https://discmaster.textfiles.com/search?formatid=msxMBM) | MSX Moon Blaster Music | .mbm | [6 sample files](https://sembiance.com/fileFormatSamples/music/msxMBM/) - Conversion works great, but kss2wav will take almost any .mbm file and convert it to garbage. No magic I can find and no current way to check output audio, so since the format is so rare, sadly need to mark it unsupported.
 [music/msxProtrackerModule](https://discmaster.textfiles.com/search?formatid=msxProtrackerModule) | MSX Protracker Module | .pro | 
+[music/msxSME3Music](https://discmaster.textfiles.com/search?formatid=msxSME3Music) | MSX SME 3 music | .ply | 
 [music/musicStudioSong](https://discmaster.textfiles.com/search?formatid=musicStudioSong) | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://sembiance.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 [music/musicXPerformance](https://discmaster.textfiles.com/search?formatid=musicXPerformance) | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXPerformance/)
 [music/musicXSequence](https://discmaster.textfiles.com/search?formatid=musicXSequence) | [Music-X Sequence](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .seq | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXSequence/)
+[music/muSiCaTextMusicFormat](https://discmaster.textfiles.com/search?formatid=muSiCaTextMusicFormat) | MuSiCa text music format | .msd | 
 [music/musicMakerModule](https://discmaster.textfiles.com/search?formatid=musicMakerModule) | MusicMaker Module | .mm8 | [5 sample files](https://sembiance.com/fileFormatSamples/music/musicMakerModule/)
 [music/musicTimeScore](https://discmaster.textfiles.com/search?formatid=musicTimeScore) | MusicTime score | .mus | 
+[music/mustMusic](https://discmaster.textfiles.com/search?formatid=mustMusic) | MUST music / song | .wvz | 
 [music/mvsTracker](https://discmaster.textfiles.com/search?formatid=mvsTracker) | MVSTracker Module | .mus | [2 sample files](https://sembiance.com/fileFormatSamples/music/mvsTracker/)
 [music/mvxModule](https://discmaster.textfiles.com/search?formatid=mvxModule) | MVX Module | .mvm | [4 sample files](https://sembiance.com/fileFormatSamples/music/mvxModule/)
 [music/nerdTracker](https://discmaster.textfiles.com/search?formatid=nerdTracker) | NerdTracker Module | .ned | [4 sample files](https://sembiance.com/fileFormatSamples/music/nerdTracker/)
@@ -941,6 +947,7 @@ Family/Format | Name | Extensions | Notes
 [music/rolandMusicSequence](https://discmaster.textfiles.com/search?formatid=rolandMusicSequence) | Roland Music Sequence | .svq | [7 sample files](https://sembiance.com/fileFormatSamples/music/rolandMusicSequence/) - Awave Studio claims support for these, but I was not able to get it to convert any SVQ files.
 [music/soteModule](https://discmaster.textfiles.com/search?formatid=soteModule) | S.O.T.E. module | .mus | [1 sample file](https://sembiance.com/fileFormatSamples/music/soteModule/)
 [music/sapiensMusic](https://discmaster.textfiles.com/search?formatid=sapiensMusic) | Sapiens Music | .mux | [2 sample files](https://sembiance.com/fileFormatSamples/music/sapiensMusic/)
+[music/sccBlafferNTMusic](https://discmaster.textfiles.com/search?formatid=sccBlafferNTMusic) | SCC Blaffer NT Music | .sbm | 
 [music/scorePerfectProfessionalSong](https://discmaster.textfiles.com/search?formatid=scorePerfectProfessionalSong) | Score Perfect Professional Song | .son | 
 [music/scrullMusicFile](https://discmaster.textfiles.com/search?formatid=scrullMusicFile) | Scrull Music File | .smf | 
 [music/sequencerOneSong](https://discmaster.textfiles.com/search?formatid=sequencerOneSong) | Sequencer One Song | .one | 
@@ -967,6 +974,7 @@ Family/Format | Name | Extensions | Notes
 [music/t0ast](https://discmaster.textfiles.com/search?formatid=t0ast) | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https://sembiance.com/fileFormatSamples/music/t0ast/)
 [music/traXTrack](https://discmaster.textfiles.com/search?formatid=traXTrack) | TraX Music Track | .mts | [5 sample files](https://sembiance.com/fileFormatSamples/music/traXTrack/)
 [music/triSoundModule](https://discmaster.textfiles.com/search?formatid=triSoundModule) | TriSound module | .tri | 
+[music/twzSCCBLAFFERMusic](https://discmaster.textfiles.com/search?formatid=twzSCCBLAFFERMusic) | TwZ SCC-BLAFFER music | .tsm | 
 [music/vgmMusicMaker](https://discmaster.textfiles.com/search?formatid=vgmMusicMaker) | VGM Music Maker Module | .vge | [4 sample files](https://sembiance.com/fileFormatSamples/music/vgmMusicMaker/)
 [music/vicTracker](https://discmaster.textfiles.com/search?formatid=vicTracker) | Vic-Tracker Module | .vt | [5 sample files](https://sembiance.com/fileFormatSamples/music/vicTracker/)
 [music/voyetraSequencerSong](https://discmaster.textfiles.com/search?formatid=voyetraSequencerSong) | Voyetra Sequencer Song | .sng | 
@@ -977,7 +985,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,791)
+## Other (1,806)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1499,6 +1507,7 @@ Family/Format | Name | Extensions | Notes
 [other/dustyDOTsSavedGame](https://discmaster.textfiles.com/search?formatid=dustyDOTsSavedGame) | DustyDOTs saved game | .dsv | 
 [other/dvdInfoFile](https://discmaster.textfiles.com/search?formatid=dvdInfoFile) | DVD Info File | .ifo .bup | 
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?formatid=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
+[other/dynamicPublisherPrinterFile](https://discmaster.textfiles.com/search?formatid=dynamicPublisherPrinterFile) | Dynamic Publisher Printer File | .prf | 
 [other/dynamicallyLinkedDeviceInterface](https://discmaster.textfiles.com/search?formatid=dynamicallyLinkedDeviceInterface) | Dynamically Linked Device Interface | .dldi | 
 [other/dynamixBitmap](https://discmaster.textfiles.com/search?formatid=dynamixBitmap) | Dynamix Bitnmap | .bmp | 
 [other/dynamixFontDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixFontDataContainer) | Dynamix Font data container | .fnt | 
@@ -1506,6 +1515,7 @@ Family/Format | Name | Extensions | Notes
 [other/dynamixSceneDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixSceneDataContainer) | Dynamix scene data container | .ttm .tkm | 
 [other/dynamixSoundDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixSoundDataContainer) | Dynamix Sound data container | .sx .snd .blk | 
 [other/eaSeattleGameData](https://discmaster.textfiles.com/search?formatid=eaSeattleGameData) | EA Seattle game data | .act | 
+[other/eaglePCBLibrary](https://discmaster.textfiles.com/search?formatid=eaglePCBLibrary) | EAGLE Library | .lbr | 
 [other/eaglePCBCircuitBoardDrawing](https://discmaster.textfiles.com/search?formatid=eaglePCBCircuitBoardDrawing) | EAGLE PCB (circuit board) drawing | .brd | 
 [other/eagleSchematic](https://discmaster.textfiles.com/search?formatid=eagleSchematic) | EAGLE schematic | .sch | 
 [other/easyCDCreatorLayout](https://discmaster.textfiles.com/search?formatid=easyCDCreatorLayout) | Easy CD Creator Layout | .cl5 | 
@@ -1625,6 +1635,7 @@ Family/Format | Name | Extensions | Notes
 [other/gadToolsBoxUIData](https://discmaster.textfiles.com/search?formatid=gadToolsBoxUIData) | GadToolsBox UI data | .gui | 
 [other/gameBoyAdvanceROM](https://discmaster.textfiles.com/search?formatid=gameBoyAdvanceROM) | Game Boy Advance ROM | .gba | 
 [other/gameBoyROM](https://discmaster.textfiles.com/search?formatid=gameBoyROM) | Game Boy ROM | .gb .gbc | 
+[other/gameDoctorSF3SavedGame](https://discmaster.textfiles.com/search?formatid=gameDoctorSF3SavedGame) | Game Doctor SF 3 saved game | .smc | 
 [other/gameGearROM](https://discmaster.textfiles.com/search?formatid=gameGearROM) | Game Gear ROM | .gg | 
 [other/gameMaker](https://discmaster.textfiles.com/search?formatid=gameMaker) | Game Maker | .gmr | 
 [other/gammaCAD](https://discmaster.textfiles.com/search?formatid=gammaCAD) | GammaCAD Document | .sym .gc1 | 
@@ -1692,6 +1703,7 @@ Family/Format | Name | Extensions | Notes
 [other/halfLifeDemo](https://discmaster.textfiles.com/search?formatid=halfLifeDemo) | Half-Life Demo | .dem | 
 [other/halionSamplerPatchBank](https://discmaster.textfiles.com/search?formatid=halionSamplerPatchBank) | HALion Sampler patch - bank | .fxb | 
 [other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
+[other/halnoteApplication](https://discmaster.textfiles.com/search?formatid=halnoteApplication) | HALNOTE Application | .apl | 
 [other/hammerHeadRhythmStationPattern](https://discmaster.textfiles.com/search?formatid=hammerHeadRhythmStationPattern) | HammerHead Rhythm Station pattern | .hh | 
 [other/handyCalcData](https://discmaster.textfiles.com/search?formatid=handyCalcData) | Handy Calc data | .clc | 
 [other/hangulWordProcessorDeviceDriver](https://discmaster.textfiles.com/search?formatid=hangulWordProcessorDeviceDriver) | Hangul Word Processor Device driver | .pdr .pds | 
@@ -2018,6 +2030,8 @@ Family/Format | Name | Extensions | Notes
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?formatid=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
 [other/msnMessengerLogFile](https://discmaster.textfiles.com/search?formatid=msnMessengerLogFile) | MSN/Windows Live Messenger Log file | .sgm .dat | 
 [other/msplotPlotterDriverMinidriver](https://discmaster.textfiles.com/search?formatid=msplotPlotterDriverMinidriver) | MSPLOT Plotter Driver Minidriver | .pcd | 
+[other/mstQuintusAnimation](https://discmaster.textfiles.com/search?formatid=mstQuintusAnimation) | MST Quintus Animation | .ani | 
+[other/mstQuintusMacro](https://discmaster.textfiles.com/search?formatid=mstQuintusMacro) | MST Quintus Macro | .qmc | 
 [other/msxROM](https://discmaster.textfiles.com/search?formatid=msxROM) | MSX ROM | .rom | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
 [other/multimediaBuilderData](https://discmaster.textfiles.com/search?formatid=multimediaBuilderData) | Multimedia Builder Data | .mbd | 
@@ -2175,6 +2189,9 @@ Family/Format | Name | Extensions | Notes
 [other/pgpKeyRing](https://discmaster.textfiles.com/search?formatid=pgpKeyRing) | PGP Key Ring | .key .pgp | 
 [other/pgpRSAEncryptedSessionKey](https://discmaster.textfiles.com/search?formatid=pgpRSAEncryptedSessionKey) | PGP RSA encrypted session key | .pgp | 
 [other/pharaohsAscentLevelData](https://discmaster.textfiles.com/search?formatid=pharaohsAscentLevelData) | Pharaoh's Ascent Level data | .lvl | 
+[other/philipsDrumSystemData](https://discmaster.textfiles.com/search?formatid=philipsDrumSystemData) | Philips Drum System data | .drm .dsq | 
+[other/philipsMusicCreatorData](https://discmaster.textfiles.com/search?formatid=philipsMusicCreatorData) | Philips Music Creator data | .spt .seq .rlt .voc .acc .ldr .sam | 
+[other/philipsVideoGraphicsAnimation](https://discmaster.textfiles.com/search?formatid=philipsVideoGraphicsAnimation) | Philips Video Graphics Animation | .ani | 
 [other/photoImpressionsAlbum](https://discmaster.textfiles.com/search?formatid=photoImpressionsAlbum) | PhotoImpressions Album | .abm | 
 [other/photoLineBrowseIndex](https://discmaster.textfiles.com/search?formatid=photoLineBrowseIndex) | PhotoLine browse index | .plb | 
 [other/photoLine32Document](https://discmaster.textfiles.com/search?formatid=photoLine32Document) | PhotoLine32 Document | .pld | 
@@ -2201,6 +2218,7 @@ Family/Format | Name | Extensions | Notes
 [other/polarSpellCheckerDictionary](https://discmaster.textfiles.com/search?formatid=polarSpellCheckerDictionary) | Polar SpellChecker dictionary |  | 
 [other/polyfilmPrefs](https://discmaster.textfiles.com/search?formatid=polyfilmPrefs) | Polyfilm Preferences | .prf | 
 [other/ponyProgDeviceFile](https://discmaster.textfiles.com/search?formatid=ponyProgDeviceFile) | PonyProg device file |  | 
+[other/popNOPCrunchedData](https://discmaster.textfiles.com/search?formatid=popNOPCrunchedData) | PopNOP crunched data | .nop .vrm | 
 [other/portsOfCallSaveGame](https://discmaster.textfiles.com/search?formatid=portsOfCallSaveGame) | Ports of Call Save Game | .trp | 
 [other/postalDemo](https://discmaster.textfiles.com/search?formatid=postalDemo) | Postal Demo | .dmo .rdx | 
 [other/postalGUIElement](https://discmaster.textfiles.com/search?formatid=postalGUIElement) | Postal GUI element | .gui | 
@@ -2268,7 +2286,9 @@ Family/Format | Name | Extensions | Notes
 [other/quattroProAddInFunctionsLibrary](https://discmaster.textfiles.com/search?formatid=quattroProAddInFunctionsLibrary) | Quattro Pro add-in functions library | .qll | 
 [other/questAdventure](https://discmaster.textfiles.com/search?formatid=questAdventure) | Quest adventure | .cas | 
 [other/quest3DData](https://discmaster.textfiles.com/search?formatid=quest3DData) | Quest3D data | .cgr | 
+[other/quickenData](https://discmaster.textfiles.com/search?formatid=quickenData) | Quicken data | .qdf | 
 [other/quickenDatabase](https://discmaster.textfiles.com/search?formatid=quickenDatabase) | Quicken Database File | .qst | 
+[other/quickenWinData](https://discmaster.textfiles.com/search?formatid=quickenWinData) | Quicken Win Data | .qsd | 
 [other/quickTextTitles](https://discmaster.textfiles.com/search?formatid=quickTextTitles) | QuickText Titles |  | 
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?formatid=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/quickTimePreferences](https://discmaster.textfiles.com/search?formatid=quickTimePreferences) | QuickTime Preferences | .qtp | 
@@ -2328,11 +2348,13 @@ Family/Format | Name | Extensions | Notes
 [other/rrReportWriterFontInformation](https://discmaster.textfiles.com/search?formatid=rrReportWriterFontInformation) | RR Report Writer Font Information File | .fif | 
 [other/rsa1Key](https://discmaster.textfiles.com/search?formatid=rsa1Key) | RSA1 key |  | 
 [other/rtPatchFile](https://discmaster.textfiles.com/search?formatid=rtPatchFile) | RTPatch File | .rtp | 
+[other/sampbox4Macro](https://discmaster.textfiles.com/search?formatid=sampbox4Macro) | Sampbox 4 Macro | .sam | 
 [other/samplitudeProject](https://discmaster.textfiles.com/search?formatid=samplitudeProject) | Samplitude Project | .rap .vip | 
 [other/sangoFighterConfiguration](https://discmaster.textfiles.com/search?formatid=sangoFighterConfiguration) | Sango Fighter Configuration | .cfg | 
 [other/sanityAikensArtifactSavedGame](https://discmaster.textfiles.com/search?formatid=sanityAikensArtifactSavedGame) | Sanity: Aiken's Artifact Saved Game | .sav | 
 [other/sasTransportXPORTFormat](https://discmaster.textfiles.com/search?formatid=sasTransportXPORTFormat) | SAS Transport (XPORT) format | .xpt | 
 [other/saveRam2CompressedData](https://discmaster.textfiles.com/search?formatid=saveRam2CompressedData) | SaveRam2 compressed data | .fls | 
+[other/sccBlafferNTInstrumentKit](https://discmaster.textfiles.com/search?formatid=sccBlafferNTInstrumentKit) | SCC Blaffer NT Instrument Kit |  | 
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?formatid=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
 [other/schirattiCommanderSituation](https://discmaster.textfiles.com/search?formatid=schirattiCommanderSituation) | Schiratti Commander Situation | .stn | 
 [other/sciTechDriver](https://discmaster.textfiles.com/search?formatid=sciTechDriver) | SciTech Driver | .drv | 
@@ -2547,6 +2569,7 @@ Family/Format | Name | Extensions | Notes
 [other/trackAttackTrackData](https://discmaster.textfiles.com/search?formatid=trackAttackTrackData) | Track Attack track Data | .dat | 
 [other/trackManiaTrack](https://discmaster.textfiles.com/search?formatid=trackManiaTrack) | TrackMania track | .gbx | 
 [other/translandMap](https://discmaster.textfiles.com/search?formatid=translandMap) | Transland Map | .map | 
+[other/traxPlayerAudioFloppyImage](https://discmaster.textfiles.com/search?formatid=traxPlayerAudioFloppyImage) | TraxPlayer audio floppy image | .nop | 
 [other/treeDBNotesDocument](https://discmaster.textfiles.com/search?formatid=treeDBNotesDocument) | TreeDBNotes document | .treedb | 
 [other/treePADDocument](https://discmaster.textfiles.com/search?formatid=treePADDocument) | TreePAD document | .hjt | 
 [other/trendMicroCleanerDatabase](https://discmaster.textfiles.com/search?formatid=trendMicroCleanerDatabase) | TrendMicro Cleaner database | .ptn | 

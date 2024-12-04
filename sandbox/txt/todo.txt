@@ -1,6 +1,24 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* This used to work in discmaster1, but doesn't in discmaster2. Looks like there are 2 partitions and the second one is the one I'm after: https://dev.discmaster2.textfiles.com/admin/item?itemid=17774
+  I can see both partitions iwth 'parted <file> print'. So I did: parted --machine --json MacAddict_068_2002_04.iso print
+  This could extract partition 2: dd if=/home/sembiance/Downloads/MacAddict_068_2002_04.iso of=partition2.raw bs=512 skip=37 count=1386496
+  This was with the help of ChatGPT. I guess I would need to look at the 'logical-sector-size' and then perform math like:
+  	start: 18.9kB → Sector: 18900 / 512 = 37
+	size: 679MB → Sectors: 679 * 1024 * 1024 / 512 = 1386496
+  Even after I got the raw partition, hmount/uniso still won't work with it.
+  deark[module:hfs] does, but deark isn't capable of creating subdirs, so it's basically useless in this case
+  IsoBuster works on it though, so the proper solution would be to add 'IsoBuster' as a converter to rawPartition for HFS, before deark
+  Then add a 'parted.js' program that will chain each result to dexvert[asFormat:archive/rawPartition]
+  Then add that parted converter to iso.js as the last final converter to try (only for HFS?)
+  I should try this 'parted <file> print' trick with other ISOs I couldn't handle, see below for a bit list of them
+  NOTE: This one also didn't work: https://dev.discmaster2.textfiles.com/admin/item?itemid=17778
+        LIKELY same cause, so probably could work after I do the above work
+
+* Try and get this to not be converted as a GEM image. Seems maybe ffmpeg is too loosey goosey:
+  https://dev.discmaster2.textfiles.com/view/17924/SVM%20Mac%20CD-ROM%20-%20No%2008.iso/Les%20tr%C3%A9sors%20du%20CD-ROM/Les%20tr%C3%A9sors%20du%20domaine%20public/%20%E2%80%A2%20Le%20coin%20des%20lecteurs/DEMO%20TURBOLOTO%E2%84%A2%202.0/Bulletins/Multiple%2010%20Num%C3%A9ros?hex
+
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
 
@@ -39,27 +57,7 @@
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
-* Adopt Game-Viewer program (try in win2k, otherwise probably win7): https://game-viewer.org/download.php
-  Use it with plugins: https://game-viewer.org/plugin.php?id=90
-  To view resources *.gfx:
-  	https://dev.discmaster2.textfiles.com/browse/11205/Gamer%20Collector%203:%20Action.iso/FUGA_192/data/plate-forme/Gold%20Miner%20Joe/GoldMiner.exe/%23setuppath%23/Graphics
-	https://dev.discmaster2.textfiles.com/browse/11534/Igromania_02.iso/Demos/Marbles_Deluxe/marbles.rar/marbles.exe/%7Bapp%7D/Graphics
-	https://dev.discmaster2.textfiles.com/browse/11546/Igromania_02.ISO/Funnies/DigiPool/digi_pool_trial.exe/%7Bapp%7D/Graphics
-	https://dev.discmaster2.textfiles.com/browse/11547/Igromania_04.ISO/Funnies/SuperstarChefs/InstallSuperstarChefs.exe/%25MAINDIR%25/product/Graphics
-	https://dev.discmaster2.textfiles.com/view/15626/PCM_0202.iso/media/igre/marbles.exe/%7Bapp%7D/Graphics/Sprites.gfx
-  Then look at other formats it supports:
-	https://game-viewer.org/games.php
-	https://game-viewer.org/plugins.php
-  I don't think it has an 'identification' capability, so I'd have to handle that on the dexvert side
-
-* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
-  Maybe see if I can just 'run' them and install to c:\out or something
-
-* Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
-
 * See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools
-
-* See why image/paintDotNetImage format fails
 
 
 /-----------------\
@@ -90,30 +88,6 @@
 	00076D20
 	00078C80
 
-* image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
-  It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
-  Perhaps get deark to add support for this format.
-
-* Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
-  I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
-  But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
-
-* Now that Print to File/PDF works better, should now be able to support:
-  document/greenstreetPublisher (Open in win2k (or winxp) with Publishing Suite 99)
-
-* Add POVRAY rendering support (see the extensive notes in povRay.js)
-  Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
-  Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
-* Add moRay support. See format moRay.js for notes
-
-* InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything.
-  For example CABS from: https://archive.org/details/250TCF
-  They take up 653MB of space but only 62MB is extracted.
-  Possible options: https://community.flexera.com/t5/InstallShield-Knowledge-Base/Installshield-Setup-exe-Command-Line-Parameters/ta-p/4270
-  Or maybe try installing Install Shield authoring itself to see if I can open them or build an extractor or something:
-	https://archive.org/details/install-shield-6.2-pro-std.-7z
-	https://archive.org/details/installshield1150premier
-
 * ISOs I was unable to process:
 	These don't convert for some reason, they both appear to be Mac CDs
 		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
@@ -127,6 +101,50 @@
 		https://archive.org/details/LionShare
 		https://archive.org/details/cdrom-megabytemonster
 		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
+
+* image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
+  It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
+  Perhaps get deark to add support for this format.
+
+* Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
+
+* Adopt Game-Viewer program (try in win2k, otherwise probably win7): https://game-viewer.org/download.php
+  Use it with plugins: https://game-viewer.org/plugin.php?id=90
+  To view resources (Retro64 / ArcadeLab game graphics data) *.gfx:
+  	https://dev.discmaster2.textfiles.com/browse/11205/Gamer%20Collector%203:%20Action.iso/FUGA_192/data/plate-forme/Gold%20Miner%20Joe/GoldMiner.exe/%23setuppath%23/Graphics
+	https://dev.discmaster2.textfiles.com/browse/11534/Igromania_02.iso/Demos/Marbles_Deluxe/marbles.rar/marbles.exe/%7Bapp%7D/Graphics
+	https://dev.discmaster2.textfiles.com/browse/11546/Igromania_02.ISO/Funnies/DigiPool/digi_pool_trial.exe/%7Bapp%7D/Graphics
+	https://dev.discmaster2.textfiles.com/browse/11547/Igromania_04.ISO/Funnies/SuperstarChefs/InstallSuperstarChefs.exe/%25MAINDIR%25/product/Graphics
+	https://dev.discmaster2.textfiles.com/view/15626/PCM_0202.iso/media/igre/marbles.exe/%7Bapp%7D/Graphics/Sprites.gfx
+	https://dev.discmaster2.textfiles.com/browse/17795/macaddict112.cdr/Software/Fun%20&%20Games/Marbles%20Deluxe.dmg/Marbles%20Deluxe%20%C6%92/Worlds
+  Then look at other formats it supports:
+	https://game-viewer.org/games.php
+	https://game-viewer.org/plugins.php
+  I don't think it has an 'identification' capability, so I'd have to handle that on the dexvert side
+
+* Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
+  I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
+  But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
+
+* Now that Print to File/PDF works better, should now be able to support:
+  document/greenstreetPublisher (Open in win2k (or winxp) with Publishing Suite 99)
+
+* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
+  I of course would need to properly identify them as something I can work with, don't see an easy way to do that.
+  Maybe see if I can just 'run' them and install to c:\out or something
+
+* Add POVRAY rendering support (see the extensive notes in povRay.js)
+  Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
+  Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
+* Add moRay support. See format moRay.js for notes
+
+* InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything.
+  For example CABS from: https://archive.org/details/250TCF
+  They take up 653MB of space but only 62MB is extracted.
+  Possible options: https://community.flexera.com/t5/InstallShield-Knowledge-Base/Installshield-Setup-exe-Command-Line-Parameters/ta-p/4270
+  Or maybe try installing Install Shield authoring itself to see if I can open them or build an extractor or something:
+	https://archive.org/details/install-shield-6.2-pro-std.-7z
+	https://archive.org/details/installshield1150premier
 
 * Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within

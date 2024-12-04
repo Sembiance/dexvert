@@ -14,7 +14,7 @@ export class gif extends Format
 		// app specific
 		"Mac PageMill's GIF bitmap (MacBinary)", "Fractint saved bitmap", "Fractint Continuous Potential Image"
 	];
-	idMeta       = ({macFileType}) => ["GIFf", "GIFF", "GIF "].includes(macFileType);
+	idMeta       = ({macFileType}) => ["GIFf", "GIFF", "GIF ", "gif "].includes(macFileType);
 	untouched    = r => r.meta.width && r.meta.height;		// if we were able to get our image meta info, then we are a valid GIF and should leave it alone
 	metaProvider = ["image", "gifsicle_info"];
 

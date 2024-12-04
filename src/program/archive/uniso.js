@@ -50,5 +50,5 @@ export class uniso extends Program
 
 		return Object.assign(r.meta, meta);
 	};
-	renameOut  = false;
+	renameOut = false;
 }

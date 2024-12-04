@@ -19,7 +19,7 @@ export class html extends Format
 	];
 	weakMagic        = true;
 	trustMagic       = true;
-	idMeta           = ({macFileType, macFileCreator}) => macFileType==="html" && macFileCreator==="html";
+	idMeta           = ({macFileType, macFileCreator}) => (macFileType==="html" && macFileCreator==="html") || (macFileType==="HTML" && macFileCreator==="MOSS");
 	confidenceAdjust = () => -10;	// Reduce by 10 since our magic is pretty weak, this allows other text formats that are less weak to match first, such as text/awk for sample text/awk/mib2html.awk
 	untouched        = true;
 	metaProvider     = ["text"];

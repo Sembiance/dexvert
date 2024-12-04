@@ -15,6 +15,9 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 	`USE=minimal emerge -1 libsndfile`,
 	`emerge -1 glibc`,	// to pick up on patch
 	`emerge --noreplace ${[
+		// need the non-bin version of rust for (I forget what program, but I know it has to do with web assembly patch I do on the source)
+		"dev-lang/rust",
+
 		// uniconvertor
 		"media-gfx/libimagequant",
 

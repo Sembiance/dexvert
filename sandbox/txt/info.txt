@@ -1,3 +1,18 @@
+/----------------\
+| Stop Dexdrones |
+\----------------/
+* Click 'pause processing' on discmaster2 admin
+
+* Stop dexdaemon with Ctrl-C in screen session on sembiance@sembiance so it doesn't start restarting dexServers
+
+* For each dexdrone server as root:
+pgrep -f "dexrecurse" | xargs kill
+su - sembiance
+stopDexserver
+exit
+rm -rf /mnt/dexdrone/* /mnt/dexvert/recurse/*
+reboot
+
 /---------------------------\
 | App Updates (Non-Portage) |
 \---------------------------/
@@ -7,7 +22,7 @@ bin/zztScreenshotter			2020-03-17		https://github.com/DrDos0016/zookeeper
 bin/activemime-format			2019-05-20		https://github.com/idiom/activemime-format
 bin/amiga-bitmap-font-tools		2023-02-03		https://github.com/smugpie/amiga-bitmap-font-tools
 bin/soundFont2tomid				2023-10-07		https://github.com/grimmdude/MidiWriterJS
-
+bin/hfsexplorer					2024-12-03		https://github.com/unsound/hfsexplorer
 
 
 /------------------------------------\

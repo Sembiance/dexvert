@@ -17718,15 +17718,18 @@ xyz:	RPG Maker
   cnm        Arxel Tribe CNM
   crh-de     Dark Earth CRH
   crh-nc     Nightmare Creatures CRH
+  cydonia    Cydonia Paco
   defcon5    Defcon 5 video
   dkanim     DK animation
   dpeg       DPEG
   duck-uqm   TrueMotion video for 3DO version of SC2
+  etv        Hercules ETV
   fla        Little Big Adventure FLA
   flh        Conquest Earth FLH
   fli        FLIC
   guilty     Innocent Until Caught 1/2 cutscenes
   h2o        The Pandora Directive video
+  haf        Death Rally HAF
   hl-fmv     Highlander cutscenes
   imx        Fable video
   jam        JAM video
@@ -17741,15 +17744,21 @@ xyz:	RPG Maker
   nl-fmv     Nightlong FMV (320x180)
   nl-fmv2    Nightlong FMV2 (640x360)
   nxl        The Lawnmower Man NXL
+  paco       PACo
   ph         Total Multimedia PH video
   pmv        Infocom PMV
   ptf        Under a Killing Moon PTF
+  q          Legend Entertainment Q
   qrac-fmv   Network Q RAC Rally FMV
+  ratvid     Ratvideo
+  rbt        Sierra robot
   rlf        Zork RLF
+  sdv        Stardock video
   talisman   Talisman animation
   tvi        Terminal Velocity video
   umv-afraid Are You Afraid of the Dark UMV
   umv-dracula Dracula Unleashed UMV
   vdo        Harrow Media VDO
   vpx1       reLINE VPX1
+  vx         Actimagine VX
   xanth      Companions of Xanth cutscenes

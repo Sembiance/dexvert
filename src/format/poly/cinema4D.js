@@ -6,6 +6,7 @@ export class cinema4D extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/C4D";
 	ext        = [".c4d", ".mc4d"];
 	magic      = ["IFF Cinema 4D file", "IFF data, MC4D MaxonCinema4D rendering", "Maxon Cinema 4D scene", "CINEMA 4D model", "Cinema 4D XML", /^fmt\/(415|540|1180)( |$)/];
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="C4DC" && macFileCreator==="C4D1";
 	converters = dexState =>
 	{
 		const r = [];

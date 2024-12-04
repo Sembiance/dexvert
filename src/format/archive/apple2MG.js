@@ -7,5 +7,6 @@ export class apple2MG extends Format
 	ext            = [".2mg"];
 	forbidExtMatch = true;
 	magic          = ["2IMG Universal Format disk image", "Apple ][ 2IMG Disk Image"];
+	idMeta         = ({macFileType}) => macFileType==="2img";
 	converters     = ["cadius", "acx"];
 }

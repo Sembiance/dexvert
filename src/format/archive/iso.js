@@ -159,6 +159,19 @@ export class iso extends Format
 
 			subState =>
 			{
+				// some mac ISOs have multiple partitions in them but only 1 partition is an HFS partition and to extract correctly I need to manually specify which one to hfsexplorer (MacAddict_068_2002_04.iso)
+				if(!dexState.hasMagics(HFS_MAGICS) || subState.f.files?.output?.length)
+					return [];
+
+				const firstHFSPartition = (dexState.meta?.parted?.partitions || []).find(o => o.filesystem==="hfs");
+				if(!firstHFSPartition)
+					return [];
+
+				return [`hfsexplorer[partition:${firstHFSPartition.number-1}][subOutDir:dexvert_mac]`];
+			},
+
+			subState =>
+			{
 				const r = [];
 				if(dexState.hasMagics(MFS_MAGICS))
 					r.push("aaru");
@@ -225,7 +238,7 @@ export class iso extends Format
 			cueFile = await findCUEFile(dexState);
 		}
 
-		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info", "fuseTree"].parallelMap(async programid =>
+		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info", "fuseTree", "parted"].parallelMap(async programid =>
 		{
 			const infoR = await Program.runProgram(programid, inputFile, {xlog, autoUnlink : true});
 			return [programid.split("_")[0], infoR.meta];

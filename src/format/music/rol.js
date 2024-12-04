@@ -10,7 +10,7 @@ export class rol extends Format
 	name         = "AdLib/Roland Song";
 	website      = "http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song";
 	ext          = [".rol"];
-	magic        = ["AdLib Visual Composer music"];
+	magic        = ["AdLib Visual Composer music", /^AdLib Visual Composer ROL file/];
 	notes        = "Couldn't convert GIRLIPEN.ROL for some reason";
 	keepFilename = true;
 

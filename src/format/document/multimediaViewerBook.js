@@ -6,6 +6,6 @@ export class multimediaViewerBook extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book";
 	ext        = [".mvb", ".hlp"];
 	weakExt    = [".hlp"];
-	magic      = ["Multimedia Viewer Book", /^fmt\/1800( |$)/];
+	magic      = ["Multimedia Viewer Book", /^fmt\/1800( |$)/, /^MS Windows Multimedia Viewer Book/];
 	converters = ["unHLPMVB[extractExtra]"];
 }

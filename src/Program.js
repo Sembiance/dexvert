@@ -149,20 +149,20 @@ export class Program
 			r.mirrorInToCWD = true;
 		}
 
-		if(this.pre)
-			await this.pre(r);
-
-		const getBin = async () => (typeof this.bin==="function" ? await this.bin(r) : this.bin);
-		const getArgs = async () => (this.args ? await this.args(r) : []).map(arg => arg.toString());
-
-		if(this.exclusive)
-		{
-			xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
-			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
-		}
-
 		try
 		{
+			if(this.pre)
+				await this.pre(r);
+
+			const getBin = async () => (typeof this.bin==="function" ? await this.bin(r) : this.bin);
+			const getArgs = async () => (this.args ? await this.args(r) : []).map(arg => arg.toString());
+
+			if(this.exclusive)
+			{
+				xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
+				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
+			}
+
 			if(this.exec)
 			{
 				// run arbitrary javascript code

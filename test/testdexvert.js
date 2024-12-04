@@ -496,6 +496,10 @@ const DISK_FAMILY_FORMAT_MAP =
 // These are sensitive files that sometimes convert, sometimes don't
 const ALLOW_PROCESS_FAILURES =
 {
+	archive :
+	{
+		xpackLZCOMPacked : ["PC (1).COM"]
+	},
 	document :
 	{
 		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"]

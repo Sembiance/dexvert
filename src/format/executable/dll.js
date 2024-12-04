@@ -13,7 +13,7 @@ export class dll extends Format
 	forbiddenExt = [".exe"];
 	magic        = [
 		// general DLL type
-		"Win32 Dynamic Link Library", "PE32 executable (DLL)", "PE32+ executable (DLL)", /^MS-DOS executable, NE for MS Windows .*\(DLL or font\)/, "PE Unknown PE signature 0 (DLL)",
+		"Win32 Dynamic Link Library", /^(MS-DOS executable|PE32\+?).*\(DLL( or font)?\)/, "PE Unknown PE signature 0 (DLL)",
 		"OLE Custom / ActiveX Control", "OLE Custom Control",
 
 		// specific DLL types

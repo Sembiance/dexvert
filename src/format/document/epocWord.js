@@ -6,6 +6,6 @@ export class epocWord extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/EPOC_Word";
 	ext            = [".wrd", ".psi"];
 	forbidExtMatch = true;
-	magic          = ["Psion Series 5 Word file", "EPOC Word document", "Psion Serie 5/EPOC Word document"];
+	magic          = ["Psion Series 5 Word file", "EPOC Word document", "Psion Serie 5/EPOC Word document", /^Psion Series 5 Record file Word file/];
 	converters     = ["psiconv"];
 }

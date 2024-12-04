@@ -117,7 +117,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 		const homeFilePath = await fileUtil.genTempPath(cwd, "home");
 		await Deno.mkdir(homeFilePath, {recursive : true});
 		
-		// create the files needed for java to work (needed for program acx (AppleCommander) to work)	NOTE: This used to be explicitly java-17, but I think it's safe to just use the latest java config
+		// create the files needed for java to work (needed for program acx (AppleCommander) to work and also hfsexplorer)	NOTE: This used to be explicitly java-17, but I think it's safe to just use the latest java config (version checking to be improved)
 		await Deno.mkdir(path.join(homeFilePath, ".gentoo", "java-config-2"), {recursive : true});
 		const latestJavaConfigNum = (await fileUtil.tree("/usr/lib/jvm", {depth : 1})).map(v => +v.split("-").at(-1)).sortMulti().at(-1);
 		await Deno.symlink(`/usr/lib/jvm/openjdk-bin-${latestJavaConfigNum}`, path.join(homeFilePath, ".gentoo", "java-config-2", "current-user-vm"));

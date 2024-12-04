@@ -22,6 +22,8 @@
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
 
+* Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
+  It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
 
 /---------------\
 | High Priority |

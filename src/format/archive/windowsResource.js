@@ -6,7 +6,7 @@ export class windowsResource extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Windows_resource";
 	ext            = [".res"];
 	forbidExtMatch = true;
-	magic          = ["MSVC .res", "Windows compiled resource", "Windows Resourcedatei"];
+	magic          = ["MSVC .res", "Windows compiled resource", "Windows Resourcedatei", /^Microsoft .*binary resource file$/];
 	notes          = "There is probably a better way to open these, maybe visual studio?";
 	converters     = ["totalCommander", "resourceHacker", "strings[matchType:magic]"];	// converter after resourceHacker was resourceEditor but it's not working right now
 }

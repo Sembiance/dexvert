@@ -8,7 +8,10 @@ export class pict extends Format
 	ext            = [".pict", ".pic", ".pct"];
 	forbidExtMatch = true;	// way too common
 	mimeType       = "image/pict";
-	magic          = ["QuickDraw/PICT", "Macintosh Quickdraw/PICT", "Claris clip art", "Claris CAD drawing", "Macintosh Pict image (MacBinary)", "Mac PICT bitmap", "image/x-pict", "piped qdraw sequence (qdraw_pipe)", /^fmt\/341( |$)/, /^x-fmt\/80( |$)/];
+	magic          = [
+		"QuickDraw/PICT", "Macintosh Quickdraw/PICT", "Claris clip art", "Claris CAD drawing", "Macintosh Pict image (MacBinary)", "Mac PICT bitmap", "image/x-pict", "piped qdraw sequence (qdraw_pipe)",
+		/^Macintosh QuickDraw PICT/, /^fmt\/341( |$)/, /^x-fmt\/80( |$)/
+	];
 	idMeta         = ({macFileType}) => macFileType==="PICT";
 	alwaysIdentify = true; // Always identify this format, even if explicitly called with asFormat image/pict, this way the matchType:magic flags below will properly apply.
 	metaProvider   = ["image"];

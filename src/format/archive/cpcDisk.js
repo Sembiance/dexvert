@@ -7,5 +7,6 @@ export class cpcDisk extends Format
 	ext            = [".dsk"];
 	forbidExtMatch = true;
 	magic          = ["Standard CPCEMU style disk image", "Extended CPCEMU style disk image", "Amstrad/Spectrum Extended .DSK data", "CPCEMU Disk image format", "Amstrad/Spectrum .DSK data"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="cDSK" && macFileCreator==="CPC+";
 	converters     = ["cpcxfs", "amstradDSKExplorer"];
 }

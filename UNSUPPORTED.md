@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,888)
+# Unsupported File Formats (2,892)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (233)
+## Archive (234)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -188,6 +188,7 @@ Family/Format | Name | Extensions | Notes
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?formatid=rohitCompressedData) | Rohit compressed data | .tsi | 
 [archive/rsCompressedArchive](https://discmaster.textfiles.com/search?formatid=rsCompressedArchive) | RS compressed archive |  | 
 [archive/sabDisketteUtilityDiskImage](https://discmaster.textfiles.com/search?formatid=sabDisketteUtilityDiskImage) | SAB Diskette Utility disk image | .sdu | Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh.
+[archive/scrambPacked](https://discmaster.textfiles.com/search?formatid=scrambPacked) | Scramb Packed | .exe | 
 [archive/secureProtected](https://discmaster.textfiles.com/search?formatid=secureProtected) | SECURE Protected | .exe | 
 [archive/setupMVA](https://discmaster.textfiles.com/search?formatid=setupMVA) | Setup Program Archive | .mva .mvb | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?formatid=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
@@ -991,7 +992,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,820)
+## Other (1,823)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2192,6 +2193,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcLabelLabel](https://discmaster.textfiles.com/search?formatid=pcLabelLabel) | PC-Label Label | .lbl | 
 [other/pcTalkIIIData](https://discmaster.textfiles.com/search?formatid=pcTalkIIIData) | PC-Talk III data | .dir | 
 [other/pcAnywhere](https://discmaster.textfiles.com/search?formatid=pcAnywhere) | PCAnywhere Data | .bhf | 
+[other/pcbBinaryFile](https://discmaster.textfiles.com/search?formatid=pcbBinaryFile) | PCB Binary file | .pcb | 
 [other/pcbLayout](https://discmaster.textfiles.com/search?formatid=pcbLayout) | PCB Layout | .ly | 
 [other/pcpArchiveIndex](https://discmaster.textfiles.com/search?formatid=pcpArchiveIndex) | PCP archive index | .index | 
 [other/pcpArchiveLog](https://discmaster.textfiles.com/search?formatid=pcpArchiveLog) | PCP archive log | .0 | 
@@ -2336,6 +2338,8 @@ Family/Format | Name | Extensions | Notes
 [other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?formatid=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 
 [other/reportSmithReport](https://discmaster.textfiles.com/search?formatid=reportSmithReport) | ReportSmith report | .rpt | 
 [other/retro64GameData](https://discmaster.textfiles.com/search?formatid=retro64GameData) | Retro64 game data | .wld | 
+[other/reunionAnimation](https://discmaster.textfiles.com/search?formatid=reunionAnimation) | Reunion Animation | .ani | 
+[other/reunionGraphics](https://discmaster.textfiles.com/search?formatid=reunionGraphics) | Reunion graphics | .pic | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?formatid=rfFlowDiagram) | RFFlow Diagram | .flo | 
 [other/rHIDEProject](https://discmaster.textfiles.com/search?formatid=rHIDEProject) | RHIDE Project | .gpr | 
 [other/richMapFormat](https://discmaster.textfiles.com/search?formatid=richMapFormat) | Rich Map Format | .rmf | 
@@ -2538,7 +2542,7 @@ Family/Format | Name | Extensions | Notes
 [other/tiCalcExpression](https://discmaster.textfiles.com/search?formatid=tiCalcExpression) | Texas Instruments Calculator Expression | .89e .89z | 
 [other/tiCalcFigure](https://discmaster.textfiles.com/search?formatid=tiCalcFigure) | Texas Instruments Calculator Figure | .92a | 
 [other/tiCalcFunction](https://discmaster.textfiles.com/search?formatid=tiCalcFunction) | Texas Instruments Calculator Function | .9xf .92f .89f | 
-[other/tiCalcGraphicDB](https://discmaster.textfiles.com/search?formatid=tiCalcGraphicDB) | Texas Instruments Calculator Graphic DB | .82d .83d .8xd .86d .89d | 
+[other/tiCalcGraphicDB](https://discmaster.textfiles.com/search?formatid=tiCalcGraphicDB) | Texas Instruments Calculator Graphic DB | .82d .83d .85d .8xd .86d .89d | 
 [other/tiCalcMatrix](https://discmaster.textfiles.com/search?formatid=tiCalcMatrix) | Texas Instruments Calculator Matrix | .9xm .86m .89m | 
 [other/tiCalcString](https://discmaster.textfiles.com/search?formatid=tiCalcString) | Texas Instruments Calculator String | .9xs .9xy .89s | 
 [other/tiCalcZipped](https://discmaster.textfiles.com/search?formatid=tiCalcZipped) | Texas Instruments Calculator Zipped | .9xy .89y | 

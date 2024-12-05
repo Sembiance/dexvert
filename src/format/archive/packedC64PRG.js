@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class packedC64PRG extends Format
 {
 	name           = "Packed C64 PRG";
-	magic          = ["P64 "];
+	magic          = ["P64 ", "8bit C64 executable Pu-Crunch compressed", /^Commodore C64 program, probably PUCrunch archive data/];
 	forbiddenMagic = [
 		"P64 Guessed", "P64 NRZI flux pulse disk image",
 		

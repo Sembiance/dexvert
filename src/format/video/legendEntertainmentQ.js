@@ -7,6 +7,6 @@ export class legendEntertainmentQ extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q";
 	ext            = [".q"];
 	forbidExtMatch = true;
-	magic          = ["Mission Critical video/animation"];
+	magic          = ["Mission Critical video/animation", "Shannara video/animation"];
 	converters     = ["na_game_tool[format:q]"];
 }

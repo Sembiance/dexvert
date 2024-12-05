@@ -158,6 +158,10 @@ const IGNORED_META_KEYS =
 		jpg : ["driOffset", "driCount"],
 		jng : ["colorCount"],
 		pes : ["colorCount"]
+	},
+	text :
+	{
+		bitTorrentFile : ["charSet"]
 	}
 };
 
@@ -361,6 +365,7 @@ const FLEX_DIFF_FILES =
 	/archive\/rsrc\/Speedometer 4\.02\.rsrc$/,
 
 	// this archive is corrupted and differing stuff is extracted each time
+	/archive\/sapThomsonDiskImage\/TURBOCUP\.SAP$/,
 	/archive\/rsrc\/MoviePlayer\.rsrc$/,
 	
 	// sometimes various .as scripts are exatracted, sometimes not
@@ -395,6 +400,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
+	[/document\/hlp\/qtim\.dll$/, "document", "multimediaViewerBook"],
 	[/document\/wordDocDOS\/.+\.(DOC|doc|MSW)$/, "document", "wri"],
 	[/document\/wordDocDOS\/horse$/, "document", "wri"],
 	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],

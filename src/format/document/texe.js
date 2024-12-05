@@ -10,5 +10,5 @@ export class texe extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = _TEXE_MAGIC;
-	converters     = ["textract"];
+	converters     = ["deark[module:texe][opt:text:encconv=0]", "textract"];
 }

@@ -5,6 +5,6 @@ export class neutralFileFormat extends Format
 	name       = "Neutral File Format";
 	website    = "http://fileformats.archiveteam.org/wiki/NFF";
 	ext        = [".nff"];
-	magic      = ["Neutral ASCII File Format"];
+	magic      = ["Neutral ASCII File Format", "Haines NFF scene"];
 	converters = ["assimp", "threeDObjectConverter"];
 }

@@ -7,5 +7,5 @@ export class doc2comGerald extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	magic          = ["DOC2COM (Gerald DePyper)"];
-	converters     = ["deark[module:doc2com]"];
+	converters     = ["deark[module:doc2com][opt:text:encconv=0]"];
 }

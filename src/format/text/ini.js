@@ -25,7 +25,7 @@ export class ini extends Format
 		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, "KDevelop Project", "Xcode perspective",
 		"Zilog Developer Studio II Workstate", "IBM i Access Client Poppad", "IBM i (Client) Access Keyboard Map", "IBM iSeries Client Access WorkStation profile", "Microsoft Zone Identifier", "Citrix Independent Computer Architecture", "Steem Patch",
 		/^Altium Designer ((integrated Library Package)|Project|Workspace)/, "TeXnicCenter Project", "application/x-kourse", "application/x-kolf", "Photofinish Calibration Map (v1.00)", "Grand Theft Auto 2 Multiplayer Map Metadata", "mIRC Theme",
-		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)", "Photofinish Output Device info", "Microsoft Project settings (v1.0)", "Atlantis Word Processor SpellCheck settings", "DemoShield project", "Yape configuration",
+		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)", "Photofinish Output Device info", "Microsoft Project settings (v1.0)", "Atlantis Word Processor SpellCheck settings", "DemoShield project", "Yape configuration", "VICE settings",
 		"NLMSX machine configuration", "FL Studio Speech Preset", "FL Studio Dashboard component Initializaton", "Zero-X Color scheme", "FL Keys Initialization", "SkyOS Installation File",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];

@@ -16,14 +16,9 @@
   NOTE: This one also didn't work: https://dev.discmaster2.textfiles.com/admin/item?itemid=17778
         LIKELY same cause, so probably could work after I do the above work
 
-* Try and get this to not be converted as a GEM image. Seems maybe ffmpeg is too loosey goosey:
-  https://dev.discmaster2.textfiles.com/view/17924/SVM%20Mac%20CD-ROM%20-%20No%2008.iso/Les%20tr%C3%A9sors%20du%20CD-ROM/Les%20tr%C3%A9sors%20du%20domaine%20public/%20%E2%80%A2%20Le%20coin%20des%20lecteurs/DEMO%20TURBOLOTO%E2%84%A2%202.0/Bulletins/Multiple%2010%20Num%C3%A9ros?hex
-
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
 
-* Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
-  It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
 
 /---------------\
 | High Priority |
@@ -62,9 +57,13 @@
 * See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools
 
 
+
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
+  It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
+
 * Look into why these 2 files fail (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip

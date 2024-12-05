@@ -50,6 +50,7 @@ export class file extends Program
 		[
 			[["Apollo", "dBase", "FoxBase", "Visual FoxPro", "VISUAL OBJECTS", "xBase"], ["DBF", "MDX", "DataBaseContainer"]],
 			["BIOS", "device="],
+			["COFF", "for "],
 			[["Mach-O", "] ["], ["armv7", "bundle", "current ar", "executable", "dSYM", "dynamic linker", "dynamically linked", "fixed", "hppa", "i386", "i486", "kext", "object", "m68k", "ppc", "preload", "SPARC", "x86"]],
 			["PGP symmetric key encrypted data", "salted"],
 			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]],
@@ -66,7 +67,7 @@ export class file extends Program
 		r.xlog.trace`B fileText:\n${fileText}`;
 
 		// Prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
-		for(const prefix of ["at byte", "block device driver", "filetype=", "last modified", "of \\d+ bytes", "to extract,", "version \\d", `[;:)(\\]["']`])
+		for(const prefix of ["at byte", "block device driver", "COFF", "filetype=", "last modified", "of \\d+ bytes", "to extract,", "version \\d", `[;:)(\\]["']`])
 			fileText = fileText.replace(new RegExp(`\n-  ?(${prefix})`, "g"), " $1");
 		r.xlog.trace`C fileText:\n${fileText}`;
 

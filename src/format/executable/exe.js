@@ -46,6 +46,7 @@ export class exe extends Format
 
 		..._INSTALLER_MAGICS
 	];
+	weakMagic = ["DOS Executable"];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 
@@ -57,7 +58,6 @@ export class exe extends Format
 	};
 
 	// We throw MSDOS/Win EXESs at various programs to try and get something useful out of them like embedded director files, cursors, icons, images, etc
-	// Could also 'decompress' packed EXEs by adding "deark[module:exepack]" but that doesn't really provide us with any actual content, so meh.
 	converters = dexState =>
 	{
 		if(!Object.keys(dexState.meta).length)

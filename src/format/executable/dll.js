@@ -13,7 +13,7 @@ export class dll extends Format
 	forbiddenExt = [".exe"];
 	magic        = [
 		// general DLL type
-		"Win32 Dynamic Link Library", /^(MS-DOS executable|PE32\+?).*\(DLL( or font)?\)/, "PE Unknown PE signature 0 (DLL)",
+		"Win32 Dynamic Link Library", /^(MS-DOS executable|PE32\+?).*\(DLL( or font)?\)/, "PE Unknown PE signature 0 (DLL)", /^PE with unknown.* \(DLL\)/,
 		"OLE Custom / ActiveX Control", "OLE Custom Control",
 
 		// specific DLL types
@@ -46,7 +46,7 @@ export class dll extends Format
 			"sevenZip[type:PE][rsrcOnly]",
 			"deark[module:exe]"] : []);
 	};
-	post  = dexState =>
+	post = dexState =>
 	{
 		if(Object.keys(dexState.meta).length>0)
 			dexState.processed = true;

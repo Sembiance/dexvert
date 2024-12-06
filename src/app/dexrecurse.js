@@ -31,6 +31,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 
 	// names have to be generic/specific, so can't have more files in the same samples directory
 	"archive/installShieldCAB",
+	"archive/sarArchive",
 	"font/riscOSFont",
 	"other/desktopDB",
 	"other/desktopDF",

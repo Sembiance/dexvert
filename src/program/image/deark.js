@@ -195,8 +195,11 @@ export class deark extends Program
 
 	verify = (r, dexFile) =>
 	{
-		// ZSQ is a little loosey goosey with it's magic, so we have to check the output to make sure it's valid
-		if(r.stdout.includes("Module: zsq") && r.stdout.includes("Checksum error. Decompression probably failed"))
+		// These modules are a little loosey goosey with it's magic, so we have to check the output to make sure it's valid
+		if(Object.entries({
+			tinystuff : "Warning: Expected file size to be",
+			zsq       : "Checksum error. Decompression probably failed"
+		}).some(([module, message]) => r.stdout.includes(`Module: ${module}`) && r.stdout.includes(message)))
 			return false;
 
 		// Deark's newprintshop module can convert almost any file into a bunch of garbage. So if that was used with anything other than a .pog, nothing from it is worth keeping

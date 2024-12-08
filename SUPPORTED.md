@@ -1,4 +1,4 @@
-# Supported File Formats (2,786)
+# Supported File Formats (2,787)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -323,7 +323,7 @@ archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak 
 archive | [Quantum Archive](http://fileformats.archiveteam.org/wiki/Quantum_compressed_archive) | .pak .q | [unpaq](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/quantum/)
 archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/wiki/QIP_(Quarterdeck)) | .qip | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/quarterdeckInstallationPacakge/)
 archive | [Quasijarus Strong Compressed](http://fileformats.archiveteam.org/wiki/Quasijarus_Strong_Compression) | .z | [ancient](https://github.com/temisu/ancient_format_decompressor) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/quasijarus/)
-archive | Raw Partition | .raw .hd .img .vhd | [uniso](https://github.com/Sembiance/dexvert/) [sevenZip](http://p7zip.sourceforge.net/) | [24 sample files](https://sembiance.com/fileFormatSamples/archive/rawPartition/)
+archive | Raw Partition | .raw .hd .img .vhd | [uniso](https://github.com/Sembiance/dexvert/) [aaru](https://github.com/aaru-dps/Aaru) [sevenZip](http://p7zip.sourceforge.net/) | [25 sample files](https://sembiance.com/fileFormatSamples/archive/rawPartition/)
 archive | RDT Compressor Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/rdtCompressorPacked/)
 archive | Reality Bytes game archive | .rbd | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realityBytesGameArchive/)
 archive | [Red Hat Package Manager Archive](http://fileformats.archiveteam.org/wiki/RPM) | .rpm | [deark](https://entropymine.com/deark/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rpm/)
@@ -494,7 +494,7 @@ audio | [MPEG ADTS Layer II](http://fileformats.archiveteam.org/wiki/MPEG_Audio_
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 .mpga .mpg |  | [8 sample files](https://sembiance.com/fileFormatSamples/audio/mp3/)
 audio | [Musepack Audio](http://justsolve.archiveteam.org/wiki/Musepack_Audio) | .mpc .mp+ .mpp | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/musepack/)
 audio | Need for Speed: Underground audio | .abk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedUndergroundAudio/)
-audio | NIST Sphere Audio | .sd | [sox](http://sox.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/nistSphere/)
+audio | NIST Sphere Audio | .sd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/nistSphere/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/ogg/)
 audio | [Opus Audio](http://fileformats.archiveteam.org/wiki/Opus) | .opus | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/opus/)
 audio | [PhotoCD Audio](http://fileformats.archiveteam.org/wiki/Photo_CD_Audio) | .pcd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/photoCDAudio/) - Some files are CDDA (audio06.pcd) but others are some sort of raw, which default to above (audio54.pcd)
@@ -1829,7 +1829,7 @@ other | Microsoft Visual C/C++ Precompiled Header file | .pch .dbg | [strings](h
 other | Microsoft WinCE Install Header | .000 | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/msWinCEInstallHeader/)
 other | Microsoft Windows Help File Content | .cnt | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/windowsHelpFileContent/)
 other | MicroStation Resource Data | .dat .ma | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/microStationResource/)
-other | [MIDI Instrument Definition File](http://fileformats.archiveteam.org/wiki/MIDI_Instrument_Definition_File) | .idf | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/other/midiInstrumentDefinitionFile/)
+other | [MIDI Instrument Definition File](http://fileformats.archiveteam.org/wiki/MIDI_Instrument_Definition_File) | .idf | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/other/midiInstrumentDefinitionFile/)
 other | Money Matters Data | .mm | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/moneyMatters/)
 other | MS Visual FoxPro App | .app .fxp | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/other/msVisualFoxProApp/)
 other | NewWord messages Overlay | .ovr | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/other/newWordMessagesOverlay/)
@@ -1957,7 +1957,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (796)
+## Text (797)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2052,7 +2052,7 @@ text | BlueJ Class context | .ctxt |  | [5 sample files](https://sembiance.com/f
 text | BlueJ package | .pkg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/blueJPackage/)
 text | blueMSX Cheats |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/blueMSXCheats/)
 text | blueMSX theme info |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/blueMSXThemeInfo/)
-text | Borland DataBase Explorer Information | .dbi |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/borlandDataBaseExplorerInformation/)
+text | Borland DataBase Explorer Information | .dbi |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/borlandDataBaseExplorerInformation/)
 text | Borland Linker Mapping Data | .map |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/borlandLinkerMappingData/)
 text | Borland Project Group | .bpg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/borlandProjectGroup/)
 text | Borland/MSVC .ide | .ide |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/borlandIDEFile/)
@@ -2107,6 +2107,7 @@ text | Csound unified file format | .csd |  | [4 sample files](https://sembiance
 text | CUETools AccuRip log | .accurip |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cueToolsAccuRipLog/)
 text | CUPL format | .jed .im |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cuplFormat/)
 text | CUPL PLD Program format | .pld |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/cuplPLDProgramFormat/)
+text | CWLS Log | .las |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cwlsLog/)
 text | Dark Reign Scenario | .scn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/darkReignScenario/)
 text | Darwinia level map data | .txt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/darwiniaLevelMapData/)
 text | Darwinia level mission data | .txt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/darwiniaLevelMissionData/)
@@ -2388,7 +2389,7 @@ text | Microsoft VisualStudio Solution User Options | .suo |  | [13 sample files
 text | MilkDrop preset | .milk |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/milkDropPreset/)
 text | MindReader Dictionary | .dic |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mindReaderDictionary/)
 text | MinerVGA sprites Library | .lbr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/minerVGASpritesLibrary/)
-text | Mirrormatic site description | .desc |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/mirrormaticSiteDescription/)
+text | Mirrormatic site description | .desc |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/mirrormaticSiteDescription/)
 text | Mobirise project | .mobirise |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/mobiriseProject/)
 text | Modula Definition | .def |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/modulaDefinition/)
 text | Modula Implementation | .mod |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/modulaImplementation/)
@@ -2476,7 +2477,7 @@ text | [PGP Message](http://fileformats.archiveteam.org/wiki/PGP) |  |  | [13 sa
 text | [PGP Public Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/pgpPublicKey/)
 text | Photogenics Fractal | .f |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/photogenicsFractal/)
 text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps .php3t .tst |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/php/)
-text | phpMyAdmin SQL dump | .sql |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/phpMyAdminSQLDump/)
+text | phpMyAdmin SQL dump | .sql |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/phpMyAdminSQLDump/)
 text | PICS Rating System | .rat |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/picsRatingSystem/)
 text | Picture It! brush definition | .txt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/pictureItBrushDefinition/)
 text | PipeDream document | .pd .pdd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pipeDreamDocument/)
@@ -2617,7 +2618,7 @@ text | SVGAVESA configuration | .svc |  | [17 sample files](https://sembiance.co
 text | T-RackS Preset | .trp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/tRackSPreset/)
 text | TASM instructions definition Table | .tab |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tasmInstructionsDefinitionTable/)
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
-text | Team Developer / SQLWindows application | .apt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/teamDeveloperSQLWindowsAppText/)
+text | Team Developer / SQLWindows application | .apt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/teamDeveloperSQLWindowsAppText/)
 text | Terminate Smartnote | .not |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/terminateSmartnote/)
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
@@ -2834,7 +2835,7 @@ video | [Pray for Death CDA Video](https://wiki.multimedia.cx/index.php/Pray_for
 video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/psygnosisYOP/)
 video | [PTF Video](https://wiki.multimedia.cx/index.php/Flic_Video#Under_a_Killing_Moon_PTF) | .ptf | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/ptfVideo/)
 video | [Quake II Cinematic Video](https://multimedia.cx/mirror/idcin.html) | .cin | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/quake2Cinematic/)
-video | [RATVID/VIDPAK Video](https://wiki.multimedia.cx/index.php/VIDPAK) | .vdo | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/ratvidVideo/)
+video | [RATVID/VIDPAK Video](https://wiki.multimedia.cx/index.php/VIDPAK) | .vdo | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/ratvidVideo/)
 video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv .rmvb .rmf | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/realVideo/)
 video | [RL2 Video](https://wiki.multimedia.cx/index.php/RL2) | .rl2 | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/rl2Video/)
 video | [Sega CPK video](https://wiki.multimedia.cx/index.php/JV) | .cpk .cak .film | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/segaCPKVideo/)

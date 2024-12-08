@@ -360,6 +360,7 @@ export default
 		cueToolsAccuRipLog                       : {name : "CUETools AccuRip log", ext : [".accurip"], magic : ["CUETools AccuRip log"]},
 		cuplFormat                               : {name : "CUPL format", ext : [".jed", ".im"], magic : ["CUPL format"]},
 		cuplPLDProgramFormat                     : {name : "CUPL PLD Program format", ext : [".pld"], magic : ["CUPL PLD Program format"], weakMagic : true},
+		cwlsLog                                  : {name : "CWLS Log", ext : [".las"], magic : ["CWLS Log ASCII Standard", /^fmt\/390( |$)/], weakMagic : true},
 		dataInterchangeFormat                    : {name : "Data Interchange Format", ext : [".dif"], magic : ["Data Interchange Format", /^x-fmt\/41( |$)/], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Data_Interchange_Format"},
 		darkReignScenario                        : {name : "Dark Reign Scenario", ext : [".scn"], magic : ["Dark Reign Scenario"], weakMagic : true},
 		dbaseWindowsFormFile                     : {name : "dBASE Windows Form File", ext : [".mnu", ".wfm"], magic : [/^fmt\/1728( |$)/]},

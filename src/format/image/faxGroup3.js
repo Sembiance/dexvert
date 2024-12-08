@@ -14,5 +14,5 @@ export class faxGroup3 extends Format
 	classify     = true;
 
 	// When it fails, it usually produes a huge/small image (text/txt/SKILLTXT.G3) and authentic ones are almost certain to be smaller than 2500px
-	verify = ({meta}) => meta.height>10 && meta.width>10 && meta.width<2500 && meta.height<2500;
+	verify = ({meta, xlog}) => meta.height>10 && meta.width>10 && meta.width<2500 && meta.height<2500 && (meta.width/meta.height)<15;
 }

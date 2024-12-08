@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,894)
+# Unsupported File Formats (2,897)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (234)
+## Archive (235)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -68,6 +68,7 @@ Family/Format | Name | Extensions | Notes
 [archive/darkstopProtected](https://discmaster.textfiles.com/search?formatid=darkstopProtected) | DaRKSToP Proterctd | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
+[archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?formatid=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | 
 [archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?formatid=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
 [archive/dismemberProtected](https://discmaster.textfiles.com/search?formatid=dismemberProtected) | Dismember EXE CRYPT Protected | .exe | 
 [archive/distributionPackageArchive](https://discmaster.textfiles.com/search?formatid=distributionPackageArchive) | Distribution Package archive | .pac | 
@@ -993,7 +994,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,824)
+## Other (1,826)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1737,6 +1738,7 @@ Family/Format | Name | Extensions | Notes
 [other/hotbarSkin](https://discmaster.textfiles.com/search?formatid=hotbarSkin) | Hotbar skin | .xip | 
 [other/hotDocsComponent](https://discmaster.textfiles.com/search?formatid=hotDocsComponent) | HotDocs Component | .cmp | 
 [other/hotMapRegionsDescription](https://discmaster.textfiles.com/search?formatid=hotMapRegionsDescription) | HotMap VBX Regions Description | .hmd | 
+[other/hoverMazeData](https://discmaster.textfiles.com/search?formatid=hoverMazeData) | Hover! maze data | .maz | 
 [other/hpfsAccessDB](https://discmaster.textfiles.com/search?formatid=hpfsAccessDB) | HPFS-Access DB | .dat | 
 [other/humanMachineInterfacesDriver](https://discmaster.textfiles.com/search?formatid=humanMachineInterfacesDriver) | Human Machine Interfaces Sound Driver | .386 | 
 [other/hyperACCESSOS2Data](https://discmaster.textfiles.com/search?formatid=hyperACCESSOS2Data) | HyperACCESS OS/2 data | .hho | 
@@ -2417,6 +2419,7 @@ Family/Format | Name | Extensions | Notes
 [other/simLifeAnimal](https://discmaster.textfiles.com/search?formatid=simLifeAnimal) | SimLife Animal | .anl | 
 [other/simulmondoLocalizedGameStrings](https://discmaster.textfiles.com/search?formatid=simulmondoLocalizedGameStrings) | Simulmondo localized game strings | .kfr .ksp .kgr .kuk .kit | 
 [other/simutransObjectPackage](https://discmaster.textfiles.com/search?formatid=simutransObjectPackage) | Simutrans object package | .pak | 
+[other/siscadpData](https://discmaster.textfiles.com/search?formatid=siscadpData) | SISCAD-P data | .zra .sfd .red | 
 [other/sKickRelocationTable](https://discmaster.textfiles.com/search?formatid=sKickRelocationTable) | SKick Relocation/patch Table | .rtb | 
 [other/skincrafterSkin](https://discmaster.textfiles.com/search?formatid=skincrafterSkin) | skincrafter skin | .skf | 
 [other/skinMagicSkin](https://discmaster.textfiles.com/search?formatid=skinMagicSkin) | SkinMagic Skin |  | 

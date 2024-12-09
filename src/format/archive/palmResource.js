@@ -6,6 +6,6 @@ export class palmResource extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PRC_(Palm_OS)";
 	ext        = [".prc"];
 	magic      = ["Palm Pilot executable"];
-	idMeta     = ({macFileType, macFileCreator}) => (macFileType==="PRC " && macFileCreator==="PPia") || (macFileType==="Gld0 " && macFileCreator==="Gld1");
+	idMeta     = ({macFileType, macFileCreator}) => (macFileType==="PRC " && ["PPia", "PITT"].includes(macFileCreator)) || (macFileType==="Gld0 " && macFileCreator==="Gld1");
 	converters = ["deark[module:palmdb]"];
 }

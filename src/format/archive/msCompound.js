@@ -18,7 +18,7 @@ export class msCompound extends Format
 		"Easy CD Creator Layout", "Oracle Data base Diagram", "CeledyDraw drawing", "Microsoft Access Wizard template", "Office Binder Document", "Microsoft Access Project", "ASAP Presentation", "Microsoft Clip Art Gallery Catalog", "Samsung document",
 		"Drafix Symbol Library", "WebLab Viewer Molecule", "Camtasia Studio Screen Recording", "Encrypted OLE2 / Multistream Compound File (ECP v1.0)", "Microsoft Visual Studio binary macro project", "Autodesk Inventor Part", "Calendar Creator 5 project",
 		"Calendar Creator 5 ClipArt Archive",
-		/^fmt\/(240|877|916|971|1213|1297|1303|1331|1360|1362|1431|1432|1493|1517|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
+		/^fmt\/(240|877|916|971|1213|1297|1298|1303|1331|1360|1362|1431|1432|1493|1517|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these
 	confidenceAdjust = (input, matchType, curConfidence) => -(curConfidence-40);	// MS Word/Excel files and Thumbs.db are also Compound Documents. Usually archive/* goes first, but let's reduce confidence here so others can go first instead like document/wordDoc

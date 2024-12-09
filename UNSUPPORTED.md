@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,897)
+# Unsupported File Formats (2,901)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -994,7 +994,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,826)
+## Other (1,830)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1796,6 +1796,7 @@ Family/Format | Name | Extensions | Notes
 [other/invictusGameData](https://discmaster.textfiles.com/search?formatid=invictusGameData) | Invictus game data | .ics | 
 [other/invisionBrushes](https://discmaster.textfiles.com/search?formatid=invisionBrushes) | Invision Brushes | .bru | 
 [other/irisOCRData](https://discmaster.textfiles.com/search?formatid=irisOCRData) | IRIS OCR data | .ytr | 
+[other/isamTableHandlerData](https://discmaster.textfiles.com/search?formatid=isamTableHandlerData) | ISAM table handler data | .ism | 
 [other/isisSchematicFile](https://discmaster.textfiles.com/search?formatid=isisSchematicFile) | ISIS Schematic file | .ds | 
 [other/ispellHashFile](https://discmaster.textfiles.com/search?formatid=ispellHashFile) | ispell hash file | .dic | 
 [other/ivsFledermausTDRFile](https://discmaster.textfiles.com/search?formatid=ivsFledermausTDRFile) | IVS Fledermaus TDR file |  | 
@@ -2067,6 +2068,7 @@ Family/Format | Name | Extensions | Notes
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?formatid=mySQLIndexFile) | MySQL Index | .myi | 
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?formatid=mySQLTableDefinition) | MySQL Table Definition | .frm | 
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?formatid=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
+[other/nacDrawDocument](https://discmaster.textfiles.com/search?formatid=nacDrawDocument) | NacDraw document | .nac | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?formatid=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
 [other/nascarRacingReplay](https://discmaster.textfiles.com/search?formatid=nascarRacingReplay) | NASCAR Racing Replay | .rpy | 
 [other/nascarRacingSeasonCarData](https://discmaster.textfiles.com/search?formatid=nascarRacingSeasonCarData) | NASCAR Racing Season Car data | .car | 
@@ -2174,6 +2176,7 @@ Family/Format | Name | Extensions | Notes
 [other/palmPluckerDocument](https://discmaster.textfiles.com/search?formatid=palmPluckerDocument) | Palm Plucker document | .pdb | 
 [other/palmPocketChessDeluxeGamesLibrary](https://discmaster.textfiles.com/search?formatid=palmPocketChessDeluxeGamesLibrary) | Palm PocketChess deluxe games library | .pdb | 
 [other/palmTealInfo](https://discmaster.textfiles.com/search?formatid=palmTealInfo) | Palm TealInfo | .pdb | 
+[other/palmTides](https://discmaster.textfiles.com/search?formatid=palmTides) | Palm Tides | .pdb | 
 [other/pandaSignatureFileSystem](https://discmaster.textfiles.com/search?formatid=pandaSignatureFileSystem) | Panda Signature file system | .sig | 
 [other/panzerkriegForWindowsScenario](https://discmaster.textfiles.com/search?formatid=panzerkriegForWindowsScenario) | Panzerkrieg for Windows Scenario | .pks | 
 [other/paperPortSlideShot](https://discmaster.textfiles.com/search?formatid=paperPortSlideShot) | PaperPort Slide Show | .fss | 
@@ -2261,6 +2264,7 @@ Family/Format | Name | Extensions | Notes
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?formatid=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
+[other/printMagicCard](https://discmaster.textfiles.com/search?formatid=printMagicCard) | Print Magic Card | .pmc | 
 [other/printShopDeluxeAutograph](https://discmaster.textfiles.com/search?formatid=printShopDeluxeAutograph) | Print Shop Deluxe Autograph | .pau | 
 [other/printShopDeluxeCardLayout](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCardLayout) | Print Shop Deluxe Card Layout | .cly | 
 [other/printShopDeluxeCardTimepieces](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCardTimepieces) | Print Shop Deluxe Card Timepieces | .pct | 

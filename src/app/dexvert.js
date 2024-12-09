@@ -1,4 +1,4 @@
-import {xu, fg} from "xu";
+import {xu} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil} from "xutil";

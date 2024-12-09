@@ -632,6 +632,7 @@ export default
 		postgreSQLDatabaseDump                   : {name : "PostgreSQL database dump", ext : [".sql"], magic : ["PostgreSQL database dump"]},
 		poswizReport                             : {name : "Poswiz! Report", ext : [".rpt"], magic : ["Poswiz! Report"]},
 		powerBaseDatabase                        : {name : "PowerBase database", ext : [".pb"], magic : ["PowerBase database"]},
+		powerDesignerData                        : {name : "PowerDesigner / PowerAMC data", ext : [".pdm"], magic : ["PowerDesigner / PowerAMC data (generic)"]},
 		powerTranslatorDocument                  : {name : "Power Translator document", ext : [".mtp"], magic : ["Power Translator document"], weakMagic : true},
 		ppd                                      : {name : "PostScript Printer Description", website : "http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description", ext : [".ppd", ".pp"], magic : ["PPD file", "PostScript Printer Description", "application/vnd.cups-ppd"]},
 		prism3DConfig                            : {name : "Prism3D config", ext : [".cfg"], magic : ["Prism3D config"]},

@@ -63,6 +63,10 @@
 * Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
   It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
 
+* Figure out how to get info out of a folio database. Some interesting stuff locked in those:
+  https://dev.discmaster2.textfiles.com/search?format=folioDatabase
+  https://dev.discmaster2.textfiles.com/view/18013/The%20Washington%20Times%20-%201991%20Volume%202%20(January%201989-December%201991)(Wayzata%20Technology)(5032)(1992).bin/fpnv.nfo
+
 * Look into why these 2 files fail (may be due to latest libre office):
   [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
   [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
@@ -169,6 +173,8 @@
 /--------------\
 | Low Priority |
 \--------------/
+* IsoBuster has had several updates since I last installed it and now supports more formats: https://www.isobuster.com/news/
+
 * Consider adding other detectors:
   - Try latest magika model release: https://github.com/google/magika/tree/main/assets/models/standard_v2_1
 	See if I already have legacy code for it or not. Ensure it runs in CPU mode, and probably as a webserver I can send reqs to

@@ -23,7 +23,7 @@ const _XML_MAGIC = [
 	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile", "Artweaver Brush", "IFC-XML",
 	"MeshMixer Part data", "Software Ideas Modeler Template", "Navigation Control file for XML", "OpenOffice/LibreOffice type library database (XML)", "OpenCV XML storage", "Mono Mconfig configuration", "Uniform Office Format (generic)",
 	"Fabmetheus model format", "Qt Help Collection Project", "MusicXML", "SOAP Envelope", "Windows 7 Task Scheduler job", "GnuCash data", "GnuCash file", "AlgoBox Algorithm", "Visual Studio Tools for Office add-in", "Anjuta IDE project", "ISE XReport",
-	"ConvertXtoDVD project", "Eclipse CDT Project settings", "Koda Form Designer Form", "Synfig project", /^Delphi Project$/, "Notepad++ session", "wxFormBuilder Project", "Scribus palette", "FET Timetable", "LMMS Preset", "LMMS Project",
+	"ConvertXtoDVD project", "Eclipse CDT Project settings", "Koda Form Designer Form", "Synfig project", /^Delphi Project$/, "Notepad++ session", "wxFormBuilder Project", "Scribus palette", "FET Timetable", "LMMS Preset", "LMMS Project", "SWID Tag",
 	"Microsoft security certificate", "Expression Design swatch (v4)", "Microsoft security certificate", "GanttProject project", "SMath Studio worksheet", "MuseScore music score", "NewsML file", "DcUpdater local configuration", "WxGlade project",
 	"Group Policy Administrative Template", "Group Policy Language-Specific Administrative Template", "Mixxx MIDI preset", "TreeDBNotes syntax config", "application/vnd.kde.kcfg", "Mixxx controller preset", "Code::Blocks Project", "QTI document",
 	"MAME ListXML format", "AutoCAD drawing lock", "EDraw Max drawing", "Citation Style Language", "Friend of a Friend (FOAF) Resource Description Framework", "Gnumeric spreadsheet", "OEB Package Format eBook", "Find and Run Robot (FARR) alias",
@@ -35,7 +35,7 @@ const _XML_MAGIC = [
 	"Wink Flash Preloader", "Wink Flash Control bar", "MAME Hash", "openMSX machine/device configuration", "ActiveReports Report (UTF-8)", "Papyrus X DB XML", /^VOTable$/, "Audacity Project", "XML Shareable Playlist Format", "application/xspf+xml",
 	"application/x-quicktime-media-link", /^Metalink \([^)]+\)$/, "NVDL script", ".NET assembly uninstaller info", "ArcPad configuration", "Predictive Model Markup Language", "SecurID Soft Token", "Qt Assistant Documentation Profile", "Karma Workspace",
 	"Microsoft Project Data Interchange XML format", "Papyrus X report XML", /^TextMate (Command|Language grammar|Theme)$/, "Apple Keynote Presentation data", "Microsoft SQL Server Analysis Services Project", "Windows PowerShell formatting (UTF-8)",
-	/^fmt\/(205|243|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1825)( |$)/, /^x-fmt\/227( |$)/
+	/^fmt\/(205|243|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};
 

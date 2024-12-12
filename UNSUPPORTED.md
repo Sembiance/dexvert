@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,901)
+# Unsupported File Formats (2,907)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -654,7 +654,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (177)
+## Image (178)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -679,6 +679,7 @@ Family/Format | Name | Extensions | Notes
 [image/autoFXPhotoGraphicEdgesImage](https://discmaster.textfiles.com/search?formatid=autoFXPhotoGraphicEdgesImage) | Auto FX PhotoGraphic Edges image | .afx | 
 [image/autoCADShape](https://discmaster.textfiles.com/search?formatid=autoCADShape) | AutoCAD Shape | .shx | [6 sample files](https://sembiance.com/fileFormatSamples/image/autoCADShape/)
 [image/autoSketchDrawing](https://discmaster.textfiles.com/search?formatid=autoSketchDrawing) | AutoSketch Drawing | .skd | [5 sample files](https://sembiance.com/fileFormatSamples/image/autoSketchDrawing/)
+[image/autoSketchIconLibrary](https://discmaster.textfiles.com/search?formatid=autoSketchIconLibrary) | AutoSketch Icon Library | .icn | 
 [image/bbcDisplayRAM](https://discmaster.textfiles.com/search?formatid=bbcDisplayRAM) | BBC Display RAM Dump |  | [1 sample file](https://sembiance.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
 [image/beagleWorksImage](https://discmaster.textfiles.com/search?formatid=beagleWorksImage) | BeagleWorks Image |  | 
 [image/beamSoftwareSIFFImage](https://discmaster.textfiles.com/search?formatid=beamSoftwareSIFFImage) | Beam Software SIFF sprite/image | .pim | 
@@ -994,7 +995,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,830)
+## Other (1,835)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1221,6 +1222,7 @@ Family/Format | Name | Extensions | Notes
 [other/bankMateActivityData](https://discmaster.textfiles.com/search?formatid=bankMateActivityData) | BankMate Activity data | .ix1 .ixp | 
 [other/bannerBlueMovieGuideLibraryAuxiliaryFile](https://discmaster.textfiles.com/search?formatid=bannerBlueMovieGuideLibraryAuxiliaryFile) | Banner Blue Movie Guide Library Auxiliary File | .nts .cst .syn | 
 [other/bannerBlueMovieGuideLibraryData](https://discmaster.textfiles.com/search?formatid=bannerBlueMovieGuideLibraryData) | Banner Blue Movie Guide Library data |  | 
+[other/banyansVINESPatchData](https://discmaster.textfiles.com/search?formatid=banyansVINESPatchData) | Banyans VINES patch data | .0 .1 | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
 [other/basVBDOSPro10Source](https://discmaster.textfiles.com/search?formatid=basVBDOSPro10Source) | BAS VBDOS Pro 1.0 Source | .bas | 
 [other/battery2QuickLoadSampleData](https://discmaster.textfiles.com/search?formatid=battery2QuickLoadSampleData) | Battery 2 quick load sample data | .nov | 
@@ -1331,6 +1333,7 @@ Family/Format | Name | Extensions | Notes
 [other/centralPointSoftwareDirectoryTreeInfo](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareDirectoryTreeInfo) | Central Point Software directory Tree info | .tre | 
 [other/centralPointSoftwareLibrary](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareLibrary) | Central Point Software Library | .dlo | 
 [other/centurionDefenderOfRomeGameData](https://discmaster.textfiles.com/search?formatid=centurionDefenderOfRomeGameData) | Centurion: Defender of Rome game data | .dat .cat | 
+[other/cForthDictionary](https://discmaster.textfiles.com/search?formatid=cForthDictionary) | cForth Dictionary | .dic | 
 [other/chalkGameDataArchive](https://discmaster.textfiles.com/search?formatid=chalkGameDataArchive) | Chalk game data archive | .wgm | 
 [other/chaosToyUniversePalette](https://discmaster.textfiles.com/search?formatid=chaosToyUniversePalette) | CHAOS Toy Universe Palette | .frt | 
 [other/chaosultdGEMParameters](https://discmaster.textfiles.com/search?formatid=chaosultdGEMParameters) | CHAOSultdGEM Parameters | .chs | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
@@ -1551,6 +1554,7 @@ Family/Format | Name | Extensions | Notes
 [other/empire2TheArtOfWarSavedGame](https://discmaster.textfiles.com/search?formatid=empire2TheArtOfWarSavedGame) | Empire II: The Art of War Saved Game | .svg | 
 [other/empireScenario](https://discmaster.textfiles.com/search?formatid=empireScenario) | Empire Scenario | .scn | 
 [other/encartaEncyclopediaLinksUpdate](https://discmaster.textfiles.com/search?formatid=encartaEncyclopediaLinksUpdate) | Encarta Encyclopedia Yearbook and Web Links update | .eyb | 
+[other/endNoteLibrary](https://discmaster.textfiles.com/search?formatid=endNoteLibrary) | EndNote Library | .enl | 
 [other/ensoniqEPSExtractedFile](https://discmaster.textfiles.com/search?formatid=ensoniqEPSExtractedFile) | Ensoniq EPS Extracted File | .efe | 
 [other/ensoniqVFXPatchFile](https://discmaster.textfiles.com/search?formatid=ensoniqVFXPatchFile) | Ensoniq VFX Patch File | .vfx | 
 [other/enviromentalAudioLibraryData](https://discmaster.textfiles.com/search?formatid=enviromentalAudioLibraryData) | Enviromental Audio Library data | .eal | 
@@ -1765,6 +1769,7 @@ Family/Format | Name | Extensions | Notes
 [other/ikMultimediaPreset](https://discmaster.textfiles.com/search?formatid=ikMultimediaPreset) | IK Multimedia Preset | .ikmp | 
 [other/iliumEWalletData](https://discmaster.textfiles.com/search?formatid=iliumEWalletData) | Ilium eWallet data |  | 
 [other/imageMixerProject](https://discmaster.textfiles.com/search?formatid=imageMixerProject) | ImageMixer project | .ima | 
+[other/imagenPrinter](https://discmaster.textfiles.com/search?formatid=imagenPrinter) | Imagen printer | .imp | 
 [other/imagineStagingData](https://discmaster.textfiles.com/search?formatid=imagineStagingData) | Imagine Staging Data | .istg | 
 [other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Sound Driver | .drv | 
 [other/independenceWar2ModPackage](https://discmaster.textfiles.com/search?formatid=independenceWar2ModPackage) | Independence War 2 mod Package | .pkg | 
@@ -2229,6 +2234,7 @@ Family/Format | Name | Extensions | Notes
 [other/pixelBenderBytecode](https://discmaster.textfiles.com/search?formatid=pixelBenderBytecode) | Pixel Bender bytecode |  | 
 [other/pixilangCompiledByteCode](https://discmaster.textfiles.com/search?formatid=pixilangCompiledByteCode) | Pixilang compiled byte-code | .pixicode | 
 [other/pkcsCryptographicMessageFile](https://discmaster.textfiles.com/search?formatid=pkcsCryptographicMessageFile) | PKCS Cryptographic Message File |  | 
+[other/pKZMENUConfiguration](https://discmaster.textfiles.com/search?formatid=pKZMENUConfiguration) | PKZMENU Configuration | .cfg | 
 [other/platinenLayoutLayout](https://discmaster.textfiles.com/search?formatid=platinenLayoutLayout) | Platinen Layout Program Layout | .pla | 
 [other/platinenLayoutBibliotheken](https://discmaster.textfiles.com/search?formatid=platinenLayoutBibliotheken) | Platinen Layout Programm Bibliotheken/library | .bib | 
 [other/platinenLayoutProgrammMacro](https://discmaster.textfiles.com/search?formatid=platinenLayoutProgrammMacro) | Platinen Layout Programm Macro | .mac | 

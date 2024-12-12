@@ -708,7 +708,7 @@ export const WEAK_VALUES =
 	/^Mac OS X Code (Directory|Requirement)/,
 	/^Mac OS X Mach-O 32-bit ARM executable/,
 	/^Mach-O 64-bit x86_64/,
-	/^Mach-O (armv6|architecture|i\d86|universal binary)/,
+	/^Mach-O (armv6|architecture|executable|i\d86|universal binary)/,
 	/^Mach-O (alpha|m68k|ns\d+) filetype=\d+/,
 	/^magic text fragment/,
 	/^MagicaVoxel model/,

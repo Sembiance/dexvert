@@ -1,21 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* This used to work in discmaster1, but doesn't in discmaster2. Looks like there are 2 partitions and the second one is the one I'm after: https://dev.discmaster2.textfiles.com/admin/item?itemid=17774
-  I can see both partitions iwth 'parted <file> print'. So I did: parted --machine --json MacAddict_068_2002_04.iso print
-  This could extract partition 2: dd if=/home/sembiance/Downloads/MacAddict_068_2002_04.iso of=partition2.raw bs=512 skip=37 count=1386496
-  This was with the help of ChatGPT. I guess I would need to look at the 'logical-sector-size' and then perform math like:
-  	start: 18.9kB → Sector: 18900 / 512 = 37
-	size: 679MB → Sectors: 679 * 1024 * 1024 / 512 = 1386496
-  Even after I got the raw partition, hmount/uniso still won't work with it.
-  deark[module:hfs] does, but deark isn't capable of creating subdirs, so it's basically useless in this case
-  IsoBuster works on it though, so the proper solution would be to add 'IsoBuster' as a converter to rawPartition for HFS, before deark
-  Then add a 'parted.js' program that will chain each result to dexvert[asFormat:archive/rawPartition]
-  Then add that parted converter to iso.js as the last final converter to try (only for HFS?)
-  I should try this 'parted <file> print' trick with other ISOs I couldn't handle, see below for a bit list of them
-  NOTE: This one also didn't work: https://dev.discmaster2.textfiles.com/admin/item?itemid=17778
-        LIKELY same cause, so probably could work after I do the above work
-
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
 

@@ -7,7 +7,7 @@ export class cdr extends Format
 	ext            = [".cdr", ".cdt", ".cdx", ".cpx"];
 	forbidExtMatch = [".cpx"];
 	magic          = ["CorelDraw Document", "CorelDraw Drawing", "Corel Draw drawing", "CorelDRAW for OS/2 drawing", "CorelDraw compressed format", "Format: CorelDraw graphics", "application/vnd.corel-draw", /^Corel Draw \d Grafikdatei \(CDR\)$/,
-		"Corel Draw 7 Templatedatei (CDT)", /^RIFF (little-endian) data, Corel Draw Picture/, /RIFF Datei: unbekannter Typ 'CDR[ \d]'/, /^Corel Draw Picture, version \d\.0/, /^fmt\/(427|464|465|466|1926)( |$)/, /^x-fmt\/(29|31|36|291|292|374|375|378|379)( |$)/];
+		"Corel Draw 7 Templatedatei (CDT)", /^RIFF (little-endian) data, Corel Draw Picture/, /RIFF Datei: unbekannter Typ 'CDR[ \d]'/, /^Corel Draw Picture, version \d\.0/, /^fmt\/(427|464|465|466|1925|1926)( |$)/, /^x-fmt\/(29|31|36|291|292|374|375|378|379)( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => ["CDR ", "CDR6", "CDR8"].includes(macFileType) && macFileCreator==="Cdrw";
 	converters     = [
 		// vector

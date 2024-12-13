@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class convert extends Program
@@ -43,6 +44,7 @@ export class convert extends Program
 		if(r.stderr.toLowerCase().includes("read error"))
 			r.unsafe = true;
 	};
-	renameOut = true;
-	chain     = r => (r.flags.outType==="svg" ? "deDynamicSVG" : null);
+	runOptions = {limitRAM : xu.GB*3};
+	renameOut  = true;
+	chain      = r => (r.flags.outType==="svg" ? "deDynamicSVG" : null);
 }

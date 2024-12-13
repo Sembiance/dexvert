@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,907)
+# Unsupported File Formats (2,915)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (235)
+## Archive (236)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -157,7 +157,8 @@ Family/Format | Name | Extensions | Notes
 [archive/os2FTCOMP](https://discmaster.textfiles.com/search?formatid=os2FTCOMP) | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a OS emulated OS/2 machine. Maybe some day.
 [archive/outlookExchangeOfflineStorage](https://discmaster.textfiles.com/search?formatid=outlookExchangeOfflineStorage) | Outlook Exchange Offline Storage | .ost | 
 [archive/bvrpPAC](https://discmaster.textfiles.com/search?formatid=bvrpPAC) | PAC (BVRP Software) | .pac | 
-[archive/packMasterPacked](https://discmaster.textfiles.com/search?formatid=packMasterPacked) | Pack MasterPacked | .exe | 
+[archive/packMasterPacked](https://discmaster.textfiles.com/search?formatid=packMasterPacked) | Pack Master Packed | .exe | 
+[archive/packmanPacked](https://discmaster.textfiles.com/search?formatid=packmanPacked) | Packman Packed |  | 
 [archive/palmMemoPadArchive](https://discmaster.textfiles.com/search?formatid=palmMemoPadArchive) | Palm Memo Pad Archive | .mpa | 
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
@@ -246,7 +247,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (70)
+## Audio (71)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -302,6 +303,7 @@ Family/Format | Name | Extensions | Notes
 [audio/richMusicFormat](https://discmaster.textfiles.com/search?formatid=richMusicFormat) | Rich Music Format | .rmf | [4 sample files](https://sembiance.com/fileFormatSamples/audio/richMusicFormat/)
 [audio/sonicArrangerInstrument](https://discmaster.textfiles.com/search?formatid=sonicArrangerInstrument) | Sonic Arranger instrument |  | No known converter
 [audio/sonixSoundSample](https://discmaster.textfiles.com/search?formatid=sonixSoundSample) | Sonix Sound Sample | .ss | [18 sample files](https://sembiance.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
+[audio/sonyCompressedVoiceFile](https://discmaster.textfiles.com/search?formatid=sonyCompressedVoiceFile) | Sony Compressed Voice File | .dvf .msv | [4 sample files](https://sembiance.com/fileFormatSamples/audio/sonyCompressedVoiceFile/)
 [audio/sonyWave64RIFFData](https://discmaster.textfiles.com/search?formatid=sonyWave64RIFFData) | Sony Wave64 RIFF data | .acd | 
 [audio/soundBlasterInstrument](https://discmaster.textfiles.com/search?formatid=soundBlasterInstrument) | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbi | [10 sample files](https://sembiance.com/fileFormatSamples/audio/soundBlasterInstrument/)
 [audio/soundImagesSoundSample](https://discmaster.textfiles.com/search?formatid=soundImagesSoundSample) | Sound Images sound sample | .bin | 
@@ -838,7 +840,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (151)
+## Music (152)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -912,6 +914,7 @@ Family/Format | Name | Extensions | Notes
 [music/maxTrax](https://discmaster.textfiles.com/search?formatid=maxTrax) | MaxTrax Module | .mxtx | [8 sample files](https://sembiance.com/fileFormatSamples/music/maxTrax/)
 [music/maxYMiserSongModule](https://discmaster.textfiles.com/search?formatid=maxYMiserSongModule) | maxYMiser Song/module | .mys | 
 [music/melodyMakerSong](https://discmaster.textfiles.com/search?formatid=melodyMakerSong) | Melody Maker Sing | .mm | 
+[music/midget3Song](https://discmaster.textfiles.com/search?formatid=midget3Song) | Midget 3 song | .m3 | 
 [music/mod8BitModule](https://discmaster.textfiles.com/search?formatid=mod8BitModule) | MOD 8-bit module | .md8 | 
 [music/moonBlasterForMoonSoundSong](https://discmaster.textfiles.com/search?formatid=moonBlasterForMoonSoundSong) | MoonBlaster for MoonSound song | .mwm .mfm .mwk .mwv | 
 [music/mozartMusicDocument](https://discmaster.textfiles.com/search?formatid=mozartMusicDocument) | MOZART Music Document | .mz | 
@@ -995,7 +998,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,835)
+## Other (1,840)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1357,6 +1360,7 @@ Family/Format | Name | Extensions | Notes
 [other/clarisWorksPaletteFiles](https://discmaster.textfiles.com/search?formatid=clarisWorksPaletteFiles) | Claris Works palette files | .pl .plt | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?formatid=clariSSAPreferences) | ClariSSA preferences |  | 
 [other/clawCustomLevel](https://discmaster.textfiles.com/search?formatid=clawCustomLevel) | Claw custom level | .wwd | 
+[other/clipGalleryDownloadPackage](https://discmaster.textfiles.com/search?formatid=clipGalleryDownloadPackage) | Clip Gallery Download Package | .cil | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
 [other/clispMemoryImageData](https://discmaster.textfiles.com/search?formatid=clispMemoryImageData) | CLISP memory image data | .mem | 
 [other/cloantoAmigaOSEncryptedROM](https://discmaster.textfiles.com/search?formatid=cloantoAmigaOSEncryptedROM) | Cloanto Amiga OS encrypted ROM | .rom | 
@@ -1491,6 +1495,7 @@ Family/Format | Name | Extensions | Notes
 [other/directoryOpusEnvironment](https://discmaster.textfiles.com/search?formatid=directoryOpusEnvironment) | Directory Opus environment |  | 
 [other/directoryOpusSettings](https://discmaster.textfiles.com/search?formatid=directoryOpusSettings) | Directory Opus Settings |  | 
 [other/directoryOpusType](https://discmaster.textfiles.com/search?formatid=directoryOpusType) | Directory Opus type |  | 
+[other/directWaveProgram](https://discmaster.textfiles.com/search?formatid=directWaveProgram) | DirectWave Program | .dwp | 
 [other/directXCompiledShaderObject](https://discmaster.textfiles.com/search?formatid=directXCompiledShaderObject) | DirectX Compiled Shader Object | .cso | 
 [other/directXPreCompiledPixelVertexShader](https://discmaster.textfiles.com/search?formatid=directXPreCompiledPixelVertexShader) | DirectX pre-compiled pixel/vertex shader | .fxo | 
 [other/disGCLScript](https://discmaster.textfiles.com/search?formatid=disGCLScript) | DISGCL script | .gcl | 
@@ -1658,6 +1663,7 @@ Family/Format | Name | Extensions | Notes
 [other/gamebyroKFMData](https://discmaster.textfiles.com/search?formatid=gamebyroKFMData) | Gamebyro KFM data | .kfm | 
 [other/gammaCAD](https://discmaster.textfiles.com/search?formatid=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gammaCADSymbolLibrary](https://discmaster.textfiles.com/search?formatid=gammaCADSymbolLibrary) | GammaCAD Symbol Library | .syl | 
+[other/garminMap](https://discmaster.textfiles.com/search?formatid=garminMap) | Garmin map | .img | 
 [other/gazeConfiguration](https://discmaster.textfiles.com/search?formatid=gazeConfiguration) | Gaze configuration | .dat | 
 [other/gconvModuleConfigurationCache](https://discmaster.textfiles.com/search?formatid=gconvModuleConfigurationCache) | gconv module configuration cache | .cache | 
 [other/gcsWorldData](https://discmaster.textfiles.com/search?formatid=gcsWorldData) | GCS World data | .wld | 
@@ -2028,6 +2034,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftWordStyleSheet](https://discmaster.textfiles.com/search?formatid=microsoftWordStyleSheet) | Microsoft Word Style Sheet | .sty | 
 [other/microsoftZooTycoonSavedGame](https://discmaster.textfiles.com/search?formatid=microsoftZooTycoonSavedGame) | Microsoft Zoo Tycoon saved game | .zoo | 
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?formatid=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
+[other/midget3Instruments](https://discmaster.textfiles.com/search?formatid=midget3Instruments) | Midget 3 Instruments | .mis | 
 [other/midiDrumMachine](https://discmaster.textfiles.com/search?formatid=midiDrumMachine) | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
 [other/midiMazeIIMaze](https://discmaster.textfiles.com/search?formatid=midiMazeIIMaze) | MIDI-MAZE II Maze | .mze | 
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?formatid=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
@@ -2601,6 +2608,7 @@ Family/Format | Name | Extensions | Notes
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 
 [other/topLevelForm](https://discmaster.textfiles.com/search?formatid=topLevelForm) | TopLevel Form | .tfm | 
 [other/topSpeedModula2Library](https://discmaster.textfiles.com/search?formatid=topSpeedModula2Library) | TopSpeed Modula-2 Library | .lib | 
+[other/tpLinkRouterFirmware](https://discmaster.textfiles.com/search?formatid=tpLinkRouterFirmware) | TP-Link router firmware | .bin | 
 [other/trackAttackBitmapsFrames](https://discmaster.textfiles.com/search?formatid=trackAttackBitmapsFrames) | Track Attack bitmaps/frames | .raw .rle | 
 [other/trackAttackCockpit](https://discmaster.textfiles.com/search?formatid=trackAttackCockpit) | Track Attack cockpit | .rle | 
 [other/trackAttackTrackData](https://discmaster.textfiles.com/search?formatid=trackAttackTrackData) | Track Attack track Data | .dat | 

@@ -136,7 +136,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			if(Object.hasOwn(format, "safeExt"))
 			{
 				cwdExt = typeof format.safeExt==="function" ? await format.safeExt(dexState) : format.safeExt;
-				xlog.debug`format has safeExt function and returned ${cwdExt}`;
+				xlog.debug`format has safeExt and returned ${cwdExt}`;
 			}
 			
 			if(cwdExt===null)
@@ -159,6 +159,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			// by default we rename the aux files to match, unless keepFilename is set to true
 			if(f.aux)
 			{
+				xlog.trace`Renaming ${f.files.aux.length.toLocaleString()} aux files for compatability...`;
 				for(const auxFile of f.files.aux)
 				{
 					const newAuxFilename = `${cwdFilename}${auxFile.ext.toLowerCase()}`;
@@ -183,11 +184,14 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 		try
 		{
+			xlog.info`Getting meta for ${format.formatid}...`;
 			Object.assign(dexState.meta, await format.getMeta(f.input, dexState));
 			
 			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
 			{
+				xlog.trace`Format ${format.formatid} is untouched, marking as processed...`;
+
 				// check family verification if our match type isn't a magic one or if we explicitly set verifyFamily (unless verifyFamily explicity set to false)
 				const verifyUntouched = Object.hasOwn(format, "verifyUntouched") ? (typeof format.verifyUntouched==="function" ? await format.verifyUntouched(dexState) : !!format.verifyUntouched) : dexState.phase.id.matchType!=="magic";
 
@@ -213,7 +217,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 			// run any pre-converter pre format function
 			if(format.pre)
+			{
+				xlog.trace`Running ${format.formatid} pre format function...`;
 				await format.pre(dexState);
+			}
 
 			const tryProg = async function tryProg(prog, {isChain}={})
 			{

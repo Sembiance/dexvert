@@ -8,5 +8,5 @@ export class mng extends Format
 	mimeType     = "video/x-mng";
 	magic        = ["Multiple-image Network Graphics bitmap", "MNG video data", "video/x-mng", /^fmt\/528( |$)/];
 	metaProvider = ["image"];
-	converters   = [`abydosconvert[format:${this.mimeType}][outType:webp]`, "convert[outType:webp]"];
+	converters   = [`abydosconvert[format:${this.mimeType}][outType:webp]`, "convert[outType:webp]", `nconvert[extractAll] -> *joinAsGIF[outType:gif]`];
 }

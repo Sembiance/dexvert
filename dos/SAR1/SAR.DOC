@@ -1,0 +1,709 @@
+                Streamline Archival Utility Ver 1.00
+
+                Copyright (C) 1993, Streamline Design
+                       All Rights Reserved
+    
+                          Available From
+                     Streamline Design Company
+                           416-790-1997
+                               or
+                          Download From
+                      The Support Group BBS
+                          416-444-7358
+
+
+No part of this publication may be reproduced, transmitted,
+transcribed, stored in a retrieval system, or translated into any other
+language or computer language in whole or in part, in any form or
+by any means, whether it be electronic, mechanical, magnetic,
+optical, manual or otherwise, without prior written consent of
+Streamline Design (984503 Ontario Inc).
+
+Streamline Design disclaims all warranties as to this software, whether
+express or implied, including without limitation any implied warranties of
+merchantability, fitness for a particular purpose, functionality, data
+integrity or protection.
+
+SAR is a trademark of Streamline Design (984502 Ontario Inc.)
+
+MS-DOS is a trademark of Microsoft Corporation.
+
+Trademarks of other companies mentioned in this documentation appear for
+identification purposes only and are the property of their respective
+companies.
+
+
+                                                                    CONTENTS
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+Introduction                                                   1
+     Product Support ......................................... 2
+
+Installation                                                   3
+     Installing SAR On Your Hard Drive ....................... 3
+
+SAR Command Reference ........................................ 4
+Trouble-Shooting                                              14
+          Customer Support Form ............................. 14
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+Streamline Design             Contents                                     i
+
+
+
+Introduction
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+        Welcome to SAR Version 1.0.  We hope to provide you with an archival
+utility that will perform both efficiently and simply.  We hope you can
+utilize the high performance of SAR to improve your systems performance and
+data storage capabilities.
+
+        SAR is a simple archival utility that uses the Huffman algorithms.
+It has been designed to utilize a single executable for all functionality
+and has proven to be more effective than most archival utilities on the
+market today.  Although SAR does not have a lot of the commands other
+utilities have, it more than makes up for it in compression and ease of use.
+Future releases of SAR will continually include more functionality.
+
+        This version of SAR is in no way disabled. The only of this package
+being unregistered is a in the Copyright notice.
+
+        You may use this product without registration for 30 Days for
+evaluation purposes.  If at this time you are not satisfied please remove it
+from your system.
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                             Introduction                                  1
+
+Product Support
+
+We hope that your use of SAR will be enjoyable and productive. It is our
+intention to provide the best possible product and documentation. We
+understand that problems may arise, and in most cases you will be able to
+resolve any problems you may have by referring to the Frequently Asked
+Questions section of this documentation.
+
+Our Product Support staff can be contacted in several ways.
+
+TSE BBS (416)793-1411
+
+Streamline Design maintains its own BBS.  The Source Exchange BBS is
+available 24 hours a day.  TSE BBS supports baud rates from 1200 up to
+38400. Communications software Should be set for 8 bits, 1 stop bit, no
+parity.
+
+TSE BBS offers the latest in SAR shareware as well as many other files.
+TSE BBS has only one line at the moment.  Please keep trying until the line
+is free.  We will be increasing our customer support lines as the need is
+required.
+
+
+The Support Group BBS (416)444-2272
+
+Streamline Design Technicians maintain a discussion conference on The Support
+Group BBS.  To get to the conference, simply type "j;16" or "j;17" from the
+main command prompt.  The latest versions of SAR will also be available here.
+
+Streamline Design messages should be addressed to TOM THAYER.
+
+Voice and Fax
+
+You may reach a Streamline Design Technician by sending a Fax containing your
+question.
+
+Streamline Design Fax
+(416)793-1411
+
+If your question is urgent, or you do not have access to any of the above
+methods of communication, a message can be left or a technician can be
+contacted at the Streamline Design Technical Support line.
+Technical support is normally available Monday through Friday, 10 am
+to 6 pm.
+
+Streamline Design Voice Support
+(416)790-1997
+
+When contacting Streamline Design in any of the above methods, please
+prepare as much information about the problem as possible.  Please include
+version numbers for: SAR, DOS, and any Memory and Device Drivers you may be
+using at the time.  Please include the command(s) you have tried to use, and
+what the results were and note what the problem was that occered.
+
+When faxing a problem, a print out of any error messages is often helpful in
+determining a solution.
+
+Streamline Design (984502 Ontario Inc.)
+1 Herron Place
+Brampton, Ontario
+L6S-1P3
+(416)790-1997 Voice
+(416)793-1411 FAX
+(416)793-1411 BBS
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                             Introduction                                  2
+
+                                                                INSTALLATION
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+SAR works best when it is located in your path.  You can put SAR in your
+path by either copying it into an already existing subdirectory that is in
+your path, or by copying it into its own subdirectory and putting that
+subdirectory into your path.
+
+Pathing
+
+There are two meanings for path as used under MS-DOS.  It may refer to the
+location of a file, or it may refer to the places DOS will search for a
+command.
+
+In the first instance, a path would be the directory or subdirectories that a
+file is located in.  If a file named "SAR.EXE" is in a subdirectory named
+"SAR" under a subdirectory named "UTILS" on your C: hard drive, it's path
+would be "C:\UTILS\SAR\SAR.EXE".
+
+In the second instance, the path is a list of places stored in your "PATH"
+environment variable.  Type "PATH" <CR> at the DOS prompt and you will see
+what your path is currently set at on your computer.  It usually looks
+something like this:
+
+C:\;C:\DOS;C:\UTILS;D:\SAR;
+
+It will look different on your computer.  The path is set by a statement in
+the AUTOEXEC.BAT file.  Please refer to your DOS manual for more information.
+
+
+Installing SAR On Your Hard Drive
+
+You should have a prompt on your screen similar to:
+
+C:\>
+
+Place the diskette containing SAR in your floppy drive, either A: or B:.
+Next, create a subdirectory on your hard drive.  This can be accomplished
+by typing:
+
+C:\>MD \SAR
+
+Change to this subdirectory.
+
+C:\>CD \SAR
+
+Your DOS prompt should now look like this:
+
+C:\SAR>
+
+Now type the following:
+
+If using the A drive - COPY A:*.*
+If using the B drive - COPY B:*.*
+
+The contents of this file will now be placed into the SAR subdirectory.
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 3
+
+You must now modify your AUTOEXEC.BAT file.  You can edit this file with any
+text editor that can load and save DOS TEXT or plain ASCII files. (As of
+DOS 5.0, the EDIT command will suffice).
+
+If you have DOS 5.0 type:
+
+C:\>EDIT AUTOEXEC.BAT
+
+Look for a line in the file that says something similar to:
+
+PATH=C:\;C:\DOS;
+
+Change this line to:
+...;C:\SAR
+by adding a semicolon at the end of the line and the path to the subdirectory
+you have just created and installed SAR into.
+
+The line will now look similar to this:
+
+PATH=C:\;C:\DOS;C:\SAR
+
+You will most likely have additional items between the C:\DOS; and C:\PKWARE.
+
+Save the file and exit.  You will have to re-boot your computer to make the
+change take effect.
+
+After you reboot type "PATH" at the DOS prompt and press enter.  Your
+machine will show the path.  Make certain that the subdirectory you installed
+the SAR files in is shown in the path.
+
+Provided you have followed all the steps above correctly, you should now be
+able to verify that the installation is correct by typing "SAR" and pressing
+enter.  If SAR is installed correctly you should see the following:
+
+SAR Version 1.0 - Streamline Arching Utility                                    
+                                                                                
+CopyRight (C) 1993, Streamline Design                                           
+UNREGISTERED
+Use: SAR [Switch] [SAR File] [Files]                                            
+                                                                                
+Switches:                                                                       
+   a: Add Files to SAR (Overwrites if Exists)                                   
+   e: Extract Files from SAR                                                    
+   r: Replace Files in SAR                                                      
+   d: Delete Files from SAR                                                     
+   p: Print Files in SAR                                                        
+   l: List Contents of SAR                                                      
+                                                                                
+When Extracting, No Filenames are Neccessary if You Wish All Files              
+                                                                                
+If no Extension is specified, a Default of SAR will be used                     
+                                                                                
+                                                                                
+                                                                                
+C:\TC\SAR>                                                                      
+                                                                                
+If you receive the message "Bad command or file name" or "Unknown command",
+Something has not installed properly.  Check the location of the files you
+copied. Also check your path in your AUTOEXEC.BAT. Make sure you have rebooted
+your system since the changes were made to the AUTOEXEC.BAT file.
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 4
+
+
+Command Reference
+
+Command Option Guide
+
+a - Add Files to SAR
+
+This option allows you to add files to a SAR Archive file.  Keep in mind,
+if a file of the same name already exists it will be overwritten.  When
+adding files SAR creates temporary files.  Neither these files, or the
+archive being created, will be added to the archive.
+
+Adding single files
+
+        This can be accomplshed by typing the following:
+
+        SAR a <ARCHIVE NAME> <Filename>
+
+        ie: SAR a test sar.exe
+
+        The above example will compress SAR.EXE to a file named TEST.SAR.
+        If you specify an extension on the archive name, that extension
+        will be used.
+
+        If all has gone well you should see the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Adding sar.exe ...... 57.0%
+          1 files
+
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 5
+
+Adding multiple files
+
+        This can be accomplished by typing one of the following:
+
+        SAR a <ARCHIVE NAME> <FILENAMES>
+        or
+        SAR a <ARCHIVE NAME>
+
+        The first example will archive all files listed on the command
+        line:  ie: SAR a TEST SAR.EXE SAR.DOC
+
+        You should see somthing similar to:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Adding SAR.EXE  57.0%
+        Adding SAR.DOC  33.1%
+          2 files
+
+        The second example will archive all files in the current directory.
+        ie: SAR a TEST or SAR a TEST *.*
+
+        You should see something similar to:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Adding SAR.EXE  57.0%
+        Adding TEST1.TXT  38.7%
+        Adding SAR.DOC  32.6%
+        Adding IO.OBJ  62.6%
+        Adding ENCODE.OBJ  50.1%
+        Adding HUF.OBJ  57.4%
+        Adding IO.C  39.2%
+        Adding MAKETBL.C  38.6%
+        Adding MAKETREE.C  37.9%
+        Adding SAR.C  27.9%
+        Adding ENCODE.C  22.0%
+        Adding DECODE.C  33.6%
+        Adding MAKETREE.OBJ  67.8%
+        Adding MAKETBL.OBJ  72.9%
+        Adding SAR.H  39.8%
+        Adding DECODE.OBJ  70.3%
+        Adding MAKEFILE
+        Adding HUF.C  22.0%
+        Adding TEST.TXT  47.1%
+        Adding SAR.OBJ  54.1%
+        Adding MAKEFILE
+        Adding Extension Signifier to MAKEFILE 48.0%
+          21 files
+
+        Please note the file MAKEFILE.  You will notice that there is a
+        second note about this file in this example.  This occurs when
+        the file being archived does not contain an extension.  When your
+        file is restored, it is still restored without the extension.
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 6
+
+
+d - Deleting files from the SAR Archive
+
+This option allows you to delete files from a SAR archive.  Please keep in
+mind that once the file has been deleted from the archive, there is no way
+to retrieve the file from the archive.
+
+Deleting a single file
+
+        This can be accomplshed by typing the following:
+
+        SAR d <ARCHIVE NAME> <Filename>
+
+        ie: SAR d TEST SAR.EXE
+
+        You should see something similar to the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Deleting SAR.EXE
+          1 files
+
+
+Deleting multiple files
+
+        This can be accomplished by typing the following:
+        
+        SAR d <ARCHIVE NAME> <Filenames>
+        or
+        SAR d <ARCHIVE NAME> *.* (or any other combination of wildcards)
+
+
+        Example 1
+
+        ie: SAR d TEST SAR.EXE SAR.DOC
+
+        You should see something similar to the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGSITERED
+        CopyRight (C) 1993, Streamline Design
+
+        Deleting SAR.DOC
+        Deleting SAR.EXE
+          2 files
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 7
+
+        Example 2:
+
+        ie: SAR d TEST *.*
+
+        You should see something similar to the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Deleting TEST1.TXT
+        Deleting IO.OBJ
+        Deleting TMP.TMP
+        Deleting ENCODE.OBJ
+        Deleting HUF.OBJ
+        Deleting IO.C
+        Deleting MAKETBL.C
+        Deleting MAKETREE.C
+        Deleting SAR.C
+        Deleting ENCODE.C
+        Deleting DECODE.C
+        Deleting MAKETREE.OBJ
+        Deleting MAKETBL.OBJ
+        Deleting SAR.H
+        Deleting DECODE.OBJ
+        Deleting MAKEFILE.
+        Deleting HUF.C
+        Deleting TEST.TXT
+        Deleting SAR.OBJ
+          19 files
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 8
+
+
+l - Listing the contents of an archive
+
+This option allows you to view the contents of an archive and provides you
+with information on each file inside the archive.  The following is a
+description of each item of information contained inside the archive.
+
+FILENAME - The name of the file stored inside the archive.
+START    - The size of the file before being compressed.
+FINISH   - The size of the file after compression
+Ratio    - The compression percentage of the file.
+           ie: 0.570 = 1.00 - percentage compressed.  In this case the
+           file is 57% of the size it was before being compressed.
+CRC      - This is the CRC value of the file.
+Method   - Currently there are 3 methods of compression supported.
+           LH5 - The best compression possible
+           LH4 - A little less than LH5.  Does not occur often.
+           LH0 - SAR was not able to compress this file any further.  In this
+                 case it has been stored.
+
+        This can be accomplished by typing the following:
+
+        SAR l <ARCHIVE NAME>
+
+        ie: SAR l TEST
+
+        You should see something similar to the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        FILENAME            START     FINISH   Ratio   CRC   Method
+        SAR.SAR             30300      30300   1.000   2F64    LH0
+        TEST1.TXT            1321        511   0.387   A65D    LH5
+        SAR.DOC             16941       5069   0.299   25D6    LH5
+        IO.OBJ               2306       1443   0.626   FCCE    LH5
+        TMP.TMP               460        191   0.415   9FC1    LH5
+        ENCODE.OBJ           5569       2791   0.501   7119    LH5
+        HUF.OBJ              5060       2906   0.574   FBBA    LH5
+        IO.C                 2366        928   0.392   67C4    LH5
+        MAKETBL.C            1526        589   0.386   70D8    LH5
+        MAKETREE.C           2631        997   0.379   DAE8    LH5
+        SAR.C               15083       4204   0.279   1360    LH5
+        ENCODE.C            10744       2360   0.220   484E    LH5
+        DECODE.C             1687        566   0.336   B2AD    LH5
+        MAKETREE.OBJ         1841       1249   0.678   2C9D    LH5
+        MAKETBL.OBJ          1108        808   0.729   8978    LH5
+        SAR.H                2115        841   0.398   C3DF    LH5
+        DECODE.OBJ            800        562   0.703   7F05    LH5
+        MAKEFILE.             512        246   0.480   C6D4    LH5
+        HUF.C               11090       2435   0.220   8509    LH5
+        TEST.TXT              552        260   0.471   1065    LH5
+        SAR.OBJ             10660       5770   0.541   1D81    LH5
+          21 files
+
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                 9
+
+e - Extracting files from and archive
+
+This option allows you to decompress files inside of a SAR archive and write
+them to you disk.  This will overwrite any file that presently exists with
+the same name.
+
+Extracting a single files
+
+        This can be accomplished by typing the following:
+
+        SAR e <ARCHIVE NAME> <Filename>
+
+        ie: SAR e TEST SAR.H
+
+        You should see something similar to the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Extracting SAR.H
+          1 files
+
+Extracting muliple files
+
+        This can be accomplished by typing the following:
+
+        SAR e <ARCHIVE NAME> <Filenames>
+        or
+        SAR e <ARCHIVE NAME> *.* (or any other wildcard combination)
+        or
+        SAR e <ARCHIVE NAME>
+
+        Example 1 only extracts the files listed.
+
+        ie: SAR e TEST SAR.EXE SAR.DOC
+
+        Example 2 extracts all files meeting the wildcard criteria
+
+        ie: SAR e TEST *.*
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                10
+
+        Example 3 extracts all files
+
+        ie: SAR e TEST
+
+        You should see somthing similar to the following:
+
+        SAR Version 1.0 - Streamline Arching Utility
+        UNREGISTERED
+        CopyRight (C) 1993, Streamline Design
+
+        Extracting SAR.EXE
+        Extracting TEST1.TXT
+        Extracting SAR.DOC
+        Extracting IO.OBJ
+        Extracting TMP.TMP
+        Extracting ENCODE.OBJ
+        Extracting HUF.OBJ
+        Extracting IO.C
+        Extracting MAKETBL.C
+        Extracting MAKETREE.C
+        Extracting SAR.C
+        Extracting ENCODE.C
+        Extracting DECODE.C
+        Extracting MAKETREE.OBJ
+        Extracting MAKETBL.OBJ
+        Extracting SAR.H
+        Extracting DECODE.OBJ
+        Extracting MAKEFILE.
+        Extracting HUF.C
+        Extracting TEST.TXT
+        Extracting SAR.OBJ
+          21 files
+
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                11
+
+p - Printing files from within an archive
+
+This option allows you to print files to your screen, or route them to your
+printer, from with the archive.  This could be very useful when you do not
+wish to fill up your system with large extracted files.
+
+Printing a single file to your computer screen
+
+        This can be accomplished by typing the following:
+
+        SAR p <ARCHIVE NAME> <Filename>
+
+        ie: SAR p TEST SAR.DOC
+
+Printing a single file to your printer
+
+        This can be accomplished by typing the following:
+
+        SAR p <ARCHIVE NAME> <Filename> >PRN
+
+        ie: SAR p TEST SAR.DOC >PRN
+
+        PRN could also be LPT1, LPT2, LPT3, COM1, COM2, COM3, COM4 or another
+        filename
+
+Printing multiple files to your computer screen
+
+        This can be accomplished by typing the following:
+
+        SAR p <ARCHIVE NAME> <Filenames>
+
+        ie: SAR p TEST SAR.DOC MAKEFILE.
+
+Printing multiple files to your printer
+
+        This can be accomplished by typing the following:
+
+        SAR p <ARCHIVE NAME> <Filenames> >PRN
+        or
+        SAR p <ARCHIVE NAME> *.* >PRN (can also use any other wildcard comb.)
+
+        ie: SAR p TEST SAR.DOC MAKEFILE. >PRN
+        or
+        ie: SAR p TEST *.* >PRN
+
+        PRN could also be LPT1, LPT2, LPT3, COM1, COM2, COM3, COM4 or another
+        filename.
+
+        This could be useful if you wish to merge several files into one file.
+
+        ** Please note, this option will not work on anything other than text
+           or ASCII files.
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                12
+
+
+r - replacing a file in an archive
+
+This option works exactly the same as add except it replaces files.
+Please refer to the addition examples above.
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                              Installation                                13
+
+
+Streamline Design Customer Support Form
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+
+By providing us with this information, you enable us to examine the problem
+in an exact and effective manner.
+
+Please fax this form first, then call our customer support line. Indicate on
+the fax that you will be calling.
+
+Streamline Design
+1 Herron Place
+Brampton, Ontario
+L6S-1P3
+(416)790-1997 Voice
+(416)793-1411 Fax
+(416)793-1411 BBS
+
+Problem Report
+
+Be sure to include the following.  Use as many additional sheets as necessary
+
+Describe what you are trying to do
+
+____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________
+
+What exactly do you expect to happen
+
+____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________
+
+What actually happened and why it is a problem
+
+____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________
+____________________________________________________________________________
+
+Please include copies of your CONFIG.SYS, AUTOEXEC.BAT and any error messages
+
+ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
+                           Customer Support Form                          14
+
+

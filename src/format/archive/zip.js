@@ -25,7 +25,7 @@ export class zip extends Format
 		"application/x-zip-compressed-fb2", "FreeCAD Standard document", "NumPy compressed data archive format", "Mozilla Firebird theme", /^Krita [Dd]ocument/, "application/x-krita", "osu! compressed beatmap data", "Wrapster archive (v1.0)",
 		"LEGO Exchange Format - Digital Designer", "Minecraft LiteLoader Mod", "application/vnd.sun.xml.draw", "Samurize package", "OpenIV mod package", "Power BI report", "Sublime Text Package (generic)", "Maxthon skin (MX1)", "Pencil template",
 		"Zoner Draw (container with preview)", "MediaForge Runtime Player Distribution Project", "Desktop Sidebar Panel", "Compressed Disk Image (password protected)", "DesktopX Object Package", "ComicRack plugin", "U3 application Package",
-		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language",
+		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language", "TuneUp Style Boot Screen", "TIP Archiv gefunden (Auflistung ist deaktiviert)",
 		/^fmt\/(424|524|595|627|628|937|942|943|999|1184)( |$)/
 	];
 	weakMagic      = ["Zip archive, with extra data prepended"];

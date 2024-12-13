@@ -15,7 +15,7 @@ export class html extends Format
 		"HyperText Markup Language with DOCTYPE", "HTML (Hyper Text Markup Language) Datei", "broken XHTML document text", /^Hyper[Tt]ext Markup Language/, /^X?HTML document/, /^text\/html/, /^fmt\/(96|97|98|99|100|102|103|471|1132)( |$)/,
 
 		// app specific HTML
-		"IBrowse Hotlist / bookmark (v2)", "Netscape Bookmark", "Internet Explorer bookmark", "Internet Explorer history (v1-3)", "Microsoft HTML Application (HTA)"
+		"IBrowse Hotlist / bookmark (v2)", "Netscape Bookmark", "Internet Explorer bookmark", "Internet Explorer history (v1-3)", "Microsoft HTML Application (HTA)", "Expression Media template"
 	];
 	weakMagic        = true;
 	trustMagic       = true;

@@ -37,7 +37,7 @@ export class abydosconvert extends Program
 
 	// Timeout is because abydos sometimes just hangs on a conversion eating 100% CPU forever. ignore-stderr is due to wanting a clean parse of the resulting JSON
 	// We run webp output a little longer since those animations can take some time to finish rendering
-	runOptions = r => ({timeout : (r.flags.outType==="webp" ? xu.MINUTE*3 : xu.MINUTE)});
+	runOptions = r => ({limitRAM : xu.GB*3, timeout : (r.flags.outType==="webp" ? xu.MINUTE*3 : xu.MINUTE)});
 	renameOut = {
 		regex : /.+?(?<num>\.\d{3,4})?(?<ext>\.(?:png|svg|webp))$/,
 		renamer :

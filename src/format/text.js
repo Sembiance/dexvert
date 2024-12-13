@@ -276,6 +276,7 @@ export default
 		aegisVideoSEGScript                      : {name : "Aegis VideoSEG Script", ext : [".script"], magic : ["Aegis VideoSEG Script"], weakMagic : true},
 		aibbResultsLog                           : {name : "AIBB results log", magic : ["AIBB results log"]},
 		aldusPrinterDriver                       : {name : "Aldus Printer Driver", ext : [".apd"], magic : ["Aldus Printer Driver"], weakMagic : true},
+		allWebMenusProject                       : {name : "AllWebMenus project", ext : [".awm"], magic : ["AllWebMenus project"], weakMagic : true},
 		alteraGraphicDesignFile                  : {name : "Altera Graphic Design File", ext : [".gdf"], magic : ["Altera Graphic Design File"]},
 		alteraHierarchyInterconnectFile          : {name : "Altera Hierarchy Interconnect File", ext : [".hif"], magic : ["Altera Hierarchy Interconnect File"]},
 		altiumDesignerDrillReport                : {name : "Altium Designer Drill Report", ext : [".drr"], magic : ["Altium Designer Drill Report"]},

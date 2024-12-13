@@ -211,7 +211,7 @@ export default
 		quickPascalUnit                  : {name : "Microsoft QuickPascal Unit", ext : [".qpu"], magic : ["Microsoft QuickPascal Unit"]},
 		reSourceControlLanguage          : {name : "ReSource Control Language", ext : [".rcl"], magic : ["ReSource Control Language"], weakMagic : true},
 		rayDreamBrowserFile              : {name : "Ray Dream BRW", ext : [".brw"], magic : ["Ray Dream data"], idMeta : ({macFileType, macFileCreator}) => macFileType==="RDBW" && macFileCreator==="RD5A"},
-		rmQuestModule                    : {name : "RM/Quest Module", ext : [".qrm"], magic : ["RM/Quest module"]},
+		rmQuestModule                    : {name : "RM/Quest Module", ext : [".qrm"], magic : ["RM/Quest module", "Allen Communications Quest Released Module"]},
 		scummRoomNameList                : {name : "SCUMM room name list", ext : [".la0", ".000"], magic : ["SCUMM room name list"]},
 		sixtyFourNetContainer            : {name : "64Net Container", ext : [".n64"], magic : ["64NET container"], weakMagic : true},
 		softdiskCrossword                : {name : "Softdisk Crossword", ext : [".sxg", ".sxp"], magic : ["Softdisk Crossword"]},

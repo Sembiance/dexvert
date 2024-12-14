@@ -53,7 +53,7 @@ export const gameextractor =
 		redengineGameArchive               : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},
 		riffBACKGameArchive                : {name : "RIFF BACK Game Archive", ext : [".res"], magic : ["Generic RIFF file BACK"]},
 		scummDigitizedSoundsGameArchive    : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)", "Lucasfilm Games VOC Sound"]},
-		simsArchive                        : {name : "The Sims Archive", ext : [".far"], magic : ["The Sims Archive"]},
+		simsArchive                        : {name : "The Sims Archive", ext : [".far"], magic : ["The Sims Archive"], website : "http://fileformats.archiveteam.org/wiki/FAR_(The_Sims)"},
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
 		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", /^Unreal (Audio|Engine) package/, /^Rune map$/], forbiddenMagic : ["Unreal Music"], idMeta : ({macFileType, macFileCreator}) => ["UnDt", "UnMp", "UnMu", "UnSn", "UnTx"].includes(macFileType) && ["DsEx", "Rune", "Unrl", "UnTn"].includes(macFileCreator)},

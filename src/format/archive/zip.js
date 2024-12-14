@@ -26,7 +26,8 @@ export class zip extends Format
 		"LEGO Exchange Format - Digital Designer", "Minecraft LiteLoader Mod", "application/vnd.sun.xml.draw", "Samurize package", "OpenIV mod package", "Power BI report", "Sublime Text Package (generic)", "Maxthon skin (MX1)", "Pencil template",
 		"Zoner Draw (container with preview)", "MediaForge Runtime Player Distribution Project", "Desktop Sidebar Panel", "Compressed Disk Image (password protected)", "DesktopX Object Package", "ComicRack plugin", "U3 application Package",
 		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language", "TuneUp Style Boot Screen", "TIP Archiv gefunden (Auflistung ist deaktiviert)",
-		/^fmt\/(424|524|595|627|628|937|942|943|999|1184)( |$)/
+		/^fmt\/(424|524|595|627|628|937|942|943|999|1184)( |$)/,
+		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];
 	weakMagic      = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType, macFileCreator}) => ["pZIP", "ZIP "].includes(macFileType) || (macFileType==="xpi " && ["MzIn", "NSIn"].includes(macFileCreator));

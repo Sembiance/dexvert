@@ -9,8 +9,7 @@ export class rotateImage extends Program
 		degrees : "Specify the number of degrees to rotate the image"
 	};
 
-	bin        = "magick";
-	args       = async r => [r.inFile(), "-rotate", r.flags.degrees, await r.outFile("out.png")];
-	runOptions = {limitRAM : xu.GB*3};
-	renameOut  = true;
+	bin       = "magick";
+	args      = async r => [r.inFile(), "-rotate", r.flags.degrees, await r.outFile("out.png")];
+	renameOut = true;
 }

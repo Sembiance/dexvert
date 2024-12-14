@@ -10,8 +10,7 @@ export class joinAsGIF extends Program
 		outType    : "Output type. Default: gif"
 	};
 
-	bin        = "magick";
-	args       = async r => ["-delay", `${r.flags.frameDelay || 12}`, "-dispose", "previous", ...r.inFiles(), "-loop", "0", "-strip", await r.outFile(`out.${r.flags.outType || "gif"}`)];
-	runOptions = {limitRAM : xu.GB*3};
-	renameOut  = true;
+	bin       = "magick";
+	args      = async r => ["-delay", `${r.flags.frameDelay || 12}`, "-dispose", "previous", ...r.inFiles(), "-loop", "0", "-strip", await r.outFile(`out.${r.flags.outType || "gif"}`)];
+	renameOut = true;
 }

@@ -10,7 +10,7 @@ export class appleDiskCopy extends Format
 	website    = "https://www.discferret.com/wiki/Apple_DiskCopy_4.2";
 	magic      = _APPLE_DISK_COPY_MAGIC;
 	weakMagic  = [/^fmt\/625( |$)/];
-	idMeta     = ({macFileType, macFileCreator}) => (macFileType==="dImg" && ["dCpy", "Wrap"].includes(macFileCreator));
+	idMeta     = ({macFileType, macFileCreator}) => (["dImg", "dimg"].includes(macFileType) && ["dCpy", "Wrap"].includes(macFileCreator));
 	idCheck    = (inputFile, detections, {idMetaMatch, xlog}) =>
 	{
 		// only return true if we have 2 or more detections against our magic or if we have just 1 match but it's not weak

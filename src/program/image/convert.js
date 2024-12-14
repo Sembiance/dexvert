@@ -44,7 +44,6 @@ export class convert extends Program
 		if(r.stderr.toLowerCase().includes("read error"))
 			r.unsafe = true;
 	};
-	runOptions = {limitRAM : xu.GB*3};
-	renameOut  = true;
-	chain      = r => (r.flags.outType==="svg" ? "deDynamicSVG" : null);
+	renameOut = true;
+	chain     = r => (r.flags.outType==="svg" ? "deDynamicSVG" : null);
 }

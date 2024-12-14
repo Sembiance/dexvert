@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,915)
+# Unsupported File Formats (2,917)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -998,7 +998,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,840)
+## Other (1,842)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1372,9 +1372,11 @@ Family/Format | Name | Extensions | Notes
 [other/codeWarriorProject](https://discmaster.textfiles.com/search?formatid=codeWarriorProject) | CodeWarrior Project | .mcp | 
 [other/codeWarriorTargetData](https://discmaster.textfiles.com/search?formatid=codeWarriorTargetData) | CodeWarrior Target Data | .tdt | 
 [other/coffLibrary](https://discmaster.textfiles.com/search?formatid=coffLibrary) | COFF Library | .lib .obj .a | 
+[other/collectorzDotComMovieCollectorData](https://discmaster.textfiles.com/search?formatid=collectorzDotComMovieCollectorData) | Collectorz.com Movie Collector data | .mvc | 
 [other/combustion2ParticleLibrary](https://discmaster.textfiles.com/search?formatid=combustion2ParticleLibrary) | Combustion 2 Particle Library | .elc | 
 [other/comicBookCreatorBackground](https://discmaster.textfiles.com/search?formatid=comicBookCreatorBackground) | Comic Book Creator Background | .bin | 
 [other/comicBookCreatorShapeTable](https://discmaster.textfiles.com/search?formatid=comicBookCreatorShapeTable) | Comic Book Creator shape Table | .tbl .frm .bin | 
+[other/comicCollectorCollectionData](https://discmaster.textfiles.com/search?formatid=comicCollectorCollectionData) | Comic Collector Collection data | .cmc | 
 [other/commanderKeen6Config](https://discmaster.textfiles.com/search?formatid=commanderKeen6Config) | Commander Keen 6 config | .ck6 | 
 [other/appleScriptCompiled](https://discmaster.textfiles.com/search?formatid=appleScriptCompiled) | Compiled AppleScript Script |  | [2 sample files](https://sembiance.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 [other/compiledErlangCode](https://discmaster.textfiles.com/search?formatid=compiledErlangCode) | Compiled Erlang code |  | 

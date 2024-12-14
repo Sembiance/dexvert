@@ -86,7 +86,7 @@ async function getMacBinaryMeta(inputFile, debug)
 		const dateUnixYear = new Date(v*1000).getFullYear();
 		if(((dateMacYear<MIN_YEAR && ![1903, 1904].includes(dateMacYear)) || dateMacYear>(currentYear+1)) &&
 		   ((dateUnixYear<MIN_YEAR && ![1969, 1970].includes(dateUnixYear)) || dateUnixYear>(currentYear+1)))
-			return debug ? `${type} date (${v} mac: ${dateMacYear} unix: ${dateUnixYear}) is out of range` : false;
+			suspectDates[type] = true;
 		
 		if((dateMacYear<MIN_YEAR || dateUnixYear<MIN_YEAR))
 			suspectDates[type] = true;
@@ -101,7 +101,6 @@ async function getMacBinaryMeta(inputFile, debug)
 	const modifiedDateValid = validateDate(modifiedDate, "Modified");
 	if(modifiedDateValid!==true)
 		return modifiedDateValid;
-
 
 	// check to see if we have too many 'suspect' things (2 or more) and return false in that case (image/paintPro/AGIGATE.RSC)
 	const suspects = [suspectForkSizes, suspectFileType || suspectFileCreator, suspectDateDifference || suspectDates.Creation || suspectDates.Modified].filter(Boolean);

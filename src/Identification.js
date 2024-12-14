@@ -36,6 +36,7 @@ export class Identification
 	{
 		const o = {};
 		Object.assign(o, this);
+		delete o.auxFiles;	// these can sometimes be huge and are not very useful after the fact
 		return o;
 	}
 

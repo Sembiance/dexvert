@@ -10,8 +10,7 @@ export class autoCropImage extends Program
 		borderColor    : `What border color to use. Default #FFFFFF`
 	};
 
-	bin        = "magick";
-	args       = async r => [r.inFile(), "-bordercolor", r.flags.borderColor ?? "#FFFFFF", "-border", "1x1", "-fuzz", `${r.flags.fuzzPercentage || 20}%`, "-trim", "+repage", await r.outFile("out.png")];
-	runOptions = {limitRAM : xu.GB*3};
-	renameOut  = true;
+	bin       = "magick";
+	args      = async r => [r.inFile(), "-bordercolor", r.flags.borderColor ?? "#FFFFFF", "-border", "1x1", "-fuzz", `${r.flags.fuzzPercentage || 20}%`, "-trim", "+repage", await r.outFile("out.png")];
+	renameOut = true;
 }

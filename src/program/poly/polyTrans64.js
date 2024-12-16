@@ -50,7 +50,7 @@ export class polyTrans64 extends Program
 	osData  = r => ({
 		cwd : "c:\\Program Files\\PolyTrans64",
 		script : `
-		WindowRequire("PolyTrans|CAD 3D Translation", "", 10)
+		WindowRequire("PolyTrans|CAD 3D Translation", "", 15)
 
 		If Not FileExists("c:\\dexvert\\polyTrans64RanOnce.txt") Then
 			FileWrite("c:\\dexvert\\polyTrans64RanOnce.txt", "yes")
@@ -63,21 +63,21 @@ export class polyTrans64 extends Program
 		Sleep(200)
 		Send("i")
 
-		SendSlow("${_FORMATS[r.flags.format].keys}", 50)
+		SendSlow("${_FORMATS[r.flags.format].keys}", 75)
 		Send("{ENTER}")
 
 		Func PreImportDialogs()
 			WindowDismiss("Merge or Replace?", "", "{DOWN}{DOWN}{DOWN}{SPACE}{ENTER}")
 			return WinActive("Select One or More Geometry Files to Import", "")
 		EndFunc
-		$importWindow = CallUntil("PreImportDialogs", ${xu.SECOND*20})
+		$importWindow = CallUntil("PreImportDialogs", ${xu.SECOND*25})
 		If Not $importWindow Then
 			Exit 0
 		EndIf
 
 		Sleep(500)
-		SendSlow("c:\\in\\${r.inFile()}{ENTER}", 50);
-		WinWaitClose($importWindow, "", 60)
+		SendSlow("c:\\in\\${r.inFile()}{ENTER}", 75);
+		WinWaitClose($importWindow, "", 90)
 
 		Func PostImportDialogs()
 			${_FORMATS[r.flags.format].importWindow ? `WindowDismiss("${_FORMATS[r.flags.format].importWindow.title}", "", "${_FORMATS[r.flags.format].importWindow.keysDimiss}")` : ``}
@@ -106,9 +106,9 @@ export class polyTrans64 extends Program
 		EndIf
 
 		Send("!")
-		Sleep(200)
+		Sleep(250)
 		Send("t")
-		Sleep(200)
+		Sleep(250)
 		Send("e")
 
 		Send("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].keys}")
@@ -118,17 +118,17 @@ export class polyTrans64 extends Program
 			WindowFailure("Warning", "no geometry to export", -1, "{ESCAPE}")
 			return WindowDismiss("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].exportWindow.title}", "", "${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].exportWindow.keysDismiss}")
 		EndFunc
-		CallUntil("PreExportDialogs", ${xu.SECOND*10})
+		CallUntil("PreExportDialogs", ${xu.SECOND*15})
 
-		$saveWindow = WindowRequire("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].saveWindow.title}", "", 10)
-		SendSlow("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}", 50);
+		$saveWindow = WindowRequire("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].saveWindow.title}", "", 15)
+		SendSlow("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}", 75);
 		WinWaitClose($saveWindow, "", 20)
 		$outputStatusWindow = WinWaitActive("Geometry Export Status", "", 4)
 		If $outputStatusWindow Then
-			WinWaitClose($outputStatusWindow, "", 240)
+			WinWaitClose($outputStatusWindow, "", 300)
 		EndIf
 		WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*2}, ${xu.MINUTE*3})`,
-		timeout : xu.MINUTE*15
+		timeout : xu.MINUTE*20
 	});
 	renameOut = {
 		alwaysRename : true,

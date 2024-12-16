@@ -3,11 +3,12 @@ import {fileUtil} from "xutil";
 
 export class videoMasterFilm extends Format
 {
-	name       = "Video Master Film";
-	website    = "http://fileformats.archiveteam.org/wiki/Video_Master_Film";
-	ext        = [".flm", ".vid", ".vsq"];
-	magic      = ["Video Master Film"];
-	meta       = async inputFile =>
+	name           = "Video Master Film";
+	website        = "http://fileformats.archiveteam.org/wiki/Video_Master_Film";
+	ext            = [".flm", ".vid", ".vsq"];
+	forbidExtMatch = true;
+	magic          = ["Video Master Film"];
+	meta           = async inputFile =>
 	{
 		const headerBytes = await fileUtil.readFileBytes(inputFile.absolute, 10);
 		const playbackRate = headerBytes.getUInt16BE(8);

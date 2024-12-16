@@ -6,6 +6,6 @@ export class microsoftWindowsInstaller extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Windows_Installer";
 	ext            = [".msi", ".msp"];
 	magic          = ["Microsoft Windows Installer", "Installer: Microsoft Installer"];
-	forbiddenMagic = ["Camtasia Studio Screen Recording", /^fmt\/1852( |$)/];
+	forbiddenMagic = ["Camtasia Studio Screen Recording", "Revit Family Architecture project", /^fmt\/(1349|1852)( |$)/];
 	converters     = ["sevenZip", "cabextract"];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,917)
+# Unsupported File Formats (2,927)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -840,7 +840,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (152)
+## Music (153)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -990,6 +990,7 @@ Family/Format | Name | Extensions | Notes
 [music/twzSCCBLAFFERMusic](https://discmaster.textfiles.com/search?formatid=twzSCCBLAFFERMusic) | TwZ SCC-BLAFFER music | .tsm | 
 [music/vgmMusicMaker](https://discmaster.textfiles.com/search?formatid=vgmMusicMaker) | VGM Music Maker Module | .vge | [4 sample files](https://sembiance.com/fileFormatSamples/music/vgmMusicMaker/)
 [music/vicTracker](https://discmaster.textfiles.com/search?formatid=vicTracker) | Vic-Tracker Module | .vt | [5 sample files](https://sembiance.com/fileFormatSamples/music/vicTracker/)
+[music/vocaloidSequence](https://discmaster.textfiles.com/search?formatid=vocaloidSequence) | Vocaloid Sequence | .vsq | 
 [music/voyetraSequencerSong](https://discmaster.textfiles.com/search?formatid=voyetraSequencerSong) | Voyetra Sequencer Song | .sng | 
 [music/winSongComposerSong](https://discmaster.textfiles.com/search?formatid=winSongComposerSong) | WinSong Composer Song | .sng | 
 [music/xlr8SentryChipComposorMusic](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorMusic) | XLR8 - Sentry Chip Composor Music | .xms | 
@@ -998,7 +999,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,842)
+## Other (1,847)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2143,6 +2144,7 @@ Family/Format | Name | Extensions | Notes
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?formatid=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?formatid=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
 [other/noxMap](https://discmaster.textfiles.com/search?formatid=noxMap) | NoX Map | .map .nxz | 
+[other/ntfsTransactionalLog](https://discmaster.textfiles.com/search?formatid=ntfsTransactionalLog) | NTFS transactional log |  | 
 [other/ntv2StandardBinaryGridShift](https://discmaster.textfiles.com/search?formatid=ntv2StandardBinaryGridShift) | NTv2 Standard Binary Grid Shift | .gsb | 
 [other/nullsoftInstallData](https://discmaster.textfiles.com/search?formatid=nullsoftInstallData) | Nullsoft Install data |  | 
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?formatid=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
@@ -2238,6 +2240,8 @@ Family/Format | Name | Extensions | Notes
 [other/picasaFontCache](https://discmaster.textfiles.com/search?formatid=picasaFontCache) | Picasa font cache | .ytf | 
 [other/pico8PODDataArchive](https://discmaster.textfiles.com/search?formatid=pico8PODDataArchive) | Pico-8 POD data archive | .dat .pod | 
 [other/picturePumpProjectFile](https://discmaster.textfiles.com/search?formatid=picturePumpProjectFile) | Picture Pump Project File | .ppp | 
+[other/piklib8AnimationData](https://discmaster.textfiles.com/search?formatid=piklib8AnimationData) | Piklib 8 Animation data | .ann | 
+[other/piklibGraphicData](https://discmaster.textfiles.com/search?formatid=piklibGraphicData) | Piklib/BlooMoo graphic data | .img | 
 [other/pinnacleStudioScene](https://discmaster.textfiles.com/search?formatid=pinnacleStudioScene) | Pinnacle Studio Scene | .scn | 
 [other/pinnacleStudioVideoProject](https://discmaster.textfiles.com/search?formatid=pinnacleStudioVideoProject) | Pinnacle Studio Video Project | .stu | 
 [other/pixelBenderBytecode](https://discmaster.textfiles.com/search?formatid=pixelBenderBytecode) | Pixel Bender bytecode |  | 
@@ -2247,6 +2251,7 @@ Family/Format | Name | Extensions | Notes
 [other/platinenLayoutLayout](https://discmaster.textfiles.com/search?formatid=platinenLayoutLayout) | Platinen Layout Program Layout | .pla | 
 [other/platinenLayoutBibliotheken](https://discmaster.textfiles.com/search?formatid=platinenLayoutBibliotheken) | Platinen Layout Programm Bibliotheken/library | .bib | 
 [other/platinenLayoutProgrammMacro](https://discmaster.textfiles.com/search?formatid=platinenLayoutProgrammMacro) | Platinen Layout Programm Macro | .mac | 
+[other/playStation3DiscData](https://discmaster.textfiles.com/search?formatid=playStation3DiscData) | PlayStation 3 Disc data | .sfb | 
 [other/playStationPortableFirmware](https://discmaster.textfiles.com/search?formatid=playStationPortableFirmware) | PlayStation Portable Firmware | .pbp | 
 [other/playstationSingleGameSave](https://discmaster.textfiles.com/search?formatid=playstationSingleGameSave) | Playstation single game save | .psx | 
 [other/plbmGamesConfiguration](https://discmaster.textfiles.com/search?formatid=plbmGamesConfiguration) | PLBM Games Configuration | .cfg | 
@@ -2306,6 +2311,7 @@ Family/Format | Name | Extensions | Notes
 [other/psionPhysicalDeviceDriver](https://discmaster.textfiles.com/search?formatid=psionPhysicalDeviceDriver) | Psion Physical Device Driver | .pdd | 
 [other/psionPrinterDriver](https://discmaster.textfiles.com/search?formatid=psionPrinterDriver) | Psion Printer Driver | .wdr | 
 [other/psm2Configuration](https://discmaster.textfiles.com/search?formatid=psm2Configuration) | PSM 2 configuration | .dat | 
+[other/pspMetadataFile](https://discmaster.textfiles.com/search?formatid=pspMetadataFile) | PSP metadata file | .psf .sfo | 
 [other/pureCProjectDB](https://discmaster.textfiles.com/search?formatid=pureCProjectDB) | Pure C Project DB | .pdb | 
 [other/pureBasicLibrary](https://discmaster.textfiles.com/search?formatid=pureBasicLibrary) | PureBasic library |  | 
 [other/pureBasicResidentData](https://discmaster.textfiles.com/search?formatid=pureBasicResidentData) | PureBasic resident data |  | 
@@ -2846,13 +2852,14 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (76)
+## Poly (80)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
 [poly/threeDDGFModel](https://discmaster.textfiles.com/search?formatid=threeDDGFModel) | 3D Dgf Model | .dgf .3dgfo | 
 [poly/threeDStudioLoftObject](https://discmaster.textfiles.com/search?formatid=threeDStudioLoftObject) | 3D Studio Loft Object | .lft | 
+[poly/threeDWorldStudioModel](https://discmaster.textfiles.com/search?formatid=threeDWorldStudioModel) | 3D World Studio model | .3dw | 
 [poly/threeDXMLFile](https://discmaster.textfiles.com/search?formatid=threeDXMLFile) | 3D XML file | .3dxml | 
 [poly/threeDCoreObjDef](https://discmaster.textfiles.com/search?formatid=threeDCoreObjDef) | 3D_Core ObjDef | .data | 
 [poly/threeDX3DModel](https://discmaster.textfiles.com/search?formatid=threeDX3DModel) | 3DX 3D model | .asc | 
@@ -2888,6 +2895,7 @@ Family/Format | Name | Extensions | Notes
 [poly/infiniDScene](https://discmaster.textfiles.com/search?formatid=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
 [poly/irit3DModel](https://discmaster.textfiles.com/search?formatid=irit3DModel) | IRIT 3D model | .irt .dat | 
 [poly/kml](https://discmaster.textfiles.com/search?formatid=kml) | [Keyhole Markup Language](http://fileformats.archiveteam.org/wiki/KML) | .kml .kmz | [4 sample files](https://sembiance.com/fileFormatSamples/poly/kml/)
+[poly/mastercam9Geometry](https://discmaster.textfiles.com/search?formatid=mastercam9Geometry) | Mastercam 9 geometry | .mc9 | 
 [poly/mayaScene](https://discmaster.textfiles.com/search?formatid=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - So the discmaster site only has like 64 unique maya files. Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
 [poly/meshworkModel](https://discmaster.textfiles.com/search?formatid=meshworkModel) | Meshwork model | .mesh | 
 [poly/msFlightSimulator3DModel](https://discmaster.textfiles.com/search?formatid=msFlightSimulator3DModel) | Microsoft Flight Simulator 3D model | .mdl | 
@@ -2897,6 +2905,8 @@ Family/Format | Name | Extensions | Notes
 [poly/northCAD3D](https://discmaster.textfiles.com/search?formatid=northCAD3D) | NorthCAD-3D | .n3d | Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. DOS based. No export capability.
 [poly/objectsToSee3DObject](https://discmaster.textfiles.com/search?formatid=objectsToSee3DObject) | Objects to See 3D object | .o2c | 
 [poly/openCascade3DModel](https://discmaster.textfiles.com/search?formatid=openCascade3DModel) | Open Cascade Technology 3D model | .brp | 
+[poly/parasolidModel](https://discmaster.textfiles.com/search?formatid=parasolidModel) | Parasolid model | .x_t | 
+[poly/playStationRSDPolygons](https://discmaster.textfiles.com/search?formatid=playStationRSDPolygons) | PlayStation RSD Polygons | .ply | 
 [poly/polyfilm](https://discmaster.textfiles.com/search?formatid=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/) - Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.
 [poly/povRay](https://discmaster.textfiles.com/search?formatid=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format. assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
 [poly/racer3DModel](https://discmaster.textfiles.com/search?formatid=racer3DModel) | Racer 3D model | .dof | 

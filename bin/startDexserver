@@ -5,6 +5,14 @@ if [ -f /mnt/ram/dexvert/dexserver.pid ]; then
 	exit 1
 fi
 
+if [ "$(pgrep -fc "/mnt/compendium/bin/dexserver")" -gt 0 ] || [ "$(pgrep -fc "/home/sembiance/bin/startDexserver")" -gt 1 ]; then
+	echo "dexserver or startDexserver is already running! so waiting for it to fully start..."
+	while [ ! -f /mnt/ram/dexvert/dexserver.pid ]; do
+		sleep 1
+	done
+	exit 0
+fi
+
 if [ -s /mnt/dexvert/log/dexserver.err ]; then
 	mkdir -p /mnt/dexvert/oldLogs
 	ts="$(date +%Y%m%d_%H%M%S)"

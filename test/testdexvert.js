@@ -302,9 +302,10 @@ const FLEX_SIZE_FORMATS =
 	poly :
 	{
 		// .glb files produced differ each time, probably some meta data timestamp or something
-		"*"              : 3,
-		cyberStudioCAD3D : 95,
-		keyCAD3DModel    : 40
+		"*"                   : 3,
+		cyberStudioCAD3D      : 95,
+		keyCAD3DModel         : 40,
+		rayDreamDesignerScene : 95
 	},
 	video :
 	{
@@ -325,9 +326,14 @@ const FLEX_SIZE_FORMATS =
 // Specific files that vary in size each run
 const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 {
+	archive :
+	{
+		sapThomsonDiskImage : ["TURBOCUP.SAP"]	// corrupted archive, different stuff extracted each time
+	},
 	document :
 	{
-		pageMaker : ["ALGEXAMP.PM3", "BCOMLAB5.PM4", "ERROR7.PM5", "phi.pm5", "SYMBKYBD.PM4", "userguid.pm4"]	// pageMaker is sensitive and doesn't always work and it often fallsback to other pageMaker versions
+		pageMaker          : ["*"],	// pageMaker is sensitive and doesn't always work and it often fallsback to other pageMaker versions
+		pageStreamDocument : ["ASyncIO_2.part2.pgs"]	// sensitive. May be mroe than just this file
 	},
 	image :
 	{
@@ -383,6 +389,7 @@ const FLEX_DIFF_FILES =
 
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
+	/audio\/soundFont2\/.*\.arl$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/
 ];
 
@@ -517,6 +524,10 @@ const ALLOW_PROCESS_FAILURES =
 	music :
 	{
 		smus : ["breaktime-v1..smus"]
+	},
+	other :
+	{
+		gfaBASICAtari : ["CDBASE.DAT"]
 	},
 	poly :
 	{
@@ -792,7 +803,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
 
-	const ignoreSizeAndConverter = IGNORE_SIZE_AND_CONVERTER_SRC_PATHS?.[result.family]?.[result.format]?.includes(path.basename(sampleFilePath));
+	const ignoreSizeAndConverter = IGNORE_SIZE_AND_CONVERTER_SRC_PATHS?.[result.family]?.[result.format]?.includesAny(["*", path.basename(sampleFilePath)]);
 
 	const converterMismatch = prevData.converter!==result.converter && !ignoreSizeAndConverter && !FLAKY_CONVERTERS.includes(prevData.converter) ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
 

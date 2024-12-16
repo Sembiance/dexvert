@@ -8,7 +8,7 @@ export class quarkXPress extends Format
 	safeExt    = "";
 	magic      = [
 		"Quark XPress document", "QuarkXpress project", "QuarkXPress Tags", "Intel Quark Express Document", "QuarkXPress Document/Project", /Quark Express Document/,
-		/^fmt\/(650|652|1317|1318|1319|1321|1323|1325|1442|1443|1444)( |$)/, /^x-fmt\/182( |$)/
+		/^fmt\/(650|652|1317|1318|1319|1321|1322|1323|1325|1442|1443|1444)( |$)/, /^x-fmt\/182( |$)/
 	];
 	idMeta     = ({macFileType, macFileCreator}) => ["XDOC", "XTMP"].includes(macFileType) && macFileCreator==="XPR3";
 	converters = ["quarkXPress6", "pageMaker7QuarkConverter"];

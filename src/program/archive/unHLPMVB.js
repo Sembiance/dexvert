@@ -12,6 +12,7 @@ export class unHLPMVB extends Program
 	unsafe     = true;
 	args       = r => Program.denoArgs(Program.binPath("unHLPMVB.js"), ...(r.flags.extractExtra ? ["--extractExtra"] : []), `--outFilename=${r.originalInput ? r.originalInput.name : "out"}`, "--", r.inFile(), r.outDir());
 	runOptions = ({env : Program.denoEnv()});
+	skipVerify = true;	// some files are HUGE, this one produces 16,172 files: https://dev.discmaster2.textfiles.com/browse/18393/CMGE-2001-CD2.iso/Media.m14
 	renameOut  = false;
 	chain      = "?dexvert[asFormat:document/rtf]";
 	chainCheck = (r, chainFile) => [".rtf"].includes(chainFile.ext.toLowerCase());

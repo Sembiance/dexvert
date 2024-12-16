@@ -12,9 +12,17 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Test multiple formats, creating a report for each",
 	opts    :
 	{
+		allow          : {desc : "Explicitly allow this to run on hosts that normally don't permit it"},
 		reportsDirPath : {desc : "Which directory to write the reports. Default: random"},
 		format         : {desc : "Specify one or more formats. Can specify 'all' or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
+
+if(!["crystalsummit", "ridgeport", "dexdrone10"].includes(Deno.hostname()) && !argv.allow)
+{
+	xlog.error`This script requires an updated set of sample files, as root@dexdrone10:\n\trsync -avl /mnt/compendium/DevLab/sembiance.com/web/fileFormatSamples/ root@${Deno.hostname()}:/mnt/compendium/DevLab/sembiance.com/web/fileFormatSamples/`;
+	xlog.error`Afterwards you this script with '--allow' to run tests.`;
+	Deno.exit(1);
+}
 
 await initFormats(xlog);
 

@@ -16,22 +16,24 @@ export class paintDotNet extends Program
 				WindowDismiss("Loading..", "Extract water into separate layer?", "n")
 				return WinExists("${path.basename(r.inFile())} - paint.net", "")
 			EndFunc
-			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*15})
 			If Not $mainWindow Then
 				Exit 0
 			EndIf
 			
 			MouseClick("left", 810, 40)	; Window doesn't always "activate" so we click it
 			Sleep(500)
+			MouseClick("left", 810, 40)	; Window doesn't always "activate" so we click it
+			Sleep(500)
 			Send("!f")
 			Send("a")
-			$saveAsWindow = WindowRequire("Save As", "", 10)
+			$saveAsWindow = WindowRequire("Save As", "", 15)
 			Send("{TAB}{DOWN}{HOME}{DOWN}{ENTER}")
 			Send("+{TAB}c:\\out\\out.png{ENTER}")
-			WinWaitClose($saveAsWindow, "", 10)
-			WindowDismissWait("Save Configuration", "", 4, "{ENTER}")
-			WindowDismissWait("Save", "flattened", 2, "{ENTER}")
-			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*2}, ${xu.SECOND*14})
+			WinWaitClose($saveAsWindow, "", 15)
+			WindowDismissWait("Save Configuration", "", 5, "{ENTER}")
+			WindowDismissWait("Save", "flattened", 3, "{ENTER}")
+			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*2}, ${xu.SECOND*16})
 			Send("!f")
 			Send("x")
 			WindowDismissWait("Unsaved Changes", "", 2, "{DOWN}{ENTER}")`

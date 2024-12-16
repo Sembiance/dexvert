@@ -52,10 +52,6 @@
   https://dev.discmaster2.textfiles.com/search?format=folioDatabase
   https://dev.discmaster2.textfiles.com/view/18013/The%20Washington%20Times%20-%201991%20Volume%202%20(January%201989-December%201991)(Wayzata%20Technology)(5032)(1992).bin/fpnv.nfo
 
-* Look into why these 2 files fail (may be due to latest libre office):
-  [FAIL] document/openDocument/aw-9colorful.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
-  [FAIL] document/openDocument/cnt-04.ott Disk family document does not match processed archive/zip Also, expected converter soffice but instead got sevenZip
-
 * Could improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
   Some things can't be handled this way though, such as recoil2png and imagemagic convert font handling, so this sort of change may require a bunch of reverse engineering work to properly convert old fonts into new fonts (rather than just getting preview images)
 

@@ -66,7 +66,7 @@ export default
 		rexxAdventureGameSource             : {name : "Rexx-Adventure game source", ext : [".rad"], magic : ["Rexx-Adventure game source"], weakMagic : true},
 		rexxAdventureSavedGame              : {name : "Rexx-Adventure Saved game", ext : [".ras"], magic : ["Rexx-Adventure Saved game"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game"},
 		simCity3000FreshnessScore           : {name : "SimCity 3000 Freshness Score", ext : [".fsc"], magic : ["SimCity 3000 Freshness Score"], weakMagic : true},
-		smartGameFormat                     : {name : "Smart Game Format", ext : [".sgf"], magic : ["Smart Game Format"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Smart_Game_Format"},
+		smartGameFormat                     : {name : "Smart Game Format", ext : [".sgf"], magic : ["Smart Game Format", "application/x-go-sgf"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Smart_Game_Format"},
 		sourceEngineCompiledAINodegraph     : {name : "Source Engine Compiled AI Nodegraph", ext : [".ain"], magic : ["Source Engine Compiled AI Nodegraph"], weakMagic : true},
 		spectre3DModelTextureData           : {name : "Spectre 3D model/texture data", ext : [".dat"], magic : ["Spectre 3D model/texture data"], weakMagic : true},
 		starquakeHighScores                 : {name : "Starquake high scores", magic : ["Starquake high scores (MS-DOS)"]},
@@ -93,6 +93,7 @@ export default
 		ysFlightObjectsIdData               : {name : "YSFlight objects id data", ext : [".dat"], magic : ["YSFlight objects id data"], weakMagic : true},
 		ysFlightSceneryField                : {name : "YSFlight scenery Field", ext : [".fld"], magic : ["YSFlight scenery Field"], weakMagic : true},
 		zillionsOfGamesRules                : {name : "Zillions of Games Rules", ext : [".zrf"], magic : ["Zillions of Games Rules File"], weakMagic : true},
+		zillionsOfGamesSolutionSavedGame    : {name : "Zillions of Games Solution - Saved Game", ext : [".zsg"], magic : ["Zillions of Games Solution - Saved Game"]},
 
 		/////////////////////////////////////
 		// Image or Poly or other 'Visual' //	Could potentially try and render/convert these into something visual in the future
@@ -391,6 +392,7 @@ export default
 		eisaAddOnCardConfiguration               : {name : "EISA add-on card Configuration", ext : [".cfg"], magic : ["EISA add-on card Configuration"], weakMagic : true},
 		elasticRealityProjectData                : {name : "Elastic Reality project data", ext : [".er"], magic : ["Elastic Reality project data"]},
 		emacsRMAIL                               : {name : "Emacs RMAIL", magic : ["Emacs RMAIL"]},
+		emu48KeyboardConfiguration               : {name : "Emu48 keyboard configuration", ext : [".kml"], magic : ["Emu48 keyboard configuration"], weakMagic : true},
 		eMuleWebInterfaceTemplate                : {name : "eMule Web Interface template", ext : [".tmpl"], magic : ["eMule Web Interface template"], weakMagic : true},
 		enrichedText                             : {name : "Enriched Text Document", magic : [/^text\/enriched/]},
 		enviHeader                               : {name : "ENVI Header", ext : [".hdr"], magic : ["ENVI Header"], weakMagic : true},
@@ -534,6 +536,7 @@ export default
 		menubarToolbarConfig                     : {name : "Menubar toolbar config", ext : [".mbr"], magic : ["Menubar toolbar config"], weakMagic : true},
 		metafontTranscript                       : {name : "METAFONT transcript", ext : [".log"], magic : ["METAFONT transcript"], weakMagic : true},
 		metasequoiaPalette                       : {name : "Metasequoia Palette", ext : [".mqp"], magic : ["Metasequoia Palette"], weakMagic : true},
+		metaTraderIndicator                      : {name : "MetaTrader indicator", ext : [".mql"], magic : ["MetaTrader indicator"], weakMagic : true},
 		mgiVideoWaveStoryboard                   : {name : "MGI VideoWave Storyboard", ext : [".sbd"], magic : ["MGI VideoWave Storyboard"]},
 		microChannelArchitectureADL              : {name : "Micro-Channel Architecture Adapter Description Library", ext : [".adl"], magic : ["Micro-Channel Architecture Adapter Description Library"]},
 		microDVDSubtitle                         : {name : "MicroDVD subtitle format", ext : [".msg"], magic : ["MicroDVD subtitle format (microdvd)"]},
@@ -772,6 +775,7 @@ export default
 		visualizationToolkitFormat               : {name : "Visualization Toolkit format", ext : [".vtk"], magic : ["Visualization Toolkit format"], weakMagic : true},
 		visualThoughtDiagram                     : {name : "Visual Thought diagram", ext : [".vthought"], magic : ["Visual Thought diagram"]},
 		vmwareConfiguration                      : {name : "VMware configuration", ext : [".vmx"], magic : ["VMware configuration"], weakMagic : true},
+		wapBookmarkInfo                          : {name : "WAP Bookmark info", ext : [".url"], magic : ["WAP Bookmark info"], weakMagic : true},
 		warpINScript                             : {name : "WarpIN Script", ext : [".wis"], magic : ["WarpIN Script"]},
 		waxProject                               : {name : "Wax Project", ext : [".wxp"], magic : ["Wax Project"]},
 		webBrowserCookies                        : {name : "Web browser cookies", ext : [".txt"], magic : ["HTTP cookies", /^Web browser cookie/]},

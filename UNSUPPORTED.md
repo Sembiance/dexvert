@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,927)
+# Unsupported File Formats (2,941)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -840,7 +840,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (153)
+## Music (155)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -874,6 +874,7 @@ Family/Format | Name | Extensions | Notes
 [music/deLuxeMusicScore](https://discmaster.textfiles.com/search?formatid=deLuxeMusicScore) | DeLuxe Music Score |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
 [music/desktopGuitaristMusicScore](https://discmaster.textfiles.com/search?formatid=desktopGuitaristMusicScore) | Desktop Guitarist music score | .dtg | 
 [music/diamondWareDigitizedMusic](https://discmaster.textfiles.com/search?formatid=diamondWareDigitizedMusic) | [DiamondWare Digitized Music](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwm | [7 sample files](https://sembiance.com/fileFormatSamples/music/diamondWareDigitizedMusic/) - Some kind of wrapped MIDI modified for OPL commands. Can be played with DOS PLAYDWM.EXE but no known converter back to midi or .wav
+[music/digitalSheetMusic](https://discmaster.textfiles.com/search?formatid=digitalSheetMusic) | Digital Sheet Music | .mgt | 
 [music/digitalSoundInterfaceKit](https://discmaster.textfiles.com/search?formatid=digitalSoundInterfaceKit) | Digital Sound Interface Kit Module | .dsm | [1 sample file](https://sembiance.com/fileFormatSamples/music/digitalSoundInterfaceKit/)
 [music/digiTrekker](https://discmaster.textfiles.com/search?formatid=digiTrekker) | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [4 sample files](https://sembiance.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
 [music/directMusicStyle](https://discmaster.textfiles.com/search?formatid=directMusicStyle) | DirectMusic Style | .sty | 
@@ -896,6 +897,7 @@ Family/Format | Name | Extensions | Notes
 [music/gmod](https://discmaster.textfiles.com/search?formatid=gmod) | [GMOD Module](https://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 [music/goatTracker](https://discmaster.textfiles.com/search?formatid=goatTracker) | GoatTracker Module | .sng | [6 sample files](https://sembiance.com/fileFormatSamples/music/goatTracker/)
 [music/guillemotMaxiSoundSequence](https://discmaster.textfiles.com/search?formatid=guillemotMaxiSoundSequence) | Guillemot MaxiSound Sequence | .seq | 
+[music/iMELODYSoundMusic](https://discmaster.textfiles.com/search?formatid=iMELODYSoundMusic) | iMELODY sound/music | .imy | 
 [music/improviseMusicData](https://discmaster.textfiles.com/search?formatid=improviseMusicData) | Improvise Music Data | .imp | [5 sample files](https://sembiance.com/fileFormatSamples/unsupported/improviseMusicData/)
 [music/ixalance](https://discmaster.textfiles.com/search?formatid=ixalance) | Ixalance Module | .ixs | [5 sample files](https://sembiance.com/fileFormatSamples/music/ixalance/)
 [music/jayTrax](https://discmaster.textfiles.com/search?formatid=jayTrax) | JayTrax Module | .jxs | [4 sample files](https://sembiance.com/fileFormatSamples/music/jayTrax/)
@@ -999,7 +1001,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,847)
+## Other (1,857)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1487,6 +1489,7 @@ Family/Format | Name | Extensions | Notes
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/diablo2SavedGame](https://discmaster.textfiles.com/search?formatid=diablo2SavedGame) | Diablo II Saved Game | .d2s | 
 [other/diagramDesignerTemplate](https://discmaster.textfiles.com/search?formatid=diagramDesignerTemplate) | Diagram Designer Template | .ddt | 
+[other/diagramStudioLibrary](https://discmaster.textfiles.com/search?formatid=diagramStudioLibrary) | Diagram Studio Library | .dsl | 
 [other/diagsoftSpaceShuttlePlotData](https://discmaster.textfiles.com/search?formatid=diagsoftSpaceShuttlePlotData) | Diagsoft Space Shuttle Plot data | .cad | 
 [other/digglesSavedGameFile](https://discmaster.textfiles.com/search?formatid=digglesSavedGameFile) | Diggles Saved Game File | .sav | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
@@ -1752,6 +1755,7 @@ Family/Format | Name | Extensions | Notes
 [other/hotDocsComponent](https://discmaster.textfiles.com/search?formatid=hotDocsComponent) | HotDocs Component | .cmp | 
 [other/hotMapRegionsDescription](https://discmaster.textfiles.com/search?formatid=hotMapRegionsDescription) | HotMap VBX Regions Description | .hmd | 
 [other/hoverMazeData](https://discmaster.textfiles.com/search?formatid=hoverMazeData) | Hover! maze data | .maz | 
+[other/hp4x3xBinary](https://discmaster.textfiles.com/search?formatid=hp4x3xBinary) | HP 49/48/39/38 binary | .hp49 .hp48 .49 .hp39 .hp38 | 
 [other/hpfsAccessDB](https://discmaster.textfiles.com/search?formatid=hpfsAccessDB) | HPFS-Access DB | .dat | 
 [other/humanMachineInterfacesDriver](https://discmaster.textfiles.com/search?formatid=humanMachineInterfacesDriver) | Human Machine Interfaces Sound Driver | .386 | 
 [other/hyperACCESSOS2Data](https://discmaster.textfiles.com/search?formatid=hyperACCESSOS2Data) | HyperACCESS OS/2 data | .hho | 
@@ -1884,6 +1888,7 @@ Family/Format | Name | Extensions | Notes
 [other/linkBootableCodeForTransputerNetwork](https://discmaster.textfiles.com/search?formatid=linkBootableCodeForTransputerNetwork) | Link Bootable code for transputer network | .btl | 
 [other/links386ProMicrosoftGolfCourse](https://discmaster.textfiles.com/search?formatid=links386ProMicrosoftGolfCourse) | Links 386 Pro / Microsoft Golf Course | .crh | 
 [other/linksLSData](https://discmaster.textfiles.com/search?formatid=linksLSData) | Links LS Data | .sht | 
+[other/linksysRT31P2NAFirmware](https://discmaster.textfiles.com/search?formatid=linksysRT31P2NAFirmware) | Linksys RT31P2-NA firmware | .bin | 
 [other/linux8086ObjectFile](https://discmaster.textfiles.com/search?formatid=linux8086ObjectFile) | Linux 8086 Object File | .o | 
 [other/linuxi386ObjectFile](https://discmaster.textfiles.com/search?formatid=linuxi386ObjectFile) | Linux i386 Object File | .o | 
 [other/linuxKernel](https://discmaster.textfiles.com/search?formatid=linuxKernel) | Linux Kernel |  | 
@@ -2079,6 +2084,7 @@ Family/Format | Name | Extensions | Notes
 [other/musicMatchJukeBoxVisualization](https://discmaster.textfiles.com/search?formatid=musicMatchJukeBoxVisualization) | MusicMatch JukeBox Visualization | .mvs | 
 [other/musikTrainerNotation](https://discmaster.textfiles.com/search?formatid=musikTrainerNotation) | Musik-Trainer Notation | .mtn | 
 [other/myFamilyTreeData](https://discmaster.textfiles.com/search?formatid=myFamilyTreeData) | My Family Tree data | .tre | 
+[other/myBaseDatabase](https://discmaster.textfiles.com/search?formatid=myBaseDatabase) | myBase database | .nyf .ssgindex | 
 [other/myriadHarmonyMelodyAssistantMusic](https://discmaster.textfiles.com/search?formatid=myriadHarmonyMelodyAssistantMusic) | Myriad Harmony / Melody assistant music | .mus .myr | 
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?formatid=mySQLIndexFile) | MySQL Index | .myi | 
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?formatid=mySQLTableDefinition) | MySQL Table Definition | .frm | 
@@ -2119,6 +2125,7 @@ Family/Format | Name | Extensions | Notes
 [other/newtonToolkitLayoutSettings](https://discmaster.textfiles.com/search?formatid=newtonToolkitLayoutSettings) | Newton Toolkit Layout settings | .lyt | 
 [other/newtonToolkitProject](https://discmaster.textfiles.com/search?formatid=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
+[other/nexusDBDatabase](https://discmaster.textfiles.com/search?formatid=nexusDBDatabase) | NexusDB database | .nx1 | 
 [other/nihilisticObjectTemplate](https://discmaster.textfiles.com/search?formatid=nihilisticObjectTemplate) | Nihilistic Object Template | .not | 
 [other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 .z64 | 
 [other/nintendoDSROM](https://discmaster.textfiles.com/search?formatid=nintendoDSROM) | Nintendo DS ROM | .nds | 
@@ -2179,7 +2186,7 @@ Family/Format | Name | Extensions | Notes
 [other/outlookExpressDatabase](https://discmaster.textfiles.com/search?formatid=outlookExpressDatabase) | Outlook Express Database |  | 
 [other/outlookShortcuts](https://discmaster.textfiles.com/search?formatid=outlookShortcuts) | Outlook Shortcuts | .fav | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
-[other/pageFocusData](https://discmaster.textfiles.com/search?formatid=pageFocusData) | PageFocus Data | .1 | 
+[other/pageFocusData](https://discmaster.textfiles.com/search?formatid=pageFocusData) | PageFocus Data | .1 .xdb | 
 [other/pageMakerTable](https://discmaster.textfiles.com/search?formatid=pageMakerTable) | PageMaker Table | .tbl | 
 [other/paiVirtuosoResourceData](https://discmaster.textfiles.com/search?formatid=paiVirtuosoResourceData) | PAI Virtuoso Resource data | .rsc .rsi | 
 [other/paintersApprenticePrintInfo](https://discmaster.textfiles.com/search?formatid=paintersApprenticePrintInfo) | Painter's Apprentice Printer Info | .pri | 
@@ -2206,6 +2213,7 @@ Family/Format | Name | Extensions | Notes
 [other/pascalCompiledUnit](https://discmaster.textfiles.com/search?formatid=pascalCompiledUnit) | Pascal Compiled Unit | .tpu .ppu | 
 [other/pascalScriptBinary](https://discmaster.textfiles.com/search?formatid=pascalScriptBinary) | Pascal Script binary | .bin | 
 [other/passMarkPerformanceTestFile](https://discmaster.textfiles.com/search?formatid=passMarkPerformanceTestFile) | PassMark PerformanceTest file | .pt | 
+[other/passwordCommanderProDatabase](https://discmaster.textfiles.com/search?formatid=passwordCommanderProDatabase) | Password Commander Pro database | .pwd | 
 [other/patchMeisterDriver](https://discmaster.textfiles.com/search?formatid=patchMeisterDriver) | PatchMeister Driver | .pmdriver | 
 [other/pathMinderApplicationsMenus](https://discmaster.textfiles.com/search?formatid=pathMinderApplicationsMenus) | PathMinder Applications Menus  | .pm4 | 
 [other/pathMinderConfiguration](https://discmaster.textfiles.com/search?formatid=pathMinderConfiguration) | PathMinder configuration | .pm4 .cnf | 
@@ -2307,6 +2315,8 @@ Family/Format | Name | Extensions | Notes
 [other/proximityTechLexicon](https://discmaster.textfiles.com/search?formatid=proximityTechLexicon) | Proximity Technology Lexicon/Thesaurus | .lex .ths | 
 [other/prsFormatResourceData](https://discmaster.textfiles.com/search?formatid=prsFormatResourceData) | PRS Format Resource Data | .prs | 
 [other/psionApplicationAlias](https://discmaster.textfiles.com/search?formatid=psionApplicationAlias) | Psion Application Alias | .als | 
+[other/psionArchiveDataBase](https://discmaster.textfiles.com/search?formatid=psionArchiveDataBase) | Psion Archive Data Base | .dbf | 
+[other/psionArchiveScreen](https://discmaster.textfiles.com/search?formatid=psionArchiveScreen) | Psion Archive Screen | .scn | 
 [other/psionLibrary](https://discmaster.textfiles.com/search?formatid=psionLibrary) | Psion Library | .dyl | 
 [other/psionPhysicalDeviceDriver](https://discmaster.textfiles.com/search?formatid=psionPhysicalDeviceDriver) | Psion Physical Device Driver | .pdd | 
 [other/psionPrinterDriver](https://discmaster.textfiles.com/search?formatid=psionPrinterDriver) | Psion Printer Driver | .wdr | 
@@ -2424,6 +2434,7 @@ Family/Format | Name | Extensions | Notes
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?formatid=segaMasterSystemROM) | Sega Master System ROM | .sms | 
 [other/segaSaturnROM](https://discmaster.textfiles.com/search?formatid=segaSaturnROM) | Sega Saturn ROM | .bin | 
+[other/semSnapshot](https://discmaster.textfiles.com/search?formatid=semSnapshot) | SEM Snapshot | .sem | 
 [other/sentinelReturnsGameData](https://discmaster.textfiles.com/search?formatid=sentinelReturnsGameData) | Sentinel Returns game data | .db | 
 [other/sentrySpellingEngineLexicon](https://discmaster.textfiles.com/search?formatid=sentrySpellingEngineLexicon) | Sentry Spelling-Checker Engine Lexicon | .clx | 
 [other/settlers2Map](https://discmaster.textfiles.com/search?formatid=settlers2Map) | Settlers II Map | .swd .wld | 
@@ -2432,6 +2443,7 @@ Family/Format | Name | Extensions | Notes
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?formatid=sgmlCompiled) | SGML Compiled | .mtl | 
 [other/shapeshifterTheme](https://discmaster.textfiles.com/search?formatid=shapeshifterTheme) | Shapeshifter theme | .guikit | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?formatid=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 
+[other/showKitTemplate](https://discmaster.textfiles.com/search?formatid=showKitTemplate) | Show.kit template | .sks | 
 [other/civilizationFile](https://discmaster.textfiles.com/search?formatid=civilizationFile) | Sid Meier's Civilization File | .pal .pic | 
 [other/siegfriedAntiviruData](https://discmaster.textfiles.com/search?formatid=siegfriedAntiviruData) | Siegfried Antivirus Professional virus data | .brainfile | 
 [other/sciDriver](https://discmaster.textfiles.com/search?formatid=sciDriver) | Sierra Creative Interpreter Driver | .drv | 
@@ -2611,7 +2623,7 @@ Family/Format | Name | Extensions | Notes
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
 [other/tmmScreen](https://discmaster.textfiles.com/search?formatid=tmmScreen) | TMM Screen | .scr | 
-[other/tMTPascalForDOSSymbols](https://discmaster.textfiles.com/search?formatid=tMTPascalForDOSSymbols) | TMT Pascal for DOS Symbols | .sym | 
+[other/tmtPascalForDOSSymbols](https://discmaster.textfiles.com/search?formatid=tmtPascalForDOSSymbols) | TMT Pascal for DOS Symbols | .sym | 
 [other/tmtPascalForOS2ObjectCode](https://discmaster.textfiles.com/search?formatid=tmtPascalForOS2ObjectCode) | TMT Pascal for OS/2 object code | .fpd .fpl .fpu | 
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 
 [other/topLevelForm](https://discmaster.textfiles.com/search?formatid=topLevelForm) | TopLevel Form | .tfm | 
@@ -2852,7 +2864,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (80)
+## Poly (81)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -2918,6 +2930,7 @@ Family/Format | Name | Extensions | Notes
 [poly/residentEvilPlayerModel](https://discmaster.textfiles.com/search?formatid=residentEvilPlayerModel) | Resident Evil player model | .emw .emd | 
 [poly/rotObject](https://discmaster.textfiles.com/search?formatid=rotObject) | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/) - Only 27 unique files on discmaster. Not sure what program created these files.
 [poly/ydl](https://discmaster.textfiles.com/search?formatid=ydl) | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.
+[poly/solidEdgeModel](https://discmaster.textfiles.com/search?formatid=solidEdgeModel) | Solid Edge part/model | .par | 
 [poly/solidWorksAssembly](https://discmaster.textfiles.com/search?formatid=solidWorksAssembly) | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
 [poly/solidWorksDrawing](https://discmaster.textfiles.com/search?formatid=solidWorksDrawing) | SolidWorks Drawing | .slddrw | [3 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksDrawing/)
 [poly/solidWorksPart](https://discmaster.textfiles.com/search?formatid=solidWorksPart) | SolidWorks Part | .sldprt | [10 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksPart/)
@@ -2938,7 +2951,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (49)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?formatid=threeDOSTRVideo) | 3DO STR video |  | 
@@ -2963,6 +2976,7 @@ Family/Format | Name | Extensions | Notes
 [video/iavfVideo](https://discmaster.textfiles.com/search?formatid=iavfVideo) | IAVF video | .avi .iavf | 
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
+[video/lzaAnimationVideo](https://discmaster.textfiles.com/search?formatid=lzaAnimationVideo) | LZA animation/video | .lza | 
 [video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/magixVideo](https://discmaster.textfiles.com/search?formatid=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)

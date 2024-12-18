@@ -186,7 +186,7 @@ export default
 		magneticHint                     : {name : "Magnetic Hint", ext : [".hnt"], magic : ["Magnetic Hint"], weakMagic : true},
 		maxonMultimediaScript            : {name : "Maxon Multimedia Script", magic : ["MaxonMULTIMEDIA script"]},
 		metaEditMethodDefinition         : {name : "MetaEdit Method Definition", ext : [".mof"], magic : ["MetaEdit Method definition"]},
-		microsoftProjectExportedData     : {name : "Microsoft Project exported data", ext : [".mpx"], magic : ["Microsoft Project exported data", /^Microsoft Project$/, /^fmt\/(342|440)( |$)/, /^x-fmt\/243( |$)/]},
+		microsoftProjectExportedData     : {name : "Microsoft Project exported data", ext : [".mpx"], magic : ["Microsoft Project exported data", /^Microsoft Project$/, /^fmt\/(342|440)( |$)/, /^x-fmt\/(243|247)( |$)/]},
 		microsoftVisualCBinaryResource   : {name : "Microsoft Visual C Binary Resource", ext : [".aps"], magic : ["Microsoft Visual C .APS file", "Visual C++ binary resource"]},
 		microStationResource             : {name : "MicroStation Resource Data", ext : [".dat", ".ma"], magic : ["MicroStation Resource data", /^fmt\/1626( |$)/]},
 		moneyMatters                     : {name : "Money Matters Data", ext : [".mm"], magic : ["Money Matters"]},

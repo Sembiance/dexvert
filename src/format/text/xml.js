@@ -35,8 +35,8 @@ const _XML_MAGIC = [
 	"Wink Flash Preloader", "Wink Flash Control bar", "MAME Hash", "openMSX machine/device configuration", "ActiveReports Report (UTF-8)", "Papyrus X DB XML", /^VOTable$/, "Audacity Project", "XML Shareable Playlist Format", "application/xspf+xml",
 	"application/x-quicktime-media-link", /^Metalink \([^)]+\)$/, "NVDL script", ".NET assembly uninstaller info", "ArcPad configuration", "Predictive Model Markup Language", "SecurID Soft Token", "Qt Assistant Documentation Profile", "Karma Workspace",
 	"Microsoft Project Data Interchange XML format", "Papyrus X report XML", /^TextMate (Command|Language grammar|Theme)$/, "Apple Keynote Presentation data", "Microsoft SQL Server Analysis Services Project", "Windows PowerShell formatting (UTF-8)",
-	"psitree router configuration", "Rosegarden score (ungzipped)", "Bitz and Pixels XML", "CAPS metadata",
-	/^fmt\/(205|243|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825)( |$)/, /^x-fmt\/227( |$)/
+	"psitree router configuration", "Rosegarden score (ungzipped)", "Bitz and Pixels XML", "CAPS metadata", "KRadio Preset", "ActiveReports Report",
+	/^fmt\/(205|243|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};
 

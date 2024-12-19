@@ -1661,7 +1661,7 @@ export const WEAK_VALUES =
 	/^CMU format - Andrew Toolkit$/,
 	/^CodeView 4 Symbolic debug information$/,
 	/^ColdFusion Component \(with rem\)$/,
-	/^Colin McRae Rally 2 game data archive$/,
+	/^Colin McRae (DiRT|Rally 2) game data archive$/,
 	/^Colossal Raw asset Package$/,
 	/^COM\+ catalog file$/,	// Most matches to this are probably correct, but it's a near worthless file so just ignore it
 	/^Compact Font Format$/,

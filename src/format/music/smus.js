@@ -11,6 +11,7 @@ export class smus extends Format
 	website = "http://fileformats.archiveteam.org/wiki/SMUS";
 	ext     = [".smus", ".song"];
 	magic   = ["SMUS IFF Simple Musical Score", "IFF data, SMUS simple music"];
+	idMeta  = ({macFileType, macFileCreator}) => macFileType==="SMUS" && macFileCreator==="UHRU";
 	notes   = xu.trim`
 		The 'SMUS' format was used by many different programs including Sonix and Deluxe Music.
 		This first tries to convert SONIX SMUS with instrument support using uade123.

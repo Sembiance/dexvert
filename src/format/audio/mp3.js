@@ -18,8 +18,7 @@ export class mp3 extends Format
 	];
 	idMeta         = ({macFileType, macFileCreator}) => ["Mp3 ", "MP3 ", "MPG3"].includes(macFileType) || (macFileType==="MPEG" && macFileCreator==="MAmp");
 	//weakMagic      = ["LAME encoded MP3 audio", "MPEG ADTS, layer III", "MP2/3 (MPEG audio layer 2/3) (mp3)", /^fmt\/134( |$)/];
-	//untouched = true;
 	forbiddenMagic = _SHOCKWAVE_AUDIO_MAGIC;	// I believe Shockwave Audio is actually just MP3 underneath but with some extra metadata, still it's format handles converting it and this ensure we properly identify as that
-	untouched      = dexState => dexState.meta?.duration>50 && dexState.meta?.sampleRate>0 && dexState.meta.channels>=1;
+	untouched      = dexState => dexState.meta?.duration>0 && dexState.meta?.sampleRate>0 && dexState.meta.channels>=1;
 	metaProvider   = ["soxi"];
 }

@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,941)
+# Unsupported File Formats (2,943)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (236)
+## Archive (237)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -97,6 +97,7 @@ Family/Format | Name | Extensions | Notes
 [archive/hToolCompressedArchive](https://discmaster.textfiles.com/search?formatid=hToolCompressedArchive) | HTool compressed archive |  | 
 [archive/humongousEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?formatid=humongousEntertainmentGameDataArchive) | Humongous Entertainment game data archive | .he2 | 
 [archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?formatid=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
+[archive/hxCFloppyEmulatorDiskImage](https://discmaster.textfiles.com/search?formatid=hxCFloppyEmulatorDiskImage) | HxC Floppy Emulator disk image | .hfe | 
 [archive/iceCompressedArchive](https://discmaster.textfiles.com/search?formatid=iceCompressedArchive) | ICE compressed archive | .ice | 
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?formatid=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
@@ -1001,7 +1002,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,857)
+## Other (1,858)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1148,6 +1149,7 @@ Family/Format | Name | Extensions | Notes
 [other/apadanaProject](https://discmaster.textfiles.com/search?formatid=apadanaProject) | Apadana Project | .apr | 
 [other/apAssistCompressedData](https://discmaster.textfiles.com/search?formatid=apAssistCompressedData) | ApAssist Compressed Data |  | 
 [other/apBasicChainFileModule](https://discmaster.textfiles.com/search?formatid=apBasicChainFileModule) | ApBasic Chain file/module | .chn | 
+[other/appFaceSkin](https://discmaster.textfiles.com/search?formatid=appFaceSkin) | AppFace skin | .urf | 
 [other/apple8900EncryptedSignedContainer](https://discmaster.textfiles.com/search?formatid=apple8900EncryptedSignedContainer) | Apple 8900 encrypted signed container | .dfu .img2 | 
 [other/appleIIgsClassicDeskAccessory](https://discmaster.textfiles.com/search?formatid=appleIIgsClassicDeskAccessory) | Apple IIgs Classic Desk Accessory |  | 
 [other/appleIIgsInstrument](https://discmaster.textfiles.com/search?formatid=appleIIgsInstrument) | Apple IIgs Instrument |  | 

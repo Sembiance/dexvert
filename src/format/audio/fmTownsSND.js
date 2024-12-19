@@ -10,6 +10,7 @@ export class fmTownsSND extends Format
 	ext            = [".snd"];
 	forbidExtMatch = true;
 	magic          = ["FM-Towns SND"];
+	weakMagic      = true;
 	meta           = async inputFile =>
 	{
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 32);

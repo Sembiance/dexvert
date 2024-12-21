@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,943)
+# Unsupported File Formats (2,949)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (237)
+## Archive (238)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -162,6 +162,7 @@ Family/Format | Name | Extensions | Notes
 [archive/packmanPacked](https://discmaster.textfiles.com/search?formatid=packmanPacked) | Packman Packed |  | 
 [archive/palmMemoPadArchive](https://discmaster.textfiles.com/search?formatid=palmMemoPadArchive) | Palm Memo Pad Archive | .mpa | 
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
+[archive/paragonDOSDiskImage](https://discmaster.textfiles.com/search?formatid=paragonDOSDiskImage) | Paragon DOS disk image | .sec .dsk .img | 
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pciGeomaticsFormat](https://discmaster.textfiles.com/search?formatid=pciGeomaticsFormat) | PCI Geomatics format | .pix | 
 [archive/peDiminisherPacked](https://discmaster.textfiles.com/search?formatid=peDiminisherPacked) | PE Diminisher Packed | .exe | 
@@ -657,7 +658,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (178)
+## Image (179)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -687,7 +688,7 @@ Family/Format | Name | Extensions | Notes
 [image/beagleWorksImage](https://discmaster.textfiles.com/search?formatid=beagleWorksImage) | BeagleWorks Image |  | 
 [image/beamSoftwareSIFFImage](https://discmaster.textfiles.com/search?formatid=beamSoftwareSIFFImage) | Beam Software SIFF sprite/image | .pim | 
 [image/bentleyMicroStationCAD](https://discmaster.textfiles.com/search?formatid=bentleyMicroStationCAD) | Bentley MicroStation CAD | .dgn | 
-[image/bethesdaImageTextureIFHD](https://discmaster.textfiles.com/search?formatid=bethesdaImageTextureIFHD) | Bethesda Image texture (IFHD) | .bsi | 
+[image/bethesdaImageTextureIFHD](https://discmaster.textfiles.com/search?formatid=bethesdaImageTextureIFHD) | Bethesda Image texture | .bsi | 
 [image/blueScanDrawing](https://discmaster.textfiles.com/search?formatid=blueScanDrawing) | Blue Scan Drawing | .blsc | 
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?formatid=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
 [image/cadlogicInstinctDrawing](https://discmaster.textfiles.com/search?formatid=cadlogicInstinctDrawing) | Cadlogic Instinct Drawing | .dp | 
@@ -748,6 +749,7 @@ Family/Format | Name | Extensions | Notes
 [image/irisShowcase](https://discmaster.textfiles.com/search?formatid=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?formatid=islandDrawDocument) | IslandDraw document | .drw | 
 [image/jamBitmap](https://discmaster.textfiles.com/search?formatid=jamBitmap) | JAM Bitmap | .jam | 
+[image/jingTaoPicFormatBitmap](https://discmaster.textfiles.com/search?formatid=jingTaoPicFormatBitmap) | Jing Tao pic format bitmap | .ssl | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?formatid=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?formatid=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 [image/lightningStrikeBitmap](https://discmaster.textfiles.com/search?formatid=lightningStrikeBitmap) | Lightning Strike bitmap | .cod | 
@@ -1002,7 +1004,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,858)
+## Other (1,862)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1359,6 +1361,7 @@ Family/Format | Name | Extensions | Notes
 [other/chromeDictionary](https://discmaster.textfiles.com/search?formatid=chromeDictionary) | Chrome dictionary | .bdic | 
 [other/chromeSavedSessions](https://discmaster.textfiles.com/search?formatid=chromeSavedSessions) | Chrome saved sessions |  | 
 [other/chromeVisitedLinksHistory](https://discmaster.textfiles.com/search?formatid=chromeVisitedLinksHistory) | Chrome Visited Links history |  | 
+[other/cinema4DLayout](https://discmaster.textfiles.com/search?formatid=cinema4DLayout) | CINEMA 4D Layout | .l4d .res | 
 [other/cineMorphProject](https://discmaster.textfiles.com/search?formatid=cineMorphProject) | CineMorph Project | .project | 
 [other/civilizationIIISaveGame](https://discmaster.textfiles.com/search?formatid=civilizationIIISaveGame) | Civilization III save game | .bic .bix | 
 [other/clamAntivirusByteCodeSignatures](https://discmaster.textfiles.com/search?formatid=clamAntivirusByteCodeSignatures) | Clam Antivirus ByteCode signatures | .cbc | 
@@ -1731,6 +1734,7 @@ Family/Format | Name | Extensions | Notes
 [other/guitarProTablature](https://discmaster.textfiles.com/search?formatid=guitarProTablature) | Guitar Pro tablature | .gp3 | 
 [other/gVariantDatabase](https://discmaster.textfiles.com/search?formatid=gVariantDatabase) | GVariant Database | .compiled | 
 [other/hbedvAVAVIRAProductKey](https://discmaster.textfiles.com/search?formatid=hbedvAVAVIRAProductKey) | H-BEDV - AVIRA product key | .key | 
+[other/h2Database](https://discmaster.textfiles.com/search?formatid=h2Database) | H2 Database | .db | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
 [other/halfLifeDemo](https://discmaster.textfiles.com/search?formatid=halfLifeDemo) | Half-Life Demo | .dem | 
 [other/halionSamplerPatchBank](https://discmaster.textfiles.com/search?formatid=halionSamplerPatchBank) | HALion Sampler patch - bank | .fxb | 
@@ -2508,6 +2512,7 @@ Family/Format | Name | Extensions | Notes
 [other/starbreezeStudiosGameDataArchive](https://discmaster.textfiles.com/search?formatid=starbreezeStudiosGameDataArchive) | Starbreeze Studios game data archive | .xw .xfc .xtc .xmd .xcd .xwc | 
 [other/starCraftMap](https://discmaster.textfiles.com/search?formatid=starCraftMap) | StarCraft Map | .scm .scx | 
 [other/starCraftReplay](https://discmaster.textfiles.com/search?formatid=starCraftReplay) | StarCraft Replay | .rep | 
+[other/stardockDeskScapesAnimatedWallpaper](https://discmaster.textfiles.com/search?formatid=stardockDeskScapesAnimatedWallpaper) | Stardock's DeskScapes animated wallpaper | .dream | 
 [other/stareEOWorkshopConfig](https://discmaster.textfiles.com/search?formatid=stareEOWorkshopConfig) | Stare-EO Workshop configuration | .cfg | 
 [other/starForceProtectionContainer](https://discmaster.textfiles.com/search?formatid=starForceProtectionContainer) | StarForce protection container | .dat | 
 [other/starlancerForceData](https://discmaster.textfiles.com/search?formatid=starlancerForceData) | Starlancer Force data | .frc | 
@@ -2842,6 +2847,7 @@ Family/Format | Name | Extensions | Notes
 [other/xTreeGoldGraphicsDriver](https://discmaster.textfiles.com/search?formatid=xTreeGoldGraphicsDriver) | XTreeGold graphics Driver | .drv | 
 [other/yabBaseballGameData](https://discmaster.textfiles.com/search?formatid=yabBaseballGameData) | YAB! Baseball game data | .dat | 
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?formatid=yafaCompressionOptions) | YAFA Compression Options |  | 
+[other/yahooWidget](https://discmaster.textfiles.com/search?formatid=yahooWidget) | Yahoo! Widget | .widget | 
 [other/yamahaSysExPresetCommand](https://discmaster.textfiles.com/search?formatid=yamahaSysExPresetCommand) | Yamaha SysEx preset command | .syx .dx7 | 
 [other/yangDataModel](https://discmaster.textfiles.com/search?formatid=yangDataModel) | YANG data model | .yang | 
 [other/zarNavigatorConfiguration](https://discmaster.textfiles.com/search?formatid=zarNavigatorConfiguration) | Z.A.R. Navigator Configuration | .cfg | 

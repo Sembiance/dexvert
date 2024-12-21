@@ -1,11 +1,11 @@
-# Supported File Formats (2,804)
+# Supported File Formats (2,806)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (424)
+## Archive (425)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -109,6 +109,7 @@ archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | 
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunch-Mania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/crunchMania/)
 archive | Cruncher Packed | .exe .com | cup386 | [8 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
 archive | [Crush Archive](http://fileformats.archiveteam.org/wiki/CRUSH) | .cru | [uncrush](http://cd.textfiles.com/pdos9606/ARCHIVER/TOOLS/CRUSH18.ZIP) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/crush/)
+archive | CyberLink TalkingShow Head Definition Pack | .hdp | [foremost](http://foremost.sourceforge.net/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/cyberLinkTalkingShowHeadDefinitionPack/)
 archive | [Daemon Tools Media Data eXtended Image](http://fileformats.archiveteam.org/wiki/MDX_(Daemon_Tools)) | .mdx | [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mdx/)
 archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark_Ages_Map_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkAgesMapGameArchive/)
 archive | Dark Reign 2 game data archive | .zwp | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/darkReign2GameDataArchive/)
@@ -1210,7 +1211,7 @@ image | [Multi-Lace Editor](http://fileformats.archiveteam.org/wiki/Multi-Lace_E
 image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | [wuimg](https://codeberg.org/kaleido/wuimg) [iio2png](http://github.com/Sembiance/iio2png/) [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [10 sample files](https://sembiance.com/fileFormatSamples/image/dcx/)
 image | [Multi-resolution Seamless Image Database](http://fileformats.archiveteam.org/wiki/MrSID) | .sid | [mrsiddecode](https://www.extensis.com/support/developers) | [10 sample files](https://sembiance.com/fileFormatSamples/image/mrSIDImage/)
 image | [multiArtist](http://fileformats.archiveteam.org/wiki/MultiArtist) | .mg1 .mg2 .mg4 .mg8 | [recoil2png](http://recoil.sourceforge.net) | [32 sample files](https://sembiance.com/fileFormatSamples/image/multiArtist/)
-image | Multipart JPEG |  | [foremost](http://foremost.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/multipartJPEG/)
+image | Multipart JPEG |  | [foremost](http://foremost.sourceforge.net/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/multipartJPEG/)
 image | [Multiple Resolution Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .mrb | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/multipleResolutionBitmap/)
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/mng/)
 image | [Naïve Image Format NIA](http://fileformats.archiveteam.org/wiki/Naïve_Image_Formats) | .nia | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/naiveNIA/)
@@ -1243,7 +1244,7 @@ image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | [recoil2png]
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [6 sample files](https://sembiance.com/fileFormatSamples/image/pabloPaint/)
 image | [PABX Background](http://fileformats.archiveteam.org/wiki/PABX_background) | .pix | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pabxBackground/)
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
-image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [4 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
+image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [5 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/paintPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_Pro) | .psp .pspimage .pspbrush | [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintShopPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)) | .da4 .psc | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/paintShop/)
@@ -2075,7 +2076,7 @@ text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Casc
 text | Cashflow Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cashflowHelp/)
 text | CauseWay DOS Extender exception | .err |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
 text | [CDRDAO TOC File](http://fileformats.archiveteam.org/wiki/TOC) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/text/toc/)
-text | Celestia script | .cel |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/celestiaScript/)
+text | Celestia script | .cel |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/celestiaScript/)
 text | Celestia Sphere displacement Mesh | .cms |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/celestiaSphereDisplacementMesh/)
 text | CheckIt Pro Performances data | .prf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/checkItProPerformancesData/)
 text | CHEMICAL molecule Data | .dat |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/chemicalMoleculeData/)
@@ -2083,12 +2084,12 @@ text | ChiWriter document | .chi |  | [10 sample files](https://sembiance.com/fi
 text | Chord text file | .crd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/chordTextFile/)
 text | CIRCAD data | .tpc .tsa .tpb .tsc .pcb .tpa .tpd .tda .tsd .tdc .tsb .sch .tdb .tdd .lib |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/circadData/)
 text | CircuitMaker schematic | .ckt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/circuitMakerSchematic/)
-text | Clam AntiVirus Database Info | .info .cud .cld |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/clamAntiVirusDatabase/)
+text | Clam AntiVirus Database Info | .info .cud .cld |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/clamAntiVirusDatabase/)
 text | Clarion Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/clarionProject/)
 text | ClariSSA saved work/session |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/clariSSASavedWorkSession/)
 text | CLISP byte-compiled Lisp program | .fas |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/clispByteCompiled/)
 text | Clustal Alignment format | .nbrf .aln |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/clustalAlignmentFormat/)
-text | Code::Blocks Dependencies | .depend |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/codeBlocksDependencies/)
+text | Code::Blocks Dependencies | .depend |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/codeBlocksDependencies/)
 text | ColdFusion Component | .cfc |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/coldFusionComponent/)
 text | ColdFusion Markup Language | .cfm .cfml |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coldFusionMarkupLanguage/)
 text | ColdFusion Verity engine fields definition | .ddd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coldFusionVerityEngineFieldsDefinition/)
@@ -2418,7 +2419,7 @@ text | NaviPress NaviDoc Data | .nvd |  | [10 sample files](https://sembiance.co
 text | NaviPress NaviMap data | .nvm |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/naviPressNaviMapData/)
 text | Neil Brown's ash script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/neilBrownsAshScript/)
 text | NeoBook Document | .pub |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/neoBookDocument/)
-text | NeoBook Settings | .set |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/neoBookSettings/)
+text | NeoBook Settings | .set |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/neoBookSettings/)
 text | NeoPaint Help | .hlp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/neoPaintHelp/)
 text | NETRUN ASCII-encoded COM/EXE | .ntr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/netrunASCIIEncodedCOMEXE/)
 text | Netscape cookies | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/netscapeCookies/)
@@ -2650,7 +2651,7 @@ text | Tornado Mission info | .mis |  | [3 sample files](https://sembiance.com/f
 text | Total Commander button Bar config | .bar |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)
 text | TPLOT graph source | .plt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tplotGraphSource/)
 text | Track Row Column markers data format | .trc |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trackRowColumnMarkersDataFormat/)
-text | Tracon Sector info | .sec |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
+text | Tracon Sector info | .sec |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
 text | Tracon Simulation data | .dem .sim |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSimulationData/)
 text | Trumpet Windsock settings | .ini |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trumpetWindsockSettings/)
 text | TTCN Abstract Test Suite | .mp .ttcn .ats |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ttcnAbstractTestSuite/)
@@ -2775,7 +2776,7 @@ text | ZIM Wiki |  |  | [3 sample files](https://sembiance.com/fileFormatSamples
 
 
 
-## Video (94)
+## Video (95)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [3GP/3GPP2 Video](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/threeGVideo/)
@@ -2807,6 +2808,7 @@ video | [Disney Animation Studio CFAST](http://fileformats.archiveteam.org/wiki/
 video | [DK Multimedia Animation](https://wiki.multimedia.cx/index.php/DK_Animation) | .ani | [na_game_tool](https://nihav.org/game_tool.html) | [15 sample files](https://sembiance.com/fileFormatSamples/video/dkAnimation/)
 video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [19 sample files](https://sembiance.com/fileFormatSamples/video/dl/)
 video | [DreamForge Video](https://wiki.multimedia.cx/index.php?title=DFA) | .dfa | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/dreamForgeVideo/)
+video | [Duck IVF Video](https://wiki.multimedia.cx/index.php/Duck_IVF) | .ivf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/duckIVF/)
 video | [Electronic Arts TCQ/TGV Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_TGV) | .tgv | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/eaTCQ/)
 video | [Electronic Arts TQI Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_TQI) | .tgq | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/eaTQI/)
 video | [eTreppid Video](https://wiki.multimedia.cx/index.php/ETV) | .etv | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/eTreppidVideo/)
@@ -2822,7 +2824,7 @@ video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Play
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/video/iffYAFA/)
 video | [Intelligent Games Video/cutscene](https://wiki.multimedia.cx/index.php/Intelligent_Games_MOV) | .mov | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/intelligentGamesVideoCutscene/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/iffANIM/)
-video | [Interplay C93 Video](https://wiki.multimedia.cx/index.php/C93) | .c93 | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/c93Video/)
+video | [Interplay C93 Video](https://wiki.multimedia.cx/index.php/C93) | .c93 | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/video/c93Video/)
 video | [Interplay MVE Video](https://wiki.multimedia.cx/index.php/Interplay_MVE) | .mve | [ffmpeg](https://ffmpeg.org/) | [19 sample files](https://sembiance.com/fileFormatSamples/video/interplayMVE/)
 video | [Interspective Animation](https://wiki.multimedia.cx/index.php/Interspective_animation) | .dat | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/interspectiveAnimation/)
 video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_tool](https://nihav.org/game_tool.html) | [5 sample files](https://sembiance.com/fileFormatSamples/video/jamVideo/)
@@ -2866,7 +2868,7 @@ video | [UMV Video](https://wiki.multimedia.cx/index.php/UMV) | .umv | [na_game_
 video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/videoMasterFilm/)
 video | [VivoActive Streaming Video](https://wiki.multimedia.cx/index.php/Vivo) | .viv | [ffmpeg](https://ffmpeg.org/) | [15 sample files](https://sembiance.com/fileFormatSamples/video/vivo/)
 video | [VPX1 Video Package](https://wiki.multimedia.cx/index.php/VPX1) | .vpx | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/vpx1VideoPackage/)
-video | [WEBM Video](http://fileformats.archiveteam.org/wiki/WebM) | .webm | [ffmpeg](https://ffmpeg.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/video/webmVideo/)
+video | [WEBM Video](http://fileformats.archiveteam.org/wiki/WebM) | .webm | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/webmVideo/)
 video | [Westwood Studios Vector Quantized Animation](https://wiki.multimedia.cx/index.php/VQA) | .vqa | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/westwoodStudiosVQA/) - FFMPEG only has partial support. The HQ ones don't appear to be supported at all despite being documented out there. I tried VQA2AVI but that just produced black videos.
 video | [Windows Media Video](http://fileformats.archiveteam.org/wiki/WMV) | .wmv .asf .xesc | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/wmv/)
 video | [XBOX XMV Video](https://wiki.multimedia.cx/index.php?title=XMV) | .xmv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/xboxXMV/)

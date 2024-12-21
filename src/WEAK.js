@@ -137,6 +137,7 @@ export const WEAK_VALUES =
 	/^Netboot image, mode 2$/,
 	/^OGG audio data$/,
 	/^QNX4 Boot Block$/,
+	/^SHA256 hash constants/,
 	/^Ubiquiti firmware header/,
 	/^UEFI PI Firmware Volume/,
 	/^Unix path: /,

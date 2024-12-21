@@ -2204,6 +2204,7 @@ export default
 		microsoftWordGlossary                    : {name : "Microsoft Word Glossary", ext : [".gly"], magic : ["Microsoft Word for DOS Glossary", /^fmt\/1689( |$)/]},
 		microsoftWordStyleSheet                  : {name : "Microsoft Word Style Sheet", ext : [".sty"], magic : ["Microsoft Word for DOS Style sheet", /^fmt\/1690( |$)/]},
 		microStationMaterialLibrary              : {name : "MicroStation Material Library", ext : [".mat"], magic : [/^fmt\/1177( |$)/]},
+		microStationSymbologyResources           : {name : "MicroStation Symbology Resources", ext : [".rsc"], magic : ["MicroStation Symbology Resources"]},
 		midget3Instruments                       : {name : "Midget 3 Instruments", ext : [".mis"], magic : ["Midget 3 Instruments"], weakMagic : true},
 		midiDrumMachine                          : {name : "MIDI Drum Machine", ext : [".drm"], magic : ["Midi Drum Machine Drum"], notes : "Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum"},
 		miniCAD                                  : {name : "MiniCAD", ext : [".mcd", ".sta"], magic : [/^fmt\/1136( |$)/], weakMagic : true},

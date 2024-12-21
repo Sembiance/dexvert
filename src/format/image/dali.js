@@ -7,5 +7,5 @@ export class dali extends Format
 	ext            = [".sd0", ".sd1", ".sd2", ".hpk", ".lpk", ".mpk"];
 	fileSize       = {".sd0,.sd1,.sd2" : 32128};
 	matchFileSize  = true;
-	converters     = ["recoil2png", "nconvert"];
+	converters     = ["recoil2png", "nconvert", "wuimg"];
 }

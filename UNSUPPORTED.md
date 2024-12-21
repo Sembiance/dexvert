@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,949)
+# Unsupported File Formats (2,950)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1004,7 +1004,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,862)
+## Other (1,863)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2048,6 +2048,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftWordStyleSheet](https://discmaster.textfiles.com/search?formatid=microsoftWordStyleSheet) | Microsoft Word Style Sheet | .sty | 
 [other/microsoftZooTycoonSavedGame](https://discmaster.textfiles.com/search?formatid=microsoftZooTycoonSavedGame) | Microsoft Zoo Tycoon saved game | .zoo | 
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?formatid=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
+[other/microStationSymbologyResources](https://discmaster.textfiles.com/search?formatid=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
 [other/midget3Instruments](https://discmaster.textfiles.com/search?formatid=midget3Instruments) | Midget 3 Instruments | .mis | 
 [other/midiDrumMachine](https://discmaster.textfiles.com/search?formatid=midiDrumMachine) | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
 [other/midiMazeIIMaze](https://discmaster.textfiles.com/search?formatid=midiMazeIIMaze) | MIDI-MAZE II Maze | .mze | 

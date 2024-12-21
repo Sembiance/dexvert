@@ -11023,7 +11023,7 @@ XWD				X11 Window Dump Format
 
 
 
->>> ImTools/LibIm (old unix code that doesn't compile on modern linux, sadly)  https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
+>>> ImTools/LibIm aka imconv (old unix code that doesn't compile on modern linux, sadly)  https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
 bmp    Microsoft Windows bitmap image file
 cur    Microsoft Windows cursor image file
 eps    Adobe Encapsulated PostScript file
@@ -17135,14 +17135,17 @@ WebP (*.webp)
 >>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
 avif:	AV1 Image File Format
 avs:	AVS X
+bld:	MegaPaint
 bmp:	Microsoft Bitmap
 bmz:	GSD engine BMZ
 bru:	Degas Brush
 c64:	KoalaPainter (KOA) and Advanced Art Studio (OCP)
+cbg:	BGI/Ethornell CompressedBG (v1)
 coke:	COKE (Atari Falcon)
 da4:	PaintShop (Atari ST)
+dali:	Dali uncompressed
 dcx:	Multi-image PCX
-degas:	DEGAS bitmaps
+degas:	DEGAS and DEGAS Elite
 dib:	Microsoft DIB
 doo:	Atari Doodle
 dpx:	Digital Picture Exchange
@@ -17150,23 +17153,25 @@ eggpaint:	EggPaint
 farbfeld:	farbfeld
 flif:	Free Lossless Image Format
 ftc:	Falcon True Color
-g00:	RealLive's G00
+g00:	RealLive engine G00
 gemview:	GEM View-Dither
 gif:	Graphics Interchange Format
 god:	GodPaint
+gp4:	elf AI5 engine GP4
 heif:	High Efficiency Image File Format
 hg3:	CatSystem engine HG3
 hpicon:	HP Palmtop Icon
 ico:	Microsoft Icon
-idsp:	id Software Sprite
-ilbm:	Interleaved Bitmap
+idsp:	id Software Sprite (Quake, Half-Life, and 32-bit variants)
+ilbm:	Interleaved Bitmap (ILBM and PBM)
+indy:	IndyPaint
 j2k:	JPEG 2000 codestream
 jbig:	JBIG
 jbig2:	JBIG2
 jp2:	JPEG 2000
-jpeg:	JPEG
-jpegls:	JPEG-LS
-jpegxl:	JPEG-XL
+jpeg:	JPEG, MPO
+jpegls:	JPEG LS
+jpegxl:	JPEG XL
 lerc:	Limited Error Raster Compression
 mac:	MacPaint
 mag:	MAG (MAKI02)
@@ -17174,40 +17179,41 @@ maki:	MAKIchan (MAKI01)
 msx:	MSX-BASIC dump
 nlm:	Nokia Logo Manager
 pcf:	PCF bitmap font
-pcx:	PC Paintbrush's PCX
-pdt:	RealLive's PDT
-pgx:	Glib2 engine's PGX
+pcx:	PC Paintbrush PCX
+pdt:	RealLive engine PDT
+pgx:	Glib2 engine PGX
 pi:	Yanagisawa's Pi
 pic:	Yanagisawa's PIC
 pic2:	Yanagisawa's PIC2
 pictor:	PCPaint PICtor
 png:	Portable Network Graphics
-pnm:	PNM format family
-prt:	Kid engine's PRT
-px:	Leaf's PX
+pnm:	PNM extended family (PNM, PAM, PFM, PHM, Xv Thumbnail, MTV, JPEG2000-PGX)
+prt:	Kid engine PRT
+px:	Leaf engine PX
 q4:	MAJYO's Q4 (XLD4)
 qoi:	QuiteOK image
 raw:	Raw camera formats
 sgi:	Silicon Graphics Image
-sixel:	Sixel
+sixel:	SIXEL terminal graphics
 sun:	Sun Raster
 svg:	Scalable Vector Graphics
-tga:	Truevision TGA
-tiff:	Tag Image File Format
+tga:	Truevision TGA (TARGA)
+tiff:	Tag Image File Format, BigTIFF
 tim:	PlayStation image
-tlg:	KiriKiri engine's image
+tiny:	Tiny Stuff
+tlg:	KiriKiri engine image (v5)
 tre:	Spooky Sprites Run-Length Encoded
 trp:	Spooky Sprites uncompressed
-trs:	Spooky Sprites Sprite
+trs:	Spooky Sprites sprite
 wbm:	Wild-Bug engine image
 wbmp:	Wireless Bitmap
 webp:	WebP
 wgtspr:	WGT Sprite
-wia:	Wild-Bug image sequence
+wia:	Wild-Bug engine image sequence
 xbm:	X Bitmap
-xcursor:	Xcursor
+xcursor:	X11 cursor
 xwd:	X Window Dump
-xyz:	RPG Maker
+xyz:	RPG Maker image
 
 
 

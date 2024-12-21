@@ -8,5 +8,8 @@ export class fmTownsHEL extends Format
 	ext            = [".hel"];
 	forbidExtMatch = true;
 	magic          = ["FM Towns HEL bitmap", "FM-Towns HEL Animation"];
-	converters     = ["hel2tif -> *ffmpeg[fps:8][outType:gif]"];
+	converters     = [
+		"deark[module:fmtowns_hel][opt:fmtowns_hel:includedups] -> *ffmpeg[fps:8][outType:gif]",
+		"hel2tif -> *ffmpeg[fps:8][outType:gif]"
+	];
 }

@@ -6,7 +6,7 @@ export class imconv extends Program
 	website = "ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools";
 	package = "media-gfx/imtools";
 	flags   = {
-		format    : "Which format to use for conversion. For list run `imformats`"
+		format : "Which format to use for conversion. For list run `imformats`"
 	};
 
 	bin        = "imconv";

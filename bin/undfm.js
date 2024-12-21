@@ -75,7 +75,7 @@ for await(const line of await inputFile.readable.pipeThrough(new TextDecoderStre
 			imageCounter++;
 		}
 	}
-	else if((/^Picture|Icon\.Data = {$/).test(line.trim()))
+	else if((/^(Picture|Icon)\.Data = {$/).test(line.trim()))
 	{
 		imageType = line.trim().split(".")[0];
 		await new Blob([encoder.encode(line)]).stream().pipeTo(outputFile.writable, {preventClose : true});

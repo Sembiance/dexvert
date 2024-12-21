@@ -58,7 +58,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 			}
 		};
 
-		let tooLongTimer = null;
+		let tooLongTimer;
 		tooLongTimer = setTimeout(() =>
 		{
 			tooLongTimer = null;

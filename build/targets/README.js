@@ -4,7 +4,7 @@ import {fileUtil} from "xutil";
 import {formats, init as initFormats} from "../../src/format/formats.js";
 import {programs, init as initPrograms} from "../../src/program/programs.js";
 
-export default async function buildREADME(xlog)
+export default async function README(xlog)
 {
 	await initPrograms(xlog);
 	await initFormats(xlog);

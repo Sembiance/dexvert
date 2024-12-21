@@ -165,7 +165,7 @@ if(argv.programFlag)
 	}
 }
 
-let workDirPath = null;
+let workDirPath;
 const fullOutputPath = path.resolve(argv.outputPath);
 if(fullOutputPath.endsWith(".tar.gz"))
 {

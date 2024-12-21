@@ -220,7 +220,7 @@ export default
 		telemateCompiledScript           : {name : "Telemate Compiled Script", ext : [".tms"], magic : ["Telemate compiled script"]},
 		telixPhonebook                   : {name : "Telix Phonebook", ext : [".fbk"], magic : ["Telix Phonebook"]},
 		tiCalcGroup                      : {name : "Texas Instruments Calculator Group", ext : [".89g", ".9xg", ".92g"], magic : [/^TI-.* Graphing Calculator$/], weakMagic : true},
-		tiCalcList                       : {name : "Texas Instruments Calculator List", ext : [".9xl", ".89l", ".92l"], magic : [/^TI-.* Graphing Calculator \(list|real list\)$/], weakMagic : true},
+		tiCalcList                       : {name : "Texas Instruments Calculator List", ext : [".9xl", ".89l", ".92l"], magic : [/^TI-.* Graphing Calculator \((list|real list)\)$/], weakMagic : true},
 		tiCalcText                       : {name : "Texas Instruments Calculator Text", ext : [".89t", ".9xt", ".92t"], magic : [/^TI-.* Graphing Calculator \(text\)$/], weakMagic : true},
 		turboBASICChainModule            : {name : "Turbo Basic Chain module", ext : [".tbc"], magic : ["Turbo Basic compiled Chain module"]},
 		turboCConfiguration              : {name : "Turbo C Configuration", ext : [".tc"], magic : ["Turbo C Configuration"]},

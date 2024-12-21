@@ -46,8 +46,8 @@ for(const inputFilePath of inputFilePaths)
 		continue;
 	}
 	
-	let idMeta = null;
-	let rows = null;
+	let idMeta;
+	let rows;
 	if(argv.direct)
 	{
 		const {init : initPrograms} = await import(path.join(import.meta.dirname, "../program/programs.js"));

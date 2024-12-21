@@ -1888,7 +1888,7 @@ export const WEAK_VALUES =
 	/^Microbee tape image$/,
 	/^Microsoft Feed$/,
 	/^Microsoft Help compiler Project \(with rem\)$/,
-	/^Microsoft Office XML Flat File Format \(ASCII|UTF\)$/,
+	/^Microsoft Office XML Flat File Format \((ASCII|UTF)\)$/,
 	/^Microsoft resource data \(old\)$/,
 	/^Microsoft Resource Library \(x86\)$/,
 	/^Microsoft SQL Server database \(generic\)$/,

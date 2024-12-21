@@ -23,9 +23,9 @@ export class zip extends Format
 		"DashXL Dashboard", "Zip document container (generic)", "Fade In document", /^Python Egg$/, "MakerBot Thing", "Autodesk material Library", "Python Wheel package", "OpenOffice Extension (Dictionary)", "Microsoft Vista Sidebar Gadget (Zip)",
 		"Balabolka Text document (compressed)", "Eclipse Project settings", "KMPlayer Skin File", "Nokia S60 Web Runtime Widget Package", "PotPlayer Skin", "Messenger Plus! Skin Pack", "MuseScore compressed music score", "Wise Care 365 Skin",
 		"application/x-zip-compressed-fb2", "FreeCAD Standard document", "NumPy compressed data archive format", "Mozilla Firebird theme", /^Krita [Dd]ocument/, "application/x-krita", "osu! compressed beatmap data", "Wrapster archive (v1.0)",
-		"LEGO Exchange Format - Digital Designer", "Minecraft LiteLoader Mod", "application/vnd.sun.xml.draw", "Samurize package", "OpenIV mod package", "Power BI report", "Sublime Text Package (generic)", "Maxthon skin (MX1)", "Pencil template",
+		"LEGO Exchange Format - Digital Designer", "Minecraft LiteLoader Mod", "application/vnd.sun.xml.draw", "Samurize package", "OpenIV mod package", "Power BI report", "Sublime Text Package (generic)", "Ashampoo Burning Studio Autorun Editor Theme",
 		"Zoner Draw (container with preview)", "MediaForge Runtime Player Distribution Project", "Desktop Sidebar Panel", "Compressed Disk Image (password protected)", "DesktopX Object Package", "ComicRack plugin", "U3 application Package",
-		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language", "TuneUp Style Boot Screen", "TIP Archiv gefunden (Auflistung ist deaktiviert)", /^IOS\/iPadOS IPA file/, "Tableau Packaged Workbook",
+		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language", "TuneUp Style Boot Screen", "TIP Archiv gefunden (Auflistung ist deaktiviert)", /^IOS\/iPadOS IPA file/, "Tableau Packaged Workbook", "Maxthon skin (MX1)", "Pencil template",
 		/^fmt\/(424|524|595|627|628|937|942|943|999|1184)( |$)/,
 		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];

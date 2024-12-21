@@ -37,7 +37,9 @@ export async function read(src)
 			const op = reader.str(4);
 			if(op==="SSET")
 			{
-				i--;	// SSET's don't count for the length
+				// SSET's don't count for the length
+				i--;	// eslint-disable-line sonarjs/updated-loop-counter
+
 				const setType = reader.str(4);
 				if(setType==="PROP")
 				{

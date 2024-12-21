@@ -15,7 +15,7 @@ await fileUtil.writeTextFile(DUMMY_FILE_PATH, "x");
 const DUMMY_DIR_PATH = await fileUtil.genTempPath();
 await Deno.mkdir(DUMMY_DIR_PATH);
 
-export default async function buildSUPPORTED(xlog)
+export default async function SUPPORTED(xlog)
 {
 	await initPrograms(xlog);
 	await initFormats(xlog);
@@ -34,39 +34,39 @@ ${(await Object.values(supportedFormats).map(f => f.familyid).unique().sortMulti
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sortMulti(f => f.name).parallelMap(async f =>
+	{
+		const noteParts = [];
+		let formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `${f.familyid}/${f.formatid}`);
+		if(!await fileUtil.exists(formatSampleDirPath))
+			formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `unsupported/${f.formatid}`);
+		if(await fileUtil.exists(formatSampleDirPath))
 		{
-			const noteParts = [];
-			let formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `${f.familyid}/${f.formatid}`);
-			if(!await fileUtil.exists(formatSampleDirPath))
-				formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `unsupported/${f.formatid}`);
-			if(await fileUtil.exists(formatSampleDirPath))
-			{
-				const formatSamples = await fileUtil.tree(formatSampleDirPath);
-				noteParts.push(`[${formatSamples.length.toLocaleString()} sample file${formatSamples.length===1 ? "" : "s"}](https://sembiance.com/fileFormatSamples/${path.relative(SAMPLES_DIR_PATH, formatSampleDirPath)}/)`);
-			}
+			const formatSamples = await fileUtil.tree(formatSampleDirPath);
+			noteParts.push(`[${formatSamples.length.toLocaleString()} sample file${formatSamples.length===1 ? "" : "s"}](https://sembiance.com/fileFormatSamples/${path.relative(SAMPLES_DIR_PATH, formatSampleDirPath)}/)`);
+		}
 
-			let converters = [];
-			if(f.converters)
-			{
-				const id = Identification.create({from : "dexvert", confidence : 100, magic : f.name});
-				const dexState = DexState.create({original : {input : await DexFile.create(DUMMY_FILE_PATH), output : await DexFile.create(DUMMY_DIR_PATH)}, ids : [id]});
-				dexState.startPhase({format : f, id, f : await FileSet.create(path.dirname(DUMMY_FILE_PATH), "input", dexState.original.input)});
-				dexState.meta.yes = true;
+		let converters = [];
+		if(f.converters)
+		{
+			const id = Identification.create({from : "dexvert", confidence : 100, magic : f.name});
+			const dexState = DexState.create({original : {input : await DexFile.create(DUMMY_FILE_PATH), output : await DexFile.create(DUMMY_DIR_PATH)}, ids : [id]});
+			dexState.startPhase({id, format : f, f : await FileSet.create(path.dirname(DUMMY_FILE_PATH), "input", dexState.original.input)});
+			dexState.meta.yes = true;
 
-				converters = typeof f.converters==="function" ? await f.converters(dexState) : f.converters;
-				if(converters.some(v => Array.isArray(v)))
-					converters = converters.flatMap(converter => (typeof converter==="function" ? converter(dexState) : converter)).unique();
-				converters = converters.map(converter => (typeof converter==="function" ? converter(dexState) : converter));
-				converters = converters.map(converter => converter.split("->")[0].trim().split("[")[0].trim());	// get rid of chains
-				converters = converters.flatMap(converter => converter.split("&").map(v => v.trim())).unique();	// expand out those that call multiple programs at once and remove duplicates (image/fig (XFig) for example)
-				converters = converters.map(programid => (programs[programid] ? (programs[programid].website ? `[${programid}](${programs[programid].website})` : programid) : programid));
-			}
-			
-			const noteText = (f.notes || "").replaceAll("\n", " ").trim();
-			if(noteText && noteText.length>0)
-				noteParts.push(noteText);
-			return (`${f.familyid} | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${(converters || []).join(" ")} | ${noteParts.join(" - ")}`);
-		})).join("\n")}
+			converters = typeof f.converters==="function" ? await f.converters(dexState) : f.converters;
+			if(converters.some(v => Array.isArray(v)))
+				converters = converters.flatMap(converter => (typeof converter==="function" ? converter(dexState) : converter)).unique();
+			converters = converters.map(converter => (typeof converter==="function" ? converter(dexState) : converter));
+			converters = converters.map(converter => converter.split("->")[0].trim().split("[")[0].trim());	// get rid of chains
+			converters = converters.flatMap(converter => converter.split("&").map(v => v.trim())).unique();	// expand out those that call multiple programs at once and remove duplicates (image/fig (XFig) for example)
+			converters = converters.map(programid => (programs[programid] ? (programs[programid].website ? `[${programid}](${programs[programid].website})` : programid) : programid));
+		}
+		
+		const noteText = (f.notes || "").replaceAll("\n", " ").trim();
+		if(noteText && noteText.length>0)
+			noteParts.push(noteText);
+		return (`${f.familyid} | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${(converters || []).join(" ")} | ${noteParts.join(" - ")}`);
+	})).join("\n")}
 `)).join("\n")}
 `);
 

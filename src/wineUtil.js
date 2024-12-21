@@ -52,7 +52,7 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 
 	cmd = ((/^[A-Za-z]:/).test(cmd) || cmd.startsWith("/")) ? cmd : `c:\\dexvert\\${cmd}`;
 	
-	let killExplorerTimeout = null;
+	let killExplorerTimeout;
 	const killExplorer = async () =>
 	{
 		killExplorerTimeout = null;

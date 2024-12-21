@@ -94,7 +94,7 @@ const ALLOWED_NO_SEMBIANCE_LINKS =
 
 const wiki = new MediaWiki("http://fileformats.archiveteam.org/", {xlog});
 
-async function checkFileFormatsArchiveTeamWiki()
+async function checkFileFormatsArchiveTeamWiki()	// eslint-disable-line no-unused-vars
 {
 	const results = [];
 	
@@ -138,7 +138,7 @@ async function checkFileFormatsArchiveTeamWiki()
 	}
 }
 
-async function lookForWebsite()
+async function lookForWebsite()	// eslint-disable-line no-unused-vars
 {
 	const results = [];
 	xlog.info`Searching for possible wiki pages for ${formatsWebsiteStats["No Website"].length.toLocaleString()} 'No Website' formats...`;
@@ -148,7 +148,7 @@ async function lookForWebsite()
 		const format = formats[familyFormat.split("/")[1]];
 		let possibleTitles = await wiki.searchTitles(format.name);
 		if(!possibleTitles?.length && format.ext?.some(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())))
-			 possibleTitles = await wiki.searchTitles(format.ext.find(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())));
+			possibleTitles = await wiki.searchTitles(format.ext.find(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())));
 
 		if(possibleTitles?.length)
 			results.push({familyFormat, possibleTitles : possibleTitles.length>3 ? `${possibleTitles.length} possibilities` : `[${possibleTitles.map(v => `http://fileformats.archiveteam.org/wiki/${encodeURIComponent(v)}`).join("] [")}]`});

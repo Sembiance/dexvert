@@ -36,7 +36,7 @@ export class svgInfo extends Program
 				{
 					for(const dim of ["width", "height"])
 					{
-						const {dimRawValue, dimUnit} = (/(?<dimRawValue>[\d.]+)(?<dimUnit>.*)?/).exec(svgData.svg[`@${dim}`].toString())?.groups || {};
+						const {dimRawValue, dimUnit} = (/(?<dimRawValue>[\d.]+)(?<dimUnit>.+)?/).exec(svgData.svg[`@${dim}`].toString())?.groups || {};
 						r.meta[dim] = Math.round((+dimRawValue) * ({mm : 3.7795275591, cm : 37.795275591, in : 96, pt : 1.3333333333, pc : 16.9333333333, px : 1}[dimUnit || "px"]) || 1);	// eslint-disable-line unicorn/numeric-separators-style
 					}
 				}

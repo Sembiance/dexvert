@@ -59,7 +59,7 @@ export class iso extends Format
 	auxFiles     = (input, otherFiles) =>
 	{
 		const otherExts = [".cue", ".toc"];
-		let matches = [];
+		let matches;
 
 		// Priority #1: Files with the same name, but ending in .cue or .toc
 		matches = otherFiles.filter(otherFile => otherExts.map(ext => input.name.toLowerCase() + ext).includes(otherFile.base.toLowerCase()));
@@ -222,7 +222,7 @@ export class iso extends Format
 	meta = async (inputFile, dexState) =>
 	{
 		const xlog = dexState.xlog;
-		let cueFile = await findCUEFile(dexState);
+		const cueFile = await findCUEFile(dexState);
 		const tocFile = (dexState.f.files.aux || []).find(auxFile => auxFile.base.toLowerCase().endsWith(".toc"));	// the auxFiles priority section above will ensure that only a filename matching .toc will be included
 
 		// If we only have a TOC but no CUE, generate a CUE so we can bchunk it later
@@ -234,8 +234,8 @@ export class iso extends Format
 			await dexState.f.add("aux", r.f.outFile);
 			await r.unlinkHomeOut();
 
-			// Now we 'search' for it again, this ensures it's valid
-			cueFile = await findCUEFile(dexState);
+			// Now we 'search' for it again, this ensures it's valid -- WHOOPS, uhm, this next line appears to do absolutely nothing
+			await findCUEFile(dexState);
 		}
 
 		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info", "fuseTree", "parted"].parallelMap(async programid =>

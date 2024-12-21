@@ -16,10 +16,10 @@ export class nspark extends Program
 	{
 		const currentYear = new Date().getFullYear();
 		const {stderr} = await runUtil.run("nspark", ["-l", "-v", r.inFile()], {cwd : r.cwd});
-		const fixedOut = stderr.replace(/-{5}[\s -]+-{5}/, "\n");	// for some reason the column underlines are not on their own line, this fixes that
+		const fixedOut = stderr.replace(/-{5}[\s-]+-{5}/, "\n");	// for some reason the column underlines are not on their own line, this fixes that
 		const fileDates = Object.fromEntries(fixedOut.split("\n").map(line =>
 		{
-			const parts = (line.match(/^(?<filePath>\S+)\s+(?<fileSize>)\d+\s(?<day>\d\d)-(?<month>...)-(?<year>\d{4})\s(?<time>\S+)\s+.+$/) || {groups : {}}).groups;
+			const parts = (line.match(/^(?<filePath>\S+)\s+(?<fileSize>\d+)\s(?<day>\d\d)-(?<month>...)-(?<year>\d{4})\s(?<time>\S+)\s+.+$/) || {groups : {}}).groups;
 			if(!parts.filePath)
 				return null;
 			

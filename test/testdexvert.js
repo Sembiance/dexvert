@@ -1,4 +1,4 @@
-/* eslint-disable camelcase, unicorn/better-regex, sonarjs/no-empty-collection */
+/* eslint-disable unicorn/better-regex, sonarjs/no-empty-collection, camelcase */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
@@ -660,8 +660,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	
 	const startedAt = performance.now();
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
-	const diskFamily = sampleSubFilePath.split("/")[0];
-	const diskFormat = sampleSubFilePath.split("/")[1];
+	const [diskFamily, diskFormat] = sampleSubFilePath.split("/");
 	const diskFormatid = `${diskFamily}/${diskFormat}`;
 
 	function handleComplete()
@@ -933,8 +932,7 @@ xlog.info`Testing ${sampleFilePaths.length} sample files...`;
 await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 {
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
-	const diskFamily = sampleSubFilePath.split("/")[0];
-	const diskFormat = sampleSubFilePath.split("/")[1];
+	const [diskFamily, diskFormat] = sampleSubFilePath.split("/");
 	const diskFormatid = `${diskFamily}/${diskFormat}`;
 	if(SKIP_FORMATS.includes(diskFormatid))
 	{
@@ -1132,38 +1130,38 @@ async function writeOutputHTML()
 		${outputFiles.length.toLocaleString()} files<br>
 		<span class="topRightInfo">formats: ${argv.format.escapeHTML() || "all formats"}</span>
 		${(await outputFiles.sortMulti([filePath => path.basename(filePath)]).parallelMap(async filePath =>
-	{
-		const titleSafe = path.basename(filePath).escapeHTML();
-		const ext = path.extname(filePath);
-		const filePathSafe = mkWeblink(filePath);
-		const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
-		switch(ext.toLowerCase())
 		{
-			case ".jpg":
-			case ".gif":
-			case ".png":
-			case ".webp":
-			case ".svg":
-				return `<a href="${filePathSafe}" title="${titleSafe}"><img src="${filePathSafe}"></a>`;
+			const titleSafe = path.basename(filePath).escapeHTML();
+			const ext = path.extname(filePath);
+			const filePathSafe = mkWeblink(filePath);
+			const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
+			switch(ext.toLowerCase())
+			{
+				case ".jpg":
+				case ".gif":
+				case ".png":
+				case ".webp":
+				case ".svg":
+					return `<a href="${filePathSafe}" title="${titleSafe}"><img src="${filePathSafe}"></a>`;
 
-			case ".mp4":
-				return `<span class="media" title="${titleSafe}"><label>${relFilePath.escapeHTML()}</label><video controls="" muted="" playsinline="" src="${filePathSafe}"></video></span>`;
+				case ".mp4":
+					return `<span class="media" title="${titleSafe}"><label>${relFilePath.escapeHTML()}</label><video controls="" muted="" playsinline="" src="${filePathSafe}"></video></span>`;
 
-			case ".wav":
-			case ".mp3":
-				return `<span class="media" title="${titleSafe}"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
-			
-			case ".txt":
-			case ".pdf":
-			case ".html":
-				return `<span class="embed"><a href="${filePathSafe}" title="${titleSafe}">${titleSafe}</a><br><iframe src="${filePathSafe}" title="${titleSafe}"></iframe></span>`;
-			
-			case ".glb":
-				return `<model-viewer loading="lazy" title="${titleSafe}" interaction-prompt="none" camera-controls touch-action="none" src="data:model/gltf-binary;base64,${base64Encode(await Deno.readFile(filePath))}" shadow-intensity="0"></model-viewer>`;
-		}
+				case ".wav":
+				case ".mp3":
+					return `<span class="media" title="${titleSafe}"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
+				
+				case ".txt":
+				case ".pdf":
+				case ".html":
+					return `<span class="embed"><a href="${filePathSafe}" title="${titleSafe}">${titleSafe}</a><br><iframe src="${filePathSafe}" title="${titleSafe}"></iframe></span>`;
+				
+				case ".glb":
+					return `<model-viewer loading="lazy" title="${titleSafe}" interaction-prompt="none" camera-controls touch-action="none" src="data:model/gltf-binary;base64,${base64Encode(await Deno.readFile(filePath))}" shadow-intensity="0"></model-viewer>`;
+			}
 
-		return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;
-	})).join("")}
+			return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;
+		})).join("")}
 	<hr>
 	${testLogLines.flatMap(v => v.split("\n")).map(v => a2html.toHtml(v)).join("<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>")}
 	</body>

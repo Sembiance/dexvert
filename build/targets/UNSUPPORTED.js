@@ -4,7 +4,7 @@ import {path} from "std";
 import {formats, init as initFormats} from "../../src/format/formats.js";
 
 const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "..", "test", "sample");
-export default async function buildUNSUPPORTED(xlog)
+export default async function UNSUPPORTED(xlog)
 {
 	await initFormats(xlog);
 	
@@ -22,22 +22,22 @@ ${(await Object.values(unsupportedFormats).map(f => f.familyid).unique().sortMul
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 ${(await Object.values(unsupportedFormats).filter(f => f.familyid===familyid).sortMulti(f => f.name).parallelMap(async f =>
+	{
+		const noteParts = [];
+		let formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `${f.familyid}/${f.formatid}`);
+		if(!await fileUtil.exists(formatSampleDirPath))
+			formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `unsupported/${f.formatid}`);
+		if(await fileUtil.exists(formatSampleDirPath))
 		{
-			const noteParts = [];
-			let formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `${f.familyid}/${f.formatid}`);
-			if(!await fileUtil.exists(formatSampleDirPath))
-				formatSampleDirPath = path.join(SAMPLES_DIR_PATH, `unsupported/${f.formatid}`);
-			if(await fileUtil.exists(formatSampleDirPath))
-			{
-				const formatSamples = await fileUtil.tree(formatSampleDirPath);
-				noteParts.push(`[${formatSamples.length.toLocaleString()} sample file${formatSamples.length===1 ? "" : "s"}](https://sembiance.com/fileFormatSamples/${path.relative(SAMPLES_DIR_PATH, formatSampleDirPath)}/)`);
-			}
-			
-			const noteText = (f.notes || "").replaceAll("\n", " ").trim();
-			if(noteText && noteText.length>0)
-				noteParts.push(noteText);
-			return (`[${f.familyid}/${f.formatid}](https://discmaster.textfiles.com/search?formatid=${f.formatid}) | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${noteParts.join(" - ")}`);
-		})).join("\n")}
+			const formatSamples = await fileUtil.tree(formatSampleDirPath);
+			noteParts.push(`[${formatSamples.length.toLocaleString()} sample file${formatSamples.length===1 ? "" : "s"}](https://sembiance.com/fileFormatSamples/${path.relative(SAMPLES_DIR_PATH, formatSampleDirPath)}/)`);
+		}
+		
+		const noteText = (f.notes || "").replaceAll("\n", " ").trim();
+		if(noteText && noteText.length>0)
+			noteParts.push(noteText);
+		return (`[${f.familyid}/${f.formatid}](https://discmaster.textfiles.com/search?formatid=${f.formatid}) | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${noteParts.join(" - ")}`);
+	})).join("\n")}
 `)).join("\n")}
 `);
 }

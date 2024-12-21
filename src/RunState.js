@@ -44,7 +44,7 @@ export class RunState
 	// will return f.outFile if set, otherwise will return <f.outDir>/<filename> if it doesn't exist, otherwise it will return a non-existing filename in <f.outDir>/<random><filename>
 	async outFile(filename="outfile", {backslash, absolute}={})
 	{
-		let result = null;
+		let result;
 		if(this.f.outFile)
 		{
 			result = absolute ? this.f.outFile.absolute : path.relative(this.cwd, this.f.outFile.absolute);

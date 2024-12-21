@@ -17,7 +17,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory to place generated BIN/CUE", required : true}
 	]});
 
-let xvfbPort=null, cb=null;
+let xvfbPort, cb=null;
 
 try
 {

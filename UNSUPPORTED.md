@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,950)
+# Unsupported File Formats (2,961)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1004,7 +1004,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,863)
+## Other (1,873)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1058,6 +1058,7 @@ Family/Format | Name | Extensions | Notes
 [other/actionTemplate](https://discmaster.textfiles.com/search?formatid=actionTemplate) | Action! Template | .tpl | 
 [other/activInspireFlipchart](https://discmaster.textfiles.com/search?formatid=activInspireFlipchart) | ActivInspire Flipchart | .flipchart | 
 [other/actorImageSnapshot](https://discmaster.textfiles.com/search?formatid=actorImageSnapshot) | Actor Image Snapshot | .ima | 
+[other/acuCOBOLIndex](https://discmaster.textfiles.com/search?formatid=acuCOBOLIndex) | AcuCOBOL/Acu4GL Index | .vix .ueh | 
 [other/addictCompiledDictionary](https://discmaster.textfiles.com/search?formatid=addictCompiledDictionary) | Addict compiled dictionary | .adm | 
 [other/addictThesaurus](https://discmaster.textfiles.com/search?formatid=addictThesaurus) | Addict Thesaurus | .thr | 
 [other/addictUserDictionary](https://discmaster.textfiles.com/search?formatid=addictUserDictionary) | Addict User Dictionary | .adu | 
@@ -1235,6 +1236,7 @@ Family/Format | Name | Extensions | Notes
 [other/banyansVINESPatchData](https://discmaster.textfiles.com/search?formatid=banyansVINESPatchData) | Banyans VINES patch data | .0 .1 | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
 [other/basVBDOSPro10Source](https://discmaster.textfiles.com/search?formatid=basVBDOSPro10Source) | BAS VBDOS Pro 1.0 Source | .bas | 
+[other/basicXCompiledBytecode](https://discmaster.textfiles.com/search?formatid=basicXCompiledBytecode) | BasicX compiled bytecode | .bxb | 
 [other/battery2QuickLoadSampleData](https://discmaster.textfiles.com/search?formatid=battery2QuickLoadSampleData) | Battery 2 quick load sample data | .nov | 
 [other/battery3DrumKit](https://discmaster.textfiles.com/search?formatid=battery3DrumKit) | Battery 3 Drum Kit | .kt3 | 
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
@@ -1368,6 +1370,7 @@ Family/Format | Name | Extensions | Notes
 [other/clarisWorksPaletteFiles](https://discmaster.textfiles.com/search?formatid=clarisWorksPaletteFiles) | Claris Works palette files | .pl .plt | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?formatid=clariSSAPreferences) | ClariSSA preferences |  | 
 [other/clawCustomLevel](https://discmaster.textfiles.com/search?formatid=clawCustomLevel) | Claw custom level | .wwd | 
+[other/clickOnceCompiledManifest](https://discmaster.textfiles.com/search?formatid=clickOnceCompiledManifest) | ClickOnce Compiled Manifest | .cdf-ms | 
 [other/clipGalleryDownloadPackage](https://discmaster.textfiles.com/search?formatid=clipGalleryDownloadPackage) | Clip Gallery Download Package | .cil | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
 [other/clispMemoryImageData](https://discmaster.textfiles.com/search?formatid=clispMemoryImageData) | CLISP memory image data | .mem | 
@@ -1501,6 +1504,8 @@ Family/Format | Name | Extensions | Notes
 [other/digitalImageDesignGameDataArchive](https://discmaster.textfiles.com/search?formatid=digitalImageDesignGameDataArchive) | Digital Image Design game data archive | .xfs | 
 [other/digitalRealitySoftwareMapsData](https://discmaster.textfiles.com/search?formatid=digitalRealitySoftwareMapsData) | Digital Reality Software Maps data | .maps | 
 [other/dinamicMultimediaGFXResource](https://discmaster.textfiles.com/search?formatid=dinamicMultimediaGFXResource) | Dinamic Multimedia GFX Resource | .grc | 
+[other/dipTracePCB](https://discmaster.textfiles.com/search?formatid=dipTracePCB) | DipTrace PCB | .dip | 
+[other/dipTraceSchematic](https://discmaster.textfiles.com/search?formatid=dipTraceSchematic) | DipTrace Schematic | .dch | 
 [other/direct3DShader](https://discmaster.textfiles.com/search?formatid=direct3DShader) | Direct3D Shader | .vso .pso | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 
 [other/directoryOpusEnvironment](https://discmaster.textfiles.com/search?formatid=directoryOpusEnvironment) | Directory Opus environment |  | 
@@ -1590,6 +1595,7 @@ Family/Format | Name | Extensions | Notes
 [other/evilGeniusGameDataArchive](https://discmaster.textfiles.com/search?formatid=evilGeniusGameDataArchive) | Evil Genius game data archive | .erb | 
 [other/examViewQuestionBank](https://discmaster.textfiles.com/search?formatid=examViewQuestionBank) | ExamView Question Bank | .bnk | 
 [other/expePointSet](https://discmaster.textfiles.com/search?formatid=expePointSet) | Expe PointSet | .pts | 
+[other/expressSCHSchematic](https://discmaster.textfiles.com/search?formatid=expressSCHSchematic) | ExpressSCH schematic | .sch | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?formatid=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
 [other/extensibleStorageEngineDataBase](https://discmaster.textfiles.com/search?formatid=extensibleStorageEngineDataBase) | Extensible Storage Engine DataBase | .edb .sdb | 
 [other/extraForWindowsAPLKeymap](https://discmaster.textfiles.com/search?formatid=extraForWindowsAPLKeymap) | Extra! for Windows APL keymap | .apl | 
@@ -1882,6 +1888,7 @@ Family/Format | Name | Extensions | Notes
 [other/labVIEWControlData](https://discmaster.textfiles.com/search?formatid=labVIEWControlData) | LabVIEW Control data | .ctl | 
 [other/labVIEWData](https://discmaster.textfiles.com/search?formatid=labVIEWData) | LabVIEW data | .lsb | 
 [other/labViewVirtualInstrument](https://discmaster.textfiles.com/search?formatid=labViewVirtualInstrument) | LabView Virtual Instrument | .vi | 
+[other/labWindowsUserInterfaceResource](https://discmaster.textfiles.com/search?formatid=labWindowsUserInterfaceResource) | LabWindows User Interface Resource | .uir | 
 [other/lavasoftAdAwareReferenceFile](https://discmaster.textfiles.com/search?formatid=lavasoftAdAwareReferenceFile) | Lavasoft Ad-Aware reference file | .ref | 
 [other/ldSoHintsFile](https://discmaster.textfiles.com/search?formatid=ldSoHintsFile) | ld.so hints file | .hints | 
 [other/ldiffDifferencesData](https://discmaster.textfiles.com/search?formatid=ldiffDifferencesData) | LDIFF Differences Data | .lzd | 
@@ -2182,6 +2189,7 @@ Family/Format | Name | Extensions | Notes
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?formatid=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
 [other/opTuneConfiguration](https://discmaster.textfiles.com/search?formatid=opTuneConfiguration) | OPTune Configuration | .cfg | 
 [other/oracleTPXTemplate](https://discmaster.textfiles.com/search?formatid=oracleTPXTemplate) | Oracle TPX Template | .tpx | 
+[other/orCADLayout](https://discmaster.textfiles.com/search?formatid=orCADLayout) | OrCAD Layout | .max | 
 [other/orCADProject](https://discmaster.textfiles.com/search?formatid=orCADProject) | OrCAD Project | .opj | 
 [other/originSystemsIFFPalette](https://discmaster.textfiles.com/search?formatid=originSystemsIFFPalette) | ORIGIN Systems IFF palette | .iff | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?formatid=os2DeviceDriver) | OS/2 Device Driver | .sys | 
@@ -2348,6 +2356,8 @@ Family/Format | Name | Extensions | Notes
 [other/qualitasHelp](https://discmaster.textfiles.com/search?formatid=qualitasHelp) | Qualitas Help | .hlp | 
 [other/quarterInchCartridgeHostInterchange](https://discmaster.textfiles.com/search?formatid=quarterInchCartridgeHostInterchange) | Quarter Inch Cartridge Host Interchange Format | .qic | 
 [other/quartetSamplesSet](https://discmaster.textfiles.com/search?formatid=quartetSamplesSet) | Quartet samples set | .set | 
+[other/quartusIIArchive](https://discmaster.textfiles.com/search?formatid=quartusIIArchive) | Quartus II Archive | .qar | 
+[other/quartusIIProject](https://discmaster.textfiles.com/search?formatid=quartusIIProject) | Quartus II Project | .sof | 
 [other/quattroProAddInFunctionsLibrary](https://discmaster.textfiles.com/search?formatid=quattroProAddInFunctionsLibrary) | Quattro Pro add-in functions library | .qll | 
 [other/questAdventure](https://discmaster.textfiles.com/search?formatid=questAdventure) | Quest adventure | .cas | 
 [other/quest3DData](https://discmaster.textfiles.com/search?formatid=quest3DData) | Quest3D data | .cgr | 
@@ -2873,7 +2883,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (81)
+## Poly (82)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -2889,6 +2899,7 @@ Family/Format | Name | Extensions | Notes
 [poly/amapi3DModel](https://discmaster.textfiles.com/search?formatid=amapi3DModel) | Amapi 3D Model | .a3d .x | [6 sample files](https://sembiance.com/fileFormatSamples/poly/amapi3DModel/)
 [poly/amiraMesh](https://discmaster.textfiles.com/search?formatid=amiraMesh) | AmiraMesh | .am | 
 [poly/artOfIllusion3DScene](https://discmaster.textfiles.com/search?formatid=artOfIllusion3DScene) | Art Of Illusion 3D scene |  | 
+[poly/ashlarVellum3DModel](https://discmaster.textfiles.com/search?formatid=ashlarVellum3DModel) | Ashlar-Vellum 3D model | .ar .co .xe .vcp | 
 [poly/autoRENDER3DModel](https://discmaster.textfiles.com/search?formatid=autoRENDER3DModel) | AutoRENDER 3D model | .a3d | 
 [poly/autoShadeRenderingSlide](https://discmaster.textfiles.com/search?formatid=autoShadeRenderingSlide) | AutoShade Rendering Slide | .rnd | 
 [poly/bisP3DODOLModel](https://discmaster.textfiles.com/search?formatid=bisP3DODOLModel) | BIS P3D ODOL model | .p3d | 

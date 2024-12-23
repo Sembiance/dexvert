@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,976)
+# Unsupported File Formats (2,979)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1011,7 +1011,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,881)
+## Other (1,884)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1479,6 +1479,7 @@ Family/Format | Name | Extensions | Notes
 [other/decisionProProject](https://discmaster.textfiles.com/search?formatid=decisionProProject) | Decision/pro project | .dp | 
 [other/decisiveBattlesOfTheAmericanCivilWarGameData](https://discmaster.textfiles.com/search?formatid=decisiveBattlesOfTheAmericanCivilWarGameData) | Decisive Battles of the American Civil War game data | .dfx .dfs | 
 [other/deHackEdPatch](https://discmaster.textfiles.com/search?formatid=deHackEdPatch) | DeHackEd Patch | .deh | 
+[other/dellSystemBIOS](https://discmaster.textfiles.com/search?formatid=dellSystemBIOS) | Dell system BIOS version | .hdr | 
 [other/delphiCompiledPackage](https://discmaster.textfiles.com/search?formatid=delphiCompiledPackage) | Delphi Compiled Package | .dcp | 
 [other/delphiDiagramPortfolio](https://discmaster.textfiles.com/search?formatid=delphiDiagramPortfolio) | Delphi Diagram Portfolio | .ddp | 
 [other/deluxeSkiJump2Replay](https://discmaster.textfiles.com/search?formatid=deluxeSkiJump2Replay) | Deluxe Ski Jump 2 Replay | .rpl | 
@@ -2074,6 +2075,7 @@ Family/Format | Name | Extensions | Notes
 [other/missionPatch](https://discmaster.textfiles.com/search?formatid=missionPatch) | Mission Patch | .pat | 
 [other/mmfwData](https://discmaster.textfiles.com/search?formatid=mmfwData) | MMFW data | .mms .mmb .mmp .snd .pic .cpk .blb | 
 [other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
+[other/mODiMODVoice](https://discmaster.textfiles.com/search?formatid=mODiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moonbaseSavedGame](https://discmaster.textfiles.com/search?formatid=moonbaseSavedGame) | Moonbase Saved game | .mbs | 
 [other/moriaSavedGame](https://discmaster.textfiles.com/search?formatid=moriaSavedGame) | Moria Saved game |  | 
@@ -2655,6 +2657,7 @@ Family/Format | Name | Extensions | Notes
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
 [other/tmmScreen](https://discmaster.textfiles.com/search?formatid=tmmScreen) | TMM Screen | .scr | 
+[other/tmtPascalForDOSObjectCode](https://discmaster.textfiles.com/search?formatid=tmtPascalForDOSObjectCode) | TMT Pascal for DOS object code | .fpd | 
 [other/tmtPascalForDOSSymbols](https://discmaster.textfiles.com/search?formatid=tmtPascalForDOSSymbols) | TMT Pascal for DOS Symbols | .sym | 
 [other/tmtPascalForOS2ObjectCode](https://discmaster.textfiles.com/search?formatid=tmtPascalForOS2ObjectCode) | TMT Pascal for OS/2 object code | .fpd .fpl .fpu | 
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 

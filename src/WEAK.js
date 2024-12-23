@@ -30,7 +30,8 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"BINA/hDmp",
 	"BINA/UNIX",
 	"DEXE/LMAN",
-	"mdos/BINA"
+	"mdos/BINA",
+	"NONE/NONE"
 ];
 
 export const WEAK_PRODOS_TYPES =
@@ -457,7 +458,7 @@ export const WEAK_VALUES =
 	/^Apple QuickTime$/,
 	/^Apple QuickTime multiple URLs$/,
 	/^Applesoft BASIC program data/,
-	/^application\/(octet-stream|postscript|x-nextmail)((;(, (ASCII|ISO-8859) text)?$)|$)/,
+	/^application\/(octet-stream|postscript|x-nextmail)/,
 	/^Applixware/,
 	/^archive \(big format\)$/,
 	/^Arhangel archive data/,
@@ -802,6 +803,7 @@ export const WEAK_VALUES =
 	/^o65 (executable|library|object)/,
 	/^Oak Technologies printer stream/,
 	/^Objective-C source/,
+	/^Octave binary data/,
 	/^Ogg data UNKNOWN REVISION \d+$/,
 	/^Old EZD Electron Density Map/,
 	/^old Microsoft 8086 x\.out/,
@@ -855,7 +857,7 @@ export const WEAK_VALUES =
 	/^Protege Project$/,
 	/^ps database/,
 	/^Psion Series 5( binary:)?$/,
-	/^Psion Series 5 (clipboard|Comms settings|database Jotter file|([Ee]xecutable)|ini file|(ROM multi-bitmap image)|Sheet (file|spreadsheet))$/,
+	/^Psion Series 5 (Backlite|clipboard|Comms settings|database Jotter file|([Ee]xecutable)|ini file|Record|(ROM multi-bitmap image)|Sheet (file|spreadsheet))/,
 	/^Psion Series 5 database Agenda file$/,
 	/^Public Suffix List data/,
 	/^(pure )?object file \(z8000 a\.out\)$/,
@@ -2045,6 +2047,7 @@ export const WEAK_VALUES =
 	/^Scribe Markup$/,
 	/^Sentry Spelling-Checker user dictionary$/,
 	/^Session Description Protocol \(with rem\)$/,
+	/^SExtractor configuration$/,
 	/^SFDN Packer compressed data$/,
 	/^SFS encrypted volume$/,
 	/^Silent Hill: Origins game data archive$/,

@@ -1,4 +1,4 @@
-# Supported File Formats (2,839)
+# Supported File Formats (2,841)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -714,7 +714,7 @@ document | Psion Database | .dbf .odb | [strings](https://www.gnu.org/software/b
 document | [Psion Series 3 Word Document](http://fileformats.archiveteam.org/wiki/EPOC_Word) | .wrd .psi | [psiconv](https://frodo.looijaard.name/project/psiconv) | [11 sample files](https://sembiance.com/fileFormatSamples/document/epocWord/)
 document | [Psion Series 3 Word Document](http://fileformats.archiveteam.org/wiki/Psion_Series_3_Word) | .wrd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/psion3Word/)
 document | Psion Spreadsheet | .spr | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/psionSpreadsheet/)
-document | Psion TCR eBook | .tcr | [ebook_convert](https://calibre-ebook.com/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/psionTCReBook/)
+document | Psion TCR eBook | .tcr | [ebook_convert](https://calibre-ebook.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/psionTCReBook/)
 document | [Python Compiled Bytecode](http://fileformats.archiveteam.org/wiki/Python) | .pyc .pyo | [pycdc](https://github.com/zrax/pycdc) | [11 sample files](https://sembiance.com/fileFormatSamples/document/pythonCompiled/)
 document | Q&A Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/qAndADocument/)
 document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [quarkXPress6](https://archive.org/details/quarkxpress6.1version6.1r02004) [pageMaker7QuarkConverter](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) | [21 sample files](https://sembiance.com/fileFormatSamples/document/quarkXPress/) - Some samples don't convert: 1_8.5x11.qxd report, 10_11X14.qxd and 9_8.5X14.qxd report
@@ -1003,7 +1003,7 @@ image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [keyViewPro](https://archive.org/details/KeyViewPro/) | [30 sample files](https://sembiance.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/esm/)
 image | [Envision](http://fileformats.archiveteam.org/wiki/Envision) | .map | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/envision/)
-image | [EPOC/Psion Sketch](http://fileformats.archiveteam.org/wiki/EPOC_Sketch) |  | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [9 sample files](https://sembiance.com/fileFormatSamples/image/epocSketch/)
+image | [EPOC/Psion Sketch](http://fileformats.archiveteam.org/wiki/EPOC_Sketch) |  | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/image/epocSketch/)
 image | [Epson RAW File](http://fileformats.archiveteam.org/wiki/Epson_ERF) | .erf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/erf/)
 image | [ERDAS LAN/GIS](http://fileformats.archiveteam.org/wiki/ERDAS_LAN/GIS) | .lan .gis | [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [3 sample files](https://sembiance.com/fileFormatSamples/image/erdasLANGIS/)
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/xb/)
@@ -1755,7 +1755,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (138)
+## Other (139)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1871,6 +1871,7 @@ other | Telix Phonebook | .fbk | [strings](https://www.gnu.org/software/binutils
 other | Texas Instruments Calculator Group | .89g .9xg .92g | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/tiCalcGroup/)
 other | Texas Instruments Calculator List | .9xl .89l .92l | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/other/tiCalcList/)
 other | Texas Instruments Calculator Text | .89t .9xt .92t | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/other/tiCalcText/)
+other | TMT Pascal Help System | .hdx | [strings](https://www.gnu.org/software/binutils/) | 
 other | Turbo Basic Chain module | .tbc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/turboBASICChainModule/)
 other | Turbo C Configuration | .tc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/turboCConfiguration/)
 other | Turbo C Context File | .dsk | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/turboCContextFile/)
@@ -1963,7 +1964,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (840)
+## Text (841)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2027,7 +2028,7 @@ text | ASIC Project/Configuration | .prj .cfg |  | [6 sample files](https://semb
 text | AskEnv Requester definition | .req |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/askEnvRequesterDefinition/)
 text | ASP Application Directive | .asax |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
 text | ASP Control Directive | .ascx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspControlDirective/)
-text | ASP WebService Directive File | .asmx |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
+text | ASP WebService Directive File | .asmx |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
 text | ASP.NET Web Form |  |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/aspNETWebForm/)
 text | aspell Personal dictionary | .per .pws |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/aspellPersonalDictionary/)
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/asm/)
@@ -2435,7 +2436,7 @@ text | Neil Brown's ash script |  |  | [10 sample files](https://sembiance.com/f
 text | NeoBook Document | .pub |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/neoBookDocument/)
 text | NeoBook Settings | .set |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/neoBookSettings/)
 text | NeoPaint Help | .hlp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/neoPaintHelp/)
-text | NETRUN ASCII-encoded COM/EXE | .ntr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/netrunASCIIEncodedCOMEXE/)
+text | NETRUN ASCII-encoded COM/EXE | .ntr |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/netrunASCIIEncodedCOMEXE/)
 text | Netscape cookies | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/netscapeCookies/)
 text | NEXUS format | .nex .nxs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
 text | NMAKE | .msc .mak |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
@@ -2542,7 +2543,7 @@ text | Protein DataBank | .pdb |  | [15 sample files](https://sembiance.com/file
 text | Protel PAD macro | .pad |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/protelPADMacro/)
 text | ProtoGen Application configuration | .pva |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/protoGenApplicationConfiguration/)
 text | Proton language Schema | .sch |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
-text | Proxy Auto-Config | .pac |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
+text | Proxy Auto-Config | .pac |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
 text | PS/2 MicroChannel Adapter Description | .adf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/ps2MicroChannelAdapterDescription/)
 text | PV3D Effect | .eff |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pv3DEffect/)
 text | PV3D scene description | .pvd |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/pV3DSceneDescription/)
@@ -2675,6 +2676,7 @@ text | Tierra genome | .tie |  | [10 sample files](https://sembiance.com/fileFor
 text | Timeworks Word Writer document |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/timeworksWordWriterDocument/)
 text | Timing Wizard Report | .twr |  | 
 text | TMPEGEnc config file | .mcf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tMPEGEncConfigFile/)
+text | TMT Pascal project Configuration | .cfg |  | 
 text | Tornado 3D Project | .prj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/tornado3DProject/)
 text | Tornado Mission info | .mis |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tornadoMissionInfo/)
 text | Total Commander button Bar config | .bar |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)

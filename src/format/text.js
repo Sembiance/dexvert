@@ -246,6 +246,7 @@ export default
 		tasmInstructionsDefinitionTable          : {name : "TASM instructions definition Table", ext : [".tab"], magic : ["TASM instructions definition Table"], weakMagic : true},
 		tclTkScript                              : {name : "Tcl/Tk script", ext : [".tcl"], magic : ["Tcl/Tk script text executable", /^a .*\/wish(step|[\d.]*) script/, /^Executable script, shebang: ".*\/wish[\d.]*"/, /^Shell Skript: '.*\/wish[\d.]*'/], website : "http://fileformats.archiveteam.org/wiki/Tcl"},
 		teamDeveloperSQLWindowsAppText           : {name : "Team Developer / SQLWindows application", ext : [".apt"], magic : ["Team Developer / SQLWindows application (text)"]},
+		tmtPascalProjectConfiguration            : {name : "TMT Pascal project Configuration", ext : [".cfg"], magic : ["TMT Pascal project Configuration (generic)"], weakMagic : true},
 		verilogSourceCode                        : {name : "Verilog source code", ext : [".v"], magic : ["Verilog source code"], weakMagic : true},
 		visualBasicClassDefinition               : {name : "Visual Basic class definition", ext : [".cls"], magic : ["Visual Basic class definition"]},
 		visualBasicActiveDesignerFile            : {name : "Visual Basic Active Designer file", ext : [".dsr"], magic : ["Visual Basic Active Designer file"], weakMagic : true},

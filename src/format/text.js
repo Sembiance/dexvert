@@ -743,7 +743,7 @@ export default
 		stockholmFormat                            : {name : "Stockholm format", ext : [".sto", ".stk", ".stockholm"], magic : ["Stockholm format"]},
 		stormEdSettings                            : {name : "StormEd settings", ext : [".ed"], magic : ["StormEd settings"]},
 		studioPrinterDitherMethod                  : {name : "Studio Printer Dither method", ext : [".dit"], magic : ["Studio Printer Dither method"]},
-		subRipSubtitles                            : {name : "SubRip subtitles", ext : [".srt"], magic : ["SubRip subtitle (srt)", /^SubRip,/, /^fmt\/1218( |$)/], weakMagic : true},
+		subRipSubtitles                            : {name : "SubRip subtitles", ext : [".srt"], magic : ["SubRip subtitles", /^SubRip,/, /^fmt\/1218( |$)/], weakMagic : true},
 		subStationAlphaSubtitle                    : {name : "SubStation Alpha Subtitle", ext : [".ssa", ".ass"], magic : ["SubStation Alpha Subtitle", "text/x-ssa", "SSA (SubStation Alpha) subtitle (ass)"], weakMagic : true},
 		subViewerSubtitle                          : {name : "SubViewer subtitle", ext : [".tts"], magic : ["SubViewer subtitle format (subviewer)"], weakMagic : true},
 		sunClocksVectorMapFormat                   : {name : "SunClock's Vector Map Format", ext : [".vmf"], magic : [/^SunClock's Vector Map Format data/]},

@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,979)
+# Unsupported File Formats (2,983)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (241)
+## Archive (242)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -26,6 +26,7 @@ Family/Format | Name | Extensions | Notes
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?formatid=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
 [archive/amigaKickstartDiskImage](https://discmaster.textfiles.com/search?formatid=amigaKickstartDiskImage) | Amiga Kickstart disk image | .adf | 
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?formatid=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
+[archive/androidBootImage](https://discmaster.textfiles.com/search?formatid=androidBootImage) | Android boot image | .img | 
 [archive/apple2DiskImage](https://discmaster.textfiles.com/search?formatid=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
 [archive/sparseImage](https://discmaster.textfiles.com/search?formatid=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 [archive/PizazzCompressed](https://discmaster.textfiles.com/search?formatid=PizazzCompressed) | Application Techniques Pizazz compressed | ~ | 
@@ -499,7 +500,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (50)
+## Executable (51)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -512,6 +513,7 @@ Family/Format | Name | Extensions | Notes
 [executable/atariSTExe](https://discmaster.textfiles.com/search?formatid=atariSTExe) | Atari ST Executable |  | [11 sample files](https://sembiance.com/fileFormatSamples/executable/atariSTExe/)
 [executable/bFLTExecutable](https://discmaster.textfiles.com/search?formatid=bFLTExecutable) | BFLT executable |  | 
 [executable/blackberryExecutable](https://discmaster.textfiles.com/search?formatid=blackberryExecutable) | BlackBerry Executable | .cod | 
+[executable/dalvikExecutable](https://discmaster.textfiles.com/search?formatid=dalvikExecutable) | Dalvik Executable | .odex | 
 [executable/digiPAKAudioDriver](https://discmaster.textfiles.com/search?formatid=digiPAKAudioDriver) | DIGIPAK audio driver | .com | 
 [executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable/Library |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
 [executable/fmTownsOSApp](https://discmaster.textfiles.com/search?formatid=fmTownsOSApp) | FM-TownsOS App | .exp | [9 sample files](https://sembiance.com/fileFormatSamples/executable/fmTownsOSApp/)
@@ -1011,7 +1013,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,884)
+## Other (1,886)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1304,7 +1306,7 @@ Family/Format | Name | Extensions | Notes
 [other/bridgeTapeRecorderTape](https://discmaster.textfiles.com/search?formatid=bridgeTapeRecorderTape) | Bridge Tape Recorder Tape | .brt | 
 [other/broderbundAudioDriver](https://discmaster.textfiles.com/search?formatid=broderbundAudioDriver) | Broderbund audio Driver | .drv | 
 [other/bryceObjectPresets](https://discmaster.textfiles.com/search?formatid=bryceObjectPresets) | Bryce Object Presets | .obp | 
-[other/bsdiffPatch](https://discmaster.textfiles.com/search?formatid=bsdiffPatch) | bsdiff patch | .bdif | 
+[other/bsdiffPatch](https://discmaster.textfiles.com/search?formatid=bsdiffPatch) | bsdiff patch | .bdif .p | 
 [other/buildEngineDemoData](https://discmaster.textfiles.com/search?formatid=buildEngineDemoData) | Build Engine Demo Data | .dem | 
 [other/bullfrogObjectData](https://discmaster.textfiles.com/search?formatid=bullfrogObjectData) | Bullfrog Object Data | .dat | 
 [other/butcherShape](https://discmaster.textfiles.com/search?formatid=butcherShape) | Butcher Shape | .shape | 
@@ -1804,6 +1806,7 @@ Family/Format | Name | Extensions | Notes
 [other/imageMixerProject](https://discmaster.textfiles.com/search?formatid=imageMixerProject) | ImageMixer project | .ima | 
 [other/imagenPrinter](https://discmaster.textfiles.com/search?formatid=imagenPrinter) | Imagen printer | .imp | 
 [other/imagineStagingData](https://discmaster.textfiles.com/search?formatid=imagineStagingData) | Imagine Staging Data | .istg | 
+[other/imgdiffPatch](https://discmaster.textfiles.com/search?formatid=imgdiffPatch) | imgdiff patch | .p .patch | 
 [other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Sound Driver | .drv | 
 [other/independenceWar2ModPackage](https://discmaster.textfiles.com/search?formatid=independenceWar2ModPackage) | Independence War 2 mod Package | .pkg | 
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?formatid=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
@@ -2200,6 +2203,7 @@ Family/Format | Name | Extensions | Notes
 [other/ohrrpgceGame](https://discmaster.textfiles.com/search?formatid=ohrrpgceGame) | OHRRPGCE game | .rpg | 
 [other/olbLib](https://discmaster.textfiles.com/search?formatid=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
 [other/openMediaFrameworkInterchange](https://discmaster.textfiles.com/search?formatid=openMediaFrameworkInterchange) | Open Media Framework Interchange | .omf | 
+[other/openFstBinaryData](https://discmaster.textfiles.com/search?formatid=openFstBinaryData) | OpenFst binary data | .far .fst | 
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?formatid=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
 [other/opTuneConfiguration](https://discmaster.textfiles.com/search?formatid=opTuneConfiguration) | OPTune Configuration | .cfg | 
 [other/oracleTPXTemplate](https://discmaster.textfiles.com/search?formatid=oracleTPXTemplate) | Oracle TPX Template | .tpx | 

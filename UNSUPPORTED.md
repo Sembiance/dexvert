@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,961)
+# Unsupported File Formats (2,976)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (238)
+## Archive (241)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -64,8 +64,8 @@ Family/Format | Name | Extensions | Notes
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
 [archive/crypackProtected](https://discmaster.textfiles.com/search?formatid=crypackProtected) | CRYPACK Protected | .exe | 
 [archive/cryptLightShowProtected](https://discmaster.textfiles.com/search?formatid=cryptLightShowProtected) | Crypt Light Show Protected | .exe | 
-[archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE Proterctd | .exe | 
-[archive/darkstopProtected](https://discmaster.textfiles.com/search?formatid=darkstopProtected) | DaRKSToP Proterctd | .exe | 
+[archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE Protected | .exe | 
+[archive/darkstopProtected](https://discmaster.textfiles.com/search?formatid=darkstopProtected) | DaRKSToP Protected | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?formatid=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | 
@@ -112,6 +112,7 @@ Family/Format | Name | Extensions | Notes
 [archive/isiGMotorMASType0GameDataArchive](https://discmaster.textfiles.com/search?formatid=isiGMotorMASType0GameDataArchive) | ISI gMotor MAS type 0 game data archive | .gtl | 
 [archive/izPackArchive](https://discmaster.textfiles.com/search?formatid=izPackArchive) | IzPack Archive |  | 
 [archive/jadeEmpireGameDataArchive](https://discmaster.textfiles.com/search?formatid=jadeEmpireGameDataArchive) | Jade Empire game data archive | .rim | 
+[archive/jmCryptExeProtected](https://discmaster.textfiles.com/search?formatid=jmCryptExeProtected) | JMCryptExe Protected | .exe | 
 [archive/kkcrunchPacked](https://discmaster.textfiles.com/search?formatid=kkcrunchPacked) | kkrunchy Packed | .exe | 
 [archive/kuaiZipCompressedArchive](https://discmaster.textfiles.com/search?formatid=kuaiZipCompressedArchive) | KuaiZip compressed archive | .kz | 
 [archive/kudoDataBaseCatalog](https://discmaster.textfiles.com/search?formatid=kudoDataBaseCatalog) | Kudo Data Base catalog | .kdb | 
@@ -185,6 +186,7 @@ Family/Format | Name | Extensions | Notes
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?formatid=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
 [archive/py2exePacked](https://discmaster.textfiles.com/search?formatid=py2exePacked) | py2exe Packed | .exe | 
 [archive/pyInstallerPacked](https://discmaster.textfiles.com/search?formatid=pyInstallerPacked) | PyInstaller Packed | .exe | 
+[archive/qemuQCOWImage](https://discmaster.textfiles.com/search?formatid=qemuQCOWImage) | QEMU QCOW Image | .qcow2 .qcow .img | 
 [archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?formatid=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
 [archive/redArchive](https://discmaster.textfiles.com/search?formatid=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?formatid=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 
@@ -232,6 +234,7 @@ Family/Format | Name | Extensions | Notes
 [archive/warhammer40KTextures](https://discmaster.textfiles.com/search?formatid=warhammer40KTextures) | Warhammer 40K textures | .rsh | 
 [archive/wrp](https://discmaster.textfiles.com/search?formatid=wrp) | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/) - uaeunp says it supports it, and it will take an input .wrp and output a 'zipped.wrp' but that never converts to anything useful UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 [archive/warpINInstaller](https://discmaster.textfiles.com/search?formatid=warpINInstaller) | WarpIN Installer | .wpi | 
+[archive/winAPEIDEHardDiskImage](https://discmaster.textfiles.com/search?formatid=winAPEIDEHardDiskImage) | WinAPE IDE hard disk image | .ide | 
 [archive/windevCompressedArchive](https://discmaster.textfiles.com/search?formatid=windevCompressedArchive) | WINDEV compressed archive | .wdz | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?formatid=wordPerfectInstallArchive) | WordPerfect install archive |  | 
 [archive/wraptor](https://discmaster.textfiles.com/search?formatid=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
@@ -496,7 +499,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (49)
+## Executable (50)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -541,6 +544,7 @@ Family/Format | Name | Extensions | Notes
 [executable/sonyPlaystationExe](https://discmaster.textfiles.com/search?formatid=sonyPlaystationExe) | Sony Playstation Executable | .exe | 
 [executable/sparcDemandExe](https://discmaster.textfiles.com/search?formatid=sparcDemandExe) | SPARC Demand Paged Exe |  | 
 [executable/superbaseProgram](https://discmaster.textfiles.com/search?formatid=superbaseProgram) | Superbase Program | .sbp | 
+[executable/symbOSExecutable](https://discmaster.textfiles.com/search?formatid=symbOSExecutable) | SymbOS executable | .sym | 
 [executable/systemV64BitLibrary](https://discmaster.textfiles.com/search?formatid=systemV64BitLibrary) | System V 64-bit library | .a | 
 [executable/tiCalcProgram](https://discmaster.textfiles.com/search?formatid=tiCalcProgram) | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p .8Xk .8xk | 
 [executable/vmsVAXExecutable](https://discmaster.textfiles.com/search?formatid=vmsVAXExecutable) | VMS VAX executable | .vxe | 
@@ -658,7 +662,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (179)
+## Image (180)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -707,6 +711,7 @@ Family/Format | Name | Extensions | Notes
 [image/desiIIIDrawing](https://discmaster.textfiles.com/search?formatid=desiIIIDrawing) | DESI-III drawing | .bin .din | 
 [image/designWorks](https://discmaster.textfiles.com/search?formatid=designWorks) | DesignWorks Drawing |  | [2 sample files](https://sembiance.com/fileFormatSamples/image/designWorks/)
 [image/deskMateDrawDrawing](https://discmaster.textfiles.com/search?formatid=deskMateDrawDrawing) | DeskMate Draw drawing | .fig | [1 sample file](https://sembiance.com/fileFormatSamples/image/deskMateDrawDrawing/)
+[image/drDrawDrawing](https://discmaster.textfiles.com/search?formatid=drDrawDrawing) | DR Draw drawing | .pix | 
 [image/drafixWindowsCADDrawing](https://discmaster.textfiles.com/search?formatid=drafixWindowsCADDrawing) | Drafix Windows CAD Drawing | .cad .slb | 
 [image/draftChoiceForWindowsDrawing](https://discmaster.textfiles.com/search?formatid=draftChoiceForWindowsDrawing) | Draft Choice for Windows drawing | .dcw | 
 [image/draftChoice](https://discmaster.textfiles.com/search?formatid=draftChoice) | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://sembiance.com/fileFormatSamples/image/draftChoice/)
@@ -843,7 +848,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (155)
+## Music (157)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -974,11 +979,12 @@ Family/Format | Name | Extensions | Notes
 [music/skaleTracker](https://discmaster.textfiles.com/search?formatid=skaleTracker) | Skale Tracker Module | .skm | [5 sample files](https://sembiance.com/fileFormatSamples/music/skaleTracker/)
 [music/soundClub](https://discmaster.textfiles.com/search?formatid=soundClub) | Sound Club Module | .sn .sn2 | [9 sample files](https://sembiance.com/fileFormatSamples/music/soundClub/)
 [music/soundSmithSequence](https://discmaster.textfiles.com/search?formatid=soundSmithSequence) | SoundSmith sequence |  | 
-[music/soundtrakker128](https://discmaster.textfiles.com/search?formatid=soundtrakker128) | [Soundtrakker 128](http://fileformats.archiveteam.org/wiki/Soundtrakker_128_module) | .128 | [3 sample files](https://sembiance.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
+[music/soundtrakker128](https://discmaster.textfiles.com/search?formatid=soundtrakker128) | [Soundtrakker 128](http://fileformats.archiveteam.org/wiki/Soundtrakker_128_module) | .128 .st2 | [4 sample files](https://sembiance.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
 [music/spispopdSong](https://discmaster.textfiles.com/search?formatid=spispopdSong) | SPISPOPD Song | .sng | 
 [music/squirrelModule](https://discmaster.textfiles.com/search?formatid=squirrelModule) | Squirrel Module | .sqm | [1 sample file](https://sembiance.com/fileFormatSamples/music/squirrelModule/)
 [music/star3MIDIKaraoke](https://discmaster.textfiles.com/search?formatid=star3MIDIKaraoke) | [Star 3 MIDI Karaoke](https://wiki.multimedia.cx/index.php?title=Star_3) | .st3 | [3 sample files](https://sembiance.com/fileFormatSamples/music/star3MIDIKaraoke/)
 [music/starkos](https://discmaster.textfiles.com/search?formatid=starkos) | STarKos Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/starkos/)
+[music/sTarKosTune](https://discmaster.textfiles.com/search?formatid=sTarKosTune) | STarKos tune | .bin .mus | 
 [music/pro24SNG](https://discmaster.textfiles.com/search?formatid=pro24SNG) | [Steinberg Pro Song](https://www.atarimania.com/utility-atari-st-pro-24-iii_29596.html) | .sng | [9 sample files](https://sembiance.com/fileFormatSamples/music/pro24SNG/) - I could emulate Atari ST in Win7, pre-generate a floppy with the song on it, use autoit to send keystrokes to Hatari emulator to load the song and then export as MIDI to the floppy and copy the floppy to c:\out
 [music/stoneTracker](https://discmaster.textfiles.com/search?formatid=stoneTracker) | StoneTracker Module | .spm .sps | [6 sample files](https://sembiance.com/fileFormatSamples/music/stoneTracker/)
 [music/sunVox](https://discmaster.textfiles.com/search?formatid=sunVox) | SunVox Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/sunVox/)
@@ -998,13 +1004,14 @@ Family/Format | Name | Extensions | Notes
 [music/vocaloidSequence](https://discmaster.textfiles.com/search?formatid=vocaloidSequence) | Vocaloid Sequence | .vsq | 
 [music/voyetraSequencerSong](https://discmaster.textfiles.com/search?formatid=voyetraSequencerSong) | Voyetra Sequencer Song | .sng | 
 [music/winSongComposerSong](https://discmaster.textfiles.com/search?formatid=winSongComposerSong) | WinSong Composer Song | .sng | 
+[music/wyzTrackerModule](https://discmaster.textfiles.com/search?formatid=wyzTrackerModule) | WYZTracker module |  | 
 [music/xlr8SentryChipComposorMusic](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorMusic) | XLR8 - Sentry Chip Composor Music | .xms | 
 [music/xlr8SentryChipComposorSong](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorSong) | XLR8 - Sentry Chip Composor Song | .xng | 
 [music/yamahaESEQ](https://discmaster.textfiles.com/search?formatid=yamahaESEQ) | Yamaha e-SEQ Music | .esq .fil | 
 
 
 
-## Other (1,873)
+## Other (1,881)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1962,6 +1969,7 @@ Family/Format | Name | Extensions | Notes
 [other/mainActorProject](https://discmaster.textfiles.com/search?formatid=mainActorProject) | MainActor project | .mpf | 
 [other/mangaStudioStory](https://discmaster.textfiles.com/search?formatid=mangaStudioStory) | Manga Studio Story | .cst | 
 [other/mapBrowserVectorData](https://discmaster.textfiles.com/search?formatid=mapBrowserVectorData) | MapBrowser/MapWriter Vector Map Data | cbd | 
+[other/mapInfoMapBasicApplicationEXtension](https://discmaster.textfiles.com/search?formatid=mapInfoMapBasicApplicationEXtension) | MapInfo MapBasic application eXtension | .mbx1 .mbx | 
 [other/mapInfoMapBasicDataIndex](https://discmaster.textfiles.com/search?formatid=mapInfoMapBasicDataIndex) | MapInfo MapBasic data Index | .ind | 
 [other/mapInfoMapBasicMapData](https://discmaster.textfiles.com/search?formatid=mapInfoMapBasicMapData) | MapInfo MapBasic map data | .map | 
 [other/mapleCommonBinary](https://discmaster.textfiles.com/search?formatid=mapleCommonBinary) | Maple Common Binary | .m | 
@@ -2061,6 +2069,7 @@ Family/Format | Name | Extensions | Notes
 [other/midiMazeIIMaze](https://discmaster.textfiles.com/search?formatid=midiMazeIIMaze) | MIDI-MAZE II Maze | .mze | 
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?formatid=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
 [other/miniCAD](https://discmaster.textfiles.com/search?formatid=miniCAD) | MiniCAD | .mcd .sta | 
+[other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?formatid=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 
 [other/mirrorIIEmulationFile](https://discmaster.textfiles.com/search?formatid=mirrorIIEmulationFile) | Mirror II Emulation File | .mef | 
 [other/missionPatch](https://discmaster.textfiles.com/search?formatid=missionPatch) | Mission Patch | .pat | 
 [other/mmfwData](https://discmaster.textfiles.com/search?formatid=mmfwData) | MMFW data | .mms .mmb .mmp .snd .pic .cpk .blb | 
@@ -2136,6 +2145,7 @@ Family/Format | Name | Extensions | Notes
 [other/netwareMessage](https://discmaster.textfiles.com/search?formatid=netwareMessage) | Netware Message | .msg | 
 [other/netwareServerLicense](https://discmaster.textfiles.com/search?formatid=netwareServerLicense) | Netware Server license | .mls | 
 [other/networkAssociatesVirusScanData](https://discmaster.textfiles.com/search?formatid=networkAssociatesVirusScanData) | Network Associates VirusScan data | .dat | 
+[other/networkInstrumentsObserverCaptureFile](https://discmaster.textfiles.com/search?formatid=networkInstrumentsObserverCaptureFile) | Network Instruments Observer capture file | .lst .bfr .ls | 
 [other/newtonToolkitLayoutSettings](https://discmaster.textfiles.com/search?formatid=newtonToolkitLayoutSettings) | Newton Toolkit Layout settings | .lyt | 
 [other/newtonToolkitProject](https://discmaster.textfiles.com/search?formatid=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
@@ -2167,6 +2177,8 @@ Family/Format | Name | Extensions | Notes
 [other/noxMap](https://discmaster.textfiles.com/search?formatid=noxMap) | NoX Map | .map .nxz | 
 [other/ntfsTransactionalLog](https://discmaster.textfiles.com/search?formatid=ntfsTransactionalLog) | NTFS transactional log |  | 
 [other/ntv2StandardBinaryGridShift](https://discmaster.textfiles.com/search?formatid=ntv2StandardBinaryGridShift) | NTv2 Standard Binary Grid Shift | .gsb | 
+[other/nullsoftDatabaseEngineData](https://discmaster.textfiles.com/search?formatid=nullsoftDatabaseEngineData) | Nullsoft Database Engine data |  | 
+[other/nullsoftDatabaseEngineIndex](https://discmaster.textfiles.com/search?formatid=nullsoftDatabaseEngineIndex) | Nullsoft Database Engine Index |  | 
 [other/nullsoftInstallData](https://discmaster.textfiles.com/search?formatid=nullsoftInstallData) | Nullsoft Install data |  | 
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?formatid=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?formatid=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
@@ -2512,6 +2524,8 @@ Family/Format | Name | Extensions | Notes
 [other/spyBotSearchAndDestroySignature](https://discmaster.textfiles.com/search?formatid=spyBotSearchAndDestroySignature) | SpyBot-Search-and-Destroy Signature | .sig | 
 [other/spyneContainer](https://discmaster.textfiles.com/search?formatid=spyneContainer) | SPYne Container |  | 
 [other/sqkServerCompactEditionDatabase](https://discmaster.textfiles.com/search?formatid=sqkServerCompactEditionDatabase) | SQL Server Compact Edition database | .sdf | 
+[other/sqliteWriteAheadLog](https://discmaster.textfiles.com/search?formatid=sqliteWriteAheadLog) | SQLite Write-Ahead Log | .db-wal | 
+[other/sqliteWriteAheadLogSharedMemory](https://discmaster.textfiles.com/search?formatid=sqliteWriteAheadLogSharedMemory) | SQLite Write-Ahead Log shared memory | .db-shm | 
 [other/sqlite2Database](https://discmaster.textfiles.com/search?formatid=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
 [other/stCADSymbol](https://discmaster.textfiles.com/search?formatid=stCADSymbol) | ST-CAD Symbol | .sym | 
 [other/stacElectronicsArchiveFormat](https://discmaster.textfiles.com/search?formatid=stacElectronicsArchiveFormat) | Stac Electronics Archive Format | .saf | 
@@ -2840,6 +2854,7 @@ Family/Format | Name | Extensions | Notes
 [other/worldConstructionSetParameters](https://discmaster.textfiles.com/search?formatid=worldConstructionSetParameters) | World Construction Set Parameters | .par | 
 [other/worldMachineDocument](https://discmaster.textfiles.com/search?formatid=worldMachineDocument) | WorldMachine document | .tmd | 
 [other/wreckinCrewLevelMap](https://discmaster.textfiles.com/search?formatid=wreckinCrewLevelMap) | Wreckin Crew level Map | .map | 
+[other/wsusPatchStorageFile](https://discmaster.textfiles.com/search?formatid=wsusPatchStorageFile) | WSUS Patch Storage File | .psf .p | 
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?formatid=xCADModifierTable) | X-CAD Modifier Table | .obj | 
 [other/xCADOverlay](https://discmaster.textfiles.com/search?formatid=xCADOverlay) | X-CAD Overlay |  | 
 [other/xCADPatternFill](https://discmaster.textfiles.com/search?formatid=xCADPatternFill) | X-CAD Pattern Fill | .ptf | 

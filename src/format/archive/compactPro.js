@@ -7,7 +7,7 @@ export class compactPro extends Format
 	ext        = [".cpt"];
 	magic      = ["Mac Compact Pro archive", "Compact Pro"];
 	weakMagic  = ["Mac Compact Pro archive"];
-	idMeta     = ({macFileType, macFileCreator}) => macFileType==="PACT" && ["CPCT", "SITx"].includes(macFileCreator);
+	idMeta     = ({macFileType}) => macFileType==="PACT";
 	priority   = this.PRIORITY.LOW;
 	converters = ["unar[mac]", "macunpack"];
 }

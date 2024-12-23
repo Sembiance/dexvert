@@ -6,6 +6,6 @@ export class locoScriptDocument extends Format
 	website        = "http://justsolve.archiveteam.org/wiki/LocoScript";
 	ext            = [".000", ".a00"];
 	forbidExtMatch = true;
-	magic          = ["LocoScript 2 document", "LocoScript PCW document", /^fmt\/1305( |$)/];
+	magic          = [/^LocoScript \d document/, "LocoScript PCW document", /^fmt\/(1304|1305)( |$)/];
 	converters     = ["ailink"];
 }

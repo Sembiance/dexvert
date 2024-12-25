@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,983)
+# Unsupported File Formats (2,986)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -664,7 +664,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (180)
+## Image (181)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -673,6 +673,7 @@ Family/Format | Name | Extensions | Notes
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
 [image/aegisDrawDrawing](https://discmaster.textfiles.com/search?formatid=aegisDrawDrawing) | Aegis Draw drawing | .draw1 | 
 [image/afl](https://discmaster.textfiles.com/search?formatid=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
+[image/aipdNI](https://discmaster.textfiles.com/search?formatid=aipdNI) | AIPD National Instruments Image | .apd .aipd | [8 sample files](https://sembiance.com/fileFormatSamples/image/aipdNI/)
 [image/aldusIntelliDrawDrawing](https://discmaster.textfiles.com/search?formatid=aldusIntelliDrawDrawing) | Aldus IntelliDraw Drawing | .idw | 
 [image/amiBlitz2Bitmap](https://discmaster.textfiles.com/search?formatid=amiBlitz2Bitmap) | AmiBlitz2 bitmap | .ab2i | 
 [image/animatorPICCEL](https://discmaster.textfiles.com/search?formatid=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
@@ -1013,7 +1014,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,886)
+## Other (1,888)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1745,6 +1746,7 @@ Family/Format | Name | Extensions | Notes
 [other/greatValleyProductsEGSSettings](https://discmaster.textfiles.com/search?formatid=greatValleyProductsEGSSettings) | Great Valley Products EGS settings | .map2video | 
 [other/greenfishIconEditorPro](https://discmaster.textfiles.com/search?formatid=greenfishIconEditorPro) | Greenfish Icon Editor Pro | .gfie .gfi | 
 [other/groundControlIIOperationExodusGameArchive](https://discmaster.textfiles.com/search?formatid=groundControlIIOperationExodusGameArchive) | Ground Control II: Operation Exodus game data archive | .sdf | 
+[other/groundControlMap](https://discmaster.textfiles.com/search?formatid=groundControlMap) | Ground Control map | .sdf | 
 [other/groupWiseAdminHostDatabase](https://discmaster.textfiles.com/search?formatid=groupWiseAdminHostDatabase) | GroupWise admin host database | .db | 
 [other/guitarProFile](https://discmaster.textfiles.com/search?formatid=guitarProFile) | Guitar Pro File | .gtp | 
 [other/guitarProTablature](https://discmaster.textfiles.com/search?formatid=guitarProTablature) | Guitar Pro tablature | .gp3 | 
@@ -1753,6 +1755,7 @@ Family/Format | Name | Extensions | Notes
 [other/h2Database](https://discmaster.textfiles.com/search?formatid=h2Database) | H2 Database | .db | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
 [other/halfLifeDemo](https://discmaster.textfiles.com/search?formatid=halfLifeDemo) | Half-Life Demo | .dem | 
+[other/halfLifeSaveGame](https://discmaster.textfiles.com/search?formatid=halfLifeSaveGame) | Half-Life Save Game | .sav | 
 [other/halionSamplerPatchBank](https://discmaster.textfiles.com/search?formatid=halionSamplerPatchBank) | HALion Sampler patch - bank | .fxb | 
 [other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
 [other/halnoteApplication](https://discmaster.textfiles.com/search?formatid=halnoteApplication) | HALNOTE Application | .apl | 

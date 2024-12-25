@@ -191,7 +191,7 @@ export default
 		microStationResource             : {name : "MicroStation Resource Data", ext : [".dat", ".ma"], magic : ["MicroStation Resource data", /^fmt\/1626( |$)/]},
 		moneyMatters                     : {name : "Money Matters Data", ext : [".mm"], magic : ["Money Matters"]},
 		msvcPCH                          : {name : "Microsoft Visual C/C++ Precompiled Header file", ext : [".pch", ".dbg"], magic : ["Microsoft Visual C .pch", "Microsoft Precompiled Header Datei", "MS Visual C++ precompiled header"]},
-		msVisualFoxProApp                : {name : "MS Visual FoxPro App", ext : [".app", ".fxp"], magic : ["Generated application MS Visual FoxPro 7"], idMeta : ({macFileType, macFileCreator}) => ["FAPP", "FFXP"].includes(macFileType) && macFileCreator==="FOXX"},
+		msVisualFoxProApp                : {name : "MS Visual FoxPro App", ext : [".app", ".fxp"], magic : ["Generated application MS Visual FoxPro 7"], idMeta : ({macFileType, macFileCreator}) => ["FAPP", "FFXP", "FSPX"].includes(macFileType) && macFileCreator==="FOXX"},
 		msWinCEInstallHeader             : {name : "Microsoft WinCE Install Header", ext : [".000"], magic : ["Microsoft WinCE install header", "Microsoft WinCE installer"]},
 		neroAudioCDCompilation           : {name : "Nero Audio-CD Compilation", ext : [".nra"], magic : ["Nero Audio-CD Compilation"]},
 		newWordMessagesOverlay           : {name : "NewWord messages Overlay", ext : [".ovr"], magic : ["NewWord messages Overlay"]},

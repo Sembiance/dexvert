@@ -29,9 +29,11 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"BINA/mdos",
 	"BINA/hDmp",
 	"BINA/UNIX",
+	"DATA/UNIX",
 	"DEXE/LMAN",
 	"mdos/BINA",
-	"NONE/NONE"
+	"NONE/NONE",
+	"UNKN/UNIX"
 ];
 
 export const WEAK_PRODOS_TYPES =
@@ -252,7 +254,7 @@ export const WEAK_VALUES =
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^ARM64EC COFF object/,
 	/^Bitmap BildException/,
-	/^BMF $\.[FO] Bild/,
+	/^BMF .\.. Bild/,
 	/^Borland Object Datei/,
 	/^BSA Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Cobol Daten Datei$/,	// It actually does seem to be correct, but it's not clear what metrics it's actually using and since I can't relly do anything with it anyways, just mark it weak
@@ -1812,6 +1814,7 @@ export const WEAK_VALUES =
 	/^Headspace Inter-Platform File Format \(v1\)$/,
 	/^Health Level-7 data \(pipe delimited\)$/,
 	/^HBuilder language package$/,
+	/^HDOS H-17 portable dump disk image$/,
 	/^Hi-MD Minidisc MPEG audio data container$/,
 	/^HS2 zipped bitmap\(s\) archive$/,
 	/^HTTP Archive format$/,

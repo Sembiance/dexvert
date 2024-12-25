@@ -8,7 +8,7 @@ export class tga extends Format
 	mimeType     = "image/x-tga";
 	magic        = ["Truevision TGA", "Targa image data", "image/x-tga", /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
 	weakMagic    = ["image/x-tga"];
-	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="TPIC" && ["8BIM", "xRes"].includes(macFileCreator)) || (macFileType==="TARG" && macFileCreator==="GKON");
+	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="TPIC" && ["8BIM", "ogle", "xRes"].includes(macFileCreator)) || (macFileType==="TARG" && macFileCreator==="GKON");
 	metaProvider = ["image"];
 	
 	// ImageMagick sometimes doesn't detect that a TGA image has been rotated. These other converters seem to do a better job at that

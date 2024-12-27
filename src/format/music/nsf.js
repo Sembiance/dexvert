@@ -7,5 +7,5 @@ export class nsf extends Format
 	ext          = [".nsf", ".nsfe"];
 	magic        = ["NES Sound File", "NES Sound Format rip", "Extended Nintendo Sound Format chiptune", "Extended NES Sound File"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123[largeQuota]"];
+	converters   = ["zxtune123[largeQuota][trimSilence]"];
 }

@@ -6,7 +6,8 @@ export class zxtune123 extends Program
 	website = "https://zxtune.bitbucket.io/";
 	package = "media-sound/zxtune";
 	flags   = {
-		largeQuota : "Some multi-track formats like nsf just produce a lot of audio, so we make a very large disk quota check for those"
+		trimSilence : "Trim silence from the beginning and end of the audio",
+		largeQuota  : "Some multi-track formats like nsf just produce a lot of audio, so we make a very large disk quota check for those"
 	};
 
 	// Some files like digitalSymphony/vath will just create massive multi-gigabyte files, it's all valid audio, but no way to instruct it to stop sooner
@@ -26,5 +27,5 @@ export class zxtune123 extends Program
 			({suffix, newName, newExt}) => [newName, suffix, newExt]
 		]
 	};
-	chain = `ffmpeg[outType:wav] -> sox[maxDuration:${xu.MINUTE*10}]`;
+	chain = r => `ffmpeg[outType:wav] -> sox[maxDuration:${xu.MINUTE*10}]${r.flags.trimSilence ? "[trimSilence]" : ""}`;
 }

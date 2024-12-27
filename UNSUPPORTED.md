@@ -1,11 +1,11 @@
-# Unsupported File Formats (2,986)
+# Unsupported File Formats (2,988)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (242)
+## Archive (243)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -219,6 +219,7 @@ Family/Format | Name | Extensions | Notes
 [archive/printShopDAT](https://discmaster.textfiles.com/search?formatid=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 [archive/simsCompactedResourceFile](https://discmaster.textfiles.com/search?formatid=simsCompactedResourceFile) | The Sims Compacted Resource file | .sims2pack | 
 [archive/softwareToolworksInstallArchive](https://discmaster.textfiles.com/search?formatid=softwareToolworksInstallArchive) | The Software Toolworks installation archive | .tzf | 
+[archive/tI99PC99TrackDump](https://discmaster.textfiles.com/search?formatid=tI99PC99TrackDump) | TI-99 PC99 Track Dump Format | .dsk .pc99dsk .dtk | 
 [archive/ti99SectorDump](https://discmaster.textfiles.com/search?formatid=ti99SectorDump) | TI-99 V9T9 Sector Dump | .dsk .tidisk | 
 [archive/tifiles](https://discmaster.textfiles.com/search?formatid=tifiles) | TIFILES | .tfu .tifile .tifiles | 
 [archive/tinyProtProtected](https://discmaster.textfiles.com/search?formatid=tinyProtProtected) | TinyProt Protected | .exe | 
@@ -851,7 +852,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (157)
+## Music (158)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -961,6 +962,7 @@ Family/Format | Name | Extensions | Notes
 [music/proTrekkr](https://discmaster.textfiles.com/search?formatid=proTrekkr) | Pro Trekkr Module | .ixs | [6 sample files](https://sembiance.com/fileFormatSamples/music/proTrekkr/)
 [music/propellerheadSoftwareReasonSong](https://discmaster.textfiles.com/search?formatid=propellerheadSoftwareReasonSong) | Propellerhead Software Reason Song | .rps | 
 [music/propellerheadsReasonSongFile](https://discmaster.textfiles.com/search?formatid=propellerheadsReasonSongFile) | Propellerheads Reason Song file | .rns | 
+[music/psgmodModule](https://discmaster.textfiles.com/search?formatid=psgmodModule) | PSGMOD module | .psgmod | 
 [music/psm2Container](https://discmaster.textfiles.com/search?formatid=psm2Container) | [PSM 2 container](http://vgmpf.com/Wiki/index.php?title=PMM) | .pmm | 
 [music/psycle](https://discmaster.textfiles.com/search?formatid=psycle) | Psycle Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/psycle/)
 [music/quartet4V](https://discmaster.textfiles.com/search?formatid=quartet4V) | [Quartet 4V Module](http://fileformats.archiveteam.org/wiki/4v) | .4v | [9 sample files](https://sembiance.com/fileFormatSamples/music/quartet4V/)

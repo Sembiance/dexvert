@@ -71,14 +71,14 @@ for(const inputFilePath of inputFilePaths)
 		const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 		if(err)
 		{
+			console.error(`${log.join("\n")}\n${err}`.trim());
 			await handleExit();
-			Deno.exit(console.error(`${log.join("\n")}\n${err}`.trim()));
 		}
 
 		if(!r && !log)
 		{
+			console.error(`Failed to retrieve dexid data from dexrpc server. Is it running?`);
 			await handleExit();
-			Deno.exit(console.error(`Failed to retrieve dexid data from dexrpc server. Is it running?`));
 		}
 
 		({ids : rows, idMeta} = r);

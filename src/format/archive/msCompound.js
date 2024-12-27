@@ -20,6 +20,7 @@ export class msCompound extends Format
 		"Calendar Creator 5 ClipArt Archive", "OrCAD PSpice Capture Symbols Models", "Autodesk Revit Template", "Revit Family Architecture project", "Diagram Studio Document", "Kingsoft Presentation template", "Orcad Schematic Capture Backup",
 		/^fmt\/(240|877|916|971|1213|1297|1298|1303|1331|1346|1349|1360|1362|1431|1432|1493|1517|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
+	idMeta           = ({macFileType, macFileCreator}) => macFileType==="MSIV" && macFileCreator==="MSIZ";
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these
 	confidenceAdjust = (input, matchType, curConfidence) => -(curConfidence-40);	// MS Word/Excel files and Thumbs.db are also Compound Documents. Usually archive/* goes first, but let's reduce confidence here so others can go first instead like document/wordDoc
 	converters       = ["sevenZip", "unar", "deark[module:cfb][opt:cfb:extractstreams]"];

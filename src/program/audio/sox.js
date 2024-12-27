@@ -38,7 +38,7 @@ export class sox extends Program
 		if(r.flags.maxDuration)
 			a.push("trim", "0", Number(+r.flags.maxDuration).toClock());
 		if(r.flags.trimSilence)
-			a.push("reverse", "silence", "5", "0.01", "0.5%", "reverse");
+			a.push("reverse", "silence", "1", "0.01", "0.5%", "reverse");
 
 		return a;
 	};

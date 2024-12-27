@@ -31,6 +31,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"BINA/UNIX",
 	"DATA/UNIX",
 	"DEXE/LMAN",
+	"DOS /DOS ",
 	"mdos/BINA",
 	"NONE/NONE",
 	"UNKN/UNIX"

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,988)
+# Unsupported File Formats (2,989)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1016,7 +1016,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,888)
+## Other (1,889)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1226,6 +1226,7 @@ Family/Format | Name | Extensions | Notes
 [other/autodeskExternalMessage](https://discmaster.textfiles.com/search?formatid=autodeskExternalMessage) | Autodesk External Message | .xmx | 
 [other/autoItCompiledScript](https://discmaster.textfiles.com/search?formatid=autoItCompiledScript) | AutoIt compiled script | .a3x | 
 [other/autoPlayMenuBuilderData](https://discmaster.textfiles.com/search?formatid=autoPlayMenuBuilderData) | AutoPlay Menu Builder data | .apm | 
+[other/autoREALMMap](https://discmaster.textfiles.com/search?formatid=autoREALMMap) | AutoREALM Map | .aur | 
 [other/avatarStudioLIO](https://discmaster.textfiles.com/search?formatid=avatarStudioLIO) | Avatar Studio LIO | .lio | 
 [other/avcHDClipInformation](https://discmaster.textfiles.com/search?formatid=avcHDClipInformation) | AVCHD Clip Information | .cpi | 
 [other/avcdHDPlaylist](https://discmaster.textfiles.com/search?formatid=avcdHDPlaylist) | AVCHD Playlist | .mpls | 

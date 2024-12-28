@@ -10468,6 +10468,40 @@ Video codecs
     .TIF       Yes     R     Aldus/Microsoft Tag Image Format
 
 
+>>> iconvert (from OpenImageIO) https://openimageio.readthedocs.io/en/v3.0.1.0/builtinplugins.html
+BMP
+Cineon
+DDS
+DICOM
+DPX
+FITS
+GIF
+HDR/RGBE
+HEIF/HEIC/AVIF
+ICO
+IFF
+JPEG
+JPEG-2000
+JPEG XL
+Movie formats (using ffmpeg)
+Null format
+OpenEXR
+OpenVDB
+PNG
+PNM / Netpbm
+PSD
+Ptex
+RAW digital camera files
+RLA
+SGI
+Softimage PIC
+Targa
+Term (Terminal)
+TIFF
+Webp
+Zfile
+
+
 >>> ICONVERT 1.52a (DOS) http://fileformats.archiveteam.org/wiki/Iconvert
 ASCII           	(8x8, 8x14)
 BASICA BLOAD    	(2 color, 4 color)

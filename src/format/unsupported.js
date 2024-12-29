@@ -550,6 +550,7 @@ export default
 		aegisDrawDrawing               : {name : "Aegis Draw drawing", ext : [".draw1"], magic : ["Aegis Draw drawing"]},
 		aipdNI                         : {name : "AIPD National Instruments Image", ext : [".apd", ".aipd"], magic : ["AIPD bitmap"]},
 		aldusIntelliDrawDrawing        : {name : "Aldus IntelliDraw Drawing", ext : [".idw"], magic : ["Aldus IntelliDraw Drawing"]},
+		amiBIOSLogoSplashBitmap        : {name : "AMI BIOS logo/splash bitmap", ext : [".grfx", ".grf"], magic : ["AMI BIOS logo/splash bitmap"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/GRFX"},
 		amiBlitz2Bitmap                : {name : "AmiBlitz2 bitmap", ext : [".ab2i"], magic : ["AmiBlitz2 Image bitmap"], weakMagic : true},
 		animatorPICCEL                 : {name : "Animator PIC/CEL", ext : [".pic", ".cel"], magic : [/^x-fmt\/223( |$)/], weakMagic : true},
 		applausePalette                : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},

@@ -1,4 +1,4 @@
-# Supported File Formats (2,848)
+# Supported File Formats (2,850)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -71,7 +71,7 @@ archive | Bloodrayne game data archive | .pod | [gameextractor](http://www.watto
 archive | [Blorb Interactive Fiction Package](http://fileformats.archiveteam.org/wiki/Blorb) | .blorb .gblorb .zblorb .blb .glb .zlb | [blorbtar](https://www.ifarchive.org/if-archive/programming/blorb/blorbtar-0.1.pl) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/blorb/)
 archive | BOLT Game Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/boltGameArchive/)
 archive | Broderbund Mohawk Game Archive | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/broderbundMohawkGameArchive/)
-archive | [BTOA Encoded](http://fileformats.archiveteam.org/wiki/Ascii85) | .ab | [ascii85Decoder](https://github.com/Sembiance/dexvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/btoaEncoded/)
+archive | [BTOA Encoded](http://fileformats.archiveteam.org/wiki/Ascii85) | .ab | [ascii85Decoder](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/btoaEncoded/)
 archive | [Build Engine Group Game Archive](http://fileformats.archiveteam.org/wiki/GRP_(Duke_Nukem_3D)) | .grp .dat | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/buildEngineGroupGameArchive/)
 archive | [Build Engine RFF Game Archive](https://moddingwiki.shikadi.net/wiki/RFF_Format) | .rff | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/buildEngineRFFGameArchive/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/bzip2) | .bz2 .bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) [sevenZip](http://p7zip.sourceforge.net/) [ancient](https://github.com/temisu/ancient_format_decompressor) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/bz2/)
@@ -147,7 +147,7 @@ archive | [Error Code Modeler](http://fileformats.archiveteam.org/wiki/Error_Cod
 archive | Eschalon Setup ARCV Container | .arv | [arcvExtractor](https://ia801900.us.archive.org/view_archive.php?archive=/29/items/ctib98_3/ctib98_3.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/eschalonSetupARCV/) - Not all formats are supported by the converter
 archive | Etherlords 2 game data archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/etherlords2GameDataArchive/)
 archive | EXECUTRIX-COMPRESSOR Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/executrixCompressorPacked/)
-archive | ExeLITE Packed | .exe .com | cup386 | [7 sample files](https://sembiance.com/fileFormatSamples/archive/exeLITEPacked/)
+archive | ExeLITE Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/exeLITEPacked/)
 archive | [EXEPACK Packed](http://fileformats.archiveteam.org/wiki/EXEPACK) | .exe .com | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/exePackPacked/)
 archive | [eXtensible ARchive](http://fileformats.archiveteam.org/wiki/Xar_(Extensible_Archive)) | .xar | [xar](https://github.com/apple-oss-distributions/xar) [unar](https://github.com/incbee/Unarchiver) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xar/)
 archive | [FDCOPY.COM CFI Disk Image](http://fileformats.archiveteam.org/wiki/CFI_disk_image) | .cfi | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fdcopyCFI/)
@@ -327,7 +327,7 @@ archive | [Quantum Archive](http://fileformats.archiveteam.org/wiki/Quantum_comp
 archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/wiki/QIP_(Quarterdeck)) | .qip | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/quarterdeckInstallationPacakge/)
 archive | [Quasijarus Strong Compressed](http://fileformats.archiveteam.org/wiki/Quasijarus_Strong_Compression) | .z | [ancient](https://github.com/temisu/ancient_format_decompressor) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/quasijarus/)
 archive | Raw Partition | .raw .hd .img .vhd | [uniso](https://github.com/Sembiance/dexvert/) [aaru](https://github.com/aaru-dps/Aaru) [sevenZip](http://p7zip.sourceforge.net/) | [26 sample files](https://sembiance.com/fileFormatSamples/archive/rawPartition/)
-archive | RDT Compressor Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/rdtCompressorPacked/)
+archive | RDT Compressor Packed | .exe .com | cup386 | [6 sample files](https://sembiance.com/fileFormatSamples/archive/rdtCompressorPacked/)
 archive | Reality Bytes game archive | .rbd | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realityBytesGameArchive/)
 archive | [Red Hat Package Manager Archive](http://fileformats.archiveteam.org/wiki/RPM) | .rpm | [deark](https://entropymine.com/deark/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rpm/)
 archive | REDengine game Archive | .rda | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/redengineGameArchive/)
@@ -527,7 +527,7 @@ audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/deta
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 .sbk .arl | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
 audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
 audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
-audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
+audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
 audio | The Need for Speed Sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedSoundBank/)
 audio | [TrueAudio Lossless Audio](https://wiki.hydrogenaud.io/index.php?title=TTA) | .tta | [ffmpeg](https://ffmpeg.org/) [ttaenc](https://tta.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/trueAudio/)
 audio | [Turtle Beach Sample Vision Audio](http://fileformats.archiveteam.org/wiki/Sample_Vision) | .smp | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sampleVision/)
@@ -1540,7 +1540,7 @@ music | Digital Studio | .dst .m | [zxtune123](https://zxtune.bitbucket.io/) | [
 music | [Digital Symphony Module](http://fileformats.archiveteam.org/wiki/Digital_Symphony_module) | .dsym | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [12 sample files](https://sembiance.com/fileFormatSamples/music/digitalSymphony/)
 music | [Digital Tracker Module](http://fileformats.archiveteam.org/wiki/Digital_Tracker_module) | .dtm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [12 sample files](https://sembiance.com/fileFormatSamples/music/digitalTracker/)
 music | [DigiTrakker Module](http://fileformats.archiveteam.org/wiki/Digitrakker_module) | .mdl | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [13 sample files](https://sembiance.com/fileFormatSamples/music/digiTrakker/)
-music | [Disorder Tracker Module](http://fileformats.archiveteam.org/wiki/DisorderTracker_2_module) | .plm | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/disorderTracker/)
+music | [Disorder Tracker Module](http://fileformats.archiveteam.org/wiki/DisorderTracker_2_module) | .plm | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [7 sample files](https://sembiance.com/fileFormatSamples/music/disorderTracker/)
 music | [Doom/Heretic Music](http://fileformats.archiveteam.org/wiki/Doom_MUS) | .mus | [mus2mid](https://github.com/Sembiance/mus2mid) [doomMUS2mp3](http://slade.mancubus.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/doomMUS/)
 music | [Dynamic Studio Professional Module](http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module) | .dsm .dsp | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/dynamicStudio/)
 music | E-Tracker Chiptune | .etc .cop .et .t .saa .sng | [zxtune123](https://zxtune.bitbucket.io/) | [20 sample files](https://sembiance.com/fileFormatSamples/music/eTracker/)
@@ -1560,7 +1560,7 @@ music | [Extreme's Tracker Module](http://fileformats.archiveteam.org/wiki/Extre
 music | [Farandole Composer Module](http://fileformats.archiveteam.org/wiki/Farandole_Composer_module) | .far | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [15 sample files](https://sembiance.com/fileFormatSamples/music/farandoleComposer/)
 music | [Fashion Tracker Module](http://fileformats.archiveteam.org/wiki/Fashion_Tracker_module) | .ex | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://sembiance.com/fileFormatSamples/music/fashionTracker/)
 music | [FastTracker Module](http://fileformats.archiveteam.org/wiki/FastTracker_module) | .ft | [zxtune123](https://zxtune.bitbucket.io/) [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [15 sample files](https://sembiance.com/fileFormatSamples/music/fastTracker/)
-music | Faust Music Creator | .sng | [adplay](https://github.com/adplug/adplay-unix) | [9 sample files](https://sembiance.com/fileFormatSamples/music/faustMusicCreator/)
+music | Faust Music Creator | .sng | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://sembiance.com/fileFormatSamples/music/faustMusicCreator/)
 music | [FC-M Packer Song](http://fileformats.archiveteam.org/wiki/FC-M_Packer_module) | .fcm | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/music/fcmPacker/)
 music | Flash Tracker | .fls | [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [6 sample files](https://sembiance.com/fileFormatSamples/music/flashTracker/)
 music | FM Kingtracker | .fmk | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmKingtracker/)
@@ -1609,7 +1609,7 @@ music | [Kris/Chip Tracker Module](http://fileformats.archiveteam.org/wiki/KRIS_
 music | [KSS Music File](http://fileformats.archiveteam.org/wiki/KSS) | .kss | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/kssMusic/) - Not all files convert correctly, such as prologue.kss and circus charlie.kss. Other software listed at website link, could try those to convert
 music | [Leggless Music Editor Module](http://fileformats.archiveteam.org/wiki/Leggless_Music_Editor) | .lme | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://sembiance.com/fileFormatSamples/music/leggless/)
 music | Lionheart Module | .lion | [uade123](http://zakalwe.fi/uade) | [11 sample files](https://sembiance.com/fileFormatSamples/music/lionheart/)
-music | [Liquid Tracker Module](http://fileformats.archiveteam.org/wiki/Liquid_Tracker_module) | .liq | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [2 sample files](https://sembiance.com/fileFormatSamples/music/liquidTracker/)
+music | [Liquid Tracker Module](http://fileformats.archiveteam.org/wiki/Liquid_Tracker_module) | .liq | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/liquidTracker/)
 music | [Loudness Sound System](https://www.vgmpf.com/Wiki/index.php/LDS) | .lds | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/loudnessSoundSystem/) - According to the wiki, LDS isn't the most common extension, but rather .dat is. So I'd need to come up with some sort of magic check in order to properly identify and convert these
 music | LucasArts AdLib Module | .laa | [adplay](https://github.com/adplug/adplay-unix) | [5 sample files](https://sembiance.com/fileFormatSamples/music/lucasArtsAdLib/)
 music | [MadTracker Module](http://fileformats.archiveteam.org/wiki/MadTracker_2_module) | .mt2 | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/madTracker/) - Sample file a little rock/mt2 doesn't convert
@@ -1667,7 +1667,7 @@ music | [Quadra Composer](http://fileformats.archiveteam.org/wiki/Quadra_Compose
 music | Quartet PSG Module | .sqt | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://sembiance.com/fileFormatSamples/music/quartetPSG/)
 music | Quartet ST Module | .qts .smp .4sq | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://sembiance.com/fileFormatSamples/music/quartetST/) - Are there 2 seperate formats I'm dealing with here?
 music | [RASTER Music Tracker Module](http://fileformats.archiveteam.org/wiki/RASTER_Music_Tracker_module) | .rmt | [zxtune123](https://zxtune.bitbucket.io/) [asapconv](http://asap.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/music/rasterMusicTracker/)
-music | Rdos Raw OPL | .raw .rac | [adplay](https://github.com/adplug/adplay-unix) | [9 sample files](https://sembiance.com/fileFormatSamples/music/rdosRawOPL/)
+music | Rdos Raw OPL | .raw .rac | [adplay](https://github.com/adplug/adplay-unix) | [13 sample files](https://sembiance.com/fileFormatSamples/music/rdosRawOPL/)
 music | [Real Tracker Module](http://fileformats.archiveteam.org/wiki/Real_Tracker_module) | .rtm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [2 sample files](https://sembiance.com/fileFormatSamples/music/realTracker/)
 music | [Reality AdLib Tracker](http://fileformats.archiveteam.org/wiki/Reality_AdLib_Tracker_module) | .rad .sng | [adplay](https://github.com/adplug/adplay-unix) | [11 sample files](https://sembiance.com/fileFormatSamples/music/realityTracker/)
 music | [Richard Joseph Module/Instrument](http://fileformats.archiveteam.org/wiki/Richard_Joseph) | .sng .ins | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://sembiance.com/fileFormatSamples/music/richardJoseph/)
@@ -1967,7 +1967,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (845)
+## Text (847)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2245,6 +2245,7 @@ text | GenBank sequence record | .dna |  | [10 sample files](https://sembiance.c
 text | Generic Printer Description | .gdl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/genericPrinterDescription/)
 text | Genius Menu Maker Menu | .gmk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/geniusMenuMakerMenu/)
 text | GENSCAN output results | .genscan |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/genscanOutputResults/)
+text | Gentoo Linux ebuild | .ebuild |  | 
 text | Gerber | .gbr .gbx .gb |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gerber/)
 text | Gerber artwork | .art |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gerberArtwork/)
 text | Gettext Portable Object | .po |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gettextPortableObject/)
@@ -2743,6 +2744,7 @@ text | Visual Thought diagram | .vthought |  | [3 sample files](https://sembianc
 text | VisualBasic Project | .vbp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicProjectText/)
 text | Visualization Toolkit format | .vtk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/visualizationToolkitFormat/)
 text | VMware configuration | .vmx |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vmwareConfiguration/)
+text | VMware Localization | .vlcl |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/vMwareLocalization/)
 text | VobSub Index file | .idx |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vobSubIndexFile/)
 text | VX-REXX Project | .vrp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vxREXXProject/)
 text | WAP Bookmark info | .url |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/wapBookmarkInfo/)

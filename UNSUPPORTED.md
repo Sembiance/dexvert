@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,989)
+# Unsupported File Formats (2,990)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -665,7 +665,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (181)
+## Image (182)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -676,6 +676,7 @@ Family/Format | Name | Extensions | Notes
 [image/afl](https://discmaster.textfiles.com/search?formatid=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 [image/aipdNI](https://discmaster.textfiles.com/search?formatid=aipdNI) | AIPD National Instruments Image | .apd .aipd | [8 sample files](https://sembiance.com/fileFormatSamples/image/aipdNI/)
 [image/aldusIntelliDrawDrawing](https://discmaster.textfiles.com/search?formatid=aldusIntelliDrawDrawing) | Aldus IntelliDraw Drawing | .idw | 
+[image/amiBIOSLogoSplashBitmap](https://discmaster.textfiles.com/search?formatid=amiBIOSLogoSplashBitmap) | [AMI BIOS logo/splash bitmap](http://fileformats.archiveteam.org/wiki/GRFX) | .grfx .grf | [6 sample files](https://sembiance.com/fileFormatSamples/image/amiBIOSLogoSplashBitmap/)
 [image/amiBlitz2Bitmap](https://discmaster.textfiles.com/search?formatid=amiBlitz2Bitmap) | AmiBlitz2 bitmap | .ab2i | 
 [image/animatorPICCEL](https://discmaster.textfiles.com/search?formatid=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
 [image/applausePalette](https://discmaster.textfiles.com/search?formatid=applausePalette) | Applause Palette | .pal | 

@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,990)
+# Unsupported File Formats (2,992)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1017,7 +1017,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,889)
+## Other (1,890)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2533,6 +2533,7 @@ Family/Format | Name | Extensions | Notes
 [other/spelToolSupplementalDictionary](https://discmaster.textfiles.com/search?formatid=spelToolSupplementalDictionary) | SpelTool Supplemental Dictionary (v1.0) | .spl | 
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?formatid=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
 [other/spilImageLibrary](https://discmaster.textfiles.com/search?formatid=spilImageLibrary) | SPIL Image Library | .ilb .slb | 
+[other/sproutGameDataArchive](https://discmaster.textfiles.com/search?formatid=sproutGameDataArchive) | Sprout game data archive | .saf | 
 [other/spssForWindowsData](https://discmaster.textfiles.com/search?formatid=spssForWindowsData) | SPSS for Windows Data | .sav | 
 [other/spyBotSearchAndDestroySignature](https://discmaster.textfiles.com/search?formatid=spyBotSearchAndDestroySignature) | SpyBot-Search-and-Destroy Signature | .sig | 
 [other/spyneContainer](https://discmaster.textfiles.com/search?formatid=spyneContainer) | SPYne Container |  | 
@@ -2912,7 +2913,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (82)
+## Poly (83)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -2966,6 +2967,7 @@ Family/Format | Name | Extensions | Notes
 [poly/northCAD3D](https://discmaster.textfiles.com/search?formatid=northCAD3D) | NorthCAD-3D | .n3d | Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. DOS based. No export capability.
 [poly/objectsToSee3DObject](https://discmaster.textfiles.com/search?formatid=objectsToSee3DObject) | Objects to See 3D object | .o2c | 
 [poly/openCascade3DModel](https://discmaster.textfiles.com/search?formatid=openCascade3DModel) | Open Cascade Technology 3D model | .brp | 
+[poly/painter3DModel](https://discmaster.textfiles.com/search?formatid=painter3DModel) | Painter 3D model | .d | 
 [poly/parasolidModel](https://discmaster.textfiles.com/search?formatid=parasolidModel) | Parasolid model | .x_t | 
 [poly/playStationRSDPolygons](https://discmaster.textfiles.com/search?formatid=playStationRSDPolygons) | PlayStation RSD Polygons | .ply | 
 [poly/polyfilm](https://discmaster.textfiles.com/search?formatid=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/) - Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.

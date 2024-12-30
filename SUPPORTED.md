@@ -1,4 +1,4 @@
-# Supported File Formats (2,850)
+# Supported File Formats (2,854)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -527,7 +527,7 @@ audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/deta
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 .sbk .arl | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
 audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
 audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
-audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
+audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
 audio | The Need for Speed Sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedSoundBank/)
 audio | [TrueAudio Lossless Audio](https://wiki.hydrogenaud.io/index.php?title=TTA) | .tta | [ffmpeg](https://ffmpeg.org/) [ttaenc](https://tta.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/trueAudio/)
 audio | [Turtle Beach Sample Vision Audio](http://fileformats.archiveteam.org/wiki/Sample_Vision) | .smp | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sampleVision/)
@@ -682,7 +682,7 @@ document | Oberon Text | .mod | [strings](https://www.gnu.org/software/binutils/
 document | [Office Open XML](http://fileformats.archiveteam.org/wiki/DOCX) | .docx .docm .dotx | [soffice](https://www.libreoffice.org) | [13 sample files](https://sembiance.com/fileFormatSamples/document/docx/)
 document | [Open Document Format for Office Applications](http://fileformats.archiveteam.org/wiki/OpenDocument) | .odm .odt .fodt .ott .odp .ods .otp | [soffice](https://www.libreoffice.org) | [18 sample files](https://sembiance.com/fileFormatSamples/document/openDocument/)
 document | [Open Office Document](http://fileformats.archiveteam.org/wiki/OpenOffice.org_XML) | .sxw .stw .stc .sti .sxc .sxi sxd | [soffice](https://www.libreoffice.org) | [14 sample files](https://sembiance.com/fileFormatSamples/document/openOffice/)
-document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/OpenXPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://sembiance.com/fileFormatSamples/document/xps/)
+document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/OpenXPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [12 sample files](https://sembiance.com/fileFormatSamples/document/xps/)
 document | [OrgPlus](http://fileformats.archiveteam.org/wiki/OrgPlus) | .opx .ops | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/orgPlus/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [ipf2txt](https://github.com/Sembiance/dexvert) | [15 sample files](https://sembiance.com/fileFormatSamples/document/os2Help/) - The ipf2txt file is limited on what files it can convert due to 16-bit limitations.
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/os2Message/)
@@ -1682,7 +1682,7 @@ music | Sample Tracker | .str | [zxtune123](https://zxtune.bitbucket.io/) | [5 s
 music | [Saturn Sound Format](http://fileformats.archiveteam.org/wiki/SSF) | .ssf .minissf .ssflib | [zxtune123](https://zxtune.bitbucket.io/) | [6 sample files](https://sembiance.com/fileFormatSamples/music/ssf/) - Minissf files don't convert, not sure why yet.
 music | [SBStudio Module](http://fileformats.archiveteam.org/wiki/SBStudio_module) | .pac | [pacplay](https://libpac.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/music/sbStudio/)
 music | [sc68 Atari ST Music](http://fileformats.archiveteam.org/wiki/SC68) | .sc68 | [sndh2raw](https://github.com/Sembiance/sndh2raw) | [8 sample files](https://sembiance.com/fileFormatSamples/music/sc68/)
-music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/Scream_Tracker_3_module) | .s3m .stm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) [adplay](https://github.com/adplug/adplay-unix) [gamemus](https://github.com/Malvineous/libgamemusic) | [24 sample files](https://sembiance.com/fileFormatSamples/music/s3m/)
+music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/Scream_Tracker_3_module) | .s3m .stm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) [adplay](https://github.com/adplug/adplay-unix) [gamemus](https://github.com/Malvineous/libgamemusic) | [25 sample files](https://sembiance.com/fileFormatSamples/music/s3m/)
 music | SCUMM Music Module | .scumm | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://sembiance.com/fileFormatSamples/music/scummMusic/)
 music | [Sean Connolly Module](http://fileformats.archiveteam.org/wiki/Sean_Connolly) | .scn | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://sembiance.com/fileFormatSamples/music/seanConnolly/)
 music | [Sean Conran Module](http://fileformats.archiveteam.org/wiki/Sean_Conran) | .scr | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://sembiance.com/fileFormatSamples/music/seanConran/)
@@ -1967,7 +1967,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (847)
+## Text (851)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2010,6 +2010,7 @@ text | AMOS Source Code | .amossourcecode |  | [10 sample files](https://sembian
 text | AMS Language |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/amsLanguage/)
 text | Anacreon: Reconstruction Scenery | .scn |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/anacreonReconstructionScenery/)
 text | Anim8or project | .an8 |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/anim8orProject/)
+text | Anjuta Project | .prj |  | 
 text | AntiVir Job | .avj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/antiVirJob/)
 text | AntiVir Profile | .avp |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/antiVirProfile/)
 text | Apache mission Data | .dta |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
@@ -2197,6 +2198,7 @@ text | Expression Design drawing | .xpr |  | [10 sample files](https://sembiance
 text | Expression Design Item List | .itl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/expressionDesignItemList/)
 text | Expression Strokes | .sks |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/expressionStrokes/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
+text | EZ-EDS Electronic Data Sheet | .eds |  | 
 text | FAR help | .hlf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
 text | FastBack Plus setup | .fb |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fastBackPlusSetup/)
 text | FastFont Symbol Set | .sym |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fastFontSymbolSet/)
@@ -2474,8 +2476,9 @@ text | OVA Manifest | .mf |  | [3 sample files](https://sembiance.com/fileFormat
 text | OziExplorer Map data | .map |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerMapData/)
 text | OziExplorer track file | .plt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
 text | OziExplorer Waypoint | .wpt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerWaypoint/)
-text | Pacific C Compiler Project | .prj |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/pacificCCompilerProject/)
+text | Pacific C Compiler Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pacificCCompilerProject/)
 text | PageRender3D facet/object | .facet |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pageRender3DFacetObject/)
+text | Painter 3D Contour | .cnt |  | 
 text | PALASM Design Description | .pds |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/palasmMDesignDescription/)
 text | Panda Security System vulnerabilities info | .xml |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pandaSecuritySystemVulnerabilitiesInfo/)
 text | Panorama Digital Elevation Model Settings | .demset |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/panoramaDigitalElevationModelSettings/)
@@ -2534,7 +2537,7 @@ text | [Portable Gaming Notation](http://fileformats.archiveteam.org/wiki/PGN) |
 text | Poser character rigging | .cr2 |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/poserCharacterRigging/)
 text | PostgreSQL database dump | .sql |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ppd/)
-text | Poswiz! Report | .rpt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/poswizReport/)
+text | Poswiz! Report | .rpt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poswizReport/)
 text | Power Translator document | .mtp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/powerTranslatorDocument/)
 text | PowerBase database | .pb |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/powerBaseDatabase/)
 text | PowerBuilder Target | .pbt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/powerBuilderTarget/)
@@ -2596,6 +2599,7 @@ text | Robocode Battle | .battle |  | [1 sample file](https://sembiance.com/file
 text | RoboHelp Topic Export | .hpt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/roboHelpTopicExport/)
 text | RPG Maker VX Project | .rvproj |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rpgMakerVXProject/)
 text | RPM Spec | .in |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rpmSpec/)
+text | RSLogix 5000 Program | .acd |  | 
 text | RTFGEN Topic data | .tpc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rtfGENTopicData/)
 text | RTPatch Documentation | .rtd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/rtPatchDocumentation/)
 text | Ruby Source | .rb .template |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/rubySource/)

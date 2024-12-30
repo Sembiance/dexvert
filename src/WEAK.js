@@ -1994,6 +1994,7 @@ export const WEAK_VALUES =
 	/^PerFROM Pro Form$/,
 	/^PERQemu Hard Disk image$/,
 	/^Personal Paint encrypted bitmap$/,	// Found these in the wild, distrubuted with demo version of program, but it's weak magic and can't decrypt them easily anyways
+	/^PestPatrol data \/ scan strings$/,
 	/^PFS File database$/,
 	/^PFS:Graph chart$/,
 	/^PFS:Write document\/outline \(v2\.x\)$/,

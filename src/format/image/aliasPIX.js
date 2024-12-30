@@ -9,10 +9,11 @@ export class aliasPIX extends Format
 	weakExt    = [".pix", ".img"];
 	mimeType   = "image/x-alias-pix";
 	magic      = ["Alias PIX", "Alias/Wavefront PIX image (alias_pix)", /^fmt\/1092( |$)/];
-	converters = ["nconvert", "deark[module:alias_pix]", "gimp", "imconv[format:pix][matchType:magic]", "canvas[matchType:magic]"];
+	converters = ["nconvert", "deark[module:alias_pix]", "gimp", "imconv[format:pix][matchType:magic]", "canvas[hasExtMatch][matchType:magic]"];
 	verify     = async ({inputFile, meta}) =>
 	{
-		if(inputFile.size<4)
+		// even with the checks below, there are still false positives so we restrict to less than 2000x2000 as I've never encountered an authentic file this large
+		if(inputFile.size<4 || meta.height>2000 || meta.width>2000)
 			return false;
 
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 6);

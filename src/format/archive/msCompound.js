@@ -18,7 +18,8 @@ export class msCompound extends Format
 		"Easy CD Creator Layout", "Oracle Data base Diagram", "CeledyDraw drawing", "Microsoft Access Wizard template", "Office Binder Document", "Microsoft Access Project", "ASAP Presentation", "Microsoft Clip Art Gallery Catalog", "Samsung document",
 		"Drafix Symbol Library", "WebLab Viewer Molecule", "Camtasia Studio Screen Recording", "Encrypted OLE2 / Multistream Compound File (ECP v1.0)", "Microsoft Visual Studio binary macro project", "Autodesk Inventor Part", "Calendar Creator 5 project",
 		"Calendar Creator 5 ClipArt Archive", "OrCAD PSpice Capture Symbols Models", "Autodesk Revit Template", "Revit Family Architecture project", "Diagram Studio Document", "Kingsoft Presentation template", "Orcad Schematic Capture Backup",
-		/^fmt\/(240|877|916|971|1213|1297|1298|1303|1331|1346|1349|1360|1362|1431|1432|1493|1517|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
+		"Rockwell Logix 500 SLC-5 Software", "muvee autoProducer Project",
+		/^fmt\/(240|877|916|971|1213|1297|1298|1303|1331|1346|1349|1360|1362|1386|1431|1432|1493|1517|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	idMeta           = ({macFileType, macFileCreator}) => macFileType==="MSIV" && macFileCreator==="MSIZ";
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these

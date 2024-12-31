@@ -28,7 +28,7 @@ export class ini extends Format
 		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)", "Photofinish Output Device info", "Microsoft Project settings (v1.0)", "Atlantis Word Processor SpellCheck settings", "DemoShield project", "Yape configuration", "VICE settings",
 		"NLMSX machine configuration", "FL Studio Speech Preset", "FL Studio Dashboard component Initializaton", "Zero-X Color scheme", "FL Keys Initialization", "SkyOS Installation File", "Logitech MouseWare Web browser buttons Mapping",
 		"Windows PROTOCOL.INI", "FL Studio DrumSynth Preset (v2.x)", "jalbum image info", "MASH script", "Micrografx Media Manager Easy Catalog", "Eagle preferences", "WinAPE Profile", "Affymetrix Probe Results (Text)", "JTAG Chain Information",
-		"Affymetrix Chip Definition File (Text)",
+		"Affymetrix Chip Definition File (Text)", "CANopen Electronic Data Sheet",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

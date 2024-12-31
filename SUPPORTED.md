@@ -1,4 +1,4 @@
-# Supported File Formats (2,854)
+# Supported File Formats (2,855)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -525,7 +525,7 @@ audio | [Sonarc Compressed WAV](http://fileformats.archiveteam.org/wiki/Sonarc) 
 audio | Sonic Foundry Sample Resource | .sfr | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sonicFoundrySampleResource/)
 audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/soundDesignerAudio/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 .sbk .arl | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
-audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
+audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
 audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
 audio | The Need for Speed Sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedSoundBank/)
@@ -670,7 +670,7 @@ document | [Microsoft Word for DOS Document](http://fileformats.archiveteam.org/
 document | [Microsoft Works Database](http://fileformats.archiveteam.org/wiki/Microsoft_Works_Database) | .wdb | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/microsoftWorksDatabase/)
 document | [Microsoft Works Document/Spreadsheet](http://fileformats.archiveteam.org/wiki/Microsoft_Works) | .wps .wp .doc .xlr | [keyViewPro](https://archive.org/details/KeyViewPro/) [fileMerlin](http://www.file-convert.com/flmn.htm) [soffice](https://www.libreoffice.org) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [14 sample files](https://sembiance.com/fileFormatSamples/document/microsoftWorks/)
 document | [Mobipocket Reader eBook](https://en.wikipedia.org/wiki/Mobipocket) | .mobi .prc | [ebook_convert](https://calibre-ebook.com/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/mobi/)
-document | [MultiMate Document](https://winworldpc.com/product/multimate) | .doc .dox .fnx .pat | [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [3 sample files](https://sembiance.com/fileFormatSamples/document/multiMate/)
+document | [MultiMate Document](https://winworldpc.com/product/multimate) | .doc .dox .fnx .pat | [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [4 sample files](https://sembiance.com/fileFormatSamples/document/multiMate/)
 document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb .hlp | [unHLPMVB](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/document/multimediaViewerBook/)
 document | NewAge Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/newAgeHelp/)
 document | [Norton Guide/Expert Help](https://en.wikipedia.org/wiki/Norton_Guides) | .ng | [ng2html](http://www.davep.org/norton-guides/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/nortonGuide/)
@@ -1967,7 +1967,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (851)
+## Text (852)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2099,6 +2099,7 @@ text | ClariSSA saved work/session |  |  | [1 sample file](https://sembiance.com
 text | CLISP byte-compiled Lisp program | .fas |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/clispByteCompiled/)
 text | Clustal Alignment format | .nbrf .aln |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/clustalAlignmentFormat/)
 text | Code::Blocks Dependencies | .depend |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/codeBlocksDependencies/)
+text | CODESYS Symbols | .sym |  | 
 text | ColdFusion Component | .cfc |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/coldFusionComponent/)
 text | ColdFusion Markup Language | .cfm .cfml |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coldFusionMarkupLanguage/)
 text | ColdFusion Verity engine fields definition | .ddd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coldFusionVerityEngineFieldsDefinition/)

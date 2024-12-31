@@ -37,7 +37,7 @@ const _XML_MAGIC = [
 	"Microsoft Project Data Interchange XML format", "Papyrus X report XML", /^TextMate (Command|Language grammar|Theme)$/, "Apple Keynote Presentation data", "Microsoft SQL Server Analysis Services Project", "Windows PowerShell formatting (UTF-8)",
 	"psitree router configuration", "Rosegarden score (ungzipped)", "Bitz and Pixels XML", "CAPS metadata", "KRadio Preset", "ActiveReports Report", "Help Table of Contents", "Hex Edit binary file format template", "Google Desktop Gadget manifest",
 	"XAML Browser Applications", "Windows PowerShell types", "Borland user specific project options", "ISE Project generated data", "Altera Qsys System", "Xilinx ISE Project", "Code::Blocks Workspace Layout", "Kettle Transformation", "Planner project",
-	"Portable Application Description (UTF-8) (PAD)",
+	"Portable Application Description (UTF-8) (PAD)", "Siemens TIA project (v11)",
 	/^fmt\/(205|243|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

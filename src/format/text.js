@@ -151,6 +151,7 @@ export default
 		borlandProjectGroup                      : {name : "Borland Project Group", ext : [".bpg"], magic : ["Borland Project Group"], weakMagic : true},
 		clispByteCompiled                        : {name : "CLISP byte-compiled Lisp program", ext : [".fas"], magic : ["CLISP byte-compiled Lisp program"]},
 		codeBlocksDependencies                   : {name : "Code::Blocks Dependencies", ext : [".depend"], magic : ["Code::Blocks Dependencies"]},
+		codesysSymbols                           : {name : "CODESYS Symbols", ext : [".sym"], magic : ["CODESYS Symbols"], weakMagic : true},
 		coldFusionComponent                      : {name : "ColdFusion Component", ext : [".cfc"], magic : ["ColdFusion Component"], weakMagic : true},
 		coldFusionMarkupLanguage                 : {name : "ColdFusion Markup Language", ext : [".cfm", ".cfml"], magic : ["ColdFusion Markup Language", /^fmt\/1566( |$)/], weakMagic : true},
 		coldFusionVerityEngineFieldsDefinition   : {name : "ColdFusion Verity engine fields definition", ext : [".ddd"], magic : ["ColdFusion Verity engine fields definition", /^fmt\/457( |$)/], weakMagic : true},

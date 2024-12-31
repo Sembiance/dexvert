@@ -1,4 +1,4 @@
-# Unsupported File Formats (2,997)
+# Unsupported File Formats (3,004)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -558,7 +558,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (101)
+## Font (102)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -624,6 +624,7 @@ Family/Format | Name | Extensions | Notes
 [font/micrografxFont](https://discmaster.textfiles.com/search?formatid=micrografxFont) | Micrografx Font | .mgf | 
 [font/msxFont](https://discmaster.textfiles.com/search?formatid=msxFont) | MSX Font | .alf | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?formatid=msxKanjiFont) | MSX Kanji Font |  | 
+[font/newsBitmapFont](https://discmaster.textfiles.com/search?formatid=newsBitmapFont) | NeWS bitmap font | .fb | 
 [font/olitextFont](https://discmaster.textfiles.com/search?formatid=olitextFont) | Olitext Font | .fnt | 
 [font/overlayFont](https://discmaster.textfiles.com/search?formatid=overlayFont) | Overlay Font | .olf | 
 [font/pcToolsFont](https://discmaster.textfiles.com/search?formatid=pcToolsFont) | PC Tools Font | .fnt | 
@@ -1017,7 +1018,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,895)
+## Other (1,901)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1087,6 +1088,7 @@ Family/Format | Name | Extensions | Notes
 [other/adobePhotoshopColorBook](https://discmaster.textfiles.com/search?formatid=adobePhotoshopColorBook) | Adobe Photoshop Color Book | .acb | 
 [other/adobePhotoshopCustomShape](https://discmaster.textfiles.com/search?formatid=adobePhotoshopCustomShape) | Adobe Photoshop Custom Shape | .csh | 
 [other/adobePhotoshopGradient](https://discmaster.textfiles.com/search?formatid=adobePhotoshopGradient) | Adobe Photoshop Gradient | .grd | 
+[other/adobePremierePeakWaveform](https://discmaster.textfiles.com/search?formatid=adobePremierePeakWaveform) | Adobe Premiere Peak Waveform | .pek | 
 [other/adobePremiereProject](https://discmaster.textfiles.com/search?formatid=adobePremiereProject) | Adobe Premiere Project | .ppj | 
 [other/adobeSetupInstallationFile](https://discmaster.textfiles.com/search?formatid=adobeSetupInstallationFile) | Adobe Setup Installation File | .sif .setupfile1 | 
 [other/adobeTypeFontInfo](https://discmaster.textfiles.com/search?formatid=adobeTypeFontInfo) | Adobe Type Manager Font Information | .inf | 
@@ -1819,6 +1821,8 @@ Family/Format | Name | Extensions | Notes
 [other/imgdiffPatch](https://discmaster.textfiles.com/search?formatid=imgdiffPatch) | imgdiff patch | .p .patch | 
 [other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Sound Driver | .drv | 
 [other/independenceWar2ModPackage](https://discmaster.textfiles.com/search?formatid=independenceWar2ModPackage) | Independence War 2 mod Package | .pkg | 
+[other/inDesignLibrary](https://discmaster.textfiles.com/search?formatid=inDesignLibrary) | InDesign Library | .indl | 
+[other/inDesignShortcutsSet](https://discmaster.textfiles.com/search?formatid=inDesignShortcutsSet) | InDesign Shortcuts set | .indk | 
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?formatid=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?formatid=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?formatid=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
@@ -2134,7 +2138,9 @@ Family/Format | Name | Extensions | Notes
 [other/nascarSimRacingGameArchive](https://discmaster.textfiles.com/search?formatid=nascarSimRacingGameArchive) | NASCAR SimRacing game archive | .mas | 
 [other/nativeInstrumentsPresetBank](https://discmaster.textfiles.com/search?formatid=nativeInstrumentsPresetBank) | Native Instruments Preset Bank | .bnk | 
 [other/navisWorksDocument](https://discmaster.textfiles.com/search?formatid=navisWorksDocument) | NavisWorks Document | .nwd | 
+[other/necromancersDOSNavigatorDialogs](https://discmaster.textfiles.com/search?formatid=necromancersDOSNavigatorDialogs) | Necromancer's DOS Navigator Dialogs | .dlg | 
 [other/necromancersDosNavigatorHelp](https://discmaster.textfiles.com/search?formatid=necromancersDosNavigatorHelp) | Necromancer's Dos Navigator Help | .hlp | 
+[other/necromancersDOSNavigatorLanguage](https://discmaster.textfiles.com/search?formatid=necromancersDOSNavigatorLanguage) | Necromancer's DOS Navigator Language | .lng | 
 [other/needForSpeed2TrackData](https://discmaster.textfiles.com/search?formatid=needForSpeed2TrackData) | Need For Speed 2 Track data | .trk | 
 [other/needForSpeedCarData](https://discmaster.textfiles.com/search?formatid=needForSpeedCarData) | Need for Speed car data | .pdn | 
 [other/needForSpeedCarExterior](https://discmaster.textfiles.com/search?formatid=needForSpeedCarExterior) | Need for Speed car exterior | .cfm | 
@@ -2161,6 +2167,7 @@ Family/Format | Name | Extensions | Notes
 [other/netwareServerLicense](https://discmaster.textfiles.com/search?formatid=netwareServerLicense) | Netware Server license | .mls | 
 [other/networkAssociatesVirusScanData](https://discmaster.textfiles.com/search?formatid=networkAssociatesVirusScanData) | Network Associates VirusScan data | .dat | 
 [other/networkInstrumentsObserverCaptureFile](https://discmaster.textfiles.com/search?formatid=networkInstrumentsObserverCaptureFile) | Network Instruments Observer capture file | .lst .bfr .ls | 
+[other/newsFontFamily](https://discmaster.textfiles.com/search?formatid=newsFontFamily) | NeWS font family | .ff | 
 [other/newtonToolkitLayoutSettings](https://discmaster.textfiles.com/search?formatid=newtonToolkitLayoutSettings) | Newton Toolkit Layout settings | .lyt | 
 [other/newtonToolkitProject](https://discmaster.textfiles.com/search?formatid=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 

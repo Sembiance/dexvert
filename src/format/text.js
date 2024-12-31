@@ -93,6 +93,7 @@ export default
 		ysFlightInstrumentPanel             : {name : "YSFlight Instrument panel", ext : [".ist"], magic : ["YSFlight Instrument panel"], weakMagic : true},
 		ysFlightObjectsIdData               : {name : "YSFlight objects id data", ext : [".dat"], magic : ["YSFlight objects id data"], weakMagic : true},
 		ysFlightSceneryField                : {name : "YSFlight scenery Field", ext : [".fld"], magic : ["YSFlight scenery Field"], weakMagic : true},
+		ySFLIGHTTerrainData                 : {name : "YS FLIGHT terrain data", ext : [".ter"], magic : ["YS FLIGHT terrain data"], weakMagic : true},
 		zillionsOfGamesRules                : {name : "Zillions of Games Rules", ext : [".zrf"], magic : ["Zillions of Games Rules File"], weakMagic : true},
 		zillionsOfGamesSolutionSavedGame    : {name : "Zillions of Games Solution - Saved Game", ext : [".zsg"], magic : ["Zillions of Games Solution - Saved Game"]},
 
@@ -284,6 +285,7 @@ export default
 		adobeDownloadManager                       : {name : "Adobe Download Manager", ext : [".aom"], magic : ["Adobe Download Manager"]},
 		adobeFontList                              : {name : "Adobe Font List", ext : [".lst"], magic : ["Adobe FontList", /^fmt\/526( |$)/], website : "http://fileformats.archiveteam.org/wiki/Adobe_Font_List"},
 		adobeInDesignPrintingInstructionsReport    : {name : "Adobe InDesign printing instructions report", magic : ["Adobe InDesign printing instructions report"]},
+		adobePhotoshopLightroomTemplate            : {name : "Adobe Photoshop Lightroom template", ext : [".agtemplate"], magic : ["Adobe Photoshop Lightroom template"], weakMagic : true},
 		adobePortableDocumentCatalogIndex          : {name : "Adobe Portable Document Catalog Index", ext : [".pdx"], magic : ["Adobe Portable Document Catalog Index", /^fmt\/(446|447|448)( |$)/], weakMagic : true},
 		advancedStreamRedirector                   : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector", "audio/x-ms-asx"], weakMagic : true},
 		aegisAnimatorScript                        : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},

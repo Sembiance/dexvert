@@ -579,8 +579,6 @@ export const WEAK_VALUES =
 	/^DSF audio bitstream data/,
 	/^dSYM companion file$/,
 	/^DuckDB database file/,
-	/^dump format, /,
-	/^dump: (4\.1BSD|Convex Storage Manager)/,
 	/^Dyalog APL/,
 	/^Dzip archive data/,
 	/^EBCDIC text/,

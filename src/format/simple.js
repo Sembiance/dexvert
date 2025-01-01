@@ -167,6 +167,7 @@ export default
 		eaLocalizedStringsGameData       : {name : "EA Localized Strings game data", ext : [".loc"], magic : ["EA Localized Strings game data"]},
 		frameMakerHelp                   : {name : "FrameMaker Help", ext : [".prd", ".hlp", ".api"], magic : ["FrameMaker Help"], idMeta : ({macFileType, macFileCreator}) => macFileType==="FHlp" && macFileCreator==="Fram"},
 		frontRunnerBinaryModule          : {name : "FrontRunner Binary Module", ext : [".frb"], magic : ["FrontRunner Binary module"]},
+		genboxFamilyHistoryDictionary    : {name : "Genbox Family History dictionary", ext : [".gdt"], magic : ["Genbox Family History dictionary"], weakMagic : true},
 		geosConvert                      : {name : "GEOS ConVerT", ext : [".cvt"], magic : ["GEOS ConVerT container format", "GEOS Convert archive"], website : "http://fileformats.archiveteam.org/wiki/GEOS_Convert"},
 		gfaBASICAmiga                    : {name : "GFA-BASIC Amiga", ext : [".gfa", ".bas"], magic : ["GFA-BASIC Amiga"]},
 		gfaBASICMSDOS                    : {name : "GFA-BASIC MS-DOS", ext : [".gfa", ".bas"], magic : ["GFA-BASIC MS-DOS"]},

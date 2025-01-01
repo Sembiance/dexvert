@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,004)
+# Unsupported File Formats (3,009)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -331,7 +331,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (164)
+## Document (165)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -420,6 +420,7 @@ Family/Format | Name | Extensions | Notes
 [document/justWriteDocument](https://discmaster.textfiles.com/search?formatid=justWriteDocument) | JustWrite document | .jw jwt .qw .qwt | 
 [document/kSpreadsheet](https://discmaster.textfiles.com/search?formatid=kSpreadsheet) | K-Spreadsheet | .spd | 
 [document/kingsoftSpreadsheet](https://discmaster.textfiles.com/search?formatid=kingsoftSpreadsheet) | Kingsoft Spreadsheet | .et | 
+[document/klasikTextDocument](https://discmaster.textfiles.com/search?formatid=klasikTextDocument) | Klasik Text document | .txk | 
 [document/logistixSpreadsheet](https://discmaster.textfiles.com/search?formatid=logistixSpreadsheet) | Logistix spreadsheet | .lgx | 
 [document/lotusSymphony](https://discmaster.textfiles.com/search?formatid=lotusSymphony) | Lotus Symphony Worksheet | .wk1 .wr1 | 
 [document/masterCook](https://discmaster.textfiles.com/search?formatid=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
@@ -666,7 +667,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (182)
+## Image (183)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -685,6 +686,7 @@ Family/Format | Name | Extensions | Notes
 [image/appleIIgsObjectOrientedGraphic](https://discmaster.textfiles.com/search?formatid=appleIIgsObjectOrientedGraphic) | Apple IIgs Object Oriented Graphic |  | 
 [image/applixBitmap](https://discmaster.textfiles.com/search?formatid=applixBitmap) | Applix bitmap | .im | 
 [image/applixwareGraphic](https://discmaster.textfiles.com/search?formatid=applixwareGraphic) | Applixware Graphic | .ag | 
+[image/artIconsIconCollection](https://discmaster.textfiles.com/search?formatid=artIconsIconCollection) | Art Icons - IconCollection | .icc | 
 [image/artsAndLettersGraphic](https://discmaster.textfiles.com/search?formatid=artsAndLettersGraphic) | Arts and Letters Graphic | .ged | 
 [image/artWorks](https://discmaster.textfiles.com/search?formatid=artWorks) | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://sembiance.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
 [image/artworxDrawing](https://discmaster.textfiles.com/search?formatid=artworxDrawing) | Artworx Drawing | .cwg | 
@@ -1018,7 +1020,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,901)
+## Other (1,904)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1093,6 +1095,7 @@ Family/Format | Name | Extensions | Notes
 [other/adobeSetupInstallationFile](https://discmaster.textfiles.com/search?formatid=adobeSetupInstallationFile) | Adobe Setup Installation File | .sif .setupfile1 | 
 [other/adobeTypeFontInfo](https://discmaster.textfiles.com/search?formatid=adobeTypeFontInfo) | Adobe Type Manager Font Information | .inf | 
 [other/adoragePreferences](https://discmaster.textfiles.com/search?formatid=adoragePreferences) | Adorage preferences |  | 
+[other/adrenalineRushHourGameData](https://discmaster.textfiles.com/search?formatid=adrenalineRushHourGameData) | Adrenaline Rush Hour game data | .bin | 
 [other/adriftTextAdventure](https://discmaster.textfiles.com/search?formatid=adriftTextAdventure) | ADRIFT Text Adventure | .taf | 
 [other/advancedCalculatorSpreadsheet](https://discmaster.textfiles.com/search?formatid=advancedCalculatorSpreadsheet) | Advanced Calculator spreadsheet | .calc | 
 [other/advancedLayouterModel](https://discmaster.textfiles.com/search?formatid=advancedLayouterModel) | Advanced Layouter model | .mus | 
@@ -1712,6 +1715,8 @@ Family/Format | Name | Extensions | Notes
 [other/gemViewPrintModule](https://discmaster.textfiles.com/search?formatid=gemViewPrintModule) | GEM-View Print module | .gvp | 
 [other/gemViewPRocessModule](https://discmaster.textfiles.com/search?formatid=gemViewPRocessModule) | GEM-View pRocess module | .gvr | 
 [other/gemViewSaveModule](https://discmaster.textfiles.com/search?formatid=gemViewSaveModule) | GEM-View Save module | .gvs | 
+[other/genboxFamilyHistoryChartOptions](https://discmaster.textfiles.com/search?formatid=genboxFamilyHistoryChartOptions) | Genbox Family History chart options | .gco | 
+[other/genboxFamilyHistoryReportOptions](https://discmaster.textfiles.com/search?formatid=genboxFamilyHistoryReportOptions) | Genbox Family History report options | .gro | 
 [other/geneRallyTrack](https://discmaster.textfiles.com/search?formatid=geneRallyTrack) | GeneRally track | .trk | 
 [other/geoffHamiltonsGardenDesignerProject](https://discmaster.textfiles.com/search?formatid=geoffHamiltonsGardenDesignerProject) | Geoff Hamilton's Garden Designer project | .grd | 
 [other/geometerSSketchpadScript](https://discmaster.textfiles.com/search?formatid=geometerSSketchpadScript) | Geometer's Sketchpad Script | .gss | 

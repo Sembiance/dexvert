@@ -275,6 +275,7 @@ export default
 		///////////
 		// Other //
 		///////////
+		absSpreadsheet                             : {name : "abs spreadsheet", ext : [".abs"], magic : ["abs spreadsheet"], weakMagic : true},
 		accelPrintedCircuitBoard                   : {name : "ACCEL Printed Circuit Board", ext : [".bak", ".sch", ".pcb"], magic : ["ACCEL Printed Circuit Board"]},
 		acclaimSkeletonFile                        : {name : "Acclaim Skeleton File", ext : [".asf"], magic : ["Acclaim Skeleton File"], weakMagic : true},
 		acegrFitDescriptionFile                    : {name : "ACE/gr fit description file", ext : [".fit"], magic : [/^ACE\/gr fit description file/]},
@@ -328,6 +329,7 @@ export default
 		audoCADMenu                                : {name : "AudoCAD Menu", ext : [".mnu"], magic : ["AudoCAD Menu"], weakMagic : true},
 		authorwareShockedMap                       : {name : "Authorware Shocked Map", ext : [".aam"], magic : ["Authorware Shocked File (Map)"]},
 		autoCADColorPalette                        : {name : "AutoCAD Color Palette", ext : [".ccp"], magic : ["AutoCAD Color Palette"], weakMagic : true},
+		autoCADCustomDictionary                    : {name : "AutoCAD Custom Dictionary", ext : [".cus"], magic : [/^x-fmt\/38( |$)/], weakMagic : true},
 		autoSketchWizardStencil                    : {name : "AutoSketch wizard Stencil", ext : [".stn"], magic : ["AutoSketch wizard Stencil"], weakMagic : true},
 		autoread                                   : {name : "Autoread", ext : [".ard"], magic : ["Autoread format"]},
 		avidMachineTemplate                        : {name : "Avid machine template", ext : [".txt"], magic : ["Avid machine template"]},

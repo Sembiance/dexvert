@@ -1867,6 +1867,7 @@ export const WEAK_VALUES =
 	/^LightWave Envelope data$/,	// Found files that ARE this format, but with no extension and the magic is pretty weak otherwise
 	/^LightWave Motion data$/,
 	/^Lingoes Dictionary$/,
+	/^Liquid Audio$/,
 	/^Litestep theme$/,
 	/^LMMC encoded router config$/,
 	/^LogonStudio Vista logon image$/,

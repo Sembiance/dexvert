@@ -8,7 +8,7 @@ export class msCompound extends Format
 		// generic msCompound
 		"Generic OLE2 / Multistream Compound", "Composite Document File V2 Document", "OLE2 Compound Document Format", "OLE 2 Compound Document", /^CFBF$/,
 		
-		// app specific: I could look into these more and support these better
+		// app specific: I could look into these more and support them better
 		"Shell Scrap object", "StormFront skin", "Ulead PhotoImpact Object(s)", "Designworks Template (v3.5)", "Easy CD Creator's Jewel case", "STATISTICA Workbook", "Ulead iPhoto Template", "iPublish document", "Quattro Pro 7 spreadsheet",
 		"Creative Witer document", "3D Studio Max Material Library", "Windows Movie Maker project", "Roxio/MGI PhotoSuite Album", "Roxio/MGI PhotoSuite Project", "Avery DesignPro Label design", "Micrografx Simply 3D project", "Micrografx clipart index",
 		"WordPerfect Slide Show", "ArcGIS Map project", "JewelCase Maker project", "Corel Gallery", "Serif PhotoPlus Picture (OLE)", "Neato MediaFACE label template", "EMB Wilcom Design embroidery file", "Melco DesignShop Project", "CDFV2 QuickBooks",
@@ -18,7 +18,7 @@ export class msCompound extends Format
 		"Easy CD Creator Layout", "Oracle Data base Diagram", "CeledyDraw drawing", "Microsoft Access Wizard template", "Office Binder Document", "Microsoft Access Project", "ASAP Presentation", "Microsoft Clip Art Gallery Catalog", "Samsung document",
 		"Drafix Symbol Library", "WebLab Viewer Molecule", "Camtasia Studio Screen Recording", "Encrypted OLE2 / Multistream Compound File (ECP v1.0)", "Microsoft Visual Studio binary macro project", "Autodesk Inventor Part", "Calendar Creator 5 project",
 		"Calendar Creator 5 ClipArt Archive", "OrCAD PSpice Capture Symbols Models", "Autodesk Revit Template", "Revit Family Architecture project", "Diagram Studio Document", "Kingsoft Presentation template", "Orcad Schematic Capture Backup",
-		"Rockwell Logix 500 SLC-5 Software", "muvee autoProducer Project", "VideoStudio Project",
+		"Rockwell Logix 500 SLC-5 Software", "muvee autoProducer Project", "VideoStudio Project", "DesignCAD drawing",
 		/^fmt\/(240|877|916|971|1213|1297|1298|1303|1331|1346|1349|1360|1362|1386|1431|1432|1493|1517|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	idMeta           = ({macFileType, macFileCreator}) => macFileType==="MSIV" && macFileCreator==="MSIZ";

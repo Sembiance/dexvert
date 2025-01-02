@@ -7,6 +7,6 @@ export class texPKFont extends Format
 	ext        = [".pk"];
 	filename   = [/\d+pk$/i];
 	magic      = ["GFtoPK packed font", /^application\/x-font-tex$/, /TeX [Pp]acked font data/];
-	idMeta     = ({macFileType, macFileCreator}) => macFileType==="Tfm+" && macFileCreator==="TeX+";
+	idMeta     = ({macFileType, macFileCreator}) => (macFileType==="Tfm+" && macFileCreator==="TeX+") || (macFileType==="OzPK" && macFileCreator==="OzMF");
 	converters = ["deark[module:pkfont]"];
 }

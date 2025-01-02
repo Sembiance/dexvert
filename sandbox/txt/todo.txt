@@ -4,6 +4,7 @@
 * Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
   SFPack tool exe is pretty available
 
+https://dev.discmaster2.textfiles.com/admin/iaitem
 
 /---------------\
 | High Priority |

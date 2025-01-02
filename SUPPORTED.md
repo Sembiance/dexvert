@@ -1,4 +1,4 @@
-# Supported File Formats (2,864)
+# Supported File Formats (2,867)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -423,7 +423,7 @@ archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_res
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)
 archive | X68000 Floppy Disk Image | .xdf | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/x68000FloppyDiskImage/)
-archive | XBMC Texture Package | .xbt | [xbtfextractor](https://github.com/larshall/xbtfextractor) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/xbmcTexturePackage/)
+archive | XBMC Texture Package | .xbt | [xbtfextractor](https://github.com/larshall/xbtfextractor) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/xbmcTexturePackage/)
 archive | XCR archive | .xcr | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/xcrArchive/)
 archive | XPACK/LZCOM Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xpackLZCOMPacked/)
 archive | [XX34](http://fileformats.archiveteam.org/wiki/XX34) |  | [xx34](https://www.sac.sk/download/utilfile/xx3402.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/xx34/)
@@ -1971,7 +1971,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (857)
+## Text (860)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2067,7 +2067,7 @@ text | Bernd Wetzel OS/2 Install Data | .dat |  | [10 sample files](https://semb
 text | BibTeX database file | .bib |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXDatabaseFile/)
 text | BibTeX style | .bst |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXStyle/)
 text | BIF bitmap ASCII info | .bif |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/bifBitmapASCIIInfo/)
-text | BitTorrent file | .torrent |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/bitTorrentFile/)
+text | BitTorrent file | .torrent |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/bitTorrentFile/)
 text | BlueJ Class context | .ctxt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/blueJClassContext/)
 text | BlueJ package | .pkg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/blueJPackage/)
 text | blueMSX Cheats |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/blueMSXCheats/)
@@ -2242,6 +2242,8 @@ text | FruityLoops Humanize Preset | .fpr |  | [11 sample files](https://sembian
 text | ftncheck project file | .prj |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ftnchekProjectFile/)
 text | Furcadia DragonSpeak Script | .ds |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/furcadiaDragonSpeakScript/)
 text | fxPAINT pen |  |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/fxPAINTPen/)
+text | Gambas form | .form |  | 
+text | Gambas project |  |  | 
 text | GAPFile | .gap |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/gapfile/)
 text | GCOV coverage report | .gcov |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/gcovCoverageReport/)
 text | gEDA Symbol | .sym |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/gEDASymbol/)
@@ -2743,6 +2745,7 @@ text | VICE Rom Set | .vrs |  | [10 sample files](https://sembiance.com/fileForm
 text | Video Creator CD32 project | .vid |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/videoCreatorCD32Project/)
 text | VideoFX2 Effect | .vfx |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/videoFX2Effect/)
 text | VideoFX2 Script | .script |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/videoFX2Script/)
+text | Visionaire Studio game settings | .ini |  | 
 text | Vista Script | .prefs .script |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/vistaScript/)
 text | Visual Basic Active Designer file | .dsr |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicActiveDesignerFile/)
 text | Visual Basic class definition | .cls |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicClassDefinition/)
@@ -2779,7 +2782,7 @@ text | Windows application log | .lge .lgc .lgd |  | [2 sample files](https://se
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/windowsAutorun/)
 text | Windows Desktop Theme | .theme |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/windowsDesktopTheme/)
 text | Windows Explorer UIFILE |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/windowsExplorerUIFILE/)
-text | Windows Media Center application link | .mcl |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/windowsMediaCenterApplicationLink/)
+text | Windows Media Center application link | .mcl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsMediaCenterApplicationLink/)
 text | Windows Media Player playlist | .wpl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsMediaPlayerPlaylist/)
 text | Windows Policy Administrative Template | .adm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsPolicyAdminTemplateText/)
 text | Windows Policy Administrative Template - Unicode | .adm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/windowsPolicyAdminTemplate/)

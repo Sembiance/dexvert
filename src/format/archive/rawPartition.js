@@ -13,7 +13,7 @@ export class rawPartition extends Format
 		"XENIX file system", "System Deployment Image", "application/x-vhd-disk", "Virtual PC Virtual HD image", "Format: Microsoft Virtual Hard Disk (.VHD)", "Connectix Virtual PC hard disk image", /^Microsoft Disk Image/, "MPFS filesystem",
 		/^fmt\/(468|1087|1105|1739)( |$)/
 	];
-	idMeta     = ({macFileType, macFileCreator}) => (["devi", "devr"].includes(macFileType) && macFileCreator==="ddsk") || (macFileType==="DDim" && macFileCreator==="DDp+");
+	idMeta     = ({macFileType, macFileCreator}) => (["devi", "devr"].includes(macFileType) && macFileCreator==="ddsk") || (macFileType==="DDim" && macFileCreator==="DDp+") || (macFileType==="hdrv" && macFileCreator==="Wrap");
 	converters = dexState =>
 	{
 		const dosMBRID = dexState.ids.find(id => id.from==="file" && id.magic.startsWith("DOS/MBR boot sector"));

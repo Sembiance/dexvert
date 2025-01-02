@@ -2155,7 +2155,7 @@ export const WEAK_VALUES =
 	/^VHSIC Hardware Description Language \(with rem\)$/,
 	/^Vice HotKeys$/,
 	/^Vice Keyboard Mapping$/,
-	/^Visionaire Studio compiled adventure \(generic\)$/,
+	/^Visionaire Studio compiled adventure/,
 	/^Visual CertExam Simulator Exam$/,	// this is some sort of weird match that seems to match files that are not anywhere close to this format, not sure why
 	/^Virtual Home Space Builder 3D Space/,
 	/^Virtual TI skin/,

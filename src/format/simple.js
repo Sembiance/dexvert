@@ -76,7 +76,7 @@ export default
 		novellDOSClientMessage   : {name : "Novell DOS Client Message", ext : [".msg"], magic : ["Novell DOS client message"]},
 		novellHelpLibrarian      : {name : "Novell Help Librarian", ext : [".hlp"], magic : ["Novell Help Librarian Data"]},
 		oberonDocument           : {name : "Oberon Document", ext : [".odc"], magic : ["Oberon/F Document"], idMeta : ({macFileType, macFileCreator}) => macFileType==="oODC" && macFileCreator==="obnF"},
-		oberonText               : {name : "Oberon Text", ext : [".mod"], magic : ["Oberon V4 text format"], idMeta : ({macFileType, macFileCreator}) => macFileType===".Ob." && [".Ob2", ".Ob4"].includes(macFileCreator)},
+		oberonText               : {name : "Oberon Text", ext : [".mod"], magic : ["Oberon V4 text format"], idMeta : ({macFileType, macFileCreator}) => macFileType===".Ob." && [".Ob2", ".Ob4", ".Ob5", ".Ob6"].includes(macFileCreator)},
 		os2Message               : {name : "OS/2 Message File", ext : [".msg"], magic : [/^OS\/2 help [Mm]essage/], website : "http://fileformats.archiveteam.org/wiki/MSG_(OS/2)"},
 		ovationPro               : {name : "Ovation Pro Document", ext : [".dpd"], magic : ["Ovation Pro", "OvationPro document"]},
 		pageSetter               : {name : "PageSetter Document", ext : [".ps"], magic : [/^PageSetter I{0,3} ?document/]},

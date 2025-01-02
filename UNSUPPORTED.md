@@ -332,7 +332,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (165)
+## Document (166)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -460,6 +460,7 @@ Family/Format | Name | Extensions | Notes
 [document/quarkImmediaDocument](https://discmaster.textfiles.com/search?formatid=quarkImmediaDocument) | QuarkImmedia Document | .imd | 
 [document/quattroForDOSSpreadsheet](https://discmaster.textfiles.com/search?formatid=quattroForDOSSpreadsheet) | Quattro for DOS spreadsheet | .wkq | 
 [document/quickHelp](https://discmaster.textfiles.com/search?formatid=quickHelp) | Quick Help | .hlp | 
+[document/ragTimeDocument](https://discmaster.textfiles.com/search?formatid=ragTimeDocument) | RagTime Document |  | 
 [document/raimaDataManager](https://discmaster.textfiles.com/search?formatid=raimaDataManager) | Raima Data Manager |  | 
 [document/rmpHelp](https://discmaster.textfiles.com/search?formatid=rmpHelp) | RMP Help | .hlp | 
 [document/saxonPublisherDocument](https://discmaster.textfiles.com/search?formatid=saxonPublisherDocument) | Saxon Publisher document | .sp | 
@@ -1021,7 +1022,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,907)
+## Other (1,906)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2414,7 +2415,6 @@ Family/Format | Name | Extensions | Notes
 [other/radianceOctree](https://discmaster.textfiles.com/search?formatid=radianceOctree) | Radiance Octree | .oct | 
 [other/radixGameData](https://discmaster.textfiles.com/search?formatid=radixGameData) | Radix game data | .dat | 
 [other/radixLevelGameDesign](https://discmaster.textfiles.com/search?formatid=radixLevelGameDesign) | Radix Level Game Design | .lgd | 
-[other/ragTimeDocument](https://discmaster.textfiles.com/search?formatid=ragTimeDocument) | RagTime Document |  | 
 [other/raimaDataManagerLock](https://discmaster.textfiles.com/search?formatid=raimaDataManagerLock) | Raima Data Manager lock | .taf | 
 [other/rapidFileData](https://discmaster.textfiles.com/search?formatid=rapidFileData) | RapidFile Data | .rpd | 
 [other/raptorGLBEncryptedContainer](https://discmaster.textfiles.com/search?formatid=raptorGLBEncryptedContainer) | Raptor GLB Encrypted Container | .glb | 

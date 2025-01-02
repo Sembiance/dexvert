@@ -7,6 +7,7 @@ export class appleDOSDiskImage extends Format
 	ext            = [".dsk", ".po", ".hdv"];
 	forbidExtMatch = true;
 	magic          = [/^Apple DOS .*Image/, /^Apple ProDOS .*Image/, /^Apple II DOS .*disk image/, /^Apple II ProDOS .*disk image/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="DSK5" && macFileCreator==="A2EM";
 	converters     = ["cadius", "acx"];
 	post            = dexState =>
 	{

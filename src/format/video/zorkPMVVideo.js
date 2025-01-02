@@ -7,5 +7,6 @@ export class zorkPMVVideo extends Format
 	ext            = [".pmv"];
 	forbidExtMatch = true;
 	magic          = ["Zork PMV Video", "MADE Engine Video"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType===".DAT" && macFileCreator==="RZrk";
 	converters     = ["na_game_tool[format:pmv]"];
 }

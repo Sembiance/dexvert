@@ -7,5 +7,6 @@ export class tajimaStich extends Format
 	ext            = [".dst"];
 	forbidExtMatch = true;
 	magic          = ["Tajima stitch image"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="TAJI" && macFileCreator==="3dVE";
 	converters     = ["konvertor"];
 }

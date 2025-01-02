@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,009)
+# Unsupported File Formats (3,013)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (243)
+## Archive (244)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -69,6 +69,7 @@ Family/Format | Name | Extensions | Notes
 [archive/darkstopProtected](https://discmaster.textfiles.com/search?formatid=darkstopProtected) | DaRKSToP Protected | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
+[archive/dfSeeDiskImage](https://discmaster.textfiles.com/search?formatid=dfSeeDiskImage) | DFSee disk image | .imz | 
 [archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?formatid=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | 
 [archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?formatid=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
 [archive/dismemberProtected](https://discmaster.textfiles.com/search?formatid=dismemberProtected) | Dismember EXE CRYPT Protected | .exe | 
@@ -1020,7 +1021,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,904)
+## Other (1,907)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1346,6 +1347,7 @@ Family/Format | Name | Extensions | Notes
 [other/calamusTextStyleList](https://discmaster.textfiles.com/search?formatid=calamusTextStyleList) | Calamus Text Style List | .csl .cs | 
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?formatid=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
 [other/callOfDutyMap](https://discmaster.textfiles.com/search?formatid=callOfDutyMap) | Call of Duty Map | .d3dbsp .bsp | 
+[other/capellaMusicNotation](https://discmaster.textfiles.com/search?formatid=capellaMusicNotation) | Capella music notation | .cap | 
 [other/cardSoftPCMCIACardLibrary](https://discmaster.textfiles.com/search?formatid=cardSoftPCMCIACardLibrary) | CardSoft PCMCIA Card Library | .clb | 
 [other/carmageddonSavedGame](https://discmaster.textfiles.com/search?formatid=carmageddonSavedGame) | Carmageddon Saved Game | .ars | 
 [other/carnivores2IceAgeGraphicsBehavio](https://discmaster.textfiles.com/search?formatid=carnivores2IceAgeGraphicsBehavio) | Carnivores/Ice Age animal and object graphics and behavior file | .car | 
@@ -2032,6 +2034,8 @@ Family/Format | Name | Extensions | Notes
 [other/megaZeuxWorld](https://discmaster.textfiles.com/search?formatid=megaZeuxWorld) | MegaZeux World | .mzx | [3 sample files](https://sembiance.com/fileFormatSamples/other/megaZeuxWorld/)
 [other/memoryManagerResourceData](https://discmaster.textfiles.com/search?formatid=memoryManagerResourceData) | Memory Manager Resource Data |  | 
 [other/memoryMateDatabase](https://discmaster.textfiles.com/search?formatid=memoryMateDatabase) | Memory Mate database | .xxt | 
+[other/mesa2Spreadsheet](https://discmaster.textfiles.com/search?formatid=mesa2Spreadsheet) | Mesa 2 spreadsheet | .m2t .m2 | 
+[other/mesa2ToolBar](https://discmaster.textfiles.com/search?formatid=mesa2ToolBar) | Mesa 2 ToolBar | .tbr | 
 [other/metaSoftwareDesignDiagram](https://discmaster.textfiles.com/search?formatid=metaSoftwareDesignDiagram) | Meta Software Design Diagram | .dsd | 
 [other/metaCreationsResourceFile](https://discmaster.textfiles.com/search?formatid=metaCreationsResourceFile) | MetaCreations Resource Composite File |  | 
 [other/metaEditOODAClassDiagram](https://discmaster.textfiles.com/search?formatid=metaEditOODAClassDiagram) | MetaEdit OODA Class Diagram | .ocd | 

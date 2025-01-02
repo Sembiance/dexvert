@@ -508,6 +508,7 @@ export default
 		interleafDocument                          : {name : "Interleaf document", ext : [".doc"], magic : [/^Interleaf document text/]},
 		introCADPrinterDefinition                  : {name : "IntroCAD Printer Definition", magic : ["IntroCAD Printer Definition"]},
 		ipTablesText                               : {name : "IPTables Text", magic : ["text/x-iptables"]},
+		iriePascalProject                          : {name : "Irie Pascal Project", ext : [".ipj"], magic : ["Irie Pascal Project (v2)"]},
 		islandWriteDocument                        : {name : "IslandWrite document", ext : [".iwrite"], magic : [/^IslandWrite document/]},
 		it871TargetDescriptor                      : {name : "IT8.7/1 target descriptor", magic : ["IT8.7/1 target descriptor"]},
 		jacosub                                    : {name : "JACOsub subtitle format (jacosub)", ext : [".js"], magic : ["JACOsub subtitle format (jacosub)"], weakMagic : true},

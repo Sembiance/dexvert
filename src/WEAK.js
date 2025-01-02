@@ -433,6 +433,7 @@ export const WEAK_VALUES =
 	/^Adobe PageMaker, (big|little)-endian, version [\d.]+$/,
 	/^Adobe Photoshop, \d{5}/,
 	/^Adobe Photoshop Color swatch/,
+	/^AdvanceMAME mbr$/,
 	/^AES encrypted data/,
 	/^AES with \d+-bit key$/,
 	/^affix definition for /,

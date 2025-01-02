@@ -123,6 +123,7 @@ export default
 		cpcPlusCartridgeImage                       : {name : "CPC Plus Cartridge image", ext : [".cpr"], magic : ["CPC Plus Cartridge image"]},
 		datacompCompressedArchive                   : {name : "DATACOMP compressed archive", ext : [".emd"], magic : ["DATACOMP 1.0 compressed archive"]},
 		debianFloppySplit                           : {name : "Debian floppy split", ext : [".bin"], magic : ["Debian floppy split"]},
+		dfSeeDiskImage                              : {name : "DFSee disk image", ext : [".imz"], magic : ["DFSee disk image"]},
 		diskIMageArchiverDiskImage                  : {name : "Disk IMage Archiver disk image", ext : [".dim"], magic : ["Disk IMage Archiver disk image"]},
 		diskImagerSFXImage                          : {name : "DiskImager SFX Image", ext : [".exe"], magic : ["DiskImager 1.1 DOS sfx image"]},
 		distributionPackageArchive                  : {name : "Distribution Package archive", ext : [".pac"], magic : ["Distribution Package archive"], weakMagic : true},

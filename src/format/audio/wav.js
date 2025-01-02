@@ -7,7 +7,7 @@ export class wav extends Format
 	ext          = [".wav", ".bwf"];
 	mimeType     = "audio/x-wav";
 	magic        = [
-		/^RIFF.*WAV[Ee].*[aA]udio/, "Waveform Audio (PCMWAVEFORMAT)", "Wave Musikdatei (WAV)", "Broadcast Wave File audio", "RIFF audio data (WAV)", "Rockwell ADPCM audio", "audio/vnd.wave", "WAV / WAVE (Waveform Audio) (wav)",
+		/^RIFF.*WAV[Ee].*[aA]udio/, "Waveform Audio (PCMWAVEFORMAT)", "Wave Musikdatei (WAV)", "Broadcast Wave File audio", "RIFF audio data (WAV)", "Rockwell ADPCM audio", "audio/vnd.wave", "WAV / WAVE (Waveform Audio) (wav)", /^soxi: wav$/,
 		/^fmt\/(2|6|141|142|143|703|704)( |$)/
 	];
 	idMeta       = ({macFileType}) => [".WAV", "WAVE"].includes(macFileType);

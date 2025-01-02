@@ -11,7 +11,8 @@ export class mp3 extends Format
 	mimeType       = "audio/mpeg";
 	magic          = [
 		// general MP3 magic
-		"LAME encoded MP3 audio", /^Audio file.* layer III/, "MPEG ADTS, layer III", "MPEG 1/2 Audio Layer 3", "Audio file with ID3 version", /^ID3v2.\d.0 Tag/, /^MP3 ID3 tag, v2\.\d$/, "audio/mpeg", "MP2/3 (MPEG audio layer 2/3) (mp3)", /^fmt\/134( |$)/,
+		"LAME encoded MP3 audio", /^Audio file.* layer III/, "MPEG ADTS, layer III", "MPEG 1/2 Audio Layer 3", "Audio file with ID3 version", /^ID3v2.\d.0 Tag/, /^MP3 ID3 tag, v2\.\d$/, "audio/mpeg",
+		"MP2/3 (MPEG audio layer 2/3) (mp3)", /^soxi: mp3$/, /^fmt\/134( |$)/,
 		
 		// specific app-generate MP3 magic
 		"GoGo encoded MP3 audio", "Plugger encoded MP3 audio", "Xing encoded MP3 audio", "MP3 Xing Encoder"

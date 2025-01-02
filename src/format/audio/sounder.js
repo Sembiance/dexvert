@@ -1,11 +1,11 @@
 import {Format} from "../../Format.js";
 
-export class soundTool extends Format
+export class sounder extends Format
 {
-	name           = "SoundTool";
+	name           = "Sounder";
 	ext            = [".snd"];
 	forbidExtMatch = [".snd"];
-	magic          = ["SoundTool audio", /^soxi: sndt$/];
+	magic          = [/^soxi: sndr$/];
 	weakMagic      = true;
 	metaProvider   = ["soxi"];
 	converters     = ["sox"];

@@ -14,7 +14,7 @@ export class aliasPIX extends Format
 	verify     = async ({inputFile, meta}) =>
 	{
 		// even with the checks below, there are still false positives so we restrict to less than 2000x2000 as I've never encountered an authentic file this large
-		if(inputFile.size<4 || meta.height>2000 || meta.width>2000)
+		if(inputFile.size<4 || meta.height>2000 || meta.width>2000 || meta.height<2 || meta.width<2)
 			return false;
 
 		// Check for probably invalid ratios

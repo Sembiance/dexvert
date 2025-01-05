@@ -744,6 +744,7 @@ export default
 		snnsResult                                 : {name : "SNNS result", ext : [".res"], magic : ["SNNS result"]},
 		softICEInitializationData                  : {name : "SoftICE initialization data", ext : [".dat"], magic : ["SoftICE initialization data (DOS)"], weakMagic : true},
 		softwareToolworksHyperbaseData             : {name : "The Software Toolworks' Hyperbase Data", ext : [".dat"], magic : ["The Software Toolworks' Hyperbase Data"]},
+		softWrapLicenseData                        : {name : "SoftWrap license data", ext : [".sw2"], magic : ["SoftWrap license data"]},
 		sonnetProject                              : {name : "Sonnet Project", ext : [".son"], magic : ["Sonnet Project"]},
 		sosiMapData                                : {name : "SOSI map data", ext : [".sos"], magic : [/^SOSI map data/, /^fmt\/1246( |$)/], weakMagic : true},
 		spanItPersonalityDefinition                : {name : "Span-It! Personality definition", ext : [".per"], magic : ["Span-It! Personality definition"]},

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,013)
+# Unsupported File Formats (3,018)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (244)
+## Archive (245)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -41,6 +41,7 @@ Family/Format | Name | Extensions | Notes
 [archive/atariCassetteTapeImage](https://discmaster.textfiles.com/search?formatid=atariCassetteTapeImage) | Atari Cassette Tape Image | .cas | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCassetteTapeImage/)
 [archive/authorware](https://discmaster.textfiles.com/search?formatid=authorware) | Authorware Application/Package | .app .apw | [9 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
 [archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?formatid=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
+[archive/autochopFragment](https://discmaster.textfiles.com/search?formatid=autochopFragment) | AUTOCHOP fragment | .#00 .#01 .#02 .#03 .#04 .#05 .#06 .#07 .#08 .#09 | 
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?formatid=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?formatid=beOSResourceData) | BeOS Resource Data | .rsrc | 
 [archive/blackFiSTPacked](https://discmaster.textfiles.com/search?formatid=blackFiSTPacked) | BlacK FiST Packed | .exe | 
@@ -332,7 +333,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (166)
+## Document (167)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -429,6 +430,7 @@ Family/Format | Name | Extensions | Notes
 [document/maxiPlanSpreadsheet](https://discmaster.textfiles.com/search?formatid=maxiPlanSpreadsheet) | MaxiPlan spreadsheet | .plan | 
 [document/mediaPaqDCF](https://discmaster.textfiles.com/search?formatid=mediaPaqDCF) | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 [document/mediaViewDocument](https://discmaster.textfiles.com/search?formatid=mediaViewDocument) | MediaView document | .mdvw .mdv | 
+[document/memotechMTXBASICSource](https://discmaster.textfiles.com/search?formatid=memotechMTXBASICSource) | Memotech MTX BASIC source | .bas | 
 [document/microsoftAdvisorHelp](https://discmaster.textfiles.com/search?formatid=microsoftAdvisorHelp) | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 [document/microsoftISAMDatabase](https://discmaster.textfiles.com/search?formatid=microsoftISAMDatabase) | Microsoft ISAM database | .db3 .mdb | 
 [document/microsoftOneNote](https://discmaster.textfiles.com/search?formatid=microsoftOneNote) | Microsoft OneNote | .one .onetoc2 | 
@@ -561,7 +563,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (102)
+## Font (103)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -622,6 +624,7 @@ Family/Format | Name | Extensions | Notes
 [font/macAdobeType1Font](https://discmaster.textfiles.com/search?formatid=macAdobeType1Font) | Mac Adobe Type 1 Font |  | 
 [font/maxonCADFont](https://discmaster.textfiles.com/search?formatid=maxonCADFont) | MaconCAD Font | .mcfont | 
 [font/matroxFont](https://discmaster.textfiles.com/search?formatid=matroxFont) | Matrox Font | .fnt | 
+[font/maxisSimCityFont](https://discmaster.textfiles.com/search?formatid=maxisSimCityFont) | Maxis SimCity Font | .mxf | 
 [font/megaPaintFont](https://discmaster.textfiles.com/search?formatid=megaPaintFont) | MegaPaint Font | .fnt | 
 [font/metagraphicsFont](https://discmaster.textfiles.com/search?formatid=metagraphicsFont) | Metagraphics Font | .fnt | 
 [font/micrografxFont](https://discmaster.textfiles.com/search?formatid=micrografxFont) | Micrografx Font | .mgf | 
@@ -1022,7 +1025,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,906)
+## Other (1,908)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1458,6 +1461,7 @@ Family/Format | Name | Extensions | Notes
 [other/cryoS3DGameData](https://discmaster.textfiles.com/search?formatid=cryoS3DGameData) | Cryo S3D game data | .s3d | 
 [other/crystalAtariBrowserModule](https://discmaster.textfiles.com/search?formatid=crystalAtariBrowserModule) | Crystal Atari Browser Module | .mdl | 
 [other/crytekAsset](https://discmaster.textfiles.com/search?formatid=crytekAsset) | Crytek asset | .cgf .cga .anm .caf | 
+[other/csrBluecoreFirmwareSegment](https://discmaster.textfiles.com/search?formatid=csrBluecoreFirmwareSegment) | CSR Bluecore firmware segment | .dfu | 
 [other/ctVOICEDriver](https://discmaster.textfiles.com/search?formatid=ctVOICEDriver) | CT-VOICE Driver | .drv | 
 [other/cubaseDrumMap](https://discmaster.textfiles.com/search?formatid=cubaseDrumMap) | Cubase Drum Map | .drm | 
 [other/cubaseProject](https://discmaster.textfiles.com/search?formatid=cubaseProject) | Cubase Project | .npr .cpr | 
@@ -2125,6 +2129,7 @@ Family/Format | Name | Extensions | Notes
 [other/mstQuintusMacro](https://discmaster.textfiles.com/search?formatid=mstQuintusMacro) | MST Quintus Macro | .qmc | 
 [other/msxROM](https://discmaster.textfiles.com/search?formatid=msxROM) | MSX ROM | .rom | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
+[other/multiExCommanderResourceFile](https://discmaster.textfiles.com/search?formatid=multiExCommanderResourceFile) | MultiEx Commander Resource File | .mrf | 
 [other/multimediaBuilderData](https://discmaster.textfiles.com/search?formatid=multimediaBuilderData) | Multimedia Builder Data | .mbd | 
 [other/multimediaFusionClickNCreateFile](https://discmaster.textfiles.com/search?formatid=multimediaFusionClickNCreateFile) | Multimedia Fusion - Click'n'Create file | .cca | 
 [other/multiSimDesign](https://discmaster.textfiles.com/search?formatid=multiSimDesign) | MultiSim Design | .ms10 .ms9 .ms8 | 

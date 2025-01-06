@@ -1,14 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
-  SFPack tool exe is pretty available
 
-https://dev.discmaster2.textfiles.com/admin/iaitem
 
 /---------------\
 | High Priority |
 \---------------/
+* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
+  SFPack tool exe is pretty available
+
 * Learn how to crack old windows programs, specifically the decode.exe's from:
 	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
 	https://dev.discmaster2.textfiles.com/browse/6923/cd.iso/charme/hard

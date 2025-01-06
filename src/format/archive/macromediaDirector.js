@@ -14,7 +14,8 @@ export class macromediaDirector extends Format
 	idMeta         = ({macFileType, macFileCreator}) => (
 		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MV${suffix}`, "FGDC", "FGDM"].includes(macFileType) &&
 		 ["AFTB", "MD00", "MD01", "MD03", ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "paST"].includes(macFileCreator))) ||
-		(macFileType==="XOBJ" && macFileCreator==="MMDR"));
+		(macFileType==="XOBJ" && macFileCreator==="MMDR") ||
+		(macFileType==="MC07" && macFileCreator==="SB14"));
 	slow           = true;
 	converters     = [
 		// Director CastRipper has fully replaced macromediaDirector.js

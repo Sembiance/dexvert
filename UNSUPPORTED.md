@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,018)
+# Unsupported File Formats (3,021)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1025,7 +1025,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,908)
+## Other (1,911)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1366,6 +1366,7 @@ Family/Format | Name | Extensions | Notes
 [other/cavewarsDialog](https://discmaster.textfiles.com/search?formatid=cavewarsDialog) | Cavewars dialog | .fdg | 
 [other/cBASICIntermediateCode](https://discmaster.textfiles.com/search?formatid=cBASICIntermediateCode) | CBASIC Intermediate code | .int | 
 [other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?formatid=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 
+[other/ccS64Snapshot](https://discmaster.textfiles.com/search?formatid=ccS64Snapshot) | CCS64 snapshot | .c64 | 
 [other/cdAudioTrackShortcut](https://discmaster.textfiles.com/search?formatid=cdAudioTrackShortcut) | CD Audio track shortcut | .cda | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?formatid=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
 [other/centralPointSoftwareDirectoryTreeInfo](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareDirectoryTreeInfo) | Central Point Software directory Tree info | .tre | 
@@ -2069,6 +2070,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftIncrementalLinker](https://discmaster.textfiles.com/search?formatid=microsoftIncrementalLinker) | Microsoft Incremental Linker Data | .ilk | 
 [other/microsoftMailServerForPCScript](https://discmaster.textfiles.com/search?formatid=microsoftMailServerForPCScript) | Microsoft Mail Server for PC Script | .scr | 
 [other/microsoftMoneyAutoSavedData](https://discmaster.textfiles.com/search?formatid=microsoftMoneyAutoSavedData) | Microsoft Money auto saved data | .mny | 
+[other/microsoftPersonalAddressBook](https://discmaster.textfiles.com/search?formatid=microsoftPersonalAddressBook) | Microsoft Personal Address Book | .pab | 
 [other/microsoftPrinterDefinition](https://discmaster.textfiles.com/search?formatid=microsoftPrinterDefinition) | Microsoft Printer Definition | .prd | 
 [other/microsoftPrivateKey](https://discmaster.textfiles.com/search?formatid=microsoftPrivateKey) | Microsoft Private Key | .pkv | 
 [other/microsoftProfilerData](https://discmaster.textfiles.com/search?formatid=microsoftProfilerData) | Microsoft Profiler Data | .pbi .pbt .pbo | 
@@ -2417,6 +2419,7 @@ Family/Format | Name | Extensions | Notes
 [other/quickTextTitles](https://discmaster.textfiles.com/search?formatid=quickTextTitles) | QuickText Titles |  | 
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?formatid=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/quickTimePreferences](https://discmaster.textfiles.com/search?formatid=quickTimePreferences) | QuickTime Preferences | .qtp | 
+[other/rageDriver](https://discmaster.textfiles.com/search?formatid=rageDriver) | R.A.G.E. Driver | .rge | 
 [other/radianceOctree](https://discmaster.textfiles.com/search?formatid=radianceOctree) | Radiance Octree | .oct | 
 [other/radixGameData](https://discmaster.textfiles.com/search?formatid=radixGameData) | Radix game data | .dat | 
 [other/radixLevelGameDesign](https://discmaster.textfiles.com/search?formatid=radixLevelGameDesign) | Radix Level Game Design | .lgd | 

@@ -56,6 +56,6 @@ if [ "$(hostname)" == "ridgeport" ] || [ "$(hostname)" == "crystalsummit" ]; the
 	done
 
 	for pid in "${KIDPIDS[@]}"; do
-		kill "$pid"
+		kill "$pid" > /dev/null 2>&1
 	done
 fi

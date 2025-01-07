@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,021)
+# Unsupported File Formats (3,029)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -861,7 +861,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (158)
+## Music (159)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -903,6 +903,7 @@ Family/Format | Name | Extensions | Notes
 [music/drumTraker](https://discmaster.textfiles.com/search?formatid=drumTraker) | [Drum Traker Module](http://fileformats.archiveteam.org/wiki/Drum_Traker_module) | .dtl | [15 sample files](https://sembiance.com/fileFormatSamples/music/drumTraker/)
 [music/electronicArtsMusicFormat](https://discmaster.textfiles.com/search?formatid=electronicArtsMusicFormat) | Electronic Arts Music format | .mus .dat | 
 [music/encoreMusicalNotation](https://discmaster.textfiles.com/search?formatid=encoreMusicalNotation) | Encore Musical Notation | .enc .mus | [3 sample files](https://sembiance.com/fileFormatSamples/music/encoreMusicalNotation/)
+[music/ericssonEMelodyRingtone](https://discmaster.textfiles.com/search?formatid=ericssonEMelodyRingtone) | Ericsson eMelody Ringtone | .emy | 
 [music/everyonePianoMusicScore](https://discmaster.textfiles.com/search?formatid=everyonePianoMusicScore) | EveryonePiano music score | .eop | 
 [music/extendedMOD](https://discmaster.textfiles.com/search?formatid=extendedMOD) | [Extended MOD](http://fileformats.archiveteam.org/wiki/Extended_MOD) | .emd | [2 sample files](https://sembiance.com/fileFormatSamples/music/extendedMOD/)
 [music/ezScoreScore](https://discmaster.textfiles.com/search?formatid=ezScoreScore) | EZ-Score Score | .sco | 
@@ -1025,7 +1026,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,911)
+## Other (1,918)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1339,6 +1340,8 @@ Family/Format | Name | Extensions | Notes
 [other/caSimplyMoneyConfiguration](https://discmaster.textfiles.com/search?formatid=caSimplyMoneyConfiguration) | CA-Simply Money Configuration | .cnf | 
 [other/cadDrawLibrary](https://discmaster.textfiles.com/search?formatid=cadDrawLibrary) | CAD/Draw Library | .tbl | 
 [other/cadDrawSettings](https://discmaster.textfiles.com/search?formatid=cadDrawSettings) | CAD/Draw Settings | .mpi | 
+[other/cad6Drawing](https://discmaster.textfiles.com/search?formatid=cad6Drawing) | CAD6 Drawing | .mkd | 
+[other/cad6Library](https://discmaster.textfiles.com/search?formatid=cad6Library) | CAD6 Library | .mkl | 
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?formatid=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
 [other/cakewalkGroove](https://discmaster.textfiles.com/search?formatid=cakewalkGroove) | Cakewalk Groove | .bin | 
 [other/cakewalkMacroDOS](https://discmaster.textfiles.com/search?formatid=cakewalkMacroDOS) | Cakewalk Macro (DOS) | .ma | 
@@ -1368,6 +1371,7 @@ Family/Format | Name | Extensions | Notes
 [other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?formatid=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 
 [other/ccS64Snapshot](https://discmaster.textfiles.com/search?formatid=ccS64Snapshot) | CCS64 snapshot | .c64 | 
 [other/cdAudioTrackShortcut](https://discmaster.textfiles.com/search?formatid=cdAudioTrackShortcut) | CD Audio track shortcut | .cda | 
+[other/cdViewerData](https://discmaster.textfiles.com/search?formatid=cdViewerData) | CD Viewer data | .cdv | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?formatid=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
 [other/centralPointSoftwareDirectoryTreeInfo](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareDirectoryTreeInfo) | Central Point Software directory Tree info | .tre | 
 [other/centralPointSoftwareLibrary](https://discmaster.textfiles.com/search?formatid=centralPointSoftwareLibrary) | Central Point Software Library | .dlo | 
@@ -1693,6 +1697,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalDesignPainterSession](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterSession) | Fractal Design Painter Session | .ssk | 
 [other/fractalDesignPainterWeavingLib](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterWeavingLib) | Fractal Design Painter Weaving Lib | .wev | 
 [other/fractalExplorerViewData](https://discmaster.textfiles.com/search?formatid=fractalExplorerViewData) | Fractal Explorer View data | .fev | 
+[other/fractalExtremePalette](https://discmaster.textfiles.com/search?formatid=fractalExtremePalette) | Fractal Extreme Paletten Datei | .fxp | 
 [other/fractalForgeParameters](https://discmaster.textfiles.com/search?formatid=fractalForgeParameters) | Fractal Forge parameters | .mnd | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
 [other/freeDOSKEYBoardLayoutCollection](https://discmaster.textfiles.com/search?formatid=freeDOSKEYBoardLayoutCollection) | FreeDOS KEYBoard layout collection | .sys | 
@@ -2106,9 +2111,10 @@ Family/Format | Name | Extensions | Notes
 [other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?formatid=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 
 [other/mirrorIIEmulationFile](https://discmaster.textfiles.com/search?formatid=mirrorIIEmulationFile) | Mirror II Emulation File | .mef | 
 [other/missionPatch](https://discmaster.textfiles.com/search?formatid=missionPatch) | Mission Patch | .pat | 
+[other/mksSpellHashList](https://discmaster.textfiles.com/search?formatid=mksSpellHashList) | MKS Spell hash list |  | 
 [other/mmfwData](https://discmaster.textfiles.com/search?formatid=mmfwData) | MMFW data | .mms .mmb .mmp .snd .pic .cpk .blb | 
 [other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
-[other/mODiMODVoice](https://discmaster.textfiles.com/search?formatid=mODiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
+[other/modiMODVoice](https://discmaster.textfiles.com/search?formatid=modiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moonbaseSavedGame](https://discmaster.textfiles.com/search?formatid=moonbaseSavedGame) | Moonbase Saved game | .mbs | 
 [other/moriaSavedGame](https://discmaster.textfiles.com/search?formatid=moriaSavedGame) | Moria Saved game |  | 
@@ -2267,6 +2273,7 @@ Family/Format | Name | Extensions | Notes
 [other/palmPocketChessDeluxeGamesLibrary](https://discmaster.textfiles.com/search?formatid=palmPocketChessDeluxeGamesLibrary) | Palm PocketChess deluxe games library | .pdb | 
 [other/palmTealInfo](https://discmaster.textfiles.com/search?formatid=palmTealInfo) | Palm TealInfo | .pdb | 
 [other/palmTides](https://discmaster.textfiles.com/search?formatid=palmTides) | Palm Tides | .pdb | 
+[other/palmDraftSchematic](https://discmaster.textfiles.com/search?formatid=palmDraftSchematic) | PalmDraft schematic | .pdb | 
 [other/pandaSignatureFileSystem](https://discmaster.textfiles.com/search?formatid=pandaSignatureFileSystem) | Panda Signature file system | .sig | 
 [other/panzerkriegForWindowsScenario](https://discmaster.textfiles.com/search?formatid=panzerkriegForWindowsScenario) | Panzerkrieg for Windows Scenario | .pks | 
 [other/paperPortSlideShot](https://discmaster.textfiles.com/search?formatid=paperPortSlideShot) | PaperPort Slide Show | .fss | 
@@ -2339,6 +2346,7 @@ Family/Format | Name | Extensions | Notes
 [other/polarSpellCheckerDictionary](https://discmaster.textfiles.com/search?formatid=polarSpellCheckerDictionary) | Polar SpellChecker dictionary |  | 
 [other/polyfilmPrefs](https://discmaster.textfiles.com/search?formatid=polyfilmPrefs) | Polyfilm Preferences | .prf | 
 [other/ponyProgDeviceFile](https://discmaster.textfiles.com/search?formatid=ponyProgDeviceFile) | PonyProg device file |  | 
+[other/poolChampionShot](https://discmaster.textfiles.com/search?formatid=poolChampionShot) | Pool Champion shot | .sho | 
 [other/popNOPCrunchedData](https://discmaster.textfiles.com/search?formatid=popNOPCrunchedData) | PopNOP crunched data | .nop .vrm | 
 [other/portsOfCallSaveGame](https://discmaster.textfiles.com/search?formatid=portsOfCallSaveGame) | Ports of Call Save Game | .trp | 
 [other/postalDemo](https://discmaster.textfiles.com/search?formatid=postalDemo) | Postal Demo | .dmo .rdx | 

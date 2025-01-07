@@ -30,7 +30,7 @@ export const gameextractor =
 		ensembleStudiosGameArchive         : {name : "Ensemble Studios Game Archive", ext : [".drs"], magic : ["Ensemble Studios Data Resource"]},
 		etherlords2GameDataArchive         : {name : "Etherlords 2 game data archive", ext : [".res"], magic : ["Etherlords 2 game data archive"]},
 		finalFantasyGameArchive            : {name : "Final Fantasy Game Archive", ext : [".lgp"], magic : ["Final Fantasy Game Archive"]},
-		finalLiberationGameArchive         : {name : "Final Liberation: Warhammer Epic 40K game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive"]},
+		finalLiberationGameArchive         : {name : "Final Liberation/Holistic Design game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive", "Holistic Design game data archive (generic)"]},
 		gabrielKnight3BarnGameArchive      : {name : "Gabriel Knight 3 barn game archive", ext : [".brn"], magic : ["Gabriel Knight 3 barn game data"]},
 		h2oGameDataArchive                 : {name : "Liquid Entertainment H2O game data archive", ext : [".h2o"], magic : ["Liquid Entertainment H2O game data archive"]},
 		highwayPursuitGameDataArchive      : {name : "Highway Pursuit game data archive", ext : [".hvd", ".hfd", ".hod", ".hsd", ".hmd", ".hgd"], magic : ["Highway Pursuit game data archive"], weakMagic : true},

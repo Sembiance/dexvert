@@ -10,7 +10,7 @@ export class aliasPIX extends Format
 	mimeType   = "image/x-alias-pix";
 	magic      = ["Alias PIX", "Alias/Wavefront PIX image (alias_pix)", /^fmt\/1092( |$)/];
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="APIX" && macFileCreator==="SKET";
-	converters = ["nconvert", "deark[module:alias_pix]", "gimp", "imconv[format:pix][matchType:magic]", "canvas[hasExtMatch][matchType:magic]"];
+	converters = ["nconvert", "deark[module:alias_pix]", "imconv[format:pix][matchType:magic]", "canvas[hasExtMatch][matchType:magic]"];	// gimp also supports it but can convert garbage
 	verify     = async ({inputFile, meta}) =>
 	{
 		// even with the checks below, there are still false positives so we restrict to less than 2000x2000 as I've never encountered an authentic file this large
@@ -19,6 +19,10 @@ export class aliasPIX extends Format
 
 		// Check for probably invalid ratios
 		if((meta.width/meta.height)>20 || (meta.height/meta.width)>20)
+			return false;
+
+		// due to the loosey goosey nature of the format, disallowing single color images
+		if(meta.colorCount<=1)
 			return false;
 
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 6);

@@ -54,7 +54,7 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		"media-libs/resvg",
 
 		// needed for fontforge, see package.env/fontforge
-		"sys-devel/clang",
+		"llvm-core/clang",
 
 		// needed for inkscape
 		"dev-python/tinycss2",
@@ -90,6 +90,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`modprobe vhba`,
 	`lsmod`,
 	`mkdir -p /mnt/dexvert`,
+	`# If you have a 2nd hard drive, mount to /mnt/dexvert (via blkid/fstab/UUID, see 'Post Install' section in gentoo_install.txt)`,
 	`chown sembiance:sembiance /mnt/dexvert`,
 	`usermod -aG vboxusers sembiance`,
 	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0 && cd`,	// required for uniconvertor

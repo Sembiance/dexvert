@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class sounder extends Format
@@ -9,4 +10,5 @@ export class sounder extends Format
 	weakMagic      = true;
 	metaProvider   = ["soxi"];
 	converters     = ["sox"];
+	verify         = ({meta}) => meta.duration<xu.HOUR*3;	// some mis-matches in the wild that are 3+ hours long. unlikely to find an actual 3+ hour long sounder format file
 }

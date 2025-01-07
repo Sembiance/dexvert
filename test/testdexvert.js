@@ -564,6 +564,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/pixfolioCatalog",
 	"archive/rar",
 	"audio/impulseTrackerSample",
+	"audio/mp3",	// TCD_tombseq1.mtc
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
 	"image/bbcDisplayRAM",

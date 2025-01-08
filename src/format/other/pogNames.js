@@ -6,6 +6,5 @@ export class pogNames extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PrintMaster";
 	ext        = [".pnm"];
 	auxFiles   = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.pog`);
-	slow       = true;
 	converters = ["strings"];
 }

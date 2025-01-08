@@ -12,17 +12,9 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Test multiple formats, creating a report for each",
 	opts    :
 	{
-		allow          : {desc : "Explicitly allow this to run on hosts that normally don't permit it"},
 		reportsDirPath : {desc : "Which directory to write the reports. Default: random"},
 		format         : {desc : "Specify one or more formats. Can specify 'all' or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
-
-if(!["crystalsummit", "ridgeport", "dexdrone10"].includes(Deno.hostname()) && !argv.allow)
-{
-	xlog.error`This script requires an updated set of sample files, as root@dexdrone10:\n\trsync -avl /mnt/compendium/DevLab/sembiance.com/web/fileFormatSamples/ root@${Deno.hostname()}:/mnt/compendium/DevLab/sembiance.com/web/fileFormatSamples/`;
-	xlog.error`Afterwards you this script with '--allow' to run tests.`;
-	Deno.exit(1);
-}
 
 await initFormats(xlog);
 
@@ -44,6 +36,7 @@ const underway = new Set();
 const maxFormatidLength = Array.from(formatsToProcess, v => v.length).max();
 const failures = [];
 const MAX_LINE_LENGTH = Deno.hostname()==="crystalsummit" ? 118 : 145;
+const FORMATS_AT_ONCE = 4;
 
 // these formats are slow, make sure to run them first, otherwise they might randomly not start until after all the rest and then prolong the total time. Don't put more than 2 formats per family
 const SLOW_FORMATS = Object.values(formats).filter(format => format.slow).map(format => `${format.familyid}/${format.formatid}`).sortMulti();
@@ -75,7 +68,7 @@ await orderedFormatsToProcess.parallelMap(async formatid =>
 		return failures.push(`${fg.orange(formatid.padStart(maxFormatidLength, " "))} ${fg.red("FAILED")}: ${stdout}`);
 
 	reports[formatid] = testData;
-}, 4);
+}, FORMATS_AT_ONCE);
 const elapsed = performance.now()-startedAt;
 
 if(failures.length)

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,029)
+# Unsupported File Formats (3,034)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (245)
+## Archive (246)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -126,6 +126,7 @@ Family/Format | Name | Extensions | Notes
 [archive/macOSInstallTome](https://discmaster.textfiles.com/search?formatid=macOSInstallTome) | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/) - Deark is working on adding this format.
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?formatid=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?formatid=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
+[archive/magixGEPacktArchive](https://discmaster.textfiles.com/search?formatid=magixGEPacktArchive) | MAGIX gepackt Archive |  | 
 [archive/massiveGameDataArchive](https://discmaster.textfiles.com/search?formatid=massiveGameDataArchive) | Massive game data archive | .pak | 
 [archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?formatid=maximusInstallerArchive) | Maximus installer archive | .fiz | 
 [archive/maxisGameDataArchive](https://discmaster.textfiles.com/search?formatid=maxisGameDataArchive) | Maxis game data archive | .package | 
@@ -672,7 +673,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (183)
+## Image (184)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -710,6 +711,7 @@ Family/Format | Name | Extensions | Notes
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?formatid=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
 [image/cadlogicInstinctDrawing](https://discmaster.textfiles.com/search?formatid=cadlogicInstinctDrawing) | Cadlogic Instinct Drawing | .dp | 
 [image/cadStdDrawing](https://discmaster.textfiles.com/search?formatid=cadStdDrawing) | CadStd drawing | .cad | 
+[image/cadvanceDrawing](https://discmaster.textfiles.com/search?formatid=cadvanceDrawing) | CADVANCE drawing | .vwf .bin | 
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?formatid=calamusVectorDocument) | Calamus Vector Document | .cvd | 
 [image/chasysDrawIESDrawing](https://discmaster.textfiles.com/search?formatid=chasysDrawIESDrawing) | Chasys Draw IES drawing | .cd5 | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?formatid=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
@@ -1026,7 +1028,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,918)
+## Other (1,921)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1267,6 +1269,7 @@ Family/Format | Name | Extensions | Notes
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
 [other/berkeleyDB](https://discmaster.textfiles.com/search?formatid=berkeleyDB) | Berkeley DB | .db | 
 [other/bethesdaGameMap](https://discmaster.textfiles.com/search?formatid=bethesdaGameMap) | Bethesda game Map | .mif | 
+[other/betterOnLineSolutionsPrinterDriver](https://discmaster.textfiles.com/search?formatid=betterOnLineSolutionsPrinterDriver) | Better On-Line Solutions Printer Driver | .apd .apw .aps | 
 [other/biewXlatTable](https://discmaster.textfiles.com/search?formatid=biewXlatTable) | Biew Xlat Table | .xlt | 
 [other/bigRedRacingLevel](https://discmaster.textfiles.com/search?formatid=bigRedRacingLevel) | Big Red Racing Level | .lev | 
 [other/billOfMaterials](https://discmaster.textfiles.com/search?formatid=billOfMaterials) | Bill of Materials | .bom | 
@@ -1342,6 +1345,7 @@ Family/Format | Name | Extensions | Notes
 [other/cadDrawSettings](https://discmaster.textfiles.com/search?formatid=cadDrawSettings) | CAD/Draw Settings | .mpi | 
 [other/cad6Drawing](https://discmaster.textfiles.com/search?formatid=cad6Drawing) | CAD6 Drawing | .mkd | 
 [other/cad6Library](https://discmaster.textfiles.com/search?formatid=cad6Library) | CAD6 Library | .mkl | 
+[other/cadvance2DSymbol](https://discmaster.textfiles.com/search?formatid=cadvance2DSymbol) | CADVANCE 2D symbol | .sym .bin | 
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?formatid=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
 [other/cakewalkGroove](https://discmaster.textfiles.com/search?formatid=cakewalkGroove) | Cakewalk Groove | .bin | 
 [other/cakewalkMacroDOS](https://discmaster.textfiles.com/search?formatid=cakewalkMacroDOS) | Cakewalk Macro (DOS) | .ma | 
@@ -2255,6 +2259,7 @@ Family/Format | Name | Extensions | Notes
 [other/os2ExtendedFileAttributes](https://discmaster.textfiles.com/search?formatid=os2ExtendedFileAttributes) | OS/2 Extended File Attributes |  | 
 [other/os2PresentationManagerMetafile](https://discmaster.textfiles.com/search?formatid=os2PresentationManagerMetafile) | OS/2 Presentation Manager Metafile | .met | 
 [other/os2SyslevelInfo](https://discmaster.textfiles.com/search?formatid=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
+[other/os2WarpServerBackupRulebook](https://discmaster.textfiles.com/search?formatid=os2WarpServerBackupRulebook) | OS/2 Warp Server backup Rulebook | .psr | 
 [other/os968kModule](https://discmaster.textfiles.com/search?formatid=os968kModule) | OS9/68k Module |  | 
 [other/outlookExpressDatabase](https://discmaster.textfiles.com/search?formatid=outlookExpressDatabase) | Outlook Express Database |  | 
 [other/outlookShortcuts](https://discmaster.textfiles.com/search?formatid=outlookShortcuts) | Outlook Shortcuts | .fav | 

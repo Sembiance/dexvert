@@ -9,6 +9,9 @@ export class pgm extends Format
 	magic        = ["Portable GrayMap bitmap (ASCII)", "Portable GrayMap bitmap (binary)", "Portable Grey Map", "image/x-portable-graymap", "piped pgm sequence (pgm_pipe)", /^Netpbm image data.*greymap/, /^fmt\/(406|407)( |$)/];
 	weakMagic    = ["Portable GrayMap bitmap (ASCII)"];
 	metaProvider = ["image"];
-	converters   = ["convert", "iio2png", "gimp", "wuimg", "paintDotNet", "hiJaakExpress", "canvas", "tomsViewer"];
+	converters   = [
+		"convert", "iio2png", "gimp", "wuimg",
+		"paintDotNet[matchType:magic]", "hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
+	];
 	verify       = ({meta}) => meta.width>2 && meta.height>2;
 }

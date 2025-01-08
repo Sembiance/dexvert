@@ -205,6 +205,7 @@ const FLEX_SIZE_FORMATS =
 	{
 		// sometimes the SHA1 sum differs
 		annaMarie              : 0.1,
+		dumpFile               : 0.1,
 		prehistorikGameArchive : 0.1,
 
 		// different each time due to way it generates frames

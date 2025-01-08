@@ -1,4 +1,4 @@
-# Supported File Formats (2,874)
+# Supported File Formats (2,876)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -98,7 +98,7 @@ archive | [Compact Compressed (Unix)](http://fileformats.archiveteam.org/wiki/Co
 archive | [Compaq Quick Release Sector Transfer Disk Image](http://fileformats.archiveteam.org/wiki/Quick_Release_Sector_Transfer) |  | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/qrst/)
 archive | [Compress Compressed (Unix)](http://fileformats.archiveteam.org/wiki/Compress_(Unix)) | .z .tz .taz | [ancient](https://github.com/temisu/ancient_format_decompressor) [gunzip](https://www.gnu.org/software/gzip/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) [izArc](https://www.izarc.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/compress/)
 archive | [Compressed ROM File System](http://fileformats.archiveteam.org/wiki/Cramfs) |  | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cramFS/)
-archive | [Compression Workshop Archive](https://github.com/geneb/CompressionWorkshop) | .cwf | [cwunpack](https://github.com/geneb/CompressionWorkshop/blob/master/CWUNPACK.EXE) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/compressionWorkshopArchive/)
+archive | [Compression Workshop Archive](https://github.com/geneb/CompressionWorkshop) | .cwf | [cwunpack](https://github.com/geneb/CompressionWorkshop/blob/master/CWUNPACK.EXE) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/compressionWorkshopArchive/)
 archive | [CopyQM Disk Image](http://fileformats.archiveteam.org/wiki/CopyQM) | .cqm | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/copyQMDiskImage/)
 archive | [Corel MOSAIC Library Thumbnail Archive](http://fileformats.archiveteam.org/wiki/CorelMOSAIC_library) | .clb | [deark](https://entropymine.com/deark/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/corelMOSAIC/)
 archive | [COSMI Document](http://fileformats.archiveteam.org/wiki/COSMI_MultiMedia) | .pub .bro .bcd .crd .dtp | [foremost](http://foremost.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/cosmiDocument/)
@@ -527,7 +527,7 @@ audio | Single Stream RWSD | .rwsd | [vgmstream](https://github.com/vgmstream/vg
 audio | [Sonarc Compressed WAV](http://fileformats.archiveteam.org/wiki/Sonarc) | .wv .vc .snc | [sonarcx](https://www.rarewares.org/rrw/sonarc.php) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/sonarc/)
 audio | Sonic Foundry Sample Resource | .sfr | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sonicFoundrySampleResource/)
 audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/soundDesignerAudio/)
-audio | Sounder | .snd | [sox](http://sox.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/sounder/)
+audio | Sounder | .snd | [sox](http://sox.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/sounder/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 .sbk .arl | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
 audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
 audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
@@ -804,23 +804,24 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (34)
+## Font (35)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
 font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [Fony](http://hukka.ncn.fi/?fony) | [45 sample files](https://sembiance.com/fileFormatSamples/font/amigaBitmapFont/)
 font | [Amiga Bitmap Font Content](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) |  | [amigaBitmapFontContentToOTF](https://github.com/smugpie/amiga-bitmap-font-tools) | [10 sample files](https://sembiance.com/fileFormatSamples/font/amigaBitmapFontContent/)
+font | Atari 8-bit/ST Font | .fnt | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/font/atariFont/)
 font | Atari FontMaker | .fn2 .fnt .fn8 | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/font/fn2/)
 font | Atari SXS Font | .sxs | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/font/sxs/)
 font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .chr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/blazingPaddlesFont/)
 font | C64 8x8 Font | .64c | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/font/c64c/)
 font | CHX Big Font | .chx | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/chxBigFont/)
 font | [Daisy-Dot](http://fileformats.archiveteam.org/wiki/Daisy-Dot_font) | .nlq | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
-font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [23 sample files](https://sembiance.com/fileFormatSamples/font/dynamicPublisherFont/)
+font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/dynamicPublisherFont/)
 font | [Embedded OpenType](http://fileformats.archiveteam.org/wiki/Embedded_OpenType) | .eot .fntdata | [eot2ttf](https://github.com/umanwizard/libeot) | [11 sample files](https://sembiance.com/fileFormatSamples/font/eot/)
 font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/font/figlet/)
 font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/sfd/)
-font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [deark](https://entropymine.com/deark/) | [30 sample files](https://sembiance.com/fileFormatSamples/font/gemFont/)
+font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [deark](https://entropymine.com/deark/) | [34 sample files](https://sembiance.com/fileFormatSamples/font/gemFont/)
 font | [Glyph Bitmap Distribution Format](http://fileformats.archiveteam.org/wiki/BDF) | .bdf | [bdftopcf](https://gitlab.freedesktop.org/xorg/app/bdftopcf) | [10 sample files](https://sembiance.com/fileFormatSamples/font/bdf/)
 font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/font/grub2PFF2/)
 font | [Interlace Character Editor](http://fileformats.archiveteam.org/wiki/Interlace_Character_Editor_font) | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/ice/)
@@ -1976,7 +1977,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (862)
+## Text (863)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2126,7 +2127,8 @@ text | Corel/WordPerfect Setup information | .csw |  | [10 sample files](https:/
 text | CorelCAD Material | .mat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/corelCADMaterial/)
 text | COREWAR program | .prg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/corewarProgram/)
 text | CP/M disks format descriptions |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cpmDisksFormatDescriptions/)
-text | CPBackup info | .set |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/cPBackupInfo/)
+text | CPBackup Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cpBackupConfiguration/)
+text | CPBackup info | .set |  | 
 text | CPBackup Settings | .set |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/cpBackupSettings/)
 text | Cream Software Palette definition | .pal |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/creamSoftwarePaletteDefinition/)
 text | Crimson Editor language specification file | .spc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/crimsonEditorLanguageSpecificationFile/)
@@ -2135,7 +2137,7 @@ text | Crossword Creator Puzzle | .puz |  | [5 sample files](https://sembiance.c
 text | Csound Orchestra | .orc |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/csoundOrchestra/)
 text | Csound unified file format | .csd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
 text | CUETools AccuRip log | .accurip |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cueToolsAccuRipLog/)
-text | CUPL format | .jed .im |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/cuplFormat/)
+text | CUPL format | .jed .im |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/cuplFormat/)
 text | CUPL PLD Program format | .pld |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cuplPLDProgramFormat/)
 text | CWLS Log | .las |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cwlsLog/)
 text | Dark Reign Scenario | .scn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/darkReignScenario/)
@@ -2694,7 +2696,7 @@ text | Terminate Smartnote | .not |  | [6 sample files](https://sembiance.com/fi
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [90 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [91 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
@@ -2771,7 +2773,7 @@ text | VMware Localization | .vlcl |  | [3 sample files](https://sembiance.com/f
 text | VobSub Index file | .idx |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vobSubIndexFile/)
 text | VX-REXX Project | .vrp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vxREXXProject/)
 text | WAP Bookmark info | .url |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/wapBookmarkInfo/)
-text | WarpIN Script | .wis |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/warpINScript/)
+text | WarpIN Script | .wis |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/warpINScript/)
 text | Watcom C/C++ Project | .wpj |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/watcomCProject/)
 text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/watcomCTarget/)
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
@@ -2817,7 +2819,7 @@ text | X.509 Certificate |  |  | [11 sample files](https://sembiance.com/fileFor
 text | Xantippe project | .xan |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xantippeProject/)
 text | XaoS Position File | .z .xpf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/xaosPositionFile/)
 text | Xara graphics | .wix |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xaraGraphics/)
-text | Xara resources index | .txt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xaraResourcesIndex/)
+text | Xara resources index | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/xaraResourcesIndex/)
 text | Xara WebStyle file | .xws |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xaraWebStyleFile/)
 text | Xilinx ASCII Bitstream | .rbt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/xilinxASCIIBitstream/)
 text | Xilinx Block Memory Map | .bmm |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/xilinxBlockMemoryMap/)

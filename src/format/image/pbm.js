@@ -10,6 +10,6 @@ export class pbm extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"convert", "iio2png", "gimp", "wuimg", "imconv[format:pbm][matchType:magic]",
-		"paintDotNet", "hiJaakExpress", "canvas", "tomsViewer"
+		"paintDotNet[matchType:magic]", "hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
 }

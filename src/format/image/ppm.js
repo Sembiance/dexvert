@@ -9,5 +9,8 @@ export class ppm extends Format
 	magic        = ["Portable PixMap bitmap", "Portable Pixel Map", "image/x-portable-pixmap", "piped ppm sequence (ppm_pipe)", /^Netpbm image data,? .*pixmap/, /^fmt\/408( |$)/, /^x-fmt\/178( |$)/];
 	idMeta       = ({macFileType}) => macFileType==="PPGM";
 	metaProvider = ["image"];
-	converters   = ["convert", "iio2png", "gimp", "wuimg", "paintDotNet", "hiJaakExpress", "canvas", "tomsViewer[matchType:magic]", "pv[matchType:magic]"];
+	converters   = [
+		"convert", "iio2png", "gimp", "wuimg",
+		"paintDotNet[matchType:magic]", "hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]", "pv[matchType:magic]"
+	];
 }

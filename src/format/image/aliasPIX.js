@@ -14,11 +14,11 @@ export class aliasPIX extends Format
 	verify     = async ({inputFile, meta}) =>
 	{
 		// even with the checks below, there are still false positives so we restrict to less than 2000x2000 as I've never encountered an authentic file this large
-		if(inputFile.size<4 || meta.height>2000 || meta.width>2000 || meta.height<2 || meta.width<2)
+		if(inputFile.size<4 || meta.height>2000 || meta.width>2000 || meta.height<5 || meta.width<5)
 			return false;
 
 		// Check for probably invalid ratios
-		if((meta.width/meta.height)>20 || (meta.height/meta.width)>20)
+		if((meta.width/meta.height)>14 || (meta.height/meta.width)>14)
 			return false;
 
 		// due to the loosey goosey nature of the format, disallowing single color images

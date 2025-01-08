@@ -17,7 +17,7 @@ export const gameextractor =
 		bioWareEntityResourceFile          : {name : "BioWare Entity Resource File", ext : [".erf"], magic : ["BioWare Entity Resource File"]},
 		bloodrayneGameDataArchive          : {name : "Bloodrayne game data archive", ext : [".pod"], magic : ["Bloodrayne game data archive"], weakMagic : true},
 		boltGameArchive                    : {name : "BOLT Game Archive", ext : [".blt"], magic : ["BOLT game data archive"]},
-		broderbundMohawkGameArchive        : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="MHK_" && macFileCreator==="MoRs"},
+		broderbundMohawkGameArchive        : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive", "Riven saved game"], idMeta : ({macFileType, macFileCreator}) => macFileType==="MHK_" && macFileCreator==="MoRs"},
 		chasmGameArchive                   : {name : "Chasm Game Archive", ext : [".bin"], magic : ["Chasm BIN archive"]},
 		ciGAMESGameDataArchive             : {name : "CI GAMES game data archive", ext : [".dpk"], magic : ["CI GAMES game data archive"], weakMagic : true},
 		darkReignGameArchive               : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)"},

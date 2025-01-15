@@ -1,7 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* wuimg supports more formats:
+	font/elecbyteMUGENfont
+	font/texFont
+	image/elecbyteMUGENSprites (I wasn't able to find samples to test all format features, so it might output garbage in some cases)
+	image/signumBitmap
 
 /---------------\
 | High Priority |
@@ -16,6 +20,10 @@
     https://dev.discmaster2.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
   Should be able to find some cracking tutotorials from back in the day and go through them. Idea is find the assembly where the password button checks validity and crack that to just be NOP or something or change from BEQ to BNE or something
   Then add support for these files. Should be fun :)
+  Try asking an LLM for help on disassembly and finding the code to patch it out, etc. Might need to use an 'uncensored' LLM for this.
+  Try grok-2 on X, but can also try:
+	https://sebastian-petrus.medium.com/someone-has-mad-an-uncensored-version-of-qwq-32b-preview-and-it-is-awesome-f64769a60d03
+	which might be available here: https://openrouter.ai/qwen/qvq-72b-preview
 
 * Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
   Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it

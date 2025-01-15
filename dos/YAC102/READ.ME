@@ -1,0 +1,396 @@
+YAC 1.02 Copyright (c) 1995 Aleksandras Surna
+
+1. Introduction
+---------------
+
+Yet Another Compressor (YAC) - utility the main goal of which is to use EMS
+for better compression.
+
+On an average 10%, but often more than 50%, better compression than
+achieved by competing software (even solid archives), especially on
+large files/file collections.
+
+YAC is not limited to 640K DOS memory. When EMS is available YAC
+detects it and uses to improve performance. Even 2 Mbytes of
+EMS available gives good results.
+
+YAC uses significantly improved LZ+Huffman engine with 64K string match
+window size. But when EMS is enabled match window size increases up to
+1024K.  YAC also automatically manages auto-solid archives. Updates
+and deleting files from such an archive do not require repacking all
+files every time due to special archive structure.
+
+Compressor works in real mode, so there are no hardware and DOS
+extender conflicts. YAC unpacks archives within 330K conventional
+memory on any PC, but up to ~700-500K EMS and/or XMS is recommended.
+
+Implemented features: add, move, update, freshen, extract, test,
+delete, list. You can limit EMS & XMS usage, though YAC automatically
+detects physical (or "real") memory when using virtual memory in
+multitasking environments.
+
+Compression rate varies, but is especially good on various databases,
+program development backups. YAC is fast enough to be used as general
+purpose compressor.
+
+2. What's new
+--------------
+
+Changes since YAC 1.01.07 BETA TEST VERSION:
+
+Important:
+- non standard DOS file attributes masked out when decompressing;
+- new switch added (-lu)
+
+Other:
+- more documentation added;
+- while reporting an error sometimes YAC showed two copyright messages;
+- better memory allocation strategy used;
+- now test operation may accept four parameters, though the last one is
+  ignored.  Changed for compatibility with archive converters.
+
+3. Benchmarking
+---------------
+
+Some compression examples:
+The following PC configuration was used:
+486SX-33, 4Mbytes RAM;
+2.6 MBytes free EMS, 570K free DOS memory under DOS 6.22;
+Compressors: ARJ 2.41, UC2R3 PRO, RAR 1.53, ZIP 2.04g, YAC 1.02
+
+ftp://ftp.kiae.su/msdos/arcers/zoosrc.zip
+Size 618266, 98 files
+ZOO compressor sources
+
+                  Compressed size  Compression time  Decompression time
+zip                 214122  133%         10s                3s
+arj                 211530  132%         14s                4s
+uc                  178904  111%         24s                6s
+rar -s              175955  110%         15s                3s
+uc tst              175392  109%         46s                7s
+yac -le0 -lx0 (*)   174765  109%         23s                6s
+yac                 159879  100%         34s                6s
+
+(*) YAC with EMS & XMS usage disabled
+
+ftp://garbo.uwasa.fi/msdos/arcers/quantum.zip
+Size 368345, 8 files
+Compression program executable files (Quantum 0.96) and some
+documentation
+
+                  Compressed size  Compression time  Decompression time
+zip                 167744  115%          6s                2s
+arj                 167646  115%          8s                2s
+uc                  166620  114%          9s                3s
+uc tst              166032  114%         21s                3s
+rar -s              163052  112%          7s                2s
+yac                 145004  100%         20s                6s
+
+ftp://garbo.uwasa.fi/unix/arcers/gzip241.tar.Z
+Size 722063, 89 files
+GNU ZIP compression program sources
+
+                  Compressed size  Compression time  Decompression time
+zip                 263675  133%         10s                3s
+arj                 261530  132%         15s                4s
+uc                  235406  119%         25s                7s
+uc tst              232726  118%         46s                7s
+rar -s              217337  110%         16s                3s
+yac                 196882  100%         38s                6s
+
+Of course compression rate greatly depends on data nature. Sometimes
+YAC near 50% better than competing software:
+
+ftp://ftp.elf.stuba.sk/pub/pc/pack/arjz015.zip
+Size 480920, 12 files
+ARJZ compressor executable files for different platforms and some
+documentation
+
+                  Compressed size  Compression time  Decompression time
+arj                 264729  141%         11s                3s
+zip                 264088  141%          9s                2s
+rar -s              241856  129%         10s                3s
+uc                  233714  125%         14s                4s
+uc tst              231424  123%         23s                4s
+yac                 186964  100%         24s                6s
+
+YAC results are significantly better if more EMS are available.
+
+4. Commands
+-----------
+
+Syntax:
+YAC <command> {-<switches>} <archive> {<files>}
+
+COMMANDS:
+
+A - Add files to archive. YAC adds specified files to archive.
+
+    add all files in current
+    directory and
+    subdirectories:             YAC a -r archive
+    may be shortened as:        YAC ar archive
+    add files from two different
+    directories except *.bak:   YAC ar -x*.bak archive c:*.* d:\t\a??.*
+    when adding files 1.*:      YAC a archive 1
+    store full path:            YAC arfp archive
+    add all subdirectories
+    except given:               YAC ar -xsubdir\*.* archive
+
+M - Move files in archive. The only difference from previous command is
+    that files are deleted after successful add operation.
+
+U - Update files. Command adds only files which are newer than those
+    in archive, or not present in archive.
+
+F - Freshen files. Works like update command, except files not present
+    in archive are NOT added.
+
+D - Delete files from archive.
+
+    delete all *.bak files:     YAC d archive *.bak
+    delete whole directory with
+    it subdirectories:          YAC d archive subdir\*.*
+    delete all files starting
+    with 'a' and 'b':           YAC d archive a* b*
+
+X - Extract files with full pathname. Required directories created
+    without asking.
+
+    Extract files to current
+    directory:                  YAC x archive
+    Extract some subset:        YAC x -x*.exe archive subdir\*.*
+    Always overwrite files:     YAC xy archive
+
+E - Extracts files without path.
+
+T - Test integrity of archive. Works like file extracting without
+    writing to disk, but file pattern is ignored. This command checks
+    files control sum. Always ALL files are checked.
+
+    Test archive:               YAC t archive
+
+V - Verbosely list contents of archive (with paths).
+
+    List archive:               YAC v archive
+    List contents of some
+    subdirectory:               YAC v archive subdir\*.*
+
+L - List contents of archive (without paths).
+
+@S- Split files. Splitting into volumes is not limited to archives
+    (you may split any file). While splitting all.yc, files
+    all_1.yc, all_2.yc, etc. are created. Command uses switch -v
+    to specify split size.
+
+    Split file into 360K
+    pieces on drive a:         YAC @s -v360k archive a:arch
+    Split file into
+    100,000 bytes pieces:      YAC @s -v100000 archive
+    Split file into
+    1 Mbytes pieces:           YAC @s -v1m archive
+
+@C- Concatenate files. You can specify as argument any splitted file.
+    Concatenated file attributes and time stamp will be restored.
+
+    Concatenate pieces into
+    archive:                   YAC @c arch_1
+    Same as:                   YAC @c arch_2
+    Same as:                   YAC @c arch
+
+SWITCHES:
+
+Fixed length switches can be added to command without separators
+and leading '-'.
+
+E.g.
+
+YAC a -bw -le0 -lx0 all
+is the same as
+YAC abwle0 -lx0 all
+
+BW - Black and white mode. YAC uses black and white instead of colored
+     output. You can place this switch in environment variable.
+
+LE - Limit EMS usage. Useful in multitasking environments.
+
+     Use 4Mbytes EMS:            YAC ar -le4m archive
+     Use 500Kbytes EMS:          YAC d -le500 archive *.bak
+     Do not use EMS:             YAC x -le0 archive
+
+LX - Limit XMS usage. Not much useful, except in combination with -le0.
+
+     Fastest add operation:      YAC arle0 -lx0 archive
+
+LU - Specify EMS usage. Advanced users only. First occurrence of
+     -LU and -LE used. All following ignored.
+
+     WARNING: Specifying too much memory may drastically slow down
+     operating system or even hang due to leak of resources. Strongly
+     recommended to use -LE switch instead.
+
+     Try to use exactly
+     10MBytes EMS:               YAC a -lu10m all *.exe
+
+R  - Recurse subdirectories.
+
+FP - Store full path up to the root disk directory. (by default YAC
+     stores path up to the top scanned directory). Affects commands
+     add, move, update, freshen.
+
+Y  - Assume Yes on all queries. Useful with expand operations to
+     specify that all files must be overwritten.
+
+X  - Exclude file set:
+
+     Delete all files
+     except *.exe and *.dll:     YAC dx*.exe -x*.dll archive *
+
+     NOTE: yac ar -x*.exe all d:*.*
+     will not exclude if current drive not d:. You need specify
+     yac ar -xd:*.exe all d:*.*
+
+V  - Specify volume size. Affects only command @S.
+
+You can specify default switches in YAC_FLAGS environment variable.
+Under Windows, it is possible to override DOS default switches
+with YAC_WFLAGS environment variable.
+
+E.g.
+
+SET YAC_WFLAGS=-le2m
+
+useful for compressing in background to prevent swapping, then
+running new applications (YAC detects free physical memory at
+startup).  There is no obvious need to limit EMS usage while running
+under DOS.
+
+5. Optimizing performance
+-------------------------
+
+On 386+ computers to enable EMS in DOS it is required to add
+corresponding driver in config.sys (e.g. EMM386.EXE or so).
+
+By default some amount (usually 1Mbyte) of EMS is available in DOS
+window within various multitasking environments. In Windows, Windows NT
+you should edit .pif file (e.g. _DEFAULT.PIF or another one) to allow
+YAC use more EMS.
+
+The more EMS is available - the better compression is achieved. It is
+recommended to use at least 2Mbytes. Using more than 8Mbytes generally
+has small effect.
+
+EMS has different speed in various environments - the best in DOS,
+worse in Windows, average in Windows NT. Accordingly varies YAC
+compression speed.
+
+It takes some time to scan memory and detect free physical
+memory in multitasking environments. You can detect an average amount
+of EMS that YAC uses and set this value as limit in environment
+variable (see 4). In this case YAC will start faster.
+
+When using YAC without EMS, its speed increases, but compression rate
+decreases. Fastest YAC compression mode is with flags -lx0 -le0 (don't
+use EMS & XMS).
+
+About 440Kbytes of free memory are required for compression (510K if no
+EMS is available). For decompression YAC requires 330Kbytes.
+
+XMS is used in very conservative way, so usually there is no need to
+limit its usage.
+
+Currently there are limit of ~2100 files that may be added at once.
+Nevertheless YAC can manage unlimited number of files within an archive.
+
+6. Compression technique
+------------------------
+
+YAC concatenates files into 1-1.5Mbytes pieces and then compresses.
+This approach is something average between solid archives and usual.
+It gives good compression with reasonable update/delete speed.
+
+When updating YAC adds new files to a separate section, so the next
+update will be faster. Generally, if you're updating near the same
+file set few times, YAC works as fast as usual non-solid
+compressors.
+
+YAC engine matches strings up to 1Mbyte back (commonwhile compressors
+only 16-64K back). After that it uses static Huffman coding per block
+basis. There are also some enhancements:
+
+- first, engine uses some data transformation to improve compression of
+two bytes data sequences (such as those frequently used in *.wmf files)
+
+- second, it has adaptive dictionary
+
+7. Frequently asked questions
+-----------------------------
+
+Q. At compression time, if you have a lot of memory, you have a big
+window. But what if the machine you're decompressing on doesn't have
+that much memory? Do you implement virtual memory accessing the file
+written so far? If so, how much does that slow down decompression?
+
+A. Yes, virtual memory in YAC is implemented. For decompressing it
+requires up to 1024Kbytes memory for the window. If DOS conventional +
+XMS + EMS exceeds 1024K decompression is extremely fast (almost all
+computers in default configuration satisfy this condition, and all may
+be adjusted so easily). In other case, depending on how much DOS
+memory and disk cache available, decompression process is slowed.
+Example: turning off in Windows PIF file XMS & EMS results in
+decompression time increased 2.5 times with archive that contained
+1.5MBytes program sources.
+
+
+Q. Why YAC doesn't use some kind of extender to access extended memory?
+Why EMS required for this purpose?
+
+A. Switching to protected mode and accessing memory directly no doubt
+is much faster. But there is big problem within DOS: You require some
+extender which translates interrupts to real mode, shares memory with
+various memory managers, and other programs... In fact extender is a
+complex program, which may work unreliable. 'Unstable' game - not
+so bad. But 'unstable' compressor is something not usable.
+
+
+Q. Do I need EMS hardware to use YAC?
+
+A. No. EMS hardware implementation was used on some 286 computers long
+time ago. Currently EMS driver such as EMM386.EXE is no more than
+convenient way to access extended memory. Actually YAC does NOT
+require EMS for working correctly. EMS simply allows him to compress
+much better.
+
+
+Q. And why does YAC not use XMS too?
+
+A. YAC uses EMS driver to access extended memory. EMS driver allows to
+map memory to the first megabyte, while XMS driver can only copy the
+memory. When you need to access memory, it is much faster to map it,
+instead of copying, modifying, then copying back. No doubt it is
+possible make YAC to use XMS, but its speed then will decrease. So
+current version uses only EMS to compress data (thought sometimes up to
+200K XMS).
+
+
+Q. Why YAC works slightly slower than usual compressors?
+
+A. As mentioned above YAC matches strings up 1Mbyte back. Match
+strings at more than 16 times larger distance than usual compressors
+is much more difficult. This results in slower work.
+
+
+                     --- * --- * ---
+
+
+Currently available E-mail address of the author: as@ashurna.msk.ru
+Fidonet: 2:5020/305.11. Aleksandras Surna (pronounced as Alexander
+Shurna) is citizen of Lithuania. No technical support is available at
+this time.
+
+You may use and distribute this version freely provided that all of
+the files are kept intact and unmodified.
+
+YAC COMES WITH NO WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED.
+YOU USE IT AT YOUR OWN RISK. IN NO EVENT WILL THE AUTHOR OF THIS SOFTWARE
+BE LIABLE OF ANY DAMAGE RESULTING FROM THE USE OF THIS SOFTWARE.

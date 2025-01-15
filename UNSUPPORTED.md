@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,072)
+# Unsupported File Formats (3,090)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -872,7 +872,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (161)
+## Music (164)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -889,6 +889,7 @@ Family/Format | Name | Extensions | Notes
 [music/atariExecutableMSXMusic](https://discmaster.textfiles.com/search?formatid=atariExecutableMSXMusic) | Atari executable MSX music | .xex .com | 
 [music/axsModule](https://discmaster.textfiles.com/search?formatid=axsModule) | AXS Module | .axs | [2 sample files](https://sembiance.com/fileFormatSamples/music/axsModule/)
 [music/aySTRC](https://discmaster.textfiles.com/search?formatid=aySTRC) | AY STRC Module | .strc | [1 sample file](https://sembiance.com/fileFormatSamples/music/aySTRC/)
+[music/beaverSweeperModule](https://discmaster.textfiles.com/search?formatid=beaverSweeperModule) | Beaver Sweeper module | .gtk | 
 [music/beepola](https://discmaster.textfiles.com/search?formatid=beepola) | Beepola Module | .bbsong | [3 sample files](https://sembiance.com/fileFormatSamples/music/beepola/)
 [music/beniTracker](https://discmaster.textfiles.com/search?formatid=beniTracker) | [Beni Tracker Module](http://fileformats.archiveteam.org/wiki/Beni_Tracker_module) | .pis | [5 sample files](https://sembiance.com/fileFormatSamples/music/beniTracker/)
 [music/beRoTracker](https://discmaster.textfiles.com/search?formatid=beRoTracker) | BeRoTracker Module | .brt | [2 sample files](https://sembiance.com/fileFormatSamples/music/beRoTracker/) - A 32bit linux 1997 player in: sandbox/app/BeRoLinuxPlayer v1.0.rar  Could get an OLD linux OS emulated: https://soft.lafibre.info/
@@ -927,6 +928,7 @@ Family/Format | Name | Extensions | Notes
 [music/fmTracker](https://discmaster.textfiles.com/search?formatid=fmTracker) | FMTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmTracker/)
 [music/forgottenWorldsMusic](https://discmaster.textfiles.com/search?formatid=forgottenWorldsMusic) | Forgotten Worlds music | .fw | 
 [music/fredEditorSoundTrack](https://discmaster.textfiles.com/search?formatid=fredEditorSoundTrack) | Fred Editor Soundtrack |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/fredEditorSoundTrack/)
+[music/gatewayMusic](https://discmaster.textfiles.com/search?formatid=gatewayMusic) | Gateway Music | .mus | 
 [music/gmod](https://discmaster.textfiles.com/search?formatid=gmod) | [GMOD Module](https://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 [music/goatTracker](https://discmaster.textfiles.com/search?formatid=goatTracker) | GoatTracker Module | .sng | [6 sample files](https://sembiance.com/fileFormatSamples/music/goatTracker/)
 [music/guillemotMaxiSoundSequence](https://discmaster.textfiles.com/search?formatid=guillemotMaxiSoundSequence) | Guillemot MaxiSound Sequence | .seq | 
@@ -1024,6 +1026,7 @@ Family/Format | Name | Extensions | Notes
 [music/technoSoundTurbo2Track](https://discmaster.textfiles.com/search?formatid=technoSoundTurbo2Track) | TechnoSound Turbo 2 Track | .track | [1 sample file](https://sembiance.com/fileFormatSamples/music/technoSoundTurbo2Track/)
 [music/t0ast](https://discmaster.textfiles.com/search?formatid=t0ast) | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https://sembiance.com/fileFormatSamples/music/t0ast/)
 [music/musicalEnlightmentSong](https://discmaster.textfiles.com/search?formatid=musicalEnlightmentSong) | The Musical Enlightment Song | .sng | 
+[music/trackjoyGUSTrackerModule](https://discmaster.textfiles.com/search?formatid=trackjoyGUSTrackerModule) | Trackjoy GUS Tracker module | .joy | 
 [music/traXTrack](https://discmaster.textfiles.com/search?formatid=traXTrack) | TraX Music Track | .mts | [5 sample files](https://sembiance.com/fileFormatSamples/music/traXTrack/)
 [music/triSoundModule](https://discmaster.textfiles.com/search?formatid=triSoundModule) | TriSound module | .tri | 
 [music/twzSCCBLAFFERMusic](https://discmaster.textfiles.com/search?formatid=twzSCCBLAFFERMusic) | TwZ SCC-BLAFFER music | .tsm | 
@@ -1039,7 +1042,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,948)
+## Other (1,961)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1220,6 +1223,7 @@ Family/Format | Name | Extensions | Notes
 [other/artEffectBrush](https://discmaster.textfiles.com/search?formatid=artEffectBrush) | ArtEffect Brush |  | 
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?formatid=artEffectConvolution) | ArtEffect Convolution |  | 
 [other/artlineSymbolFile](https://discmaster.textfiles.com/search?formatid=artlineSymbolFile) | Artline Symbol File | .syf | 
+[other/ascaronEntertainmentGameData](https://discmaster.textfiles.com/search?formatid=ascaronEntertainmentGameData) | ASCARON Entertainment game data | .ewp .ewu .ewm ._dm | 
 [other/asciiFontMetrics](https://discmaster.textfiles.com/search?formatid=asciiFontMetrics) | ASCII Font Metrics | .afm | 
 [other/ashampooPhotoCommanderDocument](https://discmaster.textfiles.com/search?formatid=ashampooPhotoCommanderDocument) | Ashampoo Photo Commander Document | .apcdoc | 
 [other/ashampooProductsTranslation](https://discmaster.textfiles.com/search?formatid=ashampooProductsTranslation) | Ashampoo products translation | .ashlang | 
@@ -1740,6 +1744,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameDoctorSF3SavedGame](https://discmaster.textfiles.com/search?formatid=gameDoctorSF3SavedGame) | Game Doctor SF 3 saved game | .smc | 
 [other/gameGearROM](https://discmaster.textfiles.com/search?formatid=gameGearROM) | Game Gear ROM | .gg | 
 [other/gameMaker](https://discmaster.textfiles.com/search?formatid=gameMaker) | Game Maker | .gmr | 
+[other/gameVoiceData](https://discmaster.textfiles.com/search?formatid=gameVoiceData) | Game Voice data | .hvo | 
 [other/gamebyroKFMData](https://discmaster.textfiles.com/search?formatid=gamebyroKFMData) | Gamebyro KFM data | .kfm | 
 [other/gammaCAD](https://discmaster.textfiles.com/search?formatid=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gammaCADSymbolLibrary](https://discmaster.textfiles.com/search?formatid=gammaCADSymbolLibrary) | GammaCAD Symbol Library | .syl | 
@@ -1866,6 +1871,7 @@ Family/Format | Name | Extensions | Notes
 [other/imagenPrinter](https://discmaster.textfiles.com/search?formatid=imagenPrinter) | Imagen printer | .imp | 
 [other/imagineStagingData](https://discmaster.textfiles.com/search?formatid=imagineStagingData) | Imagine Staging Data | .istg | 
 [other/imgdiffPatch](https://discmaster.textfiles.com/search?formatid=imgdiffPatch) | imgdiff patch | .p .patch | 
+[other/impulseTrackerNetworkDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerNetworkDriver) | Impulse Tracker Network driver | .net | 
 [other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Sound Driver | .drv | 
 [other/independenceWar2ModPackage](https://discmaster.textfiles.com/search?formatid=independenceWar2ModPackage) | Independence War 2 mod Package | .pkg | 
 [other/inDesignLibrary](https://discmaster.textfiles.com/search?formatid=inDesignLibrary) | InDesign Library | .indl | 
@@ -1906,6 +1912,7 @@ Family/Format | Name | Extensions | Notes
 [other/javaClass](https://discmaster.textfiles.com/search?formatid=javaClass) | Java Class File | .class | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/javaClass/)
 [other/javaRuntimeCurrencyData](https://discmaster.textfiles.com/search?formatid=javaRuntimeCurrencyData) | Java runtime Currency Data | .data | 
 [other/javelinPrinterDriver](https://discmaster.textfiles.com/search?formatid=javelinPrinterDriver) | Javelin Printer Driver | .pr .pr2 | 
+[other/jayMSARegistrationKey](https://discmaster.textfiles.com/search?formatid=jayMSARegistrationKey) | JAY MSA registration key | .key | 
 [other/jazzJackrabbitFile](https://discmaster.textfiles.com/search?formatid=jazzJackrabbitFile) | Jazz Jackrabbit File | .0sc .0fn | 
 [other/jeepersConfiguration](https://discmaster.textfiles.com/search?formatid=jeepersConfiguration) | Jeepers Configuration | .cfg | 
 [other/jeepersKeyIndex](https://discmaster.textfiles.com/search?formatid=jeepersKeyIndex) | Jeepers Key/index | .jpk | 
@@ -1962,6 +1969,8 @@ Family/Format | Name | Extensions | Notes
 [other/labVIEWData](https://discmaster.textfiles.com/search?formatid=labVIEWData) | LabVIEW data | .lsb | 
 [other/labViewVirtualInstrument](https://discmaster.textfiles.com/search?formatid=labViewVirtualInstrument) | LabView Virtual Instrument | .vi | 
 [other/labWindowsUserInterfaceResource](https://discmaster.textfiles.com/search?formatid=labWindowsUserInterfaceResource) | LabWindows User Interface Resource | .uir | 
+[other/lanDecoderEthernetData](https://discmaster.textfiles.com/search?formatid=lanDecoderEthernetData) | LANdecoder Ethernet data | .enf | 
+[other/lanDecoderTokenRingData](https://discmaster.textfiles.com/search?formatid=lanDecoderTokenRingData) | LANdecoder Token-Ring data | .trf | 
 [other/lavasoftAdAwareReferenceFile](https://discmaster.textfiles.com/search?formatid=lavasoftAdAwareReferenceFile) | Lavasoft Ad-Aware reference file | .ref | 
 [other/ldSoHintsFile](https://discmaster.textfiles.com/search?formatid=ldSoHintsFile) | ld.so hints file | .hints | 
 [other/ldiffDifferencesData](https://discmaster.textfiles.com/search?formatid=ldiffDifferencesData) | LDIFF Differences Data | .lzd | 
@@ -2067,6 +2076,7 @@ Family/Format | Name | Extensions | Notes
 [other/medi8orProject](https://discmaster.textfiles.com/search?formatid=medi8orProject) | Medi8or Project | .md8 | 
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?formatid=mediaDescriptorFile) | Media Descriptor File | .mds | 
 [other/mediaShowProduction](https://discmaster.textfiles.com/search?formatid=mediaShowProduction) | MediaShow Production | .prod | 
+[other/megaCADLibrary](https://discmaster.textfiles.com/search?formatid=megaCADLibrary) | MegaCAD Library | .mtl | 
 [other/megaPaintKeyboardLayout](https://discmaster.textfiles.com/search?formatid=megaPaintKeyboardLayout) | MegaPaint keyboard layout | .ttb | 
 [other/megaPaintPrinterDefinition](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDefinition) | MegaPaint Printer definition | .prt | 
 [other/megaPaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDriver) | MegaPaint Printer Driver | .trb | 
@@ -2341,6 +2351,7 @@ Family/Format | Name | Extensions | Notes
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?formatid=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?formatid=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
 [other/perFORMCompressedDatabase](https://discmaster.textfiles.com/search?formatid=perFORMCompressedDatabase) | PerFORM compressed database | .frp | 
+[other/perryMasonTheCaseOfTheMandarinMurderGameData](https://discmaster.textfiles.com/search?formatid=perryMasonTheCaseOfTheMandarinMurderGameData) | Perry Mason: The Case of the Mandarin Murder game data | .cst | 
 [other/personalFinanceManagerPlusData](https://discmaster.textfiles.com/search?formatid=personalFinanceManagerPlusData) | Personal Finance Manager Plus data | .mny | 
 [other/personalPearlDataBase](https://discmaster.textfiles.com/search?formatid=personalPearlDataBase) | Personal Pearl data base | .d00 .d01 | 
 [other/persuasionAutoTemplate](https://discmaster.textfiles.com/search?formatid=persuasionAutoTemplate) | Persuasion AutoTemplate Interchange File Format |  | 
@@ -2451,6 +2462,7 @@ Family/Format | Name | Extensions | Notes
 [other/qtMessage](https://discmaster.textfiles.com/search?formatid=qtMessage) | Qt Message | .qm | 
 [other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?formatid=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
 [other/quake2Map](https://discmaster.textfiles.com/search?formatid=quake2Map) | Quake II Map | .bsp | 
+[other/quake2SaveGame](https://discmaster.textfiles.com/search?formatid=quake2SaveGame) | Quake II save game | .sav | 
 [other/quake2SpriteReference](https://discmaster.textfiles.com/search?formatid=quake2SpriteReference) | Quake II Sprite Reference | .sp2 | 
 [other/quake3Map](https://discmaster.textfiles.com/search?formatid=quake3Map) | Quake III Map | .bsp | 
 [other/quakeMap](https://discmaster.textfiles.com/search?formatid=quakeMap) | Quake Map | .bsp | 
@@ -2479,6 +2491,7 @@ Family/Format | Name | Extensions | Notes
 [other/rarConfiguration](https://discmaster.textfiles.com/search?formatid=rarConfiguration) | RAR Configuration | .cfg | 
 [other/raveReportsProject](https://discmaster.textfiles.com/search?formatid=raveReportsProject) | Rave Reports Project | .rav | 
 [other/ravenSoftCompiledScript](https://discmaster.textfiles.com/search?formatid=ravenSoftCompiledScript) | Raven Software Compiled Script | .ibi | 
+[other/rcSimulatorGameData](https://discmaster.textfiles.com/search?formatid=rcSimulatorGameData) | RC Simulator game data | .par | 
 [other/realDRAWProject](https://discmaster.textfiles.com/search?formatid=realDRAWProject) | Real-DRAW Project | .rdw | 
 [other/realBasicProject](https://discmaster.textfiles.com/search?formatid=realBasicProject) | RealBasic Project | .rbp | 
 [other/realTimeDevice](https://discmaster.textfiles.com/search?formatid=realTimeDevice) | RealTime Device | .rtd | 
@@ -2498,7 +2511,7 @@ Family/Format | Name | Extensions | Notes
 [other/retro64GameData](https://discmaster.textfiles.com/search?formatid=retro64GameData) | Retro64 game data | .wld | 
 [other/reunionAnimation](https://discmaster.textfiles.com/search?formatid=reunionAnimation) | Reunion Animation | .ani | 
 [other/reunionGraphics](https://discmaster.textfiles.com/search?formatid=reunionGraphics) | Reunion graphics | .pic | 
-[other/rfFlowDiagram](https://discmaster.textfiles.com/search?formatid=rfFlowDiagram) | RFFlow Diagram | .flo | 
+[other/rfFlowDiagram](https://discmaster.textfiles.com/search?formatid=rfFlowDiagram) | RFFlow Diagram/Chart | .flo | 
 [other/rHIDEProject](https://discmaster.textfiles.com/search?formatid=rHIDEProject) | RHIDE Project | .gpr | 
 [other/richMapFormat](https://discmaster.textfiles.com/search?formatid=richMapFormat) | Rich Map Format | .rmf | 
 [other/riffMSXF](https://discmaster.textfiles.com/search?formatid=riffMSXF) | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
@@ -2681,7 +2694,9 @@ Family/Format | Name | Extensions | Notes
 [other/tads](https://discmaster.textfiles.com/search?formatid=tads) | TADS | .t .gam .t3 | 
 [other/tagwriteTemplate](https://discmaster.textfiles.com/search?formatid=tagwriteTemplate) | Tagwrite Template | .tww | 
 [other/tascChessSavedGame](https://discmaster.textfiles.com/search?formatid=tascChessSavedGame) | Tasc Chess saved game | .gmd | 
+[other/taskForce1942SaveGame](https://discmaster.textfiles.com/search?formatid=taskForce1942SaveGame) | Task Force 1942 save game | .sve | 
 [other/tcpdumpCapture](https://discmaster.textfiles.com/search?formatid=tcpdumpCapture) | TCPDUMP Style Capture | .dmp .pcap | 
+[other/teamF1TrackData](https://discmaster.textfiles.com/search?formatid=teamF1TrackData) | Team F1 track data | .cdr | 
 [other/teamYankeeScenario](https://discmaster.textfiles.com/search?formatid=teamYankeeScenario) | Team Yankee scenario | .ty | 
 [other/team17MOIKGameDataArchive](https://discmaster.textfiles.com/search?formatid=team17MOIKGameDataArchive) | Team17 MOIK game data archive | .aud .xom .laf .kev .bdl .cam | 
 [other/team6GameData](https://discmaster.textfiles.com/search?formatid=team6GameData) | Team6 game data | .dcf .dct .dcl .dcc .dcm .dcscript .dcw .mcs | 
@@ -2768,6 +2783,7 @@ Family/Format | Name | Extensions | Notes
 [other/triviaShellData](https://discmaster.textfiles.com/search?formatid=triviaShellData) | Trivia Shell Data | .tsd | 
 [other/triviaShellIndex](https://discmaster.textfiles.com/search?formatid=triviaShellIndex) | Trivia Shell Index | .tsi | 
 [other/trivialDataBase](https://discmaster.textfiles.com/search?formatid=trivialDataBase) | Trivial Data Base | .tdb | 
+[other/truePaintAnimation](https://discmaster.textfiles.com/search?formatid=truePaintAnimation) | TruePaint Animation | .tpa | 
 [other/trxFirmwareHeader](https://discmaster.textfiles.com/search?formatid=trxFirmwareHeader) | TRX firmware header | .trx | 
 [other/tSOnlineModemsDefinitions](https://discmaster.textfiles.com/search?formatid=tSOnlineModemsDefinitions) | TS Online modems definitions | .def .dat | 
 [other/tsiProtected](https://discmaster.textfiles.com/search?formatid=tsiProtected) | TSI Protected | .pwd .pbk | 
@@ -3082,7 +3098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (49)
+## Video (51)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?formatid=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3093,6 +3109,7 @@ Family/Format | Name | Extensions | Notes
 [video/amigaMurder](https://discmaster.textfiles.com/search?formatid=amigaMurder) | [Amiga Murder Film](https://wiki.multimedia.cx/index.php/Murder_FILM) | .film | [6 sample files](https://sembiance.com/fileFormatSamples/video/amigaMurder/)
 [video/animationMagicAnimation](https://discmaster.textfiles.com/search?formatid=animationMagicAnimation) | Animation Magic video/Animation | .ani | 
 [video/animationWorks](https://discmaster.textfiles.com/search?formatid=animationWorks) | Animation Works Movie | .awm | [5 sample files](https://sembiance.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
+[video/ascornEntertainmentAnimation](https://discmaster.textfiles.com/search?formatid=ascornEntertainmentAnimation) | ASCARON Entertainment Animation |  | [3 sample files](https://sembiance.com/fileFormatSamples/video/ascornEntertainmentAnimation/)
 [video/astoundAnimation](https://discmaster.textfiles.com/search?formatid=astoundAnimation) | Astound Animation | .awa | 
 [video/avssVideo](https://discmaster.textfiles.com/search?formatid=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
 [video/callahansCrosstimeSaloonVideo](https://discmaster.textfiles.com/search?formatid=callahansCrosstimeSaloonVideo) | Callahans Crosstime Saloon video | .q | [2 sample files](https://sembiance.com/fileFormatSamples/video/callahansCrosstimeSaloonVideo/)
@@ -3105,6 +3122,7 @@ Family/Format | Name | Extensions | Notes
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?formatid=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?formatid=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?formatid=iavfVideo) | IAVF video | .avi .iavf | 
+[video/intelIndeoVideoFile](https://discmaster.textfiles.com/search?formatid=intelIndeoVideoFile) | Intel Indeo Video File | .ivf | 
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?formatid=lzaAnimationVideo) | LZA animation/video | .lza | 

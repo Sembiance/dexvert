@@ -1,6 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Deepfreezer support: https://dev.discmaster2.textfiles.com/view/22309/VPR0002A.BIN/OLS/yz105_Win32/yz105_Win32.yz1
+  http://justsolve.archiveteam.org/wiki/Yamazaki_zipper_archive
+
 * wuimg supports more formats:
 	font/elecbyteMUGENfont
 	font/texFont

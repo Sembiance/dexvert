@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,090)
+# Unsupported File Formats (3,092)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -568,7 +568,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (106)
+## Font (107)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -645,6 +645,7 @@ Family/Format | Name | Extensions | Notes
 [font/postalFont](https://discmaster.textfiles.com/search?formatid=postalFont) | Postal Font | .fnt | 
 [font/printMagicFont](https://discmaster.textfiles.com/search?formatid=printMagicFont) | Print Magic Font | .pmf | 
 [font/printPartnerFont](https://discmaster.textfiles.com/search?formatid=printPartnerFont) | PrintPartner Font | .font | 
+[font/privateCharacterEditorBitmapFont](https://discmaster.textfiles.com/search?formatid=privateCharacterEditorBitmapFont) | Private Character Editor Bitmap Font | .euf | 
 [font/proVideoFont](https://discmaster.textfiles.com/search?formatid=proVideoFont) | Pro Video font |  | 
 [font/processingFont](https://discmaster.textfiles.com/search?formatid=processingFont) | Processing Font | .vlw | 
 [font/professionalDrawFont](https://discmaster.textfiles.com/search?formatid=professionalDrawFont) | Professional Draw Font | .pdfont | 
@@ -1042,7 +1043,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,961)
+## Other (1,962)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1981,6 +1982,7 @@ Family/Format | Name | Extensions | Notes
 [other/life3000Status](https://discmaster.textfiles.com/search?formatid=life3000Status) | LIFE 3000 Status | .lif | 
 [other/lineageIIData](https://discmaster.textfiles.com/search?formatid=lineageIIData) | Lineage II data |  | 
 [other/linkBootableCodeForTransputerNetwork](https://discmaster.textfiles.com/search?formatid=linkBootableCodeForTransputerNetwork) | Link Bootable code for transputer network | .btl | 
+[other/lInkSystemApplicationDataFormat](https://discmaster.textfiles.com/search?formatid=lInkSystemApplicationDataFormat) | LInk System Application Data Format | .lsd | 
 [other/links386ProMicrosoftGolfCourse](https://discmaster.textfiles.com/search?formatid=links386ProMicrosoftGolfCourse) | Links 386 Pro / Microsoft Golf Course | .crh | 
 [other/linksLSData](https://discmaster.textfiles.com/search?formatid=linksLSData) | Links LS Data | .sht | 
 [other/linksysRT31P2NAFirmware](https://discmaster.textfiles.com/search?formatid=linksysRT31P2NAFirmware) | Linksys RT31P2-NA firmware | .bin | 

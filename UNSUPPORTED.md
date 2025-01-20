@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,107)
+# Unsupported File Formats (3,103)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -571,7 +571,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (107)
+## Font (105)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -605,7 +605,6 @@ Family/Format | Name | Extensions | Notes
 [font/dosFONT2](https://discmaster.textfiles.com/search?formatid=dosFONT2) | DOSFONT2 | .df2 | 
 [font/dotmagicNLQFont](https://discmaster.textfiles.com/search?formatid=dotmagicNLQFont) | DOT_MAGIC! NLQ font | .nlq | 
 [font/dynaCADDVectorFont](https://discmaster.textfiles.com/search?formatid=dynaCADDVectorFont) | DynaCADD Vector Font | .fnt | 
-[font/elecbyteMUGENFont](https://discmaster.textfiles.com/search?formatid=elecbyteMUGENFont) | Elecbyte M.U.G.E.N. font | .fnt | 
 [font/electronicArtsFont](https://discmaster.textfiles.com/search?formatid=electronicArtsFont) | Electronic Arts Font | .ffn | 
 [font/envisionPublisherFont](https://discmaster.textfiles.com/search?formatid=envisionPublisherFont) | Envision Publisher Font | .svf | [3 sample files](https://sembiance.com/fileFormatSamples/font/envisionPublisherFont/)
 [font/epocFont](https://discmaster.textfiles.com/search?formatid=epocFont) | EPOC/Psion Font | .gdr | 
@@ -663,7 +662,6 @@ Family/Format | Name | Extensions | Notes
 [font/takeTwoInteractiveSoftwareFont](https://discmaster.textfiles.com/search?formatid=takeTwoInteractiveSoftwareFont) | Take-Two Interactive Software Font | .fnt | 
 [font/telepaintFont](https://discmaster.textfiles.com/search?formatid=telepaintFont) | Telepaint Font | .fnt | 
 [font/texPackedFont](https://discmaster.textfiles.com/search?formatid=texPackedFont) | TeX Packed Font | .pf | 
-[font/texFont](https://discmaster.textfiles.com/search?formatid=texFont) | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [6 sample files](https://sembiance.com/fileFormatSamples/font/texFont/) - Using sandbox/app/glut-master/progs/texfont/showtxf.c I can render it to a cube. Could write C code to render the whole test alphabet letters and then save that to an image, but MEH.
 [font/printShopDeluxeFont](https://discmaster.textfiles.com/search?formatid=printShopDeluxeFont) | The Print Shop Deluxe Font | .fnt | 
 [font/theDrawFont](https://discmaster.textfiles.com/search?formatid=theDrawFont) | TheDraw Font | .tdf | [1 sample file](https://sembiance.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 [font/townsOSFont](https://discmaster.textfiles.com/search?formatid=townsOSFont) | Towns OS Font | .fnt | 
@@ -684,7 +682,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (186)
+## Image (184)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -749,7 +747,6 @@ Family/Format | Name | Extensions | Notes
 [image/eaSeattlePictureGameData](https://discmaster.textfiles.com/search?formatid=eaSeattlePictureGameData) | EA Seattle picture game data | .pic | 
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?formatid=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
 [image/eclipseTILEBitmap](https://discmaster.textfiles.com/search?formatid=eclipseTILEBitmap) | Eclipse TILE bitmap | .tile | 
-[image/elecbyteMUGENSprites](https://discmaster.textfiles.com/search?formatid=elecbyteMUGENSprites) | Elecbyte M.U.G.E.N. sprites | .sff | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?formatid=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?formatid=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?formatid=fastRayMaterial) | FastRay material/surface |  | 
@@ -844,7 +841,6 @@ Family/Format | Name | Extensions | Notes
 [image/seam3DMaterial](https://discmaster.textfiles.com/search?formatid=seam3DMaterial) | SEAM 3D Material | .mat | 
 [image/secondNatureSlideShow](https://discmaster.textfiles.com/search?formatid=secondNatureSlideShow) | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 [image/serifDrawPlusDrawing](https://discmaster.textfiles.com/search?formatid=serifDrawPlusDrawing) | Serif DrawPlus Picture/drawing | .dpp | 
-[image/signumBitmap](https://discmaster.textfiles.com/search?formatid=signumBitmap) | Signum! bitmap | .imc .pac | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?formatid=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 [image/skyRoadsBitmap](https://discmaster.textfiles.com/search?formatid=skyRoadsBitmap) | SkyRoads Bitmap | .lzs | 
 [image/slpImage](https://discmaster.textfiles.com/search?formatid=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.

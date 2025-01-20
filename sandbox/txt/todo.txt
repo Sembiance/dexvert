@@ -1,14 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Deepfreezer support: https://dev.discmaster2.textfiles.com/view/22309/VPR0002A.BIN/OLS/yz105_Win32/yz105_Win32.yz1
-  http://justsolve.archiveteam.org/wiki/Yamazaki_zipper_archive
-
 * wuimg supports more formats:
-	font/elecbyteMUGENfont
 	font/texFont
-	image/elecbyteMUGENSprites (I wasn't able to find samples to test all format features, so it might output garbage in some cases)
-	image/signumBitmap
 
 * Look into what formats this supports and consider adding to dexvert, Noesis: https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91
 

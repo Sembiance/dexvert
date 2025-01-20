@@ -1,4 +1,4 @@
-# Supported File Formats (2,908)
+# Supported File Formats (2,912)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -808,7 +808,7 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (35)
+## Font (37)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -822,6 +822,7 @@ font | C64 8x8 Font | .64c | [recoil2png](http://recoil.sourceforge.net) | [4 sa
 font | CHX Big Font | .chx | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/chxBigFont/)
 font | [Daisy-Dot](http://fileformats.archiveteam.org/wiki/Daisy-Dot_font) | .nlq | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
 font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/dynamicPublisherFont/)
+font | [Elecbyte M.U.G.E.N. font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/font/elecbyteMUGENFont/)
 font | [Embedded OpenType](http://fileformats.archiveteam.org/wiki/Embedded_OpenType) | .eot .fntdata | [eot2ttf](https://github.com/umanwizard/libeot) | [11 sample files](https://sembiance.com/fileFormatSamples/font/eot/)
 font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/font/figlet/)
 font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/sfd/)
@@ -841,6 +842,7 @@ font | [Portable Compiled Format](http://fileformats.archiveteam.org/wiki/PCF) |
 font | RiscOS Font |  | [acorn2sfd](https://fontforge.org) | [4 sample files](https://sembiance.com/fileFormatSamples/font/riscOSFont/)
 font | [Shoot Em Up Construction Kit Font](http://fileformats.archiveteam.org/wiki/Shoot_'Em_Up_Construction_Kit) | .g | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/font/seuckFont/) - Only one file format has been located. To prevent false positives it assumes this format is 514 bytes long, always.
 font | Super-IRG | .sif | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/sif/)
+font | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 sample files](https://sembiance.com/fileFormatSamples/font/texFont/) - Using sandbox/app/glut-master/progs/texfont/showtxf.c I can render it to a cube. Could write C code to render the whole test alphabet letters and then save that to an image, but MEH.
 font | The Last Word Font | .f80 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/f80/)
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TrueType) | .ttf | [convert](https://www.imagemagick.org/) | [19 sample files](https://sembiance.com/fileFormatSamples/font/ttf/)
 font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/woff/) - Some fail to convert because their printable characters are icons and are in very high level charcodes and don't convert with imagemagick convert and thus fail verification.
@@ -849,7 +851,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (633)
+## Image (635)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1011,6 +1013,7 @@ image | [Dynamic Publisher Screen](http://fileformats.archiveteam.org/wiki/Dynam
 image | [Dynamic Publisher Stamp](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .stp | [recoil2png](http://recoil.sourceforge.net) | [25 sample files](https://sembiance.com/fileFormatSamples/image/dynamicPublisherStamp/)
 image | [ECI Graphic Editor](http://fileformats.archiveteam.org/wiki/ECI_Graphic_Editor) | .eci .ecp | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/eci/)
 image | [EggPaint / True Colour Picture](http://fileformats.archiveteam.org/wiki/EggPaint) | .trp | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [28 sample files](https://sembiance.com/fileFormatSamples/image/eggPaint/)
+image | Elecbyte M.U.G.E.N. sprites | .sff | [wuimg](https://codeberg.org/kaleido/wuimg) | [5 sample files](https://sembiance.com/fileFormatSamples/image/elecbyteMUGENSprites/)
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKPIC/)
 image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKS/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [keyViewPro](https://archive.org/details/KeyViewPro/) | [30 sample files](https://sembiance.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
@@ -1358,6 +1361,7 @@ image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) 
 image | SHF-XL Edit | .shx .shf | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/shfXLEdit/)
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_'Em_Up_Construction_Kit) | .a | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/seuckSprite/)
 image | [Sigma/Foveon X3F](http://fileformats.archiveteam.org/wiki/X3F) | .x3f | [dcraw](https://www.cybercom.net/~dcoffin/dcraw/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/x3f/)
+image | [Signum! bitmap](http://justsolve.archiveteam.org/wiki/Signum!_Compressed_Image_(IMC)) | .imc .pac | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 sample files](https://sembiance.com/fileFormatSamples/image/signumBitmap/)
 image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [iio2png](http://github.com/Sembiance/iio2png/) [gimp](https://gimp.org) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [ffmpeg](https://ffmpeg.org/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [keyViewPro](https://archive.org/details/KeyViewPro/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/sgi/)
 image | [Sinbad Slideshow](http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow) | .ssb | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/ssb/)
 image | [Sixel](http://fileformats.archiveteam.org/wiki/Sixel) | .six .sixel | [sixel2png](https://github.com/saitoha/libsixel) [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [22 sample files](https://sembiance.com/fileFormatSamples/image/sixel/)

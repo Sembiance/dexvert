@@ -17,7 +17,7 @@ Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file format
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 
-Utilizes **${Object.keys(programs).length.toLocaleString()}** helper programs running on **4** different operating systems under various emulators.
+Utilizes **${Object.keys(programs).length.toLocaleString()}** helper programs running on **6** different operating systems under various emulators.
 
 [discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly, submit an issue.
 

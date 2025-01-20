@@ -490,6 +490,7 @@ export default
 		gimpToolPreset                             : {name : "GIMP Tool Preset", ext : [".gtp"], magic : ["GIMP Tool Preset"]},
 		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                                                                	// We do NOT include Trid's "GNU Info document" because it's too loose
 		graceProjectFile                           : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
+		graphEditFilterGraphMarkupLanguage         : {name : "GraphEdit Filter Graph Markup Language", ext : [".xgr"], magic : ["GraphEdit Filter Graph Markup Language"]},
 		graphletFileFormat                         : {name : "Graphlet File Format", ext : [".gml"], magic : ["Graphlet File Format"], weakMagic : true},
 		graphmaticaGraph                           : {name : "Graphmatica Graph", ext : [".gr"], magic : ["Graphmatica Graph"], weakMagic : true},
 		gravisFirebird2Configuration               : {name : "Gravis Firebird 2 configuration", ext : [".fbd"], magic : ["Gravis Firebird 2 configuration"]},
@@ -761,6 +762,7 @@ export default
 		simulinkModel                              : {name : "Simulink Model", ext : [".mdl"], magic : ["Simulink Model"], weakMagic : true},
 		sjgPlayAlbumInfo                           : {name : "SJGPlay Album info", ext : [".alb"], magic : ["SJGPlay Album info"], weakMagic : true},
 		sketchSencilColorPalette                   : {name : "Sketch/Skencil color Palette", ext : [".spl"], magic : ["Skencil / sK1 text color Palette"]},
+		skyOSStyle                                 : {name : "SkyOS Style", ext : [".stl"], magic : ["SkyOS Style"], weakMagic : true},
 		slickEditProject                           : {name : "SlickEdit project", ext : [".vpj"], magic : ["SlickEdit project"]},
 		snnsPatternDefinition                      : {name : "SNNS pattern definition", ext : [".pat"], magic : ["SNNS pattern definition"]},
 		snnsNetworkDefinition                      : {name : "SNNS network definition", ext : [".net"], magic : ["SNNS network definition"]},

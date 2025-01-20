@@ -1,0 +1,31 @@
+			   LICENSE AGREEMENT
+
+This is Agreement about software licensing between you (end user) and
+PhysTechSoft Ltd. (software developer). If you do not agree with all
+its terms please do not install this software on your computer.
+
+
+All these software is copyrighted by PhysTechSoft. All rights reserved. 
+
+PhysTechSoft grants you rights to use this software for your own needs. 
+
+You have no rights to distribute, sell, lease or bundle this software 
+in any way.
+
+These programs comes without any explicit or implicit warranty. Use them at
+your own risk.
+
+
+
+
+PhysTechSoft Ltd.:
+
+Mail:      9, Institutsky per,
+           Dolgoprudny, Moscow region,
+           141700 Russia
+
+Voice/fax: +7 (095) 408-70-72
+           +7 (095) 576-55-18
+
+E-mail:    sales@PhysTechSoft.com
+WWW:       http://www.PhysTechSoft.com

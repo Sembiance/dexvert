@@ -7,5 +7,5 @@ export class valveSMD extends Format
 	ext            = [".smd"];
 	forbidExtMatch = true;
 	magic          = ["Valve Studiomdl Data"];
-	converters     = ["blender[format:smd]", "assimp", "threeDObjectConverter"];
+	converters     = ["blender[format:smd]", "assimp", "threeDObjectConverter", "noesis[type:poly]"];
 }

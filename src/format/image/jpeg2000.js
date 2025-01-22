@@ -18,7 +18,7 @@ export class jpeg2000 extends Format
 		if(dexState.hasMagics("Mac JPEG 2000 bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.jp2]");
 		r.push("grk_decompress", "iconvert", "ffmpeg[format:j2k_pipe][outType:png]", "gimp", "convert", "wuimg");
-		r.push("paintDotNet", "canvas");
+		r.push("noesis[type:image]", "paintDotNet", "canvas");
 		return r;
 	};
 }

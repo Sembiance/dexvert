@@ -6,5 +6,5 @@ export class pvrTexture extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/PVR_Texture";
 	ext         = [".pvr"];
 	magic       = ["Sega PVR image", "Dreamcast PVR texture format", "PowerVR Image texture format"];
-	converters  = ["pvr2png"];
+	converters  = ["pvr2png", "noesis[type:image]"];
 }

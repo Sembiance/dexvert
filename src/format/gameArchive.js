@@ -35,6 +35,7 @@ export const gameextractor =
 		h2oGameDataArchive                 : {name : "Liquid Entertainment H2O game data archive", ext : [".h2o"], magic : ["Liquid Entertainment H2O game data archive"]},
 		highwayPursuitGameDataArchive      : {name : "Highway Pursuit game data archive", ext : [".hvd", ".hfd", ".hod", ".hsd", ".hmd", ".hgd"], magic : ["Highway Pursuit game data archive"], weakMagic : true},
 		hmmPackfileGameArchive             : {name : "HMM Packfile Game Archive", ext : [".wdt", ".pak"], magic : ["Rising Kingdoms game data archive", /^fmt\/1876( |$)/]},
+		hooligansGameDataArchive           : {name : "Hooligans game data archive", ext : [".x13"], magic : ["Hooligans game data archive"], weakMagic : true},
 		howToSurviveSeriesGameArchive      : {name : "How to Survive series Game Archive", ext : [".rck"], magic : ["How to Survive series game data"], weakMagic : true},
 		interstateGameArchive              : {name : "Interstate Series Game Archive", ext : [".zfs"], magic : ["Interstate serie game data archive", "Zork FileSystem game data archive"], weakMagic : true},
 		janesLongbow2GameArchive           : {name : "Jane's Longbow 2 Game Archive", ext : [".tre"], magic : ["Jane's Longbow 2 game data archive"]},

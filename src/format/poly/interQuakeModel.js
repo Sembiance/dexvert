@@ -6,5 +6,5 @@ export class interQuakeModel extends Format
 	website    = "http://sauerbraten.org/iqm/";
 	ext        = [".iqm"];
 	magic      = ["Inter-Quake Model"];
-	converters = ["assimp"];
+	converters = ["assimp", "noesis[type:poly]"];
 }

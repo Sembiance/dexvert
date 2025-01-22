@@ -376,7 +376,7 @@ export class Program
 		}
 		else if(f.outDir && f.files.new?.length && renameOut!==false)
 		{
-			// Otherwise if we renameOut is not false, then proceed with renaming
+			// Otherwise if renameOut is not false, then proceed with renaming
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? await this.outExt(r) || "" : this.outExt || "", name : true}, Object.isObject(renameOut) ? renameOut : {});
 			if(Object.isObject(renameOut) && renameOut.preSensitive)
 			{

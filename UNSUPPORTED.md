@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,103)
+# Unsupported File Formats (3,102)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (248)
+## Archive (250)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -23,6 +23,7 @@ Family/Format | Name | Extensions | Notes
 [archive/aixBackupRestore](https://discmaster.textfiles.com/search?formatid=aixBackupRestore) | AIX/BFF backup/restore | .img .bff | 
 [archive/aldusLZWCompressedData](https://discmaster.textfiles.com/search?formatid=aldusLZWCompressedData) | Aldus LZW compressed data |  | 
 [archive/aldusZip](https://discmaster.textfiles.com/search?formatid=aldusZip) | Aldus Zip Compressed File |  | No known extractor program.
+[archive/amiBackBackupDiskImage](https://discmaster.textfiles.com/search?formatid=amiBackBackupDiskImage) | Ami-Back backup disk image | .adf | 
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?formatid=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
 [archive/amigaKickstartDiskImage](https://discmaster.textfiles.com/search?formatid=amigaKickstartDiskImage) | Amiga Kickstart disk image | .adf | 
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?formatid=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
@@ -79,6 +80,7 @@ Family/Format | Name | Extensions | Notes
 [archive/djarcArchive](https://discmaster.textfiles.com/search?formatid=djarcArchive) | DJarc archive | .dja | [1 sample file](https://sembiance.com/fileFormatSamples/archive/djarcArchive/)
 [archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
+[archive/dragonUnPACKer5PluginPackage](https://discmaster.textfiles.com/search?formatid=dragonUnPACKer5PluginPackage) | Dragon UnPACKer 5 Plugin Package | .d5p | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?formatid=dshieldProtected) | DSHIELD Protected | .exe | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?formatid=emmaCompress) | EmmaCompress |  | 
@@ -408,7 +410,7 @@ Family/Format | Name | Extensions | Notes
 [document/geoWorksWriterDocument](https://discmaster.textfiles.com/search?formatid=geoWorksWriterDocument) | GeoWorks Writer document | .000 | 
 [document/gfxbootCompiledHTMLHelp](https://discmaster.textfiles.com/search?formatid=gfxbootCompiledHTMLHelp) | gfxboot compiled HTML Help | .hlp | 
 [document/greatkarteiDataBase](https://discmaster.textfiles.com/search?formatid=greatkarteiDataBase) | Greatkartei data base | .great .geaendert | 
-[document/greenstreetPublisher](https://discmaster.textfiles.com/search?formatid=greenstreetPublisher) | [Greenstreet Publisher Document/Snippet](http://fileformats.archiveteam.org/wiki/Greenstreet_Publisher) | .dtp .srp | [10 sample files](https://sembiance.com/fileFormatSamples/document/greenstreetPublisher/) - I could open these just fine under Win2k with Publishing Suite 99, but it can't save in ANY other format, and print to file crashes QEMU, sigh.
+[document/greenstreetPublisher](https://discmaster.textfiles.com/search?formatid=greenstreetPublisher) | [Greenstreet Publisher Document/Snippet](http://fileformats.archiveteam.org/wiki/Greenstreet_Publisher) | .dtp .srp | [10 sample files](https://sembiance.com/fileFormatSamples/document/greenstreetPublisher/) - Some of these opened in Win2k with Publishing Suite 99, but it can't save in ANY other format, maybe I could 'print' to a PDF or something. But not all worked and not too many files out there, so not supported for now.
 [document/hancomWord](https://discmaster.textfiles.com/search?formatid=hancomWord) | [Hancom Word](http://fileformats.archiveteam.org/wiki/HWP) | .hwp | [1 sample file](https://sembiance.com/fileFormatSamples/document/hancomWord/)
 [document/palmHanDBaseDocument](https://discmaster.textfiles.com/search?formatid=palmHanDBaseDocument) | HanDBase PalmOS document | .pdb | 
 [document/harvardSpotlightPresentation](https://discmaster.textfiles.com/search?formatid=harvardSpotlightPresentation) | Harvard Spotlight Presentation | .ply | 
@@ -1042,7 +1044,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,973)
+## Other (1,971)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1054,6 +1056,7 @@ Family/Format | Name | Extensions | Notes
 [other/threeDProfessionalCamera](https://discmaster.textfiles.com/search?formatid=threeDProfessionalCamera) | 3-D Professional Camera |  | 
 [other/threeDProfessionalLathePlate](https://discmaster.textfiles.com/search?formatid=threeDProfessionalLathePlate) | 3-D Professional Lathe Plate |  | 
 [other/threeDProfessionalLight](https://discmaster.textfiles.com/search?formatid=threeDProfessionalLight) | 3-D Professional light |  | 
+[other/threeDemonObject](https://discmaster.textfiles.com/search?formatid=threeDemonObject) | 3-Demon Object | .object | 
 [other/threeDemonProject](https://discmaster.textfiles.com/search?formatid=threeDemonProject) | 3-Demon project | .3demon | 
 [other/threeByFiveIndex](https://discmaster.textfiles.com/search?formatid=threeByFiveIndex) | 3by5 Index | .map | 
 [other/threeByFiveSource](https://discmaster.textfiles.com/search?formatid=threeByFiveSource) | 3by5 source | .3x5 | 
@@ -1382,7 +1385,6 @@ Family/Format | Name | Extensions | Notes
 [other/calamusRasterInfo](https://discmaster.textfiles.com/search?formatid=calamusRasterInfo) | Calamus Raster Information | .cri .cr | 
 [other/calamusTextStyleList](https://discmaster.textfiles.com/search?formatid=calamusTextStyleList) | Calamus Text Style List | .csl .cs | 
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?formatid=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
-[other/callOfDutyMap](https://discmaster.textfiles.com/search?formatid=callOfDutyMap) | Call of Duty Map | .d3dbsp .bsp | 
 [other/capellaMusicNotation](https://discmaster.textfiles.com/search?formatid=capellaMusicNotation) | Capella music notation | .cap | 
 [other/cardSoftPCMCIACardLibrary](https://discmaster.textfiles.com/search?formatid=cardSoftPCMCIACardLibrary) | CardSoft PCMCIA Card Library | .clb | 
 [other/carmageddonSavedGame](https://discmaster.textfiles.com/search?formatid=carmageddonSavedGame) | Carmageddon Saved Game | .ars | 
@@ -1495,6 +1497,7 @@ Family/Format | Name | Extensions | Notes
 [other/cryoInteractiveGameData](https://discmaster.textfiles.com/search?formatid=cryoInteractiveGameData) | Cryo Interactive game data | .3da .3dc .3dm .bf | 
 [other/cryoS3DGameData](https://discmaster.textfiles.com/search?formatid=cryoS3DGameData) | Cryo S3D game data | .s3d | 
 [other/crystalAtariBrowserModule](https://discmaster.textfiles.com/search?formatid=crystalAtariBrowserModule) | Crystal Atari Browser Module | .mdl | 
+[other/crystalTOPASMaterial](https://discmaster.textfiles.com/search?formatid=crystalTOPASMaterial) | Crystal TOPAS Material |  | 
 [other/crytekAsset](https://discmaster.textfiles.com/search?formatid=crytekAsset) | Crytek asset | .cgf .cga .anm .caf | 
 [other/csrBluecoreFirmwareSegment](https://discmaster.textfiles.com/search?formatid=csrBluecoreFirmwareSegment) | CSR Bluecore firmware segment | .dfu | 
 [other/ctVOICEDriver](https://discmaster.textfiles.com/search?formatid=ctVOICEDriver) | CT-VOICE Driver | .drv | 
@@ -2470,11 +2473,8 @@ Family/Format | Name | Extensions | Notes
 [other/qtBinaryResource](https://discmaster.textfiles.com/search?formatid=qtBinaryResource) | Qt Binary Resource | .rcc | 
 [other/qtMessage](https://discmaster.textfiles.com/search?formatid=qtMessage) | Qt Message | .qm | 
 [other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?formatid=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
-[other/quake2Map](https://discmaster.textfiles.com/search?formatid=quake2Map) | Quake II Map | .bsp | 
 [other/quake2SaveGame](https://discmaster.textfiles.com/search?formatid=quake2SaveGame) | Quake II save game | .sav | 
 [other/quake2SpriteReference](https://discmaster.textfiles.com/search?formatid=quake2SpriteReference) | Quake II Sprite Reference | .sp2 | 
-[other/quake3Map](https://discmaster.textfiles.com/search?formatid=quake3Map) | Quake III Map | .bsp | 
-[other/quakeMap](https://discmaster.textfiles.com/search?formatid=quakeMap) | Quake Map | .bsp | 
 [other/qualitasBIOSCompressionFeatureInfo](https://discmaster.textfiles.com/search?formatid=qualitasBIOSCompressionFeatureInfo) | Qualitas BIOS Compression Feature info | .bcf | 
 [other/qualitasHelp](https://discmaster.textfiles.com/search?formatid=qualitasHelp) | Qualitas Help | .hlp | 
 [other/quarterInchCartridgeHostInterchange](https://discmaster.textfiles.com/search?formatid=quarterInchCartridgeHostInterchange) | Quarter Inch Cartridge Host Interchange Format | .qic | 
@@ -3021,7 +3021,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (84)
+## Poly (83)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3058,7 +3058,6 @@ Family/Format | Name | Extensions | Notes
 [poly/fastRayObject](https://discmaster.textfiles.com/search?formatid=fastRayObject) | FastRay object |  | 
 [poly/fastRayScene](https://discmaster.textfiles.com/search?formatid=fastRayScene) | FastRay scene |  | 
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?formatid=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
-[poly/ghoulEngineModel](https://discmaster.textfiles.com/search?formatid=ghoulEngineModel) | GHOUL Engine model | .ghb | 
 [poly/granny3DModel](https://discmaster.textfiles.com/search?formatid=granny3DModel) | [Granny 3D Model](http://fileformats.archiveteam.org/wiki/COLLADA) | .gr2 | I tried using https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x but it didn't work for any of the old GR2 models I gave it. Found another imported but it says it only works for Metin2 game models
 [poly/hardTruck3DModel](https://discmaster.textfiles.com/search?formatid=hardTruck3DModel) | Hard Truck 3D model | .b3d | 
 [poly/ibmCAD3XDrawing](https://discmaster.textfiles.com/search?formatid=ibmCAD3XDrawing) | IBM CAD/3X drawing | .dwg | 

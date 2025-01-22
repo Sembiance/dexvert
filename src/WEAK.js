@@ -1299,6 +1299,7 @@ export const WEAK_VALUES =
 	/^Project Dogwaffle animation \(generic\)$/,
 	/^Protocol Data Unit message data$/,
 	/^Psion Organiser Pack image$/,
+	/^PVA Video \(MainAudioStream\)$/,
 	/^Python Pickle serialized data/,
 	/^QDOS executable/,
 	/^Qmage encoded data$/,

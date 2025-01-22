@@ -8,5 +8,5 @@ export class deluxePaintAnimation extends Format
 	magic        = ["DeluxePaint Animation", "Deluxe Paint Animation (anm)", /^fmt\/1363( |$)/];
 	notes        = "Sample file HORSE.ANM doesn't convert for some reason";
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:anm]"];
+	converters   = ["ffmpeg[format:anm]", "noesis[type:animated]"];
 }

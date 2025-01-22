@@ -7,6 +7,6 @@ export class greenstreetPublisher extends Format
 	ext            = [".dtp", ".srp"];
 	forbidExtMatch = true;
 	magic          = ["Greenstreet Publisher document", "Greenstreet Publisher snippet", /^fmt\/(1415|1416)( |$)/];
-	notes          = "I could open these just fine under Win2k with Publishing Suite 99, but it can't save in ANY other format, and print to file crashes QEMU, sigh.";
+	notes          = "Some of these opened in Win2k with Publishing Suite 99, but it can't save in ANY other format, maybe I could 'print' to a PDF or something. But not all worked and not too many files out there, so not supported for now.";
 	unsupported    = true;
 }

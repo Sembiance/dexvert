@@ -17,6 +17,8 @@ export class dds extends Format
 		// paintDotNet does the best with all samples I have
 		"paintDotNet",
 		
+		"noesis[type:image]",
+
 		// convert and nconvert sometimes produce an invalid image, but convert usually does better overall than the rest and gets the abydos test image better than iconvert does
 		"convert", "iconvert", "nconvert", "gimp"
 	];

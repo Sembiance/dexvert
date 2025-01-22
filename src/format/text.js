@@ -638,6 +638,7 @@ export default
 		openSceneGraphText                         : {name : "OpenSceneGraph Text Format", ext : [".osg"], magic : ["OpenSceneGraph legacy text format"], weakMagic : true},
 		openSSLPEMPublicKey                        : {name : "OpenSSL PEM public key", ext : [".key", ".pem"], magic : ["OpenSSL PEM public key", /^OpenSSH public key/], weakMagic : true},
 		operaHotlist                               : {name : "Opera Hotlist/bookmark", ext : [".adr"], magic : ["Opera Hotlist (v2.0) / bookmark"], idMeta : ({macFileType, macFileCreator}) => macFileType==="OBok" && macFileCreator==="OPRA"},
+		opticksCamera                              : {name : "Opticks Camera", ext : [".cam"], magic : ["Opticks Camera"], weakMagic : true},
 		opticksGel                                 : {name : "Opticks Gel", ext : [".gel"], magic : ["Opticks Gel"], weakMagic : true},
 		opticksGlobalLight                         : {name : "Opticks Global light", ext : [".glo"], magic : ["Opticks Global light"], weakMagic : true},
 		opticksLamp                                : {name : "Opticks Lamp", ext : [".lmp"], magic : ["Opticks Lamp"], weakMagic : true},

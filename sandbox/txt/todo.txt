@@ -1,17 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* wuimg supports more formats:
-	font/texFont
 
-* Look into what formats this supports and consider adding to dexvert, Noesis: https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91
 
 /---------------\
 | High Priority |
 \---------------/
-* Add support for SFPack packed sound fonts: http://dev.discmaster2.textfiles.com/browse/12119/FreelogNo101-JanvierFevrier2011.iso/Creation/Soundftonts/75SoundFonts.exe/75SoundFonts
-  SFPack tool exe is pretty available
-
 * Learn how to crack old windows programs, specifically the decode.exe's from:
 	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
 	https://dev.discmaster2.textfiles.com/browse/6923/cd.iso/charme/hard
@@ -33,7 +27,7 @@
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
   Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://dev.discmaster2.textfiles.com/admin/item?itemid=10456
 
-* Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
+* Add extraction suport for these older MacroMind Projector files (THOUSANDS of them). No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
@@ -47,21 +41,13 @@
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
-* See about adopting these tools for Filemaker Pro files: https://github.com/evanmiller/fmptools
-
 
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
-  It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
-
 * Figure out how to get info out of a folio database. Some interesting stuff locked in those:
   https://dev.discmaster2.textfiles.com/search?format=folioDatabase
   https://dev.discmaster2.textfiles.com/view/18013/The%20Washington%20Times%20-%201991%20Volume%202%20(January%201989-December%201991)(Wayzata%20Technology)(5032)(1992).bin/fpnv.nfo
-
-* Could improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
-  Some things can't be handled this way though, such as recoil2png and imagemagic convert font handling, so this sort of change may require a bunch of reverse engineering work to properly convert old fonts into new fonts (rather than just getting preview images)
 
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
@@ -69,17 +55,6 @@
 	archive/iconHeaven
 	image/pmDraw
 	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
-
-* Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js)
-  Then re-process those in: https://dev.discmaster2.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
-  Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
-  These are the possible prefixes I've found, so look for these in 'detections':
-	0006AAD4
-	0006729A
-	0008FE2C
-	0007D950
-	00076D20
-	00078C80
 
 * ISOs I was unable to process:
 	These don't convert for some reason, they both appear to be Mac CDs
@@ -98,6 +73,9 @@
 * image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
   It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
   Perhaps get deark to add support for this format.
+
+* See about adopting these tools for Filemaker Pro files (~10,000 unique files on discmaster2): https://github.com/evanmiller/fmptools
+  Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
@@ -119,13 +97,6 @@
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
 
-* Now that Print to File/PDF works better, should now be able to support:
-  document/greenstreetPublisher (Open in win2k (or winxp) with Publishing Suite 99)
-
-* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
-  I of course would need to properly identify them as something I can work with, don't see an easy way to do that.
-  Maybe see if I can just 'run' them and install to c:\out or something
-
 * Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
   Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
@@ -139,20 +110,15 @@
 	https://archive.org/details/install-shield-6.2-pro-std.-7z
 	https://archive.org/details/installshield1150premier
 
-* Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
-  The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
-  Similar to how MacromediaDirector does it.
-  Extra bonus points if I use UnrealEngine itself to create a 'tool' that can automatically open a .utx, read in all assets and convert them automatically to output files
+* Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
 
 * Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
-* Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
-
-* Could create a DOOM TITLEPIC converter for files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
+* Could create a DOOM .TITLEPIC converter for ~600 unique files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
   Format: https://doomwiki.org/wiki/Picture_format   (COLORMAP: https://doomwiki.org/wiki/COLORMAP)
 
-* See about converting this Java code to javascript to extract archive/innoSetupArchive: https://github.com/d0k/ednaunpack
+* See about converting this Java code to javascript to extract ~250 archive/innoSetupArchive files: https://github.com/d0k/ednaunpack
   Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://dev.discmaster2.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
 
 * With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'
@@ -162,6 +128,37 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
+  The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
+  Similar to how MacromediaDirector does it.
+  Extra bonus points if I use UnrealEngine itself to create a 'tool' that can automatically open a .utx, read in all assets and convert them automatically to output files
+
+* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
+  I of course would need to properly identify them as something I can work with, don't see an easy way to do that.
+  Maybe see if I can just 'run' them and install to c:\out or something
+
+* Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js  NOTE: It's more than just running a program)
+  Then re-process those in: https://dev.discmaster2.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
+  Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
+  These are the possible prefixes I've found, so look for these in 'detections':
+	0006AAD4
+	0006729A
+	0008FE2C
+	0007D950
+	00076D20
+	00078C80
+
+* Could improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
+  Some things can't be handled this way though, such as recoil2png and imagemagik convert font handling, so this sort of change may require a bunch of reverse engineering work to properly convert old fonts into new fonts (rather than just getting preview images)
+  I could in theory "split" apart images generated by things like recoil2png and imagemagick into something I can process into a bitmap font file
+
+* Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
+  It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
+
+* 3D Studio ASE support could be improved with textures. Parse out the *BITMAP lines, look in current dir and parent dir and subdirs
+  Noesis certainly supports loading these textures (I tested this), dunno if other converters do or not
+  https://dev.discmaster2.textfiles.com/view/19374/Logick%C3%A9%20hry.iso/hry/Becher%20Chess/meshes/knight.ASE?text
+
 * IsoBuster has had several updates since I last installed it and now supports more formats: https://www.isobuster.com/news/
 
 * Consider adding other detectors:

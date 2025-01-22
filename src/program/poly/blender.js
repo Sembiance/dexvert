@@ -24,6 +24,7 @@ const _FORMATS =
 	"3ds"   : {importKey : "import_scene.max3ds", addon : "io_scene_3ds"},			// blender comes with this addon
 	dxf     : {importKey : "import_scene.dxf", addon : "io_import_dxf"},			// blender comes with this addon
 	fbx     : {importKey : "import_scene.fbx", addon : "io_import_fbx"},			// blender comes with this addon (only supports very recent versions of the format, which makes it not very ueful at all)
+	gltf    : {importKey : "import_scene.gltf", addon : "io_scene_gltf2"},			// blender comes with this addon
 	x3d     : {importKey : "import_scene.x3d", addon : "io_scene_x3d"},				// blender comes with this addon
 
 	// built into blender natively

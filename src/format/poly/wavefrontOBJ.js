@@ -19,5 +19,5 @@ export class wavefrontOBJ extends Format
 		return supportFiles.length===0 ? false : supportFiles;
 	};
 	keepFilename = true;
-	converters   = ["blender[format:obj]", "assimp", "milkShape3D[matchType:magic][format:wavefront]"];
+	converters   = ["blender[format:obj]", "assimp", "noesis[type:poly]", "milkShape3D[matchType:magic][format:wavefront]"];
 }

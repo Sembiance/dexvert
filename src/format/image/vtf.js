@@ -7,5 +7,5 @@ export class vtf extends Format
 	ext        = [".vtf"];
 	mimeType   = "image/vnd.valve.source.texture";
 	magic      = ["Valve Texture Format", /^fmt\/985( |$)/];
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = [`abydosconvert[format:${this.mimeType}]`, "noesis[type:image]"];
 }

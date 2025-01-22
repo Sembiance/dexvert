@@ -6,5 +6,5 @@ export class quake3Model extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MD3";
 	ext        = [".md3"];
 	magic      = ["Quake III Arena model"];
-	converters = ["assimp", "milkShape3D[format:quake3Model][matchType:magic]", "threeDObjectConverter[matchType:magic]"];
+	converters = ["assimp", "noesis[type:poly]", "milkShape3D[format:quake3Model][matchType:magic]", "threeDObjectConverter[matchType:magic]"];
 }

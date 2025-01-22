@@ -11,6 +11,6 @@ export class pcx extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"nconvert", "convert", "deark[module:pcx]", "iio2png", "gimp", "imconv[format:pcx]", "wuimg",
-		...["paintDotNet", "imageAlchemy", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "picturePublisher", "konvertor", "corelPhotoPaint", "canvas5", "canvas", "tomsViewer", "corelDRAW", "keyViewPro"].map(v => `${v}[strongMatch]`)
+		...["paintDotNet", "imageAlchemy", "noesis[type:image]", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "picturePublisher", "konvertor", "corelPhotoPaint", "canvas5", "canvas", "tomsViewer", "corelDRAW", "keyViewPro"].map(v => `${v}[strongMatch]`)
 	];
 }

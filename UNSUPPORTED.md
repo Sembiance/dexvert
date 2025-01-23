@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,102)
+# Unsupported File Formats (3,108)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -573,7 +573,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (105)
+## Font (106)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -625,6 +625,7 @@ Family/Format | Name | Extensions | Notes
 [font/interFontFont](https://discmaster.textfiles.com/search?formatid=interFontFont) | InterFont font | .ifont | 
 [font/japaneseWPKanjiFont](https://discmaster.textfiles.com/search?formatid=japaneseWPKanjiFont) | Japanese Word Processor Kanji Font | .f00 | 
 [font/knowledgeAdventureFont](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureFont) | Knowledge Adventure Font | .fnt | 
+[font/kreedFont](https://discmaster.textfiles.com/search?formatid=kreedFont) | Kreed Font | .kfn | 
 [font/laserJetSoftFont](https://discmaster.textfiles.com/search?formatid=laserJetSoftFont) | LaserJet Soft Font | .sfl .sfp .sft | 
 [font/linkWayFont](https://discmaster.textfiles.com/search?formatid=linkWayFont) | LinkWay Font | .fmf | 
 [font/lotusImpressFont](https://discmaster.textfiles.com/search?formatid=lotusImpressFont) | Lotus Impress Font | .ifl | 
@@ -1044,7 +1045,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,971)
+## Other (1,976)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1743,6 +1744,7 @@ Family/Format | Name | Extensions | Notes
 [other/fullTiltPinballData](https://discmaster.textfiles.com/search?formatid=fullTiltPinballData) | Full Tilt Pinball Data | .dat | 
 [other/furcadiaMap](https://discmaster.textfiles.com/search?formatid=furcadiaMap) | Furcadia Map | .map | 
 [other/gPoliceGameData](https://discmaster.textfiles.com/search?formatid=gPoliceGameData) | G-Police game data | .rdt | 
+[other/gabrielMaterialFile](https://discmaster.textfiles.com/search?formatid=gabrielMaterialFile) | Gabriel Material File - Robot Arena | .gmf .hkv .scc | 
 [other/gadToolsBoxUIData](https://discmaster.textfiles.com/search?formatid=gadToolsBoxUIData) | GadToolsBox UI data | .gui | 
 [other/gameBoyAdvanceROM](https://discmaster.textfiles.com/search?formatid=gameBoyAdvanceROM) | Game Boy Advance ROM | .gba | 
 [other/gameBoyROM](https://discmaster.textfiles.com/search?formatid=gameBoyROM) | Game Boy ROM | .gb .gbc | 
@@ -2538,6 +2540,7 @@ Family/Format | Name | Extensions | Notes
 [other/robouldixLevelData](https://discmaster.textfiles.com/search?formatid=robouldixLevelData) | Robouldix level data |  | 
 [other/rogueTheAdventureGameSavedGame](https://discmaster.textfiles.com/search?formatid=rogueTheAdventureGameSavedGame) | Rogue: The Adventure Game Saved game | .sav | 
 [other/rolandSMFPlayerLanguage](https://discmaster.textfiles.com/search?formatid=rolandSMFPlayerLanguage) | Roland SMF Player Language | .rlg | 
+[other/rollerCoasterTycoon3GameData](https://discmaster.textfiles.com/search?formatid=rollerCoasterTycoon3GameData) | RollerCoaster Tycoon 3 game data | .ovl | 
 [other/rollerCoasterTycoonScenario](https://discmaster.textfiles.com/search?formatid=rollerCoasterTycoonScenario) | RollerCoaster Tycoon Scenario | .sc4 | 
 [other/rosegardenMusicalNotation](https://discmaster.textfiles.com/search?formatid=rosegardenMusicalNotation) | Rosegarden musical notation | .rose | 
 [other/rotObject3DAction](https://discmaster.textfiles.com/search?formatid=rotObject3DAction) | ROT Object 3D Action | .rotact | 
@@ -2563,6 +2566,7 @@ Family/Format | Name | Extensions | Notes
 [other/scorchedEarthMountainData](https://discmaster.textfiles.com/search?formatid=scorchedEarthMountainData) | Scorched Earth Mountain Data | .mtn | 
 [other/scorePerfectProfessionalFont](https://discmaster.textfiles.com/search?formatid=scorePerfectProfessionalFont) | Score Perfect Professional Font | .spf | 
 [other/scratchProject](https://discmaster.textfiles.com/search?formatid=scratchProject) | Scratch project | .sb | 
+[other/screamEngineResourceData](https://discmaster.textfiles.com/search?formatid=screamEngineResourceData) | SCream Engine resource data | .res | 
 [other/screamTrackerInstrumentsLibrary](https://discmaster.textfiles.com/search?formatid=screamTrackerInstrumentsLibrary) | Scream Tracker Instruments Library | .015 .014 .016 .017 | 
 [other/scriptMagicArchive](https://discmaster.textfiles.com/search?formatid=scriptMagicArchive) | ScriptMagic archive |  | 
 [other/sculpt3DTake](https://discmaster.textfiles.com/search?formatid=sculpt3DTake) | Sculpt 3D Take | .take | 
@@ -2630,6 +2634,8 @@ Family/Format | Name | Extensions | Notes
 [other/spectreVRMatrix](https://discmaster.textfiles.com/search?formatid=spectreVRMatrix) | Spectre VR Matrix | .mat | 
 [other/speculatorSnapshot](https://discmaster.textfiles.com/search?formatid=speculatorSnapshot) | Speculator Snapshot | .zx82 .zx | 
 [other/speedTreeFormat](https://discmaster.textfiles.com/search?formatid=speedTreeFormat) | SpeedTree format | .spt | 
+[other/spellForce2GameDataArchive](https://discmaster.textfiles.com/search?formatid=spellForce2GameDataArchive) | SpellForce 2 game data archive | .map .cff | 
+[other/spellForceGameDataArchive](https://discmaster.textfiles.com/search?formatid=spellForceGameDataArchive) | SpellForce game data archive | .pak | 
 [other/spellGuardDictionary](https://discmaster.textfiles.com/search?formatid=spellGuardDictionary) | SpellGuard Dictionary | .dic | 
 [other/spelToolSupplementalDictionary](https://discmaster.textfiles.com/search?formatid=spelToolSupplementalDictionary) | SpelTool Supplemental Dictionary (v1.0) | .spl | 
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?formatid=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 

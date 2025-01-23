@@ -63,6 +63,7 @@ export default
 		portableBridgeNotation              : {name : "Portable Bridge Notation", ext : [".pbn"], magic : ["Portable Bridge Notation"], weakMagic : true},
 		portableDraughtsNotation            : {name : "Portable Draughts Notation", ext : [".pdn"], magic : ["Portable Draughts Notation"], website : "http://fileformats.archiveteam.org/wiki/Portable_Draughts_Notation#Sample_files"},
 		portableGamingNotation              : {name : "Portable Gaming Notation", ext : [".pgn"], magic : ["Portable Gaming Notation", "application/vnd.chess-pgn"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/PGN"},
+		privateWarsMaterialScript           : {name : "Private Wars Material script", ext : [".mat"], magic : ["Private Wars Material script"], weakMagic : true},
 		quizProQuizData                     : {name : "QuizPro Quiz data", ext : [".qzs", ".qzd", ".qze"], magic : ["QuizPro quiz data"]},
 		rexxAdventureGameSource             : {name : "Rexx-Adventure game source", ext : [".rad"], magic : ["Rexx-Adventure game source"], weakMagic : true},
 		rexxAdventureSavedGame              : {name : "Rexx-Adventure Saved game", ext : [".ras"], magic : ["Rexx-Adventure Saved game"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game"},

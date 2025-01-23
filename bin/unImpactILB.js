@@ -28,6 +28,8 @@ const readNum = () =>
 const archiveNameLen = readNum();
 const archiveName = buf.getString(pos, archiveNameLen);
 pos+=archiveNameLen;
+if(archiveNameLen>1024)
+	Deno.exit(xlog.error`Archive name length is too long. Not a rule, but almost certainly not an ILB archive: ${archiveNameLen}`);
 xlog.info`Archive Name: ${archiveName}`;
 
 const numImages = readNum();

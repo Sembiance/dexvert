@@ -7,5 +7,5 @@ export class ghoul2Model extends Format
 	ext            = [".glm"];
 	forbidExtMatch = true;
 	magic          = ["Ghoul 2 Model"];
-	converters     = ["noesis[type:poly]", "milkShape3D[format:ghoul2]"];
+	converters     = ["milkShape3D[format:ghoul2]", "noesis[type:poly]"];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,110)
+# Unsupported File Formats (3,117)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1045,7 +1045,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,978)
+## Other (1,984)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1075,6 +1075,7 @@ Family/Format | Name | Extensions | Notes
 [other/threeDPinballTableData](https://discmaster.textfiles.com/search?formatid=threeDPinballTableData) | 3D-Pinball for Windows table Data | .dat | 
 [other/threeDFXGlideDriver](https://discmaster.textfiles.com/search?formatid=threeDFXGlideDriver) | 3DFX Glide driver | .dxe | 
 [other/threeDMarkDatabase](https://discmaster.textfiles.com/search?formatid=threeDMarkDatabase) | 3DMark database | .3db | 
+[other/threeDSMaxCharacterStudioBipedMocapData](https://discmaster.textfiles.com/search?formatid=threeDSMaxCharacterStudioBipedMocapData) | 3DS Max Character Studio Biped mocap data | .bip | 
 [other/fourDPaintProject](https://discmaster.textfiles.com/search?formatid=fourDPaintProject) | 4D Paint Project | .4dp | [1 sample file](https://sembiance.com/fileFormatSamples/other/fourDPaintProject/)
 [other/binaryRelocation6502](https://discmaster.textfiles.com/search?formatid=binaryRelocation6502) | 6502 binary relocation format |  | 
 [other/sevenColorsGameDataArchive](https://discmaster.textfiles.com/search?formatid=sevenColorsGameDataArchive) | 7 Colors game data archive | .dat | 
@@ -1887,6 +1888,7 @@ Family/Format | Name | Extensions | Notes
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?formatid=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?formatid=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
 [other/infinityEngineFile](https://discmaster.textfiles.com/search?formatid=infinityEngineFile) | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
+[other/infinity2Project](https://discmaster.textfiles.com/search?formatid=infinity2Project) | Infinity2 Project | .ipr | 
 [other/infobaseNextPage](https://discmaster.textfiles.com/search?formatid=infobaseNextPage) | Infobase (NextPage) | .nfo | 
 [other/infoComicsGameData](https://discmaster.textfiles.com/search?formatid=infoComicsGameData) | InfoComics game data | .img .dat | 
 [other/infoSpotterTemplate](https://discmaster.textfiles.com/search?formatid=infoSpotterTemplate) | InfoSpotter Template | .spt | 
@@ -2075,6 +2077,7 @@ Family/Format | Name | Extensions | Notes
 [other/maxonResourceCreationData](https://discmaster.textfiles.com/search?formatid=maxonResourceCreationData) | Maxon Resource Creation Tool Data | .rct | 
 [other/maxonCADHatchPatterns](https://discmaster.textfiles.com/search?formatid=maxonCADHatchPatterns) | MaxonCAD hatch patterns |  | 
 [other/maxonCADLibrary](https://discmaster.textfiles.com/search?formatid=maxonCADLibrary) | MaxonCAD Library | .mclib | 
+[other/mayaIconsOrSwatches](https://discmaster.textfiles.com/search?formatid=mayaIconsOrSwatches) | Maya Icons or Swatches file | .swatches | 
 [other/mcAfeeAntiVirusData](https://discmaster.textfiles.com/search?formatid=mcAfeeAntiVirusData) | McAfee AntiVirus data | .dat | 
 [other/mcAfeeAVPatternUpdate](https://discmaster.textfiles.com/search?formatid=mcAfeeAVPatternUpdate) | McAfee AV Pattern update | .gem | 
 [other/mcAfeeVirusScanData](https://discmaster.textfiles.com/search?formatid=mcAfeeVirusScanData) | McAfee VirusScan data | .dat | 
@@ -2099,6 +2102,7 @@ Family/Format | Name | Extensions | Notes
 [other/memoryMateDatabase](https://discmaster.textfiles.com/search?formatid=memoryMateDatabase) | Memory Mate database | .xxt | 
 [other/mesa2Spreadsheet](https://discmaster.textfiles.com/search?formatid=mesa2Spreadsheet) | Mesa 2 spreadsheet | .m2t .m2 | 
 [other/mesa2ToolBar](https://discmaster.textfiles.com/search?formatid=mesa2ToolBar) | Mesa 2 ToolBar | .tbr | 
+[other/messiahStudioProject](https://discmaster.textfiles.com/search?formatid=messiahStudioProject) | MessiahStudio Project | .mpj | 
 [other/metaSoftwareDesignDiagram](https://discmaster.textfiles.com/search?formatid=metaSoftwareDesignDiagram) | Meta Software Design Diagram | .dsd | 
 [other/metaCreationsResourceFile](https://discmaster.textfiles.com/search?formatid=metaCreationsResourceFile) | MetaCreations Resource Composite File |  | 
 [other/metaEditOODAClassDiagram](https://discmaster.textfiles.com/search?formatid=metaEditOODAClassDiagram) | MetaEdit OODA Class Diagram | .ocd | 
@@ -2851,6 +2855,7 @@ Family/Format | Name | Extensions | Notes
 [other/vesaDisplayIdentification](https://discmaster.textfiles.com/search?formatid=vesaDisplayIdentification) | VESA Display Identification File | .vdb | 
 [other/vgaCopyConfiguration](https://discmaster.textfiles.com/search?formatid=vgaCopyConfiguration) | VGA-Copy Configuration | .cfg | 
 [other/viceSnapshotFile](https://discmaster.textfiles.com/search?formatid=viceSnapshotFile) | Vice Snapshot File | .vsf | 
+[other/viconAnimationData](https://discmaster.textfiles.com/search?formatid=viconAnimationData) | Vicon animation data | .v | 
 [other/videoMusicBoxProgression](https://discmaster.textfiles.com/search?formatid=videoMusicBoxProgression) | Video Music Box Progression | .prgn | 
 [other/videoMusicBoxStyle](https://discmaster.textfiles.com/search?formatid=videoMusicBoxStyle) | Video Music Box Style | .stle | 
 [other/videoFX2Sequence](https://discmaster.textfiles.com/search?formatid=videoFX2Sequence) | VideoFX2 Sequence | .seq | 
@@ -2897,6 +2902,7 @@ Family/Format | Name | Extensions | Notes
 [other/vpExpertHelpSystem](https://discmaster.textfiles.com/search?formatid=vpExpertHelpSystem) | VP-Expert Help System | .chp | 
 [other/vSamplerSoundBank](https://discmaster.textfiles.com/search?formatid=vSamplerSoundBank) | VSampler Sound Bank | .vsb | 
 [other/vsoLanguageData](https://discmaster.textfiles.com/search?formatid=vsoLanguageData) | VSO language data | .spk | 
+[other/vueDEspritFunctionDefinition](https://discmaster.textfiles.com/search?formatid=vueDEspritFunctionDefinition) | Vue D'Esprit function definition | .fnc .mat .vob | 
 [other/vuimageVideoDriver](https://discmaster.textfiles.com/search?formatid=vuimageVideoDriver) | VUIMAGE Video Driver | .vdr | 
 [other/vwCommsDataBase](https://discmaster.textfiles.com/search?formatid=vwCommsDataBase) | VW Comms Data Base | .db .vct .vcc | 
 [other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?formatid=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
@@ -3029,7 +3035,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (83)
+## Poly (84)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?formatid=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3068,6 +3074,7 @@ Family/Format | Name | Extensions | Notes
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?formatid=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
 [poly/granny3DModel](https://discmaster.textfiles.com/search?formatid=granny3DModel) | [Granny 3D Model](http://fileformats.archiveteam.org/wiki/COLLADA) | .gr2 | I tried using https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x but it didn't work for any of the old GR2 models I gave it. Found another imported but it says it only works for Metin2 game models
 [poly/hardTruck3DModel](https://discmaster.textfiles.com/search?formatid=hardTruck3DModel) | Hard Truck 3D model | .b3d | 
+[poly/hexagonModel](https://discmaster.textfiles.com/search?formatid=hexagonModel) | Hexagon model | .hxn | 
 [poly/ibmCAD3XDrawing](https://discmaster.textfiles.com/search?formatid=ibmCAD3XDrawing) | IBM CAD/3X drawing | .dwg | 
 [poly/infiniDScene](https://discmaster.textfiles.com/search?formatid=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
 [poly/irit3DModel](https://discmaster.textfiles.com/search?formatid=irit3DModel) | IRIT 3D model | .irt .dat | 

@@ -1820,6 +1820,7 @@ export const WEAK_VALUES =
 	/^Google Maps API data$/,
 	/^Grand Theft Auto 3 collision data$/,
 	/^Grand Theft Auto: San Andreas game data archive$/,
+	/^Graphing Calculator$/,
 	/^Groupwise Mail Message$/,
 	/^GtkSourceView language definition$/,
 	/^GNU Octave Matrix data \(text\)$/,

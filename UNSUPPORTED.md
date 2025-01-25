@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,108)
+# Unsupported File Formats (3,110)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1045,7 +1045,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,976)
+## Other (1,978)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2159,6 +2159,7 @@ Family/Format | Name | Extensions | Notes
 [other/midget3Instruments](https://discmaster.textfiles.com/search?formatid=midget3Instruments) | Midget 3 Instruments | .mis | 
 [other/midiDrumMachine](https://discmaster.textfiles.com/search?formatid=midiDrumMachine) | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
 [other/midiMazeIIMaze](https://discmaster.textfiles.com/search?formatid=midiMazeIIMaze) | MIDI-MAZE II Maze | .mze | 
+[other/mightyDrawDOSLibrary](https://discmaster.textfiles.com/search?formatid=mightyDrawDOSLibrary) | Mighty Draw DOS library | .mdl | 
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?formatid=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
 [other/miniCAD](https://discmaster.textfiles.com/search?formatid=miniCAD) | MiniCAD | .mcd .sta | 
 [other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?formatid=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 
@@ -2586,6 +2587,7 @@ Family/Format | Name | Extensions | Notes
 [other/settlers2Map](https://discmaster.textfiles.com/search?formatid=settlers2Map) | Settlers II Map | .swd .wld | 
 [other/seuFormatDefinitionFile](https://discmaster.textfiles.com/search?formatid=seuFormatDefinitionFile) | SEU Format Definition File | .fdf | 
 [other/sfxDocumentTemplateDirectory](https://discmaster.textfiles.com/search?formatid=sfxDocumentTemplateDirectory) | Sfx Document Template Directory |  | 
+[other/sgaGameDataArchive](https://discmaster.textfiles.com/search?formatid=sgaGameDataArchive) | SGA game data archive | .sga | 
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?formatid=sgmlCompiled) | SGML Compiled | .mtl | 
 [other/shapeshifterTheme](https://discmaster.textfiles.com/search?formatid=shapeshifterTheme) | Shapeshifter theme | .guikit | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?formatid=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 

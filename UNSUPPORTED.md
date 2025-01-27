@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,121)
+# Unsupported File Formats (3,122)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1046,7 +1046,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,987)
+## Other (1,988)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1293,6 +1293,7 @@ Family/Format | Name | Extensions | Notes
 [other/bannerBlueMovieGuideLibraryAuxiliaryFile](https://discmaster.textfiles.com/search?formatid=bannerBlueMovieGuideLibraryAuxiliaryFile) | Banner Blue Movie Guide Library Auxiliary File | .nts .cst .syn | 
 [other/bannerBlueMovieGuideLibraryData](https://discmaster.textfiles.com/search?formatid=bannerBlueMovieGuideLibraryData) | Banner Blue Movie Guide Library data |  | 
 [other/banyansVINESPatchData](https://discmaster.textfiles.com/search?formatid=banyansVINESPatchData) | Banyans VINES patch data | .0 .1 | 
+[other/barGameDataArchive](https://discmaster.textfiles.com/search?formatid=barGameDataArchive) | BAR game data archive | .dfw | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
 [other/basVBDOSPro10Source](https://discmaster.textfiles.com/search?formatid=basVBDOSPro10Source) | BAS VBDOS Pro 1.0 Source | .bas | 
 [other/basicXCompiledBytecode](https://discmaster.textfiles.com/search?formatid=basicXCompiledBytecode) | BasicX compiled bytecode | .bxb | 

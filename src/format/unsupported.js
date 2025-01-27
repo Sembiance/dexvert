@@ -932,6 +932,7 @@ export default
 		avatarStudioLIO                              : {name : "Avatar Studio LIO", ext : [".lio"], magic : ["Avatar Studio LIO"], weakMagic : true},
 		aweGamesGameDataContainer                    : {name : "AWE Games game data container", ext : [".omt"], magic : ["AWE Games game data container"], weakMagic : true},
 		axisGameEnhancementModules                   : {name : "Axis Game Enhancement Modules", ext : [".fil"], magic : ["Axis Game Enhancement Modules"]},
+		barGameDataArchive                           : {name : "BAR game data archive", ext : [".dfw"], magic : ["BAR game data archive"], weakMagic : true},
 		bethesdaGameMap                              : {name : "Bethesda game Map", ext : [".mif"], magic : ["Bethesda game Map"]},
 		bigRedRacingLevel                            : {name : "Big Red Racing Level", ext : [".lev"], magic : ["Big Red Racing Level"]},
 		binaryDeltaCompressedPatch                   : {name : "Binary Delta Compressed Patch", magic : ["Binary Delta Compressed Patch"]},

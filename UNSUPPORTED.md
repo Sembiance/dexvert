@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,117)
+# Unsupported File Formats (3,121)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -685,7 +685,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (184)
+## Image (185)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -857,6 +857,7 @@ Family/Format | Name | Extensions | Notes
 [image/theCivilWarSpriteLibrary](https://discmaster.textfiles.com/search?formatid=theCivilWarSpriteLibrary) | The Civil War Sprite library | .spr | 
 [image/theDrawPascalScreenImage](https://discmaster.textfiles.com/search?formatid=theDrawPascalScreenImage) | TheDraw Pascal screen Image | .pas | 
 [image/topDrawDrawing](https://discmaster.textfiles.com/search?formatid=topDrawDrawing) | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tdr .td | [3 sample files](https://sembiance.com/fileFormatSamples/image/topDrawDrawing/)
+[image/uleadPatternImage](https://discmaster.textfiles.com/search?formatid=uleadPatternImage) | Ulead Pattern image | .pst | 
 [image/uleadPhotoExpressImage](https://discmaster.textfiles.com/search?formatid=uleadPhotoExpressImage) | Ulead Photo Express image | .upx .tpx | 
 [image/uleadPhotoExpressTemplate](https://discmaster.textfiles.com/search?formatid=uleadPhotoExpressTemplate) | Ulead Photo Express Template | .tpx | 
 [image/ultraDesignDrawing](https://discmaster.textfiles.com/search?formatid=ultraDesignDrawing) | UltraDesign drawing | .ulb .uvw | 
@@ -1045,7 +1046,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,984)
+## Other (1,987)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1082,6 +1083,7 @@ Family/Format | Name | Extensions | Notes
 [other/seventhLevelGameDataArchive](https://discmaster.textfiles.com/search?formatid=seventhLevelGameDataArchive) | 7th Level game data archive | .bin | 
 [other/cpmBASCOMCompiled](https://discmaster.textfiles.com/search?formatid=cpmBASCOMCompiled) | 8bit CP/M-80 COM BASCOM compiled | .obj .run | 
 [other/ninetyFourBSoundBank](https://discmaster.textfiles.com/search?formatid=ninetyFourBSoundBank) | 94B sound bank | .94b | 
+[other/aSquaredAntiMalwareChecksum](https://discmaster.textfiles.com/search?formatid=aSquaredAntiMalwareChecksum) | a-squared Anti-Malware checksum for signatures files | .trc | 
 [other/aSquaredAntiMalwareSignature](https://discmaster.textfiles.com/search?formatid=aSquaredAntiMalwareSignature) | a-squared Anti-Malware signature | .sig | 
 [other/aeSGMLDocumentBinary](https://discmaster.textfiles.com/search?formatid=aeSGMLDocumentBinary) | A/E SGML DocumentBinary | .ae | 
 [other/abbyLingvoDictionary](https://discmaster.textfiles.com/search?formatid=abbyLingvoDictionary) | ABBYY Lingvo dictionary | .dic .lsd | 
@@ -1473,6 +1475,7 @@ Family/Format | Name | Extensions | Notes
 [other/corelMailArchivedMessageDatabase](https://discmaster.textfiles.com/search?formatid=corelMailArchivedMessageDatabase) | Corel Mail archived message database/mailbox | .db | 
 [other/corelPhotoPaintUserFilter](https://discmaster.textfiles.com/search?formatid=corelPhotoPaintUserFilter) | COREL Photo Paint User Defined Filter | .usr | 
 [other/corelPhotoPaintToneCurve](https://discmaster.textfiles.com/search?formatid=corelPhotoPaintToneCurve) | Corel PhotoPaint Tone Curve | .crv | 
+[other/corelRAVEAnimation](https://discmaster.textfiles.com/search?formatid=corelRAVEAnimation) | Corel R.A.V.E. Animation | .clk7 .clk .clk6 | 
 [other/corelSavedFindSearch](https://discmaster.textfiles.com/search?formatid=corelSavedFindSearch) | Corel saved find/search | .fin | 
 [other/corelShellMacro](https://discmaster.textfiles.com/search?formatid=corelShellMacro) | Corel Shell Macro | .shm | 
 [other/corelWritingToolsUserWordList](https://discmaster.textfiles.com/search?formatid=corelWritingToolsUserWordList) | Corel Writing Tools User Word List | .sav .hwl | 
@@ -2270,6 +2273,7 @@ Family/Format | Name | Extensions | Notes
 [other/nortonDiskDoctorUnDoFile](https://discmaster.textfiles.com/search?formatid=nortonDiskDoctorUnDoFile) | Norton Disk Doctor UnDo file | .dat | 
 [other/nortonDiskreetEncryptedData](https://discmaster.textfiles.com/search?formatid=nortonDiskreetEncryptedData) | Norton Diskreet encrypted data | .sec | 
 [other/nortonFileInfoData](https://discmaster.textfiles.com/search?formatid=nortonFileInfoData) | Norton FileInfo data | .fi | 
+[other/nortonPCAnywhereAutomatedProcedures](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereAutomatedProcedures) | Norton pcAnywhere Automated Procedures | .ap6 | 
 [other/nortonPCAnywhereCallersList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereCallersList) | Norton pcAnywhere Callers list | .ci6 | 
 [other/nortonPCAnywhereHardwareConfigurations](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereHardwareConfigurations) | Norton pcAnywhere Hardware configurations | .hw6 | 
 [other/nortonPCAnywhereHostList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereHostList) | Norton pcAnywhere host list | .pc6 | 

@@ -9,5 +9,6 @@ export class degasLow extends Format
 	magic      = ["DEGAS low-res compressed bitmap"];
 	byteCheck  = [{offset : 0, match : [0x80, 0x00]}];
 	converters = ["recoil2png", "wuimg[hasExtMatch]", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	verify     = ({meta}) => meta.colorCount>1;
 	classify   = true;
 }

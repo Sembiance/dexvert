@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,122)
+# Unsupported File Formats (3,128)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1046,7 +1046,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,988)
+## Other (1,994)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1563,6 +1563,11 @@ Family/Format | Name | Extensions | Notes
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
 [other/descentPlayer](https://discmaster.textfiles.com/search?formatid=descentPlayer) | Descent Player | .plr | 
 [other/deScribeMacro](https://discmaster.textfiles.com/search?formatid=deScribeMacro) | DeScribe Macro |  | 
+[other/design3DOutline](https://discmaster.textfiles.com/search?formatid=design3DOutline) | DESIGN 3D outline | .cnt | 
+[other/design3DPath](https://discmaster.textfiles.com/search?formatid=design3DPath) | DESIGN 3D path | .chm | 
+[other/design3DScene](https://discmaster.textfiles.com/search?formatid=design3DScene) | DESIGN 3D scene | .d3d | 
+[other/design3DScript](https://discmaster.textfiles.com/search?formatid=design3DScript) | DESIGN 3D Script | .scr | 
+[other/design3DSky](https://discmaster.textfiles.com/search?formatid=design3DSky) | DESIGN 3D Sky | .sky | 
 [other/designIt3D2DObjectLibrary](https://discmaster.textfiles.com/search?formatid=designIt3D2DObjectLibrary) | Design It! 3-D 2D object Library | .wlb | 
 [other/deskMateFilerDatabase](https://discmaster.textfiles.com/search?formatid=deskMateFilerDatabase) | DeskMate Filer database | .fil .hlp | 
 [other/desktopDB](https://discmaster.textfiles.com/search?formatid=desktopDB) | Desktop DB |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDB/)
@@ -2165,6 +2170,7 @@ Family/Format | Name | Extensions | Notes
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?formatid=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
 [other/microStationSymbologyResources](https://discmaster.textfiles.com/search?formatid=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
 [other/midget3Instruments](https://discmaster.textfiles.com/search?formatid=midget3Instruments) | Midget 3 Instruments | .mis | 
+[other/midiArpeggiatorArpeggio](https://discmaster.textfiles.com/search?formatid=midiArpeggiatorArpeggio) | MIDI Arpeggiator Arpeggio | .arp | 
 [other/midiDrumMachine](https://discmaster.textfiles.com/search?formatid=midiDrumMachine) | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
 [other/midiMazeIIMaze](https://discmaster.textfiles.com/search?formatid=midiMazeIIMaze) | MIDI-MAZE II Maze | .mze | 
 [other/mightyDrawDOSLibrary](https://discmaster.textfiles.com/search?formatid=mightyDrawDOSLibrary) | Mighty Draw DOS library | .mdl | 

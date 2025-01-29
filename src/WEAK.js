@@ -169,6 +169,7 @@ export const WEAK_VALUES =
 	/^Format: COFF Library \(\.LIB\)/,
 	/^Format: DBase Database \(\.DBF\)/,
 	/^Format: empty file$/,
+	/^Format: Guitar Pro Soundbank\(6\.x\)$/,
 	/^Format: Guitar Pro Tablature/,
 	/^Format: JavaScript Compiled\/Bytenode/,
 	/^Format: Microsoft XNA Game Studio Binary Package/,

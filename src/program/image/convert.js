@@ -9,6 +9,7 @@ export class convert extends Program
 		format      : "Specify the input format type, can be useful to ensure ImageMagick only converts the file if it's the correct type. Get list with: magick -list format",
 		background  : "Specify the background color to use",
 		outType     : `Which type to convert to (png || gif || webp || svg). Default: png`,
+		scale       : "Scale the image by the given percentage",
 		flip        : "Set this to true to flip the image vertically. Default: false",
 		removeAlpha : "Set this to true to remove the alpha channel and produce a flat, opaque image. Default: false"
 	};
@@ -35,6 +36,8 @@ export class convert extends Program
 			a.push("-flip");
 		if(r.flags.removeAlpha)
 			a.push("-alpha", "off");
+		if(r.flags.scale)
+			a.push("-scale", r.flags.scale);
 		a.push(await r.outFile(`out.${outType}`));
 		return a;
 	};

@@ -2334,6 +2334,7 @@ Family/Format | Name | Extensions | Notes
 [other/os968kModule](https://discmaster.textfiles.com/search?formatid=os968kModule) | OS9/68k Module |  | 
 [other/outlookExpressDatabase](https://discmaster.textfiles.com/search?formatid=outlookExpressDatabase) | Outlook Express Database |  | 
 [other/outlookShortcuts](https://discmaster.textfiles.com/search?formatid=outlookShortcuts) | Outlook Shortcuts | .fav | 
+[other/outpostFirewallHeuristicData](https://discmaster.textfiles.com/search?formatid=outpostFirewallHeuristicData) | Outpost Firewall heuristic data | .hax | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
 [other/pageFlipperPlusFXEffect](https://discmaster.textfiles.com/search?formatid=pageFlipperPlusFXEffect) | PageFlipper Plus FX effect |  | 
 [other/pageFocusData](https://discmaster.textfiles.com/search?formatid=pageFocusData) | PageFocus Data | .1 .xdb | 
@@ -2922,7 +2923,6 @@ Family/Format | Name | Extensions | Notes
 [other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?formatid=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
 [other/warCraft3Map](https://discmaster.textfiles.com/search?formatid=warCraft3Map) | WarCraft III Map | .w3m | 
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?formatid=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
-[other/warCraftMap](https://discmaster.textfiles.com/search?formatid=warCraftMap) | WarCraft Map | .pud | 
 [other/watcomProfilerSamplingData](https://discmaster.textfiles.com/search?formatid=watcomProfilerSamplingData) | Watcom Profiler Sampling Data | .smp | 
 [other/wbWortSavedGame0](https://discmaster.textfiles.com/search?formatid=wbWortSavedGame0) | WB-Wort saved game |  | 
 [other/webViewCacheData](https://discmaster.textfiles.com/search?formatid=webViewCacheData) | WebView cache data |  | 

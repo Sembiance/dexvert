@@ -1,10 +1,10 @@
 import {TEXT_MAGIC} from "../Detection.js";
 
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
-// NOTE: Not ALL unsupported formats are listed here. Some are marked as 'unsupported' in the various format/family/subfiles.js
-// NOTE: Due to these not having a second verification step of trying to be converted, the weakMagic flag is used liberally to avoid false positive matches
-//       THUS, if you ever support these below, where you can verify it as a valid image/document/music/etc, you will WANT PROBABLY WANT TO REMOVE the 'weakMagic' flag
-// NOTE: If looking for sample files on discmaster for unsupported formats, use the 'detections' field and search for not just the dexvert magic but also the magic it matches on, since discmaster didn't always re-process items to pick up new stuff
+// NOTE: Not ALL unsupported formats are listed here. Some are marked as 'unsupported = true' in the various format/family/subfiles.js
+// NOTE: Due to these not having a second verification step of trying to be converted, the weakMagic flag is used liberally below to avoid false positive matches
+//       THUS, if you ever add support for any formats below below, strongly consider removing the 'weakMagic' flag if you can properly verify it as a valid image/document/audio/poly/etc
+// NOTE: If looking for sample files on discmaster for unsupported formats, use the 'detections' field and search for not just the dexvert format, but also the magic it matches on, since discmaster didn't always re-process items to pick up new stuff
 export default
 {
 	archive :
@@ -1332,7 +1332,6 @@ export default
 		virtualVillagersData                         : {name : "Virtual Villagers data", ext : [".ldw"], magic : ["Virtual Villagers data"], weakMagic : true},
 		voxelAnimation                               : {name : "Voxel Animation", ext : [".vxl"], magic : ["Voxel Animation"]},
 		warBirdsAirplaneArt                          : {name : "WarBirds airplane art", ext : [".vew"], magic : ["WarBirds airplane art"], weakMagic : true},
-		warCraftMap                                  : {name : "WarCraft Map", ext : [".pud"], magic : ["WarCraft map"]},
 		warCraft3Map                                 : {name : "WarCraft III Map", ext : [".w3m"], magic : ["WarCraft III map", "Warcraft III map"]},
 		warCraft3RecordedGame                        : {name : "WarCraft III Recorded Game", ext : [".w3g"], magic : ["WarCraft III Recorded Game", "Warcraft III recorded game"]},
 		wbWortSavedGame0                             : {name : "WB-Wort saved game", magic : ["WB-Wort saved game"]},
@@ -2450,6 +2449,7 @@ export default
 		os968kModule                             : {name : "OS9/68k Module", filename : [/^cdi_appl\.pcd$/i, /^pcd_exec\.pcd$/i, /^pcd_exec\.dat$/i], magic : ["Microware OS-9/68000 module", "OS9/68K module"], weakMagic : ["OS9/68K module"]},
 		outlookExpressDatabase                   : {name : "Outlook Express Database", magic : ["Outlook Express Database", /^MS Outlook Express DBX file/, /^fmt\/(838|839)( |$)/]},
 		outlookShortcuts                         : {name : "Outlook Shortcuts", ext : [".fav"], magic : ["Outlook Shortcuts"]},
+		outpostFirewallHeuristicData             : {name : "Outpost Firewall heuristic data", ext : [".hax"], magic : ["Outpost Firewall heuristic data"], weakMagic : true},
 		pageFocusData                            : {name : "PageFocus Data", ext : [".1", ".xdb"], magic : ["PageFocus data (generic)", /^PageFocus (DataBase|DataView|Form|Objects Library|Palette)/]},
 		pageMakerTable                           : {name : "PageMaker Table", ext : [".tbl"], magic : ["PageMaker Table"], weakMagic : true},
 		pageFlipperPlusFXEffect                  : {name : "PageFlipper Plus FX effect", magic : ["PageFlipper Plus FX effect"]},

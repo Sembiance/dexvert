@@ -2077,6 +2077,7 @@ export const WEAK_VALUES =
 	/^SExtractor configuration$/,
 	/^SFDN Packer compressed data$/,
 	/^SFS encrypted volume$/,
+	/^SFZ Sample definition \(with rem\)$/,
 	/^Silent Hill: Origins game data archive$/,
 	/^Silver Scene$/,
 	/^SimAnt saved game \(Amiga\)$/,

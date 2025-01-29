@@ -26,7 +26,7 @@ export class ini extends Format
 		"Zilog Developer Studio II Workstate", "IBM i Access Client Poppad", "IBM i (Client) Access Keyboard Map", "IBM iSeries Client Access WorkStation profile", "Microsoft Zone Identifier", "Citrix Independent Computer Architecture", "Steem Patch",
 		/^Altium Designer ((integrated Library Package)|Project|Workspace)/, "TeXnicCenter Project", "application/x-kourse", "application/x-kolf", "Photofinish Calibration Map (v1.00)", "Grand Theft Auto 2 Multiplayer Map Metadata", "mIRC Theme",
 		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)", "Photofinish Output Device info", "Microsoft Project settings (v1.0)", "Atlantis Word Processor SpellCheck settings", "DemoShield project", "Yape configuration", "VICE settings",
-		"NLMSX machine configuration", "FL Studio Speech Preset", "FL Studio Dashboard component Initializaton", "Zero-X Color scheme", "FL Keys Initialization", "SkyOS Installation File", "Logitech MouseWare Web browser buttons Mapping",
+		"NLMSX machine configuration", "FL Studio Speech Preset", "FL Studio Dashboard component Initializaton", "Zero-X Color scheme", "FL Keys Initialization", "SkyOS Installation File", "Logitech MouseWare Web browser buttons Mapping", "ASTRA Report Profile",
 		"Windows PROTOCOL.INI", "FL Studio DrumSynth Preset (v2.x)", "jalbum image info", "MASH script", "Micrografx Media Manager Easy Catalog", "Eagle preferences", "WinAPE Profile", "Affymetrix Probe Results (Text)", "JTAG Chain Information",
 		"Affymetrix Chip Definition File (Text)", "CANopen Electronic Data Sheet", "Trend Micro Internet Security Tasks", "MMCDDA Audio CD track descriptor", "MinGW Developer Studio Project", "Phase3 Project (v2.x)", "Private Wars 3D Object",
 		/^fmt\/(1212|1456|1614|1760)( |$)/

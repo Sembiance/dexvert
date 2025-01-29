@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,128)
+# Unsupported File Formats (3,131)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1046,7 +1046,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,994)
+## Other (1,997)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1658,6 +1658,7 @@ Family/Format | Name | Extensions | Notes
 [other/empireScenario](https://discmaster.textfiles.com/search?formatid=empireScenario) | Empire Scenario | .scn | 
 [other/encartaEncyclopediaLinksUpdate](https://discmaster.textfiles.com/search?formatid=encartaEncyclopediaLinksUpdate) | Encarta Encyclopedia Yearbook and Web Links update | .eyb | 
 [other/endNoteLibrary](https://discmaster.textfiles.com/search?formatid=endNoteLibrary) | EndNote Library | .enl | 
+[other/enlightenmentEETArchive](https://discmaster.textfiles.com/search?formatid=enlightenmentEETArchive) | Enlightenment EET archive | .cfg .edj .imc | 
 [other/ensoniqEPSExtractedFile](https://discmaster.textfiles.com/search?formatid=ensoniqEPSExtractedFile) | Ensoniq EPS Extracted File | .efe | 
 [other/ensoniqVFXPatchFile](https://discmaster.textfiles.com/search?formatid=ensoniqVFXPatchFile) | Ensoniq VFX Patch File | .vfx | 
 [other/enviromentalAudioLibraryData](https://discmaster.textfiles.com/search?formatid=enviromentalAudioLibraryData) | Enviromental Audio Library data | .eal | 
@@ -1686,6 +1687,7 @@ Family/Format | Name | Extensions | Notes
 [other/f1gpEdData](https://discmaster.textfiles.com/search?formatid=f1gpEdData) | F1GP-Ed Data | .events .settings | 
 [other/fabricDesign](https://discmaster.textfiles.com/search?formatid=fabricDesign) | Fabric design | .fab | 
 [other/faceGenBaseMesh](https://discmaster.textfiles.com/search?formatid=faceGenBaseMesh) | FaceGen base mesh |  | 
+[other/faceGenControlsDistributionDensities](https://discmaster.textfiles.com/search?formatid=faceGenControlsDistributionDensities) | FaceGen Controls/distribution densities | .ctl | 
 [other/faceGenFaceCoordinates](https://discmaster.textfiles.com/search?formatid=faceGenFaceCoordinates) | FaceGen face coordinates |  | 
 [other/faceGenStatisticalShapeInformation](https://discmaster.textfiles.com/search?formatid=faceGenStatisticalShapeInformation) | FaceGen statistical shape information |  | 
 [other/faceGenStatisticalTextureInformation](https://discmaster.textfiles.com/search?formatid=faceGenStatisticalTextureInformation) | FaceGen statistical Texture information |  | 
@@ -1981,6 +1983,7 @@ Family/Format | Name | Extensions | Notes
 [other/kritaLayerTile](https://discmaster.textfiles.com/search?formatid=kritaLayerTile) | Krita layer/tile |  | 
 [other/kryoFluxRawStream](https://discmaster.textfiles.com/search?formatid=kryoFluxRawStream) | KryoFlux Raw Stream | .raw | [1 sample file](https://sembiance.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
 [other/kudoCatalogHashData](https://discmaster.textfiles.com/search?formatid=kudoCatalogHashData) | Kudo catalog Hash data | .hsh | 
+[other/kWallet](https://discmaster.textfiles.com/search?formatid=kWallet) | KWallet | .kwl | 
 [other/kyleGameDataContainer](https://discmaster.textfiles.com/search?formatid=kyleGameDataContainer) | Kyle game data container | .dta | 
 [other/kylix3CompiledUnit](https://discmaster.textfiles.com/search?formatid=kylix3CompiledUnit) | Kylix 3 Compiled Unit | .dpu .dcu | 
 [other/labelDesignerPlusDeluxeTemplate](https://discmaster.textfiles.com/search?formatid=labelDesignerPlusDeluxeTemplate) | Label Designer Plus Deluxe Template | .cct | 

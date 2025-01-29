@@ -27,7 +27,7 @@ export class zip extends Format
 		"Zoner Draw (container with preview)", "MediaForge Runtime Player Distribution Project", "Desktop Sidebar Panel", "Compressed Disk Image (password protected)", "DesktopX Object Package", "ComicRack plugin", "U3 application Package",
 		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language", "TuneUp Style Boot Screen", "TIP Archiv gefunden (Auflistung ist deaktiviert)", /^IOS\/iPadOS IPA file/, "Tableau Packaged Workbook", "Maxthon skin (MX1)", "Pencil template",
 		"Chamaleon Clock wallpaper clock skin", "Google Gadget", "Proteus Project", "Amiga WHDLoad package (zipped)", "MIUI Theme", "Pencil stencil", "TwinCAT Compiled-Library", "LimeWire theme", "EncryptOnClick encrypted", "SkyOS add-on Package",
-		"Midtown Madness 2 car data", "Rainlendar 2 Skin", "Rainlendar 2 Skin",
+		"Midtown Madness 2 car data", "Rainlendar 2 Skin", "Rainlendar 2 Skin", "KWord document",
 		/^fmt\/(424|524|595|627|628|937|942|943|999|1184)( |$)/,
 		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];

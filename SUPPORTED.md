@@ -1,4 +1,4 @@
-# Supported File Formats (2,931)
+# Supported File Formats (2,932)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -450,7 +450,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (101)
+## Audio (102)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 3DO STR audio |  | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/threeDOSTRAudio/)
@@ -539,6 +539,7 @@ audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/deta
 audio | Sounder | .snd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sounder/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 .sbk .arl | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
 audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
+audio | [Speex Encoded Audio](http://fileformats.archiveteam.org/wiki/Speex) | .spx | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/speex/)
 audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
 audio | The Need for Speed Sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedSoundBank/)
@@ -551,7 +552,7 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
 audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
-audio | XACT Wave Bank | .xwb | [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/xactWaveBank/)
+audio | XACT Wave Bank | .xwb | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/xactWaveBank/)
 audio | [Xilam DERF Audio](https://wiki.multimedia.cx/index.php/Xilam_DERF) | .adp | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/xilamDERFAudio/)
 audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/audio/yamahaTX/)
 
@@ -1269,8 +1270,8 @@ image | [PABX Background](http://fileformats.archiveteam.org/wiki/PABX_backgroun
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
 image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [5 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/paintPro/)
-image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_Pro) | .psp .pspimage .pspbrush | [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintShopPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)) | .da4 .psc | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/paintShop/)
+image | [PaintShop Pro](http://fileformats.archiveteam.org/wiki/PaintShop_Pro) | .psp .pspimage .pspbrush | [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintShopPro/)
 image | [Paintworks](http://fileformats.archiveteam.org/wiki/Paintworks) | .cl0 .sc0 .cl1 .sc1 .cl2 .sc2 .pg0 .pg1 .pg2 | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/paintworks/)
 image | [Palette Master](http://fileformats.archiveteam.org/wiki/Palette_Master) | .art | [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://sembiance.com/fileFormatSamples/image/paletteMaster/)
 image | [Palm Bitmap](http://fileformats.archiveteam.org/wiki/Palm_bitmap) | .palm | [deark](https://entropymine.com/deark/) [convert](https://www.imagemagick.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/palmBitmap/)
@@ -1946,7 +1947,7 @@ poly | [Doom 3 Mesh](https://modwiki.dhewm3.org/MD5MESH_(file_format)) | .md5mes
 poly | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | [polyTrans64](https://www.okino.com/conv/conv.htm) [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [AccuTrans3D](http://www.micromouse.ca/) [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/dxf/) - I would love to be able to determine if it's a flat 2D drawing or an actual 3D model, seems about 50/50 and when a 2D drawing is rendered as a polygon, it's hard to make out/see.
 poly | [Electric Image 3D File](http://fileformats.archiveteam.org/wiki/FACT) | .fact .fac | [polyTrans64](https://www.okino.com/conv/conv.htm) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/electricImage3DFile/)
 poly | [ESRI/ArcView Shape](http://fileformats.archiveteam.org/wiki/Shapefile) | .shp | [polyTrans64](https://www.okino.com/conv/conv.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/esriShape/)
-poly | [Extensible 3D](http://fileformats.archiveteam.org/wiki/X3D) | .x3d .x3db .x3dv .x3dz .x3dbz .x3dvz | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/poly/x3d/)
+poly | [Extensible 3D](http://fileformats.archiveteam.org/wiki/X3D) | .x3d .x3db .x3dv .x3dz .x3dbz .x3dvz | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/x3d/)
 poly | [Geomview Object File Format](http://fileformats.archiveteam.org/wiki/OFF_(Geomview_Object_File_Format)) | .off | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/objectFileFormat/)
 poly | [Ghoul 2 Model](http://fileformats.archiveteam.org/wiki/GLM) | .glm | [milkShape3D](http://www.milkshape3d.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/ghoul2Model/)
 poly | GHOUL Engine model | .ghb | [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/ghoulEngineModel/)
@@ -1999,7 +2000,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 ## Text (898)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-text | .NET assembly Installation Log | .installlog |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
+text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
 text | 22DISK | .def |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
 text | 3-D Professional script |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/threeDProfessionalScript/)
 text | 32-Bit Sequencer Script | .scr |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/sequencerScript/)
@@ -2065,7 +2066,7 @@ text | ASEAM 2 Plant Input Screen/Data | .pis |  | [9 sample files](https://semb
 text | ASEAM 2 System Input Screen/Data | .sis |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aseam2SystemInputScreenData/)
 text | ASIC Project/Configuration | .prj .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/asicProjectConfiguration/)
 text | AskEnv Requester definition | .req |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/askEnvRequesterDefinition/)
-text | ASP Application Directive | .asax |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
+text | ASP Application Directive | .asax |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
 text | ASP Control Directive | .ascx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspControlDirective/)
 text | ASP WebService Directive File | .asmx |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
 text | ASP.NET Web Form |  |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/aspNETWebForm/)
@@ -2131,7 +2132,7 @@ text | ChiWriter document | .chi |  | [10 sample files](https://sembiance.com/fi
 text | Chord text file | .crd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/chordTextFile/)
 text | CIRCAD data | .tpc .tsa .tpb .tsc .pcb .tpa .tpd .tda .tsd .tdc .tsb .sch .tdb .tdd .lib |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/circadData/)
 text | CircuitMaker schematic | .ckt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/circuitMakerSchematic/)
-text | Clam AntiVirus Database Info | .info .cud .cld |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/clamAntiVirusDatabase/)
+text | Clam AntiVirus Database Info | .info .cud .cld |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/clamAntiVirusDatabase/)
 text | Clarion Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/clarionProject/)
 text | ClariSSA saved work/session |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/clariSSASavedWorkSession/)
 text | CLISP byte-compiled Lisp program | .fas |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/clispByteCompiled/)
@@ -2202,7 +2203,7 @@ text | Easy SFV Creator checksum | .sfv |  | [1 sample file](https://sembiance.c
 text | EasyBase data base |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/easyBaseDataBase/)
 text | EasyBase DB Configuration | .config |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/easyBaseDBConfiguration/)
 text | Eclipse Preferences | .prefs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/eclipsePreferences/)
-text | Eclipse product marker |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/eclipseProductMarker/)
+text | Eclipse product marker |  |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/eclipseProductMarker/)
 text | EDGE Diagrammer diagram | .edg |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/edgeDiagrammerDiagram/)
 text | EDIF Netlist | .edn |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/edifNetlist/)
 text | EditPlus Auto Completion | .acp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/editPlusAutoCompletion/)
@@ -2291,7 +2292,7 @@ text | Generic Printer Description | .gdl |  | [1 sample file](https://sembiance
 text | Genesis - The Third Day Script | .scrpt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/genesisTheThirdDayScript/)
 text | Genius Menu Maker Menu | .gmk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/geniusMenuMakerMenu/)
 text | GENSCAN output results | .genscan |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/genscanOutputResults/)
-text | Gentoo Linux ebuild | .ebuild |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/gentooLinuxEbuild/)
+text | Gentoo Linux ebuild | .ebuild |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/gentooLinuxEbuild/)
 text | Gerber | .gbr .gbx .gb |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gerber/)
 text | Gerber artwork | .art |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gerberArtwork/)
 text | Gettext Portable Object | .po |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gettextPortableObject/)
@@ -2404,7 +2405,7 @@ text | [LightWave Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene
 text | LilyPond music score | .ly .ily |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lilyPondMusicScore/)
 text | Lingo Script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lingoScript/)
 text | Linux kernel symbol map |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxKernelSymbolMap/)
-text | Linux LiveCD info | .diskdefines |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxLiveCDInfo/)
+text | Linux LiveCD info | .diskdefines |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/linuxLiveCDInfo/)
 text | Linux make config build |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxMakeConfig/)
 text | Linux Software Map entry | .lsm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/linuxSoftwareMapEntry/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unixShellScript/)
@@ -2424,7 +2425,7 @@ text | Magnetic Scrolls Collection Layout | .lay |  | [1 sample file](https://se
 text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/Makefile/)
 text | Makeindex log file | .ilg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/makeindexLogFile/)
 text | [Maker Interchange Format](http://fileformats.archiveteam.org/wiki/Maker_Interchange_Format) | .mif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/makerInterchangeFormat/)
-text | Makeself SFX compressed archive | .run |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/makeselfSFXCompressedArchive/)
+text | Makeself SFX compressed archive | .run |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/makeselfSFXCompressedArchive/)
 text | MAME Configuration | .cfg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mameConfiguration/)
 text | Manhattan Printer Description | .mpd |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/manhattanPrinterDescription/)
 text | MapInfo Interchange Format | .mif |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mapInfoInterchangeFormat/)
@@ -2525,7 +2526,7 @@ text | Opticks Lamp | .lmp |  | [4 sample files](https://sembiance.com/fileForma
 text | Opticks Object | .obj |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/opticksObject/)
 text | Opticks Scene | .sce .bak |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/opticksScene/)
 text | Opticks Surface | .srf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/opticksSurface/)
-text | OrangeCD theme | .dax |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/orangeCDTheme/)
+text | OrangeCD theme | .dax |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/orangeCDTheme/)
 text | Orbiter mesh | .msh |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/orbiterMesh/)
 text | Orbiter scenario | .scn |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/orbiterScenario/)
 text | ORIGIN System Checksum | .chk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/originSystemChecksum/)
@@ -2782,7 +2783,7 @@ text | Twist Report script | .r |  | [10 sample files](https://sembiance.com/fil
 text | Unified Printer Parameter | .upp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unifiedPrinterParameter/)
 text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/upcatCatalog/)
 text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/urbanChaosStoryScript/)
-text | USGS Digital Line Graph | .dlg .dat .txt |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
+text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
 text | Value Change Dump | .vcd .vcdz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/valueChangeDump/)
 text | Valve Choreography Data format | .vcd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
 text | Valve Map Format | .vmf .vmx |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)

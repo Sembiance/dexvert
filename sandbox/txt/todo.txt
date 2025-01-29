@@ -1,6 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Generate preview image from Warcraft 2 pud maps: https://github.com/war2/war2tools
 
 
 /---------------\
@@ -128,7 +129,13 @@
 /--------------\
 | Low Priority |
 \--------------/
-* Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
+* Could extract music from ZZT files with ZZMTRIP.EXE in DOS: https://museumofzzt.com/file/view/zztmplay20/
+  Then I could modify this javascript code to produce a WAV from the ripped ZZM file: https://github.com/nicolebranagan/zzmplayjs
+  I tried doing this in Jan 2025, but 2 issues. First, the ZZMTRIP.EXE program took like 2 full minutes on "Code Red" ZZT file
+  So I'd need to get that sped up, perhaps I could update dosbox to have a dynamic config that I could run at 200% or 500% speed
+  Second, the zzmplayjs code wouldn't actually load the ZZM file and gave an error I submitted an issue: https://github.com/nicolebranagan/zzmplayjs/issues/2
+
+* Would be nice to convert additional unreal UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
   Similar to how MacromediaDirector does it.
   Extra bonus points if I use UnrealEngine itself to create a 'tool' that can automatically open a .utx, read in all assets and convert them automatically to output files

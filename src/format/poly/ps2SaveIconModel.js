@@ -22,5 +22,5 @@ export class ps2SaveIconModel extends Format
 		iconFilenames.pushUnique(reader.strTerminated());
 		return otherFiles.filter(otherFile => iconFilenames.some(iconFilename => otherFile.base.toLowerCase()===iconFilename.toLowerCase()));
 	};
-	converters     = ["ico2gltf"];
+	converters = ["ico2gltf"];
 }

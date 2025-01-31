@@ -183,8 +183,9 @@ const SUPPORTING_FILES =
 	},
 	poly :
 	{
-		keyCAD3DModel : /\.fnt$/i,
-		wavefrontOBJ  : /\.mtl$/i
+		keyCAD3DModel    : /\.fnt$/i,
+		ps2SaveIconModel : /\.ico$/i,
+		wavefrontOBJ     : /\.mtl$/i
 	},
 	other :
 	{
@@ -402,7 +403,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
 	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
 
-	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
+	// These are actually mis-identified files, but either I haven't come up with a good way to avoid it or the format isn't important enough to warrant better identification
 	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
 	[/archive\/mdf\/R180 NG Media 1\.mdf$/, "archive", "iso"],
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
@@ -424,6 +425,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/other\/db2Bind\/QEDBM03\.BN$/, "audio", "mp3"],
+	[/text\/anjutaProject\/.*\.prj$/, "text", "txt"],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],

@@ -10,7 +10,8 @@ export class xls extends Format
 		"Excel Binary workbook",
 		/^Microsoft Office XML Flat File Format Excel worksheet/, /^fmt\/(55|56|57|58|59|61|62|214|445|555|556|598)( |$)/, /^x-fmt\/17( |$)/,
 
-		"Visual Tools Spreadsheet"	// this is actually a sperate format, but only ever encountered one of these and it also matches against excel magics, so just stick it in here since these converters seem to handle it ok
+		// these are actually a sperate formats, but only ever encountered a few of these, they also matches against excel magics, and convert with same tools, so just stick it in here
+		"Visual Tools Spreadsheet", "PlanMaker spreadsheet Document", "SoftMaker PlanMaker Document/template"
 	];
 	weakMagic  = ["Microsoft Excel sheet", "Microsoft Excel worksheet (generic older format)"];	// see poly/solidWorksDrawing/kloub.SLDDRW
 	idMeta     = ({macFileType, macFileCreator}) => ["sLC3", "sLM3", "sLS3", "XLA ", "XLA5", "XLA8", "XLC3", "XLM ", "XLM3", "XLS ", "XLS3", "XLS4", "XLS5", "XLS8", "XLW4"].includes(macFileType) && macFileCreator==="XCEL";

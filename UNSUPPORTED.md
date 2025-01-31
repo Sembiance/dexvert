@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,131)
+# Unsupported File Formats (3,134)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1046,7 +1046,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,997)
+## Other (2,000)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1959,6 +1959,7 @@ Family/Format | Name | Extensions | Notes
 [other/karmaAsset](https://discmaster.textfiles.com/search?formatid=karmaAsset) | Karma Asset | .ka | 
 [other/kasparovSGambitConfiguration](https://discmaster.textfiles.com/search?formatid=kasparovSGambitConfiguration) | Kasparov's Gambit Configuration | .cfg | 
 [other/kasperskyAntiVirusDatabase](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusDatabase) | Kaspersky Anti-virus data base | .avc | 
+[other/kasperskyAntiVirusSignatureBases](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusSignatureBases) | Kaspersky Anti-Virus signature bases | .kdc | 
 [other/kasperskyLabBlackListFile](https://discmaster.textfiles.com/search?formatid=kasperskyLabBlackListFile) | Kaspersky Lab black list file | .lst | 
 [other/kasperskyLabKeyFile](https://discmaster.textfiles.com/search?formatid=kasperskyLabKeyFile) | Kaspersky Lab Key file | .key | 
 [other/kbdMapFile](https://discmaster.textfiles.com/search?formatid=kbdMapFile) | kbd map file |  | 
@@ -2183,6 +2184,7 @@ Family/Format | Name | Extensions | Notes
 [other/mirrorIIEmulationFile](https://discmaster.textfiles.com/search?formatid=mirrorIIEmulationFile) | Mirror II Emulation File | .mef | 
 [other/missionPatch](https://discmaster.textfiles.com/search?formatid=missionPatch) | Mission Patch | .pat | 
 [other/mksSpellHashList](https://discmaster.textfiles.com/search?formatid=mksSpellHashList) | MKS Spell hash list |  | 
+[other/mlocateDatabase](https://discmaster.textfiles.com/search?formatid=mlocateDatabase) | mlocate database | .db | 
 [other/mmfwData](https://discmaster.textfiles.com/search?formatid=mmfwData) | MMFW data | .mms .mmb .mmp .snd .pic .cpk .blb | 
 [other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
 [other/modiMODVoice](https://discmaster.textfiles.com/search?formatid=modiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
@@ -3006,6 +3008,7 @@ Family/Format | Name | Extensions | Notes
 [other/worldMachineDocument](https://discmaster.textfiles.com/search?formatid=worldMachineDocument) | WorldMachine document | .tmd | 
 [other/wreckinCrewLevelMap](https://discmaster.textfiles.com/search?formatid=wreckinCrewLevelMap) | Wreckin Crew level Map | .map | 
 [other/wsusPatchStorageFile](https://discmaster.textfiles.com/search?formatid=wsusPatchStorageFile) | WSUS Patch Storage File | .psf .p | 
+[other/xMotorRacingTextures](https://discmaster.textfiles.com/search?formatid=xMotorRacingTextures) | X Motor Racing textures | .trc .pnt .shd | 
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?formatid=xCADModifierTable) | X-CAD Modifier Table | .obj | 
 [other/xCADOverlay](https://discmaster.textfiles.com/search?formatid=xCADOverlay) | X-CAD Overlay |  | 
 [other/xCADPatternFill](https://discmaster.textfiles.com/search?formatid=xCADPatternFill) | X-CAD Pattern Fill | .ptf | 

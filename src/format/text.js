@@ -488,6 +488,7 @@ export default
 		gentooLinuxEbuild                          : {name : "Gentoo Linux ebuild", ext : [".ebuild"], magic : ["Gentoo Linux ebuild package", /^Gentoo ebuild/], weakMagic : true},
 		gerber                                     : {name : "Gerber", ext : [".gbr", ".gbx", ".gb"], magic : ["Gerber format", "application/vnd.gerber", /^fmt\/664( |$)/], weakMagic : true},
 		gerberArtwork                              : {name : "Gerber artwork", ext : [".art"], magic : ["Gerber artwork"]},
+		gimpCurveFile                              : {name : "GIMP curve file", magic : ["GIMP curve file, ASCII text"]},
 		gimpDynamics                               : {name : "GIMP Dynamics", ext : [".gdyn"], magic : ["GIMP Dynamics"]},
 		gimpParametricBrush                        : {name : "GIMP parametric Brush", ext : [".vbr"], magic : ["GIMP parametric Brush"]},
 		gimpToolPreset                             : {name : "GIMP Tool Preset", ext : [".gtp"], magic : ["GIMP Tool Preset"]},

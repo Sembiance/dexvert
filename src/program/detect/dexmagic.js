@@ -185,6 +185,9 @@ const DEXMAGIC_CHECKS =
 	"Quake Model"           : [{offset : 0, match : "IDPO"}, {offset : 4, match : [0x06]}],
 	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
 
+	// text
+	"Gentoo ebuild" : [{offset : 0, match : "EAPI="}],
+
 	// video
 	"Adeline XCF Video"                        : [{offset : 0, match : "FrameLen"}],
 	"AVF Video (old)"                          : [{offset : 0, match : "ALG"}],

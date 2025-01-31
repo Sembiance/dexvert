@@ -3,6 +3,7 @@ import {programs, init as initPrograms} from "../src/program/programs.js";
 await initPrograms();
 
 console.log("Follow ipmi.txt and bios.txt to connect and get the server booting from my custom gentooInstall ISO");
+console.log("Follow gentoo_install.txt to assign an IP address and get networking working");
 console.log("Install gentoo with: gentooInstall --phase=2 --withX --withQEMU --withNode --withSound --gateway=<gateway> <ip> <hostname>");
 console.log("Run the following as root on a fresh Gentoo system to be able to run dexvert:\n");
 

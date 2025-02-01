@@ -18,6 +18,7 @@ export default
 		airWarriorCameraReplay              : {name : "Air Warrior Camera replay", magic : ["Air Warrior Camera replay"]},
 		apacheMissionData                   : {name : "Apache mission Data", ext : [".dta"], magic : ["Apache mission Data"]},
 		battlefield2MapDescription          : {name : "Battlefield 2 map Description", ext : [".desc"], magic : ["Battlefield 2 map Description"], weakMagic : true},
+		beyondAtlantisSaveGame              : {name : "Beyond Atlantis save game", ext : [".sav"], magic : ["Beyond Atlantis I/II save game"], weakMagic : true},
 		callOfDutyWeaponsData               : {name : "Call Of Duty weapons data", magic : ["Call Of Duty weapons data"]},
 		corewarProgram                      : {name : "COREWAR program", ext : [".prg"], magic : ["COREWAR program"], weakMagic : true},
 		crosswordCreatorPuzzle              : {name : "Crossword Creator Puzzle", ext : [".puz"], magic : ["Crossword Creator Puzzle"]},

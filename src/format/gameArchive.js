@@ -44,6 +44,7 @@ export const gameextractor =
 		lookingGlassGameArchive            : {name : "Looking Glass Game Archive", ext : [".res"], magic : ["Looking Glass Resource data", "LG Archiv gefunden"]},
 		lucasArtsGameArchive               : {name : "Lucas Arts Game Archive", ext : [".gob"], magic : ["LucasArts Game data archive", "Dark Forces Game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="DATA" && ["dRfO", "PPUP"].includes(macFileCreator)},
 		madsHAGGameArchive                 : {name : "MADS HAG Game Archive", ext : [".hag"], magic : ["MADS HAG game data archive"]},
+		mallTycoonGameDataArchive          : {name : "Mall Tycoon game data archive", ext : [".muk"], magic : ["Mall Tycoon game data archive"], weakMagic : true},
 		meyerGlassGameArchive              : {name : "Meyer/Glass Interactive Game Archive", ext : [".mgf"], magic : ["Meyer/Glass Interactive game data Format"]},
 		mpakGameDataArchive                : {name : "MPAK game data archive", ext : [".mpak"], magic : ["MPAK game data archive"]},
 		nascarHeatGameArchive              : {name : "NASCAR Heat game archive", ext : [".trk", ".car"], magic : ["NASCAR Heat game data archive"]},

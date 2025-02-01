@@ -1,4 +1,4 @@
-# Supported File Formats (2,935)
+# Supported File Formats (2,936)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1971,7 +1971,7 @@ poly | [Neutral File Format](http://fileformats.archiveteam.org/wiki/NFF) | .nff
 poly | OGRE Mesh | .mesh.xml .mesh | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/ogreMesh/)
 poly | [Open Game Engine Exchance](https://opengex.org/) | .ogex | [assimp](https://github.com/assimp/assimp) | [6 sample files](https://sembiance.com/fileFormatSamples/poly/openGEX/)
 poly | [Playstation 2 Save Icon Model](https://www.ps2savetools.com/documents/iconsys-format/) | .sys | [ico2gltf](https://github.com/MightyDuke/ico2gltf) | [2 sample files](https://sembiance.com/fileFormatSamples/poly/ps2SaveIconModel/)
-poly | [Polygon File Format](http://fileformats.archiveteam.org/wiki/PLY) | .ply | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [polyTrans64](https://www.okino.com/conv/conv.htm) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/polygonFileFormat/)
+poly | [Polygon File Format](http://fileformats.archiveteam.org/wiki/PLY) | .ply | [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/polygonFileFormat/)
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/quake2Model/)
 poly | [Quake 3 Model](http://fileformats.archiveteam.org/wiki/MD3) | .md3 | [assimp](https://github.com/assimp/assimp) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/quake3Model/)
 poly | Quake II Map | .bsp | [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [16 sample files](https://sembiance.com/fileFormatSamples/poly/quake2Map/)
@@ -1999,7 +1999,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (899)
+## Text (900)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2408,7 +2408,7 @@ text | [LightWave Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene
 text | LilyPond music score | .ly .ily |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lilyPondMusicScore/)
 text | Lingo Script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lingoScript/)
 text | Linux kernel symbol map |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxKernelSymbolMap/)
-text | Linux LiveCD info | .diskdefines |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/linuxLiveCDInfo/)
+text | Linux LiveCD info | .diskdefines |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/linuxLiveCDInfo/)
 text | Linux make config build |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxMakeConfig/)
 text | Linux Software Map entry | .lsm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/linuxSoftwareMapEntry/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unixShellScript/)
@@ -2529,7 +2529,7 @@ text | Opticks Lamp | .lmp |  | [4 sample files](https://sembiance.com/fileForma
 text | Opticks Object | .obj |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/opticksObject/)
 text | Opticks Scene | .sce .bak |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/opticksScene/)
 text | Opticks Surface | .srf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/opticksSurface/)
-text | OrangeCD theme | .dax |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/orangeCDTheme/)
+text | OrangeCD theme | .dax |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/orangeCDTheme/)
 text | Orbiter mesh | .msh |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/orbiterMesh/)
 text | Orbiter scenario | .scn |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/orbiterScenario/)
 text | ORIGIN System Checksum | .chk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/originSystemChecksum/)
@@ -2645,7 +2645,7 @@ text | Quartus Setting File | .qsf |  | [4 sample files](https://sembiance.com/f
 text | Qucs schematic | .sch .dpl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/qucsSchematic/)
 text | Quicken Interchange Format | .qif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickenInterchangeFormat/)
 text | QuickMenu Menu | .inf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/quickMenuMenu/)
-text | QuickSFV checksum | .sfv |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/quickSFVChecksum/)
+text | QuickSFV checksum | .sfv |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/quickSFVChecksum/)
 text | QuickTime Text subtitles |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/quickTimeTextSubtitles/)
 text | QuizPro Quiz data | .qzs .qzd .qze |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quizProQuizData/)
 text | R documentation | .rd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rDocumentation/)
@@ -2660,6 +2660,7 @@ text | Receiver Independent Exchange Format | .rxo |  | [3 sample files](https:/
 text | Redcode source | .red |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/redcodeSource/)
 text | ReDIF template | .rdf .redif |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/reDIFTemplate/)
 text | Reflections/Monzoom script | .skr .men |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/reflectionsMonzoomScript/)
+text | RegCleaner Language File | .rlg |  | 
 text | RemObjects Definition Language | .rodl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/remObjectsDefinitionLanguage/)
 text | RemoteKeys profile | .rkp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/remoteKeysProfile/)
 text | Renderize Project | .bin .eye |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/renderizeProject/)

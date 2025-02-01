@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,134)
+# Unsupported File Formats (3,137)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1046,7 +1046,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,000)
+## Other (2,003)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1646,6 +1646,7 @@ Family/Format | Name | Extensions | Notes
 [other/eclipseImage](https://discmaster.textfiles.com/search?formatid=eclipseImage) | Eclipse Image | .img | 
 [other/eclipseTutorial](https://discmaster.textfiles.com/search?formatid=eclipseTutorial) | Eclipse Tutorial | .tut | 
 [other/ecxModule](https://discmaster.textfiles.com/search?formatid=ecxModule) | ECX module | .m | 
+[other/egoEngineTextures](https://discmaster.textfiles.com/search?formatid=egoEngineTextures) | EGO Engine Textures | .pssg | 
 [other/egsSpectraPaintStencil](https://discmaster.textfiles.com/search?formatid=egsSpectraPaintStencil) | EGS-SpectraPaint Stencil | .stencil | 
 [other/eicarAntivirusTestFile](https://discmaster.textfiles.com/search?formatid=eicarAntivirusTestFile) | EICAR antivirus test file | .com | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?formatid=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
@@ -2053,6 +2054,7 @@ Family/Format | Name | Extensions | Notes
 [other/machOM68kObject](https://discmaster.textfiles.com/search?formatid=machOM68kObject) | Mach-O m68k Object | .o | 
 [other/machOObject](https://discmaster.textfiles.com/search?formatid=machOObject) | Mach-O Object | .o | 
 [other/machOSparcObject](https://discmaster.textfiles.com/search?formatid=machOSparcObject) | Mach-O SPARC Object | .o | 
+[other/macroExpressMacro](https://discmaster.textfiles.com/search?formatid=macroExpressMacro) | Macro Express Macro | .mex | 
 [other/macromediaFlashColorTableFile](https://discmaster.textfiles.com/search?formatid=macromediaFlashColorTableFile) | Macromedia Flash Color Table File | .clr | 
 [other/macromediaXtraCache](https://discmaster.textfiles.com/search?formatid=macromediaXtraCache) | Macromedia Xtra Cache | .mch | 
 [other/madden2004DataFile](https://discmaster.textfiles.com/search?formatid=madden2004DataFile) | Madden 2004 data file | .dat | 
@@ -2719,6 +2721,7 @@ Family/Format | Name | Extensions | Notes
 [other/superProjectExpertProject](https://discmaster.textfiles.com/search?formatid=superProjectExpertProject) | SuperProject Expert Project | .pj | 
 [other/superProjectGraphicsDrivers](https://discmaster.textfiles.com/search?formatid=superProjectGraphicsDrivers) | SuperProject graphics drivers | .dat | 
 [other/superscapeDo3DTemplate](https://discmaster.textfiles.com/search?formatid=superscapeDo3DTemplate) | Superscape Do 3D Template | .vrt | 
+[other/surfsUpGameDataArchive](https://discmaster.textfiles.com/search?formatid=surfsUpGameDataArchive) | Surf's Up game data archive | .bin | 
 [other/surrealSoftwareGameArchive](https://discmaster.textfiles.com/search?formatid=surrealSoftwareGameArchive) | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | 
 [other/swishEIndex](https://discmaster.textfiles.com/search?formatid=swishEIndex) | Swish-e index | .swi | 
 [other/symantecInternetToolsData](https://discmaster.textfiles.com/search?formatid=symantecInternetToolsData) | Symantec Internet Tools Data | .ve2 .vep | 

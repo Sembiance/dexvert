@@ -30,7 +30,7 @@ export class pageMaker7QuarkConverter extends Program
 			SendSlow("{TAB}{ENTER}")
 
 			; It doesn't open a window, so check for the Converting text
-			WaitForControl($mainWindow, "", "[CLASS:Static; TEXT:Converting  1 of 1]", 5)
+			WaitForControl($mainWindow, "", "[CLASS:Static; TEXT:Converting  1 of 1]", ${xu.SECOND*5})
 
 			Func WaitForFinish()
 				If ControlGetHandle($mainWindow, "", "[CLASS:Static; TEXT:Converting  1 of 1]") = 0 Then

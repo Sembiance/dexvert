@@ -9,6 +9,9 @@ export class xdgMime extends Program
 	bin     = "xdg-mime";
 	loc     = "local";
 
+	// FAILURE NOTE: In Jan 2025, Gentoo updated xdg-utils to make the 'perl' flag optional which cause it not to install dev-perl/File-MimeInfo (mimetype command) which then caused xdg-mime to not identify some files such as: test/sample/text/advancedStreamRedirector/beck.asx
+	// I added +perl to my package.use dexvert file and that fixes it, but making a note here just in case something similar happens in the future
+	// I think this is because the /usr/share/mime/* files change when that perl package is installed that causes xdg-mime (and also mimetype command) to properly pick up different file types
 	pre = async r =>
 	{
 		// xdg-mime will match against file extension which would be BAD since that would mean extensions get converted to stronger 'magic', so we copy it to a tmp file (with a random.tmp name) and run trid against that

@@ -742,6 +742,7 @@ export default
 		receiverIndependentExchangeFormat          : {name : "Receiver Independent Exchange Format", ext : [".rxo"], magic : ["Receiver Independent Exchange Format"]},
 		reflectionsMonzoomScript                   : {name : "Reflections/Monzoom script", ext : [".skr", ".men"], magic : ["Reflections/Monzoom script"]},
 		reg                                        : {name : "Windows Registry Data", website : "http://fileformats.archiveteam.org/wiki/Windows_Registry", ext : [".reg", ".dat"], magic : [/^Windows Registry ((little|big)-endian )?(Data|text)/, "text/x-ms-regedit", "Windows Registry Datei", "MS Windows 95/98/ME registry file", "Format: Registry file"]},
+		regCleanerLanguageFile                     : {name : "RegCleaner Language File", ext : [".rlg"], magic : ["RegCleaner v4.3 Language File"]},
 		remoteKeysProfile                          : {name : "RemoteKeys profile", ext : [".rkp"], magic : ["RemoteKeys profile"]},
 		renderizeProject                           : {name : "Renderize Project", ext : [".bin", ".eye"], magic : ["Renderize Project", "Renderize Live project"]},
 		rendermanCompiledShaderObject              : {name : "Renderman compiled Shader object", ext : [".slo"], magic : ["Renderman compiled Shader object"], idMeta : ({macFileType, macFileCreator}) => macFileType==="RSLO" && ["RINI", "RSHD"].includes(macFileCreator)},

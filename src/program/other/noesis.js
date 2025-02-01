@@ -35,12 +35,18 @@ export class noesis extends Program
 	args   = r => [r.inFile()];
 	osData = r => ({
 		script : `
+			; Some files like poly/polygonFileFormat/example1.ply cause noesis to crash
+			; Unfortunately despite LOTS of time trying to get this failure dection to work within the WaitForFileToLoad function, I failed
+			; Thus this is the best we can do. Also note I tride WindowFailure() with a 5 second timeout, but that also failed, so weird.
+			Sleep(3000)
+			WindowFailure("Noesis", "Close the program", -1, "{ESCAPE}")
+
 			Func WaitForFileToLoad()
 				$statusBarText = WinGetText("Noesis")
 				$statusBarTextTrimmed = StringStripWS($statusBarText, 7)
 				return StringLen($statusBarTextTrimmed) > 0
 			EndFunc
-			CallUntil("WaitForFileToLoad", ${xu.SECOND*30})
+			CallUntil("WaitForFileToLoad", ${xu.SECOND*25})
 
 			Func WaitForMainWindow()
 				WindowDismiss("Open", "", "{ESCAPE}")

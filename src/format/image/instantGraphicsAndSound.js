@@ -6,7 +6,7 @@ import {fileUtil} from "xutil";
 export class instantGraphicsAndSound extends Format
 {
 	name        = "Instant Graphics and Sound";
-	website     = "http://fileformats.archiveteam.org/wiki/IGS";
+	website     = "http://fileformats.archiveteam.org/wiki/Instant_Graphics_and_Sound";
 	ext         = [".igs", ".ig", ".igm"];
 	magic       = ["Instant Graphics and Sound", ...TEXT_MAGIC];
 	weakMagic   = true;

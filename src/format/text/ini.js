@@ -29,7 +29,7 @@ export class ini extends Format
 		"NLMSX machine configuration", "FL Studio Speech Preset", "FL Studio Dashboard component Initializaton", "Zero-X Color scheme", "FL Keys Initialization", "SkyOS Installation File", "Logitech MouseWare Web browser buttons Mapping", "ASTRA Report Profile",
 		"Windows PROTOCOL.INI", "FL Studio DrumSynth Preset (v2.x)", "jalbum image info", "MASH script", "Micrografx Media Manager Easy Catalog", "Eagle preferences", "WinAPE Profile", "Affymetrix Probe Results (Text)", "JTAG Chain Information",
 		"Affymetrix Chip Definition File (Text)", "CANopen Electronic Data Sheet", "Trend Micro Internet Security Tasks", "MMCDDA Audio CD track descriptor", "MinGW Developer Studio Project", "Phase3 Project (v2.x)", "Private Wars 3D Object",
-		"ASTRA Report Profile", "Android Trash storage metadata",
+		"ASTRA Report Profile", "Android Trash storage metadata", "Gerber CAM Processor job", /^Windows boot.ini, ASCII text/, "Windows Boot Loarder information", "Spider MacroCode Data",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

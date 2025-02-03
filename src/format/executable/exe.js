@@ -7,7 +7,7 @@ const _INSTALLER_MAGICS = [
 	// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
 	"InstallShield setup", "Wise Installer executable",
 
-	"Win16 EDI Install Pro executable", "Win16 InstallShield Self-Extracting Executable", "Easy SFX Installer 16-bit DOS executable", "JRchive self-extracting 16bit DOS executable",
+	"Win16 EDI Install Pro executable", "Win16 InstallShield Self-Extracting Executable", "Easy SFX Installer 16-bit DOS executable", "JRchive self-extracting 16bit DOS executable", "aPackage sfx archiver Win32 executable",
 
 	"Installer: Gentee Installer", "Installer: Eschalon Installer", "Installer: AOLSetup", "Installer: Pantaray QSetup", "Installer: STATICSUP", "Installer: O'Setup95", "Installer: Setup Factory", "Installer: Tarma Installer", "Installer: InstallUs",
 	"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "Installer: CSDD's installer", "Installer: RNsetup",
@@ -15,7 +15,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer", "Installer: Blizzard PrePatch(2.xx)", "Installer: Box Stub", "Installer: WiX Toolset installer", "Installer: BitRock Installer", "Installer: Tarma InstallMate",
 	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: Bytessence Install Maker", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer", "Installer: Actual Installer",
 	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
-	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system",
+	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey",
 	
 	/^Installer: Wise Installer$/, /^NSIS$/
 ];

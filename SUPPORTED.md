@@ -1,4 +1,4 @@
-# Supported File Formats (2,938)
+# Supported File Formats (2,940)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -84,7 +84,7 @@ archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .
 archive | CEBE Compress Expand Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/cebeCompressExpandPacked/)
 archive | Chasm Game Archive | .bin | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/chasmGameArchive/)
 archive | Cheat Packer Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/cheatPackerPacked/)
-archive | [ChiefLZ LZA Archive](http://fileformats.archiveteam.org/wiki/ChiefLZ) | .lza .lzz | [lzaArchive](https://www.sac.sk/download/pack/lza101.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/chiefLZArchive/)
+archive | [ChiefLZ LZA Archive](http://fileformats.archiveteam.org/wiki/ChiefLZ) | .lza .lzz | [lzaArchive](https://www.sac.sk/download/pack/lza101.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/chiefLZArchive/)
 archive | [ChiefLZ LZA Compressed](http://fileformats.archiveteam.org/wiki/ChiefLZ) | _ | [lza](https://www.sac.sk/download/pack/lza101.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/chiefLZ/)
 archive | CI GAMES game data archive | .dpk | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/ciGAMESGameDataArchive/)
 archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/cso/)
@@ -548,7 +548,7 @@ audio | [TrueAudio Lossless Audio](https://wiki.hydrogenaud.io/index.php?title=T
 audio | [Turtle Beach Sample Vision Audio](http://fileformats.archiveteam.org/wiki/Sample_Vision) | .smp | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sampleVision/)
 audio | Ubisoft Rayman 2 APM | .apm | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/ubisoftRayman2APM/)
 audio | VirtualDJ audio Sample | .vdj | [vgmstream](https://github.com/vgmstream/vgmstream) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/virtualDJAudioSample/)
-audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/)
+audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav .bwf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [27 sample files](https://sembiance.com/fileFormatSamples/audio/wav/)
 audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
@@ -2000,7 +2000,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (901)
+## Text (903)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2202,6 +2202,7 @@ text | DosCapture video card Modes info | .mod |  | [10 sample files](https://se
 text | Doxygen configuration settings | .cfg |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/doxygenConfigurationSettings/)
 text | dtread Type Descriptor | .dtyp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dtreadTypeDescriptor/)
 text | Dynamic Publisher Text | .txt |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/dynamicPublisherText/)
+text | EAGLE Design Rules | .dru |  | 
 text | EASIGRAF Graph Parameters | .grp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/easigrafGraphParameters/)
 text | Easy SFV Creator checksum | .sfv |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/easySFVCreatorChecksum/)
 text | EasyBase data base |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/easyBaseDataBase/)
@@ -2243,7 +2244,7 @@ text | ExpressGraph Graph | .grf |  | [12 sample files](https://sembiance.com/fi
 text | Expression Design drawing | .xpr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/expressionDesignDrawing/)
 text | Expression Design Item List | .itl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/expressionDesignItemList/)
 text | Expression Strokes | .sks |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/expressionStrokes/)
-text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
+text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
 text | EZ-EDS Electronic Data Sheet | .eds |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ezEDSElectronicDataSheet/)
 text | FAR help | .hlf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/farHelp/)
 text | FastBack Plus setup | .fb |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fastBackPlusSetup/)
@@ -2414,7 +2415,7 @@ text | Linux LiveCD info | .diskdefines |  | [8 sample files](https://sembiance.
 text | Linux make config build |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxMakeConfig/)
 text | Linux Software Map entry | .lsm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/linuxSoftwareMapEntry/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unixShellScript/)
-text | LIRC infrared codes config file | .cf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/lircInfraredCodesConfigFile/)
+text | LIRC infrared codes config file | .cf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/lircInfraredCodesConfigFile/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/LISP) | .lsp |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/lisp/)
 text | Look and Feel screen | .lnf .oak |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lookAndFeelScreen/)
 text | Lotus Works Document | .doc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lotusWorksDocument/)
@@ -2540,9 +2541,9 @@ text | OS/2 install Package | .pkg |  | [13 sample files](https://sembiance.com/
 text | OS/2 Network Information File | .nif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/os2NetworkInformationFile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .rexx .rex |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rexx/)
 text | OVA Manifest | .mf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ovaManifest/)
-text | OziExplorer Map data | .map |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerMapData/)
-text | OziExplorer track file | .plt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
-text | OziExplorer Waypoint | .wpt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerWaypoint/)
+text | OziExplorer Map data | .map |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerMapData/)
+text | OziExplorer track file | .plt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
+text | OziExplorer Waypoint | .wpt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerWaypoint/)
 text | Pacific C Compiler Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pacificCCompilerProject/)
 text | PageRender3D facet/object | .facet |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DFacetObject/)
 text | PageRender3D Script | .script |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DScript/)
@@ -2634,6 +2635,7 @@ text | PV3D Value data | .val |  | [4 sample files](https://sembiance.com/fileFo
 text | Python egg package info | .egg-info |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pythonEggPackageInfo/)
 text | [Python Source](http://fileformats.archiveteam.org/wiki/Python) | .py |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/pythonSource/)
 text | QAPlus Keyboard Map | .kbd |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/qaPlusKeyboardMap/)
+text | Qimage Filter | .flt |  | 
 text | [QRT Ray Tracer scene description](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_scene_description) | .qrt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qrtRayTracerSceneDescription/)
 text | Qt Assistant Content File | .dcf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/qtAssistantContentFile/)
 text | Qt Resource Collection file | .qrc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/qtResourceCollectionFile/)
@@ -2838,7 +2840,7 @@ text | Watcom C/C++ Project | .wpj |  | [16 sample files](https://sembiance.com/
 text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/watcomCTarget/)
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
-text | WDDX packet |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
+text | WDDX packet |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
 text | Web browser cookies | .txt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
 text | Web Video Text Tracks | .vtt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)

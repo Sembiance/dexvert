@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,139)
+# Unsupported File Formats (3,150)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -685,7 +685,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (185)
+## Image (186)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -734,6 +734,7 @@ Family/Format | Name | Extensions | Notes
 [image/corel10Texture](https://discmaster.textfiles.com/search?formatid=corel10Texture) | Corel 10 Texture | .tex | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?formatid=crayolaArtStudio) | Crayola Art Studio | .art | 
 [image/croteamTextureFile](https://discmaster.textfiles.com/search?formatid=croteamTextureFile) | Croteam texture file | .tex .tbn | 
+[image/dataCADDrawing](https://discmaster.textfiles.com/search?formatid=dataCADDrawing) | DataCAD Drawing | .dc5 | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?formatid=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
 [image/desiIIIDrawing](https://discmaster.textfiles.com/search?formatid=desiIIIDrawing) | DESI-III drawing | .bin .din | 
 [image/designWorks](https://discmaster.textfiles.com/search?formatid=designWorks) | DesignWorks Drawing |  | [2 sample files](https://sembiance.com/fileFormatSamples/image/designWorks/)
@@ -774,7 +775,7 @@ Family/Format | Name | Extensions | Notes
 [image/imageKnifeRawBitmap](https://discmaster.textfiles.com/search?formatid=imageKnifeRawBitmap) | ImageKnife Raw bitmap | .raw | 
 [image/imagineTexture](https://discmaster.textfiles.com/search?formatid=imagineTexture) | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
 [image/inAVisionDrawing](https://discmaster.textfiles.com/search?formatid=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/) - In-a-Vision and the Micrografx Windows Convet program (both on winworld) are both Windows 1.x/2.x programs that don't work in Win2k. Not aware of anything else that can convert these, as Micrografx Designer 4 does not.
-[image/instantGraphicsAndSound](https://discmaster.textfiles.com/search?formatid=instantGraphicsAndSound) | [Instant Graphics and Sound](http://fileformats.archiveteam.org/wiki/IGS) | .igs .ig .igm | [12 sample files](https://sembiance.com/fileFormatSamples/image/instantGraphicsAndSound/) - No known converter yet. Seen a recent resurgence in interest in 2024
+[image/instantGraphicsAndSound](https://discmaster.textfiles.com/search?formatid=instantGraphicsAndSound) | [Instant Graphics and Sound](http://fileformats.archiveteam.org/wiki/Instant_Graphics_and_Sound) | .igs .ig .igm | [12 sample files](https://sembiance.com/fileFormatSamples/image/instantGraphicsAndSound/) - No known converter yet. Seen a recent resurgence in interest in 2024
 [image/intergraphRasterImage](https://discmaster.textfiles.com/search?formatid=intergraphRasterImage) | Intergraph Raster Image | .rgb | 
 [image/introCAD](https://discmaster.textfiles.com/search?formatid=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?formatid=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
@@ -1046,7 +1047,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,004)
+## Other (2,014)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1086,6 +1087,7 @@ Family/Format | Name | Extensions | Notes
 [other/aSquaredAntiMalwareChecksum](https://discmaster.textfiles.com/search?formatid=aSquaredAntiMalwareChecksum) | a-squared Anti-Malware checksum for signatures files | .trc | 
 [other/aSquaredAntiMalwareSignature](https://discmaster.textfiles.com/search?formatid=aSquaredAntiMalwareSignature) | a-squared Anti-Malware signature | .sig | 
 [other/aeSGMLDocumentBinary](https://discmaster.textfiles.com/search?formatid=aeSGMLDocumentBinary) | A/E SGML DocumentBinary | .ae | 
+[other/abbyyFinereaderLanguageData](https://discmaster.textfiles.com/search?formatid=abbyyFinereaderLanguageData) | ABBYY Finereader language data | .amt | 
 [other/abbyLingvoDictionary](https://discmaster.textfiles.com/search?formatid=abbyLingvoDictionary) | ABBYY Lingvo dictionary | .dic .lsd | 
 [other/abcFlowCharterShapesPalette](https://discmaster.textfiles.com/search?formatid=abcFlowCharterShapesPalette) | ABC FlowCharter shapes Palette | .afp | 
 [other/abcFlowCharterTemplate](https://discmaster.textfiles.com/search?formatid=abcFlowCharterTemplate) | ABC FlowCharter Template | .aft | 
@@ -1437,6 +1439,7 @@ Family/Format | Name | Extensions | Notes
 [other/clamAntivirusByteCodeSignatures](https://discmaster.textfiles.com/search?formatid=clamAntivirusByteCodeSignatures) | Clam Antivirus ByteCode signatures | .cbc | 
 [other/clarisWorksPaletteFiles](https://discmaster.textfiles.com/search?formatid=clarisWorksPaletteFiles) | Claris Works palette files | .pl .plt | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?formatid=clariSSAPreferences) | ClariSSA preferences |  | 
+[other/clarisWorksLibrary](https://discmaster.textfiles.com/search?formatid=clarisWorksLibrary) | ClarisWorks Library | .cwl | 
 [other/clawCustomLevel](https://discmaster.textfiles.com/search?formatid=clawCustomLevel) | Claw custom level | .wwd | 
 [other/clickOnceCompiledManifest](https://discmaster.textfiles.com/search?formatid=clickOnceCompiledManifest) | ClickOnce Compiled Manifest | .cdf-ms | 
 [other/clipGalleryDownloadPackage](https://discmaster.textfiles.com/search?formatid=clipGalleryDownloadPackage) | Clip Gallery Download Package | .cil | 
@@ -1881,6 +1884,7 @@ Family/Format | Name | Extensions | Notes
 [other/icyTowerReplay](https://discmaster.textfiles.com/search?formatid=icyTowerReplay) | Icy Tower Replay | .itr | 
 [other/idaSerialKey](https://discmaster.textfiles.com/search?formatid=idaSerialKey) | IDA serial key | .key | 
 [other/idaSignatures](https://discmaster.textfiles.com/search?formatid=idaSignatures) | IDA Signatures | .sig | 
+[other/idaTypeInformationList](https://discmaster.textfiles.com/search?formatid=idaTypeInformationList) | IDA Type Information List | .til | 
 [other/idMASConfiguration](https://discmaster.textfiles.com/search?formatid=idMASConfiguration) | idMAS Configuration | .cfg | 
 [other/iffBinaryPatch](https://discmaster.textfiles.com/search?formatid=iffBinaryPatch) | IFF Binary Patch | .pch .patch | 
 [other/iFFGeometryData](https://discmaster.textfiles.com/search?formatid=iFFGeometryData) | IFF Geometry Data | .dem | 
@@ -1961,6 +1965,7 @@ Family/Format | Name | Extensions | Notes
 [other/kasparovSGambitConfiguration](https://discmaster.textfiles.com/search?formatid=kasparovSGambitConfiguration) | Kasparov's Gambit Configuration | .cfg | 
 [other/kasperskyAntiVirusDatabase](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusDatabase) | Kaspersky Anti-virus data base | .avc | 
 [other/kasperskyAntiVirusSignatureBases](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusSignatureBases) | Kaspersky Anti-Virus signature bases | .kdc | 
+[other/kasperskyAntiVirusUpdateDiff](https://discmaster.textfiles.com/search?formatid=kasperskyAntiVirusUpdateDiff) | Kaspersky Anti-Virus update diff | .dif | 
 [other/kasperskyLabBlackListFile](https://discmaster.textfiles.com/search?formatid=kasperskyLabBlackListFile) | Kaspersky Lab black list file | .lst | 
 [other/kasperskyLabKeyFile](https://discmaster.textfiles.com/search?formatid=kasperskyLabKeyFile) | Kaspersky Lab Key file | .key | 
 [other/kbdMapFile](https://discmaster.textfiles.com/search?formatid=kbdMapFile) | kbd map file |  | 
@@ -2106,6 +2111,7 @@ Family/Format | Name | Extensions | Notes
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?formatid=mediaDescriptorFile) | Media Descriptor File | .mds | 
 [other/mediaShowProduction](https://discmaster.textfiles.com/search?formatid=mediaShowProduction) | MediaShow Production | .prod | 
 [other/megaCADLibrary](https://discmaster.textfiles.com/search?formatid=megaCADLibrary) | MegaCAD Library | .mtl | 
+[other/megaCADProject](https://discmaster.textfiles.com/search?formatid=megaCADProject) | MegaCAD Project | .prt .pr | 
 [other/megaPaintKeyboardLayout](https://discmaster.textfiles.com/search?formatid=megaPaintKeyboardLayout) | MegaPaint keyboard layout | .ttb | 
 [other/megaPaintPrinterDefinition](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDefinition) | MegaPaint Printer definition | .prt | 
 [other/megaPaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDriver) | MegaPaint Printer Driver | .trb | 
@@ -2225,6 +2231,7 @@ Family/Format | Name | Extensions | Notes
 [other/musicMatchJukeBoxVisualization](https://discmaster.textfiles.com/search?formatid=musicMatchJukeBoxVisualization) | MusicMatch JukeBox Visualization | .mvs | 
 [other/musikTrainerNotation](https://discmaster.textfiles.com/search?formatid=musikTrainerNotation) | Musik-Trainer Notation | .mtn | 
 [other/myFamilyTreeData](https://discmaster.textfiles.com/search?formatid=myFamilyTreeData) | My Family Tree data | .tre | 
+[other/myHouseFloorData](https://discmaster.textfiles.com/search?formatid=myHouseFloorData) | My House floor data |  | 
 [other/myBaseDatabase](https://discmaster.textfiles.com/search?formatid=myBaseDatabase) | myBase database | .nyf .ssgindex | 
 [other/myriadHarmonyMelodyAssistantMusic](https://discmaster.textfiles.com/search?formatid=myriadHarmonyMelodyAssistantMusic) | Myriad Harmony / Melody assistant music | .mus .myr | 
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?formatid=mySQLIndexFile) | MySQL Index | .myi | 
@@ -2478,6 +2485,8 @@ Family/Format | Name | Extensions | Notes
 [other/projectIGIResourceData](https://discmaster.textfiles.com/search?formatid=projectIGIResourceData) | Project IGI Resource data | .res | 
 [other/projectSpaceStationSavedMission](https://discmaster.textfiles.com/search?formatid=projectSpaceStationSavedMission) | Project: Space Station saved Mission | .msn | 
 [other/propellerheadSoftwareReasonSoundBank](https://discmaster.textfiles.com/search?formatid=propellerheadSoftwareReasonSoundBank) | Propellerhead Software Reason SoundBank | .rfl | 
+[other/protelPCBBinaryLibrary](https://discmaster.textfiles.com/search?formatid=protelPCBBinaryLibrary) | Protel PCB Binary Library |  | 
+[other/protelSchematicLibraryEditorBinaryFile](https://discmaster.textfiles.com/search?formatid=protelSchematicLibraryEditorBinaryFile) | Protel Schematic Library editor binary file |  | 
 [other/protextConfiguration](https://discmaster.textfiles.com/search?formatid=protextConfiguration) | Protext Configuration | .cfg | 
 [other/proximityTechLexicon](https://discmaster.textfiles.com/search?formatid=proximityTechLexicon) | Proximity Technology Lexicon/Thesaurus | .lex .ths | 
 [other/prsFormatResourceData](https://discmaster.textfiles.com/search?formatid=prsFormatResourceData) | PRS Format Resource Data | .prs | 
@@ -2640,6 +2649,7 @@ Family/Format | Name | Extensions | Notes
 [other/slimShowProject](https://discmaster.textfiles.com/search?formatid=slimShowProject) | Slim Show project | .s_ .ss | 
 [other/smartAddressAddressBook](https://discmaster.textfiles.com/search?formatid=smartAddressAddressBook) | Smart Address address book | .tpl .adr | 
 [other/smartAddressDiary](https://discmaster.textfiles.com/search?formatid=smartAddressDiary) | Smart Address Diary | .sdy | 
+[other/smartBootManagerBackupFile](https://discmaster.textfiles.com/search?formatid=smartBootManagerBackupFile) | Smart Boot Manager Backup File |  | 
 [other/smartDrawTemplate](https://discmaster.textfiles.com/search?formatid=smartDrawTemplate) | SmartDraw Template | .sdt .sdr | 
 [other/smartListToGoDatabase](https://discmaster.textfiles.com/search?formatid=smartListToGoDatabase) | SmartList To Go database | .pdb | 
 [other/snagItCapture](https://discmaster.textfiles.com/search?formatid=snagItCapture) | SnagIt capture | .snag | 
@@ -2935,6 +2945,7 @@ Family/Format | Name | Extensions | Notes
 [other/westAdventureConfiguration](https://discmaster.textfiles.com/search?formatid=westAdventureConfiguration) | West Adventure Configuration | .cfg | 
 [other/whackerTrackerAudioDriver](https://discmaster.textfiles.com/search?formatid=whackerTrackerAudioDriver) | Whacker Tracker audio Driver | .drv | 
 [other/whalesVoyageGraphic](https://discmaster.textfiles.com/search?formatid=whalesVoyageGraphic) | Whale's Voyage graphic | .brs | 
+[other/whatsUpGoldVirtualDevice](https://discmaster.textfiles.com/search?formatid=whatsUpGoldVirtualDevice) | WhatsUp Gold Virtual Device | .dse | 
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?formatid=whdLoadSlave) | WHDLoad Slave | .slave | 
 [other/whiteWolfProductionsPalette](https://discmaster.textfiles.com/search?formatid=whiteWolfProductionsPalette) | White Wolf Productions Palette | .pal | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?formatid=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 

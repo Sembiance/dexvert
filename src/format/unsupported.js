@@ -980,7 +980,6 @@ export default
 		cosmicBlobsModel                             : {name : "Cosmic Blobs model", ext : [".blob", ".asset"], magic : ["Cosmic Blobs model"]},
 		createAdventureGamesProject                  : {name : "Create Adventure Games Project", ext : [".cag"], magic : ["Create Adventure Games project"]},
 		crosswordPuzzle                              : {name : "Crossword Puzzle", ext : [".gpm"], magic : ["Crossword Puzzle"]},
-		crowdANIMGameDataFormat                      : {name : "CROWD ANIM game data format", ext : [".cwl"], magic : ["CROWD ANIM game data format"]},
 		cryoInteractiveGameData                      : {name : "Cryo Interactive game data", ext : [".3da", ".3dc", ".3dm", ".bf"], magic : ["Cryo Interactive game data", "Cryo Interactive gamedata"], weakMagic : true},
 		cryoS3DGameData                              : {name : "Cryo S3D game data", ext : [".s3d"], magic : ["Cryo S3D game data"], weakMagic : true},
 		cyberloreStudiosPlayboyGameMap               : {name : "Cyberlore Studios Playboy game map", ext : [".pb"], magic : ["Cyberlore Studios Playboy game map"]},

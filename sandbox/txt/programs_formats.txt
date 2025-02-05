@@ -18097,3 +18097,164 @@ skipped in dexvert (failed)
 	ARC2.0 container (*.arc)
 	Gamebryo KF (*.kf)
 	Gamebryo NIF (*.nif)
+
+
+
+
+>>> Game Viewer  (adopted to linux in dexvert/bin/gameViewerLinux)  plugins from: https://game-viewer.org/plugins.php
+Plugin Filename									Game Name												File Extensions
+---------------									---------												---------------
+1_year_hare                                     Year of the hare                                        *.scr,*.snd,*.res,*.dll,*.dat,*.flm,*.exe    
+12_chairs                                       12 chairs how it really was                             *.SID    12 chairs
+7_sins                                          7 Sins                                                  *.pak,*.rws    
+adventure_harry_evidence_for_underwear          Harry's adventures under the underwear                  *.res    
+agast                                           AGAST                                                   game.data    
+alcachofa_soft                                  Alcachofa Soft                                          *.alg    alg Images
+                                                                                                        *.an0    an0 Images
+                                                                                                        *.ani    ani Images
+                                                                                                        *.snd    snd Sound
+                                                                                                        *.svs    svs Images
+                                                                                                        *.vhs    vhs Images
+alcachofa_soft_2                                Alcachofa Soft 2                                        *.emc    
+arcade_lab                                      Arcade Lab                                              *.gfx    gfx Images
+awe_productions                                 AWE Productions                                         *.aca    aca Images
+                                                                                                        *.acg    acg Images
+                                                                                                        *.act    act Text
+                                                                                                        *.acv    acv Sound
+                                                                                                        *.bak    bak Images
+                                                                                                        *.bmp    bmp Images
+                                                                                                        *.css    css Text
+                                                                                                        *.gif    gif Images
+                                                                                                        *.ico    ico Images
+                                                                                                        *.jpg    jpg Images
+                                                                                                        *.mp3    mp3 Sound
+                                                                                                        *.psd    psd Images
+                                                                                                        *.raa    raa Images
+                                                                                                        *.rag    rag Images
+                                                                                                        *.rav    rav Sound
+                                                                                                        *.sbg    sbg Images
+                                                                                                        *.sbv    sbv Sound
+                                                                                                        *.tga    tga Images
+                                                                                                        *.txt    txt Text
+beavis_and_butt_head_do_u                       Beavis and Butt-Head Do U                               *.act,*.bg,*.fnt    
+beavis_and_butt_head_in_virtual_stupidity       Beavis and Butt-Head in Virtual Stupidity               *.000,*.vnm    
+blood_code                                      Blood Code                                              *.rpa    Blood Code Pack
+book_of_the_dead_lost_souls                     Book of dead souls                                      *.pak    
+br_pilots_2014                                  Brothers pilots version 2014-2015                       *.ico    ico Images
+                                                                                                        *.log    log Text
+                                                                                                        *.mp3    mp3 Sound
+                                                                                                        *.ogg    ogg Sound
+                                                                                                        *.png    png Images
+                                                                                                        *.tex    tex Images
+                                                                                                        *.tga    tga Images
+                                                                                                        *.txt    txt Text
+                                                                                                        *.wav    wav Sound
+bud_redhead                                     Bud Redhead The Time Chase                              *.gfx    gfx Images
+captain_pronin                                  Captain Pronin - one against all                        *.RMT    
+chukcha                                         Chukchi in a big city                                   *.npk    
+clue                                            Clue: Murder at Boddy Mansion                           *.a,*.res    
+cmyta                                           Troubles - revived dead                                 *.dat,*.res,*.spr    
+comulti_multimedia                              Comulti Multimedia                                      *.vfs,*.pak,*.txt    
+constructor_mediahouse                          Comics and cartoons designer from media house           *.lib    
+cottage_leopold                                 Dacha Cat Leopold, or Features of Mouse Hunting         00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,*.bas,*.flm    
+cpal2                                           Morozko: Adventure of Santa Claus, Ivan and Nastya      *.res    Morozko
+crazy_sacked                                    Crazy Sacked                                            *.ogd    
+crowd_anim_engine                               Crowd Anim Engine                                       *.zbm,*.cwl,*.cwd,*.cwp,*.dat,*.bdt,*.pck,*.inx,*.eog,*.gax,*.bmp,*.crp,*.psb    
+deadhunt                                        Deadhunt                                                *.idx,*.pk5    
+diamond_bird                                    Diamond Ptah                                            *.flt    
+dip_interactive                                 DIP Interactive                                         *.res    
+druuna_morbus_gravis                            Druuna Morbus Gravis                                    *.dat,*.imf    
+e_pie_entertainment                             E-Pie Entertainment                                     *.pck    
+eighth_voyage_of_sinbad_the_curse_karamogula    Eighth journey of Sinbad: Curse Karamogul               *.dat    
+elf_all_stars_datsui_jan                        Elf All Stars Datsui Jan                                *.arc    
+eugene_onegin                                   Evgeny Onegin                                           *.PAK    
+faberge_eggs                                    Faberge eggs. Adventure                                 *.zip    
+fools_for_lawlessness                           Ground for lawlessness                                  *.GMD    
+frogwares_pak                                   Frogwares pak                                           *.pak    Frogwares
+fuguriya                                        Fuguriya                                                BGM,DATA,MGD,MSD,SE,VOICE    
+golden_palace_in_search_of_the_golden_beetle    Golden Palace. In search of a golden beetle             *.dat,*.sd,*.ss,*.ira,*.res,*.cfg,*.ini,*.msk    
+green_green                                     Green Green                                             *.DAT,*.PCG    
+green_green_2_3                                 Green Green 2-3                                         *.ARC    
+grom                                            Grom                                                    *.pak,*.p01    
+gromada                                         Gromada                                                 *.res    
+hidden_dinosaures                               Hidden Dinosaures                                       *.CSA    
+hooligans                                       Hooligans                                               *.x13    
+legal_crime                                     Legal Crime                                             *.bmp       bmp Images
+                                                                                                        *.config    config Text
+                                                                                                        *.epi       epi Text
+                                                                                                        *.map       map Text
+                                                                                                        *.sce       sce Text
+                                                                                                        *.tile      tile Text
+                                                                                                        *.txt       txt Text
+                                                                                                        *.wav       wav Sound
+lost_paradise                                   Lost paradise                                           *.dat    
+lula                                            Lula                                                    *.tap,*.tgp,*.tvp,*.gfx,*.sfx,*.adh,*.ddf,*.old,*.taf,*.ta1,*.bak    
+neighbours                                      Neighbours from Hell                                    *.bnd    Neighbours Pack
+new_adventures_musketeers                       New adventures of musketeers                            *.atx     atx Text
+                                                                                                        *.bmp     bmp Images
+                                                                                                        *.dat     dat Text
+                                                                                                        *.mp3     mp3 Sound
+                                                                                                        *.spr     spr Images
+                                                                                                        *.tga     tga Images
+                                                                                                        *.txt     txt Text
+                                                                                                        *.wav     wav Sound
+                                                                                                        *.zspr    zspr Images
+new_russian_fairy_tales                         New Russian tales                                       *.png    png Images
+                                                                                                        *.spr    spr Images
+                                                                                                        *.tga    tga Images
+nine_prince                                     Nine princes of Amber                                   *.dir,npa.exe    Nine prince Pack
+on_the_trail_of_the_murderer                    In the wake of the killer                               *.002    002 Images
+                                                                                                        *.003    003 Images
+                                                                                                        *.005    005 Images
+                                                                                                        *.006    006 Images
+                                                                                                        *.010    010 Sound
+                                                                                                        *.011    011 Sound
+                                                                                                        *.chn    chn tex
+                                                                                                        *.dat    dat tex
+                                                                                                        *.drg    drg tex
+                                                                                                        *.fme    fme tex
+                                                                                                        *.gif    gif Images
+                                                                                                        *.jpg    jpg Images
+                                                                                                        *.lks    lks tex
+                                                                                                        *.obj    obj tex
+                                                                                                        txt      txt tex
+pacany                                          Boys do not cry                                         *.pac    Pacany Pack
+perfil_de_riesgo_casos_federales                Perfil de Riesgo. Casos Federales                       *.res    
+pink_panther                                    Pink Panther                                            *.orb    
+prominence                                      Prominence                                              *.res    
+reportage                                       Reportage                                               *.anm    anm Sound
+                                                                                                        *.sfx    sfx Images
+sabotain                                        Sabotage - Break the Rules                              *.sab    Sabotain: Break the Rules
+sakura_wars                                     Sakura Wars                                             *.spr,*.bin,*.tab    
+sh_awakened                                     Sherlock Holmes: The Awakened                           *.img,*.dat,*.snd    
+shards_of_infinity                              Shards of Infinity                                      *.xpack    
+shtirliz_oa                                     Shtyrlitz: Opening America                              *.res,MP.DLL    
+sin                                             SiN                                                     *.sin    
+step_creative_group                             Step Creative Group                                     *.bpk    
+sting                                           The Sting!                                              *.wld,*.exe    
+syberia                                         Syberia                                                 *.mp3    MP3 Sound
+                                                                                                        *.syj    SYJ Images
+                                                                                                        *.wav    WAV Sound
+tales_birch_bark                                Fairy tales on birch bark: walking for distant lands    *.000    
+the_lost_paradise                               Lost islands                                            *.pak    
+the_mystery_of_the_third_planet                 The secret of the third planet                          *.carc,LData    
+the_sec_rep                                     The Second Reproduction                                 *.nsa    The Second Reproduction Pack
+the_simpsons_virtual_springfield                The Simpsons Virtual Springfield                        *.vs3    vs3 Images
+                                                                                                        *.vsa    vsa Images
+                                                                                                        *.vsb    vsb Images
+three_heroes                                    Three heroes or a very terrible fairy tale              *.dat    DAT Game Pack
+tonny                                           Tonny                                                   *.mpr,*.vdb    Tonny Pack
+torrente_el_juego                               Torrente: El Juego                                      *.jpg    jpg Images
+                                                                                                        *.rut    rut Text
+                                                                                                        *.tex    tex Images
+                                                                                                        *.wav    wav Sound
+treasure_island                                 Treasure Island                                         *.dat    
+trickster_games                                 Trickster Games                                         *.pak,*.vid    
+trickster_games_2                               Trickster Games 2                                       *.toc,*.ogg,*.ogm    
+vlyapli                                         Pillowed!                                               *.alp,*.sca,*.scn,*.scp    
+voodoo_kid                                      Voodoo Kid                                              *.kid    
+watchmaker                                      Watchmaker                                              *.wm    
+will_co_engine                                  Will Co. Engine                                         *.arc    
+will_co_engine_2                                Will Co. Engine 2                                       *.arc    
+yuka                                            Yuka                                                    *.ykc    
+zanzarah                                        Zanzarah The Hidden Portal                              *.pak,*.bcf

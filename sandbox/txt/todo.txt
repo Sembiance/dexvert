@@ -79,22 +79,6 @@
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
-* Adopt Game-Viewer program (try in win2k, otherwise probably win7): https://game-viewer.org/download.php
-  Use it with plugins: https://game-viewer.org/plugin.php?id=90
-  To view resources (Retro64 / ArcadeLab game graphics data) *.gfx:
-  	https://dev.discmaster2.textfiles.com/browse/11205/Gamer%20Collector%203:%20Action.iso/FUGA_192/data/plate-forme/Gold%20Miner%20Joe/GoldMiner.exe/%23setuppath%23/Graphics
-	https://dev.discmaster2.textfiles.com/browse/11534/Igromania_02.iso/Demos/Marbles_Deluxe/marbles.rar/marbles.exe/%7Bapp%7D/Graphics
-	https://dev.discmaster2.textfiles.com/browse/11546/Igromania_02.ISO/Funnies/DigiPool/digi_pool_trial.exe/%7Bapp%7D/Graphics
-	https://dev.discmaster2.textfiles.com/browse/11547/Igromania_04.ISO/Funnies/SuperstarChefs/InstallSuperstarChefs.exe/%25MAINDIR%25/product/Graphics
-	https://dev.discmaster2.textfiles.com/view/15626/PCM_0202.iso/media/igre/marbles.exe/%7Bapp%7D/Graphics/Sprites.gfx
-	https://dev.discmaster2.textfiles.com/browse/17795/macaddict112.cdr/Software/Fun%20&%20Games/Marbles%20Deluxe.dmg/Marbles%20Deluxe%20%C6%92/Worlds
-	https://dev.discmaster2.textfiles.com/admin/item?itemid=23185
-	https://dev.discmaster2.textfiles.com/admin/item?itemid=22997
-  Then look at other formats it supports:
-	https://game-viewer.org/games.php
-	https://game-viewer.org/plugins.php
-  I don't think it has an 'identification' capability, so I'd have to handle that on the dexvert side
-
 * Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/

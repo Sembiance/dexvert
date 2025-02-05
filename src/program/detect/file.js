@@ -66,8 +66,21 @@ export class file extends Program
 		}
 		r.xlog.trace`B fileText:\n${fileText}`;
 
-		// Prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
-		for(const prefix of ["at byte", "block device driver", "COFF", "filetype=", "last modified", "of \\d+ bytes", "to extract,", "version \\d", `[;:)(\\]["']`])
+		// Generic prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
+		const PREFIXES =
+		[
+			"at byte",
+			"block device driver",
+			"COFF",
+			"filetype=",
+			"for ",
+			"last modified",
+			"of \\d+ bytes",
+			"to extract,",
+			"version \\d",
+			`[;:)(\\]["']`
+		];
+		for(const prefix of PREFIXES)
 			fileText = fileText.replace(new RegExp(`\n-  ?(${prefix})`, "g"), " $1");
 		r.xlog.trace`C fileText:\n${fileText}`;
 

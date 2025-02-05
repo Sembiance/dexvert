@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,150)
+# Unsupported File Formats (3,156)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -340,7 +340,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (169)
+## Document (170)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -512,6 +512,7 @@ Family/Format | Name | Extensions | Notes
 [document/wordPerfectNotebook](https://discmaster.textfiles.com/search?formatid=wordPerfectNotebook) | WordPerfect Notebook | .nb | 
 [document/wordUpDocument](https://discmaster.textfiles.com/search?formatid=wordUpDocument) | WordUp document | .wup | 
 [document/xTextCompiledHypertext](https://discmaster.textfiles.com/search?formatid=xTextCompiledHypertext) | xText compiled Hypertext/Help | .xdb .hlp | 
+[document/zinioReaderMagazine](https://discmaster.textfiles.com/search?formatid=zinioReaderMagazine) | Zinio Reader Magazine | .zno | 
 
 
 
@@ -573,7 +574,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (106)
+## Font (107)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -592,6 +593,7 @@ Family/Format | Name | Extensions | Notes
 [font/bitmappedSignumFont](https://discmaster.textfiles.com/search?formatid=bitmappedSignumFont) | Bitmapped Signum! Font | .p24 .e24 .p9 .l30 | 
 [font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 [font/bradfordFont](https://discmaster.textfiles.com/search?formatid=bradfordFont) | Bradford Font | .bf2 | 
+[font/byteMapFontFormat](https://discmaster.textfiles.com/search?formatid=byteMapFontFormat) | [ByteMap font format](https://web.archive.org/web/20080501103520/http://bmf.wz.cz/bmf-format.htm) | .bmf | 
 [font/calamusFont](https://discmaster.textfiles.com/search?formatid=calamusFont) | Calamus Font | .cfn | [10 sample files](https://sembiance.com/fileFormatSamples/font/calamusFont/)
 [font/chaosMetafontFont](https://discmaster.textfiles.com/search?formatid=chaosMetafontFont) | CHAOS Metafont Font | .fnt | 
 [font/chiWriterHighResScreenFont](https://discmaster.textfiles.com/search?formatid=chiWriterHighResScreenFont) | ChiWriter high resolution screen font | .eft | 
@@ -1047,7 +1049,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,014)
+## Other (2,018)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1753,6 +1755,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalExtremePalette](https://discmaster.textfiles.com/search?formatid=fractalExtremePalette) | Fractal Extreme Paletten Datei | .fxp | 
 [other/fractalForgeParameters](https://discmaster.textfiles.com/search?formatid=fractalForgeParameters) | Fractal Forge parameters | .mnd | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
+[other/freeCADAssembly](https://discmaster.textfiles.com/search?formatid=freeCADAssembly) | freeCAD assembly | .asm | 
 [other/freeDOSKEYBoardLayoutCollection](https://discmaster.textfiles.com/search?formatid=freeDOSKEYBoardLayoutCollection) | FreeDOS KEYBoard layout collection | .sys | 
 [other/freelanceGraphicsSmartmaster](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsSmartmaster) | Freelance Graphics Smartmaster | .mas .pre | 
 [other/frontPageBTreeIndex](https://discmaster.textfiles.com/search?formatid=frontPageBTreeIndex) | Front Page Binary-Tree Index | .btr | 
@@ -1855,6 +1858,7 @@ Family/Format | Name | Extensions | Notes
 [other/hmvsAntivirusDOSPlugIn](https://discmaster.textfiles.com/search?formatid=hmvsAntivirusDOSPlugIn) | HMVS antivirus DOS PlugIn | .pnp .lng | 
 [other/homePlanPro5Clip](https://discmaster.textfiles.com/search?formatid=homePlanPro5Clip) | Home Plan Pro 5 Clip | .clp | 
 [other/homePlanPro5Plan](https://discmaster.textfiles.com/search?formatid=homePlanPro5Plan) | Home Plan Pro 5 Plan | .pln | 
+[other/homeWorld2ROTGraphics](https://discmaster.textfiles.com/search?formatid=homeWorld2ROTGraphics) | Home World 2 - ROT graphics | .rot | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?formatid=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?formatid=homeBrewPalette) | HomeBrew Palette | .hpa | 
 [other/homeBrewTile](https://discmaster.textfiles.com/search?formatid=homeBrewTile) | HomeBrew Tile | .hti | 
@@ -1922,6 +1926,7 @@ Family/Format | Name | Extensions | Notes
 [other/interBaseLayout](https://discmaster.textfiles.com/search?formatid=interBaseLayout) | InterBase Layout | .lot | 
 [other/interBasePacking](https://discmaster.textfiles.com/search?formatid=interBasePacking) | InterBase Packing | .pkt | 
 [other/interBaseTableDefinition](https://discmaster.textfiles.com/search?formatid=interBaseTableDefinition) | InterBase Table Definition | .tdf | 
+[other/interlexVocabulary](https://discmaster.textfiles.com/search?formatid=interlexVocabulary) | Interlex vocabulary | .ilx | 
 [other/internationalPatchingSystem](https://discmaster.textfiles.com/search?formatid=internationalPatchingSystem) | International Patching System | .ips | 
 [other/interTalkPhonebook](https://discmaster.textfiles.com/search?formatid=interTalkPhonebook) | InterTalk Phonebook | .phone | 
 [other/interwordPrinterDefinition](https://discmaster.textfiles.com/search?formatid=interwordPrinterDefinition) | Interword printer definition |  | 
@@ -2285,6 +2290,7 @@ Family/Format | Name | Extensions | Notes
 [other/nintendoDSROM](https://discmaster.textfiles.com/search?formatid=nintendoDSROM) | Nintendo DS ROM | .nds | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
 [other/nid32AntivirusUpdateFile](https://discmaster.textfiles.com/search?formatid=nid32AntivirusUpdateFile) | NOD32 Antivirus Update file | .nup | 
+[other/nod32Module](https://discmaster.textfiles.com/search?formatid=nod32Module) | NOD32 module |  | 
 [other/noLimitsTrack](https://discmaster.textfiles.com/search?formatid=noLimitsTrack) | NoLimits Track | .nltrack | 
 [other/nordModularG2Patch](https://discmaster.textfiles.com/search?formatid=nordModularG2Patch) | Nord Modular G2 Patch | .pch2 | 
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
@@ -2620,7 +2626,6 @@ Family/Format | Name | Extensions | Notes
 [other/settlers2Map](https://discmaster.textfiles.com/search?formatid=settlers2Map) | Settlers II Map | .swd .wld | 
 [other/seuFormatDefinitionFile](https://discmaster.textfiles.com/search?formatid=seuFormatDefinitionFile) | SEU Format Definition File | .fdf | 
 [other/sfxDocumentTemplateDirectory](https://discmaster.textfiles.com/search?formatid=sfxDocumentTemplateDirectory) | Sfx Document Template Directory |  | 
-[other/sgaGameDataArchive](https://discmaster.textfiles.com/search?formatid=sgaGameDataArchive) | SGA game data archive | .sga | 
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?formatid=sgmlCompiled) | SGML Compiled | .mtl | 
 [other/shapeshifterTheme](https://discmaster.textfiles.com/search?formatid=shapeshifterTheme) | Shapeshifter theme | .guikit | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?formatid=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 
@@ -2698,6 +2703,7 @@ Family/Format | Name | Extensions | Notes
 [other/stareEOWorkshopConfig](https://discmaster.textfiles.com/search?formatid=stareEOWorkshopConfig) | Stare-EO Workshop configuration | .cfg | 
 [other/starForceProtectionContainer](https://discmaster.textfiles.com/search?formatid=starForceProtectionContainer) | StarForce protection container | .dat | 
 [other/starlancerForceData](https://discmaster.textfiles.com/search?formatid=starlancerForceData) | Starlancer Force data | .frc | 
+[other/starlancerSavedGame](https://discmaster.textfiles.com/search?formatid=starlancerSavedGame) | Starlancer Saved game | .iff | 
 [other/starsGame](https://discmaster.textfiles.com/search?formatid=starsGame) | Stars! game | .xy .m2 .m1 .hst | 
 [other/starSiegeMission](https://discmaster.textfiles.com/search?formatid=starSiegeMission) | StarSiege Mission | .mis | 
 [other/starTrekkerModuleInfo](https://discmaster.textfiles.com/search?formatid=starTrekkerModuleInfo) | Startrekker Module Info | .nt | 

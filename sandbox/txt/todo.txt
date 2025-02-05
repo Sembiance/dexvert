@@ -88,6 +88,7 @@
 	https://dev.discmaster2.textfiles.com/browse/11547/Igromania_04.ISO/Funnies/SuperstarChefs/InstallSuperstarChefs.exe/%25MAINDIR%25/product/Graphics
 	https://dev.discmaster2.textfiles.com/view/15626/PCM_0202.iso/media/igre/marbles.exe/%7Bapp%7D/Graphics/Sprites.gfx
 	https://dev.discmaster2.textfiles.com/browse/17795/macaddict112.cdr/Software/Fun%20&%20Games/Marbles%20Deluxe.dmg/Marbles%20Deluxe%20%C6%92/Worlds
+	https://dev.discmaster2.textfiles.com/admin/item?itemid=23185
 	https://dev.discmaster2.textfiles.com/admin/item?itemid=22997
   Then look at other formats it supports:
 	https://game-viewer.org/games.php

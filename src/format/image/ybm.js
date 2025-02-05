@@ -10,5 +10,5 @@ export class ybm extends Format
 	magic          = ["Bennet Yee's face format bitmap"];
 	forbiddenMagic = TEXT_MAGIC;
 	converters     = ["ybmtopbm[matchType:magic]", "deark[module:ybm][strongMatch]"];
-	verify         = ({meta}) => meta.height>1 && meta.width>1;
+	verify         = ({meta}) => meta.height>1 && meta.width>1 && (meta.width/meta.height)<14 &&(meta.height/meta.width)<14;
 }

@@ -169,10 +169,10 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const idMetaData = await getIdMeta(inputFile);
 	xlog.debug`idMetaData for ${inputFile.absolute}:\n${idMetaData}`;
 
-	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], idMeta : [], fallback : []};
+	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], custom : [], idMeta : [], fallback : []};
 	for(const familyid of FAMILY_MATCH_ORDER)
 	{
-		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], idMeta : [], fallback : []};
+		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], custom : [], idMeta : [], fallback : []};
 		for(const [formatid, format] of Object.entries(formats).sortMulti([([, vf]) => FAMILY_MATCH_ORDER.indexOf(vf.familyid), ([, vf]) => vf.formatid], [false, false]))	// the sortMulti ensures we have a predictable order
 		{
 			if(!FAMILY_MATCH_ORDER.includes(format.familyid))
@@ -277,7 +277,11 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			if((format.weakFileSize || []).includes(f.input.size))
 				weakMatch = true;
 
-			const hasAnyMatch = (extMatch || filenameMatch || idMetaMatch || fileSizeMatch || magicMatch);
+			let customMatch = false;
+			if(format.customMatch)
+				customMatch = await format.customMatch({inputFile, detections, otherFiles, otherDirs, xlog});
+
+			const hasAnyMatch = (extMatch || filenameMatch || idMetaMatch || fileSizeMatch || magicMatch || customMatch);
 
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
 			if(format.website)
@@ -329,6 +333,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				baseMatch.matchesFilename = true;
 			if(idMetaMatch)
 				baseMatch.matchesIdMeta = true;
+			if(customMatch)
+				baseMatch.matchesCustom = true;
 
 			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
@@ -336,7 +342,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const hasWeakFilename = format.weakFilename===true;
 
 			// Non-weak magic matches start at confidence 100.
-			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || idMetaMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
+			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || idMetaMatch || fileSizeMatch || customMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
 			{
 				// Original confidence is a sub-sorter used before assigning proper confidence
 				let originalConfidence = 0;
@@ -353,6 +359,10 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			if(idMetaMatch)
 				familyMatches.idMeta.push({...baseMatch, matchType : "idMeta", extMatch, hasWeakMagic});
 
+			// customMatch matches also start at confidence 100
+			if(customMatch)
+				familyMatches.custom.push({...baseMatch, matchType : "custom", extMatch, hasWeakMagic});
+
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
 			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch || idMetaMatch) && !(hasWeakExt && hasWeakMagic))
 			{
@@ -363,7 +373,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			}
 
 			// Filename matches start at confidence 44.
-			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch || idMetaMatch))
+			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch || idMetaMatch || customMatch))
 				familyMatches.filename.push({...baseMatch, matchType : "filename", hasWeakMagic});
 
 			// fileSize matches start at confidence 20.
@@ -395,7 +405,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			return true;
 		});
 
-		[["magic", 100], ["idMeta", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
+		[["magic", 100], ["idMeta", 100], ["custom", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
 		{
 			// ext matches that have a magic, but doesn't match the magic should be prioritized lower than ext matches that don't have magic
 			// Also ext matches that also match the expected fileSize should be prioritized higher
@@ -432,9 +442,10 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	const matches = [...matchesByFamily.magic,
 		...matchesByFamily.idMeta.filter(em => !Array.from(matchesByFamily.magic).some(mm => mm.magic===em.magic)),
-		...matchesByFamily.ext.filter(em => ![...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
-		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
-		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
+		...matchesByFamily.custom.filter(em => ![...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.ext.filter(em => ![...matchesByFamily.custom, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.custom, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.custom, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
 
 	// Stick any fallback matches>=10 here first, before we sort
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence>=10));

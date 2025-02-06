@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,155)
+# Unsupported File Formats (3,160)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -574,7 +574,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (107)
+## Font (108)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -643,6 +643,7 @@ Family/Format | Name | Extensions | Notes
 [font/msxFont](https://discmaster.textfiles.com/search?formatid=msxFont) | MSX Font | .alf | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?formatid=msxKanjiFont) | MSX Kanji Font |  | 
 [font/newsBitmapFont](https://discmaster.textfiles.com/search?formatid=newsBitmapFont) | NeWS bitmap font | .fb | 
+[font/odFontEditor](https://discmaster.textfiles.com/search?formatid=odFontEditor) | OD Font Editor | .odf | [1 sample file](https://sembiance.com/fileFormatSamples/font/odFontEditor/) - Just have an extension and never encountered one of these files 'in the wild' and recoil will convert things that are not an OD Font file into a garbage image.
 [font/olitextFont](https://discmaster.textfiles.com/search?formatid=olitextFont) | Olitext Font | .fnt | 
 [font/overlayFont](https://discmaster.textfiles.com/search?formatid=overlayFont) | Overlay Font | .olf | 
 [font/pcToolsFont](https://discmaster.textfiles.com/search?formatid=pcToolsFont) | PC Tools Font | .fnt | 
@@ -1049,7 +1050,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,017)
+## Other (2,021)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1699,6 +1700,7 @@ Family/Format | Name | Extensions | Notes
 [other/faceGenUVRemappingTransform](https://discmaster.textfiles.com/search?formatid=faceGenUVRemappingTransform) | FaceGen UV remapping transform |  | 
 [other/fadeToBlackObjectsIndexes](https://discmaster.textfiles.com/search?formatid=fadeToBlackObjectsIndexes) | Fade to Black objects indexes | .snt | 
 [other/faeryTaleAdventure2SaveGame](https://discmaster.textfiles.com/search?formatid=faeryTaleAdventure2SaveGame) | Faery Tale Adventure 2 save game | .sav | 
+[other/fahrenheitGameDataArchive](https://discmaster.textfiles.com/search?formatid=fahrenheitGameDataArchive) | Fahrenheit game data archive | .idm .dat | 
 [other/falloutCompiledScript](https://discmaster.textfiles.com/search?formatid=falloutCompiledScript) | Fallout compiled script | .int | 
 [other/falloutTacticsEntity](https://discmaster.textfiles.com/search?formatid=falloutTacticsEntity) | Fallout Tactics Entity | .ent | 
 [other/falloutTacticsImage](https://discmaster.textfiles.com/search?formatid=falloutTacticsImage) | Fallout Tactics image | .zar | 
@@ -2826,6 +2828,9 @@ Family/Format | Name | Extensions | Notes
 [other/tmtPascalForDOSSymbols](https://discmaster.textfiles.com/search?formatid=tmtPascalForDOSSymbols) | TMT Pascal for DOS Symbols | .sym | 
 [other/tmtPascalForOS2ObjectCode](https://discmaster.textfiles.com/search?formatid=tmtPascalForOS2ObjectCode) | TMT Pascal for OS/2 object code | .fpd .fpl .fpu | 
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 
+[other/toolsMediaCorpAmbientLightBinary](https://discmaster.textfiles.com/search?formatid=toolsMediaCorpAmbientLightBinary) | Tools Media Corp. Ambient light (binary) | .avm | 
+[other/toolsMediaCorpGUIElements](https://discmaster.textfiles.com/search?formatid=toolsMediaCorpGUIElements) | Tools Media Corp. GUI elements | .gui | 
+[other/toolsMediaCorpMesh](https://discmaster.textfiles.com/search?formatid=toolsMediaCorpMesh) | Tools Media Corp. Mesh | .otm | 
 [other/topLevelForm](https://discmaster.textfiles.com/search?formatid=topLevelForm) | TopLevel Form | .tfm | 
 [other/topSpeedModula2Library](https://discmaster.textfiles.com/search?formatid=topSpeedModula2Library) | TopSpeed Modula-2 Library | .lib | 
 [other/tpLinkRouterFirmware](https://discmaster.textfiles.com/search?formatid=tpLinkRouterFirmware) | TP-Link router firmware | .bin | 

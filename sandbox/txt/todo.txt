@@ -18,16 +18,7 @@
 	https://sebastian-petrus.medium.com/someone-has-mad-an-uncensored-version-of-qwq-32b-preview-and-it-is-awesome-f64769a60d03
 	which might be available here: https://openrouter.ai/qwen/qvq-72b-preview
 
-* Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
-  Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
-    Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
-    Ask how hard it would be to leverage the SCUMMVM code to create a CLI tool that when given any director file can extract all assets
-	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
-	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
-  After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
-  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://dev.discmaster2.textfiles.com/admin/item?itemid=10456
-
-* Add extraction suport for these older MacroMind Projector files (THOUSANDS of them). No known converter or extractor:
+* Add extraction suport for these older MacroMind Projector files (21,000+ unique files). No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
@@ -45,6 +36,15 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
+  Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
+    Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
+    Ask how hard it would be to leverage the SCUMMVM code to create a CLI tool that when given any director file can extract all assets
+	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
+	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
+  After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
+  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://dev.discmaster2.textfiles.com/admin/item?itemid=10456
+
 * Figure out how to get info out of a folio database. Some interesting stuff locked in those:
   https://dev.discmaster2.textfiles.com/search?format=folioDatabase
   https://dev.discmaster2.textfiles.com/view/18013/The%20Washington%20Times%20-%201991%20Volume%202%20(January%201989-December%201991)(Wayzata%20Technology)(5032)(1992).bin/fpnv.nfo
@@ -79,7 +79,7 @@
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
-* Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
+* Found 20 or so BitRock installers: https://dev.discmaster2.textfiles.com/search?q=%22BitRock+Installer%22&qfields=name&qfields=t&format=xml
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
 
@@ -101,10 +101,8 @@
 * Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
-* Could create a DOOM .TITLEPIC converter for ~600 unique files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
-  Format: https://doomwiki.org/wiki/Picture_format   (COLORMAP: https://doomwiki.org/wiki/COLORMAP)
-
-* See about converting this Java code to javascript to extract ~250 archive/innoSetupArchive files: https://github.com/d0k/ednaunpack
+* Found about 300 archive/innoSetupArchive files: https://dev.discmaster2.textfiles.com/search?format=innoSetupArchive
+  See about converting this Java code to javascript to extract them.
   Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://dev.discmaster2.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
 
 * With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'

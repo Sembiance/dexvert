@@ -178,8 +178,9 @@ const SUPPORTING_FILES =
 	},
 	image :
 	{
+		doomPicture      : /PNAMES$/,
 		printMasterShape : /\.sdr$/i,
-		quakeGFXLMP : /palette\.lmp$/
+		quakeGFXLMP      : /palette\.lmp$/
 	},
 	poly :
 	{
@@ -288,7 +289,7 @@ const FLEX_SIZE_FORMATS =
 		fractalImageFormat : 7,
 		grabber            : 7,
 		gifexe             : 300,
-		krisCard           : 10,
+		krisCard           : 20,
 		naplps             : 20,
 		theDrawCOM         : 5,
 		threeDCK           : 20,

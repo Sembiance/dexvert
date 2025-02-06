@@ -123,6 +123,9 @@ export class Format
 			// identification - mac file type/creator, prodos file types, etc
 			idMeta : {type : "function", length : [1]},
 
+			// identification - custom
+			customMatch : {type : "function", length : [1]},
+
 			// other
 			alwaysIdentify   : {type : "boolean"},
 			auxFiles         : {type : "function", length : [2, 4]},

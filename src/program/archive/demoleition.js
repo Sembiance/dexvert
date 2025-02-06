@@ -15,7 +15,7 @@ export class demoleition extends Program
 		script : `
 			WindowRequire("de-mole-ition v0.65", "", 10)
 			WaitForStableFileSize("c:\\out\\${path.basename(r.inFile(), path.extname(r.inFile()))}_unpacked${path.extname(r.inFile())}", ${xu.SECOND*5}, ${xu.SECOND*30})
-			FileDelete("c:\\out\\${path.basename(r.inFile())}");`
+			FileDelete("c:\\out\\${path.basename(r.inFile())}")`
 	});
 	renameOut = false;
 }

@@ -40,6 +40,7 @@ const DEXMAGIC_CHECKS =
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"PFS Filesystem"                 : [{offset : 0, match : "PFS/"}],
 	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
+	"SGS.DAT"                        : [{offset : 0, match : "SGS.DAT "}],
 	"Superscape SVR"                 : [{offset : 0, match : "SVR"}],
 	"Superscape VRT"                 : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
 	"Superscape XVR"                 : [{offset : 0, match : "XVR"}],

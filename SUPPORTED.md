@@ -1,11 +1,11 @@
-# Supported File Formats (2,947)
+# Supported File Formats (2,948)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (444)
+## Archive (445)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -368,6 +368,7 @@ archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .on
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
 archive | SGA game data archive | .sga .big | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
 archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sgiVolumeImage/)
+archive | SGS.DAT File |  | [decomposeSGS](https://www.logipole.com/konvertor-en.htm) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sgsDAT/)
 archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
 archive | [Shockwave/Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/swf/)
 archive | Shrink Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkPacked/)
@@ -2801,7 +2802,7 @@ text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.c
 text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
 text | Value Change Dump | .vcd .vcdz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/valueChangeDump/)
 text | Valve Choreography Data format | .vcd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
-text | Valve Map Format | .vmf .vmx |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)
+text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)
 text | Valve Material Type | .vmt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/valveMaterialType/)
 text | VAMAS Surface Chemical Analysis Standard Data Transfer Format | .vms |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vamasSurfaceChemicalAnalysisTransfer/)
 text | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vCard/)

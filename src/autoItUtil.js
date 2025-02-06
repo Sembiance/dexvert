@@ -29,6 +29,25 @@ Func KillAll($program)
 	Until $result Not = 1
 EndFunc
 `,
+	DirFileCount : `
+Func DirFileCount($dir)
+	Local $total = 0, $search = FileFindFirstFile($dir & "\\*")
+	If $search = -1 Then Return 0
+	While 1
+		Local $file = FileFindNextFile($search)
+		If @error Then ExitLoop
+		If $file = "." Or $file = ".." Then ContinueLoop
+		Local $fullPath = $dir & "\\" & $file
+		If StringInStr(FileGetAttrib($fullPath), "D") Then
+			$total += DirFileCount($fullPath)
+		Else
+			$total += 1
+		EndIf
+	WEnd
+	FileClose($search)
+	Return $total
+EndFunc	
+`,
 	ListCDirs : `
 #include <Array.au3>
 Func ListCDirs()

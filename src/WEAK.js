@@ -2082,6 +2082,7 @@ export const WEAK_VALUES =
 	/^SFDN Packer compressed data$/,
 	/^SFS encrypted volume$/,
 	/^SFZ Sample definition \(with rem\)$/,
+	/^SGP Baltie Program$/,
 	/^Silent Hill: Origins game data archive$/,
 	/^Silver Scene$/,
 	/^SimAnt saved game \(Amiga\)$/,

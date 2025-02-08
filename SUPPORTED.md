@@ -1,11 +1,11 @@
-# Supported File Formats (2,948)
+# Supported File Formats (2,952)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (445)
+## Archive (446)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -50,7 +50,7 @@ archive | Apple II Pascal Disk Image | .dsk | [acx](https://github.com/AppleComm
 archive | [Apple Safari Webarchive](http://fileformats.archiveteam.org/wiki/Webarchive_(Safari)) | .webarchive | [pywebarchive](https://pypi.org/project/pywebarchive/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/appleSafariWebarchive/)
 archive | [AppleSingle](http://fileformats.archiveteam.org/wiki/AppleSingle) | .as | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/appleSingle/)
 archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .deb .a .lib .sa | [ar](https://sourceware.org/binutils/) [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/arArchive/)
-archive | [ArcadeLab/Retro64 Graphics](https://web.archive.org/web/20220705090053/https://wiki.xentax.com/index.php/Retro64_GFX) | .gfx | [gameViewerLinux](https://game-viewer.org/plugins.php) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/arcadeLabGraphics/)
+archive | [ArcadeLab/Retro64 Graphics](https://web.archive.org/web/20220705090053/https://wiki.xentax.com/index.php/Retro64_GFX) | .gfx | [gameViewerLinux](https://game-viewer.org/plugins.php) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/arcadeLabGraphics/)
 archive | [ArcFS Archive](http://fileformats.archiveteam.org/wiki/ArcFS) | .arc | [nspark](https://github.com/mjwoodcock/nspark) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arcFS/)
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj .exe | [unar](https://github.com/incbee/Unarchiver) [arj](https://arj.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/arj/)
 archive | [ARQ Archive](http://fileformats.archiveteam.org/wiki/ARQ) | .arq | [arq](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arq/)
@@ -211,6 +211,7 @@ archive | Interstate Series Game Archive | .zfs | [gameextractor](http://www.wat
 archive | [Ion Storm Resource Data File](http://fileformats.archiveteam.org/wiki/Image_Gallery_(Alchemy_Mindworks)) | .rdf | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/ionStormResourceDataFile/)
 archive | iPer Advanced Embedded Hypertext | .aeh | [foremost](http://foremost.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/iPerAEH/)
 archive | [IRIX IDB/SW Archive](http://fileformats.archiveteam.org/wiki/IRIX_software_distribution_format) | .idb | [irixswextract](https://github.com/Sembiance/irixswextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/irixIDBArchive/)
+archive | Jacked game archive | .dat .old | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/jackedGameArchive/)
 archive | JAM Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/jamPacked/)
 archive | [JAM Packer Compressed File](http://fileformats.archiveteam.org/wiki/The_JAM_Packer) | .jpk | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/jamPacker/)
 archive | Jane's Longbow 2 Game Archive | .tre | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/janesLongbow2GameArchive/)
@@ -366,7 +367,7 @@ archive | [Self-Dissolving Archive](http://fileformats.archiveteam.org/wiki/SDA)
 archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
-archive | SGA game data archive | .sga .big | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
+archive | SGA game data archive | .sga .big | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
 archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sgiVolumeImage/)
 archive | SGS.DAT File |  | [decomposeSGS](https://www.logipole.com/konvertor-en.htm) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sgsDAT/)
 archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
@@ -463,7 +464,7 @@ audio | 3DO STR audio |  | [ffmpeg](https://ffmpeg.org/) | [7 sample files](http
 audio | [3GP/3GPP2 Audio](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/threeGAudio/)
 audio | [Adaptive Multi-Rate](http://fileformats.archiveteam.org/wiki/Adaptive_Multi-Rate_Audio) | .amr .3ga | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/amr/)
 audio | [Advanced Audio Coding](http://fileformats.archiveteam.org/wiki/AAC) | .aac .m4a .mp4 .ima | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/aac/)
-audio | Adventure Game Studio Audio Data | .vox | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/agsAudioData/)
+audio | Adventure Game Studio Audio Data | .vox | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/agsAudioData/)
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8-Bit_Sampled_Voice) | .8svx .iff | [ffmpeg](https://ffmpeg.org/) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/amiga8svx/) - Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates. SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [amosbank](https://github.com/dschwen/amosbank) [dumpamos](https://github.com/kyz/amostools/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/amosSamples/)
 audio | [Apple QuickTime Audio](http://fileformats.archiveteam.org/wiki/QuickTime) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) [qt_flatt](https://www.macdisk.com/quickten.php) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/quickTimeAudio/) - HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"
@@ -481,7 +482,7 @@ audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://githu
 audio | Cryo Interactive APC Audio | .apc | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/cryoInteractiveAPC/)
 audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/diamondWareDigitized/)
 audio | [Digital Speech Standard](http://justsolve.archiveteam.org/wiki/Digital_Speech_Standard) | .dss | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/digitalSpeechStandard/)
-audio | DirectMusic Segment | .dmsg | [vgmstream](https://github.com/vgmstream/vgmstream) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/directMusicSegment/)
+audio | DirectMusic Segment | .dmsg | [vgmstream](https://github.com/vgmstream/vgmstream) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/directMusicSegment/)
 audio | [Dolby Digital AC-3 ATSC A/52](https://wiki.multimedia.cx/index.php/A52) | .ac3 | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/ac3/)
 audio | [Dolby Lossless Predictive Audio](https://wiki.multimedia.cx/index.php?title=Lossless_Predictive_Audio_Coding) | .mlp | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/mlpAudio/)
 audio | [Downloadable Sound Bank](http://fileformats.archiveteam.org/wiki/Downloadable_Sounds_Banks) | .dls | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/downloadableSoundBank/)
@@ -630,7 +631,7 @@ document | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Edito
 document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls .xlsx .xlw .xlsm | [soffice](https://www.libreoffice.org) [excel97](https://archive.org/details/office97standard_201912/) [antixls](https://packages.gentoo.org/packages/app-text/antixls) | [26 sample files](https://sembiance.com/fileFormatSamples/document/xls/)
 document | Express Publisher Document | .epd | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/expressPublisher/)
 document | [Farallon Replica Document](http://fileformats.archiveteam.org/wiki/Farallon_Replica) | .rpl | [replica](https://gondwanaland.com/meta/history/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/farallonReplica/)
-document | [FictionBook](https://en.wikipedia.org/wiki/FictionBook) | .fb2 | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/fictionBook/)
+document | [FictionBook](https://en.wikipedia.org/wiki/FictionBook) | .fb2 | [ebook_convert](https://calibre-ebook.com/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/fictionBook/)
 document | [FileMaker Pro Database](http://fileformats.archiveteam.org/wiki/FileMaker_Pro) | .fp3 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/fileMakerPro/)
 document | Final Write Document |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/finalWrite/)
 document | First Choice Database | .fol .pfs | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/firstChoiceDatabase/)
@@ -2006,7 +2007,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (905)
+## Text (907)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2054,7 +2055,7 @@ text | Anacreon: Reconstruction Scenery | .scn |  | [6 sample files](https://sem
 text | Anim8or project | .an8 |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/anim8orProject/)
 text | ANIMagic DVE Map | .map |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/aniMagicDVEMap/)
 text | ANIMagic Map | .map |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/aniMagicMap/)
-text | Anjuta Project | .prj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/anjutaProject/)
+text | Anjuta Project | .prj |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/anjutaProject/)
 text | AntiVir Job | .avj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/antiVirJob/)
 text | AntiVir Profile | .avp |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/antiVirProfile/)
 text | Apache mission Data | .dta |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
@@ -2065,6 +2066,7 @@ text | Apple Project Builder Xcode Project | .pbxproj |  | [15 sample files](htt
 text | Apple Xcode User data | .pbxuser |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
 text | Applix spreadsheet | .as |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/applixSpreadsheet/)
 text | Applix Words Document | .aw |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/applixWordsDocument/)
+text | AQTitle subtitles | .sub |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/aqTitleSubtitlesAqtitle/)
 text | ARB Fragment shader |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/arbFragmentShader/)
 text | ARB Vertex shader | .vp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/arbVertexShader/)
 text | ArtMoney Table File | .amt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/artMoneyTableFile/)
@@ -2101,7 +2103,7 @@ text | [AWK Script](http://fileformats.archiveteam.org/wiki/AWK) | .awk |  | [12
 text | AZZ Cardfile Data |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/azzCardfileData/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bas/)
 text | BatMenu configuration | .mnu |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/batMenuConfiguration/)
-text | Battlefield 2 map Description | .desc |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/battlefield2MapDescription/)
+text | Battlefield 2 map Description | .desc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/battlefield2MapDescription/)
 text | BCPL source | .bcp .bpl .bcpl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bcplSource/)
 text | Bernd Wetzel OS/2 Install Data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/berndWetzelOS2InstallData/)
 text | Beyond Atlantis save game | .sav |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/beyondAtlantisSaveGame/)
@@ -2185,6 +2187,7 @@ text | dBASE Windows Form File | .mnu .wfm |  | [12 sample files](https://sembia
 text | ddrescue Logfile | .bak |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/ddrescueLogfile/)
 text | DEB build control |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/debBuildControl/)
 text | DEC-WSE Object File | .aof .aoff |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/decWSEOObjectFile/)
+text | DeleD map | .dmf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/deleDMap/)
 text | Delphi Package | .dpk |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/delphiPackage/)
 text | Descent Mission | .msn |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/descentMission/)
 text | Design Rules Check Rules export | .rul |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/designRulesCheckRulesExport/)
@@ -2663,7 +2666,7 @@ text | RAR registration data | .key .cfg |  | [6 sample files](https://sembiance
 text | RASTER Music Tracker settings | .ini |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/rasterMusicTrackerSettings/)
 text | REAL Numbers Tape | .tap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/realNumbersTape/)
 text | RealMedia meta file | .ram |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/realMediaMetaFile/)
-text | REAPER Project | .rpp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/reaperProject/)
+text | REAPER Project | .rpp |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/reaperProject/)
 text | Rebel spreadsheet (v2) | .rb2 |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/rebelSpreadsheet/)
 text | Rebol source code | .r |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rebolSourceCode/)
 text | Receiver Independent Exchange Format | .rxo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/receiverIndependentExchangeFormat/)
@@ -2775,7 +2778,7 @@ text | Timeworks Word Writer document |  |  | [2 sample files](https://sembiance
 text | Timing Wizard Report | .twr |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/timingWizardReport/)
 text | TMPEGEnc config file | .mcf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tMPEGEncConfigFile/)
 text | TMT Pascal project Configuration | .cfg |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/tmtPascalProjectConfiguration/)
-text | Tools Media Corp. material | .sss |  | 
+text | Tools Media Corp. material | .sss |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpMaterial/)
 text | Tornado 3D Project | .prj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/tornado3DProject/)
 text | Tornado Mission info | .mis |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tornadoMissionInfo/)
 text | Total Commander button Bar config | .bar |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)
@@ -2801,12 +2804,12 @@ text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileForma
 text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/urbanChaosStoryScript/)
 text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
 text | Value Change Dump | .vcd .vcdz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/valueChangeDump/)
-text | Valve Choreography Data format | .vcd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
+text | Valve Choreography Data format | .vcd |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
 text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)
 text | Valve Material Type | .vmt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/valveMaterialType/)
 text | VAMAS Surface Chemical Analysis Standard Data Transfer Format | .vms |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vamasSurfaceChemicalAnalysisTransfer/)
 text | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vCard/)
-text | VDA-FS CAD data exchange format | .vda |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/vdafsCADDataExchangeFormat/)
+text | VDA-FS CAD data exchange format | .vda |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/vdafsCADDataExchangeFormat/)
 text | VENDINFO | .diz |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vendinfo/)
 text | Ventura Font Metrics | .vfm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaFontMetrics/)
 text | Ventura Publisher Caption | .cap |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaPublisherCaption/)
@@ -2917,7 +2920,7 @@ text | ZIM Wiki |  |  | [3 sample files](https://sembiance.com/fileFormatSamples
 
 
 
-## Video (96)
+## Video (97)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [3GP/3GPP2 Video](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/threeGVideo/)
@@ -2972,6 +2975,7 @@ video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_
 video | [KDV video](https://wiki.multimedia.cx/index.php/KDV) | .kdv | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/kdvVideo/)
 video | [Legend Entertainment Q Video](https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q) | .q | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/legendEntertainmentQ/)
 video | Little Big Adventure FLA Video | .fla | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/littleBigAdventureFLAVideo/)
+video | [Loki SDL MJPEG Video](https://wiki.multimedia.cx/index.php/SMJPEG) | .mjpg | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/smjpeg/)
 video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/smush/)
 video | [Machine Hunter FMV Video](https://wiki.multimedia.cx/index.php/Machine_Hunter_FMV) | .fmv | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/machineHunterFMVVideo/)
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)

@@ -38,6 +38,7 @@ export const gameextractor =
 		hooligansGameDataArchive           : {name : "Hooligans game data archive", ext : [".x13"], magic : ["Hooligans game data archive"], weakMagic : true},
 		howToSurviveSeriesGameArchive      : {name : "How to Survive series Game Archive", ext : [".rck"], magic : ["How to Survive series game data"], weakMagic : true},
 		interstateGameArchive              : {name : "Interstate Series Game Archive", ext : [".zfs"], magic : ["Interstate serie game data archive", "Zork FileSystem game data archive"], weakMagic : true},
+		jackedGameArchive                  : {name : "Jacked game archive", ext : [".dat", ".old"], magic : ["Jacked game data archive"], weakMagic : true},
 		janesLongbow2GameArchive           : {name : "Jane's Longbow 2 Game Archive", ext : [".tre"], magic : ["Jane's Longbow 2 game data archive"]},
 		lemmingsRevolutionGameArchive      : {name : "Lemmings Revolution game archive", ext : [".box"], magic : ["Lemmings Revolution game data archive"]},
 		lionheadStudiosGameArchive         : {name : "Lionhead Studios game archive", ext : [".sad"], magic : ["Generic Lionhead Studios game data"]},

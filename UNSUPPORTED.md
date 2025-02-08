@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,160)
+# Unsupported File Formats (3,168)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1050,7 +1050,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,021)
+## Other (2,028)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1138,6 +1138,7 @@ Family/Format | Name | Extensions | Notes
 [other/advancedLayouterProject](https://discmaster.textfiles.com/search?formatid=advancedLayouterProject) | Advanced Layouter project | .lay | 
 [other/advantageDataServerTable](https://discmaster.textfiles.com/search?formatid=advantageDataServerTable) | Advantage Data Server table | .adt | 
 [other/adventureGameStudio](https://discmaster.textfiles.com/search?formatid=adventureGameStudio) | Adventure Game Studio | .dat | 
+[other/adventureGameStudioTranslationData](https://discmaster.textfiles.com/search?formatid=adventureGameStudioTranslationData) | Adventure Game Studio Translation data | .tra | 
 [other/adventureGameToolkitStrings](https://discmaster.textfiles.com/search?formatid=adventureGameToolkitStrings) | Adventure Game Toolkit Strings | .d$$ | 
 [other/aegisImpactGraph](https://discmaster.textfiles.com/search?formatid=aegisImpactGraph) | Aegis Impact! Graph | .gph | 
 [other/aegisImpactSlideshow](https://discmaster.textfiles.com/search?formatid=aegisImpactSlideshow) | Aegis Impact! Slideshow | .sld | 
@@ -1339,6 +1340,7 @@ Family/Format | Name | Extensions | Notes
 [other/bodypaint3D](https://discmaster.textfiles.com/search?formatid=bodypaint3D) | Bodypaint 3D | .b3d | 
 [other/bohemiaGameArchive](https://discmaster.textfiles.com/search?formatid=bohemiaGameArchive) | Bohemia game archive | .pbo | 
 [other/bohemiaInteractivePAA](https://discmaster.textfiles.com/search?formatid=bohemiaInteractivePAA) | Bohemia Interactive PAA | .paa | 
+[other/bohemiaInteractivePAC](https://discmaster.textfiles.com/search?formatid=bohemiaInteractivePAC) | Bohemia Interactive PAC | .pac | 
 [other/boloMap](https://discmaster.textfiles.com/search?formatid=boloMap) | Bolo Map |  | 
 [other/boogleLexicon](https://discmaster.textfiles.com/search?formatid=boogleLexicon) | Boogle Lexicon | .boo | 
 [other/boomBoxProject](https://discmaster.textfiles.com/search?formatid=boomBoxProject) | Boom Box projec | .box | 
@@ -1390,6 +1392,7 @@ Family/Format | Name | Extensions | Notes
 [other/cakewalkSONARProject](https://discmaster.textfiles.com/search?formatid=cakewalkSONARProject) | Cakewalk SONAR project | .cwp | 
 [other/cakewalkStudioWarePanel](https://discmaster.textfiles.com/search?formatid=cakewalkStudioWarePanel) | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
 [other/cakewalkWorkFile](https://discmaster.textfiles.com/search?formatid=cakewalkWorkFile) | Cakewalk Work File | .wrk | 
+[other/cal3DAnimationFile](https://discmaster.textfiles.com/search?formatid=cal3DAnimationFile) | Cal3D Animation File | .caf | 
 [other/calamusCommandKeySettings](https://discmaster.textfiles.com/search?formatid=calamusCommandKeySettings) | Calamus Command-Key settings | .ckt | 
 [other/calamusFarbColorTable](https://discmaster.textfiles.com/search?formatid=calamusFarbColorTable) | Calamus Farb Color Table | .cft .cf | 
 [other/calamusRasterInfo](https://discmaster.textfiles.com/search?formatid=calamusRasterInfo) | Calamus Raster Information | .cri .cr | 
@@ -2471,6 +2474,7 @@ Family/Format | Name | Extensions | Notes
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?formatid=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
+[other/princeOfPersiaWarriorWithinSaveGame](https://discmaster.textfiles.com/search?formatid=princeOfPersiaWarriorWithinSaveGame) | Prince of Persia: Warrior Within save game | .sav | 
 [other/printMagicCard](https://discmaster.textfiles.com/search?formatid=printMagicCard) | Print Magic Card | .pmc | 
 [other/printShopDeluxeAutograph](https://discmaster.textfiles.com/search?formatid=printShopDeluxeAutograph) | Print Shop Deluxe Autograph | .pau | 
 [other/printShopDeluxeCardLayout](https://discmaster.textfiles.com/search?formatid=printShopDeluxeCardLayout) | Print Shop Deluxe Card Layout | .cly | 
@@ -2720,6 +2724,7 @@ Family/Format | Name | Extensions | Notes
 [other/steinbergStudioModuleDriver](https://discmaster.textfiles.com/search?formatid=steinbergStudioModuleDriver) | Steinberg Studio Module Driver | .d | 
 [other/steinbergVSTSoundLibrary](https://discmaster.textfiles.com/search?formatid=steinbergVSTSoundLibrary) | Steinberg VST Sound library | .vstsound | 
 [other/stepManiaCourse](https://discmaster.textfiles.com/search?formatid=stepManiaCourse) | StepMania Course | .crs | 
+[other/stormRegionGameDataArchive](https://discmaster.textfiles.com/search?formatid=stormRegionGameDataArchive) | Storm Region game data archive | .pak | 
 [other/stormWizardResource](https://discmaster.textfiles.com/search?formatid=stormWizardResource) | StormWizard Resource | .wizard .wizard-all | 
 [other/stosVarData](https://discmaster.textfiles.com/search?formatid=stosVarData) | STOS Var data | .var | 
 [other/strikeCommanderMap](https://discmaster.textfiles.com/search?formatid=strikeCommanderMap) | Strike Commander map | .pak | 
@@ -2807,6 +2812,7 @@ Family/Format | Name | Extensions | Notes
 [other/houseOfTheDeadTextures](https://discmaster.textfiles.com/search?formatid=houseOfTheDeadTextures) | The House of the Dead textures | .vmc | 
 [other/huntForRedOctoberSavedGame](https://discmaster.textfiles.com/search?formatid=huntForRedOctoberSavedGame) | The Hunt for Red October Saved game | .sav | 
 [other/lostFilesOfSherlockHolmesResourcs](https://discmaster.textfiles.com/search?formatid=lostFilesOfSherlockHolmesResourcs) | The Lost Files of Sherlock Holmes Resources | .rrm | 
+[other/theMoviesEditorTextStringDatabase](https://discmaster.textfiles.com/search?formatid=theMoviesEditorTextStringDatabase) | The Movies Editor Text String Database | .lhts | 
 [other/theNortonAntiVirusInformation](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusInformation) | The Norton AntiVirus Information | .inf | 
 [other/theNortonAntiVirusSignatures](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusSignatures) | The Norton AntiVirus Virus Signatures | .dat | 
 [other/thePerfectGeneralFile](https://discmaster.textfiles.com/search?formatid=thePerfectGeneralFile) | The Perfect General File | .scn .cfg .mdt .mgr | 
@@ -2957,6 +2963,7 @@ Family/Format | Name | Extensions | Notes
 [other/whalesVoyageGraphic](https://discmaster.textfiles.com/search?formatid=whalesVoyageGraphic) | Whale's Voyage graphic | .brs | 
 [other/whatsUpGoldVirtualDevice](https://discmaster.textfiles.com/search?formatid=whatsUpGoldVirtualDevice) | WhatsUp Gold Virtual Device | .dse | 
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?formatid=whdLoadSlave) | WHDLoad Slave | .slave | 
+[other/whirlwindGameDataPackage](https://discmaster.textfiles.com/search?formatid=whirlwindGameDataPackage) | Whirlwind game data Package | .wpk | 
 [other/whiteWolfProductionsPalette](https://discmaster.textfiles.com/search?formatid=whiteWolfProductionsPalette) | White Wolf Productions Palette | .pal | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?formatid=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 
 [other/winampEQLibrary](https://discmaster.textfiles.com/search?formatid=winampEQLibrary) | Winamp EQ library |  | 
@@ -3167,7 +3174,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (52)
+## Video (53)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?formatid=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3194,6 +3201,7 @@ Family/Format | Name | Extensions | Notes
 [video/iavfVideo](https://discmaster.textfiles.com/search?formatid=iavfVideo) | IAVF video | .avi .iavf | 
 [video/intelIndeoVideoFile](https://discmaster.textfiles.com/search?formatid=intelIndeoVideoFile) | Intel Indeo Video File | .ivf | 
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
+[video/kheopsStudioVideo](https://discmaster.textfiles.com/search?formatid=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?formatid=lzaAnimationVideo) | LZA animation/video | .lza | 
 [video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 

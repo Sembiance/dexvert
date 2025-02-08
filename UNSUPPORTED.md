@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,168)
+# Unsupported File Formats (3,171)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1050,7 +1050,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,028)
+## Other (2,031)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1522,6 +1522,8 @@ Family/Format | Name | Extensions | Notes
 [other/cuplABS](https://discmaster.textfiles.com/search?formatid=cuplABS) | CUPL ABS | .abs | 
 [other/cursorFXTheme](https://discmaster.textfiles.com/search?formatid=cursorFXTheme) | CursorFX theme | .cursorfx | 
 [other/cwPALColorPalette](https://discmaster.textfiles.com/search?formatid=cwPALColorPalette) | CWPAL color palette | .pal | 
+[other/cyberLinkTalkingShowHeadAnimationPack](https://discmaster.textfiles.com/search?formatid=cyberLinkTalkingShowHeadAnimationPack) | CyberLink TalkingShow Head Animation Pack | .hax | 
+[other/cyberLinkTalkingShowProject](https://discmaster.textfiles.com/search?formatid=cyberLinkTalkingShowProject) | CyberLink TalkingShow Project | .tsx | 
 [other/cyberloreStudiosPlayboyGameMap](https://discmaster.textfiles.com/search?formatid=cyberloreStudiosPlayboyGameMap) | Cyberlore Studios Playboy game map | .pb | 
 [other/cyberTrackerInstrument](https://discmaster.textfiles.com/search?formatid=cyberTrackerInstrument) | CyberTracker Instrument |  | 
 [other/cybervisionMonitorInfo](https://discmaster.textfiles.com/search?formatid=cybervisionMonitorInfo) | Cybervision Monitor Info |  | 
@@ -2741,6 +2743,7 @@ Family/Format | Name | Extensions | Notes
 [other/superColliderSynthDefinition](https://discmaster.textfiles.com/search?formatid=superColliderSynthDefinition) | SuperCollider3 Synth Definition | .scsyndef | 
 [other/superFlowTemplate](https://discmaster.textfiles.com/search?formatid=superFlowTemplate) | SuperFlow Template | .stp | 
 [other/superJamFile](https://discmaster.textfiles.com/search?formatid=superJamFile) | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
+[other/superPowerScenario](https://discmaster.textfiles.com/search?formatid=superPowerScenario) | SuperPower scenario | .dsc | 
 [other/superProjectExpertProject](https://discmaster.textfiles.com/search?formatid=superProjectExpertProject) | SuperProject Expert Project | .pj | 
 [other/superProjectGraphicsDrivers](https://discmaster.textfiles.com/search?formatid=superProjectGraphicsDrivers) | SuperProject graphics drivers | .dat | 
 [other/superscapeDo3DTemplate](https://discmaster.textfiles.com/search?formatid=superscapeDo3DTemplate) | Superscape Do 3D Template | .vrt | 

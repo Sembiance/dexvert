@@ -357,6 +357,7 @@ export default
 		bitTorrentFile                             : {name : "BitTorrent file", ext : [".torrent"], magic : ["BitTorrent file", "application/x-bittorrent", /^Torrent( \(trackerless\))?$/]},
 		blueMSXCheats                              : {name : "blueMSX Cheats", magic : ["blueMSX Cheats Format"]},
 		blueMSXThemeInfo                           : {name : "blueMSX theme info", magic : ["blueMSX theme info"]},
+		bochsKeymap                                : {name : "Bochs keymap", ext : [".map"], magic : ["Bochs keymap"], weakMagic : true},
 		boundaryScanDescriptionLanguage            : {name : "Boundary Scan Description Language", ext : [".bsdl", ".bsd"], magic : ["Boundary Scan Description Language"], weakMagic : true},
 		brikChecksums                              : {name : "Brik checksums", magic : ["Brik checksums"]},
 		brutusApplicationDefinition                : {name : "Brutus Application Definition", ext : [".bad"], magic : ["Brutus Application Definition"]},

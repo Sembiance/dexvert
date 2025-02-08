@@ -51,6 +51,7 @@ export const gameextractor =
 		nascarHeatGameArchive              : {name : "NASCAR Heat game archive", ext : [".trk", ".car"], magic : ["NASCAR Heat game data archive"]},
 		novalogicGameArchive               : {name : "Novalogic Game Archive", ext : [".pff"], allowExtMatch : true, magic : ["Novalogic game data archive"]},
 		obscureHVPackFileGameArchive       : {name : "Obscure HV PackFile game archive", ext : [".hvp"], magic : ["Obscure HV PackFile game data archive"]},
+		panzerEliteActionGameArchive       : {name : "Panzer Elite Action game archive", ext : [".x"], magic : ["Panzer Elite Action game data archive"], weakMagic : true},
 		paxImperiaEminentDomainGameArchive : {name : "Pax Imperia: Eminent Domain Game Archive", ext : [".img"], magic : ["Pax Imperia: Eminent Domain game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="Px2D" && macFileCreator==="Pax2"},
 		pendulumaniaGameData               : {name : "Pendulumania game data", ext : [".qda"], magic : ["Pendulumania game data"], weakMagic : true},
 		postalGameArchive                  : {name : "Postal game Archive", ext : [".sak"], magic : ["Postal game data Archive"]},

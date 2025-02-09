@@ -713,6 +713,7 @@ export default
 		poserCharacterRigging                      : {name : "Poser character rigging", ext : [".cr2"], magic : ["Poser character rigging"], weakMagic : true},
 		poserScene                                 : {name : "Poser scene", ext : [".pz3"], magic : ["Poser scene"], weakMagic : true},
 		postgreSQLDatabaseDump                     : {name : "PostgreSQL database dump", ext : [".sql"], magic : ["PostgreSQL database dump"]},
+		postItSoftwareNoteTemplate                 : {name : "Post-It Software Note Template", magic : ["Post-It Software Note Template"]},
 		poswizReport                               : {name : "Poswiz! Report", ext : [".rpt"], magic : ["Poswiz! Report"]},
 		powerBaseDatabase                          : {name : "PowerBase database", ext : [".pb"], magic : ["PowerBase database"]},
 		powerDesignerData                          : {name : "PowerDesigner / PowerAMC data", ext : [".pdm"], magic : ["PowerDesigner / PowerAMC data (generic)"]},

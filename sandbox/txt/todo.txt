@@ -6,18 +6,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Learn how to crack old windows programs, specifically the decode.exe's from:
-	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
-	https://dev.discmaster2.textfiles.com/browse/6923/cd.iso/charme/hard
-	https://dev.discmaster2.textfiles.com/browse/6928/CDROSE2.iso/hard
-    https://dev.discmaster2.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
-  Should be able to find some cracking tutotorials from back in the day and go through them. Idea is find the assembly where the password button checks validity and crack that to just be NOP or something or change from BEQ to BNE or something
-  Then add support for these files. Should be fun :)
-  Try asking an LLM for help on disassembly and finding the code to patch it out, etc. Might need to use an 'uncensored' LLM for this.
-  Try grok-2 on X, but can also try:
-	https://sebastian-petrus.medium.com/someone-has-mad-an-uncensored-version-of-qwq-32b-preview-and-it-is-awesome-f64769a60d03
-	which might be available here: https://openrouter.ai/qwen/qvq-72b-preview
-
 * Add extraction suport for these older MacroMind Projector files (21,000+ unique files). No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
@@ -291,6 +279,19 @@
 * Add Old 32bit Linux support then add (see notes for each format):
   music/beRoTracker
   music/synderSNG
+
+* Learn how to crack old windows programs, specifically the decode.exe's from:
+	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
+	https://dev.discmaster2.textfiles.com/browse/6923/cd.iso/charme/hard
+	https://dev.discmaster2.textfiles.com/browse/6928/CDROSE2.iso/hard
+    https://dev.discmaster2.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
+  These are 16bit Windows 95/98 programs. So using W32Dasm or OllyDbg doesn't work well because those only handle 32bit code.
+  Should be able to find some cracking tutotorials from back in the day and go through them. Idea is find the assembly where the password button checks validity and crack that to just be NOP or something or change from BEQ to BNE or something
+  Then add support for these files. Should be fun :)
+  Try asking an LLM for help on disassembly and finding the code to patch it out, etc. Might need to use an 'uncensored' LLM for this.
+  Try grok-2 on X, but can also try:
+	https://sebastian-petrus.medium.com/someone-has-mad-an-uncensored-version-of-qwq-32b-preview-and-it-is-awesome-f64769a60d03
+	which might be available here: https://openrouter.ai/qwen/qvq-72b-preview
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files to convert.
   Bonus points if I make a quick dirty 'dexvert.sh' bash script that folks can use that will convert via wget from CLI via dexvert.com

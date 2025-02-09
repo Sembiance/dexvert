@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,171)
+# Unsupported File Formats (3,174)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -574,7 +574,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (108)
+## Font (109)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -684,11 +684,12 @@ Family/Format | Name | Extensions | Notes
 [font/serverNaturalFormatFont](https://discmaster.textfiles.com/search?formatid=serverNaturalFormatFont) | X11 Server Natural Format font | .snf | 
 [font/x11NeWSBitmapFont](https://discmaster.textfiles.com/search?formatid=x11NeWSBitmapFont) | X11/NeWS Bitmap Font | .fb | 
 [font/x11NeWSFontFamily](https://discmaster.textfiles.com/search?formatid=x11NeWSFontFamily) | X11/NeWS font family | .ff | 
+[font/xboxFont](https://discmaster.textfiles.com/search?formatid=xboxFont) | Xbox Font | .xtf | 
 [font/xCarFont](https://discmaster.textfiles.com/search?formatid=xCarFont) | XCar Font | .fnt | 
 
 
 
-## Image (186)
+## Image (187)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -867,6 +868,7 @@ Family/Format | Name | Extensions | Notes
 [image/ultraDesignDrawing](https://discmaster.textfiles.com/search?formatid=ultraDesignDrawing) | UltraDesign drawing | .ulb .uvw | 
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/unrealTexture](https://discmaster.textfiles.com/search?formatid=unrealTexture) | Unreal Texture | .utx .u .unr | 
+[image/variCADDrawing](https://discmaster.textfiles.com/search?formatid=variCADDrawing) | VariCAD Drawing | .dwb .bkb | 
 [image/venturaPublisher](https://discmaster.textfiles.com/search?formatid=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
 [image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?formatid=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?formatid=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
@@ -1050,7 +1052,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,031)
+## Other (2,032)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2954,6 +2956,7 @@ Family/Format | Name | Extensions | Notes
 [other/vsoLanguageData](https://discmaster.textfiles.com/search?formatid=vsoLanguageData) | VSO language data | .spk | 
 [other/vueDEspritFunctionDefinition](https://discmaster.textfiles.com/search?formatid=vueDEspritFunctionDefinition) | Vue D'Esprit function definition | .fnc .mat .vob | 
 [other/vuimageVideoDriver](https://discmaster.textfiles.com/search?formatid=vuimageVideoDriver) | VUIMAGE Video Driver | .vdr | 
+[other/virtualVolumeViewDatabase](https://discmaster.textfiles.com/search?formatid=virtualVolumeViewDatabase) | [VVV Virtual Volume View database](http://vvvapp.sourceforge.net/) | .vvv | 
 [other/vwCommsDataBase](https://discmaster.textfiles.com/search?formatid=vwCommsDataBase) | VW Comms Data Base | .db .vct .vcc | 
 [other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?formatid=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
 [other/warCraft3Map](https://discmaster.textfiles.com/search?formatid=warCraft3Map) | WarCraft III Map | .w3m | 

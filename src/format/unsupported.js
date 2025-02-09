@@ -562,6 +562,7 @@ export default
 		wordUpToolkitFont                : {name : "WordUp Graphics Toolkit Font", ext : [".wfn"], magic : ["Wordup Graphics Toolkit Font"]},
 		x11NeWSBitmapFont                : {name : "X11/NeWS Bitmap Font", ext : [".fb"], magic : ["X11/NeWS bitmap font"]},
 		x11NeWSFontFamily                : {name : "X11/NeWS font family", ext : [".ff"], magic : ["X11/NeWS font family"]},
+		xboxFont                         : {name : "Xbox Font", ext : [".xtf"], magic : ["Xbox Font", /^XTF, Microsoft Xbox data$/], weakMagic : true},
 		xCADFont                         : {name : "X-CAD Font", magic : ["X-CAD font"]},
 		xCarFont                         : {name : "XCar Font", ext : [".fnt"], magic : ["XCar Font"], weakMagic : true}
 	},
@@ -691,6 +692,7 @@ export default
 		uleadPhotoExpressTemplate      : {name : "Ulead Photo Express Template", ext : [".tpx"], magic : ["Ulead Photo Express Template"], weakMagic : true},
 		ultraDesignDrawing             : {name : "UltraDesign drawing", ext : [".ulb", ".uvw"], magic : ["UltraDesign drawing"]},
 		unrealTexture                  : {name : "Unreal Texture", ext : [".utx", ".u", ".unr"], magic : ["Unreal Texture"]},
+		variCADDrawing                 : {name : "VariCAD Drawing", ext : [".dwb", ".bkb"], magic : ["VariCAD Drawing"], weakMagic : true},
 		versaCAD2DDrawing              : {name : "VersaCAD 2D drawing", ext : [".2d"], magic : ["VersaCAD 2D drawing"], weakMagic : true},
 		visualCADDDrawing              : {name : "Visual CADD Drawing", ext : [".vcd"], magic : ["Visual CADD Drawing"]},
 		visualCADDSymbol               : {name : "Visual CADD Symbol", ext : [".vcs"], magic : ["Visual CADD Symbol"], weakMagic : true},
@@ -2834,6 +2836,7 @@ export default
 		virtualDubDebugInfo                      : {name : "VirtualDub Debug Info", ext : [".vdi"], magic : ["VirtualDub Debug Info"]},
 		virtualFireScene                         : {name : "Virtual Fire Scene", ext : [".sce"], magic : ["Virtual Fire Scene"], weakMagic : true},
 		virtualTIEmulatorSkin                    : {name : "Virtual TI emulator skin", ext : [".skn"], magic : ["Virtual TI v2.x emulator skin"]},
+		virtualVolumeViewDatabase                : {name : "VVV Virtual Volume View database", ext : [".vvv"], magic : ["VVV Virtual Volume View database"], weakMagic : true, website : "http://vvvapp.sourceforge.net/"},
 		virusExecutorPatchBrain                  : {name : "VirusExecutor Patch Brain", ext : [".patchbrain"], magic : ["VirusExecutor Patch Brain"]},
 		virusZIIArchiversInfo                    : {name : "VirusZ II Archivers info", ext : [".archivers"], magic : ["VirusZ II Archivers info"]},
 		virusZIIIBootblocksData                  : {name : "VirusZ III Bootblocks data", ext : [".bootblocks"], magic : ["VirusZ III Bootblocks data"]},

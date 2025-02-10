@@ -28,16 +28,8 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
-* See about adopting these tools for Filemaker Pro files (~10,000 unique files on discmaster2): https://github.com/evanmiller/fmptools
+* See about adopting these tools for Filemaker Pro files (13,613 files on discmaster (9,771 unique)): https://github.com/evanmiller/fmptools
   Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
-
-* Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
-  Then add format support for:
-	archive/os2FTCOMP
-	archive/iconHeaven
-	image/pmDraw
-	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
-	Also could then find sample files for text/rexxAdventureSavedGame (since rexx-adventure is an OS/2 thing)
 
 * Add 'proper' AskSam support for the ~460 files: https://dev.discmaster2.textfiles.com/search?format=askSamDatabase
   https://preservation.tylerthorsted.com/2024/01/26/asksam/
@@ -277,8 +269,8 @@
 	https://archive.org/details/cdrom-riscos-risc-disc-1
 
 * Add Old 32bit Linux support then add (see notes for each format):
-  music/beRoTracker
-  music/synderSNG
+  music/beRoTracker	(no files actually detected on discmaster)
+  music/synderSNG  	(VERY weak magic. no ACTUAL songs detected on discmaster, all are just false positives)
 
 * Learn how to crack old windows programs, specifically the decode.exe's from:
 	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
@@ -304,6 +296,17 @@
 * Could incorporate a new detectory, the DOS based identification program sandbox/app/idar215.exe (self extractor) http://fileformats.archiveteam.org/wiki/IDArc
   Due to the overhead with DOSBox, would want to use 'dosemu2' to run this directrly from the linux console: https://github.com/dosemu2/dosemu2
   I got it to install and compile, but the freedos (fdpp) linking wasn't correct yet and it failed to run IDARCH.EXE
+
+* Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
+  NOTE: Already started this a bit, got it installed into 86box and networkign working. Find it in sandbox/legacy/os2/
+  Next step would be to create a REXX script (see chatgpt history) that would do what supervisor did. Wget is available for OS/2 from Hobbes
+  I stopped because it takes 2x to 3x times longer to boot into OS/2 and there are only 4 formats that would benefit, only 1 would be automateable now and so meh.
+  Then add format support for:
+	archive/os2FTCOMP		(117,604 files on discmaster2 (56,280 unique))
+	image/pmDraw			(101 files (33 unique))  (No known converter, would need Auto-It like functionality for OS/2 to control GUI)
+	archive/iconHeaven		(702 files on discmaster2 (149 unique)) (WARNING: No known converter, even on OS/2)
+	document/os2Help		(56,493 files (11,240 unique))	(Already suport it pretty good) (maybe more converters maybe: https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
+	Find sample files for text/rexxAdventureSavedGame (since rexx-adventure is an OS/2 thing)
 
 * There are several 'detected' installer 'magic' in the 'exe.js' format, I could look into each of these and write extractors for them
 

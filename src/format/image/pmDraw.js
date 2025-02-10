@@ -7,5 +7,5 @@ export class pmDraw extends Format
 	ext         = [".pmd"];
 	magic       = ["PMDraw drawing/presentation"];
 	unsupported = true;
-	notes       = "No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.";
+	notes       = "No known converter. OS/2 drawing program. PMDraw on OS/2 does not support exporting from command line, so would need some sort of AutoIt like util for OS/2.";
 }

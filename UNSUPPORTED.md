@@ -105,7 +105,7 @@ Family/Format | Name | Extensions | Notes
 [archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?formatid=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
 [archive/hxCFloppyEmulatorDiskImage](https://discmaster.textfiles.com/search?formatid=hxCFloppyEmulatorDiskImage) | HxC Floppy Emulator disk image | .hfe | 
 [archive/iceCompressedArchive](https://discmaster.textfiles.com/search?formatid=iceCompressedArchive) | ICE compressed archive | .ice | 
-[archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
+[archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - No known converter, not even on OS/2.
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?formatid=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
 [archive/imageForWindowsDiskImage](https://discmaster.textfiles.com/search?formatid=imageForWindowsDiskImage) | Image for Windows Disk Image | .tbi | 
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?formatid=imageLibrarianArchive) | Image Librarian archive | .ril | 
@@ -829,7 +829,7 @@ Family/Format | Name | Extensions | Notes
 [image/playstation3Icon](https://discmaster.textfiles.com/search?formatid=playstation3Icon) | PlayStation 3 Icon | .gim | 
 [image/plotter3DMaterial](https://discmaster.textfiles.com/search?formatid=plotter3DMaterial) | Plotter3D Material | .material | 
 [image/plotter3DPalette](https://discmaster.textfiles.com/search?formatid=plotter3DPalette) | Plotter3D Palette | .cpal | 
-[image/pmDraw](https://discmaster.textfiles.com/search?formatid=pmDraw) | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://sembiance.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
+[image/pmDraw](https://discmaster.textfiles.com/search?formatid=pmDraw) | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://sembiance.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. PMDraw on OS/2 does not support exporting from command line, so would need some sort of AutoIt like util for OS/2.
 [image/printMagicGraphic](https://discmaster.textfiles.com/search?formatid=printMagicGraphic) | Print Magic Graphic | .pmg | 
 [image/printShopDeluxeBackdrop](https://discmaster.textfiles.com/search?formatid=printShopDeluxeBackdrop) | Print Shop Deluxe Backdrop | .pbk | 
 [image/printShopDeluxeBorder](https://discmaster.textfiles.com/search?formatid=printShopDeluxeBorder) | Print Shop Deluxe Border | .pbr | 

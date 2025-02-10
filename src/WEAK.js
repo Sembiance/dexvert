@@ -268,6 +268,7 @@ export const WEAK_VALUES =
 	/^Crypt! [v\d.]+/,
 	/^Cube$/,
 	/^Cygwin Symbolischer Link$/,
+	/^DOS COM Executable Datei$/,
 	/^DOS Ger.tetreiber/,
 	/^ELI Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Eudora Werbungsdatei$/,

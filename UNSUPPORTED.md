@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,174)
+# Unsupported File Formats (3,178)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (250)
+## Archive (251)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -230,6 +230,7 @@ Family/Format | Name | Extensions | Notes
 [archive/tifiles](https://discmaster.textfiles.com/search?formatid=tifiles) | TIFILES | .tfu .tifile .tifiles | 
 [archive/tinyProtProtected](https://discmaster.textfiles.com/search?formatid=tinyProtProtected) | TinyProt Protected | .exe | 
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
+[archive/tpacArchive](https://discmaster.textfiles.com/search?formatid=tpacArchive) | TPac archive | .pac | 
 [archive/trzZipCompressed](https://discmaster.textfiles.com/search?formatid=trzZipCompressed) | TRCZip compressed | .trc | 
 [archive/turboBatPacked](https://discmaster.textfiles.com/search?formatid=turboBatPacked) | TurboBat Packed | .com | 
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?formatid=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
@@ -1052,7 +1053,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,032)
+## Other (2,035)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1206,6 +1207,7 @@ Family/Format | Name | Extensions | Notes
 [other/amigaFoxLayout](https://discmaster.textfiles.com/search?formatid=amigaFoxLayout) | AmigaFox layout | .afox | 
 [other/amigaKontoPreferences](https://discmaster.textfiles.com/search?formatid=amigaKontoPreferences) | AmigaKonto Preferences | .prefs | 
 [other/amigaKontoSpecification](https://discmaster.textfiles.com/search?formatid=amigaKontoSpecification) | AmigaKonto Specification | .spec | 
+[other/amoebaData](https://discmaster.textfiles.com/search?formatid=amoebaData) | Amoeba Data | .amb | 
 [other/amosAmalBank](https://discmaster.textfiles.com/search?formatid=amosAmalBank) | Amos Amal Animation Bank | .abk | 
 [other/amosAsmBank](https://discmaster.textfiles.com/search?formatid=amosAsmBank) | AMOS ASM Bank | .abk | 
 [other/amosDatasBank](https://discmaster.textfiles.com/search?formatid=amosDatasBank) | AMOS Datas Bank | .abk | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/amosDatasBank/)
@@ -1750,6 +1752,7 @@ Family/Format | Name | Extensions | Notes
 [other/forteAgentCharmap](https://discmaster.textfiles.com/search?formatid=forteAgentCharmap) | Forte Agent Charmap | .cod | 
 [other/fortuneCiteData](https://discmaster.textfiles.com/search?formatid=fortuneCiteData) | Fortune Cite data | .cit | 
 [other/foxBaseMultipleIndex](https://discmaster.textfiles.com/search?formatid=foxBaseMultipleIndex) | FoxBase Multiple Index | .mdx | 
+[other/foxGraphGraph](https://discmaster.textfiles.com/search?formatid=foxGraphGraph) | FoxGraph Graph | .3gr .3ds | 
 [other/foxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=foxProCompoundIndex) | FoxPro Compound Index | .tdx .edx | 
 [other/foxProMemo](https://discmaster.textfiles.com/search?formatid=foxProMemo) | FoxPro Memo File | .fpt | 
 [other/fractalDesignPainterFrisket](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterFrisket) | Fractal Design Painter Frisket | .frs | 
@@ -2193,6 +2196,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftWordStyleSheet](https://discmaster.textfiles.com/search?formatid=microsoftWordStyleSheet) | Microsoft Word Style Sheet | .sty | 
 [other/microsoftZooTycoonSavedGame](https://discmaster.textfiles.com/search?formatid=microsoftZooTycoonSavedGame) | Microsoft Zoo Tycoon saved game | .zoo | 
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?formatid=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
+[other/microStationModificationResourceFile](https://discmaster.textfiles.com/search?formatid=microStationModificationResourceFile) | MicroStation Modification resource file | .m01 .p01 .r01 .s01 | 
 [other/microStationSymbologyResources](https://discmaster.textfiles.com/search?formatid=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
 [other/midget3Instruments](https://discmaster.textfiles.com/search?formatid=midget3Instruments) | Midget 3 Instruments | .mis | 
 [other/midiArpeggiatorArpeggio](https://discmaster.textfiles.com/search?formatid=midiArpeggiatorArpeggio) | MIDI Arpeggiator Arpeggio | .arp | 

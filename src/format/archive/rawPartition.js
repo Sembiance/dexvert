@@ -16,7 +16,7 @@ export class rawPartition extends Format
 		/^fmt\/(468|1087|1105|1739)( |$)/
 	];
 	idMeta     = ({macFileType, macFileCreator}) =>
-		(["devi", "devr"].includes(macFileType) && macFileCreator==="ddsk") ||
+		(["devi", "devr", "pcHD"].includes(macFileType) && macFileCreator==="ddsk") ||
 		(macFileType==="DDim" && macFileCreator==="DDp+") ||
 		(macFileType==="PCHD" && ["PCXT", "SWIN"].includes(macFileCreator)) ||
 		(macFileType==="hdrv" && macFileCreator==="Wrap");

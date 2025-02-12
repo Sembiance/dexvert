@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,178)
+# Unsupported File Formats (3,181)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -883,7 +883,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (164)
+## Music (165)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1013,6 +1013,7 @@ Family/Format | Name | Extensions | Notes
 [music/scorePerfectProfessionalSong](https://discmaster.textfiles.com/search?formatid=scorePerfectProfessionalSong) | Score Perfect Professional Song | .son | 
 [music/scrullMusicFile](https://discmaster.textfiles.com/search?formatid=scrullMusicFile) | Scrull Music File | .smf | 
 [music/sequencerOneSong](https://discmaster.textfiles.com/search?formatid=sequencerOneSong) | Sequencer One Song | .one | 
+[music/shakeTrackerModule](https://discmaster.textfiles.com/search?formatid=shakeTrackerModule) | ShakeTracker Module | .st | 
 [music/shroomPlayer](https://discmaster.textfiles.com/search?formatid=shroomPlayer) | ShroomPlayer Module | .sho | [5 sample files](https://sembiance.com/fileFormatSamples/music/shroomPlayer/)
 [music/sibeliusMusicScore](https://discmaster.textfiles.com/search?formatid=sibeliusMusicScore) | Sibelius Music / Score | .sib .lib | 
 [music/skaleTracker](https://discmaster.textfiles.com/search?formatid=skaleTracker) | Skale Tracker Module | .skm | [5 sample files](https://sembiance.com/fileFormatSamples/music/skaleTracker/)
@@ -1053,7 +1054,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,035)
+## Other (2,037)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1572,6 +1573,7 @@ Family/Format | Name | Extensions | Notes
 [other/demoShieldDemo](https://discmaster.textfiles.com/search?formatid=demoShieldDemo) | DemoShield Demo | .dbd .bdd | 
 [other/depthDwellersGameData](https://discmaster.textfiles.com/search?formatid=depthDwellersGameData) | Depth Dwellers Resource/game data | .res | 
 [other/derEncodedData](https://discmaster.textfiles.com/search?formatid=derEncodedData) | DER Encoded Data | .rsa | 
+[other/deriveForWindows](https://discmaster.textfiles.com/search?formatid=deriveForWindows) | Derive for Windows | .dfw | 
 [other/descent2AlternativeTextureSet](https://discmaster.textfiles.com/search?formatid=descent2AlternativeTextureSet) | Descent 2 alternative texture set | .pog | 
 [other/descentGameSave](https://discmaster.textfiles.com/search?formatid=descentGameSave) | Descent Game Save | .sg0 | 
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
@@ -2775,6 +2777,7 @@ Family/Format | Name | Extensions | Notes
 [other/team17MOIKGameDataArchive](https://discmaster.textfiles.com/search?formatid=team17MOIKGameDataArchive) | Team17 MOIK game data archive | .aud .xom .laf .kev .bdl .cam | 
 [other/team6GameData](https://discmaster.textfiles.com/search?formatid=team6GameData) | Team6 game data | .dcf .dct .dcl .dcc .dcm .dcscript .dcw .mcs | 
 [other/teamBGInfinityEngineDataFormat](https://discmaster.textfiles.com/search?formatid=teamBGInfinityEngineDataFormat) | TeamBG Infinity Engine data format | .tbg | 
+[other/teapotXDRSpreadsheet](https://discmaster.textfiles.com/search?formatid=teapotXDRSpreadsheet) | Teapot XDR spreadsheet | .tp | 
 [other/teenageMutantNinjaTurtlesLevelData](https://discmaster.textfiles.com/search?formatid=teenageMutantNinjaTurtlesLevelData) | Teenage Mutant Ninja Turtles Level data | .lev | 
 [other/telepaintMenu](https://discmaster.textfiles.com/search?formatid=telepaintMenu) | Telepaint Menu | .mnu | 
 [other/telepaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=telepaintPrinterDriver) | Telepaint printer Driver | .drv | 

@@ -2020,6 +2020,7 @@ export const WEAK_VALUES =
 	/^PERQemu Hard Disk image$/,
 	/^Personal Paint encrypted bitmap$/,	// Found these in the wild, distrubuted with demo version of program, but it's weak magic and can't decrypt them easily anyways
 	/^PestPatrol data \/ scan strings$/,
+	/^Peters Plus Sprinter Executable$/,
 	/^PFS File database$/,
 	/^PFS:Graph chart$/,
 	/^PFS:Write document\/outline \(v2\.x\)$/,

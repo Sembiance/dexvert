@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,181)
+# Unsupported File Formats (3,184)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -517,7 +517,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (52)
+## Executable (53)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -551,6 +551,7 @@ Family/Format | Name | Extensions | Notes
 [executable/machOSPARCExe](https://discmaster.textfiles.com/search?formatid=machOSPARCExe) | Mach-O SPARC Executable |  | 
 [executable/machOx86Exe](https://discmaster.textfiles.com/search?formatid=machOx86Exe) | Mach-O x86 Executable |  | 
 [executable/macPPCPEFExe](https://discmaster.textfiles.com/search?formatid=macPPCPEFExe) | MacOS PPC PEF Executable |  | 
+[executable/menuetOSApplication](https://discmaster.textfiles.com/search?formatid=menuetOSApplication) | MenuetOS application |  | 
 [executable/microsoftCompiledHelp2](https://discmaster.textfiles.com/search?formatid=microsoftCompiledHelp2) | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki/Microsoft_Help_2) | .HxS .HxI | 
 [executable/mipsECOFFExe](https://discmaster.textfiles.com/search?formatid=mipsECOFFExe) | MIPSL ECOFF Executable |  | 
 [executable/com](https://discmaster.textfiles.com/search?formatid=com) | [MS-DOS COM Executable](http://fileformats.archiveteam.org/wiki/DOS_executable_(.com)) | .com .c0m | [4 sample files](https://sembiance.com/fileFormatSamples/executable/com/)
@@ -1054,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,037)
+## Other (2,039)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1745,6 +1746,7 @@ Family/Format | Name | Extensions | Notes
 [other/fMailNodeConfiguration](https://discmaster.textfiles.com/search?formatid=fMailNodeConfiguration) | FMail Node configuration | .nod | 
 [other/fOnlineEngineTileSet](https://discmaster.textfiles.com/search?formatid=fOnlineEngineTileSet) | FOnline Engine Tile set | .til | 
 [other/fontDescriptor](https://discmaster.textfiles.com/search?formatid=fontDescriptor) | Font descriptor | .ntf14 .ntf16 .ntf4 | 
+[other/foobar2000ColumnsUISettings](https://discmaster.textfiles.com/search?formatid=foobar2000ColumnsUISettings) | Foobar 2000 Columns UI settings | .fcs | 
 [other/foreignLanguageMasterConfig](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterConfig) | Foreign Language Master Configuration | .config | 
 [other/foreignLanguageMasterDictionary](https://discmaster.textfiles.com/search?formatid=foreignLanguageMasterDictionary) | Foreign Language Master dictionary | .flm | 
 [other/forgeFileSystemGameDataArchive](https://discmaster.textfiles.com/search?formatid=forgeFileSystemGameDataArchive) | Forge File System game data archive | .ffs | 
@@ -2105,6 +2107,7 @@ Family/Format | Name | Extensions | Notes
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?formatid=masiMusicDriver) | MASI Music Driver | .mus | 
 [other/masterTracksProPreferences](https://discmaster.textfiles.com/search?formatid=masterTracksProPreferences) | Master Tracks Pro Preferences | .mtp | 
 [other/masterCookCookbookFile](https://discmaster.textfiles.com/search?formatid=masterCookCookbookFile) | MasterCook Cookbook file | .mcf | 
+[other/mathStudio](https://discmaster.textfiles.com/search?formatid=mathStudio) | Math Studio | .mts | 
 [other/mathCadDocument](https://discmaster.textfiles.com/search?formatid=mathCadDocument) | MathCad Document | .mcd | 
 [other/mathVISIONFormula](https://discmaster.textfiles.com/search?formatid=mathVISIONFormula) | MathVISION Formula | .f | 
 [other/maxonCinema4DCOFFEEBinary](https://discmaster.textfiles.com/search?formatid=maxonCinema4DCOFFEEBinary) | Maxon Cinema 4D COFFEE Binary | .cob | 

@@ -4,7 +4,7 @@ export class openDocument extends Format
 {
 	name           = "Open Document Format for Office Applications";
 	website        = "http://fileformats.archiveteam.org/wiki/OpenDocument";
-	ext            = [".odm", ".odt", ".fodt", ".ott", ".odp", ".ods", ".otp"];
+	ext            = [".odm", ".odt", ".fodt", ".ott", ".odp", ".ods", ".otp", ".odf"];
 	forbidExtMatch = true;
 	magic          = [
 		// general

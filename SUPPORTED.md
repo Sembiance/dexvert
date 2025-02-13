@@ -1,4 +1,4 @@
-# Supported File Formats (2,961)
+# Supported File Formats (2,962)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -693,7 +693,7 @@ document | [Microsoft Visio](http://fileformats.archiveteam.org/wiki/Visio) | .v
 document | [Microsoft Word for DOS Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word) | .doc .dcx | [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) [strings](https://www.gnu.org/software/binutils/) | [18 sample files](https://sembiance.com/fileFormatSamples/document/wordDocDOS/)
 document | [Microsoft Works Database](http://fileformats.archiveteam.org/wiki/Microsoft_Works_Database) | .wdb | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/microsoftWorksDatabase/)
 document | [Microsoft Works Document/Spreadsheet](http://fileformats.archiveteam.org/wiki/Microsoft_Works) | .wps .wp .doc .xlr | [keyViewPro](https://archive.org/details/KeyViewPro/) [fileMerlin](http://www.file-convert.com/flmn.htm) [soffice](https://www.libreoffice.org) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [14 sample files](https://sembiance.com/fileFormatSamples/document/microsoftWorks/)
-document | [Mobipocket Reader eBook](https://en.wikipedia.org/wiki/Mobipocket) | .mobi .prc | [ebook_convert](https://calibre-ebook.com/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/mobi/)
+document | [Mobipocket Reader eBook](https://en.wikipedia.org/wiki/Mobipocket) | .mobi .prc | [ebook_convert](https://calibre-ebook.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/mobi/)
 document | [MultiMate Document](https://winworldpc.com/product/multimate) | .doc .dox .fnx .pat | [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [4 sample files](https://sembiance.com/fileFormatSamples/document/multiMate/)
 document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb .hlp | [unHLPMVB](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/document/multimediaViewerBook/)
 document | NewAge Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/newAgeHelp/)
@@ -704,7 +704,7 @@ document | Novell/C-Worthy Message Librarian | .msg .dat | [strings](https://www
 document | Oberon Document | .odc | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/oberonDocument/)
 document | Oberon Text | .mod | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/oberonText/)
 document | [Office Open XML](http://fileformats.archiveteam.org/wiki/DOCX) | .docx .docm .dotx | [soffice](https://www.libreoffice.org) | [13 sample files](https://sembiance.com/fileFormatSamples/document/docx/)
-document | [Open Document Format for Office Applications](http://fileformats.archiveteam.org/wiki/OpenDocument) | .odm .odt .fodt .ott .odp .ods .otp | [soffice](https://www.libreoffice.org) | [18 sample files](https://sembiance.com/fileFormatSamples/document/openDocument/)
+document | [Open Document Format for Office Applications](http://fileformats.archiveteam.org/wiki/OpenDocument) | .odm .odt .fodt .ott .odp .ods .otp .odf | [soffice](https://www.libreoffice.org) | [18 sample files](https://sembiance.com/fileFormatSamples/document/openDocument/)
 document | [Open Office Document](http://fileformats.archiveteam.org/wiki/OpenOffice.org_XML) | .sxw .stw .stc .sti .sxc .sxi sxd | [soffice](https://www.libreoffice.org) | [14 sample files](https://sembiance.com/fileFormatSamples/document/openOffice/)
 document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/OpenXPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [12 sample files](https://sembiance.com/fileFormatSamples/document/xps/)
 document | [OrgPlus](http://fileformats.archiveteam.org/wiki/OrgPlus) | .opx .ops | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/orgPlus/)
@@ -2009,7 +2009,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (914)
+## Text (915)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2057,7 +2057,7 @@ text | Anacreon: Reconstruction Scenery | .scn |  | [6 sample files](https://sem
 text | Anim8or project | .an8 |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/anim8orProject/)
 text | ANIMagic DVE Map | .map |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/aniMagicDVEMap/)
 text | ANIMagic Map | .map |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/aniMagicMap/)
-text | Anjuta Project | .prj |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/anjutaProject/)
+text | Anjuta Project | .prj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/anjutaProject/)
 text | AntiVir Job | .avj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/antiVirJob/)
 text | AntiVir Profile | .avp |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/antiVirProfile/)
 text | Apache mission Data | .dta |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
@@ -2117,7 +2117,7 @@ text | BlueJ Class context | .ctxt |  | [9 sample files](https://sembiance.com/f
 text | BlueJ package | .pkg |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/blueJPackage/)
 text | blueMSX Cheats |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/blueMSXCheats/)
 text | blueMSX theme info |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/blueMSXThemeInfo/)
-text | Bochs keymap | .map |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/bochsKeymap/)
+text | Bochs keymap | .map |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/bochsKeymap/)
 text | Borland DataBase Explorer Information | .dbi |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/borlandDataBaseExplorerInformation/)
 text | Borland Linker Mapping Data | .map |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/borlandLinkerMappingData/)
 text | Borland Project Group | .bpg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/borlandProjectGroup/)
@@ -2176,6 +2176,7 @@ text | Cream Software Palette definition | .pal |  | [4 sample files](https://se
 text | Crimson Editor language specification file | .spc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/crimsonEditorLanguageSpecificationFile/)
 text | CrossStudio project | .hzp |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/crossStudioProject/)
 text | Crossword Creator Puzzle | .puz |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/crosswordCreatorPuzzle/)
+text | Crystallographic Information Framework | .cif |  | 
 text | Csound Orchestra | .orc |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/csoundOrchestra/)
 text | Csound unified file format | .csd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
 text | Cube LUT format | .lut .cube |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cubeLUTFormat/)
@@ -2672,7 +2673,7 @@ text | QuickTime Text subtitles |  |  | [6 sample files](https://sembiance.com/f
 text | QuizPro Quiz data | .qzs .qzd .qze |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quizProQuizData/)
 text | R documentation | .rd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rDocumentation/)
 text | RAR registration data | .key .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/rarRegistrationData/)
-text | RASTER Music Tracker settings | .ini |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/rasterMusicTrackerSettings/)
+text | RASTER Music Tracker settings | .ini |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rasterMusicTrackerSettings/)
 text | REAL Numbers Tape | .tap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/realNumbersTape/)
 text | RealMedia meta file | .ram |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/realMediaMetaFile/)
 text | REAPER Project | .rpp |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/reaperProject/)
@@ -2860,8 +2861,8 @@ text | Watcom C/C++ Project | .wpj |  | [16 sample files](https://sembiance.com/
 text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/watcomCTarget/)
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
-text | WDDX packet |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
-text | Web browser cookies | .txt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
+text | WDDX packet |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
+text | Web browser cookies | .txt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
 text | Web Video Text Tracks | .vtt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)
 text | Wheel binary package format info |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatInfo/)

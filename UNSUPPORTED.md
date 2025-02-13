@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,184)
+# Unsupported File Formats (3,186)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,039)
+## Other (2,041)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1404,6 +1404,7 @@ Family/Format | Name | Extensions | Notes
 [other/calamusRasterInfo](https://discmaster.textfiles.com/search?formatid=calamusRasterInfo) | Calamus Raster Information | .cri .cr | 
 [other/calamusTextStyleList](https://discmaster.textfiles.com/search?formatid=calamusTextStyleList) | Calamus Text Style List | .csl .cs | 
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?formatid=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
+[other/capellaGalleryDataFile](https://discmaster.textfiles.com/search?formatid=capellaGalleryDataFile) | Capella gallery data file | .cag | 
 [other/capellaMusicNotation](https://discmaster.textfiles.com/search?formatid=capellaMusicNotation) | Capella music notation | .cap | 
 [other/cardSoftPCMCIACardLibrary](https://discmaster.textfiles.com/search?formatid=cardSoftPCMCIACardLibrary) | CardSoft PCMCIA Card Library | .clb | 
 [other/carmageddonSavedGame](https://discmaster.textfiles.com/search?formatid=carmageddonSavedGame) | Carmageddon Saved Game | .ars | 
@@ -2217,6 +2218,7 @@ Family/Format | Name | Extensions | Notes
 [other/mlocateDatabase](https://discmaster.textfiles.com/search?formatid=mlocateDatabase) | mlocate database | .db | 
 [other/mmfwData](https://discmaster.textfiles.com/search?formatid=mmfwData) | MMFW data | .mms .mmb .mmp .snd .pic .cpk .blb | 
 [other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
+[other/mobipocketEBookAuxiliaryData](https://discmaster.textfiles.com/search?formatid=mobipocketEBookAuxiliaryData) | Mobipocket eBook Auxiliary data | .mbp | 
 [other/modiMODVoice](https://discmaster.textfiles.com/search?formatid=modiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moonbaseSavedGame](https://discmaster.textfiles.com/search?formatid=moonbaseSavedGame) | Moonbase Saved game | .mbs | 

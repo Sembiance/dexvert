@@ -1151,6 +1151,7 @@ export const WEAK_VALUES =
 	/^eXtended Triton Format$/,
 	/^F64 disk image$/,
 	/^Face The Music Effect$/,
+	/^Farandole F3R blocked linear module format$/,
 	/^Farandole Form 2\.0 Linear module$/,
 	/^Fast Search and Transfer video$/,
 	/^FDX68 disk image \(generic\)$/,

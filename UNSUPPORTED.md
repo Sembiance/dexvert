@@ -341,7 +341,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (170)
+## Document (171)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -477,6 +477,7 @@ Family/Format | Name | Extensions | Notes
 [document/rmpHelp](https://discmaster.textfiles.com/search?formatid=rmpHelp) | RMP Help | .hlp | 
 [document/saxonPublisherDocument](https://discmaster.textfiles.com/search?formatid=saxonPublisherDocument) | Saxon Publisher document | .sp | 
 [document/pagePlus](https://discmaster.textfiles.com/search?formatid=pagePlus) | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
+[document/signumDocument3](https://discmaster.textfiles.com/search?formatid=signumDocument3) | Signum Document v3 | .sdk | 
 [document/starAmPlanSpreadsheet](https://discmaster.textfiles.com/search?formatid=starAmPlanSpreadsheet) | StarAm Plan Spreadsheet | .sab | 
 [document/storybookWeaver](https://discmaster.textfiles.com/search?formatid=storybookWeaver) | Storybook Weaver Story | .swd .sts | 
 [document/superplanSpreadsheet](https://discmaster.textfiles.com/search?formatid=superplanSpreadsheet) | Superplan spreadsheet | .spp | 
@@ -576,7 +577,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (109)
+## Font (108)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -592,7 +593,6 @@ Family/Format | Name | Extensions | Notes
 [font/bannerManiaFont](https://discmaster.textfiles.com/search?formatid=bannerManiaFont) | Banner Mania Font | .fnt | [19 sample files](https://sembiance.com/fileFormatSamples/font/bannerManiaFont/)
 [font/bannerManiaBanner](https://discmaster.textfiles.com/search?formatid=bannerManiaBanner) | BannerMania banner | .brm | 
 [font/bitImagesFont](https://discmaster.textfiles.com/search?formatid=bitImagesFont) | BitImages Font | .fnt | 
-[font/bitmappedSignumFont](https://discmaster.textfiles.com/search?formatid=bitmappedSignumFont) | Bitmapped Signum! Font | .p24 .e24 .p9 .l30 | 
 [font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 [font/bradfordFont](https://discmaster.textfiles.com/search?formatid=bradfordFont) | Bradford Font | .bf2 | 
 [font/byteMapFontFormat](https://discmaster.textfiles.com/search?formatid=byteMapFontFormat) | [ByteMap font format](https://web.archive.org/web/20080501103520/http://bmf.wz.cz/bmf-format.htm) | .bmf | 
@@ -665,7 +665,7 @@ Family/Format | Name | Extensions | Notes
 [font/ripTermFont](https://discmaster.textfiles.com/search?formatid=ripTermFont) | RIPterm Font | .fnt | 
 [font/rixSoftWorksFont](https://discmaster.textfiles.com/search?formatid=rixSoftWorksFont) | RIX SoftWorks Font | .fnt | 
 [font/saxonPublisherFont](https://discmaster.textfiles.com/search?formatid=saxonPublisherFont) | Saxon Publisher Font | .sxf .sx | 
-[font/signumFont](https://discmaster.textfiles.com/search?formatid=signumFont) | Signum Font | .e24 | 
+[font/signumPrinterFont](https://discmaster.textfiles.com/search?formatid=signumPrinterFont) | Signum! Printer Font | .p24 .p9 .l30 | 
 [font/speedo](https://discmaster.textfiles.com/search?formatid=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 [font/takeTwoInteractiveSoftwareFont](https://discmaster.textfiles.com/search?formatid=takeTwoInteractiveSoftwareFont) | Take-Two Interactive Software Font | .fnt | 
 [font/telepaintFont](https://discmaster.textfiles.com/search?formatid=telepaintFont) | Telepaint Font | .fnt | 

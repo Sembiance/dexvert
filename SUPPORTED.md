@@ -1,4 +1,4 @@
-# Supported File Formats (2,963)
+# Supported File Formats (2,966)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -246,7 +246,7 @@ archive | Macromedia Projector |  | [director_files_extract](https://github.com/
 archive | MADS HAG Game Archive | .hag | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/madsHAGGameArchive/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Magic_Shadow_Archiver)) | .msa | [msa](https://web.archive.org/web/20060507110406/https://www.uni-ulm.de/~s_thuth/ix/msa-0.1.0.tar.gz) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox/MIME Entity](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [ripmime](https://github.com/inflex/ripMIME) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/mbox/)
-archive | Mall Tycoon game data archive | .muk | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/mallTycoonGameDataArchive/)
+archive | Mall Tycoon game data archive | .muk | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mallTycoonGameDataArchive/)
 archive | [MAME Compressed Hard Disk image](https://www.psxdev.net/forum/viewtopic.php?t=3980) | .chd .hd | [chdman](https://github.com/mamedev/mame/releases) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/mameCHD/)
 archive | [MDCD Archive](http://fileformats.archiveteam.org/wiki/MDCD) | .md .cd | [deark](https://entropymine.com/deark/) [mdcd](http://cd.textfiles.com/megarom/megarom1/ARC_LBR/MDCD10.ZIP) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/mdcd/)
 archive | Meyer/Glass Interactive Game Archive | .mgf | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/meyerGlassGameArchive/)
@@ -458,7 +458,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (102)
+## Audio (103)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 3DO STR audio |  | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/threeDOSTRAudio/)
@@ -470,6 +470,7 @@ audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8-Bi
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [amosbank](https://github.com/dschwen/amosbank) [dumpamos](https://github.com/kyz/amostools/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/amosSamples/)
 audio | [Apple QuickTime Audio](http://fileformats.archiveteam.org/wiki/QuickTime) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) [qt_flatt](https://www.macdisk.com/quickten.php) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/quickTimeAudio/) - HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"
 audio | [AST Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_AST) | .ast | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/astWii/)
+audio | [Astrid/Quartex AAC encoded audio](https://web.archive.org/web/20090319015937/http://www.rjamorim.com/rrw/astrid.html) | .aac | [astridAACDEC](https://web.archive.org/web/20090319015937/http://www.rjamorim.com/rrw/files/astrid.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/astridQuartexAACEncodedAudio/)
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [20 sample files](https://sembiance.com/fileFormatSamples/audio/aif/)
 audio | [Audio Visual Research](http://fileformats.archiveteam.org/wiki/AVR) | .avr | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/avr/)
 audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
@@ -566,7 +567,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (238)
+## Document (239)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/fourDWriteDocument/)
@@ -754,6 +755,7 @@ document | [Samna Word Document](https://winworldpc.com/product/samna-word/iii) 
 document | [Scribus Document](http://fileformats.archiveteam.org/wiki/Scribus) | .sla .scd | [scribus](https://www.scribus.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/scribus/)
 document | [Shanda Bambook](http://fileformats.archiveteam.org/wiki/Shanda_Bambook) | .snb .bek | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/shandaBambook/)
 document | [SHOW (Gary M. Raymond)](http://fileformats.archiveteam.org/wiki/SHOW_(Gary_M._Raymond)) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/showCOM/)
+document | [Signum Document](https://github.com/Xiphoseer/sdo-tool/blob/main/docs/formats/sdoc.md) | .sdo | [sdoTool](https://github.com/xiphoseer/sdo-tool) | [9 sample files](https://sembiance.com/fileFormatSamples/document/signumDocument/)
 document | Smart Software Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/smartSoftwareDocument/)
 document | Smart Software WorkSheet | .ws | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/document/smartSoftwareWorksheet/)
 document | [Softdisk Text Compressor Document](http://fileformats.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [13 sample files](https://sembiance.com/fileFormatSamples/document/softdiskTextCompressed/)
@@ -823,7 +825,7 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (36)
+## Font (37)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -855,6 +857,7 @@ font | [PCR Font](http://fileformats.archiveteam.org/wiki/PCR_font) | .pcr | [de
 font | [Portable Compiled Format](http://fileformats.archiveteam.org/wiki/PCF) | .pcf .pmf | [deark](https://entropymine.com/deark/) | [8 sample files](https://sembiance.com/fileFormatSamples/font/pcf/)
 font | RiscOS Font |  | [acorn2sfd](https://fontforge.org) | [4 sample files](https://sembiance.com/fileFormatSamples/font/riscOSFont/)
 font | [Shoot Em Up Construction Kit Font](http://fileformats.archiveteam.org/wiki/Shoot_'Em_Up_Construction_Kit) | .g | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/font/seuckFont/) - Only one file format has been located. To prevent false positives it assumes this format is 514 bytes long, always.
+font | Signum! Editor Font | .e24 | [chsetKB](https://github.com/xiphoseer/sdo-tool) | [16 sample files](https://sembiance.com/fileFormatSamples/font/signumEditorFont/)
 font | Super-IRG | .sif | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/sif/)
 font | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [wuimg](https://codeberg.org/kaleido/wuimg) | [16 sample files](https://sembiance.com/fileFormatSamples/font/texFont/) - Using sandbox/app/glut-master/progs/texfont/showtxf.c I can render it to a cube. Could write C code to render the whole test alphabet letters and then save that to an image, but MEH.
 font | The Last Word Font | .f80 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/f80/)
@@ -954,7 +957,7 @@ image | [C.O.L.R. Object Editor](http://fileformats.archiveteam.org/wiki/C.O.L.R
 image | [C64 Hires-Bitmap](http://fileformats.archiveteam.org/wiki/Hires-Bitmap) | .hbm .hir .hpi .gih .fgs | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/c64HiRes/)
 image | [Calamus Raster Graphic](http://fileformats.archiveteam.org/wiki/Calamus_Raster_Graphic) | .crg | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/crg/)
 image | [Calamus Vector Graphic](http://fileformats.archiveteam.org/wiki/Calamus_Vector_Graphic) | .cvg | [scribus](https://www.scribus.net/) | [19 sample files](https://sembiance.com/fileFormatSamples/image/cvg/)
-image | [Canon Image File Format](http://fileformats.archiveteam.org/wiki/Camera_Image_File_Format) | .crw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/crw/)
+image | [Canon Image File Format](http://fileformats.archiveteam.org/wiki/Camera_Image_File_Format) | .crw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/crw/)
 image | [Canon RAW 2](http://fileformats.archiveteam.org/wiki/Canon_RAW_2) | .cr2 | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/cr2/)
 image | [Canvas Image](http://fileformats.archiveteam.org/wiki/Canvas) | .cvs .cv5 .cvx .cvi | [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/canvasImage/)
 image | [Casio QV CAMera Bitmap](http://fileformats.archiveteam.org/wiki/Casio_CAM) | .cam | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/casioQVCAM/)
@@ -2772,7 +2775,7 @@ text | SVGAVESA configuration | .svc |  | [17 sample files](https://sembiance.co
 text | T-RackS Preset | .trp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/tRackSPreset/)
 text | TASM instructions definition Table | .tab |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tasmInstructionsDefinitionTable/)
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
-text | Team Developer / SQLWindows application | .apt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/teamDeveloperSQLWindowsAppText/)
+text | Team Developer / SQLWindows application | .apt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/teamDeveloperSQLWindowsAppText/)
 text | Terminate Smartnote | .not |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/terminateSmartnote/)
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
@@ -2973,7 +2976,7 @@ video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/fli/)
 video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [grasp4](https://winworldpc.com/product/fantavision/1x-dos) | [30 sample files](https://sembiance.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
 video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Digital_Video) | .gdv | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/gremlinDigitalVideo/)
-video | [Harro Media VDO video](https://wiki.multimedia.cx/index.php/Harrow_Media_VDO) | .vdo .vd | [na_game_tool](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/video/vdoVideo/)
+video | [Harro Media VDO video](https://wiki.multimedia.cx/index.php/Harrow_Media_VDO) | .vdo .vd | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/vdoVideo/)
 video | [IBM PhotoMotion MM Video](https://wiki.multimedia.cx/index.php/IBM_PhotoMotion) | .mm | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/ibmPhotoMotion/)
 video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/video/iffYAFA/)

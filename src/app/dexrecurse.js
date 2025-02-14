@@ -71,6 +71,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/bloodrayneGameDataArchive",
 	"archive/corelMOSAIC",
 	"archive/impactILB",
+	"archive/mallTycoonGameDataArchive",
 	"archive/softdiskLibrary",
 	"archive/threeDUltraMiniGolfGameData",
 	"document/bankBookForWindows",

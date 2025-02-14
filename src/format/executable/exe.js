@@ -32,7 +32,7 @@ export class exe extends Format
 
 		// specific exe types
 		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable", "MOZART tune",
-		"Graphic Workshop self-displaying picture executable", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)", "WIFE Font Driver", "PhotoFilter plugin",
+		"Graphic Workshop self-displaying picture executable", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)", "WIFE Font Driver", "PhotoFilter plugin", "Win32 EXE RosAsm",
 		"Total Commander Content plugin", "Total Commander File system extension (plugin)", "Lavasoft Ad-aware 6 plugin", "Find and Run Robot (FARR) plugin", "Microsoft Basic Quick library", "Flow Charting 3 Printer Definition",
 		
 		// icon libraries (these are EXEs basically with icons in them, the current tools below do a fine job at extracting the icons so no need to make a separate format for them)

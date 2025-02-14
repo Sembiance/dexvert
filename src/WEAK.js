@@ -748,7 +748,7 @@ export const WEAK_VALUES =
 	/^Mathematica 3.0 notebook/,
 	/^Mathematica binary file/,
 	/^Matlab v(4|Mat)/,
-	/^Matlab (vand|vChe|vCon|vDIF|vFIR|vis|vMu-|vNeu|vOpt|vpro|vRob|vSig|vsta|vSpl|vSys|vVer) mat-file/,
+	/^Matlab (vand|vChe|vCon|vDem|vDIF|vFIR|vis|vMu-|vNeu|vOpt|vpro|vRob|vSig|vsta|vSpl|vSys|vVer) mat-file/,
 	/^MAR archive data$/,
 	/^MARC21 (Authority|Bibliographic)/,
 	/^mc68k executable/,

@@ -77,6 +77,8 @@ const DEXMAGIC_CHECKS =
 	"Microsoft Publisher v1"                  : [{offset : 0, match : [0xE7, 0xAC, 0x2C, 0x00]}],
 	"PageStream Document"                     : [{offset : 0, match : [0x07, 0x23, 0x19, 0x92, 0x00, 0x0D, 0x02, 0x00, 0x00]}],
 	"PCBoard Programming Language Executable" : [{offset : 0, match : "PCBoard Programming Language Executable"}],
+	"Signum 1/2 Document"                     : [{offset : 0, match : "sdoc0001"}],
+	"Signum 3/4 Document"                     : [{offset : 0, match : "\x00\x00sdoc  03"}],
 	"Wildcat WCX"                             : [{offset : 0, match : "GHSH"}],
 
 	// executable

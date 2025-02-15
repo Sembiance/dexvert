@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,186)
+# Unsupported File Formats (3,187)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (251)
+## Archive (252)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -118,6 +118,7 @@ Family/Format | Name | Extensions | Notes
 [archive/isiGMotorMASType0GameDataArchive](https://discmaster.textfiles.com/search?formatid=isiGMotorMASType0GameDataArchive) | ISI gMotor MAS type 0 game data archive | .gtl | 
 [archive/izPackArchive](https://discmaster.textfiles.com/search?formatid=izPackArchive) | IzPack Archive |  | 
 [archive/jadeEmpireGameDataArchive](https://discmaster.textfiles.com/search?formatid=jadeEmpireGameDataArchive) | Jade Empire game data archive | .rim | 
+[archive/kdPackPacked](https://discmaster.textfiles.com/search?formatid=kdPackPacked) | JDPack Packed | .exe | 
 [archive/jmCryptExeProtected](https://discmaster.textfiles.com/search?formatid=jmCryptExeProtected) | JMCryptExe Protected | .exe | 
 [archive/kkcrunchPacked](https://discmaster.textfiles.com/search?formatid=kkcrunchPacked) | kkrunchy Packed | .exe | 
 [archive/kuaiZipCompressedArchive](https://discmaster.textfiles.com/search?formatid=kuaiZipCompressedArchive) | KuaiZip compressed archive | .kz | 

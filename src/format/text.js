@@ -624,6 +624,7 @@ export default
 		montagePreset                              : {name : "Montage Preset", ext : [".preset"], magic : ["Montage Preset"]},
 		mosaicHotlist                              : {name : "Mosaic Hotlist", ext : [".hot"], magic : ["Mosaic Hotlist"], weakMagic : true},
 		motionCaptureFileFormat                    : {name : "Motion Capture File Format", ext : [".csm"], magic : ["Motion Capture File Format"], weakMagic : true},
+		moxcelSpreadsheet                          : {name : "Moxcel spreadsheet", ext : [".mxl"], magic : ["Moxcel spreadsheet", /^fmt\/1970( |$)/], weakMagic : true},
 		mozillaMorkDatabase                        : {name : "Mozilla Mork database", ext : [".dat", ".mab"], magic : [/Mozilla Mork database/, "Mozilla Address Book", /^fmt\/612( |$)/]},
 		mozillaNetscapeSettings                    : {name : "Mozilla (Netscape) settings", ext : [".js"], magic : ["Mozilla (Netscape) settings"]},
 		mozillaSpamFilterDefinition                : {name : "Mozilla Spam Filter Definition", ext : [".sfd"], magic : ["Mozilla Spam Filter Definition"], weakMagic : true},

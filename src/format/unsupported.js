@@ -58,6 +58,7 @@ export default
 		exePackerPacked          : {name : "EXE Packer Packed", magic : ["Packer: EXE Packer"]},
 		ezipPacked               : {name : "EZip Packed", ext : [".exe"], magic : ["Packer: ezip", "EZip compressed Win32 executable"]},
 		fsgPacked                : {name : "FSG Packed", ext : [".exe"], magic : ["Packer: FSG"]},
+		kdPackPacked             : {name : "JDPack Packed", ext : [".exe"], magic : ["Packer: JDPack"]},
 		kkcrunchPacked           : {name : "kkrunchy Packed", ext : [".exe"], magic : ["Packer: kkrunchy", "kkrunchy compressed Win32 Executable"]},
 		megalitePacked           : {name : "MEGALITE Packed", ext : [".exe"], magic : ["16bit DOS EXE MEGALITE compressed"]},
 		mewPacked                : {name : "Mew Packed", ext : [".exe"], magic : ["Mew compressed Win32 Executable", "Packer: MEW"]},

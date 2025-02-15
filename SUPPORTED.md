@@ -1,4 +1,4 @@
-# Supported File Formats (2,966)
+# Supported File Formats (2,967)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -755,7 +755,7 @@ document | [Samna Word Document](https://winworldpc.com/product/samna-word/iii) 
 document | [Scribus Document](http://fileformats.archiveteam.org/wiki/Scribus) | .sla .scd | [scribus](https://www.scribus.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/scribus/)
 document | [Shanda Bambook](http://fileformats.archiveteam.org/wiki/Shanda_Bambook) | .snb .bek | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/shandaBambook/)
 document | [SHOW (Gary M. Raymond)](http://fileformats.archiveteam.org/wiki/SHOW_(Gary_M._Raymond)) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/showCOM/)
-document | [Signum Document](https://github.com/Xiphoseer/sdo-tool/blob/main/docs/formats/sdoc.md) | .sdo | [sdoTool](https://github.com/xiphoseer/sdo-tool) | [9 sample files](https://sembiance.com/fileFormatSamples/document/signumDocument/)
+document | [Signum Document](https://github.com/Xiphoseer/sdo-tool/blob/main/docs/formats/sdoc.md) | .sdo | [sdoTool](https://github.com/xiphoseer/sdo-tool) | [10 sample files](https://sembiance.com/fileFormatSamples/document/signumDocument/)
 document | Smart Software Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/smartSoftwareDocument/)
 document | Smart Software WorkSheet | .ws | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/document/smartSoftwareWorksheet/)
 document | [Softdisk Text Compressor Document](http://fileformats.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [13 sample files](https://sembiance.com/fileFormatSamples/document/softdiskTextCompressed/)
@@ -2013,7 +2013,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (915)
+## Text (916)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2431,7 +2431,7 @@ text | [LightWave Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene
 text | LilyPond music score | .ly .ily |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lilyPondMusicScore/)
 text | Lingo Script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lingoScript/)
 text | Linux kernel symbol map |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxKernelSymbolMap/)
-text | Linux LiveCD info | .diskdefines |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/linuxLiveCDInfo/)
+text | Linux LiveCD info | .diskdefines |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/linuxLiveCDInfo/)
 text | Linux make config build |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxMakeConfig/)
 text | Linux Software Map entry | .lsm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/linuxSoftwareMapEntry/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unixShellScript/)
@@ -2509,6 +2509,7 @@ text | Montage Page |  |  | [9 sample files](https://sembiance.com/fileFormatSam
 text | Montage Preset | .preset |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/montagePreset/)
 text | Mosaic Hotlist | .hot |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/mosaicHotlist/)
 text | Motion Capture File Format | .csm |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/motionCaptureFileFormat/)
+text | Moxcel spreadsheet | .mxl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/moxcelSpreadsheet/)
 text | Mozilla (Netscape) settings | .js |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mozillaNetscapeSettings/)
 text | Mozilla Mork database | .dat .mab |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mozillaMorkDatabase/)
 text | Mozilla Spam Filter Definition | .sfd |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/mozillaSpamFilterDefinition/)
@@ -2607,7 +2608,7 @@ text | [PGP Public/Private Key](http://fileformats.archiveteam.org/wiki/PGP_publ
 text | Photogenics Fractal | .f |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/photogenicsFractal/)
 text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps .php3t .tst |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/php/)
 text | phpMyAdmin SQL dump | .sql |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/phpMyAdminSQLDump/)
-text | Picasa Windows info | .fen |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/picasaWindowsInfo/)
+text | Picasa Windows info | .fen |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/picasaWindowsInfo/)
 text | PICS Rating System | .rat |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/picsRatingSystem/)
 text | Picture It! brush definition | .txt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/pictureItBrushDefinition/)
 text | Piklib 8 script | .class .cnv .def .decoded |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/piklib8Script/)
@@ -2866,7 +2867,7 @@ text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/f
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
 text | WDDX packet |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
-text | Web browser cookies | .txt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
+text | Web browser cookies | .txt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
 text | Web Video Text Tracks | .vtt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)
 text | Wheel binary package format info |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatInfo/)

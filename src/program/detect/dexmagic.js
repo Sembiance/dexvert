@@ -86,7 +86,11 @@ const DEXMAGIC_CHECKS =
 	"FM-TownsOS EXP MP" : [{offset : 0, match : "MP"}],
 	
 	// font
-	"PCR Font" : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
+	"PCR Font"              : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
+	"FONTEDIT Font"         : [{offset : 0, match : [0xEB, 0x33, 0x90]}, {offset : 10, match : "PC Magazine "}, {offset : 23, match : " Michael J. Mefford"}],
+	"FONTEDIT Font (Alt 1)" : [{offset : 0, match : [0xEB, 0x32]}, {offset : 91, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
+	"FONTEDIT Font (Alt 2)" : [{offset : 0, match : [0xEB, 0x33]}, {offset : 92, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
+	"Font Mania Font"       : [{offset : 0, match : [0xEB]}, {offset : 7, match : " FONT MANIA, VERSION"}],
 
 	// image
 	"101 Clips Image"                 : [{offset : 0, match : [0xFF, 0xFF, 0xFF, 0xFF, [0x02, 0x03], 0x00, 0x00, 0x00]}],
@@ -117,6 +121,8 @@ const DEXMAGIC_CHECKS =
 	"IFF ILBM (Generic)"              : [{offset : 8, match : "ILBMBMHD"}],
 	"Konica Quality Photo"            : [{offset : 0, match : [0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 30, match : [0x4A, 0x50, 0x45, 0x47]}],
 	"Lotus Manuscript bitmap (Alt)"   : [{offset : 0, match : ["R", "H", 0x00, "H"]}],
+	"Laughing Dog"                    : [{offset : 0, match : [0xEA, 0x03, 0x50, 0x19]}],
+	"Laughing Dog COM"				  : [{offset : 0, match : [0x06, 0xB4, 0x0F, 0xCD, 0x10, 0x3C, 0x07, 0x74, 0x06, 0xB8, 0x00, 0xB8, 0xEB, 0x04, 0x90, 0xB8]}],
 	"Lerc 1 Image"                    : [{offset : 0, match : "CntZImage"}],
 	"Minipaint MG"                    : [{offset : 0, match : [0xF1, 0x10, 0x0C, 0x12, 0xD8, 0x07, 0x9E, 0x20, 0x38, 0x35, 0x38, 0x34]}],
 	"MLDF BMHD file"                  : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],

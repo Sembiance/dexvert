@@ -599,6 +599,9 @@ PM2: LZ-compressor
 * FLI/FLC (Autodesk Animator) (module="fli")
   - Extract the (non-repeated) frames.
 
+* FM Towns HEL (module="fmtowns_hel")
+  This is a simple animation format.
+
 * FM Towns ICN (module="fmtowns_icn")
   - A standard palette is used, which isn't ideal in all cases.
 
@@ -725,6 +728,9 @@ PM2: LZ-compressor
 
 * JPEG XR (HD Photo) (part of module "tiff")
   - Minimal support.
+
+* Laughing Dog COM file (module="ldog_com")
+  Executable character graphics format made by Laughing Dog Screen Maker.
 
 * Lotus Manuscript graphics (.bit, .rle) (module="lotus_mscr") (experimental)
   - Not always autodetected. You may have to use "-m lotus_mscr".
@@ -1100,6 +1106,13 @@ PM2: LZ-compressor
   Most FNT files have an extra "absolute space" character, which Deark
   arbitrarily places at code point 256, or U+2002 (EN SPACE).
 
+* Font Mania COM format (module="fontmania")
+
+* FONTEDIT font (module="fontedit")
+  An old DOS .COM-based format.
+  Options
+   -opt fontedit:template - Also extract the template font, if different.
+
 * GEM bitmap font (module="gemfont") (experimental)
   - Autodetection may not always work. May need "-m gemfont".
 
@@ -1195,6 +1208,9 @@ PM2: LZ-compressor
   An old installer archive format used by Lotus.
 
 * compress (legacy Unix .Z format) (module="compress")
+
+* Compressor, The (module="tc_trs80")
+  TRS-80 software by John Lauro.
 
 * cpio (module="cpio")
 
@@ -1548,10 +1564,13 @@ PM2: LZ-compressor
   Options
    -a, -opt crc:all - Also compute uncommon CRCs and checksums.
 
-* DOC2COM (moule="doc2com") (experimental)
+* DOC2COM (moule="doc2com")
   Executable text (.COM) files made by G. DePyper's DOC2COM utility.
   - Supports files that use encryption.
-  - Does not attempt to translate to UTF-8.
+  - Extracts the source text. Does not necessarily render the document (e.g.
+    colors) like running the COM file would.
+  Options
+   -opt text:encconv=0 - Suppress character encoding translation.
 
 * DOC2COM (moule="doc2com_dkn")
   Executable text (.COM) files made by D. Nelson's DOC2COM utility.
@@ -1721,6 +1740,13 @@ PM2: LZ-compressor
    -opt split:stride=<n> - The distance between the start of one chunk and the
     start of the next chunk, in bytes.
 
+* TEXE (module="texe")
+  Executable text (.EXE) files made by TEXE, by R. Payette.
+  - The first byte of the original file is usually unrecoverable, due to an
+    apparent bug in TEXE.
+  Options
+   -opt text:encconv=0 - Suppress character encoding translation.
+
 * TXT2COM (module="txt2com")
   Executable text (.COM) files made by Graham's TXT2COM utility.
   - Extracts the source text. Does not necessarily render the document (e.g.
@@ -1739,6 +1765,7 @@ PM2: LZ-compressor
   Apply an XOR key to the file. By default, invert all the bits.
   Options
    -opt xor:key=<aabbcc...> - The key, expressed as one or more hex bytes.
+
 
 
 >>> imageAlchemy (DOS - v1.11 - 1998) - IMAGE (http://fileformats.archiveteam.org/wiki/Image_Alchemy)

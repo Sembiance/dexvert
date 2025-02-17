@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,187)
+# Unsupported File Formats (3,189)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -342,7 +342,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (171)
+## Document (170)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -434,7 +434,6 @@ Family/Format | Name | Extensions | Notes
 [document/kingsoftSpreadsheet](https://discmaster.textfiles.com/search?formatid=kingsoftSpreadsheet) | Kingsoft Spreadsheet | .et | 
 [document/klasikTextDocument](https://discmaster.textfiles.com/search?formatid=klasikTextDocument) | Klasik Text document | .txk | 
 [document/logistixSpreadsheet](https://discmaster.textfiles.com/search?formatid=logistixSpreadsheet) | Logistix spreadsheet | .lgx | 
-[document/lotusSymphony](https://discmaster.textfiles.com/search?formatid=lotusSymphony) | Lotus Symphony Worksheet | .wk1 .wr1 | 
 [document/masterCook](https://discmaster.textfiles.com/search?formatid=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 [document/matrixSpreadsheet](https://discmaster.textfiles.com/search?formatid=matrixSpreadsheet) | Matrix spreadsheet | .mtx | 
 [document/maxiPlanSpreadsheet](https://discmaster.textfiles.com/search?formatid=maxiPlanSpreadsheet) | MaxiPlan spreadsheet | .plan | 
@@ -1056,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,041)
+## Other (2,044)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2205,6 +2204,7 @@ Family/Format | Name | Extensions | Notes
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?formatid=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
 [other/microStationModificationResourceFile](https://discmaster.textfiles.com/search?formatid=microStationModificationResourceFile) | MicroStation Modification resource file | .m01 .p01 .r01 .s01 | 
 [other/microStationSymbologyResources](https://discmaster.textfiles.com/search?formatid=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
+[other/microTOOLInstallPackage](https://discmaster.textfiles.com/search?formatid=microTOOLInstallPackage) | microTOOL install package |  | 
 [other/midget3Instruments](https://discmaster.textfiles.com/search?formatid=midget3Instruments) | Midget 3 Instruments | .mis | 
 [other/midiArpeggiatorArpeggio](https://discmaster.textfiles.com/search?formatid=midiArpeggiatorArpeggio) | MIDI Arpeggiator Arpeggio | .arp | 
 [other/midiDrumMachine](https://discmaster.textfiles.com/search?formatid=midiDrumMachine) | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
@@ -2218,7 +2218,7 @@ Family/Format | Name | Extensions | Notes
 [other/mksSpellHashList](https://discmaster.textfiles.com/search?formatid=mksSpellHashList) | MKS Spell hash list |  | 
 [other/mlocateDatabase](https://discmaster.textfiles.com/search?formatid=mlocateDatabase) | mlocate database | .db | 
 [other/mmfwData](https://discmaster.textfiles.com/search?formatid=mmfwData) | MMFW data | .mms .mmb .mmp .snd .pic .cpk .blb | 
-[other/mobil1RallyChampionshipMapData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipMapData) | Mobil 1 Rally Championship map data | .sq | 
+[other/mobil1RallyChampionshipData](https://discmaster.textfiles.com/search?formatid=mobil1RallyChampionshipData) | Mobil 1 Rally Championship data | .sq | 
 [other/mobipocketEBookAuxiliaryData](https://discmaster.textfiles.com/search?formatid=mobipocketEBookAuxiliaryData) | Mobipocket eBook Auxiliary data | .mbp | 
 [other/modiMODVoice](https://discmaster.textfiles.com/search?formatid=modiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
@@ -2373,6 +2373,8 @@ Family/Format | Name | Extensions | Notes
 [other/outlookExpressDatabase](https://discmaster.textfiles.com/search?formatid=outlookExpressDatabase) | Outlook Express Database |  | 
 [other/outlookShortcuts](https://discmaster.textfiles.com/search?formatid=outlookShortcuts) | Outlook Shortcuts | .fav | 
 [other/outpostFirewallHeuristicData](https://discmaster.textfiles.com/search?formatid=outpostFirewallHeuristicData) | Outpost Firewall heuristic data | .hax | 
+[other/pCADBinaryLibrary](https://discmaster.textfiles.com/search?formatid=pCADBinaryLibrary) | P-CAD binary Library | .lib | 
+[other/pCADPrintedCircuitBoard](https://discmaster.textfiles.com/search?formatid=pCADPrintedCircuitBoard) | P-CAD Printed Circuit Board | .pcb | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
 [other/pageFlipperPlusFXEffect](https://discmaster.textfiles.com/search?formatid=pageFlipperPlusFXEffect) | PageFlipper Plus FX effect |  | 
 [other/pageFocusData](https://discmaster.textfiles.com/search?formatid=pageFocusData) | PageFocus Data | .1 .xdb | 

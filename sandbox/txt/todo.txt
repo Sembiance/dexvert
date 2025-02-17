@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update to latest deark and add support for lauging dog *.dog: https://dev.discmaster2.textfiles.com/search?detection=ea03501900*
+
 
 /---------------\
 | High Priority |

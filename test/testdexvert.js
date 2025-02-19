@@ -290,6 +290,7 @@ const FLEX_SIZE_FORMATS =
 		grabber            : 7,
 		gifexe             : 300,
 		krisCard           : 20,
+		laughingDog        : 50,
 		naplps             : 20,
 		theDrawCOM         : 5,
 		threeDCK           : 20,

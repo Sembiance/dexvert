@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,189)
+# Unsupported File Formats (3,191)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,044)
+## Other (2,046)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2029,6 +2029,7 @@ Family/Format | Name | Extensions | Notes
 [other/legendOfKyrandiaEMCFile](https://discmaster.textfiles.com/search?formatid=legendOfKyrandiaEMCFile) | Legend of Kyrandia EMC File | .emc | 
 [other/lernoutAndHauspieData](https://discmaster.textfiles.com/search?formatid=lernoutAndHauspieData) | Lernout and Hauspie data | .lim | 
 [other/lexiCrossPuzzle](https://discmaster.textfiles.com/search?formatid=lexiCrossPuzzle) | Lexi-Cross Puzzle | .dem .pzl | 
+[other/lextekLanguageIdentificationModule](https://discmaster.textfiles.com/search?formatid=lextekLanguageIdentificationModule) | Lextek Language Identification Module | .lid | 
 [other/life3000Status](https://discmaster.textfiles.com/search?formatid=life3000Status) | LIFE 3000 Status | .lif | 
 [other/lineageIIData](https://discmaster.textfiles.com/search?formatid=lineageIIData) | Lineage II data |  | 
 [other/linkBootableCodeForTransputerNetwork](https://discmaster.textfiles.com/search?formatid=linkBootableCodeForTransputerNetwork) | Link Bootable code for transputer network | .btl | 
@@ -2290,6 +2291,7 @@ Family/Format | Name | Extensions | Notes
 [other/net2phone](https://discmaster.textfiles.com/search?formatid=net2phone) | Net2phone |  | 
 [other/netActiveContainer](https://discmaster.textfiles.com/search?formatid=netActiveContainer) | NetActive Container | .nac | 
 [other/netCDF](https://discmaster.textfiles.com/search?formatid=netCDF) | NetCDF | .nc | 
+[other/netHackSavedGame](https://discmaster.textfiles.com/search?formatid=netHackSavedGame) | NetHack saved game |  | 
 [other/netImmerseAnimation](https://discmaster.textfiles.com/search?formatid=netImmerseAnimation) | NetImmerse animation | .kf | 
 [other/netMonCapture](https://discmaster.textfiles.com/search?formatid=netMonCapture) | NetMon capture | .cap | 
 [other/netscapeAddressBook](https://discmaster.textfiles.com/search?formatid=netscapeAddressBook) | Netscape Address Book | .nab | 

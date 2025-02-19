@@ -583,7 +583,7 @@ export default
 		manhattanPrinterDescription                : {name : "Manhattan Printer Description", ext : [".mpd"], magic : ["Manhattan Printer Description"], weakMagic : true},
 		mapInfoInterchangeFormat                   : {name : "MapInfo Interchange Format", ext : [".mif"], magic : ["MapInfo Interchange Format", /^x-fmt\/231( |$)/], weakMagic : true},
 		mapInfoMapBasicInitialDataTable            : {name : "MapInfo MapBasic initial data Table", ext : [".tab"], magic : ["MapInfo MapBasic initial data Table"], weakMagic : true},
-		mapInfoWorkspace                           : {name : "MapInfo Workspace Fe", ext : [".wor"], magic : ["MapInfo Workspace", /^fmt\/1256( |$)/], weakMagic : true},
+		mapInfoWorkspace                           : {name : "MapInfo Workspace", ext : [".wor"], magic : ["MapInfo Workspace", /^fmt\/1256( |$)/], weakMagic : true},
 		mapleClassicWorksheet                      : {name : "Maple Classic Worksheet", ext : [".mws", ".org"], magic : ["Maple Classic Worksheet", /^Maple worksheet version/], weakMagic : true},
 		marcelPrinterDriver                        : {name : "Marcel Printer Driver", ext : [".prd"], magic : ["Marcel Printer Driver"]},
 		marxMenuScript                             : {name : "MarxMenu script", ext : [".mnu", ".inc"], magic : ["MarxMenu script"], weakMagic : true},

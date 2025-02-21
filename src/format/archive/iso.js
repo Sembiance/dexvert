@@ -47,6 +47,8 @@ export class iso extends Format
 	weakMagic      = [/^First .* are blank$/, /^Apple HFS Plus/, /^HFS Plus/];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
+	idMeta = ({macFileType, macFileCreator}) => (macFileType==="GImg" && macFileCreator==="CDr3");
+
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;
 	notes        = xu.trim`

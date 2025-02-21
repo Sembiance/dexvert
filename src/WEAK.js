@@ -739,7 +739,7 @@ export const WEAK_VALUES =
 	/^Mach-O (alpha|m68k|ns\d+) filetype=\d+/,
 	/^magic text fragment/,
 	/^MagicaVoxel model/,
-	/^mail forwarding/,
+	/^mail (forwarding|piping)/,
 	/^Map file for the AssaultCube FPS game/,
 	/^Map file for cube/,
 	/^Maple help database$/,

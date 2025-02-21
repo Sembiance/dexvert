@@ -821,7 +821,7 @@ export const WEAK_VALUES =
 	/^Oak Technologies printer stream/,
 	/^Objective-C source/,
 	/^Octave binary data/,
-	/^Ogg data UNKNOWN REVISION \d+$/,
+	/^Ogg data( UNKNOWN REVISION \d+)?$/,
 	/^Old EZD Electron Density Map/,
 	/^old Microsoft 8086 x\.out/,
 	/^old packed data/,

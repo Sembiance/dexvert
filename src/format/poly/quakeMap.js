@@ -6,5 +6,6 @@ export class quakeMap extends Format
 	ext            = [".bsp"];
 	forbidExtMatch = true;
 	magic          = ["Quake Map"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="QBsp" && macFileCreator==="Quak";
 	converters     = ["noesis[type:poly]"];
 }

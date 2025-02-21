@@ -1,4 +1,4 @@
-# Supported File Formats (2,972)
+# Supported File Formats (2,974)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -2018,7 +2018,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (916)
+## Text (918)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2075,9 +2075,10 @@ text | aPatch Daten Datei | .aps |  | [3 sample files](https://sembiance.com/fil
 text | Apple IIgs Source Code |  |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/appleIIgsSourceCode/)
 text | Apple Project Builder Xcode Project | .pbxproj |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/appleProjectBuilderXcodeProject/)
 text | Apple Xcode User data | .pbxuser |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
+text | Applet Effect Factory Config File | .data |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/appletEffectFactoryConfigFile/)
 text | Applix spreadsheet | .as |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/applixSpreadsheet/)
 text | Applix Words Document | .aw |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/applixWordsDocument/)
-text | AQTitle subtitles | .sub |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/aqTitleSubtitlesAqtitle/)
+text | AQTitle subtitles | .sub |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/aqTitleSubtitlesAqtitle/)
 text | ARB Fragment shader |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/arbFragmentShader/)
 text | ARB Vertex shader | .vp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/arbVertexShader/)
 text | ArtMoney Table File | .amt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/artMoneyTableFile/)
@@ -2154,6 +2155,7 @@ text | Celestia script | .cel |  | [11 sample files](https://sembiance.com/fileF
 text | Celestia Sphere displacement Mesh | .cms |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/celestiaSphereDisplacementMesh/)
 text | CheckIt Pro Performances data | .prf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/checkItProPerformancesData/)
 text | CHEMICAL molecule Data | .dat |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/chemicalMoleculeData/)
+text | ChemWindow Standard Chemistry File | .scf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/chemWindowStandardChemistryFile/)
 text | ChiWriter document | .chi |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/chiWriterDocument/)
 text | Chord text file | .crd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/chordTextFile/)
 text | CIRCAD data | .tpc .tsa .tpb .tsc .pcb .tpa .tpd .tda .tsd .tdc .tsb .sch .tdb .tdd .lib |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/circadData/)
@@ -2534,7 +2536,7 @@ text | NETRUN ASCII-encoded COM/EXE | .ntr |  | [2 sample files](https://sembian
 text | Netscape cookies | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/netscapeCookies/)
 text | NEXUS format | .nex .nxs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
 text | NMAKE | .msc .mak |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
-text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
+text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
 text | Nota Bene Printer definition | .prn |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/notaBenePrinterDefinition/)
 text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/novell16BitLANDriverInstallerData/)
 text | NSIS script | .nsi |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nsisScript/)
@@ -2570,7 +2572,7 @@ text | OS/2 Network Information File | .nif |  | [10 sample files](https://sembi
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .rexx .rex |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rexx/)
 text | OVA Manifest | .mf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ovaManifest/)
 text | OziExplorer Map data | .map |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerMapData/)
-text | OziExplorer track file | .plt |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
+text | OziExplorer track file | .plt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
 text | OziExplorer Waypoint | .wpt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerWaypoint/)
 text | Pacific C Compiler Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pacificCCompilerProject/)
 text | PageRender3D facet/object | .facet |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DFacetObject/)
@@ -2578,7 +2580,7 @@ text | PageRender3D Script | .script |  | [5 sample files](https://sembiance.com
 text | PageRender3D Setup | .setup |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DSetup/)
 text | Painter 3D Contour | .cnt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/painter3DContour/)
 text | PALASM Design Description | .pds |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/palasmMDesignDescription/)
-text | Panda Security System vulnerabilities info | .xml |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/pandaSecuritySystemVulnerabilitiesInfo/)
+text | Panda Security System vulnerabilities info | .xml |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/pandaSecuritySystemVulnerabilitiesInfo/)
 text | Panorama Digital Elevation Model Settings | .demset |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/panoramaDigitalElevationModelSettings/)
 text | Panorama Settings | .set |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/panoramaSettings/)
 text | Papyrus X chars Mapping | .map |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/papyrusXCharsMapping/)
@@ -2686,7 +2688,7 @@ text | RAR registration data | .key .cfg |  | [6 sample files](https://sembiance
 text | RASTER Music Tracker settings | .ini |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rasterMusicTrackerSettings/)
 text | REAL Numbers Tape | .tap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/realNumbersTape/)
 text | RealMedia meta file | .ram |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/realMediaMetaFile/)
-text | REAPER Project | .rpp |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/reaperProject/)
+text | REAPER Project | .rpp |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/reaperProject/)
 text | Rebel spreadsheet (v2) | .rb2 |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/rebelSpreadsheet/)
 text | Rebol source code | .r |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rebolSourceCode/)
 text | Receiver Independent Exchange Format | .rxo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/receiverIndependentExchangeFormat/)
@@ -2742,7 +2744,7 @@ text | SNNS pattern definition | .pat |  | [13 sample files](https://sembiance.c
 text | SNNS result | .res |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/snnsResult/)
 text | SoftICE initialization data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
 text | Software Ideas Modeler Style Set | .simss |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/softwareIdeasModelerStyleSet/)
-text | SoftWrap license data | .sw2 |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
+text | SoftWrap license data | .sw2 |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
 text | Sonnet Project | .son |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/sonnetProject/)
 text | SOSI map data | .sos |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/sosiMapData/)
 text | Source Engine Compiled AI Nodegraph | .ain |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sourceEngineCompiledAINodegraph/)

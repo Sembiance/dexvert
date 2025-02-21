@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,191)
+# Unsupported File Formats (3,194)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,046)
+## Other (2,049)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1843,6 +1843,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?formatid=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/grandTheftAutoSaveGame](https://discmaster.textfiles.com/search?formatid=grandTheftAutoSaveGame) | Grand Theft Auto save game | .b | 
 [other/grandTheftAutoTextData](https://discmaster.textfiles.com/search?formatid=grandTheftAutoTextData) | Grand Theft Auto Text data | .gxt | 
+[other/graphPadPrism](https://discmaster.textfiles.com/search?formatid=graphPadPrism) | GraphPad Prism | .pzm .pzt | 
 [other/gravisGrIPLibrary](https://discmaster.textfiles.com/search?formatid=gravisGrIPLibrary) | Gravis GrIP Library | .vol | 
 [other/gravityForceMap](https://discmaster.textfiles.com/search?formatid=gravityForceMap) | Gravity Force Map | .fmp | 
 [other/greatValleyProductsEGSSettings](https://discmaster.textfiles.com/search?formatid=greatValleyProductsEGSSettings) | Great Valley Products EGS settings | .map2video | 
@@ -2802,6 +2803,7 @@ Family/Format | Name | Extensions | Notes
 [other/testDriveShapesData](https://discmaster.textfiles.com/search?formatid=testDriveShapesData) | Test Drive shapes data | .shp .sb .pes | 
 [other/testDriveUnlimitedGameDataArchive](https://discmaster.textfiles.com/search?formatid=testDriveUnlimitedGameDataArchive) | Test Drive Unlimited game data archive | .bnk .iop .scn | 
 [other/testDriveOffRoadGraphics](https://discmaster.textfiles.com/search?formatid=testDriveOffRoadGraphics) | Test Drive: Off-Road graphics | .tmf | 
+[other/tetraColorPalette](https://discmaster.textfiles.com/search?formatid=tetraColorPalette) | Tetra Color Palette | .tet | 
 [other/texFontMetricData](https://discmaster.textfiles.com/search?formatid=texFontMetricData) | TeX Font Metric Data | .tfm | 
 [other/texVirtualFont](https://discmaster.textfiles.com/search?formatid=texVirtualFont) | TeX Virtual Font | .vf | 
 [other/tiCalcAssembler](https://discmaster.textfiles.com/search?formatid=tiCalcAssembler) | Texas Instruments Calculator Assembler | .89z .9xz | 
@@ -2919,6 +2921,7 @@ Family/Format | Name | Extensions | Notes
 [other/vcdiffFormat](https://discmaster.textfiles.com/search?formatid=vcdiffFormat) | VCDIFF format | .xdelta3 .xdt .vcdiff | 
 [other/vcgGraph](https://discmaster.textfiles.com/search?formatid=vcgGraph) | VCG graph | .vcg | 
 [other/vclStyle](https://discmaster.textfiles.com/search?formatid=vclStyle) | VCL Style | .vsf | 
+[other/vectorWorksPluginOrScript](https://discmaster.textfiles.com/search?formatid=vectorWorksPluginOrScript) | VectorWorks Plugin or Script | .vsm .vso .vst | 
 [other/vectrexROM](https://discmaster.textfiles.com/search?formatid=vectrexROM) | Vectrex ROM | .vec .gam .bin | 
 [other/vektorGrafixDriver](https://discmaster.textfiles.com/search?formatid=vektorGrafixDriver) | Vektor Grafix Driver | .drv | 
 [other/vesaDisplayIdentification](https://discmaster.textfiles.com/search?formatid=vesaDisplayIdentification) | VESA Display Identification File | .vdb | 

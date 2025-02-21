@@ -11,11 +11,11 @@ export class scribus extends Program
 	website = "https://www.scribus.net/";
 	package = "app-office/scribus";
 	flags   = {
-		outType     : `Which format to output: svg | pdf. Default is svg`
+		outType : `Which format to output: svg | pdf. Default is svg`
 	};
-	unsafe  = true;
-	bin     = "scribus-1.6";
-	outExt  = r => ((r.flags.outType || "svg")==="pdf" ? ".pdf" : ".eps");
+	unsafe = true;
+	bin    = "scribus-1.6";
+	outExt = r => ((r.flags.outType || "svg")==="pdf" ? ".pdf" : ".eps");
 
 	pre = async r =>
 	{

@@ -18,5 +18,5 @@ export class diskImage extends Format
 	// 7z isn't a very reliable program with unknown data, so if we've only matched on extension, lower our confidence a lot so other format families like images have a chance
 	confidenceAdjust = (inputFile, matchType) => (matchType==="ext" ? -20 : 0);
 	
-	converters = ["sevenZip"];
+	converters = ["sevenZip", "aaru[matchType:magic][strongMatch]"];
 }

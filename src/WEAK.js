@@ -1966,6 +1966,7 @@ export const WEAK_VALUES =
 	/^Nihilistic Scene Data$/,
 	/^Nimble package info$/,
 	/^NINJA 2\.0 Patch$/,
+	/^Nintendo 3DS container format \(generic\)$/,
 	/^Nintendo Binary Revolution SEQuence$/,
 	/^Nintendo compressed disk image$/,
 	/^Nintendo (Yay0|Yaz0) compressed data$/,

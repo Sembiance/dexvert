@@ -46,6 +46,7 @@ export default
 		grandTheftAutoItemPlacement         : {name : "Grand Theft Auto Item Placement", ext : [".ipl"], magic : [/^GTA Item Placement data /], weakMagic : true},
 		grandTheftAutoModelProps            : {name : "Grand Theft Auto model IDs and properties", ext : [".ide"], magic : ["Grand Theft Auto III model IDs and properties"]},
 		gravisFirebirdConfiguration         : {name : "Gravis Firebird configuration", ext : [".fbd"], magic : ["Gravis Firebird configuration"]},
+		heroQuestQuest                      : {name : "HeroQuest Quest", ext : [".q09", ".q10", ".qst"], magic : ["HeroQuest Quest"]},
 		indyCarRacingDriversInfo            : {name : "IndyCar Racing drivers info", ext : [".txt"], magic : ["IndyCar Racing drivers info", "IndyCar Racing II drivers info"], weakMagic : true},
 		indyCarRacingTrackInfo              : {name : "IndyCar Racing track info", ext : [".txt"], magic : ["IndyCar Racing track info", "IndyCar Racing II track info"], weakMagic : true},
 		indyCarRacingTrackRecordInfo        : {name : "IndyCar Racing track record info", ext : [".txt"], magic : ["IndyCar Racing II track record info"], weakMagic : true},

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,198)
+# Unsupported File Formats (3,199)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (252)
+## Archive (251)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?formatid=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -183,7 +183,6 @@ Family/Format | Name | Extensions | Notes
 [archive/pklite32Packed](https://discmaster.textfiles.com/search?formatid=pklite32Packed) | PKLITE32 Packed | .exe | 
 [archive/pmexePacked](https://discmaster.textfiles.com/search?formatid=pmexePacked) | PMexe CP/M Packed | .com | 
 [archive/pocketExcelSheet](https://discmaster.textfiles.com/search?formatid=pocketExcelSheet) | Pocket Excel sheet |  | 
-[archive/pocketWordDocument](https://discmaster.textfiles.com/search?formatid=pocketWordDocument) | Pocket Word document | .058 | 
 [archive/popComPacked](https://discmaster.textfiles.com/search?formatid=popComPacked) | PopCom Packed | .com | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
@@ -342,7 +341,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (170)
+## Document (171)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -461,6 +460,7 @@ Family/Format | Name | Extensions | Notes
 [document/perfectForms](https://discmaster.textfiles.com/search?formatid=perfectForms) | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
 [document/perfectWorksDocument](https://discmaster.textfiles.com/search?formatid=perfectWorksDocument) | PerfectWorks document | .wpw | 
 [document/persuasionPresentation](https://discmaster.textfiles.com/search?formatid=persuasionPresentation) | Persuasion presentation | .at2 .at3 .at4 .pr3 .pn4 | 
+[document/pocketWordDocument](https://discmaster.textfiles.com/search?formatid=pocketWordDocument) | Pocket Word/Inkwriter/Notetaker document | .pwd .pwi .psw | [3 sample files](https://sembiance.com/fileFormatSamples/document/pocketWordDocument/)
 [document/popupDOSHelp](https://discmaster.textfiles.com/search?formatid=popupDOSHelp) | POP-UP DOS Help | .hlp | 
 [document/powerCADD](https://discmaster.textfiles.com/search?formatid=powerCADD) | PowerCADD | .pd6 | 
 [document/powerDraw](https://discmaster.textfiles.com/search?formatid=powerDraw) | PowerDraw | .pcadd | 
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,052)
+## Other (2,053)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2722,6 +2722,7 @@ Family/Format | Name | Extensions | Notes
 [other/stacElectronicsArchiveFormat](https://discmaster.textfiles.com/search?formatid=stacElectronicsArchiveFormat) | Stac Electronics Archive Format | .saf | 
 [other/standardACISBinary](https://discmaster.textfiles.com/search?formatid=standardACISBinary) | Standard ACIS Binary | .sab | 
 [other/stanfordGraphicsGallery](https://discmaster.textfiles.com/search?formatid=stanfordGraphicsGallery) | Stanford Graphics Gallery | .grf | 
+[other/starTrekArmadaMap](https://discmaster.textfiles.com/search?formatid=starTrekArmadaMap) | Star Trek: Armada map | .bzn | 
 [other/starWarsJediKnightBotNavigationRoutes](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightBotNavigationRoutes) | Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info | .nav | 
 [other/starWarsJediKnightJediAcademyMap](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightJediAcademyMap) | Star Wars Jedi Knight: Jedi Academy map | .bsp | 
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?formatid=starAmPlanGraphData) | StarAm Plan graph data | .gein | 

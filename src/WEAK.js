@@ -1946,6 +1946,7 @@ export const WEAK_VALUES =
 	/^MLT(\/melt)? (framework AV preset|script|XML)$/,
 	/^Moebius (Graphics|Sound|Tile) Library$/,
 	/^Motorhead game data rchive$/,
+	/^MouseWrite document \(v1\.x\)$/,
 	/^Mozilla Archive Format \(gen\)$/,
 	/^Mozilla Firefox browser extension$/,
 	/^MPSub subtitles$/,
@@ -2200,7 +2201,7 @@ export const WEAK_VALUES =
 	/^VITec image format bitmap$/,
 	/^Vivaldi Music Dump format$/,	// found these in item #1392 but no converter and magic is weak and no ext
 	/^VP-Planner Plus spreadsheet$/,
-	/^VP-Planner Worksheet \(v1\.0\)$/,
+	/^VP-Planner (3D )?Worksheet/,
 	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^VYM Mind Map$/,
 	/^WeatherLink Binary Weather data$/,

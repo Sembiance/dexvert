@@ -1,4 +1,4 @@
-# Supported File Formats (2,975)
+# Supported File Formats (2,976)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -400,7 +400,7 @@ archive | T-PACK Packed | .exe .com | cup386 | [12 sample files](https://sembian
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tape_Archive) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/tar/)
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [td02imd](https://github.com/Sembiance/td02imd) [dskconv](http://www.seasip.info/Unix/LibDsk/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/teledisk/)
 archive | Tenth Planet Soft Packer Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/tenthPlanetSoftPackerPacked/)
-archive | [The Compressor TC Aarchive](http://justsolve.archiveteam.org/wiki/The_Compressor_(John_Lauro)) | .arc .tc | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/tcArchive/)
+archive | [The Compressor TC Aarchive](http://justsolve.archiveteam.org/wiki/The_Compressor_(John_Lauro)) | .arc .tc | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/tcArchive/)
 archive | [The Lost Vikings Game Archive](https://moddingwiki.shikadi.net/wiki/The_Lost_Vikings) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lostVikingsGameArchive/)
 archive | [The Sims Archive](http://fileformats.archiveteam.org/wiki/FAR_(The_Sims)) | .far | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/simsArchive/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [deark](https://entropymine.com/deark/) [tscomp](http://fileformats.archiveteam.org/wiki/TSComp) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tscomp/)
@@ -434,7 +434,7 @@ archive | [WAD2 Game Archive](http://fileformats.archiveteam.org/wiki/Quake_WAD)
 archive | [WARC Archive](http://fileformats.archiveteam.org/wiki/WARC) | .warc | [Warcat](https://pypi.org/project/Warcat) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warc/)
 archive | Warcraft 2 Game Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/warcraft2GameArchive/)
 archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
-archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
+archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)
@@ -848,7 +848,7 @@ font | [FONTEDIT Font](http://justsolve.archiveteam.org/wiki/FONTEDIT_font) | .c
 font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/sfd/)
 font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [deark](https://entropymine.com/deark/) | [34 sample files](https://sembiance.com/fileFormatSamples/font/gemFont/)
 font | [Glyph Bitmap Distribution Format](http://fileformats.archiveteam.org/wiki/BDF) | .bdf | [bdftopcf](https://gitlab.freedesktop.org/xorg/app/bdftopcf) | [10 sample files](https://sembiance.com/fileFormatSamples/font/bdf/)
-font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/font/grub2PFF2/)
+font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 | [deark](https://entropymine.com/deark/) | [4 sample files](https://sembiance.com/fileFormatSamples/font/grub2PFF2/)
 font | [Interlace Character Editor](http://fileformats.archiveteam.org/wiki/Interlace_Character_Editor_font) | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/ice/)
 font | [MacOS X Data Fork Font](http://fileformats.archiveteam.org/wiki/Data_Fork_Suitcase_font) | .dfont | [fontforge](https://fontforge.org) | [12 sample files](https://sembiance.com/fileFormatSamples/font/osXDataForkFont/)
 font | MacOS X Font | .fnt .wfn | [fontforge](https://fontforge.org) | [1 sample file](https://sembiance.com/fileFormatSamples/font/macOSFont/)
@@ -2018,7 +2018,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (919)
+## Text (920)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2246,7 +2246,7 @@ text | EF 2000 Configuration | .cfg |  | [1 sample file](https://sembiance.com/f
 text | Egon animation | .egon |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/egonAnimation/)
 text | EISA add-on card Configuration | .cfg |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/eisaAddOnCardConfiguration/)
 text | Elastic Reality project data | .er |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/elasticRealityProjectData/)
-text | Electronics Workbench Circuit | .ewb |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/electronicsWorkbenchCircuit/)
+text | Electronics Workbench Circuit | .ewb |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/electronicsWorkbenchCircuit/)
 text | Emacs RMAIL |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emacsRMAIL/)
 text | eMbedded Visual Basic Project | .ebp |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/eMbeddedVisualBasicProject/)
 text | EMBL sequence data | .embl .emb .dna |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emblSequenceData/)
@@ -2677,8 +2677,8 @@ text | Quake I save | .sav |  | [1 sample file](https://sembiance.com/fileFormat
 text | Quartus Block Design File | .bdf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quartusBlockDesignFile/)
 text | Quartus DataBase Info | .db_info |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quartusDataBaseInfo/)
 text | Quartus Memory Initialization File | .mif |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/quartusMemoryInitializationFile/)
-text | Quartus Setting File | .qsf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/quartusSettingFile/)
-text | Qucs schematic | .sch .dpl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/qucsSchematic/)
+text | Quartus Setting File | .qsf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/quartusSettingFile/)
+text | Qucs schematic | .sch .dpl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/qucsSchematic/)
 text | Quicken Interchange Format | .qif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickenInterchangeFormat/)
 text | QuickMenu Menu | .inf |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/quickMenuMenu/)
 text | QuickSFV checksum | .sfv |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/quickSFVChecksum/)
@@ -2746,7 +2746,7 @@ text | SNNS result | .res |  | [1 sample file](https://sembiance.com/fileFormatS
 text | SoftICE initialization data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
 text | Software Ideas Modeler Style Set | .simss |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/softwareIdeasModelerStyleSet/)
 text | SoftWrap license data | .sw2 |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
-text | Sonnet Project | .son |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/sonnetProject/)
+text | Sonnet Project | .son |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/sonnetProject/)
 text | SOSI map data | .sos |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/sosiMapData/)
 text | Source Engine Compiled AI Nodegraph | .ain |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sourceEngineCompiledAINodegraph/)
 text | Span-It! Personality definition | .per |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/spanItPersonalityDefinition/)
@@ -2798,7 +2798,7 @@ text | The Software Toolworks' Hyperbase Data | .dat |  | [1 sample file](https:
 text | ThinkTank Template |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/thinkTankTemplate/)
 text | Tierra genome | .tie |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/tierraGenome/)
 text | Timeworks Word Writer document |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/timeworksWordWriterDocument/)
-text | Timing Wizard Report | .twr |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/timingWizardReport/)
+text | Timing Wizard Report | .twr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/timingWizardReport/)
 text | TMPEGEnc config file | .mcf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tMPEGEncConfigFile/)
 text | TMT Pascal project Configuration | .cfg |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/tmtPascalProjectConfiguration/)
 text | Tools Media Corp. material | .sss |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpMaterial/)
@@ -2860,7 +2860,7 @@ text | Visual C++ Workspace info | .wsp |  | [10 sample files](https://sembiance
 text | Visual J++ Project | .vjp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/visualJPPProject/)
 text | Visual Studio Project build log | .plg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioProjectBuildLog/)
 text | Visual Studio Setup and Deployment Project | .vdproj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioSetupAndDeploymentProject/)
-text | Visual Studio wizard | .vsz |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioWizard/)
+text | Visual Studio wizard | .vsz |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioWizard/)
 text | Visual Thought diagram | .vthought |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visualThoughtDiagram/)
 text | VisualBasic Project | .vbp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicProjectText/)
 text | Visualization Toolkit format | .vtk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/visualizationToolkitFormat/)
@@ -2924,6 +2924,7 @@ text | Xilinx Integrated Software Environment Project | .npl |  | [2 sample file
 text | Xilinx Netlist | .ngc .ngd .ncd .ngm .ngr |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/xilinxNetlist/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/q4d/)
 text | XMCD CD information | .db .z .xmcd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xmcdCDInformation/)
+text | Xoom Tutor tutorial | .tut |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/xoomTutorTutorial/)
 text | XSetup plugin | .xpl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xSetupPlugin/)
 text | XTrkCAD project | .xt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/xTrkCADProject/)
 text | XVision Keymap | .txt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xVisionKeymap/)

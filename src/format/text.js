@@ -918,6 +918,7 @@ export default
 		xilinxIntegratedSoftwareEnvironmentProject : {name : "Xilinx Integrated Software Environment Project", ext : [".npl"], magic : ["Xilinx Integrated Software Environment Project"], weakMagic : true},
 		xilinxNetlist                              : {name : "Xilinx Netlist", ext : [".ngc", ".ngd", ".ncd", ".ngm", ".ngr"], magic : ["Xilinx Netlist"]},
 		xmcdCDInformation                          : {name : "XMCD CD information", ext : [".db", ".z", ".xmcd"], magic : [/^xmcd database file/, /^CDDB\(tm\) format CD text data/, "XMCD CD information", "text/xmcd"]},
+		xoomTutorTutorial                          : {name : "Xoom Tutor tutorial", ext : [".tut"], magic : ["Xoom Tutor tutorial"]},
 		xSetupPlugin                               : {name : "XSetup plugin", ext : [".xpl"], magic : ["XSetup - plugin"]},
 		xTrkCADProject                             : {name : "XTrkCAD project", ext : [".xt"], magic : ["XTrkCAD project"]},
 		xVisionKeymap                              : {name : "XVision Keymap", ext : [".txt"], magic : ["XVision Keymap"], weakMagic : true},

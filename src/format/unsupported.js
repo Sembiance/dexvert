@@ -1924,6 +1924,7 @@ export default
 		coolEditAuditionSession                  : {name : "Cool Edit / Audition Session", ext : [".ses"], magic : ["Cool Edit / Audition Session", /^fmt\/1498( |$)/]},
 		coreFile                                 : {name : "Core File", filename : [/^core$/], weakFilename : true, ext : [".core"], magic : [/^(AIX|Alpha|ELF|IRIX|Linux\/i386|NetBSD|SunOS).* core (file|dump)/, /^core file \(Xenix\)/, "application/x-core", "Unix/Linux 32-Bit Core Datei"], weakMagic : true},
 		corelCatalog                             : {name : "Corel Catalog", ext : [".clc"], magic : ["Corel Catalog"]},
+		corelCENTRALCard                         : {name : "CorelCENTRAL Card", ext : [".ccc", ".cca", ".ccp", ".ccf"], magic : ["CorelCENTRAL Card"]},
 		corelCustomNaturalMediaStroke            : {name : "Corel Custom Natural Media Stroke", ext : [".npm"], magic : ["Corel Custom Natural Media Stroke"]},
 		corelDRAWCharacterSet                    : {name : "CorelDRAW Character Set", ext : [".csd"], magic : ["CorelDRAW Character Set"]},
 		corelEditorMacro                         : {name : "Corel Editor Macro", ext : [".edm"], magic : ["Corel Editor macro"]},

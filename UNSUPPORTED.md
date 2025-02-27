@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,199)
+# Unsupported File Formats (3,200)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,053)
+## Other (2,054)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1498,6 +1498,7 @@ Family/Format | Name | Extensions | Notes
 [other/corelSavedFindSearch](https://discmaster.textfiles.com/search?formatid=corelSavedFindSearch) | Corel saved find/search | .fin | 
 [other/corelShellMacro](https://discmaster.textfiles.com/search?formatid=corelShellMacro) | Corel Shell Macro | .shm | 
 [other/corelWritingToolsUserWordList](https://discmaster.textfiles.com/search?formatid=corelWritingToolsUserWordList) | Corel Writing Tools User Word List | .sav .hwl | 
+[other/corelCENTRALCard](https://discmaster.textfiles.com/search?formatid=corelCENTRALCard) | CorelCENTRAL Card | .ccc .cca .ccp .ccf | 
 [other/corelDRAWCharacterSet](https://discmaster.textfiles.com/search?formatid=corelDRAWCharacterSet) | CorelDRAW Character Set | .csd | 
 [other/corelTRACEConfiguration](https://discmaster.textfiles.com/search?formatid=corelTRACEConfiguration) | CorelTRACE configuration | .bin | 
 [other/corncob3DData](https://discmaster.textfiles.com/search?formatid=corncob3DData) | Corncob 3D Data File | .cct | 

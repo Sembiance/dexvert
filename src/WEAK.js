@@ -139,7 +139,7 @@ export const WEAK_VALUES =
 	/^LZ4 compressed data$/,
 	/^Marvell Libertas firmware$/,
 	/^MLD sequence date,/,
-	/^MySQL MISAM index file Version \d$/,
+	/^MySQL MISAM index file Version \d+$/,
 	/^Neighborly text/,
 	/^Netboot image, mode 2$/,
 	/^OGG audio data$/,

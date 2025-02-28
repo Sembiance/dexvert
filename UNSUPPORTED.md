@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,200)
+# Unsupported File Formats (3,201)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,054)
+## Other (2,055)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1556,6 +1556,7 @@ Family/Format | Name | Extensions | Notes
 [other/dataStoreDatabase](https://discmaster.textfiles.com/search?formatid=dataStoreDatabase) | Datastore Database |  | 
 [other/dateBookArchive](https://discmaster.textfiles.com/search?formatid=dateBookArchive) | DateBook Archive | .dba | 
 [other/datelActionReplay](https://discmaster.textfiles.com/search?formatid=datelActionReplay) | Datel Action Replay cheat data | .dc | 
+[other/davilexGamesGameDataFormat](https://discmaster.textfiles.com/search?formatid=davilexGamesGameDataFormat) | Davilex Games game data format | .idx .img | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?formatid=dBaseCompiledObjectProgram) | dBase Compiled File | .dbo .qbo | 
 [other/dBaseCompiledLabel](https://discmaster.textfiles.com/search?formatid=dBaseCompiledLabel) | dBase compiled Label | .lbo | 
 [other/dBaseDesign](https://discmaster.textfiles.com/search?formatid=dBaseDesign) | dBase Form | .frm | 
@@ -2452,7 +2453,7 @@ Family/Format | Name | Extensions | Notes
 [other/picasaFontCache](https://discmaster.textfiles.com/search?formatid=picasaFontCache) | Picasa font cache | .ytf | 
 [other/pico8PODDataArchive](https://discmaster.textfiles.com/search?formatid=pico8PODDataArchive) | Pico-8 POD data archive | .dat .pod | 
 [other/picturePumpProjectFile](https://discmaster.textfiles.com/search?formatid=picturePumpProjectFile) | Picture Pump Project File | .ppp | 
-[other/piklib8AnimationData](https://discmaster.textfiles.com/search?formatid=piklib8AnimationData) | Piklib 8 Animation data | .ann | 
+[other/piklibAnimationData](https://discmaster.textfiles.com/search?formatid=piklibAnimationData) | Piklib Animation data | .ann | 
 [other/piklibGraphicData](https://discmaster.textfiles.com/search?formatid=piklibGraphicData) | Piklib/BlooMoo graphic data | .img | 
 [other/pinnacleStudioScene](https://discmaster.textfiles.com/search?formatid=pinnacleStudioScene) | Pinnacle Studio Scene | .scn | 
 [other/pinnacleStudioVideoProject](https://discmaster.textfiles.com/search?formatid=pinnacleStudioVideoProject) | Pinnacle Studio Video Project | .stu | 

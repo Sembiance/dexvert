@@ -15,4 +15,4 @@ dra testMany.js --format=music		# 44m 25s
 dra testMany.js --format=archive	# 79m 55s
 dra testMany.js --format=image		# 86m  2s
 
-# dra testMany.js --format=all  #  4h 38m 30s   to  5h 40m 43s		(Last run: 5h 19m 10s)
+# dra testMany.js --format=all  #  4h 38m 30s   to  5h 40m 43s		(Last run: 5h 21m 31s)

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,201)
+# Unsupported File Formats (3,203)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,055)
+## Other (2,057)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1404,6 +1404,7 @@ Family/Format | Name | Extensions | Notes
 [other/calamusCommandKeySettings](https://discmaster.textfiles.com/search?formatid=calamusCommandKeySettings) | Calamus Command-Key settings | .ckt | 
 [other/calamusFarbColorTable](https://discmaster.textfiles.com/search?formatid=calamusFarbColorTable) | Calamus Farb Color Table | .cft .cf | 
 [other/calamusRasterInfo](https://discmaster.textfiles.com/search?formatid=calamusRasterInfo) | Calamus Raster Information | .cri .cr | 
+[other/calamusRulerList](https://discmaster.textfiles.com/search?formatid=calamusRulerList) | Calamus Ruler List | .crl | 
 [other/calamusTextStyleList](https://discmaster.textfiles.com/search?formatid=calamusTextStyleList) | Calamus Text Style List | .csl .cs | 
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?formatid=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
 [other/capellaGalleryDataFile](https://discmaster.textfiles.com/search?formatid=capellaGalleryDataFile) | Capella gallery data file | .cag | 
@@ -1697,6 +1698,7 @@ Family/Format | Name | Extensions | Notes
 [other/euphoriaDatabaseSystem](https://discmaster.textfiles.com/search?formatid=euphoriaDatabaseSystem) | Euphoria Database System | .edb .hpc | 
 [other/eurekaMercuryConfiguration](https://discmaster.textfiles.com/search?formatid=eurekaMercuryConfiguration) | Eureka/Mercury Configuration | .cfg .eka | 
 [other/eveOnlineGameContentsArchive](https://discmaster.textfiles.com/search?formatid=eveOnlineGameContentsArchive) | EVE Online Game Contents archive | .stuff | 
+[other/everQuestGameData](https://discmaster.textfiles.com/search?formatid=everQuestGameData) | EverQuest Game data | .s3d .pak .pfs .eqg | 
 [other/everythingIndex](https://discmaster.textfiles.com/search?formatid=everythingIndex) | Everything index | .db | 
 [other/evilGeniusGameDataArchive](https://discmaster.textfiles.com/search?formatid=evilGeniusGameDataArchive) | Evil Genius game data archive | .erb | 
 [other/examViewQuestionBank](https://discmaster.textfiles.com/search?formatid=examViewQuestionBank) | ExamView Question Bank | .bnk | 

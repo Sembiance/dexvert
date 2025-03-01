@@ -1,11 +1,11 @@
-# Supported File Formats (2,977)
+# Supported File Formats (2,983)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (449)
+## Archive (451)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -62,7 +62,7 @@ archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/p
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
 archive | AVPACK Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
-archive | Balko UFL game data archive | .laf .ufl | [foremost](http://foremost.sourceforge.net/) | 
+archive | Balko UFL game data archive | .laf .ufl | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/balkoUFLGameDataArchive/)
 archive | Bank Game Archive | .bnk | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/bankGameArchive/)
 archive | Battlezone 2 game data package | .pak | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/battlezone2GameDataPackage/)
 archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
@@ -127,7 +127,7 @@ archive | Diet Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/f
 archive | [DietDisk Compressed](http://fileformats.archiveteam.org/wiki/Diet_Disk) |  | [dietDiskFatten](http://cd.textfiles.com/nightowl/nopv06/010A/DIETDISC.ZIP) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/dietDisk/)
 archive | Digital Illusions game archive | .pdo .rmpublisher .rmlanguage .pdt .dta | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/digitalIllusionsGameArchive/)
 archive | [Disk Doubler](http://justsolve.archiveteam.org/wiki/DiskDoubler) | .dd | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/diskDoubler/)
-archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) | .img | [sevenZip](http://p7zip.sourceforge.net/) [aaru](https://github.com/aaru-dps/Aaru) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/diskImage/)
+archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) | .img .dsk | [sevenZip](http://p7zip.sourceforge.net/) [aaru](https://github.com/aaru-dps/Aaru) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/diskImage/)
 archive | [DiskDupe Disk Image](http://fileformats.archiveteam.org/wiki/DDI) | .ddi | [sevenZip](http://p7zip.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/diskDupeDiskImage/)
 archive | DIV GamesStudio Graphcis Library | .fpg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
 archive | Dn.COM Cruncher Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/dnCOMCruncherPacked/)
@@ -179,6 +179,7 @@ archive | [HA Archive](http://fileformats.archiveteam.org/wiki/HA) | .ha | [ha](
 archive | Half Life Model | .mdl | [Crowbar](https://github.com/ZeqMacaw/Crowbar) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/halfLifeModel/)
 archive | [Hamarsoft HAP Archive](http://fileformats.archiveteam.org/wiki/HAP) | .hap | [hap210](https://archive.org/details/msdos_festival_HAPPAH21) [hap306](https://archive.org/details/msdos_festival_HAPPAH21) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/hap/)
 archive | [Hammer](http://fileformats.archiveteam.org/wiki/Hammer_(compression)) | .hmr | [hammer_decomp](https://github.com/Treeki/RandomStuff/blob/master/hammer_decomp.py) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/hammer/)
+archive | Harry Potter: Quidditch World Cup archive | .ccd | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/harryPotterQuidditchWorldCupArchive/)
 archive | [Hemera Thumbnails Archive](http://fileformats.archiveteam.org/wiki/HTA_(Hemera)) | .hta | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/hemeraThumbnailsArchive/)
 archive | [Highway Hunter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Highway_Hunter)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/highwayHunterGameArchive/)
 archive | Highway Pursuit game data archive | .hvd .hfd .hod .hsd .hmd .hgd | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/highwayPursuitGameDataArchive/)
@@ -340,7 +341,7 @@ archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak 
 archive | [Quantum Archive](http://fileformats.archiveteam.org/wiki/Quantum_compressed_archive) | .pak .q | [unpaq](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/quantum/)
 archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/wiki/QIP_(Quarterdeck)) | .qip | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/quarterdeckInstallationPacakge/)
 archive | [Quasijarus Strong Compressed](http://fileformats.archiveteam.org/wiki/Quasijarus_Strong_Compression) | .z | [ancient](https://github.com/temisu/ancient_format_decompressor) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/quasijarus/)
-archive | Raw Partition | .raw .hd .img .vhd | [uniso](https://github.com/Sembiance/dexvert/) [aaru](https://github.com/aaru-dps/Aaru) [sevenZip](http://p7zip.sourceforge.net/) | [26 sample files](https://sembiance.com/fileFormatSamples/archive/rawPartition/)
+archive | Raw Partition | .raw .hd .img .vhd | [uniso](https://github.com/Sembiance/dexvert/) [aaru](https://github.com/aaru-dps/Aaru) [sevenZip](http://p7zip.sourceforge.net/) | [24 sample files](https://sembiance.com/fileFormatSamples/archive/rawPartition/)
 archive | RDT Compressor Packed | .exe .com | cup386 | [7 sample files](https://sembiance.com/fileFormatSamples/archive/rdtCompressorPacked/)
 archive | Reality Bytes game archive | .rbd | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realityBytesGameArchive/)
 archive | [Red Hat Package Manager Archive](http://fileformats.archiveteam.org/wiki/RPM) | .rpm | [deark](https://entropymine.com/deark/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rpm/)
@@ -374,6 +375,7 @@ archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert
 archive | SGS.DAT File |  | [decomposeSGS](https://www.logipole.com/konvertor-en.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/sgsDAT/)
 archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
 archive | [Shockwave/Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/swf/)
+archive | Shrink Archive | .shr | [unar](https://github.com/incbee/Unarchiver) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkArchive/)
 archive | Shrink Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkPacked/)
 archive | Shrinker Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkerPacked/)
 archive | SimTex Game Archive | .lbx | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/simTexGameArchive/)
@@ -872,7 +874,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (638)
+## Image (639)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1264,6 +1266,7 @@ image | [NEC PC-88 PI](http://fileformats.archiveteam.org/wiki/Pi_(image_format)
 image | NEC PC-98 EBD | .ebd | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/necEBD/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/neochrome/)
 image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [32 sample files](https://sembiance.com/fileFormatSamples/image/neoDeskIcon/)
+image | [NETPIC by Jim Tucker](http://fileformats.archiveteam.org/wiki/NETPIC_(Jim_Tucker)) | .com .npx | [dosEXEScreenshot](https://github.com/Sembiance/dexvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/netpic/)
 image | [NewDraw Drawing](http://fileformats.archiveteam.org/wiki/NeoDraw) | .teo | [neoDraw](http://cd.textfiles.com/pier/pier09/cdrom/011/neodrw.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/image/neoDrawDrawing/)
 image | [NewIcons Icon](http://fileformats.archiveteam.org/wiki/NewIcons) | .info | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/newIcon/)
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/nikon/)
@@ -1493,7 +1496,7 @@ image | [Young Picasso](http://fileformats.archiveteam.org/wiki/Young_Picasso) |
 image | Z's Staff Kid98 | .zim | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/zim/)
 image | [Zoner Bitmap](http://fileformats.archiveteam.org/wiki/BMI_(Zoner)) | .bmi | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/zonerBitmap/)
 image | [Zoner Zebra](http://fileformats.archiveteam.org/wiki/ZBR_(Zoner_Zebra)) | .zbr | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/zbr/) - reaConverter is the only program I know of that can convert to SVG but it fails to do so with QEMU WinXP 32bit (used to work in wine). So for now, we just convert to PNG.
-image | Zoom-4 | .zm4 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/zoom4/)
+image | Zoom-4 | .zm4 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/zoom4/)
 image | [ZoomBrowser Ex thumbnail cache](http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache) | .info | [foremost](http://foremost.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/zoomBrowserExThumbnailCache/)
 image | [ZX Monochrome](http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)) | .scr | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/zxMonochrome/)
 image | [ZX Spectrum - Tricolor RGB](http://fileformats.archiveteam.org/wiki/Tricolor_RGB) | .3 | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://sembiance.com/fileFormatSamples/image/zx3/)
@@ -2019,7 +2022,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (920)
+## Text (923)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2187,7 +2190,7 @@ text | CPBackup Settings | .set |  | [11 sample files](https://sembiance.com/fil
 text | Cream Software Palette definition | .pal |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/creamSoftwarePaletteDefinition/)
 text | Crimson Editor language specification file | .spc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/crimsonEditorLanguageSpecificationFile/)
 text | CrossStudio project | .hzp |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/crossStudioProject/)
-text | Crossword Creator Puzzle | .puz |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/crosswordCreatorPuzzle/)
+text | Crossword Creator Puzzle | .puz |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/crosswordCreatorPuzzle/)
 text | Crystallographic Information Framework | .cif |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/crystallographicInformationFramework/)
 text | Csound Orchestra | .orc |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/csoundOrchestra/)
 text | Csound unified file format | .csd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
@@ -2256,6 +2259,7 @@ text | Emu48 keyboard configuration | .kml |  | [4 sample files](https://sembian
 text | eMule Web Interface template | .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/eMuleWebInterfaceTemplate/)
 text | Enriched Text Document |  |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
 text | ENVI Header | .hdr |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/enviHeader/)
+text | ergo!pro Project | .prj |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ergoProProject/)
 text | ESRI Arc/Info Export | .e00 .x00 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
 text | ESRI Arc/View Project | .apr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
 text | ESRI ArcInfo DAT File (External) | .dat |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExternalDAT/)
@@ -2263,6 +2267,7 @@ text | ESRI Shapefile Projection | .prj |  | [11 sample files](https://sembiance
 text | ESS-Code Filter | .flt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/essCodeFilter/)
 text | Eureka/Mercury Report | .rpt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/eurekaMercuryReport/)
 text | EurekaLog log file | .elf .el |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/eurekaLogLogFile/)
+text | EverQuest Effect | .eff |  | 
 text | Excellon Drill File | .drl |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/excellonDrillFile/)
 text | Executor Configuration File | .ecf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/executorConfigurationFile/)
 text | Expert Astronomer Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/expertAstronomerConfiguration/)
@@ -2352,7 +2357,7 @@ text | Gravis Firebird configuration | .fbd |  | [7 sample files](https://sembia
 text | Gui4CLI script | .g .gc |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/gui4CLIScript/)
 text | Hard Disk Menu System menu | .999 .000 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hardDiskMenuSystemMenu/)
 text | HelpScribble Project | .hsc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/helpScribbleProject/)
-text | HeroQuest Quest | .q09 .q10 .qst |  | 
+text | HeroQuest Quest | .q09 .q10 .qst |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/heroQuestQuest/)
 text | High Voltage SID Collection update info | .hvs |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/highVoltageSIDCollectionUpdateInfo/)
 text | HiJaak video card configuration | .cfg .bin |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/hiJaakVideoCardConfiguration/)
 text | HMI Sound OS Configuration | .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hmiSoundOSConfiguration/)
@@ -2361,7 +2366,7 @@ text | HSQLDB configuration | .properties |  | [10 sample files](https://sembian
 text | HTML Component | .htc |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/htmlComponent/)
 text | HTML Help Collection | .col |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/htmlHelpCollection/)
 text | HTTrack Website Copier cookies | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/htTrackWebsiteCopierCookies/)
-text | HyperChem molecule format | .hin |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/hyperChemMoleculeFormat/)
+text | HyperChem molecule format | .hin |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hyperChemMoleculeFormat/)
 text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hyperReaderVideodiscPlayerDriver/)
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc .hts .htx .shtml .phtml .hta |  | [19 sample files](https://sembiance.com/fileFormatSamples/text/html/) - I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. It is also CPU intensive.
 text | IAFA Package info | .pkg .age |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/iafaPackageInfo/)
@@ -2623,6 +2628,7 @@ text | Picture It! brush definition | .txt |  | [4 sample files](https://sembian
 text | Piklib 8 script | .class .cnv .def .decoded |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/piklib8Script/)
 text | PipeDream document | .pd .pdd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/pipeDreamDocument/)
 text | PiXCL source | .pxl .px |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/piXCLSource/)
+text | PiXCL text Palette | .pal |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/piXCLTextPalette/)
 text | Plan 9 rc shell script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/plan9RCShellScript/)
 text | Plan-80 spreadsheet | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/plan80Spreadsheet/)
 text | Playmation Action |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/playmationAction/)

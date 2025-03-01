@@ -1855,6 +1855,7 @@ export const WEAK_VALUES =
 	/^Imageworks 1D LUT format$/,
 	/^Imagine for DOS Effect$/,
 	/^iMON Setting file$/,
+	/^In the Groove game data Package$/,
 	/^Incredimail Letter creator project$/,
 	/^Indigo Renderer Material$/,
 	/^Inno Setup Script \(with alt rem\)$/,

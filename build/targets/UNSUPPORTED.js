@@ -36,7 +36,7 @@ ${(await Object.values(unsupportedFormats).filter(f => f.familyid===familyid).so
 		const noteText = (f.notes || "").replaceAll("\n", " ").trim();
 		if(noteText && noteText.length>0)
 			noteParts.push(noteText);
-		return (`[${f.familyid}/${f.formatid}](https://discmaster.textfiles.com/search?formatid=${f.formatid}) | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${noteParts.join(" - ")}`);
+		return (`[${f.familyid}/${f.formatid}](https://discmaster.textfiles.com/search?format=${f.formatid}) | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${noteParts.join(" - ")}`);
 	})).join("\n")}
 `)).join("\n")}
 `);

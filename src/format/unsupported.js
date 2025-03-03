@@ -2178,6 +2178,7 @@ export default
 		hotbarSkin                               : {name : "Hotbar skin", ext : [".xip"], magic : ["Hotbar skin"]},
 		hotDocsComponent                         : {name : "HotDocs Component", ext : [".cmp"], magic : ["HotDocs Component"]},
 		hotMapRegionsDescription                 : {name : "HotMap VBX Regions Description", ext : [".hmd"], magic : ["HotMap VBX regions Description"]},
+		houdiniProject                           : {name : "Houdini Project", ext : [".hip", ".hipnc"], magic : ["Houdini Project", "Houdini Apprentice Project"]},
 		hp4x3xBinary                             : {name : "HP 49/48/39/38 binary", ext : [".hp49", ".hp48", ".49", ".hp39", ".hp38"], magic : [/^HP (49|48|39|38) binary/, /^HP (49|48|39|38) (binary|ASCII) \([^)]+\)/]},
 		hpfsAccessDB                             : {name : "HPFS-Access DB", ext : [".dat"], magic : ["HPFS-Access DB"]},
 		hyperACCESSOS2Data                       : {name : "HyperACCESS OS/2 data", ext : [".hho"], magic : ["HyperACCESS OS/2 data"]},

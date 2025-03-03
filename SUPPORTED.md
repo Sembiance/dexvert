@@ -1,4 +1,4 @@
-# Supported File Formats (2,983)
+# Supported File Formats (2,985)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -47,7 +47,7 @@ archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_
 archive | [Apple DiskCopy](https://www.discferret.com/wiki/Apple_DiskCopy_4.2) |  | [dd](https://www.gnu.org/software/coreutils/) [IsoBuster](https://www.isobuster.com/isobuster.php) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopy/)
 archive | [Apple DOS Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Apple_II)) | .dsk .po .hdv | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/appleDOSDiskImage/)
 archive | Apple II Pascal Disk Image | .dsk | [acx](https://github.com/AppleCommander/AppleCommander) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/apple2PascalDiskImage/)
-archive | [Apple Safari Webarchive](http://fileformats.archiveteam.org/wiki/Webarchive_(Safari)) | .webarchive | [pywebarchive](https://pypi.org/project/pywebarchive/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/appleSafariWebarchive/)
+archive | [Apple Safari Webarchive](http://fileformats.archiveteam.org/wiki/Webarchive_(Safari)) | .webarchive | [pywebarchive](https://pypi.org/project/pywebarchive/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/appleSafariWebarchive/)
 archive | [AppleSingle](http://fileformats.archiveteam.org/wiki/AppleSingle) | .as | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/appleSingle/)
 archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .deb .a .lib .sa | [ar](https://sourceware.org/binutils/) [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/arArchive/)
 archive | [ArcadeLab/Retro64 Graphics](https://web.archive.org/web/20220705090053/https://wiki.xentax.com/index.php/Retro64_GFX) | .gfx | [gameViewerLinux](https://game-viewer.org/plugins.php) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arcadeLabGraphics/)
@@ -1983,7 +1983,7 @@ poly | [LDraw LEGO Model](http://www.ldraw.org/) | .ldr .dat | [threeDObjectConv
 poly | Lightscape Preparatation | .lp | [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/poly/lightscapePreparatation/)
 poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lwob .lw .lightwave | [blender](https://www.blender.org) [AccuTrans3D](http://www.micromouse.ca/) [polyTrans64](https://www.okino.com/conv/conv.htm) [assimp](https://github.com/assimp/assimp) [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [18 sample files](https://sembiance.com/fileFormatSamples/poly/lightWave/)
 poly | [Linden Binary Mesh](https://wiki.secondlife.com/w/index.php?title=Avatar_Appearance#Linden_binary_mesh_file) | .llm | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [8 sample files](https://sembiance.com/fileFormatSamples/poly/lindenBinaryMesh/)
-poly | [Luxology 3D Scene](http://fileformats.archiveteam.org/wiki/LXO) | .lxo | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [AccuTrans3D](http://www.micromouse.ca/) | [9 sample files](https://sembiance.com/fileFormatSamples/poly/luxology3DScene/)
+poly | [Luxology 3D Scene](http://fileformats.archiveteam.org/wiki/LXO) | .lxo | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [AccuTrans3D](http://www.micromouse.ca/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/luxology3DScene/)
 poly | Metasequoia 3D Scene | .mqo | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/metasequoia3DScene/)
 poly | [MilkShape 3D Model](http://fileformats.archiveteam.org/wiki/MilkShape_model) | .ms3d | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [14 sample files](https://sembiance.com/fileFormatSamples/poly/milkShape3DModel/)
 poly | [MilkShape 3D Model](http://fileformats.archiveteam.org/wiki/COLLADA) | .dae .zae .xml | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/collada/)
@@ -2022,7 +2022,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (923)
+## Text (925)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2645,7 +2645,7 @@ text | Portable Bridge Notation | .pbn |  | [10 sample files](https://sembiance.
 text | [Portable Draughts Notation](http://fileformats.archiveteam.org/wiki/Portable_Draughts_Notation#Sample_files) | .pdn |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/portableDraughtsNotation/)
 text | [Portable Gaming Notation](http://fileformats.archiveteam.org/wiki/PGN) | .pgn |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/portableGamingNotation/)
 text | Poser character rigging | .cr2 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poserCharacterRigging/)
-text | Poser scene | .pz3 |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/poserScene/)
+text | Poser scene | .pz3 |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/poserScene/)
 text | Post-It Software Note Template |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/postItSoftwareNoteTemplate/)
 text | PostgreSQL database dump | .sql |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ppd/)
@@ -2793,6 +2793,7 @@ text | TASM instructions definition Table | .tab |  | [13 sample files](https://
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
 text | Team Developer / SQLWindows application | .apt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/teamDeveloperSQLWindowsAppText/)
 text | Terminate Smartnote | .not |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/terminateSmartnote/)
+text | Terragen project | .tgd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/terragenProject/)
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
@@ -2833,6 +2834,7 @@ text | Unified Printer Parameter | .upp |  | [10 sample files](https://sembiance
 text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/upcatCatalog/)
 text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/urbanChaosStoryScript/)
 text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
+text | V-Ray Material | .mat |  | 
 text | Value Change Dump | .vcd .vcdz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/valueChangeDump/)
 text | Valve Choreography Data format | .vcd |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
 text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)

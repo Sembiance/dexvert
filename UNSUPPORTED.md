@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,203)
+# Unsupported File Formats (3,204)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,057)
+## Other (2,058)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1889,6 +1889,7 @@ Family/Format | Name | Extensions | Notes
 [other/hotbarSkin](https://discmaster.textfiles.com/search?format=hotbarSkin) | Hotbar skin | .xip | 
 [other/hotDocsComponent](https://discmaster.textfiles.com/search?format=hotDocsComponent) | HotDocs Component | .cmp | 
 [other/hotMapRegionsDescription](https://discmaster.textfiles.com/search?format=hotMapRegionsDescription) | HotMap VBX Regions Description | .hmd | 
+[other/houdiniProject](https://discmaster.textfiles.com/search?format=houdiniProject) | Houdini Project | .hip .hipnc | 
 [other/hoverMazeData](https://discmaster.textfiles.com/search?format=hoverMazeData) | Hover! maze data | .maz | 
 [other/hp4x3xBinary](https://discmaster.textfiles.com/search?format=hp4x3xBinary) | HP 49/48/39/38 binary | .hp49 .hp48 .49 .hp39 .hp38 | 
 [other/hpfsAccessDB](https://discmaster.textfiles.com/search?format=hpfsAccessDB) | HPFS-Access DB | .dat | 

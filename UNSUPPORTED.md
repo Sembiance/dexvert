@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,204)
+# Unsupported File Formats (3,206)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,058)
+## Other (2,060)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1250,6 +1250,7 @@ Family/Format | Name | Extensions | Notes
 [other/ashampooProductsTranslation](https://discmaster.textfiles.com/search?format=ashampooProductsTranslation) | Ashampoo products translation | .ashlang | 
 [other/ashtonTateHelpData](https://discmaster.textfiles.com/search?format=ashtonTateHelpData) | Ashton-Tate Help data | .hlp | 
 [other/asicCompilerDebugInfo](https://discmaster.textfiles.com/search?format=asicCompilerDebugInfo) | ASIC compiler debug info | .dbg | 
+[other/asoboStudioGameDataArchive](https://discmaster.textfiles.com/search?format=asoboStudioGameDataArchive) | Asobo Studio game data archive | .dpc .dps | 
 [other/aspellDictionary](https://discmaster.textfiles.com/search?format=aspellDictionary) | Aspell dictionary | .rws | 
 [other/assaultWingLevel](https://discmaster.textfiles.com/search?format=assaultWingLevel) | Assault Wing level | .lev | 
 [other/assaultWingSprite](https://discmaster.textfiles.com/search?format=assaultWingSprite) | Assault Wing Sprite | .spr | 
@@ -2775,6 +2776,7 @@ Family/Format | Name | Extensions | Notes
 [other/superProjectExpertProject](https://discmaster.textfiles.com/search?format=superProjectExpertProject) | SuperProject Expert Project | .pj | 
 [other/superProjectGraphicsDrivers](https://discmaster.textfiles.com/search?format=superProjectGraphicsDrivers) | SuperProject graphics drivers | .dat | 
 [other/superscapeDo3DTemplate](https://discmaster.textfiles.com/search?format=superscapeDo3DTemplate) | Superscape Do 3D Template | .vrt | 
+[other/supersonicSoftwareGameDataArchive](https://discmaster.textfiles.com/search?format=supersonicSoftwareGameDataArchive) | Supersonic Software game data archive | .piz | 
 [other/surfsUpGameDataArchive](https://discmaster.textfiles.com/search?format=surfsUpGameDataArchive) | Surf's Up game data archive | .bin | 
 [other/surrealSoftwareGameArchive](https://discmaster.textfiles.com/search?format=surrealSoftwareGameArchive) | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | 
 [other/swishEIndex](https://discmaster.textfiles.com/search?format=swishEIndex) | Swish-e index | .swi | 

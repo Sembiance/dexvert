@@ -2095,6 +2095,7 @@ export default
 		fLStudioScore                            : {name : "FL Studio Score", ext : [".fsc"], magic : ["FL Studio Score"]},
 		fMailAreaConfiguration                   : {name : "FMail Area configuration", ext : [".ard", ".ar"], magic : ["FMail Area configuration"]},
 		fMailNodeConfiguration                   : {name : "FMail Node configuration", ext : [".nod"], magic : ["FMail Node configuration"]},
+		fMODAudioEvents                          : {name : "FMOD Audio Events", ext : [".fev"], magic : ["FMOD Audio Events"], weakMagic : true},
 		fontDescriptor                           : {name : "Font descriptor", ext : [".ntf14", ".ntf16", ".ntf4"], magic : ["Font descriptor"]},
 		foobar2000ColumnsUISettings              : {name : "Foobar 2000 Columns UI settings", ext : [".fcs"], magic : ["Foobar 2000 Columns UI settings"]},
 		foreignLanguageMasterConfig              : {name : "Foreign Language Master Configuration", ext : [".config"], magic : ["Foreign Language Master Configuration"]},

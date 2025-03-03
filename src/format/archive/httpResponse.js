@@ -6,6 +6,7 @@ export class httpResponse extends Format
 {
 	name       = "HTTP Response";
 	magic      = ["HTTP Response"];
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="RAW!" && macFileCreator==="WWW?";
 	packed     = true;
 	converters = async dexState =>
 	{

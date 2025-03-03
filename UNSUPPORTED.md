@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,206)
+# Unsupported File Formats (3,207)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1055,7 +1055,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,060)
+## Other (2,061)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1752,6 +1752,7 @@ Family/Format | Name | Extensions | Notes
 [other/flowCharting3Help](https://discmaster.textfiles.com/search?format=flowCharting3Help) | Flow Charting 3 Help | .fhp | 
 [other/fMailAreaConfiguration](https://discmaster.textfiles.com/search?format=fMailAreaConfiguration) | FMail Area configuration | .ard .ar | 
 [other/fMailNodeConfiguration](https://discmaster.textfiles.com/search?format=fMailNodeConfiguration) | FMail Node configuration | .nod | 
+[other/fMODAudioEvents](https://discmaster.textfiles.com/search?format=fMODAudioEvents) | FMOD Audio Events | .fev | 
 [other/fOnlineEngineTileSet](https://discmaster.textfiles.com/search?format=fOnlineEngineTileSet) | FOnline Engine Tile set | .til | 
 [other/fontDescriptor](https://discmaster.textfiles.com/search?format=fontDescriptor) | Font descriptor | .ntf14 .ntf16 .ntf4 | 
 [other/foobar2000ColumnsUISettings](https://discmaster.textfiles.com/search?format=foobar2000ColumnsUISettings) | Foobar 2000 Columns UI settings | .fcs | 

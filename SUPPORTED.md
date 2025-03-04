@@ -2834,7 +2834,7 @@ text | Unified Printer Parameter | .upp |  | [10 sample files](https://sembiance
 text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/upcatCatalog/)
 text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/urbanChaosStoryScript/)
 text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
-text | V-Ray Material | .mat |  | 
+text | V-Ray Material | .mat .vismat |  | 
 text | Value Change Dump | .vcd .vcdz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/valueChangeDump/)
 text | Valve Choreography Data format | .vcd |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
 text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)

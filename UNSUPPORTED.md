@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,211)
+# Unsupported File Formats (3,209)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -3220,7 +3220,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (50)
+## Video (48)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3233,7 +3233,6 @@ Family/Format | Name | Extensions | Notes
 [video/animationWorks](https://discmaster.textfiles.com/search?format=animationWorks) | Animation Works Movie | .awm | [5 sample files](https://sembiance.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
 [video/astoundAnimation](https://discmaster.textfiles.com/search?format=astoundAnimation) | Astound Animation | .awa | 
 [video/avssVideo](https://discmaster.textfiles.com/search?format=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
-[video/callahansCrosstimeSaloonVideo](https://discmaster.textfiles.com/search?format=callahansCrosstimeSaloonVideo) | Callahans Crosstime Saloon video | .q | [2 sample files](https://sembiance.com/fileFormatSamples/video/callahansCrosstimeSaloonVideo/)
 [video/iffSSA](https://discmaster.textfiles.com/search?format=iffSSA) | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [7 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
 [video/delphineCIN](https://discmaster.textfiles.com/search?format=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
@@ -3248,7 +3247,6 @@ Family/Format | Name | Extensions | Notes
 [video/kheopsStudioVideo](https://discmaster.textfiles.com/search?format=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?format=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?format=lzaAnimationVideo) | LZA animation/video | .lza | 
-[video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?format=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?format=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/magixVideo](https://discmaster.textfiles.com/search?format=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 

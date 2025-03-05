@@ -714,6 +714,7 @@ export default
 		pictureItBrushDefinition                   : {name : "Picture It! brush definition", ext : [".txt"], magic : ["Picture It! brush definition"]},
 		pipeDreamDocument                          : {name : "PipeDream document", ext : [".pd", ".pdd"], magic : ["PipeDream document"], weakMagic : true},
 		piXCLTextPalette                           : {name : "PiXCL text Palette", ext : [".pal"], magic : ["PiXCL text Palette"]},
+		pixelBenderKernel                          : {name : "Pixel Bender Kernel", ext : [".pbk"], magic : ["Pixel Bender Kernel"], weakMagic : true},
 		pgpPublicKey                               : {name : "PGP Public/Private Key", website : "http://fileformats.archiveteam.org/wiki/PGP_public_key", ext : [".asc", ".aexpk", ".pgp", ".pub"], magic : [/^PGP (public|private) key block/, "PGP armored data, public key block", "application/pgp-keys"], weakMagic : ["application/pgp-keys"], idMeta : ({macFileType, macFileCreator}) => macFileType==="PKey" && ["MPGP", "Safe"].includes(macFileCreator)},
 		pgpMessage                                 : {name : "PGP Message", website : "http://fileformats.archiveteam.org/wiki/PGP", magic : ["PGP ASCII-Armor", "PGP armored data", "PGP signature", "PGP Nachricht", "application/pgp-encrypted", "application/pgp-signature", /^PGP (clear text )?(signed )?message/, /^PGP armored data, (signed )?message/]},
 		plan80Spreadsheet                          : {name : "Plan-80 spreadsheet", ext : [".txt"], magic : ["Plan-80 spreadsheet"]},

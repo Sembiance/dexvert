@@ -28,7 +28,7 @@ export class zip extends Format
 		"Theme Manager / WinStyles theme", "Adobe InDesign Markup Language", "TuneUp Style Boot Screen", "TIP Archiv gefunden (Auflistung ist deaktiviert)", /^IOS\/iPadOS IPA file/, "Tableau Packaged Workbook", "Maxthon skin (MX1)", "Pencil template",
 		"Chamaleon Clock wallpaper clock skin", "Google Gadget", "Proteus Project", "Amiga WHDLoad package (zipped)", "MIUI Theme", "Pencil stencil", "TwinCAT Compiled-Library", "LimeWire theme", "EncryptOnClick encrypted", "SkyOS add-on Package",
 		"Midtown Madness 2 car data", "Rainlendar 2 Skin", "Rainlendar 2 Skin", "KWord document", "PowerPoint Macro-enabled Open XML add-in", "Maxthon skin (MX2)", "Total Commander language pack", "Rockbox Theme package", "Trillian zipped Skin",
-		"Call Of Duty map - game data archive", "Rainlendar 2 Language", "Desktop Sidebar skin", "OpenDocument Formula", "SysMetrix skin", "WindowBlinds Progress Anim theme", "Aston 2 Menu",
+		"Call Of Duty map - game data archive", "Rainlendar 2 Language", "Desktop Sidebar skin", "OpenDocument Formula", "SysMetrix skin", "WindowBlinds Progress Anim theme", "Aston 2 Menu", "ConceptDraw Project document (Zipped)",
 		/^fmt\/(424|524|595|627|628|633|937|942|943|999|1184|1476|1477)( |$)/,
 		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];

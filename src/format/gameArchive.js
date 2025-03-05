@@ -72,6 +72,7 @@ export const gameextractor =
 		warcraft2GameArchive                : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true, idMeta : ({macFileType, macFileCreator}) => macFileType==="W2df" && macFileCreator==="W2dm"},
 		wad2GameArchive                     : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
 		xcrArchive                          : {name : "XCR archive", ext : [".xcr"], magic : ["XCR archive"]},
+		xenonautsGameArchive                : {name : "Xenonauts game archive", ext : [".pfp"], magic : ["Xenonauts game data archive"], weakMagic : true},
 		youDontKnowJackGameArchive          : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"], idMeta : ({macFileType, macFileCreator}) => (macFileType==="srf " && macFileCreator==="SRF ") || (macFileType==="srf1" && macFileCreator==="SrfM")},
 		zAxisGameSoundDataArchive           : {name : "Z-Axis game sound data archive", ext : [".zsd"], magic : ["Z-Axis game sound data archive"]}
 	}

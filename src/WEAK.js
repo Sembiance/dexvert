@@ -82,6 +82,7 @@ export const IGNORE_MAGICS =
 [
 	// detectItEasy
 	/^Archive: BAGF$/,
+	/^Archive: SQZE$/,
 	/^Archive: SW/,	// These are paired with .idb files which we DO support
 
 	// dexmagic
@@ -441,7 +442,7 @@ export const WEAK_VALUES =
 	/^ACE\/gr ascii file/,
 	/^Adobe InDesign$/,
 	/^Adobe PageMaker, (big|little)-endian, version [\d.]+$/,
-	/^Adobe Photoshop, \d{5}/,
+	/^Adobe Photoshop, -?\d{5}/,
 	/^Adobe Photoshop Color swatch/,
 	/^AdvanceMAME mbr$/,
 	/^AES encrypted data/,
@@ -2075,6 +2076,7 @@ export const WEAK_VALUES =
 	/^ReqAttack Image$/,
 	/^RichView Format \(Unicode\)$/,
 	/^Rigol Binary waveform \(generic\)$/,
+	/^Rock Band multi track music$/,
 	/^ROOT format$/,
 	/^RPG Maker VX Ace Project$/,
 	/^rres resource package$/,

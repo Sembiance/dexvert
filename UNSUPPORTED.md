@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,207)
+# Unsupported File Formats (3,213)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (251)
+## Archive (252)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -233,6 +233,7 @@ Family/Format | Name | Extensions | Notes
 [archive/tpacArchive](https://discmaster.textfiles.com/search?format=tpacArchive) | TPac archive | .pac | 
 [archive/trzZipCompressed](https://discmaster.textfiles.com/search?format=trzZipCompressed) | TRCZip compressed | .trc | 
 [archive/turboBatPacked](https://discmaster.textfiles.com/search?format=turboBatPacked) | TurboBat Packed | .com | 
+[archive/unityUnityWebAssetBundle](https://discmaster.textfiles.com/search?format=unityUnityWebAssetBundle) | Unity UnityWeb asset bundle | .unity3d | 
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?format=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?format=unrealPackage) | Unreal Package | .ut2 .uasset | 
 [archive/viacomNewMedia](https://discmaster.textfiles.com/search?format=viacomNewMedia) | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
@@ -1055,7 +1056,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,061)
+## Other (2,065)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1186,6 +1187,7 @@ Family/Format | Name | Extensions | Notes
 [other/alteraWaveformDesignFile](https://discmaster.textfiles.com/search?format=alteraWaveformDesignFile) | Altera Waveform Design File | .wdf | 
 [other/altiumSimulationDataFile](https://discmaster.textfiles.com/search?format=altiumSimulationDataFile) | Altium Simulation Data File |  | 
 [other/amapiShader](https://discmaster.textfiles.com/search?format=amapiShader) | Amapi Shader | .xsh | 
+[other/ambientDesignArtRageProject](https://discmaster.textfiles.com/search?format=ambientDesignArtRageProject) | Ambient Design ArtRage project | .ptg | 
 [other/americanConquestGameArchive](https://discmaster.textfiles.com/search?format=americanConquestGameArchive) | American Conquest game archive | .gp | 
 [other/americanSMcGeeSAliceSavedGameFile](https://discmaster.textfiles.com/search?format=americanSMcGeeSAliceSavedGameFile) | American's McGee's Alice Saved Game File | .pth | 
 [other/amiBackConfiguration](https://discmaster.textfiles.com/search?format=amiBackConfiguration) | Ami-Back Configuration | .config | 
@@ -1731,6 +1733,7 @@ Family/Format | Name | Extensions | Notes
 [other/fastLynxHelp](https://discmaster.textfiles.com/search?format=fastLynxHelp) | FastLynx Help | .hlp | 
 [other/fdmDownloadsData](https://discmaster.textfiles.com/search?format=fdmDownloadsData) | FDM downloads data | .sav | 
 [other/ferrariFormulaOneTrackData](https://discmaster.textfiles.com/search?format=ferrariFormulaOneTrackData) | Ferrari Formula One track data | .tkb4 .tkb | 
+[other/fetchScript](https://discmaster.textfiles.com/search?format=fetchScript) | Fetch Script | .scpt | 
 [other/fiascoDatabaseFile](https://discmaster.textfiles.com/search?format=fiascoDatabaseFile) | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 [other/fighterBomberMission](https://discmaster.textfiles.com/search?format=fighterBomberMission) | Fighter Bomber Mission | .msn | 
 [other/fileExpressIndexHeader](https://discmaster.textfiles.com/search?format=fileExpressIndexHeader) | File Express Index Header | .ixh | 
@@ -2666,6 +2669,7 @@ Family/Format | Name | Extensions | Notes
 [other/shapeshifterTheme](https://discmaster.textfiles.com/search?format=shapeshifterTheme) | Shapeshifter theme | .guikit | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?format=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 
 [other/showKitTemplate](https://discmaster.textfiles.com/search?format=showKitTemplate) | Show.kit template | .sks | 
+[other/sibeliusScorch](https://discmaster.textfiles.com/search?format=sibeliusScorch) | Sibelius Scorch | .sco | 
 [other/civilizationFile](https://discmaster.textfiles.com/search?format=civilizationFile) | Sid Meier's Civilization File | .pal .pic | 
 [other/siegfriedAntiviruData](https://discmaster.textfiles.com/search?format=siegfriedAntiviruData) | Siegfried Antivirus Professional virus data | .brainfile | 
 [other/siemensTIAPLCFile](https://discmaster.textfiles.com/search?format=siemensTIAPLCFile) | Siemens TIA PLC File | .plf | 
@@ -2907,6 +2911,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboPascalSymbolTable](https://discmaster.textfiles.com/search?format=turboPascalSymbolTable) | Turbo Pascal Symbol Table | .psm | 
 [other/turboProfilerAreasData](https://discmaster.textfiles.com/search?format=turboProfilerAreasData) | Turbo Profiler Areas data | .tfa | 
 [other/turboCalcLibrary](https://discmaster.textfiles.com/search?format=turboCalcLibrary) | TurboCalc Library | .tclib | 
+[other/turboPrintColorProfile](https://discmaster.textfiles.com/search?format=turboPrintColorProfile) | TurboPrint color profile | .tpm | 
 [other/tvPaintProject](https://discmaster.textfiles.com/search?format=tvPaintProject) | TVPaint Project | .tvpp .deep .aur | 
 [other/twistedMetal3DModelsContainer](https://discmaster.textfiles.com/search?format=twistedMetal3DModelsContainer) | Twisted Metal 3D models container | .tpc | 
 [other/twistedMetalTexture](https://discmaster.textfiles.com/search?format=twistedMetalTexture) | Twisted Metal texture | .dpc | 
@@ -3122,7 +3127,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (84)
+## Poly (85)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3145,6 +3150,7 @@ Family/Format | Name | Extensions | Notes
 [poly/blizzard3DModelBinary](https://discmaster.textfiles.com/search?format=blizzard3DModelBinary) | Blizzard 3D Model (binary) | .mdx | 
 [poly/brlCADGeometry](https://discmaster.textfiles.com/search?format=brlCADGeometry) | BRL-CAD geometry | .g | 
 [poly/catiaModel](https://discmaster.textfiles.com/search?format=catiaModel) | CATIA model | .model | 
+[poly/cheetah3D](https://discmaster.textfiles.com/search?format=cheetah3D) | Cheetah3D | .jas | 
 [poly/coordinate3DFormat](https://discmaster.textfiles.com/search?format=coordinate3DFormat) | Coordinate 3D format | .c3d | 
 [poly/createShade3DScene](https://discmaster.textfiles.com/search?format=createShade3DScene) | Create+Shade 3D Scene | .3d | 
 [poly/cult3DObject](https://discmaster.textfiles.com/search?format=cult3DObject) | Cult3D object | .co .c3p .c3d | 

@@ -49,9 +49,5 @@ export class excel97 extends Program
 	});
 	renameOut  = true;
 	chain      = "?soffice[format:MS Excel 97][outType:pdf]";
-	chainCheck = r =>
-	{
-		r.xlog.info`in chainCheck excel97 ${r.flags.outMethod}`;
-		return r.flags.outMethod!=="print";
-	};
+	chainCheck = r => r.flags.outMethod!=="print";
 }

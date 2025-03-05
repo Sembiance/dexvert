@@ -17774,53 +17774,72 @@ xyz:	RPG Maker image
 [bif]      byLight                                  bif 
 
 >>> na_game_tool 0.2.0  Linux https://nihav.org/game_tool.html
+  ace        Space Ace scenes
   acf        Time Commando ACF
+  ai_cda     Alien Incident CDA
   ark-an     Ark of Time animation
+  ascon      Asc(ar)on animation
   avf        American Laser Games / Her Interactive Video
   avx        Jack Orlando AVX
   azmov      Azrael's Tear MOV
+  bal        Baldies animation
+  bd13       Brain Dead 13 scenes
   ca2        Microcosm CA2
   cda        Pray for Death CDA
   ci2        Arxel Tribe CI2
   cnm        Arxel Tribe CNM
   crh-de     Dark Earth CRH
   crh-nc     Nightmare Creatures CRH
+  cyclemania Cyclemania video
   cydonia    Cydonia Paco
   defcon5    Defcon 5 video
+  derf-aud   Xilam DERF audio
+  derf-vid   Xilam DERF video
   dkanim     DK animation
   dpeg       DPEG
+  drl        Thunder In Paradise DRL
   duck-uqm   TrueMotion video for 3DO version of SC2
   etv        Hercules ETV
+  fcmp       FutureVision audio
   fla        Little Big Adventure FLA
   flh        Conquest Earth FLH
   fli        FLIC
+  fst        FutureVision audio
   guilty     Innocent Until Caught 1/2 cutscenes
   h2o        The Pandora Directive video
   haf        Death Rally HAF
   hl-fmv     Highlander cutscenes
   imx        Fable video
   jam        JAM video
+  jazz2      Jazz Jackrabbit 2 cutscene
   kdv24      Comanche video
   kdv-c      Comanche video
   kdv-af     Armored Fist video
   kdv-cg     Comanche Gold video
   kdv-wc     Werewolf vs. Comanche video
+  lair       Dragon's Lair PC port scene
   lotr-av    Lord of the Rings AV
   mh-fmv     Machine Hunter FMV
   mux        Infogrames MUX video
   nl-fmv     Nightlong FMV (320x180)
   nl-fmv2    Nightlong FMV2 (640x360)
   nxl        The Lawnmower Man NXL
+  origin-fli Origin IFF FLI
+  origin-ssm System Shock movie
   paco       PACo
   ph         Total Multimedia PH video
   pmv        Infocom PMV
+  psy-str    Psychic Detective STR
   ptf        Under a Killing Moon PTF
   q          Legend Entertainment Q
   qrac-fmv   Network Q RAC Rally FMV
   ratvid     Ratvideo
+  raven-anm  Ravenloft ANM
   rbt        Sierra robot
   rlf        Zork RLF
   sdv        Stardock video
+  siff       Beam Software SIFF
+  soulhunt   Soul Hunt VID
   talisman   Talisman animation
   tvi        Terminal Velocity video
   umv-afraid Are You Afraid of the Dark UMV
@@ -17828,7 +17847,13 @@ xyz:	RPG Maker image
   vdo        Harrow Media VDO
   vpx1       reLINE VPX1
   vx         Actimagine VX
+  wingnuts   Wing Nuts game videos
   xanth      Companions of Xanth cutscenes
+  yo-mxv     Yo Matias videos and music
+  yumimi-ablk Yumimi Mix animations (ABLK)
+  yumimi-cut Yumimi Mix animations (ACUT)
+  zorton     Zorton Brothers video
+
 
 >>> noesis 4474  win7 (.net) https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91
 animated

@@ -659,6 +659,7 @@ export default
 		omnisStudioLibrary                         : {name : "Omnis Studio Library", ext : [".lbs"], magic : ["Omnis Studio Library"], weakMagic : true},
 		openColorIOProfile                         : {name : "OpenColorIO profile", ext : [".ocio"], magic : ["OpenColorIO profile"], weakMagic : true},
 		openFinancialConnectivity                  : {name : "Open Financial Connectivity", ext : [".ofc"], magic : ["Open Financial Connectivity"], weakMagic : true},
+		openFinancialExchange                      : {name : "Open Financial Exchange", ext : [".ofx", ".qfx"], magic : ["Quicken Transfer file", /^fmt\/309( |$)/], weakMagic : ["Quicken Transfer file"]},
 		openMPTKeyBinding                          : {name : "OpenMPT Key Binding", ext : [".mkb"], magic : ["OpenMPT Key Binding"]},
 		openSceneGraphText                         : {name : "OpenSceneGraph Text Format", ext : [".osg"], magic : ["OpenSceneGraph legacy text format"], weakMagic : true},
 		openSSLPEMPublicKey                        : {name : "OpenSSL PEM public key", ext : [".key", ".pem"], magic : ["OpenSSL PEM public key", /^OpenSSH public key/, /^PEM RSA public key/, /SSL-RSA public key$/], weakMagic : true},

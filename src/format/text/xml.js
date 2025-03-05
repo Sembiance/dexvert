@@ -40,7 +40,7 @@ const _XML_MAGIC = [
 	"Portable Application Description (UTF-8) (PAD)", "Siemens TIA project (v11)", "DockPanel configuration", "GObject Introspection information", "application/metalink+xml", "ZModeler profile", "Compass and Ruler Macro", "Softimage Scene TOC",
 	"Vikon Skeleton template", "Chemical Markup Language XML document", "m0n0wall configuration", "MLT XML document", "Jahshaka Scene File", "ksudoku puzzle", /^Linden (avatar|skeleton) definition/, "RealProducer Job File", "Google Earth network link",
 	/^Visual Studio J# Project \(v[78]\)$/, "Visual Studio JavaScript Project", "UniHighlighter Highlighter definition", "BORGChat configuration", "BORGChat smiles", "Zope Configuration Mark-up Language", "application/x-drgeo", "Hydrogen Song",
-	/^Together Class Diagram \(UML [\d.]+\)/, "Liberty BASIC Lesson", "Teach2000 document", "AutoCAD Color Book", "Crytek XML Material", "FMOD Designer Project", "XML Forms Data Format",
+	/^Together Class Diagram \(UML [\d.]+\)/, "Liberty BASIC Lesson", "Teach2000 document", "AutoCAD Color Book", "Crytek XML Material", "FMOD Designer Project", "XML Forms Data Format", "Adobe Premiere Effect Preset", "Mac OS installable Keyboard Layout",
 	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

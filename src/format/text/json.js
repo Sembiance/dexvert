@@ -12,7 +12,7 @@ export class json extends Format
 		"JSON text data",
 
 		// specific
-		"Chrome Bookmarks", "Firefox bookmark (JavaScript Object Notation)", "Xcode Asset Catalog"
+		"Chrome Bookmarks", "Firefox bookmark (JavaScript Object Notation)", "Xcode Asset Catalog", /^Max Patch$/
 	];
 	weakMagic        = true;
 	mimeType         = "application/json";

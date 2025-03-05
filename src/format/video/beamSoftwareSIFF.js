@@ -7,5 +7,5 @@ export class beamSoftwareSIFF extends Format
 	ext          = [".vb", ".vbc"];
 	magic        = ["Beam Software SIFF video", "Beam Software SIFF (siff)", /^fmt\/1559( |$)/];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg"];
+	converters   = ["na_game_tool[format:siff]", "ffmpeg[format:siff]"];
 }

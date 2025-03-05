@@ -1679,6 +1679,7 @@ export const WEAK_VALUES =
 	/^Bochs configuration \(with rem\)$/,
 	/^Borland Reflex Screen driver$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,
+	/^Cal3D material File$/,
 	/^Call of Duty map/,
 	/^Carrara Environment$/,
 	/^CATIA Material \(v5\)$/,

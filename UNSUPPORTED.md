@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,209)
+# Unsupported File Formats (3,211)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1057,7 +1057,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,066)
+## Other (2,068)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2768,6 +2768,7 @@ Family/Format | Name | Extensions | Notes
 [other/strikeCommanderMap](https://discmaster.textfiles.com/search?format=strikeCommanderMap) | Strike Commander map | .pak | 
 [other/strongNameKey](https://discmaster.textfiles.com/search?format=strongNameKey) | Strong Name Key | .snk | 
 [other/stuntIslandTake](https://discmaster.textfiles.com/search?format=stuntIslandTake) | Stunt Island Take | .tke | 
+[other/stupenDOSExternalSettings](https://discmaster.textfiles.com/search?format=stupenDOSExternalSettings) | StupenDOS external Settings | .set | 
 [other/su27FlankerMission](https://discmaster.textfiles.com/search?format=su27FlankerMission) | Su-27 Flanker Mission | .mis | 
 [other/subZeroGameFileMap](https://discmaster.textfiles.com/search?format=subZeroGameFileMap) | SubZero Game File map | .gmf | 
 [other/suncomF15EEagleKeysConfig](https://discmaster.textfiles.com/search?format=suncomF15EEagleKeysConfig) | Suncom F-15E Eagle Keys config | .key | 
@@ -2914,6 +2915,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboProfilerAreasData](https://discmaster.textfiles.com/search?format=turboProfilerAreasData) | Turbo Profiler Areas data | .tfa | 
 [other/turboCalcLibrary](https://discmaster.textfiles.com/search?format=turboCalcLibrary) | TurboCalc Library | .tclib | 
 [other/turboPrintColorProfile](https://discmaster.textfiles.com/search?format=turboPrintColorProfile) | TurboPrint color profile | .tpm | 
+[other/tvgenialSkin](https://discmaster.textfiles.com/search?format=tvgenialSkin) | TVgenial Skin | .tvgskin .hpk | 
 [other/tvPaintProject](https://discmaster.textfiles.com/search?format=tvPaintProject) | TVPaint Project | .tvpp .deep .aur | 
 [other/twistedMetal3DModelsContainer](https://discmaster.textfiles.com/search?format=twistedMetal3DModelsContainer) | Twisted Metal 3D models container | .tpc | 
 [other/twistedMetalTexture](https://discmaster.textfiles.com/search?format=twistedMetalTexture) | Twisted Metal texture | .dpc | 
@@ -3188,7 +3190,7 @@ Family/Format | Name | Extensions | Notes
 [poly/parasolidModel](https://discmaster.textfiles.com/search?format=parasolidModel) | Parasolid model | .x_t | 
 [poly/playStationRSDPolygons](https://discmaster.textfiles.com/search?format=playStationRSDPolygons) | PlayStation RSD Polygons | .ply | 
 [poly/polyfilm](https://discmaster.textfiles.com/search?format=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/) - Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.
-[poly/povRay](https://discmaster.textfiles.com/search?format=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV-RAY files: https://dev.discmaster2.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV https://dev.discmaster2.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov I need a better way to DETECT them though, I'm sure there are some that don't have the .pov extension, so figuring out some sort of magic for them would be POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert (may not longer be the case now since I have improved TGA support) Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format, which is ok assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
+[poly/povRay](https://discmaster.textfiles.com/search?format=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV-RAY files: https://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV https://discmaster.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov I need a better way to DETECT them though, I'm sure there are some that don't have the .pov extension, so figuring out some sort of magic for them would be POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert (may not longer be the case now since I have improved TGA support) Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format, which is ok assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
 [poly/racer3DModel](https://discmaster.textfiles.com/search?format=racer3DModel) | Racer 3D model | .dof | 
 [poly/radCadDrawing](https://discmaster.textfiles.com/search?format=radCadDrawing) | Rad Cad Drawing | .cad | 
 [poly/ravenObjectFileFormat](https://discmaster.textfiles.com/search?format=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | [4 sample files](https://sembiance.com/fileFormatSamples/poly/ravenObjectFileFormat/)

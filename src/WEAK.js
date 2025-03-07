@@ -1415,6 +1415,7 @@ export const WEAK_VALUES =
 	
 	// TRID: Checks for almost all zeroes or repeating values/patterns:
 	/^\.NET binary serialized data$/,
+	/^64 Colors BitMap$/,
 	/^3D Studio Shape$/,
 	/^A-Robots Fighting Robot Object$/,
 	/^Acorn RISC OS font/,

@@ -22,7 +22,7 @@ export class dll extends Format
 		"Pixia filter plugin", "Psycle plugin", "Ultimate Paint Graphics Editor plugin/effect", "Miranda IM plugin", "ACDSee plugin", "DLL PowerBASIC", "Microsoft Input Method Editor", "Quintessential Player input plugin",
 		"ZoneLabs Zone Alarm data", "Aston Shell plugin", /^foobar 2000 (Diskwriter output|Input|generic) component/, "Take Command plugin", "MATLAB Windows 32bit compiled function", "JAJC plugin", "DeliPlayer player plugin",
 		"Microsoft Windows Defender Virus Definition Module", "DeliPlayer genie", "Classic/Open-Shell Windows style skin", "ZX Spin Render Plugin", "AkelPad plugin", "Microsoft Resource Library (x64)", "Maya plug-in (generic)",
-		"OLE Custom / ActiveX Control (32bit)", "OLE Custom Control (16bit)", "Imagine for Windows Texture", "Imagine for Windows Effect", "The Bat! Antivirus plugin", "Microsoft CLR native image executable"
+		"OLE Custom / ActiveX Control (32bit)", "OLE Custom Control (16bit)", "Imagine for Windows Texture", "Imagine for Windows Effect", "The Bat! Antivirus plugin", "Microsoft CLR native image executable", "SpamPal plugin"
 	];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="iDLL" && macFileCreator==="CWIE";
 	priority     = this.PRIORITY.LOW;

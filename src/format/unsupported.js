@@ -2763,6 +2763,7 @@ export default
 		stormWizardResource                      : {name : "StormWizard Resource", ext : [".wizard", ".wizard-all"], magic : ["IFF data, WZRD StormWIZARD resource", "StormWIZARD resource"]},
 		stosVarData                              : {name : "STOS Var data", ext : [".var"], magic : ["STOS Var data"]},
 		strongNameKey                            : {name : "Strong Name Key", ext : [".snk"], magic : ["Strong Name Key"]},
+		stupenDOSExternalSettings                : {name : "StupenDOS external Settings", ext : [".set"], magic : ["StupenDOS external Settings"], weakMagic : true},
 		sunVoxSynthesizer                        : {name : "SunVox Synthesizer", ext : [".sunsynth"], magic : ["SunVox Synthesizer"]},
 		superbaseForm                            : {name : "Superbase Form", ext : [".sbv"], magic : ["Superbase form"]},
 		superColliderSynthDefinition             : {name : "SuperCollider3 Synth Definition", ext : [".scsyndef"], magic : [/^SuperCollider3 Synth Definition/], weakMagic : true},
@@ -2843,6 +2844,7 @@ export default
 		tsiProtected                             : {name : "TSI Protected", ext : [".pwd", ".pbk"], magic : ["TSI Protected"]},
 		tSOnlineModemsDefinitions                : {name : "TS Online modems definitions", ext : [".def", ".dat"], magic : ["TS Online modems definitions"], weakMagic : true},
 		turboPrintColorProfile                   : {name : "TurboPrint color profile", ext : [".tpm"], magic : ["TurboPrint color profile (old, binary)"], weakMagic : true},
+		tvgenialSkin                             : {name : "TVgenial Skin", ext : [".tvgskin", ".hpk"], magic : ["TVgenial Skin"], weakMagic : true},
 		tvPaintProject                           : {name : "TVPaint Project", ext : [".tvpp", ".deep", ".aur"], magic : ["TVPaint Project"]},
 		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", /^Type Library \((legacy SLTG|MSFT) format|Type[12]\)$/, /^fmt\/(1601|1602)( |$)/]},                                                                                                                                                                                      	// eslint-disable-line sonarjs/anchor-precedence
 		uleadImageiioThumbnailInfo               : {name : "Ulead Imageioo Thumbnail Info", ext : [".pe3", ".pe4"], magic : ["Ulead Imageiio/Imaginfo thumbnail", "Ulead Imaginfo thumbnail", "Ulead Gallery", /^Ulead Photo Explorer \d/]},

@@ -28,14 +28,14 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
-* See about adopting these tools for Filemaker Pro files (13,613 files on discmaster (9,771 unique)): https://github.com/evanmiller/fmptools
+* Adopt these Filemaker Pro tools for ~9,771 unique files: https://github.com/evanmiller/fmptools
   Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
 
 * Add 'proper' AskSam support for the ~460 files: https://dev.discmaster2.textfiles.com/search?format=askSamDatabase
   https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
-* Add POVRAY rendering support for the ~17,000 files (see the extensive notes in povRay.js)
+* Add POVRAY rendering support for the ~1,706 unique files (see the extensive notes in povRay.js)
 
 * Add moRay support for the ~2,300 unique files (sat on top of POV-RAY, see format moRay.js for notes): https://dev.discmaster2.textfiles.com/search?format=moRay&dedup=dedup
 

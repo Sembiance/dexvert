@@ -6,6 +6,7 @@ export class vrml extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/VRML";
 	ext        = [".wrl", ".wrz"];
 	magic      = ["Virtual Reality Modeling Language", "ISO/IEC 14772 VRML 97 file", "model/vrml", /^VRML \d file/, /^fmt\/(93|94)( |$)/];
+	idMeta     = ({macFileType}) => macFileType==="VRML";
 	auxFiles   = (input, otherFiles) =>
 	{
 		const supportFiles = otherFiles.filter(o => [".gif", ".jpg", ".tiff", ".tif"].includes(o.ext.toLowerCase()));

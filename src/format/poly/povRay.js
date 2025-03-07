@@ -18,8 +18,8 @@ export class povRay extends Format
 	unsupported  = true;
 	notes        = xu.trim`
 	    POV-RAY files:
-			https://dev.discmaster2.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
-			https://dev.discmaster2.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov
+			https://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
+			https://discmaster.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov
 		I need a better way to DETECT them though, I'm sure there are some that don't have the .pov extension, so figuring out some sort of magic for them would be
 		POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/
 		So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest

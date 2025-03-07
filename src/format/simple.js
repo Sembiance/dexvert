@@ -131,7 +131,7 @@ export default
 	
 	other :
 	{
-		actPhoneQuickList                : {name : "ACT! Phone Quick List", ext : [".pql"], magic : ["ACT! Phone Quick List"], weakMagic : true},
+		actPhoneQuickList                : {name : "ACT! Phone Quick List", ext : [".pql"], magic : ["ACT! Phone Quick List"], weakMagic : true, idMeta : ({macFileType, macFileCreator}) => macFileType===".PQL" && macFileCreator==="ACT!"},
 		agSIHelpFile                     : {name : "agSI Help File", ext : [".hlp"], magic : ["agSI Help File"]},
 		amiDockConfig                    : {name : "AmiDock Configuration", ext : [".config"], magic : ["AmiDock Configuration"], weakMagic : true},
 		amigaGuideIndex                  : {name : "Amigaguide Index", ext : [".index"], magic : ["Amigaguide Index"]},

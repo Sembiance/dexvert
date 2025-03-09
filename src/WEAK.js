@@ -1967,6 +1967,7 @@ export const WEAK_VALUES =
 	/^Neko bytecode$/,
 	/^NEOchrome Master bitmap$/,	// Many IFF ILBM files share the same keywords
 	/^NeoDraw Palette$/,
+	/^NES emulator Cheats \(var1\)$/,
 	/^NetStumbler NS1 log$/,
 	/^NeXtMidas Macro \(with rem\)$/,
 	/^Nihilistic Scene Data$/,

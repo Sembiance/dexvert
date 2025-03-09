@@ -6,7 +6,7 @@ export class lha extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/LHA";
 	ext            = [".lha", ".lhz", ".lzs", ".exe", ".lzh", ".car"];
 	forbidExtMatch = [".exe"];
-	idMeta         = ({macFileType}) => macFileType==="LHA ";
+	idMeta         = ({macFileType}) => ["LHA ", "LHA\0"].includes(macFileType);
 
 	// If it's a self-extracting archive, ensure it has a .exe extension
 	safeExt = dexState => (dexState.hasMagics("LHA self-extracting") ? ".exe" : ".lha");

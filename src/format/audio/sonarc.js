@@ -6,6 +6,6 @@ export class sonarc extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Sonarc";
 	ext            = [".wv", ".vc", ".snc"];
 	forbidExtMatch = true;
-	magic          = ["Sonarc compressed WAV audio", "Sonarc compressed VOC audio", /^RIFF.+ WAVE.+ SONARC/];
+	magic          = ["Sonarc compressed WAV audio", "Sonarc compressed VOC audio", "Sonarc compressed RAW PCM audio", /^RIFF.+ WAVE.+ SONARC/];
 	converters     = ["sonarcx"];
 }

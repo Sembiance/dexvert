@@ -24,6 +24,7 @@ export const cup386 =
 		aPACKPacked                 : {name : "aPACK Packed", magic : ["Packer: aPACK", "16bit DOS EXE aPACK compressed"]},
 		avPackPacked                : {name : "AVPACK Packed", magic : ["Packer: AVPACK"]},
 		comRLEPackerPacked          : {name : "com RLE packer Packed", magic : ["Packer: com RLE packer[by NOP/PC]"]},
+		compressEXEPacked           : {name : "Compress-EXE Packed", magic : ["Packer: Compress-EXE"]},
 		cruncherPacked              : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
 		dnCOMCruncherPacked         : {name : "Dn.COM Cruncher Packed", magic : ["Packer: Dn.COM Cruncher"]},
 		envelopePacked              : {name : "Envelope Packed", magic : ["Packer: envelope"]},

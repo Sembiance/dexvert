@@ -113,7 +113,7 @@ export const WEAK_VALUES =
 	// siegfried
 	/^fmt\/(111|135|208|304|328|347|452|473|583|584|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
-	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1874|1902|1904|1968)( |$)/,
+	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1874|1885|1902|1904|1968)( |$)/,
 	/^x-fmt\/(8|10|53|101|123|157|168|195|222|324|342)( |$)/,
 
 	// ancientID
@@ -425,6 +425,7 @@ export const WEAK_VALUES =
 
 	// FILE: Very weak checks:
 	/^, /,
+	/^\(Directory List\),/,
 	/^\(non-conforming\)$/,
 	/^\) with pointer 0x[\da-f]+$/,
 	/^0421 Alliant compact executable/,
@@ -665,7 +666,7 @@ export const WEAK_VALUES =
 	/^HPA archive data/,
 	/^hp\d00/,
 	/^HP - Rev P,/,
-	/^HP s\d+ ((demand-load|relocatable|pure|old) )?executable/,
+	/^HP s\d+ .*executable/,
 	/^HP NLS message catalog/,
 	/^huf output/,
 	/^HYP archive data/,
@@ -1284,7 +1285,6 @@ export const WEAK_VALUES =
 	/^Panasonic JR Cassette image$/,
 	/^PAR compressed archive$/,
 	/^PAX password protected bitmap$/,
-	/^PC9801 rip$/,
 	/^PCE Sector Image disk image$/,
 	/^PCX bitmap/,
 	/^PEA compressed archive/,

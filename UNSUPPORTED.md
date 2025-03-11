@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,308)
+# Unsupported File Formats (3,314)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (254)
+## Archive (255)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -82,6 +82,7 @@ Family/Format | Name | Extensions | Notes
 [archive/djpPacked](https://discmaster.textfiles.com/search?format=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?format=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/dragonUnPACKer5PluginPackage](https://discmaster.textfiles.com/search?format=dragonUnPACKer5PluginPackage) | Dragon UnPACKer 5 Plugin Package | .d5p | 
+[archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?format=emmaCompress) | EmmaCompress |  | 
@@ -265,7 +266,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (74)
+## Audio (75)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -301,6 +302,7 @@ Family/Format | Name | Extensions | Notes
 [audio/kixtartSPK](https://discmaster.textfiles.com/search?format=kixtartSPK) | KixTart SPK Notation | .spk | 
 [audio/koepacAudioArchive](https://discmaster.textfiles.com/search?format=koepacAudioArchive) | Koepac audio archive | .koe | 
 [audio/kurzweilK2Sample](https://discmaster.textfiles.com/search?format=kurzweilK2Sample) | Kurzweil K2 Sample | .kr1 .kr2 .krz | 
+[audio/madeSoundFile](https://discmaster.textfiles.com/search?format=madeSoundFile) | MADE Sound File | .sfl | 
 [audio/maestroAudio](https://discmaster.textfiles.com/search?format=maestroAudio) | Maestro Audio |  | 
 [audio/magicOfEndoriaSoundSample](https://discmaster.textfiles.com/search?format=magicOfEndoriaSoundSample) | Magic of Endoria Sound Sample | .snd .smp | 
 [audio/maxonMagicSoundSample](https://discmaster.textfiles.com/search?format=maxonMagicSoundSample) | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://sembiance.com/fileFormatSamples/audio/maxonMagicSoundSample/)
@@ -913,7 +915,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (167)
+## Music (168)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1020,6 +1022,7 @@ Family/Format | Name | Extensions | Notes
 [music/organya](https://discmaster.textfiles.com/search?format=organya) | Organya Module | .org | [8 sample files](https://sembiance.com/fileFormatSamples/music/organya/)
 [music/palladix](https://discmaster.textfiles.com/search?format=palladix) | Palladix | .plx | [3 sample files](https://sembiance.com/fileFormatSamples/music/palladix/)
 [music/gameboyTracker](https://discmaster.textfiles.com/search?format=gameboyTracker) | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://sembiance.com/fileFormatSamples/music/gameboyTracker/)
+[music/pc98Music](https://discmaster.textfiles.com/search?format=pc98Music) | PC-98 Music | .m .m2 | 
 [music/pistonCollage](https://discmaster.textfiles.com/search?format=pistonCollage) | Piston Collage Module | .ptcop | [6 sample files](https://sembiance.com/fileFormatSamples/music/pistonCollage/)
 [music/piyoPiyoMusic](https://discmaster.textfiles.com/search?format=piyoPiyoMusic) | PiyoPiyo Music | .pmd | 
 [music/playerPro](https://discmaster.textfiles.com/search?format=playerPro) | PlayerPro Module | .mad | [6 sample files](https://sembiance.com/fileFormatSamples/music/playerPro/)
@@ -1086,7 +1089,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,136)
+## Other (2,139)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1133,6 +1136,7 @@ Family/Format | Name | Extensions | Notes
 [other/abcFlowCharterTemplate](https://discmaster.textfiles.com/search?format=abcFlowCharterTemplate) | ABC FlowCharter Template | .aft | 
 [other/abcSnapGraphicsPalette](https://discmaster.textfiles.com/search?format=abcSnapGraphicsPalette) | ABC SnapGraphics Palette | .sgp | 
 [other/abcSnapGraphixWorkspace](https://discmaster.textfiles.com/search?format=abcSnapGraphixWorkspace) | ABC SnapGraphix Workspace | .sgw | 
+[other/abilityDataBase](https://discmaster.textfiles.com/search?format=abilityDataBase) | Ability DataBase | .xdb | 
 [other/abracadataDrawing](https://discmaster.textfiles.com/search?format=abracadataDrawing) | Abracadata drawing | .sig | 
 [other/absoluteDatabaseFile](https://discmaster.textfiles.com/search?format=absoluteDatabaseFile) | Absolute Database file | .abs | 
 [other/abuseDemoData](https://discmaster.textfiles.com/search?format=abuseDemoData) | Abuse demo Data | .dat | 
@@ -1609,6 +1613,7 @@ Family/Format | Name | Extensions | Notes
 [other/dateBookArchive](https://discmaster.textfiles.com/search?format=dateBookArchive) | DateBook Archive | .dba | 
 [other/datelActionReplay](https://discmaster.textfiles.com/search?format=datelActionReplay) | Datel Action Replay cheat data | .dc | 
 [other/davilexGamesGameDataFormat](https://discmaster.textfiles.com/search?format=davilexGamesGameDataFormat) | Davilex Games game data format | .idx .img | 
+[other/dazPackGameDataArchive](https://discmaster.textfiles.com/search?format=dazPackGameDataArchive) | DAZ Pack game data archive | .res .aud .msc .int | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?format=dBaseCompiledObjectProgram) | dBase Compiled File | .dbo .qbo | 
 [other/dBaseCompiledLabel](https://discmaster.textfiles.com/search?format=dBaseCompiledLabel) | dBase compiled Label | .lbo | 
 [other/dBaseDesign](https://discmaster.textfiles.com/search?format=dBaseDesign) | dBase Form | .frm | 
@@ -2451,6 +2456,7 @@ Family/Format | Name | Extensions | Notes
 [other/openMediaFrameworkInterchange](https://discmaster.textfiles.com/search?format=openMediaFrameworkInterchange) | Open Media Framework Interchange | .omf | 
 [other/openFstBinaryData](https://discmaster.textfiles.com/search?format=openFstBinaryData) | OpenFst binary data | .far .fst | 
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?format=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
+[other/optionScopeWorksheet](https://discmaster.textfiles.com/search?format=optionScopeWorksheet) | OptionScope Worksheet | .osc | 
 [other/opTuneConfiguration](https://discmaster.textfiles.com/search?format=opTuneConfiguration) | OPTune Configuration | .cfg | 
 [other/oracleTPXTemplate](https://discmaster.textfiles.com/search?format=oracleTPXTemplate) | Oracle TPX Template | .tpx | 
 [other/orCADLayout](https://discmaster.textfiles.com/search?format=orCADLayout) | OrCAD Layout | .max | 

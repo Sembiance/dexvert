@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,316)
+# Unsupported File Formats (3,318)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1089,7 +1089,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,141)
+## Other (2,143)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -3156,6 +3156,8 @@ Family/Format | Name | Extensions | Notes
 [other/winScopeCompiledScript](https://discmaster.textfiles.com/search?format=winScopeCompiledScript) | WinScope Compiled script | .wsc | 
 [other/winStormStormInfo](https://discmaster.textfiles.com/search?format=winStormStormInfo) | WinStorm Storm info | .sto | 
 [other/wintertreeThesaurusEngineDB](https://discmaster.textfiles.com/search?format=wintertreeThesaurusEngineDB) | Wintertree Thesaurus Engine DB | .tdb | 
+[other/winWayLetter](https://discmaster.textfiles.com/search?format=winWayLetter) | WinWay Letter |  | 
+[other/winWayResume](https://discmaster.textfiles.com/search?format=winWayResume) | WinWay Resume |  | 
 [other/winWorksChart](https://discmaster.textfiles.com/search?format=winWorksChart) | WinWorks Chart | .cht | 
 [other/winWorksDBDefinition](https://discmaster.textfiles.com/search?format=winWorksDBDefinition) | WinWorks DB Definition | .wdf | 
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?format=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 

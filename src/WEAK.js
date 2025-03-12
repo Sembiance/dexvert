@@ -329,6 +329,7 @@ export const WEAK_VALUES =
 	/^LZMA_Alone$/,
 	/^Now Compress$/,
 	/^Split file$/,
+	/^StuffIt split file$/,
 	/^ZipIt SEA$/,
 
 	// pc98ripperID
@@ -1707,6 +1708,7 @@ export const WEAK_VALUES =
 	/^Compact Font Format$/,
 	/^CompDisk compressed disk image$/,
 	/^Compressed Alignment format$/,
+	/^COMX-35 program$/,
 	/^Conquest: Frontier Wars game data$/,
 	/^context diff output/,
 	/^Cookeo recipe$/,

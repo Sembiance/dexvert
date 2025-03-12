@@ -2051,6 +2051,8 @@ export default
 		demoShieldDemo                           : {name : "DemoShield Demo", ext : [".dbd", ".bdd"], magic : ["DemoShield Demo", /^DemoShield Pr.*tations Datei$/]},
 		derEncodedData                           : {name : "DER Encoded Data", ext : [".rsa"], magic : ["DER Encoded PKCS#7 Signed Data", "Object signature in DER format", "Certificate Trust List (DER encoded)"]},
 		deriveForWindows                         : {name : "Derive for Windows", ext : [".dfw"], magic : ["Derive for Windows"], weakMagic : true},
+		deScribeCustomToolsSet                   : {name : "DeScribe custom tools set", magic : ["DeScribe custom tools set"]},
+		deScribeGlossary                         : {name : "DeScribe glossary", magic : ["DeScribe glossary"]},
 		deScribeMacro                            : {name : "DeScribe Macro", magic : ["DeScribe Macro"]},
 		design3DOutline                          : {name : "DESIGN 3D outline", ext : [".cnt"], magic : ["DESIGN 3D outline"]},
 		design3DPath                             : {name : "DESIGN 3D path", ext : [".chm"], magic : ["DESIGN 3D path"]},

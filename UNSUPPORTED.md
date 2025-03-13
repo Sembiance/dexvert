@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,318)
+# Unsupported File Formats (3,320)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1089,7 +1089,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,143)
+## Other (2,145)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1541,6 +1541,7 @@ Family/Format | Name | Extensions | Notes
 [other/coreFile](https://discmaster.textfiles.com/search?format=coreFile) | Core File | .core | 
 [other/corelCatalog](https://discmaster.textfiles.com/search?format=corelCatalog) | Corel Catalog | .clc | 
 [other/corelCustomNaturalMediaStroke](https://discmaster.textfiles.com/search?format=corelCustomNaturalMediaStroke) | Corel Custom Natural Media Stroke | .npm | 
+[other/corelDream3DScene](https://discmaster.textfiles.com/search?format=corelDream3DScene) | Corel Dream 3D scene | .d3d | 
 [other/corelEditorMacro](https://discmaster.textfiles.com/search?format=corelEditorMacro) | Corel Editor Macro | .edm | 
 [other/corelMailArchivedMessageDatabase](https://discmaster.textfiles.com/search?format=corelMailArchivedMessageDatabase) | Corel Mail archived message database/mailbox | .db | 
 [other/corelPhotoPaintUserFilter](https://discmaster.textfiles.com/search?format=corelPhotoPaintUserFilter) | COREL Photo Paint User Defined Filter | .usr | 
@@ -1555,6 +1556,7 @@ Family/Format | Name | Extensions | Notes
 [other/corncob3DData](https://discmaster.textfiles.com/search?format=corncob3DData) | Corncob 3D Data File | .cct | 
 [other/cornelHuthComprssedLibrary](https://discmaster.textfiles.com/search?format=cornelHuthComprssedLibrary) | Cornel Huth Compressed Library | .li_ | 
 [other/corporateLadderChart](https://discmaster.textfiles.com/search?format=corporateLadderChart) | Corporate Ladder Chart | .cht | 
+[other/cosmiFormsMakerForm](https://discmaster.textfiles.com/search?format=cosmiFormsMakerForm) | COSMI FormsMaker Form | .wfm | 
 [other/cosmicBlobsModel](https://discmaster.textfiles.com/search?format=cosmicBlobsModel) | Cosmic Blobs model | .blob .asset | 
 [other/cpm86Library](https://discmaster.textfiles.com/search?format=cpm86Library) | CP/M-86 library | .l86 | 
 [other/cracklibPasswordIndex](https://discmaster.textfiles.com/search?format=cracklibPasswordIndex) | Cracklib Password Index | .pwi | 

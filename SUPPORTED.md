@@ -1,4 +1,4 @@
-# Supported File Formats (3,030)
+# Supported File Formats (3,031)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -452,7 +452,7 @@ archive | [XZ Archive](http://fileformats.archiveteam.org/wiki/XZ) | .xz | [xz](
 archive | [Yamazaki zipper Archive](http://justsolve.archiveteam.org/wiki/Yamazaki_zipper_archive) | .yz1 | [deepFreezer](https://www.sac.sk/download/pack/deepf106.exe) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/yamazakiZipper/)
 archive | YBS Archive | .ybs | [ybs](https://www.sac.sk/download/pack/ybs003fd.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ybs/)
 archive | [yEnc Encoded Archive](http://fileformats.archiveteam.org/wiki/YEnc) | .ync .yenc | [yydecode](http://yydecode.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/yEnc/)
-archive | [Yet Another Compressor Archive](http://justsolve.archiveteam.org/wiki/YAC) | .yc | [yac](https://www.sac.sk/download/pack/yac102.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/yacArchive/)
+archive | [Yet Another Compressor Archive](http://justsolve.archiveteam.org/wiki/YAC) | .yc | [yac](https://www.sac.sk/download/pack/yac102.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/yacArchive/)
 archive | You Don't Know Jack Game Archive | .srf | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/youDontKnowJackGameArchive/)
 archive | Z-Axis game sound data archive | .zsd | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zAxisGameSoundDataArchive/)
 archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [zlib_flate](https://qpdf.sourceforge.net/) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/zlib/)
@@ -1810,7 +1810,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
-other | ACT! Phone Quick List | .pql | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/other/actPhoneQuickList/)
+other | ACT! Phone Quick List | .pql | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/other/actPhoneQuickList/)
 other | agSI Help File | .hlp | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/other/agSIHelpFile/)
 other | All Identical Bytes |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/other/identicalBytes/)
 other | All Null Bytes |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/other/nullBytes/)
@@ -1987,7 +1987,7 @@ poly | [Inter-Quake Model](http://sauerbraten.org/iqm/) | .iqm | [assimp](https:
 poly | [Kaydara Filmbox Model](http://fileformats.archiveteam.org/wiki/FBX) | .fbx .fbx4 | [polyTrans64](https://www.okino.com/conv/conv.htm) [milkShape3D](http://www.milkshape3d.com/) [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/fbx/)
 poly | keyCAD 3D Model | .mdl | [keyCADDeluxe3D](https://winworldpc.com/product/keycad/30-for-windows) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/keyCAD3DModel/)
 poly | [LDraw LEGO Model](http://www.ldraw.org/) | .ldr .dat | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [7 sample files](https://sembiance.com/fileFormatSamples/poly/ldrawLEGOModel/) - Another converter, blender plugin I could use: https://github.com/trevorsandy/blenderldrawrender
-poly | Lightscape Preparatation | .lp | [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/poly/lightscapePreparatation/)
+poly | Lightscape Preparatation | .lp | [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/lightscapePreparatation/)
 poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lwob .lw .lightwave | [blender](https://www.blender.org) [AccuTrans3D](http://www.micromouse.ca/) [polyTrans64](https://www.okino.com/conv/conv.htm) [assimp](https://github.com/assimp/assimp) [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [18 sample files](https://sembiance.com/fileFormatSamples/poly/lightWave/)
 poly | [Linden Binary Mesh](https://wiki.secondlife.com/w/index.php?title=Avatar_Appearance#Linden_binary_mesh_file) | .llm | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [8 sample files](https://sembiance.com/fileFormatSamples/poly/lindenBinaryMesh/)
 poly | [Luxology 3D Scene](http://fileformats.archiveteam.org/wiki/LXO) | .lxo | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [AccuTrans3D](http://www.micromouse.ca/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/luxology3DScene/)
@@ -2029,7 +2029,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (957)
+## Text (958)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2321,7 +2321,7 @@ text | FontLab Encoding | .enc |  | [11 sample files](https://sembiance.com/file
 text | FontLab Name mapping rule | .nam |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fontLabNameMappingRule/)
 text | FontLab Unicode Range | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fontLabUnicodeRange/)
 text | FormWorx Printer driver | .prx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/formWorxPrinterDriver/)
-text | Forte Agent Character Set Mapping | .csm |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/forteAgentCharacterSetMapping/)
+text | Forte Agent Character Set Mapping | .csm |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/forteAgentCharacterSetMapping/)
 text | FORTH Source | .f .fth .forth .4th .fs |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/forthSource/)
 text | Fractal Design Painter Colors Set | .pcs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/fractalDesignPainterColorsSet/)
 text | FrameMaker Dictionary text | .brt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/frameMakerDictionary/)
@@ -2492,7 +2492,8 @@ text | Manhattan Printer Description | .mpd |  | [13 sample files](https://sembi
 text | MapInfo Interchange Format | .mif |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mapInfoInterchangeFormat/)
 text | MapInfo MapBasic initial data Table | .tab |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mapInfoMapBasicInitialDataTable/)
 text | MapInfo Workspace | .wor |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mapInfoWorkspace/)
-text | Maple Classic Worksheet | .mws .org |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/mapleClassicWorksheet/)
+text | Maple Classic Worksheet | .mws .org |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mapleClassicWorksheet/)
+text | Maple help file | .mhp |  | 
 text | Marcel Printer Driver | .prd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/marcelPrinterDriver/)
 text | MarxMenu script | .mnu .inc |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/marxMenuScript/)
 text | MathCAD Font | .mcf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/mathCADFont/)

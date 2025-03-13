@@ -7,5 +7,6 @@ export class deepFreezer extends Program
 	loc       = "win2k";
 	bin       = "c:\\dexvert\\DeepF106\\DeepFreezer.exe";
 	args      = r => [r.inFile()];
+	unsafe    = true;
 	renameOut = false;
 }

@@ -1,7 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* Check this file: ongoing: 16m54s for ibm0520-0529/ibm0520.tar§/ibm0520/DODCF304.ZIP§/CORFLOW3.A03§/FLOW/SMARTLIB/BASEBALL.SSL§/Embedding 8/Flow 3 thumbnail
+  See what it is, what programs it's running and if I can speed it up by excluding some programs
 
 /---------------\
 | High Priority |

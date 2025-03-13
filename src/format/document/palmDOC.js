@@ -7,5 +7,6 @@ export class palmDOC extends Format
 	ext            = [".pdb", ".prc"];
 	forbidExtMatch = true;
 	magic          = ["PalmDOC text document", "AportisDoc/PalmDOC", "application/x-aportisdoc", /^fmt\/396( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="PDB " && macFileCreator==="PPia";
 	converters     = ["ebook_convert", "soffice[format:PalmDoc]"];
 }

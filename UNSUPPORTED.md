@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,320)
+# Unsupported File Formats (3,322)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (255)
+## Archive (256)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -92,6 +92,7 @@ Family/Format | Name | Extensions | Notes
 [archive/exe32PackPacked](https://discmaster.textfiles.com/search?format=exe32PackPacked) | Exe32Pack Packed | .exe | 
 [archive/exetoolsProtected](https://discmaster.textfiles.com/search?format=exetoolsProtected) | EXETOOLS Protected | .exe | 
 [archive/ezipPacked](https://discmaster.textfiles.com/search?format=ezipPacked) | EZip Packed | .exe | 
+[archive/fcdVirtualCDROMFile](https://discmaster.textfiles.com/search?format=fcdVirtualCDROMFile) | FCD Virtual CD-ROM File | .fcd | 
 [archive/finearCompressedData](https://discmaster.textfiles.com/search?format=finearCompressedData) | FINEAR compressed data | _ | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?format=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/flatoutGameDataArchive](https://discmaster.textfiles.com/search?format=flatoutGameDataArchive) | Flatout game data archive | .bfs | 
@@ -1089,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,145)
+## Other (2,146)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1191,6 +1192,7 @@ Family/Format | Name | Extensions | Notes
 [other/afsGameArchive](https://discmaster.textfiles.com/search?format=afsGameArchive) | AFS game archive | .afs | 
 [other/afterDarkForDOSResourceData](https://discmaster.textfiles.com/search?format=afterDarkForDOSResourceData) | After Dark for DOS Resource data | .rsc | 
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?format=afterlifeSavedGame) | Afterlife saved game |  | 
+[other/ageOfEmpiresScenario](https://discmaster.textfiles.com/search?format=ageOfEmpiresScenario) | Age of Empires Scenario | .scn | 
 [other/ageOfWondersShadowMagicEffects](https://discmaster.textfiles.com/search?format=ageOfWondersShadowMagicEffects) | Age of Wonders: Shadow Magic Effects | .fx | 
 [other/agesGameScript](https://discmaster.textfiles.com/search?format=agesGameScript) | AGES Game Script | .aex | 
 [other/agfaCompugraphicFontCache](https://discmaster.textfiles.com/search?format=agfaCompugraphicFontCache) | AGFA/Compugraphic Font Cache |  | 

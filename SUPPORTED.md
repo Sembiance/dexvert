@@ -1,4 +1,4 @@
-# Supported File Formats (3,031)
+# Supported File Formats (3,032)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -298,7 +298,7 @@ archive | PackDev DiskSqueeze | .dsq .pkd | [uaeunp](https://www.winuae.net/down
 archive | [PackDir Archive](http://fileformats.archiveteam.org/wiki/PackDir) |  | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/packDir/)
 archive | Packed C64 PRG |  | [unp64](https://iancoog.altervista.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/packedC64PRG/)
 archive | [PACKED/PFT Compressed Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pak | [packerPFT](http://cd.textfiles.com/psl/pslv3nv08/PRGMMING/DOS/GEN_INST/FINISH30.ZIP) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/packedPFT/)
-archive | Packer JES //CORE Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/packerJESCOREPacked/)
+archive | Packer JES //CORE Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/packerJESCOREPacked/)
 archive | Packer Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/packerPacked/)
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/packIt/)
 archive | PACKIT Installation Archive | .ins | [sevenZip](http://p7zip.sourceforge.net/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/packItInstallationArchive/)
@@ -1048,7 +1048,7 @@ image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simp
 image | [Envision](http://fileformats.archiveteam.org/wiki/Envision) | .map | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/envision/)
 image | [EPOC/Psion Sketch](http://fileformats.archiveteam.org/wiki/EPOC_Sketch) |  | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/image/epocSketch/)
 image | [Epson RAW File](http://fileformats.archiveteam.org/wiki/Epson_ERF) | .erf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/erf/)
-image | [ERDAS LAN/GIS](http://fileformats.archiveteam.org/wiki/ERDAS_LAN/GIS) | .lan .gis | [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [3 sample files](https://sembiance.com/fileFormatSamples/image/erdasLANGIS/)
+image | [ERDAS LAN/GIS](http://fileformats.archiveteam.org/wiki/ERDAS_LAN/GIS) | .lan .gis | [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [4 sample files](https://sembiance.com/fileFormatSamples/image/erdasLANGIS/)
 image | [Esm Software PIX Image](http://fileformats.archiveteam.org/wiki/Esm_Software_PIX) | .pix | [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/esmSoftwarePIX/)
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/xb/)
 image | [Extended DEGAS Image](http://fileformats.archiveteam.org/wiki/Extended_DEGAS_image) | .pi4 .pi5 .pi6 .pi7 .pi8 .pi9 | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/degasExtended/)
@@ -2029,7 +2029,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (958)
+## Text (959)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2042,7 +2042,7 @@ text | 3D Studio Help | .hlp |  | [13 sample files](https://sembiance.com/fileFo
 text | 3D Studio Quad colors |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/threeDSQuadColors/)
 text | abs spreadsheet | .abs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/absSpreadsheet/)
 text | ACCEL Printed Circuit Board | .bak .sch .pcb |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/accelPrintedCircuitBoard/)
-text | Acclaim Skeleton File | .asf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/acclaimSkeletonFile/)
+text | Acclaim Skeleton File | .asf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/acclaimSkeletonFile/)
 text | ACE/gr fit description file | .fit |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/acegrFitDescriptionFile/)
 text | Acrobat Distiller Job Options |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/acrobatDistillerJobOptions/)
 text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
@@ -2276,7 +2276,7 @@ text | EMBL sequence data | .embl .emb .dna |  | [10 sample files](https://sembi
 text | Emergency 3D model | .v3o |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/emergency3DModel/)
 text | Emu48 keyboard configuration | .kml |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/emu48KeyboardConfiguration/)
 text | eMule Web Interface template | .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/eMuleWebInterfaceTemplate/)
-text | Enriched Text Document |  |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
+text | Enriched Text Document |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
 text | ENVI Header | .hdr |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/enviHeader/)
 text | ergo!pro Project | .prj |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ergoProProject/)
 text | ESRI Arc/Info Export | .e00 .x00 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
@@ -2391,6 +2391,7 @@ text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https:/
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc .hts .htx .shtml .phtml .hta |  | [19 sample files](https://sembiance.com/fileFormatSamples/text/html/) - I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. It is also CPU intensive.
 text | IAFA Package info | .pkg .age |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/iafaPackageInfo/)
 text | iCalendar/vCalendar | .ics .vcf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/iCalendar/)
+text | IEEE DASC Standard Delay Format | .sdf .sdo |  | 
 text | IESNA Photometric data | .ies |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iesnaPhotometricData/)
 text | ILINK linker Configuration | .icf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ilinkLinkerConfiguration/)
 text | Imageworks 3D LUT format | .spi3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/imageworks3DLUTFormat/)
@@ -2779,7 +2780,7 @@ text | SlickEdit project | .vpj |  | [1 sample file](https://sembiance.com/fileF
 text | SLSH script |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/slshScript/)
 text | [Smart Game Format](http://fileformats.archiveteam.org/wiki/Smart_Game_Format) | .sgf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/smartGameFormat/)
 text | Smart Software configuration |  |  | 
-text | SmartCAM manufacture data | .smf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/smartCAMManufactureData/)
+text | SmartCAM manufacture data | .smf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/smartCAMManufactureData/)
 text | SNNS network definition | .net |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/snnsNetworkDefinition/)
 text | SNNS pattern definition | .pat |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/snnsPatternDefinition/)
 text | SNNS result | .res |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/snnsResult/)
@@ -2976,7 +2977,7 @@ text | XMCD CD information | .db .z .xmcd |  | [10 sample files](https://sembian
 text | Xoom Tutor tutorial | .tut |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/xoomTutorTutorial/)
 text | XSetup plugin | .xpl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xSetupPlugin/)
 text | XTrkCAD project | .xt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/xTrkCADProject/)
-text | XVision Keymap | .txt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xVisionKeymap/)
+text | XVision Keymap | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xVisionKeymap/)
 text | Yamaha PSR Disk Manager File | .mng |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/yamahaPSRDiskManagerFile/)
 text | YAML serialized data |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/yamlSerializedData/)
 text | YS FLIGHT terrain data | .ter |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ysFLIGHTTerrainData/)

@@ -7,6 +7,6 @@ export class beniTracker extends Format
 	ext            = [".pis"];
 	forbidExtMatch = true;
 	magic          = ["Beni Tracker module"];
-	weakMagic      = true;
+	weakMagic      = true;	// just bytes 0x00 01 02 03 04 05 06 at pos 3
 	unsupported    = true;
 }

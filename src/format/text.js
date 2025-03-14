@@ -540,6 +540,7 @@ export default
 		hyperReaderVideodiscPlayerDriver           : {name : "HyperReader! Videodisc player Driver", ext : [".vdr"], magic : ["HyperReader! Videodisc player Driver"], weakMagic : true},
 		iafaPackageInfo                            : {name : "IAFA Package info", ext : [".pkg", ".age"], magic : ["IAFA Package info"]},
 		iCalendar                                  : {name : "iCalendar/vCalendar", ext : [".ics", ".vcf"], magic : ["iCalendar - vCalendar", "iCalendar Alarm", /^iCalendar calendar file/, /^vCalendar calendar file/, "text/calendar", /^fmt\/(387|388)( |$)/]},
+		ieeeDASCStandardDelayFormat                : {name : "IEEE DASC Standard Delay Format", ext : [".sdf", ".sdo"], magic : ["IEEE DASC Standard Delay Format"], weakMagic : true},
 		iesnaPhotometricData                       : {name : "IESNA Photometric data", ext : [".ies"], magic : ["IESNA Photometric data", /^fmt\/1288( |$)/], weakMagic : true},
 		imageworks3DLUTFormat                      : {name : "Imageworks 3D LUT format", ext : [".spi3d"], magic : ["Imageworks 3D LUT format"], weakMagic : true},
 		imgBurnGraphData                           : {name : "ImgBurn Graph data", ext : [".ibg"], magic : ["ImgBurn Graph data"], weakMagic : true},

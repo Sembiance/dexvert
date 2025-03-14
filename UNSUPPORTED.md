@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,322)
+# Unsupported File Formats (3,325)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1090,7 +1090,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,146)
+## Other (2,149)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1351,6 +1351,7 @@ Family/Format | Name | Extensions | Notes
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?format=babylonGlossary) | Babylon Glossary | .bgl | 
 [other/backItPreset](https://discmaster.textfiles.com/search?format=backItPreset) | Back-It Preset | .prs | 
+[other/bandaiTamagochiGameData](https://discmaster.textfiles.com/search?format=bandaiTamagochiGameData) | Bandai Tamagochi game data | .bin | 
 [other/bankMateActivityData](https://discmaster.textfiles.com/search?format=bankMateActivityData) | BankMate Activity data | .ix1 .ixp | 
 [other/bannerBlueMovieGuideLibraryAuxiliaryFile](https://discmaster.textfiles.com/search?format=bannerBlueMovieGuideLibraryAuxiliaryFile) | Banner Blue Movie Guide Library Auxiliary File | .nts .cst .syn | 
 [other/bannerBlueMovieGuideLibraryData](https://discmaster.textfiles.com/search?format=bannerBlueMovieGuideLibraryData) | Banner Blue Movie Guide Library data |  | 
@@ -2303,6 +2304,7 @@ Family/Format | Name | Extensions | Notes
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?format=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
 [other/microStationModificationResourceFile](https://discmaster.textfiles.com/search?format=microStationModificationResourceFile) | MicroStation Modification resource file | .m01 .p01 .r01 .s01 | 
 [other/microStationSymbologyResources](https://discmaster.textfiles.com/search?format=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
+[other/microtimeAnimalLevelData](https://discmaster.textfiles.com/search?format=microtimeAnimalLevelData) | Microtime Animal level data | .lvl | 
 [other/microTOOLInstallPackage](https://discmaster.textfiles.com/search?format=microTOOLInstallPackage) | microTOOL install package |  | 
 [other/midget3Instruments](https://discmaster.textfiles.com/search?format=midget3Instruments) | Midget 3 Instruments | .mis | 
 [other/midiArpeggiatorArpeggio](https://discmaster.textfiles.com/search?format=midiArpeggiatorArpeggio) | MIDI Arpeggiator Arpeggio | .arp | 
@@ -3080,6 +3082,7 @@ Family/Format | Name | Extensions | Notes
 [other/vistaDataFormat](https://discmaster.textfiles.com/search?format=vistaDataFormat) | [Vista data format](http://fileformats.archiveteam.org/wiki/Vista_data_file) | .v | 
 [other/vistaEventLog](https://discmaster.textfiles.com/search?format=vistaEventLog) | Vista Event Log | .evtx | 
 [other/vistaMakepathSession](https://discmaster.textfiles.com/search?format=vistaMakepathSession) | Vista Makepath Session | .ses | 
+[other/vistaProDigitalElevationMap](https://discmaster.textfiles.com/search?format=vistaProDigitalElevationMap) | VistaPro Digital Elevation Map | .v4s .scm | 
 [other/visualBasicExtension](https://discmaster.textfiles.com/search?format=visualBasicExtension) | Visual Basic Extension | .vbx | 
 [other/visualBasicProjectWorkspace](https://discmaster.textfiles.com/search?format=visualBasicProjectWorkspace) | Visual Basic Project Workspace | .frm | 
 [other/visualBasicTokenizedSource](https://discmaster.textfiles.com/search?format=visualBasicTokenizedSource) | Visual Basic Tokenized Source | .bas | 

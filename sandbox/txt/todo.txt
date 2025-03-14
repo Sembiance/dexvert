@@ -68,6 +68,8 @@
 * Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
 
 * ISOs I was unable to process:
+	Just a .bin file:
+		https://archive.org/details/A.R.T.S._Episode_Number_6_CDR
 	These don't convert for some reason, they both appear to be Mac CDs
 		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
 		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one

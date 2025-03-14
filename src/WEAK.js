@@ -621,6 +621,7 @@ export const WEAK_VALUES =
 	/^Ext3 external journal/,
 	/^Ext3 file system Volume/,
 	/^Extended display identification data dump/,
+	/^Extensible storage engine,/,
 	/^Exuberant Ctags tag file/,
 	/^FGDC-STD-001-1998$/,
 	/^FIGlet controlfile/,

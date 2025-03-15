@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,331)
+# Unsupported File Formats (3,335)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (257)
+## Archive (258)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -251,6 +251,7 @@ Family/Format | Name | Extensions | Notes
 [archive/warpINInstaller](https://discmaster.textfiles.com/search?format=warpINInstaller) | WarpIN Installer | .wpi | 
 [archive/winAPEIDEHardDiskImage](https://discmaster.textfiles.com/search?format=winAPEIDEHardDiskImage) | WinAPE IDE hard disk image | .ide | 
 [archive/windevCompressedArchive](https://discmaster.textfiles.com/search?format=windevCompressedArchive) | WINDEV compressed archive | .wdz | 
+[archive/winDupeDiskImage](https://discmaster.textfiles.com/search?format=winDupeDiskImage) | WinDupe disk image | .wdf | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?format=wordPerfectInstallArchive) | WordPerfect install archive |  | 
 [archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?format=wwarpDiskImage) | WWarp Disk Image | .wwp | 
@@ -1091,7 +1092,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,154)
+## Other (2,157)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1292,6 +1293,7 @@ Family/Format | Name | Extensions | Notes
 [other/armorCommandMission](https://discmaster.textfiles.com/search?format=armorCommandMission) | Armor Command mission | .hpj | 
 [other/armorCommandPicture](https://discmaster.textfiles.com/search?format=armorCommandPicture) | Armor Command Picture | .pic | 
 [other/armSISpeedIndexTimingsData](https://discmaster.textfiles.com/search?format=armSISpeedIndexTimingsData) | ArmSI Speed Index timings data |  | 
+[other/artCAMModel](https://discmaster.textfiles.com/search?format=artCAMModel) | ArtCAM model | .art | 
 [other/artEffectBrush](https://discmaster.textfiles.com/search?format=artEffectBrush) | ArtEffect Brush |  | 
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?format=artEffectConvolution) | ArtEffect Convolution |  | 
 [other/artlineSymbolFile](https://discmaster.textfiles.com/search?format=artlineSymbolFile) | Artline Symbol File | .syf | 
@@ -2598,6 +2600,7 @@ Family/Format | Name | Extensions | Notes
 [other/powerBASICResource](https://discmaster.textfiles.com/search?format=powerBASICResource) | PowerBASIC resource | .pbr | 
 [other/powerBASICDOSConfigurationFile](https://discmaster.textfiles.com/search?format=powerBASICDOSConfigurationFile) | PowerBASIC/DOS configuration file | .pb | 
 [other/powerBuilderDynamicLibrary](https://discmaster.textfiles.com/search?format=powerBuilderDynamicLibrary) | PowerBuilder Dynamic Library | .pbd | 
+[other/powerBuilderTraceProfile](https://discmaster.textfiles.com/search?format=powerBuilderTraceProfile) | PowerBuilder trace Profile | .pbp | 
 [other/powerDreamLibrary](https://discmaster.textfiles.com/search?format=powerDreamLibrary) | PowerDream Library | .pdl | 
 [other/powerSoftDataWindowDataStore](https://discmaster.textfiles.com/search?format=powerSoftDataWindowDataStore) | PowerSoft DataWindow - DataStore | .psr | 
 [other/pPrintPattern](https://discmaster.textfiles.com/search?format=pPrintPattern) | PPrint Pattern | .pat | 
@@ -3220,6 +3223,7 @@ Family/Format | Name | Extensions | Notes
 [other/xessWorksheet](https://discmaster.textfiles.com/search?format=xessWorksheet) | XESS worksheet | .xs3 .xs4 .xs5 | 
 [other/xilinxBitstream](https://discmaster.textfiles.com/search?format=xilinxBitstream) | Xilinx Bitstream | .bit | 
 [other/xilinxInternalData](https://discmaster.textfiles.com/search?format=xilinxInternalData) | Xilinx internal data | .xbcd | 
+[other/xilinxJEDECProgrammingSpec](https://discmaster.textfiles.com/search?format=xilinxJEDECProgrammingSpec) | Xilinx JEDEC programming spec | .jed | 
 [other/xlr8SentryChipComposorInstrument](https://discmaster.textfiles.com/search?format=xlr8SentryChipComposorInstrument) | XLR8 - Sentry Chip Composor Instrument | .xin | 
 [other/xlr8SentryChipComposorVoiceSet](https://discmaster.textfiles.com/search?format=xlr8SentryChipComposorVoiceSet) | XLR8 - Sentry Chip Composor VoiceSet | .xvs | 
 [other/xpcomTypeLibrary](https://discmaster.textfiles.com/search?format=xpcomTypeLibrary) | XPCOM Type Library | .xpt | 

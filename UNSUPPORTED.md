@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,335)
+# Unsupported File Formats (3,340)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -721,7 +721,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (191)
+## Image (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -732,6 +732,7 @@ Family/Format | Name | Extensions | Notes
 [image/afl](https://discmaster.textfiles.com/search?format=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 [image/aipdNI](https://discmaster.textfiles.com/search?format=aipdNI) | AIPD National Instruments Image | .apd .aipd | [8 sample files](https://sembiance.com/fileFormatSamples/image/aipdNI/)
 [image/aldusIntelliDrawDrawing](https://discmaster.textfiles.com/search?format=aldusIntelliDrawDrawing) | Aldus IntelliDraw Drawing | .idw | 
+[image/allyCADDrawing](https://discmaster.textfiles.com/search?format=allyCADDrawing) | AllyCAD Drawing | .drg | 
 [image/amiBIOSLogoSplashBitmap](https://discmaster.textfiles.com/search?format=amiBIOSLogoSplashBitmap) | [AMI BIOS logo/splash bitmap](http://fileformats.archiveteam.org/wiki/GRFX) | .grfx .grf | [6 sample files](https://sembiance.com/fileFormatSamples/image/amiBIOSLogoSplashBitmap/)
 [image/amiBlitz2Bitmap](https://discmaster.textfiles.com/search?format=amiBlitz2Bitmap) | AmiBlitz2 bitmap | .ab2i | 
 [image/animatorPICCEL](https://discmaster.textfiles.com/search?format=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
@@ -789,6 +790,7 @@ Family/Format | Name | Extensions | Notes
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?format=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
 [image/eclipseTILEBitmap](https://discmaster.textfiles.com/search?format=eclipseTILEBitmap) | Eclipse TILE bitmap | .tile | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
+[image/fastCADForWindowsDrawing](https://discmaster.textfiles.com/search?format=fastCADForWindowsDrawing) | FastCAD for Windows drawing | .fct .fcw .fsc | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?format=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?format=fastRayMaterial) | FastRay material/surface |  | 
 [image/flashbackSprite](https://discmaster.textfiles.com/search?format=flashbackSprite) | Flashback Sprite | .spr | 
@@ -1092,7 +1094,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,157)
+## Other (2,160)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1227,6 +1229,7 @@ Family/Format | Name | Extensions | Notes
 [other/alphaFourScript](https://discmaster.textfiles.com/search?format=alphaFourScript) | Alpha Four Script | .scp | 
 [other/alphaFourUserDefinition](https://discmaster.textfiles.com/search?format=alphaFourUserDefinition) | Alpha Four User Definition | .udn | 
 [other/alphaBaseDataBase](https://discmaster.textfiles.com/search?format=alphaBaseDataBase) | AlphaBase data base | .ab | 
+[other/alteraDesignLibrarySystem](https://discmaster.textfiles.com/search?format=alteraDesignLibrarySystem) | Altera Design Library System | .dls | 
 [other/alteraWaveformDesignFile](https://discmaster.textfiles.com/search?format=alteraWaveformDesignFile) | Altera Waveform Design File | .wdf | 
 [other/altiumSimulationDataFile](https://discmaster.textfiles.com/search?format=altiumSimulationDataFile) | Altium Simulation Data File |  | 
 [other/amapiShader](https://discmaster.textfiles.com/search?format=amapiShader) | Amapi Shader | .xsh | 
@@ -1998,6 +2001,7 @@ Family/Format | Name | Extensions | Notes
 [other/iFFGeometryData](https://discmaster.textfiles.com/search?format=iFFGeometryData) | IFF Geometry Data | .dem | 
 [other/ikMultimediaPreset](https://discmaster.textfiles.com/search?format=ikMultimediaPreset) | IK Multimedia Preset | .ikmp | 
 [other/iliumEWalletData](https://discmaster.textfiles.com/search?format=iliumEWalletData) | Ilium eWallet data |  | 
+[other/imageMakerAnnotation](https://discmaster.textfiles.com/search?format=imageMakerAnnotation) | Image Maker Annotation | .ano | 
 [other/imageFinderIndex](https://discmaster.textfiles.com/search?format=imageFinderIndex) | ImageFinder Index | .index | 
 [other/imageMixerProject](https://discmaster.textfiles.com/search?format=imageMixerProject) | ImageMixer project | .ima | 
 [other/imagenPrinter](https://discmaster.textfiles.com/search?format=imagenPrinter) | Imagen printer | .imp | 
@@ -3029,6 +3033,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboProfilerAreasData](https://discmaster.textfiles.com/search?format=turboProfilerAreasData) | Turbo Profiler Areas data | .tfa | 
 [other/turboCalcLibrary](https://discmaster.textfiles.com/search?format=turboCalcLibrary) | TurboCalc Library | .tclib | 
 [other/turboPrintColorProfile](https://discmaster.textfiles.com/search?format=turboPrintColorProfile) | TurboPrint color profile | .tpm | 
+[other/turtleBeachPinnacleSoundBank](https://discmaster.textfiles.com/search?format=turtleBeachPinnacleSoundBank) | Turtle Beach Pinnacle sound Bank | .pbf | 
 [other/tvgenialSkin](https://discmaster.textfiles.com/search?format=tvgenialSkin) | TVgenial Skin | .tvgskin .hpk | 
 [other/tvPaintProject](https://discmaster.textfiles.com/search?format=tvPaintProject) | TVPaint Project | .tvpp .deep .aur | 
 [other/twistedMetal3DModelsContainer](https://discmaster.textfiles.com/search?format=twistedMetal3DModelsContainer) | Twisted Metal 3D models container | .tpc | 

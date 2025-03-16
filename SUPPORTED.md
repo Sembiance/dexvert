@@ -1,4 +1,4 @@
-# Supported File Formats (3,032)
+# Supported File Formats (3,034)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -73,7 +73,7 @@ archive | Bloodrayne game data archive | .pod | [gameextractor](http://www.watto
 archive | [Blorb Interactive Fiction Package](http://fileformats.archiveteam.org/wiki/Blorb) | .blorb .gblorb .zblorb .blb .glb .zlb | [blorbtar](https://www.ifarchive.org/if-archive/programming/blorb/blorbtar-0.1.pl) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/blorb/)
 archive | BOLT Game Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/boltGameArchive/)
 archive | Broderbund Mohawk Game Archive | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/broderbundMohawkGameArchive/)
-archive | [BS ARChiver](http://fileformats.archiveteam.org/wiki/BSA) | .bsa .bsn .bs2 | [bsa](https://www.sac.sk/download/pack/bsa.zip) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/bsaArchive/)
+archive | [BS ARChiver](http://fileformats.archiveteam.org/wiki/BSArc_and_BSA) | .bsa .bsn .bs2 | [bsa](https://www.sac.sk/download/pack/bsa.zip) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/bsaArchive/)
 archive | [BTOA Encoded](http://fileformats.archiveteam.org/wiki/Ascii85) | .ab | [ascii85Decoder](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/btoaEncoded/)
 archive | [Build Engine Group Game Archive](http://fileformats.archiveteam.org/wiki/GRP_(Duke_Nukem_3D)) | .grp .dat | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/buildEngineGroupGameArchive/)
 archive | [Build Engine RFF Game Archive](https://moddingwiki.shikadi.net/wiki/RFF_Format) | .rff | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/buildEngineRFFGameArchive/)
@@ -2029,7 +2029,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (959)
+## Text (961)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2157,6 +2157,7 @@ text | CableNut Custom Settings | .ccs |  | [7 sample files](https://sembiance.c
 text | Cabri 3D Figure | .fig |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DFigure/)
 text | Cabri 3D Language | .cgl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cabri3DLanguage/)
 text | Cache Directory Tagging Standard | .tag |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cacheDirectoryTaggingStandard/)
+text | CADSTAR data (generic) | .rgf |  | 
 text | Calamus ASCII Translation Table | .att |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/calamusASCIITranslationTable/)
 text | Call Of Duty weapons data |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/callOfDutyWeaponsData/)
 text | Canoma scene | .3dv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/canomaScene/)
@@ -2390,8 +2391,9 @@ text | HyperChem molecule format | .hin |  | [10 sample files](https://sembiance
 text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hyperReaderVideodiscPlayerDriver/)
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc .hts .htx .shtml .phtml .hta |  | [19 sample files](https://sembiance.com/fileFormatSamples/text/html/) - I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. It is also CPU intensive.
 text | IAFA Package info | .pkg .age |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/iafaPackageInfo/)
+text | IBIS model | .ibs .1 |  | 
 text | iCalendar/vCalendar | .ics .vcf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/iCalendar/)
-text | IEEE DASC Standard Delay Format | .sdf .sdo |  | 
+text | IEEE DASC Standard Delay Format | .sdf .sdo |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ieeeDASCStandardDelayFormat/)
 text | IESNA Photometric data | .ies |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iesnaPhotometricData/)
 text | ILINK linker Configuration | .icf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ilinkLinkerConfiguration/)
 text | Imageworks 3D LUT format | .spi3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/imageworks3DLUTFormat/)
@@ -2880,7 +2882,7 @@ text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/
 text | Valve Material Type | .vmt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/valveMaterialType/)
 text | VAMAS Surface Chemical Analysis Standard Data Transfer Format | .vms |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vamasSurfaceChemicalAnalysisTransfer/)
 text | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vCard/)
-text | VDA-FS CAD data exchange format | .vda |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/vdafsCADDataExchangeFormat/)
+text | VDA-FS CAD data exchange format | .vda |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/vdafsCADDataExchangeFormat/)
 text | VENDINFO | .diz |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vendinfo/)
 text | Ventura Font Metrics | .vfm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaFontMetrics/)
 text | Ventura Publisher Caption | .cap |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaPublisherCaption/)

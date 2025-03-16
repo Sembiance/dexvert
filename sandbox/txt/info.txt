@@ -1,4 +1,9 @@
 /----------------\
+| Periodic Tasks |
+\----------------/
+* Run util/formatsWebsiteStats.js twice, alternating which line is uncommented at the bottom of the file
+
+/----------------\
 | Stop Dexdrones |
 \----------------/
 * Click 'pause processing' on discmaster2 admin

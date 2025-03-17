@@ -800,6 +800,7 @@ export const WEAK_VALUES =
 	/^MSXiE archive data/,
 	/^MTZ reflection file/,
 	/^multipart\/mixed; /,
+	/^MultiTrack sound data/,
 	/^mumps (avl|blt) global/,
 	/^MySQL (MyISAM|ISAM|Maria) (compressed data|index) file Version [\d.-]+$/,
 	/^MySQL table definition file Version 0/,

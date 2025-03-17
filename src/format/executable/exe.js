@@ -15,7 +15,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer", "Installer: Blizzard PrePatch(2.xx)", "Installer: Box Stub", "Installer: WiX Toolset installer", "Installer: BitRock Installer", "Installer: Tarma InstallMate",
 	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: Bytessence Install Maker", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer", "Installer: Actual Installer",
 	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
-	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey",
+	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey", "Installer: CSDD's",
 	
 	/^Installer: Wise Installer$/, /^NSIS$/
 ];

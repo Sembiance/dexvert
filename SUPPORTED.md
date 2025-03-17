@@ -1,4 +1,4 @@
-# Supported File Formats (3,034)
+# Supported File Formats (3,036)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1195,7 +1195,7 @@ image | KrisCard | .com | [dosEXEScreenshot](https://github.com/Sembiance/dexver
 image | [KSS-Paint](http://fileformats.archiveteam.org/wiki/KSS-Paint) | .kss | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/kssPaint/)
 image | [KwikDraw Drawing](http://fileformats.archiveteam.org/wiki/KwikDraw) | .kwk | [kwikDraw](https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/KDRAW140.ZIP) [kwikDraw130](https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/KDRAW130.EXE) | [10 sample files](https://sembiance.com/fileFormatSamples/image/kwikDrawDrawing/)
 image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [25 sample files](https://sembiance.com/fileFormatSamples/image/kyssKYG/)
-image | LabEye | .im | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [5 sample files](https://sembiance.com/fileFormatSamples/image/labEye/)
+image | LabEye | .im | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://sembiance.com/fileFormatSamples/image/labEye/)
 image | [Larka Edytor Obiekt](http://fileformats.archiveteam.org/wiki/Larka_Edytor_Obiekt) | .leo | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/leo/)
 image | [Laughing Dog Screen Maker](http://justsolve.archiveteam.org/wiki/Laughing_Dog_Screen_Maker) | .dog | [laughingDog](http://cd.textfiles.com/ftp.wwiv.com/pub/ANSI/HDISP13A.ZIP) | [7 sample files](https://sembiance.com/fileFormatSamples/image/laughingDog/)
 image | [Laughing Dog Screen Maker COM file](http://justsolve.archiveteam.org/wiki/Laughing_Dog_Screen_Maker_COM_file) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/laughingDogCOM/)
@@ -2029,7 +2029,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (961)
+## Text (963)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2115,7 +2115,7 @@ text | Audacity Nyquits plug-in | .ny |  | [18 sample files](https://sembiance.c
 text | AudoCAD Menu | .mnu |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/audoCADMenu/)
 text | AUMenu script | .mdf |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/auMenuScript/)
 text | Authorware Shocked Map | .aam |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/authorwareShockedMap/)
-text | AutoCAD Color Palette | .ccp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/autoCADColorPalette/)
+text | AutoCAD Color Palette | .ccp |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/autoCADColorPalette/)
 text | AutoCAD Custom Dictionary | .cus |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/autoCADCustomDictionary/)
 text | AutoCAD Hatch Pattern | .pat |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/autoCADHatchPattern/)
 text | AutoPrompt script | .pmt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/autoPromptScript/)
@@ -2612,6 +2612,7 @@ text | OziExplorer Map data | .map |  | [10 sample files](https://sembiance.com/
 text | OziExplorer track file | .plt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
 text | OziExplorer Waypoint | .wpt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerWaypoint/)
 text | Pacific C Compiler Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pacificCCompilerProject/)
+text | PADS Layout ASCII Format | .asc .txt |  | 
 text | PageRender3D facet/object | .facet |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DFacetObject/)
 text | PageRender3D Script | .script |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DScript/)
 text | PageRender3D Setup | .setup |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/pageRender3DSetup/)
@@ -2801,6 +2802,7 @@ text | Speedo font Typeface Definition | .tdf |  | [10 sample files](https://sem
 text | Sprint converter Definition | .def |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sprintConverterDefinition/)
 text | SPSS Portable Data Format | .por |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/portableDataFormat/)
 text | Spybot Search'n'Destroy process data | .tnfo |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/spybotSearchNDestroyProcessData/)
+text | SQR script | .sqr .sqc |  | 
 text | SSH Public key | .pub |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sshPublicKey/)
 text | ST-6 color Table | .tbl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/st6ColorTable/)
 text | Standard ACIS Text | .sat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/standardACISText/)
@@ -3050,7 +3052,7 @@ video | [Interchange File Format Animation](http://fileformats.archiveteam.org/w
 video | [Interplay C93 Video](https://wiki.multimedia.cx/index.php/C93) | .c93 | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/c93Video/)
 video | [Interplay MVE Video](https://wiki.multimedia.cx/index.php/Interplay_MVE) | .mve | [ffmpeg](https://ffmpeg.org/) | [19 sample files](https://sembiance.com/fileFormatSamples/video/interplayMVE/)
 video | [Interspective Animation](https://wiki.multimedia.cx/index.php/Interspective_animation) | .dat | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/interspectiveAnimation/)
-video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_tool](https://nihav.org/game_tool.html) | [5 sample files](https://sembiance.com/fileFormatSamples/video/jamVideo/)
+video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_tool](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/video/jamVideo/)
 video | [KDV video](https://wiki.multimedia.cx/index.php/KDV) | .kdv | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/kdvVideo/)
 video | [Legend Entertainment Q Video](https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q) | .q | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/legendEntertainmentQ/)
 video | Little Big Adventure FLA Video | .fla | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/littleBigAdventureFLAVideo/)

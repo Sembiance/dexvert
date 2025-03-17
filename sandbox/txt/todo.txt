@@ -4,8 +4,7 @@
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
 
-* Check this file: ongoing: 16m54s for ibm0520-0529/ibm0520.tar§/ibm0520/DODCF304.ZIP§/CORFLOW3.A03§/FLOW/SMARTLIB/BASEBALL.SSL§/Embedding 8/Flow 3 thumbnail
-  See what it is, what programs it's running and if I can speed it up by excluding some programs
+* See why this was so slow: item #29717 ibm1000-1009/ibm1008.tar§/ibm1008/ESSWAT03.ZIP§/ELECSYMB.A02§/DATA/ELECTRIC.Z§/cgnd.dwg
 
 /---------------\
 | High Priority |

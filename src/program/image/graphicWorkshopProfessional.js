@@ -12,6 +12,7 @@ export class graphicWorkshopProfessional extends Program
 		script : `
 			Func MainWindowOrFailure()
 				WindowFailure("[TITLE:Message]", "Error opening file", -1, "{ESCAPE}")
+				WindowFailure("[TITLE:Message]", "Memory error", -1, "{ESCAPE}")
 				WindowFailure("[TITLE:Message]", "Corrupted file", -1, "{ESCAPE}")
 
 				; Program can't save convert an animated gif, sigh, such as image/macPageMillGIF/MURPH.GIF

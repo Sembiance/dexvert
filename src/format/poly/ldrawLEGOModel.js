@@ -7,6 +7,7 @@ export class ldrawLEGOModel extends Format
 	ext            = [".ldr", ".dat"];
 	forbidExtMatch = [".dat"];
 	magic          = ["LDraw Model"];
+	weakMagic      = true;
 	converters     = ["threeDObjectConverter"];
 	notes          = "Another converter, blender plugin I could use: https://github.com/trevorsandy/blenderldrawrender";
 }

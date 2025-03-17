@@ -1,4 +1,4 @@
-# Supported File Formats (3,036)
+# Supported File Formats (3,038)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -328,7 +328,7 @@ archive | PKTINY Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip .exe | [sevenZip](http://p7zip.sourceforge.net/) [unzip](http://infozip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) | [50 sample files](https://sembiance.com/fileFormatSamples/archive/zip/)
 archive | [PMA Archive](http://fileformats.archiveteam.org/wiki/PMA) | .pma | [unar](https://github.com/incbee/Unarchiver) [lha](https://github.com/jca02266/lha) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/pma/)
 archive | PMarc SFX Archive | .com | [lha](https://github.com/jca02266/lha) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/pmarcSFX/)
-archive | PMWLite Packed | .exe .com | cup386 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/pmwLitePacked/)
+archive | PMWLite Packed | .exe .com | cup386 | [6 sample files](https://sembiance.com/fileFormatSamples/archive/pmwLitePacked/)
 archive | Postal game Archive | .sak | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/postalGameArchive/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [unar](https://github.com/incbee/Unarchiver) [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [20 sample files](https://sembiance.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | PowerPlayer Music Cruncher |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/powerPlayerMusicCruncher/)
@@ -2029,7 +2029,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (963)
+## Text (965)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2042,7 +2042,7 @@ text | 3D Studio Help | .hlp |  | [13 sample files](https://sembiance.com/fileFo
 text | 3D Studio Quad colors |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/threeDSQuadColors/)
 text | abs spreadsheet | .abs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/absSpreadsheet/)
 text | ACCEL Printed Circuit Board | .bak .sch .pcb |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/accelPrintedCircuitBoard/)
-text | Acclaim Skeleton File | .asf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/acclaimSkeletonFile/)
+text | Acclaim Skeleton File | .asf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/acclaimSkeletonFile/)
 text | ACE/gr fit description file | .fit |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/acegrFitDescriptionFile/)
 text | Acrobat Distiller Job Options |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/acrobatDistillerJobOptions/)
 text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
@@ -2051,7 +2051,7 @@ text | Actor Library Definition Language | .ldl |  | [12 sample files](https://s
 text | Adblock Plus rules file | .txt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/adblockPlusRulesFile/)
 text | Adobe Download Manager | .aom |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/adobeDownloadManager/)
 text | [Adobe Font List](http://fileformats.archiveteam.org/wiki/Adobe_Font_List) | .lst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeFontList/)
-text | Adobe Illustrator Action | .aia |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/adobeIllustratorAction/)
+text | Adobe Illustrator Action | .aia |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeIllustratorAction/)
 text | Adobe InDesign printing instructions report |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobeInDesignPrintingInstructionsReport/)
 text | Adobe Photoshop Lightroom template | .agtemplate |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/adobePhotoshopLightroomTemplate/)
 text | Adobe Portable Document Catalog Index | .pdx |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobePortableDocumentCatalogIndex/)
@@ -2218,6 +2218,7 @@ text | Darwinia level map data | .txt |  | [11 sample files](https://sembiance.c
 text | Darwinia level mission data | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/darwiniaLevelMissionData/)
 text | Darwinia Shape | .shp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/darwiniaShape/)
 text | [Data Interchange Format](http://fileformats.archiveteam.org/wiki/Data_Interchange_Format) | .dif |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/dataInterchangeFormat/)
+text | DB/TextWorks Database Deferred Update Directory | .sdo |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/dbTextWorksDatabaseDeferredUpdateDirectory/)
 text | dBASE Windows Form File | .mnu .wfm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/dbaseWindowsFormFile/)
 text | ddrescue Logfile | .bak |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/ddrescueLogfile/)
 text | DEB build control |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/debBuildControl/)
@@ -2382,10 +2383,10 @@ text | HeroQuest Quest | .q09 .q10 .qst |  | [3 sample files](https://sembiance.
 text | High Voltage SID Collection update info | .hvs |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/highVoltageSIDCollectionUpdateInfo/)
 text | HiJaak video card configuration | .cfg .bin |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/hiJaakVideoCardConfiguration/)
 text | HMI Sound OS Configuration | .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hmiSoundOSConfiguration/)
-text | HP ME10 database | .mi |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hpME10Database/)
+text | HP ME10 database | .mi |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/hpME10Database/)
 text | HSQLDB configuration | .properties |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hsqlDBConfiguration/)
 text | HTML Component | .htc |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/htmlComponent/)
-text | HTML Help Collection | .col |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/htmlHelpCollection/)
+text | HTML Help Collection | .col |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/htmlHelpCollection/)
 text | HTTrack Website Copier cookies | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/htTrackWebsiteCopierCookies/)
 text | HyperChem molecule format | .hin |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hyperChemMoleculeFormat/)
 text | HyperReader! Videodisc player Driver | .vdr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/hyperReaderVideodiscPlayerDriver/)
@@ -2428,7 +2429,7 @@ text | Java Application Descriptor | .jad |  | [10 sample files](https://sembian
 text | Java Manifest | .mf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/javaManifest/)
 text | Java Source | .java |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/javaSource/)
 text | [JavaScript](http://fileformats.archiveteam.org/wiki/JavaScript) | .js |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/js/)
-text | JavaScript Bean file | .jsb |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/javaScriptBeanFile/)
+text | JavaScript Bean file | .jsb |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/javaScriptBeanFile/)
 text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/json/)
 text | JCreator Project | .jcp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/jCreatorProject/)
 text | Jeskola Buzz theme | .col |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/jeskolaBuzzTheme/)
@@ -2716,6 +2717,7 @@ text | Qt User Interface | .ui |  | [10 sample files](https://sembiance.com/file
 text | Quake I save | .sav |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quakeISave/)
 text | Quartus Block Design File | .bdf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quartusBlockDesignFile/)
 text | Quartus DataBase Info | .db_info |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quartusDataBaseInfo/)
+text | Quartus Library Mapping File | .lmf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/quartusLibraryMappingFile/)
 text | Quartus Memory Initialization File | .mif |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/quartusMemoryInitializationFile/)
 text | Quartus Setting File | .qsf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/quartusSettingFile/)
 text | Qucs schematic | .sch .dpl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/qucsSchematic/)
@@ -2838,7 +2840,7 @@ text | Terragen project | .tgd |  | [2 sample files](https://sembiance.com/fileF
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [92 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [93 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
@@ -2884,7 +2886,7 @@ text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/
 text | Valve Material Type | .vmt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/valveMaterialType/)
 text | VAMAS Surface Chemical Analysis Standard Data Transfer Format | .vms |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vamasSurfaceChemicalAnalysisTransfer/)
 text | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vCard/)
-text | VDA-FS CAD data exchange format | .vda |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/vdafsCADDataExchangeFormat/)
+text | VDA-FS CAD data exchange format | .vda |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/vdafsCADDataExchangeFormat/)
 text | VENDINFO | .diz |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vendinfo/)
 text | Ventura Font Metrics | .vfm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaFontMetrics/)
 text | Ventura Publisher Caption | .cap |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaPublisherCaption/)

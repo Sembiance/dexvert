@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,343)
+# Unsupported File Formats (3,353)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1095,7 +1095,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,162)
+## Other (2,172)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1627,6 +1627,14 @@ Family/Format | Name | Extensions | Notes
 [other/datelActionReplay](https://discmaster.textfiles.com/search?format=datelActionReplay) | Datel Action Replay cheat data | .dc | 
 [other/davilexGamesGameDataFormat](https://discmaster.textfiles.com/search?format=davilexGamesGameDataFormat) | Davilex Games game data format | .idx .img | 
 [other/dazPackGameDataArchive](https://discmaster.textfiles.com/search?format=dazPackGameDataArchive) | DAZ Pack game data archive | .res .aud .msc .int | 
+[other/dbTextWorksDatabase](https://discmaster.textfiles.com/search?format=dbTextWorksDatabase) | DB/TextWorks Database | .dbr | 
+[other/dBTextWorksDatabaseAccessControl](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseAccessControl) | DB/TextWorks Database Access Control | .acf | 
+[other/dBTextWorksDatabaseDirectory](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseDirectory) | DB/TextWorks Database Directory | .dbo | 
+[other/dBTextWorksDatabaseIndexedList](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseIndexedList) | DB/TextWorks Database Indexed List | .ixl | 
+[other/dBTextWorksDatabasePrimaryTextbaseDef](https://discmaster.textfiles.com/search?format=dBTextWorksDatabasePrimaryTextbaseDef) | DB/TextWorks Database Primary Textbase Definition | .tba | 
+[other/dBTextWorksDatabaseTermsAndWordsIndex](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTermsAndWordsIndex) | DB/TextWorks Database Term and Word Index | .btx | 
+[other/dBTextWorksDatabaseTermsAndWords](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTermsAndWords) | DB/TextWorks Database Terms and Words | .occ | 
+[other/dBTextWorksDatabaseTextbaseStructureFile](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTextbaseStructureFile) | DB/TextWorks Database Textbase Structure file | .dbs | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?format=dBaseCompiledObjectProgram) | dBase Compiled File | .dbo .qbo | 
 [other/dBaseCompiledLabel](https://discmaster.textfiles.com/search?format=dBaseCompiledLabel) | dBase compiled Label | .lbo | 
 [other/dBaseDesign](https://discmaster.textfiles.com/search?format=dBaseDesign) | dBase Form | .frm | 
@@ -2125,6 +2133,7 @@ Family/Format | Name | Extensions | Notes
 [other/ldiffDifferencesData](https://discmaster.textfiles.com/search?format=ldiffDifferencesData) | LDIFF Differences Data | .lzd | 
 [other/leapfrogResource](https://discmaster.textfiles.com/search?format=leapfrogResource) | Leapfrog Resource | .lfr | 
 [other/legendOfKyrandiaEMCFile](https://discmaster.textfiles.com/search?format=legendOfKyrandiaEMCFile) | Legend of Kyrandia EMC File | .emc | 
+[other/legoLocoSaveGame](https://discmaster.textfiles.com/search?format=legoLocoSaveGame) | Lego Loco save game | .sav | 
 [other/lernoutAndHauspieData](https://discmaster.textfiles.com/search?format=lernoutAndHauspieData) | Lernout and Hauspie data | .lim | 
 [other/level9ComputingGameDataContainer](https://discmaster.textfiles.com/search?format=level9ComputingGameDataContainer) | Level 9 Computing game data container |  | 
 [other/lexiCrossPuzzle](https://discmaster.textfiles.com/search?format=lexiCrossPuzzle) | Lexi-Cross Puzzle | .dem .pzl | 
@@ -2957,6 +2966,7 @@ Family/Format | Name | Extensions | Notes
 [other/tiCalcString](https://discmaster.textfiles.com/search?format=tiCalcString) | Texas Instruments Calculator String | .9xs .9xy .89s | 
 [other/tiCalcZipped](https://discmaster.textfiles.com/search?format=tiCalcZipped) | Texas Instruments Calculator Zipped | .9xy .89y | 
 [other/americanHeritageDictionaryIndex](https://discmaster.textfiles.com/search?format=americanHeritageDictionaryIndex) | The American Heritage Dictionary Index | .wx | 
+[other/theBatAddressBook](https://discmaster.textfiles.com/search?format=theBatAddressBook) | The Bat! Address Book | .abd | 
 [other/catacombAbyssSavedGame](https://discmaster.textfiles.com/search?format=catacombAbyssSavedGame) | The Catacomb Abyss saved game | .sav | 
 [other/chessmasterSavedGame](https://discmaster.textfiles.com/search?format=chessmasterSavedGame) | The Chessmaster 2000 saved game |  | 
 [other/chessmasterClassicGamesLibrary](https://discmaster.textfiles.com/search?format=chessmasterClassicGamesLibrary) | The Chessmaster classic games library | .cml .dat | 

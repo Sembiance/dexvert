@@ -1,4 +1,4 @@
-# Supported File Formats (3,038)
+# Supported File Formats (3,042)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -328,7 +328,7 @@ archive | PKTINY Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip .exe | [sevenZip](http://p7zip.sourceforge.net/) [unzip](http://infozip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) | [50 sample files](https://sembiance.com/fileFormatSamples/archive/zip/)
 archive | [PMA Archive](http://fileformats.archiveteam.org/wiki/PMA) | .pma | [unar](https://github.com/incbee/Unarchiver) [lha](https://github.com/jca02266/lha) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/pma/)
 archive | PMarc SFX Archive | .com | [lha](https://github.com/jca02266/lha) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/pmarcSFX/)
-archive | PMWLite Packed | .exe .com | cup386 | [6 sample files](https://sembiance.com/fileFormatSamples/archive/pmwLitePacked/)
+archive | PMWLite Packed | .exe .com | cup386 | [7 sample files](https://sembiance.com/fileFormatSamples/archive/pmwLitePacked/)
 archive | Postal game Archive | .sak | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/postalGameArchive/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [unar](https://github.com/incbee/Unarchiver) [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [20 sample files](https://sembiance.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | PowerPlayer Music Cruncher |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/powerPlayerMusicCruncher/)
@@ -2029,7 +2029,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (965)
+## Text (969)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2552,7 +2552,8 @@ text | Montage Color data | .color .color1 |  | [7 sample files](https://sembian
 text | Montage Page |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/montagePage/)
 text | Montage Preset | .preset |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/montagePreset/)
 text | Mosaic Hotlist | .hot |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/mosaicHotlist/)
-text | Motion Capture File Format | .csm |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/motionCaptureFileFormat/)
+text | Motion Capture File Format | .csm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/motionCaptureFileFormat/)
+text | Movie Master Script | .scr |  | 
 text | Moxcel spreadsheet | .mxl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/moxcelSpreadsheet/)
 text | Mozilla (Netscape) settings | .js |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mozillaNetscapeSettings/)
 text | Mozilla Mork database | .dat .mab |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mozillaMorkDatabase/)
@@ -2579,6 +2580,7 @@ text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](htt
 text | NSIS script | .nsi |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nsisScript/)
 text | Nuke script | .nk |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/nukeScript/)
 text | NUnit project | .nunit |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/nUnitProject/)
+text | NUTS Macro | .mac |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/nutsMacro/)
 text | Oberon System 3 text document | .text .tool .mod |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/oberonSystem3TextDocument/)
 text | ODI link driver configuration | .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/odiLinkDriverConfiguration/)
 text | Office Upgrade Control | .opc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/officeUpgradeControl/)
@@ -2662,6 +2664,7 @@ text | PipeDream document | .pd .pdd |  | [2 sample files](https://sembiance.com
 text | PiXCL source | .pxl .px |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/piXCLSource/)
 text | PiXCL text Palette | .pal |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/piXCLTextPalette/)
 text | Pixel Bender Kernel | .pbk |  | 
+text | PL/SQL Developer Test script | .tst |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/plSQLDeveloperTestScript/)
 text | Plan 9 rc shell script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/plan9RCShellScript/)
 text | Plan-80 spreadsheet | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/plan80Spreadsheet/)
 text | Playmation Action |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/playmationAction/)
@@ -2792,7 +2795,7 @@ text | SNNS result | .res |  | [1 sample file](https://sembiance.com/fileFormatS
 text | Softdesk AdCADD Border sheet | .brd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDBorderSheet/)
 text | Softdesk AdCADD default data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDDefaultData/)
 text | Softdesk AdCADD layer default | .ly .tut |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDLayerDefault/)
-text | SoftICE initialization data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
+text | SoftICE initialization data | .dat |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
 text | Software Ideas Modeler Style Set | .simss |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/softwareIdeasModelerStyleSet/)
 text | SoftWrap license data | .sw2 |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
 text | Sonnet Project | .son |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/sonnetProject/)
@@ -2922,6 +2925,7 @@ text | VMware configuration | .vmx |  | [3 sample files](https://sembiance.com/f
 text | VMware Localization | .vlcl |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/vMwareLocalization/)
 text | VobSub Index file | .idx |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vobSubIndexFile/)
 text | VX-REXX Project | .vrp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vxREXXProject/)
+text | W32Dasm Asm List File / project | .alf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/w32DasmAsmListFile/)
 text | WAP Bookmark info | .url |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/wapBookmarkInfo/)
 text | WarpIN Script | .wis |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/warpINScript/)
 text | Watcom C/C++ Project | .wpj |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/watcomCProject/)

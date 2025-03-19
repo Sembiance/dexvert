@@ -11,7 +11,8 @@ export class stl extends Format
 		
 		// specific
 		"Blender exported STereoLithography", "libthing STereoLithography", "VCGLib STereoLithography", "NetFabb STereoLithography", "OpenSCAD STereoLithography", "ATF STereoLithography", "FreeCAD STereoLithography", "3DSMax STereoLithography",
-		"Blender STereoLithography", "Cura STereoLithography", "MeshLab STereoLithography", "Meshmixer STereoLithography", "Rhinoceros STereoLithography", "Digitized Shape Editor/CATIA STereoLithography", "AutoCAD STereoLithography"
+		"Blender STereoLithography", "Cura STereoLithography", "MeshLab STereoLithography", "Meshmixer STereoLithography", "Rhinoceros STereoLithography", "Digitized Shape Editor/CATIA STereoLithography", "AutoCAD STereoLithography",
+		"Solid Edge STereoLithography (binary)"
 	];
 	converters = ["blender[format:stl]", "assimp", "noesis[type:poly]"];
 }

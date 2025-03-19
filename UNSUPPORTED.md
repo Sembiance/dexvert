@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,353)
+# Unsupported File Formats (3,361)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (258)
+## Archive (260)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -90,6 +90,7 @@ Family/Format | Name | Extensions | Notes
 [archive/exeManagerProtected](https://discmaster.textfiles.com/search?format=exeManagerProtected) | EXE Manager Protected | .exe | 
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?format=exePackerPacked) | EXE Packer Packed |  | 
 [archive/exe32PackPacked](https://discmaster.textfiles.com/search?format=exe32PackPacked) | Exe32Pack Packed | .exe | 
+[archive/exeHighPacked](https://discmaster.textfiles.com/search?format=exeHighPacked) | ExeHigh Packed | .exe | 
 [archive/exetoolsProtected](https://discmaster.textfiles.com/search?format=exetoolsProtected) | EXETOOLS Protected | .exe | 
 [archive/ezipPacked](https://discmaster.textfiles.com/search?format=ezipPacked) | EZip Packed | .exe | 
 [archive/fcdVirtualCDROMFile](https://discmaster.textfiles.com/search?format=fcdVirtualCDROMFile) | FCD Virtual CD-ROM File | .fcd | 
@@ -202,6 +203,7 @@ Family/Format | Name | Extensions | Notes
 [archive/redArchive](https://discmaster.textfiles.com/search?format=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 
+[archive/rerpPacked](https://discmaster.textfiles.com/search?format=rerpPacked) | RERP Packed | .exe | 
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?format=rohitCompressedData) | Rohit compressed data | .tsi | 
 [archive/rsCompressedArchive](https://discmaster.textfiles.com/search?format=rsCompressedArchive) | RS compressed archive |  | 
 [archive/sabDisketteUtilityDiskImage](https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage) | SAB Diskette Utility disk image | .sdu | Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh.
@@ -1095,7 +1097,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,172)
+## Other (2,178)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1333,6 +1335,7 @@ Family/Format | Name | Extensions | Notes
 [other/autoCADColorBasedPlotStyle](https://discmaster.textfiles.com/search?format=autoCADColorBasedPlotStyle) | AutoCAD Color-Based Plot Style | .ctb | 
 [other/autoCADCompiledMenu](https://discmaster.textfiles.com/search?format=autoCADCompiledMenu) | AutoCAD Compiled Menu | .mnx | 
 [other/autoCADDOSRealModeADIDriver](https://discmaster.textfiles.com/search?format=autoCADDOSRealModeADIDriver) | Autocad DOS Real Mode ADI Driver | .exp .ex% | 
+[other/autoCADFastLoadAutoLISP](https://discmaster.textfiles.com/search?format=autoCADFastLoadAutoLISP) | AutoCAD Fast-load AutoLISP | .fas | 
 [other/autoCADPlotStyleTable](https://discmaster.textfiles.com/search?format=autoCADPlotStyleTable) | AutoCAD Plot Style Table | .stb | 
 [other/autoCADPlotterConfiguration](https://discmaster.textfiles.com/search?format=autoCADPlotterConfiguration) | AutoCAD Plotter Configuration | .pcp .pc3 | 
 [other/autoCADProtectedLISP](https://discmaster.textfiles.com/search?format=autoCADProtectedLISP) | AutoCAD Protected LISP | .lsp | 
@@ -1359,6 +1362,7 @@ Family/Format | Name | Extensions | Notes
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?format=babylonGlossary) | Babylon Glossary | .bgl | 
 [other/backItPreset](https://discmaster.textfiles.com/search?format=backItPreset) | Back-It Preset | .prs | 
+[other/bananaAccountingData](https://discmaster.textfiles.com/search?format=bananaAccountingData) | Banana accounting data | .ac2 | 
 [other/bandaiTamagochiGameData](https://discmaster.textfiles.com/search?format=bandaiTamagochiGameData) | Bandai Tamagochi game data | .bin | 
 [other/bankMateActivityData](https://discmaster.textfiles.com/search?format=bankMateActivityData) | BankMate Activity data | .ix1 .ixp | 
 [other/bannerBlueMovieGuideLibraryAuxiliaryFile](https://discmaster.textfiles.com/search?format=bannerBlueMovieGuideLibraryAuxiliaryFile) | Banner Blue Movie Guide Library Auxiliary File | .nts .cst .syn | 
@@ -1947,6 +1951,7 @@ Family/Format | Name | Extensions | Notes
 [other/groundControlIIOperationExodusGameArchive](https://discmaster.textfiles.com/search?format=groundControlIIOperationExodusGameArchive) | Ground Control II: Operation Exodus game data archive | .sdf | 
 [other/groundControlMap](https://discmaster.textfiles.com/search?format=groundControlMap) | Ground Control map | .sdf | 
 [other/groupWiseAdminHostDatabase](https://discmaster.textfiles.com/search?format=groupWiseAdminHostDatabase) | GroupWise admin host database | .db | 
+[other/guemapDocument](https://discmaster.textfiles.com/search?format=guemapDocument) | GUEmap document | .gmp | 
 [other/guitarProFile](https://discmaster.textfiles.com/search?format=guitarProFile) | Guitar Pro File | .gtp | 
 [other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 | 
 [other/guptaReportWindowsReport](https://discmaster.textfiles.com/search?format=guptaReportWindowsReport) | Gupta ReportWindows Report | .qrp | 
@@ -2465,6 +2470,7 @@ Family/Format | Name | Extensions | Notes
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?format=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?format=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
 [other/numPyData](https://discmaster.textfiles.com/search?format=numPyData) | NumPy data | .npy | 
+[other/nutsFormat](https://discmaster.textfiles.com/search?format=nutsFormat) | NUTS format | .nmr .fid .spc .2d .001 .002 .003 | 
 [other/nutshellDataBase](https://discmaster.textfiles.com/search?format=nutshellDataBase) | Nutshell DataBase | .db .dem | 
 [other/nWiperShow](https://discmaster.textfiles.com/search?format=nWiperShow) | NWiper Show | .nw | 
 [other/oberonObject](https://discmaster.textfiles.com/search?format=oberonObject) | Oberon Object | .obj | 
@@ -2481,6 +2487,7 @@ Family/Format | Name | Extensions | Notes
 [other/officeProfileSettings](https://discmaster.textfiles.com/search?format=officeProfileSettings) | Office Profile-Settings |  | 
 [other/ohrrpgceGame](https://discmaster.textfiles.com/search?format=ohrrpgceGame) | OHRRPGCE game | .rpg | 
 [other/olbLib](https://discmaster.textfiles.com/search?format=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
+[other/opcodeVisionProject](https://discmaster.textfiles.com/search?format=opcodeVisionProject) | Opcode Vision project | .vsn | 
 [other/openMediaFrameworkInterchange](https://discmaster.textfiles.com/search?format=openMediaFrameworkInterchange) | Open Media Framework Interchange | .omf | 
 [other/openFstBinaryData](https://discmaster.textfiles.com/search?format=openFstBinaryData) | OpenFst binary data | .far .fst | 
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?format=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
@@ -3260,6 +3267,7 @@ Family/Format | Name | Extensions | Notes
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?format=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
 [other/zeroXBeatSlicerGroove](https://discmaster.textfiles.com/search?format=zeroXBeatSlicerGroove) | Zero-X BeatSlicer Groove | .zgr | 
 [other/zickyZicksMilkcapsGameData](https://discmaster.textfiles.com/search?format=zickyZicksMilkcapsGameData) | Zicky Zick's Milkcaps game data | .tub | 
+[other/zmcVisualTabletData](https://discmaster.textfiles.com/search?format=zmcVisualTabletData) | ZMC VisualTablet data | .ekb | 
 [other/zodbFileStorage](https://discmaster.textfiles.com/search?format=zodbFileStorage) | ZODB File Storage | .fs | 
 [other/zonerDraw](https://discmaster.textfiles.com/search?format=zonerDraw) | Zoner Draw | .zmf | 
 [other/zoopGameGraphics](https://discmaster.textfiles.com/search?format=zoopGameGraphics) | Zoop game graphics | .imx | 

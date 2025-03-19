@@ -4,7 +4,6 @@
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
 
-* See why this was so slow: item #29717 ibm1000-1009/ibm1008.tar§/ibm1008/ESSWAT03.ZIP§/ELECSYMB.A02§/DATA/ELECTRIC.Z§/cgnd.dwg
 
 /---------------\
 | High Priority |

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,361)
+# Unsupported File Formats (3,380)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -605,7 +605,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (112)
+## Font (113)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -655,6 +655,7 @@ Family/Format | Name | Extensions | Notes
 [font/geeFont](https://discmaster.textfiles.com/search?format=geeFont) | Gee! Font | .fon | 
 [font/geoWorksGEOSFont](https://discmaster.textfiles.com/search?format=geoWorksGEOSFont) | GeoWorks GEOS Font | .fnt | 
 [font/grxFont](https://discmaster.textfiles.com/search?format=grxFont) | GRX Font | .fnt | 
+[font/homeVideoProducerFont](https://discmaster.textfiles.com/search?format=homeVideoProducerFont) | Home Video Producer Font | .fnt | 
 [font/ibmPCStoryboardFont](https://discmaster.textfiles.com/search?format=ibmPCStoryboardFont) | IBM/PC Storyboard Font | .fac | 
 [font/impulseTrackerFont](https://discmaster.textfiles.com/search?format=impulseTrackerFont) | Impulse Tracker font | .drv | 
 [font/intelliFont](https://discmaster.textfiles.com/search?format=intelliFont) | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) | .lib .type | [7 sample files](https://sembiance.com/fileFormatSamples/font/intelliFont/)
@@ -723,7 +724,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (194)
+## Image (195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -918,6 +919,7 @@ Family/Format | Name | Extensions | Notes
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?format=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?format=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
 [image/xCarGraphics](https://discmaster.textfiles.com/search?format=xCarGraphics) | XCar Graphics | .gxa | 
+[image/xeroxPresentsClipart](https://discmaster.textfiles.com/search?format=xeroxPresentsClipart) | Xerox Presents clipart | .xpp | 
 [image/zSoftPalette](https://discmaster.textfiles.com/search?format=zSoftPalette) | ZSoft Palette | .pal | 
 [image/zyxelFAXFormat](https://discmaster.textfiles.com/search?format=zyxelFAXFormat) | Zyxel FAX format | .fax | 
 
@@ -1097,7 +1099,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,178)
+## Other (2,195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1145,6 +1147,7 @@ Family/Format | Name | Extensions | Notes
 [other/abcSnapGraphicsPalette](https://discmaster.textfiles.com/search?format=abcSnapGraphicsPalette) | ABC SnapGraphics Palette | .sgp | 
 [other/abcSnapGraphixWorkspace](https://discmaster.textfiles.com/search?format=abcSnapGraphixWorkspace) | ABC SnapGraphix Workspace | .sgw | 
 [other/abilityDataBase](https://discmaster.textfiles.com/search?format=abilityDataBase) | Ability DataBase | .xdb | 
+[other/aboveDISCConfiguration](https://discmaster.textfiles.com/search?format=aboveDISCConfiguration) | Above DISC Configuration | .cfg | 
 [other/abracadataDrawing](https://discmaster.textfiles.com/search?format=abracadataDrawing) | Abracadata drawing | .sig | 
 [other/absoluteDatabaseFile](https://discmaster.textfiles.com/search?format=absoluteDatabaseFile) | Absolute Database file | .abs | 
 [other/abuseDemoData](https://discmaster.textfiles.com/search?format=abuseDemoData) | Abuse demo Data | .dat | 
@@ -1346,6 +1349,7 @@ Family/Format | Name | Extensions | Notes
 [other/autoItCompiledScript](https://discmaster.textfiles.com/search?format=autoItCompiledScript) | AutoIt compiled script | .a3x | 
 [other/autoPlayMenuBuilderData](https://discmaster.textfiles.com/search?format=autoPlayMenuBuilderData) | AutoPlay Menu Builder data | .apm | 
 [other/autoREALMMap](https://discmaster.textfiles.com/search?format=autoREALMMap) | AutoREALM Map | .aur | 
+[other/autoSketchConfiguration](https://discmaster.textfiles.com/search?format=autoSketchConfiguration) | AutoSketch Configuration | .cfg | 
 [other/avatarStudioLIO](https://discmaster.textfiles.com/search?format=avatarStudioLIO) | Avatar Studio LIO | .lio | 
 [other/avcHDClipInformation](https://discmaster.textfiles.com/search?format=avcHDClipInformation) | AVCHD Clip Information | .cpi | 
 [other/avcdHDPlaylist](https://discmaster.textfiles.com/search?format=avcdHDPlaylist) | AVCHD Playlist | .mpls | 
@@ -1364,6 +1368,7 @@ Family/Format | Name | Extensions | Notes
 [other/backItPreset](https://discmaster.textfiles.com/search?format=backItPreset) | Back-It Preset | .prs | 
 [other/bananaAccountingData](https://discmaster.textfiles.com/search?format=bananaAccountingData) | Banana accounting data | .ac2 | 
 [other/bandaiTamagochiGameData](https://discmaster.textfiles.com/search?format=bandaiTamagochiGameData) | Bandai Tamagochi game data | .bin | 
+[other/bankStreetWriterDictionary](https://discmaster.textfiles.com/search?format=bankStreetWriterDictionary) | Bank Street Writer dictionary | .bsw | 
 [other/bankMateActivityData](https://discmaster.textfiles.com/search?format=bankMateActivityData) | BankMate Activity data | .ix1 .ixp | 
 [other/bannerBlueMovieGuideLibraryAuxiliaryFile](https://discmaster.textfiles.com/search?format=bannerBlueMovieGuideLibraryAuxiliaryFile) | Banner Blue Movie Guide Library Auxiliary File | .nts .cst .syn | 
 [other/bannerBlueMovieGuideLibraryData](https://discmaster.textfiles.com/search?format=bannerBlueMovieGuideLibraryData) | Banner Blue Movie Guide Library data |  | 
@@ -1442,6 +1447,7 @@ Family/Format | Name | Extensions | Notes
 [other/butcherSignal](https://discmaster.textfiles.com/search?format=butcherSignal) | Butcher Signal | .signal | 
 [other/buttonsButtonDefinition](https://discmaster.textfiles.com/search?format=buttonsButtonDefinition) | Buttons! Button definition | .but | 
 [other/bwsbMusicSoundDriver](https://discmaster.textfiles.com/search?format=bwsbMusicSoundDriver) | BWSB Music and Sound Engine Driver | .mse | 
+[other/bylineData](https://discmaster.textfiles.com/search?format=bylineData) | Byline data | .bdr | 
 [other/cppSymbolDatai](https://discmaster.textfiles.com/search?format=cppSymbolDatai) | C++ Symbol Data | .dat | 
 [other/caVisualObjectsADAMIndex](https://discmaster.textfiles.com/search?format=caVisualObjectsADAMIndex) | CA Visual Objects ADAM Index | .ind | 
 [other/caVisualObjectsApplication](https://discmaster.textfiles.com/search?format=caVisualObjectsApplication) | CA Visual Objects Application | .app .ap | 
@@ -1481,6 +1487,7 @@ Family/Format | Name | Extensions | Notes
 [other/castleOfTheWindsSavedGame](https://discmaster.textfiles.com/search?format=castleOfTheWindsSavedGame) | Castle of the Winds saved Game | .cwg | 
 [other/catiaAssembly](https://discmaster.textfiles.com/search?format=catiaAssembly) | CATIA Assembly | .catproduct | 
 [other/catiaDrawing](https://discmaster.textfiles.com/search?format=catiaDrawing) | CATIA Drawing | .catdrawing | 
+[other/catiaMaterial](https://discmaster.textfiles.com/search?format=catiaMaterial) | CATIA Material | .catmaterial | 
 [other/catiaPartDescription](https://discmaster.textfiles.com/search?format=catiaPartDescription) | CATIA Part Description | .catpart | 
 [other/catiaProductDescription](https://discmaster.textfiles.com/search?format=catiaProductDescription) | CATIA Product Description | .catproduct | 
 [other/caveStorySaveGame](https://discmaster.textfiles.com/search?format=caveStorySaveGame) | CaveStory save game | .dat | 
@@ -1943,6 +1950,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?format=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/grandTheftAutoSaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoSaveGame) | Grand Theft Auto save game | .b | 
 [other/grandTheftAutoTextData](https://discmaster.textfiles.com/search?format=grandTheftAutoTextData) | Grand Theft Auto Text data | .gxt | 
+[other/graphicMasterCharset](https://discmaster.textfiles.com/search?format=graphicMasterCharset) | Graphic Master charset | .chr | 
 [other/graphPadPrism](https://discmaster.textfiles.com/search?format=graphPadPrism) | GraphPad Prism | .pzm .pzt | 
 [other/gravisGrIPLibrary](https://discmaster.textfiles.com/search?format=gravisGrIPLibrary) | Gravis GrIP Library | .vol | 
 [other/gravityForceMap](https://discmaster.textfiles.com/search?format=gravityForceMap) | Gravity Force Map | .fmp | 
@@ -2065,6 +2073,7 @@ Family/Format | Name | Extensions | Notes
 [other/javaClass](https://discmaster.textfiles.com/search?format=javaClass) | Java Class File | .class | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/javaClass/)
 [other/javaRuntimeCurrencyData](https://discmaster.textfiles.com/search?format=javaRuntimeCurrencyData) | Java runtime Currency Data | .data | 
 [other/javelinConfiguration](https://discmaster.textfiles.com/search?format=javelinConfiguration) | Javelin Configuration | .cfg | 
+[other/javelinCountryDriver](https://discmaster.textfiles.com/search?format=javelinCountryDriver) | Javelin Country Driver | .cdv | 
 [other/javelinModel](https://discmaster.textfiles.com/search?format=javelinModel) | Javelin Model | .mdl | 
 [other/javelinPrinterDriver](https://discmaster.textfiles.com/search?format=javelinPrinterDriver) | Javelin Printer Driver | .pr .pr2 | 
 [other/jayMSARegistrationKey](https://discmaster.textfiles.com/search?format=jayMSARegistrationKey) | JAY MSA registration key | .key | 
@@ -2179,11 +2188,13 @@ Family/Format | Name | Extensions | Notes
 [other/lotusFormsTemplate](https://discmaster.textfiles.com/search?format=lotusFormsTemplate) | Lotus Forms Template | .ltm | 
 [other/lotusFreelancePresentation](https://discmaster.textfiles.com/search?format=lotusFreelancePresentation) | Lotus Freelance Presentation | .prz | 
 [other/lotusMagellanViewer](https://discmaster.textfiles.com/search?format=lotusMagellanViewer) | Lotus Magellan Viewer | .vw2 | 
+[other/lotusMetroScreenDriver](https://discmaster.textfiles.com/search?format=lotusMetroScreenDriver) | Lotus Metro Screen Driver | .sdr | 
 [other/lotusMovie](https://discmaster.textfiles.com/search?format=lotusMovie) | Lotus Movie | .lsm | 
 [other/lotusOrganizerData](https://discmaster.textfiles.com/search?format=lotusOrganizerData) | Lotus Organizer data | .org | 
 [other/lotusOrganiserPaperLayout](https://discmaster.textfiles.com/search?format=lotusOrganiserPaperLayout) | Lotus Organizer Paper Layout | .plt | 
 [other/lotusOrganizerReport](https://discmaster.textfiles.com/search?format=lotusOrganizerReport) | Lotus Organizer Report | .rep | 
 [other/lotusSmartPicLibrary](https://discmaster.textfiles.com/search?format=lotusSmartPicLibrary) | Lotus SmartPic library | .sy1 | 
+[other/lotusSymphonyConfiguration](https://discmaster.textfiles.com/search?format=lotusSymphonyConfiguration) | Lotus Symphony configuration | .cnf | 
 [other/lotusTranslationTable](https://discmaster.textfiles.com/search?format=lotusTranslationTable) | Lotus Translation Table | .xlt | 
 [other/lplCompiledCode](https://discmaster.textfiles.com/search?format=lplCompiledCode) | LPL Compiled code | .plc | 
 [other/luaBytecode](https://discmaster.textfiles.com/search?format=luaBytecode) | Lua bytecode |  | 
@@ -2305,6 +2316,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftPrivateKey](https://discmaster.textfiles.com/search?format=microsoftPrivateKey) | Microsoft Private Key | .pkv | 
 [other/microsoftProfilerData](https://discmaster.textfiles.com/search?format=microsoftProfilerData) | Microsoft Profiler Data | .pbi .pbt .pbo | 
 [other/microsoftProgramDatabase](https://discmaster.textfiles.com/search?format=microsoftProgramDatabase) | Microsoft Program Database | .pdb .ncb .idb | 
+[other/microsoftProjectForDOSCalendar](https://discmaster.textfiles.com/search?format=microsoftProjectForDOSCalendar) | Microsoft Project for DOS Calendar | .cal | 
 [other/microsoftProjectProject](https://discmaster.textfiles.com/search?format=microsoftProjectProject) | Microsoft Project Project | .mpp | 
 [other/microsoftProjectView](https://discmaster.textfiles.com/search?format=microsoftProjectView) | Microsoft Project View | .mpv | 
 [other/microsoftQBXLocalINI](https://discmaster.textfiles.com/search?format=microsoftQBXLocalINI) | Microsoft QBX local INI | .ini | 
@@ -2458,6 +2470,7 @@ Family/Format | Name | Extensions | Notes
 [other/nortonPCAnywhereOnlineServicesList](https://discmaster.textfiles.com/search?format=nortonPCAnywhereOnlineServicesList) | Norton pcAnywhere Online Services list | .os6 | 
 [other/nortonUtilitiesImageBackupIndex](https://discmaster.textfiles.com/search?format=nortonUtilitiesImageBackupIndex) | Norton Utilities Image backup index | .idx | 
 [other/nortonUtilitiesLibrary](https://discmaster.textfiles.com/search?format=nortonUtilitiesLibrary) | Norton Utilities Library | .rtl | 
+[other/notationInterchangeFileFormat](https://discmaster.textfiles.com/search?format=notationInterchangeFileFormat) | [Notation Interchange File Format](http://fileformats.archiveteam.org/wiki/Notation_Interchange_File_Format) | .nif | 
 [other/novastormMediaAnimation](https://discmaster.textfiles.com/search?format=novastormMediaAnimation) | Novastorm Media animation | .flm | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?format=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?format=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
@@ -2672,6 +2685,7 @@ Family/Format | Name | Extensions | Notes
 [other/pureBasicLibrary](https://discmaster.textfiles.com/search?format=pureBasicLibrary) | PureBasic library |  | 
 [other/pureBasicResidentData](https://discmaster.textfiles.com/search?format=pureBasicResidentData) | PureBasic resident data |  | 
 [other/puzzleBusterPuzzle](https://discmaster.textfiles.com/search?format=puzzleBusterPuzzle) | Puzzle Buster Puzzle | .puz | 
+[other/qAndAWriteDataBase](https://discmaster.textfiles.com/search?format=qAndAWriteDataBase) | Q and A Write data base |  | 
 [other/qEmulatorQDOSFileHeader](https://discmaster.textfiles.com/search?format=qEmulatorQDOSFileHeader) | Q-emulator QDOS file header |  | 
 [other/qarbonViewlet](https://discmaster.textfiles.com/search?format=qarbonViewlet) | Qarbon Viewlet | .viewlet | 
 [other/qbxMSBasicKeyboardDefinition](https://discmaster.textfiles.com/search?format=qbxMSBasicKeyboardDefinition) | QBX (MS Basic 7.x) Editor keyboard definition | .key | 
@@ -3077,6 +3091,7 @@ Family/Format | Name | Extensions | Notes
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?format=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?format=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 
+[other/varsityScripsitConfiguration](https://discmaster.textfiles.com/search?format=varsityScripsitConfiguration) | Varsity Scripsit Configuration | .cnf | 
 [other/vbISAMIndex](https://discmaster.textfiles.com/search?format=vbISAMIndex) | VB/ISAM Index | .ism | 
 [other/vbDOSForm](https://discmaster.textfiles.com/search?format=vbDOSForm) | VBDOS Form | .frm | 
 [other/vcdEntries](https://discmaster.textfiles.com/search?format=vcdEntries) | VCD Entries File | .vcd | 
@@ -3157,6 +3172,7 @@ Family/Format | Name | Extensions | Notes
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?format=whdLoadSlave) | WHDLoad Slave | .slave | 
 [other/whirlwindGameDataPackage](https://discmaster.textfiles.com/search?format=whirlwindGameDataPackage) | Whirlwind game data Package | .wpk | 
 [other/whiteWolfProductionsPalette](https://discmaster.textfiles.com/search?format=whiteWolfProductionsPalette) | White Wolf Productions Palette | .pal | 
+[other/whoFramedRogerRabbitMenu](https://discmaster.textfiles.com/search?format=whoFramedRogerRabbitMenu) | Who Framed Roger Rabbit Menu | .mnu | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?format=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 
 [other/winampEQLibrary](https://discmaster.textfiles.com/search?format=winampEQLibrary) | Winamp EQ library |  | 
 [other/winAPEPOKFormat](https://discmaster.textfiles.com/search?format=winAPEPOKFormat) | WinAPE POK format | .wps .pok | 
@@ -3221,6 +3237,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectRectangularBlockData](https://discmaster.textfiles.com/search?format=wordPerfectRectangularBlockData) | WordPerfect Rectangular Block Data | .mst | 
 [other/wordPerfectSettings](https://discmaster.textfiles.com/search?format=wordPerfectSettings) | WordPerfect settings | .wcl .set | 
 [other/wordPerfectSetupData](https://discmaster.textfiles.com/search?format=wordPerfectSetupData) | WordPerfect Setup Data | .set | 
+[other/wordPerfectSpellRules](https://discmaster.textfiles.com/search?format=wordPerfectSpellRules) | WordPerfect spell rules | .spr | 
 [other/wordPerfectThesaurus](https://discmaster.textfiles.com/search?format=wordPerfectThesaurus) | WordPerfect Thesaurus | .ths | 
 [other/wordPerfectVideoResource](https://discmaster.textfiles.com/search?format=wordPerfectVideoResource) | WordPerfect Video Resource | .vrs | 
 [other/wordPerfectWordlist](https://discmaster.textfiles.com/search?format=wordPerfectWordlist) | WordPerfect Wordlist | .spw | 
@@ -3256,6 +3273,8 @@ Family/Format | Name | Extensions | Notes
 [other/yabBaseballGameData](https://discmaster.textfiles.com/search?format=yabBaseballGameData) | YAB! Baseball game data | .dat | 
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?format=yafaCompressionOptions) | YAFA Compression Options |  | 
 [other/yahooWidget](https://discmaster.textfiles.com/search?format=yahooWidget) | Yahoo! Widget | .widget | 
+[other/yamahaBULKManagerMessages](https://discmaster.textfiles.com/search?format=yamahaBULKManagerMessages) | Yamaha BULK Manager Messages | .msg | 
+[other/yamahaMidimonitorMessages](https://discmaster.textfiles.com/search?format=yamahaMidimonitorMessages) | Yamaha Midimonitor Messages | .msg | 
 [other/yamahaSysExPresetCommand](https://discmaster.textfiles.com/search?format=yamahaSysExPresetCommand) | Yamaha SysEx preset command | .syx .dx7 | 
 [other/yangDataModel](https://discmaster.textfiles.com/search?format=yangDataModel) | YANG data model | .yang | 
 [other/zarNavigatorConfiguration](https://discmaster.textfiles.com/search?format=zarNavigatorConfiguration) | Z.A.R. Navigator Configuration | .cfg | 

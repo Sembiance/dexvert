@@ -111,6 +111,7 @@ const DEXMAGIC_CHECKS =
 	"ECI Graphic Editor"              : [{offset : 0, match : [0x00, 0x40]}],
 	"FM-Towns HEL Animation"          : [{offset : 0, match : "he1"}],
 	"Funny Paint"                     : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
+	"Gifpress GIF"                    : [{offset : 2, match : [0xFF, 0xB4]}],
 	"Glide 3DFX Texture"              : [{offset : 0, match : "3df v"}],
 	"GLPaint PIC"                     : [{offset : 0, match : "PIC2"}, {offset : 22, match : "JPGE"}],
 	"GoDot Clip"                      : [{offset : 0, match : "GOD1"}],

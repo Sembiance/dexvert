@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,381)
+# Unsupported File Formats (3,382)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1099,7 +1099,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,196)
+## Other (2,197)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2398,6 +2398,7 @@ Family/Format | Name | Extensions | Notes
 [other/myFamilyTreeData](https://discmaster.textfiles.com/search?format=myFamilyTreeData) | My Family Tree data | .tre | 
 [other/myHouseFloorData](https://discmaster.textfiles.com/search?format=myHouseFloorData) | My House floor data |  | 
 [other/myBaseDatabase](https://discmaster.textfiles.com/search?format=myBaseDatabase) | myBase database | .nyf .ssgindex | 
+[other/myDataBaseIndex](https://discmaster.textfiles.com/search?format=myDataBaseIndex) | MyDataBase index | .tdx | 
 [other/myriadHarmonyMelodyAssistantMusic](https://discmaster.textfiles.com/search?format=myriadHarmonyMelodyAssistantMusic) | Myriad Harmony / Melody assistant music | .mus .myr | 
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?format=mySQLIndexFile) | MySQL Index | .myi | 
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?format=mySQLTableDefinition) | MySQL Table Definition | .frm | 

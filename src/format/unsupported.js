@@ -2571,6 +2571,7 @@ export default
 		musicXVoices                             : {name : "Music-X Voices", ext : [".voices"], magic : ["Music-X Voices"], weakMagic : true},
 		musikTrainerNotation                     : {name : "Musik-Trainer Notation", ext : [".mtn"], magic : ["Musik-Trainer Notation"]},
 		myBaseDatabase                           : {name : "myBase database", ext : [".nyf", ".ssgindex"], magic : ["myBase database"]},
+		myDataBaseIndex                          : {name : "MyDataBase index", ext : [".tdx"], magic : ["MyDataBase index"], weakMagic : true},
 		myFamilyTreeData                         : {name : "My Family Tree data", ext : [".tre"], magic : ["My Family Tree data"]},
 		myHouseFloorData                         : {name : "My House floor data", magic : ["My House floor data"]},
 		myriadHarmonyMelodyAssistantMusic        : {name : "Myriad Harmony / Melody assistant music", ext : [".mus", ".myr"], magic : ["Myriad Harmony / Melody assistant music"]},

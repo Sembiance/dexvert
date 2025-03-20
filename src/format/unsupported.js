@@ -2930,6 +2930,7 @@ export default
 		symbianSeries3InstallationFile           : {name : "Symbian Series 3 Installation file", ext : [".sisx", ".sis"], magic : ["Symbian Series 3 Installation file", "x-epoc/x-sisx-app"], weakMagic : true},
 		syslinuxCOM32Module                      : {name : "Syslinux COM32 Module", ext : [".c32"], magic : ["Syslinux COM32 module", "COM executable (32-bit COMBOOT", "Syslinux module"]},
 		systemAudioManagerAwareInfo              : {name : "System Audio Manager Aware info", ext : [".saa"], magic : ["System Audio Manager Aware info"]},
+		tabWorksBook                             : {name : "TabWorks book", ext : [".twf"], magic : ["TabWorks book"], weakMagic : true},
 		tagwriteTemplate                         : {name : "Tagwrite Template", ext : [".tww"], magic : ["Tagwrite Template"]},
 		tcpdumpCapture                           : {name : "TCPDUMP Style Capture", ext : [".dmp", ".pcap"], magic : [/TCPDUMP's style capture/, /^(Lib)?pcap capture file/, "application/vnd.tcpdump.pcap", /^fmt\/779( |$)/]},
 		teapotXDRSpreadsheet                     : {name : "Teapot XDR spreadsheet", ext : [".tp"], magic : ["Teapot XDR spreadsheet", "teapot work sheet (XDR format)"]},

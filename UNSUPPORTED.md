@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,382)
+# Unsupported File Formats (3,387)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -724,7 +724,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (195)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -816,6 +816,7 @@ Family/Format | Name | Extensions | Notes
 [image/homeBrewIcon](https://discmaster.textfiles.com/search?format=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
 [image/ibmAVCStillVideoImage](https://discmaster.textfiles.com/search?format=ibmAVCStillVideoImage) | IBM Audio Visual Connection Still Video Image | .dsp ._im | 
 [image/iffChunkyBitmap](https://discmaster.textfiles.com/search?format=iffChunkyBitmap) | IFF Chunky bitmap | .ciff | 
+[image/iffPlanarBitmap](https://discmaster.textfiles.com/search?format=iffPlanarBitmap) | IFF Planar Bitmap | .plbm | 
 [image/imageKnifeRawBitmap](https://discmaster.textfiles.com/search?format=imageKnifeRawBitmap) | ImageKnife Raw bitmap | .raw | 
 [image/imagineTexture](https://discmaster.textfiles.com/search?format=imagineTexture) | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
 [image/inAVisionDrawing](https://discmaster.textfiles.com/search?format=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/) - In-a-Vision and the Micrografx Windows Convet program (both on winworld) are both Windows 1.x/2.x programs that don't work in Win2k. Not aware of anything else that can convert these, as Micrografx Designer 4 does not.
@@ -1099,7 +1100,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,197)
+## Other (2,201)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1743,11 +1744,13 @@ Family/Format | Name | Extensions | Notes
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?format=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
 [other/dynamicPublisherPrinterFile](https://discmaster.textfiles.com/search?format=dynamicPublisherPrinterFile) | Dynamic Publisher Printer File | .prf | 
 [other/dynamicallyLinkedDeviceInterface](https://discmaster.textfiles.com/search?format=dynamicallyLinkedDeviceInterface) | Dynamically Linked Device Interface | .dldi | 
+[other/dynamix3DDataContainer](https://discmaster.textfiles.com/search?format=dynamix3DDataContainer) | Dynamix 3D data container | .c3d | 
 [other/dynamixBitmap](https://discmaster.textfiles.com/search?format=dynamixBitmap) | Dynamix Bitnmap | .bmp | 
 [other/dynamixFontDataContainer](https://discmaster.textfiles.com/search?format=dynamixFontDataContainer) | Dynamix Font data container | .fnt | 
 [other/dynamixPalette](https://discmaster.textfiles.com/search?format=dynamixPalette) | Dynamix Palette | .pal | 
 [other/dynamixSceneDataContainer](https://discmaster.textfiles.com/search?format=dynamixSceneDataContainer) | Dynamix scene data container | .ttm .tkm | 
 [other/dynamixSoundDataContainer](https://discmaster.textfiles.com/search?format=dynamixSoundDataContainer) | Dynamix Sound data container | .sx .snd .blk | 
+[other/dynamixSPTGameDataContainer](https://discmaster.textfiles.com/search?format=dynamixSPTGameDataContainer) | Dynamix SPT game data container | .spt | 
 [other/dynamixTrackDataContainer](https://discmaster.textfiles.com/search?format=dynamixTrackDataContainer) | Dynamix Track data container | .trk | 
 [other/ezFMSynthesizerSoundSettings](https://discmaster.textfiles.com/search?format=ezFMSynthesizerSoundSettings) | E-Z FM Synthesizer sound Settings | .set | 
 [other/eaSeattleGameData](https://discmaster.textfiles.com/search?format=eaSeattleGameData) | EA Seattle game data | .act | 
@@ -2082,13 +2085,14 @@ Family/Format | Name | Extensions | Notes
 [other/jeepersKeyIndex](https://discmaster.textfiles.com/search?format=jeepersKeyIndex) | Jeepers Key/index | .jpk | 
 [other/jeepersReferenceDB](https://discmaster.textfiles.com/search?format=jeepersReferenceDB) | Jeepers Reference DB | .jpr | 
 [other/jetAudioTheme](https://discmaster.textfiles.com/search?format=jetAudioTheme) | jetAudio theme | .uib | 
-[other/jETPilotCCHData](https://discmaster.textfiles.com/search?format=jETPilotCCHData) | JETPilot CCH data | .cch | 
-[other/jETPilotFieldData](https://discmaster.textfiles.com/search?format=jETPilotFieldData) | JETPilot field data | .fld | 
+[other/jetPilotCCHData](https://discmaster.textfiles.com/search?format=jetPilotCCHData) | JETPilot CCH data | .cch | 
+[other/jetPilotFieldData](https://discmaster.textfiles.com/search?format=jetPilotFieldData) | JETPilot field data | .fld | 
 [other/jetPilotScenery](https://discmaster.textfiles.com/search?format=jetPilotScenery) | JETPilot scenery |  | 
 [other/jetPilotScreen](https://discmaster.textfiles.com/search?format=jetPilotScreen) | JETPilot screen | .pssl | 
 [other/jetPilotSegmentData](https://discmaster.textfiles.com/search?format=jetPilotSegmentData) | JETPilot segment data |  | 
 [other/jetPilotSprite](https://discmaster.textfiles.com/search?format=jetPilotSprite) | JETPilot sprite | .pssp .pssm | 
 [other/jetPilotSUPData](https://discmaster.textfiles.com/search?format=jetPilotSUPData) | JETPilot SUP data |  | 
+[other/jinxterGameSave](https://discmaster.textfiles.com/search?format=jinxterGameSave) | Jinxter game save | .gam | 
 [other/jniLibrary](https://discmaster.textfiles.com/search?format=jniLibrary) | JNI Library | .jnilib | 
 [other/jonathanGraphicsGameData](https://discmaster.textfiles.com/search?format=jonathanGraphicsGameData) | Jonathan graphics game data |  | 
 [other/joy2KeySettings](https://discmaster.textfiles.com/search?format=joy2KeySettings) | Joy2Key settings | .j2k .ini | 
@@ -2217,6 +2221,7 @@ Family/Format | Name | Extensions | Notes
 [other/macromediaXtraCache](https://discmaster.textfiles.com/search?format=macromediaXtraCache) | Macromedia Xtra Cache | .mch | 
 [other/madden2004DataFile](https://discmaster.textfiles.com/search?format=madden2004DataFile) | Madden 2004 data file | .dat | 
 [other/madeEngineDB](https://discmaster.textfiles.com/search?format=madeEngineDB) | MADE Engine DB | .dat | 
+[other/mADEEngineGameDataArchive](https://discmaster.textfiles.com/search?format=mADEEngineGameDataArchive) | MADE Engine game data archive | .blk | 
 [other/madeProjectGame](https://discmaster.textfiles.com/search?format=madeProjectGame) | MADE Engine/Project/game | .prj | 
 [other/maestroMusic](https://discmaster.textfiles.com/search?format=maestroMusic) | Maestro Music |  | 
 [other/maggiData](https://discmaster.textfiles.com/search?format=maggiData) | MAGGI data | .hhh | 

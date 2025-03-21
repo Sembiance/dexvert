@@ -526,6 +526,7 @@ export const WEAK_VALUES =
 	/^Certificate, Version=[\da-f]+$/,
 	/^checksummed$/,
 	/^Chiasmus key/,
+	/^cisco IOS microcode$/,
 	/^Citrus locale declaration/,
 	/^Clarion Developer/,
 	/^Claris works dictionary/,

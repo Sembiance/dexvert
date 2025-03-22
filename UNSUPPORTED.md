@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,387)
+# Unsupported File Formats (3,389)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1100,7 +1100,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,201)
+## Other (2,203)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2854,6 +2854,7 @@ Family/Format | Name | Extensions | Notes
 [other/snoopCapture](https://discmaster.textfiles.com/search?format=snoopCapture) | Snoop Capture | .snoop | 
 [other/snxSnapshot](https://discmaster.textfiles.com/search?format=snxSnapshot) | SNX Snapshot | .snx | 
 [other/softDiskLibrary](https://discmaster.textfiles.com/search?format=softDiskLibrary) | SoftDisk Library | .shl | 
+[other/softermCodepage](https://discmaster.textfiles.com/search?format=softermCodepage) | Softerm codepage | .xvd | 
 [other/softKeyWinWorksDocumentTemplate](https://discmaster.textfiles.com/search?format=softKeyWinWorksDocumentTemplate) | SoftKey WinWorks document Template | .wpt | 
 [other/softwareDesignCryptoEncryptedData](https://discmaster.textfiles.com/search?format=softwareDesignCryptoEncryptedData) | Software Design Crypto encrypted data |  | 
 [other/solitaireSettyProject](https://discmaster.textfiles.com/search?format=solitaireSettyProject) | Solitaire Setty Project | .ss | 
@@ -3095,6 +3096,7 @@ Family/Format | Name | Extensions | Notes
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?format=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealMap](https://discmaster.textfiles.com/search?format=unrealMap) | Unreal Map | .unr | 
 [other/upsPatchFile](https://discmaster.textfiles.com/search?format=upsPatchFile) | UPS patch file | .ups | 
+[other/vRayMaterial](https://discmaster.textfiles.com/search?format=vRayMaterial) | V-Ray Material | .mat .vismat | 
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?format=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?format=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 

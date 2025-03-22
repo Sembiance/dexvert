@@ -1,4 +1,4 @@
-# Supported File Formats (3,058)
+# Supported File Formats (3,057)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -92,7 +92,7 @@ archive | CI GAMES game data archive | .dpk | [gameextractor](http://www.watto.o
 archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/cso/)
 archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+source/cloop/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/cloopImage/)
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
-archive | com RLE packer Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
+archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [deark](https://entropymine.com/deark/) [DirMaster](https://style64.org/dirmaster) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreDiskImage/)
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [DirMaster](https://style64.org/dirmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreTapeImage/)
@@ -128,7 +128,7 @@ archive | Diet Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/f
 archive | [DietDisk Compressed](http://fileformats.archiveteam.org/wiki/Diet_Disk) |  | [dietDiskFatten](http://cd.textfiles.com/nightowl/nopv06/010A/DIETDISC.ZIP) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/dietDisk/)
 archive | Digital Illusions game archive | .pdo .rmpublisher .rmlanguage .pdt .dta | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/digitalIllusionsGameArchive/)
 archive | [Disk Doubler](http://justsolve.archiveteam.org/wiki/DiskDoubler) | .dd | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/diskDoubler/)
-archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) | .img .dsk | [sevenZip](http://p7zip.sourceforge.net/) [aaru](https://github.com/aaru-dps/Aaru) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/diskImage/)
+archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) | .img .dsk .flp | [sevenZip](http://p7zip.sourceforge.net/) [aaru](https://github.com/aaru-dps/Aaru) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/diskImage/)
 archive | [DiskDupe Disk Image](http://fileformats.archiveteam.org/wiki/DDI) | .ddi | [sevenZip](http://p7zip.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/diskDupeDiskImage/)
 archive | DIV GamesStudio Graphcis Library | .fpg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
 archive | Dn.COM Cruncher Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/dnCOMCruncherPacked/)
@@ -1920,7 +1920,7 @@ other | RM/Quest Module | .qrm | [strings](https://www.gnu.org/software/binutils
 other | SCUMM room name list | .la0 .000 | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/other/scummRoomNameList/)
 other | Show Partner Animator Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/showPartnerAnimatorHelp/)
 other | Softdisk Crossword | .sxg .sxp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/softdiskCrossword/)
-other | SPSS template | .cht .sct | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/other/spssTemplate/)
+other | SPSS template | .cht .sct | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/spssTemplate/)
 other | Storm C++ Debug strings | .debug | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/stormCPPDebugStrings/)
 other | Sybase iAnywhere Index | .cdx | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/sybaseIAnywhereIndex/)
 other | SYMDEF File | .symdef | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/symDef/)
@@ -2032,7 +2032,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (982)
+## Text (981)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2620,7 +2620,7 @@ text | Opticks Surface | .srf |  | [5 sample files](https://sembiance.com/fileFo
 text | OrangeCD theme | .dax |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/orangeCDTheme/)
 text | Orbiter mesh | .msh |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/orbiterMesh/)
 text | Orbiter scenario | .scn |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/orbiterScenario/)
-text | ORIGIN System Checksum | .chk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/originSystemChecksum/)
+text | ORIGIN System Checksum | .chk |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/originSystemChecksum/)
 text | OS/2 Install Catalog File | .icf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/os2InstallCatalogFile/)
 text | OS/2 install Package | .pkg |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/os2InstallPackageMeta/)
 text | OS/2 Network Information File | .nif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/os2NetworkInformationFile/)
@@ -2745,7 +2745,7 @@ text | QuickSFV checksum | .sfv |  | [5 sample files](https://sembiance.com/file
 text | QuickTime Text subtitles |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/quickTimeTextSubtitles/)
 text | QuizPro Quiz data | .qzs .qzd .qze |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quizProQuizData/)
 text | R documentation | .rd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rDocumentation/)
-text | RAPCON Sector info | .sec |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/rapconSectorInfo/)
+text | RAPCON Sector info | .sec |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/rapconSectorInfo/)
 text | RAR registration data | .key .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/rarRegistrationData/)
 text | RASTER Music Tracker settings | .ini |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rasterMusicTrackerSettings/)
 text | REAL Numbers Tape | .tap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/realNumbersTape/)
@@ -2898,7 +2898,6 @@ text | Unified Printer Parameter | .upp |  | [10 sample files](https://sembiance
 text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/upcatCatalog/)
 text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/urbanChaosStoryScript/)
 text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
-text | V-Ray Material | .mat .vismat |  | 
 text | Value Change Dump | .vcd .vcdz |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/valueChangeDump/)
 text | Valve Choreography Data format | .vcd |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/valveChoreography/)
 text | Valve Map Format | .vmf .vmx |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/valveMapFormat/)
@@ -3073,7 +3072,7 @@ video | [Intelligent Games Video/cutscene](https://wiki.multimedia.cx/index.php/
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/iffANIM/)
 video | [Interplay C93 Video](https://wiki.multimedia.cx/index.php/C93) | .c93 | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/c93Video/)
 video | [Interplay MVE Video](https://wiki.multimedia.cx/index.php/Interplay_MVE) | .mve | [ffmpeg](https://ffmpeg.org/) | [19 sample files](https://sembiance.com/fileFormatSamples/video/interplayMVE/)
-video | [Interspective Animation](https://wiki.multimedia.cx/index.php/Interspective_animation) | .dat | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/interspectiveAnimation/)
+video | [Interspective Animation](https://wiki.multimedia.cx/index.php/Interspective_animation) | .dat | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/interspectiveAnimation/)
 video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_tool](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/video/jamVideo/)
 video | [KDV video](https://wiki.multimedia.cx/index.php/KDV) | .kdv | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/kdvVideo/)
 video | [Legend Entertainment Q Video](https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q) | .q | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/legendEntertainmentQ/)

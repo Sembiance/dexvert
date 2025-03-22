@@ -941,7 +941,6 @@ export default
 		visualThoughtDiagram                       : {name : "Visual Thought diagram", ext : [".vthought"], magic : ["Visual Thought diagram"]},
 		vmwareConfiguration                        : {name : "VMware configuration", ext : [".vmx"], magic : ["VMware configuration"], weakMagic : true},
 		vMwareLocalization                         : {name : "VMware Localization", ext : [".vlcl"], magic : ["VMware Localization"]},
-		vRayMaterial                               : {name : "V-Ray Material", ext : [".mat", ".vismat"], magic : ["V-Ray Material"], weakMagic : true},
 		vobSubIndexFile                            : {name : "VobSub Index file", ext : [".idx"], magic : ["VobSub Index file"]},
 		wapBookmarkInfo                            : {name : "WAP Bookmark info", ext : [".url"], magic : ["WAP Bookmark info"], weakMagic : true},
 		warpINScript                               : {name : "WarpIN Script", ext : [".wis"], magic : ["WarpIN Script"]},

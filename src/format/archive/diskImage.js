@@ -4,7 +4,7 @@ export class diskImage extends Format
 {
 	name    = "Disk Image";
 	website = "http://fileformats.archiveteam.org/wiki/Raw_disk_image";
-	ext     = [".img", ".dsk"];
+	ext     = [".img", ".dsk", ".flp"];
 	weakExt = true;
 	magic   = [
 		// generic
@@ -12,7 +12,7 @@ export class diskImage extends Format
 		/^fmt\/1087( |$)/,
 		
 		// specific
-		"Distribution Media Format disk image", "DoubleSpace compressed volume (v6.0)", "CP Backup disk image"
+		"Distribution Media Format disk image", "DoubleSpace compressed volume (v6.0)", "CP Backup disk image", "2FILE disk image"
 	];
 	weakMagic = ["DOS floppy"];
 

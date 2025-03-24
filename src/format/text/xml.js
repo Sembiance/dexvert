@@ -41,7 +41,7 @@ const _XML_MAGIC = [
 	"Vikon Skeleton template", "Chemical Markup Language XML document", "m0n0wall configuration", "MLT XML document", "Jahshaka Scene File", "ksudoku puzzle", /^Linden (avatar|skeleton) definition/, "RealProducer Job File", "Google Earth network link",
 	/^Visual Studio J# Project \(v[78]\)$/, "Visual Studio JavaScript Project", "UniHighlighter Highlighter definition", "BORGChat configuration", "BORGChat smiles", "Zope Configuration Mark-up Language", "application/x-drgeo", "Hydrogen Song",
 	/^Together Class Diagram \(UML [\d.]+\)/, "Liberty BASIC Lesson", "Teach2000 document", "AutoCAD Color Book", "Crytek XML Material", "FMOD Designer Project", "XML Forms Data Format", "Adobe Premiere Effect Preset", "QuarkXPress Color Library",
-	"Mac OS installable Keyboard Layout", "QuarkXPress Color Library UI specs",
+	"Mac OS installable Keyboard Layout", "QuarkXPress Color Library UI specs", "Nmap scan results (XML)",
 	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

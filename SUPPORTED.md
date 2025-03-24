@@ -1,11 +1,11 @@
-# Supported File Formats (3,057)
+# Supported File Formats (3,061)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (453)
+## Archive (455)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -174,7 +174,7 @@ archive | [Genus Graphics Library Compressed Archive](http://fileformats.archive
 archive | [God of Thunder Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(God_of_Thunder)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/godOfThunderGameArchive/)
 archive | Gold Box DAX | .dax | [goldBoxExplorer](https://github.com/simeonpilgrim/goldboxexplorer) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/goldBoxDAX/)
 archive | GRZip Compressed Archive | .grz | [GRZip](https://www.sac.sk/files.php?d=7&l=) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/grZip/)
-archive | GrZip II Compressed File |  | [grZip2](https://www.sac.sk/files.php?d=7&l=) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/grZip2/)
+archive | GrZip II Compressed File |  | [grZip2](https://www.sac.sk/files.php?d=7&l=) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/grZip2/)
 archive | [GZip archive](http://fileformats.archiveteam.org/wiki/Gzip) | .gz .gzip | [sevenZip](http://p7zip.sourceforge.net/) [gunzip](https://www.gnu.org/software/gzip/) [ancient](https://github.com/temisu/ancient_format_decompressor) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/gz/)
 archive | [HA Archive](http://fileformats.archiveteam.org/wiki/HA) | .ha | [ha](http://fileformats.archiveteam.org/wiki/HA) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ha/)
 archive | Half Life Model | .mdl | [Crowbar](https://github.com/ZeqMacaw/Crowbar) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/halfLifeModel/)
@@ -199,7 +199,7 @@ archive | [Icon Manager Icon Archive](http://fileformats.archiveteam.org/wiki/Ic
 archive | IFF CAT file | .iff | [iffCATExtract](https://github.com/Sembiance/iffCATExtract) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/iffCAT/)
 archive | IFF Fantavision |  | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/iffFantavision/) - Don't have support to convert this to a movie yet, so classify it as an archive and just extract what we can from it.
 archive | [IFF LIST File](https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF) |  | [unIFFLIST](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. The VAST MAJORITY of these files are for a program called 'Movie Setter' on the Amiga and contain ILBM's with custom 'FACE' properties. I'm not aware of a converter for either the Movie Setter files themselves or the resulting ILBM files sadly. Since the output IFFs from these are not useful (and it makes a LOT of them) I actually forbid that format from matching this, so it gets properly matched to the unsupported video/movieSetterSet format.
-archive | [ImageDisk Disk Image](http://fileformats.archiveteam.org/wiki/IMD) | .imd | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/imageDisk/)
+archive | [ImageDisk Disk Image](http://fileformats.archiveteam.org/wiki/IMD) | .imd | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imageDisk/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/imageUSB/)
 archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
@@ -234,11 +234,13 @@ archive | Lionhead Studios game archive | .sad | [gameextractor](http://www.watt
 archive | Liquid Entertainment H2O game data archive | .h2o | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/h2oGameDataArchive/)
 archive | LM-T2E Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lmt2ePacked/)
 archive | LOB Compressed |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [27 sample files](https://sembiance.com/fileFormatSamples/archive/lobCompressed/)
+archive | [Long Range Zip Archive](http://fileformats.archiveteam.org/wiki/Lrzip) | .lrz | [lrzip](https://github.com/ckolivas/lrzip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/lrzip/)
 archive | Looking Glass Game Archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/lookingGlassGameArchive/)
 archive | Lucas Arts Game Archive | .gob | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lucasArtsGameArchive/)
 archive | [LyNX Archive](http://fileformats.archiveteam.org/wiki/Lynx_archive) | .lnx | [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/lynxArchive/)
 archive | [LZEXE Packed](http://fileformats.archiveteam.org/wiki/LZEXE) |  | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/lzexePacked/)
 archive | [LZIP Archive](http://fileformats.archiveteam.org/wiki/Lzip) | .lz | [lzip](https://www.nongnu.org/lzip/lzip.html) [xz](https://tukaani.org/xz/) [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/lzip/)
+archive | [LZOP Archive](http://fileformats.archiveteam.org/wiki/Lzop) | .lzo | [lzop](https://www.lzop.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lzop/)
 archive | [LZS221 Compressed](http://fileformats.archiveteam.org/wiki/LZS221) |  | [deark](https://entropymine.com/deark/) [lzsdemo](https://www.sac.sk/download/pack/lzs221.zip) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/lzs221/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/compactPro/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [24 sample files](https://sembiance.com/fileFormatSamples/archive/macBinary/) - We include MacBinary 1, 2, 3 into this single format
@@ -544,7 +546,7 @@ audio | [RK Audio](http://fileformats.archiveteam.org/wiki/RK_Audio) | .rka | [f
 audio | Sample DUMP Exchange Audio | .sdx | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sampleDUMPExchange/)
 audio | Scream Tracker Sample | .snd .s3i .smp | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/screamTrackerSample/)
 audio | [ShockWave Audio](http://fileformats.archiveteam.org/wiki/SWA) | .swa | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [16 sample files](https://sembiance.com/fileFormatSamples/audio/shockWaveAudio/)
-audio | [Shorten Losless Audio](http://fileformats.archiveteam.org/wiki/Shorten) | .shn | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/shorten/)
+audio | [Shorten Losless Audio](http://fileformats.archiveteam.org/wiki/Shorten) | .shn | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/shorten/)
 audio | [Sierra Audio](https://wiki.multimedia.cx/index.php/Sierra_Audio) | .sfx .sol | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sierraAudio/)
 audio | Simon & Schuster Interactive VAG | .vag | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/simonSchusterVAG/)
 audio | Single Stream RWSD | .rwsd | [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/singleStreamRWSD/)
@@ -613,7 +615,7 @@ document | COMit Help | .h! | [strings](https://www.gnu.org/software/binutils/) 
 document | [Commodore BASIC](http://fileformats.archiveteam.org/wiki/Commodore_BASIC_tokenized_file) | .prg .bas | [detox64](https://github.com/vroby65/detox64) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/cbmBasic/)
 document | [Common Ground](http://fileformats.archiveteam.org/wiki/Common_Ground) | .dp | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/commonGround/) - Can probably only be converted properly with the Common Ground software itself, which I was unable to locate.
 document | [Corel/WordPerfect Presentations](http://fileformats.archiveteam.org/wiki/SHW_(Corel)) | .shw .mst .prt | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/corelPresentations/)
-document | [CorelSHOW Presentation](http://fileformats.archiveteam.org/wiki/SHW_(Corel)) | .shw | [deark](https://entropymine.com/deark/) | [9 sample files](https://sembiance.com/fileFormatSamples/document/corelSHOW/) - Deark only capable of extracting the thumbnail images for each slide using RIFF module. CorelSHOW worked on Win2k and played these, but I saw no easy way to export all slides.
+document | [CorelSHOW Presentation](http://fileformats.archiveteam.org/wiki/SHW_(Corel)) | .shw | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/corelSHOW/) - Deark only capable of extracting the thumbnail images for each slide using RIFF module. CorelSHOW worked on Win2k and played these, but I saw no easy way to export all slides.
 document | [CZ Help](http://fileformats.archiveteam.org/wiki/CZ_Help) | .hlp | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/czHelp/)
 document | Dac-Easy Word Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/dacEasyWordDocument/)
 document | Dagesh Document | .dgs | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/dageshDocument/)
@@ -1056,7 +1058,7 @@ image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | 
 image | [Extended DEGAS Image](http://fileformats.archiveteam.org/wiki/Extended_DEGAS_image) | .pi4 .pi5 .pi6 .pi7 .pi8 .pi9 | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/degasExtended/)
 image | [EZ-Art Professional](http://fileformats.archiveteam.org/wiki/EZ-Art_Professional) | .eza | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/eza/)
 image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .fcp .fpt | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/facePainter/)
-image | [FaceSaver](http://fileformats.archiveteam.org/wiki/FaceSaver) | .face .fac | [fstopgm](http://netpbm.sourceforge.net/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/faceSaver/)
+image | [FaceSaver](http://fileformats.archiveteam.org/wiki/FaceSaver) | .face .fac | [fstopgm](http://netpbm.sourceforge.net/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/faceSaver/)
 image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/faxx/)
 image | [Falcon True Color](http://fileformats.archiveteam.org/wiki/Falcon_True_Color) | .ftc | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/image/ftc/)
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/farbfeld/)
@@ -2032,7 +2034,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (981)
+## Text (983)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2170,6 +2172,7 @@ text | CADSTAR data (generic) | .rgf |  |
 text | Calamus ASCII Translation Table | .att |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/calamusASCIITranslationTable/)
 text | Call Of Duty weapons data |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/callOfDutyWeaponsData/)
 text | Canoma scene | .3dv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/canomaScene/)
+text | Canon Design Essentials printer info | .csc |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/canonDesignEssentialsPrinterInfo/)
 text | Cartoon Studio Script | .css |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cartoonStudioScript/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets) | .css |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/css/)
 text | Cashflow Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cashflowHelp/)
@@ -2289,7 +2292,7 @@ text | Emergency 3D model | .v3o |  | [2 sample files](https://sembiance.com/fil
 text | Emu48 keyboard configuration | .kml |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/emu48KeyboardConfiguration/)
 text | eMule Web Interface template | .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/eMuleWebInterfaceTemplate/)
 text | Enriched Text Document |  |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
-text | ENVI Header | .hdr |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/enviHeader/)
+text | ENVI Header | .hdr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/enviHeader/)
 text | ergo!pro Project | .prj |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ergoProProject/)
 text | ESRI Arc/Info Export | .e00 .x00 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
 text | ESRI Arc/View Project | .apr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
@@ -2391,7 +2394,7 @@ text | Gravis Firebird configuration | .fbd |  | [7 sample files](https://sembia
 text | Gui4CLI script | .g .gc |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/gui4CLIScript/)
 text | Hard Disk Menu System menu | .999 .000 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hardDiskMenuSystemMenu/)
 text | HelpScribble Project | .hsc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/helpScribbleProject/)
-text | HeroQuest Quest | .q09 .q10 .qst |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/heroQuestQuest/)
+text | HeroQuest Quest | .q09 .q10 .qst |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/heroQuestQuest/)
 text | High Voltage SID Collection update info | .hvs |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/highVoltageSIDCollectionUpdateInfo/)
 text | HiJaak video card configuration | .cfg .bin |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/hiJaakVideoCardConfiguration/)
 text | HMI Sound OS Configuration | .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hmiSoundOSConfiguration/)
@@ -2850,6 +2853,7 @@ text | SuperTux Music Meta | .music |  | [3 sample files](https://sembiance.com/
 text | SuperTux Sprite Meta | .sprite |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/superTuxSpriteMeta/)
 text | SuperTux World Map | .stwm |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/superTuxWorldMap/)
 text | SVGAVESA configuration | .svc |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/svgaVESAConfiguration/)
+text | SVN dump | .dump |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/svnDump/)
 text | T-RackS Preset | .trp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/tRackSPreset/)
 text | TASM instructions definition Table | .tab |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tasmInstructionsDefinitionTable/)
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
@@ -2931,7 +2935,7 @@ text | Visual Basic user-defined control file | .ctl |  | [12 sample files](http
 text | Visual C++ Workspace info | .wsp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/visualCPPWorkspaceInfo/)
 text | Visual J++ Project | .vjp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/visualJPPProject/)
 text | Visual Studio Project build log | .plg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioProjectBuildLog/)
-text | Visual Studio Setup and Deployment Project | .vdproj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioSetupAndDeploymentProject/)
+text | Visual Studio Setup and Deployment Project | .vdproj |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioSetupAndDeploymentProject/)
 text | Visual Studio wizard | .vsz |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioWizard/)
 text | Visual Thought diagram | .vthought |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visualThoughtDiagram/)
 text | VisualBasic Project | .vbp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicProjectText/)
@@ -2951,8 +2955,8 @@ text | WDDX packet |  |  | [14 sample files](https://sembiance.com/fileFormatSam
 text | Web browser cookies | .txt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
 text | Web Video Text Tracks | .vtt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)
-text | Wheel binary package format info |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatInfo/)
-text | Wheel binary package format Metadata |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatMetadata/)
+text | Wheel binary package format info |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatInfo/)
+text | Wheel binary package format Metadata |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatMetadata/)
 text | Wildfire Benoit Coordinates | .coords |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/wildfireBenoitCoordinates/)
 text | Wildfire Session | .session |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/wildfireSession/)
 text | WIN-SFV32 checksum  | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/winSFV32Checksum/)
@@ -3030,7 +3034,7 @@ video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) |
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/QuickTime) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) [qt_flatt](https://www.macdisk.com/quickten.php) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [quickTimePlayer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [xanim](https://github.com/Sembiance/xanim) | [31 sample files](https://sembiance.com/fileFormatSamples/video/mov/) - So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents. Early quicktime movies had the 'moov' section in the resource fork of the file and the 'mdat' section in the data fork. Sadly on my PC/Mac 'hybrid' CDs, the resource fork got stripped during mastering the PC side, so there is no 'moov' section on the PC files. Luckilly in these cases you can see they usually included an .avi alternative on the PC side, and of course the Mac side has the full quicktime movie, fully working. There are a handful of cases where the on a pure PC only CD there are 'dead' .mov files that are missing their 'moov' data, but there isn't anything really that can be done here. In theor it might be possible to train a generative AI model to examine tens of thousands of working quicktime .mov files, examining the 'mdat' section and seeing how it relates to the 'moov' section. Then maybe it would be possible to feed it some of these 'bare mdat' files and have it generate a 'moov' section that would work well enough to convert, but that's not something I'm capable of doing myself and it might not work anyways. Some more info about the issue: https://preservation.tylerthorsted.com/2023/10/06/quicktime-moov/ Finally, ffmpeg itself can't deal with MacBinary 2 versions of quicktime movies (these include both the mdat data fork and moov resource fork data in 1 file), but the 'qtflat' tool can flatten these into a video file ffmpeg can work with
 video | [Argonaut Video Sequence](https://wiki.multimedia.cx/index.php/AVS) | .avs | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/argonautVideoSequence/)
 video | [Ark of Time AN Video](https://wiki.multimedia.cx/index.php/Ark_of_Time_AN) | .an | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/arkOfTimeAN/)
-video | ASCARON Entertainment Animation | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/ascornEntertainmentAnimation/)
+video | ASCARON Entertainment Animation | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/ascornEntertainmentAnimation/)
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi .divx | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [xanim](https://github.com/Sembiance/xanim) | [18 sample files](https://sembiance.com/fileFormatSamples/video/avi/)
 video | [AVF Video](https://wiki.multimedia.cx/index.php/AVF) | .avf | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/avfVideo/)
 video | [Beam Software SIFF Video](https://wiki.multimedia.cx/index.php/SIFF) | .vb .vbc | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/beamSoftwareSIFF/)
@@ -3061,7 +3065,7 @@ video | [Fantavision Movie](http://fileformats.archiveteam.org/wiki/Fantavision)
 video | [Flash Video](http://fileformats.archiveteam.org/wiki/FLV) | .flv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/flv/)
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [ffmpeg](https://ffmpeg.org/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) [na_game_tool](https://nihav.org/game_tool.html) | [14 sample files](https://sembiance.com/fileFormatSamples/video/fli/)
-video | [FutureVision FST video](https://wiki.multimedia.cx/index.php?title=FutureVision_FST) | .fst | [na_game_tool](https://nihav.org/game_tool.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/futureVisionFSTVideo/)
+video | [FutureVision FST video](https://wiki.multimedia.cx/index.php?title=FutureVision_FST) | .fst | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/futureVisionFSTVideo/)
 video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [grasp4](https://winworldpc.com/product/fantavision/1x-dos) | [30 sample files](https://sembiance.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
 video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Digital_Video) | .gdv | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/gremlinDigitalVideo/)
 video | [Harro Media VDO video](https://wiki.multimedia.cx/index.php/Harrow_Media_VDO) | .vdo .vd | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/vdoVideo/)
@@ -3122,7 +3126,7 @@ video | [Westwood Studios Vector Quantized Animation](https://wiki.multimedia.cx
 video | [Windows Media Video](http://fileformats.archiveteam.org/wiki/WMV) | .wmv .asf .xesc | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/wmv/)
 video | [XBOX XMV Video](https://wiki.multimedia.cx/index.php?title=XMV) | .xmv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/xboxXMV/)
 video | [Xilam DERF Video](https://wiki.multimedia.cx/index.php/Xilam_DERF) | .vds .vdo | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/xilamDERFVideo/)
-video | Yo-Matias MXV | .mxv | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/yoMatiasMXV/)
+video | Yo-Matias MXV | .mxv | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/yoMatiasMXV/)
 video | [Zork PMV video](https://wiki.multimedia.cx/index.php/Zork_PMV) | .pmv | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/zorkPMVVideo/)
 video | [Zork RLF video](https://wiki.multimedia.cx/index.php/RLF) | .rlf | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/zorkRLFVideo/)
 

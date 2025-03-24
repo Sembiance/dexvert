@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,389)
+# Unsupported File Formats (3,391)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -271,7 +271,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (75)
+## Audio (76)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -299,6 +299,7 @@ Family/Format | Name | Extensions | Notes
 [audio/fmTownsSND](https://discmaster.textfiles.com/search?format=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?format=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?format=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
+[audio/huffmanCompressedAudio](https://discmaster.textfiles.com/search?format=huffmanCompressedAudio) | Huffman Compressed audio | .hcom | 
 [audio/hyperStudioSampledSound](https://discmaster.textfiles.com/search?format=hyperStudioSampledSound) | HyperStudio sampled sound |  | 
 [audio/iffSampledAudio](https://discmaster.textfiles.com/search?format=iffSampledAudio) | [IFF Sampled audio](https://wiki.amigaos.net/wiki/SAMP_IFF_Sampled_Sound) |  | 
 [audio/inrsTelecomAudio](https://discmaster.textfiles.com/search?format=inrsTelecomAudio) | INRS-Telecom audio | .aud | 
@@ -1100,7 +1101,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,203)
+## Other (2,204)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -2718,6 +2719,7 @@ Family/Format | Name | Extensions | Notes
 [other/quickTextTitles](https://discmaster.textfiles.com/search?format=quickTextTitles) | QuickText Titles |  | 
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?format=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/quickTimePreferences](https://discmaster.textfiles.com/search?format=quickTimePreferences) | QuickTime Preferences | .qtp | 
+[other/quiltBlock](https://discmaster.textfiles.com/search?format=quiltBlock) | Quilt block | .blk | 
 [other/rageDriver](https://discmaster.textfiles.com/search?format=rageDriver) | R.A.G.E. Driver | .rge | 
 [other/rabbitFirstChoiceGraph](https://discmaster.textfiles.com/search?format=rabbitFirstChoiceGraph) | Rabbit/First Choice Graph | .mod | 
 [other/radianceOctree](https://discmaster.textfiles.com/search?format=radianceOctree) | Radiance Octree | .oct | 

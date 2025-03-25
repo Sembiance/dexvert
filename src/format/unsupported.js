@@ -1826,6 +1826,8 @@ export default
 		amosDatasBank                            : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format", /^AMOS Basic memory bank.* type Data$/]},
 		amosWorkBank                             : {name : "AMOS Work Bank", ext : [".abk"], magic : ["AMOS Work Bank"]},
 		androidPackageResource                   : {name : "Android Package Resource", ext : [".arsc"], magic : ["Android Package Resource"], weakMagic : true},
+		anFXJavaMovie                            : {name : "AnFX Java Movie", ext : [".afx"], magic : ["AnFX Java Movie"], weakMagic : true},
+		anFXJProject                             : {name : "AnFX Project", ext : [".afd"], magic : ["AnFX Project"], weakMagic : true},
 		aniMouseTutorial                         : {name : "AniMouse Tutorial", ext : [".sdemo"], magic : ["AniMouse Tutorial"]},
 		ansiINCIT378FingerprintsFormat           : {name : "ANSI/INCIT 378 fingerprints format (gen)", ext : [".dat", ".fmrpiv"], magic : ["ANSI/INCIT 378 fingerprints format (gen)", "ISO/IEC 19794-2 Format Minutiae Record (FMR)"], weakMagic : true},
 		avcHDClipInformation                     : {name : "AVCHD Clip Information", ext : [".cpi"], magic : ["AVCHD Clip Information", /^fmt\/1054( |$)/], weakMagic : true},

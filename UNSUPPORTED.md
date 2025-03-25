@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,391)
+# Unsupported File Formats (3,393)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1101,7 +1101,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,204)
+## Other (2,206)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1273,6 +1273,8 @@ Family/Format | Name | Extensions | Notes
 [other/amosDatasBank](https://discmaster.textfiles.com/search?format=amosDatasBank) | AMOS Datas Bank | .abk | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/amosDatasBank/)
 [other/amosWorkBank](https://discmaster.textfiles.com/search?format=amosWorkBank) | AMOS Work Bank | .abk | 
 [other/androidPackageResource](https://discmaster.textfiles.com/search?format=androidPackageResource) | Android Package Resource | .arsc | 
+[other/anFXJavaMovie](https://discmaster.textfiles.com/search?format=anFXJavaMovie) | AnFX Java Movie | .afx | 
+[other/anFXJProject](https://discmaster.textfiles.com/search?format=anFXJProject) | AnFX Project | .afd | 
 [other/aniMouseTutorial](https://discmaster.textfiles.com/search?format=aniMouseTutorial) | AniMouse Tutorial | .sdemo | 
 [other/ansiINCIT378FingerprintsFormat](https://discmaster.textfiles.com/search?format=ansiINCIT378FingerprintsFormat) | ANSI/INCIT 378 fingerprints format (gen) | .dat .fmrpiv | 
 [other/aolPreferencesOrFilingCabinet](https://discmaster.textfiles.com/search?format=aolPreferencesOrFilingCabinet) | AOL Preferences/Personal Filing Cabinet | .pfc .org | 

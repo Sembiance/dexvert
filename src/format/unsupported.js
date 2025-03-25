@@ -159,6 +159,7 @@ export default
 		installationPackage                         : {name : "Installation package", ext : [".d01"], magic : ["Installation package"], weakMagic : true},
 		internetExplorerCache                       : {name : "Internet Explorer cache", magic : ["Internet Explorer for Mac cached data", /^fmt\/500( |$)/]},
 		izPackArchive                               : {name : "IzPack Archive", magic : ["Archive: IzPack"]},
+		j2MERecordStore                             : {name : "J2ME RecordStore", ext : [".db"], magic : ["J2ME RecordStore"]},
 		kuaiZipCompressedArchive                    : {name : "KuaiZip compressed archive", ext : [".kz"], magic : ["KuaiZip compressed archive"]},
 		kudoDataBaseCatalog                         : {name : "Kudo Data Base catalog", ext : [".kdb"], magic : ["Kudo Data Base catalog"]},
 		leadTechnologiesCompressedArchive           : {name : "Lead Technologies compressed Archive", ext : [".lta"], magic : ["Lead Technologies compressed Archive"], weakMagic : true},

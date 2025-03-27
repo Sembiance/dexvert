@@ -9,6 +9,9 @@ export default async function README(xlog)
 	await initPrograms(xlog);
 	await initFormats(xlog);
 
+	const samplesFileCount = (await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nodir : true})).length;
+	const samplesFormatCount = (await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nofile : true})).length;
+
 	const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 
 	xlog.info`Writing README.md to disk...`;
@@ -22,5 +25,7 @@ Utilizes **${Object.keys(programs).length.toLocaleString()}** helper programs ru
 [discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly, submit an issue.
 
 This project is not currently ready for public use.
+
+You can find ${samplesFileCount.toLocaleString()} sample files for ${samplesFormatCount.toLocaleString()} formats at [sembiance.com/fileFormatSamples](https://sembiance.com/fileFormatSamples/)
 `);
 }

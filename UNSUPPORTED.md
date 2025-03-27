@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,394)
+# Unsupported File Formats (3,398)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1102,7 +1102,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,206)
+## Other (2,209)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1806,6 +1806,7 @@ Family/Format | Name | Extensions | Notes
 [other/expePointSet](https://discmaster.textfiles.com/search?format=expePointSet) | Expe PointSet | .pts | 
 [other/expressSCHSchematic](https://discmaster.textfiles.com/search?format=expressSCHSchematic) | ExpressSCH schematic | .sch | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?format=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
+[other/extendedVectorAnimation](https://discmaster.textfiles.com/search?format=extendedVectorAnimation) | Extended Vector Animation | .eva .evt | 
 [other/extensibleStorageEngineDataBase](https://discmaster.textfiles.com/search?format=extensibleStorageEngineDataBase) | Extensible Storage Engine DataBase | .edb .sdb | 
 [other/extraForWindowsAPLKeymap](https://discmaster.textfiles.com/search?format=extraForWindowsAPLKeymap) | Extra! for Windows APL keymap | .apl | 
 [other/extraForWindowsBinaryCompiledMacro](https://discmaster.textfiles.com/search?format=extraForWindowsBinaryCompiledMacro) | Extra! for Windows Binary/compiled Macro | .ebm | 
@@ -2225,7 +2226,7 @@ Family/Format | Name | Extensions | Notes
 [other/macromediaXtraCache](https://discmaster.textfiles.com/search?format=macromediaXtraCache) | Macromedia Xtra Cache | .mch | 
 [other/madden2004DataFile](https://discmaster.textfiles.com/search?format=madden2004DataFile) | Madden 2004 data file | .dat | 
 [other/madeEngineDB](https://discmaster.textfiles.com/search?format=madeEngineDB) | MADE Engine DB | .dat | 
-[other/mADEEngineGameDataArchive](https://discmaster.textfiles.com/search?format=mADEEngineGameDataArchive) | MADE Engine game data archive | .blk | 
+[other/madeEngineGameDataArchive](https://discmaster.textfiles.com/search?format=madeEngineGameDataArchive) | MADE Engine game data archive | .blk | 
 [other/madeProjectGame](https://discmaster.textfiles.com/search?format=madeProjectGame) | MADE Engine/Project/game | .prj | 
 [other/maestroMusic](https://discmaster.textfiles.com/search?format=maestroMusic) | Maestro Music |  | 
 [other/maggiData](https://discmaster.textfiles.com/search?format=maggiData) | MAGGI data | .hhh | 
@@ -2247,6 +2248,7 @@ Family/Format | Name | Extensions | Notes
 [other/mapleCommonBinary](https://discmaster.textfiles.com/search?format=mapleCommonBinary) | Maple Common Binary | .m | 
 [other/mapleHelpDatabase](https://discmaster.textfiles.com/search?format=mapleHelpDatabase) | Maple Help Database | .hdb | 
 [other/mapleLibrary](https://discmaster.textfiles.com/search?format=mapleLibrary) | Maple Library | .lib | 
+[other/mapleStoryGameData](https://discmaster.textfiles.com/search?format=mapleStoryGameData) | MapleStory game data | .wz | 
 [other/marvinsMarvellousAdventureMap](https://discmaster.textfiles.com/search?format=marvinsMarvellousAdventureMap) | Marvin's Marvellous Adventure Map | .mlev | 
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?format=masiMusicDriver) | MASI Music Driver | .mus | 
 [other/masterTracksProPreferences](https://discmaster.textfiles.com/search?format=masterTracksProPreferences) | Master Tracks Pro Preferences | .mtp | 
@@ -2314,6 +2316,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftCueCardsData](https://discmaster.textfiles.com/search?format=microsoftCueCardsData) | Microsoft Cue Cards data | .cue | 
 [other/microsoftDirectInputFFE](https://discmaster.textfiles.com/search?format=microsoftDirectInputFFE) | Microsoft DirectInput Force Feedback Effect | .ffe | 
 [other/microsoftDierctMusicSegments](https://discmaster.textfiles.com/search?format=microsoftDierctMusicSegments) | Microsoft DirectMusic Segments Type | .sgt | 
+[other/expressionMediaCatalog](https://discmaster.textfiles.com/search?format=expressionMediaCatalog) | Microsoft Expression Media Catalog | .ivc .mpcatalog | 
 [other/microsoftFastFindStatus](https://discmaster.textfiles.com/search?format=microsoftFastFindStatus) | Microsoft Fast Find status | .ffa | 
 [other/microsoftFastFindIndex](https://discmaster.textfiles.com/search?format=microsoftFastFindIndex) | Microsoft FastFind Index | .ffx | 
 [other/microsoftGolfReplay](https://discmaster.textfiles.com/search?format=microsoftGolfReplay) | Microsoft Golf Replay | .rpl | 
@@ -3314,7 +3317,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (85)
+## Poly (86)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3355,6 +3358,7 @@ Family/Format | Name | Extensions | Notes
 [poly/granny3DModel](https://discmaster.textfiles.com/search?format=granny3DModel) | [Granny 3D Model](http://fileformats.archiveteam.org/wiki/COLLADA) | .gr2 | I tried using https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x but it didn't work for any of the old GR2 models I gave it. Found another imported but it says it only works for Metin2 game models
 [poly/hardTruck3DModel](https://discmaster.textfiles.com/search?format=hardTruck3DModel) | Hard Truck 3D model | .b3d | 
 [poly/hexagonModel](https://discmaster.textfiles.com/search?format=hexagonModel) | Hexagon model | .hxn | 
+[poly/hoops3DStreamFormat](https://discmaster.textfiles.com/search?format=hoops3DStreamFormat) | HOOPS 3D Stream Format | .hsf | 
 [poly/ibmCAD3XDrawing](https://discmaster.textfiles.com/search?format=ibmCAD3XDrawing) | IBM CAD/3X drawing | .dwg | 
 [poly/infiniDScene](https://discmaster.textfiles.com/search?format=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
 [poly/irit3DModel](https://discmaster.textfiles.com/search?format=irit3DModel) | IRIT 3D model | .irt .dat | 

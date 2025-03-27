@@ -1,4 +1,4 @@
-# Supported File Formats (3,066)
+# Supported File Formats (3,067)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -2034,7 +2034,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (988)
+## Text (989)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2293,7 +2293,8 @@ text | Emu48 keyboard configuration | .kml |  | [4 sample files](https://sembian
 text | eMule Web Interface template | .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/eMuleWebInterfaceTemplate/)
 text | Enriched Text Document |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
 text | ENVI Header | .hdr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/enviHeader/)
-text | ergo!pro Project | .prj |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ergoProProject/)
+text | ergo!pro BubbleGEM Help | .bub |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ergoProBubbleGEMHelp/)
+text | ergo!pro Project | .prj |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ergoProProject/)
 text | ESRI Arc/Info Export | .e00 .x00 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExport/)
 text | ESRI Arc/View Project | .apr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriArcViewProject/)
 text | ESRI ArcInfo DAT File (External) | .dat |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/esriArcInfoExternalDAT/)

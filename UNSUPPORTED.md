@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,453)
+# Unsupported File Formats (3,455)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1110,7 +1110,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,254)
+## Other (2,256)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1321,6 +1321,7 @@ Family/Format | Name | Extensions | Notes
 [other/artEffectBrush](https://discmaster.textfiles.com/search?format=artEffectBrush) | ArtEffect Brush |  | 
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?format=artEffectConvolution) | ArtEffect Convolution |  | 
 [other/artlineSymbolFile](https://discmaster.textfiles.com/search?format=artlineSymbolFile) | Artline Symbol File | .syf | 
+[other/arxelGameDataContainer](https://discmaster.textfiles.com/search?format=arxelGameDataContainer) | Arxel game data container | .at3 | 
 [other/ascaronEntertainmentGameData](https://discmaster.textfiles.com/search?format=ascaronEntertainmentGameData) | ASCARON Entertainment game data | .ewp .ewu .ewm ._dm | 
 [other/asciiFontMetrics](https://discmaster.textfiles.com/search?format=asciiFontMetrics) | ASCII Font Metrics | .afm | 
 [other/ashampooPhotoCommanderDocument](https://discmaster.textfiles.com/search?format=ashampooPhotoCommanderDocument) | Ashampoo Photo Commander Document | .apcdoc | 
@@ -2389,6 +2390,7 @@ Family/Format | Name | Extensions | Notes
 [other/mightyDrawDOSLibrary](https://discmaster.textfiles.com/search?format=mightyDrawDOSLibrary) | Mighty Draw DOS library | .mdl | 
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?format=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
 [other/miniCAD](https://discmaster.textfiles.com/search?format=miniCAD) | MiniCAD | .mcd .sta | 
+[other/mioMotionMovie](https://discmaster.textfiles.com/search?format=mioMotionMovie) | MioMotion movie | .mio | 
 [other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?format=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 
 [other/mirrorIIEmulationFile](https://discmaster.textfiles.com/search?format=mirrorIIEmulationFile) | Mirror II Emulation File | .mef | 
 [other/missionPatch](https://discmaster.textfiles.com/search?format=missionPatch) | Mission Patch | .pat | 

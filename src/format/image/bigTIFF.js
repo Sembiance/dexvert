@@ -4,9 +4,9 @@ export class bigTIFF extends Format
 {
 	name           = "BigTIFF";
 	website        = "http://fileformats.archiveteam.org/wiki/BigTIFF";
-	ext            = [".tif", ".tiff"];
+	ext            = [".tif", ".tiff", ".zif"];
 	forbidExtMatch = true;
-	magic          = [/^Big TIFF image data/, /^fmt\/1917( |$)/];
+	magic          = ["ZoomifyImageFormat bitmap", /^Big TIFF image data/, /^fmt\/1917( |$)/];
 	metaProvider   = ["image"];
 	converters     = ["convert", "iio2png", "deark[module:BigTIFF]"];
 }

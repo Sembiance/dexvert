@@ -1700,6 +1700,7 @@ export const WEAK_VALUES =
 	/^BlueEyes Animation$/,
 	/^Bochs configuration \(with rem\)$/,
 	/^Borland Reflex Screen driver$/,
+	/^BrioQuery$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,
 	/^Cal3D (Xml )?material File$/,
 	/^Call of Duty map/,

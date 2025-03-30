@@ -7,6 +7,7 @@ export class bink extends Format
 	ext            = [".bik", ".bik2", ".bk2"];
 	forbidExtMatch = true;
 	magic          = [/^Bink2? [Vv]ideo/, "video/vnd.radgamettools.bink", "Bink (bink)", /^fmt\/731( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="BINK" && macFileCreator==="BINK";
 	metaProvider   = ["mplayer"];
 	converters     = ["ffmpeg"];
 }

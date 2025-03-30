@@ -798,6 +798,7 @@ export default
 		pv3DEffect                                 : {name : "PV3D Effect", ext : [".eff"], magic : ["PV3D Effect"]},
 		pV3DSceneDescription                       : {name : "PV3D scene description", ext : [".pvd"], magic : ["PV3D scene description data"], weakMagic : true},
 		pv3DValueData                              : {name : "PV3D Value data", ext : [".val"], magic : ["PV3D Value data"], weakMagic : true},
+		q0BitmapGraphicHeaderInfo                  : {name : "Q0 bitmap graphic header info", ext : [".fal"], magic : ["Q0 bitmap graphic header info"], weakMagic : true},
 		qaPlusKeyboardMap                          : {name : "QAPlus Keyboard Map", ext : [".kbd"], magic : ["QAPlus Keyboard Map"]},
 		qimageFilter                               : {name : "Qimage Filter", ext : [".flt"], magic : ["Qimage Filter"], weakMagic : true},
 		quakeISave                                 : {name : "Quake I save", ext : [".sav"], magic : [/^Quake I save/], weakMagic : true},

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,455)
+# Unsupported File Formats (3,465)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (263)
+## Archive (266)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -83,6 +83,7 @@ Family/Format | Name | Extensions | Notes
 [archive/djpPacked](https://discmaster.textfiles.com/search?format=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?format=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/dragonUnPACKer5PluginPackage](https://discmaster.textfiles.com/search?format=dragonUnPACKer5PluginPackage) | Dragon UnPACKer 5 Plugin Package | .d5p | 
+[archive/drakanOrderOfTheFlameSavedGame](https://discmaster.textfiles.com/search?format=drakanOrderOfTheFlameSavedGame) | Drakan: Order Of The Flame Saved Game | .rsg .rlt | 
 [archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
@@ -153,6 +154,7 @@ Family/Format | Name | Extensions | Notes
 [archive/microtan65Dump](https://discmaster.textfiles.com/search?format=microtan65Dump) | Microtan 65 dump | .m65 | 
 [archive/mifDiskImage](https://discmaster.textfiles.com/search?format=mifDiskImage) | MIF disk image |  | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?format=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
+[archive/moofDiskImage](https://discmaster.textfiles.com/search?format=moofDiskImage) | MOOF Macintosh floppy disk image | .moof | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moofDiskImage/)
 [archive/mpq](https://discmaster.textfiles.com/search?format=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/mpressPacked](https://discmaster.textfiles.com/search?format=mpressPacked) | MPRESS Packed | .exe | 
 [archive/mskn2Archive](https://discmaster.textfiles.com/search?format=mskn2Archive) | MSKN 2 Archive | .mskn | 
@@ -258,6 +260,7 @@ Family/Format | Name | Extensions | Notes
 [archive/windevCompressedArchive](https://discmaster.textfiles.com/search?format=windevCompressedArchive) | WINDEV compressed archive | .wdz | 
 [archive/winDupeDiskImage](https://discmaster.textfiles.com/search?format=winDupeDiskImage) | WinDupe disk image | .wdf | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?format=wordPerfectInstallArchive) | WordPerfect install archive |  | 
+[archive/wozDiskImage](https://discmaster.textfiles.com/search?format=wozDiskImage) | WOZ disk image | .woz | 
 [archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?format=wwarpDiskImage) | WWarp Disk Image | .wwp | 
 [archive/x64DiskImage](https://discmaster.textfiles.com/search?format=x64DiskImage) | X64 Disk Image | .x64 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/x64DiskImage/)
@@ -730,7 +733,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (200)
+## Image (201)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -800,6 +803,7 @@ Family/Format | Name | Extensions | Notes
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?format=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
 [image/eclipseTILEBitmap](https://discmaster.textfiles.com/search?format=eclipseTILEBitmap) | Eclipse TILE bitmap | .tile | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
+[image/expertDrawDrawing](https://discmaster.textfiles.com/search?format=expertDrawDrawing) | ExpertDraw drawing |  | 
 [image/fastCADForWindowsDrawing](https://discmaster.textfiles.com/search?format=fastCADForWindowsDrawing) | FastCAD for Windows drawing | .fct .fcw .fsc | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?format=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?format=fastRayMaterial) | FastRay material/surface |  | 
@@ -1110,7 +1114,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,256)
+## Other (2,261)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1205,6 +1209,7 @@ Family/Format | Name | Extensions | Notes
 [other/advancedLayouterProject](https://discmaster.textfiles.com/search?format=advancedLayouterProject) | Advanced Layouter project | .lay | 
 [other/advantageDataServerTable](https://discmaster.textfiles.com/search?format=advantageDataServerTable) | Advantage Data Server table | .adt | 
 [other/adventureGameStudio](https://discmaster.textfiles.com/search?format=adventureGameStudio) | Adventure Game Studio | .dat | 
+[other/adventureGameStudioSavedGame](https://discmaster.textfiles.com/search?format=adventureGameStudioSavedGame) | Adventure Game Studio saved game |  | 
 [other/adventureGameStudioTranslationData](https://discmaster.textfiles.com/search?format=adventureGameStudioTranslationData) | Adventure Game Studio Translation data | .tra | 
 [other/adventureGameToolkitStrings](https://discmaster.textfiles.com/search?format=adventureGameToolkitStrings) | Adventure Game Toolkit Strings | .d$$ | 
 [other/aegisImpactGraph](https://discmaster.textfiles.com/search?format=aegisImpactGraph) | Aegis Impact! Graph | .gph | 
@@ -1786,6 +1791,7 @@ Family/Format | Name | Extensions | Notes
 [other/eclipseImage](https://discmaster.textfiles.com/search?format=eclipseImage) | Eclipse Image | .img | 
 [other/eclipseTutorial](https://discmaster.textfiles.com/search?format=eclipseTutorial) | Eclipse Tutorial | .tut | 
 [other/ecxModule](https://discmaster.textfiles.com/search?format=ecxModule) | ECX module | .m | 
+[other/egoEngineGameDataContainer](https://discmaster.textfiles.com/search?format=egoEngineGameDataContainer) | EGO Engine game data container | .bdl | 
 [other/egoEngineTextures](https://discmaster.textfiles.com/search?format=egoEngineTextures) | EGO Engine Textures | .pssg | 
 [other/egsSpectraPaintStencil](https://discmaster.textfiles.com/search?format=egsSpectraPaintStencil) | EGS-SpectraPaint Stencil | .stencil | 
 [other/eicarAntivirusTestFile](https://discmaster.textfiles.com/search?format=eicarAntivirusTestFile) | EICAR antivirus test file | .com | 
@@ -2714,6 +2720,7 @@ Family/Format | Name | Extensions | Notes
 [other/proENGINEERFile](https://discmaster.textfiles.com/search?format=proENGINEERFile) | Pro/ENGINEER file | .dat | 
 [other/proCiteData](https://discmaster.textfiles.com/search?format=proCiteData) | ProCite data | .pdt .pos | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?format=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
+[other/professionalMusicDriverSamplesPack](https://discmaster.textfiles.com/search?format=professionalMusicDriverSamplesPack) | Professional Music Driver PVI/PZI samples pack | .pvi .pzi | 
 [other/profiInstallProject](https://discmaster.textfiles.com/search?format=profiInstallProject) | Profi Install Project | .ipj | 
 [other/programmingObjectFile](https://discmaster.textfiles.com/search?format=programmingObjectFile) | Programming Object File | .pof | 
 [other/projectIGIResourceData](https://discmaster.textfiles.com/search?format=projectIGIResourceData) | Project IGI Resource data | .res | 
@@ -2884,6 +2891,7 @@ Family/Format | Name | Extensions | Notes
 [other/simulmondoLocalizedGameStrings](https://discmaster.textfiles.com/search?format=simulmondoLocalizedGameStrings) | Simulmondo localized game strings | .kfr .ksp .kgr .kuk .kit | 
 [other/simutransObjectPackage](https://discmaster.textfiles.com/search?format=simutransObjectPackage) | Simutrans object package | .pak | 
 [other/siscadpData](https://discmaster.textfiles.com/search?format=siscadpData) | SISCAD-P data | .zra .sfd .red | 
+[other/sisthemaPersonalSystem](https://discmaster.textfiles.com/search?format=sisthemaPersonalSystem) | Sisthema Personal System | .sth | 
 [other/sKickRelocationTable](https://discmaster.textfiles.com/search?format=sKickRelocationTable) | SKick Relocation/patch Table | .rtb | 
 [other/skincrafterSkin](https://discmaster.textfiles.com/search?format=skincrafterSkin) | skincrafter skin | .skf | 
 [other/skinMagicSkin](https://discmaster.textfiles.com/search?format=skinMagicSkin) | SkinMagic Skin |  | 
@@ -3342,6 +3350,7 @@ Family/Format | Name | Extensions | Notes
 [other/xlr8SentryChipComposorVoiceSet](https://discmaster.textfiles.com/search?format=xlr8SentryChipComposorVoiceSet) | XLR8 - Sentry Chip Composor VoiceSet | .xvs | 
 [other/xpcomTypeLibrary](https://discmaster.textfiles.com/search?format=xpcomTypeLibrary) | XPCOM Type Library | .xpt | 
 [other/xTreeGoldGraphicsDriver](https://discmaster.textfiles.com/search?format=xTreeGoldGraphicsDriver) | XTreeGold graphics Driver | .drv | 
+[other/xzpContainerFormat](https://discmaster.textfiles.com/search?format=xzpContainerFormat) | XZP container format |  | 
 [other/yabBaseballGameData](https://discmaster.textfiles.com/search?format=yabBaseballGameData) | YAB! Baseball game data | .dat | 
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?format=yafaCompressionOptions) | YAFA Compression Options |  | 
 [other/yahooWidget](https://discmaster.textfiles.com/search?format=yahooWidget) | Yahoo! Widget | .widget | 
@@ -3466,7 +3475,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (49)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3485,6 +3494,7 @@ Family/Format | Name | Extensions | Notes
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/dvmVideo](https://discmaster.textfiles.com/search?format=dvmVideo) | [DVM video](http://fileformats.archiveteam.org/wiki/DVM) | .dvm | 
 [video/emblazeVideo2](https://discmaster.textfiles.com/search?format=emblazeVideo2) | Emblaze Video 2 | .ev2 | [1 sample file](https://sembiance.com/fileFormatSamples/video/emblazeVideo2/)
+[video/evaVideo](https://discmaster.textfiles.com/search?format=evaVideo) | EVA3/EVA5 video | .eva | [3 sample files](https://sembiance.com/fileFormatSamples/video/evaVideo/)
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?format=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?format=iavfVideo) | IAVF video | .avi .iavf | 

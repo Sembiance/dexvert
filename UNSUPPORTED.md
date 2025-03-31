@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,465)
+# Unsupported File Formats (3,472)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -940,7 +940,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (168)
+## Music (169)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -970,6 +970,7 @@ Family/Format | Name | Extensions | Notes
 [music/cmsOrgan](https://discmaster.textfiles.com/search?format=cmsOrgan) | [Creative Music System Intelligent Organ File](https://vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
 [music/cubaseSong](https://discmaster.textfiles.com/search?format=cubaseSong) | [Cubase Song](http://fileformats.archiveteam.org/wiki/ALL) | .all | [1 sample file](https://sembiance.com/fileFormatSamples/music/cubaseSong/)
 [music/cyberTracker64Chiptune](https://discmaster.textfiles.com/search?format=cyberTracker64Chiptune) | CyberTracker 64 Chiptune | .ct | 
+[music/cybertrackerModule](https://discmaster.textfiles.com/search?format=cybertrackerModule) | Cybertracker module | .song | 
 [music/iffCMUS](https://discmaster.textfiles.com/search?format=iffCMUS) | DeLuxe Music CMUS | .dmcs .iff | [2 sample files](https://sembiance.com/fileFormatSamples/music/iffCMUS/)
 [music/deluxeMusicConstructionSetMusic](https://discmaster.textfiles.com/search?format=deluxeMusicConstructionSetMusic) | Deluxe Music Construction Set music |  | 
 [music/deLuxeMusicScore](https://discmaster.textfiles.com/search?format=deLuxeMusicScore) | DeLuxe Music Score |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
@@ -1114,7 +1115,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,261)
+## Other (2,267)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1568,6 +1569,7 @@ Family/Format | Name | Extensions | Notes
 [other/codeWarriorTargetData](https://discmaster.textfiles.com/search?format=codeWarriorTargetData) | CodeWarrior Target Data | .tdt | 
 [other/coffLibrary](https://discmaster.textfiles.com/search?format=coffLibrary) | COFF Library | .lib .obj .a | 
 [other/collectorzDotComMovieCollectorData](https://discmaster.textfiles.com/search?format=collectorzDotComMovieCollectorData) | Collectorz.com Movie Collector data | .mvc | 
+[other/colorFontMakerPattern](https://discmaster.textfiles.com/search?format=colorFontMakerPattern) | Color Font Maker pattern | .cfm | 
 [other/combustion2ParticleLibrary](https://discmaster.textfiles.com/search?format=combustion2ParticleLibrary) | Combustion 2 Particle Library | .elc | 
 [other/comicBookCreatorBackground](https://discmaster.textfiles.com/search?format=comicBookCreatorBackground) | Comic Book Creator Background | .bin | 
 [other/comicBookCreatorShapeTable](https://discmaster.textfiles.com/search?format=comicBookCreatorShapeTable) | Comic Book Creator shape Table | .tbl .frm .bin | 
@@ -2625,6 +2627,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcAnywhere](https://discmaster.textfiles.com/search?format=pcAnywhere) | PCAnywhere Data | .bhf | 
 [other/pcbBinaryFile](https://discmaster.textfiles.com/search?format=pcbBinaryFile) | PCB Binary file | .pcb | 
 [other/pcbLayout](https://discmaster.textfiles.com/search?format=pcbLayout) | PCB Layout | .ly | 
+[other/pcloCADSilkscreen](https://discmaster.textfiles.com/search?format=pcloCADSilkscreen) | PCLO CAD Silkscreen | .silk | 
 [other/pcpArchiveIndex](https://discmaster.textfiles.com/search?format=pcpArchiveIndex) | PCP archive index | .index | 
 [other/pcpArchiveLog](https://discmaster.textfiles.com/search?format=pcpArchiveLog) | PCP archive log | .0 | 
 [other/pcpArchiveMetadata](https://discmaster.textfiles.com/search?format=pcpArchiveMetadata) | PCP archive metadata | .meta | 
@@ -2878,8 +2881,10 @@ Family/Format | Name | Extensions | Notes
 [other/sibeliusScorch](https://discmaster.textfiles.com/search?format=sibeliusScorch) | Sibelius Scorch | .sco | 
 [other/civilizationFile](https://discmaster.textfiles.com/search?format=civilizationFile) | Sid Meier's Civilization File | .pal .pic | 
 [other/siegfriedAntiviruData](https://discmaster.textfiles.com/search?format=siegfriedAntiviruData) | Siegfried Antivirus Professional virus data | .brainfile | 
+[other/siegfriedData](https://discmaster.textfiles.com/search?format=siegfriedData) | Siegfried data | .data | 
 [other/siemensTIAPLCFile](https://discmaster.textfiles.com/search?format=siemensTIAPLCFile) | Siemens TIA PLC File | .plf | 
 [other/sciDriver](https://discmaster.textfiles.com/search?format=sciDriver) | Sierra Creative Interpreter Driver | .drv | 
+[other/sigfriedAntivirusPreferences](https://discmaster.textfiles.com/search?format=sigfriedAntivirusPreferences) | Sigfried Antivirus Professional Preferences | .prefs | 
 [other/silentHunterEnvironmentData](https://discmaster.textfiles.com/search?format=silentHunterEnvironmentData) | Silent Hunter Environment data | .env | 
 [other/silentHunterSceneryData](https://discmaster.textfiles.com/search?format=silentHunterSceneryData) | Silent Hunter Scenery data | .scn | 
 [other/silentHunterWorldData](https://discmaster.textfiles.com/search?format=silentHunterWorldData) | Silent Hunter World data | .wld | 
@@ -3141,6 +3146,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboProfilerAreasData](https://discmaster.textfiles.com/search?format=turboProfilerAreasData) | Turbo Profiler Areas data | .tfa | 
 [other/turboCalcLibrary](https://discmaster.textfiles.com/search?format=turboCalcLibrary) | TurboCalc Library | .tclib | 
 [other/turboPrintColorProfile](https://discmaster.textfiles.com/search?format=turboPrintColorProfile) | TurboPrint color profile | .tpm | 
+[other/turboprintWizard](https://discmaster.textfiles.com/search?format=turboprintWizard) | Turboprint Wizard | .wizard | 
 [other/turtleBeachPinnacleSoundBank](https://discmaster.textfiles.com/search?format=turtleBeachPinnacleSoundBank) | Turtle Beach Pinnacle sound Bank | .pbf | 
 [other/tvgenialSkin](https://discmaster.textfiles.com/search?format=tvgenialSkin) | TVgenial Skin | .tvgskin .hpk | 
 [other/tvPaintProject](https://discmaster.textfiles.com/search?format=tvPaintProject) | TVPaint Project | .tvpp .deep .aur | 
@@ -3149,6 +3155,7 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?format=typeLibrary) | Type Library | .tlb | 
 [other/urbanTheCyborgProjectGameData](https://discmaster.textfiles.com/search?format=urbanTheCyborgProjectGameData) | U.R.B.A.N The Cyborg Project game data | .dat | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?format=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
+[other/ucDOSOverlay](https://discmaster.textfiles.com/search?format=ucDOSOverlay) | UCDOS Overlay | .db | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?format=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/photoImpactPresets](https://discmaster.textfiles.com/search?format=photoImpactPresets) | Ulead Photo Impact Presets | .smp | 
 [other/ultiboardLibrary](https://discmaster.textfiles.com/search?format=ultiboardLibrary) | ULTIboard Library | .hlp | 

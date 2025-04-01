@@ -825,7 +825,7 @@ export const WEAK_VALUES =
 	/^New Line Delimited JSON text data/,
 	/^NeXT version 1 disklabel/,
 	/^Nim source code/,
-	/^Nintendo 3DS BCSTM audio file/,
+	/^Nintendo 3DS (BCSTM|BCWAV) audio file/,
 	/^Nintendo Badge Arcade badge/,
 	/^Nintendo DS MPEG Video$/,
 	/^Nintendo Gameboy Music\/Audio Data/,

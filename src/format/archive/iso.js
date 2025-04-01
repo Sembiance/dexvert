@@ -37,7 +37,7 @@ export class iso extends Format
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
 	forbidExtMatch = [".img", ".bin"];	// way too common
 
-	magic          = [
+	magic = [
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660", "PC-98 ISO",
 		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS", "Xbox DVD file system",
 		/^ISO 9660$/, /^UDF recognition sequence.*ISO9660/, /^fmt\/(468|1738)( |$)/,
@@ -58,22 +58,22 @@ export class iso extends Format
 		PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs as each CD's data tracks are different per game.
 		NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)`;
 
-	auxFiles     = (input, otherFiles) =>
+	auxFiles = (input, otherFiles) =>
 	{
-		const otherExts = [".cue", ".toc"];
+		const otherExts = [".cue", ".toc", ".ccd"];
 		let matches;
 
-		// Priority #1: Files with the same name, but ending in .cue or .toc
+		// Priority #1: Files with the same name, but ending in a otherExts
 		matches = otherFiles.filter(otherFile => otherExts.map(ext => input.name.toLowerCase() + ext).includes(otherFile.base.toLowerCase()));
 		if(matches.length>0)
 			return matches;
 
-		// Priority #2: Files with the same name including extension and ending in .cue or .toc
+		// Priority #2: Files with the same name including extension and ending in a otherExts
 		matches = otherFiles.filter(otherFile => otherExts.map(ext => input.base.toLowerCase() + ext).includes(otherFile.base.toLowerCase()));
 		if(matches.length>0)
 			return matches;
 
-		// Priority #3: Files with the same name (further stripping of extension) and ending in .cue or .toc
+		// Priority #3: Files with the same name (further stripping of extension) and ending in a otherExts
 		matches = otherFiles.filter(otherFile => otherExts.map(ext => path.basename(input.name, path.extname(input.name)).toLowerCase() + ext).includes(otherFile.base.toLowerCase()));
 		if(matches.length>0)
 			return matches;

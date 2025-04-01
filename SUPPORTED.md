@@ -1,11 +1,11 @@
-# Supported File Formats (3,079)
+# Supported File Formats (3,080)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (455)
+## Archive (456)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -90,6 +90,7 @@ archive | [ChiefLZ LZA Archive](http://fileformats.archiveteam.org/wiki/ChiefLZ)
 archive | [ChiefLZ LZA Compressed](http://fileformats.archiveteam.org/wiki/ChiefLZ) | _ | [lza](https://www.sac.sk/download/pack/lza101.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/chiefLZ/)
 archive | CI GAMES game data archive | .dpk | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/ciGAMESGameDataArchive/)
 archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/cso/)
+archive | CloneCD Image | .img | [aaru](https://github.com/aaru-dps/Aaru) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/cloneCDImage/)
 archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+source/cloop/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/cloopImage/)
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
 archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)

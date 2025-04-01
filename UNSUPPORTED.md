@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,472)
+# Unsupported File Formats (3,477)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (266)
+## Archive (268)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -48,6 +48,7 @@ Family/Format | Name | Extensions | Notes
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?format=beOSResourceData) | BeOS Resource Data | .rsrc | 
 [archive/blackFiSTPacked](https://discmaster.textfiles.com/search?format=blackFiSTPacked) | BlacK FiST Packed | .exe | 
 [archive/bootableMacHFSDiskImage](https://discmaster.textfiles.com/search?format=bootableMacHFSDiskImage) | Bootable Mac HFS Disk image |  | 
+[archive/borlandPackedArchive](https://discmaster.textfiles.com/search?format=borlandPackedArchive) | Borland packed archive | .arc | 
 [archive/bsqEncodedData](https://discmaster.textfiles.com/search?format=bsqEncodedData) | BSQ encoded data | .bsq | 
 [archive/bzip](https://discmaster.textfiles.com/search?format=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 [archive/causeWayCompressorPacked](https://discmaster.textfiles.com/search?format=causeWayCompressorPacked) | CauseWay Compressor Packed | .exe | 
@@ -107,6 +108,7 @@ Family/Format | Name | Extensions | Notes
 [archive/gamosPackedGameDataArchive](https://discmaster.textfiles.com/search?format=gamosPackedGameDataArchive) | Gamos Packed game data archive | .gpf .vga .snd .ega | 
 [archive/gDevelopGameDataArchive](https://discmaster.textfiles.com/search?format=gDevelopGameDataArchive) | GDevelop game data archive | .egd | 
 [archive/hackStopProtected](https://discmaster.textfiles.com/search?format=hackStopProtected) | HackStop Protected | .exe | 
+[archive/hDiskDiskImage](https://discmaster.textfiles.com/search?format=hDiskDiskImage) | HDisk disk image |  | 
 [archive/hToolCompressedArchive](https://discmaster.textfiles.com/search?format=hToolCompressedArchive) | HTool compressed archive |  | 
 [archive/humongousEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?format=humongousEntertainmentGameDataArchive) | Humongous Entertainment game data archive | .he2 | 
 [archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?format=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
@@ -1115,7 +1117,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,267)
+## Other (2,270)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2048,6 +2050,7 @@ Family/Format | Name | Extensions | Notes
 [other/ibCardsTemplate](https://discmaster.textfiles.com/search?format=ibCardsTemplate) | IBCards template | .ibt | 
 [other/ibmAntiVirusVirusSignatures](https://discmaster.textfiles.com/search?format=ibmAntiVirusVirusSignatures) | IBM AntiVirus virus signatures | .lst | 
 [other/ibmBookManagerBook](https://discmaster.textfiles.com/search?format=ibmBookManagerBook) | IBM BookManager Book | .boo | 
+[other/ibmPS55MKKCDictionary](https://discmaster.textfiles.com/search?format=ibmPS55MKKCDictionary) | IBM PS/55 MKKC Dictionary | .dct | 
 [other/ibmSoftcopyReaderIndexFile](https://discmaster.textfiles.com/search?format=ibmSoftcopyReaderIndexFile) | IBM Softcopy Reader index file | .bki | 
 [other/iBrowseGlobalCache](https://discmaster.textfiles.com/search?format=iBrowseGlobalCache) | iBrowse Global Cache |  | 
 [other/iccAnimation](https://discmaster.textfiles.com/search?format=iccAnimation) | ICC Animation | .icc | 
@@ -2329,6 +2332,7 @@ Family/Format | Name | Extensions | Notes
 [other/metaSoftwareDesignDiagram](https://discmaster.textfiles.com/search?format=metaSoftwareDesignDiagram) | Meta Software Design Diagram | .dsd | 
 [other/metaCreationsResourceFile](https://discmaster.textfiles.com/search?format=metaCreationsResourceFile) | MetaCreations Resource Composite File |  | 
 [other/metaEditOODAClassDiagram](https://discmaster.textfiles.com/search?format=metaEditOODAClassDiagram) | MetaEdit OODA Class Diagram | .ocd | 
+[other/metalinkIceMasterMacro](https://discmaster.textfiles.com/search?format=metalinkIceMasterMacro) | Metalink iceMaster Macro | .mac | 
 [other/metasequoiaBrush](https://discmaster.textfiles.com/search?format=metasequoiaBrush) | Metasequoia Brush | .mqb | 
 [other/metaWareParseTable](https://discmaster.textfiles.com/search?format=metaWareParseTable) | MetaWare Parse Table | .pt | 
 [other/mgpaFileGameArchive](https://discmaster.textfiles.com/search?format=mgpaFileGameArchive) | MGPA-file game archive | .dat | 
@@ -3156,6 +3160,7 @@ Family/Format | Name | Extensions | Notes
 [other/urbanTheCyborgProjectGameData](https://discmaster.textfiles.com/search?format=urbanTheCyborgProjectGameData) | U.R.B.A.N The Cyborg Project game data | .dat | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?format=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/ucDOSOverlay](https://discmaster.textfiles.com/search?format=ucDOSOverlay) | UCDOS Overlay | .db | 
+[other/ucDOSPrintDefine](https://discmaster.textfiles.com/search?format=ucDOSPrintDefine) | UCDOS Print Define | .def | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?format=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/photoImpactPresets](https://discmaster.textfiles.com/search?format=photoImpactPresets) | Ulead Photo Impact Presets | .smp | 
 [other/ultiboardLibrary](https://discmaster.textfiles.com/search?format=ultiboardLibrary) | ULTIboard Library | .hlp | 

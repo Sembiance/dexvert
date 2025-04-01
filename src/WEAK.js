@@ -327,7 +327,7 @@ export const WEAK_VALUES =
 	/^Windows Maus Cursor Datei\/Works f.r DOS Datei/,
 	/^Windows Verkn.*fungs Datei$/,
 	/^Wordperfect <unbekannt>/,
-	/^Wordperfect (Block|Dokument|Makro|spalten-Block) Datei/,
+	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// lsar
 	/^Arc CBM$/,
@@ -1985,6 +1985,7 @@ export const WEAK_VALUES =
 	/^Mind Games - (Checkers|Renju) saved game$/,
 	/^MIT CADR Lisp Machine disk image$/,
 	/^Miva Script$/,
+	/^Mizar article$/,
 	/^MLT(\/melt)? (framework AV preset|script|XML)$/,
 	/^Moebius (Graphics|Sound|Tile) Library$/,
 	/^Motorhead game data rchive$/,
@@ -2046,6 +2047,7 @@ export const WEAK_VALUES =
 	/^PageTech Metafile$/,
 	/^P-touch Editor Label$/,
 	/^Packaged Indigo Renderer Material$/,
+	/^PALASM \(var\.4\)$/,
 	/^Parrot Digital sample \(raw\)$/,
 	/^Pac-in-Time game data$/,
 	/^Pacific Warrior 2: Dogfight game data archive$/,

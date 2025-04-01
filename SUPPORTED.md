@@ -1,4 +1,4 @@
-# Supported File Formats (3,080)
+# Supported File Formats (3,084)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -2041,7 +2041,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (995)
+## Text (999)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2810,6 +2810,10 @@ text | Shareware Information File | .sif |  | [10 sample files](https://sembianc
 text | ShowMaker Device | .smdevice |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/showMakerDevice/)
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
+text | Signum Font List | .fli |  | 
+text | Signum Help File | .hlp |  | 
+text | Signum Key-Combination-List | .ktl |  | 
+text | Signum Shorthands | .kue |  | 
 text | SimCity 3000 Freshness Score | .fsc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/simCity3000FreshnessScore/)
 text | Simple User Interface Toolkit library | .sui |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/simpleUserInterfaceToolkitLibrary/)
 text | Simulink Model | .mdl |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/simulinkModel/)

@@ -86,11 +86,12 @@ const DEXMAGIC_CHECKS =
 	"FM-TownsOS EXP MP" : [{offset : 0, match : "MP"}],
 	
 	// font
-	"PCR Font"              : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
-	"FONTEDIT Font"         : [{offset : 0, match : [0xEB, 0x33, 0x90]}, {offset : 10, match : "PC Magazine "}, {offset : 23, match : " Michael J. Mefford"}],
-	"FONTEDIT Font (Alt 1)" : [{offset : 0, match : [0xEB, 0x32]}, {offset : 91, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
-	"FONTEDIT Font (Alt 2)" : [{offset : 0, match : [0xEB, 0x33]}, {offset : 92, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
-	"Font Mania Font"       : [{offset : 0, match : [0xEB]}, {offset : 7, match : " FONT MANIA, VERSION"}],
+	"PCR Font"                 : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
+	"FONTEDIT Font"            : [{offset : 0, match : [0xEB, 0x33, 0x90]}, {offset : 10, match : "PC Magazine "}, {offset : 23, match : " Michael J. Mefford"}],
+	"FONTEDIT Font (Alt 1)"    : [{offset : 0, match : [0xEB, 0x32]}, {offset : 91, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
+	"FONTEDIT Font (Alt 2)"    : [{offset : 0, match : [0xEB, 0x33]}, {offset : 92, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
+	"Font Mania Font"          : [{offset : 0, match : [0xEB]}, {offset : 7, match : " FONT MANIA, VERSION"}],
+	"Signum 3 Compressed Font" : [{offset : 0, match : [0x00, 0x02]}, {offset : 2, match : "chset001"}],
 
 	// image
 	"101 Clips Image"                 : [{offset : 0, match : [0xFF, 0xFF, 0xFF, 0xFF, [0x02, 0x03], 0x00, 0x00, 0x00]}],
@@ -139,6 +140,7 @@ const DEXMAGIC_CHECKS =
 	"Reko CardSet - REKO"             : [{offset : 0, match : "PCREKO"}],
 	"Saracen Paint Image"             : [{offset : 0, match : [0x00, 0x78]}],
 	"Second Nature Slide Show"        : [{offset : 0, match : "Second Nature Software\r\nSlide Show\r\nCollection"}],
+	"Signum CDI Image"                : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "cdim0001"}],
 	"SLP Image"                       : [{offset : 0, match : "2.0N"}],
 	"Universal BitMap Format"         : [{offset : 0, match : "UBF92a"}],
 	"Wiz Solitaire Deck"              : [{offset : 0, match : "WizSolitaireDeck"}],
@@ -185,6 +187,12 @@ const DEXMAGIC_CHECKS =
 	"MegaZeux World (Encrypted)"       : [{offset : 25, match : [0x01]}, {offset : 41, match : ["M", ["Z", 0x02]]}],
 	"MegaZeux World (Encrypted) (Alt)" : [{offset : 25, match : [0x01]}, {offset : 42, match : ["M", ["Z", 0x02]]}],
 	"OLB Library"                      : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
+	"Signum Dicitionary"               : [{offset : 0, match : [0x00, 0x00, 0x57, 0x99]}, {offset : 4, match : "RTERB1"}],
+	"Signum 3 Element List"            : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "BAUST 01"}],
+	"Signum 3 Ruler List"              : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "rli_0002"}],
+	"Signum 3 Document Editor Params"  : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "DOCEDPA"}],
+	"Signum 3 Numpad List"             : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "ZIBL0002"}],
+	"Signum 3 Text Segmentation Data"  : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "BINSEP01"}],
 	"VCD Info File"                    : [{offset : 0, match : "VIDEO_CD"}],
 	"ZZT World"                        : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 3, match : [0x00]}],
 
@@ -197,7 +205,12 @@ const DEXMAGIC_CHECKS =
 	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
 
 	// text
-	"Gentoo ebuild" : [{offset : 0, match : "EAPI="}],
+	"Gentoo ebuild"               : [{offset : 0, match : "EAPI="}],
+	"Signum Font List"            : [{offset : 0, match : "FONTLIST\r\n"}],
+	"Signum Help File"            : [{offset : 0, match : `HELP-FILE\r\n${" ".repeat(37)}`}],
+	"Signum Help File Alt"        : [{offset : 0, match : `HELP-FILE${" ".repeat(39)}`}],
+	"Signum Key-Combination-List" : [{offset : 0, match : `KTOTLIST${" ".repeat(40)}`}],
+	"Signum Shorthands"           : [{offset : 0, match : "TEXTKUERZEL\r\n"}],
 
 	// video
 	"Adeline XCF Video"                        : [{offset : 0, match : "FrameLen"}],

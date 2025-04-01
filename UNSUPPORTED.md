@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,477)
+# Unsupported File Formats (3,485)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -614,7 +614,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (115)
+## Font (116)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -709,6 +709,7 @@ Family/Format | Name | Extensions | Notes
 [font/ripTermFont](https://discmaster.textfiles.com/search?format=ripTermFont) | RIPterm Font | .fnt | 
 [font/rixSoftWorksFont](https://discmaster.textfiles.com/search?format=rixSoftWorksFont) | RIX SoftWorks Font | .fnt | 
 [font/saxonPublisherFont](https://discmaster.textfiles.com/search?format=saxonPublisherFont) | Saxon Publisher Font | .sxf .sx | 
+[font/signum3CompressedFont](https://discmaster.textfiles.com/search?format=signum3CompressedFont) | Signum! 3 Compressed Font | .s01 .24n .9p .30l | 
 [font/signumPrinterFont](https://discmaster.textfiles.com/search?format=signumPrinterFont) | Signum! Printer Font | .p24 .p9 .l30 | 
 [font/speedo](https://discmaster.textfiles.com/search?format=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 [font/takeTwoInteractiveSoftwareFont](https://discmaster.textfiles.com/search?format=takeTwoInteractiveSoftwareFont) | Take-Two Interactive Software Font | .fnt | 
@@ -735,7 +736,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (201)
+## Image (202)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -908,6 +909,7 @@ Family/Format | Name | Extensions | Notes
 [image/seam3DMaterial](https://discmaster.textfiles.com/search?format=seam3DMaterial) | SEAM 3D Material | .mat | 
 [image/secondNatureSlideShow](https://discmaster.textfiles.com/search?format=secondNatureSlideShow) | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 [image/serifDrawPlusDrawing](https://discmaster.textfiles.com/search?format=serifDrawPlusDrawing) | Serif DrawPlus Picture/drawing | .dpp | 
+[image/signumCDI](https://discmaster.textfiles.com/search?format=signumCDI) | Signum! CDI Image | .cdi .c01 | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?format=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 [image/skyRoadsBitmap](https://discmaster.textfiles.com/search?format=skyRoadsBitmap) | SkyRoads Bitmap | .lzs | 
 [image/slpImage](https://discmaster.textfiles.com/search?format=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
@@ -1117,7 +1119,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,270)
+## Other (2,276)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2889,6 +2891,12 @@ Family/Format | Name | Extensions | Notes
 [other/siemensTIAPLCFile](https://discmaster.textfiles.com/search?format=siemensTIAPLCFile) | Siemens TIA PLC File | .plf | 
 [other/sciDriver](https://discmaster.textfiles.com/search?format=sciDriver) | Sierra Creative Interpreter Driver | .drv | 
 [other/sigfriedAntivirusPreferences](https://discmaster.textfiles.com/search?format=sigfriedAntivirusPreferences) | Sigfried Antivirus Professional Preferences | .prefs | 
+[other/signum3DocumentEditorParams](https://discmaster.textfiles.com/search?format=signum3DocumentEditorParams) | Signum 3 Document Editor Params | .inf | 
+[other/signum3ElementList](https://discmaster.textfiles.com/search?format=signum3ElementList) | Signum 3 Element List | .eli | 
+[other/signum3NumpadList](https://discmaster.textfiles.com/search?format=signum3NumpadList) | Signum 3 Numpad List | .zbl | 
+[other/signum3RulerList](https://discmaster.textfiles.com/search?format=signum3RulerList) | Signum 3 Ruler List | .rli | 
+[other/signum3TextSegementationData](https://discmaster.textfiles.com/search?format=signum3TextSegementationData) | Signum 3 Text Segmentation Data | .bin | 
+[other/signumDictionary](https://discmaster.textfiles.com/search?format=signumDictionary) | Signum Dictionary | .wb | 
 [other/silentHunterEnvironmentData](https://discmaster.textfiles.com/search?format=silentHunterEnvironmentData) | Silent Hunter Environment data | .env | 
 [other/silentHunterSceneryData](https://discmaster.textfiles.com/search?format=silentHunterSceneryData) | Silent Hunter Scenery data | .scn | 
 [other/silentHunterWorldData](https://discmaster.textfiles.com/search?format=silentHunterWorldData) | Silent Hunter World data | .wld | 

@@ -187,7 +187,7 @@ const DEXMAGIC_CHECKS =
 	"MegaZeux World (Encrypted)"       : [{offset : 25, match : [0x01]}, {offset : 41, match : ["M", ["Z", 0x02]]}],
 	"MegaZeux World (Encrypted) (Alt)" : [{offset : 25, match : [0x01]}, {offset : 42, match : ["M", ["Z", 0x02]]}],
 	"OLB Library"                      : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
-	"Signum Dicitionary"               : [{offset : 0, match : [0x00, 0x00, 0x57, 0x99]}, {offset : 4, match : "RTERB1"}],
+	"Signum Dictionary"                : [{offset : 0, match : [0x00, 0x00, 0x57, 0x99]}, {offset : 4, match : "RTERB1"}],
 	"Signum 3 Element List"            : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "BAUST 01"}],
 	"Signum 3 Ruler List"              : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "rli_0002"}],
 	"Signum 3 Document Editor Params"  : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "DOCEDPA"}],

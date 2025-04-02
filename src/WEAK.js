@@ -753,7 +753,6 @@ export const WEAK_VALUES =
 	/^Mach-O (arm|armv6|architecture|executable|i\d86|universal binary)/,
 	/^Mach-O (alpha|m68k|ns\d+) filetype=\d+/,
 	/^magic text fragment/,
-	/^MagicaVoxel model/,
 	/^mail (forwarding|piping)/,
 	/^Map file for the AssaultCube FPS game/,
 	/^Map file for cube/,
@@ -1827,6 +1826,7 @@ export const WEAK_VALUES =
 	/^FileGateway Server configuration$/,
 	/^File Investigator data \(generic\)$/,
 	/^Final Burn savestate$/,
+	/^Finale ETF Enigma Tansportable File$/,
 	/^Fine Artist Chunked format/,
 	/^FireDAC database$/,
 	/^FL Studio (3x Osc settings|SimSynth Preset)$/,
@@ -1946,6 +1946,7 @@ export const WEAK_VALUES =
 	/^macOS Crash log \(old-style\)$/,
 	/^Macromedia Director Java Resource - Video$/,
 	/^Magic and Mayhem sprites$/,
+	/^MagicaVoxel palette$/,
 	/^MAGIX data \(generic\)$/,
 	/^MAGIX music studio (Drum kit|Window layout)$/,	// So these have weak magics, and their extensions are very close to the magic, so it could have mis-identifications so just skip it since there isn't much we can do with them anyways
 	/^Maker Interchange Format Book$/,

@@ -6,7 +6,7 @@ export class yanagisawaPIC extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PIC_(Yanagisawa)";
 	ext        = [".pic"];
 	magic      = ["Yanagisawa PIC image file", "PIC bitmap"];
-	idMeta      = ({macFileType, macFileCreator}) => macFileType==="xPIC" && macFileCreator==="xPIC";
+	idMeta      = ({macFileType, macFileCreator}) => macFileType==="xPIC" && ["xPIC", "XTRA"].includes(macFileCreator);
 	weakMagic  = true;
 	converters = ["wuimg[matchType:magic]", "recoil2png"];
 }

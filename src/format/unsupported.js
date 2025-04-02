@@ -391,6 +391,7 @@ export default
 		penPalDocument                     : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
 		perfectWorksDocument               : {name : "PerfectWorks document", ext : [".wpw"], magic : ["PerfectWorks word processor document", "PerfectWorks document"]},
 		persuasionPresentation             : {name : "Persuasion presentation", ext : [".at2", ".at3", ".at4", ".pr3", ".pn4"], magic : [/^Persuasion Presentation \((Mac|Win)\)/, /^fmt\/(1705|1706|1707)( |$)/], weakMagic : true},
+		pfsProfessionalPlannerSpreadsheet  : {name : "PFS Professional Planner spreadsheet", ext : [".tid"], magic : ["PFS Professional Planner spreadsheet"]},
 		popupDOSHelp                       : {name : "POP-UP DOS Help", ext : [".hlp"], magic : ["POP-UP DOS Help"]},
 		powerCADD                          : {name : "PowerCADD", ext : [".pd6"], magic : [/^fmt\/1201( |$)/]},
 		powerDraw                          : {name : "PowerDraw", ext : [".pcadd"], magic : [/^fmt\/1200( |$)/]},
@@ -496,7 +497,8 @@ export default
 		x68000Executable                     : {name : "X68000 executable", ext : [".x"], magic : ["X68000 executable"], weakMagic : true},
 		xBoxExecutable                       : {name : "Xbox Executable", ext : [".xbe"], magic : ["Microsoft Xbox executable", "XBOX executable"]},
 		xex                                  : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true},
-		zmagicExe                            : {name : "Linux ZMAGIC Exectutable", magic : ["Linux i/386 ZMAGIC executable", "Linux/i386 demand-paged executable (ZMAGIC)"]}
+		zmagicExe                            : {name : "Linux ZMAGIC Exectutable", magic : ["Linux i/386 ZMAGIC executable", "Linux/i386 demand-paged executable (ZMAGIC)"]},
+		zOSProgramObjectExecutable           : {name : "z/OS Program Object executable", magic : ["z/OS Program Object executable"]}
 	},
 
 	font :
@@ -2166,6 +2168,7 @@ export default
 		dellSystemBIOS                           : {name : "Dell system BIOS version", ext : [".hdr"], magic : [/^Dell system BIOS/], weakMagic : true},
 		deluxeGameAnimatorCopperList             : {name : "Deluxe-Game-Animator Copper list", magic : ["Deluxe-Game-Animator Copper list"]},
 		deluxeGameAnimatorScrollGraphic          : {name : "Deluxe-Game-Animator scroll graphic", magic : ["Deluxe-Game-Animator scroll graphic"]},
+		deluxePaintGallery                       : {name : "DeluxePaint Gallery", ext : [".gal"], magic : ["DeluxePaint Gallery"], weakMagic : true},
 		deluxeProductionsProject                 : {name : "DeluxeProductions project", magic : ["DeluxeProductions project"]},
 		demoGeneratorShowScreen                  : {name : "Demo Generator Show screen", ext : [".sho"], magic : ["Demo Generator Show screen"], weakMagic : true},
 		demoManiacVectors                        : {name : "DemoManiac Vectors", ext : [".dat"], magic : ["DemoManiac vectors"]},
@@ -2530,6 +2533,7 @@ export default
 		maestroMusic                             : {name : "Maestro Music", magic : ["Maestro music", /^fmt\/1464( |$)/]},
 		megaCADLibrary                           : {name : "MegaCAD Library", ext : [".mtl"], magic : ["MegaCAD Library"]},
 		maggiData                                : {name : "MAGGI data", ext : [".hhh"], magic : ["MAGGI data"]},
+		magicaVoxelVox                           : {name : "MagicaVoxel Vox", ext : [".vox"], magic : ["MagicaVoxel model", /^fmt\/976( |$)/], weakMagic : true},
 		magicBinaryFile                          : {name : "magic binary file", ext : [".mgc"], magic : [/^magic binary file/, "magic compiled data"], weakMagic : true},
 		magicC64Preferences                      : {name : "MagiC64 Preferences", ext : [".prefs"], magic : ["MagiC64 Preferences/settings"]},
 		magixHardDiskProjectAudio                : {name : "MAGIX Hard Disk Project Audio", ext : [".hdp"], magic : ["MAGIX Hard Disk Project Audio"]},
@@ -2661,6 +2665,7 @@ export default
 		myFamilyTreeData                         : {name : "My Family Tree data", ext : [".tre"], magic : ["My Family Tree data"]},
 		myHouseFloorData                         : {name : "My House floor data", magic : ["My House floor data"]},
 		myriadHarmonyMelodyAssistantMusic        : {name : "Myriad Harmony / Melody assistant music", ext : [".mus", ".myr"], magic : ["Myriad Harmony / Melody assistant music"]},
+		mysticBBSInstallPackage                  : {name : "Mystic BBS install package", ext : [".mys"], magic : ["Mystic BBS install package"], weakMagic : true},
 		nacDrawDocument                          : {name : "NacDraw document", ext : [".nac"], magic : ["NacDraw document"], weakMagic : true},
 		nascarRacingSeasonCarData                : {name : "NASCAR Racing Season Car data", ext : [".car"], magic : ["NASCAR Racing 2002 Season Car data"], weakMagic : true},
 		nativeInstrumentsPresetBank              : {name : "Native Instruments Preset Bank", ext : [".bnk"], magic : ["Native Instruments Preset Bank"]},
@@ -2940,7 +2945,7 @@ export default
 		sibeliusScorch                           : {name : "Sibelius Scorch", ext : [".sco"], magic : ["Sibelius Scorch", /^fmt\/1994( |$)/], weakMagic : true},
 		siegfriedAntiviruData                    : {name : "Siegfried Antivirus Professional virus data", ext : [".brainfile"], magic : ["Siegfried Antivirus Professional virus data"]},
 		sigfriedAntivirusPreferences             : {name : "Sigfried Antivirus Professional Preferences", ext : [".prefs"], magic : ["Sigfried Antivirus Professional Preferences"], weakMagic : true},
-		signumDictionary                         : {name : "Signum Dictionary", ext : [".wb"], magic : ["Signum Dicitionary"]},
+		signumDictionary                         : {name : "Signum Dictionary", ext : [".wb"], magic : ["Signum Dictionary"]},
 		signum3ElementList                       : {name : "Signum 3 Element List", ext : [".eli"], magic : ["Signum 3 Element List"]},
 		signum3RulerList                         : {name : "Signum 3 Ruler List", ext : [".rli"], magic : ["Signum 3 Ruler List"]},
 		signum3DocumentEditorParams              : {name : "Signum 3 Document Editor Params", ext : [".inf"], magic : ["Signum 3 Document Editor Params"]},
@@ -3092,6 +3097,7 @@ export default
 		treePADDocument                          : {name : "TreePAD document", ext : [".hjt"], magic : ["TreePAD document"], weakMagic : true},
 		trendMicroCleanerDatabase                : {name : "TrendMicro Cleaner database", ext : [".ptn"], magic : [/^TrendMicro (HouseCall|System) Cleaner database/], weakMagic : true},
 		trendMicroVirusPattern                   : {name : "Trend Micro Virus Pattern", magic : ["Trend Micro Virus Pattern"]},
+		trIDDefsPackage                          : {name : "TrID defs package", ext : [".trd"], magic : ["TrID defs package"]},
 		trivialDataBase                          : {name : "Trivial Data Base", ext : [".tdb"], magic : ["Trivial Data Base", /^TDB database/], weakMagic : true},
 		truePaintAnimation                       : {name : "TruePaint Animation", ext : [".tpa"], magic : ["TruePaint Animation"], weakMagic : true},
 		trxFirmwareHeader                        : {name : "TRX firmware header", ext : [".trx"], magic : ["TRX firmware header"], weakMagic : true},

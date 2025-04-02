@@ -1470,7 +1470,7 @@ image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Spr
 image | [True Paint I](http://fileformats.archiveteam.org/wiki/True_Paint_I) | .mci .mcp | [view64](http://view64.sourceforge.net/) [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/truePaint/)
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [keyViewPro](https://archive.org/details/KeyViewPro/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [gimp](https://gimp.org) [iio2png](http://github.com/Sembiance/iio2png/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [22 sample files](https://sembiance.com/fileFormatSamples/image/tga/)
 image | [Trzmiel](http://fileformats.archiveteam.org/wiki/Trzmiel) | .cpr | [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://sembiance.com/fileFormatSamples/image/cpr/)
-image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | [ansilove](https://www.ansilove.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://sembiance.com/fileFormatSamples/image/tundra/)
+image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | [ansilove](https://www.ansilove.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [9 sample files](https://sembiance.com/fileFormatSamples/image/tundra/)
 image | [Turbo Rascal Syntax Error](http://fileformats.archiveteam.org/wiki/Turbo_Rascal_Syntax_Error) | .flf | [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/flf/)
 image | [TurboCAD Drawing](http://fileformats.archiveteam.org/wiki/TCW) | .tcw | [turboCAD](https://archive.org/details/onyxdvd-16) | [10 sample files](https://sembiance.com/fileFormatSamples/image/turboCADDrawing/)
 image | [TXS](http://fileformats.archiveteam.org/wiki/TXS) | .txs | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/txs/)
@@ -2759,7 +2759,7 @@ text | Qucs schematic | .sch .dpl |  | [13 sample files](https://sembiance.com/f
 text | QuickBMS script | .bms |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/quickBMSScript/)
 text | Quicken Interchange Format | .qif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickenInterchangeFormat/)
 text | QuickMenu Menu | .inf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickMenuMenu/)
-text | QuickSFV checksum | .sfv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/quickSFVChecksum/)
+text | QuickSFV checksum | .sfv |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/quickSFVChecksum/)
 text | QuickTime Text subtitles |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/quickTimeTextSubtitles/)
 text | QuizPro Quiz data | .qzs .qzd .qze |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quizProQuizData/)
 text | R documentation | .rd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rDocumentation/)
@@ -2811,9 +2811,9 @@ text | ShowMaker Device | .smdevice |  | [6 sample files](https://sembiance.com/
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
 text | Signum Font List | .fli |  | 
-text | Signum Help File | .hlp |  | 
-text | Signum Key-Combination-List | .ktl |  | 
-text | Signum Shorthands | .kue |  | 
+text | Signum Help File | .hlp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signumHelpFile/)
+text | Signum Key-Combination-List | .ktl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumKeyCombinationList/)
+text | Signum Shorthands | .kue |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumShorthands/)
 text | SimCity 3000 Freshness Score | .fsc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/simCity3000FreshnessScore/)
 text | Simple User Interface Toolkit library | .sui |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/simpleUserInterfaceToolkitLibrary/)
 text | Simulink Model | .mdl |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/simulinkModel/)

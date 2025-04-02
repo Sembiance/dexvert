@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,485)
+# Unsupported File Formats (3,494)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -361,7 +361,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (188)
+## Document (189)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -492,6 +492,7 @@ Family/Format | Name | Extensions | Notes
 [document/perfectForms](https://discmaster.textfiles.com/search?format=perfectForms) | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
 [document/perfectWorksDocument](https://discmaster.textfiles.com/search?format=perfectWorksDocument) | PerfectWorks document | .wpw | 
 [document/persuasionPresentation](https://discmaster.textfiles.com/search?format=persuasionPresentation) | Persuasion presentation | .at2 .at3 .at4 .pr3 .pn4 | 
+[document/pfsProfessionalPlannerSpreadsheet](https://discmaster.textfiles.com/search?format=pfsProfessionalPlannerSpreadsheet) | PFS Professional Planner spreadsheet | .tid | 
 [document/pocketWordDocument](https://discmaster.textfiles.com/search?format=pocketWordDocument) | Pocket Word/Inkwriter/Notetaker document | .pwd .pwi .psw | [3 sample files](https://sembiance.com/fileFormatSamples/document/pocketWordDocument/)
 [document/popupDOSHelp](https://discmaster.textfiles.com/search?format=popupDOSHelp) | POP-UP DOS Help | .hlp | 
 [document/powerCADD](https://discmaster.textfiles.com/search?format=powerCADD) | PowerCADD | .pd6 | 
@@ -555,7 +556,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (53)
+## Executable (54)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?format=aDotOutExecutable) | a.out Executable | .o | 
@@ -611,6 +612,7 @@ Family/Format | Name | Extensions | Notes
 [executable/wiNGsOSExecutable](https://discmaster.textfiles.com/search?format=wiNGsOSExecutable) | WiNGs OS executable |  | 
 [executable/x68000Executable](https://discmaster.textfiles.com/search?format=x68000Executable) | X68000 executable | .x | 
 [executable/xBoxExecutable](https://discmaster.textfiles.com/search?format=xBoxExecutable) | Xbox Executable | .xbe | [2 sample files](https://sembiance.com/fileFormatSamples/executable/xBoxExecutable/)
+[executable/zOSProgramObjectExecutable](https://discmaster.textfiles.com/search?format=zOSProgramObjectExecutable) | z/OS Program Object executable |  | 
 
 
 
@@ -1119,7 +1121,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,276)
+## Other (2,283)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1687,6 +1689,7 @@ Family/Format | Name | Extensions | Notes
 [other/deathTrackMap](https://discmaster.textfiles.com/search?format=deathTrackMap) | DeathTrack Map | .map | 
 [other/decisionProProject](https://discmaster.textfiles.com/search?format=decisionProProject) | Decision/pro project | .dp | 
 [other/decisiveBattlesOfTheAmericanCivilWarGameData](https://discmaster.textfiles.com/search?format=decisiveBattlesOfTheAmericanCivilWarGameData) | Decisive Battles of the American Civil War game data | .dfx .dfs | 
+[other/deepPaint3DProject](https://discmaster.textfiles.com/search?format=deepPaint3DProject) | Deep Paint 3D Project | .dp3 | 
 [other/deHackEdPatch](https://discmaster.textfiles.com/search?format=deHackEdPatch) | DeHackEd Patch | .deh | 
 [other/dellSystemBIOS](https://discmaster.textfiles.com/search?format=dellSystemBIOS) | Dell system BIOS version | .hdr | 
 [other/delphiCompiledPackage](https://discmaster.textfiles.com/search?format=delphiCompiledPackage) | Delphi Compiled Package | .dcp | 
@@ -1694,6 +1697,7 @@ Family/Format | Name | Extensions | Notes
 [other/deluxeSkiJump2Replay](https://discmaster.textfiles.com/search?format=deluxeSkiJump2Replay) | Deluxe Ski Jump 2 Replay | .rpl | 
 [other/deluxeGameAnimatorCopperList](https://discmaster.textfiles.com/search?format=deluxeGameAnimatorCopperList) | Deluxe-Game-Animator Copper list |  | 
 [other/deluxeGameAnimatorScrollGraphic](https://discmaster.textfiles.com/search?format=deluxeGameAnimatorScrollGraphic) | Deluxe-Game-Animator scroll graphic |  | 
+[other/deluxePaintGallery](https://discmaster.textfiles.com/search?format=deluxePaintGallery) | DeluxePaint Gallery | .gal | 
 [other/deluxeProductionsProject](https://discmaster.textfiles.com/search?format=deluxeProductionsProject) | DeluxeProductions project |  | 
 [other/demoGeneratorShowScreen](https://discmaster.textfiles.com/search?format=demoGeneratorShowScreen) | Demo Generator Show screen | .sho | 
 [other/demoManiacVectors](https://discmaster.textfiles.com/search?format=demoManiacVectors) | DemoManiac Vectors | .dat | 
@@ -2200,6 +2204,7 @@ Family/Format | Name | Extensions | Notes
 [other/lexiCrossPuzzle](https://discmaster.textfiles.com/search?format=lexiCrossPuzzle) | Lexi-Cross Puzzle | .dem .pzl | 
 [other/lextekLanguageIdentificationModule](https://discmaster.textfiles.com/search?format=lextekLanguageIdentificationModule) | Lextek Language Identification Module | .lid | 
 [other/life3000Status](https://discmaster.textfiles.com/search?format=life3000Status) | LIFE 3000 Status | .lif | 
+[other/lightWave3DPreset](https://discmaster.textfiles.com/search?format=lightWave3DPreset) | LightWave 3D Preset | .pst .srf | 
 [other/lineageIIData](https://discmaster.textfiles.com/search?format=lineageIIData) | Lineage II data |  | 
 [other/linkBootableCodeForTransputerNetwork](https://discmaster.textfiles.com/search?format=linkBootableCodeForTransputerNetwork) | Link Bootable code for transputer network | .btl | 
 [other/lInkSystemApplicationDataFormat](https://discmaster.textfiles.com/search?format=lInkSystemApplicationDataFormat) | LInk System Application Data Format | .lsd | 
@@ -2270,6 +2275,7 @@ Family/Format | Name | Extensions | Notes
 [other/maggiData](https://discmaster.textfiles.com/search?format=maggiData) | MAGGI data | .hhh | 
 [other/magicBinaryFile](https://discmaster.textfiles.com/search?format=magicBinaryFile) | magic binary file | .mgc | 
 [other/magicC64Preferences](https://discmaster.textfiles.com/search?format=magicC64Preferences) | MagiC64 Preferences | .prefs | 
+[other/magicaVoxelVox](https://discmaster.textfiles.com/search?format=magicaVoxelVox) | MagicaVoxel Vox | .vox | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?format=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
 [other/magixMovieEditVideo](https://discmaster.textfiles.com/search?format=magixMovieEditVideo) | Magix Movie Edit video | .vip | 
 [other/magixMusicStudioStyle](https://discmaster.textfiles.com/search?format=magixMusicStudioStyle) | MAGIX music studio Style | .sty | 
@@ -2458,6 +2464,7 @@ Family/Format | Name | Extensions | Notes
 [other/myriadHarmonyMelodyAssistantMusic](https://discmaster.textfiles.com/search?format=myriadHarmonyMelodyAssistantMusic) | Myriad Harmony / Melody assistant music | .mus .myr | 
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?format=mySQLIndexFile) | MySQL Index | .myi | 
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?format=mySQLTableDefinition) | MySQL Table Definition | .frm | 
+[other/mysticBBSInstallPackage](https://discmaster.textfiles.com/search?format=mysticBBSInstallPackage) | Mystic BBS install package | .mys | 
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?format=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
 [other/nacDrawDocument](https://discmaster.textfiles.com/search?format=nacDrawDocument) | NacDraw document | .nac | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?format=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
@@ -3136,6 +3143,7 @@ Family/Format | Name | Extensions | Notes
 [other/treePADDocument](https://discmaster.textfiles.com/search?format=treePADDocument) | TreePAD document | .hjt | 
 [other/trendMicroVirusPattern](https://discmaster.textfiles.com/search?format=trendMicroVirusPattern) | Trend Micro Virus Pattern |  | 
 [other/trendMicroCleanerDatabase](https://discmaster.textfiles.com/search?format=trendMicroCleanerDatabase) | TrendMicro Cleaner database | .ptn | 
+[other/trIDDefsPackage](https://discmaster.textfiles.com/search?format=trIDDefsPackage) | TrID defs package | .trd | 
 [other/triTrystGameData](https://discmaster.textfiles.com/search?format=triTrystGameData) | TriTryst game Data | .dat | 
 [other/triviaShellData](https://discmaster.textfiles.com/search?format=triviaShellData) | Trivia Shell Data | .tsd | 
 [other/triviaShellIndex](https://discmaster.textfiles.com/search?format=triviaShellIndex) | Trivia Shell Index | .tsi | 
@@ -3196,6 +3204,7 @@ Family/Format | Name | Extensions | Notes
 [other/vectorWorksPluginOrScript](https://discmaster.textfiles.com/search?format=vectorWorksPluginOrScript) | VectorWorks Plugin or Script | .vsm .vso .vst | 
 [other/vectrexROM](https://discmaster.textfiles.com/search?format=vectrexROM) | Vectrex ROM | .vec .gam .bin | 
 [other/vektorGrafixDriver](https://discmaster.textfiles.com/search?format=vektorGrafixDriver) | Vektor Grafix Driver | .drv | 
+[other/venusPrinterDefinition](https://discmaster.textfiles.com/search?format=venusPrinterDefinition) | Venus printer definition | .ini | 
 [other/vermontDatabaseCorporationDatabase](https://discmaster.textfiles.com/search?format=vermontDatabaseCorporationDatabase) | Vermont Database Corporation database |  | 
 [other/vesaDisplayIdentification](https://discmaster.textfiles.com/search?format=vesaDisplayIdentification) | VESA Display Identification File | .vdb | 
 [other/vgaCopyConfiguration](https://discmaster.textfiles.com/search?format=vgaCopyConfiguration) | VGA-Copy Configuration | .cfg | 

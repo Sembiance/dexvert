@@ -1,4 +1,4 @@
-# Supported File Formats (3,084)
+# Supported File Formats (3,088)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -865,7 +865,7 @@ font | [FONTEDIT Font](http://justsolve.archiveteam.org/wiki/FONTEDIT_font) | .c
 font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/sfd/)
 font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [deark](https://entropymine.com/deark/) | [34 sample files](https://sembiance.com/fileFormatSamples/font/gemFont/)
 font | [Glyph Bitmap Distribution Format](http://fileformats.archiveteam.org/wiki/BDF) | .bdf | [bdftopcf](https://gitlab.freedesktop.org/xorg/app/bdftopcf) | [10 sample files](https://sembiance.com/fileFormatSamples/font/bdf/)
-font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 | [deark](https://entropymine.com/deark/) | [4 sample files](https://sembiance.com/fileFormatSamples/font/grub2PFF2/)
+font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/grub2PFF2/)
 font | [Interlace Character Editor](http://fileformats.archiveteam.org/wiki/Interlace_Character_Editor_font) | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/ice/)
 font | [MacOS X Data Fork Font](http://fileformats.archiveteam.org/wiki/Data_Fork_Suitcase_font) | .dfont | [fontforge](https://fontforge.org) | [12 sample files](https://sembiance.com/fileFormatSamples/font/osXDataForkFont/)
 font | MacOS X Font | .fnt .wfn | [fontforge](https://fontforge.org) | [1 sample file](https://sembiance.com/fileFormatSamples/font/macOSFont/)
@@ -888,7 +888,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (640)
+## Image (641)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1395,6 +1395,7 @@ image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hi
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/sar/)
 image | [Scalable Vector Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz |  | [12 sample files](https://sembiance.com/fileFormatSamples/image/svg/)
 image | [Scitex Continuous Tone](http://fileformats.archiveteam.org/wiki/Scitex_CT) | .ct .sct | [nconvert](https://www.xnview.com/en/nconvert/) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [corelDRAW](https://winworldpc.com/product/corel-draw/50) | [7 sample files](https://sembiance.com/fileFormatSamples/image/scitexCT/)
+image | [Scriptable Network Graphic](https://sng.sourceforge.net/) | .sng | [sng](https://sng.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/sng/)
 image | [Seattle FilmWorks/PhotoWorks PhotoMail](http://fileformats.archiveteam.org/wiki/Seattle_FilmWorks) | .sfw .pwp .pwm .alb | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/seattleFilmWorks/)
 image | [Second Nature Screensaver Graphic](http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic) | .snx | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/snx/) - This only is able to convert files that are just wrapped JPEG images (dragon*.snx). Others are in an unknown file format, including barw22.snx.
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/shg/)
@@ -2041,7 +2042,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (999)
+## Text (1,002)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2118,7 +2119,7 @@ text | ASP Application Directive | .asax |  | [3 sample files](https://sembiance
 text | ASP Control Directive | .ascx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspControlDirective/)
 text | ASP WebService Directive File | .asmx |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
 text | ASP.NET Web Form |  |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/aspNETWebForm/)
-text | aspell Personal dictionary | .per .pws |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/aspellPersonalDictionary/)
+text | aspell Personal dictionary | .per .pws |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspellPersonalDictionary/)
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/asm/)
 text | Atari CardFile PIM data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/atariCardFilePIMData/)
 text | Atari800 emulator Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/atari800EmulatorConfiguration/)
@@ -2380,6 +2381,7 @@ text | Gentoo Linux ebuild | .ebuild |  | [10 sample files](https://sembiance.co
 text | Gerber | .gbr .gbx .gb |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gerber/)
 text | Gerber artwork | .art |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gerberArtwork/)
 text | Gettext Portable Object | .po |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gettextPortableObject/)
+text | Gherkin Feature | .feature |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gherkinFeature/)
 text | GIMP curve file |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/gimpCurveFile/)
 text | GIMP Dynamics | .gdyn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gimpDynamics/)
 text | GIMP Gradient |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/gimpGradient/)
@@ -2479,6 +2481,7 @@ text | KSS: Author presentation settings |  |  | [3 sample files](https://sembia
 text | Landscape Designer fractal data |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/landscapeDesignerFractalData/)
 text | Latex Auxiliary File | .aux |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/latexAUXFile/)
 text | LaunchAnywhere configuration | .lax |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/launchAnywhereConfiguration/)
+text | LCOV coverage tracefile | .info |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/lcovCoverageTracefile/)
 text | LD Linker Script | .lds .xu .xn .xs .xbn .xr .x |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/ldLinkerScript/)
 text | LDAP Data Interchange Format | .ldif .master |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/ldapDataInterchangeFormat/)
 text | Lex Description | .l .y |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/lexDescription/)
@@ -2640,7 +2643,7 @@ text | OS/2 Install Catalog File | .icf |  | [11 sample files](https://sembiance
 text | OS/2 install Package | .pkg |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/os2InstallPackageMeta/)
 text | OS/2 Network Information File | .nif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/os2NetworkInformationFile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .rexx .rex |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rexx/)
-text | OVA Manifest | .mf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ovaManifest/)
+text | OVA Manifest | .mf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/ovaManifest/)
 text | OziExplorer Map data | .map |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerMapData/)
 text | OziExplorer track file | .plt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerTrackFile/)
 text | OziExplorer Waypoint | .wpt |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/oziExplorerWaypoint/)
@@ -2733,7 +2736,7 @@ text | Protein DataBank | .pdb |  | [15 sample files](https://sembiance.com/file
 text | Protel PAD macro | .pad |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/protelPADMacro/)
 text | ProtoGen Application configuration | .pva |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/protoGenApplicationConfiguration/)
 text | Proton language Schema | .sch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
-text | Proxy Auto-Config | .pac |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
+text | Proxy Auto-Config | .pac |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
 text | PS/2 MicroChannel Adapter Description | .adf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/ps2MicroChannelAdapterDescription/)
 text | [Pure Data patch](http://fileformats.archiveteam.org/wiki/Pure_Data) | .pd |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/pureDataPatch/)
 text | PV3D Effect | .eff |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pv3DEffect/)
@@ -2810,6 +2813,7 @@ text | Shareware Information File | .sif |  | [10 sample files](https://sembianc
 text | ShowMaker Device | .smdevice |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/showMakerDevice/)
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
+text | Signum 3/Phoenix Printer Driver | .trb .prt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signum3PrinterDriver/)
 text | Signum Font List | .fli |  | 
 text | Signum Help File | .hlp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signumHelpFile/)
 text | Signum Key-Combination-List | .ktl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumKeyCombinationList/)
@@ -2874,7 +2878,7 @@ text | SuperTux Sprite Meta | .sprite |  | [3 sample files](https://sembiance.co
 text | SuperTux World Map | .stwm |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/superTuxWorldMap/)
 text | SVGAVESA configuration | .svc |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/svgaVESAConfiguration/)
 text | SVN dump | .dump |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/svnDump/)
-text | Systemtap script | .stp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/systemtapScript/)
+text | Systemtap script | .stp |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/systemtapScript/)
 text | T-RackS Preset | .trp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/tRackSPreset/)
 text | TASM instructions definition Table | .tab |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tasmInstructionsDefinitionTable/)
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
@@ -2957,7 +2961,7 @@ text | Visual Basic user-defined control file | .ctl |  | [12 sample files](http
 text | Visual C++ Workspace info | .wsp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/visualCPPWorkspaceInfo/)
 text | Visual J++ Project | .vjp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/visualJPPProject/)
 text | Visual Studio Project build log | .plg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioProjectBuildLog/)
-text | Visual Studio Setup and Deployment Project | .vdproj |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioSetupAndDeploymentProject/)
+text | Visual Studio Setup and Deployment Project | .vdproj |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioSetupAndDeploymentProject/)
 text | Visual Studio wizard | .vsz |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/visualStudioWizard/)
 text | Visual Thought diagram | .vthought |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visualThoughtDiagram/)
 text | VisualBasic Project | .vbp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicProjectText/)
@@ -2974,7 +2978,7 @@ text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/f
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
 text | WDDX packet |  |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
-text | Web browser cookies | .txt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
+text | Web browser cookies | .txt |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)
 text | Web Video Text Tracks | .vtt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/webVideoTextTracks/)
 text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wgt3DModel/)
 text | Wheel binary package format info |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wheelBinaryPackageFormatInfo/)

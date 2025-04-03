@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,494)
+# Unsupported File Formats (3,505)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (268)
+## Archive (279)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -44,6 +44,7 @@ Family/Format | Name | Extensions | Notes
 [archive/authorware](https://discmaster.textfiles.com/search?format=authorware) | Authorware Application/Package | .app .apw | [9 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
 [archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?format=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
 [archive/autochopFragment](https://discmaster.textfiles.com/search?format=autochopFragment) | AUTOCHOP fragment | .#00 .#01 .#02 .#03 .#04 .#05 .#06 .#07 .#08 .#09 | 
+[archive/bDOSBootableDiskImage](https://discmaster.textfiles.com/search?format=bDOSBootableDiskImage) | B-DOS bootable disk image | .dsk | 
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?format=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?format=beOSResourceData) | BeOS Resource Data | .rsrc | 
 [archive/blackFiSTPacked](https://discmaster.textfiles.com/search?format=blackFiSTPacked) | BlacK FiST Packed | .exe | 
@@ -107,6 +108,7 @@ Family/Format | Name | Extensions | Notes
 [archive/fsgPacked](https://discmaster.textfiles.com/search?format=fsgPacked) | FSG Packed | .exe | 
 [archive/gamosPackedGameDataArchive](https://discmaster.textfiles.com/search?format=gamosPackedGameDataArchive) | Gamos Packed game data archive | .gpf .vga .snd .ega | 
 [archive/gDevelopGameDataArchive](https://discmaster.textfiles.com/search?format=gDevelopGameDataArchive) | GDevelop game data archive | .egd | 
+[archive/gfs2Filesystem](https://discmaster.textfiles.com/search?format=gfs2Filesystem) | GFS2 Filesystem | .img | 
 [archive/hackStopProtected](https://discmaster.textfiles.com/search?format=hackStopProtected) | HackStop Protected | .exe | 
 [archive/hDiskDiskImage](https://discmaster.textfiles.com/search?format=hDiskDiskImage) | HDisk disk image |  | 
 [archive/hToolCompressedArchive](https://discmaster.textfiles.com/search?format=hToolCompressedArchive) | HTool compressed archive |  | 
@@ -129,6 +131,7 @@ Family/Format | Name | Extensions | Notes
 [archive/j2MERecordStore](https://discmaster.textfiles.com/search?format=j2MERecordStore) | J2ME RecordStore | .db | 
 [archive/jadeEmpireGameDataArchive](https://discmaster.textfiles.com/search?format=jadeEmpireGameDataArchive) | Jade Empire game data archive | .rim | 
 [archive/kdPackPacked](https://discmaster.textfiles.com/search?format=kdPackPacked) | JDPack Packed | .exe | 
+[archive/jfsFilesystemImage](https://discmaster.textfiles.com/search?format=jfsFilesystemImage) | JFS/JFS22 filesystem image | .img | 
 [archive/jmCryptExeProtected](https://discmaster.textfiles.com/search?format=jmCryptExeProtected) | JMCryptExe Protected | .exe | 
 [archive/kkcrunchPacked](https://discmaster.textfiles.com/search?format=kkcrunchPacked) | kkrunchy Packed | .exe | 
 [archive/kuaiZipCompressedArchive](https://discmaster.textfiles.com/search?format=kuaiZipCompressedArchive) | KuaiZip compressed archive | .kz | 
@@ -142,6 +145,7 @@ Family/Format | Name | Extensions | Notes
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?format=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
 [archive/magixGEPacktArchive](https://discmaster.textfiles.com/search?format=magixGEPacktArchive) | MAGIX gepackt Archive |  | 
 [archive/massiveGameDataArchive](https://discmaster.textfiles.com/search?format=massiveGameDataArchive) | Massive game data archive | .pak | 
+[archive/masterDOSVDiskImage](https://discmaster.textfiles.com/search?format=masterDOSVDiskImage) | MasterDOS disk image | .dsk | 
 [archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?format=maximusInstallerArchive) | Maximus installer archive | .fiz | 
 [archive/maxisGameDataArchive](https://discmaster.textfiles.com/search?format=maxisGameDataArchive) | Maxis game data archive | .package | 
 [archive/mbpSHRINKPacked](https://discmaster.textfiles.com/search?format=mbpSHRINKPacked) | mbp SHRINK Packed | .exe | 
@@ -208,12 +212,17 @@ Family/Format | Name | Extensions | Notes
 [archive/qnxVolumeDiskImage](https://discmaster.textfiles.com/search?format=qnxVolumeDiskImage) | QNX volume disk image | .img | 
 [archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?format=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
 [archive/redArchive](https://discmaster.textfiles.com/search?format=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
+[archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 
 [archive/rerpPacked](https://discmaster.textfiles.com/search?format=rerpPacked) | RERP Packed | .exe | 
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?format=rohitCompressedData) | Rohit compressed data | .tsi | 
 [archive/rsCompressedArchive](https://discmaster.textfiles.com/search?format=rsCompressedArchive) | RS compressed archive |  | 
 [archive/sabDisketteUtilityDiskImage](https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage) | SAB Diskette Utility disk image | .sdu | Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh.
+[archive/samCoupeProDOSDiskImage](https://discmaster.textfiles.com/search?format=samCoupeProDOSDiskImage) | SAM Coupe Pro-DOS disk image | .dsk | 
+[archive/samDiskImage](https://discmaster.textfiles.com/search?format=samDiskImage) | SAm Disk image | .sad | 
+[archive/samDOSDiskImage](https://discmaster.textfiles.com/search?format=samDOSDiskImage) | SamDOS disk image | .dsk | 
+[archive/scoUnixWareBFSFilesystem](https://discmaster.textfiles.com/search?format=scoUnixWareBFSFilesystem) | SCO UnixWare BFS filesystem | .img | 
 [archive/scrambPacked](https://discmaster.textfiles.com/search?format=scrambPacked) | Scramb Packed | .exe | 
 [archive/secureProtected](https://discmaster.textfiles.com/search?format=secureProtected) | SECURE Protected | .exe | 
 [archive/setupMVA](https://discmaster.textfiles.com/search?format=setupMVA) | Setup Program Archive | .mva .mvb | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
@@ -247,6 +256,8 @@ Family/Format | Name | Extensions | Notes
 [archive/tpacArchive](https://discmaster.textfiles.com/search?format=tpacArchive) | TPac archive | .pac | 
 [archive/trzZipCompressed](https://discmaster.textfiles.com/search?format=trzZipCompressed) | TRCZip compressed | .trc | 
 [archive/turboBatPacked](https://discmaster.textfiles.com/search?format=turboBatPacked) | TurboBat Packed | .com | 
+[archive/ubiFSilesystem](https://discmaster.textfiles.com/search?format=ubiFSilesystem) | UBIFS filesystem | .img | 
+[archive/ufs2Filesystem](https://discmaster.textfiles.com/search?format=ufs2Filesystem) | UFS2 file system | .img | 
 [archive/unityAssetBundle](https://discmaster.textfiles.com/search?format=unityAssetBundle) | Unity asset bundle | .unity3d | 
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?format=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?format=unrealPackage) | Unreal Package | .ut2 .uasset | 

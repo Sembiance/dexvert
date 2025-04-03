@@ -192,7 +192,7 @@ const DEXMAGIC_CHECKS =
 	"Signum 3 Ruler List"              : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "rli_0002"}],
 	"Signum 3 Document Editor Params"  : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "DOCEDPA"}],
 	"Signum 3 Numpad List"             : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "ZIBL0002"}],
-	"Signum 3 Printer Driver"          : [{offset : 0, match : [`;#printer: "`]}],
+	"Signum 3 Printer Driver"          : [{offset : 0, match : `;#printer: "`}],
 	"Signum 3 Text Segmentation Data"  : [{offset : 0, match : [0x00, 0x00]}, {offset : 2, match : "BINSEP01"}],
 	"VCD Info File"                    : [{offset : 0, match : "VIDEO_CD"}],
 	"ZZT World"                        : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 3, match : [0x00]}],

@@ -1861,6 +1861,7 @@ export default
 		adobePhotoshopColorBook                  : {name : "Adobe Photoshop Color Book", ext : [".acb"], magic : ["Adobe Photoshop Color Book", /^fmt\/1814( |$)/]},
 		adobePhotoshopCustomShape                : {name : "Adobe Photoshop Custom Shape", ext : [".csh"], magic : ["Adobe Photoshop Custom Shape"]},
 		adobeSetupInstallationFile               : {name : "Adobe Setup Installation File", ext : [".sif", ".setupfile1"], magic : ["Adobe Setup Installation File"]},
+		adobeSwatchExchangeFile                  : {name : "Adobe Swatch Exchange File", ext : [".act", ".ase", ".asef"], magic : ["Adobe Swatch Exchange File", /^fmt\/1816( |$)/], weakMagic : true},
 		adobeTypeFontInfo                        : {name : "Adobe Type Manager Font Information", ext : [".inf"], magic : ["Adobe Type Manager Font Information"]},
 		absoluteDatabaseFile                     : {name : "Absolute Database file", ext : [".abs"], magic : ["Absolute Database file"]},
 		advancedCalculatorSpreadsheet            : {name : "Advanced Calculator spreadsheet", ext : [".calc"], magic : ["SFX Advanced Calculator spreadsheet"]},

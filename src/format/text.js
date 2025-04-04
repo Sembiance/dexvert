@@ -816,6 +816,7 @@ export default
 		quickTimeTextSubtitles                     : {name : "QuickTime Text subtitles", magic : ["QuickTime Text subtitles"]},
 		rarRegistrationData                        : {name : "RAR registration data", ext : [".key", ".cfg"], magic : ["RAR registration data"]},
 		rasterMusicTrackerSettings                 : {name : "RASTER Music Tracker settings", ext : [".ini"], magic : ["RASTER Music Tracker settings"]},
+		rData                                      : {name : "RData (ASCII)", ext : [".rda", ".rdata"], magic : [/^fmt\/1199( |$)/]},
 		realMediaMetaFile                          : {name : "RealMedia meta file", ext : [".ram"], magic : ["RealMedia meta file", /^x-fmt\/183( |$)/], weakMagic : true},
 		realNumbersTape                            : {name : "REAL Numbers Tape", ext : [".tap"], magic : ["REAL Numbers Tape"], weakMagic : true},
 		reaperProject                              : {name : "REAPER Project", ext : [".rpp"], magic : ["REAPER Project"]},

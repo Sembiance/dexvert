@@ -1911,6 +1911,7 @@ export const WEAK_VALUES =
 	/^JSON Playlist File$/,
 	/^Just Cause game data archive$/,
 	/^JustSystems format \(generic\)$/,
+	/^K\+K Research TAC compressed audio$/,
 	/^Kaitai Struct language \(with rem\)$/,
 	/^Karl Morton (Music|Sound) format$/,
 	/^Kazaa Playlist$/,

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,505)
+# Unsupported File Formats (3,506)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1132,7 +1132,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,283)
+## Other (2,284)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1218,6 +1218,7 @@ Family/Format | Name | Extensions | Notes
 [other/adobePremierePeakWaveform](https://discmaster.textfiles.com/search?format=adobePremierePeakWaveform) | Adobe Premiere Peak Waveform | .pek | 
 [other/adobePremiereProject](https://discmaster.textfiles.com/search?format=adobePremiereProject) | Adobe Premiere Project | .ppj | 
 [other/adobeSetupInstallationFile](https://discmaster.textfiles.com/search?format=adobeSetupInstallationFile) | Adobe Setup Installation File | .sif .setupfile1 | 
+[other/adobeSwatchExchangeFile](https://discmaster.textfiles.com/search?format=adobeSwatchExchangeFile) | Adobe Swatch Exchange File | .act .ase .asef | 
 [other/adobeTypeFontInfo](https://discmaster.textfiles.com/search?format=adobeTypeFontInfo) | Adobe Type Manager Font Information | .inf | 
 [other/adoragePreferences](https://discmaster.textfiles.com/search?format=adoragePreferences) | Adorage preferences |  | 
 [other/adrenalineRushHourGameData](https://discmaster.textfiles.com/search?format=adrenalineRushHourGameData) | Adrenaline Rush Hour game data | .bin | 

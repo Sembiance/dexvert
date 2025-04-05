@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/better-regex, sonarjs/no-empty-collection, camelcase */
+/* eslint-disable unicorn/better-regex, sonarjs/no-empty-collection */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
@@ -406,7 +406,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
 
 	// These are actually mis-identified files, but either I haven't come up with a good way to avoid it or the format isn't important enough to warrant better identification
-	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
+	[/archive\/linuxEXTFilesystem\/(2940-sbpcd-nonet\.img|filesys-ELF-2\.0\.x)$/, "archive", "iso"],
 	[/archive\/mdf\/R180 NG Media 1\.mdf$/, "archive", "iso"],
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],

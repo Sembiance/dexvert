@@ -1,11 +1,11 @@
-# Supported File Formats (3,092)
+# Supported File Formats (3,095)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (456)
+## Archive (457)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -69,6 +69,7 @@ archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/binHex/)
 archive | [BinSCII](http://fileformats.archiveteam.org/wiki/BinSCII) | .bsc .bsq | [binsciiPrepare](https://github.com/Sembiance/dexvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/binscii/)
 archive | BioWare Entity Resource File | .erf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
+archive | BlakHole Archive | .bh | [izArc](https://www.izarc.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/blakHole/)
 archive | Bloodrayne game data archive | .pod | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/bloodrayneGameDataArchive/)
 archive | [Blorb Interactive Fiction Package](http://fileformats.archiveteam.org/wiki/Blorb) | .blorb .gblorb .zblorb .blb .glb .zlb | [blorbtar](https://www.ifarchive.org/if-archive/programming/blorb/blorbtar-0.1.pl) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/blorb/)
 archive | BOLT Game Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/boltGameArchive/)
@@ -230,7 +231,7 @@ archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .l
 archive | Lhwarp | .lhw | [unar](https://github.com/incbee/Unarchiver) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/lhwarp/)
 archive | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
 archive | [LIMIT Archive](http://fileformats.archiveteam.org/wiki/LIMIT) | .lin | [limit](http://cd.textfiles.com/nightowl/nopv13/014A/LIMIT12.ZIP) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/limit/)
-archive | Linux Extended Filesystem | .img .ext2 .ext3 .ext4 | [sevenZip](http://p7zip.sourceforge.net/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/linuxEXTFilesystem/)
+archive | Linux Extended Filesystem | .img .ext2 .ext3 .ext4 | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/linuxEXTFilesystem/)
 archive | Lionhead Studios game archive | .sad | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/lionheadStudiosGameArchive/)
 archive | Liquid Entertainment H2O game data archive | .h2o | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/h2oGameDataArchive/)
 archive | LM-T2E Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lmt2ePacked/)
@@ -505,7 +506,7 @@ audio | Ensoniq Disk Image | .gkh .eds .eda .ede .edt .edv | [awaveStudio](https
 audio | [eXtended Instrument](http://fileformats.archiveteam.org/wiki/Extended_instrument) | .xi | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/eXtendedInstrument/)
 audio | Flanker Sound Library | .sfx | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/flankerSoundLibrary/)
 audio | [FMOD Sample Bank](http://fileformats.archiveteam.org/wiki/FMOD_Sample_Bank) | .fsb .bank | [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/fmodSampleBank/)
-audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/flac/)
+audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/flac/)
 audio | FSSD SoundEdit Mac Sound |  | [fssd2wav](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/fssdSound/)
 audio | [FunCom ISS Audio](http://fileformats.archiveteam.org/wiki/Funcom_ISS) | .iss | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/funComISSAudio/)
 audio | GameCube Music | .gcm | [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/gameCubeMusic/)
@@ -1304,7 +1305,7 @@ image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | [recoil2png]
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [6 sample files](https://sembiance.com/fileFormatSamples/image/pabloPaint/)
 image | [PABX Background](http://fileformats.archiveteam.org/wiki/PABX_background) | .pix | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pabxBackground/)
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
-image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [5 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
+image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [6 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/paintPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)) | .da4 .psc | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/image/paintShop/)
 image | [PaintShop Pro](http://fileformats.archiveteam.org/wiki/PaintShop_Pro) | .psp .pspimage .pspbrush | [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintShopPro/)
@@ -1970,7 +1971,7 @@ other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScr
 
 
 
-## Poly (66)
+## Poly (67)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 poly | [3D Manufacturing Format](http://fileformats.archiveteam.org/wiki/3MF) | .3mf | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [4 sample files](https://sembiance.com/fileFormatSamples/poly/threeMF/)
@@ -2012,6 +2013,7 @@ poly | [NetImmerse NIF](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [b
 poly | [Neutral File Format](http://fileformats.archiveteam.org/wiki/NFF) | .nff | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/neutralFileFormat/)
 poly | OGRE Mesh | .mesh.xml .mesh | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/ogreMesh/)
 poly | [Open Game Engine Exchance](https://opengex.org/) | .ogex | [assimp](https://github.com/assimp/assimp) | [6 sample files](https://sembiance.com/fileFormatSamples/poly/openGEX/)
+poly | Panda3D Model | .egg | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [3 sample files](https://sembiance.com/fileFormatSamples/poly/panda3DModel/)
 poly | [Playstation 2 Save Icon Model](https://www.ps2savetools.com/documents/iconsys-format/) | .sys | [ico2gltf](https://github.com/MightyDuke/ico2gltf) | [2 sample files](https://sembiance.com/fileFormatSamples/poly/ps2SaveIconModel/)
 poly | [Polygon File Format](http://fileformats.archiveteam.org/wiki/PLY) | .ply | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [polyTrans64](https://www.okino.com/conv/conv.htm) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/polygonFileFormat/)
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/quake2Model/)
@@ -2042,7 +2044,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,006)
+## Text (1,007)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2163,7 +2165,7 @@ text | Boundary Scan Description Language | .bsdl .bsd |  | [2 sample files](htt
 text | Brik checksums |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/brikChecksums/)
 text | Brutus Application Definition | .bad |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/brutusApplicationDefinition/)
 text | BubbleGEM Help | .bgh |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/bubbleGEMHelp/)
-text | Bucket 'o Tab tablature | .tbs .bot |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/bucketOTabTablature/)
+text | Bucket 'o Tab tablature | .tbs .bot |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/bucketOTabTablature/)
 text | Buzzwords On-Line Manual Program TOC | .toc |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/buzzwordsOnLineManualProgramTOC/)
 text | Byline Charset definition | .chr |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/bylineCharsetDefinition/)
 text | Byline Graphic configuration | .grf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/bylineGraphicConfiguration/)
@@ -2688,7 +2690,7 @@ text | Personal Font Maker Preferences | .prf |  | [10 sample files](https://sem
 text | Personal Font Maker Settings | .set |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/personalFontMakerSettings/)
 text | [PGP Message](http://fileformats.archiveteam.org/wiki/PGP) |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/pgpMessage/)
 text | [PGP Public/Private Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pgpPublicKey/)
-text | Phoenix Printer Driver | .trb .prt |  | 
+text | Phoenix Printer Driver | .trb .prt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/phoenixPrinterDriver/)
 text | Photogenics Fractal | .f |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/photogenicsFractal/)
 text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps .php3t .tst |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/php/)
 text | phpMyAdmin SQL dump | .sql |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/phpMyAdminSQLDump/)
@@ -2864,12 +2866,13 @@ text | Starry Night Document | .sno .snf |  | [11 sample files](https://sembianc
 text | StarWriter keyboard Macro | .mac |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/starWriterKeyboardMacro/)
 text | Steam install script | .vdf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/steamInstallScript/)
 text | STEP model data | .step |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/stepModelData/)
+text | StepMania step file | .sm |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/stepManiaStepFile/)
 text | Stockholm format | .sto .stk .stockholm |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/stockholmFormat/)
 text | Storm Shell project/makefile | .¶ .image |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/stormShellProjectMakefile/)
 text | StormEd settings | .ed |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/stormEdSettings/)
 text | Studio Printer Dither method | .dit |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/studioPrinterDitherMethod/)
 text | SubRip subtitles | .srt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/subRipSubtitles/)
-text | SubStation Alpha Subtitle | .ssa .ass |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/subStationAlphaSubtitle/)
+text | SubStation Alpha Subtitle | .ssa .ass |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/subStationAlphaSubtitle/)
 text | SubViewer subtitle | .tts |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/subViewerSubtitle/)
 text | SunClock's Vector Map Format | .vmf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/sunClocksVectorMapFormat/)
 text | SuperDOS Adapter File | .adf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/superDOSAdapterFile/)
@@ -3008,7 +3011,7 @@ text | WinFlash Flashcard Source | .fls |  | [6 sample files](https://sembiance.
 text | WinHex data structure template | .txt .tpl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/winHexDataStructureTemplate/)
 text | WinJack for MS Win | .bj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/winJackForMSWin/)
 text | WinMerge directory/file Filter | .flt .tmpl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/winMergeDirectoryFileFilter/)
-text | WinMorph project | .mrf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/winMorphProject/)
+text | WinMorph project | .mrf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/winMorphProject/)
 text | WinUAE Configuration | .uae |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/winUAEConfiguration/)
 text | Wise Installer log | .log |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wiseInstallerLog/)
 text | Wise script | .wse |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)

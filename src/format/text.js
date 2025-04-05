@@ -891,6 +891,7 @@ export default
 		starDictInfo                               : {name : "StarDict Info", ext : [".ifo"], magic : ["StarDict Info"]},
 		starryNightDocument                        : {name : "Starry Night Document", ext : [".sno", ".snf"], magic : ["Starry Night Document"], weakMagic : true},
 		steamInstallScript                         : {name : "Steam install script", ext : [".vdf"], magic : ["Steam install script"], weakMagic : true},
+		stepManiaStepFile                          : {name : "StepMania step file", ext : [".sm"], magic : ["StepMania step file"], weakMagic : true},
 		stepModelData                              : {name : "STEP model data", ext : [".step"], magic : ["ISO-10303 STEP model data", /^fmt\/698( |$)/]},
 		stockholmFormat                            : {name : "Stockholm format", ext : [".sto", ".stk", ".stockholm"], magic : ["Stockholm format"]},
 		stormEdSettings                            : {name : "StormEd settings", ext : [".ed"], magic : ["StormEd settings"]},

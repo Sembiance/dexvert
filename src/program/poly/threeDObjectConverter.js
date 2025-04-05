@@ -27,7 +27,7 @@ export class threeDObjectConverter extends Program
 				WindowDismiss("Warning", "", "{ENTER}")
 				return WinActive("3D Object Converter v10.60     [ ", "");
 			EndFunc
-			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*5})
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*14})
 			If Not $mainWindow Then
 				Exit 0
 			EndIf

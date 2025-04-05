@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,506)
+# Unsupported File Formats (3,512)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1132,7 +1132,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,284)
+## Other (2,289)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1673,6 +1673,7 @@ Family/Format | Name | Extensions | Notes
 [other/darksidersGameDataPackage](https://discmaster.textfiles.com/search?format=darksidersGameDataPackage) | Darksiders game data package | .oppc .op360 .opps3 | 
 [other/darkWaveStudioModule](https://discmaster.textfiles.com/search?format=darkWaveStudioModule) | DarkWave Studio module | .dwp | 
 [other/dasBootGameDataArchive](https://discmaster.textfiles.com/search?format=dasBootGameDataArchive) | Das Boot game data archive | .d02 .d03 .d01 | 
+[other/dataModeleXchangeEncodingFormat](https://discmaster.textfiles.com/search?format=dataModeleXchangeEncodingFormat) | Data Model eXchange encoding format | .dmx | 
 [other/databenchForm](https://discmaster.textfiles.com/search?format=databenchForm) | Databench form | .msk | 
 [other/datAGIDataBase](https://discmaster.textfiles.com/search?format=datAGIDataBase) | DatAGI data base |  | 
 [other/datamatDatabaseStructure](https://discmaster.textfiles.com/search?format=datamatDatabaseStructure) | Datamat database structure | .sts | 
@@ -2625,6 +2626,7 @@ Family/Format | Name | Extensions | Notes
 [other/palmTides](https://discmaster.textfiles.com/search?format=palmTides) | Palm Tides | .pdb | 
 [other/palmDraftSchematic](https://discmaster.textfiles.com/search?format=palmDraftSchematic) | PalmDraft schematic | .pdb | 
 [other/pandaSignatureFileSystem](https://discmaster.textfiles.com/search?format=pandaSignatureFileSystem) | Panda Signature file system | .sig | 
+[other/panda3DBamContainer](https://discmaster.textfiles.com/search?format=panda3DBamContainer) | Panda3D Bam container | .bam | 
 [other/panzerkriegForWindowsScenario](https://discmaster.textfiles.com/search?format=panzerkriegForWindowsScenario) | Panzerkrieg for Windows Scenario | .pks | 
 [other/paperPortSlideShot](https://discmaster.textfiles.com/search?format=paperPortSlideShot) | PaperPort Slide Show | .fss | 
 [other/papillonPalette](https://discmaster.textfiles.com/search?format=papillonPalette) | Papillon Palette | .pal .ppal | 
@@ -2818,6 +2820,7 @@ Family/Format | Name | Extensions | Notes
 [other/realTimeWorkspace](https://discmaster.textfiles.com/search?format=realTimeWorkspace) | RealTime Workspace | .rtw | 
 [other/rebelBookMovesFormat](https://discmaster.textfiles.com/search?format=rebelBookMovesFormat) | REBEL book Moves format | .mvs | 
 [other/rebelPieces](https://discmaster.textfiles.com/search?format=rebelPieces) | REBEL Pieces | .pcs | 
+[other/recoloredProject](https://discmaster.textfiles.com/search?format=recoloredProject) | Recolored project | .rcl | 
 [other/reflectionsCamera](https://discmaster.textfiles.com/search?format=reflectionsCamera) | Reflections Camera | .kam | 
 [other/reflectionsData](https://discmaster.textfiles.com/search?format=reflectionsData) | Reflections Data | .r3 | 
 [other/reflectionsMaterial](https://discmaster.textfiles.com/search?format=reflectionsMaterial) | Reflections Material | .mat | 
@@ -2932,6 +2935,7 @@ Family/Format | Name | Extensions | Notes
 [other/skincrafterSkin](https://discmaster.textfiles.com/search?format=skincrafterSkin) | skincrafter skin | .skf | 
 [other/skinMagicSkin](https://discmaster.textfiles.com/search?format=skinMagicSkin) | SkinMagic Skin |  | 
 [other/skunnyKartGameData](https://discmaster.textfiles.com/search?format=skunnyKartGameData) | Skunny Kart Library Game Data | .lid | 
+[other/skypeExtra](https://discmaster.textfiles.com/search?format=skypeExtra) | Skype Extra | .sparc | 
 [other/skypeLocalizationData](https://discmaster.textfiles.com/search?format=skypeLocalizationData) | Skype localization data |  | 
 [other/slicksNSlidesTrack](https://discmaster.textfiles.com/search?format=slicksNSlidesTrack) | Slicks 'n' Slide Track | .ss | 
 [other/slideSavedGame](https://discmaster.textfiles.com/search?format=slideSavedGame) | Slide Saved Game | .sld | 
@@ -3204,6 +3208,7 @@ Family/Format | Name | Extensions | Notes
 [other/upsPatchFile](https://discmaster.textfiles.com/search?format=upsPatchFile) | UPS patch file | .ups | 
 [other/vRayMaterial](https://discmaster.textfiles.com/search?format=vRayMaterial) | V-Ray Material | .mat .vismat | 
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 
+[other/valveParticleStorage](https://discmaster.textfiles.com/search?format=valveParticleStorage) | Valve particle storage | .pcf | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?format=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?format=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 
 [other/varsityScripsitConfiguration](https://discmaster.textfiles.com/search?format=varsityScripsitConfiguration) | Varsity Scripsit Configuration | .cnf | 
@@ -3422,7 +3427,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (88)
+## Poly (89)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3468,6 +3473,7 @@ Family/Format | Name | Extensions | Notes
 [poly/infiniDScene](https://discmaster.textfiles.com/search?format=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
 [poly/irit3DModel](https://discmaster.textfiles.com/search?format=irit3DModel) | IRIT 3D model | .irt .dat | 
 [poly/kml](https://discmaster.textfiles.com/search?format=kml) | [Keyhole Markup Language](http://fileformats.archiveteam.org/wiki/KML) | .kml .kmz | [4 sample files](https://sembiance.com/fileFormatSamples/poly/kml/)
+[poly/legiModelData](https://discmaster.textfiles.com/search?format=legiModelData) | LEGO model data | .model | 
 [poly/mastercam9Geometry](https://discmaster.textfiles.com/search?format=mastercam9Geometry) | Mastercam 9 geometry | .mc9 | 
 [poly/mayaScene](https://discmaster.textfiles.com/search?format=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - So the discmaster site only has like 64 unique maya files. Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
 [poly/meshworkModel](https://discmaster.textfiles.com/search?format=meshworkModel) | Meshwork model | .mesh | 

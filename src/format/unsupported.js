@@ -959,7 +959,6 @@ export default
 		fujitsuMovie                  : {name : "Fujitsu Movie", ext : [".mve"], magic : ["Fujitsu Movie format video", "Generic RIFF file FJMV"]},
 		hannaBarberaAnimationWorkshop : {name : "The Hanna-Barbera Animation Workshop animation", ext : [".xsh"], magic : ["The Hanna-Barbera Animation Workshop animation data"]},
 		iavfVideo                     : {name : "IAVF video", ext : [".avi", ".iavf"], magic : ["IAVF video"]},
-		intelIndeoVideoFile           : {name : "Intel Indeo Video File", ext : [".ivf"], magic : ["Intel Indeo Video File"]},
 		invisionDeltaAnimation        : {name : "Invision Delta Animation", ext : [".a01"], magic : ["Invision delta Animation"]},
 		kheopsStudioVideo             : {name : "Kheops Studio Video", ext : [".ksv"], magic : ["Kheops Studio Video"], weakMagic : true},
 		knowledgeAdventureMovie       : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV"},

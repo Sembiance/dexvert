@@ -7,5 +7,5 @@ export class sierraVMD extends Format
 	ext          = [".vmd"];
 	magic        = ["Sierra Video and Music Data video", "Sierra VMD (vmd)"];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:vmd]"];
+	converters   = ["ffmpeg[format:vmd]", "nihav"];
 }

@@ -1,4 +1,4 @@
-# Supported File Formats (3,096)
+# Supported File Formats (3,098)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -468,11 +468,12 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (109)
+## Audio (110)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 3DO STR audio |  | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/threeDOSTRAudio/)
 audio | [3GP/3GPP2 Audio](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/threeGAudio/)
+audio | [Acorn Replay Audio](http://fileformats.archiveteam.org/wiki/Acorn_Replay) | .rpl | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/acornReplayAudio/)
 audio | [Adaptive Multi-Rate](http://fileformats.archiveteam.org/wiki/Adaptive_Multi-Rate_Audio) | .amr .3ga | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/amr/)
 audio | [Advanced Audio Coding](http://fileformats.archiveteam.org/wiki/AAC) | .aac .m4a .mp4 .ima | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/aac/)
 audio | Adventure Game Studio Audio Data | .vox | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/agsAudioData/)
@@ -527,7 +528,7 @@ audio | [Matroska Audio](http://fileformats.archiveteam.org/wiki/Matroska_Audio)
 audio | [Maxis XA Audio](https://wiki.multimedia.cx/index.php/Maxis_XA) | .xa | [sox](http://sox.sourceforge.net) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/maxisXA/)
 audio | Microsoft XWMA Audio | .xwma .xwm | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/xwmaAudio/)
 audio | MIDI Sample Dump | .sds | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/midiSampleDump/)
-audio | [Monkey's Audio](http://fileformats.archiveteam.org/wiki/Monkey's_Audio) | .ape | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/monkeysAudio/)
+audio | [Monkey's Audio](http://fileformats.archiveteam.org/wiki/Monkey's_Audio) | .ape | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/monkeysAudio/)
 audio | [MPEG ADTS Layer II](http://fileformats.archiveteam.org/wiki/MPEG_Audio_Layer_II) | .mp2 | [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/mp2/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 .mpga .mpg |  | [9 sample files](https://sembiance.com/fileFormatSamples/audio/mp3/)
 audio | [Musepack Audio](http://justsolve.archiveteam.org/wiki/Musepack_Audio) | .mpc .mp+ .mpp | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/musepack/)
@@ -567,13 +568,13 @@ audio | [Speex Encoded Audio](http://fileformats.archiveteam.org/wiki/Speex) | .
 audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
 audio | The Need for Speed Sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedSoundBank/)
-audio | [TrueAudio Lossless Audio](https://wiki.hydrogenaud.io/index.php?title=TTA) | .tta | [ffmpeg](https://ffmpeg.org/) [ttaenc](https://tta.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/trueAudio/)
+audio | [TrueAudio Lossless Audio](https://wiki.hydrogenaud.io/index.php?title=TTA) | .tta | [ffmpeg](https://ffmpeg.org/) [ttaenc](https://tta.sourceforge.net) [nihav](https://git.nihav.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/trueAudio/)
 audio | [Turtle Beach Sample Vision Audio](http://fileformats.archiveteam.org/wiki/Sample_Vision) | .smp | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sampleVision/)
 audio | Ubisoft Rayman 2 APM | .apm | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/ubisoftRayman2APM/)
 audio | VirtualDJ audio Sample | .vdj | [vgmstream](https://github.com/vgmstream/vgmstream) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/virtualDJAudioSample/)
 audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav .bwf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [27 sample files](https://sembiance.com/fileFormatSamples/audio/wav/)
-audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
+audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) [nihav](https://git.nihav.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
 audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
 audio | XACT Wave Bank | .xwb | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/xactWaveBank/)
@@ -2690,7 +2691,7 @@ text | Personal Font Maker Preferences | .prf |  | [10 sample files](https://sem
 text | Personal Font Maker Settings | .set |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/personalFontMakerSettings/)
 text | [PGP Message](http://fileformats.archiveteam.org/wiki/PGP) |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/pgpMessage/)
 text | [PGP Public/Private Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pgpPublicKey/)
-text | Phoenix Printer Driver | .trb .prt |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/phoenixPrinterDriver/)
+text | Phoenix Printer Driver | .trb .prt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/phoenixPrinterDriver/)
 text | Photogenics Fractal | .f |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/photogenicsFractal/)
 text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps .php3t .tst |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/php/)
 text | phpMyAdmin SQL dump | .sql |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/phpMyAdminSQLDump/)
@@ -2820,7 +2821,7 @@ text | Shareware Information File | .sif |  | [10 sample files](https://sembianc
 text | ShowMaker Device | .smdevice |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/showMakerDevice/)
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
-text | Signum 3 Printer Driver | .trb .prt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signum3PrinterDriver/)
+text | Signum 3 Printer Driver | .trb .prt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/signum3PrinterDriver/)
 text | Signum Font List | .fli |  | 
 text | Signum Help File | .hlp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signumHelpFile/)
 text | Signum Key-Combination-List | .ktl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumKeyCombinationList/)
@@ -3058,19 +3059,19 @@ text | ZIM Wiki |  |  | [3 sample files](https://sembiance.com/fileFormatSamples
 
 
 
-## Video (103)
+## Video (104)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [3GP/3GPP2 Video](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/threeGVideo/)
 video | [4X Movie Video](https://wiki.multimedia.cx/index.php/4xm_Format) | .4xm | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/fourXMovieVideo/)
-video | [Acorn Replay Video](http://fileformats.archiveteam.org/wiki/Acorn_Replay) | .rpl | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/acornReplayVideo/) - 3 files don't convert: ducks2, parrot, bluegreen (many others didn't convert on discmaster)
+video | [Acorn Replay Video](http://fileformats.archiveteam.org/wiki/Acorn_Replay) | .rpl | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [18 sample files](https://sembiance.com/fileFormatSamples/video/acornReplayVideo/)
 video | [Adeline XCF video](https://wiki.multimedia.cx/index.php/Adeline_XCF) | .acf | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/adelineXCF/)
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/animaticFilm/)
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/QuickTime) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) [qt_flatt](https://www.macdisk.com/quickten.php) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [quickTimePlayer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [xanim](https://github.com/Sembiance/xanim) | [31 sample files](https://sembiance.com/fileFormatSamples/video/mov/) - So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents. Early quicktime movies had the 'moov' section in the resource fork of the file and the 'mdat' section in the data fork. Sadly on my PC/Mac 'hybrid' CDs, the resource fork got stripped during mastering the PC side, so there is no 'moov' section on the PC files. Luckilly in these cases you can see they usually included an .avi alternative on the PC side, and of course the Mac side has the full quicktime movie, fully working. There are a handful of cases where the on a pure PC only CD there are 'dead' .mov files that are missing their 'moov' data, but there isn't anything really that can be done here. In theor it might be possible to train a generative AI model to examine tens of thousands of working quicktime .mov files, examining the 'mdat' section and seeing how it relates to the 'moov' section. Then maybe it would be possible to feed it some of these 'bare mdat' files and have it generate a 'moov' section that would work well enough to convert, but that's not something I'm capable of doing myself and it might not work anyways. Some more info about the issue: https://preservation.tylerthorsted.com/2023/10/06/quicktime-moov/ Finally, ffmpeg itself can't deal with MacBinary 2 versions of quicktime movies (these include both the mdat data fork and moov resource fork data in 1 file), but the 'qtflat' tool can flatten these into a video file ffmpeg can work with
 video | [Argonaut Video Sequence](https://wiki.multimedia.cx/index.php/AVS) | .avs | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/argonautVideoSequence/)
 video | [Ark of Time AN Video](https://wiki.multimedia.cx/index.php/Ark_of_Time_AN) | .an | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/arkOfTimeAN/)
 video | ASCARON Entertainment Animation | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/ascornEntertainmentAnimation/)
-video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi .divx | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [xanim](https://github.com/Sembiance/xanim) | [18 sample files](https://sembiance.com/fileFormatSamples/video/avi/)
+video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi .divx | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [nihav](https://git.nihav.org/) [xanim](https://github.com/Sembiance/xanim) | [18 sample files](https://sembiance.com/fileFormatSamples/video/avi/)
 video | [AVF Video](https://wiki.multimedia.cx/index.php/AVF) | .avf | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/avfVideo/)
 video | [Beam Software SIFF Video](https://wiki.multimedia.cx/index.php/SIFF) | .vb .vbc | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/beamSoftwareSIFF/)
 video | [Bethesda Softworks Video](https://wiki.multimedia.cx/index.php/Bethsoft_VID) | .vid | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/bethsoftVid/)
@@ -3102,11 +3103,12 @@ video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) [na_game_tool](https://nihav.org/game_tool.html) | [14 sample files](https://sembiance.com/fileFormatSamples/video/fli/)
 video | [FutureVision FST video](https://wiki.multimedia.cx/index.php?title=FutureVision_FST) | .fst | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/futureVisionFSTVideo/)
 video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [grasp4](https://winworldpc.com/product/fantavision/1x-dos) | [30 sample files](https://sembiance.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
-video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Digital_Video) | .gdv | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/gremlinDigitalVideo/)
+video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Digital_Video) | .gdv | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/gremlinDigitalVideo/)
 video | [Harro Media VDO video](https://wiki.multimedia.cx/index.php/Harrow_Media_VDO) | .vdo .vd | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/vdoVideo/)
 video | [IBM PhotoMotion MM Video](https://wiki.multimedia.cx/index.php/IBM_PhotoMotion) | .mm | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/ibmPhotoMotion/)
 video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/video/iffYAFA/)
+video | [Intel Indeo Video File](https://wiki.multimedia.cx/index.php/Indeo_IVF) | .ivf | [nihav](https://git.nihav.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/intelIndeoVideoFile/)
 video | [Intelligent Games Video/cutscene](https://wiki.multimedia.cx/index.php/Intelligent_Games_MOV) | .mov | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/intelligentGamesVideoCutscene/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/iffANIM/)
 video | [Interplay C93 Video](https://wiki.multimedia.cx/index.php/C93) | .c93 | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/c93Video/)
@@ -3117,7 +3119,7 @@ video | [KDV video](https://wiki.multimedia.cx/index.php/KDV) | .kdv | [na_game_
 video | [Legend Entertainment Q Video](https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q) | .q | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/legendEntertainmentQ/)
 video | Little Big Adventure FLA Video | .fla | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/littleBigAdventureFLAVideo/)
 video | [Loki SDL MJPEG Video](https://wiki.multimedia.cx/index.php/SMJPEG) | .mjpg | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/video/smjpeg/)
-video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/smush/)
+video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/smush/)
 video | [Machine Hunter FMV Video](https://wiki.multimedia.cx/index.php/Machine_Hunter_FMV) | .fmv | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/machineHunterFMVVideo/)
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)
 video | [Motion JPEG 2000](http://fileformats.archiveteam.org/wiki/MJ2) | .mj2 .mjp2 | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/motionJPEG2000/)
@@ -3146,7 +3148,7 @@ video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv
 video | [RL2 Video](https://wiki.multimedia.cx/index.php/RL2) | .rl2 | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/rl2Video/)
 video | [Sega CPK video](https://wiki.multimedia.cx/index.php/JV) | .cpk .cak .film | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/segaCPKVideo/)
 video | [Sierra Robot Animation](https://wiki.multimedia.cx/index.php/Robot_Animation) | .rbt | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/sierraRobotAnimation/)
-video | [Sierra Video and Music Data](https://wiki.multimedia.cx/index.php/VMD) | .vmd | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/sierraVMD/)
+video | [Sierra Video and Music Data](https://wiki.multimedia.cx/index.php/VMD) | .vmd | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/sierraVMD/)
 video | [Silicon Graphics IRIX Movie](http://fileformats.archiveteam.org/wiki/SGI_movie) | .mv .movie .sgi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [11 sample files](https://sembiance.com/fileFormatSamples/video/sgiMovie/)
 video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/smacker/)
 video | [Stardock Entertainment Video](https://wiki.multimedia.cx/index.php/VIDPAK) | .sdv .vdo | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/stardockEntertainmentVideo/)
@@ -3154,7 +3156,7 @@ video | [Talisman ANI](https://wiki.multimedia.cx/index.php/Talisman_ANI) | .ani
 video | [Terminal Reality TVI Video](https://wiki.multimedia.cx/index.php/TVI) | .tvi | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/tviVideo/)
 video | [UMV Video](https://wiki.multimedia.cx/index.php/UMV) | .umv | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/umvVideo/)
 video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/videoMasterFilm/)
-video | [VivoActive Streaming Video](https://wiki.multimedia.cx/index.php/Vivo) | .viv | [ffmpeg](https://ffmpeg.org/) | [15 sample files](https://sembiance.com/fileFormatSamples/video/vivo/)
+video | [VivoActive Streaming Video](https://wiki.multimedia.cx/index.php/Vivo) | .viv | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [18 sample files](https://sembiance.com/fileFormatSamples/video/vivo/)
 video | [VPX1 Video Package](https://wiki.multimedia.cx/index.php/VPX1) | .vpx | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/vpx1VideoPackage/)
 video | [WEBM Video](http://fileformats.archiveteam.org/wiki/WebM) | .webm | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/webmVideo/)
 video | [Westwood Studios Vector Quantized Animation](https://wiki.multimedia.cx/index.php/VQA) | .vqa | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/westwoodStudiosVQA/) - FFMPEG only has partial support. The HQ ones don't appear to be supported at all despite being documented out there. I tried VQA2AVI but that just produced black videos.

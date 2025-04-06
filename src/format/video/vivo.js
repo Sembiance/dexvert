@@ -7,5 +7,5 @@ export class vivo extends Format
 	ext          = [".viv"];
 	magic        = ["Vivo streaming video", "Vivo video data", "Vivo (vivo)", /^fmt\/499( |$)/];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:vivo]"];
+	converters   = ["nihav", "ffmpeg[format:vivo]"];
 }

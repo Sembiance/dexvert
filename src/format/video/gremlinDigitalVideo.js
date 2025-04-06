@@ -7,5 +7,5 @@ export class gremlinDigitalVideo extends Format
 	ext          = [".gdv"];
 	magic        = ["Gremlin Digital Video"];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg"];
+	converters   = ["ffmpeg", "nihav"];
 }

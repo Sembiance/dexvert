@@ -8,5 +8,5 @@ export class smush extends Format
 	magic        = ["LucasArts Smush Animation Format", "Smush Animation format", "LucasArts Smush (smush)", "LucasArts Smush v2 (SANM) video"];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="SMSH" && macFileCreator==="LApl";
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:smush]"];
+	converters   = ["ffmpeg[format:smush]", "nihav"];
 }

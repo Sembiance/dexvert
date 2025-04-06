@@ -7,5 +7,5 @@ export class monkeysAudio extends Format
 	ext          = [".ape"];
 	magic        = ["Monkey's Audio", "Monkeys Audio music file", "audio/x-ape", /^fmt\/1086( |$)/];
 	metaProvider = ["ffprobe"];
-	converters   = ["ffmpeg[outType:mp3]", "zxtune123"];
+	converters   = ["ffmpeg[outType:mp3]", "nihav[outType:mp3]", "zxtune123"];
 }

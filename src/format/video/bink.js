@@ -9,5 +9,5 @@ export class bink extends Format
 	magic          = [/^Bink2? [Vv]ideo/, "video/vnd.radgamettools.bink", "Bink (bink)", /^fmt\/731( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="BINK" && macFileCreator==="BINK";
 	metaProvider   = ["mplayer"];
-	converters     = ["ffmpeg"];
+	converters     = ["ffmpeg"];	// nihav has messed up audio for most bink files and ffmpeg seems to handle all the ones I've found
 }

@@ -764,6 +764,7 @@ export default
 		personalFontMakerSettings                  : {name : "Personal Font Maker Settings", ext : [".set"], magic : ["Personal Font Maker Settings"]},
 		phoenixPrinterDriver                       : {name : "Phoenix Printer Driver", ext : [".trb", ".prt"], magic : ["Phoenix Printer Driver"]},
 		photogenicsFractal                         : {name : "Photogenics Fractal", ext : [".f"], magic : ["Photogenics Fractal"], weakMagic : true},
+		phunScene                                  : {name : "Phun scene", ext : [".phn"], magic : ["Phun scene"], weakMagic : true},
 		picasaWindowsInfo                          : {name : "Picasa Windows info", ext : [".fen"], magic : ["Picasa Windows info"], weakMagic : true},
 		picsRatingSystem                           : {name : "PICS Rating System", ext : [".rat"], magic : ["PICS Rating System"], weakMagic : true},
 		pictureItBrushDefinition                   : {name : "Picture It! brush definition", ext : [".txt"], magic : ["Picture It! brush definition"]},

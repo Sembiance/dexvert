@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,512)
+# Unsupported File Formats (3,514)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1132,7 +1132,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,289)
+## Other (2,291)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1427,6 +1427,7 @@ Family/Format | Name | Extensions | Notes
 [other/beyondWordsComposerStyle](https://discmaster.textfiles.com/search?format=beyondWordsComposerStyle) | Beyond Words Composer Style | .sty | 
 [other/biewXlatTable](https://discmaster.textfiles.com/search?format=biewXlatTable) | Biew Xlat Table | .xlt | 
 [other/bigRedRacingLevel](https://discmaster.textfiles.com/search?format=bigRedRacingLevel) | Big Red Racing Level | .lev | 
+[other/bigJigJigsaw](https://discmaster.textfiles.com/search?format=bigJigJigsaw) | BigJig Jigsaw | .jg6 | 
 [other/billOfMaterials](https://discmaster.textfiles.com/search?format=billOfMaterials) | Bill of Materials | .bom | 
 [other/binaryColorFormat](https://discmaster.textfiles.com/search?format=binaryColorFormat) | Binary Color Format | .bcf | 
 [other/binaryDeltaCompressedPatch](https://discmaster.textfiles.com/search?format=binaryDeltaCompressedPatch) | Binary Delta Compressed Patch |  | 
@@ -3030,6 +3031,7 @@ Family/Format | Name | Extensions | Notes
 [other/subZeroGameFileMap](https://discmaster.textfiles.com/search?format=subZeroGameFileMap) | SubZero Game File map | .gmf | 
 [other/suncomF15EEagleKeysConfig](https://discmaster.textfiles.com/search?format=suncomF15EEagleKeysConfig) | Suncom F-15E Eagle Keys config | .key | 
 [other/sunVoxSynthesizer](https://discmaster.textfiles.com/search?format=sunVoxSynthesizer) | SunVox Synthesizer | .sunsynth | 
+[other/superAngeloConfiguration](https://discmaster.textfiles.com/search?format=superAngeloConfiguration) | Super Angelo Configuration | .cfg | 
 [other/superNintendoROM](https://discmaster.textfiles.com/search?format=superNintendoROM) | Super Nintendo ROM | .sfc .smc | 
 [other/superSolversGizmosGadgetsPlayers](https://discmaster.textfiles.com/search?format=superSolversGizmosGadgetsPlayers) | Super Solvers: Gizmos and Gadgets! players | .dat | 
 [other/superZZTFile](https://discmaster.textfiles.com/search?format=superZZTFile) | Super ZZT File | .szt | 

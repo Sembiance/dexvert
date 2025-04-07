@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Wait for a second reply (or another blog post) and then update NihAV: https://codecs.multimedia.cx/2025/03/nihav-encoder-improvements/
+
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
 
@@ -58,6 +60,15 @@
 /--------------\
 | Low Priority |
 \--------------/
+* For anything dexvert uses "winedump" for, could get PE section names with objdump -h or llvm-objdump -h or something like that, probably added as another "meta" program.
+  Could look at `winedump -x` to see what other info is available, from non 32-bit exes like:  https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
+  Then update injest to grab these and add them to the detections field in a similar way that I do for Mac type/creator
+  Then test by reprocess item 1 or another test item (test with the exes first manually to see what shows)
+  Will need record down every itemid currently processing or already processed.
+  Then need to create code that can go through all of those itemids, find all identified exe files (including the other formstids like windowsSCR etc) and ensure the needed programs are installed on discmaster 2 and have it be able to get new detectin data and "append" it to that field in the index data file and then "update" the existing manticore entry and then test this manually on 1 or 2 items (backup the index files first!) and then remove that itemid from the list that needs processed.
+  Finally I'll need to process all items in the list. Need a way to multiprocess it, look at existing discmaster utils to see if I have anything similar
+  Lastly, see if any section names match 'matrosch' and then reply to: https://discord.com/channels/1140706605789368492/1140706606775025786/1355543937535836190
+
 * InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything.
   For example CABS from: https://archive.org/details/250TCF
   They take up 653MB of space but only 62MB is extracted.

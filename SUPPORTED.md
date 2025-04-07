@@ -1,4 +1,4 @@
-# Supported File Formats (3,098)
+# Supported File Formats (3,099)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -484,7 +484,7 @@ audio | [AST Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCub
 audio | [Astrid/Quartex AAC encoded audio](https://web.archive.org/web/20090319015937/http://www.rjamorim.com/rrw/astrid.html) | .aac | [astridAACDEC](https://web.archive.org/web/20090319015937/http://www.rjamorim.com/rrw/files/astrid.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/astridQuartexAACEncodedAudio/)
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [20 sample files](https://sembiance.com/fileFormatSamples/audio/aif/)
 audio | [Audio Visual Research](http://fileformats.archiveteam.org/wiki/AVR) | .avr | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/avr/)
-audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
+audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
 audio | [BRSTM Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_BRSTM) | .brstm | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/brstm/)
 audio | Cavewar Sounds | .dbs | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/cavewarsSounds/)
@@ -2045,7 +2045,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,008)
+## Text (1,009)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2409,7 +2409,7 @@ text | Gravis Firebird configuration | .fbd |  | [7 sample files](https://sembia
 text | GROMACS Residue Topology | .rtp |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gromacsResidueTopology/)
 text | Gui4CLI script | .g .gc |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/gui4CLIScript/)
 text | Hard Disk Menu System menu | .999 .000 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/hardDiskMenuSystemMenu/)
-text | Haskell Source | .hs .lhs |  | 
+text | Haskell Source | .hs .lhs |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/haskellSource/)
 text | HelpScribble Project | .hsc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/helpScribbleProject/)
 text | HeroQuest Quest | .q09 .q10 .qst |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/heroQuestQuest/)
 text | High Voltage SID Collection update info | .hvs |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/highVoltageSIDCollectionUpdateInfo/)
@@ -2591,6 +2591,7 @@ text | Mosaic Hotlist | .hot |  | [17 sample files](https://sembiance.com/fileFo
 text | Motion Capture File Format | .csm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/motionCaptureFileFormat/)
 text | Movie Master Script | .scr |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/movieMasterScript/)
 text | Moxcel spreadsheet | .mxl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/moxcelSpreadsheet/)
+text | MOZART Percussion map | .mzp |  | 
 text | Mozilla (Netscape) settings | .js |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mozillaNetscapeSettings/)
 text | Mozilla Mork database | .dat .mab |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mozillaMorkDatabase/)
 text | Mozilla Spam Filter Definition | .sfd |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/mozillaSpamFilterDefinition/)
@@ -2691,7 +2692,7 @@ text | Personal Font Maker Preferences | .prf |  | [10 sample files](https://sem
 text | Personal Font Maker Settings | .set |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/personalFontMakerSettings/)
 text | [PGP Message](http://fileformats.archiveteam.org/wiki/PGP) |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/pgpMessage/)
 text | [PGP Public/Private Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/pgpPublicKey/)
-text | Phoenix Printer Driver | .trb .prt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/phoenixPrinterDriver/)
+text | Phoenix Printer Driver | .trb .prt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/phoenixPrinterDriver/)
 text | Photogenics Fractal | .f |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/photogenicsFractal/)
 text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps .php3t .tst |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/php/)
 text | phpMyAdmin SQL dump | .sql |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/phpMyAdminSQLDump/)
@@ -2821,7 +2822,7 @@ text | Shareware Information File | .sif |  | [10 sample files](https://sembianc
 text | ShowMaker Device | .smdevice |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/showMakerDevice/)
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
-text | Signum 3 Printer Driver | .trb .prt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/signum3PrinterDriver/)
+text | Signum 3 Printer Driver | .trb .prt |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/signum3PrinterDriver/)
 text | Signum Font List | .fli |  | 
 text | Signum Help File | .hlp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/signumHelpFile/)
 text | Signum Key-Combination-List | .ktl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/signumKeyCombinationList/)
@@ -3071,7 +3072,7 @@ video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/QuickTim
 video | [Argonaut Video Sequence](https://wiki.multimedia.cx/index.php/AVS) | .avs | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/argonautVideoSequence/)
 video | [Ark of Time AN Video](https://wiki.multimedia.cx/index.php/Ark_of_Time_AN) | .an | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/arkOfTimeAN/)
 video | ASCARON Entertainment Animation | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/ascornEntertainmentAnimation/)
-video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi .divx | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [nihav](https://git.nihav.org/) [xanim](https://github.com/Sembiance/xanim) | [18 sample files](https://sembiance.com/fileFormatSamples/video/avi/)
+video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi .divx | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [nihav](https://git.nihav.org/) [xanim](https://github.com/Sembiance/xanim) | [27 sample files](https://sembiance.com/fileFormatSamples/video/avi/)
 video | [AVF Video](https://wiki.multimedia.cx/index.php/AVF) | .avf | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/avfVideo/)
 video | [Beam Software SIFF Video](https://wiki.multimedia.cx/index.php/SIFF) | .vb .vbc | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/beamSoftwareSIFF/)
 video | [Bethesda Softworks Video](https://wiki.multimedia.cx/index.php/Bethsoft_VID) | .vid | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/bethsoftVid/)

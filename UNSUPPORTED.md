@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,513)
+# Unsupported File Formats (3,514)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (279)
+## Archive (280)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -73,6 +73,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cryptLightShowProtected](https://discmaster.textfiles.com/search?format=cryptLightShowProtected) | Crypt Light Show Protected | .exe | 
 [archive/cryptexeProtected](https://discmaster.textfiles.com/search?format=cryptexeProtected) | CRYPTEXE Protected | .exe | 
 [archive/ctRawDiskImage](https://discmaster.textfiles.com/search?format=ctRawDiskImage) | CT Raw disk image | .raw | 
+[archive/daemonToolsProDiskImage](https://discmaster.textfiles.com/search?format=daemonToolsProDiskImage) | Daemon Tools Pro disk image | .sav | 
 [archive/darkstopProtected](https://discmaster.textfiles.com/search?format=darkstopProtected) | DaRKSToP Protected | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?format=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?format=debianFloppySplit) | Debian floppy split | .bin | 

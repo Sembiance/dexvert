@@ -132,6 +132,7 @@ export default
 		corkCompressedData                          : {name : "Cork compressed data", ext : ["$"], magic : ["Cork compressed data"]},
 		cpcPlusCartridgeImage                       : {name : "CPC Plus Cartridge image", ext : [".cpr"], magic : ["CPC Plus Cartridge image"]},
 		ctRawDiskImage                              : {name : "CT Raw disk image", ext : [".raw"], magic : ["CT Raw disk image"]},
+		daemonToolsProDiskImage                     : {name : "Daemon Tools Pro disk image", ext : [".sav"], magic : ["Daemon Tools Pro disk image"]},
 		datacompCompressedArchive                   : {name : "DATACOMP compressed archive", ext : [".emd"], magic : ["DATACOMP 1.0 compressed archive"]},
 		debianFloppySplit                           : {name : "Debian floppy split", ext : [".bin"], magic : ["Debian floppy split"]},
 		dfSeeDiskImage                              : {name : "DFSee disk image", ext : [".imz"], magic : ["DFSee disk image"]},

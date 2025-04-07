@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/better-regex, sonarjs/no-empty-collection */
+/* eslint-disable unicorn/better-regex, sonarjs/no-empty-collection, camelcase */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
@@ -170,7 +170,8 @@ const SUPPORTING_FILES =
 {
 	archive :
 	{
-		pog : /\.pnm$/i
+		cloneCDImage : /\.ccd$/i,
+		pog          : /\.pnm$/i
 	},
 	document :
 	{
@@ -435,6 +436,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/text\/playmationAction\/.*\.txt$/i, "text", "txt"],
 	[/text\/playmationSpine\/.*\.txt$/i, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
+	[/video\/avi\/(clip_42|House)\.avi$/, "audio", "aviAudio"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
 	[/archive\/macBinary\/bdh66306\.gif$/, "image", "gif"],

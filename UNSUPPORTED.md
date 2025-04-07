@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,514)
+# Unsupported File Formats (3,515)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (280)
+## Archive (281)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -104,6 +104,7 @@ Family/Format | Name | Extensions | Notes
 [archive/fizArchive](https://discmaster.textfiles.com/search?format=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/flatoutGameDataArchive](https://discmaster.textfiles.com/search?format=flatoutGameDataArchive) | Flatout game data archive | .bfs | 
 [archive/flinkGameDataArchive](https://discmaster.textfiles.com/search?format=flinkGameDataArchive) | Flink game data archive | .wld | 
+[archive/floppyDiskManagerDiskImage](https://discmaster.textfiles.com/search?format=floppyDiskManagerDiskImage) | Floppy Disk Manager disk image | .fdm | [1 sample file](https://sembiance.com/fileFormatSamples/archive/floppyDiskManagerDiskImage/)
 [archive/foxProArchive](https://discmaster.textfiles.com/search?format=foxProArchive) | FoxPro Archive | .pak | 
 [archive/freeArc](https://discmaster.textfiles.com/search?format=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
 [archive/fsgPacked](https://discmaster.textfiles.com/search?format=fsgPacked) | FSG Packed | .exe | 

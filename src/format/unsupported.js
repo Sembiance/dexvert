@@ -151,6 +151,7 @@ export default
 		fcdVirtualCDROMFile                         : {name : "FCD Virtual CD-ROM File", ext : [".fcd"], magic : ["Virtual CD-ROM File"], weakMagic : true},
 		finearCompressedData                        : {name : "FINEAR compressed data", ext : ["_"], magic : ["FINEAR compressed data"]},
 		flinkGameDataArchive                        : {name : "Flink game data archive", ext : [".wld"], magic : ["Flink game data archive"]},
+		floppyDiskManagerDiskImage                  : {name : "Floppy Disk Manager disk image", ext : [".fdm"], magic : ["Floppy Disk Manager disk image"], weakMagic : true},
 		foxProArchive                               : {name : "FoxPro Archive", ext : [".pak"], magic : ["FoxPro compressed dist. archive"], weakMagic : true},
 		gamosPackedGameDataArchive                  : {name : "Gamos Packed game data archive", ext : [".gpf", ".vga", ".snd", ".ega"], magic : ["Gamos Packed File game data archive"]},
 		gDevelopGameDataArchive                     : {name : "GDevelop game data archive", ext : [".egd"], magic : ["GDevelop game data archive"], weakMagic : true},

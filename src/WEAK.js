@@ -2110,6 +2110,7 @@ export const WEAK_VALUES =
 	/^Psion OVAL Control$/,
 	/^PPrint Color map$/,
 	/^PPrint Image$/,
+	/^PVA Video \(VideoStream\)$/,
 	/^QEMU Enhanced Disk Image$/,
 	/^Qt Resource Collection$/,
 	/^Quartus Symbols data$/,

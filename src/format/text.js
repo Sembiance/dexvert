@@ -573,6 +573,7 @@ export default
 		impaticaOnCueProject                       : {name : "Impatica OnCue Project", ext : [".ipj"], magic : ["Impatica OnCue Project"]},
 		informationPresentationFacilityMarkup      : {name : "Information Presentation Facility markup", ext : [".ipf"], magic : ["Information Presentation Facility markup"], weakMagic : true},
 		inkscapeExtensionDescriptor                : {name : "Inkscape extension descriptor", ext : [".inx"], magic : ["Inkscape extension descriptor"]},
+		installJammerProject                       : {name : "InstallJammer Project", ext : [".mpi"], magic : ["InstallJammer Project"]},
 		installProfessionalProject                 : {name : "INSTALL Professional project", ext : [".dat"], magic : ["INSTALL Professional project"]},
 		installShieldResponseFile                  : {name : "InstallShield Response File", ext : [".iss"], magic : ["InstallShield Response File"]},
 		intelHEX                                   : {name : "Intel HEX", ext : [".hex", ".hxo"], magic : ["Intel HEX data", "Intel Hexadecimal object"], website : "http://fileformats.archiveteam.org/wiki/Intel_HEX"},

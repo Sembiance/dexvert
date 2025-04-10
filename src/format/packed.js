@@ -26,6 +26,7 @@ export const cup386 =
 		comRLEPackerPacked          : {name : "com RLE packer Packed", magic : ["Packer: com RLE packer"]},
 		compressEXEPacked           : {name : "Compress-EXE Packed", magic : ["Packer: Compress-EXE"]},
 		cruncherPacked              : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
+		dexEXEPacked                : {name : "DexEXE Packed",  magic : ["Packer: DexEXE"]},
 		dnCOMCruncherPacked         : {name : "Dn.COM Cruncher Packed", magic : ["Packer: Dn.COM Cruncher"]},
 		envelopePacked              : {name : "Envelope Packed", magic : ["Packer: envelope"]},
 		exeLITEPacked               : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable", "Packer: ExeLITE"]},

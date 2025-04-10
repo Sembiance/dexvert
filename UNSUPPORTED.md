@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,515)
+# Unsupported File Formats (3,519)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (281)
+## Archive (282)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -213,6 +213,7 @@ Family/Format | Name | Extensions | Notes
 [archive/qemuQCOWImage](https://discmaster.textfiles.com/search?format=qemuQCOWImage) | QEMU QCOW Image | .qcow2 .qcow .img | 
 [archive/qnxVolumeDiskImage](https://discmaster.textfiles.com/search?format=qnxVolumeDiskImage) | QNX volume disk image | .img | 
 [archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?format=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
+[archive/questPowerGUIPacked](https://discmaster.textfiles.com/search?format=questPowerGUIPacked) | Quest PowerGUI Packed | .dll | 
 [archive/redArchive](https://discmaster.textfiles.com/search?format=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 
@@ -1134,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,291)
+## Other (2,294)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2572,6 +2573,7 @@ Family/Format | Name | Extensions | Notes
 [other/numPyData](https://discmaster.textfiles.com/search?format=numPyData) | NumPy data | .npy | 
 [other/nutsFormat](https://discmaster.textfiles.com/search?format=nutsFormat) | NUTS format | .nmr .fid .spc .2d .001 .002 .003 | 
 [other/nutshellDataBase](https://discmaster.textfiles.com/search?format=nutshellDataBase) | Nutshell DataBase | .db .dem | 
+[other/nvidiaScene](https://discmaster.textfiles.com/search?format=nvidiaScene) | NVIDIA Scene | .nvb | 
 [other/nWiperShow](https://discmaster.textfiles.com/search?format=nWiperShow) | NWiper Show | .nw | 
 [other/oberonObject](https://discmaster.textfiles.com/search?format=oberonObject) | Oberon Object | .obj | 
 [other/oberonSymbol](https://discmaster.textfiles.com/search?format=oberonSymbol) | Oberon Symbol | .sym | 
@@ -2866,7 +2868,7 @@ Family/Format | Name | Extensions | Notes
 [other/roundRobinDatabase](https://discmaster.textfiles.com/search?format=roundRobinDatabase) | Round-Robin Database | .rrd | 
 [other/rpgMakerData](https://discmaster.textfiles.com/search?format=rpgMakerData) | RPG Maker data | .rxdata .rvdata .rvdata2 | 
 [other/rpgMakerDB](https://discmaster.textfiles.com/search?format=rpgMakerDB) | RPG Maker Database | .ldb | 
-[other/rpgMakerMap](https://discmaster.textfiles.com/search?format=rpgMakerMap) | RPG Maker Map | .lmu | EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work
+[other/rpgMakerMap](https://discmaster.textfiles.com/search?format=rpgMakerMap) | RPG Maker Map | .lmu | EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work. JP games need --encoding cp932 passed, but I found other maps where neither worked, all gave Chipset XYZ not found. So don't know of a way to get them to convert
 [other/rpgMakerSaveData](https://discmaster.textfiles.com/search?format=rpgMakerSaveData) | RPG Maker Save Data | .lsd | 
 [other/rrReportWriterFontInformation](https://discmaster.textfiles.com/search?format=rrReportWriterFontInformation) | RR Report Writer Font Information File | .fif | 
 [other/rsa1Key](https://discmaster.textfiles.com/search?format=rsa1Key) | RSA1 key |  | 
@@ -2981,7 +2983,8 @@ Family/Format | Name | Extensions | Notes
 [other/spssTableLook](https://discmaster.textfiles.com/search?format=spssTableLook) | SPSS Table Look | .tlo | 
 [other/spyBotSearchAndDestroySignature](https://discmaster.textfiles.com/search?format=spyBotSearchAndDestroySignature) | SpyBot-Search-and-Destroy Signature | .sig | 
 [other/spyneContainer](https://discmaster.textfiles.com/search?format=spyneContainer) | SPYne Container |  | 
-[other/sqkServerCompactEditionDatabase](https://discmaster.textfiles.com/search?format=sqkServerCompactEditionDatabase) | SQL Server Compact Edition database | .sdf | 
+[other/sQLServerCEEditionDatabase](https://discmaster.textfiles.com/search?format=sQLServerCEEditionDatabase) | SQL Server CE Edition database | .sdf | 
+[other/sqlServerCompactEditionDatabase](https://discmaster.textfiles.com/search?format=sqlServerCompactEditionDatabase) | SQL Server Compact Edition database | .sdf | 
 [other/sqliteWriteAheadLog](https://discmaster.textfiles.com/search?format=sqliteWriteAheadLog) | SQLite Write-Ahead Log | .db-wal | 
 [other/sqliteWriteAheadLogSharedMemory](https://discmaster.textfiles.com/search?format=sqliteWriteAheadLogSharedMemory) | SQLite Write-Ahead Log shared memory | .db-shm | 
 [other/sqlite2Database](https://discmaster.textfiles.com/search?format=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
@@ -3293,6 +3296,7 @@ Family/Format | Name | Extensions | Notes
 [other/westAdventureConfiguration](https://discmaster.textfiles.com/search?format=westAdventureConfiguration) | West Adventure Configuration | .cfg | 
 [other/whackerTrackerAudioDriver](https://discmaster.textfiles.com/search?format=whackerTrackerAudioDriver) | Whacker Tracker audio Driver | .drv | 
 [other/whalesVoyageGraphic](https://discmaster.textfiles.com/search?format=whalesVoyageGraphic) | Whale's Voyage graphic | .brs | 
+[other/whatsappMessagesDatabase](https://discmaster.textfiles.com/search?format=whatsappMessagesDatabase) | Whatsapp messages Database | .db | 
 [other/whatsUpGoldVirtualDevice](https://discmaster.textfiles.com/search?format=whatsUpGoldVirtualDevice) | WhatsUp Gold Virtual Device | .dse | 
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?format=whdLoadSlave) | WHDLoad Slave | .slave | 
 [other/whirlwindGameDataPackage](https://discmaster.textfiles.com/search?format=whirlwindGameDataPackage) | Whirlwind game data Package | .wpk | 

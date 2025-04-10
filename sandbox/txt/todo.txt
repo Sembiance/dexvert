@@ -24,7 +24,7 @@
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
-* Figure out how to get info out of a folio database. Some interesting stuff locked in those:
+* Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
   https://dev.discmaster2.textfiles.com/search?format=folioDatabase
   https://dev.discmaster2.textfiles.com/view/18013/The%20Washington%20Times%20-%201991%20Volume%202%20(January%201989-December%201991)(Wayzata%20Technology)(5032)(1992).bin/fpnv.nfo
 

@@ -1,4 +1,4 @@
-# Supported File Formats (3,101)
+# Supported File Formats (3,106)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -891,7 +891,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (641)
+## Image (642)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1058,6 +1058,7 @@ image | Elecbyte M.U.G.E.N. sprites | .sff | [wuimg](https://codeberg.org/kaleid
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKPIC/)
 image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKS/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [keyViewPro](https://archive.org/details/KeyViewPro/) | [30 sample files](https://sembiance.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
+image | [Enhanced Compressed Wavelet](http://fileformats.archiveteam.org/wiki/ECW) | .ecw | [mrsiddecode](https://www.extensis.com/support/developers) | [4 sample files](https://sembiance.com/fileFormatSamples/image/enhancedCompressedWavelet/)
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/esm/)
 image | [Envision](http://fileformats.archiveteam.org/wiki/Envision) | .map | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/envision/)
 image | [EPOC/Psion Sketch](http://fileformats.archiveteam.org/wiki/EPOC_Sketch) |  | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/image/epocSketch/)
@@ -2046,7 +2047,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,010)
+## Text (1,014)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2077,6 +2078,9 @@ text | Advanced Stream Redirector | .asx |  | [13 sample files](https://sembianc
 text | Adventure Game Toolkit Messages | .msg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adventureGameToolkitMessages/)
 text | Aegis Animator Script | .script |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/aegisAnimatorScript/)
 text | Aegis Draw part |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aegisDrawPart/)
+text | Aegis ProMotion Camera | .pcam |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/aegisProMotionCamera/)
+text | Aegis ProMotion Motion | .pmot .mot |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/aegisProMotionMotion/)
+text | Aegis ProMotion Set | .pset |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/aegisProMotionSet/)
 text | Aegis VideoSEG Script | .script |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/aegisVideoSEGScript/)
 text | AIBB results log |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/aibbResultsLog/)
 text | Air Warrior Camera replay |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/airWarriorCameraReplay/)
@@ -3042,6 +3046,7 @@ text | Xilinx Integrated Software Environment Project | .npl |  | [2 sample file
 text | Xilinx Netlist | .ngc .ngd .ncd .ngm .ngr |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/xilinxNetlist/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/q4d/)
 text | XMCD CD information | .db .z .xmcd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xmcdCDInformation/)
+text | XML Query Language | .xql .xqm .xqy .xq |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/xmlQueryLanguage/)
 text | Xoom Tutor tutorial | .tut |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/xoomTutorTutorial/)
 text | XSetup plugin | .xpl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xSetupPlugin/)
 text | XTrkCAD project | .xt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/xTrkCADProject/)
@@ -3142,7 +3147,7 @@ video | [On2 VP6 encoded video](https://wiki.multimedia.cx/index.php/On2_VP6) | 
 video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
 video | [PH Video](https://wiki.multimedia.cx/index.php/PH_Video) | .ph | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/)
 video | [Pray for Death CDA Video](https://wiki.multimedia.cx/index.php/Pray_for_Death_CDA) | .cda | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/prayForDeathCDAVideo/)
-video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/psygnosisYOP/)
+video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/psygnosisYOP/)
 video | [PTF Video](https://wiki.multimedia.cx/index.php/Flic_Video#Under_a_Killing_Moon_PTF) | .ptf | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/ptfVideo/)
 video | [Quake II Cinematic Video](https://multimedia.cx/mirror/idcin.html) | .cin | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/quake2Cinematic/)
 video | [RATVID/VIDPAK Video](https://wiki.multimedia.cx/index.php/VIDPAK) | .vdo | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/ratvidVideo/)

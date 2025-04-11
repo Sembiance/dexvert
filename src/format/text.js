@@ -288,6 +288,7 @@ export default
 		windowsExplorerUIFILE                    : {name : "Windows Explorer UIFILE", magic : ["Windows Explorer UIFILE"]},
 		winFlashFlashcardSource                  : {name : "WinFlash Flashcard Source", ext : [".fls"], magic : ["WinFlash Flashcard Source"]},
 		winHexDataStructureTemplate              : {name : "WinHex data structure template", ext : [".txt", ".tpl"], magic : ["WinHex data structure template"], weakMagic : true},
+		xmlQueryLanguage                         : {name : "XML Query Language", ext : [".xql", ".xqm", ".xqy", ".xq"], magic : ["XML Query Language"]},
 		yamlSerializedData                       : {name : "YAML serialized data", magic : ["YAML serialized data", "application/yaml"]},
 		zshScript                                : {name : "Paul Falstad's zsh script", magic : ["Paul Falstad's zsh script", /^Shell Skript: '.*\/zsh'/, /^Executable script, shebang: ".*\/zsh"/, /^a .*\/zsh script/]},
 
@@ -310,6 +311,9 @@ export default
 		advancedStreamRedirector                   : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector", "audio/x-ms-asx"], weakMagic : true},
 		aegisAnimatorScript                        : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},
 		aegisDrawPart                              : {name : "Aegis Draw part", magic : ["Aegis Draw part"]},
+		aegisProMotionCamera                       : {name : "Aegis ProMotion Camera", ext : [".pcam"], magic : ["Aegis ProMotion Camera"], weakMagic : true},
+		aegisProMotionMotion                       : {name : "Aegis ProMotion Motion", ext : [".pmot", ".mot"], magic : ["Aegis ProMotion Motion"], weakMagic : true},
+		aegisProMotionSet                          : {name : "Aegis ProMotion Set", ext : [".pset"], magic : ["Aegis ProMotion Set"], weakMagic : true},
 		aegisVideoSEGScript                        : {name : "Aegis VideoSEG Script", ext : [".script"], magic : ["Aegis VideoSEG Script"], weakMagic : true},
 		aibbResultsLog                             : {name : "AIBB results log", magic : ["AIBB results log"]},
 		aldusPrinterDriver                         : {name : "Aldus Printer Driver", ext : [".apd"], magic : ["Aldus Printer Driver"], weakMagic : true},

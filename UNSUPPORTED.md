@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,519)
+# Unsupported File Formats (3,522)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1135,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,294)
+## Other (2,297)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1423,6 +1423,7 @@ Family/Format | Name | Extensions | Notes
 [other/basicXCompiledBytecode](https://discmaster.textfiles.com/search?format=basicXCompiledBytecode) | BasicX compiled bytecode | .bxb | 
 [other/battery2QuickLoadSampleData](https://discmaster.textfiles.com/search?format=battery2QuickLoadSampleData) | Battery 2 quick load sample data | .nov | 
 [other/battery3DrumKit](https://discmaster.textfiles.com/search?format=battery3DrumKit) | Battery 3 Drum Kit | .kt3 | 
+[other/battleMoonWarsGameData](https://discmaster.textfiles.com/search?format=battleMoonWarsGameData) | Battle Moon Wars game data | .dat | 
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?format=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
 [other/berkeleyDB](https://discmaster.textfiles.com/search?format=berkeleyDB) | Berkeley DB | .db | 
 [other/bethesdaGameMap](https://discmaster.textfiles.com/search?format=bethesdaGameMap) | Bethesda game Map | .mif | 
@@ -1752,6 +1753,7 @@ Family/Format | Name | Extensions | Notes
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?format=digitaORganiserTheme) | Digita Organiser Theme |  | 
 [other/digitalImageDesignGameDataArchive](https://discmaster.textfiles.com/search?format=digitalImageDesignGameDataArchive) | Digital Image Design game data archive | .xfs | 
 [other/digitalRealitySoftwareMapsData](https://discmaster.textfiles.com/search?format=digitalRealitySoftwareMapsData) | Digital Reality Software Maps data | .maps | 
+[other/digitalTerrainElevationData](https://discmaster.textfiles.com/search?format=digitalTerrainElevationData) | Digital Terrain Elevation Data | .dt0 .dt1 .dt2 .dted .avg .min .max | 
 [other/dinamicMultimediaGFXResource](https://discmaster.textfiles.com/search?format=dinamicMultimediaGFXResource) | Dinamic Multimedia GFX Resource | .grc | 
 [other/dipTracePCB](https://discmaster.textfiles.com/search?format=dipTracePCB) | DipTrace PCB | .dip | 
 [other/dipTraceSchematic](https://discmaster.textfiles.com/search?format=dipTraceSchematic) | DipTrace Schematic | .dch | 
@@ -1953,7 +1955,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameBoyROM](https://discmaster.textfiles.com/search?format=gameBoyROM) | Game Boy ROM | .gb .gbc | 
 [other/gameDoctorSF3SavedGame](https://discmaster.textfiles.com/search?format=gameDoctorSF3SavedGame) | Game Doctor SF 3 saved game | .smc | 
 [other/gameGearROM](https://discmaster.textfiles.com/search?format=gameGearROM) | Game Gear ROM | .gg | 
-[other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr | 
+[other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr .gm6 | 
 [other/gameVoiceData](https://discmaster.textfiles.com/search?format=gameVoiceData) | Game Voice data | .hvo | 
 [other/gamebyroKFMData](https://discmaster.textfiles.com/search?format=gamebyroKFMData) | Gamebyro KFM data | .kfm | 
 [other/gammaCAD](https://discmaster.textfiles.com/search?format=gammaCAD) | GammaCAD Document | .sym .gc1 | 
@@ -1990,6 +1992,7 @@ Family/Format | Name | Extensions | Notes
 [other/gizmozRollodexData](https://discmaster.textfiles.com/search?format=gizmozRollodexData) | Gizmoz Rollodex data |  | 
 [other/glamusStructure](https://discmaster.textfiles.com/search?format=glamusStructure) | GLAMUS Structure | .doi .001 | 
 [other/glbGameDataArchive](https://discmaster.textfiles.com/search?format=glbGameDataArchive) | GLB game data archive | .glb | 
+[other/glBasic3DData](https://discmaster.textfiles.com/search?format=glBasic3DData) | GLBasic 3D data | .ddd | 
 [other/glibcLocaleFile](https://discmaster.textfiles.com/search?format=glibcLocaleFile) | [glibc Locale File](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) |  | [9 sample files](https://sembiance.com/fileFormatSamples/other/glibcLocaleFile/)
 [other/glulxGame](https://discmaster.textfiles.com/search?format=glulxGame) | Glulx Game | .ulx | 
 [other/gnuFindutilsLocateDatabase](https://discmaster.textfiles.com/search?format=gnuFindutilsLocateDatabase) | GNU findutils locate database |  | 

@@ -6,6 +6,7 @@ export class vivo extends Format
 	website      = "https://wiki.multimedia.cx/index.php/Vivo";
 	ext          = [".viv"];
 	magic        = ["Vivo streaming video", "Vivo video data", "Vivo (vivo)", /^fmt\/499( |$)/];
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="vivo" && macFileCreator==="Vivo";
 	metaProvider = ["mplayer"];
 	converters   = ["nihav", "ffmpeg[format:vivo]"];
 }

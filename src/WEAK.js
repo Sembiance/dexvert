@@ -1806,6 +1806,7 @@ export const WEAK_VALUES =
 	/^Embedded JCL debug info$/,
 	/^Embroidery file \(generic\)$/,
 	/^Encrypted Blender 3D data$/,
+	/^Encrypted PhotoList$/,
 	/^Encrypted Multi-Picture Object bitmap$/,
 	/^EngineX Sound effects$/,
 	/^ENVI n-D visualizer state$/,

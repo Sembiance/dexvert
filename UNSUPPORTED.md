@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,522)
+# Unsupported File Formats (3,524)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1135,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,297)
+## Other (2,299)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1353,6 +1353,7 @@ Family/Format | Name | Extensions | Notes
 [other/asciiFontMetrics](https://discmaster.textfiles.com/search?format=asciiFontMetrics) | ASCII Font Metrics | .afm | 
 [other/ashampooPhotoCommanderDocument](https://discmaster.textfiles.com/search?format=ashampooPhotoCommanderDocument) | Ashampoo Photo Commander Document | .apcdoc | 
 [other/ashampooProductsTranslation](https://discmaster.textfiles.com/search?format=ashampooProductsTranslation) | Ashampoo products translation | .ashlang | 
+[other/ashlarVellumPart](https://discmaster.textfiles.com/search?format=ashlarVellumPart) | Ashlar-Vellum Part | .vc6 | 
 [other/ashtonTateHelpData](https://discmaster.textfiles.com/search?format=ashtonTateHelpData) | Ashton-Tate Help data | .hlp | 
 [other/asicCompilerDebugInfo](https://discmaster.textfiles.com/search?format=asicCompilerDebugInfo) | ASIC compiler debug info | .dbg | 
 [other/asoboStudioGameDataArchive](https://discmaster.textfiles.com/search?format=asoboStudioGameDataArchive) | Asobo Studio game data archive | .dpc .dps | 
@@ -1492,6 +1493,7 @@ Family/Format | Name | Extensions | Notes
 [other/butcherShape](https://discmaster.textfiles.com/search?format=butcherShape) | Butcher Shape | .shape | 
 [other/butcherSignal](https://discmaster.textfiles.com/search?format=butcherSignal) | Butcher Signal | .signal | 
 [other/buttonsButtonDefinition](https://discmaster.textfiles.com/search?format=buttonsButtonDefinition) | Buttons! Button definition | .but | 
+[other/bvDFileset](https://discmaster.textfiles.com/search?format=bvDFileset) | BvD fileset | .bvd | 
 [other/bwsbMusicSoundDriver](https://discmaster.textfiles.com/search?format=bwsbMusicSoundDriver) | BWSB Music and Sound Engine Driver | .mse | 
 [other/bylineData](https://discmaster.textfiles.com/search?format=bylineData) | Byline data | .bdr | 
 [other/cppSymbolDatai](https://discmaster.textfiles.com/search?format=cppSymbolDatai) | C++ Symbol Data | .dat | 

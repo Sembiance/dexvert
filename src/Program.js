@@ -574,7 +574,7 @@ export class Program
 
 					if(progRaw.startsWith("*"))
 					{
-						xlog.info`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
+						xlog.info`Chaining to ${progRaw} from ${this.programid} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
 						await handleNewFiles(await Program.runProgram(progRaw.substring(1), newFiles, baseChainProgOpts), newFiles);
 					}
 					else
@@ -591,7 +591,7 @@ export class Program
 							if(Object.isObject(chainProgFlags))
 								chainProgOpts.flags = chainProgFlags;
 
-							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
+							xlog.info`Chaining to ${progRaw} from ${this.programid} with file ${newFile.rel}`;
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile], chainProgramid);
 						}, await sysUtil.optimalParallelism(newFiles.length));
 					}

@@ -82,7 +82,8 @@ const FORMAT_OS_HINT =
 		"MACPEOPLE-1998-03-01.ISO"            : "macintoshjp",
 		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp",
 		"MACPEOPLE-2001-06-01.ISO"            : "macintoshjp",
-		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp"
+		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp",
+		"MACWORLD96.bin"                      : "macintoshjp"
 	},
 	"archive/appleDiskCopy" :
 	{

@@ -23,6 +23,8 @@ export class dexvert extends Program
 			dexOpts.asFormat = r.flags.asFormat;
 		if(r.flags.skipVerify)
 			dexOpts.skipVerify = true;
+		if(Object.keys(RUNTIME.globalFlags?.osHint || {}).length)
+			dexOpts.programFlag.osHint = {...RUNTIME.globalFlags.osHint};
 
 		const forbidProgram = new Set(RUNTIME.forbidProgram);
 		for(let parentRunState=r.chainParent;parentRunState;parentRunState=parentRunState.chainParent)

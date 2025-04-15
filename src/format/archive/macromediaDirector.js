@@ -13,7 +13,7 @@ export class macromediaDirector extends Format
 	weakMagic      = ["Generic RIFX container"];
 	idMeta         = ({macFileType, macFileCreator}) => (
 		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MJ${suffix}`, `MV${suffix}`, "FGDC", "FGDM"].includes(macFileType) &&
-		 ["AFTB", "MD00", "MD01", "MD03", ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "paST"].includes(macFileCreator))) ||
+		 ["AFTB", "MD00", "MD01", "MD03", ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||
 		(macFileType==="XOBJ" && macFileCreator==="MMDR") ||
 		(macFileType==="MC07" && macFileCreator==="SB14"));
 	slow           = true;

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,524)
+# Unsupported File Formats (3,528)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (282)
+## Archive (283)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -234,6 +234,7 @@ Family/Format | Name | Extensions | Notes
 [archive/simis](https://discmaster.textfiles.com/search?format=simis) | Simis | .s .ace .t .dat .mis | 
 [archive/singleFileSystemContainer](https://discmaster.textfiles.com/search?format=singleFileSystemContainer) | Single File System container | .sfs | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?format=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
+[archive/softwareCompressPacked](https://discmaster.textfiles.com/search?format=softwareCompressPacked) | Software Compress Packed | .exe | 
 [archive/spisTCompress](https://discmaster.textfiles.com/search?format=spisTCompress) | SPIS TCompress |  | 
 [archive/spoonStudioPacked](https://discmaster.textfiles.com/search?format=spoonStudioPacked) | Spoon Studio Packed | .exe | 
 [archive/sqwezArchive](https://discmaster.textfiles.com/search?format=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
@@ -1135,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,299)
+## Other (2,302)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1913,8 +1914,10 @@ Family/Format | Name | Extensions | Notes
 [other/fMailAreaConfiguration](https://discmaster.textfiles.com/search?format=fMailAreaConfiguration) | FMail Area configuration | .ard .ar | 
 [other/fMailNodeConfiguration](https://discmaster.textfiles.com/search?format=fMailNodeConfiguration) | FMail Node configuration | .nod | 
 [other/fMODAudioEvents](https://discmaster.textfiles.com/search?format=fMODAudioEvents) | FMOD Audio Events | .fev | 
+[other/foltynCommanderSettings](https://discmaster.textfiles.com/search?format=foltynCommanderSettings) | Foltyn Commander settings | .ini | 
 [other/fOnlineEngineTileSet](https://discmaster.textfiles.com/search?format=fOnlineEngineTileSet) | FOnline Engine Tile set | .til | 
 [other/fontDescriptor](https://discmaster.textfiles.com/search?format=fontDescriptor) | Font descriptor | .ntf14 .ntf16 .ntf4 | 
+[other/fontLabAliases](https://discmaster.textfiles.com/search?format=fontLabAliases) | FontLab Aliases | .dat | 
 [other/foobar2000ColumnsUISettings](https://discmaster.textfiles.com/search?format=foobar2000ColumnsUISettings) | Foobar 2000 Columns UI settings | .fcs | 
 [other/footprintIBMWorksDataFilerDesign](https://discmaster.textfiles.com/search?format=footprintIBMWorksDataFilerDesign) | Footprint/IBM Works Data Filer Design | .lde | 
 [other/footprintIBMWorksDataFilerForm](https://discmaster.textfiles.com/search?format=footprintIBMWorksDataFilerForm) | Footprint/IBM Works Data Filer Form | .lde | 
@@ -2735,6 +2738,7 @@ Family/Format | Name | Extensions | Notes
 [other/powerBuilderDynamicLibrary](https://discmaster.textfiles.com/search?format=powerBuilderDynamicLibrary) | PowerBuilder Dynamic Library | .pbd | 
 [other/powerBuilderTraceProfile](https://discmaster.textfiles.com/search?format=powerBuilderTraceProfile) | PowerBuilder trace Profile | .pbp | 
 [other/powerDreamLibrary](https://discmaster.textfiles.com/search?format=powerDreamLibrary) | PowerDream Library | .pdl | 
+[other/powerProjectTeamplan](https://discmaster.textfiles.com/search?format=powerProjectTeamplan) | PowerProject Teamplan | .pdb | 
 [other/powerSoftDataWindowDataStore](https://discmaster.textfiles.com/search?format=powerSoftDataWindowDataStore) | PowerSoft DataWindow - DataStore | .psr | 
 [other/pPrintPattern](https://discmaster.textfiles.com/search?format=pPrintPattern) | PPrint Pattern | .pat | 
 [other/pPrintStencilFormat](https://discmaster.textfiles.com/search?format=pPrintStencilFormat) | PPrint stencil Format | .frm | 

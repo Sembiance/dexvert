@@ -1,4 +1,4 @@
-# Supported File Formats (3,106)
+# Supported File Formats (3,107)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -2047,7 +2047,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,014)
+## Text (1,015)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2123,7 +2123,7 @@ text | ASEAM 2 Plant Input Screen/Data | .pis |  | [9 sample files](https://semb
 text | ASEAM 2 System Input Screen/Data | .sis |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aseam2SystemInputScreenData/)
 text | ASIC Project/Configuration | .prj .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/asicProjectConfiguration/)
 text | AskEnv Requester definition | .req |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/askEnvRequesterDefinition/)
-text | ASP Application Directive | .asax |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
+text | ASP Application Directive | .asax |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
 text | ASP Control Directive | .ascx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspControlDirective/)
 text | ASP WebService Directive File | .asmx |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
 text | ASP.NET Web Form |  |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/aspNETWebForm/)
@@ -2218,7 +2218,7 @@ text | ColdFusion Component | .cfc |  | [1 sample file](https://sembiance.com/fi
 text | ColdFusion Markup Language | .cfm .cfml |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coldFusionMarkupLanguage/)
 text | ColdFusion Verity engine fields definition | .ddd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coldFusionVerityEngineFieldsDefinition/)
 text | Colton Software Fireworkz document | .fwk |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/coltonSoftwareFireworkzDocument/)
-text | COMit modems configuration | .dat .dos |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/comitModemsConfiguration/)
+text | COMit modems configuration | .dat .dos |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/comitModemsConfiguration/)
 text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/csv/)
 text | Compo preferences |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/compoPreferences/)
 text | Consolidated Laser Ranging Prediction Format | .cpf .opa |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/consolidatedLaserRangingPredictionFormat/)
@@ -2303,7 +2303,7 @@ text | EISA add-on card Configuration | .cfg |  | [12 sample files](https://semb
 text | Elastic Reality project data | .er |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/elasticRealityProjectData/)
 text | Electronics Workbench Circuit | .ewb |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/electronicsWorkbenchCircuit/)
 text | Emacs RMAIL |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emacsRMAIL/)
-text | eMbedded Visual Basic Project | .ebp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/eMbeddedVisualBasicProject/)
+text | eMbedded Visual Basic Project | .ebp |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/eMbeddedVisualBasicProject/)
 text | EMBL sequence data | .embl .emb .dna |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emblSequenceData/)
 text | Emergency 3D model | .v3o |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/emergency3DModel/)
 text | Emu48 keyboard configuration | .kml |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/emu48KeyboardConfiguration/)
@@ -2350,10 +2350,11 @@ text | Flight Sim Toolkit Shape | .fsd |  | [25 sample files](https://sembiance.
 text | FlipAlbum data | .flp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/flipAlbumData/)
 text | FLTK User Interface Designer | .fl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fltkUserInterfaceDesigner/)
 text | Folded control info | .fdo .f .ftx .fc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/foldedControlInfo/)
+text | Foltyn Commander Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/foltynCommanderConfiguration/)
 text | Font Compiler and Loader format | .fcl |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fontCompilerAndLoaderFormat/)
 text | FontLab Codepage Definition | .cpg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fontLabCodepageDefinition/)
 text | FontLab Encoding | .enc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fontLabEncoding/)
-text | FontLab Name mapping rule | .nam |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fontLabNameMappingRule/)
+text | FontLab Name mapping rule | .nam |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fontLabNameMappingRule/)
 text | FontLab Unicode Range | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fontLabUnicodeRange/)
 text | FormWorx Printer driver | .prx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/formWorxPrinterDriver/)
 text | Forte Agent Character Set Mapping | .csm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/forteAgentCharacterSetMapping/)
@@ -2750,7 +2751,7 @@ text | Protein DataBank | .pdb |  | [15 sample files](https://sembiance.com/file
 text | Protel PAD macro | .pad |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/protelPADMacro/)
 text | ProtoGen Application configuration | .pva |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/protoGenApplicationConfiguration/)
 text | Proton language Schema | .sch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
-text | Proxy Auto-Config | .pac |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
+text | Proxy Auto-Config | .pac |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
 text | PS/2 MicroChannel Adapter Description | .adf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/ps2MicroChannelAdapterDescription/)
 text | [Pure Data patch](http://fileformats.archiveteam.org/wiki/Pure_Data) | .pd |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/pureDataPatch/)
 text | PV3D Effect | .eff |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pv3DEffect/)
@@ -2853,7 +2854,7 @@ text | Softdesk AdCADD default data | .dat |  | [3 sample files](https://sembian
 text | Softdesk AdCADD layer default | .ly .tut |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDLayerDefault/)
 text | SoftICE initialization data | .dat |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
 text | Software Ideas Modeler Style Set | .simss |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/softwareIdeasModelerStyleSet/)
-text | SoftWrap license data | .sw2 |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
+text | SoftWrap license data | .sw2 |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
 text | Sonnet Project | .son |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/sonnetProject/)
 text | SOSI map data | .sos |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/sosiMapData/)
 text | Source Engine Compiled AI Nodegraph | .ain |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sourceEngineCompiledAINodegraph/)

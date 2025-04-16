@@ -507,6 +507,7 @@ export default
 		flashProject                               : {name : "Flash Project", ext : [".flp"], magic : ["Flash Project"]},
 		flipAlbumData                              : {name : "FlipAlbum data", ext : [".flp"], magic : ["FlipAlbum data"]},
 		foldedControlInfo                          : {name : "Folded control info", ext : [".fdo", ".f", ".ftx", ".fc"], magic : ["Folded control info"], weakMagic : true},
+		foltynCommanderConfiguration               : {name : "Foltyn Commander Configuration", ext : [".cfg"], magic : ["Foltyn Commander Configuration"], weakMagic : true},
 		fontCompilerAndLoaderFormat                : {name : "Font Compiler and Loader format", ext : [".fcl"], magic : ["Font Compiler and Loader format"], weakMagic : true},
 		fontLabCodepageDefinition                  : {name : "FontLab Codepage Definition", ext : [".cpg"], magic : ["FontLab Codepage Definition"]},
 		fontLabEncoding                            : {name : "FontLab Encoding", ext : [".enc"], magic : ["FontLab Encoding"]},

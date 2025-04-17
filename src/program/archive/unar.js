@@ -15,7 +15,21 @@ export class unar extends Program
 	bruteFlags = { executable : {} };
 
 	bin      = "unar";
-	args     = r => [...(r.flags.filenameEncoding ? ["-e", r.flags.filenameEncoding] : []), "-f", "-D", "-o", r.outDir(), r.inFile()];
+	args     = async r =>
+	{
+		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["-json", r.inFile({absolute : true})]);
+		r.lsarOutput = xu.parseJSON(fileInfoRaw);
+
+		const a = [];
+		let encoding = r.flags.filenameEncoding;	// if we specified an ecoding, use it
+		if(!encoding && r.flags.mac && RUNTIME.globalFlags?.osHint?.macintoshjp && !["macintosh", "UTF-8"].includes(r.lsarOutput?.lsarEncoding))	// otherwise if we are hinted as macintoshjp, use that so long as lsar didn't detect macintosh or UTF-8 (sample sea/まきがめ駒○駒BY彦ぷん)
+			encoding = "x-mac-japanese";
+		if(encoding)
+			a.push("-e", encoding);
+
+		a.push("-f", "-D", "-o", r.outDir(), r.inFile());
+		return a;
+	};
 	postExec = async r =>
 	{
 		const outDirPath = r.outDir({absolute : true});
@@ -66,8 +80,7 @@ export class unar extends Program
 
 		// Get our file creator types for better detection of extracted files down the line
 		fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
-		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["-json", r.inFile({absolute : true})]);
-		for(const fileInfo of xu.parseJSON(fileInfoRaw)?.lsarContents || [])
+		for(const fileInfo of r.lsarOutput?.lsarContents || [])
 		{
 			if(!fileInfo.XADFileCreator || !fileInfo.XADFileName)
 				continue;

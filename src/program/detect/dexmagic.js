@@ -32,6 +32,7 @@ const DEXMAGIC_CHECKS =
 	"Macromedia Projector PJ00/PJ01" : [{offset : 0, match : "PJ0"}, {offset : 3, match : [["0", "1"]]}],
 	"MINICAT Archive"                : [{offset : 0, match : "MINICAT"}],
 	"NeXT Disk Image Dump"           : [{offset : 46, match : "dlV3"}],
+	"Oberon Compress Archive"        : [{offset : 0, match : [0xF7, 0x07]}, {offset : 2, match : "Compress"}, {offset : 10, match : [0x2E]}],
 	"OS/2 PACK Variant"              : [{offset : 0, match : [0xA5, 0x96, 0xFF, 0xFF]}],
 	"OS/2 PACK Variant 2"            : [{offset : 0, match : [0xA5, 0x96, 0x00, 0x14]}],
 	"OS/2 PACK Variant 3"            : [{offset : 0, match : [0xA5, 0x96, 0x14, 0x0A]}],

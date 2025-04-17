@@ -73,6 +73,14 @@ const FORMAT_FILE_META =
 
 const FORMAT_OS_HINT =
 {
+	"archive/appleDiskCopy" :
+	{
+		"Sidescape1.00J.image" : "macintoshjp"
+	},
+	"archive/cpt" :
+	{
+		"cpt" : "macintoshjp"
+	},
 	"archive/iso" :
 	{
 		"OS_user_4.0.iso"                     : "nextstep",
@@ -85,9 +93,10 @@ const FORMAT_OS_HINT =
 		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp",
 		"MACWORLD96.bin"                      : "macintoshjp"
 	},
-	"archive/appleDiskCopy" :
+	"archive/sea" :
 	{
-		"Sidescape1.00J.image" : "macintoshjp"
+		"まきがめ駒○駒BY彦ぷん"     : "macintoshjp",
+		"まきがめ駒○駒BY彦ぷん.sea" : "macintoshjp"
 	},
 	"archive/sit" :
 	{
@@ -106,8 +115,8 @@ const FORMAT_OS_HINT =
 	"document/wri"         : { "readme2.wri" : "fmtownsjpy"	},
 	"image/macBinaryImage" : { "01-1-tiff-手塚莉絵" : "macintoshjp" },
 	"image/printfox"       : "commodore",
-	"image/spritePad"      : "commodore",
 	"image/shfXLEdit"      : "commodore",
+	"image/spritePad"      : "commodore",
 	"text/html"            : { "apple.html" : "macintoshjp" }
 };
 

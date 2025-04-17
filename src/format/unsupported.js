@@ -196,6 +196,7 @@ export default
 		neophyteGameDataArchive                     : {name : "Neophyte game data archive", ext : [".stuff"], magic : ["Neophyte game data archive"], weakMagic : true},
 		nortonBackupFile                            : {name : "Norton Backup file", ext : [".001"], magic : ["Norton Backup file"]},
 		nortonUtilitiesImageFATBackup               : {name : "Norton Utilities Image FAT backup", ext : [".dat"], magic : ["Norton Utilities Image FAT backup"]},
+		oberonCompresArchive                        : {name : "Oberon compres archive", ext : [".arc"], magic : ["Oberon compressed archive", "Oberon Compress Archive"], weakMagic : true},
 		originSystemsSetupArchive                   : {name : "Origin Systems's setup Archive", ext : [".a01", ".cam", ".flx"], magic : ["Origin Systems's setup Archive"]},
 		outlookExchangeOfflineStorage               : {name : "Outlook Exchange Offline Storage", ext : [".ost"], magic : ["Outlook Exchange Offline Storage", /^Microsoft Outlook Offline Storage/], weakMagic : true},
 		palmMemoPadArchive                          : {name : "Palm Memo Pad Archive", ext : [".mpa"], magic : ["Palm Memo Pad Archive"], weakMagic : true},

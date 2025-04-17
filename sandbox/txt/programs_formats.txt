@@ -702,6 +702,9 @@ PM2: LZ-compressor
   - Extract EPS, TIFF, and WMF from "EPS DOS Binary" format.
   - Supports preview images in EPSI format (1-, 2-, 4-, 8-bit grayscale)
 
+* Esm Software PIX (module="esm_pix")
+  - Extract embedded JPEG file.
+
 * Falcon True Color (module="ftc")
 
 * farbfeld (module="farbfeld")
@@ -978,7 +981,8 @@ PM2: LZ-compressor
 * PI9 (Atari Falcon 320x200) (module="fpaint_pi9")
 
 * PICT (Macintosh image) (module="pict")
-  - Extract bitmap images, etc.
+  - Extracts embedded bitmap images, etc. Does not properly convert PICT to
+    another format, though it may often seem like that's what it does.
   Options
    -opt pict:decodeqt - Try to decode embedded "QuickTime" images directly,
     instead of always extracting to .qtif format.
@@ -1252,6 +1256,9 @@ PM2: LZ-compressor
 
 * ADF (Amiga disk image) (module="amiga_adf") (experimental)
 
+* Aldus LZW and PKZP (module="aldus_inst") (experimental, incomplete)
+  An installer compressed file format.
+
 * AmBs (AMOS "Banks" aggregate format) (module="abk")
   - Extract AmSp, AmIc, AmBk files.
 
@@ -1367,6 +1374,9 @@ PM2: LZ-compressor
 * EXEPACK (module="exepack")
   Decompress an EXEPACK-compressed DOS EXE file.
   - Not automatic; must use "-m exepack" or "-opt execomp".
+  Options
+   -opt execomp:align=<16|512> - Preferred code image segment alignment
+     (ignored if it can be determined from the source file).
 
 * FAT (module="fat") (experimental/incomplete)
   - Limited support, mainly for floppy disk images.
@@ -1386,6 +1396,7 @@ PM2: LZ-compressor
   This is usually a file named "_inst32i.ex_" or "_inst16.ex_".
 
 * InstallShield Z archive (module="is_z")
+  - Mult-volume archives aren't supported.
 
 * ISO 9660 or High Sierra CD-ROM image (module="iso9660")
   Options
@@ -1422,8 +1433,8 @@ PM2: LZ-compressor
   - Not automatic; must use "-m lzexe" or "-opt execomp".
   Options
    -opt lzexe:raw - Instead of an EXE file, write raw decompressed data.
-   -opt execomp:align=<16|512> - Preferred code segment alignment. This may
-     help make the decompressed file more similar to the original.
+   -opt execomp:align=<16|512> - Preferred code image segment alignment. This
+     may help make the decompressed file more similar to the original.
 
 * LZHUF (module="lzhuf")
   Compression software by Haruyasu Yoshizaki. A bare-bones container for
@@ -1533,6 +1544,8 @@ PM2: LZ-compressor
   - For EXE format, you must use "-m pklite" or "-opt execomp".
   Options
    -opt pklite:raw - Instead of an EXE file, write raw decompressed data
+   -opt execomp:align=<16|512> - Preferred code image segment alignment
+     (ignored if it can be determined from the source file).
 
 * RAR (module="rar")
   - Files can be parsed, but there is usually nothing that can be extracted
@@ -1635,10 +1648,19 @@ PM2: LZ-compressor
 
 * Asc2Com (moule="asc2com")
   Executable text (.COM) files made by MorganSoft's Asc2Com utility.
-  - Extracts the filtered source text. May include special codes intended to
-    change colors, etc.
   - Supports files that use compression.
-  - Does not attempt to translate to UTF-8.
+  - Some files contain special codes to change colors, etc. Some of these
+    codes can be different in every file. If encoding translation is enabled,
+    such codes will be identified, and converted to... something.
+  Options
+   -opt text:fmtconv=0 - Minimal processing. Keep special codes.
+   -opt text:encconv=0 - Suppress character encoding translation. Special
+    codes may be deleted.
+
+* ASCOM (moule="ascom")
+  An executable text (.COM) format.
+  Options
+   -opt text:encconv=0 - Suppress character encoding translation.
 
 * ASF multimedia (module="asf")
   - Files can be parsed, but there is usually nothing that can be extracted
@@ -1662,6 +1684,11 @@ PM2: LZ-compressor
   - "Extract" the entire file. Use with -start and -size to extract part of
     the file.
 
+* Join (module="join")
+  - Concatenate multiple input files.
+  - You must use "-m join" to select this module, and "-mp" to allow multiple
+    input files.
+
 * CP437 (module="cp437")
   Convert DOS Code Page 437 text to UTF-8.
   - Not autodetected. Use "-m cp437".
@@ -1677,10 +1704,12 @@ PM2: LZ-compressor
 * DOC2COM (moule="doc2com")
   Executable text (.COM) files made by G. DePyper's DOC2COM utility.
   - Supports files that use encryption.
-  - Extracts the source text. Does not necessarily render the document (e.g.
-    colors) like running the COM file would.
+  - Partially processes the source text, at least to identify special codes
+    that change the colors.
   Options
-   -opt text:encconv=0 - Suppress character encoding translation.
+   -opt text:fmtconv=0 - Minimal processing. Keep special codes.
+   -opt text:encconv=0 - Suppress character encoding translation. Special
+    codes may be deleted.
 
 * DOC2COM (moule="doc2com_dkn")
   Executable text (.COM) files made by D. Nelson's DOC2COM utility.
@@ -1828,6 +1857,11 @@ PM2: LZ-compressor
   - Extract Psion PIC icons.
   - Extract other contents (use -a).
 
+* Read-A-Matic (moule="readamatic")
+  Executable text (.EXE) files made by Read-A-Matic, by M. L. Wester.
+  Options
+   -opt text:encconv=0 - Suppress character encoding translation.
+
 * READMAKE (module="readmake")
   Executable text (.EXE) files made by READMAKE, by Wayne Software.
   Options
@@ -1875,6 +1909,7 @@ PM2: LZ-compressor
   Apply an XOR key to the file. By default, invert all the bits.
   Options
    -opt xor:key=<aabbcc...> - The key, expressed as one or more hex bytes.
+
 
 
 

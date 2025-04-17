@@ -1,39 +1,62 @@
 >>> abydos (Linux - v0.2.1 - July 11, 2020) - IMAGE (http://snisurset.net/code/abydos/news.html)
 Image format	MIME type(s)	Extension(s)	Supported by abydos	Supported by gdk-pixbuf	Supported by Deark	Supported by ImageMagick	Supported by FFmpeg
 1st Publisher Clip Art Format (PFS)		art	No	No	Yes	Yes	No
-Adobe Photoshop	image/vnd.adobe.photoshop	psd	Yes	No	Yes	Yes	Yes
+Acorn Sprite	image/x-acorn-sprite, image/x-riscos-sprite	acorn	Yes	No	No	No	No
+Adobe Photoshop			Partial	No	Partial	Partial	Partial
+Adobe Photoshop version 1	image/vnd.adobe.photoshop	psd	Yes	No	Yes	Yes	Yes
+Adobe Photoshop version 2		psb	No	No	No	No	No
 Alias PIX Image File	image/x-alias-pix	alias, als, img, pix	Yes	No	Yes	No	No
-Amiga icon		info	No	No	Yes	No	No
+Amiga Metafile (AMFF)	image/x-amff	amf	Yes	No	No	No	No
+Amiga Workbench icon	image/x-amiga-icon	info	Yes	No	Yes	No	No
 AMOS Memory Bank	application/x-amos-memorybank	abk	Yes	No	Yes	No	No
 AMOS Icon Bank	image/x-amos-iconbank	abk	Yes	No	Yes	No	No
 AMOS Screen	application/x-amos-memorybank	abk	Yes	No	Yes	No	No
 AMOS Sprite Bank	image/x-amos-spritebank	abk	Yes	No	Yes	No	No
 AMOS Picture Packer	image/x-amos-picturepacker	bin	Yes	No	No	No	No
+Andrew Toolkit raster object	image/x-andrew-toolkit-raster	atk, cmu	Yes	No	No	No	No
 Ani ST	image/x-ani-st	scr, str	Yes	No	No	No	No
 ANSI art	text/x-ansi	ans	Yes	No	Yes	No	Yes
 Apple Icon Image (ICNS)	image/x-icns	icns	Yes	Lacks variant support	Yes	No	No
-Artist 64	image/x-artist-64	a64	Yes	No	No	No	No
+ArtMaster	image/x-artmaster	img	Yes	No	No	No	No
 ArtWorx Data Format (ADF)	image/x-artworx	adf	Yes	No	Yes	No	Yes
 Aseprite Format (ASE)	image/x-aseprite	ase, aseprite	Yes	No	No	No	No
 Atari CAD	image/x-atari-cad	drg	Yes	No	No	No	No
 Atari ST RGB intermediate	image/x-atari-rgb-intermediate	rgb	Yes	No	No	No	No
-Autodesk Animator (FLI/FLC)	video/x-flic	cel, flc, flh, fli, flt, flx	No	No	No	No	Yes
-FLC	video/x-flic	flc	No	No	No	No	Yes
-AV1 Image File Format (AVIF)	image/avif, image/avif-sequence	avif, avifs, heif, hif	Yes	No	No	No	No
+Autodesk Animator (FLI/FLC)	application/autodesk-animator, video/x-flic	cel, flc, flh, fli, flt, flx	No	No	No	No	Partial
+FLC	video/x-flc	flc	No	No	No	No	Yes
+FLI	application/autodesk-animator, video/x-flic	fli	No	No	No	No	No
+AV1 Image File Format (AVIF)	image/avif, image/avif-sequence	avif, avifs, heif, hif	Yes	No	No	Yes	No
 Avatar/0	text/x-avatar0	avt, bbs	Yes	No	No	No	No
-Better Portable Graphics (BPG)	image/bpg, image/x-bpg	bpg	No	No	No	Yes	No
+BBC Microcomputer display RAM	image/x-bbc-micro-screendump		Yes	No	No	No	No
+Bennet Yee's face format (YBM)	image/x-bennet-yee-face	bm	Yes	No	Yes	No	No
+Better Portable Graphics (BPG)	image/bpg, image/x-bpg	bpg	Yes	No	No	Yes	No
 Binary Text	text/x-binary	bin	Yes	No	Yes	No	Yes
-Blazing Paddles	image/x-blazing-paddles	pi	Yes	No	No	No	No
+Blazing Paddles	image/x-blazing-paddles	pi, wnd	Yes	No	No	No	No
+Canon EOS-1D Mark II RAW	image/x-canon-cr2	cr2	Yes	No	No	No	No
+Canon PowerShot	image/x-canon-crw	crw	Yes	No	No	No	No
+Cebra Teletext (TTX)	application/x.teletext.ttx	ttx	Yes	No	No	No	No
 Cheese	image/x-cheese	che	Yes	No	No	No	No
-CompuServe Graphics Interchange Format (GIF)	image/gif	gif	Yes	Yes	Yes	Yes	Yes
+Comic Book Archive			Yes	No	Partial	No	Partial
+Comic Book Archive 7z format (CB7)	application/x-cb7	cb7	Yes	No	No	No	No
+Comic Book Archive ACE format (CBA)	application/x-cba	cba	Yes	No	No	No	No
+Comic Book Archive RAR format (CBR)	application/vnd.comicbook-rar, application/x-cbr	cbr	Yes	No	No	No	No
+Comic Book Archive TAR format (CBT)	application/x-cbt	cbt	Yes	No	Yes	No	Yes
+Comic Book Archive ZIP format (CBZ)	application/vnd.comicbook+zip, application/x-cbz	cbz	Yes	No	Yes	No	No
+CompuServe Graphics Interchange Format (GIF)	image/gif	gif, giff	Yes	Yes	Yes	Yes	Yes
+Computer Graphics Metafile (CGM)	image/cgm	cgm	Yes	No	No	No	No
+Corel Metafile Exchange (CMX)		cmx	No	No	Yes	No	No
 Crack Art			No	No	No	No	No
 Crack Art high resolution		ca3	No	No	No	No	No
 Crack Art low resolution		ca1	No	No	No	No	No
 Crack Art medium resolution		ca2	No	No	No	No	No
 Dali			No	No	No	No	No
-Dali high resolution			No	No	No	No	No
-Dali low resolution			No	No	No	No	No
-Dali medium resolution			No	No	No	No	No
+Dali high resolution		hpk, sd2	No	No	No	No	No
+Dali low resolution		lpk, sd0	No	No	No	No	No
+Dali medium resolution		mpk, sd1	No	No	No	No	No
+DataShow Graphic	image/x-datashow-graphic	gra	Yes	No	No	No	No
+DataShow Screen	image/x-datashow-screen	scr	Yes	No	No	No	No
+DataShow Sprite	image/x-datashow-sprite	spr	Yes	No	No	No	No
+DaVinci	image/x-davinci	img	Yes	No	No	No	No
 Degas picture			Yes	No	Yes	No	No
 Degas compressed high resolution picture (PC3)	image/x-pc3	pc3	Yes	No	Yes	No	No
 Degas compressed low resolution picture (PC1)	image/x-pc1	pc1	Yes	No	Yes	No	No
@@ -41,84 +64,142 @@ Degas compressed medium resulution picture (PC2)	image/x-pc2	pc2	Yes	No	Yes	No	N
 Degas high resolution picture (PI3)	image/x-pi3	pi3, suh	Yes	No	Yes	No	No
 Degas low resolution picture (PI1)	image/x-pi1	pi1	Yes	No	Yes	No	No
 Degas medium resolution picture (PI2)	image/x-pi2	pi2	Yes	No	Yes	No	No
-Digital Imaging and Communications in Medicine (DICOM)	application/dicom, image/dicom-rle	dcm, dic	Yes	No	No	Yes	No
-Digital Picture Exchange (DPX)	image/x-digital-picture-exchange	dpx	Yes	No	No	Yes	Yes
-Direct Draw Surface	image/x-direct-draw-surface	dds	Yes	No	No	Yes	Yes
-DjVu	image/vnd.djvu, image/vnd.djvu+multipage, image/x-djvu	djvu	Yes	No	No	No	No
+Deluxe Paint Animator		anim, anm	No	No	No	No	Yes
+Digital Imaging and Communications in Medicine (DICOM)	application/dicom, image/dicom-rle, image/x-dicom	acr, dc3, dcm, dic, dicom	Yes	No	No	Yes	No
+Digital Negative (DNG)	image/x-adobe-dng	dng	Yes	No	No	No	No
+Digital Picture Exchange (DPX)	image/x-digital-picture-exchange, image/x-dpx	dpx	Yes	No	No	Yes	Yes
+Direct Draw Surface	image/x-dds, image/x-direct-draw-surface	dds	Yes	No	No	Yes	Yes
+DjVu	image/vnd.djvu, image/vnd.djvu+multipage, image/x-djvu	djv, djvu, iw4	Yes	No	No	No	No
+Draw256 VGA Format	image/x-draw256-vga	vga	Yes	No	No	No	No
 Draz Paint	image/x-draz-paint	drp, drz	Yes	No	No	No	No
 Dr Doodle		doo	No	No	Yes	No	No
+Dr Halo	application/dr-halo, image/x-cut	cut, pic	Yes	No	Yes	Yes	No
 Dune Image (AAI)	image/x-dune	aai	Yes	No	No	Yes	No
+DUO	image/x-atari-duo	du1, du2, duo	Yes	No	No	No	No
+Encapsulated Postscript (EPS)	application/eps, application/x-eps, image/eps, image/x-eps	epi, eps, epsf, epsi, ept	Yes	No	No	No	No
+Epson RAW	image/x-epson-erf	erf	Yes	No	No	No	No
 Extended Binary (XBIN)	image/x-xbin	xb	Yes	No	Yes	No	Yes
-Face Painter	image/x-face-painter	fcp	Yes	No	No	No	No
-Farbfeld	image/x-farbfeld	ff	Yes	No	Yes	No	No
-FlashPix Format (FPX)	image/vnd.fpx	fpx	No	No	No	Yes	Yes
-Flexible Image Transport System (FITS)	application/fits, image/fits	fit, fits, fts	No	No	No	Yes	No
+Face Painter	image/x-face-painter	fcp, fpt	Yes	No	No	No	No
+Facsimile image FORM (FAXX)	image/x-faxx	faxx	Yes	No	No	No	No
+Farbfeld	image/x-farbfeld	ff	Yes	No	Yes	Yes	No
+Fax Group 3	image/g3fax	fax, g3	Yes	No	No	Yes	No
+FIT	image/x-fit	fit	Yes	No	No	No	No
+FlashPix Format (FPX)	image/vnd.fpx, image/x-flash-pix	fpx	Yes	No	No	Yes	Yes
+Flash XML graphics (FXG)	image/x-flash-xml-graphics		Partial	No	No	No	No
+Flexible Image Transport System (FITS)	application/fits, image/fits	fit, fits, fts	Yes	No	No	Yes	No
+Fractal Image And Sequence Codec (FIASCO)	image/x-fiasco	fco	Yes	No	No	No	No
 Free Lossless Image Format (FLIF)	image/x-flif	flif	Yes	No	No	Yes	No
+Free Universal Image Format (FUIF)	image/x-fuif	fuif	Yes	No	No	No	No
+Fuji S2 RAW	image/x-fuji-raf	raf	Yes	No	No	No	No
+Fuzzy bitmap	image/x-fuzzy-bitmap	cbm, fbm	Yes	No	No	No	No
 GEM raster	image/x-gem	img, ximg	Yes	No	Yes	No	No
+GeoPaint	image/x-geopaint	geo	Yes	No	No	No	No
 GFA Artist	image/x-gfa-artist	art	Yes	No	No	No	No
 Gimp Bitmap (XCF)	image/x-xcf, image/xcf	xcf	Yes	No	No	Yes	No
 Graphics Processor			No	No	No	No	No
-Graphics Processor high resolution			No	No	No	No	No
+Graphics Processor high resolution		pg3	No	No	No	No	No
 Graphics Processor low resolution			No	No	No	No	No
 Graphics Processor medium resolution			No	No	No	No	No
 GX1	image/x-gx1	gx1	Yes	No	No	No	No
 GX2	image/x-gx2	gx2	Yes	No	No	No	No
 Haiku Vector Icon Format (HVIF)	image/x-hvif		Yes	No	No	No	No
 Hi-Eddi	image/x-hi-eddi	hed	Yes	No	No	No	No
-Hierarchical Data Format (HDF)	application/x-hdf		No	No	No	No	No
-HDF4	application/x-hdf	hdf	No	No	No	No	No
+Hierarchical Data Format (HDF)	application/x-hdf		No	No	No	No	Partial
+HDF4	application/x-hdf	hdf	No	No	No	No	Yes
 HDF5	application/x-hdf	h5	No	No	No	No	No
 High Efficiency Image File Format (HEIF)	image/heic, image/heic-sequence, image/heif, image/heif-sequence	heic	Yes	Using third party loader	No	Yes	No
-iCEDraw Format (IDF)	image/x-icedraw	idf	Yes	No	No	No	No
+Hires Player Missile	image/x-hires-player-missile	hpm	Yes	No	No	No	No
+HomeBrew Icon	image/x-homebrew-icon	hic	Yes	No	No	No	No
+HSI Raw	image/x-hsi-raw	hst, raw	Yes	No	No	No	No
+iCEDraw Format (IDF)	image/x-icedraw	idf	Yes	No	No	No	Yes
 ImageLab	image/x-imagelab	b&w, b_w	Yes	No	No	No	No
+Intergraph Raster (INGR)	image/x-intergraph-raster	cit, cmp, cot, crl, ctb, ctc, g3, g4, grd, ing, itg, jpg, lsr, rgb, rle, t27, t29, tg4, tpe	Yes	No	No	No	No
+Interleaf Image	image/x-interleaf	iimg, img	Yes	No	No	No	No
 Interleaved Bitmap (ILBM)	image/x-ilbm	bbm, blk, iff, ilbm, lbm, pic	Yes	No	Yes	Yes	Yes
+ANIM	video/x-anim	anim	Yes	No	No	No	Yes
+Deluxe Paint ST	image/x-ilbm	iff	Yes	No	No	No	No
 JBIG	image/x-jbig	bie, jbe, jbig	No	No	No	Yes	Yes
-Joint Photographic Experts Group JFIF format (JPEG / JFIF)	image/jpeg	jif, jpe, jpeg, jpg	Yes	Yes	No	Yes	Yes
-JPEG-2000	image/jpeg2000	jp2	Yes	Yes	Yes	Yes	Yes
-JPEG 2000 base still image (JP2)	image/jp2	j2c, j2k, jp2	Yes	Yes	Yes	Yes	Yes
-Jpeg Network Graphics (JNG)	image/x-jng	jng	Yes	No	No	Yes	No
-Khoros Visualization Image file (VIFF)	image/x-viff	viff, xv	Yes	No	No	Yes	No
+Joint Photographic Experts Group JFIF format (JPEG / JFIF)	image/jpeg, image/jpg, image/pjpeg	jif, jpe, jpeg, jpg	Yes	Yes	No	Yes	Yes
+JPEG-2000	image/jpeg2000	jp2	Yes	Yes	No	Yes	Yes
+JPEG 2000 base still image (JP2)	image/jp2	j2c, j2k, jp2	Yes	Yes	No	Yes	Yes
+Jpeg Network Graphics (JNG)	image/x-jng, video/x-jng	jng	Yes	No	No	Yes	No
+JPEG XL	image/jxl	jxl	Yes	Using third party loader	No	Yes	No
+Khoros Visualization Image File Format (VIFF)	image/x-viff	viff, xv	Yes	No	No	Yes	No
 Kisekae Set System Cel (KiSS Cel)	image/x-kiss-cel	cel, kcf	Yes	No	No	No	No
-Koala Painter	image/x-koa, image/x-koala	gig, kla, koa	Yes	No	No	No	No
-Kodak Cineon	image/x-cineon	cin	Yes	No	No	Yes	No
-Kodak Photo CD	image/x-photo-cd	pcd	Yes	No	No	Yes	No
+Koala Painter	image/x-koa, image/x-koala		Yes	No	No	No	No
+Koala Painter compressed	image/x-koa, image/x-koala	gg	Yes	No	No	No	No
+Koala Painter uncompressed	image/x-koa, image/x-koala	gig, kla, koa	Yes	No	No	No	No
+Kodak Cineon	image/x-cin, image/x-cineon	cin	Yes	No	No	Yes	No
+Kodak DC25 Camera	image/x-kodak-k25	k25	Yes	No	No	No	No
+Kodak DC120 Digital Camera	image/x-kdc, image/x-kodak-kdc	kdc	Yes	No	No	No	No
+Kodak Photo CD	image/x-photo-cd	pcd	Yes	No	No	Yes	Yes
+Kodak Pro Digital RAW	image/x-kodak-dcr	dcr	Yes	No	No	No	No
 Krita image	application/x-krita	kra	Yes	No	Yes	No	No
-Lottie		json	Yes	No	No	No	No
-Macintosh Quickdraw/Pict	image/pict, image/x-pict	pct, pic, pict	No	No	Yes	No	No
-MacPaint	image/x-macpaint	mac, pic, pntg	No	No	Yes	Yes	No
-Magick Image File Format (MIFF)	image/x-miff	mif, miff	Yes	No	No	Yes	No
+Kyss Graphics (KYG)	image/x-kyss-graphics	kyg	Yes	No	No	No	No
+LabEye image	image/x-labeye-image	im	Yes	No	No	No	No
+Lisp Machine Format	image/x-lisp-machine-format		Yes	No	No	No	No
+Lottie	image/x-lottie+json	json	Yes	No	No	No	No
+Lotus 1-2-3 Chart	image/x-lotus-1-2-3-chart	pic	Yes	No	No	No	No
+Macintosh Quickdraw/Pict	application/mac-quick-draw, image/pict, image/x-pict	pct, pic, pict	No	No	Yes	No	No
+MacPaint	application/mac-paint, image/x-macpaint	mac, pic, pntg	Yes	No	Yes	Yes	No
+Magick Image File Format (MIFF)	image/miff, image/x-miff	mif, miff	Yes	No	No	Yes	No
+MAKI-chan Graphics	image/x-maki-chan	mag, maki, max, mki	Yes	No	No	No	No
+ManaGeR bitmap	image/x-manager-bitmap	mgr	Yes	No	No	No	No
+MGR Systems Teletext (TTI7)	text/x.teletext.tti	tti	Yes	No	No	No	No
+MicroDesign Area	image/x-microdesign-area	mda, mdp	Yes	No	No	No	No
+Microsoft Paint	application/microsoft-paint	msp	Yes	No	Yes	No	Yes
+Minolta DiMAGE RAW	image/x-minolta-mrw		Yes	No	No	No	No
+MLDF	image/x-mldf	mldf	Yes	No	No	No	No
+Monochrome Recursive Format	image/x-monochrome-recursive-format	mrf	Yes	No	No	No	No
 MTV Ray-Tracer	image/x-mtv	mtv, pic	Yes	No	No	Yes	No
-Multi-page PCX (DCX)	image/x-dcx	dcx	Yes	No	No	Yes	No
+Multi-Picture Format (MPO)	image/x-mpo	jpg, mpo	Yes	No	Yes	Only left image	Only left image
 Multi Palette Picture (MPP)	image/x-multi-palette-picture	mpp	Yes	No	No	No	No
-Multiple Network Graphics (MNG)	video/x-mng	mng	Yes	No	No	Yes	Yes
+Multiple Network Graphics (MNG)	image/x-mng, video/x-mng	mng	Yes	No	No	Yes	Yes
+National Imagery Transmission Format (NITF)	application/vnd.nitf	nitf, ntf, ntf.r0, ntf.r1, ntf.r2, ntf.r3, ntf.r4, ntf.r5	Yes	No	No	No	No
+Naïve Image Formats		nia, nie, nii	Partial	No	No	No	No
+NIA	image/nia	nia	Yes	No	No	No	No
+NIE	image/nie	nie	Yes	No	No	No	No
+NII	image/nii	nii	No	No	No	No	No
+Nearly Raw Raster Data (NRRD)	image/x-nrrd		Yes	No	No	No	No
 Neochrome	image/x-neo, image/x-neochrome	neo	Yes	No	Yes	No	No
-Nokia Over the Air bitmap (OTA)		otb	No	No	No	Yes	No
+NeoDesk Icon	image/x-neodesk-icon	nic	Yes	No	No	No	No
+Neopaint Stamp		st	No	No	Yes	Yes	Yes
+Nikon Electronic Format (NEF)	image/x-nikon-nef	ndf, ndr, nef, nrw	Yes	No	No	No	No
+Nokia Over the Air bitmap (OTA)	image/x-nokia-over-the-air-bitmap	otb	No	No	No	Yes	No
+Olympus RAW	image/x-olympus-orf	orf	Yes	No	No	No	No
 OpenEXR (EXR)	image/x-exr	exr	Yes	No	No	Yes	Yes
-OpenRaster	image/openraster	ora	Yes	No	Yes	No	No
+OpenRaster	image/openraster	ora	Yes	No	Yes	Yes	No
+Open XML Paper Specification (XPS)	application/oxps, application/vnd.ms-xpsdocument	oxps, xps	Yes	No	No	No	No
 Pablo Packed Picture (PPP)	image/x-pablo-packed-picture		Yes	No	No	No	No
 Paintworks file format			No	No	No	No	No
-Paintworks screen in high resolution			No	No	No	No	No
-Paintworks screen in low resolution			No	No	No	No	No
-Paintworks screen in medium resolution			No	No	No	No	No
+Paintworks screen in high resolution		cl2, sc2	No	No	No	No	No
+Paintworks screen in low resolution		cl0, sc0	No	No	No	No	No
+Paintworks screen in medium resolution		cl1, sc1	No	No	No	No	No
 Palm Database ImageViewer format		pdb	No	No	Yes	Yes	No
+Panasonic RAW	image/x-panasonic-raw	bay, raw	Yes	No	No	No	No
 PC-Board	text/x-pcboard	pcb	Yes	No	Yes	No	No
-PC Paint / Pictor Page		pic	No	No	Yes	No	Yes
+PC Paint / Pictor Page		clp, pic	No	No	Yes	No	Yes
+Pentax *ist D	image/x-pentax-pef	pef	Yes	No	No	No	No
 PETSCII screen code sequence	text/x-petscii-sequence	seq	Yes	No	No	No	No
-PhotoChrome			No	No	No	No	No
-PhotoChrome PCS-ST			No	No	No	No	No
-PhotoChrome Super HAM			No	No	No	No	No
+PhotoChrome Screen	image/x-photochrome-screen		Yes	No	No	No	No
+PhotoChrome PCS-ST	image/x-photochrome-screen		Yes	No	No	No	No
+PhotoChrome Super HAM	image/x-photochrome-screen		Yes	No	No	No	No
 Picasso 64	image/x-picasso-64	p64	Yes	No	No	No	No
-Portable Anymap (PNM)	image/x-portable-anymap	pnm	Yes	Yes	Yes	Yes	Yes
+PIK	image/x-pik	pik	Yes	No	No	No	No
+PKM	image/x-pkm		Yes	No	No	No	No
+Portable Any Map	image/x-portable-anymap	pnm	Yes	Yes	Yes	Yes	Yes
 Portable Bitmap	image/x-portable-bitmap	pbm	Yes	Yes	Yes	Yes	Yes
 Portable Greyscale	image/x-portable-graymap, image/x-portable-greymap	pgm	Yes	Yes	Yes	Yes	Yes
 Portable Pixmap	image/x-portable-pixmap	ppm	Yes	Yes	Yes	Yes	Yes
 Portable Arbitrary Map	image/x-portable-arbitrarymap	pam	Yes	No	Yes	Yes	Yes
 Portable Document Format (PDF)	application/pdf, application/x-pdf	pdf	Yes	No	No	Yes	No
-Portable Float Map (PFM)	image/x-portable-floatmap	pfm	Yes	No	No	Yes	No
+Portable Float Map (PFM)	image/x-portable-floatmap	pfm	Yes	No	No	Yes	Yes
 Portable Network Graphics (PNG)	image/png	png	Yes	Yes	No	Yes	Yes
 Animated PNG (APNG)	image/apng, image/vnd.mozilla.apng	png	Yes	No	No	Yes	Yes
 Postscript (PS)	application/postscript	ps	Yes	No	No	No	No
-Prism Paint	image/x-prism-paint	pnt	Yes	No	Yes	No	No
+Prism Paint	image/x-prism-paint	pnt, tpi	Yes	No	Yes	No	No
+Progressive Graphics File (PGF)	image/x-pgf	pgf	Yes	No	No	No	No
+QOIR	image/x-qoir	qoir	Yes	No	No	No	No
 Quantum Paint	image/x-quantum-paint	pbx	Yes	No	No	No	No
 QuickTime Image Format (QTIF)	image/qtif, image/x-quicktime	qif, qtif	Lacks support for some compression schemes	Lacks support for most compression schemes	Lacks support for most compression schemes	No	Partial
 QuickTime Image Format - Animation	image/qtif, image/x-quicktime	qif, qtif	Yes	No	No	No	No
@@ -130,19 +211,34 @@ QuickTime Image Format - DVCPRO PAL	image/qtif, image/x-quicktime	qif, qtif	Yes	
 QuickTime Image Format - DV PAL	image/qtif, image/x-quicktime	qif, qtif	Yes	No	No	No	Yes
 QuickTime Image Format - H.263	image/qtif, image/x-quicktime	qif, qtif	Yes	No	No	No	Yes
 QuickTime Image Format - H.264	image/qtif, image/x-quicktime	qif, qtif	No	No	No	No	No
-QuickTime Image Format - JPEG	image/qtif, image/x-quicktime	qif, qtif	Yes	Yes	Yes	No	No
+QuickTime Image Format - JPEG	image/qtif, image/x-quicktime	qif, qtif	Yes	Yes	Yes	No	Yes
 QuickTime Image Format - JPEG 2000	image/qtif, image/x-quicktime	qif, qtif	Yes	No	No	No	No
 QuickTime Image Format - MPEG-4	image/qtif, image/x-quicktime	qif, qtif	No	No	No	No	No
 QuickTime Image Format - PNG	image/qtif, image/x-quicktime	qif, qtif	Yes	Yes	Yes	No	No
 QuickTime Image Format - Raw	image/qtif, image/x-quicktime	qif, qtif	Yes	No	Yes	No	No
+Quite OK Image Format (QOI)	image/qoi	qoi	Yes	No	No	Yes	No
 Radiance	image/vnd.radiance	hdr, img, pic, rad, rgbe, xyze	Yes	No	No	Yes	No
 Raw Teletext	text/x-raw-teletext	bin	Yes	No	No	No	No
+ReGIS	image/x-regis		Yes	No	No	No	No
 Saracen Paint	image/x-saracen-paint	sar	Yes	No	No	No	No
 Scalable Vector Graphics (SVG)	application/svg+xml, image/svg, image/svg+xml	svg, svg.gz, svgz	Yes	Using third party loader	No	Yes	Yes
+Scalable Vector Graphics Synchronized Multimedia Integration Language (SVG SMIL)	application/svg+xml, image/svg, image/svg+xml	svg, svg.gz, svgz	No	No	No	No	No
+Seattle FilmWorks (SFW)	image/x-seattle-filmworks	#??, alb, pwm, pwp, sfw	Yes	No	No	No	No
+Sigma RAW	image/x-sigma-x3f	x3f	Yes	No	No	No	No
 Silicon Graphics Image (SGI)	image/x-rgb, image/x-sgi	bw, rgb, rgba, sgi	Yes	No	No	Yes	Yes
-Sixel		sixel	No	No	No	Yes	No
+Simple Vector Format (SVF)	image/vnd-svf, image/vnd.svf, vector/vnd.svf	svf	Yes	No	No	No	No
+Sixel	image/x-sixel	sixel	Yes	No	No	Yes	No
+Softel Teletext (EP1)	text/x-softel-teletext	ep1	Yes	No	No	No	No
+Softimage	image/x-softimage-pic	pic, si, soft	Yes	No	No	No	No
+Sony DSC-F828 RAW	image/x-sony-srf	srf	Yes	No	No	No	No
+Sony RAW	image/x-sony-arw, image/x-sony-sr2	arw, sr2	Yes	No	No	No	No
 Spectrum 512 compressed	image/x-spectrum512-compressed	spc	Yes	No	Yes	No	No
+Spectrum 512 smooshed	image/x-spectrum512-smooshed	sps	Yes	No	No	No	No
 Spectrum 512 uncompressed	image/x-spectrum512-uncompressed	spu	Yes	No	Yes	No	No
+Spooky Sprites	image/x-spooky-sprites	trs	Yes	No	No	No	No
+True Colour Picture	image/x-spooky-sprites	trp, tru	No	No	No	No	No
+True Colour RLE Picture	image/x-spooky-sprites	tre	No	No	No	No	No
+True Colour Sprites	image/x-spooky-sprites	trs	Yes	No	No	No	No
 ST Aided Design (STAD)	image/x-stad	pac, seq	Yes	No	No	No	No
 Stardent Application Visualization System X (AVS X)	image/x-avsx	avs, mbfavs, x	Yes	No	No	Yes	No
 STOS Memory Bank	application/x-stos-memorybank	mbk, mbs	Yes	No	Partial	No	No
@@ -153,12 +249,17 @@ STOS Picture Packer	image/x-stos-picturepacker	pac	Yes	No	No	No	No
 STOS Picture Packer high resolution	image/x-stos-picturepacker-hires	pp3	Yes	No	No	No	No
 STOS Picture Packer low resolution	image/x-stos-picturepacker-lowres	pp1	Yes	No	No	No	No
 STOS Picture Packer medium resolution	image/x-stos-picturepacker-medres	pp2	Yes	No	No	No	No
-Sun Rasterfile	image/x-cmu-raster, image/x-sun-raster	ras, rast, rs, scr, sr, sun	Yes	Dropped	Partial	Partial	Yes
-Sun Rasterfile 1-bit	image/x-cmu-raster, image/x-sun-raster	im1	Yes	No	Yes	No	Yes
-Sun Rasterfile 8-bit	image/x-cmu-raster, image/x-sun-raster	im8	Yes	No	Yes	No	Yes
-Sun Rasterfile 24-bit	image/x-cmu-raster, image/x-sun-raster	im24	Yes	No	Yes	No	Yes
-Sun Rasterfile 32-bit	image/x-cmu-raster, image/x-sun-raster	im32	Yes	No	No	Yes	Yes
+Sun Icon/Cursor	image/x-sun-icon	cursor, ico, icon, pr	Yes	No	No	No	No
+Sun Rasterfile	image/x-cmu-raster, image/x-sun-raster	ras, rast, rs, scr, sr, sun	Yes	Yes	Partial	Yes	Yes
+Sun Rasterfile 1-bit	image/x-cmu-raster, image/x-sun-raster	im1	Yes	Yes	Yes	Yes	Yes
+Sun Rasterfile 8-bit	image/x-cmu-raster, image/x-sun-raster	im8	Yes	Yes	Yes	Yes	Yes
+Sun Rasterfile 24-bit	image/x-cmu-raster, image/x-sun-raster	im24	Yes	Yes	Yes	Yes	Yes
+Sun Rasterfile 32-bit	image/x-cmu-raster, image/x-sun-raster	im32	Yes	Yes	No	Yes	Yes
+SuperView Graphics (SGX)	image/x-superview	sgx, svg	Yes	No	No	No	No
+System for Processing Image Data from Electron microscopy and Related fields (SPIDER)	image/x-spider	spi	Yes	No	No	No	No
 Tagged Image File Format (TIFF)	image/tiff	tif, tiff	Yes	Lacks multi page support	No	Yes	Yes
+Telepaint	image/x-telepaint	ss, st	Yes	No	No	No	No
+Teletext packets (t42)	text/x-t42-packets	t42	Yes	No	No	No	No
 Tencent TAP	image/vnd.tencent.tap	tap	Yes	No	No	No	No
 Texas Instruments Calculator Image Variable	application/x-ti-variable, application/x-tilp, application/x-tilp-image		Yes	No	Yes	No	No
 TI-82 Image Variable	application/x-ti-variable, application/x-tilp, application/x-tilp-image	82i	Yes	No	Yes	No	No
@@ -166,28 +267,37 @@ TI-84 Plus C Background Variable	application/x-ti-variable, application/x-tilp, 
 TI-84 Plus C Image Variable	application/x-ti-variable, application/x-tilp, application/x-tilp-image	8ci	Yes	No	Yes	No	No
 TI-92 Image Variable	application/x-ti-variable, application/x-tilp, application/x-tilp-image	92i	Yes	No	Yes	No	No
 TheDraw Save File	image/x-thedraw	td	Yes	No	No	No	No
+Tiny	image/x-tiny-stuff	tn1, tn2, tn3, tn4, tny	Yes	No	Yes	No	No
 Tobias Richter Fullscreen Slideshow	image/x-tobias-richter-fullscreen-slideshow	pci	Yes	No	No	No	No
+Tricolor RGB	image/x-tricolor-rgb	3	Yes	No	No	No	No
 True Paint Image (TPI)			No	No	Yes	No	No
-Truevision Targa	image/x-tga	targa, tga	Yes	Yes	Yes	No	Yes
+Truevision Advanced Raster Graphics Adapter (TARGA)	image/x-tga	targa, tga	Yes	Yes	Yes	Yes	Yes
 TUNDRA	text/x-tundra	tnd	Yes	No	No	No	No
+Universal Bitmap Format (UBF)	image/x-universal-bitmap-format	ubf	Yes	No	No	No	No
 Valve Texture Format (VTF)	image/vnd.valve.source.texture, image/x-vtf	vtf	Yes	No	No	No	No
 Vidcom 64	image/x-vidcom-64	vid	Yes	No	No	No	No
 Video Image Communication and Retrieval (VICAR)	image/x-vicar	img, map, vic, vicar	Yes	No	No	Yes	No
+VIPS Image	image/x-vips	v, vips	Yes	No	No	No	No
 WAD2	application/x-doom-wad	wad	Yes	No	No	No	No
+Wavefront Raster file (SDSC)		rla	No	No	No	Yes	No
 WebP	image/webp	webp	Yes	No	No	Yes	No
+Wigmore Artist 64	image/x-artist-64	a64, wig	Yes	No	No	No	No
 Windows & Aldus Metafile (WMF)	image/wmf, image/x-wmf	apm, wmf	Yes	Using third party loader	No	Yes	No
 Windows Animated Cursor	application/x-navi-animation	ani	Yes	Lacks variant support	Yes	No	No
-Windows Bitmap (BMP)	image/bmp, image/x-bmp, image/x-ms-bmp	bmp	Yes	Yes	Yes	Yes	Yes
-Windows DIB		dib	No	No	No	Yes	No
-Windows Enhanced Metafile (EMF)	image/emf	emf	Yes	No	No	No	No
-Windows Icon	application/ico, image/ico, image/icon, image/vnd.microsoft.icon, image/x-ico, image/x-icon, image/x-win-bitmap, text/ico	ico	Yes	Yes	Yes	Yes	Yes
-Windows Cursor	application/ico, image/ico, image/icon, image/vnd.microsoft.icon, image/x-ico, image/x-icon, image/x-win-bitmap, text/ico	cur	Yes	Yes	Yes	Yes	No
-Wireless Bitmap (level 0) (WBMP)	image/vnd.wap.wbmp	wap, wbm, wbmp	Yes	No	No	Yes	No
-X11 Bitmap	image/x-xbitmap, image/x-xbmi	xbm	Yes	Yes	No	Yes	Yes
-X11 Pixmap	image/x-xpixmap, image/x-xpmi	xpm	Yes	Yes	No	Yes	Yes
+Windows Bitmap (BMP)	application/bmp, application/preview, application/x-bmp, application/x-win-bitmap, image/bmp, image/ms-bmp, image/x-bitmap, image/x-bmp, image/x-ms-bmp, image/x-windows-bmp	bmp	Yes	Yes	Yes	Yes	Yes
+Windows Enhanced Metafile (EMF)	image/emf, image/x-emf	emf	Yes	No	No	No	No
+Windows Icon	application/ico, application/x-ico, image/ico, image/icon, image/vnd.microsoft.icon, image/x-ico, image/x-icon, image/x-win-bitmap, text/ico	ico	Yes	Yes	Yes	Yes	Yes
+Windows Cursor	application/ico, application/x-ico, image/ico, image/icon, image/vnd.microsoft.icon, image/x-ico, image/x-icon, image/x-win-bitmap, text/ico	cur	Yes	Yes	Yes	Yes	No
+Wireless Bitmap (level 0) (WBMP)	image/vnd.wap.wbmp, image/x-wireless-bitmap	wap, wbm, wbmp	Yes	No	No	Yes	No
+Word Perfect Graphics	application/word-perfect, image/x-wpg	wpg	Yes	No	No	No	No
+X Bitmap (XBM)	image/x-xbitmap, image/x-xbmi	bm, xbm	Yes	Yes	No	Yes	Yes
 XGA	image/x-xga	xga	Yes	No	Yes	No	No
-X Windows System dump		xwd	No	No	No	Yes	Yes
-Zsoft Publisher's PC Paintbrush (PCX)	image/vnd.zbrush.pcx, image/x-pcx	pcx, ppc	Yes	Dropped	Yes	Yes	Yes
+X Pixmap (XPM)	image/x-xpixmap, image/x-xpmi	pm, xpm	Yes	Yes	No	Yes	Yes
+X Windows System dump	image/x-xwindowdump	xwd	Yes	No	No	Yes	Yes
+YAFA	video/x-yafa	yafa	Yes	No	No	No	No
+Zsoft Multi-page Paintbrush (DCX)	image/x-dcx	dcx	Yes	No	Yes	Yes	No
+Zsoft Publisher's PC Paintbrush (PCX)	image/pcx, image/vnd.zbrush.pcx, image/x-pcx	pcx, ppc	Yes	Dropped	Yes	Yes	Yes
+ZX Spectrum standard screen	image/x-zx-spectrum-standard-screen	scr	Yes	No	No	Yes	No
 
 
 >>> adplay (Linux - AdPlug v2.3.3 - June 16, 2020) - AUDIO/MUSIC (https://github.com/adplug/adplug/releases  http://adplug.github.io/)

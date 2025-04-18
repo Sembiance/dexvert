@@ -106,7 +106,6 @@ export default
 		afterlifeGameData                           : {name : "Afterlife game data", ext : [".000"], magic : ["Afterlife game data"]},
 		afxCompressedData                           : {name : "AFX compressed data", magic : ["AFX compressed data", /^AFX compressed file data/]},
 		aixBackupRestore                            : {name : "AIX/BFF backup/restore", ext : [".img", ".bff"], magic : ["AIX backup/restore format file", "AIX Backup File Format", "Archive: BFF", "BFF volume header"]},
-		aldusLZWCompressedData                      : {name : "Aldus LZW compressed data", magic : ["Aldus LZW compressed data"]},
 		amiBackBackupDiskImage                      : {name : "Ami-Back backup disk image", ext : [".adf"], magic : ["Ami-Back backup disk image"]},
 		amigaKickstartDiskImage                     : {name : "Amiga Kickstart disk image", ext : [".adf"], magic : ["Amiga Kickstart disk"]},
 		amigaRigidDiskBlockImage                    : {name : "Amiga Rigid Disk block / Hard Disk File image", ext : [".rdb", ".hdf"], magic : ["Amiga Rigid Disk block / Hard Disk File image", "Amiga Rigid Disk partition map", /^Rigid Disk Block/], weakMagic : true},

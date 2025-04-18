@@ -3140,7 +3140,7 @@ Apple IIGS	PNT	Paintworks	320x396	16 colors	1
 Apple IIGS	SH3, 3200		320x200	3200 colors	1
 Apple IIGS	SHR		320x200	256 colors	1
 Apple Macintosh	MAC, PNT, PNTG	MacPaint	576x720	mono	1
-Atari 8-bit	256, AP2		80x96	256 colors	1
+Atari 8-bit	256, AP2	Paint 256	80x96	256 colors	1
 Atari 8-bit	4MI	AtariTools-800 4 missiles			1
 Atari 8-bit	4PL	AtariTools-800 4 players			1
 Atari 8-bit	4PM	AtariTools-800 4 players and 4 missiles			1
@@ -3245,6 +3245,7 @@ Atari 8-bit	PI8		up to 320x192		1
 Atari 8-bit	PI9				1
 Atari 8-bit	PIC	Graphic Arts Department	160x96	128 colors	1
 Atari 8-bit	PIC	Koala MicroIllustrator	160x192	4 colors	1
+Atari 8-bit	PIC	PIC v2	up to 320x192		1
 Atari 8-bit	PIC	Visualizer	160x79	4 colors	1
 Atari 8-bit	PIX		160x192	4 colors	1
 Atari 8-bit	PLA	AtariTools-800 player	8x240	mono	1
@@ -3270,6 +3271,7 @@ Atari 8-bit	SIF	Super-IRG Font		4 colors	2
 Atari 8-bit	SKP	Sketch-PadDles	160x192	mono	1
 Atari 8-bit	SPC	The Graphics Magician Picture Painter	160x192	128 colors	1
 Atari 8-bit	SPR	Mad Studio sprite	up to 8x40	mono	1
+Atari 8-bit	SPR	SprEd		128 colors	1
 Atari 8-bit	SXS	16x16 font		mono	1
 Atari 8-bit	TIP	Taquart Interlace Picture	up to 160x119		2
 Atari 8-bit	TL4	Mad Studio ANTIC 4 tile	up to 16x40	5 colors	1
@@ -3293,6 +3295,7 @@ Atari ST/STE	BL1	DEGAS Elite block		16 colors	1
 Atari ST/STE	BL2	DEGAS Elite block		4 colors	1
 Atari ST/STE	BL3	DEGAS Elite block		mono	1
 Atari ST/STE	BLD	MegaPaint		mono	1
+Atari ST/STE	BP1, BP2, BP4, C01, C02, C04	UIMG			1
 Atari ST/STE	BRU	DEGAS Elite brush	8x8	mono	1
 Atari ST/STE	CA1	CrackArt	320x200	16 colors	1
 Atari ST/STE	CA2	CrackArt	640x200	4 colors	1
@@ -3302,6 +3305,7 @@ Atari ST/STE	CE2	ComputerEyes	640x200	32768 colors	1
 Atari ST/STE	CE3	ComputerEyes	640x400	192-level grayscale	1
 Atari ST/STE	CEL	Cyber Paint Cell	up to 320x200	16 colors	1
 Atari ST/STE	CMP	Public Painter	up to 640x800	mono	1
+Atari ST/STE	COL	Atari Image Manager	up to 256x256	16777216 colors	1
 Atari ST/STE	CP3	Picworks	640x400	mono	1
 Atari ST/STE	CPT	Canvas (compressed)			1
 Atari ST/STE	CPT+HBL	Canvas (raster)	up to 640x200		1
@@ -3316,6 +3320,7 @@ Atari ST/STE	FNT	8x16 font		mono	1
 Atari ST/STE	FNT	GDOS font		mono	1
 Atari ST/STE	FUL	Canvas (raster)	up to 640x200		1
 Atari ST/STE	GFB	DeskPic			1
+Atari ST/STE	GRX	Grafix			1
 Atari ST/STE	HPK	Dali (compressed)	640x400	mono	1
 Atari ST/STE	HRM	HighresMedium	640x200		2
 Atari ST/STE	IC1	Imagic	320x200	16 colors	1
@@ -3323,6 +3328,7 @@ Atari ST/STE	IC2	Imagic	640x200	4 colors	1
 Atari ST/STE	IC3	Imagic	640x400	mono	1
 Atari ST/STE	ICN	DEGAS Elite icon		mono	1
 Atari ST/STE	IFF	Interchange File Format			1
+Atari ST/STE	IM	Atari Image Manager	up to 256x256	256-level grayscale	1
 Atari ST/STE	IMG	GEM Bit Image			1
 Atari ST/STE	KID	Fullscreen Construction Kit	448x272	16 colors	1
 Atari ST/STE	LPK	Dali (compressed)	320x200	16 colors	1
@@ -3380,6 +3386,7 @@ Atari TT	PI4		320x480	256 colors	1
 Atari TT	PI5		640x480	16 colors	1
 Atari TT	PI6		1280x960	mono	1
 Atari Falcon	B&W, B_W	ImageLab		256-level grayscale	1
+Atari Falcon	BP6, BP8, C06, C08, C16, C24, C32	UIMG			1
 Atari Falcon	DC1	DuneGraph (compressed)	320x200	256 colors	1
 Atari Falcon	DEL	DelmPaint	320x240	256 colors	1
 Atari Falcon	DG1	DuneGraph	320x200	256 colors	1
@@ -3396,6 +3403,7 @@ Atari Falcon	PI4, PI7, PI9	Fuckpaint	up to 640x480	256 colors	1
 Atari Falcon	PIX	PixArt			1
 Atari Falcon	PNT, TPI	Prism Paint			1
 Atari Falcon	RAG	RAG-D			1
+Atari Falcon	RAGC (arbitrary)	Music Compile 2		256 colors	1
 Atari Falcon	RAW, RWH, RWL	IMG Scan	up to 640x400	256-level grayscale	1
 Atari Falcon	TCP	Rembrandt		65536 colors	1
 Atari Falcon	TG1	COKE		65536 colors	1
@@ -3414,6 +3422,7 @@ BBC Micro	BBG	LdPic	up to 640x256		1
 BBC Micro	FLF	Turbo Rascal Syntax Error	up to 320x256		1
 Commodore VIC-20	BP (arbitrary)	Best Paint	160x192	9 colors	1
 Commodore VIC-20	FLF	Turbo Rascal Syntax Error		8 colors	1
+Commodore VIC-20	MG	MINIPAINT	up to 160x192	10 colors	1
 Commodore VIC-20	PIC0 (arbitrary)+PIC1	Picasso	88x176	10 colors	1
 Commodore 64	4BT	GoDot	320x200	16 colors	1
 Commodore 64	64C	8x8 font		mono	1
@@ -3425,8 +3434,10 @@ Commodore 64	AMI	Amica Paint	160x200	16 colors	1
 Commodore 64	BDP	Boogie Down Paint	160x200	16 colors	1
 Commodore 64	BFL, BFLI	Big FLI	148x400	16 colors	1
 Commodore 64	BML, FLI, FLG	FLI Graph	148x200	16 colors	1
+Commodore 64	BS	Printfox	320x200	mono	1
 Commodore 64	CDU	CDU-Paint	160x200	16 colors	1
 Commodore 64	CFLI	CFLI Designer	296x200	16 colors	1
+Commodore 64	CGX	Commodore Grafix		16 colors	1
 Commodore 64	CHE	Cheese	160x200	16 colors	1
 Commodore 64	CLE	Centauri Logo-Editor	160x200	4 colors	1
 Commodore 64	CLP	GoDot clip	up to 320x200	16 colors	1
@@ -3452,8 +3463,10 @@ Commodore 64	FP	Fuckpaint	320x200		2
 Commodore 64	FUN, FP2	Funpaint	296x200		2
 Commodore 64	FPR	FLI Profi	160x200	16 colors	1
 Commodore 64	G	SEUCK font		mono	1
+Commodore 64	GB	Printfox	640x400	mono	1
 Commodore 64	GCD, MON		320x200	mono	1
 Commodore 64	GG	Koala Painter (compressed)	320x200	16 colors	1
+Commodore 64	GR, CS	Star Painter		mono	1
 Commodore 64	GUN, IFL	Gunpaint	296x200		2
 Commodore 64	HBM, HIR, HPI, FGS	Hires-Bitmap	320x200	mono	1
 Commodore 64	HCB	HCB-editor	148x200	16 colors	1
@@ -3485,8 +3498,11 @@ Commodore 64	NUF	NUFLI Editor	320x200	16 colors	1
 Commodore 64	NUP	NUFLI Editor (compressed)	320x200	16 colors	1
 Commodore 64	OCP, MPI, MPIC	Advanced Art Studio	160x200	16 colors	1
 Commodore 64	P64, FLY	Picasso 64	160x200	16 colors	1
+Commodore 64	PBOT	PETSCII BOT	up to 12x16 characters	16 colors	1
 Commodore 64	PDR	PetDraw64	40x25 characters	16 colors	1
+Commodore 64	PET	C64 OS screenshot v2	40x25 characters	16 colors	1
 Commodore 64	PET	PETSCII Editor	40x25 characters	16 colors	1
+Commodore 64	PG	Pagefox	up to 640x800	mono	1
 Commodore 64	PI, BPL	Blazing Paddles	160x200	16 colors	1
 Commodore 64	PMG	Paint Magic	160x200	16 colors	1
 Commodore 64	PP	Pixel Perfect	296x200		2
@@ -3503,6 +3519,7 @@ Commodore 64	SHE	Super Hires Editor	96x88	16 colors	1
 Commodore 64	SHE	Super Hires Editor 2	192x168	16 colors	1
 Commodore 64	SHF	Super Hires FLI Editor	up to 208x167	16 colors	1
 Commodore 64	SHI	Super Hires Interlace Editor	96x200		2
+Commodore 64	SHP	Loadstar	up to 320x200	16 colors	1
 Commodore 64	SHS	Super Hires Studio	320x200	16 colors	1
 Commodore 64	SHX	SHF-XL Edit	144x168	16 colors	1
 Commodore 64	SIF	Super Hires Interlace FLI Editor	96x167		2
@@ -3514,6 +3531,7 @@ Commodore 64	VIC		up to 320x200	16 colors	1
 Commodore 64	VID	Vidcom 64	160x200	16 colors	1
 Commodore 64	XFL	X-FLI Editor	192x167	16 colors	1
 Commodore 64	ZOM	Zoomatic	160x200	16 colors	1
+Commodore 64	ZS	Star Painter font		mono	1
 Commodore 16/116/Plus4	P4I	Botticelli	320x200	121 colors	1
 Commodore 16/116/Plus4	P4I	Multi Botticelli	160x200	121 colors	1
 Commodore 16/116/Plus4	P4I		128x64	4 colors	1
@@ -3526,16 +3544,17 @@ Electronika MC 0515	SCR		640x200	mono	1
 FM Towns	PI				1
 FM Towns	PIC				1
 HP 48	GRB, GRO	GROB		mono	1
-MSX	MIG	MIG	up to 512x424		1 or 2
 MSX	SC2, GRP	Screen 2	256x192	15 colors	1
 MSX	SC3	Screen 3	64x48	15 colors	1
 MSX2	CMP+PL5	Dot Designer's Club (DD-Graph)	up to 256x212	16 colors	1
 MSX2	FNT	Dynamic Publisher font	512x160	mono	1
-MSX2	GL5+PL5			16 colors	1
-MSX2	GL6+PL6			4 colors	1
-MSX2	GL7+PL7			16 colors	1
-MSX2	GL8			256 colors	1
+MSX2	GL5, SH5+PL5			16 colors	1
+MSX2	GL6, SH6+PL6			4 colors	1
+MSX2	GL7, SH7+PL7			16 colors	1
+MSX2	GL8, SH8			256 colors	1
 MSX2	MAG, MAX	Maki-chan Graphics			1
+MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
+MSX2	MIG	MIG	up to 512x424		1 or 2
 MSX2	PCT	Dynamic Publisher screen	512x704	mono	1
 MSX2	PI				1
 MSX2	PIC	YPIC	up to 256x212		1
@@ -3554,9 +3573,9 @@ MSX2	SR7+PL7	Graph Saurus	512x212	16 colors	1
 MSX2	SR8	Graph Saurus	256x212	256 colors	1
 MSX2	SRI+PL7	Graph Saurus	512x424	16 colors	2
 MSX2	STP	Dynamic Publisher stamp		mono	1
-MSX2+	GLA+PLA			12515 colors	1
-MSX2+	GLC, GLS			19268 colors	1
-MSX2+	SCA	Screen 10	256x212	12515 colors	1
+MSX2+	GLA, GLB, SHA, SHB+PLA			12515 colors	1
+MSX2+	GLC, GLS, SHC			19268 colors	1
+MSX2+	SCA, SCB	Screen 10	256x212	12515 colors	1
 MSX2+	SCA+S1A	Screen 10 interlaced	256x424	12515 colors	2
 MSX2+	SCC, SRS, YJK	Screen 12	up to 256x212	19268 colors	1
 MSX2+	SCC+S1C	Screen 12 interlaced	up to 256x424	19268 colors	2
@@ -3564,8 +3583,10 @@ MSX V9990 VDP	G9B	GFX9k		32768 colors	1
 NEC PC-80	MAG	Maki-chan Graphics	up to 640x200	8 colors	1
 NEC PC-88	IMG	ArtMaster88	640x200	8 colors	1
 NEC PC-88	IMG	DaVinci	640x200	8 colors	1
+NEC PC-88	KTY	Kitty	640x200	8 colors	1
 NEC PC-88	MAG	Maki-chan Graphics		8 colors	1
 NEC PC-88	PI			8 colors	1
+NEC PC-88 VA	KT4	Kitty	640x400	8 colors	1
 NEC PC-88 VA	MAG	Maki-chan Graphics	up to 640x400		1
 NEC PC-88 VA	PIC		up to 640x400		1
 NEC PC-98	ARV	ARTV	640x400	16 colors	1
@@ -3584,16 +3605,20 @@ PC	HS2	Handy Scanner 2000 POSTERING		mono	1
 PC	FLF	Turbo Rascal Syntax Error	320x200		1
 PC	FNT	Image 72 font		mono	1
 PC	MSP	Microsoft Paint version 1 or 2		mono	1
-PlayStation	TIM	TIM		32768 colors	1
+PlayStation	TIM	TIM			1
 Psion Series 3	PIC, ICN			mono	1
-SAM Coupe	SCS4, SS4	Mode 4	256x192	16 colors	1
+SAM Coupe	LCE		256x384		2
+SAM Coupe	SS1	Mode 1	256x192	128 colors	1
+SAM Coupe	SS2	Mode 2	256x192	128 colors	1
+SAM Coupe	SS3	Mode 3	512x192	128 colors	1
+SAM Coupe	SS4, SCS4	Mode 4	256x192	128 colors	1
 SAM Coupe	SSX		up to 512x192		1
 Sharp X68000	MAG	Maki-chan Graphics		16 colors	1
 Sharp X68000	PIC			65536 colors	1
 Tandy 1000	PNT	DeskMate Paint	312x176	16 colors	1
 Timex 2048	HRG	Hi-res Gigascreen	512x192	4 colors	2
-Timex 2048	SCR	Hi-color	256x192	15 colors	1
-Timex 2048	SCR	Hi-res	512x192	mono	1
+Timex 2048	SCR, THC	Hi-color	256x192	15 colors	1
+Timex 2048	SCR, THR	Hi-res	512x192	mono	1
 TRS-80	HR		640x240	mono	1
 TRS-80	RLE	CompuServe RLE	256x192	mono	1
 TRS-80	SHR	MagicDraw	640x240	mono	1
@@ -3617,7 +3642,7 @@ ZX Spectrum	CHX	Big font		15 colors	1
 ZX Spectrum	FLF	Turbo Rascal Syntax Error	256x192	15 colors	1
 ZX Spectrum	HLR	Attributes Gigascreen	32x24 characters		2
 ZX Spectrum	IFL	Multicolor 8x2	256x192	15 colors	1
-ZX Spectrum	IMG	Gigascreen	256x192		2
+ZX Spectrum	GSC, IMG, SCR	Gigascreen	256x192		2
 ZX Spectrum	MC	Multicolor 8x1	256x192	15 colors	1
 ZX Spectrum	MG1	MultiArtist 8x1	256x192		2
 ZX Spectrum	MG2	MultiArtist 8x2	256x192		2
@@ -3632,8 +3657,21 @@ ZX Spectrum	ZXP	ZX-Paintbrush		15 colors	1
 ZX Spectrum	ZXS	SpecSCII	256x192	15 colors	1
 ZX Spectrum Profi	GRF	Profi	512x240	16 colors	1
 ZX Spectrum ULAplus	SCR	ULAplus	256x192	64 colors	1
+ZX Spectrum ULAplus	SCR, TCU	Timex hi-color ULAplus	256x192	64 colors	1
 ZX Evolution	SXG	Speccy eXtended Graphics		256 colors	1
+ZX-Uno	RAD, SCR	Radastan	128x96		1
 ZX Spectrum Next	NXI		256x192	256 colors	1
+eLeMeNt ZX	546	HGFX PAL546	720x546	4 colors	1
+eLeMeNt ZX	HAM	HGFX HAM	up to 512x192		1
+eLeMeNt ZX	HGH	HGFX High	512x192		1
+eLeMeNt ZX	HGL	HGFX Low	256x192		1
+eLeMeNt ZX	HGS, SCR	HiResColor Gigascreen	512x192		2
+eLeMeNt ZX	HKL, SCR	HiResColor/KeyLayer	512x192	15 colors	1
+eLeMeNt ZX	HRC, SCR	HiResColor	512x192	15 colors	1
+eLeMeNt ZX	HRX, SCR	HiResindeXedColor	512x192	32 colors	1
+eLeMeNt ZX	SHR	HGFX Ultra	512x384		1
+eLeMeNt ZX	SKL, SCR	KeyLayer	256x192	15 colors	1
+eLeMeNt ZX	XKL, SCR	HiResindeXedColor/KeyLayer	512x192	63 colors	1
 
 
 >>> 7-zip sevenZip

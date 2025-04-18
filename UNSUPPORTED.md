@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,528)
+# Unsupported File Formats (3,527)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (283)
+## Archive (282)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -21,8 +21,6 @@ Family/Format | Name | Extensions | Notes
 [archive/afterlifeGameData](https://discmaster.textfiles.com/search?format=afterlifeGameData) | Afterlife game data | .000 | 
 [archive/afxCompressedData](https://discmaster.textfiles.com/search?format=afxCompressedData) | AFX compressed data |  | 
 [archive/aixBackupRestore](https://discmaster.textfiles.com/search?format=aixBackupRestore) | AIX/BFF backup/restore | .img .bff | 
-[archive/aldusLZWCompressedData](https://discmaster.textfiles.com/search?format=aldusLZWCompressedData) | Aldus LZW compressed data |  | 
-[archive/aldusZip](https://discmaster.textfiles.com/search?format=aldusZip) | Aldus Zip Compressed File |  | No known extractor program.
 [archive/amiBackBackupDiskImage](https://discmaster.textfiles.com/search?format=amiBackBackupDiskImage) | Ami-Back backup disk image | .adf | 
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?format=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
 [archive/amigaKickstartDiskImage](https://discmaster.textfiles.com/search?format=amigaKickstartDiskImage) | Amiga Kickstart disk image | .adf | 
@@ -177,6 +175,7 @@ Family/Format | Name | Extensions | Notes
 [archive/nosPackerPacked](https://discmaster.textfiles.com/search?format=nosPackerPacked) | NOS Packer Packed | .exe | 
 [archive/nsPacKPacked](https://discmaster.textfiles.com/search?format=nsPacKPacked) | NsPacK Packed |  | 
 [archive/ntShellProtected](https://discmaster.textfiles.com/search?format=ntShellProtected) | NTShell Protected | .exe | 
+[archive/oberonCompresArchive](https://discmaster.textfiles.com/search?format=oberonCompresArchive) | Oberon compres archive | .arc | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?format=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
 [archive/oricDisk](https://discmaster.textfiles.com/search?format=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 [archive/oricTape](https://discmaster.textfiles.com/search?format=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)

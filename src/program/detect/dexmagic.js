@@ -60,6 +60,7 @@ const DEXMAGIC_CHECKS =
 	"RedSpark Audio"        : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
 
 	// document
+	"ASCOM"                                   : [{offset : 0, match : [0xE9, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x8B, 0xFC, 0x36, 0x8B, 0x2D, 0x83, 0xC4, 0x02, 0x81, 0xED]}],
 	"Asc2Com (MorganSoft)"                    : [{size : 2048, match : "enerated by ASC2COM"}],
 	"Asc2Com (MorganSoft) Variant"            : [{size : 2048, match : "ASC2COM  V2"}],
 	"Asc2Com (MorganSoft) Variant 2"          : [{size : 2048, match : "File made by ASC2COM"}],

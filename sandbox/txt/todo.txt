@@ -1,12 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Once NihAV fixed (or chose not to fix): https://codecs.multimedia.cx/2025/04/nihav-even-further-encoder-improvements/
-  Update NihAV now that fixes for the various files I encountered have been applied
-  Try to see if some audio is better in files like these: https://discmaster.textfiles.com/view/6312/Anglia_BritishContrysides_Acorn.iso/shared/movies/arc9/money4
-  Then test to see if it can process: https://discmaster.textfiles.com/view/28542/The%20Best%20Shareware%20of%20the%20Year%201997%20Winter.iso/vivo/indy.viv
-  If it can't, consider mentioning it to nihav author via blog
-
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
 
@@ -15,11 +9,11 @@
 | High Priority |
 \---------------/
 * Add extraction suport for these older MacroMind Projector files (21,000+ unique files). No known converter or extractor:
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMPB
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=DG06&strict=strict
+	https://discmaster.textfiles.com/search?qfields=name&detection=macroMindProjector
+	https://discmaster.textfiles.com/search?qfields=name&detection=VWMD
+	https://discmaster.textfiles.com/search?qfields=name&detection=MMDR
+	https://discmaster.textfiles.com/search?qfields=name&detection=MMPB
+	https://discmaster.textfiles.com/search?qfields=name&detection=DG06&strict=strict
 
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
   http://dev.discmaster2.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver

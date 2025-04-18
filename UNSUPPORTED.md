@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,527)
+# Unsupported File Formats (3,536)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -570,7 +570,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (54)
+## Executable (56)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?format=aDotOutExecutable) | a.out Executable | .o | 
@@ -583,6 +583,8 @@ Family/Format | Name | Extensions | Notes
 [executable/atariSTExe](https://discmaster.textfiles.com/search?format=atariSTExe) | Atari ST Executable |  | [11 sample files](https://sembiance.com/fileFormatSamples/executable/atariSTExe/)
 [executable/bFLTExecutable](https://discmaster.textfiles.com/search?format=bFLTExecutable) | BFLT executable |  | 
 [executable/blackberryExecutable](https://discmaster.textfiles.com/search?format=blackberryExecutable) | BlackBerry Executable | .cod | 
+[executable/caslCompiledPalmPilotProgram](https://discmaster.textfiles.com/search?format=caslCompiledPalmPilotProgram) | CASL compiled PalmPilot program | .csm | 
+[executable/caslwinExecutable](https://discmaster.textfiles.com/search?format=caslwinExecutable) | CASLwin executable | .csp | 
 [executable/dalvikExecutable](https://discmaster.textfiles.com/search?format=dalvikExecutable) | Dalvik Executable | .odex | 
 [executable/digiPAKAudioDriver](https://discmaster.textfiles.com/search?format=digiPAKAudioDriver) | DIGIPAK audio driver | .com | 
 [executable/elf](https://discmaster.textfiles.com/search?format=elf) | ELF Executable/Library |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
@@ -1135,7 +1137,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,302)
+## Other (2,309)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1184,6 +1186,8 @@ Family/Format | Name | Extensions | Notes
 [other/abcSnapGraphicsPalette](https://discmaster.textfiles.com/search?format=abcSnapGraphicsPalette) | ABC SnapGraphics Palette | .sgp | 
 [other/abcSnapGraphixWorkspace](https://discmaster.textfiles.com/search?format=abcSnapGraphixWorkspace) | ABC SnapGraphix Workspace | .sgw | 
 [other/abilityDataBase](https://discmaster.textfiles.com/search?format=abilityDataBase) | Ability DataBase | .xdb | 
+[other/abletonProjectConfiguration](https://discmaster.textfiles.com/search?format=abletonProjectConfiguration) | Ableton project configuration | .cfg | 
+[other/abletonWarpAnalysis](https://discmaster.textfiles.com/search?format=abletonWarpAnalysis) | Ableton Warp Analysis | .asd | 
 [other/aboveDISCConfiguration](https://discmaster.textfiles.com/search?format=aboveDISCConfiguration) | Above DISC Configuration | .cfg | 
 [other/abracadataDrawing](https://discmaster.textfiles.com/search?format=abracadataDrawing) | Abracadata drawing | .sig | 
 [other/absoluteDatabaseFile](https://discmaster.textfiles.com/search?format=absoluteDatabaseFile) | Absolute Database file | .abs | 
@@ -1488,6 +1492,7 @@ Family/Format | Name | Extensions | Notes
 [other/broderbundAudioDriver](https://discmaster.textfiles.com/search?format=broderbundAudioDriver) | Broderbund audio Driver | .drv | 
 [other/bryceObjectPresets](https://discmaster.textfiles.com/search?format=bryceObjectPresets) | Bryce Object Presets | .obp | 
 [other/bsdiffPatch](https://discmaster.textfiles.com/search?format=bsdiffPatch) | bsdiff patch | .bdif .p | 
+[other/bueroPlusNexTFlashFilerDatabaseFile](https://discmaster.textfiles.com/search?format=bueroPlusNexTFlashFilerDatabaseFile) | Buero Plus NexT FlashFiler database file | .bpd | 
 [other/buildEngineDemoData](https://discmaster.textfiles.com/search?format=buildEngineDemoData) | Build Engine Demo Data | .dem | 
 [other/bullfrogObjectData](https://discmaster.textfiles.com/search?format=bullfrogObjectData) | Bullfrog Object Data | .dat | 
 [other/butcherShape](https://discmaster.textfiles.com/search?format=butcherShape) | Butcher Shape | .shape | 
@@ -1898,6 +1903,7 @@ Family/Format | Name | Extensions | Notes
 [other/fileStar2ToolBar](https://discmaster.textfiles.com/search?format=fileStar2ToolBar) | FileStar/2 toolBar | .bar | 
 [other/finalCutProject](https://discmaster.textfiles.com/search?format=finalCutProject) | Final Cut project | .fcp | 
 [other/finaleEnigmaBinaryFormat](https://discmaster.textfiles.com/search?format=finaleEnigmaBinaryFormat) | Finale Enigma Binary Format | .bin | 
+[other/finaleGuitar](https://discmaster.textfiles.com/search?format=finaleGuitar) | Finale Guitar | .mus .lib .ftm | 
 [other/finaleNotePad](https://discmaster.textfiles.com/search?format=finaleNotePad) | Finale NotePad | .mus | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?format=firstBasicHelp) | FirstBasic Help | .fbh | 
 [other/fLStudioScore](https://discmaster.textfiles.com/search?format=fLStudioScore) | FL Studio Score | .fsc | 
@@ -2607,6 +2613,7 @@ Family/Format | Name | Extensions | Notes
 [other/orCADProject](https://discmaster.textfiles.com/search?format=orCADProject) | OrCAD Project | .opj | 
 [other/ordaSevernyiVeterMap](https://discmaster.textfiles.com/search?format=ordaSevernyiVeterMap) | Orda: Severnyi Veter Map | .map | 
 [other/originSystemsIFFPalette](https://discmaster.textfiles.com/search?format=originSystemsIFFPalette) | ORIGIN Systems IFF palette | .iff | 
+[other/orionSamplerSample](https://discmaster.textfiles.com/search?format=orionSamplerSample) | Orion Sampler sample | .osp | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?format=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?format=os2DLL) | OS/2 Dynamic Link Library | .dll | 
 [other/os2ExtendedFileAttributes](https://discmaster.textfiles.com/search?format=os2ExtendedFileAttributes) | OS/2 Extended File Attributes |  | 
@@ -2758,6 +2765,7 @@ Family/Format | Name | Extensions | Notes
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?format=printerFontMetrics) | Printer Font Metrics | .pfm | 
 [other/printPowerProData](https://discmaster.textfiles.com/search?format=printPowerProData) | PrintPower Pro data | .pvl | 
 [other/proThrottleConfiguration](https://discmaster.textfiles.com/search?format=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
+[other/proToolsSession](https://discmaster.textfiles.com/search?format=proToolsSession) | Pro Tools session data | .pts | 
 [other/proVideoJob](https://discmaster.textfiles.com/search?format=proVideoJob) | Pro Video Job | .job | 
 [other/proVideoVectorOverlayedCharacter](https://discmaster.textfiles.com/search?format=proVideoVectorOverlayedCharacter) | Pro Video vector overlayed character |  | 
 [other/proENGINEERFile](https://discmaster.textfiles.com/search?format=proENGINEERFile) | Pro/ENGINEER file | .dat | 
@@ -2768,6 +2776,7 @@ Family/Format | Name | Extensions | Notes
 [other/programmingObjectFile](https://discmaster.textfiles.com/search?format=programmingObjectFile) | Programming Object File | .pof | 
 [other/projectIGIResourceData](https://discmaster.textfiles.com/search?format=projectIGIResourceData) | Project IGI Resource data | .res | 
 [other/projectSpaceStationSavedMission](https://discmaster.textfiles.com/search?format=projectSpaceStationSavedMission) | Project: Space Station saved Mission | .msn | 
+[other/propellerheadReasonNNXTPatch](https://discmaster.textfiles.com/search?format=propellerheadReasonNNXTPatch) | Propellerhead Reason NN-XT Patch | .sxt .sx2 | 
 [other/propellerheadSoftwareReasonSoundBank](https://discmaster.textfiles.com/search?format=propellerheadSoftwareReasonSoundBank) | Propellerhead Software Reason SoundBank | .rfl | 
 [other/protelPCBBinaryLibrary](https://discmaster.textfiles.com/search?format=protelPCBBinaryLibrary) | Protel PCB Binary Library |  | 
 [other/protelSchematicLibraryEditorBinaryFile](https://discmaster.textfiles.com/search?format=protelSchematicLibraryEditorBinaryFile) | Protel Schematic Library editor binary file |  | 

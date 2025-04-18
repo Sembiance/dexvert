@@ -6,8 +6,12 @@ export class aif extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/AIFF";
 	ext          = [".aif", ".aiff", ".aff"];
 	magic        = [
+		// generic
 		"AIFF Audio Interchange File Format", "IFF data, AIFF audio", "Audio Interchange File Format", "IFF data, AIFF-C compressed audio", "AIFF audio data", "AIFF-C", "audio/x-aiff", "audio/x-aifc", "Audio IFF (aiff)", /^soxi: aifc?f?$/,
-		/^fmt\/414( |$)/, /^x-fmt\/136( |$)/
+		/^fmt\/414( |$)/, /^x-fmt\/136( |$)/,
+
+		// specific
+		"ReCycled Audio Loop Export"
 	];
 	idMeta       = ({macFileType}) => ["AIFC", "AIFF"].includes(macFileType);
 	metaProvider = ["soxi"];

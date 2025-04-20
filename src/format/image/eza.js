@@ -6,5 +6,5 @@ export class eza extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/EZ-Art_Professional";
 	ext        = [".eza"];
 	magic      = ["EZ-Art Professional bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "wuimg"];
 }

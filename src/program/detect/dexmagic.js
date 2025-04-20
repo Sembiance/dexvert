@@ -112,6 +112,7 @@ const DEXMAGIC_CHECKS =
 	"DeskMate Paint Alt"              : [{offset : 0, match : "PNT"}],
 	"Digi-Pic 2"                      : [{offset : 32000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
 	"ECI Graphic Editor"              : [{offset : 0, match : [0x00, 0x40]}],
+	"Eclipse Proxy Image"             : [{offset : 0, match : [0xAF, 0xCB]}],
 	"FM-Towns HEL Animation"          : [{offset : 0, match : "he1"}],
 	"Funny Paint"                     : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
 	"Gifpress GIF"                    : [{offset : 2, match : [0xFF, 0xB4]}],

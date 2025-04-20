@@ -7,5 +7,5 @@ export class kyssKYG extends Format
 	ext        = [".kyg"];
 	magic      = ["KYG bitmap"];
 	mimeType   = "image/x-kyss-graphics";
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = ["wuimg", `abydosconvert[format:${this.mimeType}]`];
 }

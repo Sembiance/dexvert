@@ -6,5 +6,5 @@ export class hir extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Print-Technik";
 	ext        = [".hir"];
 	magic      = ["Print-Technik/PRO89xx Raw data bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "wuimg"];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,536)
+# Unsupported File Formats (3,531)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -754,7 +754,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (202)
+## Image (197)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -790,7 +790,6 @@ Family/Format | Name | Extensions | Notes
 [image/beagleWorksImage](https://discmaster.textfiles.com/search?format=beagleWorksImage) | BeagleWorks Image |  | 
 [image/beamSoftwareSIFFImage](https://discmaster.textfiles.com/search?format=beamSoftwareSIFFImage) | Beam Software SIFF sprite/image | .pim | 
 [image/bentleyMicroStationCAD](https://discmaster.textfiles.com/search?format=bentleyMicroStationCAD) | Bentley MicroStation CAD | .dgn | 
-[image/bethesdaImageTextureIFHD](https://discmaster.textfiles.com/search?format=bethesdaImageTextureIFHD) | Bethesda Image texture | .bsi | 
 [image/blueScanDrawing](https://discmaster.textfiles.com/search?format=blueScanDrawing) | Blue Scan Drawing | .blsc | 
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?format=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
 [image/cadlogicInstinctDrawing](https://discmaster.textfiles.com/search?format=cadlogicInstinctDrawing) | Cadlogic Instinct Drawing | .dp | 
@@ -822,7 +821,6 @@ Family/Format | Name | Extensions | Notes
 [image/dvdFabChangeGraphicPicture](https://discmaster.textfiles.com/search?format=dvdFabChangeGraphicPicture) | DVDFab Change Graphic Picture | .cgp | 
 [image/eaSeattlePictureGameData](https://discmaster.textfiles.com/search?format=eaSeattlePictureGameData) | EA Seattle picture game data | .pic | 
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?format=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
-[image/eclipseTILEBitmap](https://discmaster.textfiles.com/search?format=eclipseTILEBitmap) | Eclipse TILE bitmap | .tile | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
 [image/expertDrawDrawing](https://discmaster.textfiles.com/search?format=expertDrawDrawing) | ExpertDraw drawing |  | 
 [image/fastCADForWindowsDrawing](https://discmaster.textfiles.com/search?format=fastCADForWindowsDrawing) | FastCAD for Windows drawing | .fct .fcw .fsc | 
@@ -858,7 +856,6 @@ Family/Format | Name | Extensions | Notes
 [image/introCAD](https://discmaster.textfiles.com/search?format=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
-[image/jamBitmap](https://discmaster.textfiles.com/search?format=jamBitmap) | JAM Bitmap | .jam | 
 [image/jingTaoPicFormatBitmap](https://discmaster.textfiles.com/search?format=jingTaoPicFormatBitmap) | Jing Tao pic format bitmap | .ssl | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
@@ -929,7 +926,6 @@ Family/Format | Name | Extensions | Notes
 [image/serifDrawPlusDrawing](https://discmaster.textfiles.com/search?format=serifDrawPlusDrawing) | Serif DrawPlus Picture/drawing | .dpp | 
 [image/signumCDI](https://discmaster.textfiles.com/search?format=signumCDI) | Signum! CDI Image | .cdi .c01 | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?format=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
-[image/skyRoadsBitmap](https://discmaster.textfiles.com/search?format=skyRoadsBitmap) | SkyRoads Bitmap | .lzs | 
 [image/slpImage](https://discmaster.textfiles.com/search?format=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 [image/someraGraphicFormat](https://discmaster.textfiles.com/search?format=someraGraphicFormat) | Somera Graphic Format | .sgf | 
 [image/spriteArtistSprite](https://discmaster.textfiles.com/search?format=spriteArtistSprite) | Sprite Artist Sprite | .spr | 
@@ -955,7 +951,6 @@ Family/Format | Name | Extensions | Notes
 [image/windowsFAXCover](https://discmaster.textfiles.com/search?format=windowsFAXCover) | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?format=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?format=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
-[image/xCarGraphics](https://discmaster.textfiles.com/search?format=xCarGraphics) | XCar Graphics | .gxa | 
 [image/xeroxPresentsClipart](https://discmaster.textfiles.com/search?format=xeroxPresentsClipart) | Xerox Presents clipart | .xpp | 
 [image/zSoftPalette](https://discmaster.textfiles.com/search?format=zSoftPalette) | ZSoft Palette | .pal | 
 [image/zyxelFAXFormat](https://discmaster.textfiles.com/search?format=zyxelFAXFormat) | Zyxel FAX format | .fax | 

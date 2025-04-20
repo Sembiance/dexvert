@@ -7,5 +7,5 @@ export class quakeGFXLMP extends Format
 	ext          = [".lmp"];
 	auxFiles     = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()==="palette.lmp");
 	metaProvider = ["image"];
-	converters   = ["lmp2ppm", "noesis[type:image]"];
+	converters   = ["lmp2ppm", "wuimg", "noesis[type:image]"];
 }

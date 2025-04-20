@@ -13,6 +13,7 @@
 * For each dexdrone server as root:
 pgrep -f "dexrecurse" | xargs kill
 su - sembiance
+killall mount
 stopDexserver
 exit
 rm -rf /mnt/dexdrone/* /mnt/dexvert/recurse/*

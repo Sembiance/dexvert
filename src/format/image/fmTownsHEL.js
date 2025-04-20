@@ -11,5 +11,6 @@ export class fmTownsHEL extends Format
 	converters     = [
 		"deark[module:fmtowns_hel][opt:fmtowns_hel:includedups] -> *ffmpeg[fps:8][outType:gif]",
 		"hel2tif -> *ffmpeg[fps:8][outType:gif]"
+		// wuimg also supports this, but haven't added support for properly naming the output files so that they can be animated with ffmpeg
 	];
 }

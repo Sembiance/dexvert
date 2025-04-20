@@ -6,5 +6,5 @@ export class otaBitmap extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/OTA_bitmap";
 	ext          = [".otb"];
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "wuimg"];
 }

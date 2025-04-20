@@ -17377,14 +17377,18 @@ WebP (*.webp)
 
 
 >>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
+aliaspix:	AliasPIX and Vivid
 avif:	AV1 Image File Format
-avs:	AVS X
+avs:	Stardent AVS X
 bld:	MegaPaint
 bmp:	Microsoft Bitmap
 bmz:	GSD engine BMZ
+bob:	Bob raytracer raster
 bru:	Degas Brush
-c64:	KoalaPainter (KOA) and Advanced Art Studio (OCP)
+bsi:	Bethesda BSI texture (IFHD, BSIF)
+c64:	Art Studio (OCP), Artist64, Blazing Paddles, CDU-Paint, Cheese, Create With Garfield, Doodle (raw & compressed), Hi-Eddi, Image System, Interpaint, KoalaPainter (raw & compressed), Picasso 64, Runpaint, Saracen Paint, Vidcom 64
 cbg:	BGI/Ethornell CompressedBG (v1)
+clm:	IDES/Fairytale PC-98 thumbnail? (no palette support)
 coke:	COKE (Atari Falcon)
 da4:	PaintShop (Atari ST)
 dali:	Dali uncompressed
@@ -17393,7 +17397,11 @@ degas:	DEGAS and DEGAS Elite
 dib:	Microsoft DIB
 doo:	Atari Doodle
 dpx:	Digital Picture Exchange
+eb_fnt:	Elecbyte M.U.G.E.N. Font v1. Requires PCX
+eb_sff:	Elecbyte M.U.G.E.N. Sprite v1. Requires PCX
+eclipse:	Eclipse TILE
 eggpaint:	EggPaint
+ez:	EZ-Art Professional
 farbfeld:	farbfeld
 flif:	Free Lossless Image Format
 ftc:	Falcon True Color
@@ -17402,45 +17410,59 @@ gemview:	GEM View-Dither
 gif:	Graphics Interchange Format
 god:	GodPaint
 gp4:	elf AI5 engine GP4
+gpc:	IDES/Fairytale PC-98 visual novel image
+gxa:	Bethesda GXA image (BMHD)
 heif:	High Efficiency Image File Format
-hg3:	CatSystem engine HG3
+hel:	Herahera Animation (へらへらアニメ, HEL)
+hg3:	CatSystem engine image
+hir:	Print-Technik Raw
 hpicon:	HP Palmtop Icon
 ico:	Microsoft Icon
 idsp:	id Software Sprite (Quake, Half-Life, and 32-bit variants)
-ilbm:	Interleaved Bitmap (ILBM and PBM)
+iim:	InShape IIM
+ilbm:	Interleaved Bitmap (ILBM and PBM) (Extra Half-Brite, HAM, color cycling)
+imc:	Signum! IMC
 indy:	IndyPaint
 j2k:	JPEG 2000 codestream
+jam:	Aladdin JAM format
 jbig:	JBIG
 jbig2:	JBIG2
 jp2:	JPEG 2000
 jpeg:	JPEG, MPO
 jpegls:	JPEG LS
 jpegxl:	JPEG XL
+kro:	Kolor Raw
+kyg:	Kyss graphics format (KYG)
 lerc:	Limited Error Raster Compression
+lmp:	Quake LMP
 mac:	MacPaint
 mag:	MAG (MAKI02)
 maki:	MAKIchan (MAKI01)
-msx:	MSX-BASIC dump
+msx:	MSX-BASIC dump, Graph Saurus
 nlm:	Nokia Logo Manager
+ota:	Over The Air bitmap (uncompliant)
 pcf:	PCF bitmap font
-pcx:	PC Paintbrush PCX
-pdt:	RealLive engine PDT
-pgx:	Glib2 engine PGX
+pcx:	PC Paintbrush PCX (all versions, plus CGA mode)
+pdt:	RealLive engine PDT10 and PDT11
+pgx:	Glib2 engine image
 pi:	Yanagisawa's Pi
 pic:	Yanagisawa's PIC
 pic2:	Yanagisawa's PIC2
 pictor:	PCPaint PICtor
 png:	Portable Network Graphics
 pnm:	PNM extended family (PNM, PAM, PFM, PHM, Xv Thumbnail, MTV, JPEG2000-PGX)
-prt:	Kid engine PRT
-px:	Leaf engine PX
+prt:	Kid engine image
+px:	Leaf engine image
+pxy:	Eclipse Proxy
 q4:	MAJYO's Q4 (XLD4)
 qoi:	QuiteOK image
 raw:	Raw camera formats
 sgi:	Silicon Graphics Image
 sixel:	SIXEL terminal graphics
+skyroads:	SkyRoads LZS graphics
 sun:	Sun Raster
 svg:	Scalable Vector Graphics
+tcp:	Atari Rembrandt
 tga:	Truevision TGA (TARGA)
 tiff:	Tag Image File Format, BigTIFF
 tim:	PlayStation image
@@ -17449,14 +17471,15 @@ tlg:	KiriKiri engine image (v5)
 tre:	Spooky Sprites Run-Length Encoded
 trp:	Spooky Sprites uncompressed
 trs:	Spooky Sprites sprite
+txf:	TexFont Texture Mapped Font
 wbm:	Wild-Bug engine image
 wbmp:	Wireless Bitmap
 webp:	WebP
 wgtspr:	WGT Sprite
 wia:	Wild-Bug engine image sequence
-xbm:	X Bitmap
+xbm:	X10 and X11 Bitmap
 xcursor:	X11 cursor
-xwd:	X Window Dump
+xwd:	X11 Window Dump
 xyz:	RPG Maker image
 
 

@@ -1018,6 +1018,7 @@ export default
 		xSetupPlugin                               : {name : "XSetup plugin", ext : [".xpl"], magic : ["XSetup - plugin"]},
 		xTrkCADProject                             : {name : "XTrkCAD project", ext : [".xt"], magic : ["XTrkCAD project"]},
 		xVisionKeymap                              : {name : "XVision Keymap", ext : [".txt"], magic : ["XVision Keymap"], weakMagic : true},
+		yamahaBULKManagerSymbols                   : {name : "Yamaha Midimonitor/BULK Manager Symbols", ext : [".sbl"], magic : ["Yamaha Midimonitor/BULK Manager Symbols"], weakMagic : true},
 		yamahaPSRDiskManagerFile                   : {name : "Yamaha PSR Disk Manager File", ext : [".mng"], magic : [/^fmt\/1870( |$)/], weakMagic : true},
 		zapProgramDescription                      : {name : "ZAP Program description", ext : [".zap"], magic : ["ZAP Program description"], weakMagic : true},
 		zenWorksSnAPPshotASCIIAppObjectTemplate    : {name : "ZenWorks snAPPshot ASCII Application Object Template", ext : [".axt"], magic : ["ZenWorks snAPPshot ASCII Application Object Template"], weakMagic : true},

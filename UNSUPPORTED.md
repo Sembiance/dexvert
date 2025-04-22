@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,531)
+# Unsupported File Formats (3,534)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (282)
+## Archive (283)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -161,6 +161,7 @@ Family/Format | Name | Extensions | Notes
 [archive/mifDiskImage](https://discmaster.textfiles.com/search?format=mifDiskImage) | MIF disk image |  | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?format=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/moofDiskImage](https://discmaster.textfiles.com/search?format=moofDiskImage) | MOOF Macintosh floppy disk image | .moof | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moofDiskImage/)
+[archive/moonbaseCommanderGameDataArchive](https://discmaster.textfiles.com/search?format=moonbaseCommanderGameDataArchive) | Moonbase Commander game data archive | .cmp | 
 [archive/mpq](https://discmaster.textfiles.com/search?format=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/mpressPacked](https://discmaster.textfiles.com/search?format=mpressPacked) | MPRESS Packed | .exe | 
 [archive/mskn2Archive](https://discmaster.textfiles.com/search?format=mskn2Archive) | MSKN 2 Archive | .mskn | 
@@ -1132,7 +1133,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,309)
+## Other (2,311)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1465,6 +1466,7 @@ Family/Format | Name | Extensions | Notes
 [other/boloMap](https://discmaster.textfiles.com/search?format=boloMap) | Bolo Map |  | 
 [other/boogleLexicon](https://discmaster.textfiles.com/search?format=boogleLexicon) | Boogle Lexicon | .boo | 
 [other/boomBoxProject](https://discmaster.textfiles.com/search?format=boomBoxProject) | Boom Box projec | .box | 
+[other/boomEffect](https://discmaster.textfiles.com/search?format=boomEffect) | Boom effect |  | 
 [other/boostSerializationArchive](https://discmaster.textfiles.com/search?format=boostSerializationArchive) | Boost serialization archive |  | 
 [other/boostTextSerialization](https://discmaster.textfiles.com/search?format=boostTextSerialization) | Boost Text serialization | .txt .dat | 
 [other/bootXBootBlockRecognitionData](https://discmaster.textfiles.com/search?format=bootXBootBlockRecognitionData) | BootX Bootblock Recognition data | .recog | 
@@ -3076,6 +3078,7 @@ Family/Format | Name | Extensions | Notes
 [other/sysSpeedModule](https://discmaster.textfiles.com/search?format=sysSpeedModule) | SysSpeed Module |  | 
 [other/systemAudioManagerAwareInfo](https://discmaster.textfiles.com/search?format=systemAudioManagerAwareInfo) | System Audio Manager Aware info | .saa | 
 [other/tResourceGameDataContainer](https://discmaster.textfiles.com/search?format=tResourceGameDataContainer) | T-Resource game data container | .ega .vga .res .rsc | 
+[other/tTracksPreset](https://discmaster.textfiles.com/search?format=tTracksPreset) | T-Tracks preset |  | 
 [other/tabWorksBook](https://discmaster.textfiles.com/search?format=tabWorksBook) | TabWorks book | .twf | 
 [other/tads](https://discmaster.textfiles.com/search?format=tads) | TADS | .t .gam .t3 | 
 [other/tagwriteTemplate](https://discmaster.textfiles.com/search?format=tagwriteTemplate) | Tagwrite Template | .tww | 
@@ -3185,7 +3188,7 @@ Family/Format | Name | Extensions | Notes
 [other/trivialDataBase](https://discmaster.textfiles.com/search?format=trivialDataBase) | Trivial Data Base | .tdb | 
 [other/truePaintAnimation](https://discmaster.textfiles.com/search?format=truePaintAnimation) | TruePaint Animation | .tpa | 
 [other/trxFirmwareHeader](https://discmaster.textfiles.com/search?format=trxFirmwareHeader) | TRX firmware header | .trx | 
-[other/tSOnlineModemsDefinitions](https://discmaster.textfiles.com/search?format=tSOnlineModemsDefinitions) | TS Online modems definitions | .def .dat | 
+[other/tsOnlineModemsDefinitions](https://discmaster.textfiles.com/search?format=tsOnlineModemsDefinitions) | TS Online modems definitions | .def .dat | 
 [other/tsiProtected](https://discmaster.textfiles.com/search?format=tsiProtected) | TSI Protected | .pwd .pbk | 
 [other/tsiLangBinaryTranslationData](https://discmaster.textfiles.com/search?format=tsiLangBinaryTranslationData) | TsiLang binary translation data | .sib | 
 [other/tsunamiMediaGameDataArchive](https://discmaster.textfiles.com/search?format=tsunamiMediaGameDataArchive) | Tsunami Media game data archive | .rlb | 

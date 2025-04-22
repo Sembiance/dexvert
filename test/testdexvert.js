@@ -87,11 +87,16 @@ const FORMAT_OS_HINT =
 		"Random-Dot 3D.iso"                   : "macintoshjp",
 		"Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp",
 		"MAC100-1999-02.ISO"                  : "macintoshjp",
+		"macgaichiban199712.iso"              : "macintoshjp",
 		"MACPEOPLE-1998-03-01.ISO"            : "macintoshjp",
 		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp",
 		"MACPEOPLE-2001-06-01.ISO"            : "macintoshjp",
 		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp",
 		"MACWORLD96.bin"                      : "macintoshjp"
+	},
+	"archive/macromediaDirector" :
+	{
+		"ﾊﾘｳｯﾄﾞ名優写真館.DXR" : "macintoshjp"
 	},
 	"archive/sea" :
 	{

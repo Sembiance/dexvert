@@ -36,7 +36,12 @@ export class dexvert extends Program
 		const outDirPath = r.outDir({absolute : true});
 		const tmpOutDirPath = await fileUtil.genTempPath(undefined, "_program_other_dexvert");
 		await Deno.mkdir(tmpOutDirPath);
-		await dexvertFunc(await DexFile.create(r.inFile({absolute : true})), await DexFile.create(tmpOutDirPath), dexOpts);
+		const subState = await dexvertFunc(await DexFile.create(r.inFile({absolute : true})), await DexFile.create(tmpOutDirPath), dexOpts);
+		if(subState?.phase?.meta?.fileMeta)
+		{
+			r.meta.fileMeta ||= {};
+			Object.assign(r.meta.fileMeta, subState.phase.meta.fileMeta);
+		}
 		await (await fileUtil.tree(tmpOutDirPath, {depth : 1})).parallelMap(async createdFilePath => await fileUtil.move(createdFilePath, path.join(outDirPath, path.basename(createdFilePath))));
 		await fileUtil.unlink(tmpOutDirPath, {recursive : true});
 	};

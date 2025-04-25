@@ -1,0 +1,410 @@
+                                  VOCPACK
+                                     
+                      Lossless sound file compressor
+                     Copyright (C) 1993 Nicola Ferioli
+
+
+File:     LIB.DOC
+Version:  2.0
+Date:     01 September 1993
+
+
+===========================================================================
+
+1  -  INTRODUCTION
+
+
+Vocpack is a compressor/decompressor for 8-bit and 16-bit digital sound
+files using a lossless algorithm; it is useful to save disk space without
+degrading sound quality.
+Vocpack is available in two forms: a command-line version (see VP.DOC) and
+a library of functions which can be called from C programs.
+
+To receive the 'Vocpack 2.0 Library' package you have to register (see
+REGISTER.DOC for details).
+Any non-commercial 'executable file' (shareware or public domain) based on
+Vocpack 2.0 Library can be distributed royalty-free and without any special
+permission. The library files (*.LIB) must not be distributed with it,
+since they are licensed exclusively to the person who registered Vocpack
+2.0 Library: you can give to others any file created with these tools but
+not the tools themselves. In addition you can't distribute an application
+that does nothing but decompressing Vocpack files (since this is what is
+missing in unregistered versions).
+
+
+===========================================================================
+
+2  -  USAGE OVERVIEW
+
+
+In the following description it's implied that you know how to write C
+programs and how to link library files to them.
+
+Vocpack 2.0 Library consists of the following 4 files:
+
+   VP_S.LIB     (small memory model)
+   VP_M.LIB     (medium memory model)
+   VP_C.LIB     (compact memory model)
+   VP_L.LIB     (large memory model)
+
+You must link one of these files to your program, according to the memory
+model you used to compile it. The 'Small' library is the fastest one and
+should be preferred to the others; the second library in order of
+performance is the 'Medium' one, then the 'Compact' and finally the
+'Large'.
+All models require less than 8 Kbyte for code and data and they don't
+allocate additional memory while working. A math coprocessor isn't required
+since no floating point math is used.
+The command-line version of Vocpack is based on the Small library, so you
+can see its performance; the Large library is about 20% slower than that.
+The compression method is fast enough to obtain real-time compression and
+decompression on fast machines: my 486DX/33 MHz compresses more than 40 Kb
+of data per second (8-bit data, including hard disk access), so a 486
+running at 25 Mhz can easily compress sounds sampled at 22 Khz in real
+time, and a 50 Mhz CPU can work with 44 Khz sounds. Using a 486/33 Mhz to
+process 44 Khz data is critical since most files will be compressed and
+decompressed in real-time, but some hard-to-compress data can take longer
+(you can gain a bit of time storing data in memory to avoid disk access).
+
+The libraries were tested with Borland C 2.0, 3.0 and 3.1 and with
+Microsoft C 5.0.
+Vocpack 2.0 Library doesn't handle files compressed with version 1.0 to
+save memory (old methods used more than 100 Kbyte of data when expanding).
+All global names used in the library start with the three letters 'VP_' to
+avoid conflicts with other functions and variables of your programs.
+The file header VOCPACK.H must be included in all modules that use the
+library.
+
+
+===========================================================================
+
+3  -  COMPRESSION
+
+
+See file COMPR.C for an application of the concepts explained in this
+paragraph.
+
+Vocpack routines act as a filter: when your program wants to compress one
+byte it calls 'VP_Pack()' and every time this function needs to write out
+some data it calls 'VP_Output()'; this function must be supplied by the
+programmer, so he can choose the destination of the compressed data
+(typically a file or memory).
+
+The programmer must provide the two functions 'VP_Output()' and
+'VP_OutputSeek()'; see paragraph 5 ("User-supplied I/O functions") for
+their description.
+
+The following three functions are used during compression:
+
+  void VP_InitPack (VP_Info *Info);
+  
+    Starts the compression routines and sets the compression method to use
+    according to the information contained in the 'Info' structure:
+    
+    Info.IsSigned    = 0 for unsigned samples, 1 for signed;
+    Info.IsStereo    = 0 for mono, 1 for stereo;
+    Info.Is16Bit     = 0 for 8-bit, 1 for 16-bit;
+    Info.Align       = alignment for 16-bit samples, from 0 to 3; specifies
+                       the offset (modulus 4) of the lower byte of a 16-bit
+                       sample inside the input stream; usually this field
+                       is 0 for even-aligned data and 1 for odd;
+    Info.Name        = name of the uncompressed file; it can be used when
+                       expanding;
+    Info.UnpackedLen = ignored, can be left undefined.
+    
+    The programmer must declare a 'VP_Info' variable, fill in its fields
+    and pass a pointer to it when calling 'VP_InitPack()'.
+    You can't start a compression procedure if another compression or
+    decompression is in progress since old data will be lost.
+    
+    
+  void VP_Pack (int c);
+  
+    Compresses the 8-bit data (range 0 - 255) contained in 'c'; if you want
+    to compress a 16-bit sample you must first pass the lower byte and then
+    call this function again with the upper byte. Don't use values less
+    than 0 or greater than 255, nor the End of File marker (EOF).
+    
+    Real-time applications only:
+     you should provide some buffering for the stream of bytes sent to
+     'VP_Unpack()': compression time isn't costant and, in addition, when
+     Vocpack rebuilds its internal tables this function takes much longer
+     than usual to execute; for this reason you should record sounds using
+     DMA or IRQ, while calling this compression routine concurrently. You
+     could do direct input from your sound board if the sample rate is
+     relatively low and the sound to record is short (at present table
+     rebuilding occurs every 16384 calls to this function; this value may
+     change in the future).
+  
+  
+  void VP_EndPack (void);
+
+    Terminates a compression procedure; the output stream must be still
+    open since some remaining data is flushed. If you don't call this
+    function the output stream will be unusable.
+
+
+===========================================================================
+
+4  -  DECOMPRESSION
+
+
+See files DECOMPR.C and INFO.C for an application of the concepts explained
+in this paragraph.
+
+Vocpack routines act as a filter: when your program wants to decompress one
+byte it calls 'VP_Unpack()' and every time this function needs to read in
+some data it calls 'VP_Input()'; this function must be supplied by the
+programmer, so he can choose the source of the compressed data (typically a
+file or memory).
+
+The programmer must provide the two functions 'VP_Input()' and
+'VP_InputRewind()'; see paragraph 5 ("User-supplied I/O functions") for
+their description.
+
+The following three functions are used during decompression:
+
+  int VP_InitUnpack (VP_Info *Info);
+  
+    Starts the decompression routines and checks the content of the input
+    stream. The argument 'Info' should point to a variable of type
+    'VP_Info' that will receive information about the kind of data that is
+    to be unpacked; if you don't need it then you must pass a NULL pointer
+    (that is "VP_InitUnpack (NULL);").
+    
+    The function returns one of the following codes:
+    
+    VP_OK            = compressed with Vocpack 2.0, you can proceed;
+    VP_ERR_NOTVP     = not compressed with Vocpack;
+    VP_ERR_OLDMETHOD = compressed with version 1.0, this library can't
+                       handle it;
+    VP_ERR_UNKMETHOD = compressed with version > 2.0, you need a new
+                       updated version of the library.
+    
+    If the result code is different from 'VP_OK' then the content of 'Info'
+    is undefined and you can't go on with the expansion; otherwise 'Info'
+    contains the following data (unless you used NULL as an argument):
+    
+    Info.IsSigned    = 0 for unsigned samples, 1 for signed;
+    Info.IsStereo    = 0 for mono, 1 for stereo;
+    Info.Is16Bit     = 0 for 8-bit, 1 for 16-bit;
+    Info.Align       = alignment for 16-bit samples, from 0 to 3; specifies
+                       the offset (modulus 4) of the lower byte of a 16-bit
+                       sample inside the input stream; usually this field
+                       is 0 for even-aligned data and 1 for odd;
+    Info.Name        = name of the uncompressed file;
+    Info.UnpackedLen = length in bytes of the file after decompression.
+    
+    You don't have to worry about this information since sign conversion
+    and alignment are made internally by Vocpack to achieve a better
+    compression ratio; you just obtain the same sequence of bytes that you
+    sent during compression.
+    You can't start a compression procedure if another compression or
+    decompression is in progress since old data will be lost.
+    
+    
+  int VP_Unpack (void);
+  
+    Returns a decompressed 8-bit data (range 0 - 255); if you are unpacking
+    a 16-bit stream this function returns the lower byte first and the next
+    time you call it the upper byte (the same order used when compressing).
+    When the end of the unpacked file is reached it returns the value
+    'VP_EOF'.
+    
+    Real-time applications only:
+     you should provide some buffering for the stream of bytes returned by
+     'VP_Unpack()': decompression time isn't costant and, in addition, when
+     Vocpack rebuilds its internal tables this function takes much longer
+     than usual to execute; for this reason you should store your unpacked
+     data in memory and play it using DMA or IRQ concurrently. You could do
+     direct output to your sound board if the sample rate is relatively low
+     and the sound to play is short (at present table rebuilding occurs
+     every 16384 calls to this function; this value may change in the
+     future).
+
+  
+  void VP_Unpack (void);
+
+    Terminates a decompression procedure.
+
+
+In addition there is a fourth function:
+
+  int VP_GetInfo (VP_Info *Info);
+
+    Checks the content of the input stream but it doesn't set up internal
+    tables for decompression; this function is used to get information
+    about a compressed stream (method used, kind of samples, original file
+    length...).
+    For parameters and return codes see the function 'VP_InitPack()'
+    described above.
+
+
+===========================================================================
+
+5  -  USER-SUPPLIED I/O FUNCTIONS
+
+
+Vocpack doesn't do direct input/output to files, but every time an I/O
+operation is requested it calls some support functions written by the
+application's programmer. In this way you can freely choose the source and
+the destination of the data flow, for example:
+- for simple applications that require the capacity to read and write
+  Vocpack files you can use very simple file-oriented functions (see
+  examples 1 and 2 below);
+- if you need buffering or a better performance you can store all sounds in
+  memory (in original or packed format) to avoid disk-access overhead (see
+  examples 3 and 4 below);
+- you can do input/output directly from/to your sound board; in this case
+  read the warnings about real-time operation in the previous paragraphs;
+- you can combine in any way the sources and the destinations listed above,
+  together with any other you might need.
+
+There are four I/O functions:
+  
+  void VP_Output (int c);
+
+    writes the one-byte integer 'c' (range from 0 to 255) to the output
+    stream during compression; this function can't insert data in the
+    middle of a stream, but must overwrite it;
+
+   
+  void VP_OutputSeek (long Offset);
+  
+    moves the current output-stream pointer to position 'Offset' from the
+    beginning; at present it's used at the end of compression to store some
+    header information at the beginning of the stream;
+
+
+  int VP_Input (void);
+    
+    reads a one-byte integer (range from 0 to 255) from the input stream
+    during decompression; you should never return EOF (end of file) since
+    Vocpack stops calling this function after having read the last byte of
+    the stream (if the end of file is reached then the input data is
+    corrupted); it's also called by 'VP_GetInfo()';
+
+
+  void VP_InputRewind (void);
+  
+    moves the current input-stream pointer to the first position of the
+    stream; it's called by decompression routines and by 'VP_GetInfo()'.
+
+
+If you don't need all these functions (for example if your program doesn't
+support compression) you should declare the unused ones just the same to
+avoid linker errors. A good choice is to put warning messages or
+breakpoints in these dummy functions in order to be sure that Vocpack never
+calls them.
+
+
+Example 1 : file output.
+
+  This code shows a simple way to write to a disk file the output of
+  Vocpack when compressing. The command-line version of Vocpack 2.0
+  contains exactly the same source code. File opening and closing isn't
+  showed.
+  
+      FILE *Out;          /* file to be used as output when compressing */
+      
+      void VP_Output (int c)
+      {
+       putc(c, Out);
+      }
+      
+      void VP_OutputSeek (long Offset)
+      {
+       fseek(Out, Offset, SEEK_SET);
+      }
+
+
+Example 2 : file input.
+
+  This code shows a simple way to read from a disk file the input of
+  Vocpack when decompressing. The command-line version of Vocpack 2.0
+  contains exactly the same source code. File opening and closing isn't
+  showed.
+  
+      FILE *In;           /* file to be used as input when decompressing */
+      
+      int VP_Input (void)
+      {
+       return getc(In);
+      }
+      
+      void VP_InputRewind (void)
+      {
+       rewind(In);
+      }
+
+
+Example 3 : memory output.
+
+  This code shows a simple way to write to a memory area the output of
+  Vocpack when compressing. Before starting the compression procedure you
+  must allocate some memory and point to it with 'OutBase', 'OutEnd' and
+  'OutScan'; after compression 'OutEnd' will point to the first unused byte
+  of memory: the packed data starts at 'OutBase' and ends at 'OutEnd - 1'.
+  
+      unsigned char *OutBase,          /* start of output memory area */
+      unsigned char huge *OutEnd;      /* first unused byte of memory */
+      unsigned char huge *OutScan;     /* current memory pointer */
+      
+      void VP_Output (int c)
+      {
+       *(OutScan++) = c;
+       if (OutScan > OutEnd) OutEnd = OutScan;     /* update end pointer */
+      
+       /* here you may check for 'out of memory' */
+      }
+      
+      void VP_OutputSeek (long Offset)
+      {
+       OutScan = (unsigned char huge *)OutBase + Offset;
+      }
+  
+  
+Example 4 : memory input.
+
+  This code shows a simple way to read from a memory area the input of
+  Vocpack when decompressing. Before starting the decompression procedure
+  you must allocate some memory, load the packed data and point to it with
+  'InBase' and 'InScan'.
+  
+      unsigned char *InBase,           /* start of input data */
+      unsigned char huge *InScan;      /* current memory pointer */
+      
+      int VP_Input (void)
+      {
+       return *(InScan++);
+      }
+      
+      void VP_InputRewind (void)
+      {
+       InScan = (unsigned char huge *)InBase;
+      }
+  
+  
+===========================================================================
+
+6  -  MISCELLANEOUS THINGS
+
+
+Vocpack 2.0 Library requires at least a 386 processor to run.
+
+This software is provided 'as is' with no express or implied warranty. The
+author is not liable for any loss of data or other damage caused by the use
+of this software.
+
+Bugs, suggestions, etc. can be e-mailed to the Internet address at the end
+of this document.
+
+This text contains trademarks registered by their respective owners.
+
+
+===========================================================================
+
+FERIOLI NICOLA                       Internet: ser1509@cdc835.cdc.polimi.it
+VIA BOEZIO 6                                (this might change during 1994)
+21052 BUSTO ARSIZIO
+ITALY

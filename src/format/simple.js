@@ -54,7 +54,7 @@ export default
 		helpLibrarian            : {name : "Help Librarian Help File", ext : [".hlp"], magic : ["C-Worthy Help Librarian Data", /^fmt\/1790( |$)/], website : "http://fileformats.archiveteam.org/wiki/Help_Librarian"},
 		homeAccounts             : {name : "Home Accounts", ext : [".ha", ".ha2"], magic : ["Home Accounts account"]},
 		hotHelpCatalog           : {name : "HotHelp Catalog", ext : [".cat"], magic : ["HotHelp Catalog"]},
-		hpPhoneDatabaseNote      : {name : "HP Phone/Database/Note", ext : [".gdb", ".adb", ".ndb", ".pdb"], magic : ["HP Phone/Database/Note database"], weakMagic : true},
+		hpPhoneDatabaseNote      : {name : "HP Phone/Database/Note", ext : [".gdb", ".adb", ".ndb", ".pdb"], magic : ["HP Phone/Database/Note database", "HP 100/200lx Palmtop phonebook"], weakMagic : true},
 		hyperBook                : {name : "HyperBook", magic : ["HyberBook document"]},
 		hyperTextVSUM            : {name : "HyperText VSUM", ext : [".xdb"], magic : ["HyperText VSUM"]},
 		ibmStoryboardStory       : {name : "IBM Storyboard Story", ext : [".sh", ".sh~"], magic : ["IBM Storyboard Story", "IBM PC Storyboard Story"]},

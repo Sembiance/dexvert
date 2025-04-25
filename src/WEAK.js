@@ -2104,6 +2104,7 @@ export const WEAK_VALUES =
 	/^Pressworks document \(v2\.0\)$/,
 	/^Primary Interop Assembly \(generic\)$/,
 	/^Prisoner Of Ice game data archive$/,
+	/^Pro Evolution Soccer 2010 game data archive$/,
 	/^PRO-NTO Application$/,
 	/^Professor Layton game data package$/,
 	/^ProductView Packaged Structure and Drawing$/,

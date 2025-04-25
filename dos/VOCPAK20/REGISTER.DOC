@@ -1,0 +1,97 @@
+                                  VOCPACK
+                                     
+                      Lossless sound file compressor
+                     Copyright (C) 1993 Nicola Ferioli
+
+
+File:     REGISTER.DOC
+Version:  2.0
+Date:     01 September 1993
+
+
+===========================================================================
+
+Vocpack is SHAREWARE software; you are free to copy and distribute
+unregistered versions of this program on condition that all files are
+included without any modification. No fee must be charged for such
+distribution.
+
+The copyright displayed by the program VP.EXE contains the version number
+of Vocpack: '2.0 demo' for unregistered copies and '2.0' for registered
+ones. The shareware unregistered version of Vocpack 2.0 can only compress
+sound files for evaluation purpose but can't decompress them. If you want a
+fully functional copy you must register.
+
+Files compressed with the unregistered version can be decompressed with the
+registered one: the two programs are identical, except that in version '2.0
+demo' decompression is disabled.
+
+For a successful registration you must have the two files REGISTER.EXE and
+REGISTER.DAT; if these files were modified or damaged I can't assure that
+you will be able to obtain a working registered copy of Vocpack. I don't
+assume any responsibility for such event, since the integrity of the
+package depends on the honesty of the people who carried Vocpack to you.
+I report here the CRC-32's of the two files:
+
+     REGISTER.EXE        dc4d93df
+     REGISTER.DAT        cbd275c1
+
+In my answer to your registration request I will write again the original
+CRC-32's. You can test if they correct by typing
+
+     PKUNZIP -V VOCPAK20.ZIP
+
+and checking if the codes in the column 'CRC-32' match the ones reported
+above. If they don't, you should obtain a good copy of VOCPAK20.ZIP from
+another source.
+
+There are two possible registration options:
+
+A) Vocpack 2.0 Standard package:
+   a fully functional command-line version of Vocpack 2.0. The registered
+   program is NOT shareware, it's licensed for personal use of the person
+   who registered it and can't be copied to anyone else.
+   
+   Price: $ 10.00  (or 15000 Italian Lire)  for one license
+          $  4.00  (or  6000 Italian Lire)  for each additional license
+
+B) Vocpack 2.0 Library package:
+   the Standard package plus the library files needed to build C programs
+   which can read and write Vocpack files (see LIB.DOC for details).
+   Any non-commercial 'executable file' (shareware or public domain) based
+   on Vocpack 2.0 Library can be distributed royalty-free and without any
+   special permission. The library files (*.LIB) must not be distributed
+   with it, since they are licensed exclusively to the person who
+   registered Vocpack 2.0 Library: you can give to others any file created
+   with these tools but not the tools themselves. In addition you can't
+   distribute an application that does nothing but decompressing Vocpack
+   files (since this is what is missing in unregistered versions).
+
+   Price: $ 20.00  (or 30000 Italian Lire)  for one license
+          $  8.00  (or 12000 Italian Lire)  for each additional license
+   
+If you can't find a complete copy of Vocpack add $ 5.00 (or 7500 Italian
+Lire) to your order and you will receive a disk containing the original
+package.
+
+To include any part of Vocpack in a commercial program you must obtain a
+special license; ask for more information.
+
+Send cash or Money Order to
+
+     FERIOLI NICOLA
+     VIA BOEZIO 6
+     21052 BUSTO ARSIZIO
+     ITALY
+
+specifying your name, address, type of package (Standard or Library),
+number of licenses requested and if you want to receive a disk copy of
+Vocpack.
+
+
+===========================================================================
+
+FERIOLI NICOLA                       Internet: ser1509@cdc835.cdc.polimi.it
+VIA BOEZIO 6                                (this might change during 1994)
+21052 BUSTO ARSIZIO
+ITALY

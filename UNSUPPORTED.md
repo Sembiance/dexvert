@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,534)
+# Unsupported File Formats (3,536)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -376,7 +376,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (189)
+## Document (190)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -565,6 +565,7 @@ Family/Format | Name | Extensions | Notes
 [document/wordMARC](https://discmaster.textfiles.com/search?format=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/) - VAX based word processor. Haven't investigated it for magic.
 [document/wordPerfectHelp](https://discmaster.textfiles.com/search?format=wordPerfectHelp) | WordPerfect help | .fil .hlp | 
 [document/wordPerfectNotebook](https://discmaster.textfiles.com/search?format=wordPerfectNotebook) | WordPerfect Notebook | .nb | 
+[document/wordsAndFiguresDocument](https://discmaster.textfiles.com/search?format=wordsAndFiguresDocument) | Words and Figures document | .waf | 
 [document/wordUpDocument](https://discmaster.textfiles.com/search?format=wordUpDocument) | WordUp document | .wup | 
 [document/xTextCompiledHypertext](https://discmaster.textfiles.com/search?format=xTextCompiledHypertext) | xText compiled Hypertext/Help | .xdb .hlp | 
 [document/zinioReaderMagazine](https://discmaster.textfiles.com/search?format=zinioReaderMagazine) | Zinio Reader Magazine | .zno | 
@@ -1133,7 +1134,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,311)
+## Other (2,312)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2664,6 +2665,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcAnimatePlusFrameFX](https://discmaster.textfiles.com/search?format=pcAnimatePlusFrameFX) | PC Animate Plus Frame F/X | .ffx | 
 [other/pcAntiVirusVirusDBUpdate](https://discmaster.textfiles.com/search?format=pcAntiVirusVirusDBUpdate) | PC AntiVirus Virus DB update | .vdb | 
 [other/pcToolsMenu](https://discmaster.textfiles.com/search?format=pcToolsMenu) | PC Tools Menu | .mnc .mna .mnd | 
+[other/pcBibliothekHierarchyCompressed](https://discmaster.textfiles.com/search?format=pcBibliothekHierarchyCompressed) | PC-Bibliothek Hierarchy Compressed | .hic | 
 [other/pcDragonCartridgeImage](https://discmaster.textfiles.com/search?format=pcDragonCartridgeImage) | PC-Dragon cartridge image | .dgn | 
 [other/pcLabelLabel](https://discmaster.textfiles.com/search?format=pcLabelLabel) | PC-Label Label | .lbl | 
 [other/pcTalkIIIData](https://discmaster.textfiles.com/search?format=pcTalkIIIData) | PC-Talk III data | .dir | 

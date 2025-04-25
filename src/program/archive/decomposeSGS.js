@@ -7,6 +7,7 @@ export class decomposeSGS extends Program
 	website = "https://www.logipole.com/konvertor-en.htm";
 	loc     = "win7";
 	bin     = "c:\\dexvert\\DecomposeSGS\\DecomposeSGS.exe";
+	unsafe  = true;
 	osData  = r => ({
 		scriptPre : `
 			FileCopy("c:\\in\\${path.basename(r.inFile())}", "c:\\out\\${path.basename(r.inFile())}");`,

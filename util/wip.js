@@ -20,6 +20,3 @@ const xlog = new XLog("info");
 
 await initPrograms(xlog);
 await initFormats(xlog);
-
-//const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/archive/macBinary/Icon↵");
-//const inputFile = await DexFile.create(Deno.args[0]);

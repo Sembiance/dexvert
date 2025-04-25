@@ -457,6 +457,7 @@ export default
 		winWorksSpreadsheet                : {name : "WinWorks spreadsheet", ext : [".wpl", ".sst"], magic : ["WinWorks spreadsheet"]},
 		wordPerfectHelp                    : {name : "WordPerfect help", ext : [".fil", ".hlp"], magic : ["WordPerfect help", "Wordperfect Hilfe Datei", "Unknown Corel/Wordperfect product 26, file type 2"], weakMagic : true},
 		wordPerfectNotebook                : {name : "WordPerfect Notebook", ext : [".nb"], magic : ["WordPerfect Notebook"], weakMagic : true},
+		wordsAndFiguresDocument            : {name : "Words and Figures document", ext : [".waf"], magic : ["Words and Figures document"]},
 		wordUpDocument                     : {name : "WordUp document", ext : [".wup"], magic : ["WordUp document"], weakMagic : true},
 		xTextCompiledHypertext             : {name : "xText compiled Hypertext/Help", ext : [".xdb", ".hlp"], magic : ["xText compiled Hypertext/Help", "GRC SpinRite Hypertext/Help format"]},
 		zinioReaderMagazine                : {name : "Zinio Reader Magazine", ext : [".zno"], magic : ["Zinio Reader Magazine"], weakMagic : true}
@@ -2808,6 +2809,7 @@ export default
 		pcAnimatePlusFrameFX                     : {name : "PC Animate Plus Frame F/X", ext : [".ffx"], magic : ["PC Animate Plus Frame F/X"], weakMagic : true},
 		pcAntiVirusVirusDBUpdate                 : {name : "PC AntiVirus Virus DB update", ext : [".vdb"], magic : ["PC AntiVirus Virus DB update"], weakMagic : true},
 		pcAnywhere                               : {name : "PCAnywhere Data", ext : [".bhf"], magic : ["PCAnywhere32 Data"]},
+		pcBibliothekHierarchyCompressed          : {name : "PC-Bibliothek Hierarchy Compressed", ext : [".hic"], magic : ["PC-Bibliothek Hierarchy Compressed"]},
 		pcbBinaryFile                            : {name : "PCB Binary file", ext : [".pcb"], magic : [/^PCB [\d.]+ Binary file/]},
 		pcbLayout                                : {name : "PCB Layout", ext : [".ly"], magic : ["PCB Layout"]},
 		pcLabelLabel                             : {name : "PC-Label Label", ext : [".lbl"], magic : ["PC-Label Label"]},

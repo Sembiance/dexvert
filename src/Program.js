@@ -546,6 +546,13 @@ export class Program
 							if(!newFileSet.files.new.some(v => v.absolute===inputFile.absolute))
 								await f.remove("new", inputFile, {unlink : true});
 						}
+
+						// finally if the chained program produced fileMeta (such a bin/cue => bchunk => dexvert (uniso)) copy that over
+						if(chainResult?.meta?.fileMeta)
+						{
+							r.meta.fileMeta ||= {};
+							Object.assign(r.meta.fileMeta, chainResult.meta.fileMeta);
+						}
 						
 						xlog.info`Chain ${progRaw} resulted in ${newFileSet.files.new.length.toLocaleString()} new files: ${newFileSet.files.new.map(v => v.rel).join(" ").innerTruncate(300)}`;
 

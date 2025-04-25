@@ -1,0 +1,194 @@
+                                  VOCPACK
+                                     
+                      Lossless sound file compressor
+                     Copyright (C) 1993 Nicola Ferioli
+
+
+File:     VP.DOC
+Version:  2.0
+Date:     01 September 1993
+
+
+===========================================================================
+
+1  -  INTRODUCTION
+
+
+Vocpack is a compressor/decompressor for 8-bit and 16-bit digital sound
+files using a lossless algorithm; it is useful to save disk space without
+degrading sound quality.
+Vocpack is available in two forms: a command-line version and a library of
+functions which can be called from C programs (see LIB.DOC).
+
+Any PCM sound can be compressed and it isn't necessary to strip file
+headers before compressing since the method used is not lossy.
+The typical compression ratio (compressed size / original size) with 8-bit
+files goes from 0,8 for sounds sampled at 11 KHz to 0,4 for 44 Khz ones
+(full-power sounds; low volume recordings and human voice give a better
+ratio). The best results are obtained with 44 KHz sounds: general-purpose
+archivers create files that can be twice longer than the output of Vocpack.
+The compression ratio for 16-bit files varies from 0,9 to 0,6.
+You can obtain smaller values using lossy compressors but if your goal is
+to keep the sound quality unaltered you should use a lossless program like
+Vocpack.
+
+.MOD and .ST files are not compressed very well, since they contain a lot
+of sequencing information and the sound is sampled at a low frequency; in
+this case the files created by Vocpack could be slightly bigger than the
+ones produced by general-purpose compression programs.
+
+
+===========================================================================
+
+2  -  WHAT'S NEW IN VERSION 2.0
+
+
+VOCPACK 2.0
+- is faster: compresses and decompresses in less than 1/2 of the time
+  employed by version 1.0; with some files just 1/4 of that time;
+- compression ratio is similar, often slightly better;
+- compresses 16-bit sounds;
+- uses 386 processor instructions for best performance;
+- can detect automatically the kind of data contained in VOC and WAVE
+  files;
+- the original file name is stored in the compressed file, so it can be
+  restored when expanding;
+- the command-line version has a new interface, easier to use; it can run
+  in less than 30 Kb of free memory and if there is more memory it is used
+  for disk buffering;
+- the new Library Version can be linked with C programs and it can do
+  realtime processing ( > 40 Kb per second on a 486DX/33 MHz); it requires
+  less than 8 Kb for code and data;
+- is not compatible with version 1.0: to uncompress old methods 0 and 1 you
+  must use the included program UNVP10.EXE.
+
+
+===========================================================================
+
+3  -  VERSION NUMBER & REGISTRATION
+
+
+Vocpack is SHAREWARE software; you are free to copy and distribute
+unregistered versions of this program on condition that all files are
+included without any modification. No fee must be charged for such
+distribution.
+
+The copyright displayed by the program VP.EXE contains the version number
+of Vocpack: '2.0 demo' for unregistered copies and '2.0' for registered
+ones. The unregistered version is for evaluation purpose and can only
+compress files; decompression is enabled when you register, so don't use
+version '2.0 demo' to store important files since you won't be able to
+extract them, unless you register. A warning message will be displayed
+every time you compress a file with an unregistered copy. See REGISTER.DOC
+for more information.
+
+
+===========================================================================
+
+4  -  USAGE
+
+
+The command line of Vocpack has the form
+
+   VP [-options] <inputfile> [outputfile]
+
+You can run VP with no parameter to obtain a short summary of the available
+options.
+File names <inputfile> and [outputfile] can't contain wildcard characters,
+but may include drive and/or path.
+
+The choice between packing and unpacking depends on the content of
+<inputfile>: if it's a file already compressed by Vocpack then it gets
+expanded, otherwise it gets compressed.
+If [outputfile] is given then the new file created will have this name; the
+default output file name for compression, used if [outputname] is missing,
+is the same of <inputfile> with the extension changed to '.vp'; when
+unpacking the default is the original name of the file, stored in the
+header of the compressed file.
+For example,
+              VP SOUND.WAV        packs sound.wav to sound.vp
+              VP SOUND.VP         unpacks sound.vp back to sound.wav
+
+'Options' can be one or more of the following:
+
+   i : display information about <inputfile>: compression method used,
+       original and compressed size, compression ratio;
+
+   o : overwrite output file if it already exists; if this switch is not
+       present, Vocpack asks for confirmation before overwriting;
+   
+   q : quiet mode, don't display the progress indicator.
+   
+Options must be preceded by a '-' and can be placed anywhere on the command
+line; they can be uppercase or lowercase and they can be combined ('-oq' is
+the same of '-o -q').
+
+When compressing, Vocpack needs to know the kind of data contained in the
+file (8 or 16 bit, mono or stereo ...); if the file is in VOC or WAVE
+format Vocpack tries to get such information from the file header,
+otherwise the user must supply them through the following command-line
+options:
+
+   u : unsigned data;
+   
+   s : signed data;
+   
+   2 : stereo data (default: mono);
+   
+   6 : 16-bit data (default: 8-bit);
+   
+   1 : odd alignment (default: even); this switch specifies whether the
+       lower byte of a 16-bit sample is placed at an even or odd offset
+       from the beginning of the file.
+
+If one or more of these options is present, autodetection is disabled.
+Remember that VOC files contain unsigned data; WAVE files use unsigned
+8-bit samples and signed 16-bit samples with even alignment.
+
+To decompress a file packed with Vocpack version 1.0 you must use the
+program UNVP10.EXE contained in this package: version 2.0 doesn't handle
+them to save memory (old methods used more than 100 Kbyte of data when
+expanding).
+
+
+===========================================================================
+
+5  -  ERROR CODES
+
+
+When an error occurs, Vocpack returns one of the following error codes (DOS
+errorlevel):
+
+  1 = bad command line; the help screen was displayed
+  2 = input file not found
+  3 = output file can't be created
+  4 = input file is not compressed with Vocpack (or bad version)
+  5 = user break
+  6 = out of memory (version 1.0 only)
+  7 = read error
+  8 = write error
+
+
+===========================================================================
+
+6  -  MISCELLANEOUS THINGS
+
+
+Vocpack 2.0 requires at least a 386 processor to run.
+
+This software is provided 'as is' with no express or implied warranty. The
+author is not liable for any loss of data or other damage caused by the use
+of this software.
+
+Bugs, suggestions, etc. can be e-mailed to the Internet address at the end
+of this document.
+
+This text contains trademarks registered by their respective owners.
+
+
+===========================================================================
+
+FERIOLI NICOLA                       Internet: ser1509@cdc835.cdc.polimi.it
+VIA BOEZIO 6                                (this might change during 1994)
+21052 BUSTO ARSIZIO
+ITALY

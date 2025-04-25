@@ -1,13 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Why isn't this file's type/creator being detected?  archive/iso/macgaichiban199712.iso  (https://discmaster.textfiles.com/view/29506/macgaichiban199712.bin/%E5%88%9D%E3%82%81%E3%81%AB%E3%81%8A%E8%AA%AD%E3%81%BF%E4%B8%8B%E3%81%95%E3%80%9C%E3%81%84)
-  Doing an hmount and `hls -alb` shows it as ttro/ttxt so it's probably due to Macintosh JP filenames not matching correctly?
-  Looks like bin/uniso.js handles all this, so run that directly with the appropriate flags: --hfs --macEncoding=japan
-  After all done reply on discord: https://discord.com/channels/350407629849493504/1033065501984817252/1362889711726628875
-  Then re-process that item.
-  Then consider writing a script that will find all discmaster2 items that are macintosh JP encoding and check the files that were extracted from archive/iso files at top level and any that are missing type/creator codes, re-process? (Spot check a couple manually see if the new code fixes it)
-
 * This Macintosh JP director file would be better handled: archive/macromediaDirector/ﾊﾘｳｯﾄﾞ名優写真館.DXR
   Basically projectorRays is output un-decoded text? But when viewing it as Macintosh JP format on discmaster it's wrong:
   https://discmaster.textfiles.com/view/29506/macgaichiban199712.bin/%EF%BE%8A%EF%BE%98%EF%BD%B3%EF%BD%AF%EF%BE%84%EF%BE%9E%E5%90%8D%E5%84%AA%E5%86%99%E7%9C%9F%E9%A4%A8/%EF%BE%8A%EF%BE%98%EF%BD%B3%EF%BD%AF%EF%BE%84%EF%BE%9E%E5%90%8D%E5%84%AA%E5%86%99%E7%9C%9F%E9%A4%A8/%EF%BE%8A%EF%BE%98%EF%BD%B3%EF%BD%AF%EF%BE%84%EF%BE%9E%E5%90%8D%E5%84%AA%E5%86%99%E7%9C%9F%E9%A4%A8.DXR/00001.ls
@@ -28,6 +21,13 @@
 	https://discmaster.textfiles.com/search?qfields=name&detection=MMDR
 	https://discmaster.textfiles.com/search?qfields=name&detection=MMPB
 	https://discmaster.textfiles.com/search?qfields=name&detection=DG06&strict=strict
+  History of this program:
+	https://www.lingoworkshop.com/articles/history
+	https://macromedia.fandom.com/wiki/MacroMind_VideoWorks
+	https://macromedia.fandom.com/wiki/MacroMind
+  Could start with VideoWorks on an infinite mac, create some sample output files: https://macintoshgarden.org/apps/videoworks
+  Then add 'detection' then figure out how to 'extract' the text, audio, images from within the output files.
+  Then move to Video Works 2, Macromind Director, etc
 
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
   http://dev.discmaster2.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver
@@ -91,7 +91,7 @@
 
 * Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
 
-* ISOs I was unable to process:
+* ISOs/disk images I was unable to process:
 	Just a .bin file:
 		https://archive.org/details/A.R.T.S._Episode_Number_6_CDR
 	These don't convert for some reason, they both appear to be Mac CDs
@@ -106,6 +106,7 @@
 		https://archive.org/details/LionShare
 		https://archive.org/details/cdrom-megabytemonster
 		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
+	Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 

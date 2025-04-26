@@ -1,13 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* This Macintosh JP director file would be better handled: archive/macromediaDirector/ﾊﾘｳｯﾄﾞ名優写真館.DXR
-  Basically projectorRays is output un-decoded text? But when viewing it as Macintosh JP format on discmaster it's wrong:
-  https://discmaster.textfiles.com/view/29506/macgaichiban199712.bin/%EF%BE%8A%EF%BE%98%EF%BD%B3%EF%BD%AF%EF%BE%84%EF%BE%9E%E5%90%8D%E5%84%AA%E5%86%99%E7%9C%9F%E9%A4%A8/%EF%BE%8A%EF%BE%98%EF%BD%B3%EF%BD%AF%EF%BE%84%EF%BE%9E%E5%90%8D%E5%84%AA%E5%86%99%E7%9C%9F%E9%A4%A8/%EF%BE%8A%EF%BE%98%EF%BD%B3%EF%BD%AF%EF%BE%84%EF%BE%9E%E5%90%8D%E5%84%AA%E5%86%99%E7%9C%9F%E9%A4%A8.DXR/00001.ls
-  It's possible projectorRays decoded it as 'mac roman' to UTF-8 instead of from 'mac japan'. In which case I need to do something like:
-  const decodeOpts = {processors : encodeUtil.macintoshProcessors.romanUTF8, region : "japan"};
-  But if it's outputting just the RAW bytes, then I think discmaster should be properly translating it as Macintosh JP? Look at that code
-
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
 
@@ -68,6 +61,13 @@
   See about converting this Java code to javascript to extract them.
   Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://dev.discmaster2.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
 
+* HFS+ CDs do not currently expose mac file type/creator codes (as uniso just mounts them with -t hfsplus)
+  In fact, if they have resource forks, I bet I'm entirelly skipping them.
+  I don't have clear examples of an HFS+ CD with type/creator codes and resource forks, but here are 2 random HFS plus CDs
+  	https://discmaster.textfiles.com/browse/22754/3DW_111.iso
+  	https://discmaster.textfiles.com/browse/31512/ART_153.iso
+  To get the content may be tricky. hfsplusutils might work, but I had real issues mounting the ISOs with it.
+  Probably better to try using hfsexplorer
 
 /--------------\
 | Low Priority |

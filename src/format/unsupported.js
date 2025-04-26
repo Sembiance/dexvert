@@ -2053,6 +2053,7 @@ export default
 		cakewalkStudioWarePanel                  : {name : "Cakewalk Studio Ware Panel", ext : [".CakewalkStudioWare"], magic : ["Cakewalk Studio Ware panel"]},
 		cakewalkWorkFile                         : {name : "Cakewalk Work File", ext : [".wrk"], magic : ["Cakewalk Music project", /^fmt\/1214( |$)/]},
 		cal3DAnimationFile                       : {name : "Cal3D Animation File", ext : [".caf"], magic : ["Cal3D Animation File"], weakMagic : true},
+		cal3DXMLAnimationFile                    : {name : "Cal3D Xml Animation File", ext : [".xaf"], magic : ["Cal3D Xml Animation File"], weakMagic : true},
 		calamusCommandKeySettings                : {name : "Calamus Command-Key settings", ext : [".ckt"], magic : ["Calamus Command-Key settings"]},
 		calamusFarbColorTable                    : {name : "Calamus Farb Color Table", ext : [".cft", ".cf"], magic : ["Calamus Farb (Colour) Table"]},
 		calamusRasterInfo                        : {name : "Calamus Raster Information", ext : [".cri", ".cr"], magic : ["Calamus Raster Information"]},

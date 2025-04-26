@@ -21,7 +21,7 @@ export class pageMaker7 extends Program
 
 			Send("^S")
 
-			$saveAsWindow = WindowRequire("Save Publication", "", 5)
+			$saveAsWindow = WindowRequire("Save Publication", "", 7)
 			Send("c:\\TEMP\\document.pmd{ENTER}")
 
 			Func PostSaveAsWindows()
@@ -30,7 +30,7 @@ export class pageMaker7 extends Program
 			EndFunc
 			CallUntil("PostSaveAsWindows", ${xu.SECOND*2})
 
-			WinWaitClose($saveAsWindow, "", 5)
+			WinWaitClose($saveAsWindow, "", 7)
 
 			SendSlow("!fep")
 
@@ -39,7 +39,7 @@ export class pageMaker7 extends Program
 			EndFunc
 			CallUntil("PreExportWindows", ${xu.SECOND*2})
 
-			$pdfOptionsWindow = WindowRequire("PDF Options", "", 5)
+			$pdfOptionsWindow = WindowRequire("PDF Options", "", 7)
 			Send("e")
 			
 			Func PostPDFOptionsWindows()
@@ -47,18 +47,18 @@ export class pageMaker7 extends Program
 			EndFunc
 			CallUntil("PostPDFOptionsWindows", ${xu.SECOND*2})
 
-			$exportAsWindow = WindowRequire("Export PDF As", "", 5)
+			$exportAsWindow = WindowRequire("Export PDF As", "", 7)
 			Send("c:\\out\\out.pdf{TAB}{TAB}{TAB}{TAB}{SPACE}s")
-			WinWaitClose($exportAsWindow, "", 3)
+			WinWaitClose($exportAsWindow, "", 5)
 
 			Func PostExportWindows()
 				WindowDismiss("[TITLE:Adobe PageMaker]", "One or more of the linked", "p")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Unable to open the publication", "{ENTER}")
 			EndFunc
 			CallUntil("PostExportWindows", ${xu.SECOND*3})
-			WinWaitClose($pdfOptionsWindow, "", 3)
+			WinWaitClose($pdfOptionsWindow, "", 5)
 
-			WinWaitActive($mainWindow, "", 3)
+			WinWaitActive($mainWindow, "", 5)
 
 			Send("^q")`
 	});

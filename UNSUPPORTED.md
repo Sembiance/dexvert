@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,536)
+# Unsupported File Formats (3,537)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1134,7 +1134,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,312)
+## Other (2,313)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1522,6 +1522,7 @@ Family/Format | Name | Extensions | Notes
 [other/cakewalkStudioWarePanel](https://discmaster.textfiles.com/search?format=cakewalkStudioWarePanel) | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
 [other/cakewalkWorkFile](https://discmaster.textfiles.com/search?format=cakewalkWorkFile) | Cakewalk Work File | .wrk | 
 [other/cal3DAnimationFile](https://discmaster.textfiles.com/search?format=cal3DAnimationFile) | Cal3D Animation File | .caf | 
+[other/cal3DXMLAnimationFile](https://discmaster.textfiles.com/search?format=cal3DXMLAnimationFile) | Cal3D Xml Animation File | .xaf | 
 [other/calamusCommandKeySettings](https://discmaster.textfiles.com/search?format=calamusCommandKeySettings) | Calamus Command-Key settings | .ckt | 
 [other/calamusFarbColorTable](https://discmaster.textfiles.com/search?format=calamusFarbColorTable) | Calamus Farb Color Table | .cft .cf | 
 [other/calamusRasterInfo](https://discmaster.textfiles.com/search?format=calamusRasterInfo) | Calamus Raster Information | .cri .cr | 

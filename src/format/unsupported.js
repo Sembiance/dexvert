@@ -1966,6 +1966,7 @@ export default
 		aSquaredAntiMalwareSignature             : {name : "a-squared Anti-Malware signature", ext : [".sig"], magic : ["a-squared Anti-Malware signature"], weakMagic : true},
 		astoundActor                             : {name : "Astound Actor", ext : [".act"], magic : ["Astound Actor"]},
 		asuraEngineResourcesPackageGeneric       : {name : "Asura engine Resources package", ext : [".asr"], magic : ["Asura engine Resources package"], weakMagic : true},
+		atari800WinPlusTrainer                   : {name : "Atari800Win Plus Trainer", ext : [".a8t"], magic : ["Atari800Win Plus Trainer"], weakMagic : true},
 		atariCTBFile                             : {name : "Atari CTB File", ext : [".ctb"], magic : ["Atari CTB File"]},
 		atlantisWordProcessorSoundScheme         : {name : "Atlantis Word Processor Sound Scheme", ext : [".asn"], magic : ["Atlantis Word Processor Sound Scheme"]},
 		atokDictionary                           : {name : "ATOK Dictionary", magic : ["ATOK Dictionary"]},

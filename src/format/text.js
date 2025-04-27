@@ -308,7 +308,7 @@ export default
 		adobeInDesignPrintingInstructionsReport    : {name : "Adobe InDesign printing instructions report", magic : ["Adobe InDesign printing instructions report"]},
 		adobePhotoshopLightroomTemplate            : {name : "Adobe Photoshop Lightroom template", ext : [".agtemplate"], magic : ["Adobe Photoshop Lightroom template"], weakMagic : true},
 		adobePortableDocumentCatalogIndex          : {name : "Adobe Portable Document Catalog Index", ext : [".pdx"], magic : ["Adobe Portable Document Catalog Index", /^fmt\/(446|447|448)( |$)/], weakMagic : true},
-		advancedStreamRedirector                   : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector", "audio/x-ms-asx"], weakMagic : true},
+		advancedStreamRedirector                   : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector", "audio/x-ms-asx", "Windows Media Metadaten Datei"], weakMagic : true},
 		aegisAnimatorScript                        : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},
 		aegisDrawPart                              : {name : "Aegis Draw part", magic : ["Aegis Draw part"]},
 		aegisProMotionCamera                       : {name : "Aegis ProMotion Camera", ext : [".pcam"], magic : ["Aegis ProMotion Camera"], weakMagic : true},

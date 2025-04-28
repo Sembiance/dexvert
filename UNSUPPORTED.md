@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,538)
+# Unsupported File Formats (3,540)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (283)
+## Archive (284)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -50,6 +50,7 @@ Family/Format | Name | Extensions | Notes
 [archive/borlandPackedArchive](https://discmaster.textfiles.com/search?format=borlandPackedArchive) | Borland packed archive | .arc | 
 [archive/bsqEncodedData](https://discmaster.textfiles.com/search?format=bsqEncodedData) | BSQ encoded data | .bsq | 
 [archive/bzip](https://discmaster.textfiles.com/search?format=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
+[archive/casioBE300InstallationPackage](https://discmaster.textfiles.com/search?format=casioBE300InstallationPackage) | Casio BE-300 installation package | .cbea | 
 [archive/causeWayCompressorPacked](https://discmaster.textfiles.com/search?format=causeWayCompressorPacked) | CauseWay Compressor Packed | .exe | 
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?format=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
 [archive/cExePacked](https://discmaster.textfiles.com/search?format=cExePacked) | CExe Packed | .exe | 
@@ -1134,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,314)
+## Other (2,315)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1230,6 +1231,7 @@ Family/Format | Name | Extensions | Notes
 [other/advancedCalculatorSpreadsheet](https://discmaster.textfiles.com/search?format=advancedCalculatorSpreadsheet) | Advanced Calculator spreadsheet | .calc | 
 [other/advancedLayouterModel](https://discmaster.textfiles.com/search?format=advancedLayouterModel) | Advanced Layouter model | .mus | 
 [other/advancedLayouterProject](https://discmaster.textfiles.com/search?format=advancedLayouterProject) | Advanced Layouter project | .lay | 
+[other/advancedStrategicCommandMap](https://discmaster.textfiles.com/search?format=advancedStrategicCommandMap) | Advanced Strategic Command Map | .map | 
 [other/advantageDataServerTable](https://discmaster.textfiles.com/search?format=advantageDataServerTable) | Advantage Data Server table | .adt | 
 [other/adventureGameStudio](https://discmaster.textfiles.com/search?format=adventureGameStudio) | Adventure Game Studio | .dat | 
 [other/adventureGameStudioSavedGame](https://discmaster.textfiles.com/search?format=adventureGameStudioSavedGame) | Adventure Game Studio saved game |  | 

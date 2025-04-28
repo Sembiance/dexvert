@@ -2123,7 +2123,7 @@ text | aPatch Daten Datei | .aps |  | [3 sample files](https://sembiance.com/fil
 text | Apple IIgs Source Code |  |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/appleIIgsSourceCode/)
 text | Apple Project Builder Xcode Project | .pbxproj |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/appleProjectBuilderXcodeProject/)
 text | Apple Xcode User data | .pbxuser |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
-text | Applet Effect Factory Config File | .data |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/appletEffectFactoryConfigFile/)
+text | Applet Effect Factory Config File | .data |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/appletEffectFactoryConfigFile/)
 text | Applix spreadsheet | .as |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/applixSpreadsheet/)
 text | Applix Words Document | .aw |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/applixWordsDocument/)
 text | AQTitle subtitles | .sub |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/aqTitleSubtitlesAqtitle/)

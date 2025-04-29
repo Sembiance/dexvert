@@ -1556,6 +1556,7 @@ export const WEAK_VALUES =
 	/^QLAY MDV image$/,
 	/^Quarterdeck Installation Package$/,
 	/^Quesant AFM data$/,
+	/^RealLegal E-Transcript$/,
 	/^S2 Engine Animation$/,
 	/^Sierra AGI music format$/,
 	/^Sierra patch$/,

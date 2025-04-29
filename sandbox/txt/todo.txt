@@ -37,6 +37,12 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* So dexvert still uses 7z from p7zip (instead of more modern 7zz from 7zip package). This is because p7zip handles i18n charsets better via the LANG env var
+  The problem is that I've encountered a file test/sample/archive/zip/Masicsstory.zip that when extracted without LANG works fine, but when extracted with LANG=ja_JP is doesn't extract correctly
+  You can see this by just running `7z l Masicsstory.zip` vs `LANG=ja_JP 7z l Masicsstory.zip` and notice the second listing loses all subdirs and ends up clobbering outputs and just produces 1 output file
+  Problem is I couldn't figure out how to get 7zz to behave properly with i18n charsets. It doesn't seem to care about LANG env var? I found a -scs switch flag, but not sure it's mean for this purpose: file:///usr/share/doc/7zip-24.08/html/MANUAL/cmdline/switches/charset.htm
+  Additionally 7z from p7zip might support other features and things that 7zz doesn't? I'd need to fully test all this out. For now, meh.
+
 * Adopt these Filemaker Pro tools for ~9,771 unique files: https://github.com/evanmiller/fmptools
   Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
 

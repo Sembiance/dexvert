@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,540)
+# Unsupported File Formats (3,543)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1135,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,315)
+## Other (2,318)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1804,6 +1804,7 @@ Family/Format | Name | Extensions | Notes
 [other/dungeonSiegeResourceGameData](https://discmaster.textfiles.com/search?format=dungeonSiegeResourceGameData) | Dungeon Siege Resource game data | .dsres | 
 [other/dustyDOTsSavedGame](https://discmaster.textfiles.com/search?format=dustyDOTsSavedGame) | DustyDOTs saved game | .dsv | 
 [other/dvdInfoFile](https://discmaster.textfiles.com/search?format=dvdInfoFile) | DVD Info File | .ifo .bup | 
+[other/dvdShrinkDeepAnalysisData](https://discmaster.textfiles.com/search?format=dvdShrinkDeepAnalysisData) | DVDShrinkdeep analysis data |  | 
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?format=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
 [other/dynamicPublisherPrinterFile](https://discmaster.textfiles.com/search?format=dynamicPublisherPrinterFile) | Dynamic Publisher Printer File | .prf | 
 [other/dynamicallyLinkedDeviceInterface](https://discmaster.textfiles.com/search?format=dynamicallyLinkedDeviceInterface) | Dynamically Linked Device Interface | .dldi | 
@@ -2417,6 +2418,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftSetupBinaryPatchFormat](https://discmaster.textfiles.com/search?format=microsoftSetupBinaryPatchFormat) | Microsoft setup binary patch format | .wwp | 
 [other/microsoftSpeechDefinitionsFile](https://discmaster.textfiles.com/search?format=microsoftSpeechDefinitionsFile) | Microsoft Speech Definitions File |  | 
 [other/microsoftSQLServerBackup](https://discmaster.textfiles.com/search?format=microsoftSQLServerBackup) | Microsoft SQL Server backup | .bak | 
+[other/microsoftTestScreen](https://discmaster.textfiles.com/search?format=microsoftTestScreen) | Microsoft Test Screen | .scn | 
 [other/microsoftTutorialCourseText](https://discmaster.textfiles.com/search?format=microsoftTutorialCourseText) | Microsoft tutorial Course Text | .ctx | 
 [other/microsoftTutorialData](https://discmaster.textfiles.com/search?format=microsoftTutorialData) | Microsoft tutorial data | .sob | 
 [other/microsoftTutorialScreens](https://discmaster.textfiles.com/search?format=microsoftTutorialScreens) | Microsoft tutorial Screens | .scn | 
@@ -2962,6 +2964,7 @@ Family/Format | Name | Extensions | Notes
 [other/skunnyKartGameData](https://discmaster.textfiles.com/search?format=skunnyKartGameData) | Skunny Kart Library Game Data | .lid | 
 [other/skypeExtra](https://discmaster.textfiles.com/search?format=skypeExtra) | Skype Extra | .sparc | 
 [other/skypeLocalizationData](https://discmaster.textfiles.com/search?format=skypeLocalizationData) | Skype localization data |  | 
+[other/skypeUserData](https://discmaster.textfiles.com/search?format=skypeUserData) | Skype user data | .dbb | 
 [other/slicksNSlidesTrack](https://discmaster.textfiles.com/search?format=slicksNSlidesTrack) | Slicks 'n' Slide Track | .ss | 
 [other/slideSavedGame](https://discmaster.textfiles.com/search?format=slideSavedGame) | Slide Saved Game | .sld | 
 [other/slimShowProject](https://discmaster.textfiles.com/search?format=slimShowProject) | Slim Show project | .s_ .ss | 

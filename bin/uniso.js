@@ -104,7 +104,7 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-albi"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const hlsRegex = /^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s+(?<fileType>[^/]+)?\/?(?<fileCreator>.{4}).+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/;
+		const hlsRegex = /^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s{1,2}(?<fileType>[^/]+)?\/?(?<fileCreator>.{4}).+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/;
 		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(hlsRegex) || {})?.groups);
 		for(const entry of entries)
 		{

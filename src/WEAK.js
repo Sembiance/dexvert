@@ -42,6 +42,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 export const WEAK_PRODOS_TYPES =
 [
 	// these are very generic or system level stuff and are not useful to act on
+	"ATK",		// [E2] AppleTalk Data
 	"BAT",		// [F5] User Defined 5
 	"BIN",		// [06] Binary File
 	"BIO",		// [6B] PC BIOS
@@ -53,12 +54,15 @@ export const WEAK_PRODOS_TYPES =
 	"FND",		// [C9] Apple IIgs Finder Data
 	"FST", 		// [BD] Apple IIgs File System Translator
 	"FTD",		// [42] File Type Definitions
+	"OBJ",		// [B1] Apple IIgs Object Code
 	"OVL",		// [F1] User Defined 1
+	"LIB",		// [B2] Apple IIgs Library
 	"LDF",		// [BC] Apple IIgs Generic Load File
 	"P16",		// [F9] ProDOS-16 System File
 	"PIF",		// [B6] Apple IIgs Permanent INIT
 	"PRE",		// [6E] PC Pre-Boot
 	"PRG",		// [F8] User Defined 8
+	"REL",		// [FE] EDASM Relocatable Code
 	"SOS",		// [0C] SOS System File
 	"SYS", 		// [FF] ProDOS-8 System File
 	"TIF",		// [B7] Apple IIgs Temporary INIT

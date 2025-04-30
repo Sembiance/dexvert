@@ -1,6 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Figure out the format for these front page news CDs (several CDs!):
+  https://discmaster.textfiles.com/browse/31894
+
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
 

@@ -16,6 +16,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"Fltr/Clrs",		// ClarisWorks Translator
 	"LINK/MSIE",		// MSIE Link/Shorcut
 	"RIFF/FSX3",		// Painter
+	"VBIN/VTPC",		// Verity
 	"Xtra/Xown",		// Macromedia Director Xtra
 	
 	// fallthroughs
@@ -317,6 +318,7 @@ export const WEAK_VALUES =
 	/^Pascal Funktion/,
 	/^Pascal Prozedur/,
 	/^Pascal Source Code/,
+	/^Path not found\.$/,
 	/^PCX Bild/,
 	/^PKCS #7 Zertifikat$/,
 	/^Phar Lap \.EXP Datei$/,

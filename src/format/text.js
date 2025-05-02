@@ -1,4 +1,5 @@
 import {TEXT_MAGIC} from "../Detection.js";
+import {_NULL_BYTES_MAGIC} from "./other/nullBytes.js";
 
 // All of the formats in this file are 'text' files that should just be handled as text
 // Each entry also has the following properties added:
@@ -922,6 +923,7 @@ export default
 		text602Document                            : {name : "Text602 document", ext : [".602"], magic : ["Text602 document", "T602 document data", "application/x-t602", /^fmt\/1695( |$)/]},
 		text602PrinterDriver                       : {name : "Text602 printer Driver", ext : [".dst"], magic : ["Text602 printer Driver"], weakMagic : true},
 		texTranscript                              : {name : "TeX transcript", ext : [".log"], magic : ["TeX transcript"]},
+		textWareCDT                                : {name : "TextWare CDT File", ext : [".cdt"], magic : ["TextWare CDT (WEAK)"], forbiddenMagic : _NULL_BYTES_MAGIC, weakMagic : true},
 		thinkTankTemplate                          : {name : "ThinkTank Template", magic : ["ThinkTank Template"]},
 		threeDProfessionalScript                   : {name : "3-D Professional script", magic : ["3-D Professional script"]},
 		threeDSQuadColors                          : {name : "3D Studio Quad colors", magic : ["3ds Quad colors"]},

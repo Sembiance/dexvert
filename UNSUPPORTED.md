@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,543)
+# Unsupported File Formats (3,545)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1135,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,318)
+## Other (2,320)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1706,6 +1706,7 @@ Family/Format | Name | Extensions | Notes
 [other/dBTextWorksDatabaseTermsAndWordsIndex](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTermsAndWordsIndex) | DB/TextWorks Database Term and Word Index | .btx | 
 [other/dBTextWorksDatabaseTermsAndWords](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTermsAndWords) | DB/TextWorks Database Terms and Words | .occ | 
 [other/dBTextWorksDatabaseTextbaseStructureFile](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTextbaseStructureFile) | DB/TextWorks Database Textbase Structure file | .dbs | 
+[other/db2ConversionFile](https://discmaster.textfiles.com/search?format=db2ConversionFile) | DB2 Conversion File | .cn | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?format=dBaseCompiledObjectProgram) | dBase Compiled File | .dbo .qbo | 
 [other/dBaseCompiledLabel](https://discmaster.textfiles.com/search?format=dBaseCompiledLabel) | dBase compiled Label | .lbo | 
 [other/dBaseDesign](https://discmaster.textfiles.com/search?format=dBaseDesign) | dBase Form | .frm | 
@@ -1782,6 +1783,7 @@ Family/Format | Name | Extensions | Notes
 [other/doom3Savegame](https://discmaster.textfiles.com/search?format=doom3Savegame) | Doom 3 Savegame | .save | 
 [other/doomSaveGame](https://discmaster.textfiles.com/search?format=doomSaveGame) | DOOM Save Game | .dsg | 
 [other/dosNavigator2Settings](https://discmaster.textfiles.com/search?format=dosNavigator2Settings) | Dos Navigator 2 settings | .cfg | 
+[other/dosNavigatorModemCommunicationsSettings](https://discmaster.textfiles.com/search?format=dosNavigatorModemCommunicationsSettings) | Dos Navigator Modem/communications settings | .mdm | 
 [other/dProtelForWindowsSchematic](https://discmaster.textfiles.com/search?format=dProtelForWindowsSchematic) | DProtel for Windows schematic | .sch .dot .prj | 
 [other/drDOSCodePage](https://discmaster.textfiles.com/search?format=drDOSCodePage) | DR-DOS code page | .cpi | 
 [other/drHaloPrinterDefinition](https://discmaster.textfiles.com/search?format=drHaloPrinterDefinition) | Dr. Halo Printer definition | .prn | 

@@ -81,6 +81,7 @@ const DEXMAGIC_CHECKS =
 	"PCBoard Programming Language Executable" : [{offset : 0, match : "PCBoard Programming Language Executable"}],
 	"Signum 1/2 Document"                     : [{offset : 0, match : "sdoc0001"}],
 	"Signum 3/4 Document"                     : [{offset : 0, match : "\x00\x00sdoc  03"}],
+	"TextWare CDT (WEAK)"                     : [{offset : 0, match : Array(16).fill(0x00)}],
 	"Wildcat WCX"                             : [{offset : 0, match : "GHSH"}],
 
 	// executable

@@ -3,6 +3,7 @@
 \--------------/
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
+  Then see how to extract it. Maybe just run, with wine or something, but maybe not...
 
 
 /---------------\
@@ -23,15 +24,15 @@
   Then move to Video Works 2, Macromind Director, etc
 
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
-  http://dev.discmaster2.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver
+  http://discmaster.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver
   I started it in ~/bin/unVISEInstaller.js based on this info: https://pastebin.com/GwQYz2gG
   Also found: https://github.com/habnabit/delvmod/wiki/Installer_VISE
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
 * Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
-  https://dev.discmaster2.textfiles.com/search?format=folioDatabase
-  https://dev.discmaster2.textfiles.com/view/18013/The%20Washington%20Times%20-%201991%20Volume%202%20(January%201989-December%201991)(Wayzata%20Technology)(5032)(1992).bin/fpnv.nfo
+  https://discmaster.textfiles.com/search?format=folioDatabase
+  May be worth paying someone to reverse engineer it
 
 
 /-----------------\
@@ -46,26 +47,26 @@
 * Adopt these Filemaker Pro tools for ~9,771 unique files: https://github.com/evanmiller/fmptools
   Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
 
-* Add 'proper' AskSam support for the ~460 files: https://dev.discmaster2.textfiles.com/search?format=askSamDatabase
+* Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
   https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
 * Add POVRAY rendering support for the ~1,706 unique files (see the extensive notes in povRay.js)
 
-* Add moRay support for the ~2,300 unique files (sat on top of POV-RAY, see format moRay.js for notes): https://dev.discmaster2.textfiles.com/search?format=moRay&dedup=dedup
+* Add moRay support for the ~2,300 unique files (sat on top of POV-RAY, see format moRay.js for notes): https://discmaster.textfiles.com/search?format=moRay&dedup=dedup
 
-* Improve image/amosPicturePacker support for the ~57 unique files: https://dev.discmaster2.textfiles.com/search?format=amosPicturePacker&dedup=dedup
+* Improve image/amosPicturePacker support for the ~57 unique files: https://discmaster.textfiles.com/search?format=amosPicturePacker&dedup=dedup
   It currently is only supported by abydos and it doesn't always get it right.
-  It also doesn't associated .pal palette files: https://dev.discmaster2.textfiles.com/browse/1106/CU%20Amiga%20Magazine's%20Super%20CD-ROM%2007%20(1997)(EMAP%20Images)(GB)(Track%201%20of%208)[!][issue%201997-02].iso/cucd/readers/readers_games/animal_pairs/pictures
+  It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/1106/CU%20Amiga%20Magazine's%20Super%20CD-ROM%2007%20(1997)(EMAP%20Images)(GB)(Track%201%20of%208)[!][issue%201997-02].iso/cucd/readers/readers_games/animal_pairs/pictures
   Perhaps get deark to add support for this format.
 
-* Add BitRock installer support for the ~20 files: https://dev.discmaster2.textfiles.com/search?q=%22BitRock+Installer%22&qfields=name&qfields=t&format=xml
+* Add BitRock installer support for the ~20 files: https://discmaster.textfiles.com/search?q=%22BitRock+Installer%22&qfields=name&qfields=t&format=xml
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
 
-* Add archive/innoSetupArchive support for the ~300 files: https://dev.discmaster2.textfiles.com/search?format=innoSetupArchive
+* Add archive/innoSetupArchive support for the ~300 files: https://discmaster.textfiles.com/search?format=innoSetupArchive
   See about converting this Java code to javascript to extract them.
-  Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://dev.discmaster2.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
+  Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://discmaster.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
 
 * HFS+ CDs do not currently expose mac file type/creator codes (as uniso just mounts them with -t hfsplus)
   In fact, if they have resource forks, I bet I'm entirelly skipping them.
@@ -74,6 +75,7 @@
   	https://discmaster.textfiles.com/browse/31512/ART_153.iso
   To get the content may be tricky. hfsplusutils might work, but I had real issues mounting the ISOs with it.
   Probably better to try using hfsexplorer
+
 
 /--------------\
 | Low Priority |
@@ -123,11 +125,11 @@
 	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
 	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
-  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://dev.discmaster2.textfiles.com/admin/item?itemid=10456
+  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://discmaster.textfiles.com/admin/item?itemid=10456
 
 * Look into adding Atari ST VT-52 text/ansi art support: https://github.com/Sembiance/dexvert/issues/27
 
-* Would be nice to convert additional unreal UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
+* Would be nice to convert additional unreal UTX formats, such as textures: http://discmaster.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
   Similar to how MacromediaDirector does it.
   Extra bonus points if I use UnrealEngine itself to create a 'tool' that can automatically open a .utx, read in all assets and convert them automatically to output files
@@ -137,7 +139,7 @@
   Maybe see if I can just 'run' them and install to c:\out or something
 
 * Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js  NOTE: It's more than just running a program)
-  Then re-process those in: https://dev.discmaster2.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
+  Then re-process those in: https://discmaster.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
   Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
   These are the possible prefixes I've found, so look for these in 'detections':
 	0006AAD4
@@ -156,7 +158,7 @@
 
 * 3D Studio ASE support could be improved with textures. Parse out the *BITMAP lines, look in current dir and parent dir and subdirs
   Noesis certainly supports loading these textures (I tested this), dunno if other converters do or not
-  https://dev.discmaster2.textfiles.com/view/19374/Logick%C3%A9%20hry.iso/hry/Becher%20Chess/meshes/knight.ASE?text
+  https://discmaster.textfiles.com/view/19374/Logick%C3%A9%20hry.iso/hry/Becher%20Chess/meshes/knight.ASE?text
 
 * IsoBuster has had several updates since I last installed it and now supports more formats: https://www.isobuster.com/news/
 
@@ -177,9 +179,9 @@
   That link also has a brief overview of the format.
   The test.py script claims it can extract the files, and it does extract SOME of the PNGs from: TILES005.ART
   But I could use that as the starting point for my own deno based script. It should also create animated GIFs for animated tiles
-  Can convert these: http://dev.discmaster2.textfiles.com/browse/849/boot-disc-1996-08.iso/content/demos/games/duke3d/duke3d.grp
-  http://dev.discmaster2.textfiles.com/browse/98/EPISODE_17_SEP_1995.iso/demos/tekw
-  http://dev.discmaster2.textfiles.com/search?q=TILES000.ART&qfields=name
+  Can convert these: http://discmaster.textfiles.com/browse/849/boot-disc-1996-08.iso/content/demos/games/duke3d/duke3d.grp
+  http://discmaster.textfiles.com/browse/98/EPISODE_17_SEP_1995.iso/demos/tekw
+  http://discmaster.textfiles.com/search?q=TILES000.ART&qfields=name
   Have dexvert match *.art extension, with auxFiles req that palette.dat exists in dir and idCheck that file starts with 0x01 00 00 00
 
 * Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
@@ -281,10 +283,10 @@
   Probably spin up fresh mac instances each time with a custom HD image with the script and in/out folders pre-prepared
   After it's working, I can then support 'Graphic Converter' and these formats:
 	These seem to be Disk Copy 5/6, which I may be able to extract/convert with: http://macintoshgarden.org/apps/disk-copy-6
-	  https://archive.org/details/GigaROM2.0.img   (https://dev.discmaster2.textfiles.com/admin/item?itemid=13263)
+	  https://archive.org/details/GigaROM2.0.img   (https://discmaster.textfiles.com/admin/item?itemid=13263)
 	  https://archive.org/details/InfoMac5Disk1.img
 	  https://archive.org/details/InfoMac5Disk2.img
-	  http://dev.discmaster2.textfiles.com/view/5525/Apple%20Media%20Image%20Disc%20Vol.%205.smi.bin
+	  http://discmaster.textfiles.com/view/5525/Apple%20Media%20Image%20Disc%20Vol.%205.smi.bin
 
 * Add RISC OS support, with one of these emulators:
 	https://www.marutan.net/rpcemu/index.php
@@ -307,10 +309,10 @@
   music/synderSNG  	(VERY weak magic. no ACTUAL songs detected on discmaster, all are just false positives)
 
 * Learn how to crack old windows programs, specifically the decode.exe's from:
-	https://dev.discmaster2.textfiles.com/browse/6924/PCL_19.iso/charme/hard
-	https://dev.discmaster2.textfiles.com/browse/6923/cd.iso/charme/hard
-	https://dev.discmaster2.textfiles.com/browse/6928/CDROSE2.iso/hard
-    https://dev.discmaster2.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
+	https://discmaster.textfiles.com/browse/6924/PCL_19.iso/charme/hard
+	https://discmaster.textfiles.com/browse/6923/cd.iso/charme/hard
+	https://discmaster.textfiles.com/browse/6928/CDROSE2.iso/hard
+    https://discmaster.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
   These are 16bit Windows 95/98 programs. So using W32Dasm or OllyDbg doesn't work well because those only handle 32bit code.
   Should be able to find some cracking tutotorials from back in the day and go through them. Idea is find the assembly where the password button checks validity and crack that to just be NOP or something or change from BEQ to BNE or something
   Then add support for these files. Should be fun :)
@@ -345,6 +347,7 @@
 * There are several 'detected' installer 'magic' in the 'exe.js' format, I could look into each of these and write extractors for them
 
 * xbox content can be better extracted with: https://github.com/multimediamike/xbfuse
+
 
 /----------------\
 | Probably Never |

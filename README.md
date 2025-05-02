@@ -9,4 +9,4 @@ Utilizes **568** helper programs running on **6** different operating systems un
 
 This project is not currently ready for public use.
 
-You can find 31,049 sample files for 3,522 formats at [sembiance.com/fileFormatSamples](https://sembiance.com/fileFormatSamples/)
+You can find 31,050 sample files for 3,522 formats at [sembiance.com/fileFormatSamples](https://sembiance.com/fileFormatSamples/)

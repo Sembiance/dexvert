@@ -77,10 +77,6 @@ If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
 >>> trustMagic = true
 If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
 
->>> ******** Custom
->>> custom = async ({inputFile, detections, otherFiles, otherDirs, xlog}) => { return true; }
-If this returns true, it's counted as a custom match with 100% confidence.
-
 >>> ******** Other
 >>> auxFiles = (inputFile, otherFiles, otherDirs, {fileSizeMatchExt, xlog}) => [file, file] || false
 Some formats require other sibling files/directories to be present in order to convert correctly.

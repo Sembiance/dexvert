@@ -62,6 +62,7 @@ const FORCE_FORMAT_AS =
 const FORMAT_FILE_META =
 {
 	"document/wordMac"           : { "Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"} },
+	"text/textWareCDT"           : { "CD Fun House Index.CDT" : {macFileType : "Ware", macFileCreator : "TWar"} },
 	"image/a2gsSHStar"           : { "title" : {proDOSTypeCode : "PNT"} },
 	"image/a2HighRes"            : { "Gs.256k" : {proDOSTypeCode : "FOT"} },
 	"image/apple2Icons"          : { "Softdisk.Icon" : {proDOSTypeCode : "ICN"} },
@@ -998,7 +999,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : o, asJSON : true});
 	if(err)
 		console.error(`${log.join("\n")}\n${err}`.trim());
-	//xlog.debug`dex result: ${{...r, pretty : null}}`;
+	xlog.debug`dex result: ${{...r, pretty : null}}`;
 	await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), log?.length ? log.join("\n") : (r.pretty?.length ? r.pretty : ""));
 		
 	await workercb({sampleFilePath, tmpOutDirPath, dexData : r.json});

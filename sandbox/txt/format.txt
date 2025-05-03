@@ -162,7 +162,7 @@ A method that will be executed before any converters are attempted
 A method that will be executed after converters have been attempted
 
 >>> verify = async ({dexState, inputFile, newFile, ...extraValidatorData}) { ... }
-A method that will further verify that the given output file is proper. Currently only used by image family formats.
+A method that will further verify that the given output file is proper
 
 >>> verifyUntouched = true  ||  async dexState => true
 Untouched files are not verified if they are a magic match. To force verification, set to true or return true.

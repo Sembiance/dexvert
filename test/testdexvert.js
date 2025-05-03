@@ -62,7 +62,7 @@ const FORCE_FORMAT_AS =
 const FORMAT_FILE_META =
 {
 	"document/wordMac"           : { "Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"} },
-	"text/textWareCDT"           : { "CD Fun House Index.CDT" : {macFileType : "Ware", macFileCreator : "TWar"} },
+	"document/textWareCDT"       : { "CD Fun House Index.CDT" : {macFileType : "Ware", macFileCreator : "TWar"} },
 	"image/a2gsSHStar"           : { "title" : {proDOSTypeCode : "PNT"} },
 	"image/a2HighRes"            : { "Gs.256k" : {proDOSTypeCode : "FOT"} },
 	"image/apple2Icons"          : { "Softdisk.Icon" : {proDOSTypeCode : "ICN"} },
@@ -78,7 +78,7 @@ const FORMAT_OS_HINT =
 	{
 		"Sidescape1.00J.image" : "macintoshjp"
 	},
-	"archive/cpt" :
+	"archive/compactPro" :
 	{
 		"cpt" : "macintoshjp"
 	},
@@ -107,7 +107,8 @@ const FORMAT_OS_HINT =
 	"archive/sit" :
 	{
 		"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp",
-		"StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ"      : "macintoshjp"
+		"StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ"      : "macintoshjp",
+		"TelBan120.sit"                     : "macintoshjp"
 	},
 	"archive/zip" : { "LamenDB.zip" : "macintoshjp" },
 	"document/dbf"         :

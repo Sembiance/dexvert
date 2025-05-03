@@ -71,11 +71,14 @@ export class unar extends Program
 		
 		r.meta.fileMeta = {};
 
-		const num2str = num =>
+		const num2str = async num =>
 		{
 			const u8arr = new Uint8Array(4);
 			u8arr.setUInt32BE(0, num);
-			return u8arr.getString(0, 4);
+			
+			// Used to us u8arr.getString(0, 4) here but that wasn't properly decoding the extended mac charset
+			// We force roman region since that's all type/creator codes can be
+			return await encodeUtil.decodeMacintosh({data : [0, 1, 2, 3].map(v => `%${u8arr.getUInt8(v).toString(16).padStart(2, "0")}`).join(""), processors : encodeUtil.macintoshProcessors.percentHex, region : "roman"});
 		};
 
 		// Get our file creator types for better detection of extracted files down the line
@@ -89,8 +92,8 @@ export class unar extends Program
 			const fileOutputPath = fileOutputPaths.find(v => path.relative(outDirPath, v)===fileRelPath);
 			if(!fileOutputPath)
 				continue;
-			
-			r.meta.fileMeta[fileRelPath] = { macFileType : num2str(fileInfo.XADFileType), macFileCreator : num2str(fileInfo.XADFileCreator) };
+
+			r.meta.fileMeta[fileRelPath] = { macFileType : await num2str(fileInfo.XADFileType), macFileCreator : await num2str(fileInfo.XADFileCreator) };
 		}
 
 		if(Object.keys(r.meta.fileMeta).length===0)

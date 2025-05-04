@@ -117,8 +117,7 @@ async function getMacBinaryMeta(inputFile, debug)
 			return debug ? `Too many suspect parts: suspectForkSizes:${suspectForkSizes} (${dataForkLength}+${resourceForkLength} : ${inputFile.size}) suspectFileType:${suspectFileType} suspectFileCreator:${suspectFileCreator} suspectDates:${Object.entries(suspectDates).map(([k, v]) => `suspectDates.${k}:${v}`).join(", ")} suspectDateDifference:${suspectDateDifference}` : false;
 	}
 
-	const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
-	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData, region}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData, region})};
+	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};	// mac type/creator codes are always roman, so don't specify a region here
 }
 export {getMacBinaryMeta};
 

@@ -37,14 +37,20 @@ await Deno.mkdir(MOUNT_DIR_PATH);
 async function extractNormalISO()
 {
 	xlog.info`Extracting ISO as Normal ISO...`;
-		
-	const mountArgs = ["-o", "loop,ro"];
-	if(argv.offset || argv.block)
-		mountArgs[mountArgs.length-1] = `${mountArgs.at(-1)}${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`;
+
+	const mountOptions = ["loop", "ro", "nodev", "nosuid"];
+	if(argv.offset)
+		mountOptions.push(`offset=${argv.offset}`);
+	if(argv.block)
+		mountOptions.push(`block=${argv.block}`);
 	if(argv.options)
-		mountArgs[mountArgs.length-1] = `${mountArgs.at(-1)},${argv.options}`;
+		mountOptions.push(argv.options);
 	if(argv.nextstep)
-		mountArgs.push("-t", "ufs", "-o", "ufstype=nextstep-cd");
+		mountOptions.push("ufstype=nextstep-cd");
+	
+	const mountArgs = ["-o", mountOptions.join(",")];
+	if(argv.nextstep)
+		mountArgs.push("-t", "ufs");
 	else if(argv.hfsplus)
 		mountArgs.push("-t", "hfsplus");
 	else if(argv.type)

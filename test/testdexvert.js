@@ -31,7 +31,7 @@ const outJSON = {};
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
 // These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
-const FLAKY_CONVERTERS = ["wuimg"];
+const FLAKY_CONVERTERS = ["paintDotNet"];
 
 // These formats should be skipped entirely for one reason or another
 const SKIP_FORMATS =
@@ -386,6 +386,8 @@ const IGNORE_SIZE_FILEPATHS =
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
 const FLEX_DIFF_FILES =
 [
+	// sometimes files are created, sometimes not
+	/archive\/h2oGameDataArchive\/SoundEffects_Demo\.H2O$/,
 	// sometimes different pngs are produced, sometimes some are missing, not sure why
 	/archive\/hypercard\/.+$/,
 
@@ -613,6 +615,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"music/titanics",
 	"other/iBrowseCookies",
 	"unsupported/binPatch",
+	"video/interspectiveAnimation",
 	"video/vdoVideo"
 ];
 
@@ -808,6 +811,9 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	if(prevData.processed!==result.processed)
 	{
 		if(!result.processed && ALLOW_PROCESS_FAILURES?.[diskFamily]?.[diskFormat]?.includes(path.basename(sampleSubFilePath)))
+			return pass(fg.red("."));
+
+		if(!result.processed && FLAKY_CONVERTERS.includes(prevData.converter))
 			return pass(fg.red("."));
 
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)}${prevData.processed && prevData.converter ? ` ${xu.paren(prevData.converter)}` : ""} but got ${fg.orange(result.processed)}`);

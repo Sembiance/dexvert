@@ -63,14 +63,14 @@ export class polyTrans64 extends Program
 		Sleep(200)
 		Send("i")
 
-		SendSlow("${_FORMATS[r.flags.format].keys}", 75)
+		SendSlow("${_FORMATS[r.flags.format].keys}", 100)
 		Send("{ENTER}")
 
 		Func PreImportDialogs()
 			WindowDismiss("Merge or Replace?", "", "{DOWN}{DOWN}{DOWN}{SPACE}{ENTER}")
 			return WinActive("Select One or More Geometry Files to Import", "")
 		EndFunc
-		$importWindow = CallUntil("PreImportDialogs", ${xu.SECOND*25})
+		$importWindow = CallUntil("PreImportDialogs", ${xu.SECOND*30})
 		If Not $importWindow Then
 			Exit 0
 		EndIf
@@ -100,7 +100,7 @@ export class polyTrans64 extends Program
 			WindowFailure("", "cannot be parsed.", -1, "{ESCAPE}")
 			return WinActive("PolyTrans|CAD 3D Translation, Viewing & Composition System - ", "")
 		EndFunc
-		$mainWindow = CallUntil("PostImportDialogs", ${xu.MINUTE*1.5})
+		$mainWindow = CallUntil("PostImportDialogs", ${xu.MINUTE*2})
 		If Not $mainWindow Then
 			Exit 0
 		EndIf
@@ -111,14 +111,14 @@ export class polyTrans64 extends Program
 		Sleep(250)
 		Send("e")
 
-		Send("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].keys}")
+		SendSlow("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].keys}", 100)
 		Send("{ENTER}")
 
 		Func PreExportDialogs()
 			WindowFailure("Warning", "no geometry to export", -1, "{ESCAPE}")
 			return WindowDismiss("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].exportWindow.title}", "", "${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].exportWindow.keysDismiss}")
 		EndFunc
-		CallUntil("PreExportDialogs", ${xu.SECOND*15})
+		CallUntil("PreExportDialogs", ${xu.SECOND*20})
 
 		$saveWindow = WindowRequire("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].saveWindow.title}", "", 15)
 		SendSlow("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}", 75);
@@ -127,8 +127,8 @@ export class polyTrans64 extends Program
 		If $outputStatusWindow Then
 			WinWaitClose($outputStatusWindow, "", 300)
 		EndIf
-		WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*2}, ${xu.MINUTE*3})`,
-		timeout : xu.MINUTE*20
+		WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*2}, ${xu.MINUTE*3.5})`,
+		timeout : xu.MINUTE*22
 	});
 	renameOut = {
 		alwaysRename : true,

@@ -155,23 +155,34 @@ export class iso extends Format
 		
 		// We ASSUME that we'll never encounter a CD or disk that has a root level file/directory named: dexvert_nextstep, dexvert_mac, or dexvert_pc
 		return [
-			// We do a little trick here. We blindly try nextstep and hfsplus/hfs. These won't produce output files if the ISO isn't in that format
+			// We do a little trick here. We blindly try nextstep first. This won't produce output files if the ISO isn't in that format
 			["uniso[nextstep]"].map(v => `${v}[subOutDir:dexvert_nextstep]`),
-			["uniso[hfsplus]", "uniso[hfs]"].map(v => `${v}[subOutDir:dexvert_mac]`),
 
+			// Next, if we don't have files yet, but detect as HFS, we first try extracting if hfs+ is identified. This is important because some CDs like MACPEOPLE-2001-06-01.ISO have both HFS and HFS+ but only HFS+ has good files
+			subState =>
+			{
+				const firstHFSPlusPartition = (dexState.meta?.parted?.partitions || []).find(o => ["hfsx", "hfs+"].includes(o.filesystem));
+				if(subState.f.files?.output?.length || !firstHFSPlusPartition)
+					return [];
+
+				return [`hfsexplorer[partition:${firstHFSPlusPartition.number-1}][subOutDir:dexvert_mac]`];
+			},
+
+			// No HFS+ was extracted, so we try to extract as HFS from our regular uniso which is preffered over hfsexplorer
+			["uniso[hfs]"].map(v => `${v}[subOutDir:dexvert_mac]`),
+
+			// Finally if hfs partition is detected, we try to extract using hfsexplorer
 			subState =>
 			{
 				// some mac ISOs have multiple partitions in them but only 1 partition is an HFS partition and to extract correctly I need to manually specify which one to hfsexplorer (MacAddict_068_2002_04.iso)
-				if(!dexState.hasMagics(HFS_MAGICS) || subState.f.files?.output?.length)
-					return [];
-
-				const firstHFSPartition = (dexState.meta?.parted?.partitions || []).find(o => o.filesystem==="hfs");
-				if(!firstHFSPartition)
+				const firstHFSPartition = (dexState.meta?.parted?.partitions || []).find(o => ["hfs"].includes(o.filesystem));
+				if(subState.f.files?.output?.length || !firstHFSPartition)
 					return [];
 
 				return [`hfsexplorer[partition:${firstHFSPartition.number-1}][subOutDir:dexvert_mac]`];
 			},
 
+			// finally we try all the others
 			subState =>
 			{
 				const r = [];
@@ -186,7 +197,7 @@ export class iso extends Format
 				if(multiBinTracks)
 					r.pushUnique("fuseiso");
 
-				// If we haven't't found any nextstep/hfsplus/hfs, then safe to try additional converters that may also handle those formats
+				// If we haven't't found any nextstep/hfs, then safe to try additional converters that may also handle those formats
 				// If it's a BIN/CUE, run bchunk
 				// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
 				// We try our regular uniso/fuseiso converters first though, because sometimes the cue file is pretty useless and using it can actually just cause problems

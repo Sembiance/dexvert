@@ -14,8 +14,8 @@ export class unar extends Program
 	};
 	bruteFlags = { executable : {} };
 
-	bin      = "unar";
-	args     = async r =>
+	bin  = "unar";
+	args = async r =>
 	{
 		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["-json", r.inFile({absolute : true})]);
 		r.lsarOutput = xu.parseJSON(fileInfoRaw);

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,545)
+# Unsupported File Formats (3,546)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1135,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,320)
+## Other (2,321)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3443,6 +3443,7 @@ Family/Format | Name | Extensions | Notes
 [other/zapperInNeverwhereSavedGame](https://discmaster.textfiles.com/search?format=zapperInNeverwhereSavedGame) | Zapper In Neverwhere saved game | .pos | 
 [other/zbasic](https://discmaster.textfiles.com/search?format=zbasic) | ZBASIC | .bas | [6 sample files](https://sembiance.com/fileFormatSamples/other/zbasic/)
 [other/zBrushMatCap](https://discmaster.textfiles.com/search?format=zBrushMatCap) | ZBrush MatCap | .ztl | 
+[other/zBrushMaterial](https://discmaster.textfiles.com/search?format=zBrushMaterial) | ZBrush Material | .zmt | 
 [other/zCTSystemsGroupVideoDriver](https://discmaster.textfiles.com/search?format=zCTSystemsGroupVideoDriver) | ZCT Systems Group video Driver | .drv | 
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?format=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
 [other/zeroXBeatSlicerGroove](https://discmaster.textfiles.com/search?format=zeroXBeatSlicerGroove) | Zero-X BeatSlicer Groove | .zgr | 

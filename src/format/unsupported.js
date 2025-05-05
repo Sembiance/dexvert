@@ -3315,6 +3315,7 @@ export default
 		yangDataModel                            : {name : "YANG data model", ext : [".yang"], magic : ["YANG data model"], weakMagic : true},
 		zonerDraw                                : {name : "Zoner Draw", ext : [".zmf"], magic : ["Zoner Draw"], weakMagic : true},
 		zBrushMatCap                             : {name : "ZBrush MatCap", ext : [".ztl"], magic : ["ZBrush ZTool native format", /^fmt\/1673( |$)/]},
+		zBrushMaterial                           : {name : "ZBrush Material", ext : [".zmt"], magic : ["ZBrush Material"]},
 		zeroXBeatSlicerGroove                    : {name : "Zero-X BeatSlicer Groove", ext : [".zgr"], magic : ["Zero-X BeatSlicer Groove"]},
 		zmcVisualTabletData                      : {name : "ZMC VisualTablet data", ext : [".ekb"], magic : ["ZMC VisualTablet data"], weakMagic : true},
 		zTXTeBook                                : {name : "zTXT e-book", ext : [".pdb"], magic : ["A GutenPalm zTXT e-book", "zTXT eBook"]},

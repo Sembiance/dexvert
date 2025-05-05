@@ -13,7 +13,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		format     : {desc : "Only test a single format: archive/zip", hasValue : true},
-		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
+		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true, multiple : true},
 		serial     : {desc : "Perform only 1 test at a time, this helps when debugging"},
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
 		json       : {desc : "Output results as JSON"},
@@ -654,8 +654,8 @@ sampleFilePaths.filterInPlace(sampleFilePath =>
 	return !SUPPORTING_FILES?.[sampleSubFilePath.split("/")[0]]?.[sampleSubFilePath.split("/")[1]]?.test(sampleSubFilePath);
 });
 
-if(argv.file)
-	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toString().toLowerCase()));
+if(argv.file?.length)
+	sampleFilePaths.filterInPlace(sampleFilePath => argv.file.some(targetFile => sampleFilePath.toLowerCase().endsWith(targetFile.toString().toLowerCase())));
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
@@ -663,7 +663,7 @@ Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.rel
 	if(!SUPPORTING_FILES?.[sampleSubFilePath.split("/")[0]]?.[sampleSubFilePath.split("/")[1]]?.test(sampleSubFilePath))
 		return;
 
-	if(!argv?.format?.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
+	if(!argv?.format?.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file?.length)
 		return;
 
 	xlog.info`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;

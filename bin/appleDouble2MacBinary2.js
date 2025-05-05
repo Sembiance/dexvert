@@ -11,8 +11,7 @@ const argv = cmdUtil.cmdInit({
 	opts :
 	{
 		region           : {desc : "Which region for filename encoding", hasValue : true, defaultValue : "roman"},
-		originalFilePath : {desc : "The original file path that the AppleDouble file was created from, important to ensure we don't infinite loop the same MacBinary file over and over", hasValue : true, required : true},
-		logLevel         : {desc : "The log level to use", hasValue : true, defaultValue : "info"}
+		originalFilePath : {desc : "The original file path that the AppleDouble file was created from, important to ensure we don't infinite loop the same MacBinary file over and over", hasValue : true, required : true}
 	},
 	args :
 	[
@@ -21,7 +20,7 @@ const argv = cmdUtil.cmdInit({
 
 // BIG THANKS to eientei for this script which helped a LOT: https://raw.githubusercontent.com/einstein95/py_scripts/main/deadf.py
 
-const xlog = new XLog(argv.logLevel);
+const xlog = new XLog("error");	// We restrict to error only to ensure that on stdout is the type/creator info
 
 if(!await fileUtil.exists(argv.inputFilePath))
 	Deno.exit(xlog.error`Input file does not exist: ${argv.inputFilePath}`);
@@ -89,8 +88,13 @@ outHeader.set(macFilename, 2);
 
 // finder info detailed as 'TYPE FInfo = RECORD' on page 139 of: file:///mnt/compendium/documents/books/InsideMacintosh/Inside_Macintosh_Volume_II_1985.pdf
 const finderInfo = entries.find(entry => entry.entryType==="finderInfo");
-outHeader.set(finderInfo.data.subarray(0, 4), 65);	// file type
-outHeader.set(finderInfo.data.subarray(4, 8), 69);	// file creator
+
+const fileTypeData = finderInfo.data.subarray(0, 4);	// file type
+outHeader.set(fileTypeData, 65);
+
+const fileCreatorData = finderInfo.data.subarray(4, 8);	// file creator
+outHeader.set(fileCreatorData, 69);
+
 const finderInfoFlags = finderInfo.data.getUInt16BE(8);
 const oldFlags = (finderInfoFlags >> 8) & 0xFF;
 outHeader.setUInt8(73, oldFlags);	// original finder flags
@@ -162,3 +166,5 @@ await Deno.copyFile(tmpOutFilePath, dataFilePath);
 await fileUtil.unlink(tmpOutFilePath);
 
 await Deno.utime(dataFilePath, Math.floor(dataForkStat.mtime/xu.SECOND), Math.floor(dataForkStat.mtime/xu.SECOND));
+
+console.log(JSON.stringify({macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})}));

@@ -4,7 +4,7 @@ export class digitalSoundInterfaceKitRIFF extends Format
 {
 	name         = "Digital Sound Interface Kit RIFF Module";
 	ext          = [".dsm"];
-	magic        = ["Digital Sound Interface Kit (RIFF) module", "RIFF Datei: unbekannter Typ 'DSMF'"];
+	magic        = ["Digital Sound Interface Kit (RIFF) module", "RIFF Datei: unbekannter Typ 'DSMF'", "Generic RIFF file DSMF"];
 	metaProvider = ["musicInfo"];
 	converters   = ["zxtune123", "openmpt123", "gamemus[format:dsm-dsik]"];
 }

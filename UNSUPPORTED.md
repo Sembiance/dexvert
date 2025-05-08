@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,546)
+# Unsupported File Formats (3,548)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -757,12 +757,13 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (197)
+## Image (198)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
 [image/abcFlowCharterChart](https://discmaster.textfiles.com/search?format=abcFlowCharterChart) | ABC FlowCharter chart | .af3 | 
 [image/abcSnapGraphixGraph](https://discmaster.textfiles.com/search?format=abcSnapGraphixGraph) | ABC SnapGraphix Graph | .sg | 
+[image/acornDraw](https://discmaster.textfiles.com/search?format=acornDraw) | [Acorn/RISC-OS Draw](http://fileformats.archiveteam.org/wiki/Acorn_Draw) |  | [10 sample files](https://sembiance.com/fileFormatSamples/image/acornDraw/)
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?format=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
 [image/aegisDrawDrawing](https://discmaster.textfiles.com/search?format=aegisDrawDrawing) | Aegis Draw drawing | .draw1 .drawing | 
 [image/afl](https://discmaster.textfiles.com/search?format=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
@@ -1135,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,321)
+## Other (2,322)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1606,6 +1607,7 @@ Family/Format | Name | Extensions | Notes
 [other/comicBookCreatorBackground](https://discmaster.textfiles.com/search?format=comicBookCreatorBackground) | Comic Book Creator Background | .bin | 
 [other/comicBookCreatorShapeTable](https://discmaster.textfiles.com/search?format=comicBookCreatorShapeTable) | Comic Book Creator shape Table | .tbl .frm .bin | 
 [other/comicCollectorCollectionData](https://discmaster.textfiles.com/search?format=comicCollectorCollectionData) | Comic Collector Collection data | .cmc | 
+[other/comicLifeDocument](https://discmaster.textfiles.com/search?format=comicLifeDocument) | Comic Life Document | .comicdoc | 
 [other/commanderKeen6Config](https://discmaster.textfiles.com/search?format=commanderKeen6Config) | Commander Keen 6 config | .ck6 | 
 [other/appleScriptCompiled](https://discmaster.textfiles.com/search?format=appleScriptCompiled) | Compiled AppleScript Script |  | [2 sample files](https://sembiance.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 [other/compiledErlangCode](https://discmaster.textfiles.com/search?format=compiledErlangCode) | Compiled Erlang code |  | 

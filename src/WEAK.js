@@ -123,6 +123,7 @@ export const WEAK_VALUES =
 
 	// ancientID
 	/^<invalid>$/,
+	/^BK: ByteKiller$/,
 	/^Ice: Pack-Ice/,
 	/^Vice: Huffman compressor with RLE$/,
 
@@ -177,7 +178,9 @@ export const WEAK_VALUES =
 	/^Format: Amiga loadable file$/,
 	/^Format: AutoIt$/,
 	/^Format: Borland TLINK Symbol Table/,
+	/^Format: CFBF/,
 	/^Format: COFF Library \(\.LIB\)/,
+	/^Format: Collision Data$/,
 	/^Format: DBase Database \(\.DBF\)/,
 	/^Format: empty file$/,
 	/^Format: Guitar Pro Soundbank\(6\.x\)$/,

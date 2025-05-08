@@ -2120,6 +2120,7 @@ export default
 		comicBookCreatorBackground               : {name : "Comic Book Creator Background", ext : [".bin"], magic : ["Comic Book Creator Background"]},
 		comicBookCreatorShapeTable               : {name : "Comic Book Creator shape Table", ext : [".tbl", ".frm", ".bin"], magic : ["Comic Book Creator shape Table"]},
 		comicCollectorCollectionData             : {name : "Comic Collector Collection data", ext : [".cmc"], magic : ["Comic Collector Collection data"]},
+		comicLifeDocument                        : {name : "Comic Life Document", ext : [".comicdoc"], magic : ["Comic Life Document"]},
 		compiledXKeyMap                          : {name : "Compiled X KeyMap", ext : [".xkm"], magic : ["Compiled X KeyMap", "Compiled XKB Keymap"], weakMagic : true},
 		componentConfigurationFile               : {name : "Component Configuration File", ext : [".ccf"], magic : ["Component Configuration File", /^Philips Pronto IR remote control CCF/], weakMagic : true},
 		concurrentDOSSerialTerminalConfiguration : {name : "Concurrent DOS Serial Terminal Configuration", ext : [".dat"], magic : ["Concurrent DOS Serial Terminal Configuration"]},

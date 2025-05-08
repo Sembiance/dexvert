@@ -8,7 +8,7 @@ export class soundFont2 extends Format
 	forbidExtMatch = [".arl"];
 	magic          = [
 		// generic
-		/^RIFF \(little-endian\) data,? SoundFont\/Bank/, "Standard SoundFont", "EMU SoundFont bank", "SoundFont 2.0", "RIFF audio data (SoundFont 2.0)",
+		/^RIFF \(little-endian\) data,? SoundFont\/Bank/, "Standard SoundFont", "EMU SoundFont bank", "SoundFont 2.0", "RIFF audio data (SoundFont 2.0)", "Generic RIFF file sfbk",
 	
 		// specific
 		"Aureal Aspen sound bank"

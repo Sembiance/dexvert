@@ -23,6 +23,8 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const detectorsToTest = argv.program==="all" ? Array.from(DETECTOR_PROGRAMS) : [argv.program];
+detectorsToTest.removeAll("amigaBitmapFontContentDetector");	// only checks 1 format
+detectorsToTest.removeAll("checkBytes");						// fairly narrow things it can return, all generic
 
 await initPrograms(xlog);
 await initFormats(xlog);

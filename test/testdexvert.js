@@ -341,7 +341,7 @@ const FLEX_SIZE_FORMATS =
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 25,
 		fantavision : 60,
-		grasp       : 60
+		grasp       : 70
 	}
 };
 

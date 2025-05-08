@@ -159,27 +159,26 @@ export class iso extends Format
 			["uniso[nextstep]"].map(v => `${v}[subOutDir:dexvert_nextstep]`),
 
 			// Next, if we don't have files yet, but detect as HFS, we first try extracting if hfs+ is identified. This is important because some CDs like MACPEOPLE-2001-06-01.ISO have both HFS and HFS+ but only HFS+ has good files
-			subState =>
+			() =>
 			{
+				const r = [];
+
 				const firstHFSPlusPartition = (dexState.meta?.parted?.partitions || []).find(o => ["hfsx", "hfs+"].includes(o.filesystem));
-				if(subState.f.files?.output?.length || !firstHFSPlusPartition)
-					return [];
+				if(firstHFSPlusPartition)
+					r.push(`hfsexplorer[partition:${firstHFSPlusPartition.number-1}][subOutDir:dexvert_mac]`);
 
-				return [`hfsexplorer[partition:${firstHFSPlusPartition.number-1}][subOutDir:dexvert_mac]`];
-			},
+				r.push("uniso[hfsplus][subOutDir:dexvert_mac]");	// otherwise things like cp115w.out don't get both mac and pc sides
 
-			// No HFS+ was extracted, so we try to extract as HFS from our regular uniso which is preffered over hfsexplorer
-			["uniso[hfs]"].map(v => `${v}[subOutDir:dexvert_mac]`),
+				// No HFS+ was extracted, so we try to extract as HFS from our regular uniso which is preferred over hfsexplorer
+				r.push("uniso[hfs][subOutDir:dexvert_mac]");
 
-			// Finally if hfs partition is detected, we try to extract using hfsexplorer
-			subState =>
-			{
 				// some mac ISOs have multiple partitions in them but only 1 partition is an HFS partition and to extract correctly I need to manually specify which one to hfsexplorer (MacAddict_068_2002_04.iso)
 				const firstHFSPartition = (dexState.meta?.parted?.partitions || []).find(o => ["hfs"].includes(o.filesystem));
-				if(subState.f.files?.output?.length || !firstHFSPartition)
-					return [];
+				if(firstHFSPartition)
+					r.push(`hfsexplorer[partition:${firstHFSPartition.number-1}][subOutDir:dexvert_mac]`);
+				r.push(`hfsexplorer[subOutDir:dexvert_mac]`);	// finally just try hfsexplorer and hope for the best
 
-				return [`hfsexplorer[partition:${firstHFSPartition.number-1}][subOutDir:dexvert_mac]`];
+				return r;
 			},
 
 			// finally we try all the others

@@ -7,5 +7,6 @@ export class mrSIDImage extends Format
 	ext            = [".sid"];
 	forbidExtMatch = true;
 	magic          = ["LizardTech MrSID photo", /^fmt\/392( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="MSid" && macFileCreator==="8BIM";
 	converters     = ["mrsiddecode"];
 }

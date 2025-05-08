@@ -4,6 +4,7 @@ import {Format} from "../../Format.js";
 const _AVI_MAGIC = [
 	// generic
 	"AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format", "Animation Video (AVI)", "Audio Video Interleave video", "Format: AVI", "video/vnd.avi", "AVI (Audio Video Interleaved) (avi)", /^fmt\/5( |$)/,
+	/^Generic RIFF file AVI $/,
 	
 	// specific
 	/^Google Video$/

@@ -3,7 +3,7 @@
 # inspired by: https://github.com/asiekierka/zzt-toolbox/blob/master/screenshot_grab.py
 
 import math, os, re, sys, pathlib
-sys.path.append(pathlib.Path(__file__).parent.resolve())
+#sys.path.append(pathlib.Path(__file__).parent.resolve())
 import zookeeper
 
 def main():

@@ -31,7 +31,7 @@ export const TEXT_MAGIC_WEAK =
 	"Microsoft HTML Help Project, ISO-8859 text, with CRLF line terminators", /^text\/plain/, "TEXT/PLAIN; CHARSET=us-ascii", /^Unicode text, UTF-8 (\(with BOM\) )?text/,
 
 	// Detect It Easy
-	"Format: plain text[CRLF]",
+	/^Format: Plain text(\[(CRLF|CR|LF)])?$/,
 
 	// siegfried
 	/^x-fmt\/111( |$)/

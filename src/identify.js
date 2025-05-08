@@ -1,7 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
 import {fileUtil, encodeUtil} from "xutil";
-import {RUNTIME} from "./Program.js";
 import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";

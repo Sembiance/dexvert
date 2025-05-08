@@ -25,7 +25,7 @@ export class ffprobe extends Program
 			if(tag.key && tag.value && tag.key.trim().length>0 && tag.value.trim().length>0)
 			{
 				const key = tag.key.trim().replaceAll("_", " ").toCamelCase();
-				if(["size", "probeScore", "filename"].includes(key))
+				if(["filename", "nbStreamGroups", "probeScore", "size"].includes(key))
 					return;
 				
 				const value = tag.value.trim();

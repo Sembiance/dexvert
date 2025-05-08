@@ -6,7 +6,7 @@ export class corelDrawPattern extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/CorelDRAW";
 	ext            = [".pat"];
 	forbidExtMatch = true;
-	magic          = ["CorelDRAW Pattern", "RIFF Datei: unbekannter Typ 'cdr6'", /Corel Draw Pattern/];
+	magic          = ["CorelDRAW Pattern", "RIFF Datei: unbekannter Typ 'cdr6'", "Generic RIFF file cdr6", "Generic RIFF file CDR4", /Corel Draw Pattern/];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="CPAT" && macFileCreator==="Cdrw";
 	notes          = "Only the preview image is supported at the moment.";
 	converters     = ["deark[module:riff]"];

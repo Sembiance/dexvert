@@ -27,11 +27,15 @@ for(const name of ["__pycache__", "garbage", "tmp"])
 xlog.info`Starting classify server...`;
 const classifyDirPath = path.join(import.meta.dirname, "..", "..", "classify");
 const runOptions = {detached : true, cwd : classifyDirPath, env : {VIRTUAL_ENV : path.join(classifyDirPath, "env")}};
+if(xlog.atLeast("debug"))
+	runOptions.liveOutput = true;
 const {p} = await runUtil.run(path.join(classifyDirPath, "env/bin/python3"), ["-X", `pycache_prefix=${path.join(CLASSIFY_PATH, "__pycache__")}`, "classifyServer.py"], runOptions);
 
+xlog.info`Waiting for classify server to be available...`;
 // wait for classify server to fully load
 await xu.waitUntil(async () => (await (await fetch(`http://${CLASSIFY_HOST}:${CLASSIFY_PORT}/status`).catch(() => {}))?.json())?.status==="a-ok");
 await fileUtil.writeTextFile(argv.startedFilePath, "");
+xlog.info`Classify server started and ready!`;
 
 // wait until we are told to stop
 await xu.waitUntil(async () => await fileUtil.exists(argv.stopFilePath));

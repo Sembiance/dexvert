@@ -1,5 +1,4 @@
 import {TEXT_MAGIC} from "../Detection.js";
-import {_NULL_BYTES_MAGIC} from "./other/nullBytes.js";
 
 // All of the formats in this file are 'text' files that should just be handled as text
 // Each entry also has the following properties added:
@@ -199,7 +198,7 @@ export default
 		jCreatorProject                          : {name : "JCreator Project", ext : [".jcp"], magic : ["JCreator Project"]},
 		js                                       : {name : "JavaScript", ext : [".js"], magic : ["JavaScript Source Code", "JavaScript source", "Node.js script executable", "text/javascript"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/JavaScript"},
 		kornShellScript                          : {name : "Korn shell script", magic : [/^Korn shell script/, /^a .*\/ksh script executable/, /^Shell Skript: '.*\/ksh'/, /Executable script, shebang: ".*\/ksh"/]},
-		kdeKXMLGUIRC                             : {name : "KDE KXML GUI RC", ext : [".rc"], magic : ["application/vnd.kde.kxmlguirc"], weakMagic : true},
+		kdeKXMLGUIRC                             : {name : "KDE KXML GUI RC", ext : [".rc"], magic : ["KDE KXML GUI RC", "application/vnd.kde.kxmlguirc"], weakMagic : true},
 		lcovCoverageTracefile                    : {name : "LCOV coverage tracefile", ext : [".info"], magic : [/^LCOV coverage tracefile/]},
 		ldLinkerScript                           : {name : "LD Linker Script", ext : [".lds", ".xu", ".xn", ".xs", ".xbn", ".xr", ".x"], magic : ["LD Linker Script"]},
 		lexDescription                           : {name : "Lex Description", ext : [".l", ".y"], magic : ["lex description"], weakMagic : true},

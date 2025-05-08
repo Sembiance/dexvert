@@ -213,6 +213,7 @@ const DEXMAGIC_CHECKS =
 
 	// text
 	"Gentoo ebuild"               : [{offset : 0, match : "EAPI="}],
+	"KDE KXML GUI RC"             : [{offset : 0, match : "<!DOCTYPE kpartgui"}],
 	"Signum Font List"            : [{offset : 0, match : "FONTLIST\r\n"}],
 	"Signum Help File"            : [{offset : 0, match : `HELP-FILE\r\n${" ".repeat(37)}`}],
 	"Signum Help File Alt"        : [{offset : 0, match : `HELP-FILE${" ".repeat(39)}`}],

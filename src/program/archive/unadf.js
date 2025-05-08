@@ -7,14 +7,14 @@ export class unadf extends Program
 	website          = "http://lclevy.free.fr/adflib/";
 	package          = "app-arch/unadf";
 	bin              = "unadf";
-	args             = r => [r.inFile(), "-d", r.outDir()];
+	args             = r => ["-d", r.outDir(), r.inFile()];
 	filenameEncoding = "iso-8859-1";	// AmigaOS uses this: http://lclevy.free.fr/adflib/adf_info.html#p54
 	
 	// unadf doesn't set dates, but knows about them if I do a listing, so this function will do a listing and set proper dates
 	post = async r =>
 	{
 		const currentYear = new Date().getFullYear();
-		const {stdout} = await runUtil.run("unadf", ["-lr", r.inFile()], {cwd : r.cwd});
+		const {stdout} = await runUtil.run("unadf", ["-lrm", r.inFile()], {cwd : r.cwd});
 		r.meta.fileMeta = {};
 		const fileDates = Object.fromEntries(stdout.split("\n").map(line =>
 		{

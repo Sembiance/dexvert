@@ -1,0 +1,1 @@
+after setting up the virtual env, should only need: python3 -m pip install pillow flask numpy onnxruntime

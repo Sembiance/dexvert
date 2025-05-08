@@ -104,10 +104,10 @@ export class file extends Program
 		r.xlog.trace`Z fileText:\n${fileText}`;
 
 		if(fileText.includes("\n"))
-			r.xlog.error`Unhandled newline in file output, add support for this edge case in detect/file.js: ${JSON.stringify(fileText)}`;
+			r.xlog.warn`Unhandled newline in file output, add support for this edge case in detect/file.js: ${JSON.stringify(fileText)}`;
 
 		for(const value of fileText.split("§").unique())
-			r.meta.detections.push(Detection.create({value : value.trim(), from : "file", confidence : confidence--, file : r.f.input}));
+			r.meta.detections.push(Detection.create({value : value.trim().toVisible(), from : "file", confidence : confidence--, file : r.f.input}));
 	};
 	renameOut = false;
 }

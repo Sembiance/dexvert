@@ -1,4 +1,4 @@
-# Supported File Formats (3,129)
+# Supported File Formats (3,130)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -589,7 +589,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (244)
+## Document (245)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/fourDWriteDocument/)
@@ -616,6 +616,7 @@ document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/
 document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/atariWorksSpreadsheet/)
 document | Bank Book for Windows Account Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/bankBookForWindows/)
 document | Borland Turbo Vision Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/borlandTurboVisionHelp/)
+document | Breeze Text-to-Executable | .exe | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/breezeText2EXE/)
 document | [Broad Band eBook](http://fileformats.archiveteam.org/wiki/LRF) | .lrf .lrx .lrs | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/broadBandEBook/)
 document | Cambridge Z88 Basic | .bas | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://sembiance.com/fileFormatSamples/document/cambridgeZ88Basic/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/cardfile/)

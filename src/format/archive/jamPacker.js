@@ -7,5 +7,5 @@ export class jamPacker extends Format
 	ext        = [".jpk"];
 	magic      = ["JAM Packer compressed data", "JAM Packer compressed disk image", "LZH: JAMPacker"];
 	packed     = true;
-	converters = ["xfdDecrunch"];
+	converters = ["xfdDecrunch", "ancient"];
 }

@@ -174,6 +174,7 @@ const DEXMAGIC_CHECKS =
 	"Promizer 1.0c/1.8"                : [{offset : 0, match : [0x60, 0x38, 0x60, 0x00, 0x00, 0xA0, 0x60, 0x00, 0x01, 0x3E, 0x60, 0x00, 0x01, 0x0C, 0x48, 0xE7]}],
 	"Promizer 2.0"                     : [{offset : 0, match : [0x60, 0x00, 0x00, 0x16, 0x60, 0x00, 0x01, 0x40, 0x60, 0x00, 0x00, 0xF0, 0x3F, 0x00, 0x10, 0x3A]}],
 	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],
+	"S3M Module"                       : [{offset : 60, match : "SCRM"}],
 	"SQ Digital Tracker"               : [{offset : 247, match : [0xDD, 0x36, 0x79, 0x00, 0xCD, 0x54, 0xDE, 0xFD, 0x36]}],
 	"Theta Music Composer 1.x"         : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 35, match : [0x20]}],
 	"Theta Music Composer 2.x"         : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 6, match : [0x0E, 0x15, 0x8D, 0xD4, 0xCD, 0xC3, 0xA0, 0xD3, 0xCF, 0xCE, 0xC7, 0xA0, 0xC6, 0xC9, 0xCC, 0xC5, 0xA0, 0xB2, 0xAE, 0xB0, 0x8D, 0x15, 0x0E]}],
@@ -219,6 +220,7 @@ const DEXMAGIC_CHECKS =
 	"Signum Help File Alt"        : [{offset : 0, match : `HELP-FILE${" ".repeat(39)}`}],
 	"Signum Key-Combination-List" : [{offset : 0, match : `KTOTLIST${" ".repeat(40)}`}],
 	"Signum Shorthands"           : [{offset : 0, match : "TEXTKUERZEL\r\n"}],
+	"Twist Form"                  : [{offset : 0, match : "Listob field:256 label:"}],
 
 	// video
 	"Adeline XCF Video"                        : [{offset : 0, match : "FrameLen"}],

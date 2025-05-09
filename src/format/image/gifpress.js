@@ -6,7 +6,7 @@ export class gifpress extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Gifpress";
 	ext            = [".gps"];
 	forbidExtMatch = true;
-	magic          = ["Gifpress GIF", "Gifpress compressed GIF bitmap"];
+	magic          = ["Gifpress GIF", "Gifpress compressed GIF"];
 	weakMagic      = true;
 	converters     = ["gifpress"];
 }

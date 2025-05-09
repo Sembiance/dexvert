@@ -6,6 +6,6 @@ export class rtcwMDC extends Format
 	website        = "https://mino-git.github.io/rtcw-wet-blender-model-tools/publications/MDCFileFormat.pdf";
 	ext            = [".mdc"];
 	forbidExtMatch = true;
-	magic          = ["rtcwMDC"];
+	magic          = ["rtcwMDC", "MDC Compressed 3D Model (v2)"];
 	converters     = ["assimp", "milkShape3D[format:rtcwMDC]"];
 }

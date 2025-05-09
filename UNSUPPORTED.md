@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,548)
+# Unsupported File Formats (3,544)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -757,13 +757,12 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (198)
+## Image (195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
 [image/abcFlowCharterChart](https://discmaster.textfiles.com/search?format=abcFlowCharterChart) | ABC FlowCharter chart | .af3 | 
 [image/abcSnapGraphixGraph](https://discmaster.textfiles.com/search?format=abcSnapGraphixGraph) | ABC SnapGraphix Graph | .sg | 
-[image/acornDraw](https://discmaster.textfiles.com/search?format=acornDraw) | [Acorn/RISC-OS Draw](http://fileformats.archiveteam.org/wiki/Acorn_Draw) |  | [10 sample files](https://sembiance.com/fileFormatSamples/image/acornDraw/)
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?format=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
 [image/aegisDrawDrawing](https://discmaster.textfiles.com/search?format=aegisDrawDrawing) | Aegis Draw drawing | .draw1 .drawing | 
 [image/afl](https://discmaster.textfiles.com/search?format=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
@@ -792,7 +791,6 @@ Family/Format | Name | Extensions | Notes
 [image/autoSketchIconLibrary](https://discmaster.textfiles.com/search?format=autoSketchIconLibrary) | AutoSketch Icon Library | .icn | 
 [image/bbcDisplayRAM](https://discmaster.textfiles.com/search?format=bbcDisplayRAM) | BBC Display RAM Dump |  | [1 sample file](https://sembiance.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
 [image/beagleWorksImage](https://discmaster.textfiles.com/search?format=beagleWorksImage) | BeagleWorks Image |  | 
-[image/beamSoftwareSIFFImage](https://discmaster.textfiles.com/search?format=beamSoftwareSIFFImage) | Beam Software SIFF sprite/image | .pim | 
 [image/bentleyMicroStationCAD](https://discmaster.textfiles.com/search?format=bentleyMicroStationCAD) | Bentley MicroStation CAD | .dgn | 
 [image/blueScanDrawing](https://discmaster.textfiles.com/search?format=blueScanDrawing) | Blue Scan Drawing | .blsc | 
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?format=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
@@ -808,7 +806,6 @@ Family/Format | Name | Extensions | Notes
 [image/continuousEdge](https://discmaster.textfiles.com/search?format=continuousEdge) | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://sembiance.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 [image/corel10Texture](https://discmaster.textfiles.com/search?format=corel10Texture) | Corel 10 Texture | .tex | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?format=crayolaArtStudio) | Crayola Art Studio | .art | 
-[image/croteamTextureFile](https://discmaster.textfiles.com/search?format=croteamTextureFile) | Croteam texture file | .tex .tbn | 
 [image/dataCADDrawing](https://discmaster.textfiles.com/search?format=dataCADDrawing) | DataCAD Drawing | .dc5 | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?format=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
 [image/desiIIIDrawing](https://discmaster.textfiles.com/search?format=desiIIIDrawing) | DESI-III drawing | .bin .din | 
@@ -961,7 +958,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (169)
+## Music (168)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1067,7 +1064,6 @@ Family/Format | Name | Extensions | Notes
 [music/noteWorthyComposerSong](https://discmaster.textfiles.com/search?format=noteWorthyComposerSong) | NoteWorthy Composer song | .nwc | 
 [music/onyxMusicFile](https://discmaster.textfiles.com/search?format=onyxMusicFile) | Onyx Music File Module | .omf | [4 sample files](https://sembiance.com/fileFormatSamples/music/onyxMusicFile/)
 [music/organya](https://discmaster.textfiles.com/search?format=organya) | Organya Module | .org | [8 sample files](https://sembiance.com/fileFormatSamples/music/organya/)
-[music/palladix](https://discmaster.textfiles.com/search?format=palladix) | Palladix | .plx | [3 sample files](https://sembiance.com/fileFormatSamples/music/palladix/)
 [music/gameboyTracker](https://discmaster.textfiles.com/search?format=gameboyTracker) | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://sembiance.com/fileFormatSamples/music/gameboyTracker/)
 [music/pc98Music](https://discmaster.textfiles.com/search?format=pc98Music) | PC-98 Music | .m .m2 | 
 [music/pistonCollage](https://discmaster.textfiles.com/search?format=pistonCollage) | Piston Collage Module | .ptcop | [6 sample files](https://sembiance.com/fileFormatSamples/music/pistonCollage/)

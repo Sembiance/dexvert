@@ -6,5 +6,5 @@ export class degasEliteIcon extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DEGAS_Elite_icon";
 	ext        = [".icn"];
 	magic      = ["DEGAS Elite Icon Definition"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "wuimg"];
 }

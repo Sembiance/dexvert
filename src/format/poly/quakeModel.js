@@ -5,6 +5,6 @@ export class quakeModel extends Format
 	name       = "Quake Model";
 	website    = "http://tfc.duke.free.fr/coding/mdl-specs-en.html";
 	ext        = [".mdl"];
-	magic      = [/^Quake Model$/];
+	magic      = [/^Quake Model$/, "MDL5 3D GameStudio Model"];
 	converters = ["assimp", "threeDObjectConverter", "noesis[type:poly]"];
 }

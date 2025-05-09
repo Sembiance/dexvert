@@ -118,14 +118,11 @@ export const WEAK_VALUES =
 	// siegfried
 	/^fmt\/(111|135|208|304|328|347|452|473|583|584|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
-	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1874|1885|1902|1904|1968)( |$)/,
+	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1856|1874|1885|1902|1904|1968)( |$)/,
 	/^x-fmt\/(8|10|53|101|123|157|168|195|222|324|342)( |$)/,
 
 	// ancientID
 	/^<invalid>$/,
-	/^BK: ByteKiller$/,
-	/^Ice: Pack-Ice/,
-	/^Vice: Huffman compressor with RLE$/,
 
 	// binwalkID
 	/^Base64 standard index table$/,
@@ -1159,7 +1156,6 @@ export const WEAK_VALUES =
 	/^DiskDupe 5\.12 disk image$/,
 	/^DitPack compressed data$/,
 	/^DIV Games Studio Palette$/,
-	/^DIV Games Studio Map$/,
 	/^Doobs database$/,
 	/^Doodle bitmap$/,
 	/^Drazpaint \(C64\) bitmap$/,
@@ -1463,6 +1459,7 @@ export const WEAK_VALUES =
 	/^Cat Daddy Games game data archive$/,
 	/^ChemDraw model$/,
 	/^Chompsters level data$/,
+	/^Chromium PACK resource archive \(v5, binary\)$/,
 	/^Clonk game data$/,
 	/^Coordinate 3D \(subset of ADTech File Format\) file \(more generic\)$/,
 	/^CP\/M HUF compressed archive$/,
@@ -1895,7 +1892,7 @@ export const WEAK_VALUES =
 	/^Hi-MD Minidisc MPEG audio data container$/,
 	/^HotDocs templates Library$/,
 	/^HS2 zipped bitmap\(s\) archive$/,
-	/^HTTP Archive format$/,
+	/^HTTP Archive( format)?$/,
 	/^Hugin Project$/,
 	/^HydraVision Texture$/,
 	/^ICE ECC data \(v2\.x\)$/,
@@ -1915,6 +1912,7 @@ export const WEAK_VALUES =
 	/^Instalit Library$/,
 	/^Instant Replay Data File$/,
 	/^Intel HEX data, record type: data$/,
+	/^IPLab image sequence \(type m\)$/,
 	/^IRIX Arena data$/,
 	/^ISO BMFF byte stream format$/,
 	/^JB BAHN layout$/,
@@ -2088,6 +2086,7 @@ export const WEAK_VALUES =
 	/^PCjr Speech Adapter CVSD audio$/,
 	/^Peak audio info$/,
 	/^Pebble Draw Command (image|sequence)$/,
+	/^Pegasus PIC2 bitmap$/,
 	/^Pepakura Designer work$/,
 	/^Perfect Keyboard macro set$/,
 	/^PerFROM Pro Form$/,

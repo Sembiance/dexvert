@@ -303,7 +303,7 @@ ZX Spectrum standard screen	image/x-zx-spectrum-standard-screen	scr	Yes	No	No	Ye
 >>> adplay (Linux - AdPlug v2.3.3 - June 16, 2020) - AUDIO/MUSIC (https://github.com/adplug/adplug/releases  http://adplug.github.io/)
 A2M: AdLib Tracker 2 by subz3ro
 ADL: Westwood ADL File Format
-AGD: Herbulot AdLib Gold System (HERAD) by Remi Herbulot (preliminary)
+AGD: Herbulot AdLib Gold System (HERAD) by Remi Herbulot
 AMD: AMUSIC Adlib Tracker by Elyssis
 BAM: Bob's Adlib Music Format
 BMF: Easy AdLib 1.0 by The Brain
@@ -316,17 +316,17 @@ DMO: Twin TrackPlayer by TwinTeam
 DRO: DOSBox Raw OPL Format
 DTM: DeFy Adlib Tracker by DeFy
 GOT: God Of Thunder Music by Roy Davis of Adept Software
-HA2: Herbulot AdLib System v2 (HERAD) by Remi Herbulot (preliminary)
+HA2: Herbulot AdLib System v2 (HERAD) by Remi Herbulot
 HSC: HSC Adlib Composer by Hannes Seifert, HSC-Tracker by Electronic Rats
 HSP: HSC Packed by Number Six / Aegis Corp.
-HSQ: Herbulot AdLib System (HERAD) by Remi Herbulot (preliminary)
+HSQ: Herbulot AdLib System (HERAD) by Remi Herbulot
 IMF: Apogee IMF File Format
 IMS: IMPlay Song Format
 JBM: JBM Adlib Music Format
 KSM: Ken Silverman's Music Format
 LAA: LucasArts AdLib Audio File Format by LucasArts
 LDS: LOUDNESS Sound System
-  M: Origin AdLib Music Format
+M: Origin AdLib Music Format
 MAD: Mlat Adlib Tracker
 MDI: AdLib MIDIPlay File Format by Ad Lib Inc.
 MID: MIDI Audio File Format
@@ -334,7 +334,7 @@ MKJ: MKJamz by M \ K Productions (preliminary)
 MSC: AdLib MSCplay
 MTK: MPU-401 Trakker by SuBZeR0
 MUS: AdLib MIDI Music Format by Ad Lib Inc.
-RAD: Reality ADlib Tracker by devinacker
+RAD: Reality ADlib Tracker by Reality
 RAW: RdosPlay RAW file format by RDOS
 RIX: Softstar RIX OPL Music Format
 ROL: AdLib Visual Composer by AdLib Inc.
@@ -342,12 +342,13 @@ S3M: Screamtracker 3 by Future Crew
 SA2: Surprise! Adlib Tracker 2 by Surprise! Productions
 SAT: Surprise! Adlib Tracker by Surprise! Productions
 SCI: Sierra's AdLib Audio File Format
-SDB: Herbulot AdLib System (HERAD) by Remi Herbulot (preliminary)
+SDB: Herbulot AdLib System (HERAD) by Remi Herbulot
 SNG: SNGPlay by BUGSY of OBSESSION
 SNG: Faust Music Creator by FAUST
 SNG: Adlib Tracker 1.0 by TJ
 SOP: Note Sequencer by Lee Ho Bum (sopepos)
-SQX: Herbulot AdLib System (HERAD) by Remi Herbulot (preliminary)
+SQX: Herbulot AdLib System (HERAD) by Remi Herbulot
+PLX: PALLADIX Sound System
 VGM: Video Game Music 1.51 by Valley Bell (preliminary)
 XAD: eXotic ADlib Format by Riven the Mage
 XMS: XMS-Tracker by MaDoKaN/E.S.G
@@ -355,6 +356,14 @@ XSM: eXtra Simple Music by Davey W Taylor
 
 
 >>> ancient (Linux - June 20, 2020) - ARCHIVE (https://github.com/temisu/ancient)
+ANC Cruncher (ByteKiller Clone)
+Bytekiller
+BK: ByteKiller (all versions)
+BK: ByteKiller Pro
+ID ACE! (ByteKiller Clone)
+ID GR20 (ByteKiller Clone)
+ID MD10 (ByteKiller Clone)
+ID MD11 (ByteKiller Clone)
 bzip2
 both normal and randomized bitstreams
 Compact (Unix)
@@ -387,11 +396,24 @@ ID PARA (Imploder Clone) (verification missing)
 Freeze/Melt
 Supports both old and new formats
 gzip
+JAM Packer
+JEK: JAM Packer v1.x (ByteKiller Clone)
+Supports JAMPacker ICE algorithm (handled by Pack-Ice)
+LSD: JAMPacker V2 v2.x+
+LZW: JAMPacker LZH v3.0 / v4.0
+LZH: JAMPacker LZW v4.0
+JEK Packer
+JEK: Jek Packer v1.x - v2.x (ByteKiller Clone)
 LOB's File Compressor (Also known as a Multipak)
 Supports all original 6 modes and their combinations (BMC, HUF, LZW, LZB, MSP, MSS)
 Does not support mode 8 (as defined by some game files)
 Pack (Unix)
 Supports both old and new formats
+Pack-Ice
+Supports all known versions (3 different formats) and picture mode.
+ID SHE! (Pack-Ice Clone)
+ID TMM! (Pack-Ice Clone)
+ID TSM! (Pack-Ice Clone)
 PowerPacker
 PP 1.1 (verification missing)
 PP 2.0
@@ -401,10 +423,12 @@ ID DEN! (PowerPacker Clone)
 ID DXS9 (PowerPacker Clone)
 ID H.D. (PowerPacker Clone)
 ID RVV! (PowerPacker Clone)
+PowerPlayer Music Compressor (PMC)
+Supports both 1.x and 2.x versions
 Quasijarus Strong Compression
 Rob Northen compressors.
-RNC1: Both old and formats utilizing the same header. heuristics for detecting the correct one
-RNC2: RNC version 2 stream
+RNC1: Supports both new and old format of RNC1
+RNC2: Supports both new and old format of RNC2
 ID ...1 (RNC1 Clone)
 Turbo Packer by Wolfgang Mayerle.
 MMCMP: Music Module Compressor
@@ -419,10 +443,11 @@ S401: StoneCracker v4.01
 S403: StoneCracker v4.02a
 S404: StoneCracker v4.10
 ID 1AM (StoneCracker S300 Clone)
-ID 2AM (StoneCracker S404 Clone)
+ID 2AM (StoneCracker S401 Clone)
 ID AYS! (StoneCracker S404 Clone)
 ID Z&G! (StoneCracker S403 Clone)
 ID ZULU (StoneCracker S403 Clone)
+Vice / Vic2 Huffman compressor with RLE
 XPK-encapsulated files
 ACCA: Andre's Code Compression Algorithm
 ARTM: Arithmetic encoding compressor
@@ -567,6 +592,8 @@ PM2: LZ-compressor
 * Apple volume label image (module="applevol")
 
 * ART - PFS: 1st Publisher clip art (module="fp_art")
+  - Supports the common format, and the compressed hi-res format.
+  - In some cases, you may have to use "-m fp_art".
 
 * ArtWorx Data Format (ADF) (module="artworx_adf")
 
@@ -655,6 +682,11 @@ PM2: LZ-compressor
 
 * DIB (module="dib")
   - Adds a BMP file header to a raw Windows DIB file.
+
+* DIV Games Studio .fpg (module="div_fpg") (experimental)
+  - Supports "fpg" and "f16" formats.
+
+* DIV Games Studio .map (module="div_map") (experimental)
 
 * DCX (module="dcx")
   Multi-image PCX format.
@@ -873,6 +905,9 @@ PM2: LZ-compressor
 * MegaPaint Patterns (.pat) (module="megapaint_pat") (experimental)
 
 * Microsoft Comic Chat (.avb, .bgb) (module="comicchat")
+  Options
+   -opt comicchat:tobmp - Write icons and backgrounds to BMP format
+   -opt comicchat:applymasks=0 - Write masks to separate files
 
 * MMM (MacroMind Movie) (module="mmm") (experimental)
   - Can extract images, but cannot always get the colors right.
@@ -1477,6 +1512,7 @@ PM2: LZ-compressor
   - Supports "SZDD" variant, mode "A".
   - Supports "KWAJ" variant, all known compression methods.
   - Supports "SZ" variant.
+  - "SZ" format supports multi-part archives (use -mp).
 
 * MOOF (module="moof") (incomplete)
   Macintosh floppy disk image format.
@@ -1684,11 +1720,6 @@ PM2: LZ-compressor
   - "Extract" the entire file. Use with -start and -size to extract part of
     the file.
 
-* Join (module="join")
-  - Concatenate multiple input files.
-  - You must use "-m join" to select this module, and "-mp" to allow multiple
-    input files.
-
 * CP437 (module="cp437")
   Convert DOS Code Page 437 text to UTF-8.
   - Not autodetected. Use "-m cp437".
@@ -1778,6 +1809,11 @@ PM2: LZ-compressor
   Options
    -opt bmff:maxentries=<n> - Maximum number of sample table entries to print
      when using -d. This applies to several boxes, such as 'stsz'.
+
+* Join (module="join")
+  - Concatenate multiple input files.
+  - You must use "-m join" to select this module, and "-mp" to allow multiple
+    input files.
 
 * JPEG scan (module="jpegscan")
   - This module tries to find and extract embedded JPEG and JPEG-LS files from
@@ -1909,6 +1945,7 @@ PM2: LZ-compressor
   Apply an XOR key to the file. By default, invert all the bits.
   Options
    -opt xor:key=<aabbcc...> - The key, expressed as one or more hex bytes.
+
 
 
 
@@ -2314,315 +2351,2094 @@ YM - Amstrad CPC/Spectrum ZX/Atari ST
 
 >>> vgmstream - (Linux - r1050-3312-g70d20924 - Oct 12, 2020) AUDIO (https://github.com/vgmstream/vgmstream)
 >>> NOTE: Could not get it to recognize or play multiple different files
-PCM 16-bit
-PCM 8-bit (signed, unsigned)
-PCM 4-bit (signed, unsigned)
-PCM 32-bit float
-u-Law/a-LAW
-CRI ADX (standard, fixed, exponential, encrypted)
-Nintendo DSP ADPCM a.k.a GC ADPCM
-Nintendo DTK ADPCM
-Nintendo AFC ADPCM
-ITU-T G.721
-CD-ROM XA ADPCM
-Sony PSX ADPCM a.k.a VAG (standard, badflags, configurable, extended)
-Sony HEVAG
-Electronic Arts EA-XA (stereo, mono, Maxis)
-Electronic Arts EA-XAS (v0, v1)
-DVI/IMA ADPCM (stereo/mono + high/low nibble, 3DS, Quantic Dream, SNDS, etc)
-Microsoft MS IMA ADPCM (standard, Xbox, NDS, Radical, Wwise, FSB, WV6, etc)
-Microsoft MS ADPCM (standard, Cricket Audio)
-Westwood VBR ADPCM
-Yamaha ADPCM (AICA, Aska)
-Procyon Studio ADPCM
-Level-5 0x555 ADPCM
-lsf ADPCM
-Konami MTAF ADPCM
-Konami MTA2 ADPCM
-Paradigm MC3 ADPCM
-FMOD FADPCM 4-bit ADPCM
-Konami XMD 4-bit ADPCM
-Platinum 4-bit ADPCM
-Argonaut ASF 4-bit ADPCM
-Tantalus 4-bit ADPCM
-Ocean DSA 4-bit ADPCM
-Circus XPCM ADPCM
-Circus XPCM VQ
-OKI 4-bit ADPCM (16-bit output, 4-shift, PC-FX)
-Ubisoft 4/6-bit ADPCM
-Tiger Game.com ADPCM
-LucasArts iMUSE VBR ADPCM
-CompressWave (CWav) Huffman ADPCM
-SDX2 2:1 Squareroot-Delta-Exact compression DPCM
-CBD2 2:1 Cuberoot-Delta-Exact compression DPCM
-Activision EXAKT SASSC DPCM
-Xilam DERF DPCM
-InterPlay ACM
-VisualArt's NWA
-Electronic Arts MicroTalk a.k.a. UTK or UMT
-Relic Codec
-CRI HCA
-tri-Ace PS2 Codec
-Xiph Vorbis (Ogg, FSB5, Wwise, OGL, Silicon Knights)
-MPEG MP1/2/3 (standard, AHX, XVAG, FSB, AWC, P3D, EA, etc)
-ITU-T G.722.1 annex C a.k.a. Polycom Siren 14 (Namco)
-ITU-T G.719 annex B a.k.a. Polycom Siren 22
-Electronic Arts EASpeex
-Electronic Arts EALayer3
-Electronic Arts EA-XMA
-Sony ATRAC3, ATRAC3plus
-Sony ATRAC9
-Microsoft XMA1/2
-Microsoft WMA v1, WMA v2, WMAPro
-AAC
-Bink
-AC3/SPDIF
-Xiph Opus (Ogg, Switch, EA, UE4, Exient)
-Xiph CELT (FSB)
-Musepack
-FLAC
-Others
+- **adx.c**
+  - CRI ADX header (type 03) [*ADX_03*]
+  - CRI ADX header (type 04) [*ADX_04*]
+  - CRI ADX header (type 05) [*ADX_05*]
+  - *adx*
+    - Subfiles: *adx_subkey*
+  - *adx_subkey*: `.adx .adp + .(external)`
+  - Codecs: CRI_ADX_fixed CRI_ADX CRI_ADX_exp CRI_ADX_enc_8 CRI_ADX_enc_9
+- **brstm.c**
+  - Nintendo RSTM header [*RSTM*]
+  - *brstm*: `.brstm .brstmspm`
+  - Codecs: PCM8 PCM16BE NGC_DSP
+- **bfwav.c**
+  - Nintendo RWAV header [*RWAV*]
+  - Nintendo FWAV header [*FWAV*]
+  - Nintendo CWAV header [*CWAV*]
+  - *brwav*: `.brwav .rwav`
+  - *bfwav*: `.bfwav .fwav`
+  - *bcwav*: `.bcwav .adpcm .bms .sfx .str .zic`
+  - *brwar*: `.rwar`
+    - Subfiles: *brwav*
+  - Codecs: PCM8 PCM16BE PCM16LE NGC_DSP IMA_mono
+- **nds_strm.c**
+  - Nintendo STRM header [*STRM*]
+  - *nds_strm*: `.strm`
+  - Codecs: PCM8 PCM16LE NDS_IMA
+- **afc.c**
+  - Nintendo .AFC header [*AFC*]
+  - *afc*: `.afc .stx`
+  - Codecs: NGC_AFC
+- **ast.c**
+  - Nintendo .AST header [*AST*]
+  - *ast*: `.ast`
+  - Codecs: NGC_AFC PCM16BE
+- **halpst.c**
+  - HAL Laboratory HALPST header [*HALPST*]
+  - *halpst*: `.hps`
+  - Codecs: NGC_DSP
+- **rs03.c**
+  - Retro Studios RS03 header [*DSP_RS03*]
+  - *rs03*: `.dsp`
+  - Codecs: NGC_DSP
+- **ngc_dsp_std.c**
+  - Nintendo DSP header [*DSP_STD*]
+  - Intelligent Systems STM header [*DSP_STM*]
+  - Single DSP header stereo by .mpdsp extension [*DSP_MPDSP*]
+  - Double DSP header stereo by _lr.dsp extension [*DSP_JETTERS*]
+  - Double DSP header stereo by .mss extension [*DSP_MSS*]
+  - Double DSP header stereo by .gcm extension [*DSP_GCM*]
+  - Namco IDSP header [*IDSP_NAMCO*]
+  - Procyon Studio SADB header [*DSP_SADB*]
+  - Traveller's Tales IDSP header [*IDSP_TT*]
+  - Next Level IDSP header [*IDSP_NL*]
+  - .WSD header [*DSP_WII_WSD*]
+  - .DDSP header [*DSP_DDSP*]
+  - Sumo Digital iSWS header [*WII_WAS*]
+  - Infogrames .DSP header [*DSP_STR_IG*]
+  - XIII dsp header [*DSP_XIII*]
+  - Icon Games NDP header [*WII_NDP*]
+  - Cabelas games .DSP header [*DSP_CABELAS*]
+  - Acclaim Austin AAAp DSP header [*NGC_DSP_AAAP*]
+  - Capcom DSPW header [*DSP_DSPW*]
+  - IADP Header [*NGC_DSP_IADP*]
+  - Bethesda .mcadpcm header [*DSP_MCADPCM*]
+  - UE4 Switch Audio header [*DSP_SWITCH_AUDIO*]
+  - .VAG DSP header [*DSP_VAG*]
+  - .ITL DSP header [*DSP_ITL*]
+  - AQUASTYLE ADPY header [*DSP_ADPY*]
+  - AQUASTYLE ADPX header [*DSP_ADPX*]
+  - LucasArts .DS2 header [*DSP_DS2*]
+  - Infernal .ITL DSP header [*DSP_ITL_i*]
+  - Square Enix DSP header [*DSP_SQEX*]
+  - Koei Tecmo WiiVoice header [*DSP_WIIVOICE*]
+  - Exient WIIADPCM header [*DSP_WIIADPCM*]
+  - CRI CWAC header [*DSP_CWAC*]
+  - TOSE .IDSP header [*IDSP_TOSE*]
+  - Kuju London .KWA header [*DSP_KWA*]
+  - Koei Tecmo APEX header [*DSP_APEX*]
+  - Rebellion DSP header [*DSP_ASURA*]
+  - *ngc_dsp_std*: `.dsp .adp .(extensionless) .wav .lwav .dat .ldat .rsm`
+  - *ngc_dsp_std_le*: `.adpcm`
+  - *ngc_mdsp_std*: `.dsp .mdsp`
+  - *ngc_dsp_stm*: `.stm .lstm .dsp`
+  - *ngc_mpdsp*: `.mpdsp .ste`
+  - *ngc_dsp_std_int*: `.dsp .mss .gcm`
+  - *idsp_namco*: `.idsp`
+  - *sadb*: `.sad`
+  - *idsp_tt*: `.gcm .idsp .wua`
+  - *idsp_nl*: `.idsp`
+  - *wii_wsd*: `.wsd`
+  - *dsp_ddsp*: `.adp .ddsp .wav .lwav .(extensionless)`
+  - *wii_was*: `.was .dsp .isws`
+  - *dsp_str_ig*: `.str`
+  - *dsp_xiii*: `.dsp`
+  - *dsp_ndp*: `.nds .ndp`
+  - *dsp_cabelas*: `.dsp`
+  - *ngc_dsp_aaap*: `.dsp`
+  - *dsp_dspw*: `.dspw`
+  - *ngc_dsp_iadp*: `.adp .iadp`
+  - *dsp_mcadpcm*: `.mcadpcm`
+  - *dsp_switch_audio*: `.switch_audio .dsp`
+  - *dsp_sps_n1*: `.vag .nlsd`
+  - *dsp_itl_ch*: `.itl`
+  - *dsp_adpy*: `.adpcmx`
+  - *dsp_adpx*: `.adpcmx`
+  - *dsp_lucasarts_ds2*: `.ds2 .dsp`
+  - *dsp_itl*: `.itl .dsp`
+  - *dsp_sqex*: `.wav .lwav`
+  - *dsp_wiivoice*: `.dsp`
+  - *dsp_wiiadpcm*: `.adpcm`
+  - *dsp_cwac*: `.dsp`
+  - *idsp_tose*: `.idsp`
+  - *dsp_kwa*: `.kwa`
+  - *dsp_apex*: `.dsp`
+  - *dsp_asura*: `.dsp .wav .lwav`
+  - *dsp_asura_ds2*: `.ds2`
+  - *dsp_asura_ttss*: `.adpcm .wav .lwav`
+  - Codecs: NGC_DSP NGC_DSP_subint
+- **csmp.c**
+  - Retro Studios CSMP header [*CSMP*]
+  - *csmp*: `.csmp`
+  - Codecs: NGC_DSP
+- **rfrm.c**
+  - Retro Studios RFRM header [*RFRM*]
+  - *rfrm_mpr*: `.csmp`
+  - *rfrm*: `.csmp`
+  - Codecs: NGC_DSP
+- **cstr.c**
+  - Namco Cstr header [*DSP_CSTR*]
+  - *cstr*: `.dsp`
+  - Codecs: NGC_DSP
+- **gcsw.c**
+  - MileStone GCSW header [*GCSW*]
+  - *gcsw*: `.gcw`
+  - Codecs: PCM16BE
+- **ads.c**
+  - Sony ADS header [*ADS*]
+  - *ads*: `.ads .ss2 .pcm .adx .(extensionless) .800 .sdl`
+  - *ads_container*: `.ads .cads`
+    - Subfiles: *ads*
+  - Codecs: PCM16LE DVI_IMA_mono PSX
+- **npsf.c**
+  - Namco NPSF header [*NPS*]
+  - *npsf*: `.nps .npsf`
+  - Codecs: PSX
+- **xa.c**
+  - Sony XA header [*XA*]
+  - *xa*: `.xa .str .pxa .grn .an2 .no .(extensionless) .xai .ixa`
+  - Codecs: XA8 XA
+- **rxws.c**
+  - Sony RXWS header [*RXWS*]
+  - *rxws*: `.xwb .xws + .xwh .xwb`
+  - Codecs: PSX PCM16LE ATRAC3
+- **exst.c**
+  - Sony EXST header [*EXST*]
+  - *exst*: `.sts .sts_cp3 .x + .int_cp3 .int`
+  - Codecs: PSX
+- **svag_kcet.c**
+  - Konami SVAG header [*SVAG_KCET*]
+  - *svag_kcet*: `.svag`
+  - Codecs: PSX
+- **vag.c**
+  - Sony VAG header (custom) [*VAG_custom*]
+  - Sony VAG header [*VAG*]
+  - Acclaim Austin AAAp header [*AAAP*]
+  - Sony VAG footer [*VAG_footer*]
+  - *vag*: `.vag .swag .str .vig .l .r .vas .xa2 .snd .svg .(extensionless) .wav .lwav .msv`
+  - *vag_aaap*: `.vag`
+  - *vag_footer*: `.(extensionless) .vag`
+  - *vag_evolution_games*: `.vag`
+  - Codecs: PSX HEVAG
+- **ild.c**
+  - Tose ILD header [*ILD*]
+  - *ild*: `.ild`
+  - Codecs: PSX
+- **ngc_str_cauldron.c**
+  - Cauldron .STR header [*DSP_STR*]
+  - *ngc_str*: `.str`
+  - Codecs: NGC_DSP
+- **ea_schl_standard.c**
+  - (container)
+  - *ea_schl*: `.asf .lasf .str .chk .eam .exa .sng .aud .sx .xa .strm .stm .hab .xsf .gsf .(extensionless) .r`
+  - *ea_bnk*: `.bnk .sdt .hdt .ldt .abk .ast .cat .(extensionless)`
+  - *ea_schl_video*: `.uv .dct .mpc .lmpc .vp6 .mad .wve`
+- **caf.c**
+  - tri-Crescendo CAF header [*CAF*]
+  - *caf*: `.caf .cfn .(extensionless)`
+  - Codecs: NGC_DSP
+- **vpk.c**
+  - SCE America VPK header [*VPK*]
+  - *vpk*: `.vpk`
+  - Codecs: PSX
+- **ogg_vorbis.c**
+  - Ogg Vorbis header (encrypted) [*OGG_encrypted*]
+  - Ogg Vorbis header [*OGG_VORBIS*]
+  - Ogg Vorbis header (KOVS) [*OGG_KOVS*]
+  - *ogg_vorbis*
+    - Subfiles: *ogg_vorbis*
+  - *ogg_vorbis_config*: `.ogg .logg .adx .rof .acm .sod .msa .bin .lbin .oga .ogs .ogv .kvs .kovs .rpgmvo .ogg_ .bgm .gwm .mus .fish .isd .sngw .lse .eno .um3 .u0 + .(external)`
+    - Subfiles: *ogg_vorbis_config ogg_vorbis_cfg_ovmi ogg_vorbis_tests ogg_vorbis_common ogg_vorbis_tink ogg_vorbis*
+  - Codecs: OGG OGG_VORBIS
+- **sfl.c**
+  - Ogg Vorbis header (SFPL looping) [*OGG_SFL*]
+  - *sfl_ogg*: `.sfl .ogg + .(external) .ogg`
+    - Subfiles: *ogg_vorbis*
+- **ps2_bmdx.c**
+  - Beatmania .bmdx header [*PS2_BMDX*]
+  - *ps2_bmdx*: `.bmdx`
+  - Codecs: PSX
+- **wsi.c**
+  - Alone in the Dark .WSI header [*DSP_WSI*]
+  - *wsi*: `.wsi`
+  - Codecs: NGC_DSP
+- **aifc.c**
+  - Apple AIFF-C header [*AIFC*]
+  - Apple AIFF header [*AIFF*]
+  - *aifc*: `.aif .laif .wav .lwav .aiff .laiff .(extensionless) .aifc .laifc .afc .cbd2 .bgm .fda .n64 .xa .caf .acm .adp .ai .pcm .vp6 .mpc .lmpc`
+  - Codecs: SDX2 CBD2 DVI_IMA_mono APPLE_IMA4 RELIC VADPCM IMUSE PCM8 PCM16BE XA
+- **str_snds.c**
+  - 3DO SNDS header [*STR_SNDS*]
+  - *str_snds*: `.str .stream .3do`
+  - Codecs: SDX2_int SDX2 CBD2_int CBD2
+- **ws_aud.c**
+  - Westwood Studios .AUD header [*WS_AUD*]
+  - *ws_aud*: `.aud`
+  - Codecs: WS IMA_mono
+- **ahx.c**
+  - CRI AHX header [*AHX*]
+  - *ahx*: `.ahx`
+  - Codecs: MPEG
+- **iivb.c**
+  - Vingt-et-un IIVB header [*IIVB*]
+  - *iivb*: `.ivb`
+  - Codecs: PSX
+- **svs.c**
+  - Square SVS header [*SVS*]
+  - *svs*: `.bgm .svs`
+  - Codecs: PSX
+- **riff.c**
+  - RIFF WAVE header [*RIFF_WAVE*]
+  - RIFF WAVE header (smpl looping) [*RIFF_WAVE_smpl*]
+  - RIFF WAVE header (cue looping) [*RIFF_WAVE_cue*]
+  - RIFF WAVE header (labl looping) [*RIFF_WAVE_labl*]
+  - RIFF WAVE header (ctrl looping) [*RIFF_WAVE_ctrl*]
+  - RIFF WAVE header (wsmp looping) [*RIFF_WAVE_wsmp*]
+  - RIFX WAVE header [*RIFX_WAVE*]
+  - RIFX WAVE header (smpl looping) [*RIFX_WAVE_smpl*]
+  - *riff*: `.wav .lwav .xwav .mwv .da .dax .cd .med .snd .adx .adp .xss .xsew .adpcm .adw .wd .(extensionless) .sbv .wvx .str .at3 .rws .aud .at9 .ckd .saf .ima .nsa .pcm .xvag .ogg .logg .p1d .xms .mus .dat .ldat .wma .lwma .caf .wax .voi .se .v .xst`
+  - *rifx*: `.wav .lwav`
+  - Codecs: AICA_int PCM32LE PCM24LE PCM16BE PCM16LE PCM8_U MSADPCM IMA PCMFLOAT MS_IMA AICA MPEG_custom XBOX_IMA MS_IMA_3BIT DVI_IMA LEVEL5 OGG_VORBIS ATRAC9 ATRAC3 MPEG MSADPCM_mono
+- **nwa.c**
+  - VisualArt's NWA header (NWAINFO.INI looping) [*NWA_NWAINFOINI*]
+  - VisualArt's NWA header (Gameexe.ini looping) [*NWA_GAMEEXEINI*]
+  - VisualArt's NWA header [*NWA*]
+  - *nwa*: `.nwa + .(external)`
+  - Codecs: PCM8 PCM16LE NWA
+- **ea_1snh.c**
+  - Electronic Arts EACS header [*EA_EACS*]
+  - Electronic Arts 1SNh header [*EA_1SNH*]
+  - *ea_1snh*: `.asf .lasf .sng .as4 .cnk .uv .tgq .tgv .(extensionless)`
+  - *ea_eacs*: `.eas .bnk .as4`
+  - Codecs: PCM8_int PCM16_int ULAW_int DVI_IMA PSX
+- **xss.c**
+  - Dino Crisis 3 XSS File [*XSS*]
+  - *xss*: `.xss`
+  - Codecs: PCM16LE
+- **sl3.c**
+  - Atari Melbourne House SL3 header [*SL3*]
+  - *sl3*: `.ms`
+  - Codecs: PSX
+- **hgc1.c**
+  - Cauldron HGC1 header [*HGC1*]
+  - *hgc1*: `.str`
+  - Codecs: PSX
+- **aus.c**
+  - Atomic Planet AUS header [*AUS*]
+  - *aus*: `.aus`
+  - Codecs: XBOX_IMA PSX
+- **rws_80d.c**
+  - RenderWare RWS header [*RWS*]
+  - *rws*: `.rws`
+  - Codecs: PCM16_int PCM16BE PCM16LE PSX NGC_DSP XBOX_IMA
+- **fsb.c**
+  - FMOD FSB1 header [*FSB1*]
+  - FMOD FSB2 header [*FSB2*]
+  - FMOD FSB3 header [*FSB3*]
+  - FMOD FSB4 header [*FSB4*]
+  - *fsb*: `.fsb .bnk .sfx .ps3 .xen`
+  - Codecs: MPEG FSB_IMA XBOX_IMA PSX XMA1 XMA2 NGC_DSP NGC_DSP_subint CELT_FSB PCM8_U PCM8 PCM16BE PCM16LE
+- **fsb5.c**
+  - FMOD FSB5 header [*FSB5*]
+  - *fsb5*: `.fsb .snd .ps3`
+  - Codecs: PCM8_U PCM16BE PCM16LE PCMFLOAT NGC_DSP NGC_DSP_subint FSB_IMA XBOX_IMA PSX HEVAG XMA2 MPEG CELT_FSB ATRAC9 XWMA VORBIS_custom FADPCM Opus
+- **rwax.c**
+  - Konami RWAX header [*RWAX*]
+  - *rwax*: `.rwx`
+  - Codecs: PCM16LE
+- **xwb.c**
+  - Microsoft XWB header [*XWB*]
+  - *xwb*: `.xwb .xna .hwb .bd .(extensionless) + .wbh`
+    - Subfiles: *riff*
+  - Codecs: PCM8_U PCM16LE PCM16BE XBOX_IMA MSADPCM XMA1 XMA2 FFmpeg(various) XWMA ATRAC3 OGG_VORBIS NGC_DSP
+- **musc.c**
+  - Krome MUSC header [*MUSC*]
+  - *musc*: `.mus .musc`
+  - Codecs: PSX
+- **musx.c**
+  - Eurocom MUSX header [*MUSX*]
+  - *musx*: `.sfx .musx`
+  - Codecs: PSX DAT4_IMA DVI_IMA_mono XBOX_IMA NGC_DSP PCM16BE PCM16LE
+- **filp.c**
+  - cavia FILp header [*FILP*]
+  - *filp*: `.fil`
+  - Codecs: PSX
+- **ikm.c**
+  - MiCROViSiON IKM header [*IKM*]
+  - *ikm_pc*
+    - Subfiles: *ogg_vorbis_config*
+  - *ikm_psp*
+    - Subfiles: *riff*
+  - *ikm*: `.ikm`
+  - Codecs: PSX OGG
+- **ster.c**
+  - ALCHEMY STER header [*STER*]
+  - *ster*: `.ster .sfs`
+  - Codecs: PSX
+- **bg00.c**
+  - Cave BG00 header [*BG00*]
+  - *bg00*: `.bg00`
+  - Codecs: PSX
+- **sat_dvi.c**
+  - Konami DVI. header [*SAT_DVI*]
+  - *sat_dvi*: `.pcm .dvi`
+  - Codecs: DVI_IMA_mono
+- **dc_kcey.c**
+  - Konami KCEY header [*DC_KCEY*]
+  - *dc_kcey*: `.pcm .kcey`
+  - Codecs: DVI_IMA
+- **rstm_rockstar.c**
+  - Rockstar Games RSTM header [*RSTM_ROCKSTAR*]
+  - *rstm_rockstar*: `.rsm .rstm`
+  - Codecs: PSX
+- **acm.c**
+  - InterPlay ACM header [*ACM*]
+  - *acm*: `.acm .tun .wavc`
+  - Codecs: ACM
+- **mus_acm.c**
+  - InterPlay MUS ACM header [*MUS_ACM*]
+  - *mus_acm*: `.mus`
+    - Subfiles: *acm ogg_vorbis*
+- **vig_kces.c**
+  - Konami .VIG header [*VIG_KCES*]
+  - *vig_kces*: `.vig`
+  - Codecs: PSX
+- **hxd.c**
+  - Tecmo HXD header [*HXD*]
+  - *hxd*: `.hxd + .bd .str .at3`
+  - Codecs: PSX
+- **vsv.c**
+  - Square Enix .vsv Header [*VSV*]
+  - *vsv*: `.vsv .psh`
+  - Codecs: PSX
+- **rkv.c**
+  - Legacy of Kain - Blood Omen 2 RKV PS2 header [*PS2_RKV*]
+  - Legacy of Kain - Blood Omen 2 RKV GC header [*NGC_RKV*]
+  - *ps2_rkv*: `.rkv`
+  - *ngc_rkv*: `.(extensionless) .rkv .bo2`
+  - Codecs: PSX NGC_DSP
+- **lp_ap_lep.c**
+  - Konami LP/AP/LEP header [*LP_AP_LEP*]
+  - *lp_ap_lep*: `.bin .lbin .lp .lep .ap`
+  - Codecs: PCM16LE PSX
+- **sdt.c**
+  - High Voltage .sdt header [*SDT*]
+  - *sdt*: `.sdt`
+  - Codecs: NGC_DSP
+- **aix.c**
+  - CRI AIX header [*AIX*]
+  - *aix*: `.aix`
+    - Subfiles: *adx*
+- **wvs.c**
+  - Swingin' Ape .WVS header [*WVS*]
+  - *wvs_xbox*: `.wvs`
+  - *wvs_ngc*: `.wvs`
+  - Codecs: XBOX_IMA NGC_DSP
+- **str_sega.c**
+  - Sega Stream Asset Builder header [*STR_SEGA*]
+  - Sega Stream Asset Builder header (custom) [*STR_SEGA_custom*]
+  - *str_sega*: `.str`
+  - *str_sega_custom*: `.str`
+  - Codecs: AICA_int PCM8_U PCM16LE
+- **dec.c**
+  - Falcom .DEC RIFF header [*DEC*]
+  - *dec*: `.dec .de2 + .(external)`
+  - Codecs: MSADPCM
+- **xmu.c**
+  - Outrage XMU header [*XMU*]
+  - *xmu*: `.xmu`
+  - Codecs: XBOX_IMA
+- **sat_sap.c**
+  - VING .SAP header [*SAP*]
+  - *sat_sap*: `.sap`
+  - Codecs: PCM16BE
+- **dc_idvi.c**
+  - Capcom IDVI header [*DC_IDVI*]
+  - *dc_idvi*: `.dvi .idvi`
+  - Codecs: DVI_IMA_mono
+- **kraw.c**
+  - Geometry Wars: Galaxies KRAW header [*KRAW*]
+  - *kraw*: `.kraw`
+  - Codecs: PCM16BE
+- **omu.c**
+  - Outrage OMU header [*OMU*]
+  - *omu*: `.omu`
+  - Codecs: PCM16LE
+- **xa2_acclaim.c**
+  - Acclaim .XA2 header [*XA2_ACCLAIM*]
+  - *xa2_acclaim*: `.xa2`
+  - Codecs: PSX
+- **idsp_ie.c**
+  - Inevitable Entertainment IDSP Header [*IDSP_IE*]
+  - *idsp_ie*: `.idsp`
+  - Codecs: NGC_DSP
+- **ymf.c**
+  - Yuke's .YMF Header [*YMF*]
+  - *ymf*: `.ymf`
+  - Codecs: NGC_DSP
+- **sadl.c**
+  - Procyon Studio SADL header [*SADL*]
+  - *sadl*: `.sad`
+  - Codecs: IMA_mono NDS_PROCYON
+- **fag.c**
+  - Radical .FAG Header [*FAG*]
+  - *fag*: `.fag`
+  - Codecs: PSX
+- **mib_mih.c**
+  - Sony MultiStream MIH+MIB header [*MIB_MIH*]
+  - Sony MultiStream MIC header [*MIC*]
+  - *mib_mih*: `.mib + .mih`
+  - *mic*: `.mic .(extensionless)`
+  - Codecs: PSX
+- **ngc_pdt.c**
+  - Hudson .PDT header [*NGC_PDT*]
+  - *ngc_pdt*: `.pdt`
+  - *ngc_pdt_split*: `.pdt`
+  - Codecs: NGC_DSP
+- **mus_krome.c**
+  - Krome .MUS header [*MUS_KROME*]
+  - *mus_krome*: `.mus`
+  - Codecs: NGC_DSP
+- **spsd.c**
+  - Sega Naomi SPSD header [*SPSD*]
+  - *spsd*: `.str .spsd`
+  - Codecs: PCM16LE PCM8 AICA_int
+- **rsd.c**
+  - Radical RSD header [*RSD*]
+  - *rsd*: `.rsd .rsp`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: PCM16LE PCM16BE PSX XBOX_IMA_mch XBOX_IMA NGC_DSP NGC_DSP_subint RAD_IMA OGG FFmpeg(various) ATRAC3 XMA
+- **bgw.c**
+  - Square Enix BGMStream header [*BGW*]
+  - Square Enix SeWave header [*SPW*]
+  - *bgw*: `.bgw`
+  - *spw*: `.spw`
+  - Codecs: PSX_cfg ATRAC3 PCM16LE
+- **ps2_ass.c**
+  - SystemSoft .ASS header [*PS2_ASS*]
+  - *ps2_ass*: `.ass`
+  - Codecs: PSX
+- **ubi_jade.c**
+  - Ubisoft Jade RIFF header [*UBI_JADE*]
+  - *ubi_jade*: `.waa .wac .wad .wam .wav .lwav`
+    - Subfiles: *msf*
+  - *ubi_jade_container*: `.waa .wac .wad .wam .wav .lwav .xma`
+    - Subfiles: *xma ubi_jade*
+  - Codecs: XBOX_IMA PSX NGC_DSP MSADPCM
+- **seg.c**
+  - Stormfront SEG header [*SEG*]
+  - *seg*: `.seg`
+  - Codecs: PSX XBOX_IMA NGC_DSP IMA MPEG XMA2
+- **riff_ima.c**
+  - Square Enix RIFF IMA eader [*RIFF_IMA*]
+  - *riff_ima*: `.bin .lbin .strm`
+  - Codecs: SQEX_IMA
+- **knon.c**
+  - Paon KNON header [*KNON*]
+  - *knon*: `.str .asr`
+  - Codecs: NGC_DSP PCM16BE
+- **gca.c**
+  - GCA DSP Header [*GCA*]
+  - *gca*: `.gca`
+  - Codecs: NGC_DSP
+- **spt_spd.c**
+  - SPT+SPD DSP Header [*SPT_SPD*]
+  - *spt_spd*: `.spd + .spt`
+  - Codecs: NGC_DSP PCM16BE
+- **ish_isd.c**
+  - ISH+ISD DSP Header [*ISH_ISD*]
+  - *ish_isd*: `.isd + .ish`
+  - Codecs: NGC_DSP
+- **gsnd.c**
+  - Tecmo GSND Header [*GSND*]
+  - *gsnd*: `.gsp + .gsb`
+  - Codecs: NGC_DSP ATRAC3 XMA
+- **ydsp.c**
+  - Yuke's YDSP Header [*YDSP*]
+  - *ydsp*: `.ydsp`
+  - Codecs: NGC_DSP
+- **ngc_ssm.c**
+  - HAL Laboratory .SSM Header [*SSM*]
+  - *ssm*: `.ssm`
+  - Codecs: NGC_DSP
+- **ps2_joe.c**
+  - Asobo Studio .JOE header [*PS2_JOE*]
+  - *ps2_joe*: `.joe`
+  - Codecs: PSX
+- **vgs.c**
+  - Harmonix VGS Header [*VGS*]
+  - *vgs*: `.vgs`
+  - *vgs_old*: `.vgs`
+  - Codecs: PSX_badflags PSX
+- **dcs_wav.c**
+  - In Utero DCS+WAV header [*DCS_WAV*]
+  - *dcs_wav*: `.dcs + .wav`
+  - Codecs: AICA_int
+- **mul.c**
+  - Crystal Dynamics .MUL header [*MUL*]
+  - *mul*: `.mul .emff`
+    - Subfiles: *fsb*
+  - Codecs: PSX NGC_DSP CD_IMA XMA1
+- **thp.c**
+  - Nintendo THP header [*THP*]
+  - *thp*: `.thp .dsp .mov .(extensionless)`
+  - Codecs: NGC_DSP
+- **sts.c**
+  - Alfa System .STS header [*STS*]
+  - *sts*: `.sts`
+  - Codecs: NGC_DSP
+- **p2bt_move_visa.c**
+  - Konami P2BT/MOVE/VISA header [*P2BT_MOVE_VISA*]
+  - *p2bt_move_visa*: `.p2bt .move .vis`
+  - Codecs: PSX
+- **gbts.c**
+  - Konami GBTS header [*GBTS*]
+  - *gbts*: `.gbts`
+  - Codecs: PSX
+- **aax.c**
+  - CRI AAX header [*AAX*]
+  - *aax*: `.aax .(extensionless)`
+    - Subfiles: *hca adx*
+- **csb.c**
+  - CRI ADPCM_WII header [*UTF_DSP*]
+  - *csb*: `.csb`
+    - Subfiles: *aax utf_ahx utf_dsp*
+  - *utf_dsp*: `.aax .(extensionless)`
+  - *utf_ahx*: `.aax .(extensionless)`
+    - Subfiles: *ahx*
+  - Codecs: NGC_DSP
+- **str_sqex.c**
+  - Square Enix STR header [*STR_SQEX*]
+  - *str_sqex*: `.str`
+  - Codecs: NGC_DSP
+- **sat_baka.c**
+  - Konami BAKA header [*SAT_BAKA*]
+  - *sat_baka*: `.(extensionless) .baka`
+  - Codecs: PCM16BE
+- **swav.c**
+  - Nintendo SWAV header [*SWAV*]
+  - *swav*: `.swav .adpcm`
+  - Codecs: PCM8 PCM16LE IMA_mono
+- **vsf.c**
+  - Square Enix VSF header [*VSF*]
+  - *vsf*: `.vsf`
+  - Codecs: PSX
+- **nds_rrds.c**
+  - Ridger Racer DS Header [*NDS_RRDS*]
+  - *nds_rrds*: `.(extensionless) .rrds`
+  - Codecs: IMA_mono
+- **smss.c**
+  - Treasure SMSS header [*SMSS*]
+  - *smss*: `.vsf`
+  - Codecs: PSX
+- **ads_midway.c**
+  - Midway ADS header [*ADS_MIDWAY*]
+  - *ads_midway*: `.ads`
+  - Codecs: NGC_DSP XBOX_IMA_mono
+- **zsd.c**
+  - Konami ZSD header [*ZSD*]
+  - *zsd*: `.zsd`
+  - Codecs: PCM8
+- **vgs_ps.c**
+  - Princess Soft VGS header [*VGS_PS*]
+  - *vgs_ps*: `.vgs`
+  - Codecs: PSX
+- **redspark.c**
+  - RedSpark header [*REDSPARK*]
+  - *redspark*: `.rsd`
+  - Codecs: NGC_DSP
+- **ps2_sps.c**
+  - Ape Escape 2 SPS Header [*PS2_SPS*]
+  - *ps2_sps*: `.sps`
+  - Codecs: PCM16LE
+- **nds_hwas.c**
+  - Vicarious Visions HWAS header [*NDS_HWAS*]
+  - *nds_hwas*: `.hwas`
+  - Codecs: IMA_mono
+- **lps.c**
+  - Konami .LPS Header [*LPS*]
+  - *lps*: `.lps`
+  - Codecs: NGC_DSP
+- **ps2_snd.c**
+  - Might and Magic SSND Header [*PS2_SND*]
+  - *ps2_snd*: `.snd`
+  - Codecs: DVI_IMA_mono PCM16LE
+- **naomi_adpcm.c**
+  - NAOMI/NAOMI2 Arcade games ADPCM header [*NAOMI_ADPCM*]
+  - *naomi_adpcm*: `.adpcm`
+  - Codecs: AICA_int
+- **sd9.c**
+  - Konami SD9 header [*SD9*]
+  - *sd9*: `.sd9`
+  - Codecs: MSADPCM
+- **2dx9.c**
+  - Konami 2DX9 header [*2DX9*]
+  - *2dx9*: `.2dx .2dx9`
+  - Codecs: MSADPCM
+- **dsp_kceje.c**
+  - Konami .DSP Header [*DSP_KCEJE*]
+  - *dsp_kceje*: `.dsp`
+  - Codecs: NGC_DSP
+- **gcub.c**
+  - Sega GCub header [*GCUB*]
+  - *gcub*: `.wav .lwav .gcub`
+  - Codecs: NGC_DSP_subint NGC_DSP
+- **maxis_xa.c**
+  - Maxis XA Header [*MAXIS_XA*]
+  - *maxis_xa*: `.xa`
+  - Codecs: MAXIS_XA
+- **ngc_sck_dsp.c**
+  - The Scorpion King SCK Header [*NGC_SCK_DSP*]
+  - *ngc_sck_dsp*: `.dsp + .sck`
+  - Codecs: NGC_DSP
+- **apple_caff.c**
+  - Apple Core Audio Format File header [*CAFF*]
+  - *apple_caff*: `.caf`
+  - Codecs: PCM8 PCM16BE PCM16LE APPLE_IMA4
+- **pc_mxst.c**
+  - Lego Island MxSt Header [*PC_MXST*]
+  - *pc_mxst*: `.mxst`
+  - Codecs: PCM8_U PCM16LE
+- **sab.c**
+  - Sensaura SAB header [*SAB*]
+  - *sab*: `.sab + .sob`
+  - Codecs: PCM16LE PSX XBOX_IMA
+- **bns.c**
+  - Nintendo BNS header [*BNS*]
+  - *bns*: `.bin .lbin .bns`
+  - Codecs: NGC_DSP
+- **pona.c**
+  - Policenauts BGM header [*PONA_3DO*]
+  - Policenauts BGM header [*PONA_PSX*]
+  - *pona_3do*: `.pona .sxd`
+  - *pona_psx*: `.pona`
+  - Codecs: SDX2 PSX
+- **xwv_valve.c**
+  - Half-Life 2 .WAV header [*XBOX_HLWAV*]
+  - Valve XWV header [*XWV_VALVE*]
+  - *xbox_hlwav*: `.wav .lwav`
+  - *xwv_valve*: `.wav .lwav`
+  - Codecs: PCM16LE XBOX_IMA PCM16BE XMA2
+- **myspd.c**
+  - Punchers Impact .MYSPD header [*MYSPD*]
+  - *myspd*: `.myspd`
+  - Codecs: IMA_mono
+- **his.c**
+  - Her Interactive HIS header [*HIS*]
+  - *his*: `.his`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: OGG PCM8_U PCM16LE OGG_VORBIS
+- **ast_mmv.c**
+  - Marvelous AST header [*AST_MMV*]
+  - *ast_mmv*: `.ast`
+  - Codecs: PSX
+- **ast_mv.c**
+  - MicroVision AST header [*AST_MV*]
+  - *ast_mv*: `.ast`
+  - Codecs: PSX
+- **dmsg_segh.c**
+  - (container)
+  - *dmsg*: `.sgt .dmsg`
+    - Subfiles: *riff*
+- **wb.c**
+  - Triangle Service .WB header [*WB*]
+  - *wb*: `.wb`
+  - Codecs: PCM16LE
+- **bnsf.c**
+  - Namco Bandai BNSF header [*BNSF*]
+  - *bnsf*: `.bnsf + .(external)`
+  - Codecs: G7221C G719
+- **mcg.c**
+  - Namco MCG header [*MCG*]
+  - *mcg*: `.gcm`
+  - Codecs: PSX
+- **smpl.c**
+  - Skonec SMPL header [*SMPL*]
+  - *smpl*: `.v0 .v1`
+  - Codecs: PSX
+- **msa.c**
+  - Success .MSA header [*MSA*]
+  - *msa*: `.msa`
+  - Codecs: PSX
+- **voi.c**
+  - Irem .VOI header [*VOI*]
+  - *voi*: `.voi`
+  - Codecs: PCM16LE
+- **p3d.c**
+  - Radical P3D header [*P3D*]
+  - *p3d*: `.p3d`
+  - Codecs: RAD_IMA_mono MPEG XMA
+- **mpds.c**
+  - Paradigm MPDS header [*MPDS*]
+  - *mpds*: `.dsp .mds`
+  - Codecs: NGC_DSP
+- **ea_swvr.c**
+  - Electronic Arts SWVR header [*EA_SWVR*]
+  - *ea_swvr*: `.stream .str`
+  - Codecs: PSX NGC_DSP PCM8_U_int
+- **lpcm_shade.c**
+  - Shade LPCM header [*LPCM_SHADE*]
+  - *lpcm_shade*: `.w .lpcm`
+  - Codecs: PCM16LE
+- **ps2_vms.c**
+  - VMS Header [*PS2_VMS*]
+  - *ps2_vms*: `.vms`
+  - Codecs: PSX
+- **xau.c**
+  - XPEC XAU header [*XAU*]
+  - *xau*: `.xau`
+  - Codecs: PSX XBOX_IMA
+- **bar.c**
+  - Guitar Hero III Mobile .bar [*GH3_BAR*]
+  - *bar*: `.bar`
+  - Codecs: IMA
+- **jstm.c**
+  - JSTM Header [*PS2_JSTM*]
+  - *jstm*: `.stm .jstm`
+  - Codecs: PCM16LE
+- **xvag.c**
+  - Sony XVAG header [*XVAG*]
+  - *xvag*: `.xvag .(extensionless)`
+  - Codecs: PSX MPEG ATRAC9
+- **cps.c**
+  - tri-Crescendo CPS Header [*CPS*]
+  - *cps*: `.cps`
+  - Codecs: PCM16BE PSX
+- **sqex_scd.c**
+  - Square Enix SCD header [*SQEX_SCD*]
+  - *sqex_scd*: `.scd`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: OGG PCM16BE PCM16LE PSX MPEG MSADPCM NGC_DSP XMA ATRAC3 ATRAC9
+- **nst_monster.c**
+  - Monster .NST header [*NST_MONSTER*]
+  - *nst_monster*: `.nst .dsp`
+  - Codecs: NGC_DSP
+- **baf.c**
+  - Bizarre Creations .baf header [*BAF*]
+  - *baf*: `.baf`
+  - Codecs: PCM16BE PCM16LE PSX_cfg XMA1 XMA2
+- **msf.c**
+  - Sony MSF header [*MSF*]
+  - *msf*: `.msf .msa .at3 .mp3 .str .snd`
+  - Codecs: PCM16BE PCM16LE PSX ATRAC3 FFmpeg(various)
+- **sndp.c**
+  - Premium Agency SNDP header [*SNDP*]
+  - *sndp*: `.past`
+  - Codecs: PCM16LE
+- **sgxd.c**
+  - Sony SGXD header [*SGXD*]
+  - *sgxd*: `.sgb .sgd + .sgh .sgb`
+  - Codecs: PCM16BE OGG_VORBIS PSX ATRAC3 PSX_cfg FFmpeg(various)
+- **ras.c**
+  - Retro RAS_ header [*RAS*]
+  - *ras*: `.ras`
+  - Codecs: NGC_DSP
+- **spm.c**
+  - Square SPM header [*SPM*]
+  - *spm*: `.spm`
+  - Codecs: PCM16LE
+- **vs_str.c**
+  - Square .VS STRx header [*VS_STR*]
+  - *vs_str*: `.vs .str`
+  - Codecs: PSX
+- **lsf.c**
+  - Gizmondo Studios Helsingborg LSF header [*LSF_N1NJ4N*]
+  - *lsf_n1nj4n*: `.lsf`
+  - Codecs: PSX_cfg LSF
+- **xwav.c**
+  - feelplus XWAV header [*XWAV*]
+  - *xwav_new*: `.xwv`
+  - *xwav_old*: `.xwv`
+  - Codecs: PSX XMA2 ATRAC3
+- **mattel_hyperscan.c**
+  - Mattel Hyperscan KVAG [*HYPERSCAN_KVAG*]
+  - *hyperscan_kvag*: `.bvg`
+  - Codecs: DVI_IMA
+- **psnd.c**
+  - Polarbit PSND header [*PSND*]
+  - *psnd*: `.psn`
+  - Codecs: PCM16LE DVI_IMA
+- **adp_wildfire.c**
+  - Wildfire ADP! header [*ADP_WILDFIRE*]
+  - *adp_wildfire*: `.adp`
+  - Codecs: DVI_IMA_mono
+- **adp_qd.c**
+  - Quantic Dream .ADP header [*QD_ADP*]
+  - *adp_qd*: `.adp`
+  - Codecs: QD_IMA
+- **mtaf.c**
+  - Konami MTAF header [*MTAF*]
+  - *mtaf*: `.mtaf`
+  - Codecs: MTAF
+- **alp.c**
+  - High Voltage ALP header [*ALP*]
+  - *alp*: `.tun .pcm`
+  - Codecs: HV_IMA
+- **wpd.c**
+  - Navel WPD header [*WPD*]
+  - *wpd*: `.wpd`
+  - Codecs: PCM16LE
+- **mn_str.c**
+  - Mini Ninjas 'STR' header [*MN_STR*]
+  - *mn_str*: `.mnstr`
+  - Codecs: PCM16LE
+- **mcss.c**
+  - Guerilla MCSS header [*MCSS*]
+  - *mcss*: `.mss`
+  - Codecs: XBOX_IMA PSX
+- **ps2_hsf.c**
+  - Lowrider 'HSF' header [*PS2_HSF*]
+  - *ps2_hsf*: `.hsf`
+  - Codecs: PSX
+- **ivag.c**
+  - Namco IVAG header [*IVAG*]
+  - *ivag*: `.ivag`
+  - Codecs: PSX
+- **2pfs.c**
+  - Konami 2PFS header [*2PFS*]
+  - *2pfs*: `.sap`
+  - Codecs: PSX
+- **xnb.c**
+  - Microsoft XNA Game Studio header [*XNB*]
+  - *xnb*: `.xnb + .(external)`
+    - Subfiles: *ogg_vorbis riff opus_std ffmpeg*
+  - Codecs: PCM8_U PCM16LE MSADPCM MS_IMA XMA2 NGC_DSP
+- **ubi_ckd.c**
+  - Ubisoft CKD RIFF header [*UBI_CKD*]
+  - *ubi_ckd*: `.ckd`
+  - Codecs: NGC_DSP MSADPCM XMA
+- **ps2_vbk.c**
+  - PS2 VBK Header [*PS2_VBK*]
+  - *ps2_vbk*: `.vbk`
+  - Codecs: PSX
+- **xwb_konami.c**
+  - Konami .XWB header [*XWB_KONAMI*]
+  - *xwb_konami*: `.xwb`
+  - Codecs: PCM16LE
+- **bcstm.c**
+  - Nintendo CSTM Header [*CSTM*]
+  - *bcstm*: `.bcstm`
+  - Codecs: PCM8 PCM16LE NGC_DSP CAMELOT_IMA
+- **g1l.c**
+  - Koei Tecmo WiiBGM Header [*KT_WIIBGM*]
+  - *kt_g1l*: `.g1l`
+  - *kt_wiibgm_offset*: `.g1l .dsp`
+  - Codecs: NGC_DSP_subint
+- **bfstm.c**
+  - Nintendo FSTM Header [*FSTM*]
+  - *bfstm*: `.bfstm`
+  - Codecs: PCM8 PCM16BE PCM16LE NGC_DSP
+- **madp.c**
+  - Capcom MADP header [*MADP*]
+  - *madp*: `.mca`
+  - Codecs: NGC_DSP
+- **ktss.c**
+  - Koei Tecmo KTSS header [*KTSS*]
+  - *ktss*: `.kns .kno .ktss`
+  - Codecs: NGC_DSP Opus
+- **hca.c**
+  - CRI HCA header [*HCA*]
+  - *hca*
+    - Subfiles: *hca_subkey*
+  - *hca_subkey*: `.hca`
+  - Codecs: CRI_HCA
+- **svag_snk.c**
+  - SNK SVAG header [*SVAG_SNK*]
+  - *svag_snk*: `.svag`
+  - Codecs: PSX
+- **vds_vdm.c**
+  - Procyon Studio VDS/VDM header [*VDS_VDM*]
+  - *vds_vdm*: `.vds .vdm`
+  - Codecs: PSX
+- **cxs.c**
+  - tri-Crescendo CXS header [*CXS*]
+  - *cxs*: `.cxs`
+  - Codecs: XMA2
+- **adx_monster.c**
+  - Monster Games .ADX header [*ADX_MONSTER*]
+  - *adx_monster*: `.adx`
+  - Codecs: NGC_DSP
+- **akb.c**
+  - Square Enix AKB header [*AKB*]
+  - *akb*: `.akb`
+    - Subfiles: *ogg_vorbis_config*
+  - *akb2*: `.akb`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: MSADPCM OGG FFmpeg(various) PCM16LE
+- **mp4.c**
+  - MP4/AAC header [*MP4*]
+  - *mp4_aac_ffmpeg*: `.mp4 .m4a .m4v .lmp4 .bin .lbin .msd`
+  - Codecs: FFmpeg(various)
+- **bik.c**
+  - RAD Game Tools Bink header [*BINK*]
+  - *bik*: `.bik .bk2 .bik2 .ps3 .xmv .xen .vid .bika`
+  - Codecs: FFmpeg(various)
+- **astb.c**
+  - Capcom ASTB header [*ASTB*]
+  - *astb*: `.ast`
+  - Codecs: XMA
+- **wwise.c**
+  - Audiokinetic Wwise RIFF header [*WWISE_RIFF*]
+  - *wwise*
+    - Subfiles: *wwise_bnk*
+  - *wwise_bnk*: `.wem .wav .lwav .ogg .logg .xma .bnk`
+  - Codecs: PCM16BE PCM16LE WWISE_IMA XBOX_IMA VORBIS_custom NGC_DSP XMA XWMA FFmpeg(various) Opus HEVAG ATRAC9 PTADPCM
+- **ubi_raki.c**
+  - Ubisoft RAKI header [*UBI_RAKI*]
+  - *ubi_raki*: `.rak .ckd`
+  - Codecs: PCM16LE MSADPCM NGC_DSP XMA2 ATRAC9 Opus
+- **pasx.c**
+  - Premium Agency PASX header [*PASX*]
+  - *pasx*: `.past .sgb`
+  - Codecs: XMA
+- **xma.c**
+  - Microsoft XMA RIFF header [*XMA_RIFF*]
+  - *xma*: `.xma .xma2 .wav .lwav .nps .str .kmx`
+  - Codecs: XMA
+- **sndx.c**
+  - Sony SNDX header [*SNDX*]
+  - *sndx*: `.sxd .sxd2 .sxd3 + .sxd1`
+  - Codecs: PSX HEVAG ATRAC9
+- **ogl.c**
+  - Shin'en OGL header [*OGL*]
+  - *ogl*: `.ogl`
+  - Codecs: VORBIS_custom
+- **mpc3.c**
+  - Paradigm MPC3 header [*MPC3*]
+  - *mpc3*: `.mc3`
+  - Codecs: MPC3
+- **ghs.c**
+  - Hexadrive GHS/S_P_STH header [*GHS*]
+  - *ghs*: `.gtd`
+  - *s_p_sth*: `.gtd`
+    - Subfiles: *msf*
+  - *s_pack*: `.ged`
+    - Subfiles: *ghs*
+  - Codecs: PCM16LE MSADPCM HEVAG XMA ATRAC9
+- **aac_triace.c**
+  - tri-Ace AAC header [*AAC_TRIACE*]
+  - *aac_triace*: `.aac .laac`
+  - Codecs: XMA2 ATRAC3 ATRAC9 MSADPCM ASKA OGG_VORBIS
+- **va3.c**
+  - Konami VA3 header [*VA3*]
+  - *va3*: `.va3`
+  - Codecs: ATRAC3
+- **mta2.c**
+  - Konami MTA2 header [*MTA2*]
+  - *mta2*: `.mta2`
+  - *mta2_container*: `.dbm .bgm .mta2`
+    - Subfiles: *mta2*
+  - Codecs: MTA2
+- **xa_xa30.c**
+  - Reflections XA30 header [*XA_XA30*]
+  - *xa_xa30*: `.xa .xa30 .e4x`
+  - Codecs: PCM16LE REF_IMA PSX
+- **xa_04sw.c**
+  - Reflections 04SW header [*XA_04SW*]
+  - *xa_04sw*: `.xa`
+  - Codecs: NGC_DSP
+- **ea_schl_abk.c**
+  - (container)
+  - *ea_abk_schl*: `.abk`
+  - *ea_amb_schl*: `.amb .amx`
+  - *ea_abk_schl_main*: `(base) + .ast`
+- **ea_schl_hdr_dat.c**
+  - (container)
+  - *ea_hdr_dat*: `.hdr + .dat`
+    - Subfiles: *vag*
+  - *ea_hdr_dat_v2*: `.hdr + .dat`
+- **ea_schl_map_mpf_mus.c**
+  - (container)
+  - *ea_map_mus*: `.map .lin .mpf`
+  - *ea_mpf_mus_schl*: `.mpf`
+  - *ea_msb_mus_schl*: `.msb .msx`
+  - *ea_mpf_mus_schl_main*: `(base) + .(external) .mus`
+- **ea_schl_fixed.c**
+  - Electronic Arts SCHl header (fixed) [*EA_SCHL_fixed*]
+  - *ea_schl_fixed*: `.asf .lasf .cnk`
+  - Codecs: PCM8 PCM16BE PCM16LE DVI_IMA PSX
+- **sk_aud.c**
+  - Silicon Knights AUD header [*SK_AUD*]
+  - *sk_aud*: `.aud`
+  - Codecs: VORBIS_custom
+- **stma.c**
+  - Angel Studios/Rockstar San Diego STMA header [*STMA*]
+  - *stma*: `.stm .lstm`
+  - Codecs: NGC_DSP DVI_IMA_mono PCM16BE PCM16LE
+- **ea_eaac_standard.c**
+  - Electronic Arts SNR+SNS header [*EA_SNR_SNS*]
+  - Electronic Arts SPS header [*EA_SPS*]
+  - Electronic Arts SNU header [*EA_SNU*]
+  - *ea_snr_sns*: `.snr`
+  - *ea_sps*: `.sps`
+  - *ea_snu*: `.snu`
+- **awc.c**
+  - Rockstar AWC header [*AWC*]
+  - *awc*: `.awc`
+    - Subfiles: *riff*
+  - Codecs: PCM16BE PCM16LE AWC_IMA XMA2 MPEG_custom MPEG VORBIS_custom ATRAC9 NGC_DSP Opus
+- **opus.c**
+  - Nintendo Switch OPUS header [*OPUS*]
+  - *opus_std*: `.opus .lopus .bgm .opu .ogg .logg + .psi`
+  - *opus_n1*: `.opus .lopus`
+  - *opus_capcom*: `.opus .lopus`
+  - *opus_nop*: `.nop`
+  - *opus_shinen*: `.opus .lopus`
+  - *opus_nus3*: `.opus .lopus`
+  - *opus_sps_n1*: `.sps .nlsd .at9 .opus .lopus`
+  - *opus_opusx*: `.opusx`
+  - *opus_prototype*: `.opus .lopus`
+  - *opus_opusnx*: `.opus .lopus`
+  - *opus_nsopus*: `.nsopus`
+  - *opus_sqex*: `.wav .lwav`
+  - *opus_rsnd*: `.rsnd`
+  - Codecs: Opus
+- **astl.c**
+  - Capcom ASTL header [*ASTL*]
+  - *astl*: `.ast`
+  - Codecs: PCM16LE
+- **naac.c**
+  - Namco NAAC header [*NAAC*]
+  - *naac*: `.naac`
+  - Codecs: AAC
+- **ubi_sb.c**
+  - Ubisoft SBx header [*UBI_SB*]
+  - *ubi_sb*: `.sb0 .sb1 .sb2 .sb3 .sb4 .sb5 .sb6 .sb7`
+  - *ubi_sm*: `.sm0 .sm1 .sm2 .sm3 .sm4 .sm5 .sm6 .sm7 .lm0 .lm1 .lm2 .lm3 .lm4 .lm5 .lm6 .lm7`
+  - *ubi_bnm*: `.bnm`
+  - *ubi_dat*: `.dat`
+  - *ubi_dat_main*: `(base) + .(external) .osb .kat`
+    - Subfiles: *kat riff*
+  - *ubi_bnm_ps2*: `.bnm`
+  - *ubi_blk*: `.blk + .(external)`
+  - *ubi_sb_audio*: `(base) + .(external)`
+  - *ubi_sb_layer*: `(base) + .(external)`
+  - *ubi_sb_sequence*: `(base) + .(external)`
+  - *ubi_sb_header*: `(base) + .(external) .kat`
+  - Codecs: PCM16LE AICA_int UBI_IMA UBI_SCE_IMA UBI_ADPCM PSX XBOX_IMA NGC_DSP ATRAC3 XMA OGG_VORBIS DVI_IMA_mono UBI_MPEG
+- **ubi_apm.c**
+  - Ubisoft APM header [*UBI_APM*]
+  - *ubi_apm*: `.apm`
+  - Codecs: DVI_IMA_mono
+- **vxn.c**
+  - Gameloft VXN header [*VXN*]
+  - *vxn*: `.vxn`
+  - Codecs: PCM16LE MSADPCM MS_IMA FFmpeg(various)
+- **ea_eaac_abk.c**
+  - Electronic Arts SNR+SNS header [*EA_SNR_SNS*]
+  - *ea_abk_eaac*: `.abk`
+  - *ea_amb_eaac*: `.amb .amx`
+  - *ea_abk_eaac_main*: `(base) + .ast`
+- **ea_eaac_hdr_sth_dat.c**
+  - Electronic Arts SNR+SNS header [*EA_SNR_SNS*]
+  - *ea_hdr_sth_dat*: `.hdr + .sth .dat`
+- **ea_eaac_mpf_mus.c**
+  - Electronic Arts SNR+SNS header [*EA_SNR_SNS*]
+  - *ea_mpf_mus_eaac*: `.mpf`
+  - *ea_msb_mus_eaac*: `.msb .msx`
+  - *ea_mpf_mus_eaac_main*: `(base) + .(external) .mus`
+- **ea_eaac_tmx.c**
+  - Electronic Arts SNR+SNS header [*EA_SNR_SNS*]
+  - *ea_tmx*: `.tmx`
+    - Subfiles: *gin*
+- **ea_eaac_sbr.c**
+  - Electronic Arts SPS header [*EA_SPS*]
+  - Electronic Arts SNR+SNS header [*EA_SNR_SNS*]
+  - *ea_sbr*: `.sbr + .sbs`
+- **ea_eaac_sbr_harmony.c**
+  - Electronic Arts SPS header [*EA_SPS*]
+  - *ea_sbr_harmony*: `.sbr + .sbs`
+- **vid1.c**
+  - Factor 5 VID1 header [*VID1*]
+  - *vid1*: `.vid .ogg .logg`
+  - Codecs: PCM16_int XBOX_IMA NGC_DSP VORBIS_custom
+- **flx.c**
+  - Ultima IX .FLX header [*PC_FLX*]
+  - *flx*: `.flx`
+  - Codecs: PCM16LE EA_XA EA_XA_int EA_MT
+- **mogg.c**
+  - Harmonix Music Systems MOGG Vorbis [*MOGG*]
+  - *mogg*: `.mogg`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: OGG
+- **kma9.c**
+  - Koei Tecmo KMA9 header [*KMA9*]
+  - *kma9*: `.km9`
+  - Codecs: ATRAC9
+- **xwc.c**
+  - Starbreeze XWC header [*XWC*]
+  - *xwc*: `.xwc`
+  - Codecs: MPEG XMA2 OGG_VORBIS
+- **atsl.c**
+  - (container)
+  - *atsl*: `.atsl .atsl3 .atsl4 .atslx`
+    - Subfiles: *ogg_vorbis riff xma ktac ktss*
+- **sps_n1.c**
+  - Nippon Ichi .SPS header [*SPS_N1*]
+  - *sps_n1*: `.sps`
+    - Subfiles: *vag riff*
+  - *sps_n1_segmented*: `.at9 .nlsd`
+    - Subfiles: *ogg_vorbis opus_std*
+- **apa3.c**
+  - (container)
+  - *apa3*: `.atx`
+    - Subfiles: *riff*
+- **sqex_sead.c**
+  - Square Enix SAB header [*SQEX_SAB*]
+  - Square Enix MAB header [*SQEX_MAB*]
+  - *sqex_sead*: `.sab .mab .sbin`
+    - Subfiles: *ogg_vorbis_config hca*
+  - Codecs: PCM16LE MSADPCM OGG ATRAC9 XMA2 MPEG
+- **waf.c**
+  - KID WAF header [*WAF*]
+  - *waf*: `.waf`
+  - Codecs: MSADPCM
+- **wave.c**
+  - EngineBlack .WAVE header [*WAVE*]
+  - *wave*: `.wave`
+  - Codecs: PCM8 PCM16BE NGC_DSP IMA_mono
+- **wave_segmented.c**
+  - EngineBlack .WAVE header [*WAVE*]
+  - EngineBlack .WAVE header (segmented) [*WAVE_segmented*]
+  - *wave_segmented*: `.wave`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: IMA_mono NGC_DSP OGG
+- **smv.c**
+  - extreme .SMV header [*SMV*]
+  - *smv*: `.smv`
+  - Codecs: PSX
+- **nxap.c**
+  - Nex NXAP header [*NXAP*]
+  - *nxap*: `.adp`
+  - Codecs: NXAP
+- **ea_wve_au00.c**
+  - Electronic Arts WVE (au00) header [*EA_WVE_AU00*]
+  - *ea_wve_au00*: `.wve .fsv`
+  - Codecs: EA_XA_int PSX_cfg
+- **ea_wve_ad10.c**
+  - Electronic Arts WVE (Ad10) header [*EA_WVE_AD10*]
+  - *ea_wve_ad10*: `.wve .mov`
+  - Codecs: PSX PCM8_U_int
+- **sthd.c**
+  - Dream Factory STHD header [*STHD*]
+  - *sthd*: `.stx`
+  - Codecs: PCM16LE XBOX_IMA_mono
+- **pcm_sre.c**
+  - Capcom .PCM+SRE header [*PCM_SRE*]
+  - *pcm_sre*: `.pcm + .sre`
+  - Codecs: PSX
+- **ubi_lyn.c**
+  - Ubisoft LyN RIFF header [*UBI_LYN*]
+  - *ubi_lyn*: `.sns .wav .lwav .son`
+    - Subfiles: *ogg_vorbis*
+  - *ubi_lyn_container*: `.sns .wav .lwav .son`
+    - Subfiles: *ubi_lyn*
+  - Codecs: PCM16LE NGC_DSP OGG_VORBIS MPEG MP4/AAC XMA
+- **msb_msh.c**
+  - Sony MultiStream MSH+MSB header [*MSB_MSH*]
+  - *msb_msh*: `.msb + .msh`
+  - Codecs: PSX
+- **smc_smh.c**
+  - Genki SMC+SMH header [*SMC_SMH*]
+  - *smc_smh*: `.smc + .smh`
+  - Codecs: PSX
+- **ppst.c**
+  - epics PPST header [*PPST*]
+  - *ppst*: `.sng`
+    - Subfiles: *riff*
+- **ubi_bao.c**
+  - Ubisoft BAO header [*UBI_BAO*]
+  - *ubi_bao_pk*: `.pk .lpk .cpk`
+  - *ubi_bao_atomic*: `.bao .(extensionless)`
+  - *ubi_bao_spk*: `.spk`
+  - *ubi_bao_header*: `(base) + .(external)`
+  - Codecs: UBI_IMA PCM16LE PSX NGC_DSP XMA ATRAC3 OGG_VORBIS
+- **sadf.c**
+  - Procyon Studio SADF header [*SADF*]
+  - *sadf*: `.sad .nop .(extensionless)`
+  - Codecs: NGC_DSP
+- **h4m.c**
+  - Hudson HVQM4 header [*H4M*]
+  - *h4m*: `.h4m .hvqm`
+  - Codecs: H4M_IMA NGC_AFC
+- **asf.c**
+  - Argonaut ASF header [*ASF*]
+  - *asf*: `.asf .lasf`
+  - Codecs: ASF
+- **xmd.c**
+  - Konami XMD header [*XMD*]
+  - *xmd*: `.xmd`
+  - Codecs: XMD
+- **ck.c**
+  - Cricket Audio CKS header [*CKS*]
+  - Cricket Audio CKB header [*CKB*]
+  - *cks*: `.cks`
+  - *ckb*: `.ckb`
+  - Codecs: PCM16LE PCM8 MSADPCM_ck
+- **wv6.c**
+  - Gorilla Systems WV6 header [*WV6*]
+  - *wv6*: `.wv6`
+  - Codecs: WV6_IMA
+- **str_wav.c**
+  - Blitz Games .STR+WAV header [*STR_WAV*]
+  - *str_wav*: `.str .data .wav .wma .(extensionless) + .(external) .wav .sth`
+  - Codecs: PSX NGC_DSP XBOX_IMA BLITZ_IMA FFmpeg(various) XMA2
+- **wavebatch.c**
+  - Firebrand Games WBAT header [*WAVEBATCH*]
+  - *wavebatch*: `.wavebatch`
+  - Codecs: PCM16BE PCM16LE PCM8 NGC_DSP
+- **hd3_bd3.c**
+  - Sony HD3+BD3 header [*HD3_BD3*]
+  - *hd3_bd3*: `.hd3 + .bd3`
+  - Codecs: PSX
+- **bnk_sony.c**
+  - Sony BNK header [*BNK_SONY*]
+  - *bnk_sony*: `.bnk + .(external)`
+    - Subfiles: *xvag riff*
+  - Codecs: ATRAC9 MPEG PCM16BE PCM16LE PSX HEVAG
+- **nus3bank.c**
+  - (container)
+  - *nus3bank*: `.nub2 .nus3bank`
+    - Subfiles: *idsp_namco opus_nus3 riff bnsf ivag xma nus3bank_encrypted*
+  - *nus3bank_encrypted*: `.nus3bank .xma`
+    - Subfiles: *xma*
+- **sscf.c**
+  - Square Enix SSCF header [*SSCF*]
+  - *sscf*: `.scd`
+  - Codecs: PSX
+- **a2m.c**
+  - Artificial Mind & Movement A2M header [*A2M*]
+  - *a2m*: `.int`
+  - Codecs: PSX
+- **ahv.c**
+  - Amuze AHV header [*AHV*]
+  - *ahv*: `.ahv`
+  - Codecs: PSX
+- **msv.c**
+  - Sony MultiStream MSV header [*MSV*]
+  - *msv*: `.msv .msvp`
+  - Codecs: PSX
+- **sdf.c**
+  - Beyond Reality SDF header [*SDF*]
+  - *sdf*: `.sdf`
+  - Codecs: PCM16LE PSX NGC_DSP
+- **svgp.c**
+  - High Voltage SVGp header [*SVGP*]
+  - *svgp*: `.svg`
+  - Codecs: PSX
+- **aif_asobo.c**
+  - Asobo Studio .AIF header [*AIF_ASOBO*]
+  - *aif_asobo*: `.aif .laif`
+  - Codecs: XBOX_IMA
+- **ao.c**
+  - AlphaOgg .AO header [*AO*]
+  - *ao*: `.ao`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: OGG
+- **apc.c**
+  - Cryo APC header [*APC*]
+  - *apc*: `.apc`
+  - Codecs: IMA
+- **wav2.c**
+  - Infogrames North America WAV2 header [*WAV2*]
+  - *wav2*: `.wv2`
+  - Codecs: DVI_IMA_mono
+- **sfxb.c**
+  - Konami SFXB header [*SFXB*]
+  - *sfxb*: `.xau`
+  - Codecs: PCM16LE
+- **derf.c**
+  - Xilam DERF header [*DERF*]
+  - *derf*: `.adp`
+  - Codecs: DERF
+- **utk.c**
+  - Maxis UTK header [*UTK*]
+  - *utk*: `.utk`
+  - Codecs: EA_MT
+- **nxa1.c**
+  - Entergram NXA1 header [*NXA1*]
+  - *nxa1*: `.nxa`
+  - Codecs: Opus
+- **ue4opus.c**
+  - Epic Games UE4OPUS header [*UE4OPUS*]
+  - *ue4opus*: `.opus .lopus .ue4opus`
+  - Codecs: Opus
+- **xwma.c**
+  - Microsoft XWMA RIFF header [*XWMA*]
+  - *xwma*: `.xwma .xwm .xma .wma .lwma`
+  - Codecs: XWMA
+- **xopus.c**
+  - Exient XOPUS header [*XOPUS*]
+  - *xopus*: `.xopus`
+  - Codecs: Opus
+- **vs_square.c**
+  - Square VS header [*VS_SQUARE*]
+  - *vs_square*: `.vs`
+  - Codecs: PSX
+- **msf_banpresto.c**
+  - (container)
+  - *msf_banpresto_wmsf*: `.msf`
+    - Subfiles: *msf*
+  - *msf_banpresto_2msf*: `.at9`
+    - Subfiles: *riff*
+- **nwav.c**
+  - Chunsoft NWAV header [*NWAV*]
+  - *nwav*: `.nwav .(extensionless)`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: OGG
+- **xpcm.c**
+  - Circus XPCM header [*XPCM*]
+  - *xpcm*: `.pcm`
+  - Codecs: PCM16LE CIRCUS_ADPCM CIRCUS_VQ
+- **msf_tamasoft.c**
+  - Tama-Soft MSF header [*MSF_TAMASOFT*]
+  - *msf_tamasoft*: `.msf`
+  - Codecs: PCM16LE
+- **xps.c**
+  - From Software .XPS+DAT header [*XPS_DAT*]
+  - *xps_dat*: `.xps + .dat`
+  - *xps*: `.xps + .dat`
+    - Subfiles: *riff*
+  - Codecs: PCM16LE XBOX_IMA
+- **zsnd.c**
+  - Z-Axis ZSND header [*ZSND*]
+  - *zsnd*: `.zss .zsm .ens .enm .zsd`
+  - Codecs: IMA XBOX_IMA PSX NGC_DSP
+- **ogg_opus.c**
+  - Ogg Opus header [*OGG_OPUS*]
+  - *ogg_opus*: `.opus .lopus .ogg .logg .bgm .oga`
+  - Codecs: FFmpeg(various)
+- **nus3audio.c**
+  - (container)
+  - *nus3audio*: `.nus3audio .patch3audio`
+    - Subfiles: *idsp_namco opus_nus3 riff bnsf*
+- **imc.c**
+  - iNiS .IMC header [*IMC*]
+  - *imc*: `.imc`
+  - *imc_container*: `.imc`
+    - Subfiles: *imc*
+  - Codecs: PSX
+- **smp.c**
+  - Infernal Engine .smp header [*SMP*]
+  - *smp*: `.smp .snb`
+  - Codecs: ATRAC3 NGC_DSP MSADPCM PSX XMA2
+- **gin.c**
+  - Electronic Arts Gnsu header [*GIN*]
+  - *gin*: `.gin`
+  - Codecs: EA_XAS_V0
+- **dsf.c**
+  - Ocean DSF header [*DSF*]
+  - *dsf*: `.dsf`
+  - Codecs: DSA
+- **208.c**
+  - Ocean .208 header [*208*]
+  - *208*: `.208`
+  - Codecs: PCM8_U
+- **ffdl.c**
+  - (container)
+  - *ffdl*: `.ogg .logg .mp4 .lmp4 .bin .lbin .(extensionless)`
+    - Subfiles: *ogg_vorbis mp4_aac_ffmpeg*
+- **mus_vc.c**
+  - Vicious Cycle .MUS header [*MUS_VC*]
+  - *mus_vc*: `.mus`
+  - Codecs: NGC_DSP XBOX_IMA
+- **strm_abylight.c**
+  - Abylight STRM header [*STRM_ABYLIGHT*]
+  - *strm_abylight*: `.strm`
+  - Codecs: AAC
+- **sfh.c**
+  - (container)
+  - *sfh*: `.at3 .sspr`
+    - Subfiles: *riff sspr*
+- **msf_konami.c**
+  - Konami MSF header [*MSF_KONAMI*]
+  - *msf_konami*: `.msf`
+  - Codecs: PSX
+- **xwma_konami.c**
+  - Konami XWMA header [*XWMA_KONAMI*]
+  - *xwma_konami*: `.xwma`
+  - Codecs: XWMA
+- **9tav.c**
+  - Konami 9TAV header [*9TAV*]
+  - *9tav*: `.9tav`
+  - Codecs: ATRAC9
+- **fsb5_fev.c**
+  - (container)
+  - *fsb5_fev_bank*: `.bank`
+    - Subfiles: *fsb5 fsb_encrypted*
+- **bwav.c**
+  - Nintendo BWAV header [*BWAV*]
+  - *bwav*: `.bwav`
+    - Subfiles: *opus_std*
+  - Codecs: PCM16LE NGC_DSP
+- **awb.c**
+  - (container)
+  - *awb*
+    - Subfiles: *awb_memory*
+  - *awb_memory*: `.awb .afs2 + .acb .(external)`
+    - Subfiles: *adx_subkey hca_subkey vag riff bcwav ngc_dsp_std dsp_cwac mp4_aac_ffmpeg opus_std*
+- **acb.c**
+  - (container)
+  - *acb*: `.acb`
+    - Subfiles: *cpk_memory awb_memory*
+- **rad.c**
+  - Traveller's Tales .RAD header [*RAD*]
+  - *rad*: `.rad`
+  - Codecs: PCM16LE
+- **smk.c**
+  - RAD Game Tools SMACKER header [*SMACKER*]
+  - *smk*: `.smk`
+  - Codecs: FFmpeg(various)
+- **idtech.c**
+  - id Software MZRT header [*MZRT*]
+  - id Software BSNF header [*BSNF*]
+  - *mzrt_v0*: `.idwav .idmsf .idxma`
+  - *mzrt_v1*: `.idmsf`
+  - *bsnf*: `.bsnd + .(external)`
+  - Codecs: PCM16LE MSADPCM XMA MPEG XMA2 OGG_VORBIS ATRAC9
+- **xavs.c**
+  - Reflections XAVS header [*XAVS*]
+  - *xavs*: `.xav`
+  - Codecs: PCM16LE
+- **psf.c**
+  - Pivotal PSF header [*PSF*]
+  - *psf_single*: `.psf .swd`
+  - *psf_segmented*: `.psf .swd`
+    - Subfiles: *psf_single*
+  - *psf_pfsm*: `.psf`
+  - *sch*: `.sch + .(external)`
+    - Subfiles: *psf_segmented psf_single*
+  - Codecs: PSX PSX_pivotal NGC_DSP PCM16BE
+- **nub.c**
+  - Namco NUB header [*NUB*]
+  - *nub*: `.nub .nub2 + .(external)`
+    - Subfiles: *nub_xma nub_wav nub_vag nub_at3 nub_dsp nub_idsp nub_is14 nub_caf function*
+  - *nub_wav*: `.wav .lwav`
+    - Subfiles: *riff*
+  - *nub_vag*: `.vag`
+  - *nub_at3*: `.at3`
+    - Subfiles: *riff*
+  - *nub_xma*: `.xma`
+  - *nub_dsp*: `.dsp`
+    - Subfiles: *ngc_dsp_std*
+  - *nub_idsp*: `.idsp`
+    - Subfiles: *idsp_namco*
+  - *nub_is14*: `.is14`
+    - Subfiles: *bnsf*
+  - *nub_caf*: `.caf`
+    - Subfiles: *apple_caff*
+  - Codecs: PCM16BE PSX XMA
+- **ubi_hx.c**
+  - Ubisoft HXx header [*UBI_HX*]
+  - *ubi_hx*: `.hxd .hxc .hx2 .hxg .hxx .hx3 + .bnh .(external)`
+  - Codecs: PCM16BE PCM16LE UBI_ADPCM PSX NGC_DSP XBOX_IMA XMA2 ATRAC3 MPEG
+- **bmp_konami.c**
+  - Konami BMP header [*BMP_KONAMI*]
+  - *bmp_konami*: `.bin .lbin`
+  - Codecs: OKI4S
+- **isb.c**
+  - Creative ISACT header [*ISB*]
+  - *isb*: `.isb`
+    - Subfiles: *msf*
+  - Codecs: PCM8_U PCM16LE XBOX_IMA OGG_VORBIS XMA
+- **xssb.c**
+  - Artoon XSSB header [*XSSB*]
+  - *xssb*: `.bin .lbin`
+  - Codecs: PCM16LE XBOX_IMA
+- **xma_ue3.c**
+  - Unreal Engine XMA header [*XMA_UE3*]
+  - *xma_ue3*: `.xma .x360audio .(extensionless)`
+  - Codecs: XMA
+- **fwse.c**
+  - MT Framework FWSE header [*FWSE*]
+  - *fwse*: `.fwse`
+  - Codecs: MTF_IMA
+- **fda.c**
+  - Relic FDA header [*FDA*]
+  - *fda*: `.fda`
+  - Codecs: RELIC
+- **kwb.c**
+  - Koei Tecmo WaveBank header [*KWB*]
+  - *kwb*: `.wbd .wb2 .sed + .wbh .whd .wh2`
+  - *xws*: `.xws`
+  - *snd_koei*: `.snd`
+  - *koei_wavebank*
+    - Subfiles: *msf dsp_apex*
+  - Codecs: PCM16LE MSADPCM NGC_DSP XMA2 ATRAC9
+- **lrmd.c**
+  - Sony LRMD header [*LRMD*]
+  - *lrmd*: `.lrmh + .lrmb`
+  - Codecs: ATRAC3
+- **bkhd.c**
+  - Audiokinetic Wwise FX header [*WWISE_FX*]
+  - *bkhd*: `.bnk`
+    - Subfiles: *wwise_bnk adm3 bkhd_fx*
+  - *bkhd_fx*: `.wem .bnk`
+  - Codecs: PCMFLOAT
+- **diva.c**
+  - Sega DIVA header [*DIVA*]
+  - *diva*: `.diva`
+  - Codecs: DVI_IMA
+- **imuse.c**
+  - LucasArts iMUSE header [*IMUSE*]
+  - *imuse*: `.imx .imc .wav .lwav`
+  - Codecs: IMUSE
+- **ktsr.c**
+  - Koei Tecmo KTSR header [*KTSR*]
+  - *ktsr*: `.ktsl2asbin .asbin`
+  - *asrs*: `.srsa`
+  - *sdbs*: `.k2sb`
+  - *ktsr_internal*
+    - Subfiles: *riff ogg_vorbis ktss ktac ka1a kma9*
+  - Codecs: MSADPCM_mono KA1A NGC_DSP ATRAC9
+- **mups.c**
+  - (container)
+  - *mups*: `.mups .(extensionless)`
+    - Subfiles: *ogg_vorbis*
+- **kat.c**
+  - Sega KAT header [*KAT*]
+  - *kat*: `.kat`
+  - Codecs: AICA_int PCM8 PCM16LE
+- **pcm_success.c**
+  - Success PCM header [*PCM_SUCCESS*]
+  - *pcm_success*: `.pcm`
+  - Codecs: PSX
+- **ktsc.c**
+  - (container)
+  - *ktsc*: `.ktsl2asbin .asbin`
+    - Subfiles: *ktsr*
+- **adp_konami.c**
+  - Konami ADP header [*ADP_KONAMI*]
+  - *adp_konami*: `.adp`
+  - Codecs: OKI4S
+- **zwv.c**
+  - (container)
+  - *zwv*: `.zwv`
+    - Subfiles: *msf*
+- **dsb.c**
+  - (container)
+  - *dsb*: `.dsb`
+    - Subfiles: *bnsf*
+- **bsf.c**
+  - (container)
+  - *bsf*: `.bsf`
+    - Subfiles: *ngc_dsp_std vag riff*
+- **sdrh.c**
+  - feelplus SDRH header [*SDRH*]
+  - *sdrh_new*: `.xse`
+  - *sdrh_old*: `.xse`
+  - Codecs: PSX MPEG XMA2 ATRAC3 XMA1
+- **wady.c**
+  - Marble WADY header [*WADY*]
+  - *wady*: `.way .(extensionless)`
+  - Codecs: WADY
+- **cpk.c**
+  - (container)
+  - *cpk*
+    - Subfiles: *cpk_memory*
+  - *cpk_memory*: `.awb + .acb`
+    - Subfiles: *hca bcwav adx*
+- **sbk.c**
+  - Team17 SBK header [*SBK*]
+  - *sbk*: `.sbk`
+  - Codecs: PCM8_U PCM16LE MS_IMA
+- **ifs.c**
+  - (container)
+  - *ifs*: `.ifs`
+    - Subfiles: *bmp_konami*
+- **acx.c**
+  - (container)
+  - *acx*: `.acx`
+    - Subfiles: *ogg_vorbis adx*
+- **compresswave.c**
+  - CompressWave .cwav header [*COMPRESSWAVE*]
+  - *compresswave*: `.cwav`
+  - Codecs: COMPRESSWAVE
+- **ktac.c**
+  - Koei Tecmo KTAC header [*KTAC*]
+  - *ktac*: `.ktac`
+  - Codecs: MP4/AAC
+- **tac.c**
+  - tri-Ace Codec header [*TAC*]
+  - *tac*: `.(extensionless) .aac .laac`
+  - Codecs: TAC
+- **ogv_3rdeye.c**
+  - 3rdEye .OGV header [*OGV_3RDEYE*]
+  - *ogv_3rdeye*: `.ogv`
+    - Subfiles: *ogg_vorbis_config*
+  - Codecs: OGG
+- **sspr.c**
+  - (container)
+  - *sspr*: `.sspr`
+    - Subfiles: *riff*
+- **piff_tpcm.c**
+  - Tantalus PIFF TPCM header [*PIFF_TPCM*]
+  - *piff_tpcm*: `.tad`
+  - Codecs: TANTALUS
+- **wxd_wxh.c**
+  - Relic WXD+WXH header [*WXD_WXH*]
+  - *wxd_wxh*: `.wxd + .wxh`
+  - Codecs: RELIC
+- **bnk_relic.c**
+  - Relic BNK header [*BNK_RELIC*]
+  - *bnk_relic*: `.bnk`
+  - Codecs: RELIC
+- **xsh_xsd_xss.c**
+  - Treyarch XSH+XSD/XSS header [*XSH_XSD_XSS*]
+  - *xsh_xsd_xss*: `.xsh + .(external) .xsd`
+    - Subfiles: *riff*
+  - Codecs: XBOX_IMA
+- **psb.c**
+  - M2 PSB header [*PSB*]
+  - *psb*: `.psb`
+    - Subfiles: *riff vag ogg_vorbis*
+  - Codecs: PCM16LE PCM24LE MSADPCM XWMA XMA NGC_DSP Opus
+- **lopu_fb.c**
+  - French-Bread LOPU header [*LOPU_FB*]
+  - *lopu_fb*: `.lopus`
+  - Codecs: Opus
+- **lpcm_fb.c**
+  - French-Bread LPCM header [*LPCM_FB*]
+  - *lpcm_fb*: `.ladpcm`
+  - Codecs: NGC_DSP
+- **wbk.c**
+  - Treyarch WBK header [*WBK*]
+  - Treyarch NSLB header [*WBK_NSLB*]
+  - *wbk*: `.wbk`
+  - *wbk_nslb*: `.wbk`
+    - Subfiles: *fsb*
+  - Codecs: NGC_DSP PSX XBOX_IMA IMA XMA
+- **ubi_ckd_cwav.c**
+  - (container)
+  - *ubi_ckd_cwav*: `.wav .lwav`
+    - Subfiles: *bcwav*
+- **sspf.c**
+  - Konami SSPF header [*SSPF*]
+  - *sspf*: `.ssp`
+  - Codecs: PCM16BE MTA2
+- **s3v.c**
+  - Konami S3V header [*S3V*]
+  - *s3v*: `.s3v`
+  - Codecs: FFmpeg(various)
+- **esf.c**
+  - Eurocom ESF header [*ESF*]
+  - *esf*: `.esf`
+  - Codecs: DVI_IMA PCM8_U PCM16LE
+- **adm.c**
+  - Crankcase ADMx header [*ADM*]
+  - *adm2*: `.wem`
+  - *adm3*: `.wem .bnk`
+  - Codecs: CRANKCASE_IMA APPLE_IMA4
+- **tt_ad.c**
+  - Traveller's Tales AUDIO_DATA header [*TT_AD*]
+  - *tt_ad*: `.audio_data`
+  - Codecs: OGG_VORBIS MS_IMA_mono
+- **bw_mp3_riff.c**
+  - (container)
+  - *bw_mp3_riff*
+    - Subfiles: *riff*
+  - *bw_riff_mp3*
+    - Subfiles: *mpeg*
+- **sndz.c**
+  - Sony SNDZ header [*SNDZ*]
+  - *sndz*: `.szd1 .szd .szd3 + .szd2`
+  - Codecs: PCM16LE PCM24LE PCMFLOAT HEVAG ATRAC9
+- **vab.c**
+  - Sony VAB header [*VAB*]
+  - *vab*: `.vh .vab + .vb`
+  - Codecs: PSX
+- **bigrp.c**
+  - Inti Creates .BIGRP header [*BIGRP*]
+  - *bigrp*: `.bigrp`
+  - Codecs: ICE_RANGE ICE_DCT
+- **sscf_encrypted.c**
+  - (container)
+  - *sscf_encrypted*: `.scd`
+    - Subfiles: *xma*
+- **ego_dic.c**
+  - Codemasters DIC1 header [*DIC1*]
+  - *ego_dic*: `.dic + .(external)`
+  - Codecs: PCM16LE ULAW XBOX_IMA OGG_VORBIS
+- **awd.c**
+  - RenderWare AWD header [*AWD*]
+  - *awd*: `.awd .hwd .lwd`
+  - Codecs: PSX PCM16LE NGC_DSP XBOX_IMA
+- **rws_809.c**
+  - RenderWare RWS header [*RWS*]
+  - *rws_809*: `.rws`
+  - Codecs: PCM16BE PCM16LE PSX NGC_DSP
+- **pwb.c**
+  - Double Fine WB header [*PWB*]
+  - *pwb*: `.pwb`
+  - Codecs: PSX
+- **squeak.c**
+  - Torus SqueakStream header [*SQUEAKSTREAM*]
+  - Torus SqueakSample header [*SQUEAKSAMPLE*]
+  - *squeaksample*: `(base) + .asset .(external) .raw`
+  - Codecs: NGC_DSP PCM16LE PCM16BE PSX PCM8 MS_IMA IMA XMA2 OGG_VORBIS SPEEX
+- **snds.c**
+  - Sony SNDS header [*SNDS*]
+  - Codecs: ATRAC9
+- **nxof.c**
+  - Nihon Falcom FDK header [*NXOF*]
+  - *nxof*: `.nxopus`
+  - Codecs: Opus
+- **gwb_gwd.c**
+  - Ubisoft GWB+GWD header [*GWB_GWD*]
+  - *gwb_gwd*: `.gwb + .gwd`
+  - Codecs: NGC_DSP
+- **chatterbox.c**
+  - Traveller's Tales/Warthog Chatterbox header [*CBX*]
+  - *chatterbox*: `.cbx .box`
+  - Codecs: EA_MT
+- **vas_rockstar.c**
+  - Rockstar .VAS header [*VAS_ROCKSTAR*]
+  - *vas_rockstar*: `.vas`
+  - Codecs: PSX
+- **ea_sbk.c**
+  - Electronic Arts SBK header [*EA_SBK*]
+  - *ea_sbk*: `.sbk`
+- **ngc_dsp_asura.c**
+  - Rebellion DSP header [*DSP_ASURA*]
+  - *dsp_asura_sfx*: `.sfx`
+  - Codecs: NGC_DSP
+- **adp_ongakukan.c**
+  - Ongakukan RIFF WAVE header [*ONGAKUKAN_RIFF_ADP*]
+  - *adp_ongakukan*: `.adp`
+  - Codecs: ONGAKUKAN_ADPCM
+- **sdd.c**
+  - Doki Denki DSBH header [*SDD*]
+  - *sdd*: `.sdd`
+  - Codecs: NGC_DSP PCM16LE PSX
+- **ka1a.c**
+  - Koei Tecmo KA1A header [*KA1A*]
+  - *ka1a*: `.ka1a`
+  - Codecs: KA1A
+- **hd_bd.c**
+  - Sony HD+BD header [*HD_BD*]
+  - *hd_bd*: `.hd .hbd + .bd`
+  - Codecs: PSX
+- **pphd.c**
+  - Sony PPHD header [*PPHD*]
+  - *pphd*: `.phd + .pbd`
+  - Codecs: PSX
+- **xabp.c**
+  - cavia XABp header [*XABP*]
+  - *xabp*: `.hd2 + .bd`
+  - Codecs: PSX
+- **i3ds.c**
+  - Codemasters i3DS header [*I3DS*]
+  - *i3ds*: `.3ds`
+  - Codecs: NGC_DSP
+- **skex.c**
+  - (container)
+  - *skex*: `.skx + .tbl`
+    - Subfiles: *vag riff vpk*
+- **axhd.c**
+  - Angel Studios AXHD header [*AXHD*]
+  - *axhd*: `.xhd + .xbd`
+  - Codecs: PCM16LE XBOX_IMA
+- **shaa.c**
+  - Nintendo SHAA header [*SHAA*]
+  - *shaa*: `.shaa .shsa`
+  - Codecs: PCM16LE NGC_DSP
+- **undefind.c**
+  - (container)
+  - *undefind*: `.paf`
+    - Subfiles: *fsb fsb5*
+- **oor.c**
+  - age .OOR header [*OOR*]
+  - *oor*: `.oor`
+  - Codecs: VORBIS_custom
+- **mio.c**
+  - Entis .MIO header [*MIO*]
+  - *mio*: `.mio`
+  - Codecs: MIO
+- **agsc.c**
+  - Retro Studios AGSC header [*AGSC*]
+  - *agsc*: `.agsc`
+  - Codecs: NGC_DSP
+- **scd_pcm.c**
+  - Lunar: Eternal Blue .PCM header [*SCD_PCM*]
+  - *scd_pcm*: `.pcm`
+  - Codecs: PCM8_SB
+- **vas_kceo.c**
+  - Konami .VAS header [*VAS_KCEO*]
+  - *vas_kceo*: `.vas .dsp`
+  - *vas_kceo_container*: `.vas`
+    - Subfiles: *vas_kceo*
+  - Codecs: PCM16LE XBOX_IMA PSX NGC_DSP
+- **mjb_mjh.c**
+  - Sony MultiStream MJH+MJB header [*MJB_MJH*]
+  - *mjb_mjh*: `.mjb + .mjh .mjb`
+  - Codecs: PSX
+- **mic_koei.c**
+  - KOEI .MIC header [*MIC_KOEI*]
+  - *mic_koei*: `.mic`
+  - Codecs: PSX
+- **seb.c**
+  - Game Arts .SEB header [*SEB*]
+  - *seb*: `.seb .gms .(extensionless)`
+  - Codecs: PSX
+- **tgc.c**
+  - Tiger Game.com .4 header [*TGC*]
+  - *tgc*: `.4`
+  - Codecs: TGC
+- **rage_aud.c**
+  - Rockstar AUD header [*RAGE_AUD*]
+  - *rage_aud*: `.(extensionless) .ivaud`
+  - Codecs: PCM16BE PCM16LE XMA1 MPEG_custom MPEG IMA_mono
+- **asd_naxat.c**
+  - Naxat .ASD header [*ASD_NAXAT*]
+  - *asd_naxat*: `.asd`
+  - Codecs: PCM16LE
+- **pcm_kceje.c**
+  - Konami .PCM header [*PCM_KCEJE*]
+  - *pcm_kceje*: `.pcm`
+  - Codecs: PCM16LE
+- **vs.c**
+  - Melbourne House .VS header [*VS_MH*]
+  - *vs_mh*: `.vs`
+  - Codecs: PSX
+- **adpcm_capcom.c**
+  - Capcom .ADPCM header [*ADPCM_CAPCOM*]
+  - *adpcm_capcom*: `.adpcm .mca`
+  - Codecs: NGC_DSP
+- **ima.c**
+  - Blitz Games .IMA header [*IMA*]
+  - *ima*: `.ima`
+  - Codecs: BLITZ_IMA
+- **vgv.c**
+  - Human Head .VGV header [*VGV*]
+  - *vgv*: `.vgv`
+  - Codecs: PSX
+- **iab.c**
+  - Runtime .IAB header [*IAB*]
+  - *iab*: `.iab`
+  - Codecs: PSX
+- **2dx.c**
+  - (container)
+  - *2dx*: `.2dx`
+    - Subfiles: *2dx9*
+- **ssp.c**
+  - (container)
+  - *ssp*: `.ssp`
+    - Subfiles: *sd9*
+- **sfx0_monster.c**
+  - Monster SFX0 header [*SFX0_MONSTER*]
+  - *sfx0_monster*: `.sfx .sf0`
+  - *sfx0_monster_old*: `.sfx`
+  - Codecs: PSX XBOX_IMA PCM16LE NGC_DSP PCM16BE
+- **song_monster.c**
+  - Monster SONG header [*SONG_MONSTER*]
+  - *song_monster*: `.sn0 .sng`
+  - Codecs: PCM16BE
+- **vai.c**
+  - Asobo Studio .VAI header [*VAI*]
+  - *vai*: `.vai`
+  - Codecs: NGC_DSP
+- **ezw.c**
+  - AmuseWorld EZW header [*EZW*]
+  - *ezw*: `.ezw .ssf`
+  - Codecs: PCM16LE
+- **pos.c**
+  - RIFF WAVE header (.pos looping) [*RIFF_WAVE_POS*]
+  - *pos*: `.pos + .wav`
+    - Subfiles: *riff*
+- **sli.c**
+  - (container)
+  - *sli_loops*: `.sli + .(external)`
+    - Subfiles: *ogg_opus ogg_vorbis riff*
+- **ngc_adpdtk.c**
+  - Nintendo .DTK raw header [*DTK*]
+  - *dtk*: `.dtk .adp .trk .wav .lwav`
+  - Codecs: NGC_DTK
+- **mpeg.c**
+  - MPEG header [*MPEG*]
+  - *mpeg*: `.mp3 .mp2 .lmp3 .lmp2 .mus .imf .aix .wav .lwav .nfx .(extensionless)`
+  - Codecs: MPEG
+- **btsnd.c**
+  - Nintendo Wii U Menu Boot Sound header [*BTSND*]
+  - *btsnd*: `.btsnd`
+  - Codecs: PCM16BE
+- **fsb_encrypted.c**
+  - (container)
+  - *fsb_encrypted*: `.fsb .ps3 .xen`
+    - Subfiles: *fsb fsb5*
+- **encrypted.c**
+  - (container)
+  - *encrypted_ogg_tpf*: `.ogg .logg`
+    - Subfiles: *ogg_vorbis*
+  - *encrypted_mp3_tpf*: `.mp3`
+    - Subfiles: *ffmpeg*
+  - *encrypted_riff*: `.bgm .mse .koe`
+    - Subfiles: *riff*
+  - *encrypted_rpgmvo_riff*: `.rpgmvo`
+    - Subfiles: *riff*
+  - *encrypted_mc161*: `.mus`
+    - Subfiles: *ogg_vorbis*
+- **raw_rsf.c**
+  - Retro Studios .RSF raw header [*RSF*]
+  - *raw_rsf*: `.rsf`
+  - Codecs: G721
+- **raw_int.c**
+  - PS2 .int raw header [*RAW_INT*]
+  - *raw_int*: `.int .wp2`
+  - Codecs: PCM16LE
+- **raw_snds.c**
+  - PC .snds raw header [*RAW_SNDS*]
+  - *raw_snds*: `.snds`
+  - Codecs: SNDS_IMA
+- **raw_wavm.c**
+  - Xbox .wavm raw header [*RAW_WAVM*]
+  - *raw_wavm*: `.wavm`
+  - Codecs: XBOX_IMA
+- **raw_pcm.c**
+  - PC .raw raw header [*RAW_PCM*]
+  - *raw_pcm*: `.raw`
+  - Codecs: PCM16LE
+- **raw_s14_sss.c**
+  - Namco .S14 raw header [*S14*]
+  - Namco .SSS raw header [*SSS*]
+  - *raw_s14_sss*: `.sss .s14`
+  - Codecs: G7221C
+- **exakt_sc.c**
+  - assumed Activision / EXAKT SC by extension [*EXAKT_SC*]
+  - *exakt_sc*: `.sc`
+  - Codecs: SASSC
+- **ps2_adm.c**
+  - Dragon Quest V .ADM raw header [*PS2_ADM*]
+  - *ps2_adm*: `.adm + .(external)`
+  - Codecs: PSX
+- **rwsd.c**
+  - Nintendo RWSD header (single stream) [*RWSD*]
+  - *rwsd*: `.brwsd .rwsd`
+  - Codecs: PCM8 PCM16BE NGC_DSP
+- **ffmpeg.c**
+  - FFmpeg supported format (check log) [*FFMPEG_faulty*]
+  - FFmpeg supported format [*FFMPEG*]
+  - *ffmpeg*: `.(any)`
+  - Codecs: FFmpeg(various)
+- **ea_eaac.c**
+  - Electronic Arts SPS header [*EA_SPS*]
+  - *eaaudiocore_main*: `(base) + .sns`
+  - Codecs: PCM16_int EA_XAS_V1 MPEG NGC_DSP SPEEX ATRAC9 Opus XMA1 XMA2
+- **ea_schl.c**
+  - Electronic Arts BNK header [*EA_BNK*]
+  - Electronic Arts SCHl header [*EA_SCHL*]
+  - Codecs: EA_XA EA_XA_int EA_XA_V2 PCM8_int PCM16_int PCM8 PCM16LE PCM16BE PSX XBOX_IMA_mono NGC_DSP VADPCM MPEG EA_MT ATRAC3
 
-PS2/PSX ADPCM:
-	.ads/.ss2
-	.ass
-	.ast
-	.bg00
-	.bmdx
-	.ccc
-	.cnk
-	.dxh
-	.enth
-	.fag
-	.filp
-	.gcm
-	.gms
-	.hgc1
-	.ikm
-	.ild
-	.ivb
-	.joe
-	.kces
-	.khv
-	.leg
-	.mcg
-	.mib, .mi4 (w/ or w/o .mih)
-	.mic
-	.mihb (merged mih+mib)
-	.msa
-	.msvp
-	.musc
-	.npsf
-	.pnb
-	.psh
-	.rkv
-	.rnd
-	.rstm
-	.rws
-	.rxw
-	.snd
-	.sfs
-	.sl3
-	.smpl (w/ bad flags)
-	.ster
-	.str+.sth
-	.str (MGAV blocked)
-	.sts
-	.svag
-	.svs
-	.tec (w/ bad flags)
-	.tk5 (w/ bad flags)
-	.vas
-	.vag
-	.vgs (w/ bad flags)
-	.vig
-	.vpk
-	.vs
-	.vsf
-	.wp2
-	.xa2
-	.xa30
-	.xwb+xwh
-GC/Wii/3DS DSP ADPCM:
-	.aaap
-	.agsc
-	.asr
-	.bns
-	.bo2
-	.capdsp
-	.cfn
-	.ddsp
-	.dsp
-	standard, optional dual file stereo
-	RS03
-	Cstr
-	_lr.dsp
-MPDS
-	.gca
-	.gcm
-	.gsp+.gsp
-	.hps
-	.idsp
-	.ish+.isd
-	.lps
-	.mca
-	.mpdsp
-	.mss
-	.mus (not quite right)
-	.ndp
-	.pdt
-	.sdt
-	.smp
-	.sns
-	.spt+.spd
-	.ssm
-	.stm/.dsp
-	.str
-	.str+.sth
-	.sts
-	.swd
-	.thp, .dsp
-	.tydsp
-	.vjdsp
-	.waa, .wac, .wad, .wam
-	.was
-	.wsd
-	.wsi
-	.ydsp
-	.ymf
-	.zwdsp
-PCM:
-	.aiff (8 bit, 16 bit)
-	.asd (16 bit)
-	.baka (16 bit)
-	.bh2pcm (16 bit)
-	.dmsg (16 bit)
-	.gcsw (16 bit)
-	.gcw (16 bit)
-	.his (8 bit)
-	.int (16 bit)
-	.pcm (8 bit, 16 bit)
-	.kraw (16 bit)
-	.raw (16 bit)
-	.rwx (16 bit)
-	.sap (16 bit)
-	.snd (16 bit)
-	.sps (16 bit)
-	.str (16 bit)
-	.xss (16 bit)
-	.voi (16 bit)
-	.wb (16 bit)
-	.zsd (8 bit)
-Xbox IMA ADPCM:
-	.matx
-	.wavm
-	.wvs
-	.xmu
-	.xvas
-	.xwav
-Yamaha AICA ADPCM:
-	.adpcm
-	.dcs+.dcsw
-	.str
-	.spsd
-IMA ADPCM:
-	.bar (IMA ADPCM)
-	.pcm/dvi (DVI IMA ADPCM)
-	.hwas (IMA ADPCM)
-	.dvi/idvi (DVI IMA ADPCM)
-	.ivaud (IMA ADPCM)
-	.myspd (IMA ADPCM)
-	.strm (IMA ADPCM)
-multi:
-	.aifc (SDX2 DPCM, DVI IMA ADPCM)
-	.asf/as4 (8/16 bit PCM, DVI IMA ADPCM)
-	.ast (GC AFC ADPCM, 16 bit PCM)
-	.aud (IMA ADPCM, WS DPCM)
-	.aus (PSX ADPCM, Xbox IMA ADPCM)
-	.brstm (GC DSP ADPCM, 8/16 bit PCM)
-	.emff (PSX APDCM, GC DSP ADPCM)
-	.fsb/wii (PSX ADPCM, GC DSP ADPCM, Xbox IMA ADPCM, MPEG audio, FSB Vorbis, MS XMA)
-	.msf (PCM, PSX ADPCM, ATRAC3, MP3)
-	.musx (PSX ADPCM, Xbox IMA ADPCM, DAT4 IMA ADPCM)
-	.nwa (16 bit PCM, NWA DPCM)
-	.p3d (Radical ADPCM, Radical MP3, XMA2)
-	.psw (PSX ADPCM, GC DSP ADPCM)
-	.rwar, .rwav (GC DSP ADPCM, 8/16 bit PCM)
-	.rws (PSX ADPCM, XBOX IMA ADPCM, GC DSP ADPCM, 16 bit PCM)
-	.rwsd (GC DSP ADPCM, 8/16 bit PCM)
-	.rsd (PSX ADPCM, 16 bit PCM, GC DSP ADPCM, Xbox IMA ADPCM, Radical ADPCM)
-	.rrds (NDS IMA ADPCM)
-	.sad (GC DSP ADPCM, NDS IMA ADPCM, Procyon Studios NDS ADPCM)
-	.sgd/sgb+sgh/sgx (PSX ADPCM, ATRAC3plus, AC3)
-	.seg (Xbox IMA ADPCM, PS2 ADPCM)
-	.sng/asf/str/eam/aud (8/16 bit PCM, EA-XA ADPCM, PSX ADPCM, GC DSP ADPCM, XBOX IMA ADPCM, MPEG audio, EALayer3)
-	.strm (NDS IMA ADPCM, 8/16 bit PCM)
-	.sb0..7 (Ubi IMA ADPCM, GC DSP ADPCM, PSX ADPCM, Xbox IMA ADPCM, ATRAC3)
-	.swav (NDS IMA ADPCM, 8/16 bit PCM)
-	.xwb (PCM, Xbox IMA ADPCM, MS ADPCM, XMA, XWMA, ATRAC3)
-	.xwb+xwh (PCM, PSX ADPCM, ATRAC3)
-	.wav/lwav (unsigned 8 bit PCM, 16 bit PCM, GC DSP ADPCM, MS IMA ADPCM, XBOX IMA ADPCM)
-	.wem [lwav/logg/xma] (PCM, Wwise Vorbis, Wwise IMA ADPCM, XMA, XWMA, GC DSP ADPCM, Wwise Opus)
-etc:
-	.2dx9 (MS ADPCM)
-	.aax (CRI ADX ADPCM)
-	.acm (InterPlay ACM)
-	.adp (GC DTK ADPCM)
-	.adx (CRI ADX ADPCM)
-	.afc (GC AFC ADPCM)
-	.ahx (MPEG-2 Layer II)
-	.aix (CRI ADX ADPCM)
-	.at3 (Sony ATRAC3 / ATRAC3plus)
-	.aud (Silicon Knights Vorbis)
-	.baf (PSX configurable ADPCM)
-	.bgw (PSX configurable ADPCM)
-	.bnsf (G.722.1)
-	.caf (Apple IMA4 ADPCM, others)
-	.dec/de2 (MS ADPCM)
-	.hca (CRI High Compression Audio)
-	.pcm/kcey (DVI IMA ADPCM)
-	.lsf (LSF ADPCM)
-	.mc3 (Paradigm MC3 ADPCM)
-	.mp4/lmp4 (AAC)
-	.msf (PCM, PSX ADPCM, ATRAC3, MP3)
-	.mtaf (Konami ADPCM)
-	.mta2 (Konami XAS-like ADPCM)
-	.mwv (Level-5 0x555 ADPCM)
-	.ogg/logg (Ogg Vorbis)
-	.ogl (Shin'en Vorbis)
-	.rsf (CCITT G.721 ADPCM)
-	.sab (Worms 4 soundpacks)
-	.s14/sss (G.722.1)
-	.sc (Activision EXAKT SASSC DPCM)
-	.scd (MS ADPCM, MPEG Audio, 16 bit PCM)
-	.sd9 (MS ADPCM)
-	.smp (MS ADPCM)
-	.spw (PSX configurable ADPCM)
-	.stm/lstm [amts/ps2stm/stma] (16 bit PCM, DVI IMA ADPCM, GC DSP ADPCM)
-	.str (SDX2 DPCM)
-	.stx (GC AFC ADPCM)
-	.ulw (u-Law PCM)
-	.um3 (Ogg Vorbis)
-	.xa (CD-ROM XA audio)
-	.xma (MS XMA/XMA2)
-	.sb0/sb1/sb2/sb3/sb4/sb5/sb6/sb7 (many)
-	.sm0/sm1/sm2/sm3/sm4/sm5/sm6/sm7 (many)
-	.bao/pk (many)
-artificial/generic headers:
-	.genh (lots)
-	.txth (lots)
-loop assists:
-	.mus (playlist for .acm)
-	.pos (loop info for .wav)
-	.sli (loop info for .ogg)
-	.sfl (loop info for .ogg)
-other:
-	.adxkey (decryption key for .adx)
-	.ahxkey (decryption key for .ahx)
-	.hcakey (decryption key for .hca)
-	.fsbkey (decryption key for .fsb)
-	.bnsfkey (decryption key for .bnsf)
-	.txtp (per song segment/layer handler and player configuration)
+## Supported extras
+Reminder of some extra formats and helper files vgmstream supports. They are described
+in detail in USAGE.md.
+
+- artificial headers:
+  - .txth (text header, adds support to lots of extra formats)
+  - .txtp (text play config, per song segment/layer manipulation)
+  - .txtm (text map config, for formats that open companion files manually)
+  - .genh (generic header, deprecated)
+- loop assists:
+  - .mus (playlist for .acm)
+  - .pos (loop info for .wav)
+  - .sli (loop info for .ogg)
+  - .sfl (loop info for .ogg)
+- other:
+  - .adxkey (decryption key for .adx)
+  - .ahxkey (decryption key for .ahx)
+  - .hcakey (decryption key for .hca)
+  - .fsbkey (decryption key for .fsb)
+  - .bnsfkey (decryption key for .bnsf)
+  - .awckey (decryption key for .awc)
+
+
+## Supported codecs
+Quick list of most codecs vgmstream supports, including many obscure ones that
+are used in few games.
+
+- PCM
+  - PCM 16-bit (little endian, big endian)
+  - PCM 8-bit (signed, unsigned, sign bit)
+  - PCM 4-bit (signed, unsigned)
+  - PCM 24-bit (little endian, big endian)
+  - PCM 32-bit float
+  - u-Law/a-LAW
+- ADPCM (BRR/XA-style)
+  - CD-ROM XA ADPCM
+  - Sony PSX ADPCM a.k.a VAG (standard, badflags, configurable, extended)
+  - CRI ADX (standard, fixed, exponential, encrypted)
+  - Silicon Graphics VADPCM
+  - Nintendo DSP ADPCM a.k.a GC ADPCM
+  - Nintendo DTK ADPCM
+  - Nintendo AFC ADPCM
+  - Microsoft MSADPCM (standard, mono, Cricket Audio)
+  - Electronic Arts EA-XA (stereo, mono, Maxis)
+  - Electronic Arts EA-XAS (v0, v1)
+  - Konami MTAF ADPCM
+  - Konami MTA2 ADPCM
+  - FMOD FADPCM ADPCM
+  - Procyon Studio ADPCM
+  - Level-5 ADPCM
+  - Konami XMD ADPCM
+  - Argonaut ASF ADPCM
+  - Tantalus ADPCM
+- ADPCM (IMA-style)
+  - DVI/IMA ADPCM (stereo/mono + high/low nibble, 3DS, Quantic Dream, SNDS, etc)
+  - Microsoft MS-IMA ADPCM (standard, Xbox, NDS, Radical, Wwise, FSB, WV6, etc)
+  - Yamaha ADPCM (AICA, Aska)
+  - Westwood VBR ADPCM
+  - OKI ADPCM (16-bit output, 4-shift, PC-FX)
+  - LucasArts iMUSE VBR ADPCM
+  - Tiger Game.com ADPCM
+- ADPCM (others)
+  - Sony HEVAG
+  - Ubisoft 4/6-bit ADPCM
+  - Platinum ADPCM
+  - Paradigm MC3 ADPCM
+  - Ocean DSA ADPCM
+  - lsf ADPCM
+  - Ongakukan ADPCM
+  - ITU-T G.721
+  - CompressWave (CWav) Huffman ADPCM
+- Perceptual/transform-based
+  - MPEG MP1/2/3 (standard, AHX, XVAG, FSB, AWC, P3D, EA, etc)
+  - Xiph Vorbis (Ogg, FSB, Wwise, OGL, Silicon Knights)
+  - CRI HCA
+  - ITU-T G.722.1 annex C a.k.a. Polycom Siren 14 (Namco)
+  - ITU-T G.719 annex B a.k.a. Polycom Siren 22
+  - Xiph Opus (Ogg, Switch, EA, UE4, Exient, FSB)
+  - Xiph CELT (FSB)
+  - Microsoft XMA1/2
+  - Microsoft WMA v1, WMA v2, WMAPro
+  - AAC
+  - Sony ATRAC3
+  - Sony ATRAC3plus
+  - Sony ATRAC9
+  - Relic Codec
+  - tri-Ace PS2 Codec
+  - Bink
+  - AC3/SPDIF
+  - Musepack
+  - Electronic Arts EASpeex
+  - Electronic Arts EALayer3
+  - Electronic Arts EA-XMA
+  - Electronic Arts MicroTalk a.k.a. UTK or UMT
+  - Inti Creates DCT codec
+  - Circus XPCM VQ
+  - Koei Tecmo KA1A
+- Misc
+  - SDX2 2:1 Squareroot-Delta-Exact compression DPCM
+  - CBD2 2:1 Cuberoot-Delta-Exact compression DPCM
+  - Activision EXAKT SASSC DPCM
+  - Xilam DERF DPCM
+  - Circus XPCM DPCM
+  - VisualArt's NWA PCM/DPCM
+  - Marble WADY PCM/DPCM
+  - InterPlay ACM
+  - Inti Creates Range codec
+  - FLAC
+  - Others
 
 
 >>> gdview (DOS - v0.92) (http://www.demelo.org/gdm/gdv/formats.f.html)
@@ -8655,186 +10471,1504 @@ JPEG 2000: J2C, J2K, JP2, JPC
 *.2448 (Generic Disc Image - IsoBuster)
 
 
->>> zxtune (Linux - r4993 - Jun 28, 2021) - MUSIC (https://github.com/vitamin-caig/zxtune/releases)
-RAW - RAW
-ZIP - ZIP
-RAR - RAR
-LHA - LHA (LHArc)
-UMX - UMX (Unreal Music eXperience)
-7ZIP - 7zip
-FSB - FMOD Sample bank
-TRD - TRD (TR-DOS)
-SCL - SCL (SINCLAIR)
-HRIP - Hrip (Hrust RiP archiver)
-ZXZIP - ZXZip
-ZXSTATE - SZX (ZX-State)
-AY - Multi-AY/EMUL
-SID - Multi-SID/PSID/RSID
-NSF - Multi-NSF
-NSFE - Multi-NSFE
-GBS - Multi-GBS
-SAP - Multi-SAP
-KSSX - Multi-KSSX
-HES - Multi-HES
-ZDATA - Zdata
-HOBETA - Hobeta
-HRUST1 - Hrust v1.x
-HRUST2 - Hrust v2.1
-HRUST23 - Hrust v2.3
-FDI - FDI (Full Disk Image)
-DSQ - DataSqueezer v4.x
-MSP - MicroSpace Packer v1.x
-TRUSH - Trush Compressor v3.x
-LZS - ASC LZS Pack
-PCD61 - Powerfull Code Decreaser v6.1
-PCD61i - Powerfull Code Decreaser v6.1i
-PCD62 - Powerfull Code Decreaser v6.2
-HRUM - Hrum v3.x
-CC3 - CodeCruncher v3.x
-CC4 - CompressorCode v.4 by ZYX
-CC4PLUS - CompressorCode v.4+ by ZYX
-ESV - ESV Cruncher
-GAM - GamePacker
-GAMPLUS - GamePacker+
-TLZ - Turbo-LZ v1.x
-TLZP - Turbo#LZ v1.x (internal)
-CHARPRES - CharPres
-PACK2 - Pack v2.x
-LZH1 - LZH Compressor v1.4
-LZH2 - LZH Compressor v2.4
-SNA128 - SNA 128k
-TD0 - TD0 (TeleDisk Image)
-Z80V145 - Z80 v1.45
-Z80V20 - Z80 v2.x
-Z80V30 - Z80 v3.x
-MEGALZ - MegaLZ
-DSK - DSK Image
-GZIP - GZip
-MUSE - MUSE Compressor
-COMPILEDASC0 - ASC Sound Master v0.x player
-COMPILEDASC1 - ASC Sound Master v1.x player
-COMPILEDASC2 - ASC Sound Master v2.x player
-COMPILEDPT24 - Pro Tracker v2.40 Phantom Family player
-COMPILEDPTU13 - Pro Tracker Utility v1.3 player
-COMPILEDST3 - Sound Tracker v3.x Compiled player
-COMPILEDSTP1 - Sound Tracker Pro v1.x player
-COMPILEDSTP2 - Sound Tracker Pro v2.x player
-TS - TurboSound
-AY - AY/EMUL
-PT3 - Pro Tracker v3.x
-PT2 - Pro Tracker v2.x
-STC - Sound Tracker v1.x Compiled
-ST1 - Sound Tracker v1.x
-ST3 - Sound Tracker v3.x Compiled
-AS0 - ASC Sound Master v0.x
-ASC - ASC Sound Master v1.x
-STP - Sound Tracker Pro Compiled
-TXT - VortexTracker II
-PSG - Programmable Sound Generator
-PDT - ProDigi Tracker v0.0x
-CHI - Chip Tracker
-STR - Sample Tracker v2.x
-DST - Digital Studio
-SQD - SQ Digital Tracker
-DMM - Digital Music Maker v1.x
-PSM - Pro Sound Maker
-GTR - Global Tracker v1.x
-PT1 - Pro Tracker v1.x
-VTX - VTX (Vortex Project)
-YM - YM (ST-Sound Project)
-YM - YM (ST-Sound Project) Packed
-TFD - TurboFM Dump
-TFC - TurboFM Compiled Dump
-SQT - SQ-Tracker Compiled
-PSC - Pro Sound Creator v1.xx
-FTC - Fast Tracker v1.x
-COP - E-Tracker v1.x
-TF0 - TFM Music Maker v0.1-1.2
-TFE - TFM Music Maker v1.3+
-DTT - Desktop Tracker
-EMOD - Quadra Composer
-FNK - Funktracker
-GTK - Graoumf Tracker
-IMS - Images Music System
-LIQ - Liquid Tracker
-MED - MED 1.12 MED2
-MED - MED 2.00 MED3
-MED - MED 2.10 MED4
-LIQ - Liquid Tracker NO
-RTM - Real Tracker
-STIM - Slamtilt
-STX - STMIK 0.2
-TCB - TCB Tracker
-SID - Commodore64 RSID/PSID
-ET1 - Extreme Tracker v1.x
-AYC - CPC AYC
-SPC - SNES SPC700
-MTC - Multitrack Container
-NSF - NES Sound Format
-NSFE - Extended Nintendo Sound Format
-GBS - GameBoy Sound
-KSSX - KSS Extended Music Format
-HES - Home Entertainment System
-GYM - Genesis YM2612 (unpacked)
-KSS - KSS Music Format
-AHX - Abyss' Highest Experience
-HVL - Hively Tracker
-PSF - Playstation Sound Format
-PSF2 - Playstation2 Sound Format
-USF - Ultra64 Sound Format
-GSF - GameBoy Advance Sound Format
-2SF - Nintendo DS Sound Format
-NCSF - Nitro Composer Sound Format
-SSF - Sega Saturn Sound Format
-DSF - Dreamcast Sound Format
-SAP - Slight Atari Player Sound Format
-RMT - Raster Music Tracker
-MP3 - MPEG Audio Layer
-OGG - OGG Vorbis
-WAV - Waveform Audio File Format
-FLAC - Free Lossless Audio Codec
-V2M - Farbrausch V2 Synthesizer System
-VGM - Video Game Music
-S98 - Sound 98
-XM - FastTracker II
-IT - Impulse Tracker
-S3M - ScreamTracker 3
-STM - ScreamTracker 2
-MED - OctaMED / MED Soundstudio
-MTM - MultiTracker
-MDL - Digitrakker
-DBM - DigiBooster Pro
-FAR - Farandole Composer
-AMS - Extreme's Tracker
-AMS - Velvet Studio
-OKT - Oktalyzer
-PTM - PolyTracker
-ULT - UltraTracker
-DMF - X-Tracker
-DSM - Digital Sound Interface Kit RIFF
-AMF - ASYLUM Music Format
-AMF - DSMI / Digital Sound And Music Interface
-PSM - Epic MegaGames MASI
-PSM - Epic MegaGames MASI (Old Version)
-MT2 - Mad Tracker 2.xx
-GDM - BWSB Soundsystem
-IMF - Imago Orpheus
-DBM - Digi Booster
-DTM - Digital Tracker / Digital Home Studio
-PLM - Disorder Tracker 2
-J2B - Galaxy Sound System
-MOD - ProTracker 3.6
-FMT - Davey W Taylor's FM Tracker
-SFX - SoundFX 1.x
-SFX - SoundFX 2.0 / MultiMedia Sound
-STP - Soundtracker Pro II
-MOD - Generic MOD-compatible
-MOD - MnemoTroN SoundTracker (MOD-compatible)
-MOD - Ice Tracker (MOD-compatible)
-669 - 669 Composer / UNIS 669
-C67 - Composer 670
-MO3 - Un4seen MO3
-MOD - Ultimate Soundtracker / etc (MOD Compatible)
+>>> zxtune (Linux - r4993 - Jun 28, 2021) - MUSIC (https://github.com/vitamin-caig/zxtune/releases) List from: zxtune123 --list-plugins
+Supported plugins:
+Plugin:       RAW
+Description:  Raw scaner
+Capabilities: cat_container cont_scaner
+
+Plugin:       ZIP
+Description:  ZIP
+Capabilities: cat_container cont_archive cap_dirs
+
+Plugin:       RAR
+Description:  RAR
+Capabilities: cat_container cont_archive cap_dirs
+
+Plugin:       LHA
+Description:  LHA (LHArc)
+Capabilities: cat_container cont_archive cap_dirs
+
+Plugin:       UMX
+Description:  UMX (Unreal Music eXperience)
+Capabilities: cat_container cont_archive cap_plain
+
+Plugin:       7ZIP
+Description:  7zip
+Capabilities: cat_container cont_archive cap_dirs
+
+Plugin:       TRD
+Description:  TRD (TR-DOS)
+Capabilities: cat_container cont_diskimage cap_plain
+
+Plugin:       SCL
+Description:  SCL (SINCLAIR)
+Capabilities: cat_container cont_diskimage cap_plain
+
+Plugin:       HRIP
+Description:  Hrip (Hrust RiP archiver)
+Capabilities: cat_container cont_archive
+
+Plugin:       ZXZIP
+Description:  ZXZip
+Capabilities: cat_container cont_archive
+
+Plugin:       ZXSTATE
+Description:  SZX (ZX-State)
+Capabilities: cat_container cont_snapshot
+
+Plugin:       AY
+Description:  Multi-AY/EMUL
+Capabilities: cat_container cont_multitrack
+
+Plugin:       ZDATA
+Description:  Zdata
+Capabilities: cat_container cont_archive
+
+Plugin:       HOBETA
+Description:  Hobeta
+Capabilities: cat_container cont_archive cap_plain
+
+Plugin:       HRUST1
+Description:  Hrust v1.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       HRUST2
+Description:  Hrust v2.1
+Capabilities: cat_container cont_compressor
+
+Plugin:       HRUST23
+Description:  Hrust v2.3
+Capabilities: cat_container cont_compressor
+
+Plugin:       FDI
+Description:  FDI (Full Disk Image)
+Capabilities: cat_container cont_diskimage
+
+Plugin:       DSQ
+Description:  DataSqueezer v4.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       MSP
+Description:  MicroSpace Packer v1.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       TRUSH
+Description:  Trush Compressor v3.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       LZS
+Description:  ASC LZS Pack
+Capabilities: cat_container cont_compressor
+
+Plugin:       PCD61
+Description:  Powerfull Code Decreaser v6.1
+Capabilities: cat_container cont_compressor
+
+Plugin:       PCD61i
+Description:  Powerfull Code Decreaser v6.1i
+Capabilities: cat_container cont_compressor
+
+Plugin:       PCD62
+Description:  Powerfull Code Decreaser v6.2
+Capabilities: cat_container cont_compressor
+
+Plugin:       HRUM
+Description:  Hrum v3.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       CC3
+Description:  CodeCruncher v3.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       CC4
+Description:  CompressorCode v.4 by ZYX
+Capabilities: cat_container cont_compressor
+
+Plugin:       CC4PLUS
+Description:  CompressorCode v.4+ by ZYX
+Capabilities: cat_container cont_compressor
+
+Plugin:       ESV
+Description:  ESV Cruncher
+Capabilities: cat_container cont_compressor
+
+Plugin:       GAM
+Description:  GamePacker
+Capabilities: cat_container cont_compressor
+
+Plugin:       GAMPLUS
+Description:  GamePacker+
+Capabilities: cat_container cont_compressor
+
+Plugin:       TLZ
+Description:  Turbo-LZ v1.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       TLZP
+Description:  Turbo#LZ v1.x (internal)
+Capabilities: cat_container cont_compressor
+
+Plugin:       CHARPRES
+Description:  CharPres
+Capabilities: cat_container cont_compressor
+
+Plugin:       PACK2
+Description:  Pack v2.x
+Capabilities: cat_container cont_compressor
+
+Plugin:       LZH1
+Description:  LZH Compressor v1.4
+Capabilities: cat_container cont_compressor
+
+Plugin:       LZH2
+Description:  LZH Compressor v2.4
+Capabilities: cat_container cont_compressor
+
+Plugin:       SNA128
+Description:  SNA 128k
+Capabilities: cat_container cont_snapshot
+
+Plugin:       TD0
+Description:  TD0 (TeleDisk Image)
+Capabilities: cat_container cont_diskimage
+
+Plugin:       Z80V145
+Description:  Z80 v1.45
+Capabilities: cat_container cont_snapshot
+
+Plugin:       Z80V20
+Description:  Z80 v2.x
+Capabilities: cat_container cont_snapshot
+
+Plugin:       Z80V30
+Description:  Z80 v3.x
+Capabilities: cat_container cont_snapshot
+
+Plugin:       MEGALZ
+Description:  MegaLZ
+Capabilities: cat_container cont_compressor
+
+Plugin:       DSK
+Description:  DSK Image
+Capabilities: cat_container cont_diskimage
+
+Plugin:       GZIP
+Description:  GZip
+Capabilities: cat_container cont_archive
+
+Plugin:       MUSE
+Description:  MUSE Compressor
+Capabilities: cat_container cont_compressor
+
+Plugin:       COMPILEDASC0
+Description:  ASC Sound Master v0.x player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDASC1
+Description:  ASC Sound Master v1.x player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDASC2
+Description:  ASC Sound Master v2.x player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDPT24
+Description:  Pro Tracker v2.40 Phantom Family player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDPTU13
+Description:  Pro Tracker Utility v1.3 player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDST3
+Description:  Sound Tracker v3.x Compiled player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDSTP1
+Description:  Sound Tracker Pro v1.x player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       COMPILEDSTP2
+Description:  Sound Tracker Pro v2.x player
+Capabilities: cat_container cont_decompiler
+
+Plugin:       SID
+Description:  Multitrack Commodore64 SID/RSID/PSID
+Capabilities: cat_container cont_multitrack
+
+Plugin:       NSF
+Description:  Multitrack NES Sound Format
+Capabilities: cat_container cont_multitrack
+
+Plugin:       NSFE
+Description:  Multitrack Extended Nintendo Sound Format
+Capabilities: cat_container cont_multitrack
+
+Plugin:       GBS
+Description:  Multitrack GameBoy Sound
+Capabilities: cat_container cont_multitrack
+
+Plugin:       KSSX
+Description:  Multitrack KSS Extended Music Format
+Capabilities: cat_container cont_multitrack
+
+Plugin:       HES
+Description:  Multitrack Home Entertainment System
+Capabilities: cat_container cont_multitrack
+
+Plugin:       SAP
+Description:  Multitrack Slight Atari Player Sound Format
+Capabilities: cat_container cont_multitrack
+
+Plugin:       AWB
+Description:  Multitrack CRI Atom Wave Bank
+Capabilities: cat_container cont_multitrack
+
+Plugin:       CPK
+Description:  Multitrack CRI CPK container
+Capabilities: cat_container cont_multitrack
+
+Plugin:       ACB
+Description:  Multitrack CRI Atom Cursheet Binary
+Capabilities: cat_container cont_multitrack
+
+Plugin:       XA
+Description:  Multitrack Sony XA
+Capabilities: cat_container cont_multitrack
+
+Plugin:       XA
+Description:  Multitrack Sony XA (raw)
+Capabilities: cat_container cont_multitrack
+
+Plugin:       XVAG
+Description:  Multitrack Sony XVAG
+Capabilities: cat_container cont_multitrack
+
+Plugin:       XWS
+Description:  Multitrack Sony XWS
+Capabilities: cat_container cont_multitrack
+
+Plugin:       RXW
+Description:  Multitrack Sony XWS (bad rips)
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BNK
+Description:  Multitrack Sony BNK (LE)
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BNK
+Description:  Multitrack Sony BNK (BE)
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BNK
+Description:  Multitrack Audiokinetic Wwise Soundbank Container
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BNK
+Description:  Multitrack Electronic Arts BNK
+Capabilities: cat_container cont_multitrack
+
+Plugin:       M4A
+Description:  Multitrack Apple QuickTime Container
+Capabilities: cat_container cont_multitrack
+
+Plugin:       IFS
+Description:  Multitrack Konami Arcade Games Container
+Capabilities: cat_container cont_multitrack
+
+Plugin:       SAB
+Description:  Multitrack Square Enix SAB
+Capabilities: cat_container cont_multitrack
+
+Plugin:       MAB
+Description:  Multitrack Square Enix MAB
+Capabilities: cat_container cont_multitrack
+
+Plugin:       AKB
+Description:  Multitrack Square Enix AKB2
+Capabilities: cat_container cont_multitrack
+
+Plugin:       SCD
+Description:  Multitrack Square Enix SCD
+Capabilities: cat_container cont_multitrack
+
+Plugin:       NUS3
+Description:  Multitrack Namco nuSound container v3
+Capabilities: cat_container cont_multitrack
+
+Plugin:       NUB
+Description:  Multitrack Namco nuSound container
+Capabilities: cat_container cont_multitrack
+
+Plugin:       XWB
+Description:  Multitrack Microsoft XACT Wave Bank
+Capabilities: cat_container cont_multitrack
+
+Plugin:       XWM
+Description:  Multitrack Microsoft XWMA
+Capabilities: cat_container cont_multitrack
+
+Plugin:       PDT
+Description:  Multitrack Hudson Stream Container
+Capabilities: cat_container cont_multitrack
+
+Plugin:       H4M
+Description:  Multitrack Hudson HVQM4
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BIK
+Description:  Multitrack RAD Game Tools Bink
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BAF
+Description:  Multitrack Bizzare Creations bank file
+Capabilities: cat_container cont_multitrack
+
+Plugin:       BAF
+Description:  Multitrack Bizzare Creations band file (bad rips)
+Capabilities: cat_container cont_multitrack
+
+Plugin:       FSB
+Description:  Multitrack FMOD Sample Bank (v1-v5)
+Capabilities: cat_container cont_multitrack
+
+Plugin:       MUSX
+Description:  Multitrack Eurocom MUSX
+Capabilities: cat_container cont_multitrack
+
+Plugin:       RWS
+Description:  Multitrack RenderWare Stream
+Capabilities: cat_container cont_multitrack
+
+Plugin:       AWC
+Description:  Multitrack Rockstar AWC
+Capabilities: cat_container cont_multitrack
+
+Plugin:       ZSS
+Description:  Multitrack Z-Axis ZSND
+Capabilities: cat_container cont_multitrack
+
+Plugin:       AAC
+Description:  Multitrack tri-Ace ASKA engine
+Capabilities: cat_container cont_multitrack
+
+Plugin:       VXN
+Description:  Multitrack Gameloft VXN
+Capabilities: cat_container cont_multitrack
+
+Plugin:       ASF
+Description:  Multitrack Windows Media Audio
+Capabilities: cat_container cont_multitrack
+
+Plugin:       TS
+Description:  TurboSound
+Capabilities: cat_module mod_multi dev_turbosound
+
+Plugin:       AY
+Description:  AY/EMUL
+Capabilities: cat_module mod_memorydump dev_ay38910 dev_beeper conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       PT3
+Description:  Pro Tracker v3.x
+Capabilities: cat_module mod_track dev_ay38910 dev_turbosound conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       PT2
+Description:  Pro Tracker v2.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       STC
+Description:  Sound Tracker v1.x Compiled
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       ST1
+Description:  Sound Tracker v1.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       ST3
+Description:  Sound Tracker v3.x Compiled
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       AS0
+Description:  ASC Sound Master v0.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       ASC
+Description:  ASC Sound Master v1.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       STP
+Description:  Sound Tracker Pro Compiled
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       TXT
+Description:  VortexTracker II
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       PSG
+Description:  Programmable Sound Generator
+Capabilities: cat_module mod_stream dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       PDT
+Description:  ProDigi Tracker v0.0x
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       CHI
+Description:  Chip Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       STR
+Description:  Sample Tracker v2.x
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DST
+Description:  Digital Studio
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       SQD
+Description:  SQ Digital Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DMM
+Description:  Digital Music Maker v1.x
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       PSM
+Description:  Pro Sound Maker
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       GTR
+Description:  Global Tracker v1.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       PT1
+Description:  Pro Tracker v1.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       VTX
+Description:  VTX (Vortex Project)
+Capabilities: cat_module mod_stream dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       YM
+Description:  YM (ST-Sound Project)
+Capabilities: cat_module mod_stream dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       YM
+Description:  YM (ST-Sound Project) Packed
+Capabilities: cat_module mod_stream dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       TFD
+Description:  TurboFM Dump
+Capabilities: cat_module mod_stream dev_turbofm
+
+Plugin:       TFC
+Description:  TurboFM Compiled Dump
+Capabilities: cat_module mod_stream dev_turbofm
+
+Plugin:       SQT
+Description:  SQ-Tracker Compiled
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       PSC
+Description:  Pro Sound Creator v1.xx
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       FTC
+Description:  Fast Tracker v1.x
+Capabilities: cat_module mod_track dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       COP
+Description:  E-Tracker v1.x
+Capabilities: cat_module mod_track dev_saa1099
+
+Plugin:       TF0
+Description:  TFM Music Maker v0.1-1.2
+Capabilities: cat_module mod_track dev_turbofm
+
+Plugin:       TFE
+Description:  TFM Music Maker v1.3+
+Capabilities: cat_module mod_track dev_turbofm
+
+Plugin:       DTT
+Description:  Desktop Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       EMOD
+Description:  Quadra Composer
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       FNK
+Description:  Funktracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       GTK
+Description:  Graoumf Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       IMS
+Description:  Images Music System
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       LIQ
+Description:  Liquid Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MED
+Description:  MED 1.12 MED2
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MED
+Description:  MED 2.00 MED3
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MED
+Description:  MED 2.10 MED4
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       LIQ
+Description:  Liquid Tracker NO
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       RTM
+Description:  Real Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       STIM
+Description:  Slamtilt
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       STX
+Description:  STMIK 0.2
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       TCB
+Description:  TCB Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       ET1
+Description:  Extreme Tracker v1.x
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       AYC
+Description:  CPC AYC
+Capabilities: cat_module mod_stream dev_ay38910 conv_psg conv_zx50 conv_aydump conv_fym
+
+Plugin:       SPC
+Description:  SNES SPC700
+Capabilities: cat_module mod_memorydump dev_spc700
+
+Plugin:       MTC
+Description:  Multitrack Container
+Capabilities: cat_module mod_multi dev_multi
+
+Plugin:       AHX
+Description:  Abyss' Highest Experience
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       HVL
+Description:  Hively Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       PSF
+Description:  Playstation Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       PSF2
+Description:  Playstation2 Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       USF
+Description:  Ultra64 Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       GSF
+Description:  GameBoy Advance Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       2SF
+Description:  Nintendo DS Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       NCSF
+Description:  Nitro Composer Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       SSF
+Description:  Sega Saturn Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       DSF
+Description:  Dreamcast Sound Format
+Capabilities: cat_module mod_memorydump dev_dac cap_multifile
+
+Plugin:       MP3
+Description:  MPEG Audio Layer
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       OGG
+Description:  OGG Vorbis
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       FLAC
+Description:  Free Lossless Audio Codec
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       VGM
+Description:  Video Game Music
+Capabilities: cat_module mod_stream dev_multi
+
+Plugin:       S98
+Description:  Sound 98
+Capabilities: cat_module mod_stream dev_multi
+
+Plugin:       XM
+Description:  FastTracker II
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       IT
+Description:  Impulse Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       S3M
+Description:  ScreamTracker 3
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       STM
+Description:  ScreamTracker 2
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MED
+Description:  OctaMED / MED Soundstudio
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MTM
+Description:  MultiTracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MDL
+Description:  Digitrakker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DBM
+Description:  DigiBooster Pro
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       FAR
+Description:  Farandole Composer
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       AMS
+Description:  Extreme's Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       AMS
+Description:  Velvet Studio
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       OKT
+Description:  Oktalyzer
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       PTM
+Description:  PolyTracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       ULT
+Description:  UltraTracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DMF
+Description:  X-Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DSM
+Description:  Digital Sound Interface Kit RIFF
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       AMF
+Description:  ASYLUM Music Format
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       AMF
+Description:  DSMI / Digital Sound And Music Interface
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       PSM
+Description:  Epic MegaGames MASI
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       PSM
+Description:  Epic MegaGames MASI (Old Version)
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MT2
+Description:  Mad Tracker 2.xx
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       GDM
+Description:  BWSB Soundsystem
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       IMF
+Description:  Imago Orpheus
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DBM
+Description:  Digi Booster
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DTM
+Description:  Digital Tracker / Digital Home Studio
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       PLM
+Description:  Disorder Tracker 2
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       J2B
+Description:  Galaxy Sound System
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MOD
+Description:  ProTracker 3.6
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       FMT
+Description:  Davey W Taylor's FM Tracker
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       SFX
+Description:  SoundFX 1.x
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       SFX
+Description:  SoundFX 2.0 / MultiMedia Sound
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       STP
+Description:  Soundtracker Pro II
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MOD
+Description:  Generic MOD-compatible
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MOD
+Description:  MnemoTroN SoundTracker (MOD-compatible)
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MOD
+Description:  Ice Tracker (MOD-compatible)
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       669
+Description:  669 Composer / UNIS 669
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       C67
+Description:  Composer 670
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MO3
+Description:  Un4seen MO3
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       MOD
+Description:  Ultimate Soundtracker / etc (MOD Compatible)
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       DSYM
+Description:  Digital Symphony
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       SYMMOD
+Description:  Symphonie
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       SID
+Description:  Commodore64 SID/RSID/PSID
+Capabilities: cat_module mod_memorydump dev_mos6581
+
+Plugin:       NSF
+Description:  NES Sound Format
+Capabilities: cat_module mod_memorydump dev_rp2a0x
+
+Plugin:       NSFE
+Description:  Extended Nintendo Sound Format
+Capabilities: cat_module mod_memorydump dev_rp2a0x
+
+Plugin:       GBS
+Description:  GameBoy Sound
+Capabilities: cat_module mod_memorydump dev_lr35902
+
+Plugin:       KSSX
+Description:  KSS Extended Music Format
+Capabilities: cat_module mod_memorydump dev_multi
+
+Plugin:       HES
+Description:  Home Entertainment System
+Capabilities: cat_module mod_memorydump dev_huc6270
+
+Plugin:       GYM
+Description:  Genesis YM2612 (unpacked)
+Capabilities: cat_module mod_stream dev_multi
+
+Plugin:       KSS
+Description:  KSS Music Format
+Capabilities: cat_module mod_memorydump dev_multi
+
+Plugin:       SAP
+Description:  Slight Atari Player Sound Format
+Capabilities: cat_module mod_memorydump dev_co12294
+
+Plugin:       RMT
+Description:  Raster Music Tracker
+Capabilities: cat_module mod_memorydump dev_co12294
+
+Plugin:       HCA
+Description:  CRI HCA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ADX
+Description:  CRI ADX
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AWB
+Description:  CRI Atom Wave Bank
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CPK
+Description:  CRI CPK container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AAX
+Description:  CRI AAX
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ACB
+Description:  CRI Atom Cursheet Binary
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AIX
+Description:  CRI AIX
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AHX
+Description:  CRI AHX
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CSTM
+Description:  Nintendo CSTM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       STRM
+Description:  Nintendo STRM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RSTM
+Description:  Nintendo RSTM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       FSTM
+Description:  Nintendo FSTM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DSP
+Description:  Nintendo ADPCM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DSP
+Description:  Nintendo ADPCM (LE)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CWAV
+Description:  Nintendo CWAV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ADP
+Description:  Nintendo ADP (raw)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BWAV
+Description:  Nintendo BWAV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       FWAV
+Description:  Nintendo FWAV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SWAV
+Description:  Nintendo SWAV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RWAV
+Description:  Nintendo RWAV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       THP
+Description:  Nintendo THP
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       OPUS
+Description:  Nintendo OPUS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AST
+Description:  Nintendo AST
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ADS
+Description:  Sony AudioStream
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XA
+Description:  Sony XA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XA
+Description:  Sony XA (raw)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       VAG
+Description:  Sony VAG
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XVAG
+Description:  Sony XVAG
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MSF
+Description:  Sony MultiStream File
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XWS
+Description:  Sony XWS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RXW
+Description:  Sony XWS (bad rips)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MIC
+Description:  Sony MultiStream MIC
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BNK
+Description:  Sony BNK (LE)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BNK
+Description:  Sony BNK (BE)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       WEM
+Description:  Audiokinetic Wwise
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BNK
+Description:  Audiokinetic Wwise Soundbank Container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SCHL
+Description:  Electronic Arts SCHL
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SNR
+Description:  Electronic Arts SNR
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SPS
+Description:  Electronic Arts SPS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BNK
+Description:  Electronic Arts BNK
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       M4A
+Description:  Apple QuickTime Container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AIFF
+Description:  Apple Audio Interchange File Format
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AIFC
+Description:  Apple Compressed Audio Interchange File Format
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CAF
+Description:  Apple Core Audio Format File
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BAO
+Description:  Ubisoft BAO (atomic)
+Capabilities: cat_module mod_stream dev_dac cap_multifile
+
+Plugin:       RAK
+Description:  Ubisoft RAKI
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RAK
+Description:  Ubisoft RAKI (modified)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       LWAV
+Description:  Ubisoft RIFF
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       LWAV
+Description:  Ubisoft LyN
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CKD
+Description:  Ubisoft CKD
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BMP
+Description:  Konami BMP
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       2DX9
+Description:  Konami 2DX9
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       IFS
+Description:  Konami Arcade Games Container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SVAG
+Description:  Konami SVAG
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SD9
+Description:  Konami SD9
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       KCEY
+Description:  Konami KCE Yokohama
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MSF
+Description:  Konami MSF
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       KVS
+Description:  Koei Tecmo KVS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       KTSS
+Description:  Koei Tecmo KTSS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MIC
+Description:  Koei Tecmo MIC
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DSP
+Description:  Koei Tecmo WiiBGM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SAB
+Description:  Square Enix SAB
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AKB
+Description:  Square Enix AKB
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MAB
+Description:  Square Enix MAB
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AKB
+Description:  Square Enix AKB2
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SCD
+Description:  Square Enix SCD
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BGW
+Description:  Square Enix BGW
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       IDSP
+Description:  Namco IDSP (NUB container)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NPS
+Description:  Namco NPSF
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NAAC
+Description:  Namco AAC
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DSP
+Description:  Namco CSTR
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NUS3
+Description:  Namco nuSound container v3
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NUB
+Description:  Namco nuSound container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MCA
+Description:  Capcom MCA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AUS
+Description:  Capcom AUS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       LOPUS
+Description:  Capcom OPUS container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DSPW
+Description:  Capcom DSPW
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DVI
+Description:  Capcom IDVI
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MUL
+Description:  Crystal Dynamics MUL
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MUL
+Description:  Crystal Dynamics MUL (BE)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XMA
+Description:  Microsoft XMA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XWB
+Description:  Microsoft XACT Wave Bank
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XWM
+Description:  Microsoft XWMA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XNB
+Description:  Microsoft XNA Game Studio XNB
+Capabilities: cat_module mod_stream dev_dac cap_multifile
+
+Plugin:       PDT
+Description:  Hudson Splitted Stream container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       PDT
+Description:  Hudson Stream Container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       H4M
+Description:  Hudson HVQM4
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BIK
+Description:  RAD Game Tools Bink
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SMK
+Description:  RAD Game Tools SMACKER
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RSD
+Description:  Radical RSD
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       P3D
+Description:  Radical P3D
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RFRM
+Description:  Retro Studios RFRM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       DSP
+Description:  Retro Studios RS03
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       WMSF
+Description:  Banpresto MSF wrapper
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       2MSF
+Description:  Banpresto RIFF wrapper
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BAF
+Description:  Bizzare Creations bank file
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BAF
+Description:  Bizzare Creations band file (bad rips)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       FSB
+Description:  FMOD Sample Bank (v1-v5)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       GENH
+Description:  Generic Header
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       IDSP
+Description:  Various IDSP
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ACM
+Description:  InterPlay ACM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       OPUS
+Description:  Various OPUS containers
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XA
+Description:  Maxis XA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       VPK
+Description:  SCE America VPK
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MUSX
+Description:  Eurocom MUSX
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RPGMVO
+Description:  Encrypted OGG Vorbis
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       LOGG
+Description:  Encrypted OGG Vorbis
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       LOGG
+Description:  Corrupted OGG Vorbis
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       OPUS
+Description:  OGG Opus
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RWS
+Description:  RenderWare Stream
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XWC
+Description:  Starbreeze XWC
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AUD
+Description:  Westwood Studios AUD
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       HPS
+Description:  HAL Labs HALPST
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       BANK
+Description:  FSB5 FEV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MUSC
+Description:  Krome MUSC
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SVAG
+Description:  SNK SVAG
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AWC
+Description:  Rockstar AWC
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ZSS
+Description:  Z-Axis ZSND
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SEB
+Description:  Game Arts SEB
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SEG
+Description:  Stormfront SEG
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       WAVE
+Description:  EngineBlack WAVE
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       IMUS
+Description:  LucasArts iMUSE
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       VGS
+Description:  Princess Soft VGS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SMP
+Description:  Infernal Engine SMP
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AAC
+Description:  tri-Ace ASKA engine
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NWA
+Description:  VisualArt's NWA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       STER
+Description:  Alchemy STER
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NXA
+Description:  Entergram NXA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       STR
+Description:  Sega Stream Asset Builder STR
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       IKM
+Description:  MiCROViSiON container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       NSOPUS
+Description:  Nihon Falcom FDK
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SPSD
+Description:  Naomi SPSD
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       HWAS
+Description:  Vicarious Visions HWAS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       VXN
+Description:  Gameloft VXN
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       GCA
+Description:  Terminal Reality GCA
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       STM
+Description:  Intelligent Systems STM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ISWS
+Description:  Sumo Digital iSWS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       XWV
+Description:  feelplus XWAV
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       PONA
+Description:  Policenauts BGM
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SAD
+Description:  Procyon Studio SADL
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ADS
+Description:  Midway ADS
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       STR
+Description:  3DO STR
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CKS
+Description:  Cricket Audio Stream
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       CAF
+Description:  tri-Crescendo CAF
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ISD
+Description:  Inti Creates OGG Vorbis
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       YDSP
+Description:  Yuke DSP
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       RSD
+Description:  RedSparc RSD
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ADP
+Description:  Nex Entertainment NXAP
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ADP
+Description:  Xilam DERF
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       SDF
+Description:  Beyond Reality SDF
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ZSD
+Description:  ZSD container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MTX
+Description:  Matric Software container
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       APE
+Description:  Monkey's Audio
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       ASF
+Description:  Windows Media Audio
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       TAK
+Description:  Tom's lossless Audio Kompressor
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AAC
+Description:  Advanced Audio Coding (raw ADTS)
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       OMA
+Description:  Sony OpenMG audio
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       MPC
+Description:  Musepack
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       AC3
+Description:  Dolby AC-3
+Capabilities: cat_module mod_stream dev_dac
+
+Plugin:       V2M
+Description:  Farbrausch V2 Synthesizer System
+Capabilities: cat_module mod_track dev_dac
+
+Plugin:       WAV
+Description:  Waveform Audio File Format
+Capabilities: cat_module mod_stream dev_dac
+
 
 
 >>> ASAP (Linux - v5.0.1 - Jun 28, 2021) - MUSIC (http://asap.sourceforge.net/)
@@ -17378,6 +20512,7 @@ WebP (*.webp)
 
 >>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
 aliaspix:	AliasPIX and Vivid
+at6p:	999 AT6P
 avif:	AV1 Image File Format
 avs:	Stardent AVS X
 bld:	MegaPaint
@@ -17386,6 +20521,7 @@ bmz:	GSD engine BMZ
 bob:	Bob raytracer raster
 bru:	Degas Brush
 bsi:	Bethesda BSI texture (IFHD, BSIF)
+c:	C code formats: DEGAS Elite Icon, XBM X10 and X11
 c64:	Art Studio (OCP), Artist64, Blazing Paddles, CDU-Paint, Cheese, Create With Garfield, Doodle (raw & compressed), Hi-Eddi, Image System, Interpaint, KoalaPainter (raw & compressed), Picasso 64, Runpaint, Saracen Paint, Vidcom 64
 cbg:	BGI/Ethornell CompressedBG (v1)
 clm:	IDES/Fairytale PC-98 thumbnail? (no palette support)
@@ -17449,6 +20585,7 @@ pi:	Yanagisawa's Pi
 pic:	Yanagisawa's PIC
 pic2:	Yanagisawa's PIC2
 pictor:	PCPaint PICtor
+pim:	SIFF PIM sprite and animation (first frame only)
 png:	Portable Network Graphics
 pnm:	PNM extended family (PNM, PAM, PFM, PHM, Xv Thumbnail, MTV, JPEG2000-PGX)
 prt:	Kid engine image
@@ -17458,10 +20595,12 @@ q4:	MAJYO's Q4 (XLD4)
 qoi:	QuiteOK image
 raw:	Raw camera formats
 sgi:	Silicon Graphics Image
+sir0:	999 SIR0 sprites
 sixel:	SIXEL terminal graphics
 skyroads:	SkyRoads LZS graphics
 sun:	Sun Raster
 svg:	Scalable Vector Graphics
+tbn:	Croteam Texture
 tcp:	Atari Rembrandt
 tga:	Truevision TGA (TARGA)
 tiff:	Tag Image File Format, BigTIFF
@@ -17477,7 +20616,6 @@ wbmp:	Wireless Bitmap
 webp:	WebP
 wgtspr:	WGT Sprite
 wia:	Wild-Bug engine image sequence
-xbm:	X10 and X11 Bitmap
 xcursor:	X11 cursor
 xwd:	X11 Window Dump
 xyz:	RPG Maker image
@@ -18355,6 +21493,105 @@ skipped in dexvert (failed)
 	ARC2.0 container (*.arc)
 	Gamebryo KF (*.kf)
 	Gamebryo NIF (*.nif)
+
+
+
+>>> xmp (from https://github.com/libxmp/libxmp/blob/master/docs/formats.txt)
+Common suffix	Tracker/packer		Recognized variants
+Soundtracker and variants:
+	MOD		Sound/Noise/Protracker	M.K., M!K!, M&K!, N.T., CD81
+	MOD, M15	Soundtracker		2.2, UST
+	MOD/NT		Startrekker/ADSC	FLT4/8/M, EXO4/8
+	MOD		Digital Tracker		FA04, FA06, FA08
+	MOD		Fast/Taketracker	xCHN, xxCH, TDZx
+	MOD		His Master's Noise	-
+	FLX		Flextrax		M.K., xCHN (no dsp effects)
+	WOW		Mod's Grave		M.K.
+
+Amiga packed formats:
+	-		AC1D Packer		-
+	-		FC-M Packer		1.0
+	-		Fuchs Tracker		-
+	-		Heatseeker		mc1.0
+	-		Hornet Packer		HRT!
+	-		Images Music System	?
+	-		Kefrens Sound Machine	-
+	-		Module Protector	-
+	-		NoisePacker		1.0, 2.0, 3.0
+	-		NoiseRunner		-
+	-		Pha Packer		-
+	-		Power Music		-
+	-		ProPacker		2.1
+	-		ProRunner		1.0, 2.0
+	-		Promizer		0.1, 1.0c, 1.8a, 2.0, 4.0
+	-		SKYT Packer		-
+	-		StarTrekker Packer	-
+	-		The Player		4.x, 5.0a, 6.0a, 6.1a
+	-		Titanics Player		-
+	-		Tracker Packer		3
+	MOD		Unic Tracker		1.0, 2.0
+	-		Wanton Packer		-
+	-		XANN Packer		-
+	-		Zen Packer		-
+
+Other Amiga tracker formats:
+	DBM		DigiBooster Pro		DBM0
+	DIGI		DIGI Booster		1.4, 1.5, 1.6, 1.7
+	EMOD		Quadra Composer		0001
+	MOD		ChipTracker		KRIS
+	MOD 		Protracker 3.59		PTDT
+	MED		MED 1.12/2.10/3.00	MED2, MED3, MED4
+	MED		MED 3.00/OctaMED	MMD0, MMD1, MMD2, MMD3
+	MOD, MTN	ST 2.6, Ice Tracker	MTN, IT10
+	OKT		Oktalyzer		-
+	SFX		SoundFX			1.3, 2.0?
+
+Atari tracker formats:
+	MOD		Octalyser		CD61, CD81
+	DTM		Digital Tracker		2.015, 2.03, 2.04, 1.x
+	MGT		Megatracker		-
+
+Acorn tracker formats:
+	-		Archimedes Tracker	V1.0+++
+	-		Coconizer		-
+	-		Digital Symphony	0, 1
+
+PC tracker formats:
+	669		Composer 669/UNIS 669   if, JN
+	FAR		Farandole Composer	1.0
+	FNK		Funktracker		R0, R1, R2
+	IMF		Imago Orpheus		1.0
+	IT		Impulse Tracker		1.00, 2.00, 2.14, 2.15
+	LIQ		Liquid Tracker		NO, 0.00, 1.00
+	MDL		Digitrakker		0.0, 1.0, 1.1
+	MTM		Multitracker		1.0
+	PTM		Poly Tracker		2.03
+	RTM		Real Tracker		1.00
+	S3M		Scream Tracker 3	3.00, 3.01+
+	STM		Scream Tracker 2	!Scream!, BMOD2STM
+	ULT		Ultra Tracker		V001, V002, V003, V004
+	XM		Fast Tracker II		1.02, 1.03, 1.04
+
+PC packed formats:
+	AMF		DSMI (DMP)		0.1, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4
+	GDM		General Digital Music	1.0
+	STX		ST Music Interface Kit	1.0, 1.1
+
+Game formats:
+	ABK		AMOS Sound Bank		-
+	AMF		Asylum Music Format	1.0
+	-		Digital Illusions	-
+	-		Game Music Creator	-
+	PSM		Epic MegaGames MASI	epic, sinaria
+	PSM/PS16	Epic MegaGames MASI 16	Epic Pinball (old), Silverball
+	J2B		Galaxy Music System 5.0	-
+	-		Galaxy Music System 4.0	-
+	MFP/SMP		Magnetic Fields Packer  -
+	MMDC		MED Packer		-
+	-		Novotrade Packer	-
+	STIM		Slamtilt		-
+	UMX		Epic Games Unreal/UT	IT, S3M, MOD, XM
+	XMF		Imperium Galactica	-
 
 
 

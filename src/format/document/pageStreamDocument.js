@@ -6,6 +6,6 @@ export class pageStreamDocument extends Format
 	website        = "https://en.wikipedia.org/wiki/PageStream";
 	ext            = [".pgs"];
 	forbidExtMatch = true;
-	magic          = ["PageStream Document"];
+	magic          = ["PageStream Document", "Atari ST PageStream Document (old)"];
 	converters     = ["PageStream", "strings"];
 }

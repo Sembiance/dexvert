@@ -6,6 +6,6 @@ export class fonteditFont extends Format
 	website        = "http://justsolve.archiveteam.org/wiki/FONTEDIT_font";
 	ext            = [".com"];
 	forbidExtMatch = true;
-	magic          = ["FONTEDIT Font"];
+	magic          = ["FONTEDIT Font", "16bit DOS FONTEDIT font loader Command"];
 	converters     = ["deark[module:fontedit]"];
 }

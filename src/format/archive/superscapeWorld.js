@@ -5,6 +5,6 @@ export class superscapeWorld extends Format
 	name       = "Superscape World";
 	website    = "https://archive.superscape.org/About%20Superscape.txt";
 	ext        = [".vrt", ".xvr", ".svr"];
-	magic      = [/^Superscape (VRT|XVR|SVR)$/];
+	magic      = [/^Superscape (VRT|XVR|SVR)$/, "SuperScape world/scene data"];
 	converters = ["superscapeVRT"];
 }

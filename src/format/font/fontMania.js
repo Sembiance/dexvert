@@ -6,6 +6,6 @@ export class fontMania extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Font_Mania_(REXXCOM)";
 	ext            = [".com"];
 	forbidExtMatch = true;
-	magic          = ["Font Mania Font"];
+	magic          = ["Font Mania Font", "16bit DOS Font Mania font loader Command"];
 	converters     = ["deark[module:fontmania]"];
 }

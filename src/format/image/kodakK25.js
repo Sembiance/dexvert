@@ -6,7 +6,7 @@ export class kodakK25 extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Kodak";
 	ext        = [".k25"];
 	fileSize   = [77888, 140_352];
-	magic      = [/^TIFF image data.*model=KODAK DC25/];
+	magic      = ["Kodak DC25 Digital Camera image", /^TIFF image data.*model=KODAK DC25/];
 	mimeType   = "image/x-kodak-k25";
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

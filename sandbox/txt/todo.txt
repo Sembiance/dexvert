@@ -1,16 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Ensure new formats supported:
-	ancient
-	deark
-	wuimg
-	adplug
-	libmikmod
-	libxmp
-	vgmstream
-	zxtune
-
 * Fix audio/fssdSound
 	It seems like resource_dasm (ran from bin/fssd2wav.js) is no longer outputing the _INFO_1000.bin resource?
 	Even though I didn't update that....
@@ -121,6 +111,8 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Potentially update GIMP from 2.99 to 3.00 (there are likely considerable python API changes, claude and perplexity both highlighted a lot, but I should find an actual blog post/changes news with actual API change info)
+
 * For anything dexvert uses "winedump" for, could get PE section names with objdump -h or llvm-objdump -h or something like that, probably added as another "meta" program.
   Could look at `winedump -x` to see what other info is available, from non 32-bit exes like:  https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   Then update injest to grab these and add them to the detections field in a similar way that I do for Mac type/creator

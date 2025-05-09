@@ -70,7 +70,7 @@ export const gameextractor =
 		vivBIGF                             : {name : "VIV/BIGF/BIG4 EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF", "BIG4 Electronic Arts game data archive"], website : "http://fileformats.archiveteam.org/wiki/VIV"},
 		volitionPackageGameArchive          : {name : "Volition Package game archive", ext : [".vpp", ".vp"], magic : ["Volition Package - Red Faction game data archive", "Volition Package game archive data"]},
 		warcraft2GameArchive                : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true, idMeta : ({macFileType, macFileCreator}) => macFileType==="W2df" && macFileCreator==="W2dm"},
-		wad2GameArchive                     : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
+		wad2GameArchive                     : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file", "Quake WAD"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
 		xcrArchive                          : {name : "XCR archive", ext : [".xcr"], magic : ["XCR archive"]},
 		xenonautsGameArchive                : {name : "Xenonauts game archive", ext : [".pfp"], magic : ["Xenonauts game data archive"], weakMagic : true},
 		youDontKnowJackGameArchive          : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"], idMeta : ({macFileType, macFileCreator}) => (macFileType==="srf " && ["SRF ", "YDKJ"].includes(macFileCreator)) || (macFileType==="srf1" && macFileCreator==="SrfM") || (macFileType==="xSRF" && ["C2Bs", "Qbrw"].includes(macFileCreator))},

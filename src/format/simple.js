@@ -88,7 +88,7 @@ export default
 		palmSuperMemo            : {name : "Palm SuperMemo", ext : [".pdb"], magic : ["Palm SuperMemo", /^SuperMemo PalmOS document/]},
 		palmTealMeal             : {name : "Palm TealMeal Document", ext : [".pdb"], magic : ["Palm TealMeal", "TealMeal PalmOS document"]},
 		palmThoughtManager       : {name : "Palm ThoughtManager", ext : [".pdb"], magic : ["Palm ThoughtManager"]},
-		papyrus                  : {name : "Papyrus", ext : [".pap"], magic : ["Papyrus document", /^fmt\/1965( |$)/]},
+		papyrus                  : {name : "Papyrus", ext : [".pap"], magic : ["Papyrus document", /^fmt\/1965( |$)/], idMeta : ({macFileType, macFileCreator}) => macFileType==="PAPD" && macFileCreator==="PaPy"},
 		pcpHelpText              : {name : "PCP Help Text", ext : [".pag"], magic : ["PCP Help Text"]},
 		pcTypeDocument           : {name : "PC-Type Document", ext : [".pct"], magic : ["PC-Type document"]},
 		peterNortonHelp          : {name : "Peter Norton Computing Help", ext : [".hlp"], magic : ["Peter Norton Computing Help"]},

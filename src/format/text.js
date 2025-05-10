@@ -428,6 +428,7 @@ export default
 		consolidatedLaserRangingPredictionFormat   : {name : "Consolidated Laser Ranging Prediction Format", ext : [".cpf", ".opa"], magic : ["Consolidated Laser Ranging Prediction Format"]},
 		conTeXtDocument                            : {name : "ConTeXt document", ext : [".tex"], magic : ["ConTeXt document"], weakMagic : true},
 		corelCADMaterial                           : {name : "CorelCAD Material", ext : [".mat"], magic : ["CorelCAD Material"]},
+		corelLanguageResource                      : {name : "Corel Language Resource", ext : [".lrs"], magic : ["Corel Language Resource"]},
 		corelWordPerfectSetupInformation           : {name : "Corel/WordPerfect Setup information", ext : [".csw"], magic : ["Corel/WordPerfect Setup information"], weakMagic : true},
 		cpBackupConfiguration                      : {name : "CPBackup Configuration", ext : [".cfg"], magic : ["CPBackup Configuration"], weakMagic : true},
 		cpBackupInfo                               : {name : "CPBackup info", ext : [".set"], magic : ["CPBackup info"]},

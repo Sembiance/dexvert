@@ -237,7 +237,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				if(progProps.flags?.forbiddenMagic && dexState.ids?.some(v => v.magic.startsWith(progProps.flags.forbiddenMagic)))
 					return xlog.info`Skipping converter ${prog} due to forbiddenMagic flag and having a matching magic`, false;
 
-				if(progProps.flags?.hasExtMatch && !id.extMatch)
+				if(progProps.flags?.hasExtMatch && !id.extMatch && id.matchType!=="ext")
 					return xlog.info`Skipping converter ${prog} due to hasExtMatch flag and not having an extension match`, false;
 				
 				xlog.debug`Running converter ${prog}...`;

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,562)
+# Unsupported File Formats (3,568)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -758,7 +758,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (195)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -821,6 +821,7 @@ Family/Format | Name | Extensions | Notes
 [image/drawIt](https://discmaster.textfiles.com/search?format=drawIt) | [DrawIt](http://fileformats.archiveteam.org/wiki/DrawIt_(Atari)) | .dit | [14 sample files](https://sembiance.com/fileFormatSamples/image/drawIt/) - Can only match based on fileSize and recoil2png converts most garbage into a garbage image. Only encountered about 6 of these in all of discmaster2, but false positives are around 1,000 which is too high a ratio to bother supporting.
 [image/drawStudio](https://discmaster.textfiles.com/search?format=drawStudio) | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://sembiance.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 [image/dvdFabChangeGraphicPicture](https://discmaster.textfiles.com/search?format=dvdFabChangeGraphicPicture) | DVDFab Change Graphic Picture | .cgp | 
+[image/dxpCompressedBitmap](https://discmaster.textfiles.com/search?format=dxpCompressedBitmap) | DXP compressed bitmap | .dxp | 
 [image/eaSeattlePictureGameData](https://discmaster.textfiles.com/search?format=eaSeattlePictureGameData) | EA Seattle picture game data | .pic | 
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?format=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
@@ -1133,7 +1134,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,339)
+## Other (2,344)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1663,6 +1664,7 @@ Family/Format | Name | Extensions | Notes
 [other/cryoS3DGameData](https://discmaster.textfiles.com/search?format=cryoS3DGameData) | Cryo S3D game data | .s3d | 
 [other/crystalAtariBrowserModule](https://discmaster.textfiles.com/search?format=crystalAtariBrowserModule) | Crystal Atari Browser Module | .mdl | 
 [other/crystalTOPASMaterial](https://discmaster.textfiles.com/search?format=crystalTOPASMaterial) | Crystal TOPAS Material |  | 
+[other/crystalMakerDataFormat](https://discmaster.textfiles.com/search?format=crystalMakerDataFormat) | CrystalMaker Data format | .cmd5 .cmdf .cmmf | 
 [other/crytekAsset](https://discmaster.textfiles.com/search?format=crytekAsset) | Crytek asset | .cgf .cga .anm .caf | 
 [other/csrBluecoreFirmwareSegment](https://discmaster.textfiles.com/search?format=csrBluecoreFirmwareSegment) | CSR Bluecore firmware segment | .dfu | 
 [other/ctVOICEDriver](https://discmaster.textfiles.com/search?format=ctVOICEDriver) | CT-VOICE Driver | .drv | 
@@ -1939,6 +1941,7 @@ Family/Format | Name | Extensions | Notes
 [other/foreignLanguageMasterConfig](https://discmaster.textfiles.com/search?format=foreignLanguageMasterConfig) | Foreign Language Master Configuration | .config | 
 [other/foreignLanguageMasterDictionary](https://discmaster.textfiles.com/search?format=foreignLanguageMasterDictionary) | Foreign Language Master dictionary | .flm | 
 [other/forgeFileSystemGameDataArchive](https://discmaster.textfiles.com/search?format=forgeFileSystemGameDataArchive) | Forge File System game data archive | .ffs | 
+[other/formDBSet](https://discmaster.textfiles.com/search?format=formDBSet) | Form DB Set | .fds | 
 [other/formFloworm](https://discmaster.textfiles.com/search?format=formFloworm) | FormFlow form | .frz .frl | 
 [other/formulaDocument](https://discmaster.textfiles.com/search?format=formulaDocument) | Formula document | .frm | 
 [other/formWorxForWindowsForm](https://discmaster.textfiles.com/search?format=formWorxForWindowsForm) | FormWorx for Windows Form | .fpx | 
@@ -2385,7 +2388,9 @@ Family/Format | Name | Extensions | Notes
 [other/messiahStudioProject](https://discmaster.textfiles.com/search?format=messiahStudioProject) | MessiahStudio Project | .mpj | 
 [other/metaSoftwareDesignDiagram](https://discmaster.textfiles.com/search?format=metaSoftwareDesignDiagram) | Meta Software Design Diagram | .dsd | 
 [other/metaCreationsResourceFile](https://discmaster.textfiles.com/search?format=metaCreationsResourceFile) | MetaCreations Resource Composite File |  | 
+[other/metaEditEntityRelationshipAttrDiagram](https://discmaster.textfiles.com/search?format=metaEditEntityRelationshipAttrDiagram) | MetaEdit Entity-Relationship-Attribute diagram | .era | 
 [other/metaEditOODAClassDiagram](https://discmaster.textfiles.com/search?format=metaEditOODAClassDiagram) | MetaEdit OODA Class Diagram | .ocd | 
+[other/metaEditStructuredSystemsAnalysis](https://discmaster.textfiles.com/search?format=metaEditStructuredSystemsAnalysis) | MetaEdit Structured Systems Analysis | .ssa | 
 [other/metalinkIceMasterMacro](https://discmaster.textfiles.com/search?format=metalinkIceMasterMacro) | Metalink iceMaster Macro | .mac | 
 [other/metasequoiaBrush](https://discmaster.textfiles.com/search?format=metasequoiaBrush) | Metasequoia Brush | .mqb | 
 [other/metaWareParseTable](https://discmaster.textfiles.com/search?format=metaWareParseTable) | MetaWare Parse Table | .pt | 
@@ -2700,6 +2705,7 @@ Family/Format | Name | Extensions | Notes
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?format=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?format=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
 [other/perFORMCompressedDatabase](https://discmaster.textfiles.com/search?format=perFORMCompressedDatabase) | PerFORM compressed database | .frp | 
+[other/perFormDBDefinition](https://discmaster.textfiles.com/search?format=perFormDBDefinition) | PerForm DB definition | .fdb | 
 [other/perryMasonTheCaseOfTheMandarinMurderGameData](https://discmaster.textfiles.com/search?format=perryMasonTheCaseOfTheMandarinMurderGameData) | Perry Mason: The Case of the Mandarin Murder game data | .cst | 
 [other/personalFinanceManagerPlusData](https://discmaster.textfiles.com/search?format=personalFinanceManagerPlusData) | Personal Finance Manager Plus data | .mny | 
 [other/personalPearlDataBase](https://discmaster.textfiles.com/search?format=personalPearlDataBase) | Personal Pearl data base | .d00 .d01 | 

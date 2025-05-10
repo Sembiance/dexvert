@@ -1,4 +1,4 @@
-# Supported File Formats (3,137)
+# Supported File Formats (3,138)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -248,7 +248,7 @@ archive | [LZIP Archive](http://fileformats.archiveteam.org/wiki/Lzip) | .lz | [
 archive | [LZOP Archive](http://fileformats.archiveteam.org/wiki/Lzop) | .lzo | [lzop](https://www.lzop.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lzop/)
 archive | [LZS221 Compressed](http://fileformats.archiveteam.org/wiki/LZS221) |  | [deark](https://entropymine.com/deark/) [lzsdemo](https://www.sac.sk/download/pack/lzs221.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lzs221/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/compactPro/)
-archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [26 sample files](https://sembiance.com/fileFormatSamples/archive/macBinary/) - We include MacBinary 1, 2, 3 into this single format
+archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [27 sample files](https://sembiance.com/fileFormatSamples/archive/macBinary/) - We include MacBinary 1, 2, 3 into this single format
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [resource_dasm](https://github.com/fuzziqersoftware/resource_dasm) [deark](https://entropymine.com/deark/) | [37 sample files](https://sembiance.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [projectorRays](https://github.com/ProjectorRays/ProjectorRays) [directorCastRipper12](https://github.com/n0samu/DirectorCastRipper) [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) | [62 sample files](https://sembiance.com/fileFormatSamples/archive/macromediaDirector/)
 archive | [Macromedia Flash Compiled EXE](http://fileformats.archiveteam.org/wiki/SWF) | .exe | [EXE2SWFExtractor](https://sothink.com/product/flashdecompiler/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/swfEXE/)
@@ -362,7 +362,7 @@ archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib 
 archive | RJCrush Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rjCrushPacked/)
 archive | RLE com-packer Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rleCOMPackerPacked/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar .exe | [unrar](https://www.rarlab.com/rar_add.htm) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/rar/)
-archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
+archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
 archive | [Sango Fighter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/sangoFighterGameArchive/)
 archive | [SAP Thomson Disk Image](http://nostalgies.thomsonistes.org/transfert.html) | .sap | [sapfs](http://nostalgies.thomsonistes.org/transfert.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sapThomsonDiskImage/)
 archive | SAR Archive | .sar | [unar](https://github.com/incbee/Unarchiver) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sarArchive/)
@@ -2068,7 +2068,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,024)
+## Text (1,025)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2084,7 +2084,7 @@ text | ACCEL Printed Circuit Board | .bak .sch .pcb |  | [6 sample files](https:
 text | Acclaim Skeleton File | .asf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/acclaimSkeletonFile/)
 text | ACE/gr fit description file | .fit |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/acegrFitDescriptionFile/)
 text | Acrobat Distiller Job Options |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/acrobatDistillerJobOptions/)
-text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
+text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
 text | ActiveX License Package file | .lpk |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/activeXLicensePackageFile/)
 text | Actor Library Definition Language | .ldl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/actorLibraryDefinitionLanguage/)
 text | Adblock Plus rules file | .txt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/adblockPlusRulesFile/)
@@ -2244,6 +2244,7 @@ text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV)
 text | Compo preferences |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/compoPreferences/)
 text | Consolidated Laser Ranging Prediction Format | .cpf .opa |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/consolidatedLaserRangingPredictionFormat/)
 text | ConTeXt document | .tex |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/conTeXtDocument/)
+text | Corel Language Resource | .lrs |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/corelLanguageResource/)
 text | Corel/WordPerfect Setup information | .csw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/corelWordPerfectSetupInformation/)
 text | CorelCAD Material | .mat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/corelCADMaterial/)
 text | COREWAR program | .prg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/corewarProgram/)
@@ -3021,7 +3022,7 @@ text | WarpIN Script | .wis |  | [8 sample files](https://sembiance.com/fileForm
 text | Watcom C/C++ Debug commands sequence | .dbg |  | 
 text | Watcom C/C++ Project | .wpj |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/watcomCProject/)
 text | Watcom C/C++ Target | .tgt |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/watcomCTarget/)
-text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
+text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | Wax Project | .wxp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/waxProject/)
 text | WDDX packet |  |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/wddxPacket/)
 text | Web browser cookies | .txt |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/webBrowserCookies/)

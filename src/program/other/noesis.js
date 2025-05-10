@@ -46,18 +46,18 @@ export class noesis extends Program
 				$statusBarTextTrimmed = StringStripWS($statusBarText, 7)
 				return StringLen($statusBarTextTrimmed) > 0
 			EndFunc
-			CallUntil("WaitForFileToLoad", ${xu.SECOND*25})
+			CallUntil("WaitForFileToLoad", ${xu.SECOND*30})
 
 			Func WaitForMainWindow()
 				WindowDismiss("Open", "", "{ESCAPE}")
 				return WinActive("Noesis", "")
 			EndFunc
-			$mainWindow = CallUntil("WaitForMainWindow", ${xu.SECOND*10})
+			$mainWindow = CallUntil("WaitForMainWindow", ${xu.SECOND*15})
 			Sleep(250)
 
 			Func WaitForExportWindow()
 				Send("!f")
-				Sleep(200)
+				Sleep(250)
 				Send("e")
 
 				WindowFailure("Noesis", "file type could not", -1, "{ENTER}")
@@ -65,16 +65,16 @@ export class noesis extends Program
 
 				return WinWaitActive("Export Media", "", 1)
 			EndFunc
-			$exportWindow = CallUntil("WaitForExportWindow", ${xu.SECOND*20})
+			$exportWindow = CallUntil("WaitForExportWindow", ${xu.SECOND*25})
 			If Not $exportWindow Then
 				Exit 0
 			EndIf
 
-			Send("{TAB}{TAB}{TAB}")
-			Send("c:\\out\\${_TYPE_OUT_SUFFIX[r.flags.type]}")
+			SendSlow("{TAB}{TAB}{TAB}")
+			SendSlow("c:\\out\\${_TYPE_OUT_SUFFIX[r.flags.type]}")
 
-			Send("{TAB}{TAB}")
-			Send("${_TYPE_OUTPUT_FORMAT_KEYS[r.flags.type]}")
+			SendSlow("{TAB}{TAB}")
+			SendSlow("${_TYPE_OUTPUT_FORMAT_KEYS[r.flags.type]}")
 
 			Send("{ENTER}")
 
@@ -82,11 +82,11 @@ export class noesis extends Program
 				WindowDismiss("Open", "", "{ESCAPE}")
 				return WinActive("Noesis", "Export complete.")
 			EndFunc
-			$exportCompleteWindow = CallUntil("WaitForExportComplete", ${xu.MINUTE*2})
+			$exportCompleteWindow = CallUntil("WaitForExportComplete", ${xu.MINUTE*2.5})
 			Send("{ENTER}")
-			WinWaitClose($exportCompleteWindow, "", 10)
+			WinWaitClose($exportCompleteWindow, "", 15)
 			Send("{ESC}")
-			WinWaitClose($exportWindow, "", 10)`
+			WinWaitClose($exportWindow, "", 15)`
 	});
 	post = async r =>	// eslint-disable-line sembiance/shorter-arrow-funs
 	{

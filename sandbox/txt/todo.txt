@@ -203,9 +203,6 @@
   - Try adding puremagic 'detect' program: https://github.com/cdgriffith/puremagic
 	After, run: cd util && dra checkDetector.js --program=puremagic --format=image/p   (then later, --format=all)  
 
-* Might be fun to detect MacOS kalideoscope themes and grab the individual images and render some sort of 'preview' of it: http://discmaster.textfiles.com/search?q=%22Minimum+Kaleidoscope+version%22&qfields=content&family=text&dedup=dedup
-  If I name the preview something like kalideoscope_preview_dexvert.png then I can find them more easily
-
 * Create a Duke Nukem 3D ART extractor/convertor, see sandbox/wip/dukeART
   The BAFed jar (java -jar BAFed.jar) can load and show the ART files, with animation, but can't really export
   The 'test.py' script comes from: http://justsolve.archiveteam.org/wiki/ART_(Duke_Nukem_3D)

@@ -19,4 +19,5 @@ export class powerPack extends Format
 		return false;
 	};
 	converters = ["unar[filenameEncoding:iso-8859-1]", "ancient", "amigadepacker"];
+	verify     = ({inputFile, newFile}) => newFile.size>(inputFile.size*0.9);	// Some files detect as Powerpacker but expand to something much smaller. This trys to prevent that: https://discmaster.textfiles.com/browse/94/0_EPISODE_12_APR_1995.iso/demos/heir/heir.z/INTRO.PCV
 }

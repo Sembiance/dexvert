@@ -110,6 +110,7 @@ const DEXMAGIC_CHECKS =
 	"CD-I IFF Image"                  : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CDView Encrypted JPG"            : [{offset : 0, match : "Z}Z"}],
 	"CharPad"                         : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
+	"Croteam texture Min"             : [{offset : 0, match : "TVER"}, {offset : 8, match : "TDAT"}],
 	"DeskMate Paint Alt"              : [{offset : 0, match : "PNT"}],
 	"Digi-Pic 2"                      : [{offset : 32000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
 	"ECI Graphic Editor"              : [{offset : 0, match : [0x00, 0x40]}],

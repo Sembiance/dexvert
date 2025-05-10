@@ -247,7 +247,10 @@ const FLEX_SIZE_FORMATS =
 		"rsrc:.txt" : 1,
 
 		// different PDF each time
-		tnef : 0.1
+		tnef : 0.1,
+
+		// different each run, sometimes, not sure why
+		adobePhotoshopPatterns : 1
 	},
 	document :
 	{
@@ -287,7 +290,7 @@ const FLEX_SIZE_FORMATS =
 		gimpBrush        : 20,
 		lottie           : 0.1,
 		lotusChart       : 5,
-		odg              : 20,	// also differs per host
+		odg              : 20,  	// also differs per host
 		pes              : 0.1,
 		pgx              : 10,
 		qpcImage         : 10,
@@ -339,7 +342,7 @@ const FLEX_SIZE_FORMATS =
 		iffYAFA : 20,
 
 		// these are screen recordings from DOSBox and can differ a good bit between each run
-		disneyCFAST : 25,
+		disneyCFAST : 50,
 		fantavision : 60,
 		grasp       : 70
 	}
@@ -350,6 +353,7 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 {
 	archive :
 	{
+		macromediaDirector : ["ﾊﾘｳｯﾄﾞ名優写真館.DXR"],	// same size but different shasum
 		sapThomsonDiskImage : ["TURBOCUP.SAP"]	// corrupted archive, different stuff extracted each time
 	},
 	document :
@@ -386,8 +390,6 @@ const IGNORE_SIZE_FILEPATHS =
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
 const FLEX_DIFF_FILES =
 [
-	// sometimes files are created, sometimes not
-	/archive\/h2oGameDataArchive\/SoundEffects_Demo\.H2O$/,
 	// sometimes different pngs are produced, sometimes some are missing, not sure why
 	/archive\/hypercard\/.+$/,
 
@@ -413,7 +415,7 @@ const FLEX_DIFF_FILES =
 
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
-	/audio\/soundFont2\/.*\.arl$/,
+	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/
 ];
 

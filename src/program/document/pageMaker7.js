@@ -9,7 +9,7 @@ export class pageMaker7 extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 15)
+			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 20)
 			Func PreOpenWindows()
 				WindowFailure("Adobe PageMaker", "Cannot open file", -1, "{ENTER}")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Cannot load your target printer", "{ENTER}")
@@ -17,46 +17,46 @@ export class pageMaker7 extends Program
 				WindowDismiss("Lost Link", "", "!a")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "HyperContent Manager error", "{ENTER}")
 			EndFunc
-			CallUntil("PreOpenWindows", ${xu.SECOND*5})
+			CallUntil("PreOpenWindows", ${xu.SECOND*10})
 
 			Send("^S")
 
-			$saveAsWindow = WindowRequire("Save Publication", "", 7)
+			$saveAsWindow = WindowRequire("Save Publication", "", 10)
 			Send("c:\\TEMP\\document.pmd{ENTER}")
 
 			Func PostSaveAsWindows()
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Cannot save as", "{ENTER}")
 				WindowDismiss("Save Publication", "Do you want to replace", "y")
 			EndFunc
-			CallUntil("PostSaveAsWindows", ${xu.SECOND*2})
+			CallUntil("PostSaveAsWindows", ${xu.SECOND*2.5})
 
-			WinWaitClose($saveAsWindow, "", 7)
+			WinWaitClose($saveAsWindow, "", 10)
 
 			SendSlow("!fep")
 
 			Func PreExportWindows()
 				WindowDismiss("[TITLE:Adobe PageMaker]", "This publication is not currently in a saved state", "y")
 			EndFunc
-			CallUntil("PreExportWindows", ${xu.SECOND*2})
+			CallUntil("PreExportWindows", ${xu.SECOND*5})
 
-			$pdfOptionsWindow = WindowRequire("PDF Options", "", 7)
+			$pdfOptionsWindow = WindowRequire("PDF Options", "", 10)
 			Send("e")
 			
 			Func PostPDFOptionsWindows()
 				WindowDismiss("[TITLE:Printer Style Warnings]", "", "{ENTER}")
 			EndFunc
-			CallUntil("PostPDFOptionsWindows", ${xu.SECOND*2})
+			CallUntil("PostPDFOptionsWindows", ${xu.SECOND*5})
 
-			$exportAsWindow = WindowRequire("Export PDF As", "", 7)
+			$exportAsWindow = WindowRequire("Export PDF As", "", 10)
 			Send("c:\\out\\out.pdf{TAB}{TAB}{TAB}{TAB}{SPACE}s")
-			WinWaitClose($exportAsWindow, "", 5)
+			WinWaitClose($exportAsWindow, "", 10)
 
 			Func PostExportWindows()
 				WindowDismiss("[TITLE:Adobe PageMaker]", "One or more of the linked", "p")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Unable to open the publication", "{ENTER}")
 			EndFunc
-			CallUntil("PostExportWindows", ${xu.SECOND*3})
-			WinWaitClose($pdfOptionsWindow, "", 5)
+			CallUntil("PostExportWindows", ${xu.SECOND*5})
+			WinWaitClose($pdfOptionsWindow, "", 10)
 
 			WinWaitActive($mainWindow, "", 5)
 

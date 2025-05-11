@@ -441,6 +441,7 @@ export const WEAK_VALUES =
 	/^P;/,
 
 	// FILE: Very weak checks:
+	/^-\s+BinHex binary text/,
 	/^, /,
 	/^\(Directory List\),/,
 	/^\(non-conforming\)$/,
@@ -865,7 +866,7 @@ export const WEAK_VALUES =
 	/^OS9\/(68K|6809) module/,
 	/^overlay object file/,
 	/^PA-RISC\d/,
-	/^PAK archive data$/,
+	/^PAK archive data/,
 	/^Palm OS operating system patch data/,
 	/^Panorama database, /,
 	/^PAQ archive data/,

@@ -313,7 +313,7 @@ export default
 		adobeFontList                              : {name : "Adobe Font List", ext : [".lst"], magic : ["Adobe FontList", /^fmt\/526( |$)/], website : "http://fileformats.archiveteam.org/wiki/Adobe_Font_List"},
 		adobeInDesignPrintingInstructionsReport    : {name : "Adobe InDesign printing instructions report", magic : ["Adobe InDesign printing instructions report"]},
 		adobePhotoshopLightroomTemplate            : {name : "Adobe Photoshop Lightroom template", ext : [".agtemplate"], magic : ["Adobe Photoshop Lightroom template"], weakMagic : true},
-		adobePortableDocumentCatalogIndex          : {name : "Adobe Portable Document Catalog Index", ext : [".pdx"], magic : ["Adobe Portable Document Catalog Index", /^fmt\/(446|447|448)( |$)/], weakMagic : true},
+		adobePortableDocumentCatalogIndex          : {name : "Adobe Portable Document Catalog Index", ext : [".pdx"], magic : ["Adobe Portable Document Catalog Index", /^fmt\/(446|447|448)( |$)/], weakMagic : true, idMeta : ({macFileType, macFileCreator}) => macFileType==="PDX " && macFileCreator==="CARO"},
 		advancedStreamRedirector                   : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector", "audio/x-ms-asx", "Windows Media Metadaten Datei"], weakMagic : true},
 		aegisAnimatorScript                        : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},
 		aegisDrawPart                              : {name : "Aegis Draw part", magic : ["Aegis Draw part"]},

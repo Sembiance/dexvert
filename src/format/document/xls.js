@@ -14,7 +14,7 @@ export class xls extends Format
 		"Visual Tools Spreadsheet", "PlanMaker spreadsheet Document", "SoftMaker PlanMaker Document/template"
 	];
 	weakMagic  = ["Microsoft Excel sheet", "Microsoft Excel worksheet (generic older format)"];	// see poly/solidWorksDrawing/kloub.SLDDRW
-	idMeta     = ({macFileType, macFileCreator}) => ["sLC3", "sLM3", "sLS3", "sLS8", "XLA ", "XLA5", "XLA8", "XLC3", "XLM ", "XLM3", "XLS ", "XLS3", "XLS4", "XLS5", "XLS8", "XLW4"].includes(macFileType) && macFileCreator==="XCEL";
+	idMeta     = ({macFileType, macFileCreator}) => ["sLC3", "sLM3", "sLS3", "sLS8", "XLA ", "XLA5", "XLA8", "XLC3", "XLM ", "XLM3", "XLM4", "XLS ", "XLS3", "XLS4", "XLS5", "XLS8", "XLW3", "XLW4"].includes(macFileType) && macFileCreator==="XCEL";
 	converters = [
 		"soffice[format:MS Excel 2003 XML]", "soffice[format:MS Excel 97]", "soffice[format:MS Excel 95]", "soffice[format:MS Excel 5.0/95]", "soffice[format:MS Excel 4.0]", "excel97[matchType:magic]",
 	

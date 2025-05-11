@@ -214,7 +214,7 @@ const performRun = async (instance, runArgs) =>
 		await fileUtil.move(tmpInArchiveFilePath, inArchiveFilePath);
 
 		// Wait for the OS to finish, which happens when the VM deletes the archive file via http calling /osDONE (or our instance process changes usually due to crashing)
-		const finishedOK = await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : xu.HOUR*3)});
+		const finishedOK = await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : (xu.HOUR*1.8))});
 
 		if(await fileUtil.exists(outarchiveFilePath))	// only exists if the OS was successful and called /osPOST with the result
 		{
@@ -319,6 +319,7 @@ routes.set("/status", async () =>	// eslint-disable-line require-await
 		r.queue = Array.from(RUN_QUEUE, v => { const o = Object.fromEntries(Object.entries(v.body)); delete o.script; return o; });
 		
 	r.instancesAvailable = Object.fromEntries(Object.entries(INSTANCES).map(([osid, instances]) => ([osid, Object.values(instances).filter(v => v.ready && !v.busy).length])));
+	r.instances = INSTANCES;
 	r.cmdDurations = Object.entries(CMD_DURATIONS).map(([cmd, metaDurations]) =>
 	{
 		const durations = metaDurations.map(md => md.duration);

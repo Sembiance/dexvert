@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,568)
+# Unsupported File Formats (3,571)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1134,7 +1134,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,344)
+## Other (2,347)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1245,6 +1245,7 @@ Family/Format | Name | Extensions | Notes
 [other/afterDarkForDOSResourceData](https://discmaster.textfiles.com/search?format=afterDarkForDOSResourceData) | After Dark for DOS Resource data | .rsc | 
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?format=afterlifeSavedGame) | Afterlife saved game |  | 
 [other/ageOfEmpiresScenario](https://discmaster.textfiles.com/search?format=ageOfEmpiresScenario) | Age of Empires Scenario | .scn | 
+[other/ageOfWondersDictionaryData](https://discmaster.textfiles.com/search?format=ageOfWondersDictionaryData) | Age of Wonders Dictionary data | .mld | 
 [other/ageOfWondersShadowMagicEffects](https://discmaster.textfiles.com/search?format=ageOfWondersShadowMagicEffects) | Age of Wonders: Shadow Magic Effects | .fx | 
 [other/agesGameScript](https://discmaster.textfiles.com/search?format=agesGameScript) | AGES Game Script | .aex | 
 [other/agfaCompugraphicFontCache](https://discmaster.textfiles.com/search?format=agfaCompugraphicFontCache) | AGFA/Compugraphic Font Cache |  | 
@@ -2672,6 +2673,7 @@ Family/Format | Name | Extensions | Notes
 [other/paperPortSlideShot](https://discmaster.textfiles.com/search?format=paperPortSlideShot) | PaperPort Slide Show | .fss | 
 [other/papillonPalette](https://discmaster.textfiles.com/search?format=papillonPalette) | Papillon Palette | .pal .ppal | 
 [other/papyrusPrinterInformation](https://discmaster.textfiles.com/search?format=papyrusPrinterInformation) | Papyrus Printer Information | .pri | 
+[other/paradoxFormProperties](https://discmaster.textfiles.com/search?format=paradoxFormProperties) | Paradox Form Properties | .fp .ft | 
 [other/paradoxLock](https://discmaster.textfiles.com/search?format=paradoxLock) | Paradox Lock | .lck | 
 [other/paradoxSecondaryIndex](https://discmaster.textfiles.com/search?format=paradoxSecondaryIndex) | Paradox Secondary Index | .xg0 | 
 [other/paradoxSortDefinition](https://discmaster.textfiles.com/search?format=paradoxSortDefinition) | Paradox sort definition | .sor | 
@@ -3316,7 +3318,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualLISPApplication](https://discmaster.textfiles.com/search?format=visualLISPApplication) | Visual LISP Application | .vlx | 
 [other/visualSciencesResource](https://discmaster.textfiles.com/search?format=visualSciencesResource) | Visual Sciences Resource | .vsr | 
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?format=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 
-[other/visualSourceSafeControlFile](https://discmaster.textfiles.com/search?format=visualSourceSafeControlFile) | Visual SourceSafe Control File | .scc | 
+[other/visualSourceSafeControlFile](https://discmaster.textfiles.com/search?format=visualSourceSafeControlFile) | Visual SourceSafe Control File | .scc | [1 sample file](https://sembiance.com/fileFormatSamples/other/visualSourceSafeControlFile/)
 [other/visualToolsVTSpellDictionary](https://discmaster.textfiles.com/search?format=visualToolsVTSpellDictionary) | VisualTools VT Spell Dictionary | .vtd .vt | 
 [other/vizastarSpreadsheet](https://discmaster.textfiles.com/search?format=vizastarSpreadsheet) | Vizastar spreadsheet | .wks .seq | 
 [other/vmWareNVRAM](https://discmaster.textfiles.com/search?format=vmWareNVRAM) | VMware NVRAM | .nvram | 
@@ -3464,6 +3466,7 @@ Family/Format | Name | Extensions | Notes
 [other/zInstallFormsDialogs](https://discmaster.textfiles.com/search?format=zInstallFormsDialogs) | Z/Install forms/Dialogs | .vvd | 
 [other/zapperInNeverwhereSavedGame](https://discmaster.textfiles.com/search?format=zapperInNeverwhereSavedGame) | Zapper In Neverwhere saved game | .pos | 
 [other/zbasic](https://discmaster.textfiles.com/search?format=zbasic) | ZBASIC | .bas | [6 sample files](https://sembiance.com/fileFormatSamples/other/zbasic/)
+[other/zBrushDocument](https://discmaster.textfiles.com/search?format=zBrushDocument) | ZBrush Document | .zbr | 
 [other/zBrushMatCap](https://discmaster.textfiles.com/search?format=zBrushMatCap) | ZBrush MatCap | .ztl | 
 [other/zBrushMaterial](https://discmaster.textfiles.com/search?format=zBrushMaterial) | ZBrush Material | .zmt | 
 [other/zCTSystemsGroupVideoDriver](https://discmaster.textfiles.com/search?format=zCTSystemsGroupVideoDriver) | ZCT Systems Group video Driver | .drv | 

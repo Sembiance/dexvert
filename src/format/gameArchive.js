@@ -56,7 +56,7 @@ export const gameextractor =
 		paxImperiaEminentDomainGameArchive  : {name : "Pax Imperia: Eminent Domain Game Archive", ext : [".img"], magic : ["Pax Imperia: Eminent Domain game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="Px2D" && macFileCreator==="Pax2"},
 		pendulumaniaGameData                : {name : "Pendulumania game data", ext : [".qda"], magic : ["Pendulumania game data"], weakMagic : true},
 		postalGameArchive                   : {name : "Postal game Archive", ext : [".sak"], magic : ["Postal game data Archive"]},
-		quakePAK                            : {name : "Quake PAK", ext : [".pak"], allowExtMatch : true, magic : ["Quake archive", "Quake I or II world or extension", /^Archive: PACK$/], idMeta : ({macFileType, macFileCreator}) => macFileType==="QDat" && macFileCreator==="Quak", website : "http://fileformats.archiveteam.org/wiki/Quake_PAK"},
+		quakePAK                            : {name : "Quake PAK", ext : [".pak"], allowExtMatch : true, magic : ["Quake archive", "Quake I or II world or extension", /^Archive: PACK$/], idMeta : ({macFileType, macFileCreator}) => (macFileType==="QDat" && macFileCreator==="Quak") || (macFileType===".pak" && macFileCreator==="HEX2"), website : "http://fileformats.archiveteam.org/wiki/Quake_PAK"},
 		realityBytesGameArchive             : {name : "Reality Bytes game archive", ext : [".rbd"], magic : ["Reality Bytes game Data archive"]},
 		redengineGameArchive                : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},
 		riffBACKGameArchive                 : {name : "RIFF BACK Game Archive", ext : [".res"], magic : ["Generic RIFF file BACK"]},

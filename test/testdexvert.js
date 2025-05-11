@@ -40,7 +40,11 @@ const SKIP_FORMATS =
 	"archive/printArtist",
 
 	// these don't make sense to test
-	"other/symlink"
+	"other/symlink",
+
+	// no known samples
+	"text/rexxAdventureSavedGame",
+	"text/signumFontList"
 ];
 
 // These are relative dir paths from test/sample/ that are just supporting files that need to be here but should be ignored for testing purposes

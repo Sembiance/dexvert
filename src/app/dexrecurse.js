@@ -352,7 +352,7 @@ async function processNextQueue()
 			rpcData.fileMeta = taskProps.fileMeta;
 		if(taskProps.forbidProgram)
 			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
-		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*5)+(xu.MINUTE*10)});
+		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)});
 		if(!dexText)
 			throw new Error(`No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`);
 

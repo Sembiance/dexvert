@@ -335,6 +335,9 @@ export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, also
 				Sleep(50)
 			Until TimeDiff($exitDismissTimer) > ${xu.SECOND}
 
+			; Just in case there is a random explorer window open (possibly with a random menu dropped down), I've seen it happen, close the menu then the window
+			Send("{ESCAPE}{ESCAPE}^w")
+
 			${!skipMouseMoving ? `; This will move the mouse over the systray area, causing any 'aborted' program icons to be removed
 			MouseMove(312, 756, 1)
 			MouseMove(1000, 756, 15)` : ""}

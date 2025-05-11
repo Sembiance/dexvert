@@ -9,5 +9,6 @@ export class pcPaint extends Format
 
 	// deark is the only thing that appears to handle .clp files
 	// nconvert sometimes fails to convert, but sometimes succeeds. same command. weird.
-	converters = ["deark[module:pcpaint]", "nconvert[matchType:magic]", "wuimg[matchType:magic]", "ffmpeg[format:pictor_pipe][outType:png]", "pv[matchType:magic]"];
+	converters = ["deark[module:pcpaint]", "nconvert[matchType:magic]", "wuimg[matchType:magic]", "ffmpeg[format:pictor_pipe][outType:png]", "pv[matchType:magic][hasExtMatch]"];
+	verify     = ({meta}) => meta.height>1 && meta.width>1;
 }

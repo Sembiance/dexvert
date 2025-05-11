@@ -1,0 +1,1496 @@
+<html>
+<head>
+<title>MSAgent Character Data Specification</title>
+</head>
+<body text="black" bgcolor="white" link="blue" alink="red" vlink="blue">
+
+<p>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>MSAgent Character Data Specification</b></font></td></tr>
+</table>
+
+<p>
+<table border="0" width="50%">
+<tr><td>Spec Version:</td><td>1.6</td></tr>
+<tr><td>Last updated:</td><td>November 6, 2022</td></tr>
+<tr><td>Written by:</td><td><a href="mailto:info@lebeausoftware.org">Remy Lebeau</a></td></tr>
+<tr><td valign="top">Copyright:</td><td>&copy; 2003-2022 <a href="http://www.lebeausoftware.org" target="_blank">Lebeau Software</a>.<br>All Rights Reserved.</td></tr>
+</table>
+
+<p>
+<table border="3" width="100%" cellpadding="5" bordercolor="red">
+<tr><td align="center" bgcolor="red"><font size="+2"><b>DISCLAIMER</b></font></td></tr>
+<tr><td>
+Permission to copy and distribute this document is granted so long as the contents of this document are not altered. Any additions or modifications to this document shall be submitted to the author for review and inclusion in future releases by the author. Contributors will be credited accordingly.
+
+<p>
+In no event shall <a href="http://www.lebeausoftware.org" target="_blank">Lebeau Software</a>, <a href="http://www.microsoft.com" target="_blank">Microsoft Corporation</a>, or any individuals or other organizations listed in this document, be held liable for any use of the information contained herein. This information is provided as-is for educational purposes.
+
+<p>
+The information contained in this specification was gathered through observation of <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/microsoft-agent" target="_blank">Microsoft Agent</a> data files, and may not be entirely accurate or complete.  Use it at your own risk.
+
+<p>
+This specification is in no way sponsored, supported, or condoned by <a href="http://www.microsoft.com" target="_blank">Microsoft Corporation</a>, and is the sole work of <a href="http://www.lebeausoftware.org" target="_blank">Lebeau Software</a> and credited individuals and organizations.
+
+<p>
+<a href="https://learn.microsoft.com/en-us/windows/win32/lwef/microsoft-agent" target="_blank">Microsoft Agent</a> is Copyright &copy;1996-1998 <a href="http://www.microsoft.com" target="_blank">Microsoft Corporation</a>. All Rights Reserved.
+</td></tr></table>
+
+<p>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Table of Contents</b></font></td></tr>
+</table>
+
+<p>
+<center>
+<table border="0" width="75%">
+<tr>
+<td valign="top" width="50%">
+
+<b><u>General</u></b><br>
+<ul type="disc">
+<li><a href="#Intro">Introduction</a>
+<li><a href="#PODs">Data Types</a>
+<li><a href="#Win32Structures">Win32 API Data Structures</a>
+<li><a href="#LIST">Data Structure Lists</a>
+<li><a href="#CommonStructures">Common Data Structures</a>
+<li><a href="#Compression">Compression Algorithm</a>
+</ul>
+
+</td>
+<td valign="top" width="50%">
+
+<b><u>Data Formats</u></b><br>
+<ul type="disc">
+<li><a href="#ACSFormat">ACS Format</a>
+<li><a href="#ACFFormat">ACF Format</a>
+<li><a href="#ACAFormat">ACA Format</a>
+</ul>
+
+</td></tr>
+</table>
+</center>
+
+<p>
+<a name="Intro"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Introduction</b></font></td></tr>
+</table>
+
+<p>
+The following specification outlines the ACS, ACF, and ACA file formats of <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/microsoft-agent" target="_blank">Microsoft Agent</a> version 2.  At this time, this specification does not explore the file formats for Microsoft Agent version 1.  I hope to include that information in a future version of this specification.
+
+<p>
+I have been a long-time supporter of the MSAgent technology, and became curious about its inner workings.  This specification outlines my efforts to learn the format of the data files used for the animated Characters, in preparation for future projects that can utilize existing and future MSAgent animated Characters without use of the MSAgent engine produced by Microsoft.  Primarily, I want to do this to help to streamline the technology, improve upon it if possible, and then eventually port it to other platforms which Microsoft does not support MSAgent on.
+
+<p>
+Why do this?  Because I think that MSAgent is a fascinating technology.  It provides a relatively simple way to add animated, interactive personalities to software applications and web pages.  Sure, other technologies exist that accomplish the same thing.  But many of them are more complicated to develop with than MSAgent.  I think MSAgent still has untapped potential.  On the other hand, it has been on a downward spiral the past few years.  Partially due to lack of new versions released by Microsoft.  Partially due to lack of much visibility in the marketplace.  I'd hate to see the technology die altogether.  So I try to do my part to help it in any way I can.
+
+<p>
+<a name="PODs"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Data Types</b></font></td></tr>
+</table>
+
+<p>
+All structures mentioned in this specification are based on the following C/C++ data types:
+
+<p>
+<pre>
+    <u>DATA TYPE  | DESCRIPTION           | VALUE RANGE (inclusive)</u>
+    BOOL       | 8-bit boolean         | false (0) or true (non-zero)
+    BYTE       | 8-bit unsigned char   | 0 to 255
+    WCHAR      | 16-bit signed wchar_t | -32,768 to 32,767
+    SHORT      | 16-bit signed short   | -32,768 to 32,767
+    USHORT     | 16-bit unsigned short | 0 to 65,535
+    LONG       | 32-bit signed long    | -2,147,483,648 to 2,147,483,647
+    ULONG      | 32-bit unsigned long  | 0 to 4,294,967,295
+</pre>
+
+<p>
+The high-order BYTE of a value is the most significant BYTE.  The high-order bit of a BYTE is the most significant bit.
+
+<p>
+For example, a ULONG value of decimal 16909060 (hex 0x01020304) is stored as follows:
+
+<p>
+<pre>
+    (hex)     0x04 0x03 0x02 0x01
+    (binary)  00000100 00000011 00000010 00000001
+</pre>
+
+<p>
+<a name="Win32Structures"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Win32 API Data Structures</b></font></td></tr>
+</table>
+
+<p>
+The following structures are provided by the Windows API and are listed here for reference purposes.  These structures are publicly documented by Microsoft, and as such their full descriptions are omitted from this specification.
+
+<p>
+<a name="GUID"></a>
+<font size="+1"><b><u>GUID</u></b></font> (<a href="https://learn.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid" target="_blank">MSDN reference</a>)
+
+<p>
+A GUID is a globally unique identifier for an object.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Data 1
+    <a href="#PODs">USHORT</a>    | 1        | Data 2
+    <a href="#PODs">USHORT</a>    | 1        | Data 3
+    <a href="#PODs">BYTE</a>      | 8        | Data 4
+</pre>
+
+<p>
+<a name="BITMAPINFOHEADER"></a>
+<font size="+1"><b><u>BITMAPINFOHEADER</u></b></font> (<a href="https://learn.microsoft.com/en-us/previous-versions/dd183376(v=vs.85)" target="_blank">MSDN reference</a>)
+</table>
+
+<p>
+The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB).
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Size of this structure (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">LONG</a>      | 1        | Width (in pixels)
+    <a href="#PODs">LONG</a>      | 1        | Height (in pixels)
+    <a href="#PODs">USHORT</a>    | 1        | # of planes (always 0x01)
+    <a href="#PODs">USHORT</a>    | 1        | # of bits per pixel
+    <a href="#PODs">ULONG</a>     | 1        | Type of compression
+    <a href="#PODs">ULONG</a>     | 1        | Size of image data (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">LONG</a>      | 1        | Horizontal resolution, pixels per meter
+    <a href="#PODs">LONG</a>      | 1        | Vertical resolution, pixels per meter
+    <a href="#PODs">ULONG</a>     | 1        | # of color indices in color table
+    <a href="#PODs">ULONG</a>     | 1        | # of important color indices
+</pre>
+
+<p>
+<a name="RGBQUAD"></a>
+<font size="+1"><b><u>RGBQUAD</u></b></font> (<a href="https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-rgbquad" target="_blank">MSDN reference</a>)
+
+<p>
+The RGBQUAD structure describes a color consisting of relative intensities of red, green, and blue. 
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BYTE</a>      | 1        | Red value
+    <a href="#PODs">BYTE</a>      | 1        | Green value
+    <a href="#PODs">BYTE</a>      | 1        | Blue value
+    <a href="#PODs">BYTE</a>      | 1        | Reserved (always 0x00)
+</pre>
+
+<p>
+<a name="ICONIMAGE"></a>
+<font size="+1"><b><u>ICONIMAGE</u></b></font>
+
+<p>
+The ICONIMAGE structure contains information about the dimensions and color format of an icon.
+
+<p>
+<pre>
+    <u>DATA TYPE        | QUANTITY | DESCRIPTION</u>
+    <a href="#BITMAPINFOHEADER">BITMAPINFOHEADER</a> | 1        | Icon Header
+    <a href="#RGBQUAD">RGBQUAD</a>          | variable | Color Table
+    <a href="#PODs">BYTE</a>             | variable | XOR Mask Bits
+    <a href="#PODs">BYTE</a>             | variable | AND Mask Bits
+</pre>
+
+<p>
+<a name="LANGID"></a>
+<font size="+1"><b><u>LANGID</u></b></font> (<a href="https://learn.microsoft.com/en-us/windows/win32/intl/language-identifiers" target="_blank">MSDN reference</a>)
+
+<p>
+The LangID structure is used to specify a language locale, including primary and sublanguage identifiers.  Refer to the Windows API documentation for the MAKELANGID() macro for a list of possible values.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>    | 1        | Primary/Secondary language ID
+</pre>
+
+<p>
+<a name="RECT"></a>
+<font size="+1"><b><u>RECT</u></b></font> (<a href="https://learn.microsoft.com/en-us/previous-versions/dd162897(v=vs.85)" target="_blank">MSDN reference</a>)
+
+<p>
+The RECT structure defines the coordinates of the upper-left and lower-right corners of a rectangle. 
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">LONG</a>      | 1        | X-coordinate of the upper-left corner of the rectangle
+    <a href="#PODs">LONG</a>      | 1        | Y-coordinate of the upper-left corner of the rectangle
+    <a href="#PODs">LONG</a>      | 1        | X-coordinate of the lower-right corner of the rectangle
+    <a href="#PODs">LONG</a>      | 1        | Y-coordinate of the lower-right corner of the rectangle
+</pre>
+
+<p>
+<a name="RGNDATAHEADER"></a>
+<font size="+1"><b><u>RGNDATAHEADER</u></b></font> (<a href="https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-rgndataheader" target="_blank">MSDN reference</a>)
+
+<p>
+The RGNDATAHEADER structure describes the data returned by the GetRegionData() function. 
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Size of this structure (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">ULONG</a>     | 1        | Specifies the type of region
+    <a href="#PODs">ULONG</a>     | 1        | # of rectangles that make up the region
+    <a href="#PODs">ULONG</a>     | 1        | Size of the buffer required to receive the <a href="#RECT">RECT</a> structure that specifies the coordinates of the rectangles that make up the region
+    <a href="#RECT">RECT</a>      | 1        | Specifies a bounding rectangle for the region in logical units
+</pre>
+
+<p>
+<a name="RGNDATA"></a>
+<font size="+1"><b><u>RGNDATA</u></b></font> (<a href="https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-rgndata" target="_blank">MSDN reference</a>)
+
+<p>
+The RGNDATA structure contains a header and an array of rectangles that compose a region. The rectangles are sorted top to bottom, left to right. They do not overlap.
+
+<p>
+<pre>
+    <u>DATA TYPE     | QUANTITY | DESCRIPTION</u>
+    <a href="#RGNDATAHEADER">RGNDATAHEADER</a> | 1        | Region Header
+    <a href="#PODs">BYTE</a>          | variable | Contains the <a href="#RECT">RECT</a> structures that make up the region
+</pre>
+
+<p>
+<a name="RIFF"></a>
+<font size="+1"><b><u>RIFF AUDIO</u></b></font> (<a href="https://learn.microsoft.com/en-us/windows/win32/xaudio2/resource-interchange-file-format--riff-" target="_blank">MSDN reference</a>)
+
+<p>
+All Audio Data in <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/microsoft-agent" target="_blank">Microsoft Agent</a> is formatted as standardized Resource Interchange File Format (RIFF) chunks, as described in the WAV Format Specification.  The RIFF and WAV specifications are provided by Microsoft separately.
+
+<p>
+The Audio Data can be used as-is with any RIFF-enabled output, such as DirectSound, the Win32 API PlaySound() function, etc.  The Audio Data is never compressed in <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/microsoft-agent" target="_blank">Microsoft Agent</a>, although it may be compressed and/or encoded separately before the Character data files are compiled.
+The appropriate codec(s) need to be installed on the target machine beforehand in order to process the Audio Data for playback.
+
+<p>
+<a name="LIST"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Data Structure Lists</b></font></td></tr>
+</table>
+
+<p>
+Many of the structures described in this specification appear as standalone items, as well as lists of multiple items of the same structure type. When a list of items of a given structure type is present, the list items are immediately preceeded by a numeric value specifying how many items are in the list.
+
+<p>
+If a structure described in this specification is available in a list format, the definition of the structure will include the data type used for the list count, in parenthesis. When the list is used in another structure, the keyword "<b>LIST</b>" will be specified as the Quantity. For example:
+
+<p>
+<font size="+1"><b><u>SAMPLE (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Value 1
+    <a href="#PODs">USHORT</a>    | 2        | Values 2-3
+    <a href="#PODs">BYTE</a>      | 4        | Values 4-7
+</pre>
+
+<p>
+<font size="+1"><b><u>SOMETHINGELSE</u></b></font>
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    SAMPLE    | LIST     | List of SAMPLE Items
+</pre>
+
+<p>
+In the example above, a list of 4 items of type SAMPLE would consist of 50 <a href="#PODs">BYTEs</a> total, as follows:
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>    | 1        | # of Items in the List
+    SAMPLE    | 4        | Items of SAMPLE type
+</pre>
+
+<p>
+For the rest of this specification, the general definition of a structure list is as follows:
+
+<p>
+<font size="+1"><b><u>&lt;STRUCTURE&gt; (List Count: <a href="#PODs">&lt;COUNTTYPE&gt;</a>)</u></b></font>
+
+<p>
+<pre>
+    <u>DATA TYPE   | QUANTITY | DESCRIPTION</u>
+    &lt;COUNTTYPE&gt; | 1        | # of Items in the List
+    &lt;STRUCTURE&gt; | variable | Items of &lt;STRUCTURE&gt; type
+</pre>
+
+<p>
+<a name="CommonStructures"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Common Data Structures</b></font></td></tr>
+</table>
+
+<p>
+The structures in this section describe data that is commonly used in the ACS, ACF, and ACA formats.
+
+<p>
+<a name="STRING"></a>
+<font size="+1"><b><u>STRING (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The STRING structure contains printable characters, usually for human-readible display.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | # of Characters
+    <a href="#PODs">WCHAR</a>     | variable | String Characters
+</pre>
+
+<p>
+The character data in the ACS format includes a Null Terminator (0x0000). However, the number of characters does not include the terminator. In other words, a STRING with a count of 5 will contain 5 characters and a 6th character for the terminator. If the count is 0, then no character data is present at all, and no terminator is present.
+
+<p>
+The character data in the ACF format never includes a Null Terminator (0x0000).
+
+<p>
+The STRING structure is not used in the ACA format.
+
+<p>
+<a name="STATEINFO"></a>
+<font size="+1"><b><u>STATEINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The STATEINFO structure specifies the supported animations that are assigned to a particular Character State.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#STRING">STRING</a>    | 1        | State Name
+    <a href="#STRING">STRING</a>    | LIST     | Animations in State
+</pre>
+
+<p>
+Refer to the <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/designing-characters-for-microsoft-agent" target="_blank">"Designing Characters for Microsoft Agent"</a> documentation provided by Microsoft for more information regarding how Character States work.
+
+<p>
+<a name="LOCALIZEDINFO"></a>
+<font size="+1"><b><u>LOCALIZEDINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The LOCALIZEDINFO structure contains Character information that is localized to a particular language locale.  A Character can support multiple locales.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#LANGID">LANGID</a>    | 1        | Language ID
+    <a href="#STRING">STRING</a>    | 1        | Character Name
+    <a href="#STRING">STRING</a>    | 1        | Character Description
+    <a href="#STRING">STRING</a>    | 1        | Character Extra Data
+</pre>
+
+<p>
+<a name="PALETTECOLOR"></a>
+<font size="+1"><b><u>PALETTECOLOR (List Count: <a href="#PODs">ULONG</a>)</u></b></font>
+
+<p>
+The PALETTECOLOR structure contains an entry for the color palette that is used when rendering images. All images in a character must use the same color palette.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#RGBQUAD">RGBQUAD</a>   | 1        | Color value
+</pre>
+
+<p>
+<a name="VOICEINFO"></a>
+<font size="+1"><b><u>VOICEINFO</u></b></font>
+
+<p>
+The VOICEINFO structure contains the default settings for the Character's spoken TTS output. Once a Character has been loaded, an application or web page can override these settings prior to performing TTS operations.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#GUID">GUID</a>      | 1        | TTS Engine ID
+    <a href="#GUID">GUID</a>      | 1        | TTS Mode ID
+    <a href="#PODs">ULONG</a>     | 1        | Speed
+    <a href="#PODs">USHORT</a>    | 1        | Pitch
+    <a href="#PODs">BOOL</a>      | 1        | Extra Data is Present
+</pre>
+
+<p>
+If Extra Data is present, the following values immediately follow the above:
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#LANGID">LANGID</a>    | 1        | Language ID
+    <a href="#STRING">STRING</a>    | 1        | Language Dialect
+    <a href="#PODs">USHORT</a>    | 1        | Gender
+    <a href="#PODs">USHORT</a>    | 1        | Age
+    <a href="#STRING">STRING</a>    | 1        | Style
+</pre>
+
+<p>
+<a name="BALLOONINFO"></a>
+<font size="+1"><b><u>BALLOONINFO</u></b></font>
+
+<p>
+The BALLOONINFO structure contains the default settings for the Character's word balloon that is displayed during TTS output. Once a Character has been loaded, an application or web page can override these settings prior to performing TTS operations.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BYTE</a>      | 1        | # of Text Lines
+    <a href="#PODs">BYTE</a>      | 1        | Characters per Line
+    <a href="#RGBQUAD">RGBQUAD</a>   | 1        | Foreground Color
+    <a href="#RGBQUAD">RGBQUAD</a>   | 1        | Background Color
+    <a href="#RGBQUAD">RGBQUAD</a>   | 1        | Border Color
+    <a href="#STRING">STRING</a>    | 1        | Font Name
+    <a href="#PODs">LONG</a>      | 1        | Font Height (in logical units)
+    <a href="#PODs">LONG</a>      | 1        | Font Weight (in the range 0 - 1000)
+    <a href="#PODs">BOOL</a>      | 1        | Italicized
+    <a href="#PODs">BYTE</a>      | 1        | unknown (possibly underline/strikeout flag?)
+</pre>
+
+
+<p>
+The Font Weight has been observed as having the following values:
+
+<p>
+<pre>
+    0x0190 = normal
+    0x02BC = bold
+</pre>
+
+<p>
+The Unknown field has been observed as usually being 0.
+
+<p>
+<a name="TRAYICON"></a>
+<font size="+1"><b><u>TRAYICON</u></b></font>
+
+<p>
+The TRAYICON structure describes the icon that appears in the Windows System Tray while the Character is loaded in the MSAgent engine (if the icon is available).
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Size of Monochrome Bitmap Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#ICONIMAGE">ICONIMAGE</a> | 1        | Monochrome Bitmap Data
+    <a href="#PODs">ULONG</a>     | 1        | Size of Color Bitmap Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#ICONIMAGE">ICONIMAGE</a> | 1        | Color Bitmap Data
+</pre>
+
+<p>
+The icon is comprised of two separate images - a monochrome bitmap and a color bitmap.  To produce the final image, first the colors of the monochrome bitmap are combined with the colors of the target device context using the Boolean AND operator.  Then the colors of the color bitmap are combined with the colors of the target device context using the Boolean XOR operator.
+
+<p>
+In Win32 programming, DDBs (device-dependant bitmaps) can be created from the two <a href="#ICONIMAGE">ICONIMAGE</a> structures by using CreateBitmap() and CreateDIBitmap(), and then the resulting HBITMAP handles can be passed to CreateIconIndirect() to create an HICON handle.
+
+<p>
+<a name="BRANCHINFO"></a>
+<font size="+1"><b><u>BRANCHINFO (List Count: <a href="#PODs">BYTE</a>)</u></b></font>
+
+<p>
+The BRANCHINFO structure describes a particular branch for an animation frame. Branches are used to specify the order in which frames are displayed when playing an animation.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>    | 1        | 0-based Index of Frame to jump to
+    <a href="#PODs">USHORT</a>    | 1        | Probability %
+</pre>
+
+<p>
+Refer to the <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/designing-characters-for-microsoft-agent" target="_blank">"Designing Characters for Microsoft Agent"</a> documentation provided by Microsoft for more information regarding how Branches work. 
+
+<p>
+<a name="DATABLOCK"></a>
+<font size="+1"><b><u>DATABLOCK</u></b></font>
+
+<p>
+The DATABLOCK structure contains an arbitrary-sized block of information.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Size of Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">BYTE</a>      | variable | Data
+</pre>
+
+<p>
+<a name="COMPRESSED"></a>
+<font size="+1"><b><u>COMPRESSED</u></b></font>
+
+<p>
+The COMPRESSED structure contains an arbitrary-sized block of information that may or may not be compressed.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Size of compressed Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">ULONG</a>     | 1        | Size of uncompressed Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">BYTE</a>      | variable | Data
+</pre>
+
+<p>
+If the Compressed Size is 0, the data is not compressed, and the size of the data is the specified Uncompressed Size.
+
+<p>
+If the Compressed Size is not 0, the data is compressed, and the size of the data after decompression should match the specified Uncompressed Size.
+
+<p>
+Refer to the <a href="#Compression">Compression Algorithm</a> section for details about the format used for compressing data.
+
+<p>
+<a name="Compression"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Compression Algorithm</b></font></td></tr>
+</table>
+
+<p>
+<a href="https://learn.microsoft.com/en-us/windows/win32/lwef/microsoft-agent" target="_blank">Microsoft Agent</a> implements a custom scheme for compressing data. Below are direct quotes from Microsoft's own postings in the <a href="news://msnews.microsoft.com/microsoft.public.msagent">microsoft.public.msagent</a> newsgroup describing the algorithm used for compressing and storing data.
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<u>February 3, 1999</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Message ID: &lt;eXJ1aJ#T#GA.160@uppssnewspub04.moswest.msn.net&gt;
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"The compression that Agent uses is a proprietary, lossless, bit level compressor....The images are stored only once...the compressor does run length encoding...the image is compressed as a contiguous buffer."
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<u>May 30, 2000</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Message ID: &lt;#OMEQ4ky$GA.240@cppssbbsa02.microsoft.com&gt;#1/1
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Agent does NOT compress audio files."
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<u>November 1, 2001</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Message ID: &lt;#OFR1bvYBHA.1456@tkmsftngp07&gt;
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Frames accept multiple images to enable a developer to create an animation frame out of multiple pieces...all the overlays and base image are composited for the frame."
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<u>February 21, 2002</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Message ID: &lt;3c751da1$1@news.microsoft.com&gt;
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"The transparent area around the a character's image and mouth image is compressed out."
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<u>February 25, 2002</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Message ID: &lt;3c7a78d3$1@news.microsoft.com&gt;
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"...the editor uses its own compression which is more efficient than GIF to compile the character."<br>
+
+<p>
+<font size="+1"><b><u>COMPRESSION DETAILS</u></b></font>
+
+<p>
+Compressed data is formatted as follows:
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BYTE</a>      | 1        | Always 0x00
+    <a href="#PODs">BYTE</a>      | variable | Compressed Bit Stream
+    <a href="#PODs">BYTE</a>      | 6        | Always 0xFF
+</pre>
+
+<p>
+The Compressed Bit Stream contains a series of bit sequences, where each bit sequence describes either a single uncompressed <a href="#PODs">BYTE</a>, or a range of compressed <a href="#PODs">BYTEs</a>.
+
+<p>
+The high-order bit of a <a href="#PODs">BYTE</a> in the stream is the most significant bit.  The bits of each <a href="#PODs">BYTE</a> are processed in order from least-significant bit to most-significant bit.
+
+<p>
+Compressed <a href="#PODs">BYTEs</a> are decompressed inside the destination buffer as the buffer is being written to. Meaning that after one or more <a href="#PODs">BYTEs</a> has been decompressed into the buffer, later bit sequences can make copies of those <a href="#PODs">BYTEs</a> in order to fill in other areas of the same buffer.
+If a range of <a href="#PODs">BYTEs</a> is duplicated multiple times in the original data, this approach cuts down on the number of bits needed within the bit stream to duplicate the same uncompressed <a href="#PODs">BYTEs</a> over and over in the buffer. In other words, the more repetition there is in the original data, the smaller the data will compress.
+
+<p>
+The first bit of a sequence specifies the type of data that follows the bit:
+<p>
+<pre>
+    <u>VALUE | DESCRIPTION</u>
+    0     | a single uncompressed <a href="#PODs">BYTE</a>
+    1     | compressed range of at least 2 <a href="#PODs">BYTEs</a>
+</pre>
+
+<p>
+If a sequence represents an uncompressed <a href="#PODs">BYTE</a>, the 8 bits following the above bit are the uncompressed <a href="#PODs">BYTE</a>.  Write this <a href="#PODs">BYTE</a> into the destination buffer at the current insertion point, and then increment the insertion point.
+
+<p>
+If a sequence represents a compressed <a href="#PODs">BYTE</a> range, the remaining bits of the sequence are processed as follows:
+
+<p>
+<li>
+The initial count of the number of <a href="#PODs">BYTEs</a> that will be decoded from the sequence is 2.
+
+<p>
+<li>Count the number of sequential bits which have a value of 1. The maximum number of bits is 3. This count specifies the number of bits that make up the next value in the sequence, as follows:
+
+<p>
+<pre>
+    <u># SEQ BITS | VALUE BIT COUNT</u>
+    0          | 6
+    1          | 9
+    2          | 12
+    3          | 20
+</pre> 
+
+<p>
+<ul type="circle">
+<li>If the count of sequential bits is less than 3, skip past the bit whose value of 0 ends the sequential bits. The next value in the sequence follows this skipped bit.
+<li>Otherwise, do not skip the 4th bit.  It is part of the next value in the sequence.
+</ul>
+
+<p>
+<li>Using the bit count from the previous step, take the numeric value that is made up of the specified number of bits, and incremeent its value as follows:
+
+<p>
+<pre>
+    <u>BIT COUNT | VALUE TO ADD</u>
+    6         | 1    (0x0001)
+    9         | 65   (0x0041)
+    12        | 577  (0x0241)
+    20        | 4673 (0x1241)
+</pre> 
+
+<p>
+This final numeric value is an offset, in <a href="#PODs">BYTEs</a>, within the destination buffer, subtracted from the buffer's current insertion point.
+
+<p>
+If the bit count is 20:
+<ul type="circle">
+<li>If the numeric value is 1048575 (0x000FFFFF) before adding 4673, the end of the bit stream has been reached.
+<li>Otherwise, increment the count of <a href="#PODs">BYTEs</a> to be decoded by 1, and continue with the next steps.
+</ul>
+
+<p>
+<li>Following the offset bits, count the number of sequential bits which have a value of 1.  The maximum number of bits is 11.
+
+<p>
+<ul type="circle">
+<li>If the 12th bit is 1, an error occured.
+<li>Otherwise, continue with the next steps.
+</ul>
+
+<p>
+<li>Add the numeric value that is made up of the bits in the previous step, if any, to the count of <a href="#PODs">BYTEs</a> to be decoded.
+
+<p>
+<ul type="circle">
+<li>Do not count the bit whose value of 0 ends the sequential bits.  Skip past this bit.  The next value in the sequence follows this skipped bit.
+<li>The count of sequential bits is also the number of remaining bits in the sequence.
+</ul>
+
+<p>
+<li>Add the numeric value that is made up of the remaining bits, if any, to the count of <a href="#PODs">BYTEs</a> to be decoded.
+
+<p>
+This final count is the number of <a href="#PODs">BYTEs</a> to copy from the above offset to the current insertion point.  Copy the <a href="#PODs">BYTEs</a> one at a time, incrementing the insertion point after each <a href="#PODs">BYTE</a>, as the copying may overlap past the original insertion point.
+
+<p>
+<font size="+1"><b><u>COMPRESSION EXAMPLE</u></b></font>
+
+<p>
+Binary values are typically written in order from most-significant bit to least-significant bit.  In this example, they are written from least-significant bit to most-significant bit instead, to display the bits in processing order.
+
+<p>
+For example, a <a href="#PODs">BYTE</a> value of decimal 64 (hex 0x40) is typically written as <b>01000000</b> (MSB to LSB), but is written below as <b>00000010</b> (LSB to MSB) instead.
+
+<p>
+Here is an example of decoding a compressed block of Region Data from the <a href="#ACSIMAGEINFO">ACSIMAGEINFO</a> structure:
+
+<p>
+<u>Compressed Data</u>
+<pre>
+    00 40 00 04 10 D0 90 80
+    42 ED 98 01 B7 FF FF FF
+    FF FF FF
+</pre>
+
+<p>
+<u>Bit Stream</u>
+<pre>
+    00000010000000000010000000001000
+    00001011000010010000000101000010
+    10110111000110011000000011101101
+    11111111111111111111111
+</pre>
+
+<p>
+<u>Bit Stream Breakdown</u><br>
+<pre>
+    000000100 000000000 100000000
+    010000000 10110000100 10000000101
+    000010101 1011100011001 100000001110110
+    111111111111111111111111
+
+    <u>SEQUENCE BITS        | DESCRIPTION</u>
+    0                    | single uncompressed <a href="#PODs">BYTE</a>
+    00000100             | value = 0x20
+                         |
+    0                    | single uncompressed <a href="#PODs">BYTE</a>
+    00000000             | value = 0x00
+                         |
+    1                    | compressed <a href="#PODs">BYTE</a> range
+    0                    | offset bit count = 6, decoded <A href="#PODs">BYTE</a> count = 2
+    000000               | offset = (0+1) <a href="#PODs">BYTE</a>
+    0                    | increment decoded count by 0
+    -                    | increment decoded count by 0
+                         | copy (2+0+0) <a href="#PODs">BYTEs</a> from offset into buffer
+                         |
+    0                    | single uncompressed <a href="#PODs">BYTE</a>
+    10000000             | value = 0x01
+                         |
+    1                    | compressed <a href="#PODs">BYTE</a> range
+    0                    | offset bit count = 6, decoded <a href="#PODs">BYTE</a> count = 2
+    110000               | offset = (3+1) <a href="#PODs">BYTEs</a>
+    10                   | increment decoded count by 1
+    0                    | increment decoded count by 0
+                         | copy (2+1+0) <a href="#PODs">BYTEs</a> from offset into buffer
+                         |
+    1                    | compressed <a href="#PODs">BYTE</a> range
+    0                    | offset bit count = 6, decoded <a href="#PODs">BYTE</a> count = 2
+    000000               | offset = (0+1) <a href="#PODs">BYTE</a>
+    10                   | increment decoded count by 1
+    1                    | increment decoded count by 1
+                         | copy (2+1+1) <a href="#PODs">BYTEs</a> from offset into buffer
+                         |
+    0                    | single uncompressed <a href="#PODs">BYTE</a>
+    00010101             | value = 0xA8
+                         |
+    1                    | compressed <a href="#PODs">BYTE</a> range
+    0                    | offset bit count = 6, decoded <a href="#PODs">BYTE</a> count = 2
+    111000               | offset = (7+1) <a href="#PODs">BYTEs</a>
+    110                  | increment decoded count by 3
+    01                   | increment decoded count by 2
+                         | copy (2+3+2) <a href="#PODs">BYTEs</a> from offset into buffer
+                         |
+    1                    | compressed <a href="#PODs">BYTE</a> range
+    0                    | offset bit count = 6, decoded <a href="#PODs">BYTE</a> count = 2
+    000000               | offset = (0+1) <a href="#PODs">BYTE</a>
+    1110                 | increment decoded count by 7
+    110                  | increment decoded count by 3
+                         | copy (2+7+3) <a href="#PODs">BYTEs</a> from offset into buffer
+                         |
+    1                    | compressed <a href="#PODs">BYTE</a> range
+    111                  | offset bit count = 20, decoded <a href="#PODs">BYTE</a> count = 3
+    11111111111111111111 | 0x000FFFFF (end of bit stream)
+</pre>
+
+<p>
+<u>Decoded Data</u><br>
+<pre>
+    20 00 00 00 01 00 00 00
+    00 00 00 00 A8 00 00 00
+    00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00
+
+    RGNDATAHEADER
+        dwSize = 32
+        iType = RDH_RECTANGLES
+        nCount = 0
+        nRgnSize = 168
+        rcBound = {0, 0, 0, 0}
+</pre>
+
+<p>
+<a name="ACSFormat"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>ACS Format</b></font></td></tr>
+</table>
+
+<p>
+The ACS data format contains everything about the Character in a single file. An ACS file is designed for high performance, since all of the relavant data is stored in one place.
+
+<p>
+An ACS file should be installed on the machine that will be accessing it. On Windows machines, ACS files are installed in the "<b>%WINDIR%\MSAgent\Chars\</b>" folder by default,
+where "%WINDIR%" is the folder that Windows itself is installed in. ACS files can also be loaded into the MSAgent engine programmably from any path on the machine or local network.
+
+<p>
+In addition to the <a href="#CommonStructures">Common Data Structures</a>, the ACS format includes the following structures:
+
+<p>
+<a name="ACSLOCATOR"></a>
+<font size="+1"><b><u>ACSLOCATOR</u></b></font>
+
+<p>
+The ACSLOCATOR structure is used to specify the exact location within the data file where a particular block of information can be found.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | 0-based <a href="#PODs">BYTE</a> Offset from the Beginning of File
+    <a href="#PODs">ULONG</a>     | 1        | Size of Data (in <a href="#PODs">BYTEs</a>)
+</pre>
+
+<p>
+<a name="ACSHEADER"></a>
+<font size="+1"><b><u>ACSHEADER</u></b></font>
+
+<p>
+The ACS data format begins with a header structure which identifies the data as being the ACS format.  It contains the locations of the rest of the ACS data.
+
+<p>
+<pre>
+    <u>DATA TYPE  | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>      | 1        | Signature, Always 0xABCDABC3
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Location of <a href="#ACSCHARACTERINFO">ACSCHARACTERINFO</a> Structure
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Location of <a href="#ACSANIMATIONINFO">ACSANIMATIONINFO</a> List
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Location of <a href="#ACSIMAGEINFO">ACSIMAGEINFO</a> List
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Location of <a href="#ACSAUDIOINFO">ACSAUDIOINFO</a> List
+</pre>
+
+<p>
+<a name="ACSCHARACTERINFO"></a>
+<font size="+1"><b><u>ACSCHARACTERINFO</u></b></font>
+
+<p>
+The ACSCHARACTERINFO structure describes the dimensions and characteristics of the Character.
+
+<p>
+<pre>
+    <u>DATA TYPE         | QUANTITY    DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>            | 1           Minor Version
+    <a href="#PODs">USHORT</a>            | 1           Major Version
+    <a href="#ACSLOCATOR">ACSLOCATOR</a>        | 1           Location of <a href="#LOCALIZEDINFO">LOCALIZEDINFO</a> List
+    <a href="#GUID">GUID</a>              | 1           Unique Identifier for the Character
+    <a href="#PODs">USHORT</a>            | 1           Character Width (in pixels)
+    <a href="#PODs">USHORT</a>            | 1           Character Height (in pixels)
+    <a href="#PODs">BYTE</a>              | 1           0-based Index of Transparent Color in Color Table
+    <a href="#PODs">ULONG</a>             | 1           Flags
+    <a href="#PODs">USHORT</a>            | 1           Animation Set Major Version?
+    <a href="#PODs">USHORT</a>            | 1           Animation Set Minor Version?
+    <a href="#VOICEINFO">VOICEINFO</a>         | 1           Voice Output Info (if enabled)
+    <a href="#BALLOONINFO">BALLOONINFO</a>       | 1           Word Balloon Info (if enabled)
+    <a href="#PALETTECOLOR">PALETTECOLOR</a>      | LIST        Color Table
+    <a href="#PODs">BOOL</a>              | 1           System Tray Icon is Enabled
+    <a href="#TRAYICON">TRAYICON</a>          | 1           System Tray Icon (if enabled)
+    <a href="#STATEINFO">STATEINFO</a>         | LIST        Animation States
+</pre>
+
+<p>
+The Flags value is comprised of the following bits:
+
+<pre>
+    <u>BITS  | DESCRIPTION</u>
+    0-3   | unknown
+    4     | Voice Output
+          |     0 = disabled
+          |     1 = enabled
+    5-7   | unknown
+    8, 9  | Word Balloon disabled/enabled (respectively)
+          |     (I don't know why Microsoft separates these bits)
+    10-15 | unknown
+    16-18 | Word Balloon Styles
+          |     Can contain any combination of the following:
+          |         0x01 = size to text enabled
+          |         0x02 = auto hide disabled
+          |         0x04 = auto pace disabled
+    19    | unknown
+    20    | Standard Animation Set
+          |     0 = not supported
+          |     1 = supported
+    21-31 | unknown 
+</pre>
+
+<p>
+The Animation Set Major Version has been observed as always being 2, and the Minor Version as begin 0.
+
+<p>
+<a name="ACSOVERLAYINFO"></a>
+<font size="+1"><b><u>ACSOVERLAYINFO (List Count: <a href="#PODs">BYTE</a>)</u></b></font>
+
+<p>
+The ACSOVERLAYINFO structure describes information about a particular mouth overlay for an animation frame. Mouth overlays are displayed only during the Character's spoken TTS output.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BYTE</a>      | 1        | Overlay Type
+    <a href="#PODs">BOOL</a>      | 1        | Replace the Top Image of the Frame
+    <a href="#PODs">USHORT</a>    | 1        | 0-based Index of Image in <a href="#ACSIMAGEINFO">ACSIMAGEINFO</a> List from the <a href="#ACSHEADER">ACSHEADER</a> structure
+    <a href="#PODs">BYTE</a>      | 1        | unknown
+    <a href="#PODs">BOOL</a>      | 1        | Region Data is Present
+    <a href="#PODs">SHORT</a>     | 1        | X-offset from top of Frame (in pixels)
+    <a href="#PODs">SHORT</a>     | 1        | Y-offset from top of Frame (in pixels)
+    <a href="#PODs">USHORT</a>    | 1        | Width (in pixels)
+    <a href="#PODs">USHORT</a>    | 1        | Height (in pixels)
+    <a href="#DATABLOCK">DATABLOCK</a> | 1        | Region Data (if present)
+</pre>
+
+<p>
+The Overlay Type can be one of the following:
+                                
+<p>
+<pre>
+    0x00 = mouth closed
+    0x01 = mouth wide open 1
+    0x02 = mouth wide open 2
+    0x03 = mouth wide open 3
+    0x04 = mouth wide open 4
+    0x05 = mouth medium
+    0x06 = mouth narrow
+</pre>
+
+<p>
+The Unknown value has been observed as usually being 0.    
+	
+<p>
+The Region data is a <a href="#RGNDATA">RGNDATA</a> structure.
+
+<p>
+A frame can be composited using multiple images. If the "Replace Top Image" flag is enabled, the top-most image defined for the frame is substituted with the overlay image. Otherwise, the overlay image is placed over the frame's top-most image instead.
+
+<p>
+<b>Note:</b> The Width and Height are expressed as values that have been divided by 2. I do not know why Microsoft is doing that.
+
+<p>
+<a name="ACSFRAMEIMAGE"></a>
+<font size="+1"><b><u>ACSFRAMEIMAGE (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The ACSFRAMEIMAGE structure describes a particular image used for an animation frame. A frame can be composited using multiple images, and a single image can be shared by multiple frames.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | 0-based Index of Image in <a href="#ACSIMAGEINFO">ACSIMAGEINFO</a> List from the <a href="#ACSHEADER">ACSHEADER</a> structure
+    <a href="#PODs">SHORT</a>     | 1        | X-offset from Top of Frame (in pixels)
+    <a href="#PODs">SHORT</a>     | 1        | Y-offset from Top of Frame (in pixels)
+</pre>
+
+<p>
+<a name="ACSFRAMEINFO"></a>
+<font size="+1"><b><u>ACSFRAMEINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The ACSFRAMEINFO structure describes a particular frame in an animation sequence.
+
+<p>
+<pre>
+    <u>DATA TYPE      | QUANTITY | DESCRIPTION</u>
+    <a href="#ACSFRAMEIMAGE">ACSFRAMEIMAGE</a>  | LIST     | Images used to Composite the Frame
+    <a href="#PODs">USHORT</a>         | 1        | 0-based Index in <a href="#ACSAUDIOINFO">ACSAUDIOINFO</a> List from the <a href="#ACSHEADER">ACSHEADER</a> structure
+    <a href="#PODs">USHORT</a>         | 1        | Frame Duration (in 1/100 seconds)
+    <a href="#PODs">SHORT</a>          | 1        | 0-based Index of Frame to Exit to in Animation
+    <a href="#BRANCHINFO">BRANCHINFO</a>     | LIST     | Frame Branches
+    <a href="#ACSOVERLAYINFO">ACSOVERLAYINFO</a> | LIST     | Mouth Overlays
+</pre>
+
+<p>
+The Frame Images are composited in reverse order from last to first.
+
+<p>
+Refer to the <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/designing-characters-for-microsoft-agent" target="_blank">"Designing Characters for Microsoft Agent"</a> documentation provided by Microsoft for more information regarding how Exit Frames work. 
+
+<p>
+<b>Note:</b> the Exit Frame index may be -2.  I am not sure the significance of this value yet, but it seems to only appear in the last frame(s) of an animation
+
+<p>
+<a name="ACSANIMATIONINFO"></a>
+<font size="+1"><b><u>ACSANIMATIONINFO (List Count: <a href="#PODs">ULONG</a>)</u></b></font>
+
+<p>
+The ACSANIMATIONINFO structure describes information about a particular animation.
+
+<p>
+<pre>
+    <u>DATA TYPE  | QUANTITY | DESCRIPTION</u>
+    <a href="#STRING">STRING</a>     | 1        | Animation Name
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Location of Animation Information
+</pre>
+
+The Animation Information is as follows:
+
+<p>
+<pre>
+    <u>DATA TYPE         QUANTITY    DESCRIPTION</u>
+    <a href="#STRING">STRING</a>            1           Animation Name (in uppercase)
+    <a href="#PODs">BYTE</a>              1           Transition Type
+    <a href="#STRING">STRING</a>            1           Return Animation (in uppercase)
+    <a href="#ACSFRAMEINFO">ACSFRAMEINFO</a>      LIST        Animation Frames
+</pre>
+
+<p>
+The Transition Type can be one of the following values:
+
+<p>
+<pre>
+    0x00 = use return animation
+    0x01 = use exit branches
+    0x02 = no transition
+</pre>
+
+<p>
+Refer to the <a href="https://learn.microsoft.com/en-us/windows/win32/lwef/designing-characters-for-microsoft-agent" target="_blank">"Designing Characters for Microsoft Agent"</a> documentation provided by Microsoft for more information regarding how Animation Transitions work. 
+
+<p>
+<a name="ACSIMAGEINFO"></a>
+<font size="+1"><b><u>ACSIMAGEINFO (List Count: <a href="#PODs">ULONG</a>)</u></b></font>
+
+<p>
+The ACSIMAGEINFO structure describes information about a particular frame image.
+
+<p>
+<pre>
+    <u>DATA TYPE  | QUANTITY | DESCRIPTION</u>
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Location of Image Information
+    <a href="#PODs">ULONG</a>      | 1        | Checksum?
+</pre>
+
+The Image Information is as follows:
+
+<p>
+<pre>
+    <u>DATA TYPE   | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BYTE</a>        | 1        | unknown
+    <a href="#PODs">USHORT</a>      | 1        | Width (in pixels)
+    <a href="#PODs">USHORT</a>      | 1        | Height (in pixels)
+    <a href="#PODs">BOOL</a>        | 1        | Image Data is Compressed
+    <a href="#DATABLOCK">DATABLOCK</a>   | 1        | Image Data
+    <a href="#COMPRESSED">COMPRESSED</a>  | 1        | Region Data
+</pre>
+
+<p>
+The Unknown value has been observed as begin either 0 or 1.
+
+<p>
+The Image Data is the raw bitmap bits.  Refer to the Win32 API documentation for the <a href="#BITMAPINFOHEADER">BITMAPINFOHEADER</a> structure for details about how the bits are formatted.
+The Image Data has 1 Plane and a Bit Count of 8, and does not use any pixel compression.
+
+<p>
+If the Image Data is compressed, the number of <a href="#PODs">BYTEs</a> needed for allocating a suitable buffer prior to decompressing the data can be calculated by rounding the Image Width up to a <a href="#PODs">ULONG</a> boundary and then multiplying it by the Image Height. For example:
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;((Width + 3) & 0xFC) * Height)
+
+<p>
+The Region Data is a <a href="#RGNDATA">RGNDATA</a> structure.
+
+<p>
+<a name="ACSAUDIOINFO"></a>
+<font size="+1"><b><u>ACSAUDIOINFO (List Count: <a href="#PODs">ULONG</a>)</u></b></font>
+
+<p>
+The ACSAUDIOINFO structure describes information about a particular block of waveform audio.
+
+<p>
+<pre>
+    <u>DATA TYPE  | QUANTITY | DESCRIPTION</u>
+    <a href="#ACSLOCATOR">ACSLOCATOR</a> | 1        | Audio Data
+    <a href="#PODs">ULONG</a>      | 1        | Checksum?
+</pre>
+
+<p>
+Refer to the <a href="#RIFF">RIFF Audio</a> section for details about the format used for audio data.
+
+<p>
+<a name="ACFFormat"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>ACF Format</b></font></td></tr>
+</table>
+
+<p>
+The ACF data format contains just the Character's core information. The animation data is stored in separate ACA files, one for each animation. ACF/ACA files are designed to be download from a remote location, such as an HTTP server, and thus are relatively small to reduce network traffic.
+Because the animations are stored separately, they must be downloaded before they can be played. On the other hand, the benefit is that they can be downloaded individually on an as-needed basis without having to download all of the Character's data beforehand, unlike with ACS files which have to be loaded in full.
+
+<p>
+In addition to the <a href="#CommonStructures">Common Data Structures</a>, the ACF format includes the following structures:
+
+<p>
+<a name="ACFHEADER"></a>
+<font size="+1"><b><u>ACFHEADER</u></b></font>
+
+<p>
+The ACF data format begins with a header structure which identifies the data as being the ACF format.
+
+<p>
+<pre>
+    <u>DATA TYPE  | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>      | 1        | Signature, Always 0xABCDABC4
+    <a href="COMPRESSED">COMPRESSED</a> | 1        | Character Data
+</pre>
+
+<p>
+The Character Data is an <a href="#ACFCHARACTERINFO">ACFCHARACTERINFO</a> structure.
+
+<p>
+<a name="ACFANIMATIONINFO"></a>
+<font size="+1"><b><u>ACFANIMATIONINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The ACFANIMATIONINFO structure specifies the name of the ACA file for a particular animation.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#STRING">STRING</a>    | 1        | Animation Name
+    <a href="#STRING">STRING</a>    | 1        | ACA Filename
+    <a href="#STRING">STRING</a>    | 1        | Return Animation (in uppercase)
+    <a href="#PODs">ULONG</a>     | 1        | ACA Checksum
+</pre>
+
+<p>
+The ACA filename has no folder path included in it.  ACA files must be stored in the same folder as the ACF file.
+
+<p>
+The Checksum value matches the checksum in the <a href="#ACAHEADER">ACAHEADER</a> structure of the ACA file.
+
+<p>
+<ul type="disc">
+<li>At the time of this writing, the algorithm used for calculating the Checksum has not been determined yet.
+</ul>
+
+<p>
+<a name="ACFCHARACTERINFO"></a>
+<font size="+1"><b><u>ACFCHARACTERINFO</u></b></font>
+
+<p>
+The ACFCHARACTERINFO structure describes the dimensions and characteristics of the Character.
+
+<p>
+<pre>
+    <u>DATA TYPE        | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>           | 1        | Minor Version
+    <a href="#PODs">USHORT</a>           | 1        | Major Version
+    <a href="#ACFANIMATIONINFO">ACFANIMATIONINFO</a> | LIST     | Animations
+    <a href="#GUID">GUID</a>             | 1        | Unique Identifier for the Character
+    <a href="#LOCALIZEDINFO">LOCALIZEDINFO</a>    | LIST     | Character Localized Info
+    <a href="#PODs">USHORT</a>           | 1        | Character Width (in pixels)
+    <a href="#PODs">USHORT</a>           | 1        | Character Height (in pixels)
+    <a href="#PODs">BYTE</a>             | 1        | 0-based Index of Transparent Color in Color Table
+    <a href="#PODs">ULONG</a>            | 1        | Flags
+    <a href="#PODs">USHORT</a>           | 1        | Animation Set Major Version?
+    <a href="#PODs">USHORT</a>           | 1        | Animation Set Minor Version?
+    <a href="#VOICEINFO">VOICEINFO</a>        | 1        | Voice Output Info (if enabled)
+    <a href="#BALLOONINFO">BALLOONINFO</a>      | 1        | Word Balloon Info (if enabled)
+    <a href="#PALETTECOLOR">PALETTECOLOR</a>     | LIST     | Color Table
+    <a href="#PODs">BOOL</a>             | 1        | System Tray Icon is Enabled
+    <a href="#TRAYICON">TRAYICON</a>         | 1        | System Tray Icon (if enabled)
+    <a href="#STATEINFO">STATEINFO</a>        | LIST     | Animation States
+</pre>
+
+<p>
+The Flags are comprised of the following bits:
+
+<pre>
+    <u>BITS  | DESCRIPTION</u>
+    0-3   | unknown
+    4     | Voice Output
+          |    0 = disabled
+          |    1 = enabled
+    5-7   | unknown
+    8, 9  | Word Balloon disabled/enabled (respectively)
+          |    (I don't know why Microsoft separates these bits)
+    10-15 | unknown
+    16-18 | Word Balloon Styles
+          |    Can contain any combination of the following:
+          |        0x01 = size to text enabled
+          |        0x02 = auto hide disabled
+          |        0x04 = auto pace disabled
+    19    | unknown
+    20    | Standard Animation Set
+          |    0 = not supported
+          |    1 = supported
+    21-31 | unknown 
+</pre>
+
+The Animation Set Major Version has been observed as always being 2, and the Minor Version as being 0.
+
+<p>
+<a name="ACAFormat"></a>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>ACA Format</b></font></td></tr>
+</table>
+
+<p>
+The ACA data format contains information about a specific animation for a Character that is described in a separate ACF file.
+
+<p>
+In addition to the <a href="#CommonStructures">Common Data Structures</a>, the ACA format includes the following structures:
+
+<p>
+<a name="ACAHEADER"></a>
+<font size="+1"><b><u>ACAHEADER</u></b></font>
+
+<p>
+The ACA data format begins with a header structure which identifies the data as being the ACA format.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>    | 1        | Minor Version
+    <a href="#PODs">USHORT</a>    | 1        | Major Version
+    <a href="#PODs">ULONG</a>     | 1        | Checksum
+    <a href="#PODs">BOOL</a>      | 1        | Animation Data is Compressed
+    <a href="#PODs">BYTE</a>      | variable | Animation Data
+</pre>
+
+<p>
+The Checksum value matches the checksum in the <a href="#ACFANIMATIONINFO">ACFANIMATIONINFO</a> structure of the ACF file.
+
+<p>
+<ul type="disc">
+<li>At the time of this writing, the algorithm used for calculating the Checksum has not been determined yet.
+</ul>
+
+<p>
+The Animation Data is an <a href="#ACAANIMATIONINFO">ACAANIMATIONINFO</a> structure.  If it is compressed, it is inside of a <a href="#COMPRESSED">COMPRESSED</a> structure.  Otherwise, it is just the <a href="#ACAANIMATIONINFO">ACAANIMATIONINFO</a> structure by itself.
+
+<p>
+<a name="ACAIMAGEINFO"></a>
+<font size="+1"><b><u>ACAIMAGEINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The ACAIMAGEINFO structure describes information about a particular frame image.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">ULONG</a>     | 1        | Size of Image Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">BYTE</a>      | 1        | unknown
+    <a href="#PODs">BYTE</a>      | variable | Image Data
+    <a href="#DATABLOCK">DATABLOCK</a> | 1        | Region Data
+</pre>
+
+<p>
+The Unknown value has been observed as always being 0.
+    
+<p>
+The Image Data is the raw bitmap bits. Refer to the Win32 API documentation for the <a href="#BITMAPINFOHEADER">BITMAPINFOHEADER</a> structure for details about how the bits are formatted.
+The Image Data has 1 Plane and a Bit Count of 8, and does not use any pixel compression.
+
+<p>
+The Region Data is a <a href="#RGNDATA">RGNDATA</a> structure.
+
+<p>
+<a name="ACAAUDIOINFO"></a>
+<font size="+1"><b><u>ACAAUDIOINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The ACAAUDIOINFO structure describes information about a particular block of waveform audio.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#DATABLOCK">DATABLOCK</a> | 1        | Audio Data
+</pre>
+
+<p>
+Refer to the <a href="#RIFF">RIFF Audio</a> section for details about the format used for audio data.
+
+<p>
+<a name="ACAOVERLAYINFO"></a>
+<font size="+1"><b><u>ACAOVERLAYINFO (List Count: <a href="#PODs">BYTE</a>)</u></b></font>
+
+<p>
+The ACAOVERLAYINFO structure describes information about a particular mouth overlay for an animation frame. Mouth overlays are displayed only during the Character's spoken TTS output.
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BYTE</a>      | 1        | Overlay Type
+    <a href="#PODs">BYTE</a>      | variable | Base Image Info (present only if Overlay Type is 0x00)
+    <a href="#PODs">ULONG</a>     | 1        | Size of Image Data (in <a href="#PODs">BYTEs</a>)
+    <a href="#PODs">BYTE</a>      | 1        | unknown
+    <a href="#PODs">BOOL</a>      | 1        | Region Data is Present
+    <a href="#PODs">SHORT</a>     | 1        | X-offset from top of Frame (in pixels)
+    <a href="#PODs">SHORT</a>     | 1        | Y-offset from top of Frame (in pixels)
+    <a href="#PODs">USHORT</a>    | 1        | Width (in pixels)
+    <a href="#PODs">USHORT</a>    | 1        | Height (in pixels)
+    <a href="#PODs">BYTE</a>      | variable | Image Data
+    <a href="#DATABLOCK">DATABLOCK</a> | 1        | Region Data (if present)
+</pre>
+
+<p>
+The Overlay Type can be one of the following:
+
+<p>
+<pre>
+    0x00 = mouth closed
+    0x01 = mouth wide open 1
+    0x02 = mouth wide open 2
+    0x03 = mouth wide open 3
+    0x04 = mouth wide open 4
+    0x05 = mouth medium
+    0x06 = mouth narrow
+</pre>
+
+<p>
+If the Overlay Type is 0x00, the Base Image Info is present, as is defined as the following
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">BOOL</a>      | 1        | Replace the Top Image of the Frame
+    <a href="#PODs">BYTE</a>      | variable | Base Image Data
+</pre>
+
+<p>
+If the "Replace Top Image" is 0x00, the Base Image Data is not present.  Otherwise, it is defined as the following:
+
+<p>
+<pre>
+    <u>DATA TYPE | QUANTITY | DESCRIPTION</u>
+    <a href="#DATABLOCK">DATABLOCK</a> | 1        | Base Image Data
+    <a href="#DATABLOCK">DATABLOCK</a> | 1        | Base Region Data
+</pre>
+
+<p>
+Unlike frames in ACS files, frames in ACA files do not contain a list of multiple images. If multiple images are specified when the frame is defined by the character author, they are composited into a single image when the ACA file is compiled.
+If the "Replace Top Image" flag is 0x00, the overlay image is placed on top of the frame image specified by the <a href="#ACAFRAMEINFO">ACAFRAMEINFO</a> structure.
+If the "Replace Top Image" flag is not 0x00, the Base Image for the overlay is the complete frame image without the top image present.  The Overlay is placed on top of this Base Image rather than the frame image specified by the <a href="#ACAFRAMEINFO">ACAFRAMEINFO</a> structure.
+
+<p>
+The Unknown value has been observed as always being 0.
+
+<p>
+The Image Data is the raw bitmap bits. Refer to the Win32 API documentation for the <a href="#BITMAPINFOHEADER">BITMAPINFOHEADER</a> structure for details about how the bits are formatted.
+The Image Data has 1 Plane and a Bit Count of 8, and does not use any pixel compression.
+
+<p>
+<b>Note:</b> The Width and Height are expressed as values that have been divided by 2. I do not know why Microsoft is doing that.
+
+<p>
+<a name="ACAFRAMEINFO"></a>
+<font size="+1"><b><u>ACAFRAMEINFO (List Count: <a href="#PODs">USHORT</a>)</u></b></font>
+
+<p>
+The ACAFRAMEINFO structure describes a particular frame in an animation sequence.
+
+<p>
+<pre>
+    <u>DATA TYPE      | QUANTITY | DESCRIPTION</u>
+    <a href="#PODs">USHORT</a>         | 1        | 0-based Index of Image in <a href="#ACAIMAGEINFO">ACAIMAGEINFO</a> List from the <a href="#ACAANIMATIONINFO">ACAANIMATIONINFO</a> structure
+    <a href="#PODs">USHORT</a>         | 1        | 0-based Index of Audio in <a href="#ACAAUDIOINFO">ACAAUDIOINFO</a> List from the <a href="#ACAANIMATIONINFO">ACAANIMATIONINFO</a> structure
+    <a href="#PODs">USHORT</a>         | 1        | Frame Duration (in 1/100 seconds)
+    <a href="#PODs">ULONG</a>          | 1        | unknown
+    <a href="#PODs">SHORT</a>          | 1        | 0-based Index of Frame to Exit to in Animation
+    <a href="#BRANCHINFO">BRANCHINFO</a>     | LIST     | Frame Branches
+    <a href="#ACAOVERLAYINFO">ACAOVERLAYINFO</a> | LIST     | Mouth Overlays
+</pre>
+
+<p>
+The Unknown value has been observed as always being 0.
+
+
+<p>
+<a name="ACAANIMATIONINFO"></a>
+<font size="+1"><b><u>ACAANIMATIONINFO</u></b></font>
+
+<p>
+The ACAANIMATIONINFO structure describes the characteristics of the Animation.
+
+<p>
+<pre>
+    <u>DATA TYPE    | QUANTITY | DESCRIPTION</u>
+    <a href="#ACAAUDIOINFO">ACAAUDIOINFO</a> | List     | Frame Sounds
+    <a href="#ACAIMAGEINFO">ACAIMAGEINFO</a> | List     | Frame Images
+    <a href="#PODs">BYTE</a>         | 1        | Transition Type
+    <a href="#ACAFRAMEINFO">ACAFRAMEINFO</a> | LIST     | Animation Frames
+</pre>
+
+<p>
+The Transition Type can be one of the following values:
+
+<p>
+<pre>
+    0x00 = use return animation
+    0x01 = use exit branches
+    0x02 = no transition
+</pre>
+
+<p>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2"><b>Specification Change History</b></font></td></tr>
+</table>
+
+<p>
+<font size="+1"><b><u>November 6, 2022</u></b> - Version 1.6 released publicly</font><br>
+<ul type="disc">
+<li>Updating Copyright.
+<li>Updated links to MSDN documentation.
+<li>Updated <a href="#PODs">Data Types</a> section to add BOOL.
+<li>Fixed a typo in <a href="#GUID">GUID</a> definition.
+<li>Updated <a href="#CommonStructures">Common Data Structures</a> section to add <a href="#COMPRESSED">COMPRESSED</a> structure.
+<li>Added some clarifications in the <a href="#Compression">Compression Algorithm</a> section.
+<li>Miscellaneous formatting changes.
+</ul>
+
+<p>
+<font size="+1"><b><u>February 25, 2021</u></b> - Version 1.5 released publicly</font><br>
+<ul type="disc">
+<li>Updating Copyright.
+</ul>
+
+<p>
+<font size="+1"><b><u>December 14, 2020</u></b> - Version 1.4 released publicly</font>
+
+<p>
+<font size="+1"><b><u>May 10, 2017</u></b> - Version 1.4 (not released yet)</font><br>
+<ul type="disc">
+<li>Added links to MSDN documentation for Win32 API structures.
+<li><a href="#ACFCHARACTERINFO">ACFCHARACTERINFO</a> structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;Added fields for <a href="#VOICEINFO">VOICEINFO</a>, <a href="#BALLOONINFO">BALLOONINFO</a>, and <a href="#TRAYICON">TRAYICON</a>.
+<li><a href="#ACAANIMATIONINFO">ACAANIMATIONINFO</a> structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The Quantity of Animation Frames has been corrected to be <a href="#LIST">LIST</a> instead of 1.
+<li><a href="#ACAOVERLAYINFO">ACAOVERLAYINFO</a> structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;Correcting the offset of the Overlay Type field.
+</ul>
+
+<p>
+<font size="+1"><b><u>June 10, 2009</u></b> - Version 1.3 released publicly</font>
+
+<p>
+<font size="+1"><b><u>November 15, 2006</u></b> - Version 1.3 (not released yet)</font><br>
+<ul type="disc">
+<li>Specification re-written in HTML format.
+<li>Updated <a href="#PODs">Data Types</a> section to include a note about the endian format used.
+<li><u>ACS Format</u><br>
+<ul type="disc">
+<li>Added additional structures to describe Image and Audio data.
+<li>Added new section to describe the <a href="#Compression">Compression Algorithm</a>.
+<li>Header structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The unknown fields have been identified as <a href="#ACSLOCATOR">ACSLOCATORs</a> to <a href="#ACSIMAGEINFO">ACSIMAGEINFO</a> and <a href="#ACSAUDIOINFO">ACSAUDIOINFO</a> Lists.
+<li>ExtraCharacterInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;Renamed to <a href="#LOCALIZEDINFO">LOCALIZEDINFO</a>.
+<li>ExitBranchInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;Renamed to <a href="#BRANCHINFO">BRANCHINFO</a>.  This is no longer specific to an exit branch.
+<li>OverlayInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The index field has been corrected to be an index into the <a href="#ACSIMAGEINFO">ACSIMAGEINFO</a> List from the <a href="#ACSHEADER">ACSHEADER</a> structure.
+<li>FrameInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The unknown fields have been identified as an <a href="#ACSFRAMEIMAGE">ACSFRAMEIMAGE</a> List, and an index into the <a href="#ACSAUDIOINFO">ACSAUDIOINFO</a> List from the <a href="#ACSHEADER">ACSHEADER</a> structure.
+</ul>
+<li><u>ACF and ACA Formats</u><br>
+<ul type="disc">
+<li>Added to the specification.
+</ul>
+</ul>
+
+<p>
+<font size="+1"><b><u>June 18, 2004</u></b> - Version 1.2 (not released yet)</font><br>
+<ul type="disc">
+<li>Added quantity column to structure definitions.
+<li>AnimationInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The unknown fields have been identified as an <a href="#ACSLOCATOR">ACSLOCATOR</a> to extended animation info.
+</ul>
+
+<p>
+<font size="+1"><b><u>March 14, 2004</u></b> - Version 1.1 released publicly</font><br>
+<ul type="disc">
+<li>VoiceInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The unknown field has been identified as a Flag indicating whether the remaining Voice data is present.
+<li>CharacterInfo structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;The unknown fields surrounding the Color Table flag have been identified as being the actual number of colors in the color table.
+<li>Footer structure:<br>&nbsp;&nbsp;&nbsp;&nbsp;Renamed structure to ExtraCharacterInfo and added ExtraCharacterInfoList structure.
+</ul>
+
+<p>
+<font size="+1"><b><u>March 31, 2003</u></b> - Version 1.0 released publicly</font>
+
+<p>
+<table border="1" width="100%">
+<tr><td align="center" bgcolor="#FFFFCC"><font size="+2">&nbsp;</font></td></tr>
+</table>
+
+</body>
+</html>

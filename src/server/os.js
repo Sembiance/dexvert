@@ -214,7 +214,7 @@ const performRun = async (instance, runArgs) =>
 		await fileUtil.move(tmpInArchiveFilePath, inArchiveFilePath);
 
 		// Wait for the OS to finish, which happens when the VM deletes the archive file via http calling /osDONE (or our instance process changes usually due to crashing)
-		const finishedOK = await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : (xu.HOUR*1.8))});
+		const finishedOK = await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : (xu.HOUR*2.2))});
 
 		if(await fileUtil.exists(outarchiveFilePath))	// only exists if the OS was successful and called /osPOST with the result
 		{

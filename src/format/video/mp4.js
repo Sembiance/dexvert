@@ -15,7 +15,7 @@ export class mp4 extends Format
 		// specific
 		"iTunes Apple TV Video"
 	];
-	idMeta           = ({macFileType, macFileCreator}) => macFileType==="mpg4" && macFileCreator==="TVOD";
+	idMeta           = ({macFileType, macFileCreator}) => (macFileType==="mpg4" && macFileCreator==="TVOD") || (macFileType==="M4V " && macFileCreator==="hook");
 	confidenceAdjust = () => -10; // Adjust confidence so other MP4 container video-like formats (audio/threeGAudio match first)
 	untouched        = true;
 	metaProvider     = ["mplayer"];

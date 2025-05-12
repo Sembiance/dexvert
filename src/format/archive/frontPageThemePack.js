@@ -6,5 +6,6 @@ export class frontPageThemePack extends Format
 	ext            = [".elm"];
 	forbidExtMatch = true;
 	magic          = ["FrontPage Theme-Pack"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="THME" && macFileCreator==="MSOF";
 	converters     = ["unFrontPageThemePack"];
 }

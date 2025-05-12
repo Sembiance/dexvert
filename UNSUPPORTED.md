@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,571)
+# Unsupported File Formats (3,576)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -758,7 +758,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (196)
+## Image (198)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -779,6 +779,8 @@ Family/Format | Name | Extensions | Notes
 [image/appleIIgsObjectOrientedGraphic](https://discmaster.textfiles.com/search?format=appleIIgsObjectOrientedGraphic) | Apple IIgs Object Oriented Graphic |  | 
 [image/applixBitmap](https://discmaster.textfiles.com/search?format=applixBitmap) | Applix bitmap | .im | 
 [image/applixwareGraphic](https://discmaster.textfiles.com/search?format=applixwareGraphic) | Applixware Graphic | .ag | 
+[image/arabesqueBitmappedDrawing](https://discmaster.textfiles.com/search?format=arabesqueBitmappedDrawing) | Arabesque Professional bitmapped drawing | .abm .puf | 
+[image/arabesqueVectorDrawing](https://discmaster.textfiles.com/search?format=arabesqueVectorDrawing) | Arabesque Professional vector drawing | .aob | 
 [image/artIconsIconCollection](https://discmaster.textfiles.com/search?format=artIconsIconCollection) | Art Icons - IconCollection | .icc | 
 [image/artsAndLettersGraphic](https://discmaster.textfiles.com/search?format=artsAndLettersGraphic) | Arts and Letters Graphic | .ged | 
 [image/artWorks](https://discmaster.textfiles.com/search?format=artWorks) | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://sembiance.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
@@ -1134,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,347)
+## Other (2,350)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1435,6 +1437,7 @@ Family/Format | Name | Extensions | Notes
 [other/bethesdaGameMap](https://discmaster.textfiles.com/search?format=bethesdaGameMap) | Bethesda game Map | .mif | 
 [other/betterOnLineSolutionsPrinterDriver](https://discmaster.textfiles.com/search?format=betterOnLineSolutionsPrinterDriver) | Better On-Line Solutions Printer Driver | .apd .apw .aps | 
 [other/beyondWordsComposerStyle](https://discmaster.textfiles.com/search?format=beyondWordsComposerStyle) | Beyond Words Composer Style | .sty | 
+[other/bgBlitzPositionDatabase](https://discmaster.textfiles.com/search?format=bgBlitzPositionDatabase) | BGBlitz position database | .pdb | 
 [other/biewXlatTable](https://discmaster.textfiles.com/search?format=biewXlatTable) | Biew Xlat Table | .xlt | 
 [other/bigRedRacingLevel](https://discmaster.textfiles.com/search?format=bigRedRacingLevel) | Big Red Racing Level | .lev | 
 [other/bigJigJigsaw](https://discmaster.textfiles.com/search?format=bigJigJigsaw) | BigJig Jigsaw | .jg6 | 
@@ -3175,6 +3178,7 @@ Family/Format | Name | Extensions | Notes
 [other/huntForRedOctoberSavedGame](https://discmaster.textfiles.com/search?format=huntForRedOctoberSavedGame) | The Hunt for Red October Saved game | .sav | 
 [other/lostFilesOfSherlockHolmesResourcs](https://discmaster.textfiles.com/search?format=lostFilesOfSherlockHolmesResourcs) | The Lost Files of Sherlock Holmes Resources | .rrm | 
 [other/theMoviesEditorTextStringDatabase](https://discmaster.textfiles.com/search?format=theMoviesEditorTextStringDatabase) | The Movies Editor Text String Database | .lhts | 
+[other/theNeverhoodGameData](https://discmaster.textfiles.com/search?format=theNeverhoodGameData) | The Neverhood game data | .blb | 
 [other/theNortonAntiVirusInformation](https://discmaster.textfiles.com/search?format=theNortonAntiVirusInformation) | The Norton AntiVirus Information | .inf | 
 [other/theNortonAntiVirusSignatures](https://discmaster.textfiles.com/search?format=theNortonAntiVirusSignatures) | The Norton AntiVirus Virus Signatures | .dat | 
 [other/thePerfectGeneralFile](https://discmaster.textfiles.com/search?format=thePerfectGeneralFile) | The Perfect General File | .scn .cfg .mdt .mgr | 
@@ -3390,6 +3394,7 @@ Family/Format | Name | Extensions | Notes
 [other/windowsShimDatabase](https://discmaster.textfiles.com/search?format=windowsShimDatabase) | Windows Shim Database | .sdb | 
 [other/windowsSidebarStyle](https://discmaster.textfiles.com/search?format=windowsSidebarStyle) | Windows Sidebar Style |  | 
 [other/windowsTerminalConfiguration](https://discmaster.textfiles.com/search?format=windowsTerminalConfiguration) | Windows Terminal Configuration | .trm | 
+[other/wingsOfGlorySaveGame](https://discmaster.textfiles.com/search?format=wingsOfGlorySaveGame) | Wings of Glory save game | .sav .tmp | 
 [other/winScopeCompiledScript](https://discmaster.textfiles.com/search?format=winScopeCompiledScript) | WinScope Compiled script | .wsc | 
 [other/winStormStormInfo](https://discmaster.textfiles.com/search?format=winStormStormInfo) | WinStorm Storm info | .sto | 
 [other/wintertreeThesaurusEngineDB](https://discmaster.textfiles.com/search?format=wintertreeThesaurusEngineDB) | Wintertree Thesaurus Engine DB | .tdb | 

@@ -1,6 +1,12 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add support for program: https://github.com/th-otto/zview
+  Test with a known format, maybe BMP
+  Then try with:  https://discmaster.textfiles.com/browse/21225/Floppyshop%20-%20DTP/Floppyshop%20-%20DTP.iso/graphics/_demos/arabesqu.e_2/raster
+  Then figure out how to get a list of all formats it supports
+  Then test every format and add to converters as needed
+
 * Fix audio/fssdSound
 	It seems like resource_dasm (ran from bin/fssd2wav.js) is no longer outputing the _INFO_1000.bin resource?
 	Even though I didn't update that....

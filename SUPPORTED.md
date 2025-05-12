@@ -1,4 +1,4 @@
-# Supported File Formats (3,138)
+# Supported File Formats (3,140)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -49,7 +49,7 @@ archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_
 archive | [Apple DiskCopy](https://www.discferret.com/wiki/Apple_DiskCopy_4.2) |  | [dd](https://www.gnu.org/software/coreutils/) [IsoBuster](https://www.isobuster.com/isobuster.php) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopy/)
 archive | [Apple DOS Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Apple_II)) | .dsk .po .hdv | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/appleDOSDiskImage/)
 archive | Apple II Pascal Disk Image | .dsk | [acx](https://github.com/AppleCommander/AppleCommander) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/apple2PascalDiskImage/)
-archive | [Apple Safari Webarchive](http://fileformats.archiveteam.org/wiki/Webarchive_(Safari)) | .webarchive | [pywebarchive](https://pypi.org/project/pywebarchive/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/appleSafariWebarchive/)
+archive | [Apple Safari Webarchive](http://fileformats.archiveteam.org/wiki/Webarchive_(Safari)) | .webarchive | [pywebarchive](https://pypi.org/project/pywebarchive/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/appleSafariWebarchive/)
 archive | [AppleSingle](http://fileformats.archiveteam.org/wiki/AppleSingle) | .as | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/appleSingle/)
 archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .deb .a .lib .sa | [ar](https://sourceware.org/binutils/) [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/arArchive/)
 archive | [ArcadeLab/Retro64 Graphics](https://web.archive.org/web/20220705090053/https://wiki.xentax.com/index.php/Retro64_GFX) | .gfx | [gameViewerLinux](https://game-viewer.org/plugins.php) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arcadeLabGraphics/)
@@ -617,7 +617,7 @@ document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/
 document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/atariWorksSpreadsheet/)
 document | Bank Book for Windows Account Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/bankBookForWindows/)
 document | Borland Turbo Vision Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/borlandTurboVisionHelp/)
-document | Breeze Text-to-Executable | .exe | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/breezeText2EXE/)
+document | Breeze Text-to-Executable | .exe | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/document/breezeText2EXE/)
 document | [Broad Band eBook](http://fileformats.archiveteam.org/wiki/LRF) | .lrf .lrx .lrs | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/broadBandEBook/)
 document | Cambridge Z88 Basic | .bas | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://sembiance.com/fileFormatSamples/document/cambridgeZ88Basic/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/cardfile/)
@@ -1536,7 +1536,7 @@ image | Z's Staff Kid98 | .zim | [recoil2png](http://recoil.sourceforge.net) | [
 image | [Zoner Bitmap](http://fileformats.archiveteam.org/wiki/BMI_(Zoner)) | .bmi | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/zonerBitmap/)
 image | [Zoner Zebra](http://fileformats.archiveteam.org/wiki/ZBR_(Zoner_Zebra)) | .zbr | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/zbr/) - reaConverter is the only program I know of that can convert to SVG but it fails to do so with QEMU WinXP 32bit (used to work in wine). So for now, we just convert to PNG.
 image | Zoom-4 | .zm4 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/zoom4/)
-image | [ZoomBrowser Ex thumbnail cache](http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache) | .info | [foremost](http://foremost.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/zoomBrowserExThumbnailCache/)
+image | [ZoomBrowser Ex thumbnail cache](http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache) | .info | [foremost](http://foremost.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/zoomBrowserExThumbnailCache/)
 image | [ZX Monochrome](http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)) | .scr | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/zxMonochrome/)
 image | [ZX Spectrum - Tricolor RGB](http://fileformats.archiveteam.org/wiki/Tricolor_RGB) | .3 | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://sembiance.com/fileFormatSamples/image/zx3/)
 image | [ZX Spectrum Attributes Gigascreen](http://fileformats.archiveteam.org/wiki/HLR) | .hlr | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/image/hlr/) - File is detected as garbage, but it's actually supposed to look that, but because it looks like garbage, we actually want classify to keep identifying it as such: ht - Id-02 (2010) (Hackers Top 2010 Autumn Edition, 7).hlr
@@ -2068,7 +2068,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,025)
+## Text (1,027)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2088,7 +2088,7 @@ text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf 
 text | ActiveX License Package file | .lpk |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/activeXLicensePackageFile/)
 text | Actor Library Definition Language | .ldl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/actorLibraryDefinitionLanguage/)
 text | Adblock Plus rules file | .txt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/adblockPlusRulesFile/)
-text | Adobe Download Manager | .aom |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/adobeDownloadManager/)
+text | Adobe Download Manager | .aom |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/adobeDownloadManager/)
 text | [Adobe Font List](http://fileformats.archiveteam.org/wiki/Adobe_Font_List) | .lst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeFontList/)
 text | Adobe Illustrator Action | .aia |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeIllustratorAction/)
 text | Adobe InDesign printing instructions report |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobeInDesignPrintingInstructionsReport/)
@@ -2111,6 +2111,7 @@ text | Altera Graphic Design File | .gdf |  | [2 sample files](https://sembiance
 text | Altera Hierarchy Interconnect File | .hif |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/alteraHierarchyInterconnectFile/)
 text | Altium Designer Drill Report | .drr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/altiumDesignerDrillReport/)
 text | Altium Designer Layer Pairs export data | .ldp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/altiumDesignerLayerPairsExportData/)
+text | Amiga Function Description | .fd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/amigaFunctionDescription/)
 text | Amiga HyperGuide | .hguide |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/amigaHyperGuide/)
 text | Amiga Symbolizer Function Definition | .sfd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/amigaSymbolizerFunctionDefinition/)
 text | AmigaCash Pro IDS format | .ids2 .ids |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/amigaCashProIDSFormat/)
@@ -2291,6 +2292,7 @@ text | Dice C project | .dice |  | [15 sample files](https://sembiance.com/fileF
 text | Digital Integration mission info | .mis |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/digitalIntegrationMissionInfo/)
 text | Digital Integration mission Tasks | .dta |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/digitalIntegrationMissionTasks/)
 text | Disk Technician Gold Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/diskTechnicianGoldHelp/)
+text | DKBtrace scene | .dat .inc |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/dkbtraceScene/)
 text | DMI Management Information Format | .mif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/managementInformationFormat/)
 text | Dominion Scenario Description Language | .sdl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dominionScenarioDescriptionLanguage/)
 text | Doodle-mation Doodle | .doo |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/doodleMationDoodle/)
@@ -2929,7 +2931,7 @@ text | Terragen project | .tgd |  | [2 sample files](https://sembiance.com/fileF
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [93 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [94 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)

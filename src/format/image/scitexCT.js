@@ -7,5 +7,6 @@ export class scitexCT extends Format
 	ext            = [".ct", ".sct"];
 	forbidExtMatch = true;
 	magic          = ["Scitex Continuous Tone bitmap", /^x-fmt\/146( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="..CT" && macFileCreator==="8BIM";
 	converters     = ["nconvert", "corelPhotoPaint[outType:tiff][strongMatch]", "corelDRAW[strongMatch]"];
 }

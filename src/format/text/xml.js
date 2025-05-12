@@ -5,6 +5,7 @@ const _XML_MAGIC = [
 	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", "XML Schema", "application/xml", /^fmt\/101( |$)/, /^x-fmt\/280( |$)/,
 	
 	// specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
+	// Also, some of these could be processed into something more usable, such as'Photo Font' etc.
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
 	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Eclipse JAR settings",
 	"Visual Studio Project User Options", "Visual Studio C++ project Filters", "Visual Studio Visual C++ Project", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes", "Xcode Scheme",
@@ -41,9 +42,9 @@ const _XML_MAGIC = [
 	"Vikon Skeleton template", "Chemical Markup Language XML document", "m0n0wall configuration", "MLT XML document", "Jahshaka Scene File", "ksudoku puzzle", /^Linden (avatar|skeleton) definition/, "RealProducer Job File", "Google Earth network link",
 	/^Visual Studio J# Project \(v[78]\)$/, "Visual Studio JavaScript Project", "UniHighlighter Highlighter definition", "BORGChat configuration", "BORGChat smiles", "Zope Configuration Mark-up Language", "application/x-drgeo", "Hydrogen Song",
 	/^Together Class Diagram \(UML [\d.]+\)/, "Liberty BASIC Lesson", "Teach2000 document", "AutoCAD Color Book", "Crytek XML Material", "FMOD Designer Project", "XML Forms Data Format", "Adobe Premiere Effect Preset", "QuarkXPress Color Library",
-	"Mac OS installable Keyboard Layout", "QuarkXPress Color Library UI specs", "Nmap scan results (XML)", "PAM Dataset", "Havok XML format", "Maple XML Worksheet", "Okteta grammar (XML)", "Code::Blocks wxSmith resource", "PyDev Project",
+	"Mac OS installable Keyboard Layout", "QuarkXPress Color Library UI specs", "Nmap scan results (XML)", "PAM Dataset", "Havok XML format", "Maple XML Worksheet", "Okteta grammar (XML)", "Code::Blocks wxSmith resource", "PyDev Project", "Photo Font",
 	"Sandcastle Help File Builder Project", "Battlefield 2 mod Description", "Visual Studio Publish profile", "Qt Help Project", "RoboHelp XML Project", "Rosegarden note style", "TextMate Preferences", "TextMate Project", "OmniOutliner document",
-	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883)( |$)/, /^x-fmt\/227( |$)/
+	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};
 

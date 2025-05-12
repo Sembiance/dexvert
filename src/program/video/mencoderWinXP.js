@@ -5,7 +5,7 @@ export class mencoderWinXP extends Program
 {
 	website      = "https://oss.netfarm.it/mplayer/";
 	flags   = {
-		outType     : `Which format to output: avi mp3. Default is avi`
+		outType : `Which format to output: avi mp3. Default is avi`
 	};
 	unsafe       = true;
 	loc          = "winxp";

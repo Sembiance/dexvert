@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,586)
+# Unsupported File Formats (3,587)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -759,7 +759,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (198)
+## Image (197)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -843,7 +843,6 @@ Family/Format | Name | Extensions | Notes
 [image/genuineFractalsSTINGImage](https://discmaster.textfiles.com/search?format=genuineFractalsSTINGImage) | Genuine Fractals STING image | .stn | 
 [image/geoWorksGeoDrawDrawing](https://discmaster.textfiles.com/search?format=geoWorksGeoDrawDrawing) | GeoWorks GeoDraw drawing | .000 | 
 [image/geoWorksGEOSBackground](https://discmaster.textfiles.com/search?format=geoWorksGEOSBackground) | GeoWorks GEOS background | .000 .geo | 
-[image/gfaRaytraceBitmap](https://discmaster.textfiles.com/search?format=gfaRaytraceBitmap) | GFA Raytrace bitmap | .sul .scl .suh .sch | 
 [image/godotBitmapsContainer](https://discmaster.textfiles.com/search?format=godotBitmapsContainer) | Godot bitmaps container | .stex | 
 [image/gpFaxFAXFormat](https://discmaster.textfiles.com/search?format=gpFaxFAXFormat) | GPFax FAX format |  | 
 [image/graphicWorksVectorDrawing](https://discmaster.textfiles.com/search?format=graphicWorksVectorDrawing) | GraphicWorks Vector Drawing | .dvg | 
@@ -1137,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,359)
+## Other (2,361)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2182,6 +2181,8 @@ Family/Format | Name | Extensions | Notes
 [other/jazzJackrabbit2AnimationsLibrary](https://discmaster.textfiles.com/search?format=jazzJackrabbit2AnimationsLibrary) | Jazz Jackrabbit 2 Animations library | .j2a | 
 [other/jazzJackrabbit2Episode](https://discmaster.textfiles.com/search?format=jazzJackrabbit2Episode) | Jazz Jackrabbit 2 Episode | .j2e | 
 [other/jazzJackrabbit2LevelData](https://discmaster.textfiles.com/search?format=jazzJackrabbit2LevelData) | Jazz Jackrabbit 2 Level data | .j2l | 
+[other/jazzJackrabbit2LibraryData](https://discmaster.textfiles.com/search?format=jazzJackrabbit2LibraryData) | Jazz Jackrabbit 2 library Data | .j2d | 
+[other/jazzJackrabbit2Macro](https://discmaster.textfiles.com/search?format=jazzJackrabbit2Macro) | Jazz Jackrabbit 2 Macro | .j2m | 
 [other/jazzJackrabbit2TilesSet](https://discmaster.textfiles.com/search?format=jazzJackrabbit2TilesSet) | Jazz Jackrabbit 2 Tiles set | .j2t | 
 [other/jazzJackrabbitFile](https://discmaster.textfiles.com/search?format=jazzJackrabbitFile) | Jazz Jackrabbit File | .0sc .0fn | 
 [other/jeepersConfiguration](https://discmaster.textfiles.com/search?format=jeepersConfiguration) | Jeepers Configuration | .cfg | 

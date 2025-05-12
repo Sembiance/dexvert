@@ -21753,3 +21753,115 @@ will_co_engine                                  Will Co. Engine                 
 will_co_engine_2                                Will Co. Engine 2                                       *.arc    
 yuka                                            Yuka                                                    *.ykc    
 zanzarah                                        Zanzarah The Hidden Portal                              *.pak,*.bcf
+
+
+
+>>> zview (ATARI ST) https://github.com/th-otto/zview
+                        Name                                                    Extensions                            
+----------------------------------------------------     --------------------------------------------------------     
+AIM (Atari Image Manager)                                col,im                                                       
+Animaster (Sprite Bank)                                  asb,msk                                                      
+Animatic (Film)                                          flm                                                          
+Arabesque Bitmap                                         abm,puf                                                      
+Art Director, Palette Master, GFA Artist, The ArtiST     art                                                          
+ASCII art (grayscale)                                    txt                                                          
+Atari Portfolio Graphics                                 pgf,pgc,pgx                                                  
+Autodesk Animator FLIC                                   flc,flh,fli                                                  
+C.O.L.R. Object Editor                                   ce1,ce2,ce3                                                  
+C.O.L.R. Object Editor                                   mur                                                          
+Calamus (Raster Graphic)                                 crg                                                          
+Canvas                                                   cnv,cpt,ful                                                  
+COKE Format                                              tg1                                                          
+ColorBurst II                                            bst                                                          
+colorSTar (Object), monoSTar (Object)                    obj                                                          
+CompuServe RLE                                           rle                                                          
+CrackArt                                                 ca1,ca2,ca3                                                  
+Cyber Paint (Animation)                                  seq                                                          
+Cyber Paint (Image)                                      cel                                                          
+Cybermate (Animation)                                    dlt                                                          
+Cybermate (Animation)                                    sd0,sd1,sd2,lpk,mpk,hpk                                      
+D-GRAPH                                                  p3c,p32                                                      
+DCTV - Interchange File Format                           dct,dctv                                                     
+Degas Extended, FuckPaint                                pi4,pi5,pi6,pi7,pi9                                          
+Degas/Degas Elite                                        pi1,pi2,pi3,pc1,pc2,pc3                                      
+DelmPaint                                                del,dph                                                      
+DeskPic                                                  gfb                                                          
+Dr. Doodle                                               doo                                                          
+DuneGraph                                                dg1,dc1                                                      
+DUO                                                      duo,du1,du2                                                  
+EggPaint/Spooky Sprites                                  trp                                                          
+Eureka RAW                                               raw                                                          
+EZ-Art Professional                                      eza                                                          
+Falcon True Color                                        ftc,xga                                                      
+FULLSHOW                                                 kid,kil,kit                                                  
+Funny Paint                                              fun                                                          
+GDOS, Degas Font, Warp9 Font                             fnt                                                          
+GEM Bitmap                                               img                                                          
+GemView MGF                                              mgf                                                          
+GFA Artist (Font)                                        gft                                                          
+GFA RayTrace (Animation)                                 sal,sah                                                      
+GFA RayTrace (Image)                                     sul,scl,suh,sch                                              
+GodPaint                                                 god                                                          
+Grafix                                                   grx                                                          
+Graphics Interchange Format                              gif                                                          
+HighResMode                                              hrm                                                          
+Image format for the Web                                 web,webp                                                     
+ImageLab                                                 b_w,b&w                                                      
+Imagic (Image)                                           ic1,ic2,ic3                                                  
+IMG Scan (Seymor-Radix)                                  rwl,rwm,rwh                                                  
+IndyPaint                                                tru                                                          
+InShape                                                  iim                                                          
+INVISION Elite Color                                     r01,r02,r04,r08                                              
+Joint Photographic Experts Group                         jpg,jpe,jpeg,jif,jfif,jfi                                    
+MacPaint                                                 mac,pntg                                                     
+MegaPaint (Raster)                                       bld                                                          
+Microsoft Paint                                          msp                                                          
+MTV Raytracer Image                                      mtv                                                          
+Multi Palette Picture                                    mpp                                                          
+NEOchrome                                                neo                                                          
+NEOchrome (Animation)                                    ani                                                          
+Overscan Interlaced                                      pci                                                          
+Pablo Paint                                              ppp,pa3,bib,src                                              
+PaintPro ST/PlusPaint ST                                 pic                                                          
+PaintShop+                                               psc,da4                                                      
+Paintworks, Graphics Processor                           cl0,cl1,cl2,pg0,pg1,pg2,pg3,sc0,sc1,sc2                      
+PC Paintbrush                                            pcx                                                          
+Picture Packer                                           pp1,pp2,pp3                                                  
+Picworks                                                 cp3                                                          
+PixArt                                                   pix                                                          
+PL4                                                      pl4                                                          
+PlayStation                                              tim                                                          
+PNM (Portable Any Map)                                   ppm,pgm,pbm,pam                                              
+Portable Network Graphics                                png                                                          
+Printer Control Language                                 pcl                                                          
+Prism Paint, TruePaint                                   pnt,tpi,tpa                                                  
+PRO89xx (Print-Technik)                                  hir                                                          
+Public Painter                                           cmp                                                          
+Public Painter                                           pcs                                                          
+Quantum Paintbox                                         pbx                                                          
+Quick Ray Tracer                                         qrt                                                          
+Quite OK Image Format                                    qoi                                                          
+Rag-D (Risk Aided Graphics Design)                       rag                                                          
+RECOIL - Retro Computer Image Library                    *                                                            
+Rembrandt True Color Picture                             tcp                                                          
+RGB Intermediate Format                                  rgb                                                          
+RGB8/RGBN - Interchange File Format                      tsi                                                          
+Scalable Vector Graphics                                 svg,svgz                                                     
+Signum! (Image)                                          imc                                                          
+Silicon Graphics Image                                   sgi                                                          
+Slideshow Sinbad                                         ssb                                                          
+Spectrum 512                                             spu,spc,sps                                                  
+Spectrum 512 Extended                                    spx                                                          
+Spooky Sprites                                           tre                                                          
+ST Aided Design                                          pac                                                          
+Sun Raster                                               sun,ras,rast                                                 
+SuperView Graphics                                       sgx                                                          
+Synthetic Arts                                           srt,bit                                                      
+Tagged Image File Format                                 tif,tiff                                                     
+Tiny Stuff                                               tny,tn1,tn2,tn3,tn4,tn5,tn6                                  
+TmS Cranach (Paint/Studio)                               esm                                                          
+Truevision Targa                                         tga                                                          
+Turbo Rascal Syntax Error                                flf                                                          
+uConvert bitmap format                                   uim,uimg,c01,c02,c04,c08,c16,c24,c32,bp1,bp2,bp4,bp6,bp8     
+Windows Bitmap, OS/2 Bitmap                              bmp                                                          
+ZZ_ROUGH                                                 rgh 

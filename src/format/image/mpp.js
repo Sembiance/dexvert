@@ -2,7 +2,7 @@ import {Format} from "../../Format.js";
 
 export class mpp extends Format
 {
-	name       = "Milti Palette Picture";
+	name       = "Multi Palette Picture";
 	website    = "http://fileformats.archiveteam.org/wiki/Multi_Palette_Picture";
 	ext        = [".mpp"];
 	mimeType   = "image/x-multi-palette-picture";

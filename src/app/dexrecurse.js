@@ -5,6 +5,7 @@ import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 import {OS_SERVER_HOST, OS_SERVER_PORT} from "../osUtil.js";
 import {flexMatch} from "../identify.js";
+import {DexFile} from "../DexFile.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES, WEAK_PRODOS_TYPES} from "../WEAK.js";
 import {_PRO_DOS_TYPE_CODE} from "../program/archive/cadius.js";
@@ -352,9 +353,24 @@ async function processNextQueue()
 			rpcData.fileMeta = taskProps.fileMeta;
 		if(taskProps.forbidProgram)
 			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
-		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)});
+		let dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)});
 		if(!dexText)
-			throw new Error(`No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`);
+		{
+			const errorMessage = `No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`;
+			dexText = JSON.stringify({
+				log : [errorMessage],
+				r : {
+					json : {
+						original  : { input : (await DexFile.create(inputFilePath)).serialize() },
+						ids       : [],
+						past      : [],
+						processed : false,
+						duration  : 1
+					}
+				},
+				pretty : errorMessage
+			});
+		}
 
 		//xlog.debug`${taskLogPrefix} dexvert finished with ${dexText.length.toLocaleString()} bytes (${dexText.length.bytesToSize()}). Parsing...`;
 		const {r, log} = xu.parseJSON(dexText, {});

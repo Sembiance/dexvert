@@ -13,7 +13,8 @@ denoConfig.push({
 		"sandbox/",
 		"scribus/",
 		"test/model-viewer.min.js",
-		"test/recurse/",
+		"test/recurse/expected/",
+		"test/recurse/sample/",
 		"test/sample/",
 		"texmf/",
 		"wine/"

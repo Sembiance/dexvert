@@ -33,6 +33,13 @@ export class unar extends Program
 	postExec = async r =>
 	{
 		const outDirPath = r.outDir({absolute : true});
+		if(r.stdout.includes("Archive parsing failed!"))	// otherwise things like exe/gws.exe will incorrectly be extracted as an archive/arc file
+		{
+			r.xlog.info`unar Archive parsing failed! Not safe to keep files! Deleting output files!`;
+			await fileUtil.unlink(outDirPath, {recursive : true});
+			await Deno.mkdir(outDirPath);
+			return;
+		}
 
 		// For some files (archive/arArchive/STRMBASE.LIB) unar will produce massively deep directories. We make sure out paths are not too long (4096, but since that's total path, we use a lower amount, 3840)
 		const longPaths = (await fileUtil.tree(outDirPath, {relative : true})).filter(v => v.length>3840).sortMulti([v => v.length], [false]);

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,587)
+# Unsupported File Formats (3,590)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -962,7 +962,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (168)
+## Music (169)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1064,6 +1064,7 @@ Family/Format | Name | Extensions | Notes
 [music/nerdTracker](https://discmaster.textfiles.com/search?format=nerdTracker) | NerdTracker Module | .ned | [4 sample files](https://sembiance.com/fileFormatSamples/music/nerdTracker/)
 [music/noiseRunner](https://discmaster.textfiles.com/search?format=noiseRunner) | NoiseRunner Module | .nr | [1 sample file](https://sembiance.com/fileFormatSamples/music/noiseRunner/)
 [music/noiseTrekker](https://discmaster.textfiles.com/search?format=noiseTrekker) | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://sembiance.com/fileFormatSamples/music/noiseTrekker/)
+[music/notatorSong](https://discmaster.textfiles.com/search?format=notatorSong) | Notator Song | .son | 
 [music/notatorXScore](https://discmaster.textfiles.com/search?format=notatorXScore) | Notator-X Score | .ntrx | 
 [music/noteWorthyComposerSong](https://discmaster.textfiles.com/search?format=noteWorthyComposerSong) | NoteWorthy Composer song | .nwc | 
 [music/onyxMusicFile](https://discmaster.textfiles.com/search?format=onyxMusicFile) | Onyx Music File Module | .omf | [4 sample files](https://sembiance.com/fileFormatSamples/music/onyxMusicFile/)
@@ -1136,7 +1137,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,361)
+## Other (2,363)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1857,6 +1858,7 @@ Family/Format | Name | Extensions | Notes
 [other/empire2TheArtOfWarConfiguration](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarConfiguration) | Empire II: The Art of War Configuration | .cfg | 
 [other/empire2TheArtOfWarSavedGame](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarSavedGame) | Empire II: The Art of War Saved Game | .svg | 
 [other/empireScenario](https://discmaster.textfiles.com/search?format=empireScenario) | Empire Scenario | .scn | 
+[other/empireWargameOfTheCenturyMap](https://discmaster.textfiles.com/search?format=empireWargameOfTheCenturyMap) | Empire: Wargame of the Century Map | .map | 
 [other/encartaEncyclopediaLinksUpdate](https://discmaster.textfiles.com/search?format=encartaEncyclopediaLinksUpdate) | Encarta Encyclopedia Yearbook and Web Links update | .eyb | 
 [other/endNoteLibrary](https://discmaster.textfiles.com/search?format=endNoteLibrary) | EndNote Library | .enl | 
 [other/enlightenmentEETArchive](https://discmaster.textfiles.com/search?format=enlightenmentEETArchive) | Enlightenment EET archive | .cfg .edj .imc | 
@@ -3414,6 +3416,7 @@ Family/Format | Name | Extensions | Notes
 [other/winWorksChart](https://discmaster.textfiles.com/search?format=winWorksChart) | WinWorks Chart | .cht | 
 [other/winWorksDBDefinition](https://discmaster.textfiles.com/search?format=winWorksDBDefinition) | WinWorks DB Definition | .wdf | 
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?format=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 
+[other/wmb43DGameStudioMapLevel](https://discmaster.textfiles.com/search?format=wmb43DGameStudioMapLevel) | WMB4 3D GameStudio Map/level | .wmb | 
 [other/wolfpackMission](https://discmaster.textfiles.com/search?format=wolfpackMission) | Wolfpack Mission | .mis | 
 [other/wordWriter128PrintParametersOptions](https://discmaster.textfiles.com/search?format=wordWriter128PrintParametersOptions) | Word Writer 128 print Parameters/options | .par | 
 [other/wordPerfectCaracterFontResource](https://discmaster.textfiles.com/search?format=wordPerfectCaracterFontResource) | WordPerfect Caracter/Font resource | .crs | 

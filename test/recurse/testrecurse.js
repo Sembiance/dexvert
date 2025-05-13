@@ -27,7 +27,7 @@ async function testSample(samplePath)
 {
 	console.log(printUtil.minorHeader(`Testing sample: ${path.relative(SAMPLE_DIR_PATH, samplePath)}`, {prefix : "\n"}));
 
-	const outDirPath = await fileUtil.genTempPath(undefined, `-testrecurse-${path.basename(samplePath)}`);
+	const outDirPath = await fileUtil.genTempPath(undefined, `-testrecurse-${path.basename(samplePath)}.NOSUFFIX`);
 	await Deno.mkdir(outDirPath);
 
 	await runUtil.run("deno", runUtil.denoArgs("dexrecurse.js", samplePath, outDirPath), runUtil.denoRunOpts({cwd : path.join(import.meta.dirname, "..", "..", "src", "app"), liveOutput : true}));
@@ -35,6 +35,7 @@ async function testSample(samplePath)
 	xlog.info`Finished, gathering results...`;
 
 	const expectedDirPath = path.join(import.meta.dirname, "expected", path.basename(samplePath));
+	await runUtil.run("find", [outDirPath, "-type", "d", "-empty", "-delete"]);
 	const resultFiles = await fileUtil.tree(outDirPath, {relative : true});
 	if(argv.record)
 	{

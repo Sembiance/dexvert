@@ -38,6 +38,7 @@ const EXTS_SKIP =
 
 	// these extensions are distinctive enough
 	".amossourcecode",
+	".g11",
 	".symdef",
 	".texi",
 	".texinfo"

@@ -1,2 +1,4 @@
 #!/bin/bash
+
+# IMPORTANT. We don't use dra because we need to remove the --no-npm flag
 DENO_DIR=/var/cache/deno DENO_NO_UPDATE_CHECK=1 DENO_NO_PACKAGE_JSON=1 deno run --v8-flags=--max-old-space-size=32768,--enable-experimental-regexp-engine-on-excessive-backtracks --import-map /mnt/compendium/DevLab/deno/importMap.json --no-check --no-config --no-lock --unstable-ffi --unstable-fs --unstable-net --unstable-temporal --allow-all /mnt/compendium/DevLab/dexvert/test/fuzz.js "$@"

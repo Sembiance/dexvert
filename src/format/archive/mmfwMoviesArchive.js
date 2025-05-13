@@ -7,5 +7,5 @@ export class mmfwMoviesArchive extends Format
 	forbidExtMatch = true;
 	magic          = ["MMFW Movies Archive"];
 	keepFilename   = true;
-	converters     = ["therock_decoder"];	// WARNING: This decoder currently only supports sciguy.mov  see it's JS for more notes
+	converters     = ["mmvid_extractor"];
 }

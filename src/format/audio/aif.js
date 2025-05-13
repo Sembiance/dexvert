@@ -15,5 +15,5 @@ export class aif extends Format
 	];
 	idMeta       = ({macFileType}) => ["AIFC", "AIFF"].includes(macFileType);
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[outType:mp3]", "vgmstream", "awaveStudio"];
+	converters   = ["sox", "ffmpeg[outType:mp3]", "vgmstream", "awaveStudio[matchType:magic]"];
 }

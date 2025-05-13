@@ -84,6 +84,8 @@ if(argv.direct)
 	const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
 	if(argv.jsonFile)
 		await fileUtil.writeTextFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+	else if(argv.json)
+		console.log(JSON.stringify(dexState.serialize()));
 	else
 		console.log(dexState.pretty());
 

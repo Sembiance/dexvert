@@ -13,7 +13,7 @@ export class bmp extends Format
 	];
 	weakMagic = ["Windows Bitmap (generic)", "image/bmp", /^fmt\/114( |$)/];
 	constructor() { super(); this.magic.push(...this.weakMagic); }
-	idMeta       = ({macFileType}) => ["BMPp", ".BMP", "BMP_", "BMP ", "BMPf"].includes(macFileType);
+	idMeta       = ({macFileType}) => ["BMPp", ".BMP", "BMP_", "BMP ", "BMPf", "BMPM"].includes(macFileType);
 	metaProvider = ["image"];
 	converters   = dexState =>
 	{

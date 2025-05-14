@@ -1628,7 +1628,7 @@ export const WEAK_VALUES =
 	/^Actor Windows Description Language/,
 	/^Acu4GL\/AcuCOBOL Extended File Descriptor$/,
 	/^ADEX bitmap$/,
-	/^Adobe Dimensions geometry data \(old, Mac\)$/,	// found actual match to file "Table Scene" but it's still VERY weak and no actual extensions on mac
+	/^Adobe Dimensions geometry data/,	// found actual match to file "Table Scene" band "Sampler" but it's still VERY weak and no actual extensions on mac
 	/^ADFS disk image$/,
 	/^Adobe Extensible Metadata Platform$/,
 	/^Adobe FilmStrip$/,
@@ -1718,6 +1718,7 @@ export const WEAK_VALUES =
 	/^Bleach game data archive$/,
 	/^Blur game data Package \(PC\)$/,
 	/^BlueEyes Animation$/,
+	/^BMW TIS grayscale bitmap$/,
 	/^Bochs configuration \(with rem\)$/,
 	/^Borland Reflex Screen driver$/,
 	/^BrainStorm document$/,

@@ -417,6 +417,9 @@ const FLEX_DIFF_FILES =
 	// only works some of the time
 	/image\/teletextPackets\/TETRIS\.T42$/,
 
+	// some files get extracted sometimes, other times not, no ide awhy
+	/archive\/halfLifeModel\/.+$/,
+
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
 	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,

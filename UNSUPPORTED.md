@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,590)
+# Unsupported File Formats (3,597)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1137,7 +1137,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,363)
+## Other (2,370)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1498,6 +1498,7 @@ Family/Format | Name | Extensions | Notes
 [other/broderbundAudioDriver](https://discmaster.textfiles.com/search?format=broderbundAudioDriver) | Broderbund audio Driver | .drv | 
 [other/brokenSwordTheSmokingMirrorSaveGame](https://discmaster.textfiles.com/search?format=brokenSwordTheSmokingMirrorSaveGame) | Broken Sword: The Smoking Mirror save game |  | 
 [other/bryceObjectPresets](https://discmaster.textfiles.com/search?format=bryceObjectPresets) | Bryce Object Presets | .obp | 
+[other/bryceScene](https://discmaster.textfiles.com/search?format=bryceScene) | Bryce Scene | .br6 | 
 [other/bsdiffPatch](https://discmaster.textfiles.com/search?format=bsdiffPatch) | bsdiff patch | .bdif .p | 
 [other/bueroPlusNexTFlashFilerDatabaseFile](https://discmaster.textfiles.com/search?format=bueroPlusNexTFlashFilerDatabaseFile) | Buero Plus NexT FlashFiler database file | .bpd | 
 [other/buildEngineDemoData](https://discmaster.textfiles.com/search?format=buildEngineDemoData) | Build Engine Demo Data | .dem | 
@@ -2898,6 +2899,7 @@ Family/Format | Name | Extensions | Notes
 [other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?format=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 
 [other/reportSmithReport](https://discmaster.textfiles.com/search?format=reportSmithReport) | ReportSmith report | .rpt | 
 [other/retro64GameData](https://discmaster.textfiles.com/search?format=retro64GameData) | Retro64 game data | .wld | 
+[other/returnToCastleWolfensteinSaveGame](https://discmaster.textfiles.com/search?format=returnToCastleWolfensteinSaveGame) | Return to Castle Wolfenstein save game | .svg | 
 [other/reunionAnimation](https://discmaster.textfiles.com/search?format=reunionAnimation) | Reunion Animation | .ani | 
 [other/reunionGraphics](https://discmaster.textfiles.com/search?format=reunionGraphics) | Reunion graphics | .pic | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?format=rfFlowDiagram) | RFFlow Diagram/Chart | .flo | 
@@ -3112,7 +3114,11 @@ Family/Format | Name | Extensions | Notes
 [other/superProjectExpertProject](https://discmaster.textfiles.com/search?format=superProjectExpertProject) | SuperProject Expert Project | .pj | 
 [other/superProjectGraphicsDrivers](https://discmaster.textfiles.com/search?format=superProjectGraphicsDrivers) | SuperProject graphics drivers | .dat | 
 [other/superProjectProject](https://discmaster.textfiles.com/search?format=superProjectProject) | SuperProject Project | .spj .pj | 
+[other/superScapeConfiguration](https://discmaster.textfiles.com/search?format=superScapeConfiguration) | SuperScape Configuration | .cfg | 
 [other/superscapeDo3DTemplate](https://discmaster.textfiles.com/search?format=superscapeDo3DTemplate) | Superscape Do 3D Template | .vrt | 
+[other/superScapeFont](https://discmaster.textfiles.com/search?format=superScapeFont) | SuperScape Font | .fnt | 
+[other/superScapeResource](https://discmaster.textfiles.com/search?format=superScapeResource) | SuperScape Resource | .rsc | 
+[other/superScapeSpriteImage](https://discmaster.textfiles.com/search?format=superScapeSpriteImage) | SuperScape Sprite/image | .spr | 
 [other/supersonicSoftwareGameDataArchive](https://discmaster.textfiles.com/search?format=supersonicSoftwareGameDataArchive) | Supersonic Software game data archive | .piz | 
 [other/surfsUpGameDataArchive](https://discmaster.textfiles.com/search?format=surfsUpGameDataArchive) | Surf's Up game data archive | .bin | 
 [other/surrealSoftwareGameArchive](https://discmaster.textfiles.com/search?format=surrealSoftwareGameArchive) | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | 
@@ -3281,6 +3287,7 @@ Family/Format | Name | Extensions | Notes
 [other/unrealMap](https://discmaster.textfiles.com/search?format=unrealMap) | Unreal Map | .unr | 
 [other/upsPatchFile](https://discmaster.textfiles.com/search?format=upsPatchFile) | UPS patch file | .ups | 
 [other/vRayMaterial](https://discmaster.textfiles.com/search?format=vRayMaterial) | V-Ray Material | .mat .vismat | 
+[other/v12DataBaseEngineDB](https://discmaster.textfiles.com/search?format=v12DataBaseEngineDB) | V12 Data Base Engine DB | .db .v12 | 
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 
 [other/valveParticleStorage](https://discmaster.textfiles.com/search?format=valveParticleStorage) | Valve particle storage | .pcf | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?format=valveSourceMap) | Valve Source Map | .bsp | 

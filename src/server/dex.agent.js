@@ -2,16 +2,13 @@ import {xu} from "xu";
 import {dexvert} from "../dexvert.js";
 import {identify} from "../identify.js";
 import {XLog} from "xlog";
-import {path} from "std";
 import {DexFile} from "../DexFile.js";
 import {init as initPrograms, programChanged} from "../program/programs.js";
-import {init as initFormats, formatChanged, formats} from "../format/formats.js";
+import {init as initFormats, formatChanged} from "../format/formats.js";
 import {agentInit} from "AgentPool";
 
 await initPrograms();
 await initFormats();
-
-const slowExtensions = new Set(Object.values(formats).filter(format => format.slow && format.ext?.length).flatMap(format => format.ext));
 
 await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout, dexvertOptions={}}) =>
 {
@@ -26,7 +23,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 		return {changeResult : changeLogLines.join("\n")};
 	}
 
-	timeout ||= xu.HOUR*(slowExtensions.has(path.extname(inputFilePath)?.toLowerCase()) ? 2 : 1);	// for slow formats, if we match the extension, give a little more time
+	timeout ||= xu.HOUR*2;
 
 	const xlog = new XLog(logLevel);
 

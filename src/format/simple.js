@@ -228,6 +228,7 @@ export default
 		softdiskCrossword                : {name : "Softdisk Crossword", ext : [".sxg", ".sxp"], magic : ["Softdisk Crossword"]},
 		spssTemplate                     : {name : "SPSS template", ext : [".cht", ".sct"], magic : ["SPSS template"]},
 		stormCPPDebugStrings             : {name : "Storm C++ Debug strings", ext : [".debug"], magic : ["Storm C++ Debug strings"]},
+		superScapeMessages               : {name : "SuperScape Messages", ext : [".msg"], magic : ["SuperScape Messages"]},
 		sybaseIAnywhereIndex             : {name : "Sybase iAnywhere Index", ext : [".cdx"], magic : ["Sybase iAnywhere index files", "xBase compound index"], weakMagic : ["xBase compound index"], idMeta : ({macFileType, macFileCreator}) => macFileType==="FCDX" && macFileCreator==="FOXX"},
 		telemateCompiledScript           : {name : "Telemate Compiled Script", ext : [".tms"], magic : ["Telemate compiled script"]},
 		telixPhonebook                   : {name : "Telix Phonebook", ext : [".fbk"], magic : ["Telix Phonebook"]},

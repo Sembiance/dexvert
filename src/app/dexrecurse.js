@@ -353,29 +353,25 @@ async function processNextQueue()
 			rpcData.fileMeta = taskProps.fileMeta;
 		if(taskProps.forbidProgram)
 			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
-		let dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)});
-		if(!dexText)
-		{
-			const errorMessage = `No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`;
-			dexText = JSON.stringify({
-				log : [errorMessage],
-				r : {
-					json : {
-						original  : { input : (await DexFile.create(inputFilePath)).serialize() },
-						ids       : [],
-						past      : [],
-						processed : false,
-						duration  : 1
-					}
-				},
-				pretty : errorMessage
-			});
-		}
 
-		//xlog.debug`${taskLogPrefix} dexvert finished with ${dexText.length.toLocaleString()} bytes (${dexText.length.bytesToSize()}). Parsing...`;
-		const {r, log} = xu.parseJSON(dexText, {});
+		let {r, log} = xu.parseJSON(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {});
 		if(!r?.json)
-			throw new Error(`Invalid JSON response from dexrpc for ${task.relFilePath}:\n${log?.length ? log.map(v => v.decolor()).join("\n") : dexText}`);
+		{
+			r =
+			{
+				json :
+				{
+					original  : { input : (await DexFile.create(inputFilePath)).serialize() },
+					ids       : [],
+					past      : [],
+					processed : false,
+					duration  : 1
+				},
+				pretty : `Invalid JSON response from dexrpc for ${task.relFilePath}:\n\tlog: ${JSON.stringify(log)}\n\tr: ${JSON.stringify(r)}`
+			};
+			log = [r.pretty];
+			xlog.error`${r.pretty}`;
+		}
 
 		const dexData = r.json;
 

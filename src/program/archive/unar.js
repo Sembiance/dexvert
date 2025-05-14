@@ -10,7 +10,8 @@ export class unar extends Program
 	flags   = {
 		"mac"                     : "Set this flag to treat the files extracted as mac files and rename them",
 		"type"                    : "What type to process the file as. Kinda hacky, relies on this string being present at the end of the first line as : <type>",
-		"skipMacBinaryConversion" : "Set this flag to skip the macbinary conversion step"
+		"skipMacBinaryConversion" : "Set this flag to skip the macbinary conversion step",
+		"allowFailedParsing"      : "Set this flag to allow unar to continue even if it reports that archive parsing failed"
 	};
 	bruteFlags = { executable : {} };
 
@@ -33,7 +34,7 @@ export class unar extends Program
 	postExec = async r =>
 	{
 		const outDirPath = r.outDir({absolute : true});
-		if(r.stdout.includes("Archive parsing failed!"))	// otherwise things like exe/gws.exe will incorrectly be extracted as an archive/arc file
+		if(!r.flags.allowFailedParsing &&r.stdout.includes("Archive parsing failed!"))	// otherwise things like exe/gws.exe will incorrectly be extracted as an archive/arc file
 		{
 			r.xlog.info`unar Archive parsing failed! Not safe to keep files! Deleting output files!`;
 			await fileUtil.unlink(outDirPath, {recursive : true});

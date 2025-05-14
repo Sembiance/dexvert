@@ -64,6 +64,9 @@
   Also found: https://github.com/habnabit/delvmod/wiki/Installer_VISE
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
+  To help with this, I could install VISE and MAKE some very basic installers and reverse engineer what is produced:
+	https://macintoshgarden.org/apps/developer-vise-3
+	https://macintoshgarden.org/apps/installer-vise-601
 
 * Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
   https://discmaster.textfiles.com/search?format=folioDatabase

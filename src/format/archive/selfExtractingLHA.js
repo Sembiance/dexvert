@@ -6,5 +6,5 @@ export class selfExtractingLHA extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SFX";
 	ext        = [".sfx"];
 	magic      = ["Self-Extracting LHA Archive", "Self-extracting Commodore 64 LhA", /^DMS SFX$/, /^fmt\/1558( |$)/];
-	converters = ["unar", "DirMaster[matchType:magic]"];
+	converters = ["unar", "unar[matchType:magic][hasExtMatch][allowFailedParsing]", "DirMaster[matchType:magic]", "izArc[matchType:magic]"];
 }

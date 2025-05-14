@@ -1,4 +1,4 @@
-# Supported File Formats (3,148)
+# Supported File Formats (3,151)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -161,7 +161,7 @@ archive | Eschalon Setup ARCV Container | .arv | [arcvExtractor](https://ia80190
 archive | Etherlords 2 game data archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/etherlords2GameDataArchive/)
 archive | EXECUTRIX-COMPRESSOR Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/executrixCompressorPacked/)
 archive | ExeLITE Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/exeLITEPacked/)
-archive | [EXEPACK Packed](http://fileformats.archiveteam.org/wiki/EXEPACK) | .exe .com | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/exePackPacked/)
+archive | [EXEPACK Packed](http://fileformats.archiveteam.org/wiki/EXEPACK) | .exe .com | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/exePackPacked/)
 archive | [eXtensible ARchive](http://fileformats.archiveteam.org/wiki/Xar_(Extensible_Archive)) | .xar | [xar](https://github.com/apple-oss-distributions/xar) [unar](https://github.com/incbee/Unarchiver) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xar/)
 archive | [FDCOPY.COM CFI Disk Image](http://fileformats.archiveteam.org/wiki/CFI_disk_image) | .cfi | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fdcopyCFI/)
 archive | [File Imploder](http://fileformats.archiveteam.org/wiki/File_Imploder) | .imp | [ancient](https://github.com/temisu/ancient_format_decompressor) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/fileImploder/)
@@ -376,7 +376,7 @@ archive | [Secret Photos puzzle](http://fileformats.archiveteam.org/wiki/Secret_
 archive | [SelectWare Technologies archive](https://moddingwiki.shikadi.net/wiki/SelectWare_Archive) | .swt | [unSelectWare](https://moddingwiki.shikadi.net/wiki/SelectWare_Archive) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selectWareArchive/)
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/StuffIt) | .sea | [unar](https://github.com/incbee/Unarchiver) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/sea/)
 archive | [Self-Dissolving Archive](http://fileformats.archiveteam.org/wiki/SDA) | .sda | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfDissolvingArchive/)
-archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
+archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) [izArc](https://www.izarc.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
 archive | SGA game data archive | .sga .big | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
@@ -618,7 +618,7 @@ document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/
 document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/atariWorksSpreadsheet/)
 document | Bank Book for Windows Account Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/bankBookForWindows/)
 document | Borland Turbo Vision Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/borlandTurboVisionHelp/)
-document | Breeze Text-to-Executable | .exe | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/document/breezeText2EXE/)
+document | Breeze Text-to-Executable | .exe | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/breezeText2EXE/)
 document | [Broad Band eBook](http://fileformats.archiveteam.org/wiki/LRF) | .lrf .lrx .lrs | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/broadBandEBook/)
 document | Cambridge Z88 Basic | .bas | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://sembiance.com/fileFormatSamples/document/cambridgeZ88Basic/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/cardfile/)
@@ -900,7 +900,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (656)
+## Image (657)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1102,6 +1102,7 @@ image | [FLIP Image](http://fileformats.archiveteam.org/wiki/FLIP) | .fbi | [rec
 image | [Floor Designer](http://fileformats.archiveteam.org/wiki/Floor_Designer) | .fge | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/fge/)
 image | [FM-Towns HEL Animation](http://fileformats.archiveteam.org/wiki/HEL_(FM_Towns)) | .hel | [deark](https://entropymine.com/deark/) [hel2tif](https://discmaster.textfiles.com/browse/657/FM%20Towns%20Free%20Software%20Collection%2010.iso/t_os/tool/hel2tif) | [10 sample files](https://sembiance.com/fileFormatSamples/image/fmTownsHEL/)
 image | [FM-Towns Icons](http://fileformats.archiveteam.org/wiki/ICN_(FM_Towns)) | .icn | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/fmTownsIcons/)
+image | [Fontastic .COM File](http://fileformats.archiveteam.org/wiki/Fontastic_COM_format) | .com | [dosEXEScreenshot](https://github.com/Sembiance/dexvert/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/fontasticCOM/)
 image | [Fontasy Picture](http://fileformats.archiveteam.org/wiki/FONTASY_graphics) | .pic .tem | [iconvertDOS](https://archive.org/details/IConvertV1.10DShareware) | [10 sample files](https://sembiance.com/fileFormatSamples/image/fontasyPicture/)
 image | [Fractal Image and Sequence Codec](http://fileformats.archiveteam.org/wiki/FIASCO) | .fco | [fiascotopnm](http://netpbm.sourceforge.net/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/fiasco/)
 image | [Fractal Image Format](http://fileformats.archiveteam.org/wiki/Fractal_Image_Format) | .fif | [fifView](http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [11 sample files](https://sembiance.com/fileFormatSamples/image/fractalImageFormat/) - The 256C versions don't convert with any program I could find. With GenuineFractal 4 (GF-PP4-TR-Win32.exe) and PS7 (app/ps7.zip) I was not able to open any .fif files.
@@ -1847,7 +1848,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (146)
+## Other (147)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1961,6 +1962,7 @@ other | Show Partner Animator Help | .hlp | [strings](https://www.gnu.org/softwa
 other | Softdisk Crossword | .sxg .sxp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/softdiskCrossword/)
 other | SPSS template | .cht .sct | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/spssTemplate/)
 other | Storm C++ Debug strings | .debug | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/stormCPPDebugStrings/)
+other | SuperScape Messages | .msg | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/other/superScapeMessages/)
 other | Sybase iAnywhere Index | .cdx | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/sybaseIAnywhereIndex/)
 other | SYMDEF File | .symdef | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/symDef/)
 other | symlink |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/other/symlink/) - This format is a hardcoded match at the beginning of identify.js
@@ -2072,7 +2074,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,030)
+## Text (1,031)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2182,6 +2184,7 @@ text | Beyond Atlantis save game | .sav |  | [10 sample files](https://sembiance
 text | BibTeX database file | .bib |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXDatabaseFile/)
 text | BibTeX style | .bst |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXStyle/)
 text | BIF bitmap ASCII info | .bif |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/bifBitmapASCIIInfo/)
+text | BioWare Aurora Format script | .baf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/bioWareAuroraFormatScript/)
 text | BitTorrent file | .torrent |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/bitTorrentFile/)
 text | BlueJ Class context | .ctxt |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/blueJClassContext/)
 text | BlueJ package | .pkg |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/blueJPackage/)
@@ -2961,9 +2964,9 @@ text | Tracon Sector info | .sec |  | [11 sample files](https://sembiance.com/fi
 text | Tracon Simulation data | .dem .sim |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSimulationData/)
 text | Train Simulator Cab View File | .cvf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
 text | Train Simulator Consist | .con |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
-text | Train Simulator Shape Definition | .s .eng .sd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorShapeDefinition/)
+text | Train Simulator Shape Definition | .s .eng .sd |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorShapeDefinition/)
 text | Train Simulator Sound Management System | .sms |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorSoundManagementSystem/)
-text | Train Simulator Wagon | .eng .wag |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)
+text | Train Simulator Wagon | .eng .wag |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)
 text | Trumpet Windsock settings | .ini |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trumpetWindsockSettings/)
 text | TTCN Abstract Test Suite | .mp .ttcn .ats |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ttcnAbstractTestSuite/)
 text | TUMMY Configuration | .config |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/tummyConfiguration/)

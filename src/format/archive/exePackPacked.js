@@ -8,7 +8,13 @@ export class exePackPacked extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/EXEPACK";
 	ext            = [".exe", ".com"];
 	forbidExtMatch = true;
-	magic          = ["Packer: EXEPACK", "EXEPACK compressed DOS Executable", "Packer: WordPerfect EXEPack"];
+	magic          = [
+		// generic
+		"Packer: EXEPACK", "EXEPACK compressed DOS Executable", "Packer: WordPerfect EXEPack",
+
+		// specific
+		"16bit DOS DemoMaker Executable presentation (v1.x)"	// NOTE: archive/exePackPacked/SAMPLE.EXE - Could create a format that records of video and press spacebar a bunch for like 30 seconds at 1 second intervals, but meh.
+	];
 	forbiddenMagic = [..._TEXE_MAGIC, ..._READMAKE_MAGIC];
 	packed         = true;
 	converters     = ["deark[module:exepack]"];

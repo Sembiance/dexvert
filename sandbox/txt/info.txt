@@ -78,3 +78,8 @@ https://www.digipres.org/formats/sources/trid/
 https://fileinfo.com/
 https://www.amiga-stuff.com/crunchers-id.html
 https://www.loc.gov/preservation/digital/formats/fdd/browse_list.shtml
+
+/------------------------\
+| Reverse Engineer Folks |
+\------------------------/
+https://github.com/BJNFNE

@@ -1104,7 +1104,7 @@ Family/Format | Name | Extensions | Notes
 [music/soundtrakker128](https://discmaster.textfiles.com/search?format=soundtrakker128) | [Soundtrakker 128](http://fileformats.archiveteam.org/wiki/Soundtrakker_128_module) | .128 .st2 | [4 sample files](https://sembiance.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
 [music/spispopdSong](https://discmaster.textfiles.com/search?format=spispopdSong) | SPISPOPD Song | .sng | 
 [music/squirrelModule](https://discmaster.textfiles.com/search?format=squirrelModule) | Squirrel Module | .sqm | [1 sample file](https://sembiance.com/fileFormatSamples/music/squirrelModule/)
-[music/star3MIDIKaraoke](https://discmaster.textfiles.com/search?format=star3MIDIKaraoke) | [Star 3 MIDI Karaoke](https://wiki.multimedia.cx/index.php?title=Star_3) | .st3 | [3 sample files](https://sembiance.com/fileFormatSamples/music/star3MIDIKaraoke/)
+[music/star3MIDIKaraoke](https://discmaster.textfiles.com/search?format=star3MIDIKaraoke) | [Star 3 MIDI Karaoke](https://wiki.multimedia.cx/index.php/Star_3) | .st3 | [3 sample files](https://sembiance.com/fileFormatSamples/music/star3MIDIKaraoke/)
 [music/starkos](https://discmaster.textfiles.com/search?format=starkos) | STarKos Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/starkos/)
 [music/sTarKosTune](https://discmaster.textfiles.com/search?format=sTarKosTune) | STarKos tune | .bin .mus | 
 [music/pro24SNG](https://discmaster.textfiles.com/search?format=pro24SNG) | [Steinberg Pro Song](https://www.atarimania.com/utility-atari-st-pro-24-iii_29596.html) | .sng | [9 sample files](https://sembiance.com/fileFormatSamples/music/pro24SNG/) - I could emulate Atari ST in Win7, pre-generate a floppy with the song on it, use autoit to send keystrokes to Hatari emulator to load the song and then export as MIDI to the floppy and copy the floppy to c:\out
@@ -3633,7 +3633,7 @@ Family/Format | Name | Extensions | Notes
 [video/iavfVideo](https://discmaster.textfiles.com/search?format=iavfVideo) | IAVF video | .avi .iavf | 
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?format=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/kheopsStudioVideo](https://discmaster.textfiles.com/search?format=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
-[video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?format=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
+[video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?format=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php/Space_Adventure_MOV) | .mov | 
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?format=lzaAnimationVideo) | LZA animation/video | .lza | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?format=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/magixVideo](https://discmaster.textfiles.com/search?format=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
@@ -3645,7 +3645,7 @@ Family/Format | Name | Extensions | Notes
 [video/palmTealMovieVideo](https://discmaster.textfiles.com/search?format=palmTealMovieVideo) | Palm TealMovie Video | .pdb | [1 sample file](https://sembiance.com/fileFormatSamples/video/palmTealMovieVideo/)
 [video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?format=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 
 [video/pcAnimationVideo](https://discmaster.textfiles.com/search?format=pcAnimationVideo) | PC-Animation video | .ani | 
-[video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?format=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
+[video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?format=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php/PMM) | .pmm | Couldn't locate a converter
 [video/riffANIM](https://discmaster.textfiles.com/search?format=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 [video/roxanneAnimation](https://discmaster.textfiles.com/search?format=roxanneAnimation) | Roxanne animation | .rox | 
 [video/screenCamVideo](https://discmaster.textfiles.com/search?format=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
@@ -3657,6 +3657,6 @@ Family/Format | Name | Extensions | Notes
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?format=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 
 [video/vis5DDatasetObject](https://discmaster.textfiles.com/search?format=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
 [video/webExRecording](https://discmaster.textfiles.com/search?format=webExRecording) | WebEx Recording | .wrf .wot | 
-[video/xbvVideo](https://discmaster.textfiles.com/search?format=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php?title=XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
+[video/xbvVideo](https://discmaster.textfiles.com/search?format=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php/XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?format=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
 

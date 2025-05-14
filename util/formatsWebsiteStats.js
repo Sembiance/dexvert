@@ -92,45 +92,52 @@ const ALLOWED_NO_SEMBIANCE_LINKS =
 	"image/drHalo"
 ];
 
-const wiki = new MediaWiki("http://fileformats.archiveteam.org/", {xlog});
+const wikis =
+{
+	"http://fileformats.archiveteam.org" : {prefix : "/wiki/", wiki : new MediaWiki("http://fileformats.archiveteam.org/", {xlog})},
+	"https://wiki.multimedia.cx"         : {prefix : "/index.php/", wiki : new MediaWiki("https://wiki.multimedia.cx/", {xlog})}
+};
 
-async function checkFileFormatsArchiveTeamWiki()	// eslint-disable-line no-unused-vars
+async function checkWikis()	// eslint-disable-line no-unused-vars
 {
 	const results = [];
 	
-	xlog.info`Checking ${formatsWebsiteStats["http://fileformats.archiveteam.org"].length.toLocaleString()} 'File Formats ArchiveTeam' pages...`;
-	const bar = printUtil.progress({barWidth : 35, max : formatsWebsiteStats["http://fileformats.archiveteam.org"].length});
-	for(const familyFormat of formatsWebsiteStats["http://fileformats.archiveteam.org"])
+	for(const [websiteKey, {prefix, wiki}] of Object.entries(wikis))
 	{
-		const websiteURL = formats[familyFormat.split("/")[1]].website;
-
-		const wikiPageTitle = websiteURL.substring("http://fileformats.archiveteam.org/wiki/".length);
-		const content = await xu.tryFallbackAsync(async () => await wiki.getPage(wikiPageTitle));
-		if(!content)
+		xlog.info`Checking ${formatsWebsiteStats[websiteKey].length.toLocaleString()} 'File Formats ArchiveTeam' pages...`;
+		const bar = printUtil.progress({barWidth : 35, max : formatsWebsiteStats[websiteKey].length});
+		for(const familyFormat of formatsWebsiteStats[websiteKey])
 		{
-			bar.tick();
-			results.push(({familyFormat, websiteURL, why : "Failed to get page content"}));
-			continue;
-		}
+			const websiteURL = formats[familyFormat.split("/")[1]].website;
 
-		if(content.startsWith("#REDIRECT"))
-		{
-			bar.tick();
-			results.push(({familyFormat, websiteURL, why : `Page is a redirect to: ${content.match(/^#REDIRECT \[\[(?<title>[^\]]+)]]$/)?.groups?.title?.replaceAll(" ", "_")}`}));
-			continue;
-		}
+			const wikiPageTitle = websiteURL.substring(`${websiteKey}${prefix}`.length);
+			const content = await xu.tryFallbackAsync(async () => await wiki.getPage(wikiPageTitle));
+			if(!content)
+			{
+				bar.tick();
+				results.push(({familyFormat, websiteURL, why : "Failed to get page content"}));
+				continue;
+			}
 
-		if(!content.includes("{{DexvertSamples"))
-		{
-			bar.tick();
-			if(!ALLOWED_NO_SEMBIANCE_LINKS.includes(familyFormat))
-				results.push(({familyFormat, websiteURL, why : "No dexvert links found"}));
-			continue;
-		}
+			if(content.startsWith("#REDIRECT"))
+			{
+				bar.tick();
+				results.push(({familyFormat, websiteURL, why : `Page is a redirect to: ${content.match(/^#REDIRECT \[\[(?<title>[^\]]+)]]$/)?.groups?.title?.replaceAll(" ", "_")}`}));
+				continue;
+			}
 
-		bar.tick();
+			if(!content.includes("{{DexvertSamples"))
+			{
+				bar.tick();
+				if(!ALLOWED_NO_SEMBIANCE_LINKS.includes(familyFormat))
+					results.push(({familyFormat, websiteURL, why : "No dexvert links found"}));
+				continue;
+			}
+
+			bar.tick();
+		}
 	}
-
+	
 	if(results.length>0)
 	{
 		console.log("\n");
@@ -146,12 +153,15 @@ async function lookForWebsite()	// eslint-disable-line no-unused-vars
 	for(const familyFormat of formatsWebsiteStats["No Website"])
 	{
 		const format = formats[familyFormat.split("/")[1]];
-		let possibleTitles = await wiki.searchTitles(format.name);
-		if(!possibleTitles?.length && format.ext?.some(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())))
-			possibleTitles = await wiki.searchTitles(format.ext.find(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())));
+		for(const [websiteKey, {prefix, wiki}] of Object.entries(wikis))
+		{
+			let possibleTitles = await wiki.searchTitles(format.name);
+			if(!possibleTitles?.length && format.ext?.some(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())))
+				possibleTitles = await wiki.searchTitles(format.ext.find(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())));
 
-		if(possibleTitles?.length)
-			results.push({familyFormat, possibleTitles : possibleTitles.length>3 ? `${possibleTitles.length} possibilities` : `[${possibleTitles.map(v => `http://fileformats.archiveteam.org/wiki/${encodeURIComponent(v)}`).join("] [")}]`});
+			if(possibleTitles?.length)
+				results.push({familyFormat, possibleTitles : possibleTitles.length>3 ? `${possibleTitles.length} possibilities` : `[${possibleTitles.map(v => `${websiteKey}${prefix}${encodeURIComponent(v)}`).join("] [")}]`});
+		}
 		bar.tick();
 	}
 
@@ -163,5 +173,5 @@ async function lookForWebsite()	// eslint-disable-line no-unused-vars
 }
 
 // Best to only run 1 check at a time, you choose, uncomment the one you want to run, then swap and run the other
-//await checkFileFormatsArchiveTeamWiki();
-//await lookForWebsite();
+//await checkWikis();
+//await lookForWebsite();	// NOT AS USEFUL

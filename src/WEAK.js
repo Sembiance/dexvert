@@ -1803,6 +1803,7 @@ export const WEAK_VALUES =
 	/^Dragon Age: Origins game data$/,
 	/^Dragon Mania Legends game data archive$/,
 	/^Drive SnapShot Disk Image$/,
+	/^Driver Cleaner Customization Filter$/,
 	/^DTS encoded audio/,
 	/^DuckDB database$/,
 	/^DNG Camera Profile \((big|little)-endian\)$/,

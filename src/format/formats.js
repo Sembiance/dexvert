@@ -297,18 +297,11 @@ async function loadText({reload}={})
 				}
 				if(o.ext?.length && o.magic?.length)
 					format.forbidExtMatch = true;
-				
+
+				format.priority = format.PRIORITY.LOW;
+
 				// for text based idMeta checks, we often end up matching binary rsrc files too, so if that's why we identified as this, ensure we are only untouched if we've also matched as TEXT (or another magic on it)
-				if(o.idMeta)
-				{
-					format.untouched = dexState => dexState.id?.matchType!=="idMeta" || dexState.hasMagics(TEXT_MAGIC_STRONG) || (o.magic?.length && dexState.hasMagics(o.magic));
-					format.priority = format.PRIORITY.LOWEST;
-				}
-				else
-				{
-					format.untouched = true;
-					format.priority = format.PRIORITY.LOW;
-				}
+				format.untouched = o.idMeta ? dexState => dexState.id?.matchType!=="idMeta" || dexState.hasMagics(TEXT_MAGIC_STRONG) || (o.magic?.length && dexState.hasMagics(o.magic)) : true;
 			});
 			formats[formatid].formatid = formatid;
 			textFormatids.add(formatid);

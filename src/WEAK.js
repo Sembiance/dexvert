@@ -1970,6 +1970,7 @@ export const WEAK_VALUES =
 	/^Lightscape Radiosity$/,
 	/^LightWave Envelope data$/,	// Found files that ARE this format, but with no extension and the magic is pretty weak otherwise
 	/^LightWave Motion data$/,
+	/^Lightworks Layout$/,
 	/^Lingoes Dictionary$/,
 	/^Liquid Audio$/,
 	/^Litestep theme$/,

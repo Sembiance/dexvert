@@ -715,7 +715,7 @@ export default
 		neoBookSettings                            : {name : "NeoBook Settings", ext : [".set"], magic : [/^NeoBook for (DOS|Windows) Settings/]},
 		neoPaintHelp                               : {name : "NeoPaint Help", ext : [".hlp"], magic : ["NeoPaint Help"]},
 		netrunASCIIEncodedCOMEXE                   : {name : "NETRUN ASCII-encoded COM/EXE", ext : [".ntr"], magic : ["NETRUN ASCII-encoded COM/EXE"]},
-		netscapeCookies                            : {name : "Netscape cookies", ext : [".txt"], magic : ["Netscape cookies", /^Netscape cookie/], idMeta : ({macFileType, macFileCreator}) => macFileType==="COOK" && macFileCreator==="MOSS"},
+		netscapeCookies                            : {name : "Netscape cookies", ext : [".txt", ".lst"], magic : ["Netscape cookies", /^Netscape cookie/], idMeta : ({macFileType, macFileCreator}) => macFileType==="COOK" && macFileCreator==="MOSS"},
 		nexusFormat                                : {name : "NEXUS format", ext : [".nex", ".nxs"], magic : ["NEXUS format"]},
 		nmeaGPSLogData                             : {name : "NMEA GPS log data", ext : [".nme", ".n20", ".nmea", ".nma"], magic : ["NMEA GPS log data"], weakMagic : true},
 		noesisScene                                : {name : "Noesis Scene", ext : [".noesis"], magic : ["Noesis Scene"], weakMagic : true},

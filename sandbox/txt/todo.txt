@@ -1,13 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get wuimg or deark or someone to add support for Arabesque image format (image/arabesqueBitmappedDrawing) https://codeberg.org/kaleido/wuimg/issues/11
-  https://discmaster.textfiles.com/browse/21225/Floppyshop%20-%20DTP/Floppyshop%20-%20DTP.iso/graphics/_demos/arabesqu.e_2/raster
-* Also the GFA Raytrace format (image/gfaRaytraceBitmap): https://codeberg.org/kaleido/wuimg/issues/12
-
 * Fix audio/fssdSound
 	It seems like resource_dasm (ran from bin/fssd2wav.js) is no longer outputing the _INFO_1000.bin resource?
 	Even though I didn't update that....
+
+* Get wuimg or deark or someone to add support for Arabesque image format (image/arabesqueBitmappedDrawing) https://codeberg.org/kaleido/wuimg/issues/11
+  https://discmaster.textfiles.com/browse/21225/Floppyshop%20-%20DTP/Floppyshop%20-%20DTP.iso/graphics/_demos/arabesqu.e_2/raster
+* Also the GFA Raytrace format (image/gfaRaytraceBitmap): https://codeberg.org/kaleido/wuimg/issues/12
 
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program

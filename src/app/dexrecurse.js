@@ -354,7 +354,7 @@ async function processNextQueue()
 		if(taskProps.forbidProgram)
 			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
 
-		let {r, log} = xu.parseJSON(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {});
+		let {r, log} = xu.parseJSON(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {}) || {};
 		if(!r?.json)
 		{
 			r =

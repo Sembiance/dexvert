@@ -13,7 +13,7 @@ export class tar extends Format
 		"Ruby Gem package", "Open Virtualization Format package", "Open Virtualization Format Archive", "Sony Ericsson Theme (for mobile phones)", /^AVM FRITZ!Box firmware/
 	];
 	weakMagic      = [/^Tar$/];
-	idMeta         = ({macFileType}) => macFileType==="TARF";
+	idMeta         = ({macFileType}) => ["tar□", "TARF"].includes(macFileType);
 	forbiddenMagic = ["TFMX module sound data tar archive"];
 	converters     = ["tar", "sevenZip", "deark[module:tar]", "unar[strongMatch]", "sqc", "izArc[matchType:magic]", "UniExtract[matchType:magic][hasExtMatch]"];
 }

@@ -120,7 +120,7 @@ export const WEAK_VALUES =
 	/^fmt\/(111|135|208|304|328|347|452|473|583|584|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
 	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1856|1874|1885|1902|1904|1968)( |$)/,
-	/^fmt\/(2014|2035)( |$)/,
+	/^fmt\/(2014|2025|2035)( |$)/,
 	/^x-fmt\/(8|10|53|101|123|157|168|195|222|324|342)( |$)/,
 
 	// ancientID
@@ -495,6 +495,7 @@ export const WEAK_VALUES =
 	/^Apple QuickTime$/,
 	/^Apple QuickTime multiple URLs$/,
 	/^Applesoft BASIC program data/,
+	/^application\/\^0;/,
 	/^application\/(octet-stream|postscript|x-nextmail)/,
 	/^Applixware/,
 	/^archive \(big format\)$/,
@@ -2191,7 +2192,7 @@ export const WEAK_VALUES =
 	/^Scribble Synth data$/,
 	/^Scribe Markup$/,
 	/^Seal registry Data$/,
-	/^Semi-Virtual Diskette disk image \(v2\.0\.x\)$/,
+	/^Semi-Virtual Diskette disk image/,
 	/^Sentry Spelling-Checker user dictionary$/,
 	/^Session Description Protocol \(with rem\)$/,
 	/^SExtractor configuration$/,

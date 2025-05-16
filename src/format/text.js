@@ -614,6 +614,7 @@ export default
 		kiCadPartLibrary                           : {name : "KiCad part Library", ext : [".lib"], magic : ["KiCad part Library", /^KiCad Symbol Library/]},
 		kiCadSchematic                             : {name : "KiCad Schematic", ext : [".sch"], magic : ["KiCad Schematics", /^KiCad Schematic Document/]},
 		kinemageProteinLanguage                    : {name : "Kinemage protein language", ext : [".kin"], magic : ["Kinemage protein language"], weakMagic : true},
+		kodakPhotoCDConfiguration                  : {name : "Kodak Photo CD configuration", ext : [".pcd"], magic : ["Kodak Photo CD configuration (with rem)"], weakMagic : true},
 		konquerorCookie                            : {name : "Konqueror cookie", magic : [/^Konqueror cookie/]},
 		kssAuthorPresentationSettings              : {name : "KSS: Author presentation settings", magic : ["KSS: Author presentation settings"]},
 		latexAUXFile                               : {name : "Latex Auxiliary File", ext : [".aux"], magic : ["LaTeX auxiliary file", "LaTeX table of contents"], weakMagic : true},

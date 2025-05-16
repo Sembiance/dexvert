@@ -95,7 +95,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 		const format = formats[id.formatid];
 		xlog.info`\nAttempting to process identification: ${id.pretty()}`;
 
-		// create a temporary ram cwd where all programs will run at (by default)
+		// create a temporary cwd where all programs will run at (by default)
 		const cwd = await fileUtil.genTempPath(undefined, `${id.family}_${id.formatid}`);
 		await Deno.mkdir(cwd, {recursive : true});
 

@@ -154,6 +154,7 @@
 		https://archive.org/details/LionShare
 		https://archive.org/details/cdrom-megabytemonster
 		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
+		https://archive.org/details/Lex-C-RomSharewareExpress
 	Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html

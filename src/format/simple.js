@@ -21,7 +21,6 @@ export default
 		atariWorksSpreadsheet    : {name : "Atari Works Spreadsheet", ext : [".sts"], magic : ["Atari Works Spreadsheet"]},
 		bankBookForWindows       : {name : "Bank Book for Windows Account Data", ext : [".dat"], magic : ["Bank Book for Windows account Data"]},
 		borlandTurboVisionHelp   : {name : "Borland Turbo Vision Help", ext : [".hlp"], magic : ["Borland Turbo Vision Help", "Turbo Vision Hilfedatei"]},
-		breezeText2EXE           : {name : "Breeze Text-to-Executable", ext : [".exe"], magic : ["16bit EXE Breeze text to Executable (generic)"]},
 		cambridgeZ88Basic        : {name : "Cambridge Z88 Basic", ext : [".bas"], magic : ["Cambridge Z88 BASIC tokenized source"], weakMagic : true},
 		catalogTranslation       : {name : "Amiga Catalog Translation file", ext : [".ct"], magic : ["catalog translation", "Amiga Catalog Translation"]},
 		centralPointHelp         : {name : "Central Point Help", ext : [".hlp"], magic : ["Central Point Software Help data"]},

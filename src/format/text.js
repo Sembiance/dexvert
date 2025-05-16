@@ -127,7 +127,7 @@ export default
 		gimpPalette                            : {name : "GIMP palette", magic : ["GIMP palette data", /^GIMP Palette$/, /^fmt\/1844( |$)/], website : "http://fileformats.archiveteam.org/wiki/GIMP_Palette"},
 		iges                                   : {name : "Initial Graphics Exchange Specification", ext : [".igs"], magic : ["Initial Graphics Exchange Specification (IGES) data", "model/iges", /^x-fmt\/158( |$)/]},
 		landscapeDesignerFractalData           : {name : "Landscape Designer fractal data", magic : ["Landscape Designer fractal data"]},
-		lightWaveScene                         : {name : "LightWave Scene", website : "http://fileformats.archiveteam.org/wiki/LightWave_Scene", ext : [".lws", ".scn"], magic : ["LightWave 3D Scene"]},
+		lightWaveScene                         : {name : "LightWave Scene", website : "http://fileformats.archiveteam.org/wiki/LightWave_Scene", ext : [".lws", ".scn"], magic : ["LightWave 3D Scene"], idMeta : ({macFileType, macFileCreator}) => macFileType==="LWSC" && macFileCreator==="LW3D"},
 		pageRender3DFacetObject                : {name : "PageRender3D facet/object", ext : [".facet"], magic : ["PageRender3D facet/object"]},
 		playmationSculptureModel               : {name : "Playmation sculpture/model", ext : [".seg"], magic : ["Playmation sculpture/model"], weakMagic : true},
 		qrtRayTracerSceneDescription           : {name : "QRT Ray Tracer scene description", ext : [".qrt"], magic : ["QRT Ray Tracer scene description (with rem)"], website : "http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_scene_description"},

@@ -40,26 +40,27 @@ assert(br.uint32(), 0x00_02_00_00);
 br.skip(16);
 const numEntries = br.uint16();
 const entries = [];
+const ENTRY_TYPE_MAP = {
+	1 : "dataFork",
+	2 : "resourceFork",
+	3 : "realName",
+	4 : "comment",
+	5 : "iconBW",
+	6 : "iconColor",
+	8 : "fileDates",
+	9 : "finderInfo",
+	10 : "macFileInfo",
+	11 : "prodosFileInfo",
+	12 : "msDosFileInfo",
+	13 : "afpShortName",
+	14 : "afpFileInfo",
+	15 : "afpDirectoryId"
+};
 for(let i=0;i<numEntries;i++)
 {
 	const entry = {};
 	entry.entryid = br.uint32();
-	entry.entryType = {
-		1 : "dataFork",
-		2 : "resourceFork",
-		3 : "realName",
-		4 : "comment",
-		5 : "iconBW",
-		6 : "iconColor",
-		8 : "fileDates",
-		9 : "finderInfo",
-		10 : "macFileInfo",
-		11 : "prodosFileInfo",
-		12 : "msDosFileInfo",
-		13 : "afpShortName",
-		14 : "afpFileInfo",
-		15 : "afpDirectoryId"
-	}[entry.entryid];
+	entry.entryType = ENTRY_TYPE_MAP[entry.entryid];
 	entry.offset = br.uint32();
 	entry.length = br.uint32();
 
@@ -86,7 +87,7 @@ outHeader.setUInt8(1, Math.min(63, macFilename.length));
 outHeader.set(Array(63).fill(0), 2);
 outHeader.set(macFilename, 2);
 
-// finder info detailed as 'TYPE FInfo = RECORD' on page 139 of: file:///mnt/compendium/documents/books/InsideMacintosh/Inside_Macintosh_Volume_II_1985.pdf
+// finder info detailed as 'TYPE FInfo = RECORD' on page 139 of: /mnt/compendium/documents/books/InsideMacintosh/Inside_Macintosh_Volume_II_1985.pdf
 const finderInfo = entries.find(entry => entry.entryType==="finderInfo");
 
 const fileTypeData = finderInfo.data.subarray(0, 4);	// file type

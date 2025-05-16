@@ -4,6 +4,7 @@ import {path, assertStrictEquals, delay} from "std";
 import {Format} from "../../src/Format.js";
 import {families} from "../../src/family/families.js";
 import {XLog} from "xlog";
+import {TEXT_MAGIC_STRONG} from "../../src/Detection.js";
 
 const formats = {};
 export {formats};
@@ -284,7 +285,6 @@ async function loadText({reload}={})
 			
 			class Text extends Format
 			{
-				untouched    = true;
 				metaProvider = ["text"];
 			}
 
@@ -297,8 +297,19 @@ async function loadText({reload}={})
 				}
 				if(o.ext?.length && o.magic?.length)
 					format.forbidExtMatch = true;
+				
+				// for text based idMeta checks, we often end up matching binary rsrc files too, so if that's why we identified as this, ensure we are only untouched if we've also matched as TEXT (or another magic on it)
+				if(o.idMeta)
+				{
+					format.untouched = dexState => dexState.id?.matchType!=="idMeta" || dexState.hasMagics(TEXT_MAGIC_STRONG) || (o.magic?.length && dexState.hasMagics(o.magic));
+					format.priority = format.PRIORITY.LOWEST;
+				}
+				else
+				{
+					format.untouched = true;
+					format.priority = format.PRIORITY.LOW;
+				}
 			});
-			formats[formatid].priority = formats[formatid].PRIORITY.LOW;
 			formats[formatid].formatid = formatid;
 			textFormatids.add(formatid);
 		}

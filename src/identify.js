@@ -7,6 +7,7 @@ import {DexFile} from "./DexFile.js";
 import {Identification} from "./Identification.js";
 import {getDetections} from "./Detection.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./dexUtil.js";
+import {UInt8ArrayReader} from "UInt8ArrayReader";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
 function flexMatch(value, matcher, fullStringMatch)
@@ -118,7 +119,63 @@ async function getMacBinaryMeta(inputFile, debug)
 
 	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};	// mac type/creator codes are always roman, so don't specify a region here
 }
-export {getMacBinaryMeta};
+
+async function getAppleDoubleMeta(inputFile, debug)
+{
+	// AppleDouble format: /mnt/compendium/documents/books/AppleSingle_AppleDouble.pdf
+	const magics = await fileUtil.readFileBytes(inputFile.absolute, 26);
+	if(magics.getUInt32BE(0)!==0x00_05_16_07 || magics.getUInt32BE(4)!==0x00_02_00_00)
+		return debug ? `Invalid AppleDouble magic bytes` : false;
+
+	const numEntries = magics.getUInt16BE(24);
+	if(numEntries<1 || (numEntries*12)+26>inputFile.size)
+		return debug ? `Invalid AppleDouble number of entries ${numEntries}` : false;
+
+	const br = new UInt8ArrayReader(await fileUtil.readFileBytes(inputFile.absolute, 26+(numEntries*12)), {endianness : "be"});
+	br.skip(26);
+	const entries = [];
+	const ENTRY_TYPE_MAP = {
+		1 : "dataFork",
+		2 : "resourceFork",
+		3 : "realName",
+		4 : "comment",
+		5 : "iconBW",
+		6 : "iconColor",
+		8 : "fileDates",
+		9 : "finderInfo",
+		10 : "macFileInfo",
+		11 : "prodosFileInfo",
+		12 : "msDosFileInfo",
+		13 : "afpShortName",
+		14 : "afpFileInfo",
+		15 : "afpDirectoryId"
+	};
+	for(let i=0;i<numEntries;i++)
+	{
+		const entry = {};
+		entry.entryid = br.uint32();
+		entry.entryType = ENTRY_TYPE_MAP[entry.entryid];
+		entry.offset = br.uint32();
+		entry.length = br.uint32();
+	
+		entries.push(entry);
+	}
+
+	if(!entries.some(entry => entry.entryType==="resourceFork"))
+		return debug ? `No resourceFork entry found in AppleDouble file` : false;
+
+	const finderInfo = entries.find(entry => entry.entryType==="finderInfo");
+	if(!finderInfo)
+		return debug ? `No finderInfo entry found in AppleDouble file` : false;
+
+	if(finderInfo.offset+finderInfo.length>inputFile.size)
+		return debug ? `finderInfo entry extends beyond file size` : false;
+
+	// finder info detailed as 'TYPE FInfo = RECORD' on page 139 of: /mnt/compendium/documents/books/InsideMacintosh/Inside_Macintosh_Volume_II_1985.pdf
+	const typeCreatorData = await fileUtil.readFileBytes(inputFile.absolute, 8, finderInfo.offset);
+	return {macFileType : await encodeUtil.decodeMacintosh({data : typeCreatorData.subarray(0, 4)}), macFileCreator : await encodeUtil.decodeMacintosh({data : typeCreatorData.subarray(4, 8)})};
+}
+export {getMacBinaryMeta, getAppleDoubleMeta};
 
 // Get mac file type and creator code, either from inputFile meta (passed in originally by fileMeta argument) or checking if it's a MacBinary file and getting it from that
 export async function getIdMeta(inputFile)
@@ -134,6 +191,8 @@ export async function getIdMeta(inputFile)
 
 	if(!idMeta.macFileType || !idMeta.macFileCreator)
 		Object.assign(idMeta, (await getMacBinaryMeta(inputFile)) || {});
+	if(!idMeta.macFileType || !idMeta.macFileCreator)
+		Object.assign(idMeta, (await getAppleDoubleMeta(inputFile)) || {});
 
 	return idMeta;
 }

@@ -171,6 +171,7 @@ export default
 		developerStudioProject           : {name : "Microsoft Developer Studio Project", ext : [".mdp"], magic : ["Microsoft Developer Studio Project"]},
 		directorSTXT                     : {name : "Director STXT", ext : [".stxt"], magic : ["Director STXT"], weakMagic : true},
 		eaLocalizedStringsGameData       : {name : "EA Localized Strings game data", ext : [".loc"], magic : ["EA Localized Strings game data"]},
+		ezFormsDB                        : {name : "EZ-Forms DB", ext : [".fdb"], magic : ["EZ-Forms DB"], weakMagic : true},
 		frameMakerHelp                   : {name : "FrameMaker Help", ext : [".prd", ".hlp", ".api"], magic : ["FrameMaker Help"], idMeta : ({macFileType, macFileCreator}) => macFileType==="FHlp" && macFileCreator==="Fram"},
 		frontRunnerBinaryModule          : {name : "FrontRunner Binary Module", ext : [".frb"], magic : ["FrontRunner Binary module"]},
 		genboxFamilyHistoryDictionary    : {name : "Genbox Family History dictionary", ext : [".gdt"], magic : ["Genbox Family History dictionary"], weakMagic : true},

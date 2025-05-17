@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,600)
+# Unsupported File Formats (3,604)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (284)
+## Archive (285)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -219,6 +219,7 @@ Family/Format | Name | Extensions | Notes
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 
+[archive/repiPack](https://discmaster.textfiles.com/search?format=repiPack) | RepiPack archive | .dat | 
 [archive/rerpPacked](https://discmaster.textfiles.com/search?format=rerpPacked) | RERP Packed | .exe | 
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?format=rohitCompressedData) | Rohit compressed data | .tsi | 
 [archive/rsCompressedArchive](https://discmaster.textfiles.com/search?format=rsCompressedArchive) | RS compressed archive |  | 
@@ -1137,7 +1138,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,373)
+## Other (2,376)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1638,6 +1639,7 @@ Family/Format | Name | Extensions | Notes
 [other/corelPhotoPaintToneCurve](https://discmaster.textfiles.com/search?format=corelPhotoPaintToneCurve) | Corel PhotoPaint Tone Curve | .crv | 
 [other/corelRAVEAnimation](https://discmaster.textfiles.com/search?format=corelRAVEAnimation) | Corel R.A.V.E. Animation | .clk7 .clk .clk6 | 
 [other/corelSavedFindSearch](https://discmaster.textfiles.com/search?format=corelSavedFindSearch) | Corel saved find/search | .fin | 
+[other/corelShellDefinition](https://discmaster.textfiles.com/search?format=corelShellDefinition) | Corel shell definition | .tmn | 
 [other/corelShellMacro](https://discmaster.textfiles.com/search?format=corelShellMacro) | Corel Shell Macro | .shm | 
 [other/corelWritingToolsUserWordList](https://discmaster.textfiles.com/search?format=corelWritingToolsUserWordList) | Corel Writing Tools User Word List | .sav .hwl | 
 [other/corelCENTRALCard](https://discmaster.textfiles.com/search?format=corelCENTRALCard) | CorelCENTRAL Card | .ccc .cca .ccp .ccf | 
@@ -2612,6 +2614,7 @@ Family/Format | Name | Extensions | Notes
 [other/nortonUtilitiesImageBackupIndex](https://discmaster.textfiles.com/search?format=nortonUtilitiesImageBackupIndex) | Norton Utilities Image backup index | .idx | 
 [other/nortonUtilitiesLibrary](https://discmaster.textfiles.com/search?format=nortonUtilitiesLibrary) | Norton Utilities Library | .rtl | 
 [other/notationInterchangeFileFormat](https://discmaster.textfiles.com/search?format=notationInterchangeFileFormat) | [Notation Interchange File Format](http://fileformats.archiveteam.org/wiki/Notation_Interchange_File_Format) | .nif | 
+[other/notatorLogicProject](https://discmaster.textfiles.com/search?format=notatorLogicProject) | Notator Logic project | .log .lso | 
 [other/novastormMediaAnimation](https://discmaster.textfiles.com/search?format=novastormMediaAnimation) | Novastorm Media animation | .flm | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?format=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?format=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
@@ -3276,6 +3279,7 @@ Family/Format | Name | Extensions | Notes
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?format=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/ucDOSOverlay](https://discmaster.textfiles.com/search?format=ucDOSOverlay) | UCDOS Overlay | .db | 
 [other/ucDOSPrintDefine](https://discmaster.textfiles.com/search?format=ucDOSPrintDefine) | UCDOS Print Define | .def | 
+[other/uLeadCOOL3DPluginPreset](https://discmaster.textfiles.com/search?format=uLeadCOOL3DPluginPreset) | ULead COOL 3D plugin preset | .ucd | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?format=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/photoImpactPresets](https://discmaster.textfiles.com/search?format=photoImpactPresets) | Ulead Photo Impact Presets | .smp | 
 [other/ultiboardLibrary](https://discmaster.textfiles.com/search?format=ultiboardLibrary) | ULTIboard Library | .hlp | 

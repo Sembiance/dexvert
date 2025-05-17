@@ -155,6 +155,7 @@
 		https://archive.org/details/cdrom-megabytemonster
 		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
 		https://archive.org/details/Lex-C-RomSharewareExpress
+		https://archive.org/details/Macworld_CD-ROM_April_1995
 	Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
@@ -287,10 +288,12 @@
   Go through formats it supports (see programs_formats.txt) and try them out against dexvert test cases and consider adding to dexvert
 
 * This program is able to identify, extract and convert hundreds of visual novel file formats: https://github.com/morkt/GARbro
+  Including archive/repiPack
   It's written in C# .net but targets an old version 4.6. It also references several DLLs that they don't provide.
   The author has said that they are proprietary and he doesn't care that it won't compile anyhere else. The main build is years old.
   There is no working Console support, but there is a pull request that tries to fix that: https://github.com/morkt/GARbro/pull/394/commits   (https://github.com/Bioruebe/GARbro/tree/2112bde1cc13eb817b8d541c3bcc7a68c4f71883)
   I've saved the full source code (as of Feb 2024) WITH the pull request merged to: sandbox/app/GARbro.tar.bz2
+  I could try using the new ebuild.txt C# tips to create a working ebuild... maybe.
   With compilation not being an option and the build being so old (it didn't work right under wine anyways, I tried) just the code is useful
   What needs to happen is I need to examine the code closely, see how it 'detects' formats, 'extracts' and 'converts'
   Then I need to make a new .net mono project and slowly bring over the code, 1 file at a time, writing new API stub backings as needed

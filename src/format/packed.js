@@ -62,7 +62,7 @@ export const both =
 		executrixCompressorPacked : {name : "EXECUTRIX-COMPRESSOR Packed", magic : ["Packer: EXECUTRIX-COMPRESSOR[by Knowledge Dynamics Corp]"]},
 		lmt2ePacked               : {name : "LM-T2E Packed", magic : ["16bit DOS LM-T2E executable"]},
 		neobookPacked             : {name : "Neobook Packed", magic : ["Neobook compiled book executable"]},
-		packwinPacked             : {name : "PACKWIN Packed", magic : ["16bit DOS EXE PACKWIN compressed"]},
+		packwinPacked             : {name : "PACKWIN Packed", magic : ["16bit DOS EXE PACKWIN compressed", "16bit Win EXE PACKWIN compressed"]},
 		pgmpakPacked              : {name : "PGMPAK Packed", magic : ["Packer: PGMPAK", "16bit DOS EXE PGMPAK compressed"]},
 		pktinyPacked              : {name : "PKTINY Packed", magic : ["Packer: PKTINY", "16bit DOS EXE PKTINY compressed"]},
 		proPackPackedExe          : {name : "Pro-Pack Packed Executable", magic : ["Packer: PRO-PACK", /^16bit DOS EXE R[MN]C \/ PRO-PACK compressed/]},

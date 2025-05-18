@@ -16,7 +16,7 @@ export class cab extends Format
 		/^fmt\/987( |$)/,
 
 		// installer related cabs
-		"Microsoft Update - Self Extracting Cabinet", "Microsoft Windows CE installation Cabinet Archive", "Windows Installer Merge Module (CAB)", "MS generic-sfx Cabinet File Unpacker",
+		"Microsoft Update - Self Extracting Cabinet", "Microsoft Windows CE installation Cabinet Archive", "Windows Installer Merge Module (CAB)", "MS generic-sfx Cabinet File Unpacker", "Installer: Sfx Custom Action",
 		"Installer: PackageForTheWeb", "Installer: Wise Installer[CAB]", "Installer: Windows Installer", "Installer: Advanced Installer"
 	];
 	auxFiles = (input, otherFiles) =>

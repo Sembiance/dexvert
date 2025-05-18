@@ -4,6 +4,6 @@ export class aeroStudio extends Format
 {
 	name        = "Aero Studio";
 	ext         = [".aero"];
-	magic       = ["Aero Studio song"];
+	magic       = ["Aero Studio song", /^fmt\/1620( |$)/];
 	unsupported = true;
 }

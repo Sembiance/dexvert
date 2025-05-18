@@ -7,6 +7,6 @@ export class husqvarnaViking extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/HUS";
 	ext            = [".hus"];
 	forbidExtMatch = true;
-	magic          = ["Husqvarna Viking embroidery format", /^fmt\/2000( |$)/];
+	magic          = ["Husqvarna Viking embroidery format", "Husqvarna Designer I Embroidery Machine Format", /^fmt\/2000( |$)/];
 	converters     = ["konvertor"];
 }

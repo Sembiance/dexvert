@@ -51,6 +51,7 @@ export const WEAK_PRODOS_TYPES =
 	"CMD",		// [F0] ProDOS Command File
 	"DRV",		// [BB] Apple IIgs Device Driver
 	"DVR",		// [6D] PC Driver
+	"DVU",		// [5E] Development Utility
 	"ENT",		// [5D] Entertainment
 	"FND",		// [C9] Apple IIgs Finder Data
 	"FST", 		// [BD] Apple IIgs File System Translator
@@ -68,7 +69,9 @@ export const WEAK_PRODOS_TYPES =
 	"SYS", 		// [FF] ProDOS-8 System File
 	"TIF",		// [B7] Apple IIgs Temporary INIT
 	"UD2",		// [F2] User Defined 2
+	"UD3",		// [F3] User Defined 3
 	"UD4",		// [F4] User Defined 4
+	"UD6",		// [F6] User Defined 6
 	"UD7",		// [F7] User Defined 7
 	"UNK",		// [00] Unknown
 	"VAR"		// [FD] Applesoft BASIC Variables
@@ -1673,6 +1676,7 @@ export const WEAK_VALUES =
 	/^Aquaplus P\/ECE Executable$/,
 	/^Arc System Works game data package$/,
 	/^ArcD compressed data$/,
+	/^ArcGIS GeoDB Table$/,
 	/^ArcView Legend$/,
 	/^Arena container$/,
 	/^Arkos Generic Z80 binary song$/,
@@ -2008,7 +2012,7 @@ export const WEAK_VALUES =
 	/^MegaZeux MZMX image$/,
 	/^MEMU Floppy image$/,
 	/^MetaQuote \/ MetaTrader indicator$/,
-	/^MetaQuotes Language \d compiled program$/,
+	/^MetaQuotes Language \d compiled program/,
 	/^MG!2 compressed$/,
 	/^Microbee tape image$/,
 	/^Microsoft Feed$/,
@@ -2204,7 +2208,7 @@ export const WEAK_VALUES =
 	/^Silent Hill: Origins game data archive$/,
 	/^Silver Scene$/,
 	/^SimAnt saved game \(Amiga\)$/,
-	/^Simis 3d model \(v1\)$/,
+	/^Simis 3d model \(v\d\)$/,
 	/^Simulation Description Format$/,
 	/^Sinclair TR-DOS disk image$/,
 	/^Skyland's Star game data$/,
@@ -2320,6 +2324,7 @@ export const WEAK_VALUES =
 	/^VYM Mind Map$/,
 	/^WeatherLink Binary Weather data$/,
 	/^WebAssembly module \(binary\)$/,
+	/^WebAssembly Text$/,
 	/^WebP2 bitmap$/,
 	/^Webpack bundle$/,
 	/^Weston CAPture video \([BL]E\)$/,

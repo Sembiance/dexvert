@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,604)
+# Unsupported File Formats (3,616)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -378,7 +378,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (190)
+## Document (191)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -392,6 +392,7 @@ Family/Format | Name | Extensions | Notes
 [document/amigaBaseDB](https://discmaster.textfiles.com/search?format=amigaBaseDB) | AmigaBase Database |  | 
 [document/amigaWriter](https://discmaster.textfiles.com/search?format=amigaWriter) | AmigaWriter Documet |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
 [document/aolAddressBook](https://discmaster.textfiles.com/search?format=aolAddressBook) | AOL Address Book | .idx | 
+[document/appleIIgsBASICProgram](https://discmaster.textfiles.com/search?format=appleIIgsBASICProgram) | Apple IIgs BASIC Program |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/appleIIgsBASICProgram/)
 [document/appleIIgsDatabase](https://discmaster.textfiles.com/search?format=appleIIgsDatabase) | Apple IIgs Database |  | 
 [document/appleIIgsDesktopPublishing](https://discmaster.textfiles.com/search?format=appleIIgsDesktopPublishing) | Apple IIgs Desktop Publishing |  | 
 [document/appleIIgsDocument](https://discmaster.textfiles.com/search?format=appleIIgsDocument) | Apple IIgs Document |  | 
@@ -970,7 +971,7 @@ Family/Format | Name | Extensions | Notes
 [music/acidSong](https://discmaster.textfiles.com/search?format=acidSong) | ACID song | .acd | 
 [music/aDrumDrumkit](https://discmaster.textfiles.com/search?format=aDrumDrumkit) | ADrum Drumkit | .kit | 
 [music/aDrumTrack](https://discmaster.textfiles.com/search?format=aDrumTrack) | ADrum Track |  | 
-[music/aeroStudio](https://discmaster.textfiles.com/search?format=aeroStudio) | Aero Studio | .aero | [2 sample files](https://sembiance.com/fileFormatSamples/music/aeroStudio/)
+[music/aeroStudio](https://discmaster.textfiles.com/search?format=aeroStudio) | Aero Studio | .aero | [3 sample files](https://sembiance.com/fileFormatSamples/music/aeroStudio/)
 [music/allSoundTracker](https://discmaster.textfiles.com/search?format=allSoundTracker) | All Sound Tracker Module | .ast | [2 sample files](https://sembiance.com/fileFormatSamples/music/allSoundTracker/)
 [music/andXSynth](https://discmaster.textfiles.com/search?format=andXSynth) | AND XSynth Module | .amx | [1 sample file](https://sembiance.com/fileFormatSamples/music/andXSynth/)
 [music/ansiMusic](https://discmaster.textfiles.com/search?format=ansiMusic) | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | No known converter. Maybe easiest would be converting to MIDI? More info and samples from: http://artscene.textfiles.com/ansimusic/
@@ -1138,7 +1139,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,376)
+## Other (2,386)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1286,6 +1287,7 @@ Family/Format | Name | Extensions | Notes
 [other/alteraWaveformDesignFile](https://discmaster.textfiles.com/search?format=alteraWaveformDesignFile) | Altera Waveform Design File | .wdf | 
 [other/altiumSimulationDataFile](https://discmaster.textfiles.com/search?format=altiumSimulationDataFile) | Altium Simulation Data File |  | 
 [other/amapiShader](https://discmaster.textfiles.com/search?format=amapiShader) | Amapi Shader | .xsh | 
+[other/amazonKindlePageNumberIndex](https://discmaster.textfiles.com/search?format=amazonKindlePageNumberIndex) | Amazon Kindle Page Number index | .apnx | 
 [other/amberstarGameData](https://discmaster.textfiles.com/search?format=amberstarGameData) | Amberstar game data | .vga .mdi .all .dat .map .cha | 
 [other/ambientDesignArtRageProject](https://discmaster.textfiles.com/search?format=ambientDesignArtRageProject) | Ambient Design ArtRage project | .ptg | 
 [other/americanConquestGameArchive](https://discmaster.textfiles.com/search?format=americanConquestGameArchive) | American Conquest game archive | .gp | 
@@ -1334,10 +1336,13 @@ Family/Format | Name | Extensions | Notes
 [other/applauseSettings](https://discmaster.textfiles.com/search?format=applauseSettings) | Applause settings | .ini | 
 [other/applauseWordData](https://discmaster.textfiles.com/search?format=applauseWordData) | Applause Word data | .w | 
 [other/apple8900EncryptedSignedContainer](https://discmaster.textfiles.com/search?format=apple8900EncryptedSignedContainer) | Apple 8900 encrypted signed container | .dfu .img2 | 
+[other/appleIIDevelopmentUtility](https://discmaster.textfiles.com/search?format=appleIIDevelopmentUtility) | Apple II Development Utility |  | 
 [other/appleIIgsClassicDeskAccessory](https://discmaster.textfiles.com/search?format=appleIIgsClassicDeskAccessory) | Apple IIgs Classic Desk Accessory |  | 
+[other/appleIIgsControlPanel](https://discmaster.textfiles.com/search?format=appleIIgsControlPanel) | Apple IIgs Control Panel |  | 
 [other/appleIIgsInstrument](https://discmaster.textfiles.com/search?format=appleIIgsInstrument) | Apple IIgs Instrument |  | 
 [other/appleIIgsNewDeskAccessory](https://discmaster.textfiles.com/search?format=appleIIgsNewDeskAccessory) | Apple IIgs New Desk Accessory |  | 
 [other/appleIIgsTool](https://discmaster.textfiles.com/search?format=appleIIgsTool) | Apple IIgs Tool |  | 
+[other/appleIIgsToolboxDefinition](https://discmaster.textfiles.com/search?format=appleIIgsToolboxDefinition) | Apple IIgs Toolbox Definition | .tdf | 
 [other/appleInterfaceBuilderNIBArchive](https://discmaster.textfiles.com/search?format=appleInterfaceBuilderNIBArchive) | Apple Interface Builder NIB archive | .nib | 
 [other/appleITunesPhotoDatabase](https://discmaster.textfiles.com/search?format=appleITunesPhotoDatabase) | Apple iTunes Photo Database |  | 
 [other/applicationObjectTemplate](https://discmaster.textfiles.com/search?format=applicationObjectTemplate) | Application Object Template | .aot | 
@@ -1823,6 +1828,7 @@ Family/Format | Name | Extensions | Notes
 [other/dungeonSiegeResourceGameData](https://discmaster.textfiles.com/search?format=dungeonSiegeResourceGameData) | Dungeon Siege Resource game data | .dsres | 
 [other/dustyDOTsSavedGame](https://discmaster.textfiles.com/search?format=dustyDOTsSavedGame) | DustyDOTs saved game | .dsv | 
 [other/dvdInfoFile](https://discmaster.textfiles.com/search?format=dvdInfoFile) | DVD Info File | .ifo .bup | 
+[other/dvDisasterErrorCorrection](https://discmaster.textfiles.com/search?format=dvDisasterErrorCorrection) | DVDisaster Error Correction | .ecc | 
 [other/dvdShrinkDeepAnalysisData](https://discmaster.textfiles.com/search?format=dvdShrinkDeepAnalysisData) | DVDShrinkdeep analysis data |  | 
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?format=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
 [other/dynamicPublisherPrinterFile](https://discmaster.textfiles.com/search?format=dynamicPublisherPrinterFile) | Dynamic Publisher Printer File | .prf | 
@@ -2066,7 +2072,7 @@ Family/Format | Name | Extensions | Notes
 [other/groupWiseAdminHostDatabase](https://discmaster.textfiles.com/search?format=groupWiseAdminHostDatabase) | GroupWise admin host database | .db | 
 [other/guemapDocument](https://discmaster.textfiles.com/search?format=guemapDocument) | GUEmap document | .gmp | 
 [other/guitarProFile](https://discmaster.textfiles.com/search?format=guitarProFile) | Guitar Pro File | .gtp | 
-[other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 | 
+[other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 .gpx | 
 [other/guptaReportWindowsReport](https://discmaster.textfiles.com/search?format=guptaReportWindowsReport) | Gupta ReportWindows Report | .qrp | 
 [other/gVariantDatabase](https://discmaster.textfiles.com/search?format=gVariantDatabase) | GVariant Database | .compiled | 
 [other/hbedvAVAVIRAProductKey](https://discmaster.textfiles.com/search?format=hbedvAVAVIRAProductKey) | H-BEDV - AVIRA product key | .key | 
@@ -2107,6 +2113,7 @@ Family/Format | Name | Extensions | Notes
 [other/hpLaserJetPrinterCartridgeMetric](https://discmaster.textfiles.com/search?format=hpLaserJetPrinterCartridgeMetric) | HP LaserJet Printer Cartridge Metric | .pcm | 
 [other/hpfsAccessDB](https://discmaster.textfiles.com/search?format=hpfsAccessDB) | HPFS-Access DB | .dat | 
 [other/humanMachineInterfacesDriver](https://discmaster.textfiles.com/search?format=humanMachineInterfacesDriver) | Human Machine Interfaces Sound Driver | .386 | 
+[other/husqvarnaVikingEmbroideryFormat](https://discmaster.textfiles.com/search?format=husqvarnaVikingEmbroideryFormat) | Husqvarna Viking/Pfaff Home Embroidery Format | .vip | 
 [other/hyperACCESSOS2Data](https://discmaster.textfiles.com/search?format=hyperACCESSOS2Data) | HyperACCESS OS/2 data | .hho | 
 [other/hyperPadPad](https://discmaster.textfiles.com/search?format=hyperPadPad) | HyperPAD Pad | .pad | 
 [other/hyperspeedAnimation](https://discmaster.textfiles.com/search?format=hyperspeedAnimation) | Hyperspeed Animation | .pan | 
@@ -2850,6 +2857,7 @@ Family/Format | Name | Extensions | Notes
 [other/qarbonViewlet](https://discmaster.textfiles.com/search?format=qarbonViewlet) | Qarbon Viewlet | .viewlet | 
 [other/qbxMSBasicKeyboardDefinition](https://discmaster.textfiles.com/search?format=qbxMSBasicKeyboardDefinition) | QBX (MS Basic 7.x) Editor keyboard definition | .key | 
 [other/qlPluginROM](https://discmaster.textfiles.com/search?format=qlPluginROM) | QL Plugin-ROM |  | 
+[other/qmlCachedDocument](https://discmaster.textfiles.com/search?format=qmlCachedDocument) | QML Cached document |  | 
 [other/qtBinaryResource](https://discmaster.textfiles.com/search?format=qtBinaryResource) | Qt Binary Resource | .rcc | 
 [other/qtMessage](https://discmaster.textfiles.com/search?format=qtMessage) | Qt Message | .qm | 
 [other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?format=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
@@ -3129,6 +3137,7 @@ Family/Format | Name | Extensions | Notes
 [other/surfsUpGameDataArchive](https://discmaster.textfiles.com/search?format=surfsUpGameDataArchive) | Surf's Up game data archive | .bin | 
 [other/surrealSoftwareGameArchive](https://discmaster.textfiles.com/search?format=surrealSoftwareGameArchive) | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | 
 [other/swishEIndex](https://discmaster.textfiles.com/search?format=swishEIndex) | Swish-e index | .swi | 
+[other/swissEphemerisData](https://discmaster.textfiles.com/search?format=swissEphemerisData) | Swiss Ephemeris data | .se1 | 
 [other/swordArtOnlineGameDataArchive](https://discmaster.textfiles.com/search?format=swordArtOnlineGameDataArchive) | Sword Art Online game data archive | .ofs3 .1psp | 
 [other/symantecInternetToolsData](https://discmaster.textfiles.com/search?format=symantecInternetToolsData) | Symantec Internet Tools Data | .ve2 .vep | 
 [other/symantecNortonConfig](https://discmaster.textfiles.com/search?format=symantecNortonConfig) | Symantec/Norton Config | .bin | 
@@ -3322,6 +3331,7 @@ Family/Format | Name | Extensions | Notes
 [other/videoMaxeFile](https://discmaster.textfiles.com/search?format=videoMaxeFile) | VideoMaxe File |  | 
 [other/videoPadProject](https://discmaster.textfiles.com/search?format=videoPadProject) | VideoPad Project | .vpj | 
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?format=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
+[other/vikingEmbroideryDataDisk](https://discmaster.textfiles.com/search?format=vikingEmbroideryDataDisk) | Viking embroidery data disk | .shv .mhv .phv | 
 [other/virToolsFiles](https://discmaster.textfiles.com/search?format=virToolsFiles) | Virtools files | .cmo .nmo .vmo .nms | 
 [other/virtualChess2Game](https://discmaster.textfiles.com/search?format=virtualChess2Game) | Virtual Chess 2 game | .eck | 
 [other/virtualFireScene](https://discmaster.textfiles.com/search?format=virtualFireScene) | Virtual Fire Scene | .sce | 
@@ -3361,6 +3371,7 @@ Family/Format | Name | Extensions | Notes
 [other/voxelAnimation](https://discmaster.textfiles.com/search?format=voxelAnimation) | Voxel Animation | .vxl | 
 [other/voyagerTheDynamicSkySimulatorSettings](https://discmaster.textfiles.com/search?format=voyagerTheDynamicSkySimulatorSettings) | Voyager - The Dynamic Sky Simulator Settings | .vset | 
 [other/vpExpertHelpSystem](https://discmaster.textfiles.com/search?format=vpExpertHelpSystem) | VP-Expert Help System | .chp | 
+[other/vp3SewingMachineFile](https://discmaster.textfiles.com/search?format=vp3SewingMachineFile) | VP3 sewing machine file | .vp3 | 
 [other/vSamplerSoundBank](https://discmaster.textfiles.com/search?format=vSamplerSoundBank) | VSampler Sound Bank | .vsb | 
 [other/vsoLanguageData](https://discmaster.textfiles.com/search?format=vsoLanguageData) | VSO language data | .spk | 
 [other/vueDEspritFunctionDefinition](https://discmaster.textfiles.com/search?format=vueDEspritFunctionDefinition) | Vue D'Esprit function definition | .fnc .mat .vob | 
@@ -3615,7 +3626,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (49)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3644,6 +3655,7 @@ Family/Format | Name | Extensions | Notes
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?format=lzaAnimationVideo) | LZA animation/video | .lza | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?format=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/magixVideo](https://discmaster.textfiles.com/search?format=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
+[video/mdecVideoStream](https://discmaster.textfiles.com/search?format=mdecVideoStream) | MDEC video stream | .str | [4 sample files](https://sembiance.com/fileFormatSamples/video/mdecVideoStream/)
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?format=movieSetterSet) | MovieSetter Set | .set | 
 [video/novastormMediaVideo](https://discmaster.textfiles.com/search?format=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 

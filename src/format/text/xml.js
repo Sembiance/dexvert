@@ -44,8 +44,8 @@ const _XML_MAGIC = [
 	/^Together Class Diagram \(UML [\d.]+\)/, "Liberty BASIC Lesson", "Teach2000 document", "AutoCAD Color Book", "Crytek XML Material", "FMOD Designer Project", "XML Forms Data Format", "Adobe Premiere Effect Preset", "QuarkXPress Color Library",
 	"Mac OS installable Keyboard Layout", "QuarkXPress Color Library UI specs", "Nmap scan results (XML)", "PAM Dataset", "Havok XML format", "Maple XML Worksheet", "Okteta grammar (XML)", "Code::Blocks wxSmith resource", "PyDev Project", "Photo Font",
 	"Sandcastle Help File Builder Project", "Battlefield 2 mod Description", "Visual Studio Publish profile", "Qt Help Project", "RoboHelp XML Project", "Rosegarden note style", "TextMate Preferences", "TextMate Project", "OmniOutliner document",
-	"SMath Studio document (old)",
-	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883|2034)( |$)/, /^x-fmt\/227( |$)/
+	"SMath Studio document (old)", "XBMC Smart Playlist", "Abstract Markup Language", "WiX Project (UTF-8)",
+	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1474|1613|1677|1729|1776|1796|1824|1825|1883|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};
 

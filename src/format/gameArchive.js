@@ -74,6 +74,7 @@ export const gameextractor =
 		xcrArchive                          : {name : "XCR archive", ext : [".xcr"], magic : ["XCR archive"]},
 		xenonautsGameArchive                : {name : "Xenonauts game archive", ext : [".pfp"], magic : ["Xenonauts game data archive"], weakMagic : true},
 		youDontKnowJackGameArchive          : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"], idMeta : ({macFileType, macFileCreator}) => (macFileType==="srf " && ["SRF ", "YDKJ"].includes(macFileCreator)) || (macFileType==="srf1" && macFileCreator==="SrfM") || (macFileType==="xSRF" && ["C2Bs", "Qbrw"].includes(macFileCreator))},
+		warriorKingsGameData                : {name : "Warrior Kings game data", ext : [".bcp"], magic : ["Warrior Kings game data"]},
 		zAxisGameSoundDataArchive           : {name : "Z-Axis game sound data archive", ext : [".zsd"], magic : ["Z-Axis game sound data archive"]}
 	}
 };

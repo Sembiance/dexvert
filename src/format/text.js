@@ -585,6 +585,7 @@ export default
 		iCalendar                                  : {name : "iCalendar/vCalendar", ext : [".ics", ".vcf"], magic : ["iCalendar - vCalendar", "iCalendar Alarm", /^iCalendar calendar file/, /^vCalendar calendar file/, "text/calendar", /^fmt\/(387|388)( |$)/]},
 		ieeeDASCStandardDelayFormat                : {name : "IEEE DASC Standard Delay Format", ext : [".sdf", ".sdo"], magic : ["IEEE DASC Standard Delay Format"], weakMagic : true},
 		iesnaPhotometricData                       : {name : "IESNA Photometric data", ext : [".ies"], magic : ["IESNA Photometric data", /^fmt\/1288( |$)/], weakMagic : true},
+		imageMasterShape                           : {name : "ImageMaster Shape", ext : [".ish"], magic : ["ImageMaster Shape"], weakMagic : true},
 		imageworks3DLUTFormat                      : {name : "Imageworks 3D LUT format", ext : [".spi3d"], magic : ["Imageworks 3D LUT format"], weakMagic : true},
 		imgBurnGraphData                           : {name : "ImgBurn Graph data", ext : [".ibg"], magic : ["ImgBurn Graph data"], weakMagic : true},
 		impaticaOnCueProject                       : {name : "Impatica OnCue Project", ext : [".ipj"], magic : ["Impatica OnCue Project"]},

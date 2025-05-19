@@ -2718,6 +2718,7 @@ export default
 		midiArpeggiatorArpeggio                  : {name : "MIDI Arpeggiator Arpeggio", ext : [".arp"], magic : ["MIDI Arpeggiator Arpeggio"], weakMagic : true},
 		midiDrumMachine                          : {name : "MIDI Drum Machine", ext : [".drm"], magic : ["Midi Drum Machine Drum"], notes : "Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum"},
 		mightyDrawDOSLibrary                     : {name : "Mighty Draw DOS library", ext : [".mdl"], magic : ["Mighty Draw DOS library"], weakMagic : true},
+		mindjetMindManagerMap                    : {name : "Mindjet MindManager Map", ext : [".mmp"], magic : ["Mindjet MindManager Map"], weakMagic : true},
 		miniCAD                                  : {name : "MiniCAD", ext : [".mcd", ".sta"], magic : ["MiniCAD Drawing", /^fmt\/(1136|1137|1138)( |$)/], weakMagic : true},
 		mioMotionMovie                           : {name : "MioMotion movie", ext : [".mio"], magic : ["MioMotion movie"], weakMagic : true},
 		mirandaIMDatabaseArchive                 : {name : "MirandaIM database-archive", ext : [".dat"], magic : ["MirandaIM database-archive file"], weakMagic : true},

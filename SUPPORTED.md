@@ -1,11 +1,11 @@
-# Supported File Formats (3,155)
+# Supported File Formats (3,157)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (461)
+## Archive (462)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -445,6 +445,7 @@ archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [dear
 archive | [WAD2 Game Archive](http://fileformats.archiveteam.org/wiki/Quake_WAD) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/wad2GameArchive/)
 archive | [WARC Archive](http://fileformats.archiveteam.org/wiki/WARC) | .warc | [Warcat](https://pypi.org/project/Warcat) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warc/)
 archive | Warcraft 2 Game Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/warcraft2GameArchive/)
+archive | Warrior Kings game data | .bcp | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warriorKingsGameData/)
 archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
 archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
@@ -2075,7 +2076,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,034)
+## Text (1,035)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2470,6 +2471,7 @@ text | iCalendar/vCalendar | .ics .vcf |  | [11 sample files](https://sembiance.
 text | IEEE DASC Standard Delay Format | .sdf .sdo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ieeeDASCStandardDelayFormat/)
 text | IESNA Photometric data | .ies |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iesnaPhotometricData/)
 text | ILINK linker Configuration | .icf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ilinkLinkerConfiguration/)
+text | ImageMaster Shape | .ish |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/imageMasterShape/)
 text | Imageworks 3D LUT format | .spi3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/imageworks3DLUTFormat/)
 text | ImgBurn Graph data | .ibg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/imgBurnGraphData/)
 text | Impatica OnCue Project | .ipj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/impaticaOnCueProject/)

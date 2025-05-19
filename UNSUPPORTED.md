@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,616)
+# Unsupported File Formats (3,617)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1139,7 +1139,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,386)
+## Other (2,387)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2488,6 +2488,7 @@ Family/Format | Name | Extensions | Notes
 [other/midtownMadness3Data](https://discmaster.textfiles.com/search?format=midtownMadness3Data) | Midtown Madness 3 data | .cdds | 
 [other/mightyDrawDOSLibrary](https://discmaster.textfiles.com/search?format=mightyDrawDOSLibrary) | Mighty Draw DOS library | .mdl | 
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?format=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
+[other/mindjetMindManagerMap](https://discmaster.textfiles.com/search?format=mindjetMindManagerMap) | Mindjet MindManager Map | .mmp | 
 [other/miniCAD](https://discmaster.textfiles.com/search?format=miniCAD) | MiniCAD | .mcd .sta | 
 [other/mioMotionMovie](https://discmaster.textfiles.com/search?format=mioMotionMovie) | MioMotion movie | .mio | 
 [other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?format=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 

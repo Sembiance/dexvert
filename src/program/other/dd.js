@@ -5,9 +5,10 @@ export class dd extends Program
 	website = "https://www.gnu.org/software/coreutils/";
 	package = "sys-apps/coreutils";
 	flags   = {
-		bs    : "Byte size to set. Default: 1",
-		skip  : "How many bytes to skip",
-		count : "How many bytes to count"
+		bs     : "Byte size to set. Default: 1",
+		skip   : "How many bytes to skip",
+		count  : "How many bytes to count",
+		outExt : "Ensure the output file has a specific extension"
 	};
 	bin  = "dd";
 	args = async r =>
@@ -23,5 +24,6 @@ export class dd extends Program
 		a.push(`of=${await r.outFile("out")}`);
 		return a;
 	};
+	outExt    = r => r.flags?.outExt || "";
 	renameOut = true;
 }

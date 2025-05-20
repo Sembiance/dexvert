@@ -183,6 +183,7 @@ const DEXMAGIC_CHECKS =
 	"Tracker Packer 1/2"               : [{offset : 0, match : "MEXX"}],
 	"TurboFM Dumped"                   : [{offset : 0, match : "TFMDM"}],
 	"WonderSwan WSR Audio"             : [{offset : -32, match : "WSRF"}],
+	"XMI (Alt)"                        : [{offset : 16, match : "FORM"}, {offset : 24, match : "XDIRINFO"}],
 
 	// other
 	"Atari ST Guide Hypertext"         : [{offset : 0, match : "HDOC"}],

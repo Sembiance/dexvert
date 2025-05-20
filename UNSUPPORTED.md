@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,617)
+# Unsupported File Formats (3,619)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1139,7 +1139,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,387)
+## Other (2,389)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2200,6 +2200,7 @@ Family/Format | Name | Extensions | Notes
 [other/jazzJackrabbit2Macro](https://discmaster.textfiles.com/search?format=jazzJackrabbit2Macro) | Jazz Jackrabbit 2 Macro | .j2m | 
 [other/jazzJackrabbit2TilesSet](https://discmaster.textfiles.com/search?format=jazzJackrabbit2TilesSet) | Jazz Jackrabbit 2 Tiles set | .j2t | 
 [other/jazzJackrabbitFile](https://discmaster.textfiles.com/search?format=jazzJackrabbitFile) | Jazz Jackrabbit File | .0sc .0fn | 
+[other/jedorData](https://discmaster.textfiles.com/search?format=jedorData) | Jedor data | .vps | 
 [other/jeepersConfiguration](https://discmaster.textfiles.com/search?format=jeepersConfiguration) | Jeepers Configuration | .cfg | 
 [other/jeepersKeyIndex](https://discmaster.textfiles.com/search?format=jeepersKeyIndex) | Jeepers Key/index | .jpk | 
 [other/jeepersReferenceDB](https://discmaster.textfiles.com/search?format=jeepersReferenceDB) | Jeepers Reference DB | .jpr | 
@@ -3344,6 +3345,7 @@ Family/Format | Name | Extensions | Notes
 [other/virusExecutorPatchBrain](https://discmaster.textfiles.com/search?format=virusExecutorPatchBrain) | VirusExecutor Patch Brain | .patchbrain | 
 [other/virusZIIArchiversInfo](https://discmaster.textfiles.com/search?format=virusZIIArchiversInfo) | VirusZ II Archivers info | .archivers | 
 [other/virusZIIIBootblocksData](https://discmaster.textfiles.com/search?format=virusZIIIBootblocksData) | VirusZ III Bootblocks data | .bootblocks | 
+[other/viscosityAnimationBitmap](https://discmaster.textfiles.com/search?format=viscosityAnimationBitmap) | Viscosity animation/bitmap | .vsc | 
 [other/visiSerieCADCAMWorkFile](https://discmaster.textfiles.com/search?format=visiSerieCADCAMWorkFile) | VISI-serie CAD/CAM work file | .wkf .mas | 
 [other/visionaireMesh](https://discmaster.textfiles.com/search?format=visionaireMesh) | Visionaire Mesh | .mesh | 
 [other/visionaireProject](https://discmaster.textfiles.com/search?format=visionaireProject) | Visionaire Project | .vis | 

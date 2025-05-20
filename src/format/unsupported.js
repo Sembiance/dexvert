@@ -2279,6 +2279,7 @@ export default
 		directXPreCompiledPixelVertexShader      : {name : "DirectX pre-compiled pixel/vertex shader", ext : [".fxo"], magic : ["DirectX pre-compiled pixel/vertex shader"], weakMagic : true},
 		dirtyLittleHelperDatabaseResource        : {name : "Dirty Little Helper database resource", ext : [".dlm"], magic : ["Dirty Little Helper database resource (v2.x)"]},
 		dnaSequenceChromatogram                  : {name : "DNA Sequence Chromatogram", ext : [".scf"], magic : ["DNA Sequence Chromatogram", /^fmt\/1554( |$)/], weakMagic : true},
+		dnlEBook                                 : {name : "DNL eBook / eCatalog / eCard / eBrochure", ext : [".dnl"], magic : ["DNL eBook / eCatalog / eCard / eBrochure"], weakMagic : true},
 		dominoSequence                           : {name : "Domino Sequence", ext : [".dms"], magic : ["Domino Sequence"], weakMagic : true},
 		dosCodePage                              : {name : "MS-DOS Code Page Info", ext : [".cp", ".cpi"], magic : ["DOS code page font data collection", "MS-DOS International Code Page Info"]},
 		dosNavigator2Settings                    : {name : "Dos Navigator 2 settings", ext : [".cfg"], magic : ["Dos Navigator 2 settings"]},

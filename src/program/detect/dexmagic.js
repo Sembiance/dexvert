@@ -166,6 +166,7 @@ const DEXMAGIC_CHECKS =
 	"E-Tracker (Alt)"                  : [{offset : 1213, match : "ETracker (C) BY ESI"}],
 	"Future Composer Atari"            : [{offset : 0, match : [0x26, 0x23]}],
 	"Galaxy Music System"              : [{offset : 0, match : "MUSE"}, {offset : 4, match : [0xDE, 0xAD, [0xBE, 0xBA], [0xAF, 0xBE]]}],
+	"Game Music Format"                : [{offset : 0, match : "GMF\x01"}],
 	"IFF Deluxe Music Score"           : [{offset : 0, match : "FORM"}, {offset : 8, match : "DMCS"}],
 	"Music ProTracker"                 : [{offset : 211, match : [0x78, 0x72, 0x6B, 0x65, 0x5F, 0x5A, 0x55, 0x50, 0x4B, 0x47, 0x43]}],
 	"NTSP-system"                      : [{offset : 0, match : "SPNT"}],

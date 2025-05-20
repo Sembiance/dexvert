@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,619)
+# Unsupported File Formats (3,620)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1139,7 +1139,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,389)
+## Other (2,390)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1799,6 +1799,7 @@ Family/Format | Name | Extensions | Notes
 [other/disGCLScript](https://discmaster.textfiles.com/search?format=disGCLScript) | DISGCL script | .gcl | 
 [other/diveFileFormat](https://discmaster.textfiles.com/search?format=diveFileFormat) | Dive File Format | .dff | 
 [other/dnaSequenceChromatogram](https://discmaster.textfiles.com/search?format=dnaSequenceChromatogram) | DNA Sequence Chromatogram | .scf | 
+[other/dnlEBook](https://discmaster.textfiles.com/search?format=dnlEBook) | DNL eBook / eCatalog / eCard / eBrochure | .dnl | 
 [other/dominionScenario](https://discmaster.textfiles.com/search?format=dominionScenario) | Dominion Scenario | .sdc | 
 [other/dominoSequence](https://discmaster.textfiles.com/search?format=dominoSequence) | Domino Sequence | .dms | 
 [other/doom3Savegame](https://discmaster.textfiles.com/search?format=doom3Savegame) | Doom 3 Savegame | .save | 

@@ -12,7 +12,7 @@ export class com extends Format
 
 		// specific com types
 		"XEQ executable Command library", "P-Screen COM Screen", "OPTIKS Quick View / Self Scrolling COM", "MIDIPAK audio driver", "16bit COM NoStrAdAmuS - LineZer0 patch", "16bit COM Reanimator Of Lash patch", "8bit CP/M-80 PASCAL/M Command",
-		"DESQview/X Print Manager driver", "16bit COM Factor - FoXCoRe crack",
+		"DESQview/X Print Manager driver", "16bit COM Factor - FoXCoRe crack", "16bit DOS SCRNCH Command",
 
 		// compiled by
 		"ASIC compiled DOS COM", /^Borland Turbo Pascal [\d.x]+ DOS Command/, "ZBASIC MS-DOS COM executable", "16bit COM ZBasic compiled"

@@ -1,4 +1,4 @@
-# Supported File Formats (3,157)
+# Supported File Formats (3,158)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1564,7 +1564,7 @@ image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | [r
 
 
 
-## Music (279)
+## Music (280)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 music | [A.M.Composer Module](http://fileformats.archiveteam.org/wiki/A.M._Composer_v1.2) | .amc | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://sembiance.com/fileFormatSamples/music/amComposer/)
@@ -1630,7 +1630,7 @@ music | [Digital Symphony Module](http://fileformats.archiveteam.org/wiki/Digita
 music | [Digital Tracker Module](http://fileformats.archiveteam.org/wiki/Digital_Tracker_module) | .dtm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [12 sample files](https://sembiance.com/fileFormatSamples/music/digitalTracker/)
 music | [DigiTrakker Module](http://fileformats.archiveteam.org/wiki/Digitrakker_module) | .mdl | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [13 sample files](https://sembiance.com/fileFormatSamples/music/digiTrakker/)
 music | [Disorder Tracker Module](http://fileformats.archiveteam.org/wiki/DisorderTracker_2_module) | .plm | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [7 sample files](https://sembiance.com/fileFormatSamples/music/disorderTracker/)
-music | [Doom/Heretic Music](http://fileformats.archiveteam.org/wiki/Doom_MUS) | .mus | [mus2mid](https://github.com/Sembiance/mus2mid) [doomMUS2mp3](http://slade.mancubus.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/doomMUS/)
+music | [Doom/Heretic Music](http://fileformats.archiveteam.org/wiki/Doom_MUS) | .mus | [mus2mid](https://github.com/Sembiance/mus2mid) [midistar2mp3](https://github.com/Sembiance/midistar2mid) [doomMUS2mp3](http://slade.mancubus.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/doomMUS/)
 music | [Dynamic Studio Professional Module](http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module) | .dsm .dsp | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/dynamicStudio/)
 music | E-Tracker Chiptune | .etc .cop .et .t .saa .sng | [zxtune123](https://zxtune.bitbucket.io/) | [20 sample files](https://sembiance.com/fileFormatSamples/music/eTracker/)
 music | EarAche Module | .ea | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://sembiance.com/fileFormatSamples/music/earAche/)
@@ -1665,6 +1665,7 @@ music | [Fuxoft AY Language](http://fileformats.archiveteam.org/wiki/Fuxoft_AY_L
 music | [Fuzzac Packer Module](http://fileformats.archiveteam.org/wiki/Fuzzac_Packer_module) | .fuzzac | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/music/fuzzac/)
 music | [Galaxy Music System](https://moddingwiki.shikadi.net/wiki/Jazz_2_Music_Format) | .j2b | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/galaxyMusicSystem/)
 music | [Game Music Creator Module](http://fileformats.archiveteam.org/wiki/Game_Music_Creator) | .gmc | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicCreator/)
+music | [Game Music Format](https://www.vgmpf.com/Wiki/index.php?title=GMF) | .gmf | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [4 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicFormat/)
 music | [General Digital Music](http://fileformats.archiveteam.org/wiki/General_Digital_Music_module) | .gdm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/generalDigiMusic/)
 music | [Genesis GYM](http://fileformats.archiveteam.org/wiki/GYM) | .gym | [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://sembiance.com/fileFormatSamples/music/genesisGYM/)
 music | Global Tracker | .gtr | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [6 sample files](https://sembiance.com/fileFormatSamples/music/globalTracker/)
@@ -1699,7 +1700,7 @@ music | [KSS Music File](http://fileformats.archiveteam.org/wiki/KSS) | .kss | [
 music | [Leggless Music Editor Module](http://fileformats.archiveteam.org/wiki/Leggless_Music_Editor) | .lme | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://sembiance.com/fileFormatSamples/music/leggless/)
 music | Lionheart Module | .lion | [uade123](http://zakalwe.fi/uade) | [11 sample files](https://sembiance.com/fileFormatSamples/music/lionheart/)
 music | [Liquid Tracker Module](http://fileformats.archiveteam.org/wiki/Liquid_Tracker_module) | .liq | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/liquidTracker/)
-music | [Loudness Sound System](https://www.vgmpf.com/Wiki/index.php/LDS) | .lds | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/loudnessSoundSystem/) - According to the wiki, LDS isn't the most common extension, but rather .dat is. So I'd need to come up with some sort of magic check in order to properly identify and convert these
+music | [Loudness Sound System](https://www.vgmpf.com/Wiki/index.php/LDS) | .lds | [adplay](https://github.com/adplug/adplay-unix) [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [5 sample files](https://sembiance.com/fileFormatSamples/music/loudnessSoundSystem/) - According to the wiki, LDS isn't the most common extension, but rather .dat is. So I'd need to come up with some sort of magic check in order to properly identify and convert these
 music | LucasArts AdLib Module | .laa | [adplay](https://github.com/adplug/adplay-unix) | [5 sample files](https://sembiance.com/fileFormatSamples/music/lucasArtsAdLib/)
 music | [MadTracker Module](http://fileformats.archiveteam.org/wiki/MadTracker_2_module) | .mt2 | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/madTracker/) - Sample file a little rock/mt2 doesn't convert
 music | [Maniacs of Noise Module](http://fileformats.archiveteam.org/wiki/Maniacs_of_Noise) | .mon | [uade123](http://zakalwe.fi/uade) | [10 sample files](https://sembiance.com/fileFormatSamples/music/maniacsOfNoise/)

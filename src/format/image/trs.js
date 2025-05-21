@@ -7,5 +7,5 @@ export class trs extends Format
 	ext        = [".trs"];
 	magic      = ["True Colour Sprites bitmap", /^fmt\/1605( |$)/];
 	mimeType   = "image/x-spooky-sprites";
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = [`abydosconvert[format:${this.mimeType}]`];	// wuimg
 }

@@ -12,5 +12,5 @@ export class zlib extends Format
 		// app specific
 		"Easy CD Creator Drag to Disk File"
 	];
-	converters   = ["gameextractor", "zlib_flate", "deark[module:zlib]"];
+	converters = ["gameextractor", "zlib_flate", "deark[module:zlib]"];
 }

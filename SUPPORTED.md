@@ -1665,7 +1665,7 @@ music | [Fuxoft AY Language](http://fileformats.archiveteam.org/wiki/Fuxoft_AY_L
 music | [Fuzzac Packer Module](http://fileformats.archiveteam.org/wiki/Fuzzac_Packer_module) | .fuzzac | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/music/fuzzac/)
 music | [Galaxy Music System](https://moddingwiki.shikadi.net/wiki/Jazz_2_Music_Format) | .j2b | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/galaxyMusicSystem/)
 music | [Game Music Creator Module](http://fileformats.archiveteam.org/wiki/Game_Music_Creator) | .gmc | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicCreator/)
-music | [Game Music Format](https://www.vgmpf.com/Wiki/index.php?title=GMF) | .gmf | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [4 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicFormat/)
+music | [Game Music Format](https://www.vgmpf.com/Wiki/index.php?title=GMF) | .gmf | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [6 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicFormat/)
 music | [General Digital Music](http://fileformats.archiveteam.org/wiki/General_Digital_Music_module) | .gdm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/generalDigiMusic/)
 music | [Genesis GYM](http://fileformats.archiveteam.org/wiki/GYM) | .gym | [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://sembiance.com/fileFormatSamples/music/genesisGYM/)
 music | Global Tracker | .gtr | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [6 sample files](https://sembiance.com/fileFormatSamples/music/globalTracker/)
@@ -2524,7 +2524,7 @@ text | KiCad Netlist | .net |  | [1 sample file](https://sembiance.com/fileForma
 text | KiCad part Library | .lib |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/kiCadPartLibrary/)
 text | KiCad Schematic | .sch |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/kiCadSchematic/)
 text | Kinemage protein language | .kin |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/kinemageProteinLanguage/)
-text | Kodak Photo CD configuration | .pcd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/kodakPhotoCDConfiguration/)
+text | Kodak Photo CD configuration | .pcd |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/kodakPhotoCDConfiguration/)
 text | Konqueror cookie |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
 text | Korn shell script |  |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/kornShellScript/)
 text | KsofT CRC-32 Data | .crc .dat |  | 

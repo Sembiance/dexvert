@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,620)
+# Unsupported File Formats (3,622)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1139,7 +1139,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,390)
+## Other (2,392)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1797,6 +1797,7 @@ Family/Format | Name | Extensions | Notes
 [other/directXPreCompiledPixelVertexShader](https://discmaster.textfiles.com/search?format=directXPreCompiledPixelVertexShader) | DirectX pre-compiled pixel/vertex shader | .fxo | 
 [other/dirtyLittleHelperDatabaseResource](https://discmaster.textfiles.com/search?format=dirtyLittleHelperDatabaseResource) | Dirty Little Helper database resource | .dlm | 
 [other/disGCLScript](https://discmaster.textfiles.com/search?format=disGCLScript) | DISGCL script | .gcl | 
+[other/findingNemoGameData](https://discmaster.textfiles.com/search?format=findingNemoGameData) | Disney Pixar Finding Nemo game data | .co2a | 
 [other/diveFileFormat](https://discmaster.textfiles.com/search?format=diveFileFormat) | Dive File Format | .dff | 
 [other/dnaSequenceChromatogram](https://discmaster.textfiles.com/search?format=dnaSequenceChromatogram) | DNA Sequence Chromatogram | .scf | 
 [other/dnlEBook](https://discmaster.textfiles.com/search?format=dnlEBook) | DNL eBook / eCatalog / eCard / eBrochure | .dnl | 
@@ -2896,6 +2897,7 @@ Family/Format | Name | Extensions | Notes
 [other/rarConfiguration](https://discmaster.textfiles.com/search?format=rarConfiguration) | RAR Configuration | .cfg | 
 [other/raveReportsProject](https://discmaster.textfiles.com/search?format=raveReportsProject) | Rave Reports Project | .rav | 
 [other/ravenSoftCompiledScript](https://discmaster.textfiles.com/search?format=ravenSoftCompiledScript) | Raven Software Compiled Script | .ibi | 
+[other/ravenloftAnimation](https://discmaster.textfiles.com/search?format=ravenloftAnimation) | Ravenloft Animation | .anm | 
 [other/raysMediaData](https://discmaster.textfiles.com/search?format=raysMediaData) | Rays Media data | .mda | 
 [other/rcSimulatorGameData](https://discmaster.textfiles.com/search?format=rcSimulatorGameData) | RC Simulator game data | .par | 
 [other/realDRAWProject](https://discmaster.textfiles.com/search?format=realDRAWProject) | Real-DRAW Project | .rdw | 

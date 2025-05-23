@@ -16,6 +16,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"Fltr/Clrs",		// ClarisWorks Translator
 	"LINK/MSIE",		// MSIE Link/Shorcut
 	"RIFF/FSX3",		// Painter
+	"SIMA/GEOL",		// AppleScript Documentation
 	"VBIN/VTPC",		// Verity
 	"Xtra/Xown",		// Macromedia Director Xtra
 	
@@ -24,6 +25,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"□□□□/□□□□",
 
 	// these are very generic and can't be acted on
+	"BIN /A/UX",
 	"bin /mdos",
 	"BINA/????",
 	"bina/mdos",
@@ -2108,6 +2110,7 @@ export const WEAK_VALUES =
 	/^Palm Markup Language$/,
 	/^PALASM \(var\.2\)$/,
 	/^Panorama database$/,
+	/^Papers Please Mod$/,
 	/^Parquet storage format/,
 	/^Particles format \((big|little)-endian\)$/,
 	/^PC Secure encrypted \(V\d\)$/,	// so I actually found files that ARE this, but it's a pretty weak magic and we can't do anything with em, so we just mark it weak
@@ -2194,6 +2197,7 @@ export const WEAK_VALUES =
 	/^Scalable Vector Graphics \(var\.3\)$/,
 	/^Scene Generator scene settings$/,
 	/^Scheduling Export File$/,
+	/^Scoop bucket$/,
 	/^Scribble Synth data$/,
 	/^Scribe Markup$/,
 	/^Seal registry Data$/,
@@ -2310,6 +2314,7 @@ export const WEAK_VALUES =
 	/^VersaCAD 2D Library \(MS-DOS\)$/,
 	/^VersaForm form$/,
 	/^VHSIC Hardware Description Language \(with rem\)$/,
+	/^VIA keypad definition$/,
 	/^Vice HotKeys$/,
 	/^Vice Keyboard Mapping$/,
 	/^Visionaire Studio compiled adventure/,

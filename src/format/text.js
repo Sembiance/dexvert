@@ -430,6 +430,7 @@ export default
 		compoPreferences                           : {name : "Compo preferences", magic : ["Compo preferences"]},
 		consolidatedLaserRangingPredictionFormat   : {name : "Consolidated Laser Ranging Prediction Format", ext : [".cpf", ".opa"], magic : ["Consolidated Laser Ranging Prediction Format"]},
 		conTeXtDocument                            : {name : "ConTeXt document", ext : [".tex"], magic : ["ConTeXt document"], weakMagic : true},
+		contextFreeDesignGrammar                   : {name : "Context Free design grammar", magic : ["Context Free design grammar"]},
 		corelCADMaterial                           : {name : "CorelCAD Material", ext : [".mat"], magic : ["CorelCAD Material"]},
 		corelLanguageResource                      : {name : "Corel Language Resource", ext : [".lrs"], magic : ["Corel Language Resource"]},
 		corelWordPerfectSetupInformation           : {name : "Corel/WordPerfect Setup information", ext : [".csw"], magic : ["Corel/WordPerfect Setup information"], weakMagic : true},

@@ -26,7 +26,7 @@ export class tiff extends Format
 		const r = [];
 		if(dexState.hasMagics("Macintosh TIFF bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.tiff]");
-		r.push("deark[module:tiff][noThumbs]", "convert", "iconvert", "iio2png", "wuimg");
+		r.push("deark[module:tiff][noThumbs]", "iconvert", "convert", "iio2png", "wuimg");	// iconvert handles ycbcr-cat.tif properly
 
 		// only include certain long-running windows based converters if we're not dealing with a MacBinary file (archive/macBinary/1Sled Ride.EPS)
 		if(!dexState.hasMagics(_MACBINARY_MAGIC))

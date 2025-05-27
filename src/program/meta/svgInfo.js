@@ -48,7 +48,7 @@ export class svgInfo extends Program
 				}
 				else
 				{
-					if(imageInfo?.width && imageInfo?.height)
+					if(imageInfo?.width && imageInfo?.height)	// this handles svg/23.svg which is missing a width tag but does have a height tag
 						Object.assign(r.meta, {width : imageInfo.width, height : imageInfo.height});
 					else
 						Object.assign(r.meta, {width : 0, height : 0});

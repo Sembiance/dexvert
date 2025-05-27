@@ -7,5 +7,5 @@ export class gfaRaytraceBitmap extends Format
 	ext            = [".sul", ".scl", ".suh", ".sch"];
 	forbidExtMatch = true;
 	magic          = [/^GFA Raytrace .*image .*bitmap$/];
-	converters     = ["nconvertWine"];
+	converters     = ["wuimg", "nconvertWine"];
 }

@@ -15,7 +15,7 @@ export class iffILBM extends Format
 		"DCTV encoded ILBM bitmap", "IFF Sliced HAM bitmap",  "IFF Newtek Dynamic HAM bitmap", "IFF Palette Changes HAM bitMap", "IFF Atari ST Interleaved bitmap", "MandelBlitz IFF Mandelbrot bitmap"
 	];
 	forbiddenMagic = ["IFF Amiga Contiguous BitMap"];	// trid likes to identify IFF ACBM files as both ACBM and ILBM, so forbid the magic here and let iffACBM handle that
-	idMeta         = ({macFileType}) => macFileType==="ILBM";
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="ILBM" || (macFileType==="IFF " && macFileCreator==="GKON");
 	metaProvider   = ["image"];
 	notes          = xu.trim`
 		ILBM files are only converted to static PNG images. Color cyclying animated GIFs are not produced.

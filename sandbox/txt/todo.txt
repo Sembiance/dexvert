@@ -154,6 +154,7 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
 	Could not figure these out (may be bad rips)
+		https://archive.org/details/cdrom-megabytemonster
 		https://archive.org/details/CitroenC5-2001
 		https://archive.org/details/LionShare
 		https://archive.org/details/cdrom-megabytemonster

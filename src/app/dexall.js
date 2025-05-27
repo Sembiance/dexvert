@@ -65,8 +65,8 @@ await argv.inputFiles.parallelMap(async inputFile =>
 		allNonNew.push(inputFilePath);
 
 	r.json.actions = [];
-	r.json.actions.push({text : "stash", value : `dexstash --record ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
-	r.json.actions.push({text : "stash+rm", value : `dexstash --record --delete ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
+	r.json.actions.push({text : "stash", value : `dexstash ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
+	r.json.actions.push({text : "stash+rm", value : `dexstash --delete ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
 	r.json.actions.push({text : "delete", value : `rm -f '${inputFilePath}'`});
 
 	r.json.originalInputFilename = inputFilename;
@@ -180,7 +180,7 @@ await fileUtil.writeTextFile(reportFilePath, `
 	<body>
 		<input type="text" id="copyTextInput">
 		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2>
-		${allNonNew.length ? `<span data-copy="rm -f ${allNonNew.map(v => `'${v.replaceAll("'", "'\\''")}'`).join(" ")}">delete all existing stash files</span>` : ""}<br>
+		${allNonNew.length ? `<span data-copy="rm -f ${allNonNew.map(v => `'${v.replaceAll("'", "'\\''")}'`).join(" ")}">delete all pre-existing stash files</span>` : ""}<br>
 		${failures.length ? `<span data-copy="cp ${failures.map(({inputFilePath}) => `'${inputFilePath.replaceAll("'", "'\\''")}'`).join(" ")} ">copy failures to ...</span>` : ""}<br>
 		<hr>
 		${failures.length>0 ? `<h3 style="color: red;">Failures (${failures.length.toLocaleString()})</h3>

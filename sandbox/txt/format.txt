@@ -91,9 +91,11 @@ A function that matches to see if our format matches various input file metadata
 A way to match against a particular part of the file as a way to double check the file is correct.
 Can be a single object or an array of objects. The match key can be a string or an array of bytes
 ext is a way to restrict the byte check to a given file extension and is OPTIONAL.
+If multiple used in array, they ALL must match. Also, offset is REQUIRED
 
 >>> idCheck = async (inputFile, detections, {extMatch, filenameMatch, fileSizeMatch, magicMatch, xlog}) => { return true; }
 A custom function that must return true for any match to be made against this file
+WARNING: If using this to just check for some bytes, probably want to use byteCheck instead
 
 >>> confidenceAdjust : (inputFile, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
 Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.

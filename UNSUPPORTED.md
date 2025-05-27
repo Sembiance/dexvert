@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,622)
+# Unsupported File Formats (3,630)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (285)
+## Archive (286)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -202,6 +202,7 @@ Family/Format | Name | Extensions | Notes
 [archive/pmexePacked](https://discmaster.textfiles.com/search?format=pmexePacked) | PMexe CP/M Packed | .com | 
 [archive/pocketExcelSheet](https://discmaster.textfiles.com/search?format=pocketExcelSheet) | Pocket Excel sheet |  | 
 [archive/popComPacked](https://discmaster.textfiles.com/search?format=popComPacked) | PopCom Packed | .com | 
+[archive/powerArchiverEncrypted](https://discmaster.textfiles.com/search?format=powerArchiverEncrypted) | PowerArchiver Encrypted | .pae | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?format=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?format=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?format=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
@@ -378,7 +379,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (191)
+## Document (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -550,6 +551,7 @@ Family/Format | Name | Extensions | Notes
 [document/theSPREADSHEETWorksheet](https://discmaster.textfiles.com/search?format=theSPREADSHEETWorksheet) | THE SPREADSHEET worksheet | .ts1 | 
 [document/tomeRaider](https://discmaster.textfiles.com/search?format=tomeRaider) | TomeRaider e-book/document | .tr | 
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?format=trueBASICCompiledCode) | True BASIC compiled code |  | 
+[document/turboPascalMicroCalcSpreadsheet](https://discmaster.textfiles.com/search?format=turboPascalMicroCalcSpreadsheet) | Turbo Pascal MicroCalc Spreadsheet | .mca .mcs | 
 [document/turboBaseDB](https://discmaster.textfiles.com/search?format=turboBaseDB) | TurboBase DB | .tbp | 
 [document/turboCalc](https://discmaster.textfiles.com/search?format=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 [document/txt2exeJohnPalma](https://discmaster.textfiles.com/search?format=txt2exeJohnPalma) | [TXT2EXE (John De Palma)](http://fileformats.archiveteam.org/wiki/TXT2EXE.COM_(John_De_Palma)) | .exe .com | [2 sample files](https://sembiance.com/fileFormatSamples/document/txt2exeJohnPalma/)
@@ -761,7 +763,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (197)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -782,7 +784,6 @@ Family/Format | Name | Extensions | Notes
 [image/appleIIgsObjectOrientedGraphic](https://discmaster.textfiles.com/search?format=appleIIgsObjectOrientedGraphic) | Apple IIgs Object Oriented Graphic |  | 
 [image/applixBitmap](https://discmaster.textfiles.com/search?format=applixBitmap) | Applix bitmap | .im | 
 [image/applixwareGraphic](https://discmaster.textfiles.com/search?format=applixwareGraphic) | Applixware Graphic | .ag | 
-[image/arabesqueBitmappedDrawing](https://discmaster.textfiles.com/search?format=arabesqueBitmappedDrawing) | Arabesque Professional bitmapped drawing | .abm .puf | 
 [image/arabesqueVectorDrawing](https://discmaster.textfiles.com/search?format=arabesqueVectorDrawing) | Arabesque Professional vector drawing | .aob | 
 [image/artIconsIconCollection](https://discmaster.textfiles.com/search?format=artIconsIconCollection) | Art Icons - IconCollection | .icc | 
 [image/artsAndLettersGraphic](https://discmaster.textfiles.com/search?format=artsAndLettersGraphic) | Arts and Letters Graphic | .ged | 
@@ -841,6 +842,7 @@ Family/Format | Name | Extensions | Notes
 [image/fractalDesignPreviewBitmap](https://discmaster.textfiles.com/search?format=fractalDesignPreviewBitmap) | Fractal Design Preview bitmap | .pix | 
 [image/freelanceGraphicsDrawing](https://discmaster.textfiles.com/search?format=freelanceGraphicsDrawing) | Freelance Graphics Drawing | .drw | 
 [image/fxgBitmap](https://discmaster.textfiles.com/search?format=fxgBitmap) | FXG Bitmap | .fxg | [3 sample files](https://sembiance.com/fileFormatSamples/image/fxgBitmap/)
+[image/gemViewMGF](https://discmaster.textfiles.com/search?format=gemViewMGF) | GEMView MGF | .mgf | [3 sample files](https://sembiance.com/fileFormatSamples/image/gemViewMGF/)
 [image/genericCADD](https://discmaster.textfiles.com/search?format=genericCADD) | Generic CADD | .gcd | 
 [image/genuineFractalsSTINGImage](https://discmaster.textfiles.com/search?format=genuineFractalsSTINGImage) | Genuine Fractals STING image | .stn | 
 [image/geoWorksGeoDrawDrawing](https://discmaster.textfiles.com/search?format=geoWorksGeoDrawDrawing) | GeoWorks GeoDraw drawing | .000 | 
@@ -853,7 +855,6 @@ Family/Format | Name | Extensions | Notes
 [image/hitachiRaster](https://discmaster.textfiles.com/search?format=hitachiRaster) | Hitachi Raster Format bitmap | .hrf | [1 sample file](https://sembiance.com/fileFormatSamples/image/hitachiRaster/)
 [image/homeBrewIcon](https://discmaster.textfiles.com/search?format=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
 [image/ibmAVCStillVideoImage](https://discmaster.textfiles.com/search?format=ibmAVCStillVideoImage) | IBM Audio Visual Connection Still Video Image | .dsp ._im | 
-[image/iffChunkyBitmap](https://discmaster.textfiles.com/search?format=iffChunkyBitmap) | IFF Chunky bitmap | .ciff | 
 [image/iffPlanarBitmap](https://discmaster.textfiles.com/search?format=iffPlanarBitmap) | IFF Planar Bitmap | .plbm | 
 [image/imageKnifeRawBitmap](https://discmaster.textfiles.com/search?format=imageKnifeRawBitmap) | ImageKnife Raw bitmap | .raw | 
 [image/imagineTexture](https://discmaster.textfiles.com/search?format=imagineTexture) | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
@@ -1139,7 +1140,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,392)
+## Other (2,399)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1822,6 +1823,7 @@ Family/Format | Name | Extensions | Notes
 [other/dreamcastDisc](https://discmaster.textfiles.com/search?format=dreamcastDisc) | Dreamcast Disc | .bin | 
 [other/dreamWebGameData](https://discmaster.textfiles.com/search?format=dreamWebGameData) | DreamWeb game data |  | 
 [other/driDisplayManagerDisplay](https://discmaster.textfiles.com/search?format=driDisplayManagerDisplay) | DRI Display Manager Display | .dis | 
+[other/driverCleanerProCustomizationFilter](https://discmaster.textfiles.com/search?format=driverCleanerProCustomizationFilter) | Driver Cleaner Pro Customization Filter | .dcf | 
 [other/dtvShot](https://discmaster.textfiles.com/search?format=dtvShot) | DTV Shot | .sht | 
 [other/dukeNukem3DMapLevel](https://discmaster.textfiles.com/search?format=dukeNukem3DMapLevel) | Duke Nukem 3D Map/level | .map | 
 [other/duneIISavedGame](https://discmaster.textfiles.com/search?format=duneIISavedGame) | Dune II Saved Game | .dat | 
@@ -1932,6 +1934,7 @@ Family/Format | Name | Extensions | Notes
 [other/fighterBomberMission](https://discmaster.textfiles.com/search?format=fighterBomberMission) | Fighter Bomber Mission | .msn | 
 [other/fileExpressIndexHeader](https://discmaster.textfiles.com/search?format=fileExpressIndexHeader) | File Express Index Header | .ixh | 
 [other/fileExpressQuickScan](https://discmaster.textfiles.com/search?format=fileExpressQuickScan) | File Express Quick Scan | .qss | 
+[other/fileWizardConfiguration](https://discmaster.textfiles.com/search?format=fileWizardConfiguration) | File Wizard Configuration | .cfg .swp | 
 [other/fileStar2ToolBar](https://discmaster.textfiles.com/search?format=fileStar2ToolBar) | FileStar/2 toolBar | .bar | 
 [other/finalCutProject](https://discmaster.textfiles.com/search?format=finalCutProject) | Final Cut project | .fcp | 
 [other/finaleEnigmaBinaryFormat](https://discmaster.textfiles.com/search?format=finaleEnigmaBinaryFormat) | Finale Enigma Binary Format | .bin | 
@@ -2002,6 +2005,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr .gm6 | 
 [other/gameVoiceData](https://discmaster.textfiles.com/search?format=gameVoiceData) | Game Voice data | .hvo | 
 [other/gamebyroKFMData](https://discmaster.textfiles.com/search?format=gamebyroKFMData) | Gamebyro KFM data | .kfm | 
+[other/gameHouseJigsawGame](https://discmaster.textfiles.com/search?format=gameHouseJigsawGame) | GameHouse Jigsaw Game | .jig | 
 [other/gameZAssetsArchive](https://discmaster.textfiles.com/search?format=gameZAssetsArchive) | GameZ assets archive | .zbd | 
 [other/gameZInterpreterScript](https://discmaster.textfiles.com/search?format=gameZInterpreterScript) | GameZ interpreter script | .zbd | 
 [other/gameZPreCompiledAnimationDefinitions](https://discmaster.textfiles.com/search?format=gameZPreCompiledAnimationDefinitions) | GameZ pre-compiled animation definitions | .zbd | 
@@ -2356,6 +2360,7 @@ Family/Format | Name | Extensions | Notes
 [other/magicC64Preferences](https://discmaster.textfiles.com/search?format=magicC64Preferences) | MagiC64 Preferences | .prefs | 
 [other/magicaVoxelVox](https://discmaster.textfiles.com/search?format=magicaVoxelVox) | MagicaVoxel Vox | .vox | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?format=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
+[other/mAGIXLibrary](https://discmaster.textfiles.com/search?format=mAGIXLibrary) | MAGIX library | .mxm | 
 [other/magixMovieEditVideo](https://discmaster.textfiles.com/search?format=magixMovieEditVideo) | Magix Movie Edit video | .vip | 
 [other/magixMusicStudioStyle](https://discmaster.textfiles.com/search?format=magixMusicStudioStyle) | MAGIX music studio Style | .sty | 
 [other/magixSamplitudeProject](https://discmaster.textfiles.com/search?format=magixSamplitudeProject) | Magix Samplitude Project | .vip | 
@@ -2506,6 +2511,7 @@ Family/Format | Name | Extensions | Notes
 [other/monarchModel](https://discmaster.textfiles.com/search?format=monarchModel) | Monarch Model | .mod | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?format=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moonbaseSavedGame](https://discmaster.textfiles.com/search?format=moonbaseSavedGame) | Moonbase Saved game | .mbs | 
+[other/mophunGame](https://discmaster.textfiles.com/search?format=mophunGame) | Mophun game | .mpn | 
 [other/moriaSavedGame](https://discmaster.textfiles.com/search?format=moriaSavedGame) | Moria Saved game |  | 
 [other/morrowindPlugin](https://discmaster.textfiles.com/search?format=morrowindPlugin) | Morrowind plugin | .esp | 
 [other/mortalKombat3GameArchive](https://discmaster.textfiles.com/search?format=mortalKombat3GameArchive) | Mortal Kombat 3 game archive | .ftr | 
@@ -3085,6 +3091,8 @@ Family/Format | Name | Extensions | Notes
 [other/starWarsJediKnightJediAcademyMap](https://discmaster.textfiles.com/search?format=starWarsJediKnightJediAcademyMap) | Star Wars Jedi Knight: Jedi Academy map | .bsp | 
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?format=starAmPlanGraphData) | StarAm Plan graph data | .gein | 
 [other/starbreezeStudiosGameDataArchive](https://discmaster.textfiles.com/search?format=starbreezeStudiosGameDataArchive) | Starbreeze Studios game data archive | .xw .xfc .xtc .xmd .xcd .xwc | 
+[other/starCalcData](https://discmaster.textfiles.com/search?format=starCalcData) | StarCalc data | .dat | 
+[other/starCalcDataIndex](https://discmaster.textfiles.com/search?format=starCalcDataIndex) | StarCalc data index | .bin | 
 [other/starCraftMap](https://discmaster.textfiles.com/search?format=starCraftMap) | StarCraft Map | .scm .scx | 
 [other/starCraftReplay](https://discmaster.textfiles.com/search?format=starCraftReplay) | StarCraft Replay | .rep | 
 [other/stardockDeskScapesAnimatedWallpaper](https://discmaster.textfiles.com/search?format=stardockDeskScapesAnimatedWallpaper) | Stardock's DeskScapes animated wallpaper | .dream | 

@@ -6,6 +6,5 @@ export class trs extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Spooky_Sprites";
 	ext        = [".trs"];
 	magic      = ["True Colour Sprites bitmap", /^fmt\/1605( |$)/];
-	mimeType   = "image/x-spooky-sprites";
-	converters = [`abydosconvert[format:${this.mimeType}]`];	// wuimg
+	converters = ["wuimg"];	// we don't use abydosconvert with mimeType "image/x-spooky-sprites" because wuimg handles them all and doesn't stretch them
 }

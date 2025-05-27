@@ -10,12 +10,13 @@ export class svgInfo extends Program
 	package = "media-libs/resvg";
 	exec    = async r =>
 	{
+		let imageInfo;
 		try
 		{
 			// convert to PNG to get color count and opaque info
 			const pngFilePath = await fileUtil.genTempPath(r.f.root, ".png");
 			await runUtil.run("resvg", ["--width", "500", r.inFile(), path.relative(r.f.root, pngFilePath)], {timeout : xu.MINUTE*2, cwd : r.f.root});
-			const imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
+			imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
 			await fileUtil.unlink(pngFilePath);
 			r.meta.opaque = imageInfo.opaque;
 			r.meta.colorCount = imageInfo.colorCount;
@@ -47,7 +48,10 @@ export class svgInfo extends Program
 				}
 				else
 				{
-					Object.assign(r.meta, {width : 0, height : 0});
+					if(imageInfo?.width && imageInfo?.height)
+						Object.assign(r.meta, {width : imageInfo.width, height : imageInfo.height});
+					else
+						Object.assign(r.meta, {width : 0, height : 0});
 				}
 			}
 			catch

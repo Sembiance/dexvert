@@ -20511,6 +20511,8 @@ WebP (*.webp)
 
 
 >>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
+Known formats: 113
+aipd:	National Instruments AIPD
 aliaspix:	AliasPIX and Vivid
 at6p:	999 AT6P
 avif:	AV1 Image File Format
@@ -20524,6 +20526,7 @@ bsi:	Bethesda BSI texture (IFHD, BSIF)
 c:	C code formats: DEGAS Elite Icon, XBM X10 and X11
 c64:	Art Studio (OCP), Artist64, Blazing Paddles, CDU-Paint, Cheese, Create With Garfield, Doodle (raw & compressed), Hi-Eddi, Image System, Interpaint, KoalaPainter (raw & compressed), Picasso 64, Runpaint, Saracen Paint, Vidcom 64
 cbg:	BGI/Ethornell CompressedBG (v1)
+chky:	IFF Chunky
 clm:	IDES/Fairytale PC-98 thumbnail? (no palette support)
 coke:	COKE (Atari Falcon)
 da4:	PaintShop (Atari ST)
@@ -20543,6 +20546,7 @@ flif:	Free Lossless Image Format
 ftc:	Falcon True Color
 g00:	RealLive engine G00
 gemview:	GEM View-Dither
+gfa:	GFA Raytrace
 gif:	Graphics Interchange Format
 god:	GodPaint
 gp4:	elf AI5 engine GP4
@@ -20567,6 +20571,7 @@ jp2:	JPEG 2000
 jpeg:	JPEG, MPO
 jpegls:	JPEG LS
 jpegxl:	JPEG XL
+kips:	IBM KIPS (no palette)
 kro:	Kolor Raw
 kyg:	Kyss graphics format (KYG)
 lerc:	Limited Error Raster Compression
@@ -20598,6 +20603,7 @@ sgi:	Silicon Graphics Image
 sir0:	999 SIR0 sprites
 sixel:	SIXEL terminal graphics
 skyroads:	SkyRoads LZS graphics
+stad:	STAD PAC, Arabesque
 sun:	Sun Raster
 svg:	Scalable Vector Graphics
 tbn:	Croteam Texture
@@ -20619,6 +20625,9 @@ wia:	Wild-Bug engine image sequence
 xcursor:	X11 cursor
 xwd:	X11 Window Dump
 xyz:	RPG Maker image
+
+Known extensions: 257
+a64, aas, abm, als, apd, arw, avif, avifs, avs, bie, bl1, bld, bmp, bmp24, bmz, bob, bp, bpl, bru, bsi, bw, cdu, che, ciff, clm, cps, cr2, cur, cwg, da4, dat, dcr, dcx, dd, ddl, dib, dit, dmp, dng, doo, dpx, dt, dt2, dta, erf, eza, ff, flif, fnt, ftc, g00, ge5, ge7, ge8, gg, gif, gif87, gif89, gig, god, gp4, gpc, grp, gxa, hed, heic, heics, heif, heifs, hel, hg3, hgr, hif, hir, hpi, icn, ico, icon, iff, iim, ilbm, im1, im24, im32, im4, im8, imc, ims, ip64h, iph, ipt, ish, ism, j2c, j2k, jam, jb2, jbg, jbig, jfi, jfif, jhc, jif, jj, jls, jp2, jpc, jpe, jpeg, jpg, jph, jps, jxl, k25, kdc, kla, koa, koala, kps, kro, kyg, lbm, lerc, lerc1, lerc2, lmp, lrc, lzs, mac, mag, max, mbfavs, mki, mpo, mtv, nef, nlm, nrw, ocp, orf, otb, p2, p64, p7, pac, pam, pbm, pc1, pc2, pc3, pcc, pcf, pcx, pdt, pef, pfm, pgm, pgx, phm, pi, pi1, pi2, pi3, pic, pim, pix, png, pnm, pntg, ppm, prt, puf, px, pxy, q4, qoi, raf, ras, raw, rgb, rgba, rpm, rw2, rwl, s16, s17, s1a, s1c, sah, sal, sar, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sca, scc, sch, scl, sd0, sd1, sd2, sff, sgi, six, sixel, spr, spr32, sr5, sr6, sr7, sr8, srs, stj, suh, sul, sun, svg, svgz, tbn, tcp, tex, tg1, tga, thm, tif, tiff, tile, tim, tlg, tmsk, tn1, tn2, tn3, tn4, tn5, tn6, tny, tre, trp, trs, tru, txf, vid, wbm, wbmp, webp, wia, wig, x, xbm, xwd, xyz, yjk
 
 
 

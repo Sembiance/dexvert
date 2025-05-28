@@ -16,7 +16,6 @@ export class mpeg2 extends Format
 		// specific
 		"PlayStation Portable Movie Format", "AVCHD video clips - MPEG Transport Stream", "BDAV MPEG-2 Transport Stream (M2TS)"
 	];
-	weakMagic    = ["MPEG-PS (MPEG-2 Program Stream) (mpeg)", "MPEG-TS (MPEG-2 Transport Stream) (mpegts)"];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="MPG2" || (macFileType==="MPEG" && macFileCreator==="TVOD");
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg", "xanim"];

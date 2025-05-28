@@ -334,6 +334,7 @@ const FLEX_SIZE_FORMATS =
 		"*"                   : 3,
 		cyberStudioCAD3D      : 95,
 		keyCAD3DModel         : 40,
+		panda3DModel          : 50,
 		rayDreamDesignerScene : 95
 	},
 	video :
@@ -547,6 +548,10 @@ const ALLOW_PROCESS_FAILURES =
 	archive :
 	{
 		xpackLZCOMPacked : ["PC (1).COM"]
+	},
+	audio :
+	{
+		soundFont2 : ["aurealgm"]
 	},
 	document :
 	{

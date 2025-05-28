@@ -33,7 +33,6 @@ export class zip extends Format
 		/^fmt\/(424|524|595|627|628|633|937|942|943|999|1184|1476|1477)( |$)/,
 		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];
-	weakMagic      = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType, macFileCreator}) => ["pZIP", "ZIP "].includes(macFileType) || (macFileType==="xpi " && ["MzIn", "NSIn"].includes(macFileCreator));
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters     = () =>

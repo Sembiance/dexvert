@@ -2030,6 +2030,7 @@ export default
 		autodeskExternalMessage                  : {name : "Autodesk External Message", ext : [".xmx"], magic : ["Autodesk External Message compiled"]},
 		autoPlayMenuBuilderData                  : {name : "AutoPlay Menu Builder data", ext : [".apm"], magic : ["AutoPlay Menu Builder data"]},
 		autoREALMMap                             : {name : "AutoREALM Map", ext : [".aur"], magic : ["AutoREALM Map"], weakMagic : true},
+		autoREALMSymbols                         : {name : "AutoREALM Symbols", ext : [".aus"], magic : ["AutoREALM Symbols"], weakMagic : true},
 		autoSketchConfiguration                  : {name : "AutoSketch Configuration", ext : [".cfg"], magic : ["AutoSketch Configuration"]},
 		avgAntivirusVault                        : {name : "AVG Antivirus vault", ext : [".fil"], magic : ["AVG Antivirus Vault", "AVG 7 Antivirus vault file data"]},
 		avcdHDPlaylist                           : {name : "AVCHD Playlist", ext : [".mpls"], magic : [/^fmt\/1074( |$)/], weakMagic : true},

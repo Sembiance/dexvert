@@ -12,7 +12,6 @@ export class dbf extends Format
 		/^dBase I[IV]I? DBT/, /^x-fmt\/(9|271)( |$)/, /^fmt\/(373|374|376|377|379|380|381)( |$)/
 	];
 	forbiddenMagic = [/^(dBase|xBase) .*DBF, no records/];
-	weakMagic      = [/^dBase I[IV]I? DBT/, "Visual FoxPro"];
 	idMeta         = ({macFileType, macFileCreator}) => (["F+DB", "F+FR", "F+LB", "F+RP", "FDBC", "FMNX", "FPJX", "FSCX"].includes(macFileType) && ["FOX+", "FOXX"].includes(macFileCreator)) ||
 		([".DBF", ".Dxx", "DBF ", "dDBF"].includes(macFileType) && ["ACT!", "dBAS", "FILL"].includes(macFileCreator));
 	converters     = ["soffice[format:dBase]", "excel97[strongMatch]", "strings[strongMatch][hasExtMatch]"];

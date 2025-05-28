@@ -48,7 +48,6 @@ export class exe extends Format
 
 		..._INSTALLER_MAGICS
 	];
-	weakMagic = ["DOS Executable"];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 

@@ -44,7 +44,6 @@ export class iso extends Format
 		/^First .*are blank$/,
 		...HFS_MAGICS, ...MFS_MAGICS
 	];
-	weakMagic      = [/^First .* are blank$/, /^Apple HFS Plus/, /^HFS Plus/];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	idMeta = ({macFileType, macFileCreator}) => (macFileType==="GImg" && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");

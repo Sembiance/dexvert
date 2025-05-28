@@ -14,7 +14,6 @@ export class diskImage extends Format
 		// specific
 		"Distribution Media Format disk image", "DoubleSpace compressed volume (v6.0)", "CP Backup disk image", "2FILE disk image"
 	];
-	weakMagic = ["DOS floppy"];
 
 	// 7z isn't a very reliable program with unknown data, so if we've only matched on extension, lower our confidence a lot so other format families like images have a chance
 	confidenceAdjust = (inputFile, matchType) => (matchType==="ext" ? -20 : 0);

@@ -8,6 +8,5 @@ export class avfVideo extends Format
 	ext            = [".avf"];
 	forbidExtMatch = true;
 	magic          = [/^AVF video$/, "AVF Video (old)"];
-	weakMagic      = ["AVF Video (old)"];
 	converters     = ["na_game_tool[format:avf]"];
 }

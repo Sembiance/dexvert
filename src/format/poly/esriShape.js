@@ -7,6 +7,5 @@ export class esriShape extends Format
 	ext            = [".shp"];
 	forbidExtMatch = true;
 	magic          = ["ArcView Shape", "ESRI Shapefile", /^x-fmt\/235( |$)/];
-	weakMagic      = ["ESRI Shapefile"];
 	converters     = ["polyTrans64[format:esriShape]"];
 }

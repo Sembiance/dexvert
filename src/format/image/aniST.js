@@ -8,7 +8,6 @@ export class aniST extends Format
 	ext            = [".scr", ".str"];
 	forbidExtMatch = true;
 	magic          = ["Ani ST Script", "Ani ST Animation"];
-	weakMagic      = ["Ani ST Animation"];
 	mimeType       = "image/x-ani-st";
 
 	// Make sure not to attempt to convert windows SCR files

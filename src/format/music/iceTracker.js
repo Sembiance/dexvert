@@ -7,7 +7,6 @@ export class iceTracker extends Format
 	ext            = [".it"];
 	forbidExtMatch = [".it"];
 	magic          = ["IceTracker module"];
-	weakMagic      = ["IceTracker module"];
 	priority       = this.PRIORITY.LOW;
 	metaProvider   = ["musicInfo"];
 	converters     = ["xmp", "uade123", "zxtune123", "openmpt123"];

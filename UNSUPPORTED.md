@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,631)
+# Unsupported File Formats (3,632)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1140,7 +1140,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,400)
+## Other (2,401)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1409,6 +1409,7 @@ Family/Format | Name | Extensions | Notes
 [other/autoItCompiledScript](https://discmaster.textfiles.com/search?format=autoItCompiledScript) | AutoIt compiled script | .a3x | 
 [other/autoPlayMenuBuilderData](https://discmaster.textfiles.com/search?format=autoPlayMenuBuilderData) | AutoPlay Menu Builder data | .apm | 
 [other/autoREALMMap](https://discmaster.textfiles.com/search?format=autoREALMMap) | AutoREALM Map | .aur | 
+[other/autoREALMSymbols](https://discmaster.textfiles.com/search?format=autoREALMSymbols) | AutoREALM Symbols | .aus | 
 [other/autoSketchConfiguration](https://discmaster.textfiles.com/search?format=autoSketchConfiguration) | AutoSketch Configuration | .cfg | 
 [other/avatarStudioLIO](https://discmaster.textfiles.com/search?format=avatarStudioLIO) | Avatar Studio LIO | .lio | 
 [other/avcHDClipInformation](https://discmaster.textfiles.com/search?format=avcHDClipInformation) | AVCHD Clip Information | .cpi | 

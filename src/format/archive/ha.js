@@ -6,6 +6,5 @@ export class ha extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/HA";
 	ext        = [".ha"];
 	magic      = ["HA compressed archive", "HA archive data", "HA Archiv gefunden"];
-	weakMagic  = ["HA compressed archive"];
 	converters = ["ha"];
 }

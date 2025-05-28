@@ -7,6 +7,5 @@ export class bsaArchive extends Format
 	ext            = [".bsa", ".bsn", ".bs2"];
 	forbidExtMatch = true;
 	magic          = ["BSA Packing program compressed archive", "BSArc compressed archive", /^(BSArc|BSN) archive data/];
-	weakMagic      = [/^(BSArc|BSN) archive data/];
 	converters     = ["bsa"];
 }

@@ -7,6 +7,5 @@ export class dgi extends Format
 	ext        = [".dgi"];
 	fileSize   = 64008;
 	magic      = ["Digi-Pic 2"];
-	weakMagic  = ["Digi-Pic 2"];
 	converters = ["deark[module:dgi][matchType:magic]", "dgiwind"];
 }

@@ -10,8 +10,7 @@ export class macromediaDirector extends Format
 		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", "Director Cast data",
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
-	weakMagic      = ["Generic RIFX container"];
-	idMeta         = ({macFileType, macFileCreator}) => (
+	idMeta = ({macFileType, macFileCreator}) => (
 		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MJ${suffix}`, `MV${suffix}`, "D!11", "D*11", "DC11", "FGDC", "FGDM"].includes(macFileType) &&
 		 ["AFTB", ...[0, 1, 3, 7].map(v => `MD0${v}`), ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||
 		(macFileType==="XOBJ" && macFileCreator==="MMDR") ||

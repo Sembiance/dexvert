@@ -9,10 +9,8 @@ export class bmp extends Format
 	mimeType       = "image/bmp";
 	magic          = [
 		"Windows Bitmap", /^PC bitmap, (Windows 3\.x|OS\/2 \d\.x) format/, /^PC bitmap, Windows (98\/2000|95\/NT4)/, "Device independent bitmap graphic", "Run Length Encoded bitmap", "Mac BMP bitmap (MacBinary)",
-		"Alpha Microsystems Bitmap", "image/x-dib", "piped bmp sequence (bmp_pipe)", "PC bitmap", /Bitmap Bild \(Typ \d/, /^fmt\/(115|116|117|118|119)( |$)/, /^x-fmt\/270( |$)/
+		"Alpha Microsystems Bitmap", "image/x-dib", "piped bmp sequence (bmp_pipe)", "PC bitmap", /Bitmap Bild \(Typ \d/, /^fmt\/(114|115|116|117|118|119)( |$)/, /^x-fmt\/270( |$)/, "image/bmp"
 	];
-	weakMagic = ["Windows Bitmap (generic)", "image/bmp", /^fmt\/114( |$)/];
-	constructor() { super(); this.magic.push(...this.weakMagic); }
 	idMeta       = ({macFileType, macFileCreator}) => ["BMPp", ".BMP", "BMP_", "BMP ", "BMPf", "BMPM"].includes(macFileType) || (macFileType==="BINA" && macFileCreator==="8BIM");
 	metaProvider = ["image"];
 	converters   = dexState =>

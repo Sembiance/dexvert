@@ -7,7 +7,6 @@ export class pgm extends Format
 	ext          = [".pgm", ".pnm"];
 	mimeType     = "image/x-portable-graymap";
 	magic        = ["Portable GrayMap bitmap (ASCII)", "Portable GrayMap bitmap (binary)", "Portable Grey Map", "image/x-portable-graymap", "piped pgm sequence (pgm_pipe)", /^Netpbm image data.*greymap/, /^fmt\/(406|407)( |$)/];
-	weakMagic    = ["Portable GrayMap bitmap (ASCII)"];
 	metaProvider = ["image"];
 	converters   = [
 		"convert", "iio2png", "gimp", "wuimg",

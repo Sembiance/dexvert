@@ -13,7 +13,7 @@ export class ans extends Format
 	mimeType         = "text/x-ansi";
 	priority         = this.PRIORITY.LOW;	// allow other image format detections to take priority
 	magic            = ["ANSI escape sequence text", "ISO-8859 text, with escape sequences", ...TEXT_MAGIC, /^data$/, ..._IMF_MAGIC];
-	weakMagic        = ["ISO-8859 text, with escape sequences", ...TEXT_MAGIC, /^data$/, ..._IMF_MAGIC];
+	weakMagic        = [...TEXT_MAGIC, /^data$/, ..._IMF_MAGIC];
 	confidenceAdjust = (inputFile, matchType, curConfidence, {detections}) =>
 	{
 		const magicMatches = detections.filter(detection => this.magic.some(m => flexMatch(detection.value, m)));

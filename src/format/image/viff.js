@@ -8,5 +8,6 @@ export class viff extends Format
 	mimeType     = "image/x-viff";
 	magic        = ["Khoros Visualization Image File Format"];
 	metaProvider = ["image"];
-	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "imconv[format:viff]", "tomsViewer"];
+	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "imconv[format:viff]", "tomsViewer[matchType:magic][hasExtMatch]"];
+	verify       = ({meta}) => meta.height>2 && meta.width>2 && meta.width<3000 && meta.height<3000;
 }

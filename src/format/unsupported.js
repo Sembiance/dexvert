@@ -1539,6 +1539,7 @@ export default
 		unrealEngineCharacter                        : {name : "Unreal Engine character", ext : [".psk"], magic : ["Unreal Engine character"], weakMagic : true},
 		unrealMap                                    : {name : "Unreal Map", ext : [".unr"], magic : ["Unreal Map"]},
 		urbanTheCyborgProjectGameData                : {name : "U.R.B.A.N The Cyborg Project game data", ext : [".dat"], magic : ["U.R.B.A.N The Cyborg Project game data"], weakMagic : true},
+		uropa2GameData                               : {name : "Uropa2 game data", ext : [".z", ".00"], magic : [/^Uropa2 (base|CObjects|droid|surface) data$/]},
 		usNavyFightersTheaterGameData                : {name : "U.S. Navy Fighters Theater game data", ext : [".t2"], magic : ["U.S. Navy Fighters Theater game data"], weakMagic : true},
 		valveParticleStorage                         : {name : "Valve particle storage", ext : [".pcf"], magic : ["Valve particle storage"]},
 		valveSourceMap                               : {name : "Valve Source Map", ext : [".bsp"], magic : ["Valve Source BSP format", "Valve Source map"]},

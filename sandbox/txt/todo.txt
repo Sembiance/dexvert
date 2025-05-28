@@ -5,14 +5,6 @@
 	It seems like resource_dasm (ran from bin/fssd2wav.js) is no longer outputing the _INFO_1000.bin resource?
 	Even though I didn't update that....
 
-* Update wuimg:
-	Test trs.js and then if good, introduce wuimg as first converter: https://codeberg.org/kaleido/wuimg/issues/13
-	add support for arabesque
-		https://codeberg.org/kaleido/wuimg/issues/11
-		https://discmaster.textfiles.com/browse/21225/Floppyshop%20-%20DTP/Floppyshop%20-%20DTP.iso/graphics/_demos/arabesqu.e_2/raster
-	GFA Raytrace
-		NOT YET IMPLEMENTED (image/gfaRaytraceBitmap): https://codeberg.org/kaleido/wuimg/issues/12
-
 * See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
   For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
   Then see how to extract it. Maybe just run, with wine or something, but maybe not...

@@ -318,28 +318,30 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				}
 			}
 
-			let weakMatch = false;
-			
-			let hasMagicWeakMatch = false;
-			let hasMagicStrongMatch = false;
-			for(const detection of detections)
+			const weakMagicMatchesHard = [];
+			const weakMagicMatchesSoft = [];
+			const strongMagicMatches = [];
+			for(const d of detections)
 			{
-				if(!detection?.value)
+				if(!d?.value)
 					continue;
 
 				for(const m of (format.magic || []))
 				{
-					if(!flexMatch(detection.value, m))
+					if(!flexMatch(d.value, m))
 						continue;
 
-					if(detection.weak)
-						hasMagicWeakMatch = true;
+					if((Array.isArray(format.weakMagic) && format.weakMagic.some(weakMagic => flexMatch(d.value, weakMagic))) || (format.weakMagicSensitive && d.weak))
+						weakMagicMatchesHard.push(d);
+					else if(d.weak)
+						weakMagicMatchesSoft.push(d);
 					else
-						hasMagicStrongMatch = true;
+						strongMagicMatches.push(d);
 				}
 			}
-			const magicMatch = hasMagicWeakMatch || hasMagicStrongMatch;
-			if(hasMagicWeakMatch && !hasMagicStrongMatch)
+			const magicMatch = weakMagicMatchesHard.length || weakMagicMatchesSoft.length || strongMagicMatches.length;
+			let weakMatch = false;
+			if(!strongMagicMatches.length && (weakMagicMatchesSoft.length || weakMagicMatchesHard.length))
 				weakMatch = true;
 
 			if((format.weakFileSize || []).includes(f.input.size))
@@ -406,7 +408,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
 			const hasWeakFilename = format.weakFilename===true;
-			const hasWeakMagic = format.weakMagic===true || detections.filter(d => (format.weakMagicSensitive && !hasMagicStrongMatch && d.weak && (format.magic || []).some(m => flexMatch(d.value, m))) || (Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => flexMatch(d.value, wm))).length;
+			const hasWeakMagic = format.weakMagic===true || (weakMagicMatchesHard.length && !strongMagicMatches.length);
+			//if(["dmg"].includes(format.formatid))
+			//	xlog.info`${format.formatid}: ${{weakMatch, weakMagicMatchesHard, weakMagicMatchesSoft, strongMagicMatches, magicMatch, hasWeakMagic, hasWeakExt, hasWeakFilename, extMatch, filenameMatch, idMetaMatch, fileSizeMatch, customMatch}}  format.weakMagic: ${format.weakMagic}`;
 
 			// Non-weak magic matches start at confidence 100.
 			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || idMetaMatch || fileSizeMatch || customMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)

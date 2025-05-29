@@ -5,6 +5,6 @@ export class aProSys extends Format
 	name        = "AProSys Module";
 	ext         = [".amx", ".aps"];
 	matchPreExt = true;
-	magic       = ["AProSys module", /^AProSys	module$/];	// eslint-disable-line no-control-regex
+	magic       = ["AProSys module", /^AProSys⇥module$/];
 	unsupported = true;
 }

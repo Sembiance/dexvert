@@ -571,7 +571,7 @@ export const WEAK_VALUES =
 	/^CCP4 Electron Density Map/,
 	/^CDC Codec archive data$/,
 	/^Certificate, Version=[\da-f]+$/,
-	/^checksummed$/,
+	/^checksummed/,
 	/^Chiasmus key/,
 	/^cisco IOS microcode$/,
 	/^Citrus locale declaration/,

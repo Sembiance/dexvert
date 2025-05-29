@@ -6,7 +6,6 @@ export class arw extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Sony_ARW";
 	ext          = [".arw"];
 	magic        = ["Sony ARW RAW Image File", "Sony digital camera RAW image", /^fmt\/1127( |$)/];
-	mimeType     = "image/x-sony-arw";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`];	// nconvert can mistake some tiff's as arw (tiff/pc260001.tif)
+	converters   = ["darktable_cli", "convert[format:ARW]"];	// nconvert converts anything, like (tiff/pc260001.tif) and (tga/wizard9.arw). abydosconvert also works with mime "image/x-sony-arw" but meh.
 }

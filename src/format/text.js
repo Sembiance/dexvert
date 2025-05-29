@@ -376,6 +376,7 @@ export default
 		avsFieldData                               : {name : "AVS Field data", ext : [".fld"], magic : ["AVS Field data"], weakMagic : true},
 		aWebHotlistBookmark                        : {name : "AWeb Hotlist / bookmark", ext : [".hotlist"], magic : ["AWeb Hotlist / bookmark"]},
 		azzCardfileData                            : {name : "AZZ Cardfile Data", magic : ["AZZ Cardfile data"]},
+		azzCardfileIndex                           : {name : "AZZ Cardfile index", ext : [".~i"], magic : ["AZZ Cardfile index"]},
 		batMenuConfiguration                       : {name : "BatMenu configuration", ext : [".mnu"], magic : ["BatMenu configuration"]},
 		berndWetzelOS2InstallData                  : {name : "Bernd Wetzel OS/2 Install Data", ext : [".dat"], magic : ["Bernd Wetzel OS/2 Install Data"]},
 		bibTeXDatabaseFile                         : {name : "BibTeX database file", ext : [".bib"], magic : ["text/x-bibtex", /^fmt\/1616( |$)/], weakMagic : true},
@@ -565,7 +566,7 @@ export default
 		gimpToolPreset                             : {name : "GIMP Tool Preset", ext : [".gtp"], magic : ["GIMP Tool Preset"]},
 		gmshMesh                                   : {name : "Gmsh Mesh", ext : [".msh"], magic : ["Gmsh Mesh"]},
 		gsmsendConfiguration                       : {name : "GSMSEND configuration", ext : [".par"], magic : ["GSMSEND configuration"]},
-		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                                                                	// We do NOT include Trid's "GNU Info document" because it's too loose
+		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                          	// We do NOT include Trid's "GNU Info document" because it's too loose
 		golemModel                                 : {name : "Golem model", ext : [".golem"], magic : ["Golem model"]},
 		graceProjectFile                           : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
 		graphEditFilterGraphMarkupLanguage         : {name : "GraphEdit Filter Graph Markup Language", ext : [".xgr"], magic : ["GraphEdit Filter Graph Markup Language"]},

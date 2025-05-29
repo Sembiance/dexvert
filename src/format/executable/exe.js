@@ -27,7 +27,7 @@ export class exe extends Format
 	ext     = [".exe"];
 	magic   = [
 		// general exe type
-		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS [Ee]xecutable$/, /^Microsoft .*DOS Executable/, "DOS Executable", "OS/2 Executable", "32bit DOS Executable",
+		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS [Ee]xecutable$/, /^Microsoft .*DOS Executable/, "DOS Executable", "OS/2 Executable", "32bit DOS Executable", "deark: exe (DOS EXE)",
 		"Microsoft executable", /^PE32\+? executable/, /^Win\d\d Executable/, "Win16 NE executable", /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/(899|900)( |$)/, /^x-fmt\/(409|410|411)( |$)/,
 
 		// specific exe types

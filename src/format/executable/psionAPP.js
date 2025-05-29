@@ -6,6 +6,6 @@ export class psionAPP extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Psion_IMG/APP";
 	ext            = [".app", ".img"];
 	forbidExtMatch = true;
-	magic          = ["PSION Application/Image executable"];
+	magic          = ["PSION Application/Image executable", "deark: psionapp (Psion IMG/APP)"];
 	converters     = ["deark[module:psionapp][renameOut:false] & strings[matchType:magic]"];
 }

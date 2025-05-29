@@ -8,7 +8,7 @@ export class showCOM extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SHOW_(Gary_M._Raymond)";
 	ext            = [".com"];
 	forbidExtMatch = true;
-	magic          = ["16bit COM executable SHOW"];
+	magic          = ["16bit COM executable SHOW", "deark: show_gmr (SHOW (executable text))"];
 	idCheck        = async inputFile =>
 	{
 		if((await fileUtil.readFileBytes(inputFile.absolute, 1, -1))[0]!==0x1A)

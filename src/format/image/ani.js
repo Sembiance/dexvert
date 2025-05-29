@@ -8,7 +8,7 @@ export class ani extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Windows_Animated_Cursor";
 	ext        = [".ani"];
 	mimeType   = "application/x-navi-animation";
-	magic      = ["Windows Animated Cursor", /^RIFF .* animated cursor/, "Generic RIFF file ACON", /^fmt\/386( |$)/];
+	magic      = ["Windows Animated Cursor", /^RIFF .* animated cursor/, "Generic RIFF file ACON", "deark: riff (Windows animated cursor)", /^fmt\/386( |$)/];
 	meta       = async inputFile =>
 	{
 		const inputData = await fileUtil.readFileBytes(inputFile.absolute, 512);	// hopefully the anih chunk is in the first 512 bytes

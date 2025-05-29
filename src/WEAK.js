@@ -173,6 +173,18 @@ export const WEAK_VALUES =
 	/^Xilinx Virtex\/Spartan FPGA bitstream dummy \+ sync word$/,
 	/^ZBOOT firmware header/,
 
+	// dearkID
+	/^deark: ascii85$/,
+	/^deark: cfb$/,
+	/^deark: exe \(((DOS EXE)|NE|PE32|PE32\+)\)$/,
+	/^deark: iff$/,
+	/^deark: godpaint$/,
+	/^deark: pnm/,
+	/^deark: qtif$/,
+	/^deark: riff$/,
+	/^deark: rodraw$/,
+	/^deark: zlib$/,
+
 	// Detect-It-Easy
 	/^Archive: André Osterhues's Code Compression Algorithm \(ACCA\.\)$/,
 	/^Archive: (DCL|INSA|LZMA|Resources)$/,
@@ -251,6 +263,7 @@ export const WEAK_VALUES =
 	/^DV \(Digital Video\) \(dv\)$/,
 	/^Electronic Arts cdata \(ea_cdata\)$/,
 	/^Electronic Arts Multimedia \(ea\)$/,
+	/^FLI\/FLC\/FLX animation \(flic\)$/,
 	/^Game Music Emu demuxer \(libgme\)$/,
 	/^IEC 61937 \(compressed data in S\/PDIF\) \(spdif\)$/,
 	/^IFF \(Interchange File Format\) \(iff\)$/,

@@ -8,7 +8,7 @@ export class bsave extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/BSAVE_Image";
 	ext            = [".art", ".pic", ".scn", ".bsv", ".cgx", ".pix", ".dat", ".pkx", ".drw", ".raw", ".scr", ".bas", ".gf2"];
 	forbidExtMatch = true;
-	magic          = ["QuickBasic BSAVE binary data"];
+	magic          = ["QuickBasic BSAVE binary data", "deark: bsave"];
 	weakMagic      = true;
 
 	// deark can't determine what type of BSAVE format it is, so we just try em all. Yah, it produces a lot of bad output, but usually one of them IS right

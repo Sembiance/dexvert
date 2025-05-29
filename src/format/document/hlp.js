@@ -6,7 +6,7 @@ export class hlp extends Format
 	website = "http://fileformats.archiveteam.org/wiki/HLP_(WinHelp)";
 	ext     = [".hlp"];
 	magic   = [
-		"Windows HELP File", /^MS Windows 3\.. help/, "Windows Help File", "MS Windows help Bookmark", "Windows 3.x Hilfedatei", "Windows 95/98 Hilfedatei", "Format: MS Help", "application/winhlp", /^MS Windows help annotation/,
+		"Windows HELP File", /^MS Windows 3\.. help/, "Windows Help File", "MS Windows help Bookmark", "Windows 3.x Hilfedatei", "Windows 95/98 Hilfedatei", "Format: MS Help", "application/winhlp", /^MS Windows help annotation/, "deark: hlp",
 		/^MS Windows 95 help/, /^fmt\/474( |$)/
 	];
 	idMeta  = ({macFileType, macFileCreator}) => macFileType==="HELP" && ["CRGR", "MSH2", "MSHE"].includes(macFileCreator);

@@ -5,6 +5,7 @@ export class dl extends Format
 	name    = "DL Video";
 	website = "http://fileformats.archiveteam.org/wiki/DL";
 	ext     = [".dl"];
+	magic   = ["deark: dlmaker"];
 	idMeta  = ({macFileType}) => macFileType==="DL  ";
 	
 	// dl files will start with 0x03, 0x02 or 0x01

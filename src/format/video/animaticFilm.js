@@ -7,7 +7,7 @@ export class animaticFilm extends Format
 	name       = "Animatic Film";
 	website    = "http://fileformats.archiveteam.org/wiki/Animatic_Film";
 	ext        = [".flm"];
-	magic      = ["Animatic Film", /^fmt\/1784( |$)/];
+	magic      = ["Animatic Film", "deark: animatic (Animatic Film)", /^fmt\/1784( |$)/];
 	meta       = async inputFile =>
 	{
 		const headerBytes = await fileUtil.readFileBytes(inputFile.absolute, 36);

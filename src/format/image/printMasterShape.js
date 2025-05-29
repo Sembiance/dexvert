@@ -4,9 +4,9 @@ export class printMasterShape extends Format
 {
 	name           = "PrintMaster Shape";
 	website        = "http://fileformats.archiveteam.org/wiki/PrintMaster";
-	magic          = ["Printmaster Shape bitmap"];
 	ext            = [".shp"];
 	forbidExtMatch = true;
+	magic          = ["Printmaster Shape bitmap", "deark: printmaster (PrintMaster (SHP/SDR))"];
 	auxFiles       = (input, otherFiles) =>
 	{
 		// .shp can convert on it's own, but optionally uses an .sdr

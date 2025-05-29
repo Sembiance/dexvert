@@ -9,7 +9,7 @@ export class neochromeAnimation extends Format
 	ext            = [".ani"];
 	forbidExtMatch = true;
 	idCheck        = inputFile => inputFile.size>48;
-	magic          = ["Atari NEOchrome animation"];
+	magic          = ["Atari NEOchrome animation", "deark: neochrome_ani (NEOchrome Animation)"];
 	meta           = async inputFile =>
 	{
 		const headerBytes = await fileUtil.readFileBytes(inputFile.absolute, 18);

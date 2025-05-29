@@ -6,7 +6,7 @@ export class convert extends Program
 	website = "https://www.imagemagick.org/";
 	package = "media-gfx/imagemagick";
 	flags   = {
-		format      : "Specify the input format type, can be useful to ensure ImageMagick only converts the file if it's the correct type. Get list with: magick -list format",
+		format      : "Specify the input format type, can be useful to ensure ImageMagick only converts the file if it's the correct type. Get list with: magick -list format",	// NOTE: This may bypass id checks by forcing it? So it may not be wise to use everywhere?
 		background  : "Specify the background color to use",
 		outType     : `Which type to convert to (png || gif || webp || svg). Default: png`,
 		scale       : "Scale the image by the given percentage",

@@ -197,6 +197,10 @@ export class deark extends Program
 	{
 		// These modules are a little loosey goosey with it's magic, so we have to check the output to make sure it's valid
 		if(Object.entries({
+			lbr       : "This is probably not an LBR file.",
+			macpaint  : "This is probably not a MacPaint file.",
+			makichan  : "This is probably not a MAKIchan file.",
+			shg       : "This is probably not an SHG/MRB file.",
 			tinystuff : "Warning: Expected file size to be",
 			zsq       : "Checksum error. Decompression probably failed"
 		}).some(([module, message]) => r.stdout.includes(`Module: ${module}`) && r.stdout.includes(message)))

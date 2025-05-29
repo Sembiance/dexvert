@@ -8,7 +8,7 @@ export class aliasPIX extends Format
 	ext        = [".pix", ".alias", ".img", ".als"];
 	weakExt    = [".pix", ".img"];
 	mimeType   = "image/x-alias-pix";
-	magic      = ["Alias PIX", "Alias/Wavefront PIX image (alias_pix)", /^fmt\/1092( |$)/];
+	magic      = ["Alias PIX", "Alias/Wavefront PIX image (alias_pix)", "deark: alias_pix", /^fmt\/1092( |$)/];
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="APIX" && macFileCreator==="SKET";
 	converters = ["nconvert", "deark[module:alias_pix]", "wuimg[hasExtMatch][matchType:magic]", "imconv[format:pix][hasExtMatch][matchType:magic]", "canvas[hasExtMatch][matchType:magic]"];	// gimp also supports it but can convert garbage
 	verify     = async ({inputFile, meta}) =>

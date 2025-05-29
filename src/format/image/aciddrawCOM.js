@@ -7,6 +7,6 @@ export class aciddrawCOM extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ACiDDraw_COM_file";
 	ext            = [".com"];
 	forbidExtMatch = true;
-	magic          = ["ACiDDraw COM"];
+	magic          = ["ACiDDraw COM", "deark: aciddraw_com"];
 	converters     = ["deark[module:aciddraw_com][charOutType:image]"];
 }

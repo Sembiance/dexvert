@@ -6,7 +6,7 @@ export class pog extends Format
 	name     = "Print Shop Graphic POG Archive";
 	website  = "http://fileformats.archiveteam.org/wiki/The_Print_Shop";
 	ext      = [".pog"];
-	magic    = ["The Print Shop graphic"];
+	magic    = ["The Print Shop graphic", "deark: newprintshop (The New Print Shop (POG/PNM))"];
 	idCheck = async inputFile => inputFile.size>4 && (await fileUtil.readFileBytes(inputFile.absolute, 4))[3]===0x01;
 	auxFiles = (input, otherFiles) =>
 	{

@@ -7,7 +7,7 @@ export class videoMasterFilm extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Video_Master_Film";
 	ext            = [".flm", ".vid", ".vsq"];
 	forbidExtMatch = true;
-	magic          = ["Video Master Film"];
+	magic          = ["Video Master Film", "deark: videomaster"];
 	meta           = async inputFile =>
 	{
 		const headerBytes = await fileUtil.readFileBytes(inputFile.absolute, 10);

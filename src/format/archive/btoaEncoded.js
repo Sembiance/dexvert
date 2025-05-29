@@ -4,9 +4,9 @@ export class btoaEncoded extends Format
 {
 	name           = "BTOA Encoded";
 	website        = "http://fileformats.archiveteam.org/wiki/Ascii85";
-	ext            = [".ab"];
+	ext            = [".ab", ".btoa"];
 	forbidExtMatch = true;
 	packed         = true;
 	magic          = ["btoa encoded data", /^btoa'd/];
-	converters     = ["ascii85Decoder"];
+	converters     = ["ascii85Decoder", "deark[module:ascii85]"];
 }

@@ -76,6 +76,10 @@ If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
 NOTE: Using the 'array' version does NOT match the individual detection as weak, that's only done by WEAK.js
 So only use the 'array' version if it's a format that is a specific version of another format and it shouldn't match first
 
+>>> weakMagicSensitive = true
+If this is set, then any 'detections' that are marked as weak will be included as if they were in weakMagic = [] if just weak matches
+Useful if you have a mix of strong and weak magics but there isn't any further checking that things are proper, such as untouched
+
 >>> trustMagic = true
 If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
 

@@ -128,6 +128,7 @@ async function loadSimple({reload}={})
 				converters = ["strings"];
 				packed     = true;
 				simple     = true;
+				weakMagicSensitive = true;
 			}
 
 			formats[formatid] = Simple.create(families[familyid], format =>

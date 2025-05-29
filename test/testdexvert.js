@@ -84,7 +84,8 @@ const FORMAT_OS_HINT =
 	},
 	"archive/compactPro" :
 	{
-		"cpt" : "macintoshjp"
+		"cpt" : "macintoshjp",
+		"まきがめ駒○駒BY彦ぷん.sea" : "macintoshjp"
 	},
 	"archive/iso" :
 	{
@@ -103,10 +104,9 @@ const FORMAT_OS_HINT =
 	{
 		"ﾊﾘｳｯﾄﾞ名優写真館.DXR" : "macintoshjp"
 	},
-	"archive/sea" :
+	"archive/macBinary" :
 	{
-		"まきがめ駒○駒BY彦ぷん"     : "macintoshjp",
-		"まきがめ駒○駒BY彦ぷん.sea" : "macintoshjp"
+		"まきがめ駒○駒BY彦ぷん" : "macintoshjp"
 	},
 	"archive/sit" :
 	{
@@ -1037,6 +1037,8 @@ if(newSuccesses.length>0)
 {
 	const recordNewSuccessesScriptFilePath = await fileUtil.genTempPath(DEXTEST_ROOT_DIR, ".sh");
 	xlog.info`\n\n${newSuccesses.length.toLocaleString()} new successes. ${fg.pink("Execute to record")}: ${recordNewSuccessesScriptFilePath}`;
+	//for(const newSuccess of newSuccesses)
+	//	xlog.info`\t${newSuccess.split("--file=")[1]}`;
 	await fileUtil.writeTextFile(recordNewSuccessesScriptFilePath, `#!/bin/bash
 cd /mnt/compendium/DevLab/dexvert/test || exit
 ${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}

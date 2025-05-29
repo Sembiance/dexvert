@@ -8,5 +8,5 @@ export class compactPro extends Format
 	magic      = ["Mac Compact Pro archive", "Compact Pro"];
 	idMeta     = ({macFileType}) => macFileType==="PACT";
 	priority   = this.PRIORITY.LOW;
-	converters = ["unar[mac]", "macunpack"];
+	converters = ["unar[type:Compact Pro][mac]", "macunpack"];
 }

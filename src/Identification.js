@@ -26,7 +26,7 @@ export class Identification
 			fileSizeMatchExt : {type : "string"},	// if non null, it's the ext that matched the fileSize
 			extMatch         : {type : "boolean"},	// if true, then we matched an extension
 			auxFiles         : {type : [DexFile]},	// an array of DexFiles that are needed to support this identificatrion
-			weak             : {type : "boolean"}	// if true, this identification comes frmo a weak detection
+			weak             : {type : "boolean"}	// if true, this identification comes from a weak detection
 		});
 
 		return id;

@@ -13,6 +13,8 @@
 /---------------\
 | High Priority |
 \---------------/
+* Add support for Basic .MUS. This is a bit of work and should be done 'for fun'. See sandbox/wip/BasicMUS_mml2mid.js
+
 * Update blender from old 4.0 to latest version.
   First, starting with Blender 4.2, the addons that were distributed may not be anymore: https://devtalk.blender.org/t/changes-to-add-on-and-themes-bundling-4-2-onwards/34593
   Next, the Python API has changed with every version, so my python code (and possibly all the addons which I manually updated to even work with 4.0) will need to be update:

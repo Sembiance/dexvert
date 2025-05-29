@@ -8,5 +8,5 @@ export class arw extends Format
 	magic        = ["Sony ARW RAW Image File", "Sony digital camera RAW image", /^fmt\/1127( |$)/];
 	mimeType     = "image/x-sony-arw";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`];	// nconvert can mistake some tiff's as arw (tiff/pc260001.tif)
 }

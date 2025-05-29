@@ -9,7 +9,7 @@ export class unar extends Program
 	package = "app-arch/unar";
 	flags   = {
 		"mac"                     : "Set this flag to treat the files extracted as mac files and rename them",
-		"type"                    : "What type to process the file as. Kinda hacky, relies on this string being present at the end of the first line as : <type>",
+		"type"                    : "What type to process the file as. Kinda hacky, relies on this string being present as: ': <type>'",
 		"skipMacBinaryConversion" : "Set this flag to skip the macbinary conversion step",
 		"allowFailedParsing"      : "Set this flag to allow unar to continue even if it reports that archive parsing failed"
 	};
@@ -112,7 +112,7 @@ export class unar extends Program
 		if(r.stdout.includes("This archive requires a password to unpack"))
 			r.meta.passwordProtected = true;
 	};
-	verify    = r => !r.flags.type || r.stdout?.trim()?.split("\n")?.[0]?.toLowerCase()?.endsWith(`: ${r.flags.type.toLowerCase()}`);
+	verify    = r => !r.flags.type || r.stdout?.trim()?.split("\n")?.[0]?.toLowerCase()?.includes(`: ${r.flags.type.toLowerCase()}`);
 	renameOut = false;
 }
 

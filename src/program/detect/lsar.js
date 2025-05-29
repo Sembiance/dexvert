@@ -19,6 +19,8 @@ export class lsar extends Program
 		if(data.lsarConfidence===0 && !data.lsarContents?.length)
 			return;
 
+		if(data.lsarInnerFormatName)
+			r.meta.detections.push(Detection.create({value : data.lsarInnerFormatName, confidence : Math.min(100, ((data.lsarConfidence || 1)*100)+1), from : "lsar", file : r.f.input}));
 		r.meta.detections.push(Detection.create({value : data.lsarFormatName, confidence : (data.lsarConfidence || 1)*100, from : "lsar", file : r.f.input}));
 	};
 	renameOut = false;

@@ -17,8 +17,9 @@ export class mp3 extends Format
 		// specific app-generate MP3 magic
 		"GoGo encoded MP3 audio", "Plugger encoded MP3 audio", "Xing encoded MP3 audio", "MP3 Xing Encoder"
 	];
-	idMeta         = ({macFileType, macFileCreator}) => ["Mp3 ", "MP3 ", "MPG3"].includes(macFileType) || (macFileType==="MPEG" && macFileCreator==="MAmp") || (macFileType==="PLAY" && macFileCreator==="mAmp") || (macFileType==="MPEG" && macFileCreator==="SCPL");
-	forbiddenMagic = _SHOCKWAVE_AUDIO_MAGIC;	// I believe Shockwave Audio is actually just MP3 underneath but with some extra metadata, still it's format handles converting it and this ensure we properly identify as that
-	untouched      = dexState => dexState.meta?.duration>0 && dexState.meta?.sampleRate>0 && dexState.meta.channels>=1;
-	metaProvider   = ["soxi"];
+	forbiddenMagic     = _SHOCKWAVE_AUDIO_MAGIC;	// I believe Shockwave Audio is actually just MP3 underneath but with some extra metadata, still it's format handles converting it and this ensure we properly identify as that
+	weakMagicSensitive = true;	// we have some weak magics and we don't verify that things are MP3 too closely (archive/powerPack/Aonia)
+	idMeta             = ({macFileType, macFileCreator}) => ["Mp3 ", "MP3 ", "MPG3"].includes(macFileType) || (macFileType==="MPEG" && macFileCreator==="MAmp") || (macFileType==="PLAY" && macFileCreator==="mAmp") || (macFileType==="MPEG" && macFileCreator==="SCPL");
+	untouched          = dexState => dexState.meta?.duration>0 && dexState.meta?.sampleRate>0 && dexState.meta.channels>=1;
+	metaProvider       = ["soxi"];
 }

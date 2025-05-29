@@ -115,10 +115,11 @@ export class Format
 			matchFileSize : {type : "boolean"},
 
 			// identification - magic
-			magic            : {type : ["string", RegExp]},
-			forbiddenMagic   : {type : ["string", RegExp]},
-			forbidMagicMatch : {type : "boolean"},
-			weakMagic        : {types : ["boolean", Array]},
+			magic              : {type : ["string", RegExp]},
+			forbiddenMagic     : {type : ["string", RegExp]},
+			forbidMagicMatch   : {type : "boolean"},
+			weakMagic          : {types : ["boolean", Array]},
+			weakMagicSensitive : {type : "boolean"},
 
 			// identification - mac file type/creator, prodos file types, etc
 			idMeta : {type : "function", length : [1]},

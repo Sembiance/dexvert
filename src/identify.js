@@ -319,17 +319,28 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			}
 
 			let weakMatch = false;
-			const magicMatch = detections.some(detection => (format.magic || []).some(m =>
+			
+			let hasMagicWeakMatch = false;
+			let hasMagicStrongMatch = false;
+			for(const detection of detections)
 			{
 				if(!detection?.value)
-					return false;
-				
-				const magicMatched = flexMatch(detection.value, m);
-				if(magicMatched && detection.weak)
-					weakMatch = true;
+					continue;
 
-				return magicMatched;
-			}));
+				for(const m of (format.magic || []))
+				{
+					if(!flexMatch(detection.value, m))
+						continue;
+
+					if(detection.weak)
+						hasMagicWeakMatch = true;
+					else
+						hasMagicStrongMatch = true;
+				}
+			}
+			const magicMatch = hasMagicWeakMatch || hasMagicStrongMatch;
+			if(hasMagicWeakMatch && !hasMagicStrongMatch)
+				weakMatch = true;
 
 			if((format.weakFileSize || []).includes(f.input.size))
 				weakMatch = true;
@@ -393,10 +404,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			if(customMatch)
 				baseMatch.matchesCustom = true;
 
-			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
-			const hasWeakMagic = format.weakMagic===true || (Array.isArray(format.weakMagic) && detections.some(r => format.weakMagic.some(m => flexMatch(r.value, m))) && !detections.some(r => trustedMagic.some(m => flexMatch(r.value, m))));
 			const hasWeakFilename = format.weakFilename===true;
+			const hasWeakMagic = format.weakMagic===true || detections.filter(d => (format.weakMagicSensitive && !hasMagicStrongMatch && d.weak && (format.magic || []).some(m => flexMatch(d.value, m))) || (Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => flexMatch(d.value, wm))).length;
 
 			// Non-weak magic matches start at confidence 100.
 			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || idMetaMatch || fileSizeMatch || customMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)

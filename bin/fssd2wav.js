@@ -67,18 +67,19 @@ if(!outputFiles.length)
 		outputFiles = await fileUtil.tree(wipDirPath, {nodir : true});
 	}
 }
+const rawFilePath = outputFiles.find(v => ![".adf", ".rsrc"].some(ext => v.toLowerCase().endsWith(ext)));
 
 if(outputFiles.length!==2)
 {
 	if(outputFiles.length!==1)
 		await cleanupAndExit(xlog.error`Error: Expected 2 files in the unar output, but got ${outputFiles.length}`);
 
-	if([".rsrc", ".adf"].some(ext => outputFiles[0].toLowerCase().endsWith(ext)))
+	if(!rawFilePath)
 		await cleanupAndExit(xlog.error`Error: Expected 2 files in the unar output, but got just 1 .rsrc file`);
 
 	xlog.warn`Warning: Expected 2 files in the unar output, but got 1, trying to convert the file with defaults`;
-	await convertFileToWav(outputFiles[0], RATES[1], 1, "_22kHz");
-	await convertFileToWav(outputFiles[0], RATES[2], 1, "_11kHz");
+	await convertFileToWav(rawFilePath, RATES[1], 1, "_22kHz");
+	await convertFileToWav(rawFilePath, RATES[2], 1, "_11kHz");
 	await cleanupAndExit();
 }
 
@@ -112,8 +113,8 @@ if(infoFilePath)
 }
 else
 {
-	await convertFileToWav(outputFiles[0], RATES[1], 1, "_22kHz");
-	await convertFileToWav(outputFiles[0], RATES[2], 1, "_11kHz");
+	await convertFileToWav(rawFilePath, RATES[1], 1, "_22kHz");
+	await convertFileToWav(rawFilePath, RATES[2], 1, "_11kHz");
 }
 
 await cleanupAndExit();

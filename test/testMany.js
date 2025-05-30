@@ -80,11 +80,15 @@ const SLOW_FORMATS =
 	"other/pogNames"       : 1,
 
 	// poly
-	//"poly/dxf" : 0,
-	//"poly/rayDreamDesignerScene" : 0,
+	"poly/blitz3DObject" : 8,
+	"poly/cinema4D"      : 9,
+	"poly/dxf"           : 20,
 
 	// text
-	//"text/txt" : 0,
+	"text/linuxLiveCDInfo"  : 2,
+	"text/sonnetProject"    : 4,
+	"text/txt"              : 3,
+	"text/tornado3DProject" : 2,
 
 	// video
 	"video/avi"  : 6,

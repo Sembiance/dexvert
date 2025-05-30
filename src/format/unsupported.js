@@ -2199,6 +2199,7 @@ export default
 		csrBluecoreFirmwareSegment               : {name : "CSR Bluecore firmware segment", ext : [".dfu"], magic : ["CSR Bluecore firmware segment"], weakMagic : true},
 		cracklibPasswordIndex                    : {name : "Cracklib Password Index", ext : [".pwi"], magic : ["Cracklib password index"]},
 		craftFactoryDesign                       : {name : "Craft Factory design", ext : [".cra"], magic : ["Craft Factory design"], weakMagic : true},
+		crazyTalkProject                         : {name : "CrazyTalk Project", ext : [".ctp"], magic : ["CrazyTalk Project"]},
 		createShadeLights                        : {name : "Create+Shade Lights", ext : [".lights"], magic : ["Create+Shade Lights"], weakMagic : true},
 		cricketGraphData                         : {name : "Cricket Graph Data", ext : [".cgd"], magic : ["Cricket Graph Data"], weakMagic : true},
 		cricketGraphGraph                        : {name : "Cricket Graph Graph", ext : [".cgg"], magic : ["Cricket Graph Graph"], weakMagic : true},

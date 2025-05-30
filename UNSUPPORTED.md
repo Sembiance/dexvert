@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,637)
+# Unsupported File Formats (3,638)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1141,7 +1141,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,405)
+## Other (2,406)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1663,6 +1663,7 @@ Family/Format | Name | Extensions | Notes
 [other/cracklibPasswordIndex](https://discmaster.textfiles.com/search?format=cracklibPasswordIndex) | Cracklib Password Index | .pwi | 
 [other/craftFactoryDesign](https://discmaster.textfiles.com/search?format=craftFactoryDesign) | Craft Factory design | .cra | 
 [other/crazyMachinesModel](https://discmaster.textfiles.com/search?format=crazyMachinesModel) | Crazy Machines model | .ucm | 
+[other/crazyTalkProject](https://discmaster.textfiles.com/search?format=crazyTalkProject) | CrazyTalk Project | .ctp | 
 [other/createAQuizFile](https://discmaster.textfiles.com/search?format=createAQuizFile) | Create A Quiz file | .qz | 
 [other/createAdventureGamesProject](https://discmaster.textfiles.com/search?format=createAdventureGamesProject) | Create Adventure Games Project | .cag | 
 [other/createShadeLights](https://discmaster.textfiles.com/search?format=createShadeLights) | Create+Shade Lights | .lights | 

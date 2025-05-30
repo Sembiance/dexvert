@@ -9,6 +9,7 @@ export const gameextractor =
 {
 	archive :
 	{
+		agonGameDataArchive                 : {name : "Agon game data archive", ext : [".sfl"], magic : ["Agon game data archive"], weakMagic : true},
 		allods2RageOfMagesGameArchive       : {name : "Allods 2 Rage Of Mages game archive", ext : [".res"], magic : ["Allods 2 Rage Of Mages game data archive"]},
 		americanConquest2GameArchvie        : {name : "American Conquest 2 game archvie", ext : [".gs1", ".gsc"], magic : ["American Conquest 2 game data archvie"]},
 		ascaronEntertainmentGameArchive     : {name : "ASCARON Entertainment game archive", ext : [".cpr"], magic : ["ASCARON Entertainment game data archive"]},
@@ -32,6 +33,7 @@ export const gameextractor =
 		finalFantasyGameArchive             : {name : "Final Fantasy Game Archive", ext : [".lgp"], magic : ["Final Fantasy Game Archive"]},
 		finalLiberationGameArchive          : {name : "Final Liberation/Holistic Design game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive", "Holistic Design game data archive (generic)"]},
 		gabrielKnight3BarnGameArchive       : {name : "Gabriel Knight 3 barn game archive", ext : [".brn"], magic : ["Gabriel Knight 3 barn game data"]},
+		haemimontGamesADGameDataArchive     : {name : "Haemimont Games AD game data archive", ext : [".hpk"], magic : ["Haemimont Games AD game data archive"], weakMagic : true},
 		h2oGameDataArchive                  : {name : "Liquid Entertainment H2O game data archive", ext : [".h2o"], magic : ["Liquid Entertainment H2O game data archive"]},
 		harryPotterQuidditchWorldCupArchive : {name : "Harry Potter: Quidditch World Cup archive", ext : [".ccd"], magic : ["Harry Potter: Quidditch World Cup game data archive"], weakMagic : true},
 		highwayPursuitGameDataArchive       : {name : "Highway Pursuit game data archive", ext : [".hvd", ".hfd", ".hod", ".hsd", ".hmd", ".hgd"], magic : ["Highway Pursuit game data archive"], weakMagic : true},

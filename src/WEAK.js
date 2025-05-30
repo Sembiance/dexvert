@@ -2301,6 +2301,7 @@ export const WEAK_VALUES =
 	/^Sony SELF - SPRX format$/,
 	/^Sound Description Interchange Format$/,
 	/^SoundSlimmer compressed audio$/,
+	/^Soul Hunt Video\/cutscenes$/,
 	/^Spider Syntax Script$/,
 	/^SPLASH - Lenex compressed data$/,
 	/^Starlink Data Format$/,

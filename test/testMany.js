@@ -42,22 +42,21 @@ const FORMATS_AT_ONCE = 4;
 const SLOW_FORMATS =
 {
 	// archive
-	"archive/dmg"                : 17,
-	"archive/innoSetupInstaller" : 12,
-	"archive/macromediaDirector" : 78,
-	"archive/zxSpectrumTape"     : 11,
+	"archive/innoSetupInstaller" : 11,
+	"archive/macromediaDirector" : 64,
 	
 	// audio
-	"audio/fmodSampleBank" : 19,
+	"audio/fmodSampleBank" : 15,
 	"audio/photoCDAudio"   : 16,
 	"audio/quickTimeAudio" : 9,
-	"audio/soundFont2"     : 7,
+	"audio/soundFont2"     : 6,
 
 	// document
-	"document/amigaGuide"           : 6,
-	"document/hlp"                  : 7,
-	"document/hyperWriter"          : 5,
-	"document/multimediaViewerBook" : 5,
+	"document/amigaGuide"            : 6,
+	"document/hlp"                   : 8,
+	"document/hyperWriter"           : 5,
+	"document/palmPeanutReaderEBook" : 7,
+	"document/multimediaViewerBook"  : 5,
 
 	// executable
 	"executable/dll" : 1,
@@ -68,21 +67,25 @@ const SLOW_FORMATS =
 	"font/amigaBitmapFontContent" : 1,
 
 	// image
-	"image/elecbyteMUGENSprites" : 8,
-	"image/trs" : 7,
+	"image/atariTools800"        : 7,
+	"image/elecbyteMUGENSprites" : 6,
+	"image/micrografxDraw"       : 6,
+	"image/trs"                  : 7,
 
 	// music
+	"music/ay"                 : 9,
 	"music/chaosMusicComposer" : 5,
-	"music/ymst"               : 3,
 	
 	// other
+	"other/canDoVariables" : 1,
 	"other/frameMakerHelp" : 1,
 	"other/pogNames"       : 1,
 
 	// poly
-	"poly/blitz3DObject" : 8,
-	"poly/cinema4D"      : 9,
-	"poly/dxf"           : 20,
+	"poly/blitz3DObject"         : 5,
+	"poly/cinema4D"              : 6,
+	"poly/dxf"                   : 10,
+	"poly/rayDreamDesignerScene" : 7,
 
 	// text
 	"text/linuxLiveCDInfo"  : 2,

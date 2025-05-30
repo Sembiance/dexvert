@@ -8,6 +8,5 @@ export class printArtist extends Format
 	forbidExtMatch = true;
 	magic          = ["Print / Instant Artist"];
 	idMeta         = ({macFileType, macFileCreator}) => ["GRFX", "LAYC", "LAYS", "QOTE"].includes(macFileType) && macFileCreator==="SOPa";
-	slow           = true;
 	converters     = ["printArtist"];
 }

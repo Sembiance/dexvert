@@ -7,7 +7,7 @@ export class rpm extends Format
 	ext        = [".rpm"];
 	magic      = [
 		// generic
-		"RPM Package", "RPM ", "Red Hat Package Manager Source", "Archive: RPM package", "application/x-rpm", /^RPM$/, /^fmt\/(793|794|795)( |$)/,
+		"RPM Package", "RPM ", "Red Hat Package Manager Source", "Archive: RPM package", "application/x-rpm", /^RPM$/, "deark: rpm", /^fmt\/(793|794|795)( |$)/,
 		
 		// specific
 		"Delta RPM Package"

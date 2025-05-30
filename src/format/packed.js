@@ -58,7 +58,7 @@ export const both =
 		axePacked                 : {name : "AXE Packed", magic : ["16bit DOS AXE compressed Executable", "16bit DOS EXE AXE compressed", "Packer: SEA-AXE"]},
 		cebeCompressExpandPacked  : {name : "CEBE Compress Expand Packed", magic : ["CEBE Compress Expand compressed DOS executable"]},
 		cheatPackerPacked         : {name : "Cheat Packer Packed", magic : ["Packer: Cheat packer"]},
-		dietPacked                : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed"]},
+		dietPacked                : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed", "deark: diet (DIET-compressed COM"]},
 		executrixCompressorPacked : {name : "EXECUTRIX-COMPRESSOR Packed", magic : ["Packer: EXECUTRIX-COMPRESSOR[by Knowledge Dynamics Corp]"]},
 		lmt2ePacked               : {name : "LM-T2E Packed", magic : ["16bit DOS LM-T2E executable"]},
 		neobookPacked             : {name : "Neobook Packed", magic : ["Neobook compiled book executable"]},

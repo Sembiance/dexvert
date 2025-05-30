@@ -6,6 +6,6 @@ export class acornSpark extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Spark";
 	ext            = [".spk", ".arc"];
 	forbidExtMatch = [".arc"];
-	magic          = ["Acorn Spark Archive"];
+	magic          = ["Acorn Spark Archive", "deark: spark (Spark)"];
 	converters     = ["deark[module:spark]"];
 }

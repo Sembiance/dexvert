@@ -175,14 +175,25 @@ export const WEAK_VALUES =
 
 	// dearkID
 	/^deark: ascii85$/,
+	/^deark: basic_c64$/,
 	/^deark: cfb$/,
+	/^deark: dclimplode$/,
+	/^deark: degas/,
 	/^deark: exe \(((DOS EXE)|NE|PE32|PE32\+)\)$/,
 	/^deark: iff$/,
+	/^deark: fat /,
 	/^deark: godpaint$/,
+	/^deark: lha$/,
+	/^deark: pm_xv$/,
+	/^deark: png \(CgBI\)$/,
 	/^deark: pnm/,
+	/^deark: printshop \(The Print Shop \(DAT\/NAM\)\)$/,
 	/^deark: qtif$/,
 	/^deark: riff$/,
 	/^deark: rodraw$/,
+	/^deark: sauce$/,
+	/^deark: tivariable/,
+	/^deark: tga \(TGA\)$/,
 	/^deark: zlib$/,
 
 	// Detect-It-Easy

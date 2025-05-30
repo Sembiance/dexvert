@@ -7,6 +7,5 @@ export class fmodSampleBank extends Format
 	ext            = [".fsb", ".bank"];
 	forbidExtMatch = true;
 	magic          = ["FMOD Sample Bank format", "FMOD Sample Bank"];
-	slow           = true;
 	converters     = ["vgmstream[extractAll]", "zxtune123"];
 }

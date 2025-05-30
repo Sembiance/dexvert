@@ -9,7 +9,7 @@ export class arArchive extends Format
 	ext            = [".deb", ..._WEAK_EXT];
 	forbidExtMatch = true;
 	magic          = ["current ar archive", "ar archive", "Debian binary package", "Debian Linux Package", "Archive: Debian Software package", "BSD library", "Archive: The archiver", "application/x-archive", "application/vnd.debian.binary-package",
-		/^MIPS archive /, /^Ar$/, /^archive$/, /^Alpha archive$/, "System V Release 1 ar archive", /^fmt\/1835( |$)/];
+		/^MIPS archive /, /^Ar$/, /^archive$/, /^Alpha archive$/, "System V Release 1 ar archive", "deark: ar", /^fmt\/1835( |$)/];
 	converters     = ["ar", "unar", "deark[module:ar]"];
 	verify         = ({dexState, newFile}) =>
 	{

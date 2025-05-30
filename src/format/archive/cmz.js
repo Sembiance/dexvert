@@ -5,6 +5,6 @@ export class cmz extends Format
 	name       = "CMZ Compressed Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)";
 	ext        = [".cmz"];
-	magic      = ["CMZ Compressed archive"];
+	magic      = ["CMZ Compressed archive", "deark: cmz"];
 	converters = ["deark[module:cmz]", "uncmz"];
 }

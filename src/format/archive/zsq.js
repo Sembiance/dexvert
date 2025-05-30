@@ -5,7 +5,7 @@ export class zsq extends Format
 	name       = "ZSQ";
 	website    = "http://fileformats.archiveteam.org/wiki/ZSQ_(LZW_compression)";
 	ext        = [".zzz"];
-	magic      = ["ZSQ compressed data"];
+	magic      = ["ZSQ compressed data", "deark: zsq"];
 	packed     = true;
 	converters = ["deark[module:zsq]"];
 }

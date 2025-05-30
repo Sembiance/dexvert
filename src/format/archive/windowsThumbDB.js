@@ -8,7 +8,7 @@ export class windowsThumbDB extends Format
 	filename   = [/^Thumbs\.db$/];
 	magic      = [
 		// generic
-		"Windows Thumbnail Database", "Windows thumbnail Data Base", /^fmt\/682( |$)/, "Windows thumbnails/icons cache",
+		"Windows Thumbnail Database", "Windows thumbnail Data Base", "Windows thumbnails/icons cache", "deark: cfb (Thumbs.db)", /^fmt\/682( |$)/,
 
 		// app specific
 		"Corel PrintHouse image", "Corel Print Office image",

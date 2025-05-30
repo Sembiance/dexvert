@@ -32,27 +32,96 @@ for(const format of Object.values(formats))
 let formatCount = 0;
 const reports = {};
 const startedAt = performance.now();
-const underway = new Set();
 const maxFormatidLength = Array.from(formatsToProcess, v => v.length).max();
 const failures = [];
 const MAX_LINE_LENGTH = Deno.hostname()==="crystalsummit" ? 118 : 145;
+const SLOW_FORMATS_AT_ONCE = 2;
 const FORMATS_AT_ONCE = 4;
 
-// these formats are slow, make sure to run them first, otherwise they might randomly not start until after all the rest and then prolong the total time. Don't put more than 2 formats per family
-const SLOW_FORMATS = Object.values(formats).filter(format => format.slow).map(format => `${format.familyid}/${format.formatid}`).sortMulti();
+// these formats are slow, they run first, ordered slowest to fastest, but only at max SLOW_FORMATS_AT ONCE in order to ensure we fully utilize all our various bottlenecks in dexvert
+const SLOW_FORMATS =
+{
+	// archive
+	"archive/dmg"                : 17,
+	"archive/innoSetupInstaller" : 12,
+	"archive/macromediaDirector" : 78,
+	"archive/zxSpectrumTape"     : 11,
+	
+	// audio
+	"audio/fmodSampleBank" : 19,
+	"audio/photoCDAudio"   : 16,
+	"audio/quickTimeAudio" : 9,
+	"audio/soundFont2"     : 7,
+
+	// document
+	"document/amigaGuide"           : 6,
+	"document/hlp"                  : 7,
+	"document/hyperWriter"          : 5,
+	"document/multimediaViewerBook" : 5,
+
+	// executable
+	"executable/dll" : 1,
+	"executable/exe" : 1,
+
+	// font
+	"font/amigaBitmapFont"        : 1,
+	"font/amigaBitmapFontContent" : 1,
+
+	// image
+	"image/elecbyteMUGENSprites" : 8,
+	"image/trs" : 7,
+
+	// music
+	"music/chaosMusicComposer" : 5,
+	"music/ymst"               : 3,
+	
+	// other
+	"other/frameMakerHelp" : 1,
+	"other/pogNames"       : 1,
+
+	// poly
+	//"poly/dxf" : 0,
+	//"poly/rayDreamDesignerScene" : 0,
+
+	// text
+	//"text/txt" : 0,
+
+	// video
+	"video/avi"  : 6,
+	"video/mov"  : 6,
+	"video/vivo" : 5,
+	"video/wmv"  : 8
+};
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));
-const orderedFormatsToProcess = Array.from(formatsToProcess).shuffle();
-if(argv.format[0]!=="all")
-	orderedFormatsToProcess.sortMulti([formatid => SLOW_FORMATS.includes(formatid)], [true]);
-await orderedFormatsToProcess.parallelMap(async formatid =>
+
+const formatsRemaining = Array.from(formatsToProcess).shuffle();
+const slowFormatsRemaining = formatsRemaining.filter(formatid => Object.hasOwn(SLOW_FORMATS, formatid)).sortMulti([formatid => SLOW_FORMATS[formatid] || 0], [true]);
+formatsRemaining.filterInPlace(formatid => !slowFormatsRemaining.includes(formatid));
+
+const underway = new Set();
+const underwaySlow = new Set();
+
+await [].pushSequence(1, formatsRemaining.length+slowFormatsRemaining.length).parallelMap(async () =>
 {
+	let formatid;
+	if(underwaySlow.size<SLOW_FORMATS_AT_ONCE && slowFormatsRemaining.length)
+	{
+		formatid = slowFormatsRemaining.shift();
+		underwaySlow.add(formatid);
+	}
+	else
+	{
+		formatid = formatsRemaining.pop() || slowFormatsRemaining.shift();
+	}
+
 	underway.add(formatid);
 	const formatStartedAt = performance.now();
 	const {stdout} = await runUtil.run("deno", runUtil.denoArgs("testdexvert.js", `--format=${formatid}`, "--json"), runUtil.denoRunOpts({cwd : import.meta.dirname}));
 	const formatElapsed = performance.now()-formatStartedAt;
 	const testData = xu.parseJSON(stdout);
 	underway.delete(formatid);
+	underwaySlow.delete(formatid);
 
 	const line = [];
 	line.push(`${fg.peach(formatElapsed.msAsHumanReadable({short : true, maxParts : 2}).padStart(8))}`);

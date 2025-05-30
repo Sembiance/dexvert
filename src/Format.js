@@ -140,7 +140,6 @@ export class Format
 			simple           : {type : "boolean"},
 			skipClassify     : {type : "boolean"},
 			allow2ColorSVG   : {type : "boolean"},
-			slow             : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			unsupported      : {type : "boolean"},
 			untouched        : {types : ["boolean", "function"]},

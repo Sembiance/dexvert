@@ -6,6 +6,6 @@ export class esmSoftwarePIX extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Esm_Software_PIX";
 	ext            = [".pix"];
 	forbidExtMatch = [".pix"];
-	magic          = ["Esm Software PIX bitmap"];
+	magic          = ["Esm Software PIX bitmap", "deark: esm_pix"];
 	converters     = ["deark[module:esm_pix]", "nconvert"];
 }

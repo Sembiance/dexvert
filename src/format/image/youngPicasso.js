@@ -6,6 +6,6 @@ export class youngPicasso extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Young_Picasso";
 	ext            = [".yp"];
 	forbidExtMatch = true;
-	magic          = ["Young Picasso"];
+	magic          = ["Young Picasso", "deark: young_picasso"];
 	converters     = ["deark[module:young_picasso]"];
 }

@@ -7,6 +7,7 @@ export class tcArchive extends Format
 	name    = "The Compressor TC Aarchive";
 	website = "http://justsolve.archiveteam.org/wiki/The_Compressor_(John_Lauro)";
 	ext     = [".arc", ".tc"];
+	magic   = ["deark: tc_trs80"];
 	idCheck = async (inputFile, _detections, {xlog}) =>
 	{
 		// header format: https://dev.discmaster2.textfiles.com/view/11868/2014.01.www.rtsi.com.tar/www.rtsi.com/OS9/OS9_6X09/ARCHIVERS/unTC.lzh/untc.c

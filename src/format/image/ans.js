@@ -12,8 +12,8 @@ export class ans extends Format
 	forbidExtMatch   = true;	// Sadly some .ice files like "2002 - 20 - tcf-0001.ice" won't get converted because they only identify as 'data' and since ansilove will convert any file you send it, we can't send these
 	mimeType         = "text/x-ansi";
 	priority         = this.PRIORITY.LOW;	// allow other image format detections to take priority
-	magic            = ["ANSI escape sequence text", "ISO-8859 text, with escape sequences", "deark: ansiart", ...TEXT_MAGIC, /^data$/, ..._IMF_MAGIC];
-	weakMagic        = [...TEXT_MAGIC, /^data$/, ..._IMF_MAGIC];
+	magic            = ["ANSI escape sequence text", "ISO-8859 text, with escape sequences", ...TEXT_MAGIC, /^data$/, "deark: ansiart", ..._IMF_MAGIC];
+	weakMagic        = [...TEXT_MAGIC, /^data$/, "deark: ansiart", ..._IMF_MAGIC];
 	confidenceAdjust = (inputFile, matchType, curConfidence, {detections}) =>
 	{
 		const magicMatches = detections.filter(detection => this.magic.some(m => flexMatch(detection.value, m)));

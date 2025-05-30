@@ -14,7 +14,7 @@ export class macPaint extends Format
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];
 	converters     = [
-		"deark[module:macpaint][mac][matchType:magic]", "iio2png", "wuimg[matchType:magic]", "imconv[format:mpnt][matchType:magic]", `abydosconvert[format:${this.mimeType}]`, "convert",
+		"deark[module:macpaint][mac][matchType:magic]", "iio2png", "wuimg[matchType:magic]", "imconv[format:mpnt][strongMatch]", `abydosconvert[format:${this.mimeType}]`, "convert",
 		"keyViewPro",
 		...["pv", "canvas5", "corelPhotoPaint", "tomsViewer"].map(v => `${v}[strongMatch]`)	// omit "hiJaakExpress[hasExtMatch]" as it will incorrectly handle other/venusMacro/SW.MAC
 	];

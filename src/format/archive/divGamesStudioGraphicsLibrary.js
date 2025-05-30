@@ -5,6 +5,6 @@ export class divGamesStudioGraphicsLibrary extends Format
 	name       = "DIV GamesStudio Graphics Library";
 	website    = "http://fileformats.archiveteam.org/wiki/DIV_Games_Studio";
 	ext        = [".fpg"];
-	magic      = ["DIV Games Studio Graphics Library"];
+	magic      = ["DIV Games Studio Graphics Library", "deark: div_fpg (DIV "];
 	converters = ["deark[module:div_fpg]", "nconvert[extractAll]"];
 }

@@ -6,7 +6,10 @@ export class gem extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GEM_Raster";
 	ext        = [".img", ".ximg", ".timg"];
 	mimeType   = "image/x-gem";
-	magic      = ["GEM bitmap", "GEM HYPERPAINT Image data", "GEM Image data", "Extended GEM bitmap", "Digital Research GEM VDI bitmap", "piped gem sequence (gem_pipe)", /^GEM .{4} Image data/, /^fmt\/1657( |$)/, /^x-fmt\/159( |$)/];
+	magic      = [
+		"GEM bitmap", "GEM HYPERPAINT Image data", "GEM Image data", "Extended GEM bitmap", "Digital Research GEM VDI bitmap", "piped gem sequence (gem_pipe)", /^GEM .{4} Image data/, "deark: gemraster",
+		/^fmt\/1657( |$)/, /^x-fmt\/159( |$)/
+	];
 	converters = [
 		// ffmpeg handles everything the best, like teststtt.img and COLUMNS4.IMG
 		"ffmpeg[format:gem_pipe][outType:png]",

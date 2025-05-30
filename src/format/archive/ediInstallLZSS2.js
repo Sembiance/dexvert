@@ -7,6 +7,6 @@ export class ediInstallLZSS2 extends Format
 	ext            = ["$"];
 	forbidExtMatch = true;
 	packed         = true;
-	magic          = ["EDI Install Pro LZSS2 compressed data", "EDI LZSS2 packed"];
+	magic          = ["EDI Install Pro LZSS2 compressed data", "EDI LZSS2 packed", "deark: edi_pack (EDI Pack LZSS2)"];
 	converters     = ["deark[module:edi_pack]"];
 }

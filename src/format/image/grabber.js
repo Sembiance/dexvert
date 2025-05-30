@@ -7,6 +7,6 @@ export class grabber extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/GRABBER";
 	ext            = [".exe", ".com"];
 	forbidExtMatch = true;
-	magic          = ["GRABBER COM", /16bit DOS (EXE|COM) GRABBER/];
+	magic          = ["GRABBER COM", /16bit DOS (EXE|COM) GRABBER/, "deark: grabber"];
 	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:95]`];
 }

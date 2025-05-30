@@ -7,7 +7,7 @@ export class tar extends Format
 	ext            = [".tar", ".gtar"];
 	magic          = [
 		// generic
-		"TAR - Tape ARchive", "LZMA compressed Tape ARchive", "TAR Archiv gefunden", "Archive: tar", "application/x-tar", /.* tar archive/, /^tar archive/, /^Tar$/, /^x-fmt\/265( |$)/,
+		"TAR - Tape ARchive", "LZMA compressed Tape ARchive", "TAR Archiv gefunden", "Archive: tar", "application/x-tar", /.* tar archive/, /^tar archive/, /^Tar$/, "deark: tar", /^x-fmt\/265( |$)/,
 
 		// specific
 		"Ruby Gem package", "Open Virtualization Format package", "Open Virtualization Format Archive", "Sony Ericsson Theme (for mobile phones)", /^AVM FRITZ!Box firmware/

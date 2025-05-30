@@ -9,7 +9,7 @@ export class ibmStoryboardPic extends Format
 	ext            = [".pic", ".cap"];
 	forbiddenExt   = [".txm"];
 	forbidExtMatch = true;
-	magic          = ["IBM Storyboard bitmap", "IBM Storyboard screen Capture"];
+	magic          = ["IBM Storyboard bitmap", "IBM Storyboard screen Capture", "deark: storyboard (Storyboard picture (new))"];
 	forbiddenMagic = TEXT_MAGIC;	// Let the .txt format pick up on any pure text captures
 	notes          = xu.trim`
 		Unable to use SBLIVE/PICTYPE.EXE to determine if it's valid due to that program not working with shell redirection (see sandbox/legacy/programs_and_formats/storyboardLivePicType.js)

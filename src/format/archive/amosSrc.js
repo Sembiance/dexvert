@@ -5,6 +5,6 @@ export class amosSrc extends Format
 	name       = "AMOS Basic Source Code Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file";
 	ext        = [".amos"];
-	magic      = ["AMOS Basic source code", "AMOS Pro source", "AMOS source"];
+	magic      = ["AMOS Basic source code", "AMOS Pro source", "AMOS source", "deark: amos_source"];
 	converters = ["listamos & dumpamos"];
 }

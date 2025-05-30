@@ -9,7 +9,7 @@ export class rsrc extends Format
 	name           = "MacOS Resource Fork";
 	website        = "http://fileformats.archiveteam.org/wiki/Macintosh_resource_file";
 	ext            = [".rsrc", ".rs"];
-	magic          = ["Mac OSX datafork font", ..._APPLE_DOUBLE_MAGIC, "Apple HFS/HFS+ resource fork", "Mac resource data", "Mac AIFF audio", "deark: macrsrc", /^fmt\/(503|966)( |$)/];
+	magic          = ["Mac OSX datafork font", ..._APPLE_DOUBLE_MAGIC, "Apple HFS/HFS+ resource fork", "Mac resource data", "Mac AIFF audio", "deark: macrsrc", "deark: applesd (AppleDouble header file)", /^fmt\/(503|966)( |$)/];
 	forbiddenMagic = _OSX_DATA_FORK_FONT_MAGIC;	// mis-identified as rsrc but are actually data forks
 	converters     = dexState =>
 	{

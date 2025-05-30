@@ -6,7 +6,7 @@ export class sgi extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)";
 	ext            = [".sgi", ".bw", ".rgba", ".rgb"];
 	mimeType       = "image/x-sgi";
-	magic          = [/^Silicon Graphics.* bitmap/, "SGI image data", "piped sgi sequence (sgi_pipe)", /^x-fmt\/140( |$)/];
+	magic          = [/^Silicon Graphics.* bitmap/, "SGI image data", "piped sgi sequence (sgi_pipe)", "deark: sgiimage", /^x-fmt\/140( |$)/];
 	forbiddenMagic = [/^SGI image data.*\d{5,6} x \d{5,6}/];
 	idMeta         = ({macFileType}) => ["SGI ", ".SGI"].includes(macFileType);
 	metaProvider   = ["image"];

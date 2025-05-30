@@ -424,7 +424,8 @@ const FLEX_DIFF_FILES =
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
 	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,
-	/music\/sid\/Legacy_of_the_Ancients.sid$/
+	/music\/sid\/Legacy_of_the_Ancients.sid$/,
+	/music\/ay\/emul\.dragonslair2$/
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format

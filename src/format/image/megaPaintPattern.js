@@ -6,6 +6,6 @@ export class megaPaintPattern extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/MegaPaint_BLD";
 	ext            = [".pat"];
 	forbidExtMatch = true;
-	magic          = ["MegaPaint Pattern"];
+	magic          = ["MegaPaint Pattern", "deark: megapaint_pat"];
 	converters     = ["deark[module:megapaint_pat]"];
 }

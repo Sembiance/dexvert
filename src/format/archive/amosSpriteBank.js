@@ -6,6 +6,6 @@ export class amosSpriteBank extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank";
 	ext        = [".abk"];
 	mimeType   = "image/x-amos-spritebank";
-	magic      = ["AMOS Basic sprite bank", "AMOS Sprites Bank"];
+	magic      = ["AMOS Basic sprite bank", "AMOS Sprites Bank", "deark: abk (AMOS Sprite Bank)"];
 	converters = ["dumpamos"];
 }

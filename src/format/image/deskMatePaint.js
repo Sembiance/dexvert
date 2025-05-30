@@ -6,6 +6,6 @@ export class deskMatePaint extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DeskMate_Paint";
 	ext            = [".pnt"];
 	forbidExtMatch = true;
-	magic          = ["DeskMate Paint image", "DeskMate Paint Alt"];
+	magic          = ["DeskMate Paint image", "DeskMate Paint Alt", "deark: deskmate_pnt"];
 	converters     = ["deark[module:deskmate_pnt]", "recoil2png"];
 }

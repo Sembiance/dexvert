@@ -11,7 +11,7 @@ import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 // NOTE: This isn't strictly 'just ISO files'. There are some disk images in here too because the converters are the same, but technically those should probably be in rawPartition.js but meh
 
 const MFS_MAGICS = ["MFS file system", /^Macintosh MFS data/];
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image",
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "deark: apm", "deark: hfs",
 	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/1757( |$)/
 ];
 
@@ -39,7 +39,7 @@ export class iso extends Format
 
 	magic = [
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660", "PC-98 ISO",
-		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS", "Xbox DVD file system",
+		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS", "Xbox DVD file system", "deark: iso9660", "deark: cd_raw",
 		/^ISO 9660$/, /^UDF recognition sequence.*ISO9660/, /^fmt\/(468|1738)( |$)/,
 		/^First .*are blank$/,
 		...HFS_MAGICS, ...MFS_MAGICS

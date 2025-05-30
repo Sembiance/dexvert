@@ -6,6 +6,6 @@ export class amosPicture extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank";
 	ext        = [".abk"];
 	mimeType   = "application/x-amos-memorybank";
-	magic      = ["AMOS Picture Bank"];
+	magic      = ["AMOS Picture Bank", "deark: abk (AMOS Memory Bank)"];
 	converters = ["deark[module:abk]", `abydosconvert[format:${this.mimeType}]`, "dumpamos"];
 }

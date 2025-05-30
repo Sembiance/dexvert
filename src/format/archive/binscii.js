@@ -4,7 +4,7 @@ import {TEXT_MAGIC} from "../../Detection.js";
 import {flexMatch} from "../../identify.js";
 import {fileUtil} from "xutil";
 
-const BINSCII_MAGIC = ["BinSCII", "binscii"];
+const BINSCII_MAGIC = ["BinSCII", "binscii", "deark: binscii"];
 
 export class binscii extends Format
 {

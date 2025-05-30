@@ -6,7 +6,7 @@ export class appleDOSDiskImage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DSK_(Apple_II)";
 	ext            = [".dsk", ".po", ".hdv"];
 	forbidExtMatch = true;
-	magic          = [/^Apple DOS .*Image/, /^Apple ProDOS .*Image/, /^Apple II DOS .*disk image/, /^Apple II ProDOS .*disk image/];
+	magic          = [/^Apple DOS .*Image/, /^Apple ProDOS .*Image/, /^Apple II DOS .*disk image/, /^Apple II ProDOS .*disk image/, "deark: apple2_dsk"];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="DSK5" && macFileCreator==="A2EM";
 	converters     = ["cadius", "acx"];
 	post            = dexState =>

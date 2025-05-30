@@ -6,6 +6,6 @@ export class naiveNIE extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Naïve_Image_Formats";
 	ext        = [".nie"];
 	mimeType   = "image/nie";
-	magic      = ["Naive Image format NIE bitmap"];
+	magic      = ["Naive Image format NIE bitmap", "deark: nie (NIE)"];
 	converters = ["deark[module:nie]", `abydosconvert[format:${this.mimeType}]`];
 }

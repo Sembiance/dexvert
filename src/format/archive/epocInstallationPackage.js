@@ -4,7 +4,7 @@ export class epocInstallationPackage extends Format
 {
 	name       = "EPOC Installation Package";
 	website    = "http://fileformats.archiveteam.org/wiki/SIS";
-	magic      = ["EPOC Installation package", "Symbian installation file", "application/vnd.symbian.install", /^Psion Series 5 Application Installer/];
+	magic      = ["EPOC Installation package", "Symbian installation file", "application/vnd.symbian.install", /^Psion Series 5 Application Installer/, "deark: sis (SIS, EPOC"];
 	ext        = [".sis"];
 	converters = ["deark[module:sis]"];
 }

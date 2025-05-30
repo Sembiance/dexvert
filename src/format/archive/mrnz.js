@@ -7,6 +7,6 @@ export class mrnz extends Format
 	ext            = ["_"];
 	forbidExtMatch = true;
 	packed         = true;
-	magic          = ["MRNZ installer/obfuscated format"];
+	magic          = ["MRNZ installer/obfuscated format", "deark: mrnz"];
 	converters     = ["deark[module:mrnz]"];
 }

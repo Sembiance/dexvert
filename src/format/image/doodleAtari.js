@@ -4,6 +4,7 @@ export class doodleAtari extends Format
 {
 	name          = "Doodle Atari";
 	website       = "http://fileformats.archiveteam.org/wiki/Doodle_(Atari)";
+	magic         = ["deark: doodle"];
 	ext           = [".doo", ".art"];
 	fileSize      = 32000;
 	matchFileSize = true;

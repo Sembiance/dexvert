@@ -7,7 +7,7 @@ export class fmTownsHEL extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/HEL_(FM_Towns)";
 	ext            = [".hel"];
 	forbidExtMatch = true;
-	magic          = ["FM Towns HEL bitmap", "FM-Towns HEL Animation"];
+	magic          = ["FM Towns HEL bitmap", "FM-Towns HEL Animation", "deark: fmtowns_hel"];
 	converters     = [
 		"deark[module:fmtowns_hel][opt:fmtowns_hel:includedups] -> *ffmpeg[fps:8][outType:gif]",
 		"hel2tif -> *ffmpeg[fps:8][outType:gif]"

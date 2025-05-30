@@ -7,7 +7,7 @@ export class prismPaint extends Format
 	ext            = [".pnt", ".tpi"];
 	forbidExtMatch = [".pnt"];	// .pnt is so common an extension and the magic is pretty robust
 	mimeType       = "image/x-prism-paint";
-	magic          = ["Prism Paint bitmap", /^fmt\/1732( |$)/];
+	magic          = ["Prism Paint bitmap", "deark: prismpaint", /^fmt\/1732( |$)/];
 	//priority       = this.PRIORITY.LOW;
 	converters     = ["deark[module:prismpaint]", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

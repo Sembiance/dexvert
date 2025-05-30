@@ -6,7 +6,7 @@ export class makichan extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/MAKIchan_Graphics";
 	ext            = [".mag", ".max", ".mki"];
 	forbidExtMatch = true;
-	magic          = [/^MAKI v1-[ab] bitmap$/, "MAG v2 bitmap", "Maki-chan v2 image", /^Maki-chan v1.[ab] image/, /^fmt\/1469( |$)/];
+	magic          = [/^MAKI v1-[ab] bitmap$/, "MAG v2 bitmap", "Maki-chan v2 image", /^Maki-chan v1.[ab] image/, "deark: makichan", /^fmt\/1469( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="MAG!" && ["Cute", "ImB1", "xPIC"].includes(macFileCreator);
 	converters     = ["recoil2png", "wuimg", "deark[module:makichan]"];		// deark & wuimg gets some dimensions wrong
 	verify         = ({meta}) => meta.height>1 && meta.width>1;	// deark is a little too aggressive in converting things so we check height/width and forbid ext matches

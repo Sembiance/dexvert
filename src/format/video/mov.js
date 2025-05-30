@@ -14,7 +14,7 @@ export class mov extends Format
 	ext          = _MOV_EXT;
 	mimeType     = "video/quicktime";
 	magic        = _MOV_MAGIC;
-	idMeta      = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
+	idMeta       = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
 	converters   = r => [
@@ -22,8 +22,7 @@ export class mov extends Format
 		(r.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"),
 		...(r.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"] : [])
 	];
-	slow         = true;
-	notes        = xu.trim`
+	notes = xu.trim`
 		So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents.
 		Early quicktime movies had the 'moov' section in the resource fork of the file and the 'mdat' section in the data fork.
 		Sadly on my PC/Mac 'hybrid' CDs, the resource fork got stripped during mastering the PC side, so there is no 'moov' section on the PC files.

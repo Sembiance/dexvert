@@ -9,7 +9,8 @@ export class iffILBM extends Format
 	mimeType       = "image/x-ilbm";
 	magic          = [
 		// generic
-		"IFF InterLeaved BitMap", "IFF data, ILBM interleaved image", "Interchange File Format Interleaved Bitmap", "IFF ILBM bitmap", "IFF Packed Bitmap", "image/x-ilbm", "IFF ILBM (Generic)", /^fmt\/338( |$)/,
+		"IFF InterLeaved BitMap", "IFF data, ILBM interleaved image", "Interchange File Format Interleaved Bitmap", "IFF ILBM bitmap", "IFF Packed Bitmap", "image/x-ilbm", "IFF ILBM (Generic)", "deark: ilbm (IFF-ILBM)", "deark: ilbm (IFF-PBM)",
+		/^fmt\/338( |$)/,
 
 		// specific
 		"DCTV encoded ILBM bitmap", "IFF Sliced HAM bitmap",  "IFF Newtek Dynamic HAM bitmap", "IFF Palette Changes HAM bitMap", "IFF Atari ST Interleaved bitmap", "MandelBlitz IFF Mandelbrot bitmap"

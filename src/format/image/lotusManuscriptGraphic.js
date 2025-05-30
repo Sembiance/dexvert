@@ -6,7 +6,7 @@ export class lotusManuscriptGraphic extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Lotus_Manuscript_graphics";
 	ext            = [".bit", ".rle"];
 	forbidExtMatch = true;
-	magic          = ["Lotus Manuscript bitmap", "Lotus Manuscript bitmap (Alt)"];
+	magic          = ["Lotus Manuscript bitmap", "Lotus Manuscript bitmap (Alt)", "deark: lotus_mscr"];
 	weakMagic      = true;
 	converters     = ["deark[module:lotus_mscr]"];
 }

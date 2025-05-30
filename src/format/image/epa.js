@@ -6,7 +6,7 @@ export class epa extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Award_BIOS_logo";
 	ext            = [".epa"];
 	forbidExtMatch = true;
-	magic          = [/^Award BIOS [Ll]ogo/];
+	magic          = ["deark: awbm (Award BIOS logo", /^Award BIOS [Ll]ogo/];
 	weakMagic      = true;
 
 	// nconvert, as usual, messes up several files

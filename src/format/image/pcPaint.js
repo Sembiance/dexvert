@@ -5,7 +5,7 @@ export class pcPaint extends Format
 	name    = "PC Paint Image";
 	website = "http://fileformats.archiveteam.org/wiki/PCPaint_PIC";
 	ext     = [".pic", ".clp"];
-	magic   = ["PC Paint/Pictor bitmap", "PC Paint Bitmap", "piped pictor sequence (pictor_pipe)", /^x-fmt\/170( |$)/];
+	magic   = ["PC Paint/Pictor bitmap", "PC Paint Bitmap", "piped pictor sequence (pictor_pipe)", "deark: pcpaint (PCPaint", /^x-fmt\/170( |$)/];
 
 	// deark is the only thing that appears to handle .clp files
 	// nconvert sometimes fails to convert, but sometimes succeeds. same command. weird.

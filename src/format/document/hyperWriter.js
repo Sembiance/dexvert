@@ -18,5 +18,5 @@ export class hyperWriter extends Format
 		return supportingFiles?.length ? supportingFiles : false;
 	};
 
-	converters = r => [({".hw4" : "hyperReader4", ".hw3" : "hyperReader3"}[r.f.input.ext.toLowerCase()] || "hyperReader4")];
+	converters = dexState => [({".hw4" : "hyperReader4", ".hw3" : "hyperReader3"}[dexState.f.input.ext.toLowerCase()] || "hyperReader4")];
 }

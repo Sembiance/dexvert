@@ -9,7 +9,7 @@ export class sevenZip extends Program
 	flags   = {
 		"rsrcOnly"   : "Only care about the files contained within the output .rsrc folder for things like DLL/EXE extraction",
 		"singleFile" : "Likely just a single output result, so rename it to the name of the original input file",
-		"type"       : "What archive type to process as"
+		"type"       : "What archive type to process as (run 7z i  for list"
 	};
 	bin  = "7z";
 	args = r =>

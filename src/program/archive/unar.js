@@ -21,6 +21,9 @@ export class unar extends Program
 		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["-json", r.inFile({absolute : true})]);
 		r.lsarOutput = xu.parseJSON(fileInfoRaw);
 
+		//if(!r.flags.mac && r.lsarOutput?.lsarFormatName==="MacBinary")
+		//	r.flags.mac = true;
+
 		const a = [];
 		let encoding = r.flags.filenameEncoding;	// if we specified an ecoding, use it
 		if(!encoding && r.flags.mac && RUNTIME.globalFlags?.osHint?.macintoshjp && !["macintosh", "UTF-8"].includes(r.lsarOutput?.lsarEncoding))	// otherwise if we are hinted as macintoshjp, use that so long as lsar didn't detect macintosh or UTF-8 (sample sea/まきがめ駒○駒BY彦ぷん)

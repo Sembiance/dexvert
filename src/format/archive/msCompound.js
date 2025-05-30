@@ -26,6 +26,6 @@ export class msCompound extends Format
 	idMeta           = ({macFileType, macFileCreator}) => macFileType==="MSIV" && macFileCreator==="MSIZ";
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these
 	confidenceAdjust = (input, matchType, curConfidence) => -(curConfidence-40);	// MS Word/Excel files and Thumbs.db are also Compound Documents. Usually archive/* goes first, but let's reduce confidence here so others can go first instead like document/wordDoc
-	converters       = ["sevenZip", "unar", "deark[module:cfb][opt:cfb:extractstreams]"];
+	converters       = ["sevenZip[type:Compound]", "unar", "deark[module:cfb][opt:cfb:extractstreams]"];
 	notes            = "The app specific msCompound files cound be improved to handle the specific sub-files contained within each type.";
 }

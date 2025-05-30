@@ -23,6 +23,6 @@ export class binaryText extends Format
 	idCheck        = inputFile => inputFile.size>=4000 && inputFile.size<=400_000;	// .bin is so generic, only try converting if less than 400k, otherwise it's unlikely to be this format
 
 	// Only convert if ffprobe or ansiloveInfo found the proper formatName
-	converters = r => ((r.meta?.id?.startsWith("SAUCE") || r.meta?.formatName==="bin") ? ["deark[module:bintext][charOutType:image]", "ansilove[format:bin]", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[codec:bintext][outType:png]"] : []);
+	converters = dexState => ((dexState.meta?.id?.startsWith("SAUCE") || dexState.meta?.formatName==="bin") ? ["deark[module:bintext][charOutType:image]", "ansilove[format:bin]", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[codec:bintext][outType:png]"] : []);
 	classify   = true;
 }

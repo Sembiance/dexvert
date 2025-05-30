@@ -12,12 +12,18 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Dexverts one or more files",
 	opts    :
 	{
-		outputDir : {desc : "Output directory. Default: Random Directory", hasValue : true, defaultValue : await fileUtil.genTempPath()}
+		inputDir  : {desc : "Input directory to recursively process all files from. You can set this o", hasValue : true},
+		outputDir : {desc : "Output directory. Default: Random Directory", hasValue : true, defaultValue : await fileUtil.genTempPath()},
+		relative  : {desc : "On the report, show the paths as relative to the current working directory"}
 	},
 	args :
 	[
-		{argid : "inputFiles", desc : "Which files to convert", required : true, multiple : true}
+		{argid : "inputFiles", desc : "Which files to convert", multiple : true}
 	]});
+
+let inputFiles = argv.inputFiles || [];
+if(argv.inputDir)
+	inputFiles = inputFiles.concat(await fileUtil.tree(argv.inputDir, {nodir : true}));
 
 const outputDirPath = path.resolve(path.relative(Deno.cwd(), argv.outputDir));
 await fileUtil.unlink(outputDirPath, {recursive : true});
@@ -30,7 +36,7 @@ const startedAt = performance.now();
 let completed = 0;
 const existingSums = {};
 const allNonNew = [];
-await argv.inputFiles.parallelMap(async inputFile =>
+await inputFiles.parallelMap(async inputFile =>
 {
 	if(!await fileUtil.exists(inputFile) || !(await Deno.stat(inputFile)).isFile)
 		return completed++;
@@ -46,7 +52,7 @@ await argv.inputFiles.parallelMap(async inputFile =>
 	if(!r?.json?.processed || !r?.json?.phase?.format)
 	{
 		failures.push({inputFilePath, ids : r.json.ids || []});
-		return xlog.error`Failed to dexvert ${inputFilePath} (${(argv.inputFiles.length-completed).toLocaleString()} remain)`;
+		return xlog.error`Failed to dexvert ${inputFilePath} (${(inputFiles.length-completed).toLocaleString()} remain)`;
 	}
 
 	families.pushUnique(r.json.phase.family);
@@ -69,7 +75,7 @@ await argv.inputFiles.parallelMap(async inputFile =>
 	r.json.actions.push({text : "stash+rm", value : `dexstash --delete ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
 	r.json.actions.push({text : "delete", value : `rm -f '${inputFilePath}'`});
 
-	r.json.originalInputFilename = inputFilename;
+	r.json.originalInputFilename = argv.relative ? path.relative(Deno.cwd(), inputFile) : inputFilename;
 	if(!r.json.created?.files?.output?.length)
 	{
 		r.json.outputLink = path.join(".", inputFilename);
@@ -88,7 +94,7 @@ await argv.inputFiles.parallelMap(async inputFile =>
 
 	reports.push(r.json);
 
-	xlog.info`${completed.toLocaleString().padStart(argv.inputFiles.length.toLocaleString().length)} files completed    ${(argv.inputFiles.length-completed).toLocaleString().padStart(argv.inputFiles.length.toLocaleString().length)} remain`;
+	xlog.info`${completed.toLocaleString().padStart(inputFiles.length.toLocaleString().length)} files completed    ${(inputFiles.length-completed).toLocaleString().padStart(inputFiles.length.toLocaleString().length)} remain`;
 }, Math.floor(navigator.hardwareConcurrency*0.90));
 const elapsed = performance.now()-startedAt;
 

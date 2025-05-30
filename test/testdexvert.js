@@ -108,6 +108,14 @@ const FORMAT_OS_HINT =
 	{
 		"まきがめ駒○駒BY彦ぷん" : "macintoshjp"
 	},
+	"archive/nowCompress" :
+	{
+		"その他のモデム設定.sea" : "macintoshjp"
+	},
+	"archive/lha" :
+	{
+		"MYMY145f.sea" : "macintoshjp"
+	},
 	"archive/sit" :
 	{
 		"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp",
@@ -409,7 +417,8 @@ const FLEX_DIFF_FILES =
 	/archive\/swf\/.+$/,
 	/archive\/swfEXE\/.+$/,
 
-	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
+	// not sure why, but sometimes I get a .txt sometimes I get a .pdf weird
+	/document\/pageStreamDocument\/ASyncIO_2\.part2\.pgs$/,
 	/document\/wordDoc\/POWWOW\.DOC$/,
 
 	// on some hosts, scribus fails to process this file, not sure why

@@ -24,8 +24,8 @@ export class drHalo extends Format
 		return otherFile ? [otherFile] : false;
 	};
 
-	converters   = r => [
-		`deark[module:drhalocut]${r.f.aux ? `[file2:${r.f.aux.base}]` : ""}`, `deark[module:drhalopic]${r.f.aux ? `[file2:${r.f.aux.base}]` : ""}`,
+	converters   = dexState => [
+		`deark[module:drhalocut]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`, `deark[module:drhalopic]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`,
 		"convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress[matchType:magic]", "pv[matchType:magic]"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
 	metaProvider = ["image"];
 	weakMagic    = true;

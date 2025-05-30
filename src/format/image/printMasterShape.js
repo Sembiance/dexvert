@@ -13,5 +13,5 @@ export class printMasterShape extends Format
 		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.sdr`);
 		return otherFile ? [otherFile] : false;
 	};
-	converters = r => [`deark[module:printmaster]${r.f.aux ? `[file2:${r.f.aux.base}]` : ""}`];
+	converters = dexState => [`deark[module:printmaster]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`];
 }

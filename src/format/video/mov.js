@@ -17,10 +17,10 @@ export class mov extends Format
 	idMeta       = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
-	converters   = r => [
+	converters   = dexState => [
 		"ffmpeg",
-		(r.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"),
-		...(r.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"] : [])
+		(dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"),
+		...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"] : [])
 	];
 	notes = xu.trim`
 		So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents.

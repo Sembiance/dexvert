@@ -11,33 +11,6 @@
 \---------------/
 * Add support for Basic .MUS. This is a bit of work and should be done 'for fun'. See sandbox/wip/BasicMUS_mml2mid.js
 
-* Update blender from old 4.0 to latest version.
-  First, starting with Blender 4.2, the addons that were distributed may not be anymore: https://devtalk.blender.org/t/changes-to-add-on-and-themes-bundling-4-2-onwards/34593
-  Next, the Python API has changed with every version, so my python code (and possibly all the addons which I manually updated to even work with 4.0) will need to be update:
-	https://developer.blender.org/docs/release_notes/4.1/python_api/
-	https://developer.blender.org/docs/release_notes/4.2/python_api/
-	https://developer.blender.org/docs/release_notes/4.3/python_api/
-	https://developer.blender.org/docs/release_notes/4.4/python_api/
-  It's probably best to just jump to the latest version.
-	cd /mnt/compendium/DevLab/dexvert
-	mv blender blender_OLD
-	mkdir -p blender/addons/
-  FIRST: The 'native' support (collada/obj/ply/stl)
-  	Test them VISUALLY with: BLENDER_USER_SCRIPTS=/mnt/compendium/DevLab/dexvert/blender blender-?.?
-  	Once they all work, take the program/poly/blender.js python code and hand craft a script to test with against
-  	Get that working CLI with the args seen in blender.js
-  	NOW update blender.js with this new python script and then test and get working that one addon in dexvert for all native formats
-  SECOND: Blender specific addons (3ds/dxf/fbx/x3d) see if they are distributed in the 'addons_core' folder or if I need to get them from: http://extensions.blender.org/
-	Get each one working VISUALLY.
-	Then update blender.js with the necessary code and get them working with dexvert
-  THIRD: 3rd party addons
-	For each one look to see if there is an 'updated' or 'alternatve' plugin that supports it from: http://extensions.blender.org/  or github, etc
-	If no, then rsync over from dexvert/blender_OLD/addons/<addon> to blender/addons/<addon>/
-	Then update the addon code as needed to get it working VISUALLY with blender
-	Then test it with dexvert
-	Then proceed to the next addon
-  FINALLY: Do a full testdexvert with all of poly
-
 * Add extraction suport for these older MacroMind Projector files (21,000+ unique files). No known converter or extractor:
 	https://discmaster.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://discmaster.textfiles.com/search?qfields=name&detection=VWMD
@@ -70,6 +43,33 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Update blender from 4.0 to latest version (4.4 as of May 2025)
+  First, starting with Blender 4.2, the addons that were distributed may not be anymore: https://devtalk.blender.org/t/changes-to-add-on-and-themes-bundling-4-2-onwards/34593
+  Next, the Python API has changed with every version, so my python code (and possibly all the addons which I manually updated to even work with 4.0) will need to be update:
+	https://developer.blender.org/docs/release_notes/4.1/python_api/
+	https://developer.blender.org/docs/release_notes/4.2/python_api/
+	https://developer.blender.org/docs/release_notes/4.3/python_api/
+	https://developer.blender.org/docs/release_notes/4.4/python_api/
+  It's probably best to just jump to the latest version.
+	cd /mnt/compendium/DevLab/dexvert
+	mv blender blender_OLD
+	mkdir -p blender/addons/
+  FIRST: The 'native' support (collada/obj/ply/stl)
+  	Test them VISUALLY with: BLENDER_USER_SCRIPTS=/mnt/compendium/DevLab/dexvert/blender blender-?.?
+  	Once they all work, take the program/poly/blender.js python code and hand craft a script to test with against
+  	Get that working CLI with the args seen in blender.js
+  	NOW update blender.js with this new python script and then test and get working that one addon in dexvert for all native formats
+  SECOND: Blender specific addons (3ds/dxf/fbx/x3d) see if they are distributed in the 'addons_core' folder or if I need to get them from: http://extensions.blender.org/
+	Get each one working VISUALLY.
+	Then update blender.js with the necessary code and get them working with dexvert
+  THIRD: 3rd party addons
+	For each one look to see if there is an 'updated' or 'alternatve' plugin that supports it from: http://extensions.blender.org/  or github, etc
+	If no, then rsync over from dexvert/blender_OLD/addons/<addon> to blender/addons/<addon>/
+	Then update the addon code as needed to get it working VISUALLY with blender
+	Then test it with dexvert
+	Then proceed to the next addon
+  FINALLY: Do a full testdexvert with all of poly
+
 * So dexvert still uses 7z from p7zip (instead of more modern 7zz from 7zip package). This is because p7zip handles i18n charsets better via the LANG env var
   The problem is that I've encountered a file test/sample/archive/zip/Masicsstory.zip that when extracted without LANG works fine, but when extracted with LANG=ja_JP is doesn't extract correctly
   You can see this by just running `7z l Masicsstory.zip` vs `LANG=ja_JP 7z l Masicsstory.zip` and notice the second listing loses all subdirs and ends up clobbering outputs and just produces 1 output file

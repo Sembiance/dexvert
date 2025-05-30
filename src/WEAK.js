@@ -382,12 +382,10 @@ export const WEAK_VALUES =
 	/^Arc CBM$/,
 	/^LhWarp$/,
 	/^LZMA_Alone$/,
-	/^Now Compress$/,
 	/^Self-extracting ARC$/,
 	/^Split file$/,
 	/^StuffIt split file$/,
 	/^Tar$/,
-	/^ZipIt SEA$/,
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,

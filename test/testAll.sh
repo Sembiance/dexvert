@@ -15,4 +15,4 @@ dra testMany.js --format=poly		# 50m 46s
 dra testMany.js --format=archive	# 74m 50s
 dra testMany.js --format=image		# 88m 59s
 
-# dra testMany.js --format=all  #  4h 38m 30s   to  6h 5m 42s   (Last: 5h 35m 42s)
+# dra testMany.js --format=all  #  4h 38m 30s   to  6h 5m 42s   (Last: 5h 39m 46s)

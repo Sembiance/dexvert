@@ -38,7 +38,7 @@ const MAX_LINE_LENGTH = Deno.hostname()==="crystalsummit" ? 118 : 145;
 const SLOW_FORMATS_AT_ONCE = 2;
 const FORMATS_AT_ONCE = 4;
 
-// these formats are slow, they run first, ordered slowest to fastest, but only at max SLOW_FORMATS_AT ONCE in order to ensure we fully utilize all our various bottlenecks in dexvert
+// these formats are slow, they run first, ordered slowest to fastest (the number is how many minutes that format took to test), but only at max SLOW_FORMATS_AT ONCE in order to ensure we fully utilize all our various bottlenecks in dexvert
 const SLOW_FORMATS =
 {
 	// archive

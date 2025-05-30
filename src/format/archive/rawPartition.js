@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const HFS_MAGICS = ["Macintosh HFS data", "HFS file system"];
+const HFS_MAGICS = ["Macintosh HFS data", "HFS file system", "deark: hfs"];
 
 export class rawPartition extends Format
 {

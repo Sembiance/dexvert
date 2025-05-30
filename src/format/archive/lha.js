@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_MACBINARY_MAGIC} from "../archive/macBinary.js";
 
 export class lha extends Format
 {
@@ -14,7 +15,7 @@ export class lha extends Format
 	magic = [
 		// generic LHA
 		"LHARC/LZARK compressed archive", /^LHa .*archive data/, "LHA File Format", "LHARK compressed archive", "LHA self-extracting", "LHarc self-extracting archive", "LZH Archiv gefunden", "Self-extracting Amiga LhA", "application/x-lha",
-		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^MS-DOS .*LHarc self-extracting archive/, /^Self-extracting LZH$/, /^LZH$/, "deark: lha", "deark: car_lha", /^fmt\/626( |$)/,
+		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^MS-DOS .*LHarc self-extracting archive/, /^Self-extracting LZH$/, /^LZH$/, "deark: lha", "deark: car_lha", /^LZH$/, /^fmt\/626( |$)/,
 
 		// app specific LHA
 		"Amiga WHDLoad package (lha compressed)", "CAR compressed archive", "SDS Software SFX", "Atari ST LHArc SFX archive"
@@ -23,5 +24,8 @@ export class lha extends Format
 	// Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark
 	// Luckilly 'lha' fails on these, so then I try lhark specific extractor
 	// See: https://entropymine.wordpress.com/2020/12/24/notes-on-lhark-compression-format/
-	converters = ["lha", "sevenZip", "deark[module:lha][opt:lha:lhark]", "deark[module:car_lha] -> lha", "deark[module:lharc_sfx_com]", "unar", "sqc", "UniExtract[matchType:magic]", "izArc[matchType:magic]", "lhark", "uaeunp"];
+	converters = dexState => ["lha", "sevenZip", "deark[module:lha][opt:lha:lhark]", "deark[module:car_lha] -> lha", "deark[module:lharc_sfx_com]",
+		dexState.hasMagics(_MACBINARY_MAGIC) ? "unar[mac]" : "unar",
+		"sqc", "UniExtract[matchType:magic]", "izArc[matchType:magic]", "lhark", "uaeunp"
+	];
 }

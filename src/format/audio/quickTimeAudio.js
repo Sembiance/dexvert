@@ -13,12 +13,12 @@ export class quickTimeAudio extends Format
 	confidenceAdjust = () => -10;	// Reduce by 10 so that mov matches first
 	metaProvider     = ["ffprobe"];
 	notes			 = `HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"`;
-	converters       = r =>
+	converters       = dexState =>
 	{
 		const validConverters = ["ffmpeg[outType:mp3]"];
 		if(RUNTIME.asFormat!=="audio/quickTimeAudio")
 		{
-			if(r.f.input.size<(xu.MB*25))
+			if(dexState.f.input.size<(xu.MB*25))
 			{
 				RUNTIME.forbidProgram.delete("qt_flatt");
 				validConverters.push("qt_flatt[chainAs:audio/quickTimeAudio]");

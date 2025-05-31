@@ -4,7 +4,7 @@ export class squeeze extends Format
 {
 	name       = "Squeeze Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/Squeeze";
-	magic      = [/Squeezed .*data/, "squeezed data", "Squeeze compressed archive", /^Squeeze$/, "deark: squeeze (Squeezed)"];
+	magic      = [/Squeezed .*data/, "squeezed data", "Squeeze compressed archive", /^Squeeze$/, "deark: squeeze (Squeeze"];
 	// We don't set packed = true here because we don't have a standard extension
 	converters = ["unar", "lbrate", "deark[module:squeeze]"];
 }

@@ -646,6 +646,7 @@ export default
 		lotusHALHelp                               : {name : "Lotus HAL Help", ext : [".hlp"], magic : ["Lotus HAL Help"], weakMagic : true},
 		lotusWorksDocument                         : {name : "Lotus Works Document", ext : [".doc"], magic : ["Lotus Works Document"], weakMagic : true},
 		ltSpiceCircuitSchematic                    : {name : "LTSpice Circuit Schematic", ext : [".asc"], magic : ["LTSpice Circuit Schematic"]},
+		lyapunoviaCoordinates                      : {name : "Lyapunovia coordinates", magic : ["Lyapunovia coordinates"]},
 		lyricFile                                  : {name : "Lyric file", magic : ["Lyric file (with ID tags)"]},
 		m3uPlaylist                                : {name : "M3U playlist", ext : [".m3u"], magic : ["Extended M3U playlist", "audio/x-mpegurl", /^M3U playlist/]},
 		magicianDriver                             : {name : "Magician Driver", ext : [".vdv", ".rdv"], magic : ["Magician vector/plotter driver", "Magician raster/printer driver"], weakMagic : true},

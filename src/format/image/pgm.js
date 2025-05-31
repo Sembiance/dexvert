@@ -12,5 +12,5 @@ export class pgm extends Format
 		"convert", "iio2png", "gimp", "wuimg",
 		"paintDotNet[matchType:magic]", "hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
-	verify       = ({meta}) => meta.width>2 && meta.height>2;
+	verify = ({meta}) => meta.width>2 && meta.height>2;
 }

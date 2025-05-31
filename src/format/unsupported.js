@@ -593,6 +593,7 @@ export default
 		maxonCADFont                     : {name : "MaconCAD Font", ext : [".mcfont"], magic : ["MaxonCAD Font"]},
 		megaPaintFont                    : {name : "MegaPaint Font", ext : [".fnt"], magic : ["MegaPaint Font"], weakMagic : true},
 		metagraphicsFont                 : {name : "Metagraphics Font", ext : [".fnt"], magic : ["Metagraphics Font"]},
+		micrografxBitfont                : {name : "Micrografx Bitfont", ext : [".bez"], magic : ["Micrografx Bitfont"], weakMagic : true},
 		micrografxFont                   : {name : "Micrografx Font", ext : [".mgf"], magic : ["Micrografx Font"]},
 		msxFont                          : {name : "MSX Font", ext : [".alf"], magic : ["MSX Font"], weakMagic : true},
 		msxKanjiFont                     : {name : "MSX Kanji Font", magic : ["MSX Kanji Font"]},
@@ -877,7 +878,7 @@ export default
 		wyzTrackerModule                : {name : "WYZTracker module", magic : ["WYZTracker module"]},
 		xlr8SentryChipComposorMusic     : {name : "XLR8 - Sentry Chip Composor Music", ext : [".xms"], magic : ["XLR8 - Sentry Chip Composor Music"]},
 		xlr8SentryChipComposorSong      : {name : "XLR8 - Sentry Chip Composor Song", ext : [".xng"], magic : ["XLR8 - Sentry Chip Composor Song"], weakMagic : true},
-		yamahaESEQ                      : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
+		yamahaESEQ                      : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music", /^fmt\/1960( |$)/]}
 	},
 
 	poly :
@@ -1017,6 +1018,7 @@ export default
 		afterlifeSavedGame                           : {name : "Afterlife saved game", magic : ["Afterlife saved game"]},
 		ageOfEmpiresScenario                         : {name : "Age of Empires Scenario", ext : [".scn"], magic : ["Age of Empires Scenario"], weakMagic : true},
 		ageOfWondersDictionaryData                   : {name : "Age of Wonders Dictionary data", ext : [".mld"], magic : ["Age of Wonders Dictionary data"]},
+		ageOfWondersEffects                          : {name : "Age of Wonders Effects", ext : [".fx"], magic : ["Age of Wonders Effects"], weakMagic : true},
 		ageOfWondersShadowMagicEffects               : {name : "Age of Wonders: Shadow Magic Effects", ext : [".fx"], magic : ["Age of Wonders: Shadow Magic Effects"], weakMagic : true},
 		agesGameScript                               : {name : "AGES Game Script", ext : [".aex"], magic : ["AGES Game Script"]},
 		airlineTycoonGameDataArchive                 : {name : "Airline Tycoon game data archive", ext : [".gli"], magic : ["Airline Tycoon game data archive"], weakMagic : true},
@@ -1470,6 +1472,7 @@ export default
 		starWarsGalaxiesTREArchive                   : {name : "Star Wars Galaxies TRE archive", ext : [".tre", ".bin"], magic : ["Star Wars Galaxies TRE archive"], weakMagic : true},
 		starWarsJediKnightJediAcademyMap             : {name : "Star Wars Jedi Knight: Jedi Academy map", ext : [".bsp"], magic : ["Star Wars Jedi Knight: Jedi Academy map"], weakMagic : true},
 		starWarsJediKnightBotNavigationRoutes        : {name : "Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info", ext : [".nav"], magic : ["Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info"], weakMagic : true},
+		starWarsJediKnight2SaveGame                  : {name : "Star Wars: Jedi Knight II - Jedi Outcast save game", ext : [".sav"], magic : ["Star Wars: Jedi Knight II - Jedi Outcast save game"]},
 		steelPanthersShapesData                      : {name : "Steel Panthers Shapes data", ext : [".shp"], magic : ["Steel Panthers Shapes data"], weakMagic : true},
 		stepManiaCourse                              : {name : "StepMania Course", ext : [".crs"], magic : ["StepMania Course"], weakMagic : true},
 		stormRegionGameDataArchive                   : {name : "Storm Region game data archive", ext : [".pak"], magic : ["Storm Region game data archive"], weakMagic : true},
@@ -1958,6 +1961,7 @@ export default
 		amigaModeProSettings                     : {name : "Amiga ModePro settings", ext : [".pref"], magic : ["Amiga ModePro settings"]},
 		amigaMoney                               : {name : "Amiga Money", ext : [".amm", ".sets"], magic : [/^Amiga Money (accounts|books|budgets|credit|categories|data|groups|reports|Settings)/], weakMagic : true},
 		amigaOutlineTag                          : {name : "Amiga Outline Tag", ext : [".otag"], magic : ["AmigaOS outline tag"]},
+		amigaPlotParameters                      : {name : "Amiga Plot Parameters", ext : [".parms"], magic : ["Amiga Plot Parameters"], weakMagic : true},
 		amigaXDFMeta                             : {name : "Amiga ADF XDF Meta", ext : [".xdfmeta"], magic : [...TEXT_MAGIC, /^data$/], weakMagic : true},
 		amiMetafileFormat                        : {name : "Ami metafile format", magic : ["Ami metafile format"]},
 		amoebaData                               : {name : "Amoeba Data", ext : [".amb"], magic : ["Amoeba Data"], weakMagic : true},
@@ -2844,7 +2848,6 @@ export default
 		orCADLayout                              : {name : "OrCAD Layout", ext : [".max"], magic : [/^fmt\/1465( |$)/]},
 		orCADProject                             : {name : "OrCAD Project", ext : [".opj"], magic : ["OrCAD Project", /^fmt\/1572( |$)/], weakMagic : true},
 		orionSamplerSample                       : {name : "Orion Sampler sample", ext : [".osp"], magic : ["Orion Sampler sample"], weakMagic : true},
-		os2ExtendedFileAttributes                : {name : "OS/2 Extended File Attributes", magic : ["OS/2 EA Extended file Attributes"]},
 		os2DLL                                   : {name : "OS/2 Dynamic Link Library", ext : [".dll"], magic : ["OS/2 Dynamic Link Library"]},
 		os2PresentationManagerMetafile           : {name : "OS/2 Presentation Manager Metafile", ext : [".met"], magic : [/^x-fmt\/67( |$)/], weakMagic : true},
 		os2SyslevelInfo                          : {name : "OS/2 SYSLEVEL info", ext : [".pem", ".x25", ".nfs"], magic : ["OS/2 SYSLEVEL info"]},

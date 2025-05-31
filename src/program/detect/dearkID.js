@@ -30,7 +30,9 @@ export class dearkID extends Program
 
 		const lowConfidenceStrings =
 		[
+			"Bad or unsupported image dimensions",
 			"Invalid or unsupported ",
+			"Malformed header",
 			"No files found to extract!",
 			"This is probably not "
 		];

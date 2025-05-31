@@ -173,13 +173,13 @@ export const WEAK_VALUES =
 	/^Xilinx Virtex\/Spartan FPGA bitstream dummy \+ sync word$/,
 	/^ZBOOT firmware header/,
 
-	// dearkID
+	// dearkID (trailing spaces on purpose)
 	/^deark: ascii85$/,
 	/^deark: basic_c64$/,
 	/^deark: cfb$/,
 	/^deark: dclimplode$/,
 	/^deark: degas/,
-	/^deark: exe \(((DOS EXE)|NE|PE32|PE32\+)\)$/,
+	/^deark: exe /,
 	/^deark: iff$/,
 	/^deark: fat /,
 	/^deark: godpaint$/,
@@ -188,6 +188,7 @@ export const WEAK_VALUES =
 	/^deark: png \(CgBI\)$/,
 	/^deark: pnm/,
 	/^deark: printshop \(The Print Shop \(DAT\/NAM\)\)$/,
+	/^deark: qdv$/,
 	/^deark: qtif$/,
 	/^deark: riff$/,
 	/^deark: rodraw$/,

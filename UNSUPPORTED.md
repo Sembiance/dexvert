@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,638)
+# Unsupported File Formats (3,640)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -640,7 +640,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (118)
+## Font (119)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -712,6 +712,7 @@ Family/Format | Name | Extensions | Notes
 [font/maxisSimCityFont](https://discmaster.textfiles.com/search?format=maxisSimCityFont) | Maxis SimCity Font | .mxf | 
 [font/megaPaintFont](https://discmaster.textfiles.com/search?format=megaPaintFont) | MegaPaint Font | .fnt | 
 [font/metagraphicsFont](https://discmaster.textfiles.com/search?format=metagraphicsFont) | Metagraphics Font | .fnt | 
+[font/micrografxBitfont](https://discmaster.textfiles.com/search?format=micrografxBitfont) | Micrografx Bitfont | .bez | 
 [font/micrografxFont](https://discmaster.textfiles.com/search?format=micrografxFont) | Micrografx Font | .mgf | 
 [font/msxFont](https://discmaster.textfiles.com/search?format=msxFont) | MSX Font | .alf | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?format=msxKanjiFont) | MSX Kanji Font |  | 
@@ -764,7 +765,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (196)
+## Image (195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -834,7 +835,6 @@ Family/Format | Name | Extensions | Notes
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
 [image/expertDrawDrawing](https://discmaster.textfiles.com/search?format=expertDrawDrawing) | ExpertDraw drawing |  | 
 [image/fastCADForWindowsDrawing](https://discmaster.textfiles.com/search?format=fastCADForWindowsDrawing) | FastCAD for Windows drawing | .fct .fcw .fsc | 
-[image/fastgraphPRF](https://discmaster.textfiles.com/search?format=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?format=fastRayMaterial) | FastRay material/surface |  | 
 [image/flashbackSprite](https://discmaster.textfiles.com/search?format=flashbackSprite) | Flashback Sprite | .spr | 
 [image/fpr](https://discmaster.textfiles.com/search?format=fpr) | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -1141,7 +1141,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,406)
+## Other (2,408)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1253,6 +1253,7 @@ Family/Format | Name | Extensions | Notes
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?format=afterlifeSavedGame) | Afterlife saved game |  | 
 [other/ageOfEmpiresScenario](https://discmaster.textfiles.com/search?format=ageOfEmpiresScenario) | Age of Empires Scenario | .scn | 
 [other/ageOfWondersDictionaryData](https://discmaster.textfiles.com/search?format=ageOfWondersDictionaryData) | Age of Wonders Dictionary data | .mld | 
+[other/ageOfWondersEffects](https://discmaster.textfiles.com/search?format=ageOfWondersEffects) | Age of Wonders Effects | .fx | 
 [other/ageOfWondersShadowMagicEffects](https://discmaster.textfiles.com/search?format=ageOfWondersShadowMagicEffects) | Age of Wonders: Shadow Magic Effects | .fx | 
 [other/agesGameScript](https://discmaster.textfiles.com/search?format=agesGameScript) | AGES Game Script | .aex | 
 [other/agfaCompugraphicFontCache](https://discmaster.textfiles.com/search?format=agfaCompugraphicFontCache) | AGFA/Compugraphic Font Cache |  | 
@@ -1311,6 +1312,7 @@ Family/Format | Name | Extensions | Notes
 [other/amigaModeProSettings](https://discmaster.textfiles.com/search?format=amigaModeProSettings) | Amiga ModePro settings | .pref | 
 [other/amigaMoney](https://discmaster.textfiles.com/search?format=amigaMoney) | Amiga Money | .amm .sets | 
 [other/amigaOutlineTag](https://discmaster.textfiles.com/search?format=amigaOutlineTag) | Amiga Outline Tag | .otag | 
+[other/amigaPlotParameters](https://discmaster.textfiles.com/search?format=amigaPlotParameters) | Amiga Plot Parameters | .parms | 
 [other/iffPrefs](https://discmaster.textfiles.com/search?format=iffPrefs) | Amiga Preferences | .prefs | 
 [other/amigaSharedLibrary](https://discmaster.textfiles.com/search?format=amigaSharedLibrary) | Amiga Shared Library | .lib | 
 [other/amigaFoxLayout](https://discmaster.textfiles.com/search?format=amigaFoxLayout) | AmigaFox layout | .afox | 
@@ -2681,7 +2683,6 @@ Family/Format | Name | Extensions | Notes
 [other/orionSamplerSample](https://discmaster.textfiles.com/search?format=orionSamplerSample) | Orion Sampler sample | .osp | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?format=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?format=os2DLL) | OS/2 Dynamic Link Library | .dll | 
-[other/os2ExtendedFileAttributes](https://discmaster.textfiles.com/search?format=os2ExtendedFileAttributes) | OS/2 Extended File Attributes |  | 
 [other/os2PresentationManagerMetafile](https://discmaster.textfiles.com/search?format=os2PresentationManagerMetafile) | OS/2 Presentation Manager Metafile | .met | 
 [other/os2SyslevelInfo](https://discmaster.textfiles.com/search?format=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
 [other/os2WarpServerBackupRulebook](https://discmaster.textfiles.com/search?format=os2WarpServerBackupRulebook) | OS/2 Warp Server backup Rulebook | .psr | 
@@ -3094,6 +3095,7 @@ Family/Format | Name | Extensions | Notes
 [other/starWarsGalaxiesTREArchive](https://discmaster.textfiles.com/search?format=starWarsGalaxiesTREArchive) | Star Wars Galaxies TRE archive | .tre .bin | 
 [other/starWarsJediKnightBotNavigationRoutes](https://discmaster.textfiles.com/search?format=starWarsJediKnightBotNavigationRoutes) | Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info | .nav | 
 [other/starWarsJediKnightJediAcademyMap](https://discmaster.textfiles.com/search?format=starWarsJediKnightJediAcademyMap) | Star Wars Jedi Knight: Jedi Academy map | .bsp | 
+[other/starWarsJediKnight2SaveGame](https://discmaster.textfiles.com/search?format=starWarsJediKnight2SaveGame) | Star Wars: Jedi Knight II - Jedi Outcast save game | .sav | 
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?format=starAmPlanGraphData) | StarAm Plan graph data | .gein | 
 [other/starbreezeStudiosGameDataArchive](https://discmaster.textfiles.com/search?format=starbreezeStudiosGameDataArchive) | Starbreeze Studios game data archive | .xw .xfc .xtc .xmd .xcd .xwc | 
 [other/starCalcData](https://discmaster.textfiles.com/search?format=starCalcData) | StarCalc data | .dat | 

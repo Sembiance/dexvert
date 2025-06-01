@@ -7,6 +7,4 @@ export class macOSInstallTome extends Format
 	magic       = ["Mac Installation Tome"];
 	idMeta      = ({macFileType, macFileCreator}) => macFileType==="idcp" && macFileCreator==="kakc";
 	converters  = ["deark[module:tome]"];
-	unsupported = true;
-	notes       = "Deark is working on adding this format.";
 }

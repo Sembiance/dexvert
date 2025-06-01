@@ -12,18 +12,29 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Dexverts one or more files",
 	opts    :
 	{
-		inputDir  : {desc : "Input directory to recursively process all files from. You can set this o", hasValue : true},
 		outputDir : {desc : "Output directory. Default: Random Directory", hasValue : true, defaultValue : await fileUtil.genTempPath()},
 		relative  : {desc : "On the report, show the paths as relative to the current working directory"}
 	},
 	args :
 	[
-		{argid : "inputFiles", desc : "Which files to convert", multiple : true}
+		{argid : "inputFiles", desc : "Which files or directories to convert", multiple : true, required : true}
 	]});
 
-let inputFiles = argv.inputFiles || [];
-if(argv.inputDir)
-	inputFiles = inputFiles.concat(await fileUtil.tree(argv.inputDir, {nodir : true}));
+let inputFiles = [];
+for(const inputFile of (argv.inputFiles || []))
+{
+	if(!await fileUtil.exists(inputFile))
+	{
+		xlog.error`Input file/dir does not exist: ${inputFile}`;
+		continue;
+	}
+
+	if((await Deno.stat(inputFile)).isDirectory)
+		inputFiles = inputFiles.concat(await fileUtil.tree(inputFile, {nodir : true}));
+	else
+		inputFiles.push(inputFile);
+}
+inputFiles = inputFiles.unique();
 
 const outputDirPath = path.resolve(path.relative(Deno.cwd(), argv.outputDir));
 await fileUtil.unlink(outputDirPath, {recursive : true});

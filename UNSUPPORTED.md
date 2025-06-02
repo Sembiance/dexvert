@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,640)
+# Unsupported File Formats (3,648)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1140,7 +1140,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,408)
+## Other (2,415)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1387,6 +1387,8 @@ Family/Format | Name | Extensions | Notes
 [other/atlantisWordProcessorSoundScheme](https://discmaster.textfiles.com/search?format=atlantisWordProcessorSoundScheme) | Atlantis Word Processor Sound Scheme | .asn | 
 [other/atokDictionary](https://discmaster.textfiles.com/search?format=atokDictionary) | ATOK Dictionary |  | 
 [other/atomicBombermanAnimation](https://discmaster.textfiles.com/search?format=atomicBombermanAnimation) | Atomic Bomberman Animation | .ani | 
+[other/atomicElbowGameDataArchive](https://discmaster.textfiles.com/search?format=atomicElbowGameDataArchive) | Atomic Elbow game data archive | .bod | 
+[other/audacityBlockFile](https://discmaster.textfiles.com/search?format=audacityBlockFile) | Audacity Block File | .auf | 
 [other/audfprintPeak](https://discmaster.textfiles.com/search?format=audfprintPeak) | audfprint peak | .afpk | 
 [other/ailDigitalAudioDriver](https://discmaster.textfiles.com/search?format=ailDigitalAudioDriver) | Audio Interface Library 3 Digital audio driver | .dig | 
 [other/ailMidiDriver](https://discmaster.textfiles.com/search?format=ailMidiDriver) | Audio Interface Library 3 Music/MIDI driver | .mdi | 
@@ -1601,6 +1603,7 @@ Family/Format | Name | Extensions | Notes
 [other/civilizationIIISaveGame](https://discmaster.textfiles.com/search?format=civilizationIIISaveGame) | Civilization III save game | .bic .bix | 
 [other/clamAntivirusByteCodeSignatures](https://discmaster.textfiles.com/search?format=clamAntivirusByteCodeSignatures) | Clam Antivirus ByteCode signatures | .cbc | 
 [other/clarisWorksPaletteFiles](https://discmaster.textfiles.com/search?format=clarisWorksPaletteFiles) | Claris Works palette files | .pl .plt | 
+[other/clarisDrawClipartLibrary](https://discmaster.textfiles.com/search?format=clarisDrawClipartLibrary) | ClarisDraw Clipart Library | .clb | 
 [other/clariSSAPreferences](https://discmaster.textfiles.com/search?format=clariSSAPreferences) | ClariSSA preferences |  | 
 [other/clarisWorksLibrary](https://discmaster.textfiles.com/search?format=clarisWorksLibrary) | ClarisWorks Library | .cwl | 
 [other/clawCustomLevel](https://discmaster.textfiles.com/search?format=clawCustomLevel) | Claw custom level | .wwd | 
@@ -2575,6 +2578,7 @@ Family/Format | Name | Extensions | Notes
 [other/needForSpeedCarExterior](https://discmaster.textfiles.com/search?format=needForSpeedCarExterior) | Need for Speed car exterior | .cfm | 
 [other/needForSpeedFont](https://discmaster.textfiles.com/search?format=needForSpeedFont) | Need For Speed Font | .ffn | 
 [other/needForSpeedGameData](https://discmaster.textfiles.com/search?format=needForSpeedGameData) | Need for Speed game data | .lzc | 
+[other/needForSpeedUnderground2SaveGame](https://discmaster.textfiles.com/search?format=needForSpeedUnderground2SaveGame) | Need for Speed: Underground 2 save game |  | 
 [other/neoGeoPocketColorROM](https://discmaster.textfiles.com/search?format=neoGeoPocketColorROM) | Neo Geo Pcoekt Color ROM | .ngp .ngc .npc | 
 [other/neoPaintPallette](https://discmaster.textfiles.com/search?format=neoPaintPallette) | NeoPaint Palette | .pal | 
 [other/neoPaintPrinterDriver](https://discmaster.textfiles.com/search?format=neoPaintPrinterDriver) | NeoPaint Printer Driver | .prd | 
@@ -2969,6 +2973,8 @@ Family/Format | Name | Extensions | Notes
 [other/sagGameSoundDataContainer](https://discmaster.textfiles.com/search?format=sagGameSoundDataContainer) | SAG game sound data container | .sag | 
 [other/sampbox4Macro](https://discmaster.textfiles.com/search?format=sampbox4Macro) | Sampbox 4 Macro | .sam | 
 [other/samplitudeProject](https://discmaster.textfiles.com/search?format=samplitudeProject) | Samplitude Project | .rap .vip | 
+[other/sangduckMap](https://discmaster.textfiles.com/search?format=sangduckMap) | Sangduck Map | .cmf | 
+[other/sangduckSprite](https://discmaster.textfiles.com/search?format=sangduckSprite) | Sangduck Sprite | .spr | 
 [other/sangoFighterConfiguration](https://discmaster.textfiles.com/search?format=sangoFighterConfiguration) | Sango Fighter Configuration | .cfg | 
 [other/sanityAikensArtifactSavedGame](https://discmaster.textfiles.com/search?format=sanityAikensArtifactSavedGame) | Sanity: Aiken's Artifact Saved Game | .sav | 
 [other/sasTransportXPORTFormat](https://discmaster.textfiles.com/search?format=sasTransportXPORTFormat) | SAS Transport (XPORT) format | .xpt | 
@@ -3039,6 +3045,7 @@ Family/Format | Name | Extensions | Notes
 [other/skypeUserData](https://discmaster.textfiles.com/search?format=skypeUserData) | Skype user data | .dbb | 
 [other/slicksNSlidesTrack](https://discmaster.textfiles.com/search?format=slicksNSlidesTrack) | Slicks 'n' Slide Track | .ss | 
 [other/slideSavedGame](https://discmaster.textfiles.com/search?format=slideSavedGame) | Slide Saved Game | .sld | 
+[other/slideWritePlusChart](https://discmaster.textfiles.com/search?format=slideWritePlusChart) | SlideWrite Plus Chart | .tc .fg | 
 [other/slimShowProject](https://discmaster.textfiles.com/search?format=slimShowProject) | Slim Show project | .s_ .ss | 
 [other/smartAddressAddressBook](https://discmaster.textfiles.com/search?format=smartAddressAddressBook) | Smart Address address book | .tpl .adr | 
 [other/smartAddressDiary](https://discmaster.textfiles.com/search?format=smartAddressDiary) | Smart Address Diary | .sdy | 
@@ -3554,7 +3561,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (89)
+## Poly (90)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3636,6 +3643,7 @@ Family/Format | Name | Extensions | Notes
 [poly/superscapeDo3DObject](https://discmaster.textfiles.com/search?format=superscapeDo3DObject) | Superscape Do 3D VCA | .vca | I was able to open these in Superscape VRT, but exporting to VRML didn't produce a usable result. The 'Do 3D' program doesn't work any better (also requires CD in drive)
 [poly/superScapeVR](https://discmaster.textfiles.com/search?format=superScapeVR) | SuperScape Virtual Reality | .svr | 
 [poly/swift3D3DGraphic](https://discmaster.textfiles.com/search?format=swift3D3DGraphic) | Swift 3D 3D Graphic | .txt .t3d | 
+[poly/techland3DModel](https://discmaster.textfiles.com/search?format=techland3DModel) | Techland 3D model | .3da | 
 [poly/tornado3DModel](https://discmaster.textfiles.com/search?format=tornado3DModel) | Tornado 3D model | .tor | 
 [poly/valveModelVertices](https://discmaster.textfiles.com/search?format=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.
 [poly/vertexBinary](https://discmaster.textfiles.com/search?format=vertexBinary) | Vertex Binary 3D Object | .3d | Only 5 uniques of these files are on discmaster, all samples from an Amiga app called Vertex.

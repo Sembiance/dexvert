@@ -176,6 +176,7 @@ export const WEAK_VALUES =
 	// dearkID (trailing spaces on purpose)
 	/^deark: ascii85$/,
 	/^deark: basic_c64$/,
+	/^deark: cas$/,
 	/^deark: cfb$/,
 	/^deark: dclimplode$/,
 	/^deark: degas/,
@@ -2469,6 +2470,7 @@ export const WEAK_VALUES =
 	/^Xpress Tree disk$/,
 	/^XTrkCAD parameters$/,
 	/^XYPad Drawing$/,
+	/^XyWrite Printer driver$/,
 	/^YSFlight Surface$/,
 	/^Z-Axis game data archive$/,
 	/^Zig Zag Ancient Greeks saved game$/,

@@ -8,5 +8,6 @@ export class fontasticCOM extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	magic          = ["16bit DOS Fontastic screen loader Command"];
+	weakMagic      = true;
 	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:95]`];
 }

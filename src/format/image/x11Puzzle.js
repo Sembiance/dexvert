@@ -7,4 +7,5 @@ export class x11Puzzle extends Format
 	ext        = [".cm", ".pzl"];
 	magic      = ["deark: xpuzzle"];
 	converters = ["deark[module:xpuzzle]"];
+	verify     = ({meta}) => meta.width>2 && meta.height>2;
 }

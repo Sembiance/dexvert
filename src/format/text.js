@@ -686,6 +686,7 @@ export default
 		micrografxGraphData                        : {name : "Micrografx Graph data", ext : [".dat"], magic : ["Micrografx Graph data"], weakMagic : true},
 		microHofCodeEncodedMessage                 : {name : "MicroHof Code encoded message", ext : [".cde"], magic : ["MicroHof Code encoded message"], weakMagic : true},
 		microSimPSpiceSchematic                    : {name : "MicroSim PSpice schematic", ext : [".sch"], magic : ["MicroSim PSpice schematic"], weakMagic : true},
+		microsoftBackupSettings                    : {name : "Microsoft Backup Settings", ext : [".set"], magic : ["Microsoft Backup Settings"]},
 		microsoftFrontPageServerExtensionConfig    : {name : "Microsoft Front Page Server Extension Configuration", magic : ["FrontPage _VTI_ log/info", /^fmt\/288( |$)/]},
 		microsoftIISLog                            : {name : "Microsoft IIS log", ext : [".log"], magic : ["Microsoft IIS log"], weakMagic : true},
 		microsoftMapData                           : {name : "Microsoft Map Data", ext : [".map"], magic : ["Microsoft Map Datei"], weakMagic : true},

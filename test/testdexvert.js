@@ -108,6 +108,10 @@ const FORMAT_OS_HINT =
 	{
 		"まきがめ駒○駒BY彦ぷん" : "macintoshjp"
 	},
+	"archive/macOSInstallTome" :
+	{
+		"リモートアクセス ファイル" : "macintoshjp"
+	},
 	"archive/nowCompress" :
 	{
 		"その他のモデム設定.sea" : "macintoshjp"

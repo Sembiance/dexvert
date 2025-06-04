@@ -21174,23 +21174,29 @@ a64, aas, abm, als, apd, arw, avif, avifs, avs, bie, bl1, bld, bmp, bmp24, bmz, 
 [pcx]      Zsoft Publisher's Paintbrush             pcx pcc dcx 
 [bif]      byLight                                  bif 
 
->>> na_game_tool 0.2.0  Linux https://nihav.org/game_tool.html
+>>> na_game_tool 0.2.0  (na_game_tool --list-input-formats)  Linux https://nihav.org/game_tool.html
   ace        Space Ace scenes
   acf        Time Commando ACF
   ai_cda     Alien Incident CDA
+  amf        Manic Karts AMF
   ark-an     Ark of Time animation
   ascon      Asc(ar)on animation
+  avenger    Road Avenger BIN
   avf        American Laser Games / Her Interactive Video
   avx        Jack Orlando AVX
   azmov      Azrael's Tear MOV
   bal        Baldies animation
   bd13       Brain Dead 13 scenes
+  byon-m     Castles 2 greyscale video
   ca2        Microcosm CA2
+  ccommand   Cobra Command BIN
   cda        Pray for Death CDA
+  cfo        Chewy CFO
   ci2        Arxel Tribe CI2
   cnm        Arxel Tribe CNM
   crh-de     Dark Earth CRH
   crh-nc     Nightmare Creatures CRH
+  cup        Humongous Entertainment CUP
   cyclemania Cyclemania video
   cydonia    Cydonia Paco
   defcon5    Defcon 5 video
@@ -21200,16 +21206,21 @@ a64, aas, abm, als, apd, arw, avif, avifs, avs, bie, bl1, bld, bmp, bmp24, bmz, 
   dpeg       DPEG
   drl        Thunder In Paradise DRL
   duck-uqm   TrueMotion video for 3DO version of SC2
+  egg        Independence Day EGG
   etv        Hercules ETV
   fcmp       FutureVision audio
   fla        Little Big Adventure FLA
   flh        Conquest Earth FLH
   fli        FLIC
-  fst        FutureVision audio
+  fst        FutureVision video
   guilty     Innocent Until Caught 1/2 cutscenes
   h2o        The Pandora Directive video
   haf        Death Rally HAF
   hl-fmv     Highlander cutscenes
+  hnm0       Cryo HNM0
+  hnm1       Cryo HNM1
+  hnm4       Cryo HNM4
+  imv        ICOM video
   imx        Fable video
   jam        JAM video
   jazz2      Jazz Jackrabbit 2 cutscene
@@ -21218,14 +21229,23 @@ a64, aas, abm, als, apd, arw, avif, avifs, avs, bie, bl1, bld, bmp, bmp24, bmz, 
   kdv-af     Armored Fist video
   kdv-cg     Comanche Gold video
   kdv-wc     Werewolf vs. Comanche video
+  kingpin-bin The Amazing Spider-Man vs The Kingpin cutscene
+  kmvid      Klondike Moon VID
+  koda       Sonic CD video
   lair       Dragon's Lair PC port scene
+  lms        Ecco the Dolphin LMS
   lotr-av    Lord of the Rings AV
+  m95        Interplay M95
+  maelstrom-anm Maelstrom ANM
+  mfilm      Murder FILM
   mh-fmv     Machine Hunter FMV
   mux        Infogrames MUX video
+  ninja-bin  Revenge of the Ninja BIN
   nl-fmv     Nightlong FMV (320x180)
   nl-fmv2    Nightlong FMV2 (640x360)
   nxl        The Lawnmower Man NXL
   origin-fli Origin IFF FLI
+  origin-sc  Shadowcaster cutscene
   origin-ssm System Shock movie
   paco       PACo
   ph         Total Multimedia PH video
@@ -21237,23 +21257,30 @@ a64, aas, abm, als, apd, arw, avif, avifs, avs, bie, bl1, bld, bmp, bmp24, bmz, 
   ratvid     Ratvideo
   raven-anm  Ravenloft ANM
   rbt        Sierra robot
+  reaper-fmv Reaper FMV
   rlf        Zork RLF
   sdv        Stardock video
   siff       Beam Software SIFF
+  smv        Psygnosis SMV
   soulhunt   Soul Hunt VID
+  spidy-ani  Spidy Animation v2
   talisman   Talisman animation
   tvi        Terminal Velocity video
   umv-afraid Are You Afraid of the Dark UMV
   umv-dracula Dracula Unleashed UMV
   vdo        Harrow Media VDO
+  vdx        Trilobyte VDX
   vpx1       reLINE VPX1
   vx         Actimagine VX
+  warrior-anm Savage Warriors ANM
   wingnuts   Wing Nuts game videos
   xanth      Companions of Xanth cutscenes
   yo-mxv     Yo Matias videos and music
+  yqs        Independence Day YQS
   yumimi-ablk Yumimi Mix animations (ABLK)
   yumimi-cut Yumimi Mix animations (ACUT)
   zorton     Zorton Brothers video
+
 
 
 >>> noesis 4474  win7 (.net) https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91

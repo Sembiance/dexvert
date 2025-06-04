@@ -553,6 +553,8 @@ export default
 		genesisTheThirdDayScript                   : {name : "Genesis - The Third Day Script", ext : [".scrpt"], magic : ["Genesis - The Third Day Script"], weakMagic : true},
 		genSurfMap                                 : {name : "Gen Surf map", ext : [".map"], magic : ["Gen Surf map", "Nihilistic Map"], weakMagic : true},
 		gettextPortableObject                      : {name : "Gettext Portable Object", ext : [".po"], magic : ["Gettext Portable Object", "GNU gettext message catalogue", "text/x-gettext-translation-template"], weakMagic : true},
+		genePixArrayList                           : {name : "GenePix Array List", ext : [".gal"], magic : ["GenePix Array List"]},
+		genePixResults                             : {name : "GenePix Results", ext : [".gpr"], magic : ["GenePix Results", "Biosig/Axon Text format"], weakMagic : ["Biosig/Axon Text format"]},
 		genericFeatureFormat                       : {name : "Generic Feature Format", ext : [".gff3"], magic : ["Generic Feature Format Version 3"], weakMagic : true},
 		genericPrinterDescription                  : {name : "Generic Printer Description", ext : [".gdl"], magic : ["Generic Printer Description"], weakMagic : true},
 		genscanOutputResults                       : {name : "GENSCAN output results", ext : [".genscan"], magic : ["GENSCAN output results"]},

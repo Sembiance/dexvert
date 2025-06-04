@@ -189,6 +189,7 @@ export const WEAK_VALUES =
 	/^deark: png \(CgBI\)$/,
 	/^deark: pnm/,
 	/^deark: printshop \(The Print Shop \(DAT\/NAM\)\)$/,
+	/^deark: psd$/,
 	/^deark: qdv$/,
 	/^deark: qtif$/,
 	/^deark: riff$/,

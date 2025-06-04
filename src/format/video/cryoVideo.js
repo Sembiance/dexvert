@@ -8,5 +8,5 @@ export class cryoVideo extends Format
 	magic        = [/^CRYO HNM\d video$/, "CRYO UBB video", "Cryo HNM v4 (hnm)"];
 	notes        = "FFMPEG has support for HNM4 but not other versions. Don't currently have a sample of HNM4. So the current samples DO NOT convert, but in the future with HNM4, it should.";
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:hnm]"];
+	converters   = ["na_game_tool[format:hnm4]", "na_game_tool[format:hnm1]", "na_game_tool[format:hnm40", "ffmpeg[format:hnm]"];
 }

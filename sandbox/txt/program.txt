@@ -45,6 +45,9 @@ Set to true if this program can produce an output file identical to the original
 >>> forbidChildRun = true
 Set to true if this program should never be ran again directly on the children it produces because of potential infinite loops
 
+>>> allowLargeOutput = true
+Set to true to allow this program to produce really large output files relative to input files
+
 >>> ******** Execute Properties
 >>> bin = "binary_program"
 The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("subDir/binname") to get a local dexvert/bin/*

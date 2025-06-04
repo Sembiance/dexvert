@@ -246,6 +246,7 @@ const DEXMAGIC_CHECKS =
 	"Pray for Death CDA Video"                 : [{offset : 0, match : "LSANM\x01"}],
 	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
 	"Talisman ANI"                             : [{offset : 0, match : [0x34, 0x12, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00]}, {offset : 28, match : [0x21, 0x43, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00]}],
+	"Trilobyte VDX Video"                      : [{offset : 0, match : [0x67, 0x92]}],
 	"VPX1 Video Package"                       : [{offset : 0, match : "VPX1  video interflow packing exalter"}],
 	"Zork PMV Video"                           : [{offset : 0, match : "MOVE"}, {offset : 8, match : "MHED"}],
 

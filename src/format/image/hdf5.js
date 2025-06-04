@@ -9,4 +9,5 @@ export class hdf5 extends Format
 	magic      = ["Hierarchical Data Format (version 5)", "Hierarchical Data Format 5", "application/x-hdf", /^NCSA Hierarchical Data Format 5$/, /^fmt\/807( |$)/];
 	notes      = "Only support converting to grayscale.";
 	converters = ["h5topng"];
+	verify     = ({meta}) => meta.height>1 && meta.width>1;
 }

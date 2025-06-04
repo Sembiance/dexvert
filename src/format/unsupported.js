@@ -986,7 +986,6 @@ export default
 		roxanneAnimation              : {name : "Roxanne animation", ext : [".rox"], magic : ["Roxanne animation"]},
 		screenCamVideo                : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video", "Lotus Screen Cam Datei", /^fmt\/1938( |$)/], website : "https://wiki.multimedia.cx/index.php/SCM"},
 		stngAFinalUnityFMVCutscene    : {name : "STNG 'A Final Unity' Fullmotion Video cutscene", ext : [".fvf"], magic : ["STNG 'A Final Unity' Fullmotion Video cutscene File"], weakMagic : true},
-		surfaceTensionGameVideo       : {name : "Surface Tension game video", ext : [".vid"], magic : ["Surface Tension game video"], weakMagic : true},
 		toonBoomStudioAnimation       : {name : "Toon Boom Studio animation", ext : [".tbd", ".tbp"], magic : ["Toon Boom Studio animation"], weakMagic : true},
 		vis5DDatasetObject            : {name : "Vis5D dataset object", ext : [".v5d"], magic : ["Vis5D dataset object"], weakMagic : true},
 		webExRecording                : {name : "WebEx Recording", ext : [".wrf", ".wot"], magic : ["WebEx Recording"], weakMagic : true}

@@ -1,6 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add librempeg support: https://github.com/librempeg/librempeg
+  It is a fork of ffmpeg but has a lot of different format support available and has been recommended a few times.
+
+* Get the install shield self-extractor reverse engineered and an extractor written for it
+  After, I can re-enable magic in installShieldSelfExtractor and have converters just include only the new extractor
+  I can also delete the wine/base-exclusive directory and move wineSelfExtractor to sandbox/legacy/program/
+
 * Other 'installer icons' that I can look into supporting:
 	http://discmaster.textfiles.com/browse/9331/The%20Best%20of%20TUCOWS%20Volume%202.iso/files/onmeten.zip/Setup.exe
 	https://discmaster.textfiles.com/search?b3sum=753284e7240127076dd0f173ef940ae517ac539ba07f6f22a5c554ba8cf37c58

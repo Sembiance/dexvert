@@ -1,12 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add librempeg support: https://github.com/librempeg/librempeg
-  It is a fork of ffmpeg but has a lot of different format support available and has been recommended a few times.
-
-* Get the install shield self-extractor reverse engineered and an extractor written for it
+* Write up brief for reverse engineering the installshield self extractor programs found in ~/tmp/installShield_Self_Extractors
+  Then contact my dude on upwork and see if he is up for taking on this challenge
   After, I can re-enable magic in installShieldSelfExtractor and have converters just include only the new extractor
   I can also delete the wine/base-exclusive directory and move wineSelfExtractor to sandbox/legacy/program/
+
+* Add librempeg support: https://github.com/librempeg/librempeg
+  It is a fork of ffmpeg but has a lot of different format support available and has been recommended a few times.
 
 * Other 'installer icons' that I can look into supporting:
 	http://discmaster.textfiles.com/browse/9331/The%20Best%20of%20TUCOWS%20Volume%202.iso/files/onmeten.zip/Setup.exe
@@ -15,10 +16,6 @@
 * If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
-
-* See if I can 'detect' this self-extracting installshield EXEs: https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
-  For example, this and the other one have the string: InstallShield Self-Extracting Stub Program
-  Then see how to extract it. Maybe just run, with wine or something, but maybe not...
 
 
 /---------------\

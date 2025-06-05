@@ -1685,7 +1685,6 @@ export default
 		iffSDBG                            : {name : "Amiga IFF Debug File", ext : [".debug"], magic : ["IFF SDBG file"]},
 		installShieldUninstallScript       : {name : "InstallShield Uninstall Script", ext : [".isu"], magic : ["InstallShield Uninstall Script", "installShield Uninstall Datei"]},
 		intellCOFFObject                   : {name : "Intel Common Object File Format Object", ext : [".obj"], magic : [/^Intel .*Common Object File Format (COFF) object/, /^Intel .*COFF object file/], weakMagic : [/^Intel .*COFF object file/]},
-		javaClass                          : {name : "Java Class File", ext : [".class"], magic : ["Java Compiled Object Code", "compiled Java class data", "Java bytecode", "Format: Java Class File", "Kompilierter Java Bytecode", "application/x-java", /^x-fmt\/415( |$)/], weakMagic : ["Kompilierter Java Bytecode"]},
 		javaRuntimeCurrencyData            : {name : "Java runtime Currency Data", ext : [".data"], magic : ["Java runtime Currency Data"]},
 		jniLibrary                         : {name : "JNI Library", ext : [".jnilib"], magic : ["JNI Library"], weakMagic : true},
 		kickPascalUnitInterface            : {name : "KICK-Pascal Unit Interface", ext : [".u"], magic : ["KICK-Pascal Unit Interface"]},

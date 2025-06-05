@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,648)
+# Unsupported File Formats (3,647)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1140,7 +1140,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,417)
+## Other (2,416)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2203,7 +2203,6 @@ Family/Format | Name | Extensions | Notes
 [other/ispellHashFile](https://discmaster.textfiles.com/search?format=ispellHashFile) | ispell hash file | .dic | 
 [other/ivsFledermausTDRFile](https://discmaster.textfiles.com/search?format=ivsFledermausTDRFile) | IVS Fledermaus TDR file |  | 
 [other/javaAppletCacheIndex](https://discmaster.textfiles.com/search?format=javaAppletCacheIndex) | Java Applet cache index | .idx | 
-[other/javaClass](https://discmaster.textfiles.com/search?format=javaClass) | Java Class File | .class | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/javaClass/)
 [other/javaRuntimeCurrencyData](https://discmaster.textfiles.com/search?format=javaRuntimeCurrencyData) | Java runtime Currency Data | .data | 
 [other/javelinConfiguration](https://discmaster.textfiles.com/search?format=javelinConfiguration) | Javelin Configuration | .cfg | 
 [other/javelinCountryDriver](https://discmaster.textfiles.com/search?format=javelinCountryDriver) | Javelin Country Driver | .cdv | 

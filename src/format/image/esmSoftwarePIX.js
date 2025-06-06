@@ -7,5 +7,5 @@ export class esmSoftwarePIX extends Format
 	ext            = [".pix"];
 	forbidExtMatch = [".pix"];
 	magic          = ["Esm Software PIX bitmap", "deark: esm_pix"];
-	converters     = ["deark[module:esm_pix]", "nconvert"];
+	converters     = ["deark[module:esm_pix]"];
 }

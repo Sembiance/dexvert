@@ -6,5 +6,5 @@ export class dap extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SlideShow_for_VBXE";
 	ext        = [".dap"];
 	fileSize   = 77568;
-	converters = ["recoil2png", "nconvert"];
+	converters = ["recoil2png"];
 }

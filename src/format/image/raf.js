@@ -8,5 +8,5 @@ export class raf extends Format
 	magic        = ["Fujifilm Raw image", "Fujifilm RAF raw image data", "image/x-fuji-raf", /^fmt\/642( |$)/];
 	mimeType     = "image/x-fuji-raf";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`];
 }

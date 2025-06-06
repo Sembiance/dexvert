@@ -10,6 +10,6 @@ export class pictureIt extends Format
 	ext            = [".mix"];
 	forbidExtMatch = true;
 	magic          = _PICTUREIT_MAGIC;
-	converters     = ["photoDraw", "deark[module:cfb]", "nconvert"];
+	converters     = ["photoDraw", "deark[module:cfb]"];
 	notes          = "Only thumbnail extraction is supported.";
 }

@@ -9,5 +9,5 @@ export class doodleC64 extends Format
 	priority       = this.PRIORITY.LOW;
 	fileSize       = {".dd" : [9218, 9026, 9346]};
 	matchFileSize  = true;
-	converters     = ["recoil2png", "nconvert"];
+	converters     = ["recoil2png", "nconvert[matchType:magic]"];
 }

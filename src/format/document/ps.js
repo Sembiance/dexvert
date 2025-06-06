@@ -17,5 +17,5 @@ export class ps extends Format
 	magic          = _PS_MAGIC;
 	forbiddenMagic = _EPS_MAGIC;
 	forbiddenExt   = _EPS_EXT.subtractAll(_PS_EXT);
-	converters     = ["ps2pdf"];	//, "inkscape", "uniconvertor", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters     = ["ps2pdf"];	//, "inkscape", "uniconvertor", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:ps]"];
 }

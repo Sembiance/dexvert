@@ -20,6 +20,6 @@ export class dds extends Format
 		"noesis[type:image]",
 
 		// convert and nconvert sometimes produce an invalid image, but convert usually does better overall than the rest and gets the abydos test image better than iconvert does
-		"convert", "iconvert", "nconvert", "gimp"
+		"convert", "iconvert", "nconvert[format:dds]", "gimp"
 	];
 }

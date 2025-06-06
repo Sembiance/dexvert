@@ -5,6 +5,6 @@ export class gimpBrush extends Format
 	name       = "GIMP Brush";
 	website    = "http://fileformats.archiveteam.org/wiki/GIMP_Brush";
 	ext        = [".gbr", ".gpb"];
-	magic      = ["GIMP Brush", "GIMP brush data", "image/x-gimp-gbr"];
-	converters = ["gimp", "nconvert"];
+	magic      = ["GIMP Brush", "GIMP brush data", "image/x-gimp-gbr", "Gimp Brush :gbr:"];
+	converters = ["gimp", "nconvert[format:gbr]"];
 }

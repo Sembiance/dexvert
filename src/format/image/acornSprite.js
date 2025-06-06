@@ -7,6 +7,6 @@ export class acornSprite extends Format
 	ext        = [".acorn"];
 	magic      = ["deark: rosprite", "GLS_BINARY_LSB_FIRST", "GLS_BINARY_MSB_FIRST"];
 	priority   = this.PRIORITY.LOW;
-	converters = ["deark[module:rosprite]", "nconvert"];
+	converters = ["deark[module:rosprite]"];
 	verify     = ({meta}) => meta.height>3 && meta.width>3;
 }

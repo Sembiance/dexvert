@@ -6,5 +6,5 @@ export class nokiaStartupLogo extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Nokia_Startup_Logo";
 	ext        = [".nsl"];
 	magic      = ["Nokia Startup Logo Editor bitmap", "deark: nsl"];
-	converters = ["deark[module:nsl]", "nconvert"];
+	converters = ["deark[module:nsl]"];
 }

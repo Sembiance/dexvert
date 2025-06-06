@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _XBM_MAGIC = ["X Bitmap", "xbm image", "piped xbm sequence (xbm_pipe)", /^x-fmt\/(207|299)( |$)/];
+const _XBM_MAGIC = ["X Bitmap", "xbm image", "piped xbm sequence (xbm_pipe)", "X BitMap :xbm:", /^x-fmt\/(207|299)( |$)/];
 export {_XBM_MAGIC};
 
 export class xbm extends Format
@@ -14,7 +14,7 @@ export class xbm extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"wuimg",	// only one that handles 3270.icon and iv.X correctly
-		"convert", "gimp", "nconvert[matchType:magic]", "imconv[format:xbm][matchType:magic]",
+		"convert", "gimp", "nconvert[format:xbm][matchType:magic]", "imconv[format:xbm][matchType:magic]",
 		"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
 }

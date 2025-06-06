@@ -7,5 +7,5 @@ export class gemViewDither extends Format
 	ext        = [".dit"];
 	fileSize   = 266;
 	magic      = ["GEM-View Dither"];
-	converters = ["wuimg[matchType:magic]", "nconvert"];
+	converters = ["wuimg[matchType:magic]"];
 }

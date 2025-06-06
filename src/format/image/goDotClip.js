@@ -5,6 +5,6 @@ export class goDotClip extends Format
 	name           = "GoDot Clip Image";
 	ext            = [".clp"];
 	forbidExtMatch = [".clp"];
-	magic          = ["GoDot Clip"];
-	converters     = ["nconvert", "recoil2png", "view64"];
+	magic          = ["GoDot Clip", "GoDot clip :god:"];
+	converters     = ["nconvert[format:god]", "recoil2png", "view64"];
 }

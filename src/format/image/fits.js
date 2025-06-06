@@ -6,7 +6,7 @@ export class fits extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System";
 	ext        = [".fit", ".fits", ".fts", ".fz"];
 	mimeType   = "image/fits";
-	magic      = ["Flexible Image Transport System", "FITS image data", "application/fits", /^x-fmt\/383( |$)/];
+	magic      = ["Flexible Image Transport System", "FITS image data", "application/fits", "Flexible Image Transport System :fits:",  /^x-fmt\/383( |$)/];
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="FITS" && macFileCreator==="VIST";
-	converters = ["nconvert", "iconvert", "gimp"];
+	converters = ["nconvert[format:fits]", "iconvert", "gimp"];
 }

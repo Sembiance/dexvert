@@ -8,5 +8,5 @@ export class orf extends Format
 	magic        = ["Olympus RAW", "Olympus ORF raw image data", "Olympus digital camera RAW image", "image/x-olympus-orf", "deark: tiff (Olympus RAW)", /^fmt\/668( |$)/];
 	mimeType     = "image/x-olympus-orf";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`];
 }

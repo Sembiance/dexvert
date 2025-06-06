@@ -8,5 +8,5 @@ export class crw extends Format
 	magic        = ["Canon CIFF raw image data", "Canon RAW format", "image/x-canon-crw", /^fmt\/593( |$)/];
 	mimeType     = "image/x-canon-crw";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`];
 }

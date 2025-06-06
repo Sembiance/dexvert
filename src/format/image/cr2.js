@@ -8,5 +8,5 @@ export class cr2 extends Format
 	magic        = ["Canon RAW 2 format", "Canon CR2 raw image data", /^fmt\/592( |$)/];
 	mimeType     = "image/x-canon-cr2";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`];
 }

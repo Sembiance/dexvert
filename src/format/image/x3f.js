@@ -8,5 +8,5 @@ export class x3f extends Format
 	magic        = ["Sigma RAW Image", "Foveon X3F raw image data", "Sigma - Foveon X3 raw picture", "image/x-sigma-x3f", /^fmt\/661( |$)/];
 	mimeType     = "image/x-sigma-x3f";
 	metaProvider = ["image"];
-	converters   = ["dcraw", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["dcraw", "convert", `abydosconvert[format:${this.mimeType}]`];
 }

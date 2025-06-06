@@ -9,5 +9,5 @@ export class photoDraw extends Format
 	forbidExtMatch = true;
 	magic          = ["Microsoft PhotoDraw drawing", /^fmt\/594( |$)/];
 	forbiddenMagic = _PICTUREIT_MAGIC;
-	converters     = ["photoDraw", "deark[module:cfb]", "nconvert"];	// deark and nconvert only handle thumbnail extraction
+	converters     = ["photoDraw", "deark[module:cfb]"];	// deark only handles thumbnail extraction
 }

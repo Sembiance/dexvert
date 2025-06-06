@@ -8,5 +8,5 @@ export class jng extends Format
 	mimeType     = "image/x-jng";
 	magic        = ["JPEG Network Graphics", "JNG video data", /^fmt\/529( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
+	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`];
 }

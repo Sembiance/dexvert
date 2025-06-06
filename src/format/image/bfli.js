@@ -5,7 +5,7 @@ export class bfli extends Format
 	name       = "Big Flexible Line Interpretation";
 	website    = "http://fileformats.archiveteam.org/wiki/BFLI";
 	ext        = [".bfli"];
-	magic      = ["Big Flexible Line Interpretation bitmap"];
+	magic      = ["Big Flexible Line Interpretation bitmap", "BFLI :bfli:"];
 	fileSize   = 33795;
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "nconvert[format:bfli]"];
 }

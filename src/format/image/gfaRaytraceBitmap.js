@@ -6,6 +6,6 @@ export class gfaRaytraceBitmap extends Format
 	website        = "https://www.atari-wiki.com/index.php?title=GFA_Raytrace_file_format";
 	ext            = [".sul", ".scl", ".suh", ".sch"];
 	forbidExtMatch = true;
-	magic          = [/^GFA Raytrace .*image .*bitmap$/];
+	magic          = [/^GFA Raytrace .*image .*bitmap$/, "Gfa Raytrace :gfaray:"];
 	converters     = ["wuimg", "nconvertWine"];
 }

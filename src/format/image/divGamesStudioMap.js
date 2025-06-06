@@ -6,6 +6,6 @@ export class divGamesStudioMap extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DIV_Games_Studio";
 	ext            = [".map"];
 	forbidExtMatch = true;
-	magic          = ["DIV Games Studio Map", "deark: div_map (DIV MAP)"];
-	converters     = ["deark[module:div_map]"];
+	magic          = ["DIV Games Studio Map", "deark: div_map (DIV MAP)", "DIV Game Studio Map :map:"];
+	converters     = ["deark[module:div_map]", "nconvert[format:map]"];
 }

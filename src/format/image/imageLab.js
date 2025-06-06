@@ -6,6 +6,6 @@ export class imageLab extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic";
 	ext        = [".b_w", ".b&w"];
 	mimeType   = "image/x-imagelab";
-	magic      = ["ImageLab bitmap"];
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`];
+	magic      = ["ImageLab bitmap", "ImageLab :ilab:"];
+	converters = ["nconvert[format:ilab]", `abydosconvert[format:${this.mimeType}]`];
 }

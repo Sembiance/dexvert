@@ -6,7 +6,7 @@ export class synu extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Synu";
 	ext            = [".synu", ".syn"];
 	forbidExtMatch = true;
-	magic          = ["Synu bitmap"];
+	magic          = ["Synu bitmap", "Synthetic Universe :synu:"];
 	weakMagic      = true;
-	converters     = ["imconv[format:synu]", "nconvert"];
+	converters     = ["imconv[format:synu]", "nconvert[format:synu]"];
 }

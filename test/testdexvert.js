@@ -123,6 +123,7 @@ const FORMAT_OS_HINT =
 	"archive/sit" :
 	{
 		"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp",
+		"SoundJam™ MP 1.1.1.sea"            : "macintoshjp",
 		"StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ"      : "macintoshjp",
 		"TelBan120.sit"                     : "macintoshjp"
 	},

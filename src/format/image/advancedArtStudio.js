@@ -6,6 +6,7 @@ export class advancedArtStudio extends Format
 	website       = "http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio";
 	ext           = [".ocp", ".scr", ".win", ".pal"];
 	fileSize      = {".ocp" : 10018};
+	magic         = ["Advanced Art Studio :ocp:"];
 	matchFileSize = true;
 	auxFiles = (input, otherFiles, otherDirs, {fileSizeMatchExt}) =>
 	{
@@ -25,5 +26,5 @@ export class advancedArtStudio extends Format
 
 	untouched       = ({f}) => f.input.ext.toLowerCase()===".pal";
 	verifyUntouched = false;
-	converters      = ["recoil2png", "wuimg[hasExtMatch]"];
+	converters      = ["recoil2png", "wuimg[hasExtMatch]", "nconvert[format:ocp]"];
 }

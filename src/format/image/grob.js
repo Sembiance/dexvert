@@ -5,6 +5,9 @@ export class grob extends Format
 	name       = "GROB Image";
 	website    = "http://fileformats.archiveteam.org/wiki/GROB";
 	ext        = [".grb", ".gro"];
-	magic      = ["HP 48 binary - Rev D (GROB)", "HP-48 Graphic Object Bitmap", "HP-49 Graphic Object Bitmap", "HP 49 binary - Rev X (GROB)", "HP ASII GROB bitmap", "HP 49 binary (GROB)", "HP 49 series binary transfer data", "deark: grob"];
-	converters = ["nconvert", "deark[module:grob]", "recoil2png", "imageAlchemy"];
+	magic      = [
+		"HP 48 binary - Rev D (GROB)", "HP-48 Graphic Object Bitmap", "HP-49 Graphic Object Bitmap", "HP 49 binary - Rev X (GROB)", "HP ASII GROB bitmap", "HP 49 binary (GROB)", "HP 49 series binary transfer data", "deark: grob",
+		/^HP.* Grob.* Bitmap file :grob:$/
+	];
+	converters = ["nconvert[format:grob]", "deark[module:grob]", "recoil2png", "imageAlchemy"];
 }

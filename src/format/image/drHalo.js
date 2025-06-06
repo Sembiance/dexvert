@@ -5,7 +5,7 @@ export class drHalo extends Format
 	name           = "Dr. Halo";
 	website        = "http://fileformats.archiveteam.org/wiki/Dr._Halo";
 	ext            = [".cut", ".pal", ".pic"];
-	magic          = ["Dr. Halo device dependent bitmap", "Dr. Halo Palette", "deark: drhalo", /^fmt\/1186( |$)/];
+	magic          = ["Dr. Halo device dependent bitmap", "Dr. Halo Palette", "deark: drhalo", "Dr Halo :cut:", /^fmt\/1186( |$)/];
 	idMeta         = ({macFileType}) => macFileType==="Halo";
 	forbidExtMatch = [".pal", ".pic"];
 	mimeType       = "application/dr-halo";
@@ -26,7 +26,7 @@ export class drHalo extends Format
 
 	converters   = dexState => [
 		`deark[module:drhalocut]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`, `deark[module:drhalopic]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`,
-		"convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress[matchType:magic]", "pv[matchType:magic]"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
+		"nconvert[format:cut]", "convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress[matchType:magic]", "pv[matchType:magic]"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
 	metaProvider = ["image"];
 	weakMagic    = true;
 

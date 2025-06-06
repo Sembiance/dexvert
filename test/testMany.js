@@ -60,7 +60,7 @@ const SLOW_FORMATS =
 
 	// executable
 	"executable/dll" : 1,
-	"executable/exe" : 1,
+	"executable/exe" : 2,
 
 	// font
 	"font/amigaBitmapFont"        : 1,

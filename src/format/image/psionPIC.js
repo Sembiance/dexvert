@@ -6,6 +6,6 @@ export class psionPIC extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Psion_PIC";
 	ext        = [".pic", ".icn"];
 	weakExt    = [".pic", ".icn"];
-	magic      = ["Psion Serie 3 bitmap", "deark: psionpic", /^fmt\/1744( |$)/];
-	converters = ["deark[module:psionpic][matchType:magic]", "recoil2png", "nconvert[matchType:magic]"];
+	magic      = ["Psion Serie 3 bitmap", "deark: psionpic", "Psion Series 3 Bitmap file :psion3:", /^fmt\/1744( |$)/];
+	converters = ["deark[module:psionpic][matchType:magic]", "recoil2png", "nconvert[format:psion3][matchType:magic]"];
 }

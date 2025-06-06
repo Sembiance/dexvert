@@ -6,6 +6,6 @@ export class interleafImage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Interleaf_image";
 	ext            = [".iimg", ".img"];
 	forbidExtMatch = [".img"];
-	magic          = ["Interleaf image", "Interleaf Image"];
-	converters     = ["leaftoppm"];
+	magic          = ["Interleaf image", "Interleaf Image", "Interleaf :iimg:"];
+	converters     = ["leaftoppm", "nconvert[format:iimg]"];
 }

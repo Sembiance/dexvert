@@ -8,5 +8,5 @@ export class pentaxRaw extends Format
 	magic        = ["Pentax RAW image", /^fmt\/1781( |$)/];
 	mimeType     = "image/x-pentax-pef";
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[matchType:magic]"];
+	converters   = ["darktable_cli", "convert[format:pef]", `abydosconvert[format:${this.mimeType}]`, "nconvert[matchType:magic]"];
 }

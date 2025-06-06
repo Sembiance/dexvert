@@ -25,5 +25,5 @@ export class ani extends Format
 		// Assume an NTSC 60Hz display, that's a 16.66ms minimum delay (+1) between frames
 		return {fps : xu.SECOND/(16.66*(displayRate+1))};
 	};
-	converters = dexState => [`deark -> convert -> *ffmpeg[fps:${dexState.meta.fps || 8}][outType:gif]`];
+	converters = dexState => [`deark[module:riff] -> convert -> *ffmpeg[fps:${dexState.meta.fps || 8}][outType:gif]`, `nconvert[format:ani][extractAll] -> *ffmpeg[fps:${dexState.meta.fps || 8}][outType:gif]`, "nconvert[format:ani]"];
 }

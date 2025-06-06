@@ -5,7 +5,7 @@ export class psd extends Format
 {
 	name           = "Adobe Photoshop";
 	website        = "http://fileformats.archiveteam.org/wiki/PSD";
-	magic          = [/^Adobe Photoshop [Ii]mage/, /^Adobe Photoshop$/, "Photoshop Bild", "image/vnd.adobe.photoshop", "piped psd sequence (psd_pipe)", "deark: psd (PSD)", /^x-fmt\/92( |$)/];
+	magic          = [/^Adobe Photoshop [Ii]mage/, /^Adobe Photoshop$/, "Photoshop Bild", "image/vnd.adobe.photoshop", "piped psd sequence (psd_pipe)", "deark: psd (PSD)", "Adobe Photoshop Document :psd:", /^x-fmt\/92( |$)/];
 	idMeta         = ({macFileType}) => macFileType==="8BPS";
 	forbiddenMagic = _MACBINARY_MAGIC;
 	ext            = [".psd"];
@@ -15,7 +15,7 @@ export class psd extends Format
 	// I made the decision to just use regular convert, which will extract ALL layers from the PSD.
 	// I could in theory just extract the 'main' image by doing: ensuring convert calls with `${filePath}[0]`
 	converters = [
-		"convert", "iio2png", "gimp", "deark[module:psd]", "iconvert",
+		"convert", "iio2png", "gimp", "deark[module:psd]", "iconvert", "nconvert[format:psd]",
 		"paintDotNet",
 		"hiJaakExpress", "corelPhotoPaint", "photoDraw", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "picturePublisher"];
 }

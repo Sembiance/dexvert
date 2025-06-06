@@ -7,8 +7,8 @@ export class mtv extends Format
 	ext            = [".mtv", ".pic"];
 	forbidExtMatch = [".pic"];
 	mimeType       = "image/x-mtv";
-	magic          = ["zlib compressed data"];
+	magic          = ["zlib compressed data", "MTV / Rayshade :mtv:"];
 	weakMagic      = true;
 	metaProvider   = ["image"];
-	converters     = ["convert", "nconvert", "wuimg", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
+	converters     = ["convert", "nconvert[format:mtv]", "wuimg", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
 }

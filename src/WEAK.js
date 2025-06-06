@@ -178,6 +178,8 @@ export const WEAK_VALUES =
 	/^deark: basic_c64$/,
 	/^deark: cas$/,
 	/^deark: cfb$/,
+	/^deark: crlzh$/,
+	/^deark: crunch$/,
 	/^deark: dclimplode$/,
 	/^deark: degas/,
 	/^deark: exe /,
@@ -316,6 +318,8 @@ export const WEAK_VALUES =
 	/^VPlayer subtitles \(vplayer\)$/,
 
 	// librempegprobeID
+	/^DAT \(Digital Audio Tape\) \(dat\)$/,
+	/^Electronic Arts Layer 3 \(ealayer3\)$/,
 	/^QuickTime \/ MacBinary \(macbinary\)$/,
 	/^tri-Ace PS2 \(tac\)$/,
 
@@ -394,6 +398,22 @@ export const WEAK_VALUES =
 	/^Split file$/,
 	/^StuffIt split file$/,
 	/^Tar$/,
+
+	// nconvertID
+	/^Amiga icon :info:$/,
+	/^Astronomical Image Processing :aip:$/,
+	/^Dali \((Low|Medium|High) Resolution\) :dali:/,
+	/^Datacopy :dcpy:$/,
+	/^FLI movie :fli:$/,
+	/^GigaPaint Multi :gig:$/,
+	/^Hayes JTFax :jtf:$/,
+	/^Image Speeder :ish:$/,
+	/^Jovian VI :vi:$/,
+	/^JPEG based file :pmp:$/,
+	/^LaserData :lda:$/,
+	/^MGI Photosuite Project :pzp:$/,
+	/^NewsRoom :nsr:$/,
+	/^RIPTerm Image :ript:$/,
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,

@@ -147,6 +147,7 @@ export default
 		// Programming //
 		/////////////////
 		actorLibraryDefinitionLanguage           : {name : "Actor Library Definition Language", ext : [".ldl"], magic : ["Actor Library Definition Language"], weakMagic : true},
+		acuCorpAcuCOBOLLicense                   : {name : "AcuCorp AcuCOBOL license", ext : [".alc"], magic : ["AcuCorp AcuCOBOL license"]},
 		adobeIllustratorAction                   : {name : "Adobe Illustrator Action", ext : [".aia"], magic : ["Adobe Illustrator Action"]},
 		amigaDOSScript                           : {name : "AmigaDOS Script File", website : "https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/", magic : ["AmigaDOS script"]},
 		amigaFunctionDescription                 : {name : "Amiga Function Description", ext : [".fd"], magic : ["Amiga Function Description"], weakMagic : true},

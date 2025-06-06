@@ -5,8 +5,9 @@ export class hiEddi extends Format
 	name          = "Hi-Eddi";
 	website       = "http://fileformats.archiveteam.org/wiki/Hi-Eddi";
 	ext           = [".hed"];
+	magic         = ["Hi-Eddi :hed:"];
 	mimeType      = "image/x-hi-eddi";
 	fileSize      = 9218;
 	matchFileSize = true;
-	converters    = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "view64", "tomsViewer"];
+	converters    = ["nconvert[format:hed]", `abydosconvert[format:${this.mimeType}]`, "view64", "tomsViewer"];
 }

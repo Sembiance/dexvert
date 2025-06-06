@@ -6,7 +6,7 @@ export class drazPaint extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Drazpaint";
 	ext        = [".drz", ".drp"];
 	mimeType   = "image/x-draz-paint";
-	magic      = ["Drazpaint"];
+	magic      = ["Drazpaint", "Draz Paint :drz:"];
 	weakMagic  = true;
-	converters = ["nconvert", "recoil2png[matchType:magic]", `abydosconvert[format:${this.mimeType}]`, "view64[matchType:magic]"];
+	converters = ["nconvert[format:drz]", "recoil2png[matchType:magic]", `abydosconvert[format:${this.mimeType}]`, "view64[matchType:magic]"];
 }

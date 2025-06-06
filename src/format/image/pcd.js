@@ -6,11 +6,11 @@ export class pcd extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Photo_CD";
 	ext        = [".pcd"];
 	mimeType   = "image/x-photo-cd";
-	magic      = [/Kodak Photo CD [Ii]mage/, "Kodak PhotoCD bitmap", /^Kodak Photo CD [Oo]verview [Pp]ack/, "piped photocd sequence (photocd_pipe)", /^fmt\/211( |$)/];
+	magic      = [/Kodak Photo CD [Ii]mage/, "Kodak PhotoCD bitmap", /^Kodak Photo CD [Oo]verview [Pp]ack/, "piped photocd sequence (photocd_pipe)", "Kodak Photo CD :pcd:", /^fmt\/211( |$)/];
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="PCDI" && ["aMOS", "PCDv"].includes(macFileCreator);
 	// Used to have a metaProvider from convert, but oh boy is it unreliable at determining the width x height: http://discmaster.textfiles.com/view/731/PCD1235.BIN/photo_cd/images/img0067.pcd
 	converters = [
-		"pcdtojpeg", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert",
+		"pcdtojpeg", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:pcd]",
 		
 		...["hiJaakExpress", "picturePublisher", "corelPhotoPaint", "photoDraw", "canvas", "tomsViewer", "corelDRAW", "pv"].map(v => `${v}[matchType:magic]`)
 	];

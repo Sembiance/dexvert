@@ -10,6 +10,7 @@ export class pict extends Format
 	mimeType       = "image/pict";
 	magic          = [
 		"QuickDraw/PICT", "Macintosh Quickdraw/PICT", "Claris clip art", "Claris CAD drawing", "Macintosh Pict image (MacBinary)", "Mac PICT bitmap", "image/x-pict", "piped qdraw sequence (qdraw_pipe)", "deark: pict (PICT v",
+		/^Macintosh PICT (2 )?(\((DirectBits )?(Bitmap|Pixmap)\) )?:pict:$/,
 		/^Macintosh QuickDraw PICT/, /^fmt\/341( |$)/, /^x-fmt\/80( |$)/
 	];
 	idMeta         = ({macFileType}) => macFileType==="PICT";
@@ -71,7 +72,7 @@ export class pict extends Format
 
 		r.push(
 			"tomsViewer[matchType:magic]",		// For some PICTS will only produce the 'thumbnail' (samples 35, 039 and 06). For these files, corelPhotoPaint produces a full image so this converter is tried after that one
-			"nconvert",	// nconvert produces just a black image PICT v2 format picts: p#.pic
+			"nconvert[format:pict]",	// nconvert produces just a black image PICT v2 format picts: p#.pic
 			"convert"	// convert has a habit of just producing a black square
 		);
 		return r;

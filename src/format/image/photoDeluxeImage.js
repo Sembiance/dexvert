@@ -7,7 +7,7 @@ export class photoDeluxeImage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/PhotoDeluxe";
 	ext            = [".pdd"];
 	forbidExtMatch = true;
-	magic          = ["Adobe Photoshop Elements (PhotoDeluxe) image", /^Adobe Photoshop Image \(PhotoDeluxe\)/];
+	magic          = ["Adobe Photoshop Elements (PhotoDeluxe) image", /^Adobe Photoshop Image \(PhotoDeluxe\)/, "Adobe Photoshop Document :pdd:"];
 	metaProvider   = ["image"];
 	converters     = ["gimp", "iio2png", "convert"];
 }

@@ -6,7 +6,7 @@ export class tga extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/TGA";
 	ext          = [".tga", ".targa", ".tpic", ".icb", ".vda", ".vst"];
 	mimeType     = "image/x-tga";
-	magic        = ["Truevision TGA", "Targa image data", "image/x-tga", "deark: tga (TGA)", /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
+	magic        = ["Truevision TGA", "Targa image data", "image/x-tga", "deark: tga (TGA)", /^Truevision TARGA \(Type \d+\) :tga:$/, /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="TPIC" && ["8BIM", "GKON", "ogle", "xRes"].includes(macFileCreator)) || (macFileType==="TARG" && macFileCreator==="GKON");
 	metaProvider = ["image"];
 	
@@ -19,7 +19,7 @@ export class tga extends Format
 		"deark[module:tga][matchType:magic][opt:tga:trans=0]", "deark[module:tga][matchType:magic][hasExtMatch][opt:tga:trans=0]", "wuimg", "imconv[format:tga][matchType:magic]", "iconvert",
 		"imageAlchemy", "paintDotNet[hasExtMatch]",
 		"keyViewPro", "corelDRAW[hasExtMatch]", "pv", "photoDraw",
-		"nconvert", "recoil2png", "gimp", "iio2png",
+		"nconvert[format:tga]", "recoil2png", "gimp", "iio2png",
 		"noesis[type:image][matchType:magic]", "hiJaakExpress[hasExtMatch]", "corelPhotoPaint[hasExtMatch]", "canvas5[hasExtMatch]", "canvas[hasExtMatch]"
 	].map(converter => (["deark", "recoil2png", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
 	// many converters will produce garbage with weak TGA magics. deark too, but if we have an extension+magic match, make an exception. recoil2png and iio2png seem to be pretty strict, so allow those as-is

@@ -5,5 +5,6 @@ export class quakeTexture extends Format
 	name       = "Quake Texture";
 	website    = "http://fileformats.archiveteam.org/wiki/Quake_2_Texture";
 	ext        = [".wal"];
-	converters = ["nconvert", "noesis[type:image]", "irfanView"];
+	magic      = ["Quake Texture :wal:"];
+	converters = ["nconvert[format:wal]", "noesis[type:image]", "irfanView"];
 }

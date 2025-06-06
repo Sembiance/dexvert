@@ -6,7 +6,7 @@ export class interpaint extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Interpaint";
 	ext            = [".iph", ".ipt", ".lre", ".hre"];
 	forbidExtMatch = true;
-	magic          = ["Interpaint bitmap"];
+	magic          = ["Interpaint bitmap", "Interpaint (Hires) :ciph:", "InterPaint Multicolor :cipt:"];
 	weakMagic      = true;
-	converters     = ["recoil2png", "nconvert", "view64"];
+	converters     = ["recoil2png", "nconvert[format:ciph]", "nconvert[format:cipt]", "view64"];
 }

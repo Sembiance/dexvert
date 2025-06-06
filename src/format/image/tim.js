@@ -5,8 +5,12 @@ export class tim extends Format
 	name         = "PlayStation TIM";
 	website      = "http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)";
 	ext          = [".tim"];
-	magic        = ["TIM image", "PSX TIM", "deark: tim"];
+	magic        = ["TIM image", "PSX TIM", "deark: tim", "TIM PSX :tim:"];
 	weakMagic    = ["TIM image", "PSX TIM"];
 	metaProvider = ["image"];
-	converters   = ["convert", "deark[module:tim]", "wuimg", "paintDotNet", "noesis[type:image]", "recoil2png"];
+	converters   = [
+		"convert", "deark[module:tim]", "wuimg", "nconvert[format:tim]",
+		"paintDotNet", "noesis[type:image]",
+		"recoil2png"
+	];
 }

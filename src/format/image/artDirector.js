@@ -5,6 +5,7 @@ export class artDirector extends Format
 	name       = "Art Director";
 	website    = "http://fileformats.archiveteam.org/wiki/Art_Director";
 	ext        = [".art"];
+	magic      = ["Art Director :artdir:"];
 	fileSize   = 32512;
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "nconvert[format:artdir]"];
 }

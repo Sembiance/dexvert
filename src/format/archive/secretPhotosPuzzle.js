@@ -6,7 +6,7 @@ export class secretPhotosPuzzle extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Secret_Photos_puzzle";
 	ext            = [".xp0"];
 	forbidExtMatch = true;
-	magic          = ["Secret Photos puzzle"];
+	magic          = ["Secret Photos puzzle", "SecretPhotos puzzle :xp0:"];
 	weakMagic      = true;
-	converters     = ["foremost"];
+	converters     = ["foremost", "nconvert[format:xp0][extractAll]"];
 }

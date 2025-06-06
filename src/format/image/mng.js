@@ -6,7 +6,7 @@ export class mng extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/MNG";
 	ext          = [".mng"];
 	mimeType     = "video/x-mng";
-	magic        = ["Multiple-image Network Graphics bitmap", "MNG video data", "video/x-mng", /^fmt\/528( |$)/];
+	magic        = ["Multiple-image Network Graphics bitmap", "MNG video data", "video/x-mng", "Multiple Network Graphics :mng:", /^fmt\/528( |$)/];
 	metaProvider = ["image"];
-	converters   = [`abydosconvert[format:${this.mimeType}][outType:webp]`, "convert[outType:webp]", `nconvert[extractAll] -> *joinAsGIF[outType:gif]`];
+	converters   = [`abydosconvert[format:${this.mimeType}][outType:webp]`, "convert[outType:webp]", `nconvert[extractAll][format:mng] -> *joinAsGIF[outType:gif]`];
 }

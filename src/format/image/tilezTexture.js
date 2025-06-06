@@ -6,6 +6,6 @@ export class tilezTexture extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Tilez_texture";
 	ext            = [".til"];
 	forbidExtMatch = true;
-	magic          = ["Tilez texture"];
-	converters     = ["foremost"];
+	magic          = ["Tilez texture", "Buttonz & Tilez texture :til:"];
+	converters     = ["nconvert[format:til]"];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,653)
+# Unsupported File Formats (3,655)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1141,7 +1141,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,420)
+## Other (2,422)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2773,6 +2773,8 @@ Family/Format | Name | Extensions | Notes
 [other/photoImpressionsAlbum](https://discmaster.textfiles.com/search?format=photoImpressionsAlbum) | PhotoImpressions Album | .abm | 
 [other/photoLineBrowseIndex](https://discmaster.textfiles.com/search?format=photoLineBrowseIndex) | PhotoLine browse index | .plb | 
 [other/photoLine32Document](https://discmaster.textfiles.com/search?format=photoLine32Document) | PhotoLine32 Document | .pld | 
+[other/photoshopAction](https://discmaster.textfiles.com/search?format=photoshopAction) | Photoshop Action | .atn | 
+[other/photoshopStyles](https://discmaster.textfiles.com/search?format=photoshopStyles) | Photoshop Styles | .asl | 
 [other/photoStylerColorsDefinition](https://discmaster.textfiles.com/search?format=photoStylerColorsDefinition) | PhotoStyler Colors definition | .clr | 
 [other/pIImagePalette](https://discmaster.textfiles.com/search?format=pIImagePalette) | PI Image Palette | .pal | 
 [other/piImagePatterns](https://discmaster.textfiles.com/search?format=piImagePatterns) | PI Image Patterns | .motivi | 

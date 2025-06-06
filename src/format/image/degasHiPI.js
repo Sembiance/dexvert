@@ -6,9 +6,9 @@ export class degasHiPI extends Format
 	website   = "http://fileformats.archiveteam.org/wiki/DEGAS_image";
 	ext       = [".pi3", ".suh"];
 	mimeType  = "image/x-pi3";
-	magic     = ["DEGAS hi-res bitmap"];
+	magic     = ["DEGAS hi-res bitmap", "Degas (High Resolution) :degas:"];
 	byteCheck = [{offset : 0, match : [0x00, 0x02]}];
 
 	// nconvert messes up with certain files such as vanna5.pi3
-	converters = ["recoil2png", "wuimg[hasExtMatch]", `abydosconvert[format:${this.mimeType}][hasExtMatch]`, "nconvert"];
+	converters = ["recoil2png", "wuimg[hasExtMatch]", `abydosconvert[format:${this.mimeType}][hasExtMatch]`, "nconvert[format:degas]"];
 }

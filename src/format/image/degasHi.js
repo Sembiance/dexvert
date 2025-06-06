@@ -6,10 +6,10 @@ export class degasHi extends Format
 	website   = "http://fileformats.archiveteam.org/wiki/DEGAS_image";
 	ext       = [".pc3"];
 	mimeType  = "image/x-pc3";
-	magic     = ["DEGAS hi-res compressed bitmap"];
+	magic     = ["DEGAS hi-res compressed bitmap", "Degas (High Resolution - RLE) :degas:"];
 	byteCheck = [{offset : 0, match : [0x80, 0x02]}];
 	classify  = true;
 
 	// nconvert fails to properly convert some files
-	converters = ["wuimg[hasExtMatch]", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters = ["wuimg[hasExtMatch]", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:degas]"];
 }

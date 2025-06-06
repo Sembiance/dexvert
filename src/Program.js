@@ -582,8 +582,15 @@ export class Program
 
 					if(progRaw.startsWith("*"))
 					{
-						xlog.info`Chaining to ${progRaw} from ${this.programid} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
-						await handleNewFiles(await Program.runProgram(progRaw.substring(1), newFiles, baseChainProgOpts), newFiles);
+						if(!newFiles?.length)
+						{
+							xlog.info`SKIPPING chaining to ${progRaw} from ${this.programid} as no new files were found`;
+						}
+						else
+						{
+							xlog.info`Chaining to ${progRaw} from ${this.programid} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
+							await handleNewFiles(await Program.runProgram(progRaw.substring(1), newFiles, baseChainProgOpts), newFiles);
+						}
 					}
 					else
 					{
@@ -678,6 +685,9 @@ export class Program
 			};
 
 			srcFiles = Array.force(fRaw);
+			if(!srcFiles?.length)
+				throw new Error(`Invalid fRaw passed to Program.runProgram for ${progRaw}`);
+
 			if(program.renameIn!==false && !progOptions.skipSafeRename && !program.skipSafeRename)
 			{
 				safeFiles = await srcFiles.parallelMap(async srcFile =>

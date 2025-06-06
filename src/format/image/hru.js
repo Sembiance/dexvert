@@ -4,7 +4,7 @@ export class hru extends Format
 {
 	name       = "HRU";
 	website    = "http://fileformats.archiveteam.org/wiki/HRU";
-	magic      = ["HRU bitmap"];
+	magic      = ["HRU bitmap", "HRU :hru:"];
 	ext        = [".hru"];
-	converters = ["nconvert"];
+	converters = ["nconvert[format:hru]"];
 }

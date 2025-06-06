@@ -8,7 +8,7 @@ export class rix extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ColoRIX";
 	ext            = [".rix", ..._WEAK_EXT];
 	forbidExtMatch = _WEAK_EXT;
-	magic          = ["ColoRIX bitmap", "ColoRIX Image", "deark: colorix (ColoRIX"];
+	magic          = ["ColoRIX bitmap", "ColoRIX Image", "deark: colorix (ColoRIX", "ColoRIX :rix:"];
 	idMeta         = ({macFileType}) => macFileType==="RIX3";
-	converters     = ["nconvert", "deark[module:colorix]", "pv[matchType:magic]"];
+	converters     = ["nconvert[format:rix]", "deark[module:colorix]", "pv[matchType:magic]"];
 }

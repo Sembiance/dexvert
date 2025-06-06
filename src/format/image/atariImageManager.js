@@ -4,6 +4,7 @@ export class atariImageManager extends Format
 {
 	name       = "Atari Image Manager";
 	ext        = [".col", ".im"];
+	magic      = ["AIM :aim:"];
 	idCheck    = inputFile => inputFile.size%16384===0;
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "nconvert[format:aim]"];
 }

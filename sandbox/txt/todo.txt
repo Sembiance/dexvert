@@ -1,14 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Write up brief for reverse engineering the installshield self extractor programs found in ~/tmp/installShield_Self_Extractors
-  Then contact my dude on upwork and see if he is up for taking on this challenge
-  After, I can re-enable magic in installShieldSelfExtractor and have converters just include only the new extractor
-  I can also delete the wine/base-exclusive directory and move wineSelfExtractor to sandbox/legacy/program/
-
-* Add librempeg support: https://github.com/librempeg/librempeg
-  It is a fork of ffmpeg but has a lot of different format support available and has been recommended a few times.
-
 * Other 'installer icons' that I can look into supporting:
 	http://discmaster.textfiles.com/browse/9331/The%20Best%20of%20TUCOWS%20Volume%202.iso/files/onmeten.zip/Setup.exe
 	https://discmaster.textfiles.com/search?b3sum=753284e7240127076dd0f173ef940ae517ac539ba07f6f22a5c554ba8cf37c58

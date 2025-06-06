@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,647)
+# Unsupported File Formats (3,653)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -764,7 +764,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (195)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -893,6 +893,7 @@ Family/Format | Name | Extensions | Notes
 [image/omniGraffleDrawing](https://discmaster.textfiles.com/search?format=omniGraffleDrawing) | OmniGraffle Drawing | .graffle | 
 [image/openTTDGraphicsResource](https://discmaster.textfiles.com/search?format=openTTDGraphicsResource) | OpenTTD Graphics Resource | .grf | 
 [image/pOSWorkbenchIcon](https://discmaster.textfiles.com/search?format=pOSWorkbenchIcon) | p.OS Workbench Icon | .info | 
+[image/pageStreamIllustration](https://discmaster.textfiles.com/search?format=pageStreamIllustration) | PageStream Illustration | .ilus | 
 [image/painterRIF](https://discmaster.textfiles.com/search?format=painterRIF) | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [2 sample files](https://sembiance.com/fileFormatSamples/image/painterRIF/)
 [image/paintproBitmap](https://discmaster.textfiles.com/search?format=paintproBitmap) | Paintpro Bitmap | .tb1 .ppp | 
 [image/paintWorksPalette](https://discmaster.textfiles.com/search?format=paintWorksPalette) | PaintWorkse Palette |  | 
@@ -1140,7 +1141,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,416)
+## Other (2,420)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1950,6 +1951,7 @@ Family/Format | Name | Extensions | Notes
 [other/finaleGuitar](https://discmaster.textfiles.com/search?format=finaleGuitar) | Finale Guitar | .mus .lib .ftm | 
 [other/finaleNotePad](https://discmaster.textfiles.com/search?format=finaleNotePad) | Finale NotePad | .mus | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?format=firstBasicHelp) | FirstBasic Help | .fbh | 
+[other/firstPaintPalette](https://discmaster.textfiles.com/search?format=firstPaintPalette) | FirstPaint Palette | .zpl | 
 [other/flStudioScore](https://discmaster.textfiles.com/search?format=flStudioScore) | FL Studio Score | .fsc | 
 [other/flStudioTrack](https://discmaster.textfiles.com/search?format=flStudioTrack) | FL Studio Track | .flp .fst | 
 [other/flanker2MissionData](https://discmaster.textfiles.com/search?format=flanker2MissionData) | Flanker 2 Mission data | .mis .trk | 
@@ -2158,6 +2160,7 @@ Family/Format | Name | Extensions | Notes
 [other/ikMultimediaPreset](https://discmaster.textfiles.com/search?format=ikMultimediaPreset) | IK Multimedia Preset | .ikmp | 
 [other/iliumEWalletData](https://discmaster.textfiles.com/search?format=iliumEWalletData) | Ilium eWallet data |  | 
 [other/imageMakerAnnotation](https://discmaster.textfiles.com/search?format=imageMakerAnnotation) | Image Maker Annotation | .ano | 
+[other/imageDeskCatalog](https://discmaster.textfiles.com/search?format=imageDeskCatalog) | ImageDesk Catalog | .cat | 
 [other/imageFinderIndex](https://discmaster.textfiles.com/search?format=imageFinderIndex) | ImageFinder Index | .index | 
 [other/imageMixerProject](https://discmaster.textfiles.com/search?format=imageMixerProject) | ImageMixer project | .ima | 
 [other/imagenPrinter](https://discmaster.textfiles.com/search?format=imagenPrinter) | Imagen printer | .imp | 
@@ -2510,6 +2513,7 @@ Family/Format | Name | Extensions | Notes
 [other/mioMotionMovie](https://discmaster.textfiles.com/search?format=mioMotionMovie) | MioMotion movie | .mio | 
 [other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?format=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 
 [other/mirrorIIEmulationFile](https://discmaster.textfiles.com/search?format=mirrorIIEmulationFile) | Mirror II Emulation File | .mef | 
+[other/mirrorsEdgeSaveGame](https://discmaster.textfiles.com/search?format=mirrorsEdgeSaveGame) | Mirror's Edge save game | .dat | 
 [other/missionPatch](https://discmaster.textfiles.com/search?format=missionPatch) | Mission Patch | .pat | 
 [other/mksSpellHashList](https://discmaster.textfiles.com/search?format=mksSpellHashList) | MKS Spell hash list |  | 
 [other/mlocateDatabase](https://discmaster.textfiles.com/search?format=mlocateDatabase) | mlocate database | .db | 
@@ -3151,6 +3155,7 @@ Family/Format | Name | Extensions | Notes
 [other/superColliderSynthDefinition](https://discmaster.textfiles.com/search?format=superColliderSynthDefinition) | SuperCollider3 Synth Definition | .scsyndef | 
 [other/superFlowTemplate](https://discmaster.textfiles.com/search?format=superFlowTemplate) | SuperFlow Template | .stp | 
 [other/superJamFile](https://discmaster.textfiles.com/search?format=superJamFile) | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
+[other/superKidPalette](https://discmaster.textfiles.com/search?format=superKidPalette) | SuperKid Palette | .zpl | 
 [other/superPowerScenario](https://discmaster.textfiles.com/search?format=superPowerScenario) | SuperPower scenario | .dsc | 
 [other/superProjectExpertProject](https://discmaster.textfiles.com/search?format=superProjectExpertProject) | SuperProject Expert Project | .pj | 
 [other/superProjectGraphicsDrivers](https://discmaster.textfiles.com/search?format=superProjectGraphicsDrivers) | SuperProject graphics drivers | .dat | 
@@ -3658,7 +3663,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (49)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3671,6 +3676,7 @@ Family/Format | Name | Extensions | Notes
 [video/astoundAnimation](https://discmaster.textfiles.com/search?format=astoundAnimation) | Astound Animation | .awa | 
 [video/avssVideo](https://discmaster.textfiles.com/search?format=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
 [video/iffSSA](https://discmaster.textfiles.com/search?format=iffSSA) | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [7 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
+[video/criwareSofdec2Movie](https://discmaster.textfiles.com/search?format=criwareSofdec2Movie) | CRIWARE Sofdec2 Movie | .usm | [1 sample file](https://sembiance.com/fileFormatSamples/video/criwareSofdec2Movie/)
 [video/delphineCIN](https://discmaster.textfiles.com/search?format=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.

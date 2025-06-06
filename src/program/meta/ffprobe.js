@@ -5,9 +5,12 @@ export class ffprobe extends Program
 {
 	website = "https://ffmpeg.org/";
 	package = "media-video/ffmpeg";
-	bin     = "ffprobe";
-	args    = r => ["-show_streams", "-show_format", r.inFile()];
-	post    = r =>
+	flags   = {
+		libre : "Use librempegprobe instead of ffprobe"
+	};
+	bin  = r => (r.flags.libre ? "librempegprobe" : "ffprobe");
+	args = r => ["-show_streams", "-show_format", r.inFile()];
+	post = r =>
 	{
 		let seenFormatSection = false;
 		r.stdout.trim().split("\n").forEach(line =>

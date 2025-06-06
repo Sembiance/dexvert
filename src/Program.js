@@ -181,9 +181,9 @@ export class Program
 				if(this.runOptions)
 					Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 
-				xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
+				xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${r.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
 				xlog.debug`  with options ${printUtil.inspect(r.runOptions).squeeze()}`;
-				const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
+				const {stdout, stderr, status} = await runUtil.run(r.bin, r.args, r.runOptions);
 				Object.assign(r, {stdout, stderr, status});
 			}
 			else if(this.loc==="dos")

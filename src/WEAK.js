@@ -315,6 +315,10 @@ export const WEAK_VALUES =
 	/^Video CCTV DAT \(luodat\)$/,
 	/^VPlayer subtitles \(vplayer\)$/,
 
+	// librempegprobeID
+	/^QuickTime \/ MacBinary \(macbinary\)$/,
+	/^tri-Ace PS2 \(tac\)$/,
+
 	// GT2
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^ARM64EC COFF object/,

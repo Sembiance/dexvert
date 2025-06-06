@@ -29,6 +29,24 @@ Func KillAll($program)
 	Until $result Not = 1
 EndFunc
 `,
+	DirCopyContents : `
+Func DirCopyContents($dir, $targetDir)
+	Local $search = FileFindFirstFile($dir & "\\*")
+	If $search = -1 Then Return 0
+	While 1
+		Local $file = FileFindNextFile($search)
+		If @error Then ExitLoop
+		If $file = "." Or $file = ".." Then ContinueLoop
+		Local $fullPath = $dir & "\\" & $file
+		If StringInStr(FileGetAttrib($fullPath), "D") Then
+			DirCopy($fullPath, $targetDir & "\\" & $file, 1)
+		Else
+			FileCopy($fullPath, $targetDir & "\\" & $file)
+		EndIf
+	WEnd
+	FileClose($search)
+EndFunc
+`,
 	DirFileCount : `
 Func DirFileCount($dir)
 	Local $total = 0, $search = FileFindFirstFile($dir & "\\*")
@@ -47,6 +65,24 @@ Func DirFileCount($dir)
 	FileClose($search)
 	Return $total
 EndFunc	
+`,
+	DirEmpty : `
+Func DirEmpty($dir)
+	Local $search = FileFindFirstFile($dir & "\\*")
+	If $search = -1 Then Return 0
+	While 1
+		Local $file = FileFindNextFile($search)
+		If @error Then ExitLoop
+		If $file = "." Or $file = ".." Then ContinueLoop
+		Local $fullPath = $dir & "\\" & $file
+		If StringInStr(FileGetAttrib($fullPath), "D") Then
+			DirRemove($fullPath, 1)
+		Else
+			FileDelete($fullPath)
+		EndIf
+	WEnd
+	FileClose($search)
+EndFunc
 `,
 	ListCDirs : `
 #include <Array.au3>
@@ -126,6 +162,26 @@ Func WaitForStableFileSize($filePath, $stableDuration, $maxDuration)
 			ExitLoop
 		EndIf
 	Until TimeDiff($stableSizeTimer) > $maxDuration
+EndFunc
+`,
+	WaitForStableDirCount : `
+Func WaitForStableDirCount($dirPath, $stableDuration, $maxDuration)
+	Local $lastCount = 0
+	Local $stableCountTimer = GetTime()
+	Local $stableTimer = GetTime()
+	Do
+		Sleep(50)
+		
+		If Not FileExists($dirPath) Then ContinueLoop
+
+		$curCount = DirFileCount($dirPath)
+		If $curCount <> $lastCount Then
+			$lastCount = $curCount
+			$stableTimer = GetTime()
+		ElseIf TimeDiff($stableTimer) > $stableDuration Then
+			ExitLoop
+		EndIf
+	Until TimeDiff($stableCountTimer) > $maxDuration
 EndFunc
 `,
 	WaitForPID : `
@@ -277,22 +333,32 @@ EndFunc`,
 	EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["GetTime", "TimeDiff", "KillAll"];
+const FUNC_REQ_FUNCS =
+{
+	WaitForStableDirCount : "DirFileCount"
+};
 
 export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, alsoKill=[], fullCmd, skipMouseMoving})
 {
-	// Build an AutoIt script
-	scriptLines.push(...AUTO_INCLUDE_FUNCS.map(AUTO_INCLUDE_FUNC => AUTOIT_FUNCS[AUTO_INCLUDE_FUNC]));
-
+	const funcsToInclude = Array.from(AUTO_INCLUDE_FUNCS);
 	if(!script && timeout)
-		scriptLines.push(AUTOIT_FUNCS.WaitForPID, AUTOIT_FUNCS.RunWaitWithTimeout);
-	
+		funcsToInclude.pushUnique("WaitForPID", "RunWaitWithTimeout");
+
 	if(script)
-		scriptLines.push(...Object.entries(AUTOIT_FUNCS).map(([funcName, funcText]) => (!AUTO_INCLUDE_FUNCS.includes(funcName) && script.includes(funcName) ? funcText : null)).filter(v => !!v));
+		funcsToInclude.pushUnique(...Object.keys(AUTOIT_FUNCS).filter(funcName => script.includes(funcName)));
 	if(scriptPre)
+		funcsToInclude.pushUnique(...Object.keys(AUTOIT_FUNCS).filter(funcName => scriptPre.includes(funcName)));
+
+	for(const [funcName, reqFuncs] of Object.entries(FUNC_REQ_FUNCS))
 	{
-		scriptLines.push(...Object.entries(AUTOIT_FUNCS).map(([funcName, funcText]) => (!AUTO_INCLUDE_FUNCS.includes(funcName) && scriptPre.includes(funcName) ? funcText : null)).filter(v => !!v));
-		scriptLines.push(scriptPre);
+		if(funcsToInclude.includes(funcName))
+			funcsToInclude.pushUnique(...Array.force(reqFuncs));
 	}
+
+	scriptLines.push(...funcsToInclude.map(funcName => AUTOIT_FUNCS[funcName]).filter(v => !!v));
+
+	if(scriptPre)
+		scriptLines.push(scriptPre);
 
 	scriptLines.push(`
 		OnAutoItExitRegister("ExitHandler")

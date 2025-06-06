@@ -43,6 +43,7 @@ fi
 cd /tmp || exit
 if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -f .X*lock
+	rm -rf 7777-runtime-dir.*
 fi
 rm -f OSL_PIPE*
 fd magick -x rm {} \;

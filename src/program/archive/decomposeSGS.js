@@ -18,23 +18,8 @@ export class decomposeSGS extends Program
 			SendSlow("{DOWN}{DOWN}")
 			SendSlow("{TAB}{END}")
 			SendSlow("+{TAB}+{TAB}")
-
-			Local $lastCount = DirFileCount("c:\\out")
 			Send("{ENTER}")
-
-			Local $stableCountTimer = GetTime()
-			Local $stableTimer = GetTime()
-			Do
-				Sleep(50)
-
-				$curCount = DirFileCount("c:\\out")
-				If $curCount <> $lastCount Then
-					$lastCount = $curCount
-					$stableTimer = GetTime()
-				ElseIf TimeDiff($stableTimer) > ${xu.SECOND*30} Then
-					ExitLoop
-				EndIf
-			Until TimeDiff($stableCountTimer) > ${xu.MINUTE*30}
+			WaitForStableDirCount("c:\\out", ${xu.SECOND*30}, ${xu.MINUTE*30})
 			FileDelete("c:\\out\\${path.basename(r.inFile())}")`
 	});
 	renameOut = true;

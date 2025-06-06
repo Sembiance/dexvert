@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class javaClass extends Format
 {
 	name           = "Java Class File";
-	website        = "http://fileformats.archiveteam.org/wiki/ASCOM";
+	website        = "http://fileformats.archiveteam.org/wiki/Java_bytecode";
 	ext            = [".class"];
 	forbidExtMatch = true;
 	magic          = ["Java Compiled Object Code", "compiled Java class data", "Java bytecode", "Format: Java Class File", "Kompilierter Java Bytecode", "application/x-java", /^x-fmt\/415( |$)/];

@@ -15,7 +15,8 @@ pgrep -f "dexrecurse" | xargs kill
 su - sembiance
 stopDexserver
 exit
-rm -rf /mnt/dexdrone/* /mnt/dexvert/recurse/*
+ls -al /mnt/dexvert/oldLogs/
+rm -rf /mnt/dexdrone/* /mnt/dexvert/recurse/* /mnt/dexvert/oldLogs/*
 reboot
 
 

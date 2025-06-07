@@ -276,9 +276,11 @@ export const WEAK_VALUES =
 	/^ADP \(adp\)$/,
 	/^AV1 low overhead OBU \(obu\)$/,
 	/^CD Graphics \(cdg\)$/,
+	/^DAT \(Digital Audio Tape\) \(dat\)$/,	// librempeg
 	/^Digital Pictures SGA \(sga\)$/,
 	/^DV \(Digital Video\) \(dv\)$/,
 	/^Electronic Arts cdata \(ea_cdata\)$/,
+	/^Electronic Arts Layer 3 \(ealayer3\)$/,	// librempeg
 	/^Electronic Arts Multimedia \(ea\)$/,
 	/^FLI\/FLC\/FLX animation \(flic\)$/,
 	/^Game Music Emu demuxer \(libgme\)$/,
@@ -300,6 +302,7 @@ export const WEAK_VALUES =
 	/^Ogg \(ogg\)$/,
 	/^PJS \(Phoenix Japanimation Society\) subtitles \(pjs\)$/,
 	/^piped (gem|jpeg|tiff) sequence \((gem|jpeg|tiff)_pipe\)$/,
+	/^QuickTime \/ MacBinary \(macbinary\)$/,	// librempeg
 	/^QuickTime \/ MOV \(mov,mp4,m4a,3gp,3g2,mj2\)$/,
 	/^raw (AC-3|AC-4|AMR-[NW]B|DTS|dvbsub|dvdsub|GSM|E-AC-3|H\.26[1346]|HEVC|lmlm4|MJPEG|MJPEG 2000|MPEG|MPEG-4|VC-1)(\/VVC)? (video )?\((ac3|ac4|amr[nw]b|dts|dvbsub|dvdsub|eac3|gsm|h26[134]|hevc|lmlm4|m4v|mjpeg|mjpeg_2000|mpegvideo|vc1|vvc)\)$/,
 	/^raw Chinese AVS \(Audio Video Standard\) \(cavsvideo\)$/,
@@ -314,14 +317,9 @@ export const WEAK_VALUES =
 	/^Tele-typewriter \(tty\)$/,
 	/^THP \(thp\)$/,
 	/^Tiertex Limited SEQ \(tiertexseq\)$/,
+	/^tri-Ace PS2 \(tac\)$/,	// librempeg
 	/^Video CCTV DAT \(luodat\)$/,
 	/^VPlayer subtitles \(vplayer\)$/,
-
-	// librempegprobeID
-	/^DAT \(Digital Audio Tape\) \(dat\)$/,
-	/^Electronic Arts Layer 3 \(ealayer3\)$/,
-	/^QuickTime \/ MacBinary \(macbinary\)$/,
-	/^tri-Ace PS2 \(tac\)$/,
 
 	// GT2
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,
@@ -401,9 +399,11 @@ export const WEAK_VALUES =
 
 	// nconvertID
 	/^Amiga icon :info:$/,
+	/^Apple Macintosh MacPaint :mac:/,
 	/^Astronomical Image Processing :aip:$/,
 	/^Dali \((Low|Medium|High) Resolution\) :dali:/,
 	/^Datacopy :dcpy:$/,
+	/^Fax G3 :fax:$/,
 	/^FLI movie :fli:$/,
 	/^GigaPaint Multi :gig:$/,
 	/^Hayes JTFax :jtf:$/,
@@ -414,6 +414,7 @@ export const WEAK_VALUES =
 	/^MGI Photosuite Project :pzp:$/,
 	/^NewsRoom :nsr:$/,
 	/^RIPTerm Image :ript:$/,
+	/^Truevision TARGA.* :tga:$/,
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,

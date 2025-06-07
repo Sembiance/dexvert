@@ -449,6 +449,7 @@ export default
 		theDataMasterDataBase              : {name : "The DataMaster Data Base", ext : [".tdb"], magic : ["The DataMaster Data Base"]},
 		theSPREADSHEETWorksheet            : {name : "THE SPREADSHEET worksheet", ext : [".ts1"], magic : ["THE SPREADSHEET worksheet"], weakMagic : true},
 		tomeRaider                         : {name : "TomeRaider e-book/document", ext : [".tr"], magic : ["TomeRaider e-book/document"]},
+		tomeRaiderPalmOSDocument           : {name : "TomeRaider PalmOS document", ext : [".pdb"], magic : ["TomeRaider PalmOS document"], weakMagic : true},
 		trueBASICCompiledCode              : {name : "True BASIC compiled code", magic : ["True BASIC compiled code"]},
 		typePlusFontWorksDocument          : {name : "TypePlus / FontWorks document", ext : [".tpp"], magic : ["TypePlus / FontWorks document"]},
 		turboBaseDB                        : {name : "TurboBase DB", ext : [".tbp"], magic : ["TurboBase DB"]},

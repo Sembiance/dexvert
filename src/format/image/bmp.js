@@ -21,7 +21,8 @@ export class bmp extends Format
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.bmp]");
 		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert[format:bmp]", "ffmpeg[format:bmp_pipe][outType:png]", "wuimg", "imconv[format:bmp][matchType:magic]");
 		r.push(...["noesis[type:image]"].map(v => `${v}[matchType:magic]`));
-		r.push(...["canvas5", "graphicWorkshopProfessional", "paintDotNet", "keyViewPro", "imageAlchemy", "hiJaakExpress", "corelPhotoPaint", "canvas[matchType:magic][hasExtMatch]", "tomsViewer", "pv"].map(v => `${v}[matchType:magic][strongMatch]`));
+		r.push(...["paintDotNet", "keyViewPro", "imageAlchemy", "corelPhotoPaint", "canvas[matchType:magic][hasExtMatch]", "tomsViewer"].map(v => `${v}[matchType:magic][strongMatch]`));
+		// Not reliable and can produce garbage, even with strong matches with extensions: "graphicWorkshopProfessional", "canvas5", "hiJaakExpress", "pv"
 		r.push(...["photoDraw"].map(v => `${v}[matchType:magic][strongMatch][hasExtMatch]`));
 		return r;
 	};

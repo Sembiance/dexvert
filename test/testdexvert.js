@@ -31,7 +31,12 @@ const outJSON = {};
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
 // These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
-const FLAKY_CONVERTERS = ["paintDotNet"];
+const FLAKY_CONVERTERS = [
+	"paintDotNet",
+	"pageMaker7",
+	"polyTrans64",
+	"vcdxrip"
+];
 
 // These formats should be skipped entirely for one reason or another
 const SKIP_FORMATS =
@@ -397,12 +402,13 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 // if any of the OUTPUT FILES from a conversion equal these regexes, then ignore their size completely
 const IGNORE_SIZE_FILEPATHS =
 [
+	/Human Meg\.glb$/,		// cinema4D82 doesn't always convert this and polyTrans64 takes over
 	/Legacy_of_the_Ancients \d\d\.mp3$/i,
-	/scripts\/.+\.as$/i,			// archive/swf/cookie-hamster often produces very different script/**/*.as files
-	/\^\^ sweet heart\.png$/,
 	/lem2\.webp$/,
+	/scripts\/.+\.as$/i,	// archive/swf/cookie-hamster often produces very different script/**/*.as files
 	/SUB2\.webp$/,
-	/Human Meg\.glb$/	// cinema4D82 doesn't always convert this and polyTrans64 takes over
+	/\^\^ sweet heart\.png$/,
+	/videocd\.xml$/			// from archive/iso/NiezwykleMiejsca.iso  the generated XML ccan change from run to run
 ];
 
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
@@ -410,6 +416,9 @@ const FLEX_DIFF_FILES =
 [
 	// sometimes different pngs are produced, sometimes some are missing, not sure why
 	/archive\/hypercard\/.+$/,
+
+	// the self-extractor chooses random names for some of the DLL files
+	/archive\/installShieldSelfExtractor\/.+$/,
 
 	// this specific file sometimes extracts a pict, sometimes a bmp, no idea why
 	/archive\/rsrc\/Speedometer 4\.02\.rsrc$/,
@@ -439,7 +448,7 @@ const FLEX_DIFF_FILES =
 	/archive\/iso\/WIKINGOWIE\.iso$/,
 	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/,
-	/music\/ay\/emul\.dragonslair2$/
+	/music\/ay\/emul\.(dragonslair2|gliderrider)$/
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
@@ -452,11 +461,13 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These are actually mis-identified files, but either I haven't come up with a good way to avoid it or the format isn't important enough to warrant better identification
 	[/archive\/linuxEXTFilesystem\/(2940-sbpcd-nonet\.img|filesys-ELF-2\.0\.x)$/, "archive", "iso"],
+	[/archive\/macBinary\/Guy's Mac Contacts\.cpt$/, "archive", "macOSExecutable"],
 	[/archive\/mdf\/R180 NG Media 1\.mdf$/, "archive", "iso"],
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
-	[/document\/hlp\/qtim\.dll$/, "document", "multimediaViewerBook"],
+	[/document\/hlp\/(HELLBNDX\.HLP|qtim\.dll)$/, "document", "multimediaViewerBook"],
+	[/document\/multimediaViewerBook\/DIGITIZE\.HLP$/, "document", "hlp"],
 	[/document\/wordDocDOS\/.+\.(DOC|doc|MSW)$/, "document", "wri"],
 	[/document\/wordDocDOS\/horse$/, "document", "wri"],
 	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],
@@ -490,7 +501,9 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/text\/latexAUXFile\/(LCAU\.AUX|LATEX\.BUG)$/i, "text", "txt"],
 
 	// These files don't convert with my converters and get identified to other things
+	[/archive\/installShieldSelfExtractor\/SWREG\.EXE$/, "executable", "exe"],
 	[/audio\/quickTimeAudio\/Demo Music File$/i, "archive", "macBinary"],
+	[/archive\/macOSInstallTome\/(AppleVision Tome 2|Installation Tome)$/i, "archive", "macBinary"],
 	[/document\/openDocument\/(aw-9colorful|cnt-04)\.ott$/, "archive", "zip"],
 	[/document\/scribus\/(arkanoid|robocop)\.sla$/, "text", "txt"],
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
@@ -503,6 +516,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/poly\/quickDraw3D\/testn\.3dmf$/i, "text", "txt"],
 	[/poly\/trueSpace3D\/dna\.cob$/i, "text", "txt"],
 	[/poly\/openGEX\/(artifact_advanced|Example|solar_engine)\.ogex$/i, "text", true],
+	[/video\/idRoQ\/(comrooms|introcom)\.gjd$/i, "image", "embeddedJPG"],
 
 	// These formats share generic .ext only, no magic matches
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],

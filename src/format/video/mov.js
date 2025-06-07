@@ -18,7 +18,7 @@ export class mov extends Format
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
 	converters   = dexState => [
-		"ffmpeg", "ffmpeg[libre]",
+		"ffmpeg",
 		(dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"),
 		...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"] : [])
 	];

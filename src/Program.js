@@ -46,7 +46,7 @@ export class Program
 		const program = new this();
 
 		if(Object.hasOwn(program, "bin") && Object.hasOwn(program, "exec"))
-			throw new Error(`class [${this.constructor.name}] can't have both [bin] and [exec] properties.`);
+			throw new Error(`class [${program.constructor.name}] can't have both [bin] and [exec] properties.`);
 
 		validateClass(program, {
 			// required

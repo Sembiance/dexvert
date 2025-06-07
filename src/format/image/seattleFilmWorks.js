@@ -8,5 +8,5 @@ export class seattleFilmWorks extends Format
 	magic        = ["Seattle FilmWorks", "Seattle Film Works :sfw:", /^fmt\/1104( |$)/];
 	mimeType     = "image/x-seattle-filmworks";
 	metaProvider = ["image"];
-	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:sfw]"];
+	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:sfw]", "nconvert[format:pmp]"];	// the pmp is for a few that don't properly convert to sfw but are indeed SFW files
 }

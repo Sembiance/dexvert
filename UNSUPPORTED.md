@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,655)
+# Unsupported File Formats (3,656)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -379,7 +379,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (192)
+## Document (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -550,6 +550,7 @@ Family/Format | Name | Extensions | Notes
 [document/printShopDeluxeSign](https://discmaster.textfiles.com/search?format=printShopDeluxeSign) | The Print Shop Deluxe Sign | .pds | 
 [document/theSPREADSHEETWorksheet](https://discmaster.textfiles.com/search?format=theSPREADSHEETWorksheet) | THE SPREADSHEET worksheet | .ts1 | 
 [document/tomeRaider](https://discmaster.textfiles.com/search?format=tomeRaider) | TomeRaider e-book/document | .tr | 
+[document/tomeRaiderPalmOSDocument](https://discmaster.textfiles.com/search?format=tomeRaiderPalmOSDocument) | TomeRaider PalmOS document | .pdb | 
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?format=trueBASICCompiledCode) | True BASIC compiled code |  | 
 [document/turboPascalMicroCalcSpreadsheet](https://discmaster.textfiles.com/search?format=turboPascalMicroCalcSpreadsheet) | Turbo Pascal MicroCalc Spreadsheet | .mca .mcs | 
 [document/turboBaseDB](https://discmaster.textfiles.com/search?format=turboBaseDB) | TurboBase DB | .tbp | 

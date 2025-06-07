@@ -12,7 +12,8 @@ export class DirMaster extends Program
 	args     = r => ["--exportall", r.inFile()];
 	cwd      = r => r.outDir();
 	wineData = r => ({
-		timeout : (+(r.flags.timeout || xu.MINUTE*3))
+		timeout       : (+(r.flags.timeout || xu.MINUTE*3)),
+		timeoutSignal : "SIGKILL"
 	});
 	renameOut = {
 		alwaysRename : true,

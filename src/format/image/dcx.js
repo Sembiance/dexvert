@@ -4,7 +4,7 @@ export class dcx extends Format
 {
 	name         = "Multi-Page PCX";
 	website      = "http://fileformats.archiveteam.org/wiki/DCX";
-	ext          = [".dcx"];
+	ext          = [".dcx", ".fax"];
 	mimeType     = "image/x-dcx";
 	magic        = ["Multipage Zsoft Paintbrush Bitmap Graphics", "DCX multi-page", "Graphics Multipage PCX bitmap", "deark: dcx", "Zsoft Paintbrush :dcx:", /^x-fmt\/348( |$)/];
 	metaProvider = ["image"];

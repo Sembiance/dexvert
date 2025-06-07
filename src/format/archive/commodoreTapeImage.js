@@ -12,6 +12,6 @@ export class commodoreTapeImage extends Format
 	// Alternatively we could use c1541 to convert the tape image to a d64 image and then process it through c1541. See: https://immerhax.com/?p=136
 	converters = [
 		// "deark[module:t64][matchType:magic]", // This also works, but for certain tape images it produces thousands of erroneous files (Tom.tap and Ancipital.tap)
-		`DirMaster[timeout:${xu.SECOND*15}]`	// Often other tapes are detected as C64 and DirMaster just hangs forever.
+		`DirMaster[timeout:${xu.SECOND*40}]`	// Often other files are detected as C64 and DirMaster just hangs forever.
 	];
 }

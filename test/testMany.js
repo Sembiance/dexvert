@@ -42,21 +42,27 @@ const FORMATS_AT_ONCE = 4;
 const SLOW_FORMATS =
 {
 	// archive
-	"archive/innoSetupInstaller" : 11,
-	"archive/macromediaDirector" : 64,
+	"archive/innoSetupInstaller"         : 11,
+	"archive/installShieldSelfExtractor" : 6,
+	"archive/iso"                        : 9,
+	"archive/macromediaDirector"         : 69,
+	"archive/swf"                        : 6,
 	
 	// audio
-	"audio/fmodSampleBank" : 15,
-	"audio/photoCDAudio"   : 16,
-	"audio/quickTimeAudio" : 9,
-	"audio/soundFont2"     : 6,
+	"audio/aviAudio"            : 4,
+	"audio/fmodSampleBank"      : 16,
+	"audio/proPinballSoundbank" : 5,
+	"audio/quickTimeAudio"      : 10,
+	"audio/soundFont2"          : 7,
 
 	// document
-	"document/amigaGuide"            : 6,
-	"document/hlp"                   : 8,
+	"document/amigaGuide"            : 7,
+	"document/hlp"                   : 4,
 	"document/hyperWriter"           : 5,
-	"document/palmPeanutReaderEBook" : 7,
-	"document/multimediaViewerBook"  : 5,
+	"document/multimediaViewerBook"  : 3,
+	"document/pageMaker"             : 4,
+	"document/palmPeanutReaderEBook" : 2,
+	"document/quarkXPress"           : 4,
 
 	// executable
 	"executable/dll" : 1,
@@ -65,39 +71,44 @@ const SLOW_FORMATS =
 	// font
 	"font/amigaBitmapFont"        : 1,
 	"font/amigaBitmapFontContent" : 1,
+	"font/gemFont"                : 1,
 
 	// image
-	"image/atariTools800"        : 7,
-	"image/elecbyteMUGENSprites" : 6,
-	"image/micrografxDraw"       : 6,
-	"image/trs"                  : 7,
+	"image/elecbyteMUGENSprites" : 10,
+	"image/micrografxDraw"       : 8,
+	"image/trs"                  : 9,
+	"image/wgtSprite"            : 5,
+	"image/xRes"                 : 5,
 
 	// music
 	"music/ay"                 : 9,
+	"music/ayAMAD"             : 3,
 	"music/chaosMusicComposer" : 5,
+	"music/fuxoftAYLanguage"   : 4,
 	
 	// other
-	"other/canDoVariables" : 1,
 	"other/frameMakerHelp" : 1,
+	"other/javaClass"      : 4,
 	"other/pogNames"       : 1,
 
 	// poly
-	"poly/blitz3DObject"         : 5,
-	"poly/cinema4D"              : 6,
-	"poly/dxf"                   : 10,
-	"poly/rayDreamDesignerScene" : 7,
+	"poly/dxf"                   : 18,
+	"poly/rayDreamDesignerScene" : 8,
+	"poly/softimageXSI"          : 8,
 
 	// text
 	"text/linuxLiveCDInfo"  : 2,
+	"text/linuxMakeConfig"  : 1,
 	"text/sonnetProject"    : 4,
 	"text/txt"              : 3,
 	"text/tornado3DProject" : 2,
 
 	// video
-	"video/avi"  : 6,
-	"video/mov"  : 6,
-	"video/vivo" : 5,
-	"video/wmv"  : 8
+	"video/avi"          : 6,
+	"video/mov"          : 6,
+	"video/trilobyteVDX" : 5,
+	"video/vivo"         : 5,
+	"video/wmv"          : 11
 };
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));

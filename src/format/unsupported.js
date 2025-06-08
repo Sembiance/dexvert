@@ -459,7 +459,6 @@ export default
 		upShotManual                       : {name : "UpShot Manual", ext : [".mnl"], magic : ["UpShot Manual"]},
 		venturaPublisherChapter            : {name : "Ventura Publisher Chapter", ext : [".chp"], magic : ["Ventura Publisher Chapter"]},
 		vizawriteDocument                  : {name : "Vizawrite Document", magic : ["Vizawrite document"]},
-		winFaxDocument                     : {name : "WinFax Document", ext : [".fxm", ".fxr"], magic : ["WinFax Pro multipage document", "WinFax Sent / Received document", /^fmt\/1995( |$)/]},
 		winkPresentation                   : {name : "Wink presentation", ext : [".wnk"], magic : ["Wink presentation"], weakMagic : true},
 		winWorksSpreadsheet                : {name : "WinWorks spreadsheet", ext : [".wpl", ".sst"], magic : ["WinWorks spreadsheet"]},
 		wordPerfectHelp                    : {name : "WordPerfect help", ext : [".fil", ".hlp"], magic : ["WordPerfect help", "Wordperfect Hilfe Datei", "Unknown Corel/Wordperfect product 26, file type 2"], weakMagic : true},

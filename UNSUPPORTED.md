@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,656)
+# Unsupported File Formats (3,655)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -379,7 +379,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (193)
+## Document (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -565,7 +565,6 @@ Family/Format | Name | Extensions | Notes
 [document/vizawriteDocument](https://discmaster.textfiles.com/search?format=vizawriteDocument) | Vizawrite Document |  | 
 [document/volkswriter](https://discmaster.textfiles.com/search?format=volkswriter) | [Volkswriter](https://winworldpc.com/product/volkswriter) | .vw | [1 sample file](https://sembiance.com/fileFormatSamples/document/volkswriter/) - DOS based word processor. Haven't investigated it for magic.
 [document/wangIWP](https://discmaster.textfiles.com/search?format=wangIWP) | [WANG Integrated Word Processor](https://archive.org/details/wangeditor) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/wangIWP/) - DOS based word processor. Haven't investigated it for magic.
-[document/winFaxDocument](https://discmaster.textfiles.com/search?format=winFaxDocument) | WinFax Document | .fxm .fxr | 
 [document/winkPresentation](https://discmaster.textfiles.com/search?format=winkPresentation) | Wink presentation | .wnk | 
 [document/winWorksSpreadsheet](https://discmaster.textfiles.com/search?format=winWorksSpreadsheet) | WinWorks spreadsheet | .wpl .sst | 
 [document/wordMARC](https://discmaster.textfiles.com/search?format=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/) - VAX based word processor. Haven't investigated it for magic.

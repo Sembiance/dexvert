@@ -174,6 +174,7 @@ export const WEAK_VALUES =
 	/^ZBOOT firmware header/,
 
 	// dearkID (trailing spaces on purpose)
+	/^deark: adex$/,
 	/^deark: ascii85$/,
 	/^deark: basic_c64$/,
 	/^deark: cas$/,
@@ -398,11 +399,14 @@ export const WEAK_VALUES =
 	/^Tar$/,
 
 	// nconvertID
+	/^ADEX :adex:$/,
 	/^Amiga icon :info:$/,
 	/^Apple Macintosh MacPaint :mac:/,
 	/^Astronomical Image Processing :aip:$/,
+	/^Brender :bdr:$/,
 	/^Dali \((Low|Medium|High) Resolution\) :dali:/,
 	/^Datacopy :dcpy:$/,
+	/^DBW Render 4096 :dbw:$/,
 	/^Fax G3 :fax:$/,
 	/^FLI movie :fli:$/,
 	/^GigaPaint Multi :gig:$/,
@@ -415,6 +419,7 @@ export const WEAK_VALUES =
 	/^NewsRoom :nsr:$/,
 	/^RIPTerm Image :ript:$/,
 	/^Truevision TARGA.* :tga:$/,
+	/^Img Software Set :img:$/,	// unlikely to encounter this, but code that compiles (but fails to produce an image) is in sandbox/app/X_img/  also see: http://fileformats.archiveteam.org/wiki/Img_Software_Set
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,

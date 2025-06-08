@@ -4,7 +4,7 @@ import {_MACBINARY_MAGIC} from "../archive/macBinary.js";
 const _EPS_MAGIC = [
 	// generic EPS
 	"Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", /^Encapsulated PostScript$/, "DOS EPS Binary File", "Macintosh Encapsulated Postscript (MacBinary)", "image/x-eps",
-	"deark: eps (EPS binary)", "deark: eps (Encapsulated PostScript)", "Encapsuled Postscript :eps:", "TIFF :epsp:",
+	"deark: eps (EPS binary)", "deark: eps (Encapsulated PostScript)", /^Encapsuled Postscript :(ai|eps|ps):$/, "TIFF :epsp:",
 	/^fmt\/(122|123|124|417)( |$)/, /^x-fmt\/20( |$)/,
 
 	// app specific

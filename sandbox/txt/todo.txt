@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Other 'installer icons' that I can look into supporting:
-	http://discmaster.textfiles.com/browse/9331/The%20Best%20of%20TUCOWS%20Volume%202.iso/files/onmeten.zip/Setup.exe
-	https://discmaster.textfiles.com/search?b3sum=753284e7240127076dd0f173ef940ae517ac539ba07f6f22a5c554ba8cf37c58
-
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
 

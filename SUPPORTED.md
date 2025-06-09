@@ -1,4 +1,4 @@
-# Supported File Formats (3,208)
+# Supported File Formats (3,210)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -914,7 +914,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (672)
+## Image (674)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -923,7 +923,7 @@ image | [3D Construction Kit](http://fileformats.archiveteam.org/wiki/3D_Constru
 image | [ACiDDraw COM](http://fileformats.archiveteam.org/wiki/ACiDDraw_COM_file) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/aciddrawCOM/)
 image | [Acorn (RISC OS) Sprite](http://fileformats.archiveteam.org/wiki/Acorn_Sprite) | .acorn | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/acornSprite/)
 image | [Acorn/RISC-OS Draw](http://fileformats.archiveteam.org/wiki/Acorn_Draw) |  | [drawview](http://www.keelhaul.me.uk/acorn/drawview/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/acornDraw/)
-image | Adobe Brush | .abr | [nconvert](https://www.xnview.com/en/nconvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/adobeBrush/)
+image | Adobe Brush | .abr | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/adobeBrush/)
 image | [Adobe Illustrator](http://fileformats.archiveteam.org/wiki/Adobe_Illustrator_Artwork) | .ai | [adobeIllustrator](https://winworldpc.com/product/adobe-illustrator/80) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelDRAW](https://winworldpc.com/product/corel-draw/50) | [12 sample files](https://sembiance.com/fileFormatSamples/image/adobeIllustrator/)
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | [convert](https://www.imagemagick.org/) [iio2png](http://github.com/Sembiance/iio2png/) [gimp](https://gimp.org) [deark](https://entropymine.com/deark/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [nconvert](https://www.xnview.com/en/nconvert/) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) | [14 sample files](https://sembiance.com/fileFormatSamples/image/psd/)
 image | [Advanced Art Studio](http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio) | .ocp .scr .win .pal | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) | [27 sample files](https://sembiance.com/fileFormatSamples/image/advancedArtStudio/)
@@ -1092,7 +1092,7 @@ image | Elecbyte M.U.G.E.N. sprites | .sff | [wuimg](https://codeberg.org/kaleid
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKPIC/)
 image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKS/)
 image | eLeMeNt ZX | .hgl .hgh .skl .xkl .hrx | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/elementZX/)
-image | Embedded JPEG File |  | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/embeddedJPG/)
+image | Embedded JPEG File |  | [nconvert](https://www.xnview.com/en/nconvert/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/embeddedJPG/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [keyViewPro](https://archive.org/details/KeyViewPro/) | [31 sample files](https://sembiance.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
 image | [Enhanced Compressed Wavelet](http://fileformats.archiveteam.org/wiki/ECW) | .ecw | [mrsiddecode](https://www.extensis.com/support/developers) | [4 sample files](https://sembiance.com/fileFormatSamples/image/enhancedCompressedWavelet/)
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/esm/)
@@ -1211,6 +1211,7 @@ image | [IFF-DEEP](http://fileformats.archiveteam.org/wiki/IFF-DEEP) | .deep | [
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/imageSystem/)
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/imageLab/)
 image | [Imagic](http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture) | .ic1 .ic2 .ic3 | [recoil2png](http://recoil.sourceforge.net) | [19 sample files](https://sembiance.com/fileFormatSamples/image/imagic/)
+image | Imaging Fax | .g3n | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/imagingFax/)
 image | [IMG Scan](http://fileformats.archiveteam.org/wiki/IMG_Scan) | .rwl .raw .rwh | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/imgScan/)
 image | [IndyPaint](http://fileformats.archiveteam.org/wiki/IndyPaint) | .tru | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/indyPaint/)
 image | [ING 15](http://fileformats.archiveteam.org/wiki/ING_15) | .ing | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ing/)
@@ -1261,6 +1262,7 @@ image | [Laughing Dog Screen Maker COM file](http://justsolve.archiveteam.org/wi
 image | [LEADTools Compressed Image](http://fileformats.archiveteam.org/wiki/CMP) | .cmp | [leadecom](https://archive.org/details/JPEG35_ZIP) | [15 sample files](https://sembiance.com/fileFormatSamples/image/cmp/)
 image | [libgd GD Image](http://fileformats.archiveteam.org/wiki/GD_image_format) | .gd | [gdtopng](https://libgd.org) | [11 sample files](https://sembiance.com/fileFormatSamples/image/gd/)
 image | [libgd GD2 Image](http://fileformats.archiveteam.org/wiki/GD2_image_format) | .gd2 | [gd2topng](https://libgd.org) | [10 sample files](https://sembiance.com/fileFormatSamples/image/gd2/)
+image | [LightWork Image bitmap](http://fileformats.archiveteam.org/wiki/LightWork_Image) | .lwi | [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/lightWorkImage/)
 image | [Limited Error Raster Compression Image](http://fileformats.archiveteam.org/wiki/LERC) | .lrc .lerc .lerc1 .lerc2 | [wuimg](https://codeberg.org/kaleido/wuimg) | [3 sample files](https://sembiance.com/fileFormatSamples/image/lercImage/)
 image | [Lisp Machine Bitmap](http://fileformats.archiveteam.org/wiki/Lisp_Machine_Bitmap) | .lispm | [lispmtopgm](http://netpbm.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/lispMachineBitmap/)
 image | [Loadstar SHP](http://fileformats.archiveteam.org/wiki/SHP_(Loadstar)) | .shp | [recoil2png](http://recoil.sourceforge.net) | [36 sample files](https://sembiance.com/fileFormatSamples/image/loadstarSHP/)
@@ -1580,7 +1582,7 @@ image | [ZX Spectrum Gigascreen](http://fileformats.archiveteam.org/wiki/Gigascr
 image | [ZX Spectrum Multicolor](http://fileformats.archiveteam.org/wiki/Multicolor_(ZX_Spectrum)) | .ifl .mc .mlt | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/image/multiColor/)
 image | [ZX Spectrum Next Layer 2](http://fileformats.archiveteam.org/wiki/NXI) | .nxi | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/zxNXI/)
 image | ZX Spectrum Profi | .grf | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/profi/)
-image | ZX Spectrum Snapshot | .sna | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/zxSpectrumSnapshot/)
+image | ZX Spectrum Snapshot | .sna | [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/zxSpectrumSnapshot/)
 image | [ZX Spectrum Standard SCR](http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)) | .scr | [recoil2png](http://recoil.sourceforge.net) [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/zxSCR/) - Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.
 image | [ZX Spectrum Stellar](http://fileformats.archiveteam.org/wiki/STL_(ZX_Spectrum)) | .stl | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/zxStellar/)
 image | [ZX Spectrum ULA+](http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)) | .scr | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/zxULAPlus/)

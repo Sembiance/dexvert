@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,657)
+# Unsupported File Formats (3,659)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -379,7 +379,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (192)
+## Document (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -458,6 +458,7 @@ Family/Format | Name | Extensions | Notes
 [document/gfxbootCompiledHTMLHelp](https://discmaster.textfiles.com/search?format=gfxbootCompiledHTMLHelp) | gfxboot compiled HTML Help | .hlp | 
 [document/greatkarteiDataBase](https://discmaster.textfiles.com/search?format=greatkarteiDataBase) | Greatkartei data base | .great .geaendert | 
 [document/greenstreetPublisher](https://discmaster.textfiles.com/search?format=greenstreetPublisher) | [Greenstreet Publisher Document/Snippet](http://fileformats.archiveteam.org/wiki/Greenstreet_Publisher) | .dtp .srp | [10 sample files](https://sembiance.com/fileFormatSamples/document/greenstreetPublisher/) - Some of these opened in Win2k with Publishing Suite 99, but it can't save in ANY other format, maybe I could 'print' to a PDF or something. But not all worked and not too many files out there, so not supported for now.
+[document/gsCalcSpreadsheet](https://discmaster.textfiles.com/search?format=gsCalcSpreadsheet) | GS-Calc spreadsheet | .gs | 
 [document/hancomWord](https://discmaster.textfiles.com/search?format=hancomWord) | [Hancom Word](http://fileformats.archiveteam.org/wiki/HWP) | .hwp | [1 sample file](https://sembiance.com/fileFormatSamples/document/hancomWord/)
 [document/palmHanDBaseDocument](https://discmaster.textfiles.com/search?format=palmHanDBaseDocument) | HanDBase PalmOS document | .pdb | 
 [document/harvardSpotlightPresentation](https://discmaster.textfiles.com/search?format=harvardSpotlightPresentation) | Harvard Spotlight Presentation | .ply | 
@@ -764,7 +765,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (198)
+## Image (197)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -871,7 +872,6 @@ Family/Format | Name | Extensions | Notes
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?format=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 [image/lightningStrikeBitmap](https://discmaster.textfiles.com/search?format=lightningStrikeBitmap) | Lightning Strike bitmap | .cod | 
 [image/lightWaveSurface](https://discmaster.textfiles.com/search?format=lightWaveSurface) | LightWave Surface | .srf | 
-[image/lightWorkImageBitmap](https://discmaster.textfiles.com/search?format=lightWorkImageBitmap) | LightWork Image bitmap | .lwi | 
 [image/littleDrawDrawing](https://discmaster.textfiles.com/search?format=littleDrawDrawing) | Little Draw Drawing | .ldw | Only known samples are those that came with the program. Simple format, but not really even worth supporting.
 [image/logoWriterPage](https://discmaster.textfiles.com/search?format=logoWriterPage) | Logo Writer page | .lwr | 
 [image/logoArtDrawing](https://discmaster.textfiles.com/search?format=logoArtDrawing) | LogoArt drawing | .art | 
@@ -1143,7 +1143,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,422)
+## Other (2,424)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1363,6 +1363,7 @@ Family/Format | Name | Extensions | Notes
 [other/armorCommandMission](https://discmaster.textfiles.com/search?format=armorCommandMission) | Armor Command mission | .hpj | 
 [other/armorCommandPicture](https://discmaster.textfiles.com/search?format=armorCommandPicture) | Armor Command Picture | .pic | 
 [other/armSISpeedIndexTimingsData](https://discmaster.textfiles.com/search?format=armSISpeedIndexTimingsData) | ArmSI Speed Index timings data |  | 
+[other/artIconsProIconProject](https://discmaster.textfiles.com/search?format=artIconsProIconProject) | Art Icons Pro - IconProject | .icpr | 
 [other/artCAMModel](https://discmaster.textfiles.com/search?format=artCAMModel) | ArtCAM model | .art | 
 [other/artEffectBrush](https://discmaster.textfiles.com/search?format=artEffectBrush) | ArtEffect Brush |  | 
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?format=artEffectConvolution) | ArtEffect Convolution |  | 
@@ -2091,6 +2092,7 @@ Family/Format | Name | Extensions | Notes
 [other/groundControlIIOperationExodusGameArchive](https://discmaster.textfiles.com/search?format=groundControlIIOperationExodusGameArchive) | Ground Control II: Operation Exodus game data archive | .sdf | 
 [other/groundControlMap](https://discmaster.textfiles.com/search?format=groundControlMap) | Ground Control map | .sdf | 
 [other/groupWiseAdminHostDatabase](https://discmaster.textfiles.com/search?format=groupWiseAdminHostDatabase) | GroupWise admin host database | .db | 
+[other/gsBaseDataBase](https://discmaster.textfiles.com/search?format=gsBaseDataBase) | GS-Base data base | .gs | 
 [other/guemapDocument](https://discmaster.textfiles.com/search?format=guemapDocument) | GUEmap document | .gmp | 
 [other/guitarProFile](https://discmaster.textfiles.com/search?format=guitarProFile) | Guitar Pro File | .gtp | 
 [other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 .gpx | 

@@ -520,6 +520,7 @@ export default
 		flexiDriverConfiguration                   : {name : "Flexi driver configuration", ext : [".csm"], magic : ["Flexi driver configuration"], weakMagic : true},
 		fileTypeRule                               : {name : "File-Type Rule", ext : [".ftr"], magic : ["File-Type Rule"], weakMagic : true},
 		finkInfoFile                               : {name : "Fink Info-file", ext : [".info"], magic : ["Fink Info-file"], weakMagic : true},
+		fitsHeaderXtension                         : {name : "FITS Header (xtension)", ext : [".hdr"], magic : ["FITS Header (xtension)"], weakMagic : true},
 		flashProject                               : {name : "Flash Project", ext : [".flp"], magic : ["Flash Project"]},
 		flipAlbumData                              : {name : "FlipAlbum data", ext : [".flp"], magic : ["FlipAlbum data"]},
 		foldedControlInfo                          : {name : "Folded control info", ext : [".fdo", ".f", ".ftx", ".fc"], magic : ["Folded control info"], weakMagic : true},

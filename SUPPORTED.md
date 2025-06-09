@@ -1,4 +1,4 @@
-# Supported File Formats (3,206)
+# Supported File Formats (3,208)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -914,7 +914,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (671)
+## Image (672)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -923,6 +923,7 @@ image | [3D Construction Kit](http://fileformats.archiveteam.org/wiki/3D_Constru
 image | [ACiDDraw COM](http://fileformats.archiveteam.org/wiki/ACiDDraw_COM_file) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/aciddrawCOM/)
 image | [Acorn (RISC OS) Sprite](http://fileformats.archiveteam.org/wiki/Acorn_Sprite) | .acorn | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/acornSprite/)
 image | [Acorn/RISC-OS Draw](http://fileformats.archiveteam.org/wiki/Acorn_Draw) |  | [drawview](http://www.keelhaul.me.uk/acorn/drawview/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/acornDraw/)
+image | Adobe Brush | .abr | [nconvert](https://www.xnview.com/en/nconvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/adobeBrush/)
 image | [Adobe Illustrator](http://fileformats.archiveteam.org/wiki/Adobe_Illustrator_Artwork) | .ai | [adobeIllustrator](https://winworldpc.com/product/adobe-illustrator/80) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelDRAW](https://winworldpc.com/product/corel-draw/50) | [12 sample files](https://sembiance.com/fileFormatSamples/image/adobeIllustrator/)
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | [convert](https://www.imagemagick.org/) [iio2png](http://github.com/Sembiance/iio2png/) [gimp](https://gimp.org) [deark](https://entropymine.com/deark/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [nconvert](https://www.xnview.com/en/nconvert/) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) | [14 sample files](https://sembiance.com/fileFormatSamples/image/psd/)
 image | [Advanced Art Studio](http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio) | .ocp .scr .win .pal | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) | [27 sample files](https://sembiance.com/fileFormatSamples/image/advancedArtStudio/)
@@ -1091,7 +1092,7 @@ image | Elecbyte M.U.G.E.N. sprites | .sff | [wuimg](https://codeberg.org/kaleid
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKPIC/)
 image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKS/)
 image | eLeMeNt ZX | .hgl .hgh .skl .xkl .hrx | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/elementZX/)
-image | Embedded JPEG File |  | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/embeddedJPG/)
+image | Embedded JPEG File |  | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/embeddedJPG/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [keyViewPro](https://archive.org/details/KeyViewPro/) | [31 sample files](https://sembiance.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
 image | [Enhanced Compressed Wavelet](http://fileformats.archiveteam.org/wiki/ECW) | .ecw | [mrsiddecode](https://www.extensis.com/support/developers) | [4 sample files](https://sembiance.com/fileFormatSamples/image/enhancedCompressedWavelet/)
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/esm/)
@@ -2104,7 +2105,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,049)
+## Text (1,050)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2405,6 +2406,7 @@ text | FGDC metadata | .met |  | [5 sample files](https://sembiance.com/fileForm
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
 text | File-Type Rule | .ftr |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/fileTypeRule/)
 text | Fink Info-file | .info |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/finkInfoFile/)
+text | FITS Header (xtension) | .hdr |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fitsHeaderXtension/)
 text | Flash Project | .flp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flashProject/)
 text | Flexi driver configuration | .csm |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/flexiDriverConfiguration/)
 text | Flight Sim Toolkit airplane parameters |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitAirplaneParameters/)
@@ -2509,7 +2511,7 @@ text | iCalendar/vCalendar | .ics .vcf |  | [11 sample files](https://sembiance.
 text | IEEE DASC Standard Delay Format | .sdf .sdo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ieeeDASCStandardDelayFormat/)
 text | IESNA Photometric data | .ies |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iesnaPhotometricData/)
 text | ILINK linker Configuration | .icf |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ilinkLinkerConfiguration/)
-text | ImageMaster Shape | .ish |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/imageMasterShape/)
+text | ImageMaster Shape | .ish |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/imageMasterShape/)
 text | Imageworks 3D LUT format | .spi3d |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/imageworks3DLUTFormat/)
 text | ImgBurn Graph data | .ibg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/imgBurnGraphData/)
 text | Impatica OnCue Project | .ipj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/impaticaOnCueProject/)

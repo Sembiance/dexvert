@@ -15,6 +15,12 @@ const DECRECURSE_PORT = 17738;
 const DESIRED_SAMPLE_COUNT = 10;
 const RECURSE_WORK_DIR_PATH = "/mnt/dexvert/recurse";
 
+// these formats we want some extra samples for
+const EXTRA_SAMPLE_COUNT =
+{
+	"image/embeddedJPEG" : 20
+};
+
 // these formats should not be higlighted for sample inclusion on the admin item page for various resons
 const EXCLUDED_SAMPLE_FORMATS =
 [
@@ -307,7 +313,7 @@ if(argv.headless)
 const SAMPLE_PATH_SUMS = {};
 async function isNewSampleFile(dexformatid, sampleFilePath)
 {
-	if((EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)>=DESIRED_SAMPLE_COUNT)
+	if((EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)>=(EXTRA_SAMPLE_COUNT[dexformatid] || DESIRED_SAMPLE_COUNT))
 		return false;
 
 	if(EXCLUDED_SAMPLE_FORMATS.includes(dexformatid) || dexformatid.endsWith("GameArchive"))

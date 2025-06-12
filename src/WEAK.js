@@ -184,6 +184,7 @@ export const WEAK_VALUES =
 	/^deark: dclimplode$/,
 	/^deark: degas/,
 	/^deark: exe /,
+	/^deark: fli$/,
 	/^deark: iff$/,
 	/^deark: fat /,
 	/^deark: godpaint$/,
@@ -406,12 +407,14 @@ export const WEAK_VALUES =
 	/^Brender :bdr:$/,
 	/^Dali \((Low|Medium|High) Resolution\) :dali:/,
 	/^Datacopy :dcpy:$/,
+	/^Digital F\/X :tdim:$/,
 	/^DBW Render 4096 :dbw:$/,
 	/^Fax G3 :fax:$/,
 	/^FLI movie :fli:$/,
 	/^GigaPaint Multi :gig:$/,
 	/^Hayes JTFax :jtf:$/,
 	/^Image Speeder :ish:$/,
+	/^Img Software Set :img:$/,	// unlikely to encounter this, but code that compiles (but fails to produce an image) is in sandbox/app/X_img/  also see: http://fileformats.archiveteam.org/wiki/Img_Software_Set
 	/^Jovian VI :vi:$/,
 	/^JPEG based file :pmp:$/,
 	/^LaserData :lda:$/,
@@ -419,7 +422,7 @@ export const WEAK_VALUES =
 	/^NewsRoom :nsr:$/,
 	/^RIPTerm Image :ript:$/,
 	/^Truevision TARGA.* :tga:$/,
-	/^Img Software Set :img:$/,	// unlikely to encounter this, but code that compiles (but fails to produce an image) is in sandbox/app/X_img/  also see: http://fileformats.archiveteam.org/wiki/Img_Software_Set
+	/^Zsoft Paintbrush :bmg:$/,
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,
@@ -871,7 +874,6 @@ export const WEAK_VALUES =
 	/^mcrypt [\d .]*encrypted data/,
 	/^MegaPaint (INF|POP|VIN|VPO)$/,	// these MegaPaint's are here instead of unsupported because the magic matches the extension, so weakMagic wouldn't ensure a non-match
 	/^MegaPaint plug-in Module$/,
-	/^MegaPaint symbols Library$/,
 	/^message(, ASCII text)?$/,
 	/^Message Sequence Chart \(chart\)/,
 	/^Micro Focus File with Header/,
@@ -946,6 +948,7 @@ export const WEAK_VALUES =
 	/^old timezone data/,
 	/^old-fs dump file/,
 	/^OLE 2 Compound Document.* Microsoft Works.* document/,
+	/^OpenDocument$/,
 	/OpenFirmware FORTH Dictionary/,
 	/^openssl enc'd data with salted password/,
 	/^OpenPGP Public Key/,
@@ -2482,6 +2485,7 @@ export const WEAK_VALUES =
 	/^WordPerfect Executive Spreadsheet$/,
 	/^World of Warcraft TOC file$/,
 	/^WorldWide Telescope collection$/,
+	/^WWE 2K20 game data archive$/,
 	/^wxWindows - wxPython Resource$/,
 	/^X-CAD Screen Menu$/,
 	/^X-CAD SoftFont$/,

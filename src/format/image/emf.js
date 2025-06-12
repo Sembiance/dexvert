@@ -6,7 +6,7 @@ export class emf extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Enhanced_Metafile";
 	ext          = [".emf"];
 	mimeType     = "image/emf";
-	magic        = ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile", "image/emf", "deark: emf (EMF)", /^fmt\/(344|345)( |$)/, /^x-fmt\/153( |$)/];
+	magic        = ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile", "image/emf", /^deark: emf \(EMF\+?\)$/, /^fmt\/(344|345)( |$)/, /^x-fmt\/153( |$)/];
 	metaProvider = ["image"];
 	converters   = [
 		"deark[module:emf]", "convert[format:emf][matchType:magic]", `abydosconvert[format:${this.mimeType}]`,

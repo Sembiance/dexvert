@@ -8,7 +8,8 @@ export class cab extends Format
 	filename = [/^cabinet$/, /^_cabinet$/i];
 	magic    = [
 		// general cab
-		/^Microsoft Cabinet [Aa]rchive/, "CAB Archiv gefunden", "Archive: Microsoft Cabinet File", "Self-extracting CAB", "Win32 MS Cabinet Self-Extractor",  "application/vnd.ms-cab-compressed", /^CAB$/, /^fmt\/1839( |$)/, /^x-fmt\/(216|414)( |$)/,
+		/^Microsoft Cabinet [Aa]rchive/, "CAB Archiv gefunden", "Archive: Microsoft Cabinet File", "Self-extracting CAB", "Win32 MS Cabinet Self-Extractor",  "application/vnd.ms-cab-compressed", /^CAB$/, "deark: cab",
+		/^fmt\/1839( |$)/, /^x-fmt\/(216|414)( |$)/,
 		
 		// app specific cabs
 		"IncrediMail data (generic)", "IncrediMail Animation", "IncrediMail letter/ecard Flavor", "IncrediMail Image", "IncrediMail sound", "IncrediMail Notifier", "IncrediMail Skin", "IncrediMail Emoticon", "Diagnostic Cabinet",

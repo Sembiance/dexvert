@@ -12,6 +12,7 @@ export class nconvertID extends Program
 	runOptions = ({timeout : xu.SECOND*20});	// can take a while on bigger files, so just timeout quickly
 	post       = r =>
 	{
+		// NOTE: nconvert DOES utilize the extension 'to some degree' to determine the format, but in my tests it didn't seem necessary to strip the extension a-la ffprobeID
 		r.meta.detections = [];
 
 		const meta = {};

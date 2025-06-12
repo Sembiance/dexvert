@@ -46,6 +46,7 @@ if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -rf 7777-runtime-dir.*
 fi
 rm -f OSL_PIPE*
+rm -f file??????
 fd magick -x rm {} \;
 rm -rf Ay_Emul* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
 rm -f ./*.crash.txt

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,659)
+# Unsupported File Formats (3,657)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -765,7 +765,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (197)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -862,7 +862,6 @@ Family/Format | Name | Extensions | Notes
 [image/imagineTexture](https://discmaster.textfiles.com/search?format=imagineTexture) | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
 [image/inAVisionDrawing](https://discmaster.textfiles.com/search?format=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/) - In-a-Vision and the Micrografx Windows Convet program (both on winworld) are both Windows 1.x/2.x programs that don't work in Win2k. Not aware of anything else that can convert these, as Micrografx Designer 4 does not.
 [image/instantGraphicsAndSound](https://discmaster.textfiles.com/search?format=instantGraphicsAndSound) | [Instant Graphics and Sound](http://fileformats.archiveteam.org/wiki/Instant_Graphics_and_Sound) | .igs .ig .igm | [12 sample files](https://sembiance.com/fileFormatSamples/image/instantGraphicsAndSound/) - No known converter yet. Seen a recent resurgence in interest in 2024
-[image/intergraphRasterImage](https://discmaster.textfiles.com/search?format=intergraphRasterImage) | Intergraph Raster Image | .rgb | 
 [image/introCAD](https://discmaster.textfiles.com/search?format=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
@@ -1143,7 +1142,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,424)
+## Other (2,423)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1259,7 +1258,6 @@ Family/Format | Name | Extensions | Notes
 [other/ageOfWondersShadowMagicEffects](https://discmaster.textfiles.com/search?format=ageOfWondersShadowMagicEffects) | Age of Wonders: Shadow Magic Effects | .fx | 
 [other/agesGameScript](https://discmaster.textfiles.com/search?format=agesGameScript) | AGES Game Script | .aex | 
 [other/agfaCompugraphicFontCache](https://discmaster.textfiles.com/search?format=agfaCompugraphicFontCache) | AGFA/Compugraphic Font Cache |  | 
-[other/aheadNeroCoverDesignerTemplate](https://discmaster.textfiles.com/search?format=aheadNeroCoverDesignerTemplate) | Ahead Nero CoverDesigner Template | .nct | 
 [other/aibbLoadModule](https://discmaster.textfiles.com/search?format=aibbLoadModule) | AIBB load Module | .module .aibb | 
 [other/aimpSkin](https://discmaster.textfiles.com/search?format=aimpSkin) | AIMP Skin | .acs3 | 
 [other/airlineTycoonGameDataArchive](https://discmaster.textfiles.com/search?format=airlineTycoonGameDataArchive) | Airline Tycoon game data archive | .gli | 
@@ -1429,7 +1427,6 @@ Family/Format | Name | Extensions | Notes
 [other/avroSerializedData](https://discmaster.textfiles.com/search?format=avroSerializedData) | Avro serialized data | .avro | 
 [other/avsVideoEditorProject](https://discmaster.textfiles.com/search?format=avsVideoEditorProject) | AVS Video Editor Project | .vep | 
 [other/aweGamesGameDataContainer](https://discmaster.textfiles.com/search?format=aweGamesGameDataContainer) | AWE Games game data container | .omt | 
-[other/axialisProScreensaverProducerProject](https://discmaster.textfiles.com/search?format=axialisProScreensaverProducerProject) | Axialis Professional Screensaver Producer project | .ssp | 
 [other/axisGameEnhancementModules](https://discmaster.textfiles.com/search?format=axisGameEnhancementModules) | Axis Game Enhancement Modules | .fil | 
 [other/babbleData](https://discmaster.textfiles.com/search?format=babbleData) | Babble! Data | .bab | 
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
@@ -2119,6 +2116,7 @@ Family/Format | Name | Extensions | Notes
 [other/hexWorkshopCharMapFile](https://discmaster.textfiles.com/search?format=hexWorkshopCharMapFile) | Hex Workshop Char Map File | .map | 
 [other/hiddenAndDangerousGameDataArchive](https://discmaster.textfiles.com/search?format=hiddenAndDangerousGameDataArchive) | Hidden and Dangerous game data archive | .cnt .dta | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?format=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
+[other/hitmanCodename47SaveGame](https://discmaster.textfiles.com/search?format=hitmanCodename47SaveGame) | Hitman: Codename 47 save game | .sav | 
 [other/hmvsAntivirusDOSPlugIn](https://discmaster.textfiles.com/search?format=hmvsAntivirusDOSPlugIn) | HMVS antivirus DOS PlugIn | .pnp .lng | 
 [other/homePlanPro5Clip](https://discmaster.textfiles.com/search?format=homePlanPro5Clip) | Home Plan Pro 5 Clip | .clp | 
 [other/homePlanPro5Plan](https://discmaster.textfiles.com/search?format=homePlanPro5Plan) | Home Plan Pro 5 Plan | .pln | 

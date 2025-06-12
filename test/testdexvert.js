@@ -119,7 +119,8 @@ const FORMAT_OS_HINT =
 	},
 	"archive/nowCompress" :
 	{
-		"その他のモデム設定.sea" : "macintoshjp"
+		"その他のモデム設定.sea" : "macintoshjp",
+		"WYSIWYG ﾒﾆｭｰアーカイブ" : "macintoshjp"
 	},
 	"archive/lha" :
 	{

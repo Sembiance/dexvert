@@ -1,11 +1,11 @@
-# Supported File Formats (3,216)
+# Supported File Formats (3,218)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (473)
+## Archive (474)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -350,6 +350,7 @@ archive | PMWLite Packed | .exe .com | cup386 | [9 sample files](https://sembian
 archive | Postal game Archive | .sak | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/postalGameArchive/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [unar](https://github.com/incbee/Unarchiver) [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](https://gitlab.com/heikkiorsila/amigadepacker) | [20 sample files](https://sembiance.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | PowerPlayer Music Cruncher |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) [ancient](https://github.com/temisu/ancient_format_decompressor) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/powerPlayerMusicCruncher/)
+archive | [PPMZ Archive](http://fileformats.archiveteam.org/wiki/PPMZ) |  | [ppmz](http://www.cs.hut.fi/u/tarhio/ppmz/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ppmz/)
 archive | [Prehistorik Game Archive](https://moddingwiki.shikadi.net/wiki/CUR_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/prehistorikGameArchive/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [deark](https://entropymine.com/deark/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/pog/)
 archive | [Print/Instant Artist](http://fileformats.archiveteam.org/wiki/Print_Artist) | .gfx | [printArtist](https://winworldpc.com/product/instant-artist-print/60) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/printArtist/)
@@ -989,7 +990,7 @@ image | [AutoCAD Slide](http://fileformats.archiveteam.org/wiki/AutoCAD_Slide) |
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | [avifdec](https://github.com/AOMediaCodec/libavif) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [5 sample files](https://sembiance.com/fileFormatSamples/image/avif/)
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [20 sample files](https://sembiance.com/fileFormatSamples/image/avatar/)
 image | [Award BIOS Logo](http://fileformats.archiveteam.org/wiki/Award_BIOS_logo) | .epa | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/epa/)
-image | Axialis Professional Screensaver Producer project | .ssp | [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/axialisProScreensaverProducerProject/)
+image | Axialis Professional Screensaver Producer project | .ssp | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/axialisProScreensaverProducerProject/)
 image | Base64 Encoded Image |  | [base64](https://www.gnu.org/software/coreutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/base64EncodedImage/)
 image | [BBC Micro Image](http://fileformats.archiveteam.org/wiki/BBC_Micro_mode_image) | .bb0 .bb1 .bb2 .bb4 .bb5 | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/bbcMicro/)
 image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/ldpic/)
@@ -1233,7 +1234,7 @@ image | iOS/Apple Optimized PNG | .png | [nconvert](https://www.xnview.com/en/nc
 image | [Jet Graphics Planner](http://fileformats.archiveteam.org/wiki/Jet_Graphics_Planner) | .jgp | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/jgp/)
 image | [Jigsaw Puzzle](http://fileformats.archiveteam.org/wiki/Jigsaw_(Walter_A._Kuhn)) | .jig .sav | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/jigsawPuzzle/)
 image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/jbig/) - Sample file mx.jbg converts to garbage, not sure why.
-image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPEG) | .jpg .jpeg .jpe .jfif | [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [iio2png](http://github.com/Sembiance/iio2png/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [photoDraw](https://archive.org/details/PhotoDraw2000V2) | [71 sample files](https://sembiance.com/fileFormatSamples/image/jpg/)
+image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPEG) | .jpg .jpeg .jpe .jfif | [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [iio2png](http://github.com/Sembiance/iio2png/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [photoDraw](https://archive.org/details/PhotoDraw2000V2) | [72 sample files](https://sembiance.com/fileFormatSamples/image/jpg/)
 image | [Jovian Logix VI Image](http://fileformats.archiveteam.org/wiki/Jovian_Logic_VI) | .vi | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [7 sample files](https://sembiance.com/fileFormatSamples/image/jovianLogicVI/)
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 .j2c | [grk_decompress](https://github.com/GrokImageCompression/grok) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [ffmpeg](https://ffmpeg.org/) [gimp](https://gimp.org) [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [14 sample files](https://sembiance.com/fileFormatSamples/image/jpeg2000/)
 image | [JPEG 2000 PGX](http://fileformats.archiveteam.org/wiki/PGX_(JPEG_2000)) | .pgx | [convert](https://www.imagemagick.org/) [ffmpeg](https://ffmpeg.org/) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/jpeg2000PGX/)
@@ -1281,7 +1282,7 @@ image | [LuRaWave Bitmap](http://fileformats.archiveteam.org/wiki/LuraWave) | .l
 image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict .drw | [soffice](https://www.libreoffice.org) | [19 sample files](https://sembiance.com/fileFormatSamples/image/macDraw/)
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [iio2png](http://github.com/Sembiance/iio2png/) [ffmpeg](https://ffmpeg.org/) [recoil2png](http://recoil.sourceforge.net) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [keyViewPro](https://archive.org/details/KeyViewPro/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [soffice](https://www.libreoffice.org) [tomsViewer](https://tomseditor.com/blog/viewer) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [63 sample files](https://sembiance.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/icns/)
-image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic .macp .pnt | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [wuimg](https://codeberg.org/kaleido/wuimg) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [keyViewPro](https://archive.org/details/KeyViewPro/) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [tomsViewer](https://tomseditor.com/blog/viewer) | [31 sample files](https://sembiance.com/fileFormatSamples/image/macPaint/) - The MacBinary header is entirely optional, which makes this format really hard to properly detect, like those here: http://discmaster.textfiles.com/browse/8166/Educorp1Compilation.sit/educorp1/Clip%20Art_Pictures%20(4000,%207200)/4009%20Celebs%20v.2/The%20Pics!
+image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic .macp .pnt | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [keyViewPro](https://archive.org/details/KeyViewPro/) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [tomsViewer](https://tomseditor.com/blog/viewer) | [31 sample files](https://sembiance.com/fileFormatSamples/image/macPaint/) - The MacBinary header is entirely optional, which makes this format really hard to properly detect, like those here: http://discmaster.textfiles.com/browse/8166/Educorp1Compilation.sit/educorp1/Clip%20Art_Pictures%20(4000,%207200)/4009%20Celebs%20v.2/The%20Pics!
 image | [Macro Pixel Editor](http://fileformats.archiveteam.org/wiki/Marco_Pixel_Editor) | .cpi | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/cpi/)
 image | [Mad Designer](http://fileformats.archiveteam.org/wiki/Mad_Designer) | .mbg | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mbg/)
 image | [Magic Draw](http://fileformats.archiveteam.org/wiki/MagicDraw) | .shr | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/magicDraw/)
@@ -2113,7 +2114,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,050)
+## Text (1,051)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2690,7 +2691,7 @@ text | Moxcel spreadsheet | .mxl |  | [1 sample file](https://sembiance.com/file
 text | MOZART Percussion map | .mzp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/mozartPercussionMap/)
 text | Mozilla (Netscape) settings | .js |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mozillaNetscapeSettings/)
 text | Mozilla Mork database | .dat .mab |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mozillaMorkDatabase/)
-text | Mozilla Spam Filter Definition | .sfd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mozillaSpamFilterDefinition/)
+text | Mozilla Spam Filter Definition | .sfd |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/mozillaSpamFilterDefinition/)
 text | MPlayer font Description | .desc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/mPlayerFontDescription/)
 text | MS Developer Studio Project | .dsp |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/msDeveloperStudioProject/)
 text | Multi Edit configuration | .me |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/multiEditConfiguration/)
@@ -2874,6 +2875,7 @@ text | RAPCON Sector info | .sec |  | [6 sample files](https://sembiance.com/fil
 text | RAR registration data | .key .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rarRegistrationData/)
 text | RASTER Music Tracker settings | .ini |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rasterMusicTrackerSettings/)
 text | RData (ASCII) | .rda .rdata |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rData/)
+text | ReachOut Script | .ros |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/reachOutScript/)
 text | REAL Numbers Tape | .tap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/realNumbersTape/)
 text | RealMedia meta file | .ram |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/realMediaMetaFile/)
 text | REAPER Project | .rpp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/reaperProject/)

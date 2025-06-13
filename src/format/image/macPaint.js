@@ -8,13 +8,15 @@ export class macPaint extends Format
 	ext            = [".mac", ".pntg", ".pic", ".macp", ".pnt"];
 	forbidExtMatch = [".pic"];
 	magic          = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)", "deark: macpaint", "Apple Macintosh MacPaint :mac:", /^fmt\/(161|1429)( |$)/, /^x-fmt\/161( |$)/];
-	//weakMagic      = ["deark: macpaint"];
+	//weakMagic      = ["deark: macpaint", /^x-fmt\/161( |$)/];
 	idMeta         = ({macFileType}) => macFileType==="PNTG";
 	mimeType       = "image/x-macpaint";
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];
 	converters     = [
-		"deark[module:macpaint][mac][matchType:magic]", "iio2png", "wuimg[matchType:magic]", "imconv[format:mpnt][strongMatch]", "nconvert[format:mac]", `abydosconvert[format:${this.mimeType}]`, "convert",
+		"deark[module:macpaint][mac][matchType:magic]", "iio2png",
+		//"wuimg[matchType:magic]",		// incorrectly processes non MacPaint files such as: https://discmaster.textfiles.com/view/33954/DPPCPRO0599A.ISO/May/Lotus97/LOTUS/WORDPRO/XX01252.TBL?details
+		"imconv[format:mpnt][strongMatch]", "nconvert[format:mac]", `abydosconvert[format:${this.mimeType}]`, "convert",
 		"keyViewPro",	// important to use for 5054.pnt & 5058.pnt & 5060.pnt
 		...["pv", "canvas5", "corelPhotoPaint", "tomsViewer"].map(v => `${v}[strongMatch]`)	// omit "hiJaakExpress[hasExtMatch]" as it will incorrectly handle other/venusMacro/SW.MAC
 	];

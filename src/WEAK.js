@@ -2501,7 +2501,7 @@ export const WEAK_VALUES =
 	/^XML-Data Reduced$/,
 	/^XMOD format module$/,
 	/^XPEC Entertainment game Archive Format$/,
-	/^Xpress Tree disk$/,
+	/^Xpress (backup|Tree) disk/,
 	/^XTrkCAD parameters$/,
 	/^XYPad Drawing$/,
 	/^XyWrite Printer driver$/,

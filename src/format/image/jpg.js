@@ -7,8 +7,9 @@ export class jpg extends Format
 	website          = "http://fileformats.archiveteam.org/wiki/JPEG";
 	ext              = [".jpg", ".jpeg", ".jpe", ".jfif"];
 	mimeType         = "image/jpeg";
-	magic            = ["JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", "piped jpeg sequence (jpeg_pipe)",
-		"JPEG Stereoscopic bitmap", "deark: jpeg (JPEG/Exif)", "deark: jpeg (JPEG/JFIF", "deark: jpeg (JPEG (other))", /^JPEG (CMYK|Grayscale|TrueColor) \(v[\d.]+\) :(jpeg|jps):$/,
+	magic            = [
+		"JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", "piped jpeg sequence (jpeg_pipe)",
+		"JPEG Stereoscopic bitmap", "deark: jpeg (JPEG/Exif)", "deark: jpeg (JPEG/JFIF", "deark: jpeg (JPEG (other))", /^JPEG (CMYK|Grayscale|TrueColor) \(v[\d.]+\) :(jpeg|jps):$/, "JPEG based file :*:",
 		"Pegasus JPEG bitmap",	// supposedly a variant of JPEG but it seems to work just fine as a normal JPEG
 		/^fmt\/(41|42|43|44|645|1507)( |$)/, /^x-fmt\/(390|391|398)( |$)/];
 	idMeta           = ({macFileType}) => ["JFIF", "JPEG", "jpeg"].includes(macFileType);

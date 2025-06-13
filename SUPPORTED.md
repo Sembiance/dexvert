@@ -1,4 +1,4 @@
-# Supported File Formats (3,223)
+# Supported File Formats (3,224)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -916,7 +916,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (684)
+## Image (685)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1461,6 +1461,7 @@ image | [Scitex Continuous Tone](http://fileformats.archiveteam.org/wiki/Scitex_
 image | [Scriptable Network Graphic](https://sng.sourceforge.net/) | .sng | [sng](https://sng.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/sng/)
 image | [Seattle FilmWorks/PhotoWorks PhotoMail](http://fileformats.archiveteam.org/wiki/Seattle_FilmWorks) | .sfw .pwp .pwm .alb | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/seattleFilmWorks/)
 image | [Second Nature Screensaver Graphic](http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic) | .snx | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/snx/) - This only is able to convert files that are just wrapped JPEG images (dragon*.snx). Others are in an unknown file format, including barw22.snx.
+image | Second Nature Slide Show | .cat | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/)
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/shg/)
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/sge/)
 image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [4 sample files](https://sembiance.com/fileFormatSamples/image/sgx/) - Some image files are not yet supported such as testimg-lz77.sgx

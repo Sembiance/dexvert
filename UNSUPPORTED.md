@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,653)
+# Unsupported File Formats (3,652)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -765,7 +765,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (192)
+## Image (191)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -927,7 +927,6 @@ Family/Format | Name | Extensions | Notes
 [image/reflectionsMonzoom](https://discmaster.textfiles.com/search?format=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
 [image/satoriPaint](https://discmaster.textfiles.com/search?format=satoriPaint) | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 [image/seam3DMaterial](https://discmaster.textfiles.com/search?format=seam3DMaterial) | SEAM 3D Material | .mat | 
-[image/secondNatureSlideShow](https://discmaster.textfiles.com/search?format=secondNatureSlideShow) | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 [image/serifDrawPlusDrawing](https://discmaster.textfiles.com/search?format=serifDrawPlusDrawing) | Serif DrawPlus Picture/drawing | .dpp | 
 [image/signumCDI](https://discmaster.textfiles.com/search?format=signumCDI) | Signum! CDI Image | .cdi .c01 | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?format=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)

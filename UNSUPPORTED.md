@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,657)
+# Unsupported File Formats (3,653)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -765,7 +765,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (196)
+## Image (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -774,12 +774,9 @@ Family/Format | Name | Extensions | Notes
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?format=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
 [image/aegisDrawDrawing](https://discmaster.textfiles.com/search?format=aegisDrawDrawing) | Aegis Draw drawing | .draw1 .drawing | 
 [image/afl](https://discmaster.textfiles.com/search?format=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
-[image/aipdNI](https://discmaster.textfiles.com/search?format=aipdNI) | AIPD National Instruments Image | .apd .aipd | [8 sample files](https://sembiance.com/fileFormatSamples/image/aipdNI/)
 [image/aldusIntelliDrawDrawing](https://discmaster.textfiles.com/search?format=aldusIntelliDrawDrawing) | Aldus IntelliDraw Drawing | .idw | 
 [image/allyCADDrawing](https://discmaster.textfiles.com/search?format=allyCADDrawing) | AllyCAD Drawing | .drg | 
-[image/amiBIOSLogoSplashBitmap](https://discmaster.textfiles.com/search?format=amiBIOSLogoSplashBitmap) | [AMI BIOS logo/splash bitmap](http://fileformats.archiveteam.org/wiki/GRFX) | .grfx .grf | [6 sample files](https://sembiance.com/fileFormatSamples/image/amiBIOSLogoSplashBitmap/)
 [image/amiBlitz2Bitmap](https://discmaster.textfiles.com/search?format=amiBlitz2Bitmap) | AmiBlitz2 bitmap | .ab2i | 
-[image/animatorPICCEL](https://discmaster.textfiles.com/search?format=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
 [image/applausePalette](https://discmaster.textfiles.com/search?format=applausePalette) | Applause Palette | .pal | 
 [image/applausePicture](https://discmaster.textfiles.com/search?format=applausePicture) | Applause Picture | .p | 
 [image/a2Sprites](https://discmaster.textfiles.com/search?format=a2Sprites) | Apple II Sprites | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
@@ -904,7 +901,6 @@ Family/Format | Name | Extensions | Notes
 [image/pcrImage](https://discmaster.textfiles.com/search?format=pcrImage) | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://sembiance.com/fileFormatSamples/image/pcrImage/)
 [image/petsciiSeq](https://discmaster.textfiles.com/search?format=petsciiSeq) | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://sembiance.com/fileFormatSamples/image/petsciiSeq/) - Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
 [image/phoneToolsInternalGraphic](https://discmaster.textfiles.com/search?format=phoneToolsInternalGraphic) | PhoneTools Internal Graphic Format | .dgr | 
-[image/pictrisPicture](https://discmaster.textfiles.com/search?format=pictrisPicture) | Pictris Picture | .pic | 
 [image/pixelPerfect](https://discmaster.textfiles.com/search?format=pixelPerfect) | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [1 sample file](https://sembiance.com/fileFormatSamples/image/pixelPerfect/) - Can't reliably detect this format and recoil2png & view64 will convert almost any file you give it into garbage
 [image/pixelmatorGraphic](https://discmaster.textfiles.com/search?format=pixelmatorGraphic) | Pixelmator graphic | .pxm | 
 [image/pixie](https://discmaster.textfiles.com/search?format=pixie) | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)) | .pxi .pxs | [2 sample files](https://sembiance.com/fileFormatSamples/image/pixie/)

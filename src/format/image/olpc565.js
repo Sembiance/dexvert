@@ -7,5 +7,5 @@ export class olpc565 extends Format
 	ext            = [".565"];
 	forbidExtMatch = true;
 	magic          = ["OLPC 565 bitmap", "OLPC firmware icon image data", "deark: olpc565"];
-	converters     = ["deark[module:olpc565]", "tomsViewer"];
+	converters     = ["deark[module:olpc565]", "wuimg", "tomsViewer"];
 }

@@ -7,6 +7,6 @@ export class spectrum512U extends Format
 	ext        = [".spu"];
 	magic      = ["deark: spectrum512u (Spectrum 512 Uncompressed", "Spectrum 512/4096 :spu:"];
 	mimeType   = "image/x-spectrum512-uncompressed";
-	converters = ["deark[module:spectrum512u]", "recoil2png", "nconvert[format:spu]"];
+	converters = ["deark[module:spectrum512u]", "recoil2png", "nconvert[format:spu]", "wuimg"];
 	verify     = ({meta}) => meta.colorCount>1;
 }

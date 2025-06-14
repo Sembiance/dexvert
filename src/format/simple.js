@@ -251,6 +251,7 @@ export default
 		videoArchivDataBase              : {name : "VideoArchiv Data base", ext : [".vad"], magic : ["VideoArchiv Data base"]},
 		visualBasicForm                  : {name : "Visual Basic Form", ext : [".frm", ".frx"], magic : ["Visual Basic Form", "VisualBasic Form", "Microsoft Visual Basic Form", "eMbedded Visual Basic Form", /^fmt\/(1541|1542)( |$)/], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_form"},
 		visualBasicProject               : {name : "Visual Basic Project", ext : [".mak"], magic : ["Visual Basic project"], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_project"},
+		whereIsItCatalog                 : {name : "WhereIsIt? catalog", ext : [".ctf"], magic : ["WhereIsIt? catalog file"], weakMagic : true},
 		windowsHelpFileContent           : {name : "Microsoft Windows Help File Content", ext : [".cnt"], magic : ["Help File Contents", "MS Windows help file Content", /^fmt\/1656( |$)/]},
 		windowsShortcut                  : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut", "Format: Windows Shortcut", /^x-fmt\/428( |$)/, "application/x-ms-shortcut"]},
 		wingzScript                      : {name : "Wingz Script", ext : [".scz"], magic : ["Wingz script", "Wingz compiled script"], idMeta : ({macFileType, macFileCreator}) => macFileType==="WZSC" && macFileCreator==="WNGZ"},

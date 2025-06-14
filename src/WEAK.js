@@ -401,6 +401,7 @@ export const WEAK_VALUES =
 
 	// nconvertID
 	/^ADEX :adex:$/,
+	/^Airnav :anv:$/,
 	/^Amiga icon :info:$/,
 	/^Apple Macintosh MacPaint :mac:/,
 	/^Astronomical Image Processing :aip:$/,
@@ -414,6 +415,7 @@ export const WEAK_VALUES =
 	/^GigaPaint Multi :gig:$/,
 	/^Hayes JTFax :jtf:$/,
 	/^Image Speeder :ish:$/,
+	/^Image Systems RLC2 :rlc2:$/,
 	/^Img Software Set :img:$/,	// unlikely to encounter this, but code that compiles (but fails to produce an image) is in sandbox/app/X_img/  also see: http://fileformats.archiveteam.org/wiki/Img_Software_Set
 	/^Jovian VI :vi:$/,
 	/^JPEG based file :pmp:$/,

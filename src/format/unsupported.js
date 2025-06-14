@@ -1293,6 +1293,7 @@ export default
 		lomaxGameData                                : {name : "Lomax game data", ext : [".lmx"], magic : ["Lomax game data"]},
 		lomaxWorldGameData                           : {name : "Lomax World game data", ext : [".wld"], magic : ["Lomax World game data"]},
 		lostFilesOfSherlockHolmesResourcs            : {name : "The Lost Files of Sherlock Holmes Resources", ext : [".rrm"], magic : ["The Lost Files of Sherlock Holmes Resource data"]},
+		isigMotorMASType1GameDataArchive             : {name : "ISI gMotor MAS type 1 game data archive", ext : [".mas", ".mas_2", ".mas_1", ".mas_3"], magic : ["ISI gMotor MAS type 1 game data archive"]},
 		lucasFilmData                                : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel"]},
 		lureOfTheTemptressGameDataArchive            : {name : "Lure of the Temptress game data archive", ext : [".vga"], magic : ["Lure of the Temptress game data archive"], weakMagic : true},
 		madden2004DataFile                           : {name : "Madden 2004 data file", ext : [".dat"], magic : ["Madden 2004 data file"]},

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,651)
+# Unsupported File Formats (3,652)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1137,7 +1137,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,423)
+## Other (2,424)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2199,6 +2199,7 @@ Family/Format | Name | Extensions | Notes
 [other/invisionBrushes](https://discmaster.textfiles.com/search?format=invisionBrushes) | Invision Brushes | .bru | 
 [other/irisOCRData](https://discmaster.textfiles.com/search?format=irisOCRData) | IRIS OCR data | .ytr | 
 [other/isamTableHandlerData](https://discmaster.textfiles.com/search?format=isamTableHandlerData) | ISAM table handler data | .ism | 
+[other/isigMotorMASType1GameDataArchive](https://discmaster.textfiles.com/search?format=isigMotorMASType1GameDataArchive) | ISI gMotor MAS type 1 game data archive | .mas .mas_2 .mas_1 .mas_3 | 
 [other/isisSchematicFile](https://discmaster.textfiles.com/search?format=isisSchematicFile) | ISIS Schematic file | .ds | 
 [other/ispellHashFile](https://discmaster.textfiles.com/search?format=ispellHashFile) | ispell hash file | .dic | 
 [other/ivsFledermausTDRFile](https://discmaster.textfiles.com/search?format=ivsFledermausTDRFile) | IVS Fledermaus TDR file |  | 

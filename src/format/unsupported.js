@@ -979,7 +979,6 @@ export default
 		metaStream3DObject            : {name : "MetaStream 3D object", ext : [".mts"], magic : ["MetaStream 3D object"], weakMagic : true},
 		movieSetterSet                : {name : "MovieSetter Set", ext : [".set"], magic : ["Movie Setter Set"]},
 		novastormMediaVideo           : {name : "Novastorm Media video", ext : [".fa", ".fza", ".mza"], magic : ["Novastorm Media video"]},
-		palmTealMovieVideo            : {name : "Palm TealMovie Video", ext : [".pdb"], magic : ["Palm TealMovie video+audio"]},
 		pcAnimatePlusAnimation        : {name : "PC Animate Plus Animation", ext : [".ani"], magic : ["PC Animate Plus Animation"], weakMagic : true},
 		pcAnimationVideo              : {name : "PC-Animation video", ext : [".ani"], magic : ["PC-Animation video"]},
 		roxanneAnimation              : {name : "Roxanne animation", ext : [".rox"], magic : ["Roxanne animation"]},

@@ -1,6 +1,16 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
+  Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
+  Don't do this for all formats, since in several cases a simple flattening is the best course of action
+
+* Figure out problem with aolart2ppm2007 under wine
+	[] image/aolART/ANDHIT_1.art Created file ANDHIT_1.png differs in size by 0.18% (allowed 0.1%) Expected 174KB but got 174KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
+	[] image/aolART/clouds.art Created file clouds.png differs in size by 0.57% (allowed 0.1%) Expected 85KB but got 84KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
+	[] image/aolART/GINANG.art Created file GINANG.png differs in size by 1.18% (allowed 0.1%) Expected 146KB but got 145KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
+	[] image/aolART/nyt_science7.art Created file nyt_science7.png differs in size by 79.79% (allowed 0.1%) Expected 9KB but got 17KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
+
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
 

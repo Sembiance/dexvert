@@ -85,7 +85,7 @@ async function getMacBinaryMeta(inputFile, debug)
 		const dateMacYear = macTSToDate(v).getFullYear();
 		const dateUnixYear = new Date(v*1000).getFullYear();
 		if(((dateMacYear<MIN_YEAR && ![1903, 1904].includes(dateMacYear)) || dateMacYear>(currentYear+1)) &&
-		   ((dateUnixYear<MIN_YEAR && ![1969, 1970].includes(dateUnixYear)) || dateUnixYear>(currentYear+1)))
+			((dateUnixYear<MIN_YEAR && ![1969, 1970].includes(dateUnixYear)) || dateUnixYear>(currentYear+1)))
 			suspectDates[type] = true;
 		
 		if((dateMacYear<MIN_YEAR || dateUnixYear<MIN_YEAR))

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,652)
+# Unsupported File Formats (3,648)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -297,7 +297,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (76)
+## Audio (75)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -341,7 +341,6 @@ Family/Format | Name | Extensions | Notes
 [audio/medSynthSound](https://discmaster.textfiles.com/search?format=medSynthSound) | MED Synth Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/medSynthSound/)
 [audio/microsoftSpeechData](https://discmaster.textfiles.com/search?format=microsoftSpeechData) | Microsoft Speech Data |  | 
 [audio/mioCompressedAudio](https://discmaster.textfiles.com/search?format=mioCompressedAudio) | MIO compressed audio | .mio | 
-[audio/mmfwSounds](https://discmaster.textfiles.com/search?format=mmfwSounds) | MMFW Sounds | .mma .snd | 
 [audio/musicStudioSound](https://discmaster.textfiles.com/search?format=musicStudioSound) | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://sembiance.com/fileFormatSamples/audio/musicStudioSound/)
 [audio/musiclineInstrument](https://discmaster.textfiles.com/search?format=musiclineInstrument) | [Musicline Instrument](https://www.musicline.org/) |  | [7 sample files](https://sembiance.com/fileFormatSamples/audio/musiclineInstrument/)
 [audio/outcastSoundEffects](https://discmaster.textfiles.com/search?format=outcastSoundEffects) | [Outcast Sound effects](https://playtechs.blogspot.com/2010/05/reading-outcast-sfx-files.html) | .sfx | 
@@ -765,7 +764,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (191)
+## Image (190)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -883,7 +882,6 @@ Family/Format | Name | Extensions | Notes
 [image/microsoftBorderArt](https://discmaster.textfiles.com/search?format=microsoftBorderArt) | Microsoft Border Art | .bdr | 
 [image/microsoftDocumentImagingFormat](https://discmaster.textfiles.com/search?format=microsoftDocumentImagingFormat) | Microsoft Document Imaging format | .mdi | 
 [image/xboxXPR0Texture](https://discmaster.textfiles.com/search?format=xboxXPR0Texture) | Microsoft Xbox XPR0 texture | .xbx | 
-[image/mmfwPictures](https://discmaster.textfiles.com/search?format=mmfwPictures) | MMFW Pictures | .pic .mmp | 
 [image/mvpPaintAnimation](https://discmaster.textfiles.com/search?format=mvpPaintAnimation) | MVP Paint Animation | .af | 
 [image/needForSpeedTextures](https://discmaster.textfiles.com/search?format=needForSpeedTextures) | Need For Speed textures | .fam | 
 [image/neoPaintPattern](https://discmaster.textfiles.com/search?format=neoPaintPattern) | NeoPaint Pattern | .pat | [2 sample files](https://sembiance.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
@@ -1137,7 +1135,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,424)
+## Other (2,423)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2515,7 +2513,6 @@ Family/Format | Name | Extensions | Notes
 [other/missionPatch](https://discmaster.textfiles.com/search?format=missionPatch) | Mission Patch | .pat | 
 [other/mksSpellHashList](https://discmaster.textfiles.com/search?format=mksSpellHashList) | MKS Spell hash list |  | 
 [other/mlocateDatabase](https://discmaster.textfiles.com/search?format=mlocateDatabase) | mlocate database | .db | 
-[other/mmfwData](https://discmaster.textfiles.com/search?format=mmfwData) | MMFW data | .mms .mmb .mmp .cpk .blb | 
 [other/mobil1RallyChampionshipData](https://discmaster.textfiles.com/search?format=mobil1RallyChampionshipData) | Mobil 1 Rally Championship data | .sq | 
 [other/mobipocketEBookAuxiliaryData](https://discmaster.textfiles.com/search?format=mobipocketEBookAuxiliaryData) | Mobipocket eBook Auxiliary data | .mbp | 
 [other/modiMODVoice](https://discmaster.textfiles.com/search?format=modiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
@@ -3663,7 +3660,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (47)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3706,7 +3703,6 @@ Family/Format | Name | Extensions | Notes
 [video/screenCamVideo](https://discmaster.textfiles.com/search?format=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
 [video/sonyVegas](https://discmaster.textfiles.com/search?format=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
 [video/stngAFinalUnityFMVCutscene](https://discmaster.textfiles.com/search?format=stngAFinalUnityFMVCutscene) | STNG 'A Final Unity' Fullmotion Video cutscene | .fvf | 
-[video/completeAnimatorFilm](https://discmaster.textfiles.com/search?format=completeAnimatorFilm) | The Complete Animator Film | .tca | 
 [video/theDirector](https://discmaster.textfiles.com/search?format=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?format=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?format=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 

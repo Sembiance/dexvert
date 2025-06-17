@@ -12,14 +12,12 @@ export class hcdisk extends Program
 	wineData  = r => ({
 		console : true,
 		script  : `
-			$mainWindow = WindowRequire("c:\\dexvert\\HCDisk2.exe", "", 5)
-			Sleep(1000)
+			Sleep(5000)
 			Send("open c:\\in${r.wineCounter}\\${path.basename(r.inFile())}{ENTER}")
 			Sleep(1000)
 			Send("get *{ENTER}")
 			Sleep(1000)
-			Send("exit{ENTER}")
-			WinWaitClose($mainWindow, "", 5)`
+			Send("exit{ENTER}")`
 	});
 	renameOut = false;
 }

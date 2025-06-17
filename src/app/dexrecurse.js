@@ -437,7 +437,7 @@ async function processNextQueue()
 			const proDOSType = dexData.idMeta?.proDOSType;
 			const proDOSTypeCode = _PRO_DOS_TYPE_CODE[proDOSType];
 			if(proDOSType && !idMetaCheckers.some(idMetaChecker => idMetaChecker({proDOSType, proDOSTypeCode, proDOSTypePretty : dexData.idMeta?.proDOSTypePretty, proDOSTypeAux : dexData.idMeta?.proDOSTypeAux})) &&
-			   (!proDOSTypeCode?.length || !WEAK_PRODOS_TYPES.includes(proDOSTypeCode)))
+				(!proDOSTypeCode?.length || !WEAK_PRODOS_TYPES.includes(proDOSTypeCode)))
 			{
 				const proDOSTypeFull = `${proDOSTypeCode || ""} [${proDOSType}] ${dexData.idMeta?.proDOSTypePretty || ""}${dexData.idMeta?.proDOSTypeAux ? ` (0x${dexData.idMeta?.proDOSTypeAux})` : ""}`.trim();
 				newProDOSTypes[proDOSTypeFull] ||= [];

@@ -12,9 +12,9 @@ export class macromediaDirector extends Format
 	];
 	idMeta = ({macFileType, macFileCreator}) => (
 		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MJ${suffix}`, `MV${suffix}`, "D!11", "D*11", "DC11", "FGDC", "FGDM"].includes(macFileType) &&
-		 ["AFTB", ...[0, 1, 3, 7].map(v => `MD0${v}`), ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||
-		(macFileType==="XOBJ" && macFileCreator==="MMDR") ||
-		(macFileType==="MC07" && macFileCreator==="SB14"));
+			["AFTB", ...[0, 1, 3, 7].map(v => `MD0${v}`), ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||
+			(macFileType==="XOBJ" && macFileCreator==="MMDR") ||
+			(macFileType==="MC07" && macFileCreator==="SB14"));
 	converters = [
 		// Director CastRipper has fully replaced macromediaDirector.js
 		// Some files must be unprotected first in order to get "all" the files (such as the lingo scripts), thus projectorrays goes first (DREAM3.DXR for example, without projectorrays then cast ripper only gets 14 files, decompiling it first gets 24 total)

@@ -14,7 +14,7 @@ export class installShieldSelfExtractor extends Program
 			DirEmpty("c:\\WINNT\\Temp")`,
 		script : `
 			Func WaitForFiles()
-				WindowDismiss("InstallShield Self-extracting EXE", "", "Y")
+				WindowDismiss("InstallShield ", "", "Y")
 				return FileExists("c:\\WINNT\\Temp\\_ISTMP0.DIR") And DirFileCount("c:\\WINNT\\Temp\\_ISTMP0.DIR") > 0
 			EndFunc
 			$foundDir = CallUntil("WaitForFiles", ${xu.MINUTE})

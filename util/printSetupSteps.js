@@ -31,8 +31,8 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		// fixes bad filenames
 		"app-text/convmv",
 
-		// video meta provider
-		"media-video/mplayer",
+		// needed by other packages later (mplayer)
+		"media-video/ffmpeg",
 
 		// dos
 		"games-emulation/dosbox",
@@ -63,6 +63,11 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
 		"dev-lang/perl"
 	].join(" ")}`
+].forEach(line => console.log(line));
+
+[
+	// video meta provider (needed here AFTER ffmpeg above)
+	`emerge --noreplace media-video/mplayer`
 ].forEach(line => console.log(line));
 
 const postPackages =

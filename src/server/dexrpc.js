@@ -8,7 +8,7 @@ import {AgentPool} from "AgentPool";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
-	cmdid   : "dexserver-dexrpcz",
+	cmdid   : "dexserver-dexrpc",
 	version : "1.0.0",
 	desc    : "Pre-starts a bunch of dexvert and dexid agents to be able to evenly distribute CPU load and handle crashes, etc",
 	opts    :
@@ -52,8 +52,8 @@ const onFail = ({reason, error}, {log, msg}) =>
 const dexPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
 const idPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
 
-await dexPool.init();
-await idPool.init();
+await dexPool.init({maxProcessDuration : (xu.HOUR*2)+(xu.MINUTE*10)});
+await idPool.init({maxProcessDuration : (xu.HOUR*2)+(xu.MINUTE*10)});
 
 const runEnv = {};
 for(const [key, value] of Object.entries(Deno.env.toObject()))

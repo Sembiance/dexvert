@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
 import {fileUtil} from "xutil";
+import {DexFile} from "../../DexFile.js";
 import {Program} from "../../Program.js";
 import {path, base64Encode} from "std";
 import {XLog} from "xlog";
@@ -35,7 +36,7 @@ export class iso extends Format
 	name           = "CD Disc Image";
 	website        = "http://fileformats.archiveteam.org/wiki/ISO_image";
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
-	forbidExtMatch = [".img", ".bin"];	// way too common
+	forbidExtMatch = [".img"];	// way too common
 
 	magic = [
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660", "PC-98 ISO",
@@ -47,6 +48,25 @@ export class iso extends Format
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	idMeta = ({macFileType, macFileCreator}) => (macFileType==="GImg" && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
+
+	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
+	{
+		// this whole function is just to handle when we have an ext match to '.bin' because that's so generic we need to check for a cue file that references our .bin file
+		if(magicMatch || filenameMatch || idMetaMatch || fileSizeMatch)
+			return true;
+
+		if(!extMatch || inputFile.ext.toLowerCase()!==".bin")
+			return true;
+
+		for(const cueFilePath of await fileUtil.tree(inputFile.dir, {depth : 1, nodir : true, regex : /\.cue$/i}))
+		{
+			const cueFiles = (await Program.runProgram("cueInfo", await DexFile.create(cueFilePath), {xlog : xlog.atLeast("debug") ? xlog : new XLog("none"), autoUnlink : true}))?.meta?.files || [];
+			if(cueFiles.filter(file => file.name).some(file => file.name.toLowerCase().endsWith(inputFile.base.toLowerCase())))
+				return true;
+		}
+
+		return false;
+	};
 
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;

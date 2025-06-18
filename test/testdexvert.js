@@ -32,6 +32,7 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 
 // These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
 const FLAKY_CONVERTERS = [
+	"canvas5",
 	"paintDotNet",
 	"pageMaker7",
 	"polyTrans64",
@@ -190,7 +191,7 @@ const FLEX_SIZE_PROGRAMS =
 	zxtune123                   : 0.1
 };
 
-// these formats have some meta data that can change per host or per upgradeand so we should just ignore it
+// these formats have some meta data that can change per host or per upgrade and so we should just ignore it
 const IGNORED_META_KEYS =
 {
 	image :
@@ -502,7 +503,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/text\/latexAUXFile\/(LCAU\.AUX|LATEX\.BUG)$/i, "text", "txt"],
 
 	// These files don't convert with my converters and get identified to other things
-	[/archive\/installShieldSelfExtractor\/SWREG\.EXE$/, "executable", "exe"],
+	[/archive\/installShieldSelfExtractor\/(SWREG\.EXE|MonkeyMinimum\.exe)$/, "executable", "exe"],
 	[/audio\/quickTimeAudio\/Demo Music File$/i, "archive", "macBinary"],
 	[/archive\/macOSInstallTome\/(AppleVision Tome 2|Installation Tome)$/i, "archive", "macBinary"],
 	[/document\/openDocument\/(aw-9colorful|cnt-04)\.ott$/, "archive", "zip"],
@@ -585,6 +586,7 @@ const ALLOW_PROCESS_FAILURES =
 	},
 	document :
 	{
+		hlp         : ["qtim.dll"],
 		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"]
 	},
 	image :
@@ -965,6 +967,8 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		{
 			if(prevData.meta[k] && result.meta[k])
 				prevData.meta[k] = result.meta[k];
+			else if(prevData.meta[k] && !result.meta[k])
+				delete prevData.meta[k];
 		}
 
 		const objDiff = diffUtil.diff(prevData.meta, result.meta);

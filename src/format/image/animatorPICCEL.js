@@ -6,6 +6,6 @@ export class animatorPICCEL extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Animator_PIC/CEL";
 	ext            = [".cel", ".pic"];
 	forbidExtMatch = true;
-	magic          = [/^x-fmt\/223( |$)/];
+	magic          = ["deark: animator_pic", /^x-fmt\/223( |$)/];
 	converters     = ["deark[module:animator_pic]", "wuimg", "imageAlchemy"];
 }

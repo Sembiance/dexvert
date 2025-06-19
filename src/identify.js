@@ -197,11 +197,11 @@ export async function getIdMeta(inputFile)
 	return idMeta;
 }
 
-export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
+export async function identify(inputFileRaw, {xlog=new XLog()}={})
 {
-	const xlog = _xlog || new XLog(logLevel);
-
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
+	xlog.debug`Identify starting identification for: ${inputFile.pretty()}`;
+	
 	if(inputFile.isDirectory)
 		return {ids : [Identification.create({from : "dexvert", confidence : 100, magic : "directory", family : "other", formatid : "directory", matchType : "magic", unsupported : true})]};
 
@@ -210,9 +210,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 		return {ids : [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic"})]};
 
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
+	xlog.debug`Identify getting detections`;
 	const detections = await getDetections(f, {xlog});
-
-	xlog.debug`raw detections:\n${detections.map(v => v?.pretty("\t") || v).join("\n")}`;
+	xlog.debug`Identify raw detections:\n${detections.map(v => v?.pretty("\t") || v).join("\n")}`;
 
 	const otherFiles = (await (await fileUtil.tree(f.root, {depth : 1, nodir : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file && file.absolute!==f.input.absolute);
 	const otherDirs = (await (await fileUtil.tree(f.root, {depth : 1, nofile : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file);
@@ -223,8 +223,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	if(await fileUtil.exists(f.input.absolute))
 		byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
 
+	xlog.debug`Identify calling getIdMeta`;
 	const idMetaData = await getIdMeta(inputFile);
-	xlog.debug`idMetaData for ${inputFile.absolute}:\n${idMetaData}`;
+	xlog.debug`Identify idMetaData for ${inputFile.absolute}:\n${idMetaData}`;
 
 	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], custom : [], idMeta : [], fallback : []};
 	for(const familyid of FAMILY_MATCH_ORDER)
@@ -241,7 +242,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			// skip this format if any of our detections are forbidden magic values or our input filename has a forbidden extension
 			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => f.input.base.toLowerCase().endsWith(fext)))))
 			{
-				xlog.debug`Excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
+				xlog.debug`Identify excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
 				continue;
 			}
 
@@ -269,7 +270,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 				if(!match)
 				{
-					xlog.debug`Excluding format ${formatid} due to byteCheck not matching.`;
+					xlog.debug`Identify exluding format ${formatid} due to byteCheck not matching.`;
 					continue;
 				}
 			}
@@ -360,7 +361,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			// some formats require some sort of other check to ensure the file is valid
 			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog})))
 			{
-				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
+				xlog.debug`Identify excluding format ${formatid} due to idCheck not succeeding.`;
 				continue;
 			}
 
@@ -368,18 +369,19 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			let auxFiles = null;
 			if(format.auxFiles && hasAnyMatch)
 			{
+				xlog.debug`Identify  calling auxFiles for format ${format.formatid}`;
 				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs, {fileSizeMatchExt, xlog});
 
 				// If the filesRequired function returns false, then we don't have any required files
 				// If it returns an empty array then we fail to match
 				if(auxFiles!==false && auxFiles.length===0)
 				{
-					xlog.debug`Excluding format ${formatid} due to requiredFiles not being present.`;
+					xlog.debug`Identify excluding format ${formatid} due to requiredFiles not being present.`;
 					continue;
 				}
 
 				if(auxFiles && Array.isArray(auxFiles) && auxFiles.length && xlog.atLeast("debug"))
-					xlog.debug`Identified auxFiles for ${formatid}:\n\t${auxFiles.map(v => v.base).join("\n\t")}`;
+					xlog.debug`Identify identified auxFiles for ${formatid}:\n\t${auxFiles.map(v => v.base).join("\n\t")}`;
 			}
 			if(auxFiles)
 				baseMatch.auxFiles = auxFiles;
@@ -544,7 +546,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			xlog.trace`RAW MATCH: ${o}`;
 	}
 
-	xlog.debug`matches/identifications for ${inputFile.absolute}:\n${ids.map(v => v.pretty("\t")).join("\n")}`;
+	xlog.debug`Identify got identifications for ${inputFile.pretty()}:\n${ids.map(v => v.pretty("\t")).join("\n")}`;
 
 	return {idMeta : idMetaData, ids};
 }

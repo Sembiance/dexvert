@@ -355,7 +355,7 @@ async function processNextQueue()
 		await Deno.mkdir(path.dirname(task.metaFilePath), {recursive : true});
 
 		const inputFilePath = path.join(fileDirPath, task.relFilePath);
-		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, dexvertOptions : xu.clone(dexvertOptions)};
+		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : "debug", dexvertOptions : xu.clone(dexvertOptions)};
 		if(taskProps.fileMeta)
 			rpcData.fileMeta = taskProps.fileMeta;
 		if(taskProps.forbidProgram)
@@ -586,12 +586,7 @@ if(argv.report)
 
 if(fullOutputPath.endsWith(".tar.gz"))
 {
-	xlog.debug`Creating output tarball...`;
 	await runUtil.run("tar", ["-cf", fullOutputPath.substring(0, fullOutputPath.length-3), "-C", workDirPath, "."]);
-
-	xlog.debug`Compressing output tarball...`;
 	await runUtil.run("pigz", [fullOutputPath.substring(0, fullOutputPath.length-3)]);
-
-	xlog.debug`Cleaning up workDirPath ${workDirPath}...`;
 	await fileUtil.unlink(workDirPath, {recursive : true});
 }

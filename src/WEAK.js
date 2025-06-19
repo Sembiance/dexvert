@@ -423,6 +423,7 @@ export const WEAK_VALUES =
 	/^MGI Photosuite Project :pzp:$/,
 	/^NewsRoom :nsr:$/,
 	/^RIPTerm Image :ript:$/,
+	/^TealPaint :teal:$/,
 	/^Truevision TARGA.* :tga:$/,
 	/^Zsoft Paintbrush :bmg:$/,
 
@@ -620,7 +621,6 @@ export const WEAK_VALUES =
 	/^Blink archive data/,
 	/^Blowfish \(128 bit key, 16 rounds\)$/,
 	/^BOA archive data/,
-	/^Brooktrout 301 fax image/,
 	/^BS image/,
 	/^BSD makefile script/,
 	/^(BSArc|BSN) archive data/,

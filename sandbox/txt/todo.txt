@@ -17,6 +17,9 @@
 /---------------\
 | High Priority |
 \---------------/
+* Get support added to the various archive/mmfwArchive sub-formats. Maybe wumimg or deark could take on the Pictures variety
+  Would be useful if I could see what the pictures are, at the very least by running the programs and taking some screenshots
+
 * If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 
 * Add support for Basic .MUS. This is a bit of work and should be done 'for fun'. See sandbox/wip/BasicMUS_mml2mid.js

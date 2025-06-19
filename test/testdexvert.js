@@ -1022,7 +1022,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 
-	const o = {op : "dexvert", inputFilePath : sampleFilePath, outputDirPath : tmpOutDirPath, logLevel : argv.debug ? "debug" : "info", prod : true, dexvertOptions : {programFlag : {}}};
+	const o = {op : "dexvert", inputFilePath : sampleFilePath, outputDirPath : tmpOutDirPath, logLevel : argv.debug ? "debug" : "info", dexvertOptions : {programFlag : {}}};
 	if(typeof FORMAT_OS_HINT[diskFormatid]==="string")
 	{
 		o.dexvertOptions.programFlag.osHint = {};

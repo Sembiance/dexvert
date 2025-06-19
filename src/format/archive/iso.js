@@ -16,6 +16,8 @@ const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*App
 	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/1757( |$)/
 ];
 
+const _RAW_MAGICS = [/^Raw CD image, Mode [12]/, "deark: cd_raw"];
+
 async function validCUEFile(dexState, cueFile)
 {
 	const cueInfoR = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog.atLeast("debug") ? dexState.xlog : new XLog("none"), autoUnlink : true});
@@ -36,13 +38,13 @@ export class iso extends Format
 	name           = "CD Disc Image";
 	website        = "http://fileformats.archiveteam.org/wiki/ISO_image";
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
-	forbidExtMatch = [".img"];	// way too common
 
 	magic = [
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660", "PC-98 ISO",
-		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS", "Xbox DVD file system", "deark: iso9660", "deark: cd_raw",
+		"ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS", "Xbox DVD file system", "deark: iso9660",
 		/^ISO 9660$/, /^UDF recognition sequence.*ISO9660/, /^fmt\/(468|1738)( |$)/,
 		/^First .*are blank$/,
+		..._RAW_MAGICS,
 		...HFS_MAGICS, ...MFS_MAGICS
 	];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
@@ -51,18 +53,27 @@ export class iso extends Format
 
 	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
 	{
-		// this whole function is just to handle when we have an ext match to '.bin' because that's so generic we need to check for a cue file that references our .bin file
-		if(magicMatch || filenameMatch || idMetaMatch || fileSizeMatch)
+		// this whole function is just to handle when we have an ext match to '.bin' or '.img' because they are so generic we need to check for other files. easier to do this than with a combination of 'auxFiles'
+		const ext = inputFile.ext.toLowerCase();
+		if(magicMatch || filenameMatch || idMetaMatch || fileSizeMatch || !extMatch || ![".bin", ".img"].includes(ext))
 			return true;
 
-		if(!extMatch || inputFile.ext.toLowerCase()!==".bin")
-			return true;
-
-		for(const cueFilePath of await fileUtil.tree(inputFile.dir, {depth : 1, nodir : true, regex : /\.cue$/i}))
+		if(ext===".bin")
 		{
-			const cueFiles = (await Program.runProgram("cueInfo", await DexFile.create(cueFilePath), {xlog : xlog.atLeast("debug") ? xlog : new XLog("none"), autoUnlink : true}))?.meta?.files || [];
-			if(cueFiles.filter(file => file.name).some(file => file.name.toLowerCase().endsWith(inputFile.base.toLowerCase())))
-				return true;
+			for(const cueFilePath of await fileUtil.tree(inputFile.dir, {depth : 1, nodir : true, regex : /\.cue$/i}))
+			{
+				const cueFiles = (await Program.runProgram("cueInfo", await DexFile.create(cueFilePath), {xlog : xlog.atLeast("debug") ? xlog : new XLog("none"), autoUnlink : true}))?.meta?.files || [];
+				if(cueFiles.filter(file => file.name).some(file => file.name.toLowerCase().endsWith(inputFile.base.toLowerCase())))
+					return true;
+			}
+		}
+		else if(ext===".img")
+		{
+			for(const ccdFilePath of await fileUtil.tree(inputFile.dir, {depth : 1, nodir : true, regex : /\.ccd$/i}))
+			{
+				if(path.basename(ccdFilePath, path.extname(ccdFilePath)).toLowerCase()===inputFile.name.toLowerCase())
+					return true;
+			}
 		}
 
 		return false;
@@ -223,6 +234,8 @@ export class iso extends Format
 					r.push(`bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`);
 
 				r.push("uniso[block:512][checkMount]");		// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
+				if(dexState.hasMagics(_RAW_MAGICS))
+					r.push("ccd2iso");
 				r.pushUnique("fuseiso");
 
 				if(!subState.f.files?.output?.length)

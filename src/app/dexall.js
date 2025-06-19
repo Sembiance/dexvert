@@ -57,7 +57,7 @@ await inputFiles.parallelMap(async inputFile =>
 	const outputSubDirPath = path.join(outputDirPath, inputFilename);
 	await Deno.mkdir(outputSubDirPath, {recursive : true});
 
-	const o = {op : "dexvert", inputFilePath, outputDirPath : outputSubDirPath, logLevel : "info", prod : true};
+	const o = {op : "dexvert", inputFilePath, outputDirPath : outputSubDirPath};
 	const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 	completed++;
 	if(!r?.json?.processed || !r?.json?.phase?.format)

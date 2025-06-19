@@ -119,11 +119,13 @@ export class Program
 		flags = {...flags, ...RUNTIME.globalFlags[this.programid]};
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
-		
+
 		const unknownFlags = Object.keys(flags).subtractAll([...GLOBAL_FLAGS, ...Object.keys(this.flags || {})]);
 		if(unknownFlags.length>0)
 			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
-		
+
+		xlog.debug`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} run starting for ${f.pretty()} (original: ${originalInput?.pretty()})`;
+
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags, xlog});
 		r.cwd = f.root;
@@ -139,10 +141,14 @@ export class Program
 
 		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
 		if(this.diskQuota)
+		{
+			xlog.debug`Program ${fg.orange(this.programid)} restricting disk size`;
 			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${typeof this.diskQuota==="function" ? await this.diskQuota(r) : this.diskQuota},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
+		}
 
 		if(this.mirrorInToCWD)
 		{
+			xlog.debug`Program ${fg.orange(this.programid)} mirroring in to CWD`;
 			if(this.mirrorInToCWD==="copy")	// eslint-disable-line unicorn/prefer-ternary
 				await runUtil.run("rsync", [path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile()))]);
 			else
@@ -153,21 +159,25 @@ export class Program
 		try
 		{
 			if(this.pre)
+			{
+				xlog.debug`Program ${fg.orange(this.programid)} calling pre()`;
 				await this.pre(r);
+			}
 
 			const getBin = async () => (typeof this.bin==="function" ? await this.bin(r) : this.bin);
 			const getArgs = async () => (this.args ? await this.args(r) : []).map(arg => arg.toString());
 
 			if(this.exclusive)
 			{
-				xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
+				xlog.info`Program ${fg.orange(this.programid)} waiting for exclusive lock ${this.exclusive}`;
 				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
+				xlog.info`Program ${fg.orange(this.programid)} lock acquired`;
 			}
 
 			if(this.exec)
 			{
 				// run arbitrary javascript code
-				xlog.info`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
+				xlog.info`Program ${fg.orange(this.programid)} executing exec`;
 				await this.exec(r);
 			}
 			else if(this.loc==="local")
@@ -181,7 +191,7 @@ export class Program
 				if(this.runOptions)
 					Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 
-				xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${r.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
+				xlog.info`Program ${fg.orange(this.programid)} executing locally: \`${r.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
 				xlog.debug`  with options ${printUtil.inspect(r.runOptions).squeeze()}`;
 				const {stdout, stderr, status} = await runUtil.run(r.bin, r.args, r.runOptions);
 				Object.assign(r, {stdout, stderr, status});
@@ -193,6 +203,8 @@ export class Program
 				if(this.dosData)
 					Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);
 
+				xlog.info`Program ${fg.orange(this.programid)} executing DOS`;
+				xlog.debug`  with dosData: ${printUtil.inspect(r.dosData).squeeze()}`;
 				r.status = await runDOS(r.dosData);
 			}
 			else if(this.loc==="wine")
@@ -203,6 +215,8 @@ export class Program
 				if(this.wineData)
 					Object.assign(r.wineData, typeof this.wineData==="function" ? await this.wineData(r) : this.wineData);
 
+				xlog.info`Program ${fg.orange(this.programid)} executing wine`;
+				xlog.debug`  with wineData: ${printUtil.inspect(r.wineData).squeeze()} (wineCounter: ${r.wineCounter})`;
 				r.status = await runWine(r.wineData);
 			}
 			else if(OSIDS.includes(this.loc))
@@ -214,11 +228,17 @@ export class Program
 				if(this.osData)
 					Object.assign(r.osData, typeof this.osData==="function" ? await this.osData(r) : this.osData);
 
+				xlog.info`Program ${fg.orange(this.programid)} executing OS`;
+				xlog.debug`  with osData: ${printUtil.inspect(r.osData).squeeze()}`;
 				r.status = await runOS(r.osData);
 			}
+			xlog.debug`Program ${fg.orange(this.programid)} execution finished ${JSON.stringify(r.status)}`;
 
 			if(this.postExec)
+			{
+				xlog.debug`Program ${fg.orange(this.programid)} calling postExec()`;
 				await this.postExec(r);
+			}
 		}
 		catch(err)
 		{
@@ -227,12 +247,15 @@ export class Program
 
 		if(this.exclusive)
 		{
-			xlog.debug`Program ${fg.orange(this.programid)} releasing lock...`;
+			xlog.debug`Program ${fg.orange(this.programid)} releasing lock`;
 			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
 		}
 
 		if(this.mirrorInToCWD)
+		{
+			xlog.debug`Program ${fg.orange(this.programid)} unlinking mirror in CWD`;
 			await fileUtil.unlink(r.inFile({absolute : true}));
+		}
 
 		// some programs like resource_dasm will DELETE the output directory if it wasn't able to extract, so we should check that it still exists
 		if(f.outDir && await fileUtil.exists(f.outDir.absolute))
@@ -240,17 +263,17 @@ export class Program
 			// we may have new files on disk in f.outDir
 
 			// first we have to run fixPerms in order to ensure we can access the new files
-			xlog.info`Program ${fg.orange(this.programid)} fixing permissions for: ${f.outDir.absolute}...`;
+			xlog.info`Program ${fg.orange(this.programid)} fixing permissions for: ${f.outDir.absolute}`;
 			await runUtil.run("/mnt/compendium/bin/fixPerms", [], {cwd : f.outDir.absolute, liveOutput : true});
 
 			// next we fix any filenames that contain UTF16 or other non-UTF8 characters, converting them to UTF8. This fixes problems with tree/readdir etc. because deno only supports UTF8 encodings
 			// can run `convmv --list` for a list of valid encoding names
-			xlog.debug`Program ${fg.orange(this.programid)} fixing filename encoding...`;
+			xlog.debug`Program ${fg.orange(this.programid)} fixing filename encoding`;
 			const targetEncoding = (flags.filenameEncoding || (typeof this.filenameEncoding==="function" ? await this.filenameEncoding(r) : this.filenameEncoding)) || "windows-1252";
 			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", targetEncoding, "-t", "UTF-8", f.outDir.absolute]);
 
 			// delete various things
-			xlog.debug`Program ${fg.orange(this.programid)} deleting directory symlinks, empty files, 'special' files, and broken symlinks...`;
+			xlog.debug`Program ${fg.orange(this.programid)} deleting directory symlinks, empty files, 'special' files, and broken symlinks`;
 			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "-xtype", "d", "-delete"]);		// delete directory symlinks, which are dangerous as they could point outside of the output directory
 			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);				// delete special files like block, named pipes, sockets, etc
 			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);			// delete empty files
@@ -258,10 +281,10 @@ export class Program
 			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "!", "-readable", "-delete"]);	// delete unreadable symlinks, this is a workaround for broken symlinks that point to directories that don't exist and thus don't get caught by the above
 
 			// now find any new files on disk in the output dir that we don't yet know about
-			xlog.debug`Program ${fg.orange(this.programid)} locating new files...`;
+			xlog.debug`Program ${fg.orange(this.programid)} locating new files`;
 			const newFilePaths = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute));
 
-			xlog.debug`Program ${fg.orange(this.programid)} sanity filtering ${newFilePaths.length.toLocaleString()} new files...`;
+			xlog.debug`Program ${fg.orange(this.programid)} sanity filtering ${newFilePaths.length.toLocaleString()} new files`;
 			let foundDups = false;
 			const newDexFiles = (await newFilePaths.parallelMap(async newFilePath =>
 			{
@@ -349,7 +372,7 @@ export class Program
 
 			if(newDexFiles.length>0)
 			{
-				xlog.debug`Adding ${newDexFiles.length.toLocaleString()} new files to file set...`;
+				xlog.debug`Adding ${newDexFiles.length.toLocaleString()} new files to file set`;
 				await f.addAll("new", newDexFiles);
 			}
 		}
@@ -357,7 +380,7 @@ export class Program
 		// sort the filenames by depth and then by filename
 		if(f.files.new)
 		{
-			xlog.debug`Program ${fg.orange(this.programid)} located ${f.files.new.length.toLocaleString()} new files...`;
+			xlog.debug`Program ${fg.orange(this.programid)} located ${f.files.new.length.toLocaleString()} new files`;
 			f.files.new.sortMulti([file => file.rel.split("/").length, file => file.base]);
 		}
 
@@ -437,8 +460,7 @@ export class Program
 				}
 				else
 				{
-					xlog.info`Picked renamer #${renamerNum} for renaming ${f.files.new.length} files...`;
-
+					xlog.info`Picked renamer #${renamerNum} for renaming ${f.files.new.length} files`;
 					for(const newFile of f.files.new)
 					{
 						const replacementName = renamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {}).join("");
@@ -522,7 +544,7 @@ export class Program
 						}
 
 						// copy our new chain output files over to the dir the input files are in. WARNING! This doesn't do ANY collision avoidance at all, so if there are duplicate filenames, they will overwrite the existing files
-						xlog.debug`Handling ${chainResult.f.all.length} chain file results...`;
+						xlog.debug`Handling ${chainResult.f.all.length} chain file results`;
 
 						const targetChainDirPath = inputFiles[0].dir.startsWith(f.outDir.absolute) ? inputFiles[0].dir : f.outDir.absolute;
 						let newFileSet=null;
@@ -614,7 +636,7 @@ export class Program
 
 				if(this.chainPost)
 				{
-					xlog.debug`Running ${this.programid}.chainPost()...`;
+					xlog.debug`Running ${this.programid}.chainPost()`;
 					try { await this.chainPost(r); }
 					catch(err) { xlog.error`Program chainPost ${fg.orange(this.programid)} threw error ${err}`; }
 				}

@@ -52,8 +52,8 @@ const onFail = ({reason, error}, {log, msg}) =>
 const dexPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
 const idPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
 
-await dexPool.init({maxProcessDuration : (xu.HOUR*2)+(xu.MINUTE*10)});
-await idPool.init({maxProcessDuration : (xu.HOUR*2)+(xu.MINUTE*10)});
+await dexPool.init();
+await idPool.init();
 
 const runEnv = {};
 for(const [key, value] of Object.entries(Deno.env.toObject()))
@@ -91,14 +91,18 @@ xlog.info`Starting web RPC...`;
 const routes = new Map();
 
 routes.set("/agentCount", () => new Response(DEXVERT_AGENT_COUNT.toString()));
-routes.set("/status", () => new Response(JSON.stringify({idPool : idPool.status({simpleLog : true}), dexPool : dexPool.status({simpleLog : true})})));
+routes.set("/status", async () => new Response(JSON.stringify(Object.fromEntries(await [["idPool", idPool], ["dexPool", dexPool]].parallelMap(async ([type, pool]) =>
+{
+	const status = await pool.status();
+	for(const agent of status.agents)
+		agent.log &&= agent.log.join("\n").decolor();
+	return [type, status];
+})))));
 
 routes.set("/dex", async request =>
 {
 	const workerData = await request.json();
 	workerData.rpcid = RPCID_COUNTER++;
-	if(["trace", "debug"].includes(workerData.logLevel))
-		workerData.liveOutput = true;
 	if(RPCID_COUNTER>10_000_000)
 		RPCID_COUNTER = 1;
 

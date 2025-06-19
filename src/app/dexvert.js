@@ -94,7 +94,7 @@ if(argv.direct)
 
 xlog.trace`Making RPC call to dexserver...`;
 
-const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
+const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, liveOutput : true, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
 const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 if(err)
 	Deno.exit(console.error(`${log.join("\n")}\n${err}`.trim()));

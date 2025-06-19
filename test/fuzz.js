@@ -79,7 +79,7 @@ async function fuzzByExt()
 		await Deno.mkdir(outputDirPath, {recursive : true});
 		await runUtil.run("dd", ["if=/dev/urandom", `of=${inputFilePath}`, `bs=${fileSize}`, "count=1"]);
 
-		const o = {op : "dexvert", inputFilePath, outputDirPath, logLevel : "debug", prod : true, timeout : xu.MINUTE};
+		const o = {op : "dexvert", inputFilePath, outputDirPath, logLevel : "debug", timeout : xu.MINUTE};
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
@@ -133,7 +133,7 @@ async function fuzzByFileSize()
 		await Deno.mkdir(outputDirPath, {recursive : true});
 		await runUtil.run("dd", ["if=/dev/urandom", `of=${inputFilePath}`, `bs=${fileSize}`, "count=1"]);
 
-		const o = {op : "dexvert", inputFilePath, outputDirPath, logLevel : "debug", prod : true, timeout : xu.MINUTE};
+		const o = {op : "dexvert", inputFilePath, outputDirPath, logLevel : "debug", timeout : xu.MINUTE};
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
@@ -192,7 +192,7 @@ async function fuzzByFilename()
 		await Deno.mkdir(outputDirPath, {recursive : true});
 		await runUtil.run("dd", ["if=/dev/urandom", `of=${inputFilePath}`, `bs=${fileSize}`, "count=1"]);
 
-		const o = {op : "dexvert", inputFilePath, outputDirPath, logLevel : "debug", prod : true, timeout : xu.MINUTE};
+		const o = {op : "dexvert", inputFilePath, outputDirPath, logLevel : "debug", timeout : xu.MINUTE};
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();

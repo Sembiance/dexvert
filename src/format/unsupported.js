@@ -1247,6 +1247,7 @@ export default
 		infoComicsGameData                           : {name : "InfoComics game data", ext : [".img", ".dat"], magic : ["InfoComics game data"]},
 		intelligentGamesResourceData                 : {name : "Intelligent Games resource data", ext : [".res"], magic : ["Intelligent Games Ltd resource data"]},
 		invictusGameData                             : {name : "Invictus game data", ext : [".ics"], magic : ["Invictus game data"], weakMagic : true},
+		irffGameDataContainer                        : {name : "IRFF game data container", ext : [".dat"], magic : ["IRFF game data container"]},
 		jazzJackrabbit2AnimationsLibrary             : {name : "Jazz Jackrabbit 2 Animations library", ext : [".j2a"], magic : ["Jazz Jackrabbit 2 Animations library"], weakMagic : true},
 		jazzJackrabbit2Episode                       : {name : "Jazz Jackrabbit 2 Episode", ext : [".j2e"], magic : ["Jazz Jackrabbit 2 Episode"], weakMagic : true},
 		jazzJackrabbit2LevelData                     : {name : "Jazz Jackrabbit 2 Level data", ext : [".j2l"], magic : ["Jazz Jackrabbit 2 Level data"], weakMagic : true},

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,648)
+# Unsupported File Formats (3,650)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (286)
+## Archive (287)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -160,6 +160,7 @@ Family/Format | Name | Extensions | Notes
 [archive/microtan65Dump](https://discmaster.textfiles.com/search?format=microtan65Dump) | Microtan 65 dump | .m65 | 
 [archive/mifDiskImage](https://discmaster.textfiles.com/search?format=mifDiskImage) | MIF disk image |  | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?format=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
+[archive/mmfwArchive](https://discmaster.textfiles.com/search?format=mmfwArchive) | [MMFW Archive](https://github.com/david47k/mmex) | .mmp .mms .mmf .mma .mmb .pic .snd .vec | [1 sample file](https://sembiance.com/fileFormatSamples/archive/mmfwArchive/)
 [archive/moofDiskImage](https://discmaster.textfiles.com/search?format=moofDiskImage) | MOOF Macintosh floppy disk image | .moof | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moofDiskImage/)
 [archive/moonbaseCommanderGameDataArchive](https://discmaster.textfiles.com/search?format=moonbaseCommanderGameDataArchive) | Moonbase Commander game data archive | .cmp | 
 [archive/mpq](https://discmaster.textfiles.com/search?format=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
@@ -1135,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,423)
+## Other (2,424)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2195,6 +2196,7 @@ Family/Format | Name | Extensions | Notes
 [other/quickBooksForWindows](https://discmaster.textfiles.com/search?format=quickBooksForWindows) | Intuit QuickBooks for Windows | .qbw | 
 [other/invictusGameData](https://discmaster.textfiles.com/search?format=invictusGameData) | Invictus game data | .ics | 
 [other/invisionBrushes](https://discmaster.textfiles.com/search?format=invisionBrushes) | Invision Brushes | .bru | 
+[other/irffGameDataContainer](https://discmaster.textfiles.com/search?format=irffGameDataContainer) | IRFF game data container | .dat | 
 [other/irisOCRData](https://discmaster.textfiles.com/search?format=irisOCRData) | IRIS OCR data | .ytr | 
 [other/isamTableHandlerData](https://discmaster.textfiles.com/search?format=isamTableHandlerData) | ISAM table handler data | .ism | 
 [other/isigMotorMASType1GameDataArchive](https://discmaster.textfiles.com/search?format=isigMotorMASType1GameDataArchive) | ISI gMotor MAS type 1 game data archive | .mas .mas_2 .mas_1 .mas_3 | 

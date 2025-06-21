@@ -19,6 +19,7 @@
 \---------------/
 * Get support added to the various archive/mmfwArchive sub-formats. Maybe wumimg or deark could take on the Pictures variety
   Would be useful if I could see what the pictures are, at the very least by running the programs and taking some screenshots
+  This might be a good one to use: https://discmaster.textfiles.com/browse/13330/Highlights%20Hidden%20Pictures%20Workshop.iso/pc/hidpics.pic
 
 * If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 

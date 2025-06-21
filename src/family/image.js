@@ -12,7 +12,7 @@ const CLASSIFY_PATH_EXCLUSIONS =
 	"texture", "textura",
 	"background", "backgrnd",
 	"repeatable",
-	"stereo", "pattern", "brush", "noise", "illusion", "fractal", "border"
+	"stereo", "pattern", "noise", "illusion", "fractal", "border"
 ];
 
 const MATCH_MAX_GARBAGE_PROBABILITIES =

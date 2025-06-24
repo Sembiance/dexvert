@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,650)
+# Unsupported File Formats (3,653)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1136,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,424)
+## Other (2,427)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3194,6 +3194,7 @@ Family/Format | Name | Extensions | Notes
 [other/team6GameData](https://discmaster.textfiles.com/search?format=team6GameData) | Team6 game data | .dcf .dct .dcl .dcc .dcm .dcscript .dcw .mcs | 
 [other/teamBGInfinityEngineDataFormat](https://discmaster.textfiles.com/search?format=teamBGInfinityEngineDataFormat) | TeamBG Infinity Engine data format | .tbg | 
 [other/teapotXDRSpreadsheet](https://discmaster.textfiles.com/search?format=teapotXDRSpreadsheet) | Teapot XDR spreadsheet | .tp | 
+[other/teckitCompiledMapping](https://discmaster.textfiles.com/search?format=teckitCompiledMapping) | TECkit compiled mapping | .tec | 
 [other/teenageMutantNinjaTurtlesLevelData](https://discmaster.textfiles.com/search?format=teenageMutantNinjaTurtlesLevelData) | Teenage Mutant Ninja Turtles Level data | .lev | 
 [other/telepaintMenu](https://discmaster.textfiles.com/search?format=telepaintMenu) | Telepaint Menu | .mnu | 
 [other/telepaintPrinterDriver](https://discmaster.textfiles.com/search?format=telepaintPrinterDriver) | Telepaint printer Driver | .drv | 
@@ -3341,6 +3342,7 @@ Family/Format | Name | Extensions | Notes
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 
 [other/valveParticleStorage](https://discmaster.textfiles.com/search?format=valveParticleStorage) | Valve particle storage | .pcf | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?format=valveSourceMap) | Valve Source Map | .bsp | 
+[other/vampireTheMasqueradeRedemptionSaveGame](https://discmaster.textfiles.com/search?format=vampireTheMasqueradeRedemptionSaveGame) | Vampire: The Masquerade - Redemption save game | .nsw | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?format=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 
 [other/varsityScripsitConfiguration](https://discmaster.textfiles.com/search?format=varsityScripsitConfiguration) | Varsity Scripsit Configuration | .cnf | 
 [other/vbISAMIndex](https://discmaster.textfiles.com/search?format=vbISAMIndex) | VB/ISAM Index | .ism | 
@@ -3370,6 +3372,7 @@ Family/Format | Name | Extensions | Notes
 [other/virtualChess2Game](https://discmaster.textfiles.com/search?format=virtualChess2Game) | Virtual Chess 2 game | .eck | 
 [other/virtualFireScene](https://discmaster.textfiles.com/search?format=virtualFireScene) | Virtual Fire Scene | .sce | 
 [other/virtualPascalUnit](https://discmaster.textfiles.com/search?format=virtualPascalUnit) | Virtual Pascal Unit | .vpi | 
+[other/virtualSkipperGameData](https://discmaster.textfiles.com/search?format=virtualSkipperGameData) | Virtual Skipper game data | .vsk .pak | 
 [other/virtualTIEmulatorSkin](https://discmaster.textfiles.com/search?format=virtualTIEmulatorSkin) | Virtual TI emulator skin | .skn | 
 [other/virtualVillagersData](https://discmaster.textfiles.com/search?format=virtualVillagersData) | Virtual Villagers data | .ldw | 
 [other/virtualBusMap](https://discmaster.textfiles.com/search?format=virtualBusMap) | VirtualBus Map | .ms1 | 

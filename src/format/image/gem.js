@@ -21,5 +21,4 @@ export class gem extends Format
 		//`abydosconvert[format:${this.mimeType}]`, "nconvert[format:gem]",
 		//"canvas5[strongMatch][matchType:magic][hasExtMatch]", "hiJaakExpress[strongMatch]", "pv[strongMatch]", "corelPhotoPaint[strongMatch]"
 	];
-	verify = ({meta}) => meta.colorCount>1;
 }

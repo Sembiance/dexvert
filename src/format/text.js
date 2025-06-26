@@ -834,7 +834,7 @@ export default
 		prepForMonarchHelp                         : {name : "Prep for Monarch Help", ext : [".hlp"], magic : ["Prep for Monarch Help"], weakMagic : true},
 		prism3DConfig                              : {name : "Prism3D config", ext : [".cfg"], magic : ["Prism3D config"]},
 		proCONTROLScript                           : {name : "ProCONTROL script", magic : ["ProCONTROL script"]},
-		proteinDataBank                            : {name : "Protein DataBank", ext : [".pdb"], magic : ["Protein DataBank", "Format: Protein Data Bank file", "Protein Data Bank data", "chemical/x-pdb"], weakMagic : true},
+		proteinDataBank                            : {name : "Protein DataBank", ext : [".pdb", ".ent"], magic : ["Protein DataBank", "Format: Protein Data Bank file", "Protein Data Bank data", "chemical/x-pdb", /^fmt\/2009( |$)/], weakMagic : true},
 		protelPADMacro                             : {name : "Protel PAD macro", ext : [".pad"], magic : ["Protel PAD macro"]},
 		protoGenApplicationConfiguration           : {name : "ProtoGen Application configuration", ext : [".pva"], magic : ["ProtoGen Application configuration"], weakMagic : true},
 		proxyAutoConfig                            : {name : "Proxy Auto-Config", ext : [".pac"], magic : ["Proxy Auto-Config"], weakMagic : true},

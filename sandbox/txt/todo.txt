@@ -1,15 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
+
 * Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
   Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
   Don't do this for all formats, since in several cases a simple flattening is the best course of action
-
-* Figure out problem with aolart2ppm2007 under wine
-	[] image/aolART/ANDHIT_1.art Created file ANDHIT_1.png differs in size by 0.18% (allowed 0.1%) Expected 174KB but got 174KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
-	[] image/aolART/clouds.art Created file clouds.png differs in size by 0.57% (allowed 0.1%) Expected 85KB but got 84KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
-	[] image/aolART/GINANG.art Created file GINANG.png differs in size by 1.18% (allowed 0.1%) Expected 146KB but got 145KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
-	[] image/aolART/nyt_science7.art Created file nyt_science7.png differs in size by 79.79% (allowed 0.1%) Expected 9KB but got 17KB Also, expected converter aolart2ppm2007 but instead got graphicWorkshopProfessional
 
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
@@ -17,6 +13,12 @@
 /---------------\
 | High Priority |
 \---------------/
+* Between thet 'os' stats and the 'AgentPool' status, I should be able to build a nice little website tool that can show 'live' stats about what's going on and cumulative stats about what's taken long, what's been run too many times, etc Not sure if this should be done 'through' dexdaemon or if it should be like an ssh reverse proxy thing or dunno. Would need to think about it some more. Maybe not a high priority at all
+
+* Replacing 86box with qemu could help a lot at improving speeds by freeing up CPU usage. BUT would likely require re-setting up every program on both win2k and winxp, which is likely 2 full days of work, at least.
+
+* Consider getting an EPYC from ioflood with FAST nvme and FAST RAM and run some comparisons without any changes. Possible to save money if an EPYC costs like 2x or 3x but gives like 4x performance.
+
 * Get support added to the various archive/mmfwArchive sub-formats. Maybe wumimg or deark could take on the Pictures variety
   Would be useful if I could see what the pictures are, at the very least by running the programs and taking some screenshots
   This might be a good one to use: https://discmaster.textfiles.com/browse/13330/Highlights%20Hidden%20Pictures%20Workshop.iso/pc/hidpics.pic

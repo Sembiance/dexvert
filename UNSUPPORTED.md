@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,653)
+# Unsupported File Formats (3,654)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1136,7 +1136,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,427)
+## Other (2,428)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1536,6 +1536,7 @@ Family/Format | Name | Extensions | Notes
 [other/caimanGraphics](https://discmaster.textfiles.com/search?format=caimanGraphics) | Caiman graphics | .dat | 
 [other/cakewalkGroove](https://discmaster.textfiles.com/search?format=cakewalkGroove) | Cakewalk Groove | .bin | 
 [other/cakewalkMacroDOS](https://discmaster.textfiles.com/search?format=cakewalkMacroDOS) | Cakewalk Macro (DOS) | .ma | 
+[other/cakewalkProject](https://discmaster.textfiles.com/search?format=cakewalkProject) | Cakewalk Project/Pattern/Layout/Template | .p5p .p5l .p5t | 
 [other/cakewalkSONARProject](https://discmaster.textfiles.com/search?format=cakewalkSONARProject) | Cakewalk SONAR project | .cwp | 
 [other/cakewalkStudioWarePanel](https://discmaster.textfiles.com/search?format=cakewalkStudioWarePanel) | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
 [other/cakewalkWorkFile](https://discmaster.textfiles.com/search?format=cakewalkWorkFile) | Cakewalk Work File | .wrk | 

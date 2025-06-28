@@ -2111,6 +2111,7 @@ export default
 		cadvance2DSymbol                         : {name : "CADVANCE 2D symbol", ext : [".sym", ".bin"], magic : ["CADVANCE 2D symbol"]},
 		cakewalkGroove                           : {name : "Cakewalk Groove", ext : [".bin"], magic : ["Cakewalk Groove"]},
 		cakewalkMacroDOS                         : {name : "Cakewalk Macro (DOS)", ext : [".ma"], magic : ["Cakewalk Macro (DOS)"]},
+		cakewalkProject                          : {name : "Cakewalk Project/Pattern/Layout/Template", ext : [".p5p", ".p5l", ".p5t"], magic : ["Cakewalk Project5 Project Layout/Pattern/Template"]},
 		cakewalkSONARProject                     : {name : "Cakewalk SONAR project", ext : [".cwp"], magic : ["Cakewalk SONAR project"]},
 		cakewalkStudioWarePanel                  : {name : "Cakewalk Studio Ware Panel", ext : [".CakewalkStudioWare"], magic : ["Cakewalk Studio Ware panel"]},
 		cakewalkWorkFile                         : {name : "Cakewalk Work File", ext : [".wrk"], magic : ["Cakewalk Music project", /^fmt\/1214( |$)/]},

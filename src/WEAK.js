@@ -411,6 +411,7 @@ export const WEAK_VALUES =
 	/^Datacopy :dcpy:$/,
 	/^Digital F\/X :tdim:$/,
 	/^DBW Render 4096 :dbw:$/,
+	/^Edmics Group 4 :c4:$/,
 	/^Fax G3 :fax:$/,
 	/^FLI movie :fli:$/,
 	/^GigaPaint Multi :gig:$/,

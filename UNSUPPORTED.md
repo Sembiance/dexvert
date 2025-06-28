@@ -5,7 +5,7 @@ Others are not converted because it was deemed low priority, or there are no kno
 
 
 
-## Archive (287)
+## Archive (286)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -242,7 +242,6 @@ Family/Format | Name | Extensions | Notes
 [archive/spisTCompress](https://discmaster.textfiles.com/search?format=spisTCompress) | SPIS TCompress |  | 
 [archive/spoonStudioPacked](https://discmaster.textfiles.com/search?format=spoonStudioPacked) | Spoon Studio Packed | .exe | 
 [archive/sqwezArchive](https://discmaster.textfiles.com/search?format=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
-[archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?format=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
 [archive/starWarsBattlefrontGameDataArchive](https://discmaster.textfiles.com/search?format=starWarsBattlefrontGameDataArchive) | Star Wars Battlefront game data archive | .lvl | 
 [archive/stardockEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?format=stardockEntertainmentGameDataArchive) | Stardock Entertainment game data archive | .emp .mtd | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?format=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
@@ -765,7 +764,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (190)
+## Image (191)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -876,6 +875,7 @@ Family/Format | Name | Extensions | Notes
 [image/maxonCADDrawing](https://discmaster.textfiles.com/search?format=maxonCADDrawing) | MaconCAD Drawing | .mc2 | [1 sample file](https://sembiance.com/fileFormatSamples/image/maxonCADDrawing/)
 [image/madStudio](https://discmaster.textfiles.com/search?format=madStudio) | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [12 sample files](https://sembiance.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
 [image/magneticGraphics](https://discmaster.textfiles.com/search?format=magneticGraphics) | Magnetic Graphics | .gfx | 
+[image/malieGFBitmap](https://discmaster.textfiles.com/search?format=malieGFBitmap) | MalieGF Bitmap | .mgf | [9 sample files](https://sembiance.com/fileFormatSamples/image/malieGFBitmap/)
 [image/mangaClipStudioPage](https://discmaster.textfiles.com/search?format=mangaClipStudioPage) | Manga/Clip Studio Page | .cpg | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?format=megaPaintVector) | MegaPaint Vector | .vek | 
 [image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.

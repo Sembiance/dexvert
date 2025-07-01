@@ -1828,7 +1828,7 @@ export const WEAK_VALUES =
 	/^Bochs configuration \(with rem\)$/,
 	/^Borland Reflex Screen driver$/,
 	/^BrainStorm document$/,
-	/^BRender Material script \(with rem\)$/,
+	/^BRender Material script/,
 	/^BrioQuery$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,
 	/^Cal3D (Xml )?material File$/,

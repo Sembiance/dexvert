@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,654)
+# Unsupported File Formats (3,667)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (286)
+## Archive (287)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -111,6 +111,7 @@ Family/Format | Name | Extensions | Notes
 [archive/gDevelopGameDataArchive](https://discmaster.textfiles.com/search?format=gDevelopGameDataArchive) | GDevelop game data archive | .egd | 
 [archive/gfs2Filesystem](https://discmaster.textfiles.com/search?format=gfs2Filesystem) | GFS2 Filesystem | .img | 
 [archive/hackStopProtected](https://discmaster.textfiles.com/search?format=hackStopProtected) | HackStop Protected | .exe | 
+[archive/haptekCompressedFile](https://discmaster.textfiles.com/search?format=haptekCompressedFile) | Haptek Compressed file | .htr .haptar | [1 sample file](https://sembiance.com/fileFormatSamples/archive/haptekCompressedFile/)
 [archive/hDiskDiskImage](https://discmaster.textfiles.com/search?format=hDiskDiskImage) | HDisk disk image |  | 
 [archive/hToolCompressedArchive](https://discmaster.textfiles.com/search?format=hToolCompressedArchive) | HTool compressed archive |  | 
 [archive/humongousEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?format=humongousEntertainmentGameDataArchive) | Humongous Entertainment game data archive | .he2 | 
@@ -764,7 +765,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (191)
+## Image (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -883,6 +884,8 @@ Family/Format | Name | Extensions | Notes
 [image/microsoftBorderArt](https://discmaster.textfiles.com/search?format=microsoftBorderArt) | Microsoft Border Art | .bdr | 
 [image/microsoftDocumentImagingFormat](https://discmaster.textfiles.com/search?format=microsoftDocumentImagingFormat) | Microsoft Document Imaging format | .mdi | 
 [image/xboxXPR0Texture](https://discmaster.textfiles.com/search?format=xboxXPR0Texture) | Microsoft Xbox XPR0 texture | .xbx | 
+[image/monuCadDrawing](https://discmaster.textfiles.com/search?format=monuCadDrawing) | Monu-Cad Drawing | .mcd | 
+[image/monuCadFont](https://discmaster.textfiles.com/search?format=monuCadFont) | Monu-Cad Font | .fnt | 
 [image/mvpPaintAnimation](https://discmaster.textfiles.com/search?format=mvpPaintAnimation) | MVP Paint Animation | .af | 
 [image/needForSpeedTextures](https://discmaster.textfiles.com/search?format=needForSpeedTextures) | Need For Speed textures | .fam | 
 [image/neoPaintPattern](https://discmaster.textfiles.com/search?format=neoPaintPattern) | NeoPaint Pattern | .pat | [2 sample files](https://sembiance.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
@@ -961,7 +964,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (169)
+## Music (170)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1051,6 +1054,7 @@ Family/Format | Name | Extensions | Notes
 [music/msxMBM](https://discmaster.textfiles.com/search?format=msxMBM) | MSX Moon Blaster Music | .mbm | [6 sample files](https://sembiance.com/fileFormatSamples/music/msxMBM/) - Conversion works great, but kss2wav will take almost any .mbm file and convert it to garbage. No magic I can find and no current way to check output audio, so since the format is so rare, sadly need to mark it unsupported.
 [music/msxProtrackerModule](https://discmaster.textfiles.com/search?format=msxProtrackerModule) | MSX Protracker Module | .pro | 
 [music/msxSME3Music](https://discmaster.textfiles.com/search?format=msxSME3Music) | MSX SME 3 music | .ply | 
+[music/musicBoxMusic](https://discmaster.textfiles.com/search?format=musicBoxMusic) | Music Box music | .sav | 
 [music/musicStudioSong](https://discmaster.textfiles.com/search?format=musicStudioSong) | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://sembiance.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 [music/musicXPerformance](https://discmaster.textfiles.com/search?format=musicXPerformance) | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXPerformance/)
 [music/musicXSequence](https://discmaster.textfiles.com/search?format=musicXSequence) | [Music-X Sequence](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .seq | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXSequence/)
@@ -1136,7 +1140,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,428)
+## Other (2,436)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1635,6 +1639,7 @@ Family/Format | Name | Extensions | Notes
 [other/compiledMSVCResources](https://discmaster.textfiles.com/search?format=compiledMSVCResources) | Compiled MSVC Resources | .resources | 
 [other/compiledXKeyMap](https://discmaster.textfiles.com/search?format=compiledXKeyMap) | Compiled X KeyMap | .xkm | 
 [other/componentConfigurationFile](https://discmaster.textfiles.com/search?format=componentConfigurationFile) | Component Configuration File | .ccf | 
+[other/compressedElectronicsWorkbenchProject](https://discmaster.textfiles.com/search?format=compressedElectronicsWorkbenchProject) | Compressed Electronics Workbench project |  | 
 [other/concurrentDOSSerialTerminalConfiguration](https://discmaster.textfiles.com/search?format=concurrentDOSSerialTerminalConfiguration) | Concurrent DOS Serial Terminal Configuration | .dat | 
 [other/calCompressedData](https://discmaster.textfiles.com/search?format=calCompressedData) | Confusion and Light Compressed Data | .cal | 
 [other/coolEditAuditionSession](https://discmaster.textfiles.com/search?format=coolEditAuditionSession) | Cool Edit / Audition Session | .ses | 
@@ -1660,6 +1665,7 @@ Family/Format | Name | Extensions | Notes
 [other/corporateLadderChart](https://discmaster.textfiles.com/search?format=corporateLadderChart) | Corporate Ladder Chart | .cht | 
 [other/cosmiFormsMakerForm](https://discmaster.textfiles.com/search?format=cosmiFormsMakerForm) | COSMI FormsMaker Form | .wfm | 
 [other/cosmicBlobsModel](https://discmaster.textfiles.com/search?format=cosmicBlobsModel) | Cosmic Blobs model | .blob .asset | 
+[other/cpBackupDirectory](https://discmaster.textfiles.com/search?format=cpBackupDirectory) | CP Backup Directory | .dir | 
 [other/cpm86Library](https://discmaster.textfiles.com/search?format=cpm86Library) | CP/M-86 library | .l86 | 
 [other/cracklibPasswordIndex](https://discmaster.textfiles.com/search?format=cracklibPasswordIndex) | Cracklib Password Index | .pwi | 
 [other/craftFactoryDesign](https://discmaster.textfiles.com/search?format=craftFactoryDesign) | Craft Factory design | .cra | 
@@ -1819,6 +1825,7 @@ Family/Format | Name | Extensions | Notes
 [other/drHardwareSysInfo](https://discmaster.textfiles.com/search?format=drHardwareSysInfo) | Dr. Hardware Sysinfo | .dat | 
 [other/drSolomonsAntivirusMessages](https://discmaster.textfiles.com/search?format=drSolomonsAntivirusMessages) | Dr. Solomon's Antivirus messages | .dat | 
 [other/drWebLanguageData](https://discmaster.textfiles.com/search?format=drWebLanguageData) | Dr. Web Language data | .dwl | 
+[other/drEngraveDocument](https://discmaster.textfiles.com/search?format=drEngraveDocument) | Dr.Engrave Document | .ded | 
 [other/drWebAntiVirusDatabas](https://discmaster.textfiles.com/search?format=drWebAntiVirusDatabas) | Dr.Web Anti-Virus Database | .vdb | 
 [other/dragonUnPACKerColorPalette](https://discmaster.textfiles.com/search?format=dragonUnPACKerColorPalette) | Dragon UnPACKer color Palette | .dpal | 
 [other/dragonUnPACKerHTMLTemplate](https://discmaster.textfiles.com/search?format=dragonUnPACKerHTMLTemplate) | Dragon UnPACKer HTML Template | .uht | 
@@ -2297,6 +2304,7 @@ Family/Format | Name | Extensions | Notes
 [other/lextekLanguageIdentificationModule](https://discmaster.textfiles.com/search?format=lextekLanguageIdentificationModule) | Lextek Language Identification Module | .lid | 
 [other/life3000Status](https://discmaster.textfiles.com/search?format=life3000Status) | LIFE 3000 Status | .lif | 
 [other/lightWave3DPreset](https://discmaster.textfiles.com/search?format=lightWave3DPreset) | LightWave 3D Preset | .pst .srf | 
+[other/line6Tone](https://discmaster.textfiles.com/search?format=line6Tone) | Line 6 Tone | .l6t | 
 [other/lineageIIData](https://discmaster.textfiles.com/search?format=lineageIIData) | Lineage II data |  | 
 [other/linkBootableCodeForTransputerNetwork](https://discmaster.textfiles.com/search?format=linkBootableCodeForTransputerNetwork) | Link Bootable code for transputer network | .btl | 
 [other/lInkSystemApplicationDataFormat](https://discmaster.textfiles.com/search?format=lInkSystemApplicationDataFormat) | LInk System Application Data Format | .lsd | 
@@ -2923,6 +2931,8 @@ Family/Format | Name | Extensions | Notes
 [other/realBasicProject](https://discmaster.textfiles.com/search?format=realBasicProject) | RealBasic Project | .rbp | 
 [other/realTimeDevice](https://discmaster.textfiles.com/search?format=realTimeDevice) | RealTime Device | .rtd | 
 [other/realTimeWorkspace](https://discmaster.textfiles.com/search?format=realTimeWorkspace) | RealTime Workspace | .rtw | 
+[other/reasonCombinatorInstrumentPatch](https://discmaster.textfiles.com/search?format=reasonCombinatorInstrumentPatch) | Reason Combinator Instrument Patch | .cmb | 
+[other/reasonSong](https://discmaster.textfiles.com/search?format=reasonSong) | Reason song | .record | 
 [other/rebelBookMovesFormat](https://discmaster.textfiles.com/search?format=rebelBookMovesFormat) | REBEL book Moves format | .mvs | 
 [other/rebelPieces](https://discmaster.textfiles.com/search?format=rebelPieces) | REBEL Pieces | .pcs | 
 [other/recoloredProject](https://discmaster.textfiles.com/search?format=recoloredProject) | Recolored project | .rcl | 
@@ -3055,7 +3065,6 @@ Family/Format | Name | Extensions | Notes
 [other/smartAddressAddressBook](https://discmaster.textfiles.com/search?format=smartAddressAddressBook) | Smart Address address book | .tpl .adr | 
 [other/smartAddressDiary](https://discmaster.textfiles.com/search?format=smartAddressDiary) | Smart Address Diary | .sdy | 
 [other/smartBootManagerBackupFile](https://discmaster.textfiles.com/search?format=smartBootManagerBackupFile) | Smart Boot Manager Backup File |  | 
-[other/smartDrawTemplate](https://discmaster.textfiles.com/search?format=smartDrawTemplate) | SmartDraw Template | .sdt .sdr | 
 [other/smartListToGoDatabase](https://discmaster.textfiles.com/search?format=smartListToGoDatabase) | SmartList To Go database | .pdb | 
 [other/snagItCapture](https://discmaster.textfiles.com/search?format=snagItCapture) | SnagIt capture | .snag | 
 [other/snarkBustersGameDataArchive](https://discmaster.textfiles.com/search?format=snarkBustersGameDataArchive) | Snark Busters game data archive | .pack | 
@@ -3084,6 +3093,7 @@ Family/Format | Name | Extensions | Notes
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?format=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
 [other/spiderman2SoundMusicData](https://discmaster.textfiles.com/search?format=spiderman2SoundMusicData) | Spiderman 2 sound/music data | .wbk | 
 [other/spilImageLibrary](https://discmaster.textfiles.com/search?format=spilImageLibrary) | SPIL Image Library | .ilb .slb | 
+[other/sPlanSchematic](https://discmaster.textfiles.com/search?format=sPlanSchematic) | sPlan schematic | .lib .spl | 
 [other/sprintHelp](https://discmaster.textfiles.com/search?format=sprintHelp) | Sprint Help | .hlp | 
 [other/sproutGameDataArchive](https://discmaster.textfiles.com/search?format=sproutGameDataArchive) | Sprout game data archive | .saf | 
 [other/spssForWindowsData](https://discmaster.textfiles.com/search?format=spssForWindowsData) | SPSS for Windows Data | .sav | 
@@ -3265,6 +3275,7 @@ Family/Format | Name | Extensions | Notes
 [other/timeSplittersFuturePerfectGameDataArchive](https://discmaster.textfiles.com/search?format=timeSplittersFuturePerfectGameDataArchive) | Time Splitters Future Perfect game data archive | .pak .pakbeginfile | 
 [other/timelineSchedule](https://discmaster.textfiles.com/search?format=timelineSchedule) | Timeline schedule |  | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?format=timeZoneData) | TimeZone Data | .tz | 
+[other/tinaSchematic](https://discmaster.textfiles.com/search?format=tinaSchematic) | TINA Schematic | .sch .tsc | 
 [other/tmmScreen](https://discmaster.textfiles.com/search?format=tmmScreen) | TMM Screen | .scr | 
 [other/tmtPascalForDOSObjectCode](https://discmaster.textfiles.com/search?format=tmtPascalForDOSObjectCode) | TMT Pascal for DOS object code | .fpd | 
 [other/tmtPascalForDOSSymbols](https://discmaster.textfiles.com/search?format=tmtPascalForDOSSymbols) | TMT Pascal for DOS Symbols | .sym | 
@@ -3515,6 +3526,7 @@ Family/Format | Name | Extensions | Notes
 [other/worldMachineDocument](https://discmaster.textfiles.com/search?format=worldMachineDocument) | WorldMachine document | .tmd | 
 [other/wreckinCrewLevelMap](https://discmaster.textfiles.com/search?format=wreckinCrewLevelMap) | Wreckin Crew level Map | .map | 
 [other/wsusPatchStorageFile](https://discmaster.textfiles.com/search?format=wsusPatchStorageFile) | WSUS Patch Storage File | .psf .p | 
+[other/wtComparisonTestData](https://discmaster.textfiles.com/search?format=wtComparisonTestData) | WT Comparison Test Data | .dat | 
 [other/wwIITankCommanderGameDataArchive](https://discmaster.textfiles.com/search?format=wwIITankCommanderGameDataArchive) | WWII Tank Commander game data archive | .pck | 
 [other/xMotorRacingTextures](https://discmaster.textfiles.com/search?format=xMotorRacingTextures) | X Motor Racing textures | .trc .pnt .shd | 
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?format=xCADModifierTable) | X-CAD Modifier Table | .obj | 
@@ -3666,7 +3678,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (47)
+## Video (48)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3689,6 +3701,7 @@ Family/Format | Name | Extensions | Notes
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?format=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?format=iavfVideo) | IAVF video | .avi .iavf | 
+[video/imperiumGalacticaAnimation](https://discmaster.textfiles.com/search?format=imperiumGalacticaAnimation) | Imperium Galactica Animation | .ani | [1 sample file](https://sembiance.com/fileFormatSamples/video/imperiumGalacticaAnimation/)
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?format=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/kheopsStudioVideo](https://discmaster.textfiles.com/search?format=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?format=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php/Space_Adventure_MOV) | .mov | 

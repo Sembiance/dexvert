@@ -3044,6 +3044,7 @@ export default
 		realDRAWProject                          : {name : "Real-DRAW Project", ext : [".rdw"], magic : ["Real-DRAW Project"], weakMagic : true},
 		realTimeDevice                           : {name : "RealTime Device", ext : [".rtd"], magic : ["RealTime Device"], weakMagic : true},
 		realTimeWorkspace                        : {name : "RealTime Workspace", ext : [".rtw"], magic : ["RealTime Workspace"], weakMagic : true},
+		reaperMediaPeakInformation               : {name : "REAPER media peak information", ext : [".reapeaks"], magic : ["REAPER media peak information"], weakMagic : true},
 		reasonCombinatorInstrumentPatch          : {name : "Reason Combinator Instrument Patch", ext : [".cmb"], magic : ["Reason Combinator Instrument Patch"], weakMagic : true},
 		reasonSong                               : {name : "Reason song", ext : [".record"], magic : ["Reason song"], weakMagic : true},
 		recoloredProject                         : {name : "Recolored project", ext : [".rcl"], magic : ["Recolored project"]},

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,667)
+# Unsupported File Formats (3,668)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1140,7 +1140,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,436)
+## Other (2,437)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2931,6 +2931,7 @@ Family/Format | Name | Extensions | Notes
 [other/realBasicProject](https://discmaster.textfiles.com/search?format=realBasicProject) | RealBasic Project | .rbp | 
 [other/realTimeDevice](https://discmaster.textfiles.com/search?format=realTimeDevice) | RealTime Device | .rtd | 
 [other/realTimeWorkspace](https://discmaster.textfiles.com/search?format=realTimeWorkspace) | RealTime Workspace | .rtw | 
+[other/reaperMediaPeakInformation](https://discmaster.textfiles.com/search?format=reaperMediaPeakInformation) | REAPER media peak information | .reapeaks | 
 [other/reasonCombinatorInstrumentPatch](https://discmaster.textfiles.com/search?format=reasonCombinatorInstrumentPatch) | Reason Combinator Instrument Patch | .cmb | 
 [other/reasonSong](https://discmaster.textfiles.com/search?format=reasonSong) | Reason song | .record | 
 [other/rebelBookMovesFormat](https://discmaster.textfiles.com/search?format=rebelBookMovesFormat) | REBEL book Moves format | .mvs | 

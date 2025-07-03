@@ -1,15 +1,16 @@
-# Unsupported File Formats (3,668)
+# Unsupported File Formats (3,673)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (287)
+## Archive (288)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
 [archive/winUpackPacked](https://discmaster.textfiles.com/search?format=winUpackPacked) | (Win)Upack Packed | .exe | 
+[archive/updProtected](https://discmaster.textfiles.com/search?format=updProtected) | $UPD Protected | .exe | 
 [archive/onesaneGameArchive](https://discmaster.textfiles.com/search?format=onesaneGameArchive) | 1nsane game data archive | .idf | 
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?format=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?format=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -1140,7 +1141,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,437)
+## Other (2,441)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1572,6 +1573,7 @@ Family/Format | Name | Extensions | Notes
 [other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?format=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 
 [other/ccS64Snapshot](https://discmaster.textfiles.com/search?format=ccS64Snapshot) | CCS64 snapshot | .c64 | 
 [other/cdAudioTrackShortcut](https://discmaster.textfiles.com/search?format=cdAudioTrackShortcut) | CD Audio track shortcut | .cda | 
+[other/cdLabelProProject](https://discmaster.textfiles.com/search?format=cdLabelProProject) | CD Label Pro project | .cdl | 
 [other/cdViewerData](https://discmaster.textfiles.com/search?format=cdViewerData) | CD Viewer data | .cdv | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?format=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
 [other/centralPointPCBackupDirectoryData](https://discmaster.textfiles.com/search?format=centralPointPCBackupDirectoryData) | Central Point PC Backup Directory data | .dir | 
@@ -1587,6 +1589,7 @@ Family/Format | Name | Extensions | Notes
 [other/checkItProData](https://discmaster.textfiles.com/search?format=checkItProData) | CheckIt Pro Data | .ckd | 
 [other/checksAndBalances](https://discmaster.textfiles.com/search?format=checksAndBalances) | Checks and Balances data |  | 
 [other/chem3DFormat](https://discmaster.textfiles.com/search?format=chem3DFormat) | Chem3D Format | .c3 | 
+[other/chem3DModel](https://discmaster.textfiles.com/search?format=chem3DModel) | Chem3D model | .c3d | 
 [other/chemDrawTemplate](https://discmaster.textfiles.com/search?format=chemDrawTemplate) | ChemDraw Template | .ctr | 
 [other/chemicalDrawExchangeFormat](https://discmaster.textfiles.com/search?format=chemicalDrawExchangeFormat) | Chemical Draw Exchange Format | .cdx | 
 [other/chemViewAnimationData](https://discmaster.textfiles.com/search?format=chemViewAnimationData) | Chemview Animation Data | .d | 
@@ -1846,6 +1849,7 @@ Family/Format | Name | Extensions | Notes
 [other/dvdInfoFile](https://discmaster.textfiles.com/search?format=dvdInfoFile) | DVD Info File | .ifo .bup | 
 [other/dvDisasterErrorCorrection](https://discmaster.textfiles.com/search?format=dvDisasterErrorCorrection) | DVDisaster Error Correction | .ecc | 
 [other/dvdShrinkDeepAnalysisData](https://discmaster.textfiles.com/search?format=dvdShrinkDeepAnalysisData) | DVDShrinkdeep analysis data |  | 
+[other/dxmMusic](https://discmaster.textfiles.com/search?format=dxmMusic) | DXM music | .dxm | 
 [other/dynamicMessageSystemFile](https://discmaster.textfiles.com/search?format=dynamicMessageSystemFile) | Dynamic Message System File | .msg | 
 [other/dynamicPublisherPrinterFile](https://discmaster.textfiles.com/search?format=dynamicPublisherPrinterFile) | Dynamic Publisher Printer File | .prf | 
 [other/dynamicallyLinkedDeviceInterface](https://discmaster.textfiles.com/search?format=dynamicallyLinkedDeviceInterface) | Dynamically Linked Device Interface | .dldi | 
@@ -3197,6 +3201,7 @@ Family/Format | Name | Extensions | Notes
 [other/tads](https://discmaster.textfiles.com/search?format=tads) | TADS | .t .gam .t3 | 
 [other/tagwriteTemplate](https://discmaster.textfiles.com/search?format=tagwriteTemplate) | Tagwrite Template | .tww | 
 [other/talesOfEterniaOnlineGameDataArchive](https://discmaster.textfiles.com/search?format=talesOfEterniaOnlineGameDataArchive) | Tales Of Eternia Online game data archive | .bnd | 
+[other/talismanGameDataArchive](https://discmaster.textfiles.com/search?format=talismanGameDataArchive) | Talisman game data archive | .dz | 
 [other/tascChessSavedGame](https://discmaster.textfiles.com/search?format=tascChessSavedGame) | Tasc Chess saved game | .gmd | 
 [other/taskForce1942SaveGame](https://discmaster.textfiles.com/search?format=taskForce1942SaveGame) | Task Force 1942 save game | .sve | 
 [other/tcpdumpCapture](https://discmaster.textfiles.com/search?format=tcpdumpCapture) | TCPDUMP Style Capture | .dmp .pcap | 

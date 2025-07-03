@@ -724,6 +724,7 @@ export default
 		mozillaNetscapeSettings                    : {name : "Mozilla (Netscape) settings", ext : [".js"], magic : ["Mozilla (Netscape) settings"]},
 		mozillaSpamFilterDefinition                : {name : "Mozilla Spam Filter Definition", ext : [".sfd"], magic : ["Mozilla Spam Filter Definition"], weakMagic : true},
 		mPlayerFontDescription                     : {name : "MPlayer font Description", ext : [".desc"], magic : ["MPlayer font Description"], weakMagic : true},
+		mrml                                       : {name : "Medical Reality Markup Language", ext : [".mrl"], magic : ["text/x-mrml"], weakMagic : true},
 		multiEditConfiguration                     : {name : "Multi Edit configuration", ext : [".me"], magic : ["Multi Edit configuration"]},
 		multiFaxTemplate                           : {name : "MultiFax Template", ext : [".tem"], magic : ["MultiFax Template"], weakMagic : true},
 		multipleSequenceFile                       : {name : "Multiple Sequence File", ext : [".msf"], magic : ["Multiple Sequence File"], weakMagic : true},

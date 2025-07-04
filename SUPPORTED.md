@@ -1,4 +1,4 @@
-# Supported File Formats (3,249)
+# Supported File Formats (3,251)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -138,7 +138,7 @@ archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) |
 archive | [DiskDupe Disk Image](http://fileformats.archiveteam.org/wiki/DDI) | .ddi | [sevenZip](http://p7zip.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/diskDupeDiskImage/)
 archive | [DIV GamesStudio Graphics Library](http://fileformats.archiveteam.org/wiki/DIV_Games_Studio) | .fpg | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
 archive | Dn.COM Cruncher Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/dnCOMCruncherPacked/)
-archive | [DOS BACKUP file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-DOS)) |  | [unDOSBACKUP](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/dosBackupFile/)
+archive | [DOS BACKUP file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-DOS)) |  | [unDOSBACKUP](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/dosBackupFile/)
 archive | [DOSIMG Disk Image](http://fileformats.archiveteam.org/wiki/IMG_(DOSIMG)) | .img | [aaru](https://github.com/aaru-dps/Aaru) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/dosimg/)
 archive | [Dr. Riptide Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/drRiptideGameArchive/)
 archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php?title=Tape%5CDisk_Preservation#VDK_File_Format) | .vdk | [dcopy](https://github.com/pulkomandy/ddosutils) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dragonVDK/)
@@ -505,7 +505,7 @@ audio | [Audio Visual Research](http://fileformats.archiveteam.org/wiki/AVR) | .
 audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
 audio | [Bink Audio](https://wiki.multimedia.cx/index.php/Bink_Audio) | .binka | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/binkAudio/)
-audio | [Blaster Master VOC Compiled Audio](http://fileformats.archiveteam.org/wiki/VCOMP_(Blaster_Master)) | .exe | [dd](https://www.gnu.org/software/coreutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/vcomp/)
+audio | [Blaster Master VOC Compiled Audio](http://fileformats.archiveteam.org/wiki/VCOMP_(Blaster_Master)) | .exe | [dd](https://www.gnu.org/software/coreutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/vcomp/)
 audio | [BRSTM Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_BRSTM) | .brstm | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/brstm/)
 audio | Cavewar Sounds | .dbs | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/cavewarsSounds/)
 audio | Circus XPCM Audio | .pcm | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/circusXPCM/)
@@ -917,7 +917,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (696)
+## Image (697)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1593,6 +1593,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 image | [Young Picasso](http://fileformats.archiveteam.org/wiki/Young_Picasso) | .yp | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/youngPicasso/)
 image | Z's Staff Kid98 | .zim | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/zim/)
 image | [Zoner Bitmap](http://fileformats.archiveteam.org/wiki/BMI_(Zoner)) | .bmi | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/zonerBitmap/)
+image | Zoner Callisto Metafile Preview | .zmf | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/zonerCallistoMetafilePreview/)
 image | [Zoner Zebra](http://fileformats.archiveteam.org/wiki/ZBR_(Zoner_Zebra)) | .zbr | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/zbr/) - reaConverter is the only program I know of that can convert to SVG but it fails to do so with QEMU WinXP 32bit (used to work in wine). So for now, we just convert to PNG.
 image | Zoom-4 | .zm4 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/zoom4/)
 image | [ZoomBrowser Ex thumbnail cache](http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache) | .info | [foremost](http://foremost.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/zoomBrowserExThumbnailCache/)
@@ -2133,7 +2134,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,061)
+## Text (1,062)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2284,7 +2285,7 @@ text | Canon Design Essentials printer info | .csc |  | [3 sample files](https:/
 text | Cartoon Studio Script | .css |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cartoonStudioScript/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets) | .css |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/css/)
 text | Cashflow Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cashflowHelp/)
-text | CauseWay DOS Extender exception | .err |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
+text | CauseWay DOS Extender exception | .err |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
 text | CD Viewer Help | .cvh |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cdViewerHelp/)
 text | [CDRDAO TOC File](http://fileformats.archiveteam.org/wiki/TOC) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/text/toc/)
 text | Celestia script | .cel |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/celestiaScript/)
@@ -2711,6 +2712,7 @@ text | Montage Page |  |  | [13 sample files](https://sembiance.com/fileFormatSa
 text | Montage Preset | .preset |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/montagePreset/)
 text | Mosaic Hotlist | .hot |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/mosaicHotlist/)
 text | Motion Capture File Format | .csm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/motionCaptureFileFormat/)
+text | Motorola phone skin info | .ski |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/motorolaPhoneSkinInfo/)
 text | Movie Master Script | .scr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/movieMasterScript/)
 text | Moxcel spreadsheet | .mxl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/moxcelSpreadsheet/)
 text | MOZART Percussion map | .mzp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/mozartPercussionMap/)

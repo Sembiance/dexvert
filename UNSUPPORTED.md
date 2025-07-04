@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,673)
+# Unsupported File Formats (3,674)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1141,7 +1141,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,441)
+## Other (2,442)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3065,6 +3065,7 @@ Family/Format | Name | Extensions | Notes
 [other/skypeUserData](https://discmaster.textfiles.com/search?format=skypeUserData) | Skype user data | .dbb | 
 [other/slicksNSlidesTrack](https://discmaster.textfiles.com/search?format=slicksNSlidesTrack) | Slicks 'n' Slide Track | .ss | 
 [other/slideSavedGame](https://discmaster.textfiles.com/search?format=slideSavedGame) | Slide Saved Game | .sld | 
+[other/slideWritePlusBatch](https://discmaster.textfiles.com/search?format=slideWritePlusBatch) | SlideWrite Plus Batch | .bt .bin | 
 [other/slideWritePlusChart](https://discmaster.textfiles.com/search?format=slideWritePlusChart) | SlideWrite Plus Chart | .tc .fg | 
 [other/slimShowProject](https://discmaster.textfiles.com/search?format=slimShowProject) | Slim Show project | .s_ .ss | 
 [other/smartAddressAddressBook](https://discmaster.textfiles.com/search?format=smartAddressAddressBook) | Smart Address address book | .tpl .adr | 
@@ -3497,7 +3498,7 @@ Family/Format | Name | Extensions | Notes
 [other/winWorksChart](https://discmaster.textfiles.com/search?format=winWorksChart) | WinWorks Chart | .cht | 
 [other/winWorksDBDefinition](https://discmaster.textfiles.com/search?format=winWorksDBDefinition) | WinWorks DB Definition | .wdf | 
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?format=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 
-[other/wmb43DGameStudioMapLevel](https://discmaster.textfiles.com/search?format=wmb43DGameStudioMapLevel) | WMB4 3D GameStudio Map/level | .wmb | 
+[other/wmb3DGameStudioMapLevel](https://discmaster.textfiles.com/search?format=wmb3DGameStudioMapLevel) | WMB 3D GameStudio Map/level | .wmb | 
 [other/wolfpackMission](https://discmaster.textfiles.com/search?format=wolfpackMission) | Wolfpack Mission | .mis | 
 [other/wordWriter128PrintParametersOptions](https://discmaster.textfiles.com/search?format=wordWriter128PrintParametersOptions) | Word Writer 128 print Parameters/options | .par | 
 [other/wordPerfectCaracterFontResource](https://discmaster.textfiles.com/search?format=wordPerfectCaracterFontResource) | WordPerfect Caracter/Font resource | .crs | 

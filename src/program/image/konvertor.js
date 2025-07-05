@@ -10,17 +10,19 @@ export class konvertor extends Program
 	args    = () => [];
 	osData  = r => ({
 		script : `
+			FileDelete("c:\\in\\go.au3");
 			WindowRequire("Konvertor - Computer", "", 10)
-			Send("{RIGHT}{ENTER}")
+			SendSlow("{RIGHT}{ENTER}")
 			WindowRequire("Konvertor - C:\\", "", 5)
-			Send("in{ENTER}")
+			SendSlow("in{ENTER}")
 			WindowRequire("Konvertor - C:\\in", "", 5)
-			Send("${path.basename(r.inFile(), path.extname(r.inFile()))}")
+			Sleep(250)
 			MouseClick("right", 335, 277)
+			Sleep(250)
 			Send("{DOWN}{DOWN}{DOWN}{ENTER}")
-			$convertWindow = WindowRequire("Konvertor - Convert Images", "", 5)
+			$convertWindow = WindowRequire("Konvertor - Convert Images", "", 7)
 			Send("{ENTER}")
-			WaitForStableFileSize("c:\\out\\${path.basename(r.inFile(), path.extname(r.inFile()))}.png", ${xu.SECOND*2}, ${xu.SECOND*10})
+			WaitForStableFileSize("c:\\out\\${path.basename(r.inFile(), path.extname(r.inFile()))}.png", ${xu.SECOND*2}, ${xu.SECOND*15})
 			Send("{ENTER}")
 			WinWaitClose($convertWindow, "", 10)
 			Send("!f")

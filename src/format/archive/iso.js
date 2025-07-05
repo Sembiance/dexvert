@@ -49,7 +49,7 @@ export class iso extends Format
 	];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
-	idMeta = ({macFileType, macFileCreator}) => (macFileType==="GImg" && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
+	idMeta = ({macFileType, macFileCreator}) => (["GImg", "HImg", "hImg"].includes(macFileType) && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
 
 	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
 	{

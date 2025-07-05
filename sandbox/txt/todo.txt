@@ -2,6 +2,8 @@
 | TOP Priority |
 \--------------/
 * archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
+  Other MacOS installers to target in a similar way:
+	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc
 
 * Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
   Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer

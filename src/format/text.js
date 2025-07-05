@@ -534,7 +534,7 @@ export default
 		formWorxPrinterDriver                      : {name : "FormWorx Printer driver", ext : [".prx"], magic : ["FormWorx for DOS Printer driver"]},
 		forteAgentCharacterSetMapping              : {name : "Forte Agent Character Set Mapping", ext : [".csm"], magic : ["Forte Agent Character Set Mapping"], weakMagic : true},
 		fractalDesignPainterColorsSet              : {name : "Fractal Design Painter Colors Set", ext : [".pcs"], magic : ["Fractal Design Painter Colors Set"], weakMagic : true},
-		frameMakerDictionary                       : {name : "FrameMaker Dictionary text", ext : [".brt"], magic : ["FrameMaker Dictionary text", "FrameMaker hyphens dictionary"], idMeta : ({macFileType, macFileCreator}) => ["FMdc", "FUdc"].includes(macFileType) && macFileCreator==="Fram"},
+		frameMakerDictionary                       : {name : "FrameMaker Dictionary text", ext : [".brt"], magic : ["FrameMaker Dictionary text", "FrameMaker hyphens dictionary"], idMeta : ({macFileType, macFileCreator}) => ["FMdc", "FUdc"].includes(macFileType) && ["Fra5", "Fram"].includes(macFileCreator)},
 		frameMakerMakerMarkupLanguage              : {name : "FrameMaker Maker Markup Language", ext : [".mml"], magic : ["FrameMaker Maker Markup Language", /^FrameMaker MML file/], weakMagic : true},
 		fredFishProductInfo                        : {name : "Fred Fish's Product-Info", magic : ["Fred Fish's Product-Info"]},
 		freeMindMindMap                            : {name : "FreeMind mind map", ext : [".mm"], magic : ["FreeMind mind map", "Freeplane MindMap", /^(Freemind|Freeplane) document/]},

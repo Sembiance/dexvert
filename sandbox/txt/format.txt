@@ -149,6 +149,9 @@ Don't rename the file safely for input. ONLY USE THIS if the program requires th
 NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
+>>> safeFilename = "SpecificFilename.xyz"
+If the conversion programs don't work well except with a specific filename, use this to ensure it has that specific filename
+
 >>> safeExt = async (dexState) { return ".safe"; }
 When processing, the extension used is this priority:
 1. An extension returned from safeExt() (if present)

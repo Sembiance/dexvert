@@ -146,14 +146,16 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				else
 					cwdExt = inputFile.ext;
 			}
+
+			const fullFilename = format.safeFilename || `${cwdFilename}${cwdExt}`;
 			
 			try
 			{
-				await f.input.rename(cwdFilename + cwdExt);
+				await f.input.rename(fullFilename);
 			}
 			catch(err)
 			{
-				xlog.warn`Failed to rename input file to ${cwdFilename}${cwdExt}: ${err}`;
+				xlog.warn`Failed to rename input file to ${fullFilename}: ${err}`;
 			}
 
 			// by default we rename the aux files to match, unless keepFilename is set to true

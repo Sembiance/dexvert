@@ -212,7 +212,7 @@ export default
 		pcToolsDesktopMessagesHelp       : {name : "PC Tools Desktop Messages/help", ext : [".msg"], magic : ["PC Tools Desktop Messages/help"], weakMagic : true},
 		perFORMMessages                  : {name : "PerFORM Messages", ext : [".msg"], magic : ["PerFORM Messages"]},
 		polytronVCSLogfile               : {name : "Polytron VCS logfile", ext : [".pmv"], magic : ["Polytron VCS logfile"]},
-		parsonsTechnologyResourceData    : {name : "Parsons Technology resource data", ext : [".us5", ".ovl", ".cfg", ".wrk", ".idx"], magic : ["Parsons Technology resource"]},
+		parsonsTechnologyResourceData    : {name : "Parsons Technology resource data", ext : [".us5", ".ovl", ".cfg", ".wrk", ".idx"], magic : ["Parsons Technology resource"], idMeta : ({macFileType, macFileCreator}) => macFileType==="PLGL" && macFileCreator==="Ptek"},
 		playStationRSD3DModelInfo        : {name : "PlayStation RSD 3D model info", ext : [".rsd"], magic : ["PlayStation RSD 3D model info"], weakMagic : true},
 		powerWindowsProject              : {name : "PowerWindows Project", ext : [".pw"], magic : ["PowerWindows Project"]},
 		qseqProject                      : {name : "QSEQ Project", ext : [".qsq"], magic : ["QSEQ project"]},

@@ -8,7 +8,7 @@ export class compactPro extends Format
 	forbidExtMatch = [".sea"];
 	magic          = ["Mac Compact Pro archive", "Compact Pro"];
 	weakMagic      = ["Mac Compact Pro archive"];
-	idMeta         = ({macFileType}) => macFileType==="PACT";
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="PACT" || (macFileType==="VDat" && macFileCreator==="Vrki");
 	priority       = this.PRIORITY.LOW;
 	converters     = ["unar[type:Compact Pro][mac]", "macunpack[strongMatch]"];
 }

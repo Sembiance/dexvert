@@ -149,6 +149,7 @@ export class Format
 			// conversion
 			converters   : {types : [Array, "function"]},
 			keepFilename : {type : "boolean"},
+			safeFilename : {type : "string"},
 			metaProvider : {type : ["string"], enum : []},
 			safeExt      : {types : ["string", "function"], allowEmpty : true},
 			processed    : {type : "function", length : [0, 1]},

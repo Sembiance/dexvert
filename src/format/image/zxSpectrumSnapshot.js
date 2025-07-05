@@ -7,5 +7,6 @@ export class zxSpectrumSnapshot extends Format
 	ext            = [".sna"];
 	forbidExtMatch = true;
 	magic          = ["ZX Spectrum Snapshot :zxsna:"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="Snap" && macFileCreator==="ZXSP";
 	converters     = ["nconvert[format:zxsna]"];
 }

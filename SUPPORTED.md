@@ -1,4 +1,4 @@
-# Supported File Formats (3,251)
+# Supported File Formats (3,252)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -917,7 +917,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (697)
+## Image (698)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1500,7 +1500,7 @@ image | [SpritePad](http://fileformats.archiveteam.org/wiki/SpritePad) | .spd | 
 image | SSI Packed Library Image | .tlb | [tlb2bmp](http://frua.rosedragon.org/pc/misc/tlb2bmp.txt) | [10 sample files](https://sembiance.com/fileFormatSamples/image/ssiTLB/)
 image | [ST-6 compressed astrocamera bitmap](https://web.archive.org/web/20210610121116/https://hwiegman.home.xs4all.nl/fileformats/sbig/sbig.txt) | .st6 | [nconvert](https://www.xnview.com/en/nconvert/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/st6CompressedAstrocameraBitmap/)
 image | [STAD PAC](http://fileformats.archiveteam.org/wiki/STAD_PAC) | .pac .seq | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [16 sample files](https://sembiance.com/fileFormatSamples/image/stadPAC/)
-image | Star Office Gallery | .sdg | [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/starOfficeGallery/)
+image | Star Office Gallery | .sdg | [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/starOfficeGallery/)
 image | [Star Painter](http://fileformats.archiveteam.org/wiki/Star_Painter) | .gr .cs .zs | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/starPainter/)
 image | [Stardent AVS X](http://fileformats.archiveteam.org/wiki/AVS_X_image) | .avs .mbfavs .x | [x2tga](https://paulbourke.net/dataformats/avs_x/xtoraw.c) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tomsViewer](https://tomseditor.com/blog/viewer) | [7 sample files](https://sembiance.com/fileFormatSamples/image/avsx/)
 image | [STJ Sterescopic Image](https://stereo.jpn.org/eng/stphmkr/) | .stj | [konvertor](https://www.logipole.com/konvertor-en.htm) | [2 sample files](https://sembiance.com/fileFormatSamples/image/stjStereoscopic/)
@@ -1570,6 +1570,7 @@ image | [WGT Sprite](http://fileformats.archiveteam.org/wiki/WGT_Sprite) | .spr 
 image | [WhyPic](http://fileformats.archiveteam.org/wiki/WhyPic) | .ypc | [konvertor](https://www.logipole.com/konvertor-en.htm) | [2 sample files](https://sembiance.com/fileFormatSamples/image/whyPic/)
 image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/artist64/)
 image | [Windows Clipboard](http://fileformats.archiveteam.org/wiki/Windows_clipboard) | .clp | [deark](https://entropymine.com/deark/) [clipbrdWin2k](https://microsoft.com) [nconvert](https://www.xnview.com/en/nconvert/) [irfanView](https://www.irfanview.com/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [10 sample files](https://sembiance.com/fileFormatSamples/image/windowsClipboard/)
+image | Windows IconCacheDB | .db | [konvertor](https://www.logipole.com/konvertor-en.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/image/windowsIconCacheDB/)
 image | [WinFax](http://fileformats.archiveteam.org/wiki/WinFax_Fax_Image) | .fxr .fxs .fxm | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/winFax/)
 image | [Winzle Puzzle](http://fileformats.archiveteam.org/wiki/Winzle_Puzzle) | .wzl | [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/winzlePuzzle/)
 image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp .wap .wbm | [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) | [10 sample files](https://sembiance.com/fileFormatSamples/image/wirelessBMP/)
@@ -2021,7 +2022,7 @@ other | Show Partner Animator Help | .hlp | [strings](https://www.gnu.org/softwa
 other | Softdisk Crossword | .sxg .sxp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/softdiskCrossword/)
 other | SPSS template | .cht .sct | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/spssTemplate/)
 other | Storm C++ Debug strings | .debug | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/stormCPPDebugStrings/)
-other | SuperScape Messages | .msg | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/other/superScapeMessages/)
+other | SuperScape Messages | .msg | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/other/superScapeMessages/)
 other | Sybase iAnywhere Index | .cdx | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/sybaseIAnywhereIndex/)
 other | SYMDEF File | .symdef | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/symDef/)
 other | symlink |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/other/symlink/) - This format is a hardcoded match at the beginning of identify.js
@@ -2616,7 +2617,7 @@ text | Lightscape Block | .blk |  | [2 sample files](https://sembiance.com/fileF
 text | Lightscape Defaults | .df |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/lightscapeDefaults/)
 text | Lightscape View | .vw .dv |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/lightscapeView/)
 text | LightWave 3D Configuration | .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lightWave3DConfiguration/)
-text | LightWave 3D convolution Kernel | .krn |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/lightWave3DConvolutionKernel/)
+text | LightWave 3D convolution Kernel | .krn |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/lightWave3DConvolutionKernel/)
 text | [LightWave Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene) | .lws .scn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/lightWaveScene/)
 text | LilyPond music score | .ly .ily |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lilyPondMusicScore/)
 text | Lingo Script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lingoScript/)
@@ -3268,7 +3269,7 @@ video | Little Big Adventure FLA Video | .fla | [na_game_tool](https://nihav.org
 video | [Loki SDL MJPEG Video](https://wiki.multimedia.cx/index.php/SMJPEG) | .mjpg | [ffmpeg](https://ffmpeg.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/video/smjpeg/)
 video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/smush/)
 video | [Machine Hunter FMV Video](https://wiki.multimedia.cx/index.php/Machine_Hunter_FMV) | .fmv | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/machineHunterFMVVideo/)
-video | [Mailestrom ANM](https://wiki.multimedia.cx/index.php/Maelstrom_ANM) | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/video/maelstromANM/)
+video | [Mailestrom ANM](https://wiki.multimedia.cx/index.php/Maelstrom_ANM) | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/maelstromANM/)
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)
 video | [Motion JPEG 2000](http://fileformats.archiveteam.org/wiki/MJ2) | .mj2 .mjp2 | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/motionJPEG2000/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [xanim](https://github.com/Sembiance/xanim) | [71 sample files](https://sembiance.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably. CYC and demo_5 don't convert. Also exists is video/movieSetterSet which is currently unsupported, don't know what can convert it.

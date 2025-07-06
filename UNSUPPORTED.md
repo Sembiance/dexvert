@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,674)
+# Unsupported File Formats (3,678)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -766,7 +766,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (193)
+## Image (194)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -832,6 +832,7 @@ Family/Format | Name | Extensions | Notes
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?format=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 
 [image/expertDrawDrawing](https://discmaster.textfiles.com/search?format=expertDrawDrawing) | ExpertDraw drawing |  | 
+[image/extracadDrawing](https://discmaster.textfiles.com/search?format=extracadDrawing) | EXTRACAD drawing | .cad | 
 [image/fastCADForWindowsDrawing](https://discmaster.textfiles.com/search?format=fastCADForWindowsDrawing) | FastCAD for Windows drawing | .fct .fcw .fsc | 
 [image/fastRayMaterial](https://discmaster.textfiles.com/search?format=fastRayMaterial) | FastRay material/surface |  | 
 [image/flashbackSprite](https://discmaster.textfiles.com/search?format=flashbackSprite) | Flashback Sprite | .spr | 
@@ -1141,7 +1142,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,442)
+## Other (2,445)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1886,6 +1887,7 @@ Family/Format | Name | Extensions | Notes
 [other/empireAnimationGameData](https://discmaster.textfiles.com/search?format=empireAnimationGameData) | Empire animation game Data | .dat | 
 [other/empireDeluxeConfig](https://discmaster.textfiles.com/search?format=empireDeluxeConfig) | Empire Deluxe Configuration | .cfg | 
 [other/empireDeluxeMap](https://discmaster.textfiles.com/search?format=empireDeluxeMap) | Empire Deluxe Map | .map | 
+[other/empireDeluxeSavedGame](https://discmaster.textfiles.com/search?format=empireDeluxeSavedGame) | Empire Deluxe Saved Game | .svg | 
 [other/empire2TheArtOfWarConfiguration](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarConfiguration) | Empire II: The Art of War Configuration | .cfg | 
 [other/empire2TheArtOfWarSavedGame](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarSavedGame) | Empire II: The Art of War Saved Game | .svg | 
 [other/empireScenario](https://discmaster.textfiles.com/search?format=empireScenario) | Empire Scenario | .scn | 
@@ -2479,6 +2481,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftIncrementalLinker](https://discmaster.textfiles.com/search?format=microsoftIncrementalLinker) | Microsoft Incremental Linker Data | .ilk | 
 [other/microsoftMailServerForPCScript](https://discmaster.textfiles.com/search?format=microsoftMailServerForPCScript) | Microsoft Mail Server for PC Script | .scr | 
 [other/microsoftMoneyAutoSavedData](https://discmaster.textfiles.com/search?format=microsoftMoneyAutoSavedData) | Microsoft Money auto saved data | .mny | 
+[other/microsoftPCHealthQuery](https://discmaster.textfiles.com/search?format=microsoftPCHealthQuery) | Microsoft PCHealth query | .query .bin | 
 [other/microsoftPersonalAddressBook](https://discmaster.textfiles.com/search?format=microsoftPersonalAddressBook) | Microsoft Personal Address Book | .pab | 
 [other/microsoftPrinterDefinition](https://discmaster.textfiles.com/search?format=microsoftPrinterDefinition) | Microsoft Printer Definition | .prd | 
 [other/microsoftPrivateKey](https://discmaster.textfiles.com/search?format=microsoftPrivateKey) | Microsoft Private Key | .pkv | 
@@ -2766,6 +2769,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcpArchiveMetadata](https://discmaster.textfiles.com/search?format=pcpArchiveMetadata) | PCP archive metadata | .meta | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?format=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?format=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
+[other/perFORMCommunicatorFilePacket](https://discmaster.textfiles.com/search?format=perFORMCommunicatorFilePacket) | PerFORM Communicator File Packet | .fpk | 
 [other/perFORMCompressedDatabase](https://discmaster.textfiles.com/search?format=perFORMCompressedDatabase) | PerFORM compressed database | .frp | 
 [other/perFormDBDefinition](https://discmaster.textfiles.com/search?format=perFormDBDefinition) | PerForm DB definition | .fdb | 
 [other/perFormPROLOCKEDFS](https://discmaster.textfiles.com/search?format=perFormPROLOCKEDFS) | PerForm PRO LOCKEDFS | .lib .fap .fal | 

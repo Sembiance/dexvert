@@ -1441,6 +1441,7 @@ export default
 		sangoFighterConfiguration                    : {name : "Sango Fighter Configuration", ext : [".cfg"], magic : ["Sango Fighter Configuration"]},
 		sanityAikensArtifactSavedGame                : {name : "Sanity: Aiken's Artifact Saved Game", ext : [".sav"], magic : ["Sanity: Aiken's Artifact Saved Game"]},
 		schirattiCommanderSituation                  : {name : "Schiratti Commander Situation", ext : [".stn"], magic : ["Schiratti Commander Situation"], weakMagic : true},
+		sciCompanionCompiledObject                   : {name : "SCI Companion compiled Object", ext : [".sco"], magic : ["SCI Companion compiled Object"], weakMagic : true},
 		sciDriver                                    : {name : "Sierra Creative Interpreter Driver", ext : [".drv"], magic : ["SCI Driver (generic)"]},
 		scorchedEarthMountainData                    : {name : "Scorched Earth Mountain Data", ext : [".mtn"], magic : ["Scorched Earth Mountain range data"]},
 		screamEngineResourceData                     : {name : "SCream Engine resource data", ext : [".res"], magic : ["SCream Engine resource data"], weakMagic : true},

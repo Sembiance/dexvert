@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,678)
+# Unsupported File Formats (3,679)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1142,7 +1142,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,445)
+## Other (2,446)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3006,6 +3006,7 @@ Family/Format | Name | Extensions | Notes
 [other/sccBlafferNTInstrumentKit](https://discmaster.textfiles.com/search?format=sccBlafferNTInstrumentKit) | SCC Blaffer NT Instrument Kit |  | 
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?format=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
 [other/schirattiCommanderSituation](https://discmaster.textfiles.com/search?format=schirattiCommanderSituation) | Schiratti Commander Situation | .stn | 
+[other/sciCompanionCompiledObject](https://discmaster.textfiles.com/search?format=sciCompanionCompiledObject) | SCI Companion compiled Object | .sco | 
 [other/sciTechDriver](https://discmaster.textfiles.com/search?format=sciTechDriver) | SciTech Driver | .drv | 
 [other/scooterMacro](https://discmaster.textfiles.com/search?format=scooterMacro) | Scooter Macro | .mac | 
 [other/scorchedEarthMountainData](https://discmaster.textfiles.com/search?format=scorchedEarthMountainData) | Scorched Earth Mountain Data | .mtn | 

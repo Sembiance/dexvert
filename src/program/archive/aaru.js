@@ -28,7 +28,6 @@ export class aaru extends Program
 			return;
 
 		const subDirs = await fileUtil.tree(rootDirs[0], {nofile : true, depth : 1});
-		r.xlog.info`subDirs ${subDirs}`;
 		if(subDirs.length!==1)
 			return;
 

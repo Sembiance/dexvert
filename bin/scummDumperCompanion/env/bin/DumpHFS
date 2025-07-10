@@ -1,0 +1,17 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+import argparse
+from machfs import Volume
+
+args = argparse.ArgumentParser()
+
+args.add_argument('src', metavar='INPUT', nargs=1, help='Disk image')
+args.add_argument('dir', metavar='OUTPUT', nargs=1, help='Destination folder')
+
+args = args.parse_args()
+
+with open(args.src[0], 'rb') as f:
+	v = Volume()
+	v.read(f.read())
+
+v.write_folder(args.dir[0])

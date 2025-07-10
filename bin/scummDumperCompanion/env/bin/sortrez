@@ -1,0 +1,59 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+# Copyright (c) 2020 Elliot Nunn
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+import argparse
+import macresources
+
+
+parser = argparse.ArgumentParser(description='''
+    Sort the resources in a Rez file (for diffing).
+''')
+
+parser.add_argument('src', nargs='*', help='Rez files')
+parser.add_argument('--like', action='store', help='Rez file supplying the sort order')
+args = parser.parse_args()
+
+if args.like is not None:
+    args.like = macresources.parse_rez_code(open(args.like, 'rb').read())
+    args.like = {(r.type, r.id): idx for (idx, r) in enumerate(args.like)}
+    # print(args.like)
+
+def sortkey(resource):
+    if args.like:
+        for tryrange in [[resource.id], reversed(range(resource.id)), range(resource.id, 0x8000)]:
+            for parentid in tryrange:
+                parentidx = args.like.get((resource.type, parentid), None)
+                if parentidx is not None:
+                    # print('found one', (0, parentidx, resource.id))
+                    return (0, parentidx, resource.id)
+
+    return (1, resource.type.decode('mac_roman'), resource.id)
+
+for srcfile in args.src:
+    with open(srcfile, 'r+b') as f:
+        raw = f.read()
+        resources = list(macresources.parse_rez_code(raw))
+        resources.sort(key=sortkey)
+        f.seek(0)
+        f.truncate(0)
+        f.write(macresources.make_rez_code(resources, ascii_clean=True))

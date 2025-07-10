@@ -1,0 +1,261 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+# Copyright (c) 2020 Elliot Nunn
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+import macresources
+import sys
+import tempfile
+import os
+from os import path
+import re
+import subprocess
+
+
+HELP = '''Usage: rfx [-c] command [arg | arg//type/id | arg//type | arg// ...]
+
+Expose MacOS resource forks to command
+
+Resources specified as filename//type/id are converted to tempfiles
+before command is run, then back after command returns. Truncated //
+arguments are wildcards.
+
+Supports .rdump Rez files and .hqx BinHex files. Otherwise .rdump will
+be appended implicitly.
+
+Examples:
+    rfx mv Doc.rdump//STR/0 Doc.rdump//STR/1
+    rfx cp App.hqx//PICT allpictures/
+    rfx rm System/..namedfork/rsrc//vers/2'''
+
+
+if len(sys.argv) < 2 or sys.argv[1].startswith('-'):
+    sys.exit(HELP)
+
+
+def is_rez(the_path):
+    return path.splitext(the_path)[1].lower() == '.rdump'
+
+
+def is_hqx(the_path):
+    return path.splitext(the_path)[1].lower() == '.hqx'
+
+
+def is_fork(the_path):
+    return the_path.lower().endswith('/..namedfork/rsrc') or path.splitext(the_path)[1].lower() == '.rsrc'
+
+
+resourcefork_cache = {} # the_path, mutable list of resurces
+inodes = {} # deduplicates file paths so we don't screw it up
+hqx_saved_data = {} # stores data fork and Finder info so we don't strip it
+def get_cached_file(the_path):
+    path_user_entered = the_path # only for error messages
+
+    if not (is_rez(the_path) or is_fork(the_path) or is_hqx(the_path)):
+        the_path += '.rdump' # will cause is_rez to return true
+
+    # The path is already in the cache! Hooray!
+    try: return resourcefork_cache[the_path]
+    except KeyError: pass
+
+    # Hack to stop us being fooled by the same file with multiple names
+    # (Doesn't help if the file doesn't exist yet -- oh well)
+    try:
+        stat = os.stat(the_path)
+        stat = (stat.st_dev, stat.st_ino)
+        the_path = inodes.setdefault(stat, the_path)
+
+        # Have one more crack at the main cache
+        try: return resourcefork_cache[the_path]
+        except KeyError: pass
+
+    except FileNotFoundError:
+        pass
+
+    try:
+        with open(the_path, 'rb') as f:
+            raw = f.read()
+
+        try:
+            if is_rez(the_path):
+                resources = list(macresources.parse_rez_code(raw))
+            elif is_fork(the_path):
+                resources = list(macresources.parse_file(raw))
+            elif is_hqx(the_path):
+                from macresources import binhex
+                hb = binhex.HexBin(raw)
+                hqx_saved_data[the_path] = (hb.FName, hb.FInfo, hb.read())
+                rsrc = hb.read_rsrc()
+                resources = macresources.parse_file(rsrc)
+        except:
+            sys.exit('Corrupt: ' + repr(path_user_entered))
+
+    except FileNotFoundError: # Treat as empty resource fork
+        if is_rez(the_path):
+            resources = []
+        elif is_fork(the_path):
+            resources = []
+        elif is_hqx(the_path):
+            try:
+                valid_filename = path.basename(the_path)[:-4].replace(':', path.sep)
+                valid_filename.encode('mac_roman')
+                if len(valid_filename) > 31: raise ValueError
+            except:
+                sys.exit('Name not suitable for a new BinHex: ' + repr(path_user_entered))
+
+            hqx_saved_data[the_path] = (valid_filename, None, b'')
+            resources = []
+
+    resourcefork_cache[the_path] = resources
+    return resources
+
+
+def flush_cache():
+    for the_path, resources in resourcefork_cache.items():
+        # No change, do not write the file
+        if not any(getattr(res, '__rfx_dirty', False) for res in resources): continue
+
+        # Weed out the ghost resources
+        resources = [res for res in resources if not getattr(res, '__rfx_ghost', False)]
+
+        # Support commands that pack/unpack GreggyBits etc (mistake here very rare!)
+        for res in resources:
+            if getattr(res, '__rfx_dirty', False):
+                is_compressed = (res.startswith(b'\xA8\x9F\x65\x72') and
+                    len(res) >= 6 and
+                    len(res) >= int.from_bytes(res[4:6], 'big')) # hdrlen thing
+                res.attribs = (res.attribs & ~1) | int(is_compressed)
+
+        if is_rez(the_path):
+            # For BASE.rdump to be valid, BASE must exist (my rule)
+            try:
+                with open(path.splitext(the_path)[0], 'x'): pass
+            except FileExistsError:
+                pass
+
+            with open(the_path, 'wb') as f:
+                f.write(macresources.make_rez_code(resources, ascii_clean=True))
+
+        elif is_fork(the_path):
+            # For BASE/..namedfork/rsrc to be openable by macOS, BASE must exist
+            if the_path.lower().endswith('/..namedfork/rsrc'):
+                try:
+                    with open(the_path[:-17], 'x'): pass
+                except FileExistsError:
+                    pass
+
+            with open(the_path, 'wb') as f:
+                f.write(macresources.make_file(resources))
+
+        elif is_hqx(the_path):
+            # Get back the non-resource-fork stuff for the BinHex file
+            from macresources import binhex
+            fname, finfo, data = hqx_saved_data[the_path]
+            rsrc = macresources.make_file(resources)
+            bh = binhex.BinHex((fname, finfo, len(data), len(rsrc)), the_path)
+            bh.write(b'')
+            bh.write_rsrc(rsrc)
+            bh.close()
+
+
+def escape_ostype(ostype):
+    escaped = ''
+    for char in ostype:
+        if ord('A') <= char <= ord('Z') or ord('a') <= char <= ord('z'):
+            escaped += chr(char)
+        else:
+            escaped += '_%02X' % char
+    return escaped
+
+
+with tempfile.TemporaryDirectory() as backup_tmp_dir:
+    new_argv = [sys.argv[1]]
+    to_retrieve = []
+
+    for i, arg in enumerate(sys.argv[2:], 1):
+        m = re.match(r'(.*[^/])//(?:([^/]{1,4})(?:/(-?\d+)?)?)?$'.replace('/', re.escape(path.sep)), arg)
+
+        if not m:
+            # Do not expand this argument
+            new_argv.append(arg)
+        else:
+            # Expand arg into 1+ fake-resource tempfiles, each backed by a Resource object
+            res_file = m.group(1)
+            res_type = m.group(2).encode('mac_roman').ljust(4)[:4] if m.group(2) else None
+            res_id = int(m.group(3)) if m.group(3) else None
+
+            if res_type is None:
+                # File// = every resource
+                arg_resources = get_cached_file(res_file)
+            elif res_id is None:
+                # File//Type/ = resources of type (can omit trailing slash)
+                arg_resources = [foundres for foundres in get_cached_file(res_file) if foundres.type == res_type]
+            else:
+                # File//Type/ID = 1 resource
+                for foundres in get_cached_file(res_file):
+                    if foundres.type == res_type and foundres.id == res_id:
+                        arg_resources = [foundres]
+                        break
+                else:
+                    arg_resources = [macresources.Resource(res_type, res_id)]
+                    arg_resources[0].__rfx_ghost = True
+                    arg_resources[0].__rfx_dirty = False
+                    get_cached_file(res_file).append(arg_resources[0])
+
+            if not arg_resources:
+                # Failed to expand so leave unchanged
+                new_argv.append(arg)
+            else:
+                # Expand!
+                for j, res in enumerate(arg_resources, 1):
+                    enclosing_dir = path.join(backup_tmp_dir, '%d.%d' % (i,j))
+                    os.mkdir(enclosing_dir)
+
+                    tmp_file = path.join(enclosing_dir, '%s.%d' % (escape_ostype(res.type), res.id))
+                    if not getattr(res, '__rfx_ghost', False):
+                        with open(tmp_file, 'wb') as f:
+                            f.write(res)
+
+                    to_retrieve.append((tmp_file, res))
+                    new_argv.append(tmp_file)
+
+    result = subprocess.run(new_argv)
+
+    for tmp_file, res in to_retrieve:
+        try:
+            with open(tmp_file, 'rb') as f:
+                d = f.read()
+
+            if getattr(res, '__rfx_ghost', False) or d != res:
+                res[:] = d
+                res.__rfx_dirty = True
+
+            res.__rfx_ghost = False
+
+        except FileNotFoundError:
+            if not getattr(res, '__rfx_ghost', False):
+                res.__rfx_dirty = True
+
+            res.__rfx_ghost = True
+
+flush_cache()
+
+sys.exit(result.returncode)

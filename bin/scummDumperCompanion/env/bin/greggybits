@@ -1,0 +1,95 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+# Copyright (c) 2019-2020 Elliot Nunn
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+HELP = '''GreggyBits: (un)pack resources in the Macintosh System file (7.1)
+
+Algorithm by Greg Mariott <http://www.greggybits.com>
+Reimplemented by Maxim Poliakovski and Elliot Nunn
+
+Use the 'rfx' wrapper command to access resources inside a file'''
+
+def debug_round_trip(filename, packed):
+    print(filename.split('/')[-1], end=' ')
+
+    unpacked = unpack(packed)
+    repacked = pack(unpacked)
+
+    if packed == repacked:
+        print('good', end=' ')
+    elif packed[17] != repacked[17]:
+        print('WRONGMODE', repacked[17], 'not', packed[17], end=' ')
+        if pack_with_flags(unpacked, packed[17]) == packed:
+            print('(correct when mode is forced)', end=' ')
+    elif packed[:14] == repacked[:14] and packed[16:] == repacked[16:]:
+        print('sloppy', hex(struct.unpack_from('>H', repacked, 14)[0]), 'not', hex(struct.unpack_from('>H', packed, 14)[0]), end=' ')
+    else:
+        print('other', end=' ')
+
+    print()
+
+if __name__ == '__main__':
+    # Some cheeky debug code for testing... rfx greggybits --debug System//
+    from macresources.greggybits import pack, pack_with_flags, unpack
+    import struct
+    import sys
+
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description=HELP, formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.prog = '[rfx] ' + parser.prog
+
+    parser.add_argument('path', nargs='+', metavar='file', action='store', help='Resource data')
+    parser.add_argument('-x', dest='do_compress', action='store_false', help='extract (default: compress)')
+    parser.add_argument('--debug', action='store_true', help='attempt to round-trip resources')
+
+    args = parser.parse_args()
+
+    for el in args.path:
+        from macresources.greggybits import pack, unpack, WrongFormatError
+
+        with open(el, 'r+b') as f:
+            already_compressed = (f.read(4) == b'\xA8\x9Fer')
+            if already_compressed == args.do_compress: continue
+
+            f.seek(0)
+            data = f.read()
+
+            try:
+                if args.do_compress:
+                    data = pack(data)
+                    if args.debug: debug_round_trip(el, data)
+                else:
+                    if args.debug: debug_round_trip(el, data)
+                    try:
+                        data = unpack(data)
+                    except WrongFormatError:
+                        continue
+
+                f.seek(0)
+                f.write(data)
+                f.truncate()
+            except:
+                print(el)
+                raise

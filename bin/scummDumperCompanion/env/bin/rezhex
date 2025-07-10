@@ -1,0 +1,93 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+# Copyright (c) 2018-2020 Elliot Nunn
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+import os
+from os import path
+import argparse
+import macresources
+from macresources import binhex
+
+
+def do_file(the_path):
+    finfo = binhex.FInfo()
+    finfo.Flags = 0
+
+    try:
+        info = open(the_path + '.idump', 'rb').read(8)
+        assert len(info) == 8
+        finfo.Type = info[:4]
+        finfo.Creator = info[4:]
+    except:
+        pass
+
+    try:
+        data = open(the_path, 'rb').read()
+        if finfo.Type in [b'TEXT', b'ttro']:
+            data = data.replace(b'\n', b'\r').decode('utf-8').encode('mac_roman')
+    except:
+        data = b''
+
+    try:
+        rsrc = open(the_path + '.rdump', 'rb').read()
+        rsrc = macresources.make_file(macresources.parse_rez_code(rsrc))
+    except:
+        rsrc = b''
+
+    bh = binhex.BinHex((path.basename(the_path), finfo, len(data), len(rsrc)), the_path + '.hqx')
+
+    bh.write(data)
+    bh.write_rsrc(rsrc)
+
+    bh.close()
+
+
+def is_valid_base(the_path):
+    name = path.basename(the_path)
+    base, ext = path.splitext(name)
+    if ext.lower() in ('.hqx', '.idump', '.rdump'): return False
+    return True
+
+
+parser = argparse.ArgumentParser(description='''
+    BinHex (BASE + BASE.rdump + BASE.idump) into (BASE.hqx)
+''')
+
+parser.add_argument('base', metavar='BASE', nargs='+', help='file or directory')
+
+args = parser.parse_args()
+
+for base in args.base:
+    if path.isdir(base):
+        for base, dirlist, filelist in os.walk(base):
+            dirlist[:] = [d for d in dirlist if not d.startswith('.')]; dirlist.sort()
+            filelist[:] = [f for f in filelist if not f.startswith('.')]; filelist.sort()
+
+            for f in filelist:
+                if is_valid_base(f):
+                    do_file(path.join(base, f))
+
+    else:
+        if not is_valid_base(base):
+            exit('Base names cannot have a .hqx/.idump/.rdump extension')
+
+        do_file(base)

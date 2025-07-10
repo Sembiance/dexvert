@@ -3,6 +3,18 @@
 \--------------/
 * Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural
 
+* Create a way to launch an installer in winxp or something in QEMU, run the installer (so autoit is installed to help) then shutdown the system, extract the disk drive image and compare the files and use that as the output:
+  Will need a way to vnc into these 'while' running to debug of course
+  First, WISE installers: https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
+  Second, figure out how to 'detect/find' these files better then go test on a TON of them until they all work
+  Once working, reply on #discmaster textfiles to eintei that it's been solved and things will be reprocesed over time to handle these
+  BEFORE I start re-processing potentially thousands of CDs, find more installers.
+  First, look at the list of 'installers' in exe.js and ones that seem to be more 'common' start looking at those.
+  Then, manually go through items, #1, #2, #2, #4 and run more installers. Might need a way to quicky launch my extractor QEMU with a downloaded .iso file
+  Then I can run the installer in the native environment and see how it is set up, figure out if I can 'detect' them and support them
+  Finally, only after I've done like a TON of common installers, now reprocess items as needed to support these.
+  It *might* be wise to tackle the hard problem now of partial re-processing, partial re-injestion and partial re-indexing. Maybe. That sounds tricky and error prone and dangerous, so if I skip on that now, I'll never do it likely.
+
 * archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
   Other MacOS installers to target in a similar way:
 	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc

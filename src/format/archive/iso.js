@@ -208,6 +208,10 @@ export class iso extends Format
 					r.push(`hfsexplorer[partition:${firstHFSPartition.number-1}][subOutDir:dexvert_mac]`);
 				r.push(`hfsexplorer[subOutDir:dexvert_mac]`);	// finally just try hfsexplorer and hope for the best
 
+				// some ISO dumps are weird and don't work in anything other than IsoBuster and scummDumperCompanion (iso/Europe in the Round CD-ROM.iso)
+				if(dexState.hasMagics("Apple Partition Map (APM) disk image") && dexState.hasMagics("Old-style Apple partition map"))
+					r.push("scummDumperCompanion");	// Also possible here: "IsoBuster[subOutDir:dexvert_mac]"
+
 				return r;
 			},
 

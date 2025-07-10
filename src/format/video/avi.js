@@ -16,7 +16,7 @@ export class avi extends Format
 	name         = "Audio Video Interleaved Video";
 	website      = "http://fileformats.archiveteam.org/wiki/AVI";
 	ext          = [".avi", ".divx"];
-	idMeta       = ({macFileType, macFileCreator}) => macFileType==="VfW " || (macFileType==="BINA" && macFileCreator==="AVIC");
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="VfW " || (macFileType==="BINA" && macFileCreator==="AVIC") || (macFileType==="AVI " && macFileCreator==="MSIE");
 	mimeType     = "video/avi";
 	magic        = _AVI_MAGIC;
 	metaProvider = ["mplayer"];

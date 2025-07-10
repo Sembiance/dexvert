@@ -1,0 +1,71 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+# Copyright (c) 2019-2020 Elliot Nunn
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+HELP = '''InstaComp: unpack resources in the Macintosh System file (7.5)
+
+Algorithm from MacOS and the Installer SDK (Apple)
+Decompression reimplemented by Maxim Poliakovski
+
+Use the 'rfx' wrapper command to access resources inside a file'''
+
+if __name__ == '__main__':
+    import struct
+    import sys
+
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description=HELP, formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.prog = '[rfx] ' + parser.prog
+
+    parser.add_argument('path', nargs='+', metavar='file', action='store', help='Resource data')
+    parser.add_argument('-x', dest='do_compress', action='store_false', required=True, help='extract (currently mandatory)')
+
+    args = parser.parse_args()
+
+    for el in args.path:
+        from macresources.instacomp import unpack, WrongFormatError
+
+        with open(el, 'r+b') as f:
+            already_compressed = (f.read(4) == b'\xA8\x9Fer')
+            if not already_compressed: continue
+
+            f.seek(0)
+            data = f.read()
+
+            print(el) # elliot delete!
+
+            try:
+                try:
+                    data = unpack(data)
+                except WrongFormatError:
+                    continue
+
+                f.seek(0)
+                f.write(data)
+                f.truncate()
+            except Exception as e:
+                print('failed', e)
+                # print(el)
+                # raise

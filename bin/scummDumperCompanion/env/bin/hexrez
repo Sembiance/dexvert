@@ -1,0 +1,91 @@
+#!/mnt/compendium/DevLab/dexvert/bin/scummDumperCompanion/env/bin/python3
+
+# Copyright (c) 2018-2020 Elliot Nunn
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+import os
+from os import path
+import argparse
+import macresources
+from macresources import binhex
+
+
+def do_file(the_path):
+    base_path = path.splitext(the_path)[0] # known to have hqx extension
+    hb = binhex.HexBin(the_path)
+
+    if hb.FInfo.Type == hb.FInfo.Creator == b'????':
+        try:
+            os.remove(base_path + '.idump')
+        except FileNotFoundError:
+            pass
+    else:
+        with open(base_path + '.idump', 'wb') as f:
+            f.write(hb.FInfo.Type + hb.FInfo.Creator)
+
+    data = hb.read()
+    if hb.FInfo.Type in [b'TEXT', b'ttro']:
+        data = data.replace(b'\r', b'\n').decode('mac_roman').encode('utf-8')
+    with open(base_path, 'wb') as f:
+        f.write(data)
+
+    rsrc = hb.read_rsrc()
+    if rsrc:
+        with open(base_path + '.rdump', 'wb') as f:
+            f.write(macresources.make_rez_code(macresources.parse_file(rsrc), ascii_clean=True))
+    else:
+        try:
+            os.remove(base_path + '.rdump')
+        except FileNotFoundError:
+            pass
+
+
+def is_hqx_name(the_path):
+    name = path.basename(the_path)
+    base, ext = path.splitext(name)
+    if ext.lower() == '.hqx':
+        return True
+    else:
+        return False
+
+
+parser = argparse.ArgumentParser(description='''
+    UnBinHex (BASE.hqx) into (BASE + BASE.rdump + BASE.idump)
+''')
+
+parser.add_argument('hqx', metavar='BASE.hqx', nargs='+', help='file or directory')
+
+args = parser.parse_args()
+
+for hqx in args.hqx:
+    if path.isdir(hqx):
+        for hqx, dirlist, filelist in os.walk(hqx):
+            dirlist[:] = [d for d in dirlist if not d.startswith('.')]; dirlist.sort()
+            filelist[:] = [f for f in filelist if not f.startswith('.')]; filelist.sort()
+
+            for f in filelist:
+                if is_hqx_name(f):
+                    do_file(path.join(hqx, f))
+    else:
+        if not is_hqx_name(hqx):
+            exit('Not a BinHex file')
+
+        do_file(hqx)

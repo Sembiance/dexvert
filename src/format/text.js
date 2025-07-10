@@ -1046,6 +1046,7 @@ export default
 		wiseScript                                 : {name : "Wise script", ext : [".wse"], magic : ["Wise script"]},
 		wiziTeXEquation                            : {name : "WiziTeX equation", ext : [".tex"], magic : ["WiziTeX equation"]},
 		x509Certificate                            : {name : "X.509 Certificate", magic : ["X.509v3 security certificate", "application/pkix-cert"]},
+		xactProject                                : {name : "XACT Project", ext : [".xap"], magic : ["XACT Project"], weakMagic : true},
 		xantippeProject                            : {name : "Xantippe project", ext : [".xan"], magic : ["Xantippe project"]},
 		xaosPositionFile                           : {name : "XaoS Position File", ext : [".z", ".xpf"], magic : ["XaoS Position File"], weakMagic : true},
 		xaraResourcesIndex                         : {name : "Xara resources index", ext : [".txt"], magic : ["Xara resources index"], weakMagic : true},

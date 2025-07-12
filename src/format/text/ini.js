@@ -31,7 +31,7 @@ export class ini extends Format
 		"Affymetrix Chip Definition File (Text)", "CANopen Electronic Data Sheet", "Trend Micro Internet Security Tasks", "MMCDDA Audio CD track descriptor", "MinGW Developer Studio Project", "Phase3 Project (v2.x)", "Private Wars 3D Object", "RoboHelp data",
 		"ASTRA Report Profile", "Android Trash storage metadata", "Gerber CAM Processor job", /^Windows boot.ini, ASCII text/, "Windows Boot Loarder information", "Spider MacroCode Data", "PSpice Probe configuration", "SubViewer 2.0 subtitles",
 		"Turboprint Printer Description", "Evasive Action scenery Topography", "Extra! for Windows Album/slideshow", "IBM i Access Client Translation Table", "Origin Fitting Function Definition File", /^git configuration$/, "RealStorm Engine object",
-		"Quarterdeck Provider info", "InstallShield Installation Package Strings table", "Gemsylk graph", "Micro-Cap Circuit", "Popcorn Mail configuration",
+		"Quarterdeck Provider info", "InstallShield Installation Package Strings table", "Gemsylk graph", "Micro-Cap Circuit", "Popcorn Mail configuration", "WinOnCD Project",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

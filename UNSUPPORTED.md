@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,682)
+# Unsupported File Formats (3,683)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1143,7 +1143,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,448)
+## Other (2,449)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2090,6 +2090,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?format=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/grandTheftAutoSaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoSaveGame) | Grand Theft Auto save game | .b | 
 [other/grandTheftAutoTextData](https://discmaster.textfiles.com/search?format=grandTheftAutoTextData) | Grand Theft Auto Text data | .gxt | 
+[other/graphicImpactPresentation](https://discmaster.textfiles.com/search?format=graphicImpactPresentation) | Graphic Impact presentation | .giw | 
 [other/graphicMasterCharset](https://discmaster.textfiles.com/search?format=graphicMasterCharset) | Graphic Master charset | .chr | 
 [other/graphPadPrism](https://discmaster.textfiles.com/search?format=graphPadPrism) | GraphPad Prism | .pzm .pzt | 
 [other/gravisGrIPLibrary](https://discmaster.textfiles.com/search?format=gravisGrIPLibrary) | Gravis GrIP Library | .vol | 

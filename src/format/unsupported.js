@@ -2484,6 +2484,7 @@ export default
 		goldMineReport                           : {name : "GoldMine report", ext : [".fp"], magic : ["GoldMine report"], weakMagic : true},
 		goldParserTables                         : {name : "GOLD Parser Tables", ext : [".cgt"], magic : ["GOLD Parser Tables"]},
 		gPatchPatch                              : {name : "GPatch Patch", ext : [".patch", ".gpatch", ".gpch"], magic : [/^GPatch Patch \(v\d.\d\)/], weakMagic : true},
+		graphicImpactPresentation                : {name : "Graphic Impact presentation", ext : [".giw"], magic : ["Graphic Impact presentation"]},
 		graphicMasterCharset                     : {name : "Graphic Master charset", ext : [".chr"], magic : ["Graphic Master charset"], weakMagic : true},
 		graphPadPrism                            : {name : "GraphPad Prism", ext : [".pzm", ".pzt"], magic : [/^fmt\/575( |$)/], weakMagic : true},
 		gravisGrIPLibrary                        : {name : "Gravis GrIP Library", ext : [".vol"], magic : ["Gravis GrIP Library"]},

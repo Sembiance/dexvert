@@ -299,7 +299,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (75)
+## Audio (74)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -327,7 +327,6 @@ Family/Format | Name | Extensions | Notes
 [audio/fmTownsSND](https://discmaster.textfiles.com/search?format=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?format=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?format=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
-[audio/huffmanCompressedAudio](https://discmaster.textfiles.com/search?format=huffmanCompressedAudio) | Huffman Compressed audio | .hcom | 
 [audio/hyperStudioSampledSound](https://discmaster.textfiles.com/search?format=hyperStudioSampledSound) | HyperStudio sampled sound |  | 
 [audio/iffSampledAudio](https://discmaster.textfiles.com/search?format=iffSampledAudio) | [IFF Sampled audio](https://wiki.amigaos.net/wiki/SAMP_IFF_Sampled_Sound) |  | 
 [audio/inrsTelecomAudio](https://discmaster.textfiles.com/search?format=inrsTelecomAudio) | INRS-Telecom audio | .aud | 
@@ -641,7 +640,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (119)
+## Font (120)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -686,6 +685,7 @@ Family/Format | Name | Extensions | Notes
 [font/epocFont](https://discmaster.textfiles.com/search?format=epocFont) | EPOC/Psion Font | .gdr | 
 [font/expertDrawFont](https://discmaster.textfiles.com/search?format=expertDrawFont) | ExpertDraw Font | .expf | 
 [font/f3Font](https://discmaster.textfiles.com/search?format=f3Font) | [F3 Font](http://fileformats.archiveteam.org/wiki/F3_font) | .f3b | 
+[font/fnxFont](https://discmaster.textfiles.com/search?format=fnxFont) | FNX Font) | .fnx | 
 [font/fontLabFont](https://discmaster.textfiles.com/search?format=fontLabFont) | FontLab Font | .vfb | 
 [font/fontographer](https://discmaster.textfiles.com/search?format=fontographer) | [Fontographer](http://fileformats.archiveteam.org/wiki/Fontographer) | .fog | [10 sample files](https://sembiance.com/fileFormatSamples/font/fontographer/) - The Fontographer program is CRAZY sensitive to register. It was working, but a 86Box update changed hardware and Fontographer no longer registers. Meh, only 533 unique files have been found on discmaster, so just disable support for this
 [font/fontrixFontSet](https://discmaster.textfiles.com/search?format=fontrixFontSet) | Fontrix Font Set | .set | 

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,683)
+# Unsupported File Formats (3,689)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1143,7 +1143,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,449)
+## Other (2,455)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1429,6 +1429,7 @@ Family/Format | Name | Extensions | Notes
 [other/avsVideoEditorProject](https://discmaster.textfiles.com/search?format=avsVideoEditorProject) | AVS Video Editor Project | .vep | 
 [other/aweGamesGameDataContainer](https://discmaster.textfiles.com/search?format=aweGamesGameDataContainer) | AWE Games game data container | .omt | 
 [other/axisGameEnhancementModules](https://discmaster.textfiles.com/search?format=axisGameEnhancementModules) | Axis Game Enhancement Modules | .fil | 
+[other/b17FlyingFortressSavedGameMission](https://discmaster.textfiles.com/search?format=b17FlyingFortressSavedGameMission) | B-17 Flying Fortress Saved Game/mission | .bsg | 
 [other/babbleData](https://discmaster.textfiles.com/search?format=babbleData) | Babble! Data | .bab | 
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?format=babylonGlossary) | Babylon Glossary | .bgl | 
@@ -1541,8 +1542,10 @@ Family/Format | Name | Extensions | Notes
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?format=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
 [other/caimanFont](https://discmaster.textfiles.com/search?format=caimanFont) | Caiman Font | .fnt | 
 [other/caimanGraphics](https://discmaster.textfiles.com/search?format=caimanGraphics) | Caiman graphics | .dat | 
+[other/cakewalkDrumSynthModel](https://discmaster.textfiles.com/search?format=cakewalkDrumSynthModel) | Cakewalk drum synth Model | .mdl | 
 [other/cakewalkGroove](https://discmaster.textfiles.com/search?format=cakewalkGroove) | Cakewalk Groove | .bin | 
 [other/cakewalkMacroDOS](https://discmaster.textfiles.com/search?format=cakewalkMacroDOS) | Cakewalk Macro (DOS) | .ma | 
+[other/cakewalkOvertureScore](https://discmaster.textfiles.com/search?format=cakewalkOvertureScore) | Cakewalk Overture Score | .ove | 
 [other/cakewalkProject](https://discmaster.textfiles.com/search?format=cakewalkProject) | Cakewalk Project/Pattern/Layout/Template | .p5p .p5l .p5t | 
 [other/cakewalkSONARProject](https://discmaster.textfiles.com/search?format=cakewalkSONARProject) | Cakewalk SONAR project | .cwp | 
 [other/cakewalkStudioWarePanel](https://discmaster.textfiles.com/search?format=cakewalkStudioWarePanel) | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
@@ -1722,6 +1725,7 @@ Family/Format | Name | Extensions | Notes
 [other/darkReignPalette](https://discmaster.textfiles.com/search?format=darkReignPalette) | Dark Reign Palette | .pal | 
 [other/darksidersGameDataPackage](https://discmaster.textfiles.com/search?format=darksidersGameDataPackage) | Darksiders game data package | .oppc .op360 .opps3 | 
 [other/darkWaveStudioModule](https://discmaster.textfiles.com/search?format=darkWaveStudioModule) | DarkWave Studio module | .dwp | 
+[other/darwinPondFile](https://discmaster.textfiles.com/search?format=darwinPondFile) | Darwin Pond File |  | 
 [other/dasBootGameDataArchive](https://discmaster.textfiles.com/search?format=dasBootGameDataArchive) | Das Boot game data archive | .d02 .d03 .d01 | 
 [other/dataModeleXchangeEncodingFormat](https://discmaster.textfiles.com/search?format=dataModeleXchangeEncodingFormat) | Data Model eXchange encoding format | .dmx | 
 [other/databenchForm](https://discmaster.textfiles.com/search?format=databenchForm) | Databench form | .msk | 
@@ -2733,6 +2737,7 @@ Family/Format | Name | Extensions | Notes
 [other/palmTealInfo](https://discmaster.textfiles.com/search?format=palmTealInfo) | Palm TealInfo | .pdb | 
 [other/palmTides](https://discmaster.textfiles.com/search?format=palmTides) | Palm Tides | .pdb | 
 [other/palmDraftSchematic](https://discmaster.textfiles.com/search?format=palmDraftSchematic) | PalmDraft schematic | .pdb | 
+[other/pamDevelopmentGameDataArchive](https://discmaster.textfiles.com/search?format=pamDevelopmentGameDataArchive) | PAM Development game data archive | .wad | 
 [other/pandaSignatureFileSystem](https://discmaster.textfiles.com/search?format=pandaSignatureFileSystem) | Panda Signature file system | .sig | 
 [other/panda3DBamContainer](https://discmaster.textfiles.com/search?format=panda3DBamContainer) | Panda3D Bam container | .bam | 
 [other/panzerkriegForWindowsScenario](https://discmaster.textfiles.com/search?format=panzerkriegForWindowsScenario) | Panzerkrieg for Windows Scenario | .pks | 
@@ -2982,6 +2987,7 @@ Family/Format | Name | Extensions | Notes
 [other/riscOSARMObjectFile](https://discmaster.textfiles.com/search?format=riscOSARMObjectFile) | RISC OS ARM Object File |  | 
 [other/riseOfTheTriadLevel](https://discmaster.textfiles.com/search?format=riseOfTheTriadLevel) | Rise of the Triad Level | .rtc .rtl | 
 [other/risenGameDataArchive](https://discmaster.textfiles.com/search?format=risenGameDataArchive) | Risen game data archive | .pak | 
+[other/robotArenaBot](https://discmaster.textfiles.com/search?format=robotArenaBot) | Robot Arena bot | .bot | 
 [other/robouldixLevelData](https://discmaster.textfiles.com/search?format=robouldixLevelData) | Robouldix level data |  | 
 [other/rogueTheAdventureGameSavedGame](https://discmaster.textfiles.com/search?format=rogueTheAdventureGameSavedGame) | Rogue: The Adventure Game Saved game | .sav | 
 [other/rolandSMFPlayerLanguage](https://discmaster.textfiles.com/search?format=rolandSMFPlayerLanguage) | Roland SMF Player Language | .rlg | 

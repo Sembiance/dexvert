@@ -26,6 +26,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 [
 	// too big
 	"archive/aaruDiskImage",
+	"archive/americanConquest2GameArchvie",
 	"archive/cdi",
 	"archive/hemeraThumbnailsArchive",
 	"archive/iso",
@@ -33,6 +34,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/mdx",
 	"archive/mTropolisArchive",
 	"archive/nrg",
+	"archive/sgaGameDataArchive",
 	"archive/sgiVolumeImage",
 	"archive/sgsDAT",
 	"archive/thumbsUpDatabase",

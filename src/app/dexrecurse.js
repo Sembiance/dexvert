@@ -85,6 +85,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/mallTycoonGameDataArchive",
 	"archive/softdiskLibrary",
 	"archive/threeDUltraMiniGolfGameData",
+	"archive/warriorKingsGameData",
 	"document/bankBookForWindows",
 	"document/centralPointHelp",
 	"document/codeViewHelp",

@@ -1242,6 +1242,7 @@ export const WEAK_VALUES =
 	/^Cybiko Picture bitmap$/,
 	/^Dalet Sound format audio \(old\)$/,
 	/^Dalet Volume info$/,
+	/^DannyPaint Font$/,
 	/^[Dd]ar archive/,
 	/^dBASE 5\.0 Multiple index$/,
 	/^dBASE IV Multiple index$/,

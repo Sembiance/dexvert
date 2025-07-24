@@ -1,4 +1,4 @@
-# Supported File Formats (3,263)
+# Supported File Formats (3,265)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -17,7 +17,7 @@ archive | [ACE Archive](http://fileformats.archiveteam.org/wiki/ACE) | .ace | [u
 archive | [Acorn Spark Compressed Archive](http://fileformats.archiveteam.org/wiki/Spark) | .spk .arc | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/acornSpark/)
 archive | [ActiveMime](http://fileformats.archiveteam.org/wiki/ActiveMime) | .mso | [activeMimeExtractor](https://github.com/idiom/activemime-format) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/activeMime/)
 archive | Adobe Photoshop Patterns | .pat | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/adobePhotoshopPatterns/)
-archive | Agon game data archive | .sfl | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/agonGameDataArchive/)
+archive | Agon game data archive | .sfl | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/agonGameDataArchive/)
 archive | [AIN Archive](http://fileformats.archiveteam.org/wiki/AIN) | .ain | [ain](https://www.sac.sk/download/pack/ain232.exe) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/ain/)
 archive | AINEXE Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ainexePacked/)
 archive | [AKT Archive](http://fileformats.archiveteam.org/wiki/AKT) | .akt | [akt](https://www.sac.sk/download/pack/akt070b5.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/akt/)
@@ -388,7 +388,7 @@ archive | [Self-Dissolving Archive](http://fileformats.archiveteam.org/wiki/SDA)
 archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) [izArc](https://www.izarc.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
-archive | SGA game data archive | .sga .big | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
+archive | SGA game data archive | .sga .big | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
 archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sgiVolumeImage/)
 archive | SGS.DAT File |  | [decomposeSGS](https://www.logipole.com/konvertor-en.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/sgsDAT/)
 archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
@@ -495,7 +495,7 @@ audio | [3GP/3GPP2 Audio](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3
 audio | [Acorn Replay Audio](http://fileformats.archiveteam.org/wiki/Acorn_Replay) | .rpl | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/audio/acornReplayAudio/)
 audio | [Adaptive Multi-Rate](http://fileformats.archiveteam.org/wiki/Adaptive_Multi-Rate_Audio) | .amr .3ga | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/amr/)
 audio | [Advanced Audio Coding](http://fileformats.archiveteam.org/wiki/AAC) | .aac .m4a .mp4 .ima | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/aac/)
-audio | Adventure Game Studio Audio Data | .vox | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/agsAudioData/)
+audio | Adventure Game Studio Audio Data | .vox | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/agsAudioData/)
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8-Bit_Sampled_Voice) | .8svx .iff | [ffmpeg](https://ffmpeg.org/) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/amiga8svx/) - Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates. SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [amosbank](https://github.com/dschwen/amosbank) [dumpamos](https://github.com/kyz/amostools/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/amosSamples/)
 audio | [Apple QuickTime Audio](http://fileformats.archiveteam.org/wiki/QuickTime) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) [qt_flatt](https://www.macdisk.com/quickten.php) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/quickTimeAudio/) - HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"
@@ -514,7 +514,7 @@ audio | Circus XPCM Audio | .pcm | [ffmpeg](https://ffmpeg.org/) | [2 sample fil
 audio | [CoreAudio Format](http://fileformats.archiveteam.org/wiki/Core_Audio_Format) | .caf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/coreAudio/)
 audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/covoxADPCM/)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/voc/)
-audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/adxCRI/)
+audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/adxCRI/)
 audio | Cryo Interactive APC Audio | .apc | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/cryoInteractiveAPC/)
 audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwd | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/diamondWareDigitized/)
 audio | [Digital Speech Standard](http://justsolve.archiveteam.org/wiki/Digital_Speech_Standard) | .dss | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/digitalSpeechStandard/)
@@ -562,9 +562,9 @@ audio | NIST Sphere Audio | .sd | [sox](http://sox.sourceforge.net) | [10 sample
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/ogg/)
 audio | [Opus Audio](http://fileformats.archiveteam.org/wiki/Opus) | .opus | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/opus/)
 audio | [PhotoCD Audio](http://fileformats.archiveteam.org/wiki/Photo_CD_Audio) | .pcd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/photoCDAudio/) - Some files are CDDA (audio06.pcd) but others are some sort of raw, which default to above (audio54.pcd)
-audio | [Playstation 2 Sound Format](http://fileformats.archiveteam.org/wiki/PSF2) | .psf2 | [zxtune123](https://zxtune.bitbucket.io/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/psf2/)
+audio | [Playstation 2 Sound Format](http://fileformats.archiveteam.org/wiki/PSF2) | .psf2 | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/psf2/)
 audio | [PlayStation VAG Audio](http://fileformats.archiveteam.org/wiki/VAG_(PlayStation)) | .vag | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/vag/)
-audio | [Portable Sound Format](http://fileformats.archiveteam.org/wiki/Portable_Sound_Format) | .psf .minipsf .dsf | [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/psf/)
+audio | [Portable Sound Format](http://fileformats.archiveteam.org/wiki/Portable_Sound_Format) | .psf .minipsf .dsf | [zxtune123](https://zxtune.bitbucket.io/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/psf/)
 audio | Pro Pinball Soundbank | .22c .11c .5c | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/proPinballSoundbank/)
 audio | Psion Voice | .prc | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/psionVoice/)
 audio | [Psion WVE Audio](http://fileformats.archiveteam.org/wiki/WVE_(Psion)) | .wve .sdn | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/psionWVE/)
@@ -1631,7 +1631,7 @@ image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | [r
 
 
 
-## Music (280)
+## Music (281)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 music | [A.M.Composer Module](http://fileformats.archiveteam.org/wiki/A.M._Composer_v1.2) | .amc | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://sembiance.com/fileFormatSamples/music/amComposer/)
@@ -1734,7 +1734,7 @@ music | [Galaxy Music System](https://moddingwiki.shikadi.net/wiki/Jazz_2_Music_
 music | [Game Music Creator Module](http://fileformats.archiveteam.org/wiki/Game_Music_Creator) | .gmc | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicCreator/)
 music | [Game Music Format](https://www.vgmpf.com/Wiki/index.php?title=GMF) | .gmf | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [13 sample files](https://sembiance.com/fileFormatSamples/music/gameMusicFormat/)
 music | [General Digital Music](http://fileformats.archiveteam.org/wiki/General_Digital_Music_module) | .gdm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/generalDigiMusic/)
-music | [Genesis GYM](http://fileformats.archiveteam.org/wiki/GYM) | .gym | [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://sembiance.com/fileFormatSamples/music/genesisGYM/)
+music | [Genesis GYM](http://fileformats.archiveteam.org/wiki/GYM) | .gym | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/genesisGYM/)
 music | Global Tracker | .gtr | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [6 sample files](https://sembiance.com/fileFormatSamples/music/globalTracker/)
 music | GlueMon Module | .glue | [uade123](http://zakalwe.fi/uade) | [13 sample files](https://sembiance.com/fileFormatSamples/music/glueMon/)
 music | [God of Thunder Song](https://vgmpf.com/Wiki/index.php?title=GOT) |  | [gamemus](https://github.com/Malvineous/libgamemusic) | [8 sample files](https://sembiance.com/fileFormatSamples/music/godOfThunderSong/)
@@ -1795,7 +1795,7 @@ music | [MultiTracker Module](http://fileformats.archiveteam.org/wiki/Multi_Trac
 music | Music Assembler Module | .ma | [uade123](http://zakalwe.fi/uade) | [13 sample files](https://sembiance.com/fileFormatSamples/music/musicAssembler/)
 music | [Music ProTracker](http://atariki.krap.pl/index.php/MPT_%28format_pliku%29) | .mpt | [asapconv](http://asap.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/musicProTracker/)
 music | [Musicline Module](https://www.musicline.org/) | .ml | [uade123](http://zakalwe.fi/uade) | [11 sample files](https://sembiance.com/fileFormatSamples/music/musiclineModule/)
-music | [NES Sound File](http://fileformats.archiveteam.org/wiki/NES_Sound_Format) | .nsf .nsfe | [zxtune123](https://zxtune.bitbucket.io/) | [9 sample files](https://sembiance.com/fileFormatSamples/music/nsf/)
+music | [NES Sound File](http://fileformats.archiveteam.org/wiki/NES_Sound_Format) | .nsf .nsfe | [zxtune123](https://zxtune.bitbucket.io/) | [12 sample files](https://sembiance.com/fileFormatSamples/music/nsf/)
 music | NoisePacker Module | .np1 .np2 np3 | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [8 sample files](https://sembiance.com/fileFormatSamples/music/noisePacker/)
 music | [NovoTrade Packer](http://fileformats.archiveteam.org/wiki/NovoTrade_Packer) | .ntp | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/novoTrade/)
 music | NTSP-system | .two | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://sembiance.com/fileFormatSamples/music/ntspSystem/)
@@ -1899,10 +1899,11 @@ music | TurboFM Dumped | .tfd | [zxtune123](https://zxtune.bitbucket.io/) | [2 s
 music | Twin TrackPlayer | .dmo | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/twinTrackPlayer/)
 music | Ultima 6 | .m | [adplay](https://github.com/adplug/adplay-unix) | [11 sample files](https://sembiance.com/fileFormatSamples/music/ultima6/)
 music | [Ultra Tracker Module](http://fileformats.archiveteam.org/wiki/Ultra_Tracker) | .ult | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) [xmp](http://xmp.sourceforge.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/music/ultraTracker/)
+music | [Ultra64 Sound Format](http://fileformats.archiveteam.org/wiki/USF) | .usf .miniusf .usflib | [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://sembiance.com/fileFormatSamples/music/ultra64SoundFormat/)
 music | Unreal Music | .umx | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://sembiance.com/fileFormatSamples/music/unrealMusic/)
 music | V2 Module | .v2m | [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://sembiance.com/fileFormatSamples/music/v2m/)
 music | [Velvet Studio Module](http://fileformats.archiveteam.org/wiki/Velvet_Studio) | .ams | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://sembiance.com/fileFormatSamples/music/velvetStudio/)
-music | Video Game Music | .vgm | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://sembiance.com/fileFormatSamples/music/videoGameMusic/)
+music | Video Game Music | .vgm | [zxtune123](https://zxtune.bitbucket.io/) | [15 sample files](https://sembiance.com/fileFormatSamples/music/videoGameMusic/)
 music | Voodoo Supreme Synthesizer Module | .vss | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://sembiance.com/fileFormatSamples/music/voodooSupremeSynthesizer/)
 music | Vortex Tracker | .vtx | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [14 sample files](https://sembiance.com/fileFormatSamples/music/vortexTracker/)
 music | Vortex Tracker 2 | .vt2 .pt3 | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [7 sample files](https://sembiance.com/fileFormatSamples/music/vortexTracker2/)
@@ -2130,7 +2131,7 @@ poly | [Return to Castle Wolfenstein MDC](https://mino-git.github.io/rtcw-wet-bl
 poly | [Rhino OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [polyTrans64](https://www.okino.com/conv/conv.htm) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/openNURBS/)
 poly | Sculpt 3D Scene | .scene | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/sculpt3DScene/)
 poly | SGI Open Inventor Scene Graph | .iv | [polyTrans64](https://www.okino.com/conv/conv.htm) [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/openInventor/)
-poly | Shadowgrounds 3D model | .s3d | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [5 sample files](https://sembiance.com/fileFormatSamples/poly/shadowgrounds3DModel/)
+poly | Shadowgrounds 3D model | .s3d | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/shadowgrounds3DModel/)
 poly | [Shockwave 3D Scene](http://fileformats.archiveteam.org/wiki/Wavefront_OBJ) | .w3d | [shockwave3DWorldConverter](https://github.com/tomysshadow/Shockwave-3D-World-Converter) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/shockwave3D/)
 poly | [Simply 3D Geometry](http://fileformats.archiveteam.org/wiki/Simply_3D_Geometry) | .ged | [simply3D20](https://archive.org/details/premier2_cd) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/simply3DGeometry/)
 poly | [SketchUp Model](http://fileformats.archiveteam.org/wiki/SKP) | .skp | [polyTrans64](https://www.okino.com/conv/conv.htm) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/sketchUp/)
@@ -2145,7 +2146,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,063)
+## Text (1,064)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2258,7 +2259,7 @@ text | Beyond Atlantis save game | .sav |  | [10 sample files](https://sembiance
 text | BibTeX database file | .bib |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXDatabaseFile/)
 text | BibTeX style | .bst |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXStyle/)
 text | BIF bitmap ASCII info | .bif |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/bifBitmapASCIIInfo/)
-text | BioWare Aurora Format script | .baf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/bioWareAuroraFormatScript/)
+text | BioWare Aurora Format script | .baf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bioWareAuroraFormatScript/)
 text | BitTorrent file | .torrent |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/bitTorrentFile/)
 text | BlueJ Class context | .ctxt |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/blueJClassContext/)
 text | BlueJ package | .pkg |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/blueJPackage/)
@@ -2425,7 +2426,7 @@ text | ESRI ArcInfo DAT File (External) | .dat |  | [12 sample files](https://se
 text | ESRI Shapefile Projection | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/esriShapefileProjection/)
 text | ESS-Code Filter | .flt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/essCodeFilter/)
 text | Eureka/Mercury Report | .rpt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/eurekaMercuryReport/)
-text | EurekaLog log file | .elf .el |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/eurekaLogLogFile/)
+text | EurekaLog log file | .elf .el |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/eurekaLogLogFile/)
 text | EverQuest Effect | .eff |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/everQuestEffect/)
 text | Excellon Drill File | .drl |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/excellonDrillFile/)
 text | Executor Configuration File | .ecf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/executorConfigurationFile/)
@@ -2457,6 +2458,7 @@ text | Flight Sim Toolkit Places | .fst |  | [15 sample files](https://sembiance
 text | Flight Sim Toolkit Shape | .fsd |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitShape/)
 text | FlipAlbum data | .flp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/flipAlbumData/)
 text | FLTK User Interface Designer | .fl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fltkUserInterfaceDesigner/)
+text | FMS Scenery | .scn |  | 
 text | Folded control info | .fdo .f .ftx .fc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/foldedControlInfo/)
 text | Foltyn Commander Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/foltynCommanderConfiguration/)
 text | Font Compiler and Loader format | .fcl |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fontCompilerAndLoaderFormat/)

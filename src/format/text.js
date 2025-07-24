@@ -41,6 +41,7 @@ export default
 		flightSimToolkitModel               : {name : "Flight Sim Toolkit Model", ext : [".fmd"], magic : ["Flight Sim Toolkit Model"]},
 		flightSimToolkitPlaces              : {name : "Flight Sim Toolkit Places", ext : [".fst"], magic : ["Flight Sim Toolkit Places"]},
 		flightSimToolkitShape               : {name : "Flight Sim Toolkit Shape", ext : [".fsd"], magic : ["Flight Sim Toolkit Shape"]},
+		fmsScenery                          : {name : "FMS Scenery", ext : [".scn"], magic : ["FMS Scenery"], weakMagic : true},
 		furcadiaDragonSpeakScript           : {name : "Furcadia DragonSpeak Script", ext : [".ds"], magic : ["Furcadia DragonSpeak Script"], weakMagic : true},
 		gambitExtensiveGameFile             : {name : "Gambit Extensive Game File", ext : [".efg"], magic : ["Gambit Extensive Game File Format"], weakMagic : true},
 		gambitStrategicNPlayerGameFile      : {name : "Gambit strategic N-player Game File", ext : [".nfg"], magic : ["Gambit strategic N-player Game File Format"], weakMagic : true},

@@ -101,6 +101,7 @@ export default
 		valveMapFormat                      : {name : "Valve Map Format", ext : [".vmf", ".vmx"], magic : ["Valve Map Format"], weakMagic : true},
 		valveMaterialType                   : {name : "Valve Material Type", ext : [".vmt"], magic : ["Valve Material Type"], weakMagic : true},
 		visionaireStudioGameSettings        : {name : "Visionaire Studio game settings", ext : [".ini"], magic : ["Visionaire Studio game settings"], weakMagic : true},
+		weaponDefinitionScript              : {name : "Weapon definition script", ext : [".weap"], magic : ["Weapon definition script"], weakMagic : true},
 		worldConstructionSetCloudMap        : {name : "World Construction Set Cloud map", ext : [".cld"], magic : ["World Construction Set Cloud map"], weakMagic : true},
 		worldConstructionSetDatabase        : {name : "World Construction Set database", magic : ["World Construction Set database"]},
 		worldConstructionSetModel           : {name : "World Construction Set model", magic : ["World Construction Set model"]},

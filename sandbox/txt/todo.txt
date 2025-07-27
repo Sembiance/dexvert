@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Make sure this works: ./testdexvert --format=audio/huffmanCompressedAudio
-
 * Consider adding 'type' to all uses of "sox" in order to tighten things up a bit. Would want to run full dexdrone10 test suite before AND after
 
 * Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural

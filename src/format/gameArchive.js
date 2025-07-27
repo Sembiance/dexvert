@@ -30,6 +30,7 @@ export const gameextractor =
 		empireEarth1GameArchive             : {name : "Empire Earth 1 Game Archive", ext : [".ssa"], magic : ["Empire Earth 1 game data", "Empire Earth Game Archive"], weakMagic : true},
 		ensembleStudiosGameArchive          : {name : "Ensemble Studios Game Archive", ext : [".drs"], magic : ["Ensemble Studios Data Resource"]},
 		etherlords2GameDataArchive          : {name : "Etherlords 2 game data archive", ext : [".res"], magic : ["Etherlords 2 game data archive"]},
+		fearGameArchive                     : {name : "F.E.A.R. game archive", ext : [".arch00"], magic : ["F.E.A.R. game archive"]},
 		finalFantasyGameArchive             : {name : "Final Fantasy Game Archive", ext : [".lgp"], magic : ["Final Fantasy Game Archive"]},
 		finalLiberationGameArchive          : {name : "Final Liberation/Holistic Design game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive", "Holistic Design game data archive (generic)"]},
 		gabrielKnight3BarnGameArchive       : {name : "Gabriel Knight 3 barn game archive", ext : [".brn"], magic : ["Gabriel Knight 3 barn game data"]},

@@ -46,6 +46,7 @@ const _XML_MAGIC = [
 	"Sandcastle Help File Builder Project", "Battlefield 2 mod Description", "Visual Studio Publish profile", "Qt Help Project", "RoboHelp XML Project", "Rosegarden note style", "TextMate Preferences", "TextMate Project", "OmniOutliner document",
 	"SMath Studio document (old)", "XBMC Smart Playlist", "Abstract Markup Language", "WiX Project (UTF-8)", "Code::Blocks lexer", "UpdateStar info", "Lazarus Package", "Code::Blocks lexer", "KlipFolio Klip", "XMLTV format", "NewsML", "WiX Library",
 	"RAD Studio modeling Configuration", "Code::Blocks Workspace", "WiX Object", "Filter Forge filter", "Microsoft Flight Simulator Flight Plan", "gretl Data", "MzXML mass spectrometer output data", "Poseidon for UML Project information", "ChemDraw XML",
+	"Garmin Training Center Database XML",
 	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1824|1825|1883|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

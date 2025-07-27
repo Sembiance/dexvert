@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,691)
+# Unsupported File Formats (3,692)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1143,7 +1143,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,457)
+## Other (2,458)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3040,7 +3040,7 @@ Family/Format | Name | Extensions | Notes
 [other/semSnapshot](https://discmaster.textfiles.com/search?format=semSnapshot) | SEM Snapshot | .sem | 
 [other/sentinelReturnsGameData](https://discmaster.textfiles.com/search?format=sentinelReturnsGameData) | Sentinel Returns game data | .db | 
 [other/sentrySpellingEngineLexicon](https://discmaster.textfiles.com/search?format=sentrySpellingEngineLexicon) | Sentry Spelling-Checker Engine Lexicon | .clx | 
-[other/settlers2Map](https://discmaster.textfiles.com/search?format=settlers2Map) | Settlers II Map | .swd .wld | 
+[other/settlers2Map](https://discmaster.textfiles.com/search?format=settlers2Map) | Settlers II Map | .swd .wld .s2m | 
 [other/seuFormatDefinitionFile](https://discmaster.textfiles.com/search?format=seuFormatDefinitionFile) | SEU Format Definition File | .fdf | 
 [other/sfxDocumentTemplateDirectory](https://discmaster.textfiles.com/search?format=sfxDocumentTemplateDirectory) | Sfx Document Template Directory |  | 
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?format=sgmlCompiled) | SGML Compiled | .mtl | 
@@ -3306,6 +3306,7 @@ Family/Format | Name | Extensions | Notes
 [other/toolmakerProject](https://discmaster.textfiles.com/search?format=toolmakerProject) | Toolmaker project | .tm | 
 [other/toolsMediaCorpAmbientLightBinary](https://discmaster.textfiles.com/search?format=toolsMediaCorpAmbientLightBinary) | Tools Media Corp. Ambient light (binary) | .avm | 
 [other/toolsMediaCorpGUIElements](https://discmaster.textfiles.com/search?format=toolsMediaCorpGUIElements) | Tools Media Corp. GUI elements | .gui | 
+[other/toolsMediaCorpLevelData](https://discmaster.textfiles.com/search?format=toolsMediaCorpLevelData) | Tools Media Corp. level data | .bsf | 
 [other/toolsMediaCorpMesh](https://discmaster.textfiles.com/search?format=toolsMediaCorpMesh) | Tools Media Corp. Mesh | .otm | 
 [other/topLevelForm](https://discmaster.textfiles.com/search?format=topLevelForm) | TopLevel Form | .tfm | 
 [other/topSpeedModula2Library](https://discmaster.textfiles.com/search?format=topSpeedModula2Library) | TopSpeed Modula-2 Library | .lib | 

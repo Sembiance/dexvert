@@ -88,6 +88,7 @@ export default
 		superTuxSpriteMeta                  : {name : "SuperTux Sprite Meta", ext : [".sprite"], magic : ["SuperTux Sprite"], weakMagic : true},
 		theNeedForSpeedCarPerformanceSpecs  : {name : "The Need for Speed car Performance Specs", ext : [".pbs"], magic : ["The Need for Speed car Performance Specs"], weakMagic : true},
 		theNeedForSpeedWindshieldShape      : {name : "The Need For Speed windshield shape", ext : [".fmm"], magic : ["The Need For Speed windshield shape"], weakMagic : true},
+		toolsMediaCorpAmbientLight          : {name : "Tools Media Corp. Ambient light", ext : [".avm"], magic : ["Tools Media Corp. Ambient light (text)"]},
 		toolsMediaCorpMaterial              : {name : "Tools Media Corp. material", ext : [".sss"], magic : ["Tools Media Corp. material"], weakMagic : true},
 		toonBoomPalette                     : {name : "Toon Boom Palette", ext : [".plt", ".plt~"], magic : ["Toon Boom Palette"], weakMagic : true},
 		tornadoMissionInfo                  : {name : "Tornado Mission info", ext : [".mis"], magic : ["Tornado Mission info"], weakMagic : true},

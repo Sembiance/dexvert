@@ -17,11 +17,12 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Scans a given file for all possible identifications by offsetting bytes",
 	opts    :
 	{
+		startAt   : {desc : "Offset to start processing from", hasValue : true, defaultValue : 0},
 		maxOffset : {desc : "Maximum offset to process", hasValue : true, defaultValue : 1000}
 	},
 	args :
 	[
-		{argid : "inputFilePath", desc : "Input bad 7z CUR file to parse", required : true}
+		{argid : "inputFilePath", desc : "Input file to scan", required : true}
 	]});
 
 const {size : FILE_SIZE} = await Deno.stat(argv.inputFilePath);
@@ -38,6 +39,8 @@ await [].pushSequence(0, atOnce).parallelMap(async partid =>
 {
 	for(let offset=(partid*partSize);offset<Math.min(argv.maxOffset, ((partid+1)*partSize));offset++)
 	{
+		if(offset<argv.startAt)
+			continue;
 		const tmpInputFilePath = await fileUtil.genTempPath(undefined, path.extname(argv.inputFilePath));
 		await runUtil.run("dd", ["bs=1", `skip=${offset}`, `if=${argv.inputFilePath}`, `of=${tmpInputFilePath}`]);
 

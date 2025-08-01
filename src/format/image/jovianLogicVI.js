@@ -8,5 +8,5 @@ export class jovianLogicVI extends Format
 	forbidExtMatch = true;
 	magic          = ["Jovian Logic VI bitmap", "deark: jovianvi", "Jovian VI :vi:"];
 	converters     = ["deark[module:jovianvi]", "nconvert[format:vi]", "imageAlchemy[hasExtMatch]", "pv[hasExtMatch]"];
-	verify         = ({meta}) => meta.width>2 && meta.height>2 && meta.width<4000 && meta.height<4000;
+	verify         = ({meta}) => meta.width>2 && meta.height>2 && meta.width<4000 && meta.height<4000 && meta.colorCount>1;
 }

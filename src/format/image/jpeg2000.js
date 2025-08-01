@@ -8,7 +8,7 @@ export class jpeg2000 extends Format
 	mimeType     = "image/jp2";
 	magic        = [
 		"JPEG 2000", "JP2 (JPEG 2000", "Mac JPEG 2000 bitmap (MacBinary)", "JPEG-2000 Code Stream bitmap", "JPEG 2000 codestream", "image/jp2", "image/x-jp2-codestream", "image/jpm", "image/jpx", "piped j2k sequence (j2k_pipe)", "deark: jpeg2000",
-		/^fmt\/(363|463|1794)( |$)/, /^x-fmt\/(392|1794)( |$)/
+		/^fmt\/(151|363|463|1794)( |$)/, /^x-fmt\/(392|1794)( |$)/
 	];
 	idMeta     = ({macFileType}) => macFileType==="jp2k";
 	metaProvider = ["image"];

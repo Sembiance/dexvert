@@ -11,7 +11,7 @@ export class aif extends Format
 		/^fmt\/414( |$)/, /^x-fmt\/136( |$)/,
 
 		// specific
-		"ReCycled Audio Loop Export"
+		"ReCycled Audio Loop Export", "Asobo Studio Games AIF (aif)"
 	];
 	idMeta       = ({macFileType}) => ["AIFC", "AIFF"].includes(macFileType);
 	metaProvider = ["soxi"];

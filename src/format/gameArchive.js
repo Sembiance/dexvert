@@ -64,6 +64,7 @@ export const gameextractor =
 		redengineGameArchive                : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},
 		riffBACKGameArchive                 : {name : "RIFF BACK Game Archive", ext : [".res"], magic : ["Generic RIFF file BACK"]},
 		scummDigitizedSoundsGameArchive     : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)", "Lucasfilm Games VOC Sound"]},
+		scraplandGameDataArchive            : {name : "Scrapland game data archive", ext : [".packed"], magic : ["Scrapland game data archive"]},
 		sgaGameDataArchive                  : {name : "SGA game data archive", ext : [".sga", ".big"], magic : ["SGA game data archive", "SGA archive"], weakMagic : true},
 		simsArchive                         : {name : "The Sims Archive", ext : [".far"], magic : ["The Sims Archive"], website : "http://fileformats.archiveteam.org/wiki/FAR_(The_Sims)"},
 		simTexGameArchive                   : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},

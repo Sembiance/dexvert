@@ -1866,6 +1866,7 @@ export const WEAK_VALUES =
 	/^context diff output/,
 	/^Cookeo recipe$/,
 	/^Copper Colourz! File$/,	// Found correct matches, but magic 'CCF' (and string 'CCF FILE') are too generic given that the extension is .ccf
+	/^Cricket Audio XML Bank Description$/,
 	/^CryEngine Project \(generic\)$/,
 	/^Cryptx encrypted data$/,
 	/^Crystal Dynamics game data archive$/,
@@ -2413,6 +2414,7 @@ export const WEAK_VALUES =
 	/^TWS pixmap\/Icon$/,
 	/^UBX encoded data$/,
 	/^UAE Input recorder data$/,
+	/^Ultimate Stunts 3D-editor texture$/,
 	/^Ultimo Primo SnapShot$/,
 	/^UltraEdit Wordfile$/,
 	/^Ultra-fast LZ compressed data$/,

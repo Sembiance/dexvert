@@ -1,6 +1,27 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress
+
+* Figure out how to extract the bink/smacker videos: https://discmaster.textfiles.com/browse/36350/EXE_7.ISO/Video
+  https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
+  sandbox/app/radTools/ has some tools that in theory you can use to extract, but it didn't work with the files I tested
+  MAYBE this tool can do it: https://www.zeus-software.com/downloads/xripper
+
+* Use exiftool to get CompanyName, ProductVersion, Comments, and other fields from formats: exe, dll, etc.
+  Store this as meta info. Make sure to update injest/phase/phase4.js and ensure this gets stored into textContent
+  Then upload SOME of these to item #7 and reprocess and try searching for it, make sure it can find them: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
+  Write a script that can go and get this data and update the WebDB file and update the index.jsonl file and update elastic
+  It'll go as "content" 
+  Targeted so it'll do a paginated elastic search for the target formats, run on discmaster2 server the exiftool, insert the data
+  Use an 'agentpool' of course.
+  Also make this fairly 'generic' or provide 'helpers' for both the paginated search (which is similar to deepfind kinda)
+  but also helpers for updating webdb, the index.jsonl for the given fileid and also the elastic entry too
+
+* Using the above now inserted data, with format 'exe' selected, search for content that is likely a bink/smacker video
+  Also these: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
+  And finally create the code that can do 'targeted' reprocessing of files. It's time to do it.
+
 * Consider adding 'type' to all uses of "sox" in order to tighten things up a bit. Would want to run full dexdrone10 test suite before AND after
 
 * Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural

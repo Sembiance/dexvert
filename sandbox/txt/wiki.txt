@@ -46,7 +46,6 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 #REDIRECT [[AmigaGuide]]
 
 
-
 >>> Multimedia.cx:
 * Samples: {{DexvertSamples|video/bitmapBrothersJV}}
 

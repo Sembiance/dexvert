@@ -1,4 +1,4 @@
-# Supported File Formats (3,275)
+# Supported File Formats (3,277)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -374,7 +374,7 @@ archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib 
 archive | RJCrush Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rjCrushPacked/)
 archive | RLE com-packer Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rleCOMPackerPacked/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar .exe | [unrar](https://www.rarlab.com/rar_add.htm) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/rar/)
-archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
+archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
 archive | [Sango Fighter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/sangoFighterGameArchive/)
 archive | [SAP Thomson Disk Image](http://nostalgies.thomsonistes.org/transfert.html) | .sap | [sapfs](http://nostalgies.thomsonistes.org/transfert.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sapThomsonDiskImage/)
 archive | SAR Archive | .sar | [unar](https://github.com/incbee/Unarchiver) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sarArchive/)
@@ -925,7 +925,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (706)
+## Image (707)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1477,6 +1477,7 @@ image | [SAM Coupe Mode 4](http://fileformats.archiveteam.org/wiki/SAM_Coupé_Mo
 image | Sam Coupe SSX | .ssx | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/samCoupeSSX/)
 image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace) | .shc | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/samarHiresInterlace/)
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/sar/)
+image | SBIG CCDOPS Image | .stx .st4 .st7 .sbig | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/sbigCCDOPS/)
 image | [Scalable Vector Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz |  | [13 sample files](https://sembiance.com/fileFormatSamples/image/svg/)
 image | [Scitex Continuous Tone](http://fileformats.archiveteam.org/wiki/Scitex_CT) | .ct .sct | [nconvert](https://www.xnview.com/en/nconvert/) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [corelDRAW](https://winworldpc.com/product/corel-draw/50) | [7 sample files](https://sembiance.com/fileFormatSamples/image/scitexCT/)
 image | [Scriptable Network Graphic](https://sng.sourceforge.net/) | .sng | [sng](https://sng.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/sng/)
@@ -2151,7 +2152,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,069)
+## Text (1,070)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2215,7 +2216,7 @@ text | aPatch Daten Datei | .aps |  | [3 sample files](https://sembiance.com/fil
 text | Apple IIgs Source Code |  |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/appleIIgsSourceCode/)
 text | Apple Project Builder Xcode Project | .pbxproj |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/appleProjectBuilderXcodeProject/)
 text | Apple Xcode User data | .pbxuser |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
-text | Applet Effect Factory Config File | .data |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/appletEffectFactoryConfigFile/)
+text | Applet Effect Factory Config File | .data |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/appletEffectFactoryConfigFile/)
 text | Applix spreadsheet | .as |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/applixSpreadsheet/)
 text | Applix Words Document | .aw |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/applixWordsDocument/)
 text | APTCL output data | .apt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/aptclOutputData/)
@@ -2302,6 +2303,7 @@ text | Canon Design Essentials printer info | .csc |  | [3 sample files](https:/
 text | Cartoon Studio Script | .css |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cartoonStudioScript/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets) | .css |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/css/)
 text | Cashflow Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cashflowHelp/)
+text | Casio calculator Tape format | .cat |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/casioCalculatorTapeFormat/)
 text | CauseWay DOS Extender exception | .err |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
 text | CD Viewer Help | .cvh |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cdViewerHelp/)
 text | [CDRDAO TOC File](http://fileformats.archiveteam.org/wiki/TOC) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/text/toc/)
@@ -2334,7 +2336,7 @@ text | Compo preferences |  |  | [6 sample files](https://sembiance.com/fileForm
 text | Consolidated Laser Ranging Prediction Format | .cpf .opa |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/consolidatedLaserRangingPredictionFormat/)
 text | ConTeXt document | .tex |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/conTeXtDocument/)
 text | Context Free design grammar |  |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/contextFreeDesignGrammar/)
-text | Corel Language Resource | .lrs |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/corelLanguageResource/)
+text | Corel Language Resource | .lrs |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/corelLanguageResource/)
 text | Corel/WordPerfect Setup information | .csw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/corelWordPerfectSetupInformation/)
 text | CorelCAD Material | .mat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/corelCADMaterial/)
 text | COREWAR program | .prg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/corewarProgram/)

@@ -417,6 +417,7 @@ export default
 		canonDesignEssentialsPrinterInfo           : {name : "Canon Design Essentials printer info", ext : [".csc"], magic : ["Canon Design Essentials printer info"], weakMagic : true},
 		cartoonStudioScript                        : {name : "Cartoon Studio Script", ext : [".css"], magic : ["Cartoon Studio Script"]},
 		cashflowHelp                               : {name : "Cashflow Help", ext : [".hlp"], magic : ["Cashflow Help"]},
+		casioCalculatorTapeFormat                  : {name : "Casio calculator Tape format", ext : [".cat"], magic : ["Casio calculator Tape format"], weakMagic : true},
 		causeWayDOSExtenderException               : {name : "CauseWay DOS Extender exception", ext : [".err"], magic : ["CauseWay DOS Extender exception"]},
 		cdViewerHelp                               : {name : "CD Viewer Help", ext : [".cvh"], magic : ["CD Viewer Help"]},
 		celestiaScript                             : {name : "Celestia script", ext : [".cel"], magic : ["Celestia script"], weakMagic : true},

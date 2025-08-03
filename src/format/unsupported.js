@@ -393,7 +393,7 @@ export default
 		maxiPlanSpreadsheet                : {name : "MaxiPlan spreadsheet", ext : [".plan"], magic : ["MaxiPlan spreadsheet"], weakMagic : true},
 		mediaViewDocument                  : {name : "MediaView document", ext : [".mdvw", ".mdv"], magic : ["MediaView document"]},
 		memotechMTXBASICSource             : {name : "Memotech MTX BASIC source", ext : [".bas"], magic : ["Memotech MTX BASIC source"]},
-		microsoftISAMDatabase              : {name : "Microsoft ISAM database", ext : [".db3", ".mdb"], magic : ["Microsoft Professional ISAM database", "MS ISAM database"]},
+		microsoftISAMDatabase              : {name : "Microsoft ISAM database", ext : [".db3", ".mdb"], magic : ["Microsoft Professional ISAM database", "MS ISAM database", "Microsoft Money data"]},
 		microsoftOneNote                   : {name : "Microsoft OneNote", ext : [".one", ".onetoc2"], magic : ["Microsoft OneNote", "OneNote table of contents", /^fmt\/637( |$)/]},
 		miniOfficeSpreadsheet              : {name : "Mini Office Spreadsheet", ext : [".spr"], magic : ["Mini Office Spreadsheet"]},
 		minitabWorksheet                   : {name : "Minitab Worksheet", ext : [".mtw"], magic : ["Minitab Worksheet", /^fmt\/1430( |$)/], weakMagic : true},

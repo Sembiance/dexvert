@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,718)
+# Unsupported File Formats (3,729)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -578,7 +578,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (56)
+## Executable (57)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?format=aDotOutExecutable) | a.out Executable | .o | 
@@ -635,6 +635,7 @@ Family/Format | Name | Extensions | Notes
 [executable/windowsAudioCompressionManagerDriver](https://discmaster.textfiles.com/search?format=windowsAudioCompressionManagerDriver) | Windows Audio Compression Manager driver | .acm | 
 [executable/wiNGsOSExecutable](https://discmaster.textfiles.com/search?format=wiNGsOSExecutable) | WiNGs OS executable |  | 
 [executable/x68000Executable](https://discmaster.textfiles.com/search?format=x68000Executable) | X68000 executable | .x | 
+[executable/xbox360Executable](https://discmaster.textfiles.com/search?format=xbox360Executable) | Xbox 360 Executable | .xex | 
 [executable/xBoxExecutable](https://discmaster.textfiles.com/search?format=xBoxExecutable) | Xbox Executable | .xbe | [2 sample files](https://sembiance.com/fileFormatSamples/executable/xBoxExecutable/)
 [executable/zOSProgramObjectExecutable](https://discmaster.textfiles.com/search?format=zOSProgramObjectExecutable) | z/OS Program Object executable |  | 
 
@@ -967,7 +968,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (171)
+## Music (172)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1042,6 +1043,7 @@ Family/Format | Name | Extensions | Notes
 [music/logicSong](https://discmaster.textfiles.com/search?format=logicSong) | Logic Song | .lso | 
 [music/lucasfilmGamesMIDIMusic](https://discmaster.textfiles.com/search?format=lucasfilmGamesMIDIMusic) | Lucasfilm Games MIDI music | .gmd | 
 [music/mMusic](https://discmaster.textfiles.com/search?format=mMusic) | M music |  | 
+[music/magicScoreMaestroSong](https://discmaster.textfiles.com/search?format=magicScoreMaestroSong) | MagicScore Maestro Song | .sfd | 
 [music/magixMusicStudioSong](https://discmaster.textfiles.com/search?format=magixMusicStudioSong) | MAGIX music studio Song | .sng | 
 [music/masterTracker](https://discmaster.textfiles.com/search?format=masterTracker) | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://sembiance.com/fileFormatSamples/music/masterTracker/)
 [music/masterTracksPro](https://discmaster.textfiles.com/search?format=masterTracksPro) | Master Tracks Pro | .mts | [2 sample files](https://sembiance.com/fileFormatSamples/music/masterTracksPro/) - Attempts to run Master Trakcks Pro under win2k/winxp/win7 64bit, all failed. Program just doesn't launch.
@@ -1144,7 +1146,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,480)
+## Other (2,489)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2406,6 +2408,13 @@ Family/Format | Name | Extensions | Notes
 [other/magicCameraEffect](https://discmaster.textfiles.com/search?format=magicCameraEffect) | Magic Camera Effect | .mce | 
 [other/magicC64Preferences](https://discmaster.textfiles.com/search?format=magicC64Preferences) | MagiC64 Preferences | .prefs | 
 [other/magicaVoxelVox](https://discmaster.textfiles.com/search?format=magicaVoxelVox) | MagicaVoxel Vox | .vox | 
+[other/magicScoreChord](https://discmaster.textfiles.com/search?format=magicScoreChord) | MagicScore Chord | .chd | 
+[other/magicScoreDrumStyle](https://discmaster.textfiles.com/search?format=magicScoreDrumStyle) | MagicScore Drum Style | .drm | 
+[other/magicScoreGuitar](https://discmaster.textfiles.com/search?format=magicScoreGuitar) | MagicScore Guitar | .gtr | 
+[other/magicScoreLanguageResourceFile](https://discmaster.textfiles.com/search?format=magicScoreLanguageResourceFile) | MagicScore Language Resource File | .lrf | 
+[other/magicScoreSymbol](https://discmaster.textfiles.com/search?format=magicScoreSymbol) | MagicScore Symbol | .smb | 
+[other/magicScoreTemplate](https://discmaster.textfiles.com/search?format=magicScoreTemplate) | MagicScore Template | .ctf | 
+[other/magicScoreTransport](https://discmaster.textfiles.com/search?format=magicScoreTransport) | MagicScore Transport | .trn | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?format=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
 [other/mAGIXLibrary](https://discmaster.textfiles.com/search?format=mAGIXLibrary) | MAGIX library | .mxm | 
 [other/magixMovieEditVideo](https://discmaster.textfiles.com/search?format=magixMovieEditVideo) | Magix Movie Edit video | .vip | 
@@ -3580,6 +3589,8 @@ Family/Format | Name | Extensions | Notes
 [other/xCADOverlay](https://discmaster.textfiles.com/search?format=xCADOverlay) | X-CAD Overlay |  | 
 [other/xCADPatternFill](https://discmaster.textfiles.com/search?format=xCADPatternFill) | X-CAD Pattern Fill | .ptf | 
 [other/xPlaneAirfoils](https://discmaster.textfiles.com/search?format=xPlaneAirfoils) | X-Plane Airfoils | .afl | 
+[other/xPlaneDrapedPolygon](https://discmaster.textfiles.com/search?format=xPlaneDrapedPolygon) | X-Plane Draped Polygon | .pol | 
+[other/xPlanePaintedLine](https://discmaster.textfiles.com/search?format=xPlanePaintedLine) | X-Plane Painted Line | .lin | 
 [other/x11XauthorityData](https://discmaster.textfiles.com/search?format=x11XauthorityData) | X11 Xauthority data |  | 
 [other/xactGlobalSettings](https://discmaster.textfiles.com/search?format=xactGlobalSettings) | XACT Global Settings | .xgs | 
 [other/xactSoundBank](https://discmaster.textfiles.com/search?format=xactSoundBank) | XACT Sound Bank | .xsb | 

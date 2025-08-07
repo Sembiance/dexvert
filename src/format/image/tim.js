@@ -10,7 +10,7 @@ export class tim extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"convert", "deark[module:tim]", "wuimg", "nconvert[format:tim]",
-		"paintDotNet", "noesis[type:image]",
+		"paintDotNet[matchType:magic]", "noesis[type:image]",
 		"recoil2png"
 	];
 }

@@ -20,7 +20,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.logLevel);
 const DEXVERT_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.75);
-const DEXID_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.30);
+const DEXID_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.35);
 const LOCKS = new Set();
 const RPC_RESPONSES = new Map();
 let RPCID_COUNTER = 1;

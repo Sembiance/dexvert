@@ -14,7 +14,7 @@ export class xbm extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"wuimg",	// only one that handles 3270.icon and iv.X correctly
-		"convert", "gimp", "nconvert[format:xbm][matchType:magic]", "imconv[format:xbm][matchType:magic]",
-		"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
+		"convert", "gimp", "nconvert[format:xbm][matchType:magic]", "imconv[format:xbm][matchType:magic]"
+		//"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
 }

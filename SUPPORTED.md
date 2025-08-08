@@ -1,4 +1,4 @@
-# Supported File Formats (3,278)
+# Supported File Formats (3,279)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -624,7 +624,7 @@ document | [Across Crossword Puzzle](http://fileformats.archiveteam.org/wiki/PUZ
 document | ACT! Word Processor Document | .wpa .tpl .rep .wpd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/actWordProcessorDocument/)
 document | Adorage Script | .scp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/adorageScript/)
 document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [soffice](https://www.libreoffice.org) [pageMaker7](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) [pageMaker5](https://winworldpc.com/product/aldus-pagemaker/50) [pageMaker4](https://winworldpc.com/product/aldus-pagemaker/40) | [23 sample files](https://sembiance.com/fileFormatSamples/document/pageMaker/)
-document | [Amazon Kindle eBook](http://fileformats.archiveteam.org/wiki/AZW) | .azw .azw3 .azw4 | [ebook_convert](https://calibre-ebook.com/) | [8 sample files](https://sembiance.com/fileFormatSamples/document/amazonKindleBook/)
+document | [Amazon Kindle eBook](http://fileformats.archiveteam.org/wiki/AZW) | .azw .azw3 .azw4 | [ebook_convert](https://calibre-ebook.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/amazonKindleBook/)
 document | Ami Pro/Word Pro document | .sam | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/amiProWordProDocument/)
 document | Amiga Catalog Translation file | .ct | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/catalogTranslation/)
 document | Amiga ProWrite Document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/amigaProWrite/)
@@ -642,7 +642,7 @@ document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/softwa
 document | Bank Book for Windows Account Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/bankBookForWindows/)
 document | Borland Turbo Vision Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/borlandTurboVisionHelp/)
 document | Breeze/TextLife Text-to-Executable | .exe | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/document/breezeText2EXE/)
-document | [Broad Band eBook](http://fileformats.archiveteam.org/wiki/LRF) | .lrf .lrx .lrs | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/broadBandEBook/)
+document | [Broad Band eBook](http://fileformats.archiveteam.org/wiki/LRF) | .lrf .lrx .lrs | [ebook_convert](https://calibre-ebook.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/broadBandEBook/)
 document | Cambridge Z88 Basic | .bas | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://sembiance.com/fileFormatSamples/document/cambridgeZ88Basic/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/cardfile/)
 document | Central Point Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/centralPointHelp/)
@@ -2152,7 +2152,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,071)
+## Text (1,072)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2471,7 +2471,7 @@ text | Foltyn Commander Configuration | .cfg |  | [1 sample file](https://sembia
 text | Font Compiler and Loader format | .fcl |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fontCompilerAndLoaderFormat/)
 text | FontLab Codepage Definition | .cpg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fontLabCodepageDefinition/)
 text | FontLab Encoding | .enc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fontLabEncoding/)
-text | FontLab Name mapping rule | .nam |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/fontLabNameMappingRule/)
+text | FontLab Name mapping rule | .nam |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/fontLabNameMappingRule/)
 text | FontLab Unicode Range | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fontLabUnicodeRange/)
 text | FormWorx Printer driver | .prx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/formWorxPrinterDriver/)
 text | Forte Agent Character Set Mapping | .csm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/forteAgentCharacterSetMapping/)
@@ -3094,6 +3094,7 @@ text | Twist Report script | .r |  | [10 sample files](https://sembiance.com/fil
 text | ULTIboard PCB Design Data File | .ddf |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/ultiboardPCBDesignDataFile/)
 text | Ultimate 3D Effect | .ufx |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ultimate3DEffect/)
 text | Ultimate Stunts Track | .template .track |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/ultimateStuntsTrack/)
+text | UltraEdit Menu | .mfg .mnu .mb0 .mb1 .in1 .pb0 .pb1 |  | 
 text | Unified Printer Parameter | .upp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unifiedPrinterParameter/)
 text | Unity asset Meta data | .meta |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/unityAssetMetaData/)
 text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/upcatCatalog/)

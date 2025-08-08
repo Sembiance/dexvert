@@ -2149,6 +2149,7 @@ export const WEAK_VALUES =
 	/^Miva Script$/,
 	/^Mizar article$/,
 	/^MLT(\/melt)? (framework AV preset|script|XML)$/,
+	/^MNX Music Notation$/,
 	/^Moebius (Graphics|Sound|Tile) Library$/,
 	/^Motorhead game data rchive$/,
 	/^MouseWrite document \(v1\.x\)$/,

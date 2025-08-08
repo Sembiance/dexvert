@@ -1517,7 +1517,7 @@ Family/Format | Name | Extensions | Notes
 [other/breach3Campaign](https://discmaster.textfiles.com/search?format=breach3Campaign) | Breach 3 campaign | .b3s | 
 [other/bridgeTapeRecorderTape](https://discmaster.textfiles.com/search?format=bridgeTapeRecorderTape) | Bridge Tape Recorder Tape | .brt | 
 [other/broderbundAudioDriver](https://discmaster.textfiles.com/search?format=broderbundAudioDriver) | Broderbund audio Driver | .drv | 
-[other/brokenSwordTheSmokingMirrorSaveGame](https://discmaster.textfiles.com/search?format=brokenSwordTheSmokingMirrorSaveGame) | Broken Sword: The Smoking Mirror save game |  | 
+[other/brokenSwordSaveGame](https://discmaster.textfiles.com/search?format=brokenSwordSaveGame) | Broken Sword save game | .bss .bs4 .001 .002 .003 .004 | 
 [other/bryceObjectPresets](https://discmaster.textfiles.com/search?format=bryceObjectPresets) | Bryce Object Presets | .obp | 
 [other/bryceScene](https://discmaster.textfiles.com/search?format=bryceScene) | Bryce Scene | .br6 | 
 [other/bsdiffPatch](https://discmaster.textfiles.com/search?format=bsdiffPatch) | bsdiff patch | .bdif .p | 
@@ -3245,7 +3245,7 @@ Family/Format | Name | Extensions | Notes
 [other/tTracksPreset](https://discmaster.textfiles.com/search?format=tTracksPreset) | T-Tracks preset |  | 
 [other/tabWorksBook](https://discmaster.textfiles.com/search?format=tabWorksBook) | TabWorks book | .twf | 
 [other/tadtidameSoundDataContainer](https://discmaster.textfiles.com/search?format=tadtidameSoundDataContainer) | TAD/TID game sound data container | .tad | 
-[other/tads](https://discmaster.textfiles.com/search?format=tads) | TADS | .t .gam .t3 | 
+[other/tads](https://discmaster.textfiles.com/search?format=tads) | TADS | .t .gam .t3 .rs0 | 
 [other/tagwriteTemplate](https://discmaster.textfiles.com/search?format=tagwriteTemplate) | Tagwrite Template | .tww | 
 [other/talesOfEterniaOnlineGameDataArchive](https://discmaster.textfiles.com/search?format=talesOfEterniaOnlineGameDataArchive) | Tales Of Eternia Online game data archive | .bnd | 
 [other/talismanGameDataArchive](https://discmaster.textfiles.com/search?format=talismanGameDataArchive) | Talisman game data archive | .dz | 

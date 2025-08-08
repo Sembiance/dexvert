@@ -1000,6 +1000,7 @@ export default
 		twistReportScript                          : {name : "Twist Report script", ext : [".r"], magic : ["Twist Report script"], weakMagic : true},
 		ultiboardPCBDesignDataFile                 : {name : "ULTIboard PCB Design Data File", ext : [".ddf"], magic : ["ULTIboard PCB Design Data File format"], weakMagic : true},
 		ultimate3DEffect                           : {name : "Ultimate 3D Effect", ext : [".ufx"], magic : ["Ultimate 3D Effect"]},
+		ultraEditMenu                              : {name : "UltraEdit Menu", ext : [".mfg", ".mnu", ".mb0", ".mb1", ".in1", ".pb0", ".pb1"], magic : ["UltraEdit Menu"], weakMagic : true},
 		unifiedPrinterParameter                    : {name : "Unified Printer Parameter", ext : [".upp"], magic : ["Unified Printer Parameter"]},
 		upcatCatalog                               : {name : "Upcat Catalog", ext : [".cat"], magic : ["Upcat Catalog"]},
 		valueChangeDump                            : {name : "Value Change Dump", ext : [".vcd", ".vcdz"], magic : ["Value Change Dump"]},

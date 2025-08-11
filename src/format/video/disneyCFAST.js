@@ -7,5 +7,5 @@ export class disneyCFAST extends Format
 	ext        = [".cft", ".sec"];
 	magic      = ["CFast Animation", "Disney Animation Studio Secure Animation"];
 	notes      = "The format is documented, so someone could create a more modern converter";
-	converters = ["flick[matchType:magic]"];
+	converters = ["ffmpeg[libre][format:cfast]", "flick[matchType:magic]"];
 }

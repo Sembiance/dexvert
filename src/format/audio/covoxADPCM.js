@@ -7,5 +7,5 @@ export class covoxADPCM extends Format
 	ext            = [".v8", ".cvx"];
 	forbidExtMatch = true;
 	magic          = ["Covox ADPCM encoded audio", /^fmt\/1676( |$)/];
-	converters     = ["awaveStudio"];
+	converters     = ["awaveStudio", "ffmpeg[libre][format:covox][outType:mp3]"];
 }

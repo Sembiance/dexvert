@@ -51,6 +51,7 @@ fd magick -x rm {} \;
 rm -rf Ay_Emul* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
 rm -f ./*.crash.txt
 rm -rf .vbox-sembiance-ipc system-commandline-sentinel-files gimp blender* .wine-7777
+rm -f ~/.mtab.fuseiso ~/.mtab.fuseiso.new
 
 umount --quiet .mount_ink* 2> /dev/null
 rm -rf .mount_ink*

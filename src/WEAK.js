@@ -133,6 +133,7 @@ export const WEAK_VALUES =
 	/^BK: ByteKiller$/,
 
 	// binwalkID
+	/^AES Inverse S-Box$/,
 	/^Base64 standard index table$/,
 	/^BIN-Header,/,
 	/^Boot section Start/,
@@ -277,9 +278,12 @@ export const WEAK_VALUES =
 	/^YZ Archiv gefunden/,
 
 	// ffprobeID
+	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
+	/^AGSC Bank \(Metroid Prime 1\/2 GC\) \(agsc\)$/,
 	/^AV1 low overhead OBU \(obu\)$/,
 	/^CD Graphics \(cdg\)$/,
+	/^CD[AR] \(Compact Disc Audio\) \(cd[ar]\)$/,
 	/^DAT \(Digital Audio Tape\) \(dat\)$/,	// librempeg
 	/^Digital Pictures SGA \(sga\)$/,
 	/^DV \(Digital Video\) \(dv\)$/,
@@ -301,6 +305,8 @@ export const WEAK_VALUES =
 	/^MPEG-[PT]S \(MPEG-2 (Program|Transport) Stream\) \(mpeg(ts)?\)$/,
 	/^MPL2 subtitles \(mpl2\)$/,
 	/^MPlayer subtitles \(mpsub\)$/,
+	/^Naxat ASD \(naxat_asd\)$/,
+	/^NGC \(Nintendo DSP Standard\) \(ngcdspstd\)$/,
 	/^NC camera feed \(nc\)$/,
 	/^Nullsoft Streaming Video \(nsv\)$/,
 	/^Ogg \(ogg\)$/,
@@ -313,6 +319,7 @@ export const WEAK_VALUES =
 	/^raw HDMV Presentation Graphic Stream subtitles \(sup\)$/,
 	/^RealText subtitle format \(realtext\)$/,
 	/^REDCODE R3D \(r3d\)$/,
+	/^Sega CD PCM \(scdpcm\)$/,
 	/^Sega DC STR \(dcstr\)$/,
 	/^SDP \(sdp\)$/,
 	/^Sony Playstation STR \(psxstr\)$/,
@@ -947,6 +954,7 @@ export const WEAK_VALUES =
 	/^Objective-C source/,
 	/^Octave binary data/,
 	/^Ogg data( UNKNOWN REVISION \d+)?$/,
+	/^Ogg data, ASCII text/,
 	/^Old EZD Electron Density Map/,
 	/^old Microsoft 8086 x\.out/,
 	/^old packed data/,
@@ -2459,6 +2467,7 @@ export const WEAK_VALUES =
 	/^WIC \(fake\) compressed archive$/,
 	/^Wii Effect controls$/,
 	/^Wii Effects Textures$/,
+	/^Wikireader Forth program$/,
 	/^Wildfire convolution$/,
 	/^Win16\/32 Executable Delphi generic$/,
 	/^Win32 EXE PECompact compressed \(generic\)$/,

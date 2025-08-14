@@ -22113,6 +22113,8 @@ Formats:
  DE  adx             CRI ADX
  DE  aea             MD STUDIO audio
  D   afc             AFC
+ D   agsc            AGSC Bank (Metroid Prime 1/2 GC)
+ D   ahx             CRI AHX
  D   aif             Asobo Studio Games AIF
  DE  aiff            Audio IFF
  D   aix             CRI AIX
@@ -22144,6 +22146,7 @@ Formats:
  DE  ast             AST (Audio Stream)
  D   astb            Capcom ASTB (Audio Stream)
  DE  au              Sun AU
+ D   aus             AUS (Atomic Planet)
  D   av1             AV1 Annex B
  DE  avi             AVI (Audio Video Interleaved)
   E  avif            AVIF
@@ -22166,32 +22169,45 @@ Formats:
  D   bmp_pipe        piped bmp sequence
  D   bmv             Discworld II BMV
  D   bnsf            BNSF (Bandai Namco Sound Format)
+ DE  bnvib           BNVIB (Binary NX Vibration)
  D   boa             Black Ops Audio
  D   bonk            raw Bonk
  D   brender_pix     BRender PIX image
- D   brstm           BRSTM (Binary Revolution Stream)
+ D   brr             BRR (Bit Rate Reduction)
+ DE  brstm           BRSTM (Binary Revolution Stream)
+ D   btsnd           BTSND (Wii Boot Sound)
+ D   bwav            BWAV (NintendoWare BWAV)
  D   c93             Interplay C93
  DE  caf             Apple CAF (Core Audio Format)
  DE  cavsvideo       raw Chinese AVS (Audio Video Standard) video
+ D   cda             CDA (Compact Disc Audio)
  D   cdg             CD Graphics
+ D   cdr             CDR (Compact Disc Audio)
  D   cdxl            Commodore CDXL video
+ D   cfast           CFAST (Disney Animation Studio)
  D   cine            Phantom Cine
  DE  codec2          codec2 .c2 muxer
  DE  codec2raw       raw codec2 muxer
  D   concat          Virtual concatenation script
+ D   covox           Covox Audio
   E  crc             CRC testing
  D   cri_pipe        piped cri sequence
+ D   csmp            CSMP (Retro Studios Metroid Prime)
  DE  dash            DASH Muxer
  D   dat             DAT (Digital Audio Tape)
  DE  data            raw data
  DE  daud            D-Cinema audio
+ D   dcidvi          Capcom DC IDVI
+ D   dckcey          Konami DC KCEY
  D   dcstr           Sega DC STR
  D   dds_pipe        piped dds sequence
- D   derf            Xilam DERF
+ D   derf            Xilam DERF Audio
+ D   derfvideo       Xilam DERF Video
  D   dfa             Chronomaster DFA
  DE  dfpwm           raw DFPWM1a
  D   dhav            Video DAV
  DE  dirac           raw Dirac
+ D   dkanim          DK Animation
  DE  dnxhd           raw DNxHD (SMPTE VC-3)
  D   dpx_pipe        piped dpx sequence
  D   dsf             DSD Stream File (DSF)
@@ -22218,6 +22234,7 @@ Formats:
  DE  f64be           PCM 64-bit floating-point big-endian
  DE  f64le           PCM 64-bit floating-point little-endian
  DEd fbdev           Linux framebuffer
+ D   fblpcm          French-Bread LPCM
  DE  ffmetadata      FFmpeg metadata in text
   E  fifo            FIFO queue pseudo-muxer
  DE  film_cpk        Sega FILM / CPK
@@ -22232,6 +22249,7 @@ Formats:
  D   frm             Megalux Frame
  D   fsb             FMOD Sample Bank
  D   fwse            Capcom's MT Framework sound
+ D   g1l             G1L (Koei Tecmo)
  DE  g722            raw G.722
  DE  g723_1          raw G.723.1
  DE  g726            raw big-endian G.726 ("left-justified")
@@ -22263,7 +22281,7 @@ Formats:
  DE  ico             Microsoft Windows ICO
  D   idcin           id Cinematic
  D   idf             iCE Draw File
- D   idsp            IDSP (Inevitable Entertainment)
+ DE  idsp            IDSP (Inevitable Entertainment)
  D   iff             IFF (Interchange File Format)
  D   ifv             IFV CCTV DVR
  DE  ilbc            iLBC storage
@@ -22289,8 +22307,10 @@ Formats:
  D   jpegxl_pipe     piped jpegxl sequence
  D   jv              Bitmap Brothers JV
  D d kmsgrab         KMS screen capture
+ D   ktss            KTSS (Koei Tecmo)
  D   kux             KUX (YouKu)
  DE  kvag            Simon & Schuster Interactive VAG
+ D   kvs             KVS Audio
  D   laf             LAF (Limitless Audio Format)
   E  latm            LOAS/LATM
  D d lavfi           Libavfilter virtual input device
@@ -22298,6 +22318,8 @@ Formats:
  D   live_flv        live RTMP FLV (Flash Video)
  D   lmlm4           raw lmlm4
  D   loas            LOAS AudioSyncStream
+ D   lopu            Switch LOPU
+ D   lopus           Switch OPUS
  DE  lrc             LRC lyrics
  D   luodat          Video CCTV DAT
  D   lvf             LVF
@@ -22307,7 +22329,7 @@ Formats:
   E  matroska        Matroska
  D   matroska,webm   Matroska / WebM
  D   mca             MCA Audio Format
- D   mcc             MacCaption
+ DE  mcc             MacCaption
  D   mcraw           MotionCam RAW
   E  md5             MD5 testing
  D   mgsts           Metal Gear Solid: The Twin Snakes
@@ -22320,6 +22342,7 @@ Formats:
  D   mlv             Magic Lantern Video (MLV)
  D   mm              American Laser Games MM
  DE  mmf             Yamaha SMAF
+ D   mo              MobiClip MO
  D   mods            MobiClip MODS
  D   moflex          MobiClip MOFLEX
   E  mov             QuickTime / MOV
@@ -22352,13 +22375,18 @@ Formats:
   E  mxf_d10         MXF (Material eXchange Format) D-10 Mapping
   E  mxf_opatom      MXF (Material eXchange Format) Operational Pattern Atom
  D   mxg             MxPEG clip
+ D   naxat_asd       Naxat ASD
+ D   naxat_asd_bank  Naxat ASD Bank
  D   nc              NC camera feed
+ D   ngcdspstd       NGC (Nintendo DSP Standard)
  DE  nistsphere      NIST SPeech HEader REsources
  D   nsp             Computerized Speech Lab NSP
  D   nsv             Nullsoft Streaming Video
   E  null            raw null video
+ D   nus3            Namco NUS3
  DE  nut             NUT
  D   nuv             NuppelVideo
+ D   nwav            NWAV Audio
  DE  obu             AV1 low overhead OBU
   E  oga             Ogg Audio
  DE  ogg             Ogg
@@ -22369,6 +22397,9 @@ Formats:
  DEd oss             OSS (Open Sound System) playback
  D   paf             Amazing Studio Packed Animation File
  D   pam_pipe        piped pam sequence
+ D   pamf            Sony PlayStation Advanced Movie Format
+ D   pasd            PASD (Premium Agency Sound Bank)
+ D   pasx            PASX (Premium Agency Sound)
  D   pbm_pipe        piped pbm sequence
  D   pcx_pipe        piped pcx sequence
  D   pda             PlayDate Audio
@@ -22380,11 +22411,14 @@ Formats:
  D   phm_pipe        piped phm sequence
  D   photocd_pipe    piped photocd sequence
  D   pictor_pipe     piped pictor sequence
+ D   piff            PIFF Tantalus
  D   pjs             PJS (Phoenix Japanimation Society) subtitles
  D   pmp             Playstation Portable PMP
  D   png_pipe        piped png sequence
+ D   pona            3DO PONA
  D   pp_bnk          Pro Pinball Series Soundbank
  D   ppm_pipe        piped ppm sequence
+ D   psb             PSB M2
  D   psd_pipe        piped psd sequence
   E  psp             PSP MP4 (MPEG-4 Part 14)
  D   psxstr          Sony Playstation STR
@@ -22398,13 +22432,14 @@ Formats:
  DE  rawvideo        raw video
  DE  rcwt            RCWT (Raw Captions With Time)
  D   realtext        RealText subtitle format
- D   redspark        RedSpark
+ DE  redspark        RedSpark
  D   rfb             RFB
  D   rka             RKA (RK Audio)
  D   rl2             RL2
  DE  rm              RealMedia
  DE  roq             raw id RoQ
  D   rpl             RPL / ARMovie
+ D   rs03            RS03 (Metroid Prime GameCube)
  D   rsd             GameCube RSD
  DE  rso             Lego Mindstorms RSO
  DE  rtp             RTP output
@@ -22418,12 +22453,14 @@ Formats:
  DE  s32le           PCM signed 32-bit little-endian
  D   s337m           SMPTE 337M
  DE  s8              PCM signed 8-bit
+ D   sadl            Procyon DS SADL)
  D   sami            SAMI subtitle format
  DE  sap             SAP output
+ D   saud            LucasArts SAUD
  DE  sbc             raw SBC
- D   sbg             SBaGen binaural beats script
  DE  scc             Scenarist Closed Captions
  D   scd             Square Enix SCD
+ D   scdpcm          Sega CD PCM
  D   sdns            Xbox SDNS
  D   sdp             SDP
  D   sdr2            SDR2
@@ -22433,9 +22470,11 @@ Formats:
  D   ser             SER (Simple uncompressed video format for astronomical capturing)
  D   sga             Digital Pictures SGA
  D   sgi_pipe        piped sgi sequence
+ D   shaa            SHAA/SHSA (Nintendo Alarmo)
  D   shn             raw Shorten
  D   siff            Beam Software SIFF
  D   simbiosis_imx   Simbiosis Interactive IMX
+ D   sk              SK Ogg
  D   sln             Asterisk raw pcm
  DE  smjpeg          Loki SDL MJPEG
  D   smk             Smacker
@@ -22443,14 +22482,18 @@ Formats:
  D   smp             Sample Vision Audio
  D   smush           LucasArts Smush
  D   sndb            Capcom SNDB (Sound Bank)
+ D   snrsns          Electronic Arts SNR/SNS
  D   sol             Sierra SOL
  DE  sox             SoX (Sound eXchange) native
+ D   spcm            Success PCM
  DE  spdif           IEC 61937 (used on S/PDIF - IEC958)
   E  spx             Ogg Speex
  DE  srt             SubRip subtitle
  D   stl             Spruce subtitle format
+ D   stma            STMA Audio
   E  stream_segment,ssegment streaming segment muxer
   E  streamhash      Per-stream hash testing
+ D   strm            STRM (Nintendo DS Stream)
  D   subviewer       SubViewer subtitle format
  D   subviewer1      SubViewer v1 subtitle format
  D   sunrast_pipe    piped sunrast sequence
@@ -22459,7 +22502,10 @@ Formats:
   E  svcd            MPEG-2 PS (SVCD)
  D   svg_pipe        piped svg sequence
  D   svs             Square SVS
+ D   swar            SWAR (Nintendo DS SWAR)
+ D   swav            SWAV (Nintendo DS SWAV)
  DE  swf             SWF (ShockWave Flash)
+ D   swp             SWP Bank (Konami/KCE Studio)
  D   tac             tri-Ace PS2
  D   tak             raw TAK
  D   tedcaptions     TED Talks captions
@@ -22494,6 +22540,7 @@ Formats:
   E  vcd             MPEG-1 Systems / MPEG program stream (VCD)
  DE  vidc            PCM Archimedes VIDC
  DEd video4linux2,v4l2 Video4Linux2 output device
+ D   vig             VIG (Konami/KCE Studio)
  D   vividas         Vividas VIV
  D   vivo            Vivo
  D   vmd             Sierra VMD
@@ -22512,9 +22559,10 @@ Formats:
   E  webm            WebM
   E  webm_chunk      WebM Chunk Muxer
  DE  webm_dash_manifest WebM DASH Manifest
-  E  webp            WebP
+ DE  webp            WebP
  D   webp_pipe       piped webp sequence
  DE  webvtt          WebVTT subtitle
+ D   wiibgm          WiiBGM (Koei Tecmo)
  DE  wsaud           Westwood Studios audio
  D   wsd             Wideband Single-bit Data (WSD)
  D   wsvqa           Westwood Studios VQA
@@ -22531,10 +22579,12 @@ Formats:
  D   xpm_pipe        piped xpm sequence
   Ed xv              XV (XVideo) output device
  D   xvag            Sony PS3 XVAG
+ D   xwc             Starbreeze XWC
  D   xwd_pipe        piped xwd sequence
  D   xwma            Microsoft xWMA
  D   yop             Psygnosis YOP
  DE  yuv4mpegpipe    YUV4MPEG pipe
+ D   zpd             ZPD (Z-Music)
 
 
 Codecs:
@@ -22576,6 +22626,7 @@ Codecs:
  ..V.L. avs2                 AVS2-P2/IEEE1857.4
  ..V.L. avs3                 AVS3-P2/IEEE1857.10
  DEVI.S avui                 Avid Meridien Uncompressed
+ D.V.LS awebp                WebP Animation
  D.V.L. bethsoftvid          Bethesda VID video
  D.V.L. bfi                  Brute Force & Ignorance
  D.V.L. binkvideo            Bink video
@@ -22590,6 +22641,7 @@ Codecs:
  D.V.L. cdgraphics           CD Graphics video
  D.V..S cdtoons              CDToons video
  D.VIL. cdxl                 Commodore CDXL video
+ D.VIL. cfast                CFAST ((Disney Animation Studio))
  DEV.L. cfhd                 GoPro CineForm HD
  DEV.L. cinepak              Cinepak
  D.V.L. clearvideo           Iterated Systems ClearVideo
@@ -22605,7 +22657,7 @@ Codecs:
  D.V.L. dfa                  Chronomaster DFA
  DEV.LS dirac                Dirac (encoders: vc2)
  DEVIL. dnxhd                VC3/DNxHD
- ..VI.S dnxuc                DNxUncompressed / SMPTE RDD 50
+ D.VI.S dnxuc                DNxUncompressed / SMPTE RDD 50
  DEVI.S dpx                  DPX (Digital Picture Exchange) image
  D.V.L. dsicinvideo          Delphine Software International CIN video
  DEVIL. dvvideo              DV (Digital Video)
@@ -22850,6 +22902,7 @@ Codecs:
  D.AIL. adpcm_agm            ADPCM AmuseGraphics Movie AGM
  D.AIL. adpcm_aica           ADPCM Yamaha AICA
  DEAIL. adpcm_argo           ADPCM Argonaut Games
+ D.AIL. adpcm_brr            ADPCM Bit Rate Reduction
  D.AIL. adpcm_circus         ADPCM Circus
  D.AIL. adpcm_ct             ADPCM Creative Technology
  D.AIL. adpcm_dtk            ADPCM Nintendo Gamecube DTK
@@ -22859,6 +22912,7 @@ Codecs:
  D.AIL. adpcm_ea_r2          ADPCM Electronic Arts R2
  D.AIL. adpcm_ea_r3          ADPCM Electronic Arts R3
  D.AIL. adpcm_ea_xas         ADPCM Electronic Arts XAS
+ D.AIL. adpcm_fmod           ADPCM FMOD
  DEAIL. adpcm_g722           G.722 ADPCM (decoders: g722) (encoders: g722)
  DEAIL. adpcm_g726           G.726 ADPCM (decoders: g726) (encoders: g726)
  DEAIL. adpcm_g726le         G.726 ADPCM little-endian (decoders: g726le) (encoders: g726le)
@@ -22878,8 +22932,10 @@ Codecs:
  D.A.L. adpcm_ima_hvqm4      ADPCM IMA HVQM4
  D.AIL. adpcm_ima_iss        ADPCM IMA Funcom ISS
  D.AIL. adpcm_ima_magix      ADPCM IMA Magix
+ D.AIL. adpcm_ima_mo         ADPCM IMA MobiClip MO
  D.AIL. adpcm_ima_moflex     ADPCM IMA MobiClip MOFLEX
  D.AIL. adpcm_ima_mtf        ADPCM IMA Capcom's MT Framework
+ D.AIL. adpcm_ima_nds        ADPCM IMA Nintendo DS
  D.AIL. adpcm_ima_oki        ADPCM IMA Dialogic OKI
  D.AIL. adpcm_ima_pda        ADPCM IMA PlayDate
  DEAIL. adpcm_ima_qt         ADPCM IMA QuickTime
@@ -22889,18 +22945,26 @@ Codecs:
  DEAIL. adpcm_ima_wav        ADPCM IMA WAV
  DEAIL. adpcm_ima_ws         ADPCM IMA Westwood
  D.AIL. adpcm_ima_xbox       ADPCM IMA Xbox
+ D.AIL. adpcm_ima_zmusic     ADPCM IMA Z-Music
  DEAIL. adpcm_ms             ADPCM Microsoft
  D.AIL. adpcm_mtaf           ADPCM MTAF
  D.AIL. adpcm_n64            ADPCM Silicon Graphics N64
+ DEAIL. adpcm_ndsp           ADPCM Nintendo DSP
+ DEAIL. adpcm_ndsp_le        ADPCM Nintendo DSP (little-endian)
+ D.AIL. adpcm_ndsp_si        ADPCM Nintendo DSP (sub-interleave 2)
+ D.AIL. adpcm_ndsp_si1       ADPCM Nintendo DSP (sub-interleave 1)
+ D.AIL. adpcm_procyon        ADPCM Procyon
  D.AIL. adpcm_psx            ADPCM Playstation
  D.AIL. adpcm_psxc           ADPCM Playstation C
  D.AIL. adpcm_pt             ADPCM Wwise Platinum
+ D.AIL. adpcm_sanyo          ADPCM Sanyo
  D.AIL. adpcm_sbpro_2        ADPCM Sound Blaster Pro 2-bit
  D.AIL. adpcm_sbpro_3        ADPCM Sound Blaster Pro 2.6-bit
  D.AIL. adpcm_sbpro_4        ADPCM Sound Blaster Pro 4-bit
  DEAIL. adpcm_swf            ADPCM Shockwave Flash
- D.AIL. adpcm_thp            ADPCM Nintendo THP
- D.AIL. adpcm_thp_le         ADPCM Nintendo THP (Little-Endian)
+ D.A.L. adpcm_tantalus       ADPCM Tantalus
+ DEAIL. adpcm_thp            ADPCM Nintendo THP
+ DEAIL. adpcm_thp_le         ADPCM Nintendo THP (Little-Endian)
  D.AIL. adpcm_vima           LucasArts VIMA audio
  D.AIL. adpcm_xa             ADPCM CDROM XA
  D.AIL. adpcm_xmd            ADPCM Konami XMD
@@ -22952,6 +23016,7 @@ Codecs:
  DEAI.S flac                 FLAC (Free Lossless Audio Codec)
  D.AIL. ftr                  FTR Voice
  D.AIL. g719                 G.719
+ D.AIL. g722_1               G.722.1 Annex C
  DEAIL. g723_1               G.723.1
  D.AIL. g728                 G.728
  D.AIL. g729                 G.729
@@ -22997,6 +23062,7 @@ Codecs:
  DEAI.S pcm_f32le            PCM 32-bit floating point little-endian
  DEAI.S pcm_f64be            PCM 64-bit floating point big-endian
  DEAI.S pcm_f64le            PCM 64-bit floating point little-endian
+ D.AI.S pcm_hdmv             PCM signed 16-bit big-endian for HDMV media
  D.AI.S pcm_lxf              PCM signed 20-bit little-endian planar
  DEAIL. pcm_mulaw            PCM mu-law / G.711 mu-law
  DEAI.S pcm_s16be            PCM signed 16-bit big-endian
@@ -23038,6 +23104,7 @@ Codecs:
  D.AI.S shorten              Shorten
  D.AIL. sipr                 RealAudio SIPR / ACELP.NET
  D.AIL. siren                Siren
+ D.AIL. skvorbis             SK Vorbis
  D.AIL. smackaudio           Smacker audio (decoders: smackaud)
  ..AIL. smv                  SMV (Selectable Mode Vocoder)
  D.AIL. sol_dpcm             DPCM Sol
@@ -23057,7 +23124,7 @@ Codecs:
  DEAIL. vorbis               Vorbis (decoders: vorbis libvorbis) (encoders: vorbis libvorbis)
  D.AIL. wady_dpcm            DPCM Marble WADY
  D.AI.S wavarc               Waveform Archiver
- D.AI.. wavesynth            Wave synthesis pseudo-codec
+ ..AI.. wavesynth            Wave synthesis pseudo-codec
  DEAILS wavpack              WavPack
  D.AIL. westwood_snd1        Westwood Audio (SND1) (decoders: ws_snd1)
  D.AI.S wmalossless          Windows Media Audio Lossless
@@ -23077,6 +23144,7 @@ Codecs:
  ..D... otf                  OpenType font
  ..D... scte_35              SCTE 35 Message Queue
  ..D... smpte_2038           SMPTE ST 2038 VANC in MPEG-2 TS
+ ..D... smpte_436m_anc       MXF SMPTE-436M ANC
  ..D... timed_id3            timed ID3 metadata
  ..D... ttf                  TrueType font
  ..S... arib_caption         ARIB STD-B24 caption

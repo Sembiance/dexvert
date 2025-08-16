@@ -6,5 +6,5 @@ export class nokiaPictureMessage extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Nokia_Picture_Message";
 	ext        = [".npm"];
 	magic      = ["Nokia Picture Message bitmap", "deark: npm", /^fmt\/1896( |$)/];
-	converters = ["deark[module:npm][strongMatch]"];
+	converters = ["deark[module:npm][strongMatch]", "wuimg[matchType:magic]"];
 }

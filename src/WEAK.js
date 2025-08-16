@@ -282,6 +282,7 @@ export const WEAK_VALUES =
 	/^ADP \(adp\)$/,
 	/^AGSC Bank \(Metroid Prime 1\/2 GC\) \(agsc\)$/,
 	/^AV1 low overhead OBU \(obu\)$/,
+	/^BNVIB \(Binary NX Vibration\) \(bnvib\)$/,
 	/^CD Graphics \(cdg\)$/,
 	/^CD[AR] \(Compact Disc Audio\) \(cd[ar]\)$/,
 	/^DAT \(Digital Audio Tape\) \(dat\)$/,	// librempeg

@@ -7,5 +7,8 @@ export class gifferQDV extends Format
 	ext        = [".qdv"];
 	magic      = ["deark: qdv", "Qdv :qdv:"];
 	weakMagic  = true;
-	converters = ["deark[module:qdv]", ...["nconvert[format:qdv]", "imageAlchemy", "konvertor"].map(v => `${v}[strongMatch]`)];
+	converters = [
+		"deark[module:qdv]", "wuimg[matchType:magic]",
+		...["nconvert[format:qdv]", "imageAlchemy", "konvertor"].map(v => `${v}[strongMatch]`)
+	];
 }

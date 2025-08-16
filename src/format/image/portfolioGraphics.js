@@ -7,5 +7,5 @@ export class portfolioGraphics extends Format
 	ext        = [".pgf"];
 	magic      = ["deark: pf_pgf (PGF (Portfolio graphics))", "Portfolio Graphic Compressed :pgf:"];
 	fileSize   = 1920;
-	converters = ["deark[module:pf_pgf]", "recoil2png", "nconvert[format:pgf]"];
+	converters = ["deark[module:pf_pgf]", "recoil2png", "nconvert[format:pgf]", "wuimg[matchType:magic]"];
 }

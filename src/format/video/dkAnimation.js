@@ -6,6 +6,6 @@ export class dkAnimation extends Format
 	website        = "https://wiki.multimedia.cx/index.php/DK_Animation";
 	ext            = [".ani"];
 	forbidExtMatch = true;
-	magic          = ["DK Multimedia Animation", "Dorling Kindersley Animation"];
+	magic          = ["DK Multimedia Animation", "Dorling Kindersley Animation", "DK Animation (dkanim)"];
 	converters     = ["na_game_tool[format:dkanim]"];
 }

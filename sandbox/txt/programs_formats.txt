@@ -20559,7 +20559,7 @@ WebP (*.webp)
 
 
 >>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
-Known formats: 121
+Known formats: 135
 aipd:	National Instruments AIPD (uncertain color interpretation)
 aliaspix:	AliasPIX and Vivid
 amibios:	AMI BIOS Logo
@@ -20567,22 +20567,24 @@ at6p:	999 AT6P
 avif:	AV1 Image File Format
 avs:	Stardent AVS X
 bld:	MegaPaint
-bmp:	Microsoft Bitmap
-bmz:	GSD engine BMZ
+bmp:	Microsoft Bitmap, Jigsaw Puzzle image
+bmz:	GSD engine compressed BMP. Requires DIB
 bob:	Bob raytracer raster
 bru:	Degas Brush
 bsi:	Bethesda BSI texture (IFHD, BSIF)
 c:	C code formats: DEGAS Elite Icon, XBM X10 and X11
-c64:	Art Studio (OCP), Artist64, Blazing Paddles, CDU-Paint, Cheese, Create With Garfield, Doodle (raw & compressed), Hi-Eddi, Image System, Interpaint, KoalaPainter (raw & compressed), Picasso 64, Runpaint, Saracen Paint, Vidcom 64
+c64:	Hires and Multicolor formats: AFLI editor, Art Studio (OCP), Artist64, Blazing Paddles, CDU-Paint, Cheese, Create With Garfield, Doodle (raw & compressed), Faces Painter, FLI Designer, Hi-Eddi, HiPic Creator, HiRes Editor, Hires FLI (HFC), Image System, Interpaint, KoalaPainter (raw & compressed), Picasso 64, Runpaint, Saracen Paint, Vidcom 64, probably others by accident
 cbg:	BGI/Ethornell CompressedBG (v1)
 chky:	IFF Chunky
+cisrle:	CompuServe RLE (CompuServe Information Service)
 ckiss:	Cherry KiSS CEL
 clm:	IDES/Fairytale PC-98 thumbnail? (no palette support)
 coke:	COKE (Atari Falcon)
+crg:	Calamus Raster Graphic
 da4:	PaintShop (Atari ST)
 dali:	Dali uncompressed
 dcx:	Multi-image PCX
-degas:	DEGAS and DEGAS Elite
+degas:	DEGAS, DEGAS Elite, PaintPro
 dib:	Microsoft DIB
 doo:	Atari Doodle
 dpx:	Digital Picture Exchange
@@ -20610,15 +20612,16 @@ hpicon:	HP Palmtop Icon
 ico:	Microsoft Icon
 idsp:	id Software Sprite (Quake, Half-Life, and 32-bit variants)
 iim:	InShape IIM
-ilbm:	Interleaved Bitmap (ILBM and PBM) (Extra Half-Brite, HAM, color cycling)
+ilbm:	Interleaved Bitmap & Co.: ILBM, PBM, ACBM, RGB8, RGBN and Mean Streets MLDF.
 imc:	Signum! IMC
+imgscan:	IMG Scan
 indy:	IndyPaint
 j2k:	JPEG 2000 codestream
 jam:	Aladdin JAM format
 jbig:	JBIG
 jbig2:	JBIG2
 jp2:	JPEG 2000
-jpeg:	JPEG, MPO
+jpeg:	JPEG, MPO, Esm Software PIX, Ricoh J6I
 jpegls:	JPEG LS
 jpegxl:	JPEG XL
 kips:	IBM KIPS (no palette)
@@ -20633,11 +20636,15 @@ maki:	MAKIchan (MAKI01)
 megapat:	MegaPaint Pattern
 msx:	MSX-BASIC dump, Graph Saurus
 nlm:	Nokia Logo Manager
+nol:	Nokia Operator Logo and Nokia Group Graphics (NOL/NGG)
+npm:	Nokia Picture Message
+nsl:	Nokia Startup Logo
 olpc565:	OLPC 565 boot graphic
 ota:	Over The Air bitmap (uncompliant)
 pcf:	PCF bitmap font
-pcx:	PC Paintbrush PCX (all versions, plus CGA mode)
+pcx:	PC Paintbrush PCX (all versions, plus CGA mode), Word for DOS screen capture
 pdt:	RealLive engine PDT10 and PDT11
+pgf:	Portfolio Graphics uncompressed
 pgx:	Glib2 engine image
 pi:	Yanagisawa's Pi
 pic:	Yanagisawa's PIC
@@ -20646,14 +20653,17 @@ piccel:	Autodesk Animator PIC/CEL
 pictor:	PCPaint PICtor
 pictris:	Pictris
 pim:	SIFF PIM sprite and animation (first frame only)
-png:	Portable Network Graphics
+png:	Portable Network Graphics, Malie engine MGF
 pnm:	PNM extended family (PNM, PAM, PFM, PHM, Xv Thumbnail, MTV, JPEG2000-PGX)
 prt:	Kid engine image
 px:	Leaf engine image
 pxy:	Eclipse Proxy
+pzl:	X11 Puzzle
 q4:	MAJYO's Q4 (XLD4)
+qdv:	Giffer QDV
 qoi:	QuiteOK image
 raw:	Raw camera formats
+sgf:	Somera Graphic Format
 sgi:	Silicon Graphics Image
 sir0:	999 SIR0 sprites
 sixel:	SIXEL terminal graphics
@@ -20666,13 +20676,17 @@ tbn:	Croteam Texture
 tcp:	Atari Rembrandt
 tga:	Truevision TGA (TARGA)
 tiff:	Tag Image File Format, BigTIFF
-tim:	PlayStation image
+tim:	PlayStation image, multiple palettes
 tiny:	Tiny Stuff
 tlg:	KiriKiri engine image (v5)
 tre:	Spooky Sprites Run-Length Encoded
 trp:	Spooky Sprites uncompressed
 trs:	Spooky Sprites sprite
+trs80clp:	TRS-80 Clip Art
+trs80hr:	TRS-80 High Resolution
+trs80max:	TRS-80 MAX
 txf:	TexFont Texture Mapped Font
+utahrle:	Utah RLE
 wbm:	Wild-Bug engine image
 wbmp:	Wireless Bitmap
 webp:	WebP
@@ -20682,8 +20696,8 @@ xcursor:	X11 cursor
 xwd:	X11 Window Dump
 xyz:	RPG Maker image
 
-Known extensions: 265
-565, a64, aas, abm, als, apd, arw, avif, avifs, avs, bie, bl1, bld, bmp, bmp24, bmz, bob, bp, bpl, bru, bsi, bw, cdu, cel, che, ciff, clm, cps, cr2, cur, cwg, da4, dat, dcr, dcx, dd, ddl, dib, dit, dmp, dng, doo, dpx, dt, dt2, dta, erf, eza, ff, flif, fnt, ftc, g00, ge5, ge7, ge8, gg, gif, gif87, gif89, gig, god, gp4, gpc, grf, grp, gxa, hed, heic, heics, heif, heifs, hel, hg3, hgr, hif, hir, hpi, icn, ico, icon, iff, iim, ilbm, im1, im24, im32, im4, im8, imc, img, ims, ip64h, iph, ipt, ish, ism, j2c, j2k, jam, jb2, jbg, jbig, jfi, jfif, jhc, jif, jj, jls, jp2, jpc, jpe, jpeg, jpg, jph, jps, jxl, k25, kdc, kla, koa, koala, kps, kro, kyg, lbm, lerc, lerc1, lerc2, lmp, lrc, lux, lwi, lzs, mac, mag, max, mbfavs, mki, mpo, mtv, nef, nlm, nrw, ocp, orf, otb, p2, p64, p7, pac, pam, pat, pbm, pc1, pc2, pc3, pcc, pcf, pcx, pdt, pef, pfm, pgm, pgx, phm, pi, pi1, pi2, pi3, pic, pim, pix, png, pnm, pntg, ppm, prt, puf, px, pxy, q4, qoi, raf, ras, raw, rgb, rgba, rpm, rw2, rwl, s16, s17, s1a, s1c, sah, sal, sar, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sca, scc, sch, scl, sd0, sd1, sd2, sff, sgi, six, sixel, spr, spr32, spu, sr5, sr6, sr7, sr8, srs, stj, suh, sul, sun, svg, svgz, tbn, tcp, tex, tg1, tga, thm, tif, tiff, tile, tim, tlg, tmsk, tn1, tn2, tn3, tn4, tn5, tn6, tny, tre, trp, trs, tru, txf, vid, wbm, wbmp, webp, wia, wig, x, xbm, xwd, xyz, yjk
+Known extensions: 309
+565, a64, aas, abm, acbm, afl, als, apd, art, arw, avif, avifs, avs, bie, bl1, bl2, bl3, bld, bmp, bmp24, bmz, bob, bp, bpl, bru, bsi, bw, cdu, cel, che, ciff, clm, clp, cm, cps, cr2, cr3, crg, crw, cur, cwg, da4, dat, dcr, dcx, dd, ddl, dib, dit, dmp, dng, doo, dpx, dt, dt2, dta, erf, eza, fcp, fcs, fd2, ff, fli, flif, fnt, fpt, ftc, g00, g3n, ge5, ge7, ge8, gg, gif, gif87, gif89, gig, god, gp4, gpc, grf, grp, gxa, hcp, hed, heic, heics, heif, heifs, hel, het, hfc, hg3, hgr, hif, hir, hpc, hpi, hr, icn, ico, icon, iff, iim, ilbm, im1, im24, im32, im4, im8, imc, img, ims, ip64h, iph, ipt, ish, ism, j2c, j2k, j6i, jam, jb2, jbg, jbig, jfi, jfif, jhc, jif, jig, jj, jls, jp2, jpc, jpe, jpeg, jpg, jph, jps, jxl, k25, kdc, kla, koa, koala, kps, kro, kyg, lbm, lerc, lerc1, lerc2, lmp, lrc, lux, lwi, lzs, mac, mag, max, mbfavs, mgf, mki, mld, mpo, mrw, mtv, mwg, nef, ngg, nlm, no, nol, npm, nrw, nsl, ocp, orf, otb, p2, p41, p64, p7, pac, pam, pat, pbm, pc1, pc2, pc3, pcc, pcf, pcx, pdt, pef, pfm, pgf, pgm, pgx, phm, pi, pi1, pi2, pi3, pic, pim, pix, png, pnm, pntg, ppm, prt, puf, px, pxy, pzl, q4, qdv, qoi, raf, ras, raw, rgb, rgba, rle, rpm, rw2, rwh, rwl, s16, s17, s1a, s1c, sah, sal, sar, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sca, scc, sch, scl, scr, sd0, sd1, sd2, sff, sgf, sgi, shp, six, sixel, spr, spr32, spu, sr2, sr5, sr6, sr7, sr8, srf, srs, stj, suh, sul, sun, svg, svgz, tbn, tcp, tex, tg1, tga, thm, tif, tiff, tile, tim, tlg, tmsk, tn1, tn2, tn3, tn4, tn5, tn6, tny, tre, trp, trs, tru, txf, vic, vid, wbm, wbmp, webp, wia, wig, x, xbm, xwd, xyz, yjk
 
 
 >>> NConvert (wine)

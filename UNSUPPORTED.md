@@ -5,7 +5,7 @@ Others are not converted because it was deemed low priority, or there are no kno
 
 
 
-## Archive (288)
+## Archive (289)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -166,6 +166,7 @@ Family/Format | Name | Extensions | Notes
 [archive/moofDiskImage](https://discmaster.textfiles.com/search?format=moofDiskImage) | MOOF Macintosh floppy disk image | .moof | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moofDiskImage/)
 [archive/moonbaseCommanderGameDataArchive](https://discmaster.textfiles.com/search?format=moonbaseCommanderGameDataArchive) | Moonbase Commander game data archive | .cmp | 
 [archive/mpq](https://discmaster.textfiles.com/search?format=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
+[archive/mozillaARchive](https://discmaster.textfiles.com/search?format=mozillaARchive) | Mozilla ARchive | .mar | 
 [archive/mpressPacked](https://discmaster.textfiles.com/search?format=mpressPacked) | MPRESS Packed | .exe | 
 [archive/mskn2Archive](https://discmaster.textfiles.com/search?format=mskn2Archive) | MSKN 2 Archive | .mskn | 
 [archive/msxCassetteTape](https://discmaster.textfiles.com/search?format=msxCassetteTape) | MSX Cassette Tape | .cas | 
@@ -767,7 +768,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (195)
+## Image (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -809,7 +810,6 @@ Family/Format | Name | Extensions | Notes
 [image/chasysDrawIESDrawing](https://discmaster.textfiles.com/search?format=chasysDrawIESDrawing) | Chasys Draw IES drawing | .cd5 | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?format=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
 [image/comicSetterProject](https://discmaster.textfiles.com/search?format=comicSetterProject) | Comic Setter project |  | 
-[image/commandSimulationsGameGraphic](https://discmaster.textfiles.com/search?format=commandSimulationsGameGraphic) | Command Simulations game graphic |  | I tried reverseing chunk names (sandbox/legacy/commandSimulation2iff.js) but it didn't work (probably more sub-chunk reversals)
 [image/condensedEmbroidery](https://discmaster.textfiles.com/search?format=condensedEmbroidery) | Condensed embroidery format | .cnd | 
 [image/continuousEdge](https://discmaster.textfiles.com/search?format=continuousEdge) | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://sembiance.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 [image/corel10Texture](https://discmaster.textfiles.com/search?format=corel10Texture) | Corel 10 Texture | .tex | 
@@ -866,7 +866,6 @@ Family/Format | Name | Extensions | Notes
 [image/introCAD](https://discmaster.textfiles.com/search?format=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
-[image/jingTaoPicFormatBitmap](https://discmaster.textfiles.com/search?format=jingTaoPicFormatBitmap) | Jing Tao pic format bitmap | .ssl | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?format=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
@@ -880,7 +879,6 @@ Family/Format | Name | Extensions | Notes
 [image/maxonCADDrawing](https://discmaster.textfiles.com/search?format=maxonCADDrawing) | MaconCAD Drawing | .mc2 | [1 sample file](https://sembiance.com/fileFormatSamples/image/maxonCADDrawing/)
 [image/madStudio](https://discmaster.textfiles.com/search?format=madStudio) | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [12 sample files](https://sembiance.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
 [image/magneticGraphics](https://discmaster.textfiles.com/search?format=magneticGraphics) | Magnetic Graphics | .gfx | 
-[image/malieGFBitmap](https://discmaster.textfiles.com/search?format=malieGFBitmap) | MalieGF Bitmap | .mgf | [9 sample files](https://sembiance.com/fileFormatSamples/image/malieGFBitmap/)
 [image/mangaClipStudioPage](https://discmaster.textfiles.com/search?format=mangaClipStudioPage) | Manga/Clip Studio Page | .cpg | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?format=megaPaintVector) | MegaPaint Vector | .vek | 
 [image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -907,6 +905,7 @@ Family/Format | Name | Extensions | Notes
 [image/pcrImage](https://discmaster.textfiles.com/search?format=pcrImage) | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://sembiance.com/fileFormatSamples/image/pcrImage/)
 [image/petsciiSeq](https://discmaster.textfiles.com/search?format=petsciiSeq) | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://sembiance.com/fileFormatSamples/image/petsciiSeq/) - Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
 [image/phoneToolsInternalGraphic](https://discmaster.textfiles.com/search?format=phoneToolsInternalGraphic) | PhoneTools Internal Graphic Format | .dgr | 
+[image/photoFiltreImageBitmap](https://discmaster.textfiles.com/search?format=photoFiltreImageBitmap) | PhotoFiltre Image bitmap | .pfi | 
 [image/pixelPerfect](https://discmaster.textfiles.com/search?format=pixelPerfect) | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [1 sample file](https://sembiance.com/fileFormatSamples/image/pixelPerfect/) - Can't reliably detect this format and recoil2png & view64 will convert almost any file you give it into garbage
 [image/pixelmatorGraphic](https://discmaster.textfiles.com/search?format=pixelmatorGraphic) | Pixelmator graphic | .pxm | 
 [image/pixie](https://discmaster.textfiles.com/search?format=pixie) | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)) | .pxi .pxs | [2 sample files](https://sembiance.com/fileFormatSamples/image/pixie/)
@@ -937,7 +936,6 @@ Family/Format | Name | Extensions | Notes
 [image/signumCDI](https://discmaster.textfiles.com/search?format=signumCDI) | Signum! CDI Image | .cdi .c01 | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?format=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 [image/slpImage](https://discmaster.textfiles.com/search?format=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
-[image/someraGraphicFormat](https://discmaster.textfiles.com/search?format=someraGraphicFormat) | Somera Graphic Format | .sgf | 
 [image/spriteArtistSprite](https://discmaster.textfiles.com/search?format=spriteArtistSprite) | Sprite Artist Sprite | .spr | 
 [image/stCADDrawing](https://discmaster.textfiles.com/search?format=stCADDrawing) | ST-CAD Drawing | .dvg .ptp | 
 [image/superFlowDiagram](https://discmaster.textfiles.com/search?format=superFlowDiagram) | SuperFlow diagram | .sf1 | 
@@ -1146,7 +1144,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,490)
+## Other (2,492)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1438,6 +1436,7 @@ Family/Format | Name | Extensions | Notes
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?format=babylonGlossary) | Babylon Glossary | .bgl | 
 [other/backItPreset](https://discmaster.textfiles.com/search?format=backItPreset) | Back-It Preset | .prs | 
+[other/balabolkaSkin](https://discmaster.textfiles.com/search?format=balabolkaSkin) | Balabolka Skin | .asz | 
 [other/bananaAccountingData](https://discmaster.textfiles.com/search?format=bananaAccountingData) | Banana accounting data | .ac2 | 
 [other/bandaiTamagochiGameData](https://discmaster.textfiles.com/search?format=bandaiTamagochiGameData) | Bandai Tamagochi game data | .bin | 
 [other/bankStreetWriterDictionary](https://discmaster.textfiles.com/search?format=bankStreetWriterDictionary) | Bank Street Writer dictionary | .bsw | 
@@ -2813,6 +2812,7 @@ Family/Format | Name | Extensions | Notes
 [other/pgaTourVideoAnimation](https://discmaster.textfiles.com/search?format=pgaTourVideoAnimation) | PGA Tour Video Animation file format | .van | 
 [other/pgpKeyRing](https://discmaster.textfiles.com/search?format=pgpKeyRing) | PGP Key Ring | .key .pgp | 
 [other/pgpRSAEncryptedSessionKey](https://discmaster.textfiles.com/search?format=pgpRSAEncryptedSessionKey) | PGP RSA encrypted session key | .pgp | 
+[other/pgpSig](https://discmaster.textfiles.com/search?format=pgpSig) | PGP sig | .sig | 
 [other/pharaohsAscentLevelData](https://discmaster.textfiles.com/search?format=pharaohsAscentLevelData) | Pharaoh's Ascent Level data | .lvl | 
 [other/philipsDrumSystemData](https://discmaster.textfiles.com/search?format=philipsDrumSystemData) | Philips Drum System data | .drm .dsq | 
 [other/philipsMusicCreatorData](https://discmaster.textfiles.com/search?format=philipsMusicCreatorData) | Philips Music Creator data | .spt .seq .rlt .voc .acc .ldr .sam | 

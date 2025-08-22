@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class corelClipart extends Format
@@ -7,5 +8,6 @@ export class corelClipart extends Format
 	ext        = [".ccx", ".cdr"];
 	priority   = this.PRIORITY.HIGH;	// this ensures we rank higher than image/cdr for things like sample/image/corelClipart/homer1.cdr
 	magic      = ["Corel Clipart", "RIFF Datei: unbekannter Typ 'CDRX'", "Generic RIFF file CDRX", "deark: corel_ccx", /^RIFF.+Corel Clipart/];
+	idCheck    = inputFile => inputFile.size<xu.MB*100;	// if huge file, probably not a CDR file
 	converters = ["uniconvertor[autoCrop]", "deark[module:corel_ccx][renameOut] -> dexvert[asFormat:image/cmx]", "nconvert[format:cmx]"];
 }

@@ -1,4 +1,4 @@
-# Supported File Formats (3,288)
+# Supported File Formats (3,292)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -94,7 +94,7 @@ archive | [ChiefLZ LZA Archive](http://fileformats.archiveteam.org/wiki/ChiefLZ)
 archive | [ChiefLZ LZA Compressed](http://fileformats.archiveteam.org/wiki/ChiefLZ) | _ | [lza](https://www.sac.sk/download/pack/lza101.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/chiefLZ/)
 archive | CI GAMES game data archive | .dpk | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/ciGAMESGameDataArchive/)
 archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/cso/)
-archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+source/cloop/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/cloopImage/)
+archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+source/cloop/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/cloopImage/)
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
 archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
@@ -925,7 +925,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (711)
+## Image (713)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1158,6 +1158,7 @@ image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLI
 image | [FreeHand Drawing](http://fileformats.archiveteam.org/wiki/FreeHand) | .fh .fh2 .fh3 .fh4 .fh5 .fh6 .fh7 .fh8 .fh9 .fh10 | [soffice](https://www.libreoffice.org) [scribus](https://www.scribus.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/freeHandDrawing/)
 image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/Fujifilm_RAF) | .raf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://sembiance.com/fileFormatSamples/image/raf/)
 image | [Fullscreen Construction Kit](http://fileformats.archiveteam.org/wiki/Fullscreen_Construction_Kit) | .kid | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/kid/)
+image | Fun Photor | .fpr | [nconvert](https://www.xnview.com/en/nconvert/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/funPhotor/)
 image | [Fun With Art](http://fileformats.archiveteam.org/wiki/Fun_with_Art) | .fwa | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/fwa/)
 image | [Funny Paint](http://fileformats.archiveteam.org/wiki/Funny_Paint) | .fun | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/image/funnyPaint/)
 image | [Funpaint](http://fileformats.archiveteam.org/wiki/Funpaint) | .fp2 .fun | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/funpaint/)
@@ -1501,7 +1502,7 @@ image | [Sketch-PadDles](http://fileformats.archiveteam.org/wiki/Sketch-PadDles)
 image | SkyRoads LZS Graphics | .lzs | [wuimg](https://codeberg.org/kaleido/wuimg) | [15 sample files](https://sembiance.com/fileFormatSamples/image/skyRoadsLZS/)
 image | [SlideShow for VBXE](http://fileformats.archiveteam.org/wiki/SlideShow_for_VBXE) | .dap | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/dap/)
 image | [SmartDraw Drawing](http://fileformats.archiveteam.org/wiki/SmartDraw) | .sdr | [smartDraw6](https://archive.org/details/twilight-dvd069) | [11 sample files](https://sembiance.com/fileFormatSamples/image/smartDrawDrawing/)
-image | SmartDraw Template | .sdt .sdr | [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/smartDrawTemplate/)
+image | SmartDraw Template | .sdt .sdr | [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/smartDrawTemplate/)
 image | SmoothMove Pan Viewer Image | .pan | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/smoothMovePanViewerImage/)
 image | Softel Teletext | .ep1 | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/softelText/)
 image | [Softimage PIC Bitmap](http://fileformats.archiveteam.org/wiki/Softimage_PIC) | .soft .pic | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/softimage/)
@@ -1576,12 +1577,13 @@ image | Ulead Pattern | .pst | [nconvert](https://www.xnview.com/en/nconvert/) |
 image | [Utah RLE](http://fileformats.archiveteam.org/wiki/Utah_RLE) | .rle | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [wuimg](https://codeberg.org/kaleido/wuimg) [convert](https://www.imagemagick.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/utahRLE/)
 image | [Valve Texture Format](http://fileformats.archiveteam.org/wiki/Valve_Texture_Format) | .vtf | [abydosconvert](https://github.com/Sembiance/abydosconvert) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/image/vtf/)
 image | [VDC BitMap](http://fileformats.archiveteam.org/wiki/VBM_(VDC_BitMap)) | .vbm .bm | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [19 sample files](https://sembiance.com/fileFormatSamples/image/vbm/)
-image | Venta Fax | .vfx | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/ventaFax/)
+image | Venta Fax | .vfx | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ventaFax/)
 image | [VertiZontal Interlacing](http://fileformats.archiveteam.org/wiki/VertiZontal_Interlacing) | .vzi | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/vzi/)
 image | [Very Ordinary Rendering Toolkit PIX](http://fileformats.archiveteam.org/wiki/VORT_file) | .vort .pix | [vort2ppm](https://ftp.gwdg.de/pub/misc/grafik/vogl/vort.tar.gz) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/vortPIX/)
 image | [Vidcom 64](http://fileformats.archiveteam.org/wiki/Vidcom_64) | .vid | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/vidcom64/)
 image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/vicar/)
 image | [Vidig Paint](http://fileformats.archiveteam.org/wiki/Vidig_Paint) | .rap | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/rap/)
+image | VIPS Image | .v | [convert](https://www.imagemagick.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/vips/)
 image | Vue D'Esprit VOB | .vob .mat | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/vueDEspritVOB/)
 image | WebArt Designer graphics | .mif | [foremost](http://foremost.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/webArtDesignerGraphics/)
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/WebP) | .webp |  | [8 sample files](https://sembiance.com/fileFormatSamples/image/webp/)
@@ -2157,7 +2159,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,076)
+## Text (1,078)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2182,7 +2184,7 @@ text | Adobe Download Manager | .aom |  | [2 sample files](https://sembiance.com
 text | [Adobe Font List](http://fileformats.archiveteam.org/wiki/Adobe_Font_List) | .lst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeFontList/)
 text | Adobe Illustrator Action | .aia |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeIllustratorAction/)
 text | Adobe InDesign printing instructions report |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobeInDesignPrintingInstructionsReport/)
-text | Adobe Photoshop Lightroom template | .agtemplate |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/adobePhotoshopLightroomTemplate/)
+text | Adobe Photoshop Lightroom template | .agtemplate |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/adobePhotoshopLightroomTemplate/)
 text | Adobe Portable Document Catalog Index | .pdx |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobePortableDocumentCatalogIndex/)
 text | Advanced Gravis Phoenix configuration | .phx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/advancedGravisPhoenixConfiguration/)
 text | Advanced Stream Redirector | .asx |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/advancedStreamRedirector/)
@@ -2299,8 +2301,9 @@ text | Byline Variables | .var |  | [1 sample file](https://sembiance.com/fileFo
 text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/c/)
 text | Cabal info | .cabal |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cabalInfo/)
 text | CableNut Custom Settings | .ccs |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/cableNutCustomSettings/)
-text | Cabri 3D Figure | .fig |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DFigure/)
-text | Cabri 3D Language | .cgl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cabri3DLanguage/)
+text | Cabri 3D Figure | .fig |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DFigure/)
+text | Cabri 3D Language | .cgl |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DLanguage/)
+text | Cabri 3D Macro | .mac |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DMacro/)
 text | Cache Directory Tagging Standard | .tag |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cacheDirectoryTaggingStandard/)
 text | CADSTAR data (generic) | .rgf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cadstarData/)
 text | Calamus ASCII Translation Table | .att |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/calamusASCIITranslationTable/)
@@ -2635,7 +2638,7 @@ text | LCOV coverage tracefile | .info |  | [1 sample file](https://sembiance.co
 text | LD Linker Script | .lds .xu .xn .xs .xbn .xr .x |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/ldLinkerScript/)
 text | LDAP Data Interchange Format | .ldif .master |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/ldapDataInterchangeFormat/)
 text | Lex Description | .l .y |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/lexDescription/)
-text | Libery BASIC tokenized source | .tkn |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/liberyBASICTokenizedSource/)
+text | Libery BASIC tokenized source | .tkn |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/liberyBASICTokenizedSource/)
 text | LibGuide configuration | .dvc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/libGuideConfiguration/)
 text | LibreOffice Gallery translations | .str |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/libreOfficeGalleryTranslations/)
 text | libtool library control info | .la |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/libtoolLibraryControlInfo/)
@@ -2714,6 +2717,7 @@ text | Microsoft eMbedded Visual Tools Workspace | .vcw |  | [11 sample files](h
 text | Microsoft Front Page Server Extension Configuration |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microsoftFrontPageServerExtensionConfig/)
 text | Microsoft Help compiler Project | .hpj |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/microsoftHelpCompilerProject/)
 text | Microsoft IIS log | .log |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/microsoftIISLog/)
+text | Microsoft Keyboard Layout Creator source | .klc |  | 
 text | Microsoft Map Data | .map |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/microsoftMapData/)
 text | [Microsoft Object Description Language](http://fileformats.archiveteam.org/wiki/ODL_(Microsoft_Object_Description_Language)) | .odl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftObjectDescriptionLanguage/)
 text | Microsoft Programmer's Workbench Status | .sts |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftProgrammersWorkbenchStatus/)
@@ -2877,7 +2881,7 @@ text | [Portable Gaming Notation](http://fileformats.archiveteam.org/wiki/PGN) |
 text | Poser character rigging | .cr2 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poserCharacterRigging/)
 text | Poser scene | .pz3 |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/poserScene/)
 text | Post-It Software Note Template |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/postItSoftwareNoteTemplate/)
-text | PostgreSQL database dump | .sql |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
+text | PostgreSQL database dump | .sql |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ppd/)
 text | Poswiz! Report | .rpt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poswizReport/)
 text | Power Translator document | .mtp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/powerTranslatorDocument/)
@@ -2945,7 +2949,7 @@ text | ReDIF template | .rdf .redif |  | [11 sample files](https://sembiance.com
 text | Reflections/Monzoom script | .skr .men |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/reflectionsMonzoomScript/)
 text | RegCleaner Language File | .rlg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/regCleanerLanguageFile/)
 text | RemObjects Definition Language | .rodl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/remObjectsDefinitionLanguage/)
-text | Remote Desktop Connection Settings | .rdp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/remoteDesktopConnectionSettings/)
+text | Remote Desktop Connection Settings | .rdp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/remoteDesktopConnectionSettings/)
 text | RemoteKeys profile | .rkp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/remoteKeysProfile/)
 text | Renderize Project | .bin .eye |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/renderizeProject/)
 text | Renderman compiled Shader object | .slo |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/rendermanCompiledShaderObject/)

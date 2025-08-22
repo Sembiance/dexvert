@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,730)
+# Unsupported File Formats (3,733)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (289)
+## Archive (290)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -267,6 +267,7 @@ Family/Format | Name | Extensions | Notes
 [archive/trzZipCompressed](https://discmaster.textfiles.com/search?format=trzZipCompressed) | TRCZip compressed | .trc | 
 [archive/turboBatPacked](https://discmaster.textfiles.com/search?format=turboBatPacked) | TurboBat Packed | .com | 
 [archive/ubiFSilesystem](https://discmaster.textfiles.com/search?format=ubiFSilesystem) | UBIFS filesystem | .img | 
+[archive/uclCompressedData](https://discmaster.textfiles.com/search?format=uclCompressedData) | UCL compressed data | .ucl | 
 [archive/ufs2Filesystem](https://discmaster.textfiles.com/search?format=ufs2Filesystem) | UFS2 file system | .img | 
 [archive/unityAssetBundle](https://discmaster.textfiles.com/search?format=unityAssetBundle) | Unity asset bundle | .unity3d | 
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?format=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
@@ -1144,7 +1145,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,492)
+## Other (2,494)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1232,6 +1233,7 @@ Family/Format | Name | Extensions | Notes
 [other/adobePremierePeakWaveform](https://discmaster.textfiles.com/search?format=adobePremierePeakWaveform) | Adobe Premiere Peak Waveform | .pek | 
 [other/adobePremiereProject](https://discmaster.textfiles.com/search?format=adobePremiereProject) | Adobe Premiere Project | .ppj | 
 [other/adobeSetupInstallationFile](https://discmaster.textfiles.com/search?format=adobeSetupInstallationFile) | Adobe Setup Installation File | .sif .setupfile1 | 
+[other/adobeSINGGlyphlet](https://discmaster.textfiles.com/search?format=adobeSINGGlyphlet) | Adobe SING Glyphlet | .gai | 
 [other/adobeSwatchExchangeFile](https://discmaster.textfiles.com/search?format=adobeSwatchExchangeFile) | Adobe Swatch Exchange File | .act .ase .asef | 
 [other/adobeTypeFontInfo](https://discmaster.textfiles.com/search?format=adobeTypeFontInfo) | Adobe Type Manager Font Information | .inf | 
 [other/adoragePreferences](https://discmaster.textfiles.com/search?format=adoragePreferences) | Adorage preferences |  | 
@@ -2351,6 +2353,7 @@ Family/Format | Name | Extensions | Notes
 [other/liveMotionProject](https://discmaster.textfiles.com/search?format=liveMotionProject) | LiveMotion project | .liv | 
 [other/livePixProject](https://discmaster.textfiles.com/search?format=livePixProject) | LivePix project | .lpi | 
 [other/liveStageProProject](https://discmaster.textfiles.com/search?format=liveStageProProject) | LiveStage Pro project | .lsd | 
+[other/liveSwifMovie](https://discmaster.textfiles.com/search?format=liveSwifMovie) | LiveSwif Movie | .lvm | 
 [other/llvmIRBitcode](https://discmaster.textfiles.com/search?format=llvmIRBitcode) | LLVM IR Bitcode | .bc | 
 [other/logicSimCircuit](https://discmaster.textfiles.com/search?format=logicSimCircuit) | LogicSim Circuit |  | 
 [other/logitechModula2LoadableSymbols](https://discmaster.textfiles.com/search?format=logitechModula2LoadableSymbols) | Logitech Modula-2 Loadable Symbols | .sym | 

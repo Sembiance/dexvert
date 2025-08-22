@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class cdr extends Format
@@ -10,6 +11,7 @@ export class cdr extends Format
 		/^Generic RIFF file CDR[5 ]$/, "deark: cdr_wl (CorelDRAW (WL format))", "Corel Draw bitmap :cdr:",
 		/^Corel Draw \d Templatedatei \(CDT\)/, /^RIFF (little-endian) data, Corel Draw Picture/, /RIFF Datei: unbekannter Typ 'CDR[ \d]'/, /^Corel Draw Picture, version \d\.0/, /^fmt\/(427|428|464|465|466|1925|1926)( |$)/, /^x-fmt\/(29|31|36|291|292|374|375|378|379)( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => ["CDR ", "CDT6", "CDR6", "CDR7", "CDR8"].includes(macFileType) && macFileCreator==="Cdrw";
+	idCheck        = inputFile => inputFile.size<xu.MB*100;	// if huge file, probably not a CDR file
 	converters     = [
 		// vector
 		"scribus",

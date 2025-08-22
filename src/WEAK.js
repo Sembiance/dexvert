@@ -251,6 +251,7 @@ export const WEAK_VALUES =
 	/^ZZT World$/,
 
 	// disktype
+	/^[A-Z\d]+:\.html$/,
 	/^Amiga AFS file system Type "AFS\\0"$/,
 	/^Amiga Kickstart disk Type "KICK"$/,
 	/^Amiga Smart File System Type "SFS\\0"$/,

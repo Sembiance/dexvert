@@ -28,6 +28,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/aaruDiskImage",
 	"archive/americanConquest2GameArchvie",
 	"archive/cdi",
+	"archive/cloopImage",
 	"archive/haemimontGamesADGameDataArchive",
 	"archive/hemeraThumbnailsArchive",
 	"archive/iso",
@@ -126,6 +127,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"other/novellErrorLibrarian",
 	"other/qseqProject",
 	"other/quickPascalUnit",
+	"text/makeselfSFXCompressedArchive",
 	"text/neoBookDocument",
 	"text/neoPaintHelp",
 

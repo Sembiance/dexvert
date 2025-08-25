@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,733)
+# Unsupported File Formats (3,740)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1145,7 +1145,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,494)
+## Other (2,499)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1240,6 +1240,7 @@ Family/Format | Name | Extensions | Notes
 [other/adrenalineRushHourGameData](https://discmaster.textfiles.com/search?format=adrenalineRushHourGameData) | Adrenaline Rush Hour game data | .bin | 
 [other/adriftTextAdventure](https://discmaster.textfiles.com/search?format=adriftTextAdventure) | ADRIFT Text Adventure | .taf | 
 [other/advancedCalculatorSpreadsheet](https://discmaster.textfiles.com/search?format=advancedCalculatorSpreadsheet) | Advanced Calculator spreadsheet | .calc | 
+[other/advancedCivilizationSavedGame](https://discmaster.textfiles.com/search?format=advancedCivilizationSavedGame) | Advanced Civilization saved game | .dat | 
 [other/advancedLayouterModel](https://discmaster.textfiles.com/search?format=advancedLayouterModel) | Advanced Layouter model | .mus | 
 [other/advancedLayouterProject](https://discmaster.textfiles.com/search?format=advancedLayouterProject) | Advanced Layouter project | .lay | 
 [other/advancedStrategicCommandMap](https://discmaster.textfiles.com/search?format=advancedStrategicCommandMap) | Advanced Strategic Command Map | .map | 
@@ -1944,6 +1945,7 @@ Family/Format | Name | Extensions | Notes
 [other/extraForWindowsSmartpadDefinition](https://discmaster.textfiles.com/search?format=extraForWindowsSmartpadDefinition) | Extra! for Windows smartpad definition | .ewp | 
 [other/extraForWindowsSnapShot](https://discmaster.textfiles.com/search?format=extraForWindowsSnapShot) | Extra! for Windows SnapShot | .pss | 
 [other/f1gpEdData](https://discmaster.textfiles.com/search?format=f1gpEdData) | F1GP-Ed Data | .events .settings | 
+[other/fableSaveGame](https://discmaster.textfiles.com/search?format=fableSaveGame) | Fable save game | .sav | 
 [other/fabricDesign](https://discmaster.textfiles.com/search?format=fabricDesign) | Fabric design | .fab | 
 [other/faceGenBaseMesh](https://discmaster.textfiles.com/search?format=faceGenBaseMesh) | FaceGen base mesh |  | 
 [other/faceGenControlsDistributionDensities](https://discmaster.textfiles.com/search?format=faceGenControlsDistributionDensities) | FaceGen Controls/distribution densities | .ctl | 
@@ -2576,6 +2578,7 @@ Family/Format | Name | Extensions | Notes
 [other/mortalKombat3GameArchive](https://discmaster.textfiles.com/search?format=mortalKombat3GameArchive) | Mortal Kombat 3 game archive | .ftr | 
 [other/mortalKombatGameDataArchive](https://discmaster.textfiles.com/search?format=mortalKombatGameDataArchive) | Mortal Kombat game data archive | .ssf | 
 [other/motocrossMadnessTerrain](https://discmaster.textfiles.com/search?format=motocrossMadnessTerrain) | Motocross Madness Terrain | .trn | 
+[other/motorolaFlashSuperfile](https://discmaster.textfiles.com/search?format=motorolaFlashSuperfile) | Motorola Flash Superfile | .shx | 
 [other/movieSetterProject](https://discmaster.textfiles.com/search?format=movieSetterProject) | Movie Setter Project | .ms | 
 [other/moviePlusProject](https://discmaster.textfiles.com/search?format=moviePlusProject) | MoviePlus Project |  | 
 [other/movieShopMacros](https://discmaster.textfiles.com/search?format=movieShopMacros) | MovieShop Macros | .macros | 
@@ -2724,6 +2727,7 @@ Family/Format | Name | Extensions | Notes
 [other/olbLib](https://discmaster.textfiles.com/search?format=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
 [other/opcodeVisionProject](https://discmaster.textfiles.com/search?format=opcodeVisionProject) | Opcode Vision project | .vsn | 
 [other/openMediaFrameworkInterchange](https://discmaster.textfiles.com/search?format=openMediaFrameworkInterchange) | Open Media Framework Interchange | .omf | 
+[other/openCanvasEventData](https://discmaster.textfiles.com/search?format=openCanvasEventData) | OpenCanvas event data | .oes .ca4 | 
 [other/openFstBinaryData](https://discmaster.textfiles.com/search?format=openFstBinaryData) | OpenFst binary data | .far .fst | 
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?format=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
 [other/optionScopeWorksheet](https://discmaster.textfiles.com/search?format=optionScopeWorksheet) | OptionScope Worksheet | .osc | 
@@ -3145,6 +3149,7 @@ Family/Format | Name | Extensions | Notes
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?format=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
 [other/spiderman2SoundMusicData](https://discmaster.textfiles.com/search?format=spiderman2SoundMusicData) | Spiderman 2 sound/music data | .wbk | 
 [other/spilImageLibrary](https://discmaster.textfiles.com/search?format=spilImageLibrary) | SPIL Image Library | .ilb .slb | 
+[other/spiritOfExcaliburSettings](https://discmaster.textfiles.com/search?format=spiritOfExcaliburSettings) | Spirit of Excalibur settings | .cfg | 
 [other/sPlanSchematic](https://discmaster.textfiles.com/search?format=sPlanSchematic) | sPlan schematic | .lib .spl | 
 [other/splashDamageMegatextureFormat](https://discmaster.textfiles.com/search?format=splashDamageMegatextureFormat) | Splash Damage Megatexture format | .mega | 
 [other/springEngineMap](https://discmaster.textfiles.com/search?format=springEngineMap) | Spring Engine Map | .smf | 
@@ -3645,7 +3650,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (93)
+## Poly (94)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3731,6 +3736,7 @@ Family/Format | Name | Extensions | Notes
 [poly/swift3D3DGraphic](https://discmaster.textfiles.com/search?format=swift3D3DGraphic) | Swift 3D 3D Graphic | .txt .t3d | 
 [poly/techland3DModel](https://discmaster.textfiles.com/search?format=techland3DModel) | Techland 3D model | .3da | 
 [poly/tornado3DModel](https://discmaster.textfiles.com/search?format=tornado3DModel) | Tornado 3D model | .tor | 
+[poly/uleadCOOL3D](https://discmaster.textfiles.com/search?format=uleadCOOL3D) | Ulead COOL 3D | .uez | 
 [poly/ultimateStuntsBinary3D](https://discmaster.textfiles.com/search?format=ultimateStuntsBinary3D) | Ultimate Stunts binary 3D geometry | .glb | 
 [poly/valveModelVertices](https://discmaster.textfiles.com/search?format=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.
 [poly/vertexBinary](https://discmaster.textfiles.com/search?format=vertexBinary) | Vertex Binary 3D Object | .3d | Only 5 uniques of these files are on discmaster, all samples from an Amiga app called Vertex.
@@ -3744,7 +3750,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (49)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3793,6 +3799,7 @@ Family/Format | Name | Extensions | Notes
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?format=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 
 [video/vis5DDatasetObject](https://discmaster.textfiles.com/search?format=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
 [video/webExRecording](https://discmaster.textfiles.com/search?format=webExRecording) | WebEx Recording | .wrf .wot | 
+[video/wingCommander3Movie](https://discmaster.textfiles.com/search?format=wingCommander3Movie) | Wing Commander III MVE movie | .mve | [1 sample file](https://sembiance.com/fileFormatSamples/video/wingCommander3Movie/)
 [video/xbvVideo](https://discmaster.textfiles.com/search?format=xbvVideo) | [XBV Video](https://wiki.multimedia.cx/index.php/XBV) | .xbv | [1 sample file](https://sembiance.com/fileFormatSamples/video/xbvVideo/)
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?format=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
 

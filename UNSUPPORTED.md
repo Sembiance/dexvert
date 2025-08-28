@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,740)
+# Unsupported File Formats (3,754)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -769,7 +769,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (192)
+## Image (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -881,6 +881,7 @@ Family/Format | Name | Extensions | Notes
 [image/madStudio](https://discmaster.textfiles.com/search?format=madStudio) | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [12 sample files](https://sembiance.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
 [image/magneticGraphics](https://discmaster.textfiles.com/search?format=magneticGraphics) | Magnetic Graphics | .gfx | 
 [image/mangaClipStudioPage](https://discmaster.textfiles.com/search?format=mangaClipStudioPage) | Manga/Clip Studio Page | .cpg | 
+[image/megamidGrayscaleBitMap](https://discmaster.textfiles.com/search?format=megamidGrayscaleBitMap) | Megamid Grayscale BitMap | .gbm .map | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?format=megaPaintVector) | MegaPaint Vector | .vek | 
 [image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 [image/micrografxIcon](https://discmaster.textfiles.com/search?format=micrografxIcon) | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://sembiance.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
@@ -1145,7 +1146,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,499)
+## Other (2,512)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1566,6 +1567,7 @@ Family/Format | Name | Extensions | Notes
 [other/calamusTextStyleList](https://discmaster.textfiles.com/search?format=calamusTextStyleList) | Calamus Text Style List | .csl .cs | 
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?format=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
 [other/callOfDutyGameData](https://discmaster.textfiles.com/search?format=callOfDutyGameData) | Call of Duty game data | .ff | 
+[other/callusSavestate](https://discmaster.textfiles.com/search?format=callusSavestate) | Callus savestate | .cs0 | 
 [other/capellaGalleryDataFile](https://discmaster.textfiles.com/search?format=capellaGalleryDataFile) | Capella gallery data file | .cag | 
 [other/capellaMusicNotation](https://discmaster.textfiles.com/search?format=capellaMusicNotation) | Capella music notation | .cap | 
 [other/cardSoftPCMCIACardLibrary](https://discmaster.textfiles.com/search?format=cardSoftPCMCIACardLibrary) | CardSoft PCMCIA Card Library | .clb | 
@@ -1581,6 +1583,7 @@ Family/Format | Name | Extensions | Notes
 [other/catiaProductDescription](https://discmaster.textfiles.com/search?format=catiaProductDescription) | CATIA Product Description | .catproduct | 
 [other/caveStorySaveGame](https://discmaster.textfiles.com/search?format=caveStorySaveGame) | CaveStory save game | .dat | 
 [other/cavewarsDialog](https://discmaster.textfiles.com/search?format=cavewarsDialog) | Cavewars dialog | .fdg | 
+[other/caxaDrawing](https://discmaster.textfiles.com/search?format=caxaDrawing) | CAXA drawing | .tpl .frm .exb .hdr .lin | 
 [other/cBASICIntermediateCode](https://discmaster.textfiles.com/search?format=cBASICIntermediateCode) | CBASIC Intermediate code | .int | 
 [other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?format=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 
 [other/ccS64Snapshot](https://discmaster.textfiles.com/search?format=ccS64Snapshot) | CCS64 snapshot | .c64 | 
@@ -1588,6 +1591,7 @@ Family/Format | Name | Extensions | Notes
 [other/cdLabelProProject](https://discmaster.textfiles.com/search?format=cdLabelProProject) | CD Label Pro project | .cdl | 
 [other/cdViewerData](https://discmaster.textfiles.com/search?format=cdViewerData) | CD Viewer data | .cdv | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?format=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
+[other/centralPointCommuteConfiguration](https://discmaster.textfiles.com/search?format=centralPointCommuteConfiguration) | Central Point Commute Configuration | .cfg | 
 [other/centralPointPCBackupDirectoryData](https://discmaster.textfiles.com/search?format=centralPointPCBackupDirectoryData) | Central Point PC Backup Directory data | .dir | 
 [other/centralPointSoftwareDirectoryTreeInfo](https://discmaster.textfiles.com/search?format=centralPointSoftwareDirectoryTreeInfo) | Central Point Software directory Tree info | .tre | 
 [other/centralPointSoftwareLibrary](https://discmaster.textfiles.com/search?format=centralPointSoftwareLibrary) | Central Point Software Library | .dlo | 
@@ -1929,6 +1933,7 @@ Family/Format | Name | Extensions | Notes
 [other/euphoriaDatabaseSystem](https://discmaster.textfiles.com/search?format=euphoriaDatabaseSystem) | Euphoria Database System | .edb .hpc | 
 [other/eurekaMercuryConfiguration](https://discmaster.textfiles.com/search?format=eurekaMercuryConfiguration) | Eureka/Mercury Configuration | .cfg .eka | 
 [other/eveOnlineGameContentsArchive](https://discmaster.textfiles.com/search?format=eveOnlineGameContentsArchive) | EVE Online Game Contents archive | .stuff | 
+[other/evermoreSoftwareEIOfficeDocumentBinder](https://discmaster.textfiles.com/search?format=evermoreSoftwareEIOfficeDocumentBinder) | Evermore Software EIOffice document binder | .eio .eit | 
 [other/everNoteDatabase](https://discmaster.textfiles.com/search?format=everNoteDatabase) | EverNote database | .enb | 
 [other/everQuestGameData](https://discmaster.textfiles.com/search?format=everQuestGameData) | EverQuest Game data | .s3d .pak .pfs .eqg | 
 [other/everythingIndex](https://discmaster.textfiles.com/search?format=everythingIndex) | Everything index | .db | 
@@ -3045,6 +3050,7 @@ Family/Format | Name | Extensions | Notes
 [other/sangoFighterConfiguration](https://discmaster.textfiles.com/search?format=sangoFighterConfiguration) | Sango Fighter Configuration | .cfg | 
 [other/sanityAikensArtifactSavedGame](https://discmaster.textfiles.com/search?format=sanityAikensArtifactSavedGame) | Sanity: Aiken's Artifact Saved Game | .sav | 
 [other/sasTransportXPORTFormat](https://discmaster.textfiles.com/search?format=sasTransportXPORTFormat) | SAS Transport (XPORT) format | .xpt | 
+[other/savageWarriorsAnimation](https://discmaster.textfiles.com/search?format=savageWarriorsAnimation) | Savage Warriors Animation | .anm | 
 [other/saveRam2CompressedData](https://discmaster.textfiles.com/search?format=saveRam2CompressedData) | SaveRam2 compressed data | .fls | 
 [other/sccBlafferNTInstrumentKit](https://discmaster.textfiles.com/search?format=sccBlafferNTInstrumentKit) | SCC Blaffer NT Instrument Kit |  | 
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?format=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
@@ -3394,8 +3400,15 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?format=typeLibrary) | Type Library | .tlb | 
 [other/urbanTheCyborgProjectGameData](https://discmaster.textfiles.com/search?format=urbanTheCyborgProjectGameData) | U.R.B.A.N The Cyborg Project game data | .dat | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?format=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
+[other/ucDOSConfiguration](https://discmaster.textfiles.com/search?format=ucDOSConfiguration) | UCDOS Configuration | .cfg | 
+[other/ucDOSDisplayDriver](https://discmaster.textfiles.com/search?format=ucDOSDisplayDriver) | UCDOS display Driver | .drv | 
+[other/ucDOSInputMetodDriver](https://discmaster.textfiles.com/search?format=ucDOSInputMetodDriver) | UCDOS Input Metod Driver | .imd | 
 [other/ucDOSOverlay](https://discmaster.textfiles.com/search?format=ucDOSOverlay) | UCDOS Overlay | .db | 
 [other/ucDOSPrintDefine](https://discmaster.textfiles.com/search?format=ucDOSPrintDefine) | UCDOS Print Define | .def | 
+[other/ucDOSPrinterDriver](https://discmaster.textfiles.com/search?format=ucDOSPrinterDriver) | UCDOS Printer Driver | .pdv | 
+[other/ucShellGroup](https://discmaster.textfiles.com/search?format=ucShellGroup) | UCShell Group | .grp | 
+[other/ucSHELLInfo](https://discmaster.textfiles.com/search?format=ucSHELLInfo) | UCSHELL info | .ush | 
+[other/ucTABSpreadsheet](https://discmaster.textfiles.com/search?format=ucTABSpreadsheet) | UCTAB spreadsheet | .tab .ta | 
 [other/uLeadCOOL3DPluginPreset](https://discmaster.textfiles.com/search?format=uLeadCOOL3DPluginPreset) | ULead COOL 3D plugin preset | .ucd | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?format=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/photoImpactPresets](https://discmaster.textfiles.com/search?format=photoImpactPresets) | Ulead Photo Impact Presets | .smp | 
@@ -3605,6 +3618,7 @@ Family/Format | Name | Extensions | Notes
 [other/xactSoundBank](https://discmaster.textfiles.com/search?format=xactSoundBank) | XACT Sound Bank | .xsb | 
 [other/xcpNetworkCapture](https://discmaster.textfiles.com/search?format=xcpNetworkCapture) | XCP network capture file | .cap | 
 [other/xDeltaBinaryPatchFile](https://discmaster.textfiles.com/search?format=xDeltaBinaryPatchFile) | XDelta binary patch file | .patch .xdelta | 
+[other/xDictDictionary](https://discmaster.textfiles.com/search?format=xDictDictionary) | XDict Dictionary | .dat .dic | 
 [other/xenosagaSoundBank](https://discmaster.textfiles.com/search?format=xenosagaSoundBank) | Xenosaga Sound bank | .vsf | 
 [other/xenosagaSoundInfo](https://discmaster.textfiles.com/search?format=xenosagaSoundInfo) | Xenosaga Sound info | .prj | 
 [other/xessWorksheet](https://discmaster.textfiles.com/search?format=xessWorksheet) | XESS worksheet | .xs3 .xs4 .xs5 | 

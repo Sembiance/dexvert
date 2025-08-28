@@ -1,4 +1,4 @@
-# Supported File Formats (3,294)
+# Supported File Formats (3,299)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -489,7 +489,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (119)
+## Audio (120)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 3DO STR audio |  | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/threeDOSTRAudio/)
@@ -551,6 +551,7 @@ audio | Knowledge Adventure Sound | .snd | [awaveStudio](https://archive.org/det
 audio | kRAW Audio Stream | .kraw | [vgmstream](https://github.com/vgmstream/vgmstream) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/kRAWAudio/)
 audio | Lego Racers ALP Audio | .tun | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/legoRacersALP/)
 audio | [Low- Bitrate Packed Audio](https://www.rarewares.org/rrw/lbpack.php) | .lb | [lbplay](https://www.rarewares.org/rrw/lbpack.php) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/lowBitrateAudio/)
+audio | LucasArts SAUD | .sad | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/lucasArtsSAUD/)
 audio | [MacroSystem Audio](http://fileformats.archiveteam.org/wiki/IFF-MAUD) | .maud | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/maud/)
 audio | [Matroska Audio](http://fileformats.archiveteam.org/wiki/Matroska_Audio) | .mka | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/mka/)
 audio | [Maxis XA Audio](https://wiki.multimedia.cx/index.php/Maxis_XA) | .xa | [sox](http://sox.sourceforge.net) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/maxisXA/)
@@ -1046,7 +1047,7 @@ image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | 
 image | [Centauri Logo Editor](http://fileformats.archiveteam.org/wiki/Centauri_Logo_Editor) | .cle | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/centauriLogoEditor/)
 image | CFLI Designer | .cfli | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/cfliDesigner/)
 image | [Champions' Interlace Image](http://fileformats.archiveteam.org/wiki/Champions'_Interlace) | .cci .cin | [recoil2png](http://recoil.sourceforge.net) | [32 sample files](https://sembiance.com/fileFormatSamples/image/championsInterlace/)
-image | Character Studio thumbnail | .bip | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/characterStudioThumbnail/)
+image | Character Studio thumbnail | .bip | [nconvert](https://www.xnview.com/en/nconvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/characterStudioThumbnail/)
 image | [CharPad](http://fileformats.archiveteam.org/wiki/CharPad) | .ctm | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/charPad/)
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/cheese/)
 image | [COKE TG1](http://fileformats.archiveteam.org/wiki/COKE_(Atari_Falcon)) | .tg1 | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/tg1/)
@@ -2160,7 +2161,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,079)
+## Text (1,083)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2499,6 +2500,7 @@ text | FruityLoops Humanize Preset | .fpr |  | [11 sample files](https://sembian
 text | ftncheck project file | .prj |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ftnchekProjectFile/)
 text | Furcadia DragonSpeak Script | .ds |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/furcadiaDragonSpeakScript/)
 text | fxPAINT pen |  |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/fxPAINTPen/)
+text | G-Police Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/gPoliceConfiguration/)
 text | Gambas form | .form |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/gambasForm/)
 text | Gambas project |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/gambasProject/)
 text | Gambit Extensive Game File | .efg |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/gambitExtensiveGameFile/)
@@ -2627,7 +2629,7 @@ text | KiCad Netlist | .net |  | [1 sample file](https://sembiance.com/fileForma
 text | KiCad part Library | .lib |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/kiCadPartLibrary/)
 text | KiCad Schematic | .sch |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/kiCadSchematic/)
 text | Kinemage protein language | .kin |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/kinemageProteinLanguage/)
-text | Kodak Photo CD configuration | .pcd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/kodakPhotoCDConfiguration/)
+text | Kodak Photo CD configuration | .pcd |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/kodakPhotoCDConfiguration/)
 text | Konqueror cookie |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
 text | Korn shell script |  |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/kornShellScript/)
 text | KsofT CRC-32 Data | .crc .dat |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ksofTCRC32Data/)
@@ -2711,7 +2713,7 @@ text | MicroFiche Filer settings | .prefs |  | [2 sample files](https://sembianc
 text | Micrografx Graph data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/micrografxGraphData/)
 text | MicroHof Code encoded message | .cde |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/microHofCodeEncodedMessage/)
 text | MicroSim PSpice schematic | .sch |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microSimPSpiceSchematic/)
-text | Microsoft Backup Settings | .set |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/microsoftBackupSettings/)
+text | Microsoft Backup Settings | .set |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/microsoftBackupSettings/)
 text | Microsoft Developer Studio Workspace | .dsw |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/microsoftDeveloperStudioWorkspace/)
 text | Microsoft eMbedded Visual Tools Project | .vcp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftEmbeddedVisualToolsProject/)
 text | Microsoft eMbedded Visual Tools Workspace | .vcw |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microsoftEmbeddedVisualToolsWorkspace/)
@@ -3009,7 +3011,7 @@ text | SNNS result | .res |  | [2 sample files](https://sembiance.com/fileFormat
 text | Softdesk AdCADD Border sheet | .brd |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDBorderSheet/)
 text | Softdesk AdCADD default data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDDefaultData/)
 text | Softdesk AdCADD layer default | .ly .tut |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/softdeskAdCADDLayerDefault/)
-text | SoftICE initialization data | .dat |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
+text | SoftICE initialization data | .dat |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
 text | Software Ideas Modeler Style Set | .simss |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/softwareIdeasModelerStyleSet/)
 text | SoftWrap license data | .sw2 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/softWrapLicenseData/)
 text | Sonnet Project | .son |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/sonnetProject/)
@@ -3077,7 +3079,7 @@ text | Timeworks Word Writer document |  |  | [10 sample files](https://sembianc
 text | Timing Wizard Report | .twr |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/timingWizardReport/)
 text | TMPEGEnc config file | .mcf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tMPEGEncConfigFile/)
 text | TMT Pascal project Configuration | .cfg |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/tmtPascalProjectConfiguration/)
-text | Tools Media Corp. Ambient light | .avm |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpAmbientLight/)
+text | Tools Media Corp. Ambient light | .avm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpAmbientLight/)
 text | Tools Media Corp. material | .sss |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpMaterial/)
 text | Toon Boom Palette | .plt .plt~ |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/toonBoomPalette/)
 text | Tornado 3D Project | .prj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/tornado3DProject/)
@@ -3088,8 +3090,11 @@ text | TPLOT graph source | .plt |  | [12 sample files](https://sembiance.com/fi
 text | Track Row Column markers data format | .trc |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trackRowColumnMarkersDataFormat/)
 text | Tracon Sector info | .sec |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
 text | Tracon Simulation data | .dem .sim |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSimulationData/)
-text | Train Simulator Cab View File | .cvf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
-text | Train Simulator Consist | .con |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
+text | Train Simulator Activity | .act |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorActivity/)
+text | Train Simulator Cab View File | .cvf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
+text | Train Simulator Consist | .con |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
+text | Train Simulator Path | .pat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorPath/)
+text | Train Simulator Service definition | .srv |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorServiceDefinition/)
 text | Train Simulator Shape Definition | .s .eng .sd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorShapeDefinition/)
 text | Train Simulator Sound Management System | .sms |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorSoundManagementSystem/)
 text | Train Simulator Wagon | .eng .wag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)
@@ -3322,7 +3327,7 @@ video | [MTV Movie](http://fileformats.archiveteam.org/wiki/MTV_Movie_(.MTV)) | 
 video | [MTV Video](http://fileformats.archiveteam.org/wiki/MTV_Video_(.AMV)) | .amv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/mtvVideo/)
 video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/neochromeAnimation/)
 video | [Network Q RAC Rally full motion video](https://wiki.multimedia.cx/index.php/Network_Q_RAC_Rally_FMV) |  | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/networkQRACRallyFMV/)
-video | [Nullsoft Video](https://wiki.multimedia.cx/index.php/Nullsoft_Video) | .nsv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/nullsoftVideo/)
+video | [Nullsoft Video](https://wiki.multimedia.cx/index.php/Nullsoft_Video) | .nsv | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/video/nullsoftVideo/)
 video | [NuppelVideo](https://wiki.multimedia.cx/index.php/Nuppelvideo) | .nuv | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/nuppelVideo/)
 video | [NXL Video](https://wiki.multimedia.cx/index.php/NXL) | .nxl | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/nxlVideo/)
 video | [Ogg Theora Video](http://fileformats.archiveteam.org/wiki/Theora) | .ogg .ogv | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/oggTheoraVideo/)

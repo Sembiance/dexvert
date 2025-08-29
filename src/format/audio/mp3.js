@@ -10,12 +10,12 @@ export class mp3 extends Format
 	forbidExtMatch = [".mpg"];
 	mimeType       = "audio/mpeg";
 	magic          = [
-		// general MP3 magic
+		// general
 		"LAME encoded MP3 audio", /^Audio file.* layer III/, "MPEG ADTS, layer III", "MPEG 1/2 Audio Layer 3", "Audio file with ID3 version", /^ID3v2.\d.0 Tag/, /^MP3 ID3 tag, v2\.\d$/, "audio/mpeg",
 		"MP2/3 (MPEG audio layer 2/3) (mp3)", /^soxi: mp3$/, "deark: mpegaudio (MP3)", /^fmt\/134( |$)/,
 		
-		// specific app-generate MP3 magic
-		"GoGo encoded MP3 audio", "Plugger encoded MP3 audio", "Xing encoded MP3 audio", "MP3 Xing Encoder"
+		// app specific
+		"GoGo encoded MP3 audio", "Plugger encoded MP3 audio", "Xing encoded MP3 audio", "MP3 Xing Encoder", "Audition Loop"
 	];
 	forbiddenMagic     = _SHOCKWAVE_AUDIO_MAGIC;	// I believe Shockwave Audio is actually just MP3 underneath but with some extra metadata, still it's format handles converting it and this ensure we properly identify as that
 	weakMagicSensitive = true;	// we have some weak magics and we don't verify that things are MP3 too closely (archive/powerPack/Aonia)

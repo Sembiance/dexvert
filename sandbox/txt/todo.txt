@@ -93,6 +93,7 @@
 * Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
   https://discmaster.textfiles.com/search?format=folioDatabase
   May be worth paying someone to reverse engineer it
+  Afterwards, search 'itaitem' for: infobase     folio
 
 * Figure out how to extract archive/stackerCompressedVolume as these may be stacker:
 	https://discmaster.textfiles.com/search?family=unknown&sizeMin=20MB&detection=535441434b4552*&dedup=dedup

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,754)
+# Unsupported File Formats (3,758)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (290)
+## Archive (291)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -104,6 +104,7 @@ Family/Format | Name | Extensions | Notes
 [archive/fizArchive](https://discmaster.textfiles.com/search?format=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/flatoutGameDataArchive](https://discmaster.textfiles.com/search?format=flatoutGameDataArchive) | Flatout game data archive | .bfs | 
 [archive/flinkGameDataArchive](https://discmaster.textfiles.com/search?format=flinkGameDataArchive) | Flink game data archive | .wld | 
+[archive/floppyDiskFileImage](https://discmaster.textfiles.com/search?format=floppyDiskFileImage) | Floppy Disk File image | .fdf | 
 [archive/floppyDiskManagerDiskImage](https://discmaster.textfiles.com/search?format=floppyDiskManagerDiskImage) | Floppy Disk Manager disk image | .fdm | [1 sample file](https://sembiance.com/fileFormatSamples/archive/floppyDiskManagerDiskImage/)
 [archive/foxProArchive](https://discmaster.textfiles.com/search?format=foxProArchive) | FoxPro Archive | .pak | 
 [archive/freeArc](https://discmaster.textfiles.com/search?format=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
@@ -1146,7 +1147,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,512)
+## Other (2,514)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1480,6 +1481,7 @@ Family/Format | Name | Extensions | Notes
 [other/bisRtmAnimation](https://discmaster.textfiles.com/search?format=bisRtmAnimation) | BIS Rtm animation | .rtm | 
 [other/bitDefenderPlugIn](https://discmaster.textfiles.com/search?format=bitDefenderPlugIn) | BitDefender plug-in | .xmd | 
 [other/blackAndWhiteSoundsData](https://discmaster.textfiles.com/search?format=blackAndWhiteSoundsData) | Black and White sounds data | .sad | 
+[other/blackViperGameData](https://discmaster.textfiles.com/search?format=blackViperGameData) | Black Viper game data | .edp | 
 [other/blackjackLabGame](https://discmaster.textfiles.com/search?format=blackjackLabGame) | Blackjack Lab game |  | 
 [other/blackjackLabRules](https://discmaster.textfiles.com/search?format=blackjackLabRules) | Blackjack Lab rules |  | 
 [other/blindWriteTOC](https://discmaster.textfiles.com/search?format=blindWriteTOC) | BlindWrite TOC | .b6t .b5t | 
@@ -2947,6 +2949,7 @@ Family/Format | Name | Extensions | Notes
 [other/qtBinaryResource](https://discmaster.textfiles.com/search?format=qtBinaryResource) | Qt Binary Resource | .rcc | 
 [other/qtMessage](https://discmaster.textfiles.com/search?format=qtMessage) | Qt Message | .qm | 
 [other/quake3ArenaSkeletonData](https://discmaster.textfiles.com/search?format=quake3ArenaSkeletonData) | Quake 3 Arena skeleton data | .gla | 
+[other/quakeColoredLightData](https://discmaster.textfiles.com/search?format=quakeColoredLightData) | Quake colored light data | .lit | 
 [other/quake2SaveGame](https://discmaster.textfiles.com/search?format=quake2SaveGame) | Quake II save game | .sav | 
 [other/quake2SpriteReference](https://discmaster.textfiles.com/search?format=quake2SpriteReference) | Quake II Sprite Reference | .sp2 | 
 [other/qualitasBIOSCompressionFeatureInfo](https://discmaster.textfiles.com/search?format=qualitasBIOSCompressionFeatureInfo) | Qualitas BIOS Compression Feature info | .bcf | 
@@ -3664,7 +3667,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (94)
+## Poly (95)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3720,6 +3723,7 @@ Family/Format | Name | Extensions | Notes
 [poly/moRay](https://discmaster.textfiles.com/search?format=moRay) | MoRay 3D Model | .mdl | [18 sample files](https://sembiance.com/fileFormatSamples/poly/moRay/) - A shareware program that sat 'on top' of a required POV-Ray installation. Just like POV-Ray, MoRay is super sensitive to version changes and using the last release v3.5 yielded an error where it stated to use 3.2 to open DOS moray files.
 [poly/ninja3DModel](https://discmaster.textfiles.com/search?format=ninja3DModel) | Ninja 3D Model | .nj | 
 [poly/northCAD3D](https://discmaster.textfiles.com/search?format=northCAD3D) | NorthCAD-3D | .n3d | Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. DOS based. No export capability.
+[poly/obEd3DObject](https://discmaster.textfiles.com/search?format=obEd3DObject) | ObEd 3D Object | .obj | 
 [poly/objectsToSee3DObject](https://discmaster.textfiles.com/search?format=objectsToSee3DObject) | Objects to See 3D object | .o2c | 
 [poly/openCascade3DModel](https://discmaster.textfiles.com/search?format=openCascade3DModel) | Open Cascade Technology 3D model | .brp | 
 [poly/painter3DModel](https://discmaster.textfiles.com/search?format=painter3DModel) | Painter 3D model | .d | 

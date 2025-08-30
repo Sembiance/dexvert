@@ -6,6 +6,6 @@ export class warCraftMap extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Warcraft_II_PUD";
 	ext        = [".pud"];
 	magic      = ["WarCraft map (v2)"];
-	idMeta     = ({macFileType, macFileCreator}) => macFileType==="W2ed" && macFileCreator==="W2ed";
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="W2ed" || macFileCreator==="W2ed";
 	converters = ["pud"];
 }

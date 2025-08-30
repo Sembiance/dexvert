@@ -20,8 +20,9 @@ export class rawPartition extends Format
 		(macFileType==="DDim" && macFileCreator==="DDp+") ||
 		(macFileType==="PCHD" && ["PCXT", "SWIN"].includes(macFileCreator)) ||
 		(macFileType==="hdrv" && macFileCreator==="Wrap");
-	metaProvider = ["parted"];
-	converters = dexState =>
+	confidenceAdjust = inputFile => (inputFile.ext.toLowerCase()===".dmg" ? -5 : 0);
+	metaProvider     = ["parted"];
+	converters       = dexState =>
 	{
 		const dosMBRID = dexState.ids.find(id => id.from==="file" && id.magic.startsWith("DOS/MBR boot sector"));
 		if(dosMBRID)

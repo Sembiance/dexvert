@@ -335,6 +335,7 @@ export const WEAK_VALUES =
 	/^VPlayer subtitles \(vplayer\)$/,
 
 	// GT2
+	/^777 Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^ARM64EC COFF object/,
 	/^ASD Archiv gefunden \(Auflistung ist deaktiviert\)$/,

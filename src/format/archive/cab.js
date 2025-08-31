@@ -13,7 +13,7 @@ export class cab extends Format
 		
 		// app specific cabs
 		"IncrediMail data (generic)", "IncrediMail Animation", "IncrediMail letter/ecard Flavor", "IncrediMail Image", "IncrediMail sound", "IncrediMail Notifier", "IncrediMail Skin", "IncrediMail Emoticon", "Diagnostic Cabinet",
-		"Skin / Theme for Pocket PC PDAs", "Windows Device Metadata", "Microsoft Vista Sidebar Gadget (CAB", "InfoPath Dynamic Form - Template",
+		"Skin / Theme for Pocket PC PDAs", "Windows Device Metadata", "Microsoft Vista Sidebar Gadget (CAB", "InfoPath Dynamic Form - Template", "Pocket PC Themes :tsk:",
 		/^fmt\/987( |$)/,
 
 		// installer related cabs

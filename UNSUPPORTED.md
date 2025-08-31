@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,758)
+# Unsupported File Formats (3,759)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1147,7 +1147,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,514)
+## Other (2,515)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2555,6 +2555,7 @@ Family/Format | Name | Extensions | Notes
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?format=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
 [other/microStationModificationResourceFile](https://discmaster.textfiles.com/search?format=microStationModificationResourceFile) | MicroStation Modification resource file | .m01 .p01 .r01 .s01 | 
 [other/microStationSymbologyResources](https://discmaster.textfiles.com/search?format=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
+[other/microthStrokeSet](https://discmaster.textfiles.com/search?format=microthStrokeSet) | Microth Stroke Set | .ipe .004 .003 | 
 [other/microtimeAnimalLevelData](https://discmaster.textfiles.com/search?format=microtimeAnimalLevelData) | Microtime Animal level data | .lvl | 
 [other/microTOOLInstallPackage](https://discmaster.textfiles.com/search?format=microTOOLInstallPackage) | microTOOL install package |  | 
 [other/midget3Instruments](https://discmaster.textfiles.com/search?format=midget3Instruments) | Midget 3 Instruments | .mis | 

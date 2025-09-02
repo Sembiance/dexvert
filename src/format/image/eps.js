@@ -4,7 +4,7 @@ import {_MACBINARY_MAGIC} from "../archive/macBinary.js";
 const _EPS_MAGIC = [
 	// generic EPS
 	"Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", /^Encapsulated PostScript$/, "DOS EPS Binary File", "Macintosh Encapsulated Postscript (MacBinary)", "image/x-eps",
-	"deark: eps (EPS binary)", "deark: eps (Encapsulated PostScript)", /^Encapsuled Postscript :(ai|eps|pdx|ps):$/, "TIFF :epsp:",
+	"deark: eps (EPS binary)", "deark: eps (Encapsulated PostScript)", /^Encapsuled Postscript :(ai|eps|pdf|pdx|ps):$/, "TIFF :epsp:",
 	/^fmt\/(122|123|124|417)( |$)/, /^x-fmt\/20( |$)/,
 
 	// app specific
@@ -20,7 +20,7 @@ export class eps extends Format
 	ext        = _EPS_EXT;
 	mimeType   = "application/eps";
 	magic      = _EPS_MAGIC;
-	idMeta     = ({macFileType}) => ["EPSF", "ESPF", "EPSP", "EPSW"].includes(macFileType);
+	idMeta     = ({macFileType, macFileCreator}) => ["EPSF", "ESPF", "EPSP", "EPSW"].includes(macFileType) || (macFileType==="EPS " && macFileCreator==="8BIM");
 	notes      = "We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001";
 	converters = dexState =>
 	{

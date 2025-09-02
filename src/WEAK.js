@@ -15,6 +15,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"BBXT/R*ch",		// BBEdit Extension
 	"Fltr/Clrs",		// ClarisWorks Translator
 	"LINK/MSIE",		// MSIE Link/Shorcut
+	"PCFA/PCXT",		// ???
 	"RIFF/FSX3",		// Painter
 	"SIMA/GEOL",		// AppleScript Documentation
 	"VBIN/VTPC",		// Verity
@@ -689,6 +690,7 @@ export const WEAK_VALUES =
 	/^Cytovision FISH Probe file/,
 	/^ctab data/,
 	/^DataBaseContainer, no records/,
+	/^DB PalmOS document "[^"]+"$/,
 	/^DCL command file/,
 	/^ddis\/ddif/,
 	/^DER Encoded Certificate/,

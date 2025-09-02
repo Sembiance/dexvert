@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,759)
+# Unsupported File Formats (3,764)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1147,7 +1147,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,515)
+## Other (2,520)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1430,6 +1430,7 @@ Family/Format | Name | Extensions | Notes
 [other/avcdHDPlaylist](https://discmaster.textfiles.com/search?format=avcdHDPlaylist) | AVCHD Playlist | .mpls | 
 [other/averyLabelProLabel](https://discmaster.textfiles.com/search?format=averyLabelProLabel) | Avery Label Pro label | .lpd .lp | 
 [other/avgAntivirusVault](https://discmaster.textfiles.com/search?format=avgAntivirusVault) | AVG Antivirus vault | .fil | 
+[other/avgIntegrityDatabase](https://discmaster.textfiles.com/search?format=avgIntegrityDatabase) | AVG Integrity Database | .dat | 
 [other/aviraAntiVirMessage](https://discmaster.textfiles.com/search?format=aviraAntiVirMessage) | Avira AntiVir message | .avr | 
 [other/aviraAntiVirVirusDatabase](https://discmaster.textfiles.com/search?format=aviraAntiVirVirusDatabase) | Avira AntiVir Virus Database | .vdf | 
 [other/avroSerializedData](https://discmaster.textfiles.com/search?format=avroSerializedData) | Avro serialized data | .avro | 
@@ -1577,6 +1578,7 @@ Family/Format | Name | Extensions | Notes
 [other/carnivores2IceAgeGraphicsBehavio](https://discmaster.textfiles.com/search?format=carnivores2IceAgeGraphicsBehavio) | Carnivores/Ice Age animal and object graphics and behavior file | .car | 
 [other/cartoonersActor](https://discmaster.textfiles.com/search?format=cartoonersActor) | Cartooners Actor | .act | 
 [other/casioDiscTitlePrinterLabel](https://discmaster.textfiles.com/search?format=casioDiscTitlePrinterLabel) | Casio Disc Title Printer label | .ctw | 
+[other/casioPocketViewerAddInDataFile](https://discmaster.textfiles.com/search?format=casioPocketViewerAddInDataFile) | Casio Pocket Viewer Add-in Data file | .adt | 
 [other/castleOfTheWindsSavedGame](https://discmaster.textfiles.com/search?format=castleOfTheWindsSavedGame) | Castle of the Winds saved Game | .cwg | 
 [other/catiaAssembly](https://discmaster.textfiles.com/search?format=catiaAssembly) | CATIA Assembly | .catproduct | 
 [other/catiaDrawing](https://discmaster.textfiles.com/search?format=catiaDrawing) | CATIA Drawing | .catdrawing | 
@@ -1593,6 +1595,7 @@ Family/Format | Name | Extensions | Notes
 [other/cdLabelProProject](https://discmaster.textfiles.com/search?format=cdLabelProProject) | CD Label Pro project | .cdl | 
 [other/cdViewerData](https://discmaster.textfiles.com/search?format=cdViewerData) | CD Viewer data | .cdv | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?format=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
+[other/celestronsTheSkyDataBase](https://discmaster.textfiles.com/search?format=celestronsTheSkyDataBase) | Celestron's TheSky Data Base | .sdb | 
 [other/centralPointCommuteConfiguration](https://discmaster.textfiles.com/search?format=centralPointCommuteConfiguration) | Central Point Commute Configuration | .cfg | 
 [other/centralPointPCBackupDirectoryData](https://discmaster.textfiles.com/search?format=centralPointPCBackupDirectoryData) | Central Point PC Backup Directory data | .dir | 
 [other/centralPointSoftwareDirectoryTreeInfo](https://discmaster.textfiles.com/search?format=centralPointSoftwareDirectoryTreeInfo) | Central Point Software directory Tree info | .tre | 
@@ -2059,6 +2062,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameZReaderArchive](https://discmaster.textfiles.com/search?format=gameZReaderArchive) | GameZ reader archive | .zbd | 
 [other/gammaCAD](https://discmaster.textfiles.com/search?format=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gammaCADSymbolLibrary](https://discmaster.textfiles.com/search?format=gammaCADSymbolLibrary) | GammaCAD Symbol Library | .syl | 
+[other/gapHelpSystemSix](https://discmaster.textfiles.com/search?format=gapHelpSystemSix) | GAP Help System Six | .six | 
 [other/garminMap](https://discmaster.textfiles.com/search?format=garminMap) | Garmin map | .img | 
 [other/gazeConfiguration](https://discmaster.textfiles.com/search?format=gazeConfiguration) | Gaze configuration | .dat | 
 [other/gconvModuleConfigurationCache](https://discmaster.textfiles.com/search?format=gconvModuleConfigurationCache) | gconv module configuration cache | .cache | 
@@ -2814,6 +2818,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcpArchiveIndex](https://discmaster.textfiles.com/search?format=pcpArchiveIndex) | PCP archive index | .index | 
 [other/pcpArchiveLog](https://discmaster.textfiles.com/search?format=pcpArchiveLog) | PCP archive log | .0 | 
 [other/pcpArchiveMetadata](https://discmaster.textfiles.com/search?format=pcpArchiveMetadata) | PCP archive metadata | .meta | 
+[other/pcSyncForWindows](https://discmaster.textfiles.com/search?format=pcSyncForWindows) | PCsync for Windows | .twf | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?format=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?format=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
 [other/perFORMCommunicatorFilePacket](https://discmaster.textfiles.com/search?format=perFORMCommunicatorFilePacket) | PerFORM Communicator File Packet | .fpk | 

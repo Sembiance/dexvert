@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,764)
+# Unsupported File Formats (3,766)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (291)
+## Archive (293)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -76,9 +76,10 @@ Family/Format | Name | Extensions | Notes
 [archive/daemonToolsProDiskImage](https://discmaster.textfiles.com/search?format=daemonToolsProDiskImage) | Daemon Tools Pro disk image | .sav | 
 [archive/darkstopProtected](https://discmaster.textfiles.com/search?format=darkstopProtected) | DaRKSToP Protected | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?format=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
+[archive/dcrexeProtected](https://discmaster.textfiles.com/search?format=dcrexeProtected) | DCREXE Protected | .exe | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?format=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/dfSeeDiskImage](https://discmaster.textfiles.com/search?format=dfSeeDiskImage) | DFSee disk image | .imz | 
-[archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?format=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | 
+[archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?format=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskIMageArchiverDiskImage/)
 [archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?format=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
 [archive/dismemberProtected](https://discmaster.textfiles.com/search?format=dismemberProtected) | Dismember EXE CRYPT Protected | .exe | 
 [archive/distributionPackageArchive](https://discmaster.textfiles.com/search?format=distributionPackageArchive) | Distribution Package archive | .pac | 
@@ -220,6 +221,7 @@ Family/Format | Name | Extensions | Notes
 [archive/qnxVolumeDiskImage](https://discmaster.textfiles.com/search?format=qnxVolumeDiskImage) | QNX volume disk image | .img | 
 [archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?format=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
 [archive/questPowerGUIPacked](https://discmaster.textfiles.com/search?format=questPowerGUIPacked) | Quest PowerGUI Packed | .dll | 
+[archive/realArcadeGameInstaller](https://discmaster.textfiles.com/search?format=realArcadeGameInstaller) | RealArcade Game Installer | .rgs | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realArcadeGameInstaller/)
 [archive/redArchive](https://discmaster.textfiles.com/search?format=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 

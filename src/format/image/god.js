@@ -8,4 +8,5 @@ export class god extends Format
 	magic      = ["deark: godpaint"];
 	fileSize   = 153_606;
 	converters = ["deark[module:godpaint]", "wuimg[hasExtMatch]", "recoil2png"];
+	verify     = ({meta}) => meta.width<2000 && meta.height<2000;
 }

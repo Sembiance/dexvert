@@ -59,6 +59,7 @@ rm -rf .mount_ink*
 if [[ "$(hostname)" == dexdrone* ]]; then
 	cd .X11-unix || exit
 	rm -f ./*
+	/mnt/compendium/sys/bin/clearSyslog.sh
 fi
 
 cd /mnt/ram || exit

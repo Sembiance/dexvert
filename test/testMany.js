@@ -49,6 +49,7 @@ const SLOW_FORMATS =
 	"archive/swf"                        : 6,
 	
 	// audio
+	"audio/agsAudioData"        : 25,
 	"audio/aviAudio"            : 4,
 	"audio/fmodSampleBank"      : 16,
 	"audio/proPinballSoundbank" : 5,

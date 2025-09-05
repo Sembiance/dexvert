@@ -14,5 +14,6 @@ export class dmg extends Format
 	// for some reason, some DMG files identify as ZLIB data
 	magic      = [...DMG_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 	weakMagic  = DMG_MAGIC;
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="dmg " && macFileCreator==="ddsk";
 	converters = ["dmg2img", "sevenZip"];
 }

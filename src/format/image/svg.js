@@ -9,6 +9,7 @@ export class svg extends Format
 	forbidExtMatch = true;
 	mimeType       = "image/svg+xml";
 	magic          = ["SVG Scalable Vector Graphics image", "Scalable Vector Graphics", "SVG XML document", "image/svg+xml", "piped svg sequence (svg_pipe)", /^fmt\/(91|92|413)( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="svg " && macFileCreator==="MSIE";
 	untouched      = dexState => dexState.meta.width && dexState.meta.height;
 	meta           = async (inputFile, dexState) => (await Program.runProgram("svgInfo", inputFile, {xlog : dexState.xlog, autoUnlink : true})).meta;
 }

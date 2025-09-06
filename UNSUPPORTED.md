@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,766)
+# Unsupported File Formats (3,767)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1149,7 +1149,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,520)
+## Other (2,521)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3351,6 +3351,7 @@ Family/Format | Name | Extensions | Notes
 [other/thunderbyteAV](https://discmaster.textfiles.com/search?format=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .key .sig | 
 [other/thunderstrike2Data](https://discmaster.textfiles.com/search?format=thunderstrike2Data) | Thunderstrike 2 data | .wad | 
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?format=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
+[other/timeLineBinarySymbolsV6X](https://discmaster.textfiles.com/search?format=timeLineBinarySymbolsV6X) | Time Line Binary Symbols | .bin | 
 [other/timeSplittersFuturePerfectGameDataArchive](https://discmaster.textfiles.com/search?format=timeSplittersFuturePerfectGameDataArchive) | Time Splitters Future Perfect game data archive | .pak .pakbeginfile | 
 [other/timelineSchedule](https://discmaster.textfiles.com/search?format=timelineSchedule) | Timeline schedule |  | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?format=timeZoneData) | TimeZone Data | .tz | 

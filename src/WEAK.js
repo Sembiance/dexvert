@@ -563,7 +563,7 @@ export const WEAK_VALUES =
 	/^ABComp archive data/,
 	/^ACE\/gr ascii file/,
 	/^ACPI Machine Language/,
-	/^Adobe InDesign$/,
+	/^Adobe InDesign((, at )|$)/,
 	/^Adobe PageMaker, (big|little)-endian, version [\d.]+$/,
 	/^Adobe Photoshop, -?\d{5}/,
 	/^Adobe Photoshop Color swatch/,

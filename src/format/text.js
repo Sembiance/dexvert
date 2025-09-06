@@ -589,6 +589,7 @@ export default
 		gsmsendConfiguration                       : {name : "GSMSEND configuration", ext : [".par"], magic : ["GSMSEND configuration"]},
 		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                          	// We do NOT include Trid's "GNU Info document" because it's too loose
 		golemModel                                 : {name : "Golem model", ext : [".golem"], magic : ["Golem model"]},
+		goodWayFlightPlannerFlightPlan             : {name : "GoodWay Flight Planner flight plan", ext : [".gwp"], magic : ["GoodWay Flight Planner flight plan"]},
 		graceProjectFile                           : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
 		graphEditFilterGraphMarkupLanguage         : {name : "GraphEdit Filter Graph Markup Language", ext : [".xgr"], magic : ["GraphEdit Filter Graph Markup Language"]},
 		graphletFileFormat                         : {name : "Graphlet File Format", ext : [".gml"], magic : ["Graphlet File Format"], weakMagic : true},

@@ -6,5 +6,6 @@ export class photoLinePLD extends Format
 	ext            = [".pld"];
 	forbidExtMatch = true;
 	magic          = ["PhotoLine :pld:"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="PhLD" && macFileCreator==="PhLn";
 	converters     = ["nconvert[format:pld]"];
 }

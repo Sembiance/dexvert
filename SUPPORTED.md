@@ -1,4 +1,4 @@
-# Supported File Formats (3,306)
+# Supported File Formats (3,307)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -479,7 +479,7 @@ archive | [yEnc Encoded Archive](http://fileformats.archiveteam.org/wiki/YEnc) |
 archive | [Yet Another Compressor Archive](http://justsolve.archiveteam.org/wiki/YAC) | .yc | [yac](https://www.sac.sk/download/pack/yac102.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/yacArchive/)
 archive | You Don't Know Jack Game Archive | .srf | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/youDontKnowJackGameArchive/)
 archive | Z-Axis game sound data archive | .zsd | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zAxisGameSoundDataArchive/)
-archive | ZipIt |  | [unar](https://github.com/incbee/Unarchiver) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/zipIt/)
+archive | ZipIt |  | [unar](https://github.com/incbee/Unarchiver) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/zipIt/)
 archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [zlib_flate](https://qpdf.sourceforge.net/) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/zlib/)
 archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [zoo](https://packages.debian.org/jessie/zoo) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zoo/)
 archive | ZP Packed GXL | .zp | [dd](https://www.gnu.org/software/coreutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/zpPackedGXL/)
@@ -2165,7 +2165,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,085)
+## Text (1,086)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2482,7 +2482,7 @@ text | Flight Sim Toolkit Places | .fst |  | [15 sample files](https://sembiance
 text | Flight Sim Toolkit Shape | .fsd |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitShape/)
 text | FlipAlbum data | .flp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/flipAlbumData/)
 text | FLTK User Interface Designer | .fl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/fltkUserInterfaceDesigner/)
-text | FMS Scenery | .scn |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/fmsScenery/)
+text | FMS Scenery | .scn |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/fmsScenery/)
 text | Folded control info | .fdo .f .ftx .fc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/foldedControlInfo/)
 text | Foltyn Commander Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/foltynCommanderConfiguration/)
 text | Font Compiler and Loader format | .fcl |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/fontCompilerAndLoaderFormat/)
@@ -2546,6 +2546,7 @@ text | GNAT Ada Library Information | .ali |  | [18 sample files](https://sembia
 text | GNU Bison Grammar | .yy .y |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gnuBisonGrammar/)
 text | GNU Info File | .info .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info-7 .info-8 .info-9 |  | [21 sample files](https://sembiance.com/fileFormatSamples/text/gnuInfo/)
 text | Golem model | .golem |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/golemModel/)
+text | GoodWay Flight Planner flight plan | .gwp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/goodWayFlightPlannerFlightPlan/)
 text | Grace project file | .agr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/graceProjectFile/)
 text | Grand Theft Auto Item Definition | .ide |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/grandTheftAutoItemDefinition/)
 text | Grand Theft Auto Item Placement | .ipl |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/grandTheftAutoItemPlacement/)

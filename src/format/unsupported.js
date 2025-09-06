@@ -3335,6 +3335,7 @@ export default
 		threeByFiveIndex                         : {name : "3by5 Index", ext : [".map"], magic : ["3by5 Index"]},
 		threeByFiveSource                        : {name : "3by5 source", ext : [".3x5"], magic : ["3by5 source"]},
 		thumbsPlusIndex                          : {name : "ThumbsPlus Index", ext : [".tux", ".idx"], magic : ["ThumbsPlus Index"], weakMagic : true},
+		timeLineBinarySymbolsV6X                 : {name : "Time Line Binary Symbols", ext : [".bin"], magic : ["Time Line Binary Symbols)"]},
 		tiCalcAssembler                          : {name : "Texas Instruments Calculator Assembler", ext : [".89z", ".9xz"], magic : [/^TI-.* Graphing Calculator \(assembler\)$/]},
 		tiCalcBackup                             : {name : "Texas Instruments Calculator Backup", ext : [".73b", ".82b", ".83b", ".85b", ".86b", ".89b", ".92b"], magic : [/^TI-.* Graphing Calculator \(backup\)$/]},
 		tiCalcData                               : {name : "Texas Instruments Calculator Data", ext : [".89c", ".9xc"], magic : [/^TI-.* Graphing Calculator \(data\)$/]},

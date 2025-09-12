@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,767)
+# Unsupported File Formats (3,769)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (293)
+## Archive (294)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -47,6 +47,7 @@ Family/Format | Name | Extensions | Notes
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?format=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?format=beOSResourceData) | BeOS Resource Data | .rsrc | 
 [archive/blackFiSTPacked](https://discmaster.textfiles.com/search?format=blackFiSTPacked) | BlacK FiST Packed | .exe | 
+[archive/blueCieloMeridianBriefCaseFileArchive](https://discmaster.textfiles.com/search?format=blueCieloMeridianBriefCaseFileArchive) | BlueCielo Meridian BriefCase - File Archive | .brc | 
 [archive/bootableMacHFSDiskImage](https://discmaster.textfiles.com/search?format=bootableMacHFSDiskImage) | Bootable Mac HFS Disk image |  | 
 [archive/borlandPackedArchive](https://discmaster.textfiles.com/search?format=borlandPackedArchive) | Borland packed archive | .arc | 
 [archive/bsqEncodedData](https://discmaster.textfiles.com/search?format=bsqEncodedData) | BSQ encoded data | .bsq | 
@@ -384,7 +385,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (193)
+## Document (194)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -544,6 +545,7 @@ Family/Format | Name | Extensions | Notes
 [document/studentWritingCenterDocument](https://discmaster.textfiles.com/search?format=studentWritingCenterDocument) | Student Writing Center document | .rp .lt .sg .nl .jn .ltt .nlt .rpt .sgt | 
 [document/superplanSpreadsheet](https://discmaster.textfiles.com/search?format=superplanSpreadsheet) | Superplan spreadsheet | .spp | 
 [document/sureThingCDLabelerDocument](https://discmaster.textfiles.com/search?format=sureThingCDLabelerDocument) | SureThing CD Labeler document | .std .dsn | 
+[document/swiftWordPublisherDocument](https://discmaster.textfiles.com/search?format=swiftWordPublisherDocument) | Swift Word Publisher document | .pmf | [1 sample file](https://sembiance.com/fileFormatSamples/document/swiftWordPublisherDocument/)
 [document/symantecDOSSoftwareHelp](https://discmaster.textfiles.com/search?format=symantecDOSSoftwareHelp) | Symantec DOS software help | .hlp | 
 [document/tagDocument](https://discmaster.textfiles.com/search?format=tagDocument) | TAG document | .tag .mtg | 
 [document/texelSpreadsheet](https://discmaster.textfiles.com/search?format=texelSpreadsheet) | Texel spreadsheet | .txl | 

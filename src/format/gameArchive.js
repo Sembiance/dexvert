@@ -23,6 +23,7 @@ export const gameextractor =
 		ciGAMESGameDataArchive              : {name : "CI GAMES game data archive", ext : [".dpk"], magic : ["CI GAMES game data archive"], weakMagic : true},
 		darkReignGameArchive                : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)"},
 		darkReign2GameDataArchive           : {name : "Dark Reign 2 game data archive", ext : [".zwp"], magic : ["Dark Reign 2 game data archive"], weakMagic : true},
+		destanGameDataArchive               : {name : "Destan game data archive", ext : [".3dn"], magic : ["Destan game data archive"]},
 		digitalIllusionsGameArchive         : {name : "Digital Illusions game archive", ext : [".pdo", ".rmpublisher", ".rmlanguage", ".pdt", ".dta"], magic : ["Digital Illusions game data package"], weakMagic : true},
 		dynamixGameArchive                  : {name : "Dynamix Game Archive", ext : [".dyn", ".rbx"], magic : ["Dynamix game data archive", "Dynamix Volume File game data archive"]},
 		earthAndBeyondGameArchive           : {name : "Earth and Beyond Game Archive", ext : [".mix"], magic : ["Earth And Beyond game data archive"]},

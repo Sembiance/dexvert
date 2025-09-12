@@ -192,6 +192,7 @@ export const WEAK_VALUES =
 	/^deark: godpaint$/,
 	/^deark: lha$/,
 	/^deark: mpegaudio( \(MP[12] audio\))?$/,
+	/^deark: ogg \(Ogg Vorbis\)$/,
 	/^deark: pm_xv$/,
 	/^deark: png \(CgBI\)$/,
 	/^deark: pnm/,

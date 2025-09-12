@@ -855,6 +855,7 @@ export default
 		powerTranslatorDocument                    : {name : "Power Translator document", ext : [".mtp"], magic : ["Power Translator document"], weakMagic : true},
 		ppd                                        : {name : "PostScript Printer Description", website : "http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description", ext : [".ppd", ".pp"], magic : ["PPD file", "PostScript Printer Description", "application/vnd.cups-ppd"]},
 		prepForMonarchHelp                         : {name : "Prep for Monarch Help", ext : [".hlp"], magic : ["Prep for Monarch Help"], weakMagic : true},
+		primaPrintMagicLayout                      : {name : "Prima PrintMagic Layout", ext : [".lyt"], magic : ["Prima PrintMagic Layout"]},
 		prism3DConfig                              : {name : "Prism3D config", ext : [".cfg"], magic : ["Prism3D config"]},
 		proCONTROLScript                           : {name : "ProCONTROL script", magic : ["ProCONTROL script"]},
 		profiCADSymbols                            : {name : "ProfiCAD symbols", ext : [".ppd"], magic : ["ProfiCAD symbols"], weakMagic : true},

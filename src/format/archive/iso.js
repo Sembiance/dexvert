@@ -262,6 +262,8 @@ export class iso extends Format
 				if(dexState.hasMagics("null bytes"))	// Some isos have a lot of null bytes at the beginning which screws up other converters bu 7z seems to handle it (Cracking I..iso)
 					r.push("sevenZip");
 
+				r.push("akaiextract");
+
 				return r.map(v => `${v}[subOutDir:dexvert_pc]`);
 			}
 		];

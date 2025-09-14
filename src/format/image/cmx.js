@@ -7,6 +7,7 @@ export class cmx extends Format
 	ext            = [".cmx"];
 	forbidExtMatch = true;
 	magic          = ["Corel Metafile Exchange Image", "Corel Presentation Exchange File", "RIFF Datei: unbekannter Typ 'CMX1'", "Generic RIFF file CMX1", "deark: riff (Corel CMX)", "Corel Metafile Exchange :cmx:", /^x-fmt\/34( |$)/, /^x-fmt\/35( |$)/];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="CMX " && macFileCreator==="Cph1";
 	converters     = [
 		"soffice[outType:svg]", "uniconvertor[autoCrop]", "deark[module:corel_ccx]",
 		"hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]", "nconvert[format:cmx]"

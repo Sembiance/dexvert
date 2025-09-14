@@ -58,6 +58,7 @@ export default
 		indyCarRacingTrackRecordInfo        : {name : "IndyCar Racing track record info", ext : [".txt"], magic : ["IndyCar Racing II track record info"], weakMagic : true},
 		ishiFormatGoGame                    : {name : "Ishi Format Go game", ext : [".go", ".prb"], magic : ["Ishi Format Go game"]},
 		jetPilotDocsText                    : {name : "JETPilot docs/text", ext : [".001"], magic : ["JETPilot docs/text"]},
+		karatekaAnimationScript             : {name : "Karateka animation script", magic : ["Karateka animation script"]},
 		kasparovsGambitSavedGame            : {name : "Kasparov's Gambit saved Game", ext : [".gam"], magic : ["Kasparov's Gambit saved Game"], weakMagic : true},
 		lifeCellularAutomataFormat          : {name : "Life cellular automata format", ext : [".lif"], magic : ["Life cellular automata format"], weakMagic : true},
 		mameConfiguration                   : {name : "MAME Configuration", ext : [".cfg"], magic : ["MAME Configuration"], weakMagic : true},

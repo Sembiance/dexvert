@@ -14,5 +14,6 @@ export class windowsThumbDB extends Format
 		"Corel PrintHouse image", "Corel Print Office image",
 		/^fmt\/(1417|1418|1419|1420|1421)( |$)/
 	];
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="PHd1" && macFileCreator==="Cph1";
 	converters = ["vinetto", "deark[module:cfb]", "iio2png"];
 }

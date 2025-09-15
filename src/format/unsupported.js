@@ -2745,6 +2745,7 @@ export default
 		magicScoreSymbol                         : {name : "MagicScore Symbol", ext : [".smb"], magic : ["MagicScore Maestro Symbol"]},
 		magicScoreTemplate                       : {name : "MagicScore Template", ext : [".ctf"], magic : ["MagicScore Maestro Template"]},
 		magicScoreTransport                      : {name : "MagicScore Transport", ext : [".trn"], magic : ["MagicScore Transport"]},
+		magicWorkstationDeck                     : {name : "Magic Workstation Deck", ext : [".mwdeck"], magic : ["Magic Workstation Deck"]},
 		magixHardDiskProjectAudio                : {name : "MAGIX Hard Disk Project Audio", ext : [".hdp"], magic : ["MAGIX Hard Disk Project Audio"]},
 		magixMovieEditVideo                      : {name : "Magix Movie Edit video", ext : [".vip"], magic : ["Magix Movie Edit video"]},
 		mAGIXLibrary                             : {name : "MAGIX library", ext : [".mxm"], magic : ["MAGIX library"]},

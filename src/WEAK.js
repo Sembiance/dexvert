@@ -423,6 +423,7 @@ export const WEAK_VALUES =
 	/^Dali \((Low|Medium|High) Resolution\) :dali:/,
 	/^Datacopy :dcpy:$/,
 	/^Digital F\/X :tdim:$/,
+	/^Discorp CMP Image :dcmp:$/,
 	/^DBW Render 4096 :dbw:$/,
 	/^Edmics Group 4 :c4:$/,
 	/^Fax G3 :fax:$/,

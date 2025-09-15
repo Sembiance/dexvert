@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,771)
+# Unsupported File Formats (3,772)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1151,7 +1151,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,523)
+## Other (2,524)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2425,6 +2425,7 @@ Family/Format | Name | Extensions | Notes
 [other/maggiData](https://discmaster.textfiles.com/search?format=maggiData) | MAGGI data | .hhh | 
 [other/magicBinaryFile](https://discmaster.textfiles.com/search?format=magicBinaryFile) | magic binary file | .mgc | 
 [other/magicCameraEffect](https://discmaster.textfiles.com/search?format=magicCameraEffect) | Magic Camera Effect | .mce | 
+[other/magicWorkstationDeck](https://discmaster.textfiles.com/search?format=magicWorkstationDeck) | Magic Workstation Deck | .mwdeck | 
 [other/magicC64Preferences](https://discmaster.textfiles.com/search?format=magicC64Preferences) | MagiC64 Preferences | .prefs | 
 [other/magicaVoxelVox](https://discmaster.textfiles.com/search?format=magicaVoxelVox) | MagicaVoxel Vox | .vox | 
 [other/magicScoreChord](https://discmaster.textfiles.com/search?format=magicScoreChord) | MagicScore Chord | .chd | 

@@ -3,6 +3,9 @@
 \--------------/
 * Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress
 
+* Add support for: https://discmaster.textfiles.com/browse/22410/HOD_DEMO_GB.iso/Wads/jedi%20knight/dak_siege.zip/dak_siege.gob
+  with: https://github.com/smlu/blender-sith
+
 * Figure out how to extract the bink/smacker videos: https://discmaster.textfiles.com/browse/36350/EXE_7.ISO/Video
   https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
   sandbox/app/radTools/ has some tools that in theory you can use to extract, but it didn't work with the files I tested

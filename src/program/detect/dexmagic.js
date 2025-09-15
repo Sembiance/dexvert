@@ -56,6 +56,7 @@ const DEXMAGIC_CHECKS =
 	"WAD2 file"                      : [{offset : 0, match : "WAD2"}],
 
 	// audio
+	"AKAI Sample"           : [{offset : 0, match : [0x03, 0x01, 0x3C]}],
 	"EA BNK Audio"          : [{offset : 0, match : "BNKl"}],
 	"GameCube Music (IDSP)" : [{offset : 0, match : "IDSP"}],
 	"KORG File"             : [{offset : 0, match : "KORG"}],

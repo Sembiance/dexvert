@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,772)
+# Unsupported File Formats (3,778)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -585,7 +585,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (57)
+## Executable (58)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?format=aDotOutExecutable) | a.out Executable | .o | 
@@ -634,6 +634,7 @@ Family/Format | Name | Extensions | Notes
 [executable/riscOSExe](https://discmaster.textfiles.com/search?format=riscOSExe) | RISC OS Executable |  | 
 [executable/sonyPlaystationExe](https://discmaster.textfiles.com/search?format=sonyPlaystationExe) | Sony Playstation Executable | .exe | 
 [executable/sparcDemandExe](https://discmaster.textfiles.com/search?format=sparcDemandExe) | SPARC Demand Paged Exe |  | 
+[executable/step7MicroWINPLCProgram](https://discmaster.textfiles.com/search?format=step7MicroWINPLCProgram) | STEP7-Micro WIN PLC Program | .mwl .mwp | 
 [executable/superbaseProgram](https://discmaster.textfiles.com/search?format=superbaseProgram) | Superbase Program | .sbp | 
 [executable/symbOSExecutable](https://discmaster.textfiles.com/search?format=symbOSExecutable) | SymbOS executable | .sym | 
 [executable/systemV64BitLibrary](https://discmaster.textfiles.com/search?format=systemV64BitLibrary) | System V 64-bit library | .a | 
@@ -1151,7 +1152,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,524)
+## Other (2,529)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1299,6 +1300,8 @@ Family/Format | Name | Extensions | Notes
 [other/alphaFourUserDefinition](https://discmaster.textfiles.com/search?format=alphaFourUserDefinition) | Alpha Four User Definition | .udn | 
 [other/alphaBaseDataBase](https://discmaster.textfiles.com/search?format=alphaBaseDataBase) | AlphaBase data base | .ab | 
 [other/alteraDesignLibrarySystem](https://discmaster.textfiles.com/search?format=alteraDesignLibrarySystem) | Altera Design Library System | .dls | 
+[other/alteraPatternCaptureFormat](https://discmaster.textfiles.com/search?format=alteraPatternCaptureFormat) | Altera Pattern Capture Format | .pcf | 
+[other/alteraSynopsysConstraintsFormat](https://discmaster.textfiles.com/search?format=alteraSynopsysConstraintsFormat) | Altera Synopsys Constraints Format | .scf | 
 [other/alteraWaveformDesignFile](https://discmaster.textfiles.com/search?format=alteraWaveformDesignFile) | Altera Waveform Design File | .wdf | 
 [other/altiumSimulationDataFile](https://discmaster.textfiles.com/search?format=altiumSimulationDataFile) | Altium Simulation Data File |  | 
 [other/amapiShader](https://discmaster.textfiles.com/search?format=amapiShader) | Amapi Shader | .xsh | 
@@ -2436,8 +2439,9 @@ Family/Format | Name | Extensions | Notes
 [other/magicScoreTemplate](https://discmaster.textfiles.com/search?format=magicScoreTemplate) | MagicScore Template | .ctf | 
 [other/magicScoreTransport](https://discmaster.textfiles.com/search?format=magicScoreTransport) | MagicScore Transport | .trn | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?format=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
-[other/mAGIXLibrary](https://discmaster.textfiles.com/search?format=mAGIXLibrary) | MAGIX library | .mxm | 
+[other/magixLibrary](https://discmaster.textfiles.com/search?format=magixLibrary) | MAGIX library | .mxm | 
 [other/magixMovieEditVideo](https://discmaster.textfiles.com/search?format=magixMovieEditVideo) | Magix Movie Edit video | .vip | 
+[other/magixStudioDefinitions](https://discmaster.textfiles.com/search?format=magixStudioDefinitions) | MAGIX music studio Definitions | .def | 
 [other/magixMusicStudioStyle](https://discmaster.textfiles.com/search?format=magixMusicStudioStyle) | MAGIX music studio Style | .sty | 
 [other/magixSamplitudeProject](https://discmaster.textfiles.com/search?format=magixSamplitudeProject) | Magix Samplitude Project | .vip | 
 [other/magneticGame](https://discmaster.textfiles.com/search?format=magneticGame) | Magnetic Game | .mag | 
@@ -2771,6 +2775,7 @@ Family/Format | Name | Extensions | Notes
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?format=paRISCObjectCode) | PA-RISC Object Code | .o | 
 [other/pageFlipperPlusFXEffect](https://discmaster.textfiles.com/search?format=pageFlipperPlusFXEffect) | PageFlipper Plus FX effect |  | 
 [other/pageFocusData](https://discmaster.textfiles.com/search?format=pageFocusData) | PageFocus Data | .1 .xdb | 
+[other/pageFocusLog](https://discmaster.textfiles.com/search?format=pageFocusLog) | PageFocus Log | .xlg | 
 [other/pageMakerTable](https://discmaster.textfiles.com/search?format=pageMakerTable) | PageMaker Table | .tbl | 
 [other/paiVirtuosoResourceData](https://discmaster.textfiles.com/search?format=paiVirtuosoResourceData) | PAI Virtuoso Resource data | .rsc .rsi | 
 [other/paintersApprenticePrintInfo](https://discmaster.textfiles.com/search?format=paintersApprenticePrintInfo) | Painter's Apprentice Printer Info | .pri | 
@@ -3646,6 +3651,7 @@ Family/Format | Name | Extensions | Notes
 [other/xlr8SentryChipComposorInstrument](https://discmaster.textfiles.com/search?format=xlr8SentryChipComposorInstrument) | XLR8 - Sentry Chip Composor Instrument | .xin | 
 [other/xlr8SentryChipComposorVoiceSet](https://discmaster.textfiles.com/search?format=xlr8SentryChipComposorVoiceSet) | XLR8 - Sentry Chip Composor VoiceSet | .xvs | 
 [other/xpcomTypeLibrary](https://discmaster.textfiles.com/search?format=xpcomTypeLibrary) | XPCOM Type Library | .xpt | 
+[other/xSimSave](https://discmaster.textfiles.com/search?format=xSimSave) | XSim Save |  | 
 [other/xTreeGoldGraphicsDriver](https://discmaster.textfiles.com/search?format=xTreeGoldGraphicsDriver) | XTreeGold graphics Driver | .drv | 
 [other/xzpContainerFormat](https://discmaster.textfiles.com/search?format=xzpContainerFormat) | XZP container format |  | 
 [other/yabBaseballGameData](https://discmaster.textfiles.com/search?format=yabBaseballGameData) | YAB! Baseball game data | .dat | 

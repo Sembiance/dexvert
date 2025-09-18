@@ -44,6 +44,7 @@ cd /tmp || exit
 if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -f .X*lock
 	rm -rf 7777-runtime-dir.*
+	rm -f ink_ext*
 fi
 rm -f OSL_PIPE*
 rm -f file??????

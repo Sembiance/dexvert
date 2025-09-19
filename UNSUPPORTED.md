@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,778)
+# Unsupported File Formats (3,780)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1152,7 +1152,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,529)
+## Other (2,531)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2141,6 +2141,7 @@ Family/Format | Name | Extensions | Notes
 [other/gsBaseDataBase](https://discmaster.textfiles.com/search?format=gsBaseDataBase) | GS-Base data base | .gs | 
 [other/gStreamerBinaryRegistry](https://discmaster.textfiles.com/search?format=gStreamerBinaryRegistry) | GStreamer binary registry | .bin | 
 [other/guemapDocument](https://discmaster.textfiles.com/search?format=guemapDocument) | GUEmap document | .gmp | 
+[other/guileObject](https://discmaster.textfiles.com/search?format=guileObject) | Guile Object | .go | 
 [other/guitarProFile](https://discmaster.textfiles.com/search?format=guitarProFile) | Guitar Pro File | .gtp | 
 [other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 .gpx | 
 [other/guptaReportWindowsReport](https://discmaster.textfiles.com/search?format=guptaReportWindowsReport) | Gupta ReportWindows Report | .qrp | 
@@ -2295,6 +2296,7 @@ Family/Format | Name | Extensions | Notes
 [other/junglevisionData](https://discmaster.textfiles.com/search?format=junglevisionData) | Junglevision data | .op3 | 
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?format=junoClientLicenseKey) | Juno client license Key | .key | 
 [other/jwcadData](https://discmaster.textfiles.com/search?format=jwcadData) | Jw_cad data | .def .dta | 
+[other/kAdvancedTextEditorSwapData](https://discmaster.textfiles.com/search?format=kAdvancedTextEditorSwapData) | K Advanced Text Editor swap data | .kate-swp | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?format=kChessSavedGame) | K-Chess saved game | .kch .kc | 
 [other/kapeerskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?format=kapeerskyAntiVirusLicenseKey) | Kaperesky Anti-Virus License Key | .key | 
 [other/karaFunKaraokeSong](https://discmaster.textfiles.com/search?format=karaFunKaraokeSong) | KaraFun Karaoke Song | .kfn .kfp | 

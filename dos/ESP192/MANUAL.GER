@@ -1,0 +1,392 @@
+
+ESP - Extension Sort Packer Version 1.9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copyright 1996-97 GyikSoft & MikroLab - All Rights Reserved.
+Ins Deutsche Åbersetzt von Dirk Paehl dpaehl@writeme.com
+** korrigiert von Roman Korcek <roman_korcek@hotmail.com> **
+
+===================
+Kurze Beschreibung
+===================
+
+ESP ist ein sehr schneller Packer, der einen guten Pack-Algorithmus besitzt
+und im allgemeinen besser als die anderen Packer funktioniert. Dieser Packer
+ist in Assembler geschrieben, darum benîtigt er wenig Platz
+auf der Festplatte. Das ESP-Programmpaket besteht aus den folgenden Dateien:
+
+ESP.EXE       - der Packer
+UNESP.EXE     - der Unpacker
+ESP2EXE.COM   - der SFX-Ersteller
+ESPLINK.COM   - Archivkonverter, fÅgt gesplittete Archive zusammen
+GIF2PIC.COM   - Bildkonverter, zu der Kommentierung von Archiven
+ANS2BIN.COM   - ANSI nach BINary Konverter fÅr farbige Archivkommentare
+MANUAL.HUN    - Beschreibung auf Ungarisch
+MANUAL.ENG    - Beschreibung auf Englisch
+MANUAL.GER    - Beschreibung auf Deutsch
+MANUAL.SVK    - Beschreibung auf Slowakisch
+TEST.TXT      - Das hier ist ein Test. Lesen Sie ihn, bitte!
+
+======
+Syntax
+======
+
+ ESP - der Packer
+ ~~~
+
+ Syntax:
+ ESP.EXE [/Schalter] Name_der_Datei[.ESP] [path\][dateimaske] [@listfile]
+ (Die Parameter in den eckigen Klammern sind optional.)
+
+ <Befehle>
+ Es gibt keine, es wird immer gepackt.
+
+ <Schalter>
+ /R           es wird mit Unterverzeichnissen gepackt
+ /P           ohne /R: Unterverzeichnisnamen werden mitgepackt
+              mit /R: Unterverzeichnisnamen werden NICHT mitgepackt
+ /Mx          wÑhlt das Packverfahren aus, Bedeutung von "x":
+              0=bestes, 3=schnellstes, 4=Store (Standard=0)
+ /J           schaltet die Wiederholungs-Suche (REP) aus
+ /Sabcd       Sortierungs-PrioritÑt
+              GrunderklÑrung=1240 (Grî·e, Path, Attribute, Name)
+              "a", "b", "c", und "d" kînnen eines der folgenden sein:
+                  0=Name
+                  1=Grî·e
+                  2=Path
+                  3=Datum/Zeit
+                  4=Attribute
+
+ /T           schaltet die interne EXTENSION-table aus
+ /Gpasswort   verschlÅsselt mit Passwort
+ /Ct=Name     fÅgt Kommentare zum Archiv, beim entpacken werden sie
+              angezeigt.
+               Name=Name des Kommentars
+                  t=Typ des Kommentars
+                         1=ASCII-Text (einfarbiger Text)
+                         2=COLOR-Text (binÑrischer Bildschirm-Inhalt, 16 bit)
+                         4=320x200, 256 Farben-Grafik (verg. RAW2PIC)
+                         5=320x200, Farbe-Grafik (verg. GIF2PIC)
+                         6=640x480, Farbe-Grafik (verg. GIF2PIC)
+
+ /D[sn[,ss]]  fÅgt Archiv-Wiederherstellung zum Archiv (DRR)
+              (Falls Archiv teilweise beschÑdigt wird kann es trotzdem
+               entpackt werden)
+                        sn=Nummer der Sektoren      (Standard=4)
+                        ss=(Grî·e der Sektoren)/256 (Standard=2)
+
+ /Vnnn[K|M]   splittet Archiv auf, nnn ist die Grî·e (Beispiel: /V1440K)
+ /B           schaltet BEEP ein (Z.B. wenn Eingabe erwartet wird oder
+              am Ende des packens)
+ /Y           es wird immer mit JA bestÑtigt (es mu· nirgends bestÑtigt
+                                              werden)
+ /MM          schaltet die MultiMedia Packmethode ein, brauchbar fÅr
+              8-bit sound Dateien und 256-Farbige/Graustufige bilder,
+              zum Beispiel BMP, PCX, RAW, SCO, WAV, VOC, MOD, S3M, XM...
+              nicht benutzen fÅr schon gepackte Dateien, zum Beispiel:
+              GIF, JPG, MPG, MP3...
+ /MM2         schaltet die MultiMedia Packmethode fÅr 24-bit Bilder ein
+ /MEx         wÑhlt die VerschlÅsselungsmethode, x=Nummer der Methode
+                        1=alte Methode
+                        2=neue Methode (Standard=2)
+
+ *** Hinweis: Solange ESP packt drÅcken Sie F1 um TETRIS
+              oder F2 um NIBBLES zu spielen.
+
+
+ UNESP: der Entpacker
+ ~~~~~
+ Syntax:
+  UNESP Befehl[Schalter][passwort] archiv_Name[.ESP] [Ziel-Path\]
+     [Path/][Name_der_Datei] [@listfile]
+  (Die Parameter in den eckigen Klammern sind optional.)
+
+ <Befehle>
+ ?            zeigt die Helpseite an
+ e            entpacken der Dateien aus dem Archiv ohne Unterverzeichnisse
+ x            entpacken der Dateien aus dem Archiv mit Unterverzeichnissen
+ l            zeigt den Inhalt des Archiv an
+ v            listet detailiert den Inhalt des Archiv
+ t            teste Archiv
+
+ <Schalter>
+ f            zeigt binÑrisch Dateien an. - auch mit 'L'&'V'
+              (Beispiel: UNESP VF arc bin)
+ k            wartet auf Tastendruck am Ende der Bildschirmseite
+ p            mit Passwort entpacken (Beispiel: UNESP XPsecret FILE.ESP)
+              (Wenn kein Passwort eingegeben wird, fragt UNESP danach)
+ s            Åberspringe Kommentar(e) & DRR Verarbeitung
+ y            immer mit Ja bestÑtigen
+ n            immer mit Nein bestÑtigen
+ b            schaltet BEEP ein
+
+ ESP2EXE: der SFX-Ersteller
+ ~~~~~~~
+ (konvertiert ESP-Archive zur selbstentpackenden EXE)
+
+ Syntax:
+ ESP2EXE Archivename.ESP [exe_Name.EXE]
+
+ Achtung: Konvertieren sie keine Dateien, die mit Passwort versehen sind,
+          weil das Entpackprogramm es nicht kennt und deshalb diese Dateien
+          nicht entpacken kann.
+
+
+ ESPLINK: der Archivkonverter, fÅgt alle gesplitteten Archive in eine Datei
+ ~~~~~~~  zusammen
+
+ Syntax:
+ ESPLINK erstes_split_archiv[.ESP] [archiv_name.ESP]
+
+ Hinweis: ESPLINK wartet, wenn die nÑchste Splitt-Datei nicht gefunden
+          wurde, auf die nÑchste Diskette.
+
+
+ GIF2PIC: bildkonverter fÅr Archivkommentare
+ ~~~~~~~  (GIF format -> ESP's PIC format)
+
+ Syntax:
+ GIF2PIC Bild_Name.GIF [Bild_Name.PIC]
+
+ Hinweis: Bearbeitet 2, 16 und 256-farbige Bilder. Dieses Bild kînnen
+          Sie dann als ein Archivkommentar mit dem /C5 oder /C6 Schalter
+          hinzufÅgen. (/C5 wird das Kommentar in 320x200,
+          /C6 in 640x480 anzeigen)
+          Funktioniert nur mit GIF-87 Format Bildern!!!
+
+          FÅr's PIC-Format siehe (TECHNOTE.TXT)
+
+
+ ANS2BIN: einfacher ANSI nach BINary Konverter fÅr farbige Archivkommentare
+ ~~~~~~~
+
+ Syntax:
+  ANS2BIN picture_name[.ANS] [picture_name.BIN]
+
+  Beispiel: ANS2BIN /20 LOGO.ANS LOGO.BIN
+  Nun kînnen Sie die BIN Datei als Kommentar wie folgt anfÅgen:
+  ESP /C2=LOGO.BIN archiv.ESP
+
+
+  #1: Es mu· ein ANSI-Treiber installiert sein (z.B. ANSI.SYS von DOS)
+      bevor Sie dieses Tool starten. FÅr SFX wird kein Ansi benîtigt.
+      Wenn Ihr Ansi-Editor das binary (.BIN) Datei-format unterstÅtzt, dann
+      brauchen Sie dieses Programm nicht zu benutzen.
+  #2: Sie kînnen Ansidateien direkt mit dem Schalter /C1 nutzen, aber Sie
+      brauchen zum entpacken (UNESP) einen Ansitreiber zum betrachten.
+
+
+==========
+Vorbehalt:
+==========
+
+ Wir hoffen, da· die Benutzung von ESP brauchbar und fehlerfrei ist, aber wir
+ kînnen nicht garantieren, da· das Program keinen Fehler hat. Wenn Sie Fehler
+ gefunden haben, nehmen Sie mit uns Kontakt auf und wir versuchen den Fehler
+ zu korrigieren. Sie kînnen uns auch via Internet kontaktieren,
+ unsere Adresse finden Sie am Ende dieses Textes.
+
+
+=========================
+Die Installierung von ESP
+=========================
+
+ GegenwÑrtig ist es nicht notwendig ESP zu installieren, aber es ist
+ zweckmÑ·ig ESP in ein erreichbares Verzeichnis zu kopieren welches
+ Åber PATH erreichbar ist (z.B.: C:\DOS):
+
+=====================
+Wie funktioniert das?
+=====================
+
+ Jetzt versuche ich erklÑren, warum ESP besser als andere Packer packen kann.
+ Erstens: ESP packt im SOLID Format (- das hei·t es werden alle Dateien
+ angehÑngt und dann gepackt. Beim Entpacken werden diese Dateien enpackt und
+ dann getrennt), aber es sortiert die Dateien nach Typ, das bedeutet Text,
+ grafik und andere Dateien werden nahe bei dem gleichen Typ aneinander
+ stehen.
+
+ Zweitens: ESP sucht nach den gleichen AnfÑngen von Dateien, zum Beispiel
+ Text Dateien, wo alle den gleichen Dateikopf haben.
+ Sie kînnen diese Funktion mit den /J Schalter ausschalten.
+
+==================
+Lizenzbedingungen
+==================
+
+   ESP ist Freeware, das bedeutet:
+
+ 1. Es kann frei genutzt werden, doch ich bitte Sie: geben sie es
+    ihren Freunden weiter, schildern Sie ihre schlechten und guten
+    Erfahrungen bezugnehmend auf dieses Program.
+    (Bitte teilen Sie auch uns Ihre Erfahrungen mit!)
+
+    ABER: Sie kînnen kein Geld dafÅr verlangen, nur wenn Sie es verkaufen
+    oder vermieten (???????), usw. und dann max. das doppelte des Wertes
+    des DatentrÑgers.
+
+ 2. Wenn Sie es kopieren, kopieren Sie bitte das original Programmpaket,
+    weil der andere User die Dokumentationen oder andere Teile
+    des Programmes mîglicherweise benîtigt.
+    (Wenn nicht, kann er/sie die Dateien immer noch lîschen!)
+
+ 3. Sie kînnen ESP max. 100 Jahre lang verwenden, danach MöSSEN Sie
+    es lîschen !!!!!  :-)
+
+ 4. Modifizieren Sie NICHT das Programm oder Teile davon, das machen wir,
+    die Autoren und wenn sie etwas vermissen und sie es verwenden
+    mîchten, kontaktieren Sie uns bitte und wir werden das
+    Programm modifizieren, wenn Ihre Idee gut und brauchbar ist.
+    Wenn Sie es auf anderem Wege ausnutzen oder das Programm verletzen,
+    werden Sie die Gesetze Åberschreiten (und denn ...?)
+
+ 5. Wenn Sie ESP verwenden mîchten, mÅssen Sie nur eine Kleinigkeit
+    erfÅllen (ich denke jetzt nicht DARAN !). Das dem User mitgeteilt wird,
+    da· mit ESP gepackt wurden ist und schreiben Sie die Namen der Autoren
+    irgendwo mit hin. Das kînnen Sie z.B. in der Beschreibung des Programmes
+    machen.
+
+ 6. WIR HAFTEN FöR KEINE SCHéDEN DIE DER USER ANRICHTET.
+    DAS PROGRAMM KANN NUR MIT SELBSTVERANTWORTUNG VERWENDET WERDEN.
+    DIE AUTOREN KôNNEN NICHT FöR DATENVERLUST, SCHéDEN ODER FöR IRGENDWELCHE
+    SCHADEN VERANTWORTUNG öBERNEHMEN (OB SIE DAS PROGRAM BENUTZEN ODER NICHT!)
+
+ 7. Die Installierung und die Benutzung von ESP bedeutet, da· Sie die oben
+    erwÑhnten Bediengungen akzeptieren. Wenn Sie damit nicht Åbereinstimmen,
+    mÅssen sie ESP lîschen und dÅrfen ESP nicht nutzen.
+
+    Danke sehr, das Sie das Original ESP-Programm benutzen!
+
+============
+Danksagungen
+============
+
+ Wir danken folgenden Leuten fÅr Ihre Anregungen und Beta-Tests.
+
+   ( In Alphabetischer Reihenfolge )
+
+ Beef & Piszur (fÅr seine ganzen Tests und Konstruktive Anregungen)
+ Dirk Paehl (fÅr alles was er fÅr uns tat)
+ DJ.Sharki from SHARK BBS (fÅr die Tests der ESP Kommentarfunktionen
+                           und Ideen fÅr BAV)
+ George Shadoff (fÅr die Tests und Ideen)
+ Horst Hackenbruch from LineLife M/F (fÅr Anregungen und das prompte Testen)
+ Johnson Wu (fÅr seine Tests an allen neuen ESP-Versionen und gute
+             Anregungen)
+ P†lma from THE DOLPHIN BBS (fÅr die gute Ideen)
+ Peter Hubinsky vom Slovak Antivirus Center
+ Purak S†ndor (Palomar)  (fÅr das Testen von ESP & BAV)
+ Roman Korcek (fÅr das öbersetzen ins Slowakisch und die Korrigierung von
+               den Beschreibungen)
+ Szymon Grabowski (fÅr MultiMedia filters)
+   ...und den vielen anderen Leuten die uns helfen!
+
+ Vielen Dank!
+
+ Hinweis: BAV ist eine grafische NutzeroberflÑche fÅr ESP
+          und viele andere Packer. Sie ist aber noch nicht fertig.
+
+
+================================
+Wie kînnen Sie uns kontaktieren?
+================================
+
+ FÅr Fragen, VorschlÑge kontaktieren Sie uns in aller Ruhe und wir werden
+ Ihnen bald und verbindlich Antwort geben.
+
+ Internet:
+ ~~~~~~~~
+
+ E-mail: garpad@sparta.banki.hu
+         gyiks@shadow.banki.hu
+
+ WWW:    http://goliat.eik.bme.hu/~gpilaszy/gyiksoft.html
+         http://shadow.banki.hu/~gyiks
+
+ FTP:    SAC:        ftp.elf.stuba.sk/pub/pc/pack/esp*.exe
+         ASTROBASE:  astrobase.bajaobs.hu/pub/astrobase/gyiksoft/esp*.*
+
+ Wenn Sie immer an der neuesten Version von ESP und/oder eines anderen
+ Programmes interessiert sind, schicken Sie uns eine EMAIL.
+ Wir kînnen wenn Sie uns schon kontaktiert haben, eine Liste unserer
+ Programme und ganze Programme schicken.
+
+ *** Die letzte Version kînnen Sie immer von unserer Homepage downloaden! ***
+ * Wenn unsere Homepage nicht funktioniert, melden Sie es uns bitte SOFORT! *
+
+ Wenn Sie die letzte Version von ESP via EMAIL haben mîchten, beachten Sie
+ bitte folgendes:
+
+ - wÑhlen Sie die Kodiermethode, wie Sie ESP empfangen mîchten
+   (UUE, MIME & CODE91 sind verfÅgbar)
+ - senden Sie uns eine EMAIL mit folgenden SUBJECT (Betreff):
+   "subscribe.ESP.Code91" fÅr CODE91-kodierte Version (unser Format,sehr kurz!)
+   "subscribe.ESP.MIME"   fÅr MIME-kodierte Version
+   "subscribe.ESP.UUE"    fÅr UUE-kodierte Version
+   "subscribe.ESP.info"   fÅr nur kurzes Info Åber die neuste ESP-version
+
+ Dann bekommen Sie immer die letzte Version kurz nachdem wir sie fertig haben.
+ Wenn Sie ESP nicht mehr via EMAIL haben mîchten, dann senden Sie uns eine
+ EMAIL mit folgendem SUBJECT (BETREFF): "unsubscribe.ESP"
+
+ Wenn Sie nur die aktuellste Version von ESP haben mîchten dann
+ schreiben Sie hinter SUBJECT (BETREFF): "req.ESP.UUE"
+
+ Wenn Sie Probleme mit dem decodieren haben, dann kînnen Sie die aktuellste
+ Version von unserem CODE91 Programm bekommen: schreiben Sie dann
+ hinter SUBJECT (BETREFF): "req.Code91".
+
+BBS:
+~~~
+ ASTROBASE BBS   +36-79-324-600
+ Modem: Microcom DeskPorte 28.8 S * 33600 bps * V.34, V.FC, MNP 10
+ Opening hours: 0:00-24:00   SySop: Jager Zoltan
+
+ BabYlon BBS      29-446-230 33.6k   and   29-446-231 14.4k
+ Opening hours: 0:00-24:00   SySop: Achilles & ScoTTT    CoSySop: Flawless
+
+ THE DOLPHIN BBS +36-1-189-7745  Rockwell 33.6k
+ Opening hours: 23:00-06:00  SysOp: P†lma
+
+ SHARK BBS  +36-1-133-1602   Elsa Mikrolink TQW 28.8k bps  V32bis V42bis
+ Opening hours: 0:00-24:00   SysOp: DJ.Sharki
+
+
+FIDONET File-Request (FREQ)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LineLife M/F  (Germany)               SysOp: Horst Hackenbruch
+
+  2:2433/1640  (300 - 128,000bps Zyxel-2864i    v.34/v.110/v.120/x.75/MLP/CCB)
+               Phone: +49-2173-967910
+
+  2:2433/1641  (ISDN:  ELINK EL310              v.110/x.75 ESDD-1)
+               Phone: +49-2173-967911
+
+  A file list is FREQable under the magic name: COMPRESS
+  Note: there is no BBS available.
+
+
+ Brief:
+ ~~~~~~
+
+ Wenn Sie noch keine EMAIL schicken kînnen, kînnen Sie uns auch
+ einen Brief schicken (mit Briefmarken versehenden Antwortbrief!).
+
+ Unsere Adresse:        GyikSoft:      Gerîffy èrp†d
+                                          GyikSoft
+
+                                       H-1085, Budapest
+                                     Somogyi BÇla utca 17.
+
+                        Mikrolab:      B†rth†zi Andr†s
+                                           Mikrolab
+
+                                       H-1043, Budapest
+                                         Ny†r utca 53.
+
+ P.S.: Wenn Sie denn in dieser Beschreibung einige Fehler
+ (auf lexikalischen oder grammatischen) finden, bitten wir Sie um
+ Entschuldigung! Teilen Sie uns das bitte mit.
+
+ 1997                                       Gereîffy èrp†d & B†rth†zi Andr†s
+
+                                        korrigiert von Roman Korcek: 27.8.97

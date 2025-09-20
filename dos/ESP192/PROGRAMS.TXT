@@ -1,0 +1,69 @@
+
+Programs, which supports the ESP archiver:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If your program supports ESP, then please send us a short description about it!
+
+EXT V2.0 - (C) Wiktor proDucTion - http://nostromo.jpte.hu/~wiktor
+Automatic archive file identifier and unpacker  CARD-WARE
+
+** All of these programs are downloadable from SAC, from /pc/pack directory: **
+
+AinView 1.74á Cardware    [Palma,The Chaos/PCi-STUFF]Ä-[97.o6.12]
+Archive file viewer. Support 31 archives!
+
+FID v2.11 Cardware        [Palma/PCi-STUFF]Ä-[97.o6.o8]
+File_id.diz extractor.  Support 36 packer, 8 sfx, 11 pic, 13 music!
+75+ options for the best performance
+Languages:Hungarian,English,German,French,Spanish
+
+BCD-LIST FILE_ID.DIZ Lister/Catalogizer V4.1c  (c) 1996-97, P.Rotter
+Supports 35 popular archivers and 10 SFXs.         FREEWARE!
+New in this ver: SFX support, all of the functions seems to work
+
+************ *Dac *Version 1.26 **********  Copyright by Dirk Paehl
+DAC is an archives converter. Converts can be at any format.
+All archives in the actually directory will be repacked per switch.
+Archives can be tested with up to 10 viruses scanner.
+
+********** *Entpack *Version 2.91 ********  Copyright by Dirk Paehl
+Program to unpack archives. (GUS clone)  Archives - file can be become
+scan killed at once the files can with up to four viruses scanner.
+
+************ ES Version 1.3b *********  Copyright by Dirk Paehl
+ES is a unpackshell for the most archives. Identify at the time 46
+archive independent the extension and Errorlevels was returned.
+Sourcecode archive recognition enclosed Freewareversion.
+
+********* *Pi *Version 2.6**************  Copyright by Dirk Paehl
+Pi is a simplemindedly Tool (FREEWARE) to the identifying of packed
+files also from batch file. It's will be given out adequating Errorlevels.
+Version for DOS, Windows 3. 1x and new version for Windows 95 with 32 bit DLL.
+
+IDArc is a simple tool (FREEWARE) to identify compressed files from
+within batchfiles. Incl. Pascal source!   (C) 1994-97, Juergen Peters
+
+MULTI FILE IDENTIFIER 1.33      'MUFI'    by WYx 9706
+Graphics, archive, audio, animation and other file IDENTIFIER !
+
+REPACK v1.00 (Beta 4)  SHAREWARE       Copyright (c) 1996 by Enrico Straube
+The new archive repack program with optional virusscan identifies the
+archives automaticly.
+  - 27 extensions can be identified
+  - 6 virusscanner can be identified
+  - 3 different languages (German, English, Italian)
+  - a very good shell for REPACK (optional)
+
+< SH Archive Identifier v2.30 (23 May 1997) >  (c) 1996-1997 SH Software
+Most extensive archive identifier  available:
+recognizes 65 archive and 24 SFX files. Small
+and fast. Returns archive type and errorlevel
+to DOS.  Can  be  used traditionally and like
+TestFile.  Tested quality software. Documents
+both in English and Finnish.        FREEWARE!
+
+    þþþ Universal Unpacker þþþ (GUS-Clone)
+English version 1.23 (C) 1995-97  Juergen Peters
+Identifies and unpacks archives of many types.
+Virus scan possible during unpacking, move broken archives to baddir.
+
+

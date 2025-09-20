@@ -1,0 +1,63 @@
+
+                       旼컴컴컴컴컴컴컴컴컴컴컴컴커
+                       쿢sing ESP under DOS Shells�
+                       읕컴컴컴컴컴컴컴컴컴컴컴컴켸
+
+This file contains some idea about using our archiver under the well-known
+Dos Shells: Dos Navigator and Volkov Commander. Here they are:
+
+Volkov Commander 4.9903 (text by Ferenc Lutischan)
+~~~~~~~~~~~~~~~~~~~~~~~
+Add these lines to VCARCH.EXT and you can handle ESP file like sub-dirs:
+
+--------- VCARCH.EXT -----------
+ESP:
+E0?:
+E1?:    S M "/" D "/" Y T N
+        unesp.exe v !A
+        unesp.exe x !A @!@!M
+        esp.exe a !A @!@!M
+--------------------------------
+
+Volkov Commander 4.9902 (text by Boogie)
+~~~~~~~~~~~~~~~~~~~~~~~
+Add these lines to VCARCH.EXT and you can handle ESP file like sub-dirs:
+
+--------- VCARCH.EXT -----------
+ESP:    S D T N
+        unesp.exe vs !A
+        unesp.exe xs !A !M
+--------------------------------
+
+Dos Navigator (idea by Beef & Piszur)
+~~~~~~~~~~~~~
+After you add the following lines to DN.EXT and DN.MNU files, you can:
+
+- Pack files to ESP archive:	 Select them and press F2
+- Unpack files from ESP archive: Press Alt+Enter
+
+ ---------- DN.MNU --------------
+ >1 Make ~E~SP archive
+  >2 With subdirs
+   <Archive name:
+    esp /r /b $:$\%3
+  >2 Without subdirs
+   <Archive name:
+    esp /b $:$\%3
+  >2
+  >2 With subdirs+Data Recovery
+   <Archive name:
+    esp /r /b /d $:$\%3
+  >2 Without subdirs+Data Recovery
+   <Archive name:
+    esp /b /d $:$\%3
+ --------------------------------
+
+ ---------- DN.EXT --------------
+ ;Archive
+ esp[>1 E~x~tract to $:$\
+	unesp x !.! $:$\
+     >1 ~T~esting
+	unesp t !.!
+     ]
+ --------------------------------

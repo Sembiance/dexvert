@@ -1,0 +1,369 @@
+
+ESP - Extension Sort Packer verzia 1.9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copyright 1996-97 GyikSoft & MikroLab - všetky práva vyhradené.
+do slovenèiny preloil Roman Korèek <roman_korcek@hotmail.com>
+
+============
+Krátky popis
+============
+
+ ESP je ve¾my rıchly pakovaè. Vyuíva dobrı kompresnı algoritmus, ktorı je
+ vo väèšine prípadov lepší, ne zvyèajne pouívanıch pakovaèov. Je napísanı
+ v assemblere, take nezaberá ve¾a miesta na disku. Kompletnı balík
+ programov ESP obsahuje tieto súbory:
+
+        ESP.EXE      - Pakovací program
+        UNESP.EXE    - Rozpakovávací program
+        ESP2EXE.COM  - Konvertor pre vytvorenie SFX-archívov
+        ESPLINK.COM  - Konvertuje èasti archívu do archívu jedného
+        GIF2PIC.COM  - Konvertor obrázkov pre archívne komentáre
+        ANS2BIN.COM  - Jednoduchı ANSI do BIN konvertor pre farebné
+                       archívne komentáre
+        MANUAL.*     - Súbory s dokumentáciou
+        TECHNOTE.TXT - Formát ESP-súboru & vıpis adresára v archíve
+                       v Pascale
+        TEST.TXT     - Toto je test, preèítaj si to, prosím!
+        WHATSNEW.TXT - Nové vymoenosti ESP
+
+=======
+Príkazy
+=======
+
+    Zatia¾ má ESP iba zopár príkazov a prepínaèov, tu sú:
+
+ ESP: pakovací program
+ ~~~
+ Syntax:
+ ESP [/prepinace] nazov_archivu[.ESP] [vstupna_cesta\][suborovy_filter] [@zoznam_suborov]
+
+ (parametre v hranatıch zátvorkách nie je nutné uvádza)
+
+ <príkazy>
+ iadne, pakuje sa v kadom prípade.
+
+ <prepínaèe>
+ /R          pakuj aj s podadresármy
+ /P          bez /R: ulo mená podadresárov
+             s /R: neulo mená podadresárov
+ /Mx         pakuj metódou x, kde x znamená:
+             0=najlepšia  3=rıchla  4=ukladanie-iadna (štandardne=0)
+ /J          nepoui mód opakovaného h¾adania
+ /Sabcd      priorita triedenia   štandardne=1240
+                                  (ve¾kos, cesta, atribúty, názov)
+             kde a,b,c a d sú jedno z tıchto:
+                                  0=názov
+                                  1=ve¾kos
+                                  2=cesta
+                                  3=dátum/èas
+                                  4=atribúty
+ /T          nepoui internú tabu¾ku prípon
+ /Gheslo     zašifruj heslom, kde heslo je heslo, ktorım chceš šifrova :-)
+ /Cn=nazov   poui archívny komentár zo súboru 'nazov' typu 'n'
+             1=ASCII TEXT
+             2=farebnı text (binárny obsah obrazovky)
+             4=320x200x256  (starı PIC formát, funguje len s RAW2PIC)
+             5=320x200xN    (novı PIC formát, funguje s GIF2PIC konvertorom)
+             6=640x480xN    (novı PIC formát, funguje s GIF2PIC konvertorom)
+ /D[sn[,ss]] ulo do archívu aj záchrannı záznam
+             sn=poèet sektorov        (štandardne=4)
+             ss=(ve¾kos sektora)/256 (štandardne=2)
+ /Vnnn[K|M]  pakuj na viac èastí, kde nnn je ve¾kos èasti
+             (napríklad: /V1440K)
+ /B          poui BEEP (pípanie, ak treba nieèo zada, napríklad potvrdenie
+                         na prepísanie súboru)
+ /Y          automaticky zadávaj Áno
+ /MM         poui MultiMediálnu metódu kompresie pre 8-bitové zvukové
+             súbory a 256-farebné/èiernobiele obrázky.
+             Tento prepínaè nepouívaj pre u skomprimované súbory,
+             ako napríklad GIF, JPG, MPG, MP3...
+             Funguje len s BMP, PCX, RAW, SCO, WAV, VOC, MOD, S3M, XM...
+ /MM2        poui MultiMediálnu metódu kompresie pre 24-bitové obrázky
+ /MEx        poui šifrovaciu metódu x, kde x je: 1=stará
+                                                  2=nová
+                                                  (štandardne=2)
+
+ *** Poznámka: Pokım ESP pakuje, môeš stlaèi F1 pre spustenie hry TETRIS
+               alebo F2 pre NIBBLES.
+
+ UNESP: rozpakovávací program
+ ~~~~~
+ Syntax:
+ UNESP prikaz[prepinac][heslo] nazov_archivu[.ESP] [vystupna_cesta] [cesta\][suborovy_filter] [@zoznam_suborov]
+
+ (Hranaté zátvorky majú rovnakı vıznam ako predtım, parametre v nich nie je
+  nutné uvádza.)
+
+ <príkazy>
+  ?          uká nápovedu
+  e          rozpakuj súbory z archívu bez vytvorenia podadresárov
+  x          rozpakuj súbory z archívu aj s vytvorením podadresárov
+  l          uká obsah archívu
+  v          detailne uká obsah archívu
+  t          otestuj archív
+
+ <prepínaèe>
+  f          zapíš obsah archívu do BIN súboru - funguje s príkazmi
+             'L' a 'V' (napríklad: UNESP VF arch bin)
+  k          poèkaj na stlaèenie klávesy na konci kadej strany
+  p          poui heslo (napríklad: UNESP XPtajne SUBOR.ESP)
+             (Ak nezadáš heslo a je ho treba, UNESP sa naò opıta.)
+  s          preskoè komentár(e) a spracovanie záchranného záznamu
+  y          automaticky zadávaj Áno
+  n          automaticky zadávaj Nie
+  b          poui BEEP
+
+ ESP2EXE: konvertor pre vytvorenie samorozpakovávacieho (SFX) archívu
+ ~~~~~~~  z ESP-archívu (vytvor EXE)
+
+ Syntax:
+ ESP2EXE nazov_archivu.ESP [exe_subor.EXE]
+
+ Poznámka: Nekonvertuj heslom chránené ESP-archívy na EXE a nepouívaj
+           so staršími ESP-archívmi, lebo dekompresná rutina nedokáe
+           spracova zašifrované archívy a staršie ESP-archívy.
+
+           Sú dve rutiny, malá a menšia, program automaticky pouije
+           vhodnejšiu. Menšia nedokáe skonvertova archívny komentár
+           a záchrannı záznam.
+
+ ESPLINK: konvertor èastí archívu do archívu jedného
+ ~~~~~~~
+ Syntax:
+ ESPLINK prva_cast[.ESP] [vysledny_archiv.ESP]
+
+ Poznámka: Ak nie je moné otvori ïalšiu èas, ESPLINK poèká na vımenu
+           diskety.
+
+ GIF2PIC: konvertor obrázkov pre archívne komenty
+ ~~~~~~~  (formát GIF do formátu PIC, pouívaného ESPom)
+
+ Syntax:
+ GIF2PIC meno_obrazku[.GIF] [meno_obrazku.PIC]
+
+ Spracúva 2, 16 a 256-farebné obrázky s hocijakım rozlíšením. Pre pouitie
+ ako archívny komentár poui prepínaè /C5 alebo /C6. (S prepínaèom /C5 bude
+ obrázok zobrazenı v rozlíšení 320x200, s prepínaèom /C6 v rozlíšení
+ 640x480.) Funguje len s obrázkami formátu GIF87!!!
+
+ Poznámka: Pozri TECHNOTE.TXT pre popis formátu PIC.
+
+ ANS2BIN: jednoduchı z formátu ANSI do formátu BIN konvertor pre farebné
+ ~~~~~~~  archívne komentáre
+
+ Syntax:
+ ANS2BIN [/pocet_riadkov] meno_obrazku[.ANS] [meno_obrazku.BIN]
+
+ Napríklad: ANS2BIN /20 LOGO.ANS LOGO.BIN
+
+ Pre pouitie ako archívny komentár poui prepínaè /C2.
+
+ Poznámka #1: Tento konvertor nedokáe spracova obrázky animované alebo
+              väèšie ne obrazovka.
+
+ Poznámka #2: Musíš ma nainštalovanı nejakı ANSI driver (napríklad ANSI.SYS
+              z DOSu), aby si mohol poui tento konvertor. Driver ale nie
+              je potrebnı pre pozeranie archívnych komentárov. Ak tvoj ANSI
+              editor podporuje binárny (BIN) formát, tento konvertor nemusíš
+              pouíva.
+
+ Poznámka #3: ANSI-súbor môeš poui priamo s prepínaèom /C1, ale pre
+              pozeranie archívnych komentárov u potrebuješ ma
+              nainštalovanı ANSI-driver.
+
+=======
+Podpora
+=======
+
+    Dúfame, e pouívanie ESPu bude príjemné a bezproblémové, ale nie sme
+ schopní zaruèi, e v programe nie sú iadne chyby. Ak si našiel nejakú
+ chybu skontaktuj sa s nami cez Internet alebo jednoducho poštou,
+ adresa je na konci tohoto dokumentu a my sa pokúsime túto chybu opravi.
+
+===============
+Inštalácia ESPu
+===============
+
+    Zatia¾ ESP netreba nijako inštalova, ale odporúèa sa skopírova
+ spúšatelné súbory do nejakého adresára uvedeného v PATHe.
+
+===============
+Ako to funguje?
+===============
+
+    Teraz sa pokúsim vysvetli, preèo je ESP lepší, ne iné pakovaèe. ESPov
+ algoritmus je takmer takı istı ako inıch pakovaèov. Hlavné rozdiely sú dva:
+    Prvı: ESP pakuje v SOLID-formáte (- to znamená, e pri kompresii najprv
+ spojí všetky súbory do jedného a potom ich spakuje. Pri dekompresii súbory
+ rozpakuje a potom rozdelí.), ale súbory triedi pod¾a typu.
+    Druhı: ESP detekuje rovnaké zaèiatky súborov, ako napríklad u textovıch
+ dokumentov, ktoré majú rovnaké záhlavie atï. Túto funkciu môeš vypnú
+ prepínaèom /J.
+
+========================
+O kopírovaní a pouívaní
+========================
+
+ESP je freeware. To znamená:
+
+1. Môeš ho vo¾ne kopírova, dokonca by sme boli radi. Prosím, skopíruj
+   tento program kamarátom a povedz im o dobrıch a zlıch skúsenostiach
+   s ním. (Pode¾ sa o ne, prosím, aj s nami.)
+   Nesmieš poadova peniaze za tento program, iba pri predaji
+   alebo prenájme (tie neviem, ja to iba prekladám :-) - pozn. prekl.)
+   a to maximálne dvojnásobok ceny diskety alebo iného nosièa.
+
+2. Ak ho skopíruješ, skopíruj prosím celı programovı balík, iní mono
+   budú potrebova dokumentáciu a iné programy, ktoré sú v òom zahrnuté.
+   Ak ich ten alebo tá nebudú potrebova, jednoducho ich vymaú.
+
+3. Tento pakovaè môeš pouíva 100 rokov, po tejto dobe ho MUSÍŠ vymaza
+   z tvojho disku. :-)
+
+4. Nemodifikuj program, nato sme tu my. Ak nieèo potrebuješ, myslíš, e by
+   sa nieèo dalo poui inak, alebo chceš poui dekompresnı algoritmus
+   v tvojom programe, skontaktuj sa s nami, ak bude tvoj nápad dobrı,
+   program zmeníme, alebo ti pošleme dekompresnı algoritmus za malièkı
+   poplatok. Ak zmeníš program alebo ho pouiješ hocijakou neautorizovanou
+   cestou, porušíš zákon.
+
+5. V kadom prípade, ak chceš poui ESP v tvojom programe, musíš urobi
+   len malièkos: oznámi pouívate¾ovi, e kompresia bola vykonaná ESPom
+   a spomenú mená autorov. Môeš aj v návode.
+
+6. Autori nie sú zodpovední za niè. (Toto je skrátene povedané. Volá sa to
+   Disclaimer a je to v kadom manuáli. Originál je
+   v MANUAL.ENG, alebo v MANUAL.HUN, alebo v oboch - pozn. prekl.)
+
+7. Inštalácia a pouívanie ESP znamená, e s hore uvedenımi bodmi súhlasíš.
+   Ak nesúhlasíš, musíš ESP z tvojho systému a všetkıch tvojich dátovıch
+   nosièov odstráni a nesmieš ESP pouíva.
+
+     Ïakujeme za to, e pouívaš originálny ESP.
+
+
+=========
+Ïakujeme:
+=========
+
+ Radi by sme poïakovali tımto ¾uïom za ich návrhy a beta-testovanie:
+
+   (v abecednom poradí)
+ Beef & Piszur (za kompletné testovanie a konštruktívne návrhy)
+ Dirk Paehl (za všetko èo pre nás urobil)
+ DJ.Sharki z SHARK BBS (za testovanie funkcií archívnych komentárov a nápady
+                        pre BAV)
+ George Shadoff (za testovanie a nápady)
+ Horst Hackenbruch z LineLife M/F (za nápady a rıchle testovanie)
+ Johnson Wu (za testovanie kadej novej verzie ESP a dobré nápady)
+ Pálma z THE DOLPHIN BBS (za dobré nápady)
+ Peter Hubinskı zo Slovenského Antivírusového Centra
+ Purak Sándor (Palomar) (za testovanie ESP & BAV)
+ Roman Korèek (za preklad do slovenèiny a úpravy v dokumentácii)
+ Szymon Grabowski (za MultiMedia filters)
+  ...a mnohım ïalším ¾uïom, ktorí nám pomáhajú!
+
+ ÏAKUJEME!
+
+ Poznámka: BAV je grafické pouívate¾ské prostredie (GUI) pre ESP a ve¾a
+           inıch pakovaèov. Ešte nie je hotové.
+
+===========================
+Ako sa s nami skontaktova?
+===========================
+
+ Skontaktujte sa s nami kvôli hocièomu, sme vïaèní za všetky návrhy, ako
+ tento program vylepši.
+
+InterNet:
+~~~~~~~~
+ E-mail: garpad@sparta.banki.hu
+         gyiks@shadow.banki.hu
+
+ WWW:    http://goliat.eik.bme.hu/~gpilaszy/gyiksoft.html
+         http://shadow.banki.hu/~gyiks
+
+ FTP:    SAC:        ftp.elf.stuba.sk/pub/pc/pack/esp*.exe
+         ASTROBASE:  astrobase.bajaobs.hu/pub/astrobase/gyiksoft/esp*.*
+
+ *** Najnovšia verzia je vdy k dispozícii z našej domovskej stránky! ***
+  Ak naša domovská stránka nefunguje, skontaktuj sa s nami prosím IHNEÏ! 
+
+
+ Ak si chceš "objedna" najnovšiu verziu ESPu a dostáva ju E-mailom, staèí
+ urobi len nasledovné:
+
+ - zvo¾ si metódu kódovania, akou chceš, aby bol ESP kódovanı
+   (UUE, MIME alebo CODE91)
+ - pošli nám E-mail so SUBJECTom:
+   "subscribe.ESP.Code91" pre CODE91-kódovanú verziu (náš formát,
+                                                      ve¾mi krátky!)
+   "subscribe.ESP.MIME"   pre MIME-kódovanú verziu
+   "subscribe.ESP.UUE"    pre UUE-kódovanú verziu
+   "subscribe.ESP.info"   pre krátku informáciu o novıch verziách
+
+  Potom budeš dostáva najnovšiu verziu ESPu hneï ako bude hotová.
+  Ak u nechceš dostáva ESP, pošli nám E-mail so SUBJECTom:
+  "unsubscribe.ESP".
+
+  Ak chceš dosta len jednu, najnovšiu verziu ESPu, namiesto "subscribe"
+  napíš "req", napríklad: "req.ESP.UUE".
+
+  Ak máš problémy s dekódovaním, pošli E-mail so SUBJECTom "req.Code91"
+  a pošleme ti Code91 - dekódovací program.
+
+BBS:
+~~~
+ ASTROBASE BBS   +36-79-324-600
+ Modem: Microcom DeskPorte 28.8 S * 33600 bps * V.34, V.FC, MNP 10
+ Otváracie hodiny: 0:00-24:00   SySop: Jager Zoltan
+
+ BabYlon BBS      29-446-230 33.6k   and   29-446-231 14.4k
+ Otváracie hodiny: 0:00-24:00   SySop: Achilles & ScoTTT    CoSySop: Flawless
+
+ THE DOLPHIN BBS +36-1-189-7745  Rockwell 33.6k
+ Otváracie hodiny: 23:00-06:00  SysOp: P lma
+
+ SHARK BBS  +36-1-133-1602   Elsa Mikrolink TQW 28.8k bps  V32bis V42bis
+ Otváracie hodiny: 0:00-24:00   SysOp: DJ.Sharki
+
+
+FIDONET File-Request (FREQ):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LineLife M/F  (Nemecko)               SysOp: Horst Hackenbruch
+
+  2:2433/1640  (300 - 128,000bps Zyxel-2864i    v.34/v.110/v.120/x.75/MLP/CCB)
+               Phone: +49-2173-967910
+
+  2:2433/1641  (ISDN:  ELINK EL310              v.110/x.75 ESDD-1)
+               Phone: +49-2173-967911
+
+  Zoznam súborov je FREQovate¾nı pod MAGIC NAMEom: COMPRESS
+
+
+
+Normálny list:
+~~~~~~~~~~~~~
+    GyikSoft:       Gereöffy Arpád
+                       GyikSoft
+
+                 17. Somogyi B. street
+                H-1085 Budapeš (Maïarsko)
+
+
+    Mikrolab:      Bártházi András
+                       Mikrolab
+
+                    53. Nyár Street
+                H-1043 Budapeš (Maïarsko)
+
+
+ Na záver:
+ Originál tohoto dokumentu napísal Bártházi András, (pre neMaïarov: jeho
+ krstné meno je András a rodné Bártházi - takáto forma mien sa pouíva
+ v Maïarsku). Za chyby v tomto preklade môem ja, Roman Korèek.
+
+                                           Bártházi András & Gereöffy Arpád
+
+                                                        originál: Máj 1997
+                                                         preklad: 27.8.1997

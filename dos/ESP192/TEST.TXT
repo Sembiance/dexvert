@@ -1,0 +1,107 @@
+
+       Our questions about the future versions of ESP (v2.0)
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please fill this test, and send back to us!
+  E-Mail: garpad@sparta.banki.hu
+      or: gyiks@shadow.banki.hu  (only if the first address doesn't works)
+
+What do you want in ESP v2.0 ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Do you want WIN95 long filename support?
+   ( ) No   ( ) Not important   ( ) Yes
+
+2. Do you want graphic user interface (GUI, like RAR) ?
+   ( ) No   ( ) Not important   ( ) Yes
+
+   What type?
+   ( ) One file-window (RAR-like)   ( ) Two file-windows (NC-like)
+
+   How does GUI use the UNESP?
+   ( ) Execute external UNESP.EXE   ( ) Use internal UNESP routine
+
+3. Do you want to use script files?
+   ( ) No   ( ) Not important   ( ) Yes
+
+4. What do you want to do while ESP compressing large files?
+   [ ] Nothing                  [ ] Playing Nibbles or Tetris
+   [ ] Playing Go-Mu-Ku         [ ] See GIF pictures
+   [ ] Listening to FM-Music    [ ] Listening to .MOD files
+   [ ] Other: _____________________________________________
+
+5. What kind of command-line do you want for ESP?
+   ( ) ESP 1.x-compatible
+   ( ) ARJ-compatible
+   ( ) RAR-compatible
+   ( ) PkZIP-compatible
+   ( ) Incompatible with all archivers ;-)
+   ( ) Other: ___________
+
+6. Do you want documentation on your language?
+   ( ) No   ( ) Not important   ( ) Yes
+   Which language(s)? _______________________________
+
+   Do you want to translate the document(s) to your language?
+   ( ) No   ( ) Yes
+
+7. Got the ESP from: _____________________________________
+   What version of ESP do you use? __________
+
+8. What kind of copyright do you want for ESP v2.0+ ?
+   ( ) FreeWare  (with no AV-key support!!!)
+   ( ) CardWare  (free registration via E-Mail)
+   ( ) ShareWare  Registration: ______ US dollars
+
+9. Do you want subscribe to ESP mailing list?  ( ) No   ( ) Yes
+   (we can send new versions for you via E-Mail)
+   Encoding:  ( ) Code91   ( ) UUE   ( ) Mime  ( ) Only info about new version
+   For more info see MANUAL.* files!
+
+Other questions:  (not important to fill it)
+~~~~~~~~~~~~~~~~
+Your name: _______________________________________
+Nickname:  _________________
+E-Mail:    _______________________________________
+Homepage:  _______________________________________
+Country:   _________________
+City/town: _________________
+
+You are:   ( ) Player   ( ) Programmer   ( ) Other:________________________
+
+Which programming-language do you use? (if you are programmer)
+   [ ] Assembly  [ ] Pascal   [ ] C/C++  [ ] C--  [ ] BAssPasC
+   [ ] LOGO :-)  [ ] Clipper  [ ] Basic  [ ] Other:______________
+
+What's your computer's parameters?
+   Family    ( ) <386   ( ) 386  ( ) 486    ( ) Pentium  ( ) Other:
+   Manufact. ( ) Intel  ( ) AMD  ( ) Cyrix  ( ) IBM      ( ) Other:
+   Clock freq. _____ MHz
+   HDD size: _______ MByte
+   RAM: ____ MByte
+   VGA card type: _____________________  Is it VESA-compatible? ( ) Yes  ( ) No
+   Sound card type: ___________________  Sound card RAM: ______
+   
+Which OS do you use?
+   MS-DOS:  ( ) v5.0   ( ) 6.22   ( ) 7.0   ( ) Other version: ______
+   ( ) PC-DOS 7.0   ( ) Caldera OpenDOS  ( ) Novell-DOS   ( ) 4DOS
+   ( ) Windows 3.1  ( ) Win95   ( ) Win NT 4.0  ( ) OS/2
+   LINUX:   ( ) SlackWare  ( ) RedHat  ( ) Other: ___________________
+   ( ) Other(s):_____________________________________________________
+
+Under which OS do you want use ESP? _________________________________
+
+Which commander do you use?
+   ( ) NC v4.0  ( ) NC v4.5  ( ) NC v5.0  ( ) Volkov C. ( ) Dos Navigator
+   ( ) Other:_______________________________________________
+
+Which archivers do(did) you use?
+   [ ] RAR  [ ] ZIP  [ ] ARJ  [ ] UC2  [ ] AIN  [ ] ARJZ  [ ] X1  [ ] BZIP
+   Other(s): _______________________________________________
+   Why? ____________________________________________________
+
+Have you got any comments for this test? What's that?   
+
+Have you got any ideas, suggestions that improve ESP? What's that?
+
+Did you experience any bug? What's that?
+

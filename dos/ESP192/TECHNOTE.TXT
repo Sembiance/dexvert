@@ -1,0 +1,100 @@
+====================
+Some Technical Notes
+====================
+
+ Switch F in UNESP
+ ~~~~~~~~~~~~~~~~~
+    This command creates a binary file contains the directory structure of the
+ archive file. It useable if you want to build ESP in your SHELL. It's format
+ is:
+
+           Size        ( dword  )
+           DateTime    ( dword  )
+           NameLength  ( byte   ) д©
+           Name        ( x byte ) дад A Pascal-type string
+                                       x=79, if command 'V' used, and
+                                       x=13, if command 'L'.
+
+ Format of the ESP Header
+ ~~~~~~~~~~~~~~~~~~~~~~~~
+
+           ID          ( 4 byte )  Always "ESP>"
+           Version     ( byte   )  Version of file-format:
+                                     15h: ESP v1.5
+                                     16h: ESP v1.6+ normal archive
+                                     17h: ESP v1.9+ with /ME2
+                                     19h: ESP v1.9+ with /MM2
+           Method      ( byte   )  Method & password flag
+                                   0..2 bits: Number of method
+                                     3. bit : Multimedia-Compressed
+                                     4. bit : < unused yet >
+                                     5. bit : Last fragment
+                                     6. bit : Password used
+                                     7. bit : Not-first fragment
+
+ Format of a new PIC picture (created with GIF2PIC)
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+           X-resolution  ( word )
+           Y-resolution  ( word )
+           Color bits    ( byte )  8 if 256 color, 4 if 16 color, 1 if 2 color.
+           Color palette ( colors*3  byte )  6 bit format, values 0..63
+           Pixel data    ( 64000 byte )  Uncompressed, ESP will compress this.
+
+ Note: First 5 byte missed in old PIC format (created with RAW2PIC)
+
+===========================================
+Read dir of an ESP file - EXAMPLE IN PASCAL
+===========================================
+
+-[ ESPDIR.PAS ]--------------------- 8< --------------------------------------
+
+Program EspDir;
+
+{$M $4000,0,0}
+
+Uses Dos;
+
+Type
+  DirType = Record
+              Size     : Longint;
+              DateTime : Longint;
+              Name     : String[79];
+            End;
+
+Var
+  Temp  : file of DirType;
+  aFile : DirType;
+  Err   : Integer;
+
+Begin
+
+If ParamCount<>1 Then
+Begin
+  Writeln('Right use: EspDir Archive.ESP');
+  Writeln('!ATTENTION! Works with UNESP v1.71 or higher!');
+  Halt(1);
+End;
+
+SwapVectors;
+Exec('C:\COMMAND.COM','/C UNESP.EXE VFS '+ParamStr(1)+' temp.dir >NUL');
+SwapVectors;
+Assign(Temp,'temp.dir');
+{$I-} Reset(Temp); {$I+}
+If IOResult<>0 Then
+Begin
+  Writeln('Error reading tempfile. (Need password, bad version of UNESP, etc.)');
+  Halt(1);
+End;
+
+While Not Eof(Temp) do
+Begin
+   Read(Temp,aFile);
+   WriteLn(aFile.Size:9,' "',aFile.Name,'"');
+End;
+
+Close(Temp);
+Erase(Temp);
+End.
+
+------------------------------------ 8< --------------------------------------
+

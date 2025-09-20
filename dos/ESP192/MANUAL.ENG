@@ -1,0 +1,364 @@
+
+ESP - Extension Sort Packer Version 1.9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copyright 1996-97 GyikSoft & MikroLab - All Rights Reserved.
+*** corrected by Roman Korcek <roman_korcek@hotmail.com> ***
+
+=================
+Short Description
+=================
+
+    ESP is a very fast archiver. It has got a good compression algorithm,
+ that is in the most cases better than the one of commonly used archivers.
+ It was written in assembly, so it uses very little place on your disk.
+ The ESP complete program package contains the following files:
+
+    ESP.EXE      - Compression Program
+    UNESP.EXE    - Decompression Program
+    ESP2EXE.COM  - Self-Extracting Maker
+    ESPLINK.COM  - Convert fragments to a single archive file
+    GIF2PIC.COM  - Picture converter for graphics archive-comments
+    ANS2BIN.COM  - Simple ANSI to BIN converter for color archive-comments
+    MANUAL.*     - Documentation files
+    TECHNOTE.TXT - File-formats & ESP lister in Pascal
+    TEST.TXT     - This is a test, please read it!
+    WHATSNEW.TXT - New features of ESP
+
+==============
+Command Syntax
+==============
+
+    For now, ESP has got only a few command parameters and switches,
+ here they are:
+
+ ESP: the compression program
+ ~~~
+ Usage: ESP [/switches] arc_name[.ESP] [source_path\][filemask] [@listfile]
+ (Square brackets are used to indicate that the parameter is not necessary)
+
+ <Commands>
+ None, ESP always compresses.
+
+ <Switches>
+ /R       recursively scan subdirs
+ /P       without /R: save subdir's name
+          with /R: don't save pathnames
+ /Mx      select compression method where x means:
+                                     0=best 3=fast 4=storing (default=0)
+ /J       disable repeat-search mode
+ /Sabcd   sorting priority   default=1240 (size, path, attrib, name)
+                             a, b, c and d is one of the follows:
+                             0 = Name
+                             1 = Size
+                             2 = Path
+                             3 = Date/Time
+                             4 = Attribute
+ /T          disable internal EXTENSION-table
+ /Gpassword  garble with password (encrypt file)
+             (if you don't give a password, ESP will prompt for it)
+ /Cn=name    use archive comment file 'name' type 'n'
+               1 = ASCII TEXT
+               2 = Color text  (binary screen format)
+               4 = 320x200x256 (old PIC format, works only with RAW2PIC)
+               5 = 320x200xN   (new PIC, works with GIF2PIC.COM converter)
+               6 = 640x480xN   (new PIC, works with GIF2PIC.COM converter)
+ /D[sn[,ss]] add Data Recovery Record to archive
+                  sn=number of sectors    (default=4)
+                  ss=(size of sector)/256 (default=2)
+ /Vnnn[K|M]  enable multiple volumes, volume size is nnn  (example: /V1440K)
+ /B          enable BEEPing (if user input is needed or at the end
+                             of compression)
+ /Y          always Yes option (don't wait for a key before next volume)
+ /MM         enable MultiMedia compression method for 8-bit sound and
+             256-color/greyscale images.  Do not use for already compressed
+             files, for example GIF, JPG, MPG, MP3...
+             It works only with BMP, PCX, RAW, SCO, WAV, VOC, MOD, S3M, XM...
+ /MM2        enable MultiMedia compression method for 24-bit images
+ /MEx        select method (1=old or 2=new) of encryption (default=2)
+
+ *** Note: During the compression process you can press F1 for playing
+           TETRIS or F2 for playing NIBBLES.
+
+ UNESP: the decompression program
+ ~~~~~
+ Usage:
+  UNESP command[switch][password] arc_name[.ESP] [dest_dir\] [path\][filemask]
+        [@listfile]
+
+ (Square brackets have got the same meaning as above, they are used
+  to indicate that the parameter is not necessary)
+
+ <Commands>
+  ?       View help message
+  e       Extract files from archive
+  x       eXtract files with full path
+  l       List contents of archive
+  v       Verbosely list contents of archive
+  t       Test archive
+
+ <Switches>
+  f       list to bin file - works with 'L'&'V' command (example: UNESP VF arc bin)
+  k       wait for a key at end of every screen
+  p       set password   (example: UNESP XPsecret FILE.ESP)
+          (if you don't give a password, UNESP will prompt for it)
+  s       skip comment(s) & DRR handling
+  y       always Yes
+  n       always No
+  b       enable BEEP
+
+ ESP2EXE: self-extract maker from an ESP archive (Create EXE)
+ ~~~~~~~
+ Usage: ESP2EXE archive_name.ESP [exe_name.EXE]
+
+ Note: Don't convert a password protected ESP file to EXE and don't use with
+       older ESP files, 'cause the decompression routine doesn't handle the
+       password and older ESP files.
+
+       There are two routines, a small and a smaller, the program
+       automatically selects the better one. The smaller routine doesn't
+       handle file comments and DRR.
+
+ ESPLINK: archive converter, makes a single archive from archive fragments
+ ~~~~~~~
+ Usage: ESPLINK first_fragment[.ESP] [single_arc_file.ESP]
+
+ Note: ESPLINK will wait for a disk-change, if it can't open the next
+       fragment.
+
+ GIF2PIC: picture converter for archive-comments
+ ~~~~~~~  (GIF format -> ESP's new PIC format)
+
+ Usage: GIF2PIC picture_name[.GIF] [picture_name.PIC]
+
+ Handles 2, 16 and 256 color pictures with any resolution. You can add this
+ picture as a comment to an ESP-archive, using the /C5 or /C6 switch.
+ (/C5 will show the comment in 320x200, /C6 in 640x480)
+ Works only with GIF87-format pictures!!!
+
+ Note: See technical notes for PIC-structure in TECHNOTE.TXT!
+
+ ANS2BIN: simple ANSI to BINary converter for color archive-comments
+ ~~~~~~~
+ Usage: ANS2BIN [/number_of_lines] picture_name[.ANS] [picture_name.BIN]
+ Example: ANS2BIN /20 LOGO.ANS LOGO.BIN
+ You can add a BIN file as a comment to your ESP-archive with the command
+ /C2:
+   ESP /C2=LOGO.BIN archive.ESP
+
+ Note #1: This utility cannot handle animated pictures, or pictures
+          larger than one screen!
+
+ Note #2: You must have an ANSI-driver installed (for example ANSI.SYS from
+          DOS) before you can run this utility. But an ANSI-driver isn't
+          needed to view color archive-comments! If your ANSI-editor
+          supports binary (.BIN) file-format, you don't need to use this
+          program.
+
+ Note #3: You can use ANSI-files directly with /C1 option, but you need
+          to have an ANSI-driver installed for UNESP (or SFX) to show
+          your comment.
+
+===============
+Program Support
+===============
+
+    We hope that the use of ESP will be enjoyable and troublefree, but we
+ are not able to guarantee that the program hasn't got bugs. If you have
+ an error encontered, please contact us, and we'll try to fix it.  You can
+ reach us by the NET or simple by MAIL, our address is at the end of this
+ document.
+
+==============
+Installing ESP
+==============
+
+    For now, ESP doesn't need any installation, but recommended is to
+ copy these files to a directory that is in the PATH string. This way
+ you can pack/unpack from every directory.
+
+=================
+How does it work?
+=================
+
+    Now I'll try to explain why ESP works better than other archivers. ESP's
+ algorithm is almost the same as the one other archivers use. The main
+ differences are two.
+    The first is:  ESP compresses in a SOLID format (that means that before
+ compressing the files it merges all files into one, and then compresses
+ them. When decompressing, ESP decompresses first and then cuts
+ the package to files), but it sorts the files by type, what means that
+ text, graphic and other files will be near the same type.
+    The second one is: ESP detects the same beginnings of files, for
+ example in text-files, when all of them have got the same header, etc.
+ You can switch this function off by using the /J switch.
+
+=======================
+About Copying and Using
+=======================
+
+ ESP is freeware. This means:
+
+ 1. You may freely distributed it, and I ask for it: Please give this
+    program to your friends and tell them your good and bad experiences
+    with it. (Please tell your experiences to us, too.)
+    You mustn't get money for this program, just for selling, renting, etc.
+    it, and just for max. the double worth of the disk(etc.).
+
+ 2. If you distribute it, please copy the original package, because the
+    other users may need the documentation files, and the all programs
+    the package contains. If she or he doesn't need them, then she or he
+    will delete them.
+
+ 3. You can use this archiver for 100 years, after this period you MUST
+    delete it from your machine. :-)
+
+ 4. Do not modify the program, for this procedure we are here, if you
+    need something, you think something is usable in another way, or you
+    want to use the decompession algorithm in your program, contact
+    us, we will modify the program if it is useful or we'll send you the
+    decompression algorithm for a very minimal fee. If you modify the
+    program or you use it in any unauthorized way, then you shall result
+    in criminal and/or civil prosecution.
+
+ 5. Any other way, if you want to use ESP by your program, you have to do
+    just a little thing: Tell the user by any way, that the compression was
+    done by ESP, and tell the authors names. You can do it in your user's
+    manual.
+
+ 6. ESP ARCHIVER IS DISTRIBUTED "AS IS".  NO WARRANTY OF ANY KIND IS
+    EXPRESSED OR IMPLIED. YOU USE AT YOUR OWN RISK. THE AUTHORS WILL
+    NOT BE  LIABLE FOR  DATA LOSS,  DAMAGES,  LOSS OF PROFITS OR ANY
+    KIND OF LOSS WHILE USING OR MISUSING THIS SOFTWARE.
+
+ 7. Installing and using ESP signifies acceptance of these terms and
+    conditions of the licence. If you don't agree with the terms of
+    this licence you must remove the ESP files from all your storage devices
+    and cease to use the product.
+
+      Thank you for using the original ESP.
+
+
+=============
+ Thanks to:
+=============
+
+ We would like to thank these people for their suggestions and beta-testing:
+
+   ( In alphabetic order )
+ Beef & Piszur (for complete testing and constructive suggestions)
+ Dirk Paehl (for everything he has done for us)
+ DJ.Sharki from SHARK BBS (for testing ESP comment functions,
+                           and ideas for BAV)
+ George Shadoff (for testing and for ideas)
+ Horst Hackenbruch from LineLife M/F (for suggestions, and quick testing)
+ Johnson Wu (for testing every new ESP version and giving good ideas)
+ P†lma from THE DOLPHIN BBS (for good ideas)
+ Peter Hubinsky from Slovak Antivirus Center
+ Purak S†ndor (Palomar) from ASTROBASE BBS & FTP site (for testing ESP & BAV)
+ Roman Korcek (for the Slovakian translation and correction of manuals)
+ Szymon Grabowski (for MultiMedia filters)
+  ...and many other people, who are helping us!
+
+ Thank you!
+
+ Note: BAV is a GUI for ESP and a lot of other archivers.
+ It is not ready yet.
+
+=======================
+Where can you reach us?
+=======================
+
+ Contact us for anything, we would appreciate any suggestions to improve this
+ archiver.
+
+InterNet:
+~~~~~~~~
+ E-mail: garpad@sparta.banki.hu
+         gyiks@shadow.banki.hu    (only if the first address didn't work)
+
+ WWW:    http://goliat.eik.bme.hu/~gpilaszy/gyiksoft.html
+         http://shadow.banki.hu/~gyiks    (Doesn't work at the moment)
+
+ FTP:    SAC:        ftp.elf.stuba.sk/pub/pc/pack/esp*.exe
+         ASTROBASE:  astrobase.bajaobs.hu/pub/astrobase/gyiksoft/esp*.*
+
+ *** The latest version is always downloadable from our Homepage! ***
+   *** If our homepage doesn't work, please report IMMEDIATELY! ***
+
+ If you want to "order" posting the latest version of ESP by e-mail,
+ you just have to do the following things:
+
+ - choose a coding method with which you want to receive ESP
+   (UUE, MIME & CODE91 possible)
+ - send us an e-mail with SUBJECT:
+   "subscribe.ESP.Code91"  for CODE91-encoded version (our format, very short!)
+   "subscribe.ESP.MIME"    for MIME-encoded version
+   "subscribe.ESP.UUE"     for UUEncoded version
+   "subscribe.ESP.info"    for only short info about new versions
+
+ After it you will get the latest version of ESP the same time we create it.
+ If you want to revoke ordering ESP, send us an e-mail with SUBJECT:
+ "unsubscribe.ESP"
+
+ If you want to get the only actual ESP version, please write "req"
+ instead of "subscribe", for example: "req.ESP.UUE".
+
+ If you have problems with decoding, or you want to get a new coding
+ technology, please write an e-mail with "req.Code91" in subject!
+ We'll send you the self-decoding package of the Code91 program.
+
+
+BBS:
+~~~
+ ASTROBASE BBS   +36-79-324-600
+ Modem: Microcom DeskPorte 28.8 S * 33600 bps * V.34, V.FC, MNP 10
+ Opening hours: 0:00-24:00   SySop: Jager Zoltan
+
+ BabYlon BBS      29-446-230 33.6k   and   29-446-231 14.4k
+ Opening hours: 0:00-24:00   SySop: Achilles & ScoTTT    CoSySop: Flawless
+
+ THE DOLPHIN BBS +36-1-189-7745  Rockwell 33.6k
+ Opening hours: 23:00-06:00  SysOp: P†lma
+
+ SHARK BBS  +36-1-133-1602   Elsa Mikrolink TQW 28.8k bps  V32bis V42bis
+ Opening hours: 0:00-24:00   SysOp: DJ.Sharki
+
+
+FIDONET File-Request (FREQ)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  LineLife M/F  (Germany)               SysOp: Horst Hackenbruch
+
+  2:2433/1640  (300 - 128,000bps Zyxel-2864i    v.34/v.110/v.120/x.75/MLP/CCB)
+               Phone: +49-2173-967910
+
+  2:2433/1641  (ISDN:  ELINK EL310              v.110/x.75 ESDD-1)
+               Phone: +49-2173-967911
+
+  A file list is FREQable under the magic name: : COMPRESS
+  Note: there is no BBS available.
+
+
+Normal letter:
+~~~~~~~~~~~~~~
+    GyikSoft:       Gereîffy èrp†d
+                       GyikSoft
+
+                 17. Somogyi B. street
+                H-1085 Budapest (Hungary)
+
+
+    Mikrolab:      B†rth†zi Andr†s
+                       Mikrolab
+
+                    53. Ny†r Street
+                H-1043 Budapest (Hungary)
+
+
+ At last:
+ This document was originally written by B†rth†zi Andr†s,
+ (for foreigners: my family name is B†rth†zi, and my first name
+ is Andr†s - we use this form of the names in Hungary).
+
+                                            B†rth†zi Andr†s & Gereîffy èrp†d
+                                                                   May, 1997
+                                          corrected by Roman Korcek: 27.8.97

@@ -1,0 +1,239 @@
+--------------------------------------------------------------------------------
+   *** If you can help us in translating documentation, please write us! ***
+--------------------------------------------------------------------------------
+Note: we are working on ESP v2.0, and we hope the first betas will be
+      relased soon...
+Some important features of ESP v2.0:
+  - DLL-support for easy upgrade
+  - characterized graphic user interface (archiver shell) like RAR or ACE
+  - all archiver function (add, delete, move, update, etc...)
+  - better ratio, higher speed and super multimedia compression algorithms
+  - long filename and extended attribute/date support (Win95,OS/2,Linux)
+  - free UNESP source code in Assembly, BAssPasC, Pascal and C/C++ language!
+  - LINUX version of ESP (and maybe Win95 and OS/2 too)
+  - realtime-interpreted ANSI comments, and FLI/FLC comments!
+  - 7-bit file formats (UUE or Code91 encoding)
+--------------------------------------------------------------------------------
+
+                            WHAT'S NEW?
+
+ v1.92 final version
+~~~~~~~~~~~~~~~~~~~~~
+- Modifications in text files, German manual is complete now. <by Roman Korcek>
+- Some internet address and BBS has changed, see manuals!
+- DOSNAVIG.TXT is renamed to DOSSHELL.TXT and it contains informations about
+  using ESP with Volkov Commander v4.99+ too. <by Boogie>
+- bugfix in ESPLINK: name changed from SINGE.ESP to SINGLE.ESP
+- bigfix in ESP:  ESP test \path\mask  didn't work!  <thanks to Johnson Wu>
+
+ v1.91 test version    NOT RELASED BY US!
+~~~~~~~~~~~~~~~~~~~~
+- New option is added to ESP:
+    /MLx  where x is the 'minimum match length' in range [3..256] (default=3).
+  For multimedia files use both /MM (or /MM2) and /MLx options!
+  (Value /ML7 was the best in my tests)           <idea by Szymon Grabowski>
+- Small modification in compress routine in order to presenting better ratio
+  with /M0 and /M2 (/M1 and /M3 are unchanged).
+
+ v1.9 final version
+~~~~~~~~~~~~~~~~~~~~
+- All known bugs are fixed!!!
+  If you find a bug in this version, please report immediately!
+- Slovakian documentation, and corrections in other texts by Roman Korcek
+- PROGRAMS.TXT added, this is a list of programs which supports ESP archiver
+- DOSNAVIG.TXT added, instructions for using ESP with Dos navigator
+
+ v1.9 non-public beta7 version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- New multimedia-compression algorithm by Szymon Grabowski
+  Use /MM2 option for compress 24-bit files better than other archivers!
+  It works only with uncompressed files, for example: RAW, BMP, TGA, TIFF
+  Warning! JPG and PNG is already compressed, don't try compress them with /MM2
+- ESP.EXE supports listfile, you can specify listfile-name after a @ character:
+   ESP archive.ESP @listfile
+  Warning! If you want use directory names in the listfile, you must use
+  /P (or /R) option too, otherwise ESP don't store path for files!
+- ESP & UNESP give back ERRORLEVEL values if (de)compress failed  <Beef&Piszur>
+
+ v1.9 non-public beta6 version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- OS/2 bug fixed. <Special thanks to Kov cs Istv n (Kofa) for the lot of help!>
+    When launching an ESP SFX with archive comment present as the first
+    program in a DOS session the SFX would hang at the beginning of extraction
+    if the full path of the executable file is 28 characters or longer.
+- BUGFIX: there was an other optimization bug, so UNESP failed to extract
+  some large and very special files correctly  <thanks to Beef & Piszur>
+- BUGFIX: Sometimes SFX modules crash after unpack all file. <thanks to P lma>
+- BUGFIX: UNESP and SFX-modules didn't write error if disk full. <Beef&Piszur>
+- ESP write the archive-name, number of files and uncompressed size.  <Piszur>
+- UNESP: You can abort listing with ESC key (UNESP LK archive)   <Beef&Piszur>
+- ESP: You can write the options after filename(s) too.          <Beef&Piszur>
+- New: n*1000byte and n*1000000byte volume sizes added:
+    /Vnnn  =  if nnn>=4096 then nnn bytes, else nnn*1024 bytes!
+    /Vnnnk =  nnn*1000 bytes
+    /VnnnK =  nnn*1024 bytes
+    /Vnnnm =  nnn*1,000,000 bytes  (million bytes)
+    /VnnnM =  nnn*1024*1024 bytes  (megabytes)
+  Special volume sizes for MS-DOS formatted diskettes: (ARJ-compatible)
+    /VV1440  = 1456400 byte
+    /VV1200  = 1212400 byte
+    /VV720   =  729400 byte
+    /VV360   =  361400 byte
+  <Thanks to Beef & Piszur for all ideas!>
+- And some other small bugfixes...
+
+
+ v1.9 beta5 test version
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- BUGFIX: UNESP cannot unpack archives with more than 256 files sometimes!
+- BUGFIX: In previous versions you can use two password to extract files!
+  For example: If you encrypt an archive with password ABCD, then you can unpack
+  it with password ABCE too. But ABCC or ABCF don't works!!! The lowest bit
+  of ASCII code lost in short passwords. <thanks to Pedro Ignacio Maza Arias>
+  I must add new switch for reverse compatibility: /MEx
+  Default is new algorithm, but you can make compatible encrypted archives
+  if you use /ME1 option. (for new algorithm /ME2, but this is default, so
+  switch not need) In version 2.0 will be more encryption method, including
+  PGP and others. Older versions cannot unpack /ME2-encrypted archives!!!
+- BUGFIX: UNESP create subdirs wrong if you gave destination path.
+- BUGFIX: Method /M0 and /M1 are modified, because /M0 didn't works on all
+  Pentium-compatible processors <thanks to Beef&Piszur>
+- BUGFIX: REP-search function works bad sometimes, if the files are smaller
+  than 32 byte! <thanks to Pierre Foucart>
+- NEW: ESP save full path if you give, and works with /R too!
+  For example: ESP /R ARCHIVE.ESP F:\ASSEMBLY\ESP\*.ASM DOC\MANUAL.* D:*.*
+- NEW: If you give a subdir's name, then ESP will automatic append '\*.*'
+  example: ESP ARCHIVE.ESP TESTDIR  equal with  ESP ARCHIVE.ESP TESTDIR\*.*
+     <idea from Grin and others>
+- NEW: ESP write size and ratio of redudancy after compression
+- NEW: UNESP write actual ratio under testing <idea by Beef&Piszur>
+- NEW in UNESP: You can give more filename/filemask in command line
+      <idea by George Shadoff>
+- NEW in UNESP: You can use LISTFILE too. Example: UNESP X ARCH.ESP @LIST.TXT
+  In listfile you can use SPACE,#0,CR or LF between filenames/filemasks!
+- NEW: Comment graphic in 640x480 too!  <idea from Johnson Wu>
+  ESP supports comment GFX in resolution 320x200 or 640x480, with 2,16 or 256
+  colors! (VESA-compatible VGA-card need for view 640x480x256 gfx)
+  Use GIF2PIC converter for create PIC file, and after you can add picture
+  to archive with /C5 or /C6 option!
+  (RAW2PIC util is removed from package)
+
+ v1.9 beta4 test version
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- BUGFIX in ESP & UNESP: MultiMedia compression didn't works sometimes: UNESP
+  unpack small files wrong  <thanks to Robert Joosten>
+  Note: If you have important files archived with wrong ESP version (beta3),
+  send me, I can unpack it manually!
+- BUGFIX: Small SFX routine didn't restore file attributes <th. George Shadoff>
+- Some bugfixes in documentation files  <thanks for Palomar>
+- New: MANUAL.GER - german documentation <thanks for Dirk Paehl>
+
+ v1.9 beta3 test version
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- !!! Some address changed !!! (new WEB site, and new E-Mail after 05/19/97)
+- Bugfix: SFX - You can quit after comment with ESC key <thanks to Beef&Piszur>
+- Bugfix: UNESP handles now better bad archives
+- Bugfix: UNESP didn't view correctly SFX comments <thanks to Palomar>
+- Bugfix: UNESP command V unpacks empty subdirs sometime <th. to George Shadoff>
+- Bugfix: UNESP can overwrite read-only files too <thanks to Beef>
+- Bugfix: ESP was calculating ratio wrong sometime <thanks to Piszur>
+- Bugfix: ESP&UNESP handles wrong TEMP env. variable <th. Piszur & Johnson Wu>
+- Some file has got wrong date in beta2 package <thanks to Palomar>
+- New: Test function in UNESP (command T) <thanks to Beef & Palomar>
+- New: if you don't give password at command-line, ESP will prompt for it!
+                                                           <idea by Dirk Paehl>
+- New: option /B - will BEEP if keypress needed or ready <thanks to Piszur>
+- New: ESP write number of disk, when waiting for next volume
+- New: always Yes option in ESP <thanks to Johnson Wu>
+- New: built ESP2EXES into ESP2EXE (autodetecting from archive header) [***]
+- New: ANS2BIN program for easier ANSI -> BIN converting (for /C2 comment type)
+- New: NIBBLES game in ESP, press F2!  <thanks to Mikrolab for routine>
+- Tetris is faster!
+
+ v1.9 beta2 test version
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- File ESPLINK.COM missed from v1.9beta <thanks to Horst Hackenbruch & Piszur>
+- New support sites (FTP&BBS: ASTROBASE, FIDONET: Linelife M/F) See doc!
+
+ v1.9 beta test version
+~~~~~~~~~~~~~~~~~~~~~~~~
+- Multimedia Compression for 8-bit sound and 256-color/greyscale images
+  Do not use for already compressed files, for example GIF,JPG,MPG,MP3...
+  It works only with BMP, PCX, RAW, SCO, WAV, VOC, MOD, S3M, XM,...
+- New utility: ESPLINK - links fragmented files to a single archive
+- Smallest SFX routines  (only 3559 / 4542 bytes)
+- ESP: INTERNAL GAME!!! PRESS F1 TO PLAY TETRIS! It use only 0.7% CPU-time!
+- ESP: BUGFIX - skipped files without extension when filemask used
+                                 <thanks to everyone, who reports this big bug>
+- ESP: BUGFIX - option /V didn't handle K and M   <thanks to Johnson Wu>
+- ESP: BUGFIX - write 'Disk full!' before create next volume <thanks to Palomar>
+- ESP: Shows compression ratio under compressing
+- ESP: Prints compressed size and compression ratio after compression
+- ESP: You can paused compression with SPACE. (usefull with any CACHE program)
+- UNESP: BUGFIX - Default extension is .ESP now! <th. Pierre Foucart & Palomar>
+- UNESP: BUGFIX - Now can handle SFX files! <thanks to George Shadoff & others>
+- UNESP: New switch: S - skip comment+DRR <idea from P lma>
+- UNESP: Prints Total Length & Ratio at L & V commands <idea from TOM & others>
+- UNESP: SKIP ALL at overwrite question (S) <idea from BEEF & PISZUR>
+- modified TEST.TXT (thanks to me :-)
+- TECHNOTE.TXT contains technical informations (ESP file format...)
+<and thanks to everyone, who reported bugs, gave ideas, wrote suggestions to us>
+
+ v1.8c
+~~~~~~~
+- BUGFIX:  <thanks to George Shadoff>
+   in ESP.EXE: /R doesn't works with filemasks.
+   in UNESP & ESP2EXE: doesn't restore file attributes
+- BUGFIX:  ESP.EXE filename.ESP D:*.*  doesn't works
+- BUGFIX in UNESP: destination drive/path doesn't works with subdirs
+- BUGFIX in UNESP: Command ? not works (view help)
+
+ v1.8b
+~~~~~~~
+- Write error message, if can't create TEMP-file (TEMP directory doesn't exists)
+- Modified TEST.TXT
+
+ v1.8
+~~~~~~
+- Data Recovery Record (use ESP with /D switch)
+- It use TEMP environment variable for locate temporary drive and directory
+- UNESP: better listing (V and L commands)
+- ESP: You can give more filename (filemask) in commandline
+          <thanks to Ingo Korb for suggestion>
+- bugfix: There was a big mistake! The ESP extractor sometimes created an error
+          until decompression - it has been fixed  <thanks again to Dirk Paehl>
+- smallest SFX routine, only 3723 bytes! (with ESP2EXES.EXE)
+- add TEST.TXT file to package, please read it!
+
+ v1.71
+~~~~~~~
+- UNESP: New switch: F-list to binary file (See doc and EXAMPLE PASCAL program!)
+         With this switch UNESP creates a binary file contains the directory.
+- AinView supports ESP from this version!
+
+ v1.7
+~~~~~~
+- Comments in ESP archive!  ASCII Text / COLOR text / 320x200x256 graphic!!!
+- UNESP: new option if file exists: Q = quit
+
+ v1.61
+~~~~~~~
+- bugfix: the ESP extractor didn't restore original file date/time with all
+  DOS version <thanks for Dirk Paehl>
+
+ v1.6
+~~~~~~
+- password option
+- modified file stucture & header
+- hungarian documentation  (MANUAL.HUN)
+
+ v1.5
+~~~~~~
+- english documentation    (MANUAL.ENG)
+- UNESP: always YES option
+- small bugfixes
+     
+ v1.4
+~~~~~~
+first publicated version of ESP
+

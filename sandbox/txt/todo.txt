@@ -53,6 +53,48 @@
 
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
+* Add these newly added deark modules:
+	+* MMFW Pictures (part of module="mmfw") (experimental/incomplete)
+	+  See also the section on "MMFW resource file".
+	+  Some picture formats are supported; others are not.
+	+  Caution: These files can contain a huge number of images, and Deark's
+	+  decoder is not well optimized. Expect it to be slow. You may have to use
+	+  an option like "-maxfiles" or "-zip" to get everything.
+	+
+
+	+* EA/PEA archive (module="ea_arch") (experimental)
+	+  An installer format used by Electronic Arts.
+
+	+* InstallShield SFX EXE-NE (via module="exe") (experimental/incomplete)
+	+  InstallShield self-extracting installers for Windows 3.x.
+	+  - You must use "-opt exe:sfx".
+	+  - Extracted files will have placeholder names like "ishield000.dat".
+
+	+* Logitech Compress v2.0 (module="lgcompress")
+
+	+* MMFW resource file (module="mmfw") (experimental)
+	+  See also the section on "MMFW Pictures".
+	+  Options
+	+   -opt mmfw:extractall - Also extract undecoded resources, in raw form.
+	+   -opt mmfw:extractallraw - Extract all resources in raw form.
+
+	+* MS-DOS v2.0-3.2 BACKUP (module="dosbackup20") (experimental)
+	+  - If the file was split onto multiple volumes, you must use the "-mp" option,
+	+    and list all the file fragments (in any order).
+	+
+	+* MS-DOS v3.3-5.x BACKUP (module="dosbackup33") (experimental)
+	+  This is a multi-file format that uses CONTROL.* and BACKUP.* files.
+	+  - This module is very picky, partly because it doesn't rely on the input
+	+    filenames.
+	+  - You must use the "-mp" option, and list all the CONTROL files in the
+	+    correct order, and all the BACKUP files in the correct order. Preferably,
+	+    list all the CONTROL files before any BACKUP files.
+
+	+* EA datafile (module="ea_data")
+	+  The hidden "EA DATA. SF" attributes file on some floppy disks used by OS/2.
+	+  This module is mainly for internal use by the "fat" module. It can be used
+	+  directly, though possibly with reduced functionality.
+
 
 /---------------\
 | High Priority |

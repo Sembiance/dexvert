@@ -7,5 +7,5 @@ export class amosPicture extends Format
 	ext        = [".abk"];
 	mimeType   = "application/x-amos-memorybank";
 	magic      = ["AMOS Picture Bank", "deark: abk (AMOS Memory Bank)"];
-	converters = ["deark[module:abk]", `abydosconvert[format:${this.mimeType}]`, "dumpamos"];
+	converters = ["deark[module:abk][opt:abk:allownopal]", `abydosconvert[format:${this.mimeType}]`, "dumpamos"];
 }

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,775)
+# Unsupported File Formats (3,776)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (294)
+## Archive (295)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -86,6 +86,7 @@ Family/Format | Name | Extensions | Notes
 [archive/distributionPackageArchive](https://discmaster.textfiles.com/search?format=distributionPackageArchive) | Distribution Package archive | .pac | 
 [archive/djarcArchive](https://discmaster.textfiles.com/search?format=djarcArchive) | DJarc archive | .dja | [1 sample file](https://sembiance.com/fileFormatSamples/archive/djarcArchive/)
 [archive/djpPacked](https://discmaster.textfiles.com/search?format=djpPacked) | DJP Packed | .exe | 
+[archive/dosBackup33File](https://discmaster.textfiles.com/search?format=dosBackup33File) | [DOS BACKUP 3.3 file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-DOS)) |  | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?format=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/dragonUnPACKer5PluginPackage](https://discmaster.textfiles.com/search?format=dragonUnPACKer5PluginPackage) | Dragon UnPACKer 5 Plugin Package | .d5p | 
 [archive/drakanOrderOfTheFlameSavedGame](https://discmaster.textfiles.com/search?format=drakanOrderOfTheFlameSavedGame) | Drakan: Order Of The Flame Saved Game | .rsg .rlt | 

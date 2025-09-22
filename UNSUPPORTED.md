@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,780)
+# Unsupported File Formats (3,775)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -649,7 +649,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (120)
+## Font (118)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -688,8 +688,6 @@ Family/Format | Name | Extensions | Notes
 [font/dosFONT2](https://discmaster.textfiles.com/search?format=dosFONT2) | DOSFONT2 | .df2 | 
 [font/dotmagicNLQFont](https://discmaster.textfiles.com/search?format=dotmagicNLQFont) | DOT_MAGIC! NLQ font | .nlq | 
 [font/dynaCADDVectorFont](https://discmaster.textfiles.com/search?format=dynaCADDVectorFont) | DynaCADD Vector Font | .fnt | 
-[font/eaSFNFont](https://discmaster.textfiles.com/search?format=eaSFNFont) | EA SFN Font | .sfn | 
-[font/electronicArtsFont](https://discmaster.textfiles.com/search?format=electronicArtsFont) | Electronic Arts Font | .ffn | 
 [font/envisionPublisherFont](https://discmaster.textfiles.com/search?format=envisionPublisherFont) | Envision Publisher Font | .svf | [3 sample files](https://sembiance.com/fileFormatSamples/font/envisionPublisherFont/)
 [font/epocFont](https://discmaster.textfiles.com/search?format=epocFont) | EPOC/Psion Font | .gdr | 
 [font/expertDrawFont](https://discmaster.textfiles.com/search?format=expertDrawFont) | ExpertDraw Font | .expf | 
@@ -775,7 +773,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (193)
+## Image (191)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -890,7 +888,6 @@ Family/Format | Name | Extensions | Notes
 [image/megamidGrayscaleBitMap](https://discmaster.textfiles.com/search?format=megamidGrayscaleBitMap) | Megamid Grayscale BitMap | .gbm .map | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?format=megaPaintVector) | MegaPaint Vector | .vek | 
 [image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
-[image/micrografxIcon](https://discmaster.textfiles.com/search?format=micrografxIcon) | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://sembiance.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
 [image/microsoftBorderArt](https://discmaster.textfiles.com/search?format=microsoftBorderArt) | Microsoft Border Art | .bdr | 
 [image/microsoftDocumentImagingFormat](https://discmaster.textfiles.com/search?format=microsoftDocumentImagingFormat) | Microsoft Document Imaging format | .mdi | 
 [image/xboxXPR0Texture](https://discmaster.textfiles.com/search?format=xboxXPR0Texture) | Microsoft Xbox XPR0 texture | .xbx | 
@@ -923,7 +920,6 @@ Family/Format | Name | Extensions | Notes
 [image/plotter3DMaterial](https://discmaster.textfiles.com/search?format=plotter3DMaterial) | Plotter3D Material | .material | 
 [image/plotter3DPalette](https://discmaster.textfiles.com/search?format=plotter3DPalette) | Plotter3D Palette | .cpal | 
 [image/pmDraw](https://discmaster.textfiles.com/search?format=pmDraw) | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://sembiance.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. PMDraw on OS/2 does not support exporting from command line, so would need some sort of AutoIt like util for OS/2.
-[image/printMagicGraphic](https://discmaster.textfiles.com/search?format=printMagicGraphic) | Print Magic Graphic | .pmg | 
 [image/printShopDeluxeBackdrop](https://discmaster.textfiles.com/search?format=printShopDeluxeBackdrop) | Print Shop Deluxe Backdrop | .pbk | 
 [image/printShopDeluxeBorder](https://discmaster.textfiles.com/search?format=printShopDeluxeBorder) | Print Shop Deluxe Border | .pbr | 
 [image/printShopDeluxeColumnsGraphic](https://discmaster.textfiles.com/search?format=printShopDeluxeColumnsGraphic) | Print Shop Deluxe Columns Graphic | .pcg | 
@@ -2166,6 +2162,7 @@ Family/Format | Name | Extensions | Notes
 [other/herInteractiveGameDataArchive](https://discmaster.textfiles.com/search?format=herInteractiveGameDataArchive) | Her Interactive game data archive | .cif | 
 [other/hexWorkshopBookmark](https://discmaster.textfiles.com/search?format=hexWorkshopBookmark) | Hex Workshop Bookmark | .hbk | 
 [other/hexWorkshopCharMapFile](https://discmaster.textfiles.com/search?format=hexWorkshopCharMapFile) | Hex Workshop Char Map File | .map | 
+[other/hiddenAgendaSaveGame](https://discmaster.textfiles.com/search?format=hiddenAgendaSaveGame) | Hidden Agenda save game | .ha | 
 [other/hiddenAndDangerousGameDataArchive](https://discmaster.textfiles.com/search?format=hiddenAndDangerousGameDataArchive) | Hidden and Dangerous game data archive | .cnt .dta | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?format=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
 [other/hitmanCodename47SaveGame](https://discmaster.textfiles.com/search?format=hitmanCodename47SaveGame) | Hitman: Codename 47 save game | .sav | 
@@ -2654,7 +2651,6 @@ Family/Format | Name | Extensions | Notes
 [other/needForSpeed2TrackData](https://discmaster.textfiles.com/search?format=needForSpeed2TrackData) | Need For Speed 2 Track data | .trk | 
 [other/needForSpeedCarData](https://discmaster.textfiles.com/search?format=needForSpeedCarData) | Need for Speed car data | .pdn | 
 [other/needForSpeedCarExterior](https://discmaster.textfiles.com/search?format=needForSpeedCarExterior) | Need for Speed car exterior | .cfm | 
-[other/needForSpeedFont](https://discmaster.textfiles.com/search?format=needForSpeedFont) | Need For Speed Font | .ffn | 
 [other/needForSpeedGameData](https://discmaster.textfiles.com/search?format=needForSpeedGameData) | Need for Speed game data | .lzc | 
 [other/needForSpeedUnderground2SaveGame](https://discmaster.textfiles.com/search?format=needForSpeedUnderground2SaveGame) | Need for Speed: Underground 2 save game |  | 
 [other/neoGeoPocketColorROM](https://discmaster.textfiles.com/search?format=neoGeoPocketColorROM) | Neo Geo Pcoekt Color ROM | .ngp .ngc .npc | 
@@ -3790,7 +3786,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (49)
+## Video (48)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3807,7 +3803,6 @@ Family/Format | Name | Extensions | Notes
 [video/delphineCIN](https://discmaster.textfiles.com/search?format=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
-[video/dvmVideo](https://discmaster.textfiles.com/search?format=dvmVideo) | [DVM video](http://fileformats.archiveteam.org/wiki/DVM) | .dvm | 
 [video/emblazeVideo2](https://discmaster.textfiles.com/search?format=emblazeVideo2) | Emblaze Video 2 | .ev2 | [1 sample file](https://sembiance.com/fileFormatSamples/video/emblazeVideo2/)
 [video/evaVideo](https://discmaster.textfiles.com/search?format=evaVideo) | EVA3/EVA5 video | .eva | [3 sample files](https://sembiance.com/fileFormatSamples/video/evaVideo/)
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 

@@ -1,4 +1,4 @@
-# Supported File Formats (3,313)
+# Supported File Formats (3,319)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -883,7 +883,7 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (40)
+## Font (43)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -897,7 +897,9 @@ font | C64 8x8 Font | .64c | [recoil2png](http://recoil.sourceforge.net) | [4 sa
 font | CHX Big Font | .chx | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/chxBigFont/)
 font | [Daisy-Dot](http://fileformats.archiveteam.org/wiki/Daisy-Dot_font) | .nlq | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
 font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/dynamicPublisherFont/)
+font | EA SFN Font | .sfn | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/font/eaSFNFont/)
 font | [Elecbyte M.U.G.E.N. font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/font/elecbyteMUGENFont/)
+font | Electronic Arts Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/font/electronicArtsFont/)
 font | [Embedded OpenType](http://fileformats.archiveteam.org/wiki/Embedded_OpenType) | .eot .fntdata | [eot2ttf](https://github.com/umanwizard/libeot) | [11 sample files](https://sembiance.com/fileFormatSamples/font/eot/)
 font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/font/figlet/)
 font | [Font Mania Font](http://fileformats.archiveteam.org/wiki/Font_Mania_(REXXCOM)) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/font/fontMania/)
@@ -910,6 +912,7 @@ font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 |
 font | [Interlace Character Editor](http://fileformats.archiveteam.org/wiki/Interlace_Character_Editor_font) | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/ice/)
 font | [MacOS X Data Fork Font](http://fileformats.archiveteam.org/wiki/Data_Fork_Suitcase_font) | .dfont | [fontforge](https://fontforge.org) | [12 sample files](https://sembiance.com/fileFormatSamples/font/osXDataForkFont/)
 font | MacOS X Font | .fnt .wfn | [fontforge](https://fontforge.org) | [1 sample file](https://sembiance.com/fileFormatSamples/font/macOSFont/)
+font | Need For Speed Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/font/needForSpeedFont/)
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [convert](https://www.imagemagick.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/otf/)
 font | Oric Font | .chs | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/font/oricFont/)
 font | [Packed Font File Format](http://fileformats.archiveteam.org/wiki/PK_font) | .pk | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/font/texPKFont/)
@@ -929,7 +932,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (719)
+## Image (722)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1057,7 +1060,7 @@ image | [COKE TG1](http://fileformats.archiveteam.org/wiki/COKE_(Atari_Falcon)) 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [13 sample files](https://sembiance.com/fileFormatSamples/image/rix/)
 image | ColorSTar/MonoSTar | .bil .obj | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/colorSTar/)
 image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/colorViewSquash/)
-image | Command Simulations game graphic |  | [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/commandSimulationsGameGraphic/)
+image | Command Simulations game graphic |  | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/commandSimulationsGameGraphic/)
 image | Commodore 64 VIC | .vic | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [21 sample files](https://sembiance.com/fileFormatSamples/image/vic/)
 image | [CompuServe RLE](http://fileformats.archiveteam.org/wiki/CompuServe_RLE) | .rle | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [cistopbm](http://netpbm.sourceforge.net/) | [58 sample files](https://sembiance.com/fileFormatSamples/image/compuServeRLE/) - RRCP1.RLE isn't able to be converted by recoil2png and cistopbm handles it better, but still a bit corrupted.
 image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [11 sample files](https://sembiance.com/fileFormatSamples/image/cals/)
@@ -1113,6 +1116,7 @@ image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .
 image | [Drazlace](http://fileformats.archiveteam.org/wiki/Drazlace) | .drl .dlp | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/drazlace/)
 image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | [convert](https://www.imagemagick.org/) [tomsViewer](https://tomseditor.com/blog/viewer) | [1 sample file](https://sembiance.com/fileFormatSamples/image/aai/)
 image | [DuneGraph](http://fileformats.archiveteam.org/wiki/DuneGraph) | .dc1 .dg1 | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/duneGraph/)
+image | [DVM](http://fileformats.archiveteam.org/wiki/DVM) | .dvm | [wuimg](https://codeberg.org/kaleido/wuimg) | 
 image | [Dynamic Publisher Screen](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .pct .pap | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/dynamicPublisherScreen/)
 image | [Dynamic Publisher Stamp](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .stp | [recoil2png](http://recoil.sourceforge.net) | [25 sample files](https://sembiance.com/fileFormatSamples/image/dynamicPublisherStamp/)
 image | Ecchi Image | .ecc | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/ecchi/)
@@ -1337,6 +1341,7 @@ image | [MegaPaint Pattern](http://fileformats.archiveteam.org/wiki/MegaPaint_BL
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mil/)
 image | [MicroDesign](http://fileformats.archiveteam.org/wiki/MDA) | .mda .mdp | [mdatopbm](http://netpbm.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/microDesign/)
 image | [Micrografx Draw/Designer](http://fileformats.archiveteam.org/wiki/Micrografx_Draw) | .drw .drt .ds4 .dsf | [scribus](https://www.scribus.net/) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [13 sample files](https://sembiance.com/fileFormatSamples/image/micrografxDraw/)
+image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn .bin | [wuimg](https://codeberg.org/kaleido/wuimg) | [7 sample files](https://sembiance.com/fileFormatSamples/image/micrografxIcon/)
 image | [Microsoft Image Composer](http://fileformats.archiveteam.org/wiki/Microsoft_Image_Composer) | .mic | [photoDraw](https://archive.org/details/PhotoDraw2000V2) | [10 sample files](https://sembiance.com/fileFormatSamples/image/microsoftImageComposer/)
 image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [ffmpeg](https://ffmpeg.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [14 sample files](https://sembiance.com/fileFormatSamples/image/msp/)
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/Windows_Animated_Cursor) | .ani | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [27 sample files](https://sembiance.com/fileFormatSamples/image/ani/)
@@ -1395,7 +1400,7 @@ image | [OS/2 Pointer](http://fileformats.archiveteam.org/wiki/OS/2_Pointer) | .
 image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/p4i/)
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [6 sample files](https://sembiance.com/fileFormatSamples/image/pabloPaint/)
 image | [PABX Background](http://fileformats.archiveteam.org/wiki/PABX_background) | .pix | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pabxBackground/)
-image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
+image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
 image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [9 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/image/paintPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)) | .da4 .psc | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/paintShop/)
@@ -1446,6 +1451,7 @@ image | [Portfolio Graphics](http://fileformats.archiveteam.org/wiki/PGF_(Portfo
 image | [Portfolio Graphics Compressed](http://fileformats.archiveteam.org/wiki/PGC_(Portfolio_Graphics_Compressed)) | .pgc | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/pgc/)
 image | [Portfolio PGX](http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)) | .pgx | [deark](https://entropymine.com/deark/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/pgx/) - Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an GIF. Each PGC file within the PGX specifies have how long to delay between each frame, so we could make a better GIF: https://www.idealine.info/portfolio/library/text/pgxspec.txt
 image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/pgr/)
+image | Print Magic Graphic | .pmg .ico | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/image/printMagicGraphic/)
 image | Print Shop GS Graphic |  | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/printShopGSGraphic/)
 image | [Print-Technik HIR Image](http://fileformats.archiveteam.org/wiki/Print-Technik) | .hir | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/hir/)
 image | [Printfox/Pagefox Bitmap](http://fileformats.archiveteam.org/wiki/Printfox_bitmap) | .gb .bs .pg | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) | [35 sample files](https://sembiance.com/fileFormatSamples/image/printfox/)
@@ -2413,7 +2419,7 @@ text | Doom Configuration | .cfg |  | [10 sample files](https://sembiance.com/fi
 text | DoomEd ASCII map | .dwd |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/doomEdASCIIMap/)
 text | DoReMIX song | .dmx |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/doReMIXSong/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/Batch_file) | .bat |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/batDOS/)
-text | DOSBox Configuration | .conf |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/dosBoxConfig/)
+text | DOSBox Configuration | .conf |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/dosBoxConfig/)
 text | DosCapture video card Modes info | .mod |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dosCaptureVideoCardModesInfo/)
 text | Doxygen configuration settings | .cfg |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/doxygenConfigurationSettings/)
 text | dtread Type Descriptor | .dtyp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dtreadTypeDescriptor/)

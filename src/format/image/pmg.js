@@ -11,5 +11,5 @@ export class pmg extends Format
 	// Only have 1 known sample and it's less than 10k, so just try that
 	idCheck = inputFile => inputFile.size<10000;
 
-	converters = ["recoil2png", "view64[matchType:magic]", "nconvert[format:pmg]"];
+	converters = ["recoil2png", "view64[matchType:magic]", "nconvert[format:pmg]", "wuimg"];
 }

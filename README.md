@@ -1,5 +1,5 @@
 # dexvert - **D**ecompress **EX**tract con**VERT**
-Convert **3,322** file formats (out of **7,098** known) into modern equivalents (png/svg/pdf/mp3/mp4/etc.)
+Convert **3,324** file formats (out of **7,103** known) into modern equivalents (png/svg/pdf/mp3/mp4/etc.)
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 
@@ -9,4 +9,4 @@ Utilizes **585** helper programs running on **6** different operating systems un
 
 This project is not currently ready for public use.
 
-You can find 33,487 sample files for 3,728 formats at [sembiance.com/fileFormatSamples](https://sembiance.com/fileFormatSamples/)
+You can find 33,515 sample files for 3,730 formats at [sembiance.com/fileFormatSamples](https://sembiance.com/fileFormatSamples/)

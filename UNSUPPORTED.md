@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,776)
+# Unsupported File Formats (3,779)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (295)
+## Archive (296)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -293,6 +293,7 @@ Family/Format | Name | Extensions | Notes
 [archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?format=wwarpDiskImage) | WWarp Disk Image | .wwp | 
 [archive/x64DiskImage](https://discmaster.textfiles.com/search?format=x64DiskImage) | X64 Disk Image | .x64 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/x64DiskImage/)
+[archive/xboxVirtualDisk](https://discmaster.textfiles.com/search?format=xboxVirtualDisk) | Xbox Virtual Disk | .xvc .msixvc | 
 [archive/xelaSoftArchive](https://discmaster.textfiles.com/search?format=xelaSoftArchive) | XelaSoft Archive | .xsa | 
 [archive/xldjDiskImage](https://discmaster.textfiles.com/search?format=xldjDiskImage) | XLDJ/XL/ST link Disk Image | .di | 
 [archive/xpackPacked](https://discmaster.textfiles.com/search?format=xpackPacked) | XPACK Packed |  | 
@@ -1149,7 +1150,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,531)
+## Other (2,533)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2684,6 +2685,7 @@ Family/Format | Name | Extensions | Notes
 [other/nexonGameArchive](https://discmaster.textfiles.com/search?format=nexonGameArchive) | Nexon game archive | .nar | 
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?format=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
 [other/nexusDBDatabase](https://discmaster.textfiles.com/search?format=nexusDBDatabase) | NexusDB database | .nx1 | 
+[other/nicktoonsAttackOfTheToybotsGameData](https://discmaster.textfiles.com/search?format=nicktoonsAttackOfTheToybotsGameData) | Nicktoons: Attack of the Toybots game data | .trb | 
 [other/nihilisticObjectTemplate](https://discmaster.textfiles.com/search?format=nihilisticObjectTemplate) | Nihilistic Object Template | .not | 
 [other/n64ROM](https://discmaster.textfiles.com/search?format=n64ROM) | Nintendo 64 ROM | .v64 .z64 | 
 [other/nintendoAnimationResource](https://discmaster.textfiles.com/search?format=nintendoAnimationResource) | Nintendo Animation Resource | .nanr | 
@@ -3443,6 +3445,7 @@ Family/Format | Name | Extensions | Notes
 [other/universalCommunicationsFormat](https://discmaster.textfiles.com/search?format=universalCommunicationsFormat) | Universal Communications Format | .ucf | 
 [other/unknown](https://discmaster.textfiles.com/search?format=unknown) | Unknown File |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?format=unrealEngineCharacter) | Unreal Engine character | .psk | 
+[other/unrealEngineLocalizationResource](https://discmaster.textfiles.com/search?format=unrealEngineLocalizationResource) | Unreal Engine Localization Resource | .locres | 
 [other/unrealMap](https://discmaster.textfiles.com/search?format=unrealMap) | Unreal Map | .unr | 
 [other/upsPatchFile](https://discmaster.textfiles.com/search?format=upsPatchFile) | UPS patch file | .ups | 
 [other/uropa2Configuration](https://discmaster.textfiles.com/search?format=uropa2Configuration) | Uropa2 Configuration | .config | 

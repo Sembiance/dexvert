@@ -1,4 +1,4 @@
-# Supported File Formats (3,322)
+# Supported File Formats (3,324)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -898,9 +898,9 @@ font | C64 8x8 Font | .64c | [recoil2png](http://recoil.sourceforge.net) | [4 sa
 font | CHX Big Font | .chx | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/chxBigFont/)
 font | [Daisy-Dot](http://fileformats.archiveteam.org/wiki/Daisy-Dot_font) | .nlq | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
 font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/dynamicPublisherFont/)
-font | EA SFN Font | .sfn | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/font/eaSFNFont/)
+font | EA SFN Font | .sfn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/font/eaSFNFont/)
 font | [Elecbyte M.U.G.E.N. font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/font/elecbyteMUGENFont/)
-font | Electronic Arts Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/font/electronicArtsFont/)
+font | Electronic Arts Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [8 sample files](https://sembiance.com/fileFormatSamples/font/electronicArtsFont/)
 font | [Embedded OpenType](http://fileformats.archiveteam.org/wiki/Embedded_OpenType) | .eot .fntdata | [eot2ttf](https://github.com/umanwizard/libeot) | [11 sample files](https://sembiance.com/fileFormatSamples/font/eot/)
 font | EVAfont | .com | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/evaFont/)
 font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/font/figlet/)
@@ -934,7 +934,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (723)
+## Image (725)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1441,6 +1441,8 @@ image | [PIXIT](http://fileformats.archiveteam.org/wiki/PIXIT) | .com | [deark](
 image | [PL4](http://fileformats.archiveteam.org/wiki/PL4) | .pl4 | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/image/pl4/)
 image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | [nconvert](https://www.xnview.com/en/nconvert/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [12 sample files](https://sembiance.com/fileFormatSamples/image/pds/)
 image | [Planetary Data System v3](http://fileformats.archiveteam.org/wiki/PDS) | .img .imq .pds | [pdsTransformTool](https://nasa-pds.github.io/transform/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/pds3/)
+image | [PlayStation 2 TIM2](http://fileformats.archiveteam.org/wiki/TIM2) | .tm2 .tim2 .tim | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/tim2/)
+image | [PlayStation 2 TIM2 TXC](http://fileformats.archiveteam.org/wiki/TIM2) | .txc | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/tim2TXC/)
 image | [PlayStation Graphics Image Map](https://web.archive.org/web/20230817135907/http://wiki.xentax.com/index.php/GIM_Image) | .gim | [gim2png](https://www.junk2ool.net/_media/tools/psx/gim2png01.7z) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [12 sample files](https://sembiance.com/fileFormatSamples/image/psxGIM/)
 image | [PlayStation TIM](http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)) | .tim | [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/image/tim/)
 image | [PMG Designer](http://fileformats.archiveteam.org/wiki/PMG_Designer) | .pmd | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/pmd/)
@@ -2653,7 +2655,7 @@ text | Kinemage protein language | .kin |  | [4 sample files](https://sembiance.
 text | Kodak Photo CD configuration | .pcd |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/kodakPhotoCDConfiguration/)
 text | Konqueror cookie |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
 text | Korn shell script |  |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/kornShellScript/)
-text | KsofT CRC-32 Data | .crc .dat |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ksofTCRC32Data/)
+text | KsofT CRC-32 Data | .crc .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ksofTCRC32Data/)
 text | KSS: Author presentation settings |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/kssAuthorPresentationSettings/)
 text | Landscape Designer fractal data |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/landscapeDesignerFractalData/)
 text | Latex Auxiliary File | .aux |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/latexAUXFile/)
@@ -2793,7 +2795,7 @@ text | Netscape cookies | .txt .lst |  | [10 sample files](https://sembiance.com
 text | NEXUS format | .nex .nxs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
 text | NMAKE | .msc .mak |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
 text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
-text | Noesis Scene | .noesis |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/noesisScene/)
+text | Noesis Scene | .noesis |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/noesisScene/)
 text | Nota Bene Printer definition | .prn |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/notaBenePrinterDefinition/)
 text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/novell16BitLANDriverInstallerData/)
 text | NSIS script | .nsi |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nsisScript/)
@@ -2950,7 +2952,7 @@ text | Quartus Library Mapping File | .lmf |  | [7 sample files](https://sembian
 text | Quartus Memory Initialization File | .mif |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/quartusMemoryInitializationFile/)
 text | Quartus Setting File | .qsf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/quartusSettingFile/)
 text | Qucs schematic | .sch .dpl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/qucsSchematic/)
-text | QuickBMS script | .bms |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/quickBMSScript/)
+text | QuickBMS script | .bms |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/quickBMSScript/)
 text | Quicken Interchange Format | .qif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickenInterchangeFormat/)
 text | QuickMenu Menu | .inf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickMenuMenu/)
 text | QuickSFV checksum | .sfv |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/quickSFVChecksum/)

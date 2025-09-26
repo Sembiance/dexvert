@@ -8,6 +8,5 @@ export class mmfwArchive extends Format
 	forbidExtMatch = true;
 	magic          = [/^MMFW (Blobs|data|Pictures|Scripts|Sounds)/];
 	priority       = this.PRIORITY.LOW;
-	converters     = ["mmex"];
-	unsupported    = true; // The only thing extracted out is unhandled .bin files. Movie archives are handled by mmfwMoviesArchive
+	converters     = ["deark[module:mmfw]", "mmex"];
 }

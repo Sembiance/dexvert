@@ -1,11 +1,11 @@
-# Supported File Formats (3,324)
+# Supported File Formats (3,326)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (481)
+## Archive (482)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -128,7 +128,7 @@ archive | Dark Reign 2 game data archive | .zwp | [gameextractor](http://www.wat
 archive | [Dark Reign Game Archive](http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)) | .ftg | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkReignGameArchive/)
 archive | [Delphi Borland Form](http://fileformats.archiveteam.org/wiki/Borland_Delphi_form) | .dfm | [dfm2txt](http://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/borlandDelphiForm/)
 archive | Descent Game Archive | .hog | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/descentGameArchive/)
-archive | Destan game data archive | .3dn | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/destanGameDataArchive/)
+archive | Destan game data archive | .3dn | [gameextractor](http://www.watto.org/game_extractor.html) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/destanGameDataArchive/)
 archive | DexEXE Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dexEXEPacked/)
 archive | [DIET](http://fileformats.archiveteam.org/wiki/DIET_(compression)) |  | [deark](https://entropymine.com/deark/) [diet](http://fileformats.archiveteam.org/wiki/DIET_(compression)) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/diet/)
 archive | Diet Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/dietPacked/)
@@ -278,6 +278,7 @@ archive | [Microsoft Windows Installer](http://fileformats.archiveteam.org/wiki/
 archive | [Microsoft Windows Program Information File](http://fileformats.archiveteam.org/wiki/Program_information_file) | .pif | [deark](https://entropymine.com/deark/) [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/windowsProgramInfo/)
 archive | MIME HTML Archive | .mht | [ripmime](https://github.com/inflex/ripMIME) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mimeHTMLArchive/)
 archive | MINICAT Archive | .cat | [foremost](http://foremost.sourceforge.net/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/minicat/)
+archive | [MMFW Archive](https://github.com/david47k/mmex) | .mmp .mms .mmf .mma .mmb .pic .snd .vec | [deark](https://entropymine.com/deark/) [mmex](https://github.com/david47k/mmex) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mmfwArchive/)
 archive | MMFW Movies Archive | .mov | [mmvid_extractor](https://github.com/einstein95/mmvid_extractor) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mmfwMoviesArchive/)
 archive | [MoleBox Packed](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .exe | [demoleition](https://lifeinhex.com/updated-molebox-unpacker/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/moleBoxPacked/)
 archive | [Monster Bash Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Monster_Bash)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/monsterBashGameArchive/)
@@ -884,7 +885,7 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (44)
+## Font (45)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -897,10 +898,11 @@ font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_
 font | C64 8x8 Font | .64c | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/font/c64c/)
 font | CHX Big Font | .chx | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/chxBigFont/)
 font | [Daisy-Dot](http://fileformats.archiveteam.org/wiki/Daisy-Dot_font) | .nlq | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
+font | DOS Code Page Font | .cpi .cp .cpx .bin .cps | [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/font/dosCodePageFont/)
 font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/dynamicPublisherFont/)
 font | EA SFN Font | .sfn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/font/eaSFNFont/)
 font | [Elecbyte M.U.G.E.N. font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/font/elecbyteMUGENFont/)
-font | Electronic Arts Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [8 sample files](https://sembiance.com/fileFormatSamples/font/electronicArtsFont/)
+font | Electronic Arts Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [16 sample files](https://sembiance.com/fileFormatSamples/font/electronicArtsFont/)
 font | [Embedded OpenType](http://fileformats.archiveteam.org/wiki/Embedded_OpenType) | .eot .fntdata | [eot2ttf](https://github.com/umanwizard/libeot) | [11 sample files](https://sembiance.com/fileFormatSamples/font/eot/)
 font | EVAfont | .com | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/evaFont/)
 font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/font/figlet/)
@@ -914,7 +916,7 @@ font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 |
 font | [Interlace Character Editor](http://fileformats.archiveteam.org/wiki/Interlace_Character_Editor_font) | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/ice/)
 font | [MacOS X Data Fork Font](http://fileformats.archiveteam.org/wiki/Data_Fork_Suitcase_font) | .dfont | [fontforge](https://fontforge.org) | [12 sample files](https://sembiance.com/fileFormatSamples/font/osXDataForkFont/)
 font | MacOS X Font | .fnt .wfn | [fontforge](https://fontforge.org) | [1 sample file](https://sembiance.com/fileFormatSamples/font/macOSFont/)
-font | Need For Speed Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sample files](https://sembiance.com/fileFormatSamples/font/needForSpeedFont/)
+font | Need For Speed Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [5 sample files](https://sembiance.com/fileFormatSamples/font/needForSpeedFont/)
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [convert](https://www.imagemagick.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/otf/)
 font | Oric Font | .chs | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/font/oricFont/)
 font | [Packed Font File Format](http://fileformats.archiveteam.org/wiki/PK_font) | .pk | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/font/texPKFont/)
@@ -1879,7 +1881,7 @@ music | SCUMM Music Module | .scumm | [uade123](http://zakalwe.fi/uade) | [5 sam
 music | [Sean Connolly Module](http://fileformats.archiveteam.org/wiki/Sean_Connolly) | .scn | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://sembiance.com/fileFormatSamples/music/seanConnolly/)
 music | [Sean Conran Module](http://fileformats.archiveteam.org/wiki/Sean_Conran) | .scr | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://sembiance.com/fileFormatSamples/music/seanConran/)
 music | [SidMon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid2 | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://sembiance.com/fileFormatSamples/music/sidMon2/)
-music | [SidMon Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://sembiance.com/fileFormatSamples/music/sidMon/)
+music | [SidMon Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid | [uade123](http://zakalwe.fi/uade) | [6 sample files](https://sembiance.com/fileFormatSamples/music/sidMon/)
 music | [Silmarils Module](http://fileformats.archiveteam.org/wiki/Silmarils) | .mok | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://sembiance.com/fileFormatSamples/music/silmarils/)
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/SMUS) | .smus .song | [uade123](http://zakalwe.fi/uade) [smus2midi](https://github.com/AugusteBonnin/smus2midi) | [10 sample files](https://sembiance.com/fileFormatSamples/music/smus/) - The 'SMUS' format was used by many different programs including Sonix and Deluxe Music. This first tries to convert SONIX SMUS with instrument support using uade123. That can fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples. SMUS2MIDI seems to work on more files, but it gets several of them a bit wrong (Rhapsody.smus)
 music | SKYT/Drifters Packer | .skyt | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/music/skytPacker/)
@@ -1889,7 +1891,7 @@ music | [Sonic Arrange Module](http://fileformats.archiveteam.org/wiki/Sonic_Arr
 music | Sound Control Module | .sc .sct | [uade123](http://zakalwe.fi/uade) | [6 sample files](https://sembiance.com/fileFormatSamples/music/soundControl/)
 music | Sound Images Module | .tw | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://sembiance.com/fileFormatSamples/music/soundImages/)
 music | Sound Invasion Module | .is .is20 | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://sembiance.com/fileFormatSamples/music/soundInvasion/)
-music | Sound Master Module | .sm .smpro .sm3 | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://sembiance.com/fileFormatSamples/music/soundMaster/)
+music | Sound Master Module | .sm .smpro .sm3 | [uade123](http://zakalwe.fi/uade) | [14 sample files](https://sembiance.com/fileFormatSamples/music/soundMaster/)
 music | Sound Programming Language Module | .spl | [uade123](http://zakalwe.fi/uade) | [6 sample files](https://sembiance.com/fileFormatSamples/music/soundProgrammingLanguage/)
 music | [SoundFactory Module](http://fileformats.archiveteam.org/wiki/Soundfactory) | .psf | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://sembiance.com/fileFormatSamples/music/soundFactory/)
 music | [SoundFX Module](http://fileformats.archiveteam.org/wiki/SoundFX_module) | .sfx .sfx2 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [13 sample files](https://sembiance.com/fileFormatSamples/music/soundFX/)
@@ -2239,7 +2241,7 @@ text | ANIMagic Map | .map |  | [5 sample files](https://sembiance.com/fileForma
 text | Anjuta Project | .prj |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/anjutaProject/)
 text | AntiVir Job | .avj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/antiVirJob/)
 text | AntiVir Profile | .avp |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/antiVirProfile/)
-text | Apache mission Data | .dta |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
+text | Apache mission Data | .dta |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
 text | ApAssist document |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/apAssistDocument/)
 text | aPatch Daten Datei | .aps |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/aPatchDatenDatei/)
 text | AppCache Manifest | .notmanifest .cachemanifest .appcache |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/cacheManifest/)
@@ -2641,7 +2643,7 @@ text | Jeskola Buzz theme | .col |  | [3 sample files](https://sembiance.com/fil
 text | JETPilot docs/text | .001 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/jetPilotDocsText/)
 text | JTAG Chain File | .jcf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/jtagChainFile/)
 text | Karateka animation script |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/karatekaAnimationScript/)
-text | Kasparov's Gambit saved Game | .gam |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/kasparovsGambitSavedGame/)
+text | Kasparov's Gambit saved Game | .gam |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/kasparovsGambitSavedGame/)
 text | KDE config file | .kdelnk |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeConfigFile/)
 text | KDE KXML GUI RC | .rc |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeKXMLGUIRC/)
 text | KEGS configuration | .kegs |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/kegsConfiguration/)
@@ -2736,7 +2738,7 @@ text | MicroFiche Filer settings | .prefs |  | [2 sample files](https://sembianc
 text | Micrografx Graph data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/micrografxGraphData/)
 text | MicroHof Code encoded message | .cde |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/microHofCodeEncodedMessage/)
 text | MicroSim PSpice schematic | .sch |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microSimPSpiceSchematic/)
-text | Microsoft Backup Settings | .set |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/microsoftBackupSettings/)
+text | Microsoft Backup Settings | .set |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftBackupSettings/)
 text | Microsoft Developer Studio Workspace | .dsw |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/microsoftDeveloperStudioWorkspace/)
 text | Microsoft eMbedded Visual Tools Project | .vcp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftEmbeddedVisualToolsProject/)
 text | Microsoft eMbedded Visual Tools Workspace | .vcw |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/microsoftEmbeddedVisualToolsWorkspace/)
@@ -2910,7 +2912,7 @@ text | Post-It Software Note Template |  |  | [6 sample files](https://sembiance
 text | PostgreSQL database dump | .sql |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ppd/)
 text | Poswiz! Report | .rpt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poswizReport/)
-text | Power Translator document | .mtp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/powerTranslatorDocument/)
+text | Power Translator document | .mtp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/powerTranslatorDocument/)
 text | PowerBase database | .pb |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/powerBaseDatabase/)
 text | PowerBuilder Target | .pbt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/powerBuilderTarget/)
 text | PowerBuilder Workspace | .pbw |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/powerBuilderWorkspace/)

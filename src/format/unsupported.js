@@ -569,7 +569,6 @@ export default
 		demoManiacFont                   : {name : "DemoManiac Font", ext : [".font"], magic : ["DemoManiac Font"]},
 		digitalRealitySoftwareFont       : {name : "Digital Reality Software font", ext : [".chr"], magic : ["Digital Reality Software font"], weakMagic : true},
 		divGamesStudioFont               : {name : "DIV Games Studio Font", ext : [".fnt"], magic : ["DIV Games Studio Font"], weakMagic : true},
-		dosCodePageFont                  : {name : "DOS Code Page Font", magic : ["DOS code page font data", "application/x-font-dos"]},
 		dosFONT2                         : {name : "DOSFONT2", ext : [".df2"], magic : ["DOSFONT2 encrypted font data"]},
 		dotmagicNLQFont                  : {name : "DOT_MAGIC! NLQ font", ext : [".nlq"], magic : ["DOT_MAGIC! NLQ font"]},
 		dynaCADDVectorFont               : {name : "DynaCADD Vector Font", ext : [".fnt"], magic : ["DynaCADD vector Font"]},
@@ -796,6 +795,7 @@ export default
 	music :
 	{
 		acidSong                        : {name : "ACID song", ext : [".acd"], magic : ["ACID song"]},
+		adLibVisualComposer2Music       : {name : "AdLib Visual Composer 2 music", ext : [".rl2"], magic : ["AdLib Visual Composer 2 music"]},
 		aDrumDrumkit                    : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
 		aDrumTrack                      : {name : "ADrum Track", magic : ["ADrum track"]},
 		appleIIgsMusic                  : {name : "Apple IIgs Music", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="MUS"},
@@ -1580,6 +1580,7 @@ export default
 		toolsMediaCorpGUIElements                    : {name : "Tools Media Corp. GUI elements", ext : [".gui"], magic : ["Tools Media Corp. GUI elements"]},
 		toolsMediaCorpLevelData                      : {name : "Tools Media Corp. level data", ext : [".bsf"], magic : ["Tools Media Corp. level data"]},
 		toolsMediaCorpMesh                           : {name : "Tools Media Corp. Mesh", ext : [".otm"], magic : ["Tools Media Corp. Mesh"], weakMagic : true},
+		topologikaAdventures8086Interpreter          : {name : "Topologika adventures 8086 interpreter", ext : [".com"], magic : ["Topologika adventures 8086 interpreter"], weakMagic : true},
 		trackAttackBitmapsFrames                     : {name : "Track Attack bitmaps/frames", ext : [".raw", ".rle"], magic : ["Track Attack Raw bitmaps/frames", "Track Attack RLE compressed bitmaps/frames"]},
 		trackAttackCockpit                           : {name : "Track Attack cockpit", ext : [".rle"], magic : ["Track Attack RLE compressed cockpit"]},
 		trackAttackTrackData                         : {name : "Track Attack track Data", ext : [".dat"], magic : ["Track Attack track Data"]},
@@ -2381,7 +2382,7 @@ export default
 		dnaSequenceChromatogram                  : {name : "DNA Sequence Chromatogram", ext : [".scf"], magic : ["DNA Sequence Chromatogram", /^fmt\/1554( |$)/], weakMagic : true},
 		dnlEBook                                 : {name : "DNL eBook / eCatalog / eCard / eBrochure", ext : [".dnl"], magic : ["DNL eBook / eCatalog / eCard / eBrochure"], weakMagic : true},
 		dominoSequence                           : {name : "Domino Sequence", ext : [".dms"], magic : ["Domino Sequence"], weakMagic : true},
-		dosCodePage                              : {name : "MS-DOS Code Page Info", ext : [".cp", ".cpi"], magic : ["DOS code page font data collection", "MS-DOS International Code Page Info"]},
+		dosBackupControlFile                     : {name : "DOS Backup Control File", filename : [/^control\.\d{3}$/i], magic : ["deark: dosbackup33", /^DOS [\d.]+ backup control file/, /^MS-DOS Backup Control data \(v3\.30-5\.xx\)$/, /^DOS 2\.0-3\.2 Backup control info/]},
 		dosNavigator2Settings                    : {name : "Dos Navigator 2 settings", ext : [".cfg"], magic : ["Dos Navigator 2 settings"]},
 		dosNavigatorModemCommunicationsSettings  : {name : "Dos Navigator Modem/communications settings", ext : [".mdm"], magic : ["Dos Navigator Modem/communications settings"]},
 		dProtelForWindowsSchematic               : {name : "DProtel for Windows schematic", ext : [".sch", ".dot", ".prj"], magic : ["DProtel for Windows schematic"]},

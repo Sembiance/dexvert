@@ -48,6 +48,7 @@ const _XML_MAGIC = [
 	"RAD Studio modeling Configuration", "Code::Blocks Workspace", "WiX Object", "Filter Forge filter", "Microsoft Flight Simulator Flight Plan", "gretl Data", "MzXML mass spectrometer output data", "Poseidon for UML Project information", "ChemDraw XML",
 	"Garmin Training Center Database XML", "Cal3D Xml Skeleton File", "Apple Quartz Filter", "Torque sprite asset (XML)", "ImmerVision XML user interface", "Amnesia: T.D.D. sound entity", "Instant3D document", "Microsoft Assistance Markup Language (UTF-8)",
 	"DialogBlocks Project", /^FinalBuilder (actions Package|code completion info|Project \(v4\)|Wizard)/, "Adobe Premiere Preset", "Automise Project (v3)", "OWL XML Ontology", /^Gentoo (category|package) metadata file/, "Newzbin Usenet Index",
+	"MiSTer Game Launcher", "XML Data Package",
 	/^fmt\/(205|243|333|475|570|896|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1824|1825|1883|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

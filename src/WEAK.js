@@ -604,6 +604,7 @@ export const WEAK_VALUES =
 	/^application\/(octet-stream|postscript|x-nextmail)/,
 	/^Applixware/,
 	/^archive \(big format\)$/,
+	/^archive, ASCII text/,
 	/^Arhangel archive data/,
 	/^aria2 control file/,
 	/^ARM Cortex-M firmware/,

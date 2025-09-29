@@ -7,7 +7,7 @@ export class wavefrontOBJ extends Format
 	ext        = [".obj"];
 	magic      = [
 		// generic
-		"Wavefront Object", "UVMapper object", "model/obj", /^fmt\/(1|1210)( |$)/,
+		"Wavefront Object", "UVMapper object", "model/obj", "LightWave 3D exported object", /^fmt\/(1|1210)( |$)/,
 
 		// specific
 		"CADRazor 3d model"

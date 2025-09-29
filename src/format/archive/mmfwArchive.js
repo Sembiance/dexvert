@@ -6,7 +6,7 @@ export class mmfwArchive extends Format
 	website        = "https://github.com/david47k/mmex";
 	ext            = [".mmp", ".mms", ".mmf", ".mma", ".mmb", ".pic", ".snd", ".vec"];
 	forbidExtMatch = true;
-	magic          = [/^MMFW (Blobs|data|Pictures|Scripts|Sounds)/];
+	magic          = [/^MMFW (Blobs|data|Pictures|Scripts|Sounds)/, "deark: mmfw (MMFW resource file"];
 	priority       = this.PRIORITY.LOW;
-	converters     = ["deark[module:mmfw]", "mmex"];
+	converters     = ["deark[module:mmfw]"];	// produces garbage: , "mmex"
 }

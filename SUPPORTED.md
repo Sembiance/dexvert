@@ -1,4 +1,4 @@
-# Supported File Formats (3,327)
+# Supported File Formats (3,330)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -467,7 +467,7 @@ archive | [WARC Archive](http://fileformats.archiveteam.org/wiki/WARC) | .warc |
 archive | Warcraft 2 Game Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/warcraft2GameArchive/)
 archive | Warrior Kings game data | .bcp | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warriorKingsGameData/)
 archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
-archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
+archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)
@@ -484,7 +484,7 @@ archive | [yEnc Encoded Archive](http://fileformats.archiveteam.org/wiki/YEnc) |
 archive | [Yet Another Compressor Archive](http://justsolve.archiveteam.org/wiki/YAC) | .yc | [yac](https://www.sac.sk/download/pack/yac102.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/yacArchive/)
 archive | You Don't Know Jack Game Archive | .srf | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/youDontKnowJackGameArchive/)
 archive | Z-Axis game sound data archive | .zsd | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zAxisGameSoundDataArchive/)
-archive | ZipIt |  | [unar](https://github.com/incbee/Unarchiver) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/zipIt/)
+archive | ZipIt |  | [unar](https://github.com/incbee/Unarchiver) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/zipIt/)
 archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [zlib_flate](https://qpdf.sourceforge.net/) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/zlib/)
 archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [zoo](https://packages.debian.org/jessie/zoo) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zoo/)
 archive | ZP Packed GXL | .zp | [dd](https://www.gnu.org/software/coreutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/zpPackedGXL/)
@@ -2183,7 +2183,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,088)
+## Text (1,091)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2643,7 +2643,7 @@ text | JCreator Project | .jcp |  | [2 sample files](https://sembiance.com/fileF
 text | Jeskola Buzz theme | .col |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/jeskolaBuzzTheme/)
 text | JETPilot docs/text | .001 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/jetPilotDocsText/)
 text | JTAG Chain File | .jcf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/jtagChainFile/)
-text | Karateka animation script |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/karatekaAnimationScript/)
+text | Karateka animation script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/karatekaAnimationScript/)
 text | Kasparov's Gambit saved Game | .gam |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/kasparovsGambitSavedGame/)
 text | KDE config file | .kdelnk |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeConfigFile/)
 text | KDE KXML GUI RC | .rc |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/kdeKXMLGUIRC/)
@@ -2991,6 +2991,7 @@ text | RIS Citation | .txt |  | [3 sample files](https://sembiance.com/fileForma
 text | Robocode Battle | .battle |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/robocodeBattle/)
 text | RoboDemo Margin | .fcm |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/roboDemoMargin/)
 text | RoboHelp Topic Export | .hpt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/roboHelpTopicExport/)
+text | Robot Arena hazard configuration | .adf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/robotArenaHazardConfiguration/)
 text | RPG Maker VX Project | .rvproj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/rpgMakerVXProject/)
 text | RPM Spec | .in |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rpmSpec/)
 text | RSLogix 5000 Program | .acd |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/rsLogix5000Program/)
@@ -3126,7 +3127,9 @@ text | Train Simulator Shape Definition | .s .eng .sd |  | [11 sample files](htt
 text | Train Simulator Sound Management System | .sms |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorSoundManagementSystem/)
 text | Train Simulator Wagon | .eng .wag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)
 text | Trumpet Windsock settings | .ini |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trumpetWindsockSettings/)
-text | TSPLIB Traveling Salesman Problem data | .tsp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTravelingSalesmanProblemData/)
+text | TSPLIB Tour Solution data | .tour |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTourSolutionData/)
+text | TSPLIB Traveling Salesman Problem data | .tsp |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTravelingSalesmanProblemData/)
+text | TSPLIB Vehicle Routing Problem data | .vrp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/tsplibVehicleRoutingProblemData/)
 text | TTCN Abstract Test Suite | .mp .ttcn .ats |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/ttcnAbstractTestSuite/)
 text | TUMMY Configuration | .config |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/tummyConfiguration/)
 text | TUMMY Data Base | .mcl .tdb |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/tummyDataBase/)

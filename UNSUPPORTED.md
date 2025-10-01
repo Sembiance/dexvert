@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,787)
+# Unsupported File Formats (3,790)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1153,7 +1153,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,538)
+## Other (2,541)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1917,6 +1917,7 @@ Family/Format | Name | Extensions | Notes
 [other/electronicArtsAudioContainerSystem](https://discmaster.textfiles.com/search?format=electronicArtsAudioContainerSystem) | Electronic Arts audio Container System | .sph .dty .mon .asf | 
 [other/electronicArtsBundleGameDataArchive](https://discmaster.textfiles.com/search?format=electronicArtsBundleGameDataArchive) | Electronic Arts Bundle game data archive | .bundle | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?format=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
+[other/elitePlusCommanderFileSavedGame](https://discmaster.textfiles.com/search?format=elitePlusCommanderFileSavedGame) | Elite Plus Commander file / saved game | .cdr | 
 [other/emacsCompiledLisp](https://discmaster.textfiles.com/search?format=emacsCompiledLisp) | Emacs Compiled Lisp | .elc | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with (maybe): https://github.com/rocky/elisp-decompile
 [other/emergencyPeopleAnimationData](https://discmaster.textfiles.com/search?format=emergencyPeopleAnimationData) | Emergency people animation data | .vmo | 
 [other/empireAnimationGameData](https://discmaster.textfiles.com/search?format=empireAnimationGameData) | Empire animation game Data | .dat | 
@@ -2174,6 +2175,7 @@ Family/Format | Name | Extensions | Notes
 [other/hiddenAndDangerousGameDataArchive](https://discmaster.textfiles.com/search?format=hiddenAndDangerousGameDataArchive) | Hidden and Dangerous game data archive | .cnt .dta | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?format=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
 [other/hitmanCodename47SaveGame](https://discmaster.textfiles.com/search?format=hitmanCodename47SaveGame) | Hitman: Codename 47 save game | .sav | 
+[other/hmp3DGameStudioTerrain](https://discmaster.textfiles.com/search?format=hmp3DGameStudioTerrain) | HMP4 3D GameStudio terrain | .hmp | 
 [other/hmvsAntivirusDOSPlugIn](https://discmaster.textfiles.com/search?format=hmvsAntivirusDOSPlugIn) | HMVS antivirus DOS PlugIn | .pnp .lng | 
 [other/homePlanPro5Clip](https://discmaster.textfiles.com/search?format=homePlanPro5Clip) | Home Plan Pro 5 Clip | .clp | 
 [other/homePlanPro5Plan](https://discmaster.textfiles.com/search?format=homePlanPro5Plan) | Home Plan Pro 5 Plan | .pln | 
@@ -3585,6 +3587,7 @@ Family/Format | Name | Extensions | Notes
 [other/windowsHelpFullTextSearchGroup](https://discmaster.textfiles.com/search?format=windowsHelpFullTextSearchGroup) | Windows Help Full-Text search Group | .ftg | 
 [other/windowsHelpGIDIndex](https://discmaster.textfiles.com/search?format=windowsHelpGIDIndex) | Windows Help Global Index Data | .gid | 
 [other/windowsHelpIndex](https://discmaster.textfiles.com/search?format=windowsHelpIndex) | Windows Help index | .hlp | 
+[other/windowsJournal](https://discmaster.textfiles.com/search?format=windowsJournal) | Windows Journal | .jtp .jnt | 
 [other/windowsLogoDrawingCode](https://discmaster.textfiles.com/search?format=windowsLogoDrawingCode) | Windows LOGO Drawing Code | .lgo .lg | 
 [other/windowsMediaPlayerDataBase](https://discmaster.textfiles.com/search?format=windowsMediaPlayerDataBase) | Windows Media Player DataBase | .wmdb | 
 [other/windowsNTLDRBootLoader](https://discmaster.textfiles.com/search?format=windowsNTLDRBootLoader) | Windows NTLDR boot loader |  | 

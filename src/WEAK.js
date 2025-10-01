@@ -134,7 +134,7 @@ export const WEAK_VALUES =
 	/^BK: ByteKiller$/,
 
 	// binwalkID
-	/^AES Inverse S-Box$/,
+	/^AES (Inverse )?S-Box$/,
 	/^Base64 standard index table$/,
 	/^BIN-Header,/,
 	/^Boot section Start/,

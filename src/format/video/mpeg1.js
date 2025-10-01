@@ -14,7 +14,7 @@ export class mpeg1 extends Format
 		// specific
 		"Sofdec video"
 	];
-	idMeta       = ({macFileType, macFileCreator}) => macFileType==="MPGx" || (["M1V ", "MPEG"].includes(macFileType) && macFileCreator==="mMPG") || (macFileType==="MPG " && macFileCreator==="TVOD");
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="MPGx" || (["M1V ", "MPEG"].includes(macFileType) && macFileCreator==="mMPG") || (macFileType==="MPG " && ["TVOD", "WiLL"].includes(macFileCreator));
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg"];
 }

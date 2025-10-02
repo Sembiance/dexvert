@@ -1,4 +1,4 @@
-# Supported File Formats (3,330)
+# Supported File Formats (3,331)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -65,7 +65,7 @@ archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/p
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
 archive | AVPACK Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
-archive | Balko UFL game data archive | .laf .ufl | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/balkoUFLGameDataArchive/)
+archive | Balko UFL game data archive | .laf .ufl | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/balkoUFLGameDataArchive/)
 archive | Bank Game Archive | .bnk | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/bankGameArchive/)
 archive | Battlezone 2 game data package | .pak | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/battlezone2GameDataPackage/)
 archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
@@ -1103,7 +1103,7 @@ image | [DeskMate Paint](http://fileformats.archiveteam.org/wiki/DeskMate_Paint)
 image | [DeskPic](http://fileformats.archiveteam.org/wiki/DeskPic) | .gfb | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/gfb/)
 image | [DICOM Bitmap](http://fileformats.archiveteam.org/wiki/DICOM) | .dcm .dic | [nconvert](https://www.xnview.com/en/nconvert/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [gimp](https://gimp.org) [abydosconvert](https://github.com/Sembiance/abydosconvert) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/dicom/)
 image | [Digi Paint](http://fileformats.archiveteam.org/wiki/Digi_Paint) | .ap3 .apv .dgi .dgp .ilc .esc .pzm .g09 .bg9 | [recoil2png](http://recoil.sourceforge.net) | [15 sample files](https://sembiance.com/fileFormatSamples/image/digiPaint/)
-image | [Digi-Pic DGI](http://fileformats.archiveteam.org/wiki/DGI_(Digi-Pic)) | .dgi | [deark](https://entropymine.com/deark/) [dgiwind](http://cd.textfiles.com/carousel344/003/CONV125.ZIP) | [5 sample files](https://sembiance.com/fileFormatSamples/image/dgi/)
+image | [Digi-Pic DGI](http://fileformats.archiveteam.org/wiki/DGI_(Digi-Pic)) | .dgi | [deark](https://entropymine.com/deark/) [dgiwind](http://cd.textfiles.com/carousel344/003/CONV125.ZIP) | [6 sample files](https://sembiance.com/fileFormatSamples/image/dgi/)
 image | [Digital Negative](http://fileformats.archiveteam.org/wiki/DNG) | .dng | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [11 sample files](https://sembiance.com/fileFormatSamples/image/dng/)
 image | [Digital Picture Exchange](http://fileformats.archiveteam.org/wiki/DPX) | .dpx | [convert](https://www.imagemagick.org/) [ffmpeg](https://ffmpeg.org/) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/dpx/)
 image | [DIN](http://fileformats.archiveteam.org/wiki/DIN) | .din | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/din/)
@@ -2183,7 +2183,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,091)
+## Text (1,092)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2908,6 +2908,7 @@ text | Portable Bridge Notation | .pbn |  | [10 sample files](https://sembiance.
 text | [Portable Draughts Notation](http://fileformats.archiveteam.org/wiki/Portable_Draughts_Notation#Sample_files) | .pdn |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/portableDraughtsNotation/)
 text | [Portable Gaming Notation](http://fileformats.archiveteam.org/wiki/PGN) | .pgn |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/portableGamingNotation/)
 text | Poser character rigging | .cr2 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poserCharacterRigging/)
+text | Poser Material | .mt5 |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/poserMaterial/)
 text | Poser scene | .pz3 |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/poserScene/)
 text | Post-It Software Note Template |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/postItSoftwareNoteTemplate/)
 text | PostgreSQL database dump | .sql |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)

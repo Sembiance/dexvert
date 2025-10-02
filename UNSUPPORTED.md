@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,790)
+# Unsupported File Formats (3,793)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (296)
+## Archive (297)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -216,6 +216,7 @@ Family/Format | Name | Extensions | Notes
 [archive/protectIt2Protected](https://discmaster.textfiles.com/search?format=protectIt2Protected) | ProtectIt/2 Protected | .zie | 
 [archive/protectorProtected](https://discmaster.textfiles.com/search?format=protectorProtected) | protector Protected | .exe | 
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?format=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
+[archive/psxCompressedCDImage](https://discmaster.textfiles.com/search?format=psxCompressedCDImage) | pSX compressed CD image | .cdz | 
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?format=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
 [archive/py2exePacked](https://discmaster.textfiles.com/search?format=py2exePacked) | py2exe Packed | .exe | 
 [archive/pyInstallerPacked](https://discmaster.textfiles.com/search?format=pyInstallerPacked) | PyInstaller Packed | .exe | 
@@ -1153,7 +1154,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,541)
+## Other (2,543)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1999,6 +2000,7 @@ Family/Format | Name | Extensions | Notes
 [other/finaleEnigmaBinaryFormat](https://discmaster.textfiles.com/search?format=finaleEnigmaBinaryFormat) | Finale Enigma Binary Format | .bin | 
 [other/finaleGuitar](https://discmaster.textfiles.com/search?format=finaleGuitar) | Finale Guitar | .mus .lib .ftm | 
 [other/finaleNotePad](https://discmaster.textfiles.com/search?format=finaleNotePad) | Finale NotePad | .mus | 
+[other/finalePrintMusic](https://discmaster.textfiles.com/search?format=finalePrintMusic) | Finale PrintMusic | .ftm .mus | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?format=firstBasicHelp) | FirstBasic Help | .fbh | 
 [other/firstPaintPalette](https://discmaster.textfiles.com/search?format=firstPaintPalette) | FirstPaint Palette | .zpl | 
 [other/flStudioScore](https://discmaster.textfiles.com/search?format=flStudioScore) | FL Studio Score | .fsc | 
@@ -2841,6 +2843,7 @@ Family/Format | Name | Extensions | Notes
 [other/pcSyncForWindows](https://discmaster.textfiles.com/search?format=pcSyncForWindows) | PCsync for Windows | .twf | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?format=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
 [other/peakGraphicalWaveform](https://discmaster.textfiles.com/search?format=peakGraphicalWaveform) | Peak Graphical Waveform | .pk | 
+[other/peggleNightsReplay](https://discmaster.textfiles.com/search?format=peggleNightsReplay) | Peggle Nights replay | .dat .pegn | 
 [other/perFORMCommunicatorFilePacket](https://discmaster.textfiles.com/search?format=perFORMCommunicatorFilePacket) | PerFORM Communicator File Packet | .fpk | 
 [other/perFORMCompressedDatabase](https://discmaster.textfiles.com/search?format=perFORMCompressedDatabase) | PerFORM compressed database | .frp | 
 [other/perFormDBDefinition](https://discmaster.textfiles.com/search?format=perFormDBDefinition) | PerForm DB definition | .fdb | 

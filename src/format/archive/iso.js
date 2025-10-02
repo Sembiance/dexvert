@@ -124,7 +124,7 @@ export class iso extends Format
 
 		const cueFile = await findCUEFile(dexState);
 		let multiBinTracks = false;
-		let multipleMode1Tracks = false;
+		let multipleMode12Tracks = false;
 		if(cueFile)
 		{
 			// Check to see if we are have tracks split across multiple .bin files
@@ -169,7 +169,7 @@ export class iso extends Format
 			else
 			{
 				// Check to see if we have multiple MODE1 tracks
-				multipleMode1Tracks = ((cueFileMeta?.files || [])?.[0]?.tracks || []).filter(o => o.type==="MODE1/2352").length>1;
+				multipleMode12Tracks = ((cueFileMeta?.files || [])?.[0]?.tracks || []).filter(o => ["MODE1/2352", "MODE2/2352"].includes(o.type)).length>1;
 			}
 		}
 
@@ -222,7 +222,7 @@ export class iso extends Format
 				if(dexState.hasMagics(MFS_MAGICS))
 					r.push("aaru");
 
-				if(multipleMode1Tracks)		// Some CD's (Game_Killer.bin) have a ton of MODE1 tracks, not sure why, but the stuff below kinda chokes on them, but aaru/unar/fuseiso all seem to handle it ok, but we just pick aaru and fuseiso for now
+				if(multipleMode12Tracks)		// Some CD's (Game_Killer.bin) have a ton of MODE1 tracks, not sure why, but the stuff below kinda chokes on them, but aaru/unar/fuseiso all seem to handle it ok, but we just pick aaru and fuseiso for now
 					r.pushUnique("aaru", "fuseiso");
 				r.push("uniso[checkMount]");	// Will only copy files if there are no input/output errors getting a directory listing (The PC-SIG Library on CD ROM - Ninth Edition.iso)
 

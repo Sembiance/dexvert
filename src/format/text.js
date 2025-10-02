@@ -854,6 +854,7 @@ export default
 		poswizReport                               : {name : "Poswiz! Report", ext : [".rpt"], magic : ["Poswiz! Report"]},
 		powerBaseDatabase                          : {name : "PowerBase database", ext : [".pb"], magic : ["PowerBase database"]},
 		powerDesignerData                          : {name : "PowerDesigner / PowerAMC data", ext : [".pdm", ".cdm", ".pam"], magic : ["PowerDesigner / PowerAMC data (generic)", "PowerDesigner file (generic)"]},
+		poserMaterial                              : {name : "Poser Material", ext : [".mt5"], magic : ["Poser Material"], weakMagic : true},
 		powerTranslatorDocument                    : {name : "Power Translator document", ext : [".mtp"], magic : ["Power Translator document"], weakMagic : true},
 		ppd                                        : {name : "PostScript Printer Description", website : "http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description", ext : [".ppd", ".pp"], magic : ["PPD file", "PostScript Printer Description", "application/vnd.cups-ppd"]},
 		prepForMonarchHelp                         : {name : "Prep for Monarch Help", ext : [".hlp"], magic : ["Prep for Monarch Help"], weakMagic : true},

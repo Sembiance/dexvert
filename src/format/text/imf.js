@@ -11,6 +11,7 @@ export class imf extends Format
 	ext            = [".eml", ".msg"];
 	forbidExtMatch = true;
 	magic          = _IMF_MAGIC;
+	idMeta         = ({macFileType, macFileCreator}) => macFileType==="M822" && macFileCreator==="MSNM";
 	untouched      = true;
 	notes          = xu.trim`
 		With several RFC files describing the format, you'd think this would be straight forward to parse, but it's a total nightmare.

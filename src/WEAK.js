@@ -256,7 +256,7 @@ export const WEAK_VALUES =
 	/^[A-Z\d]+:\.html$/,
 	/^Amiga AFS file system Type "AFS\\0"$/,
 	/^Amiga Kickstart disk Type "KICK"$/,
-	/^Amiga Smart File System Type "SFS\\0"$/,
+	/^Amiga Smart File System Type "SFS\\0"/,
 	/^Amiga type code /,
 	/^Archive: C\(ompression\)KIT by Mad Man Software/,
 	/^ATARI ST partition map/,

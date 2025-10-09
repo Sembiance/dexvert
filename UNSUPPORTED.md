@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,793)
+# Unsupported File Formats (3,803)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (297)
+## Archive (298)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -289,6 +289,7 @@ Family/Format | Name | Extensions | Notes
 [archive/winAPEIDEHardDiskImage](https://discmaster.textfiles.com/search?format=winAPEIDEHardDiskImage) | WinAPE IDE hard disk image | .ide | 
 [archive/windevCompressedArchive](https://discmaster.textfiles.com/search?format=windevCompressedArchive) | WINDEV compressed archive | .wdz | 
 [archive/winDupeDiskImage](https://discmaster.textfiles.com/search?format=winDupeDiskImage) | WinDupe disk image | .wdf | 
+[archive/wizardryBootstrapDiskImage](https://discmaster.textfiles.com/search?format=wizardryBootstrapDiskImage) | Wizardry bootstrap disk image | .dsk | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?format=wordPerfectInstallArchive) | WordPerfect install archive |  | 
 [archive/wozDiskImage](https://discmaster.textfiles.com/search?format=wozDiskImage) | WOZ disk image | .woz | 
 [archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
@@ -975,7 +976,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (173)
+## Music (174)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1024,6 +1025,7 @@ Family/Format | Name | Extensions | Notes
 [music/ericssonEMelodyRingtone](https://discmaster.textfiles.com/search?format=ericssonEMelodyRingtone) | Ericsson eMelody Ringtone | .emy | 
 [music/everyonePianoMusicScore](https://discmaster.textfiles.com/search?format=everyonePianoMusicScore) | EveryonePiano music score | .eop | 
 [music/extendedMOD](https://discmaster.textfiles.com/search?format=extendedMOD) | [Extended MOD](http://fileformats.archiveteam.org/wiki/Extended_MOD) | .emd | [2 sample files](https://sembiance.com/fileFormatSamples/music/extendedMOD/)
+[music/eXtensibleMusicFile](https://discmaster.textfiles.com/search?format=eXtensibleMusicFile) | eXtensible Music File Format | .xmf | [1 sample file](https://sembiance.com/fileFormatSamples/music/eXtensibleMusicFile/)
 [music/ezScoreScore](https://discmaster.textfiles.com/search?format=ezScoreScore) | EZ-Score Score | .sco | 
 [music/facSoundtrackerModule](https://discmaster.textfiles.com/search?format=facSoundtrackerModule) | FAC Soundtracker Module | .mus | 
 [music/faceTheMusic](https://discmaster.textfiles.com/search?format=faceTheMusic) | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [5 sample files](https://sembiance.com/fileFormatSamples/music/faceTheMusic/)
@@ -1154,7 +1156,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,543)
+## Other (2,551)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1491,6 +1493,10 @@ Family/Format | Name | Extensions | Notes
 [other/bisraPEncoded](https://discmaster.textfiles.com/search?format=bisraPEncoded) | BIS raP encoded format | .sqm .bin | 
 [other/bisRtmAnimation](https://discmaster.textfiles.com/search?format=bisRtmAnimation) | BIS Rtm animation | .rtm | 
 [other/bitDefenderPlugIn](https://discmaster.textfiles.com/search?format=bitDefenderPlugIn) | BitDefender plug-in | .xmd | 
+[other/blackAndWhite2GameDataScript](https://discmaster.textfiles.com/search?format=blackAndWhite2GameDataScript) | Black and White 2 game data script | .chl | 
+[other/blackAndWhite2PathsData](https://discmaster.textfiles.com/search?format=blackAndWhite2PathsData) | Black and White 2 paths data | .pat | 
+[other/blackAndWhite2TerrainData](https://discmaster.textfiles.com/search?format=blackAndWhite2TerrainData) | Black and White 2 Terrain data | .ter | 
+[other/blackAndWhite2WallData](https://discmaster.textfiles.com/search?format=blackAndWhite2WallData) | Black and White 2 Wall data | .wal | 
 [other/blackAndWhiteSoundsData](https://discmaster.textfiles.com/search?format=blackAndWhiteSoundsData) | Black and White sounds data | .sad | 
 [other/blackViperGameData](https://discmaster.textfiles.com/search?format=blackViperGameData) | Black Viper game data | .edp | 
 [other/blackjackLabGame](https://discmaster.textfiles.com/search?format=blackjackLabGame) | Blackjack Lab game |  | 
@@ -1979,6 +1985,7 @@ Family/Format | Name | Extensions | Notes
 [other/faeryTaleAdventure2SaveGame](https://discmaster.textfiles.com/search?format=faeryTaleAdventure2SaveGame) | Faery Tale Adventure 2 save game | .sav | 
 [other/fahrenheitGameDataArchive](https://discmaster.textfiles.com/search?format=fahrenheitGameDataArchive) | Fahrenheit game data archive | .idm .dat | 
 [other/falloutCompiledScript](https://discmaster.textfiles.com/search?format=falloutCompiledScript) | Fallout compiled script | .int | 
+[other/falloutTacticsCampaign](https://discmaster.textfiles.com/search?format=falloutTacticsCampaign) | Fallout Tactics Campaign | .cam | 
 [other/falloutTacticsEntity](https://discmaster.textfiles.com/search?format=falloutTacticsEntity) | Fallout Tactics Entity | .ent | 
 [other/falloutTacticsImage](https://discmaster.textfiles.com/search?format=falloutTacticsImage) | Fallout Tactics image | .zar | 
 [other/falloutTacticsSprite](https://discmaster.textfiles.com/search?format=falloutTacticsSprite) | Fallout Tactics Sprite | .spr | 
@@ -2148,6 +2155,7 @@ Family/Format | Name | Extensions | Notes
 [other/gsBaseDataBase](https://discmaster.textfiles.com/search?format=gsBaseDataBase) | GS-Base data base | .gs | 
 [other/gStreamerBinaryRegistry](https://discmaster.textfiles.com/search?format=gStreamerBinaryRegistry) | GStreamer binary registry | .bin | 
 [other/guemapDocument](https://discmaster.textfiles.com/search?format=guemapDocument) | GUEmap document | .gmp | 
+[other/guildWarsData](https://discmaster.textfiles.com/search?format=guildWarsData) | Guild Wars data | .dat | 
 [other/guileObject](https://discmaster.textfiles.com/search?format=guileObject) | Guile Object | .go | 
 [other/guitarProFile](https://discmaster.textfiles.com/search?format=guitarProFile) | Guitar Pro File | .gtp | 
 [other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 .gpx | 
@@ -3162,6 +3170,7 @@ Family/Format | Name | Extensions | Notes
 [other/smartListToGoDatabase](https://discmaster.textfiles.com/search?format=smartListToGoDatabase) | SmartList To Go database | .pdb | 
 [other/snagItCapture](https://discmaster.textfiles.com/search?format=snagItCapture) | SnagIt capture | .snag | 
 [other/snarkBustersGameDataArchive](https://discmaster.textfiles.com/search?format=snarkBustersGameDataArchive) | Snark Busters game data archive | .pack | 
+[other/snes9xSnapshot](https://discmaster.textfiles.com/search?format=snes9xSnapshot) | Snes9x snapshot | .fig .smc .sfc .swc | 
 [other/snifferCapture](https://discmaster.textfiles.com/search?format=snifferCapture) | Sniffer Capture | .snf .trc | 
 [other/snippitPatch](https://discmaster.textfiles.com/search?format=snippitPatch) | Snippit patch | .snp | 
 [other/snoopCapture](https://discmaster.textfiles.com/search?format=snoopCapture) | Snoop Capture | .snoop | 
@@ -3498,6 +3507,7 @@ Family/Format | Name | Extensions | Notes
 [other/virToolsFiles](https://discmaster.textfiles.com/search?format=virToolsFiles) | Virtools files | .cmo .nmo .vmo .nms | 
 [other/virtualChess2Game](https://discmaster.textfiles.com/search?format=virtualChess2Game) | Virtual Chess 2 game | .eck | 
 [other/virtualFireScene](https://discmaster.textfiles.com/search?format=virtualFireScene) | Virtual Fire Scene | .sce | 
+[other/virtualGameStationMemoryCardSaveGame](https://discmaster.textfiles.com/search?format=virtualGameStationMemoryCardSaveGame) | Virtual Game Station memory card save game |  | 
 [other/virtualPascalUnit](https://discmaster.textfiles.com/search?format=virtualPascalUnit) | Virtual Pascal Unit | .vpi | 
 [other/virtualSkipperGameData](https://discmaster.textfiles.com/search?format=virtualSkipperGameData) | Virtual Skipper game data | .vsk .pak | 
 [other/virtualTIEmulatorSkin](https://discmaster.textfiles.com/search?format=virtualTIEmulatorSkin) | Virtual TI emulator skin | .skn | 

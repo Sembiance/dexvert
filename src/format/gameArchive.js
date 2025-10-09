@@ -16,6 +16,7 @@ export const gameextractor =
 		bankGameArchive                     : {name : "Bank Game Archive", ext : [".bnk"], magic : ["Bank game data archive"]},
 		battlezone2GameDataPackage          : {name : "Battlezone 2 game data package", ext : [".pak"], magic : ["Battlezone 2 game data package"], weakMagic : true},
 		bioWareEntityResourceFile           : {name : "BioWare Entity Resource File", ext : [".erf"], magic : ["BioWare Entity Resource File"]},
+		bizarreCreationsBankFile            : {name : "Bizarre Creations Bank File", ext : [".baf"], magic : ["BAF (Bizarre Creations Bank File) (baf)"]},
 		bloodrayneGameDataArchive           : {name : "Bloodrayne game data archive", ext : [".pod"], magic : ["Bloodrayne game data archive"], weakMagic : true},
 		boltGameArchive                     : {name : "BOLT Game Archive", ext : [".blt"], magic : ["BOLT game data archive"]},
 		broderbundMohawkGameArchive         : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive", "Riven saved game"], idMeta : ({macFileType, macFileCreator}) => (macFileType==="MHK_" && macFileCreator==="MoRs") || (macFileType==="LBgP" && macFileCreator==="LBgP")},

@@ -139,6 +139,7 @@ export const WEAK_VALUES =
 	/^BIN-Header,/,
 	/^Boot section Start/,
 	/^Broadcom (\d+ firmware )?header/,
+	/^BSA archive, version: \d+/,
 	/^Copyright string: /,
 	/^CRC32 polynomial table/,
 	/^CSYS header,/,

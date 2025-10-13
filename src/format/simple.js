@@ -210,6 +210,7 @@ export default
 		nsFileWrapperSerializedData      : {name : "NSFileWrapper Serialized Data", magic : ["NSFileWrapper serialized data"]},
 		omnisStudioDatabase              : {name : "Omnis Studio Database", ext : [".df1", ".lbr"], magic : ["Omnis Studio Database"]},
 		objectVisionDatafile             : {name : "ObjectVision Datafile", ext : [".ovd"], magic : ["ObjectVision Datafile"]},
+		openTTDLanguageStrings           : {name : "OpenTTD Language strings", ext : [".lng"], magic : ["OpenTTD Language strings"], weakMagic : true},
 		pcToolsDesktopMessagesHelp       : {name : "PC Tools Desktop Messages/help", ext : [".msg"], magic : ["PC Tools Desktop Messages/help"], weakMagic : true},
 		perFORMMessages                  : {name : "PerFORM Messages", ext : [".msg"], magic : ["PerFORM Messages"]},
 		polytronVCSLogfile               : {name : "Polytron VCS logfile", ext : [".pmv"], magic : ["Polytron VCS logfile"]},

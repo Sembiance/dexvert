@@ -22,6 +22,7 @@ export const gameextractor =
 		broderbundMohawkGameArchive         : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive", "Riven saved game"], idMeta : ({macFileType, macFileCreator}) => (macFileType==="MHK_" && macFileCreator==="MoRs") || (macFileType==="LBgP" && macFileCreator==="LBgP")},
 		chasmGameArchive                    : {name : "Chasm Game Archive", ext : [".bin"], magic : ["Chasm BIN archive"]},
 		ciGAMESGameDataArchive              : {name : "CI GAMES game data archive", ext : [".dpk"], magic : ["CI GAMES game data archive"], weakMagic : true},
+		creativeAssemblyGameResourceData    : {name : "Creative Assembly game resource data", ext : [".pack"], magic : ["Creative Assembly game resource data"]},
 		darkReignGameArchive                : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)"},
 		darkReign2GameDataArchive           : {name : "Dark Reign 2 game data archive", ext : [".zwp"], magic : ["Dark Reign 2 game data archive"], weakMagic : true},
 		destanGameDataArchive               : {name : "Destan game data archive", ext : [".3dn"], magic : ["Destan game data archive"]},
@@ -82,6 +83,7 @@ export const gameextractor =
 		xenonautsGameArchive                : {name : "Xenonauts game archive", ext : [".pfp"], magic : ["Xenonauts game data archive"], weakMagic : true},
 		youDontKnowJackGameArchive          : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"], idMeta : ({macFileType, macFileCreator}) => (macFileType==="srf " && ["SRF ", "YDKJ"].includes(macFileCreator)) || (macFileType==="srf1" && macFileCreator==="SrfM") || (macFileType==="xSRF" && ["C2Bs", "Qbrw"].includes(macFileCreator))},
 		warriorKingsGameData                : {name : "Warrior Kings game data", ext : [".bcp"], magic : ["Warrior Kings game data"]},
+		wolfensteinGameData                 : {name : "Wolfenstein game data", ext : [".spk", ".mpk"], magic : ["Wolfenstein game data"]},
 		zAxisGameSoundDataArchive           : {name : "Z-Axis game sound data archive", ext : [".zsd"], magic : ["Z-Axis game sound data archive"]}
 	}
 };

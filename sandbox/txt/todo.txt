@@ -18,6 +18,10 @@
   sandbox/app/radTools/ has some tools that in theory you can use to extract, but it didn't work with the files I tested
   MAYBE this tool can do it: https://www.zeus-software.com/downloads/xripper
 
+* Add support for:
+	http://fileformats.archiveteam.org/index.php?title=SABDU
+	https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage
+
 * Use exiftool to get CompanyName, ProductVersion, Comments, and other fields from formats: exe, dll, etc.
   Store this as meta info. Make sure to update injest/phase/phase4.js and ensure this gets stored into textContent
   Then upload SOME of these to item #7 and reprocess and try searching for it, make sure it can find them: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e

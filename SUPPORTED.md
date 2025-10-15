@@ -1,11 +1,11 @@
-# Supported File Formats (3,335)
+# Supported File Formats (3,340)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (486)
+## Archive (488)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -181,6 +181,7 @@ archive | FrontPage Theme-Pack | .elm | [unFrontPageThemePack](https://github.co
 archive | [FSH Archive](http://fileformats.archiveteam.org/wiki/FSH_(EA_Sports)) | .fsh | [fshtool](http://www.math.polytechnique.fr/cmat/auroux/nfs/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/fshArchive/)
 archive | FVL0 Compressed |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fvl0/)
 archive | Gabriel Knight 3 barn game archive | .brn | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/gabrielKnight3BarnGameArchive/)
+archive | GameMaker Studio game data archive | .dat | [gameextractor](http://www.watto.org/game_extractor.html) | 
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [deark](https://entropymine.com/deark/) | [26 sample files](https://sembiance.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Full format details: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [deark](https://entropymine.com/deark/) [unpcxgx](http://www.ctpax-x.org/?goto=files&show=104) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/gxlib/)
 archive | [God of Thunder Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(God_of_Thunder)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/godOfThunderGameArchive/)
@@ -416,6 +417,7 @@ archive | [Squeez SQX Archive](http://fileformats.archiveteam.org/wiki/SQX) | .s
 archive | [Squeeze Archive](http://fileformats.archiveteam.org/wiki/Squeeze) |  | [unar](https://github.com/incbee/Unarchiver) [lbrate](http://www.svgalib.org/rus/lbrate.html) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/squeeze/)
 archive | Squeeze It Archive | .sqz .exe | [squeezeIt](http://cd.textfiles.com/ftp.wwiv.com/pub/GENUTIL/sqz1083.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/squeezeIt/)
 archive | Stacker compressed volume | .dsk | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/stackerCompressedVolume/) - This code might help (I tried the mc extension, couldn't get it to do anything): https://cmp.felk.cvut.cz/~pisa/dmsdos/
+archive | Star Trek Online game data | .hogg | [gameextractor](http://www.watto.org/game_extractor.html) | 
 archive | [Stargunner Game Archive](https://moddingwiki.shikadi.net/wiki/DLT_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/stargunnerGameArchive/)
 archive | Starsiege Game Archive | .vol | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/starsiegeGameArchive/)
 archive | [STAT Compressed](https://bellard.org/stat/) | .st | [stat_fabrice](https://bellard.org/stat/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/statCompressed/)
@@ -472,7 +474,7 @@ archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/v
 archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
-archive | Wolfenstein game data | .spk .mpk | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/wolfensteinGameData/)
+archive | Wolfenstein game data | .spk .mpk | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/wolfensteinGameData/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)
 archive | X68000 Floppy Disk Image | .xdf | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/x68000FloppyDiskImage/)
 archive | XBMC Texture Package | .xbt | [xbtfextractor](https://github.com/larshall/xbtfextractor) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xbmcTexturePackage/)
@@ -1409,7 +1411,7 @@ image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | [recoil2png]
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [6 sample files](https://sembiance.com/fileFormatSamples/image/pabloPaint/)
 image | [PABX Background](http://fileformats.archiveteam.org/wiki/PABX_background) | .pix | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pabxBackground/)
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
-image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [9 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
+image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/image/paintPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)) | .da4 .psc | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/paintShop/)
 image | [PaintShop Pro](http://fileformats.archiveteam.org/wiki/PaintShop_Pro) | .psp .pspimage .pspbrush | [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintShopPro/)
@@ -2187,7 +2189,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,092)
+## Text (1,095)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2299,6 +2301,7 @@ text | BatMenu configuration | .mnu |  | [2 sample files](https://sembiance.com/
 text | Battlefield 2 map Description | .desc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/battlefield2MapDescription/)
 text | BCPL source | .bcp .bpl .bcpl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bcplSource/)
 text | Bernd Wetzel OS/2 Install Data | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/berndWetzelOS2InstallData/)
+text | Besiege machine | .bsg |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/besiegeMachine/)
 text | Beyond Atlantis save game | .sav |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/beyondAtlantisSaveGame/)
 text | BibTeX database file | .bib |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXDatabaseFile/)
 text | BibTeX style | .bst |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/bibTeXStyle/)
@@ -2532,6 +2535,7 @@ text | Gambas form | .form |  | [1 sample file](https://sembiance.com/fileFormat
 text | Gambas project |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/gambasProject/)
 text | Gambit Extensive Game File | .efg |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/gambitExtensiveGameFile/)
 text | Gambit strategic N-player Game File | .nfg |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/gambitStrategicNPlayerGameFile/)
+text | GameMaker document/object | .gmx .col |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/gameMakerDocumentObject/)
 text | GAPFile | .gap |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/gapfile/)
 text | GCOV coverage report | .gcov |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/gcovCoverageReport/)
 text | gEDA Symbol | .sym |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/gEDASymbol/)
@@ -2939,7 +2943,7 @@ text | ProtoGen Application configuration | .pva |  | [6 sample files](https://s
 text | Proton language Schema | .sch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
 text | Proxy Auto-Config | .pac |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
 text | PS/2 MicroChannel Adapter Description | .adf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/ps2MicroChannelAdapterDescription/)
-text | [Pure Data patch](http://fileformats.archiveteam.org/wiki/Pure_Data) | .pd |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/pureDataPatch/)
+text | [Pure Data patch](http://fileformats.archiveteam.org/wiki/Pure_Data) | .pd |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/pureDataPatch/)
 text | PV3D Effect | .eff |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pv3DEffect/)
 text | PV3D scene description | .pvd |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/pV3DSceneDescription/)
 text | PV3D Value data | .val |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/pv3DValueData/)
@@ -3067,7 +3071,7 @@ text | StarDict Info | .ifo |  | [6 sample files](https://sembiance.com/fileForm
 text | Starquake high scores |  |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/starquakeHighScores/)
 text | Starry Night Document | .sno .snf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/starryNightDocument/)
 text | StarWriter keyboard Macro | .mac |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/starWriterKeyboardMacro/)
-text | Steam install script | .vdf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/steamInstallScript/)
+text | Steam install script | .vdf |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/steamInstallScript/)
 text | STEP model data | .step |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/stepModelData/)
 text | StepMania step file | .sm |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/stepManiaStepFile/)
 text | Stockholm format | .sto .stk .stockholm |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/stockholmFormat/)
@@ -3151,7 +3155,8 @@ text | Ultimate 3D Effect | .ufx |  | [1 sample file](https://sembiance.com/file
 text | Ultimate Stunts Track | .template .track |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/ultimateStuntsTrack/)
 text | UltraEdit Menu | .mfg .mnu .mb0 .mb1 .in1 .pb0 .pb1 |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/ultraEditMenu/)
 text | Unified Printer Parameter | .upp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/unifiedPrinterParameter/)
-text | Unity asset Meta data | .meta |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/unityAssetMetaData/)
+text | Unity asset Meta data | .meta |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/unityAssetMetaData/)
+text | Unity Player Log | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/unityPlayerLog/)
 text | Upcat Catalog | .cat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/upcatCatalog/)
 text | Urban Chaos Story Script | .sty |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/urbanChaosStoryScript/)
 text | USGS Digital Line Graph | .dlg .dat .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/usgsDigitalLineGraph/)
@@ -3181,7 +3186,7 @@ text | Video Creator CD32 project | .vid |  | [10 sample files](https://sembianc
 text | VideoFX2 Effect | .vfx |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/videoFX2Effect/)
 text | VideoFX2 Script | .script |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/videoFX2Script/)
 text | Vim syntax |  |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/vimSyntax/)
-text | Visionaire Studio game settings | .ini |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/visionaireStudioGameSettings/)
+text | Visionaire Studio game settings | .ini |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visionaireStudioGameSettings/)
 text | Vista Script | .prefs .script |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/vistaScript/)
 text | Visual Basic Active Designer file | .dsr |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicActiveDesignerFile/)
 text | Visual Basic class definition | .cls |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicClassDefinition/)
@@ -3248,7 +3253,7 @@ text | World Construction Set Preferences | .prefs |  | [3 sample files](https:/
 text | World Construction Set Project | .prefs .proj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/worldConstructionSetProject/)
 text | World Construction Set Wave | .wve |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/worldConstructionSetWave/)
 text | X.509 Certificate |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/x509Certificate/)
-text | XACT Project | .xap |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/xactProject/)
+text | XACT Project | .xap |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xactProject/)
 text | Xantippe project | .xan |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xantippeProject/)
 text | XaoS Position File | .z .xpf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/xaosPositionFile/)
 text | Xara graphics | .wix |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/xaraGraphics/)

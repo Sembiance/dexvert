@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,808)
+# Unsupported File Formats (3,813)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1158,7 +1158,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,554)
+## Other (2,559)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1232,6 +1232,7 @@ Family/Format | Name | Extensions | Notes
 [other/addictThesaurus](https://discmaster.textfiles.com/search?format=addictThesaurus) | Addict Thesaurus | .thr | 
 [other/addictUserDictionary](https://discmaster.textfiles.com/search?format=addictUserDictionary) | Addict User Dictionary | .adu | 
 [other/adobeAfterEffectsProject](https://discmaster.textfiles.com/search?format=adobeAfterEffectsProject) | Adobe After Effects Project | .aep | 
+[other/adobeAuditionPeakFile](https://discmaster.textfiles.com/search?format=adobeAuditionPeakFile) | Adobe Audition Peak File | .pkf | 
 [other/adobeCaptureDocument](https://discmaster.textfiles.com/search?format=adobeCaptureDocument) | Adobe Capture Document |  | 
 [other/adobeCMaps](https://discmaster.textfiles.com/search?format=adobeCMaps) | Adobe CMaps | .cmap .bcmap | 
 [other/adobeColorSettingsFile](https://discmaster.textfiles.com/search?format=adobeColorSettingsFile) | Adobe Color Settings File | .csf | 
@@ -1267,6 +1268,7 @@ Family/Format | Name | Extensions | Notes
 [other/aegisProMotionGeometry](https://discmaster.textfiles.com/search?format=aegisProMotionGeometry) | Aegis Pro Motion Geometry | .geo | 
 [other/aegisSonixMusic](https://discmaster.textfiles.com/search?format=aegisSonixMusic) | Aegis Sonix music | .snx | 
 [other/aesopEngineResourceData](https://discmaster.textfiles.com/search?format=aesopEngineResourceData) | AESOP engine Resource data | .res | 
+[other/affinityDocument](https://discmaster.textfiles.com/search?format=affinityDocument) | Affinity document | .afdesign | 
 [other/afsGameArchive](https://discmaster.textfiles.com/search?format=afsGameArchive) | AFS game archive | .afs | 
 [other/afterDarkForDOSResourceData](https://discmaster.textfiles.com/search?format=afterDarkForDOSResourceData) | After Dark for DOS Resource data | .rsc | 
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?format=afterlifeSavedGame) | Afterlife saved game |  | 
@@ -2075,7 +2077,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameBoyROM](https://discmaster.textfiles.com/search?format=gameBoyROM) | Game Boy ROM | .gb .gbc | 
 [other/gameDoctorSF3SavedGame](https://discmaster.textfiles.com/search?format=gameDoctorSF3SavedGame) | Game Doctor SF 3 saved game | .smc | 
 [other/gameGearROM](https://discmaster.textfiles.com/search?format=gameGearROM) | Game Gear ROM | .gg | 
-[other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr .gm6 | 
+[other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr .gm6 .gm | 
 [other/gameVoiceData](https://discmaster.textfiles.com/search?format=gameVoiceData) | Game Voice data | .hvo | 
 [other/gamebyroKFMData](https://discmaster.textfiles.com/search?format=gamebyroKFMData) | Gamebyro KFM data | .kfm | 
 [other/gameHouseJigsawGame](https://discmaster.textfiles.com/search?format=gameHouseJigsawGame) | GameHouse Jigsaw Game | .jig | 
@@ -2140,6 +2142,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?format=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
 [other/grandTheftAuto2MapLayout](https://discmaster.textfiles.com/search?format=grandTheftAuto2MapLayout) | Grand Theft Auto 2 Map Layout | .gmp | 
 [other/grandTheftAuto2StyleData](https://discmaster.textfiles.com/search?format=grandTheftAuto2StyleData) | Grand Theft Auto 2 Style data | .sty | 
+[other/grandTheftAuto5TextureDictionary](https://discmaster.textfiles.com/search?format=grandTheftAuto5TextureDictionary) | Grand Theft Auto 5 Texture Dictionary | .ytd | 
 [other/grandTheftAutoAnimation](https://discmaster.textfiles.com/search?format=grandTheftAutoAnimation) | Grand Theft Auto animation | .ifp | 
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?format=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/grandTheftAutoSaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoSaveGame) | Grand Theft Auto save game | .b | 
@@ -2335,6 +2338,7 @@ Family/Format | Name | Extensions | Notes
 [other/kickPascalUnitInterface](https://discmaster.textfiles.com/search?format=kickPascalUnitInterface) | KICK-Pascal Unit Interface | .u | 
 [other/kidPixProject](https://discmaster.textfiles.com/search?format=kidPixProject) | Kid Pix project | .kpx | 
 [other/kidspirationDocument](https://discmaster.textfiles.com/search?format=kidspirationDocument) | Kidspiration document | .kid | 
+[other/killingFloorMap](https://discmaster.textfiles.com/search?format=killingFloorMap) | Killing Floor Map | .rom | 
 [other/kingsoftAntivirusData](https://discmaster.textfiles.com/search?format=kingsoftAntivirusData) | Kingsoft Antivirus data | .psg .fsg .vsg .ksg | 
 [other/kiriKiriAdventureGameSystemPackage](https://discmaster.textfiles.com/search?format=kiriKiriAdventureGameSystemPackage) | KiriKiri Adventure Game System package | .xp3 | 
 [other/kissCELColorPalette](https://discmaster.textfiles.com/search?format=kissCELColorPalette) | KiSS CEL Color Palette | .kcf | 
@@ -3044,6 +3048,7 @@ Family/Format | Name | Extensions | Notes
 [other/reflectionsScene](https://discmaster.textfiles.com/search?format=reflectionsScene) | Reflections Scene |  | 
 [other/reflex2Report](https://discmaster.textfiles.com/search?format=reflex2Report) | Reflex 2 Report | .r2r | 
 [other/relocatableObjectModule](https://discmaster.textfiles.com/search?format=relocatableObjectModule) | Relocatable Object Module | .obj .o | 
+[other/renPyCompiledGame](https://discmaster.textfiles.com/search?format=renPyCompiledGame) | Ren'Py Compiled game | .rpyc .rpymc | 
 [other/rend386VideoDriver](https://discmaster.textfiles.com/search?format=rend386VideoDriver) | Rend386 video driver | .rvd | 
 [other/renderwareTeXtureDictionary](https://discmaster.textfiles.com/search?format=renderwareTeXtureDictionary) | Renderware TeXture Dictionary | .txd | 
 [other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?format=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 

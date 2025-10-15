@@ -1269,7 +1269,7 @@ export const WEAK_VALUES =
 	/^DEGAS hi-res bitmap$/,
 	/^DEGAS hi-res compressed bitmap$/,
 	/^DeltaCad drawing$/,
-	/^Denise Amiga Saved state \(generic\)$/,
+	/^Denise (Amiga|C64) Saved state \(generic\)$/,
 	/^Device Compression System disk image$/,
 	/^Dialogic VOX \(telephony\) encoded audio$/,
 	/^DICOM medical imaging bitmap/,

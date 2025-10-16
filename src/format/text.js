@@ -910,6 +910,7 @@ export default
 		roboDemoMargin                             : {name : "RoboDemo Margin", ext : [".fcm"], magic : ["RoboDemo Margin"], weakMagic : true},
 		roboHelpTopicExport                        : {name : "RoboHelp Topic Export", ext : [".hpt"], magic : ["RoboHelp Topic Export"]},
 		rpgMakerVXProject                          : {name : "RPG Maker VX Project", ext : [".rvproj"], magic : ["RPG Maker VX Project"], weakMagic : true},
+		rPGMaker2003ProjectID                      : {name : "RPG Maker 2003 Project id", ext : [".r3proj"], magic : ["RPG Maker 2003 Project id"], weakMagic : true},
 		rpmSpec                                    : {name : "RPM Spec", ext : [".in"], magic : ["text/x-rpm-spec"], weakMagic : true},
 		rsLogix5000Program                         : {name : "RSLogix 5000 Program", ext : [".acd"], magic : ["RSLogix 5000 Program"]},
 		rtfGENTopicData                            : {name : "RTFGEN Topic data", ext : [".tpc"], magic : ["RTFGEN Topic data"]},

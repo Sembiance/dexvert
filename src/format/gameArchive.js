@@ -38,6 +38,7 @@ export const gameextractor =
 		finalLiberationGameArchive          : {name : "Final Liberation/Holistic Design game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive", "Holistic Design game data archive (generic)"]},
 		gabrielKnight3BarnGameArchive       : {name : "Gabriel Knight 3 barn game archive", ext : [".brn"], magic : ["Gabriel Knight 3 barn game data"]},
 		gameMakerStudioGameDataArchive      : {name : "GameMaker Studio game data archive", ext : [".dat"], magic : ["GameMaker Studio game data archive"], weakMagic : true},
+		godotPackageFormat                  : {name : "Godot Package format", ext : [".pck"], magic : ["Godot Package format"], weakMagic : true},
 		haemimontGamesADGameDataArchive     : {name : "Haemimont Games AD game data archive", ext : [".hpk"], magic : ["Haemimont Games AD game data archive"], weakMagic : true},
 		h2oGameDataArchive                  : {name : "Liquid Entertainment H2O game data archive", ext : [".h2o"], magic : ["Liquid Entertainment H2O game data archive"]},
 		harryPotterQuidditchWorldCupArchive : {name : "Harry Potter: Quidditch World Cup archive", ext : [".ccd"], magic : ["Harry Potter: Quidditch World Cup game data archive"], weakMagic : true},

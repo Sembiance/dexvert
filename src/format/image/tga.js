@@ -24,7 +24,7 @@ export class tga extends Format
 	].map(converter => (["deark", "recoil2png", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
 	// many converters will produce garbage with weak TGA magics. deark too, but if we have an extension+magic match, make an exception. recoil2png and iio2png seem to be pretty strict, so allow those as-is
 
-	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy, require more than 1 color
+	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy (but do from crunchDXT ?), require more than 1 color
 	// Color counts are calculated for images too large, so we exempt large TGAs from this check since those are encountered in the wild
 	verify = ({meta}) => meta.height>2000 || meta.width>2000 || meta.colorCount>1;
 }

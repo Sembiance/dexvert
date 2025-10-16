@@ -420,6 +420,7 @@ export const WEAK_VALUES =
 	/^Amiga icon :info:$/,
 	/^Apple Macintosh MacPaint :mac:/,
 	/^Astronomical Image Processing :aip:$/,
+	/^BIAS FringeProcessor :bias:$/,
 	/^Brender :bdr:$/,
 	/^Dali \((Low|Medium|High) Resolution\) :dali:/,
 	/^Datacopy :dcpy:$/,

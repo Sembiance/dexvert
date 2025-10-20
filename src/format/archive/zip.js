@@ -30,7 +30,7 @@ export class zip extends Format
 		"Midtown Madness 2 car data", "Rainlendar 2 Skin", "Rainlendar 2 Skin", "KWord document", "PowerPoint Macro-enabled Open XML add-in", "Maxthon skin (MX2)", "Total Commander language pack", "Rockbox Theme package", "Trillian zipped Skin",
 		"Call Of Duty map - game data archive", "Rainlendar 2 Language", "Desktop Sidebar skin", "OpenDocument Formula", "SysMetrix skin", "WindowBlinds Progress Anim theme", "Aston 2 Menu", "ConceptDraw Project document (Zipped)", "Android Archive",
 		"MindManager Brainstorm and Process Control Map", "SubEthaEdit Mode", "Moodle Backup", "PulseView sigrok dump", "Siren Jukebox Skin", "Storyist project", "Brother P-touch Editor Label", "Alice 2 World", "Kivio Flowchart", "AZZ Cardfile card",
-		"Aston Shell theme", "Numbers spreadsheet", "TuneUp Styler Logo Animation", "Automise Project (compressed) (gen)", "Karbon drawing", "application/x-karbon",
+		"Aston Shell theme", "Numbers spreadsheet", "TuneUp Styler Logo Animation", "Automise Project (compressed) (gen)", "Karbon drawing", "application/x-karbon", "MSIX Windows app package",
 		/^fmt\/(424|524|595|627|628|633|937|942|943|999|1184|1440|1476|1477)( |$)/,
 		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];

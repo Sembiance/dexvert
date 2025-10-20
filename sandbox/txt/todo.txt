@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Trid has been upgraded to python and is MUCH faster AND supports CSV output now for better parsing
+
 * Figure out why this cd-rom isn't extracting properly: https://archive.org/details/cdrinc_Dr._Morse_1999-03-30
 
 * Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress

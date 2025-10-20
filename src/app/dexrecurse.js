@@ -29,6 +29,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/americanConquest2GameArchvie",
 	"archive/cdi",
 	"archive/cloopImage",
+	"archive/gameMakerStudioGameDataArchive",
 	"archive/h2oGameDataArchive",
 	"archive/haemimontGamesADGameDataArchive",
 	"archive/hemeraThumbnailsArchive",

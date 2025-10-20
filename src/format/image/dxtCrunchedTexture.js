@@ -7,5 +7,6 @@ export class dxtCrunchedTexture extends Format
 	forbidExtMatch = true;
 	safeExt        = ".crn";
 	magic          = [/^Crunch compressed texture:/];
+	classify       = true;
 	converters     = ["crunchDXT"];
 }

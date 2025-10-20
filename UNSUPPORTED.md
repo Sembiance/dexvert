@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,815)
+# Unsupported File Formats (3,822)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (300)
+## Archive (301)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -44,6 +44,7 @@ Family/Format | Name | Extensions | Notes
 [archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?format=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
 [archive/autochopFragment](https://discmaster.textfiles.com/search?format=autochopFragment) | AUTOCHOP fragment | .#00 .#01 .#02 .#03 .#04 .#05 .#06 .#07 .#08 .#09 | 
 [archive/bDOSBootableDiskImage](https://discmaster.textfiles.com/search?format=bDOSBootableDiskImage) | B-DOS bootable disk image | .dsk | 
+[archive/batToExePacked](https://discmaster.textfiles.com/search?format=batToExePacked) | Bat To Exe Packed | .exe | 
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?format=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?format=beOSResourceData) | BeOS Resource Data | .rsrc | 
 [archive/blackFiSTPacked](https://discmaster.textfiles.com/search?format=blackFiSTPacked) | BlacK FiST Packed | .exe | 
@@ -311,7 +312,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (74)
+## Audio (75)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -367,6 +368,7 @@ Family/Format | Name | Extensions | Notes
 [audio/raveEJaySampleAudio](https://discmaster.textfiles.com/search?format=raveEJaySampleAudio) | Rave eJay sample audio |  | 
 [audio/rex2AudioSampleLoop](https://discmaster.textfiles.com/search?format=rex2AudioSampleLoop) | REX2 audio sample loop | .rx2 .rex | 
 [audio/richMusicFormat](https://discmaster.textfiles.com/search?format=richMusicFormat) | Rich Music Format | .rmf | [4 sample files](https://sembiance.com/fileFormatSamples/audio/richMusicFormat/)
+[audio/rpgMakerEncryptedOggVorbisAudio](https://discmaster.textfiles.com/search?format=rpgMakerEncryptedOggVorbisAudio) | RPG Maker encrypted Ogg Vorbis audio | .rpgmvo | 
 [audio/sonicArrangerInstrument](https://discmaster.textfiles.com/search?format=sonicArrangerInstrument) | Sonic Arranger instrument |  | No known converter
 [audio/sonixSoundSample](https://discmaster.textfiles.com/search?format=sonixSoundSample) | Sonix Sound Sample | .ss | [18 sample files](https://sembiance.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
 [audio/sonyCompressedVoiceFile](https://discmaster.textfiles.com/search?format=sonyCompressedVoiceFile) | Sony Compressed Voice File | .dvf .msv | [4 sample files](https://sembiance.com/fileFormatSamples/audio/sonyCompressedVoiceFile/)
@@ -1158,7 +1160,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,561)
+## Other (2,566)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2234,6 +2236,7 @@ Family/Format | Name | Extensions | Notes
 [other/iffBinaryPatch](https://discmaster.textfiles.com/search?format=iffBinaryPatch) | IFF Binary Patch | .pch .patch | 
 [other/iFFGeometryData](https://discmaster.textfiles.com/search?format=iFFGeometryData) | IFF Geometry Data | .dem | 
 [other/ikMultimediaPreset](https://discmaster.textfiles.com/search?format=ikMultimediaPreset) | IK Multimedia Preset | .ikmp | 
+[other/il2cppGlobalMetadata](https://discmaster.textfiles.com/search?format=il2cppGlobalMetadata) | IL2CPP global metadata | .dat | 
 [other/iliumEWalletData](https://discmaster.textfiles.com/search?format=iliumEWalletData) | Ilium eWallet data |  | 
 [other/imageMakerAnnotation](https://discmaster.textfiles.com/search?format=imageMakerAnnotation) | Image Maker Annotation | .ano | 
 [other/imageDeskCatalog](https://discmaster.textfiles.com/search?format=imageDeskCatalog) | ImageDesk Catalog | .cat | 
@@ -2663,6 +2666,7 @@ Family/Format | Name | Extensions | Notes
 [other/myriadHarmonyMelodyAssistantMusic](https://discmaster.textfiles.com/search?format=myriadHarmonyMelodyAssistantMusic) | Myriad Harmony / Melody assistant music | .mus .myr | 
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?format=mySQLIndexFile) | MySQL Index | .myi | 
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?format=mySQLTableDefinition) | MySQL Table Definition | .frm | 
+[other/mystIVRevelationSavedGame](https://discmaster.textfiles.com/search?format=mystIVRevelationSavedGame) | Myst IV: Revelation saved game | .m4s | 
 [other/mysticBBSInstallPackage](https://discmaster.textfiles.com/search?format=mysticBBSInstallPackage) | Mystic BBS install package | .mys | 
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?format=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
 [other/nacDrawDocument](https://discmaster.textfiles.com/search?format=nacDrawDocument) | NacDraw document | .nac | 
@@ -2801,6 +2805,8 @@ Family/Format | Name | Extensions | Notes
 [other/pCADBinaryLibrary](https://discmaster.textfiles.com/search?format=pCADBinaryLibrary) | P-CAD binary Library | .lib | 
 [other/pCADPrintedCircuitBoard](https://discmaster.textfiles.com/search?format=pCADPrintedCircuitBoard) | P-CAD Printed Circuit Board | .pcb | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?format=paRISCObjectCode) | PA-RISC Object Code | .o | 
+[other/packageResourceIndex](https://discmaster.textfiles.com/search?format=packageResourceIndex) | Package Resource Index | .pri | 
+[other/packedDigitalSignature](https://discmaster.textfiles.com/search?format=packedDigitalSignature) | Packed Digital Signature | .p7x | 
 [other/pageFlipperPlusFXEffect](https://discmaster.textfiles.com/search?format=pageFlipperPlusFXEffect) | PageFlipper Plus FX effect |  | 
 [other/pageFocusData](https://discmaster.textfiles.com/search?format=pageFocusData) | PageFocus Data | .1 .xdb | 
 [other/pageFocusLog](https://discmaster.textfiles.com/search?format=pageFocusLog) | PageFocus Log | .xlg | 
@@ -3087,7 +3093,7 @@ Family/Format | Name | Extensions | Notes
 [other/rosegardenMusicalNotation](https://discmaster.textfiles.com/search?format=rosegardenMusicalNotation) | Rosegarden musical notation | .rose | 
 [other/rotObject3DAction](https://discmaster.textfiles.com/search?format=rotObject3DAction) | ROT Object 3D Action | .rotact | 
 [other/roundRobinDatabase](https://discmaster.textfiles.com/search?format=roundRobinDatabase) | Round-Robin Database | .rrd | 
-[other/rpgMakerData](https://discmaster.textfiles.com/search?format=rpgMakerData) | RPG Maker data | .rxdata .rvdata .rvdata2 | 
+[other/rpgMakerData](https://discmaster.textfiles.com/search?format=rpgMakerData) | RPG Maker data | .rxdata .rvdata .rvdata2 .rgmvp | 
 [other/rpgMakerDB](https://discmaster.textfiles.com/search?format=rpgMakerDB) | RPG Maker Database | .ldb | 
 [other/rpgMakerMap](https://discmaster.textfiles.com/search?format=rpgMakerMap) | RPG Maker Map | .lmu | EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work. JP games need --encoding cp932 passed, but I found other maps where neither worked, all gave Chipset XYZ not found. So don't know of a way to get them to convert
 [other/rpgMakerSaveData](https://discmaster.textfiles.com/search?format=rpgMakerSaveData) | RPG Maker Save Data | .lsd | 
@@ -3631,6 +3637,7 @@ Family/Format | Name | Extensions | Notes
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?format=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 
 [other/wmb3DGameStudioMapLevel](https://discmaster.textfiles.com/search?format=wmb3DGameStudioMapLevel) | WMB 3D GameStudio Map/level | .wmb | 
 [other/wolfpackMission](https://discmaster.textfiles.com/search?format=wolfpackMission) | Wolfpack Mission | .mis | 
+[other/woplInstrumentBank](https://discmaster.textfiles.com/search?format=woplInstrumentBank) | WOPL instrument bank | .wopl | 
 [other/wordWriter128PrintParametersOptions](https://discmaster.textfiles.com/search?format=wordWriter128PrintParametersOptions) | Word Writer 128 print Parameters/options | .par | 
 [other/wordPerfectCaracterFontResource](https://discmaster.textfiles.com/search?format=wordPerfectCaracterFontResource) | WordPerfect Caracter/Font resource | .crs | 
 [other/wordPerfectDictionaryAdvise](https://discmaster.textfiles.com/search?format=wordPerfectDictionaryAdvise) | WordPerfect dictionary advise | .adv | 

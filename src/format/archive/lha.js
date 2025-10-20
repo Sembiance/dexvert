@@ -5,7 +5,7 @@ export class lha extends Format
 {
 	name           = "LHArc Archive";
 	website        = "http://fileformats.archiveteam.org/wiki/LHA";
-	ext            = [".lha", ".lhz", ".lzs", ".exe", ".lzh", ".car"];
+	ext            = [".lha", ".lhz", ".lzs", ".exe", ".lzh", ".car", ".lz"];
 	forbidExtMatch = [".exe"];
 	idMeta         = ({macFileType}) => ["LARC", "LHA ", "LHA\0", "LHA□"].includes(macFileType);
 

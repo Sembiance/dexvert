@@ -11,7 +11,7 @@ export class mpeg2 extends Format
 	mimeType       = "video/mpeg";
 	magic          = [
 		// generic
-		"MPEG-2 Elementary Stream", "MPEG-2 Program Stream", "MPEG sequence, v2", "MPEG-2 Transport Stream", "VideoCD MPEG", "video/mp2t",
+		"MPEG-2 Elementary Stream", "MPEG-2 Program Stream", "MPEG sequence, v2", "MPEG-2 Transport Stream", "VideoCD MPEG", "video/mp2t", "DVD Video Object",
 		"MPEG-PS (MPEG-2 Program Stream) (mpeg)", "MPEG-TS (MPEG-2 Transport Stream) (mpegts)", /^MPEG transport stream data$/, "DVD Video Recording format",
 		/^fmt\/(585|640|1055)( |$)/, /^x-fmt\/386( |$)/,
 		..._VOB_MAGICS,

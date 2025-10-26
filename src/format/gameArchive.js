@@ -68,6 +68,7 @@ export const gameextractor =
 		realityBytesGameArchive             : {name : "Reality Bytes game archive", ext : [".rbd"], magic : ["Reality Bytes game Data archive"]},
 		redengineGameArchive                : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},
 		riffBACKGameArchive                 : {name : "RIFF BACK Game Archive", ext : [".res"], magic : ["Generic RIFF file BACK"]},
+		rumbleFighterGameDataArchive        : {name : "Rumble Fighter game data archive", ext : [".nsz"], magic : ["Rumble Fighter game data archive"]},
 		scummDigitizedSoundsGameArchive     : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)", "Lucasfilm Games VOC Sound"]},
 		scraplandGameDataArchive            : {name : "Scrapland game data archive", ext : [".packed"], magic : ["Scrapland game data archive"]},
 		sgaGameDataArchive                  : {name : "SGA game data archive", ext : [".sga", ".big"], magic : ["SGA game data archive", "SGA archive"], weakMagic : true},

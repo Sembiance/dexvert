@@ -7,5 +7,5 @@ export class fontMania extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	magic          = ["Font Mania Font", "16bit DOS Font Mania font loader Command", "deark: fontmania"];
-	converters     = ["deark[module:fontmania]"];
+	converters     = ["deark[module:fontmania][renameOut] -> deark[module:psf]"];
 }

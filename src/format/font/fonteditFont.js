@@ -7,5 +7,5 @@ export class fonteditFont extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	magic          = ["FONTEDIT Font", "16bit DOS FONTEDIT font loader Command", "deark: fontedit"];
-	converters     = ["deark[module:fontedit]"];
+	converters     = ["deark[module:fontedit][renameOut] -> deark[module:psf]"];
 }

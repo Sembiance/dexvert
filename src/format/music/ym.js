@@ -7,5 +7,5 @@ export class ym extends Format
 	ext          = [".ym"];
 	magic        = ["ST-Sound YM chiptune"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "ym2wav", "ayEmul[matchType:magic]"];
+	converters   = ["zxtune123", "ym2wav", "ayEmul[matchType:magic][hasExtMatch]"];
 }

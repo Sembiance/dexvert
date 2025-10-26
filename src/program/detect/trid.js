@@ -24,7 +24,7 @@ export class trid extends Program
 		}
 	};
 
-	args = r => [r.tridTmpFilePath, "-n:5"];
+	args = r => ["-n", "5", r.tridTmpFilePath];
 	post = async r =>
 	{
 		await fileUtil.unlink(r.tridTmpFilePath);

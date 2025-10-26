@@ -224,6 +224,7 @@ const DEXMAGIC_CHECKS =
 
 	// text
 	"Gentoo ebuild"               : [{offset : 0, match : "EAPI="}],
+	"HP ME10 Database"            : [{offset : 0, match : "#~"}, {offset : 2, match : [["1", "2"]]}],
 	"KDE KXML GUI RC"             : [{offset : 0, match : "<!DOCTYPE kpartgui"}],
 	"Signum Font List"            : [{offset : 0, match : "FONTLIST\r\n"}],
 	"Signum Help File"            : [{offset : 0, match : `HELP-FILE\r\n${" ".repeat(37)}`}],

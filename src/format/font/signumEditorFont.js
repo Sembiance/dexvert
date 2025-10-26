@@ -5,6 +5,6 @@ export class signumEditorFont extends Format
 	name           = "Signum! Editor Font";
 	ext            = [".e24"];
 	forbidExtMatch = true;
-	magic          = ["Bitmapped Signum!2 printer font (screen)"];
+	magic          = ["Signum!2 bitmapped Editor font"];
 	converters     = ["chsetKB"];
 }

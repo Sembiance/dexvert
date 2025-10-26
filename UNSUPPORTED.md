@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,822)
+# Unsupported File Formats (3,835)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (301)
+## Archive (303)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -92,6 +92,7 @@ Family/Format | Name | Extensions | Notes
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?format=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/dragonUnPACKer5PluginPackage](https://discmaster.textfiles.com/search?format=dragonUnPACKer5PluginPackage) | Dragon UnPACKer 5 Plugin Package | .d5p | 
 [archive/drakanOrderOfTheFlameSavedGame](https://discmaster.textfiles.com/search?format=drakanOrderOfTheFlameSavedGame) | Drakan: Order Of The Flame Saved Game | .rsg .rlt | 
+[archive/dreamloadFileArchiveImage](https://discmaster.textfiles.com/search?format=dreamloadFileArchiveImage) | Dreamload File Archive image | .dfi | 
 [archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
@@ -158,6 +159,7 @@ Family/Format | Name | Extensions | Notes
 [archive/maxisGameDataArchive](https://discmaster.textfiles.com/search?format=maxisGameDataArchive) | Maxis game data archive | .package | 
 [archive/mbpSHRINKPacked](https://discmaster.textfiles.com/search?format=mbpSHRINKPacked) | mbp SHRINK Packed | .exe | 
 [archive/mechWarrior2GameData](https://discmaster.textfiles.com/search?format=mechWarrior2GameData) | MechWarrior 2 game data | .prj | 
+[archive/mechWarrior4GameData](https://discmaster.textfiles.com/search?format=mechWarrior4GameData) | MechWarrior 4 game data | .mw4 | 
 [archive/megalitePacked](https://discmaster.textfiles.com/search?format=megalitePacked) | MEGALITE Packed | .exe | 
 [archive/messProtected](https://discmaster.textfiles.com/search?format=messProtected) | Mess Protected | .exe | 
 [archive/metaCardStack](https://discmaster.textfiles.com/search?format=metaCardStack) | MetaCard/Revolution Stack | .rev | [4 sample files](https://sembiance.com/fileFormatSamples/archive/metaCardStack/)
@@ -660,7 +662,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (117)
+## Font (118)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -750,6 +752,7 @@ Family/Format | Name | Extensions | Notes
 [font/processingFont](https://discmaster.textfiles.com/search?format=processingFont) | Processing Font | .vlw | 
 [font/professionalDrawFont](https://discmaster.textfiles.com/search?format=professionalDrawFont) | Professional Draw Font | .pdfont | 
 [font/psionFont](https://discmaster.textfiles.com/search?format=psionFont) | Psion Font | .fon | 
+[font/psmEngineFont](https://discmaster.textfiles.com/search?format=psmEngineFont) | PSM Engine Font | .fnt | 
 [font/publisherSTypeFoundryBitmapFont](https://discmaster.textfiles.com/search?format=publisherSTypeFoundryBitmapFont) | Publisher's Type Foundry bitmap Font | .xfr | 
 [font/qCadFont](https://discmaster.textfiles.com/search?format=qCadFont) | QCad Font | .cxf | 
 [font/qnxPhotonFontBitmap](https://discmaster.textfiles.com/search?format=qnxPhotonFontBitmap) | QNX Photon Font | .phf | 
@@ -1160,7 +1163,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,566)
+## Other (2,576)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1742,6 +1745,7 @@ Family/Format | Name | Extensions | Notes
 [other/csrBluecoreFirmwareSegment](https://discmaster.textfiles.com/search?format=csrBluecoreFirmwareSegment) | CSR Bluecore firmware segment | .dfu | 
 [other/ctVOICEDriver](https://discmaster.textfiles.com/search?format=ctVOICEDriver) | CT-VOICE Driver | .drv | 
 [other/cubaseDrumMap](https://discmaster.textfiles.com/search?format=cubaseDrumMap) | Cubase Drum Map | .drm | 
+[other/cubaseMIDIDeviceConfiguration](https://discmaster.textfiles.com/search?format=cubaseMIDIDeviceConfiguration) | Cubase MIDI Device configuration | .dev .dat | 
 [other/cubaseProject](https://discmaster.textfiles.com/search?format=cubaseProject) | Cubase Project | .npr .cpr | 
 [other/cubicPlayerAnimation](https://discmaster.textfiles.com/search?format=cubicPlayerAnimation) | Cubic Player animation | .dat | 
 [other/cubicPlayerArchiveCache](https://discmaster.textfiles.com/search?format=cubicPlayerArchiveCache) | Cubic Player archive cache | .dat | 
@@ -1927,6 +1931,7 @@ Family/Format | Name | Extensions | Notes
 [other/egoEngineTextures](https://discmaster.textfiles.com/search?format=egoEngineTextures) | EGO Engine Textures | .pssg | 
 [other/egsSpectraPaintStencil](https://discmaster.textfiles.com/search?format=egsSpectraPaintStencil) | EGS-SpectraPaint Stencil | .stencil | 
 [other/eicarAntivirusTestFile](https://discmaster.textfiles.com/search?format=eicarAntivirusTestFile) | EICAR antivirus test file | .com | 
+[other/electronicArtsAPTGameData](https://discmaster.textfiles.com/search?format=electronicArtsAPTGameData) | Electronic Arts APT game data | .apt | 
 [other/electronicArtsAudioContainerSystem](https://discmaster.textfiles.com/search?format=electronicArtsAudioContainerSystem) | Electronic Arts audio Container System | .sph .dty .mon .asf | 
 [other/electronicArtsBundleGameDataArchive](https://discmaster.textfiles.com/search?format=electronicArtsBundleGameDataArchive) | Electronic Arts Bundle game data archive | .bundle | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?format=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
@@ -1990,6 +1995,7 @@ Family/Format | Name | Extensions | Notes
 [other/fadeToBlackObjectsIndexes](https://discmaster.textfiles.com/search?format=fadeToBlackObjectsIndexes) | Fade to Black objects indexes | .snt | 
 [other/faeryTaleAdventure2SaveGame](https://discmaster.textfiles.com/search?format=faeryTaleAdventure2SaveGame) | Faery Tale Adventure 2 save game | .sav | 
 [other/fahrenheitGameDataArchive](https://discmaster.textfiles.com/search?format=fahrenheitGameDataArchive) | Fahrenheit game data archive | .idm .dat | 
+[other/fallout3SaveGame](https://discmaster.textfiles.com/search?format=fallout3SaveGame) | Fallout 3 save game | .fos | 
 [other/falloutCompiledScript](https://discmaster.textfiles.com/search?format=falloutCompiledScript) | Fallout compiled script | .int | 
 [other/falloutTacticsCampaign](https://discmaster.textfiles.com/search?format=falloutTacticsCampaign) | Fallout Tactics Campaign | .cam | 
 [other/falloutTacticsEntity](https://discmaster.textfiles.com/search?format=falloutTacticsEntity) | Fallout Tactics Entity | .ent | 
@@ -2079,7 +2085,7 @@ Family/Format | Name | Extensions | Notes
 [other/gameBoyROM](https://discmaster.textfiles.com/search?format=gameBoyROM) | Game Boy ROM | .gb .gbc | 
 [other/gameDoctorSF3SavedGame](https://discmaster.textfiles.com/search?format=gameDoctorSF3SavedGame) | Game Doctor SF 3 saved game | .smc | 
 [other/gameGearROM](https://discmaster.textfiles.com/search?format=gameGearROM) | Game Gear ROM | .gg | 
-[other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr .gm6 .gm | 
+[other/gameMaker](https://discmaster.textfiles.com/search?format=gameMaker) | Game Maker | .gmr .gm6 .gm .win | 
 [other/gameVoiceData](https://discmaster.textfiles.com/search?format=gameVoiceData) | Game Voice data | .hvo | 
 [other/gamebyroKFMData](https://discmaster.textfiles.com/search?format=gamebyroKFMData) | Gamebyro KFM data | .kfm | 
 [other/gameHouseJigsawGame](https://discmaster.textfiles.com/search?format=gameHouseJigsawGame) | GameHouse Jigsaw Game | .jig | 
@@ -2205,6 +2211,7 @@ Family/Format | Name | Extensions | Notes
 [other/hotDocsComponent](https://discmaster.textfiles.com/search?format=hotDocsComponent) | HotDocs Component | .cmp | 
 [other/hotMapRegionsDescription](https://discmaster.textfiles.com/search?format=hotMapRegionsDescription) | HotMap VBX Regions Description | .hmd | 
 [other/houdiniProject](https://discmaster.textfiles.com/search?format=houdiniProject) | Houdini Project | .hip .hipnc | 
+[other/houghtonMifflinCompanyData](https://discmaster.textfiles.com/search?format=houghtonMifflinCompanyData) | Houghton Mifflin Company data | .dct .dic .hyp | 
 [other/hoverMazeData](https://discmaster.textfiles.com/search?format=hoverMazeData) | Hover! maze data | .maz | 
 [other/hp4x3xBinary](https://discmaster.textfiles.com/search?format=hp4x3xBinary) | HP 49/48/39/38 binary | .hp49 .hp48 .49 .hp39 .hp38 | 
 [other/hpLaserJetPrinterCartridgeMetric](https://discmaster.textfiles.com/search?format=hpLaserJetPrinterCartridgeMetric) | HP LaserJet Printer Cartridge Metric | .pcm | 
@@ -2259,6 +2266,7 @@ Family/Format | Name | Extensions | Notes
 [other/infoComicsGameData](https://discmaster.textfiles.com/search?format=infoComicsGameData) | InfoComics game data | .img .dat | 
 [other/infoSpotterTemplate](https://discmaster.textfiles.com/search?format=infoSpotterTemplate) | InfoSpotter Template | .spt | 
 [other/infoViewPalmOSDocument](https://discmaster.textfiles.com/search?format=infoViewPalmOSDocument) | InfoView PalmOS document | .pdb | 
+[other/insoCorporationLexiconData](https://discmaster.textfiles.com/search?format=insoCorporationLexiconData) | Inso Corporation Lexicon data | .dat .lex | 
 [other/inspirationSoftwareData](https://discmaster.textfiles.com/search?format=inspirationSoftwareData) | Inspiration Software data | .isf .ist | 
 [other/installProject](https://discmaster.textfiles.com/search?format=installProject) | Install Project | .ipj | 
 [other/installShieldHDR](https://discmaster.textfiles.com/search?format=installShieldHDR) | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://sembiance.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
@@ -2316,6 +2324,7 @@ Family/Format | Name | Extensions | Notes
 [other/jniLibrary](https://discmaster.textfiles.com/search?format=jniLibrary) | JNI Library | .jnilib | 
 [other/jonathanGraphicsGameData](https://discmaster.textfiles.com/search?format=jonathanGraphicsGameData) | Jonathan graphics game data |  | 
 [other/joy2KeySettings](https://discmaster.textfiles.com/search?format=joy2KeySettings) | Joy2Key settings | .j2k .ini | 
+[other/jRunServerApplication](https://discmaster.textfiles.com/search?format=jRunServerApplication) | JRun Server Application | .jsa | 
 [other/juggleKrazyLadderDiagram](https://discmaster.textfiles.com/search?format=juggleKrazyLadderDiagram) | JuggleKrazy Ladder diagram | .lad | 
 [other/juggleKrazyTutorial](https://discmaster.textfiles.com/search?format=juggleKrazyTutorial) | JuggleKrazy Tutorial | .tut | 
 [other/julesVerneJourneyToTheMoonSaveGame](https://discmaster.textfiles.com/search?format=julesVerneJourneyToTheMoonSaveGame) | Jules Verne: Journey to The Moon save game |  | 
@@ -2776,6 +2785,7 @@ Family/Format | Name | Extensions | Notes
 [other/oCamlObject](https://discmaster.textfiles.com/search?format=oCamlObject) | OCaml object | .cmo | 
 [other/officeAutoCorrectList](https://discmaster.textfiles.com/search?format=officeAutoCorrectList) | Office AutoCorrect List | .acl | 
 [other/officeProfileSettings](https://discmaster.textfiles.com/search?format=officeProfileSettings) | Office Profile-Settings |  | 
+[other/ogreSkeleton](https://discmaster.textfiles.com/search?format=ogreSkeleton) | OGRE Skeleton |  | 
 [other/ohrrpgceGame](https://discmaster.textfiles.com/search?format=ohrrpgceGame) | OHRRPGCE game | .rpg | 
 [other/olbLib](https://discmaster.textfiles.com/search?format=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
 [other/opcodeVisionProject](https://discmaster.textfiles.com/search?format=opcodeVisionProject) | Opcode Vision project | .vsn | 
@@ -3083,6 +3093,8 @@ Family/Format | Name | Extensions | Notes
 [other/riscOSARMObjectFile](https://discmaster.textfiles.com/search?format=riscOSARMObjectFile) | RISC OS ARM Object File |  | 
 [other/riseOfTheTriadLevel](https://discmaster.textfiles.com/search?format=riseOfTheTriadLevel) | Rise of the Triad Level | .rtc .rtl | 
 [other/risenGameDataArchive](https://discmaster.textfiles.com/search?format=risenGameDataArchive) | Risen game data archive | .pak | 
+[other/risingLandsLZSCompressedGameData](https://discmaster.textfiles.com/search?format=risingLandsLZSCompressedGameData) | Rising Lands LZS compressed game data | .lzs | 
+[other/risingLandsWorldData](https://discmaster.textfiles.com/search?format=risingLandsWorldData) | Rising Lands world data | .eta .net | 
 [other/robotArenaBot](https://discmaster.textfiles.com/search?format=robotArenaBot) | Robot Arena bot | .bot | 
 [other/robouldixLevelData](https://discmaster.textfiles.com/search?format=robouldixLevelData) | Robouldix level data |  | 
 [other/rogueTheAdventureGameSavedGame](https://discmaster.textfiles.com/search?format=rogueTheAdventureGameSavedGame) | Rogue: The Adventure Game Saved game | .sav | 
@@ -3563,6 +3575,7 @@ Family/Format | Name | Extensions | Notes
 [other/vortexATonceConfiguration](https://discmaster.textfiles.com/search?format=vortexATonceConfiguration) | Vortex ATonce Configuration | .cfg | 
 [other/voxelAnimation](https://discmaster.textfiles.com/search?format=voxelAnimation) | Voxel Animation | .vxl | 
 [other/voyagerTheDynamicSkySimulatorSettings](https://discmaster.textfiles.com/search?format=voyagerTheDynamicSkySimulatorSettings) | Voyager - The Dynamic Sky Simulator Settings | .vset | 
+[other/voyetraSysExPresetCommand](https://discmaster.textfiles.com/search?format=voyetraSysExPresetCommand) | Voyetra SysEx preset command | .syx | 
 [other/vpExpertHelpSystem](https://discmaster.textfiles.com/search?format=vpExpertHelpSystem) | VP-Expert Help System | .chp | 
 [other/vp3SewingMachineFile](https://discmaster.textfiles.com/search?format=vp3SewingMachineFile) | VP3 sewing machine file | .vp3 | 
 [other/vSamplerSoundBank](https://discmaster.textfiles.com/search?format=vSamplerSoundBank) | VSampler Sound Bank | .vsb | 
@@ -3846,7 +3859,7 @@ Family/Format | Name | Extensions | Notes
 [video/astoundAnimation](https://discmaster.textfiles.com/search?format=astoundAnimation) | Astound Animation | .awa | 
 [video/avssVideo](https://discmaster.textfiles.com/search?format=avssVideo) | [AVSS Video](http://ohlandl.ipv7.net/video/actionmedia.html) | .avs | 
 [video/iffSSA](https://discmaster.textfiles.com/search?format=iffSSA) | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [7 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
-[video/criwareSofdec2Movie](https://discmaster.textfiles.com/search?format=criwareSofdec2Movie) | CRIWARE Sofdec2 Movie | .usm | [1 sample file](https://sembiance.com/fileFormatSamples/video/criwareSofdec2Movie/)
+[video/criwareSofdec2Movie](https://discmaster.textfiles.com/search?format=criwareSofdec2Movie) | CRIWARE/Scaleform Sofdec2 Movie | .usm | [3 sample files](https://sembiance.com/fileFormatSamples/video/criwareSofdec2Movie/)
 [video/delphineCIN](https://discmaster.textfiles.com/search?format=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.

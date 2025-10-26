@@ -10,7 +10,7 @@ export class latex2html extends Program
 	checkForDups = true;
 
 	// If you need more .sty files from CTAN, can download them recursively with: ncftpget -R -v "ftp://ftp.math.utah.edu/pub/ctan/tex-archive/macros/latex209/contrib/"
-	bin = "latex2html";
+	bin = "perl";
 
 	runOptions = ({
 		// Some files hang forever, like document/latex/LATEX.BUG
@@ -26,7 +26,7 @@ export class latex2html extends Program
 		// Specify where our texmf files live
 		env : {TEXINPUTS : path.join(import.meta.dirname, "..", "..", "..", "texmf")}
 	});
-	args = r => ["-tmp", r.f.root, "-noinfo", "-html_version", "3.2,unicode,frame,math", "-image_type", "png", "-dir", r.outDir(), r.inFile()];
+	args = r => ["/usr/bin/latex2html", "-tmp", r.f.root, "-noinfo", "-html_version", "3.2,unicode,frame,math", "-image_type", "png", "-dir", r.outDir(), r.inFile()];
 
 	// If latex2html craps out, it leaves just a single TMP dir behind. Delete it so that other converters can try converting. Also delete some other junk files it may leave
 	verify     = (r, dexFile) => !((dexFile.dir===r.outDir({absolute : true}) && ["images.log", "images.tex", "images.pdf", "images.bbl", "images.pl", "images.aux", "WARNINGS"].includes(dexFile.base)) || dexFile.rel.startsWith(`${r.outDir()}/TMP`));

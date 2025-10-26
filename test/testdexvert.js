@@ -33,6 +33,8 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 // These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
 const FLAKY_CONVERTERS = [
 	"canvas5",
+	"Crowbar & noesis",
+	"noesis",
 	"paintDotNet",
 	"pageMaker7",
 	"polyTrans64",
@@ -187,6 +189,7 @@ const FLEX_SIZE_PROGRAMS =
 	sapfs                       : 25,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
+	threeDObjectConverter       : 10,
 	unp                         : 0.1,
 	zxtune123                   : 0.1
 };
@@ -352,7 +355,7 @@ const FLEX_SIZE_FORMATS =
 	{
 		// .glb files produced differ each time, probably some meta data timestamp or something
 		"*"                   : 3,
-		cyberStudioCAD3D      : 95,
+		cyberStudioCAD3D      : 99,
 		keyCAD3DModel         : 40,
 		panda3DModel          : 50,
 		rayDreamDesignerScene : 95
@@ -641,6 +644,8 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
 	"image/bbcDisplayRAM",
 	"image/cgm",	// sadly we don't match on magic alone due to how loose the magic is and how easily non-CGM files convert into garabge and 'family2' has no .cgm extension
+	"image/ecchi",	// ISAKU53.ECC
+	"image/hrs",	// output.tap
 	"image/lotusManuscriptGraphic",
 	"image/printfox",
 	"image/teletext",

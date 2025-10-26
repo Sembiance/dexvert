@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Trid has been upgraded to python and is MUCH faster AND supports CSV output now for better parsing
-
-* Figure out why this cd-rom isn't extracting properly: https://archive.org/details/cdrinc_Dr._Morse_1999-03-30
-
 * Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress
 
 * Add support for: http://fileformats.archiveteam.org/index.php?title=Puma_Street_Soccer_PPM&diff=51052&oldid=0
@@ -270,7 +266,7 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-1.0
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
-	Could not figure these out (may be bad rips)
+	Could not figure these out (may be bad rips):
 		https://archive.org/details/cdrom-megabytemonster
 		https://archive.org/details/CitroenC5-2001
 		https://archive.org/details/LionShare
@@ -280,6 +276,8 @@
 		https://archive.org/details/Macworld_CD-ROM_April_1995
 		https://archive.org/download/Apple_Developer_Discs_1989-2009/1992/ADC%20Developer%20CD%20%281992-11%2C%2012%29%20%28%27%27Wayne%27s%20Gworld%27%27%29_mdf.rar
 	Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
+	Haven't investigated:
+		https://archive.org/details/cdrinc_Dr._Morse_1999-03-30
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 

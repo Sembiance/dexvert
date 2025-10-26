@@ -8,5 +8,5 @@ export class pcrFont extends Format
 	fileSize       = 3595;
 	forbidExtMatch = true;
 	magic          = ["PCR Font", "deark: pcrfont"];
-	converters     = ["deark[module:pcrfont]"];
+	converters     = ["deark[module:pcrfont][renameOut] -> deark[module:psf]"];
 }

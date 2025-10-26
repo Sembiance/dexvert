@@ -6,6 +6,6 @@ export class magicDeskIcon extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Magic_Desk_icon";
 	ext        = [".icn"];
 	idCheck    = inputFile => inputFile.size%515===0;
-	magic      = ["MagicDesk Icon", "deark: mdesk_icn (Magic Desk icon)"];
+	magic      = ["ToyBox / MagicDesk Icon", "deark: mdesk_icn (Magic Desk icon)"];
 	converters = ["deark[module:mdesk_icn]"];
 }

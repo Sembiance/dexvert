@@ -7,7 +7,7 @@ export class amiga8svx extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/8-Bit_Sampled_Voice";
 	ext          = [".8svx", ".iff"];
 	weakExt      = [".iff"];
-	magic        = ["Amiga IFF 8SVX audio", "IFF data, 8SVX", "Interchange File Format 8-bit Sampled Voice", /^soxi: 8svx$/, /^fmt\/339( |$)/];
+	magic        = ["Amiga IFF 8SVX audio", "IFF data, 8SVX", "Interchange File Format 8-bit Sampled Voice", "Amiga 8SVX 8-Bit Sampled Voice audio", /^soxi: 8svx$/, /^fmt\/339( |$)/];
 	idMeta       = ({macFileType}) => macFileType==="8SVX";
 	notes        = xu.trim`
 		Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates.

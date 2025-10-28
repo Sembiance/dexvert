@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,835)
+# Unsupported File Formats (3,841)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -786,7 +786,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (191)
+## Image (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -884,6 +884,7 @@ Family/Format | Name | Extensions | Notes
 [image/introCAD](https://discmaster.textfiles.com/search?format=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
+[image/kaboomStudiosBitmapBlock](https://discmaster.textfiles.com/search?format=kaboomStudiosBitmapBlock) | Kaboom Studios Bitmap Block | .bmb | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?format=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
@@ -1163,7 +1164,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,576)
+## Other (2,581)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1304,7 +1305,7 @@ Family/Format | Name | Extensions | Notes
 [other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?format=allwaysPrinterDriver) | Allways Printer driver | .apc | 
 [other/allwaysPrinterFontsInfo](https://discmaster.textfiles.com/search?format=allwaysPrinterFontsInfo) | Allways Printer Fonts info | .apf | 
 [other/allwaysScreenDriver](https://discmaster.textfiles.com/search?format=allwaysScreenDriver) | Allways Screen Driver | .asd | 
-[other/aloneInTheDark2SaveGame](https://discmaster.textfiles.com/search?format=aloneInTheDark2SaveGame) | Alone in the Dark 2 save game | .itd | 
+[other/aloneInTheDarkSaveGame](https://discmaster.textfiles.com/search?format=aloneInTheDarkSaveGame) | Alone in the Dark save game | .itd | 
 [other/alphaFourFieldRules](https://discmaster.textfiles.com/search?format=alphaFourFieldRules) | Alpha Four field rules | .rln | 
 [other/alphaFourHelp](https://discmaster.textfiles.com/search?format=alphaFourHelp) | Alpha Four Help | .hlp | 
 [other/alphaFourIndexDefinition](https://discmaster.textfiles.com/search?format=alphaFourIndexDefinition) | Alpha Four Index Definition | .idn | 
@@ -1511,6 +1512,7 @@ Family/Format | Name | Extensions | Notes
 [other/blackjackLabGame](https://discmaster.textfiles.com/search?format=blackjackLabGame) | Blackjack Lab game |  | 
 [other/blackjackLabRules](https://discmaster.textfiles.com/search?format=blackjackLabRules) | Blackjack Lab rules |  | 
 [other/blindWriteTOC](https://discmaster.textfiles.com/search?format=blindWriteTOC) | BlindWrite TOC | .b6t .b5t | 
+[other/blitzkriegMapData](https://discmaster.textfiles.com/search?format=blitzkriegMapData) | Blitzkrieg Map data | .bzm | 
 [other/blockBreakerPattern](https://discmaster.textfiles.com/search?format=blockBreakerPattern) | Block Breaker Pattern | .blc | 
 [other/bloodFrontierRedEclipseMapFile](https://discmaster.textfiles.com/search?format=bloodFrontierRedEclipseMapFile) | Blood Frontier/Red Eclipse Map File |  | 
 [other/bluRayClipAVStream](https://discmaster.textfiles.com/search?format=bluRayClipAVStream) | Blu-ray Clip AV stream | .clpi | 
@@ -1574,6 +1576,7 @@ Family/Format | Name | Extensions | Notes
 [other/cadDrawSettings](https://discmaster.textfiles.com/search?format=cadDrawSettings) | CAD/Draw Settings | .mpi | 
 [other/cad6Drawing](https://discmaster.textfiles.com/search?format=cad6Drawing) | CAD6 Drawing | .mkd | 
 [other/cad6Library](https://discmaster.textfiles.com/search?format=cad6Library) | CAD6 Library | .mkl | 
+[other/cadaverGameData](https://discmaster.textfiles.com/search?format=cadaverGameData) | Cadaver game data | .tad .lng .mp1 .mp3 .mp2 .dat | 
 [other/cadvance2DSymbol](https://discmaster.textfiles.com/search?format=cadvance2DSymbol) | CADVANCE 2D symbol | .sym .bin | 
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?format=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
 [other/caimanFont](https://discmaster.textfiles.com/search?format=caimanFont) | Caiman Font | .fnt | 
@@ -1642,6 +1645,7 @@ Family/Format | Name | Extensions | Notes
 [other/chessAssistant](https://discmaster.textfiles.com/search?format=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 [other/chessBaseArchiveFile](https://discmaster.textfiles.com/search?format=chessBaseArchiveFile) | ChessBase Archive file | .cbv | 
 [other/chessBaseLightDatabaseHeader](https://discmaster.textfiles.com/search?format=chessBaseLightDatabaseHeader) | ChessBase Light database Header | .cbh | 
+[other/chipSChallengeLevelPack](https://discmaster.textfiles.com/search?format=chipSChallengeLevelPack) | Chip's Challenge level pack | .dat | 
 [other/chromeDictionary](https://discmaster.textfiles.com/search?format=chromeDictionary) | Chrome dictionary | .bdic | 
 [other/chromeSavedSessions](https://discmaster.textfiles.com/search?format=chromeSavedSessions) | Chrome saved sessions |  | 
 [other/chromeVisitedLinksHistory](https://discmaster.textfiles.com/search?format=chromeVisitedLinksHistory) | Chrome Visited Links history |  | 
@@ -1926,6 +1930,7 @@ Family/Format | Name | Extensions | Notes
 [other/eclipseHelp](https://discmaster.textfiles.com/search?format=eclipseHelp) | Eclipse Help | .hlp | 
 [other/eclipseImage](https://discmaster.textfiles.com/search?format=eclipseImage) | Eclipse Image | .img | 
 [other/eclipseTutorial](https://discmaster.textfiles.com/search?format=eclipseTutorial) | Eclipse Tutorial | .tut | 
+[other/ecstaticaGameData](https://discmaster.textfiles.com/search?format=ecstaticaGameData) | Ecstatica game data | .fan | 
 [other/ecxModule](https://discmaster.textfiles.com/search?format=ecxModule) | ECX module | .m | 
 [other/egoEngineGameDataContainer](https://discmaster.textfiles.com/search?format=egoEngineGameDataContainer) | EGO Engine game data container | .bdl | 
 [other/egoEngineTextures](https://discmaster.textfiles.com/search?format=egoEngineTextures) | EGO Engine Textures | .pssg | 
@@ -2333,6 +2338,7 @@ Family/Format | Name | Extensions | Notes
 [other/jwcadData](https://discmaster.textfiles.com/search?format=jwcadData) | Jw_cad data | .def .dta | 
 [other/kAdvancedTextEditorSwapData](https://discmaster.textfiles.com/search?format=kAdvancedTextEditorSwapData) | K Advanced Text Editor swap data | .kate-swp | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?format=kChessSavedGame) | K-Chess saved game | .kch .kc | 
+[other/kaboomStudiosModelBlock](https://discmaster.textfiles.com/search?format=kaboomStudiosModelBlock) | Kaboom Studios Model Block | .mbk | 
 [other/kapeerskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?format=kapeerskyAntiVirusLicenseKey) | Kaperesky Anti-Virus License Key | .key | 
 [other/karaFunKaraokeSong](https://discmaster.textfiles.com/search?format=karaFunKaraokeSong) | KaraFun Karaoke Song | .kfn .kfp | 
 [other/karmaAsset](https://discmaster.textfiles.com/search?format=karmaAsset) | Karma Asset | .ka | 

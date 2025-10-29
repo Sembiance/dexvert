@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,841)
+# Unsupported File Formats (3,852)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1164,7 +1164,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,581)
+## Other (2,592)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1218,6 +1218,7 @@ Family/Format | Name | Extensions | Notes
 [other/aboveDISCConfiguration](https://discmaster.textfiles.com/search?format=aboveDISCConfiguration) | Above DISC Configuration | .cfg | 
 [other/abracadataDrawing](https://discmaster.textfiles.com/search?format=abracadataDrawing) | Abracadata drawing | .sig | 
 [other/absoluteDatabaseFile](https://discmaster.textfiles.com/search?format=absoluteDatabaseFile) | Absolute Database file | .abs | 
+[other/absoluteMagicResourceData](https://discmaster.textfiles.com/search?format=absoluteMagicResourceData) | Absolute Magic Resource data | .res | 
 [other/abuseDemoData](https://discmaster.textfiles.com/search?format=abuseDemoData) | Abuse demo Data | .dat | 
 [other/abuseLevel](https://discmaster.textfiles.com/search?format=abuseLevel) | Abuse Level | .lvl .spe | 
 [other/abyssEngineImageFormat](https://discmaster.textfiles.com/search?format=abyssEngineImageFormat) | Abyss Engine Image format | .aei | 
@@ -1687,6 +1688,7 @@ Family/Format | Name | Extensions | Notes
 [other/commanderKeen6Config](https://discmaster.textfiles.com/search?format=commanderKeen6Config) | Commander Keen 6 config | .ck6 | 
 [other/commonDataFormat](https://discmaster.textfiles.com/search?format=commonDataFormat) | Common Data Format | .cdf | 
 [other/appleScriptCompiled](https://discmaster.textfiles.com/search?format=appleScriptCompiled) | Compiled AppleScript Script |  | [2 sample files](https://sembiance.com/fileFormatSamples/unsupported/appleScriptCompiled/)
+[other/compiledAutoLISP](https://discmaster.textfiles.com/search?format=compiledAutoLISP) | Compiled AutoLISP | .vlx | 
 [other/compiledErlangCode](https://discmaster.textfiles.com/search?format=compiledErlangCode) | Compiled Erlang code |  | 
 [other/compiledMediaBasicProject](https://discmaster.textfiles.com/search?format=compiledMediaBasicProject) | Compiled MediaBasic Project | .ebc | 
 [other/compiledMSVCResources](https://discmaster.textfiles.com/search?format=compiledMSVCResources) | Compiled MSVC Resources | .resources | 
@@ -1948,7 +1950,10 @@ Family/Format | Name | Extensions | Notes
 [other/empireDeluxeMap](https://discmaster.textfiles.com/search?format=empireDeluxeMap) | Empire Deluxe Map | .map | 
 [other/empireDeluxeSavedGame](https://discmaster.textfiles.com/search?format=empireDeluxeSavedGame) | Empire Deluxe Saved Game | .svg | 
 [other/empire2TheArtOfWarConfiguration](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarConfiguration) | Empire II: The Art of War Configuration | .cfg | 
+[other/empire2TheArtOfWarIconLibrary](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarIconLibrary) | Empire II: The Art of War Icon Library | .icl | 
+[other/empire2TheArtOfWarMap](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarMap) | Empire II: The Art of War Map | .map | 
 [other/empire2TheArtOfWarSavedGame](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarSavedGame) | Empire II: The Art of War Saved Game | .svg | 
+[other/empire2TheArtOfWarTechnology](https://discmaster.textfiles.com/search?format=empire2TheArtOfWarTechnology) | Empire II: The Art of War Technology | .tec | 
 [other/empireScenario](https://discmaster.textfiles.com/search?format=empireScenario) | Empire Scenario | .scn | 
 [other/empireWargameOfTheCenturyMap](https://discmaster.textfiles.com/search?format=empireWargameOfTheCenturyMap) | Empire: Wargame of the Century Map | .map | 
 [other/encartaEncyclopediaLinksUpdate](https://discmaster.textfiles.com/search?format=encartaEncyclopediaLinksUpdate) | Encarta Encyclopedia Yearbook and Web Links update | .eyb | 
@@ -2689,6 +2694,8 @@ Family/Format | Name | Extensions | Notes
 [other/nascarRacingReplay](https://discmaster.textfiles.com/search?format=nascarRacingReplay) | NASCAR Racing Replay | .rpy | 
 [other/nascarRacingSeasonCarData](https://discmaster.textfiles.com/search?format=nascarRacingSeasonCarData) | NASCAR Racing Season Car data | .car | 
 [other/nascarSimRacingGameArchive](https://discmaster.textfiles.com/search?format=nascarSimRacingGameArchive) | NASCAR SimRacing game archive | .mas | 
+[other/nativeInstrumentsEnsemble](https://discmaster.textfiles.com/search?format=nativeInstrumentsEnsemble) | Native Instruments GENERATOR Ensemble | .ens | 
+[other/nativeInstrumentsInstrumentMacro](https://discmaster.textfiles.com/search?format=nativeInstrumentsInstrumentMacro) | Native Instruments GENERATOR Instrument / Macro | .ism .mdl | 
 [other/nativeInstrumentsPresetBank](https://discmaster.textfiles.com/search?format=nativeInstrumentsPresetBank) | Native Instruments Preset Bank | .bnk | 
 [other/navisWorksDocument](https://discmaster.textfiles.com/search?format=navisWorksDocument) | NavisWorks Document | .nwd | 
 [other/necromancersDOSNavigatorDialogs](https://discmaster.textfiles.com/search?format=necromancersDOSNavigatorDialogs) | Necromancer's DOS Navigator Dialogs | .dlg | 
@@ -2935,6 +2942,8 @@ Family/Format | Name | Extensions | Notes
 [other/plotter3DLight](https://discmaster.textfiles.com/search?format=plotter3DLight) | Plotter3D Light | .light | 
 [other/pocketAccessDatabase](https://discmaster.textfiles.com/search?format=pocketAccessDatabase) | Pocket Access database |  | 
 [other/pocketTanksEmitter](https://discmaster.textfiles.com/search?format=pocketTanksEmitter) | Pocket Tanks emitter | .emi | 
+[other/podGameAssets](https://discmaster.textfiles.com/search?format=podGameAssets) | POD game assets | .meg | 
+[other/podTrackData](https://discmaster.textfiles.com/search?format=podTrackData) | POD track data | .bl3 .bl4 | 
 [other/polarSpellCheckerDictionary](https://discmaster.textfiles.com/search?format=polarSpellCheckerDictionary) | Polar SpellChecker dictionary |  | 
 [other/polyfilmPrefs](https://discmaster.textfiles.com/search?format=polyfilmPrefs) | Polyfilm Preferences | .prf | 
 [other/ponyProgDeviceFile](https://discmaster.textfiles.com/search?format=ponyProgDeviceFile) | PonyProg device file |  | 
@@ -3235,6 +3244,7 @@ Family/Format | Name | Extensions | Notes
 [other/spiritOfExcaliburSettings](https://discmaster.textfiles.com/search?format=spiritOfExcaliburSettings) | Spirit of Excalibur settings | .cfg | 
 [other/sPlanSchematic](https://discmaster.textfiles.com/search?format=sPlanSchematic) | sPlan schematic | .lib .spl | 
 [other/splashDamageMegatextureFormat](https://discmaster.textfiles.com/search?format=splashDamageMegatextureFormat) | Splash Damage Megatexture format | .mega | 
+[other/sportsCarGTSavedReplay](https://discmaster.textfiles.com/search?format=sportsCarGTSavedReplay) | Sports Car GT saved replay | .vcr | 
 [other/springEngineMap](https://discmaster.textfiles.com/search?format=springEngineMap) | Spring Engine Map | .smf | 
 [other/springEngineTile](https://discmaster.textfiles.com/search?format=springEngineTile) | Spring Engine Tile | .smt | 
 [other/sprintHelp](https://discmaster.textfiles.com/search?format=sprintHelp) | Sprint Help | .hlp | 
@@ -3509,6 +3519,7 @@ Family/Format | Name | Extensions | Notes
 [other/uropa2Configuration](https://discmaster.textfiles.com/search?format=uropa2Configuration) | Uropa2 Configuration | .config | 
 [other/uropa2GameData](https://discmaster.textfiles.com/search?format=uropa2GameData) | Uropa2 game data | .z .00 | 
 [other/uropa2SaveGame](https://discmaster.textfiles.com/search?format=uropa2SaveGame) | Uropa2 save game |  | 
+[other/utopiaTechnologiesGameDataPackage](https://discmaster.textfiles.com/search?format=utopiaTechnologiesGameDataPackage) | Utopia Technologies game data package | .wpr | 
 [other/vRayMaterial](https://discmaster.textfiles.com/search?format=vRayMaterial) | V-Ray Material | .mat .vismat | 
 [other/v12DataBaseEngineDB](https://discmaster.textfiles.com/search?format=v12DataBaseEngineDB) | V12 Data Base Engine DB | .db .v12 | 
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 

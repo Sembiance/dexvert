@@ -10,6 +10,7 @@ export const gameextractor =
 	archive :
 	{
 		agonGameDataArchive                 : {name : "Agon game data archive", ext : [".sfl"], magic : ["Agon game data archive"], weakMagic : true},
+		alienVsPredatorGameDataContainer    : {name : "Alien vs Predator game data container", ext : [".ffl"], magic : ["Alien vs Predator game data container"]},
 		allods2RageOfMagesGameArchive       : {name : "Allods 2 Rage Of Mages game archive", ext : [".res"], magic : ["Allods 2 Rage Of Mages game data archive"]},
 		americanConquest2GameArchvie        : {name : "American Conquest 2 game archvie", ext : [".gs1", ".gsc"], magic : ["American Conquest 2 game data archvie"]},
 		ascaronEntertainmentGameArchive     : {name : "ASCARON Entertainment game archive", ext : [".cpr"], magic : ["ASCARON Entertainment game data archive"]},

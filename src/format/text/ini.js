@@ -32,7 +32,7 @@ export class ini extends Format
 		"ASTRA Report Profile", "Android Trash storage metadata", "Gerber CAM Processor job", /^Windows boot.ini, (ASCII|ISO-8859) text/, "Windows Boot Loarder information", "Spider MacroCode Data", "PSpice Probe configuration", "SubViewer 2.0 subtitles",
 		"Turboprint Printer Description", "Evasive Action scenery Topography", "Extra! for Windows Album/slideshow", "IBM i Access Client Translation Table", "Origin Fitting Function Definition File", /^git configuration$/, "RealStorm Engine object",
 		"Quarterdeck Provider info", "InstallShield Installation Package Strings table", "Gemsylk graph", "Micro-Cap Circuit", "Popcorn Mail configuration", "WinOnCD Project", "Spring Map Definition", "Premiere Title data", "Codewright Project (v3.x)",
-		"Unreal Engine Crash report", /^application\/x-godot-(resource|scene)/, /^Godot Engine Text (Resource|Scene)/, "Godot Engine Import settings",
+		"Unreal Engine Crash report", /^application\/x-godot-(resource|scene)/, /^Godot Engine Text (Resource|Scene)/, "Godot Engine Import settings", /^Total Annihilation (features data|GUI definition|map data|unit)/,
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

@@ -103,7 +103,7 @@ If multiple used in array, they ALL must match. Also, offset is REQUIRED
 A custom function that must return true for any match to be made against this file
 WARNING: If using this to just check for some bytes, probably want to use byteCheck instead
 
->>> confidenceAdjust : (inputFile, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
+>>> confidenceAdjust : (inputFile, matchType, curConfidence, {detections, xlog}) => (matchType==="ext" ? -20 : 0)
 Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.
 Can be useful if a format has a generic extension, or is otherwise easily matched, and the conversion program doesn't check the
 file it's converting well enough, often producing garbage or something when a file is mis-identified. 

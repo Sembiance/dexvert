@@ -125,7 +125,7 @@ export const WEAK_VALUES =
 	// siegfried
 	/^fmt\/(111|114|134|135|208|304|328|347|452|473|583|584|625|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
-	/^fmt\/(1555|1556|1562|1575|1651|1672|1701|1702|1703|1704|1708|1737|1740|1742|1751|1812|1856|1874|1885|1902|1904|1968)( |$)/,
+	/^fmt\/(1555|1556|1562|1575|1651|1672|1737|1740|1742|1751|1812|1856|1874|1885|1902|1904|1968)( |$)/,
 	/^fmt\/(2014|2025|2035)( |$)/,
 	/^x-fmt\/(8|10|53|101|123|157|168|195|222|324|325|342)( |$)/,
 
@@ -216,7 +216,7 @@ export const WEAK_VALUES =
 	/^Archive: LZ4 compressed data/,
 	/^Archive: Packed git objects/,
 	/^Archive: Peril WAD$/,
-	/^Archive: SHP\(v2\.0 [1995]\)$/,
+	/^Archive: SHP\(v2\.0 \[1995\]\)$/,
 	/^Archive: Unity\/Unity Asset/,
 	/^Archive: XFL game resource file/,
 	/^Format: Amiga loadable file$/,
@@ -2192,6 +2192,7 @@ export const WEAK_VALUES =
 	/^Mozilla Firefox browser extension$/,
 	/^MPSub subtitles$/,
 	/^Mu Online Bitmap$/,
+	/^Multi-part message in MIME format$/,
 	/^Multiplan spreadsheet \(v1\.0x\)$/,
 	/^Music Macro Language$/,
 	/^MSBuild file Tracker Log$/,
@@ -2319,6 +2320,7 @@ export const WEAK_VALUES =
 	/^QEMU Enhanced Disk Image$/,
 	/^Qt Resource Collection$/,
 	/^Quartus Symbols data$/,
+	/^QuickCAD Drawing$/,
 	/^QuickCompression compressed data \((BE|LE)\)$/,
 	/^Quick Database$/,
 	/^Quicken Transfer file$/,

@@ -503,7 +503,7 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 				
 				if(m.confidenceAdjust)
 				{
-					m.confidence += m.confidenceAdjust(f.input, matchType, m.confidence, {detections});
+					m.confidence += m.confidenceAdjust(f.input, matchType, m.confidence, {familyMatches, detections, xlog});
 					m.confidence = Math.min(Math.max(m.confidence, 1), 100);
 					delete m.confidenceAdjust;
 				}

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,852)
+# Unsupported File Formats (3,859)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (303)
+## Archive (304)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -96,6 +96,7 @@ Family/Format | Name | Extensions | Notes
 [archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
+[archive/ekoSoftwareGameData](https://discmaster.textfiles.com/search?format=ekoSoftwareGameData) | Eko Software game data | .rck | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?format=emmaCompress) | EmmaCompress |  | 
 [archive/emtcopyDiskImage](https://discmaster.textfiles.com/search?format=emtcopyDiskImage) | EMTCOPY disk image | .emt | 
 [archive/exeManagerProtected](https://discmaster.textfiles.com/search?format=exeManagerProtected) | EXE Manager Protected | .exe | 
@@ -786,7 +787,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (192)
+## Image (193)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -954,6 +955,7 @@ Family/Format | Name | Extensions | Notes
 [image/signumCDI](https://discmaster.textfiles.com/search?format=signumCDI) | Signum! CDI Image | .cdi .c01 | 
 [image/simpleVectorFormat](https://discmaster.textfiles.com/search?format=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 [image/slpImage](https://discmaster.textfiles.com/search?format=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
+[image/solidWorksSketch](https://discmaster.textfiles.com/search?format=solidWorksSketch) | SolidWorks Sketch | .ske | 
 [image/spriteArtistSprite](https://discmaster.textfiles.com/search?format=spriteArtistSprite) | Sprite Artist Sprite | .spr | 
 [image/stCADDrawing](https://discmaster.textfiles.com/search?format=stCADDrawing) | ST-CAD Drawing | .dvg .ptp | 
 [image/superFlowDiagram](https://discmaster.textfiles.com/search?format=superFlowDiagram) | SuperFlow diagram | .sf1 | 
@@ -1164,7 +1166,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,592)
+## Other (2,597)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1859,6 +1861,7 @@ Family/Format | Name | Extensions | Notes
 [other/dipTracePCB](https://discmaster.textfiles.com/search?format=dipTracePCB) | DipTrace PCB | .dip | 
 [other/dipTraceSchematic](https://discmaster.textfiles.com/search?format=dipTraceSchematic) | DipTrace Schematic | .dch | 
 [other/direct3DShader](https://discmaster.textfiles.com/search?format=direct3DShader) | Direct3D Shader | .vso .pso | 
+[other/directMusicAudioPath](https://discmaster.textfiles.com/search?format=directMusicAudioPath) | DirectMusic Audio Path | .aud | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?format=directoryOpusButton) | Directory Opus button |  | 
 [other/directoryOpusEnvironment](https://discmaster.textfiles.com/search?format=directoryOpusEnvironment) | Directory Opus environment |  | 
 [other/directoryOpusSettings](https://discmaster.textfiles.com/search?format=directoryOpusSettings) | Directory Opus Settings |  | 
@@ -1938,6 +1941,7 @@ Family/Format | Name | Extensions | Notes
 [other/egoEngineTextures](https://discmaster.textfiles.com/search?format=egoEngineTextures) | EGO Engine Textures | .pssg | 
 [other/egsSpectraPaintStencil](https://discmaster.textfiles.com/search?format=egsSpectraPaintStencil) | EGS-SpectraPaint Stencil | .stencil | 
 [other/eicarAntivirusTestFile](https://discmaster.textfiles.com/search?format=eicarAntivirusTestFile) | EICAR antivirus test file | .com | 
+[other/ekoSoftwareGameCodeContainer](https://discmaster.textfiles.com/search?format=ekoSoftwareGameCodeContainer) | Eko Software game code container |  | 
 [other/electronicArtsAPTGameData](https://discmaster.textfiles.com/search?format=electronicArtsAPTGameData) | Electronic Arts APT game data | .apt | 
 [other/electronicArtsAudioContainerSystem](https://discmaster.textfiles.com/search?format=electronicArtsAudioContainerSystem) | Electronic Arts audio Container System | .sph .dty .mon .asf | 
 [other/electronicArtsBundleGameDataArchive](https://discmaster.textfiles.com/search?format=electronicArtsBundleGameDataArchive) | Electronic Arts Bundle game data archive | .bundle | 
@@ -2172,10 +2176,12 @@ Family/Format | Name | Extensions | Notes
 [other/gravityForceMap](https://discmaster.textfiles.com/search?format=gravityForceMap) | Gravity Force Map | .fmp | 
 [other/greatValleyProductsEGSSettings](https://discmaster.textfiles.com/search?format=greatValleyProductsEGSSettings) | Great Valley Products EGS settings | .map2video | 
 [other/greenfishIconEditorPro](https://discmaster.textfiles.com/search?format=greenfishIconEditorPro) | Greenfish Icon Editor Pro | .gfie .gfi | 
+[other/grooveWorld](https://discmaster.textfiles.com/search?format=grooveWorld) | Groove World | .grv | 
 [other/groundControlIIOperationExodusGameArchive](https://discmaster.textfiles.com/search?format=groundControlIIOperationExodusGameArchive) | Ground Control II: Operation Exodus game data archive | .sdf | 
 [other/groundControlMap](https://discmaster.textfiles.com/search?format=groundControlMap) | Ground Control map | .sdf | 
 [other/groupWiseAdminHostDatabase](https://discmaster.textfiles.com/search?format=groupWiseAdminHostDatabase) | GroupWise admin host database | .db | 
 [other/gsBaseDataBase](https://discmaster.textfiles.com/search?format=gsBaseDataBase) | GS-Base data base | .gs | 
+[other/gscGameWorldGameDataArchive](https://discmaster.textfiles.com/search?format=gscGameWorldGameDataArchive) | GSC Game World game data archive | .gp | 
 [other/gStreamerBinaryRegistry](https://discmaster.textfiles.com/search?format=gStreamerBinaryRegistry) | GStreamer binary registry | .bin | 
 [other/guemapDocument](https://discmaster.textfiles.com/search?format=guemapDocument) | GUEmap document | .gmp | 
 [other/guildWarsData](https://discmaster.textfiles.com/search?format=guildWarsData) | Guild Wars data | .dat | 
@@ -3605,6 +3611,7 @@ Family/Format | Name | Extensions | Notes
 [other/warCraft3Map](https://discmaster.textfiles.com/search?format=warCraft3Map) | WarCraft III Map | .w3m | 
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?format=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
 [other/watcomProfilerSamplingData](https://discmaster.textfiles.com/search?format=watcomProfilerSamplingData) | Watcom Profiler Sampling Data | .smp | 
+[other/watcomSQLDatabase](https://discmaster.textfiles.com/search?format=watcomSQLDatabase) | Watcom SQL database | .db .new | 
 [other/waterworldMission](https://discmaster.textfiles.com/search?format=waterworldMission) | Waterworld Mission | .mis | 
 [other/wbWortSavedGame0](https://discmaster.textfiles.com/search?format=wbWortSavedGame0) | WB-Wort saved game |  | 
 [other/webViewCacheData](https://discmaster.textfiles.com/search?format=webViewCacheData) | WebView cache data |  | 

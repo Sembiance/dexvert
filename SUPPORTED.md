@@ -1,4 +1,4 @@
-# Supported File Formats (3,353)
+# Supported File Formats (3,356)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -25,7 +25,7 @@ archive | [Alchemy Mindworks Image Gallery](http://fileformats.archiveteam.org/w
 archive | [Alcohol 120% MDF Image](http://fileformats.archiveteam.org/wiki/MDF_and_MDS) | .mdf | [uniso](https://github.com/Sembiance/dexvert/) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [dexvert](https://github.com/Sembiance/dexvert) [MDFtoISO](http://www.mdftoiso.com/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/mdf/)
 archive | Aldus LZW compressed data |  | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/aldusLZWCompressedData/)
 archive | Aldus Zip Compressed File |  | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/aldusZip/)
-archive | Alien vs Predator game data container | .ffl | [gameextractor](http://www.watto.org/game_extractor.html) | 
+archive | Alien vs Predator game data container | .ffl | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/alienVsPredatorGameDataContainer/)
 archive | [Allegro Packfile](http://fileformats.archiveteam.org/wiki/Allegro_packfile) | .dat | [pack](https://liballeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/allegroPackfile/)
 archive | Allods 2 Rage Of Mages game archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/allods2RageOfMagesGameArchive/)
 archive | American Conquest 2 game archvie | .gs1 .gsc | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/americanConquest2GameArchvie/)
@@ -217,7 +217,7 @@ archive | IFF Fantavision |  | [iff_convert](http://www.boomerangsworld.de/cms/t
 archive | [IFF LIST File](https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF) |  | [unIFFLIST](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. The VAST MAJORITY of these files are for a program called 'Movie Setter' on the Amiga and contain ILBM's with custom 'FACE' properties. I'm not aware of a converter for either the Movie Setter files themselves or the resulting ILBM files sadly. Since the output IFFs from these are not useful (and it makes a LOT of them) I actually forbid that format from matching this, so it gets properly matched to the unsupported video/movieSetterSet format.
 archive | [ImageDisk Disk Image](http://fileformats.archiveteam.org/wiki/IMD) | .imd | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imageDisk/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/imageUSB/)
-archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
+archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
 archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innounp](https://innounp.sourceforge.net/) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
@@ -453,7 +453,7 @@ archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTCOMP) |  | 
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/ttw/)
 archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |  | [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/turboPacker/)
 archive | UCEXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/ucexePacked/)
-archive | [UHARC](http://fileformats.archiveteam.org/wiki/UHARC) | .uha | [uharcd](https://www.sac.sk/download/pack/uharc06b.zip) uharc | [9 sample files](https://sembiance.com/fileFormatSamples/archive/uharc/)
+archive | [UHARC](http://fileformats.archiveteam.org/wiki/UHARC) | .uha | [uharcd](https://www.sac.sk/download/pack/uharc06b.zip) uharc | [8 sample files](https://sembiance.com/fileFormatSamples/archive/uharc/)
 archive | [UHBC Compressed File](http://fileformats.archiveteam.org/wiki/UHBC) |  | [uhbc](https://www.sac.sk/download/pack/uhbc10.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/uhbc/)
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UltraCompressor_II) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/ultraCompressor2/)
 archive | [Unix Fast File system (UFS)](http://fileformats.archiveteam.org/wiki/UFS) |  | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ufsFS/)
@@ -629,7 +629,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (246)
+## Document (247)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/fourDWriteDocument/)
@@ -638,6 +638,7 @@ document | [AbiWord Document](http://fileformats.archiveteam.org/wiki/AbiWord) |
 document | [Across Crossword Puzzle](http://fileformats.archiveteam.org/wiki/PUZ_(crossword_puzzles)) | .puz | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/acrossCrosswordPuzzle/)
 document | ACT! Word Processor Document | .wpa .tpl .rep .wpd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/actWordProcessorDocument/)
 document | Adorage Script | .scp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/adorageScript/)
+document | Aldus Persuasion Player File | .ppf | [gifsicleExplode](https://www.lcdf.org/~eddietwo/gifsicle/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/aldusPersuasionPlayerFile/)
 document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [soffice](https://www.libreoffice.org) [pageMaker7](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) [pageMaker5](https://winworldpc.com/product/aldus-pagemaker/50) [pageMaker4](https://winworldpc.com/product/aldus-pagemaker/40) | [23 sample files](https://sembiance.com/fileFormatSamples/document/pageMaker/)
 document | [Amazon Kindle eBook](http://fileformats.archiveteam.org/wiki/AZW) | .azw .azw3 .azw4 | [ebook_convert](https://calibre-ebook.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/amazonKindleBook/)
 document | Ami Pro/Word Pro document | .sam | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/amiProWordProDocument/)
@@ -2120,7 +2121,7 @@ other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScr
 
 
 
-## Poly (68)
+## Poly (69)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 poly | [3D Manufacturing Format](http://fileformats.archiveteam.org/wiki/3MF) | .3mf | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [4 sample files](https://sembiance.com/fileFormatSamples/poly/threeMF/)
@@ -2146,6 +2147,7 @@ poly | [Geomview Object File Format](http://fileformats.archiveteam.org/wiki/OFF
 poly | [Ghoul 2 Model](http://fileformats.archiveteam.org/wiki/GLM) | .glm | [milkShape3D](http://www.milkshape3d.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/ghoul2Model/)
 poly | GHOUL Engine model | .ghb | [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/ghoulEngineModel/)
 poly | [GL Transmission Format](http://fileformats.archiveteam.org/wiki/GlTF) | .glb .gltf |  | [4 sample files](https://sembiance.com/fileFormatSamples/poly/glTF/)
+poly | Half-Life Map | .bsp | [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [1 sample file](https://sembiance.com/fileFormatSamples/poly/halfLifeMap/)
 poly | [Industry Foundation Classes](http://fileformats.archiveteam.org/wiki/IFC) | .ifc | [polyTrans64](https://www.okino.com/conv/conv.htm) [assimp](https://github.com/assimp/assimp) | [7 sample files](https://sembiance.com/fileFormatSamples/poly/industryFoundationClasses/)
 poly | [Inter-Quake Model](http://sauerbraten.org/iqm/) | .iqm | [assimp](https://github.com/assimp/assimp) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/interQuakeModel/)
 poly | [Kaydara Filmbox Model](http://fileformats.archiveteam.org/wiki/FBX) | .fbx .fbx4 | [polyTrans64](https://www.okino.com/conv/conv.htm) [milkShape3D](http://www.milkshape3d.com/) [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/fbx/)
@@ -2194,7 +2196,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,103)
+## Text (1,104)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2449,6 +2451,7 @@ text | Doxygen configuration settings | .cfg |  | [14 sample files](https://semb
 text | Drumatix complete project | .dal |  | 
 text | dtread Type Descriptor | .dtyp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dtreadTypeDescriptor/)
 text | Duxbury Scrub Table | .sbt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/duxburyScrubTable/)
+text | DVD Junior subtitles | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/dvdJuniorSubtitles/)
 text | DVDSubtitle subtitles | .sub .out |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/dvdSubtitleSubtitles/)
 text | Dynamic Publisher Text | .txt |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/dynamicPublisherText/)
 text | EAGLE Design Rules | .dru |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/eagleDesignRules/)
@@ -2939,7 +2942,7 @@ text | PowerBuilder Workspace | .pbw |  | [3 sample files](https://sembiance.com
 text | PowerDesigner / PowerAMC data | .pdm .cdm .pam |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/powerDesignerData/)
 text | Prep for Monarch Help | .hlp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/prepForMonarchHelp/)
 text | Prima PrintMagic Layout | .lyt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/primaPrintMagicLayout/)
-text | Prism3D config | .cfg |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/prism3DConfig/)
+text | Prism3D config | .cfg |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/prism3DConfig/)
 text | Private Wars Material script | .mat |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/privateWarsMaterialScript/)
 text | ProCONTROL script |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/proCONTROLScript/)
 text | ProfiCAD symbols | .ppd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/profiCADSymbols/)
@@ -3010,7 +3013,7 @@ text | RIS Citation | .txt |  | [3 sample files](https://sembiance.com/fileForma
 text | Robocode Battle | .battle |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/robocodeBattle/)
 text | RoboDemo Margin | .fcm |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/roboDemoMargin/)
 text | RoboHelp Topic Export | .hpt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/roboHelpTopicExport/)
-text | Robot Arena hazard configuration | .adf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/robotArenaHazardConfiguration/)
+text | Robot Arena hazard configuration | .adf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/robotArenaHazardConfiguration/)
 text | RPG Maker 2003 Project id | .r3proj |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/rPGMaker2003ProjectID/)
 text | RPG Maker VX Project | .rvproj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/rpgMakerVXProject/)
 text | RPM Spec | .in |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/rpmSpec/)
@@ -3373,7 +3376,7 @@ video | [Mailestrom ANM](https://wiki.multimedia.cx/index.php/Maelstrom_ANM) | .
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)
 video | [Motion JPEG 2000](http://fileformats.archiveteam.org/wiki/MJ2) | .mj2 .mjp2 | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/motionJPEG2000/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [xanim](https://github.com/Sembiance/xanim) | [71 sample files](https://sembiance.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably. CYC and demo_5 don't convert. Also exists is video/movieSetterSet which is currently unsupported, don't know what can convert it.
-video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/mpeg1/)
+video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/mpeg1/)
 video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v .m2ts .ts .vob .bin .mts | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [13 sample files](https://sembiance.com/fileFormatSamples/video/mpeg2/)
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v .f4v |  | [12 sample files](https://sembiance.com/fileFormatSamples/video/mp4/)
 video | [MTV Movie](http://fileformats.archiveteam.org/wiki/MTV_Movie_(.MTV)) | .mtv | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/mtvMovie/)

@@ -3,6 +3,13 @@
 \--------------/
 * Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress
 
+* wuimg supports more formats:
+	document/asyncProfessionalFax
+	image/gpFaxFAXFormat
+	image/quickLinkIIFaxBitmap
+	image/zyxelFAXFormat
+	font/xCarFont  (it produces one image per glyph, empty space character included, so need to tile it into 1 image)
+
 * Add support for: http://fileformats.archiveteam.org/index.php?title=Puma_Street_Soccer_PPM&diff=51052&oldid=0
   And then look on discmaster for more samples and items to reprocess
 

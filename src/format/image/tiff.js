@@ -13,7 +13,7 @@ export class tiff extends Format
 		/^fmt\/(154|155|353)( |$)/, /^x-fmt\/(387|388|399)( |$)/,
 
 		// App-Specific TIFF files
-		"CorelChart chart", "QuickLink II Fax bitmap (new)", "Hasselblad 3F RAW image", /^fmt\/(1312|1313|1480)( |$)/
+		"CorelChart chart", "QuickLink II Fax bitmap (new)", "Hasselblad 3F RAW image", "Wang Image File Format bitmap (TIFF with WANG tags)", /^fmt\/(1312|1313|1480)( |$)/
 	];
 	idMeta       = ({macFileType}) => macFileType==="TIFF";
 	priority     = this.PRIORITY.LOW;	// Often other formats are mis-identified as TIFF files such RAW camera files like Sony ARW and kodak*

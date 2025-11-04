@@ -10,7 +10,7 @@ export class pict extends Format
 	mimeType       = "image/pict";
 	magic          = [
 		"QuickDraw/PICT", "Macintosh Quickdraw/PICT", "Claris clip art", "Claris CAD drawing", "Macintosh Pict image (MacBinary)", "Mac PICT bitmap", "image/x-pict", "piped qdraw sequence (qdraw_pipe)", "deark: pict (PICT v",
-		/^Macintosh PICT (2 )?(\((DirectBits )?(Bitmap|Pixmap)\) )?:pict:$/,
+		/^Macintosh PICT (2 )?(\((DirectBits )?(Bitmap|Pixmap)\) )?:(bum|pict):$/,
 		/^Macintosh QuickDraw PICT/, /^fmt\/341( |$)/, /^x-fmt\/80( |$)/
 	];
 	idMeta         = ({macFileType}) => macFileType==="PICT";

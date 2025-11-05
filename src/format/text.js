@@ -425,6 +425,7 @@ export default
 		cabri3DMacro                               : {name : "Cabri 3D Macro", ext : [".mac"], magic : ["Cabri 3D Macro"], idMeta : ({macFileType, macFileCreator}) => macFileType==="MACR" && macFileCreator.startsWith("CaG")},
 		cacheDirectoryTaggingStandard              : {name : "Cache Directory Tagging Standard", ext : [".tag"], magic : ["Cache Directory Tagging Standard"]},
 		cacheManifest                              : {name : "AppCache Manifest", ext : [".notmanifest", ".cachemanifest", ".appcache"], magic : ["HTML5 AppCache Manifest", "text/cache-manifest"]},
+		cadenceOrCADAllegroCAMStatus               : {name : "Cadence OrCAD/Allegro CAM status", ext : [".cam", ".pcb"], magic : ["Cadence OrCAD/Allegro CAM status"], weakMagic : true},
 		cadstarData                                : {name : "CADSTAR data (generic)", ext : [".rgf"], magic : ["CADSTAR data"]},
 		calamusASCIITranslationTable               : {name : "Calamus ASCII Translation Table", ext : [".att"], magic : ["Calamus ASCII Translation Table"]},
 		canomaScene                                : {name : "Canoma scene", ext : [".3dv"], magic : ["Canoma scene"], weakMagic : true},

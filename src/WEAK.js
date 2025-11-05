@@ -2233,6 +2233,7 @@ export const WEAK_VALUES =
 	/^NXEngine Sprite Image Format$/,
 	/^OctaMED MCNT multi-module$/,
 	/^OGG stream \(generic\)$/,
+	/^Okino plugin Run Time Information$/,
 	/^OMP Model$/,
 	/^Open Packaging Conventions container$/,
 	/^OpenOffice Extension$/,

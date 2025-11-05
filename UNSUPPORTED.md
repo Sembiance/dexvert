@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,872)
+# Unsupported File Formats (3,875)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (304)
+## Archive (305)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -306,6 +306,7 @@ Family/Format | Name | Extensions | Notes
 [archive/xldjDiskImage](https://discmaster.textfiles.com/search?format=xldjDiskImage) | XLDJ/XL/ST link Disk Image | .di | 
 [archive/xpackPacked](https://discmaster.textfiles.com/search?format=xpackPacked) | XPACK Packed |  | 
 [archive/yodasCrypterProtected](https://discmaster.textfiles.com/search?format=yodasCrypterProtected) | Yoda's Crypte Protected | .exe | 
+[archive/yuGiOhData](https://discmaster.textfiles.com/search?format=yuGiOhData) | Yu Gi Oh! data | .dat | Extractor could be written, see: https://yugiohextractor.sourceforge.net/documentation.htm
 [archive/zapCompressedDiskImage](https://discmaster.textfiles.com/search?format=zapCompressedDiskImage) | ZAP compressed disk image | .zap | 
 [archive/zipscrubPacked](https://discmaster.textfiles.com/search?format=zipscrubPacked) | ZIPSCRUB Packed |  | 
 [archive/zoomDiskImage](https://discmaster.textfiles.com/search?format=zoomDiskImage) | ZOOM Disk Image | .zom | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
@@ -787,7 +788,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (194)
+## Image (195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -900,6 +901,7 @@ Family/Format | Name | Extensions | Notes
 [image/madStudio](https://discmaster.textfiles.com/search?format=madStudio) | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [12 sample files](https://sembiance.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
 [image/magneticGraphics](https://discmaster.textfiles.com/search?format=magneticGraphics) | Magnetic Graphics | .gfx | 
 [image/mangaClipStudioPage](https://discmaster.textfiles.com/search?format=mangaClipStudioPage) | Manga/Clip Studio Page | .cpg | 
+[image/medusa2DCADDrawing](https://discmaster.textfiles.com/search?format=medusa2DCADDrawing) | Medusa 2D CAD drawing | .she | 
 [image/megamidGrayscaleBitMap](https://discmaster.textfiles.com/search?format=megamidGrayscaleBitMap) | Megamid Grayscale BitMap | .gbm .map | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?format=megaPaintVector) | MegaPaint Vector | .vek | 
 [image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -1167,7 +1169,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,608)
+## Other (2,609)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2706,6 +2708,7 @@ Family/Format | Name | Extensions | Notes
 [other/mystIVRevelationSavedGame](https://discmaster.textfiles.com/search?format=mystIVRevelationSavedGame) | Myst IV: Revelation saved game | .m4s | 
 [other/mysticBBSInstallPackage](https://discmaster.textfiles.com/search?format=mysticBBSInstallPackage) | Mystic BBS install package | .mys | 
 [other/mythTheFallenLordsGameArchive](https://discmaster.textfiles.com/search?format=mythTheFallenLordsGameArchive) | Myth: The Fallen Lords game archive | .gor .bin | 
+[other/nTrackStudioConfiguration](https://discmaster.textfiles.com/search?format=nTrackStudioConfiguration) | n-Track Studio Configuration |  | 
 [other/nacDrawDocument](https://discmaster.textfiles.com/search?format=nacDrawDocument) | NacDraw document | .nac | 
 [other/nascarRacingCarData](https://discmaster.textfiles.com/search?format=nascarRacingCarData) | NASCAR Racing Car/Track data | .trk .car | 
 [other/nascarRacingReplay](https://discmaster.textfiles.com/search?format=nascarRacingReplay) | NASCAR Racing Replay | .rpy | 
@@ -3007,7 +3010,7 @@ Family/Format | Name | Extensions | Notes
 [other/proToolsSession](https://discmaster.textfiles.com/search?format=proToolsSession) | Pro Tools session data | .pts | 
 [other/proVideoJob](https://discmaster.textfiles.com/search?format=proVideoJob) | Pro Video Job | .job | 
 [other/proVideoVectorOverlayedCharacter](https://discmaster.textfiles.com/search?format=proVideoVectorOverlayedCharacter) | Pro Video vector overlayed character |  | 
-[other/proENGINEERFile](https://discmaster.textfiles.com/search?format=proENGINEERFile) | Pro/ENGINEER file | .dat | 
+[other/proENGINEERFile](https://discmaster.textfiles.com/search?format=proENGINEERFile) | Pro/ENGINEER file | .dat .prt .1 | 
 [other/proCiteData](https://discmaster.textfiles.com/search?format=proCiteData) | ProCite data | .pdt .pos | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?format=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
 [other/professionalMusicDriverSamplesPack](https://discmaster.textfiles.com/search?format=professionalMusicDriverSamplesPack) | Professional Music Driver PVI/PZI samples pack | .pvi .pzi | 

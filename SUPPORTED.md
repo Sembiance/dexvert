@@ -1,4 +1,4 @@
-# Supported File Formats (3,361)
+# Supported File Formats (3,362)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1067,7 +1067,7 @@ image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | 
 image | [Centauri Logo Editor](http://fileformats.archiveteam.org/wiki/Centauri_Logo_Editor) | .cle | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/centauriLogoEditor/)
 image | CFLI Designer | .cfli | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/cfliDesigner/)
 image | [Champions' Interlace Image](http://fileformats.archiveteam.org/wiki/Champions'_Interlace) | .cci .cin | [recoil2png](http://recoil.sourceforge.net) | [32 sample files](https://sembiance.com/fileFormatSamples/image/championsInterlace/)
-image | Character Studio thumbnail | .bip | [nconvert](https://www.xnview.com/en/nconvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/characterStudioThumbnail/)
+image | Character Studio thumbnail | .bip | [nconvert](https://www.xnview.com/en/nconvert/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/characterStudioThumbnail/)
 image | [CharPad](http://fileformats.archiveteam.org/wiki/CharPad) | .ctm | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/charPad/)
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/cheese/)
 image | [COKE TG1](http://fileformats.archiveteam.org/wiki/COKE_(Atari_Falcon)) | .tg1 | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/tg1/)
@@ -2197,7 +2197,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,108)
+## Text (1,109)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2347,6 +2347,7 @@ text | Cabri 3D Figure | .fig |  | [10 sample files](https://sembiance.com/fileF
 text | Cabri 3D Language | .cgl |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DLanguage/)
 text | Cabri 3D Macro | .mac |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cabri3DMacro/)
 text | Cache Directory Tagging Standard | .tag |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cacheDirectoryTaggingStandard/)
+text | Cadence OrCAD/Allegro CAM status | .cam .pcb |  | 
 text | CADSTAR data (generic) | .rgf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cadstarData/)
 text | Calamus ASCII Translation Table | .att |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/calamusASCIITranslationTable/)
 text | Call Of Duty weapons data |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/callOfDutyWeaponsData/)
@@ -2944,7 +2945,7 @@ text | PowerBuilder Workspace | .pbw |  | [3 sample files](https://sembiance.com
 text | PowerDesigner / PowerAMC data | .pdm .cdm .pam |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/powerDesignerData/)
 text | Prep for Monarch Help | .hlp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/prepForMonarchHelp/)
 text | Prima PrintMagic Layout | .lyt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/primaPrintMagicLayout/)
-text | Prism3D config | .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/prism3DConfig/)
+text | Prism3D config | .cfg |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/prism3DConfig/)
 text | Private Wars Material script | .mat |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/privateWarsMaterialScript/)
 text | ProCONTROL script |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/proCONTROLScript/)
 text | ProfiCAD symbols | .ppd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/profiCADSymbols/)

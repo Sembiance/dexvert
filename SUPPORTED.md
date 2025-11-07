@@ -1,4 +1,4 @@
-# Supported File Formats (3,362)
+# Supported File Formats (3,363)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -2197,7 +2197,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,109)
+## Text (1,110)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2279,7 +2279,7 @@ text | ASEAM 2 Plant Input Screen/Data | .pis |  | [9 sample files](https://semb
 text | ASEAM 2 System Input Screen/Data | .sis |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aseam2SystemInputScreenData/)
 text | ASIC Project/Configuration | .prj .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/asicProjectConfiguration/)
 text | AskEnv Requester definition | .req |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/askEnvRequesterDefinition/)
-text | ASP Application Directive | .asax |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
+text | ASP Application Directive | .asax |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/aspApplicationDirective/)
 text | ASP Control Directive | .ascx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspControlDirective/)
 text | ASP WebService Directive File | .asmx |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
 text | ASP.NET Web Form |  |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/aspNETWebForm/)
@@ -2389,7 +2389,7 @@ text | Compo preferences |  |  | [6 sample files](https://sembiance.com/fileForm
 text | Consolidated Laser Ranging Prediction Format | .cpf .opa |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/consolidatedLaserRangingPredictionFormat/)
 text | ConTeXt document | .tex |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/conTeXtDocument/)
 text | Context Free design grammar |  |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/contextFreeDesignGrammar/)
-text | Corel Language Resource | .lrs |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/corelLanguageResource/)
+text | Corel Language Resource | .lrs |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/corelLanguageResource/)
 text | Corel/WordPerfect Setup information | .csw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/corelWordPerfectSetupInformation/)
 text | CorelCAD Material | .mat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/corelCADMaterial/)
 text | COREWAR program | .prg |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/corewarProgram/)
@@ -2643,6 +2643,7 @@ text | InstallShield Response File | .iss |  | [12 sample files](https://sembian
 text | [Intel HEX](http://fileformats.archiveteam.org/wiki/Intel_HEX) | .hex .hxo |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/intelHEX/)
 text | Inter-Quake Export | .iqe |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/interQuakeExport/)
 text | Interleaf document | .doc |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/interleafDocument/)
+text | INTERLIS Model File | .ili |  | 
 text | Internet Data Query File | .idq |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/internetDataQueryFile/)
 text | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/imf/) - With several RFC files describing the format, you'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/ Once I get working, update program Email_Outlook_Message to chain to convert the resulting .eml into this format handler (to handle attachments). Then re-process document/outlookMessage CDs
 text | IntroCAD Printer Definition |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/introCADPrinterDefinition/)

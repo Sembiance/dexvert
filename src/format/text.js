@@ -638,6 +638,7 @@ export default
 		installProfessionalProject                 : {name : "INSTALL Professional project", ext : [".dat"], magic : ["INSTALL Professional project"]},
 		installShieldResponseFile                  : {name : "InstallShield Response File", ext : [".iss"], magic : ["InstallShield Response File"]},
 		intelHEX                                   : {name : "Intel HEX", ext : [".hex", ".hxo"], magic : ["Intel HEX data", "Intel Hexadecimal object"], website : "http://fileformats.archiveteam.org/wiki/Intel_HEX"},
+		interlisModelFile                          : {name : "INTERLIS Model File", ext : [".ili"], magic : [/^fmt\/1014( |$)/]},
 		internetDataQueryFile                      : {name : "Internet Data Query File", ext : [".idq"], magic : [/^fmt\/358( |$)/]},
 		interleafDocument                          : {name : "Interleaf document", ext : [".doc"], magic : [/^Interleaf document text/]},
 		interQuakeExport                           : {name : "Inter-Quake Export", ext : [".iqe"], magic : ["Inter-Quake Export"]},

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,875)
+# Unsupported File Formats (3,877)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1169,7 +1169,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,609)
+## Other (2,611)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2634,6 +2634,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftWordGlossary](https://discmaster.textfiles.com/search?format=microsoftWordGlossary) | Microsoft Word Glossary | .gly | 
 [other/microsoftWordStyleSheet](https://discmaster.textfiles.com/search?format=microsoftWordStyleSheet) | Microsoft Word Style Sheet | .sty | 
 [other/microsoftZooTycoonSavedGame](https://discmaster.textfiles.com/search?format=microsoftZooTycoonSavedGame) | Microsoft Zoo Tycoon saved game | .zoo | 
+[other/microstationJavaJMDLCompiledClass](https://discmaster.textfiles.com/search?format=microstationJavaJMDLCompiledClass) | Microstation Java (JMDL) Compiled Class | .mclass | 
 [other/microStationMaterialLibrary](https://discmaster.textfiles.com/search?format=microStationMaterialLibrary) | MicroStation Material Library | .mat | 
 [other/microStationModificationResourceFile](https://discmaster.textfiles.com/search?format=microStationModificationResourceFile) | MicroStation Modification resource file | .m01 .p01 .r01 .s01 | 
 [other/microStationSymbologyResources](https://discmaster.textfiles.com/search?format=microStationSymbologyResources) | MicroStation Symbology Resources | .rsc | 
@@ -2659,6 +2660,7 @@ Family/Format | Name | Extensions | Notes
 [other/mlocateDatabase](https://discmaster.textfiles.com/search?format=mlocateDatabase) | mlocate database | .db | 
 [other/mobil1RallyChampionshipData](https://discmaster.textfiles.com/search?format=mobil1RallyChampionshipData) | Mobil 1 Rally Championship data | .sq | 
 [other/mobipocketEBookAuxiliaryData](https://discmaster.textfiles.com/search?format=mobipocketEBookAuxiliaryData) | Mobipocket eBook Auxiliary data | .mbp | 
+[other/modarisModel](https://discmaster.textfiles.com/search?format=modarisModel) | Modaris Model | .mdl | 
 [other/modiMODVoice](https://discmaster.textfiles.com/search?format=modiMODVoice) | MODiMOD Voice | .vce .v00 .v01 .v02 .v03 .v04 .v05 .v06 .v07 .v08 .v09 .v10 .v11 .v12 .v14 .v15 | 
 [other/monarchModel](https://discmaster.textfiles.com/search?format=monarchModel) | Monarch Model | .mod | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?format=moonbaseGameData) | Moonbase Game Data | .mb | 

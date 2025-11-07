@@ -9,7 +9,7 @@ export class tiff extends Format
 	mimeType     = "image/tiff";
 	magic        = [
 		// Generic TIFF files
-		"Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", "image/tiff", "piped tiff sequence (tiff_pipe)", "eXtended Image File Format bitmap", /^deark: tiff \((TIFF|XIFF)\)/, /^TIFF (\((jpeg|Tiled)\) )?:(cpt|stw|tiff):$/,
+		"Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", "image/tiff", "piped tiff sequence (tiff_pipe)", "eXtended Image File Format bitmap", /^deark: tiff \((TIFF|XIFF)\)/, /^(Geo)?TIFF (\((jpeg|Tiled)\) )?:(cpt|stw|tiff):$/,
 		/^fmt\/(154|155|353)( |$)/, /^x-fmt\/(387|388|399)( |$)/,
 
 		// App-Specific TIFF files

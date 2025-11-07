@@ -70,6 +70,13 @@
   Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
   Don't do this for all formats, since in several cases a simple flattening is the best course of action
 
+* From discord: I just realized discmaster handles detection of yamaha SMAF files, but doesn't actually parse them apart into their elements
+	they're meant for use with 2000s era cell phones, for ringtones, images, etc in many formats
+	search for .mmf files of type 'audio'
+	iirc the ADPCM format in here is yamaha adpcm, which ffmpeg can decode, but they can also contain mp3 as well as an MML format for simple beep ringtones
+	and also FM synthesis ringtones
+  See PDF: sandbox/wip/SMAF3.06e.pdf
+
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
 * Add these newly added deark modules:   ROB NOTE, Some snd/pics seen in : https://discmaster.textfiles.com/admin/item?itemid=41695

@@ -77,6 +77,7 @@ export class file extends Program
 			"last modified",
 			"of \\d+ bytes",
 			"standard inputcharacter device driver",
+			"structured file",
 			"to extract,",
 			"version \\d",
 			`[;:)(\\]["']`

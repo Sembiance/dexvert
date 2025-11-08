@@ -2317,6 +2317,7 @@ export const WEAK_VALUES =
 	/^ProductView Packaged Structure and Drawing$/,
 	/^Programmer's Notepad text Clips$/,
 	/^Project Dogwaffle mixing palette \(type 2\)$/,
+	/^ProWrite macro \(with rem\)$/,
 	/^PSI MI format$/,
 	/^Psion Organiser Block data$/,
 	/^Psion OVAL Control$/,

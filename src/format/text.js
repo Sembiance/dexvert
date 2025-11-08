@@ -184,6 +184,8 @@ export default
 		borlandLinkerMappingData                 : {name : "Borland Linker Mapping Data", ext : [".map"], magic : ["Borland Linker Mapping Datei"]},
 		borlandProjectGroup                      : {name : "Borland Project Group", ext : [".bpg"], magic : ["Borland Project Group"], weakMagic : true},
 		clispByteCompiled                        : {name : "CLISP byte-compiled Lisp program", ext : [".fas"], magic : ["CLISP byte-compiled Lisp program"]},
+		cloantoPersonalPaintRexxScript           : {name : "Cloanto Personal Paint Rexx script", ext : [".pprx"], magic : ["Cloanto Personal Paint Rexx script"], weakMagic : true},
+		cloantoPersonalPaintSettings             : {name : "Cloanto Personal Paint Settings", ext : [".set"], magic : ["Cloanto Personal Paint Settings"]},
 		codeBlocksDependencies                   : {name : "Code::Blocks Dependencies", ext : [".depend"], magic : ["Code::Blocks Dependencies"]},
 		codesysSymbols                           : {name : "CODESYS Symbols", ext : [".sym"], magic : ["CODESYS Symbols"], weakMagic : true},
 		coldFusionComponent                      : {name : "ColdFusion Component", ext : [".cfc"], magic : ["ColdFusion Component"], weakMagic : true},

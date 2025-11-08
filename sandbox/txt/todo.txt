@@ -89,6 +89,7 @@
 	+  decoder is not well optimized. Expect it to be slow. You may have to use
 	+  an option like "-maxfiles" or "-zip" to get everything.
 	+
+	*** ROB NOTE: See *.MMS: https://discmaster.textfiles.com/browse/41779/TWILIGHT66B.ISO/Games/032/gamex32.rar/Shrek%20Game%20Land
 
 	+* EA/PEA archive (module="ea_arch") (experimental)
 	+  An installer format used by Electronic Arts.

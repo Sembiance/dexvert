@@ -1,11 +1,11 @@
-# Supported File Formats (3,363)
+# Supported File Formats (3,367)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (491)
+## Archive (492)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -132,7 +132,7 @@ archive | [Dark Reign Game Archive](http://fileformats.archiveteam.org/wiki/FTG_
 archive | [Delphi Borland Form](http://fileformats.archiveteam.org/wiki/Borland_Delphi_form) | .dfm | [dfm2txt](http://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/borlandDelphiForm/)
 archive | Descent Game Archive | .hog | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/descentGameArchive/)
 archive | Destan game data archive | .3dn | [gameextractor](http://www.watto.org/game_extractor.html) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/destanGameDataArchive/)
-archive | DexEXE Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dexEXEPacked/)
+archive | DexEXE Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/dexEXEPacked/)
 archive | [DIET](http://fileformats.archiveteam.org/wiki/DIET_(compression)) |  | [deark](https://entropymine.com/deark/) [diet](http://fileformats.archiveteam.org/wiki/DIET_(compression)) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/diet/)
 archive | Diet Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/dietPacked/)
 archive | [DietDisk Compressed](http://fileformats.archiveteam.org/wiki/Diet_Disk) |  | [dietDiskFatten](http://cd.textfiles.com/nightowl/nopv06/010A/DIETDISC.ZIP) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/dietDisk/)
@@ -217,7 +217,7 @@ archive | IFF Fantavision |  | [iff_convert](http://www.boomerangsworld.de/cms/t
 archive | [IFF LIST File](https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF) |  | [unIFFLIST](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. The VAST MAJORITY of these files are for a program called 'Movie Setter' on the Amiga and contain ILBM's with custom 'FACE' properties. I'm not aware of a converter for either the Movie Setter files themselves or the resulting ILBM files sadly. Since the output IFFs from these are not useful (and it makes a LOT of them) I actually forbid that format from matching this, so it gets properly matched to the unsupported video/movieSetterSet format.
 archive | [ImageDisk Disk Image](http://fileformats.archiveteam.org/wiki/IMD) | .imd | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imageDisk/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/imageUSB/)
-archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
+archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
 archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innounp](https://innounp.sourceforge.net/) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
@@ -330,6 +330,7 @@ archive | Packer Packed | .exe .com | cup386 | [11 sample files](https://sembian
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/packIt/)
 archive | PACKIT Installation Archive | .ins | [sevenZip](http://p7zip.sourceforge.net/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/packItInstallationArchive/)
 archive | PACKWIN Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/packwinPacked/)
+archive | Pacman - Adventures in Time game archive | .pac | [gameextractor](http://www.watto.org/game_extractor.html) | 
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/paintShopProBrowserCache/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak .exe | [unar](https://github.com/incbee/Unarchiver) [arc](http://arc.sourceforge.net) [xarc](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus) [deark](https://entropymine.com/deark/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [21 sample files](https://sembiance.com/fileFormatSamples/archive/arc/)
 archive | [PAKLEO Archive](http://fileformats.archiveteam.org/wiki/PAKLEO) | .pll | [unpakleo](https://www.sac.sk/download/pack/pakll106.zip) [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/pakleo/)
@@ -946,7 +947,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (728)
+## Image (729)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1368,6 +1369,7 @@ image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/ico/)
 image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/Windows_Metafile) | .wmf .apm .wmz | [wmf2svg](https://github.com/hidekatsu-izuno/wmf2svg) [uniconvertor](https://sk1project.net/uc2/) [soffice](https://www.libreoffice.org) [convert](https://www.imagemagick.org/) [iio2png](http://github.com/Sembiance/iio2png/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [keyViewPro](https://archive.org/details/KeyViewPro/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [19 sample files](https://sembiance.com/fileFormatSamples/image/wmf/) - Some WMF files like 001.WMF just have an embedded PNG. So the initial programs that convert to SVG will fail, and fall back to convert which will produce a PNG.
 image | [MIG](http://fileformats.archiveteam.org/wiki/MIG) | .mig | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/image/mig/)
+image | Mindjongg IPG | .ipg | [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/mindjonggIPG/)
 image | [Minipaint MG](https://sourceforge.net/p/recoil/bugs/102/) | .mg | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/minipaintMG/)
 image | [Minolta RAW](http://fileformats.archiveteam.org/wiki/Minolta_MRW) | .mrw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mrw/)
 image | MMS Composer File | .mcf | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/mmsComposerFile/)
@@ -2197,7 +2199,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,110)
+## Text (1,112)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2375,6 +2377,8 @@ text | Clam AntiVirus Database Info | .info .cud .cld |  | [14 sample files](htt
 text | Clarion Project | .prj |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/clarionProject/)
 text | ClariSSA saved work/session |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/clariSSASavedWorkSession/)
 text | CLISP byte-compiled Lisp program | .fas |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/clispByteCompiled/)
+text | Cloanto Personal Paint Rexx script | .pprx |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/cloantoPersonalPaintRexxScript/)
+text | Cloanto Personal Paint Settings | .set |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/cloantoPersonalPaintSettings/)
 text | Clustal Alignment format | .nbrf .aln |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/clustalAlignmentFormat/)
 text | Code::Blocks Dependencies | .depend |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/codeBlocksDependencies/)
 text | CODESYS Symbols | .sym |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/codesysSymbols/)
@@ -2453,7 +2457,7 @@ text | Doxygen configuration settings | .cfg |  | [14 sample files](https://semb
 text | Drumatix complete project | .dal |  | 
 text | dtread Type Descriptor | .dtyp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/dtreadTypeDescriptor/)
 text | Duxbury Scrub Table | .sbt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/duxburyScrubTable/)
-text | DVD Junior subtitles | .txt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/dvdJuniorSubtitles/)
+text | DVD Junior subtitles | .txt |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dvdJuniorSubtitles/)
 text | DVDSubtitle subtitles | .sub .out |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/dvdSubtitleSubtitles/)
 text | Dynamic Publisher Text | .txt |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/dynamicPublisherText/)
 text | EAGLE Design Rules | .dru |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/eagleDesignRules/)
@@ -2946,7 +2950,7 @@ text | PowerBuilder Workspace | .pbw |  | [3 sample files](https://sembiance.com
 text | PowerDesigner / PowerAMC data | .pdm .cdm .pam |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/powerDesignerData/)
 text | Prep for Monarch Help | .hlp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/prepForMonarchHelp/)
 text | Prima PrintMagic Layout | .lyt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/primaPrintMagicLayout/)
-text | Prism3D config | .cfg |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/prism3DConfig/)
+text | Prism3D config | .cfg |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/prism3DConfig/)
 text | Private Wars Material script | .mat |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/privateWarsMaterialScript/)
 text | ProCONTROL script |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/proCONTROLScript/)
 text | ProfiCAD symbols | .ppd |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/profiCADSymbols/)

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,878)
+# Unsupported File Formats (3,882)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (305)
+## Archive (306)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -54,6 +54,7 @@ Family/Format | Name | Extensions | Notes
 [archive/bsqEncodedData](https://discmaster.textfiles.com/search?format=bsqEncodedData) | BSQ encoded data | .bsq | 
 [archive/bzip](https://discmaster.textfiles.com/search?format=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 [archive/casioBE300InstallationPackage](https://discmaster.textfiles.com/search?format=casioBE300InstallationPackage) | Casio BE-300 installation package | .cbea | 
+[archive/casioGraph100ROMDISKImage](https://discmaster.textfiles.com/search?format=casioGraph100ROMDISKImage) | Casio Graph100 ROMDISK image | .cdr .lec | 
 [archive/causeWayCompressorPacked](https://discmaster.textfiles.com/search?format=causeWayCompressorPacked) | CauseWay Compressor Packed | .exe | 
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?format=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
 [archive/cExePacked](https://discmaster.textfiles.com/search?format=cExePacked) | CExe Packed | .exe | 
@@ -989,7 +990,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (174)
+## Music (175)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -1089,6 +1090,7 @@ Family/Format | Name | Extensions | Notes
 [music/muSiCaTextMusicFormat](https://discmaster.textfiles.com/search?format=muSiCaTextMusicFormat) | MuSiCa text music format | .msd | 
 [music/musicMakerModule](https://discmaster.textfiles.com/search?format=musicMakerModule) | MusicMaker Module | .mm8 | [5 sample files](https://sembiance.com/fileFormatSamples/music/musicMakerModule/)
 [music/musicTimeScore](https://discmaster.textfiles.com/search?format=musicTimeScore) | MusicTime score | .mus | 
+[music/musicWriteScore](https://discmaster.textfiles.com/search?format=musicWriteScore) | MusicWrite score | .mwk | 
 [music/mustMusic](https://discmaster.textfiles.com/search?format=mustMusic) | MUST music / song | .wvz | 
 [music/mvsTracker](https://discmaster.textfiles.com/search?format=mvsTracker) | MVSTracker Module | .mus | [2 sample files](https://sembiance.com/fileFormatSamples/music/mvsTracker/)
 [music/mvxModule](https://discmaster.textfiles.com/search?format=mvxModule) | MVX Module | .mvm | [4 sample files](https://sembiance.com/fileFormatSamples/music/mvxModule/)
@@ -1169,7 +1171,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,612)
+## Other (2,613)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1502,6 +1504,7 @@ Family/Format | Name | Extensions | Notes
 [other/billOfMaterials](https://discmaster.textfiles.com/search?format=billOfMaterials) | Bill of Materials | .bom | 
 [other/binaryColorFormat](https://discmaster.textfiles.com/search?format=binaryColorFormat) | Binary Color Format | .bcf | 
 [other/binaryDeltaCompressedPatch](https://discmaster.textfiles.com/search?format=binaryDeltaCompressedPatch) | Binary Delta Compressed Patch |  | 
+[other/binaryExtendScriptScript](https://discmaster.textfiles.com/search?format=binaryExtendScriptScript) | Binary ExtendScript Script | .jsxbin | 
 [other/binaryManagedObjectFile](https://discmaster.textfiles.com/search?format=binaryManagedObjectFile) | Binary Managed Object File | .bmf | 
 [other/binaryUnicodeConversionTable](https://discmaster.textfiles.com/search?format=binaryUnicodeConversionTable) | Binary Unicode conversion Table | .tbl | 
 [other/binkleyTermScheduleData](https://discmaster.textfiles.com/search?format=binkleyTermScheduleData) | BinkleyTerm Schedule data | .scd | 
@@ -3889,7 +3892,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (49)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -3906,6 +3909,7 @@ Family/Format | Name | Extensions | Notes
 [video/delphineCIN](https://discmaster.textfiles.com/search?format=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
+[video/eggVideo](https://discmaster.textfiles.com/search?format=eggVideo) | EGG video | .egg | [4 sample files](https://sembiance.com/fileFormatSamples/video/eggVideo/)
 [video/emblazeVideo2](https://discmaster.textfiles.com/search?format=emblazeVideo2) | Emblaze Video 2 | .ev2 | [1 sample file](https://sembiance.com/fileFormatSamples/video/emblazeVideo2/)
 [video/evaVideo](https://discmaster.textfiles.com/search?format=evaVideo) | EVA3/EVA5 video | .eva | [3 sample files](https://sembiance.com/fileFormatSamples/video/evaVideo/)
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 

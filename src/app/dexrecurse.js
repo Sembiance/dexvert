@@ -38,6 +38,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/mdx",
 	"archive/mTropolisArchive",
 	"archive/nrg",
+	"archive/pacmanAdventuresInTimeGameArchive",
 	"archive/scraplandGameDataArchive",
 	"archive/sgaGameDataArchive",
 	"archive/sgiVolumeImage",

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,882)
+# Unsupported File Formats (3,889)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -317,7 +317,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (75)
+## Audio (76)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -328,6 +328,7 @@ Family/Format | Name | Extensions | Notes
 [audio/appleIIgsSampledInstrumentFile](https://discmaster.textfiles.com/search?format=appleIIgsSampledInstrumentFile) | Apple IIgs Sampled Instrument File |  | 
 [audio/ariaSamplesBank](https://discmaster.textfiles.com/search?format=ariaSamplesBank) | ARIA Samples Bank | .bnk | 
 [audio/artOfNoiseInstrument](https://discmaster.textfiles.com/search?format=artOfNoiseInstrument) | Art of Noise Instrument | .fm | [5 sample files](https://sembiance.com/fileFormatSamples/audio/artOfNoiseInstrument/)
+[audio/audioSimAnalogueSoundfile](https://discmaster.textfiles.com/search?format=audioSimAnalogueSoundfile) | AudioSim analogue Soundfile | .snd | 
 [audio/audioWorksSoundSample](https://discmaster.textfiles.com/search?format=audioWorksSoundSample) | AudioWorks Sound Sample |  | 
 [audio/bisWSSPCMAudio](https://discmaster.textfiles.com/search?format=bisWSSPCMAudio) | BIS WSS PCM audio | .wss | 
 [audio/commonInstrumentFile](https://discmaster.textfiles.com/search?format=commonInstrumentFile) | [Common Instrument Sample](http://fileformats.archiveteam.org/wiki/Common_Instrument_Format) | .ci1 .ci2 | 
@@ -665,7 +666,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (118)
+## Font (119)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -718,6 +719,7 @@ Family/Format | Name | Extensions | Notes
 [font/grxFont](https://discmaster.textfiles.com/search?format=grxFont) | GRX Font | .fnt | 
 [font/homeVideoProducerFont](https://discmaster.textfiles.com/search?format=homeVideoProducerFont) | Home Video Producer Font | .fnt | 
 [font/ibmPCStoryboardFont](https://discmaster.textfiles.com/search?format=ibmPCStoryboardFont) | IBM/PC Storyboard Font | .fac | 
+[font/iffLikeFont](https://discmaster.textfiles.com/search?format=iffLikeFont) | IFF-like Font | .fnt .d03 .d04 .d02 | 
 [font/impulseTrackerFont](https://discmaster.textfiles.com/search?format=impulseTrackerFont) | Impulse Tracker font | .drv | 
 [font/intelliFont](https://discmaster.textfiles.com/search?format=intelliFont) | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) | .lib .type | [7 sample files](https://sembiance.com/fileFormatSamples/font/intelliFont/)
 [font/interFontFont](https://discmaster.textfiles.com/search?format=interFontFont) | InterFont font | .ifont | 
@@ -789,7 +791,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (195)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -977,6 +979,7 @@ Family/Format | Name | Extensions | Notes
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?format=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/unrealTexture](https://discmaster.textfiles.com/search?format=unrealTexture) | Unreal Texture | .utx .u .unr | 
 [image/variCADDrawing](https://discmaster.textfiles.com/search?format=variCADDrawing) | VariCAD Drawing | .dwb .bkb | 
+[image/ventaFaxGraphics](https://discmaster.textfiles.com/search?format=ventaFaxGraphics) | VentaFax graphics | .vfx .vf | [2 sample files](https://sembiance.com/fileFormatSamples/image/ventaFaxGraphics/)
 [image/venturaPublisher](https://discmaster.textfiles.com/search?format=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
 [image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?format=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?format=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
@@ -1171,7 +1174,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,613)
+## Other (2,617)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1437,6 +1440,7 @@ Family/Format | Name | Extensions | Notes
 [other/ailDigitalAudioDriver](https://discmaster.textfiles.com/search?format=ailDigitalAudioDriver) | Audio Interface Library 3 Digital audio driver | .dig | 
 [other/ailMidiDriver](https://discmaster.textfiles.com/search?format=ailMidiDriver) | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 [other/audioOverview](https://discmaster.textfiles.com/search?format=audioOverview) | Audio Overview | .ovw | 
+[other/audioSimAnalogueInstrumentsBank](https://discmaster.textfiles.com/search?format=audioSimAnalogueInstrumentsBank) | AudioSim analogue instruments Bank | .bnk .old | 
 [other/aufschwungOstGraphics](https://discmaster.textfiles.com/search?format=aufschwungOstGraphics) | Aufschwung Ost graphics | .bpl | 
 [other/auraFateOfTheAgesGameData](https://discmaster.textfiles.com/search?format=auraFateOfTheAgesGameData) | Aura: Fate of the Ages game data |  | 
 [other/auroraEditorCompiledMacro](https://discmaster.textfiles.com/search?format=auroraEditorCompiledMacro) | Aurora Editor compiled macro | .x | 
@@ -2046,6 +2050,7 @@ Family/Format | Name | Extensions | Notes
 [other/finaleEnigmaBinaryFormat](https://discmaster.textfiles.com/search?format=finaleEnigmaBinaryFormat) | Finale Enigma Binary Format | .bin | 
 [other/finaleGuitar](https://discmaster.textfiles.com/search?format=finaleGuitar) | Finale Guitar | .mus .lib .ftm | 
 [other/finaleNotePad](https://discmaster.textfiles.com/search?format=finaleNotePad) | Finale NotePad | .mus | 
+[other/finalePerformanceAssessment](https://discmaster.textfiles.com/search?format=finalePerformanceAssessment) | Finale Performance Assessment | .fpa | 
 [other/finalePrintMusic](https://discmaster.textfiles.com/search?format=finalePrintMusic) | Finale PrintMusic | .ftm .mus | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?format=firstBasicHelp) | FirstBasic Help | .fbh | 
 [other/firstPaintPalette](https://discmaster.textfiles.com/search?format=firstPaintPalette) | FirstPaint Palette | .zpl | 
@@ -2058,6 +2063,7 @@ Family/Format | Name | Extensions | Notes
 [other/flightCommander2Campaign](https://discmaster.textfiles.com/search?format=flightCommander2Campaign) | Flight Commander 2 Campaign | .cam | 
 [other/flightSimToolkitTerrain](https://discmaster.textfiles.com/search?format=flightSimToolkitTerrain) | Flight Sim Toolkit Terrain Data | .ftd | 
 [other/floorPlan3DProject](https://discmaster.textfiles.com/search?format=floorPlan3DProject) | FloorPlan 3D project | .bmf | 
+[other/floorPlanPlus3DConfiguration](https://discmaster.textfiles.com/search?format=floorPlanPlus3DConfiguration) | FloorPlan Plus/3D Configuration | .cfg | 
 [other/flowCharting3ExportFilter](https://discmaster.textfiles.com/search?format=flowCharting3ExportFilter) | Flow Charting 3 Export Filter | .fef | 
 [other/flowCharting3Help](https://discmaster.textfiles.com/search?format=flowCharting3Help) | Flow Charting 3 Help | .fhp | 
 [other/flowCytometryStandardFormat](https://discmaster.textfiles.com/search?format=flowCytometryStandardFormat) | Flow Cytometry Standard format | .fcs | 
@@ -2844,6 +2850,7 @@ Family/Format | Name | Extensions | Notes
 [other/orionSamplerSample](https://discmaster.textfiles.com/search?format=orionSamplerSample) | Orion Sampler sample | .osp | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?format=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?format=os2DLL) | OS/2 Dynamic Link Library | .dll | 
+[other/os2Metafile](https://discmaster.textfiles.com/search?format=os2Metafile) | OS/2 Metafile | .met | 
 [other/os2PresentationManagerMetafile](https://discmaster.textfiles.com/search?format=os2PresentationManagerMetafile) | OS/2 Presentation Manager Metafile | .met | 
 [other/os2SyslevelInfo](https://discmaster.textfiles.com/search?format=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
 [other/os2WarpServerBackupRulebook](https://discmaster.textfiles.com/search?format=os2WarpServerBackupRulebook) | OS/2 Warp Server backup Rulebook | .psr | 

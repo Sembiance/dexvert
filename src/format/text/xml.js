@@ -49,7 +49,7 @@ const _XML_MAGIC = [
 	"Garmin Training Center Database XML", "Cal3D Xml Skeleton File", "Apple Quartz Filter", "Torque sprite asset (XML)", "ImmerVision XML user interface", "Amnesia: T.D.D. sound entity", "Instant3D document", "Microsoft Assistance Markup Language (UTF-8)",
 	"DialogBlocks Project", /^FinalBuilder (actions Package|code completion info|Project \(v4\)|Wizard)/, "Adobe Premiere Preset", "Automise Project (v3)", "OWL XML Ontology", /^Gentoo (category|package) metadata file/, "Newzbin Usenet Index",
 	"MiSTer Game Launcher", "XML Data Package", "SPSS Analysis Plan", "SPSS Sampling Plan", "DeleD scene", "Net2Plan Network design", "MAME software list", "Mathcad XML based worksheet", /^PowerDesigner (Conceptual )?(Model|WorkSpace)$/,
-	"SQL Server Data Tools Database info", "Visual Studio Intel Fortran Project", "VideoWave Movie Project", "Visual Studio Data Source", "Autodesk Inventor Project",
+	"SQL Server Data Tools Database info", "Visual Studio Intel Fortran Project", "VideoWave Movie Project", "Visual Studio Data Source", "Autodesk Inventor Project", "FxCop project", "EtherPeek/AiroPeek/OmniPeek capture file",
 	/^fmt\/(205|243|333|475|570|896|932|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1824|1825|1883|1962|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

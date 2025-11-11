@@ -9,7 +9,7 @@ export class riff extends Format
 		"Generic RIFF container", "RIFF Datei: unbekannter Typ", "application/x-riff", /^RIFF \((little|big)-endian\) data/, /^RIFF .*data$/, /^fmt\/1886( |$)/,
 
 		// specific
-		"CorelSHOW Background (v5)", "Sonic Foundry Impulse", "Corel DESIGNER graphics (generic RIFF)", "Corel DESIGNER graphics (v12)",
+		"CorelSHOW Background (v5)", "Sonic Foundry Impulse", "Corel DESIGNER graphics (generic RIFF)", /^Corel DESIGNER graphics \(v1[02]\)/, "Corel Symbol Library",
 		/^x-fmt\/33( |$)/
 	];
 	fallback   = true;

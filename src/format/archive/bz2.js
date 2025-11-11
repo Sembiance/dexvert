@@ -8,7 +8,8 @@ export class bz2 extends Format
 	packed     = true;
 	magic      = [
 		// generic
-		"bzip2 compressed data", "bzip2 compressed archive", "BZIP2 Compressed Archive", "bz2: bzip2", "BZ Archiv gefunden", "bzip2-compressed data", "Archive: BZip2", "application/x-bzip2", /^Bzip2$/, /^x-fmt\/268( |$)/,
+		"bzip2 compressed data", "bzip2 compressed archive", "BZIP2 Compressed Archive", "bz2: bzip2", "BZ Archiv gefunden", "bzip2-compressed data", "Archive: BZip2", "application/x-bzip2", "bar archive bzip2-compressed data", /^Bzip2$/,
+		/^x-fmt\/268( |$)/,
 
 		// app specific
 		"Gentoo binary package (XPAK)"

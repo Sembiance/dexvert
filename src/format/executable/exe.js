@@ -45,7 +45,7 @@ export class exe extends Format
 		/^Microsoft Pascal (v[\d.]+ )?16-bit executable/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable", "16bit DOS EXE BasicBasic", "Turbo Pascal for Windows 1.0 executable", "MinGW32 C/C++ Executable", "Generic CIL Executable",
 		"DOS Metaware Professional Pascal Executable", "Win32 Cygwin executable", "WIN32 Executable PowerBASIC", "DOS Pacific C Compiler executable", "Win32 EXE TMT Pascal (generic)", "Format: AutoIt", "Format: Compiled AutoHotKey",
 		"AutoIt3 compiled script executable", "TCC Win32 executable", "Win32 EXE Euphoria (Watcom compiled)", "Win32 IBasic executable", "DIZ2EXE Win32 executable", "16bit COM 22NICE loader", "FreeBASIC Win32 executable (generic)",
-		"TMT Pascal Compiler 3.90 DOS executable", "16bit DOS Central Point Anti-Virus immunized Executable", "16bit DOS EXE EPW password protected",
+		"TMT Pascal Compiler 3.90 DOS executable", "16bit DOS Central Point Anti-Virus immunized Executable", "16bit DOS EXE EPW password protected", "PolyEnE compressed/encrypted Win32 Executable",
 
 		..._INSTALLER_MAGICS
 	];

@@ -2147,6 +2147,7 @@ export const WEAK_VALUES =
 	/^Manga Studio data \(generic\)$/,
 	/^MapInfo Sea Chart$/,
 	/^MapLinx Data File \(generic\)$/,
+	/^Mapping Specification Language \(ASCII\)$/,
 	/^MapTrip data \(generic\)$/,
 	/^MapVue profilometry data \(phase\)$/,
 	/^Mariner Write Document$/,

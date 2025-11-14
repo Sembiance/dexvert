@@ -1,4 +1,4 @@
-# Supported File Formats (3,368)
+# Supported File Formats (3,372)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -947,7 +947,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (730)
+## Image (731)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1655,6 +1655,7 @@ image | [Yanagisawa PIC](http://fileformats.archiveteam.org/wiki/PIC_(Yanagisawa
 image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [wuimg](https://codeberg.org/kaleido/wuimg) | [12 sample files](https://sembiance.com/fileFormatSamples/image/yanagisawaPIC2/) - There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c
 image | [Young Picasso](http://fileformats.archiveteam.org/wiki/Young_Picasso) | .yp | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/youngPicasso/)
 image | Z's Staff Kid98 | .zim | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/zim/)
+image | Z80 Screen dump ZXHOB | .$c | [nconvert](https://www.xnview.com/en/nconvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/z80ScreenDumpZXHOB/)
 image | [Zoner Bitmap](http://fileformats.archiveteam.org/wiki/BMI_(Zoner)) | .bmi | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/zonerBitmap/)
 image | Zoner Callisto Metafile Preview | .zmf | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/zonerCallistoMetafilePreview/)
 image | [Zoner Zebra](http://fileformats.archiveteam.org/wiki/ZBR_(Zoner_Zebra)) | .zbr | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/zbr/) - reaConverter is the only program I know of that can convert to SVG but it fails to do so with QEMU WinXP 32bit (used to work in wine). So for now, we just convert to PNG.
@@ -1957,7 +1958,7 @@ music | [Velvet Studio Module](http://fileformats.archiveteam.org/wiki/Velvet_St
 music | Video Game Music | .vgm | [zxtune123](https://zxtune.bitbucket.io/) | [15 sample files](https://sembiance.com/fileFormatSamples/music/videoGameMusic/)
 music | Voodoo Supreme Synthesizer Module | .vss | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://sembiance.com/fileFormatSamples/music/voodooSupremeSynthesizer/)
 music | Vortex Tracker | .vtx | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [14 sample files](https://sembiance.com/fileFormatSamples/music/vortexTracker/)
-music | Vortex Tracker 2 | .vt2 .pt3 | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [7 sample files](https://sembiance.com/fileFormatSamples/music/vortexTracker2/)
+music | Vortex Tracker 2 | .vt2 .pt3 | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://bulba.untergrund.net/emulator_e.htm) | [8 sample files](https://sembiance.com/fileFormatSamples/music/vortexTracker2/)
 music | [Wacky Wheels KLM](https://vgmpf.com/Wiki/index.php?title=KLM) | .klm | [gamemus](https://github.com/Malvineous/libgamemusic) | [11 sample files](https://sembiance.com/fileFormatSamples/music/wackyWheelsKLM/)
 music | Wally Beben Module | .wb | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://sembiance.com/fileFormatSamples/music/wallyBeben/)
 music | Wanton Packer Module | .wn | [xmp](http://xmp.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/music/wantonPacker/)
@@ -2200,7 +2201,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,112)
+## Text (1,115)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2413,6 +2414,7 @@ text | Cube LUT format | .lut .cube |  | [4 sample files](https://sembiance.com/
 text | CUETools AccuRip log | .accurip |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cueToolsAccuRipLog/)
 text | CUPL format | .jed .im |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/cuplFormat/)
 text | CUPL PLD Program format | .pld |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cuplPLDProgramFormat/)
+text | CVS password text file |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cvsPasswordTextFile/)
 text | CWLS Log | .las |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/cwlsLog/)
 text | Dac-Easy Word Printer | .prt |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/dacEasyWordPrinter/)
 text | Dark Reign Scenario | .scn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/darkReignScenario/)
@@ -2840,12 +2842,13 @@ text | ODI link driver configuration | .cfg |  | [10 sample files](https://sembi
 text | Office Upgrade Control | .opc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/officeUpgradeControl/)
 text | OGRE Material | .material |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/ogreMaterial/)
 text | Oleo spreadsheet | .oleo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/oleoSpreadsheet/)
+text | OllyDbg Module Info | .udd |  | 
 text | Omnis Studio Library | .lbs |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/omnisStudioLibrary/)
 text | Open Financial Connectivity | .ofc |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/openFinancialConnectivity/)
 text | Open Financial Exchange | .ofx .qfx |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/openFinancialExchange/)
 text | OpenColorIO profile | .ocio |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/openColorIOProfile/)
 text | OpenMPT Key Binding | .mkb |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/openMPTKeyBinding/)
-text | OpenSceneGraph Text Format | .osg |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/openSceneGraphText/)
+text | OpenSceneGraph Text Format | .osg |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/openSceneGraphText/)
 text | OpenSSL PEM public key | .key .pem |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/openSSLPEMPublicKey/)
 text | Opera Hotlist/bookmark | .adr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/operaHotlist/)
 text | Operation Flashpoint mission | .sqm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/operationFlashpointMission/)
@@ -2965,7 +2968,7 @@ text | ProtoGen Application configuration | .pva |  | [6 sample files](https://s
 text | Proton language Schema | .sch |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/protonLanguageSchema/)
 text | Proxy Auto-Config | .pac |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/proxyAutoConfig/)
 text | PS/2 MicroChannel Adapter Description | .adf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/ps2MicroChannelAdapterDescription/)
-text | [Pure Data patch](http://fileformats.archiveteam.org/wiki/Pure_Data) | .pd |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/pureDataPatch/)
+text | [Pure Data patch](http://fileformats.archiveteam.org/wiki/Pure_Data) | .pd |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/pureDataPatch/)
 text | PV3D Effect | .eff |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/pv3DEffect/)
 text | PV3D scene description | .pvd |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/pV3DSceneDescription/)
 text | PV3D Value data | .val |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/pv3DValueData/)
@@ -3039,6 +3042,7 @@ text | sc Spreadsheet Calculator spreadsheet | .sc .ast |  | [10 sample files](h
 text | Scala Multimedia Script | .script |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/scalaMultimediaScript/)
 text | SCCS checksum | .chk |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/sccsChecksum/)
 text | Scooter circuit layout | .plt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/scooterCircuitLayout/)
+text | SDict Dictionary | .dct |  | 
 text | sendmail m4 | .m4 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sendmailM4/)
 text | Serial Vector Format | .svf |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/serialVectorFormat/)
 text | Session Description Protocol | .sdp .txt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/sessionDescriptionProtocol/)

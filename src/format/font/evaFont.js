@@ -5,7 +5,7 @@ export class evaFont extends Format
 	name           = "EVAfont";
 	ext            = [".com"];
 	forbidExtMatch = true;
-	magic          = ["deark: evafont"];
+	magic          = ["deark: evafont", "EVAfont driver"];
 	weakMagic      = true;
 	converters     = ["deark[module:evafont][renameOut] -> deark[module:psf]"];
 }

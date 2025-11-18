@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,889)
+# Unsupported File Formats (3,899)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -993,9 +993,10 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (175)
+## Music (176)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
+[music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
 [music/aceTracker](https://discmaster.textfiles.com/search?format=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
 [music/acidSong](https://discmaster.textfiles.com/search?format=acidSong) | ACID song | .acd | 
 [music/adLibVisualComposer2Music](https://discmaster.textfiles.com/search?format=adLibVisualComposer2Music) | AdLib Visual Composer 2 music | .rl2 | 
@@ -1174,7 +1175,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,617)
+## Other (2,626)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1449,6 +1450,7 @@ Family/Format | Name | Extensions | Notes
 [other/authorwarePackagedLibrary](https://discmaster.textfiles.com/search?format=authorwarePackagedLibrary) | Authorware Packaged library | .a4e .a5e .a6e | 
 [other/autoCADColorBasedPlotStyle](https://discmaster.textfiles.com/search?format=autoCADColorBasedPlotStyle) | AutoCAD Color-Based Plot Style | .ctb | 
 [other/autoCADCompiledMenu](https://discmaster.textfiles.com/search?format=autoCADCompiledMenu) | AutoCAD Compiled Menu | .mnx | 
+[other/autoCADDataExtractionTemplate](https://discmaster.textfiles.com/search?format=autoCADDataExtractionTemplate) | AutoCAD Data Extraction template | .dxe | 
 [other/autoCADDOSRealModeADIDriver](https://discmaster.textfiles.com/search?format=autoCADDOSRealModeADIDriver) | Autocad DOS Real Mode ADI Driver | .exp .ex% | 
 [other/autoCADFastLoadAutoLISP](https://discmaster.textfiles.com/search?format=autoCADFastLoadAutoLISP) | AutoCAD Fast-load AutoLISP | .fas | 
 [other/autoCADLock](https://discmaster.textfiles.com/search?format=autoCADLock) | AutoCAD Lock | .dwk .mxk | 
@@ -1883,6 +1885,7 @@ Family/Format | Name | Extensions | Notes
 [other/directoryOpusEnvironment](https://discmaster.textfiles.com/search?format=directoryOpusEnvironment) | Directory Opus environment |  | 
 [other/directoryOpusSettings](https://discmaster.textfiles.com/search?format=directoryOpusSettings) | Directory Opus Settings |  | 
 [other/directoryOpusType](https://discmaster.textfiles.com/search?format=directoryOpusType) | Directory Opus type |  | 
+[other/directWavePreset](https://discmaster.textfiles.com/search?format=directWavePreset) | DirectWave Preset | .dwp | 
 [other/directWaveProgram](https://discmaster.textfiles.com/search?format=directWaveProgram) | DirectWave Program | .dwp | 
 [other/directXCompiledShaderObject](https://discmaster.textfiles.com/search?format=directXCompiledShaderObject) | DirectX Compiled Shader Object | .cso | 
 [other/directXPreCompiledPixelVertexShader](https://discmaster.textfiles.com/search?format=directXPreCompiledPixelVertexShader) | DirectX pre-compiled pixel/vertex shader | .fxo | 
@@ -2330,6 +2333,7 @@ Family/Format | Name | Extensions | Notes
 [other/isigMotorMASType1GameDataArchive](https://discmaster.textfiles.com/search?format=isigMotorMASType1GameDataArchive) | ISI gMotor MAS type 1 game data archive | .mas .mas_2 .mas_1 .mas_3 | 
 [other/isisSchematicFile](https://discmaster.textfiles.com/search?format=isisSchematicFile) | ISIS Schematic file | .ds | 
 [other/ispellHashFile](https://discmaster.textfiles.com/search?format=ispellHashFile) | ispell hash file | .dic | 
+[other/iTunesDB](https://discmaster.textfiles.com/search?format=iTunesDB) | iTunesDB |  | 
 [other/ivsFledermausTDRFile](https://discmaster.textfiles.com/search?format=ivsFledermausTDRFile) | IVS Fledermaus TDR file |  | 
 [other/javaAppletCacheIndex](https://discmaster.textfiles.com/search?format=javaAppletCacheIndex) | Java Applet cache index | .idx | 
 [other/javaRuntimeCurrencyData](https://discmaster.textfiles.com/search?format=javaRuntimeCurrencyData) | Java runtime Currency Data | .data | 
@@ -2763,6 +2767,7 @@ Family/Format | Name | Extensions | Notes
 [other/networkAssociatesVirusScanData](https://discmaster.textfiles.com/search?format=networkAssociatesVirusScanData) | Network Associates VirusScan data | .dat | 
 [other/networkInstrumentsObserverCaptureFile](https://discmaster.textfiles.com/search?format=networkInstrumentsObserverCaptureFile) | Network Instruments Observer capture file | .lst .bfr .ls | 
 [other/newsFontFamily](https://discmaster.textfiles.com/search?format=newsFontFamily) | NeWS font family | .ff | 
+[other/newTekDigiPaintData](https://discmaster.textfiles.com/search?format=newTekDigiPaintData) | NewTek DigiPaint data | .ntpd | 
 [other/newtonToolkitLayoutSettings](https://discmaster.textfiles.com/search?format=newtonToolkitLayoutSettings) | Newton Toolkit Layout settings | .lyt | 
 [other/newtonToolkitProject](https://discmaster.textfiles.com/search?format=newtonToolkitProject) | Newton Toolkit Project | .ntk | 
 [other/nexonGameArchive](https://discmaster.textfiles.com/search?format=nexonGameArchive) | Nexon game archive | .nar | 
@@ -3205,6 +3210,7 @@ Family/Format | Name | Extensions | Notes
 [other/shapeshifterTheme](https://discmaster.textfiles.com/search?format=shapeshifterTheme) | Shapeshifter theme | .guikit | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?format=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 
 [other/showKitTemplate](https://discmaster.textfiles.com/search?format=showKitTemplate) | Show.kit template | .sks | 
+[other/showBiZProject](https://discmaster.textfiles.com/search?format=showBiZProject) | ShowBiZ project | .sbz | 
 [other/sibeliusScorch](https://discmaster.textfiles.com/search?format=sibeliusScorch) | Sibelius Scorch | .sco | 
 [other/civilizationFile](https://discmaster.textfiles.com/search?format=civilizationFile) | Sid Meier's Civilization File | .pal .pic | 
 [other/siegfriedAntiviruData](https://discmaster.textfiles.com/search?format=siegfriedAntiviruData) | Siegfried Antivirus Professional virus data | .brainfile | 
@@ -3329,6 +3335,7 @@ Family/Format | Name | Extensions | Notes
 [other/statisticalAnalysisSystemData](https://discmaster.textfiles.com/search?format=statisticalAnalysisSystemData) | Statistical Analysis System Data | .sas7bdat .sd7 | 
 [other/steamRegistry](https://discmaster.textfiles.com/search?format=steamRegistry) | Steam Registry | .blob | 
 [other/steelPanthersShapesData](https://discmaster.textfiles.com/search?format=steelPanthersShapesData) | Steel Panthers Shapes data | .shp | 
+[other/steinbergPlugIn](https://discmaster.textfiles.com/search?format=steinbergPlugIn) | Steinberg Plug-in | .fxp | 
 [other/steinbergResourceFile](https://discmaster.textfiles.com/search?format=steinbergResourceFile) | Steinberg Resource File | .srf | 
 [other/steinbergStudioModuleDriver](https://discmaster.textfiles.com/search?format=steinbergStudioModuleDriver) | Steinberg Studio Module Driver | .d | 
 [other/steinbergVSTSoundLibrary](https://discmaster.textfiles.com/search?format=steinbergVSTSoundLibrary) | Steinberg VST Sound library | .vstsound | 
@@ -3341,6 +3348,7 @@ Family/Format | Name | Extensions | Notes
 [other/strongNameKey](https://discmaster.textfiles.com/search?format=strongNameKey) | Strong Name Key | .snk | 
 [other/stuntIslandTake](https://discmaster.textfiles.com/search?format=stuntIslandTake) | Stunt Island Take | .tke | 
 [other/stupenDOSExternalSettings](https://discmaster.textfiles.com/search?format=stupenDOSExternalSettings) | StupenDOS external Settings | .set | 
+[other/stylusDictionary](https://discmaster.textfiles.com/search?format=stylusDictionary) | Stylus Dictionary | .#sd | 
 [other/su27FlankerMission](https://discmaster.textfiles.com/search?format=su27FlankerMission) | Su-27 Flanker Mission | .mis | 
 [other/subZeroGameFileMap](https://discmaster.textfiles.com/search?format=subZeroGameFileMap) | SubZero Game File map | .gmf | 
 [other/suncomF15EEagleKeysConfig](https://discmaster.textfiles.com/search?format=suncomF15EEagleKeysConfig) | Suncom F-15E Eagle Keys config | .key | 
@@ -3631,6 +3639,7 @@ Family/Format | Name | Extensions | Notes
 [other/vp3SewingMachineFile](https://discmaster.textfiles.com/search?format=vp3SewingMachineFile) | VP3 sewing machine file | .vp3 | 
 [other/vSamplerSoundBank](https://discmaster.textfiles.com/search?format=vSamplerSoundBank) | VSampler Sound Bank | .vsb | 
 [other/vsoLanguageData](https://discmaster.textfiles.com/search?format=vsoLanguageData) | VSO language data | .spk | 
+[other/vstPreset](https://discmaster.textfiles.com/search?format=vstPreset) | VST Preset | .vstpreset | 
 [other/vueDEspritFunctionDefinition](https://discmaster.textfiles.com/search?format=vueDEspritFunctionDefinition) | Vue D'Esprit function definition | .fnc .mat .vob | 
 [other/vuimageVideoDriver](https://discmaster.textfiles.com/search?format=vuimageVideoDriver) | VUIMAGE Video Driver | .vdr | 
 [other/virtualVolumeViewDatabase](https://discmaster.textfiles.com/search?format=virtualVolumeViewDatabase) | [VVV Virtual Volume View database](http://vvvapp.sourceforge.net/) | .vvv | 
@@ -3734,6 +3743,7 @@ Family/Format | Name | Extensions | Notes
 [other/worldConstructionSetObject](https://discmaster.textfiles.com/search?format=worldConstructionSetObject) | World Construction Set Object | .obj | 
 [other/worldConstructionSetParameters](https://discmaster.textfiles.com/search?format=worldConstructionSetParameters) | World Construction Set Parameters | .par | 
 [other/worldMachineDocument](https://discmaster.textfiles.com/search?format=worldMachineDocument) | WorldMachine document | .tmd | 
+[other/wpSpellDictionary](https://discmaster.textfiles.com/search?format=wpSpellDictionary) | WPSpell Dictionary |  | 
 [other/wreckinCrewLevelMap](https://discmaster.textfiles.com/search?format=wreckinCrewLevelMap) | Wreckin Crew level Map | .map | 
 [other/wsusPatchStorageFile](https://discmaster.textfiles.com/search?format=wsusPatchStorageFile) | WSUS Patch Storage File | .psf .p | 
 [other/wtComparisonTestData](https://discmaster.textfiles.com/search?format=wtComparisonTestData) | WT Comparison Test Data | .dat | 

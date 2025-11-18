@@ -775,6 +775,7 @@ export default
 		netrunASCIIEncodedCOMEXE                   : {name : "NETRUN ASCII-encoded COM/EXE", ext : [".ntr"], magic : ["NETRUN ASCII-encoded COM/EXE"]},
 		netscapeCookies                            : {name : "Netscape cookies", ext : [".txt", ".lst"], magic : ["Netscape cookies", /^Netscape cookie/], idMeta : ({macFileType, macFileCreator}) => macFileType==="COOK" && macFileCreator==="MOSS"},
 		nexusFormat                                : {name : "NEXUS format", ext : [".nex", ".nxs"], magic : ["NEXUS format"]},
+		nistITLStRDFormat                          : {name : "NIST/ITL StRD format", ext : [".dat"], magic : ["NIST/ITL StRD format"], weakMagic : true},
 		nmeaGPSLogData                             : {name : "NMEA GPS log data", ext : [".nme", ".n20", ".nmea", ".nma"], magic : ["NMEA GPS log data"], weakMagic : true},
 		noesisScene                                : {name : "Noesis Scene", ext : [".noesis"], magic : ["Noesis Scene"], weakMagic : true},
 		notaBenePrinterDefinition                  : {name : "Nota Bene Printer definition", ext : [".prn"], magic : ["Nota Bene Printer definition"], weakMagic : true},

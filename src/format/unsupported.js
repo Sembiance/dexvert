@@ -3,7 +3,7 @@ import {TEXT_MAGIC} from "../Detection.js";
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
 // NOTE: Not ALL unsupported formats are listed here. Some are marked as 'unsupported = true' in the various format/family/subfiles.js
 // NOTE: Due to these not having a second verification step of trying to be converted, the weakMagic flag is used liberally below to avoid false positive matches
-//       THUS, if you ever add support for any formats below below, strongly consider removing the 'weakMagic' flag if you can properly verify it as a valid image/document/audio/poly/etc
+//       THUS, if you ever add support for any formats below, STRONGLY consider removing the 'weakMagic' flag if you can properly verify it as a valid image/document/audio/poly/etc
 // NOTE: If looking for sample files on discmaster for unsupported formats, use the 'detections' field and search for not just the dexvert format, but also the magic it matches on, since discmaster didn't always re-process items to pick up new stuff
 export default
 {
@@ -507,7 +507,7 @@ export default
 		caslwinExecutable                    : {name : "CASLwin executable", ext : [".csp"], magic : ["CASLwin executable"], weakMagic : true},
 		dalvikExecutable                     : {name : "Dalvik Executable", ext : [".odex"], magic : ["Optimized Dalvik Executable", /^fmt\/695( |$)/], weakMagic : true},
 		digiPAKAudioDriver                   : {name : "DIGIPAK audio driver", ext : [".com"], magic : ["DIGIPAK audio driver"]},
-		elf                                  : {name : "ELF Executable/Library", magic : ["ELF Executable and Linkable format", /^ELF,? \d\d-bit (N32 )?[LM]SB (pie )?(MIPS[IV\d-]*? )?(\*unknown arch[^*]+\*)?(\s?version \d+)(executable|processor-specific|relocatable|shared object|0x[\da-f*]+|\s?\([^)]+\)|$)/, "Executable and Linkable Format", /^Unix\/Linux \d+-Bit/, "BeOS executable (Intel)", /^MATLAB .*bit compiled function/, /^fmt\/(688|689|690)( |$)/]},
+		elf                                  : {name : "ELF Executable/Library", magic : ["ELF Executable and Linkable format", /^ELF,? \d\d-bit (N32 )?[LM]SB (pie )?(MIPS[IV\d-]*? )?(\*unknown arch[^*]+\*)?(\s?version \d+)?(executable|processor-specific|relocatable|shared object|0x[\da-f*]+|\s?\([^)]+\)|$)/, "Executable and Linkable Format", /^Unix\/Linux \d+-Bit/, "BeOS executable (Intel)", /^MATLAB .*bit compiled function/, /^fmt\/(688|689|690)( |$)/]},
 		geoWorksGEOSApplication              : {name : "GeoWorks GEOS application", ext : [".geo"], magic : ["GeoWorks GEOS application", "GeoWorks GEOS executable", "GeoWorks GEOS utility", /^GEOS executable,/]},
 		linux8086Exe                         : {name : "Linux 8086 Executable", magic : [/^Linux.*8086.*executable/]},
 		linux386Exe                          : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},
@@ -817,6 +817,7 @@ export default
 	music :
 	{
 		acidSong                        : {name : "ACID song", ext : [".acd"], magic : ["ACID song"]},
+		adamMusicComposerScript         : {name : "A'dam Music Composer Script", ext : [".scr"], magic : ["A'dam Music Composer Script"]},
 		adLibVisualComposer2Music       : {name : "AdLib Visual Composer 2 music", ext : [".rl2"], magic : ["AdLib Visual Composer 2 music"]},
 		aDrumDrumkit                    : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
 		aDrumTrack                      : {name : "ADrum Track", magic : ["ADrum track"]},
@@ -2178,6 +2179,7 @@ export default
 		autoCADCompiledMenu                      : {name : "AutoCAD Compiled Menu", ext : [".mnx"], magic : ["AutoCAD compiled Menu"]},
 		autoCADAutoShadeFilmRoll                 : {name : "AutoCAD/AutoShade Film roll", ext : [".flm"], magic : ["AutoCAD/AutoShade Film roll"]},
 		autoCADColorBasedPlotStyle               : {name : "AutoCAD Color-Based Plot Style", ext : [".ctb"], magic : ["AutoCAD Color-Based Plot Style", /^x-fmt\/37( |$)/], weakMagic : true},
+		autoCADDataExtractionTemplate            : {name : "AutoCAD Data Extraction template", ext : [".dxe"], magic : ["AutoCAD Data Extraction template", /^x-fmt\/24( |$)/]},
 		autoCADLock                              : {name : "AutoCAD Lock", ext : [".dwk", ".mxk"], magic : ["AutoCAD Lock"]},
 		autoCADPlotStyleTable                    : {name : "AutoCAD Plot Style Table", ext : [".stb"], magic : ["AutoCAD Plot Style Table", /^x-fmt\/107( |$)/], weakMagic : true},
 		autoCADPlotterConfiguration              : {name : "AutoCAD Plotter Configuration", ext : [".pcp", ".pc3"], magic : ["AutoCAD Plotter Configuration", /^x-fmt\/78( |$)/], weakMagic : true},
@@ -2478,6 +2480,7 @@ export default
 		drHaloPrinterDefinition                  : {name : "Dr. Halo Printer definition", ext : [".prn"], magic : ["Dr. Halo Printer definition"]},
 		drHardwareSysInfo                        : {name : "Dr. Hardware Sysinfo", ext : [".dat"], magic : ["Dr. Hardware Sysinfo data"]},
 		direct3DShader                           : {name : "Direct3D Shader", ext : [".vso", ".pso"], magic : ["Direct3DX9 Shader"]},
+		directWavePreset                         : {name : "DirectWave Preset", ext : [".dwp"], magic : ["DirectWave Preset"], weakMagic : true},
 		driDisplayManagerDisplay                 : {name : "DRI Display Manager Display", ext : [".dis"], magic : ["DRI Display Manager Display"]},
 		driverCleanerProCustomizationFilter      : {name : "Driver Cleaner Pro Customization Filter", ext : [".dcf"], magic : ["Driver Cleaner Pro Customization Filter"]},
 		drDOSCodePage                            : {name : "DR-DOS code page", ext : [".cpi"], magic : ["DR-DOS code page", "DR-DOS International Code Page"]},
@@ -2732,6 +2735,7 @@ export default
 		isamTableHandlerData                     : {name : "ISAM table handler data", ext : [".ism"], magic : ["ISAM table handler data"], weakMagic : true},
 		isisSchematicFile                        : {name : "ISIS Schematic file", ext : [".ds"], magic : ["ISIS Schematic file"]},
 		ispellHashFile                           : {name : "ispell hash file", ext : [".dic"], magic : [/ispell .*hash file/], weakMagic : true},
+		iTunesDB                                 : {name : "iTunesDB", magic : ["Apple iTunesDB"]},
 		ivsFledermausTDRFile                     : {name : "IVS Fledermaus TDR file", magic : ["IVS Fledermaus TDR file"]},
 		javaAppletCacheIndex                     : {name : "Java Applet cache index", ext : [".idx"], magic : ["Java Applet cache index"], weakMagic : true},
 		javelinConfiguration                     : {name : "Javelin Configuration", ext : [".cfg"], magic : ["Javelin Configuration"], weakMagic : true},
@@ -3011,6 +3015,7 @@ export default
 		networkAssociatesVirusScanData           : {name : "Network Associates VirusScan data", ext : [".dat"], magic : ["Network Associates VirusScan data (generic)"]},
 		networkInstrumentsObserverCaptureFile    : {name : "Network Instruments Observer capture file", ext : [".lst", ".bfr", ".ls"], magic : ["Network Instruments Observer capture file"]},
 		newsFontFamily                           : {name : "NeWS font family", ext : [".ff"], magic : ["NeWS font family"], weakMagic : true},
+		newTekDigiPaintData                      : {name : "NewTek DigiPaint data", ext : [".ntpd"], magic : ["NewTek DigiPaint data"], weakMagic : true},
 		neXTStepWMWindowAttribute                : {name : "NeXTStep Workspace Manager window attributes", ext : [".wmd"], magic : ["NeXTStep Workspace Manager window attributes (binary)"]},
 		nexusDBDatabase                          : {name : "NexusDB database", ext : [".nx1"], magic : ["NexusDB database"], weakMagic : true},
 		nid32AntivirusUpdateFile                 : {name : "NOD32 Antivirus Update file", ext : [".nup"], magic : ["NOD32 Antivirus Update file"]},
@@ -3300,6 +3305,7 @@ export default
 		semSnapshot                              : {name : "SEM Snapshot", ext : [".sem"], magic : ["SEM Snapshot"], weakMagic : true},
 		sentrySpellingEngineLexicon              : {name : "Sentry Spelling-Checker Engine Lexicon", ext : [".clx"], magic : ["Sentry Spelling-Checker Engine Lexicon", /^W.*rterbuch Datei \(Wintertree Software\)$/]},
 		shapeshifterTheme                        : {name : "Shapeshifter theme", ext : [".guikit"], magic : ["Shapeshifter theme"], weakMagic : true},
+		showBiZProject                           : {name : "ShowBiZ project", ext : [".sbz"], magic : ["ShowBiZ project"]},
 		showKitTemplate                          : {name : "Show.kit template", ext : [".sks"], magic : ["Show.kit template"], weakMagic : true},
 		showPartnerMasteredShow                  : {name : "Show Partner Mastered Show", ext : [".pro"], magic : ["Show Partner mastered show"]},
 		sibeliusScorch                           : {name : "Sibelius Scorch", ext : [".sco"], magic : ["Sibelius Scorch", /^fmt\/1994( |$)/], weakMagic : true},
@@ -3380,12 +3386,14 @@ export default
 		starWriterFormula                        : {name : "StarWriter Formula", ext : [".frm"], magic : ["StarWriter for MS-DOS Formula"]},
 		stCADSymbol                              : {name : "ST-CAD Symbol", ext : [".sym"], magic : ["ST-CAD Symbol"]},
 		steamRegistry                            : {name : "Steam Registry", ext : [".blob"], magic : ["Steam Registry"], weakMagic : true},
+		steinbergPlugIn                          : {name : "Steinberg Plug-in", ext : [".fxp"], magic : ["Steinberg Plug-in"]},
 		steinbergResourceFile                    : {name : "Steinberg Resource File", ext : [".srf"], magic : ["Steinberg Resource File"], weakMagic : true},
 		steinbergVSTSoundLibrary                 : {name : "Steinberg VST Sound library", ext : [".vstsound"], magic : ["Steinberg VST Sound library"], weakMagic : true},
 		stormWizardResource                      : {name : "StormWizard Resource", ext : [".wizard", ".wizard-all"], magic : ["IFF data, WZRD StormWIZARD resource", "StormWIZARD resource"]},
 		stosVarData                              : {name : "STOS Var data", ext : [".var"], magic : ["STOS Var data"]},
 		strongNameKey                            : {name : "Strong Name Key", ext : [".snk"], magic : ["Strong Name Key"]},
 		stupenDOSExternalSettings                : {name : "StupenDOS external Settings", ext : [".set"], magic : ["StupenDOS external Settings"], weakMagic : true},
+		stylusDictionary                         : {name : "Stylus Dictionary", ext : [".#sd"], magic : ["Stylus Dictionary"], weakMagic : true},
 		sunVoxSynthesizer                        : {name : "SunVox Synthesizer", ext : [".sunsynth"], magic : ["SunVox Synthesizer"]},
 		superAngeloConfiguration                 : {name : "Super Angelo Configuration", ext : [".cfg"], magic : ["Super Angelo Configuration"]},
 		superbaseForm                            : {name : "Superbase Form", ext : [".sbv"], magic : ["Superbase form"]},
@@ -3552,6 +3560,7 @@ export default
 		voyetraSysExPresetCommand                : {name : "Voyetra SysEx preset command", ext : [".syx"], magic : ["Voyetra SysEx preset command"], weakMagic : true},
 		vp3SewingMachineFile                     : {name : "VP3 sewing machine file", ext : [".vp3"], magic : ["VP3 sewing machine file", /^fmt\/2002( |$)/], weakMagic : true},
 		vRayMaterial                             : {name : "V-Ray Material", ext : [".mat", ".vismat"], magic : ["V-Ray Material"], weakMagic : true},
+		vstPreset                                : {name : "VST Preset", ext : [".vstpreset"], magic : ["VST Preset"], weakMagic : true},
 		vocalEyesHelp                            : {name : "Vocal-Eyes Help", ext : [".hlp"], magic : ["Vocal-Eyes Help"]},
 		vocalEyesSet                             : {name : "Vocal-Eyes Set", ext : [".set"], magic : ["Vocal-Eyes Set"]},
 		vocalTecMediaFile                        : {name : "VocalTec Media File", ext : [".vmf"], magic : ["VocalTec Media File"], weakMagic : true},
@@ -3633,6 +3642,7 @@ export default
 		wordWriter128PrintParametersOptions      : {name : "Word Writer 128 print Parameters/options", ext : [".par"], magic : ["Word Writer 128 print Parameters/options"], weakMagic : true},
 		workingModel2DData                       : {name : "Working Model 2D data", ext : [".wm", ".wm2d"], magic : ["Working Model 2D data"], weakMagic : true},
 		worldMachineDocument                     : {name : "WorldMachine document", ext : [".tmd"], magic : ["WorldMachine document"], weakMagic : true},
+		wpSpellDictionary                        : {name : "WPSpell Dictionary", magic : ["WPSpell Dictionary"]},
 		wsusPatchStorageFile                     : {name : "WSUS Patch Storage File", ext : [".psf", ".p"], magic : ["WSUS Patch Storage File"], weakMagic : true},
 		wtComparisonTestData                     : {name : "WT Comparison Test Data", ext : [".dat"], magic : ["WT Comparison Test language", "WT Comparison Test data"], weakMagic : true},
 		yafaCompressionOptions                   : {name : "YAFA Compression Options", magic : ["YAFA compression options"]},

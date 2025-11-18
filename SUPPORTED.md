@@ -1,4 +1,4 @@
-# Supported File Formats (3,372)
+# Supported File Formats (3,373)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -915,7 +915,7 @@ font | EA SFN Font | .sfn | [wuimg](https://codeberg.org/kaleido/wuimg) | [4 sam
 font | [Elecbyte M.U.G.E.N. font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/font/elecbyteMUGENFont/)
 font | Electronic Arts Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [16 sample files](https://sembiance.com/fileFormatSamples/font/electronicArtsFont/)
 font | [Embedded OpenType](http://fileformats.archiveteam.org/wiki/Embedded_OpenType) | .eot .fntdata | [eot2ttf](https://github.com/umanwizard/libeot) | [11 sample files](https://sembiance.com/fileFormatSamples/font/eot/)
-font | EVAfont | .com | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/evaFont/)
+font | EVAfont | .com | [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/font/evaFont/)
 font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/font/figlet/)
 font | [Font Mania Font](http://fileformats.archiveteam.org/wiki/Font_Mania_(REXXCOM)) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/font/fontMania/)
 font | [FONTEDIT Font](http://justsolve.archiveteam.org/wiki/FONTEDIT_font) | .com | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/font/fonteditFont/)
@@ -2201,7 +2201,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,115)
+## Text (1,116)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2828,6 +2828,7 @@ text | NeoPaint Help | .hlp |  | [1 sample file](https://sembiance.com/fileForma
 text | NETRUN ASCII-encoded COM/EXE | .ntr |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/netrunASCIIEncodedCOMEXE/)
 text | Netscape cookies | .txt .lst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/netscapeCookies/)
 text | NEXUS format | .nex .nxs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
+text | NIST/ITL StRD format | .dat |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/nistITLStRDFormat/)
 text | NMAKE | .msc .mak |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
 text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
 text | Noesis Scene | .noesis |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/noesisScene/)
@@ -2944,7 +2945,7 @@ text | Poser character rigging | .cr2 |  | [11 sample files](https://sembiance.c
 text | Poser Material | .mt5 |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/poserMaterial/)
 text | Poser scene | .pz3 |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/poserScene/)
 text | Post-It Software Note Template |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/postItSoftwareNoteTemplate/)
-text | PostgreSQL database dump | .sql |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
+text | PostgreSQL database dump | .sql |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/postgreSQLDatabaseDump/)
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ppd/)
 text | Poswiz! Report | .rpt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/poswizReport/)
 text | Power Translator document | .mtp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/powerTranslatorDocument/)
@@ -3138,7 +3139,7 @@ text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  | 
 text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [101 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
-text | The Battle for Wesnoth Configuration game data | .cfg |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/battleForWesnothConfigData/)
+text | The Battle for Wesnoth Configuration game data | .cfg |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/battleForWesnothConfigData/)
 text | The Need for Speed car Performance Specs | .pbs |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedCarPerformanceSpecs/)
 text | The Need For Speed windshield shape | .fmm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/theNeedForSpeedWindshieldShape/)
 text | The Software Toolworks' Hyperbase Data | .dat |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/softwareToolworksHyperbaseData/)

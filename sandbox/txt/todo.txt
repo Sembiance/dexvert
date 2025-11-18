@@ -177,6 +177,12 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* This ISO seems to crash dexrecurse reliably after about 24 hours: https://archive.org/details/dvdrom-xakep-2005-06
+  That's even AFTER excluding paths:
+		files/magazine/Vzlom/Оружие нового поколения/
+		files/updates/win/
+  I could do each subdir individually until I determine what is causing the crash. It can then be re-added to discmaster
+
 * Add support for QWK format: https://discmaster.textfiles.com/search?detection=Produced+by+Qmail&dedup=dedup
 
 * Improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page

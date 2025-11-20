@@ -126,6 +126,10 @@
 /---------------\
 | High Priority |
 \---------------/
+* Look for fully transparent images from certain formats. I can detect this with:
+	magick input.png -alpha extract -format "alpha min=%[fx:minima], max=%[fx:maxima]\n" info:
+  If min and max are the same it's either fully transparent (0) or fully opaque (1). In either case convert[removeAlpha] fixes it
+
 * Between thet 'os' stats and the 'AgentPool' status, I should be able to build a nice little website tool that can show 'live' stats about what's going on and cumulative stats about what's taken long, what's been run too many times, etc Not sure if this should be done 'through' dexdaemon or if it should be like an ssh reverse proxy thing or dunno. Would need to think about it some more. Maybe not a high priority at all
 
 * Replacing 86box with qemu could help a lot at improving speeds by freeing up CPU usage. BUT would likely require re-setting up every program on both win2k and winxp, which is likely 2 full days of work, at least.

@@ -1,4 +1,4 @@
-# Supported File Formats (3,373)
+# Supported File Formats (3,374)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -25,7 +25,7 @@ archive | [Alchemy Mindworks Image Gallery](http://fileformats.archiveteam.org/w
 archive | [Alcohol 120% MDF Image](http://fileformats.archiveteam.org/wiki/MDF_and_MDS) | .mdf | [uniso](https://github.com/Sembiance/dexvert/) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [dexvert](https://github.com/Sembiance/dexvert) [MDFtoISO](http://www.mdftoiso.com/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/mdf/)
 archive | Aldus LZW compressed data |  | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/aldusLZWCompressedData/)
 archive | Aldus Zip Compressed File |  | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/aldusZip/)
-archive | Alien vs Predator game data container | .ffl | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/alienVsPredatorGameDataContainer/)
+archive | Alien vs Predator game data container | .ffl | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/alienVsPredatorGameDataContainer/)
 archive | [Allegro Packfile](http://fileformats.archiveteam.org/wiki/Allegro_packfile) | .dat | [pack](https://liballeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/allegroPackfile/)
 archive | Allods 2 Rage Of Mages game archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/allods2RageOfMagesGameArchive/)
 archive | American Conquest 2 game archvie | .gs1 .gsc | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/americanConquest2GameArchvie/)
@@ -1031,7 +1031,7 @@ image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [20 sample files](https://sembiance.com/fileFormatSamples/image/avatar/)
 image | [Award BIOS Logo](http://fileformats.archiveteam.org/wiki/Award_BIOS_logo) | .epa | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/epa/)
 image | Axialis Professional Screensaver Producer project | .ssp | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/axialisProScreensaverProducerProject/)
-image | B3D Image | .b3d | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/b3dImage/)
+image | B3D Image | .b3d | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/b3dImage/)
 image | Base64 Encoded Image |  | [base64](https://www.gnu.org/software/coreutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/base64EncodedImage/)
 image | [BBC Micro Image](http://fileformats.archiveteam.org/wiki/BBC_Micro_mode_image) | .bb0 .bb1 .bb2 .bb4 .bb5 | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/bbcMicro/)
 image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/ldpic/)
@@ -1141,7 +1141,7 @@ image | Eclipse Proxy | .pxy | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 
 image | Eclipse TILE bitmap | .tile | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/eclipseTILE/)
 image | [EggPaint / True Colour Picture](http://fileformats.archiveteam.org/wiki/EggPaint) | .trp | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [31 sample files](https://sembiance.com/fileFormatSamples/image/eggPaint/)
 image | Elecbyte M.U.G.E.N. sprites | .sff | [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/elecbyteMUGENSprites/)
-image | Electric Image |  | [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/electricImage/)
+image | Electric Image |  | [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/electricImage/)
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKPIC/)
 image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKS/)
 image | eLeMeNt ZX | .hgl .hgh .skl .xkl .hrx | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/elementZX/)
@@ -2201,7 +2201,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,116)
+## Text (1,117)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -3161,10 +3161,11 @@ text | Track Row Column markers data format | .trc |  | [4 sample files](https:/
 text | Tracon Sector info | .sec |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
 text | Tracon Simulation data | .dem .sim |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSimulationData/)
 text | Train Simulator Activity | .act |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorActivity/)
-text | Train Simulator Cab View File | .cvf |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
-text | Train Simulator Consist | .con |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
-text | Train Simulator Path | .pat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorPath/)
-text | Train Simulator Service definition | .srv |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorServiceDefinition/)
+text | Train Simulator Cab View File | .cvf |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
+text | Train Simulator Consist | .con |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
+text | Train Simulator Environment | .env |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorEnvironment/)
+text | Train Simulator Path | .pat |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorPath/)
+text | Train Simulator Service definition | .srv |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorServiceDefinition/)
 text | Train Simulator Shape Definition | .s .eng .sd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorShapeDefinition/)
 text | Train Simulator Sound Management System | .sms |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorSoundManagementSystem/)
 text | Train Simulator Wagon | .eng .wag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)

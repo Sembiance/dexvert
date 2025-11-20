@@ -6,5 +6,5 @@ export class b3dImage extends Format
 	ext            = [".b3d"];
 	forbidExtMatch = true;
 	magic          = ["B3D :b3d:"];
-	converters     = ["nconvert[format:b3d]"];
+	converters     = ["nconvert[format:b3d] -> convert[removeAlpha]"];
 }

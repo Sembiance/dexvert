@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,899)
+# Unsupported File Formats (3,902)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -993,7 +993,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (176)
+## Music (177)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -1073,6 +1073,7 @@ Family/Format | Name | Extensions | Notes
 [music/mMusic](https://discmaster.textfiles.com/search?format=mMusic) | M music |  | 
 [music/magicScoreMaestroSong](https://discmaster.textfiles.com/search?format=magicScoreMaestroSong) | MagicScore Maestro Song | .sfd | 
 [music/magixMusicStudioSong](https://discmaster.textfiles.com/search?format=magixMusicStudioSong) | MAGIX music studio Song | .sng | 
+[music/makingWavesDigitalSoundStudioTrack](https://discmaster.textfiles.com/search?format=makingWavesDigitalSoundStudioTrack) | Making Waves Digital Sound Studio Track | .trk | 
 [music/masterTracker](https://discmaster.textfiles.com/search?format=masterTracker) | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://sembiance.com/fileFormatSamples/music/masterTracker/)
 [music/masterTracksPro](https://discmaster.textfiles.com/search?format=masterTracksPro) | Master Tracks Pro | .mts | [2 sample files](https://sembiance.com/fileFormatSamples/music/masterTracksPro/) - Attempts to run Master Trakcks Pro under win2k/winxp/win7 64bit, all failed. Program just doesn't launch.
 [music/maxTrax](https://discmaster.textfiles.com/search?format=maxTrax) | MaxTrax Module | .mxtx | [8 sample files](https://sembiance.com/fileFormatSamples/music/maxTrax/)
@@ -1175,7 +1176,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,626)
+## Other (2,628)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3251,6 +3252,7 @@ Family/Format | Name | Extensions | Notes
 [other/smartAddressAddressBook](https://discmaster.textfiles.com/search?format=smartAddressAddressBook) | Smart Address address book | .tpl .adr | 
 [other/smartAddressDiary](https://discmaster.textfiles.com/search?format=smartAddressDiary) | Smart Address Diary | .sdy | 
 [other/smartBootManagerBackupFile](https://discmaster.textfiles.com/search?format=smartBootManagerBackupFile) | Smart Boot Manager Backup File |  | 
+[other/smartCatDiskCatalog](https://discmaster.textfiles.com/search?format=smartCatDiskCatalog) | SmartCat disk Catalog | .cat | 
 [other/smartListToGoDatabase](https://discmaster.textfiles.com/search?format=smartListToGoDatabase) | SmartList To Go database | .pdb | 
 [other/snagItCapture](https://discmaster.textfiles.com/search?format=snagItCapture) | SnagIt capture | .snag | 
 [other/snarkBustersGameDataArchive](https://discmaster.textfiles.com/search?format=snarkBustersGameDataArchive) | Snark Busters game data archive | .pack | 
@@ -3557,6 +3559,7 @@ Family/Format | Name | Extensions | Notes
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?format=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealEngineLocalizationResource](https://discmaster.textfiles.com/search?format=unrealEngineLocalizationResource) | Unreal Engine Localization Resource | .locres | 
 [other/unrealMap](https://discmaster.textfiles.com/search?format=unrealMap) | Unreal Map | .unr | 
+[other/uplinkEncryptedGameData](https://discmaster.textfiles.com/search?format=uplinkEncryptedGameData) | Uplink encrypted game data | .dat | 
 [other/upsPatchFile](https://discmaster.textfiles.com/search?format=upsPatchFile) | UPS patch file | .ups | 
 [other/uropa2Configuration](https://discmaster.textfiles.com/search?format=uropa2Configuration) | Uropa2 Configuration | .config | 
 [other/uropa2GameData](https://discmaster.textfiles.com/search?format=uropa2GameData) | Uropa2 game data | .z .00 | 

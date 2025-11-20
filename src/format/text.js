@@ -100,6 +100,7 @@ export default
 		trainSimulatorActivity              : {name : "Train Simulator Activity", ext : [".act"], magic : ["Train Simulator Activity"]},
 		trainSimulatorCabViewFile           : {name : "Train Simulator Cab View File", ext : [".cvf"], magic : ["Train Simulator Cab View File"]},
 		trainSimulatorConsist               : {name : "Train Simulator Consist", ext : [".con"], magic : ["Train Simulator Consist"]},
+		trainSimulatorEnvironment           : {name : "Train Simulator Environment", ext : [".env"], magic : ["Train Simulator Environment"]},
 		trainSimulatorPath                  : {name : "Train Simulator Path", ext : [".pat"], magic : ["Train Simulator Path"]},
 		trainSimulatorServiceDefinition     : {name : "Train Simulator Service definition", ext : [".srv"], magic : ["Train Simulator Service definition"]},
 		trainSimulatorShapeDefinition       : {name : "Train Simulator Shape Definition", ext : [".s", ".eng", ".sd"], magic : ["Train Simulator Shape Definition"]},

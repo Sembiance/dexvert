@@ -33,7 +33,7 @@ export class ini extends Format
 		"Turboprint Printer Description", "Evasive Action scenery Topography", "Extra! for Windows Album/slideshow", "IBM i Access Client Translation Table", "Origin Fitting Function Definition File", /^git configuration$/, "RealStorm Engine object",
 		"Quarterdeck Provider info", "InstallShield Installation Package Strings table", "Gemsylk graph", "Micro-Cap Circuit", "Popcorn Mail configuration", "WinOnCD Project", "Spring Map Definition", "Premiere Title data", "Codewright Project (v3.x)",
 		"Unreal Engine Crash report", /^application\/x-godot-(resource|scene)/, /^Godot Engine Text (Resource|Scene)/, "Godot Engine Import settings", /^Total Annihilation (features data|GUI definition|map data|unit)/, "CAMtastic Aperture Wizard template",
-		"NCSA Mosaic configuration", /^LICQ configuration file, ASCII text$/,
+		"NCSA Mosaic configuration", /^LICQ configuration file, ASCII text$/, "TOPBENCH database",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

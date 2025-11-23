@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,902)
+# Unsupported File Formats (3,909)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (306)
+## Archive (305)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -288,7 +288,6 @@ Family/Format | Name | Extensions | Notes
 [archive/viacomNewMedia](https://discmaster.textfiles.com/search?format=viacomNewMedia) | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 [archive/virtualBoxDiskImage](https://discmaster.textfiles.com/search?format=virtualBoxDiskImage) | VirtualBox Disk Image | .vdi | 
 [archive/vmsSaveset](https://discmaster.textfiles.com/search?format=vmsSaveset) | VMS SaveSet |  | 
-[archive/vmwareDiskImage](https://discmaster.textfiles.com/search?format=vmwareDiskImage) | VMware disk image | .vmdk | 
 [archive/vz200300Image](https://discmaster.textfiles.com/search?format=vz200300Image) | VZ200/300 image | .vz | 
 [archive/warhammer40KTextures](https://discmaster.textfiles.com/search?format=warhammer40KTextures) | Warhammer 40K textures | .rsh | 
 [archive/wrp](https://discmaster.textfiles.com/search?format=wrp) | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/) - uaeunp says it supports it, and it will take an input .wrp and output a 'zipped.wrp' but that never converts to anything useful UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
@@ -791,7 +790,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (196)
+## Image (197)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -946,6 +945,7 @@ Family/Format | Name | Extensions | Notes
 [image/printShopDeluxeRowsGraphic](https://discmaster.textfiles.com/search?format=printShopDeluxeRowsGraphic) | Print Shop Deluxe Rows Graphic | .prg | 
 [image/printMasterDocument](https://discmaster.textfiles.com/search?format=printMasterDocument) | PrintMaster Document | .car | 
 [image/printPartnerBorder](https://discmaster.textfiles.com/search?format=printPartnerBorder) | PrintPartner Border | .bdr | 
+[image/proPixelImageBitmap](https://discmaster.textfiles.com/search?format=proPixelImageBitmap) | Pro Pixel Image bitmap | .ppg | 
 [image/professionalDraw](https://discmaster.textfiles.com/search?format=professionalDraw) | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://sembiance.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 [image/proShapeDrawing](https://discmaster.textfiles.com/search?format=proShapeDrawing) | ProShape Drawing | .psp | [5 sample files](https://sembiance.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 [image/protoCAD3DDrawing](https://discmaster.textfiles.com/search?format=protoCAD3DDrawing) | ProtoCAD 3D Drawing | .pcf | 
@@ -993,7 +993,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (177)
+## Music (178)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -1081,6 +1081,7 @@ Family/Format | Name | Extensions | Notes
 [music/melodyMakerSong](https://discmaster.textfiles.com/search?format=melodyMakerSong) | Melody Maker Sing | .mm | 
 [music/midget3Song](https://discmaster.textfiles.com/search?format=midget3Song) | Midget 3 song | .m3 | 
 [music/mod8BitModule](https://discmaster.textfiles.com/search?format=mod8BitModule) | MOD 8-bit module | .md8 | 
+[music/monotoneTrackerChiptune](https://discmaster.textfiles.com/search?format=monotoneTrackerChiptune) | Monotone Tracker chiptune |  | 
 [music/moonBlasterForMoonSoundSong](https://discmaster.textfiles.com/search?format=moonBlasterForMoonSoundSong) | MoonBlaster for MoonSound song | .mwm .mfm .mwk .mwv | 
 [music/mozartMusicDocument](https://discmaster.textfiles.com/search?format=mozartMusicDocument) | MOZART Music Document | .mz | 
 [music/ms3Music](https://discmaster.textfiles.com/search?format=ms3Music) | MS3 music | .ms3 | 
@@ -1176,7 +1177,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,628)
+## Other (2,634)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1620,6 +1621,7 @@ Family/Format | Name | Extensions | Notes
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?format=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
 [other/callOfDutyGameData](https://discmaster.textfiles.com/search?format=callOfDutyGameData) | Call of Duty game data | .ff | 
 [other/callusSavestate](https://discmaster.textfiles.com/search?format=callusSavestate) | Callus savestate | .cs0 | 
+[other/calmiraAlias](https://discmaster.textfiles.com/search?format=calmiraAlias) | Calmira Alias | .als | 
 [other/capellaGalleryDataFile](https://discmaster.textfiles.com/search?format=capellaGalleryDataFile) | Capella gallery data file | .cag | 
 [other/capellaMusicNotation](https://discmaster.textfiles.com/search?format=capellaMusicNotation) | Capella music notation | .cap | 
 [other/cardSoftPCMCIACardLibrary](https://discmaster.textfiles.com/search?format=cardSoftPCMCIACardLibrary) | CardSoft PCMCIA Card Library | .clb | 
@@ -1967,6 +1969,7 @@ Family/Format | Name | Extensions | Notes
 [other/electronicArtsAudioContainerSystem](https://discmaster.textfiles.com/search?format=electronicArtsAudioContainerSystem) | Electronic Arts audio Container System | .sph .dty .mon .asf | 
 [other/electronicArtsBundleGameDataArchive](https://discmaster.textfiles.com/search?format=electronicArtsBundleGameDataArchive) | Electronic Arts Bundle game data archive | .bundle | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?format=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
+[other/eliteGameSavePC](https://discmaster.textfiles.com/search?format=eliteGameSavePC) | Elite game save (PC) | .cdr | 
 [other/elitePlusCommanderFileSavedGame](https://discmaster.textfiles.com/search?format=elitePlusCommanderFileSavedGame) | Elite Plus Commander file / saved game | .cdr | 
 [other/emacsCompiledLisp](https://discmaster.textfiles.com/search?format=emacsCompiledLisp) | Emacs Compiled Lisp | .elc | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with (maybe): https://github.com/rocky/elisp-decompile
 [other/emergencyPeopleAnimationData](https://discmaster.textfiles.com/search?format=emergencyPeopleAnimationData) | Emergency people animation data | .vmo | 
@@ -2193,6 +2196,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?format=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/grandTheftAutoSaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoSaveGame) | Grand Theft Auto save game | .b | 
 [other/grandTheftAutoTextData](https://discmaster.textfiles.com/search?format=grandTheftAutoTextData) | Grand Theft Auto Text data | .gxt | 
+[other/grandTheftAutoViceCitySaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoViceCitySaveGame) | Grand Theft Auto Vice City save game |  | 
 [other/graphicImpactPresentation](https://discmaster.textfiles.com/search?format=graphicImpactPresentation) | Graphic Impact presentation | .giw | 
 [other/graphicMasterCharset](https://discmaster.textfiles.com/search?format=graphicMasterCharset) | Graphic Master charset | .chr | 
 [other/graphPadPrism](https://discmaster.textfiles.com/search?format=graphPadPrism) | GraphPad Prism | .pzm .pzt | 
@@ -3025,6 +3029,8 @@ Family/Format | Name | Extensions | Notes
 [other/printShopDeluxeSealExteriors](https://discmaster.textfiles.com/search?format=printShopDeluxeSealExteriors) | Print Shop Deluxe Seal Exteriors | .pse | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?format=printerFontMetrics) | Printer Font Metrics | .pfm | 
 [other/printPowerProData](https://discmaster.textfiles.com/search?format=printPowerProData) | PrintPower Pro data | .pvl | 
+[other/proPixel2DPalette](https://discmaster.textfiles.com/search?format=proPixel2DPalette) | Pro Pixel 2D Palette | .ppp | 
+[other/proPixel2DPaletteBank](https://discmaster.textfiles.com/search?format=proPixel2DPaletteBank) | Pro Pixel 2D Palette Bank | .pp2p | 
 [other/proThrottleConfiguration](https://discmaster.textfiles.com/search?format=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
 [other/proToolsSession](https://discmaster.textfiles.com/search?format=proToolsSession) | Pro Tools session data | .pts | 
 [other/proVideoJob](https://discmaster.textfiles.com/search?format=proVideoJob) | Pro Video Job | .job | 
@@ -3435,6 +3441,7 @@ Family/Format | Name | Extensions | Notes
 [other/tiCalcMatrix](https://discmaster.textfiles.com/search?format=tiCalcMatrix) | Texas Instruments Calculator Matrix | .9xm .86m .89m | 
 [other/tiCalcString](https://discmaster.textfiles.com/search?format=tiCalcString) | Texas Instruments Calculator String | .9xs .9xy .89s | 
 [other/tiCalcZipped](https://discmaster.textfiles.com/search?format=tiCalcZipped) | Texas Instruments Calculator Zipped | .9xy .89y | 
+[other/thailsPrinterCode](https://discmaster.textfiles.com/search?format=thailsPrinterCode) | Thails Printer Code | .cod | 
 [other/americanHeritageDictionaryIndex](https://discmaster.textfiles.com/search?format=americanHeritageDictionaryIndex) | The American Heritage Dictionary Index | .wx | 
 [other/theBatAddressBook](https://discmaster.textfiles.com/search?format=theBatAddressBook) | The Bat! Address Book | .abd | 
 [other/catacombAbyssSavedGame](https://discmaster.textfiles.com/search?format=catacombAbyssSavedGame) | The Catacomb Abyss saved game | .sav | 

@@ -6,6 +6,6 @@ export class pixit extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/PIXIT";
 	ext            = [".com"];
 	forbidExtMatch = true;
-	magic          = ["PIXIT Image (COM)", "deark: pixit"];
+	magic          = ["PIXIT Image (COM)", "16bit COM PIXIT self-display pic", "deark: pixit"];
 	converters     = ["deark[module:pixit]"];
 }

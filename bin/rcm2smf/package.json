@@ -1,0 +1,29 @@
+{
+  "name": "rcm2smf",
+  "version": "0.1.0",
+  "description": "Recomposer file (.RCP, .R36, .G36, and .MCP) to Standard MIDI File (.mid) converter",
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
+  "scripts": {
+    "lint": "eslint {*.js,*.html}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/shingo45endo/rcm2smf.git"
+  },
+  "author": "shingo45endo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shingo45endo/rcm2smf/issues"
+  },
+  "homepage": "https://github.com/shingo45endo/rcm2smf#readme",
+  "dependencies": {
+    "yargs": "^13.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-plugin-html": "^6.2.0"
+  }
+}

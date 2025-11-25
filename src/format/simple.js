@@ -212,6 +212,7 @@ export default
 		objectVisionDatafile             : {name : "ObjectVision Datafile", ext : [".ovd"], magic : ["ObjectVision Datafile"]},
 		openTTDLanguageStrings           : {name : "OpenTTD Language strings", ext : [".lng"], magic : ["OpenTTD Language strings"], weakMagic : true},
 		pcToolsDesktopMessagesHelp       : {name : "PC Tools Desktop Messages/help", ext : [".msg"], magic : ["PC Tools Desktop Messages/help"], weakMagic : true},
+		pcToolsStructuredText            : {name : "PC Tools structured text", ext : [".pro"], magic : ["PC Tools structured text"]},
 		perFORMMessages                  : {name : "PerFORM Messages", ext : [".msg"], magic : ["PerFORM Messages"]},
 		polytronVCSLogfile               : {name : "Polytron VCS logfile", ext : [".pmv"], magic : ["Polytron VCS logfile"]},
 		parsonsTechnologyResourceData    : {name : "Parsons Technology resource data", ext : [".us5", ".ovl", ".cfg", ".wrk", ".idx"], magic : ["Parsons Technology resource"], idMeta : ({macFileType, macFileCreator}) => macFileType==="PLGL" && macFileCreator==="Ptek"},

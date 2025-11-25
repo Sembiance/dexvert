@@ -441,6 +441,7 @@ export default
 		cdViewerHelp                               : {name : "CD Viewer Help", ext : [".cvh"], magic : ["CD Viewer Help"]},
 		celestiaScript                             : {name : "Celestia script", ext : [".cel"], magic : ["Celestia script"], weakMagic : true},
 		celestiaSphereDisplacementMesh             : {name : "Celestia Sphere displacement Mesh", ext : [".cms"], magic : ["Celestia Sphere displacement Mesh"]},
+		centralPointAntiVirusSearchReport          : {name : "Central Point Anti-Virus search report", ext : [".rpt"], magic : ["Central Point Anti-Virus search report"]},
 		chainOfCommandPrinterDefinition            : {name : "Chain of Command Printer definition", ext : [".cfg"], magic : ["Chain of Command Printer definition"], weakMagic : true},
 		chaosFile                                  : {name : "CHAOS File", ext : [".pal", ".frp", ".toy", ".sap", ".ifs", ".for", ".mfg"], magic : [/^CHAOS (Attractor (Palette|Parameters)|Barnsley (IFS Data|Palette)|Forge data|Fractal Parameters|Magnets Layout|Toy Universe data)$/]},
 		checkItProPerformancesData                 : {name : "CheckIt Pro Performances data", ext : [".prf"], magic : ["CheckIt Pro Performances data"]},

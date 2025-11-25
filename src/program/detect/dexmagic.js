@@ -182,6 +182,8 @@ const DEXMAGIC_CHECKS =
 	"Pro 24 MIDI SNG"                  : [{offset : 752, match : "TWENTY"}, {offset : 759, match : "FOUR"}],
 	"Promizer 1.0c/1.8"                : [{offset : 0, match : [0x60, 0x38, 0x60, 0x00, 0x00, 0xA0, 0x60, 0x00, 0x01, 0x3E, 0x60, 0x00, 0x01, 0x0C, 0x48, 0xE7]}],
 	"Promizer 2.0"                     : [{offset : 0, match : [0x60, 0x00, 0x00, 0x16, 0x60, 0x00, 0x01, 0x40, 0x60, 0x00, 0x00, 0xF0, 0x3F, 0x00, 0x10, 0x3A]}],
+	"Recomposer RCP"                   : [{offset : 0, match : "RCM-PC98V2"}],
+	"Recomposer G36"				   : [{offset : 0, match : "COME ON MUSIC RECOMPOSER"}],
 	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],
 	"S3M Module"                       : [{offset : 60, match : "SCRM"}],
 	"SQ Digital Tracker"               : [{offset : 247, match : [0xDD, 0x36, 0x79, 0x00, 0xCD, 0x54, 0xDE, 0xFD, 0x36]}],

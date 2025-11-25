@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>rcm2smf</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/marked.min.js"></script>
+<script>
+/* global $, marked */
+/* eslint-disable strict, prefer-arrow-callback */
+'use strict';
+$(function() {
+	// Checks whether the browser supports necessary functionalities.
+	if (!(window.Promise) ||
+	    !(window.Map && window.Set) ||
+	    !(window.File && window.FileList && window.FileReader) ||
+	    !(window.TextDecoder)) {
+
+		// Adds warning message.
+		$('main').prepend($('<div class="alert alert-danger" role="alert">This application doesn\'t work on your browser.</div>'));
+
+		// Adds how to use.
+		const text = (document.getElementById('my-markdown').content || $('#my-markdown')[0]).textContent;
+		$('#my-filePanes').append($(marked(text, {headerIds: false})));
+	}
+});
+/* eslint-enable strict, prefer-arrow-callback */
+</script>
+<script type="module">
+import {parseRcm, convertRcmToSeq, convertSeqToSmf, ctrl2smf, defaultSettings} from './rcm_converter.js';
+import {convertMtdToSysEx, convertCm6ToSysEx, convertGsdToSysEx, isSysExRedundant} from './rcm_ctrl_converter.js';
+import {decodeNec932} from './nec932_decoder.js';
+
+function readFileAsync(file) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = (e) => reject(e);
+		reader.readAsArrayBuffer(file);
+	});
+}
+
+const makeEventLists = (() => {
+	const ctrlNames = {
+		  0: 'PG.BANK',
+		  1: 'MODULAT',
+		  5: 'PORTA T',
+		  6: 'DATA (M)',
+		  7: 'VOLUME',
+		 10: 'PANPOT',
+		 11: 'EXPRESS',
+		 32: 'PG.BANKL',
+		 38: 'DATA (L)',
+		 64: 'PEDAL',
+		 65: 'PORTAM',
+		 66: 'SOSTEN',
+		 67: 'SOFT',
+		 84: 'LEGATO',
+		 91: 'REVERB',
+		 93: 'CHORUS',
+		 98: 'NRPN (L)',
+		 99: 'NRPN (M)',
+		100: 'RPN  (L)',
+		101: 'RPN  (M)',
+	};
+	const tableStrMcp = {
+		0xc0: 'DX7FUNC',
+		0xc1: 'DX.PARA',
+		0xc2: 'DX.PERF',
+		0xc3: 'TX.FUNC',
+		0xc5: 'FB-01 P',
+		0xc6: 'FB-01 S',
+		0xc7: 'TX81Z V',
+		0xc8: 'TX81Z A',
+		0xc9: 'TX81Z P',
+		0xca: 'TX81Z S',
+		0xcb: 'TX81Z E',
+		0xcc: 'DX7-2 R',
+		0xcd: 'DX7-2 A',
+		0xce: 'DX7-2 P',
+		0xcf: 'TX802 P',
+		0xd0: 'MIDI CH.',
+		0xe0: 'PROGRAM',
+		0xe1: 'AFTER K.',
+		0xe2: 'CONTROL',
+		0xe3: 'AFTER C.',
+		0xe4: 'PITCH',
+		0xe6: 'R.EXCLU',
+		0xe7: 'MT32BASE',
+		0xe8: 'MT32PARA',
+		0xf9: 'CMU-800',
+		0xfa: 'TEMPO',
+		0xfb: '       ]',
+		0xfc: '       [',
+		0xfd: '--------',
+		0xfe: '[E.O.T]',
+	};
+	const tableStrRcpG36 = {
+		0x90: 'UsrExc0',
+		0x91: 'UsrExc1',
+		0x92: 'UsrExc2',
+		0x93: 'UsrExc3',
+		0x94: 'UsrExc4',
+		0x95: 'UsrExc5',
+		0x96: 'UsrExc6',
+		0x97: 'UsrExc7',
+		0x98: 'Tr.Excl',
+		0x99: 'ExtCmd',
+		0xc0: 'DX7FUNC',
+		0xc1: 'DX.PARA',
+		0xc2: 'DX.PERF',
+		0xc3: 'TX.FUNC',
+		0xc5: 'FB-01 P',
+		0xc6: 'FB-01 S',
+		0xc7: 'TX81Z V',
+		0xc8: 'TX81Z A',
+		0xc9: 'TX81Z P',
+		0xca: 'TX81Z S',
+		0xcb: 'TX81Z E',
+		0xcc: 'DX7-2 R',
+		0xcd: 'DX7-2 A',
+		0xce: 'DX7-2 P',
+		0xcf: 'TX802 P',
+		0xd0: 'YamBase',
+		0xd1: 'YamDev#',
+		0xd2: 'YamPara',
+		0xd3: 'XGPara',
+		0xdc: 'MKS-7',
+		0xdd: 'RolBase',
+		0xde: 'RolPara',
+		0xdf: 'RolDev#',
+		0xe1: 'BankPrgL',
+		0xe2: 'BankPrg',
+		0xe5: 'KeyScan',
+		0xe6: 'MIDI CH.',
+		0xe7: 'TEMPO',
+		0xea: 'AFTER C.',
+		0xeb: 'CONTROL',
+		0xec: 'PROGRAM',
+		0xed: 'AFTER K.',
+		0xee: 'PITCH',
+		0xf5: 'MusicKey',
+		0xf6: 'Comment',
+		0xf7: '(2ndEvt)',
+		0xf8: '       ]',
+		0xf9: '       [',
+		0xfc: '========',
+		0xfd: '--------',
+		0xfe: '[E.O.T]',
+	};
+
+	const format = (() => {
+		const table = {
+			uint: (value) => String(value).padStart(4),
+			hex:  (value) => ` $${value.toString(16).padStart(2, '0')}`,
+			char: (value) => {
+				if (0x20 <= value && value <= 0x7e) {
+					return ` '${String.fromCharCode(value)}'`;
+				} else if (0xa1 <= value && value <= 0xdf) {
+					return ` '${String.fromCharCode(value + 0xfec0)}'`;
+				} else {
+					return table.hex(value);
+				}
+			},
+			dummy: () => ` ---`,
+
+			hexesP: (values) => values.map((e) => table.hex(e)).join(','),
+			charsP: (values) => values.map((e) => table.char(e)).join(','),
+			pitchP: (values) => {
+				const [ll, hh] = values;
+				const value = ((hh << 7) | ll) - 8192;
+				return String(value).padStart(9);
+			},
+			strP: (values) => decodeNec932(new Uint8Array(values)),
+		};
+
+		return (strings, ...keys) => (event) => {
+			const [noteOrCmd, ...values] = [...event];
+			const tokens = [((noteOrCmd < 0x80) ? table.uint(noteOrCmd) : table.hex(noteOrCmd)), ' ', strings[0]];
+			keys.forEach((key, i) => {
+				const handler = table[key];
+				console.assert(handler, `Invalid key: ${key}`);
+				if (key.endsWith('P')) {
+					console.assert(i === keys.length - 1, `${key} must be the last argument`);
+					tokens.push(handler(values));
+				} else {
+					const value = values.shift();
+					tokens.push(handler(value));
+				}
+				tokens.push(strings[i + 1]);
+			});
+			return tokens.join('');
+		};
+	})();
+
+	const tableFuncMcp = {
+		0xc0: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7FUNC
+		0xc1: format`${'uint'} ${'hex'} ${'hex'}`,		// DX_PARA
+		0xc2: format`${'uint'} ${'hex'} ${'hex'}`,		// DX_PERF
+		0xc3: format`${'uint'} ${'hex'} ${'hex'}`,		// TX_FUNC
+		0xc5: format`${'uint'} ${'hex'} ${'hex'}`,		// FB_01_P
+		0xc6: format`${'uint'} ${'hex'} ${'hex'}`,		// FB_01_S
+		0xc7: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_V
+		0xc8: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_A
+		0xc9: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_P
+		0xca: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_S
+		0xcb: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_E
+		0xcc: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7_2_R
+		0xcd: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7_2_A
+		0xce: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7_2_P
+		0xcf: format`${'uint'} ${'hex'} ${'hex'}`,		// TX802_P
+		0xd0: format`${'uint'} ${'uint'} ${'dummy'}`,	// MIDI_CH
+		0xe0: format`${'uint'} ${'uint'} ${'dummy'}`,	// PROGRAM
+		0xe1: format`${'uint'} ${'uint'} ${'uint'}`,	// AFTER_K
+		0xe2: format`${'uint'} ${'uint'} ${'uint'}`,	// CONTROL
+		0xe3: format`${'uint'} ${'uint'} ${'dummy'}`,	// AFTER_C
+		0xe4: format`${'uint'} ${'pitchP'}`,			// PITCH
+		0xe6: format`${'uint'} ${'hex'} ${'hex'}`,		// RolDev
+		0xe7: format`${'uint'} ${'hex'} ${'hex'}`,		// RolBase
+		0xe8: format`${'uint'} ${'hex'} ${'hex'}`,		// RolPara
+		0xf9: format`${'uint'} ${'uint'} ${'dummy'}`,	// CMU_800
+		0xfa: format`${'uint'} ${'uint'} ${'uint'}`,	// TEMPO
+		0xfb: format`${'uint'} ${'dummy'} ${'dummy'}`,	// LoopEnd
+		0xfc: format`${'dummy'} ${'dummy'} ${'dummy'}`,	// LoopStart
+		0xfd: format`${'dummy'} ${'dummy'} ${'dummy'}`,	// MeasEnd
+		0xfe: format`${'dummy'} ${'dummy'} ${'dummy'}`,	// TrackEnd
+	};
+	const tableFuncRcp = {
+		0x90: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc0
+		0x91: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc1
+		0x92: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc2
+		0x93: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc3
+		0x94: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc4
+		0x95: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc5
+		0x96: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc6
+		0x97: format`${'uint'} ${'hex'} ${'hex'}`,		// UsrExc7
+		0x98: format`${'uint'} ${'hex'} ${'hex'}`,		// TrExcl
+		0x99: format`${'dummy'} ${'uint'} ${'dummy'}`,	// ExtCmd
+		0xc0: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7FUNC
+		0xc1: format`${'uint'} ${'hex'} ${'hex'}`,		// DX_PARA
+		0xc2: format`${'uint'} ${'hex'} ${'hex'}`,		// DX_PERF
+		0xc3: format`${'uint'} ${'hex'} ${'hex'}`,		// TX_FUNC
+		0xc5: format`${'uint'} ${'hex'} ${'hex'}`,		// FB_01_P
+		0xc6: format`${'uint'} ${'hex'} ${'hex'}`,		// FB_01_S
+		0xc7: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_V
+		0xc8: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_A
+		0xc9: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_P
+		0xca: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_S
+		0xcb: format`${'uint'} ${'hex'} ${'hex'}`,		// TX81Z_E
+		0xcc: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7_2_R
+		0xcd: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7_2_A
+		0xce: format`${'uint'} ${'hex'} ${'hex'}`,		// DX7_2_P
+		0xcf: format`${'uint'} ${'hex'} ${'hex'}`,		// TX802_P
+		0xd0: format`${'uint'} ${'hex'} ${'hex'}`,		// YamBase
+		0xd1: format`${'uint'} ${'hex'} ${'hex'}`,		// YamDev
+		0xd2: format`${'uint'} ${'hex'} ${'hex'}`,		// YamPara
+		0xd3: format`${'uint'} ${'hex'} ${'hex'}`,		// XGPara
+		0xdc: format`${'uint'} ${'hex'} ${'hex'}`,		// MKS_7
+		0xdd: format`${'uint'} ${'hex'} ${'hex'}`,		// RolBase
+		0xde: format`${'uint'} ${'hex'} ${'hex'}`,		// RolPara
+		0xdf: format`${'uint'} ${'hex'} ${'hex'}`,		// RolDev
+		0xe1: format`${'uint'} ${'uint'} ${'uint'}`,	// BankPrgL
+		0xe2: format`${'uint'} ${'uint'} ${'uint'}`,	// BankPrg
+		0xe5: format`${'uint'} ${'uint'} ${'dummy'}`,	// KeyScan
+		0xe6: format`${'uint'} ${'uint'} ${'dummy'}`,	// MIDI_CH
+		0xe7: format`${'uint'} ${'uint'} ${'uint'}`,	// TEMPO
+		0xea: format`${'uint'} ${'uint'} ${'dummy'}`,	// AFTER_C
+		0xeb: format`${'uint'} ${'uint'} ${'uint'}`,	// CONTROL
+		0xec: format`${'uint'} ${'uint'} ${'dummy'}`,	// PROGRAM
+		0xed: format`${'uint'} ${'uint'} ${'uint'}`,	// AFTER_K
+		0xee: format`${'uint'} ${'pitchP'}`,			// PITCH
+		0xf5: format`${'hex'} ${'dummy'} ${'dummy'}`,	// MusicKey
+		0xf6: format`${'dummy'} ${'char'} ${'char'}`,	// Comment
+		0xf7: format`${'dummy'} ${'hexesP'}`,			// SecondEvt
+		0xf8: format`${'uint'} ${'dummy'} ${'dummy'}`,	// LoopEnd
+		0xf9: format`${'dummy'} ${'dummy'} ${'dummy'}`,	// LoopStart
+		0xfc: format`${'uint'} ${'hex'} ${'hex'}`,		// SameMeas
+		0xfd: format`${'dummy'} ${'dummy'} ${'dummy'}`,	// MeasEnd
+		0xfe: format`${'dummy'} ${'dummy'} ${'dummy'}`,	// TrackEnd
+	};
+	const tableFuncG36 = {
+		0x99: format`${'charsP'}`,	// ExtCmd
+		0xf6: format`${'charsP'}`,	// Comment
+	};
+	const tableFuncExtracted = {
+		0x98: format`${'uint'} ${'hex'} ${'hex'}:${'hexesP'}`,	// TrExcl
+		0x99: format`"${'strP'}"`,	// ExtCmd
+		0xf6: format`"${'strP'}"`,	// Comment
+	};
+	const formatStGtVel = format`${'uint'} ${'uint'} ${'uint'}`;
+
+	function formatMeas(meas) {
+		return `${String(meas).padStart(4)}:`;
+	}
+	function formatNote(event) {
+		if (event[0] >= 0x80) {
+			return null;
+		}
+		if (event[2] === 0 || event[3] === 0) {
+			return '        ';
+		}
+		const octave = Math.trunc(event[0] / 12) - 1;
+		const noteName = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'][event[0] % 12];
+		return `${noteName.padEnd(2, ' ')}${octave}`.padEnd(8);
+	}
+	function formatCommandMcp(event) {
+		return (((event[0] === 0xe2) ? ctrlNames[event[2]] : null) || tableStrMcp[event[0]] || '?unknown').padEnd(8);
+	}
+	function formatCommandRcpG36(event) {
+		return (((event[0] === 0xeb) ? ctrlNames[event[2]] : null) || tableStrRcpG36[event[0]] || '?unknown').padEnd(8);
+	}
+
+	function isMeasureIncreased(cmd) {
+		return (cmd === 0xfd);
+	}
+	function isMeasureIncreasedBySM(cmd, prevCmd) {
+		return ((cmd === 0xfc && prevCmd !== 0xfd) || prevCmd === 0xfc);
+	}
+
+	function formatMcp(events) {
+		let str = '';
+		let meas = 0;
+		for (const event of events) {
+			const cmd = event[0];
+
+			const func = tableFuncMcp[cmd] || formatStGtVel;
+			str += `${formatMeas(meas)} ${formatNote(event) || formatCommandMcp(event)} ${func(event)}\n`;
+
+			if (isMeasureIncreased(cmd)) {
+				meas++;
+			}
+		}
+
+		return str;
+	}
+
+	function formatRcp(events) {
+		let str = '';
+		let meas = 0;
+		let isInComment = false;
+		let prevCmd;
+		for (const event of events) {
+			const cmd = event[0];
+
+			if (isMeasureIncreasedBySM(cmd, prevCmd)) {
+				meas++;
+			}
+
+			let func = tableFuncRcp[cmd] || formatStGtVel;
+			if (cmd === 0xf7) {
+				func = (isInComment) ? format`${'dummy'} ${'char'} ${'char'}` : format`${'dummy'} ${'hex'} ${'hex'}`;
+				str += `${formatMeas(meas)} ${formatNote(event) || formatCommandRcpG36(event)} ${func(event)}\n`;
+			} else {
+				str += `${formatMeas(meas)} ${formatNote(event) || formatCommandRcpG36(event)} ${func(event)}\n`;
+				isInComment = (cmd === 0x99 || cmd === 0xf6);
+			}
+
+			if (isMeasureIncreased(cmd)) {
+				meas++;
+			}
+
+			prevCmd = cmd;
+		}
+
+		return str;
+	}
+
+	function formatG36(events) {
+		let str = '';
+		let meas = 0;
+		let isInComment = false;
+		let prevCmd;
+		for (const event of events) {
+			const cmd = event[0];
+
+			if (isMeasureIncreasedBySM(cmd, prevCmd)) {
+				meas++;
+			}
+
+			let func = tableFuncG36[cmd] || tableFuncRcp[cmd] || formatStGtVel;
+			if (cmd === 0xf7) {
+				func = format`${(isInComment) ? 'charsP' : 'hexesP'}`;
+				str += `${formatMeas(meas)} ${formatNote(event) || formatCommandRcpG36(event)} ${func(event)}\n`;
+			} else if (cmd === 0x99 || cmd === 0xf6) {
+				str += `${formatMeas(meas)} ${formatCommandRcpG36(event)} ${func(event)}\n`;
+				isInComment = true;
+			} else {
+				const convertedEvent = [event[0], event[2] | (event[3] << 8), event[4] | (event[5] << 8), event[1]];
+				str += `${formatMeas(meas)} ${formatNote(convertedEvent) || formatCommandRcpG36(convertedEvent)} ${func(convertedEvent)}\n`;
+				isInComment = false;
+			}
+
+			if (isMeasureIncreased(cmd)) {
+				meas++;
+			}
+
+			prevCmd = cmd;
+		}
+
+		return str;
+	}
+
+	function formatExtracted(events) {
+		let str = '';
+		let meas = 0;
+		for (const event of events) {
+			const cmd = event[0];
+
+			const func = tableFuncExtracted[cmd] || tableFuncRcp[cmd] || formatStGtVel;
+			str += `${formatMeas(meas)} ${formatNote(event) || formatCommandRcpG36(event)} ${func(event)}\n`;
+
+			if (isMeasureIncreased(cmd)) {
+				meas++;
+			}
+		}
+
+		return str;
+	}
+
+	function formatMcpRhythm(events) {
+		let str = '';
+		let patternNo = 1;
+		for (const event of events) {
+			const st = event[3];
+			const velBits = event.slice(0, 3).reduce((p, c) => {
+				p.push(...[(c >> 6) & 0x03, (c >> 4) & 0x03, (c >> 2) & 0x03, c & 0x03]);
+				return p;
+			}, []);
+
+			if (isMeasureIncreased(event[0])) {
+				patternNo++;
+				str += '\n';
+			} else {
+				str += `${formatMeas(patternNo)} ${String(st).padStart(4)} "${velBits.map((e) => String(e)).join(', ')}"\n`;
+			}
+		}
+
+		return str;
+	}
+
+	return (kind, events) => ({
+		'MCP': formatMcp,
+		'RCP': formatRcp,
+		'G36': formatG36,
+		'MCP-rhythm': formatMcpRhythm,
+		'ext-MCP': formatMcp,
+		'ext-RCP': formatExtracted,
+		'ext-G36': formatExtracted,
+	})[kind](events);
+})();
+
+/* global $, marked */
+$(() => {
+	/* eslint-disable no-invalid-this */
+
+	// Replaces the default console functions.
+	['info', 'warn', 'error'].forEach((kind) => {
+		((func) => {
+			const $log = $('#my-log');
+			const $logs = $('#my-logs');
+			const $errors = $('#my-errors');
+
+			console[kind] = (...args) => {
+				const mes = args.join('');
+				$log.text(`${kind}: ${mes}`);
+				$logs.append(`<li>${mes}</li>`);
+
+				if (kind === 'error') {
+					$errors.append(`<li>${mes}</li>`);
+					$('#my-errorModal').modal('show');
+				}
+
+				func(...args);
+			};
+		})(console[kind]);
+	});
+
+	function emptyLogs() {
+		$('#my-logs').empty();
+		$('#my-errors').empty();
+	}
+
+	const makeElementFromTemplateId = (() => {
+		const templates = [...document.querySelectorAll('template')].reduce((p, elem) => {
+			p[elem.id] = elem;
+			return p;
+		}, {});
+
+		return (id) => templates[id].content.cloneNode(true);
+	})();
+
+	const currentSettings = {...defaultSettings};
+	$('#my-settingsModal').on('show.bs.modal', () => {
+		for (const key of Object.keys(currentSettings)) {
+			const value = currentSettings[key];
+			const $elem = $(`#my-${key}`);
+
+			switch (typeof value) {
+			case 'string':
+			case 'number':
+				$elem.val(value);
+				break;
+			case 'boolean':
+				$elem.prop('checked', value);
+				break;
+			default:
+				console.assert(false);
+				break;
+			}
+		}
+	});
+	$('#my-saveChanges').on('click', () => {
+		for (const key of Object.keys(currentSettings)) {
+			const $elem = $(`#my-${key}`);
+
+			switch (typeof currentSettings[key]) {
+			case 'string':
+				currentSettings[key] = $elem.val();
+				break;
+			case 'number':
+				currentSettings[key] = Number($elem.val());
+				break;
+			case 'boolean':
+				currentSettings[key] = $elem.prop('checked');
+				break;
+			default:
+				console.assert(false);
+				break;
+			}
+		}
+	});
+
+	const contents = {};
+	async function addContent(file) {
+		emptyLogs();
+
+		// Parses the input file.
+		const content = await parseContent(file);
+		if (!content || !content.kind) {
+			console.error(`Unknown file: ${content.name}`);
+			return;
+		}
+
+		// Adds the parsed content.
+		const name = file.name;
+		contents[name] = content;
+
+		// Decides the IDs of new tab and pane.
+		const id = name.split('').map((e) => {
+			if (/[0-9a-zA-Z_-]/u.test(e)) {
+				return e;
+			} else {
+				return `_${e.charCodeAt(0).toString(16)}_`;
+			}
+		}).join('');
+		const tabId = `my-tab-${id}`;
+		const paneId = `my-pane-${id}`;
+
+		// Removes both tab and pane.
+		$(`#${tabId}`).remove();
+		$(`#${paneId}`).remove();
+
+		// Adds a new tab and a new pane.
+		$('#my-fileTabs').append($(`
+			<li class="nav-item">
+				<a id="${tabId}" class="nav-link" href="#${paneId}" role="tab" data-toggle="tab">${name}</a>
+			</li>`));
+		$('#my-filePanes').append($(`<div id="${paneId}" class="tab-pane fade" role="tabpanel"></div>`));
+
+		// Creates a page and appends it to the pane.
+		switch (content.kind) {
+		case 'rcm':
+			$(`#${paneId}`).append(makeRcmPage(content.rcm, id, name));
+			break;
+		case 'ctrl':
+			$(`#${paneId}`).append(makeCtrlPage(content.sysExs, name));
+			break;
+		default:
+			console.assert(false);
+			break;
+		}
+
+		// Chooses the first track.
+		$(`#${paneId} .my-trackTabs a.nav-link:first`).tab('show');
+	}
+
+	async function parseContent(file) {
+		const content = {name: file.name};
+
+		// Reads the input file.
+		const buf = new Uint8Array(await readFileAsync(file));
+		content.buf = buf;
+
+		// Is it a sequence file?
+		const rcm = await parseRcm(buf, null, {ignoreCtrlFile: true}).catch((_) => {/* EMPTY */});
+		if (rcm) {
+			content.kind = 'rcm';
+			content.rcm = rcm;
+			return content;
+		}
+
+		// Is it a control file?
+		const sysExs = convertCm6ToSysEx(buf) || convertMtdToSysEx(buf) || convertGsdToSysEx(buf);
+		if (sysExs) {
+			content.kind = 'ctrl';
+			content.sysExs = sysExs;
+			return content;
+		}
+
+		return content;
+	}
+
+	function getContent(fileName, fileNameRaw) {
+		return new Promise((resolve, reject) => {
+			if (contents[fileName]) {
+				resolve(contents[fileName].buf);
+				return;
+			} else if (fileNameRaw) {
+				const fileName2 = decodeNec932(fileNameRaw);
+				if (contents[fileName2]) {
+					resolve(contents[fileName2].buf);
+					return;
+				}
+			}
+			reject(new Error(`Not found: ${fileName}`));
+		});
+	}
+
+	function makeRcmPage(rcm, id, name) {
+		const $rcmPage = $(makeElementFromTemplateId('my-rcmFile'));
+
+		// Title
+		$(`.my-title`, $rcmPage).text(decodeNec932(rcm.header.title));
+
+		// File name
+		const $rcmSmfFileName = $(`.my-rcmSmfFileName`, $rcmPage);
+		$rcmSmfFileName.val(`${name}.mid`);
+
+		// Convert
+		$(`.my-convertRcm`, $rcmPage).on('click', ((rcmFileName, smfFileName) => async function() {
+			emptyLogs();
+			try {
+				const rcm = await parseRcm(contents[rcmFileName].buf, getContent, currentSettings);
+				const seq = convertRcmToSeq(rcm, currentSettings);
+				const smf = convertSeqToSmf(seq, rcm.header.timeBase, currentSettings);
+				const blob = new Blob([smf], {type: 'audio/midi'});
+
+				$(this).attr('download', smfFileName);
+				$(this).attr('href', URL.createObjectURL(blob));
+			} catch (e) {
+				console.error(e);
+			}
+
+			return false;
+		})(name, $rcmSmfFileName.val()));
+
+		// Header
+		['tempo', 'playBias', 'beatD', 'beatN', 'timeBase'].forEach((key) => {
+			$(`.my-${key}`, $rcmPage).text(rcm.header[key]);
+		});
+
+		// Key
+		const tonic = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'Cb', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'A', 'D', 'G', 'C', 'F', 'Bb', 'Eb', 'Ab'][rcm.header.key & 0x1f];
+		$(`.my-key`, $rcmPage).text(`${tonic} ${(rcm.header.key < 0x10) ? 'Major' : 'Minor'}`);
+
+		// Control files
+		['MTD', 'CM6', 'GSD', 'GSD2'].forEach((key) => {
+			const fileName = `fileName${key}`;
+			if (rcm.header[fileName]) {
+				$(`.my-fileName${key}`, $rcmPage).text(decodeNec932(rcm.header[fileName]));
+			}
+		});
+
+		// Memo area
+		if (rcm.header.memoLines && rcm.header.memoLines.length) {
+			$('.my-memoArea', $rcmPage).text(rcm.header.memoLines.map((e) => decodeNec932(e)).join('\n'));
+		}
+
+		// User SysEx
+		const table = {0x80: 'gt', 0x81: 've', 0x82: 'ch', 0x83: 'cs', 0x84: 'ss', 0xf7: '<span class="text-muted">f7</span>'};
+		if (rcm.header.userSysExs) {
+			let i = 0;
+			for (const userSysEx of rcm.header.userSysExs) {
+				$('.my-userSysExs', $rcmPage).append($(`
+					<tr>
+						<th class="text-center align-middle">${i}</th>
+						<td>
+							<h3 class="h6 mb-0">${decodeNec932(userSysEx.memo)}</b></h3>
+							<code>${[...userSysEx.bytes].map((e) => table[e] || e.toString(16).padStart(2, '0')).join(' ')}</code>
+						</td>
+					</tr>`));
+				i++;
+			}
+		}
+
+		// Tracks
+		const kind = (rcm.header.isG) ? 'G36' : (rcm.header.isMCP) ? 'MCP' : 'RCP';
+		let trackId = 0;
+		for (const track of rcm.tracks) {
+			// Table
+			const trackNo = ('trackNo' in track) ? track.trackNo : trackId;
+			const trackMemo = (track.memo) ? decodeNec932(track.memo) : '';
+			const html = `
+				<td class="text-right">${trackNo}</td>
+				<td class="text-right">${((track.mode & 0x1) === 0) ? 'Play' : 'Mute'}</td>
+				<td class="text-right">${(track.midiCh >= 0) ? track.midiCh + 1 : 'Off'}</td>
+				<td class="text-right">${('stShift' in track) ? track.stShift : 0}</td>
+				<td class="text-right">${(!('keyShift' in track) || (track.keyShift & 0x80) !== 0) ? 0 : track.keyShift - ((track.keyShift >= 0x40) ? 0x80 : 0)}</td>
+				<td style="text-overflow: ellipsis">${trackMemo}</td>`;
+			$('.my-tracks', $rcmPage).append($(`<tr>${html}</tr>`));
+
+			// Tabs
+			const paneId = `my-${id}-pane-${trackId}`;
+			$('.my-trackTabs', $rcmPage).append($(`<a class="nav-link my-0 p-2" href="#${paneId}" role="tab" data-toggle="pill">Tr. ${trackNo}</a>`));
+			$('.my-eventPanes', $rcmPage).append($(`<div id="${paneId}" class="tab-pane" role="tabpanel"></div>`));
+			$(`#${paneId}`, $rcmPage).append($(makeElementFromTemplateId('my-eventTables')));
+			$(`#${paneId} .my-track`, $rcmPage).text(`Track ${trackNo}: ${trackMemo}`);
+
+			// Events
+			if (kind === 'MCP' && trackId === 0) {
+				$(`#${paneId} .my-events`, $rcmPage).text(makeEventLists('MCP-rhythm', track.events));
+			} else {
+				$(`#${paneId} .my-events`, $rcmPage).text(makeEventLists(kind, track.events));
+				$(`#${paneId} .my-extractedEvents`, $rcmPage).text(makeEventLists(`ext-${kind}`, track.extractedEvents));
+			}
+
+			trackId++;
+		}
+
+		return $rcmPage;
+	}
+
+	function makeCtrlPage(sysExs, name) {
+		const tableAddr = [
+			[/^f0 41 10 16 12 03/u, 'Patch Temporary Area (LA)'],
+			[/^f0 41 10 16 12 04/u, 'Timbre Temporary Area (LA)'],
+			[/^f0 41 10 16 12 05/u, 'Patch Memory (LA)'],
+			[/^f0 41 10 16 12 08/u, 'Timbre Memory (LA)'],
+			[/^f0 41 10 16 12 10/u, 'System Area (LA)'],
+
+			[/^f0 41 10 16 12 50/u, 'Patch Temporary Area (PCM)'],
+			[/^f0 41 10 16 12 51/u, 'Patch Memory (PCM)'],
+			[/^f0 41 10 16 12 52/u, 'System Area (PCM)'],
+
+			[/^f0 41 10 42 12 40 0./u,    'Patch Common Parameters'],
+			[/^f0 41 10 42 12 48 00 00/u, 'System Parameters'],
+			[/^f0 41 10 42 12 48/u,       'Patch Parameters'],
+			[/^f0 41 10 42 12 49 0[01]/u, 'Drum Map 1 Setup Parameters (Play Note Number)'],
+			[/^f0 41 10 42 12 49 0[23]/u, 'Drum Map 1 Setup Parameters (Level)'],
+			[/^f0 41 10 42 12 49 0[45]/u, 'Drum Map 1 Setup Parameters (Assign Group Number)'],
+			[/^f0 41 10 42 12 49 0[67]/u, 'Drum Map 1 Setup Parameters (Panpot)'],
+			[/^f0 41 10 42 12 49 0[89]/u, 'Drum Map 1 Setup Parameters (Reverb Send Level)'],
+			[/^f0 41 10 42 12 49 0[ab]/u, 'Drum Map 1 Setup Parameters (Chorus Send Level)'],
+			[/^f0 41 10 42 12 49 0[cd]/u, 'Drum Map 1 Setup Parameters (Rx. Note On/Off)'],
+			[/^f0 41 10 42 12 49 0e/u,    'Drum Map 1 Setup Parameters (Drum Map Name)'],
+			[/^f0 41 10 42 12 49 1[01]/u, 'Drum Map 2 Setup Parameters (Play Note Number)'],
+			[/^f0 41 10 42 12 49 1[23]/u, 'Drum Map 2 Setup Parameters (Level)'],
+			[/^f0 41 10 42 12 49 1[45]/u, 'Drum Map 2 Setup Parameters (Assign Group Number)'],
+			[/^f0 41 10 42 12 49 1[67]/u, 'Drum Map 2 Setup Parameters (Panpot)'],
+			[/^f0 41 10 42 12 49 1[89]/u, 'Drum Map 2 Setup Parameters (Reverb Send Level)'],
+			[/^f0 41 10 42 12 49 1[ab]/u, 'Drum Map 2 Setup Parameters (Chorus Send Level)'],
+			[/^f0 41 10 42 12 49 1[cd]/u, 'Drum Map 2 Setup Parameters (Rx. Note On/Off)'],
+			[/^f0 41 10 42 12 49 1e/u,    'Drum Map 2 Setup Parameters (Drum Map Name)'],
+			[/^f0 41 10 42 12 49/u,       'Drum Setup Parameters'],
+
+			[/./u, ''],
+		];
+
+		const $ctrlPage = $(makeElementFromTemplateId('my-ctrlFile'));
+
+		// File name
+		const $ctrlSyxFileName = $(`.my-ctrlSyxFileName`, $ctrlPage);
+		$ctrlSyxFileName.val(`${name}.syx`);
+
+		const $ctrlSmfFileName = $(`.my-ctrlSmfFileName`, $ctrlPage);
+		$ctrlSmfFileName.val(`${name}.mid`);
+
+		// Convert
+		$(`.my-convertCtrlSyx`, $ctrlPage).on('click', ((ctrlFileName, syxFileName) => function() {
+			emptyLogs();
+			try {
+				const bytesIn = contents[ctrlFileName].buf;
+				const sysExs = convertCm6ToSysEx(bytesIn) || convertMtdToSysEx(bytesIn) || convertGsdToSysEx(bytesIn);
+				const bytesOut = new Uint8Array([].concat(...sysExs));
+				const blob = new Blob([bytesOut], {type: 'application/octet-stream'});
+
+				$(this).attr('download', syxFileName);
+				$(this).attr('href', URL.createObjectURL(blob));
+			} catch (e) {
+				console.error(e);
+			}
+
+			return true;
+		})(name, $ctrlSyxFileName.val()));
+
+		$(`.my-convertCtrlSmf`, $ctrlPage).on('click', ((ctrlFileName, smfFileName) => function() {
+			emptyLogs();
+			try {
+				const smf = ctrl2smf(contents[ctrlFileName].buf, ctrlFileName, currentSettings);
+				const blob = new Blob([smf], {type: 'audio/midi'});
+
+				$(this).attr('download', smfFileName);
+				$(this).attr('href', URL.createObjectURL(blob));
+			} catch (e) {
+				console.error(e);
+			}
+
+			return true;
+		})(name, $ctrlSmfFileName.val()));
+
+		// SysExs
+		for (const sysEx of sysExs) {
+			const hexStr = [...sysEx].map((e) => e.toString(16).padStart(2, '0')).join(' ');
+			const addrStr = tableAddr.filter((e) => e[0].test(hexStr))[0][1];
+			let timbreHtml;
+			if (/^f0 41 10 16 12 08 [0-7][02468ace] 00/u.test(hexStr)) {
+				const timbreNo = sysEx[6] / 2;
+				console.assert(Number.isInteger(timbreNo) && (0 <= timbreNo && timbreNo < 64));
+				const timbreName = String.fromCharCode(...sysEx.slice(8, 18));
+				timbreHtml = `
+					<div class="card bg-light mt-2">
+						<div class="card-body py-1">
+							I${String(timbreNo).padStart(2, '0')}: <pre class="my-0">${timbreName}</pre>
+						</div>
+					</div>`;
+			}
+			const isRedundant = isSysExRedundant(sysEx);
+			$('.my-sysExs', $ctrlPage).append($(`
+				<tr class="${(isRedundant) ? 'table-secondary text-muted' : ''}">
+					<th style="width: 15rem;">
+						${addrStr}
+						${(timbreHtml) ? timbreHtml : ''}
+					</th>
+					<td>
+						<pre class="my-sysEx mb-0"><code>${hexStr}</code></pre>
+					</td>
+				</tr>`));
+		}
+
+		return $ctrlPage;
+	}
+
+	// Handles D&D related events.
+	window.addEventListener('dragenter', (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+	});
+	window.addEventListener('dragover', (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+	});
+	window.addEventListener('drop', (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+
+		(async () => {
+			// Processes each file.
+			for (const file of [...e.dataTransfer.files]) {
+				await addContent(file);
+			}
+
+			// Moves to the newest pane.
+			$('#my-fileTabs a.nav-link:last').tab('show');
+		})();
+	});
+
+	// Adds "Help" pane.
+	$('#my-fileTabs').append($(`<li class="nav-item"><a id="my-tab-help" class="nav-link" href="#my-pane-help" role="tab" data-toggle="tab">Help</a></li>`));
+	$('#my-filePanes').append($(`<div id="my-pane-help" class="tab-pane fade" role="tabpanel"></div>`));
+	$('#my-pane-help').append($(makeElementFromTemplateId('my-help')));
+	$('#my-pane-help .my-helpText').append(marked(document.getElementById('my-markdown').content.textContent, {headerIds: false}));
+	$(`#my-tab-help`).tab('show');
+
+	/* eslint-enable no-invalid-this */
+});
+</script>
+<style>
+th {
+	font-weight: 500;
+}
+
+.container-fluid {
+	max-width: 2000px;
+}
+
+.my-trackTabs .nav-link.active {
+	opacity: 0.5;
+}
+
+.my-memoArea {
+	width: 14rem;
+	height: 12rem;
+	overflow: visible;
+	font-family: monospace;
+	font-size: 16px;
+	line-height: 1;
+}
+
+.my-extractedEvents {
+	white-space: pre-wrap;
+}
+
+.my-sysEx {
+	white-space: pre-wrap;
+	text-indent: -11.5rem;
+	padding-left: 11.5rem;
+}
+</style>
+</head>
+
+<body>
+	<!-- Navbar -->
+	<nav class="navbar sticky-top bg-light">
+		<div class="container-fluid align-items-start">
+			<h1 class="h6 mb-0"><span class="navbar-brand">rcm2smf</span></h1>
+			<div class="row justify-content-center flex-fill">
+				<div class="col-xl-8 col-lg-10 col-12">
+					<a class="btn btn-outline-secondary float-right ml-2 px-2 py-0" href="#my-logs" role="button" data-toggle="collapse">&hellip;</a>
+					<div class="alert alert-light mb-0 py-2" role="alert" style="max-height: 10rem; overflow-y: auto;">
+						<div id="my-log">Log messages will be displayed.</div>
+						<ul id="my-logs" class="collapse list-unstyled border-top mb-0"></ul>
+					</div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#my-settingsModal">Settings</button>
+		</div>
+	</nav>
+
+	<!-- Main screen -->
+	<main class="container-fluid mt-2">
+		<!-- Tabs  -->
+		<ul id="my-fileTabs" class="nav nav-tabs" role="tablist"></ul>
+		<!-- Panes -->
+		<div id="my-filePanes" class="tab-content"></div>
+	</main>
+
+	<!-- Settings dialog -->
+	<div id="my-settingsModal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title h6">Settings</h2>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<form>
+							<h3 class="h6 mb-3">SMF Generation:</h3>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">Meta Event</div>
+								<div class="col-10">
+									<div class="form-check">
+										<input id="my-metaTextMemo" type="checkbox" class="form-check-input">
+										<label for="my-metaTextMemo" class="form-check-label">
+											Generate SMF Text events for RCM memo area
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-metaTextComment" type="checkbox" class="form-check-input">
+										<label for="my-metaTextComment" class="form-check-label">
+											Generate SMF Text events for RCM Comment events
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-metaTextUsrExc" type="checkbox" class="form-check-input">
+										<label for="my-metaTextUsrExc" class="form-check-label">
+											Generate SMF Text events for each RCM <code>UsrExc</code> events
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-metaCue" type="checkbox" class="form-check-input">
+										<label for="my-metaCue" class="form-check-label">
+											Generate SMF Cue Point events for RCM <code>KeyScan</code> and External Command event
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-metaTimeSignature" type="checkbox" class="form-check-input">
+										<label for="my-metaTimeSignature" class="form-check-label">
+											Generate SMF Time Signature events from each measure's step time
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">Trimming</div>
+								<div class="col-8">Remove whitespace from SMF Sequence/Track Name event</div>
+								<select class="custom-select col-2" id="my-trimTrackName">
+									<option value="none">None</option>
+									<option value="left">Left</option>
+									<option value="right">Right</option>
+									<option value="both">Both</option>
+								</select>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Remove whitespace from SMF Text events for RCM memo area</div>
+								<select class="custom-select col-2" id="my-trimTextMemo">
+									<option value="none">None</option>
+									<option value="left">Left</option>
+									<option value="right">Right</option>
+									<option value="both">Both</option>
+								</select>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Remove whitespace from SMF Text events for RCM Comment events
+								</div>
+								<select class="custom-select col-2" id="my-trimTextComment">
+									<option value="none">None</option>
+									<option value="left">Left</option>
+									<option value="right">Right</option>
+									<option value="both">Both</option>
+								</select>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Remove whitespace from SMF Text events for RCM UsrExc events
+								</div>
+								<select class="custom-select col-2" id="my-trimTextUsrExc">
+									<option value="none">None</option>
+									<option value="left">Left</option>
+									<option value="right">Right</option>
+									<option value="both">Both</option>
+								</select>
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">Note Off</div>
+								<div class="col-10">
+									<div class="form-check">
+										<input id="my-noteOff" type="checkbox" class="form-check-input">
+										<label for="my-noteOff" class="form-check-label">
+											Use note-off ("<code>8nH kk uu</code>") events instead of
+											"<code>9nH kk 00H</code>"
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Velocity of note-off ("<code>8nH kk uu</code>") events</div>
+								<input id="my-noteOffVel" type="number" class="form-control col-2" min="0" max="127" placeholder="Velocity">
+							</div>
+	
+							<h3 class="h6 mb-3">RCM Parsing:</h3>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">ST+</div>
+								<div class="col-8">Assume ST+ as signed (&ge; RCM 2.5) or unsigned (&le; RCM 2.3a)</div>
+								<select class="custom-select col-2" id="my-stPlus">
+									<option value="auto">Auto</option>
+									<option value="unsigned">Unsigned</option>
+									<option value="signed">Signed</option>
+								</select>
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">Control File</div>
+								<div class="col-10">
+									<div class="form-check">
+										<input id="my-resetBeforeCtrl" type="checkbox" class="form-check-input">
+										<label for="my-resetBeforeCtrl" class="form-check-label">
+											Send reset SysEx before sending control files
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-optimizeCtrl" type="checkbox" class="form-check-input">
+										<label for="my-optimizeCtrl" class="form-check-label">
+											Optimize redundant SysEx generated from control files
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-extraSysexWait" type="checkbox" class="form-check-input">
+										<label for="my-extraSysexWait" class="form-check-label">
+											Wait for extra time after each SysEx in control files (for MT-32 Ver.1.xx)
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-ignoreCtrlFile" type="checkbox" class="form-check-input">
+										<label for="my-ignoreCtrlFile" class="form-check-label">
+											Ignore control files
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">Error handling</div>
+								<div class="col-10">
+									<div class="form-check">
+										<input id="my-ignoreOutOfRange" type="checkbox" class="form-check-input">
+										<label for="my-ignoreOutOfRange" class="form-check-label">
+											Ignore out-of-range values in events
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-10">
+									<div class="form-check">
+										<input id="my-ignoreWrongEvent" type="checkbox" class="form-check-input">
+										<label for="my-ignoreWrongEvent" class="form-check-label">
+											Ignore unexpected events
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">Loop handling</div>
+								<div class="col-8">Maximum loop nest level</div>
+								<input id="my-maxLoopNest" type="number" class="form-control col-2" min="0" max="100" placeholder="Loop level">
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Loop count to revise to avoid loop-bomb</div>
+								<input id="my-infinityLoopCount" type="number" class="form-control col-2" min="1" max="255" placeholder="Loop count">
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Number of extracted beats considered as loop-bomb</div>
+								<input id="my-loopBombThreshold" type="number" class="form-control col-2" min="100" placeholder="Beats">
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">RolPara</div>
+								<div class="col-8">Initial value of device ID for <code>RolDev#</code></div>
+								<input id="my-rolandDevId" type="number" class="form-control col-2" min="0" max="127" placeholder="Device ID">
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Initial value of model ID for <code>RolDev#</code></div>
+								<input id="my-rolandModelId" type="number" class="form-control col-2" min="0" max="127" placeholder="Model ID">
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-6">Initial value of the base address for <code>RolBase</code></div>
+								<input id="my-rolandBaseAddrH" type="number" class="form-control col-2" min="0" max="127" placeholder="Address (H)">
+								<input id="my-rolandBaseAddrM" type="number" class="form-control col-2" min="0" max="127" placeholder="Address (M)">
+							</div>
+							<div class="form-group row">
+								<div class="col-2 float-left" style="height: 0;">XGPara &amp; YamPara</div>
+								<div class="col-8">Initial value of device ID for <code>YamDev#</code></div>
+								<input id="my-yamahaDevId" type="number" class="form-control col-2" min="0" max="127" placeholder="Device ID">
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-8">Initial value of model ID for <code>YamDev#</code></div>
+								<input id="my-yamahaModelId" type="number" class="form-control col-2" min="0" max="127" placeholder="Model ID">
+							</div>
+							<div class="form-group row">
+								<div class="offset-2 col-6">Initial value of the base address for <code>YamBase</code></div>
+								<input id="my-yamahaBaseAddrH" type="number" class="form-control col-2" min="0" max="127" placeholder="Address (H)">
+								<input id="my-yamahaBaseAddrM" type="number" class="form-control col-2" min="0" max="127" placeholder="Address (M)">
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button id="my-saveChanges" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Error dialog -->
+	<div id="my-errorModal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title h6">Error</h2>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<ul id="my-errors" class="list-unstyled"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Template for sequence data -->
+	<template id="my-rcmFile">
+		<!-- Title -->
+		<div class="row mt-2">
+			<div class="col-xl-8 col-lg-6">
+				<h2 class="my-title h6 mt-3 mb-lg-0"></h2>
+			</div>
+			<div class="col-xl-4 col-lg-6 d-flex justify-content-end">
+				<div class="input-group mr-2">
+					<div class="input-group-prepend">
+						<div class="input-group-text">SMF Name</div>
+					</div>
+					<input type="text" class="my-rcmSmfFileName form-control" placeholder="SMF File Name">
+					<div class="input-group-append">
+						<a class="my-convertRcm btn btn-primary" href="#" role="button">Convert</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-0">
+			<div class="col-xl-5 col-lg-12">
+				<div class="row mt-3">
+					<!-- Header information -->
+					<div class="col-xl-5 col-lg-6 pr-xl-0">
+						<div class="card">
+							<h3 class="card-header h6">Header</h3>
+							<div class="card-body">
+								<table class="table table-borderless table-sm m-0">
+									<tbody>
+										<tr><th class="pl-0">Tempo:</th><td class="my-tempo text-right"></td></tr>
+										<tr><th class="pl-0">Play Bias:</th><td class="my-playBias text-right"></td></tr>
+										<tr><th class="pl-0">Key:</th><td class="my-key text-right"></td></tr>
+										<tr><th class="pl-0">Beat:</th><td class="text-right"><span class="my-beatN"></span> / <span class="my-beatD"></span></td></tr>
+										<tr><th class="pl-0">Time Base:</th><td class="my-timeBase text-right"></td></tr>
+									</tbody>
+								</table>
+								<hr class="">
+								<h4 class="h6">Control File(s):</h4>
+								<ul class="list-unstyled mb-0 text-right">
+									<li class="my-fileNameMTD"></li>
+									<li class="my-fileNameCM6"></li>
+									<li class="my-fileNameGSD"></li>
+									<li class="my-fileNameGSD2"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- Memo area -->
+					<div class="col-xl-7 col-lg-6">
+						<div class="card">
+							<h3 class="card-header h6">Memo</h3>
+							<div class="card-body px-0 d-flex justify-content-center">
+								<pre class="my-memoArea border border-light mb-0"></pre>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Track information -->
+				<div class="row mt-3">
+					<div class="col-12">
+						<div class="card">
+							<h3 class="card-header h6">Tracks</h3>
+							<div class="card-body">
+								<table class="table table-sm m-0">
+									<thead>
+										<tr>
+											<th class="text-right" style="width: 2.5rem;">Tr.</th>
+											<th class="text-right" style="width: 2.5rem;">Mode</th>
+											<th class="text-right" style="width: 2.5rem;">Ch.</th>
+											<th class="text-right" style="width: 2.5rem;">ST+</th>
+											<th class="text-right" style="width: 2.5rem;">K#+</th>
+											<th>Memo</th>
+										</tr>
+									</thead>
+									<tbody class="my-tracks">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- User Exclusive -->
+				<div class="row mt-3">
+					<div class="col-12">
+						<div class="card">
+							<h3 class="card-header h6">User Exclusive</h3>
+							<div class="card-body">
+								<table class="table table-sm m-0">
+									<thead>
+										<tr>
+											<th class="text-right" style="width: 3rem;">No.</th>
+											<th>Memo &amp; Content</th>
+										</tr>
+									</thead>
+									<tbody class="my-userSysExs">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-7 col-lg-12">
+				<div class="row mt-3">
+					<div class="col-11 pr-2">
+						<div class="card">
+							<h3 class="card-header h6">Events</h3>
+							<div class="card-body">
+								<div class="my-eventPanes tab-content">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-1">
+						<div class="row">
+							<div class="my-trackTabs nav flex-column nav-pills" role="tablist">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</template>
+
+	<!-- Template for event table -->
+	<template id="my-eventTables">
+		<div class="row">
+			<div class="col-12">
+				<h3 class="my-track h6"></h3>
+				<hr>
+			</div>
+		</div>
+		<div class="row" style="display: flex;">
+			<div class="col p-0" style="min-width: 22,5rem; max-width: 22.5rem;">
+				<h4 class="h6 pl-3">Original:</h4>
+				<pre class="my-events"></pre>
+			</div>
+			<div class="col p-0" style="flex: 1;">
+				<h4 class="h6 pl-3">Extracted:</h4>
+				<pre class="my-extractedEvents"></pre>
+			</div>
+		</div>
+	</template>
+
+	<!-- Template for control file -->
+	<template id="my-ctrlFile">
+		<div class="row mt-2">
+			<div class="col-xl-4 col-lg-12">
+				<h2 class="my-title h6 mt-3 mb-lg-0">Control File</h2>
+			</div>
+			<div class="col-xl-4 col-lg-6 d-flex justify-content-end">
+				<div class="input-group mr-2">
+					<div class="input-group-prepend">
+						<div class="input-group-text">Syx Name</div>
+					</div>
+					<input type="text" class="my-ctrlSyxFileName form-control" placeholder="Syx File Name">
+					<div class="input-group-append">
+						<a class="my-convertCtrlSyx btn btn-primary" href="#" role="button">Convert</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-lg-6 d-flex justify-content-end">
+				<div class="input-group mr-2">
+					<div class="input-group-prepend">
+						<div class="input-group-text">SMF Name</div>
+					</div>
+					<input type="text" class="my-ctrlSmfFileName form-control" placeholder="SMF File Name">
+					<div class="input-group-append">
+						<a class="my-convertCtrlSmf btn btn-primary" href="#" role="button">Convert</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-12">
+				<div class="card">
+					<h2 class="card-header h6">SysEx</h2>
+					<div class="card-body">
+						<table class="table table-sm">
+							<tbody class="my-sysExs">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<!-- Template for help message -->
+	<template id="my-help">
+		<div class="row mt-3">
+			<div class="col-12">
+				<div class="my-helpText px-3"></div>
+			</div>
+		</div>
+	</template>
+
+	<!-- Container of help message -->
+	<template id="my-markdown">
+What is this?
+-------------
+
+This is a Recomposer file (.RCP, .R36, .G36, and .MCP) to Standard MIDI File (.mid) converter.
+
+For more detail, refer to https://github.com/shingo45endo/rcm2smf
+
+How to use
+----------
+
+1. Drag & drop RCP/R36/G36/MCP file(s).
+	* If the input files need control files (such as MTD/CM6/GSD), drag & drop them too.
+2. Push the "Convert" button on the top-right of the pane area.
+	* If necessary, you can change the file name of generated SMF with the adjacent text field.
+
+Supported Formats
+-----------------
+
+### Sequence Files
+
+* MCP
+	* RCM-PC98 Ver.1.0
+	* Contains at most 8 tracks and special tracks for rhythm part.
+* RCP
+	* Recomposer (aka RCM-PC98) Ver.2.0 ~ Ver.2.5F
+	* Contains at most 18 tracks.
+* R36
+	* Recomposer Ver.2.5F
+	* Contains at most 36 tracks.
+* G36
+	* Recomposer Ver.2.5G, Ver.3.0, and for Windows
+	* Time base can be 480 ticks per beat at a maximum.
+	* Contains at most 36 tracks (or 99 tracks only for Windows 95 Version)
+
+### Control Files
+
+Some Recomposer sequence files contain "control files" to set up the initial settings of sound modules by bulk dump. This converter converts them into SysExs and prepends the generated them to the beginning of SMF.
+
+* MTD
+	* For MCP files
+	* Intended to Roland MT-32.
+* CM6
+	* For RCP files
+	* Intended to Roland CM-64 (and MT-32).
+* GSD
+	* For RCP/R36/G36 files
+	* Intended to Roland SC-55.
+	* As for G36, two GSD files can be used for each port.
+</template>
+
+</body>
+</html>

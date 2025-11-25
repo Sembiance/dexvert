@@ -2128,6 +2128,7 @@ export const WEAK_VALUES =
 	/^Liquid Audio$/,
 	/^Litestep theme$/,
 	/^LMMC encoded router config$/,
+	/^LocoScript Data \(v1\.x\)$/,
 	/^LogonStudio Vista logon image$/,
 	/^lpaq compressed data \(generic\)$/,
 	/^LZ4 compressed stream$/,

@@ -6,7 +6,7 @@ export class wordForDOSScreenCapture extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Word_for_DOS_screen_capture";
 	ext            = [".scr", ".mwg"];
 	forbidExtMatch = true;
-	magic          = ["deark: mswordscr (Word for DOS screen capture)"];
+	magic          = ["deark: mswordscr (Word for DOS screen capture)", "Word for DOS screen capture"];
 	converters     = ["deark[module:mswordscr]"];
 	verify         = ({meta}) => meta.width>2 && meta.height>2;
 }

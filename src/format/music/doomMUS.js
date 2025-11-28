@@ -2,7 +2,7 @@ import {Format} from "../../Format.js";
 
 export class doomMUS extends Format
 {
-	name           = "Doom/Heretic Music";
+	name           = "DMX Doom/Heretic Music";
 	website        = "http://fileformats.archiveteam.org/wiki/Doom_MUS";
 	ext            = [".mus"];
 	forbidExtMatch = true;

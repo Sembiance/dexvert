@@ -227,7 +227,7 @@ export default
 		quadrupleDArchiverArchive                   : {name : "Quadruple D Archiver archive", ext : [".qda"], magic : ["Quadruple D Archiver compressed archive"]},
 		quickBooksBackup                            : {name : "Intuit QuickBooks Backup", ext : [".qbb"], magic : ["Intuit QuickBooks Backup", /^fmt\/1354( |$)/]},
 		realArcadeGameInstaller                     : {name : "RealArcade Game Installer", ext : [".rgs"], magic : ["RealArcade Game Installer"]},
-		reiserFSFileSystem                          : {name : "ReiserFS file system", ext : [".img"], magic : [/^(Reiser\d|ReiserFS) file system/]},
+		reiserFSFileSystem                          : {name : "ReiserFS file system", ext : [".img"], magic : [/^(Reiser\d|ReiserFS) file system/, "ReiserFS V"]},
 		renPyArchive                                : {name : "Ren'Py Archive", ext : [".rpa"], magic : ["Ren'Py Archive"], weakMagic : true},
 		repiPack                                    : {name : "RepiPack archive", ext : [".dat"], magic : ["RepiPack archive"]},
 		rohitCompressedData                         : {name : "Rohit compressed data", ext : [".tsi"], magic : ["Rohit compressed data"]},

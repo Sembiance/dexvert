@@ -22,7 +22,7 @@ export class ini extends Format
 		"Windows system Initialization settings", "EightyOne snapshot", "Icon Theme index", "Cisco VPN Profile Configuration File", /^Avatar Studio (Deformations|data \(generic\)|SAP|Save|Animation|BRZ|Bank descriptor)/, "Room Arranger design",
 		"AGS game configuration", "Picasa info (generic)", "Adblock Plus 2.0 rules file", "KLH10 RAW tape image directory", "Marble map description", "Advanced Renamer method", "D-Fend Reloaded Profile", "RawTherapee Postprocessing Profile", "AutoIt script",
 		"Psycle display preset", "cdrtfe tools configuration", "SynWrite Output Preset", "Midnight Commander skin", "NPS Image Editor Palette", "Silverpoint Skin", "SlickRun MagicWord Pack", "Krita Color scheme", "Compaq Diagnostics", "EEPROM Template",
-		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, "KDevelop Project", "Xcode perspective",
+		"Windows Media redirector / shortcut", /^Motocross Madness (model|Motions|Scene)/, /^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, "KDevelop Project", "Xcode perspective", "Astra Report",
 		"Zilog Developer Studio II Workstate", "IBM i Access Client Poppad", "IBM i (Client) Access Keyboard Map", "IBM iSeries Client Access WorkStation profile", "Microsoft Zone Identifier", "Citrix Independent Computer Architecture", "Steem Patch",
 		/^Altium Designer ((integrated Library Package)|Project|Workspace)/, "TeXnicCenter Project", "application/x-kourse", "application/x-kolf", "Photofinish Calibration Map (v1.00)", "Grand Theft Auto 2 Multiplayer Map Metadata", "mIRC Theme",
 		"TraxMaker settings (v2.00)", "FL Studio DrumSynth Preset (v1.x)", "Photofinish Output Device info", "Microsoft Project settings (v1.0)", "Atlantis Word Processor SpellCheck settings", "DemoShield project", "Yape configuration", "VICE settings",
@@ -33,7 +33,7 @@ export class ini extends Format
 		"Turboprint Printer Description", "Evasive Action scenery Topography", "Extra! for Windows Album/slideshow", "IBM i Access Client Translation Table", "Origin Fitting Function Definition File", /^git configuration$/, "RealStorm Engine object",
 		"Quarterdeck Provider info", "InstallShield Installation Package Strings table", "Gemsylk graph", "Micro-Cap Circuit", "Popcorn Mail configuration", "WinOnCD Project", "Spring Map Definition", "Premiere Title data", "Codewright Project (v3.x)",
 		"Unreal Engine Crash report", /^application\/x-godot-(resource|scene)/, /^Godot Engine Text (Resource|Scene)/, "Godot Engine Import settings", /^Total Annihilation (features data|GUI definition|map data|unit)/, "CAMtastic Aperture Wizard template",
-		"NCSA Mosaic configuration", /^LICQ configuration file, ASCII text$/, "TOPBENCH database", "Twistpad Syntax highlight script",
+		"NCSA Mosaic configuration", /^LICQ configuration file, ASCII text$/, "TOPBENCH database", "Twistpad Syntax highlight script", "ARCsolo Host Adapter Configuration", "ARCsolo Host Adapters List",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

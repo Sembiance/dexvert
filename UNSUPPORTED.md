@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,939)
+# Unsupported File Formats (3,942)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (305)
+## Archive (306)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -39,6 +39,7 @@ Family/Format | Name | Extensions | Notes
 [archive/asPackPacked](https://discmaster.textfiles.com/search?format=asPackPacked) | ASPack Packed |  | 
 [archive/asymetrixToolbookArchive](https://discmaster.textfiles.com/search?format=asymetrixToolbookArchive) | Asymetrix Toolbook Archive |  | 
 [archive/atariCassetteTapeImage](https://discmaster.textfiles.com/search?format=atariCassetteTapeImage) | Atari Cassette Tape Image | .cas | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCassetteTapeImage/)
+[archive/atariLZF0CompressedArchive](https://discmaster.textfiles.com/search?format=atariLZF0CompressedArchive) | Atari LZF0 compressed archive | .pax | 
 [archive/audiokineticWwisePackage](https://discmaster.textfiles.com/search?format=audiokineticWwisePackage) | Audiokinetic Wwise Package | .pck .pkg | 
 [archive/authorware](https://discmaster.textfiles.com/search?format=authorware) | Authorware Application/Package | .app .apw | [9 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
 [archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?format=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
@@ -1178,7 +1179,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,663)
+## Other (2,665)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1409,6 +1410,7 @@ Family/Format | Name | Extensions | Notes
 [other/arConProject](https://discmaster.textfiles.com/search?format=arConProject) | ArCon project | .acp | 
 [other/arcSoftAlbumOrSlideshow](https://discmaster.textfiles.com/search?format=arcSoftAlbumOrSlideshow) | ArcSoft Album | .abm .sld | 
 [other/arcSoftUI](https://discmaster.textfiles.com/search?format=arcSoftUI) | ArcSoft UI | .aui | 
+[other/arcsoloTapeSupport](https://discmaster.textfiles.com/search?format=arcsoloTapeSupport) | ARCsolo Tape Support | .tds | 
 [other/area51GameDataArchive](https://discmaster.textfiles.com/search?format=area51GameDataArchive) | Area 51 game data archive | .dfs | 
 [other/armorCommandMission](https://discmaster.textfiles.com/search?format=armorCommandMission) | Armor Command mission | .hpj | 
 [other/armorCommandPicture](https://discmaster.textfiles.com/search?format=armorCommandPicture) | Armor Command Picture | .pic | 
@@ -1763,6 +1765,7 @@ Family/Format | Name | Extensions | Notes
 [other/cricketGraphData](https://discmaster.textfiles.com/search?format=cricketGraphData) | Cricket Graph Data | .cgd | 
 [other/cricketGraphGraph](https://discmaster.textfiles.com/search?format=cricketGraphGraph) | Cricket Graph Graph | .cgg | 
 [other/cricketGraphTemplate](https://discmaster.textfiles.com/search?format=cricketGraphTemplate) | Cricket Graph Template | .cgt | 
+[other/crimsonFieldsLevelData](https://discmaster.textfiles.com/search?format=crimsonFieldsLevelData) | Crimson Fields Level data | .lev | 
 [other/criwareCPKGameDataContainer](https://discmaster.textfiles.com/search?format=criwareCPKGameDataContainer) | CRIWARE CPK game data container | .cpk | 
 [other/crosstalkDriver](https://discmaster.textfiles.com/search?format=crosstalkDriver) | Crosstalk Driver | .xtd | 
 [other/crosstalkFilter](https://discmaster.textfiles.com/search?format=crosstalkFilter) | Crosstalk Filter | .xtf | 

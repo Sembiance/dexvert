@@ -2061,6 +2061,7 @@ export const WEAK_VALUES =
 	/^Hi-MD Minidisc MPEG audio data container$/,
 	/^HotDocs templates Library$/,
 	/^HP Printer Command Language \(ESC\+E\)$/,
+	/^HPTuners \/ VCM data \(generic\)$/,
 	/^HS2 zipped bitmap\(s\) archive$/,
 	/^HTTP Archive( format)?$/,
 	/^Hugin Project$/,

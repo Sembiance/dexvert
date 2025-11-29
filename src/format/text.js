@@ -755,6 +755,7 @@ export default
 		montagePreset                              : {name : "Montage Preset", ext : [".preset"], magic : ["Montage Preset"]},
 		mosaicHotlist                              : {name : "Mosaic Hotlist", ext : [".hot"], magic : ["Mosaic Hotlist"], weakMagic : true},
 		motionCaptureFileFormat                    : {name : "Motion Capture File Format", ext : [".csm"], magic : ["Motion Capture File Format"], weakMagic : true},
+		motorolaDSPObjectModuleFormat              : {name : "Motorola DSP56000/56001 object module format", ext : [".lod"], magic : ["Motorola DSP56000/56001 object module format"], weakMagic : true},
 		motorolaPhoneSkinInfo                      : {name : "Motorola phone skin info", ext : [".ski"], magic : ["Motorola phone skin info"], weakMagic : true},
 		movieMasterScript                          : {name : "Movie Master Script", ext : [".scr"], magic : ["Movie Master Script"], weakMagic : true},
 		moxcelSpreadsheet                          : {name : "Moxcel spreadsheet", ext : [".mxl"], magic : ["Moxcel spreadsheet", /^fmt\/1970( |$)/], weakMagic : true},

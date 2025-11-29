@@ -1,11 +1,11 @@
-# Supported File Formats (3,379)
+# Supported File Formats (3,381)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (493)
+## Archive (494)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -449,6 +449,7 @@ archive | TinyProg Packed | .exe .com | [unp](https://sites.google.com/view/f1gp
 archive | [TPK Archive](http://fileformats.archiveteam.org/wiki/TPK_(compressed_archive)) |  | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/tpk/)
 archive | [Transport Neutral Encapsulation Format](http://fileformats.archiveteam.org/wiki/Transport_Neutral_Encapsulation_Format) | .tnef .dat | [ytnef](https://github.com/Yeraze/ytnef) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tnef/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dmk/)
+archive | TRS/80 JVC Disk Image | .jvc | [jvcextract](https://github.com/mseminatore/dsktools) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/trs80JVCDiskImage/)
 archive | TSCRUNCH Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/tscrunchPacked/)
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTCOMP) |  | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ttcomp/)
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/ttw/)
@@ -2204,7 +2205,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,119)
+## Text (1,120)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2809,6 +2810,7 @@ text | Montage Page |  |  | [13 sample files](https://sembiance.com/fileFormatSa
 text | Montage Preset | .preset |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/montagePreset/)
 text | Mosaic Hotlist | .hot |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/mosaicHotlist/)
 text | Motion Capture File Format | .csm |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/motionCaptureFileFormat/)
+text | Motorola DSP56000/56001 object module format | .lod |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/motorolaDSPObjectModuleFormat/)
 text | Motorola phone skin info | .ski |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/motorolaPhoneSkinInfo/)
 text | Movie Master Script | .scr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/movieMasterScript/)
 text | Moxcel spreadsheet | .mxl |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/moxcelSpreadsheet/)

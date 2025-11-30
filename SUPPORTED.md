@@ -2525,7 +2525,7 @@ text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembi
 text | File-Type Rule | .ftr |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/fileTypeRule/)
 text | Fink Info-file | .info |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/finkInfoFile/)
 text | FITS Header (xtension) | .hdr |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/fitsHeaderXtension/)
-text | Flash Project | .flp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flashProject/)
+text | Flash Project | .flp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/flashProject/)
 text | Flexi driver configuration | .csm |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/flexiDriverConfiguration/)
 text | Flight Sim Toolkit airplane parameters |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitAirplaneParameters/)
 text | Flight Sim Toolkit Gauges | .fgd |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitGauges/)

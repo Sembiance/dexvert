@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,942)
+# Unsupported File Formats (3,943)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1179,7 +1179,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,665)
+## Other (2,666)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2151,6 +2151,7 @@ Family/Format | Name | Extensions | Notes
 [other/gapHelpSystemSix](https://discmaster.textfiles.com/search?format=gapHelpSystemSix) | GAP Help System Six | .six | 
 [other/garminMap](https://discmaster.textfiles.com/search?format=garminMap) | Garmin map | .img | 
 [other/gazeConfiguration](https://discmaster.textfiles.com/search?format=gazeConfiguration) | Gaze configuration | .dat | 
+[other/gccGCNOCoverageFtestCoverage](https://discmaster.textfiles.com/search?format=gccGCNOCoverageFtestCoverage) | GCC gcno coverage | .gcno | 
 [other/gconvModuleConfigurationCache](https://discmaster.textfiles.com/search?format=gconvModuleConfigurationCache) | gconv module configuration cache | .cache | 
 [other/gcsWorldData](https://discmaster.textfiles.com/search?format=gcsWorldData) | GCS World data | .wld | 
 [other/gdsIIStream](https://discmaster.textfiles.com/search?format=gdsIIStream) | GDSII stream | .gds | 

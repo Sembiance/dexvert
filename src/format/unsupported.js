@@ -1826,6 +1826,7 @@ export default
 		eclipseImage                       : {name : "Eclipse Image", ext : [".img"], magic : ["Eclipse Image"]},
 		eclipseTutorial                    : {name : "Eclipse Tutorial", ext : [".tut"], magic : ["Eclipse Tutorial"]},
 		emacsCompiledLisp                  : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp/], notes : "Could decompile it with (maybe): https://github.com/rocky/elisp-decompile"},
+		gccGCNOCoverageFtestCoverage       : {name : "GCC gcno coverage", ext : [".gcno"], magic : [/^GCC gcno coverage/], weakMagic : true},
 		glBasic3DData                      : {name : "GLBasic 3D data", ext : [".ddd"], magic : ["GLBasic 3D data"], weakMagic : true},
 		gLBasicProject                     : {name : "GLBasic project", ext : [".gbap"], magic : ["GLBasic project"], weakMagic : true},
 		gnuGettextMachineObject            : {name : "GNU Gettext Machine Objec", ext : [".gmo"], magic : ["Format: GNU Gettext Machine Object (.MO)"], weakMagic : true},

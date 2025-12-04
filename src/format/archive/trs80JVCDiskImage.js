@@ -7,5 +7,6 @@ export class trs80JVCDiskImage extends Format
 	forbidExtMatch = true;
 	fileSize       = 161_280;
 	matchFileSize  = true;
+	idCheck        = (inputFile, detections, {extMatch}) => !!extMatch;
 	converters     = ["jvcextract"];
 }

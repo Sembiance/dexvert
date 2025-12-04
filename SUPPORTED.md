@@ -1,4 +1,4 @@
-# Supported File Formats (3,381)
+# Supported File Formats (3,382)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -891,7 +891,7 @@ Family | Name | Extensions | Converters | Notes
 executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/executable/epocExecutable/)
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/executable/macOSExecutable/)
 executable | [Microsoft Windows Dynamic Link Library](http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)) | .dll | [director_files_extract](https://github.com/n0samu/director-files-extract) [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [24 sample files](https://sembiance.com/fileFormatSamples/executable/dll/)
-executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [director_files_extract](https://github.com/n0samu/director-files-extract) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) [deark](https://entropymine.com/deark/) | [35 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
+executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [director_files_extract](https://github.com/n0samu/director-files-extract) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) [deark](https://entropymine.com/deark/) | [36 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
 executable | [Psion IMG/APP](http://fileformats.archiveteam.org/wiki/Psion_IMG/APP) | .app .img | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionAPP/)
 executable | [Psion OPO/OPA Executable](http://fileformats.archiveteam.org/wiki/Psion_OPO/OPA) | .opo .opa .app | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionOPL/)
 executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/windowsSCR/) - Could be fun to 'run' these in Wine and record the output into a preview.mp4 video
@@ -1335,7 +1335,7 @@ image | [Lotus 1-2-3 Chart](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3_
 image | [Lotus Manuscript Graphic](http://fileformats.archiveteam.org/wiki/Lotus_Manuscript_graphics) | .bit .rle | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/lotusManuscriptGraphic/)
 image | [Lucasfilm Picture](http://fileformats.archiveteam.org/wiki/Lucasfilm_picture) | .lff | [nconvert](https://www.xnview.com/en/nconvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/lucasfilmPicture/)
 image | [Ludek Maker](http://fileformats.archiveteam.org/wiki/Ludek_Maker) | .ldm | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/ldm/)
-image | [LuRaWave Bitmap](http://fileformats.archiveteam.org/wiki/LuraWave) | .lwf | [luraWave](https://archive.org/download/plug-in-power-pack-for-netscape-communicator/Plug-In%20Power%20Pack%20for%20Netscape%20Communicator.iso/plugins%2Flw20free.exe) | [2 sample files](https://sembiance.com/fileFormatSamples/image/luraWave/)
+image | [LuRaWave Bitmap](http://fileformats.archiveteam.org/wiki/LuraWave) | .lwf | [luraWave](https://archive.org/download/plug-in-power-pack-for-netscape-communicator/Plug-In%20Power%20Pack%20for%20Netscape%20Communicator.iso/plugins%2Flw20free.exe) | [3 sample files](https://sembiance.com/fileFormatSamples/image/luraWave/)
 image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict .drw | [soffice](https://www.libreoffice.org) | [19 sample files](https://sembiance.com/fileFormatSamples/image/macDraw/)
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [iio2png](http://github.com/Sembiance/iio2png/) [ffmpeg](https://ffmpeg.org/) [recoil2png](http://recoil.sourceforge.net) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [keyViewPro](https://archive.org/details/KeyViewPro/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [soffice](https://www.libreoffice.org) [tomsViewer](https://tomseditor.com/blog/viewer) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [65 sample files](https://sembiance.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/icns/)
@@ -2205,7 +2205,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,120)
+## Text (1,121)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2414,7 +2414,7 @@ text | CrossStudio project | .hzp |  | [5 sample files](https://sembiance.com/fi
 text | Crossword Creator Puzzle | .puz |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/crosswordCreatorPuzzle/)
 text | Crystallographic Information Framework | .cif |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/crystallographicInformationFramework/)
 text | Csound Orchestra | .orc |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/csoundOrchestra/)
-text | Csound unified file format | .csd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
+text | Csound unified file format | .csd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
 text | Cube LUT format | .lut .cube |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/cubeLUTFormat/)
 text | CUETools AccuRip log | .accurip |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/cueToolsAccuRipLog/)
 text | CUPL format | .jed .im |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/cuplFormat/)
@@ -2693,7 +2693,7 @@ text | KiCad part Library | .lib |  | [2 sample files](https://sembiance.com/fil
 text | KiCad Schematic | .sch |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/kiCadSchematic/)
 text | Kinemage protein language | .kin |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/kinemageProteinLanguage/)
 text | Kodak Photo CD configuration | .pcd |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/kodakPhotoCDConfiguration/)
-text | Konqueror cookie |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
+text | Konqueror cookie |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/konquerorCookie/)
 text | Korn shell script |  |  | [25 sample files](https://sembiance.com/fileFormatSamples/text/kornShellScript/)
 text | KsofT CRC-32 Data | .crc .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/ksofTCRC32Data/)
 text | KSS: Author presentation settings |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/kssAuthorPresentationSettings/)
@@ -2715,6 +2715,7 @@ text | Lightscape View | .vw .dv |  | [1 sample file](https://sembiance.com/file
 text | LightWave 3D Configuration | .cfg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lightWave3DConfiguration/)
 text | LightWave 3D convolution Kernel | .krn |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/lightWave3DConvolutionKernel/)
 text | [LightWave Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene) | .lws .scn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/lightWaveScene/)
+text | Lightwright Show File |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/lightwrightShowFile/)
 text | LilyPond music score | .ly .ily |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lilyPondMusicScore/)
 text | Lingo Script |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lingoScript/)
 text | Linux kernel symbol map |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/linuxKernelSymbolMap/)
@@ -3133,7 +3134,7 @@ text | SURFCAM post processor | .m3 .e4 .m4 .e2 .e .l2 .m .l .m5 |  | [4 sample 
 text | SVGAVESA configuration | .svc |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/svgaVESAConfiguration/)
 text | SVN dump | .dump |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/svnDump/)
 text | Swords of the Stars Ship | .shipsection |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/swordsOfTheStarsShip/)
-text | Systemtap script | .stp |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/systemtapScript/)
+text | Systemtap script | .stp |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/systemtapScript/)
 text | T-RackS Preset | .trp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/tRackSPreset/)
 text | TASM instructions definition Table | .tab |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tasmInstructionsDefinitionTable/)
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
@@ -3241,7 +3242,7 @@ text | Visual Studio wizard | .vsz |  | [14 sample files](https://sembiance.com/
 text | Visual Thought diagram | .vthought |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/visualThoughtDiagram/)
 text | VisualBasic Project | .vbp |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/visualBasicProjectText/)
 text | Visualization Toolkit format | .vtk |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/visualizationToolkitFormat/)
-text | VMware configuration | .vmx |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/vmwareConfiguration/)
+text | VMware configuration | .vmx |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/vmwareConfiguration/)
 text | VMware Localization | .vlcl |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/vMwareLocalization/)
 text | VobSub Index file | .idx |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/vobSubIndexFile/)
 text | VX-REXX Project | .vrp |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vxREXXProject/)

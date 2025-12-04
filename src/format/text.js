@@ -680,6 +680,7 @@ export default
 		lightscapeView                             : {name : "Lightscape View", ext : [".vw", ".dv"], magic : ["Lightscape View"]},
 		lightWave3DConfiguration                   : {name : "LightWave 3D Configuration", ext : [".cfg"], magic : ["LightWave 3D Configuration"]},
 		lightWave3DConvolutionKernel               : {name : "LightWave 3D convolution Kernel", ext : [".krn"], magic : ["LightWave 3D convolution Kernel"], weakMagic : true},
+		lightwrightShowFile                        : {name : "Lightwright Show File", magic : [/^fmt\/1152( |$)/]},
 		lilyPondMusicScore                         : {name : "LilyPond music score", ext : [".ly", ".ily"], magic : ["LilyPond music score"], weakMagic : true},
 		linuxKernelSymbolMap                       : {name : "Linux kernel symbol map", filename : [/system\.map/i], weakFilename : true, magic : ["Linux kernel symbol map, ASCII text"], weakMagic : true},
 		linuxLiveCDInfo                            : {name : "Linux LiveCD info", ext : [".diskdefines"], magic : ["Linux LiveCD info"], weakMagic : true},

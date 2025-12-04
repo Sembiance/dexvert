@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,943)
+# Unsupported File Formats (3,944)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1179,7 +1179,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,666)
+## Other (2,667)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3026,6 +3026,7 @@ Family/Format | Name | Extensions | Notes
 [other/powerDriveSavedGame](https://discmaster.textfiles.com/search?format=powerDriveSavedGame) | Power Drive saved game | .ral | 
 [other/powerUpAlbumProject](https://discmaster.textfiles.com/search?format=powerUpAlbumProject) | Power Up! Album Project | .alb | 
 [other/powerTabTablature](https://discmaster.textfiles.com/search?format=powerTabTablature) | Power-Tab Tablature | .ptb | 
+[other/powerAlbumAlbum](https://discmaster.textfiles.com/search?format=powerAlbumAlbum) | PowerAlbum Album |  | 
 [other/powerAlbumDocument](https://discmaster.textfiles.com/search?format=powerAlbumDocument) | PowerAlbum document | .pwr | 
 [other/powerBASICHelp](https://discmaster.textfiles.com/search?format=powerBASICHelp) | PowerBASIC Help | .pbh | 
 [other/powerBASICResource](https://discmaster.textfiles.com/search?format=powerBASICResource) | PowerBASIC resource | .pbr | 

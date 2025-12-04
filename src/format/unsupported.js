@@ -3213,6 +3213,7 @@ export default
 		ponyProgDeviceFile                       : {name : "PonyProg device file", magic : ["PonyProg device file"]},
 		popNOPCrunchedData                       : {name : "PopNOP crunched data", ext : [".nop", ".vrm"], magic : ["PopNOP crunched data"], weakMagic : true},
 		portfolioCatalog                         : {name : "Portfolio catalog", ext : [".fdb"], magic : ["Portfolio catalog"]},
+		powerAlbumAlbum                          : {name : "PowerAlbum Album", magic : ["PowerAlbum Album"]},
 		powerAlbumDocument                       : {name : "PowerAlbum document", ext : [".pwr"], magic : ["PowerAlbum document"]},
 		powerBASICDOSConfigurationFile           : {name : "PowerBASIC/DOS configuration file", ext : [".pb"], magic : ["PowerBASIC/DOS configuration file"]},
 		powerBuilderTraceProfile                 : {name : "PowerBuilder trace Profile", ext : [".pbp"], magic : ["PowerBuilder trace Profile"], weakMagic : true},

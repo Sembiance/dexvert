@@ -58,6 +58,8 @@
   It *might* be wise to tackle the hard problem now of partial re-processing, partial re-injestion and partial re-indexing. Maybe. That sounds tricky and error prone and dangerous, so if I skip on that now, I'll never do it likely.
   Another installer to handle, Installer:InstallUs: https://discmaster.textfiles.com/view/39541/c64classix.iso/setup.exe?details
   Also can search for format 'exe' with a particular minimum MB to help identify additional installers (also of course look at exe.js for other installers to search for in detection field)
+  Make sure I go and see if I can do all the 'Installer' marked sub-formats in exe.js, especially 'Setup-Specialist' which is also sample exe/SeTUp.eXe)
+
 
 * archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
   Other MacOS installers to target in a similar way:

@@ -1,4 +1,4 @@
-# Supported File Formats (3,382)
+# Supported File Formats (3,388)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -560,7 +560,7 @@ audio | [Gravis Ultrasound Patch](http://fileformats.archiveteam.org/wiki/Gravis
 audio | [GSM Audio](http://fileformats.archiveteam.org/wiki/GSM) | .gsm | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/gsm/)
 audio | HAL Laboratory HALPST Audio | .hps | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/halLabsAudio/)
 audio | High Compression Audio | .hca | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/highCompressionAudio/)
-audio | Huffman Compressed audio | .hcom | [sox](http://sox.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/huffmanCompressedAudio/)
+audio | Huffman Compressed audio | .hcom | [sox](http://sox.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/huffmanCompressedAudio/)
 audio | [Impulse Tracker Sample](http://fileformats.archiveteam.org/wiki/Impulse_Tracker_sample) | .its | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/impulseTrackerSample/)
 audio | [Interplay Compressed Audio](http://fileformats.archiveteam.org/wiki/Interplay_ACM) | .acm | [zxtune123](https://zxtune.bitbucket.io/) [acm2wav](http://return0.pisem.net/audio.html) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/interplayACM/)
 audio | [IRCAM Sound Format](http://fileformats.archiveteam.org/wiki/Berkeley/IRCAM/Carl_Sound_Format) | .sf | [sox](http://sox.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/ircam/)
@@ -949,7 +949,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (731)
+## Image (732)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1250,6 +1250,7 @@ image | [Hires Interlace](http://fileformats.archiveteam.org/wiki/Hires_Interlac
 image | [Hires Manager](http://fileformats.archiveteam.org/wiki/Hires_Manager) | .him | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/him/)
 image | [HiRes Player Missile](http://fileformats.archiveteam.org/wiki/HiRes_Player_Missile) | .hpm | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [14 sample files](https://sembiance.com/fileFormatSamples/image/hiResPlayerMissile/)
 image | Hires-Editor | .het | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/hiresEditor/)
+image | Homeworld Texture LiF | .lif | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/homeworldTextureLiF/)
 image | [HP Palmtop Icon](http://fileformats.archiveteam.org/wiki/HP_100LX/200LX_icon) | .icn .xbg | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/hpPalmtopIcon/)
 image | [HRU](http://fileformats.archiveteam.org/wiki/HRU) | .hru | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/hru/)
 image | [HS2 Postering](http://fileformats.archiveteam.org/wiki/HS2_(POSTERING)) | .hs2 | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/hs2/)
@@ -2205,7 +2206,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,121)
+## Text (1,126)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2586,7 +2587,7 @@ text | Gerber artwork | .art |  | [4 sample files](https://sembiance.com/fileFor
 text | Gerber Photoplot | .pho |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gerberPhotoplot/)
 text | Gettext Portable Object | .po |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gettextPortableObject/)
 text | Ghemical Project | .gpr |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/ghemicalProject/)
-text | Gherkin Feature | .feature |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/gherkinFeature/)
+text | Gherkin Feature | .feature |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gherkinFeature/)
 text | GIMP curve file |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/gimpCurveFile/)
 text | GIMP Dynamics | .gdyn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gimpDynamics/)
 text | GIMP Gradient |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/gimpGradient/)
@@ -2838,6 +2839,7 @@ text | Netscape cookies | .txt .lst |  | [10 sample files](https://sembiance.com
 text | NEXUS format | .nex .nxs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nexusFormat/)
 text | NIST/ITL StRD format | .dat |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/nistITLStRDFormat/)
 text | NMAKE | .msc .mak |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/nmake/)
+text | Nmap scan results |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/nmapScanResults/)
 text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
 text | Noesis Scene | .noesis |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/noesisScene/)
 text | Nota Bene Printer definition | .prn |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/notaBenePrinterDefinition/)
@@ -3134,7 +3136,7 @@ text | SURFCAM post processor | .m3 .e4 .m4 .e2 .e .l2 .m .l .m5 |  | [4 sample 
 text | SVGAVESA configuration | .svc |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/svgaVESAConfiguration/)
 text | SVN dump | .dump |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/svnDump/)
 text | Swords of the Stars Ship | .shipsection |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/swordsOfTheStarsShip/)
-text | Systemtap script | .stp |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/systemtapScript/)
+text | Systemtap script | .stp |  | [23 sample files](https://sembiance.com/fileFormatSamples/text/systemtapScript/)
 text | T-RackS Preset | .trp |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/tRackSPreset/)
 text | TASM instructions definition Table | .tab |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tasmInstructionsDefinitionTable/)
 text | [Tcl/Tk script](http://fileformats.archiveteam.org/wiki/Tcl) | .tcl |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/tclTkScript/)
@@ -3168,15 +3170,19 @@ text | TPLOT graph source | .plt |  | [12 sample files](https://sembiance.com/fi
 text | Track Row Column markers data format | .trc |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trackRowColumnMarkersDataFormat/)
 text | Tracon Sector info | .sec |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
 text | Tracon Simulation data | .dem .sim |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/traconSimulationData/)
-text | Train Simulator Activity | .act |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorActivity/)
-text | Train Simulator Cab View File | .cvf |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
-text | Train Simulator Consist | .con |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
+text | Train Simulator Activity | .act |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorActivity/)
+text | Train Simulator Cab View File | .cvf |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorCabViewFile/)
+text | Train Simulator colors Palette | .pal |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorColorsPalette/)
+text | Train Simulator Consist | .con |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorConsist/)
 text | Train Simulator Environment | .env |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorEnvironment/)
-text | Train Simulator Path | .pat |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorPath/)
-text | Train Simulator Service definition | .srv |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorServiceDefinition/)
+text | Train Simulator Path | .pat |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorPath/)
+text | Train Simulator Service definition | .srv |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorServiceDefinition/)
 text | Train Simulator Shape Definition | .s .eng .sd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorShapeDefinition/)
 text | Train Simulator Sound Management System | .sms |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorSoundManagementSystem/)
+text | Train Simulator Track | .trk |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/trainSimulatorTrack/)
+text | Train Simulator Traffic definition | .trf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorTrafficDefinition/)
 text | Train Simulator Wagon | .eng .wag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)
+text | Train Simulator World | .w |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWorld/)
 text | Trumpet Windsock settings | .ini |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trumpetWindsockSettings/)
 text | TSPLIB Tour Solution data | .tour |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTourSolutionData/)
 text | TSPLIB Traveling Salesman Problem data | .tsp |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTravelingSalesmanProblemData/)

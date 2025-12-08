@@ -3305,6 +3305,7 @@ export default
 		reflectionsScene                         : {name : "Reflections Scene", magic : ["Reflections scene/project"]},
 		reflex2Report                            : {name : "Reflex 2 Report", ext : [".r2r"], magic : ["Reflex 2 Report"]},
 		relocatableObjectModule                  : {name : "Relocatable Object Module", ext : [".obj", ".o"], magic : ["8086 relocatable", /^Microsoft .*compiled object code$/, "Oberon-M Object", /^Microsoft .*DOS Object module/]},
+		renderStar2Materials                     : {name : "RenderStar-2 Materials", ext : [".mat"], magic : ["RenderStar-2 Materials"]},
 		renderwareTeXtureDictionary              : {name : "Renderware TeXture Dictionary", ext : [".txd"], magic : ["Renderware TeXture Dictionary"], weakMagic : true},
 		repliGoVirtualPrint                      : {name : "RepliGo virtual print", ext : [".rgo"], magic : ["RepliGo virtual print"]},
 		reportSmithReport                        : {name : "ReportSmith report", ext : [".rpt"], magic : ["ReportSmith report"]},

@@ -1,6 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Support 	Win16 InstallShield Self-Extracting Executable
+  https://discmaster.textfiles.com/view/23942/PCGamer50_80Jogos.iso/Especial/mlsetup.exe?details
+  Can extract with sandbox/app/rip_isv3_exe.py   (can probably convert this to deno instead)
+  Then add to discmaster reprocess: https://discmaster.textfiles.com/search?detection=%22Win16+InstallShield%22
+
 * Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress
 
 * wuimg supports more formats:

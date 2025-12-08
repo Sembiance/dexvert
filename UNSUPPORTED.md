@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,944)
+# Unsupported File Formats (3,945)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1179,7 +1179,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,667)
+## Other (2,668)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3154,6 +3154,7 @@ Family/Format | Name | Extensions | Notes
 [other/relocatableObjectModule](https://discmaster.textfiles.com/search?format=relocatableObjectModule) | Relocatable Object Module | .obj .o | 
 [other/renPyCompiledGame](https://discmaster.textfiles.com/search?format=renPyCompiledGame) | Ren'Py Compiled game | .rpyc .rpymc | 
 [other/rend386VideoDriver](https://discmaster.textfiles.com/search?format=rend386VideoDriver) | Rend386 video driver | .rvd | 
+[other/renderStar2Materials](https://discmaster.textfiles.com/search?format=renderStar2Materials) | RenderStar-2 Materials | .mat | 
 [other/renderwareTeXtureDictionary](https://discmaster.textfiles.com/search?format=renderwareTeXtureDictionary) | Renderware TeXture Dictionary | .txd | 
 [other/rendezvousWithRamaGameData](https://discmaster.textfiles.com/search?format=rendezvousWithRamaGameData) | Rendezvous with Rama game data |  | 
 [other/rendezvousWithRamaGameLogic](https://discmaster.textfiles.com/search?format=rendezvousWithRamaGameLogic) | Rendezvous with Rama game logic |  | 

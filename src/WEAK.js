@@ -2242,7 +2242,6 @@ export const WEAK_VALUES =
 	/^OpenSceneGraph (legacy|native) binary format$/,
 	/^OpenShot profile$/,
 	/^OpenSSL encrypted data$/,
-	/^OpenTTD savegame$/,
 	/^OpenVPN profile/,
 	/^Oracle Help for Java mapping$/,
 	/^Orda: Severnyi Veter game data$/,

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,945)
+# Unsupported File Formats (3,948)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1179,7 +1179,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,668)
+## Other (2,671)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1696,6 +1696,7 @@ Family/Format | Name | Extensions | Notes
 [other/clipGalleryDownloadPackage](https://discmaster.textfiles.com/search?format=clipGalleryDownloadPackage) | Clip Gallery Download Package | .cil | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?format=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
 [other/clispMemoryImageData](https://discmaster.textfiles.com/search?format=clispMemoryImageData) | CLISP memory image data | .mem | 
+[other/cliveBarkersJerichoSaveGame](https://discmaster.textfiles.com/search?format=cliveBarkersJerichoSaveGame) | Clive Barker's Jericho save game | .cbjericho | 
 [other/cloantoAmigaOSEncryptedROM](https://discmaster.textfiles.com/search?format=cloantoAmigaOSEncryptedROM) | Cloanto Amiga OS encrypted ROM | .rom | 
 [other/cloneCDSubChannelData](https://discmaster.textfiles.com/search?format=cloneCDSubChannelData) | CloneCD CDImage SubChannel Data | .sub | 
 [other/cloneCDLanguageFile](https://discmaster.textfiles.com/search?format=cloneCDLanguageFile) | CloneCD Language File | .lng | 
@@ -2052,6 +2053,7 @@ Family/Format | Name | Extensions | Notes
 [other/falloutTacticsImage](https://discmaster.textfiles.com/search?format=falloutTacticsImage) | Fallout Tactics image | .zar | 
 [other/falloutTacticsSprite](https://discmaster.textfiles.com/search?format=falloutTacticsSprite) | Fallout Tactics Sprite | .spr | 
 [other/familyTreeMakerFamilyTree](https://discmaster.textfiles.com/search?format=familyTreeMakerFamilyTree) | Family Tree Maker Family Tree | .fbk .ftw | 
+[other/farCry2SaveGame](https://discmaster.textfiles.com/search?format=farCry2SaveGame) | Far Cry 2 save game | .sav | 
 [other/farmingSimulatorTerreinData](https://discmaster.textfiles.com/search?format=farmingSimulatorTerreinData) | Farming Simulator terrein data | .grle | 
 [other/farscapeTheGameAnimationData](https://discmaster.textfiles.com/search?format=farscapeTheGameAnimationData) | Farscape: The Game Animation data | .fsa | 
 [other/fasaInteractiveGameDataArchive](https://discmaster.textfiles.com/search?format=fasaInteractiveGameDataArchive) | FASA Interactive game data archive | .fst | 
@@ -2871,6 +2873,7 @@ Family/Format | Name | Extensions | Notes
 [other/openCanvasEventData](https://discmaster.textfiles.com/search?format=openCanvasEventData) | OpenCanvas event data | .oes .ca4 | 
 [other/openFstBinaryData](https://discmaster.textfiles.com/search?format=openFstBinaryData) | OpenFst binary data | .far .fst | 
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?format=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
+[other/openTTDCompressedData](https://discmaster.textfiles.com/search?format=openTTDCompressedData) | OpenTTD Compressed Data | .scn .dat .sav | 
 [other/optionScopeWorksheet](https://discmaster.textfiles.com/search?format=optionScopeWorksheet) | OptionScope Worksheet | .osc | 
 [other/opTuneConfiguration](https://discmaster.textfiles.com/search?format=opTuneConfiguration) | OPTune Configuration | .cfg | 
 [other/opusCreatorMultimediaFile](https://discmaster.textfiles.com/search?format=opusCreatorMultimediaFile) | Opus Creator multimedia file | .ilm | 

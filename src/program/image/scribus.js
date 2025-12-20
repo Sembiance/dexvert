@@ -27,7 +27,7 @@ export class scribus extends Program
 		for(const filename of SCRIBUS_PREF_FILENAMES)
 			await Deno.copyFile(path.join(SCRIBUS_PREF_SRC, filename), path.join(r.scribusDirPath, filename));
 		
-		// now we create a conv.py pythong script to convert to SVG
+		// now we create a conv.py python script to convert to SVG
 		// right now it only supports converting to EPS (then to PNG+SVG). In the future I could add a flag to optionally convert to PDF for documents
 		// SCRIPT API: https://wiki.scribus.net/canvas/Automatic_Scripter_Commands_list
 

@@ -16,14 +16,12 @@ const DESIRED_SAMPLE_COUNT = 10;
 const RECURSE_WORK_DIR_PATH = "/mnt/dexvert/recurse";
 
 // these formats we want some extra samples for
-const EXTRA_SAMPLE_COUNT =
-{
+const EXTRA_SAMPLE_COUNT = {
 	"image/embeddedJPEG" : 20
 };
 
 // these formats should not be higlighted for sample inclusion on the admin item page for various resons
-const EXCLUDED_SAMPLE_FORMATS =
-[
+const EXCLUDED_SAMPLE_FORMATS = [
 	// too big
 	"archive/aaruDiskImage",
 	"archive/americanConquest2GameArchvie",
@@ -43,6 +41,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/sgaGameDataArchive",
 	"archive/sgiVolumeImage",
 	"archive/sgsDAT",
+	"archive/starTrekOnlineGameData",
 	"archive/thumbsUpDatabase",
 	"archive/vmwareDiskImage",
 
@@ -315,7 +314,7 @@ if(argv.headless)
 			r.osStatus = await xu.fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/status`, {asJSON : true});
 		}
 
-		return new Response(JSON.stringify(r));
+		return Response.json(r);
 	});
 
 	webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes), {xlog});
@@ -375,8 +374,7 @@ async function processNextQueue()
 		let {r, log} = xu.parseJSON(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {}) || {};
 		if(!r?.json)
 		{
-			r =
-			{
+			r = {
 				json :
 				{
 					original  : { input : (await DexFile.create(inputFilePath)).serialize() },

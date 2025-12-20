@@ -1,5 +1,4 @@
-export const WEAK_MAC_TYPE_CREATORS =
-[
+export const WEAK_MAC_TYPE_CREATORS = [
 	// common mac type/creators
 	"BTFL/pds ",		// AppleShare PDS
 	"BTFL/ugbt",		// AppleShare PDS
@@ -43,8 +42,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"UNKN/UNIX"
 ];
 
-export const WEAK_PRODOS_TYPES =
-[
+export const WEAK_PRODOS_TYPES = [
 	// these are very generic or system level stuff and are not useful to act on
 	"ATK",		// [E2] AppleTalk Data
 	"BAT",		// [F5] User Defined 5
@@ -80,8 +78,7 @@ export const WEAK_PRODOS_TYPES =
 	"VAR"		// [FD] Applesoft BASIC Variables
 ];
 
-export const WEAK_MAC_TYPES =
-[
+export const WEAK_MAC_TYPES = [
 	// common Mac types
 	"cdev",		// Control Panel
 	"INIT",
@@ -89,8 +86,7 @@ export const WEAK_MAC_TYPES =
 ];
 
 // these magics should be ignored in terms of reporting 'new magic' discoveries in things like dexrecurse, but are may be legitimate matches by various formats so should not explictly be marked as weak
-export const IGNORE_MAGICS =
-[
+export const IGNORE_MAGICS = [
 	// detectItEasy
 	/^Archive: BAGF$/,
 	/^Archive: JAM$/,
@@ -120,8 +116,7 @@ export const IGNORE_MAGICS =
 
 // These magics are untrustworthy and any detections against them should be noted as such
 // Note: Some may not be especially weak, they may just be so application-specific that I didn't want to deal with them anymore as they wouldn't be useful to support
-export const WEAK_VALUES =
-[
+export const WEAK_VALUES = [
 	// siegfried
 	/^fmt\/(111|114|134|135|208|304|328|347|452|473|583|584|625|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
@@ -215,7 +210,7 @@ export const WEAK_VALUES =
 	/^Archive: LZ4 compressed data/,
 	/^Archive: Packed git objects/,
 	/^Archive: Peril WAD$/,
-	/^Archive: SHP\(v2\.0 \[1995\]\)$/,
+	/^Archive: SHP\(v2\.0 \[1995]\)$/,
 	/^Archive: Unity\/Unity Asset/,
 	/^Archive: XFL game resource file/,
 	/^Format: Amiga loadable file$/,
@@ -1668,6 +1663,7 @@ export const WEAK_VALUES =
 	/^MDDClone game save$/,
 	/^Microsoft Bob container \(generic\)$/,
 	/^Microsoft Excel worksheet \(generic older format\)$/,
+	/^Microsoft Golf 1\.0 for Windows game data$/,
 	/^Microsoft SQL Server log \(generic\)$/,
 	/^Microsoft Works for Mac document \(v1\.0\)$/,
 	/^Mixman Studio Mix$/,
@@ -1724,6 +1720,7 @@ export const WEAK_VALUES =
 	/^TextCraft document$/,
 	/^Torque Dynamix Three Space model/,
 	/^Total Annihilation game data$/,
+	/^Toys for Bob data$/,
 	/^TrendMicro AntiVirus database$/,
 	/^Turbo Pascal Map/,
 	/^UbiArt Framework Cooked Asset$/,

@@ -93,11 +93,12 @@ const DEXMAGIC_CHECKS =
 	"FM-TownsOS EXP MP" : [{offset : 0, match : "MP"}],
 	
 	// font
-	"PCR Font"                 : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
+	"BitFax Font"              : [{offset : 0, match : "BIT  FAX  FONT"}],
+	"Font Mania Font"          : [{offset : 0, match : [0xEB]}, {offset : 7, match : " FONT MANIA, VERSION"}],
 	"FONTEDIT Font"            : [{offset : 0, match : [0xEB, 0x33, 0x90]}, {offset : 10, match : "PC Magazine "}, {offset : 23, match : " Michael J. Mefford"}],
 	"FONTEDIT Font (Alt 1)"    : [{offset : 0, match : [0xEB, 0x32]}, {offset : 91, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
 	"FONTEDIT Font (Alt 2)"    : [{offset : 0, match : [0xEB, 0x33]}, {offset : 92, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
-	"Font Mania Font"          : [{offset : 0, match : [0xEB]}, {offset : 7, match : " FONT MANIA, VERSION"}],
+	"PCR Font"                 : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
 	"Signum 3 Compressed Font" : [{offset : 0, match : [0x00, 0x02]}, {offset : 2, match : "chset001"}],
 
 	// image
@@ -110,6 +111,7 @@ const DEXMAGIC_CHECKS =
 	"Apple IIGS Preferred Format"     : [{offset : 2, match : [0x00, 0x00, 0x04]}, {offset : 5, match : "MAIN"}],
 	"ArtMaster88"                     : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
 	"Auto/FX Image"                   : [{offset : 0, match : [0x89, 0x41, 0x46, 0x58]}],
+	"BitFax Image"                    : [{offset : 0, match : "BIT  FAX"}],
 	"CAD/Draw TVG"                    : [{offset : 0, match : "TommySoftware TVG"}],
 	"CD-I IFF Image"                  : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CDView Encrypted JPG"            : [{offset : 0, match : "Z}Z"}],

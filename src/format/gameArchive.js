@@ -5,8 +5,7 @@
 //	converters     : ["gameextractor"] or ["gamearch"] or ["gamearch", "gameextractor"]
 // SPECIAL properties only allowed in this file:
 // allowExtMatch : true				(Set this is you want to allow ext matching for the format)
-export const gameextractor =
-{
+export const gameextractor = {
 	archive :
 	{
 		agonGameDataArchive                 : {name : "Agon game data archive", ext : [".sfl"], magic : ["Agon game data archive"], weakMagic : true},
@@ -94,8 +93,7 @@ export const gameextractor =
 	}
 };
 
-export const gamearch =
-{
+export const gamearch = {
 	archive :
 	{
 		buildEngineRFFGameArchive : {name : "Build Engine RFF Game Archive", ext : [".rff"], magic : ["Build Engine RFF encrypted container"], website : "https://moddingwiki.shikadi.net/wiki/RFF_Format"},
@@ -119,8 +117,7 @@ export const gamearch =
 	
 };
 
-export const both =
-{
+export const both = {
 	archive :
 	{
 		buildEngineGroupGameArchive : {name : "Build Engine Group Game Archive", ext : [".grp", ".dat"], magic : ["Build engine group file", "Build Engine GRP container"], idMeta : ({macFileType, macFileCreator}) => macFileType==="data" && ["Duke", "ShdW"].includes(macFileCreator), website : "http://fileformats.archiveteam.org/wiki/GRP_(Duke_Nukem_3D)"},

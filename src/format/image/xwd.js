@@ -7,7 +7,9 @@ export class xwd extends Format
 	ext          = [".xwd", ".dmp", ".xdm"];
 	safeExt      = ".xwd";
 	mimeType     = "image/x-xwindowdump";
-	magic        = ["X-Windows screen dump", "X-Window screen dump image data", "XWD X Windows Dump image data", "piped xwd sequence (xwd_pipe)", "deark: xwd", /^X Window Dump \((Direct|Pseudo|True) Color\) :xwd:$/, /^fmt\/401( |$)/];
+	magic        = ["X-Windows screen dump", "X-Window screen dump image data", "XWD X Windows Dump image data", "piped xwd sequence (xwd_pipe)", "deark: xwd", /^X Window Dump \((Direct|Pseudo|True) Color\) :xwd:$/, "X Window Dump (Static Grey) :xwd:",
+		/^fmt\/401( |$)/
+	];
 	metaProvider = ["image"];
 
 	// GIMP does the best for most input files

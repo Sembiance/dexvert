@@ -4,7 +4,7 @@ export class doomENDOOM extends Format
 {
 	name         = "Doom ENDOOM Screen";
 	website      = "https://doomwiki.org/wiki/ENDOOM";
-	ext          = [".endstrf", ".endtext"];
+	ext          = [".endstrf", ".endtext", ".loading"];
 	weakExt      = true;
 	filename     = [/endoom/i];		// sometimes it's an extension, or just the name, or somewhere in the name
 	weakFilename = true;

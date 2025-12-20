@@ -91,13 +91,13 @@ xlog.info`Starting web RPC...`;
 const routes = new Map();
 
 routes.set("/agentCount", () => new Response(DEXVERT_AGENT_COUNT.toString()));
-routes.set("/status", async () => new Response(JSON.stringify(Object.fromEntries(await [["idPool", idPool], ["dexPool", dexPool]].parallelMap(async ([type, pool]) =>
+routes.set("/status", async () => Response.json(Object.fromEntries(await [["idPool", idPool], ["dexPool", dexPool]].parallelMap(async ([type, pool]) =>
 {
 	const status = await pool.status();
 	for(const agent of status.agents)
 		agent.log &&= agent.log.join("\n").decolor();
 	return [type, status];
-})))));
+}))));
 
 routes.set("/dex", async request =>
 {
@@ -110,7 +110,7 @@ routes.set("/dex", async request =>
 	await xu.waitUntil(() => RPC_RESPONSES.has(workerData.rpcid));
 	const response = RPC_RESPONSES.get(workerData.rpcid);
 	RPC_RESPONSES.delete(workerData.rpcid);
-	return new Response(JSON.stringify(response));
+	return Response.json(response);
 });
 
 routes.set("/lock", async request =>

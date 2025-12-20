@@ -20,8 +20,7 @@ const xlog = new XLog(argv.logLevel);
 const OS_INSTANCE_DIR_PATH = "/mnt/dexvert/os";
 const OS_INSTANCE_START_INTERVAL = 500;
 
-const OS =
-{
+const OS = {
 	win2k :
 	{
 		debug       : false,
@@ -29,6 +28,7 @@ const OS =
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",
+		emuArgs     : () => (["86box.cfg"]),
 		copy        : ["86box.cfg", "nvr"],
 		hd          : ["hd.vhd"],
 		archiveType : "zip"
@@ -40,6 +40,7 @@ const OS =
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",
+		emuArgs     : () => (["86box.cfg"]),
 		copy        : ["86box.cfg", "nvr"],
 		hd          : ["hd.vhd"],
 		archiveType : "zip"
@@ -67,7 +68,7 @@ const OS =
 const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.40);
 const totalDesiredCores = Object.values(OS).map(({qty}) => qty).sum();
 for(const o of Object.values(OS))
-	o.qty = o.debug ? 1 : Math.min(o.qty, Math.max(Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)), 2));
+	o.qty = o.debug ? 1 : Math.min(o.qty, Math.max(Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)), 2));	// eslint-disable-line sembiance/prefer-math-clamp
 
 // reduce instance quantity to fit in 80% of available RAM
 const totalSystemRAM = (await sysUtil.memInfo()).total;
@@ -327,7 +328,7 @@ routes.set("/status", async () =>	// eslint-disable-line require-await
 		o.metas = metaDurations.map(md => md.meta).unique().map(meta => ({meta, count : metaDurations.filter(md => md.meta===meta).length}));
 		return o;
 	}).sortMulti([o => o.count, o => o.cmd], [true, false]);
-	return new Response(JSON.stringify(r));
+	return Response.json(r);
 });
 
 routes.set("/osRun", async request =>

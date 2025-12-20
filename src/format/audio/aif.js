@@ -16,5 +16,5 @@ export class aif extends Format
 	weakMagic    = ["audio/x-aiff"];
 	idMeta       = ({macFileType}) => ["AIFC", "AIFF"].includes(macFileType);
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[outType:mp3]", "vgmstream", "awaveStudio[matchType:magic]"];
+	converters   = ["sox", "ffmpeg[outType:mp3]", "vgmstream", "awaveStudio[matchType:magic]", "ffmpeg[libre][outType:mp3]"];
 }

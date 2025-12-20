@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+This is the DTD for IBM's BookManager eXtensible Knowledge Shelf XML file
+format.  It uses the unregistered PUBLIC ID "-//IBM//BookManagerXKS 0.1//EN".
+XKS shelves published by IBM, or created by IBM software, will specify the
+SYSTEM ID as "http://publib.boulder.ibm.com/epubs/df/xksVVRRX.dtd"
+where:
+  VV  is the 2-digit numeric version number of the DTD.
+  RR  is the 2-digit numeric release number of the DTD, within the
+       specified version.
+  X   is normally unused, but may be used to specify a modification
+       level of the VVRR.  If used, it must be a A..Z or a..z or
+       0..9 or $@#- in order to ensure that the DTD is portable to
+       all filesystems that BookManager products support.  Note that
+       some filesystems are not case-sensitive.  Therefore, do not
+       distinguish mod levels by using an uppercase letter for one,
+       and the same letter, lowercase, for another.  Unpredictable
+       results may occur.  A lowercase letter is suggested, if you
+       use this part of the DTD filename.
+
+BookManager software recognizes the above URL, and substitutes a local copy
+of the DTD, if one is available, when it parses XKS shelves.
+
+The DOCTYPE used with this DTD must be "XKS".
+
+Certain fields described in this DTD have additional restrictions which the DTD
+is unable to describe (limitation of XML 1.0 spec).  When BookManager software
+processes an XKS shelf, additional edit checks are performed to enforce these
+additional restrictions.  Comments located near each such field's definition
+within the DTD describe the additional restrictions.
+
+
+Portable names vs. URIs
+=======================
+All BookManager files, including BOOKs and XKS shelves, are cross-platform.
+Therefore, they are given filenames which are valid for any filesystem which
+BookManager supports.  This is the portable name.  Most BookManager products
+accept a portable name as input, append a predefined extension to it, and search
+for this file in a list of locations previously configured by the end user or
+the customer's product administrator.  This allows the file to have one short
+name (always specified by a NAME= attribute on the appropriate element start
+tag), and be able to be referenced with it, without the user having to modify
+the shelf, every time the shelf is copied to a new system.  This is the
+traditional BookManager file naming mechanism.  It is recognized, however, that
+this may not meet the needs of all customers.  Therefore, the URI= attribute
+was created as an alternative way of specifying the location of the file.
+Since this is a fully qualified location, it is likely that the URI= will have
+to be changed, whenever either the file or the XKS shelf moved.  This is
+especially likely, if the URI= specifies a local file, rather than a Web-
+based copy (CAUTION:   The intial August, 2003 release of SoftCcopy Librarian
+and Softcopy Reader do not support web-based URIs.  No commitment is made,
+to provide this support later, although it is considered a desirable
+enhancement.  The XKS Architecture does not require any product to support
+Web-based URIs.).  IBM strongly recommends that URIs not be specified in
+shelves, unless absolutely necessary.
+
+
+Restricted character set #1
+===========================
+Several fields refer to "restricted character set #1" as a restriction.  IBM's
+XKS code currently implements restricted character set #1 as follows (copied
+from file XKS_Shelf.hpp 08APR03):
+
+//  Restricted Character Set #1 is comprised of characters which are
+//  acceptable as filename characters in all filesystems supported by
+//  any BookManager product.  This list has not been fully tested.
+//    "_","+",and most other punctuation are disallowed by MVS
+//    lowercase letters are disallowed by ISO9660 (CD-ROM)
+//    "#", "$", "@" are known to be allowed on MVS, but are not well
+//      tested, otherwise
+//    0..9 and "-" are not allowed as the first character, by MVS
+//    "/", "\", ".", ":", ";", comma, and blank are used as separators
+//      by various filesystems
+//    "*", "%", "?", "=" are used as wildcards by various platforms
+//    quotes are used as quotes
+//    other esoteric punctuation is not allowed by most older
+//      filesystems
+//    parentheses, braces, brackets are not allowed by most older
+//      filesystems
+#define XKS_RESTRICTED_CHARSET_1_FIRSTCHAR "ABCDEFGHIJKLMNOPQRSTUVWXYZ#$@"
+#define XKS_RESTRICTED_CHARSET_1 "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$@-"
+
+NAME= attributes anywhere in an XKS are reported to be in error, if they do
+not conform to the above.
+
+
+End-of-line handling
+====================
+BookManager ignores physical end-of-line.  Leading and trailing linends are
+dropped from all data values.  Embedded linends that are next to blanks are
+also dropped.  Embedded linends which are not next to a blank are converted
+to blanks.  WARNING!  The policy of converting embedded linends to blanks
+could change, based on subsequent MVS dataset testing!
+
+
+Line breaks in data
+===================
+For text elements defined in this DTD to support it, line breaks which are
+desired in the text are denoted using BR elements in the XKS file.  When
+read out by the XKS code, BR elements are converted to the string "<BR />"
+embedded in the returned text.  When updating such a field, any occurrence
+of the string "<BR />" (exactly 1 blank between uppercase "BR" and forward
+slash ("/"), using literal open- and close-angle-bracket characters, NOT
+character entities) is stored in the XKS file as an actual BR element.
+
+Line break requests are not supported for attribute data.
+
+
+Change Log
+==========
+1.0     D.M.W.   20MAR03  Create DTD.
+1.5     D.M.W.   12MAY03  Add warnings about not changing subelement order due
+                          to restrictions in XKS_XMLBase.cpp.
+1.6-7   D.M.W.   04JUN03  The DTD URL for DOCTYPEs changed.
+1.2     D.M.W.   06MAY04  Defect 2866:  change the commentary describing
+                          portable (file)names to state that hyphens are not
+                          allowed as the first character of a name
+                          (XKS_RESTRICTED_CHARSET_1_FIRSTCHAR).  DTD level not
+                          updated, because this is a comments-only change.
+
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT AUTHOR (#PCDATA | BR)*>
+<!--
+This element describes the shelf's author (if used within the SHELFHEADER
+element) or the author of an instance of a document (if used within the
+INSTANCE element).
+
+This element is always optional.
+If present at the SHELFHEADER level, it follows the TITLE element.
+At the INSTANCE level, the required element order is ..., TITLE, SUBJECT,
+KEYWORDS, AUTHOR, ....
+
+Element Contents:  Freeform text with optional &lt;BR /&gt; subelements.
+
+Element Text Format:
+Text can be marked up with &lt;BR /&gt; tags to request line breaks, but the
+reading application may ignore any markup contained herein, if it does not
+support multiline AUTHOR data.  It may also truncate this data, if it is too
+long to display.  This specification will not define how long is "too long."
+Therefore, it could truncate it at the first line break, as an alternative
+way to cope, if the reading application only allows one line.
+
+Note:  the definition and restrictions for AUTHOR are the same as for
+       SUBJECT, except that SUBJECT is not allowed at the SHELFHEADER
+       level.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT BR EMPTY>
+<!--
+Indicates a recommended line break within textual data.  The application
+reading this data is NOT obligated to honor the line break request, however.
+This provision is made because not all BookManager software will be able to
+deal with multiline field contents.
+
+This element is always optional.
+It can be used within AUTHOR and SUBJECT elements.
+
+Element Contents:  none.
+
+Element Text Format:
+n/a
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT DOCOBJPROCESSING EMPTY>
+<!ATTLIST DOCOBJPROCESSING
+   DOCOBJTYPE CDATA #REQUIRED
+   COMMONNAME CDATA #REQUIRED
+   GENERICPROGRAMS NMTOKENS #IMPLIED
+   SPECIFICPROGRAMCOMMAND CDATA ""
+>
+<!--
+DOCOBJPROCESSING elements are used to tell the application what name to use for
+different types of document instances, when communicating with the user, to
+suggest a general type of processing, and to suggest a particular processing
+program, for files of this MIME type.  For every DOCOBJTYPE= value which occurs
+in an INSTANCE element anywhere in the shelf, other than the builting types
+"application/pdf" and "application/x-boo", a DOCOBJPROCESSING element is
+required, to define that type.
+Example:
+  DOCOBJPROCESSING
+    DOCOBJTYPE="text/plain"
+    COMMONNAME="text"
+    GENERICPROGRAMNAMES="EDITOR BROWSER"
+    SPECIFICPROGRAMCOMMAND="/opt/bin/the %f &"
+
+This element is required, if non-builtin DOCOBJTYPE= values are used.
+If present, all DOCOBJPROCESSING elements follow the INDEX element (or the
+SHELFHEADER element, if there is no INDEX element).
+
+Element Contents:  No text.  Several attributes.
+
+Element Text Format:
+n/a
+Attributes:
+DOCOBJTYPE  A MIME type/subtype.  Must not be the same as DOCOBJTYPE= of any
+              other DOCOBJPROCESSING element in this shelf (DOCOBJTYPE= is the
+              ID or key for DOCOBJPROCESSING elements).  Must not be one of the
+              builtin types (as of 10APR03, they are "application/pdf" and
+              "application/x-boo").  MIME types are not case-sensitive.  Cannot
+              contain whitespace.  Must consist of displayable characters
+              expressable in 7-bit USASCII (a.k.a. Unicode characters U+x'21'
+              through U+x'7E'), in order to comply with RFC's.  Required.
+              Note:  This should be defined in the DTD as type ID, except that:
+                     (A) MIME types do not meet the formatting/character set
+                     restrictions imposed by XML on ID-type attributes; and
+                     (B) there is only one domain for all ID's, and DOCOBJTYPEs
+                     don't really match with DOCIDs (also of type ID).
+COMMONNAME  Must not be all blank, and must be 1..8 characters long.  Required.
+GENERICPROGRAMNAMES
+            One or more keywords denoting general classes of programs, any one
+            of which could be used to process a document instance of this type.
+            If the application does not want to handle this type of data itself,
+            it is free to choose any program of one of the types of programs
+            listed (the order that the program types are listed may be from
+            best- to worst choice, but that is actually a subjective user
+            judgement), or to choose the SPECIFICPROGRAMCOMMAND= program.  It
+            is suggested that the application might want to treat the selected
+            GENERICPROGRAMNAMES keyword as an environment variable name, which
+            would allow the end user to customize what program was run (e.g.
+            many Linux applications already look for the EDITOR environment
+            variable to determine the user's choice of text editor).  This
+            attribute's keywords (very) vaguely corresponds to the idea of a
+            PUBLIC identifier in a NOTATION or DOCTYPE declaration.  The valid
+            keywords are defined in the XKS code in XKS_VALID_GENERIC_PROGRAMS
+            in XKS_Shelf.hpp (file not available to customers).  As of 11APR03,
+            the following keywords were defined therein:
+                 EDITOR        Can use a text editor to display content of this
+                                 type.  On Linux (elsewhere?), the application
+                                 should look for the EDITOR environment variable,
+                                 to find out whether the user has a preferred
+                                 text editor (EDITOR is a pre-existing cross-
+                                 application environment variable in Linux, but
+                                 does not appear to be a formal standard.  Don't
+                                 know about other Unixes.
+                 BROWSER       A Web browser should be able to display this type
+                                 of content.
+                 IMAGEVIEWER   An image viewing/editing program can be used to
+                                 display this content.
+                 PSVIEWER      Content is PostScript, EPS, PDF, etc.  A
+                                 PostScript viewing application should be used.
+                 SPREADSHEET   Content is a spreadsheet.  Us appropriate office
+                                 application.
+                 DATABASE      Content is from a database application.  Use
+                                 another database application to display it.
+                 WORDPROCESSOR Use a word processing application to display this
+                                 word processor source file.
+                 PRESENTATION  Content is presentation graphics.
+                 BKMGR         Content is a BookManager BOOK, shelf, case, or
+                                 index.
+                 PRINTER       Content is not online viewable.  User must print
+                                 it to access it.
+            This attribute is optional.  If specified, must use at least one
+            keyword from the above list.
+SPECIFICPROGRAMCOMMAND
+            Provides a way for the shelf author or customizer to nominate a
+            specific program or command to display this data format.  WARNING!
+            the value of SPECIFICPROGRAMCOMMAND= is likely to be platform-
+            specific, so its use is discouraged.  The value can be either the
+            fileid of a program, or an arbitrary command.  CAUTION!  This provides
+            a method by which anyone who can modify the shelf can cause an
+            arbitrary program to be run on the machine reading the shelf.  Such
+            a program would probably execute with the same privileges as the
+            application reading the shelf (although that actually depends upon
+            how the application handles the SPECIFICPROGRAMCOMMAND value).
+
+            The application should scan the value of SPECIFICPROGRAMCOMMAND=
+            for the substitution symbols "%f" and "%i".  All occurrences of "%f"
+            should be replaced by the local fileid of the instance to be
+            processed.  All occurrences of "%i" should be replaced with the URI
+            of the INSTANCE (application may use URI= attribute of INSTANCE, or
+            may develop URI from fileid).  If neither "%f" nor "%i" appear in
+            the SPEICIFICPROGRAMCOMMAND= value, then the application should
+            append a blank and the local fileid of the instance to the
+            command. "%f" and "%i" are case-sensitive, and do not have double-
+            quotes around them, when actually used in SPECIFIPROGRAMCOMMAND=
+            values.  Whether the rest of the command string is case-sensitive
+            or not, depends upon the execution environment.  Note that the XKS
+            software does not automatically perform these substitutions.  This
+            is because it does not know the whereabouts of the local copy of
+            the data file described by the INSTANCE element (most instances
+            have a portable NAME=, which is then searched for, by the
+            application, using application-defined path lists).
+
+            SPECIFICPROGRAMCOMMAND= vaguely corresponds to the SYSTEM identifier
+            in a NOTATION declaration.  Must not be all whitespace.  May be a
+            zero-length string, however.  Optional.  Not recommended.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT DOCUMENT (INSTANCE+)>
+<!ATTLIST DOCUMENT
+   DOCID ID #REQUIRED
+>
+<!--
+Represents a logical document.  To actually read a document, one or more
+physical instances (or renderings, or filetypes) of it must exist.  They are
+represented by INSTANCE subelements.
+
+This element is always optional.
+The DOCID= attribute is required whenever the DOCUMENT element is used.
+DOCUMENT elements follow the DOCOBJPROCESSING elements.
+
+Element Contents:  No text.  DOCID= attribute.  At least one INSTANCE subelement.
+
+Element Text Format:
+n/a
+
+Attributes:
+DOCID       The unique document number as specified within all instances of
+            this document, thus defining this document.  Duplicate values on
+            the same shelf are not permitted, and may cause some reader products
+            to abend.  Uniqueness within the shelf is enforced by the DTD.
+            Must be 64 bytes (not characters) or less, when translated into the
+            local code page.  No whitespace allowed.  Must contain only
+            displayable characters.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT EXPIRATION EMPTY>
+<!ATTLIST EXPIRATION
+   DATETIME NMTOKEN #REQUIRED
+>
+<!--
+Contains the "expiration date" of the shelf or of an instance of a document.
+No behaviour for an expired document instance has been defined, as of 11APR03.
+No behaviour for an expired XKS has been defined, as of 11APR03.
+
+This element is always optional.
+The DATETIME= attribute is required whenever the EXPIRATION element is used.
+EXPIRATION follows the UPDATE element.
+
+Element Contents:  No text.  DATETIME= attribute.
+
+Element Text Format:
+n/a
+
+Attributes:
+DATETIME    Must be an ISO8601 ccyy-mm-ddThh:mm:ss date without TZ field,
+            reporting the time that the instance or shelf is to expire.
+            This attribute must be specified.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT INDEX (UPDATE)>
+<!ATTLIST INDEX
+   NAME CDATA #REQUIRED
+   LEXIS ( EIJDUTC | EIJFREN | EIJBPOR | EIJPORT | EIJENGL | EIJTHAI | EIJARAB | EIJCROA | EIJHEBR | EIJSLOE | EIJFARS | EIJHUNG | EIJPOLI | EIJSLOV | EIJCZEC | EIJRUSS | EIJTURK | EIJGREE | EIJICEL | EIJFINN | EIJCFRE | EIJDANI | EIJGERM | EIJITAL | EIJNORW | EIJSPAN | EIJSWED | EIJUKEN ) #REQUIRED
+   URI CDATA ""
+>
+<!--
+Describes a file which indexes all of the contents of one or more of the
+logical documents contained on this shelf (the BKINDEX file, itself, contains
+information identifying which documents it actually indexes.  It could be used
+with more that one shelf, and can be used with BKSHELF format shelves, as well).
+Currently, at most INDEX element is allowed.
+
+The INDEX element is required, if an index is to be used with the shelf.
+It is not allowed, if no index is available to be used with the shelf.
+The application program and/or the SCAM subsystem it uses, determines whether
+to actually use the index file for any particular search request.
+If used, the INDEX element follows the SHELFHEADER element.
+
+Element Contents:  No text.  Several subelements.  Several Attributes.
+WARNING!  Do not add new subelements following UPDATE;  doing so will
+          break findSubElement() calls in BookManager programs.
+
+Element Text Format:
+n/a
+
+Attributes:
+NAME        1-8 character portable name of file.  Restricted character
+              set #1.  Always required.
+LEXIS       1-8 character keyword denoting which LEXAM dictionary was used to
+              build the index file.  Note that the existence of a dictionary
+              keyword does not necessarily mean that an support for that
+              language actually exists in a BookManager BUILD or INDEX product.
+              Not all BookManager reader products use dictionaries with indexes.
+              Not all readers supply the same set of dictionaries.
+              The following LEXIS keywords are known:
+                  LEXIS   language (EBCDIC CECP)
+                 keyword   (from XKS.cpp 11APR03; see there for original source)
+                 EIJDUTC  Belgian Dutch (274), Dutch (037)
+                 EIJFREN  Swiss French (500), Belgian French (274), French (297)
+                 EIJBPOR  Brazillian Portuguese (037)
+                 EIJPORT  Portuguese (282)
+                 EIJENGL  US English (037)
+                 EIJTHAI  Thai (838)
+                 EIJARAB  Arabic (420)
+                 EIJCROA  Croatian (870)
+                 EIJHEBR  Hebrew (424)
+                 EIJSLOE  Slovenian? (870)
+                 EIJFARS  Farsi (1097)
+                 EIJHUNG  Hungarian (870)
+                 EIJPOLI  Polish (0)
+                 EIJSLOV  Slovak (870)
+                 EIJCZEC  Czech (870)
+                 EIJRUSS  Russian (1025)
+                 EIJTURK  Turkish (1026)
+                 EIJGREE  Greek (875)
+                 EIJICEL  Icelandic (871)
+                 EIJFINN  Finnish (278)
+                 EIJCFRE  Canadian French (037)
+                 EIJDANI  Danish (277)
+                 EIJGERM  German (273), Swiss German (500)
+                 EIJITAL  Italian (280), Swiss Italian (500)
+                 EIJNORW  Norwegian (277)
+                 EIJSPAN  Spanish (284)
+                 EIJSWED  Swedish (278)
+                 EIJUKEN  UK English (285)
+              Former DTD definition was   LEXIS CDATA #REQUIRED .
+              This attribute is always required.
+
+URI         Fully qualified URI describing the location of the file.  Required
+              only for files stored in MVS datasets.  Optional for all other
+              file locations.  Note that if it is ever permitted to define an
+              INDEX which is not stored locally, then the URI would be
+              required, in that case, too.  IBM recommends that you not specify
+              this attribute unless it is actually needed.  This is because it
+              may make the shelf non-portable.  The preferred method for the
+              application to locate the index file described by an INDEX is
+              by searching for the portable name (NAME= attribute, above) in
+              one or more application-defined locations (e.g. path list in
+              Softcopy Reader).
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT INSTANCE (TITLE , SUBJECT? , KEYWORDS? , AUTHOR? , UPDATE , EXPIRATION?)>
+<!ATTLIST INSTANCE
+   DOCOBJTYPE CDATA #REQUIRED
+   VERSION CDATA ""
+   NAME CDATA #REQUIRED
+   URI CDATA ""
+   VALIDATE ( YES | NO ) #FIXED "NO"
+>
+<!--
+Represents a physical instance of (i.e. Identifies a file containing) a logical
+document.  The INSTANCEs of a DOCUMENT must be unique by DOCOBJTYPE (MIME type).
+All instances of a document must contain the same level of the document, or
+unexpected results may occur (e.g. a shelf search might use one INSTANCE to do
+the search, but the user might've chosen to open a different format of the
+document;  if the INSTANCEs aren't really the same level of the same document,
+then when the document is openned for the user, it might open to the wrong place,
+or the expected search hit might not be found there.  Note that shelf-level
+searching is not enabled in the initial August, 2003 release software releases).
+
+At least one INSTANCE element is required in every DOCUMENT element.
+The order of INSTANCE elements within a DOCUMENT element is undefined.
+
+Element Contents:  No text.  Several subelements.  Several Attributes.
+WARNING!  Do not change the order of subelements;  doing so will
+          break findSubElement() calls in BookManager programs.
+
+Element Text Format:
+n/a
+
+Attributes:
+DOCOBJTYPE  MIME type/subtype.  Must be some value for which a corresponding
+              DOCOBJPROCESSING element exists or one of the builtin types
+              (as of 10APR03, they are "application/pdf", "application/x-boo")
+              MIME types are not case-sensitive.  Cannot contain whitespace.
+              Must consist of displayable characters expressable in 7-bit
+              USASCII (a.k.a. Unicode characters U+x'21' through U+x'7E'),
+              in order to comply with RFC's.  DOCOBJTYPE must be unique
+              within the current DOCUMENT element.  It is the key used to
+              request a specific INSTANCE element.  Always required.
+              Note:  This should be defined in the DTD as type IDREF, except
+                     that: (A) MIME types do not meet the formatting/character
+                     set restrictions imposed by XML on ID-type attributes;
+                     (B) DOCOBJTYPE= can take values built into XKS, which
+                     don't have a DOCOBJPROCESSING element within the shelf
+                     for the IDREF to be matched to; (C) there is only one
+                     domain for all ID's, and DOCOBJTYPEs don't really match
+                     with DOCIDs (also of type ID); and (D) DOCOBJTYPE=
+                     is only unique within the DOCUMENT element, not
+                     throughout the entire XML document.
+VERSION     Architectural version of this instance of the document.  0-8
+              characters.  This value may be used by the application to
+              determine whether it can process this INSTANCE, or it may be
+              displayed (by the application) to the user as information.
+              Writing applications should obtain this data by direct examination
+              of the data file which it is describing in the INSTANCE.  Reading
+              applications may or may not verify this data against the actual
+              data file.  The XKS Validator makes no attempt to do so.  For
+              a BOOK, specify the graphics architecture (e.g. 1.3, 1.4),
+              derived from the lfwrds field (byte offset 8-11) of logical block
+              1 in the BOOK file.  For a PDF, specify the value from byte
+              offset 5-7 of the PDF Header in the PDF file (e.g. 1.3, 4.0).
+VALIDATE    How much validation the application (or SCAM, for BookManager
+              BOOK INSTANCEs) should perform, and what it should do if there
+              is a problem.  Application developers should refer to the XKS
+              Architecture documentation for further information.  Optional.
+              If specified, must (as of 10APR03) be "NO".  The value "YES" is
+              defined, but is not currently allowed, because no XKS applica-
+              tion yet defines any additional validation.  Note that other
+              values could be defined later.
+NAME        1-8 character portable name of file.  Restricted character
+              set #1.  Always required.
+URI         Fully qualified URI describing the location of the file.  Required
+              only for files stored in MVS datasets.  Optional for all other
+              file locations.  Note that if it is ever permitted to define an
+              INSTANCE which is not stored locally, then the URI would be
+              required, in that case, too.  IBM recommends that you not specify
+              this attribute unless it is actually needed.  This is because it
+              may make the shelf non-portable.  The preferred method for the
+              application to locate the data file described by an INSTANCE is
+              by searching for the portable name (NAME= attribute, above) in
+              one or more application-defined locations (e.g. path list in
+              Softcopy Reader).
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT KEYWORDS (#PCDATA)>
+<!--
+List of blank-separated, author-provided, "Find Book" searchable keywords.
+This field is not intended to be displayable, but is intended to be searched
+by application functions similar to BookServer's "Find Book" function.  For
+PDF's, the application may wish to obtain this field from the PDF metadata
+keyword "Keywords", but this is not required.  In fact, the application may
+construct KEYWORDS data from any place it wants, or may omit it.  Note that
+an IBM-internal PDF-building standard recommends that the first keyword in
+PDF metadata "Keywords" be the docnum.    The XKS Architecture makes no such
+requirement, and will not recognize teh first (or second, or last, or any
+other) keyword as a docnum.  "The" docunum must always be specified in the
+DOCID= attribute of the DOCUMENT element.  Therefore, the XKS common code
+will not obtain a docnum from the KEYWORDS element, and will not try to
+validate any docnum which might happen to appear in KEYWORDS for form,
+duplication, etc., nor try to match it against the real DOCID= for the
+DOCUMENT.
+
+This element is always optional.
+
+Element Contents:  Blank-separated text.
+
+Element Text Format:
+Search keywords may be chosen by the author or the person updating the
+shelf.  That is, there are no specific keywords predefined by the XKS
+Architecture.  Keywords must be separated by one or more blanks (U+X'20',
+EBCDIC x'40', etc.).  Separating keywords with other whitespace characters
+may result in search misses.  This is an application restriction.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT SHELFHEADER (TITLE , AUTHOR? , UPDATE , EXPIRATION?)>
+<!ATTLIST SHELFHEADER
+   NAME CDATA #REQUIRED
+>
+<!--
+Contains the shelf's selfdescriptive information.
+
+This element is always required.
+
+Element Contents:  No text.  Several subelements.  One attribute.
+WARNING!  Do not change the order of subelements;  doing so will
+          break findSubElement() calls in BookManager programs.
+
+Element Text Format:
+n/a
+
+Attributes:
+NAME        1-8 character portable name of shelf.  Restricted character
+              set #1.  Always required.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT SUBJECT (#PCDATA | BR)*>
+<!--
+This element describes the shelf's author (if used within the SHELFHEADER
+element) or the author of an instance of a document (if used within the
+INSTANCE element).
+
+This element is always optional.
+If present at the SHELFHEADER level, it follows the TITLE element.
+At the INSTANCE level, the required element order is ..., TITLE, SUBJECT,
+KEYWORDS, AUTHOR, ....
+
+Element Contents:  Freeform text with optional &lt;BR /&gt; subelements.
+
+Element Text Format:
+Text can be marked up with &lt;BR /&gt; tags to request line breaks, but the
+reading application may ignore any markup contained herein, if it does not
+support multiline AUTHOR data.  It may also truncate this data, if it is too
+long to display.  This specification will not define how long is "too long."
+Therefore, it could truncate it at the first line break, as an alternative
+way to cope, if the reading application only allows one line.
+
+Note:  the definition and restrictions for AUTHOR are the same as for
+       SUBJECT, except that SUBJECT is not allowed at the SHELFHEADER
+       level.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT TITLE (#PCDATA)>    <!-- 1-255 characters, must not be all whitespace -->
+<!--
+This element gives the shelf's descriptive title (if used within the SHELFHEADER
+element) or the title of an instance of a document (if used within the
+INSTANCE element).
+
+This element is always required.
+TITLE is the first subelement of SHELFHEADER, and of INSTANCE.
+
+Element Contents:  Freeform text.
+
+Element Text Format:
+No markup allowed within the text.  Cannot be zero length.  Max. 255
+characters.  Must contain at least one non-whitespace character.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT UPDATE (#PCDATA)>  <!-- 0-255 characters -->
+<!ATTLIST UPDATE
+   DATETIME NMTOKEN #REQUIRED
+>
+<!--
+At the shelf level, tracks the last time the shelf was updated.  At the
+instance of document level, tracks the build or last-changed date of the
+instance's file.  If the instance file contains an internal date, that
+date should be used here.
+
+This element, and the DATETIME= attribute, are always required.
+UPDATE follows the AUTHOR element, if the latter is present.
+
+Element Contents:  Freeform text or empty.  DATETIME= attribute.
+
+Element Text Format:
+No markup allowed within the text.  Max. 255 characters.
+Text content may be omitted.
+
+Attributes:
+DATETIME    Must be an ISO8601 ccyy-mm-ddThh:mm:ss date without TZ field,
+            reporting the last time the instance file was modified or rebuilt,
+            or the last time the shelf was modified.
+            This attribute must be specified.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->
+
+
+
+<!ELEMENT XKS (SHELFHEADER, INDEX?, DOCOBJPROCESSING*, DOCUMENT*)>
+<!--
+Top-level element of the shelf (root element).
+
+This element is always required.
+It follows the DOCTYPE declaration.
+
+Element Contents:  No text.  No attributes.
+WARNING!  Do not change the order of subelements;  doing so may
+          have unpredictable effects on BookManager programs.
+
+Element Text Format:
+n/a
+
+Subelements (must appear in this order):
+SHELFHEADER       contains the shelf's selfdescriptive information.  Required.
+INDEX             describes the optional BKINDEX file to be used with this shelf.
+DOCOBJPROCESSING  declares non-builtin MIME types used in instances of
+                   documents.  Not required, if no instance types other than
+                   PDFs and BookManager BOOKs are used.  Mandatory for other
+                   instance types.
+DOCUMENT          represents a logical document on the shelf.  Each logical
+                   document must contain at least one instance of a physical
+                   document file.  A shelf with no documents is permitted.
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ -->

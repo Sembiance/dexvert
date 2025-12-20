@@ -1,0 +1,52 @@
+<HTML>
+<TITLE>Extended Document Properties Help</TITLE>
+<BODY>
+<P>
+Extended shelves can have zero or more documents, uniquely defined by document 
+ID.  Each document must contain one or more instances, uniquely defined by type. 
+Taken together, document instances can be described by these fields:
+<P>
+<DL>
+
+    <DT><B>ID</B></DT>
+    <DD>Uniquely identifies the document within the extended shelf.</DD>
+    <DT><B>Type</B></DT>
+    <DD>Refers to the type of file the document instance is formatted in.  Examples 
+    are PDF File or Softcopy Reader Book.  This cannot be changed.</DD>
+    <DT><B>Name</B></DT>
+    <DD>Name of the extended shelf.  This is required and must be 1-8 characters in 
+    length.</DD>
+    <DT><B>Title</B></DT>
+    <DD>Title of the document instance.  This is required and has no specific format.</DD>
+    <DT><B>Update Timestamp</B></DT>
+    <DD>Date and time document instance was last modified.  This is required.  The 
+    format must be MM/dd/yy HH:mm:ss, where MM is the month of the year (1-12), dd 
+    is the day of the month (1-31), yy is the two digit year, HH is the hour of the 
+    day (0-23), mm is the minute (0-59) and ss is the seconds.</DD>
+    <DT><B>Update Comment</B></DT>
+    <DD>This is a place for putting comments about the last update. It is optional.</DD>
+    <DT><B>Subject, Keywords and Author</B></DT>
+    <DD>These are optional fields which further describe the document instance. 
+    There is no specific format for these fields.</DD>
+    <DT><B>Expiration Timestamp</B></DT>
+    <DD>This is the date and time the document is expired.  The format is the same 
+    as the update timestamp.  This field is optional.</DD>
+    <DT><B>URI</B></DT>
+    <DD>This the absolute URI location of the document instance. The use of this 
+    field is primarily for z/OS based platforms. This field is both optional and 
+    discouraged.</DD>
+
+</DL>
+
+<HR>
+<CENTER>
+    <P>
+    <FONT SIZE="-1">IBM&reg; and Softcopy Reader&reg; are registered trademarks of 
+    the</FONT> <BR>
+    <FONT SIZE="-1">International Business Machines Corporation.</FONT>
+</CENTER>
+
+
+</BODY>
+
+</HTML>

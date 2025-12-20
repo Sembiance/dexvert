@@ -7,6 +7,6 @@ export class talismanANI extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Talisman_ANI";
 	ext            = [".ani"];
 	forbidExtMatch = true;
-	magic          = ["Talisman ANI"];
+	magic          = ["Talisman ANI", "Talisman game Animation"];
 	converters     = ["na_game_tool[format:talisman]"];
 }

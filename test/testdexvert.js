@@ -42,8 +42,7 @@ const FLAKY_CONVERTERS = [
 ];
 
 // These formats should be skipped entirely for one reason or another
-const SKIP_FORMATS =
-[
+const SKIP_FORMATS = [
 	// these take AGES to extract, just WAY too long
 	"archive/printArtist",
 
@@ -52,17 +51,19 @@ const SKIP_FORMATS =
 
 	// no known samples
 	"text/rexxAdventureSavedGame",
-	"text/signumFontList"
+	"text/signumFontList",
+
+	// only HUGE samples available
+	"archive/pacmanAdventuresInTimeGameArchive",
+	"archive/vmwareDiskImage"
 ];
 
 // These are relative dir paths from test/sample/ that are just supporting files that need to be here but should be ignored for testing purposes
-const SUPPORTING_DIR_PATHS =
-[
+const SUPPORTING_DIR_PATHS = [
 	"music/Instruments"
 ];
 
-const FORCE_FORMAT_AS =
-[
+const FORCE_FORMAT_AS = [
 	// these formats have files that won't identify due to not being in the proper disk locations, so we force the format
 	"font/amigaBitmapFontContent",
 	"document/applesoftBASIC",
@@ -71,8 +72,7 @@ const FORCE_FORMAT_AS =
 	"image/dynamicPublisherStamp"
 ];
 
-const FORMAT_FILE_META =
-{
+const FORMAT_FILE_META = {
 	"document/wordMac"           : { "Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"} },
 	"document/textWareCDT"       : { "CD Fun House Index.CDT" : {macFileType : "Ware", macFileCreator : "TWar"} },
 	"image/a2gsSHStar"           : { "title" : {proDOSTypeCode : "PNT"} },
@@ -84,8 +84,7 @@ const FORMAT_FILE_META =
 	"text/appleIIgsSourceCode"   : { "*" : {proDOSTypeCode : "SRC"} }
 };
 
-const FORMAT_OS_HINT =
-{
+const FORMAT_OS_HINT = {
 	"archive/appleDiskCopy" :
 	{
 		"Sidescape1.00J.image" : "macintoshjp"
@@ -153,8 +152,7 @@ const FORMAT_OS_HINT =
 	"text/html"            : { "apple.html" : "macintoshjp" }
 };
 
-const FORMAT_PROGRAM_FLAG =
-{
+const FORMAT_PROGRAM_FLAG = {
 	"archive/iso" :
 	{
 		"PanicDisc (PANIC.COM).bin" : {bchunk : {forceMode1 : true}},
@@ -163,12 +161,9 @@ const FORMAT_PROGRAM_FLAG =
 };
 
 // these formats produce a single file, but the name is always different
-const SINGLE_FILE_DYNAMIC_NAMES =
-[
-];
+const SINGLE_FILE_DYNAMIC_NAMES = [];
 
-const FLEX_SIZE_PROGRAMS =
-{
+const FLEX_SIZE_PROGRAMS = {
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
 
@@ -195,8 +190,7 @@ const FLEX_SIZE_PROGRAMS =
 };
 
 // these formats have some meta data that can change per host or per upgrade and so we should just ignore it
-const IGNORED_META_KEYS =
-{
+const IGNORED_META_KEYS = {
 	image :
 	{
 		jpg : ["driOffset", "driCount"],
@@ -210,8 +204,7 @@ const IGNORED_META_KEYS =
 };
 
 // these formats have supporting files that should be ignored
-const SUPPORTING_FILES =
-{
+const SUPPORTING_FILES = {
 	archive :
 	{
 		cloneCDImage : /\.ccd$/i,
@@ -241,8 +234,7 @@ const SUPPORTING_FILES =
 };
 
 // these formats produce slightly different sized output each time they run
-const FLEX_SIZE_FORMATS =
-{
+const FLEX_SIZE_FORMATS = {
 	audio :
 	{
 		// MP3 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
@@ -377,8 +369,7 @@ const FLEX_SIZE_FORMATS =
 };
 
 // Specific files that vary in size each run
-const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
-{
+const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS = {
 	archive :
 	{
 		macromediaDirector : ["ﾊﾘｳｯﾄﾞ名優写真館.DXR"],	// same size but different shasum
@@ -405,8 +396,7 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 };
 
 // if any of the OUTPUT FILES from a conversion equal these regexes, then ignore their size completely
-const IGNORE_SIZE_FILEPATHS =
-[
+const IGNORE_SIZE_FILEPATHS = [
 	/Human Meg\.glb$/,		// cinema4D82 doesn't always convert this and polyTrans64 takes over
 	/Legacy_of_the_Ancients \d\d\.mp3$/i,
 	/lem2\.webp$/,
@@ -417,8 +407,7 @@ const IGNORE_SIZE_FILEPATHS =
 ];
 
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
-const FLEX_DIFF_FILES =
-[
+const FLEX_DIFF_FILES = [
 	// sometimes different pngs are produced, sometimes some are missing, not sure why
 	/archive\/hypercard\/.+$/,
 
@@ -457,8 +446,7 @@ const FLEX_DIFF_FILES =
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
-const DISK_FAMILY_FORMAT_MAP =
-[
+const DISK_FAMILY_FORMAT_MAP = [
 	// Mis-classified by classify as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
@@ -565,7 +553,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/video\/acornReplayVideo\/(ducks2|bluegreen|parrot)/, "text", true],
 
 	// Supporting/AUX files
-	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
+	[/archive\/(cdi|iso)\/.+\.(cue|toc|ccd)$/i, "text", true],
 	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", "pogNames"],
 	[/font\/riscOSFont\/intmetric.*$/i, "other", "riscOSFontMetrics"],
@@ -577,8 +565,7 @@ const DISK_FAMILY_FORMAT_MAP =
 ];
 
 // These are sensitive files that sometimes convert, sometimes don't
-const ALLOW_PROCESS_FAILURES =
-{
+const ALLOW_PROCESS_FAILURES = {
 	archive :
 	{
 		xpackLZCOMPacked : ["PC (1).COM"]
@@ -594,7 +581,8 @@ const ALLOW_PROCESS_FAILURES =
 	},
 	image :
 	{
-		theDraw : ["CREDITS.TD"]
+		micrografxDraw : ["elec-07.mgx"],
+		theDraw        : ["CREDITS.TD"]
 	},
 	music :
 	{
@@ -616,8 +604,7 @@ const ALLOW_PROCESS_FAILURES =
 };
 
 // Sometimes metadata just happens to change every time, so we ignore it
-const ALLOW_METADATA_DIFFERENCES =
-{
+const ALLOW_METADATA_DIFFERENCES = {
 	image :
 	{
 		teletextPackets : ["TETRIS.T42"]
@@ -630,8 +617,7 @@ const ALLOW_METADATA_DIFFERENCES =
 
 // Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match or a version of format that I can't id or process
 // So in the future I could look at these files and see if I can determine a pattern to them or in some better way id them
-const UNPROCESSED_ALLOW_NO_IDS =
-[
+const UNPROCESSED_ALLOW_NO_IDS = [
 	"archive/drRiptideGameArchive",
 	"archive/irixIDBArchive",
 	"archive/lostVikingsGameArchive",

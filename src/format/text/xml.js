@@ -51,6 +51,7 @@ const _XML_MAGIC = [
 	"MiSTer Game Launcher", "XML Data Package", "SPSS Analysis Plan", "SPSS Sampling Plan", "DeleD scene", "Net2Plan Network design", "MAME software list", "Mathcad XML based worksheet", /^PowerDesigner (Conceptual )?(Model|WorkSpace)$/,
 	"SQL Server Data Tools Database info", "Visual Studio Intel Fortran Project", "VideoWave Movie Project", "Visual Studio Data Source", "Autodesk Inventor Project", "FxCop project", "EtherPeek/AiroPeek/OmniPeek capture file", /^DITA (Map|structure)/,
 	"Eclipse Launch configuration", "Amazing Mahjongg 3D Layout", "TermBase eXchange Format", "Translation Memory Exchange", "GENPO Organ", "GNOME Timed Wallpaper", "JavaServer FacesServlet pointer", "VSIX Manifest (2010)", "Cal3D Xml Mesh File",
+	"Linden Lab Structured Data", "Irrlicht 3D scene", "A Vampyre Story save game",
 	/^fmt\/(205|243|333|475|570|896|932|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1824|1825|1883|1962|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

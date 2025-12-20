@@ -6,6 +6,6 @@ export class esriShape extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Shapefile";
 	ext            = [".shp"];
 	forbidExtMatch = true;
-	magic          = ["ArcView Shape", "ESRI Shapefile", /^x-fmt\/235( |$)/];
+	magic          = ["ArcView Shape", "ESRI Shapefile", "ESRI ArcGIS Shapefile", /^x-fmt\/235( |$)/];
 	converters     = ["polyTrans64[format:esriShape]"];
 }

@@ -33,10 +33,10 @@ export class exe extends Format
 		"Microsoft executable", /^PE32\+? executable/, /^Win\d\d Executable/, "Win16 NE executable", /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/(899|900)( |$)/, /^x-fmt\/(409|410|411)( |$)/,
 
 		// specific exe types: NOTE! Could possibly better parse these and get additional data out of them
-		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable", "MOZART tune",
+		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable", "Borland TLink Overlay",
 		"Graphic Workshop self-displaying picture executable", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)", "WIFE Font Driver", "PhotoFilter plugin", "Win32 EXE RosAsm",
 		"Total Commander Content plugin", "Total Commander File system extension (plugin)", "Lavasoft Ad-aware 6 plugin", "Find and Run Robot (FARR) plugin", "Microsoft Basic Quick library", "Flow Charting 3 Printer Definition", "Javelin Driver",
-		"Win16 Klik'n'Play Executable (generic)", "16bit EXE DOS SCRNCH Executable", "16bit DOS Executable with 1988 MS runtime lib (generic)", "16bit DOS Pianoman music player Executable", "ScreenExtender for WP video Driver",
+		"Win16 Klik'n'Play Executable (generic)", "16bit EXE DOS SCRNCH Executable", "16bit DOS Executable with 1988 MS runtime lib (generic)", "16bit DOS Pianoman music player Executable", "ScreenExtender for WP video Driver", "MOZART tune",
 		
 		// icon libraries (these are EXEs basically with icons in them, the current tools below do a fine job at extracting the icons so no need to make a separate format for them)
 		"Icon library (Impact Software)", "Icon library (Norton Icon Editor)", "Icon library (Easy Icons v3.x)", "Icon library (hDC Icon Designer)",

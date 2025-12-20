@@ -8,7 +8,7 @@ export class embeddedJPG extends Format
 		"JPEG based file :pmp:",
 		
 		// app specific
-		"DELFTship ship"
+		"DELFTship ship", "CriticalSeeker Picture Packet"
 	];
 	priority   = this.PRIORITY.LOWEST;
 	fallback   = true;

@@ -5,6 +5,6 @@ export class sbigCCDOPS extends Format
 	name           = "SBIG CCDOPS Image";
 	ext            = [".stx", ".st4", ".st7", ".sbig"];
 	forbidExtMatch = true;
-	magic          = ["SBIG CCD ST-7/Standard Image :stx:"];
+	magic          = ["SBIG CCD ST-7/Standard Image :stx:", "SBIG CCDOPS bitmap (generic)"];
 	converters     = ["nconvert[format:stx]"];
 }

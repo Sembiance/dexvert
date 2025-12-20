@@ -6,6 +6,6 @@ export class vtf extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Valve_Texture_Format";
 	ext        = [".vtf"];
 	mimeType   = "image/vnd.valve.source.texture";
-	magic      = ["Valve Texture Format", /^fmt\/985( |$)/];
+	magic      = ["Valve Texture Format", "Format: Valve Texture", /^fmt\/985( |$)/];
 	converters = [`abydosconvert[format:${this.mimeType}]`, "noesis[type:image]"];
 }

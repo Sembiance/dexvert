@@ -8,7 +8,7 @@ export class jpg extends Format
 	ext              = [".jpg", ".jpeg", ".jpe", ".jfif"];
 	mimeType         = "image/jpeg";
 	magic            = [
-		"JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", "piped jpeg sequence (jpeg_pipe)",
+		"JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format", "JFIF-EXIF JPEG Bitmap", "Macintosh JPEG bitmap (MacBinary)", "HSI JPEG bitmap", "image/jpeg", "piped jpeg sequence (jpeg_pipe)", "Format: JPEG",
 		"JPEG Stereoscopic bitmap", "deark: jpeg (JPEG/Exif)", "deark: jpeg (JPEG/JFIF", "deark: jpeg (JPEG (other))", /^deark: jpeg$/, /^JPEG (CMYK|Grayscale|TrueColor) \(v[\d.]+\) :(frm|fsy|jpeg|jps|mph):$/, "JPEG based file :*:",
 		"Pegasus JPEG bitmap",	// supposedly a variant of JPEG but it seems to work just fine as a normal JPEG
 		/^fmt\/(41|42|43|44|645|1507)( |$)/, /^x-fmt\/(390|391|398)( |$)/];

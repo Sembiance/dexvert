@@ -6,8 +6,7 @@ import {WEAK_VALUES} from "./WEAK.js";
 
 export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "dearkID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2", "disktype", "unp64ID", "detectItEasy", "binwalkID", "xdgMime", "ffprobeID", "soxiID", "librempegprobeID", "nconvertID"];
 
-export const TEXT_MAGIC_STRONG =
-[
+export const TEXT_MAGIC_STRONG = [
 	// checkBytes
 	"Printable ASCII",
 	
@@ -19,8 +18,7 @@ export const TEXT_MAGIC_STRONG =
 	"Text - UTF-8 encoded"
 ];
 
-export const TEXT_MAGIC_WEAK =
-[
+export const TEXT_MAGIC_WEAK = [
 	// perlTextCheck
 	"Likely Text (Perl)",
 

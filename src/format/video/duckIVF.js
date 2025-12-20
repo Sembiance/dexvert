@@ -6,7 +6,7 @@ export class duckIVF extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Duck_IVF";
 	ext            = [".ivf"];
 	forbidExtMatch = true;
-	magic          = ["IVF Video", "IVF VP8 Video", "On2 IVF (ivf)", /^Duck IVF video file/];
+	magic          = ["IVF Video", "IVF VP8 Video", "On2 IVF (ivf)", "Format: Duck IVF", /^Duck IVF video file/];
 	metaProvider   = ["mplayer"];
 	converters     = ["ffmpeg[format:ivf]"];
 }

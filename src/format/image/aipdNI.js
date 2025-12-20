@@ -6,6 +6,6 @@ export class aipdNI extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/AIPD";
 	ext            = [".apd", ".aipd"];
 	forbidExtMatch = true;
-	magic          = ["AIPD bitmap"];
+	magic          = ["AIPD bitmap", "AIPD :aipd:"];
 	converters     = ["wuimg"];
 }

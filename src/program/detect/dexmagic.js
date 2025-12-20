@@ -13,8 +13,7 @@ import {path} from "std";
 // WARNING: YOU CANNOT DO: match : ["abc", "xyz"]  only 1 character at a time
 
 /* eslint-disable unicorn/no-hex-escape */
-const DEXMAGIC_CHECKS =
-{
+const DEXMAGIC_CHECKS = {
 	// archive
 	"ActiveMime (Base64 Encoded)"    : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
 	"Anna-Marie Archive"             : [{offset : 0, match : "Anna-Marie"}],
@@ -273,8 +272,7 @@ const DEXMAGIC_CHECKS =
 };
 /* eslint-enable unicorn/no-hex-escape */
 
-const DEXMAGIC_CUSTOMS =
-[
+const DEXMAGIC_CUSTOMS = [
 	// sometimes a .bin file can be valid but not match any magics at all, but format iso doesn't match on .bin extension due to how common it is
 	// So we just do a quick check to see if we have a corresponding .cue file in the same dir
 	async function checkBinCue(r)

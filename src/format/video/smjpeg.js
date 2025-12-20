@@ -5,7 +5,7 @@ export class smjpeg extends Format
 	name         = "Loki SDL MJPEG Video";
 	website      = "https://wiki.multimedia.cx/index.php/SMJPEG";
 	ext          = [".mjpg"];
-	magic        = ["SMJPEG video", /^SMJPEG .*data,.*\d+ frames/, "Loki SDL MJPEG (smjpeg)"];
+	magic        = ["SMJPEG video", /^SMJPEG .*data,.*\d+ frames/, "Loki SDL MJPEG (smjpeg)", /^soxi: smjpeg$/];
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg[format:smjpeg]"];
 }

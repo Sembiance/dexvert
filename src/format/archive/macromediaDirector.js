@@ -7,7 +7,7 @@ export class macromediaDirector extends Format
 	ext            = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr"];
 	forbidExtMatch = true;
 	magic          = [
-		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", "Director Cast data",
+		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", "Director Cast data", "Format: Director",
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
 	idMeta = ({macFileType, macFileCreator}) => (

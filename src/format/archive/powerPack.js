@@ -5,7 +5,7 @@ export class powerPack extends Format
 	name       = "PowerPacker Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/PowerPacker";
 	ext        = [".pp"];
-	magic      = [/^Power Packer.* compressed data/, "PowerPacker compressed", "PP: PowerPacker", "Archive: PP20", "Archive: Power Peak's PowerPacker", /^PowerPacker$/];
+	magic      = [/^Power Packer.* compressed data/, "PowerPacker compressed", "PP: PowerPacker", "Archive: PP20", "Archive: Power Peak's PowerPacker", "Archive: PowerPack", /^PowerPacker$/];
 	notes      = "Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.";
 	packed     = true;
 	untouched    = dexState =>

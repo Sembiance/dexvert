@@ -60,7 +60,7 @@ for(const format of Object.values(formats))
 
 const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "test", "sample");
 
-console.log(printUtil.minorHeader(`${formatsToProcess.size.toLocaleString()} formats - Locating samples`, {prefix : "\n"}));
+console.log(printUtil.minorHeader(`${formatsToProcess.size.toLocaleString()} formats (${argv.format}) - Locating samples...`, {prefix : "\n"}));
 let bar = printUtil.progress({max : formatsToProcess.size});
 const sampleFilePaths = (await Array.from(formatsToProcess).parallelMap(async formatid =>
 {
@@ -88,6 +88,9 @@ async function checkDetector(detectorid)
 
 		const magic = detection.value.trim();
 		if(isExistingMagic(magic))
+			return;
+
+		if(detectorid==="soxiID" && magic===`soxi: ${path.extname(sampleFilePath).toLowerCase().substring(1)}`)
 			return;
 
 		const [family, format] = path.relative(SAMPLES_DIR_PATH, sampleFilePath).split("/");

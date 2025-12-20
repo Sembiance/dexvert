@@ -12,7 +12,7 @@ export default
 		acrossCrosswordPuzzle    : {name : "Across Crossword Puzzle", ext : [".puz"], magic : ["PUZ crossword puzzle", "Across crossword puzzle"], website : "http://fileformats.archiveteam.org/wiki/PUZ_(crossword_puzzles)"},
 		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa", ".tpl", ".rep", ".wpd"], magic : ["ACT! word processor document"], weakMagic : true},
 		adorageScript            : {name : "Adorage Script", ext : [".scp"], magic : ["Adorage Script"]},
-		amigaProWrite            : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "IFF data, ProWrite document"]},
+		amigaProWrite            : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "Amiga ProWrite/QuickWrite document", "IFF data, ProWrite document"]},
 		amiProWordProDocument    : {name : "Ami Pro/Word Pro document", ext : [".sam"], magic : ["Ami Pro/Word Pro document", "Lotus AmiPro Dokument", /^x-fmt\/191( |$)/], weakMagic : true},
 		appleWorksDocument       : {name : "AppleWorks Document", magic : ["AppleWorks Word Processor", "AppleWorks document"], forbiddenMagic : TEXT_MAGIC},
 		askSamDatabase           : {name : "askSam Database", ext : [".ask"], magic : ["askSam data base", "askSam for Windows data base", "askSam DB", /^fmt\/(2019|2020|2021|2022)( |$)/]},

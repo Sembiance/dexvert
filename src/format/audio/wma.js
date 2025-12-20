@@ -5,7 +5,9 @@ export class wma extends Format
 	name             = "Windows Media Audio";
 	website          = "http://fileformats.archiveteam.org/wiki/WMA";
 	ext              = [".wma", ".asf"];
-	magic            = ["Windows Media (generic)", "Microsoft ASF", "Advanced Streaming Format (generic)", "application/vnd.ms-asf", "ASF (Advanced / Active Streaming Format) (asf)", "Argonaut Games ASF (argo_asf)", /^fmt\/132( |$)/];
+	magic            = ["Windows Media (generic)", "Microsoft ASF", "Advanced Streaming Format (generic)", "application/vnd.ms-asf", "ASF (Advanced / Active Streaming Format) (asf)",
+		"Argonaut Games ASF (argo_asf)", /^soxi: argo_asf$/, /^fmt\/132( |$)/
+	];
 	confidenceAdjust = () => -10;	// Reduce by 10 so that wmv matches first
 	metaProvider     = ["ffprobe"];
 	converters       = ["ffmpeg[outType:mp3]"];

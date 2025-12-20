@@ -6,6 +6,6 @@ export class signumDocument extends Format
 	website        = "https://github.com/Xiphoseer/sdo-tool/blob/main/docs/formats/sdoc.md";
 	ext            = [".sdo"];
 	forbidExtMatch = true;
-	magic          = ["Signum 1/2 Document"];
+	magic          = ["Signum 1/2 Document", "Signum! Document"];
 	converters     = ["sdoTool"];
 }

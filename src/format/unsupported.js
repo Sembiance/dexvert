@@ -3066,7 +3066,6 @@ export default
 		netShieldConfiguration                   : {name : "NetShield configuration", ext : [".dat"], magic : ["NetShield configuration"]},
 		netShieldVirusPattern                    : {name : "NetShield Virus Pattern Library", ext : [".dat"], magic : ["NetShield virus pattern library"]},
 		netwareMessage                           : {name : "Netware Message", ext : [".msg"], magic : ["NetWare Message"]},
-		neroCoverDesigner                        : {name : "Nero Cover Designer", ext : [".bcd"], magic : ["Nero CoverDesigner", /^fmt\/1368( |$)/]},
 		netwareServerLicense                     : {name : "Netware Server license", ext : [".mls"], magic : ["Netware 4.x Server license"]},
 		networkAssociatesVirusScanData           : {name : "Network Associates VirusScan data", ext : [".dat"], magic : ["Network Associates VirusScan data (generic)"]},
 		networkInstrumentsObserverCaptureFile    : {name : "Network Instruments Observer capture file", ext : [".lst", ".bfr", ".ls"], magic : ["Network Instruments Observer capture file"]},

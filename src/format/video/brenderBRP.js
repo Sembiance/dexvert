@@ -8,5 +8,5 @@ export class brenderBRP extends Format
 	forbidExtMatch = true;
 	magic          = ["BRender BRP", "Argonaut Games BRP (argo_brp)"];
 	metaProvider   = ["mplayer"];
-	converters     = ["ffmpeg"];
+	converters     = ["ffmpeg[format:argo_brp]"];
 }

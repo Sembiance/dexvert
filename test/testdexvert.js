@@ -329,9 +329,9 @@ const FLEX_SIZE_FORMATS = {
 		fractalImageFormat : 7,
 		grabber            : 7,
 		gifexe             : 300,
-		krisCard           : 20,
+		krisCard           : 25,
 		laughingDog        : 50,
-		naplps             : 20,
+		naplps             : 25,
 		theDrawCOM         : 5,
 		threeDCK           : 20,
 

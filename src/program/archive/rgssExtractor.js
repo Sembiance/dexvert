@@ -18,7 +18,7 @@ export class rgssExtractor extends Program
 		for(const file of r.binFiles)
 			await Deno.copyFile(path.join(getWineDriveC("win64"), "dexvert", "RGSS-Extractor-v1.0", file), path.join(r.outDir({absolute : true}), file));
 	};
-	postExec = async r =>	// eslint-disable-line sembiance/shorter-arrow-funs
+	postExec = async r =>
 	{
 		for(const file of r.binFiles)
 			await fileUtil.unlink(path.join(r.outDir({absolute : true}), file));

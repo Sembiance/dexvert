@@ -2798,6 +2798,7 @@ export default
 		jetAudioTheme                            : {name : "jetAudio theme", ext : [".uib"], magic : ["jetAudio theme"], weakMagic : true},
 		joy2KeySettings                          : {name : "Joy2Key settings", ext : [".j2k", ".ini"], magic : ["Joy2Key settings"]},
 		junoClientLicenseKey                     : {name : "Juno client license Key", ext : [".key"], magic : ["Juno client license Key"]},
+		justButtonsFormat                        : {name : "Just Buttons format", ext : [".btn"], magic : ["Just Buttons format"]},
 		jwcadData                                : {name : "Jw_cad data", ext : [".def", ".dta"], magic : ["Jw_cad data"]},
 		kaboomStudiosModelBlock                  : {name : "Kaboom Studios Model Block", ext : [".mbk"], magic : ["Kaboom Studios Model Block"], weakMagic : true},
 		kAdvancedTextEditorSwapData              : {name : "K Advanced Text Editor swap data", ext : [".kate-swp"], magic : ["K Advanced Text Editor swap data"]},

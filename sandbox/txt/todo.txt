@@ -1,6 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* These formats don't detect with latest Detect-It-Easy: https://github.com/horsicq/Detect-It-Easy/issues/326
+	archive/packerPacked   and  archive/packerJESCOREPacked
+
+* Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
+
 * Test with latest scribus version that we've installed (couldn't get the old one to build anymore)
   After getting it working, remove the commented out lines from overlay/util/updatePackageMasks.js
 

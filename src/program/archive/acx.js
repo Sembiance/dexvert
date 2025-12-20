@@ -30,64 +30,61 @@ export class acx extends Program
 	chainPost = async r =>
 	{
 		const currentYear = new Date().getFullYear();
-		const {stdout} = await runUtil.run("acx", ["ls", "-r", "-d", r.inFile()], {cwd : r.cwd});
+		
+		const acxInfo = xu.parseJSON((await runUtil.run("acx", ["ls", "--detail", "--json", "-r", "-d", r.inFile()], {cwd : r.cwd})).stdout)?.disks?.[0];
+		if(!acxInfo)
+			return;
+
 		r.meta.fileMeta = {};
-		const dirChain = [];
-		for(const line of stdout.split("\n"))
+		const volumename = acxInfo.diskName?.trimChars("/:");
+		if(volumename && volumename!=="APPLECOMMANDER")
+			r.meta.volumeName = volumename;
+
+		const dirs = {};
+		for(const file of acxInfo.files || [])
 		{
-			const {volumeName} = line.match(/^Name:\s+\/(?<volumeName>[^/]+)\/.*$/)?.groups || {};
-			if(volumeName)
+			const subPath = file.directory?.length && file.directory!=="0002" ? path.join(dirs[file.directory], file.name) : file.name;
+			if(file.type==="DIR")
 			{
-				if(volumeName!=="APPLECOMMANDER")
-					r.meta.volumeName = volumeName;
+				dirs[file.keyBlock] = subPath;
 				continue;
 			}
 
-			const {dirName, indents} = line.match(/^\*?(?<indents>\s+)(?<dirName>\S+)\s+DIR.+$/)?.groups || {};
-			if(dirName)
-			{
-				while(dirChain.length>Math.max(((indents.length/2)-1), 0))
-					dirChain.pop();
-				dirChain.push(dirName);
-				
-				continue;
-			}
-
-			const {filename, proDOSTypeCode, month, day, year, proDOSTypeAux} = line.match(/^\*?\s+(?<filename>\S+)\s+(?<proDOSTypeCode>\S+)\s+\S+\s+(?<month>\d+)\/(?<day>\d+)\/(?<year>\d+)\s\d+\/\d+\/\d+\s+\S+(?:\s+A=\$(?<proDOSTypeAux>[\dA-F]{4}))?.*$/)?.groups || {};
-			if(!filename)
-				continue;
-			
 			const meta = {};
-			
-			//r.xlog.debug`acx parsing line: ${line}\n\t${{proDOSTypeCode, proDOSTypeAux}}`;
-			if(proDOSTypeCode)
+			for(const prop of [file.modified, file.created])
 			{
-				meta.proDOSTypeCode = proDOSTypeCode;
-				meta.proDOSTypePretty = _proDOSTypeCodeToPretty(proDOSTypeCode);
+				for(const regex of [/^(?<month>\d\d)\/(?<day>\d\d)\/(?<year>\d{4})/, /^(?<day>\d\d)-(?<monthName>[A-Za-z]{3})-(?<yearPart>\d\d)/])
+				{
+					const {month, monthName, day, year, yearPart} = prop?.match(regex)?.groups || {};
+					const yearFull = +year || 1900 + (+yearPart);
+					if(yearFull && yearFull<currentYear && yearFull>=1970)
+						meta.when = dateParse(`${day}.${month || {Jan : "01", Feb : "02", Mar : "03", Apr : "04", May : "05", Jun : "06", Jul : "07", Aug : "08", Sep : "09", Oct : "10", Nov : "11", Dec : "12"}[monthName]}.${yearFull} 00:00:00`, `dd.MM.yyyy HH:mm:ss`);
+				}
 			}
-			if(proDOSTypeAux)
-				meta.proDOSTypeAux = proDOSTypeAux;
-
-			if((+year)<currentYear)
-				meta.when = dateParse(`${day}.${month}.${(+year)<1970 ? currentYear : year} 00:00:00`, "dd.MM.yyyy HH:mm:ss");
+			
+			if(acxInfo.format==="ProDOS")
+			{
+				const {auxType} = file.auxType?.match(/^A?=?\$(?<auxType>[\dA-F]{4})/)?.groups || {};
+				if(auxType)
+					meta.proDOSTypeAux = auxType;
+				if(file?.type?.length)
+				{
+					meta.proDOSTypeCode = file.type;
+					meta.proDOSTypePretty = _proDOSTypeCodeToPretty(file.type);
+				}
+			}
 
 			if(Object.keys(meta).length>0)
-				r.meta.fileMeta[`${dirChain.join("/")}${dirChain.length ? "/" : ""}${filename}`] = meta;
+				r.meta.fileMeta[subPath] = meta;
 		}
 
 		for(const outputFile of r.f.files.new || [])
 		{
 			const relPath = path.relative(r.outDir(), outputFile.rel);
-			if(r.meta.fileMeta[relPath]?.when)
+			for(const subPath of [relPath, path.join(path.dirname(relPath), path.basename(relPath, path.extname(relPath)))])
 			{
-				outputFile.setTS(r.meta.fileMeta[relPath]?.when.getTime());
-			}
-			else
-			{
-				// acx adds various extra extensions like .PNG, .bas, .csv when it converts a file, so we try stripping the extension to see if we match then
-				const relPathModified = path.join(path.dirname(relPath), path.basename(relPath, path.extname(relPath)));
-				if(r.meta.fileMeta[relPathModified]?.when)
-					outputFile.setTS(r.meta.fileMeta[relPathModified]?.when.getTime());
+				if(r.meta.fileMeta[subPath]?.when)
+					outputFile.setTS(r.meta.fileMeta[subPath]?.when.getTime());
 			}
 		}
 	};

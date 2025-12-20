@@ -7,16 +7,14 @@ import {programs} from "../program/programs.js";
 import {rpcidentify} from "../identify.js";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the classify garbage model
-const CLASSIFY_PATH_EXCLUSIONS =
-[
+const CLASSIFY_PATH_EXCLUSIONS = [
 	"texture", "textura",
 	"background", "backgrnd",
 	"repeatable",
 	"stereo", "pattern", "noise", "illusion", "fractal", "border"
 ];
 
-const MATCH_MAX_GARBAGE_PROBABILITIES =
-{
+const MATCH_MAX_GARBAGE_PROBABILITIES = {
 	magic    : 0.7,
 	filename : 0.6,
 	ext      : 0.6,

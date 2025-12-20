@@ -11,7 +11,7 @@ export class unrar extends Program
 		if(r.stdout.length>0)
 		{
 			const singleLineOut = r.stdout.replaceAll("\n", "§").replaceAll("\r", "†").replace(/§UNRAR \d.+Copyright.+Alexander Roshal§§/, "");
-			const commentGroups = (singleLineOut.match(/(?<comment>.+)§§§Extracting from in\.rar§§/) || {groups : {}}).groups;
+			const commentGroups = (singleLineOut.match(/(?<comment>.+)§\s?§§Extracting from in\.rar§§/) || {groups : {}}).groups;
 			if(commentGroups.comment)
 			{
 				const comment = commentGroups.comment.replaceAll("§", "\n").replaceAll("†", "\r").trimChars("\n\r");	// don't trim anything other than newlines, to preserve comment spacing

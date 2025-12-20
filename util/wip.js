@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {runUtil, fileUtil, printUtil, encodeUtil, cmdUtil, hashUtil} from "xutil";
+import {runUtil, fileUtil, printUtil, encodeUtil, cmdUtil, hashUtil, imageUtil} from "xutil";
 import {path, delay, base64Encode, csvParse, ascii85Decode} from "std";
 import {Program} from "../src/Program.js";
 import {formats, init as initFormats} from "../src/format/formats.js";
@@ -18,5 +18,8 @@ import {WEAK_VALUES} from "../src/WEAK.js";
 
 const xlog = new XLog("info");
 
-await initPrograms(xlog);
-await initFormats(xlog);
+//await initPrograms(xlog);
+//await initFormats(xlog);
+
+const info = await imageUtil.getInfo(Deno.args[0]);
+xlog.info`${info}`;

@@ -2373,6 +2373,7 @@ export const WEAK_VALUES = [
 	/^Seal registry Data$/,
 	/^Semi-Virtual Diskette disk image/,
 	/^Sentry Spelling-Checker user dictionary$/,
+	/^Sequencer One Block$/,
 	/^Session Description Protocol \(with rem\)$/,
 	/^SExtractor configuration$/,
 	/^SFDN Packer compressed data$/,

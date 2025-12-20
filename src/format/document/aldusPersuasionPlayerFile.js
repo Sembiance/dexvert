@@ -6,5 +6,5 @@ export class aldusPersuasionPlayerFile extends Format
 	ext            = [".ppf"];
 	forbidExtMatch = true;
 	magic          = [/^fmt\/1708( |$)/];	// NOTE: If I find more magics later, ensure I update format/image/gif.js confidenceAdjust too
-	converters     = ["gifsicleExplode -> *img2pdf"];
+	converters     = ["gifsicleExplode -> *img2pdf -> qpdf[pages:2-z]"];	// first page always seems to be a mini-thumbnail image, so remove it with qpdf
 }

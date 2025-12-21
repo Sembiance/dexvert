@@ -14,7 +14,7 @@ export class scribus extends Program
 		outType : `Which format to output: svg | pdf. Default is svg`
 	};
 	unsafe = true;
-	bin    = "scribus-1.6";
+	bin    = "scribus-1.7";
 	outExt = r => ((r.flags.outType || "svg")==="pdf" ? ".pdf" : ".eps");
 
 	pre = async r =>

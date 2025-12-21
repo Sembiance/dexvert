@@ -21,5 +21,4 @@ const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
 
-const info = await imageUtil.getInfo(Deno.args[0]);
-xlog.info`${info}`;
+xlog.info`${Number(+xu.MINUTE*10).toClock()}`;

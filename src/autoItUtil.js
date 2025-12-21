@@ -5,8 +5,7 @@ import {path} from "std";
 // AUTOIT LIB FUNCTIONS: https://www.autoitscript.com/autoit3/docs/libfunctions.htm
 // Send() Keys: https://www.autoitscript.com/autoit3/docs/functions/Send.htm
 // AUTOIT DLL INFO: https://www.autoitscript.com/forum/topic/93496-tutorial-on-dllcall-dllstructs/
-const AUTOIT_FUNCS =
-{
+const AUTOIT_FUNCS = {
 	// TimerInit and TimerDiff are 100% NOT TRUSTWORTHY! They will report that 60,000ms has gone by when in reality only 3 or 4 seconds have gone by. AutoIt does warn that it doesn't work on some processors. So we roll our own here
 	GetTime : `
 #include <Date.au3>
@@ -333,8 +332,7 @@ EndFunc`,
 	EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["GetTime", "TimeDiff", "KillAll"];
-const FUNC_REQ_FUNCS =
-{
+const FUNC_REQ_FUNCS = {
 	WaitForStableDirCount : "DirFileCount"
 };
 

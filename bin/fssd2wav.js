@@ -22,8 +22,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output dir to write to", required : true}
 	]});
 
-const RATES =
-{
+const RATES = {
 	1 : 22256,
 	2 : 11128,
 	3 : 7418,

@@ -6,8 +6,17 @@
 
 * Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
 
-* Test with latest scribus version that we've installed (couldn't get the old one to build anymore)
-  After getting it working, remove the commented out lines from overlay/util/updatePackageMasks.js
+* sox_ng has decided to be a lot more strict about handling corrupted WAV files: https://codeberg.org/sox_ng/sox_ng/issues/747
+  This causes audio/doomEternalSound/lem.sfx extracted WAV files to not convert
+  So I've reverted to use sourceforge sox, possibly forever if sox_ng doesn't want to loosen it's strictness enforcement
+
+* These formats didn't pass, need to investigate
+	music/unrealMusic				missing output files: WoT.u
+	music/ay						missing many output MP3's vs test expected in files: EMUL.Renegade-3  and  emul.vmp_quickhack
+	music/fuxoftAYLanguage			these failed: A.FXM  and  monty on the run.fxm  and  spacecrusade.fxm  and  star3.fxm
+	music/hes						missing output file: strip fighter 2.hes
+	music/nsf						missing output files in: legend of zelda.nsf  and  METROIDD.NSF  and  super mario bros 2.nsf
+	music/ayAMAD					missing an output MP3 vs test expected for: tetris 2.amad 
 
 * Add support for BitFax Image (already added magic): https://discmaster.textfiles.com/search?q=-FAXFONT+-FAXFON%24&detection=4249542020464158*
 
@@ -106,6 +115,11 @@
 	image/mindjonggIPG          abc.ipg      deark: mindjongg (Mindjongg tileset (old))        
 
 	+* Logitech Compress v2.0 (module="lgcompress")
+		Logitech Compress compressed
+		Logitech Compress archive data
+		https://discmaster.textfiles.com/view/42992/1997.tar/1997/3000-18491_4-119988_sp5312.exe/sp5312.exe/sp5312.exe/LGEZNESW.CU~
+		running deark -d3 shows missing letter, so make sure if deark doesn't put it in, that I parse this and put it in
+		Also, maybe there are some other formats that end in _ that have deark support that can show the missing letter?
 
 	+* MMFW Pictures (part of module="mmfw") (experimental/incomplete)
 	+  See also the section on "MMFW resource file".

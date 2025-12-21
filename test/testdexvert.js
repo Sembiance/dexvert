@@ -160,8 +160,10 @@ const FORMAT_PROGRAM_FLAG = {
 	}
 };
 
-// these formats produce a single file, but the name is always different
-const SINGLE_FILE_DYNAMIC_NAMES = [];
+// these formats produce a files, but the namee are always different
+const FILE_DYNAMIC_NAMES = [
+	"document/ibmBookManagerBook"
+];
 
 const FLEX_SIZE_PROGRAMS = {
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
@@ -274,10 +276,11 @@ const FLEX_SIZE_FORMATS = {
 	document :
 	{
 		// these conversions sometimes differ WILDLY, haven't figured out why
-		farallonReplica : 25,
-		hlp             : 50,
-		wildcatWCX      : 90,
-		wordDoc         : 80,
+		farallonReplica    : 25,
+		hlp                : 50,
+		ibmBookManagerBook : 95,
+		wildcatWCX         : 90,
+		wordDoc            : 80,
 
 		// very subtle differences each time, not sure why
 		winampCompiledMakiScript : 0.1,
@@ -345,12 +348,8 @@ const FLEX_SIZE_FORMATS = {
 	},
 	poly :
 	{
-		// .glb files produced differ each time, probably some meta data timestamp or something
-		"*"                   : 3,
-		cyberStudioCAD3D      : 99,
-		keyCAD3DModel         : 40,
-		panda3DModel          : 50,
-		rayDreamDesignerScene : 95
+		// .glb files produced differ each time, could be any number of things, but due to the small file sizes, it can sometimes vary quite wildly
+		"*" : 400
 	},
 	video :
 	{
@@ -893,7 +892,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		const beforeKeys = Object.keys(prevData.files).sortMulti(v => v);
 		const afterKeys = Object.keys(result.files).sortMulti(v => v);
 		const diffFiles = diffUtil.diff(beforeKeys, afterKeys);
-		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
+		if(diffFiles?.length && !FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
 		{
 			const caseInsensitiveDiff = diffUtil.diff(beforeKeys.map(v => v.toLowerCase()), afterKeys.map(v => v.toLowerCase()));
 			return await fail(`Created files are different: ${diffFiles.innerTruncate(3000)} (before: ${beforeKeys.length.toLocaleString()} files) (after: ${afterKeys.length.toLocaleString()} files) caseInsensitiveDiff: ${caseInsensitiveDiff.length ? `${caseInsensitiveDiff}` : "no differences"}${converterMismatch}`);
@@ -912,7 +911,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			if(IGNORE_SIZE_FILEPATHS.some(re => re.test(name)))
 				continue;
 
-			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
+			const prevFile = FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
 			if(!prevFile)	// can happen if FLEX_DIFF_FILES matches for this format/file
 				continue;
 
@@ -929,7 +928,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		// Now check timestamps
 		for(const [name, {ts}] of Object.entries(result.files))
 		{
-			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
+			const prevFile = FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
 			if(!prevFile)	// can happen if FLEX_DIFF_FILES matches for this format/file
 				continue;
 

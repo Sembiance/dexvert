@@ -343,6 +343,7 @@ export default
 		advancedStreamRedirector                   : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector", "audio/x-ms-asx", "Windows Media Metadaten Datei"], weakMagic : true},
 		aegisAnimatorScript                        : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},
 		aegisDrawPart                              : {name : "Aegis Draw part", magic : ["Aegis Draw part"]},
+		aegisLightsCameraActionScript              : {name : "Aegis Lights! Camera! Action! script", magic : ["Aegis Lights! Camera! Action! script"]},
 		aegisProMotionCamera                       : {name : "Aegis ProMotion Camera", ext : [".pcam"], magic : ["Aegis ProMotion Camera"], weakMagic : true},
 		aegisProMotionMotion                       : {name : "Aegis ProMotion Motion", ext : [".pmot", ".mot"], magic : ["Aegis ProMotion Motion"], weakMagic : true},
 		aegisProMotionSet                          : {name : "Aegis ProMotion Set", ext : [".pset"], magic : ["Aegis ProMotion Set"], weakMagic : true},
@@ -407,6 +408,7 @@ export default
 		bibTeXStyle                                : {name : "BibTeX style", ext : [".bst"], magic : ["BibTeX Style", /^BibTeX ((custom|standard) bibliography )?style text file/]},
 		bifBitmapASCIIInfo                         : {name : "BIF bitmap ASCII info", ext : [".bif"], magic : ["BIF bitmap ASCII info"], weakMagic : true},
 		bitTorrentFile                             : {name : "BitTorrent file", ext : [".torrent"], magic : ["BitTorrent file", "application/x-bittorrent", /^Torrent( \(trackerless\))?$/]},
+		blitzSpreadSpreadsheet                     : {name : "Blitz Spread spreadsheet", ext : [".sheet"], magic : ["Blitz Spread spreadsheet"], weakMagic : true},
 		blueByteSoftware3DAssetsCatalog            : {name : "Blue Byte Software 3D assets catalog", ext : [".dir"], magic : ["Blue Byte Software 3D assets catalog"]},
 		blueByteSoftware3DWorldData                : {name : "Blue Byte Software 3D World data", ext : [".3dw"], magic : ["Blue Byte Software 3D World data"]},
 		blueMSXCheats                              : {name : "blueMSX Cheats", magic : ["blueMSX Cheats Format"]},
@@ -608,7 +610,7 @@ export default
 		gimpToolPreset                             : {name : "GIMP Tool Preset", ext : [".gtp"], magic : ["GIMP Tool Preset"]},
 		gmshMesh                                   : {name : "Gmsh Mesh", ext : [".msh"], magic : ["Gmsh Mesh"]},
 		gsmsendConfiguration                       : {name : "GSMSEND configuration", ext : [".par"], magic : ["GSMSEND configuration"]},
-		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                          	// We do NOT include Trid's "GNU Info document" because it's too loose
+		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                                                 	// We do NOT include Trid's "GNU Info document" because it's too loose
 		golemModel                                 : {name : "Golem model", ext : [".golem"], magic : ["Golem model"]},
 		goodWayFlightPlannerFlightPlan             : {name : "GoodWay Flight Planner flight plan", ext : [".gwp"], magic : ["GoodWay Flight Planner flight plan"]},
 		graceProjectFile                           : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},

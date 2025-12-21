@@ -167,6 +167,7 @@ export const WEAK_VALUES = [
 	/^UEFI PI Firmware Volume/,
 	/^Unix path: /,
 	/^VxWorks symbol table/,
+	/^Windows CE image header/,
 	/^Windows CE memory segment header/,
 	/^WMA audio data$/,
 	/^Xilinx Virtex\/Spartan FPGA bitstream dummy \+ sync word$/,

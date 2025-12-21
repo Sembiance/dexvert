@@ -11,12 +11,7 @@
   So I've reverted to use sourceforge sox, possibly forever if sox_ng doesn't want to loosen it's strictness enforcement
 
 * These formats didn't pass, need to investigate
-	music/unrealMusic				missing output files: WoT.u
-	music/ay						missing many output MP3's vs test expected in files: EMUL.Renegade-3  and  emul.vmp_quickhack
-	music/fuxoftAYLanguage			these failed: A.FXM  and  monty on the run.fxm  and  spacecrusade.fxm  and  star3.fxm
-	music/hes						missing output file: strip fighter 2.hes
 	music/nsf						missing output files in: legend of zelda.nsf  and  METROIDD.NSF  and  super mario bros 2.nsf
-	music/ayAMAD					missing an output MP3 vs test expected for: tetris 2.amad 
 
 * Add support for BitFax Image (already added magic): https://discmaster.textfiles.com/search?q=-FAXFONT+-FAXFON%24&detection=4249542020464158*
 

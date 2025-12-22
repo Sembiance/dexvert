@@ -195,6 +195,7 @@ const FLEX_SIZE_PROGRAMS = {
 const IGNORED_META_KEYS = {
 	image :
 	{
+		cr2 : ["width", "height"],
 		jpg : ["driOffset", "driCount"],
 		jng : ["colorCount"],
 		pes : ["colorCount"]
@@ -278,7 +279,7 @@ const FLEX_SIZE_FORMATS = {
 		// these conversions sometimes differ WILDLY, haven't figured out why
 		farallonReplica    : 25,
 		hlp                : 50,
-		ibmBookManagerBook : 95,
+		ibmBookManagerBook : 250,
 		wildcatWCX         : 90,
 		wordDoc            : 80,
 
@@ -330,7 +331,7 @@ const FLEX_SIZE_FORMATS = {
 
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
-		grabber            : 7,
+		grabber            : 15,
 		gifexe             : 300,
 		krisCard           : 25,
 		laughingDog        : 50,

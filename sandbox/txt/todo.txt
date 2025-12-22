@@ -6,14 +6,9 @@
 
 * Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
 
-* sox_ng has decided to be a lot more strict about handling corrupted WAV files: https://codeberg.org/sox_ng/sox_ng/issues/747
-  This causes audio/doomEternalSound/lem.sfx extracted WAV files to not convert
-  So I've reverted to use sourceforge sox, possibly forever if sox_ng doesn't want to loosen it's strictness enforcement
-
-* These formats didn't pass, need to investigate
-	music/nsf						missing output files in: legend of zelda.nsf  and  METROIDD.NSF  and  super mario bros 2.nsf
-
 * Add support for BitFax Image (already added magic): https://discmaster.textfiles.com/search?q=-FAXFONT+-FAXFON%24&detection=4249542020464158*
+  Then reprocess:
+  https://discmaster.textfiles.com/search?q=-FAXFONT+-FAXFON%24&detection=4249542020464158*
 
 * Support version 2.0 using the actual extract exe: http://fileformats.archiveteam.org/wiki/Logitech_Compress
 
@@ -42,58 +37,6 @@
 	http://fileformats.archiveteam.org/index.php?title=SABDU
 	https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage
 
-* Use exiftool to get CompanyName, ProductVersion, Comments, and other fields from formats: exe, dll, etc.
-  Store this as meta info. Make sure to update injest/phase/phase4.js and ensure this gets stored into textContent
-  Then upload SOME of these to item #7 and reprocess and try searching for it, make sure it can find them: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
-  Write a script that can go and get this data and update the WebDB file and update the index.jsonl file and update elastic
-  It'll go as "content" 
-  Targeted so it'll do a paginated elastic search for the target formats, run on discmaster2 server the exiftool, insert the data
-  Use an 'agentpool' of course.
-  Also make this fairly 'generic' or provide 'helpers' for both the paginated search (which is similar to deepfind kinda)
-  but also helpers for updating webdb, the index.jsonl for the given fileid and also the elastic entry too
-
-* Using the above now inserted data, with format 'exe' selected, search for content that is likely a bink/smacker video
-  Also these: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
-  And finally create the code that can do 'targeted' reprocessing of files. It's time to do it.
-
-* Consider adding 'type' to all uses of "sox" in order to tighten things up a bit. Would want to run full dexdrone10 test suite before AND after
-
-* Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural
-
-* Create a way to launch an installer in winxp or something in QEMU, run the installer (so autoit is installed to help) then shutdown the system, extract the disk drive image and compare the files and use that as the output:
-  Will need a way to vnc into these 'while' running to debug of course
-  First, WISE installers: https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
-  Second, figure out how to 'detect/find' these files better then go test on a TON of them until they all work
-  Once working, reply on #discmaster textfiles to eintei that it's been solved and things will be reprocesed over time to handle these
-  BEFORE I start re-processing potentially thousands of CDs, find more installers.
-  First, look at the list of 'installers' in exe.js and ones that seem to be more 'common' start looking at those.
-  Then, manually go through items, #1, #2, #2, #4 and run more installers. Might need a way to quicky launch my extractor QEMU with a downloaded .iso file
-  Then I can run the installer in the native environment and see how it is set up, figure out if I can 'detect' them and support them
-  Finally, only after I've done like a TON of common installers, now reprocess items as needed to support these.
-  It *might* be wise to tackle the hard problem now of partial re-processing, partial re-injestion and partial re-indexing. Maybe. That sounds tricky and error prone and dangerous, so if I skip on that now, I'll never do it likely.
-  Another installer to handle, Installer:InstallUs: https://discmaster.textfiles.com/view/39541/c64classix.iso/setup.exe?details
-  Also can search for format 'exe' with a particular minimum MB to help identify additional installers (also of course look at exe.js for other installers to search for in detection field)
-  Make sure I go and see if I can do all the 'Installer' marked sub-formats in exe.js, especially 'Setup-Specialist' which is also sample exe/SeTUp.eXe)
-
-
-* archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
-  Other MacOS installers to target in a similar way:
-	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc
-* After mac x11vnc support, add Aldus Persuasion 2 support (these v2 files won't open in anything other than v2 of the program, won't work in v3):
-	https://discmaster.textfiles.com/view/23575/Apple%20R&P%20Lib%20Internal%20v8.0.iso/3-Presentations/Apple%20Computer%20Inc./Apple%20Computer/Corporate%20Overview/Corporate%20Overview/Corporate%20Overview
-	https://macintoshgarden.org/apps/aldus-persuasion-212
-
-* Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
-  Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
-  Don't do this for all formats, since in several cases a simple flattening is the best course of action
-
-* From discord: I just realized discmaster handles detection of yamaha SMAF files, but doesn't actually parse them apart into their elements
-	they're meant for use with 2000s era cell phones, for ringtones, images, etc in many formats
-	search for .mmf files of type 'audio'
-	iirc the ADPCM format in here is yamaha adpcm, which ffmpeg can decode, but they can also contain mp3 as well as an MML format for simple beep ringtones
-	and also FM synthesis ringtones
-  See PDF: sandbox/wip/SMAF3.06e.pdf
-
 * Ancient new version:
 	Added Bytekiller & Clones (ANC, JEK)
 	Added JAMPacker
@@ -102,8 +45,6 @@
 
 * AppleCommander now supports:
 	WOZ
-
-* Several audio/speex samples are a bit distorted. See if this can be fixed.
 
 * Add these newly added deark modules:   ROB NOTE, Some snd/pics seen in : https://discmaster.textfiles.com/admin/item?itemid=41695
 	image/amosPicturePacker     Menu.bin     deark: abk (AMOS picture, with screen header)     
@@ -166,11 +107,64 @@
 * nihav updated from 06-10 to today:
 	https://git.nihav.org/?p=nihav.git;a=summary
 	
-
 * Add support for:
 	http://fileformats.archiveteam.org/wiki/PCX2EXE
 	http://fileformats.archiveteam.org/wiki/TINYPROG
 	https://discmaster.textfiles.com/view/37864/PC%20Master%20%CE%A4%CE%B5%CF%8D%CF%87%CE%BF%CF%82%20149%20-%20%CE%9C%CE%AC%CF%81%CF%84%CE%B9%CE%BF%CF%82%202002/PC%20Master%20%CE%A4%CE%B5%CF%8D%CF%87%CE%BF%CF%82%20149%20-%20%CE%9C%CE%AC%CF%81%CF%84%CE%B9%CE%BF%CF%82%202002.bin/extras/nightofthehermit/setup.zip/Talkie.ace/speech.vox
+
+* From discord: I just realized discmaster handles detection of yamaha SMAF files, but doesn't actually parse them apart into their elements
+	they're meant for use with 2000s era cell phones, for ringtones, images, etc in many formats
+	search for .mmf files of type 'audio'
+	iirc the ADPCM format in here is yamaha adpcm, which ffmpeg can decode, but they can also contain mp3 as well as an MML format for simple beep ringtones
+	and also FM synthesis ringtones
+  See PDF: sandbox/wip/SMAF3.06e.pdf
+
+* Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
+  Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
+  Don't do this for all formats, since in several cases a simple flattening is the best course of action
+
+* Consider adding 'type' to all uses of "sox" in order to tighten things up a bit.
+  Would want to run full dexdrone10 test suite before AND after
+
+* Use exiftool to get CompanyName, ProductVersion, Comments, and other fields from formats: exe, dll, etc.
+  Store this as meta info. Make sure to update injest/phase/phase4.js and ensure this gets stored into textContent
+  Then upload SOME of these to item #7 and reprocess and try searching for it, make sure it can find them: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
+  Write a script that can go and get this data and update the WebDB file and update the index.jsonl file and update elastic
+  It'll go as "content" 
+  Targeted so it'll do a paginated elastic search for the target formats, run on discmaster2 server the exiftool, insert the data
+  Use an 'agentpool' of course.
+  Also make this fairly 'generic' or provide 'helpers' for both the paginated search (which is similar to deepfind kinda)
+  but also helpers for updating webdb, the index.jsonl for the given fileid and also the elastic entry too
+
+* Using the above now inserted data, with format 'exe' selected, search for content that is likely a bink/smacker video
+  Also these: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
+  And finally create the code that can do 'targeted' reprocessing of files. It's time to do it.
+
+* Create a way to launch an installer in winxp or something in QEMU, run the installer (so autoit is installed to help) then shutdown the system, extract the disk drive image and compare the files and use that as the output:
+  Will need a way to vnc into these 'while' running to debug of course
+  First, WISE installers: https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
+  Second, figure out how to 'detect/find' these files better then go test on a TON of them until they all work
+  Once working, reply on #discmaster textfiles to eintei that it's been solved and things will be reprocesed over time to handle these
+  BEFORE I start re-processing potentially thousands of CDs, find more installers.
+  First, look at the list of 'installers' in exe.js and ones that seem to be more 'common' start looking at those.
+  Then, manually go through items, #1, #2, #2, #4 and run more installers. Might need a way to quicky launch my extractor QEMU with a downloaded .iso file
+  Then I can run the installer in the native environment and see how it is set up, figure out if I can 'detect' them and support them
+  Finally, only after I've done like a TON of common installers, now reprocess items as needed to support these.
+  It *might* be wise to tackle the hard problem now of partial re-processing, partial re-injestion and partial re-indexing. Maybe. That sounds tricky and error prone and dangerous, so if I skip on that now, I'll never do it likely.
+  Another installer to handle, Installer:InstallUs: https://discmaster.textfiles.com/view/39541/c64classix.iso/setup.exe?details
+  Also can search for format 'exe' with a particular minimum MB to help identify additional installers (also of course look at exe.js for other installers to search for in detection field)
+  Make sure I go and see if I can do all the 'Installer' marked sub-formats in exe.js, especially 'Setup-Specialist' which is also sample exe/SeTUp.eXe)
+
+* archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
+  Other MacOS installers to target in a similar way:
+	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc
+* After mac x11vnc support, add Aldus Persuasion 2 support (these v2 files won't open in anything other than v2 of the program, won't work in v3):
+	https://discmaster.textfiles.com/view/23575/Apple%20R&P%20Lib%20Internal%20v8.0.iso/3-Presentations/Apple%20Computer%20Inc./Apple%20Computer/Corporate%20Overview/Corporate%20Overview/Corporate%20Overview
+	https://macintoshgarden.org/apps/aldus-persuasion-212
+
+* Several audio/speex samples are a bit distorted. See if this can be fixed.
+
+* Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural
 
 * Blender 4 is getting a lot harder to keep running with dexvert. Updating to blender 5 (with all the addons) looks to be a HUGE effort
   So first, try using the 'binary' version of blender 4.0.2 and see if I can get that working on linux with the addons:

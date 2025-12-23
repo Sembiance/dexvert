@@ -40,6 +40,8 @@ export class gt2 extends Program
 	};
 	post = r =>
 	{
+		// no need to delete the copied file, as it went into the 'in#' dir which wineUtil automatically deletes
+
 		const matchValues = (r.status?.stdout || "").split("\n").map(line => line.match(/^3: (?<magic>.+)/)?.groups.magic).filter(v => !!v);
 		r.meta.detections = (matchValues.length!==1 || !matchValues[0].length || matchValues[0].startsWith("Fehler:")) ? [] : [Detection.create({value : `${matchValues[0]}`, from : "gt2", file : r.f.input})];
 	};

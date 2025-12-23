@@ -1,11 +1,11 @@
-# Supported File Formats (3,402)
+# Supported File Formats (3,404)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (495)
+## Archive (497)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -224,7 +224,7 @@ archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/Ins
 archive | [InstallShield Archive](http://fileformats.archiveteam.org/wiki/InstallShield_archive_(IBT)) | .ibt | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldArchive/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldInstallerArchive/)
-archive | [InstallShield Self-Extractor](http://justsolve.archiveteam.org/wiki/InstallShield_Self-Extracting_EXE) | .exe | [unISV3](https://github.com/Sembiance/dexvert) [installShieldSelfExtractor](https://github.com/Sembiance/dexvert) | [38 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/)
+archive | [InstallShield Self-Extractor](http://justsolve.archiveteam.org/wiki/InstallShield_Self-Extracting_EXE) | .exe | [unISV3](https://github.com/Sembiance/dexvert) [installShieldSelfExtractor](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [38 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldZ/)
 archive | [Interchangeable Preservation Format Floppy Disk Image](http://fileformats.archiveteam.org/wiki/IPF) | .ipf | [uaeunp](https://www.winuae.net/download/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ipfFloppyDiskImage/)
 archive | Interstate Series Game Archive | .zfs | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/interstateGameArchive/)
@@ -351,6 +351,7 @@ archive | [Pelican Press Artwork Archive](https://www.amigafuture.de/app.php/asd
 archive | Pendulumania game data | .qda | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/pendulumaniaGameData/)
 archive | PFS Filesystem | .img | [binwalk](https://github.com/OSPG/binwalk) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/pfsFilesystem/)
 archive | PGMPAK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/pgmpakPacked/)
+archive | [Picture Catalog Spinnaker](http://fileformats.archiveteam.org/wiki/Picture_Catalog_(Spinnaker_.CAT)) | .cat | [deark](https://entropymine.com/deark/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/pictureCatalogSpinnaker/)
 archive | [Pixfolio Catalog](http://fileformats.archiveteam.org/wiki/PixFolio_catalog) | .cat .cix | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/pixfolioCatalog/)
 archive | [PKLITE Packed](http://fileformats.archiveteam.org/wiki/PKLITE) |  | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/pklitePacked/)
 archive | PKTINY Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/pktinyPacked/)
@@ -501,6 +502,7 @@ archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |
 archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [zoo](https://packages.debian.org/jessie/zoo) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zoo/)
 archive | ZP Packed GXL | .zp | [dd](https://www.gnu.org/software/coreutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/zpPackedGXL/)
 archive | [ZPAQ Archive](http://fileformats.archiveteam.org/wiki/ZPAQ) | .zpaq | [zpaq](http://mattmahoney.net/dc/zpaq.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/zpaq/)
+archive | ZSoft Package 2 | $ | [deark](https://entropymine.com/deark/) | 
 archive | [ZSQ](http://fileformats.archiveteam.org/wiki/ZSQ_(LZW_compression)) | .zzz | [deark](https://entropymine.com/deark/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zsq/)
 archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HCDisk) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/zxSpectrumTape/)
 
@@ -1224,7 +1226,7 @@ image | [GoDot 4Bit Image](http://fileformats.archiveteam.org/wiki/GoDot) | .4bt
 image | GoDot Clip Image | .clp | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/goDotClip/)
 image | [GodPaint](http://fileformats.archiveteam.org/wiki/GodPaint) | .god | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/god/)
 image | GPFax FAX format |  | [wuimg](https://codeberg.org/kaleido/wuimg) | 
-image | [Grabber](http://fileformats.archiveteam.org/wiki/GRABBER) | .exe .com | [dosEXEScreenshot](https://github.com/Sembiance/dexvert/) | [19 sample files](https://sembiance.com/fileFormatSamples/image/grabber/)
+image | [Grabber](http://fileformats.archiveteam.org/wiki/GRABBER) | .exe .com | [deark](https://entropymine.com/deark/) [dosEXEScreenshot](https://github.com/Sembiance/dexvert/) | [19 sample files](https://sembiance.com/fileFormatSamples/image/grabber/)
 image | [GrafX2](http://fileformats.archiveteam.org/wiki/PKM) | .pkm | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/grafx2/)
 image | [Graph Saurus](http://fileformats.archiveteam.org/wiki/Graph_Saurus) | .sr5 .gl5 .pl5 .sr6 .gl6 .pl6 .sr7 .gl7 .pl7 .sr8 .gl8 .sri .srs | [recoil2png](http://recoil.sourceforge.net) | [29 sample files](https://sembiance.com/fileFormatSamples/image/graphSaurus/) - Sample LOGO.GL5 doesn't convert.
 image | [Graph2Font](http://fileformats.archiveteam.org/wiki/Graph2Font) | .g2f .mch | [recoil2png](http://recoil.sourceforge.net) | [20 sample files](https://sembiance.com/fileFormatSamples/image/graph2Font/)
@@ -1379,7 +1381,7 @@ image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/ico/)
 image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/Windows_Metafile) | .wmf .apm .wmz | [wmf2svg](https://github.com/hidekatsu-izuno/wmf2svg) [uniconvertor](https://sk1project.net/uc2/) [soffice](https://www.libreoffice.org) [convert](https://www.imagemagick.org/) [iio2png](http://github.com/Sembiance/iio2png/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [keyViewPro](https://archive.org/details/KeyViewPro/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [19 sample files](https://sembiance.com/fileFormatSamples/image/wmf/) - Some WMF files like 001.WMF just have an embedded PNG. So the initial programs that convert to SVG will fail, and fall back to convert which will produce a PNG.
 image | [MIG](http://fileformats.archiveteam.org/wiki/MIG) | .mig | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://sembiance.com/fileFormatSamples/image/mig/)
-image | Mindjongg IPG | .ipg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/mindjonggIPG/)
+image | [Mindjongg IPG](http://fileformats.archiveteam.org/wiki/Mindjongg_tileset) | .ipg | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/mindjonggIPG/)
 image | [Minipaint MG](https://sourceforge.net/p/recoil/bugs/102/) | .mg | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/minipaintMG/)
 image | [Minolta RAW](http://fileformats.archiveteam.org/wiki/Minolta_MRW) | .mrw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mrw/)
 image | MMS Composer File | .mcf | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/mmsComposerFile/)

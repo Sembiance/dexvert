@@ -8,60 +8,51 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* Add support for: https://discmaster.textfiles.com/browse/22410/HOD_DEMO_GB.iso/Wads/jedi%20knight/dak_siege.zip/dak_siege.gob
-  with: https://github.com/smlu/blender-sith
-
-* Figure out how to extract the bink/smacker videos: https://discmaster.textfiles.com/browse/36350/EXE_7.ISO/Video
-  https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
-  sandbox/app/radTools/ has some tools that in theory you can use to extract, but it didn't work with the files I tested
-  MAYBE this tool can do it: https://www.zeus-software.com/downloads/xripper
-
-* Add support for:
-	http://fileformats.archiveteam.org/index.php?title=SABDU
-	https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage
-
-* Ancient new version:
-	Added Bytekiller & Clones (ANC, JEK)
-	Added JAMPacker
-	Added PMC
-	Added Pack-Ice
-
-* AppleCommander now supports:
-	WOZ
-
-* Add these newly added deark modules:   ROB NOTE, Some snd/pics seen in : https://discmaster.textfiles.com/admin/item?itemid=41695
+* Add these newly added deark modules:
 	image/amosPicturePacker     Menu.bin     deark: abk (AMOS picture, with screen header)     
-	image/mindjonggIPG          abc.ipg      deark: mindjongg (Mindjongg tileset (old))        
 
-	+* Logitech Compress v2.0 (module="lgcompress")
-		Logitech Compress compressed
-		Logitech Compress archive data
-		https://discmaster.textfiles.com/view/42992/1997.tar/1997/3000-18491_4-119988_sp5312.exe/sp5312.exe/sp5312.exe/LGEZNESW.CU~
-		running deark -d3 shows missing letter, so make sure if deark doesn't put it in, that I parse this and put it in
-		Also, maybe there are some other formats that end in _ that have deark support that can show the missing letter?
+	+* BMG - Bert's Coloring Programs (module="berts_bmg")
+	+  This format looks like PCX, but in most cases it must be interpreted in a
+	+  special way.
+	+  - Files are converted to standard PCX.
+	+  - File must have extension ".bmg" or ".ibg" (or use "-m berts_bmg").
+	+  - Only the distribution files are handled automatically. Otherwise, you must
+	+    use the "defpal" option.
+	+  Options
+	+   -opt berts_bmg:defpal=<name> - The predefined palette to use, if it can't be
+	+     determined.
+	+     Options are "1", "2", "3" for standard palettes, "outline" to remove the
+	+     coloring, "gray" for grayscale, "fail" (default) to give up and not write
+	+     a file.
+	+   -opt berts_bmg:forcepal=<name> - The palette to use, even if the correct
+	+     palette is known.
 
-	+* MMFW Pictures (part of module="mmfw") (experimental/incomplete)
-	+  See also the section on "MMFW resource file".
-	+  Some picture formats are supported; others are not.
-	+  Caution: These files can contain a huge number of images, and Deark's
-	+  decoder is not well optimized. Expect it to be slow. You may have to use
-	+  an option like "-maxfiles" or "-zip" to get everything.
-	+
-	*** ROB NOTE: See *.MMS: https://discmaster.textfiles.com/browse/41779/TWILIGHT66B.ISO/Games/032/gamex32.rar/Shrek%20Game%20Land
+	+* DXP image (module="dxp_image")
+	+  An image format possibly associated with software named Dexter, by Paul
+	+  Burkey.
 
+	+* Mah Jongg tile set (.TIL) (module="mahj_na_til")
+	+  Graphics used with Nels Anderson's Mah Jongg solitaire game.
+	+  - Format is difficult to autodetect. In some cases, you must use
+	+    "-m mahj_na_til". If the file extension is not ".til", you always need the
+	+    -m option.
+	+  Options
+	+   -opt mahj_na_til:nf=<0|1> - A hint as to whether the file starts with a
+	+     "name" field, and what to do about that. 0 means the name field is not
+	+     present.
+	+   -padpix - Reveal the top-left and bottom-right corner pixels.
+
+	+* Mah Jongg -V-G-A- tile set (.tis) (module="mjvga")
+	+  Graphics used with Mah Jongg -V-G-A- and Mah Jongg for Windows, by Ron
+	+  Balewski.
+	+  - Also supports the single-tile format with extension .icn or .til. This
+	+    format uses a separate palette file usually named pal.cfg.
+	+  Options
+	+   -file2 <pal.cfg> - Read the palette from this file. Not expected to be used
+	+    with TIS format, but allowed.
+	
 	+* EA/PEA archive (module="ea_arch") (experimental)  (already started being detected as deark: ea_arch, but could search for older ones using detections)
 	+  An installer format used by Electronic Arts.
-
-	+* InstallShield SFX EXE-NE (via module="exe") (experimental/incomplete)
-	+  InstallShield self-extracting installers for Windows 3.x.
-	+  - You must use "-opt exe:sfx".
-	+  - Extracted files will have placeholder names like "ishield000.dat".
-
-	+* MMFW resource file (module="mmfw") (experimental)
-	+  See also the section on "MMFW Pictures".
-	+  Options
-	+   -opt mmfw:extractall - Also extract undecoded resources, in raw form.
-	+   -opt mmfw:extractallraw - Extract all resources in raw form.
 
 	+* MS-DOS v2.0-3.2 BACKUP (module="dosbackup20") (experimental)
 	+  - If the file was split onto multiple volumes, you must use the "-mp" option,
@@ -80,9 +71,9 @@
 	+  This module is mainly for internal use by the "fat" module. It can be used
 	+  directly, though possibly with reduced functionality.
 
-* ALL deark changes since September 20 until December 12
-
-* wuimg
+* Add support for:
+	http://fileformats.archiveteam.org/index.php?title=SABDU
+	https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage
 
 * LOTS of new formats supported in librempeg: https://github.com/librempeg/librempeg/blob/master/Changelog
   Last version os 08-10
@@ -102,6 +93,15 @@
 		https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DF!PF099.ZIP/BOOMDOS.EXE
 	http://fileformats.archiveteam.org/wiki/TINYPROG
 	https://discmaster.textfiles.com/view/37864/PC%20Master%20%CE%A4%CE%B5%CF%8D%CF%87%CE%BF%CF%82%20149%20-%20%CE%9C%CE%AC%CF%81%CF%84%CE%B9%CE%BF%CF%82%202002/PC%20Master%20%CE%A4%CE%B5%CF%8D%CF%87%CE%BF%CF%82%20149%20-%20%CE%9C%CE%AC%CF%81%CF%84%CE%B9%CE%BF%CF%82%202002.bin/extras/nightofthehermit/setup.zip/Talkie.ace/speech.vox
+
+* Ancient new version:
+	Added Bytekiller & Clones (ANC, JEK)
+	Added JAMPacker
+	Added PMC
+	Added Pack-Ice
+
+* AppleCommander now supports:
+	WOZ
 
 * 16bit DOS Disk eXPress SFX disk image Executable: http://justsolve.archiveteam.org/wiki/Disk_Express
 	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX4.ZIP/w95-dsk4.exe
@@ -126,6 +126,14 @@
 * Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
   Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
   Don't do this for all formats, since in several cases a simple flattening is the best course of action
+
+* Figure out how to extract the bink/smacker videos: https://discmaster.textfiles.com/browse/36350/EXE_7.ISO/Video
+  https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
+  sandbox/app/radTools/ has some tools that in theory you can use to extract, but it didn't work with the files I tested
+  MAYBE this tool can do it: https://www.zeus-software.com/downloads/xripper
+
+* Add support for: https://discmaster.textfiles.com/browse/22410/HOD_DEMO_GB.iso/Wads/jedi%20knight/dak_siege.zip/dak_siege.gob
+  with: https://github.com/smlu/blender-sith
 
 * Consider adding 'type' to all uses of "sox" in order to tighten things up a bit.
   Would want to run full dexdrone10 test suite before AND after

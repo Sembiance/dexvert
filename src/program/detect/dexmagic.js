@@ -41,6 +41,7 @@ const DEXMAGIC_CHECKS = {
 	"Palm Web Content Record"        : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"PFS Filesystem"                 : [{offset : 0, match : "PFS/"}],
+	"Picture Catalog Spinnaker"      : [{offset : 0, match : "CAT "}, {offset : 8, match : "CLIPFORM"}],
 	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
 	"SGS.DAT"                        : [{offset : 0, match : "SGS.DAT "}],
 	"Superscape SVR"                 : [{offset : 0, match : "SVR"}],
@@ -99,6 +100,7 @@ const DEXMAGIC_CHECKS = {
 	"FONTEDIT Font (Alt 2)"    : [{offset : 0, match : [0xEB, 0x33]}, {offset : 92, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
 	"PCR Font"                 : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
 	"Signum 3 Compressed Font" : [{offset : 0, match : [0x00, 0x02]}, {offset : 2, match : "chset001"}],
+	"XCar Font (Loose)"               : [{offset : 0, match : "FNHD"}, {offset : 65, match : "PAL"}],
 
 	// image
 	"101 Clips Image"                 : [{offset : 0, match : [0xFF, 0xFF, 0xFF, 0xFF, [0x02, 0x03], 0x00, 0x00, 0x00]}],
@@ -157,7 +159,6 @@ const DEXMAGIC_CHECKS = {
 	"SLP Image"                       : [{offset : 0, match : "2.0N"}],
 	"Universal BitMap Format"         : [{offset : 0, match : "UBF92a"}],
 	"Wiz Solitaire Deck"              : [{offset : 0, match : "WizSolitaireDeck"}],
-	"XCar Font (Loose)"               : [{offset : 0, match : "FNHD"}, {offset : 65, match : "PAL"}],
 	"Young Picasso"                   : [{offset : 0, match : [0x50, 0x00, 0x00, 0x50, 0x00, 0x00, 0x52, 0x00, 0x00]}],
 	"ZX Spectrum BSP"                 : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],
 	"ZX Spectrum CHR"                 : [{offset : 0, match : "chr"}, {offset : 3, match : [0x24]}],

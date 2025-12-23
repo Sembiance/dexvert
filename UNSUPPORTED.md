@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,973)
+# Unsupported File Formats (3,972)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (308)
+## Archive (307)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -314,7 +314,6 @@ Family/Format | Name | Extensions | Notes
 [archive/zipscrubPacked](https://discmaster.textfiles.com/search?format=zipscrubPacked) | ZIPSCRUB Packed |  | 
 [archive/zoomDiskImage](https://discmaster.textfiles.com/search?format=zoomDiskImage) | ZOOM Disk Image | .zom | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
 [archive/zPackageCompressedArchive](https://discmaster.textfiles.com/search?format=zPackageCompressedArchive) | ZPackage compressed archive | .zpk | 
-[archive/zSoftPackageFormat2](https://discmaster.textfiles.com/search?format=zSoftPackageFormat2) | ZSoft Package format 2 | $ | 
 [archive/zxSpectrumTZXTape](https://discmaster.textfiles.com/search?format=zxSpectrumTZXTape) | ZX Spectrum TZX Tape | .tzx | 
 
 

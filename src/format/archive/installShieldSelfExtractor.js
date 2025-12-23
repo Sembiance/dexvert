@@ -13,6 +13,6 @@ export class installShieldSelfExtractor extends Format
 	magic          = ["InstallShield Self-Extractor", "Win16 InstallShield Self-Extracting Executable"];
 	idCheck        = async inputFile => inputFile.size>_MAGIC.length && (await fileUtil.readFileBytes(inputFile.absolute, _MAGIC)).indexOfX(_MAGIC)!==0;
 	forbiddenMagic = ["Win32 Dynamic Link Library"];
-	converters     = ["unISV3", "installShieldSelfExtractor"];
+	converters     = ["unISV3", "installShieldSelfExtractor", "deark[module:exe][opt:exe:sfx]"];
 	verify         = ({newFile}) => !["_setup.lib", "_setup32.lib"].includes(newFile.base.toLowerCase());	// these files are already extracted by the installer, so no need to keep them around to just be extracted again by a dexrecurse
 }

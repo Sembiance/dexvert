@@ -529,6 +529,7 @@ PM2: LZ-compressor
 
 
 >>> deark (Linux - v1.5.5 - June 6, 2020) - ARCHIVE, IMAGE (https://github.com/jsummers/deark  https://entropymine.com/deark/)
+>>> formats: https://raw.githubusercontent.com/jsummers/deark/refs/heads/master/formats.txt
 === Image format modules ===
 
 (Images that are not "extracted" will be converted to PNG, except as noted.)
@@ -539,7 +540,8 @@ PM2: LZ-compressor
 * ADEX .IMG (module="adex") (experimental)
 
 * Alias PIX, a.k.a. Vivid ray tracer bitmap (module="alias_pix")
-  - Truecolor only. Grayscale not supported.
+  - Not all files can be autodetected. You may need "-m alias_pix".
+  - Grayscale/matte images are not autodetected. Support is experimental.
 
 * Alpha Microsystems BMP (module="alphabmp") (experimental)
 
@@ -615,6 +617,22 @@ PM2: LZ-compressor
    -opt char:width=<n> - Number of characters per row
 
 * BLD (MegaPaint BLD) (module="bld")
+
+* BMG - Bert's Coloring Programs (module="berts_bmg")
+  This format looks like PCX, but in most cases it must be interpreted in a
+  special way.
+  - Files are converted to standard PCX.
+  - File must have extension ".bmg" or ".ibg" (or use "-m berts_bmg").
+  - Only the distribution files are handled automatically. Otherwise, you must
+    use the "defpal" option.
+  Options
+   -opt berts_bmg:defpal=<name> - The predefined palette to use, if it can't be
+     determined.
+     Options are "1", "2", "3" for standard palettes, "outline" to remove the
+     coloring, "gray" for grayscale, "fail" (default) to give up and not write
+     a file.
+   -opt berts_bmg:forcepal=<name> - The palette to use, even if the correct
+     palette is known.
 
 * BMI (Zoner bitmap) (module="bmi") (experimental)
 
@@ -723,6 +741,10 @@ PM2: LZ-compressor
   Options
    -file2 <file.pal> - Read the palette from this file.
 
+* DXP image (module="dxp_image")
+  An image format possibly associated with software named Dexter, by Paul
+  Burkey.
+
 * EggPaint (*.trp) (module="eggpaint")
 
 * Enhanced Windows Metafile (module="emf")
@@ -773,6 +795,13 @@ PM2: LZ-compressor
      the file has been disposed of. Incompatible with gif:raw.
 
 * GodPaint (Atari Falcon) (module="godpaint")
+
+* GRABBER (module="grabber")
+  Self-displaying DOS screen capture.
+  - Most COM-based formats are supported (made by GRABBER up to v3.35).
+  - Most EXE-based formats are supported, except some early ones. Supported
+    versions are 3.70-3.98, 5.50-5.60, 6.30-6.60. Some modes are also supported
+    for v3.60, 6.01-6.20.
 
 * Graphic Workshop self-displaying picture (module="gws_exepic")
   - Supports the DOS EXE-based format.
@@ -896,6 +925,29 @@ PM2: LZ-compressor
   Options
    -opt mdesk_icn:pal=<1|2|3|4> - 1=Use ToyBox palette, 2=Use Magic Desk
      palette, 3=Prefer ToyBox palette, 4=Prefer Magic Desk palette (default)
+
+* Mah Jongg tile set (.TIL) (module="mahj_na_til")
+  Graphics used with Nels Anderson's Mah Jongg solitaire game.
+  - Format is difficult to autodetect. In some cases, you must use
+    "-m mahj_na_til". If the file extension is not ".til", you always need the
+    -m option.
+  Options
+   -opt mahj_na_til:nf=<0|1> - A hint as to whether the file starts with a
+     "name" field, and what to do about that. 0 means the name field is not
+     present.
+   -padpix - Reveal the top-left and bottom-right corner pixels.
+
+* Mah Jongg -V-G-A- tile set (.tis) (module="mjvga")
+  Graphics used with Mah Jongg -V-G-A- and Mah Jongg for Windows, by Ron
+  Balewski.
+  - Also supports the single-tile format with extension .icn or .til. This
+    format uses a separate palette file usually named pal.cfg.
+  Options
+   -file2 <pal.cfg> - Read the palette from this file. Not expected to be used
+    with TIS format, but allowed.
+
+* Mindjongg tileset (.ipg) (module="mindjongg")
+  - Extracts the embedded image files.
 
 * MAKIchan graphics (module="makichan")
   - Supports most 16- and 256-color .MAG images
@@ -1040,6 +1092,9 @@ PM2: LZ-compressor
   Options
    -opt pixfolio:undelete - Also extract deleted images.
 
+* Picture Catalog (Spinnaker) (module="pic_cat_sp")
+  An obscure IFF-like format used by some Spinnaker Windows apps.
+
 * PIXIT/pix320 (module="pixit")
   A simple executable graphics format, in a DOS COM file.
   - The intermediate .PIX format is also supported.
@@ -1099,6 +1154,11 @@ PM2: LZ-compressor
   Options
    -opt psionpic:bw - Do not try to detect grayscale images. Write each bitmap
      as a separate image.
+
+* Puma Street Soccer PPM (module="pss_ppm")
+  An encrypted variant of PPM, with signature "PX" instead of "P6".
+  - Also supports the vertically flipped "P6" files that may be included with
+    the game (must use "-m pss_ppm").
 
 * QDV (Giffer) (module="qdv")
 
@@ -1244,8 +1304,8 @@ PM2: LZ-compressor
   - Extract bitmaps
 
 * X11 puzzle (module="xpuzzle")
-  Format used by X-Windows "puzzle" program.
-  ftp://ftp.x.org/pub/unsupported/programs/puzzle/
+  Format used by the "puzzle" program, from some versions of the X Window
+  System.
   Generated by Netpbm's ppmtopuzz utility.
 
 * XBIN (module="xbin")
@@ -1259,7 +1319,9 @@ PM2: LZ-compressor
 
 * XGA (Atari Falcon image) (module="falcon_xga")
 
-* XWD (X-Windows screen dump) (module="xwd") (experimental)
+* XWD (module="xwd")
+  Screen capture format associated with the X Window System, mainly the "xwd"
+  (X Window Dump) utility.
 
 * YBM (Bennet Yee face format) (module="ybm")
 
@@ -1356,7 +1418,7 @@ in the readme file.)
   Variant of ARC.
 
 * ARJ (module="arj")
-  - Multi-volumes archives are supported; use "-mp" (experimental). All volumes
+  - Multi-volume archives are supported; use "-mp" (experimental). All volumes
     must be listed on the command line, in the correct order.
   Options
    -opt arj:entrypoint=<n> : Specify the offset of ARJ data.
@@ -1378,7 +1440,7 @@ in the readme file.)
 
 * CAR (module="car_lha")
   Variant of LHA by MylesHi! Software. Deark tries to convert it to LHA.
-  - File extension must be ".car" (or use "-m car").
+  - File extension must be ".car" (or use "-m car_lha").
 
 * CAZIP (module="cazip") (experimental)
   A compressed file format for software installation.
@@ -1480,7 +1542,7 @@ in the readme file.)
      typical use is to set n=16 to ignore Joliet extensions.
 
 * LBR (module="lbr")
-  LRB is an uncompressed CP/M archive format.
+  LBR is an uncompressed CP/M archive format.
   - These often contain files in compressed formats known as Squeeze, Crunch,
   and CrLZH. Deark doesn't necessarily support all of those formats.
 
@@ -1511,6 +1573,9 @@ in the readme file.)
    -opt lzexe:raw - Instead of an EXE file, write raw decompressed data.
    -opt execomp:align=<16|512> - Preferred code image segment alignment. This
      may help make the decompressed file more similar to the original.
+   -opt lzexe:toexe - There's an LZEXE derivative named CEBE that can compress
+     COM files directly to LZEXE format. Deark detects such files, and
+     decompresses them to COM. This option disables that feature.
 
 * LZHUF (module="lzhuf")
   Compression software by Haruyasu Yoshizaki. A bare-bones container for
@@ -1526,7 +1591,7 @@ in the readme file.)
 
 * LZSS(Okumura) (module="lzss_oku")
   LZSS.C compression software by Haruhiko Okumura.
-  - Not autodetected; you must use "-m lzhuf_oku".
+  - Not autodetected; you must use "-m lzss_oku".
 
 * LZWCOM (module="lzwcom")
   LZWCOM/LZWUNC is an old file compression utility.
@@ -1700,6 +1765,8 @@ in the readme file.)
      the start of the file (or to new_offset).
    -opt zip:combine - Instead of decoding, combine the files of a multi-segment
      archive into a single ZIP file. Use with "-mp". (experimental)
+   -opt zip:implodebug[=0] - Enable/disable workaround of the Implode "MML" bug
+     present in early versions of PKZIP. Default is to autodetect.
 
 * zlib (module="zlib")
   - Raw zlib files are uncompressed.
@@ -1715,6 +1782,8 @@ in the readme file.)
 * Zoo Z format (module="zoo_z")
   Format created by "zoo xz <foo.zoo> [...]". Not all Zoo programs support it.
   - Will be translated to Zoo format.
+
+* zpk2 (ZSoft installer archive) (module="zpk2") (experimental)
 
 * ZSQ (module="zsq")
   Compressed file format related to LZWCOM.
@@ -1967,8 +2036,9 @@ here are most "character graphics" formats, which are in the "Image" section.)
     from them.
 
 * PIF (Windows Program Information File) (module="pif") (incomplete)
-  - Files can be parsed, but there is usually nothing that can be extracted
-    from them.
+  - Some files contain a config file or an icon that can be extracted, but in
+    most cases, there is nothing that can be extracted.
+  - Some older files must have extension ".pif" (or use "-m pif").
   Options
    -opt oemenc=<...> - The encoding for OEM Text items. Same options as -inenc.
 
@@ -2061,7 +2131,6 @@ dwc - DWC compressed archive.
 fastgraph_ppr - Fastgraph Pixel Run Format.
 fastgraph_spr - Fastgraph Packed Pixel Run Format.
 flif - FLIF image.
-grabber - GRABBER image, self-displaying COM.
 hit - HIT compressed archive.
 icedraw - iCEDraw IDF. Not implemented; helps to ID related formats.
 id3 - ID3 metadata.

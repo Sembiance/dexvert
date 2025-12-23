@@ -23,9 +23,11 @@ export class disktype extends Program
 			r.xlog.warn`Failed to copy file to tmp file for disktype: ${err}`;
 		}
 	};
-	args    = r => [r.disktypeFilePath];
-	post    = r =>
+	args = r => [r.disktypeFilePath];
+	post = async r =>
 	{
+		await fileUtil.unlink(r.disktypeFilePath);
+
 		r.meta.detections = [];
 
 		const magic = [];

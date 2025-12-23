@@ -8,5 +8,5 @@ export class grabber extends Format
 	ext            = [".exe", ".com"];
 	forbidExtMatch = true;
 	magic          = ["GRABBER COM", /16bit DOS (EXE|COM) GRABBER/, "deark: grabber"];
-	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:95]`];
+	converters     = ["deark[module:grabber]", `dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:95]`];
 }

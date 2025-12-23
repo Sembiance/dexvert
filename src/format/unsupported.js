@@ -278,7 +278,6 @@ export default
 		xldjDiskImage                               : {name : "XLDJ/XL/ST link Disk Image", ext : [".di"], magic : ["XL/ST link / XLDJ Disk Image"], weakMagic : true},
 		zapCompressedDiskImage                      : {name : "ZAP compressed disk image", ext : [".zap"], magic : ["ZAP compressed disk image"]},
 		zPackageCompressedArchive                   : {name : "ZPackage compressed archive", ext : [".zpk"], magic : ["ZPackage compressed archive"], weakMagic : true},
-		zSoftPackageFormat2                         : {name : "ZSoft Package format 2", ext : ["$"], magic : ["ZSoft Package format 2"]},
 		zxSpectrumTZXTape                           : {name : "ZX Spectrum TZX Tape", ext : [".tzx"], magic : ["Spectrum .TZX data", "ZX Spectrum Tape image", "MSX Tape image", /^fmt\/1000( |$)/]}
 	},
 

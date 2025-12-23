@@ -42,5 +42,5 @@ export class gametls extends Program
 			});
 		});
 	};
-	renameOut    = true;
+	renameOut = true;
 }

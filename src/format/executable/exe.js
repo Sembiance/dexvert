@@ -47,6 +47,7 @@ export class exe extends Format
 		"DOS Metaware Professional Pascal Executable", "Win32 Cygwin executable", "WIN32 Executable PowerBASIC", "DOS Pacific C Compiler executable", "Win32 EXE TMT Pascal (generic)", "Format: AutoIt", "Format: Compiled AutoHotKey",
 		"AutoIt3 compiled script executable", "TCC Win32 executable", "Win32 EXE Euphoria (Watcom compiled)", "Win32 IBasic executable", "DIZ2EXE Win32 executable", "16bit COM 22NICE loader", "FreeBASIC Win32 executable (generic)",
 		"TMT Pascal Compiler 3.90 DOS executable", "16bit DOS Central Point Anti-Virus immunized Executable", "16bit DOS EXE EPW password protected", "PolyEnE compressed/encrypted Win32 Executable", "wxBasic Win32 executable",
+		"MS-DOS RTLink runtime linker executable",
 
 		..._INSTALLER_MAGICS
 	];

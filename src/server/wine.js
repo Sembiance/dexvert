@@ -81,7 +81,7 @@ for(const wineBase of WINE_BASES)
 xlog.info`Starting wine web server...`;
 
 const routes = new Map();
-routes.set("/getBaseEnv", async () => new Response(JSON.stringify(wineBaseEnv)));
+routes.set("/getBaseEnv", async () => Response.json(wineBaseEnv));
 routes.set("/getWineCounter", async () =>
 {
 	const wineCounterNum = `${wineCounter++}`;

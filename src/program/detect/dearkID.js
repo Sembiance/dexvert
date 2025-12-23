@@ -28,8 +28,7 @@ export class dearkID extends Program
 		if(!Object.keys(meta).length || meta.module==="unsupported")
 			return;
 
-		const lowConfidenceStrings =
-		[
+		const lowConfidenceStrings = [
 			"Bad or unsupported image dimensions",
 			"Invalid or unsupported ",
 			"Malformed header",

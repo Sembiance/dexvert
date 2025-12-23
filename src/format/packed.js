@@ -4,7 +4,8 @@
 //	forbidExtMatch : true
 //          packed : true
 //	converters     : ["unp[renameKeepFilename]"] or ["cup386[renameKeepFilename]"] or ["unp[renameKeepFilename]", "cup386[renameKeepFilename]"]
-export const unp = {
+export const unp =
+{
 	archive :
 	{
 		compackPacked  : {name : "COMPACK Packed", magic : ["Packer: COMPACK", "16bit DOS EXE COMPACK compressed"]},
@@ -14,7 +15,8 @@ export const unp = {
 	}
 };
 
-export const cup386 = {
+export const cup386 =
+{
 	archive :
 	{
 		ainexePacked                : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE"]},
@@ -49,7 +51,8 @@ export const cup386 = {
 	
 };
 
-export const both = {
+export const both =
+{
 	archive :
 	{
 		axePacked                 : {name : "AXE Packed", magic : ["16bit DOS AXE compressed Executable", "16bit DOS EXE AXE compressed", "Packer: SEA-AXE"]},

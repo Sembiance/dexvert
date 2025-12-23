@@ -654,6 +654,7 @@ export default
 		texPackedFont                    : {name : "TeX Packed Font", ext : [".pf"], magic : [/^TeX [Pp]acked font/]},
 		theDrawFont                      : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"},
 		threeDCKFont                     : {name : "3D Construction Kit Font", ext : [".3fd"], magic : [/^3D Construction Kit \d? ?Font$/]},
+		threeDStudioDOSVectorFont        : {name : "3DStudio DOS vector Font", ext : [".fnt"], magic : ["3DStudio DOS vector Font"], weakMagic : true},
 		townsOSFont                      : {name : "Towns OS Font", ext : [".fnt"], magic : ["Towns OS Font"]},
 		turboCFontFile                   : {name : "TurboC Font file", ext : [".chr"], magic : ["TurboC Font file"], weakMagic : true},
 		ultraDesignFont                  : {name : "UltraDesign Font", ext : [".ufnt"], magic : ["UltraDesign Font"], weakMagic : true},
@@ -667,8 +668,7 @@ export default
 		x11NeWSBitmapFont                : {name : "X11/NeWS Bitmap Font", ext : [".fb"], magic : ["X11/NeWS bitmap font"]},
 		x11NeWSFontFamily                : {name : "X11/NeWS font family", ext : [".ff"], magic : ["X11/NeWS font family"]},
 		xboxFont                         : {name : "Xbox Font", ext : [".xtf"], magic : ["Xbox Font", /^XTF, Microsoft Xbox data$/], weakMagic : true},
-		xCADFont                         : {name : "X-CAD Font", magic : ["X-CAD font"]},
-		xCarFont                         : {name : "XCar Font", ext : [".fnt"], magic : ["XCar Font"], weakMagic : true}
+		xCADFont                         : {name : "X-CAD Font", magic : ["X-CAD font"]}
 	},
 
 	image :
@@ -692,7 +692,6 @@ export default
 		autoFXPhotoGraphicEdgesImage   : {name : "Auto FX PhotoGraphic Edges image", ext : [".afx"], magic : ["Auto FX PhotoGraphic Edges image", /^fmt\/1939( |$)/]},
 		autoSketchIconLibrary          : {name : "AutoSketch Icon Library", ext : [".icn"], magic : ["AutoSketch Icon Library"], weakMagic : true},
 		beagleWorksImage               : {name : "BeagleWorks Image", magic : ["BeagleWorks Drawing document", "BeagleWorks Painting document"]},
-		bitFax                         : {name : "BitFax", ext : [".bfx"], magic : ["BFX :bfx:"]},
 		blueScanDrawing                : {name : "Blue Scan Drawing", ext : [".blsc"], magic : ["Blue Scan drawing"]},
 		cadlogicInstinctDrawing        : {name : "Cadlogic Instinct Drawing", ext : [".dp"], magic : ["Cadlogic Instinct Drawing"], weakMagic : true},
 		cadStdDrawing                  : {name : "CadStd drawing", ext : [".cad"], magic : ["CadStd drawing"], weakMagic : true},
@@ -731,7 +730,6 @@ export default
 		geoWorksGeoDrawDrawing         : {name : "GeoWorks GeoDraw drawing", ext : [".000"], magic : ["GeoWorks GeoDraw drawing"]},
 		geoWorksGEOSBackground         : {name : "GeoWorks GEOS background", ext : [".000", ".geo"], magic : ["GeoWorks GEOS background"]},
 		godotBitmapsContainer          : {name : "Godot bitmaps container", ext : [".stex"], magic : ["Godot bitmaps container", /^Godot 3 texture/], weakMagic : true},
-		gpFaxFAXFormat                 : {name : "GPFax FAX format", magic : ["GPFax FAX format"]},
 		graphicWorksVectorDrawing      : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
 		gsDrawDrawing                  : {name : "GS Draw drawing", ext : [".grs"], magic : ["GS Draw drawing"]},
 		ibmAVCStillVideoImage          : {name : "IBM Audio Visual Connection Still Video Image", ext : [".dsp", "._im"], magic : ["IBM Audio Visual Connection (AVC) Still Video Image"]},
@@ -787,7 +785,6 @@ export default
 		pwDrawDrawing                  : {name : "PWDraw drawing", ext : [".drw"], magic : ["PWDraw drawing"], weakMagic : true},
 		quattroProClipArt              : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
 		quickLinkFaxCover              : {name : "QuickLink Fax Cover", ext : [".cvr"], magic : ["QuickLink Fax Cover"]},
-		quickLinkIIFaxBitmap           : {name : "QuickLink II Fax bitmap", ext : [".qfx"], magic : ["QuickLink II Fax bitmap (old)"]},
 		reflectionsMonzoom             : {name : "Reflections/Monzoom", ext : [".r3"], magic : ["Reflections/Monzoom IFF data (generic)"]},
 		seam3DMaterial                 : {name : "SEAM 3D Material", ext : [".mat"], magic : ["SEAM 3D Materials"]},
 		serifDrawPlusDrawing           : {name : "Serif DrawPlus Picture/drawing", ext : [".dpp"], magic : ["Serif DrawPlus Picture/drawing (v2)", /^fmt\/(827|852|853|1519|1520|1526|1528)( |$)/]},
@@ -808,15 +805,13 @@ export default
 		ultraDesignDrawing             : {name : "UltraDesign drawing", ext : [".ulb", ".uvw"], magic : ["UltraDesign drawing"]},
 		unrealTexture                  : {name : "Unreal Texture", ext : [".utx", ".u", ".unr"], magic : ["Unreal Texture"]},
 		variCADDrawing                 : {name : "VariCAD Drawing", ext : [".dwb", ".bkb"], magic : ["VariCAD Drawing"], weakMagic : true},
-		ventaFaxGraphics               : {name : "VentaFax graphics", ext : [".vfx", ".vf"], magic : ["VentaFax graphics"]},
 		versaCAD2DDrawing              : {name : "VersaCAD 2D drawing", ext : [".2d"], magic : ["VersaCAD 2D drawing"], weakMagic : true},
 		visualCADDDrawing              : {name : "Visual CADD Drawing", ext : [".vcd"], magic : ["Visual CADD Drawing"]},
 		visualCADDSymbol               : {name : "Visual CADD Symbol", ext : [".vcs"], magic : ["Visual CADD Symbol"], weakMagic : true},
 		winFaxCoverPage                : {name : "WinFax CoverPage Image", ext : [".cvp", ".cv"], magic : ["WinFax CoverPage image"]},
 		xboxXPR0Texture                : {name : "Microsoft Xbox XPR0 texture", ext : [".xbx"], magic : [/^Microsoft Xbox XPR0 texture/], weakMagic : true},
 		xeroxPresentsClipart           : {name : "Xerox Presents clipart", ext : [".xpp"], magic : ["Xerox Presents clipart"]},
-		zSoftPalette                   : {name : "ZSoft Palette", ext : [".pal"], magic : ["ZSoft Palette"]},
-		zyxelFAXFormat                 : {name : "Zyxel FAX format", ext : [".fax"], magic : ["Zyxel FAX format"]}
+		zSoftPalette                   : {name : "ZSoft Palette", ext : [".pal"], magic : ["ZSoft Palette"]}
 	},
 
 	music :
@@ -2023,6 +2018,7 @@ export default
 		starWriterPrinterDriver            : {name : "StarWriter Printer Driver", ext : [".gpm"], magic : ["StarWriter for MS-DOS Graphics Printer driver"]},
 		starWriterVideoDriver              : {name : "StarWriter Video Driver", ext : [".hgd"], magic : ["StarWriter for MS-DOS Graphics video Driver"]},
 		steinbergStudioModuleDriver        : {name : "Steinberg Studio Module Driver", ext : [".d"], magic : ["Steinberg Studio Module Driver"], weakMagic : true},
+		sytosPlusDeviceDriverModule        : {name : "SYTOS Plus device Driver module", ext : [".drv"], magic : ["SYTOS Plus device Driver module"]},
 		telepaintPrinterDriver             : {name : "Telepaint printer Driver", ext : [".drv"], magic : ["Telepaint printer Driver"]},
 		threeDCKVirtualRealityStudioDriver : {name : "3D Construction Kit / Virtual Reality Studio driver", ext : [".drv"], magic : ["3D Construction Kit / Virtual Reality Studio driver"]},
 		threeDFXGlideDriver                : {name : "3DFX Glide driver", ext : [".dxe"], magic : ["3DFX Glide driver"]},
@@ -2377,6 +2373,7 @@ export default
 		clariSSAPreferences                      : {name : "ClariSSA preferences", magic : ["ClariSSA preferences"]},
 		clarisWorksLibrary                       : {name : "ClarisWorks Library", ext : [".cwl"], magic : ["ClarisWorks Library (v5)"]},
 		clarisWorksPaletteFiles                  : {name : "Claris Works palette files", ext : [".pl", ".plt"], magic : [/^Claris Works palette files/], weakMagic : true},
+		clarionRunTimeLibrary                    : {name : "Clarion RunTime Library", ext : [".rtl"], magic : ["Clarion RunTime Library"], weakMagic : true},
 		clickOnceCompiledManifest                : {name : "ClickOnce Compiled Manifest", ext : [".cdf-ms"], magic : ["ClickOnce Compiled Manifest"]},
 		clipGalleryDownloadPackage               : {name : "Clip Gallery Download Package", ext : [".cil"], magic : ["Clip Gallery Download Package"]},
 		cloantoAmigaOSEncryptedROM               : {name : "Cloanto Amiga OS encrypted ROM", ext : [".rom"], magic : ["Cloanto Amiga OS encrypted ROM"]},
@@ -2716,6 +2713,7 @@ export default
 		hbedvAVAVIRAProductKey                   : {name : "H-BEDV - AVIRA product key", ext : [".key"], magic : ["H-BEDV - AVIRA product key"]},
 		helpReaderVoiceInfo                      : {name : "Help Reader Voice info", ext : [".voi", ".vo"], magic : ["Help Reader Voice info"]},
 		hexWorkshopBookmark                      : {name : "Hex Workshop Bookmark", ext : [".hbk"], magic : ["Hex Workshop Bookmark File"]},
+		hiJaakTypeFaceInfo                       : {name : "HiJaak TypeFace info", ext : [".tpf"], magic : ["HiJaak TypeFace info"], weakMagic : true},
 		hmp3DGameStudioTerrain                   : {name : "HMP4 3D GameStudio terrain", ext : [".hmp"], magic : ["HMP4 3D GameStudio terrain"], weakMagic : true},
 		hmvsAntivirusDOSPlugIn                   : {name : "HMVS antivirus DOS PlugIn", ext : [".pnp", ".lng"], magic : ["HMVS antivirus DOS PlugIn"], weakMagic : true},
 		homePlanPro5Clip                         : {name : "Home Plan Pro 5 Clip", ext : [".clp"], magic : ["Home Plan Pro 5 Clip"]},
@@ -3168,7 +3166,7 @@ export default
 		paradoxTableView                         : {name : "Paradox Table View", ext : [".tv"], magic : ["Paradox Table View", "Borland Standard File (generic)"], weakMagic : ["Borland Standard File (generic)"]},
 		paRISCObjectCode                         : {name : "PA-RISC Object Code", ext : [".o"], magic : [/PA-RISC.* object code/, /PA-RISC.* relocatable object/], weakMagic : true},
 		parityArchiveVolumeSet                   : {name : "Parity Archive Volume Set", ext : [".par2"], magic : ["Parity Archive Volume Set", "application/x-par2", "Parity Archive Volume Set (Par2)"]},
-		pascalCompiledUnit                       : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit", /^FPK Pascal .*Unit$/, /^(Borland )?Turbo Pascal [\d. ]+(compiled )?Unit/]},
+		pascalCompiledUnit                       : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit", "Format: Turbo Pascal Unit", /^FPK Pascal .*Unit$/, /^(Borland )?Turbo Pascal [\d. ]+(compiled )?Unit/]},
 		passMarkPerformanceTestFile              : {name : "PassMark PerformanceTest file", ext : [".pt"], magic : ["PassMark PerformanceTest file"]},
 		passwordCommanderProDatabase             : {name : "Password Commander Pro database", ext : [".pwd"], magic : ["Password Commander Pro database"], weakMagic : true},
 		pathMinderApplicationsMenus              : {name : "PathMinder Applications Menus ", ext : [".pm4"], magic : ["PathMinder Applications Menus"]},
@@ -3564,7 +3562,7 @@ export default
 		turtleBeachPinnacleSoundBank             : {name : "Turtle Beach Pinnacle sound Bank", ext : [".pbf"], magic : ["Turtle Beach Pinnacle sound Bank"]},
 		tvgenialSkin                             : {name : "TVgenial Skin", ext : [".tvgskin", ".hpk"], magic : ["TVgenial Skin"], weakMagic : true},
 		tvPaintProject                           : {name : "TVPaint Project", ext : [".tvpp", ".deep", ".aur"], magic : ["TVPaint Project"]},
-		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", "SPSS Type Library", /^Type Library \((legacy SLTG|MSFT) format|Type[12]\)$/, /^fmt\/(1601|1602)( |$)/]},                                                                                                                                                                 	// eslint-disable-line sonarjs/anchor-precedence
+		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", "SPSS Type Library", /^Type Library \((legacy SLTG|MSFT) format|Type[12]\)$/, /^Format: Microsoft Type Library$/, /^fmt\/(1601|1602)( |$)/]},                                                                                                                             	// eslint-disable-line sonarjs/anchor-precedence
 		ucDOSConfiguration                       : {name : "UCDOS Configuration", ext : [".cfg"], magic : ["UCDOS Configuration"]},
 		ucDOSDisplayDriver                       : {name : "UCDOS display Driver", ext : [".drv"], magic : ["UCDOS display Driver"]},
 		ucDOSInputMetodDriver                    : {name : "UCDOS Input Metod Driver", ext : [".imd"], magic : ["UCDOS Input Metod Driver"]},
@@ -3595,6 +3593,7 @@ export default
 		vermontDatabaseCorporationDatabase       : {name : "Vermont Database Corporation database", magic : ["Vermont Database Corporation database"]},
 		vesaDisplayIdentification                : {name : "VESA Display Identification File", ext : [".vdb"], magic : ["VESA Display Identification File"]},
 		vgaCopyConfiguration                     : {name : "VGA-Copy Configuration", ext : [".cfg"], magic : ["VGA-Copy Configuration"], weakMagic : true},
+		vibrantGraphicsEngineResource            : {name : "Vibrant Graphics Engine Resource", ext : [".res"], magic : ["Vibrant Graphics Engine Resource"]},
 		viceSnapshotFile                         : {name : "Vice Snapshot File", ext : [".vsf"], magic : ["Vice Snapshot File"]},
 		viconAnimationData                       : {name : "Vicon animation data", ext : [".v"], magic : ["Vicon animation data"]},
 		videoFX2Sequence                         : {name : "VideoFX2 Sequence", ext : [".seq"], magic : ["VideoFX2 Sequence"]},
@@ -3679,6 +3678,7 @@ export default
 		windowsLogoDrawingCode                   : {name : "Windows LOGO Drawing Code", ext : [".lgo", ".lg"], magic : ["Windows logo drawing code"]},
 		windowsMediaPlayerDataBase               : {name : "Windows Media Player DataBase", ext : [".wmdb"], magic : ["Windows Media Player DataBase"]},
 		windowsNTLDRBootLoader                   : {name : "Windows NTLDR boot loader", magic : ["Windows NTLDR boot loader"]},
+		windowsNT4OPL3DriverPatchBank            : {name : "Windows NT4 OPL3 driver Patch bank", ext : [".pat"], magic : ["Windows NT4 OPL3 driver Patch bank"]},
 		windowsPolicyData                        : {name : "Windows Policy data", ext : [".pol"], magic : ["Windows Policy data"]},
 		windowsShimDatabase                      : {name : "Windows Shim Database", ext : [".sdb"], magic : ["Windows application compatibility Shim DataBase", "Windows Shim Database"]},
 		windowsSidebarStyle                      : {name : "Windows Sidebar Style", magic : ["Windows Sidebar Style"]},

@@ -1,4 +1,5 @@
-export const WEAK_MAC_TYPE_CREATORS = [
+export const WEAK_MAC_TYPE_CREATORS =
+[
 	// common mac type/creators
 	"BTFL/pds ",		// AppleShare PDS
 	"BTFL/ugbt",		// AppleShare PDS
@@ -42,7 +43,8 @@ export const WEAK_MAC_TYPE_CREATORS = [
 	"UNKN/UNIX"
 ];
 
-export const WEAK_PRODOS_TYPES = [
+export const WEAK_PRODOS_TYPES =
+[
 	// these are very generic or system level stuff and are not useful to act on
 	"ATK",		// [E2] AppleTalk Data
 	"BAT",		// [F5] User Defined 5
@@ -78,7 +80,8 @@ export const WEAK_PRODOS_TYPES = [
 	"VAR"		// [FD] Applesoft BASIC Variables
 ];
 
-export const WEAK_MAC_TYPES = [
+export const WEAK_MAC_TYPES =
+[
 	// common Mac types
 	"cdev",		// Control Panel
 	"INIT",
@@ -86,7 +89,8 @@ export const WEAK_MAC_TYPES = [
 ];
 
 // these magics should be ignored in terms of reporting 'new magic' discoveries in things like dexrecurse, but are may be legitimate matches by various formats so should not explictly be marked as weak
-export const IGNORE_MAGICS = [
+export const IGNORE_MAGICS =
+[
 	// detectItEasy
 	/^Archive: BAGF$/,
 	/^Archive: JAM$/,
@@ -116,7 +120,8 @@ export const IGNORE_MAGICS = [
 
 // These magics are untrustworthy and any detections against them should be noted as such
 // Note: Some may not be especially weak, they may just be so application-specific that I didn't want to deal with them anymore as they wouldn't be useful to support
-export const WEAK_VALUES = [
+export const WEAK_VALUES =
+[
 	// siegfried
 	/^fmt\/(111|114|134|135|208|304|328|347|452|473|583|584|625|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
@@ -226,7 +231,7 @@ export const WEAK_VALUES = [
 	/^Format: Guitar Pro Soundbank\(6\.x\)$/,
 	/^Format: Guitar Pro Tablature/,
 	/^Format: JavaScript Compiled\/Bytenode/,
-	/^Format: Microsoft Office\(97-2003\)$/,
+	/^Format: Microsoft Office\((19)?97-2003\)$/,
 	/^Format: Microsoft XNA Game Studio Binary Package/,
 	/^Format: Norton Ghost image$/,
 	/^Format: Palm OS file/,
@@ -864,7 +869,6 @@ export const WEAK_VALUES = [
 	/^LN03 output/,
 	/^locale archive /,
 	/^locale data table/,
-	/^Logitech Compress archive data/,
 	/^Lotus 1-2-3 unknown formatting data/,
 	/^Lotus 1-2-3 CoNFiguration/,
 	/^LVM1 \(Linux Logical Volume Manager\)/,

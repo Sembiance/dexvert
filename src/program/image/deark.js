@@ -33,6 +33,7 @@ export class deark extends Program
 		onlyIfOne     : "Only 'succeed' if there is just a single output file",
 		deleteADF     : "Set this to delete the output ADF file as it's not needed. This is mainly used when a simple image format like TIFF is wrapped as a MacBinary file.",
 		convertAsExt  : "Use this ext as a hint as to what to convert as",
+		missingLetter : "Some archives are missing a letter, this will restore it if deark knows about it",
 		alwaysConvert : "Always convert output files using convert[removeAlpha]",
 		extractAll    : "Extract all files, sets the -a flag used by some modules",
 		start         : "Start processing with deark at a specific byte offset",
@@ -54,7 +55,7 @@ export class deark extends Program
 			a.push("-main");
 		if(r.flags.file2)
 			a.push("-file2", r.flags.file2);
-		if(r.flags.recombine)
+		if(r.flags.recombine || r.flags.missingLetter)
 			a.push("-d");
 		if(r.flags.extractAll)
 			a.push("-a");
@@ -130,7 +131,6 @@ export class deark extends Program
 			// if we have a width and height and more than 1 part and none of those parts have the same x/y coordinate (PICT_2021.pict) then we can recombine them
 			if(imgInfo.w && imgInfo.h && imgInfo.parts.length>1 && imgInfo.parts.length===imgInfo.parts.map(({x, y}) => `${x}x${y}`).unique().length)
 			{
-				r.xlog.debug`${imgInfo}`;
 				const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
 				await runUtil.run("magick", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);
 				for(const part of imgInfo.parts)
@@ -149,6 +149,14 @@ export class deark extends Program
 
 				await runUtil.run("magick", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(outDirPath, `${r.originalInput.name}.png`)]);
 			}
+		}
+
+		if(r.flags.missingLetter)
+		{
+			const {missingLetter} = (r.stdout.split("\n").find(line => line.trim().startsWith("DEBUG: missing filename char:")) || "").match(/missing filename char: '(?<missingLetter>.)'/)?.groups || {};
+			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
+			if(missingLetter && fileOutputPaths.length===1)
+				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext.substring(0, 3)}${missingLetter}`));
 		}
 
 		// so bsave images are very common, unfortunately there isn't a good way to determine what format that image is, so dexvert tries them all

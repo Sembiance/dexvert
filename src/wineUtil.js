@@ -28,7 +28,7 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 	if(wineCounter!==undefined)
 	{
 		wineInDirPath = path.join(wineBaseEnv[base].WINEPREFIX, "drive_c", `in${wineCounter}`);
-		await Deno.mkdir(wineInDirPath);
+		await Deno.mkdir(wineInDirPath, {recursive : true});
 
 		for(const file of [f.input, ...(f.files.aux || [])])
 			await Deno.copyFile(file.absolute, path.join(wineInDirPath, path.basename(file.absolute)));

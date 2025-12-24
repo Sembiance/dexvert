@@ -68,8 +68,11 @@ export class boo2html extends Program
 			iNode.parentNode.insertBefore(anchor, iNode);
 		}
 
+		const bookHTML = doc.querySelector("html").outerHTML;
+		if(!bookHTML || bookHTML.trim().length===0 || bookHTML.trim().toLowerCase()==="<html><head></head><body></body></html>")
+			return;
 
-		await fileUtil.writeTextFile(path.join(outDirPath, `${r.originalInput.name}.html`), doc.querySelector("html").outerHTML);
+		await fileUtil.writeTextFile(path.join(outDirPath, `${r.originalInput.name}.html`), bookHTML);
 	};
 	renameOut = false;
 }

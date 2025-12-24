@@ -44,7 +44,7 @@ KIDPIDS=()
 echo -e "\nDexserver started!!\n\nIt will remain running in background, run stopDexserver to stop it cleanly"
 
 # on dev workstations, want to simulate running dexserver in foreground by tailing the logs
-if [ "$(hostname)" == "ridgeport" ] || [ "$(hostname)" == "crystalsummit" ]; then
+if [ "$(hostname)" == "eaglehollow" ] || [ "$(hostname)" == "crystalsummit" ]; then
 	KIDPIDS=()
 	tail -n 0 -f /mnt/dexvert/log/dexserver.out &
 	KIDPIDS+=($!)

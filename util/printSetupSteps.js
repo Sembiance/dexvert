@@ -10,7 +10,6 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 [
 	`cd /etc/portage/package.use && ln -s /mnt/compendium/overlay/dexvert/package.use/wine-32 && ln -s /mnt/compendium/overlay/dexvert/package.use/xanim`,
 	`cd`,
-	`USE="-harfbuzz" emerge -1 media-libs/freetype`,
 	`emerge -uDN world`,
 	`USE=minimal emerge mono`,
 	`USE=minimal emerge -1 libsndfile`,
@@ -83,7 +82,8 @@ const postPackages =
 	"app-arch/Aaru",
 
 	// dunno why these don't work in the 'big' emerge, but best done after and in a smaller batch
-	"games-util/EasyRPG-Tools"
+	"games-util/EasyRPG-Tools",
+	"media-gfx/abydosconvert"
 ];
 
 const programPackages = Object.values(programs).flatMap(program => Array.force(program.package)).unique().subtractAll(postPackages).sortMulti().join(" ").innerTrim();
@@ -93,7 +93,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
-	`# If pablodraw or Aaru below fail to merge, just try again (often works 2nd time)`,
+	`# If any of these below fail to merge, just try again (often works 2nd time)`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
 	"eselect news read --quiet all",
 	"eselect news purge",
@@ -116,7 +116,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`grep dexvert ~/.ssh/authorized_keys >> /home/sembiance/.ssh/authorized_keys`,
 	`chown sembiance:sembiance /home/sembiance/.ssh/authorized_keys`,
 	`chmod 600 /home/sembiance/.ssh/authorized_keys`,
-	`# Need to re-install this now, again, to get it to puck up the correct dotnet version`,
+	`# Need to re-install this now, again, to get it to puck up the correct dotnet version. I DO NOT THINK THIS IS NEEDED ANMORE`,
 	`emerge app-arch/Aaru`,
 	`su - sembiance`,
 	`mkdir -p /mnt/dexvert/oldLogs`,

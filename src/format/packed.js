@@ -45,6 +45,7 @@ export const cup386 =
 		spaceMakerPacked            : {name : "SpaceMaker Packed", magic : ["16bit DOS EXE Spacemaker compressed"]},
 		tenthPlanetSoftPackerPacked : {name : "Tenth Planet Soft Packer Packed", magic : ["Packer: Tenth Planet Soft packer[1996]"]},
 		tpackPacked                 : {name : "T-PACK Packed", magic : ["Packer: TPACK", "16bit DOS COM T-PACK compressed"]},
+		triplexPacked               : {name : "Triplex Packed", magic : ["Packer: Triplex"]},
 		tscrunchPacked              : {name : "TSCRUNCH Packed", magic : ["Packer: TSCRUNCH[by Clarion software]"]},
 		xpackLZCOMPacked            : {name : "XPACK/LZCOM Packed", magic : ["Packer: XPACK/LZCOM"]}
 	}

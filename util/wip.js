@@ -18,7 +18,5 @@ import {WEAK_VALUES} from "../src/WEAK.js";
 
 const xlog = new XLog("info");
 
-//await initPrograms(xlog);
-//await initFormats(xlog);
-
-xlog.info`${Number(+xu.MINUTE*10).toClock()}`;
+await initPrograms(xlog);
+await initFormats(xlog);

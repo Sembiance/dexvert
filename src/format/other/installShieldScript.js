@@ -6,6 +6,6 @@ export class installShieldScript extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/InstallShield_INS";
 	ext            = [".ins"];
 	forbidExtMatch = true;
-	magic          = ["InstallShield Script", "Compilierte installShield Script Datei"];
+	magic          = ["InstallShield Script", "Compilierte installShield Script Datei", "Format: InstallShield(Windows Registry Script)"];
 	converters     = ["strings"];
 }

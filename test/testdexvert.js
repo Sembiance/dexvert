@@ -279,7 +279,7 @@ const FLEX_SIZE_FORMATS = {
 		// these conversions sometimes differ WILDLY, haven't figured out why
 		farallonReplica    : 25,
 		hlp                : 50,
-		ibmBookManagerBook : 250,
+		ibmBookManagerBook : 99999,
 		wildcatWCX         : 90,
 		wordDoc            : 80,
 

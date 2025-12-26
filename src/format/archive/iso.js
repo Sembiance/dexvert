@@ -128,7 +128,7 @@ export class iso extends Format
 		if(cueFile)
 		{
 			// Check to see if we are have tracks split across multiple .bin files
-			const {meta : cueFileMeta} = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog, autoUnlink : true});
+			const {meta : cueFileMeta} = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog || new XLog("none"), autoUnlink : true});
 			if((cueFileMeta?.files || []).map(({name}) => name).unique().length>1)
 			{
 				if(cueFileMeta.files[0].name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()))
@@ -172,6 +172,8 @@ export class iso extends Format
 				multipleMode12Tracks = ((cueFileMeta?.files || [])?.[0]?.tracks || []).filter(o => ["MODE1/2352", "MODE2/2352"].includes(o.type)).length>1;
 			}
 		}
+
+		const {meta : akailist} = await Program.runProgram("akailist", dexState.f.input, {xlog : dexState.xlog || new XLog("none"), autoUnlink : true});
 
 		// If it's a VideoCD, prefer to rip it as video using 'vcdxrip'
 		if(dexState.meta?.vcd?.isVCD && cueFile)
@@ -262,7 +264,9 @@ export class iso extends Format
 				if(dexState.hasMagics("null bytes"))	// Some isos have a lot of null bytes at the beginning which screws up other converters bu 7z seems to handle it (Cracking I..iso)
 					r.push("sevenZip");
 
-				r.push("akaiextract", "akairead");
+				// both of these can consume a lot of RAM and CPU, so best to only do it if there is a hint of being akai format
+				if(akailist?.files?.length)
+					r.push("akaiextract", "akairead");
 
 				return r.map(v => `${v}[subOutDir:dexvert_pc]`);
 			}

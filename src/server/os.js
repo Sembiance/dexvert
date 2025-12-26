@@ -64,16 +64,19 @@ const OS = {
 	}
 };
 
+const RAM_PERCENTAGE_TARGET = 0.8;
+const RAM_PERCENTAGE_TARGET_HOST = {eaglehollow : 0.4, crystalsummit : 0.4};
+
 // reduce instance quantity to fit in 40% of available cores or 1 each if set to debug
 const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.40);
 const totalDesiredCores = Object.values(OS).map(({qty}) => qty).sum();
 for(const o of Object.values(OS))
 	o.qty = o.debug ? 1 : Math.min(o.qty, Math.max(Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)), 2));	// eslint-disable-line sembiance/prefer-math-clamp
 
-// reduce instance quantity to fit in 80% of available RAM
+// reduce instance quantity to fit in X% of available RAM
 const totalSystemRAM = (await sysUtil.memInfo()).total;
-while((Object.values(OS).map(({qty, ramGB}) => qty*ramGB).sum()*xu.GB)>(totalSystemRAM*0.8))
-	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-1); });
+while((Object.values(OS).map(({qty, ramGB}) => qty*ramGB).sum()*xu.GB)>(totalSystemRAM*(RAM_PERCENTAGE_TARGET_HOST[Deno.hostname()] || RAM_PERCENTAGE_TARGET)))
+	Object.values(OS).forEach(o => { o.qty = Math.max(1, o.qty-1); });
 
 const HTTP_DIR_PATH = "/mnt/ram/dexvert/http";
 const HTTP_IN_DIR_PATH = path.join(HTTP_DIR_PATH, "in");

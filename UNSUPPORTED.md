@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,972)
+# Unsupported File Formats (3,988)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (307)
+## Archive (312)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -48,6 +48,7 @@ Family/Format | Name | Extensions | Notes
 [archive/batToExePacked](https://discmaster.textfiles.com/search?format=batToExePacked) | Bat To Exe Packed | .exe | 
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?format=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?format=beOSResourceData) | BeOS Resource Data | .rsrc | 
+[archive/beroEXEPackerPacked](https://discmaster.textfiles.com/search?format=beroEXEPackerPacked) | BeRoEXEPacker Packed | .exe .dll | 
 [archive/blackFiSTPacked](https://discmaster.textfiles.com/search?format=blackFiSTPacked) | BlacK FiST Packed | .exe | 
 [archive/blueCieloMeridianBriefCaseFileArchive](https://discmaster.textfiles.com/search?format=blueCieloMeridianBriefCaseFileArchive) | BlueCielo Meridian BriefCase - File Archive | .brc | 
 [archive/bootableMacHFSDiskImage](https://discmaster.textfiles.com/search?format=bootableMacHFSDiskImage) | Bootable Mac HFS Disk image |  | 
@@ -82,6 +83,7 @@ Family/Format | Name | Extensions | Notes
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?format=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/dcrexeProtected](https://discmaster.textfiles.com/search?format=dcrexeProtected) | DCREXE Protected | .exe | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?format=debianFloppySplit) | Debian floppy split | .bin | 
+[archive/dePackPacked](https://discmaster.textfiles.com/search?format=dePackPacked) | dePack Packed | .exe | 
 [archive/dfSeeDiskImage](https://discmaster.textfiles.com/search?format=dfSeeDiskImage) | DFSee disk image | .imz | 
 [archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?format=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskIMageArchiverDiskImage/)
 [archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?format=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
@@ -101,6 +103,7 @@ Family/Format | Name | Extensions | Notes
 [archive/ekoSoftwareGameData](https://discmaster.textfiles.com/search?format=ekoSoftwareGameData) | Eko Software game data | .rck | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?format=emmaCompress) | EmmaCompress |  | 
 [archive/emtcopyDiskImage](https://discmaster.textfiles.com/search?format=emtcopyDiskImage) | EMTCOPY disk image | .emt | 
+[archive/escapeVelocityNovaGameDataArchive](https://discmaster.textfiles.com/search?format=escapeVelocityNovaGameDataArchive) | Escape Velocity Nova game data archive | .rez .off | 
 [archive/exeManagerProtected](https://discmaster.textfiles.com/search?format=exeManagerProtected) | EXE Manager Protected | .exe | 
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?format=exePackerPacked) | EXE Packer Packed |  | 
 [archive/exe32PackPacked](https://discmaster.textfiles.com/search?format=exe32PackPacked) | Exe32Pack Packed | .exe | 
@@ -239,6 +242,7 @@ Family/Format | Name | Extensions | Notes
 [archive/renPyArchive](https://discmaster.textfiles.com/search?format=renPyArchive) | Ren'Py Archive | .rpa | 
 [archive/repiPack](https://discmaster.textfiles.com/search?format=repiPack) | RepiPack archive | .dat | 
 [archive/rerpPacked](https://discmaster.textfiles.com/search?format=rerpPacked) | RERP Packed | .exe | 
+[archive/rlPackPacked](https://discmaster.textfiles.com/search?format=rlPackPacked) | RLPack Packed | .exe .dll | 
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?format=rohitCompressedData) | Rohit compressed data | .tsi | 
 [archive/rsCompressedArchive](https://discmaster.textfiles.com/search?format=rsCompressedArchive) | RS compressed archive |  | 
 [archive/sabDisketteUtilityDiskImage](https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage) | SAB Diskette Utility disk image | .sdu | Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh.
@@ -252,6 +256,7 @@ Family/Format | Name | Extensions | Notes
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?format=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
 [archive/shrinkerWindowsPacked](https://discmaster.textfiles.com/search?format=shrinkerWindowsPacked) | Shrinker Packed (Windows) | .exe | 
 [archive/simis](https://discmaster.textfiles.com/search?format=simis) | Simis | .s .ace .t .dat .mis | 
+[archive/simplePackPacked](https://discmaster.textfiles.com/search?format=simplePackPacked) | Simple Pack Packed | .exe | 
 [archive/singleFileSystemContainer](https://discmaster.textfiles.com/search?format=singleFileSystemContainer) | Single File System container | .sfs | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?format=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
 [archive/softwareCompressPacked](https://discmaster.textfiles.com/search?format=softwareCompressPacked) | Software Compress Packed | .exe | 
@@ -1175,7 +1180,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,696)
+## Other (2,707)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1453,8 +1458,10 @@ Family/Format | Name | Extensions | Notes
 [other/auraFateOfTheAgesGameData](https://discmaster.textfiles.com/search?format=auraFateOfTheAgesGameData) | Aura: Fate of the Ages game data |  | 
 [other/auroraEditorCompiledMacro](https://discmaster.textfiles.com/search?format=auroraEditorCompiledMacro) | Aurora Editor compiled macro | .x | 
 [other/aeSGMLBinaryStyle](https://discmaster.textfiles.com/search?format=aeSGMLBinaryStyle) | Author/Editor SGML Binary Style | .stl | 
+[other/authorwareData](https://discmaster.textfiles.com/search?format=authorwareData) | Authorware data | .apw .a3w | 
 [other/authorwareLibrary](https://discmaster.textfiles.com/search?format=authorwareLibrary) | Authorware Library | .apl | 
 [other/authorwarePackagedLibrary](https://discmaster.textfiles.com/search?format=authorwarePackagedLibrary) | Authorware Packaged library | .a4e .a5e .a6e | 
+[other/authorwareSupportDriver](https://discmaster.textfiles.com/search?format=authorwareSupportDriver) | Authorware support driver | .vdr | 
 [other/autoCADColorBasedPlotStyle](https://discmaster.textfiles.com/search?format=autoCADColorBasedPlotStyle) | AutoCAD Color-Based Plot Style | .ctb | 
 [other/autoCADCompiledMenu](https://discmaster.textfiles.com/search?format=autoCADCompiledMenu) | AutoCAD Compiled Menu | .mnx | 
 [other/autoCADDataExtractionTemplate](https://discmaster.textfiles.com/search?format=autoCADDataExtractionTemplate) | AutoCAD Data Extraction template | .dxe | 
@@ -1527,6 +1534,7 @@ Family/Format | Name | Extensions | Notes
 [other/bioForgeMotion](https://discmaster.textfiles.com/search?format=bioForgeMotion) | BioForge Motion | .mtn | 
 [other/bioForgeSkeleton](https://discmaster.textfiles.com/search?format=bioForgeSkeleton) | BioForge Skeleton | .skl | 
 [other/bioForgeSkin](https://discmaster.textfiles.com/search?format=bioForgeSkin) | BioForge Skin | .skn | 
+[other/bionicCommandoSaveGame](https://discmaster.textfiles.com/search?format=bionicCommandoSaveGame) | Bionic Commando save game | .sav | 
 [other/biovisionAction](https://discmaster.textfiles.com/search?format=biovisionAction) | Biovision Action data | .vpm .bva | 
 [other/biovisionHierarchyCharacterAnimation](https://discmaster.textfiles.com/search?format=biovisionHierarchyCharacterAnimation) | Biovision Hierarchy character animation format | .bvh | 
 [other/bisraPEncoded](https://discmaster.textfiles.com/search?format=bisraPEncoded) | BIS raP encoded format | .sqm .bin | 
@@ -2029,6 +2037,7 @@ Family/Format | Name | Extensions | Notes
 [other/expePointSet](https://discmaster.textfiles.com/search?format=expePointSet) | Expe PointSet | .pts | 
 [other/expressSCHSchematic](https://discmaster.textfiles.com/search?format=expressSCHSchematic) | ExpressSCH schematic | .sch | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?format=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
+[other/ext4JournalSuperblock](https://discmaster.textfiles.com/search?format=ext4JournalSuperblock) | Ext4 Journal superblock |  | 
 [other/extendedVectorAnimation](https://discmaster.textfiles.com/search?format=extendedVectorAnimation) | Extended Vector Animation | .eva .evt | 
 [other/extensibleStorageEngineDataBase](https://discmaster.textfiles.com/search?format=extensibleStorageEngineDataBase) | Extensible Storage Engine DataBase | .edb .sdb | 
 [other/extraForWindowsAPLKeymap](https://discmaster.textfiles.com/search?format=extraForWindowsAPLKeymap) | Extra! for Windows APL keymap | .apl | 
@@ -2099,6 +2108,7 @@ Family/Format | Name | Extensions | Notes
 [other/fontDescriptor](https://discmaster.textfiles.com/search?format=fontDescriptor) | Font descriptor | .ntf14 .ntf16 .ntf4 | 
 [other/fontLabAliases](https://discmaster.textfiles.com/search?format=fontLabAliases) | FontLab Aliases | .dat | 
 [other/foobar2000ColumnsUISettings](https://discmaster.textfiles.com/search?format=foobar2000ColumnsUISettings) | Foobar 2000 Columns UI settings | .fcs | 
+[other/footprintIBMWorksChartData](https://discmaster.textfiles.com/search?format=footprintIBMWorksChartData) | Footprint/IBM Works Chart data | .lch | 
 [other/footprintIBMWorksDataFilerDesign](https://discmaster.textfiles.com/search?format=footprintIBMWorksDataFilerDesign) | Footprint/IBM Works Data Filer Design | .lde | 
 [other/footprintIBMWorksDataFilerForm](https://discmaster.textfiles.com/search?format=footprintIBMWorksDataFilerForm) | Footprint/IBM Works Data Filer Form | .lde | 
 [other/foreignLanguageMasterConfig](https://discmaster.textfiles.com/search?format=foreignLanguageMasterConfig) | Foreign Language Master Configuration | .config | 
@@ -2216,6 +2226,7 @@ Family/Format | Name | Extensions | Notes
 [other/grandTheftAutoSaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoSaveGame) | Grand Theft Auto save game | .b | 
 [other/grandTheftAutoTextData](https://discmaster.textfiles.com/search?format=grandTheftAutoTextData) | Grand Theft Auto Text data | .gxt | 
 [other/grandTheftAutoViceCitySaveGame](https://discmaster.textfiles.com/search?format=grandTheftAutoViceCitySaveGame) | Grand Theft Auto Vice City save game |  | 
+[other/graphInTheBoxWindowsMaster](https://discmaster.textfiles.com/search?format=graphInTheBoxWindowsMaster) | Graph-in-the-Box Windows Master | .mas | 
 [other/graphicImpactPresentation](https://discmaster.textfiles.com/search?format=graphicImpactPresentation) | Graphic Impact presentation | .giw | 
 [other/graphicMasterCharset](https://discmaster.textfiles.com/search?format=graphicMasterCharset) | Graphic Master charset | .chr | 
 [other/graphicSoftwarePrinterConfiguration](https://discmaster.textfiles.com/search?format=graphicSoftwarePrinterConfiguration) | Graphic Software Technology printer Configuration | .cfg .dft .nlq | 
@@ -2237,6 +2248,7 @@ Family/Format | Name | Extensions | Notes
 [other/guitarProFile](https://discmaster.textfiles.com/search?format=guitarProFile) | Guitar Pro File | .gtp | 
 [other/guitarProTablature](https://discmaster.textfiles.com/search?format=guitarProTablature) | Guitar Pro tablature | .gp3 .gpx | 
 [other/guptaReportWindowsReport](https://discmaster.textfiles.com/search?format=guptaReportWindowsReport) | Gupta ReportWindows Report | .qrp | 
+[other/guptaSQLBaseDatabase](https://discmaster.textfiles.com/search?format=guptaSQLBaseDatabase) | Gupta SQLBase database | .dbs | 
 [other/gVariantDatabase](https://discmaster.textfiles.com/search?format=gVariantDatabase) | GVariant Database | .compiled | 
 [other/hbedvAVAVIRAProductKey](https://discmaster.textfiles.com/search?format=hbedvAVAVIRAProductKey) | H-BEDV - AVIRA product key | .key | 
 [other/h2Database](https://discmaster.textfiles.com/search?format=h2Database) | H2 Database | .db | 
@@ -2941,6 +2953,7 @@ Family/Format | Name | Extensions | Notes
 [other/pascalCompiledUnit](https://discmaster.textfiles.com/search?format=pascalCompiledUnit) | Pascal Compiled Unit | .tpu .ppu | 
 [other/pascalScriptBinary](https://discmaster.textfiles.com/search?format=pascalScriptBinary) | Pascal Script binary | .bin | 
 [other/passMarkPerformanceTestFile](https://discmaster.textfiles.com/search?format=passMarkPerformanceTestFile) | PassMark PerformanceTest file | .pt | 
+[other/passoloLocalizationProject](https://discmaster.textfiles.com/search?format=passoloLocalizationProject) | Passolo Localization Project | .lpu | 
 [other/passwordCommanderProDatabase](https://discmaster.textfiles.com/search?format=passwordCommanderProDatabase) | Password Commander Pro database | .pwd | 
 [other/patchMeisterDriver](https://discmaster.textfiles.com/search?format=patchMeisterDriver) | PatchMeister Driver | .pmdriver | 
 [other/pathMinderApplicationsMenus](https://discmaster.textfiles.com/search?format=pathMinderApplicationsMenus) | PathMinder Applications Menus  | .pm4 | 
@@ -3227,6 +3240,7 @@ Family/Format | Name | Extensions | Notes
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?format=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
 [other/schirattiCommanderSituation](https://discmaster.textfiles.com/search?format=schirattiCommanderSituation) | Schiratti Commander Situation | .stn | 
 [other/sciCompanionCompiledObject](https://discmaster.textfiles.com/search?format=sciCompanionCompiledObject) | SCI Companion compiled Object | .sco | 
+[other/scidGameData](https://discmaster.textfiles.com/search?format=scidGameData) | Scid game data | .si4 .si3 .sn4 .sn3 | 
 [other/sciTechDriver](https://discmaster.textfiles.com/search?format=sciTechDriver) | SciTech Driver | .drv | 
 [other/scooterMacro](https://discmaster.textfiles.com/search?format=scooterMacro) | Scooter Macro | .mac | 
 [other/scorchedEarthMountainData](https://discmaster.textfiles.com/search?format=scorchedEarthMountainData) | Scorched Earth Mountain Data | .mtn | 
@@ -3321,6 +3335,7 @@ Family/Format | Name | Extensions | Notes
 [other/soundForgePeakData](https://discmaster.textfiles.com/search?format=soundForgePeakData) | Sound Forge Peak Data | .sfk | 
 [other/soundImagesSoundDriver](https://discmaster.textfiles.com/search?format=soundImagesSoundDriver) | Sound Images Sound Driver | .bin | 
 [other/sourceEditLanguageDefinition](https://discmaster.textfiles.com/search?format=sourceEditLanguageDefinition) | SourceEdit Language Definition | .lng | 
+[other/spcDeinstallLogData](https://discmaster.textfiles.com/search?format=spcDeinstallLogData) | SPC Deinstall Log/data | .dlh | 
 [other/spectreVRMatrix](https://discmaster.textfiles.com/search?format=spectreVRMatrix) | Spectre VR Matrix | .mat | 
 [other/speculatorSnapshot](https://discmaster.textfiles.com/search?format=speculatorSnapshot) | Speculator Snapshot | .zx82 .zx | 
 [other/speedTreeFormat](https://discmaster.textfiles.com/search?format=speedTreeFormat) | SpeedTree format | .spt | 
@@ -3432,6 +3447,7 @@ Family/Format | Name | Extensions | Notes
 [other/swissEphemerisData](https://discmaster.textfiles.com/search?format=swissEphemerisData) | Swiss Ephemeris data | .se1 | 
 [other/swordArtOnlineGameDataArchive](https://discmaster.textfiles.com/search?format=swordArtOnlineGameDataArchive) | Sword Art Online game data archive | .ofs3 .1psp | 
 [other/symantecInternetToolsData](https://discmaster.textfiles.com/search?format=symantecInternetToolsData) | Symantec Internet Tools Data | .ve2 .vep | 
+[other/symantecTimeLineProject](https://discmaster.textfiles.com/search?format=symantecTimeLineProject) | Symantec Time Line Project | .tlp | 
 [other/symantecNortonConfig](https://discmaster.textfiles.com/search?format=symantecNortonConfig) | Symantec/Norton Config | .bin | 
 [other/symbianOSResourceData](https://discmaster.textfiles.com/search?format=symbianOSResourceData) | Symbian OS resource data | .rsc | 
 [other/symbianSeries3InstallationFile](https://discmaster.textfiles.com/search?format=symbianSeries3InstallationFile) | Symbian Series 3 Installation file | .sisx .sis | 

@@ -288,7 +288,7 @@ const FLEX_SIZE_FORMATS = {
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
 		// Also different hosts generate different PDFs, no idea exactly why. Final output looks very similar, just slight formatting changes, not sure why, but eh.
-		"*:.pdf" : 50,
+		"*:.pdf" : 65,
 
 		// HTML generation can change easily too
 		"*:.html" : 1

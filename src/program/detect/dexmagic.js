@@ -146,6 +146,7 @@ const DEXMAGIC_CHECKS = {
 	"NAPLPS Image"                    : [{offset : 0, match : [0x0C, 0x0E, 0x20, 0x4C, 0x6F, 0x21, 0x48, 0x40, 0x40, 0x49, 0x3E, 0x40, 0x3C, 0x40, 0x40, 0x40, 0x3E]}],
 	"PaintWorks"                      : [{offset : 54, match : "ANvisionA"}],
 	"PCR Image"                       : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x10]}],
+	"PCX2EXE (Arminio Grgic)"         : [{offset : 0, match : "MZ"}, {offset : 754, match : "Armini"}, {offset : 761, match : "Grgic"}],
 	"Picasso 64 Image"                : [{offset : 0, match : [0x00, 0x18]}],
 	"PIXIT Image (COM)"               : [{offset : 0, match : [0xBC, 0x00, 0x01, 0xB8, 0x13, 0x00, 0xCD, 0x10, 0xB8, 0x12, 0x10, 0xBB, 0x00, 0x00, 0xB9, 0x00]}],
 	"PrintFox/Pagefox WEAK"           : [{offset : 0, match : [[0x42, 0x47, 0x50]]}],

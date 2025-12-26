@@ -37,7 +37,7 @@ export class unar extends Program
 	postExec = async r =>
 	{
 		const outDirPath = r.outDir({absolute : true});
-		if(!r.flags.allowFailedParsing &&r.stdout.includes("Archive parsing failed!"))	// otherwise things like exe/gws.exe will incorrectly be extracted as an archive/arc file
+		if(!r.flags.allowFailedParsing && r.stdout.includes("Archive parsing failed!"))	// otherwise things like exe/gws.exe will incorrectly be extracted as an archive/arc file
 		{
 			r.xlog.info`unar Archive parsing failed! Not safe to keep files! Deleting output files!`;
 			await fileUtil.unlink(outDirPath, {recursive : true});

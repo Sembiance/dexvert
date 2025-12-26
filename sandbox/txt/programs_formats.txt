@@ -528,7 +528,7 @@ PM1: LZ-compressor
 PM2: LZ-compressor
 
 
->>> deark (Linux - v1.5.5 - June 6, 2020) - ARCHIVE, IMAGE (https://github.com/jsummers/deark  https://entropymine.com/deark/)
+>>> deark (https://github.com/jsummers/deark  https://entropymine.com/deark/)
 >>> formats: https://raw.githubusercontent.com/jsummers/deark/refs/heads/master/formats.txt
 === Image format modules ===
 

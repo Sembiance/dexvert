@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,001)
+# Unsupported File Formats (4,000)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -802,7 +802,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (193)
+## Image (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -862,7 +862,6 @@ Family/Format | Name | Extensions | Notes
 [image/drawIt](https://discmaster.textfiles.com/search?format=drawIt) | [DrawIt](http://fileformats.archiveteam.org/wiki/DrawIt_(Atari)) | .dit | [14 sample files](https://sembiance.com/fileFormatSamples/image/drawIt/) - Can only match based on fileSize and recoil2png converts most garbage into a garbage image. Only encountered about 6 of these in all of discmaster2, but false positives are around 1,000 which is too high a ratio to bother supporting.
 [image/drawStudio](https://discmaster.textfiles.com/search?format=drawStudio) | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://sembiance.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 [image/dvdFabChangeGraphicPicture](https://discmaster.textfiles.com/search?format=dvdFabChangeGraphicPicture) | DVDFab Change Graphic Picture | .cgp | 
-[image/dxpCompressedBitmap](https://discmaster.textfiles.com/search?format=dxpCompressedBitmap) | DXP compressed bitmap | .dxp | 
 [image/eaSeattlePictureGameData](https://discmaster.textfiles.com/search?format=eaSeattlePictureGameData) | EA Seattle picture game data | .pic | 
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?format=easyCADDrawing) | EasyCAD Drawing | .fcd .ec .ecw | 
 [image/electronicArtsGraphics](https://discmaster.textfiles.com/search?format=electronicArtsGraphics) | Electronic Arts graphics | .fsh | 

@@ -720,7 +720,6 @@ export default
 		drawingInterchangeBinary       : {name : "Drawing Interchange Binary Format", ext : [".dxb"], magic : ["AutoCAD Drawing Exchange Binary Format", /^fmt\/54( |$)/]},
 		drDrawDrawing                  : {name : "DR Draw drawing", ext : [".pix"], magic : ["DR Draw drawing"], weakMagic : true},
 		dvdFabChangeGraphicPicture     : {name : "DVDFab Change Graphic Picture", ext : [".cgp"], magic : ["DVDFab Change Graphic Picture"]},
-		dxpCompressedBitmap            : {name : "DXP compressed bitmap", ext : [".dxp"], magic : ["DXP compressed bitmap"], weakMagic : true},
 		easyCADDrawing                 : {name : "EasyCAD Drawing", ext : [".fcd", ".ec", ".ecw"], magic : ["EasyCAD drawing", "EasyCAD for Windows drawing"]},
 		eaSeattlePictureGameData       : {name : "EA Seattle picture game data", ext : [".pic"], magic : ["EA Seattle picture game data (UNCP)"], weakMagic : true},
 		electronicArtsGraphics         : {name : "Electronic Arts graphics", ext : [".fsh"], magic : ["Electronic Arts graphics"], weakMagic : true},

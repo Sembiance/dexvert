@@ -8,55 +8,6 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* Add support for: http://fileformats.archiveteam.org/wiki/TINYPROG
-
-* Add these newly added deark modules:
-	image/amosPicturePacker     Menu.bin     deark: abk (AMOS picture, with screen header)     
-
-	+* BMG - Bert's Coloring Programs (module="berts_bmg")
-	+  This format looks like PCX, but in most cases it must be interpreted in a
-	+  special way.
-	+  - Files are converted to standard PCX.
-	+  - File must have extension ".bmg" or ".ibg" (or use "-m berts_bmg").
-	+  - Only the distribution files are handled automatically. Otherwise, you must
-	+    use the "defpal" option.
-	+  Options
-	+   -opt berts_bmg:defpal=<name> - The predefined palette to use, if it can't be
-	+     determined.
-	+     Options are "1", "2", "3" for standard palettes, "outline" to remove the
-	+     coloring, "gray" for grayscale, "fail" (default) to give up and not write
-	+     a file.
-	+   -opt berts_bmg:forcepal=<name> - The palette to use, even if the correct
-	+     palette is known.
-
-	+* DXP image (module="dxp_image")
-	+  An image format possibly associated with software named Dexter, by Paul
-	+  Burkey.
-	
-	+* EA/PEA archive (module="ea_arch") (experimental)  (already started being detected as deark: ea_arch, but could search for older ones using detections)
-	+  An installer format used by Electronic Arts.
-
-	+* MS-DOS v2.0-3.2 BACKUP (module="dosbackup20") (experimental)
-	+  - If the file was split onto multiple volumes, you must use the "-mp" option,
-	+    and list all the file fragments (in any order).
-	+
-	+* MS-DOS v3.3-5.x BACKUP (module="dosbackup33") (experimental)
-	+  This is a multi-file format that uses CONTROL.* and BACKUP.* files.
-	+  - This module is very picky, partly because it doesn't rely on the input
-	+    filenames.
-	+  - You must use the "-mp" option, and list all the CONTROL files in the
-	+    correct order, and all the BACKUP files in the correct order. Preferably,
-	+    list all the CONTROL files before any BACKUP files.
-
-	+* EA datafile (module="ea_data")
-	+  The hidden "EA DATA. SF" attributes file on some floppy disks used by OS/2.
-	+  This module is mainly for internal use by the "fat" module. It can be used
-	+  directly, though possibly with reduced functionality.
-
-* NOT all deark modules are accounted for, I just found pcx2com in programs_formats.txt but wasn't using it in dexvert
-  I should get a list of all deark modules, then for each on do an 'ag' search in src/format/ for module:<moduleName>
-  And report any that are missing
-
 * Add support for:
 	http://fileformats.archiveteam.org/index.php?title=SABDU
 	https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage

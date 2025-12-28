@@ -8,5 +8,5 @@ export class theDrawCOM extends Format
 	forbidExtMatch = true;
 	mimeType       = "image/x-thedraw";
 	magic          = ["TheDraw COM screen save", "deark: thedraw_com"];
-	converters     = ["dosEXEScreenshot"];
+	converters     = ["deark[module:thedraw_com][charOutType:image]"];
 }

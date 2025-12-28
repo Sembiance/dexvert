@@ -1,11 +1,11 @@
-# Supported File Formats (3,422)
+# Supported File Formats (3,428)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (502)
+## Archive (503)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -69,7 +69,7 @@ archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/fi
 archive | Balko UFL game data archive | .laf .ufl | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/balkoUFLGameDataArchive/)
 archive | Bank Game Archive | .bnk | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/bankGameArchive/)
 archive | Battlezone 2 game data package | .pak | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/battlezone2GameDataPackage/)
-archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
+archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/binHex/)
 archive | [BinSCII](http://fileformats.archiveteam.org/wiki/BinSCII) | .bsc .bsq | [binsciiPrepare](https://github.com/Sembiance/dexvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/binscii/)
 archive | BioWare Entity Resource File | .erf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
@@ -123,7 +123,7 @@ archive | [CROWD ANIM game data format](https://ja.wikipedia.org/wiki/CROWD) | .
 archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | [unar](https://github.com/incbee/Unarchiver) [lbrate](http://www.svgalib.org/rus/lbrate.html) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crunch/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunch-Mania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/crunchMania/)
 archive | Cruncher Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
-archive | [Crush Archive](http://fileformats.archiveteam.org/wiki/CRUSH) | .cru | [uncrush](http://cd.textfiles.com/pdos9606/ARCHIVER/TOOLS/CRUSH18.ZIP) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/crush/)
+archive | [Crush Archive](http://fileformats.archiveteam.org/wiki/CRUSH) | .cru | [deark](https://entropymine.com/deark/) [uncrush](http://cd.textfiles.com/pdos9606/ARCHIVER/TOOLS/CRUSH18.ZIP) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/crush/)
 archive | CyberLink TalkingShow Head Definition Pack | .hdp | [foremost](http://foremost.sourceforge.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/cyberLinkTalkingShowHeadDefinitionPack/)
 archive | [Daemon Tools Media Data eXtended Image](http://fileformats.archiveteam.org/wiki/MDX_(Daemon_Tools)) | .mdx | [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mdx/)
 archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark_Ages_Map_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkAgesMapGameArchive/)
@@ -149,6 +149,7 @@ archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php
 archive | dump File |  | [restore](https://dump.sourceforge.io/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dumpFile/)
 archive | [DWS Self-Extracting Archive](http://fileformats.archiveteam.org/wiki/DWC) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/dwcSelfExtracting/)
 archive | Dynamix Game Archive | .dyn .rbx | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/dynamixGameArchive/)
+archive | [EA Archive](http://fileformats.archiveteam.org/wiki/EA_archive) | .ea .pea | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/eaArchive/)
 archive | Earth and Beyond Game Archive | .mix | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/earthAndBeyondGameArchive/)
 archive | [EDI Install Archive](http://fileformats.archiveteam.org/wiki/EDI_Install_archive) | $00 $01 $02 $04 $05 | [ediInstallArchiveExtractor](http://cd.textfiles.com/cica/cica9603/disk1/disc1/util/wramp12.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallArchive/)
 archive | [EDI Install LZS Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/os/aux/win2k/app/UNPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZS/)
@@ -641,7 +642,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (248)
+## Document (249)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/fourDWriteDocument/)
@@ -828,6 +829,7 @@ document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | 
 document | [Quattro Pro](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .wq1 .wq2 .wb1 .wb2 .wb3 .qpw | [soffice](https://www.libreoffice.org) [excel97](https://archive.org/details/office97standard_201912/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/quattroPro/)
 document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?title=Quill) | .doc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/quill/)
 document | RapidFile Memo | .mmo | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/rapidFileMemo/)
+document | [Read-A-Matic](http://fileformats.archiveteam.org/wiki/Read-A-Matic) | .exe | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/readAMatic/)
 document | [READMAKE](http://fileformats.archiveteam.org/wiki/READMAKE) | .exe | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/readmake/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [20 sample files](https://sembiance.com/fileFormatSamples/document/rtf/)
 document | RISC OS BBC BASIC V Source |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/riscOSBBCBasic/)
@@ -960,7 +962,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (744)
+## Image (748)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -989,7 +991,7 @@ image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Am
 image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [11 sample files](https://sembiance.com/fileFormatSamples/image/info/)
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/amosIcons/)
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [dumpamos](https://github.com/kyz/amostools/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/amosPicture/)
-image | AMOS Picture Packer | .bin | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/amosPicturePacker/)
+image | AMOS Picture Packer | .bin | [abydosconvert](https://github.com/Sembiance/abydosconvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/amosPicturePacker/)
 image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/amstradMode5/)
 image | Andrew Raster object | .raster | [nconvert](https://www.xnview.com/en/nconvert/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/andrewRasterObject/)
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/image/aniST/)
@@ -1051,6 +1053,7 @@ image | [BBC Micro Image](http://fileformats.archiveteam.org/wiki/BBC_Micro_mode
 image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/ldpic/)
 image | Beam Software SIFF sprite/image | .pim | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/beamSoftwareSIFFImage/)
 image | [Bennet Yee's Face Format](http://fileformats.archiveteam.org/wiki/YBM) | .bm .ybm | [ybmtopbm](http://netpbm.sourceforge.net/) [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ybm/)
+image | [Bert's Coloring Programs BMG](http://fileformats.archiveteam.org/wiki/BMG_(Bert%27s_Coloring_Programs)) | .bmg .ibg | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/bertsColoringPrograms/)
 image | Best Paint | .bp | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/bestPaint/)
 image | Bethesda BSI Texture | .bsi | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/bethesdaBSITexture/)
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | [bpgdec](http://bellard.org/bpg/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/bpg/) - Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
@@ -1066,6 +1069,7 @@ image | [Bob Ray Tracer Bitmap](http://fileformats.archiveteam.org/wiki/Bob_ray_
 image | Bootsplash Image |  | [tomsViewer](https://tomseditor.com/blog/viewer) | [12 sample files](https://sembiance.com/fileFormatSamples/image/bootsplash/)
 image | [BRender PIX](http://fileformats.archiveteam.org/wiki/BRender_PIX) | .pix | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/brenderPIX/)
 image | [Brooktrout Fax Image](http://fileformats.archiveteam.org/wiki/Brooktrout) | .301 | [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/brooktroutFaxImage/)
+image | [BSAVE Compressed](http://fileformats.archiveteam.org/wiki/PCPaint_BSAVE) | .pic .img | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/bsaveCompressed/)
 image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/bgp/)
 image | [C.O.L.R. Object Editor](http://fileformats.archiveteam.org/wiki/C.O.L.R._Object_Editor) | .mur .pal | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mur/)
 image | [C64 Hires-Bitmap](http://fileformats.archiveteam.org/wiki/Hires-Bitmap) | .hbm .hir .hpi .gih .fgs | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/c64HiRes/)
@@ -1147,6 +1151,7 @@ image | [Drazlace](http://fileformats.archiveteam.org/wiki/Drazlace) | .drl .dlp
 image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/aai/)
 image | [DuneGraph](http://fileformats.archiveteam.org/wiki/DuneGraph) | .dc1 .dg1 | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/duneGraph/)
 image | [DVM](http://fileformats.archiveteam.org/wiki/DVM) | .dvm | [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/dvm/)
+image | [DXP compressed bitmap](http://fileformats.archiveteam.org/wiki/DXP_(image_format)) | .dxp | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/dxpCompressedBitmap/)
 image | DXT Crunched Texture | .res .crn | [crunchDXT](https://github.com/BinomialLLC/crunch) | [7 sample files](https://sembiance.com/fileFormatSamples/image/dxtCrunchedTexture/)
 image | [Dynamic Publisher Screen](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .pct .pap | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/dynamicPublisherScreen/)
 image | [Dynamic Publisher Stamp](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .stp | [recoil2png](http://recoil.sourceforge.net) | [25 sample files](https://sembiance.com/fileFormatSamples/image/dynamicPublisherStamp/)
@@ -1611,7 +1616,7 @@ image | [Texture Maker0](http://fileformats.archiveteam.org/wiki/Texture_Maker0)
 image | [TGIF](https://bourbon.usc.edu/tgif/faq/format.html) | .obj | [tgif](http://bourbon.usc.edu/tgif/index.html) | [13 sample files](https://sembiance.com/fileFormatSamples/image/tgif/)
 image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .xcf | [xcf2png](http://henning.makholm.net/software) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/xcf/)
 image | [The Graphics Magician Picture Painter](http://fileformats.archiveteam.org/wiki/The_Graphics_Magician_Picture_Painter) | .spc | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/graphicsMagicianPainter/) - It's a vector format, so it would be nice to convert to SVG, but only program that I know of that can convert it is recoil2png which just produces PNG files.
-image | [TheDraw .COM File](http://fileformats.archiveteam.org/wiki/TheDraw_COM_File) | .com | [dosEXEScreenshot](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/theDrawCOM/)
+image | [TheDraw .COM File](http://fileformats.archiveteam.org/wiki/TheDraw_COM_File) | .com | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/theDrawCOM/)
 image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/theDraw/)
 image | [Tilez texture](http://fileformats.archiveteam.org/wiki/Tilez_texture) | .til | [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/tilezTexture/)
 image | [Timex 2048 Hi-Color](http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)) | .scr | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/image/timexHiColor/)
@@ -1647,6 +1652,7 @@ image | [Vidcom 64](http://fileformats.archiveteam.org/wiki/Vidcom_64) | .vid | 
 image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/vicar/)
 image | [Vidig Paint](http://fileformats.archiveteam.org/wiki/Vidig_Paint) | .rap | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/rap/)
 image | VIPS Image | .v | [convert](https://www.imagemagick.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/vips/)
+image | [VITec Image](http://fileformats.archiveteam.org/wiki/VITec) | .vitec .vit | [deark](https://entropymine.com/deark/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [1 sample file](https://sembiance.com/fileFormatSamples/image/vitec/)
 image | Vue D'Esprit VOB | .vob .mat | [nconvert](https://www.xnview.com/en/nconvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/vueDEspritVOB/)
 image | WebArt Designer graphics | .mif | [foremost](http://foremost.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/webArtDesignerGraphics/)
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/WebP) | .webp |  | [8 sample files](https://sembiance.com/fileFormatSamples/image/webp/)

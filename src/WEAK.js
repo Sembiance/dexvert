@@ -452,7 +452,6 @@ export const WEAK_VALUES =
 	/^RIPTerm Image :ript:$/,
 	/^TealPaint :teal:$/,
 	/^Truevision TARGA.* :tga:$/,
-	/^Zsoft Paintbrush :bmg:$/,
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,
@@ -2515,7 +2514,6 @@ export const WEAK_VALUES =
 	/^Visual FoxPro/,
 	/^Virtual Home Space Builder 3D Space/,
 	/^Virtual TI skin/,
-	/^VITec image format bitmap$/,
 	/^Vivaldi Music Dump format$/,	// found these in item #1392 but no converter and magic is weak and no ext
 	/^VP-Planner Plus spreadsheet$/,
 	/^VP-Planner (3D )?Worksheet/,

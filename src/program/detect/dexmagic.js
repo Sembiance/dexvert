@@ -83,6 +83,7 @@ const DEXMAGIC_CHECKS = {
 	"Microsoft Publisher v1"                  : [{offset : 0, match : [0xE7, 0xAC, 0x2C, 0x00]}],
 	"PageStream Document"                     : [{offset : 0, match : [0x07, 0x23, 0x19, 0x92, 0x00, 0x0D, 0x02, 0x00, 0x00]}],
 	"PCBoard Programming Language Executable" : [{offset : 0, match : "PCBoard Programming Language Executable"}],
+	"Read-A-Matic"                            : [{offset : 0, match : [0x4D, 0x5A, 0x6F, 0x01, 0x1A, 0x00, 0x01, 0x00, 0x08, 0x00, 0xAE, 0x0A, 0xFF, 0xFF, 0x37, 0x03]}],
 	"Signum 1/2 Document"                     : [{offset : 0, match : "sdoc0001"}],
 	"Signum 3/4 Document"                     : [{offset : 0, match : "\x00\x00sdoc  03"}],
 	"TextWare CDT (WEAK)"                     : [{offset : 0, match : Array(16).fill(0x00)}],

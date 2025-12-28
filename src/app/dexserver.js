@@ -56,7 +56,7 @@ async function stopDexserver()
 		xlog.info`Stopping server ${fg.peach(serverid)}...`;
 		const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
 		await fileUtil.writeTextFile(stopFilePath, "");
-		await xu.waitUntil(async () => !(await fileUtil.exists(stopFilePath)), {timeout : xu.SECOND*20});
+		await xu.waitUntil(async () => !await fileUtil.exists(stopFilePath), {timeout : xu.SECOND*20});
 		await runUtil.kill(serverProcs[serverid]);
 	}
 
@@ -68,7 +68,7 @@ async function stopDexserver()
 
 xu.waitUntil(async () =>
 {
-	if(!(await fileUtil.exists("/mnt/ram/tmp/stopdexserver")))
+	if(!await fileUtil.exists("/mnt/ram/tmp/stopdexserver"))
 		return false;
 	
 	await fileUtil.unlink("/mnt/ram/tmp/stopdexserver", {recursive : true});

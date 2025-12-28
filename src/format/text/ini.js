@@ -34,7 +34,7 @@ export class ini extends Format
 		"Quarterdeck Provider info", "InstallShield Installation Package Strings table", "Gemsylk graph", "Micro-Cap Circuit", "Popcorn Mail configuration", "WinOnCD Project", "Spring Map Definition", "Premiere Title data", "Codewright Project (v3.x)",
 		"Unreal Engine Crash report", /^application\/x-godot-(resource|scene)/, /^Godot Engine Text (Resource|Scene)/, "Godot Engine Import settings", /^Total Annihilation (features data|GUI definition|map data|unit)/, "CAMtastic Aperture Wizard template",
 		"NCSA Mosaic configuration", /^LICQ configuration file, ASCII text$/, "TOPBENCH database", "Twistpad Syntax highlight script", "ARCsolo Host Adapter Configuration", "ARCsolo Host Adapters List", "Format: Mesh configuration (.CURE)",
-		"Format: CloneCD Control", "blueMSX Shortcuts",
+		"Format: CloneCD Control", "blueMSX Shortcuts", "Quartus Workspace",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

@@ -218,7 +218,7 @@ const performRun = async (instance, runArgs) =>
 		await fileUtil.move(tmpInArchiveFilePath, inArchiveFilePath);
 
 		// Wait for the OS to finish, which happens when the VM deletes the archive file via http calling /osDONE (or our instance process changes usually due to crashing)
-		const finishedOK = await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : (xu.HOUR*2.2))});
+		const finishedOK = await xu.waitUntil(async () => !await fileUtil.exists(inArchiveFilePath) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : (xu.HOUR*2.2))});
 
 		if(await fileUtil.exists(outarchiveFilePath))	// only exists if the OS was successful and called /osPOST with the result
 		{
@@ -358,7 +358,7 @@ routes.set("/osGET", async request =>
 	const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
 	xlog.trace`Got osGET from ${body.osid}-${body.instanceid}`;
 	const inArchiveFilePath = path.join(HTTP_IN_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`);
-	if(!(await fileUtil.exists(inArchiveFilePath)))
+	if(!await fileUtil.exists(inArchiveFilePath))
 		return new Response(null, {status : 404});
 				
 	const inArchive = await Deno.open(inArchiveFilePath, {read : true});

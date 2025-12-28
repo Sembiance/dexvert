@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,988)
+# Unsupported File Formats (4,001)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (312)
+## Archive (317)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -159,6 +159,8 @@ Family/Format | Name | Extensions | Notes
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?format=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?format=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
 [archive/magixGEPacktArchive](https://discmaster.textfiles.com/search?format=magixGEPacktArchive) | MAGIX gepackt Archive |  | 
+[archive/majiroEngineResourceData](https://discmaster.textfiles.com/search?format=majiroEngineResourceData) | Majiro Engine resource data | .arc | 
+[archive/mameFloppyImage](https://discmaster.textfiles.com/search?format=mameFloppyImage) | MAME Floppy Image | .mfi | 
 [archive/massiveGameDataArchive](https://discmaster.textfiles.com/search?format=massiveGameDataArchive) | Massive game data archive | .pak | 
 [archive/masterDOSVDiskImage](https://discmaster.textfiles.com/search?format=masterDOSVDiskImage) | MasterDOS disk image | .dsk | 
 [archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?format=maximusInstallerArchive) | Maximus installer archive | .fiz | 
@@ -193,6 +195,7 @@ Family/Format | Name | Extensions | Notes
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?format=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 
 [archive/nosPackerPacked](https://discmaster.textfiles.com/search?format=nosPackerPacked) | NOS Packer Packed | .exe | 
 [archive/nsPacKPacked](https://discmaster.textfiles.com/search?format=nsPacKPacked) | NsPacK Packed |  | 
+[archive/ntPackerPacked](https://discmaster.textfiles.com/search?format=ntPackerPacked) | NTPacker Packed | .exe | 
 [archive/ntShellProtected](https://discmaster.textfiles.com/search?format=ntShellProtected) | NTShell Protected | .exe | 
 [archive/oberonCompresArchive](https://discmaster.textfiles.com/search?format=oberonCompresArchive) | Oberon compres archive | .arc | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?format=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
@@ -267,6 +270,7 @@ Family/Format | Name | Extensions | Notes
 [archive/starWarsBattlefrontGameDataArchive](https://discmaster.textfiles.com/search?format=starWarsBattlefrontGameDataArchive) | Star Wars Battlefront game data archive | .lvl | 
 [archive/stardockEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?format=stardockEntertainmentGameDataArchive) | Stardock Entertainment game data archive | .emp .mtd | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?format=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
+[archive/superCardProFluxImage](https://discmaster.textfiles.com/search?format=superCardProFluxImage) | SuperCard Pro flux image | .scp | 
 [archive/symantecCompressedInstallPackage](https://discmaster.textfiles.com/search?format=symantecCompressedInstallPackage) | Symantec compressed install Package | .pk$ | 
 [archive/syneticAArchive](https://discmaster.textfiles.com/search?format=syneticAArchive) | Synetic Archive | .syn | 
 [archive/ted5Archive](https://discmaster.textfiles.com/search?format=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
@@ -274,6 +278,7 @@ Family/Format | Name | Extensions | Notes
 [archive/texModPackageFile](https://discmaster.textfiles.com/search?format=texModPackageFile) | TexMod package File | .tpf | 
 [archive/theBuilderPacked](https://discmaster.textfiles.com/search?format=theBuilderPacked) | The Builder Packed | .exe | 
 [archive/duplicatorToolkitDiskImage](https://discmaster.textfiles.com/search?format=duplicatorToolkitDiskImage) | The Duplicator Toolkit disk image | .img | 
+[archive/theLearningCompanyAssetsContainer](https://discmaster.textfiles.com/search?format=theLearningCompanyAssetsContainer) | The Learning Company assets container | .grp | 
 [archive/thePatcherPacked](https://discmaster.textfiles.com/search?format=thePatcherPacked) | The Patcher Packed | .exe | 
 [archive/printShopDAT](https://discmaster.textfiles.com/search?format=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 [archive/simsCompactedResourceFile](https://discmaster.textfiles.com/search?format=simsCompactedResourceFile) | The Sims Compacted Resource file | .sims2pack | 
@@ -323,7 +328,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (76)
+## Audio (75)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -399,7 +404,6 @@ Family/Format | Name | Extensions | Notes
 [audio/dvsm](https://discmaster.textfiles.com/search?format=dvsm) | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
 [audio/wipeoutSoundEffects](https://discmaster.textfiles.com/search?format=wipeoutSoundEffects) | Wipeout sound effects | .fx0 .fx1 .fx2 .fx3 .fx4 .fx5 .fx6 .fx7 | 
 [audio/wonderSwanWSR](https://discmaster.textfiles.com/search?format=wonderSwanWSR) | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
-[audio/wwiseSoundBank](https://discmaster.textfiles.com/search?format=wwiseSoundBank) | Wwise sound Bank | .bnk | 
 [audio/yamahaSMAF](https://discmaster.textfiles.com/search?format=yamahaSMAF) | [Yamaha Synthetic Music Mobile Application Format](https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF) | .mmf | [1 sample file](https://sembiance.com/fileFormatSamples/audio/yamahaSMAF/)
 [audio/zyxelVoice](https://discmaster.textfiles.com/search?format=zyxelVoice) | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fileFormatSamples/audio/zyxelVoice/)
 
@@ -671,7 +675,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (120)
+## Font (121)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -755,6 +759,7 @@ Family/Format | Name | Extensions | Notes
 [font/pcToolsFont](https://discmaster.textfiles.com/search?format=pcToolsFont) | PC Tools Font | .fnt | 
 [font/pcDraftCADFont](https://discmaster.textfiles.com/search?format=pcDraftCADFont) | PC-Draft-CAD Font | .fon | 
 [font/personalFontMakerFont](https://discmaster.textfiles.com/search?format=personalFontMakerFont) | Personal Font Maker Font/Character Set | .fnt .set | 
+[font/pgfFont](https://discmaster.textfiles.com/search?format=pgfFont) | PGF Font | .pgf | 
 [font/portableFontResource](https://discmaster.textfiles.com/search?format=portableFontResource) | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://sembiance.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
 [font/postalFont](https://discmaster.textfiles.com/search?format=postalFont) | Postal Font | .fnt | 
 [font/printMagicFont](https://discmaster.textfiles.com/search?format=printMagicFont) | Print Magic Font | .pmf | 
@@ -1180,7 +1185,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,707)
+## Other (2,715)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2374,6 +2379,7 @@ Family/Format | Name | Extensions | Notes
 [other/ivsFledermausTDRFile](https://discmaster.textfiles.com/search?format=ivsFledermausTDRFile) | IVS Fledermaus TDR file |  | 
 [other/javaAppletCacheIndex](https://discmaster.textfiles.com/search?format=javaAppletCacheIndex) | Java Applet cache index | .idx | 
 [other/javaRuntimeCurrencyData](https://discmaster.textfiles.com/search?format=javaRuntimeCurrencyData) | Java runtime Currency Data | .data | 
+[other/javaSerializationStream](https://discmaster.textfiles.com/search?format=javaSerializationStream) | Java serialization stream | .ser | 
 [other/javelinConfiguration](https://discmaster.textfiles.com/search?format=javelinConfiguration) | Javelin Configuration | .cfg | 
 [other/javelinCountryDriver](https://discmaster.textfiles.com/search?format=javelinCountryDriver) | Javelin Country Driver | .cdv | 
 [other/javelinModel](https://discmaster.textfiles.com/search?format=javelinModel) | Javelin Model | .mdl | 
@@ -2827,6 +2833,7 @@ Family/Format | Name | Extensions | Notes
 [other/nintendoColourResource](https://discmaster.textfiles.com/search?format=nintendoColourResource) | Nintendo Colour Resource | .nclr | 
 [other/nintendoDSROM](https://discmaster.textfiles.com/search?format=nintendoDSROM) | Nintendo DS ROM | .nds | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?format=nintendoROM) | Nintendo ROM | .nes | 
+[other/nogbaEmulatorBackup](https://discmaster.textfiles.com/search?format=nogbaEmulatorBackup) | no$gba emulator backup | .sav | 
 [other/nocturneSaveGame](https://discmaster.textfiles.com/search?format=nocturneSaveGame) | Nocturne save game | .noc | 
 [other/nid32AntivirusUpdateFile](https://discmaster.textfiles.com/search?format=nid32AntivirusUpdateFile) | NOD32 Antivirus Update file | .nup | 
 [other/nod32Module](https://discmaster.textfiles.com/search?format=nod32Module) | NOD32 module |  | 
@@ -2894,6 +2901,7 @@ Family/Format | Name | Extensions | Notes
 [other/optionScopeWorksheet](https://discmaster.textfiles.com/search?format=optionScopeWorksheet) | OptionScope Worksheet | .osc | 
 [other/opTuneConfiguration](https://discmaster.textfiles.com/search?format=opTuneConfiguration) | OPTune Configuration | .cfg | 
 [other/opusCreatorMultimediaFile](https://discmaster.textfiles.com/search?format=opusCreatorMultimediaFile) | Opus Creator multimedia file | .ilm | 
+[other/oracleExecutableForm](https://discmaster.textfiles.com/search?format=oracleExecutableForm) | Oracle Executable Form | .fmx | 
 [other/oracleTPXTemplate](https://discmaster.textfiles.com/search?format=oracleTPXTemplate) | Oracle TPX Template | .tpx | 
 [other/orCADLayout](https://discmaster.textfiles.com/search?format=orCADLayout) | OrCAD Layout | .max | 
 [other/orCADProject](https://discmaster.textfiles.com/search?format=orCADProject) | OrCAD Project | .opj | 
@@ -3023,8 +3031,10 @@ Family/Format | Name | Extensions | Notes
 [other/playmakerFootballTeamData](https://discmaster.textfiles.com/search?format=playmakerFootballTeamData) | Playmaker Football Team data | .pdr .dat | 
 [other/playStation3DiscData](https://discmaster.textfiles.com/search?format=playStation3DiscData) | PlayStation 3 Disc data | .sfb | 
 [other/playstation3SavegameControlData](https://discmaster.textfiles.com/search?format=playstation3SavegameControlData) | Playstation 3 savegame control data | .pfd | 
+[other/playStationPortableData](https://discmaster.textfiles.com/search?format=playStationPortableData) | PlayStation Portable data | .prx | 
 [other/playStationPortableFirmware](https://discmaster.textfiles.com/search?format=playStationPortableFirmware) | PlayStation Portable Firmware | .pbp | 
 [other/playstationSingleGameSave](https://discmaster.textfiles.com/search?format=playstationSingleGameSave) | Playstation single game save | .psx | 
+[other/playStationUpdatePackage](https://discmaster.textfiles.com/search?format=playStationUpdatePackage) | PlayStation Update Package | .pbp | 
 [other/plbmGamesConfiguration](https://discmaster.textfiles.com/search?format=plbmGamesConfiguration) | PLBM Games Configuration | .cfg | 
 [other/plbmGamesGameData](https://discmaster.textfiles.com/search?format=plbmGamesGameData) | PLBM Games game data | .lcr | 
 [other/plbmGamesHighScores](https://discmaster.textfiles.com/search?format=plbmGamesHighScores) | PLBM Games high scores | .dat | 
@@ -3143,6 +3153,7 @@ Family/Format | Name | Extensions | Notes
 [other/quickTimePreferences](https://discmaster.textfiles.com/search?format=quickTimePreferences) | QuickTime Preferences | .qtp | 
 [other/quiltBlock](https://discmaster.textfiles.com/search?format=quiltBlock) | Quilt block | .blk | 
 [other/rageDriver](https://discmaster.textfiles.com/search?format=rageDriver) | R.A.G.E. Driver | .rge | 
+[other/r4CheatCodes](https://discmaster.textfiles.com/search?format=r4CheatCodes) | R4 cheat codes | .dat | 
 [other/rabbitFirstChoiceGraph](https://discmaster.textfiles.com/search?format=rabbitFirstChoiceGraph) | Rabbit/First Choice Graph | .mod | 
 [other/radianceOctree](https://discmaster.textfiles.com/search?format=radianceOctree) | Radiance Octree | .oct | 
 [other/radixGameData](https://discmaster.textfiles.com/search?format=radixGameData) | Radix game data | .dat | 
@@ -3272,6 +3283,7 @@ Family/Format | Name | Extensions | Notes
 [other/sfxrSample](https://discmaster.textfiles.com/search?format=sfxrSample) | sfxr Sample | .sfs | 
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?format=sgmlCompiled) | SGML Compiled | .mtl | 
 [other/shapeshifterTheme](https://discmaster.textfiles.com/search?format=shapeshifterTheme) | Shapeshifter theme | .guikit | 
+[other/shotOnlineResource](https://discmaster.textfiles.com/search?format=shotOnlineResource) | Shot Online Resource | .sor | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?format=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 
 [other/showKitTemplate](https://discmaster.textfiles.com/search?format=showKitTemplate) | Show.kit template | .sks | 
 [other/showBiZProject](https://discmaster.textfiles.com/search?format=showBiZProject) | ShowBiZ project | .sbz | 
@@ -3329,6 +3341,7 @@ Family/Format | Name | Extensions | Notes
 [other/softKeyWinWorksDocumentTemplate](https://discmaster.textfiles.com/search?format=softKeyWinWorksDocumentTemplate) | SoftKey WinWorks document Template | .wpt | 
 [other/softwareDesignCryptoEncryptedData](https://discmaster.textfiles.com/search?format=softwareDesignCryptoEncryptedData) | Software Design Crypto encrypted data |  | 
 [other/solitaireSettyProject](https://discmaster.textfiles.com/search?format=solitaireSettyProject) | Solitaire Setty Project | .ss | 
+[other/sonicAdventureDXGameDataArchive](https://discmaster.textfiles.com/search?format=sonicAdventureDXGameDataArchive) | Sonic Adventure DX game data archive | .dat | 
 [other/soniqueSkin](https://discmaster.textfiles.com/search?format=soniqueSkin) | Sonique skin | .sgf | 
 [other/sonixMIDIInstrument](https://discmaster.textfiles.com/search?format=sonixMIDIInstrument) | Sonix MIDI Instrument | .instr | 
 [other/soundChipSynthPatch](https://discmaster.textfiles.com/search?format=soundChipSynthPatch) | Sound Chip Synth patch | .syn | 

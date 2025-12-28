@@ -20,7 +20,7 @@ let imageType = null;
 let imageCounter=0;
 let inImage = false;
 const hexBytes = [];
-for await(const line of await inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
+for await (const line of await inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(inImage)
 	{

@@ -1527,7 +1527,6 @@ export const WEAK_VALUES =
 	/^Stunt Island Resource$/,
 	/^SubRip subtitles$/,
 	/^Superbase Query definition$/,
-	/^SuperCard Pro flux image$/,
 	/^Taxman's Retro Engine v5 Configuration$/,
 	/^Telltale Games Font \(VSM\)$/,
 	/^TERSE compressed data \(S?PACK, [UV]\)$/,

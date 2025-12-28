@@ -8,27 +8,7 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* Add support for the various PCX2EXE formats
-  First use them to create a .exe, then check if trid id, then add to dexmagic, then will need to 'run' screenshot them:
-	http://fileformats.archiveteam.org/wiki/PCX2EXE_(F._del_Pozo)			(NOTE: Trid's identification is NOT RELIABLE)
-	http://fileformats.archiveteam.org/wiki/PCX2EXE_(Mike_Williams)
-	http://fileformats.archiveteam.org/wiki/PCX-to-Executable
-
-* Add support for:
-	http://fileformats.archiveteam.org/wiki/PCX2EXE
-		https://discmaster.textfiles.com/view/42923/Deathmatch%20Maker%20(USA)/Deathmatch%20Maker%20(USA).bin/Extras/Utilities/3ds2map.zip/3DS2MAP.EXE
-		https://discmaster.textfiles.com/view/29697/ibm0800-0809/ibm0806.tar/ibm0806/MSQ95214.ZIP/win950b.r13/drivers/modem/wdlboca1/drivers.zip/CDATAPI.SYS
-		https://discmaster.textfiles.com/view/29697/ibm0800-0809/ibm0805.tar/ibm0805/NMSIAVC2.ZIP/IAVC.A02/APPS/EMAIL/PEGASUS/MERCURY/ADDQ.EXE
-		https://discmaster.textfiles.com/view/29711/ibm0940-0949/ibm0948.tar/ibm0948/EPI-BOR1.ZIP/EPI-BOR.EXE/WILKIN.EXE
-		https://discmaster.textfiles.com/view/30006/wbiz0220-0229/wbiz0225.tar/wbiz0225/NETUIUD.ZIP/NETSCAN.EXE
-		https://discmaster.textfiles.com/view/42677/DVPEG%202.1%20and%20DCX%20Tool%20Box.iso/dvpeg21/vidsetup.exe
-		https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DF!PF099.ZIP/BOOMDOS.EXE
-		https://discmaster.textfiles.com/admin/item?itemid=7070
-		https://discmaster.textfiles.com/admin/item?itemid=29672
-		https://discmaster.textfiles.com/admin/item?itemid=30062
-		https://discmaster.textfiles.com/admin/item?itemid=30068
-	http://fileformats.archiveteam.org/wiki/TINYPROG
-	https://discmaster.textfiles.com/view/37864/PC%20Master%20%CE%A4%CE%B5%CF%8D%CF%87%CE%BF%CF%82%20149%20-%20%CE%9C%CE%AC%CF%81%CF%84%CE%B9%CE%BF%CF%82%202002/PC%20Master%20%CE%A4%CE%B5%CF%8D%CF%87%CE%BF%CF%82%20149%20-%20%CE%9C%CE%AC%CF%81%CF%84%CE%B9%CE%BF%CF%82%202002.bin/extras/nightofthehermit/setup.zip/Talkie.ace/speech.vox
+* Add support for: http://fileformats.archiveteam.org/wiki/TINYPROG
 
 * Add these newly added deark modules:
 	image/amosPicturePacker     Menu.bin     deark: abk (AMOS picture, with screen header)     
@@ -85,6 +65,8 @@
   Last version os 08-10
   Cyberflix sounds?: https://discmaster.textfiles.com/admin/item?itemid=43192
 
+* na_game_tool update: https://codecs.multimedia.cx/2025/12/na_game_tool-more-flicy-formats/
+
 * nihav updated from 06-10 to today:
 	https://git.nihav.org/?p=nihav.git;a=summary
 	QPEG DVC Supported now *.dvc in:
@@ -99,7 +81,7 @@
 * AppleCommander now supports:
 	WOZ
 
-* 16bit DOS Disk eXPress SFX disk image Executable: http://justsolve.archiveteam.org/wiki/Disk_Express
+* 16bit DOS Disk eXPress SFX disk image Executable (bad trid magic?): http://justsolve.archiveteam.org/wiki/Disk_Express
 	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX4.ZIP/w95-dsk4.exe
 	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX3.ZIP/w95-dsk3.exe
 	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX2.ZIP/w95-dsk2.exe
@@ -107,6 +89,7 @@
 	https://discmaster.textfiles.com/view/43219/gigapak-2-for-os2-warp.iso/demos/xact32_1/xact32_1.exe
 	https://discmaster.textfiles.com/admin/item?itemid=29672
 	https://discmaster.textfiles.com/view/30068/wbiz0840-0849/wbiz0846.tar/wbiz0846/DOS7PWA1.ZIP/DISK1.EXE
+	https://discmaster.textfiles.com/admin/item?itemid=43152
   Would need to figure out how to handle this. Maybe DOSBOX can be launched with a blank floppy inserted?
   Then for the EXE versions it would just write to the floppy? And I'd have to have X versions of disk express for the non-exe ones?
   If DOSBOX won't work, could maybe find a way to send an 'insert disk' command to 86Box, run the program, then eject the disk?

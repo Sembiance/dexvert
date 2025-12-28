@@ -24,7 +24,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 	for(const progid of forbidProgram)
 		RUNTIME.forbidProgram.add(progid);
 
-	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
+	if(!await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid"))
 		throw new Error("dexserver not running!");
 	if(inputFile.isDirectory)
 		throw new Error(`Invalid input file, expected a file, got a directory: ${inputFile.absolute}`);
@@ -165,7 +165,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				for(const auxFile of f.files.aux)
 				{
 					const newAuxFilename = `${cwdFilename}${auxFile.ext.toLowerCase()}`;
-					if(!(await fileUtil.exists(path.join(auxFile.dir, newAuxFilename))))
+					if(!await fileUtil.exists(path.join(auxFile.dir, newAuxFilename)))
 						await auxFile.rename(newAuxFilename);
 				}
 			}

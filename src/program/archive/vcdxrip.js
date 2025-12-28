@@ -35,7 +35,7 @@ export class vcdxrip extends Program
 		// So we used to proceed just so long as we have an mpg file that is not empty
 		// However then I encountered this one: http://dev.discmaster2.textfiles.com/view/375/VolumeLabel.bin/avseq01.mpg
 		// Where it produce just a 120kb file. so now we also check if the file is larger than 5MB when there is only a single avseq result file
-		if(!(await fileUtil.exists(avseqFilePath)) || ((await Deno.stat(avseqFilePath)).size || 0)<(avseqFileCount===1 ? xu.MB*5 : 1))	// If the output includes this message then the processing of the VCD failed somewhere and left an incomplete .mpg file
+		if(!await fileUtil.exists(avseqFilePath) || ((await Deno.stat(avseqFilePath)).size || 0)<(avseqFileCount===1 ? xu.MB*5 : 1))	// If the output includes this message then the processing of the VCD failed somewhere and left an incomplete .mpg file
 		{
 			if(r.tmpBINCUEDirPath)
 				await fileUtil.unlink(r.tmpBINCUEDirPath, {recursive : true});

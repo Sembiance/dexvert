@@ -23,7 +23,7 @@ let msg = {};
 let prevLineEmpty = true;
 
 const inputFile = await Deno.open(argv.inputFilePath);
-for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
+for await (const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(line.trim().length===0)
 	{

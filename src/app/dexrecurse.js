@@ -205,7 +205,7 @@ if(fullOutputPath.endsWith(".tar.gz"))
 }
 else
 {
-	if(!(await fileUtil.exists(fullOutputPath)))
+	if(!await fileUtil.exists(fullOutputPath))
 		Deno.exit(xlog.error`Output directory ${fullOutputPath} does not exist!`);
 
 	if((await fileUtil.tree(fullOutputPath)).length>0)
@@ -481,7 +481,7 @@ async function processNextQueue()
 		try
 		{
 			await fileUtil.writeTextFile(task.logFilePath, err.toString(), {append : true});
-			if(!(await fileUtil.exists(task.metaFilePath)))
+			if(!await fileUtil.exists(task.metaFilePath))
 				await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify({failed : true, err : err.toString(), stack : err.stack}));
 		}
 		catch(err2)	// eslint-disable-line unicorn/catch-error-name

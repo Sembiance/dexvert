@@ -84,7 +84,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					return rtfPNG(cachedPNGData[availableFilename]);
 
 				const importFilePath = path.join(tmpDirPath, filename);
-				if(!(await fileUtil.exists(importFilePath)))
+				if(!await fileUtil.exists(importFilePath))
 				{
 					// helpdeco only auto extracts files it understands. so here we check to see if we have it available to extract manually and do so if needed
 					if(!availableFilenames.has(availableFilename))
@@ -149,7 +149,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					const svgHeight = r?.phase?.meta?.height || r?.phase?.meta?.canvasHeight || 100;
 					const tmpPNGFilePath = await fileUtil.genTempPath(tmpDirPath, ".png");
 					const {stdout : stdoutSVG, stderr : stderrSVG} = await runUtil.run("resvg", ["--width", svgWidth.toString(), "--height", svgHeight.toString(), importOutputFileAbsolute, tmpPNGFilePath], {timeout : xu.MINUTE});
-					if(!(await fileUtil.exists(tmpPNGFilePath)))
+					if(!await fileUtil.exists(tmpPNGFilePath))
 					{
 						xlog.error`Failed to convert SVG for match ${m} result with resvg from ${filename} to PNG with stdout ${stdoutSVG} and stderr ${stderrSVG}`;
 						return rtfPNG(BROKEN_IMAGE_PNG_HEX);
@@ -173,7 +173,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					const vidHeight = r?.phase?.meta?.height || 100;
 					const tmpPNGFilePath = await fileUtil.genTempPath(tmpDirPath, ".png");
 					const {stdout : stdoutVid, stderr : stderrVid} = await runUtil.run("ffmpeg", ["-i", `file:${importOutputFileAbsolute}`, "-frames:v", "1", "-an", "-s", `${vidWidth}x${vidHeight}`, "-ss", "0", "-f", "image2", "-c", "png", `file:${tmpPNGFilePath}`]);
-					if(!(await fileUtil.exists(tmpPNGFilePath)))
+					if(!await fileUtil.exists(tmpPNGFilePath))
 					{
 						xlog.error`Failed to generate thumb for match ${m} for MP4 result with ffmpeg from ${filename} with dimensions ${vidWidth}x${vidHeight} with stdout ${stdoutVid} and stderr ${stderrVid}`;
 						return rtfPNG(BROKEN_IMAGE_PNG_HEX);
@@ -198,7 +198,7 @@ if(argv.extractExtra)
 	{
 		const extraOutputFilePath = path.join(argv.outputDirPath, availableFilename);
 		await runUtil.run("helpdeco", [inputFilePath, availableFilename, extraOutputFilePath]);
-		if(!(await fileUtil.exists(extraOutputFilePath)))
+		if(!await fileUtil.exists(extraOutputFilePath))
 			return;
 
 		const extraFileStats = await Deno.stat(extraOutputFilePath);

@@ -14,7 +14,7 @@ export class tscompInfo extends Program
 	postExec = async r =>
 	{
 		const listFilePath = path.join(r.f.root, r.flags.outDirname || r.f.outDir.base, "DEXVERTL.TXT");
-		if(!(await fileUtil.exists(listFilePath)))
+		if(!await fileUtil.exists(listFilePath))
 		{
 			r.xlog.warn`Failed to find DEXVERTL.TXT from TSCOMP.EXE execution: ${listFilePath}`;
 			return;

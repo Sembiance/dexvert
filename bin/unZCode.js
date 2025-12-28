@@ -14,14 +14,14 @@ const argv = cmdUtil.cmdInit({
 const txdOutFilePath = await fileUtil.genTempPath(undefined, ".txt");
 await runUtil.run("txd", [argv.inputFilePath], {stdoutFilePath : txdOutFilePath});
 
-if(!(await fileUtil.exists(txdOutFilePath)) || (await Deno.stat(txdOutFilePath)).size===0)
+if(!await fileUtil.exists(txdOutFilePath) || (await Deno.stat(txdOutFilePath)).size===0)
 	Deno.exit(await fileUtil.unlink(txdOutFilePath));
 
 const encoder = new TextEncoder();
 const outputFile = await Deno.open(argv.outputFilePath, {create : true, write : true, truncate : true});
 const inputFile = await Deno.open(txdOutFilePath);
 let skip = false;
-for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
+for await (const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(line.startsWith("[Start of code]"))
 	{

@@ -786,7 +786,7 @@ export class Program
 				if(safeFile.absolute===srcFile.absolute)
 					return;
 				
-				if(!(await fileUtil.exists(safeFile.absolute)))
+				if(!await fileUtil.exists(safeFile.absolute))
 				{
 					xlog.info`Program ${progRaw} safe path no longer exists ${safeFile.pretty()}`;
 					return;

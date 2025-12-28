@@ -86,7 +86,7 @@ async function loadUnsupported({reload}={})
 				unsupported = true;
 			}
 
-			formats[formatid] = Unsupported.create(families[familyid], format =>	// eslint-disable-line sembiance/shorter-arrow-funs
+			formats[formatid] = Unsupported.create(families[familyid], format =>
 			{
 				for(const supportedKey of supportedKeys)
 				{

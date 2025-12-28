@@ -19,7 +19,7 @@ export class hpgl extends Format
 		if(inputFile.size>(xu.MB*3))	// discmaster has never encountered an HPGL file larger than 1.4MB so this is probably pretty safe
 			return false;
 
-		for await(const line of (await Deno.open(inputFile.absolute)).readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
+		for await (const line of (await Deno.open(inputFile.absolute)).readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 		{
 			if(!line?.trim()?.length)
 				continue;

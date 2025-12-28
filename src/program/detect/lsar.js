@@ -24,7 +24,7 @@ export class lsar extends Program
 		if(data.lsarConfidence===0 || data.lsarContents?.length<3)
 		{
 			// JSON output doesn't show if there was an error parsing the archive, and checking this is important otherwise we get way too many false positives, so just run it manually and check the output
-			const {stdout : stdoutRaw} = await runUtil.run("lsar", [r.inFile({absolute : true})]);
+			const {stdout : stdoutRaw} = await runUtil.run("lsar", [r.inFile({absolute : true})], {timeout : xu.SECOND*10});
 			if(stdoutRaw.includes("Archive parsing failed!"))
 				return;
 		}

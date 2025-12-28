@@ -88,7 +88,7 @@ export class noesis extends Program
 			Send("{ESC}")
 			WinWaitClose($exportWindow, "", 15)`
 	});
-	post = async r =>	// eslint-disable-line sembiance/shorter-arrow-funs
+	post = async r =>
 	{
 		for(const newFile of r.f?.files?.new || [])
 		{

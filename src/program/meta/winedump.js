@@ -16,9 +16,10 @@ export class winedump extends Program
 		const ARRAY_HEADERS = ["optionalheader32bit", "datadirectory"];
 		const NUMS =
 		[
-			"bytesOnLastPage", "numberOfPages", "relocations", "sizeOfHeader", "minExtraParagraphs", "maxExtraParagraphs", "overlayNumber", "offsetToExtHeader", "relocationFile",	// EXE
+			"bytesOnLastPage", "numberOfPages", "relocations", "sizeOfHeader", "minExtraParagraphs", "maxExtraParagraphs", "overlayNumber", "relocationFile",	// EXE
 			"autoDataSegment", "numberOfSegments", "numberOfModrefs"	// DLL
 		];
+		const HEX_NUMS = ["offsetToExtHeader"];
 		const ARRAY_SUBCATS = ["characteristics"];
 		r.stdout.trim().split("\n").forEach(line =>
 		{
@@ -49,7 +50,7 @@ export class winedump extends Program
 						if(ARRAY_SUBCATS.includes(subcat))
 							meta[category][subcat].push(propValue);
 						else
-							meta[category][subcat] = NUMS.includes(propKey) ? +propValue : propValue;
+							meta[category][subcat] = NUMS.includes(propKey) ? +propValue : (HEX_NUMS.includes(propKey) ? parseInt(propValue, 16) : propValue);
 					}
 					else if(ARRAY_SUBCATS.includes(propKey))
 					{
@@ -58,7 +59,7 @@ export class winedump extends Program
 					}
 					else if(propKey)
 					{
-						meta[category][propKey] = NUMS.includes(propKey) ? +propValue : propValue;
+						meta[category][propKey] = NUMS.includes(propKey) ? +propValue : (HEX_NUMS.includes(propKey) ? parseInt(propValue, 16) : propValue);
 					}
 				}
 				else

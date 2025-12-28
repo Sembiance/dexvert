@@ -66,7 +66,7 @@ export async function classifyImage(imagePath, modelName, xlog)
 	for(const [i, tmpImagePath] of tmpImagePaths.entries())
 	{
 		await cropImage({modelName, inPath : pngTrimmedPath, outPath : tmpImagePath, method : CROP_METHODS[i]});
-		if(!(await fileUtil.exists(tmpImagePath)))
+		if(!await fileUtil.exists(tmpImagePath))
 		{
 			xlog.warn`Failed to crop image ${imagePath} for classification`;
 			continue;

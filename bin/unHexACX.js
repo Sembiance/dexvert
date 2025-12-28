@@ -15,7 +15,7 @@ const inputFile = await Deno.open(argv.inputFilePath);
 let inHex = false;
 const hexBytes = [];
 
-for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
+for await (const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(inHex)
 	{

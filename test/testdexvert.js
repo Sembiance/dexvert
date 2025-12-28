@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/better-regex, sonarjs/no-empty-collection, camelcase */
+/* eslint-disable unicorn/better-regex, camelcase */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";

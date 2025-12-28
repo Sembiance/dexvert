@@ -9,7 +9,7 @@ export class zip extends Format
 	forbidExtMatch = [".exe"];
 	magic          = [
 		// general zip magic
-		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /ZIP self-extracting archive/, "Zip multi-volume archive data", "application/zip", /^Zip$/, "deark: zip", "Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip",
+		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /ZIP self-extracting archive/, "Zip multi-volume archive data", "application/zip", /^Zip$/, "deark: zip", "Self-extracting zip", "ZIP Archiv gefunden", /^Archive: Zip(\(|$)/,
 		"Zip archive, with extra data prepended", "End of Zip archive", /^x-fmt\/263( |$)/,
 
 		// app specific zip magic

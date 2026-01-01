@@ -174,18 +174,24 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.headless ? "error" : argv.logLevel);
 
 const dexvertOptions = {};
-if(argv.programFlag)
+
+function parseProgramFlags(flags)
 {
-	dexvertOptions.programFlag = {};
-	for(const flagRaw of Array.force(argv.programFlag))
+	const programFlag = {};
+	for(const flagRaw of Array.force(flags))
 	{
 		const [programid, flagKey, flagValue] = flagRaw.split(":");
 
-		if(!Object.hasOwn(dexvertOptions.programFlag, programid))
-			dexvertOptions.programFlag[programid] = {};
-		dexvertOptions.programFlag[programid][flagKey] = (flagValue===undefined ? true : flagValue);
+		if(!Object.hasOwn(programFlag, programid))
+			programFlag[programid] = {};
+		programFlag[programid][flagKey] = (flagValue===undefined ? true : flagValue);
 	}
+
+	return programFlag;
 }
+
+if(argv.programFlag)
+	dexvertOptions.programFlag = parseProgramFlags(argv.programFlag);
 
 let workDirPath;
 const fullOutputPath = path.resolve(argv.outputPath);
@@ -285,6 +291,14 @@ else
 	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(inputFullPath, "/"), path.join(fileDirPath, "/"), {fast : true}));
 }
 
+let fileProgramFlags = {};
+const fileProgramFlagFilePath = path.join(fileDirPath, "dexvert_fileProgramFlags.json");
+if(await fileUtil.exists(fileProgramFlagFilePath))
+{
+	fileProgramFlags = xu.parseJSON(await fileUtil.readTextFile(fileProgramFlagFilePath)) || {};
+	await fileUtil.unlink(fileProgramFlagFilePath);
+}
+
 let taskFinishedCount = 0;
 let taskHandledCount = 0;
 const originalFiles = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
@@ -370,6 +384,11 @@ async function processNextQueue()
 			rpcData.fileMeta = taskProps.fileMeta;
 		if(taskProps.forbidProgram)
 			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
+		if(fileProgramFlags[task.relFilePath])
+		{
+			rpcData.dexvertOptions.programFlag ||= {};
+			Object.assign(rpcData.dexvertOptions.programFlag, parseProgramFlags(fileProgramFlags[task.relFilePath]));
+		}
 
 		let {r, log} = xu.parseJSON(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {}) || {};
 		if(!r?.json)

@@ -135,7 +135,11 @@ const FORMAT_OS_HINT = {
 		"StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ"      : "macintoshjp",
 		"TelBan120.sit"                     : "macintoshjp"
 	},
-	"archive/zip" : { "LamenDB.zip" : "macintoshjp" },
+	"archive/zip" :
+	{
+		"LamenDB.zip" : "macintoshjp",
+		"pchan109.zip" : "fmtownsjpy"
+	},
 	"document/dbf"         :
 	{
 		"DEMO.ADB" : "fmtownsjpy",

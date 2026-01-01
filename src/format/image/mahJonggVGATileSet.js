@@ -6,7 +6,7 @@ export class mahJonggVGATileSet extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Mah_Jongg_-V-G-A-_tile_set";
 	ext            = [".tis", ".til", ".icn", ".cfg"];
 	forbidExtMatch = true;
-	magic          = ["Mah Jongg -V-G-A-/Windows TileSet", "deark: mjvga"];
+	magic          = ["Mah Jongg -V-G-A-/Windows TileSet", "Mah Jongg -V-G-A-/Windows Icon/Tile", "deark: mjvga"];
 	auxFiles       = (input, otherFiles) =>
 	{
 		// .tis can convert on it's own, but .icn and .til can optionally use a pal.cfg file

@@ -17,7 +17,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: Bytessence Install Maker", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer", "Installer: Actual Installer",
 	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
 	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey", "Installer: CSDD's", "Installer: I-D Media installer", "Installer: ACCAStore",
-	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Astrum",
+	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Astrum", "Installer: Quick Install", "Installer: custom installer with SZDD-archives",
 	
 	/^Installer: Wise Installer$/, /^NSIS$/
 ];
@@ -47,7 +47,7 @@ export class exe extends Format
 		"DOS Metaware Professional Pascal Executable", "Win32 Cygwin executable", "WIN32 Executable PowerBASIC", "DOS Pacific C Compiler executable", "Win32 EXE TMT Pascal (generic)", "Format: AutoIt", "Format: Compiled AutoHotKey",
 		"AutoIt3 compiled script executable", "TCC Win32 executable", "Win32 EXE Euphoria (Watcom compiled)", "Win32 IBasic executable", "DIZ2EXE Win32 executable", "16bit COM 22NICE loader", "FreeBASIC Win32 executable (generic)",
 		"TMT Pascal Compiler 3.90 DOS executable", "16bit DOS Central Point Anti-Virus immunized Executable", "16bit DOS EXE EPW password protected", "PolyEnE compressed/encrypted Win32 Executable", "wxBasic Win32 executable",
-		"MS-DOS RTLink runtime linker executable",
+		"MS-DOS RTLink runtime linker executable", "GFA BASIC DOS executable",
 
 		..._INSTALLER_MAGICS
 	];

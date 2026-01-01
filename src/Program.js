@@ -7,6 +7,7 @@ import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
+import {run as runMSDOS} from "./msdosUtil.js";
 import {run as runOS, OSIDS} from "./osUtil.js";
 import {run as runWine, WINE_WEB_HOST, WINE_WEB_PORT} from "./wineUtil.js";
 import {programs} from "./program/programs.js";
@@ -51,7 +52,7 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "dos", "wine", ...OSIDS]},
+			loc       : {type : "string", required : true, enum : ["local", "dos", "msdos", "wine", ...OSIDS]},
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
@@ -78,6 +79,7 @@ export class Program
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {types : ["function", "number"]},
 			dosData          : {types : ["function", Object]},
+			msdosData        : {types : ["function", Object]},
 			exec             : {type : "function", length : [0, 1]},
 			failOnDups       : {type : "boolean"},
 			filenameEncoding : {types : ["function", "string"]},
@@ -180,7 +182,7 @@ export class Program
 				xlog.info`Program ${fg.orange(this.programid)} executing exec`;
 				await this.exec(r);
 			}
-			else if(this.loc==="local")
+			else if(this.loc==="local")	// eslint-disable-line unicorn/prefer-switch
 			{
 				// run a program on disk
 				r.bin = await getBin();
@@ -206,6 +208,17 @@ export class Program
 				xlog.info`Program ${fg.orange(this.programid)} executing DOS`;
 				xlog.debug`  with dosData: ${printUtil.inspect(r.dosData).squeeze()}`;
 				r.status = await runDOS(r.dosData);
+			}
+			else if(this.loc==="msdos")
+			{
+				r.msdosData = {root : f.root, inFile : r.f.input, outDir : r.f.outDir, cmd : await getBin(), xlog};
+				r.msdosData.args = await getArgs();
+				if(this.msdosData)
+					Object.assign(r.msdosData, typeof this.msdosData==="function" ? await this.msdosData(r) : this.msdosData);
+
+				xlog.info`Program ${fg.orange(this.programid)} executing MSDOS`;
+				xlog.debug`  with msdosData: ${printUtil.inspect(r.msdosData).squeeze()}`;
+				r.status = await runMSDOS(r.msdosData);
 			}
 			else if(this.loc==="wine")
 			{

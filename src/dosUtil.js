@@ -21,6 +21,7 @@ export async function run({cmd, args=[], root, outDir, preExec, autoExec, postEx
 	await Deno.copyFile(path.join(DOS_SRC_PATH, "dosbox.conf"), configFilePath);
 	await fileUtil.searchReplace(configFilePath, "captures = capture", `captures = ${dosDirPath}`);
 
+	// https://www.dosbox.com/DOSBoxManual.html
 	const bootExecLines = [
 		`mount C ${path.join(dosDirPath, "c")}`,
 		"PATH C:\\DOS",

@@ -452,11 +452,9 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 			// fileSize matches start at confidence 20.
 			if(fileSizeMatch && format.matchFileSize)
 			{
-				const m = {...baseMatch, matchType : "fileSize"};
+				const m = {...baseMatch, matchType : "fileSize", extMatch};
 				if(fileSizeMatchExt)
 					m.fileSizeMatchExt = fileSizeMatchExt;
-				if((format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext)))
-					m.matchesExt = true;
 
 				familyMatches.fileSize.push(m);
 			}
@@ -492,7 +490,7 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 			for(const m of familyMatches[matchType])
 			{
 				if(m.unsupported)
-					m.confidence = 1 + (m.matchesExt ? 1 : 0);
+					m.confidence = 1 + (m.extMatch ? 1 : 0);
 				else if(m.weak && !m.trustMagic && !m.extMatch && !m.idMetaMatch && !m.filenameMatch)
 					m.confidence = 10;
 				else

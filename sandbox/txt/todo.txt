@@ -302,6 +302,9 @@
 	Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
 	Haven't investigated:
 		https://archive.org/details/cdrinc_Dr._Morse_1999-03-30
+		https://archive.org/details/iCreate02
+		https://archive.org/details/iCreate04
+		https://archive.org/details/iCreate07
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 

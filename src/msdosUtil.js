@@ -123,9 +123,9 @@ export async function run({cmd, args=[], root, inFile, outDir, floppy, keys, tim
 	const r = await cb();
 
 	await Deno.mkdir(inoutDirPath);
-	await runUtil.run("sudo", ["mount", "-o", `loop,offset=${hdSize.start*hdSize.sectorSize}`, path.join(msdosDirPath, "inout.img"), inoutDirPath], {verbose : true, liveOutput : true});
+	await runUtil.run("sudo", ["mount", "-o", `loop,offset=${hdSize.start*hdSize.sectorSize}`, path.join(msdosDirPath, "inout.img"), inoutDirPath]);
 	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(inoutDirPath, "OUT", "/"), path.join(outDir.absolute, "/"), {inPlace : true, fast : true}));
-	await runUtil.run("sudo", ["umount", inoutDirPath], {liveOutput : true});
+	await runUtil.run("sudo", ["umount", inoutDirPath]);
 
 	if(!xlog.atLeast("trace"))
 		await fileUtil.unlink(msdosDirPath, {recursive : true});

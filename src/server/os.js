@@ -24,7 +24,7 @@ const OS = {
 	win2k :
 	{
 		debug       : false,
-		qty         : 12,
+		qty         : 8,
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",
@@ -36,7 +36,7 @@ const OS = {
 	winxp :
 	{
 		debug       : false,
-		qty         : 14,
+		qty         : 8,
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",

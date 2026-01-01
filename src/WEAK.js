@@ -40,6 +40,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"DOS /DOS ",
 	"mdos/BINA",
 	"NONE/NONE",
+	"PCFA/SWIN",
 	"UNKN/UNIX"
 ];
 
@@ -197,6 +198,7 @@ export const WEAK_VALUES =
 	/^deark: lha$/,
 	/^deark: mpegaudio( \(MP[12] audio\))?$/,
 	/^deark: ogg \(Ogg (Vorbis|\(other\))\)$/,
+	/^deark: palmdb \(Palm PDB\)$/,
 	/^deark: png \(CgBI\)$/,
 	/^deark: pnm/,
 	/^deark: printshop \(The Print Shop \(DAT\/NAM\)\)$/,
@@ -1776,7 +1778,7 @@ export const WEAK_VALUES =
 	/^Actor Windows Description Language/,
 	/^Acu4GL\/AcuCOBOL Extended File Descriptor$/,
 	/^ADEX bitmap$/,
-	/^ADEX ChromaGraph bitmap$/,
+	/^ADEX ChromaGraph bitmap/,
 	/^ADFS disk image$/,
 	/^Adobe Dimensions geometry data/,	// found actual match to file "Table Scene" band "Sampler" but it's still VERY weak and no actual extensions on mac
 	/^Adobe Extensible Metadata Platform$/,
@@ -2364,6 +2366,7 @@ export const WEAK_VALUES =
 	/^Red Sector Demo-Maker vector/,
 	/^RELOAD serialization format$/,
 	/^Relocatable object file format$/,
+	/^Remedy Archive System \/ Max Payne data$/,
 	/^ReplaceEm fileset$/,
 	/^ReqAttack Image$/,
 	/^Resume$/,
@@ -2564,6 +2567,7 @@ export const WEAK_VALUES =
 	/^Wink Template \(v[\d-]+\)$/,
 	/^WinImage archive data$/,
 	/^WinImage disk image$/,
+	/^Wii Binary Revolution Layout Animation$/,
 	/^Wii Model Animation$/,
 	/^Wii Texture Animation$/,
 	/^WordPerfect Executive Spreadsheet$/,

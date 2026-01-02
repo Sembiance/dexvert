@@ -14,5 +14,5 @@ export class soundFont2 extends Format
 		"Aureal Aspen sound bank"
 	];
 	forbiddenMagic = ["Emu Sound Font (v1.0)"];
-	converters     = ["soundFont2tomp3", "awaveStudio[matchType:magic]"];
+	converters     = ["soundFont2tomp3"];	// "awaveStudio[matchType:magic]"
 }

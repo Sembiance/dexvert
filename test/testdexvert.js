@@ -444,7 +444,6 @@ const FLEX_DIFF_FILES = [
 
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
-	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/,
 	/music\/ay\/emul\.(dragonslair2|gliderrider)$/
 ];
@@ -573,10 +572,6 @@ const ALLOW_PROCESS_FAILURES = {
 	archive :
 	{
 		xpackLZCOMPacked : ["PC (1).COM"]
-	},
-	audio :
-	{
-		soundFont2 : ["aurealgm"]
 	},
 	document :
 	{

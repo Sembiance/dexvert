@@ -21,8 +21,18 @@ const argv = cmdUtil.cmdInit({
 const midiFilePaths = [];
 
 tiptoe(
-	function runFluidSynth()
+	function ensureLoaded()
 	{
+		runUtil.run("fluidsynth", ["--audio-driver=file", "--quiet", argv.inputFilePath], {silent : true, "ignore-stderr" : true, inputData : "fonts\nquit"}, this);
+	},
+	function runFluidSynth(fluidSynthRaw)
+	{
+		if(!fluidSynthRaw.includes(path.basename(argv.inputFilePath)))
+		{
+			console.error("Failed to load soundfont into FluidSynth.");
+			return this.finish();
+		}
+
 		runUtil.run("fluidsynth", ["--audio-driver=file", "--quiet", argv.inputFilePath], {silent : true, "ignore-stderr" : true, inputData : "inst 1\nquit"}, this);
 	},
 	function writeMidiFiles(fluidSynthRaw)

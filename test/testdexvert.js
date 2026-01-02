@@ -444,6 +444,7 @@ const FLEX_DIFF_FILES = [
 
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
+	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/,
 	/music\/ay\/emul\.(dragonslair2|gliderrider)$/
 ];
@@ -480,12 +481,13 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/other\/db2Bind\/QEDBM03\.BN$/, "audio", "mp3"],
 	[/text\/anjutaProject\/.*\.prj$/, "text", "txt"],
-	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
-	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],
 	[/text\/forthSource\/.*\.txt$/i, "text", "txt"],
+	[/text\/hpME10Database\/COGWHEEL\.txt$/, "text", "txt"],
+	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/playmationAction\/.*\.txt$/i, "text", "txt"],
 	[/text\/playmationSpine\/.*\.txt$/i, "text", "txt"],
+	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 	[/video\/avi\/(clip_42|House)\.avi$/, "audio", "aviAudio"],
 
@@ -572,6 +574,10 @@ const ALLOW_PROCESS_FAILURES = {
 	archive :
 	{
 		xpackLZCOMPacked : ["PC (1).COM"]
+	},
+	audio :
+	{
+		soundFont2 : ["aurealgm"]
 	},
 	document :
 	{

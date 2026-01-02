@@ -25,7 +25,7 @@ export class diskExpressSFX extends Program
 	};
 	bin       = r => (r.floppyType ? `D:\\IN\\${r.inFile({backslash : true})}` : "ECHO");
 	args      = () => ["A:"];
-	msdosData = r => ({floppy : {filePath : path.join(r.cwd, "floppy.img"), type : r.floppyType}, keys : [xu.SECOND*7, "y", xu.SECOND, "Return"], timeout : xu.MINUTE*5});
+	msdosData = r => ({floppy : {filePath : path.join(r.cwd, "floppy.img"), type : r.floppyType}, keys : [xu.SECOND*10, "y", xu.SECOND, "Return"], timeout : xu.MINUTE*5});
 	postExec  = async r =>
 	{
 		if(r.floppySum===await hashUtil.hashFile("blake3", r.floppyFilePath))

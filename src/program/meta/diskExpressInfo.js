@@ -6,17 +6,20 @@ import {path} from "std";
 export class diskExpressInfo extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
-	unsafe  = true;
 	loc     = "dos";
+	unsafe  = true;
+	bin     = "SCRDUMP.COM";
 	flags   = {
-		outDirname : "Dirname where the DEXVERTL.TXT file should be output, overrides default"
+		outDirname : "Dirname where the DEXVERTI.TXT file should be output, required to work right"
 	};
-	pre      = async r => await fileUtil.writeTextFile(path.join(r.cwd, "DOSEXE.bat"), ["@ECHO OFF", `${r.inFile()} /d > ..\\${r.flags.outDirname || r.f.outDir.base}\\DEXVERTI.TXT`, "EXIT"].join("\n"));
-	bin      = "DOSEXE.bat";
-	dosData  = () => ({runIn : "absolute", timeout : xu.SECOND*30});
+	dosData = r => ({
+		preExec  : `${r.inFile()} /d`,
+		postExec : [`COPY SCREEN.TXT ${r.flags.outDirname.toUpperCase()}\\DEXVERTI.TXT`, `DEL SCREEN.TXT`],
+		timeout  : xu.SECOND*30
+	});
 	postExec = async r =>
 	{
-		const infoFilePath = path.join(r.f.root, r.flags.outDirname || r.f.outDir.base, "DEXVERTI.TXT");
+		const infoFilePath = path.join(r.f.root, r.flags.outDirname, "DEXVERTI.TXT");
 		if(!await fileUtil.exists(infoFilePath))
 		{
 			r.xlog.warn`Failed to find DEXVERTI.TXT from diskExpressInfo program: ${infoFilePath}`;

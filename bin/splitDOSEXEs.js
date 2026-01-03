@@ -33,7 +33,6 @@ const encodeUint16 = v =>
 
 while(reader.remaining())
 {
-	xlog.info`${reader.pos}`;
 	const signature = reader.str(2);
 	if(signature!=="MZ")
 	{

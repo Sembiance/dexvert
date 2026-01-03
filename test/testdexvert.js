@@ -227,6 +227,10 @@ const SUPPORTING_FILES = {
 		printMasterShape : /\.sdr$/i,
 		quakeGFXLMP      : /palette\.lmp$/
 	},
+	music :
+	{
+		musicProTracker : /VENTURE\.D15$/
+	},
 	poly :
 	{
 		keyCAD3DModel    : /\.fnt$/i,

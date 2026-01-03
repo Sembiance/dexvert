@@ -57,11 +57,12 @@ const DEXMAGIC_CHECKS = {
 	"WAD2 file"                      : [{offset : 0, match : "WAD2"}],
 
 	// audio
-	"AKAI Sample"           : [{offset : 0, match : [0x03, 0x01, 0x3C]}],
-	"EA BNK Audio"          : [{offset : 0, match : "BNKl"}],
-	"GameCube Music (IDSP)" : [{offset : 0, match : "IDSP"}],
-	"KORG File"             : [{offset : 0, match : "KORG"}],
-	"RedSpark Audio"        : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
+	"208 Audio (Ocean Games)" : [{offset : 0xCC, match : [0x1F, 0x7D, 0x98, 0x4D]}],
+	"AKAI Sample"             : [{offset : 0, match : [0x03, 0x01, 0x3C]}],
+	"EA BNK Audio"            : [{offset : 0, match : "BNKl"}],
+	"GameCube Music (IDSP)"   : [{offset : 0, match : "IDSP"}],
+	"KORG File"               : [{offset : 0, match : "KORG"}],
+	"RedSpark Audio"          : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
 
 	// document
 	"ASCOM"                                   : [{offset : 0, match : [0xE9, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x8B, 0xFC, 0x36, 0x8B, 0x2D, 0x83, 0xC4, 0x02, 0x81, 0xED]}],
@@ -280,7 +281,7 @@ const DEXMAGIC_CHECKS = {
 const DEXMAGIC_CUSTOMS = [
 	// sometimes a .bin file can be valid but not match any magics at all, but format iso doesn't match on .bin extension due to how common it is
 	// So we just do a quick check to see if we have a corresponding .cue file in the same dir
-	async function checkBinCue(r)
+	async function bincue(r)
 	{
 		if(r.f.input.ext?.toLowerCase()!==".bin")
 			return;
@@ -291,8 +292,82 @@ const DEXMAGIC_CUSTOMS = [
 				return "BIN with CUE";
 		}
 	},
+
+	async function diskExpressSFX(r)
+	{
+		if(r.f.input.size<(28+512))
+			return;
+
+		const exeHeader = await fileUtil.readFileBytes(r.f.input.absolute, 6);
+		if(!["MZ", "ZM"].includes(exeHeader.getString(0, 2)))
+			return;
+
+		const lastPageBytes = exeHeader.getUInt16LE(2);
+		const numPages = exeHeader.getUInt16LE(4);
+		const diskExpressOffset = (((numPages-1)*512)+(lastPageBytes || 512))+4;
+		if(r.f.input.size<(diskExpressOffset+512))
+			return;
+
+		const diskExpressHeader = await fileUtil.readFileBytes(r.f.input.absolute, 2, diskExpressOffset);
+		if(diskExpressHeader.getString(0, 2)!=="AS")
+			return;
+
+		return "Disk Express SFX";
+	},
 	
-	async function checkInstallIt(r)
+	async function fmTownsSND(r)
+	{
+		if(r.f.input.size<33)
+			return;
+
+		// logic from ggxsnd-0.8.1/snd.h and checkSndHeader in snd_file.c (sandbox/app/)
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 32);
+		if(header.getUInt32LE(12)!==(r.f.input.size-32))
+			return;
+		
+		const rate = header.getUInt16LE(24);
+		if(rate>2024)
+			return;
+
+		if(header.getUInt8(29)!==0 || header.getUInt16LE(30)!==0)
+			return;
+		
+		return "FM-Towns SND";
+	},
+
+	async function genericFORMIFF(r)
+	{
+		if(r.f.input.size<12)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
+		if(header.getString(0, 4)!=="FORM")
+			return;
+
+		const formType = header.getString(8, 4);
+		if(!(/^[ -~]{4}$/).test(formType))
+			return;
+
+		return `Generic IFF FORM file ${formType}`;
+	},
+
+	async function genericRIFF(r)
+	{
+		if(r.f.input.size<12)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
+		if(header.getString(0, 4)!=="RIFF")
+			return;
+
+		const riffType = header.getString(8, 4);
+		if(!(/^[ -~]{4}$/).test(riffType))
+			return;
+
+		return `Generic RIFF file ${riffType}`;
+	},
+
+	async function installIt(r)
 	{
 		if(r.f.input.size<43)
 			return;
@@ -302,7 +377,7 @@ const DEXMAGIC_CUSTOMS = [
 			return "InstallIt! compressed file";
 	},
 
-	async function checkMacromediaProjector(r)
+	async function macromediaProjector(r)
 	{
 		if(r.f.input.size<8)
 			return;
@@ -325,59 +400,7 @@ const DEXMAGIC_CUSTOMS = [
 		return "Macromedia Projector (alt)";
 	},
 
-	async function checkFMTownsSND(r)
-	{
-		if(r.f.input.size<33)
-			return;
-
-		// logic from ggxsnd-0.8.1/snd.h and checkSndHeader in snd_file.c (sandbox/app/)
-		const header = await fileUtil.readFileBytes(r.f.input.absolute, 32);
-		if(header.getUInt32LE(12)!==(r.f.input.size-32))
-			return;
-		
-		const rate = header.getUInt16LE(24);
-		if(rate>2024)
-			return;
-
-		if(header.getUInt8(29)!==0 || header.getUInt16LE(30)!==0)
-			return;
-		
-		return "FM-Towns SND";
-	},
-
-	async function checkGenericFORMIFF(r)
-	{
-		if(r.f.input.size<12)
-			return;
-
-		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
-		if(header.getString(0, 4)!=="FORM")
-			return;
-
-		const formType = header.getString(8, 4);
-		if(!(/^[ -~]{4}$/).test(formType))
-			return;
-
-		return `Generic IFF FORM file ${formType}`;
-	},
-
-	async function checkGenericRIFF(r)
-	{
-		if(r.f.input.size<12)
-			return;
-
-		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
-		if(header.getString(0, 4)!=="RIFF")
-			return;
-
-		const riffType = header.getString(8, 4);
-		if(!(/^[ -~]{4}$/).test(riffType))
-			return;
-
-		return `Generic RIFF file ${riffType}`;
-	},
-
-	async function checkVCard(r)
+	async function vCard(r)
 	{
 		if(r.f.input.size<11)
 			return;
@@ -393,7 +416,7 @@ const DEXMAGIC_CUSTOMS = [
 		return `vCard`;
 	},
 
-	async function checkWatcomInstallArchive(r)
+	async function watcomInstallArchive(r)
 	{
 		if(r.f.input.size<12)
 			return;
@@ -410,7 +433,7 @@ const DEXMAGIC_CUSTOMS = [
 		return "WATCOM Install Archive";
 	},
 
-	async function checkZPPacked(r)
+	async function zpPacked(r)
 	{
 		if(r.f.input.size<10)
 			return;

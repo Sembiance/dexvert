@@ -243,7 +243,6 @@ export default
 		repiPack                                    : {name : "RepiPack archive", ext : [".dat"], magic : ["RepiPack archive"]},
 		rohitCompressedData                         : {name : "Rohit compressed data", ext : [".tsi"], magic : ["Rohit compressed data"]},
 		rsCompressedArchive                         : {name : "RS compressed archive", magic : ["RS compressed archive"]},
-		sabDisketteUtilityDiskImage                 : {name : "SAB Diskette Utility disk image", ext : [".sdu"], magic : ["SAB Diskette Utility disk image"], notes : "Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh."},
 		samCoupeProDOSDiskImage                     : {name : "SAM Coupe Pro-DOS disk image", ext : [".dsk"], magic : ["SAM Coupe Pro-DOS disk image"]},
 		samDiskImage                                : {name : "SAm Disk image", ext : [".sad"], magic : ["SAm Disk image"]},
 		samDOSDiskImage                             : {name : "SamDOS disk image", ext : [".dsk"], magic : [/^SamDOS v\d bootable disk image/]},

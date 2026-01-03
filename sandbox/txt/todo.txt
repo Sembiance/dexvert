@@ -11,29 +11,6 @@
 * Several WAVs and other audio formats (where WAVs are extracted with foremost) don't work with sox_ng (the sox replacement)
   I've opened an issue about it: https://codeberg.org/sox_ng/sox_ng/issues/747
 
-* 16bit DOS Disk eXPress SFX disk image Executable (bad trid magic?): http://justsolve.archiveteam.org/wiki/Disk_Express
-	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX4.ZIP/w95-dsk4.exe
-	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX3.ZIP/w95-dsk3.exe
-	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX2.ZIP/w95-dsk2.exe
-	https://discmaster.textfiles.com/view/29659/ibm0410-0419/ibm0413.tar/ibm0413/DOD95FX1.ZIP/w95-dsk1.exe
-	https://discmaster.textfiles.com/view/43219/gigapak-2-for-os2-warp.iso/demos/xact32_1/xact32_1.exe
-	https://discmaster.textfiles.com/admin/item?itemid=29672
-	https://discmaster.textfiles.com/view/30068/wbiz0840-0849/wbiz0846.tar/wbiz0846/DOS7PWA1.ZIP/DISK1.EXE
-	https://discmaster.textfiles.com/admin/item?itemid=43152
-	https://discmaster.textfiles.com/admin/item?itemid=43531
-  Would need to figure out how to handle this. Maybe DOSBOX can be launched with a blank floppy inserted?
-  Then for the EXE versions it would just write to the floppy? And I'd have to have X versions of disk express for the non-exe ones?
-  If DOSBOX won't work, could maybe find a way to send an 'insert disk' command to 86Box, run the program, then eject the disk?
-  Need a deepFind agent for this one.   The agent should follow the detection logic on the just solve wiki
-
-* Add support for:
-	http://fileformats.archiveteam.org/index.php?title=SABDU
-	https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage
-
-* LOTS of new formats supported in librempeg: https://github.com/librempeg/librempeg/blob/master/Changelog
-  Last version os 08-10
-  Cyberflix sounds?: https://discmaster.textfiles.com/admin/item?itemid=43192
-
 * na_game_tool update: https://codecs.multimedia.cx/2025/12/na_game_tool-more-flicy-formats/
 
 * nihav updated from 06-10 to today:

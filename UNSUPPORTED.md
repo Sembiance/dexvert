@@ -85,6 +85,7 @@ Family/Format | Name | Extensions | Notes
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?format=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/dePackPacked](https://discmaster.textfiles.com/search?format=dePackPacked) | dePack Packed | .exe | 
 [archive/dfSeeDiskImage](https://discmaster.textfiles.com/search?format=dfSeeDiskImage) | DFSee disk image | .imz | 
+[archive/diskExpress](https://discmaster.textfiles.com/search?format=diskExpress) | [Disk Express](http://fileformats.archiveteam.org/wiki/Disk_Express) | .dxp | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskExpress/)
 [archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?format=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskIMageArchiverDiskImage/)
 [archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?format=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
 [archive/dismemberProtected](https://discmaster.textfiles.com/search?format=dismemberProtected) | Dismember EXE CRYPT Protected | .exe | 
@@ -248,7 +249,6 @@ Family/Format | Name | Extensions | Notes
 [archive/rlPackPacked](https://discmaster.textfiles.com/search?format=rlPackPacked) | RLPack Packed | .exe .dll | 
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?format=rohitCompressedData) | Rohit compressed data | .tsi | 
 [archive/rsCompressedArchive](https://discmaster.textfiles.com/search?format=rsCompressedArchive) | RS compressed archive |  | 
-[archive/sabDisketteUtilityDiskImage](https://discmaster.textfiles.com/search?format=sabDisketteUtilityDiskImage) | SAB Diskette Utility disk image | .sdu | Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh.
 [archive/samCoupeProDOSDiskImage](https://discmaster.textfiles.com/search?format=samCoupeProDOSDiskImage) | SAM Coupe Pro-DOS disk image | .dsk | 
 [archive/samDiskImage](https://discmaster.textfiles.com/search?format=samDiskImage) | SAm Disk image | .sad | 
 [archive/samDOSDiskImage](https://discmaster.textfiles.com/search?format=samDOSDiskImage) | SamDOS disk image | .dsk | 

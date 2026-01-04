@@ -27,5 +27,5 @@ export class zxtune123 extends Program
 			({suffix, newName, newExt}) => [newName, suffix, newExt]
 		]
 	};
-	chain = r => `ffmpeg[outType:wav] -> sox[maxDuration:${xu.MINUTE*10}]${r.flags.trimSilence ? "[trimSilence]" : ""}`;
+	chain = r => `ffmpeg[outType:wav] -> sox[type:wav][maxDuration:${xu.MINUTE*10}]${r.flags.trimSilence ? "[trimSilence]" : ""}`;
 }

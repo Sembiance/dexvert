@@ -6,5 +6,5 @@ export class psionVoice extends Format
 	ext          = [".prc"];
 	magic        = ["Psion Series 5 voice note", "Psion Record/EPOC voice audio", /^soxi: prc$/, /^Psion Series 5 Record file voice note/];
 	metaProvider = ["soxi"];
-	converters   = ["sox"];
+	converters   = ["sox[type:prc]"];
 }

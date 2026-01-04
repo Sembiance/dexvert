@@ -3269,6 +3269,7 @@ export default
 		plotter3DLight                           : {name : "Plotter3D Light", ext : [".light"], magic : ["Plotter3D Light"], weakMagic : true},
 		pocketAccessDatabase                     : {name : "Pocket Access database", magic : ["Pocket Access database"]},
 		polarSpellCheckerDictionary              : {name : "Polar SpellChecker dictionary", magic : ["Polar SpellChecker dictionary"]},
+		polygonMovieMakerScene                   : {name : "Polygon Movie Maker scene", ext : [".pmm"], magic : ["MikuMikuDance Polygon Movie Maker scene"]},
 		polyfilmPrefs                            : {name : "Polyfilm Preferences", ext : [".prf"], magic : ["Polyfilm Preferences"]},
 		ponyProgDeviceFile                       : {name : "PonyProg device file", magic : ["PonyProg device file"]},
 		popNOPCrunchedData                       : {name : "PopNOP crunched data", ext : [".nop", ".vrm"], magic : ["PopNOP crunched data"], weakMagic : true},

@@ -8,5 +8,5 @@ export class acm2wav extends Program
 	args      = r => [r.inFile()];
 	osData    = ({cwd : "c:\\out"});
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

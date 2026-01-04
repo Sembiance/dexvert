@@ -7,5 +7,5 @@ export class gsm extends Format
 	ext          = [".gsm"];
 	magic        = ["raw GSM (gsm)", /^soxi: gsm$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox"];	// ffmpeg[format:gsm][outType:mp3] also works, but it'll convert any ole .gsm file into garbage and sox handles all the file samples without converting garbage, so just use sox
+	converters   = ["sox[type:gsm]"];	// ffmpeg[format:gsm][outType:mp3] also works, but it'll convert any ole .gsm file into garbage and sox handles all the file samples without converting garbage, so just use sox
 }

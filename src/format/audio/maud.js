@@ -7,5 +7,5 @@ export class maud extends Format
 	ext          = [".maud"];
 	magic        = ["IFF data, MAUD MacroSystem audio", "IFF MacroSystem Audio", /^soxi: maud$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "awaveStudio"];
+	converters   = ["sox[type:maud]", "awaveStudio"];
 }

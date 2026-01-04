@@ -8,5 +8,5 @@ export class soundTool extends Format
 	magic          = ["SoundTool audio", /^soxi: sndt$/];
 	weakMagic      = true;
 	metaProvider   = ["soxi"];
-	converters     = ["sox"];
+	converters     = ["sox[type:sndt]"];
 }

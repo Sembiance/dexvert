@@ -7,5 +7,5 @@ export class wavPack extends Format
 	ext          = [".wv", ".wvc"];
 	magic        = ["WavPack Lossless Audio", "WavPack compressed audio correction data", "WavPack compressed audio", "audio/x-wavpack", "WavPack (wv)", /^soxi: wv$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "nihav[outType:mp3]"];
+	converters   = ["sox[type:wv]", "nihav[outType:mp3]"];
 }

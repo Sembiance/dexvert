@@ -27,5 +27,5 @@ export class sidplay2 extends Program
 			({r, suffix, newName, numFiles}, {songNum, ext}) => [newName, " ", songNum.padStart((r.flags.songCount || numFiles).toString().length, "0"), suffix, ext]
 		]
 	};
-	chain = "sox[trimSilence]";
+	chain = "sox[type:wav][trimSilence]";
 }

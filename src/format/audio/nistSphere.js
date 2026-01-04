@@ -6,5 +6,5 @@ export class nistSphere extends Format
 	ext          = [".sd"];
 	magic        = ["NIST SPHERE file", "NIST Sphere waveform audio", "NIST SPeech HEader REsources (nistsphere)", /^soxi: sph$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox"];
+	converters   = ["sox[type:sph]"];
 }

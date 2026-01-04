@@ -38,5 +38,5 @@ export class timidity extends Program
 	};
 
 	renameOut = true;
-	chain     = `sox[maxDuration:${xu.MINUTE*10}]`;
+	chain     = `sox[type:wav][maxDuration:${xu.MINUTE*10}]`;
 }

@@ -6,5 +6,5 @@ export class flankerSoundLibrary extends Format
 	ext            = [".sfx"];
 	forbidExtMatch = true;
 	magic          = ["Sound library / container", "Generic RIFF file SLIB"];
-	converters     = ["foremost -> sox"];
+	converters     = ["foremost -> sox[type:wav]"];
 }

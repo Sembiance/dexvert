@@ -7,5 +7,8 @@ export class amr extends Format
 	ext          = [".amr", ".3ga"];
 	magic        = ["Adaptive Multi-Rate Codec", "AMR (Adaptive Multi Rate) encoded audio", "Adaptive Multi-Rate Wideband ACELP codec", "audio/AMR", "audio/AMR-WB", "3GPP AMR (amr)", /^soxi: amr-[nw]b$/, /^fmt\/(356|954)( |$)/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[outType:mp3]"];
+	converters   = [
+		"sox",	// no type because it could be amr-nb or wmr-wb
+		"ffmpeg[outType:mp3]"
+	];
 }

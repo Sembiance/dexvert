@@ -8,5 +8,5 @@ export class ttaenc extends Program
 	args      = r => ["-d", r.inFile()];
 	cwd       = r => r.outDir();
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

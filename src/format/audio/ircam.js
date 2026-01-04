@@ -7,5 +7,5 @@ export class ircam extends Format
 	ext          = [".sf"];
 	magic        = ["IRCAM file", "IRCAM Sound Format audio", "Berkeley/IRCAM/CARL Sound Format (ircam)", /^soxi: sf$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox"];
+	converters   = ["sox[type:sf]"];
 }

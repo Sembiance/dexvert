@@ -9,7 +9,7 @@ export class amosbank extends Program
 	cwd              = r => r.outDir();
 	args             = r => [r.inFile()];
 	filenameEncoding = "iso-8859-1";	// AmigaOS uses this: http://lclevy.free.fr/adflib/adf_info.html#p54
-	chain            = "sox";
+	chain            = "sox[type:wav]";
 	renameOut        = {
 		alwaysRename : true,
 		regex        : /.+?(?<num>\.\d+)\.(?<name>.+)(?<ext>\.wav)$/,

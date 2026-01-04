@@ -7,5 +7,5 @@ export class maxisXA extends Format
 	ext          = [".xa"];
 	magic        = ["Maxis XA Audio", "RIFF Datei: unbekannter Typ 'CDXA'", "Generic RIFF file CDXA", "Maxis XA (xa)", /^soxi: xa$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "vgmstream", "zxtune123"];
+	converters   = ["sox[type:xa]", "vgmstream", "zxtune123"];
 }

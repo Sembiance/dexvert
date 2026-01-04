@@ -24,5 +24,5 @@ export class ayEmul extends Program
 			({newName}) => [newName]
 		]
 	};
-	chain = "sox";
+	chain = "sox[type:wav]";
 }

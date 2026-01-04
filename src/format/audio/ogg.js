@@ -8,5 +8,5 @@ export class ogg extends Format
 	magic        = ["OGG Vorbis audio", "Ogg data, Vorbis audio", "audio/x-vorbis+ogg", /^soxi: vorbis$/, /^fmt\/203( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="Ogg!" && macFileCreator==="Nox!") || (macFileType==="OggS" && macFileCreator==="hook");
 	metaProvider = ["soxi"];
-	converters   = ["sox"];
+	converters   = ["sox[type:vorbis]"];
 }

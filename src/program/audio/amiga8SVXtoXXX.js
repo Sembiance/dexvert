@@ -6,6 +6,6 @@ export class amiga8SVXtoXXX extends Program
 	unsafe    = true;
 	bin       = "vamos";
 	args      = r => [...Program.vamosArgs("8SVXtoXXX"), "INPUT", r.inFile(), "OUTPUT", "system:out.wav"];
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 	renameOut = true;
 }

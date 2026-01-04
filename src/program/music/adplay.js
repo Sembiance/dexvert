@@ -18,5 +18,5 @@ export class adplay extends Program
 	renameOut = true;
 
 	// we chain to ffmpeg first because due to the diskQuota we sometimes end up with malformed wav files that ffmpeg handles fine but sox doesn't
-	chain     = `ffmpeg[outType:wav] -> sox[maxDuration:${xu.MINUTE*10}]`;
+	chain     = `ffmpeg[outType:wav] -> sox[type:wav][maxDuration:${xu.MINUTE*10}]`;
 }

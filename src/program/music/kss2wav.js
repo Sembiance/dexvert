@@ -7,5 +7,5 @@ export class kss2wav extends Program
 	bin       = "kss2wav";
 	args      = async r => ["-p120", "-l0", "-n1", "-q1", `-o${await r.outFile("out.wav")}`, r.inFile()];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

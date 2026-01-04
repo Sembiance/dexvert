@@ -8,5 +8,5 @@ export class voc extends Format
 	magic        = ["Creative Voice audio", "Creative Labs voice data", "Creative Voice", /^soxi: voc$/, /^fmt\/1736( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="VOC " || (macFileType==="ovc " && macFileCreator==="BSnd");
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[format:voc][outType:mp3]"];
+	converters   = ["sox[type:voc]", "ffmpeg[format:voc][outType:mp3]"];
 }

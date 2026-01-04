@@ -8,5 +8,5 @@ export class flac extends Format
 	mimeType     = "audio/x-flac";
 	magic        = ["FLAC audio bitstream data", "FLAC lossless compressed audio", "FLAC (Free Lossless Audio Codec)", "FLAC audio data", "audio/flac", "raw FLAC (flac)", "Ogg data, FLAC audio", "audio/x-flac+ogg", "deark: flac", /^soxi: flac$/, /^fmt\/279( |$)/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[format:ogg][codec:flac][outType:mp3]"];
+	converters   = ["sox[type:flac]", "ffmpeg[format:ogg][codec:flac][outType:mp3]"];
 }

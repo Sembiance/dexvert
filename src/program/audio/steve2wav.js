@@ -8,5 +8,5 @@ export class steve2wav extends Program
 	args       = async r => Program.denoArgs(Program.binPath("steve2wav.js"), "--", r.inFile(), await r.outFile("out.wav"));
 	runOptions = ({env : Program.denoEnv()});
 	renameOut  = true;
-	chain      = "sox";
+	chain      = "sox[type:wav]";
 }

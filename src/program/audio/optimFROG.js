@@ -7,5 +7,5 @@ export class optimFROG extends Program
 	bin       = "OptimFROG_Win_x86_5100\\ofr.exe";
 	args      = async r => ["--decode", r.inFile(), "--output", await r.outFile("out.wav")];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

@@ -7,5 +7,5 @@ export class astridAACDEC extends Program
 	bin       = "c:\\dexvert\\astrid\\AACDEC.EXE";
 	args      = async r => [r.inFile(), await r.outFile("out.wav")];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

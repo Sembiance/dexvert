@@ -7,5 +7,5 @@ export class coreAudio extends Format
 	ext          = [".caf"];
 	magic        = ["CoreAudio Format", "Core Audio File", "Core Audio Format", "Apple CAF (Core Audio Format) (caf)", /^soxi: caf$/, /^fmt\/416( |$)/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[format:caf][outType:mp3]"];
+	converters   = ["sox[type:caf]", "ffmpeg[format:caf][outType:mp3]"];
 }

@@ -6,5 +6,5 @@ export class midiSampleDump extends Format
 	ext          = [".sds"];
 	magic        = ["MIDI Sample Dump"];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "awaveStudio"];
+	converters   = ["sox[type:sndfile]", "awaveStudio"];
 }

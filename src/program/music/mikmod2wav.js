@@ -8,5 +8,5 @@ export class mikmod2wav extends Program
 	bin       = "mikmod2wav";
 	args      = async r => ["--limitSeconds", "900", r.inFile(), await r.outFile("out.wav")];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

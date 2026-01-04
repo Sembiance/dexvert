@@ -12819,6 +12819,9 @@ Description: MPEG Layer 2/3 lossy audio compression
 Also handles: mp2 audio/mpeg
 Sample-rate restricted to: 8000 11025 12000 16000 22050 24000 32000 44100 48000
 
+Format: opus
+Description: Xiph.org's Opus lossy compression
+
 Format: sndfile
 Description: Pseudo format to use libsndfile
 Also handles: sds
@@ -12857,6 +12860,7 @@ Also handles: ogg
 
 Format: wv
 Description: Lossless, lossy, and hybrid audio compression
+
 
 
 

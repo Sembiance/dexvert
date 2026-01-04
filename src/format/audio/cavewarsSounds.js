@@ -7,5 +7,5 @@ export class cavewarsSounds extends Format
 	forbidExtMatch = true;
 	magic          = ["Cavewars sounds archive"];
 	weakMagic      = true;
-	converters     = ["foremost -> sox"];
+	converters     = ["foremost -> sox[type:wav]"];
 }

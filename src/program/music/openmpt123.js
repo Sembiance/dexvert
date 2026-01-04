@@ -10,5 +10,5 @@ export class openmpt123 extends Program
 	// openmpt123 often fails to produce a valid wav but does produce a 88 byte wav file of nothing
 	verify    = (r, dexFile) => dexFile.size!==88;
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

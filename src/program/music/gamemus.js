@@ -10,5 +10,5 @@ export class gamemus extends Program
 	bin       = "gamemus";
 	args      = async r => [...(r.flags.format ? ["-t", r.flags.format] : []), "-l", "0", "-w", await r.outFile("out.wav"), r.inFile()];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

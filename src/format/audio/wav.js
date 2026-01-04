@@ -13,5 +13,5 @@ export class wav extends Format
 	];
 	idMeta       = ({macFileType}) => [".WAV", "WAVE"].includes(macFileType);
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[format:wav][outType:mp3]", "awaveStudio"];
+	converters   = ["sox[type:wav]", "ffmpeg[format:wav][outType:mp3]", "awaveStudio"];
 }

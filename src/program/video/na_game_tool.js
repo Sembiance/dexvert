@@ -12,6 +12,6 @@ export class na_game_tool extends Program
 
 	bin       = "na_game_tool";
 	args      = async r => [...(r.flags.format ? ["-ifmt", r.flags.format] : []), r.inFile(), "-ofmt", r.flags.outType || "avi", await r.outFile(`out.${r.flags.outType || "avi"}`)];
-	chain     = r => (r.flags.outType==="wav" ? "sox" : "ffmpeg");
+	chain     = r => (r.flags.outType==="wav" ? "sox[type:wav]" : "ffmpeg");
 	renameOut = true;
 }

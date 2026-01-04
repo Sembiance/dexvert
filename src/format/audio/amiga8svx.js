@@ -35,6 +35,6 @@ export class amiga8svx extends Format
 			}
 		}
 
-		return [`ffmpeg[outType:mp3]${voiceRate ? `[rate:${voiceRate}]` : ""}`, "iff_convert -> sox"];	// The last entry used to be: , "amiga8SVXtoXXX[matchType:magic]"
+		return [`ffmpeg[outType:mp3]${voiceRate ? `[rate:${voiceRate}]` : ""}`, "iff_convert -> sox[type:wav]"];	// The last entry used to be: , "amiga8SVXtoXXX[matchType:magic]"
 	};
 }

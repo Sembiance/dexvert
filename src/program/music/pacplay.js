@@ -7,5 +7,5 @@ export class pacplay extends Program
 	bin       = "pacplay";
 	args      = async r => [r.inFile(), await r.outFile("out.wav")];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

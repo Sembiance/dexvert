@@ -7,5 +7,5 @@ export class ym2wav extends Program
 	bin       = "ym2wav";
 	args      = async r => [r.inFile(), await r.outFile("out.wav")];
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

@@ -7,5 +7,5 @@ export class sampleVision extends Format
 	ext          = [".smp"];
 	magic        = ["Sample Vision file", "Turtle Beach Sample Vision audio sample", "Sample Vision Audio (smp)", /^soxi: smp$/, /^fmt\/1560( |$)/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[libre][format:smp][outType:mp3]"];
+	converters   = ["sox[type:smp]", "ffmpeg[libre][format:smp][outType:mp3]"];
 }

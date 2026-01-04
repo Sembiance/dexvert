@@ -8,5 +8,5 @@ export class rkau extends Program
 	args      = r => [r.inFile()];
 	cwd       = r => r.outDir();
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

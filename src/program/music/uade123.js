@@ -14,5 +14,5 @@ export class uade123 extends Program
 	// uade often fails to produce a valid wav but does produce a 68 byte wav file of nothing
 	verify    = (r, dexFile) => dexFile.size!==68;
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

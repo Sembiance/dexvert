@@ -45,8 +45,8 @@ export class awaveStudio extends Program
 
 			WaitForPID("Awave.exe", ${xu.MINUTE*5})`
 	});
-	chain = "sox";
-	renameOut      = {
+	chain     = "sox";	// no type because I can't guarantee awave will produce a wav file every time
+	renameOut = {
 		alwaysRename : true,
 		regex        : /in - (?:(?:in (?<num>\d+))|(?<name>.+))(?<ext>\.wav)$/,		// either in - NAME.wav  or  in - in - 33.wav
 		renamer      :

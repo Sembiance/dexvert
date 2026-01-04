@@ -7,5 +7,5 @@ export class avr extends Format
 	ext          = [".avr"];
 	magic        = [/^Audio Visual Research (file|sample)/, "AVR (Audio Visual Research) (avr)", /^soxi: avr$/];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[outType:mp3]"];
+	converters   = ["sox[type:avr]", "ffmpeg[outType:mp3]"];
 }

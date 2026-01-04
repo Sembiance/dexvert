@@ -6,5 +6,5 @@ export class doomEternalSound extends Format
 	ext            = [".sfx", ".snd"];
 	forbidExtMatch = true;
 	magic          = ["Doom Eternal Sound"];
-	converters     = ["foremost -> sox"];
+	converters     = ["foremost -> sox[type:wav]"];
 }

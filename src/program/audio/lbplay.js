@@ -10,5 +10,5 @@ export class lbplay extends Program
 	cwd       = r => r.outDir();
 	dosData   = () => ({runIn : "out"});
 	renameOut = true;
-	chain     = "sox";
+	chain     = "sox[type:wav]";
 }

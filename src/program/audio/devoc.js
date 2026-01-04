@@ -9,5 +9,5 @@ export class devoc extends Program
 	cwd           = r => r.outDir();
 	mirrorInToCWD = true;
 	renameOut     = true;
-	chain         = "sox";
+	chain         = "sox[type:wav]";
 }

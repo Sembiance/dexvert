@@ -9,5 +9,5 @@ export class eupplay extends Program
 	args       = async r => ["-d", "1", "-o", await r.outFile("out.wav"), r.inFile()];
 	runOptions = ({env : {SDL_AUDIODRIVER : "disk"}});
 	renameOut  = true;
-	chain      = "sox";
+	chain      = "sox[type:wav]";
 }

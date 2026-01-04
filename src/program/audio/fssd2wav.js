@@ -8,5 +8,5 @@ export class fssd2wav extends Program
 	args       = r => Program.denoArgs(Program.binPath("fssd2wav.js"), "--", r.inFile(), r.outDir());
 	runOptions = ({env : Program.denoEnv()});
 	renameOut  = true;
-	chain      = "sox";
+	chain      = "sox[type:wav]";
 }

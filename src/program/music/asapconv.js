@@ -13,5 +13,5 @@ export class asapconv extends Program
 			({suffix, newName, numFiles}, {songNum, ext}) => [newName, " ", songNum.padStart(numFiles.toString().length, "0"), suffix, ext]
 		]
 	};
-	chain = "sox";
+	chain = "sox[type:wav]";
 }

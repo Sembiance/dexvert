@@ -19,8 +19,9 @@ export class mov extends Format
 	metaProvider = ["mplayer"];
 	converters   = dexState => [
 		"ffmpeg", "nihav",
+		"nihav[fixedFrameRate:15]",	// this handles certain variable-rate files like mov/Hangman Movie  (see: https://codecs.multimedia.cx/2025/09/new-obscure-formats/comment-page-1/)
 		(dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"),
-		...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"] : [])
+		...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"].map(v => `${v}[matchType:magic]`) : [])
 	];
 	notes = xu.trim`
 		So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents.

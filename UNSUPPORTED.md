@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,021)
+# Unsupported File Formats (4,020)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (317)
+## Archive (316)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -310,7 +310,6 @@ Family/Format | Name | Extensions | Notes
 [archive/winDupeDiskImage](https://discmaster.textfiles.com/search?format=winDupeDiskImage) | WinDupe disk image | .wdf | 
 [archive/wizardryBootstrapDiskImage](https://discmaster.textfiles.com/search?format=wizardryBootstrapDiskImage) | Wizardry bootstrap disk image | .dsk | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?format=wordPerfectInstallArchive) | WordPerfect install archive |  | 
-[archive/wozDiskImage](https://discmaster.textfiles.com/search?format=wozDiskImage) | WOZ disk image | .woz | 
 [archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?format=wwarpDiskImage) | WWarp Disk Image | .wwp | 
 [archive/x64DiskImage](https://discmaster.textfiles.com/search?format=x64DiskImage) | X64 Disk Image | .x64 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/x64DiskImage/)
@@ -328,7 +327,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (75)
+## Audio (74)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -404,7 +403,6 @@ Family/Format | Name | Extensions | Notes
 [audio/dvsm](https://discmaster.textfiles.com/search?format=dvsm) | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
 [audio/wipeoutSoundEffects](https://discmaster.textfiles.com/search?format=wipeoutSoundEffects) | Wipeout sound effects | .fx0 .fx1 .fx2 .fx3 .fx4 .fx5 .fx6 .fx7 | 
 [audio/wonderSwanWSR](https://discmaster.textfiles.com/search?format=wonderSwanWSR) | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
-[audio/yamahaSMAF](https://discmaster.textfiles.com/search?format=yamahaSMAF) | [Yamaha Synthetic Music Mobile Application Format](https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF) | .mmf | [1 sample file](https://sembiance.com/fileFormatSamples/audio/yamahaSMAF/)
 [audio/zyxelVoice](https://discmaster.textfiles.com/search?format=zyxelVoice) | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fileFormatSamples/audio/zyxelVoice/)
 
 
@@ -1186,7 +1184,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,734)
+## Other (2,735)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2912,6 +2910,7 @@ Family/Format | Name | Extensions | Notes
 [other/opcodeVisionProject](https://discmaster.textfiles.com/search?format=opcodeVisionProject) | Opcode Vision project | .vsn | 
 [other/openMediaFrameworkInterchange](https://discmaster.textfiles.com/search?format=openMediaFrameworkInterchange) | Open Media Framework Interchange | .omf | 
 [other/openCanvasEventData](https://discmaster.textfiles.com/search?format=openCanvasEventData) | OpenCanvas event data | .oes .ca4 | 
+[other/openCTM3DMesh](https://discmaster.textfiles.com/search?format=openCTM3DMesh) | OpenCTM 3D mesh | .ctm | 
 [other/openFstBinaryData](https://discmaster.textfiles.com/search?format=openFstBinaryData) | OpenFst binary data | .far .fst | 
 [other/openOfficeTypeLibraryDatabase](https://discmaster.textfiles.com/search?format=openOfficeTypeLibraryDatabase) | OpenOffice/LibreOffice type library database (UNOIDL) | .rdb | 
 [other/openTTDCompressedData](https://discmaster.textfiles.com/search?format=openTTDCompressedData) | OpenTTD Compressed Data | .scn .dat .sav | 

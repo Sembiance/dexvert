@@ -3,7 +3,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse, base64Encode} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../src/dexUtil.js";
+import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE} from "../src/dexUtil.js";
 import {ANSIToHTML} from "thirdParty";
 import {mkWeblink} from "./testUtil.js";
 
@@ -668,7 +668,7 @@ const UNPROCESSED_ALLOW_NO_IDS = [
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath("/mnt/dexvert/test", "_dextest");
 await Deno.mkdir(DEXTEST_ROOT_DIR, {recursive : true});
 
-const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*0.60);
+const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*(DEV_MACHINE ? 0.30 : 0.60));
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};

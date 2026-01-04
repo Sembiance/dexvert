@@ -293,6 +293,33 @@ const DEXMAGIC_CUSTOMS = [
 		}
 	},
 
+	async function binkEXE(r)
+	{
+		if(r.f.input.size<512)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 512);
+		if(header.getString(0, 2)!=="MZ")
+			return;
+
+		const peHeaderOffset = header.getUInt32LE(0x3C);
+		if((peHeaderOffset+24)>512 || header.getString(peHeaderOffset, 2)!=="PE")
+			return;
+
+		const lastSecMetaOff = (peHeaderOffset+24+header.getUInt16LE(peHeaderOffset+20))+((header.getUInt16LE(peHeaderOffset+6)-1)*40)+16;
+		if((lastSecMetaOff+8)>r.f.input.size)
+			return;
+
+		const sectionHeader = await fileUtil.readFileBytes(r.f.input.absolute, 8, lastSecMetaOff);
+		const bikiStartOffset = sectionHeader.getUInt32LE(0) + sectionHeader.getUInt32LE(4);
+
+		if((bikiStartOffset+4)>r.f.input.size)
+			return;
+			
+		if((await fileUtil.readFileBytes(r.f.input.absolute, 4, bikiStartOffset)).getString(0, 4)==="BIKi")
+			return "BinkEXE";
+	},
+
 	async function diskExpressSFX(r)
 	{
 		if(r.f.input.size<(28+512))

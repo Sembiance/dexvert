@@ -13,7 +13,7 @@ export class sox extends Program
 		endianness  : "Input endianness. Valid: little || big.",
 		maxDuration : "Trim output file, limiting to maxDuration",
 		rate        : "Input sampling rate",
-		type        : "Input file type. Run `man soxformat` for a list",
+		type        : `Input file type. For list run: sox --help-format all | grep -vP "^\s|(Reads|Writes):"`,	// eslint-disable-line no-useless-escape
 		trimSilence : "Trim silence from the end"
 	};
 

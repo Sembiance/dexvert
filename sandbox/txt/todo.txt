@@ -11,38 +11,6 @@
 * Several WAVs and other audio formats (where WAVs are extracted with foremost) don't work with sox_ng (the sox replacement)
   I've opened an issue about it: https://codeberg.org/sox_ng/sox_ng/issues/747
 
-* na_game_tool update: https://codecs.multimedia.cx/2025/12/na_game_tool-more-flicy-formats/
-
-* nihav updated from 06-10 to today:
-	https://git.nihav.org/?p=nihav.git;a=summary
-	QPEG DVC Supported now *.dvc in:
-		https://discmaster.textfiles.com/browse/42826/Inside%20Multimedia%20Extra%2001-1995%20(DE)%20(1995)%20(TRONIC-Verlag)/imme0195.iso/share/qpeg
-
-* Ancient new version:
-	Added Bytekiller & Clones (ANC, JEK)
-	Added JAMPacker
-	Added PMC
-	Added Pack-Ice
-
-* AppleCommander now supports:
-	WOZ
-
-* From discord: I just realized discmaster handles detection of yamaha SMAF files, but doesn't actually parse them apart into their elements
-	they're meant for use with 2000s era cell phones, for ringtones, images, etc in many formats
-	search for .mmf files of type 'audio'
-	iirc the ADPCM format in here is yamaha adpcm, which ffmpeg can decode, but they can also contain mp3 as well as an MML format for simple beep ringtones
-	and also FM synthesis ringtones
-  See PDF: sandbox/wip/SMAF3.06e.pdf
-
-* Since updating gimp, now all layers are flattened and exported. This means image/gimpAnimatedBrush has them on top of another
-  Should add an option to gimp program and script to 'seperateLayers' that will make multiple output images per layer
-  Don't do this for all formats, since in several cases a simple flattening is the best course of action
-
-* Figure out how to extract the bink/smacker videos: https://discmaster.textfiles.com/browse/36350/EXE_7.ISO/Video
-  https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
-  sandbox/app/radTools/ has some tools that in theory you can use to extract, but it didn't work with the files I tested
-  MAYBE this tool can do it: https://www.zeus-software.com/downloads/xripper
-
 * Consider adding 'type' to all uses of "sox" in order to tighten things up a bit.
   Would want to run full dexdrone10 test suite before AND after
 

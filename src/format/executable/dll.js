@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_WINDUMP_META_KEYS} from "../../program/meta/winedump.js";
 
 const BAD_FILENAMES_TO_SKIP_ENTIRELY =
 [
@@ -27,7 +28,7 @@ export class dll extends Format
 	];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="iDLL" && macFileCreator==="CWIE";
 	priority     = this.PRIORITY.LOW;
-	metaProvider = ["winedump"];
+	metaProvider = ["winedump", "exiftool"];
 
 	// We throw DLLs at deark and 7z which can often extract various embedded cursors, icons and images
 	converters = dexState =>
@@ -39,7 +40,7 @@ export class dll extends Format
 			return [];
 		}
 
-		return (Object.keys(dexState.meta).length>0 ? [
+		return (Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS) ? [
 			// first make sure there it's not a Projector file with a director file hidden in it, then we want to extract it for sure
 			"director_files_extract",
 
@@ -49,7 +50,7 @@ export class dll extends Format
 	};
 	post = dexState =>
 	{
-		if(Object.keys(dexState.meta).length>0)
+		if(Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS))
 			dexState.processed = true;
 	};
 }

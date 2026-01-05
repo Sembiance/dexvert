@@ -1,5 +1,17 @@
 import {Program} from "../../Program.js";
 
+const KEY_VAL_HEADERS = ["fileheader", "dosimage"];
+const ARRAY_HEADERS = ["optionalheader32bit", "datadirectory"];
+const NUMS =
+[
+	"bytesOnLastPage", "numberOfPages", "relocations", "sizeOfHeader", "minExtraParagraphs", "maxExtraParagraphs", "overlayNumber", "relocationFile",	// EXE
+	"autoDataSegment", "numberOfSegments", "numberOfModrefs"	// DLL
+];
+const HEX_NUMS = ["offsetToExtHeader"];
+const ARRAY_SUBCATS = ["characteristics"];
+
+export const _WINDUMP_META_KEYS = [...KEY_VAL_HEADERS, ...ARRAY_HEADERS];
+
 export class winedump extends Program
 {
 	website = "https://www.winehq.org/";
@@ -12,21 +24,12 @@ export class winedump extends Program
 		let category = null;
 		let subcat = null;
 
-		const KEY_VAL_HEADERS = ["fileheader", "dosimage"];
-		const ARRAY_HEADERS = ["optionalheader32bit", "datadirectory"];
-		const NUMS =
-		[
-			"bytesOnLastPage", "numberOfPages", "relocations", "sizeOfHeader", "minExtraParagraphs", "maxExtraParagraphs", "overlayNumber", "relocationFile",	// EXE
-			"autoDataSegment", "numberOfSegments", "numberOfModrefs"	// DLL
-		];
-		const HEX_NUMS = ["offsetToExtHeader"];
-		const ARRAY_SUBCATS = ["characteristics"];
 		r.stdout.trim().split("\n").forEach(line =>
 		{
-			const lineCat = line.trimChars(":").trim().strip(" ()").toLowerCase();
-			if([...KEY_VAL_HEADERS, ...ARRAY_HEADERS].includes(lineCat))
+			const lineCat = line.trimChars(" :").strip(" ()").toLowerCase();
+			if(_WINDUMP_META_KEYS.includes(lineCat))
 			{
-				category = line.trimChars(" :").strip(" ()").toLowerCase();
+				category = lineCat;
 				subcat = null;
 			}
 			else if(category)

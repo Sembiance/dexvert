@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_WINDUMP_META_KEYS} from "../../program/meta/winedump.js";
 
 const _INSTALLER_MAGICS = [
 	// installers: These actually do convert ok already with things like cmdTotal or other programs below
@@ -52,11 +53,11 @@ export class exe extends Format
 		..._INSTALLER_MAGICS
 	];
 	priority     = this.PRIORITY.LOW;
-	metaProvider = ["winedump"];
+	metaProvider = ["winedump", "exiftool"];
 
 	pre = dexState =>
 	{
-		// If we have meta from winedump and it's a DLL file, then delete the meta which will cause no converters to run
+		// If we have meta from winedump and it's a DLL file, then delete the meta which will cause no converters to run as an exe format
 		if((dexState.meta?.fileheader?.characteristics || []).includes("DLL"))
 			Object.clear(dexState.meta);
 	};
@@ -64,7 +65,7 @@ export class exe extends Format
 	// We throw MSDOS/Win EXESs at various programs to try and get something useful out of them like embedded director files, cursors, icons, images, etc
 	converters = dexState =>
 	{
-		if(!Object.keys(dexState.meta).length)
+		if(!Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS))
 			return [];
 		
 		const r= [
@@ -90,7 +91,7 @@ export class exe extends Format
 
 	post = dexState =>
 	{
-		if(Object.keys(dexState.meta).length>0)
+		if(Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS))
 			dexState.processed = true;
 	};
 }

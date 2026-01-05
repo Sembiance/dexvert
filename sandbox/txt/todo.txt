@@ -6,27 +6,44 @@
 
 * Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
 
-* Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
-
 * Several WAVs and other audio formats (where WAVs are extracted with foremost -> sox) don't work with sox_ng (the sox replacement)
   I've opened an issue about it: https://codeberg.org/sox_ng/sox_ng/issues/747
 
-* Use exiftool to get CompanyName, ProductVersion, Comments, and other fields from formats: exe, dll, etc.
-  Store this as meta info. Make sure to update injest/phase/phase4.js and ensure this gets stored into textContent
-  Then upload SOME of these to item #7 and reprocess and try searching for it, make sure it can find them: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
-  Write a script that can go and get this data and update the WebDB file and update the index.jsonl file and update elastic
-  It'll go as "content" 
-  Targeted so it'll do a paginated elastic search for the target formats, run on discmaster2 server the exiftool, insert the data
-  Use an 'agentpool' of course.
-  Also make this fairly 'generic' or provide 'helpers' for both the paginated search (which is similar to deepfind kinda)
-  but also helpers for updating webdb, the index.jsonl for the given fileid and also the elastic entry too
+* Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* Using the above now inserted data, with format 'exe' selected, search for content that is likely a bink/smacker video
-  Also these: https://discmaster.textfiles.com/search?b3sum=efd36ee62c586ea4181ed14edf8d75ff221708751cc0895a74ca59e95bc0d40e
-  And finally create the code that can do 'targeted' reprocessing of files. It's time to do it.
 
-* Create a way to launch an installer in winxp or something in QEMU, run the installer (so autoit is installed to help) then shutdown the system, extract the disk drive image and compare the files and use that as the output:
+/---------------\
+| High Priority |
+\---------------/
+* archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc progrmatically connect to the VNC port and automate it
+  So via code it would send keyboard and mouse clicks at various coordinates.
+  Maybe the installer could auto launch with something like: https://macintoshgarden.org/apps/oneclick
+  MAYBE I can get away with doing this without scraping the video, but my hunch is I'll need to scrape video to some degree.
+  After it's installed, can shutdown the mac, extract all files from 'before' and 'after' HD image and keep any NEWLY CREATED files
+  May need several different mac emulatators for different MacOS versions (see documents/dev/macos.txt for emulators)
+  Would likely also want to have certain extras pre-installed like Quicktime, etc
+  Probably want to get 1 installer working, installing any pre-requisites and then do another and another and another
+  Along the way updating the original HD with any new pre-requisites needed
+  Other MacOS installers to target in a similar way:
+	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc
+  OLD NOTES FOR THIS FORMAT:
+	Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
+	http://discmaster.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver
+	I started it in ~/bin/unVISEInstaller.js based on this info: https://pastebin.com/GwQYz2gG
+	Also found: https://github.com/habnabit/delvmod/wiki/Installer_VISE
+	Both of those links I archived in sandbox/wip/installerVISE
+	But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
+	To help with this, I could install VISE and MAKE some very basic installers and reverse engineer what is produced:
+		https://macintoshgarden.org/apps/developer-vise-3
+		https://macintoshgarden.org/apps/installer-vise-601
+
+* After mac x11vnc support, add Aldus Persuasion 2 support (these v2 files won't open in anything other than v2 of the program, won't work in v3):
+	https://discmaster.textfiles.com/view/23575/Apple%20R&P%20Lib%20Internal%20v8.0.iso/3-Presentations/Apple%20Computer%20Inc./Apple%20Computer/Corporate%20Overview/Corporate%20Overview/Corporate%20Overview
+	https://macintoshgarden.org/apps/aldus-persuasion-212
+
+* Create a way to launch an installer in QEMU, run the installer (so autoit is installed to help) then shutdown the system, extract the disk drive image and compare the files and use that as the output:
   Will need a way to vnc into these 'while' running to debug of course
+  Essentially this 
   First, WISE installers: https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
   Second, figure out how to 'detect/find' these files better then go test on a TON of them until they all work
   Once working, reply on #discmaster textfiles to eintei that it's been solved and things will be reprocesed over time to handle these
@@ -40,16 +57,14 @@
   Also can search for format 'exe' with a particular minimum MB to help identify additional installers (also of course look at exe.js for other installers to search for in detection field)
   Make sure I go and see if I can do all the 'Installer' marked sub-formats in exe.js, especially 'Setup-Specialist' which is also sample exe/SeTUp.eXe)
 
-* archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc programmatically scrape video, send keyboard inputs and mouse clicks. Can thus launch an emulator with the vise starting up automatically and clicking to install then doing a hard drive "diff" afterwards and finding any newly created files. Never sure exactly what versions of macos the vise will be compatible with, so may need different emulators with different hard drives and versions..also may need different oreindtalled software requisites like wuicktime, etc. Would just try one after another and keep fixing and adding support. See documents/dev/macos.txt for emulators
-  Other MacOS installers to target in a similar way:
-	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc
-* After mac x11vnc support, add Aldus Persuasion 2 support (these v2 files won't open in anything other than v2 of the program, won't work in v3):
-	https://discmaster.textfiles.com/view/23575/Apple%20R&P%20Lib%20Internal%20v8.0.iso/3-Presentations/Apple%20Computer%20Inc./Apple%20Computer/Corporate%20Overview/Corporate%20Overview/Corporate%20Overview
-	https://macintoshgarden.org/apps/aldus-persuasion-212
-
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
 * Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural
+
+* Improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
+  I could in theory "split" apart images generated by things like recoil2png, deark and imagemagick into something I can process into a bitmap font file
+  Additionally I could then reliably record into meta how many 'glyphs' are in each font using something like: ttfdump TREK.TTF | ag numGlyphs
+  Then this could be searched upon in discmaster with '# of <glyphs>'
 
 >>> Blender 5
 * Update to Blender 5. I could go with the binary verison (https://download.blender.org/release/Blender5.0/) or Gentoo.
@@ -87,9 +102,6 @@
 	- Look at other formats I'm using things like cinema4D/polytrans/etc for conversion and see if there is a blender addon that does a good job
 <<<
 
-/---------------\
-| High Priority |
-\---------------/
 * Look for fully transparent images from certain formats. I can detect this with:
 	magick input.png -alpha extract -format "alpha min=%[fx:minima], max=%[fx:maxima]\n" info:
   If min and max are the same it's either fully transparent (0) or fully opaque (1). In either case convert[removeAlpha] fixes it
@@ -123,15 +135,16 @@
   Then add 'detection' then figure out how to 'extract' the text, audio, images from within the output files.
   Then move to Video Works 2, Macromind Director, etc
 
-* Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
-  http://discmaster.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver
-  I started it in ~/bin/unVISEInstaller.js based on this info: https://pastebin.com/GwQYz2gG
-  Also found: https://github.com/habnabit/delvmod/wiki/Installer_VISE
-  Both of those links I archived in sandbox/wip/installerVISE
-  But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
-  To help with this, I could install VISE and MAKE some very basic installers and reverse engineer what is produced:
-	https://macintoshgarden.org/apps/developer-vise-3
-	https://macintoshgarden.org/apps/installer-vise-601
+* Add Classic MacOS support to "runIn", probably use this software: https://macintoshgarden.org/apps/oneclick
+  Probably spin up fresh mac instances each time with a custom HD image with the script and in/out folders pre-prepared
+  After it's working, I can then support 'Graphic Converter' and these formats:
+	These seem to be Disk Copy 5/6, which I may be able to extract/convert with: http://macintoshgarden.org/apps/disk-copy-6
+	  https://archive.org/details/GigaROM2.0.img   (https://discmaster.textfiles.com/admin/item?itemid=13263)
+	  https://archive.org/details/InfoMac5Disk1.img
+	  https://archive.org/details/InfoMac5Disk2.img
+	  https://archive.org/details/AppleTechnicianTraining.img
+	  https://archive.org/details/ClassicMacSurvivalKit
+	  http://discmaster.textfiles.com/view/5525/Apple%20Media%20Image%20Disc%20Vol.%205.smi.bin
 
 * Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
   https://discmaster.textfiles.com/search?format=folioDatabase
@@ -153,11 +166,6 @@
   I could do each subdir individually until I determine what is causing the crash. It can then be re-added to discmaster
 
 * Add support for QWK format: https://discmaster.textfiles.com/search?detection=Produced+by+Qmail&dedup=dedup
-
-* Improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
-  I could in theory "split" apart images generated by things like recoil2png, deark and imagemagick into something I can process into a bitmap font file
-  Additionally I could then reliably record ino meta how many 'glyphs' are in each font using something like: ttfdump TREK.TTF | ag numGlyphs
-  Then this could be searched upon in discmaster with '# of <glyphs>'
 
 * So dexvert still uses 7z from p7zip (instead of more modern 7zz from 7zip package). This is because p7zip handles i18n charsets better via the LANG env var
   The problem is that I've encountered a file test/sample/archive/zip/Masicsstory.zip that when extracted without LANG works fine, but when extracted with LANG=ja_JP is doesn't extract correctly
@@ -202,15 +210,6 @@
 | Low Priority |
 \--------------/
 * Potentially update GIMP from 2.99 to 3.00 (there are likely considerable python API changes, claude and perplexity both highlighted a lot, but I should find an actual blog post/changes news with actual API change info)
-
-* For anything dexvert uses "winedump" for, could get PE section names with objdump -h or llvm-objdump -h or something like that, probably added as another "meta" program.
-  Could look at `winedump -x` to see what other info is available, from non 32-bit exes like:  https://discmaster.textfiles.com/view/27509/aktief3.zip/aktief3/DOWNLOAD/SHOCKW/SHOCK16.EXE
-  Then update injest to grab these and add them to the detections field in a similar way that I do for Mac type/creator
-  Then test by reprocess item 1 or another test item (test with the exes first manually to see what shows)
-  Will need record down every itemid currently processing or already processed.
-  Then need to create code that can go through all of those itemids, find all identified exe files (including the other formstids like windowsSCR etc) and ensure the needed programs are installed on discmaster 2 and have it be able to get new detectin data and "append" it to that field in the index data file and then "update" the existing manticore entry and then test this manually on 1 or 2 items (backup the index files first!) and then remove that itemid from the list that needs processed.
-  Finally I'll need to process all items in the list. Need a way to multiprocess it, look at existing discmaster utils to see if I have anything similar
-  Lastly, see if any section names match 'matrosch' and then reply to: https://discord.com/channels/1140706605789368492/1140706606775025786/1355543937535836190
 
 * InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything.
   For example CABS from: https://archive.org/details/250TCF
@@ -405,17 +404,6 @@
 	To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
   Add format support:
 	archive/sparseImage
-
-* Add Classic MacOS support, probably use this software: https://macintoshgarden.org/apps/oneclick
-  Probably spin up fresh mac instances each time with a custom HD image with the script and in/out folders pre-prepared
-  After it's working, I can then support 'Graphic Converter' and these formats:
-	These seem to be Disk Copy 5/6, which I may be able to extract/convert with: http://macintoshgarden.org/apps/disk-copy-6
-	  https://archive.org/details/GigaROM2.0.img   (https://discmaster.textfiles.com/admin/item?itemid=13263)
-	  https://archive.org/details/InfoMac5Disk1.img
-	  https://archive.org/details/InfoMac5Disk2.img
-	  https://archive.org/details/AppleTechnicianTraining.img
-	  https://archive.org/details/ClassicMacSurvivalKit
-	  http://discmaster.textfiles.com/view/5525/Apple%20Media%20Image%20Disc%20Vol.%205.smi.bin
 
 * Add RISC OS support, with one of these emulators:
 	https://www.marutan.net/rpcemu/index.php

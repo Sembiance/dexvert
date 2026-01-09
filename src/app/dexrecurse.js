@@ -24,21 +24,14 @@ const EXTRA_SAMPLE_COUNT = {
 const EXCLUDED_SAMPLE_FORMATS = [
 	// too big
 	"archive/aaruDiskImage",
-	"archive/americanConquest2GameArchvie",
 	"archive/cdi",
 	"archive/cloopImage",
-	"archive/gameMakerStudioGameDataArchive",
-	"archive/h2oGameDataArchive",
-	"archive/haemimontGamesADGameDataArchive",
 	"archive/hemeraThumbnailsArchive",
 	"archive/iso",
 	"archive/mdf",
 	"archive/mdx",
 	"archive/mTropolisArchive",
 	"archive/nrg",
-	"archive/pacmanAdventuresInTimeGameArchive",
-	"archive/scraplandGameDataArchive",
-	"archive/sgaGameDataArchive",
 	"archive/sgiVolumeImage",
 	"archive/sgsDAT",
 	"archive/starTrekOnlineGameData",
@@ -84,11 +77,8 @@ const EXCLUDED_SAMPLE_FORMATS = [
 
 	// not interesting, or very application specific or have only come across a tiny repeated few over and over
 	"archive/activeMime",
-	"archive/bloodrayneGameDataArchive",
-	"archive/ciGAMESGameDataArchive",
 	"archive/corelMOSAIC",
 	"archive/impactILB",
-	"archive/mallTycoonGameDataArchive",
 	"archive/softdiskLibrary",
 	"archive/threeDUltraMiniGolfGameData",
 	"archive/warriorKingsGameData",
@@ -340,7 +330,7 @@ async function isNewSampleFile(dexformatid, sampleFilePath)
 	if((EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)>=(EXTRA_SAMPLE_COUNT[dexformatid] || DESIRED_SAMPLE_COUNT))
 		return false;
 
-	if(EXCLUDED_SAMPLE_FORMATS.includes(dexformatid) || dexformatid.endsWith("GameArchive"))
+	if(EXCLUDED_SAMPLE_FORMATS.includes(dexformatid) || dexformatid.endsWith("GameArchive") || dexformatid.endsWith("GameDataArchive"))
 		return false;
 
 	SAMPLE_PATH_SUMS[dexformatid] ||= await (EXISTING_SAMPLE_FILES[dexformatid] || []).parallelMap(async filename => await hashUtil.hashFile("blake3", path.join(import.meta.dirname, "..", "..", "test", "sample", dexformatid, filename)));

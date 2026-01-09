@@ -33,11 +33,13 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 // These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
 const FLAKY_CONVERTERS = [
 	"canvas5",
+	"cinema4D82",
 	"Crowbar & noesis",
 	"noesis",
 	"paintDotNet",
 	"pageMaker7",
 	"polyTrans64",
+	"quarkXPress6",
 	"vcdxrip"
 ];
 
@@ -256,6 +258,7 @@ const FLEX_SIZE_FORMATS = {
 		// sometimes the SHA1 sum differs
 		annaMarie              : 0.1,
 		dumpFile               : 0.1,
+		isoZipped              : 0.1,
 		prehistorikGameArchive : 0.1,
 
 		// different each time due to way it generates frames
@@ -344,6 +347,7 @@ const FLEX_SIZE_FORMATS = {
 		krisCard           : 25,
 		laughingDog        : 50,
 		naplps             : 25,
+		pcx2exeFDelPozo    : 25,
 		theDrawCOM         : 5,
 		threeDCK           : 20,
 

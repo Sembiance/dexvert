@@ -1,5 +1,5 @@
 // All of the formats in this file are game archive files that should just be handled with the 'gamearch' and/or 'gameextractor' programs and are not worthy of having their own file
-// If you end the formatid with 'GameArchive' then dexrecurse won't bubble up any warnings about needing more sample file formats
+// If you end the formatid with 'GameArchive' or 'GameDataArchive' then dexrecurse won't bubble up any warnings about needing more sample file formats
 // Each entry also has the following properties added:
 //	forbidExtMatch : true			(Only if ext is set)
 //	converters     : ["gameextractor"] or ["gamearch"] or ["gamearch", "gameextractor"]

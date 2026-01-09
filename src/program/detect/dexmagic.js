@@ -202,6 +202,7 @@ const DEXMAGIC_CHECKS = {
 	"XMI (Alt)"                        : [{offset : 16, match : "FORM"}, {offset : 24, match : "XDIRINFO"}],
 
 	// other
+	"ASCII Font Metrics"               : [{offset : 0, match : [0x14, 0x00]}, {offset : 2, match : "StartFontMetrics"}],
 	"Atari ST Guide Hypertext"         : [{offset : 0, match : "HDOC"}],
 	"Bolo Map"                         : [{offset : 0, match : "BMAPBOLO"}],
 	"Director STXT"                    : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],

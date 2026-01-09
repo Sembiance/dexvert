@@ -3,6 +3,8 @@
 \----------------/
 * Run util/formatsWebsiteStats.js twice, alternating which line is uncommented at the bottom of the file
 
+* See if these folks have created any new extractors (last: SPEx): https://codeberg.org/CYBERDEV?q=&tab=repositories&sort=newest
+
 /----------------\
 | Stop Dexdrones |
 \----------------/

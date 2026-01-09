@@ -3,10 +3,10 @@ import {_WINDUMP_META_KEYS} from "../../program/meta/winedump.js";
 
 const _INSTALLER_MAGICS = [
 	// installers: These actually do convert ok already with things like cmdTotal or other programs below
-	"Installer: Vise", "16bit DOS EXE SEZ sfx Zoo archive",
+	"Installer: Vise", "16bit DOS EXE SEZ sfx Zoo archive", "Wise Installer executable", /^Installer: Wise Installer$/,
 
 	// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
-	"InstallShield setup", "Wise Installer executable",
+	"InstallShield setup",
 
 	"Win16 EDI Install Pro executable", "Win16 InstallShield Self-Extracting Executable", "Easy SFX Installer 16-bit DOS executable", "JRchive self-extracting 16bit DOS executable", "aPackage sfx archiver Win32 executable",
 	"Sydex SXD Self eXtraciting Disk image Executable",
@@ -19,8 +19,9 @@ const _INSTALLER_MAGICS = [
 	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
 	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey", "Installer: CSDD's", "Installer: I-D Media installer", "Installer: ACCAStore",
 	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Astrum", "Installer: Quick Install", "Installer: custom installer with SZDD-archives", "Installer: VMWare Installation Launcher",
+	"Installer: Sax Software installer",
 	
-	/^Installer: Wise Installer$/, /^NSIS$/
+	/^NSIS$/
 ];
 
 export class exe extends Format
@@ -68,7 +69,7 @@ export class exe extends Format
 		if(!Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS))
 			return [];
 		
-		const r= [
+		return [
 			// Is it just a ZIP file of some sort?
 			"sevenZip[type:zip]",
 			
@@ -77,16 +78,21 @@ export class exe extends Format
 			"unar[type:nsis]",
 
 			// Is it a Projector executable hiding a director file?
-			"director_files_extract"
+			"director_files_extract",
+
+			// a WISE installer?
+			"WiseUnpacker",
+
+			// A Setup Factory installer?
+			"defactory",
+
+			// generic installer extractor
+			"cmdTotal[wcx:InstExpl.wcx]",
+
+			// finally just try some general EXE extractors
+			"sevenZip[type:PE][rsrcOnly]",
+			"deark[module:exe]"
 		];
-
-		// generic installer extractor
-		r.push("cmdTotal[wcx:InstExpl.wcx]");
-
-		// Try some general EXE extractors
-		r.push("sevenZip[type:PE][rsrcOnly]", "deark[module:exe]");
-
-		return r;
 	};
 
 	post = dexState =>

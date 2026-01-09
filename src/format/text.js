@@ -376,6 +376,7 @@ export default
 		arbVertexShader                            : {name : "ARB Vertex shader", ext : [".vp"], magic : ["ARB Vertex shader"]},
 		artMoneyTableFile                          : {name : "ArtMoney Table File", ext : [".amt"], magic : ["ArtMoney Table File"], weakMagic : true},
 		asciiColorFormat                           : {name : "ASCII Color Format", ext : [".acf"], magic : ["ASCII Color Format", "DreamLight PixelPalette colors data"]},
+		asciiFontMetrics                           : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric", "Adobe/Outline Font Metric", "ASCII Font Metrics"]},
 		aseam2LoadsInputScreenData                 : {name : "ASEAM 2 Loads Input Screen/Data", ext : [".lis"], magic : ["ASEAM 2 Loads Input Screen/Data"]},
 		aseam2MainMenuScreenData                   : {name : "ASEAM 2 Main Menu Screen/Data", ext : [".mis"], magic : ["ASEAM 2 Main Menu Screen/Data"]},
 		aseam2PlantInputScreenData                 : {name : "ASEAM 2 Plant Input Screen/Data", ext : [".pis"], magic : ["ASEAM 2 Plant Input Screen/Data"]},
@@ -592,6 +593,7 @@ export default
 		gemSetupConfiguration                      : {name : "GEM-Setup Configuration", ext : [".gsc"], magic : ["GEM-Setup Configuration"]},
 		genBankFlat                                : {name : "GenBank Flat File", ext : [".gb", ".gbk"], magic : [/^fmt\/1770( |$)/]},
 		genBankSequenceRecord                      : {name : "GenBank sequence record", ext : [".dna"], magic : ["GenBank sequence record"]},
+		genCADLayout                               : {name : "GenCAD layout", ext : [".cad"], magic : ["GenCAD layout"], weakMagic : true},
 		genesisTheThirdDayScript                   : {name : "Genesis - The Third Day Script", ext : [".scrpt"], magic : ["Genesis - The Third Day Script"], weakMagic : true},
 		genSurfMap                                 : {name : "Gen Surf map", ext : [".map"], magic : ["Gen Surf map", "Nihilistic Map"], weakMagic : true},
 		gettextPortableObject                      : {name : "Gettext Portable Object", ext : [".po"], magic : ["Gettext Portable Object", "GNU gettext message catalogue", "text/x-gettext-translation-template"], weakMagic : true},
@@ -611,7 +613,7 @@ export default
 		gimpToolPreset                             : {name : "GIMP Tool Preset", ext : [".gtp"], magic : ["GIMP Tool Preset"]},
 		gmshMesh                                   : {name : "Gmsh Mesh", ext : [".msh"], magic : ["Gmsh Mesh"]},
 		gsmsendConfiguration                       : {name : "GSMSEND configuration", ext : [".par"], magic : ["GSMSEND configuration"]},
-		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                                                                                                                                                                             	// We do NOT include Trid's "GNU Info document" because it's too loose
+		gnuInfo                                    : {name : "GNU Info File", ext : [".info", ".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?/]},                                                                                                                                                                                                                                                                                                                                                                                  	// We do NOT include Trid's "GNU Info document" because it's too loose
 		golemModel                                 : {name : "Golem model", ext : [".golem"], magic : ["Golem model"]},
 		goodWayFlightPlannerFlightPlan             : {name : "GoodWay Flight Planner flight plan", ext : [".gwp"], magic : ["GoodWay Flight Planner flight plan"]},
 		graceProjectFile                           : {name : "Grace project file", ext : [".agr"], magic : [/^Grace project file/]},
@@ -766,6 +768,7 @@ export default
 		motionCaptureFileFormat                    : {name : "Motion Capture File Format", ext : [".csm"], magic : ["Motion Capture File Format"], weakMagic : true},
 		motorolaDSPObjectModuleFormat              : {name : "Motorola DSP56000/56001 object module format", ext : [".lod"], magic : ["Motorola DSP56000/56001 object module format"], weakMagic : true},
 		motorolaPhoneSkinInfo                      : {name : "Motorola phone skin info", ext : [".ski"], magic : ["Motorola phone skin info"], weakMagic : true},
+		mouseSystemsCorpMenuSource                 : {name : "Mouse Systems Corp. menu source", ext : [".msc"], magic : ["Mouse Systems Corp. menu source"], weakMagic : true},
 		movieMasterScript                          : {name : "Movie Master Script", ext : [".scr"], magic : ["Movie Master Script"], weakMagic : true},
 		moxcelSpreadsheet                          : {name : "Moxcel spreadsheet", ext : [".mxl"], magic : ["Moxcel spreadsheet", /^fmt\/1970( |$)/], weakMagic : true},
 		mozartPercussionMap                        : {name : "MOZART Percussion map", ext : [".mzp"], magic : ["MOZART Percussion map"], weakMagic : true},

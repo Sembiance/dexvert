@@ -7,6 +7,6 @@ export class sonarcx extends Program
 	loc       = "dos";
 	bin       = "SONARCX.EXE";
 	args      = async r => [r.inFile({backslash : true}), await r.outFile("out.wav", {backslash : true})];
-	chain     = "sox[type:wav]";
+	chain     = "sox";	// no type because usually the output is wav, but TIE.001 produces a voc
 	renameOut = true;
 }

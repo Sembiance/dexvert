@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,021)
+# Unsupported File Formats (4,022)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (316)
+## Archive (317)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -16,6 +16,7 @@ Family/Format | Name | Extensions | Notes
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?format=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 [archive/abackupDiskImage](https://discmaster.textfiles.com/search?format=abackupDiskImage) | ABackup Disk Image | .adf | 
 [archive/acornCPMDiskImage](https://discmaster.textfiles.com/search?format=acornCPMDiskImage) | Acorn CP/M disk image | .dsk | 
+[archive/acornDiscFilingSystemDiskImage](https://discmaster.textfiles.com/search?format=acornDiscFilingSystemDiskImage) | Acorn Disc Filing System disk image | .adf | 
 [archive/actionPresentation](https://discmaster.textfiles.com/search?format=actionPresentation) | Action! presentation | .acp .act .sta | 
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?format=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
 [archive/adysGLUEPacked](https://discmaster.textfiles.com/search?format=adysGLUEPacked) | Ady's GLUE Packed | .exe | 
@@ -1428,7 +1429,6 @@ Family/Format | Name | Extensions | Notes
 [other/artlineSymbolFile](https://discmaster.textfiles.com/search?format=artlineSymbolFile) | Artline Symbol File | .syf | 
 [other/arxelGameDataContainer](https://discmaster.textfiles.com/search?format=arxelGameDataContainer) | Arxel game data container | .at3 | 
 [other/ascaronEntertainmentGameData](https://discmaster.textfiles.com/search?format=ascaronEntertainmentGameData) | ASCARON Entertainment game data | .ewp .ewu .ewm ._dm | 
-[other/asciiFontMetrics](https://discmaster.textfiles.com/search?format=asciiFontMetrics) | ASCII Font Metrics | .afm | 
 [other/ashampooPhotoCommanderDocument](https://discmaster.textfiles.com/search?format=ashampooPhotoCommanderDocument) | Ashampoo Photo Commander Document | .apcdoc | 
 [other/ashampooProductsTranslation](https://discmaster.textfiles.com/search?format=ashampooProductsTranslation) | Ashampoo products translation | .ashlang | 
 [other/ashlarVellumPart](https://discmaster.textfiles.com/search?format=ashlarVellumPart) | Ashlar-Vellum Part | .vc6 | 
@@ -3207,6 +3207,7 @@ Family/Format | Name | Extensions | Notes
 [other/renPyCompiledGame](https://discmaster.textfiles.com/search?format=renPyCompiledGame) | Ren'Py Compiled game | .rpyc .rpymc | 
 [other/rend386VideoDriver](https://discmaster.textfiles.com/search?format=rend386VideoDriver) | Rend386 video driver | .rvd | 
 [other/renderStar2Materials](https://discmaster.textfiles.com/search?format=renderStar2Materials) | RenderStar-2 Materials | .mat | 
+[other/renderStar2PaletteGradients](https://discmaster.textfiles.com/search?format=renderStar2PaletteGradients) | RenderStar-2 Palette/gradients | .pal | 
 [other/renderwareTeXtureDictionary](https://discmaster.textfiles.com/search?format=renderwareTeXtureDictionary) | Renderware TeXture Dictionary | .txd | 
 [other/rendezvousWithRamaGameData](https://discmaster.textfiles.com/search?format=rendezvousWithRamaGameData) | Rendezvous with Rama game data |  | 
 [other/rendezvousWithRamaGameLogic](https://discmaster.textfiles.com/search?format=rendezvousWithRamaGameLogic) | Rendezvous with Rama game logic |  | 

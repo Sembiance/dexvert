@@ -336,6 +336,7 @@ export const WEAK_VALUES =
 	/^REDCODE R3D \(r3d\)$/,
 	/^Sega CD PCM \(scdpcm\)$/,
 	/^Sega DC STR \(dcstr\)$/,
+	/^Silicon Studios STER \(ster\)$/,	// librempeg
 	/^SDP \(sdp\)$/,
 	/^Sonic STM video \(sonic\)$/,	// librempeg
 	/^Sony Playstation STR \(psxstr\)$/,

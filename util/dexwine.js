@@ -28,11 +28,13 @@ const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`ht
 if(existingEnv)
 	Deno.exit(xlog.error`Can't run this while dexserver is running!`);
 
-const wineBaseEnv = {};
-wineBaseEnv[argv.base] = {
-	DISPLAY    : ":0",
-	WINEARCH   : argv.arch,
-	WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
+const wineBaseEnv = {
+	[argv.base] :
+	{
+		DISPLAY    : ":0",
+		WINEARCH   : argv.arch,
+		WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
+	}
 };
 
 const routes = new Map();

@@ -1,8 +1,6 @@
-# Project and dot files
-dexvert.code-workspace
-.eslintrc.js
-.vscode/
-deno/
-wine/
-aux/
-blender/addons/__pycache__/
+/dexvert.code-workspace
+/.vscode/
+/deno/
+/wine/
+/aux/
+/blender/addons/__pycache__/

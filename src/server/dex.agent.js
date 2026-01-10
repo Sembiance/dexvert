@@ -84,9 +84,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 		r = err.stack;
 	}
 
-	const fullResult = {};
-	fullResult[typeof r==="string" ? "err" : "r"] = r;
-
+	const fullResult = {[typeof r==="string" ? "err" : "r"] : r};
 	xlog.info`dex.agent.js: returning fullResult`;
 	return fullResult;
 }, () => Array.from(logLines));

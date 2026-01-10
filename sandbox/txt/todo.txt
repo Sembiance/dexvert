@@ -11,6 +11,10 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
+* Update deark, add support for:
+	http://fileformats.archiveteam.org/wiki/Color_RLE
+	https://discmaster.textfiles.com/search?extension=rle&detection=1b4743*			(just 1 unique file, BARELY worth adding, but sure, add it)
+
 /-------------\
 | dexvert 3.0 |
 \-------------/
@@ -27,7 +31,8 @@
 
 * Re-imagine how dexrpc requests are tracked throughout it's life cycle.
   Ideally I'd keep track of the lifecycle history of each dexrpc request (id, programs, os, dos, etc), how long it spent in each area
-  EXTRA BONUS if it's possible to cancel at any point of the process
+  So it should it should certainly list the 'converters' that were identified to be ran for this format, which ones it's done (and how long they took) which one it's on (and how long it's been waiting) and which ones still to do
+  EXTRA BONUS if it's possible to cancel at any point of the process, this seems pretty unrealistic though, if I can just get more data about where things are being held up, then I can optimize which converters are ran in which situations, tighten identifications, etc
   This will help me nail down why sometimes files seem to just 'hang' for like 2 hours
 
 * Would be great dexrecurse would generate an HTML 'report' that contains statistics of all files it did along with lifecycle stats, etc

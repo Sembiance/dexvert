@@ -5,6 +5,7 @@ denoConfig.push({
 	[
 		"aux/",
 		"bin/amiga-bitmap-font-tools/",
+		"bin/mmf2vgm.js",
 		"blender/",
 		"classify/",
 		"dos/",

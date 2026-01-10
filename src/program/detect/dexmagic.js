@@ -397,6 +397,24 @@ const DEXMAGIC_CUSTOMS = [
 
 	async function installIt(r)
 	{
+		if(r.f.input.size<9)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 9);
+		if(header.getUInt32LE(0)!==r.f.input.size-4)
+			return;
+
+		if(header.getString(4, 4)!=="GIF8")
+			return;
+		
+		if(!["7", "9"].includes(header.getString(8, 1)))
+			return;
+
+		return "GIF (with Length Prefix)";
+	},
+
+	async function installIt(r)
+	{
 		if(r.f.input.size<43)
 			return;
 

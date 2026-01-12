@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,022)
+# Unsupported File Formats (4,026)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1185,7 +1185,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,736)
+## Other (2,740)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1324,6 +1324,7 @@ Family/Format | Name | Extensions | Notes
 [other/aliceThePersonalPascalProgram](https://discmaster.textfiles.com/search?format=aliceThePersonalPascalProgram) | ALICE: The Personal Pascal Program | .ap | 
 [other/alienTrilogyMap](https://discmaster.textfiles.com/search?format=alienTrilogyMap) | Alien Trilogy Map | .map | 
 [other/alienTrilogyTextures](https://discmaster.textfiles.com/search?format=alienTrilogyTextures) | Alien Trilogytextures | .b16 .bin .bnd .16 | 
+[other/alienVsPredatorMARSOUNDSoundIndex](https://discmaster.textfiles.com/search?format=alienVsPredatorMARSOUNDSoundIndex) | Alien vs. Predator MARSOUND Sound Index | .dat | 
 [other/allFusionERwinData](https://discmaster.textfiles.com/search?format=allFusionERwinData) | AllFusion ERwin data | .er1 .erx | 
 [other/allwaysPrinterCartridgeData](https://discmaster.textfiles.com/search?format=allwaysPrinterCartridgeData) | Allways Printer Cartridge data | .apc | 
 [other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?format=allwaysPrinterDriver) | Allways Printer driver | .apc | 
@@ -1348,7 +1349,6 @@ Family/Format | Name | Extensions | Notes
 [other/amazonGameData](https://discmaster.textfiles.com/search?format=amazonGameData) | Amazon game data |  | 
 [other/amazonKindlePageNumberIndex](https://discmaster.textfiles.com/search?format=amazonKindlePageNumberIndex) | Amazon Kindle Page Number index | .apnx | 
 [other/amberstarGameData](https://discmaster.textfiles.com/search?format=amberstarGameData) | Amberstar game data | .vga .mdi .all .dat .map .cha | 
-[other/ambientDesignArtRageProject](https://discmaster.textfiles.com/search?format=ambientDesignArtRageProject) | Ambient Design ArtRage project | .ptg | 
 [other/americanConquestGameArchive](https://discmaster.textfiles.com/search?format=americanConquestGameArchive) | American Conquest game archive | .gp | 
 [other/americanSMcGeeSAliceSavedGameFile](https://discmaster.textfiles.com/search?format=americanSMcGeeSAliceSavedGameFile) | American's McGee's Alice Saved Game File | .pth | 
 [other/amiMetafileFormat](https://discmaster.textfiles.com/search?format=amiMetafileFormat) | Ami metafile format |  | 
@@ -1837,13 +1837,13 @@ Family/Format | Name | Extensions | Notes
 [other/dayOfTheTentacleSaveGame](https://discmaster.textfiles.com/search?format=dayOfTheTentacleSaveGame) | Day of the Tentacle save game |  | 
 [other/dazPackGameDataArchive](https://discmaster.textfiles.com/search?format=dazPackGameDataArchive) | DAZ Pack game data archive | .res .aud .msc .int | 
 [other/dbTextWorksDatabase](https://discmaster.textfiles.com/search?format=dbTextWorksDatabase) | DB/TextWorks Database | .dbr | 
-[other/dBTextWorksDatabaseAccessControl](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseAccessControl) | DB/TextWorks Database Access Control | .acf | 
-[other/dBTextWorksDatabaseDirectory](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseDirectory) | DB/TextWorks Database Directory | .dbo | 
-[other/dBTextWorksDatabaseIndexedList](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseIndexedList) | DB/TextWorks Database Indexed List | .ixl | 
-[other/dBTextWorksDatabasePrimaryTextbaseDef](https://discmaster.textfiles.com/search?format=dBTextWorksDatabasePrimaryTextbaseDef) | DB/TextWorks Database Primary Textbase Definition | .tba | 
-[other/dBTextWorksDatabaseTermsAndWordsIndex](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTermsAndWordsIndex) | DB/TextWorks Database Term and Word Index | .btx | 
-[other/dBTextWorksDatabaseTermsAndWords](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTermsAndWords) | DB/TextWorks Database Terms and Words | .occ | 
-[other/dBTextWorksDatabaseTextbaseStructureFile](https://discmaster.textfiles.com/search?format=dBTextWorksDatabaseTextbaseStructureFile) | DB/TextWorks Database Textbase Structure file | .dbs | 
+[other/dbTextWorksDatabaseAccessControl](https://discmaster.textfiles.com/search?format=dbTextWorksDatabaseAccessControl) | DB/TextWorks Database Access Control | .acf | 
+[other/dbTextWorksDatabaseDirectory](https://discmaster.textfiles.com/search?format=dbTextWorksDatabaseDirectory) | DB/TextWorks Database Directory | .dbo | 
+[other/dbTextWorksDatabaseIndexedList](https://discmaster.textfiles.com/search?format=dbTextWorksDatabaseIndexedList) | DB/TextWorks Database Indexed List | .ixl | 
+[other/dbTextWorksDatabasePrimaryTextbaseDef](https://discmaster.textfiles.com/search?format=dbTextWorksDatabasePrimaryTextbaseDef) | DB/TextWorks Database Primary Textbase Definition | .tba | 
+[other/dbTextWorksDatabaseTermsAndWordsIndex](https://discmaster.textfiles.com/search?format=dbTextWorksDatabaseTermsAndWordsIndex) | DB/TextWorks Database Term and Word Index | .btx | 
+[other/dbTextWorksDatabaseTermsAndWords](https://discmaster.textfiles.com/search?format=dbTextWorksDatabaseTermsAndWords) | DB/TextWorks Database Terms and Words | .occ | 
+[other/dbTextWorksDatabaseTextbaseStructureFile](https://discmaster.textfiles.com/search?format=dbTextWorksDatabaseTextbaseStructureFile) | DB/TextWorks Database Textbase Structure file | .dbs | 
 [other/db2ConversionFile](https://discmaster.textfiles.com/search?format=db2ConversionFile) | DB2 Conversion File | .cn | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?format=dBaseCompiledObjectProgram) | dBase Compiled File | .dbo .qbo | 
 [other/dBaseCompiledLabel](https://discmaster.textfiles.com/search?format=dBaseCompiledLabel) | dBase compiled Label | .lbo | 
@@ -1851,6 +1851,7 @@ Family/Format | Name | Extensions | Notes
 [other/dBaseIndex](https://discmaster.textfiles.com/search?format=dBaseIndex) | dBase Index File | .ntx | 
 [other/dBasePrintForm](https://discmaster.textfiles.com/search?format=dBasePrintForm) | dBase Print Form | .prf | 
 [other/dBaseScreen](https://discmaster.textfiles.com/search?format=dBaseScreen) | dBASE Screen | .scr | 
+[other/dbISAM](https://discmaster.textfiles.com/search?format=dbISAM) | DBISAM | .dbk .tbl .idx .blb | 
 [other/dctvPaintPalette](https://discmaster.textfiles.com/search?format=dctvPaintPalette) | DCTV Paint Palette | .pal | 
 [other/deathTrackMap](https://discmaster.textfiles.com/search?format=deathTrackMap) | DeathTrack Map | .map | 
 [other/decisionProProject](https://discmaster.textfiles.com/search?format=decisionProProject) | Decision/pro project | .dp | 
@@ -1932,7 +1933,6 @@ Family/Format | Name | Extensions | Notes
 [other/dosNavigator2Settings](https://discmaster.textfiles.com/search?format=dosNavigator2Settings) | Dos Navigator 2 settings | .cfg | 
 [other/dosNavigatorModemCommunicationsSettings](https://discmaster.textfiles.com/search?format=dosNavigatorModemCommunicationsSettings) | Dos Navigator Modem/communications settings | .mdm | 
 [other/dProtelForWindowsSchematic](https://discmaster.textfiles.com/search?format=dProtelForWindowsSchematic) | DProtel for Windows schematic | .sch .dot .prj | 
-[other/drDOSCodePage](https://discmaster.textfiles.com/search?format=drDOSCodePage) | DR-DOS code page | .cpi | 
 [other/drHaloPrinterDefinition](https://discmaster.textfiles.com/search?format=drHaloPrinterDefinition) | Dr. Halo Printer definition | .prn | 
 [other/drHardwareSysInfo](https://discmaster.textfiles.com/search?format=drHardwareSysInfo) | Dr. Hardware Sysinfo | .dat | 
 [other/drSolomonsAntivirusMessages](https://discmaster.textfiles.com/search?format=drSolomonsAntivirusMessages) | Dr. Solomon's Antivirus messages | .dat | 
@@ -2303,6 +2303,7 @@ Family/Format | Name | Extensions | Notes
 [other/houghtonMifflinCompanyData](https://discmaster.textfiles.com/search?format=houghtonMifflinCompanyData) | Houghton Mifflin Company data | .dct .dic .hyp | 
 [other/hoverMazeData](https://discmaster.textfiles.com/search?format=hoverMazeData) | Hover! maze data | .maz | 
 [other/hp4x3xBinary](https://discmaster.textfiles.com/search?format=hp4x3xBinary) | HP 49/48/39/38 binary | .hp49 .hp48 .49 .hp39 .hp38 | 
+[other/hpFirmware](https://discmaster.textfiles.com/search?format=hpFirmware) | HP firmware | .img | 
 [other/hpLaserJetPrinterCartridgeMetric](https://discmaster.textfiles.com/search?format=hpLaserJetPrinterCartridgeMetric) | HP LaserJet Printer Cartridge Metric | .pcm | 
 [other/hpfsAccessDB](https://discmaster.textfiles.com/search?format=hpfsAccessDB) | HPFS-Access DB | .dat | 
 [other/humanMachineInterfacesDriver](https://discmaster.textfiles.com/search?format=humanMachineInterfacesDriver) | Human Machine Interfaces Sound Driver | .386 | 
@@ -2626,6 +2627,7 @@ Family/Format | Name | Extensions | Notes
 [other/medi8orProject](https://discmaster.textfiles.com/search?format=medi8orProject) | Medi8or Project | .md8 | 
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?format=mediaDescriptorFile) | Media Descriptor File | .mds | 
 [other/mediaShowProduction](https://discmaster.textfiles.com/search?format=mediaShowProduction) | MediaShow Production | .prod | 
+[other/medievilWAD](https://discmaster.textfiles.com/search?format=medievilWAD) | Medievil WAD | .mwd | 
 [other/megaCADLibrary](https://discmaster.textfiles.com/search?format=megaCADLibrary) | MegaCAD Library | .mtl | 
 [other/megaCADProject](https://discmaster.textfiles.com/search?format=megaCADProject) | MegaCAD Project | .prt .pr | 
 [other/megaPaintKeyboardLayout](https://discmaster.textfiles.com/search?format=megaPaintKeyboardLayout) | MegaPaint keyboard layout | .ttb | 
@@ -2873,6 +2875,7 @@ Family/Format | Name | Extensions | Notes
 [other/nortonUtilitiesLibrary](https://discmaster.textfiles.com/search?format=nortonUtilitiesLibrary) | Norton Utilities Library | .rtl | 
 [other/notationInterchangeFileFormat](https://discmaster.textfiles.com/search?format=notationInterchangeFileFormat) | [Notation Interchange File Format](http://fileformats.archiveteam.org/wiki/Notation_Interchange_File_Format) | .nif | 
 [other/notatorLogicProject](https://discmaster.textfiles.com/search?format=notatorLogicProject) | Notator Logic project | .log .lso | 
+[other/novalogicResourceGameData](https://discmaster.textfiles.com/search?format=novalogicResourceGameData) | Novalogic Resource / game data | .res | 
 [other/novastormMediaAnimation](https://discmaster.textfiles.com/search?format=novastormMediaAnimation) | Novastorm Media animation | .flm | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?format=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?format=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
@@ -3762,6 +3765,7 @@ Family/Format | Name | Extensions | Notes
 [other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?format=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
 [other/warCraft3Map](https://discmaster.textfiles.com/search?format=warCraft3Map) | WarCraft III Map | .w3m | 
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?format=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
+[other/warlordsXCI](https://discmaster.textfiles.com/search?format=warlordsXCI) | Warlords XCI | .xci | 
 [other/watcomDebugTrap](https://discmaster.textfiles.com/search?format=watcomDebugTrap) | Watcom C/C++ debug Trap | .trp | 
 [other/watcomProfilerSamplingData](https://discmaster.textfiles.com/search?format=watcomProfilerSamplingData) | Watcom Profiler Sampling Data | .smp | 
 [other/watcomSQLDatabase](https://discmaster.textfiles.com/search?format=watcomSQLDatabase) | Watcom SQL database | .db .new | 

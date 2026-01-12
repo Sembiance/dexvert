@@ -53,7 +53,7 @@ export const gameextractor =
 		lemmingsRevolutionGameArchive       : {name : "Lemmings Revolution game archive", ext : [".box"], magic : ["Lemmings Revolution game data archive"]},
 		lionheadStudiosGameArchive          : {name : "Lionhead Studios game archive", ext : [".sad"], magic : ["Generic Lionhead Studios game data"]},
 		lookingGlassGameArchive             : {name : "Looking Glass Game Archive", ext : [".res"], magic : ["Looking Glass Resource data", "LG Archiv gefunden"]},
-		lucasArtsGameArchive                : {name : "Lucas Arts Game Archive", ext : [".gob"], magic : ["LucasArts Game data archive", "Dark Forces Game data archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="DATA" && ["dRfD", "dRfO", "PPUP"].includes(macFileCreator)},
+		lucasArtsGameArchive                : {name : "Lucas Arts Game Archive", ext : [".gob"], magic : ["LucasArts Game data archive", "Dark Forces Game data archive", "Archive: LucasArts Binary Archive"], idMeta : ({macFileType, macFileCreator}) => macFileType==="DATA" && ["dRfD", "dRfO", "PPUP"].includes(macFileCreator)},
 		madsHAGGameArchive                  : {name : "MADS HAG Game Archive", ext : [".hag"], magic : ["MADS HAG game data archive"]},
 		mallTycoonGameDataArchive           : {name : "Mall Tycoon game data archive", ext : [".muk"], magic : ["Mall Tycoon game data archive"], weakMagic : true},
 		meyerGlassGameArchive               : {name : "Meyer/Glass Interactive Game Archive", ext : [".mgf"], magic : ["Meyer/Glass Interactive game data Format"]},

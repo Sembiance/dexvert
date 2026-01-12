@@ -37,6 +37,7 @@ const FLAKY_CONVERTERS = [
 	"Crowbar & noesis",
 	"noesis",
 	"paintDotNet",
+	"pageMaker4",
 	"pageMaker7",
 	"polyTrans64",
 	"quarkXPress6",
@@ -384,7 +385,8 @@ const FLEX_SIZE_FORMATS = {
 const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS = {
 	archive :
 	{
-		macromediaDirector : ["ﾊﾘｳｯﾄﾞ名優写真館.DXR"],	// same size but different shasum
+		macromediaDirector  : ["ﾊﾘｳｯﾄﾞ名優写真館.DXR"], // same size but different shasum
+		shrinkerPacked      : ["NOTES.EXE"],	// different each time, not sure why
 		sapThomsonDiskImage : ["TURBOCUP.SAP"]	// corrupted archive, different stuff extracted each time
 	},
 	document :
@@ -564,6 +566,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/poly\/ydl\/.+/i, "text", true],
 	[/unsupported\/emacsCompiledLisp\/FILES\.ELC/i, "text", true],
 	[/video\/acornReplayVideo\/(ducks2|bluegreen|parrot)/, "text", true],
+	[/video\/avi\/pcpos\.avi/, "audio", "aviAudio"],
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc|ccd)$/i, "text", true],

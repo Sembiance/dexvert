@@ -36,8 +36,9 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		// dos
 		"games-emulation/dosbox",
 		
-		// os.js (win2k & winxp)
+		// os.js (win2k & winxp & win7)
 		"app-emulation/86Box",
+		"app-emulation/qemu",
 		"app-emulation/virtualbox",
 		"x11-misc/x11vnc",
 
@@ -111,21 +112,24 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge --depclean`,
 	`revdep-rebuild -pi`,
 	`eix-update`,
+	`su - sembiance`,
+	`mkdir -p /mnt/dexvert/oldLogs`,
+	`rm -rf .config/Aaru.json .local/share/Aaru`,
+	`# Aaru needs to build a database and ask questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
+	`aaru`,
+	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
+	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
+
+	`\n#DEXDRONE SETUP:`,
 	`mkdir -p /mnt/dexdrone`,
 	`chown sembiance:sembiance /mnt/dexdrone`,
 	`grep dexvert ~/.ssh/authorized_keys >> /home/sembiance/.ssh/authorized_keys`,
 	`chown sembiance:sembiance /home/sembiance/.ssh/authorized_keys`,
 	`chmod 600 /home/sembiance/.ssh/authorized_keys`,
-	`# Need to re-install this now, again, to get it to puck up the correct dotnet version. I DO NOT THINK THIS IS NEEDED ANMORE`,
-	`emerge app-arch/Aaru`,
-	`su - sembiance`,
-	`mkdir -p /mnt/dexvert/oldLogs`,
-	`# Aaru needs to build a database and ask questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
-	`aaru`,
-	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
-	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
+
+	`\n# Final Steps, all computers`,
 	`sudo reboot`,
 	`# After reboot, as sembiance@host run and ensure works: startDexserver`,
 	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
-	"# Now add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
+	"# Now IF dexdrone, add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
 ].forEach(line => console.log(line));

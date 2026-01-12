@@ -20,5 +20,5 @@ export class avi extends Format
 	mimeType     = "video/avi";
 	magic        = _AVI_MAGIC;
 	metaProvider = ["mplayer"];
-	converters   = dexState => ["ffmpeg", "nihav", "mencoderWinXP[matchType:magic]", `xanim[fps:${dexState.meta.fps || 10}][matchType:magic]`];
+	converters   = dexState => ["ffmpeg", "ffmpeg[libre]", "nihav", "mencoderWinXP[matchType:magic]", `xanim[fps:${dexState.meta.fps || 10}][matchType:magic]`];
 }

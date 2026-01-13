@@ -294,7 +294,7 @@ const DEXMAGIC_CUSTOMS = [
 		}
 	},
 
-	async function binkEXE(r)
+	async function exeAppended(r)
 	{
 		if(r.f.input.size<512)
 			return;
@@ -317,8 +317,12 @@ const DEXMAGIC_CUSTOMS = [
 		if((bikiStartOffset+4)>r.f.input.size)
 			return;
 			
-		if((await fileUtil.readFileBytes(r.f.input.absolute, 4, bikiStartOffset)).getString(0, 4)==="BIKi")
+		const idString = (await fileUtil.readFileBytes(r.f.input.absolute, 4, bikiStartOffset)).getString(0, 4);
+		if(idString==="BIKi")
 			return "BinkEXE";
+
+		if(["PCRS"].includes(idString))	// may be many more valid options
+			return `AuthorwareEXE`;
 	},
 
 	async function diskExpressSFX(r)

@@ -19,7 +19,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
 	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey", "Installer: CSDD's", "Installer: I-D Media installer", "Installer: ACCAStore",
 	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Astrum", "Installer: Quick Install", "Installer: custom installer with SZDD-archives", "Installer: VMWare Installation Launcher",
-	"Installer: Sax Software installer", "Installer: INTENIUM",
+	"Installer: Sax Software installer", "Installer: INTENIUM", "Installer: THEMEPAK", "Installer: Myriad Install", "Installer: CNetX",
 	
 	/^NSIS$/
 ];

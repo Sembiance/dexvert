@@ -236,6 +236,7 @@ export const WEAK_VALUES =
 	/^Format: Guitar Pro Soundbank\(6\.x\)$/,
 	/^Format: Guitar Pro Tablature/,
 	/^Format: JavaScript Compiled\/Bytenode/,
+	/^Format: LVL\[/,
 	/^Format: Microsoft Office\((19)?97-2003\)$/,
 	/^Format: Microsoft XNA Game Studio Binary Package/,
 	/^Format: Norton Ghost image$/,

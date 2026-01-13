@@ -17,19 +17,20 @@ export class file extends Program
 		// The file source code itself is VERY messy and gross, so trying to modify/patch it to output a better seperator when --keep-going (MAGIC_CONTINUE) is used would be painful, I couldn't figure out where it's even happening at exactly
 		// So in the end we just do our best here, knowing that we'll get some grossness in the detections for some files, but hopefully this will improve with time as I discover more edge cases. Sigh.
 		// Other problematic files to use to test logic:
-		//     archive/iso/The Girls of GLITZ.iso
-		//     archive/macBinary/Click
-		//     archive/rawPartition/Madame X Game.bin
-		//	   archive/zip/neopnt21.zip		<-- This shows how bad 'file' is. The '-  to extract' line is a continuation of the previous match, but the '-  Zip archive data' is a new match. We can't really handle this as checking case of 1st letter is unsafe
-		//     archive/zip/wresv111.zip
-		//     document/dBaseMultipleIndex/CLIENT.MDX
-		//     document/dbf/NUMEROS.DBF
-		//     document/dbf/STAMPS.DAT
-		//     executable/amigaExe/PowerPacker.pp
-		//     executable/elf/D3D.UC
-		//     image/gif/eb399.gif
-		//     text/txt/2.emlx
-		//     other/unknown/Bonus1.bin
+		//	archive/iso/The Girls of GLITZ.iso
+		//	archive/macBinary/Click
+		//	archive/rawPartition/Madame X Game.bin
+		//	archive/zip/neopnt21.zip		<-- This shows how bad 'file' is. The '-  to extract' line is a continuation of the previous match, but the '-  Zip archive data' is a new match. We can't really handle this as checking case of 1st letter is unsafe
+		//	archive/zip/wresv111.zip
+		//	document/dBaseMultipleIndex/CLIENT.MDX
+		//	document/dbf/NUMEROS.DBF
+		//	document/dbf/STAMPS.DAT
+		//	executable/amigaExe/PowerPacker.pp
+		//	executable/elf/D3D.UC
+		//	image/gif/eb399.gif
+		//	text/txt/2.emlx
+		//	other/unknown/Bonus1.bin
+		//	other/unknown/ta.gmo
 
 		r.meta.detections = [];
 		let confidence = 100;

@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,026)
+# Unsupported File Formats (4,030)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (317)
+## Archive (318)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -313,6 +313,7 @@ Family/Format | Name | Extensions | Notes
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?format=wordPerfectInstallArchive) | WordPerfect install archive |  | 
 [archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?format=wwarpDiskImage) | WWarp Disk Image | .wwp | 
+[archive/xpackJariPacked](https://discmaster.textfiles.com/search?format=xpackJariPacked) | X-PACK Jari Packed | .com | 
 [archive/x64DiskImage](https://discmaster.textfiles.com/search?format=x64DiskImage) | X64 Disk Image | .x64 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/x64DiskImage/)
 [archive/xboxVirtualDisk](https://discmaster.textfiles.com/search?format=xboxVirtualDisk) | Xbox Virtual Disk | .xvc .msixvc | 
 [archive/xelaSoftArchive](https://discmaster.textfiles.com/search?format=xelaSoftArchive) | XelaSoft Archive | .xsa | 
@@ -1185,11 +1186,12 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,740)
+## Other (2,743)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
 [other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
+[other/zeroOneZeroEditorBookmark](https://discmaster.textfiles.com/search?format=zeroOneZeroEditorBookmark) | 010 Editor bookmark | .1bk | 
 [other/oneDirPlusData](https://discmaster.textfiles.com/search?format=oneDirPlusData) | 1dir+ data | .1dr .1dl | 
 [other/oneDirPlusHelp](https://discmaster.textfiles.com/search?format=oneDirPlusHelp) | 1dir+ Help | .hlp .hll | 
 [other/secondFighterMaker2ndData](https://discmaster.textfiles.com/search?format=secondFighterMaker2ndData) | 2D Fighter Maker 2nd data | .demo .player .stage .kgt | 
@@ -1553,6 +1555,7 @@ Family/Format | Name | Extensions | Notes
 [other/blackViperGameData](https://discmaster.textfiles.com/search?format=blackViperGameData) | Black Viper game data | .edp | 
 [other/blackjackLabGame](https://discmaster.textfiles.com/search?format=blackjackLabGame) | Blackjack Lab game |  | 
 [other/blackjackLabRules](https://discmaster.textfiles.com/search?format=blackjackLabRules) | Blackjack Lab rules |  | 
+[other/blassicSource](https://discmaster.textfiles.com/search?format=blassicSource) | Blassic source | .blc .bas | 
 [other/blindWriteTOC](https://discmaster.textfiles.com/search?format=blindWriteTOC) | BlindWrite TOC | .b6t .b5t | 
 [other/blitzkriegMapData](https://discmaster.textfiles.com/search?format=blitzkriegMapData) | Blitzkrieg Map data | .bzm | 
 [other/blockBreakerPattern](https://discmaster.textfiles.com/search?format=blockBreakerPattern) | Block Breaker Pattern | .blc | 
@@ -1784,6 +1787,7 @@ Family/Format | Name | Extensions | Notes
 [other/cricketGraphTemplate](https://discmaster.textfiles.com/search?format=cricketGraphTemplate) | Cricket Graph Template | .cgt | 
 [other/crimsonFieldsLevelData](https://discmaster.textfiles.com/search?format=crimsonFieldsLevelData) | Crimson Fields Level data | .lev | 
 [other/criwareCPKGameDataContainer](https://discmaster.textfiles.com/search?format=criwareCPKGameDataContainer) | CRIWARE CPK game data container | .cpk | 
+[other/crocodilePhysicsSimulation](https://discmaster.textfiles.com/search?format=crocodilePhysicsSimulation) | Crocodile Physics Simulation | .cyp | 
 [other/crosstalkDriver](https://discmaster.textfiles.com/search?format=crosstalkDriver) | Crosstalk Driver | .xtd | 
 [other/crosstalkFilter](https://discmaster.textfiles.com/search?format=crosstalkFilter) | Crosstalk Filter | .xtf | 
 [other/crosstalkProtocol](https://discmaster.textfiles.com/search?format=crosstalkProtocol) | Crosstalk Protocol | .xtp | 
@@ -3664,7 +3668,7 @@ Family/Format | Name | Extensions | Notes
 [other/uniCodeExtensions](https://discmaster.textfiles.com/search?format=uniCodeExtensions) | UniCode Extensions | .uce | 
 [other/unifiedEmulatorFormat](https://discmaster.textfiles.com/search?format=unifiedEmulatorFormat) | Unified Emulator Format |  | 
 [other/universalCommunicationsFormat](https://discmaster.textfiles.com/search?format=universalCommunicationsFormat) | Universal Communications Format | .ucf | 
-[other/unknown](https://discmaster.textfiles.com/search?format=unknown) | Unknown File |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
+[other/unknown](https://discmaster.textfiles.com/search?format=unknown) | Unknown File |  | [2 sample files](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?format=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealEngineLocalizationResource](https://discmaster.textfiles.com/search?format=unrealEngineLocalizationResource) | Unreal Engine Localization Resource | .locres | 
 [other/unrealMap](https://discmaster.textfiles.com/search?format=unrealMap) | Unreal Map | .unr | 

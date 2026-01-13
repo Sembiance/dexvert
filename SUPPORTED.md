@@ -1,11 +1,11 @@
-# Supported File Formats (3,452)
+# Supported File Formats (3,454)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (506)
+## Archive (507)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -63,6 +63,7 @@ archive | ASCARON Entertainment game archive | .cpr | [gameextractor](http://www
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/stDiskImage/)
 archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atomikCruncher/)
+archive | Authorware Wrapped EXE | .exe | [exeUnPostContent](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/authorwareEXE/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
 archive | AVPACK Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
@@ -457,7 +458,7 @@ archive | TimeGate Studios game archive | .rwd | [gameextractor](http://www.watt
 archive | TinyProg Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/tinyProgPacked/)
 archive | [TPK Archive](http://fileformats.archiveteam.org/wiki/TPK_(compressed_archive)) |  | [deark](https://entropymine.com/deark/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/tpk/)
 archive | [Transport Neutral Encapsulation Format](http://fileformats.archiveteam.org/wiki/Transport_Neutral_Encapsulation_Format) | .tnef .dat | [ytnef](https://github.com/Yeraze/ytnef) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tnef/)
-archive | Triplex Packed | .exe .com | cup386 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/triplexPacked/)
+archive | Triplex Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/triplexPacked/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dmk/)
 archive | TRS/80 JVC Disk Image | .jvc | [jvcextract](https://github.com/mseminatore/dsktools) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/trs80JVCDiskImage/)
 archive | TSCRUNCH Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/tscrunchPacked/)
@@ -576,7 +577,7 @@ audio | HAL Laboratory HALPST Audio | .hps | [ffmpeg](https://ffmpeg.org/) [vgms
 audio | High Compression Audio | .hca | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/highCompressionAudio/)
 audio | Huffman Compressed audio | .hcom | [sox](http://sox.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/huffmanCompressedAudio/)
 audio | [Impulse Tracker Sample](http://fileformats.archiveteam.org/wiki/Impulse_Tracker_sample) | .its | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/impulseTrackerSample/)
-audio | iMUSE Audio | .imc .imx | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/iMUSE/)
+audio | iMUSE Audio | .imc .imx | [ffmpeg](https://ffmpeg.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/iMUSE/)
 audio | [Interplay Compressed Audio](http://fileformats.archiveteam.org/wiki/Interplay_ACM) | .acm | [zxtune123](https://zxtune.bitbucket.io/) [acm2wav](http://return0.pisem.net/audio.html) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/interplayACM/)
 audio | [IRCAM Sound Format](http://fileformats.archiveteam.org/wiki/Berkeley/IRCAM/Carl_Sound_Format) | .sf | [sox](http://sox.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/ircam/)
 audio | Knowledge Adventure Sound | .snd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/knowledgeAdventureSound/)
@@ -967,12 +968,12 @@ font | The Last Word Font | .f80 | [recoil2png](http://recoil.sourceforge.net) |
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TrueType) | .ttf | [convert](https://www.imagemagick.org/) | [19 sample files](https://sembiance.com/fileFormatSamples/font/ttf/)
 font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/woff/) - Some fail to convert because their printable characters are icons and are in very high level charcodes and don't convert with imagemagick convert and thus fail verification.
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt
-font | XCar Font | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 sample files](https://sembiance.com/fileFormatSamples/font/xCarFont/)
+font | XCar Font | .fnt | [wuimg](https://codeberg.org/kaleido/wuimg) | [9 sample files](https://sembiance.com/fileFormatSamples/font/xCarFont/)
 font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/zxFont/)
 
 
 
-## Image (750)
+## Image (751)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1369,6 +1370,7 @@ image | [Lotus Manuscript Graphic](http://fileformats.archiveteam.org/wiki/Lotus
 image | [Lucasfilm Picture](http://fileformats.archiveteam.org/wiki/Lucasfilm_picture) | .lff | [nconvert](https://www.xnview.com/en/nconvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/lucasfilmPicture/)
 image | [Ludek Maker](http://fileformats.archiveteam.org/wiki/Ludek_Maker) | .ldm | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/ldm/)
 image | [LuRaWave Bitmap](http://fileformats.archiveteam.org/wiki/LuraWave) | .lwf | [luraWave](https://archive.org/download/plug-in-power-pack-for-netscape-communicator/Plug-In%20Power%20Pack%20for%20Netscape%20Communicator.iso/plugins%2Flw20free.exe) | [3 sample files](https://sembiance.com/fileFormatSamples/image/luraWave/)
+image | LView Pro Image | .lvp | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/lViewProImage/)
 image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict .drw | [soffice](https://www.libreoffice.org) | [19 sample files](https://sembiance.com/fileFormatSamples/image/macDraw/)
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [iio2png](http://github.com/Sembiance/iio2png/) [ffmpeg](https://ffmpeg.org/) [recoil2png](http://recoil.sourceforge.net) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [keyViewPro](https://archive.org/details/KeyViewPro/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [soffice](https://www.libreoffice.org) [tomsViewer](https://tomseditor.com/blog/viewer) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [65 sample files](https://sembiance.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/icns/)
@@ -1759,7 +1761,7 @@ music | [Beathoven Synthesizer Module](http://fileformats.archiveteam.org/wiki/B
 music | [Ben Daglish](http://fileformats.archiveteam.org/wiki/Ben_Daglish) | .bd | [uade123](http://zakalwe.fi/uade) | [10 sample files](https://sembiance.com/fileFormatSamples/music/benDaglish/)
 music | [Ben Daglish SID](http://fileformats.archiveteam.org/wiki/Ben_Daglish_SID) | .bds | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://sembiance.com/fileFormatSamples/music/benDaglishSID/)
 music | BioWare Music Unit | .bmu | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/music/bioWareMusicUnit/)
-music | [Bob's AdLib](http://fileformats.archiveteam.org/wiki/Bob's_Adlib_Music) | .bam | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://sembiance.com/fileFormatSamples/music/bobsAdLib/)
+music | [Bob's AdLib](http://fileformats.archiveteam.org/wiki/Bob's_Adlib_Music) | .bam | [adplay](https://github.com/adplug/adplay-unix) | [8 sample files](https://sembiance.com/fileFormatSamples/music/bobsAdLib/)
 music | [Boom Tracker](http://fileformats.archiveteam.org/wiki/Boom_Tracker_v4.0_module) | .cff | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/boomTracker/)
 music | [Brian Postma SoundMon module](http://fileformats.archiveteam.org/wiki/Brian_Postma_SoundMon_v2.x_&_v3.x_module) | .bp .bp3 | [uade123](http://zakalwe.fi/uade) | [15 sample files](https://sembiance.com/fileFormatSamples/music/soundMon/) - Not all files convert properly, such as CYBERSONG and SANXION
 music | [Chaos Music Composer](http://justsolve.archiveteam.org/wiki/CMC) | .cmc .cm3 .cms .cmr .dmc | [asapconv](http://asap.sourceforge.net/) | [29 sample files](https://sembiance.com/fileFormatSamples/music/chaosMusicComposer/)
@@ -2324,7 +2326,7 @@ text | ARB Vertex shader | .vp |  | [13 sample files](https://sembiance.com/file
 text | ArdenScrypt | .script .npcs |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/ardenScrypt/)
 text | ArtMoney Table File | .amt |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/artMoneyTableFile/)
 text | ASCII Color Format | .acf |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/asciiColorFormat/)
-text | ASCII Font Metrics | .afm |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/asciiFontMetrics/)
+text | ASCII Font Metrics | .afm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/asciiFontMetrics/)
 text | ASEAM 2 Loads Input Screen/Data | .lis |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aseam2LoadsInputScreenData/)
 text | ASEAM 2 Main Menu Screen/Data | .mis |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/aseam2MainMenuScreenData/)
 text | ASEAM 2 Plant Input Screen/Data | .pis |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/aseam2PlantInputScreenData/)
@@ -2725,8 +2727,8 @@ text | Java Source | .java |  | [13 sample files](https://sembiance.com/fileForm
 text | [JavaScript](http://fileformats.archiveteam.org/wiki/JavaScript) | .js |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/js/)
 text | JavaScript Bean file | .jsb |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/javaScriptBeanFile/)
 text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/json/)
-text | JCreator Project | .jcp |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/jCreatorProject/)
-text | JCreator Workspace | .jcw |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/jCreatorWorkspace/)
+text | JCreator Project | .jcp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/jCreatorProject/)
+text | JCreator Workspace | .jcw |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/jCreatorWorkspace/)
 text | Jeskola Buzz theme | .col |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/jeskolaBuzzTheme/)
 text | JETPilot docs/text | .001 |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/jetPilotDocsText/)
 text | Jigsaws Galore Pieces | .asc |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/jigsawsGalorePieces/)
@@ -3417,7 +3419,7 @@ video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/
 video | [AVF Video](https://wiki.multimedia.cx/index.php/AVF) | .avf | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/avfVideo/)
 video | [Beam Software SIFF Video](https://wiki.multimedia.cx/index.php/SIFF) | .vb .vbc | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/beamSoftwareSIFF/)
 video | [Bethesda Softworks Video](https://wiki.multimedia.cx/index.php/Bethsoft_VID) | .vid | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/bethsoftVid/)
-video | Bink EXE Wrapper | .exe | [exe2bik](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/video/binkEXE/)
+video | Bink EXE Wrapper | .exe | [exeUnPostContent](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/video/binkEXE/)
 video | [Bink Video](http://fileformats.archiveteam.org/wiki/Bink_Video) | .bik .bik2 .bk2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/bink/)
 video | [Bitmap Brotehrs JV Video](https://wiki.multimedia.cx/index.php/JV) | .jv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/bitmapBrothersJV/)
 video | [Blazing Rendered BRP Video](https://en.wikipedia.org/wiki/Argonaut_Games#BRender) | .brp | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/brenderBRP/)

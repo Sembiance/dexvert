@@ -6,5 +6,5 @@ export class binkEXE extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = ["BinkEXE"];
-	converters     = ["exe2bik -> dexvert[asFormat:video/bink]"];
+	converters     = ["exeUnPostContent[idstring:BIKi][ext:.bik] -> dexvert[asFormat:video/bink]"];
 }

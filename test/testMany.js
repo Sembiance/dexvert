@@ -6,6 +6,7 @@ import {formats, init as initFormats} from "../src/format/formats.js";
 import {mkWeblink} from "./testUtil.js";
 
 const xlog = new XLog();
+const LOW_DISK_SPACE_HOSTS = ["crystalsummit"];
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -27,6 +28,15 @@ for(const format of Object.values(formats))
 	const formatid = `${format.family.familyid}/${format.formatid}`;
 	if(argv.format[0]==="all" || argv.format.some(v => formatid.startsWith(v)))
 		formatsToProcess.add(formatid);
+}
+
+if(LOW_DISK_SPACE_HOSTS.includes(Deno.hostname()))
+{
+	if(argv.format[0]==="all")
+		Deno.exit(xlog.error`Not enough disk space to do 'all' must do 1 family at a time`);
+
+	await fileUtil.unlink("/mnt/dexvert/test", {recursive : true});
+	await Deno.mkdir("/mnt/dexvert/test", {recursive : true});
 }
 
 let formatCount = 0;

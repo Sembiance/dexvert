@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,030)
+# Unsupported File Formats (4,031)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -497,7 +497,7 @@ Family/Format | Name | Extensions | Notes
 [document/hyperSlidePresentation](https://discmaster.textfiles.com/search?format=hyperSlidePresentation) | HyperSlide presentation | .hsl | 
 [document/iesHyperText](https://discmaster.textfiles.com/search?format=iesHyperText) | I.E.S. HyperText | .hyp | [6 sample files](https://sembiance.com/fileFormatSamples/document/iesHyperText/)
 [document/ibmDisplayWriteDocument](https://discmaster.textfiles.com/search?format=ibmDisplayWriteDocument) | IBM DisplayWrite Document | .doc | 
-[document/iceBookReaderEBook](https://discmaster.textfiles.com/search?format=iceBookReaderEBook) | ICE Book Reader eBook | .book | 
+[document/iceBookReaderEBook](https://discmaster.textfiles.com/search?format=iceBookReaderEBook) | ICE Book Reader eBook | .book .ibk | 
 [document/ichitaroDocument](https://discmaster.textfiles.com/search?format=ichitaroDocument) | Ichitaro document | .jtd .jaw .jsw .jbw | 
 [document/improvSpreadsheet](https://discmaster.textfiles.com/search?format=improvSpreadsheet) | Improv spreadsheet | .imp | 
 [document/installShieldCompiledScript](https://discmaster.textfiles.com/search?format=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
@@ -803,7 +803,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (193)
+## Image (194)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -990,6 +990,7 @@ Family/Format | Name | Extensions | Notes
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?format=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/unrealTexture](https://discmaster.textfiles.com/search?format=unrealTexture) | Unreal Texture | .utx .u .unr | 
 [image/variCADDrawing](https://discmaster.textfiles.com/search?format=variCADDrawing) | VariCAD Drawing | .dwb .bkb | 
+[image/vectorWorksDrawing](https://discmaster.textfiles.com/search?format=vectorWorksDrawing) | VectorWorks Drawing | .mcd .vwx .sta | 
 [image/venturaPublisher](https://discmaster.textfiles.com/search?format=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
 [image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?format=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?format=visualCADDDrawing) | Visual CADD Drawing | .vcd | 

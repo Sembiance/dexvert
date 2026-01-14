@@ -37,6 +37,8 @@ export class file extends Program
 		let fileText =  r.stdout.trim();
 		r.xlog.trace`START fileText:\n${fileText}`;
 
+		fileText = fileText.replaceAll("§", "?");
+
 		// Single-line edgecases: These should always remove the newline and include the next line as part of the match
 		const SINGLE_LINE_PREFIXES =
 		[

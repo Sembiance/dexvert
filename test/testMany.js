@@ -37,6 +37,9 @@ if(LOW_DISK_SPACE_HOSTS.includes(Deno.hostname()))
 
 	await fileUtil.unlink("/mnt/dexvert/test", {recursive : true});
 	await Deno.mkdir("/mnt/dexvert/test", {recursive : true});
+
+	await fileUtil.unlink("/mnt/dexvert/sample", {recursive : true});
+	await Deno.mkdir("/mnt/dexvert/sample", {recursive : true});
 }
 
 let formatCount = 0;

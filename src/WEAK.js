@@ -624,7 +624,6 @@ export const WEAK_VALUES =
 	/^ARM Cortex-M firmware/,
 	/^ARMv7 Thumb/,
 	/^ARRI ARI image data/,
-	/^ASD archive data/,
 	/^ASF_Extended_Content_Description_Object$/,
 	/^ASF_Stream_Bitrate_Properties_Object$/,
 	/^[ai]spell personal/,

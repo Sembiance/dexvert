@@ -1,11 +1,11 @@
-# Supported File Formats (3,454)
+# Supported File Formats (3,455)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (507)
+## Archive (508)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -60,6 +60,7 @@ archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj .exe
 archive | [ARQ Archive](http://fileformats.archiveteam.org/wiki/ARQ) | .arq | [arq](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/arq/)
 archive | [ARX Archive](http://fileformats.archiveteam.org/wiki/ARX) | .arx | [deark](https://entropymine.com/deark/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/arx/)
 archive | ASCARON Entertainment game archive | .cpr | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ascaronEntertainmentGameArchive/)
+archive | [ASD Archive](http://fileformats.archiveteam.org/wiki/ASD_Archiver) | .asd | [unasd](https://www.sac.sk/download/pack/asd020.exe) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/asdArchive/)
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/stDiskImage/)
 archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atomikCruncher/)
@@ -1217,7 +1218,7 @@ image | [Fractal Image and Sequence Codec](http://fileformats.archiveteam.org/wi
 image | [Fractal Image Format](http://fileformats.archiveteam.org/wiki/Fractal_Image_Format) | .fif | [fifView](http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [11 sample files](https://sembiance.com/fileFormatSamples/image/fractalImageFormat/) - The 256C versions don't convert with any program I could find. With GenuineFractal 4 (GF-PP4-TR-Win32.exe) and PS7 (app/ps7.zip) I was not able to open any .fif files.
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | [abydosconvert](https://github.com/Sembiance/abydosconvert) [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/flif/)
 image | [FreeHand Drawing](http://fileformats.archiveteam.org/wiki/FreeHand) | .fh .fh2 .fh3 .fh4 .fh5 .fh6 .fh7 .fh8 .fh9 .fh10 | [soffice](https://www.libreoffice.org) [scribus](https://www.scribus.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/freeHandDrawing/)
-image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/Fujifilm_RAF) | .raf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://sembiance.com/fileFormatSamples/image/raf/)
+image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/Fujifilm_RAF) | .raf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [9 sample files](https://sembiance.com/fileFormatSamples/image/raf/)
 image | [Fullscreen Construction Kit](http://fileformats.archiveteam.org/wiki/Fullscreen_Construction_Kit) | .kid | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/kid/)
 image | Fun Photor | .fpr | [nconvert](https://www.xnview.com/en/nconvert/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/funPhotor/)
 image | [Fun With Art](http://fileformats.archiveteam.org/wiki/Fun_with_Art) | .fwa | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/fwa/)
@@ -1588,7 +1589,7 @@ image | SmoothMove Pan Viewer Image | .pan | [nconvert](https://www.xnview.com/e
 image | Softel Teletext | .ep1 | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/softelText/)
 image | [Softimage PIC Bitmap](http://fileformats.archiveteam.org/wiki/Softimage_PIC) | .soft .pic | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/softimage/)
 image | Somera Graphic Format | .sgf | [wuimg](https://codeberg.org/kaleido/wuimg) | [7 sample files](https://sembiance.com/fileFormatSamples/image/someraGraphicFormat/)
-image | [Sony RAW](http://fileformats.archiveteam.org/wiki/Sony_ARW) | .arw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/arw/)
+image | [Sony RAW](http://fileformats.archiveteam.org/wiki/Sony_ARW) | .arw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/arw/)
 image | [Speccy eXtended Graphic](http://fileformats.archiveteam.org/wiki/SXG_(ZX_Spectrum)) | .sxg | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/sxg/)
 image | [Spectrum 512 Compressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spc | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/spectrum512C/)
 image | [Spectrum 512 Extended](http://fileformats.archiveteam.org/wiki/Spectrum_512_Extended) | .spx | [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/spectrum512X/)
@@ -2464,7 +2465,7 @@ text | Crossword Creator Puzzle | .puz |  | [6 sample files](https://sembiance.c
 text | Crystallographic Information Framework | .cif |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/crystallographicInformationFramework/)
 text | Csound Orchestra | .orc |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/csoundOrchestra/)
 text | Csound unified file format | .csd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
-text | Cube LUT format | .lut .cube |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/cubeLUTFormat/)
+text | Cube LUT format | .lut .cube |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/cubeLUTFormat/)
 text | CUETools AccuRip log | .accurip |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cueToolsAccuRipLog/)
 text | CUPL format | .jed .im |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/cuplFormat/)
 text | CUPL PLD Program format | .pld |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/cuplPLDProgramFormat/)

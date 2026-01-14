@@ -8,7 +8,7 @@ export class diskImage extends Format
 	weakExt = true;
 	magic   = [
 		// generic
-		"Generic PC disk image", "FAT Disk Image", "DOS floppy", "Old DOS disk image",  "BeOS boot loader",
+		"Generic PC disk image", "FAT Disk Image", "DOS floppy", "Old DOS disk image",  "BeOS boot loader", /^VMWare3$/, "(part of a) VMware 3 Virtual Disk",
 		/^fmt\/1087( |$)/,
 		
 		// specific

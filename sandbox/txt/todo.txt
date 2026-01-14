@@ -63,7 +63,9 @@
 		https://discmaster.textfiles.com/search?q=%22Authorware+Runtime%22&qfields=name&qfields=t&extension=txt
 		https://discmaster.textfiles.com/search?format=authorwareEXE
 		NOTE: The detection of these 'EXE' variants could be extended with different idstrings, see dexmagic.exe
+	    If I add more, also update authorwareEXE.js with the new idstrings too
   Could use original authorware authoring tools, create simple files, then reverse engineer the output to build an extractor
+  After adding support, could reprocess all of these CDs too: https://discmaster.textfiles.com/admin/items?search=Imparo+Giocando
   
 * archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc progrmatically connect to the VNC port and automate it
   So via code it would send keyboard and mouse clicks at various coordinates.

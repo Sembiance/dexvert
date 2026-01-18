@@ -630,6 +630,7 @@ export default
 		highVoltageSIDCollectionUpdateInfo         : {name : "High Voltage SID Collection update info", ext : [".hvs"], magic : ["High Voltage SID Collection update info"]},
 		hiJaakVideoCardConfiguration               : {name : "HiJaak video card configuration", ext : [".cfg", ".bin"], magic : ["HiJaak video card configuration"], weakMagic : true},
 		hmiSoundOSConfiguration                    : {name : "HMI Sound OS Configuration", ext : [".cfg"], magic : ["HMI Sound Operating System Configuration"]},
+		hnskyDeepSkyDatabase                       : {name : "HNSKY Deep Sky Database", ext : [".hnd"], magic : ["HNSKY Deep Sky Database"]},
 		hoops3DMetafile                            : {name : "HOOPS 3D Metafile", ext : [".hmf"], magic : ["HOOPS 3D Metafile"], weakMagic : true},
 		houdiniGeometry                            : {name : "Houdini Geometry", ext : [".data"], magic : ["Houdini Geometry"]},
 		hpME10Database                             : {name : "HP ME10 database", ext : [".mi"], magic : ["HP ME10 Database"], weakMagic : true},

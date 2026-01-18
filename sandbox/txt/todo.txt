@@ -56,6 +56,8 @@
   Then this could be searched upon in discmaster with '# of <glyphs>'
   Of course then re-process ALL FONTS on discmaster
 
+* If need to reverse engineer a program, or crack a long outdated program, purchase and use: https://binary.ninja/purchase/#non-commercial
+
 * Authorware, thousands of files, no known extractor:
 	https://discmaster.textfiles.com/search?format=authorware
 	https://discmaster.textfiles.com/search?format=authorwareAPRArchive

@@ -37,6 +37,7 @@ const EXCLUDED_SAMPLE_FORMATS = [
 	"archive/starTrekOnlineGameData",
 	"archive/thumbsUpDatabase",
 	"archive/vmwareDiskImage",
+	"video/binkEXE",
 
 	// names have to be generic/specific, so can't have more files in the same samples directory
 	"archive/installShieldCAB",

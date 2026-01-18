@@ -6,6 +6,7 @@ export class visualArtsNWA extends Format
 	ext            = [".nwa"];
 	forbidExtMatch = true;
 	magic          = ["Visual Arts NWA (nwa)"];
+	weakMagic      = true;
 	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[outType:mp3][libre]"];
 	verify         = ({meta}) => meta.duration>=0.1;

@@ -2066,6 +2066,7 @@ export const WEAK_VALUES =
 	/^Graphing Calculator$/,
 	/^GridLAB-D Model \(with rem\)$/,
 	/^Groupwise Mail Message$/,
+	/^Gromada Resource \(generic\)$/,
 	/^GtkSourceView language definition$/,
 	/^GNU Octave Matrix data \(text\)$/,
 	/^Godot Engine Configuration block$/,

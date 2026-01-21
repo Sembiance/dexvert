@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {path} from "std";
 
-// Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
+// Below are a couple additional detections based on magic numbers and other criteria that other identifiers like trid, file, etc. all miss
 // All offsets matches must match 'match' property
 // match can be a string, which means it has to match that string
 // if match is an array of bytes then it must match those bytes exactly
@@ -14,19 +14,31 @@ import {path} from "std";
 
 /* eslint-disable unicorn/no-hex-escape */
 const DEXMAGIC_CHECKS = {
+	// multi-format
+	"Trilobyte GDJ/VDX " : [{offset : 0, match : [0x67, 0x92]}],	// both an archive and a video
+
 	// archive
+	"7th Level Archive"              : [{offset : 0, match : "7L"}, {offset : 2, match : [["b", "B"]]}, {offset : 3, match : [0x01]}],
+	"7th Level Archive (Alt)"        : [{offset : 0, match : "7L"}, {offset : 2, match : [0x01, 0x00]}],
 	"ActiveMime (Base64 Encoded)"    : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
 	"Anna-Marie Archive"             : [{offset : 0, match : "Anna-Marie"}],
-	"Anna-Marie Archive (alt)"       : [{offset : -160, match : "Anna-Marie"}],
+	"Anna-Marie Archive (Alt)"       : [{offset : -160, match : "Anna-Marie"}],
 	"Authorware APR Archive"         : [{offset : 0, match : "WPLI"}],
+	"Coktel Vision STK2 Archive"     : [{offset : 0, match : "STK2."}, {offset : 5, match : [["0", "1"]]}],
+	"Conquest Earth Archive"         : [{offset : -8, match : "XCELZLIB"}],
 	"Crowd Anim Engine"              : [{offset : 0, match : "cwd format"}],
+	"Cryo Archive (BigFile variant)" : [{offset : 0, match : "BigFile 1.00"}],
 	"EDI Split File Archive"         : [{offset : 0, match : "EDISPLI"}, {offset : 7, match : [["T", "0"]]}],
 	"Empire Earth Game Archive"      : [{offset : 0, match : [0x72, 0x61, 0x73, 0x73, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
+	"Goosebumps CFS Archive"         : [{offset : 0, match : [0x46, 0x53, 0x48, 0x32]}],
 	"HTTP Response"                  : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
+	"Horde VDX Archive"              : [{offset : 2, match : "RATVID"}],
+	"Hostile Waters MNG Archive"     : [{offset : 0, match : "ZGWH"}],
 	"InstallShield Self-Extractor"   : [{size : 2048, match : "InstallShield Self-Extracting"}],
 	"IFF CAT file"                   : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"                  : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"                       : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
+	"M88 Movie Archive" 			 : [{offset : 8, match : "M441"}],
 	"Macromedia Projector RIFX"      : [{offset : 0, match : "RIFX"}, {offset : 8, match : "APPL"}],
 	"Macromedia Projector XFIR"      : [{offset : 0, match : "XFIR"}, {offset : 8, match : "LPPA"}],
 	"Macromedia Projector PJ00/PJ01" : [{offset : 0, match : "PJ0"}, {offset : 3, match : [["0", "1"]]}],
@@ -44,6 +56,7 @@ const DEXMAGIC_CHECKS = {
 	"Picture Catalog Spinnaker"      : [{offset : 0, match : "CAT "}, {offset : 8, match : "CLIPFORM"}],
 	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
 	"SGS.DAT"                        : [{offset : 0, match : "SGS.DAT "}],
+	"SouthPeak Puzzle Archive"       : [{offset : 0, match : "\n\r Copyright "}, {offset : 15, match : "1996 by SouthPeak Interactive"}],
 	"Superscape SVR"                 : [{offset : 0, match : "SVR"}],
 	"Superscape VRT"                 : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
 	"Superscape XVR"                 : [{offset : 0, match : "XVR"}],
@@ -146,6 +159,7 @@ const DEXMAGIC_CHECKS = {
 	"MLDF BMHD file"                  : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],
 	"multiArtist"                     : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],
 	"NAPLPS Image"                    : [{offset : 0, match : [0x0C, 0x0E, 0x20, 0x4C, 0x6F, 0x21, 0x48, 0x40, 0x40, 0x49, 0x3E, 0x40, 0x3C, 0x40, 0x40, 0x40, 0x3E]}],
+	"Ninell Graphic"        		  : [{offset : 0, match : "NGF"}, {offset : 3, match : [0x01]}, {offset : 4, match : [0x00]}],
 	"PaintWorks"                      : [{offset : 54, match : "ANvisionA"}],
 	"PCR Image"                       : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x10]}],
 	"PCX2EXE (Arminio Grgic)"         : [{offset : 0, match : "MZ"}, {offset : 754, match : "Armini"}, {offset : 761, match : "Grgic"}],
@@ -245,22 +259,27 @@ const DEXMAGIC_CHECKS = {
 
 	// video
 	"Adeline XCF Video"                        : [{offset : 0, match : "FrameLen"}],
+	"Arc Developments HUF Video"               : [{offset : 0, match : "[AVF-95]"}],
 	"AVF Video (old)"                          : [{offset : 0, match : "ALG"}],
 	"CRH Video"                                : [{offset : 0, match : [0x01, 0x00, 0x22, 0x56]}],
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
 	"Dorling Kindersley Animation"             : [{offset : 0, match : [0x01, 0x00]}, {offset : 52, match : "funky!"}],
+	"Gates of Skeldal Video" 			       : [{offset : 0, match : "MGIF97"}],
+	"GTE Vantage Animation"                    : [{offset : 0, match : "GAV "}],
 	"IFF SSAd file"                            : [{offset : 0, match : "FORM"}, {offset : 8, match : "SSAd"}],
 	"JAM Video"                                : [{offset : 0, match : "JAM\0"}],
 	"KDV Video"                                : [{offset : 0, match : "xVDK"}],
 	"Little Big Adventure FLA Video"           : [{offset : 0, match : "V1.3"}],
 	"Machine Hunter FMV Video"                 : [{offset : 0, match : "AFMV"}],
+	"Ninell Animation"        		           : [{offset : 0, match : "NAF"}, {offset : 3, match : [0x01]}, {offset : 4, match : [0x00]}],
 	"NXL Video v1"                             : [{offset : 0, match : [0x01]}, {offset : 16, match : "NXL1"}],
 	"NXL Video v2"                             : [{offset : 0, match : [0x01]}, {offset : 16, match : "NXL2"}],
 	"PTF Video"                                : [{offset : 4, match : [0x2E]}, {offset : 5, match : "PTF"}],
 	"Pray for Death CDA Video"                 : [{offset : 0, match : "LSANM\x01"}],
 	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
+	"Sesame Street STR Video" 				   : [{offset : 0, match : "STHD"}],
+	"Stargunner FLC"                           : [{offset : 0, match : "PGBP"}],
 	"Talisman ANI"                             : [{offset : 0, match : [0x34, 0x12, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00]}, {offset : 28, match : [0x21, 0x43, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00]}],
-	"Trilobyte VDX Video"                      : [{offset : 0, match : [0x67, 0x92]}],
 	"VPX1 Video Package"                       : [{offset : 0, match : "VPX1  video interflow packing exalter"}],
 	"Zork PMV Video"                           : [{offset : 0, match : "MOVE"}, {offset : 8, match : "MHED"}],
 
@@ -280,6 +299,24 @@ const DEXMAGIC_CHECKS = {
 /* eslint-enable unicorn/no-hex-escape */
 
 const DEXMAGIC_CUSTOMS = [
+	async function adMVI(r)
+	{
+		if(r.f.input.size<32)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 32);
+		if(header.getUInt32LE(0)!==1)
+			return;
+
+		if([header.getUInt32LE(8), header.getUInt32LE(12)].some(v => v===0 || v>1024))
+			return;
+
+		if([header.getUInt32LE(28)].some(v => v===0 || v>30))
+			return;
+
+		return `Archimedean Dynasty MVI Video`;
+	},
+	
 	// sometimes a .bin file can be valid but not match any magics at all, but format iso doesn't match on .bin extension due to how common it is
 	// So we just do a quick check to see if we have a corresponding .cue file in the same dir
 	async function bincue(r)
@@ -292,6 +329,45 @@ const DEXMAGIC_CUSTOMS = [
 			if(await fileUtil.exists(path.join(r.f.input.dir, `${r.f.input.name}${ext}`)))
 				return "BIN with CUE";
 		}
+	},
+
+	async function bureau13Video(r)
+	{
+		if(r.f.input.size<32)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 14);
+		if(header.getUInt16LE(0)!==0)
+			return;
+
+		if(![11025, 22050].includes(header.getUInt32LE(10)))	// observed sample rates, maybe there is more out there, but this is all I could find from the retail release of the game
+			return;
+
+		return `Bureau 13 Video`;
+	},
+
+	async function escalCompressed(r)
+	{
+		if(r.f.input.size<22)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 22);
+		const headerSize = header.getUInt8(0);
+		if(headerSize<22)
+			return;
+
+		if([2, 3, 4].some(offset => header.getUInt8(offset)!==0x78) || ![0x30, 0x34, 0x35, 0x78].includes(header.getUInt8(5)) || header.getUInt8(6)!==0x78)
+			return;
+		
+		const filenameLength = header.getUInt8(21);
+		if(filenameLength===0 || filenameLength>12)
+			return;
+
+		const compressedSize = header.getUInt32LE(7);
+		if(![r.f.input.size-1, r.f.input.size].includes(compressedSize+headerSize+2))
+			return;
+
+		return `Escal Compressed`;
 	},
 
 	async function exeAppended(r)

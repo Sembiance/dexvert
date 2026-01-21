@@ -66,6 +66,10 @@ const SUPPORTING_DIR_PATHS = [
 	"music/Instruments"
 ];
 
+const SUPPORTING_FAMILY_PARENT_FILE_PATHS = [
+	"video/res0006"
+];
+
 const FORCE_FORMAT_AS = [
 	// these formats have files that won't identify due to not being in the proper disk locations, so we force the format
 	"font/amigaBitmapFontContent",
@@ -700,6 +704,17 @@ const testData = xu.parseJSON(await fileUtil.readTextFile(DATA_FILE_PATH), {});
 xlog.info`Finding sample files...`;
 const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
 sampleFilePaths.filterInPlace(sampleFilePath => !SUPPORTING_DIR_PATHS.some(v => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath).startsWith(v)));
+
+// some formats (video/seventhLevelVideo) have supporting files in parent dirs that are needed for conversion, so copy those over too
+for(const supportingFamilyParentFilePath of SUPPORTING_FAMILY_PARENT_FILE_PATHS)
+{
+	if(sampleFilePaths.some(sampleFilePath => path.dirname(supportingFamilyParentFilePath)===path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath).split("/")[0]))
+	{
+		const destFilePath = path.join(SAMPLE_DIR_ROOT_PATH, supportingFamilyParentFilePath);
+		await Deno.mkdir(path.dirname(destFilePath), {recursive : true});
+		await Deno.copyFile(path.join(import.meta.dirname, "sample", supportingFamilyParentFilePath), destFilePath);
+	}
+}
 
 sampleFilePaths.filterInPlace(sampleFilePath =>
 {

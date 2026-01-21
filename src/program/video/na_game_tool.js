@@ -11,7 +11,7 @@ export class na_game_tool extends Program
 	allowLargeOutput = true;
 
 	bin       = "na_game_tool";
-	args      = async r => [...(r.flags.format ? ["-ifmt", r.flags.format] : []), r.inFile(), "-ofmt", r.flags.outType || "avi", await r.outFile(`out.${r.flags.outType || "avi"}`)];
-	chain     = r => (r.flags.outType==="wav" ? "sox[type:wav]" : "ffmpeg");
+	args      = async r => [...(r.flags.format ? ["-ifmt", r.flags.format] : []), r.inFile(), "-ofmt", (r.flags.outType==="png" ? "imgseq" : (r.flags.outType || "avi")), await r.outFile(`out.${r.flags.outType==="png" ? "ppm" : (r.flags.outType || "avi")}`)];
+	chain     = r => (r.flags.outType==="wav" ? "sox[type:wav]" : (r.flags.outType==="png" ? "convert" : "ffmpeg"));
 	renameOut = true;
 }

@@ -21415,20 +21415,26 @@ Known extensions: 338
 [pcx]      Zsoft Publisher's Paintbrush             pcx pcc dcx 
 [bif]      byLight                                  bif 
 
->>> na_game_tool 0.2.0  (na_game_tool --list-input-formats)  Linux https://nihav.org/game_tool.html
+>>> na_game_tool 0.2.0  (na_game_tool --list-input-formats) AND (na_game_tool --list-archive-formats)  Linux https://nihav.org/game_tool.html
+  7lev_movie 7th Level movie
   ace        Space Ace scenes
   acf        Time Commando ACF
+  ad_mvi     Archimedean Dynasty/Schleichfahrt MVI
   ai_cda     Alien Incident CDA
   amf        Manic Karts AMF
+  arc-huf    Arc Developments HUF
   ark-an     Ark of Time animation
   ascon      Asc(ar)on animation
+  av_ani     Alien Virus animation
   avenger    Road Avenger BIN
   avf        American Laser Games / Her Interactive Video
   avx        Jack Orlando AVX
   azmov      Azrael's Tear MOV
+  b13_fli    Bureau 13 video
   bal        Baldies animation
   bd13       Brain Dead 13 scenes
   byon-m     Castles 2 greyscale video
+  c13        Hammer of the Gods C13
   ca2        Microcosm CA2
   ccommand   Cobra Command BIN
   cda        Pray for Death CDA
@@ -21444,16 +21450,22 @@ Known extensions: 338
   derf-aud   Xilam DERF audio
   derf-vid   Xilam DERF video
   dkanim     DK animation
+  dmv        Brainstorm Technology DMV
   dpeg       DPEG
   drl        Thunder In Paradise DRL
   duck-uqm   TrueMotion video for 3DO version of SC2
+  dxv        Celestial Impact DXV
   egg        Independence Day EGG
   etv        Hercules ETV
   fcmp       FutureVision audio
   fla        Little Big Adventure FLA
   flh        Conquest Earth FLH
   fli        FLIC
+  flk        FLK
   fst        FutureVision video
+  fvf        Spectrum Holobyte FVF
+  gav        GTE Vantage Animation
+  grn        Microids GRN
   guilty     Innocent Until Caught 1/2 cutscenes
   h2o        The Pandora Directive video
   haf        Death Rally HAF
@@ -21461,8 +21473,12 @@ Known extensions: 338
   hnm0       Cryo HNM0
   hnm1       Cryo HNM1
   hnm4       Cryo HNM4
+  hnm5       Cryo UBB
+  hnm6       Cryo HNM6
   imv        ICOM video
   imx        Fable video
+  ivas       Tsunami Media video
+  ivd        Interactive Pictures VID
   jam        JAM video
   jazz2      Jazz Jackrabbit 2 cutscene
   kdv24      Comanche video
@@ -21479,8 +21495,14 @@ Known extensions: 338
   m95        Interplay M95
   maelstrom-anm Maelstrom ANM
   mfilm      Murder FILM
+  mgif       Gates of Skeldal MGIF
   mh-fmv     Machine Hunter FMV
+  mpanim     MP Entertainment animation
+  mpanim-seq MP Entertainment animated sequence
   mux        Infogrames MUX video
+  mvi1       Ikarion MVI1
+  mvi2       Ikarion MVI2
+  naf        Ninell Animation File
   ninja-bin  Revenge of the Ninja BIN
   nl-fmv     Nightlong FMV (320x180)
   nl-fmv2    Nightlong FMV2 (640x360)
@@ -21490,23 +21512,30 @@ Known extensions: 338
   origin-ssm System Shock movie
   paco       PACo
   ph         Total Multimedia PH video
+  pmm        Psygnosis MultiMedia
   pmv        Infocom PMV
   psy-str    Psychic Detective STR
   ptf        Under a Killing Moon PTF
   q          Legend Entertainment Q
   qrac-fmv   Network Q RAC Rally FMV
+  rac        Spectrum Holobyte RAC
   ratvid     Ratvideo
   raven-anm  Ravenloft ANM
   rbt        Sierra robot
   reaper-fmv Reaper FMV
   rlf        Zork RLF
+  roq        Trilobyte / id Software RoQ
   sdv        Stardock video
+  sg_flc     Packed Stargunner FLC
   siff       Beam Software SIFF
+  sks        Ascon SKS
   smv        Psygnosis SMV
   soulhunt   Soul Hunt VID
   spidy-ani  Spidy Animation v2
+  ssstr      Sesame Street STR
   talisman   Talisman animation
   tvi        Terminal Velocity video
+  um         Dark Moon UM
   umv-afraid Are You Afraid of the Dark UMV
   umv-dracula Dracula Unleashed UMV
   vdo        Harrow Media VDO
@@ -21521,7 +21550,27 @@ Known extensions: 338
   yumimi-ablk Yumimi Mix animations (ABLK)
   yumimi-cut Yumimi Mix animations (ACUT)
   zorton     Zorton Brothers video
-
+Supported archive extractors:
+  7lev_bin   7th Level BIN
+  access_ap  Access Software AP
+  b13_gl     Bureau 13 GL
+  bd13_dat   Braid Dead 13 DAT
+  beam_gob   Beam Software GOB
+  ce_wad     Conquest Earth WAD
+  cryo_archive Cryo Archive
+  egg        HotHouse EGG
+  escal-z    Escal compressed
+  gjd        Trilobyte GJD
+  gk3_barn   Gabriel Knight 3 Barn
+  goosebumps Goosebumps CFS
+  hell-lib   Hell: A Cyberpunk Thriller library
+  horde-vdx  The Horde VDX
+  m88        M88 Movie
+  mco        SouthPeak Interactive puzzle archive
+  mng        Hostile Waters MNG
+  rlb        Tsunami Media RLB
+  stk        Coktel Vision STK
+  stk2       Coktel Vision STK2
 
 >>> nihav linux https://git.nihav.org/		(nihav-encoder --list-decoders | sort)
  aac (AAC)

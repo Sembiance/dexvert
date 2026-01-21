@@ -6,6 +6,7 @@ export class trilobyteVDX extends Format
 	website        = "https://wiki.multimedia.cx/index.php/VDX";
 	ext            = [".vdx"];
 	forbidExtMatch = true;
-	magic          = ["Trilobyte VDX Video"];
+	magic          = ["Trilobyte GDJ/VDX"];
+	weakMagic      = true;
 	converters     = ["na_game_tool[format:vdx]"];
 }

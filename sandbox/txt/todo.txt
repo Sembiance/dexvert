@@ -8,17 +8,19 @@
 
 * Several WAVs and other audio formats (where WAVs are extracted with foremost -> sox) don't work with sox_ng (the sox replacement)
   I've opened an issue about it: https://codeberg.org/sox_ng/sox_ng/issues/747
+  Once they fix that, I can update my system and install sox_ng (already have overlay for it) instead of sox
+  Then need to run full test-suite again and ensure everything still works correctly
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* Update deark, add support for:
+* Update deark and add support for:
 	http://fileformats.archiveteam.org/wiki/Color_RLE
-	https://discmaster.textfiles.com/search?extension=rle&detection=1b4743*			(just 1 unique file, BARELY worth adding, but sure, add it)
+	https://discmaster.textfiles.com/search?extension=rle&detection=1b4743*		(just 1 unique file, BARELY worth adding, but sure, add it)
 
 /-------------\
 | dexvert 3.0 |
 \-------------/
-* Keep dexdrone10 STATIC as a test base of all truth
+* Keep dexdrone10 STATIC as a test base of all truth. Do not update it.
 
 * Spin up a new modern AMD based machine WITH a GPU and get the test suite working there perfectly
 

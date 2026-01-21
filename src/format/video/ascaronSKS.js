@@ -9,5 +9,5 @@ export class ascaronSKS extends Format
 	magic          = ["ASCARON video"];
 	weakMagic      = true;
 	metaProvider   = ["mplayer"];
-	converters     = ["ffmpeg[format:mjpeg]"];
+	converters     = ["na_game_tool[format:sks]", "ffmpeg[format:mjpeg]"];
 }

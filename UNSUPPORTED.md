@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,041)
+# Unsupported File Formats (4,037)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -409,7 +409,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (197)
+## Document (198)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -566,6 +566,7 @@ Family/Format | Name | Extensions | Notes
 [document/saxonPublisherDocument](https://discmaster.textfiles.com/search?format=saxonPublisherDocument) | Saxon Publisher document | .sp | 
 [document/pagePlus](https://discmaster.textfiles.com/search?format=pagePlus) | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
 [document/signumDocument3](https://discmaster.textfiles.com/search?format=signumDocument3) | Signum Document v3 | .sdk | 
+[document/softbookPublisherEBook](https://discmaster.textfiles.com/search?format=softbookPublisherEBook) | Softbook Publisher eBook | .imp | 
 [document/softdeskSpreadsheet](https://discmaster.textfiles.com/search?format=softdeskSpreadsheet) | Softdesk Spreadsheet | .sst | 
 [document/starAmPlanSpreadsheet](https://discmaster.textfiles.com/search?format=starAmPlanSpreadsheet) | StarAm Plan Spreadsheet | .sab | 
 [document/storybookWeaver](https://discmaster.textfiles.com/search?format=storybookWeaver) | Storybook Weaver Story | .swd .sts | 
@@ -1187,7 +1188,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,752)
+## Other (2,750)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1225,7 +1226,6 @@ Family/Format | Name | Extensions | Notes
 [other/fourDPaintProject](https://discmaster.textfiles.com/search?format=fourDPaintProject) | 4D Paint Project | .4dp | [1 sample file](https://sembiance.com/fileFormatSamples/other/fourDPaintProject/)
 [other/binaryRelocation6502](https://discmaster.textfiles.com/search?format=binaryRelocation6502) | 6502 binary relocation format |  | 
 [other/sevenColorsGameDataArchive](https://discmaster.textfiles.com/search?format=sevenColorsGameDataArchive) | 7 Colors game data archive | .dat | 
-[other/seventhLevelGameDataArchive](https://discmaster.textfiles.com/search?format=seventhLevelGameDataArchive) | 7th Level game data archive | .bin | 
 [other/cpmBASCOMCompiled](https://discmaster.textfiles.com/search?format=cpmBASCOMCompiled) | 8bit CP/M-80 COM BASCOM compiled | .obj .run | 
 [other/ninetyFourBSoundBank](https://discmaster.textfiles.com/search?format=ninetyFourBSoundBank) | 94B sound bank | .94b | 
 [other/aSquaredAntiMalwareChecksum](https://discmaster.textfiles.com/search?format=aSquaredAntiMalwareChecksum) | a-squared Anti-Malware checksum for signatures files | .trc | 
@@ -2471,6 +2471,7 @@ Family/Format | Name | Extensions | Notes
 [other/komGameDataArchive](https://discmaster.textfiles.com/search?format=komGameDataArchive) | KOM game data archive | .kom | 
 [other/konicaPictureShowSlideshow](https://discmaster.textfiles.com/search?format=konicaPictureShowSlideshow) | Konica Picture Show Slideshow | .sld | 
 [other/korgFile](https://discmaster.textfiles.com/search?format=korgFile) | KORG File | .pcg .bsq .arr .sty .sng | 
+[other/kossacsAutoSafeFormat](https://discmaster.textfiles.com/search?format=kossacsAutoSafeFormat) | Kossacs Auto Safe Format | .sav | 
 [other/krisCardsCardTemplate](https://discmaster.textfiles.com/search?format=krisCardsCardTemplate) | KrisCards card/template | .krs | 
 [other/kristalAudioEngineProject](https://discmaster.textfiles.com/search?format=kristalAudioEngineProject) | KRISTAL Audio Engine project | .kristal | 
 [other/kritaLayerTile](https://discmaster.textfiles.com/search?format=kritaLayerTile) | Krita layer/tile |  | 
@@ -2765,7 +2766,6 @@ Family/Format | Name | Extensions | Notes
 [other/movieShopPreferences](https://discmaster.textfiles.com/search?format=movieShopPreferences) | MovieShop Preferences | .prefs | 
 [other/movieShopTimeline](https://discmaster.textfiles.com/search?format=movieShopTimeline) | MovieShop timeline |  | 
 [other/mozillaXULFastload](https://discmaster.textfiles.com/search?format=mozillaXULFastload) | Mozilla XUL fastload | .mfasl .mfl | 
-[other/mPEntertainmentAnimation](https://discmaster.textfiles.com/search?format=mPEntertainmentAnimation) | MP Entertainment Animation | .anm .seq | 
 [other/mpEntertainmentSVGAAnimation](https://discmaster.textfiles.com/search?format=mpEntertainmentSVGAAnimation) | MP Entertainment SVGA Animation | .ani | 
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?format=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
 [other/msnMessengerLogFile](https://discmaster.textfiles.com/search?format=msnMessengerLogFile) | MSN/Windows Live Messenger Log file | .sgm .dat | 
@@ -3634,7 +3634,6 @@ Family/Format | Name | Extensions | Notes
 [other/tsOnlineModemsDefinitions](https://discmaster.textfiles.com/search?format=tsOnlineModemsDefinitions) | TS Online modems definitions | .def .dat | 
 [other/tsiProtected](https://discmaster.textfiles.com/search?format=tsiProtected) | TSI Protected | .pwd .pbk | 
 [other/tsiLangBinaryTranslationData](https://discmaster.textfiles.com/search?format=tsiLangBinaryTranslationData) | TsiLang binary translation data | .sib | 
-[other/tsunamiMediaGameDataArchive](https://discmaster.textfiles.com/search?format=tsunamiMediaGameDataArchive) | Tsunami Media game data archive | .rlb | 
 [other/turboAssemblerHelp](https://discmaster.textfiles.com/search?format=turboAssemblerHelp) | Turbo Assembler Help | .tah | 
 [other/turboBASICConfiguration](https://discmaster.textfiles.com/search?format=turboBASICConfiguration) | Turbo BASIC configuration | .tb | 
 [other/turboCHelp](https://discmaster.textfiles.com/search?format=turboCHelp) | Turbo C Help | .tch | 
@@ -4049,7 +4048,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (51)
+## Video (48)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -4066,13 +4065,11 @@ Family/Format | Name | Extensions | Notes
 [video/delphineCIN](https://discmaster.textfiles.com/search?format=delphineCIN) | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://sembiance.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 [video/eaMADVideo](https://discmaster.textfiles.com/search?format=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?format=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
-[video/eggVideo](https://discmaster.textfiles.com/search?format=eggVideo) | EGG video | .egg | [4 sample files](https://sembiance.com/fileFormatSamples/video/eggVideo/)
 [video/emblazeVideo2](https://discmaster.textfiles.com/search?format=emblazeVideo2) | Emblaze Video 2 | .ev2 | [1 sample file](https://sembiance.com/fileFormatSamples/video/emblazeVideo2/)
 [video/evaVideo](https://discmaster.textfiles.com/search?format=evaVideo) | EVA3/EVA5 video | .eva | [3 sample files](https://sembiance.com/fileFormatSamples/video/evaVideo/)
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?format=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?format=iavfVideo) | IAVF video | .avi .iavf | 
-[video/ikarionMovie](https://discmaster.textfiles.com/search?format=ikarionMovie) | Ikarion Movie | .mvi | [5 sample files](https://sembiance.com/fileFormatSamples/video/ikarionMovie/)
 [video/imperiumGalacticaAnimation](https://discmaster.textfiles.com/search?format=imperiumGalacticaAnimation) | Imperium Galactica Animation | .ani | [1 sample file](https://sembiance.com/fileFormatSamples/video/imperiumGalacticaAnimation/)
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?format=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/kheopsStudioVideo](https://discmaster.textfiles.com/search?format=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
@@ -4082,6 +4079,7 @@ Family/Format | Name | Extensions | Notes
 [video/magixVideo](https://discmaster.textfiles.com/search?format=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 [video/mdecVideoStream](https://discmaster.textfiles.com/search?format=mdecVideoStream) | MDEC video stream | .str | [4 sample files](https://sembiance.com/fileFormatSamples/video/mdecVideoStream/)
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 
+[video/microidsGRN](https://discmaster.textfiles.com/search?format=microidsGRN) | Microids GRN Video | .grn | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?format=movieSetterSet) | MovieSetter Set | .set | 
 [video/novastormMediaVideo](https://discmaster.textfiles.com/search?format=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 
 [video/ntitler](https://discmaster.textfiles.com/search?format=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
@@ -4089,12 +4087,10 @@ Family/Format | Name | Extensions | Notes
 [video/pageFlipperPlusFXAnimation](https://discmaster.textfiles.com/search?format=pageFlipperPlusFXAnimation) | PageFlipper Plus F/X animation |  | 
 [video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?format=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 
 [video/pcAnimationVideo](https://discmaster.textfiles.com/search?format=pcAnimationVideo) | PC-Animation video | .ani | 
-[video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?format=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php/PMM) | .pmm | Couldn't locate a converter
 [video/riffANIM](https://discmaster.textfiles.com/search?format=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 [video/roxanneAnimation](https://discmaster.textfiles.com/search?format=roxanneAnimation) | Roxanne animation | .rox | 
 [video/screenCamVideo](https://discmaster.textfiles.com/search?format=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
 [video/sonyVegas](https://discmaster.textfiles.com/search?format=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
-[video/stngAFinalUnityFMVCutscene](https://discmaster.textfiles.com/search?format=stngAFinalUnityFMVCutscene) | STNG 'A Final Unity' Fullmotion Video cutscene | .fvf | 
 [video/theDirector](https://discmaster.textfiles.com/search?format=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
 [video/hannaBarberaAnimationWorkshop](https://discmaster.textfiles.com/search?format=hannaBarberaAnimationWorkshop) | The Hanna-Barbera Animation Workshop animation | .xsh | 
 [video/toonBoomStudioAnimation](https://discmaster.textfiles.com/search?format=toonBoomStudioAnimation) | Toon Boom Studio animation | .tbd .tbp | 

@@ -7,5 +7,5 @@ export class idRoQ extends Format
 	ext          = [".roq"];
 	magic        = ["Id Software RoQ video", "id RoQ (roq)"];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:roq]"];
+	converters   = ["na_game_tool[format:roq]", "ffmpeg[format:roq]"];
 }

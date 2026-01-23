@@ -22,6 +22,9 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const xlog = new XLog(argv.debug ? "debug" : "info", {alwaysEcho : !argv.json});
+if(argv.record && Deno.hostname()!=="dexdrone10")
+	Deno.exit(xlog.error("Recording new test results is only allowed on dexdrone10"));
+
 const testLogLines = [];
 xlog.logger = line => testLogLines.push(line);
 

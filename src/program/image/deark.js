@@ -156,7 +156,7 @@ export class deark extends Program
 			const {missingLetter} = (r.stdout.split("\n").find(line => line.trim().startsWith("DEBUG: missing filename char:")) || "").match(/missing filename char: '(?<missingLetter>.)'/)?.groups || {};
 			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 			if(missingLetter && fileOutputPaths.length===1)
-				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext.substring(0, 3)}${missingLetter}`));
+				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext.substring(0, 3)}${r.originalInput.ext.substring(1, 3)===r.originalInput.ext.substring(1, 3).toUpperCase() ? missingLetter.toUpperCase() : missingLetter}`));
 		}
 
 		// so bsave images are very common, unfortunately there isn't a good way to determine what format that image is, so dexvert tries them all

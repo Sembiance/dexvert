@@ -14,7 +14,6 @@ export class timidity extends Program
 	flags   = {
 		midiFont : `Which midifont to use to convert (${INSTRUMENT_NAMES.join(", ")}) Default: ${INSTRUMENT_NAMES[0]}`
 	};
-
 	bin = "timidity";
 
 	// Some MIDI files are buggy and have 2 hour+ run times, others seem to loop for hours. So specify a sane timeout, it'll then handle the WAV that it did produce, which will be good enough

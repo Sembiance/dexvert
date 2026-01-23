@@ -14,7 +14,7 @@ export async function verifyAudio(dexState, dexFile)
 	}
 
 	const soxiR = await Program.runProgram("soxi", dexFile, {xlog, autoUnlink : true});
-	if(!soxiR.meta.sampleEncoding)
+	if(!soxiR?.meta?.sampleEncoding)
 	{
 		xlog.warn`Audio failed verification due to not detecting a sample encoding: ${soxiR.meta}`;
 		return false;
@@ -33,7 +33,7 @@ export async function verifyAudio(dexState, dexFile)
 		}
 	}
 
-	return {identifications, meta : ffprobeR.meta};
+	return {identifications, soxiMeta : soxiR.meta, meta : ffprobeR.meta};
 }
 
 export class audio extends Family

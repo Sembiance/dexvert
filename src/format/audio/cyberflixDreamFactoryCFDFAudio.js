@@ -8,5 +8,5 @@ export class cyberflixDreamFactoryCFDFAudio extends Format
 	magic          = ["CFDF (Cyberflix DreamFactory) (cfdf)"];
 	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:cfdf][outType:mp3]"];
+	verify         = ({soxiMeta}) => soxiMeta.duration>100;
 }
-

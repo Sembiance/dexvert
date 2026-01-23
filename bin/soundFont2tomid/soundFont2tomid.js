@@ -23,11 +23,11 @@ const midiFilePaths = [];
 tiptoe(
 	function ensureLoaded()
 	{
-		runUtil.run("fluidsynth", ["--audio-driver=file", "--quiet", argv.inputFilePath], {silent : true, "ignore-stderr" : true, inputData : "fonts\nquit"}, this);
+		runUtil.run("fluidsynth", ["--audio-driver=file", argv.inputFilePath], {silent : true, inputData : "fonts\nquit"}, this);
 	},
 	function runFluidSynth(fluidSynthRaw)
 	{
-		if(!fluidSynthRaw.includes(path.basename(argv.inputFilePath)))
+		if(!fluidSynthRaw.includes(path.basename(argv.inputFilePath)) || ["/usr/share/sounds/sf2/FluidR3_G", "Failed to load SoundFont", "not a SoundFont or MIDI file or error occurred identifying it"].some(v => fluidSynthRaw.includes(v)))
 		{
 			console.error("Failed to load soundfont into FluidSynth.");
 			return this.finish();

@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,037)
+# Unsupported File Formats (4,042)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -329,7 +329,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (74)
+## Audio (73)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -394,7 +394,6 @@ Family/Format | Name | Extensions | Notes
 [audio/soundBlasterInstrument](https://discmaster.textfiles.com/search?format=soundBlasterInstrument) | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbi | [10 sample files](https://sembiance.com/fileFormatSamples/audio/soundBlasterInstrument/)
 [audio/soundImagesSoundSample](https://discmaster.textfiles.com/search?format=soundImagesSoundSample) | Sound Images sound sample | .bin | 
 [audio/soundPlayDigitizedAudio](https://discmaster.textfiles.com/search?format=soundPlayDigitizedAudio) | Sound Play digitized audio | .snd | 
-[audio/soundFont1](https://discmaster.textfiles.com/search?format=soundFont1) | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [1 sample file](https://sembiance.com/fileFormatSamples/audio/soundFont1/) - Awave Studio can technically convert these, but 99.9% of all SBK SoundFond 1 files just contain meta info that points to a samples in ROM, thus there isn't anything really to convert.
 [audio/stoneTrackerSample](https://discmaster.textfiles.com/search?format=stoneTrackerSample) | StoneTracker Sample | .sps | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stoneTrackerSample/)
 [audio/stosSample](https://discmaster.textfiles.com/search?format=stosSample) | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stosSample/)
 [audio/superscapeSounds](https://discmaster.textfiles.com/search?format=superscapeSounds) | Superscape Sounds | .snd | [1 sample file](https://sembiance.com/fileFormatSamples/audio/superscapeSounds/) - Not yet supported. This can convert it: sox -t raw -r 11025 -e signed -b 16 -c 2 sounds.snd b.wav In the UI you can see the 'pitch' which corresponds to the rate: 64===11025hz and 40===44100hz However there are several sounds packed into this file, not just 1 sound, and they may differ in rate/pitch, etc. So ideally the format needs to be figured out so each sound can be extracted separately.
@@ -804,7 +803,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (194)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -904,6 +903,7 @@ Family/Format | Name | Extensions | Notes
 [image/kaboomStudiosBitmapBlock](https://discmaster.textfiles.com/search?format=kaboomStudiosBitmapBlock) | Kaboom Studios Bitmap Block | .bmb | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
+[image/kompasDrawing](https://discmaster.textfiles.com/search?format=kompasDrawing) | KOMPAS Drawing | .cdw .lyt .lts .bss | 
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?format=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 [image/lightningStrikeBitmap](https://discmaster.textfiles.com/search?format=lightningStrikeBitmap) | Lightning Strike bitmap | .cod | 
 [image/lightWaveSurface](https://discmaster.textfiles.com/search?format=lightWaveSurface) | LightWave Surface | .srf | 
@@ -996,6 +996,7 @@ Family/Format | Name | Extensions | Notes
 [image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?format=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?format=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
 [image/visualCADDSymbol](https://discmaster.textfiles.com/search?format=visualCADDSymbol) | Visual CADD Symbol | .vcs | 
+[image/werescCADEDrawing](https://discmaster.textfiles.com/search?format=werescCADEDrawing) | Weresc CADE drawing | .dtc | 
 [image/windowsFAXCover](https://discmaster.textfiles.com/search?format=windowsFAXCover) | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?format=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?format=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
@@ -1188,7 +1189,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,750)
+## Other (2,755)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2450,6 +2451,7 @@ Family/Format | Name | Extensions | Notes
 [other/kasperskyLabBlackListFile](https://discmaster.textfiles.com/search?format=kasperskyLabBlackListFile) | Kaspersky Lab black list file | .lst | 
 [other/kasperskyLabKeyFile](https://discmaster.textfiles.com/search?format=kasperskyLabKeyFile) | Kaspersky Lab Key file | .key | 
 [other/kbdMapFile](https://discmaster.textfiles.com/search?format=kbdMapFile) | kbd map file |  | 
+[other/keaColoringBookPage](https://discmaster.textfiles.com/search?format=keaColoringBookPage) | Kea Coloring Book page | .kcx | 
 [other/keePassPlugin](https://discmaster.textfiles.com/search?format=keePassPlugin) | KeePass plugin | .plgx | 
 [other/keymanCompiledKeyboardFile](https://discmaster.textfiles.com/search?format=keymanCompiledKeyboardFile) | Keyman Compiled Keyboard File | .kmx | 
 [other/keyWalletObjectEncryptedData](https://discmaster.textfiles.com/search?format=keyWalletObjectEncryptedData) | KeyWallet Object - encrypted data | .kwo | 
@@ -2995,6 +2997,7 @@ Family/Format | Name | Extensions | Notes
 [other/passoloLocalizationProject](https://discmaster.textfiles.com/search?format=passoloLocalizationProject) | Passolo Localization Project | .lpu | 
 [other/passwordCommanderProDatabase](https://discmaster.textfiles.com/search?format=passwordCommanderProDatabase) | Password Commander Pro database | .pwd | 
 [other/patchMeisterDriver](https://discmaster.textfiles.com/search?format=patchMeisterDriver) | PatchMeister Driver | .pmdriver | 
+[other/pathAwayMap](https://discmaster.textfiles.com/search?format=pathAwayMap) | PathAway map | .prc | 
 [other/pathMinderApplicationsMenus](https://discmaster.textfiles.com/search?format=pathMinderApplicationsMenus) | PathMinder Applications Menus  | .pm4 | 
 [other/pathMinderConfiguration](https://discmaster.textfiles.com/search?format=pathMinderConfiguration) | PathMinder configuration | .pm4 .cnf | 
 [other/paxImperiaSavedGame](https://discmaster.textfiles.com/search?format=paxImperiaSavedGame) | Pax Imperia Saved Game |  | 
@@ -3644,6 +3647,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboPascalHelp](https://discmaster.textfiles.com/search?format=turboPascalHelp) | Turbo Pascal Help | .hlp | 
 [other/turboPascalSymbolTable](https://discmaster.textfiles.com/search?format=turboPascalSymbolTable) | Turbo Pascal Symbol Table | .psm | 
 [other/turboProfilerAreasData](https://discmaster.textfiles.com/search?format=turboProfilerAreasData) | Turbo Profiler Areas data | .tfa | 
+[other/turboShellSettings](https://discmaster.textfiles.com/search?format=turboShellSettings) | Turbo Shell settings | .dsk | 
 [other/turboCalcLibrary](https://discmaster.textfiles.com/search?format=turboCalcLibrary) | TurboCalc Library | .tclib | 
 [other/turboPrintColorProfile](https://discmaster.textfiles.com/search?format=turboPrintColorProfile) | TurboPrint color profile | .tpm | 
 [other/turboprintWizard](https://discmaster.textfiles.com/search?format=turboprintWizard) | Turboprint Wizard | .wizard | 
@@ -3679,6 +3683,7 @@ Family/Format | Name | Extensions | Notes
 [other/unknown](https://discmaster.textfiles.com/search?format=unknown) | Unknown File |  | [2 sample files](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealEngineCharacter](https://discmaster.textfiles.com/search?format=unrealEngineCharacter) | Unreal Engine character | .psk | 
 [other/unrealEngineLocalizationResource](https://discmaster.textfiles.com/search?format=unrealEngineLocalizationResource) | Unreal Engine Localization Resource | .locres | 
+[other/unrealEngineSaveGame](https://discmaster.textfiles.com/search?format=unrealEngineSaveGame) | Unreal Engine save game | .sav | 
 [other/unrealMap](https://discmaster.textfiles.com/search?format=unrealMap) | Unreal Map | .unr | 
 [other/uplinkEncryptedGameData](https://discmaster.textfiles.com/search?format=uplinkEncryptedGameData) | Uplink encrypted game data | .dat | 
 [other/upsPatchFile](https://discmaster.textfiles.com/search?format=upsPatchFile) | UPS patch file | .ups | 
@@ -3778,6 +3783,7 @@ Family/Format | Name | Extensions | Notes
 [other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?format=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
 [other/warCraft3Map](https://discmaster.textfiles.com/search?format=warCraft3Map) | WarCraft III Map | .w3m | 
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?format=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
+[other/warlordsXCG](https://discmaster.textfiles.com/search?format=warlordsXCG) | Warlords XCG | .xcg | 
 [other/warlordsXCI](https://discmaster.textfiles.com/search?format=warlordsXCI) | Warlords XCI | .xci | 
 [other/watcomDebugTrap](https://discmaster.textfiles.com/search?format=watcomDebugTrap) | Watcom C/C++ debug Trap | .trp | 
 [other/watcomProfilerSamplingData](https://discmaster.textfiles.com/search?format=watcomProfilerSamplingData) | Watcom Profiler Sampling Data | .smp | 
@@ -4048,7 +4054,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (48)
+## Video (47)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/threeDOSTRVideo](https://discmaster.textfiles.com/search?format=threeDOSTRVideo) | 3DO STR video |  | 
@@ -4079,7 +4085,6 @@ Family/Format | Name | Extensions | Notes
 [video/magixVideo](https://discmaster.textfiles.com/search?format=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 [video/mdecVideoStream](https://discmaster.textfiles.com/search?format=mdecVideoStream) | MDEC video stream | .str | [4 sample files](https://sembiance.com/fileFormatSamples/video/mdecVideoStream/)
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 
-[video/microidsGRN](https://discmaster.textfiles.com/search?format=microidsGRN) | Microids GRN Video | .grn | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?format=movieSetterSet) | MovieSetter Set | .set | 
 [video/novastormMediaVideo](https://discmaster.textfiles.com/search?format=novastormMediaVideo) | Novastorm Media video | .fa .fza .mza | 
 [video/ntitler](https://discmaster.textfiles.com/search?format=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro

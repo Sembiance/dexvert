@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,042)
+# Unsupported File Formats (4,036)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -803,7 +803,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (196)
+## Image (194)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -847,7 +847,6 @@ Family/Format | Name | Extensions | Notes
 [image/comicSetterProject](https://discmaster.textfiles.com/search?format=comicSetterProject) | Comic Setter project |  | 
 [image/condensedEmbroidery](https://discmaster.textfiles.com/search?format=condensedEmbroidery) | Condensed embroidery format | .cnd | 
 [image/continuousEdge](https://discmaster.textfiles.com/search?format=continuousEdge) | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://sembiance.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
-[image/corel10Texture](https://discmaster.textfiles.com/search?format=corel10Texture) | Corel 10 Texture | .tex | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?format=crayolaArtStudio) | Crayola Art Studio | .art | 
 [image/dataCADDrawing](https://discmaster.textfiles.com/search?format=dataCADDrawing) | DataCAD Drawing | .dc5 | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?format=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
@@ -900,7 +899,6 @@ Family/Format | Name | Extensions | Notes
 [image/introCAD](https://discmaster.textfiles.com/search?format=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
-[image/kaboomStudiosBitmapBlock](https://discmaster.textfiles.com/search?format=kaboomStudiosBitmapBlock) | Kaboom Studios Bitmap Block | .bmb | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
 [image/kompasDrawing](https://discmaster.textfiles.com/search?format=kompasDrawing) | KOMPAS Drawing | .cdw .lyt .lts .bss | 
@@ -1189,7 +1187,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,755)
+## Other (2,751)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1491,6 +1489,7 @@ Family/Format | Name | Extensions | Notes
 [other/autoREALMMap](https://discmaster.textfiles.com/search?format=autoREALMMap) | AutoREALM Map | .aur | 
 [other/autoREALMSymbols](https://discmaster.textfiles.com/search?format=autoREALMSymbols) | AutoREALM Symbols | .aus | 
 [other/autoSketchConfiguration](https://discmaster.textfiles.com/search?format=autoSketchConfiguration) | AutoSketch Configuration | .cfg | 
+[other/avastSetupUpdatePackage](https://discmaster.textfiles.com/search?format=avastSetupUpdatePackage) | Avast setup-update package | .vpu | 
 [other/avatarStudioLIO](https://discmaster.textfiles.com/search?format=avatarStudioLIO) | Avatar Studio LIO | .lio | 
 [other/avcHDClipInformation](https://discmaster.textfiles.com/search?format=avcHDClipInformation) | AVCHD Clip Information | .cpi | 
 [other/avcdHDPlaylist](https://discmaster.textfiles.com/search?format=avcdHDPlaylist) | AVCHD Playlist | .mpls | 
@@ -1731,7 +1730,6 @@ Family/Format | Name | Extensions | Notes
 [other/codeWarriorProject](https://discmaster.textfiles.com/search?format=codeWarriorProject) | CodeWarrior Project | .mcp | 
 [other/codeWarriorTargetData](https://discmaster.textfiles.com/search?format=codeWarriorTargetData) | CodeWarrior Target Data | .tdt | 
 [other/coffLibrary](https://discmaster.textfiles.com/search?format=coffLibrary) | COFF Library | .lib .obj .a | 
-[other/colFormatColorPalette](https://discmaster.textfiles.com/search?format=colFormatColorPalette) | COL Format 256 Color palette | .res .col | 
 [other/collectorzDotComMovieCollectorData](https://discmaster.textfiles.com/search?format=collectorzDotComMovieCollectorData) | Collectorz.com Movie Collector data | .mvc | 
 [other/colorFontMakerPattern](https://discmaster.textfiles.com/search?format=colorFontMakerPattern) | Color Font Maker pattern | .cfm | 
 [other/combustion2ParticleLibrary](https://discmaster.textfiles.com/search?format=combustion2ParticleLibrary) | Combustion 2 Particle Library | .elc | 
@@ -1825,7 +1823,6 @@ Family/Format | Name | Extensions | Notes
 [other/daikatanaGameData](https://discmaster.textfiles.com/search?format=daikatanaGameData) | Daikatana game data | .vsc | 
 [other/dalvikDexFile](https://discmaster.textfiles.com/search?format=dalvikDexFile) | Dalvik Dex File | .dex | 
 [other/danebaCanvasPalette](https://discmaster.textfiles.com/search?format=danebaCanvasPalette) | Daneba Canvas Palette (v3.x) | .pal .pa | 
-[other/darkLegionsColorPalaette](https://discmaster.textfiles.com/search?format=darkLegionsColorPalaette) | Dark Legions Color palaette | .col | 
 [other/darkReignMap](https://discmaster.textfiles.com/search?format=darkReignMap) | Dark Reign Map | .map | 
 [other/darkReignPalette](https://discmaster.textfiles.com/search?format=darkReignPalette) | Dark Reign Palette | .pal | 
 [other/darksidersGameDataPackage](https://discmaster.textfiles.com/search?format=darksidersGameDataPackage) | Darksiders game data package | .oppc .op360 .opps3 | 
@@ -2225,6 +2222,7 @@ Family/Format | Name | Extensions | Notes
 [other/gnuGettextMachineObject](https://discmaster.textfiles.com/search?format=gnuGettextMachineObject) | GNU Gettext Machine Objec | .gmo | 
 [other/gnuGprofPerformanceData](https://discmaster.textfiles.com/search?format=gnuGprofPerformanceData) | GNU gprof performance data | .out | 
 [other/gnuSmallTalkmage](https://discmaster.textfiles.com/search?format=gnuSmallTalkmage) | GNU SmallTalk image | .im | 
+[other/gobTOTFileFormat](https://discmaster.textfiles.com/search?format=gobTOTFileFormat) | GOB Engine TOT File | .tot | 
 [other/gObjectIntrospectionTypeLibrayData](https://discmaster.textfiles.com/search?format=gObjectIntrospectionTypeLibrayData) | GObject introspection Type Libray data | .typelib | 
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?format=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/godotCompiledScript](https://discmaster.textfiles.com/search?format=godotCompiledScript) | Godot Compiled script | .gdc | 
@@ -2302,7 +2300,6 @@ Family/Format | Name | Extensions | Notes
 [other/hmvsAntivirusDOSPlugIn](https://discmaster.textfiles.com/search?format=hmvsAntivirusDOSPlugIn) | HMVS antivirus DOS PlugIn | .pnp .lng | 
 [other/homePlanPro5Clip](https://discmaster.textfiles.com/search?format=homePlanPro5Clip) | Home Plan Pro 5 Clip | .clp | 
 [other/homePlanPro5Plan](https://discmaster.textfiles.com/search?format=homePlanPro5Plan) | Home Plan Pro 5 Plan | .pln | 
-[other/homeWorld2ROTGraphics](https://discmaster.textfiles.com/search?format=homeWorld2ROTGraphics) | Home World 2 - ROT graphics | .rot | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?format=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?format=homeBrewPalette) | HomeBrew Palette | .hpa | 
 [other/homeBrewTile](https://discmaster.textfiles.com/search?format=homeBrewTile) | HomeBrew Tile | .hti | 
@@ -2424,6 +2421,7 @@ Family/Format | Name | Extensions | Notes
 [other/jetPilotSegmentData](https://discmaster.textfiles.com/search?format=jetPilotSegmentData) | JETPilot segment data |  | 
 [other/jetPilotSprite](https://discmaster.textfiles.com/search?format=jetPilotSprite) | JETPilot sprite | .pssp .pssm | 
 [other/jetPilotSUPData](https://discmaster.textfiles.com/search?format=jetPilotSUPData) | JETPilot SUP data |  | 
+[other/jigdoTemplate](https://discmaster.textfiles.com/search?format=jigdoTemplate) | Jigdo Template | .template | 
 [other/jinxterGameSave](https://discmaster.textfiles.com/search?format=jinxterGameSave) | Jinxter game save | .gam | 
 [other/jniLibrary](https://discmaster.textfiles.com/search?format=jniLibrary) | JNI Library | .jnilib | 
 [other/jonathanGraphicsGameData](https://discmaster.textfiles.com/search?format=jonathanGraphicsGameData) | Jonathan graphics game data |  | 
@@ -2627,7 +2625,6 @@ Family/Format | Name | Extensions | Notes
 [other/maxonResourceCreationData](https://discmaster.textfiles.com/search?format=maxonResourceCreationData) | Maxon Resource Creation Tool Data | .rct | 
 [other/maxonCADHatchPatterns](https://discmaster.textfiles.com/search?format=maxonCADHatchPatterns) | MaxonCAD hatch patterns |  | 
 [other/maxonCADLibrary](https://discmaster.textfiles.com/search?format=maxonCADLibrary) | MaxonCAD Library | .mclib | 
-[other/mayaIconsOrSwatches](https://discmaster.textfiles.com/search?format=mayaIconsOrSwatches) | Maya Icons or Swatches file | .swatches | 
 [other/mayoSPMAnalyzeFormatHeader](https://discmaster.textfiles.com/search?format=mayoSPMAnalyzeFormatHeader) | Mayo/SPM Analyze format Header | .hdr | 
 [other/mcAfeeAntiVirusData](https://discmaster.textfiles.com/search?format=mcAfeeAntiVirusData) | McAfee AntiVirus data | .dat | 
 [other/mcAfeeAVPatternUpdate](https://discmaster.textfiles.com/search?format=mcAfeeAVPatternUpdate) | McAfee AV Pattern update | .gem | 
@@ -3051,7 +3048,6 @@ Family/Format | Name | Extensions | Notes
 [other/pico8PODDataArchive](https://discmaster.textfiles.com/search?format=pico8PODDataArchive) | Pico-8 POD data archive | .dat .pod | 
 [other/picturePumpProjectFile](https://discmaster.textfiles.com/search?format=picturePumpProjectFile) | Picture Pump Project File | .ppp | 
 [other/piklibAnimationData](https://discmaster.textfiles.com/search?format=piklibAnimationData) | Piklib Animation data | .ann | 
-[other/piklibGraphicData](https://discmaster.textfiles.com/search?format=piklibGraphicData) | Piklib/BlooMoo graphic data | .img | 
 [other/pinnacleStudioScene](https://discmaster.textfiles.com/search?format=pinnacleStudioScene) | Pinnacle Studio Scene | .scn | 
 [other/pinnacleStudioVideoProject](https://discmaster.textfiles.com/search?format=pinnacleStudioVideoProject) | Pinnacle Studio Video Project | .stu | 
 [other/pixelBenderBytecode](https://discmaster.textfiles.com/search?format=pixelBenderBytecode) | Pixel Bender bytecode |  | 
@@ -3110,7 +3106,6 @@ Family/Format | Name | Extensions | Notes
 [other/premiereTitleData](https://discmaster.textfiles.com/search?format=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?format=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
 [other/princeOfPersiaWarriorWithinSaveGame](https://discmaster.textfiles.com/search?format=princeOfPersiaWarriorWithinSaveGame) | Prince of Persia: Warrior Within save game | .sav | 
-[other/printMagicCard](https://discmaster.textfiles.com/search?format=printMagicCard) | Print Magic Card | .pmc | 
 [other/printShopDeluxeAutograph](https://discmaster.textfiles.com/search?format=printShopDeluxeAutograph) | Print Shop Deluxe Autograph | .pau | 
 [other/printShopDeluxeCardLayout](https://discmaster.textfiles.com/search?format=printShopDeluxeCardLayout) | Print Shop Deluxe Card Layout | .cly | 
 [other/printShopDeluxeCardTimepieces](https://discmaster.textfiles.com/search?format=printShopDeluxeCardTimepieces) | Print Shop Deluxe Card Timepieces | .pct | 
@@ -3137,6 +3132,7 @@ Family/Format | Name | Extensions | Notes
 [other/projectSpaceStationSavedMission](https://discmaster.textfiles.com/search?format=projectSpaceStationSavedMission) | Project: Space Station saved Mission | .msn | 
 [other/propellerheadReasonNNXTPatch](https://discmaster.textfiles.com/search?format=propellerheadReasonNNXTPatch) | Propellerhead Reason NN-XT Patch | .sxt .sx2 | 
 [other/propellerheadSoftwareReasonSoundBank](https://discmaster.textfiles.com/search?format=propellerheadSoftwareReasonSoundBank) | Propellerhead Software Reason SoundBank | .rfl | 
+[other/proprietaryObjectEXtension](https://discmaster.textfiles.com/search?format=proprietaryObjectEXtension) | Proprietary Object eXtension | .pox | 
 [other/protelPCBBinaryLibrary](https://discmaster.textfiles.com/search?format=protelPCBBinaryLibrary) | Protel PCB Binary Library |  | 
 [other/protelSchematicLibraryEditorBinaryFile](https://discmaster.textfiles.com/search?format=protelSchematicLibraryEditorBinaryFile) | Protel Schematic Library editor binary file |  | 
 [other/protextConfiguration](https://discmaster.textfiles.com/search?format=protextConfiguration) | Protext Configuration | .cfg | 
@@ -3234,7 +3230,6 @@ Family/Format | Name | Extensions | Notes
 [other/retro64GameData](https://discmaster.textfiles.com/search?format=retro64GameData) | Retro64 game data | .wld | 
 [other/returnToCastleWolfensteinSaveGame](https://discmaster.textfiles.com/search?format=returnToCastleWolfensteinSaveGame) | Return to Castle Wolfenstein save game | .svg | 
 [other/reunionAnimation](https://discmaster.textfiles.com/search?format=reunionAnimation) | Reunion Animation | .ani | 
-[other/reunionGraphics](https://discmaster.textfiles.com/search?format=reunionGraphics) | Reunion graphics | .pic | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?format=rfFlowDiagram) | RFFlow Diagram/Chart | .flo | 
 [other/rHIDEProject](https://discmaster.textfiles.com/search?format=rHIDEProject) | RHIDE Project | .gpr | 
 [other/richMapFormat](https://discmaster.textfiles.com/search?format=richMapFormat) | Rich Map Format | .rmf | 
@@ -3515,6 +3510,7 @@ Family/Format | Name | Extensions | Notes
 [other/tagwriteTemplate](https://discmaster.textfiles.com/search?format=tagwriteTemplate) | Tagwrite Template | .tww | 
 [other/talesOfEterniaOnlineGameDataArchive](https://discmaster.textfiles.com/search?format=talesOfEterniaOnlineGameDataArchive) | Tales Of Eternia Online game data archive | .bnd | 
 [other/talismanGameDataArchive](https://discmaster.textfiles.com/search?format=talismanGameDataArchive) | Talisman game data archive | .dz | 
+[other/targetProject](https://discmaster.textfiles.com/search?format=targetProject) | Target project | .t3001 .t2001 | 
 [other/tascChessSavedGame](https://discmaster.textfiles.com/search?format=tascChessSavedGame) | Tasc Chess saved game | .gmd | 
 [other/taskForce1942SaveGame](https://discmaster.textfiles.com/search?format=taskForce1942SaveGame) | Task Force 1942 save game | .sve | 
 [other/tcpdumpCapture](https://discmaster.textfiles.com/search?format=tcpdumpCapture) | TCPDUMP Style Capture | .dmp .pcap | 
@@ -3793,7 +3789,6 @@ Family/Format | Name | Extensions | Notes
 [other/webViewCacheData](https://discmaster.textfiles.com/search?format=webViewCacheData) | WebView cache data |  | 
 [other/westAdventureConfiguration](https://discmaster.textfiles.com/search?format=westAdventureConfiguration) | West Adventure Configuration | .cfg | 
 [other/whackerTrackerAudioDriver](https://discmaster.textfiles.com/search?format=whackerTrackerAudioDriver) | Whacker Tracker audio Driver | .drv | 
-[other/whalesVoyageGraphic](https://discmaster.textfiles.com/search?format=whalesVoyageGraphic) | Whale's Voyage graphic | .brs | 
 [other/whatsappMessagesDatabase](https://discmaster.textfiles.com/search?format=whatsappMessagesDatabase) | Whatsapp messages Database | .db | 
 [other/whatsUpGoldVirtualDevice](https://discmaster.textfiles.com/search?format=whatsUpGoldVirtualDevice) | WhatsUp Gold Virtual Device | .dse | 
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?format=whdLoadSlave) | WHDLoad Slave | .slave | 
@@ -3939,7 +3934,6 @@ Family/Format | Name | Extensions | Notes
 [other/zmcVisualTabletData](https://discmaster.textfiles.com/search?format=zmcVisualTabletData) | ZMC VisualTablet data | .ekb | 
 [other/zodbFileStorage](https://discmaster.textfiles.com/search?format=zodbFileStorage) | ZODB File Storage | .fs | 
 [other/zonerDraw](https://discmaster.textfiles.com/search?format=zonerDraw) | Zoner Draw | .zmf | 
-[other/zoopGameGraphics](https://discmaster.textfiles.com/search?format=zoopGameGraphics) | Zoop game graphics | .imx | 
 [other/zopeBinaryExportFile](https://discmaster.textfiles.com/search?format=zopeBinaryExportFile) | Zope binary export file | .zexp | 
 [other/zsnesSaveSate](https://discmaster.textfiles.com/search?format=zsnesSaveSate) | ZSNES Save State | .zst | 
 [other/zTXTeBook](https://discmaster.textfiles.com/search?format=zTXTeBook) | zTXT e-book | .pdb | 

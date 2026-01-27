@@ -68,6 +68,7 @@ const DEXMAGIC_CHECKS = {
 	"VICE Installer EXE"             : [{offset : -8, match : "ESIV"}, {offset : -4, match : [0xA0, 0x9A, 0x00, 0x00]}],
 	"Wacky Wheels Archive"           : [{offset : 2, match : "WACKY.ING"}],
 	"WAD2 file"                      : [{offset : 0, match : "WAD2"}],
+	"Wintermute DCP Archive"         : [{offset : 0, match : [0xDE, 0xAD, 0xC0, 0xDE]}, {offset : 4, match : "JUNK"}],
 
 	// audio
 	"208 Audio (Ocean Games)" : [{offset : 0xCC, match : [0x1F, 0x7D, 0x98, 0x4D]}],
@@ -149,6 +150,7 @@ const DEXMAGIC_CHECKS = {
 	"GRABBER COM v3.20 - v3.30 (Alt)" : [{offset : 5, match : "All Code Copyright (C) 1988, 1989 Gerald A. Monroe"}],
 	"GRABBER COM v3.34 - v3.35"       : [{offset : 5, match : "This file was created by GRABBER.COM Version"}],
 	"Grafix GRX"                      : [{offset : 0, match : "GRXP"}],
+	"HomeWorld 2 ROT Graphics"        : [{offset : 0, match : "FORM"}, {offset : 8, match : "HEAD"}, {offset : 36, match : "MIPSFORM"}, {offset : 48, match : "MLVL"}],
 	"IFF ILBM (Generic)"              : [{offset : 8, match : "ILBMBMHD"}],
 	"Konica Quality Photo"            : [{offset : 0, match : [0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 30, match : [0x4A, 0x50, 0x45, 0x47]}],
 	"Lotus Manuscript bitmap (Alt)"   : [{offset : 0, match : ["R", "H", 0x00, "H"]}],

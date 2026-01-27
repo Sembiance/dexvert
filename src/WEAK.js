@@ -243,7 +243,6 @@ export const WEAK_VALUES =
 	/^Format: Palm OS file/,
 	/^Format: plain text/,
 	/^Format: RenderWare collision data \(\.COL\)/,
-	/^Format: TOT/,
 	/^Format: TrueType font/,
 	/^Format: Unknown$/,
 	/^Format: Universal Binary$/,

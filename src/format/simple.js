@@ -204,6 +204,7 @@ export default
 		msWinCEInstallHeader             : {name : "Microsoft WinCE Install Header", ext : [".000"], magic : ["Microsoft WinCE install header", "Microsoft WinCE installer"]},
 		neroAudioCDCompilation           : {name : "Nero Audio-CD Compilation", ext : [".nra"], magic : ["Nero Audio-CD Compilation"]},
 		newWordMessagesOverlay           : {name : "NewWord messages Overlay", ext : [".ovr"], magic : ["NewWord messages Overlay"]},
+		niLabVIEWDataLog                 : {name : "NI LabVIEW DataLog", magic : ["NI LabVIEW DataLog"]},
 		nortonCommanderModuleMessage     : {name : "Norton Commander module message", ext : [".msg"], magic : ["Norton Commander module message"], weakMagic : true},
 		noteWorthyComposure              : {name : "NoteWorthy Composure", ext : [".nw"], magic : ["NoteWorthy song"]},
 		novellErrorLibrarian             : {name : "Novell Error Librarian", ext : [".dat", ".idx"], magic : ["Novell Error Librarian Data"]},

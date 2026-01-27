@@ -20764,7 +20764,7 @@ WebP (*.webp)
 
 
 >>> wuimg   linux  (run 'wuconv --fmts' for list of formats)  https://codeberg.org/kaleido/wuimg
-Known formats: 151
+Known formats: 158
 aai:	Dune HD image (uncompliant alpha interpretation)
 aipd:	National Instruments AIPD (uncertain color interpretation)
 aliaspix:	AliasPIX and Vivid
@@ -20775,6 +20775,7 @@ at6p:	999 AT6P
 avif:	AV1 Image File Format
 avs:	Stardent AVS X
 bld:	MegaPaint
+bmb:	Kaboom Studio Bitmap Block
 bmp:	Microsoft Bitmap, Jigsaw Puzzle image
 bmz:	GSD engine compressed BMP. Requires DIB
 bob:	Bob raytracer raster
@@ -20788,6 +20789,7 @@ cisrle:	CompuServe RLE (CompuServe Information Service)
 ckiss:	Cherry KiSS CEL
 clm:	IDES thumbnail? (no palette support)
 coke:	COKE (Atari Falcon)
+col:	COL color palette
 crg:	Calamus Raster Graphic
 da4:	PaintShop (Atari ST)
 dali:	Dali uncompressed
@@ -20823,10 +20825,11 @@ hel:	Herahera Animation (へらへらアニメ, HEL)
 hg3:	CatSystem engine image
 hir:	Print-Technik Raw
 hpicon:	HP Palmtop Icon
+icc:	ICC color palette
 ico:	Microsoft Icon
 idsp:	id Software Sprite (Quake, Half-Life, and 32-bit variants, only first image of each animation group)
 iim:	InShape IIM
-ilbm:	Interleaved Bitmap & Co.: ILBM, PBM, ACBM, RGB8, RGBN, Mean Streets MLDF, Command Simulations little-endian ILBM
+ilbm:	Interleaved Bitmap & Co.: ILBM, PBM, ACBM, RGB8, RGBN, Mean Streets MLDF, Command Simulations little-endian ILBM, Whale's Voyage BRS
 imc:	Signum! IMC
 imgscan:	IMG Scan
 indy:	IndyPaint
@@ -20847,6 +20850,7 @@ lwi:	LightWork Image
 mac:	MacPaint
 mag:	MAG (MAKI02)
 maki:	MAKIchan (MAKI01)
+mayaicon:	Maya Icons or Swatches
 megapat:	MegaPaint Pattern
 mgxicn:	Micrografx ICN
 msx:	MSX-BASIC dump, Graph Saurus
@@ -20867,8 +20871,9 @@ pic2:	Yanagisawa's PIC2
 piccel:	Autodesk Animator PIC/CEL
 pictor:	PCPaint PICtor
 pictris:	Pictris
+piklib:	Aidem Media Piklib image (uncompressed only)
 pim:	SIFF PIM sprite and animation (first frame only)
-pmg:	Print Magic Graphic (PMGRAF)
+pmg:	Print Magic Graphic (PMGRAF) and Card (PMCARD)
 png:	Portable Network Graphics, Malie engine MGF
 pnm:	PNM extended family (PNM, PAM, PFM, PHM, Xv Thumbnail, MTV, JPEG2000-PGX)
 prs:	Kirara/IDES PRS, Micro Cabin PRS (Kimagure Orange Road)
@@ -20881,12 +20886,14 @@ qdv:	Giffer QDV
 qfx:	Quick Link II fax
 qoi:	QuiteOK image
 raw:	Raw camera formats: Adobe DNG, Apple QuickTake, Canon CR2/CR3/CRW, EPSON ERF, Fujifilm RAF, Kodak DCR/K25/KDC, Minolta MRW, Nikon NEF/NRW, Olympus ORF, Panasonic RW2/RWL, Pentax PEF, Sigma X3F, Sony ARW/SR2/SRF
+rot:	Homeworld 2 ROT texture (uncompressed only)
 seuck:	Seuck Font
 sgf:	Somera Graphic Format
 sgi:	Silicon Graphics Image
 sir0:	999 SIR0 sprites
 sixel:	SIXEL terminal graphics
 skyroads:	SkyRoads LZS graphics
+spidygfx:	Reunion graphics
 spu:	Spectrum 512 Uncompressed (3/4/5-bits)
 stad:	STAD PAC, Arabesque
 sun:	Sun Raster
@@ -20917,8 +20924,8 @@ xwd:	X11 Window Dump
 xyz:	RPG Maker image
 zyxel:	ZyXEL fax
 
-Known extensions: 338
-3fr, 565, a64, aai, aas, abm, acbm, afl, als, ant, apd, apf, art, arw, avif, avifs, avs, bie, bl1, bl2, bl3, bld, bmp, bmp24, bmz, bob, bp, bpl, bru, bsi, bw, cdu, cel, che, ciff, clm, clp, clt2, cm, cph, cpn, cps, cr2, cr3, crg, crw, cur, cwg, da4, dat, dcr, dcx, dd, ddl, dib, dit, dmp, dng, doo, dpc, dpx, dt, dt2, dta, dvm, erf, eza, fax, faxx, fcp, fcs, fd2, ff, fff, ffn, fli, flif, fnt, fpt, ftc, g, g00, g3, g3n, ge5, ge7, ge8, gg, gif, gif87, gif89, gig, god, gp4, gpc, grf, grp, gxa, hcp, hed, heic, heics, heif, heifs, hel, het, hfc, hg3, hgr, hif, hir, hpc, hpi, hr, icn, ico, icon, iff, iim, iiq, ilbm, im1, im24, im32, im4, im8, imc, img, ims, ip64h, iph, ipt, ish, ism, j2c, j2k, j6i, jam, jb2, jbg, jbig, jfi, jfif, jhc, jif, jig, jj, jls, jp2, jpc, jpe, jpeg, jpg, jph, jps, jxl, k25, kdc, kla, koa, koala, kps, kro, kyg, lbm, lerc, lerc1, lerc2, lmp, lrc, lsp, lux, lwi, lzs, mac, mag, max, mbfavs, mef, mgf, mki, mld, mos, mpo, mrw, mtv, mwg, nef, ngg, nlm, no, nol, npm, nrw, nsl, ocp, orf, ori, otb, p2, p41, p64, p7, pac, pam, pan, pat, pbm, pc1, pc2, pc3, pcc, pcf, pcx, pdt, pef, pfm, pgf, pgm, pgx, phm, pi, pi1, pi2, pi3, pic, pim, pix, pmg, png, pnm, pntg, ppm, prs, prt, puf, px, pxy, pzl, q4, qdv, qfx, qoi, qtk, raf, ras, raw, rgb, rgba, rle, rpm, rw2, rwh, rwl, s16, s17, s1a, s1c, sah, sal, sar, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sca, scc, sch, scl, scr, sd0, sd1, sd2, sff, sfn, sgf, sgi, shp, six, sixel, spr, spr32, spu, sr2, sr5, sr6, sr7, sr8, srf, srs, sti, stj, suh, sul, sun, svg, svgz, tbn, tcp, tex, tg1, tga, thm, tif, tiff, tile, tim, tim2, tlg, tm2, tmsk, tn1, tn2, tn3, tn4, tn5, tn6, tny, tre, trp, trs, tru, txf, vic, vid, wbm, wbmp, webp, wia, wig, x, xbm, xwd, xyz, yjk
+Known extensions: 347
+3fr, 565, a64, aai, aas, abm, acbm, afl, als, ant, apd, apf, art, arw, avif, avifs, avs, bie, bl1, bl2, bl3, bld, bmb, bmp, bmp24, bmz, bob, bp, bpl, brs, bru, bsi, bw, cdu, cel, che, ciff, clm, clp, clt2, cm, col, cph, cpn, cps, cr2, cr3, crg, crw, cur, cwg, da4, dat, dcr, dcx, dd, ddl, dib, dit, dmp, dng, doo, dpc, dpx, dt, dt2, dta, dvm, erf, eza, fax, faxx, fcp, fcs, fd2, ff, fff, ffn, fli, flif, fnt, fpt, ftc, g, g00, g3, g3n, ge5, ge7, ge8, gg, gif, gif87, gif89, gig, god, gp4, gpc, grf, grp, gxa, hcp, hed, heic, heics, heif, heifs, hel, het, hfc, hg3, hgr, hif, hir, hpc, hpi, hr, icc, icn, ico, icon, icons, iff, iim, iiq, ilbm, im1, im24, im32, im4, im8, imc, img, ims, ip64h, iph, ipt, ish, ism, j2c, j2k, j6i, jam, jb2, jbg, jbig, jfi, jfif, jhc, jif, jig, jj, jls, jp2, jpc, jpe, jpeg, jpg, jph, jps, jxl, k25, kdc, kla, koa, koala, kps, kro, kyg, lbm, lerc, lerc1, lerc2, lmp, lrc, lsp, lux, lwi, lzs, mac, mag, max, mbfavs, mef, mgf, mki, mld, mos, mpo, mrw, mtv, mwg, nef, ngg, nlm, no, nol, npm, nrw, nsl, ocp, orf, ori, otb, p2, p41, p64, p7, pac, pam, pan, pat, pbm, pc1, pc2, pc3, pcc, pcf, pcx, pdt, pef, pfm, pgf, pgm, pgx, phm, pi, pi1, pi2, pi3, pic, pim, pix, pmc, pmg, png, pnm, pntg, ppm, prs, prt, puf, px, pxy, pzl, q4, qdv, qfx, qoi, qtk, raf, ras, raw, res, rgb, rgba, rle, rot, rpm, rw2, rwh, rwl, s16, s17, s1a, s1c, sah, sal, sar, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sca, scc, sch, scl, scr, sd0, sd1, sd2, sff, sfn, sgf, sgi, shp, six, sixel, spr, spr32, spu, sr2, sr5, sr6, sr7, sr8, srf, srs, sti, stj, suh, sul, sun, svg, svgz, swatches, tbn, tcp, tex, tg1, tga, thm, tif, tiff, tile, tim, tim2, tlg, tm2, tmsk, tn1, tn2, tn3, tn4, tn5, tn6, tny, tre, trp, trs, tru, txf, vic, vid, wbm, wbmp, webp, wia, wig, x, xbm, xwd, xyz, yjk
 
 >>> NConvert (wine)
 [max]      3DS Max thumbnail                        max 

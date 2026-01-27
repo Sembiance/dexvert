@@ -1,0 +1,30 @@
+# Wintermute Engine
+# script for QuickBMS http://quickbms.aluigi.org
+# http://aluigi.altervista.org/papers/bms/wintermute.bms
+
+idstring "\xde\xad\xc0\xde"
+goto 0x80
+get OFFSET long
+goto OFFSET
+
+get NAMESZ byte
+getdstring NAME NAMESZ
+get DUMMY byte
+get FILES long
+for i = 0 < FILES
+    get NAMESZ byte
+    filexor 0x44
+    getdstring NAME NAMESZ
+    filexor ""
+    get OFFSET long
+    get SIZE long
+    get ZSIZE long
+    get DUMMY long
+    get CRC long
+    get DUMMY long
+    if ZSIZE == 0
+        log NAME OFFSET SIZE
+    else
+        clog NAME OFFSET ZSIZE SIZE
+    endif
+next i

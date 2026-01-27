@@ -84,7 +84,8 @@
   - Better convertor program that can accept a specific formatid to process as
 
 * Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
-  Have it be it's own format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
+  Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
+	https://discmaster.textfiles.com/search?format=mov&detection=qtvr&dedup=dedup
   First I'd need to properly extract the images/data. Next discmaster can then make a nice viewer for it
   To extract/convert, look into:
 	https://github.com/fieldOfView/CuTy				https://fieldofview.com/projects/cuty

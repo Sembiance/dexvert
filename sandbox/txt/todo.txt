@@ -13,16 +13,6 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* Add support for this SFX DOS format:
-	https://discmaster.textfiles.com/view/24025/1997-07_Disc_3.4.iso/patches/strife31.zip/V13_V131.EXE
-		SELFEX Version 3.20 - .RTPatch(R) Professional - Software Update System
-		DOS Self-Extracting Unarchival Utility
-	Run it in DOS and it spits out the files
-
-* Add support for Blood & Lace formats:
-	https://codecs.multimedia.cx/2025/01/another-fun-bit-about-image-formats/
-	https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/
-
 /-------------\
 | dexvert 3.0 |
 \-------------/

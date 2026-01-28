@@ -379,55 +379,65 @@ const DEXMAGIC_CUSTOMS = [
 
 	async function exeAppended(r)
 	{
-		if(r.f.input.size<512)
+		if(r.f.input.size<64)
 			return;
 
-		const header = await fileUtil.readFileBytes(r.f.input.absolute, 512);
-		if(header.getString(0, 2)!=="MZ")
+		const dosHeader = await fileUtil.readFileBytes(r.f.input.absolute, 64);
+		if(!["MZ", "ZM"].includes(dosHeader.getString(0, 2)))
 			return;
 
-		const peHeaderOffset = header.getUInt32LE(0x3C);
-		if((peHeaderOffset+24)>512 || header.getString(peHeaderOffset, 2)!=="PE")
+		const peHeaderOffset = dosHeader.getUInt32LE(0x3C);
+		let overlayStartOffset;
+
+		// Try PE format first
+		if(peHeaderOffset>=0x40 && peHeaderOffset<r.f.input.size-24)
+		{
+			const peSignature = await fileUtil.readFileBytes(r.f.input.absolute, 4, peHeaderOffset);
+			if(peSignature.getString(0, 2)==="PE")
+			{
+				const peHeader = await fileUtil.readFileBytes(r.f.input.absolute, 24, peHeaderOffset);
+				const numSections = peHeader.getUInt16LE(6);
+				if(numSections>0)
+				{
+					const lastSecOffset = peHeaderOffset+24+peHeader.getUInt16LE(20)+((numSections-1)*40);
+					if((lastSecOffset+40)<=r.f.input.size)
+					{
+						const lastSec = await fileUtil.readFileBytes(r.f.input.absolute, 24, lastSecOffset+16);
+						overlayStartOffset = lastSec.getUInt32LE(4)+lastSec.getUInt32LE(0);
+					}
+				}
+			}
+		}
+
+		// Fallback to MS-DOS format
+		if(!overlayStartOffset)
+		{
+			const pages = dosHeader.getUInt16LE(0x04);
+			const lastPageBytes = dosHeader.getUInt16LE(0x02);
+			if(pages>0)
+				overlayStartOffset = lastPageBytes===0 ? pages*512 : ((pages-1)*512)+lastPageBytes;
+		}
+
+		if(!overlayStartOffset || overlayStartOffset>=r.f.input.size)
 			return;
 
-		const lastSecMetaOff = (peHeaderOffset+24+header.getUInt16LE(peHeaderOffset+20))+((header.getUInt16LE(peHeaderOffset+6)-1)*40)+16;
-		if((lastSecMetaOff+8)>r.f.input.size)
-			return;
+		const overlayIDs =
+		[
+			{id : "BIKi",    name : "BinkEXE"},
+			{id : "PCRS",    name : "AuthorwareEXE"},
+			{id : "AS",      name : "Disk Express SFX", offset : 4},
+			{id : "JRchive", name : "JRchive SFX"},
+			{id : "KJd",     name : "RTPatch SFX"}
+		];
 
-		const sectionHeader = await fileUtil.readFileBytes(r.f.input.absolute, 8, lastSecMetaOff);
-		const bikiStartOffset = sectionHeader.getUInt32LE(0) + sectionHeader.getUInt32LE(4);
+		for(const {id, name, offset=0} of overlayIDs)
+		{
+			if((overlayStartOffset+id.length+offset)>r.f.input.size)
+				continue;
 
-		if((bikiStartOffset+4)>r.f.input.size)
-			return;
-			
-		const idString = (await fileUtil.readFileBytes(r.f.input.absolute, 4, bikiStartOffset)).getString(0, 4);
-		if(idString==="BIKi")
-			return "BinkEXE";
-
-		if(["PCRS"].includes(idString))	// may be many more valid options
-			return `AuthorwareEXE`;
-	},
-
-	async function diskExpressSFX(r)
-	{
-		if(r.f.input.size<(28+512))
-			return;
-
-		const exeHeader = await fileUtil.readFileBytes(r.f.input.absolute, 6);
-		if(!["MZ", "ZM"].includes(exeHeader.getString(0, 2)))
-			return;
-
-		const lastPageBytes = exeHeader.getUInt16LE(2);
-		const numPages = exeHeader.getUInt16LE(4);
-		const diskExpressOffset = (((numPages-1)*512)+(lastPageBytes || 512))+4;
-		if(r.f.input.size<(diskExpressOffset+512))
-			return;
-
-		const diskExpressHeader = await fileUtil.readFileBytes(r.f.input.absolute, 2, diskExpressOffset);
-		if(diskExpressHeader.getString(0, 2)!=="AS")
-			return;
-
-		return "Disk Express SFX";
+			if((await fileUtil.readFileBytes(r.f.input.absolute, id.length, overlayStartOffset+offset)).getString(0, id.length)===id)
+				return name;
+		}
 	},
 	
 	async function fmTownsSND(r)

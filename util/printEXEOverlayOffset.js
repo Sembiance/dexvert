@@ -9,43 +9,95 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Print out the byte offset where the EXE overlay starts",
 	args :
 	[
-		{argid : "inputFilePath", desc : "EXE tp process", required : true}
+		{argid : "inputFilePath", desc : "EXE to process", required : true}
 	]
 });
 
-const size = (await Deno.stat(argv.inputFilePath)).size;
+const inputFilePath = argv.inputFilePath;
+const size = (await Deno.stat(inputFilePath)).size;
 if(size<64)
 	Deno.exit(0);
 
-const dosHeader = await fileUtil.readFileBytes(argv.inputFilePath, 64);
-if(dosHeader.getString(0, 2)!=="MZ")
+const dosHeader = await fileUtil.readFileBytes(inputFilePath, 64);
+if(!["MZ", "ZM"].includes(dosHeader.getString(0, 2)))
 	Deno.exit(0);
 
-const peHeaderOffset = dosHeader.getUInt32LE(0x3C);
+const sigHeaderOffset = dosHeader.getUInt32LE(0x3C);
 let overlayStartOffset;
 
 // Try PE format first
-if(peHeaderOffset>=0x40 && peHeaderOffset<size-24)
+if(sigHeaderOffset>=0x40 && sigHeaderOffset<=(size-24))
 {
-	const peSignature = await fileUtil.readFileBytes(argv.inputFilePath, 4, peHeaderOffset);
-	if(peSignature.getString(0, 2)==="PE")
+	const sigHeader = await fileUtil.readFileBytes(inputFilePath, 24, sigHeaderOffset);
+	const signature = sigHeader.getString(0, 2);
+	if(signature==="PE")
 	{
-		const peHeader = await fileUtil.readFileBytes(argv.inputFilePath, 24, peHeaderOffset);
-		const numSections = peHeader.getUInt16LE(6);
-		if(numSections>0)
+		const numSections = sigHeader.getUInt16LE(6);
+		const sectionTableOffset = sigHeaderOffset+24+sigHeader.getUInt16LE(20);
+		if(numSections>0 && (sectionTableOffset+(numSections*40))<=size)
 		{
-			const lastSecOffset = peHeaderOffset+24+peHeader.getUInt16LE(20)+((numSections-1)*40);
-			if((lastSecOffset+40)<=size)
+			let maxEnd = 0;
+
+			const sections = await fileUtil.readFileBytes(inputFilePath, numSections*40, sectionTableOffset);
+			for(let i=0;i<numSections;i++)
 			{
-				const lastSec = await fileUtil.readFileBytes(argv.inputFilePath, 24, lastSecOffset+16);
-				overlayStartOffset = lastSec.getUInt32LE(4)+lastSec.getUInt32LE(0);
+				const end = sections.getUInt32LE((i*40)+16)+sections.getUInt32LE((i*40)+20);
+				if(end>maxEnd)
+					maxEnd = end;
+			}
+
+			if(maxEnd>0)
+				overlayStartOffset = maxEnd;
+		}
+	}
+	else if(signature==="NE" && sigHeaderOffset<=(size-56))
+	{
+		const neHeader = await fileUtil.readFileBytes(inputFilePath, 56, sigHeaderOffset);
+		const segmentTableOffset = sigHeaderOffset+neHeader.getUInt16LE(0x22);
+		const segmentCount = neHeader.getUInt16LE(0x1C);
+		const alignmentShift = neHeader.getUInt16LE(0x32);
+		const nonResNameTableOffset = neHeader.getUInt32LE(0x2C);
+		const nonResNameTableSize = neHeader.getUInt16LE(0x20);
+
+		let maxOffset = 0;
+
+		if(segmentCount>0 && segmentTableOffset<size)
+		{
+			const segTableSize = segmentCount*8;
+			if((segmentTableOffset+segTableSize)<=size)
+			{
+				const segTable = await fileUtil.readFileBytes(inputFilePath, segTableSize, segmentTableOffset);
+				const align = 2**alignmentShift;
+
+				for(let i=0; i<segmentCount; i++)
+				{
+					const logicalSector = segTable.getUInt16LE(i*8);
+					const lengthInFile = segTable.getUInt16LE((i*8)+2);
+
+					if(logicalSector>0 && lengthInFile>0)
+					{
+						const segEnd = (logicalSector*align)+lengthInFile;
+						if(segEnd>maxOffset)
+							maxOffset = segEnd;
+					}
+				}
 			}
 		}
+
+		if(nonResNameTableOffset>0 && nonResNameTableSize>0)
+		{
+			const nonResEnd = nonResNameTableOffset+nonResNameTableSize;
+			if(nonResEnd>maxOffset)
+				maxOffset = nonResEnd;
+		}
+
+		if(maxOffset>0)
+			overlayStartOffset = maxOffset;
 	}
 }
 
 // Fallback to MS-DOS format
-if(!overlayStartOffset)
+if(overlayStartOffset===undefined)
 {
 	const pages = dosHeader.getUInt16LE(0x04);
 	const lastPageBytes = dosHeader.getUInt16LE(0x02);
@@ -53,8 +105,8 @@ if(!overlayStartOffset)
 		overlayStartOffset = lastPageBytes===0 ? pages*512 : ((pages-1)*512)+lastPageBytes;
 }
 
-if(!overlayStartOffset || overlayStartOffset>=size)
+if(overlayStartOffset===undefined || overlayStartOffset>=size)
 	Deno.exit(0);
 
 xlog.info`Overlay offset: ${overlayStartOffset}`;
-xlog.info`hexyl -s ${overlayStartOffset} -n 128 "${argv.inputFilePath}"`;
+xlog.info`hexyl -s ${overlayStartOffset} -n 128 "${inputFilePath}"`;

@@ -379,38 +379,91 @@ const DEXMAGIC_CUSTOMS = [
 
 	async function exeAppended(r)
 	{
-		if(r.f.input.size<64)
+		const inputFilePath = r.f.input.absolute;
+		const size = r.f.input.size;
+		if(size<64)
 			return;
 
-		const dosHeader = await fileUtil.readFileBytes(r.f.input.absolute, 64);
+		const dosHeader = await fileUtil.readFileBytes(inputFilePath, 64);
 		if(!["MZ", "ZM"].includes(dosHeader.getString(0, 2)))
 			return;
 
-		const peHeaderOffset = dosHeader.getUInt32LE(0x3C);
+		const sigHeaderOffset = dosHeader.getUInt32LE(0x3C);
 		let overlayStartOffset;
 
 		// Try PE format first
-		if(peHeaderOffset>=0x40 && peHeaderOffset<r.f.input.size-24)
+		if(sigHeaderOffset>=0x40 && sigHeaderOffset<=(size-24))
 		{
-			const peSignature = await fileUtil.readFileBytes(r.f.input.absolute, 4, peHeaderOffset);
-			if(peSignature.getString(0, 2)==="PE")
+			const sigHeader = await fileUtil.readFileBytes(inputFilePath, 24, sigHeaderOffset);
+			const signature = sigHeader.getString(0, 2);
+			if(signature==="PE")
 			{
-				const peHeader = await fileUtil.readFileBytes(r.f.input.absolute, 24, peHeaderOffset);
-				const numSections = peHeader.getUInt16LE(6);
-				if(numSections>0)
+				const numSections = sigHeader.getUInt16LE(6);
+				const sectionTableOffset = sigHeaderOffset+24+sigHeader.getUInt16LE(20);
+				if(numSections>0 && (sectionTableOffset+(numSections*40))<=size)
 				{
-					const lastSecOffset = peHeaderOffset+24+peHeader.getUInt16LE(20)+((numSections-1)*40);
-					if((lastSecOffset+40)<=r.f.input.size)
+					let maxEnd = 0;
+
+					const sections = await fileUtil.readFileBytes(inputFilePath, numSections*40, sectionTableOffset);
+					for(let i=0;i<numSections;i++)
 					{
-						const lastSec = await fileUtil.readFileBytes(r.f.input.absolute, 24, lastSecOffset+16);
-						overlayStartOffset = lastSec.getUInt32LE(4)+lastSec.getUInt32LE(0);
+						const end = sections.getUInt32LE((i*40)+16)+sections.getUInt32LE((i*40)+20);
+						if(end>maxEnd)
+							maxEnd = end;
+					}
+
+					if(maxEnd>0)
+						overlayStartOffset = maxEnd;
+				}
+			}
+			else if(signature==="NE" && sigHeaderOffset<=(size-56))
+			{
+				const neHeader = await fileUtil.readFileBytes(inputFilePath, 56, sigHeaderOffset);
+				const segmentTableOffset = sigHeaderOffset+neHeader.getUInt16LE(0x22);
+				const segmentCount = neHeader.getUInt16LE(0x1C);
+				const alignmentShift = neHeader.getUInt16LE(0x32);
+				const nonResNameTableOffset = neHeader.getUInt32LE(0x2C);
+				const nonResNameTableSize = neHeader.getUInt16LE(0x20);
+
+				let maxOffset = 0;
+
+				if(segmentCount>0 && segmentTableOffset<size)
+				{
+					const segTableSize = segmentCount*8;
+					if((segmentTableOffset+segTableSize)<=size)
+					{
+						const segTable = await fileUtil.readFileBytes(inputFilePath, segTableSize, segmentTableOffset);
+						const align = 2**alignmentShift;
+
+						for(let i=0; i<segmentCount; i++)
+						{
+							const logicalSector = segTable.getUInt16LE(i*8);
+							const lengthInFile = segTable.getUInt16LE((i*8)+2);
+
+							if(logicalSector>0 && lengthInFile>0)
+							{
+								const segEnd = (logicalSector*align)+lengthInFile;
+								if(segEnd>maxOffset)
+									maxOffset = segEnd;
+							}
+						}
 					}
 				}
+
+				if(nonResNameTableOffset>0 && nonResNameTableSize>0)
+				{
+					const nonResEnd = nonResNameTableOffset+nonResNameTableSize;
+					if(nonResEnd>maxOffset)
+						maxOffset = nonResEnd;
+				}
+
+				if(maxOffset>0)
+					overlayStartOffset = maxOffset;
 			}
 		}
 
 		// Fallback to MS-DOS format
-		if(!overlayStartOffset)
+		if(overlayStartOffset===undefined)
 		{
 			const pages = dosHeader.getUInt16LE(0x04);
 			const lastPageBytes = dosHeader.getUInt16LE(0x02);
@@ -418,7 +471,7 @@ const DEXMAGIC_CUSTOMS = [
 				overlayStartOffset = lastPageBytes===0 ? pages*512 : ((pages-1)*512)+lastPageBytes;
 		}
 
-		if(!overlayStartOffset || overlayStartOffset>=r.f.input.size)
+		if(overlayStartOffset===undefined || overlayStartOffset>=size)
 			return;
 
 		const overlayIDs =
@@ -430,12 +483,13 @@ const DEXMAGIC_CUSTOMS = [
 			{id : "KJd",     name : "RTPatch SFX"}
 		];
 
+		const overlayIDBuf = await fileUtil.readFileBytes(inputFilePath, overlayIDs.map(o => o.id.length+(o.offset||0)).max(), overlayStartOffset);
 		for(const {id, name, offset=0} of overlayIDs)
 		{
-			if((overlayStartOffset+id.length+offset)>r.f.input.size)
+			if(overlayIDBuf.length<(id.length+offset))
 				continue;
 
-			if((await fileUtil.readFileBytes(r.f.input.absolute, id.length, overlayStartOffset+offset)).getString(0, id.length)===id)
+			if(overlayIDBuf.getString(offset, id.length)===id)
 				return name;
 		}
 	},

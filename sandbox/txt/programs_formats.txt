@@ -661,6 +661,8 @@ ZENO: LZW-compressor
   - Cannot be autodetected. You must use "-m compfacei".
 
 * CompuServe RLE (module="cserve_rle")
+  - Supports high resolution, medium resolution (experimental), and a
+    nonstandard 4-color format (experimental).
 
 * Corel CCX (module="corel_ccx")
   - Decompresses and converts to CMX format.
@@ -1066,7 +1068,7 @@ ZENO: LZW-compressor
   Options
    -opt pixfolio:undelete - Also extract deleted images.
 
-* Picture Catalog (Spinnaker) (module="pic_cat_sp")
+* Picture Catalog (.cat) (Spinnaker) (module="pic_cat_sp")
   An obscure IFF-like format used by some Spinnaker Windows apps.
 
 * PIXIT/pix320 (module="pixit")
@@ -1206,6 +1208,9 @@ ZENO: LZW-compressor
 
 * Syberia texture (.syj) (module="syberia_syj")
   - Convert abbreviated JPEG file to JPEG.
+
+* Template Catalog (.tct) (Spinnaker) (module="tplt_cat_sp")
+  Similar format to Spinnaker Picture Catalog.
 
 * TGA (Targa) (module="tga")
   Options
@@ -1356,6 +1361,13 @@ in the readme file.)
 
 * ADF (Amiga disk image) (module="amiga_adf") (experimental)
 
+* AFX (Atari compressed file) (module="atari_afx")
+  Single-file variant of LHarc format, for Atari ST. Used by a transparent
+  compression utility by T. Quester, and supported by Quester's versions of
+  LHarc v2.01x.
+  - For unknown reasons, some files in the wild have the wrong CRC stored in
+    the file. They might still decompress correctly, despite the CRC warning.
+
 * Aldus LZW and PKZP (module="aldus_inst") (experimental, incomplete)
   An installer compressed file format.
 
@@ -1462,6 +1474,11 @@ in the readme file.)
   Decompress a DIET-compressed DOS EXE or COM or data file.
   Options
    -opt diet:raw - For EXE, write raw decompressed data.
+
+* Disk Express (module="dskexp")
+  Floppy disk image format.
+  - Supports self-extracting EXE format, and non-executable (.DXP) format.
+  - Extracts to raw IMA (FAT) format.
 
 * DMS (Amiga disk image) (module="amiga_dms") (experimental)
   - Decompresses to ADF format.
@@ -2121,9 +2138,6 @@ sauce - SAUCE metadata, for internal use.
 swg - SWAG packet, LHA-like archive.
 tome - Tome, Macintosh installer-archive.
 xpk - XPK compressed file.
-
-
-
 
 
 >>> imageAlchemy (DOS - v1.11 - 1998) - IMAGE (http://fileformats.archiveteam.org/wiki/Image_Alchemy)

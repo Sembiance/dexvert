@@ -1,6 +1,5 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
-import {base64Decode} from "std";
 
 export class xor extends Program
 {

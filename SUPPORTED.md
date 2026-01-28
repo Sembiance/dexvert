@@ -1,11 +1,11 @@
-# Supported File Formats (3,523)
+# Supported File Formats (3,530)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (529)
+## Archive (530)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -80,6 +80,7 @@ archive | [BinSCII](http://fileformats.archiveteam.org/wiki/BinSCII) | .bsc .bsq
 archive | BioWare Entity Resource File | .erf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
 archive | Bizarre Creations Bank File | .baf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bizarreCreationsBankFile/)
 archive | BlakHole Archive | .bh | [izArc](https://www.izarc.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/blakHole/)
+archive | Blood & Lace Compressed |  | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | 
 archive | Bloodrayne game data archive | .pod | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/bloodrayneGameDataArchive/)
 archive | [Blorb Interactive Fiction Package](http://fileformats.archiveteam.org/wiki/Blorb) | .blorb .gblorb .zblorb .blb .glb .zlb | [blorbtar](https://www.ifarchive.org/if-archive/programming/blorb/blorbtar-0.1.pl) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/blorb/)
 archive | BOLT Game Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/boltGameArchive/)
@@ -133,7 +134,7 @@ archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | 
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunch-Mania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/crunchMania/)
 archive | Cruncher Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
 archive | [Crush Archive](http://fileformats.archiveteam.org/wiki/CRUSH) | .cru | [deark](https://entropymine.com/deark/) [uncrush](http://cd.textfiles.com/pdos9606/ARCHIVER/TOOLS/CRUSH18.ZIP) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/crush/)
-archive | Cryo Archive | .big .hnm | [na_game_tool_extract](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/cryoArchive/)
+archive | Cryo Archive | .big .hnm | [na_game_tool_extract](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cryoArchive/)
 archive | CyberLink TalkingShow Head Definition Pack | .hdp | [foremost](http://foremost.sourceforge.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/cyberLinkTalkingShowHeadDefinitionPack/)
 archive | [Daemon Tools Media Data eXtended Image](http://fileformats.archiveteam.org/wiki/MDX_(Daemon_Tools)) | .mdx | [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mdx/)
 archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark_Ages_Map_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkAgesMapGameArchive/)
@@ -998,7 +999,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (762)
+## Image (764)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1102,6 +1103,7 @@ image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [view64](http://view64.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/blazingPaddles/)
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/blazingPaddlesWindow/)
 image | [Blizzard Picture](http://fileformats.archiveteam.org/wiki/BLP) | .blp | [nconvert](https://www.xnview.com/en/nconvert/) [blpngConverter](https://www.wowinterface.com/downloads/info22128-BLPNGConverter.html) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [uniconvertor](https://sk1project.net/uc2/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/blizzardPicture/)
+image | Blood & Lace Compressed TGA | .tga | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/bloodLaceCompressedTGA/)
 image | [Bob Ray Tracer Bitmap](http://fileformats.archiveteam.org/wiki/Bob_ray_tracer_bitmap) | .bob | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [tomsViewer](https://tomseditor.com/blog/viewer) | [10 sample files](https://sembiance.com/fileFormatSamples/image/bobRayTracerBitmap/)
 image | Bootsplash Image |  | [tomsViewer](https://tomseditor.com/blog/viewer) | [12 sample files](https://sembiance.com/fileFormatSamples/image/bootsplash/)
 image | [BRender PIX](http://fileformats.archiveteam.org/wiki/BRender_PIX) | .pix | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/brenderPIX/)
@@ -1352,6 +1354,7 @@ image | [Jet Graphics Planner](http://fileformats.archiveteam.org/wiki/Jet_Graph
 image | [Jigsaw Puzzle](http://fileformats.archiveteam.org/wiki/Jigsaw_(Walter_A._Kuhn)) | .jig .sav | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/jigsawPuzzle/)
 image | Jing Tao pic format bitmap | .ssl | [jingTaoPic2jpg](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/jingTaoPicFormatBitmap/)
 image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/jbig/) - Sample file mx.jbg converts to garbage, not sure why.
+image | [Joint Bi-Level Image experts Group 2](http://fileformats.archiveteam.org/wiki/JBIG2) | .jb2 .jbig2 | [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/jbig2/)
 image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPEG) | .jpg .jpeg .jpe .jfif | [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [iio2png](http://github.com/Sembiance/iio2png/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [photoDraw](https://archive.org/details/PhotoDraw2000V2) | [74 sample files](https://sembiance.com/fileFormatSamples/image/jpg/)
 image | [Jovian Logix VI Image](http://fileformats.archiveteam.org/wiki/Jovian_Logic_VI) | .vi | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [7 sample files](https://sembiance.com/fileFormatSamples/image/jovianLogicVI/)
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 .j2c | [grk_decompress](https://github.com/GrokImageCompression/grok) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [ffmpeg](https://ffmpeg.org/) [gimp](https://gimp.org) [convert](https://www.imagemagick.org/) [wuimg](https://codeberg.org/kaleido/wuimg) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [14 sample files](https://sembiance.com/fileFormatSamples/image/jpeg2000/)
@@ -2286,7 +2289,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,158)
+## Text (1,162)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2349,7 +2352,7 @@ text | AntiVir Profile | .avp |  | [17 sample files](https://sembiance.com/fileF
 text | Apache mission Data | .dta |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
 text | ApAssist document |  |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/apAssistDocument/)
 text | aPatch Daten Datei | .aps |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/aPatchDatenDatei/)
-text | AppCache Manifest | .notmanifest .cachemanifest .appcache |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/cacheManifest/)
+text | AppCache Manifest | .notmanifest .cachemanifest .appcache |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/cacheManifest/)
 text | Apple IIgs Source Code |  |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/appleIIgsSourceCode/)
 text | Apple Project Builder Xcode Project | .pbxproj |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/appleProjectBuilderXcodeProject/)
 text | Apple Xcode User data | .pbxuser |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/appleXcodeUserData/)
@@ -2390,6 +2393,7 @@ text | AutoPrompt script | .pmt |  | [1 sample file](https://sembiance.com/fileF
 text | Autoread | .ard |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/autoread/)
 text | AutoSketch wizard Stencil | .stn |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/autoSketchWizardStencil/)
 text | Avid machine template | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/avidMachineTemplate/)
+text | Avogadro Drawlog | .drawlog .ignore |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/avogadroDrawlog/)
 text | AVS Field data | .fld |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/avsFieldData/)
 text | AWeb Hotlist / bookmark | .hotlist |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/aWebHotlistBookmark/)
 text | [AWK Script](http://fileformats.archiveteam.org/wiki/AWK) | .awk |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/awk/)
@@ -2498,7 +2502,7 @@ text | Cream Software Palette definition | .pal |  | [4 sample files](https://se
 text | Crimson Editor language specification file | .spc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/crimsonEditorLanguageSpecificationFile/)
 text | CrossStudio project | .hzp |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/crossStudioProject/)
 text | Crossword Creator Puzzle | .puz |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/crosswordCreatorPuzzle/)
-text | Crystallographic Information Framework | .cif |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/crystallographicInformationFramework/)
+text | Crystallographic Information Framework | .cif |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/crystallographicInformationFramework/)
 text | Csound Orchestra | .orc |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/csoundOrchestra/)
 text | Csound unified file format | .csd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/csoundUnifiedFileFormat/)
 text | Cube LUT format | .lut .cube |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/cubeLUTFormat/)
@@ -2768,6 +2772,7 @@ text | Java Source | .java |  | [13 sample files](https://sembiance.com/fileForm
 text | [JavaScript](http://fileformats.archiveteam.org/wiki/JavaScript) | .js |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/js/)
 text | JavaScript Bean file | .jsb |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/javaScriptBeanFile/)
 text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/json/)
+text | JCAMP-DX format | .jdx .dx .smp |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/jcampDXFormat/)
 text | JCreator Project | .jcp |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/jCreatorProject/)
 text | JCreator Workspace | .jcw |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/jCreatorWorkspace/)
 text | Jeskola Buzz theme | .col |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/jeskolaBuzzTheme/)
@@ -2784,7 +2789,7 @@ text | KeyTronic Trakball profile | .pro .fil |  | [2 sample files](https://semb
 text | KiCad Documentation | .dcm |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/kiCadDocumentation/)
 text | KiCad footprint information | .cmp |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/kiCadFootprintInformation/)
 text | KiCad Module library | .mod .emp |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/kiCadModuleLibrary/)
-text | KiCad Netlist | .net |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/kiCadNetlist/)
+text | KiCad Netlist | .net |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/kiCadNetlist/)
 text | KiCad part Library | .lib |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/kiCadPartLibrary/)
 text | KiCad pcbnew PCB layout | .brd |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/kiCadPCBNEWPCBLayout/)
 text | KiCad Project | .pro |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/kiCadProject/)
@@ -2829,6 +2834,7 @@ text | Lotus Agenda Structured Text File | .stf |  | [1 sample file](https://sem
 text | Lotus HAL Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/lotusHALHelp/)
 text | Lotus Works Document | .doc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/lotusWorksDocument/)
 text | LTSpice Circuit Schematic | .asc |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/ltSpiceCircuitSchematic/)
+text | LTSpice Symbol | .asy |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/ltSpiceSymbol/)
 text | Lua script | .lua |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/luaScript/)
 text | Lyapunovia coordinates |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/lyapunoviaCoordinates/)
 text | Lyric file |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/lyricFile/)
@@ -3292,6 +3298,7 @@ text | Train Simulator Track | .trk |  | [1 sample file](https://sembiance.com/f
 text | Train Simulator Traffic definition | .trf |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorTrafficDefinition/)
 text | Train Simulator Wagon | .eng .wag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWagon/)
 text | Train Simulator World | .w |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/trainSimulatorWorld/)
+text | Tripos Mol2 | .mol2 |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/triposMol2/)
 text | Trumpet Windsock settings | .ini |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trumpetWindsockSettings/)
 text | TSPLIB Tour Solution data | .tour |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTourSolutionData/)
 text | TSPLIB Traveling Salesman Problem data | .tsp |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/tsplibTravelingSalesmanProblemData/)
@@ -3553,7 +3560,7 @@ video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [2 
 video | Palm TealMovie Video | .pdb | [nihav](https://git.nihav.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/video/palmTealMovieVideo/)
 video | [PH Video](https://wiki.multimedia.cx/index.php/PH_Video) | .ph | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/)
 video | [Pray for Death CDA Video](https://wiki.multimedia.cx/index.php/Pray_for_Death_CDA) | .cda | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/prayForDeathCDAVideo/)
-video | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php/PMM) | .pmm | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/psygnosisMultiMedia/)
+video | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php/PMM) | .pmm | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/psygnosisMultiMedia/)
 video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/psygnosisYOP/)
 video | [PTF Video](https://wiki.multimedia.cx/index.php/Flic_Video#Under_a_Killing_Moon_PTF) | .ptf | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/ptfVideo/)
 video | [QPEG DVC](https://wiki.multimedia.cx/index.php/QPEG) | .dvc | [nihav](https://git.nihav.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/qpegDVC/)

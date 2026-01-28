@@ -7,5 +7,5 @@ export class diskExpressSFX extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = ["Disk Express SFX", "16bit DOS Disk eXPress SFX disk image Executable"];
-	converters     = ["diskExpressSFX"];
+	converters     = ["deark[module:dskexp]", "diskExpressSFX"];
 }

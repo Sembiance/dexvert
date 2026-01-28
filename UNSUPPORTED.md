@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,047)
+# Unsupported File Formats (4,049)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1186,7 +1186,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,763)
+## Other (2,765)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2178,6 +2178,7 @@ Family/Format | Name | Extensions | Notes
 [other/gammaCAD](https://discmaster.textfiles.com/search?format=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gammaCADSymbolLibrary](https://discmaster.textfiles.com/search?format=gammaCADSymbolLibrary) | GammaCAD Symbol Library | .syl | 
 [other/gapHelpSystemSix](https://discmaster.textfiles.com/search?format=gapHelpSystemSix) | GAP Help System Six | .six | 
+[other/garminFlexibleInteroperableDataTransfer](https://discmaster.textfiles.com/search?format=garminFlexibleInteroperableDataTransfer) | Garmin Flexible and Interoperable data Transfer | .fit | 
 [other/garminMap](https://discmaster.textfiles.com/search?format=garminMap) | Garmin map | .img | 
 [other/garminMapSource](https://discmaster.textfiles.com/search?format=garminMapSource) | Garmin MapSource | .mps | 
 [other/garminPointOfInterest](https://discmaster.textfiles.com/search?format=garminPointOfInterest) | Garmin Point of Interest | .gpi | 
@@ -2532,6 +2533,7 @@ Family/Format | Name | Extensions | Notes
 [other/logitechModula2LoadableSymbols](https://discmaster.textfiles.com/search?format=logitechModula2LoadableSymbols) | Logitech Modula-2 Loadable Symbols | .sym | 
 [other/logitechModula2Overlay](https://discmaster.textfiles.com/search?format=logitechModula2Overlay) | Logitech Modula-2 Overlay | .ovl | 
 [other/logosLibronixData](https://discmaster.textfiles.com/search?format=logosLibronixData) | Logos Libronix data | .lbx .lbxdat .LBXLLS | 
+[other/logox4Speechengine](https://discmaster.textfiles.com/search?format=logox4Speechengine) | Logox4 Speechengine | .lgx | 
 [other/lomaxGameData](https://discmaster.textfiles.com/search?format=lomaxGameData) | Lomax game data | .lmx | 
 [other/lomaxWorldGameData](https://discmaster.textfiles.com/search?format=lomaxWorldGameData) | Lomax World game data | .wld | 
 [other/lotus123AddInApplication](https://discmaster.textfiles.com/search?format=lotus123AddInApplication) | Lotus 1-2-3 Add-In Application | .adn | 

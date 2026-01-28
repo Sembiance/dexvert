@@ -8,5 +8,5 @@ export class diskExpress extends Format
 	forbidExtMatch = true;
 	magic          = ["Disk eXPress disk image"];
 	weakMagic      = true;
-	unsupported    = true;	// Can find samples with: https://discmaster.textfiles.com/search?extension=dxp&detection=4153*
+	converters     = ["deark[module:dskexp]"];
 }

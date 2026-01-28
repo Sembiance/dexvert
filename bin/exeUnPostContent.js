@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil} from "xutil";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
+import {getEXEOverlayOffset} from "../src/dexUtil.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -15,31 +16,14 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.logLevel);
 
-// file format: http://fileformats.archiveteam.org/wiki/MS-DOS_EXE
+const overlayOffset = await getEXEOverlayOffset(argv.inputFilePath);
+if(!overlayOffset)
+	Deno.exit(0);
+
 const reader = new UInt8ArrayReader(await Deno.readFile(argv.inputFilePath), {endianness : "le"});
-if(reader.str(2)!=="MZ")
-	Deno.exit(xlog.error`Invalid DOS EXE file header`);
+reader.setPOS(overlayOffset);
+if(reader.str(argv.idstring.length)!==argv.idstring)
+	Deno.exit(xlog.error`No ${argv.idstring} string found at calculated offset ${overlayOffset}`);
 
-reader.setPOS(0x3C);
-const peHeaderOffset = reader.uint32();
-
-reader.setPOS(peHeaderOffset);
-if(reader.str(4)!=="PE\0\0")
-	Deno.exit(xlog.error`Invalid PE header`);
-reader.skip(2);
-
-const numSections = reader.uint16();
-reader.skip(12);
-
-const sizeOfOptionalHeader = reader.uint16();
-reader.skip(2);
-
-reader.setPOS((peHeaderOffset+24+sizeOfOptionalHeader)+((numSections-1)*40)+16);
-const extraStartOffset = reader.uint32() + reader.uint32();
-reader.setPOS(extraStartOffset);
-
-if(reader.str(4)!==argv.idstring)
-	Deno.exit(xlog.error`No ${argv.idstring} string found at calculated offset ${extraStartOffset}`);
-
-reader.rewind(4);
-await reader.writeToDisk(reader.arr.length-extraStartOffset, argv.outputFilePath);
+reader.rewind(argv.idstring.length);
+await reader.writeToDisk(reader.arr.length-overlayOffset, argv.outputFilePath);

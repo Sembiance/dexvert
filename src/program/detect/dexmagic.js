@@ -3,6 +3,7 @@ import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {path} from "std";
+import {getEXEOverlayOffset} from "../../dexUtil.js";
 
 // Below are a couple additional detections based on magic numbers and other criteria that other identifiers like trid, file, etc. all miss
 // All offsets matches must match 'match' property
@@ -379,100 +380,7 @@ const DEXMAGIC_CUSTOMS = [
 
 	async function exeAppended(r)
 	{
-		const inputFilePath = r.f.input.absolute;
-		const size = r.f.input.size;
-		if(size<64)
-			return;
-
-		const dosHeader = await fileUtil.readFileBytes(inputFilePath, 64);
-		if(!["MZ", "ZM"].includes(dosHeader.getString(0, 2)))
-			return;
-
-		const sigHeaderOffset = dosHeader.getUInt32LE(0x3C);
-		let overlayStartOffset;
-
-		// Try PE format first
-		if(sigHeaderOffset>=0x40 && sigHeaderOffset<=(size-24))
-		{
-			const sigHeader = await fileUtil.readFileBytes(inputFilePath, 24, sigHeaderOffset);
-			const signature = sigHeader.getString(0, 2);
-			if(signature==="PE")
-			{
-				const numSections = sigHeader.getUInt16LE(6);
-				const sectionTableOffset = sigHeaderOffset+24+sigHeader.getUInt16LE(20);
-				if(numSections>0 && (sectionTableOffset+(numSections*40))<=size)
-				{
-					let maxEnd = 0;
-
-					const sections = await fileUtil.readFileBytes(inputFilePath, numSections*40, sectionTableOffset);
-					for(let i=0;i<numSections;i++)
-					{
-						const end = sections.getUInt32LE((i*40)+16)+sections.getUInt32LE((i*40)+20);
-						if(end>maxEnd)
-							maxEnd = end;
-					}
-
-					if(maxEnd>0)
-						overlayStartOffset = maxEnd;
-				}
-			}
-			else if(signature==="NE" && sigHeaderOffset<=(size-56))
-			{
-				const neHeader = await fileUtil.readFileBytes(inputFilePath, 56, sigHeaderOffset);
-				const segmentTableOffset = sigHeaderOffset+neHeader.getUInt16LE(0x22);
-				const segmentCount = neHeader.getUInt16LE(0x1C);
-				const alignmentShift = neHeader.getUInt16LE(0x32);
-				const nonResNameTableOffset = neHeader.getUInt32LE(0x2C);
-				const nonResNameTableSize = neHeader.getUInt16LE(0x20);
-
-				let maxOffset = 0;
-
-				if(segmentCount>0 && segmentTableOffset<size)
-				{
-					const segTableSize = segmentCount*8;
-					if((segmentTableOffset+segTableSize)<=size)
-					{
-						const segTable = await fileUtil.readFileBytes(inputFilePath, segTableSize, segmentTableOffset);
-						const align = 2**alignmentShift;
-
-						for(let i=0; i<segmentCount; i++)
-						{
-							const logicalSector = segTable.getUInt16LE(i*8);
-							const lengthInFile = segTable.getUInt16LE((i*8)+2);
-
-							if(logicalSector>0 && lengthInFile>0)
-							{
-								const segEnd = (logicalSector*align)+lengthInFile;
-								if(segEnd>maxOffset)
-									maxOffset = segEnd;
-							}
-						}
-					}
-				}
-
-				if(nonResNameTableOffset>0 && nonResNameTableSize>0)
-				{
-					const nonResEnd = nonResNameTableOffset+nonResNameTableSize;
-					if(nonResEnd>maxOffset)
-						maxOffset = nonResEnd;
-				}
-
-				if(maxOffset>0)
-					overlayStartOffset = maxOffset;
-			}
-		}
-
-		// Fallback to MS-DOS format
-		if(overlayStartOffset===undefined)
-		{
-			const pages = dosHeader.getUInt16LE(0x04);
-			const lastPageBytes = dosHeader.getUInt16LE(0x02);
-			if(pages>0)
-				overlayStartOffset = lastPageBytes===0 ? pages*512 : ((pages-1)*512)+lastPageBytes;
-		}
-
-		if(overlayStartOffset===undefined || overlayStartOffset>=size)
-			return;
+		const overlayStartOffset = await getEXEOverlayOffset(r.f.input.absolute, r.f.input.size);
 
 		const overlayIDs =
 		[
@@ -483,7 +391,7 @@ const DEXMAGIC_CUSTOMS = [
 			{id : "KJd",     name : "RTPatch SFX"}
 		];
 
-		const overlayIDBuf = await fileUtil.readFileBytes(inputFilePath, overlayIDs.map(o => o.id.length+(o.offset||0)).max(), overlayStartOffset);
+		const overlayIDBuf = await fileUtil.readFileBytes(r.f.input.absolute, overlayIDs.map(o => o.id.length+(o.offset||0)).max(), overlayStartOffset);
 		for(const {id, name, offset=0} of overlayIDs)
 		{
 			if(overlayIDBuf.length<(id.length+offset))

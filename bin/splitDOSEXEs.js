@@ -45,7 +45,7 @@ while(reader.remaining())
 	const numPages = reader.uint16();
 	const exeData = reader.raw((((numPages-1)*512)+(lastPageBytes || 512))-6);
 
-	// WARNING: DOES NOT SUPPORT OVERLAY DATA, NO RELIABLE WAY TO DETERMINE HOW MUCH THERE ACTUALLY IS
+	// WARNING: DOES NOT SUPPORT OVERLAY DATA, NO RELIABLE WAY TO DETERMINE HOW MUCH OVERLAY THERE ACTUALLY IS
 	/*let overlayData;
 	if(reader.remaining())
 	{

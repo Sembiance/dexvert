@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,036)
+# Unsupported File Formats (4,047)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (318)
+## Archive (316)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -21,7 +21,6 @@ Family/Format | Name | Extensions | Notes
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?format=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
 [archive/adysGLUEPacked](https://discmaster.textfiles.com/search?format=adysGLUEPacked) | Ady's GLUE Packed | .exe | 
 [archive/afterlifeGameData](https://discmaster.textfiles.com/search?format=afterlifeGameData) | Afterlife game data | .000 | 
-[archive/afxCompressedData](https://discmaster.textfiles.com/search?format=afxCompressedData) | AFX compressed data |  | 
 [archive/aixBackupRestore](https://discmaster.textfiles.com/search?format=aixBackupRestore) | AIX/BFF backup/restore | .img .bff | 
 [archive/amiBackBackupDiskImage](https://discmaster.textfiles.com/search?format=amiBackBackupDiskImage) | Ami-Back backup disk image | .adf | 
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?format=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
@@ -86,7 +85,6 @@ Family/Format | Name | Extensions | Notes
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?format=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/dePackPacked](https://discmaster.textfiles.com/search?format=dePackPacked) | dePack Packed | .exe | 
 [archive/dfSeeDiskImage](https://discmaster.textfiles.com/search?format=dfSeeDiskImage) | DFSee disk image | .imz | 
-[archive/diskExpress](https://discmaster.textfiles.com/search?format=diskExpress) | [Disk Express](http://fileformats.archiveteam.org/wiki/Disk_Express) | .dxp | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskExpress/)
 [archive/diskIMageArchiverDiskImage](https://discmaster.textfiles.com/search?format=diskIMageArchiverDiskImage) | Disk IMage Archiver disk image | .dim | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskIMageArchiverDiskImage/)
 [archive/diskImagerSFXImage](https://discmaster.textfiles.com/search?format=diskImagerSFXImage) | DiskImager SFX Image | .exe | 
 [archive/dismemberProtected](https://discmaster.textfiles.com/search?format=dismemberProtected) | Dismember EXE CRYPT Protected | .exe | 
@@ -803,7 +801,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (194)
+## Image (195)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -844,6 +842,7 @@ Family/Format | Name | Extensions | Notes
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?format=calamusVectorDocument) | Calamus Vector Document | .cvd | 
 [image/chasysDrawIESDrawing](https://discmaster.textfiles.com/search?format=chasysDrawIESDrawing) | Chasys Draw IES drawing | .cd5 | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?format=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
+[image/coMaFAXPage](https://discmaster.textfiles.com/search?format=coMaFAXPage) | CoMa FAX page | .f01 .f02 .f03 | 
 [image/comicSetterProject](https://discmaster.textfiles.com/search?format=comicSetterProject) | Comic Setter project |  | 
 [image/condensedEmbroidery](https://discmaster.textfiles.com/search?format=condensedEmbroidery) | Condensed embroidery format | .cnd | 
 [image/continuousEdge](https://discmaster.textfiles.com/search?format=continuousEdge) | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://sembiance.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
@@ -1187,7 +1186,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,751)
+## Other (2,763)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2180,6 +2179,8 @@ Family/Format | Name | Extensions | Notes
 [other/gammaCADSymbolLibrary](https://discmaster.textfiles.com/search?format=gammaCADSymbolLibrary) | GammaCAD Symbol Library | .syl | 
 [other/gapHelpSystemSix](https://discmaster.textfiles.com/search?format=gapHelpSystemSix) | GAP Help System Six | .six | 
 [other/garminMap](https://discmaster.textfiles.com/search?format=garminMap) | Garmin map | .img | 
+[other/garminMapSource](https://discmaster.textfiles.com/search?format=garminMapSource) | Garmin MapSource | .mps | 
+[other/garminPointOfInterest](https://discmaster.textfiles.com/search?format=garminPointOfInterest) | Garmin Point of Interest | .gpi | 
 [other/garminVoiceProcessingModule](https://discmaster.textfiles.com/search?format=garminVoiceProcessingModule) | Garmin Voice Processing Module | .8e35f4fd_0783_47dd_9f30_fb1eaa0b6f21 | 
 [other/gazeConfiguration](https://discmaster.textfiles.com/search?format=gazeConfiguration) | Gaze configuration | .dat | 
 [other/gccGCNOCoverageFtestCoverage](https://discmaster.textfiles.com/search?format=gccGCNOCoverageFtestCoverage) | GCC gcno coverage | .gcno | 
@@ -2233,6 +2234,8 @@ Family/Format | Name | Extensions | Notes
 [other/goldMineReport](https://discmaster.textfiles.com/search?format=goldMineReport) | GoldMine report | .fp | 
 [other/gothic3GameDataArchive](https://discmaster.textfiles.com/search?format=gothic3GameDataArchive) | Gothic 3 game data archive | .p00 .pak .p01 | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?format=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
+[other/gpsTrack](https://discmaster.textfiles.com/search?format=gpsTrack) | GPS track | .twl | 
+[other/gpsTrackMakerMap](https://discmaster.textfiles.com/search?format=gpsTrackMakerMap) | GPS TrackMaker map | .gtm | 
 [other/grandPrix5002GameData](https://discmaster.textfiles.com/search?format=grandPrix5002GameData) | Grand Prix 500 2 game data | .cpv | 
 [other/grandPrixCircuitSavedSlot](https://discmaster.textfiles.com/search?format=grandPrixCircuitSavedSlot) | Grand Prix Circuit Saved slot | .stm | 
 [other/grandTheftAuto2MapLayout](https://discmaster.textfiles.com/search?format=grandTheftAuto2MapLayout) | Grand Theft Auto 2 Map Layout | .gmp | 
@@ -2575,6 +2578,7 @@ Family/Format | Name | Extensions | Notes
 [other/madeEngineGameDataArchive](https://discmaster.textfiles.com/search?format=madeEngineGameDataArchive) | MADE Engine game data archive | .blk | 
 [other/madeProjectGame](https://discmaster.textfiles.com/search?format=madeProjectGame) | MADE Engine/Project/game | .prj | 
 [other/maestroMusic](https://discmaster.textfiles.com/search?format=maestroMusic) | Maestro Music |  | 
+[other/magellanMapSend](https://discmaster.textfiles.com/search?format=magellanMapSend) | Magellan MapSend | .trk .mapsend .wpt | 
 [other/maggiData](https://discmaster.textfiles.com/search?format=maggiData) | MAGGI data | .hhh | 
 [other/magicBinaryFile](https://discmaster.textfiles.com/search?format=magicBinaryFile) | magic binary file | .mgc | 
 [other/magicCameraEffect](https://discmaster.textfiles.com/search?format=magicCameraEffect) | Magic Camera Effect | .mce | 
@@ -2608,6 +2612,7 @@ Family/Format | Name | Extensions | Notes
 [other/mapleHelpDatabase](https://discmaster.textfiles.com/search?format=mapleHelpDatabase) | Maple Help Database | .hdb | 
 [other/mapleLibrary](https://discmaster.textfiles.com/search?format=mapleLibrary) | Maple Library | .lib | 
 [other/mapleStoryGameData](https://discmaster.textfiles.com/search?format=mapleStoryGameData) | MapleStory game data | .wz | 
+[other/mapSourceGPSWaypointDatabase](https://discmaster.textfiles.com/search?format=mapSourceGPSWaypointDatabase) | MapSource GPS Waypoint Database | .gdb | 
 [other/marioKartWiiBRRESModelData](https://discmaster.textfiles.com/search?format=marioKartWiiBRRESModelData) | Mario Kart Wii BRRES model data | .brres | 
 [other/marvinsMarvellousAdventureMap](https://discmaster.textfiles.com/search?format=marvinsMarvellousAdventureMap) | Marvin's Marvellous Adventure Map | .mlev | 
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?format=masiMusicDriver) | MASI Music Driver | .mus | 
@@ -2640,6 +2645,8 @@ Family/Format | Name | Extensions | Notes
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?format=mediaDescriptorFile) | Media Descriptor File | .mds | 
 [other/mediaShowProduction](https://discmaster.textfiles.com/search?format=mediaShowProduction) | MediaShow Production | .prod | 
 [other/medievilWAD](https://discmaster.textfiles.com/search?format=medievilWAD) | Medievil WAD | .mwd | 
+[other/medusa3DCADModel](https://discmaster.textfiles.com/search?format=medusa3DCADModel) | Medusa 3D CAD model | .mod | 
+[other/medusaM42DCADSymbol](https://discmaster.textfiles.com/search?format=medusaM42DCADSymbol) | Medusa/M4 2D CAD Symbol | .sym | 
 [other/megaCADLibrary](https://discmaster.textfiles.com/search?format=megaCADLibrary) | MegaCAD Library | .mtl | 
 [other/megaCADProject](https://discmaster.textfiles.com/search?format=megaCADProject) | MegaCAD Project | .prt .pr | 
 [other/megaPaintKeyboardLayout](https://discmaster.textfiles.com/search?format=megaPaintKeyboardLayout) | MegaPaint keyboard layout | .ttb | 
@@ -2651,6 +2658,7 @@ Family/Format | Name | Extensions | Notes
 [other/megaZeuxWorld](https://discmaster.textfiles.com/search?format=megaZeuxWorld) | MegaZeux World | .mzx | [3 sample files](https://sembiance.com/fileFormatSamples/other/megaZeuxWorld/)
 [other/memoryManagerResourceData](https://discmaster.textfiles.com/search?format=memoryManagerResourceData) | Memory Manager Resource Data |  | 
 [other/memoryMateDatabase](https://discmaster.textfiles.com/search?format=memoryMateDatabase) | Memory Mate database | .xxt | 
+[other/memoryMapNavigatorOverlay](https://discmaster.textfiles.com/search?format=memoryMapNavigatorOverlay) | Memory-Map Navigator Overlay | .mmo | 
 [other/mesa2Spreadsheet](https://discmaster.textfiles.com/search?format=mesa2Spreadsheet) | Mesa 2 spreadsheet | .m2t .m2 | 
 [other/mesa2ToolBar](https://discmaster.textfiles.com/search?format=mesa2ToolBar) | Mesa 2 ToolBar | .tbr | 
 [other/messiahStudioProject](https://discmaster.textfiles.com/search?format=messiahStudioProject) | MessiahStudio Project | .mpj | 
@@ -3607,6 +3615,7 @@ Family/Format | Name | Extensions | Notes
 [other/toolsMediaCorpLevelData](https://discmaster.textfiles.com/search?format=toolsMediaCorpLevelData) | Tools Media Corp. level data | .bsf | 
 [other/toolsMediaCorpMesh](https://discmaster.textfiles.com/search?format=toolsMediaCorpMesh) | Tools Media Corp. Mesh | .otm | 
 [other/topLevelForm](https://discmaster.textfiles.com/search?format=topLevelForm) | TopLevel Form | .tfm | 
+[other/topografixEasyGPSTerraByteLocationFile](https://discmaster.textfiles.com/search?format=topografixEasyGPSTerraByteLocationFile) | Topografix's EasyGPS/TerraByte Location file | .loc | 
 [other/topologikaAdventures8086Interpreter](https://discmaster.textfiles.com/search?format=topologikaAdventures8086Interpreter) | Topologika adventures 8086 interpreter | .com | 
 [other/topSpeedModula2Library](https://discmaster.textfiles.com/search?format=topSpeedModula2Library) | TopSpeed Modula-2 Library | .lib | 
 [other/tpLinkRouterFirmware](https://discmaster.textfiles.com/search?format=tpLinkRouterFirmware) | TP-Link router firmware | .bin | 
@@ -3796,6 +3805,7 @@ Family/Format | Name | Extensions | Notes
 [other/whiteWolfProductionsHelp](https://discmaster.textfiles.com/search?format=whiteWolfProductionsHelp) | White Wolf Productions Help | .hlp | 
 [other/whiteWolfProductionsPalette](https://discmaster.textfiles.com/search?format=whiteWolfProductionsPalette) | White Wolf Productions Palette | .pal | 
 [other/whoFramedRogerRabbitMenu](https://discmaster.textfiles.com/search?format=whoFramedRogerRabbitMenu) | Who Framed Roger Rabbit Menu | .mnu | 
+[other/wiScanLog](https://discmaster.textfiles.com/search?format=wiScanLog) | wi-scan log | .std .sum .txt | 
 [other/wiiTPLImagesContainer](https://discmaster.textfiles.com/search?format=wiiTPLImagesContainer) | Wii TPL images container | .tpl | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?format=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 
 [other/winampEQLibrary](https://discmaster.textfiles.com/search?format=winampEQLibrary) | Winamp EQ library |  | 
@@ -3839,6 +3849,7 @@ Family/Format | Name | Extensions | Notes
 [other/wingsOfGlorySaveGame](https://discmaster.textfiles.com/search?format=wingsOfGlorySaveGame) | Wings of Glory save game | .sav .tmp | 
 [other/winScopeCompiledScript](https://discmaster.textfiles.com/search?format=winScopeCompiledScript) | WinScope Compiled script | .wsc | 
 [other/winStormStormInfo](https://discmaster.textfiles.com/search?format=winStormStormInfo) | WinStorm Storm info | .sto | 
+[other/wintecToolsGPSLog](https://discmaster.textfiles.com/search?format=wintecToolsGPSLog) | Wintec Tools GPS log | .tk1 | 
 [other/wintertreeThesaurusEngineDB](https://discmaster.textfiles.com/search?format=wintertreeThesaurusEngineDB) | Wintertree Thesaurus Engine DB | .tdb | 
 [other/winWayLetter](https://discmaster.textfiles.com/search?format=winWayLetter) | WinWay Letter |  | 
 [other/winWayResume](https://discmaster.textfiles.com/search?format=winWayResume) | WinWay Resume |  | 

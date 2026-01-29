@@ -22,7 +22,7 @@ export class msCompound extends Format
 		"Rockwell Logix 500 SLC-5 Software", "muvee autoProducer Project", "VideoStudio Project", "DesignCAD drawing", "Font FX Template", "Softimage Scene", "Softimage Exported 3D Model", "Ability Office Spreadsheet", "Intergraph SmartSketch Drawing",
 		"Blaze Media Pro Skin", "AAF legacy file using MS Structured Storage", "602Tab Workbook", "PROMT document", "Business Objects Report", "Canon Design Essentials template", "Impromptu report", "Flexi Swatch Library", "Designworks Sample (v3.5)",
 		"Microsoft MapPoint map", "Bernina Artista", "GraphEdit Filter Graph", "GMAX scene", "OmniForm Form", "Autodesk Inventor Drawing", "Solid Edge Assembly document", "Roxio PhotoSuite Project", "think3 thinkdesign CAD", "Solid Edge Draft Document",
-		"Sothink SWF Easy Project", "GeoMedia Coordinate System File",
+		"Sothink SWF Easy Project", "GeoMedia Coordinate System File", "MindMapper Map",
 		/^fmt\/(240|877|916|971|1213|1295|1296|1297|1298|1303|1330|1331|1346|1349|1360|1362|1366|1386|1431|1432|1492|1493|1517|1644|1648|1852|1878)( |$)/, /^x-fmt\/(151|243)( |$)/
 	];
 	idMeta           = ({macFileType, macFileCreator}) => macFileType==="MSIV" && macFileCreator==="MSIZ";

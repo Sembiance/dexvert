@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,049)
+# Unsupported File Formats (4,052)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1186,7 +1186,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,765)
+## Other (2,768)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1422,6 +1422,7 @@ Family/Format | Name | Extensions | Notes
 [other/arcSoftUI](https://discmaster.textfiles.com/search?format=arcSoftUI) | ArcSoft UI | .aui | 
 [other/arcsoloTapeSupport](https://discmaster.textfiles.com/search?format=arcsoloTapeSupport) | ARCsolo Tape Support | .tds | 
 [other/area51GameDataArchive](https://discmaster.textfiles.com/search?format=area51GameDataArchive) | Area 51 game data archive | .dfs | 
+[other/arenaOpeningBook](https://discmaster.textfiles.com/search?format=arenaOpeningBook) | Arena opening Book | .abk | 
 [other/armorCommandMission](https://discmaster.textfiles.com/search?format=armorCommandMission) | Armor Command mission | .hpj | 
 [other/armorCommandPicture](https://discmaster.textfiles.com/search?format=armorCommandPicture) | Armor Command Picture | .pic | 
 [other/armSISpeedIndexTimingsData](https://discmaster.textfiles.com/search?format=armSISpeedIndexTimingsData) | ArmSI Speed Index timings data |  | 
@@ -1740,6 +1741,7 @@ Family/Format | Name | Extensions | Notes
 [other/commonDataFormat](https://discmaster.textfiles.com/search?format=commonDataFormat) | Common Data Format | .cdf | 
 [other/appleScriptCompiled](https://discmaster.textfiles.com/search?format=appleScriptCompiled) | Compiled AppleScript Script |  | [2 sample files](https://sembiance.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 [other/compiledAutoLISP](https://discmaster.textfiles.com/search?format=compiledAutoLISP) | Compiled AutoLISP | .vlx | 
+[other/compiledDEV7Object](https://discmaster.textfiles.com/search?format=compiledDEV7Object) | Compiled DEV7 object | .obc | 
 [other/compiledErlangCode](https://discmaster.textfiles.com/search?format=compiledErlangCode) | Compiled Erlang code |  | 
 [other/compiledMediaBasicProject](https://discmaster.textfiles.com/search?format=compiledMediaBasicProject) | Compiled MediaBasic Project | .ebc | 
 [other/compiledMSVCResources](https://discmaster.textfiles.com/search?format=compiledMSVCResources) | Compiled MSVC Resources | .resources | 
@@ -3659,6 +3661,7 @@ Family/Format | Name | Extensions | Notes
 [other/turboPrintColorProfile](https://discmaster.textfiles.com/search?format=turboPrintColorProfile) | TurboPrint color profile | .tpm | 
 [other/turboprintWizard](https://discmaster.textfiles.com/search?format=turboprintWizard) | Turboprint Wizard | .wizard | 
 [other/turtleBeachPinnacleSoundBank](https://discmaster.textfiles.com/search?format=turtleBeachPinnacleSoundBank) | Turtle Beach Pinnacle sound Bank | .pbf | 
+[other/tuxGuitarTablature](https://discmaster.textfiles.com/search?format=tuxGuitarTablature) | TuxGuitar Tablature | .tg | 
 [other/tvgenialSkin](https://discmaster.textfiles.com/search?format=tvgenialSkin) | TVgenial Skin | .tvgskin .hpk | 
 [other/tvPaintProject](https://discmaster.textfiles.com/search?format=tvPaintProject) | TVPaint Project | .tvpp .deep .aur | 
 [other/twistedMetal3DModelsContainer](https://discmaster.textfiles.com/search?format=twistedMetal3DModelsContainer) | Twisted Metal 3D models container | .tpc | 

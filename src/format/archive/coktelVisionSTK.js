@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 import {fileUtil} from "xutil";
 
@@ -7,7 +8,7 @@ export class coktelVisionSTK extends Format
 	ext     = [".stk"];
 	idCheck = async inputFile =>
 	{
-		if(inputFile.size<2)
+		if(inputFile.size<6)
 			return false;
 		
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 6);

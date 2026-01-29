@@ -67,7 +67,7 @@ archive | [ASD Archive](http://fileformats.archiveteam.org/wiki/ASD_Archiver) | 
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/stDiskImage/)
 archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atomikCruncher/)
-archive | Authorware Wrapped EXE | .exe | [exeUnPostContent](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareEXE/)
+archive | Authorware Wrapped EXE | .exe | [exeUnPostContent](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareEXE/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
 archive | AVPACK Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
@@ -106,7 +106,7 @@ archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https
 archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+source/cloop/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/cloopImage/)
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
 archive | Coktel Vision STK Archive | .stk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK/)
-archive | Coktel Vision STK2 Archive  | .itk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK2/)
+archive | Coktel Vision STK2 Archive  | .itk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK2/)
 archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [deark](https://entropymine.com/deark/) [DirMaster](https://style64.org/dirmaster) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreDiskImage/)
@@ -2744,7 +2744,7 @@ text | IndyCar Racing track info | .txt |  | [11 sample files](https://sembiance
 text | IndyCar Racing track record info | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingTrackRecordInfo/)
 text | Inform source | .inf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/informSource/)
 text | Information Presentation Facility markup | .ipf |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/informationPresentationFacilityMarkup/)
-text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [17 sample files](https://sembiance.com/fileFormatSamples/text/ini/)
+text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [18 sample files](https://sembiance.com/fileFormatSamples/text/ini/)
 text | Initial Graphics Exchange Specification | .igs |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/iges/)
 text | Inkscape extension descriptor | .inx |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/inkscapeExtensionDescriptor/)
 text | INSTALL Professional project | .dat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/installProfessionalProject/)

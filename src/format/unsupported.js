@@ -1836,6 +1836,7 @@ export default
 		codeWarriorProject                 : {name : "CodeWarrior Project", ext : [".mcp"], magic : ["CodeWarrior Project"]},
 		codeWarriorTargetData              : {name : "CodeWarrior Target Data", ext : [".tdt"], magic : ["CodeWarrior Target Data"], weakMagic : true},
 		coffLibrary                        : {name : "COFF Library", ext : [".lib", ".obj", ".a"], magic : ["Common Object File Format (COFF) Library"]},
+		compiledDEV7Object                 : {name : "Compiled DEV7 object", ext : [".obc"], magic : ["Format: Compiled DEV7 object (.OBC)"]},
 		compiledErlangCode                 : {name : "Compiled Erlang code", magic : ["Compiled Erlang code"]},
 		compiledMediaBasicProject          : {name : "Compiled MediaBasic Project", ext : [".ebc"], magic : ["Compiled MediaBasic Project"], weakMagic : true},
 		compiledMSVCResources              : {name : "Compiled MSVC Resources", ext : [".resources"], magic : ["Kompilierte Microsoft Visual Studio Resource Datei"], weakMagic : true},
@@ -2217,6 +2218,7 @@ export default
 		arcSoftAlbumOrSlideshow                  : {name : "ArcSoft Album", ext : [".abm", ".sld"], magic : [/^fmt\/1833( |$)/]},
 		arcSoftUI                                : {name : "ArcSoft UI", ext : [".aui"], magic : ["ArcSoft UI"]},
 		arcsoloTapeSupport                       : {name : "ARCsolo Tape Support", ext : [".tds"], magic : ["ARCsolo Tape Support"]},
+		arenaOpeningBook                         : {name : "Arena opening Book", ext : [".abk"], magic : ["Arena opening Book"], weakMagic : true},
 		armSISpeedIndexTimingsData               : {name : "ArmSI Speed Index timings data", magic : ["ArmSI Speed Index timings data"]},
 		artCAMModel                              : {name : "ArtCAM model", ext : [".art"], magic : ["ArtCAM model"], weakMagic : true},
 		artEffectBrush                           : {name : "ArtEffect Brush", magic : ["ArtEffect brush"]},
@@ -3633,6 +3635,7 @@ export default
 		turboprintWizard                         : {name : "Turboprint Wizard", ext : [".wizard"], magic : ["Turboprint Wizard"]},
 		turboShellSettings                       : {name : "Turbo Shell settings", ext : [".dsk"], magic : ["Turbo Shell settings"]},
 		turtleBeachPinnacleSoundBank             : {name : "Turtle Beach Pinnacle sound Bank", ext : [".pbf"], magic : ["Turtle Beach Pinnacle sound Bank"]},
+		tuxGuitarTablature                       : {name : "TuxGuitar Tablature", ext : [".tg"], magic : ["TuxGuitar Tablature"]},
 		tvgenialSkin                             : {name : "TVgenial Skin", ext : [".tvgskin", ".hpk"], magic : ["TVgenial Skin"], weakMagic : true},
 		tvPaintProject                           : {name : "TVPaint Project", ext : [".tvpp", ".deep", ".aur"], magic : ["TVPaint Project"]},
 		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", "SPSS Type Library", /^Type Library \((legacy SLTG|MSFT) format|Type[12]\)$/, /^Format: Microsoft Type Library$/, /^fmt\/(1601|1602)( |$)/]},                                                                                                                             	// eslint-disable-line sonarjs/anchor-precedence

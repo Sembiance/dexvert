@@ -42,7 +42,7 @@ export class jpg extends Format
 
 		if(dexState.hasMagics("Macintosh JPEG bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.jpg]");
-		r.push("iconvert", "iio2png");
+		r.push("iconvert", "iio2png", "wuimg[format:jpeg]");
 
 		// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but these programs can handle it. 'canvas5' yields static garbage, don't use that.
 		r.push("imageAlchemy", "pv[matchType:magic]", "noesis[type:image][matchType:magic]", "photoDraw[matchType:magic][hasExtMatch]");	// photoDraw takes like 20 seconds on average, which is a long time if allowed to run on thousands of app-specific file non-jpg that happens to have the extension or magic only

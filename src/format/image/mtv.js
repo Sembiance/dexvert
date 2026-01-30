@@ -10,5 +10,5 @@ export class mtv extends Format
 	magic          = ["zlib compressed data", "MTV / Rayshade :mtv:"];
 	weakMagic      = true;
 	metaProvider   = ["image"];
-	converters     = ["convert", "nconvert[format:mtv]", "wuimg", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
+	converters     = ["convert", "nconvert[format:mtv]", "wuimg[format:pnm]", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
 }

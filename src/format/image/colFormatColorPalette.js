@@ -6,5 +6,5 @@ export class colFormatColorPalette extends Format
 	ext            = [".res", ".col"];
 	forbidExtMatch = true;
 	magic          = ["256 Color palette", "Dark Legions Color palaette"];
-	converters     = ["wuimg -> convert[scale:1200%]"];
+	converters     = ["wuimg[format:col] -> convert[scale:1200%]"];
 }

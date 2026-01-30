@@ -6,5 +6,5 @@ export class kaboomStudiosBitmapBlock extends Format
 	ext            = [".bmb"];
 	forbidExtMatch = true;
 	magic          = ["Kaboom Studios Bitmap Block"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:bmb]"];
 }

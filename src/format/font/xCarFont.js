@@ -6,5 +6,5 @@ export class xCarFont extends Format
 	ext            = [".fnt"];
 	forbidExtMatch = true;
 	magic          = ["XCar Font"];
-	converters     = ["wuimg -> *montage"];
+	converters     = ["wuimg[format:fnhd] -> *montage"];
 }

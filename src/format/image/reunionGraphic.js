@@ -6,5 +6,5 @@ export class reunionGraphic extends Format
 	ext            = [".pic"];
 	forbidExtMatch = true;
 	magic          = ["Reunion graphics"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:spidygfx]"];
 }

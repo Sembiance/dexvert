@@ -13,7 +13,7 @@ export class xbm extends Format
 	mimeType     = "image/x-xbitmap";
 	metaProvider = ["image"];
 	converters   = [
-		"wuimg",	// only one that handles 3270.icon and iv.X correctly
+		"wuimg[format:c]",	// only one that handles 3270.icon and iv.X correctly
 		"convert", "gimp", "nconvert[format:xbm][matchType:magic]", "imconv[format:xbm][matchType:magic]"
 		//"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];

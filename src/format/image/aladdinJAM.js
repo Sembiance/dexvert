@@ -6,5 +6,5 @@ export class aladdinJAM extends Format
 	ext        = [".jam"];
 	magic      = ["JAM bitmap"];
 	weakMagic  = true;
-	converters = ["wuimg"];
+	converters = ["wuimg[format:jam]"];
 }

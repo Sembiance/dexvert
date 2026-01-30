@@ -7,5 +7,5 @@ export class eclipseProxy extends Format
 	forbidExtMatch = true;
 	magic          = ["Eclipse Proxy Image"];
 	weakMagic      = true;
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:pxy]"];
 }

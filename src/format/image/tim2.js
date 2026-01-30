@@ -7,5 +7,5 @@ export class tim2 extends Format
 	ext            = [".tm2", ".tim2", ".tim"];
 	forbidExtMatch = true;
 	magic          = ["TIM2 PlayStation2 bitmap", "TIM PS2 :tim2:"];
-	converters     = ["nconvert[format:tim2]", "wuimg"];
+	converters     = ["nconvert[format:tim2]", "wuimg[format:tim2]"];
 }

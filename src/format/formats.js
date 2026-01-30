@@ -5,6 +5,8 @@ import {Format} from "../../src/Format.js";
 import {families} from "../../src/family/families.js";
 import {XLog} from "xlog";
 import {TEXT_MAGIC_STRONG} from "../../src/Detection.js";
+import {Program, GLOBAL_FLAGS} from "../Program.js";
+import {programs} from "../program/programs.js";
 
 const formats = {};
 export {formats};
@@ -51,9 +53,34 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 			throw new Error(`format ${formatid} has invalid extensions (SHOULD always be LOWERCASE): ${invalidExtensions}`);
 	}
 
-
 	if(Object.hasOwn(format, "forbidExtMatch") && !Object.hasOwn(format, "ext"))
 		throw new Error(`format ${formatid} has forbidExtMatch, but no ext`);
+
+	// validate the converters to some degree
+	if(Array.isArray(format.converters))
+	{
+		for(const converterFull of format.converters)
+		{
+			if(typeof converterFull!=="string")
+				continue;
+
+			for(const converter of converterFull.split("->").flatMap(v => v.split(" & ")).map(v => v.trim().trimChars("*")))
+			{
+				const {programid, flags} = Program.parseProgram(converter) || {};
+				const program = programs[programid];
+				if(!program)
+					throw new Error(`format ${formatid} has converter (${converter}) with unknown programid: ${programid}`);
+
+				for(const flagKey of Object.keys(flags))
+				{
+					if(GLOBAL_FLAGS.includes(flagKey) || program.flags?.[flagKey])
+						continue;
+
+					throw new Error(`${formatid} has converter ${converter} with unknown flagKey: ${flagKey}`);
+				}
+			}
+		}
+	}
 
 	formats[formatid] = format;
 }

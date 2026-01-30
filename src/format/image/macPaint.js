@@ -15,7 +15,7 @@ export class macPaint extends Format
 	metaProvider   = ["image"];
 	converters     = [
 		"deark[module:macpaint][mac][matchType:magic]", "iio2png",
-		//"wuimg[matchType:magic]",		// incorrectly processes non MacPaint files such as: https://discmaster.textfiles.com/view/33954/DPPCPRO0599A.ISO/May/Lotus97/LOTUS/WORDPRO/XX01252.TBL?details
+		"wuimg[format:mac][matchType:magic]",		// incorrectly processes non MacPaint files such as: https://discmaster.textfiles.com/view/33954/DPPCPRO0599A.ISO/May/Lotus97/LOTUS/WORDPRO/XX01252.TBL?details
 		"imconv[format:mpnt][strongMatch]", "nconvert[format:mac]", `abydosconvert[format:${this.mimeType}]`, "convert",
 		"keyViewPro",	// important to use for 5054.pnt & 5058.pnt & 5060.pnt
 		...["pv", "canvas5", "corelPhotoPaint", "tomsViewer"].map(v => `${v}[strongMatch]`)	// omit "hiJaakExpress[hasExtMatch]" as it will incorrectly handle other/venusMacro/SW.MAC

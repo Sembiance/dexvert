@@ -6,5 +6,5 @@ export class needForSpeedFont extends Format
 	ext            = [".ffn"];
 	forbidExtMatch = true;
 	magic          = ["The Need For Speed Font"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:eafnt]"];
 }

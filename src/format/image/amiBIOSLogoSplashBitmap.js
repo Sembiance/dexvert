@@ -7,5 +7,5 @@ export class amiBIOSLogoSplashBitmap extends Format
 	ext            = [".grfx", ".grf"];
 	forbidExtMatch = true;
 	magic          = ["AMI BIOS logo/splash bitmap"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:amibios]"];
 }

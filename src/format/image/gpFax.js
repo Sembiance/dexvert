@@ -4,5 +4,5 @@ export class gpFax extends Format
 {
 	name       = "GPFax FAX format";
 	magic      = ["GPFax FAX format"];
-	converters = ["wuimg"];
+	converters = ["wuimg[format:faxx]"];
 }

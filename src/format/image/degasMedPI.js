@@ -11,5 +11,5 @@ export class degasMedPI extends Format
 	byteCheck = [{offset : 0, match : [0x00, 0x01]}];
 
 	// nconvert properly handles aspect ratio
-	converters = ["nconvert[format:degas]", "wuimg[hasExtMatch]", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["nconvert[format:degas]", "wuimg[format:degas][hasExtMatch]", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

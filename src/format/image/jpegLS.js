@@ -6,5 +6,5 @@ export class jpegLS extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/JPEG-LS";
 	ext        = [".jls"];
 	magic      = ["JPEG-LS bitmap", /^JPEG-LS image data/, "piped jpegls sequence (jpegls_pipe)"];
-	converters = ["wuimg", "ffmpeg[format:jpegls_pipe][outType:png]"];
+	converters = ["wuimg[format:jpegls]", "ffmpeg[format:jpegls_pipe][outType:png]"];
 }

@@ -7,5 +7,5 @@ export class asyncProfessionalFax extends Format
 	ext            = [".apf"];
 	forbidExtMatch = true;
 	magic          = ["Async Professional Fax"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:apf]"];
 }

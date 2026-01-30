@@ -7,5 +7,5 @@ export class signumBitmap extends Format
 	ext            = [".imc", ".pac"];
 	forbidExtMatch = true;
 	magic          = ["Signum! bitmap"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:imc]"];
 }

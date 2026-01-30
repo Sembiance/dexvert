@@ -7,6 +7,7 @@ export class editeurMusicalSequentie extends Format
 	ext          = [".ems"];
 	matchPreExt  = true;
 	metaProvider = ["musicInfo"];
-	converters   = ["uade123[player:EMS-6]", "uade123[player:EMS]", "Electronic Music System v6 module"];
+	magic        = ["Electronic Music System v6 module"];
+	converters   = ["uade123[player:EMS-6]", "uade123[player:EMS]"];
 	verify       = ({meta}) => meta.duration>=xu.SECOND;
 }

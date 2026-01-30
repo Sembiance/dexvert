@@ -6,5 +6,5 @@ export class pictrisPicture extends Format
 	ext            = [".pic"];
 	forbidExtMatch = true;
 	magic          = ["Pictris Picture"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:pictris]"];
 }

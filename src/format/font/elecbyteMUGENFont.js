@@ -7,5 +7,5 @@ export class elecbyteMUGENFont extends Format
 	ext            = [".fnt"];
 	forbidExtMatch = true;
 	magic          = ["Elecbyte M.U.G.E.N. font"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:eb_fnt]"];
 }

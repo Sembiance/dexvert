@@ -6,5 +6,5 @@ export class croteamTextureFile extends Format
 	ext            = [".tex", ".tbn"];
 	forbidExtMatch = true;
 	magic          = ["Croteam texture file", "Croteam texture Min"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:tbn]"];
 }

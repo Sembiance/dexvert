@@ -19,7 +19,7 @@ export class avsx extends Format
 	mimeType   = "image/x-avsx";
 	converters = [
 		"x2tga",	// properly handles mandrill.x & EXPRESS.X & AVS_LOGO.X but doesn't handle transparency, but that's a fine enough tradeoff for now
-		"wuimg",
+		"wuimg[format:avs]",
 		"nconvert[format:avs]", `abydosconvert[format:${this.mimeType}]`,
 		"imconv[format:x]",
 		"tomsViewer"

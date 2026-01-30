@@ -155,6 +155,7 @@ const DEXMAGIC_CHECKS = {
 	"GRABBER COM v3.34 - v3.35"       : [{offset : 5, match : "This file was created by GRABBER.COM Version"}],
 	"Grafix GRX"                      : [{offset : 0, match : "GRXP"}],
 	"HomeWorld 2 ROT Graphics"        : [{offset : 0, match : "FORM"}, {offset : 8, match : "HEAD"}, {offset : 36, match : "MIPSFORM"}, {offset : 48, match : "MLVL"}],
+	"IDES GPC Image"                  : [{offset : 0, match : "PC98)GPCFILE"}],
 	"IFF ILBM (Generic)"              : [{offset : 8, match : "ILBMBMHD"}],
 	"Konica Quality Photo"            : [{offset : 0, match : [0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 30, match : [0x4A, 0x50, 0x45, 0x47]}],
 	"Lotus Manuscript bitmap (Alt)"   : [{offset : 0, match : ["R", "H", 0x00, "H"]}],

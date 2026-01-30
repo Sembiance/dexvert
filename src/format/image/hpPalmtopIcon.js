@@ -6,5 +6,5 @@ export class hpPalmtopIcon extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/HP_100LX/200LX_icon";
 	ext        = [".icn", ".xbg"];
 	magic      = [/HP Palmtop .*Icon$/, "deark: hpicn"];
-	converters = ["deark[module:hpicn][matchType:magic]", "wuimg[matchType:magic]"];
+	converters = ["deark[module:hpicn][matchType:magic]", "wuimg[format:hpicon][matchType:magic]"];
 }

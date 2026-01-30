@@ -6,5 +6,5 @@ export class beamSoftwareSIFFImage extends Format
 	ext            = [".pim"];
 	forbidExtMatch = true;
 	magic          = ["Beam Software SIFF sprite/image"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:pim]"];
 }

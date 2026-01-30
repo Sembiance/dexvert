@@ -6,5 +6,5 @@ export class electronicArtsFont extends Format
 	ext            = [".ffn"];
 	forbidExtMatch = true;
 	magic          = ["Electronic Arts Font (generic)", "FIFA game serie Font"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:eafnt]"];
 }

@@ -10,7 +10,7 @@ export class ppm extends Format
 	idMeta       = ({macFileType}) => macFileType==="PPGM";
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "iio2png", "gimp", "wuimg",
+		"convert", "iio2png", "gimp", "wuimg[format:pnm]",
 		"paintDotNet[matchType:magic]", "hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]", "pv[matchType:magic]"
 	];
 }

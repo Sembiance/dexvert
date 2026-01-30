@@ -19,7 +19,7 @@ export class bmp extends Format
 		const r = [];
 		if(dexState.hasMagics("Mac BMP bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.bmp]");
-		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert[format:bmp]", "ffmpeg[format:bmp_pipe][outType:png]", "wuimg", "imconv[format:bmp][matchType:magic]");
+		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert[format:bmp]", "ffmpeg[format:bmp_pipe][outType:png]", "wuimg[format:bmp]", "wuimg[format:dib]", "imconv[format:bmp][matchType:magic]");
 		r.push(...["noesis[type:image]"].map(v => `${v}[matchType:magic]`));
 		r.push(...["paintDotNet", "keyViewPro", "imageAlchemy", "corelPhotoPaint", "canvas[matchType:magic][hasExtMatch]", "tomsViewer"].map(v => `${v}[matchType:magic][strongMatch]`));
 		// Not reliable and can produce garbage, even with strong matches with extensions: "graphicWorkshopProfessional", "canvas5", "hiJaakExpress", "pv"

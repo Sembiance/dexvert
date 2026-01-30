@@ -6,5 +6,5 @@ export class mayaIconsOrSwatches extends Format
 	ext            = [".swatches"];
 	forbidExtMatch = true;
 	magic          = [/^fmt\/1168( |$)/];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:mayaicon]"];
 }

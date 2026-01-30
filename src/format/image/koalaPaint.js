@@ -16,7 +16,7 @@ export class koalaPaint extends Format
 	mimeType   = "image/x-koa";
 	magic      = ["Koala Paint", "Koala Paint (Compressed) :gg:"];
 	trustMagic = true;	// Koala Paint is normally untrustworthy, but we trust it here
-	converters = ["nconvert[format:gg]", `abydosconvert[format:${this.mimeType}]`, "view64", "wuimg", "tomsViewer"];
+	converters = ["nconvert[format:gg]", `abydosconvert[format:${this.mimeType}]`, "view64", "wuimg[format:c64]", "tomsViewer"];
 
 	// Must be <= 10018 because either we are uncompressed (10003/10006) or we are compresed in which case we should be smaller and we found a 10018 sized file in the wild
 	idCheck = inputFile => inputFile.size<=10018;

@@ -7,5 +7,5 @@ export class bobRayTracerBitmap extends Format
 	ext        = [".bob"];
 	magic      = ["deark: bob", "Bob :bob:"];
 	weakMagic  = true;
-	converters = ["deark", "nconvert[format:bob]", "wuimg[matchType:magic]", "tomsViewer[matchType:magic]"];	// do NOT specify [module:bob] for deark as we just have a ext match and specyfing the module bypasses some sanity checking that deark does which causes too many false positives
+	converters = ["deark", "nconvert[format:bob]", "wuimg[format:bob][matchType:magic]", "tomsViewer[matchType:magic]"];	// do NOT specify [module:bob] for deark as we just have a ext match and specyfing the module bypasses some sanity checking that deark does which causes too many false positives
 }

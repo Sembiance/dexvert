@@ -6,5 +6,5 @@ export class idSoftwareSprite extends Format
 	ext            = [".spr", ".spr32"];
 	forbidExtMatch = true;
 	magic          = ["ID Software Sprite format"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:idsp]"];
 }

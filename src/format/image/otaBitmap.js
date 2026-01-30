@@ -7,5 +7,5 @@ export class otaBitmap extends Format
 	ext          = [".otb"];
 	magic        = ["Nokia OTA bitmap :otb:"];
 	metaProvider = ["image"];
-	converters   = ["convert", "wuimg"];	// nconvert fails to convert properly the 1 sample we have
+	converters   = ["convert", "wuimg[format:ota]"];	// nconvert fails to convert properly the 1 sample we have
 }

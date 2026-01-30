@@ -8,5 +8,5 @@ export class jpeg2000PGX extends Format
 	forbidExtMatch = true;	// pretty rare format and thus don't want too many false matches via ext
 	magic          = ["PGX JPEG 2000 bitmap", "piped pgx sequence (pgx_pipe)"];
 	metaProvider   = ["image"];
-	converters     = ["convert", "ffmpeg[format:pgx_pipe][outType:png]", "wuimg[matchType:magic]"];
+	converters     = ["convert", "ffmpeg[format:pgx_pipe][outType:png]", "wuimg[format:pnm][matchType:magic]"];
 }

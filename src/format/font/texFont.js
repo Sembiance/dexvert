@@ -6,5 +6,5 @@ export class texFont extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/TexFont";
 	ext        = [".txf"];
 	magic      = ["TexFont"];
-	converters = ["wuimg"];
+	converters = ["wuimg[format:txf]"];
 }

@@ -6,5 +6,5 @@ export class rembrandt extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Rembrandt";
 	ext        = [".tcp"];
 	magic      = ["Rembrandt True Color Picture bitmap"];
-	converters = ["recoil2png", "wuimg"];
+	converters = ["recoil2png", "wuimg[format:tcp]"];
 }

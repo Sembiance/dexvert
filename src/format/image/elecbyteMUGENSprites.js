@@ -6,5 +6,5 @@ export class elecbyteMUGENSprites extends Format
 	ext            = [".sff"];
 	forbidExtMatch = true;
 	magic          = ["Elecbyte M.U.G.E.N. sprites"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:eb_sff]"];
 }

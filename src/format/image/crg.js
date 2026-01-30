@@ -6,5 +6,5 @@ export class crg extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Calamus_Raster_Graphic";
 	ext        = [".crg"];
 	magic      = ["Calamus Raster Graphic bitmap", "deark: crg", "Calamus :crg:"];
-	converters = ["recoil2png", "deark[module:crg]", "nconvert[format:crg]", "wuimg[matchType:magic]"];
+	converters = ["recoil2png", "deark[module:crg]", "nconvert[format:crg]", "wuimg[format:crg][matchType:magic]"];
 }

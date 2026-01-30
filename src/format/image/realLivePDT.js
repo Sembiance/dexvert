@@ -5,5 +5,5 @@ export class realLivePDT extends Format
 	name       = "RealLive PDT10 image";
 	ext        = [".pdt"];
 	magic      = ["RealLive PDT10 image"];
-	converters = ["wuimg[matchType:magic]"];
+	converters = ["wuimg[format:pdt][matchType:magic]"];
 }

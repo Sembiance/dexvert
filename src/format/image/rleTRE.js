@@ -7,5 +7,5 @@ export class rleTRE extends Format
 	ext            = [".tre"];
 	forbidExtMatch = true;
 	magic          = ["Run length encoded True Colour Picture bitmap"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:tre]"];
 }

@@ -10,7 +10,7 @@ export class fmTownsHEL extends Format
 	magic          = ["FM Towns HEL bitmap", "FM-Towns HEL Animation", "deark: fmtowns_hel"];
 	converters     = [
 		"deark[module:fmtowns_hel][opt:fmtowns_hel:includedups] -> *ffmpeg[fps:8][outType:gif]",
-		"hel2tif -> *ffmpeg[fps:8][outType:gif]"
-		// wuimg also supports this, but haven't added support for properly naming the output files so that they can be animated with ffmpeg
+		"hel2tif -> *ffmpeg[fps:8][outType:gif]",
+		"wuimg[format:hel] -> *ffmpeg[fps:8][outType:gif]"
 	];
 }

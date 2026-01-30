@@ -7,5 +7,5 @@ export class animatorPICCEL extends Format
 	ext            = [".cel", ".pic"];
 	forbidExtMatch = true;
 	magic          = ["deark: animator_pic", /^x-fmt\/223( |$)/];
-	converters     = ["deark[module:animator_pic]", "wuimg", "imageAlchemy"];
+	converters     = ["deark[module:animator_pic]", "wuimg[format:piccel]", "imageAlchemy"];
 }

@@ -6,5 +6,5 @@ export class indyPaint extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/IndyPaint";
 	ext        = [".tru"];
 	magic      = ["IndyPaint bitmap", "deark: indypaint"];
-	converters = ["deark[module:indypaint]", "wuimg", "recoil2png"];
+	converters = ["deark[module:indypaint]", "wuimg[format:indy]", "recoil2png"];
 }

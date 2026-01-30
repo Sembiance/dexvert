@@ -6,5 +6,5 @@ export class eaSFNFont extends Format
 	ext            = [".sfn"];
 	forbidExtMatch = true;
 	magic          = ["EA SFN Font"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:eafnt]"];
 }

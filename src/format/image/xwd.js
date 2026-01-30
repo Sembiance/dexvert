@@ -17,7 +17,7 @@ export class xwd extends Format
 	// nconvert handles the color of MARBLE.XPM well but messes up bettyboop and woman-with-ban.
 	// All the other converters do less well
 	converters = [
-		"gimp", "iio2png", "deark[module:xwd]", "wuimg", "imconv[format:xwd][matchType:magic]", "nconvert[format:xwd]", "ffmpeg[format:xwd_pipe][outType:png]", `abydosconvert[format:${this.mimeType}]`, "convert",
+		"gimp", "iio2png", "deark[module:xwd]", "wuimg[format:xwd]", "imconv[format:xwd][matchType:magic]", "nconvert[format:xwd]", "ffmpeg[format:xwd_pipe][outType:png]", `abydosconvert[format:${this.mimeType}]`, "convert",
 		"hiJaakExpress[matchType:magic][hasExtMatch]"
 	];
 

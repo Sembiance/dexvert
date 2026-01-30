@@ -16,6 +16,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "./dexUtil.js";
 const MAX_FILENAME_LENGTH = 245;
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir"];
+export {GLOBAL_FLAGS};
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =

@@ -6,5 +6,5 @@ export class printMagicCard extends Format
 	ext            = [".pmc"];
 	forbidExtMatch = true;
 	magic          = ["Print Magic Card"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:pmg]"];
 }

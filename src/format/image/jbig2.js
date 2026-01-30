@@ -6,5 +6,5 @@ export class jbig2 extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/JBIG2";
 	ext          = [".jb2", ".jbig2"];
 	magic        = ["JBIG2 bitmap"];
-	converters   = ["wuimg"];
+	converters   = ["wuimg[format:jbig2]"];
 }

@@ -6,5 +6,5 @@ export class lercImage extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/LERC";
 	ext        = [".lrc", ".lerc", ".lerc1", ".lerc2"];
 	magic      = ["Lerc 1 Image", "Lerc2 bitmap", "Lerc1 compressed bitmap"];
-	converters = ["wuimg"];
+	converters = ["wuimg[format:lerc]"];
 }

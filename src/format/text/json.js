@@ -11,8 +11,8 @@ export class json extends Format
 		// generic
 		"JSON text data",
 
-		// specific
-		"Chrome Bookmarks", "Firefox bookmark (JavaScript Object Notation)", "Xcode Asset Catalog", /^Max Patch$/, "application/schema+json", /^Unreal Engine (Plugin|Project)$/, /^fmt\/1311( |$)/
+		// app specific
+		"Chrome Bookmarks", "Firefox bookmark (JavaScript Object Notation)", "Xcode Asset Catalog", /^Max Patch$/, "application/schema+json", "Node.js Package Manifest", /^Unreal Engine (Plugin|Project)$/, /^fmt\/1311( |$)/
 	];
 	weakMagic        = true;
 	mimeType         = "application/json";

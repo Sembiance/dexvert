@@ -9,7 +9,7 @@ export class tim extends Format
 	weakMagic    = ["TIM image", "PSX TIM"];
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "deark[module:tim]", "wuimg", "nconvert[format:tim]",
+		"convert", "deark[module:tim]", "wuimg[format:tim]", "nconvert[format:tim]",
 		"paintDotNet[matchType:magic]", "noesis[type:image]",
 		"recoil2png"
 	];

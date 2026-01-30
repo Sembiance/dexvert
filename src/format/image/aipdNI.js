@@ -7,5 +7,5 @@ export class aipdNI extends Format
 	ext            = [".apd", ".aipd"];
 	forbidExtMatch = true;
 	magic          = ["AIPD bitmap", "AIPD :aipd:"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:aipd]"];
 }

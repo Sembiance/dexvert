@@ -7,5 +7,5 @@ export class lightWorkImage extends Format
 	ext            = [".lwi"];
 	forbidExtMatch = true;
 	magic          = ["LightWork Image bitmap", "Light Work Image :lwi:"];
-	converters     = ["nconvert[format:lwi]", "wuimg"];
+	converters     = ["nconvert[format:lwi]", "wuimg[format:lwi]"];
 }

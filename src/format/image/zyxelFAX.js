@@ -6,5 +6,5 @@ export class zyxelFAX extends Format
 	ext            = [".fax"];
 	forbidExtMatch = true;
 	magic          = ["Zyxel FAX format"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:zyxel]"];
 }

@@ -6,5 +6,5 @@ export class skyRoadsLZS extends Format
 	ext        = [".lzs"];
 	magic      = ["SkyRoads bitmap"];
 	weakMagic  = true;
-	converters = ["wuimg"];
+	converters = ["wuimg[format:skyroads]"];
 }

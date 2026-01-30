@@ -4,7 +4,7 @@ const _XML_MAGIC = [
 	// generic XML
 	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", "XML Schema", "application/xml", /^fmt\/101( |$)/, /^x-fmt\/280( |$)/,
 	
-	// specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
+	// app specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
 	// Also, some of these could be processed into something more usable, such as'Photo Font' etc.
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
 	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Eclipse JAR settings",
@@ -54,7 +54,7 @@ const _XML_MAGIC = [
 	"Linden Lab Structured Data", "Irrlicht 3D scene", "A Vampyre Story save game", "JCross CrossWords puzzle", "FontCreator Pro transform script", "TrID definition! :-)", "Camtasia Studio Project", "MSX software data base", "Domino module",
 	"Adobe Application Manager Package Info", "3ds Max XML Animation File", "QNX Package Manifest", "QNX Repository Manifest", "Keyhole - Google Earth Overlay", "DITA conditional processing profile", "News Industry Text Format", "Irrlicht Mesh (UTF",
 	"RealProducer Server Destination", "QGIS GRASS module definition", "VTK XML", "ParaView Data", /^Expression SketchFlow (data|Feedback)/, "Windows Communication Foundation reference", "Fritzing Part", "Azure Cloud Service Package Manifest (UTF",
-	"Azure Service Definition schema", "OpenStreetMap XML Data", "Route 66 Landmarks", "Fritzing Bin module", "Styled Layer Descriptor", "Compass and Ruler Job", "XEphem gallery info", "XEphem lunar DB",
+	"Azure Service Definition schema", "OpenStreetMap XML Data", "Route 66 Landmarks", "Fritzing Bin module", "Styled Layer Descriptor", "Compass and Ruler Job", "XEphem gallery info", "XEphem lunar DB", "NI MASCHINE template",
 	/^fmt\/(205|243|333|475|570|896|932|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1803|1824|1825|1853|1883|1962|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

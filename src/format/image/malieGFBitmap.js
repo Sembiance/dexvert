@@ -5,5 +5,5 @@ export class malieGFBitmap extends Format
 	name       = "MalieGF Bitmap";
 	ext        = [".mgf"];
 	magic      = ["MalieGF bitmap"];
-	converters = ["wuimg[matchType:magic]"];
+	converters = ["wuimg[format:png][matchType:magic]"];
 }

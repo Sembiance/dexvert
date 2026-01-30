@@ -6,6 +6,6 @@ export class x11Puzzle extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Puzzle_image_(X11)";
 	ext        = [".cm", ".pzl"];
 	magic      = ["deark: xpuzzle", "Puzzle :pzl:"];
-	converters = ["deark[module:xpuzzle]", "nconvert[format:pzl]", "wuimg[matchType:magic]"];
+	converters = ["deark[module:xpuzzle]", "nconvert[format:pzl]", "wuimg[format:pzl][matchType:magic]"];
 	verify     = ({meta}) => meta.width>6 && meta.height>6;
 }

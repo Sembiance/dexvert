@@ -10,6 +10,6 @@ export class degasMed extends Format
 	byteCheck = [{offset : 0, match : [0x80, 0x01]}];
 
 	// nconvert & wuimg properly handles aspect ratio
-	converters = ["nconvert[format:degas]", "wuimg[hasExtMatch]", `abydosconvert[format:${this.mimeType}]`, "recoil2png"];
+	converters = ["nconvert[format:degas]", "wuimg[format:degas][hasExtMatch]", `abydosconvert[format:${this.mimeType}]`, "recoil2png"];
 	classify   = true;
 }

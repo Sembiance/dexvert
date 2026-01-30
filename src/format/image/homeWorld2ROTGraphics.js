@@ -6,5 +6,5 @@ export class homeWorld2ROTGraphics extends Format
 	ext            = [".rot"];
 	forbidExtMatch = true;
 	magic          = ["HomeWorld 2 ROT Graphics", "Home World 2 - ROT graphics"];
-	converters     = ["wuimg"];	// currently only supports uncompressed versions, of which I haven't found any samples of yet
+	converters     = ["wuimg[format:rot]"];	// currently only supports uncompressed versions, of which I haven't found any samples of yet
 }

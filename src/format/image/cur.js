@@ -8,5 +8,5 @@ export class cur extends Format
 	mimeType     = "application/ico";
 	magic        = ["MS Windows cursor resource", "Microsoft Windows Cursor", "Windows Cursor shape", "deark: ico (Windows Cursor)", "deark: win1ico (Windows 1.0 cursor)", "Windows Cursor Image :cur:", /^fmt\/385( |$)/];
 	metaProvider = ["image"];
-	converters   = ["deark[module:ico]", "iio2png", "deark[module:win1ico]", "gimp", "convert", "nconvert[format:cur]", "wuimg", "imconv[format:cur][matchType:magic]"];
+	converters   = ["deark[module:ico]", "iio2png", "deark[module:win1ico]", "gimp", "convert", "nconvert[format:cur]", "wuimg[format:ico]", "imconv[format:cur][matchType:magic]"];
 }

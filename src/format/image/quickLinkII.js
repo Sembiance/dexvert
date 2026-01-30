@@ -6,5 +6,5 @@ export class quickLinkII extends Format
 	ext            = [".qfx"];
 	forbidExtMatch = true;
 	magic          = ["QuickLink II Fax bitmap"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:qfx]"];
 }

@@ -7,5 +7,5 @@ export class wgtSprite extends Format
 	ext            = [".spr"];
 	forbidExtMatch = true;
 	magic          = ["WGT Sprite"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:wgtspr]"];
 }

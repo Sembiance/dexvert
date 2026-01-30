@@ -7,5 +7,5 @@ export class quiteOK extends Format
 	ext          = [".qoi"];
 	magic        = ["Quite OK Image Format bitmap", "image/qoi", "piped qoi sequence (qoi_pipe)", /^QOI image data/];
 	metaProvider = ["image"];
-	converters   = ["convert", "wuimg", "ffmpeg[format:qoi_pipe][outType:png]"];
+	converters   = ["convert", "wuimg[format:qoi]", "ffmpeg[format:qoi_pipe][outType:png]"];
 }

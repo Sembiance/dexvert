@@ -30,7 +30,7 @@ export class iffILBM extends Format
 	// abydosconvert also 'stretches' the pixels to 'mimic' how they originally looked, but I don't really like that
 	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
 	converters = [
-		`recoil2png`, "deark[module:ilbm]", "ffmpeg[format:iff][outType:png]", "convert", "iio2png", "wuimg", "nconvert[format:iff]", "nconvert[format:lbm]", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert",
+		`recoil2png`, "deark[module:ilbm]", "ffmpeg[format:iff][outType:png]", "convert", "iio2png", "wuimg[format:ilbm]", "nconvert[format:iff]", "nconvert[format:lbm]", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert",
 		"noesis[type:image][matchType:magic]", "hiJaakExpress[matchType:magic][hasExtMatch]", "pv[matchType:magic]", "paintDotNet[matchType:magic][hasExtMatch]"
 		//"canvas[matchType:magic]",	WAY too slow and also doesn't seem to handle any ILBM's that all the others miss, so skip it
 	];

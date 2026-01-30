@@ -6,5 +6,5 @@ export class kro extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Kolor_Raw";
 	ext        = [".kro"];
 	magic      = ["Kolor Raw image format", "AutoPano RAW format :kro:"];
-	converters = ["nconvert[format:kro]", "wuimg", "tomsViewer"];
+	converters = ["nconvert[format:kro]", "wuimg[format:kro]", "tomsViewer"];
 }

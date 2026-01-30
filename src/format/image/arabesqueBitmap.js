@@ -6,5 +6,5 @@ export class arabesqueBitmap extends Format
 	ext            = [".abm", ".puf"];
 	forbidExtMatch = true;
 	magic          = ["Arabesque Professional bitmapped drawing"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:stad]"];
 }

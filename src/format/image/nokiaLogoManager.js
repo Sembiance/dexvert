@@ -8,5 +8,5 @@ export class nokiaLogoManager extends Format
 	ext            = [".nlm"];
 	magic          = ["Nokia Logo Manager bitmap", "deark: nlm", "Nokia Logo File :nlm:"];
 	forbiddenMagic = TEXT_MAGIC;
-	converters     = ["deark[module:nlm][matchType:magic]", "nconvert[format:nlm]", "wuimg[matchType:magic]"];
+	converters     = ["deark[module:nlm][matchType:magic]", "nconvert[format:nlm]", "wuimg[format:nlm][matchType:magic]"];
 }

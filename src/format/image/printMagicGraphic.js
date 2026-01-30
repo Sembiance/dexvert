@@ -7,5 +7,5 @@ export class printMagicGraphic extends Format
 	forbidExtMatch = true;
 	magic          = ["Print Magic Graphic"];
 	weakMagic      = true;
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:pmg]"];
 }

@@ -6,5 +6,5 @@ export class iffChunkyBitmap extends Format
 	ext            = [".ciff"];
 	forbidExtMatch = true;
 	magic          = ["IFF Chunky bitmap"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:chky]"];
 }

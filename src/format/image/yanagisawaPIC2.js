@@ -8,6 +8,6 @@ export class yanagisawaPIC2 extends Format
 	magic       = ["PIC2 bitmap"];
 	idMeta      = ({macFileType, macFileCreator}) => macFileType==="Pic2" && macFileCreator==="xPIC";
 	weakMagic   = true;
-	converters  = ["wuimg"];
+	converters  = ["wuimg[format:pic2]"];
 	notes       = `There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c`;
 }

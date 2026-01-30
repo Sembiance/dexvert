@@ -7,5 +7,5 @@ export class megaPaintPattern extends Format
 	ext            = [".pat"];
 	forbidExtMatch = true;
 	magic          = ["MegaPaint Pattern", "deark: megapaint_pat"];
-	converters     = ["deark[module:megapaint_pat]", "wuimg"];
+	converters     = ["deark[module:megapaint_pat]", "wuimg[format:megapat]"];
 }

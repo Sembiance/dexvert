@@ -1083,7 +1083,6 @@ export default
 		twistImportScript                          : {name : "Twist Import script", ext : [".i"], magic : ["Twist Import script"], weakMagic : true},
 		twistMailmergeScript                       : {name : "Twist Mailmerge script", ext : [".m"], magic : ["Twist Mailmerge script"], weakMagic : true},
 		twistReportScript                          : {name : "Twist Report script", ext : [".r"], magic : ["Twist Report script"], weakMagic : true},
-		typo3Extension                             : {name : "TYPO3 extension", ext : [".t3x"], magic : ["Compressed TYPO3 extension"]},
 		ultiboardPCBDesignDataFile                 : {name : "ULTIboard PCB Design Data File", ext : [".ddf"], magic : ["ULTIboard PCB Design Data File format"], weakMagic : true},
 		ultimate3DEffect                           : {name : "Ultimate 3D Effect", ext : [".ufx"], magic : ["Ultimate 3D Effect"]},
 		ultraEditMenu                              : {name : "UltraEdit Menu", ext : [".mfg", ".mnu", ".mb0", ".mb1", ".in1", ".pb0", ".pb1"], magic : ["UltraEdit Menu"], weakMagic : true},

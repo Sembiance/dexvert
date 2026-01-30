@@ -6,5 +6,5 @@ export class bethesdaBSITexture extends Format
 	ext        = [".bsi"];
 	magic      = ["Bethesda Image texture"];
 	weakMagic  = true;
-	converters = ["wuimg"];
+	converters = ["wuimg[format:bsi]"];
 }

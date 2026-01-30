@@ -7,5 +7,5 @@ export class micrografxIcon extends Format
 	ext            = [".icn", ".bin"];
 	forbidExtMatch = true;
 	magic          = ["Micrografx Icon", /^fmt\/1907( |$)/];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:mgxicn]"];
 }

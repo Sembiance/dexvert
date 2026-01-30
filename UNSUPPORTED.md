@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,052)
+# Unsupported File Formats (4,058)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -801,7 +801,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (195)
+## Image (196)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -900,6 +900,7 @@ Family/Format | Name | Extensions | Notes
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 [image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
+[image/kiriKiriBitmap](https://discmaster.textfiles.com/search?format=kiriKiriBitmap) | KiriKiri Bitmap | .tlg | 
 [image/kompasDrawing](https://discmaster.textfiles.com/search?format=kompasDrawing) | KOMPAS Drawing | .cdw .lyt .lts .bss | 
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?format=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 [image/lightningStrikeBitmap](https://discmaster.textfiles.com/search?format=lightningStrikeBitmap) | Lightning Strike bitmap | .cod | 
@@ -1186,7 +1187,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,768)
+## Other (2,773)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2476,6 +2477,7 @@ Family/Format | Name | Extensions | Notes
 [other/kolekoSaveState](https://discmaster.textfiles.com/search?format=kolekoSaveState) | KOLEKO Save State | .rom | 
 [other/komGameDataArchive](https://discmaster.textfiles.com/search?format=komGameDataArchive) | KOM game data archive | .kom | 
 [other/konicaPictureShowSlideshow](https://discmaster.textfiles.com/search?format=konicaPictureShowSlideshow) | Konica Picture Show Slideshow | .sld | 
+[other/kontaktCacheData](https://discmaster.textfiles.com/search?format=kontaktCacheData) | KONTAKT Cache data | .nkc | 
 [other/korgFile](https://discmaster.textfiles.com/search?format=korgFile) | KORG File | .pcg .bsq .arr .sty .sng | 
 [other/kossacsAutoSafeFormat](https://discmaster.textfiles.com/search?format=kossacsAutoSafeFormat) | Kossacs Auto Safe Format | .sav | 
 [other/krisCardsCardTemplate](https://discmaster.textfiles.com/search?format=krisCardsCardTemplate) | KrisCards card/template | .krs | 
@@ -2817,6 +2819,7 @@ Family/Format | Name | Extensions | Notes
 [other/nascarSimRacingGameArchive](https://discmaster.textfiles.com/search?format=nascarSimRacingGameArchive) | NASCAR SimRacing game archive | .mas | 
 [other/nativeInstrumentsEnsemble](https://discmaster.textfiles.com/search?format=nativeInstrumentsEnsemble) | Native Instruments GENERATOR Ensemble | .ens | 
 [other/nativeInstrumentsInstrumentMacro](https://discmaster.textfiles.com/search?format=nativeInstrumentsInstrumentMacro) | Native Instruments GENERATOR Instrument / Macro | .ism .mdl | 
+[other/nativeInstrumentsGuitarRig5Preset](https://discmaster.textfiles.com/search?format=nativeInstrumentsGuitarRig5Preset) | Native Instruments Guitar Rig 5 preset | .ngrr | 
 [other/nativeInstrumentsPresetBank](https://discmaster.textfiles.com/search?format=nativeInstrumentsPresetBank) | Native Instruments Preset Bank | .bnk | 
 [other/navisWorksDocument](https://discmaster.textfiles.com/search?format=navisWorksDocument) | NavisWorks Document | .nwd | 
 [other/necromancersDOSNavigatorDialogs](https://discmaster.textfiles.com/search?format=necromancersDOSNavigatorDialogs) | Necromancer's DOS Navigator Dialogs | .dlg | 
@@ -3168,6 +3171,7 @@ Family/Format | Name | Extensions | Notes
 [other/qarbonViewlet](https://discmaster.textfiles.com/search?format=qarbonViewlet) | Qarbon Viewlet | .viewlet | 
 [other/qbxMSBasicKeyboardDefinition](https://discmaster.textfiles.com/search?format=qbxMSBasicKeyboardDefinition) | QBX (MS Basic 7.x) Editor keyboard definition | .key | 
 [other/qlPluginROM](https://discmaster.textfiles.com/search?format=qlPluginROM) | QL Plugin-ROM |  | 
+[other/qlikViewDocument](https://discmaster.textfiles.com/search?format=qlikViewDocument) | QlikView document |  | 
 [other/qmlCachedDocument](https://discmaster.textfiles.com/search?format=qmlCachedDocument) | QML Cached document |  | 
 [other/qtBinaryResource](https://discmaster.textfiles.com/search?format=qtBinaryResource) | Qt Binary Resource | .rcc | 
 [other/qtMessage](https://discmaster.textfiles.com/search?format=qtMessage) | Qt Message | .qm | 
@@ -3374,6 +3378,7 @@ Family/Format | Name | Extensions | Notes
 [other/smartBootManagerBackupFile](https://discmaster.textfiles.com/search?format=smartBootManagerBackupFile) | Smart Boot Manager Backup File |  | 
 [other/smartCatDiskCatalog](https://discmaster.textfiles.com/search?format=smartCatDiskCatalog) | SmartCat disk Catalog | .cat | 
 [other/smartListToGoDatabase](https://discmaster.textfiles.com/search?format=smartListToGoDatabase) | SmartList To Go database | .pdb | 
+[other/smdicDictionary](https://discmaster.textfiles.com/search?format=smdicDictionary) | SMDIC Dictionary | .dic | 
 [other/snagItCapture](https://discmaster.textfiles.com/search?format=snagItCapture) | SnagIt capture | .snag | 
 [other/snarkBustersGameDataArchive](https://discmaster.textfiles.com/search?format=snarkBustersGameDataArchive) | Snark Busters game data archive | .pack | 
 [other/snes9xSnapshot](https://discmaster.textfiles.com/search?format=snes9xSnapshot) | Snes9x snapshot | .fig .smc .sfc .swc | 
@@ -3667,6 +3672,7 @@ Family/Format | Name | Extensions | Notes
 [other/twistedMetal3DModelsContainer](https://discmaster.textfiles.com/search?format=twistedMetal3DModelsContainer) | Twisted Metal 3D models container | .tpc | 
 [other/twistedMetalTexture](https://discmaster.textfiles.com/search?format=twistedMetalTexture) | Twisted Metal texture | .dpc | 
 [other/typeLibrary](https://discmaster.textfiles.com/search?format=typeLibrary) | Type Library | .tlb | 
+[other/typo3Extension](https://discmaster.textfiles.com/search?format=typo3Extension) | TYPO3 extension | .t3x | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/typo3Extension/)
 [other/urbanTheCyborgProjectGameData](https://discmaster.textfiles.com/search?format=urbanTheCyborgProjectGameData) | U.R.B.A.N The Cyborg Project game data | .dat | 
 [other/usNavyFightersTheaterGameData](https://discmaster.textfiles.com/search?format=usNavyFightersTheaterGameData) | U.S. Navy Fighters Theater game data | .t2 | 
 [other/uaeSavedState](https://discmaster.textfiles.com/search?format=uaeSavedState) | UAE Saved State | .uss | 

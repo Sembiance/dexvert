@@ -6,5 +6,5 @@ export class ibmKIPS extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/IBM_KIPS_bitmap";
 	ext        = [".kps"];
 	magic      = ["IBM KIPS bitmap", "IBM Kips :kps:"];
-	converters = ["wuimg", "nconvert[format:kps]"];
+	converters = ["wuimg[format:kips]", "nconvert[format:kps]"];
 }

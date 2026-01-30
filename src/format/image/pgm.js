@@ -12,7 +12,7 @@ export class pgm extends Format
 	];
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "iio2png", "gimp", "wuimg",
+		"convert", "iio2png", "gimp", "wuimg[format:pnm]",
 		"paintDotNet[matchType:magic]", "hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
 	];
 	verify = ({meta}) => meta.width>2 && meta.height>2;

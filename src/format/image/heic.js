@@ -8,5 +8,5 @@ export class heic extends Format
 	mimeType     = "image/heic";
 	magic        = ["HEIF bitmap", "High Efficiency Image File Format", "ISO Media, HEIF Image", "image/heif", /^Format: MP4 Video\[(mif1heic|heicmif1)/, "deark: bmff", /^fmt\/1101( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "iconvert", "gimp", "wuimg"];
+	converters   = ["convert", "iconvert", "gimp", "wuimg[format:heif]"];
 }

@@ -7,5 +7,5 @@ export class trs80HR extends Format
 	ext           = [".hr"];
 	magic         = ["deark: hr", "TRS-80 :hr:"];
 	fileSize      = [16384, 19200, 19328, 19456];
-	converters    = ["deark[module:hr]", "recoil2png", "nconvert[format:hr]", "wuimg[matchType:magic]"];	//, "tomsViewer"
+	converters    = ["deark[module:hr]", "recoil2png", "nconvert[format:hr]", "wuimg[format:trs80hr][matchType:magic]"];	//, "tomsViewer"
 }

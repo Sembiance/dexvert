@@ -6,5 +6,5 @@ export class piklibGraphicData extends Format
 	ext            = [".img"];
 	forbidExtMatch = true;
 	magic          = ["Piklib/BlooMoo graphic data"];
-	converters     = ["wuimg"];
+	converters     = ["wuimg[format:piklib]"];
 }

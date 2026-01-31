@@ -1088,7 +1088,7 @@ export default
 		ultraEditMenu                              : {name : "UltraEdit Menu", ext : [".mfg", ".mnu", ".mb0", ".mb1", ".in1", ".pb0", ".pb1"], magic : ["UltraEdit Menu"], weakMagic : true},
 		unifiedPrinterParameter                    : {name : "Unified Printer Parameter", ext : [".upp"], magic : ["Unified Printer Parameter"]},
 		unityPlayerLog                             : {name : "Unity Player Log", ext : [".txt"], magic : ["Unity Player Log"]},
-		unityYAMLScene                             : {name : "Unity YAML Scene", ext : [".unity", ".asset"], magic : ["Unity YAML Scene"], weakMagic : true},
+		unityYAMLScene                             : {name : "Unity YAML Scene", ext : [".unity", ".asset"], magic : ["Unity YAML Scene", "Unity Prefab"], weakMagic : true},
 		upcatCatalog                               : {name : "Upcat Catalog", ext : [".cat"], magic : ["Upcat Catalog"]},
 		valueChangeDump                            : {name : "Value Change Dump", ext : [".vcd", ".vcdz"], magic : ["Value Change Dump"]},
 		vamasSurfaceChemicalAnalysisTransfer       : {name : "VAMAS Surface Chemical Analysis Standard Data Transfer Format", ext : [".vms"], magic : [/^fmt\/1122( |$)/]},

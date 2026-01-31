@@ -1,0 +1,5 @@
+#!/bin/bash
+shopt -s expand_aliases
+source /mnt/compendium/sys/bash/bash_aliases
+
+dra /mnt/compendium/DevLab/dexvert/test/printSampleCounts.js "$@"

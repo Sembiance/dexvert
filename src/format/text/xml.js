@@ -7,7 +7,7 @@ const _XML_MAGIC = [
 	// app specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
 	// Also, some of these could be processed into something more usable, such as'Photo Font' etc.
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
-	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Eclipse JAR settings",
+	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", /^MSBuild (Project|Targets)/, "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Eclipse JAR settings",
 	"Visual Studio Project User Options", "Visual Studio C++ project Filters", "Visual Studio Visual C++ Project", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes", "Xcode Scheme",
 	"Tag Library Descriptor", "Channel Definition Format", "QuickTime Media Link", "Interface Builder UI resource data (archive)", "Mozilla XML User interface Language", "GPS eXchange format", "Glade UI design", "Internet Archive book scan data",
 	"RoboHelp / FlashHelp skin", "Entity and Attribute Information", "Shapefile Geospatial metadata", "NuGet Specification", "Microsoft Management Console Snap-in control file", "Microsoft Extensible Application Markup Language", "XSI Addon",
@@ -22,7 +22,7 @@ const _XML_MAGIC = [
 	"application/x-xbel", "Windows Script Component", "WiX Localization", "Android compiled View resource", "Scripting Definition", "Xcode Workspace Data", "Android Manifest", "Interface Builder Storyboard document", "RealProducer Profile",
 	"Visual Studio Shared Code project", "iOS App Zip archive data", "Open Virtualization Format descriptor", "Borland Group Project", "FastReport 3 report", "XML Bookmark Exchange Language", "ttx font format", "Eclipse Extension Point Schema",
 	"ArgoUML project", "Precision Graphics Markup Language", "XML Metadata Interchange", "Thrustmaster TARGET profile", "Java Web Start application descriptor", "MAME Layout", "Distribution Format Exchange Profile", "Artweaver Brush", "IFC-XML",
-	"MeshMixer Part data", "Software Ideas Modeler Template", "Navigation Control file for XML", "OpenOffice/LibreOffice type library database (XML)", "OpenCV XML storage", "Mono Mconfig configuration", "Uniform Office Format (generic)",
+	"MeshMixer Part data", "Software Ideas Modeler Template", "Navigation Control file for XML", "OpenOffice/LibreOffice type library database (XML)", "Mapping Specification Language", "Mono Mconfig configuration", "Uniform Office Format (generic)",
 	"Fabmetheus model format", "Qt Help Collection Project", "MusicXML", "SOAP Envelope", "Windows 7 Task Scheduler job", "GnuCash data", "GnuCash file", "AlgoBox Algorithm", "Visual Studio Tools for Office add-in", "Anjuta IDE project", "ISE XReport",
 	"ConvertXtoDVD project", "Eclipse CDT Project settings", "Koda Form Designer Form", "Synfig project", /^Delphi Project$/, "Notepad++ session", "wxFormBuilder Project", "Scribus palette", "FET Timetable", "LMMS Preset", "LMMS Project", "SWID Tag",
 	"Microsoft security certificate", "Expression Design swatch (v4)", "Microsoft security certificate", "GanttProject project", "SMath Studio worksheet", "MuseScore music score", "NewsML file", "DcUpdater local configuration", "WxGlade project",
@@ -52,9 +52,10 @@ const _XML_MAGIC = [
 	"SQL Server Data Tools Database info", "Visual Studio Intel Fortran Project", "VideoWave Movie Project", "Visual Studio Data Source", "Autodesk Inventor Project", "FxCop project", "EtherPeek/AiroPeek/OmniPeek capture file", /^DITA (Map|structure)/,
 	"Eclipse Launch configuration", "Amazing Mahjongg 3D Layout", "TermBase eXchange Format", "Translation Memory Exchange", "GENPO Organ", "GNOME Timed Wallpaper", "JavaServer FacesServlet pointer", "VSIX Manifest (2010)", "Cal3D Xml Mesh File",
 	"Linden Lab Structured Data", "Irrlicht 3D scene", "A Vampyre Story save game", "JCross CrossWords puzzle", "FontCreator Pro transform script", "TrID definition! :-)", "Camtasia Studio Project", "MSX software data base", "Domino module",
-	"Adobe Application Manager Package Info", "3ds Max XML Animation File", "QNX Package Manifest", "QNX Repository Manifest", "Keyhole - Google Earth Overlay", "DITA conditional processing profile", "News Industry Text Format", "Irrlicht Mesh (UTF",
-	"RealProducer Server Destination", "QGIS GRASS module definition", "VTK XML", "ParaView Data", /^Expression SketchFlow (data|Feedback)/, "Windows Communication Foundation reference", "Fritzing Part", "Azure Cloud Service Package Manifest (UTF",
-	"Azure Service Definition schema", "OpenStreetMap XML Data", "Route 66 Landmarks", "Fritzing Bin module", "Styled Layer Descriptor", "Compass and Ruler Job", "XEphem gallery info", "XEphem lunar DB", "NI MASCHINE template",
+	"Adobe Application Manager Package Info", "3ds Max XML Animation File", "QNX Package Manifest", "QNX Repository Manifest", "Keyhole - Google Earth Overlay", "DITA conditional processing profile", "News Industry Text Format", "Irrlicht Mesh",
+	"RealProducer Server Destination", "QGIS GRASS module definition", "VTK XML", "ParaView Data", /^Expression SketchFlow (data|Feedback)/, "Windows Communication Foundation reference", "Fritzing Part", "Azure Cloud Service Package Manifest",
+	"Azure Service Definition schema", "OpenStreetMap XML Data", "Route 66 Landmarks", "Fritzing Bin module", "Styled Layer Descriptor", "Compass and Ruler Job", "XEphem gallery info", "XEphem lunar DB", "NI MASCHINE template", "OpenCV XML storage",
+	/^Visual Studio (Code Analysis Rule Set|Test Metadata)/,
 	/^fmt\/(205|243|333|475|570|896|932|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1803|1824|1825|1853|1883|1962|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

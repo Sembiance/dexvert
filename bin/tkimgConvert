@@ -1,0 +1,13 @@
+#!/bin/bash
+
+wish <<EOF
+package require Img
+catch {package require img::ps}
+catch {package require img::dted}
+catch {package require img::raw}
+catch {package require img::flir}
+
+image create photo img -file "$1"
+img write "$2" -format png
+exit
+EOF

@@ -29,7 +29,7 @@ export class gif extends Format
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.gif]", "deark[module:macbinary]");
 		r.push("iconvert", "nconvert[format:gif]", "deark[module:gif]", "wuimg[format:gif]");
 		
-		r.push(...["foremost", "keyViewPro", "photoDraw", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "corelDRAW"].map(v => `${v}[matchType:magic])`));
+		r.push(...["tkimgConvert", "foremost", "keyViewPro", "photoDraw", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "corelDRAW"].map(v => `${v}[matchType:magic])`));
 		return r;
 	};
 }

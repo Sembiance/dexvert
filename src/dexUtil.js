@@ -3,6 +3,8 @@ import {Program, CONVERT_PNG_ARGS} from "./Program.js";
 import {fileUtil, runUtil, sysUtil} from "xutil";
 import {path} from "std";
 import {DexFile} from "./DexFile.js";
+import {init as initPrograms} from "./program/programs.js";
+import {init as initFormats} from "./format/formats.js";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
@@ -203,4 +205,11 @@ export async function getEXEOverlayOffset(inputFilePath, size)
 		return;
 
 	return overlayStartOffset;
+}
+
+
+export async function initRegistry(xlog)
+{
+	await initPrograms(xlog);
+	await initFormats(xlog);
 }

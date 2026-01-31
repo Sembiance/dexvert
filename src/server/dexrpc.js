@@ -1,9 +1,9 @@
 import {xu} from "xu";
 import {path} from "std";
-import {init as initPrograms, programDirPath} from "../program/programs.js";
-import {init as initFormats, formatDirPath} from "../format/formats.js";
+import { programDirPath} from "../program/programs.js";
+import {formatDirPath} from "../format/formats.js";
 import {fileUtil, webUtil, cmdUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE} from "../dexUtil.js";
+import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE, initRegistry} from "../dexUtil.js";
 import {AgentPool} from "AgentPool";
 import {XLog} from "xlog";
 
@@ -29,8 +29,7 @@ xlog.info`Starting dexrpc server...`;
 
 // we do this once here, because we will be starting like 20+ workers at once and if we don't prime the deno cache here first, the workers get a lot of contention and it's super slow
 xlog.info`Priming deno cache for programs and formats...`;
-await initPrograms();
-await initFormats();
+await initRegistry();
 
 const onSuccess = ({changeResult, err, r}, {log, msg}) =>
 {

@@ -6,5 +6,11 @@ export class paintShop extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)";
 	ext        = [".da4", ".psc"];
 	magic      = ["PaintShop plus Compressed bitmap", /^fmt\/1733( |$)/];
-	converters = ["wuimg[format:da4][matchType:magic]", "recoil2png"];
+	converters = dexState =>
+	{
+		const r = ["recoil2png"];
+		if(dexState.original.input.ext.toLowerCase()===".da4")
+			r.push("wuimg[format:da4][matchType:magic]");
+		return r;
+	};
 }

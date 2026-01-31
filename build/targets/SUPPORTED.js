@@ -1,12 +1,13 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {path} from "std";
-import {formats, init as initFormats} from "../../src/format/formats.js";
+import {formats} from "../../src/format/formats.js";
 import {DexState} from "../../src/DexState.js";
 import {DexFile} from "../../src/DexFile.js";
 import {FileSet} from "../../src/FileSet.js";
 import {Identification} from "../../src/Identification.js";
-import {programs, init as initPrograms} from "../../src/program/programs.js";
+import {programs} from "../../src/program/programs.js";
+import {initRegistry} from "../../src/dexUtil.js";
 
 const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "..", "test", "sample");
 
@@ -17,8 +18,7 @@ await Deno.mkdir(DUMMY_DIR_PATH);
 
 export default async function SUPPORTED(xlog)
 {
-	await initPrograms(xlog);
-	await initFormats(xlog);
+	await initRegistry(xlog);
 
 	const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 

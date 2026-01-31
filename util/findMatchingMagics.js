@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil} from "xutil";
-import {formats, init as initFormats} from "../src/format/formats.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {formats} from "../src/format/formats.js";
 import {WEAK_VALUES, IGNORE_MAGICS} from "../src/WEAK.js";
 import {XLog} from "xlog";
 import {flexMatch} from "../src/identify.js";
@@ -20,7 +21,7 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.logLevel);
 
 xlog.info`Loading formats...`;
-await initFormats(xlog);
+await initRegistry(xlog);
 
 for(const m of WEAK_VALUES)
 {

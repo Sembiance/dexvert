@@ -1,12 +1,13 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {path} from "std";
-import {formats, init as initFormats} from "../../src/format/formats.js";
+import {formats} from "../../src/format/formats.js";
+import {initRegistry} from "../../src/dexUtil.js";
 
 const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "..", "test", "sample");
 export default async function UNSUPPORTED(xlog)
 {
-	await initFormats(xlog);
+	await initRegistry(xlog);
 	
 	const unsupportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => format.unsupported));
 

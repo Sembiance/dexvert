@@ -1,6 +1,7 @@
 import {xu} from "xu";
-import {programs, init as initPrograms} from "../src/program/programs.js";
-await initPrograms();
+import {programs} from "../src/program/programs.js";
+import {initRegistry} from "../src/dexUtil.js";
+await initRegistry();
 
 console.log("Follow ipmi.txt and bios.txt to connect and get the server booting from my custom gentooInstall ISO");
 console.log("Follow gentoo_install.txt to assign an IP address and get networking working");

@@ -1,9 +1,10 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {formats, init as initFormats} from "../src/format/formats.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {formats} from "../src/format/formats.js";
 
 const xlog = new XLog("info");
-await initFormats(xlog);
+await initRegistry(xlog);
 
 for(const [formatid, format] of Object.entries(formats))
 {

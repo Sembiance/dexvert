@@ -4,8 +4,8 @@ import {fileUtil, printUtil, cmdUtil} from "xutil";
 import {Program} from "../src/Program.js";
 import {FileSet} from "../src/FileSet.js";
 import {DETECTOR_PROGRAMS} from "../src/Detection.js";
-import {init as initPrograms} from "../src/program/programs.js";
-import {formats, init as initFormats} from "../src/format/formats.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {formats} from "../src/format/formats.js";
 import {path} from "std";
 import {flexMatch} from "../src/identify.js";
 
@@ -26,8 +26,7 @@ const detectorsToTest = argv.program==="all" ? Array.from(DETECTOR_PROGRAMS) : [
 detectorsToTest.removeAll("amigaBitmapFontContentDetector");	// only checks 1 format
 detectorsToTest.removeAll("checkBytes");						// fairly narrow things it can return, all generic
 
-await initPrograms(xlog);
-await initFormats(xlog);
+await initRegistry(xlog);
 
 const ALL_MAGICS = new Set();
 for(const format of Object.values(formats))

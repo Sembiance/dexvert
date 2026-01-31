@@ -2,8 +2,9 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
-import {programs, init as initPrograms} from "../program/programs.js";
-import {formats, init as initFormats} from "../format/formats.js";
+import {programs} from "../program/programs.js";
+import {formats} from "../format/formats.js";
+import {initRegistry} from "../dexUtil.js";
 import {families} from "../family/families.js";
 import {DexFile} from "../DexFile.js";
 import {Format} from "../Format.js";
@@ -28,8 +29,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog("info");
 
-await initPrograms(xlog);
-await initFormats(xlog);
+await initRegistry(xlog);
 
 const EXCLUDE_FAMILIES = ["detect", "meta", "other", "post"];
 const PROGRAM_BASE_PATH = path.join(import.meta.dirname, "..", "program");

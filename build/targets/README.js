@@ -1,13 +1,13 @@
 import {xu} from "xu";
 import {path} from "std";
 import {fileUtil} from "xutil";
-import {formats, init as initFormats} from "../../src/format/formats.js";
-import {programs, init as initPrograms} from "../../src/program/programs.js";
+import {initRegistry} from "../../src/dexUtil.js";
+import {formats} from "../../src/format/formats.js";
+import {programs} from "../../src/program/programs.js";
 
 export default async function README(xlog)
 {
-	await initPrograms(xlog);
-	await initFormats(xlog);
+	await initRegistry(xlog);
 
 	const samplesFileCount = (await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nodir : true})).length;
 	const samplesFormatCount = (await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nofile : true})).length;

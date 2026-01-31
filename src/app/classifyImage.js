@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil} from "xutil";
 import {classifyImage} from "../classifyUtil.js";
-import {init as initPrograms} from "../program/programs.js";
+import {initRegistry} from "../dexUtil.js";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
@@ -18,7 +18,7 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 const xlog = new XLog("warn");
-await initPrograms(xlog);
+await initRegistry(xlog);
 
 for(const inputFilePath of argv.inputFilePath)
 {

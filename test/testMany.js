@@ -2,7 +2,8 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
-import {formats, init as initFormats} from "../src/format/formats.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {formats} from "../src/format/formats.js";
 import {mkWeblink} from "./testUtil.js";
 
 const xlog = new XLog();
@@ -17,7 +18,7 @@ const argv = cmdUtil.cmdInit({
 		format         : {desc : "Specify one or more formats. Can specify 'all' or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
 
-await initFormats(xlog);
+await initRegistry(xlog);
 
 const formatsToProcess = new Set();
 for(const format of Object.values(formats))

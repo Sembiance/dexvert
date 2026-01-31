@@ -2,11 +2,12 @@ import {xu} from "xu";
 import {MediaWiki} from "MediaWiki";
 import {XLog} from "xlog";
 import {printUtil} from "xutil";
-import {formats, init as initFormats} from "../src/format/formats.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {formats} from "../src/format/formats.js";
 
 const xlog = new XLog();
 
-await initFormats(xlog);
+await initRegistry(xlog);
 
 const formatsWebsiteStats =
 {

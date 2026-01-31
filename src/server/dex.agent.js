@@ -3,12 +3,12 @@ import {dexvert} from "../dexvert.js";
 import {identify} from "../identify.js";
 import {XLog} from "xlog";
 import {DexFile} from "../DexFile.js";
-import {init as initPrograms, programChanged} from "../program/programs.js";
-import {init as initFormats, formatChanged} from "../format/formats.js";
+import {initRegistry} from "../dexUtil.js";
+import {programChanged} from "../program/programs.js";
+import {formatChanged} from "../format/formats.js";
 import {agentInit} from "AgentPool";
 
-await initPrograms();
-await initFormats();
+await initRegistry();
 
 const logLines = [];
 

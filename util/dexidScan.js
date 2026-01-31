@@ -3,14 +3,12 @@ import {XLog} from "xlog";
 import {fileUtil, runUtil, cmdUtil, printUtil} from "xutil";
 import {path} from "std";
 import {identify} from "../src/identify.js";
-import {init as initFormats} from "../src/format/formats.js";
-import {init as initPrograms} from "../src/program/programs.js";
+import {initRegistry} from "../src/dexUtil.js";
 
 // THIS IS IS VERY VERY VERY VERY VERY VERY VERY VERY SLOW THING. I don't think I've ever used it for anything and find anything. Just too slow.
 
 const xlog = new XLog();
-await initPrograms(xlog);
-await initFormats(xlog);
+await initRegistry(xlog);
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",

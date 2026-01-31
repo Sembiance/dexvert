@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {cmdUtil, printUtil, runUtil, fileUtil} from "xutil";
 import {path} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../dexUtil.js";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
@@ -50,11 +50,7 @@ for(const inputFilePath of inputFilePaths)
 	let rows;
 	if(argv.direct)
 	{
-		const {init : initPrograms} = await import(path.join(import.meta.dirname, "../program/programs.js"));
-		const {init : initFormats} = await import(path.join(import.meta.dirname, "../format/formats.js"));
-
-		await initPrograms();
-		await initFormats();
+		await initRegistry();
 
 		const {DexFile} = await import(path.join(import.meta.dirname, "../DexFile.js"));
 		const {identify} = await import(path.join(import.meta.dirname, "../identify.js"));

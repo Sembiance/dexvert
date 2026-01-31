@@ -2,8 +2,8 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
-import {formats, init as initFormats} from "../src/format/formats.js";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../src/dexUtil.js";
+import {formats} from "../src/format/formats.js";
+import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../src/dexUtil.js";
 import {mkWeblink} from "./testUtil.js";
 import RandExp from "npm:randexp@0.5.3";
 
@@ -17,7 +17,7 @@ const argv = cmdUtil.cmdInit({
 		format : {desc : "Specify one or more formats. Can specify 'all' or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
 
-await initFormats(xlog);
+await initRegistry(xlog);
 
 const formatsToProcess = [];
 for(const format of Object.values(formats))

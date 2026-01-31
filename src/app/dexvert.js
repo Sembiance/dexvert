@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../dexUtil.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
@@ -68,11 +68,7 @@ async function handleExit(ignored)
 
 if(argv.direct)
 {
-	const {init : initPrograms} = await import(path.join(import.meta.dirname, "../program/programs.js"));
-	const {init : initFormats} = await import(path.join(import.meta.dirname, "../format/formats.js"));
-
-	await initPrograms();
-	await initFormats();
+	await initRegistry();
 
 	const {DexFile} = await import(path.join(import.meta.dirname, "../DexFile.js"));
 	const {dexvert} = await import(path.join(import.meta.dirname, "../dexvert.js"));

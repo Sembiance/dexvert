@@ -2,11 +2,11 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil, urlUtil} from "xutil";
 import {path} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../dexUtil.js";
 import {OS_SERVER_HOST, OS_SERVER_PORT} from "../osUtil.js";
 import {flexMatch} from "../identify.js";
 import {DexFile} from "../DexFile.js";
-import {formats, init as initFormats} from "../format/formats.js";
+import {formats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES, WEAK_PRODOS_TYPES} from "../WEAK.js";
 import {_PRO_DOS_TYPE_CODE} from "../program/archive/cadius.js";
 
@@ -227,7 +227,7 @@ const idMetaCheckers = [];
 
 if(argv.report)
 {
-	await initFormats(xlog);
+	await initRegistry(xlog);
 
 	for(const magic of IGNORE_MAGICS)
 		ALL_MAGICS.add(magic);

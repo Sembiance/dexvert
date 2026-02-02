@@ -13,6 +13,7 @@ export class rawPartition extends Format
 		/^(LILO|SYSLINUX|Syslinux) boot ?loader/,
 		"romfs image", "Linux romfs", "Linux/i386 LILO", "DOS/MBR partition map",	"eXtended Density Format disk image", /^GPT partition table/, "U-Boot uImage", /^u-boot legacy uImage/, "Format: U-Boot", "uImage header", "System Deployment Image",
 		"application/x-vhd-disk", "Virtual PC Virtual HD image", "Format: Microsoft Virtual Hard Disk (.VHD)", "Connectix Virtual PC hard disk image", /^Microsoft Disk Image/, /^DOS\/MBR boot sector/, "Format: System Deployment Image (.SDI)",
+		"Linux LVM2 volume", /^LVM2 PV/,
 		/^fmt\/(468|1087|1105|1609|1739)( |$)/
 	];
 	idMeta = ({macFileType, macFileCreator}) =>

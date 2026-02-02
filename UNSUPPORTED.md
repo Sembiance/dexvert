@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,059)
+# Unsupported File Formats (4,060)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (316)
+## Archive (315)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -132,7 +132,6 @@ Family/Format | Name | Extensions | Notes
 [archive/humongousEntertainmentMusicAudioDataArchive](https://discmaster.textfiles.com/search?format=humongousEntertainmentMusicAudioDataArchive) | Humongous Entertainment music/audio data archive | .he4 | 
 [archive/hxCFloppyEmulatorDiskImage](https://discmaster.textfiles.com/search?format=hxCFloppyEmulatorDiskImage) | HxC Floppy Emulator disk image | .hfe | 
 [archive/iceCompressedArchive](https://discmaster.textfiles.com/search?format=iceCompressedArchive) | ICE compressed archive | .ice | 
-[archive/iconHeaven](https://discmaster.textfiles.com/search?format=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - No known converter, not even on OS/2.
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?format=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
 [archive/imageForWindowsDiskImage](https://discmaster.textfiles.com/search?format=imageForWindowsDiskImage) | Image for Windows Disk Image | .tbi | 
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?format=imageLibrarianArchive) | Image Librarian archive | .ril | 
@@ -801,7 +800,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (197)
+## Image (198)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -895,6 +894,7 @@ Family/Format | Name | Extensions | Notes
 [image/inAVisionDrawing](https://discmaster.textfiles.com/search?format=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/) - In-a-Vision and the Micrografx Windows Convet program (both on winworld) are both Windows 1.x/2.x programs that don't work in Win2k. Not aware of anything else that can convert these, as Micrografx Designer 4 does not.
 [image/infinityWardImage](https://discmaster.textfiles.com/search?format=infinityWardImage) | Infinity Ward Image | .iwi | 
 [image/instantGraphicsAndSound](https://discmaster.textfiles.com/search?format=instantGraphicsAndSound) | [Instant Graphics and Sound](http://fileformats.archiveteam.org/wiki/Instant_Graphics_and_Sound) | .igs .ig .igm | [12 sample files](https://sembiance.com/fileFormatSamples/image/instantGraphicsAndSound/) - No known converter yet. Seen a recent resurgence in interest in 2024
+[image/intelligentImageQuality](https://discmaster.textfiles.com/search?format=intelligentImageQuality) | Intelligent Image Quality - Phase One RAW image | .iiq | 
 [image/introCAD](https://discmaster.textfiles.com/search?format=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
@@ -1188,7 +1188,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,773)
+## Other (2,774)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3245,6 +3245,7 @@ Family/Format | Name | Extensions | Notes
 [other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?format=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 
 [other/reportSmithReport](https://discmaster.textfiles.com/search?format=reportSmithReport) | ReportSmith report | .rpt | 
 [other/retro64GameData](https://discmaster.textfiles.com/search?format=retro64GameData) | Retro64 game data | .wld | 
+[other/retroPlatformLibrary](https://discmaster.textfiles.com/search?format=retroPlatformLibrary) | RetroPlatform Library | .rp-lib | 
 [other/returnToCastleWolfensteinSaveGame](https://discmaster.textfiles.com/search?format=returnToCastleWolfensteinSaveGame) | Return to Castle Wolfenstein save game | .svg | 
 [other/reunionAnimation](https://discmaster.textfiles.com/search?format=reunionAnimation) | Reunion Animation | .ani | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?format=rfFlowDiagram) | RFFlow Diagram/Chart | .flo | 

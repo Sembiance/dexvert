@@ -32,7 +32,7 @@ export class zip extends Format
 		"MindManager Brainstorm and Process Control Map", "SubEthaEdit Mode", "Moodle Backup", "PulseView sigrok dump", "Siren Jukebox Skin", "Storyist project", "Brother P-touch Editor Label", "Alice 2 World", "Kivio Flowchart", "AZZ Cardfile card",
 		"Aston Shell theme", "Numbers spreadsheet", "TuneUp Styler Logo Animation", "Automise Project (compressed) (gen)", "Karbon drawing", "application/x-karbon", "MSIX Windows app package", "Amazing Mahjongg 3D skin", "Amazing Mahjongg 3D Tile set",
 		"MySQL Workbench model archive", "World of Good addin", "Serif MetaFile", "Python Zip Application", "OpenMG Jukebox Skin", "Minecraft Add-on", "Renoise effects chain", "Renoise Instrument", "3DMark2003 Results", "Nokia theme", "Magic Set Editor Set",
-		"Installer: AutoPlay Media Studio", "Visual Studio Extension", "Spring Engine Zipped mod", "Presonus Studio One Song",
+		"Installer: AutoPlay Media Studio", "Visual Studio Extension", "Spring Engine Zipped mod", "Presonus Studio One Song", "RetroPlatform Player archive", "OpenRocket project (zipped)",
 		/^fmt\/(424|524|595|627|628|633|937|942|943|999|1184|1440|1476|1477)( |$)/,
 		/^fmt\/(646|1441)( |$)/	// this is apple iWork document/keynote, which can be converted to PDF with "soffice[format:AppleKeynote]" but it's also a zip and treating it as such allows getting embeeded images, audio and more
 	];

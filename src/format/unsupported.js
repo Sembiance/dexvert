@@ -3425,7 +3425,6 @@ export default
 		sampbox4Macro                            : {name : "Sampbox 4 Macro", ext : [".sam"], magic : ["Sampbox 4 Macro"]},
 		samplitudeProject                        : {name : "Samplitude Project", ext : [".rap", ".vip"], magic : ["Samplitude RAM Project", "Samplitude Virtual Project"]},
 		sasTransportXPORTFormat                  : {name : "SAS Transport (XPORT) format", ext : [".xpt"], magic : ["SAS Transport (XPORT) format"]},
-		saveRam2CompressedData                   : {name : "SaveRam2 compressed data", ext : [".fls"], magic : ["SaveRam2 compressed data"]},
 		sceneryAnimatorLandscape                 : {name : "Scenery Animator Landscape", ext : [".scape"], magic : ["Scenery Animator landscape/keyframes"]},
 		sccBlafferNTInstrumentKit                : {name : "SCC Blaffer NT Instrument Kit", magic : ["SCC Blaffer NT Instrument Kit"]},
 		scooterMacro                             : {name : "Scooter Macro", ext : [".mac"], magic : ["Scooter Macro", "Scooter-PCB Macro"]},

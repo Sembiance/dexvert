@@ -121,16 +121,18 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
 	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
 
-	`\n#DEXDRONE SETUP:`,
+	`\n# DEXDRONE SETUP:`,
 	`mkdir -p /mnt/dexdrone`,
 	`chown sembiance:sembiance /mnt/dexdrone`,
 	`grep dexvert ~/.ssh/authorized_keys >> /home/sembiance/.ssh/authorized_keys`,
 	`chown sembiance:sembiance /home/sembiance/.ssh/authorized_keys`,
 	`chmod 600 /home/sembiance/.ssh/authorized_keys`,
 
-	`\n# Final Steps, all computers`,
+	`\n# Final Steps:`,
 	`sudo reboot`,
-	`# After reboot, as sembiance@host run and ensure works: startDexserver`,
-	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
-	"# Now IF dexdrone, add new dexdrone# to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
+	`# At Home:`,
+	`cd /mnt/compendium/DevLab/dexdaemon/util && dra syncDrones.js HOSTID`,
+	`# After reboot, as sembiance@HOSTID run and ensure works: startDexserver`,
+	"# Run a full 'dra testMany.js --format=executable' then 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP",
+	"# Now IF dexdrone, add HOSTID to dexdaemon/src/C.js DEXDRONES array, then pause processing on discmaster2 and once all dexdrones are quiet, stop dexdaemon and start it back up again"
 ].forEach(line => console.log(line));

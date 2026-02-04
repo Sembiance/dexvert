@@ -24,7 +24,7 @@ const OS = {
 	win2k :
 	{
 		debug       : false,
-		qty         : 8,
+		qty         : navigator.hardwareConcurrency===32 ? 3 : 8,
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",
@@ -36,7 +36,7 @@ const OS = {
 	winxp :
 	{
 		debug       : false,
-		qty         : 8,
+		qty         : navigator.hardwareConcurrency===32 ? 3 : 8,
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",
@@ -48,7 +48,7 @@ const OS = {
 	win7 :
 	{
 		debug     : false,
-		qty       : 4,
+		qty       : navigator.hardwareConcurrency===32 ? 2 : 4,
 		ramGB     : 16,
 		cores     : 4,
 		scriptExt : ".au3",

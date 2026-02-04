@@ -60,6 +60,7 @@ const DEXMAGIC_CHECKS = {
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"PFS Filesystem"                 : [{offset : 0, match : "PFS/"}],
 	"Picture Catalog Spinnaker"      : [{offset : 0, match : "CAT "}, {offset : 8, match : "CLIPFORM"}],
+	"SAVERAM Data"                   : [{offset : 0, match : [0x02, 0x00, 0xFE, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 92, match : "SaveRam"}],
 	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
 	"SGS.DAT"                        : [{offset : 0, match : "SGS.DAT "}],
 	"SouthPeak Puzzle Archive"       : [{offset : 0, match : "\n\r Copyright "}, {offset : 15, match : "1996 by SouthPeak Interactive"}],

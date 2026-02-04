@@ -93,7 +93,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 [
 	`emerge --noreplace ${programPackages}`,
 	`emerge mono`,
-	`emerge -1 libsndfile`,
+	`emerge libsndfile`,
 	`emerge -uDN world`,
 	`# If any of these below fail to merge, just try again (often works 2nd time)`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
@@ -111,7 +111,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<oor:data xmlns:oor="http://openoffice.org/2001/registry">\n  <dependency file="main"/>\n  <oor:component-data oor:package="org.openoffice.Office" oor:name="Common">\n    <node oor:name="Misc">\n      <prop oor:name="UseLocking">\n        <value>false</value>\n      </prop>\n    </node>\n  </oor:component-data>\n</oor:data>' > /usr/lib64/libreoffice/share/registry/disable-file-locking.xcd`,
 	`find /usr/portage/distfiles/ -mindepth 1 -delete`,
 	`emerge --depclean`,
-	`revdep-rebuild -pi`,
+	`revdep-rebuild`,
 	`eix-update`,
 	`su - sembiance`,
 	`mkdir -p /mnt/dexvert/oldLogs`,

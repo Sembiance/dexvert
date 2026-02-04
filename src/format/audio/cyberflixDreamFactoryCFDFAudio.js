@@ -7,6 +7,6 @@ export class cyberflixDreamFactoryCFDFAudio extends Format
 	forbidExtMatch = true;
 	magic          = ["CFDF (Cyberflix DreamFactory) (cfdf)"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = ["ffmpeg[libre][format:cfdf][outType:mp3]"];
-	verify         = ({soxiMeta}) => soxiMeta.duration>100;
+	converters     = dexState => ([[].pushSequence(0, (dexState.meta.nbStreams || 0)).map(i => `ffmpeg[libre][format:cfdf][outType:mp3][numStreams:${dexState.meta.nbStreams}][streamNum:${i}]`).join(" & ")]);
+	verify         = ({soxiMeta}) => soxiMeta.duration>10;
 }

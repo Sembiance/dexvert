@@ -19,4 +19,3 @@ import {WEAK_VALUES} from "../src/WEAK.js";
 const xlog = new XLog("info");
 
 await initRegistry(xlog);
-

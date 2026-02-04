@@ -64,6 +64,7 @@ const SLOW_FORMATS = {
 	// audio
 	"audio/agsAudioData"        : 25,
 	"audio/aviAudio"            : 4,
+	"audio/criAFS"              : 16,
 	"audio/fmodSampleBank"      : 16,
 	"audio/proPinballSoundbank" : 5,
 	"audio/quickTimeAudio"      : 10,
@@ -203,6 +204,24 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 				color: #8585ff;
 			}
 
+			#showSuccesses
+			{
+				position: absolute;
+				top: 0.25em;
+				right: 0.5em;
+				cursor: pointer;
+			}
+
+			tr.success
+			{
+				display: none;
+			}
+
+			body.showSuccesses tr.success
+			{
+				display: table-row;
+			}
+
 			th
 			{
 				text-decoration: underline;
@@ -247,6 +266,7 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 		</style>
 	</head>
 	<body>
+		<label id="showSuccesses"><input type="checkbox" onchange="document.body.classList.toggle('showSuccesses', this.checked);"> Show Success Rows</label>
 		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2>
 		host: ${Deno.hostname()}<br>
 		args: ${argv.format.join(" ")}<hr>
@@ -264,7 +284,8 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 					</tr>
 				</thead>
 				<tbody>
-					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([, o]) => (+o.newSuccessesCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
+					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([, o]) => (+o.newSuccessesCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `
+					<tr${+o.successPercentage===100 && !(+o.failCount) && !(+o.newSuccessesCount) ? ` class="success"` : ""}>
 						<td style="text-align: left;">${o.reportFilePath ? `<a href="${mkWeblink(o.reportFilePath)}">${formatid.escapeHTML()}</a>` : formatid.escapeHTML()}</td>
 						<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
 						<td class="${(+o.successPercentage || 0)<10 ? "red" : ((+o.successPercentage || 0) < 40 ? "orange" : ((+o.successPercentage || 0) < 100 ? "yellow" : "good"))}">${o.successPercentage || "0"}%</td>

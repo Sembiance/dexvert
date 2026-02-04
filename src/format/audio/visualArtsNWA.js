@@ -9,5 +9,5 @@ export class visualArtsNWA extends Format
 	weakMagic      = true;
 	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[outType:mp3][libre]"];
-	verify         = ({soxiMeta}) => soxiMeta.duration>=100;
+	verify         = ({soxiMeta}) => soxiMeta.duration>=10;
 }

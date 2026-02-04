@@ -123,6 +123,9 @@ async function getMacBinaryMeta(inputFile, debug)
 async function getAppleDoubleMeta(inputFile, debug)
 {
 	// AppleDouble format: /mnt/compendium/documents/books/AppleSingle_AppleDouble.pdf
+	if(inputFile.size<26)
+		return debug ? `File size ${inputFile.size} is less than 26 bytes required by AppleDouble` : false;
+
 	const magics = await fileUtil.readFileBytes(inputFile.absolute, 26);
 	if(magics.getUInt32BE(0)!==0x00_05_16_07 || magics.getUInt32BE(4)!==0x00_02_00_00)
 		return debug ? `Invalid AppleDouble magic bytes` : false;
@@ -131,7 +134,10 @@ async function getAppleDoubleMeta(inputFile, debug)
 	if(numEntries<1 || (numEntries*12)+26>inputFile.size)
 		return debug ? `Invalid AppleDouble number of entries ${numEntries}` : false;
 
-	const br = new UInt8ArrayReader(await fileUtil.readFileBytes(inputFile.absolute, 26+(numEntries*12)), {endianness : "be"});
+	const brSize = 26+(numEntries*12);
+	if(inputFile.size<brSize)
+		return debug ? `AppleDouble file size (${inputFile.size}) is less than expected header size (${brSize})` : false;
+	const br = new UInt8ArrayReader(await fileUtil.readFileBytes(inputFile.absolute, brSize), {endianness : "be"});
 	br.skip(26);
 	const entries = [];
 	const ENTRY_TYPE_MAP = {
@@ -172,6 +178,8 @@ async function getAppleDoubleMeta(inputFile, debug)
 		return debug ? `finderInfo entry extends beyond file size` : false;
 
 	// finder info detailed as 'TYPE FInfo = RECORD' on page 139 of: /mnt/compendium/documents/books/InsideMacintosh/Inside_Macintosh_Volume_II_1985.pdf
+	if(inputFile.size<(finderInfo.offset+8))
+		return debug ? `File size (${inputFile.size}) is less than required finderInfo offset+8 (${finderInfo.offset+8})` : false;
 	const typeCreatorData = await fileUtil.readFileBytes(inputFile.absolute, 8, finderInfo.offset);
 	return {macFileType : await encodeUtil.decodeMacintosh({data : typeCreatorData.subarray(0, 4)}), macFileCreator : await encodeUtil.decodeMacintosh({data : typeCreatorData.subarray(4, 8)})};
 }

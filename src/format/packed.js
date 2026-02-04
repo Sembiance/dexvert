@@ -34,7 +34,7 @@ export const cup386 =
 		jamPacked                   : {name : "JAM Packed", magic : ["JAM compressed 16bit DOS executable"]},
 		lglzPacked                  : {name : "LGLZ Packed", magic : ["Packer: LGLZ", "16bit DOS EXE LGLZ compressed", "LGLZ compressed DOS command"]},
 		packPacked                  : {name : "Pack Packed", magic : ["Packer: Pack(1.0)[1987 by K.Kokkonen]"]},
-		packerJESCOREPacked         : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]"]},
+		packerJESCOREPacked         : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]", "Packer (JES//CORE) Packed"]},
 		packerPacked                : {name : "Packer Packed", magic : ["Packer: Packer"]},
 		pmwLitePacked               : {name : "PMWLite Packed", magic : ["Packer: PMWLite"]},
 		rdtCompressorPacked         : {name : "RDT Compressor Packed", magic : ["Packer: RDT_Compressor", "Packer: RTD_Compressor"]},

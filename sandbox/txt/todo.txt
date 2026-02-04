@@ -13,21 +13,26 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
-* These .mdl files are taking too long 45391: CD-Action 12-2016.bin§/pelne/Men of War Red Tide/data1.cab§/DefaultComponent/resource/entity/e2.pak§/construction/entourage/rope_skein2/rope_skein2.mdl
+* See about fixing:
+	image/paintDotNetImage/ui_ingame2_common.pdn
+	poly/nif
+	
 
 /-------------\
 | dexvert 3.0 |
 \-------------/
-* Keep dexdrone10 STATIC as a test base of all truth. Do not update it.
+* Keep dexdrone10 STATIC as a test base of all truth. Do not update it at all
 
-* Spin up a new modern AMD based machine WITH a GPU and get the test suite working there perfectly
-
-* Get a second duplicate AMD+GPU based machine and ensure it's working perfectly too. All below improvements make to 2nd AMD+GPU box
-
-* Switch as many Win2k & Win XP programs as possible to QEMU. Maybe try migrating programs into the Win7 QEMU
-  If a lot of programs remain, create a QEMU for WinXP and try migrating remaining win2k/winxp 86box programs to that
-  If any win2k programs remain, try running them in the 86box version of winxp.
-  Ideal goal is to remove 86box entirely for 'win2k' and 'winxp' due to CPU usage and slowness, but I'll settle for just win2k
+* Goal: Get rid of 86box
+  Process: Start with winxp, then later win2k
+  	Pick a program
+	Install on QEMU Win7
+	Get it to work (Can right click the exe and under Compatability can run it in Win2k/WinXP mode)
+	testdexvert any formats that call that program, make sure test still passes
+	do NOT uninstall it from win2k/winxp 86box image, just leave it there
+	Move on to next program
+  If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
+  After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
 * Re-imagine how dexrpc requests are tracked throughout it's life cycle.
   Ideally I'd keep track of the lifecycle history of each dexrpc request (id, programs, os, dos, etc), how long it spent in each area
@@ -35,7 +40,6 @@
   NICE TO HAVE would be an internal /status website in dexserver that can show me the current status of dexvert, which programs ran, stats on them, what it's doing now and for how long, etc
   EXTRA BONUS if it's possible to cancel at any point of the process, this seems pretty unrealistic though, if I can just get more data about where things are being held up, then I can optimize which converters are ran in which situations, tighten identifications, etc
   This will help me nail down why sometimes files seem to just 'hang' for like 2 hours
-
 
 * Would be great dexrecurse would generate an HTML 'report' that contains statistics of all files it did along with lifecycle stats, etc
   The idea is I could analyze this report to find things to optimize and improve
@@ -92,6 +96,7 @@
   Of course then re-process ALL FONTS on discmaster
 
 * If need to reverse engineer a program, or crack a long outdated program, purchase and use: https://binary.ninja/purchase/#non-commercial
+  Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
 
 * Authorware, thousands of files, no known extractor:
 	https://discmaster.textfiles.com/search?format=authorware

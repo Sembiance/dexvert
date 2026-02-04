@@ -53,6 +53,9 @@ const DEXMAGIC_CHECKS = {
 	"OS/2 PACK Variant 2"            : [{offset : 0, match : [0xA5, 0x96, 0x00, 0x14]}],
 	"OS/2 PACK Variant 3"            : [{offset : 0, match : [0xA5, 0x96, 0x14, 0x0A]}],
 	"PACKIT Installation Archive"    : [{offset : 0, match : "PACKIT by MJP"}],
+	"Packer (B. Vorontsov) Packed"   : [{offset : 0, match : [0xBF]}, {offset : 3, match : [0xBE]}, {offset : 6, match : [0xB9]}, {offset : 9, match : [0xFD, 0xF3, 0xA5, 0xFC, 0xEB]}, {offset : 15, match : [0x8B, 0xF7, 0xBF]}, {offset : 20, match : [0xAD, 0xAD, 0x8B, 0xE8, 0xB2]}, {offset : 26, match : [0xE9]}],
+	"Packer (JES//CORE) Packed"      : [{offset : 0, match : [0xBE]}, {offset : 3, match : [0xBD]}, {offset : 6, match : [0x55, 0x8B, 0xCE, 0x8D, 0x72]}, {offset : 12, match : [0xBF]}, {offset : 15, match : [0xD1, 0xE9, 0xFD, 0x57, 0xF3, 0xA5, 0x8D, 0x75]}, {offset : 24, match : [0xFC, 0xF9, 0xBF]}, {offset : 29, match : [0xC3]}],
+	"Packer (JES//CORE) Packed Alt"  : [{offset : 0, match : [0xBE]}, {offset : 3, match : [0xBD]}, {offset : 6, match : [0x55, 0x8B, 0xCE, 0x8D, 0x72]}, {offset : 12, match : [0xBF]}, {offset : 15, match : [0xD1, 0xE9, 0xFD, 0x57, 0xF3, 0xA5, 0x8D, 0x75]}, {offset : 24, match : [0xFC, 0xF9, 0xBF, 0xFD, 0xC3]}],
 	"Palm Web Content Record"        : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"PFS Filesystem"                 : [{offset : 0, match : "PFS/"}],
@@ -373,8 +376,12 @@ const DEXMAGIC_CUSTOMS = [
 			return;
 
 		const compressedSize = header.getUInt32LE(7);
-		if(![r.f.input.size-1, r.f.input.size].includes(compressedSize+headerSize+2))
+		if((compressedSize+headerSize)>r.f.input.size)
 			return;
+
+		// this worked for help2.hot, password.hot and status3.hot but fails with status.hot
+		//if(![r.f.input.size-1, r.f.input.size].includes(compressedSize+headerSize+2))
+		//	return;
 
 		return `Escal Compressed`;
 	},

@@ -11,6 +11,7 @@ export class jar extends Format
 		
 		// specific
 		"Android Package", "Android package (APK)", "SPSS output document", "Pocket Code/Catroid Catrobat Project", "Power BI desktop Visual data", "Telerik Report", "Poseidon for UML project file", "Flare3D model", "NetBeans Module",
+		"Java Card converted Applet",
 		/^fmt\/274( |$)/
 	];
 	converters = ["unzip", "sevenZip", "unar"];

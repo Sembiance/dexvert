@@ -5,9 +5,9 @@
 
 * See if these folks have created any new extractors (last: SPEx): https://codeberg.org/CYBERDEV?q=&tab=repositories&sort=newest
 
-/----------------\
-| Stop Dexdrones |
-\----------------/
+/-----------------\
+| Kill dexrecurse |
+\-----------------/
 * Click 'pause processing' on discmaster2 admin
 
 * Stop dexdaemon with Ctrl-C in screen session on sembiance@sembiance so it doesn't start restarting dexServers

@@ -1,0 +1,108 @@
+/------\
+| Info |
+\------/
+https://github.com/bhky/opennsfw2
+https://pypi.org/project/opennsfw2/
+
+
+/---------\
+| install |
+\---------/
+# Setup steps per dexvert computer
+sudo emerge "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" 
+cd /mnt/compendium/DevLab/dexvert/pp/nsfw
+mkdir -p home
+python3.12 -m venv env
+source env/bin/activate
+python3.12 -m pip install wheel
+python3.12 -m pip install opennsfw2 pillow tensorflow torch nvidia-tensorrt flask
+exit
+
+
+/-------------------------------\
+| optimized compiled tensorflow |
+\-------------------------------/
+# This setup will compile tensorflow for the particular CPU enabling all optimizations. Do this INSTEAD of the steps above
+# The bazel compile only supports certain versions (as of Feb 2026)
+sudo emerge sys-devel/gcc:14 llvm-core/clang:20 llvm-core/lld:20 "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" 
+
+# Now can proceed with compile/install:
+sudo su - root
+sudo gcc-config x86_64-pc-linux-gnu-14
+exit
+ssh <dexdrone#>
+cd /mnt/compendium/DevLab/dexvert/pp/nsfw
+screen
+mkdir -p home build
+python3.12 -m venv env
+source env/bin/activate
+python3.12 -m pip install wheel numpy packaging requests setuptools
+cd build
+git clone https://github.com/tensorflow/tensorflow.git tensorflow-build
+cd tensorflow-build
+git checkout v2.20.0
+./configure
+	Please specify the location of python. [Default is /mnt/compendium/DevLab/dexvert/pp/nsfw/env/bin/python3]: <enter>
+	Please input the desired Python library path to use.  Default is [/mnt/compendium/DevLab/dexvert/pp/nsfw/env/lib/python3.12/site-packages] <enter>
+	Do you wish to build TensorFlow with ROCm support? [y/N]: n
+	Do you wish to build TensorFlow with CUDA support? [y/N]: y
+	Please specify the hermetic CUDA version you want to use or leave empty to use the default version. 12.8.1   (eix -I dev-util/nvidia-cuda-toolkit)
+	Please specify the hermetic cuDNN version you want to use or leave empty to use the default version. 9.8.0   (eix -I dev-libs/cudnn)
+	Please specify a list of comma-separated CUDA compute capabilities you want to build with.
+	You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus. Each capability can be specified as "x.y" or "compute_xy" to include both virtual and binary GPU code, or as "sm_xy" to only include the binary code.
+	Please note that each additional compute capability significantly increases your build time and binary size, and that TensorFlow only supports compute capabilities >= 3.5 [Default is: 3.5,7.0]: 12.0  (visit that URL and check GPU)
+	Please specify the local CUDA path you want to use or leave empty to use the default version.  <enter>
+	Please specify the local CUDNN path you want to use or leave empty to use the default version.  <enter>
+	Please specify the local NCCL path you want to use or leave empty to use the default version.  <enter>
+	Do you want to use clang as CUDA compiler? [Y/n]: y
+	Please specify clang path that to be used as host compiler. [Default is /usr/lib/llvm/21/bin/clang]: /usr/lib/llvm/20/bin/clang
+	Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -Wno-sign-compare]: -O3 -march=native   (check /etc/portage/make.conf)
+	Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]: n
+cat > .bazelrc.user << 'EOF'
+# RTX 5090 (Blackwell) compute capability
+build --repo_env=HERMETIC_CUDA_COMPUTE_CAPABILITIES="sm_120,compute_120"
+
+# Optimization flags
+build --copt=-O3
+build --host_copt=-O3
+build --copt=-march=native
+build --host_copt=-march=native
+
+# GCC 14 compatibility fixes
+build --conlyopt=-include
+build --conlyopt=stdint.h
+build --cxxopt=-include
+build --cxxopt=stdint.h
+build --host_conlyopt=-include
+build --host_conlyopt=stdint.h
+build --host_cxxopt=-include
+build --host_cxxopt=stdint.h
+build --copt=-D_GNU_SOURCE
+build --host_copt=-D_GNU_SOURCE
+EOF
+
+bazel build //tensorflow/tools/pip_package:wheel --config=cuda_wheel --jobs=$(nproc)
+
+cd ../../
+python3.12 -m pip install build/tensorflow-build/bazel-bin/tensorflow/tools/pip_package/wheel_house/tensorflow-2.20.0.dev0+selfbuilt-cp312-cp312-linux_x86_64.whl
+python3.12 -m pip install opennsfw2 pillow torch nvidia-tensorrt flask
+deactivate
+# switch back to the previous gcc-config, probably the most recent, check first with: gcc-config -l
+sudo gcc-config 3
+
+
+>>> if need to rebuild:
+bazel clean
+python3.12 -m pip uninstall tensorflow
+<<<
+
+
+
+
+
+/--------------------\
+| Alternative Models |
+\--------------------/
+https://huggingface.co/AdamCodd/vit-base-nsfw-detector			Only flags NSFW or SFW, no in-between. But *maybe* it does assign a score I could use?
+https://huggingface.co/Falconsai/nsfw_image_detection			Some simple checks show it misses stuff
+https://github.com/notAI-tech/NudeNet							Really old and simple checks shows it misses a lot of NSFW stuff

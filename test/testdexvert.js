@@ -1,11 +1,11 @@
-/* eslint-disable unicorn/better-regex */
+/* eslint-disable unicorn/better-regex, camelcase */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse, base64Encode} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE} from "../src/dexUtil.js";
 import {ANSIToHTML} from "thirdParty";
-import {mkWeblink} from "./testUtil.js";
+import {mkWeblink, DEXDRONE_TRUTH_HOST} from "./testUtil.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -22,8 +22,8 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const xlog = new XLog(argv.debug ? "debug" : "info", {alwaysEcho : !argv.json});
-if(argv.record && Deno.hostname()!=="dexdrone10")
-	Deno.exit(xlog.error("Recording new test results is only allowed on dexdrone10"));
+if(argv.record && Deno.hostname()!==DEXDRONE_TRUTH_HOST)
+	Deno.exit(xlog.error`Recording new test results is only allowed on ${DEXDRONE_TRUTH_HOST}`);
 
 const testLogLines = [];
 xlog.logger = line => testLogLines.push(line);
@@ -275,6 +275,7 @@ const FLEX_SIZE_FORMATS = {
 
 		// different generation per host/version
 		"swish:.ttf"          : 0.1,
+		"swish:.mp4"          : 1,
 		"amosMemoryBank:.mp3" : 1,
 		"iso:.mp3"            : 1,
 		"tnef:.pdf"           : 40,
@@ -461,7 +462,7 @@ const FLEX_DIFF_FILES = [
 
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
-	/audio\/soundFont2\/(.*\.arl|aurealgm)$/,
+	/audio\/aurealAspenSoundBank\/(.*\.arl|aurealgm)$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/,
 	/music\/ay\/emul\.(dragonslair2|gliderrider)$/
 ];
@@ -630,7 +631,8 @@ const ALLOW_PROCESS_FAILURES = {
 const ALLOW_METADATA_DIFFERENCES = {
 	image :
 	{
-		teletextPackets : ["TETRIS.T42"]
+		teletextPackets : ["TETRIS.T42"],
+		tiff            : ["CHEETAH.TIF", "PIE01.TIF", "PIE02.TIF", "PIE03.TIF", "PIE04.TIF", "TRAIN1.TIF", "TRAIN2.TIF", "TRAIN3.TIF", "WHALE.TIF"]	// colorCount flip between 1 and 2
 	},
 	music :
 	{

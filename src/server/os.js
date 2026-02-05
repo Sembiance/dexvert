@@ -57,7 +57,7 @@ const OS = {
 			"-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=2023-03-01T10:00:00", "-device", "virtio-rng-pci", "-m", `size=${OS[instance.osid].ramGB}G`, "-smp", `cores=${OS[instance.osid].cores}`, "-vga", "cirrus",
 			//"-audiodev", "none,id=audio0", "-device", "ac97,audiodev=audio0",	// Used to enable sound if you discover any programs that need it
 			"-drive", "format=qcow2,if=ide,index=0,file=hd.qcow2", "-boot", "order=c",
-			"-netdev", `user,net=192.168.51.0/24,dhcpstart=192.168.51.${20+instance.instanceid},id=nd1`, "-device", "rtl8139,netdev=nd1", "-drive", `if=floppy,media=disk,file=${path.join(instance.dirPath, "instance.img")}`
+			"-netdev", `user,net=192.168.51.0/24,dhcpstart=192.168.51.${20+instance.instanceid},id=nd1`, "-device", "rtl8139,netdev=nd1", "-drive", `if=floppy,media=disk,format=raw,file=${path.join(instance.dirPath, "instance.img")}`
 		]),
 		hd          : ["hd.qcow2"],
 		archiveType : "zip"

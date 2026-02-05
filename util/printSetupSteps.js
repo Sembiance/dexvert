@@ -8,6 +8,71 @@ console.log("Follow gentoo_install.txt to assign an IP address and get networkin
 console.log("Install gentoo with: gentooInstall --phase=2 --withX --withQEMU --withNode --withSound --gateway=<gateway> <ip> <hostname>");
 console.log("Run the following as root on a fresh Gentoo system to be able to run dexvert:\n");
 
+const EXTRA_PACKAGES =
+[
+	// used by youtube-dl-max and cosmictv
+	"net-misc/yt-dlp",
+	
+	// need the non-bin version of rust for (I forget what program, but I know it has to do with web assembly patch I do on the source)
+	"dev-lang/rust",
+
+	// uniconvertor
+	"media-gfx/libimagequant",
+
+	// monitors for changes to files
+	"sys-fs/inotify-tools",
+	
+	// fixes bad filenames
+	"app-text/convmv",
+
+	// needed by other packages later (mplayer)
+	"media-video/ffmpeg",
+
+	// dos
+	"games-emulation/dosbox",
+	
+	// os.js (win2k & winxp & win7)
+	"app-emulation/86Box",
+	"app-emulation/qemu",
+	"app-emulation/virtualbox",
+	"x11-misc/x11vnc",
+
+	// used by perlTextCheck.js
+	"app-arch/trimGarbage",
+
+	// vamos
+	"app-arch/amitools",
+
+	// wine
+	"app-emulation/wine-vanilla",
+
+	// used by thumbnail creation
+	"media-libs/resvg",
+
+	// needed for fontforge, see package.env/fontforge
+	"llvm-core/clang",
+
+	// needed for inkscape
+	"dev-python/tinycss2",
+
+	// needed for gameViewerLinux and other python things
+	"dev-lang/python:3.12",
+
+	// needed by boo2pdf
+	"x11-libs/libXtst",
+
+	// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
+	"dev-lang/perl",
+
+	// post processing
+	// specific versions are needed to compile TensorFlow with full AVX2 support as of Feb 2026
+	"=dev-util/nvidia-cuda-toolkit-12.8.1*",
+	"=dev-libs/cudnn-9.8.0*",
+	"sys-devel/gcc:14",
+	"llvm-core/clang:20",
+	"llvm-core/lld:20"
+];
+
 [
 	`cd /etc/portage/package.use && ln -s /mnt/compendium/overlay/dexvert/package.use/wine-32 && ln -s /mnt/compendium/overlay/dexvert/package.use/xanim`,
 	`cd`,
@@ -15,61 +80,7 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 	`USE=minimal emerge mono`,
 	`USE=minimal emerge -1 libsndfile`,
 	`emerge -1 glibc`,	// to pick up on patch
-	`emerge --noreplace ${[
-		// used by youtube-dl-max and cosmictv
-		"net-misc/yt-dlp",
-		
-		// need the non-bin version of rust for (I forget what program, but I know it has to do with web assembly patch I do on the source)
-		"dev-lang/rust",
-
-		// uniconvertor
-		"media-gfx/libimagequant",
-
-		// monitors for changes to files
-		"sys-fs/inotify-tools",
-		
-		// fixes bad filenames
-		"app-text/convmv",
-
-		// needed by other packages later (mplayer)
-		"media-video/ffmpeg",
-
-		// dos
-		"games-emulation/dosbox",
-		
-		// os.js (win2k & winxp & win7)
-		"app-emulation/86Box",
-		"app-emulation/qemu",
-		"app-emulation/virtualbox",
-		"x11-misc/x11vnc",
-
-		// used by perlTextCheck.js
-		"app-arch/trimGarbage",
-
-		// vamos
-		"app-arch/amitools",
-
-		// wine
-		"app-emulation/wine-vanilla",
-
-		// used by thumbnail creation
-		"media-libs/resvg",
-
-		// needed for fontforge, see package.env/fontforge
-		"llvm-core/clang",
-
-		// needed for inkscape
-		"dev-python/tinycss2",
-
-		// needed for gameViewerLinux and other python things
-		"dev-lang/python:3.12",
-
-		// needed by boo2pdf
-		"x11-libs/libXtst",
-
-		// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
-		"dev-lang/perl"
-	].join(" ")}`
+	`emerge --noreplace ${EXTRA_PACKAGES.join(" ")}`
 ].forEach(line => console.log(line));
 
 [
@@ -88,7 +99,7 @@ const postPackages =
 	"media-gfx/abydosconvert"
 ];
 
-const programPackages = Object.values(programs).flatMap(program => Array.force(program.package)).unique().subtractAll(postPackages).sortMulti().join(" ").innerTrim();
+const programPackages = Object.values(programs).flatMap(program => Array.force(program.package)).unique().subtractAll(postPackages).subtractAll(EXTRA_PACKAGES).sortMulti().join(" ").innerTrim();
 
 [
 	`emerge --noreplace ${programPackages}`,

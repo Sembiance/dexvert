@@ -1,0 +1,47 @@
+import logging, sys, time, os, argparse
+from pprint import pprint
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--web_port", type=int)
+cfg = parser.parse_args()
+
+print("nsfwServer: Loading models...")
+
+########
+# NSFW # https://pypi.org/project/opennsfw2/
+########
+import torch
+import tensorflow as tf
+from opennsfw2._model import make_open_nsfw_model
+
+nsfwModel = make_open_nsfw_model(weights_path=os.path.join(os.path.dirname(os.path.realpath(__file__)), "weights", "open_nsfw_weights-0.1.0.h5"))
+
+def processFilePaths(filePaths):
+	results = []
+	tensors = tf.convert_to_tensor([torch.load(filePath, weights_only=False) for filePath in filePaths])
+	predictions = nsfwModel.predict(tensors, batch_size=8, verbose=0)
+	nsfwProbabilities: List[float] = predictions[:, 1].tolist()
+	return [nsfwProbability*100 for nsfwProbability in nsfwProbabilities]
+
+################
+# FLASK ROUTES #
+################
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+logging.getLogger('werkzeug').setLevel(logging.WARNING)
+
+print("nsfwServer: Defining flask routes...")
+
+@app.route("/status", methods=["GET"])
+def status():
+	return "a-ok"
+
+@app.route("/process", methods=["POST"])
+def process():
+	t0 = time.time()
+	results = processFilePaths(request.json["filePaths"])
+	print("processFilePaths --- %s seconds ---" % (time.time() - t0))
+	return jsonify(results)
+
+print("nsfwServer: Server running on port: " + str(cfg.web_port))
+app.run(host="127.0.0.1", port=cfg.web_port, threaded=False)

@@ -103,6 +103,7 @@ python3.12 -m pip uninstall tensorflow
 /--------------------\
 | Alternative Models |
 \--------------------/
+
 https://huggingface.co/AdamCodd/vit-base-nsfw-detector			Only flags NSFW or SFW, no in-between. But *maybe* it does assign a score I could use?
 https://huggingface.co/Falconsai/nsfw_image_detection			Some simple checks show it misses stuff
 https://github.com/notAI-tech/NudeNet							Really old and simple checks shows it misses a lot of NSFW stuff

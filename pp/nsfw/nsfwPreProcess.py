@@ -1,6 +1,8 @@
 import os, multiprocessing, sys
 from pprint import pprint
 
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+
 imageNames = []
 
 for root, dirs, files in os.walk(sys.argv[1]):

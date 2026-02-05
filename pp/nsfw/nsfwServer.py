@@ -1,6 +1,9 @@
 import logging, sys, time, os, argparse
 from pprint import pprint
 
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--web_port", type=int)
 cfg = parser.parse_args()

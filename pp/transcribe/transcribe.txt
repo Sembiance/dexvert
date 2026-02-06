@@ -1,0 +1,48 @@
+/------\
+| Info |
+\------/
+https://github.com/shashikg/WhisperS2T
+
+
+/-----------------\
+| install (quick) |
+\-----------------/
+sudo emerge --noreplace "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" ffmpeg
+cd /mnt/compendium/DevLab/dexvert/pp/transcribe
+mkdir -p home
+python3.12 -m venv env
+source env/bin/activate
+python3.12 -m pip install wheel
+python3.12 -m pip install whisper_s2t flask
+
+>>> modify WhisperS2T code
+# Need to fix bugs with small segments causing issues. See: https://github.com/shashikg/WhisperS2T/pull/57/files
+# Use that pull request for reference on what to change. Here it is in case the pull request is gone:
+
+nano env/lib/python3.12/site-packages/whisper_s2t/data.py
+# Add near top: import math
+# Change line #66 or 67 from:
+	for i in range(0, int(audio_duration), int(self.max_seg_len)):
+# to:
+	for i in range(0, math.ceil(audio_duration), int(self.max_seg_len)):
+
+nano env/lib/python3.12/site-packages/whisper_s2t/backends/ctranslate2/model.py
+# Change line #218 from:
+	def generate_segment_batched(self, features, prompts, seq_lens, seg_metadata):
+# to:
+	def generate_segment_batched(self, features, prompts, seq_lens=None, seg_metadata=None):
+
+# Also change:
+
+nano env/lib/python3.12/site-packages/whisper_s2t/audio.py
+# Change line #19 from:
+	ret_code = os.system(f'ffmpeg -version')
+# to:
+	ret_code = os.system(f'ffmpeg -version > /dev/null 2>&1')
+<<<
+
+
+
+/--------------------\
+| Alternative Models |
+\--------------------/

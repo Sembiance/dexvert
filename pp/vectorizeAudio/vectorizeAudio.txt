@@ -1,26 +1,26 @@
 /------\
 | Info |
 \------/
-https://github.com/bhky/opennsfw2
-https://pypi.org/project/opennsfw2/
+https://huggingface.co/laion/larger_clap_general
 
 
-/-----------------\
-| install (quick) |
-\-----------------/
+/---------\
+| install |
+\---------/
 sudo emerge --noreplace "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" 
-cd /mnt/compendium/DevLab/dexvert/pp/nsfw
+cd /mnt/compendium/DevLab/dexvert/pp/vectorizeAudio
 mkdir -p home
 python3.12 -m venv env
 source env/bin/activate
 python3.12 -m pip install wheel
-python3.12 -m pip install opennsfw2 pillow tensorflow torch nvidia-tensorrt flask
+python3.12 -m pip install torch torchaudio transformers flask torchcodec
 
 
 
-/-------------------------------------\
-| install (custom compiled tensorflow |
-\-------------------------------------/
+
+/-------------------------------\
+| optimized compiled tensorflow |
+\-------------------------------/
 # This setup will compile tensorflow for the particular CPU enabling all optimizations. Do this INSTEAD of the steps above
 # The bazel compile only supports certain versions (as of Feb 2026)
 sudo emerge sys-devel/gcc:14 llvm-core/clang:20 llvm-core/lld:20 "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" 
@@ -102,8 +102,13 @@ python3.12 -m pip uninstall tensorflow
 /--------------------\
 | Alternative Models |
 \--------------------/
-https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct				Vision model, could ask it to give me a NSFW rating for the image. Have not yet tried
-
-https://huggingface.co/AdamCodd/vit-base-nsfw-detector			Only flags NSFW or SFW, no in-between. But *maybe* it does assign a score I could use?
-https://huggingface.co/Falconsai/nsfw_image_detection			Some simple checks show it misses stuff
-https://github.com/notAI-tech/NudeNet							Really old and simple checks shows it misses a lot of NSFW stuff
+* As of early 2025
+CLAP based is probably best as it'll support the text query
+	https://chatgpt.com/c/6850b342-ee08-8000-858d-0eae6eb0123b			(Look at the end of the chat)
+	https://huggingface.co/laion/larger_clap_general					(1 year old)
+	https://huggingface.co/laion/clap-htsat-fused						(2 years old)
+	https://github.com/LAION-AI/CLAP									(2 years old)
+Other possibilities, not sure if they support text-to-vector:
+	https://huggingface.co/MIT/ast-finetuned-audioset-10-10-0.4593		(2 years old)
+	https://github.com/qiuqiangkong/panns_inference						(5 years old)
+	VGGish

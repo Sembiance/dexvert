@@ -1,0 +1,23 @@
+/------\
+| Info |
+\------/
+https://github.com/mindee/doctr
+https://pypi.org/project/python-doctr/
+
+
+/-----------------\
+| install (quick) |
+\-----------------/
+sudo emerge --noreplace "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" 
+cd /mnt/compendium/DevLab/dexvert/pp/ocr
+mkdir -p home
+python3.12 -m venv env
+source env/bin/activate
+python3.12 -m pip install wheel
+python3.12 -m pip install nvidia-tensorrt flask python-doctr
+
+
+
+/--------------------\
+| Alternative Models |
+\--------------------/

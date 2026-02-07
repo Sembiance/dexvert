@@ -21,7 +21,10 @@
 /-------------\
 | dexvert 3.0 |
 \-------------/
-* Keep dexdrone0 STATIC as a test base of all truth. Do not update it at all
+* Keep dexdrone0 STATIC as a test base of all truth. Do not update it at all. Instead spawn an identical server and test on that
+
+* Dexpool/idpool, simplify and make it just 1 pool that can either id or dexvert (may already be this way)
+  All 'identifcation' jobs should happen first, so those should always be put at front of queue
 
 * Goal: Get rid of 86box
   Process: Start with winxp, then later win2k

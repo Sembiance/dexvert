@@ -8,6 +8,7 @@ https://pypi.org/project/opennsfw2/
 /-----------------\
 | install (quick) |
 \-----------------/
+* Should probably use the custom compiled tensorflow below instructions instead, but if you just want a quick less-optimized install, continue.
 sudo emerge --noreplace "=dev-libs/cudnn-9.8.0*" "=dev-util/nvidia-cuda-toolkit-12.8.1*" 
 cd /mnt/compendium/DevLab/dexvert/pp/nsfw
 mkdir -p home

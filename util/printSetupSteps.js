@@ -65,12 +65,20 @@ const EXTRA_PACKAGES =
 	"dev-lang/perl",
 
 	// post processing
-	// specific versions are needed to compile TensorFlow with full AVX2 support as of Feb 2026
-	"=dev-util/nvidia-cuda-toolkit-12.8.1*",
+	"app-arch/pigz",
+	"dev-db/sparkey",
+	"dev-java/openjdk-bin:11",	// tika
+	"media-gfx/gifsicle",
+	"media-gfx/imagemagick",
+	"media-libs/resvg",
+	"media-video/ffmpeg",
+
+	// post processing: specific versions are needed to compile TensorFlow with full AVX2 support as of Feb 2026
 	"=dev-libs/cudnn-9.8.0*",
-	"sys-devel/gcc:14",
+	"=dev-util/nvidia-cuda-toolkit-12.8.1*",
 	"llvm-core/clang:20",
-	"llvm-core/lld:20"
+	"llvm-core/lld:20",
+	"sys-devel/gcc:14"
 ];
 
 [

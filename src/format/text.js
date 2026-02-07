@@ -1094,7 +1094,7 @@ export default
 		upcatCatalog                               : {name : "Upcat Catalog", ext : [".cat"], magic : ["Upcat Catalog"]},
 		valueChangeDump                            : {name : "Value Change Dump", ext : [".vcd", ".vcdz"], magic : ["Value Change Dump"]},
 		vamasSurfaceChemicalAnalysisTransfer       : {name : "VAMAS Surface Chemical Analysis Standard Data Transfer Format", ext : [".vms"], magic : [/^fmt\/1122( |$)/]},
-		vCard                                      : {name : "vCard", website : "http://fileformats.archiveteam.org/wiki/VCard", ext : [".vcf", ".vcard"], magic : ["vCard - Business Card", "vCard visiting card", "Virtual Card Datei (VCF)", "text/vcard", "Format: vCard/Virtual Contact File", /^vCard$/, /^fmt\/(395|1879|1880)( |$)/]},
+		vCard                                      : {name : "vCard", website : "http://fileformats.archiveteam.org/wiki/VCard", ext : [".vcf", ".vcard"], magic : ["vCard - Business Card", "vCard visiting card", "Virtual Card Datei (VCF)", "text/vcard", "Format: vCard/Virtual Contact File", /^vCard$/, /^fmt\/(395|1879|1880|1881)( |$)/]},
 		vdafsCADDataExchangeFormat                 : {name : "VDA-FS CAD data exchange format", ext : [".vda"], magic : ["VDA-FS CAD data exchange format"]},
 		vendinfo                                   : {name : "VENDINFO", ext : [".diz"], filename : [/^vendinfo\.diz$/i], magic : ["VENDINFO information"]},
 		venturaFontMetrics                         : {name : "Ventura Font Metrics", ext : [".vfm"], magic : ["Ventura Font Metrics"], weakMagic : true},

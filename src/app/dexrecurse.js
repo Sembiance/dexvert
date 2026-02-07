@@ -9,6 +9,7 @@ import {DexFile} from "../DexFile.js";
 import {formats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES, WEAK_PRODOS_TYPES} from "../WEAK.js";
 import {_PRO_DOS_TYPE_CODE} from "../program/archive/cadius.js";
+import {C} from "../../pp/ppUtil.js";
 
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
@@ -154,9 +155,10 @@ const argv = cmdUtil.cmdInit({
 		programFlag : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
 		ignorePath  : {desc : "A path to ignore when encountered and to skip processing and skip recursing into", hasValue : true, multiple : true},
 		suffix      : {desc : "What suffix to use for output directories. This is important to avoid clobbering other output files.", defaultValue : "§"},
-		headless    : {desc : "Run headless, no GUI. Instead create a webserver and listen on a port for updates on recursion progress"},
-		report      : {desc : "Generate a report of new magics and new sample files"},
-		logLevel	: {desc : "Log level to use", hasValue : true, defaultValue : "info"}
+		headless    : {desc : "Run headless, no GUI"},
+		logLevel	: {desc : "Log level to use", hasValue : true, defaultValue : "info"},
+		postProcess : {desc : "Perform post processing on the results"},
+		itemMetaURL : {desc : "A URL to fetch itemMeta data from, which is passed to postProcess.js", hasValue : true}
 	},
 	args :
 	[
@@ -165,6 +167,8 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 const xlog = new XLog(argv.headless ? "error" : argv.logLevel);
+if(argv.postProcess && !argv.itemMetaURL)
+	Deno.exit(xlog.error`--itemMetaURL is required when --postProcess is set!`);
 
 const dexvertOptions = {};
 
@@ -225,31 +229,28 @@ const newMacTypeCreatorsFormatids = {};
 const newProDOSTypes = {};
 const idMetaCheckers = [];
 
-if(argv.report)
+await initRegistry(xlog);
+
+for(const magic of IGNORE_MAGICS)
+	ALL_MAGICS.add(magic);
+
+for(const format of Object.values(formats))
 {
-	await initRegistry(xlog);
+	for(const m of Array.force(format.magic || []))
+		ALL_MAGICS.add(m);
 
-	for(const magic of IGNORE_MAGICS)
-		ALL_MAGICS.add(magic);
+	if(format.idMeta)
+		idMetaCheckers.push(format.idMeta);
+}
 
-	for(const format of Object.values(formats))
-	{
-		for(const m of Array.force(format.magic || []))
-			ALL_MAGICS.add(m);
-
-		if(format.idMeta)
-			idMetaCheckers.push(format.idMeta);
-	}
-
-	xlog.info`Finding existing sample files...`;
-	const sampleFilePaths = await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nodir : true, relative : true, depth : 3});
-	for(const sampleFilePath of sampleFilePaths)
-	{
-		const parts = sampleFilePath.split("/");
-		const formatid = `${parts[0]}/${parts[1]}`;
-		EXISTING_SAMPLE_FILES[formatid] ||= [];
-		EXISTING_SAMPLE_FILES[formatid].push(parts[2]);
-	}
+xlog.info`Finding existing sample files...`;
+const sampleFilePaths = await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nodir : true, relative : true, depth : 3});
+for(const sampleFilePath of sampleFilePaths)
+{
+	const parts = sampleFilePath.split("/");
+	const formatid = `${parts[0]}/${parts[1]}`;
+	EXISTING_SAMPLE_FILES[formatid] ||= [];
+	EXISTING_SAMPLE_FILES[formatid].push(parts[2]);
 }
 
 const isExistingMagic = v =>
@@ -297,35 +298,35 @@ let taskHandledCount = 0;
 const originalFiles = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
 const taskQueue = originalFiles.map(v => ({rel : v}));
 const taskActive = new Set();
-const bar = argv.headless ? null : printUtil.progress({barWidth : 35, max : taskQueue.length});
 const startedAt = performance.now();
 
-let webServer = null;
-if(argv.headless)
+const routes = new Map();
+routes.set("/status", async request =>
 {
-	const routes = new Map();
-	routes.set("/status", async request =>
+	const query = urlUtil.urlToQueryObject(request?.url);
+	const r = {duration : performance.now()-startedAt, taskQueueCount : taskQueue.length, taskActiveCount : taskActive.size, taskFinishedCount, taskHandledCount};
+	const oldestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
+	if(oldestTask)
 	{
-		const query = urlUtil.urlToQueryObject(request?.url);
-		const r = {duration : performance.now()-startedAt, taskQueueCount : taskQueue.length, taskActiveCount : taskActive.size, taskFinishedCount, taskHandledCount};
-		const oldestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
-		if(oldestTask)
-		{
-			r.oldestTask = oldestTask;
-			r.oldestTask.duration = performance.now()-oldestTask.startedAt;
-		}
+		r.oldestTask = oldestTask;
+		r.oldestTask.duration = performance.now()-oldestTask.startedAt;
+	}
 
-		if(query?.verbose)
-		{
-			r.rpcStatus = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/status`, {asJSON : true});
-			r.osStatus = await xu.fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/status`, {asJSON : true});
-		}
+	if(query?.verbose)
+	{
+		r.rpcStatus = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/status`, {asJSON : true});
+		r.osStatus = await xu.fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/status`, {asJSON : true});
+	}
 
-		return Response.json(r);
-	});
+	const postProcessStatus = await xu.fetch(`http://${C.POST_PROCESS_HOST}:${C.POST_PROCESS_PORT}/status`, {asJSON : true, timeout : xu.SECOND, silent : true});
+	if(postProcessStatus)
+		r.postProcessStatus = postProcessStatus;
 
-	webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes), {xlog});
-}
+	return Response.json(r);
+});
+
+const webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes), {xlog});
+const bar = argv.headless ? null : printUtil.progress({barWidth : 35, max : taskQueue.length});
 
 const SAMPLE_PATH_SUMS = {};
 async function isNewSampleFile(dexformatid, sampleFilePath)
@@ -411,59 +412,56 @@ async function processNextQueue()
 		if(dexid)
 			taskHandledCount++;
 
-		if(argv.report)
+		const dexformatid = dexid ? `${dexid.family}/${dexid.formatid}` : null;
+
+		//xlog.debug`${taskLogPrefix} Gathering data for report...`;
+		if(dexid && !dexid.unsupported && await isNewSampleFile(dexformatid, inputFilePath))
 		{
-			const dexformatid = dexid ? `${dexid.family}/${dexid.formatid}` : null;
-
-			//xlog.debug`${taskLogPrefix} Gathering data for report...`;
-			if(dexid && !dexid.unsupported && await isNewSampleFile(dexformatid, inputFilePath))
+			newSampleFiles[dexformatid] ||= [];
+			newSampleFiles[dexformatid].push(task.relFilePath);
+		}
+		
+		if(dexData.ids?.length)
+		{
+			for(const id of dexData.ids || [])
 			{
-				newSampleFiles[dexformatid] ||= [];
-				newSampleFiles[dexformatid].push(task.relFilePath);
+				// Skip weak identifications, those from dexvert or magics that match an existing format
+				if(id.weak || id.from==="dexvert" || isExistingMagic(id.magic))
+					continue;
+
+				const magicsBucket = dexid ? improvedMagics : newMagics;
+				magicsBucket[id.magic] ||= [];
+				magicsBucket[id.magic].pushUnique(task.relFilePath);
 			}
-			
-			if(dexData.ids?.length)
-			{
-				for(const id of dexData.ids || [])
-				{
-					// Skip weak identifications, those from dexvert or magics that match an existing format
-					if(id.weak || id.from==="dexvert" || isExistingMagic(id.magic))
-						continue;
+		}
 
-					const magicsBucket = dexid ? improvedMagics : newMagics;
-					magicsBucket[id.magic] ||= [];
-					magicsBucket[id.magic].pushUnique(task.relFilePath);
+		const macFileType = dexData.idMeta?.macFileType;
+		const macFileCreator = dexData.idMeta?.macFileCreator;
+		if((macFileType || macFileCreator) && !idMetaCheckers.some(idMetaChecker => idMetaChecker({macFileType, macFileCreator})))
+		{
+			const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
+			if(macFileTypeCreator.trim(macFileTypeCreator).length>1 && !WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator) && !WEAK_MAC_TYPES.includes(macFileType || "????"))
+			{
+				newMacTypeCreators[macFileTypeCreator] ||= [];
+				newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
+
+				if(dexid && !dexid.unsupported)
+				{
+					newMacTypeCreatorsFormatids[macFileTypeCreator] ||= {};
+					newMacTypeCreatorsFormatids[macFileTypeCreator][dexformatid] ||= 0;
+					newMacTypeCreatorsFormatids[macFileTypeCreator][dexformatid]++;
 				}
 			}
+		}
 
-			const macFileType = dexData.idMeta?.macFileType;
-			const macFileCreator = dexData.idMeta?.macFileCreator;
-			if((macFileType || macFileCreator) && !idMetaCheckers.some(idMetaChecker => idMetaChecker({macFileType, macFileCreator})))
-			{
-				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
-				if(macFileTypeCreator.trim(macFileTypeCreator).length>1 && !WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator) && !WEAK_MAC_TYPES.includes(macFileType || "????"))
-				{
-					newMacTypeCreators[macFileTypeCreator] ||= [];
-					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
-
-					if(dexid && !dexid.unsupported)
-					{
-						newMacTypeCreatorsFormatids[macFileTypeCreator] ||= {};
-						newMacTypeCreatorsFormatids[macFileTypeCreator][dexformatid] ||= 0;
-						newMacTypeCreatorsFormatids[macFileTypeCreator][dexformatid]++;
-					}
-				}
-			}
-
-			const proDOSType = dexData.idMeta?.proDOSType;
-			const proDOSTypeCode = _PRO_DOS_TYPE_CODE[proDOSType];
-			if(proDOSType && !idMetaCheckers.some(idMetaChecker => idMetaChecker({proDOSType, proDOSTypeCode, proDOSTypePretty : dexData.idMeta?.proDOSTypePretty, proDOSTypeAux : dexData.idMeta?.proDOSTypeAux})) &&
-				(!proDOSTypeCode?.length || !WEAK_PRODOS_TYPES.includes(proDOSTypeCode)))
-			{
-				const proDOSTypeFull = `${proDOSTypeCode || ""} [${proDOSType}] ${dexData.idMeta?.proDOSTypePretty || ""}${dexData.idMeta?.proDOSTypeAux ? ` (0x${dexData.idMeta?.proDOSTypeAux})` : ""}`.trim();
-				newProDOSTypes[proDOSTypeFull] ||= [];
-				newProDOSTypes[proDOSTypeFull].pushUnique(task.relFilePath);
-			}
+		const proDOSType = dexData.idMeta?.proDOSType;
+		const proDOSTypeCode = _PRO_DOS_TYPE_CODE[proDOSType];
+		if(proDOSType && !idMetaCheckers.some(idMetaChecker => idMetaChecker({proDOSType, proDOSTypeCode, proDOSTypePretty : dexData.idMeta?.proDOSTypePretty, proDOSTypeAux : dexData.idMeta?.proDOSTypeAux})) &&
+			(!proDOSTypeCode?.length || !WEAK_PRODOS_TYPES.includes(proDOSTypeCode)))
+		{
+			const proDOSTypeFull = `${proDOSTypeCode || ""} [${proDOSType}] ${dexData.idMeta?.proDOSTypePretty || ""}${dexData.idMeta?.proDOSTypeAux ? ` (0x${dexData.idMeta?.proDOSTypeAux})` : ""}`.trim();
+			newProDOSTypes[proDOSTypeFull] ||= [];
+			newProDOSTypes[proDOSTypeFull].pushUnique(task.relFilePath);
 		}
 
 		if(!dexData?.created?.files?.output?.length)
@@ -527,83 +525,22 @@ await xu.waitUntil(async () =>	// eslint-disable-line require-await
 	return false;
 }, {interval : 100});
 
-if(webServer)
-	await webServer.stop();
-
 const totalDuration = performance.now()-startedAt;
-xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
+xlog.info`\ndex Duration: ${totalDuration.msAsHumanReadable()}`;
 
-if(argv.report)
+xlog.debug`Preparing reportData...`;
+const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newMacTypeCreatorsFormatids, newProDOSTypes};
+
+xlog.debug`Writing reportData to: ${path.join(workDirPath, "report.json")}`;
+await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
+
+if(argv.postProcess && argv.itemMetaURL)
 {
-	xlog.debug`Preparing reportData...`;
-	const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newMacTypeCreatorsFormatids, newProDOSTypes};
-
-	xlog.debug`Writing reportData to: ${path.join(workDirPath, "report.json")}`;
-	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
-
-	if(!argv.headless)
-	{
-		const newSampleFilesEntries = Object.entries(newSampleFiles);
-		if(newSampleFilesEntries.length>0)
-		{
-			console.log(printUtil.majorHeader(`New Sample Files (${newSampleFilesEntries.length.toLocaleString()})`, {prefix : "\n"}));
-			for(const [formatid, files] of Object.entries(newSampleFiles))
-			{
-				xlog.info`${formatid}   (${files.length} files)`;
-				for(const file of files)
-					xlog.info`\t${file}`;
-			}
-		}
-
-		const newMagicsEntries = Object.entries(newMagics);
-		if(newMagicsEntries.length>0)
-		{
-			console.log(printUtil.majorHeader(`New Magics (${newMagicsEntries.length.toLocaleString()})`, {prefix : "\n"}));
-			for(const [magic, files] of Object.entries(newMagics))
-			{
-				xlog.info`${magic}   (${files.length} files)`;
-				for(const file of files)
-					xlog.info`\t${file}`;
-			}
-		}
-
-		const improvedMagicsEntries = Object.entries(improvedMagics);
-		if(improvedMagicsEntries.length>0)
-		{
-			console.log(printUtil.majorHeader(`Improved Magics (${improvedMagicsEntries.length.toLocaleString()})`, {prefix : "\n"}));
-			for(const [magic, files] of Object.entries(improvedMagics))
-			{
-				xlog.info`${magic}   (${files.length} files)`;
-				for(const file of files)
-					xlog.info`\t${file}`;
-			}
-		}
-
-		const newMacTypeCreatorsEntries = Object.entries(newMacTypeCreators);
-		if(newMacTypeCreatorsEntries.length>0)
-		{
-			console.log(printUtil.majorHeader(`New Mac Type/Creators (${newMacTypeCreatorsEntries.length.toLocaleString()})`, {prefix : "\n"}));
-			for(const [macTypeCreator, files] of Object.entries(newMacTypeCreators))
-			{
-				xlog.info`${macTypeCreator}   (${files.length} files)`;
-				for(const file of files)
-					xlog.info`\t${file}`;
-			}
-		}
-
-		const newProDOSTypesEntries = Object.entries(newProDOSTypes);
-		if(newProDOSTypesEntries.length>0)
-		{
-			console.log(printUtil.majorHeader(`New ProDOS Types (${newProDOSTypesEntries.length.toLocaleString()})`, {prefix : "\n"}));
-			for(const [proDOSType, files] of Object.entries(newProDOSTypes))
-			{
-				xlog.info`${proDOSType}   (${files.length} files)`;
-				for(const file of files)
-					xlog.info`\t${file}`;
-			}
-		}
-	}
+	xlog.info`Starting post processing...`;
+	await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "..", "pp", "postProcess.js"), "--itemMetaURL", argv.itemMetaURL, workDirPath), runUtil.denoRunOpts({liveOutput : true}));
 }
+
+await webServer.stop();
 
 if(fullOutputPath.endsWith(".tar.gz"))
 {

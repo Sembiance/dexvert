@@ -54,7 +54,7 @@ const _XML_MAGIC = [
 	"Adobe Application Manager Package Info", "3ds Max XML Animation File", "QNX Package Manifest", "QNX Repository Manifest", "Keyhole - Google Earth Overlay", "DITA conditional processing profile", "News Industry Text Format", "Irrlicht Mesh",
 	"RealProducer Server Destination", "QGIS GRASS module definition", "VTK XML", "ParaView Data", /^Expression SketchFlow (data|Feedback)/, "Windows Communication Foundation reference", "Fritzing Part", "Azure Cloud Service Package Manifest",
 	"Azure Service Definition schema", "RetroPlatform Player RP9 manifest", "JMeter XML test plan", /^OpenShot (effect|export preset)/,
-	/^Visual Studio (C\+\+ project Filters|Code Analysis Rule Set|Data Source|((\.NET )?Visual [CJ]#?\+?\+?|Intel Fortran|JavaScript|Shared Code|SQL Server|Visual Basic) [Pp]roject|Natvis visualization|Publish profile|Project User Options|Settings|Test Metadata|Tools for Office add-in|unit test configuration)/,
+	/^Visual Studio (C\+\+ project Filters|Code Analysis Rule Set|Data Source|((\.NET )?(Visual )?[CJ]#?\+?\+?|Intel Fortran|JavaScript|Shared Code|SQL Server|Visual Basic) [Pp]roject|Natvis visualization|Publish profile|Project User Options|Settings|Test Metadata|Tools for Office add-in|unit test configuration)/,
 	/^fmt\/(205|243|333|475|570|896|932|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1803|1824|1825|1853|1883|1962|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];
 export {_XML_MAGIC};

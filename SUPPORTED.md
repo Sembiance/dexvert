@@ -1,11 +1,11 @@
-# Supported File Formats (3,538)
+# Supported File Formats (3,539)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (533)
+## Archive (534)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -67,7 +67,7 @@ archive | [ASD Archive](http://fileformats.archiveteam.org/wiki/ASD_Archiver) | 
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/stDiskImage/)
 archive | Atomik Cruncher Compressed Data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/atomikCruncher/)
-archive | Authorware Wrapped EXE | .exe | [exeUnPostContent](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareEXE/)
+archive | Authorware Wrapped EXE | .exe | [exeUnPostContent](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareEXE/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/autoCADSlideLibrary/) - The sldtoppm utility used to extract these randomly won't extract some images, but then work fine when ran again. This is an issue with sldtoppm as it does this even with a simple bash script.
 archive | AVPACK Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/avPackPacked/)
 archive | AXE Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/axePacked/)
@@ -80,7 +80,7 @@ archive | [BinSCII](http://fileformats.archiveteam.org/wiki/BinSCII) | .bsc .bsq
 archive | BioWare Entity Resource File | .erf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
 archive | Bizarre Creations Bank File | .baf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bizarreCreationsBankFile/)
 archive | BlakHole Archive | .bh | [izArc](https://www.izarc.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/blakHole/)
-archive | Blood & Lace Compressed |  | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/bloodLaceCompressed/)
+archive | Blood & Lace Compressed |  | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/bloodLaceCompressed/)
 archive | Bloodrayne game data archive | .pod | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/bloodrayneGameDataArchive/)
 archive | [Blorb Interactive Fiction Package](http://fileformats.archiveteam.org/wiki/Blorb) | .blorb .gblorb .zblorb .blb .glb .zlb | [blorbtar](https://www.ifarchive.org/if-archive/programming/blorb/blorbtar-0.1.pl) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/blorb/)
 archive | BOLT Game Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/boltGameArchive/)
@@ -245,7 +245,7 @@ archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/Ins
 archive | [InstallShield Archive](http://fileformats.archiveteam.org/wiki/InstallShield_archive_(IBT)) | .ibt | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldArchive/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldInstallerArchive/)
-archive | [InstallShield Self-Extractor](http://justsolve.archiveteam.org/wiki/InstallShield_Self-Extracting_EXE) | .exe | [unISV3](https://github.com/Sembiance/dexvert) [installShieldSelfExtractor](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [38 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/)
+archive | [InstallShield Self-Extractor](http://justsolve.archiveteam.org/wiki/InstallShield_Self-Extracting_EXE) | .exe | [unISV3](https://github.com/Sembiance/dexvert) [installShieldSelfExtractor](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [39 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldZ/)
 archive | [Interchangeable Preservation Format Floppy Disk Image](http://fileformats.archiveteam.org/wiki/IPF) | .ipf | [uaeunp](https://www.winuae.net/download/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ipfFloppyDiskImage/)
 archive | Interstate Series Game Archive | .zfs | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/interstateGameArchive/)
@@ -413,12 +413,13 @@ archive | RJCrush Packed | .exe .com | cup386 | [11 sample files](https://sembia
 archive | RLE com-packer Packed | .exe .com | cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/rleCOMPackerPacked/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar .exe | [unrar](https://www.rarlab.com/rar_add.htm) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/rar/)
 archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
-archive | [RTPatch Self-Extracting Archive](http://justsolve.archiveteam.org/wiki/RTPatch) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/rtPatchSFX/)
+archive | [RTPatch Self-Extracting Archive](http://justsolve.archiveteam.org/wiki/RTPatch) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/rtPatchSFX/)
 archive | Rumble Fighter game data archive | .nsz | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/rumbleFighterGameDataArchive/)
 archive | [SAB Diskette Utility disk image](http://fileformats.archiveteam.org/wiki/SABDU) | .sdu | [dd](https://www.gnu.org/software/coreutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/sabDisketteUtilityDiskImage/)
 archive | [Sango Fighter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/sangoFighterGameArchive/)
 archive | [SAP Thomson Disk Image](http://nostalgies.thomsonistes.org/transfert.html) | .sap | [sapfs](http://nostalgies.thomsonistes.org/transfert.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sapThomsonDiskImage/)
 archive | SAR Archive | .sar | [unar](https://github.com/incbee/Unarchiver) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sarArchive/)
+archive | SAVERAM Data | .fls .ram | [loadram](https://discmaster.textfiles.com/view/29622/ibm0040-0049/ibm0047.tar/ibm0047/LEGATOB1.ZIP/LOADRAM.EXE) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/saveramData/)
 archive | [SCO Compress](http://fileformats.archiveteam.org/wiki/SCO_compress_LZH) |  | [gunzip](https://www.gnu.org/software/gzip/) [deark](https://entropymine.com/deark/) [ancient](https://github.com/temisu/ancient_format_decompressor) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/scoCompress/)
 archive | SCR Package | .spz | [foremost](http://foremost.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/scrPackage/) - The format contains JPEG files, but I think it's done something to them as any extraction produces slightly corrupted results and just small images. Still, better than nothing.
 archive | Scrapland game data archive | .packed | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/scraplandGameDataArchive/)
@@ -1106,7 +1107,7 @@ image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [view64](http://view64.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/blazingPaddles/)
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/blazingPaddlesWindow/)
 image | [Blizzard Picture](http://fileformats.archiveteam.org/wiki/BLP) | .blp | [nconvert](https://www.xnview.com/en/nconvert/) [blpngConverter](https://www.wowinterface.com/downloads/info22128-BLPNGConverter.html) [paintDotNet](https://archive.org/details/paint.net.4.3.12) [uniconvertor](https://sk1project.net/uc2/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/blizzardPicture/)
-image | Blood & Lace Compressed TGA | .tga | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/bloodLaceCompressedTGA/)
+image | Blood & Lace Compressed TGA | .tga | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/bloodLaceCompressedTGA/)
 image | [Bob Ray Tracer Bitmap](http://fileformats.archiveteam.org/wiki/Bob_ray_tracer_bitmap) | .bob | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [tomsViewer](https://tomseditor.com/blog/viewer) | [10 sample files](https://sembiance.com/fileFormatSamples/image/bobRayTracerBitmap/)
 image | Bootsplash Image |  | [tomsViewer](https://tomseditor.com/blog/viewer) | [12 sample files](https://sembiance.com/fileFormatSamples/image/bootsplash/)
 image | [BRender PIX](http://fileformats.archiveteam.org/wiki/BRender_PIX) | .pix | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/brenderPIX/)
@@ -1133,7 +1134,7 @@ image | Character Studio thumbnail | .bip | [nconvert](https://www.xnview.com/en
 image | [CharPad](http://fileformats.archiveteam.org/wiki/CharPad) | .ctm | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/charPad/)
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/cheese/)
 image | [COKE TG1](http://fileformats.archiveteam.org/wiki/COKE_(Atari_Falcon)) | .tg1 | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/tg1/)
-image | COL Format 256 Color palette | .res .col | [wuimg](https://codeberg.org/kaleido/wuimg) | [3 sample files](https://sembiance.com/fileFormatSamples/image/colFormatColorPalette/)
+image | COL Format 256 Color palette | .res .col | [wuimg](https://codeberg.org/kaleido/wuimg) | [12 sample files](https://sembiance.com/fileFormatSamples/image/colFormatColorPalette/)
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [13 sample files](https://sembiance.com/fileFormatSamples/image/rix/)
 image | ColorSTar/MonoSTar | .bil .obj | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/colorSTar/)
 image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/colorViewSquash/)
@@ -1369,7 +1370,7 @@ image | [JPEG XL](http://fileformats.archiveteam.org/wiki/JPEG_XL) | .jxl | [ico
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/jpegXR/)
 image | [JPEG-LS](http://fileformats.archiveteam.org/wiki/JPEG-LS) | .jls | [wuimg](https://codeberg.org/kaleido/wuimg) [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/jpegLS/)
 image | JustButtons Button | .btn | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/justButtonsButton/)
-image | Kaboom Studios Bitmap Block | .bmb | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/kaboomStudiosBitmapBlock/)
+image | Kaboom Studios Bitmap Block | .bmb | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 sample files](https://sembiance.com/fileFormatSamples/image/kaboomStudiosBitmapBlock/)
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tomsViewer](https://tomseditor.com/blog/viewer) | [13 sample files](https://sembiance.com/fileFormatSamples/image/viff/)
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [gimp](https://gimp.org) | [11 sample files](https://sembiance.com/fileFormatSamples/image/kissCel/)
 image | Kitty NEC PC-88 | .kt4 .kty | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/kittyNECPC88/)
@@ -1429,7 +1430,7 @@ image | [Manager Windowing System Bitmap](http://fileformats.archiveteam.org/wik
 image | [Mapletown Network](http://fileformats.archiveteam.org/wiki/Mapletown_Network) | .ml1 .mx1 .nl3 | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/mapletownNetwork/)
 image | [Matlab MAT](http://fileformats.archiveteam.org/wiki/MAT) | .mat | [convert](https://www.imagemagick.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/mat5/) - I believe a .mat file can contain more than images, thus maybe this should be an archive, but right now we only support converting images.
 image | Maxon Cinema 4D Catalog | .cat | [deark](https://entropymine.com/deark/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/maxonCinema4DCatalog/)
-image | Maya Icons/Swatches | .swatches | [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/mayaIconsOrSwatches/)
+image | Maya Icons/Swatches | .swatches | [wuimg](https://codeberg.org/kaleido/wuimg) | [5 sample files](https://sembiance.com/fileFormatSamples/image/mayaIconsOrSwatches/)
 image | [McPainter](http://fileformats.archiveteam.org/wiki/McPainter) | .mcp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mcPainter/)
 image | [Mean Streets MLDF File](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [31 sample files](https://sembiance.com/fileFormatSamples/image/mldf/)
 image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/bld/)
@@ -1589,7 +1590,7 @@ image | ReGIS | .regis | [abydosconvert](https://github.com/Sembiance/abydosconv
 image | [REKO Cardset](http://fileformats.archiveteam.org/wiki/REKO_Cardset) | .reko .deck .rkp | [deark](https://entropymine.com/deark/) [reko2png](https://github.com/Sembiance/reko2png) | [17 sample files](https://sembiance.com/fileFormatSamples/image/rekoCardset/)
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/rembrandt/)
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [pabloDraw](http://picoe.ca/products/pablodraw/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/ripScrip/)
-image | Reunion Graphic | .pic | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/reunionGraphic/)
+image | Reunion Graphic | .pic | [wuimg](https://codeberg.org/kaleido/wuimg) | [8 sample files](https://sembiance.com/fileFormatSamples/image/reunionGraphic/)
 image | [Ricoh JSI Image](http://justsolve.archiveteam.org/wiki/J6I) | .j6i | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ricohJ6I/)
 image | [RIP Icon](http://fileformats.archiveteam.org/wiki/RIPscrip_Icon) | .icn | [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/ripIcon/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [recoil2png](http://recoil.sourceforge.net) | [134 sample files](https://sembiance.com/fileFormatSamples/image/rockyInterlace/)
@@ -1716,7 +1717,7 @@ image | WebArt Designer graphics | .mif | [foremost](http://foremost.sourceforge
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/WebP) | .webp |  | [8 sample files](https://sembiance.com/fileFormatSamples/image/webp/)
 image | [Webshots Picture](http://fileformats.archiveteam.org/wiki/Webshots_picture) | .wb1 .wbz .wbd .wbc .wbp | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/webshotsPicture/)
 image | [WGT Sprite](http://fileformats.archiveteam.org/wiki/WGT_Sprite) | .spr | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/image/wgtSprite/)
-image | Whale's Voyage Graphic | .brs | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/whalesVoyageGraphic/)
+image | Whale's Voyage Graphic | .brs | [wuimg](https://codeberg.org/kaleido/wuimg) | [9 sample files](https://sembiance.com/fileFormatSamples/image/whalesVoyageGraphic/)
 image | [WhyPic](http://fileformats.archiveteam.org/wiki/WhyPic) | .ypc | [konvertor](https://www.logipole.com/konvertor-en.htm) | [2 sample files](https://sembiance.com/fileFormatSamples/image/whyPic/)
 image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/artist64/)
 image | [Windows Clipboard](http://fileformats.archiveteam.org/wiki/Windows_clipboard) | .clp | [deark](https://entropymine.com/deark/) [clipbrdWin2k](https://microsoft.com) [nconvert](https://www.xnview.com/en/nconvert/) [irfanView](https://www.irfanview.com/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [10 sample files](https://sembiance.com/fileFormatSamples/image/windowsClipboard/)
@@ -2688,7 +2689,7 @@ text | Gerber Photoplot | .pho |  | [10 sample files](https://sembiance.com/file
 text | Gettext Portable Object | .po |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gettextPortableObject/)
 text | Ghemical Project | .gpr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ghemicalProject/)
 text | Gherkin Feature | .feature |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gherkinFeature/)
-text | GIMP curve file |  |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/gimpCurveFile/)
+text | GIMP curve file |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gimpCurveFile/)
 text | GIMP Dynamics | .gdyn |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/gimpDynamics/)
 text | GIMP Gradient |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/gimpGradient/)
 text | [GIMP palette](http://fileformats.archiveteam.org/wiki/GIMP_Palette) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gimpPalette/)
@@ -3285,7 +3286,7 @@ text | TMT Pascal project Configuration | .cfg |  | [4 sample files](https://sem
 text | Tools Media Corp. Ambient light | .avm |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpAmbientLight/)
 text | Tools Media Corp. material | .sss |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/toolsMediaCorpMaterial/)
 text | Toon Boom Palette | .plt .plt~ |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/toonBoomPalette/)
-text | Tor state |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/torState/)
+text | Tor state |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/torState/)
 text | Tornado 3D Project | .prj |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/tornado3DProject/)
 text | Tornado Mission info | .mis |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tornadoMissionInfo/)
 text | Total Commander button Bar config | .bar |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)

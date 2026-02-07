@@ -326,7 +326,7 @@ routes.set("/status", async request =>
 });
 
 const webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes), {xlog});
-const bar = argv.headless ? null : printUtil.progress({barWidth : 35, max : taskQueue.length});
+const bar = argv.headless ? null : printUtil.progress({barWidth : 25, max : taskQueue.length});
 
 const SAMPLE_PATH_SUMS = {};
 async function isNewSampleFile(dexformatid, sampleFilePath)

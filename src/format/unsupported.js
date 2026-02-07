@@ -3261,6 +3261,7 @@ export default
 		perFORMCompressedDatabase                : {name : "PerFORM compressed database", ext : [".frp"], magic : ["PerFORM compressed database"]},
 		perFormDBDefinition                      : {name : "PerForm DB definition", ext : [".fdb"], magic : ["PerForm DB definition"]},
 		perFormPROLOCKEDFS                       : {name : "PerForm PRO LOCKEDFS", ext : [".lib", ".fap", ".fal"], magic : ["PerForm PRO LOCKEDFS"]},
+		personalCADPCCAPSDatabase                : {name : "Personal CAD PC-CAPS Database", ext : [".sch"], magic : ["Personal CAD PC-CAPS Database"]},
 		personalFinanceManagerPlusData           : {name : "Personal Finance Manager Plus data", ext : [".mny"], magic : ["Personal Finance Manager Plus data"], weakMagic : true},
 		personalPearlDataBase                    : {name : "Personal Pearl data base", ext : [".d00", ".d01"], magic : ["Personal Pearl data base"]},
 		persuasionAutoTemplate                   : {name : "Persuasion AutoTemplate Interchange File Format", magic : ["Persuasion AutoTemplate Interchange File Format", /^fmt\/1710( |$)/]},

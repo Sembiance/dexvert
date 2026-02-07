@@ -22,16 +22,16 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 Image.MAX_IMAGE_PIXELS = None
 
 import open_clip
+model, preprocess, tokenizer = open_clip.create_model_and_transforms("ViT-L-14", pretrained="./model/CLIP-ViT-L-14-laion2B-s32B-b82K/open_clip_pytorch_model.bin")
+del model, tokenizer
 
 def worker(i):
-	vectorizeModel, preprocess, _ = open_clip.create_model_and_transforms("ViT-L-14", pretrained="./model/CLIP-ViT-L-14-laion2B-s32B-b82K/open_clip_pytorch_model.bin")
-	vectorizeModel.eval()
 	for imageName in imageNameChunks[i]:
 		try:
 			torch.save(preprocess(Image.open(os.path.join(sys.argv[1], imageName)).convert("RGB")), os.path.join(sys.argv[2], imageName))
 			print("Pre-processed image %s" % imageName)	# important to keep so progress bar can be updated
 		except Exception as e:
-			print("Failed to pre-process image %s with error: %s" % (imageName, str(e)))
+			print("Failed to pre-process image %s with error: %s" % (imageName, str(e)), file=sys.stderr)
 	return
 
 if __name__ == '__main__':
@@ -42,3 +42,5 @@ if __name__ == '__main__':
 		procs.append(p)
 	for p in procs:
 		p.join()
+		if p.exitcode!=0:
+			print("Worker died with exit code %d" % (p.exitcode), file=sys.stderr)

@@ -70,7 +70,7 @@ export default async function phase5({itemWebDirPath, itemThumbDirPath, itemFile
 		type         : "nsfw",
 		libraries    : ["tensorrt_libs", "tensorrt_bindings", "tensorrt", "nvidia/cudnn/lib", "nvidia/cuda_runtime/lib", "nvidia/cublas/lib", "torch/lib"],
 		preProcess   : true,
-		filesAtOnce  : 100,
+		filesAtOnce  : 200,
 		processor    : async (fileBatch, results) =>
 		{
 			for(const [i, nsfwScore] of Object.entries(results))
@@ -196,6 +196,8 @@ export default async function phase5({itemWebDirPath, itemThumbDirPath, itemFile
 		libraries        : ["tensorrt_libs", "tensorrt_bindings", "tensorrt", "nvidia/cuda_runtime/lib"],
 		preProcess       : true,
 		preProcessSuffix : ".npy",
+		batchSize        : 16,
+		filesAtOnce      : 200,
 		processor        : ocrProcessor
 	};
 

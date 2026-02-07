@@ -3,6 +3,7 @@ from pprint import pprint
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--web_port", type=int)
+parser.add_argument("--batch_size", type=int, default=16)
 cfg = parser.parse_args()
 
 print("ocrServer: Loading models...")
@@ -22,15 +23,28 @@ with torch.inference_mode():
     model([dummy])
 
 def processFilePaths(filePaths):
-	# Can't call from_images(filePaths) with entire list because the images are different dimensions
-	results = []
-	for filePath in filePaths:
+	results = [None] * len(filePaths)
+	batch, batch_idxs = [], []
+	for i, filePath in enumerate(filePaths):
 		try:
-			with torch.inference_mode():
-				result = model([np.load(filePath)]).export()
-			results.append(result)
+			batch.append(np.load(filePath))
+			batch_idxs.append(i)
 		except Exception as e:
-			results.append({"err" : str(e)})
+			results[i] = {"err": str(e)}
+		if len(batch) >= cfg.batch_size or (i == len(filePaths) - 1 and batch):
+			try:
+				with torch.inference_mode():
+					exported = model(batch).export()
+				for k, idx in enumerate(batch_idxs):
+					results[idx] = {"pages": [exported["pages"][k]]}
+			except Exception:
+				for k, idx in enumerate(batch_idxs):
+					try:
+						with torch.inference_mode():
+							results[idx] = model([batch[k]]).export()
+					except Exception as e:
+						results[idx] = {"err": str(e)}
+			batch, batch_idxs = [], []
 	return results
 
 ################
@@ -55,3 +69,4 @@ def process():
 
 print("ocrServer: Server running on port: " + str(cfg.web_port))
 app.run(host="127.0.0.1", port=cfg.web_port, threaded=False)
+

@@ -145,7 +145,7 @@ export function isFileBlocked(item, fileid)
 	return fileid?.length && (item?.blocks || []).some(({block}) => block.startsWith(fileid) || fileid.startsWith(block));
 }
 
-export async function classify({taskRunner, xlog, filesToProcess, itemClassifyDirPath, filesDirPath, type, libraries, preProcess, preProcessSuffix, processor, filesAtOnce=10, startTimeout=xu.MINUTE*5, processTimeout=xu.MINUTE*10})
+export async function classify({taskRunner, xlog, filesToProcess, itemClassifyDirPath, filesDirPath, type, libraries, preProcess, preProcessSuffix, processor, batchSize, filesAtOnce=10, startTimeout=xu.MINUTE*5, processTimeout=xu.MINUTE*10})
 {
 	const cwd = path.join(import.meta.dirname, type);
 	const env = {
@@ -168,7 +168,7 @@ export async function classify({taskRunner, xlog, filesToProcess, itemClassifyDi
 		{
 			const runOptions = runUtil.denoRunOpts({cwd});
 			if(xlog.atLeast("info"))
-				runOptions.stderrcb = line => xlog.warn`${xu.bracket(`PreProcess.js ${type}`)} ${line}`;
+				runOptions.stderrcb = line => taskRunner.addError(`${xu.bracket(`PreProcess.js ${type}`)} ${line}`);
 			await runUtil.run("deno", runUtil.denoArgs(`${type}PreProcess.js`, filesDirPath, typeDirPath), runOptions);
 		}
 		else
@@ -176,7 +176,7 @@ export async function classify({taskRunner, xlog, filesToProcess, itemClassifyDi
 			taskRunner.startProgress(filesToProcess.length, `Pre-Processing files [${type}]...`);
 			const runOptions = {cwd, stdoutcb : () => taskRunner.increment(), env : {...env, CUDA_VISIBLE_DEVICES : "-1"}};
 			if(xlog.atLeast("info"))
-				runOptions.stderrcb = line => xlog.warn`${xu.bracket(`PreProcess.py ${type}`)} ${line}`;
+				runOptions.stderrcb = line => taskRunner.addError(`${xu.bracket(`PreProcess.py ${type}`)} ${line}`);
 			await runUtil.run(python3Path, [`${type}PreProcess.py`, filesDirPath, typeDirPath], runOptions);
 		}
 	}
@@ -187,7 +187,7 @@ export async function classify({taskRunner, xlog, filesToProcess, itemClassifyDi
 	{
 		const r = {gpuNum, port : getAvailablePort()};
 
-		const {p, cb} = await runUtil.run(python3Path, [`${type}Server.py`, "--web_port", r.port.toString()], {detached : true, cwd, env : {...env, CUDA_VISIBLE_DEVICES : gpuNum.toString()}});
+		const {p, cb} = await runUtil.run(python3Path, [`${type}Server.py`, "--web_port", r.port.toString(), ...(batchSize ? ["--batch_size", batchSize.toString()] : [])], {detached : true, cwd, env : {...env, CUDA_VISIBLE_DEVICES : gpuNum.toString()}});
 		r.p = p;
 		r.cb = cb;
 

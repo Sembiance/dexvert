@@ -18,12 +18,16 @@ fileNameChunks = [fileNames[x:x+numPerChunk] for x in range(0, len(fileNames), n
 
 import torchaudio
 from transformers import ClapProcessor
+processor = ClapProcessor.from_pretrained("./model/larger_clap_general", local_files_only=True)
 
 def worker(i):
-	processor = ClapProcessor.from_pretrained("./model/larger_clap_general", local_files_only=True)
 	for fileName in fileNameChunks[i]:
 		try:
-			audio, sr = torchaudio.load(os.path.join(sys.argv[1], fileName))
+			filePath = os.path.join(sys.argv[1], fileName)
+			try:
+				audio, sr = torchaudio.load(filePath)
+			except Exception:
+				audio, sr = torchaudio.load(filePath, backend="ffmpeg")
 			if sr != 48000:
 				audio = torchaudio.functional.resample(audio, sr, 48000)
 			mono = audio.mean(dim=0, keepdim=True)[0].numpy()
@@ -31,7 +35,7 @@ def worker(i):
 			torch.save(inputs.data, os.path.join(sys.argv[2], fileName))
 			print("Pre-processed audio %s" % fileName)	# important to keep so progress bar can be updated
 		except Exception as e:
-			print("Failed to pre-process audio file %s with error: %s" % (fileName, str(e)))
+			print("Failed to pre-process audio file %s with error: %s" % (fileName, str(e)), file=sys.stderr)
 	return
 
 if __name__ == '__main__':
@@ -42,3 +46,5 @@ if __name__ == '__main__':
 		procs.append(p)
 	for p in procs:
 		p.join()
+		if p.exitcode!=0:
+			print("Worker died with exit code %d" % (p.exitcode), file=sys.stderr)

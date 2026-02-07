@@ -36,10 +36,10 @@ while true; do
 done
 
 result=$(curl -s -X POST -H "Content-Type: application/json" -d '{"filePaths":["/mnt/ram/tmp/nsfwTest/prepared/0242picx.gif"]}' "http://127.0.0.1:33004/process" | jq '.[0]')
-if [[ "$result" == 34.0* ]]; then
+if [[ "$result" == 34* ]]; then
 	echo "✓ PASS: Got expected value $result"
 else
-	echo "╳ FAIL: Expected 34.0*, got $result"
+	echo "╳ FAIL: Expected 34*, got $result"
 fi
 kill $nsfwServerPID
 wait

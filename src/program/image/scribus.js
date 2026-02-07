@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 import {fileUtil} from "xutil";
 import {path} from "std";
 
-const SCRIBUS_PREF_FILENAMES = [".neversplash", "checkfonts150.xml", "prefs150.xml", "scribus150.rc", "scribusshapes.xml"];
+const SCRIBUS_PREF_FILENAMES = [".neversplash", "checkfonts170.xml", "prefs170.xml", "scribus170.rc", "scribusshapes.xml"];
 const SCRIBUS_PREF_SRC = path.join(import.meta.dirname, "../../../scribus");
 
 export class scribus extends Program
@@ -27,9 +27,8 @@ export class scribus extends Program
 		for(const filename of SCRIBUS_PREF_FILENAMES)
 			await Deno.copyFile(path.join(SCRIBUS_PREF_SRC, filename), path.join(r.scribusDirPath, filename));
 		
-		// now we create a conv.py python script to convert to SVG
-		// right now it only supports converting to EPS (then to PNG+SVG). In the future I could add a flag to optionally convert to PDF for documents
 		// SCRIPT API: https://wiki.scribus.net/canvas/Automatic_Scripter_Commands_list
+		// 2026 Feb NOTE: May have a more recent API available: https://scribus-scripter.readthedocs.io/en/latest/#python-scripts     https://wiki.scribus.net/canvas/Scripter2_API
 
 		// So I used to iterate over all the objects, measure width/height and x/y of every object, figuring out how big the canvas needed to be exactly
 		// I later simplified that to just a getSize(groupObjects(getAllObjects()))
@@ -55,7 +54,7 @@ scribus.fileQuit()`);
 	};
 
 	args       = r => ["--no-gui", "--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()];
-	runOptions = ({timeout : xu.MINUTE, virtualX : true});
+	runOptions = ({timeout : xu.MINUTE, virtualX : true});	// scribus gets hung up on font substitution, presenting a dialog despire --no-gui. Could maybe add a scribusWin on win7 that uses autoit to do the conversion instead of linux headless as a backup
 	renameOut  = true;
 	chain      = "?inkscape";
 	chainCheck = r => ((r.flags.outType || "svg")==="svg");

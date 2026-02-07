@@ -2,6 +2,43 @@ import {xu} from "xu";
 import {path, getAvailablePort} from "std";
 import {runUtil, fileUtil} from "xutil";
 
+const ALLOWED_PP_ERRORS =
+[
+	/RetryError: Retrying exceeded the maxAttempts/,
+	/Failed to decode text file of.*buffer exceeds maximum length$/,
+	/No match for.* font-family./,
+	"a non-XML character",
+	"an unknown namespace prefix",
+	"BackgroundImage filter input isn't supported and not planed",
+	"cache resources exhausted",
+	`Cairo error "out of memory"`,
+	"convert: no images defined",
+	"does not contain any stream and original exists true",
+	"failed to allocate an image",
+	"ffmpeg failed to resample the input audio file",
+	"identify: improper image header",
+	"IEND: CRC error",
+	"improper image header",
+	"insufficient image data in file",
+	"InstExpl.wcx",
+	"invalid colormap index",
+	"invalid matrix (not invertible)",
+	"InvalidStateError: readyState not OPEN",
+	"moov atom not found",
+	"negative or zero image size",
+	"Not a JPEG file: starts with",
+	"output dimensions must be positive",
+	"Output file #0 does not contain any stream",	// happens if an MP4 video only has an audio stream: https://discmaster.textfiles.com/browse/17034/Sybex_Virtual_Trainer_CCNP_Switching.iso/ccnp2711/media/content/graphics/animations/0104_sounds/11.swf
+	"provided data has not an UTF-8 encoding",
+	"QuickTime™ Musical Instruments",
+	"SVG data parsing failed cause an unknown namespace prefix",
+	"SVG data parsing failed cause nodes limit reached",
+	"SVG data parsing failed cause the document does not have a root node",
+	"SVG has an invalid size",
+	"unknown entity reference '"
+];
+export {ALLOWED_PP_ERRORS};
+
 const C = {};
 C.POLY_THUMB_DEFAULT_FPS = 20;
 C.POLY_THUMB_DEFAULT_ROTATE_SPEED = 180;

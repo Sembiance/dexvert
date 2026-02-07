@@ -53,7 +53,7 @@ export default async function phase5({itemWebDirPath, itemThumbDirPath, itemFile
 		taskRunner.increment();
 	};
 
-	const prepareImagePool = new AgentPool(path.join(import.meta.dirname, "..", "agent", "prepareClassifyImage.js"), {onSuccess, xlog});
+	const prepareImagePool = new AgentPool(path.join(import.meta.dirname, "..", "prepareClassifyImage.agent.js"), {onSuccess, xlog});
 	await prepareImagePool.init();
 	await prepareImagePool.start();
 	prepareImagePool.process(images);

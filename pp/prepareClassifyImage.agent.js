@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {agentInit} from "AgentPool";
 import {fileUtil, runUtil, imageUtil} from "xutil";
-import {C} from "../ppUtil.js";
+import {C} from "./ppUtil.js";
 
 await agentInit(async image =>
 {
@@ -36,6 +36,7 @@ await agentInit(async image =>
 	convertArgs.push("-resize", `${C.CLASSIFY_IMAGE_DIM_MIN}^<`);	// will scale image up to at least this resolution
 	convertArgs.push("-resize", `${C.CLASSIFY_IMAGE_DIM_MAX}>`);	// will scale image down to at most this resolution
 	convertArgs.push("-strip");		// remove metadata
+	convertArgs.push("-type", "TrueColor");	// forces palette images to be RGB/RGBA
 	convertArgs.push(filePath);
 
 	const {stderr : convertResize1} = await runUtil.run("magick", convertArgs, {timeout : xu.MINUTE*5, signal : "SIGKILL"});

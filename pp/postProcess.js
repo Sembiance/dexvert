@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil, printUtil, webUtil} from "xutil";
 import {XLog} from "xlog";
 import {path} from "std";
-import {C} from "./ppUtil.js";
+import {C, ALLOWED_PP_ERRORS} from "./ppUtil.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "postProcess",
@@ -101,6 +101,9 @@ class TaskRunner
 
 	addError(errorMsg, critical)
 	{
+		if(!critical && ALLOWED_PP_ERRORS.some(m => (typeof m==="string" ? errorMsg.includes(m) : m.test(errorMsg))))
+			return;
+
 		if(!argv.headless)
 			xlog.error`${critical ? "CRITICAL ERROR: " : ""}${errorMsg}`;
 		if(critical)

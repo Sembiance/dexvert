@@ -198,7 +198,7 @@ export default async function phase3({item, itemWebDirPath, itemThumbDirPath, it
 		taskRunner.increment();
 	};
 
-	const buildThumbPool = new AgentPool(path.join(import.meta.dirname, "..", "agent", "buildThumb.js"), {onSuccess, xlog});
+	const buildThumbPool = new AgentPool(path.join(import.meta.dirname, "..", "buildThumb.agent.js"), {onSuccess, xlog});
 	await buildThumbPool.init();
 	await buildThumbPool.start();
 	buildThumbPool.process(thumbs);

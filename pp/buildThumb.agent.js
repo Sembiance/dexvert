@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {agentInit} from "AgentPool";
 import {path} from "std";
 import {fileUtil, runUtil} from "xutil";
-import {C} from "../ppUtil.js";
+import {C} from "./ppUtil.js";
 
 await agentInit(async ({dexid, meta, filePath, content, itemWebDirPath, itemFileDirPath, itemThumbDirPath}) =>
 {

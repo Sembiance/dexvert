@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <preferences>
 	<level name="application">
-		<context name="AlignDistributePalette">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
-		</context>
-		<context name="Books">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
-		</context>
 		<context name="CharSelect">
-			<attribute key="visible" value="0"/>
-		</context>
-		<context name="ContentPalette">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
 			<attribute key="visible" value="0"/>
 		</context>
 		<context name="DownloadsPalette">
@@ -26,42 +11,20 @@
 			<table name="ExtraFontDirs">
 			</table>
 		</context>
-		<context name="GradientVectorPalette">
-			<attribute key="visible" value="0"/>
-		</context>
 		<context name="GuideManager">
 			<attribute key="visible" value="0"/>
 		</context>
-		<context name="Inline">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
-		</context>
-		<context name="Layers">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
-		</context>
-		<context name="ObjectSize">
-			<attribute key="Origin" value="0"/>
-			<attribute key="Remember" value="1"/>
-			<attribute key="defHeight" value="100"/>
-			<attribute key="defWidth" value="100"/>
+		<context name="NewDocumentWindow">
+			<attribute key="height" value="650"/>
+			<attribute key="width" value="897"/>
 		</context>
 		<context name="PagePalette">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
+			<attribute key="pagePreviewSize" value="96"/>
+			<attribute key="showMasterThumbnails" value="0"/>
 		</context>
-		<context name="PropertiesPalette">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
-		</context>
-		<context name="Sclib">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
+		<context name="PreferencesDialog">
+			<attribute key="height" value="700"/>
+			<attribute key="width" value="1039"/>
 		</context>
 		<context name="Scrapbook">
 			<attribute key="hideDirs" value="0"/>
@@ -69,47 +32,71 @@
 			<attribute key="hideVectors" value="0"/>
 			<attribute key="openMode" value="0"/>
 		</context>
-		<context name="Shap">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="height" value="240"/>
-			<attribute key="left" value="1200"/>
-			<attribute key="top" value="0"/>
-			<attribute key="visible" value="0"/>
-			<attribute key="width" value="220"/>
+		<context name="SectionPPAttributes">
+			<attribute key="collapsed" value="1"/>
 		</context>
-		<context name="Symb">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
+		<context name="SectionPPDropShadow">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionPPFill">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionPPLine">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionPPShape">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionPPXYZ">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="SectionTPAlignment">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="SectionTPColumnsMargins">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionTPFont">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="SectionTPHyphenation">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionTPLists">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionTPOpenTypeFeatures">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionTPOrphansWidows">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionTPStyles">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="SectionTPTextOnPath">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="SectionTPTypography">
+			<attribute key="collapsed" value="1"/>
 		</context>
 		<context name="ToolBar-Edit">
-			<attribute key="IsVisible" value="1"/>
+			<attribute key="IsVisible" value="0"/>
 		</context>
 		<context name="ToolBar-File">
-			<attribute key="IsVisible" value="1"/>
+			<attribute key="IsVisible" value="0"/>
 		</context>
 		<context name="ToolBar-PDF_Tools">
-			<attribute key="IsVisible" value="1"/>
+			<attribute key="IsVisible" value="0"/>
 		</context>
 		<context name="ToolBar-Tools">
-			<attribute key="IsVisible" value="1"/>
-		</context>
-		<context name="Tree">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
+			<attribute key="IsVisible" value="0"/>
 		</context>
 		<context name="checkDocument">
-			<attribute key="height" value="313"/>
-			<attribute key="left" value="1200"/>
-			<attribute key="top" value="0"/>
 			<attribute key="visible" value="0"/>
-			<attribute key="width" value="795"/>
 		</context>
-		<context name="dirs">
-			<attribute key="eps" value="/tmp"/>
-			<attribute key="pdf" value="."/>
+		<context name="documentLogViewer">
+			<attribute key="visible" value="0"/>
 		</context>
 		<context name="marksManager">
 			<attribute key="visible" value="0"/>
@@ -129,7 +116,7 @@
 			<attribute key="Command" value=""/>
 			<attribute key="Copies" value="1"/>
 			<attribute key="CurrentPage" value="0"/>
-			<attribute key="CurrentPrn" value="Brother_HL-L8260CDW_series"/>
+			<attribute key="CurrentPrn" value="File"/>
 			<attribute key="DoGCR" value="0"/>
 			<attribute key="ICCinUse" value="1"/>
 			<attribute key="MirrorH" value="0"/>
@@ -139,6 +126,7 @@
 			<attribute key="PageNr" value=""/>
 			<attribute key="PrintAll" value="1"/>
 			<attribute key="PrintColor" value="0"/>
+			<attribute key="PrintLanguage" value="3"/>
 			<attribute key="PrintRange" value="0"/>
 			<attribute key="SepArt" value="0"/>
 			<attribute key="Separations" value="0"/>
@@ -152,31 +140,59 @@
 			<attribute key="markOffset" value="0"/>
 			<attribute key="registrationMarks" value="0"/>
 		</context>
+		<context name="sectionAlign">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="sectionBleeds">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionDistribute">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="sectionDocument">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="sectionImageClippingPaths">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionImageColorManagement">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionImageDimensions">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="sectionImageEffects">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionImageLayers">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionImagePDF">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionMargins">
+			<attribute key="collapsed" value="0"/>
+		</context>
+		<context name="sectionPreview">
+			<attribute key="collapsed" value="1"/>
+		</context>
+		<context name="sectionTextFrame">
+			<attribute key="collapsed" value="1"/>
+		</context>
 		<context name="styleManager">
 			<attribute key="eX" value="0"/>
 			<attribute key="eY" value="0"/>
 			<attribute key="isEditMode" value="0"/>
 			<attribute key="visible" value="0"/>
 		</context>
-		<context name="uWidget">
-			<attribute key="visible" value="0"/>
-		</context>
 		<context name="undo">
-			<attribute key="enabled" value="1"/>
+			<attribute key="enabled" value="0"/>
 			<attribute key="historylength" value="99"/>
 		</context>
-		<context name="undoPalette">
-			<attribute key="area" value="0"/>
-			<attribute key="floating" value="1"/>
-			<attribute key="visible" value="0"/>
-		</context>
 		<context name="user_preferences">
+			<attribute key="ads_dockstate" value="AAAEsXjalVRdb4IwFH3fr2h4d4JO44NiGMZkybK5oNtzgRvWWFrTFjeX/fi1oAQYMPdEe8+999yPU+bLz5SiIwhJOFtYzq1tIWARjwlLFtZuux7MrKU7f1FefMQsgnjFo73GgpNUkKLXMtBCOwmivOs0PmcKE6YtOewDUwLTNxInoBaWyVMzWe68jEBryrHKS7C1PThQopQ2PwuiQzRiKAaGImPKZO/y+S59JlfkGWkfTwBGWxxKc0V+JgQYaIMT2GAKOlw7FRWjJ5xCHUI+5RJiU9Kw4bYV0MSHhqxGOa5QepQkbEWkEiTMVBf7Iz7pCfcRd+TpichYzNvdzhUH5Auk64zHDrLRfFhc9fc831pLd5WWglMaNht4YFSvvK+cIKIk7HO453zfO4Kc96/ZO5VCf6sTeZTyD4hNQLGoNcWJLMRXI2uJvTDb7cxVoZk3oA9dWhP8AEIRkFessZHqP/0H7/jQ5M5tPXKwtRZGk8kM2R2iuKhmOm2Fh+Xz1+eOH4578wNVm4pS"/>
 			<attribute key="gui_language" value="en_US"/>
-			<attribute key="mainwinstate" value="AAAA/wAAAAD9AAAAAAAAB4AAAAPoAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAUAAAAIAEYAaQBsAGUBAAAAAP////8AAAAAAAAAAAAAAAgARQBkAGkAdAEAAAC//////wAAAAAAAAAAAAAACgBUAG8AbwBsAHMBAAABTP////8AAAAAAAAAAAAAABIAUABEAEYAXwBUAG8AbwBsAHMBAAADm/////8AAAAAAAAAAAAAABQAVgBpAGUAdwBfAFQAbwBvAGwAcwEAAARz/////wAAAAAAAAAA"/>
-			<table name="activeTabs">
-			</table>
-			<table name="tabbedPalettes">
-			</table>
+			<attribute key="mainwinstate" value="AAAA/wAAAAD9AAAAAAAACf4AAAVYAAAABAAAAAQAAAAIAAAACPwAAAACAAAAAAAAAAEAAAAKAFQAbwBvAGwAcwIAAAAA/////wAAAAAAAAAAAAAAAgAAAAQAAAAIAEYAaQBsAGUAAAAAAP////8AAAAAAAAAAAAAAAgARQBkAGkAdAAAAADb/////wAAAAAAAAAAAAAAEgBQAEQARgBfAFQAbwBvAGwAcwAAAAF8/////wAAAAAAAAAAAAAAFABWAGkAZQB3AF8AVABvAG8AbABzAAAAAXz/////AAAAAAAAAAA="/>
 		</context>
 	</level>
 	<level name="plugin">
@@ -194,6 +210,7 @@
 			<attribute key="colorwheel" value="0"/>
 			<attribute key="flattenpath" value="0"/>
 			<attribute key="fontpreview" value="0"/>
+			<attribute key="hunspellplugin" value="0"/>
 			<attribute key="importai" value="0"/>
 			<attribute key="importcdr" value="0"/>
 			<attribute key="importcgm" value="0"/>
@@ -233,6 +250,8 @@
 			<attribute key="scribus134format" value="0"/>
 			<attribute key="scribus13format" value="0"/>
 			<attribute key="scribus150format" value="0"/>
+			<attribute key="scribus170format" value="0"/>
+			<attribute key="scribus171format" value="0"/>
 			<attribute key="scribusexportpixmap" value="0"/>
 			<attribute key="scribusshortwords" value="0"/>
 			<attribute key="scriptplugin" value="1"/>
@@ -258,9 +277,8 @@
 			<attribute key="syntaxtext" value="#000000"/>
 			<table name="recentscripts">
 			</table>
-		</context>
-		<context name="svgex">
-			<attribute key="wdir" value="/mnt/ram/tmp"/>
+			<table name="scriptpaths">
+			</table>
 		</context>
 	</level>
 </preferences>

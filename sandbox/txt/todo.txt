@@ -59,6 +59,10 @@
 /---------------\
 | High Priority |
 \---------------/
+* scribus on linux isn't super solid, funt substituion dialogs break the headless script
+  So create a scribusWin program and install on win7 and use autoit to convert via GUI.
+  Use this as the fallback next converter wherever scribus is currently used
+
 * gameextractor supports over 5,200 game formats but I'm only extracting about 90
   Grab the source code from: https://sourceforge.net/projects/gameextractor/files/ (saved at sandbox/app/gameextractor_316_source.zip just in case)
   Examine the code and the entry point that I currently call, see what flags are supported.

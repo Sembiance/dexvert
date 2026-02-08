@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
-import {_MOV_MAGIC, _MOV_EXT} from "../video/mov.js";
+import {_MOV_MAGIC, _MOV_EXT, _MOV_MAGIC_WEAK} from "../video/mov.js";
 import {RUNTIME} from "../../Program.js";
 
 export class quickTimeAudio extends Format
@@ -18,15 +18,19 @@ export class quickTimeAudio extends Format
 		const validConverters = ["ffmpeg[outType:mp3]"];
 		if(RUNTIME.asFormat!=="audio/quickTimeAudio")
 		{
-			if(dexState.f.input.size<(xu.MB*25))
+			const magicCount = _MOV_MAGIC.map(m => (dexState.hasMagics(m) ? 1 : 0)).sum();
+			if(magicCount>1 || (magicCount===1 && !dexState.hasMagics(_MOV_MAGIC_WEAK)))
 			{
-				RUNTIME.forbidProgram.delete("qt_flatt");
-				validConverters.push("qt_flatt[chainAs:audio/quickTimeAudio]");
-			}
-			else
-			{
-				RUNTIME.forbidProgram.delete("qtflat");
-				validConverters.push("qtflat[chainAs:audio/quickTimeAudio]");
+				if(dexState.f.input.size<(xu.MB*25))
+				{
+					RUNTIME.forbidProgram.delete("qt_flatt");
+					validConverters.push("qt_flatt[chainAs:audio/quickTimeAudio]");
+				}
+				else
+				{
+					RUNTIME.forbidProgram.delete("qtflat");
+					validConverters.push("qtflat[chainAs:audio/quickTimeAudio]");
+				}
 			}
 		}
 

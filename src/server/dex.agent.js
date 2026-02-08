@@ -11,11 +11,13 @@ import {agentInit} from "AgentPool";
 await initRegistry();
 
 const logLines = [];
+const xlog = new XLog("error", {alwaysEcho : true, logger : line => logLines.push(line.decolor())});
 
 await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout, dexvertOptions={}}) =>
 {
 	logLines.clear();
-	const xlog = new XLog(logLevel, {alwaysEcho : true, logger : line => logLines.push(line.decolor())});
+	xlog.level = logLevel;
+	
 	xlog.info`dex.agent.js: handling op ${op} for inputFilePath: ${inputFilePath}  outputDirPath: ${outputDirPath}  timeout: ${timeout}`;
 
 	if(["formatChange", "programChange"].includes(op))
@@ -29,9 +31,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 		return {changeResult : changeLogLines.join("\n")};
 	}
 
-
 	timeout ||= xu.HOUR*2;
-
 
 	let r = null;
 	try
@@ -47,15 +47,11 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 			{
 				if(op==="dexid")
 				{
-					xlog.info`dex.agent.js: calling identify`;
 					r ||= await identify(twigDiskFile, {xlog});
-					xlog.info`dex.agent.js: identify completed`;
 				}
 				else if(op==="dexvert")
 				{
-					xlog.info`dex.agent.js calling dexvert`;
 					const dexState = await dexvert(twigDiskFile, await DexFile.create(outputDirPath), {xlog, ...dexvertOptions});
-					xlog.info`dex.agent.js: dexvert completed`;
 					r ||= dexState ? {json : dexState.serialize(), pretty : dexState.pretty()} : `dexvert failed to return a dexState object for inputFilePath ${inputFilePath} and outputDirPath ${outputDirPath}`;
 				}
 			}
@@ -73,9 +69,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 			r ||= `${op} twigDiskFilePath ${xu.bracket(inputFilePath)} took too long (>${timeout.msAsHumanReadable()}) to process and was aborted (outputDirPath ${outputDirPath})`;
 		}, timeout);
 		tryOp();
-		xlog.info`dex.agent.js: waiting for 'r' to be set`;
 		await xu.waitUntil(() => !!r);
-		xlog.info`dex.agent.js: done waiting for 'r' to be set`;
 		if(tooLongTimer)
 			clearTimeout(tooLongTimer);
 	}
@@ -84,7 +78,5 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 		r = err.stack;
 	}
 
-	const fullResult = {[typeof r==="string" ? "err" : "r"] : r};
-	xlog.info`dex.agent.js: returning fullResult`;
-	return fullResult;
+	return {[typeof r==="string" ? "err" : "r"] : r};
 }, () => Array.from(logLines));

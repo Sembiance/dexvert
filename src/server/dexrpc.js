@@ -10,7 +10,7 @@ import {XLog} from "xlog";
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexserver-dexrpc",
 	version : "1.0.0",
-	desc    : "Pre-starts a bunch of dexvert and dexid agents to be able to evenly distribute CPU load and handle crashes, etc",
+	desc    : "Pre-starts a bunch of agents to handle dexid and dexvert to be able to evenly distribute CPU load and handle crashes, etc",
 	opts    :
 	{
 		startedFilePath : {desc : "Path to write a file to when the server has started", hasValue : true, required : true},
@@ -19,8 +19,7 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const xlog = new XLog(argv.logLevel);
-const DEXVERT_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.75);
-const DEXID_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.35);
+const DEXVERT_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.85);
 const LOCKS = new Set();
 const RPC_RESPONSES = new Map();
 let RPCID_COUNTER = 1;
@@ -49,10 +48,7 @@ const onFail = ({reason, error}, {log, msg}) =>
 };
 
 const dexPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
-const idPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
-
 await dexPool.init();
-await idPool.init();
 
 const runEnv = {};
 for(const [key, value] of Object.entries(Deno.env.toObject()))
@@ -61,11 +57,8 @@ for(const [key, value] of Object.entries(Deno.env.toObject()))
 		runEnv[key] = value;
 }
 
-xlog.info`Starting ${DEXVERT_AGENT_COUNT} dexvert agents...`;
+xlog.info`Starting ${DEXVERT_AGENT_COUNT} dex agents...`;
 await dexPool.start({qty : DEXVERT_AGENT_COUNT, runEnv});
-
-xlog.info`Starting ${DEXID_AGENT_COUNT} dexid agents...`;
-await idPool.start({qty : DEXID_AGENT_COUNT, runEnv});
 
 const monitors = [];
 if(DEV_MACHINE)
@@ -77,7 +70,7 @@ if(DEV_MACHINE)
 		if(change.type==="ready")
 			return monitorsReady.push(op);
 
-		await [idPool, dexPool].parallelMap(async pool => await pool.broadcast({op, change}));
+		await dexPool.broadcast({op, change});
 	};
 
 	monitors.push(await fileUtil.monitor(formatDirPath, async change => await changeHandler("formatChange", change)));
@@ -90,22 +83,22 @@ xlog.info`Starting web RPC...`;
 const routes = new Map();
 
 routes.set("/agentCount", () => new Response(DEXVERT_AGENT_COUNT.toString()));
-routes.set("/status", async () => Response.json(Object.fromEntries(await [["idPool", idPool], ["dexPool", dexPool]].parallelMap(async ([type, pool]) =>
+routes.set("/status", async () =>
 {
-	const status = await pool.status();
+	const status = await dexPool.status();
 	for(const agent of status.agents)
 		agent.log &&= agent.log.join("\n").decolor();
-	return [type, status];
-}))));
+	return Response.json(status);
+});
 
 routes.set("/dex", async request =>
 {
 	const workerData = await request.json();
 	workerData.rpcid = RPCID_COUNTER++;
-	if(RPCID_COUNTER>10_000_000)
+	if(RPCID_COUNTER>99_000_000)
 		RPCID_COUNTER = 1;
 
-	(workerData.op==="dexid" ? idPool : dexPool).process([workerData]);
+	dexPool[workerData.op==="dexid" ? "processPriority" : "process"]([workerData]);
 	await xu.waitUntil(() => RPC_RESPONSES.has(workerData.rpcid));
 	const response = RPC_RESPONSES.get(workerData.rpcid);
 	RPC_RESPONSES.delete(workerData.rpcid);
@@ -140,6 +133,6 @@ await xu.waitUntil(async () => await fileUtil.exists(argv.stopFilePath));
 xlog.info`Stopping...`;
 webServer.stop();
 await monitors.parallelMap(async monitor => await monitor?.stop());
-await [dexPool, idPool].parallelMap(async pool => await pool?.stop());
+await dexPool.stop();
 
 await fileUtil.unlink(argv.stopFilePath);

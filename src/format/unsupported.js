@@ -2214,6 +2214,7 @@ export default
 		appleITunesPhotoDatabase                 : {name : "Apple iTunes Photo Database", magic : ["Apple iTunes Photo Database"]},
 		appleQuickTimeCompressedArchive          : {name : "Apple QuickTime compressed archive", ext : [".qup"], magic : ["Apple QuickTime compressed archive"]},
 		appliedBiosystemsIncFormat               : {name : "Applied Biosystems Inc. Format (ABIF)", ext : [".s1", ".ab1", ".fsa"], magic : ["ABIF - Applied Biosystems Inc. Format", /^fmt\/587( |$)/]},
+		appleSpotlightStoreDataBase              : {name : "Apple Spotlight Store Data Base", ext : [".db"], magic : ["Apple Spotlight Store Data Base"], weakMagic : true},
 		aptCacheData                             : {name : "APT cache data", ext : [".bin"], filename : [/pkgcache/], weakFilename : true, magic : [/^APT cache data/]},
 		archiCADLibraryObject                    : {name : "ArchiCAD Project/Library Object", ext : [".gsm"], magic : ["ArchiCAD Library Object", /^fmt\/1955( |$)/]},
 		arcMasterColorSet                        : {name : "ArcMaster color Set", ext : [".set"], magic : ["ArcMaster color Set"]},

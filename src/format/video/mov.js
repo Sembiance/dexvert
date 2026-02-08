@@ -4,8 +4,9 @@ import {Format} from "../../Format.js";
 const _MOV_MAGIC = [
 	"Apple QuickTime movie", "QuickTime Movie", "Mac QuickTime video", "ISO Media, Apple QuickTime movie", "Apple QuickTime Film", "video/quicktime", /^MacBinary II.+'MooV'/, "Format: QuickTime Movie", /Format: MP4 Video\[qt\s*]/,
 	"Format: MP4 Video[qt", /^x-fmt\/384( |$)/];
+const _MOV_MAGIC_WEAK = ["Apple QuickTime movie (unoptimized)"];
 const _MOV_EXT = [".mov", ".omv", ".pmv", ".qt"];
-export {_MOV_MAGIC, _MOV_EXT};
+export {_MOV_MAGIC, _MOV_MAGIC_WEAK, _MOV_EXT};
 
 export class mov extends Format
 {
@@ -17,12 +18,19 @@ export class mov extends Format
 	idMeta       = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
-	converters   = dexState => [
-		"ffmpeg", "nihav",
-		"nihav[fixedFrameRate:15]",	// this handles certain variable-rate files like mov/Hangman Movie  (see: https://codecs.multimedia.cx/2025/09/new-obscure-formats/comment-page-1/)
-		(dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"),
-		...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"].map(v => `${v}[matchType:magic]`) : [])
-	];
+	converters   = dexState =>
+	{
+		const r = [
+			"ffmpeg", "nihav",
+			"nihav[fixedFrameRate:15]"	// this handles certain variable-rate files like mov/Hangman Movie  (see: https://codecs.multimedia.cx/2025/09/new-obscure-formats/comment-page-1/)
+		];
+
+		const magicCount = _MOV_MAGIC.map(m => (dexState.hasMagics(m) ? 1 : 0)).sum();
+		if(magicCount>1 || (magicCount===1 && !dexState.hasMagics(_MOV_MAGIC_WEAK)))
+			r.push((dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"), ...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"].map(v => `${v}[matchType:magic]`) : []));
+		
+		return r;
+	};
 	notes = xu.trim`
 		So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents.
 		Early quicktime movies had the 'moov' section in the resource fork of the file and the 'mdat' section in the data fork.

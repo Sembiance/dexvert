@@ -1,13 +1,13 @@
 import {Family} from "../Family.js";
 import {videoUtil} from "xutil";
-import {rpcidentify} from "../identify.js";
+import {identify} from "../identify.js";
 
 export class video extends Family
 {
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const {ids : identifications} = await rpcidentify(dexFile);
+		const {ids : identifications} = await identify(dexFile);
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="video" && id.formatid==="mp4");
 		if(!dexid)
 		{

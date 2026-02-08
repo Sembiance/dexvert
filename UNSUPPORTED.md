@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,059)
+# Unsupported File Formats (4,061)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1188,7 +1188,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,773)
+## Other (2,775)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1414,6 +1414,7 @@ Family/Format | Name | Extensions | Notes
 [other/appleInterfaceBuilderNIBArchive](https://discmaster.textfiles.com/search?format=appleInterfaceBuilderNIBArchive) | Apple Interface Builder NIB archive | .nib | 
 [other/appleITunesPhotoDatabase](https://discmaster.textfiles.com/search?format=appleITunesPhotoDatabase) | Apple iTunes Photo Database |  | 
 [other/appleQuickTimeCompressedArchive](https://discmaster.textfiles.com/search?format=appleQuickTimeCompressedArchive) | Apple QuickTime compressed archive | .qup | 
+[other/appleSpotlightStoreDataBase](https://discmaster.textfiles.com/search?format=appleSpotlightStoreDataBase) | Apple Spotlight Store Data Base | .db | 
 [other/applicationObjectTemplate](https://discmaster.textfiles.com/search?format=applicationObjectTemplate) | Application Object Template | .aot | 
 [other/appliedBiosystemsIncFormat](https://discmaster.textfiles.com/search?format=appliedBiosystemsIncFormat) | Applied Biosystems Inc. Format (ABIF) | .s1 .ab1 .fsa | 
 [other/aptCacheData](https://discmaster.textfiles.com/search?format=aptCacheData) | APT cache data | .bin | 
@@ -3040,6 +3041,7 @@ Family/Format | Name | Extensions | Notes
 [other/perFormPROLOCKEDFS](https://discmaster.textfiles.com/search?format=perFormPROLOCKEDFS) | PerForm PRO LOCKEDFS | .lib .fap .fal | 
 [other/perryMasonTheCaseOfTheMandarinMurderGameData](https://discmaster.textfiles.com/search?format=perryMasonTheCaseOfTheMandarinMurderGameData) | Perry Mason: The Case of the Mandarin Murder game data | .cst | 
 [other/perryMasonTheCaseOfTheMandarinMurderGameLogic](https://discmaster.textfiles.com/search?format=perryMasonTheCaseOfTheMandarinMurderGameLogic) | Perry Mason: The Case of the Mandarin Murder game logic |  | 
+[other/personalCADPCCAPSDatabase](https://discmaster.textfiles.com/search?format=personalCADPCCAPSDatabase) | Personal CAD PC-CAPS Database | .sch | 
 [other/personalFinanceManagerPlusData](https://discmaster.textfiles.com/search?format=personalFinanceManagerPlusData) | Personal Finance Manager Plus data | .mny | 
 [other/personalPearlDataBase](https://discmaster.textfiles.com/search?format=personalPearlDataBase) | Personal Pearl data base | .d00 .d01 | 
 [other/persuasionAutoTemplate](https://discmaster.textfiles.com/search?format=persuasionAutoTemplate) | Persuasion AutoTemplate Interchange File Format |  | 

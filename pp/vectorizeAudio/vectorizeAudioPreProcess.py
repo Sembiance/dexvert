@@ -23,11 +23,7 @@ processor = ClapProcessor.from_pretrained("./model/larger_clap_general", local_f
 def worker(i):
 	for fileName in fileNameChunks[i]:
 		try:
-			filePath = os.path.join(sys.argv[1], fileName)
-			try:
-				audio, sr = torchaudio.load(filePath)
-			except Exception:
-				audio, sr = torchaudio.load(filePath, backend="ffmpeg")
+			audio, sr = torchaudio.load(os.path.join(sys.argv[1], fileName))
 			if sr != 48000:
 				audio = torchaudio.functional.resample(audio, sr, 48000)
 			mono = audio.mean(dim=0, keepdim=True)[0].numpy()
@@ -35,7 +31,7 @@ def worker(i):
 			torch.save(inputs.data, os.path.join(sys.argv[2], fileName))
 			print("Pre-processed audio %s" % fileName)	# important to keep so progress bar can be updated
 		except Exception as e:
-			print("Failed to pre-process audio file %s with error: %s" % (fileName, str(e)), file=sys.stderr)
+			print("Failed to pre-process audio file %s with error: %s" % (fileName, str(e).replace('\n', ' ').strip()), file=sys.stderr)
 	return
 
 if __name__ == '__main__':

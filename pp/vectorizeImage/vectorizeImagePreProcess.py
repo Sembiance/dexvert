@@ -31,7 +31,7 @@ def worker(i):
 			torch.save(preprocess(Image.open(os.path.join(sys.argv[1], imageName)).convert("RGB")), os.path.join(sys.argv[2], imageName))
 			print("Pre-processed image %s" % imageName)	# important to keep so progress bar can be updated
 		except Exception as e:
-			print("Failed to pre-process image %s with error: %s" % (imageName, str(e)), file=sys.stderr)
+			print("Failed to pre-process image %s with error: %s" % (imageName, str(e).replace('\n', ' ').strip()), file=sys.stderr)
 	return
 
 if __name__ == '__main__':

@@ -53,7 +53,9 @@ export default async function phase5({itemWebDirPath, itemThumbDirPath, itemFile
 		taskRunner.increment();
 	};
 
-	const prepareImagePool = new AgentPool(path.join(import.meta.dirname, "..", "prepareClassifyImage.agent.js"), {onSuccess, xlog});
+	const onFail = ({reason, error}, {msg}) => taskRunner.addError(`prepareClassifyImage.agent.js failed with ${msg} with reason ${reason}: ${error}`);
+
+	const prepareImagePool = new AgentPool(path.join(import.meta.dirname, "..", "prepareClassifyImage.agent.js"), {onSuccess, onFail, xlog});
 	await prepareImagePool.init();
 	await prepareImagePool.start();
 	prepareImagePool.process(images);

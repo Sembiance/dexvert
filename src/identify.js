@@ -6,7 +6,6 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {Identification} from "./Identification.js";
 import {getDetections} from "./Detection.js";
-import {DEXRPC_HOST, DEXRPC_PORT} from "./dexUtil.js";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
@@ -556,11 +555,3 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 
 	return {idMeta : idMetaData, ids};
 }
-
-export async function rpcidentify(inputFile, {logLevel="error"}={})
-{
-	const rpcData = {op : "dexid", inputFilePath : inputFile.absolute, logLevel};
-	const {r} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
-	return r;
-}
-

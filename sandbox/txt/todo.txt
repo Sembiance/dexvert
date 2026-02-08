@@ -23,9 +23,6 @@
 \-------------/
 * Keep dexdrone0 STATIC as a test base of all truth. Do not update it at all. Instead spawn an identical server and test on that
 
-* Dexpool/idpool, simplify and make it just 1 pool that can either id or dexvert (may already be this way)
-  All 'identifcation' jobs should happen first, so those should always be put at front of queue
-
 * Goal: Get rid of 86box
   Process: Start with winxp, then later win2k
   	Pick a program
@@ -102,8 +99,9 @@
   Then this could be searched upon in discmaster with '# of <glyphs>'
   Of course then re-process ALL FONTS on discmaster
 
-* If need to reverse engineer a program, or crack a long outdated program, purchase and use: https://binary.ninja/purchase/#non-commercial
+* If need to reverse engineer a program or format, or crack a long outdated program, purchase and use: https://binary.ninja/purchase/#non-commercial
   Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
+  This has some interesting features in the 'workbench': https://runhexed.com/
 
 * Authorware, thousands of files, no known extractor:
 	https://discmaster.textfiles.com/search?format=authorware

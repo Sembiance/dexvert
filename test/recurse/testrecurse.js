@@ -59,15 +59,15 @@ async function testSample(samplePath)
 	}
 
 	// compare duration and if >10% difference from expected, log it
-	let durationDiff = Math.abs(resultReport.duration - expectedReport.duration);
-	let durationDiffPercent = (durationDiff/expectedReport.duration)*100;
-	if(durationDiffPercent>10)
-		xlog.warn`Report duration of ${resultReport.duration.msAsHumanReadable({short : true})} has a ${durationDiffPercent.toFixed(1)}% (${durationDiff.msAsHumanReadable({short : true})}) vs expected duration of ${expectedReport.duration.msAsHumanReadable({short : true})}`;
+	let durationDiff = resultReport.duration - expectedReport.duration;
+	let durationDiffPercent = (Math.abs(durationDiff)/expectedReport.duration)*100;
+	if(durationDiffPercent>5)
+		xlog.warn`Report duration of ${resultReport.duration.msAsHumanReadable({short : true})} is ${durationDiff.msAsHumanReadable({short : true})} (${durationDiffPercent.toFixed(1)}%) vs expected ${expectedReport.duration.msAsHumanReadable({short : true})}`;
 
-	durationDiff = Math.abs(resultReport.postProcess.duration-expectedReport.postProcess.duration);
-	durationDiffPercent = (durationDiff/expectedReport.postProcess.duration)*100;
-	if(durationDiffPercent>10)
-		xlog.warn`Report postProcess.duration of ${resultReport.postProcess.duration.msAsHumanReadable({short : true})} has a ${durationDiffPercent.toFixed(1)}% difference of ${durationDiff.msAsHumanReadable({short : true})} vs expected postProcess.duration of ${expectedReport.postProcess.duration.msAsHumanReadable({short : true})}`;
+	durationDiff = resultReport.postProcess.duration-expectedReport.postProcess.duration;
+	durationDiffPercent = (Math.abs(durationDiff)/expectedReport.postProcess.duration)*100;
+	if(durationDiffPercent>5)
+		xlog.warn`Report postProcess.duration of ${resultReport.postProcess.duration.msAsHumanReadable({short : true})} is ${durationDiff.msAsHumanReadable({short : true})} (${durationDiffPercent.toFixed(1)}%) vs expected ${expectedReport.postProcess.duration.msAsHumanReadable({short : true})}`;
 
 	for(const type of ["file", "web", "thumb"])
 	{
@@ -84,10 +84,10 @@ async function testSample(samplePath)
 			xlog.error`${extraKeys.length.toLocaleString()} Extra ${type} sparkey keys:\n\t${[...missingKeys.slice(0, 10), ...(extraKeys.length>10 ? ["<capped to 10> ..."] : [])].join("\n\t")}`;
 	}
 
-	const totalBytesDiff = Math.abs(resultReport.postProcess.totalBytes-expectedReport.postProcess.totalBytes);
-	const totalBytesDiffPercent = (totalBytesDiff/expectedReport.postProcess.totalBytes)*100;
+	const totalBytesDiff = resultReport.postProcess.totalBytes-expectedReport.postProcess.totalBytes;
+	const totalBytesDiffPercent = (Math.abs(totalBytesDiff)/expectedReport.postProcess.totalBytes)*100;
 	if(totalBytesDiffPercent>10)
-		xlog.warn`Report postProcess.totalBytes of ${resultReport.postProcess.totalBytes.bytesToSize()} has a ${totalBytesDiffPercent.toFixed(1)} difference of ${totalBytesDiff.bytesToSize()} vs expected postProcess.totalBytes of ${expectedReport.postProcess.totalBytes.bytesToSize()}`;
+		xlog.warn`Report postProcess.totalBytes of ${resultReport.postProcess.totalBytes.bytesToSize()} is ${totalBytesDiff<0 ? "-" : ""}${Math.abs(totalBytesDiff).bytesToSize()} (${totalBytesDiffPercent.toFixed(1)}) vs expected ${expectedReport.postProcess.totalBytes.bytesToSize()}`;
 
 	for(const key of ["handledCount", "fileCount", "indexedCount"])
 	{
@@ -134,6 +134,8 @@ async function testSample(samplePath)
 	if(resultIndexCount!==Object.keys(expectedIndex).length)
 		xlog.error`Result index file has ${resultIndexCount.toLocaleString()} !== ${Object.keys(expectedIndex).length.toLocaleString()} expected`;
 
+	// TODO don't delete outDir if there were any errors (not warnings, just errors)
+	// xlog.info`Output in (up to you to delete it): ${outDirPath}`;
 	await fileUtil.unlink(outDirPath, {recursive : true});
 }
 

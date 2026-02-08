@@ -21,6 +21,7 @@ const ALLOWED_PP_ERRORS =
 	"improper image header",
 	"insufficient image data in file",
 	"InstExpl.wcx",
+	"Invalid data found when processing input",
 	"invalid colormap index",
 	"invalid matrix (not invertible)",
 	"InvalidStateError: readyState not OPEN",
@@ -30,11 +31,11 @@ const ALLOWED_PP_ERRORS =
 	"output dimensions must be positive",
 	"Output file #0 does not contain any stream",	// happens if an MP4 video only has an audio stream: https://discmaster.textfiles.com/browse/17034/Sybex_Virtual_Trainer_CCNP_Switching.iso/ccnp2711/media/content/graphics/animations/0104_sounds/11.swf
 	"provided data has not an UTF-8 encoding",
-	"QuickTime™ Musical Instruments",
 	"SVG data parsing failed cause an unknown namespace prefix",
 	"SVG data parsing failed cause nodes limit reached",
 	"SVG data parsing failed cause the document does not have a root node",
 	"SVG has an invalid size",
+	"The best audio stream is unknown",
 	"unknown entity reference '"
 ];
 export {ALLOWED_PP_ERRORS};

@@ -1,11 +1,11 @@
-# Supported File Formats (3,539)
+# Supported File Formats (3,540)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (534)
+## Archive (535)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -105,7 +105,7 @@ archive | CI GAMES game data archive | .dpk | [gameextractor](http://www.watto.o
 archive | [CISO Compressed ISO](https://web.archive.org/web/20230714160428/https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/cso/)
 archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+source/cloop/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/cloopImage/)
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
-archive | Coktel Vision STK Archive | .stk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK/)
+archive | Coktel Vision STK Archive | .stk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK/)
 archive | Coktel Vision STK2 Archive  | .itk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK2/)
 archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
@@ -213,7 +213,7 @@ archive | Half Life Model | .mdl | [Crowbar](https://github.com/ZeqMacaw/Crowbar
 archive | [Hamarsoft HAP Archive](http://fileformats.archiveteam.org/wiki/HAP) | .hap | [hap210](https://archive.org/details/msdos_festival_HAPPAH21) [hap306](https://archive.org/details/msdos_festival_HAPPAH21) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/hap/)
 archive | [Hammer](http://fileformats.archiveteam.org/wiki/Hammer_(compression)) | .hmr | [hammer_decomp](https://github.com/Treeki/RandomStuff/blob/master/hammer_decomp.py) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/hammer/)
 archive | Harry Potter: Quidditch World Cup archive | .ccd | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/harryPotterQuidditchWorldCupArchive/)
-archive | Hell: A Cayberpunk Thriller Library | .pl | [na_game_tool_extract](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/hellLib/)
+archive | Hell: A Cayberpunk Thriller Library | .pl | [na_game_tool_extract](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/hellLib/)
 archive | [Hemera Thumbnails Archive](http://fileformats.archiveteam.org/wiki/HTA_(Hemera)) | .hta | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/hemeraThumbnailsArchive/)
 archive | [Highway Hunter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Highway_Hunter)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/highwayHunterGameArchive/)
 archive | Highway Pursuit game data archive | .hvd .hfd .hod .hsd .hmd .hgd | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/highwayPursuitGameDataArchive/)
@@ -240,7 +240,7 @@ archive | [ImageDisk Disk Image](http://fileformats.archiveteam.org/wiki/IMD) | 
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/imageUSB/)
 archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
-archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innounp](https://innounp.sourceforge.net/) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
+archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innoextract](https://github.com/dscharrer/innoextract) [innounp](https://innounp.sourceforge.net/) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
 archive | [InstallShield Archive](http://fileformats.archiveteam.org/wiki/InstallShield_archive_(IBT)) | .ibt | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldArchive/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldCAB/)
@@ -325,7 +325,7 @@ archive | [Mythos Software Game Archive](https://moddingwiki.shikadi.net/wiki/LI
 archive | NASCAR Heat game archive | .trk .car | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/nascarHeatGameArchive/)
 archive | NeoBook Cartoon | .car | [foremost](http://foremost.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/neoBookCartoon/)
 archive | Neobook Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/neobookPacked/)
-archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [dd](https://www.gnu.org/software/coreutils/) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/nrg/)
+archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [aaruConvert](https://github.com/aaru-dps/Aaru) [dd](https://www.gnu.org/software/coreutils/) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/nrg/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/news/) - Converter currently doesn't handle when just a single newsgroup message is saved in a file
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImage/)
 archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImageDump/)
@@ -447,6 +447,7 @@ archive | [Softdisk LIBrary Game Data Archive](https://moddingwiki.shikadi.net/w
 archive | Sony PSP Theme | .ptf | [ptf_extract](https://github.com/GeofrontTeam/LibPSPThemes) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sonyPSPTheme/)
 archive | SouthPeak Puzzle Archive | .mco | [na_game_tool_extract](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/southPeakPuzzleArchive/)
 archive | SpaceMaker Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/spaceMakerPacked/)
+archive | SpinBaker SBX Archive | .sb | [spinBakerSBX](http://web.archive.org/web/20001218041900/www.spinnerbaker.com/sbx.htm) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/spinBakerSBX/)
 archive | [SQLLite3 Database](http://fileformats.archiveteam.org/wiki/SQLite) | .sqlite .sqlite3 .db | [unSqlite3](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sqlLite3/)
 archive | [SQUASH Archive](http://fileformats.archiveteam.org/wiki/Squash_(RISC_OS)) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/squash/) - Alternative de-archiver I didn't try: https://github.com/mjwoodcock/riscosarc/
 archive | [SquashFS Image](http://fileformats.archiveteam.org/wiki/Squashfs) | .squashfs .sfs .squash | [unsquashfs](https://github.com/plougher/squashfs-tools/) [sevenZip](http://p7zip.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/squashFS/)
@@ -656,7 +657,7 @@ audio | Sony PS3 MSF | .msf | [ffmpeg](https://ffmpeg.org/) | [4 sample files](h
 audio | Sony PS3 XVAG | .xvag | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sonyXVAG/)
 audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/soundDesignerAudio/)
 audio | Sounder | .snd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sounder/)
-audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont1/)
+audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont1/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
 audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
 audio | [Speex Encoded Audio](http://fileformats.archiveteam.org/wiki/Speex) | .spx | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/speex/)
@@ -1134,7 +1135,7 @@ image | Character Studio thumbnail | .bip | [nconvert](https://www.xnview.com/en
 image | [CharPad](http://fileformats.archiveteam.org/wiki/CharPad) | .ctm | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/charPad/)
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/cheese/)
 image | [COKE TG1](http://fileformats.archiveteam.org/wiki/COKE_(Atari_Falcon)) | .tg1 | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/tg1/)
-image | COL Format 256 Color palette | .res .col | [wuimg](https://codeberg.org/kaleido/wuimg) | [12 sample files](https://sembiance.com/fileFormatSamples/image/colFormatColorPalette/)
+image | COL Format 256 Color palette | .res .col | [wuimg](https://codeberg.org/kaleido/wuimg) | [17 sample files](https://sembiance.com/fileFormatSamples/image/colFormatColorPalette/)
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [13 sample files](https://sembiance.com/fileFormatSamples/image/rix/)
 image | ColorSTar/MonoSTar | .bil .obj | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/colorSTar/)
 image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/colorViewSquash/)
@@ -1370,7 +1371,7 @@ image | [JPEG XL](http://fileformats.archiveteam.org/wiki/JPEG_XL) | .jxl | [ico
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/jpegXR/)
 image | [JPEG-LS](http://fileformats.archiveteam.org/wiki/JPEG-LS) | .jls | [wuimg](https://codeberg.org/kaleido/wuimg) [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/image/jpegLS/)
 image | JustButtons Button | .btn | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/justButtonsButton/)
-image | Kaboom Studios Bitmap Block | .bmb | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 sample files](https://sembiance.com/fileFormatSamples/image/kaboomStudiosBitmapBlock/)
+image | Kaboom Studios Bitmap Block | .bmb | [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/kaboomStudiosBitmapBlock/)
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tomsViewer](https://tomseditor.com/blog/viewer) | [13 sample files](https://sembiance.com/fileFormatSamples/image/viff/)
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [gimp](https://gimp.org) | [11 sample files](https://sembiance.com/fileFormatSamples/image/kissCel/)
 image | Kitty NEC PC-88 | .kt4 .kty | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/kittyNECPC88/)
@@ -3549,7 +3550,7 @@ video | [Mailestrom ANM](https://wiki.multimedia.cx/index.php/Maelstrom_ANM) | .
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)
 video | Microids GRN Video | .grn | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/microidsGRN/)
 video | [Motion JPEG 2000](http://fileformats.archiveteam.org/wiki/MJ2) | .mj2 .mjp2 | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/motionJPEG2000/)
-video | [Motion Pixels MVI](https://wiki.multimedia.cx/index.php/Motion_Pixels) | .mvi | [nihav](https://git.nihav.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/motionPixelsMVI/)
+video | [Motion Pixels MVI](https://wiki.multimedia.cx/index.php/Motion_Pixels) | .mvi | [nihav](https://git.nihav.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/video/motionPixelsMVI/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [xanim](https://github.com/Sembiance/xanim) | [71 sample files](https://sembiance.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably. CYC and demo_5 don't convert. Also exists is video/movieSetterSet which is currently unsupported, don't know what can convert it.
 video | MP Entertainment Animation | .anm .seq | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/mpEntertainmentAnimation/)
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/video/mpeg1/)

@@ -6,6 +6,5 @@ export class innoSetupArchive extends Format
 	ext            = [".bin"];
 	forbidExtMatch = true;
 	magic          = ["Inno Setup archive", "Inno Archiv gefunden", "Archive: Inno Setup"];
-	unsupported    = true;
-	notes          = "Could maybe write my own extractor, see sandbox/app/ednaunpack";
+	unsupported    = true;	// handled by innoSetupInstaller
 }

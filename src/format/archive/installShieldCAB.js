@@ -2,11 +2,11 @@ import {Format} from "../../Format.js";
 
 export class installShieldCAB extends Format
 {
-	name          = "InstallShield CAB";
-	website       = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
-	ext           = [".cab"];
-	magic         = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield Compressed Archive", "ISC Archiv gefunden", "Archive: InstallShield Cabinet File"];
-	keepFilename  = true;
+	name         = "InstallShield CAB";
+	website      = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
+	ext          = [".cab"];
+	magic        = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield Compressed Archive", "ISC Archiv gefunden", "Archive: InstallShield Cabinet File"];
+	keepFilename = true;
 	auxFiles     = (input, otherFiles) =>
 	{
 		if(input.ext.toLowerCase()===".hdr")

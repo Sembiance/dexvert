@@ -1647,6 +1647,7 @@ export default
 		starWarsGalaxiesTREArchive                    : {name : "Star Wars Galaxies TRE archive", ext : [".tre", ".bin"], magic : ["Star Wars Galaxies TRE archive"], weakMagic : true},
 		starWarsJediKnightJediAcademyMap              : {name : "Star Wars Jedi Knight: Jedi Academy map", ext : [".bsp"], magic : ["Star Wars Jedi Knight: Jedi Academy map"], weakMagic : true},
 		starWarsJediKnightBotNavigationRoutes         : {name : "Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info", ext : [".nav"], magic : ["Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info"], weakMagic : true},
+		starWarsJediKnightDarkForces2SaveGame         : {name : "Star Wars: Jedi Knight - Dark Forces II save game", ext : [".jks"], magic : ["Star Wars: Jedi Knight - Dark Forces II save game"]},
 		starWarsJediKnight2SaveGame                   : {name : "Star Wars: Jedi Knight II - Jedi Outcast save game", ext : [".sav"], magic : ["Star Wars: Jedi Knight II - Jedi Outcast save game"]},
 		steelPanthersShapesData                       : {name : "Steel Panthers Shapes data", ext : [".shp"], magic : ["Steel Panthers Shapes data"], weakMagic : true},
 		stepManiaCourse                               : {name : "StepMania Course", ext : [".crs"], magic : ["StepMania Course"], weakMagic : true},

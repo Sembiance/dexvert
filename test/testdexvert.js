@@ -13,7 +13,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		format     : {desc : "Only test a single format: archive/zip", hasValue : true},
-		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true, multiple : true},
+		file       : {desc : "Only test these sample files, case insensitive.", hasValue : true, multiple : true},
 		serial     : {desc : "Perform only 1 test at a time, this helps when debugging"},
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
 		json       : {desc : "Output results as JSON"},
@@ -728,7 +728,7 @@ sampleFilePaths.filterInPlace(sampleFilePath =>
 });
 
 if(argv.file?.length)
-	sampleFilePaths.filterInPlace(sampleFilePath => argv.file.some(targetFile => sampleFilePath.toLowerCase().endsWith(targetFile.toString().toLowerCase())));
+	sampleFilePaths.filterInPlace(sampleFilePath => argv.file.some(targetFile => path.basename(sampleFilePath).toLowerCase()===targetFile.toString().toLowerCase()));
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {

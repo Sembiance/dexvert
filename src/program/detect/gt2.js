@@ -10,12 +10,12 @@ export class gt2 extends Program
 	website = "https://www.helger.com/gt/gt2.htm";
 	loc     = "wine";
 	bin     = "c:\\Program Files\\GT2\\gt2.exe";
-	args      = async r =>
+	args    = async r =>
 	{
-		// disktype gets confused by some filenames, especially if they have control characters, so rename first: https://discmaster.textfiles.com/view/42767/NatGeoPhoto_002.tar/0020272_Biologist%20Fumika%20Takahashi%20searches%20for%20the%20federally%20endangered%20vernal%20pool%20tadpole%20shrimp,%20Lepidurus%20packardi,%20at%20the%20Kesterson%20Unit%20of%20the%20San%20Luis%20National%20Wildlife%20Refuge.%0a%0aThese%20rare%20shrimp%20have.jpg
+		// gt2 gets confused by some filenames (image/jpeg/0020272_*) and some extensions (executable/exe/el.-%0Aexit%0A), so rename first
 		// we do it in args because this is the first time we have access to r.wineData.wineCounter
 		const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
-		const gt2FilePath = await fileUtil.genTempPath(path.join(wineBaseEnv.base.WINEPREFIX, "drive_c", `in${r.wineCounter}`), r.f.input.ext || "");
+		const gt2FilePath = await fileUtil.genTempPath(path.join(wineBaseEnv.base.WINEPREFIX, "drive_c", `in${r.wineCounter}`), (r.f.input.ext || "").replaceAll(/[\t\n\r]/g, " "));
 		await Deno.mkdir(path.dirname(gt2FilePath), {recursive : true});
 		try
 		{

@@ -34,12 +34,30 @@
   If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
   After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
-* Re-imagine how dexrpc requests are tracked throughout it's life cycle.
-  Ideally I'd keep track of the lifecycle history of each dexrpc request (id, programs, os, dos, etc), how long it spent in each area
+* Re-imagine how dexvert requests are tracked throughout it's life cycle.
+  Create a new deno/sight/sight.js project. It's a generic thing that can be used in other projects that need to track 'lifecycles' of ops
+  It'll expose functions: init, service
+  dexserver would start by created like: init(masterPort)
+  	That'll start up a web server with some internal /msg type urls for future services/ops to log
+	Same web server will have a /status  that can be used to see what's going on
+  Services can then register with const service = register({masterPort, name : "service name", update : async () => { return {current, status}}})
+	service.update({various, stats, here, whatever, running : false, state : "loading", subState : "finding files...", loadPercentage : 47})
+	const op = service.op({name : "dexvert", update : async () => { return {current, status}}})
+	op.update({op, status}
+	op.log`msg with ${data} inline ${var} yah`;
+	const subOp = op.op({name : "identify"})
+	const subOp = op.op({name : "Program.run", type : "os", os : "win2k", programid : "whatever", flags : "whatever", etc})
+	op.done({err : error, msg : "why"});  /// magic 'err' the op will be marked as failed with any other keys specific as meta
+  When vising the website show all current services, with all ops for each service active and past with their current update data and a log of messages
+  When someone visits teh /status website each service and active op that registerd an update handler, that handler will be called via HTTP
+    That means when starting a service, it to will start a webserver and listen ona  port it tells master about to deliver live status updates
+  The idea is a service might not support the 'live' update with the update callback, it might just send periodic updates
+  Or maybe it never called .update() proactively at all and instead only returns update data when requested
+  Since loading /status blocks on calling these update handlers over HTTP back to the service, it should return data fast
+  Might be nice if the master could be told to log 'snapshots' to disk every X interval. basically call the /status page and write the HTML to disk
+  Master keeps track of when each op started, so knows how long it's been in that op and can show duration
+  Would be nice to have a /stats that will take all ran ops and give average durations for the various names, maybe some way to group lower
   So it should it should certainly list the 'converters' that were identified to be ran for this format, which ones it's done (and how long they took) which one it's on (and how long it's been waiting) and which ones still to do
-  NICE TO HAVE would be an internal /status website in dexserver that can show me the current status of dexvert, which programs ran, stats on them, what it's doing now and for how long, etc
-  EXTRA BONUS if it's possible to cancel at any point of the process, this seems pretty unrealistic though, if I can just get more data about where things are being held up, then I can optimize which converters are ran in which situations, tighten identifications, etc
-  This will help me nail down why sometimes files seem to just 'hang' for like 2 hours
 
 * Would be great dexrecurse would generate an HTML 'report' that contains statistics of all files it did along with lifecycle stats, etc
   The idea is I could analyze this report to find things to optimize and improve
@@ -160,9 +178,6 @@
 
 * Fix garbage degas low res? https://discmaster.textfiles.com/browse/35046/PC%20Actual%20CD%2053.iso/Juegos/Alice/alice_demo.exe/demo/pak0.pk3/textures/natural
 
-* Add archive/innoSetupArchive support for the ~2,600 files: https://discmaster.textfiles.com/search?format=innoSetupArchive
-  See about converting this Java code to javascript to extract them.
-  Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://discmaster.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
 
 >>> Blender 5
 * Update to Blender 5. I could go with the binary verison (https://download.blender.org/release/Blender5.0/) or Gentoo.

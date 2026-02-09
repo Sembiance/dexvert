@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
-import {fileUtil} from "xutil";
+import {fileUtil, runUtil} from "xutil";
 import {DexFile} from "../../DexFile.js";
 import {Program} from "../../Program.js";
 import {path, base64Encode} from "std";
@@ -292,7 +292,7 @@ export class iso extends Format
 			await findCUEFile(dexState);
 		}
 
-		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info", "fuseTree", "parted"].parallelMap(async programid =>
+		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info", "fuseTree", "parted", "lsdvd"].parallelMap(async programid =>
 		{
 			const infoR = await Program.runProgram(programid, inputFile, {xlog, autoUnlink : true});
 			return [programid.split("_")[0], infoR.meta];
@@ -356,6 +356,18 @@ export class iso extends Format
 				await fileUtil.unlink(macFilePath);
 				await Deno.symlink(path.relative(path.dirname(macFilePath), pcFilePath), macFilePath);
 			}, 2);
+		}
+
+		const videoTSDir = outputDirs.find(dir => dir.toLowerCase()==="video_ts");
+		if(videoTSDir && dexState.meta?.lsdvd?.track?.length)
+		{
+			dexState.xlog.info`Found VIDEO_TS dir & lsdvd tracks. Converting with dvd2mp4.sh and replacing original VIDEO_TS directory...`;
+			const tmpOutDirPath = await fileUtil.genTempPath(dexState.f.outDir.absolute);
+			await Deno.mkdir(tmpOutDirPath);
+			const videoTSDirPath = path.join(dexState.f.outDir.absolute, videoTSDir);
+			await runUtil.run(Program.binPath("dvd2mp4.sh"), [dexState.f.input.absolute, tmpOutDirPath]);
+			await fileUtil.unlink(videoTSDirPath, {recursive : true});
+			await Deno.rename(tmpOutDirPath, videoTSDirPath);
 		}
 	};
 }

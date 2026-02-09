@@ -21688,6 +21688,7 @@ Supported archive extractors:
  pivideo (PI-Video)
  qdesign-music (QDesign Music)
  qdesign-music2 (QDesign Music v2)
+ qdraw (Apple QuickDraw)
  qpeg-dvc (QPEG video in DVC)
  qt-rle (Apple Animation)
  qt-smc (Apple Graphics)

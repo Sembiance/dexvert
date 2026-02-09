@@ -210,6 +210,7 @@ export class deark extends Program
 			makichan  : "This is probably not a MAKIchan file.",
 			shg       : "This is probably not an SHG/MRB file.",
 			tinystuff : "Warning: Expected file size to be",
+			uuencode  : "Error: Bad uuencoded data",
 			zsq       : "Checksum error. Decompression probably failed"
 		}).some(([module, message]) => r.stdout.includes(`Module: ${module}`) && r.stdout.includes(message)))
 			return false;

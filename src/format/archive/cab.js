@@ -28,5 +28,5 @@ export class cab extends Format
 	};
 	untouched = dexState => dexState.id?.auxFiles?.length && dexState.original?.input?.ext!==".1";	// If we do have aux files, then we are a multi-part cabinet and we need to only process the first part as it gets everything
 	keepFilename = true;
-	converters   = ["cabextract", "sqc", "deark[module:cab]", "izArc", "UniExtract"];
+	converters   = ["cabextract", "sqc", "deark[module:cab]", "izArc[matchType:magic]", "UniExtract[matchType:magic]"];
 }

@@ -61,6 +61,9 @@ const EXTRA_PACKAGES =
 	// needed by boo2pdf
 	"x11-libs/libXtst",
 
+	// used by dvd2mp4.sh
+	"media-video/handbrake",
+
 	// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
 	"dev-lang/perl",
 

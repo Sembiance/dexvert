@@ -14,10 +14,10 @@ export class innoSetupInstaller extends Format
 		const archiveFiles = [];
 		for(const otherFile of otherFiles)
 		{
-			if(otherFile.size<5)
+			if(otherFile.size<7)
 				continue;
-			const header = await fileUtil.readFileBytes(otherFile.absolute, 5);
-			if(header.getString(0, 5)==="idska")
+			const headerString = (await fileUtil.readFileBytes(otherFile.absolute, 7)).getString(0, 7);
+			if(["idska32", "Inno Se", "My Inno", /^i\d\.\d\.\d/, /^i\d{3}/].some(v => (typeof v==="string" ? headerString.startsWith(v) : v.test(headerString))))
 				archiveFiles.push(otherFile);
 		}
 		return archiveFiles.length ? archiveFiles : false;

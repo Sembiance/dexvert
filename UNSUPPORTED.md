@@ -135,7 +135,7 @@ Family/Format | Name | Extensions | Notes
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?format=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
 [archive/imageForWindowsDiskImage](https://discmaster.textfiles.com/search?format=imageForWindowsDiskImage) | Image for Windows Disk Image | .tbi | 
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?format=imageLibrarianArchive) | Image Librarian archive | .ril | 
-[archive/innoSetupArchive](https://discmaster.textfiles.com/search?format=innoSetupArchive) | Inno Setup Archive | .bin | [1 sample file](https://sembiance.com/fileFormatSamples/archive/innoSetupArchive/)
+[archive/innoSetupArchive](https://discmaster.textfiles.com/search?format=innoSetupArchive) | Inno Setup Archive | .bin .0 .1 .2 .3 .4 .5 .6 .7 .8 .9 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/innoSetupArchive/)
 [archive/installationPackage](https://discmaster.textfiles.com/search?format=installationPackage) | Installation package | .d01 | 
 [archive/installerVISE](https://discmaster.textfiles.com/search?format=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 [archive/interfaze](https://discmaster.textfiles.com/search?format=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)

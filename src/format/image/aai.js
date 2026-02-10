@@ -8,4 +8,5 @@ export class aai extends Format
 	mimeType     = "image/x-dune";
 	metaProvider = ["image"];
 	converters   = ["convert", "wuimg[format:aai]"];	// "tomsViewer"
+	verify       = ({meta}) => meta.height>1 && meta.width>1;
 }

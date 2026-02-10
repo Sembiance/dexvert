@@ -14,9 +14,7 @@
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
 * See about fixing:
-	image/paintDotNetImage/ui_ingame2_common.pdn
 	poly/nif
-	
 
 /-------------\
 | dexvert 3.0 |
@@ -77,10 +75,6 @@
 * Reverse engineer registration code for: ssbx.exe
 	Use: https://binary.ninja/purchase/#non-commercial
 	Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
-
-* scribus on linux isn't super solid, funt substituion dialogs break the headless script
-  So create a scribusWin program and install on win7 and use autoit to convert via GUI.
-  Use this as the fallback next converter wherever scribus is currently used
 
 * gameextractor supports over 5,200 game formats but I'm only extracting about 90
   Grab the source code from: https://sourceforge.net/projects/gameextractor/files/ (saved at sandbox/app/gameextractor_316_source.zip just in case)
@@ -263,6 +257,10 @@
   https://discmaster.textfiles.com/search?format=folioDatabase
   May be worth paying someone to reverse engineer it
   Afterwards, search 'itaitem' for: infobase     folio
+
+* scribus on linux isn't super solid, font substitution dialogs break the headless script
+  So create a scribusWin program and install on win7 and use autoit to convert via GUI.
+  Use this as the fallback next converter wherever scribus is currently used
 
 * Figure out how to extract archive/stackerCompressedVolume as these may be stacker:
 	https://discmaster.textfiles.com/search?family=unknown&sizeMin=20MB&detection=535441434b4552*&dedup=dedup

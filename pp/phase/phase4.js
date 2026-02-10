@@ -116,7 +116,7 @@ export default async function phase4({item, itemWebDirPath, taskRunner, xlog})
 					indexData.textContent.push(fileData.comment);
 
 				// archive files original to the item should include the ITEM name and description as part of the textContent
-				if(itemOriginalFileids.includes(fileData.fileid) && fileData.family==="archive")
+				if(itemOriginalFileids.includes(fileData.fileid) && fileData.family==="archive" && item.itemid!==7)
 				{
 					indexData.textContent.push(item.title);
 					if(item.description?.length)

@@ -853,7 +853,7 @@ document | PC-Type Document | .pct | [strings](https://www.gnu.org/software/binu
 document | [PCBoard Programming Language Executable](https://en-academic.com/dic.nsf/enwiki/3064510) | .ppe | [pplx](http://files.mpoli.fi/unpacked/tlr/pcboard_bbs_utilities/agsppx20.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/pcBoardPPE/)
 document | PCP Help Text | .pag | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://sembiance.com/fileFormatSamples/document/pcpHelpText/)
 document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/peterNortonHelp/)
-document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [12 sample files](https://sembiance.com/fileFormatSamples/document/pdf/)
+document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [11 sample files](https://sembiance.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/PostScript) | .ps | [ps2pdf](https://ghostscript.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/ps/)
 document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx .potx | [soffice](https://www.libreoffice.org) | [21 sample files](https://sembiance.com/fileFormatSamples/document/powerPoint/)
 document | Professional Page Document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/professionalPage/)
@@ -943,7 +943,7 @@ document | ZX Spectrum DOS BASIC Source Code | .bas | [strings](https://www.gnu.
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/executable/epocExecutable/)
-executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/executable/macOSExecutable/)
+executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [18 sample files](https://sembiance.com/fileFormatSamples/executable/macOSExecutable/)
 executable | [Microsoft Windows Dynamic Link Library](http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)) | .dll |  | [25 sample files](https://sembiance.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe |  | [48 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
 executable | [Psion IMG/APP](http://fileformats.archiveteam.org/wiki/Psion_IMG/APP) | .app .img | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionAPP/)

@@ -2,24 +2,18 @@ import {xu, fg} from "xu";
 import {path} from "std";
 import {runUtil, fileUtil} from "xutil";
 import {appendCommonFuncs} from "./autoItUtil.js";
-
-export const WINE_WEB_HOST = "127.0.0.1";
-export const WINE_WEB_PORT = 17737;
-export const WINESERVER_VNC_BASE_PORT = 9940;
-
-export const WINE_PREFIX_SRC = path.join(import.meta.dirname, "..", "wine");
-export const WINE_PREFIX = "/mnt/ram/dexvert/wine";
+import {C} from "./C.js";
 
 export function getWineDriveC(base)
 {
-	return path.join(WINE_PREFIX, base, "drive_c");
+	return path.join(C.WINE_PREFIX, base, "drive_c");
 }
 
 // Key names: /usr/include/X11/keysymdef.h
 // Wine Guide: https://wiki.winehq.org/Wine_User%27s_Guide
 export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, keepOutput, script, wineCounter, timeout=xu.MINUTE*10, timeoutSignal="SIGTERM", xlog})
 {
-	const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
+	const wineBaseEnv = await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getBaseEnv`)).json();
 	if(!Object.keys(wineBaseEnv).includes(base))
 		throw new Error(`Invalid wine base '${base}' for cmd [${cmd}] valid bases: [${Object.keys(wineBaseEnv).join("], [")}]`);
 

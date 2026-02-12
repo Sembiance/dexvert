@@ -1,20 +1,21 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {C} from "../../C.js";
 
 export class gameextractor extends Program
 {
-	website      = "http://www.watto.org/game_extractor.html";
-	package      = "games-util/gameextractor";
-	bin          = "gameextractor";
+	website = "https://sourceforge.net/projects/gameextractor/files/";
+	loc     = "local";
+	flags   = {
+		codes : "Specify which format code to treat the input file as. REQUIRED"
+	};
 	checkForDups = true;
-
-	// gameextractor requires full absolute paths
-	args = r => ["-extract", "-input", r.inFile({absolute : true}), "-output", r.outDir({absolute : true})];
-
-	// gameextractor always opens an X window (thus virtualX) and on some files it just hangs forever (thus timeout)
-	runOptions = ({virtualX : true, timeout : xu.MINUTE*1, killChildren : true});
-	verify     = (r, dexFile) => dexFile.size<Math.max(r.f.input.size*3, xu.MB*5);		// some files are mistakenly identified as zlib and HUGE files are created
-	renameOut  = false;
-
-	// Sometimes gameextractor files with _ge_decompressed suffixes in the INPUT dir. Since this is in the INPUT dir, I don't really care
+	exec         = async r =>
+	{
+		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true}), codes : r.flags.codes.split(",")}, asJSON : true});
+		if(result?.error)
+			r.xlog.error`GameExtractor error for codes ${r.flags.codes}: ${result.error}`;
+	};
+	verify    = (r, dexFile) => dexFile.size<Math.max(r.f.input.size*3, xu.MB*5);		// some files are mistakenly identified as zlib and HUGE files are created
+	renameOut = false;
 }

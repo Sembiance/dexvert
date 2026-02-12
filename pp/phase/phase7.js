@@ -1,7 +1,8 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {path} from "std";
-import {C, classify} from "../ppUtil.js";
+import {classify} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 
 // Phase 7 - Any browser-safe audio should be processed with vectorization for auditory simularity search
 export default async function phase7({itemWebDirPath, itemClassifyDirPath, taskRunner, xlog})

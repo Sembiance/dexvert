@@ -3,7 +3,7 @@ import {fileUtil} from "xutil";
 import {path, delay, assertStrictEquals} from "std";
 import {Program} from "../../src/Program.js";
 import {XLog} from "xlog";
-import {DEV_MACHINE} from "../dexUtil.js";
+import {C} from "../C.js";
 
 const programs = {};
 export {programs};
@@ -36,7 +36,7 @@ async function loadProgramFilePath(programFilePath, {reload}={})
 		console.warn(`program ${programid} has ${"allowDupOut"} set to true, but does not have a ${"chain"} this is quite dangerous! Could lead to infinite recursion on processing server`);
 }
 
-export async function init(xlog=new XLog(DEV_MACHINE ? "info" : "error"))
+export async function init(xlog=new XLog(C.IS_DEV_MACHINE ? "info" : "error"))
 {
 	if(initCalled)
 		return;

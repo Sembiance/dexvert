@@ -2,7 +2,8 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil, printUtil, webUtil} from "xutil";
 import {XLog} from "xlog";
 import {path} from "std";
-import {C, ALLOWED_PP_ERRORS} from "./ppUtil.js";
+import {ALLOWED_PP_ERRORS} from "./ppUtil.js";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "postProcess",
@@ -19,7 +20,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "itemDirPath", desc : "The path to the item dexrecurse outputs including file & meta subdirs", required : true}
 	]});
 
-const xlog = new XLog(argv.headless ? "error" : argv.logLevel);
+const xlog = new XLog(argv.headless ? "warn" : argv.logLevel);
 
 const phases =
 [
@@ -192,6 +193,7 @@ for(const phase of phases)
 
 // phases are done, finalize our stats
 report = xu.parseJSON(await fileUtil.readTextFile(reportFilePath), {});
+report.postProcess.complete = true;
 report.postProcess.duration = taskRunner.getDuration();
 report.postProcess.errors = errors;
 await fileUtil.writeTextFile(reportFilePath, JSON.stringify(report));

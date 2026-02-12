@@ -3,7 +3,8 @@ import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {formats} from "../src/format/formats.js";
-import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../src/dexUtil.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {C} from "../src/C.js";
 import {mkWeblink} from "./testUtil.js";
 import RandExp from "npm:randexp@0.5.3";
 
@@ -83,7 +84,7 @@ async function fuzzByExt()
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
-		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 		if(r?.json?.processed)
 		{
 			const logFilePath = await fileUtil.genTempPath(dirPath, ".log.txt");
@@ -137,7 +138,7 @@ async function fuzzByFileSize()
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
-		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 		if(r?.json?.processed)
 		{
 			const logFilePath = await fileUtil.genTempPath(dirPath, ".log.txt");
@@ -196,7 +197,7 @@ async function fuzzByFilename()
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
-		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 		if(r?.json?.processed)
 		{
 			const logFilePath = await fileUtil.genTempPath(dirPath, ".log.txt");

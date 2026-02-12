@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {path} from "std";
 import {cmdUtil, fileUtil, hashUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {C} from "../C.js";
 import {XLog} from "xlog";
 
 const xlog = new XLog();
@@ -58,7 +58,7 @@ await inputFiles.parallelMap(async inputFile =>
 	await Deno.mkdir(outputSubDirPath, {recursive : true});
 
 	const o = {op : "dexvert", inputFilePath, outputDirPath : outputSubDirPath};
-	const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+	const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 	completed++;
 	if(!r?.json?.processed || !r?.json?.phase?.format)
 	{

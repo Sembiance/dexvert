@@ -2,7 +2,7 @@
 import {xu} from "xu";
 import {fileUtil, runUtil, cmdUtil} from "xutil";
 import {base64Encode, base64Decode, path} from "std";
-import {C} from "./ppUtil.js";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "poly2thumb",
@@ -36,7 +36,7 @@ await fileUtil.writeTextFile(tmpHTMLFilePath, `
 	<html>
 		<head></head>
 		<body>
-			<script type="module">${await fileUtil.readTextFile(path.join(import.meta.dirname, "..", "root", "js", "model-viewer.min.js"))}</script>
+			<script type="module">${await fileUtil.readTextFile(path.join(import.meta.dirname, "aux", "model-viewer.min.js"))}</script>
 			<span id="modelHolder"></span>
 			<script type="module">
 				addEventListener("DOMContentLoaded", () =>

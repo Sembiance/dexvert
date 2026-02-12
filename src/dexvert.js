@@ -86,6 +86,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 	if(ids.some(id => id.from==="dexvert"))
 		xlog.info`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
 
+	let prevFailedVerify = false;
 	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, ids, idMeta, xlog});
 	for(const id of ids)
 	{
@@ -224,7 +225,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				await format.pre(dexState);
 			}
 
-			const tryProg = async function tryProg(prog, {isChain}={})
+			const tryProg = async function tryProg(prog, {isChain}={})	// eslint-disable-line no-loop-func
 			{
 				const progProps = Program.parseProgram(prog);
 				if(RUNTIME.forbidProgram.has(progProps.programid))
@@ -241,6 +242,9 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 				if(progProps.flags?.hasExtMatch && !id.extMatch && id.matchType!=="ext")
 					return xlog.info`Skipping converter ${prog} due to hasExtMatch flag and not having an extension match`, false;
+
+				if(progProps.flags?.noPrevFailedVerify && prevFailedVerify)
+					return xlog.info`Skipping converter ${prog} due to noPrevFailedVerify flag and previously failed verify being true`, false;
 				
 				xlog.debug`Running converter ${prog}...`;
 
@@ -279,6 +283,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 						const failValidation = async msg =>
 						{
+							prevFailedVerify = true;
 							xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
 							if(!xlog.atLeast("trace"))
 								await fileUtil.unlink(newFile.absolute);

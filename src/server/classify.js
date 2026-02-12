@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, runUtil, fileUtil} from "xutil";
-import {CLASSIFY_HOST, CLASSIFY_PORT, CLASSIFY_PATH} from "../classifyUtil.js";
+import {C} from "../C.js";
 import {path} from "std";
 import {XLog} from "xlog";
 
@@ -18,22 +18,22 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.logLevel);
 
 xlog.info`Removing existing classify wip directories...`;
-await fileUtil.unlink(CLASSIFY_PATH, {recursive : true}).catch(() => {});
+await fileUtil.unlink(C.CLASSIFY_PATH, {recursive : true}).catch(() => {});
 
 xlog.info`Creating classify wip directories...`;
 for(const name of ["__pycache__", "garbage", "tmp"])
-	await Deno.mkdir(path.join(CLASSIFY_PATH, name), {recursive : true});
+	await Deno.mkdir(path.join(C.CLASSIFY_PATH, name), {recursive : true});
 
 xlog.info`Starting classify server...`;
 const classifyDirPath = path.join(import.meta.dirname, "..", "..", "classify");
 const runOptions = {detached : true, cwd : classifyDirPath, env : {VIRTUAL_ENV : path.join(classifyDirPath, "env")}};
 if(xlog.atLeast("debug"))
 	runOptions.liveOutput = true;
-const {p} = await runUtil.run(path.join(classifyDirPath, "env/bin/python3"), ["-X", `pycache_prefix=${path.join(CLASSIFY_PATH, "__pycache__")}`, "classifyServer.py"], runOptions);
+const {p} = await runUtil.run(path.join(classifyDirPath, "env/bin/python3"), ["-X", `pycache_prefix=${path.join(C.CLASSIFY_PATH, "__pycache__")}`, "classifyServer.py"], runOptions);
 
 xlog.info`Waiting for classify server to be available...`;
 // wait for classify server to fully load
-await xu.waitUntil(async () => (await (await fetch(`http://${CLASSIFY_HOST}:${CLASSIFY_PORT}/status`).catch(() => {}))?.json())?.status==="a-ok");
+await xu.waitUntil(async () => (await (await fetch(`http://${C.CLASSIFY_HOST}:${C.CLASSIFY_PORT}/status`).catch(() => {}))?.json())?.status==="a-ok");
 await fileUtil.writeTextFile(argv.startedFilePath, "");
 xlog.info`Classify server started and ready!`;
 

@@ -3,7 +3,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse, base64Encode} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE} from "../src/dexUtil.js";
+import {C} from "../src/C.js";
 import {ANSIToHTML} from "thirdParty";
 import {mkWeblink, DEXDRONE_TRUTH_HOST} from "./testUtil.js";
 
@@ -684,7 +684,7 @@ const UNPROCESSED_ALLOW_NO_IDS = [
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath("/mnt/dexvert/test", "_dextest");
 await Deno.mkdir(DEXTEST_ROOT_DIR, {recursive : true});
 
-const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*(DEV_MACHINE ? 0.30 : 0.60));
+const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*(C.IS_DEV_MACHINE ? 0.30 : 0.60));
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};
@@ -1078,7 +1078,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 		xlog.info`Attempting file: ${sampleSubFilePath}`;
 	xlog.debug`Running dex with options: ${o}`;
 
-	const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : o, asJSON : true});
+	const {r, log, err} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : o, asJSON : true});
 	if(err)
 		console.error(`${log.join("\n")}\n${err}`.trim());
 	xlog.debug`dex result: ${{...r, pretty : null}}`;

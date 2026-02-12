@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, runUtil} from "xutil";
-import {WINE_WEB_HOST, WINE_WEB_PORT} from "../src/wineUtil.js";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexwineWindowInfo",
@@ -14,6 +14,6 @@ const argv = cmdUtil.cmdInit({
 		winSpy     : {desc : "Run WinSpy instead of the window info program"}
 	}});
 
-const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json());
+const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getBaseEnv`)).json());
 await runUtil.run("wine", [argv.winSpy ? `c:\\dexvert\\winspy.exe` : (argv.winSpector ? "c:\\Program Files\\Winspector\\WinspectorU.exe" : "c:\\Program Files\\AutoIt3\\Au3Info.exe")], {liveOutput : true, env : {WINEARCH : argv.arch, ...existingEnv[argv.base]}});
 

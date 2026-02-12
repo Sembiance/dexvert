@@ -2,9 +2,8 @@ import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {base64Encode, path} from "std";
+import {C} from "../../C.js";
 
-const SIEGFRIED_HOST = "127.0.0.1";
-const SIEGFRIED_PORT = 15138;
 const WARNINGS_SKIP = ["no match", "match on extension only", "empty source"];
 const WARNINGS_ALLOW = ["extension mismatch", "match on text only"];
 
@@ -17,7 +16,7 @@ export class siegfried extends Program
 	{
 		r.meta.detections = [];
 
-		const rawText = await xu.tryFallbackAsync(async () => await (await fetch(`http://${SIEGFRIED_HOST}:${SIEGFRIED_PORT}/identify/${base64Encode(r.inFile({absolute : true}))}?base64=true&format=json`)).text());
+		const rawText = await xu.tryFallbackAsync(async () => await (await fetch(`http://${C.SIEGFRIED_HOST}:${C.SIEGFRIED_PORT}/identify/${base64Encode(r.inFile({absolute : true}))}?base64=true&format=json`)).text());
 		if(!rawText)
 			return r.xlog.error`Failed to get siegfried data for file: ${r.f.input.base} got: ${rawText}`;
 			

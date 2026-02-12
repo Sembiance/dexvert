@@ -1,7 +1,8 @@
 import {xu} from "xu";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
-import {C, classify} from "../ppUtil.js";
+import {classify} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 
 // Phase 6 - Any browser-safe audio/video should be prepared and then processed with transcription to get text content
 export default async function phase6({itemWebDirPath, itemClassifyDirPath, taskRunner, xlog})

@@ -1,7 +1,8 @@
 import {xu, fg} from "xu";
 import {cmdUtil, printUtil, runUtil, fileUtil} from "xutil";
 import {path} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../dexUtil.js";
+import {C} from "../C.js";
+import {initRegistry} from "../dexUtil.js";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
@@ -64,7 +65,7 @@ for(const inputFilePath of inputFilePaths)
 	else
 	{
 		const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
-		const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
+		const {r, log, err} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 		if(err)
 		{
 			console.error(`${log.join("\n")}\n${err}`.trim());

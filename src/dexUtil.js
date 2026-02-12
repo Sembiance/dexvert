@@ -6,10 +6,6 @@ import {DexFile} from "./DexFile.js";
 import {init as initPrograms} from "./program/programs.js";
 import {init as initFormats} from "./format/formats.js";
 
-export const DEXRPC_HOST = "127.0.0.1";
-export const DEXRPC_PORT = 17750;
-export const DEV_MACHINE = ["crystalsummit", "eaglehollow"].includes(Deno.hostname());
-
 // Based on file extension or an r.flag.convertAsExt hint, will just try to convert the file to a PNG
 // This introduces a slight risk of generating a garbage PNG file, but the MASSIVE speed gains are worth it
 // Currently only called by other programs that generate lots of sub files like deark and resource_dasm
@@ -207,9 +203,22 @@ export async function getEXEOverlayOffset(inputFilePath, size)
 	return overlayStartOffset;
 }
 
-
 export async function initRegistry(xlog)
 {
 	await initPrograms(xlog);
 	await initFormats(xlog);
+}
+
+export async function detectPreRename(r)
+{
+	r.detectTmpFilePath = await fileUtil.genTempPath();
+	try
+	{
+		if(await fileUtil.exists(r.inFile({absolute : true})))
+			await Deno.copyFile(r.inFile({absolute : true}), r.detectTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
+	}
+	catch(err)
+	{
+		r.xlog.warn`Failed to copy file to tmp file for ${r.programid}: ${err}`;
+	}
 }

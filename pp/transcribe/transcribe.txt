@@ -46,3 +46,26 @@ nano env/lib/python3.12/site-packages/whisper_s2t/audio.py
 /--------------------\
 | Alternative Models |
 \--------------------/
+>>> parakeet: https://nvidia.github.io/NeMo/blogs/2024/2024-01-parakeet-tdt/  and  https://huggingface.co/nvidia/parakeet-tdt-1.1b
+mkdir parakeet
+cd parakeet
+virtualenv -p 3.10 env
+source env/bin/activate
+pip install Cython torch nvidia-tensorrt
+pip install nemo_toolkit['asr']
+
+# So I tried the above, it's not as good as whisper, it missed many words in many of my samples
+# Where it does better is it doesn't hallucinate as much
+# Samples need to be pre-converted to 16000Hz mono wav: ffmpeg -i inputfile.mp4 -ac 1 -ar 16000 outputfile.wav
+
+
+>>> owsm: https://www.wavlab.org/activities/2024/owsm/   and  https://huggingface.co/espnet/owsm_v3.1_ebf
+mkdir owsm
+cd owsm
+virtualenv -p 3.10 env
+source env/bin/activate
+pip install torch torchaudio nvidia-tensorrt
+pip install espnet espnet_model_zoo
+
+# Tried it and it does much worse than whisper and also halucinates in silence
+# Don't see a reason to use this over whisper

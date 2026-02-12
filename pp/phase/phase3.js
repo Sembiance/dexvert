@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {fileUtil, runUtil} from "xutil";
-import {C, isFileBlocked} from "../ppUtil.js";
+import {C} from "../../src/C.js";
+import {isFileBlocked} from "../ppUtil.js";
 import {path} from "std";
 import {AgentPool} from "AgentPool";
 

@@ -3,10 +3,7 @@ import {runUtil, fileUtil} from "xutil";
 import {path} from "std";
 import {Program} from "./Program.js";
 import {DexFile} from "./DexFile.js";
-
-export const CLASSIFY_PATH = "/mnt/ram/dexvert/classify";
-export const CLASSIFY_HOST = "127.0.0.1";
-export const CLASSIFY_PORT = 17736;
+import {C} from "./C.js";
 
 const MODEL_DIM =
 {
@@ -31,11 +28,11 @@ async function cropImage({modelName, inPath, outPath, method="centerCrop"}={})
 
 export async function preProcessPNG(modelName, imagePath, outDir)
 {
-	await Deno.mkdir(path.join(CLASSIFY_PATH, "tmp"), {recursive : true});
-	const pngTrimmedPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
+	await Deno.mkdir(path.join(C.CLASSIFY_PATH, "tmp"), {recursive : true});
+	const pngTrimmedPath = await fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), ".png");
 	await runUtil.run("magick", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 	
-	const tmpTrimPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
+	const tmpTrimPath = await fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), ".png");
 	await runUtil.run("magick", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
 	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
@@ -45,10 +42,10 @@ export async function preProcessPNG(modelName, imagePath, outDir)
 
 export async function classifyImage(imagePath, modelName, xlog)
 {
-	const tmpImagePaths = await Promise.all(CROP_METHODS.map(v => fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), `_${v}.png`)));
+	const tmpImagePaths = await Promise.all(CROP_METHODS.map(v => fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), `_${v}.png`)));
 
 	// convert to PNG
-	const pngTrimmedPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
+	const pngTrimmedPath = await fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), ".png");
 
 	const fileR = await Program.runProgram("file", await DexFile.create({root : path.dirname(imagePath), absolute : imagePath}), {xlog, autoUnlink : true});
 	
@@ -58,7 +55,7 @@ export async function classifyImage(imagePath, modelName, xlog)
 	else
 		await runUtil.run("magick", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 
-	const tmpTrimPath = await fileUtil.genTempPath(path.join(CLASSIFY_PATH, "tmp"), ".png");
+	const tmpTrimPath = await fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), ".png");
 	await runUtil.run("magick", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
 	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
@@ -72,7 +69,7 @@ export async function classifyImage(imagePath, modelName, xlog)
 			continue;
 		}
 		
-		const garbageScore = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${CLASSIFY_HOST}:${CLASSIFY_PORT}/classify/${modelName}`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()), {});
+		const garbageScore = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${C.CLASSIFY_HOST}:${C.CLASSIFY_PORT}/classify/${modelName}`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()), {});
 		await fileUtil.unlink(tmpImagePath);
 		confidences.push(garbageScore);
 	}

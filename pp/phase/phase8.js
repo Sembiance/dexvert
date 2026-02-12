@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
 import {xu} from "xu";
 import {fileUtil, runUtil} from "xutil";
-import {C} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 import {path} from "std";
 
 const MAX_LINES_BYTES_WAIT_THRESHOLD = xu.MB*500;

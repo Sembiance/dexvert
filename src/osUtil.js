@@ -2,10 +2,7 @@ import {xu, fg} from "xu";
 import {path} from "std";
 import {RUNTIME} from "./Program.js";
 import {appendCommonFuncs} from "./autoItUtil.js";
-
-export const OS_SERVER_HOST = "127.0.0.1";
-export const OS_SERVER_PORT = 17735;
-export const OSIDS = ["win2k", "winxp", "win7"];
+import {C} from "./C.js";
 
 export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scriptPre, timeout=xu.MINUTE*10, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {
@@ -47,7 +44,7 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scr
 	xlog.info`Running OS ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
 	xlog.debug`osData: ${osData}`;
 	xlog.debug`\tSCRIPT: ${osData.script}`;
-	const r = await (await fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/osRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(osData)})).text();
+	const r = await (await fetch(`http://${C.OS_SERVER_HOST}:${C.OS_SERVER_PORT}/osRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(osData)})).text();
 	if(r!=="ok")
 		throw new Error(r);
 		

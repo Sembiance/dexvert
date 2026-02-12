@@ -1,6 +1,7 @@
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {fileUtil} from "xutil";
+import {detectPreRename} from "../../dexUtil.js";
 
 export class trid extends Program
 {
@@ -8,26 +9,11 @@ export class trid extends Program
 	package = "app-arch/trid";
 	bin     = "trid";
 	loc     = "local";
-
-	pre = async r =>
+	pre     = detectPreRename;
+	args    = r => ["-n", "5", r.detectTmpFilePath];
+	post    = async r =>
 	{
-		// trid is SUPER sensitive to certain filenames, so we copy it to a tmp file and run trid against that
-		r.tridTmpFilePath = await fileUtil.genTempPath();
-		try
-		{
-			if(await fileUtil.exists(r.inFile({absolute : true})))
-				await Deno.copyFile(r.inFile({absolute : true}), r.tridTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
-		}
-		catch(err)
-		{
-			r.xlog.warn`Failed to copy file to tmp file for trid: ${err}`;
-		}
-	};
-
-	args = r => ["-n", "5", r.tridTmpFilePath];
-	post = async r =>
-	{
-		await fileUtil.unlink(r.tridTmpFilePath);
+		await fileUtil.unlink(r.detectTmpFilePath);
 
 		r.meta.detections = [];
 

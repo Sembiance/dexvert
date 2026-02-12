@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {agentInit} from "AgentPool";
 import {fileUtil, runUtil, imageUtil} from "xutil";
-import {C} from "./ppUtil.js";
+import {C} from "../src/C.js";
 
 await agentInit(async image =>
 {

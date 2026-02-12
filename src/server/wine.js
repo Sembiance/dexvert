@@ -3,7 +3,7 @@ import {xu, fg} from "xu";
 import {runUtil, fileUtil, webUtil, cmdUtil} from "xutil";
 import {XLog} from "xlog";
 import {path, delay} from "std";
-import {WINE_PREFIX_SRC, WINE_PREFIX, WINE_WEB_HOST, WINE_WEB_PORT} from "../wineUtil.js";
+import {C} from "../C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexserver-wine",
@@ -33,23 +33,23 @@ const cleanupProcs = async () =>
 await cleanupProcs();
 
 xlog.info`Preparing prefix bases...`;
-await fileUtil.unlink(WINE_PREFIX, {recursive : true});
-await Deno.mkdir(WINE_PREFIX, {recursive : true});
+await fileUtil.unlink(C.WINE_PREFIX, {recursive : true});
+await Deno.mkdir(C.WINE_PREFIX, {recursive : true});
 
-const winePrefixDirPaths = await fileUtil.tree(WINE_PREFIX_SRC, {nofile : true, depth : 1});
+const winePrefixDirPaths = await fileUtil.tree(C.WINE_PREFIX_SRC, {nofile : true, depth : 1});
 for(const winePrefixDirPath of winePrefixDirPaths)
 {
 	const wineBase = path.basename(winePrefixDirPath);
 	WINE_BASES.push(wineBase);
 
-	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(winePrefixDirPath, "/"), path.join(WINE_PREFIX, wineBase, "/"), {fast : true}));
+	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(winePrefixDirPath, "/"), path.join(C.WINE_PREFIX, wineBase, "/"), {fast : true}));
 }
 
 xlog.info`Starting wineservers...`;
 for(const wineBase of WINE_BASES)
 {
 	const runOpts = {detached : true, stdoutcb : line => xlog.info`${xu.colon(fg.orange(wineBase))}${line}`, stderrcb : line => xlog.warn`${xu.colon(fg.orange(wineBase))}${line}`};
-	runOpts.env = {WINEPREFIX : path.join(WINE_PREFIX, wineBase)};
+	runOpts.env = {WINEPREFIX : path.join(C.WINE_PREFIX, wineBase)};
 	if(xlog.atLeast("debug"))
 	{
 		runOpts.env.DISPLAY = ":0";
@@ -90,7 +90,7 @@ routes.set("/getWineCounter", async () =>
 	return new Response(wineCounterNum);
 });
 
-const webServer = webUtil.serve({hostname : WINE_WEB_HOST, port : WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
 
 xlog.debug`wineBaseEnv: ${wineBaseEnv}`;
 xlog.info`Wine started`;
@@ -117,7 +117,7 @@ for(const p of wineserverProcs)
 	await runUtil.kill(p);
 
 xlog.debug`Deleting wine prefix bases...`;
-await fileUtil.unlink(WINE_PREFIX, {recursive : true});
+await fileUtil.unlink(C.WINE_PREFIX, {recursive : true});
 
 await cleanupProcs();
 await fileUtil.unlink(argv.stopFilePath);

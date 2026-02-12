@@ -21,3 +21,13 @@ python3.12 -m pip install nvidia-tensorrt flask python-doctr
 /--------------------\
 | Alternative Models |
 \--------------------/
+* Older list:
+    https://github.com/junhoyeo/BetterOCR
+    https://github.com/open-mmlab/mmocr
+    https://github.com/PaddlePaddle/PaddleOCR
+        http://home.cosmicrealms.com/compendium/DevLab/legacy/retromission/sandbox/txt/ocr.txt
+        https://vinod-baste.medium.com/unlocking-the-power-of-paddleocr-4141544f8dba
+
+    https://toon-beerten.medium.com/ocr-comparison-tesseract-versus-easyocr-vs-paddleocr-vs-mmocr-a362d9c79e66
+    https://github.com/clovaai/deep-text-recognition-benchmark
+    https://huggingface.co/docs/transformers/model_doc/trocr

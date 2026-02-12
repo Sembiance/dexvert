@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {fileUtil, hashUtil} from "xutil";
-import {C} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 import {path, dateFormat} from "std";
 
 function getDexid(dexData)

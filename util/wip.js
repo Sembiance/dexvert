@@ -13,7 +13,8 @@ import {programs} from "../src/program/programs.js";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
 import {MediaWiki} from "MediaWiki";
 import {xmlParse} from "denoLandX";
-import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../src/dexUtil.js";
+import {initRegistry} from "../src/dexUtil.js";
+import {C} from "../src/C.js";
 import {WEAK_VALUES} from "../src/WEAK.js";
 
 const xlog = new XLog("info");

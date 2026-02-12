@@ -6,7 +6,7 @@ import {WEAK_VALUES} from "./WEAK.js";
 
 export const DETECTOR_PROGRAMS = [
 	"file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "dearkID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2", "disktype", "unp64ID", "detectItEasy", "binwalkID",
-	"xdgMime", "ffprobeID", "soxiID", "librempegprobeID", "nconvertID"
+	"xdgMime", "ffprobeID", "soxiID", "librempegprobeID", "nconvertID", "gameextractorID"
 ];
 
 export const TEXT_MAGIC_STRONG = [

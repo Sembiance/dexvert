@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {path} from "std";
 import {fileUtil} from "xutil";
-import {WINE_WEB_HOST, WINE_WEB_PORT} from "../../wineUtil.js";
+import {C} from "../../C.js";
 
 export class gt2 extends Program
 {
@@ -14,7 +14,7 @@ export class gt2 extends Program
 	{
 		// gt2 gets confused by some filenames (image/jpeg/0020272_*) and some extensions (executable/exe/el.-%0Aexit%0A), so rename first
 		// we do it in args because this is the first time we have access to r.wineData.wineCounter
-		const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
+		const wineBaseEnv = await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getBaseEnv`)).json();
 		const gt2FilePath = await fileUtil.genTempPath(path.join(wineBaseEnv.base.WINEPREFIX, "drive_c", `in${r.wineCounter}`), (r.f.input.ext || "").replaceAll(/[\t\n\r]/g, " "));
 		await Deno.mkdir(path.dirname(gt2FilePath), {recursive : true});
 		try

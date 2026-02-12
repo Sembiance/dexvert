@@ -2,6 +2,7 @@
 
 whoami=$(whoami | tr -d '[:space:]')
 
+pkill -f dexserver
 kill "$(cat /mnt/dexvert/daemonize_dexserver.pid)"
 kill "$(pidof -x dexserver)"
 sudo killall -q -9 winedevice.exe services.exe explorer.exe plugplay.exe svchost.exe rpcss.exe sf dosbox

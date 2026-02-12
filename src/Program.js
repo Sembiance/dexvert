@@ -8,15 +8,13 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runMSDOS} from "./msdosUtil.js";
-import {run as runOS, OSIDS} from "./osUtil.js";
-import {run as runWine, WINE_WEB_HOST, WINE_WEB_PORT} from "./wineUtil.js";
+import {run as runOS} from "./osUtil.js";
+import {run as runWine} from "./wineUtil.js";
 import {programs} from "./program/programs.js";
-import {DEXRPC_HOST, DEXRPC_PORT} from "./dexUtil.js";
+import {C} from "./C.js";
 
 const MAX_FILENAME_LENGTH = 245;
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir"];
-export {GLOBAL_FLAGS};
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -53,7 +51,7 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "dos", "msdos", "wine", ...OSIDS]},
+			loc       : {type : "string", required : true, enum : ["local", "dos", "msdos", "wine", ...C.OSIDS]},
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
@@ -123,7 +121,7 @@ export class Program
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 
-		const unknownFlags = Object.keys(flags).subtractAll([...GLOBAL_FLAGS, ...Object.keys(this.flags || {})]);
+		const unknownFlags = Object.keys(flags).subtractAll([...C.GLOBAL_FLAGS, ...Object.keys(this.flags || {})]);
 		if(unknownFlags.length>0)
 			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
 
@@ -173,7 +171,7 @@ export class Program
 			if(this.exclusive)
 			{
 				xlog.info`Program ${fg.orange(this.programid)} waiting for exclusive lock ${this.exclusive}`;
-				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
+				await xu.waitUntil(async () => (await (await fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
 				xlog.info`Program ${fg.orange(this.programid)} lock acquired`;
 			}
 
@@ -223,7 +221,7 @@ export class Program
 			}
 			else if(this.loc==="wine")
 			{
-				r.wineCounter = +(await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getWineCounter`)).text());	// we don't use xu.randStr() because we append to c:\out<counter> and thus need full path to be < 8 chars
+				r.wineCounter = +(await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getWineCounter`)).text());	// we don't use xu.randStr() because we append to c:\out<counter> and thus need full path to be < 8 chars
 				r.wineData = {f, cmd : await getBin(), cwd : r.cwd, xlog, wineCounter : r.wineCounter};
 				r.wineData.args = await getArgs();
 				if(this.wineData)
@@ -233,7 +231,7 @@ export class Program
 				xlog.debug`  with wineData: ${printUtil.inspect(r.wineData).squeeze()} (wineCounter: ${r.wineCounter})`;
 				r.status = await runWine(r.wineData);
 			}
-			else if(OSIDS.includes(this.loc))
+			else if(C.OSIDS.includes(this.loc))
 			{
 				r.osData = {f, cmd : await getBin(), osid : this.loc, xlog};
 				if(format?.formatid)
@@ -262,7 +260,7 @@ export class Program
 		if(this.exclusive)
 		{
 			xlog.debug`Program ${fg.orange(this.programid)} releasing lock`;
-			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
+			await xu.waitUntil(async () => (await (await fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
 		}
 
 		if(this.mirrorInToCWD)

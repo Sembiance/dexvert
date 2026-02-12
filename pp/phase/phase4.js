@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {fileUtil, runUtil, hashUtil, encodeUtil} from "xutil";
-import {C} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 import {path, dateParse} from "std";
 
 const TIKA_TIMEOUT = xu.MINUTE*1.5;

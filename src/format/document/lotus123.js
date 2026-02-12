@@ -10,5 +10,5 @@ export class lotus123 extends Format
 		/^fmt\/(1452|1453)( |$)/, /^x-fmt\/(114|115|116|117)( |$)/
 	];
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="LWKS" && ["L123", "XCEL"].includes(macFileCreator);
-	converters = ["soffice[format:Lotus]", "excel97[matchType:magic]", "soffice[hasExtMatch][matchType:magic]"];
+	converters = ["soffice[format:Lotus]", "excel97[hasExtMatch][matchType:magic]", "soffice[hasExtMatch][matchType:magic]"];
 }

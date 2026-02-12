@@ -2,7 +2,7 @@
 | TOP Priority |
 \--------------/
 * These formats don't detect with latest Detect-It-Easy: https://github.com/horsicq/Detect-It-Easy/issues/326
-	archive/packerPacked   and  archive/packerJESCOREPacked
+	archive/packerPacked   and  archive/packerJESCOREPacked (I was able to find the old ID code for this one and add it)
 
 * Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
 
@@ -16,12 +16,15 @@
 * See about fixing:
 	poly/nif
 
-/-------------\
-| dexvert 3.0 |
-\-------------/
-* Keep dexdrone0 STATIC as a test base of all truth. Do not update it at all. Instead spawn an identical server and test on that
 
+/---------------\
+| High Priority |
+\---------------/
 * Goal: Get rid of 86box
+  If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism
+  FIRST, try running win7 manually --cores=2 to see how it does
+  If it loads just fine, no complaints, then reduce cores to 2 in os.js and then testdexvert some formats that use win7 converters
+  then run a full dexdrone0 test suite
   Process: Start with winxp, then later win2k
   	Pick a program
 	Install on QEMU Win7
@@ -32,46 +35,6 @@
   If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
   After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
-* Re-imagine how dexvert requests are tracked throughout it's life cycle.
-  Create a new deno/sight/sight.js project. It's a generic thing that can be used in other projects that need to track 'lifecycles' of ops
-  It'll expose functions: init, service
-  dexserver would start by created like: init(masterPort)
-  	That'll start up a web server with some internal /msg type urls for future services/ops to log
-	Same web server will have a /status  that can be used to see what's going on
-  Services can then register with const service = register({masterPort, name : "service name", update : async () => { return {current, status}}})
-	service.update({various, stats, here, whatever, running : false, state : "loading", subState : "finding files...", loadPercentage : 47})
-	const op = service.op({name : "dexvert", update : async () => { return {current, status}}})
-	op.update({op, status}
-	op.log`msg with ${data} inline ${var} yah`;
-	const subOp = op.op({name : "identify"})
-	const subOp = op.op({name : "Program.run", type : "os", os : "win2k", programid : "whatever", flags : "whatever", etc})
-	op.done({err : error, msg : "why"});  /// magic 'err' the op will be marked as failed with any other keys specific as meta
-  When vising the website show all current services, with all ops for each service active and past with their current update data and a log of messages
-  When someone visits teh /status website each service and active op that registerd an update handler, that handler will be called via HTTP
-    That means when starting a service, it to will start a webserver and listen ona  port it tells master about to deliver live status updates
-  The idea is a service might not support the 'live' update with the update callback, it might just send periodic updates
-  Or maybe it never called .update() proactively at all and instead only returns update data when requested
-  Since loading /status blocks on calling these update handlers over HTTP back to the service, it should return data fast
-  Might be nice if the master could be told to log 'snapshots' to disk every X interval. basically call the /status page and write the HTML to disk
-  Master keeps track of when each op started, so knows how long it's been in that op and can show duration
-  Would be nice to have a /stats that will take all ran ops and give average durations for the various names, maybe some way to group lower
-  So it should it should certainly list the 'converters' that were identified to be ran for this format, which ones it's done (and how long they took) which one it's on (and how long it's been waiting) and which ones still to do
-
-* Would be great dexrecurse would generate an HTML 'report' that contains statistics of all files it did along with lifecycle stats, etc
-  The idea is I could analyze this report to find things to optimize and improve
-
-* Get discmaster2 injest code migrated to be performed after dexvert ON the dexvert machine, now that it has a GPU
-  dexrecurse would do this, and thus avoid tarring up the results until fully fully done
-
-* Get working with dexdaemon
-
-* Can now be integrated into discmaster3
-
-* Now proceed to do the high priority stuff below
-
-/---------------\
-| High Priority |
-\---------------/
 * Reverse engineer registration code for: ssbx.exe
 	Use: https://binary.ninja/purchase/#non-commercial
 	Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
@@ -270,6 +233,33 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Re-imagine how dexvert requests are tracked throughout it's life cycle.
+  Create a new deno/sight/sight.js project. It's a generic thing that can be used in other projects that need to track 'lifecycles' of ops
+  It'll expose functions: init, service
+  dexserver would start by created like: init(masterPort)
+  	That'll start up a web server with some internal /msg type urls for future services/ops to log
+	Same web server will have a /status  that can be used to see what's going on
+  Services can then register with const service = register({masterPort, name : "service name", update : async () => { return {current, status}}})
+	service.update({various, stats, here, whatever, running : false, state : "loading", subState : "finding files...", loadPercentage : 47})
+	const op = service.op({name : "dexvert", update : async () => { return {current, status}}})
+	op.update({op, status}
+	op.log`msg with ${data} inline ${var} yah`;
+	const subOp = op.op({name : "identify"})
+	const subOp = op.op({name : "Program.run", type : "os", os : "win2k", programid : "whatever", flags : "whatever", etc})
+	op.done({err : error, msg : "why"});  /// magic 'err' the op will be marked as failed with any other keys specific as meta
+  When vising the website show all current services, with all ops for each service active and past with their current update data and a log of messages
+  When someone visits teh /status website each service and active op that registerd an update handler, that handler will be called via HTTP
+    That means when starting a service, it to will start a webserver and listen ona  port it tells master about to deliver live status updates
+  The idea is a service might not support the 'live' update with the update callback, it might just send periodic updates
+  Or maybe it never called .update() proactively at all and instead only returns update data when requested
+  Since loading /status blocks on calling these update handlers over HTTP back to the service, it should return data fast
+  Might be nice if the master could be told to log 'snapshots' to disk every X interval. basically call the /status page and write the HTML to disk
+  Master keeps track of when each op started, so knows how long it's been in that op and can show duration
+  Would be nice to have a /stats that will take all ran ops and give average durations for the various names, maybe some way to group lower
+  So it should it should certainly list the 'converters' that were identified to be ran for this format, which ones it's done (and how long they took) which one it's on (and how long it's been waiting) and which ones still to do
+  Would be great dexrecurse would generate an HTML 'report' that contains statistics of all files it did along with lifecycle stats, etc
+  The idea is I could analyze this report to find things to optimize and improve
+
 * This ISO seems to crash dexrecurse reliably after about 24 hours: https://archive.org/details/dvdrom-xakep-2005-06
   That's even AFTER excluding paths:
 		files/magazine/Vzlom/Оружие нового поколения/

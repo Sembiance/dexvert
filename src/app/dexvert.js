@@ -2,7 +2,8 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../dexUtil.js";
+import {initRegistry} from "../dexUtil.js";
+import {C} from "../C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
@@ -91,7 +92,7 @@ if(argv.direct)
 xlog.trace`Making RPC call to dexserver...`;
 
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, liveOutput : true, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
-const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
+const {r, log, err} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 if(err)
 	await handleExit(console.error(`${log.join("\n")}\n${err}`.trim()));
 

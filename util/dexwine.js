@@ -2,7 +2,8 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil, webUtil} from "xutil";
 import {path} from "std";
 import {XLog} from "xlog";
-import {run as wineRun, WINE_PREFIX_SRC, WINE_WEB_HOST, WINE_WEB_PORT} from "../src/wineUtil.js";
+import {run as wineRun} from "../src/wineUtil.js";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexwine",
@@ -24,7 +25,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.logLevel);
 
-const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json());
+const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getBaseEnv`)).json());
 if(existingEnv)
 	Deno.exit(xlog.error`Can't run this while dexserver is running!`);
 
@@ -33,13 +34,13 @@ const wineBaseEnv = {
 	{
 		DISPLAY    : ":0",
 		WINEARCH   : argv.arch,
-		WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
+		WINEPREFIX : path.join(C.WINE_PREFIX_SRC, argv.base)
 	}
 };
 
 const routes = new Map();
 routes.set("/getBaseEnv", async () => Response.json(wineBaseEnv));	// eslint-disable-line require-await
-const webServer = webUtil.serve({hostname : WINE_WEB_HOST, port : WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
 
 const wineData = {cmd : (await fileUtil.exists(argv.cmd) ? path.resolve(argv.cmd) : argv.cmd), args : argv.args || [], arch : argv.arch, base : argv.base, console : argv.console, xlog};
 if(argv.program)

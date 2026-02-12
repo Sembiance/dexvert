@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {agentInit} from "AgentPool";
 import {path} from "std";
 import {fileUtil, runUtil} from "xutil";
-import {C} from "./ppUtil.js";
+import {C} from "../src/C.js";
 
 await agentInit(async ({dexid, meta, filePath, content, itemWebDirPath, itemFileDirPath, itemThumbDirPath}) =>
 {
@@ -59,9 +59,9 @@ await agentInit(async ({dexid, meta, filePath, content, itemWebDirPath, itemFile
 				await fileUtil.unlock(lockFile);
 				return true;
 			});
-			({stdout, stderr} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "poly2thumb.js"), `--tmpDirPath=${C.POLY_TMP_DIR}`, filePath, thumbFilePath), runUtil.denoRunOpts({timeout : xu.MINUTE*30})));
+			({stdout, stderr} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "poly2thumb.js"), `--tmpDirPath=${C.POLY_TMP_DIR}`, filePath, thumbFilePath), runUtil.denoRunOpts({timeout : xu.MINUTE*30})));
 			if(!await fileUtil.exists(thumbFilePath))
-				({stdout, stderr} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "poly2thumbStatic.js"), `--tmpDirPath=${C.POLY_TMP_DIR}`, filePath, thumbFilePath), runUtil.denoRunOpts({timeout : xu.MINUTE*5})));
+				({stdout, stderr} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "poly2thumbStatic.js"), `--tmpDirPath=${C.POLY_TMP_DIR}`, filePath, thumbFilePath), runUtil.denoRunOpts({timeout : xu.MINUTE*5})));
 
 			const lockFile = await fileUtil.lock(C.POLY_THUMB_COUNT_LOCK_FILE_PATH);
 			let activePolyCount = +((await fileUtil.readTextFile(C.POLY_THUMB_COUNT_FILE_PATH)) || "0").trim();

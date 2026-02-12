@@ -1,6 +1,7 @@
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {fileUtil} from "xutil";
+import {detectPreRename} from "../../dexUtil.js";
 
 export class ffprobeID extends Program
 {
@@ -8,24 +9,11 @@ export class ffprobeID extends Program
 	package = "media-video/ffmpeg";
 	bin     = "ffprobe";
 	loc     = "local";
-	pre     = async r =>
+	pre     = detectPreRename;
+	args    = r => ["-v", "quiet", "-show_entries", "format=format_name,format_long_name", "-of", "default=noprint_wrappers=1:nokey=1", "-analyzeduration", "2000000", r.detectTmpFilePath];
+	post    = async r =>
 	{
-		// ffprobeID will match against file extension which would be BAD since that would mean extensions get converted to stronger 'magic', so we copy it to a tmp file (with a random.tmp name) and run trid against that
-		r.ffprobeIDTempFilePath = await fileUtil.genTempPath();
-		try
-		{
-			if(await fileUtil.exists(r.inFile({absolute : true})))
-				await Deno.copyFile(r.inFile({absolute : true}), r.ffprobeIDTempFilePath);			// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
-		}
-		catch(err)
-		{
-			r.xlog.warn`Failed to copy file to tmp file for ffprobeID: ${err}`;
-		}
-	};
-	args = r => ["-v", "quiet", "-show_entries", "format=format_name,format_long_name", "-of", "default=noprint_wrappers=1:nokey=1", "-analyzeduration", "2000000", r.ffprobeIDTempFilePath];
-	post = async r =>
-	{
-		await fileUtil.unlink(r.ffprobeIDTempFilePath);
+		await fileUtil.unlink(r.detectTmpFilePath);
 
 		r.meta.detections = [];
 

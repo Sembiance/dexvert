@@ -17,6 +17,7 @@ There are a few 'global' flags that can be specified for any program:
 	hasExtMatch				If set, only run this program if we have a match to one of our extensions (even if a magic match overall). This is a way to kind fake 'weakMagic' if you combine with [matchType:magic] without specifying weakMagic, useful if one program is troublesome with a format
 	matchType               If set, this program won't run unless the match type matches the specified value. Only valid in format 'converters' list.
 	noAux                   Don't include any aux files in this running of the program
+	noPrevFailedVerify		If set, this program will be skipped if any files failed verificaton from a previous tried converter
 	osHint					Can set various platforms like commodore:true in order to enable a slightly wider identification scope for matching and converting files
 	osPriority				This program should have priority when being ran on an OS (really only used internally to fast-track stuff)
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename

@@ -3,7 +3,8 @@ import {path} from "std";
 import { programDirPath} from "../program/programs.js";
 import {formatDirPath} from "../format/formats.js";
 import {fileUtil, webUtil, cmdUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE, initRegistry} from "../dexUtil.js";
+import {initRegistry} from "../dexUtil.js";
+import {C} from "../C.js";
 import {AgentPool} from "AgentPool";
 import {XLog} from "xlog";
 
@@ -61,7 +62,7 @@ xlog.info`Starting ${DEXVERT_AGENT_COUNT} dex agents...`;
 await dexPool.start({qty : DEXVERT_AGENT_COUNT, runEnv});
 
 const monitors = [];
-if(DEV_MACHINE)
+if(C.IS_DEV_MACHINE)
 {
 	xlog.info`Starting format & program monitors...`;
 	const monitorsReady = [];
@@ -125,7 +126,7 @@ routes.set("/unlock", async request =>
 	return new Response("true");
 });
 
-const webServer = webUtil.serve({hostname : DEXRPC_HOST, port : DEXRPC_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.DEXRPC_HOST, port : C.DEXRPC_PORT}, await webUtil.route(routes), {xlog});
 await fileUtil.writeTextFile(argv.startedFilePath, "");
 
 // wait until we are told to stop

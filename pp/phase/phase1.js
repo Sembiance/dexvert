@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
-import {C} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 import {path} from "std";
 
 // Phase 1 - file & directory renaming

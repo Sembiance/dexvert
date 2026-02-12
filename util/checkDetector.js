@@ -93,7 +93,7 @@ async function checkDetector(detectorid)
 			return;
 
 		const [family, format] = path.relative(SAMPLES_DIR_PATH, sampleFilePath).split("/");
-		matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).innerTruncate(30), magic : magic.innerTruncate(65)});
+		matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).replaceAll(/[\n\t\r]/g, " ").innerTruncate(30), magic : magic.innerTruncate(65), confidence : detection.confidence});
 	}, -1);
 
 	if(argv.unique)
@@ -111,7 +111,7 @@ async function checkDetector(detectorid)
 		});
 	}
 
-	console.log(printUtil.columnizeObjects(matches.sortMulti([o => o.formatid.split("/")[0], o => o.formatid.split("/")[1]]), {prefix : "\n\n"}));
+	console.log(printUtil.columnizeObjects(matches.sortMulti([o => o.formatid.split("/")[0], o => o.formatid.split("/")[1], o => o.filename.toLowerCase()]), {prefix : "\n\n"}));
 }
 
 for(const detectorid of detectorsToTest.sortMulti())

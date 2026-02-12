@@ -2,7 +2,8 @@ import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {path} from "std";
 import {Sparkey} from "Sparkey";
-import {C, isFileBlocked} from "../ppUtil.js";
+import {isFileBlocked} from "../ppUtil.js";
+import {C} from "../../src/C.js";
 
 const LARGE_FILE_THRESHOLD = xu.MB*250;
 

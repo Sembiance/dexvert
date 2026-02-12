@@ -21,7 +21,7 @@ const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["dexrpc", "siegfried", "os", "wine", "classify"];
+const SERVER_ORDER = ["dexrpc", "gameextractor", "siegfried", "os", "wine", "classify"];
 
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {

@@ -6,5 +6,5 @@ export class agsAudioData extends Format
 	ext            = [".vox"];
 	forbidExtMatch = true;
 	magic          = ["AGS audio data"];
-	converters     = ["gameextractor -> dexvert"];
+	converters     = ["gameextractor[codes:VOX_CLIB,VOX_CLIB_2,VOX_CLIB_3] -> dexvert"];
 }

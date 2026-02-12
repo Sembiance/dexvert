@@ -18,7 +18,7 @@ export class wad extends Format
 		if(dexState.hasMagics(WAD3_MAGICS))
 			r.push("nconvert[extractAll][format:wad]");
 
-		r.push("deark[module:wad]", "gamearch", "gameextractor");
+		r.push("deark[module:wad]", "gamearch", "gameextractor[codes:WAD_WAD3,WAD_PWAD,WAD_IWAD]");
 		return r.map(v => `${v} & noesis[type:poly]`);
 	};
 }

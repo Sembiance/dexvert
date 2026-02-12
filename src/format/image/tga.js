@@ -17,10 +17,9 @@ export class tga extends Format
 	// iio2png works really well, except when it doesn't. like 648.TGA and several other hundred TGA's like it, convert as just a transparent image
 	converters = [
 		"deark[module:tga][matchType:magic][opt:tga:trans=0]", "deark[module:tga][matchType:magic][hasExtMatch][opt:tga:trans=0]", "wuimg[format:tga]", "imconv[format:tga][matchType:magic]", "iconvert",
-		"imageAlchemy", "paintDotNet[hasExtMatch]",
-		"keyViewPro", "corelDRAW[hasExtMatch]", "pv", "photoDraw",
+		...["imageAlchemy", "paintDotNet[hasExtMatch]", "keyViewPro", "corelDRAW[hasExtMatch]", "pv", "photoDraw"].map(v => `${v}[noPrevFailedVerify]`),
 		"nconvert[format:tga]", "recoil2png", "gimp", "iio2png", "tkimgConvert",
-		"noesis[type:image][matchType:magic]", "hiJaakExpress[hasExtMatch]", "corelPhotoPaint[hasExtMatch]", "canvas5[hasExtMatch]", "canvas[hasExtMatch]"
+		...["noesis[type:image][matchType:magic]", "hiJaakExpress[hasExtMatch]", "corelPhotoPaint[hasExtMatch]", "canvas5[hasExtMatch]", "canvas[hasExtMatch]"].map(v => `${v}[noPrevFailedVerify]`)
 	].map(converter => (["deark", "recoil2png", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
 	// many converters will produce garbage with weak TGA magics. deark too, but if we have an extension+magic match, make an exception. recoil2png and iio2png seem to be pretty strict, so allow those as-is
 

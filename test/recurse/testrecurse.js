@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 import {XLog} from "xlog";
-import {C} from "../../pp/ppUtil.js";
+import {C} from "../../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",

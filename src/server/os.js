@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {runUtil, fileUtil, sysUtil, printUtil, webUtil, cmdUtil} from "xutil";
 import {path, delay} from "std";
-import {OS_SERVER_HOST, OS_SERVER_PORT, OSIDS} from "../osUtil.js";
+import {C} from "../C.js";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
@@ -116,7 +116,7 @@ const startOS = async (osid, instanceid) =>
 	const instance = {osid, instanceid, ready : false, busy : false};
 	instance.dirPath = path.join(OS_INSTANCE_DIR_PATH, `${osid}-${instanceid}`);
 	instance.debug = OS[osid].debug;
-	instance.vncPort = 7900+(100*OSIDS.indexOf(osid))+instanceid;
+	instance.vncPort = 7900+(100*C.OSIDS.indexOf(osid))+instanceid;
 	instance.scriptName = `go${OS[osid].scriptExt}`;
 	INSTANCES[osid][instanceid] = instance;
 
@@ -382,7 +382,7 @@ routes.set("/osDONE", async request =>
 	return new Response("", {status : 200});
 });
 
-const webServer = webUtil.serve({hostname : OS_SERVER_HOST, port : OS_SERVER_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.OS_SERVER_HOST, port : C.OS_SERVER_PORT}, await webUtil.route(routes), {xlog});
 
 await Deno.mkdir(path.join(OS_INSTANCE_DIR_PATH), {recursive : true});
 

@@ -5,7 +5,8 @@ import {Format} from "../../src/Format.js";
 import {families} from "../../src/family/families.js";
 import {XLog} from "xlog";
 import {TEXT_MAGIC_STRONG} from "../../src/Detection.js";
-import {Program, GLOBAL_FLAGS} from "../Program.js";
+import {Program} from "../Program.js";
+import {C} from "../C.js";
 import {programs} from "../program/programs.js";
 
 const formats = {};
@@ -73,7 +74,7 @@ async function loadFormatFilePath(formatFilePath, {reload}={})
 
 				for(const flagKey of Object.keys(flags))
 				{
-					if(GLOBAL_FLAGS.includes(flagKey) || program.flags?.[flagKey])
+					if(C.GLOBAL_FLAGS.includes(flagKey) || program.flags?.[flagKey])
 						continue;
 
 					throw new Error(`${formatid} has converter ${converter} with unknown flagKey: ${flagKey}`);

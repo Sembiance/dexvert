@@ -2,14 +2,13 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil, urlUtil} from "xutil";
 import {path} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT, initRegistry} from "../dexUtil.js";
-import {OS_SERVER_HOST, OS_SERVER_PORT} from "../osUtil.js";
+import {initRegistry} from "../dexUtil.js";
 import {flexMatch} from "../identify.js";
 import {DexFile} from "../DexFile.js";
 import {formats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES, WEAK_PRODOS_TYPES} from "../WEAK.js";
 import {_PRO_DOS_TYPE_CODE} from "../program/archive/cadius.js";
-import {C} from "../../pp/ppUtil.js";
+import {C} from "../C.js";
 
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
@@ -166,7 +165,11 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputPath", desc : "Specify a directory to stick it all into the directory. Specify a outputName.tar.gz to stick results into a .tar.gz", required : true}
 	]});
 
-const xlog = new XLog(argv.headless ? "error" : argv.logLevel);
+const xlogOptions = {};
+const xlogWarnings = [];
+if(argv.headless)
+	xlogOptions.logger = v => xlogWarnings.push(v);
+const xlog = new XLog(argv.headless ? "warn" : argv.logLevel, xlogOptions);
 if(argv.postProcess && !argv.itemMetaURL)
 	Deno.exit(xlog.error`--itemMetaURL is required when --postProcess is set!`);
 
@@ -217,7 +220,7 @@ else
 	workDirPath = fullOutputPath;
 }
 
-const AGENT_COUNT = +(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/agentCount`));
+const AGENT_COUNT = +(await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/agentCount`));
 
 const ALL_MAGICS = new Set();
 const EXISTING_SAMPLE_FILES = {};
@@ -276,13 +279,13 @@ const inputFullPath = path.resolve(argv.inputPath);
 if((await Deno.stat(inputFullPath)).isFile)
 {
 	if(inputFullPath.endsWith(".tar.gz"))	// eslint-disable-line unicorn/prefer-ternary
-		await runUtil.run("tar", ["-xf", inputFullPath, "-C", fileDirPath]);
+		await runUtil.run("tar", ["-xf", inputFullPath, "-C", fileDirPath], {xlog});
 	else
-		await runUtil.run("rsync", runUtil.rsyncArgs(inputFullPath, path.join(fileDirPath, path.basename(inputFullPath)), {fast : true}));
+		await runUtil.run("rsync", runUtil.rsyncArgs(inputFullPath, path.join(fileDirPath, path.basename(inputFullPath)), {fast : true}), {xlog});
 }
 else
 {
-	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(inputFullPath, "/"), path.join(fileDirPath, "/"), {fast : true}));
+	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(inputFullPath, "/"), path.join(fileDirPath, "/"), {fast : true}), {xlog});
 }
 
 let fileProgramFlags = {};
@@ -314,8 +317,8 @@ routes.set("/status", async request =>
 
 	if(query?.verbose)
 	{
-		r.rpcStatus = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/status`, {asJSON : true});
-		r.osStatus = await xu.fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/status`, {asJSON : true});
+		r.rpcStatus = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/status`, {asJSON : true});
+		r.osStatus = await xu.fetch(`http://${C.OS_SERVER_HOST}:${C.OS_SERVER_PORT}/status`, {asJSON : true});
 	}
 
 	const postProcessStatus = await xu.fetch(`http://${C.POST_PROCESS_HOST}:${C.POST_PROCESS_PORT}/status`, {asJSON : true, timeout : xu.SECOND, silent : true});
@@ -384,7 +387,7 @@ async function processNextQueue()
 			Object.assign(rpcData.dexvertOptions.programFlag, parseProgramFlags(fileProgramFlags[task.relFilePath]));
 		}
 
-		let {r, log} = xu.parseJSON(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {}) || {};
+		let {r, log} = xu.parseJSON(await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {}) || {};
 		if(!r?.json)
 		{
 			r = {
@@ -529,22 +532,30 @@ const totalDuration = performance.now()-startedAt;
 xlog.info`\ndex Duration: ${totalDuration.msAsHumanReadable()}`;
 
 xlog.debug`Preparing reportData...`;
-const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newMacTypeCreatorsFormatids, newProDOSTypes};
+let reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newMacTypeCreatorsFormatids, newProDOSTypes};
 
 xlog.debug`Writing reportData to: ${path.join(workDirPath, "report.json")}`;
-await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
+const reportFilePath = path.join(workDirPath, "report.json");
+await fileUtil.writeTextFile(reportFilePath, JSON.stringify(reportData));
 
 if(argv.postProcess && argv.itemMetaURL)
 {
 	xlog.info`Starting post processing...`;
-	await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "..", "pp", "postProcess.js"), "--itemMetaURL", argv.itemMetaURL, workDirPath), runUtil.denoRunOpts({liveOutput : true}));
+	await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "..", "pp", "postProcess.js"), "--itemMetaURL", argv.itemMetaURL, ...(argv.headless ? ["--headless"] : []), workDirPath), runUtil.denoRunOpts({xlog}));
 }
 
 await webServer.stop();
 
+if(argv.headless)
+{
+	reportData = xu.parseJSON(await fileUtil.readTextFile(reportFilePath));
+	reportData.dexrecurseWarnings = xlogWarnings;
+	await fileUtil.writeTextFile(reportFilePath, JSON.stringify(reportData));
+}
+
 if(fullOutputPath.endsWith(".tar.gz"))
 {
-	await runUtil.run("tar", ["-cf", fullOutputPath.substring(0, fullOutputPath.length-3), "-C", workDirPath, "."]);
-	await runUtil.run("pigz", [fullOutputPath.substring(0, fullOutputPath.length-3)]);
+	await runUtil.run("tar", ["-cf", fullOutputPath.substring(0, fullOutputPath.length-3), "-C", workDirPath, "."], {xlog});
+	await runUtil.run("pigz", [fullOutputPath.substring(0, fullOutputPath.length-3)], {xlog});
 	await fileUtil.unlink(workDirPath, {recursive : true});
 }

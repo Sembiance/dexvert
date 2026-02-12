@@ -1342,7 +1342,6 @@ export default
 		groundControlIIOperationExodusGameArchive     : {name : "Ground Control II: Operation Exodus game data archive", ext : [".sdf"], magic : ["Ground Control II: Operation Exodus game data archive"], weakMagic : true},
 		gscGameWorldGameDataArchive                   : {name : "GSC Game World game data archive", ext : [".gp"], magic : ["GSC Game World game data archive"], weakMagic : true},
 		guildWarsData                                 : {name : "Guild Wars data", ext : [".dat"], magic : ["Guild Wars data"], weakMagic : true},
-		halloweenHarryGameData                        : {name : "Halloween Harry game data", ext : [".bnk", ".-0"], magic : ["Halloween Harry Bank game data container"]},
 		hallsOfMontezumaScenario                      : {name : "Halls of Montezuma Scenario", ext : [".bfs"], magic : ["Halls of Montezuma Scenario"], weakMagic : true},
 		halfLifeDemo                                  : {name : "Half-Life Demo", ext : [".dem"], magic : ["Half-Life Demo"], weakMagic : true},
 		halfLife2Demo                                 : {name : "Half-Life 2 Demo", ext : [".dem"], magic : ["Half-Life 2 Demo"], weakMagic : true},

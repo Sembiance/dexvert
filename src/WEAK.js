@@ -350,6 +350,21 @@ export const WEAK_VALUES =
 	/^Video CCTV DAT \(luodat\)$/,
 	/^VPlayer subtitles \(vplayer\)$/,
 
+	// gameextractor
+	/^geArchive: 000_5( |$)/,
+	/^geArchive: ACE_SIMIS( |$)/,
+	/^geArchive: ASNCDAT( |$)/,
+	/^geArchive: AST_SCHI( |$)/,
+	/^geArchive: CPN( |$)/,
+	/^geArchive: DAT_8( |$)/,
+	/^geArchive: DAT_37( |$)/,
+	/^geArchive: DAT_53( |$)/,
+	/^geArchive: GME( |$)/,
+	/^geArchive: M02( |$)/,
+
+	/^geViewer: GLI_GLIB_IMG( |$)/,
+	/^geViewer: OGG_OGG( |$)/,
+
 	// GT2
 	/^777 Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,

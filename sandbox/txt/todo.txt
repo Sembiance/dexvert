@@ -1,6 +1,6 @@
-/--------------\
-| TOP Priority |
-\--------------/
+/-------------------\
+| Waiting on Others |
+\-------------------/
 * These formats don't detect with latest Detect-It-Easy: https://github.com/horsicq/Detect-It-Easy/issues/326
 	archive/packerPacked   and  archive/packerJESCOREPacked (I was able to find the old ID code for this one and add it)
 
@@ -13,8 +13,16 @@
 
 * Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
+
+/--------------\
+| TOP Priority |
+\--------------/
 * See about fixing:
 	poly/nif
+
+* These likely are not lotus123 files, investigate further:
+    https://discmaster.textfiles.com/search?extension=-wks+-wk1+-wk2+-wk3+-wk4+-123+-wkb&format=lotus123
+  Tighten up identifcation/conversion, reprocess them
 
 
 /---------------\
@@ -229,6 +237,11 @@
 	https://discmaster.textfiles.com/search?family=unknown&sizeMin=20MB&detection=535441434b4552*&dedup=dedup
 	https://archive.org/details/cdrinc_IMSS_Jefatura_de_Servicios_de_Afiliacion_Catalogo_Region_1
 
+* Go through the sandbox/txt/checkfor_GameExtractor.txt file to locate new files and format samples I should add support for
+  Create new formats and adding to the reprocess list as necessary
+
+* Look at ALL items below, including low priority (such as scummvm code leveraging for macromedia director extration)
+  With each item, consider if vibe coding could help make it a 95% reality
 
 /-----------------\
 | Medium Priority |

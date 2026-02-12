@@ -67,6 +67,9 @@ const EXTRA_PACKAGES =
 	// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
 	"dev-lang/perl",
 
+	// GameExtractorServer
+	"games-util/quickbms",
+
 	// post processing
 	"app-arch/pigz",
 	"dev-db/sparkey",

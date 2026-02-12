@@ -5,6 +5,6 @@ export class agsAudioData extends Format
 	name           = "Adventure Game Studio Audio Data";
 	ext            = [".vox"];
 	forbidExtMatch = true;
-	magic          = ["AGS audio data"];
+	magic          = ["AGS audio data", "geArchive: VOX_CLIB"];
 	converters     = ["gameextractor[codes:VOX_CLIB,VOX_CLIB_2,VOX_CLIB_3] -> dexvert"];
 }

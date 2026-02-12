@@ -7,10 +7,10 @@ export class pcx extends Format
 	ext          = [".pcx", ".pcc"];
 	mimeType     = "image/x-pcx";
 	idMeta       = ({macFileType}) => [".PCX", "PCX ", "PCXx"].includes(macFileType);
-	magic        = ["PCX bitmap", "image/vnd.zbrush.pcx", /^PCX ver.* image data/, /^PCX$/, "piped pcx sequence (pcx_pipe)", "deark: pcx (PCX)", "Zsoft Paintbrush :pcx:", /^fmt\/(86|87|88|89|90)( |$)/];
+	magic        = ["PCX bitmap", "image/vnd.zbrush.pcx", /^PCX ver.* image data/, /^PCX$/, "piped pcx sequence (pcx_pipe)", "deark: pcx (PCX)", "Zsoft Paintbrush :pcx:", /^geViewer: PCX( |$)/, /^fmt\/(86|87|88|89|90)( |$)/];
 	metaProvider = ["image"];
 	converters   = [
-		"nconvert[format:pcx]", "convert", "deark[module:pcx]", "iio2png", "gimp", "imconv[format:pcx]", "wuimg[format:pcx]", "tkimgConvert[strongMatch]",
+		"nconvert[format:pcx]", "convert", "deark[module:pcx]", "iio2png", "gimp", "imconv[format:pcx]", "wuimg[format:pcx]", "tkimgConvert[strongMatch]", "gameextractor[strongMatch][renameOut][codes:PCX]",
 		...["paintDotNet", "imageAlchemy", "noesis[type:image]", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "picturePublisher", "konvertor", "corelPhotoPaint", "canvas5", "canvas", "tomsViewer", "corelDRAW", "keyViewPro"].map(v => `${v}[strongMatch]`)
 	];
 }

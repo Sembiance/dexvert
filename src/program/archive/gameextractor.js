@@ -12,7 +12,7 @@ export class gameextractor extends Program
 	checkForDups = true;
 	exec         = async r =>
 	{
-		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true}), codes : r.flags.codes.split(",")}, asJSON : true});
+		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true}), codes : r.flags.codes.toString().split(",")}, asJSON : true});
 		if(result?.error)
 			r.xlog.error`GameExtractor error for codes ${r.flags.codes}: ${result.error}`;
 	};

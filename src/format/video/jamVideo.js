@@ -7,7 +7,7 @@ export class jamVideo extends Format
 	website        = "https://wiki.multimedia.cx/index.php/JAM";
 	ext            = [".jam"];
 	forbidExtMatch = true;
-	magic          = ["JAM Video", "JAM game video"];
+	magic          = ["JAM Video", "JAM game video", /^geArchive: JAM_JAM( |$)/];
 	weakMagic      = true;
 	converters     = ["na_game_tool[format:jam]"];
 }

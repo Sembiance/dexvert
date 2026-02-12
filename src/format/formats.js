@@ -175,64 +175,6 @@ async function loadSimple({reload}={})
 	}
 }
 
-const gameArchiveFormatids = new Set();
-async function loadGameArchive({reload}={})
-{
-	if(reload)
-	{
-		for(const formatid of gameArchiveFormatids)
-			delete formats[formatid];
-		gameArchiveFormatids.clear();
-	}
-
-	const gameArchiveImport = await import(reload ? `./gameArchive.js#${Date.now() + performance.now()}` :"./gameArchive.js");
-
-	for(const converterType of ["gameextractor", "gamearch", "both"])
-	{
-		const gameArchiveFamilyFormats = gameArchiveImport[converterType];
-		for(const [familyid, gameArchiveFormats] of Object.entries(gameArchiveFamilyFormats))
-		{
-			for(const [formatid, o] of Object.entries(gameArchiveFormats))
-			{
-				if(formats[formatid])
-					throw new Error(`format [${formatid}] in gameArchive.js is a duplicate`);
-
-				const allowExtMatch = !!o.allowExtMatch;
-				delete o.allowExtMatch;
-
-				const supportedKeys = ["ext", "filename", "forbiddenMagic", "idMeta", "magic", "name", "trustMagic", "weakMagic", "website"];
-				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
-				if(extraKeys.length>0)
-					throw new Error(`gameArchive format ${familyid}/${formatid} has extra keys that are not currently copied over to the GameArchive class, add them: ${extraKeys}`);
-				
-				class GameArchive extends Format
-				{
-					converters = [];
-				}
-
-				formats[formatid] = GameArchive.create(families[familyid], format =>
-				{
-					for(const supportedKey of supportedKeys)
-					{
-						if(Object.hasOwn(o, supportedKey))
-							format[supportedKey] = o[supportedKey];
-					}
-					if(o.ext?.length && !allowExtMatch)
-						format.forbidExtMatch = true;
-
-					if(["both", "gamearch"].includes(converterType))
-						format.converters.push("gamearch");
-					if(["both", "gameextractor"].includes(converterType))
-						format.converters.push("gameextractor");
-				});
-
-				formats[formatid].formatid = formatid;
-				gameArchiveFormatids.add(formatid);
-			}
-		}
-	}
-}
-
 const packedFormatids = new Set();
 async function loadPacked({reload}={})
 {
@@ -346,7 +288,7 @@ export async function init(xlog=new XLog("info"))
 
 	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Loading ${formatFilePaths.length} format files...`;
-	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive(), loadPacked(), loadText()]));
+	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadPacked(), loadText()]));
 	xlog.debug`Loaded ${Object.keys(formats).length} formats`;
 }
 
@@ -366,10 +308,6 @@ export async function formatChanged({type, filePath}, xlog=new XLog("info"))
 			else if(path.basename(filePath)==="simple.js")
 			{
 				await loadSimple({reload : true});
-			}
-			else if(path.basename(filePath)==="gameArchive.js")
-			{
-				await loadGameArchive({reload : true});
 			}
 			else if(path.basename(filePath)==="packed.js")
 			{

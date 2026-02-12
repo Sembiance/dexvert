@@ -106,13 +106,15 @@ for(const inputFilePath of inputFilePaths)
 		family    : rows.map(({family}) => (family || "").length).max()
 	};
 
+	//const extraColWidthUsage = rows.map(({family, formatid, extensions}) => `${(family || "")}/${(formatid || "")}${(extensions || []).join(", ").innerTruncate(25)}`.length).max();
 	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid, unsupported, weak}) => ({
 		from : from==="dexvert" ? fg.green(from) : from,
 		confidence,
-		format : `${from!=="dexvert" ? magic.innerTruncate(75) : magic}${unsupported ? fg.deepSkyblue(" unsupported") : ""}${weak ? fg.deepSkyblue(" weak") : ""}`,
-		extensions,
+		format : `${from!=="dexvert" ? magic.innerTruncate(100) : magic}${unsupported ? fg.deepSkyblue(" unsupported") : ""}${weak ? fg.deepSkyblue(" weak") : ""}`,
+		extensions : (extensions || []).join(", ").innerTruncate(25),
 		dexvert : `${from!=="dexvert" ? "" : `${fg.peach(matchType.padStart(maxes.matchType))} ${fg.yellow(family.padStart(maxes.family))}${fg.cyan("/")}${fg.yellowDim(formatid)}`}`}));
 	console.log(printUtil.columnizeObjects(printRows, {
+		padding    : 2,
 		colNameMap : {confidence : "%"},
 		color      : {confidence : "white"}}));
 }

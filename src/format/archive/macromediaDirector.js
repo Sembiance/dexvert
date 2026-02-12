@@ -8,6 +8,7 @@ export class macromediaDirector extends Format
 	forbidExtMatch = true;
 	magic          = [
 		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", "Director Cast data", "Format: Director",
+		/^geArchive: (CXT_RIFX|CXT_XFIR)( |$)/,
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
 	idMeta = ({macFileType, macFileCreator}) => (
@@ -15,6 +16,7 @@ export class macromediaDirector extends Format
 			["AFTB", ...[0, 1, 3, 7].map(v => `MD0${v}`), ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||
 			(macFileType==="XOBJ" && macFileCreator==="MMDR") ||
 			(macFileType==="MC07" && macFileCreator==="SB14"));
+	
 	converters = [
 		// Director CastRipper has fully replaced macromediaDirector.js
 		// Some files must be unprotected first in order to get "all" the files (such as the lingo scripts), thus projectorrays goes first (DREAM3.DXR for example, without projectorrays then cast ripper only gets 14 files, decompiling it first gets 24 total)
@@ -49,6 +51,8 @@ export class macromediaDirector extends Format
 
 		dirOpener	This tool used to not only un-protect a file, but also re-wrapped it in a modern up to date version of director, though sometimes would mess up some assets.
 					It was still an amazingly useful tool to use until Director Cast Ripper was created and now isn't needed at all
+
+		gameextractor	Works but just extracts the chunks raw, no further conversion or anything, thus not really that useful
 		*/
 	];
 }

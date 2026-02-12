@@ -7,7 +7,7 @@ export class mid extends Format
 	ext          = [".mid"];
 	magic        = [
 		// general
-		"MIDI Music", "MIDI Audio", "Standard MIDI data", "Karaoke MIDI", "MIDI sequence data", "audio/midi", /^x-fmt\/230( |$)/,
+		"MIDI Music", "MIDI Audio", "Standard MIDI data", "Karaoke MIDI", "MIDI sequence data", "audio/midi", /^geViewer: MIDI_MTHD( |$)/, /^x-fmt\/230( |$)/,
 
 		// app specific
 		"Yamaha General Style"

@@ -43,11 +43,11 @@ export const TEXT_MAGIC = [...TEXT_MAGIC_STRONG, ...TEXT_MAGIC_WEAK];
 export class Detection
 {
 	// builder to get around the fact that constructors can't be async
-	static create({value, from, file, confidence=100, extensions=[]})
+	static create({value, from, file, weak, confidence=100, extensions=[]})
 	{
 		const detection = new this();
 		Object.assign(detection, {value, from, file, confidence, extensions});
-		detection.weak = WEAK_VALUES.some(v => v.test(value)) || confidence<5;
+		detection.weak = WEAK_VALUES.some(v => v.test(value)) || confidence<5 || !!weak;
 
 		validateClass(detection, {
 			// required

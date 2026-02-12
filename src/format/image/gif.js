@@ -9,7 +9,7 @@ export class gif extends Format
 	mimeType     = "image/gif";
 	magic        = [
 		// generic GIF
-		"GIF image data", "GIF animated bitmap", "image/gif", "CompuServe Graphics Interchange Format (GIF) (gif)", "deark: gif", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, "Compuserve GIF", /^fmt\/(3|4)( |$)/,	//eslint-disable-line sonarjs/single-character-alternation
+		"GIF image data", "GIF animated bitmap", "image/gif", "CompuServe Graphics Interchange Format (GIF) (gif)", "deark: gif", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, "Compuserve GIF", /^geViewer: GIF_GIF( |$)/, /^fmt\/(3|4)( |$)/,	//eslint-disable-line sonarjs/single-character-alternation
 		"GIF (with Length Prefix)",
 
 		// app specific

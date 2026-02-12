@@ -467,6 +467,23 @@ const DEXMAGIC_CUSTOMS = [
 		return `Generic RIFF file ${riffType}`;
 	},
 
+	async function htmlTags(r)
+	{
+		const checkSize = 20;
+		if(r.f.input.size<(checkSize*2))
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, checkSize);
+		if(!(/^\s*<html>/s).test(header.getString(0, checkSize).toLowerCase()))
+			return;
+
+		const footer = await fileUtil.readFileBytes(r.f.input.absolute, checkSize, -checkSize);
+		if(!(/<\/html>\s*$/s).test(footer.getString(0, checkSize).toLowerCase()))
+			return;
+
+		return `HTML start and end tags`;
+	},
+
 	async function installIt(r)
 	{
 		if(r.f.input.size<9)

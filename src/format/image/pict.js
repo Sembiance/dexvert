@@ -61,6 +61,7 @@ export class pict extends Format
 			
 		r.push(
 			"imageAlchemy",		// while this properly recombines sub-bitmaps, it's DOS based and so we don't trust it very much
+			"powerpaint[format:pict][matchType:magic]",
 			"keyViewPro[matchType:magic]",
 			"graphicWorkshopProfessional[matchType:magic]",
 			"corelDRAW[matchType:magic]"

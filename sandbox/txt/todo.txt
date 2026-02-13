@@ -17,14 +17,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Test out 22749 dexrecurse and create an expected (this is to ensure 3D previews are generated and work correctly)
-
 * See about fixing:
 	poly/nif
-
-* These likely are not lotus123 files, investigate further:
-    https://discmaster.textfiles.com/search?extension=-wks+-wk1+-wk2+-wk3+-wk4+-123+-wkb&format=lotus123
-  Tighten up identifcation/conversion, reprocess them
 
 
 /---------------\
@@ -44,31 +38,6 @@
 	Move on to next program
   If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
   After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
-
-* Reverse engineer registration code for: ssbx.exe
-	Use: https://binary.ninja/purchase/#non-commercial
-	Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
-
-* gameextractor supports over 5,200 game formats but I'm only extracting about 90
-  Grab the source code from: https://sourceforge.net/projects/gameextractor/files/ (saved at sandbox/app/gameextractor_316_source.zip just in case)
-  Examine the code and the entry point that I currently call, see what flags are supported.
-  Can use AI (claude code or something similar) to help.
-  Tasks:
-  - Determine if it tries multiple formats, or only tries the best match
-  - Dump a list of all supported formats
-  - Specify a specific format to process as rather than have it guess
-  - Now determine how it detects which format to process as
-  - Custom Java 'detect' server
-	Listens on HTTP JSON with a request to 'identify' a filePath and an 'originalName' field
-	It would then run through ALL plugins using getMatchRating() and returning match confidences above a given threshold?
-	Should return some sort of 'formatid' in the response that I can feed it later
-	Spot check several known files
-	Add that as a new 'detect' program and run the test suite through it
-	I could then get this working on discmaster2
-	I could then create a script that would using the 'file' db and web JSON, test every single file in that item with the new java server
-	Then reproduce an HTML report in 2 seconds, 1 section is 'handled' files and a section for 'unknown' files, showing in each what the gameextract server sees them as
-	Then just work through adding the formats
-  - Better convertor program that can accept a specific formatid to process as
 
 * Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
   Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
@@ -486,10 +455,6 @@
   If host is omitted or is localhost then open locally.
   If host is a remote host then use vncRemote command
 
-* Would be nice to take this Java program and make a CLI conversion program from it's code (git cloned a copy into sandbox/app/): https://github.com/kreativekorp/powerpaint
-  I submitted an issue on their GitHub asking if that would be possible, or at least some help in which classes/methods to use to make it happen
-  Go through formats it supports (see programs_formats.txt) and try them out against dexvert test cases and consider adding to dexvert
-
 * This program is able to identify, extract and convert hundreds of visual novel file formats: https://github.com/morkt/GARbro
   Including archive/repiPack
   It's written in C# .net but targets an old version 4.6. It also references several DLLs that they don't provide.
@@ -583,6 +548,9 @@
 
 * xbox content can be better extracted with: https://github.com/multimediamike/xbfuse
 
+* Reverse engineer registration code for: ssbx.exe  (I forget the name of the program in dexvert, ssbx is the installer, but it is in there)
+	Use: https://binary.ninja/purchase/#non-commercial
+	Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
 
 /----------------\
 | Probably Never |

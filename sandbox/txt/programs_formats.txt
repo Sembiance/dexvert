@@ -11831,23 +11831,6 @@ xwd    X Window System window dump image file
 
 
 
->>> Kreative PowerPaint  https://github.com/kreativekorp/powerpaint
-PNG
-GIF
-JPEG
-BMP
-WBMP (Wireless BMP)
-PICT
-MacPaint
-SuperPaint
-PBM
-PGM
-PPM
-PNM
-PAM
-SuperPaint
-SIC (Sabine Icon)
-
 >>> Graphic Workshop (dos)  http://discmaster.textfiles.com/view/17093/Technotools%20(Chestnut%20CD-ROM)(1993).ISO/utils/gws/gws.doc
 Macpaint
 GEM/IMG
@@ -20703,6 +20686,29 @@ Codecs:
  D.S... vplayer              VPlayer subtitle
  DES... webvtt               WebVTT subtitle
  DES... xsub                 XSUB
+
+>>> https://github.com/kreativekorp/powerpaint    (java -jar /mnt/compendium/DevLab/dexvert/bin/powerpaint.jar --list)
+FORMAT TYPE     EXT      DESCRIPTION                    CAPABILITIES
+───────────     ───      ───────────                    ────────────
+bmp             .bmp     Bitmap                         Read/Write
+gif             .gif     Graphics Interchange Format    Read/Write
+jpeg            .jpg     Joint Photography Experts Group Read/Write
+macpaint        .mpnt    MacPaint                       Read/Write
+pam             .pam     Portable Arbitrary Map         Read/Write
+pbm             .pbm     Portable Bitmap                Read/Write
+pgm             .pgm     Portable Graymap               Read/Write
+pict            .pict    QuickDraw Picture              Read
+png             .png     Portable Network Graphics      Read/Write
+pnm             .pnm     Portable Anymap                Read/Write
+powerpaint      .ckp     PowerPaint                     Read/Write
+ppm             .ppm     Portable Pixmap                Read/Write
+raabits         .rbit    RaaBits                        Read/Write
+sabineicon      .sic     Sabine Icon                    Read/Write
+superpaint      .spnt    SuperPaint                     Read
+wbmp            .wbmp    Wireless Bitmap                Read/Write
+woba            .woba    Wrath of Bill Atkinson         Read/Write
+
+
 
 >>> gameextractor (run dra util/updateGameextractorFormats.js to update)
           Code                                                   Name                                                                                         Extensions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Games

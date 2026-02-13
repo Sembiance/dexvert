@@ -1,3 +1,5 @@
+ATTENTION: This specification was vibe coded by claude code
+
 PDN3 File Format Specification
 ==============================
 

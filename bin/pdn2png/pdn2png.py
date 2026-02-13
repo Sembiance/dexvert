@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""ATTENTION: This program was vibe coded by claude code"""
 """Convert Paint.NET PDN3 files to PNG."""
 
 import struct

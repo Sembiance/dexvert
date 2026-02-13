@@ -7,5 +7,5 @@ export class epfGameArchive extends Format
 	ext            = [".epf"];
 	forbidExtMatch = true;
 	magic          = ["EPF game data archive", /^geArchive: EPF_EPFS( |$)/];
-	converters     = ["gameextractor[codes:EPF_EPFS]", "gamearch"];
+	converters     = ["gamearch", "gameextractor[codes:EPF_EPFS]"];
 }

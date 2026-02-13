@@ -17,6 +17,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Test out 22749 dexrecurse and create an expected (this is to ensure 3D previews are generated and work correctly)
+
 * See about fixing:
 	poly/nif
 

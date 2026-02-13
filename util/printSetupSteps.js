@@ -145,6 +145,8 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
 	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
+	`# Ensure the latest java-vm is set as the sembiance user for GameExtractorServer`,
+	`eselect java-vm set #`,
 
 	`\n# DEXDRONE SETUP:`,
 	`mkdir -p /mnt/dexdrone`,

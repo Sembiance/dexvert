@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,062)
+# Unsupported File Formats (4,061)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1188,7 +1188,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,776)
+## Other (2,775)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2285,7 +2285,6 @@ Family/Format | Name | Extensions | Notes
 [other/halfLifeDemo](https://discmaster.textfiles.com/search?format=halfLifeDemo) | Half-Life Demo | .dem | 
 [other/halfLifeSaveGame](https://discmaster.textfiles.com/search?format=halfLifeSaveGame) | Half-Life Save Game | .sav | 
 [other/halionSamplerPatchBank](https://discmaster.textfiles.com/search?format=halionSamplerPatchBank) | HALion Sampler patch - bank | .fxb | 
-[other/halloweenHarryGameData](https://discmaster.textfiles.com/search?format=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
 [other/hallsOfMontezumaScenario](https://discmaster.textfiles.com/search?format=hallsOfMontezumaScenario) | Halls of Montezuma Scenario | .bfs | 
 [other/halnoteApplication](https://discmaster.textfiles.com/search?format=halnoteApplication) | HALNOTE Application | .apl | 
 [other/hammerHeadRhythmStationPattern](https://discmaster.textfiles.com/search?format=hammerHeadRhythmStationPattern) | HammerHead Rhythm Station pattern | .hh | 

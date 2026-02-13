@@ -1,0 +1,244 @@
+PDN3 File Format Specification
+==============================
+
+Paint.NET project file format (version 3.x/4.x), extension ".pdn".
+
+1. OVERALL FILE LAYOUT
+======================
+
+  Offset  Size     Description
+  ------  ----     -----------
+  0       4        Magic bytes: "PDN3" (0x50 0x44 0x4E 0x33)
+  4       3        XML header length (24-bit little-endian unsigned integer)
+  7       N        XML header (UTF-8 string, N = XML header length)
+  7+N     2        Binary section prefix: 0x00 0x01
+  9+N     M        .NET BinaryFormatter serialized Document object
+  ...     1        MessageEnd record (0x0B)
+  ...     ...      Deferred data section (gzip-compressed pixel data)
+
+
+2. XML HEADER
+=============
+
+The XML header is a UTF-8 string of exactly the length specified at offset 4-6.
+It contains image metadata in this structure:
+
+  <pdnImage width="W" height="H" layers="L" savedWithVersion="V">
+    <custom>
+      <thumb png="BASE64_DATA" />
+    </custom>
+  </pdnImage>
+
+Fields:
+  width             Image width in pixels
+  height            Image height in pixels
+  layers            Number of layers in the document
+  savedWithVersion  Paint.NET version string (e.g. "3.56.3972.42619")
+  thumb png         Base64-encoded PNG thumbnail image
+
+
+3. BINARY SECTION PREFIX
+========================
+
+Two bytes 0x00 0x01 appear between the XML closing tag and the start of the
+.NET BinaryFormatter stream. This serves as a binary format version identifier
+and is consistent across all observed PDN3 files.
+
+
+4. .NET BINARYFORMATTER SERIALIZED STREAM
+==========================================
+
+Standard .NET BinaryFormatter format (Microsoft MS-NRBF specification).
+
+4.1 Stream Header
+-----------------
+Record type 0x00 (SerializedStreamHeader):
+  RootId:       1
+  HeaderId:     -1
+  MajorVersion: 1
+  MinorVersion: 0
+
+4.2 Serialized Object Graph
+----------------------------
+The stream contains the following key classes:
+
+PaintDotNet.Document (root object)
+  isDisposed    Boolean       Always false
+  layers        LayerList     List of all layers
+  width         Int32         Image width
+  height        Int32         Image height
+  userMetaData  NameValueCollection  EXIF and other metadata
+  savedWith     System.Version       Paint.NET version
+
+PaintDotNet.LayerList
+  parent        Document      Back-reference to parent document
+  _items        Object[]      Array of BitmapLayer references
+  _size         Int32         Number of layers
+  _version      Int32         Internal version counter
+
+PaintDotNet.BitmapLayer
+  properties          BitmapLayerProperties  Blend mode
+  surface             Surface                Pixel data surface
+  Layer+isDisposed    Boolean                Always false
+  Layer+width         Int32                  Layer width
+  Layer+height        Int32                  Layer height
+  Layer+properties    LayerProperties        Visibility, opacity, name
+
+PaintDotNet.BitmapLayer+BitmapLayerProperties
+  blendOp       UserBlendOps+*BlendOp    Blend operation class
+
+  Known blend op classes (class name suffix indicates mode):
+    NormalBlendOp, MultiplyBlendOp, AdditiveBlendOp, ColorBurnBlendOp,
+    ColorDodgeBlendOp, ReflectBlendOp, GlowBlendOp, OverlayBlendOp,
+    DifferenceBlendOp, NegationBlendOp, LightenBlendOp, DarkenBlendOp,
+    ScreenBlendOp, XorBlendOp
+
+PaintDotNet.Layer+LayerProperties
+  name          String        Layer name
+  userMetaData  NameValueCollection  Per-layer metadata
+  visible       Boolean       Layer visibility flag
+  isBackground  Boolean       Whether this is a background layer
+  opacity       Byte          Layer opacity (0-255, 255 = fully opaque)
+
+PaintDotNet.Surface
+  scan0         MemoryBlock   Raw pixel data storage
+  width         Int32         Surface width in pixels
+  height        Int32         Surface height in pixels
+  stride        Int32         Bytes per scanline (always width * 4)
+
+PaintDotNet.MemoryBlock
+  length64      Int64         Total byte length (= width * height * 4)
+  hasParent     Boolean       Always false for top-level blocks
+  deferred      Boolean       Always true - data in deferred section
+
+4.3 Stream End
+--------------
+The stream ends with a MessageEnd record (0x0B). All records between the
+StreamHeader and MessageEnd follow the standard .NET BinaryFormatter record
+type definitions (MS-NRBF specification).
+
+
+5. DEFERRED DATA SECTION (PIXEL DATA)
+======================================
+
+After the MessageEnd record (0x0B), the file contains gzip-compressed pixel
+data for each layer's MemoryBlock, in the order they appear in the serialized
+object graph.
+
+5.1 Format Byte
+----------------
+The format byte (byte 2 of the first-chunk header) determines the maximum
+uncompressed chunk size:
+
+  Format Byte    Max Chunk Size            Paint.NET Versions
+  -----------    --------------            ------------------
+  0x04           262,144 bytes (256 KB)    >= 3.53, including 4.x
+  0x10           1,048,576 bytes (1 MB)    3.22 through 3.36
+
+  Formula: max_chunk_size = format_byte * 65536
+
+5.2 Per-Layer Header (13 bytes)
+-------------------------------
+Each layer's pixel data begins with a 13-byte header:
+
+  Offset  Size  Type      Description
+  ------  ----  ----      -----------
+  0       2     uint16    Reserved (always 0x0000)
+  2       1     uint8     Format byte (0x04 or 0x10)
+  3       4     uint32    Reserved (always 0x00000000)
+  7       1     uint8     Reserved (always 0x00)
+  8       1     uint8     Chunk order flag:
+                            0x00 = full chunks first, remainder last (v3.x)
+                            0x01 = remainder chunk first, full chunks after (v4.x)
+  9       4     uint32be  Compressed data size of first chunk (big-endian)
+
+5.3 Chunk Structure
+-------------------
+For a layer with total_bytes raw pixel data (= width * height * 4):
+
+  num_full_chunks = total_bytes / max_chunk_size  (integer division)
+  remainder_size  = total_bytes % max_chunk_size
+  total_chunks    = num_full_chunks + (1 if remainder_size > 0 else 0)
+
+The first chunk's compressed data immediately follows the 13-byte header.
+Each subsequent chunk has an 8-byte continuation header:
+
+  Offset  Size  Type      Description
+  ------  ----  ----      -----------
+  0       4     uint32be  Chunk index (big-endian)
+  4       4     uint32be  Compressed data size (big-endian)
+
+Each chunk's data is independently gzip-compressed.
+
+5.4 Chunk Ordering
+------------------
+With chunk_order = 0x00 (v3.x):
+  Chunks appear in order: full chunks (ascending index), then remainder.
+  Concatenating in file order produces correct pixel data.
+
+With chunk_order = 0x01 (v4.x):
+  The remainder chunk appears FIRST, followed by full chunks.
+  To reconstruct pixel data: move the first chunk to the end, then
+  concatenate. i.e., correct order = chunks[1:] + [chunks[0]].
+
+5.5 Pixel Data Format
+---------------------
+Each decompressed chunk contains raw BGRA pixel data:
+
+  Byte 0: Blue   (0-255)
+  Byte 1: Green  (0-255)
+  Byte 2: Red    (0-255)
+  Byte 3: Alpha  (0-255, 0 = transparent, 255 = opaque)
+
+4 bytes per pixel, stored left-to-right, top-to-bottom (row-major order).
+Stride is always width * 4 with no padding.
+
+
+6. LAYER COMPOSITING
+====================
+
+To produce a flattened image, layers are composited bottom-to-top (layer 0
+is the bottom-most). Only visible layers (visible=true) participate.
+
+6.1 Effective Alpha
+-------------------
+Each pixel's effective alpha combines the pixel alpha with layer opacity:
+
+  effective_alpha = pixel_alpha * layer_opacity / 255
+
+6.2 Blend Modes
+---------------
+For non-Normal blend modes, the source color is first mixed with the blend
+result based on destination alpha (W3C Compositing Level 1):
+
+  blended_color = BlendFunc(source_color, dest_color)
+  mixed_color   = (1 - dest_alpha) * source_color + dest_alpha * blended_color
+
+For Normal blend: mixed_color = source_color (no blending needed).
+
+Blend functions (all operate per-channel in [0,1] range):
+  Normal:      src
+  Multiply:    src * dst
+  Screen:      src + dst - src * dst
+  Overlay:     2*src*dst if dst<0.5, else 1-2*(1-src)*(1-dst)
+  Darken:      min(src, dst)
+  Lighten:     max(src, dst)
+  ColorDodge:  dst / (1 - src), clamped to [0,1]
+  ColorBurn:   1 - (1 - dst) / src, clamped to [0,1]
+  Difference:  |src - dst|
+  Negation:    1 - |1 - src - dst|
+  Screen:      src + dst - src * dst
+  Reflect:     dst^2 / (1 - src), clamped to [0,1]
+  Glow:        src^2 / (1 - dst), clamped to [0,1]
+  Additive:    min(src + dst, 1)
+  Xor:         src XOR dst (integer operation on byte values)
+
+6.3 Alpha Compositing
+---------------------
+Standard source-over compositing with the mixed color:
+
+  result_alpha = src_alpha + dst_alpha * (1 - src_alpha)
+  result_color = (src_alpha * mixed_color + dst_alpha * (1 - src_alpha) * dst_color)
+                 / result_alpha
+
+Where src_alpha uses the effective alpha from 6.1.

@@ -364,6 +364,7 @@ export const WEAK_VALUES =
 
 	/^geViewer: GLI_GLIB_IMG( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
+	/^geViewer: TGA( |$)/,
 
 	// GT2
 	/^777 Archiv gefunden \(Auflistung ist deaktiviert\)$/,

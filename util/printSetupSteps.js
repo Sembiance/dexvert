@@ -57,6 +57,8 @@ const EXTRA_PACKAGES =
 
 	// needed for gameViewerLinux and other python things
 	"dev-lang/python:3.12",
+	"dev-python/pillow",
+	"dev-python/numpy",
 
 	// needed by boo2pdf
 	"x11-libs/libXtst",

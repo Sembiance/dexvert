@@ -13,11 +13,15 @@ export class wad extends Format
 	idMeta     = ({macFileType, macFileCreator}) => (macFileType===".WAD" && ["Htic", "idSW"].includes(macFileCreator)) || (macFileType==="HXwd" && macFileCreator==="HEXN");
 	converters = dexState =>
 	{
-		const r = ["gameextractor[codes:WAD_WAD3,WAD_PWAD,WAD_IWAD]"];
+		const r = [];
 		if(dexState.hasMagics("WAD3 :wad:"))
-			r.push("nconvert[extractAll][format:wad]");
+			r.push("gameextractor[codes:WAD_WAD3,WAD_PWAD,WAD_IWAD]", "nconvert[extractAll][format:wad]");
 
-		r.push("deark[module:wad]", "gamearch");
+		r.push("deark[module:wad]");
+		if(!dexState.hasMagics("WAD3 :wad:"))
+			r.push("gameextractor[codes:WAD_WAD3,WAD_PWAD,WAD_IWAD]");
+		
+		r.push("gamearch");
 		return r.map(v => `${v} & noesis[type:poly]`);
 	};
 }

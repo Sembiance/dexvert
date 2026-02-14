@@ -13,6 +13,12 @@ if [ "$(pgrep -fc "/mnt/compendium/bin/dexserver")" -gt 0 ] || [ "$(pgrep -fc "/
 	exit 0
 fi
 
+# enable KSM so QEMU instances can share memory pages
+echo 10000 | sudo tee /sys/kernel/mm/ksm/pages_to_scan > /dev/null
+echo 100 | sudo tee /sys/kernel/mm/ksm/sleep_millisecs > /dev/null
+echo 1 | sudo tee /sys/kernel/mm/ksm/run > /dev/null
+
+# archive old logs
 if [ -s /mnt/dexvert/log/dexserver.err ]; then
 	mkdir -p /mnt/dexvert/oldLogs
 	ts="$(date +%Y%m%d_%H%M%S)"

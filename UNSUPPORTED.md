@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,059)
+# Unsupported File Formats (4,058)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (314)
+## Archive (313)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -41,7 +41,6 @@ Family/Format | Name | Extensions | Notes
 [archive/atariCassetteTapeImage](https://discmaster.textfiles.com/search?format=atariCassetteTapeImage) | Atari Cassette Tape Image | .cas | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCassetteTapeImage/)
 [archive/atariLZF0CompressedArchive](https://discmaster.textfiles.com/search?format=atariLZF0CompressedArchive) | Atari LZF0 compressed archive | .pax | 
 [archive/audiokineticWwisePackage](https://discmaster.textfiles.com/search?format=audiokineticWwisePackage) | Audiokinetic Wwise Package | .pck .pkg | 
-[archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?format=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
 [archive/autochopFragment](https://discmaster.textfiles.com/search?format=autochopFragment) | AUTOCHOP fragment | .#00 .#01 .#02 .#03 .#04 .#05 .#06 .#07 .#08 .#09 | 
 [archive/bDOSBootableDiskImage](https://discmaster.textfiles.com/search?format=bDOSBootableDiskImage) | B-DOS bootable disk image | .dsk | 
 [archive/batToExePacked](https://discmaster.textfiles.com/search?format=batToExePacked) | Bat To Exe Packed | .exe | 

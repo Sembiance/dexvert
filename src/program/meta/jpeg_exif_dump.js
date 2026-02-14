@@ -1,12 +1,14 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class jpeg_exif_dump extends Program
 {
-	website = "https://github.com/nico/hack/blob/main/jpeg_exif_dump.c";
-	package = "media-gfx/jpeg_exif_dump";
-	bin     = "jpeg_exif_dump";
-	args    = r => ["--scan", r.inFile()];
-	post    = r =>
+	website    = "https://github.com/nico/hack/blob/main/jpeg_exif_dump.c";
+	package    = "media-gfx/jpeg_exif_dump";
+	bin        = "jpeg_exif_dump";
+	args       = r => ["--scan", r.inFile()];
+	runOptions = {stdoutLimit : xu.KB*100};	// some files have MASSIVE amounts of metadata that we don't really care about. See samples: Neddy_Flyer_ft_HeatherRyan.jpg and skin.jpg
+	post       = r =>
 	{
 		const meta = {};
 		let driCount=0;

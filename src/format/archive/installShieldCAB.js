@@ -5,7 +5,7 @@ export class installShieldCAB extends Format
 	name         = "InstallShield CAB";
 	website      = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
 	ext          = [".cab"];
-	magic        = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield Compressed Archive", "ISC Archiv gefunden", "Archive: InstallShield Cabinet File", /^geArchive: (CAB_ISC_2|CAB_ISC_3)( |$)/];
+	magic        = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield Compressed Archive", "ISC Archiv gefunden", "Archive: InstallShield Cabinet File", /^geArchive: (CAB_ISC|CAB_ISC_2|CAB_ISC_3)( |$)/];
 	keepFilename = true;
 	auxFiles     = (input, otherFiles) =>
 	{
@@ -21,5 +21,5 @@ export class installShieldCAB extends Format
 		const hdrAndCabFiles = otherFiles.filter(file => [".hdr", ".cab"].includes(file.ext.toLowerCase()));
 		return hdrAndCabFiles.length>0 ? hdrAndCabFiles : false;
 	};
-	converters = ["unshield", "unshield[oldCompression]", "winPack[matchType:magic]", "gameextractor[codes:CAB_ISC_2,CAB_ISC_3]", "UniExtract[matchType:magic][hasExtMatch]"];
+	converters = ["unshield", "unshield[oldCompression]", "winPack[matchType:magic]", "gameextractor[codes:CAB_ISC_3,CAB_ISC_2,CAB_ISC]", "UniExtract[matchType:magic][hasExtMatch]"];
 }

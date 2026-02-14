@@ -76,3 +76,5 @@ rm -rf dexvert
 if [[ "$(hostname)" == dexdrone* ]]; then
 	fd . /home/"$whoami"/.dbus/session-bus/ --type=file -x rm {} \;
 fi
+
+echo 0 | sudo tee /sys/kernel/mm/ksm/run > /dev/null

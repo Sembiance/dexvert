@@ -387,7 +387,7 @@ async function processNextQueue()
 			Object.assign(rpcData.dexvertOptions.programFlag, parseProgramFlags(fileProgramFlags[task.relFilePath]));
 		}
 
-		let {r, log} = xu.parseJSON(await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}), {}) || {};
+		let {r, log} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}) || {};
 		if(!r?.json)
 		{
 			r = {
@@ -518,12 +518,15 @@ await xu.waitUntil(async () =>	// eslint-disable-line require-await
 	while(taskQueue.length>0 && taskActive.size<AGENT_COUNT)
 		processNextQueue();	// eslint-disable-line no-floating-promise/no-floating-promise
 
-	const slowestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
-	const queuePart = `${xu.cf.fg.chartreuse("Q")} ${xu.cf.fg.white(taskQueue.length.toString())}`;
-	const activePart = `${xu.cf.fg.chartreuse("A")} ${xu.cf.fg.white(taskActive.size.toString())}`;
-	const handledPart = `${xu.cf.fg.chartreuse("H")} ${((taskHandledCount/taskFinishedCount)*100).toFixed(2)}%`;
-	const slowestPart = `${xu.cf.fg.white((performance.now()-slowestTask.startedAt).msAsHumanReadable({short : true}))} ${slowestTask.relFilePath.innerTruncate(40)}`;
-	bar?.setStatus(` ${queuePart}   ${activePart}   ${handledPart}   ${slowestPart}`);
+	if(bar)
+	{
+		const slowestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
+		const queuePart = `${xu.cf.fg.chartreuse("Q")} ${xu.cf.fg.white(taskQueue.length.toString())}`;
+		const activePart = `${xu.cf.fg.chartreuse("A")} ${xu.cf.fg.white(taskActive.size.toString())}`;
+		const handledPart = `${xu.cf.fg.chartreuse("H")} ${((taskHandledCount/taskFinishedCount)*100).toFixed(2)}%`;
+		const slowestPart = slowestTask ? `${xu.cf.fg.white((performance.now()-slowestTask.startedAt).msAsHumanReadable({short : true}))} ${slowestTask.relFilePath.innerTruncate(40)}` : `no tasks?? ${taskActive.size}`;
+		bar.setStatus(` ${queuePart}   ${activePart}   ${handledPart}   ${slowestPart}`);
+	}
 
 	return false;
 }, {interval : 100});

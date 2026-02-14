@@ -3414,7 +3414,7 @@ export default
 		rfFlowDiagram                            : {name : "RFFlow Diagram/Chart", ext : [".flo"], magic : ["RFFlow diagram", /^fmt\/(1289|1290)( |$)/]},
 		riffMSXF                                 : {name : "RIFF MSFX File", ext : [".sfx"], magic : ["RIFF MSFX file"], notes : "Just contains meta info about a given soundeffect usually distributed alongside it as a .wav"},
 		riffMxSt                                 : {name : "RIFF MxSt File", ext : [".si"], magic : ["RIFF MxSt file"], notes : "References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff"},
-		riffPalette                              : {name : "RIFF Palette", ext : [".pal"], magic : ["RIFF Palette", /^RIFF \((little|big)-endian\) data, palette/, /^fmt\/624( |$)/]},
+		riffPalette                              : {name : "RIFF Palette", ext : [".pal"], magic : ["RIFF Palette", /^RIFF \((little|big)-endian\) data, palette/, /^geArchive: PAL_RIFF( |$)/, /^fmt\/624( |$)/]},
 		riffSTYL                                 : {name : "RIFF STYL File", ext : [".par"], magic : ["RIFF STYL file"], notes : "References a font for mac and windows and includes some text in a TEXT chunk"},
 		rioScene                                 : {name : "RIO Scene", ext : [".scn", ".sty"], magic : ["RIO Scene"], weakMagic : true},
 		risCitationFormat                        : {name : "RIS citation format", ext : [".layout"], magic : ["RIS citation format"]},

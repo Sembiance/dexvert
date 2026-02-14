@@ -4,15 +4,21 @@ import {Detection} from "../../Detection.js";
 import {C} from "../../C.js";
 
 // these codes are known to match lots of random files based on current dexvert test samples, so just exclude them entirely from appearing
+const _WEAK_PREFIX_CODES =
+{
+	35 : ["NoExt_"],
+	30 : ["BIN_", "DAT_", "NoExt_", "PAK_"],
+	25 : ["RES_", "WAD_"]
+};
 const _SKIP_CODES = new Set([
-	"AFS_AFS_WE00", "AMM_FORM", "ARC_ARC", "ARK_2", "CEG_GEKV", "BIN_6", "BIN_7L", "BMP_BMP", "DAT_57", "DAT_CMP_2", "DBS", "DLL_MZ",
-	"FBZ_PK", "FFMPEG_Audio_", "FLA", "GUT", "ISO", "JavaImagingUtilities", "LBM_FORM", "MHTML", "MP3",
-	"NoExt_1", "NoExt_2", "NoExt_3", "NoExt_4", "NoExt_6", "NoExt_7", "NoExt_8", "NoExt_RDFZ",
-	"PAK_11", "PAK_42", "PAK_43", "PAK_55", "PAK_FORM", "PAK_G3V0", "PCG", "PCK_2", "PKBARC_BMT", "PKF", "PRJ_PROJ",
-	"SHD", "SND_SND2", "TEXTURE", "TXT", "U_Generic", "VGMSTREAM_Audio_WAV_RIFF", "WAD_8", "WAV_RIFF", "ZBD_RIFF", "ZIP_PK"
+	"AFS_AFS_WE00", "AMM_FORM", "ARC_ARC", "ARK_2", "CEG_GEKV", "BMP_BMP", "DBS", "DLL_MZ",
+	"FBZ_PK", "FLA", "GUT", "ISO", "JavaImagingUtilities", "LBM_FORM", "MHTML", "MP3",
+	"PAK_FORM", "PCG", "PCK_2", "PKBARC_BMT", "PKF", "PRJ_PROJ",
+	"SHD", "SND_SND2", "TEXTURE", "TXT", "U_Generic", "WAV_RIFF", "ZBD_RIFF", "ZIP_PK"
 ]);
-const _SKIP_NAMES = ["Unity3D Engine Resource"];
-export {_SKIP_CODES, _SKIP_NAMES};
+const _SKIP_PREFIX_CODES = [];
+const _SKIP_PREFIX_NAMES = ["Unity3D Engine Resource"];
+export {_SKIP_CODES, _SKIP_PREFIX_CODES, _SKIP_PREFIX_NAMES};
 
 export class gameextractorID extends Program
 {
@@ -25,7 +31,7 @@ export class gameextractorID extends Program
 		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/detect`, {json : {filePath : r.inFile({absolute : true})}, asJSON : true});
 		for(const {type, code, name, rating, extensions, games, extensionMatch} of result?.matches || [])
 		{
-			if((!r.xlog || !r.xlog.atLeast("trace")) && (_SKIP_CODES.has(code) || _SKIP_NAMES.some(v => name.startsWith(v))))
+			if((!r.xlog || !r.xlog.atLeast("trace")) && (_SKIP_CODES.has(code) || _SKIP_PREFIX_CODES.some(v => code.startsWith(v)) || _SKIP_PREFIX_NAMES.some(v => name.startsWith(v))))
 				continue;
 
 			const confidence = Math.clamp(rating - (extensionMatch ? 25 : 0), 0, 100);
@@ -38,7 +44,8 @@ export class gameextractorID extends Program
 					vals.push(` - ${name}`);
 				if((games || []).length && games.some(v => v?.length))
 					vals.push(` (${games.sortMulti().slice(0, 2).join(", ")}${games.length>3 ? `, ${games.length-3} more...` : ""})`);
-				r.meta.detections.push(Detection.create({value : vals.join(""), from : "gameextractorID", extensions : (extensions || []).sortMulti().map(v => `.${v}`), confidence, weak : confidence<=15, file : r.f.input}));
+				const weak = confidence<=(r.f.input.size<100 ? 49 : 15) || (Object.entries(_WEAK_PREFIX_CODES).some(([lowCon, codes]) => codes.some(v => code.startsWith(v)) && confidence<=lowCon));
+				r.meta.detections.push(Detection.create({value : vals.join(""), from : "gameextractorID", extensions : (extensions || []).sortMulti().map(v => `.${v}`), confidence, weak, file : r.f.input}));
 			}
 		}
 	};

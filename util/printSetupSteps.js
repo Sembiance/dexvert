@@ -156,6 +156,11 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`grep dexvert ~/.ssh/authorized_keys >> /home/sembiance/.ssh/authorized_keys`,
 	`chown sembiance:sembiance /home/sembiance/.ssh/authorized_keys`,
 	`chmod 600 /home/sembiance/.ssh/authorized_keys`,
+	`dd if=/dev/zero of=/swapfile bs=1M count=131072 status=progress`,
+	`chmod 600 /swapfile`,
+	`mkswap /swapfile`,
+	`swapon /swapfile`,
+	`echo "/swapfile none swap sw 0 0" >> /etc/fstab`,
 
 	`\n# Final Steps:`,
 	`sudo reboot`,

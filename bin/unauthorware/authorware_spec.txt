@@ -1,46 +1,179 @@
 vibe coded by claude code
 
-Authorware Packaged File (.a4p / .a5p) Specification
-=====================================================
-Reverse-engineered from Macromedia Authorware 4.x/5.x sample files.
+Authorware Packaged/Library File Specification
+===============================================
+Covers: .app (Authorware 1.x/Star packaged), .apr (Authorware 1.x/Star library),
+        .apw/.asw (Authorware 2.x Windows), .aas (Authorware segments),
+        .a3m (Authorware 3.x Mac), .a3w (Authorware 3.x Windows),
+        .a4p, .a5p, .a6p, .a7p (packaged),
+        and .a4r, .a5r, .a6r, .a7r (library)
+Reverse-engineered from Macromedia Authorware 1.x/2.x/3.x/4.x/5.x/6.x/7.x sample files.
 
 Overview
 --------
-The A4P/A5P format is a packaged (runtime) file used by Macromedia Authorware,
-an interactive multimedia authoring tool. A4P files are produced by Authorware
-4.x and A5P files by Authorware 5.x. Both use the identical binary format
-described here. It stores a collection of "icons" (display elements,
-interactions, scripts, images, text, etc.) in a single file with optional
-zlib compression.
+Macromedia Authorware uses five related binary formats for its files:
+
+Authorware Star/1.x packaged files (.app) use the "WPCR" magic
+signature with secondary magic A8 AF BC AD. Three sub-formats exist
+based on flags:
+
+  - Flags 0xFFFFFFFC: 4-byte offset-only entry table at table_offset.
+    Entries are a list of uint32 data offsets with no IDs, sizes, or type
+    fields. Data sizes are computed from gaps between consecutive offsets.
+    An end-of-data marker (= file_size) follows at position entry_count.
+
+  - Flags 0xFFFFFFFB: 16-byte entry records at table_offset (same layout
+    as WCRS, but all entry IDs are 0).
+
+  - Flags 0xFFFFFFFF: 16-byte entry records at table_offset (same as
+    WCRS with proper entry IDs). Table is typically at end of file.
+
+All WPCR data is uncompressed. Content types are auto-detected from
+data signatures.
+
+Authorware Star/1.x library files (.apr) use the "WPLI" magic signature
+with secondary magic A8 AF B3 B6. They use the same three sub-formats
+as WPCR (based on flags), the same header layout, and the same entry
+table formats. WPLI is the library counterpart of WPCR, analogous to
+PCRS being the library counterpart of ACRS. Some .apr files are
+segment files (header file_size > actual file size).
+
+Authorware 2.x Windows files (.apw/.asw) use the "WCRS" magic signature
+with format version 2. They use a compact 10-byte entry table located at
+the end of the file (offset = file_size - table_total_size). Entry records
+contain only id, data_offset, and data_size (no icon type or storage
+type fields). All data is uncompressed. Content types are detected
+from data signatures. Two flavors exist: format version 2 (10-byte
+records at end of file) and format version 4 (16-byte records at
+table_offset, same as A3W). APW and ASW files are structurally
+identical; the only observed difference is the encoder version field
+(1 for APW, 5-6 for ASW).
+
+Authorware 3.x Windows files (.a3w) use the "WCRS" magic signature and
+a 16-byte entry table format with no icon type field (see WCRS Entry
+Table section). All data is uncompressed. Content types are detected
+from data signatures (PIG, DIB, BMP, AIFF headers).
+
+Authorware 3.x Mac files (.a3m) use the "ACRS" magic signature but with
+all multi-byte header and entry table fields in big-endian byte order.
+They use the same 16-byte entry record format as WCRS files (no icon
+type field, no compression). The big-endian format is detected by
+reading the format_version field at 0x20 as little-endian: if the
+result exceeds 255, the file is big-endian. DIB images (BITMAPINFOHEADER)
+in A3M files may be stored in either big-endian or little-endian byte
+order; both must be handled.
+
+Packaged files (.a4p/.a5p/.a6p/.a7p) are runtime files produced by
+Authorware 4.x through 7.x. They use the "ACRS" magic signature.
+
+Library files (.a4r/.a5r/.a6r/.a7r) are reusable component libraries.
+They use the "PCRS" magic signature. A4R files use the same 30-byte
+entry table format as ACRS packaged files. A5R/A6R/A7R files use a
+compact 10-byte entry table format (see PCRS Entry Table section).
+
+  Library     Format version    Flags                   Entry record size
+  ----------  ----------------  ----------------------  -----------------
+  A4R         5                 0xFFFFFFF9/0xF9FFFFFF   30 bytes (ACRS)
+  A5R         5                 0xFFFFFFF8              10 bytes (PCRS)
+  A6R         6                 0xFFFFFFF6/0xFFFFFFF7   10 bytes (PCRS)
+  A7R         6                 0xFFFFFFF5              10 bytes (PCRS)
+
+To determine the entry record size for PCRS files, check whether
+entry_count * 30 fits within table_total_size. If not, use 10-byte
+records.
+
+Segment files (.aas) are Authorware Segment files that use the "PCRS"
+magic signature. They use the same format as library files (either
+10-byte or 30-byte entry records depending on flags). Some .aas files
+are complete (header file_size matches actual file size), while others
+are segments of a larger file where the header describes all entries
+but only a subset of the entry data is present. For segment files,
+entries whose data_offset exceeds the actual file size should be
+skipped (their data resides in other segment files). Segment files
+are detected by comparing the header file_size field against the
+actual file size on disk.
+
+  AAS variant     Format version    Flags                   Entry record size
+  --------------  ----------------  ----------------------  -----------------
+  (A4R-style)     5                 0xFFFFFFF9              30 bytes (ACRS)
+  (A5R-style)     5                 0xFFFFFFF8              10 bytes (PCRS)
+  (A6R-style)     6                 0xFFFFFFF6/0xFFFFFFF7   10 bytes (PCRS)
+
+Both formats share the same 64-byte header structure, icon type system,
+compression scheme, and data extraction logic. They store a collection
+of "icons" (display elements, interactions, scripts, images, text, etc.)
+in a single file with optional zlib compression.
 
 All multi-byte integers are little-endian unless otherwise noted.
+Exception: A3M (Authorware 3.x Mac) files store all header and entry
+table fields in big-endian byte order (see A3M section above).
 
 Version Differences
 -------------------
-A4P (Authorware 4.x) and A5P (Authorware 5.x) files share the same format
-with the following observed differences:
+APP/APR files (Authorware Star/1.x) use the WPCR (packaged) or WPLI
+(library) magic with format version 4 and encoder version 22. Three
+sub-formats exist:
+  - Flags 0xFFFFFFFC: 4-byte offset-only entry table (no entry IDs/sizes).
+  - Flags 0xFFFFFFFB: 16-byte records at table_offset (IDs all zero).
+  - Flags 0xFFFFFFFF: 16-byte records at table_offset (with IDs).
+Some .app files use the PCRS magic (same as library files).
 
-  Field               A4P                     A5P
-  ------------------  ----------------------  ----------------------
-  Encoder version     0 or 22                 22
-  Flags               0xFFFFFFF9/0xF9FFFFFF   0xFFFFFFF8
-  Format version      5                       5
-  Layout patterns     Both A and B            B only (data-first)
+APW/ASW files (Authorware 2.x Windows) use the WCRS magic with two
+format versions:
+  - Format version 2 (encoder version 1/5/6, flags 0x00000003): 10-byte
+    entry records located at file_size - table_total_size. The
+    table_offset header field (0x34) is always 0 (unused).
+  - Format version 4 (encoder version 22, flags 0xFFFFFFFF): 16-byte
+    entry records at the table_offset, same layout as A3W files.
+Both use no compression. Content types are auto-detected from data.
 
-The icon types, entry table format, compression, and all other structures
-are identical between versions.
+A3W files (Authorware 3.x Windows) use format version 4 with flags
+0xFFFFFFFC or 0xFFFFFFFB. They use the WCRS magic, 16-byte entry
+records with no icon type field, and no zlib compression (all data
+is stored raw).
+
+A3M files (Authorware 3.x Mac) use format version 4 with flags
+0xFFFFFFFC. They use the ACRS magic but with all multi-byte fields
+in big-endian byte order. They use the same 16-byte entry record
+format as WCRS (no icon type, no compression). PIG entries may
+contain WIN and/or MAC platform sub-images. DIB entries may have
+big-endian or little-endian BITMAPINFOHEADER fields; the endianness
+is detected from the biSize field (LE: 0x28000000, BE: 0x00000028).
+
+A4P, A5P, A6P, and A7P files share the same format with the following
+observed differences:
+
+  Field               A4P                     A5P                     A6P                     A7P
+  ------------------  ----------------------  ----------------------  ----------------------  ----------------------
+  Encoder version     0 or 22                 22                      22                      22
+  Flags               0xFFFFFFF9/0xF9FFFFFF   0xFFFFFFF8              0xFFFFFFF6/0xFFFFFFF7   0xFFFFFFF5
+  Format version      5                       5                       6                       6
+  Layout patterns     Both A and B            B only (data-first)     Both A and B            Both A and B
+
+The icon types, compression, and all other structures are identical across
+all packaged file versions. ACRS files use 30-byte entry records; PCRS
+files use 10-byte entry records (see PCRS Entry Table section). A6P
+introduces one new icon type (0x39 MediaLink). PCRS library files
+introduce two library-specific icon types: 0x1D LibraryIndex (all PCRS
+versions) and 0x1E LibraryLayout (A4R only). No new types were
+introduced in A5P or A7P.
 
 
 File Header (64 bytes, offset 0x00)
 -----------------------------------
 Offset  Size  Type      Description
 ------  ----  --------  -------------------------------------------
-0x00    4     char[4]   Magic signature: "ACRS"
-0x04    4     uint32    Secondary magic: 0xACBCBEAC (bytes: BE BC AD AC)
-0x08    4     uint32    Encoder version (typically 0 or 22)
-0x0C    4     int32     Flags (typically 0xFFFFFFF9 or 0xF9FFFFFF)
+0x00    4     char[4]   Magic: "WPCR" (Star/1.x packaged), "WPLI" (Star/1.x library),
+                        "WCRS" (v2/v3 Windows), "ACRS" (packaged + v3 Mac),
+                        or "PCRS" (library)
+0x04    4     uint32    Secondary magic: A8 AF BC AD (WPCR), A8 AF B3 B6 (WPLI),
+                        A8 BC AD AC (WCRS), BE BC AD AC (ACRS/A3M),
+                        or AF BC AD AC (PCRS)
+0x08    4     uint32    Encoder version (1 for APW v2, 0 or 22 for others)
+0x0C    4     int32     Flags (see Version Differences)
 0x10    16    bytes     File metadata / checksum (may be zeros or 0xCC fill)
-0x20    4     uint32    Format version (observed: 5)
+0x20    4     uint32    Format version (4 for APP/APW v4/A3W/A3M,
+                        2 for APW/ASW v2, 5 for A4P/A5P, 6 for A6P/A7P)
 0x24    4     uint32    File size in bytes (matches actual file size)
 0x28    4     uint32    Total uncompressed data size
 0x2C    4     uint32    Table region total size (entry table + secondary table)
@@ -79,8 +212,8 @@ In both patterns, the entry table offset is always given by header field
 entry record.
 
 
-Entry Table
------------
+Entry Table (ACRS - Packaged Files)
+-----------------------------------
 Located at the file offset given by header field 0x34.
 Each entry is exactly 30 bytes:
 
@@ -116,6 +249,125 @@ The secondary table format varies between files:
 
 This table appears to contain auxiliary metadata related to the Authorware
 flowline tree structure. It is NOT a reference table for additional data.
+
+
+Entry Table (PCRS - Library Files)
+----------------------------------
+PCRS library files use a compact 10-byte entry record format. The entry
+table is always at offset 0x6A (layout A, table-first). Entries do not
+have explicit IDs or parent fields; they are numbered sequentially.
+
+Each entry is exactly 10 bytes:
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    4     uint32    Data offset (absolute file position of entry data)
+0x04    4     uint32    Decompressed data size in bytes
+0x08    1     uint8     Icon type (see Icon Types below)
+0x09    1     uint8     Storage type: 2 = uncompressed, 3 = zlib-compressed
+
+Note: PCRS storage type values are offset by 1 from ACRS values
+(PCRS 2 = ACRS 1 = raw, PCRS 3 = ACRS 2 = zlib).
+
+The compressed size is not stored explicitly. For zlib-compressed entries,
+it must be derived from the gap between consecutive data offsets (sorted
+by offset). For uncompressed entries, the compressed size equals the
+decompressed size.
+
+Following the entry table, a secondary table extends to the total table
+size given by header field 0x2C. This secondary table contains icon name
+strings and other library metadata.
+
+
+Entry Table (WCRS/A3M - Authorware 3.x)
+----------------------------------------
+WCRS files (.a3w) and A3M files (.a3m) use 16-byte entry records.
+Unlike ACRS/PCRS, entries have NO icon type field. Content types
+must be auto-detected from data signatures (PIG header,
+BITMAPINFOHEADER, BMP file header, etc.). All data is stored
+uncompressed. A3M files use big-endian byte order for all fields.
+
+Each entry is exactly 16 bytes:
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    2     uint16    Entry ID (1-based)
+0x02    2     uint16    Storage flags (0 or 1; both uncompressed)
+0x04    4     uint32    Reserved (always 0)
+0x08    4     uint32    Data offset (absolute file position of entry data)
+0x0C    4     uint32    Data size in bytes
+
+Empty/placeholder entries have storage flags = 0, data offset = 0,
+and data size = 0.
+
+Content type auto-detection from data signatures:
+  - Bytes 2-5 = "PIG\0"              -> PIG image container
+  - First uint32 (LE or BE) = 40
+    + valid bitmap fields             -> DIB (BITMAPINFOHEADER)
+  - Bytes 0-1 = "BM"                 -> BMP image
+  - Bytes 0-3 = "FORM"               -> AIFF audio
+  - All other entries                 -> raw binary data
+
+Note: A3M files may contain DIBs with big-endian BITMAPINFOHEADER
+fields (biSize = 0x00000028 in BE vs 0x28000000 in LE). The biSize
+field must be checked in both endiannesses to detect all DIBs.
+
+
+Entry Table (WPCR/WPLI - Authorware Star/1.x)
+----------------------------------------------
+WPCR (.app) and WPLI (.apr) files use three different entry table
+formats depending on the flags field:
+
+Format 1 (flags = 0xFFFFFFFC): Offset-only table
+  The entry table at table_offset is a list of entry_count uint32
+  data offsets (4 bytes each). An additional uint32 value at position
+  entry_count serves as the end-of-data marker (always equals
+  file_size). Entry data sizes are computed from gaps between
+  consecutive offsets. No entry IDs, icon types, or storage type
+  fields exist; entries are numbered sequentially and content types
+  are auto-detected.
+
+  Entry table layout (entry_count + 1 values):
+    0x00  4  uint32    Data offset for entry 0
+    0x04  4  uint32    Data offset for entry 1
+    ...
+    N*4   4  uint32    End-of-data marker (= file_size)
+
+Format 2 (flags = 0xFFFFFFFB): 16-byte records, no IDs
+  Same 16-byte record layout as WCRS/A3M (see above), but all entry
+  ID fields are 0. Content types are auto-detected.
+
+Format 3 (flags = 0xFFFFFFFF): 16-byte records, with IDs
+  Same 16-byte record layout as WCRS/A3M (see above). Table is
+  typically located at fsz - tts (end of file). Entry IDs use the
+  same high uint16 convention as WCRS files.
+
+All WPCR formats store data uncompressed.
+
+
+Entry Table (WCRS v2 - Authorware 2.x)
+---------------------------------------
+APW files with format version 2 use a compact 10-byte entry record
+format. The entry table is located at file_size - table_total_size
+(i.e., at the end of the file). The table_offset header field (0x34)
+is always 0 and should be ignored for v2 files.
+
+Each entry is exactly 10 bytes:
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    2     uint16    Entry ID
+0x02    4     uint32    Data offset (absolute file position of entry data)
+0x06    4     uint32    Data size in bytes
+
+All data is stored uncompressed. There is no icon type field; content
+types must be auto-detected from data signatures (same as WCRS v4/A3M).
+There is no storage type field; all entries are raw data.
+
+Entry IDs follow the same convention as other WCRS files, with system
+entries using high uint16 values (e.g., 0xFDF3-0xFDFF, 0xFF00-0xFFFF)
+and user content using low values (1+). Some entries also use IDs in
+the 0x4000 range (e.g., 0x400F).
 
 
 Unreferenced Data Blocks
@@ -181,6 +433,8 @@ Type    Name                    Description
 0x1A    CursorData              Cursor bitmap data
 0x1B    TextInput               Text entry field definition
 0x1C    LookupTable             System lookup table (always 512 bytes)
+0x1D    LibraryIndex            Library icon index table (PCRS only, 4 + N*1024 bytes)
+0x1E    LibraryLayout           Library icon layout/positioning (A4R only, 16-byte records)
 0x1F    Erase                   Erase icon (display removal)
 0x21    MovieReference          Movie/video media reference
 0x22    InteractionResponse     Interaction response data
@@ -197,9 +451,10 @@ Type    Name                    Description
 0x36    SoundHeader             Audio metadata header (48 bytes, see below)
 0x37    SoundData               Raw 8-bit PCM audio samples (see below)
 0x38    AnimationFrames         Animation frame data (paired with 0x33)
+0x39    MediaLink               External media reference (file paths + format info, A6P only)
 0x3A    DisplayText             Display text / UI label strings
-0x3B    EmbeddedMedia           Embedded media (BMP image, 3DMF model, or other)
-0x3C    AIFFAudio               AIFF audio data (may span multiple entries)
+0x3B    EmbeddedMedia           Embedded media (BMP image, 3DMF model, SWF, or other)
+0x3C    StreamingAudio          Streaming audio data (AIFF, WAV, or MP3; may span multiple entries)
 0x3E    BMP                     Full Windows BMP image (with BM file header)
 0xFFFD  PluginPIG               Plugin icon graphic (PIG format, see PIG section)
 
@@ -284,6 +539,12 @@ header is present; one must be prepended for standard BMP viewers.
 
 Pixel data may use RLE8 compression (biCompression = 1) for 8bpp images.
 
+In A3M files, the BITMAPINFOHEADER fields may be in big-endian byte
+order (biSize = 0x00000028 in BE). To create a valid BMP, the header
+fields must be byte-swapped to little-endian. Palette data (RGBQUAD)
+and pixel data for <= 8bpp are byte-oriented and do not require
+swapping.
+
 
 BMP (type 0x3E)
 ---------------
@@ -353,15 +614,47 @@ WIN-platform PIG data (icon positioning and rendering metadata for
 plugin-provided display objects).
 
 
-AIFF Audio (type 0x3C)
------------------------
-AIFF (Audio Interchange File Format) audio data. Large audio files are
-split across multiple consecutive 0x3C entries, each up to 65536 bytes.
-The first entry begins with the standard AIFF header ("FORM" + size +
-"AIFF"), containing COMM (format) and SSND (sample data) chunks. All
-consecutive 0x3C entries must be concatenated in order to reconstruct
-the complete AIFF file. The FORM chunk's size field gives the total
-audio data size (excluding the 8-byte FORM header).
+Streaming Audio (type 0x3C)
+---------------------------
+Streaming audio data. Large audio files are split across multiple
+consecutive 0x3C entries, each up to 65536 bytes. All consecutive 0x3C
+entries must be concatenated in order to reconstruct the complete audio
+file.
+
+The actual audio format varies and can be determined from the first
+chunk's opening bytes:
+
+  Signature          Format    Extension
+  -----------------  --------  ---------
+  "FORM" (46 4F 52 4D)  AIFF      .aiff
+  "RIFF" (52 49 46 46)  WAV       .wav
+  "ID3" or 0xFF 0xFB    MP3       .mp3
+
+AIFF: The first entry begins with "FORM" + size + "AIFF", containing
+COMM (format) and SSND (sample data) chunks. Observed in A4P and A5P.
+
+WAV: Standard RIFF/WAVE container with fmt and data chunks. Observed
+in A6P files.
+
+MP3: MPEG audio with ID3 tag or raw MPEG sync frames (0xFFFB, 0xFFF3,
+0xFFFA, 0xFFF2, 0xFFE2). Observed in A6P files. Some MP3 entries have
+a 36-byte big-endian wrapper header:
+
+  Offset  Size  Type      Description
+  ------  ----  --------  -------------------------------------------
+  0x00    4     uint32be  Header indicator (always 0x00000020 = 32)
+  0x04    4     uint32be  Parameter count (observed: 2)
+  0x08    4     uint32be  Sample rate (e.g. 22050)
+  0x0C    4     uint32be  Bitrate or data size
+  0x10    4     uint32be  Parameter
+  0x14    4     uint32be  Parameter
+  0x18    8     bytes     Padding (zeros or 0xFF fill)
+  0x20    2     uint16be  Format type (0x0002)
+  0x22    2     uint16be  Channel count (0x0001 = mono)
+  0x24    ...   bytes     MP3 data (MPEG sync frame)
+
+The MP3 data from offset 0x24 onward should be extracted, discarding
+the wrapper.
 
 
 Empty Entries

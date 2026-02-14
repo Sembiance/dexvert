@@ -49,7 +49,7 @@ const OS = {
 	{
 		debug     : false,
 		qty       : navigator.hardwareConcurrency===32 ? 2 : 4,
-		ramGB     : 16,
+		ramGB     : 8,
 		cores     : 4,
 		scriptExt : ".au3",
 		emu       : "qemu-system-x86_64",

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # vibe coded by claude code
 """
-Authorware Packaged File (.a4p / .a5p) Extractor
+Authorware Packaged/Library File Extractor (.app/.apr/.apw/.asw/.aas/.a3m/.a3w/.a4p/.a5p/.a6p/.a7p/.a4r/.a5r/.a6r/.a7r)
 
 Extracts images, text, scripts, and raw data from Macromedia Authorware
-packaged files.
+packaged files (ACRS), library files (PCRS), and v3 files (WCRS/A3M).
 
-Usage: python3 a4p_extract.py <inputFile> <outputDir>
+Usage: python3 unauthorware.py <inputFile> <outputDir>
 """
 
 import sys
@@ -41,6 +41,8 @@ ICON_TYPE_NAMES = {
     0x1A: "CursorData",
     0x1B: "TextInput",
     0x1C: "LookupTable",
+    0x1D: "LibraryIndex",
+    0x1E: "LibraryLayout",
     0x1F: "Erase",
     0x21: "MovieReference",
     0x22: "InteractionResponse",
@@ -59,7 +61,8 @@ ICON_TYPE_NAMES = {
     0x38: "AnimationFrames",
     0x3A: "DisplayText",
     0x3B: "EmbeddedMedia",
-    0x3C: "AIFFAudio",
+    0x3C: "StreamingAudio",
+    0x39: "MediaLink",
     0x3E: "BMP",
     0xFFFD: "PluginPIG",
 }
@@ -72,27 +75,32 @@ def read_header(data):
     """Parse the 64-byte file header."""
     if len(data) < 64:
         raise ValueError("File too small for header")
-    if data[:4] != b'ACRS':
-        raise ValueError(f"Invalid magic: {data[:4]!r} (expected b'ACRS')")
-    if data[4:8] != b'\xbe\xbc\xad\xac':
+    if data[:4] not in (b'ACRS', b'PCRS', b'WCRS', b'WPCR', b'WPLI'):
+        raise ValueError(f"Invalid magic: {data[:4]!r} (expected b'ACRS', b'PCRS', b'WCRS', b'WPCR', or b'WPLI')")
+    if data[4:8] not in (b'\xbe\xbc\xad\xac', b'\xaf\xbc\xad\xac', b'\xa8\xbc\xad\xac', b'\xa8\xaf\xbc\xad', b'\xa8\xaf\xb3\xb6'):
         raise ValueError("Invalid secondary magic")
 
     hdr = {}
-    hdr['encoder_version'] = struct.unpack_from('<I', data, 0x08)[0]
-    hdr['flags'] = struct.unpack_from('<i', data, 0x0C)[0]
-    hdr['format_version'] = struct.unpack_from('<I', data, 0x20)[0]
-    hdr['file_size'] = struct.unpack_from('<I', data, 0x24)[0]
-    hdr['uncompressed_size'] = struct.unpack_from('<I', data, 0x28)[0]
-    hdr['table_total_size'] = struct.unpack_from('<I', data, 0x2C)[0]
-    hdr['entry_count'] = struct.unpack_from('<I', data, 0x30)[0]
-    hdr['table_offset'] = struct.unpack_from('<I', data, 0x34)[0]
-    hdr['table_size'] = struct.unpack_from('<I', data, 0x38)[0]
-    hdr['data_end'] = struct.unpack_from('<I', data, 0x3C)[0]
+    hdr['magic'] = data[:4].decode('ascii')
+    # Detect big-endian: if LE format_version > 255, file is big-endian (e.g. a3m Mac files)
+    le_ver = struct.unpack_from('<I', data, 0x20)[0]
+    endian = '>' if le_ver > 255 else '<'
+    hdr['big_endian'] = (endian == '>')
+    hdr['encoder_version'] = struct.unpack_from(f'{endian}I', data, 0x08)[0]
+    hdr['flags'] = struct.unpack_from(f'{endian}i', data, 0x0C)[0]
+    hdr['format_version'] = struct.unpack_from(f'{endian}I', data, 0x20)[0]
+    hdr['file_size'] = struct.unpack_from(f'{endian}I', data, 0x24)[0]
+    hdr['uncompressed_size'] = struct.unpack_from(f'{endian}I', data, 0x28)[0]
+    hdr['table_total_size'] = struct.unpack_from(f'{endian}I', data, 0x2C)[0]
+    hdr['entry_count'] = struct.unpack_from(f'{endian}I', data, 0x30)[0]
+    hdr['table_offset'] = struct.unpack_from(f'{endian}I', data, 0x34)[0]
+    hdr['table_size'] = struct.unpack_from(f'{endian}I', data, 0x38)[0]
+    hdr['data_end'] = struct.unpack_from(f'{endian}I', data, 0x3C)[0]
     return hdr
 
 
 def read_entries(data, hdr):
-    """Parse the entry table."""
+    """Parse the entry table (ACRS 30-byte records)."""
     entries = []
     table_off = hdr['table_offset']
     for i in range(hdr['entry_count']):
@@ -110,6 +118,204 @@ def read_entries(data, hdr):
         entry['data_offset'] = struct.unpack_from('<I', data, off + 24)[0]
         entry['parent'] = struct.unpack_from('<h', data, off + 28)[0]
         entries.append(entry)
+    return entries
+
+
+def read_entries_pcrs(data, hdr):
+    """Parse the entry table for PCRS library files (10-byte records).
+
+    PCRS entries use a compact format without entry IDs or parent fields.
+    Compressed sizes are derived from gaps between consecutive data offsets.
+    """
+    entries = []
+    table_off = hdr['table_offset']
+    for i in range(hdr['entry_count']):
+        off = table_off + i * 10
+        if off + 10 > len(data):
+            break
+        entry = {}
+        entry['data_offset'] = struct.unpack_from('<I', data, off)[0]
+        entry['decomp_size'] = struct.unpack_from('<I', data, off + 4)[0]
+        entry['icon_type'] = data[off + 8]
+        # PCRS uses 2=raw, 3=zlib; normalize to ACRS convention (1=raw, 2=zlib)
+        entry['storage_type'] = data[off + 9] - 1
+        entry['id'] = i + 1  # auto-assign sequential IDs
+        entry['flags'] = 0
+        entry['flags2'] = 0
+        entry['parent'] = 0
+        entries.append(entry)
+
+    # Compute comp_size from gaps between sorted data offsets
+    by_offset = sorted(range(len(entries)), key=lambda j: entries[j]['data_offset'])
+    for k, idx in enumerate(by_offset):
+        if entries[idx]['storage_type'] == 1:
+            # Uncompressed (normalized): comp_size = decomp_size
+            entries[idx]['comp_size'] = entries[idx]['decomp_size']
+        elif k + 1 < len(by_offset):
+            entries[idx]['comp_size'] = entries[by_offset[k + 1]]['data_offset'] - entries[idx]['data_offset']
+        else:
+            # Last entry: use remaining file data
+            entries[idx]['comp_size'] = len(data) - entries[idx]['data_offset']
+
+    return entries
+
+
+def detect_icon_type(entry_data):
+    """Auto-detect icon type from data signatures (for WCRS files with no type field)."""
+    if not entry_data or len(entry_data) < 4:
+        return 0x06  # RawData
+    if len(entry_data) >= 6 and entry_data[2:6] == b'PIG\x00':
+        return 0x34  # PIG
+    if entry_data[:2] == b'BM':
+        return 0x3E  # BMP
+    if entry_data[:4] == b'FORM':
+        return 0x3C  # StreamingAudio (AIFF)
+    if entry_data[:4] == b'RIFF':
+        return 0x3C  # StreamingAudio (WAV)
+    # Check for BITMAPINFOHEADER in both LE and BE
+    for endian in ('<', '>'):
+        hdr_size = struct.unpack_from(f'{endian}I', entry_data, 0)[0]
+        if hdr_size == 40 and len(entry_data) >= 40:
+            w = struct.unpack_from(f'{endian}i', entry_data, 4)[0]
+            h = abs(struct.unpack_from(f'{endian}i', entry_data, 8)[0])
+            planes = struct.unpack_from(f'{endian}H', entry_data, 12)[0]
+            bpp = struct.unpack_from(f'{endian}H', entry_data, 14)[0]
+            if 0 < w < 10000 and 0 < h < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
+                return 0x35  # DIB
+    return 0x06  # RawData
+
+
+def read_entries_wcrs(data, hdr):
+    """Parse the entry table for WCRS/A3M files (16-byte records, no icon type).
+
+    WCRS (Authorware 3.x Windows) and A3M (Authorware 3.x Mac) entries
+    have no icon type field. Types are auto-detected from data signatures.
+    A3M uses big-endian byte order.
+    """
+    endian = '>' if hdr.get('big_endian') else '<'
+    entries = []
+    table_off = hdr['table_offset']
+    for i in range(hdr['entry_count']):
+        off = table_off + i * 16
+        if off + 16 > len(data):
+            break
+        entry = {}
+        entry['id'] = struct.unpack_from(f'{endian}H', data, off)[0]
+        entry['storage_type'] = struct.unpack_from(f'{endian}H', data, off + 2)[0]
+        entry['data_offset'] = struct.unpack_from(f'{endian}I', data, off + 8)[0]
+        entry['decomp_size'] = struct.unpack_from(f'{endian}I', data, off + 12)[0]
+        entry['comp_size'] = entry['decomp_size']  # WCRS is always uncompressed
+        entry['icon_type'] = 0  # unknown, will be detected from data
+        entry['flags'] = 0
+        entry['flags2'] = 0
+        entry['parent'] = 0
+        # Normalize storage type to 1 (raw) for all WCRS entries
+        entry['storage_type'] = 1
+        entries.append(entry)
+
+    # Auto-detect icon types from data signatures
+    for entry in entries:
+        if entry['comp_size'] == 0 and entry['decomp_size'] == 0:
+            continue
+        off = entry['data_offset']
+        sz = entry['decomp_size']
+        if off + sz <= len(data):
+            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)])
+
+    return entries
+
+
+def read_entries_wcrs_v2(data, hdr):
+    """Parse the entry table for WCRS v2 files (10-byte records at end of file).
+
+    Authorware 2.x Windows packaged files use a compact entry format:
+    id(2) + data_offset(4) + decomp_size(4) = 10 bytes per entry.
+    The entry table is located at file_size - table_total_size.
+    No icon type or storage type fields; types are auto-detected.
+    """
+    entries = []
+    table_off = hdr['file_size'] - hdr['table_total_size']
+    for i in range(hdr['entry_count']):
+        off = table_off + i * 10
+        if off + 10 > len(data):
+            break
+        entry = {}
+        entry['id'] = struct.unpack_from('<H', data, off)[0]
+        entry['data_offset'] = struct.unpack_from('<I', data, off + 2)[0]
+        entry['decomp_size'] = struct.unpack_from('<I', data, off + 6)[0]
+        entry['comp_size'] = entry['decomp_size']  # v2 is always uncompressed
+        entry['icon_type'] = 0  # will be auto-detected
+        entry['storage_type'] = 1  # always raw
+        entry['flags'] = 0
+        entry['flags2'] = 0
+        entry['parent'] = 0
+        entries.append(entry)
+
+    # Auto-detect icon types from data signatures
+    for entry in entries:
+        if entry['comp_size'] == 0 and entry['decomp_size'] == 0:
+            continue
+        off = entry['data_offset']
+        sz = entry['decomp_size']
+        if off + sz <= len(data):
+            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)])
+
+    return entries
+
+
+def read_entries_wpcr(data, hdr):
+    """Parse the entry table for WPCR files (4-byte offset-only records).
+
+    Authorware 1.x packaged files with flags 0xFFFFFFFC use a minimal
+    entry format: just a list of uint32 data offsets. Entry sizes are
+    computed from gaps between consecutive offsets. The value at position
+    entry_count in the offset array is the end-of-data marker (= file_size).
+    No entry IDs, icon types, or storage type fields exist.
+    """
+    entries = []
+    table_off = hdr['table_offset']
+    ec = hdr['entry_count']
+
+    # Read ec data offsets
+    offsets = []
+    for i in range(ec):
+        off = table_off + i * 4
+        if off + 4 > len(data):
+            break
+        offsets.append(struct.unpack_from('<I', data, off)[0])
+
+    # Read end marker (value at position ec)
+    end_off = table_off + ec * 4
+    if end_off + 4 <= len(data):
+        end_marker = struct.unpack_from('<I', data, end_off)[0]
+    else:
+        end_marker = hdr['file_size']
+
+    # Compute sizes from gaps
+    for i, doff in enumerate(offsets):
+        next_off = offsets[i + 1] if i + 1 < len(offsets) else end_marker
+        dsz = next_off - doff
+        entry = {}
+        entry['id'] = i + 1  # auto-assign sequential IDs
+        entry['data_offset'] = doff
+        entry['decomp_size'] = dsz
+        entry['comp_size'] = dsz
+        entry['icon_type'] = 0  # will be auto-detected
+        entry['storage_type'] = 1  # always raw
+        entry['flags'] = 0
+        entry['flags2'] = 0
+        entry['parent'] = 0
+        entries.append(entry)
+
+    # Auto-detect icon types from data signatures
+    for entry in entries:
+        if entry['comp_size'] == 0 and entry['decomp_size'] == 0:
+            continue
+        off = entry['data_offset']
+        sz = entry['decomp_size']
+        if off + sz <= len(data):
+            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)])
+
     return entries
 
 
@@ -136,10 +342,43 @@ def decompress_entry(data, entry):
     return None
 
 
+def dib_endian(dib_data):
+    """Detect if a DIB BITMAPINFOHEADER is big-endian or little-endian.
+
+    Returns '>' for big-endian, '<' for little-endian.
+    """
+    if len(dib_data) < 40:
+        return '<'
+    be_hdr = struct.unpack_from('>I', dib_data, 0)[0]
+    le_hdr = struct.unpack_from('<I', dib_data, 0)[0]
+    if be_hdr == 40 and le_hdr != 40:
+        return '>'
+    return '<'
+
+
+def swap_dib_to_le(dib_data):
+    """Convert a big-endian BITMAPINFOHEADER to little-endian.
+
+    Swaps the 40-byte header fields. Palette (RGBQUAD) and pixel data
+    for <= 8bpp are byte-oriented and don't need swapping.
+    """
+    if len(dib_data) < 40:
+        return dib_data
+    # Read all 40-byte header fields in BE
+    fields = struct.unpack_from('>IiiHHIIiiII', dib_data, 0)
+    # Repack in LE
+    le_header = struct.pack('<IiiHHIIiiII', *fields)
+    return le_header + dib_data[40:]
+
+
 def make_bmp_from_dib(dib_data):
     """Create a full BMP file from raw DIB data (BITMAPINFOHEADER + palette + pixels)."""
     if len(dib_data) < 40:
         return None
+
+    # Convert BE DIB to LE if needed
+    if dib_endian(dib_data) == '>':
+        dib_data = swap_dib_to_le(dib_data)
 
     hdr_size = struct.unpack_from('<I', dib_data, 0)[0]
     if hdr_size < 40:
@@ -171,7 +410,8 @@ def dib_has_embedded_palette(pig_data, dib_offset):
     """
     if dib_offset + 44 > len(pig_data):
         return True  # assume it has one if we can't check
-    bpp = struct.unpack_from('<H', pig_data, dib_offset + 14)[0]
+    endian = dib_endian(pig_data[dib_offset:dib_offset + 40])
+    bpp = struct.unpack_from(f'{endian}H', pig_data, dib_offset + 14)[0]
     if bpp > 8:
         return False  # no palette needed
 
@@ -202,12 +442,13 @@ def calc_dib_size(pig_data, offset, in_pig=False):
     """Calculate the total size of a DIB starting at offset."""
     if offset + 40 > len(pig_data):
         return 0
-    hdr_size = struct.unpack_from('<I', pig_data, offset)[0]
-    w = struct.unpack_from('<i', pig_data, offset + 4)[0]
-    h = abs(struct.unpack_from('<i', pig_data, offset + 8)[0])
-    bpp = struct.unpack_from('<H', pig_data, offset + 14)[0]
-    img_size = struct.unpack_from('<I', pig_data, offset + 20)[0]
-    colors_used = struct.unpack_from('<I', pig_data, offset + 32)[0]
+    endian = dib_endian(pig_data[offset:offset + 40])
+    hdr_size = struct.unpack_from(f'{endian}I', pig_data, offset)[0]
+    w = struct.unpack_from(f'{endian}i', pig_data, offset + 4)[0]
+    h = abs(struct.unpack_from(f'{endian}i', pig_data, offset + 8)[0])
+    bpp = struct.unpack_from(f'{endian}H', pig_data, offset + 14)[0]
+    img_size = struct.unpack_from(f'{endian}I', pig_data, offset + 20)[0]
+    colors_used = struct.unpack_from(f'{endian}I', pig_data, offset + 32)[0]
 
     if in_pig and not dib_has_embedded_palette(pig_data, offset):
         palette_size = 0
@@ -242,17 +483,19 @@ def find_best_dib_in_pig(pig_data):
 
     i = 0
     while i < len(pig_data) - 40:
-        hdr_size = struct.unpack_from('<I', pig_data, i)[0]
-        if hdr_size == 40:
-            w = struct.unpack_from('<i', pig_data, i + 4)[0]
-            h = struct.unpack_from('<i', pig_data, i + 8)[0]
-            planes = struct.unpack_from('<H', pig_data, i + 12)[0]
-            bpp = struct.unpack_from('<H', pig_data, i + 14)[0]
-            if 0 < w < 10000 and 0 < abs(h) < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
-                dib_size = calc_dib_size(pig_data, i, in_pig=True)
-                if dib_size > 0 and i + dib_size <= len(pig_data):
-                    has_palette = dib_has_embedded_palette(pig_data, i)
-                    dibs.append((i, bpp, dib_size, has_palette))
+        for endian in ('<', '>'):
+            hdr_size = struct.unpack_from(f'{endian}I', pig_data, i)[0]
+            if hdr_size == 40:
+                w = struct.unpack_from(f'{endian}i', pig_data, i + 4)[0]
+                h = struct.unpack_from(f'{endian}i', pig_data, i + 8)[0]
+                planes = struct.unpack_from(f'{endian}H', pig_data, i + 12)[0]
+                bpp = struct.unpack_from(f'{endian}H', pig_data, i + 14)[0]
+                if 0 < w < 10000 and 0 < abs(h) < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
+                    dib_size = calc_dib_size(pig_data, i, in_pig=True)
+                    if dib_size > 0 and i + dib_size <= len(pig_data):
+                        has_palette = dib_has_embedded_palette(pig_data, i)
+                        dibs.append((i, bpp, dib_size, has_palette))
+                break  # don't check other endian if hdr_size == 40
         i += 1
 
     if not dibs:
@@ -285,9 +528,13 @@ def extract_pig_dimensions(pig_data):
     if pig_data[2:5] != b'PIG':
         return None, None
     platform = pig_data[6:9]
-    if platform == b'WIN':
+    if platform in (b'WIN', b'MAC'):
+        # Try LE first, fall back to BE if dimensions look unreasonable
         w = struct.unpack_from('<H', pig_data, 0x1E)[0]
         h = struct.unpack_from('<H', pig_data, 0x20)[0]
+        if w > 10000 or h > 10000:
+            w = struct.unpack_from('>H', pig_data, 0x1E)[0]
+            h = struct.unpack_from('>H', pig_data, 0x20)[0]
         return w, h
     return None, None
 
@@ -494,7 +741,22 @@ def main():
         data = f.read()
 
     hdr = read_header(data)
-    entries = read_entries(data, hdr)
+    if hdr['magic'] in ('WPCR', 'WPLI') and hdr['flags'] & 0xFFFFFFFF == 0xFFFFFFFC:
+        # WPCR/WPLI offset-only format: 4-byte offset list
+        entries = read_entries_wpcr(data, hdr)
+    elif hdr['magic'] in ('WCRS', 'WPCR', 'WPLI') and hdr['format_version'] == 2:
+        # Authorware 2.x: 10-byte records at end of file
+        entries = read_entries_wcrs_v2(data, hdr)
+    elif hdr['magic'] in ('WCRS', 'WPCR', 'WPLI'):
+        # WCRS/WPCR/WPLI: 16-byte records
+        entries = read_entries_wcrs(data, hdr)
+    elif hdr.get('big_endian'):
+        # A3M: big-endian ACRS with 16-byte records (same structure as WCRS)
+        entries = read_entries_wcrs(data, hdr)
+    elif hdr['magic'] == 'PCRS' and hdr['entry_count'] * 30 > hdr['table_total_size']:
+        entries = read_entries_pcrs(data, hdr)
+    else:
+        entries = read_entries(data, hdr)
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -508,12 +770,20 @@ def main():
     print()
 
     extracted_count = 0
-    aiff_accum = None  # (start_eid, chunks) for combining consecutive 0x3C entries
+    audio_accum = None  # (start_eid, chunks) for combining consecutive 0x3C entries
+    # Detect segment files (header file_size > actual data length)
+    is_segment = hdr['file_size'] > len(data)
+    skipped_segment = 0
 
     for entry in entries:
         eid = entry['id']
         icon_type = entry['icon_type']
         type_name = ICON_TYPE_NAMES.get(icon_type, f"Unknown_0x{icon_type:02x}")
+
+        # Skip entries whose data is beyond or straddles this segment's bounds
+        if is_segment and (entry['data_offset'] >= len(data) or entry['data_offset'] + entry['comp_size'] > len(data)):
+            skipped_segment += 1
+            continue
 
         entry_data = decompress_entry(data, entry)
         if entry_data is None:
@@ -540,9 +810,10 @@ def main():
             # DIB data - convert to BMP
             bmp_data = make_bmp_from_dib(entry_data)
             if bmp_data:
-                w = struct.unpack_from('<i', entry_data, 4)[0]
-                h = struct.unpack_from('<i', entry_data, 8)[0]
-                bpp = struct.unpack_from('<H', entry_data, 14)[0]
+                de = dib_endian(entry_data)
+                w = struct.unpack_from(f'{de}i', entry_data, 4)[0]
+                h = struct.unpack_from(f'{de}i', entry_data, 8)[0]
+                bpp = struct.unpack_from(f'{de}H', entry_data, 14)[0]
                 fname = f"{eid:03d}_{type_name}_{w}x{h}_{bpp}bpp.bmp"
                 fpath = os.path.join(output_dir, fname)
                 with open(fpath, 'wb') as f:
@@ -559,9 +830,10 @@ def main():
                 if dib_data:
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
-                        w = struct.unpack_from('<i', dib_data, 4)[0]
-                        h = struct.unpack_from('<i', dib_data, 8)[0]
-                        bpp = struct.unpack_from('<H', dib_data, 14)[0]
+                        de = dib_endian(dib_data)
+                        w = struct.unpack_from(f'{de}i', dib_data, 4)[0]
+                        h = struct.unpack_from(f'{de}i', dib_data, 8)[0]
+                        bpp = struct.unpack_from(f'{de}H', dib_data, 14)[0]
                         fname = f"{eid:03d}_{type_name}_{platform}_{w}x{h}_{bpp}bpp.bmp"
                         fpath = os.path.join(output_dir, fname)
                         with open(fpath, 'wb') as f:
@@ -637,9 +909,10 @@ def main():
                 if dib_data:
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
-                        w = struct.unpack_from('<i', dib_data, 4)[0]
-                        h = struct.unpack_from('<i', dib_data, 8)[0]
-                        bpp = struct.unpack_from('<H', dib_data, 14)[0]
+                        de = dib_endian(dib_data)
+                        w = struct.unpack_from(f'{de}i', dib_data, 4)[0]
+                        h = struct.unpack_from(f'{de}i', dib_data, 8)[0]
+                        bpp = struct.unpack_from(f'{de}H', dib_data, 14)[0]
                         fname = f"{eid:03d}_{type_name}_{platform}_{w}x{h}_{bpp}bpp.bmp"
                         fpath = os.path.join(output_dir, fname)
                         with open(fpath, 'wb') as f:
@@ -716,23 +989,37 @@ def main():
             extracted_count += 1
 
         elif icon_type == 0x3C:
-            # AIFF audio - consecutive 0x3C entries form one file
-            if aiff_accum is None:
-                aiff_accum = (eid, [entry_data])
+            # Streaming audio - consecutive 0x3C entries form one file
+            # Format varies: AIFF (FORM), WAV (RIFF), MP3 (0xFFFB/0xFFF3/0xFFFA/ID3)
+            if audio_accum is None:
+                audio_accum = (eid, [entry_data])
             else:
-                aiff_accum = (aiff_accum[0], aiff_accum[1] + [entry_data])
+                audio_accum = (audio_accum[0], audio_accum[1] + [entry_data])
             # Check if next entry is also 0x3C; if not, flush now
             next_idx = entries.index(entry) + 1
             if next_idx >= len(entries) or entries[next_idx]['icon_type'] != 0x3C:
-                start_eid = aiff_accum[0]
-                combined = b''.join(aiff_accum[1])
-                fname = f"{start_eid:03d}_{type_name}.aiff"
+                start_eid = audio_accum[0]
+                combined = b''.join(audio_accum[1])
+                # Detect actual audio format from first chunk
+                if combined[:4] == b'FORM':
+                    ext, fmt_name = 'aiff', 'AIFF'
+                elif combined[:4] == b'RIFF':
+                    ext, fmt_name = 'wav', 'WAV'
+                elif combined[:3] == b'ID3' or (len(combined) > 1 and combined[0] == 0xFF and combined[1] in (0xFB, 0xF3, 0xFA, 0xF2, 0xE2)):
+                    ext, fmt_name = 'mp3', 'MP3'
+                elif len(combined) > 0x26 and combined[:4] == b'\x00\x00\x00\x20' and combined[0x24] == 0xFF and (combined[0x25] & 0xE0) == 0xE0:
+                    # 36-byte big-endian wrapper with audio metadata, MP3 data at offset 0x24
+                    combined = combined[0x24:]
+                    ext, fmt_name = 'mp3', 'MP3'
+                else:
+                    ext, fmt_name = 'bin', 'audio'
+                fname = f"{start_eid:03d}_{type_name}.{ext}"
                 fpath = os.path.join(output_dir, fname)
                 with open(fpath, 'wb') as f:
                     f.write(combined)
-                print(f"  Entry {start_eid:3d} ({type_name}): AIFF audio ({len(combined)} bytes, {len(aiff_accum[1])} chunks) -> {fname}")
+                print(f"  Entry {start_eid:3d} ({type_name}): {fmt_name} ({len(combined)} bytes, {len(audio_accum[1])} chunks) -> {fname}")
                 extracted_count += 1
-                aiff_accum = None
+                audio_accum = None
 
         else:
             # Other types - save raw decompressed data
@@ -743,8 +1030,8 @@ def main():
             print(f"  Entry {eid:3d} ({type_name}): {len(entry_data)} bytes -> {fname}")
             extracted_count += 1
 
-    # Extract unique uncovered zlib blocks
-    uncovered = find_uncovered_zlib_blocks(data, hdr, entries)
+    # Extract unique uncovered zlib blocks (only for ACRS files with zlib compression)
+    uncovered = find_uncovered_zlib_blocks(data, hdr, entries) if hdr['magic'] == 'ACRS' and not hdr.get('big_endian') else []
     if uncovered:
         print(f"\n  Unreferenced data blocks ({len(uncovered)}):")
         for idx, (off, comp_sz, block_data) in enumerate(uncovered):
@@ -773,9 +1060,10 @@ def main():
                 if dib_data:
                     bmp_data = make_bmp_from_dib(dib_data)
                     if bmp_data:
-                        w = struct.unpack_from('<i', dib_data, 4)[0]
-                        h = struct.unpack_from('<i', dib_data, 8)[0]
-                        bpp = struct.unpack_from('<H', dib_data, 14)[0]
+                        de = dib_endian(dib_data)
+                        w = struct.unpack_from(f'{de}i', dib_data, 4)[0]
+                        h = struct.unpack_from(f'{de}i', dib_data, 8)[0]
+                        bpp = struct.unpack_from(f'{de}H', dib_data, 14)[0]
                         fname = f"{prefix}_PIG_{platform}_{w}x{h}_{bpp}bpp.bmp"
                         fpath = os.path.join(output_dir, fname)
                         with open(fpath, 'wb') as f:
@@ -790,11 +1078,12 @@ def main():
                     f.write(block_data)
                 print(f"    0x{off:06x}: PIG/{platform} ({len(block_data)} bytes, no extractable bitmap) -> {fname}")
 
-            elif len(block_data) >= 40 and struct.unpack_from('<I', block_data, 0)[0] == 40:
-                w = struct.unpack_from('<i', block_data, 4)[0]
-                h = abs(struct.unpack_from('<i', block_data, 8)[0])
-                planes = struct.unpack_from('<H', block_data, 12)[0]
-                bpp = struct.unpack_from('<H', block_data, 14)[0]
+            elif len(block_data) >= 40 and (struct.unpack_from('<I', block_data, 0)[0] == 40 or struct.unpack_from('>I', block_data, 0)[0] == 40):
+                de = dib_endian(block_data)
+                w = struct.unpack_from(f'{de}i', block_data, 4)[0]
+                h = abs(struct.unpack_from(f'{de}i', block_data, 8)[0])
+                planes = struct.unpack_from(f'{de}H', block_data, 12)[0]
+                bpp = struct.unpack_from(f'{de}H', block_data, 14)[0]
                 if 0 < w < 10000 and 0 < h < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
                     bmp_data = make_bmp_from_dib(block_data)
                     if bmp_data:
@@ -828,6 +1117,8 @@ def main():
 
             extracted_count += 1
 
+    if is_segment and skipped_segment > 0:
+        print(f"\n  Segment file: {skipped_segment} entries skipped (data in other segments)")
     print(f"\nExtracted {extracted_count} items to {output_dir}")
 
 

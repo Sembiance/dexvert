@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,061)
+# Unsupported File Formats (4,059)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (315)
+## Archive (314)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -41,7 +41,6 @@ Family/Format | Name | Extensions | Notes
 [archive/atariCassetteTapeImage](https://discmaster.textfiles.com/search?format=atariCassetteTapeImage) | Atari Cassette Tape Image | .cas | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCassetteTapeImage/)
 [archive/atariLZF0CompressedArchive](https://discmaster.textfiles.com/search?format=atariLZF0CompressedArchive) | Atari LZF0 compressed archive | .pax | 
 [archive/audiokineticWwisePackage](https://discmaster.textfiles.com/search?format=audiokineticWwisePackage) | Audiokinetic Wwise Package | .pck .pkg | 
-[archive/authorware](https://discmaster.textfiles.com/search?format=authorware) | Authorware Application/Package | .app .apw | [9 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
 [archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?format=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
 [archive/autochopFragment](https://discmaster.textfiles.com/search?format=autochopFragment) | AUTOCHOP fragment | .#00 .#01 .#02 .#03 .#04 .#05 .#06 .#07 .#08 .#09 | 
 [archive/bDOSBootableDiskImage](https://discmaster.textfiles.com/search?format=bDOSBootableDiskImage) | B-DOS bootable disk image | .dsk | 
@@ -1004,7 +1003,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (178)
+## Music (177)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -1112,7 +1111,6 @@ Family/Format | Name | Extensions | Notes
 [music/mvsTracker](https://discmaster.textfiles.com/search?format=mvsTracker) | MVSTracker Module | .mus | [2 sample files](https://sembiance.com/fileFormatSamples/music/mvsTracker/)
 [music/mvxModule](https://discmaster.textfiles.com/search?format=mvxModule) | MVX Module | .mvm | [4 sample files](https://sembiance.com/fileFormatSamples/music/mvxModule/)
 [music/nerdTracker](https://discmaster.textfiles.com/search?format=nerdTracker) | NerdTracker Module | .ned | [4 sample files](https://sembiance.com/fileFormatSamples/music/nerdTracker/)
-[music/noiseRunner](https://discmaster.textfiles.com/search?format=noiseRunner) | NoiseRunner Module | .nr | [1 sample file](https://sembiance.com/fileFormatSamples/music/noiseRunner/)
 [music/noiseTrekker](https://discmaster.textfiles.com/search?format=noiseTrekker) | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://sembiance.com/fileFormatSamples/music/noiseTrekker/)
 [music/notatorSong](https://discmaster.textfiles.com/search?format=notatorSong) | Notator Song | .son | 
 [music/notatorXScore](https://discmaster.textfiles.com/search?format=notatorXScore) | Notator-X Score | .ntrx | 

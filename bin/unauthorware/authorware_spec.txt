@@ -1,0 +1,383 @@
+vibe coded by claude code
+
+Authorware Packaged File (.a4p / .a5p) Specification
+=====================================================
+Reverse-engineered from Macromedia Authorware 4.x/5.x sample files.
+
+Overview
+--------
+The A4P/A5P format is a packaged (runtime) file used by Macromedia Authorware,
+an interactive multimedia authoring tool. A4P files are produced by Authorware
+4.x and A5P files by Authorware 5.x. Both use the identical binary format
+described here. It stores a collection of "icons" (display elements,
+interactions, scripts, images, text, etc.) in a single file with optional
+zlib compression.
+
+All multi-byte integers are little-endian unless otherwise noted.
+
+Version Differences
+-------------------
+A4P (Authorware 4.x) and A5P (Authorware 5.x) files share the same format
+with the following observed differences:
+
+  Field               A4P                     A5P
+  ------------------  ----------------------  ----------------------
+  Encoder version     0 or 22                 22
+  Flags               0xFFFFFFF9/0xF9FFFFFF   0xFFFFFFF8
+  Format version      5                       5
+  Layout patterns     Both A and B            B only (data-first)
+
+The icon types, entry table format, compression, and all other structures
+are identical between versions.
+
+
+File Header (64 bytes, offset 0x00)
+-----------------------------------
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    4     char[4]   Magic signature: "ACRS"
+0x04    4     uint32    Secondary magic: 0xACBCBEAC (bytes: BE BC AD AC)
+0x08    4     uint32    Encoder version (typically 0 or 22)
+0x0C    4     int32     Flags (typically 0xFFFFFFF9 or 0xF9FFFFFF)
+0x10    16    bytes     File metadata / checksum (may be zeros or 0xCC fill)
+0x20    4     uint32    Format version (observed: 5)
+0x24    4     uint32    File size in bytes (matches actual file size)
+0x28    4     uint32    Total uncompressed data size
+0x2C    4     uint32    Table region total size (entry table + secondary table)
+0x30    4     uint32    Entry count (number of icon entries)
+0x34    4     uint32    Entry table file offset
+0x38    4     uint32    Auxiliary data (purpose varies; does not correspond to
+                        any single derived value across files)
+0x3C    4     uint32    Data section end offset
+
+After the header, bytes 0x40 through 0x57 (24 bytes) are always zero-filled
+padding.
+
+
+Preamble (0x58 to table/data start)
+------------------------------------
+Bytes 0x58 onward contain a small fixed structure beginning with uint32 = 1
+followed by zeros. This region extends to either the entry table offset or
+the first entry data offset, whichever comes first (typically 18 bytes,
+from 0x58 to 0x6A).
+
+
+File Layout Patterns
+--------------------
+Two layout patterns have been observed:
+
+Pattern A (table-first): The entry table begins at offset 0x6A, immediately
+after the preamble. Entry data follows the table region. Files observed:
+Basicstart.a4p, Credits.a4p, WRITE.A4P.
+
+Pattern B (data-first): Entry data begins at a low offset (e.g. 0x6A),
+and the entry table is located deep in the file (e.g. 0x5728, 0x98C4).
+Files observed: Example1.a4p, Notepad.a4p.
+
+In both patterns, the entry table offset is always given by header field
+0x34, and entry data offsets are absolute file positions stored in each
+entry record.
+
+
+Entry Table
+-----------
+Located at the file offset given by header field 0x34.
+Each entry is exactly 30 bytes:
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    2     uint16    Entry ID (1-based, monotonically increasing)
+0x02    2     uint16    Reserved (always 0)
+0x04    2     uint16    Icon type (see Icon Types below)
+0x06    2     uint16    Flags (typically 0x4001)
+0x08    4     uint32    Compressed data size in bytes
+0x0C    4     uint32    Decompressed data size in bytes
+0x10    2     uint16    Storage type: 1 = uncompressed, 2 = zlib-compressed
+0x12    2     uint16    Flags2 (typically 1)
+0x14    4     uint32    Reserved (always 0)
+0x18    4     uint32    Data offset (absolute file position of entry data)
+0x1C    2     int16     Parent entry ID (0 = root level)
+
+When storage type = 1, the compressed and decompressed sizes are equal
+and the data at the given offset is stored raw (no compression).
+When storage type = 2, the data is zlib-compressed (RFC 1950 deflate).
+
+
+Secondary Table
+---------------
+Immediately following the entry table, there may be a secondary table
+whose size is:  header[0x2C] - (entry_count * 30).
+
+The secondary table format varies between files:
+  - Array of 30-byte records mirroring entry table format
+  - Array of uint32 values (possibly tree depth or ordering data)
+  - Sequential byte ramp (lookup table or palette index)
+  - All zeros (unused)
+
+This table appears to contain auxiliary metadata related to the Authorware
+flowline tree structure. It is NOT a reference table for additional data.
+
+
+Unreferenced Data Blocks
+-------------------------
+In addition to data referenced by the entry table, files contain
+zlib-compressed blocks scattered in the data region that are not
+pointed to by any entry's data_offset field. These blocks fall into
+two categories:
+
+1. Duplicate blocks: Exact copies of data already referenced by entries.
+   These may serve as backup or cross-platform fallback data.
+
+2. Unique blocks: Data not found in any entry. These include:
+
+   Media content (should be extracted):
+   - GIF images (signature: "GIF87a" or "GIF89a")
+   - Full BMP images (signature: "BM")
+   - Raw DIB data (BITMAPINFOHEADER with biSize = 40)
+   - PIG containers (bytes 2-5 = "PIG\0") with embedded bitmaps
+
+   Authorware internal structures (preserve as raw binary):
+   - Flowline/tree data (prefix 04 04 00 00) — most common
+   - Presentation/layout structures (prefix 02 02 0C 02)
+   - FileProperties variants (prefix 00 01 00 00, typically 1212 bytes)
+   - Icon configuration records (prefix 13 00 XX 00, various subtypes)
+   - Interaction/response config (prefix 01 00 XX 00)
+   - Navigate variants (prefix 03 00 0A 00, typically 44 bytes)
+   - Settings/property blocks (prefix XX 79 XX 00)
+   - Small positioning/bounds records (< 128 bytes)
+
+The total compressed size of these blocks is tracked loosely (but not
+exactly) by header field 0x38 in some files. Small 1-4 byte gaps between
+entry data regions are alignment padding.
+
+
+Icon Types
+----------
+Type    Name                    Description
+------  ----------------------  -----------------------------------------
+0x01    FileProperties          Project/file metadata (typically 1212 bytes)
+0x02    IconNames               Null-separated list of icon names/labels
+0x03    ColorPalette            System color palette (2048 bytes)
+0x04    Calculation             Calculation expression bytecode
+0x05    Script                  Script/function code
+0x06    RawData                 Raw binary data
+0x07    LibraryPaths            Library file references (null-terminated paths)
+0x09    NamedElements           Null-separated display object name list
+0x0A    Variables               Variable definitions (null-separated names)
+0x0B    PropertyDescriptions    Property description strings
+0x0C    Interaction             Interaction icon definition
+0x0D    Conditional             Conditional branch definition
+0x0E    FunctionDoc             UCD/Xtra function documentation (param + help text)
+0x0F    ConditionalBranch       Conditional branch target
+0x10    Target                  Target/destination
+0x11    Motion                  Motion/animation path
+0x13    ButtonResponse          Button response handler
+0x14    HotSpotResponse         Hot-spot response handler
+0x15    Navigate                Navigation icon
+0x16    Framework               Framework/page structure icon
+0x17    Decision                Decision/branching icon
+0x18    CursorResource          Cursor image resource
+0x19    FontTable               Font mapping table (font names + metrics)
+0x1A    CursorData              Cursor bitmap data
+0x1B    TextInput               Text entry field definition
+0x1C    LookupTable             System lookup table (always 512 bytes)
+0x1F    Erase                   Erase icon (display removal)
+0x21    MovieReference          Movie/video media reference
+0x22    InteractionResponse     Interaction response data
+0x23    LibraryRefs             Library reference paths
+0x24    Expression              Calculation/expression code
+0x25    Display                 Display icon (offset table + styled text + images)
+0x26    MapGroup                Map/group container icon
+0x27    Wait                    Wait/pause icon
+0x28    RichText                Rich text block with font table (see below)
+0x29    Reference               Small 4-byte configuration/reference value
+0x33    AnimationPath           Animation/motion path definition (~2400-2600 bytes)
+0x34    PIG                     Packaged Icon Group (platform-specific image)
+0x35    DIB                     Device Independent Bitmap (raw BITMAPINFOHEADER)
+0x36    SoundHeader             Audio metadata header (48 bytes, see below)
+0x37    SoundData               Raw 8-bit PCM audio samples (see below)
+0x38    AnimationFrames         Animation frame data (paired with 0x33)
+0x3A    DisplayText             Display text / UI label strings
+0x3B    EmbeddedMedia           Embedded media (BMP image, 3DMF model, or other)
+0x3C    AIFFAudio               AIFF audio data (may span multiple entries)
+0x3E    BMP                     Full Windows BMP image (with BM file header)
+0xFFFD  PluginPIG               Plugin icon graphic (PIG format, see PIG section)
+
+
+Rich Text Block (type 0x28)
+---------------------------
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    2     uint16    Version/type (typically 2)
+0x02    2     uint16    Sub-flags
+0x04    4     uint32    Reserved
+0x08    2     uint16    Text data offset (from start of block)
+
+Following the 10-byte header is a font table consisting of null-terminated
+font name strings. The text data begins at the offset specified in field 0x08.
+
+
+Display Icon (type 0x25)
+------------------------
+Begins with an offset table of uint32 values, typically 256 entries
+(1024 bytes). Each offset points to a display element sub-record within
+the remaining data. Sub-records contain positioned text runs, formatting
+information, and embedded inline content.
+
+
+Packaged Icon Group - PIG (type 0x34)
+--------------------------------------
+A platform-specific image container. Header structure:
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    2     uint16    Reserved (0)
+0x02    4     char[4]   Signature: "PIG\0"
+0x06    4     char[4]   Platform: "WIN\0" or "MAC\0"
+0x0A    4     char[4]   Version: "001\0"
+0x0E    4     uint32    Sub-image count
+0x12    4     uint32    Remaining data size (total_size - 2)
+0x16    4     uint32    Reserved (0)
+0x1A    4     uint32    Reserved (0)
+
+For WIN platform entries:
+  0x1E    2   uint16    Image width
+  0x20    2   uint16    Image height
+  Followed by bounds rectangles and then image data.
+
+  Shared palette (WIN only):
+    At offset 80 (0x50) from the start of the PIG entry, there is a
+    256-color RGBQUAD palette (1024 bytes). This shared palette is used
+    by 8bpp BITMAPINFOHEADER sub-images within the PIG. These 8bpp DIBs
+    omit their own palette and rely on the PIG's shared palette at offset
+    80.
+
+    Lower bit-depth sub-images (1bpp, 4bpp) include their own embedded
+    palettes within the BITMAPINFOHEADER structure as normal.
+
+  One or more BITMAPINFOHEADER sub-images follow at various bit depths.
+  The highest bit-depth sub-image is typically the best quality version.
+
+For MAC platform entries:
+  Contains QuickDraw/PICT-format data with big-endian coordinates.
+  Some MAC PIGs still contain BITMAPINFOHEADER sub-images (possibly for
+  cross-platform compatibility).
+
+Some PIG entries embed GIF images (observed in A5P files) instead of
+BITMAPINFOHEADER sub-images. The GIF data appears at a variable offset
+after the PIG header and bounds structures (observed at offsets 204,
+342, 418, and 786). The GIF can be identified by scanning for the
+"GIF87a" or "GIF89a" signature within the PIG data. The PIG header's
+width/height fields describe the display region, which may be larger
+than the actual GIF image dimensions.
+
+Some PIG entries contain only position/bounds data (small entries) or
+mixed content including styled text and Authorware script code alongside
+image data.
+
+
+DIB (type 0x35)
+---------------
+Raw Windows DIB data starting with a BITMAPINFOHEADER (40 bytes),
+followed by the color palette (if bpp <= 8) and pixel data. No BMP file
+header is present; one must be prepended for standard BMP viewers.
+
+Pixel data may use RLE8 compression (biCompression = 1) for 8bpp images.
+
+
+BMP (type 0x3E)
+---------------
+A complete Windows BMP file starting with the standard "BM" file header.
+Can be extracted and saved directly as a .bmp file.
+
+
+Sound Header (type 0x36) and Sound Data (type 0x37)
+----------------------------------------------------
+Audio is stored as a pair of entries: a 48-byte SoundHeader (0x36)
+immediately followed by a SoundData (0x37) entry containing raw PCM.
+
+SoundHeader layout (48 bytes):
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    4     uint32    Audio format type (observed: 3)
+0x04    2     uint16    Channel count (1 = mono)
+0x06    2     uint16    Data size in bytes (matches paired 0x37 entry)
+0x08    16    bytes     Reserved (zeros)
+0x18    2     uint16    Channel count (repeated)
+0x1A    1     uint8     Block size hint
+0x1B    1     uint8     Bits per sample (8)
+0x1C    4     bytes     Encoding flags
+0x20    8     bytes     Float/reserved data
+0x28    2     uint16    Sample rate (e.g. 22050)
+0x2A    6     bytes     Reserved (zeros)
+
+The SoundData entry contains unsigned 8-bit PCM samples centered at
+0x80 (128 = silence). To create a playable WAV file, prepend a standard
+RIFF/WAV header specifying PCM format with the sample rate, bit depth,
+and channel count from the SoundHeader.
+
+
+Embedded Media (type 0x3B)
+--------------------------
+A container for various embedded media types. The content type can be
+determined by inspecting the data:
+  - "BM" (42 4D) at offset 0: Windows BMP image - extract directly as .bmp
+  - "3DMF" (33 44 4D 46) at offset 0: QuickDraw 3D Metafile - extract as .3dmf
+  - "FWS" or "CWS" at offset 12: Macromedia Flash SWF file (see below)
+  - Other: Binary layout/positioning data or plugin-specific content
+
+SWF entries have a 12-byte big-endian wrapper header before the SWF data:
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------
+0x00    4     uint32be  Total block size (matches entry data size)
+0x04    4     uint32be  Sub-item count (always 1)
+0x08    4     uint32be  SWF data size (total_size - 12)
+0x0C    ...   bytes     SWF file data ("FWS" = uncompressed, "CWS" = compressed)
+
+The SWF data from offset 12 onward can be extracted directly as a .swf file.
+
+
+Animation Data (types 0x33 and 0x38)
+-------------------------------------
+Animation is stored as a pair: an AnimationPath (0x33) defining the
+motion path (~2400-2600 bytes) followed by AnimationFrames (0x38)
+containing the frame-by-frame data (can be very large, up to ~57KB).
+
+
+Plugin PIG (type 0xFFFD)
+-------------------------
+Plugin icon graphics use the same PIG format as type 0x34 entries.
+These are specific to Authorware's Xtra/plugin system and contain
+WIN-platform PIG data (icon positioning and rendering metadata for
+plugin-provided display objects).
+
+
+AIFF Audio (type 0x3C)
+-----------------------
+AIFF (Audio Interchange File Format) audio data. Large audio files are
+split across multiple consecutive 0x3C entries, each up to 65536 bytes.
+The first entry begins with the standard AIFF header ("FORM" + size +
+"AIFF"), containing COMM (format) and SSND (sample data) chunks. All
+consecutive 0x3C entries must be concatenated in order to reconstruct
+the complete AIFF file. The FORM chunk's size field gives the total
+audio data size (excluding the 8-byte FORM header).
+
+
+Empty Entries
+-------------
+Some entries have comp_size = 0, decomp_size = 0, and data_offset = 0.
+These are placeholder/stub entries with no data content and should be
+skipped during extraction.
+
+
+Compression
+-----------
+Entry data with storage_type = 2 is compressed using zlib (RFC 1950
+deflate wrapper). The compressed data at the entry's data_offset can be
+decompressed using standard zlib inflate. The decompressed result should
+match the entry's decomp_size field.
+
+Unreferenced zlib blocks elsewhere in the file use the same compression
+format and can be identified by the zlib header byte 0x78 followed by
+one of: 0x01 (no compression), 0x5E (fast), 0x9C (default), 0xDA (best).

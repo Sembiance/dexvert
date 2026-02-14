@@ -17,6 +17,29 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Continue working on authorware vibe extractor:
+	https://discmaster.textfiles.com/search?extension=-a4p+-a5p&format=authorware&limit=1000
+  Check .a6p, .a7p etc and other extensions listed in authorware.js, add to extension list above until all handled
+  Then look into whatever authorwareAPRArchive is, maybe can combine, maybe not
+  After adding, reprocess for sure:
+	https://discmaster.textfiles.com/admin/items?search=Imparo+Giocando
+  And of course all authorware/authorwareAPRArchive matches 
+
+* Create a new 'detect' app, that only works on exe's for now, call it like 'overlayID'
+  Vibe code this and base it on dexUtil.getEXEOverlayOffset but ensure it has full support for all exe types with no bugs
+  Update that dexUtil to be dexUtil.extractEXEOverlay(inputFilePath, outputFilePath)
+  Update exeUnPostContent to just be an 'exec = async r => {}' section instead of a bin/ program
+  The detection program will extract that extra portion of data at the end of an exe and save it to a tmp file then run that through 'identify'
+  Then report back those detections as Overlay: <detection>
+  Then I can get rid of dexmagic.exeAppended and those things in there should be detected by the new detection app
+  So update those formats with the proper 'Overlay: <whatever>' magic
+	Exaine: https://gemini.google.com/app/1d58c08e3b5d457b
+
+* vibe code color shifting ILBM to animted webp, with DETECTION of whether it actualy has MEANINGFUL shifting.
+  See my notes in the ilbm.js and maybe below or other files about how some say they have shfiting data, but don't really
+  Then I can set animated:true or false in meta (see how I handle that for webpinfo and gifsicle_info)
+  See how this is handled in postProcess and also discmaster, but it should be the same way (not part of subprogram)
+
 * See about fixing:
 	poly/nif
 
@@ -56,17 +79,6 @@
   Additionally I could then reliably record into meta how many 'glyphs' are in each font using something like: ttfdump TREK.TTF | ag numGlyphs
   Then this could be searched upon in discmaster with '# of <glyphs>'
   Of course then re-process ALL FONTS on discmaster
-
-* Authorware, thousands of files, no known extractor:
-	https://discmaster.textfiles.com/search?format=authorware
-	https://discmaster.textfiles.com/search?format=authorwareAPRArchive
-	Also appened to the end of PE exes:
-		https://discmaster.textfiles.com/search?q=%22Authorware+Runtime%22&qfields=name&qfields=t&extension=txt
-		https://discmaster.textfiles.com/search?format=authorwareEXE
-		NOTE: The detection of these 'EXE' variants could be extended with different idstrings, see dexmagic.exe
-	    If I add more, also update authorwareEXE.js with the new idstrings too
-  Could use original authorware authoring tools, create simple files, then reverse engineer the output to build an extractor
-  After adding support, could reprocess all of these CDs too: https://discmaster.textfiles.com/admin/items?search=Imparo+Giocando
   
 * archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc progrmatically connect to the VNC port and automate it
   So via code it would send keyboard and mouse clicks at various coordinates.

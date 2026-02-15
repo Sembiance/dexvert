@@ -6,5 +6,5 @@ export class iim extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/InShape_IIM";
 	ext        = [".iim"];
 	magic      = ["InShape IIM bitmap", "deark: iim", "Inshape :iim:"];
-	converters = ["deark[module:iim]", "nconvert[format:iim]", "recoil2png", "wuimg[format:iim]"];
+	converters = ["deark[module:iim]", "nconvert[format:iim]", "recoil2png[format:IIM]", "wuimg[format:iim]"];
 }

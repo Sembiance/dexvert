@@ -6,5 +6,5 @@ export class rap extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Vidig_Paint";
 	ext        = [".rap"];
 	fileSize   = 7681;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:RAP]"];
 }

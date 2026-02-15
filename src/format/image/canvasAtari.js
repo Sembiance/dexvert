@@ -24,5 +24,5 @@ export class canvasAtari extends Format
 	// Don't do anything with .hbl files
 	untouched       = ({f}) => f.input.ext.toLowerCase()===".hbl";
 	verifyUntouched = false;
-	converters      = ["recoil2png"];
+	converters      = ["recoil2png[format:CPT,FUL]"];
 }

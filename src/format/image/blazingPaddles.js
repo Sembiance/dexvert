@@ -9,6 +9,6 @@ export class blazingPaddles extends Format
 	mimeType      = "image/x-blazing-paddles";
 	fileSize      = [10240, 10242];
 	matchFileSize = true;
-	converters    = ["recoil2png", "nconvert[format:pi]", "view64"];	// abydosconvert[format:${this.mimeType}] messes too much stuff up
+	converters    = ["recoil2png[format:PI.Bpl]", "nconvert[format:pi]", "view64"];	// abydosconvert[format:${this.mimeType}] messes too much stuff up
 	verify        = ({meta}) => meta.colorCount>1;
 }

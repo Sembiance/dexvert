@@ -4,5 +4,5 @@ export class electronikaBKS extends Format
 {
 	name       = "Electronika BKS";
 	ext        = [".bks"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:BKS]"];
 }

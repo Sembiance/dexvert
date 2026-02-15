@@ -9,5 +9,5 @@ export class doodleAtari extends Format
 	fileSize      = 32000;
 	matchFileSize = true;
 	classify      = true;
-	converters    = ["deark[module:doodle]", "recoil2png", "nconvert[format:doodle]"];	// wuimg works too but is too lax with what it accepts and converts
+	converters    = ["deark[module:doodle]", "recoil2png[format:ART.Doo,DOO]", "nconvert[format:doodle]"];	// wuimg works too but is too lax with what it accepts and converts
 }

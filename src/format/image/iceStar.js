@@ -5,5 +5,5 @@ export class iceStar extends Format
 	name       = "Atari ICE* Image";
 	website    = "http://fileformats.archiveteam.org/wiki/ICE_(Atari)";
 	ext        = [".icn", ".imn", ".ipc", ".ip2"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:IPC,IP2,IMN,ICN.Atari8Ice]"];
 }

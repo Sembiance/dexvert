@@ -5,5 +5,5 @@ export class hiresFLIDesigner extends Format
 	name       = "Hires FLI Designer";
 	website    = "http://fileformats.archiveteam.org/wiki/Hires_FLI_Designer";
 	ext        = [".hfc", ".hfd"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HFC]"];
 }

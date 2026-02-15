@@ -5,5 +5,5 @@ export class samCoupeInterlaced extends Format
 	name       = "SAM Coupe Interlaced";
 	ext        = [".lce"];
 	fileSize   = [49234];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:LCE]"];
 }

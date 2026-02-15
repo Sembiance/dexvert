@@ -6,5 +6,5 @@ export class gigaCad extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Giga Cad";
 	ext        = [".gcd"];
 	magic      = ["Gigacad Hires :gcd:"];
-	converters = ["recoil2png", "nconvert[format:gcd]"];
+	converters = ["recoil2png[format:GCD]", "nconvert[format:gcd]"];
 }

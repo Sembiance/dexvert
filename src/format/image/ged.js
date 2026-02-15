@@ -6,5 +6,5 @@ export class ged extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GED";
 	ext        = [".ged"];
 	magic      = ["Atari GED bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:GED]"];
 }

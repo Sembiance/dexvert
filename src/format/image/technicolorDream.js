@@ -15,5 +15,5 @@ export class technicolorDream extends Format
 	// Don't do anything with .col files
 	untouched       = ({f}) => f.input.ext.toLowerCase()===".col";
 	verifyUntouched = false;
-	converters      = ["recoil2png"];
+	converters      = ["recoil2png[format:LUM]"];
 }

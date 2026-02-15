@@ -7,5 +7,5 @@ export class timexHiColor extends Format
 	ext        = [".scr"];
 	fileSize   = 12288;
 	idCheck    = inputFile => !["custom", "gr", "strings"].includes(inputFile.name.toLowerCase());	// These are false positives that recur in the wild
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SCR]"];
 }

@@ -7,5 +7,5 @@ export class nlq extends Format
 	ext        = [".nlq"];
 	magic      = ["Daisy-Dot NLQ font", /^fmt\/(1546|1547)( |$)/];
 	notes      = "Most of the sample files do not convert with recoil2png. Maybe a different version?";
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:NLQ]"];
 }

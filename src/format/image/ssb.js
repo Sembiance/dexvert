@@ -6,5 +6,5 @@ export class ssb extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow";
 	ext        = [".ssb"];
 	fileSize   = 32768;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SSB]"];
 }

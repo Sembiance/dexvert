@@ -5,5 +5,5 @@ export class symbOSGraphic extends Format
 	name       = "SymbOS Graphic";
 	website    = "http://fileformats.archiveteam.org/wiki/SymbOS_graphic";
 	ext        = [".sgx"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SGX]"];
 }

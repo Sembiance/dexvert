@@ -7,5 +7,5 @@ export class rainbowPainter extends Format
 	ext        = [".rp"];
 	magic      = ["Rainbow Painter :rp:"];
 	fileSize   = 10242;
-	converters = ["recoil2png", "nconvert[format:rp]", "view64"];
+	converters = ["recoil2png[format:RP]", "nconvert[format:rp]", "view64"];
 }

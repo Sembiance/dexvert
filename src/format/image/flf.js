@@ -6,5 +6,5 @@ export class flf extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Turbo_Rascal_Syntax_Error";
 	ext        = [".flf"];
 	magic      = ["Turbo Rascal Syntax Error"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:FLF]"];
 }

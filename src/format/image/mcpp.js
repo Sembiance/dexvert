@@ -6,5 +6,5 @@ export class mcpp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Paradox_(graphics)";
 	ext        = [".mcpp"];
 	fileSize   = 8008;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:MCPP]"];
 }

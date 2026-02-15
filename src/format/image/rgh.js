@@ -6,5 +6,5 @@ export class rgh extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ZZ_ROUGH";
 	ext        = [".rgh"];
 	magic      = ["ZZ ROUGH bitmap", "ZZ Rough :zzrough:"];
-	converters = ["recoil2png", "nconvert[format:zzrough]"];
+	converters = ["recoil2png[format:RGH]", "nconvert[format:zzrough]"];
 }

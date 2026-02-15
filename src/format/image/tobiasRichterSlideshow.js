@@ -6,5 +6,5 @@ export class tobiasRichterSlideshow extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow";
 	ext        = [".pci"];
 	mimeType   = "image/x-tobias-richter-fullscreen-slideshow";
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["recoil2png[format:PCI]", `abydosconvert[format:${this.mimeType}]`];
 }

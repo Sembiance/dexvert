@@ -10,5 +10,5 @@ export class grassSlideshow extends Format
 	// So if we get to this format, we need to ensure that we don't try converting it because recoil2png will just produce garbage
 	idCheck = inputFile => inputFile.size!==19203;
 
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HPM]"];
 }

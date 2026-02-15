@@ -6,5 +6,5 @@ export class monoMagic extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Mono_Magic";
 	ext        = [".mon"];
 	magic      = ["Mono Magic :mon:"];
-	converters = ["recoil2png", "nconvert[format:mon]"];
+	converters = ["recoil2png[format:MON]", "nconvert[format:mon]"];
 }

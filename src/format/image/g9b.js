@@ -6,5 +6,5 @@ export class g9b extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/G9B";
 	ext        = [".g9b"];
 	magic      = ["G9B graphics format bitmap", /^fmt\/1787( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:G9B]"];
 }

@@ -15,7 +15,7 @@ export class a2gsSHStar extends Format
 		return ext;
 	};
 	idMeta     = ({proDOSTypeCode}) => ["PIC", "PNT"].includes(proDOSTypeCode);
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SHR.AppleIIShr,SHR.Sh3,SH3.Sh3]"];
 	notes      = "Suffix #C00002 is usually captured by a2gsPreferred magic, but is here just in case it isn't.";
 	verify     = ({meta}) => meta.colorCount>1;
 }

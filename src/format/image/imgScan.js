@@ -8,5 +8,5 @@ export class imgScan extends Format
 	fileSize         = {".rwl" : 64000, ".raw" : 128_000, ".rwh" : 256_000};
 	matchFileSize    = true;
 	confidenceAdjust = () => -19;	// Very weak format, so set it as nearly last
-	converters       = ["recoil2png", "wuimg[format:imgscan]"];
+	converters       = ["recoil2png[format:RWL,RAW.Rw,RWH]", "wuimg[format:imgscan]"];
 }

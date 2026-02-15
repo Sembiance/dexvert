@@ -6,5 +6,5 @@ export class taquart extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Taquart_Interlace_Picture";
 	ext        = [".tip"];
 	magic      = ["Taquart Interlace Picture bitmap", /^fmt\/1589( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:TIP]"];
 }

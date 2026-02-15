@@ -6,5 +6,5 @@ export class sprEd extends Format
 	ext            = [".spr"];
 	forbidExtMatch = true;
 	magic          = ["SprEd Sprite"];
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[format:SPR.SprEd,SPR.Atari8Spr]"];
 }

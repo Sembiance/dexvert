@@ -11,5 +11,5 @@ export class vidcom64 extends Format
 	fileSize  = 10050;
 	
 	// nconvert produces clearer output compared to recoil2png
-	converters = ["nconvert[format:vid]", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
+	converters = ["nconvert[format:vid]", "recoil2png[format:VID]", `abydosconvert[format:${this.mimeType}]`, "view64"];
 }

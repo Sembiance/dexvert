@@ -8,5 +8,5 @@ export class dali extends Format
 	magic          = [/^Dali \((Low|Medium|High) Resolution\) :dali:/];
 	fileSize       = {".sd0,.sd1,.sd2" : 32128};
 	matchFileSize  = true;
-	converters     = ["recoil2png[hasExtMatch]", "nconvert[format:dali]", "wuimg[format:dali]"];
+	converters     = ["recoil2png[format:SD2,SD1,LPK,HPK,SD0,MPK]", "nconvert[format:dali]", "wuimg[format:dali]"];
 }

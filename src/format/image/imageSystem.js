@@ -12,7 +12,7 @@ export class imageSystem extends Format
 	forbiddenMagic = TEXT_MAGIC;
 
 	// recoil2png doesn't properly handle some files, nconvert does a better job here
-	converters = ["nconvert[format:cism]", "nconvert[format:cish]", "recoil2png", "view64"];
+	converters = ["nconvert[format:cism]", "nconvert[format:cish]", "recoil2png[format:ISH,ISM]", "view64"];
 
 	// Due to not having a good magic, we reject any created images that have less than 5 colors
 	verify = ({meta}) => meta.colorCount>5;

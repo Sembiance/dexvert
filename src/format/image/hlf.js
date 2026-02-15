@@ -6,5 +6,5 @@ export class hlf extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Hires_Interlace";
 	ext        = [".hlf"];
 	byteCheck  = [{offset : 0, match : [0x00, 0x20]}];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HLF]"];
 }

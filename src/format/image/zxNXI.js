@@ -6,5 +6,5 @@ export class zxNXI extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/NXI";
 	ext        = [".nxi"];
 	fileSize   = 49664;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:NXI]"];
 }

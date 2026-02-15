@@ -7,5 +7,5 @@ export class deskMatePaint extends Format
 	ext            = [".pnt"];
 	forbidExtMatch = true;
 	magic          = ["DeskMate Paint image", "DeskMate Paint Alt", "deark: deskmate_pnt"];
-	converters     = ["deark[module:deskmate_pnt]", "recoil2png"];
+	converters     = ["deark[module:deskmate_pnt]", "recoil2png[format:PNT.TandyPnt,PNT.Paintworks]"];
 }

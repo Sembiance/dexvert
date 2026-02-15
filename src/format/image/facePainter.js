@@ -8,5 +8,5 @@ export class facePainter extends Format
 	magic      = ["FacePainter :fpt:"];
 	mimeType   = "image/x-face-painter";
 	fileSize   = 10004;
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64", "nconvert[format:fpt]"];
+	converters = ["recoil2png[format:FCP,FPT]", `abydosconvert[format:${this.mimeType}]`, "view64", "nconvert[format:fpt]"];
 }

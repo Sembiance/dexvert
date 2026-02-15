@@ -6,5 +6,5 @@ export class zxStellar extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/STL_(ZX_Spectrum)";
 	ext        = [".stl"];
 	fileSize   = 3072;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:STL]"];
 }

@@ -6,5 +6,5 @@ export class pgr extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PowerGraphics";
 	ext        = [".pgr"];
 	magic      = ["PowerGraphics bitmap", /^fmt\/1731( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:PGR]"];
 }

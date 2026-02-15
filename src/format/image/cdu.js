@@ -7,5 +7,5 @@ export class cdu extends Format
 	ext        = [".cdu"];
 	magic      = ["CDU Paint :cdu:"];
 	fileSize   = 10277;
-	converters = ["recoil2png", "nconvert[format:cdu]", "view64"];
+	converters = ["recoil2png[format:CDU]", "nconvert[format:cdu]", "view64"];
 }

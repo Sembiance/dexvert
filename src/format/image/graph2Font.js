@@ -7,5 +7,5 @@ export class graph2Font extends Format
 	ext        = [".g2f", ".mch"];
 	magic      = ["Graph2Font bitmap"];
 	fileSize   = {".mch" : [30833, 32993]};
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:MCH,G2F]"];
 }

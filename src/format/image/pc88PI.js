@@ -7,5 +7,5 @@ export class pc88PI extends Format
 	ext        = [".pi"];
 	magic      = ["Pi bitmap", "Yanagisawa Pi 16 color picture"];
 	idMeta      = ({macFileType, macFileCreator}) => macFileType==="__PI" && macFileCreator==="xPIC";
-	converters = ["recoil2png", "wuimg[format:pi]"];
+	converters = ["recoil2png[format:PI.Pi]", "wuimg[format:pi]"];
 }

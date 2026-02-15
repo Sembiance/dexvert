@@ -7,5 +7,5 @@ export class rys extends Format
 	ext        = [".rys"];
 	magic      = ["Truevision TGA"];
 	weakMagic  = true;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:RYS]"];
 }

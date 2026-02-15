@@ -8,5 +8,5 @@ export class seuckSprite extends Format
 	safeExt       = ".a";
 	fileSize      = 8130;
 	matchFileSize = true;
-	converters    = ["recoil2png"];
+	converters    = ["recoil2png[format:A]"];
 }

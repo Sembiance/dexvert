@@ -5,5 +5,5 @@ export class delmPaint extends Format
 	name       = "DelmPaint";
 	website    = "http://fileformats.archiveteam.org/wiki/Calamus_Raster_Graphic";
 	ext        = [".del", ".dph"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:DEL,DPH]"];
 }

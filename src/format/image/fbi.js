@@ -8,5 +8,5 @@ export class fbi extends Format
 	forbidExtMatch = true;
 	magic          = ["SysEx File", "FLIP Bitmap"];
 	weakMagic      = true;
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[format:FBI]"];
 }

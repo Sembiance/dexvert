@@ -8,5 +8,5 @@ export class publicPainter extends Format
 	ext        = [".cmp"];
 	priority   = this.PRIORITY.LOW;
 	idCheck    = inputFile => inputFile.size<(xu.KB*32);	// Pretty weak match, just an extension, so do a little sanity checking on file size. Haven't encountered any larger than 30k, so restrict to 32k or less
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:CMP.StCmp,CMP.DdGraph]"];
 }

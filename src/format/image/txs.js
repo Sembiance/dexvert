@@ -5,5 +5,5 @@ export class txs extends Format
 	name       = "TXS";
 	website    = "http://fileformats.archiveteam.org/wiki/TXS";
 	ext        = [".txs"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:TXS]"];
 }

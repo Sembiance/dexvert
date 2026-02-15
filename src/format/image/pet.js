@@ -5,5 +5,5 @@ export class pet extends Format
 	name       = "PETSCII Editor";
 	ext        = [".pet"];
 	fileSize   = 2026;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:PET]"];
 }

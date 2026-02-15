@@ -6,5 +6,5 @@ export class computerEyes extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ComputerEyes";
 	ext        = [".ce1", ".ce2", ".ce3"];
 	magic      = ["ComputerEyes Raw Data Format bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:CE3,CE1,CE2]"];
 }

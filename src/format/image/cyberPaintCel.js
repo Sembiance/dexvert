@@ -6,5 +6,5 @@ export class cyberPaintCel extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell";
 	ext        = [".cel"];
 	magic      = ["Cyber Paint Cell animation"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:CEL]"];
 }

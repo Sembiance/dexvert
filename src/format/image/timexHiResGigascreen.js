@@ -6,5 +6,5 @@ export class timexHiResGigascreen extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)";
 	ext        = [".hrg"];
 	fileSize   = 24578;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HRG]"];
 }

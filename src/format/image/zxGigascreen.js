@@ -6,5 +6,5 @@ export class zxGigascreen extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Gigascreen";
 	ext        = [".img"];
 	fileSize   = 13824;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:IMG.Gsc]"];
 }

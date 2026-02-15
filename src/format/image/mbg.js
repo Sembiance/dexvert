@@ -6,5 +6,5 @@ export class mbg extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Mad_Designer";
 	ext        = [".mbg"];
 	fileSize   = 16384;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:MBG]"];
 }

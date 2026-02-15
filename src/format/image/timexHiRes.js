@@ -6,5 +6,5 @@ export class timexHiRes extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SCR_(ZX_Spectrum)";
 	ext        = [".scr"];
 	fileSize   = 12289;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SCR]"];
 }

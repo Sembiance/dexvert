@@ -6,5 +6,5 @@ export class rockyInterlace extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture";
 	ext        = [".rip"];
 	magic      = ["Rocky Interlace Picture bitmap", /^fmt\/1746( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:RIP]"];
 }

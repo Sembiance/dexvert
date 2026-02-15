@@ -7,5 +7,5 @@ export class a2HighRes extends Format
 	ext        = [".hgr"];
 	fileSize   = 8192;
 	idMeta     = ({proDOSTypeCode}) => proDOSTypeCode==="FOT";
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HGR]"];
 }

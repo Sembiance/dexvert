@@ -9,5 +9,5 @@ export class prismPaint extends Format
 	mimeType       = "image/x-prism-paint";
 	magic          = ["Prism Paint bitmap", "deark: prismpaint", /^fmt\/1732( |$)/];
 	//priority       = this.PRIORITY.LOW;
-	converters     = ["deark[module:prismpaint]", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters     = ["deark[module:prismpaint]", "recoil2png[format:PNT.FalconPnt,TPI]", `abydosconvert[format:${this.mimeType}]`];
 }

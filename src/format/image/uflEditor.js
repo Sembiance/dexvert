@@ -4,5 +4,5 @@ export class uflEditor extends Format
 {
 	name       = "UFLI-editor";
 	ext        = [".ufl"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:UFL]"];
 }

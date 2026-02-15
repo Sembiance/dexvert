@@ -6,5 +6,5 @@ export class samarHiresInterlace extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace";
 	ext        = [".shc"];
 	fileSize   = 17920;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SHC.Shc]"];
 }

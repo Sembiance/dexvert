@@ -7,5 +7,5 @@ export class mil extends Format
 	ext        = [".mil"];
 	magic      = ["Micro Illustrator Uncompressed :mil:"];
 	fileSize   = 10022;
-	converters = ["recoil2png", "nconvert[format:mil]"];
+	converters = ["recoil2png[format:MIL]", "nconvert[format:mil]"];
 }

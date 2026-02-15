@@ -7,5 +7,5 @@ export class ftc extends Format
 	ext        = [".ftc"];
 	magic      = ["deark: ftc"];
 	fileSize   = 184_320;
-	converters = ["deark[module:ftc]", "wuimg[format:ftc]", "recoil2png"];
+	converters = ["deark[module:ftc]", "wuimg[format:ftc]", "recoil2png[format:FTC]"];
 }

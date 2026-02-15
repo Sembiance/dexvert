@@ -10,7 +10,7 @@ export class degasExtended extends Format
 	byteCheck  = [{ext : ".pi5", offset : 0, match : [0x00, 0x04]}];
 	converters = dexState =>
 	{
-		const r = ["recoil2png"];
+		const r = ["recoil2png[format:PI4.Fuckpaint,PI9,PI8,PI7,PI6,PI4.StPi,PI5]"];
 		const originalExt = dexState.original.input.ext.toLowerCase();
 		if(originalExt===".pi9")
 			r.push("deark[module:fpaint_pi9]");

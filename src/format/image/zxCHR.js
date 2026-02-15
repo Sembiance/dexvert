@@ -6,5 +6,5 @@ export class zxCHR extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CH$";
 	ext        = [".ch$"];
 	magic      = ["ZX Spectrum CHR$ bitmap", "ZX Spectrum CHR"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:CH$]"];
 }

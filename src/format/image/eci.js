@@ -7,5 +7,5 @@ export class eci extends Format
 	ext        = [".eci", ".ecp"];
 	magic      = ["ECI Graphic Editor"];
 	weakMagic  = true;
-	converters = ["recoil2png", "view64[matchType:magic]"];
+	converters = ["recoil2png[format:ECP,ECI]", "view64[matchType:magic]"];
 }

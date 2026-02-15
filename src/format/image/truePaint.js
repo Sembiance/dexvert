@@ -6,5 +6,5 @@ export class truePaint extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/True_Paint_I";
 	ext        = [".mci", ".mcp"];
 	fileSize   = {".mci" : 19434};
-	converters = ["view64", "recoil2png"];
+	converters = ["view64", "recoil2png[format:MCI]"];
 }

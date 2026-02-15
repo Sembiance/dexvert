@@ -6,5 +6,5 @@ export class shfXLEdit extends Format
 	name        = "SHF-XL Edit";
 	ext         = [".shx", ".shf"];
 	idCheck     = () => RUNTIME.globalFlags?.osHint?.commodore;	// no magic match, so only match if we have explicitly set an environment variable as commodore
-	converters  = ["recoil2png"];
+	converters  = ["recoil2png[format:SHF,SHX]"];
 }

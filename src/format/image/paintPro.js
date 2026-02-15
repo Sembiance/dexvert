@@ -7,5 +7,5 @@ export class paintPro extends Format
 	ext           = [".pic"];
 	fileSize      = 32034;
 	matchFileSize = true;
-	converters    = ["recoil2png"];
+	converters    = ["recoil2png[format:PIC,BIL]"];
 }

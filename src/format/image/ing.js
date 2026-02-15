@@ -6,6 +6,6 @@ export class ing extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ING_15";
 	ext        = [".ing"];
 	fileSize   = 16052;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ING]"];
 	verify     = ({meta}) => meta.colorCount>1;
 }

@@ -6,5 +6,5 @@ export class atariImageManager extends Format
 	ext        = [".col", ".im"];
 	magic      = ["AIM :aim:"];
 	idCheck    = inputFile => inputFile.size%16384===0;
-	converters = ["recoil2png", "nconvert[format:aim]"];
+	converters = ["recoil2png[format:IM,COL]", "nconvert[format:aim]"];
 }

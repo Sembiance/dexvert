@@ -6,5 +6,5 @@ export class zxAtr extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ATR_(ZX_Spectrum)";
 	ext        = [".atr"];
 	fileSize   = 768;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ATR]"];
 }

@@ -7,5 +7,5 @@ export class kid extends Format
 	ext        = [".kid"];
 	magic      = ["Fullscreen Construction Kit"];
 	fileSize   = 63054;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:KID]"];
 }

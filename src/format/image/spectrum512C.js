@@ -7,5 +7,5 @@ export class spectrum512C extends Format
 	ext        = [".spc"];
 	mimeType   = "image/x-spectrum512-compressed";
 	magic      = ["Spectrum 512 compressed", "deark: spectrum512c (Spectrum 512 Compressed)", "Spectrum 512 (Compressed) :spc:"];
-	converters = ["deark[module:spectrum512c]", "recoil2png", "nconvert[format:spc]"];
+	converters = ["deark[module:spectrum512c]", "recoil2png[format:SPC.StSpc]", "nconvert[format:spc]"];
 }

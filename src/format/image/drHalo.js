@@ -26,7 +26,7 @@ export class drHalo extends Format
 
 	converters   = dexState => [
 		`deark[module:drhalocut]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`, `deark[module:drhalopic]${dexState.f.aux ? `[file2:${dexState.f.aux.base}]` : ""}`,
-		"nconvert[format:cut]", "convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress[matchType:magic]", "pv[matchType:magic]"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
+		"nconvert[format:cut]", "convert", "recoil2png[format:CUT]", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress[matchType:magic]", "pv[matchType:magic]"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
 	metaProvider = ["image"];
 	weakMagic    = true;
 

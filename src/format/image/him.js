@@ -6,5 +6,5 @@ export class him extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Hires_Manager";
 	ext        = [".him"];
 	byteCheck  = [{offset : 0, match : [0x00, 0x40]}];
-	converters = ["recoil2png", "view64"];
+	converters = ["recoil2png[format:HIM]", "view64"];
 }

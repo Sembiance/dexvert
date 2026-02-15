@@ -10,5 +10,5 @@ export class epa extends Format
 	weakMagic      = true;
 
 	// nconvert, as usual, messes up several files
-	converters     = ["recoil2png", "deark[module:awbm]", "nconvert[format:epa]"];
+	converters     = ["recoil2png[format:EPA]", "deark[module:awbm]", "nconvert[format:epa]"];
 }

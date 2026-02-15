@@ -8,5 +8,5 @@ export class cheese extends Format
 	magic      = ["Cheese :che:"];
 	mimeType   = "image/x-cheese";
 	fileSize   = 20482;
-	converters = ["recoil2png", "nconvert[format:che]", `abydosconvert[format:${this.mimeType}]`, "view64"];
+	converters = ["recoil2png[format:CHE]", "nconvert[format:che]", `abydosconvert[format:${this.mimeType}]`, "view64"];
 }

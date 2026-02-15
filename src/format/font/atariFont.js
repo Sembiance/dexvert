@@ -6,5 +6,5 @@ export class atariFont extends Format
 	ext        = [".fnt"];
 	priority   = this.PRIORITY.LOW;
 	fallback   = true;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:FNT.StFnt,FNT.Atari8Fnt,FNT.GdosFnt,FNT.Image72Fnt,FNT.AmstradFnt]"];
 }

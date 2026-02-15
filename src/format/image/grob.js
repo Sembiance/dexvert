@@ -9,5 +9,5 @@ export class grob extends Format
 		"HP 48 binary - Rev D (GROB)", "HP-48 Graphic Object Bitmap", "HP-49 Graphic Object Bitmap", "HP 49 binary - Rev X (GROB)", "HP ASII GROB bitmap", "HP 49 binary (GROB)", "HP 49 series binary transfer data", "deark: grob",
 		/^HP.* Grob.* Bitmap file :grob:$/
 	];
-	converters = ["nconvert[format:grob]", "deark[module:grob]", "recoil2png", "imageAlchemy"];
+	converters = ["nconvert[format:grob]", "deark[module:grob]", "recoil2png[format:GRO,GRB]", "imageAlchemy"];
 }

@@ -6,5 +6,5 @@ export class dynamicPublisherScreen extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Dynamic_Publisher";
 	ext        = [".pct", ".pap"];
 	magic      = ["Dynamic Publisher Picture/Screen", "Dynamic Publisher screen", /^fmt\/1778( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:PCT]"];
 }

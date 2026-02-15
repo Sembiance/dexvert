@@ -11,6 +11,6 @@ export class tim extends Format
 	converters   = [
 		"convert", "deark[module:tim]", "wuimg[format:tim]", "nconvert[format:tim]", "gameextractor[renameOut][codes:TIM]",
 		"paintDotNet[matchType:magic]", "noesis[type:image]",
-		"recoil2png"
+		"recoil2png[format:TIM]"
 	];
 }

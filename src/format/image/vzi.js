@@ -7,5 +7,5 @@ export class vzi extends Format
 	ext           = [".vzi"];
 	fileSize      = 16000;
 	matchFileSize = true;
-	converters    = ["recoil2png"];
+	converters    = ["recoil2png[format:SCR,VZI]"];
 }

@@ -6,5 +6,5 @@ export class digiPaint extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Digi_Paint";
 	ext        = [".ap3", ".apv", ".dgi", ".dgp", ".ilc", ".esc", ".pzm", ".g09", ".bg9"];
 	fileSize   = [15360, 15362, 15872];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ILC,PZM,DGI,APV,G09,BG9,ESC,DGP,AP3]"];
 }

@@ -4,5 +4,5 @@ export class elementZX extends Format
 {
 	name       = "eLeMeNt ZX";
 	ext        = [".hgl", ".hgh", ".skl", ".xkl", ".hrx"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HGL,HRX,HGH,SKL,XKL]"];
 }

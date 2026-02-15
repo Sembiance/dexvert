@@ -7,5 +7,5 @@ export class stadPAC extends Format
 	ext        = [".pac", ".seq"];
 	mimeType   = "image/x-stad";
 	magic      = ["STAD hi-res", "Atari ST STAD bitmap image data", "Stad :stad:", /^fmt\/1653( |$)/];
-	converters = ["nconvert[format:stad]", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["nconvert[format:stad]", "recoil2png[format:PAC]", `abydosconvert[format:${this.mimeType}]`];
 }

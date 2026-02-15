@@ -7,5 +7,5 @@ export class dynamicPublisherFont extends Format
 	ext            = [".fnt"];
 	forbidExtMatch = true;
 	magic          = ["Dynamic Publisher Font", /^fmt\/1779( |$)/];
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[format:FNT.Pct]"];
 }

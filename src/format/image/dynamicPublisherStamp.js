@@ -7,6 +7,6 @@ export class dynamicPublisherStamp extends Format
 	ext        = [".stp"];
 	magic      = ["Dynamic Publisher Stamp"];
 	weakMagic  = true;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:STP]"];
 	verify     = ({meta}) => meta.height>3 && meta.width>3 && meta.width<2000 && meta.height<2000;
 }

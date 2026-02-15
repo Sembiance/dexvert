@@ -6,5 +6,5 @@ export class bbcMicro extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/BBC_Micro_mode_image";
 	ext        = [".bb0", ".bb1", ".bb2", ".bb4", ".bb5"];
 	fileSize   = [10240, 20480];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:BB4,BB0,BB5,BB1,BB2]"];
 }

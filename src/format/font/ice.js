@@ -10,5 +10,5 @@ export class ice extends Format
 	// All samples are less than 2055 bytes, but we'll check anything less than 8192
 	idCheck = inputFile => inputFile.size<4096;
 
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ICE]"];
 }

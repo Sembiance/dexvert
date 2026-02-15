@@ -7,5 +7,5 @@ export class zx3 extends Format
 	ext        = [".3"];
 	mimeType   = "image/x-tricolor-rgb";
 	fileSize   = 18432;
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["recoil2png[format:3]", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -7,5 +7,5 @@ export class fn2 extends Format
 	safeExt        = ".fn2";
 	fileSize       = 2048;
 	forbiddenMagic = ["Home Video Producer Font"];
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[format:FN2]"];
 }

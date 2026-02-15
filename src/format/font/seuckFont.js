@@ -7,5 +7,5 @@ export class seuckFont extends Format
 	ext        = [".g"];
 	fileSize   = 514;
 	notes      = "Only one file format has been located. To prevent false positives it assumes this format is 514 bytes long, always.";
-	converters = ["recoil2png", "wuimg[format:seuck]"];
+	converters = ["recoil2png[format:G]", "wuimg[format:seuck]"];
 }

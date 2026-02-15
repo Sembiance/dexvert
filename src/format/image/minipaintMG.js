@@ -9,5 +9,5 @@ export class minipaintMG extends Format
 	forbidExtMatch = true;
 	magic          = ["Minipaint MG"];
 	//weakMagic      = true;	// not sure if it's weak or not (comes from dexmagic), we'll find out
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[format:MG]"];
 }

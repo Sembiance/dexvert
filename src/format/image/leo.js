@@ -5,5 +5,5 @@ export class leo extends Format
 	name       = "Larka Edytor Obiekt";
 	website    = "http://fileformats.archiveteam.org/wiki/Larka_Edytor_Obiekt";
 	ext        = [".leo"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:LEO]"];
 }

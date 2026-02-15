@@ -10,5 +10,5 @@ export class zxSCR extends Format
 	mimeType     = "image/x-zx-spectrum-standard-screen";
 	notes        = "Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.";
 	metaProvider = ["image"];
-	converters   = ["recoil2png", "convert", "nconvert[format:zxscr]", `abydosconvert[format:${this.mimeType}]`];
+	converters   = ["recoil2png[format:SCR]", "convert", "nconvert[format:zxscr]", `abydosconvert[format:${this.mimeType}]`];
 }

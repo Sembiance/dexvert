@@ -7,6 +7,6 @@ export class utahRLE extends Format
 	ext          = [".rle"];
 	magic        = ["Utah Raster Toolkit bitmap", "RLE image data", "Utah Raster :rle:"];
 	metaProvider = ["image"];
-	converters   = ["nconvert[format:rle]", "recoil2png", "imconv[format:rle][matchType:magic]", "wuimg[format:utahrle][matchType:magic]", "convert"];	// convert sometimes produces just a black square, see mandrill.rle
+	converters   = ["nconvert[format:rle]", "imconv[format:rle][matchType:magic]", "wuimg[format:utahrle][matchType:magic]", "convert"];	// convert sometimes produces just a black square, see mandrill.rle
 	verify       = ({meta}) => meta.colorCount>1;
 }

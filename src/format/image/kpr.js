@@ -5,5 +5,5 @@ export class kpr extends Format
 	name       = "Kompresor do Animatora";
 	website    = "http://fileformats.archiveteam.org/wiki/Kompresor_do_Animatora";
 	ext        = [".kpr"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:KPR]"];
 }

@@ -7,5 +7,5 @@ export class championsInterlace extends Format
 	ext        = [".cci", ".cin"];
 	magic      = ["Compressed Champions' Interlace bitmap"];
 	fileSize   = {".cin" : [15360, 16004, 16384]};
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:CIN,CCI]"];
 }

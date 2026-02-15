@@ -6,5 +6,5 @@ export class icdrawIcon extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ICDRAW_icon";
 	ext        = [".ib3", ".ibi"];
 	magic      = ["ICDRAW group icon bitmap", "ICDRAW single icon bitmap", /^fmt\/(1792|1793)( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:IB3,IBI]"];
 }

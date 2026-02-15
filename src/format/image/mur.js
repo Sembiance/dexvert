@@ -12,5 +12,5 @@ export class mur extends Format
 	// Don't do anything with .pal files
 	untouched       = ({f}) => f.input.ext.toLowerCase()===".pal";
 	verifyUntouched = false;
-	converters      = ["recoil2png"];
+	converters      = ["recoil2png[format:MUR]"];
 }

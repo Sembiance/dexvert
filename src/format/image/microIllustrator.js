@@ -6,5 +6,5 @@ export class microIllustrator extends Format
 	ext         = [".mic"];
 	unsupported = true;
 	notes       = "NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.";
-	converters  = ["recoil2png", "view64"];
+	converters  = ["recoil2png[format:MIC]", "view64"];
 }

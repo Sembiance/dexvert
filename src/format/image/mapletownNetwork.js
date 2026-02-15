@@ -11,7 +11,7 @@ export class mapletownNetwork extends Format
 		{ext : ".mx1", offset : 0, match : [0x40, 0x40, 0x40, 0x20]},
 		{ext : ".nl3", offset : 0, match : [0x20, 0x20, 0x78, 0x25]}
 	];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ML1,MX1,NL3]"];
 }
 
 

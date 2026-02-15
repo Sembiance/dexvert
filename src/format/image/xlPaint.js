@@ -7,5 +7,5 @@ export class xlPaint extends Format
 	ext        = [".xlp", ".max", ".raw"];
 	magic      = ["XL-Paint MAX bitmap", /^fmt\/(1658|1659)( |$)/];
 	fileSize   = {".raw" : [792, 15372]};
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:MAX.Atari8Max,XLP,RAW.Atari8Raw,RAW.Zx81Raw]"];
 }

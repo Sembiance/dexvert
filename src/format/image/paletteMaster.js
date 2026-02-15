@@ -6,5 +6,5 @@ export class paletteMaster extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Palette_Master";
 	ext        = [".art"];
 	fileSize   = 36864;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ART.PaletteMaster]"];
 }

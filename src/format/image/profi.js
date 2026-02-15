@@ -5,5 +5,5 @@ export class profi extends Format
 	name       = "ZX Spectrum Profi";
 	ext        = [".grf"];
 	priority   = this.PRIORITY.LOW;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:GRF.ProfiGrf]"];
 }

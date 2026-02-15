@@ -6,5 +6,5 @@ export class grafixGRX extends Format
 	ext            = [".grx"];
 	forbidExtMatch = true;
 	magic          = ["Grafix GRX"];
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[format:GRX]"];
 }

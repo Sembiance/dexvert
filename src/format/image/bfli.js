@@ -7,5 +7,5 @@ export class bfli extends Format
 	ext        = [".bfli"];
 	magic      = ["Big Flexible Line Interpretation bitmap", "BFLI :bfli:"];
 	fileSize   = 33795;
-	converters = ["recoil2png", "nconvert[format:bfli]"];
+	converters = ["recoil2png[format:BFLI]", "nconvert[format:bfli]"];
 }

@@ -4,5 +4,5 @@ export class txe extends Format
 {
 	name       = "Texture Editor by Mikey";
 	ext        = [".txe"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:TXE]"];
 }

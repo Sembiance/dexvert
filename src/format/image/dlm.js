@@ -8,5 +8,5 @@ export class dlm extends Format
 	magic      = ["Dir Logo Maker bitmap"];
 	fileSize   = 256;
 	byteCheck  = [{offset : 0, match : ["B".charCodeAt(0)]}];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:DLM]"];
 }

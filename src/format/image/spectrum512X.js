@@ -6,5 +6,5 @@ export class spectrum512X extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Spectrum_512_Extended";
 	ext        = [".spx"];
 	magic      = ["Spectrum 512 Extended bitmap", /^fmt\/(1577|1578)( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SPX]"];
 }

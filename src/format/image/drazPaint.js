@@ -8,5 +8,5 @@ export class drazPaint extends Format
 	mimeType   = "image/x-draz-paint";
 	magic      = ["Drazpaint", "Draz Paint :drz:"];
 	weakMagic  = true;
-	converters = ["nconvert[format:drz]", "recoil2png[matchType:magic]", `abydosconvert[format:${this.mimeType}]`, "view64[matchType:magic]"];
+	converters = ["nconvert[format:drz]", "recoil2png[format:DRZ,DRP]", `abydosconvert[format:${this.mimeType}]`, "view64[matchType:magic]"];
 }

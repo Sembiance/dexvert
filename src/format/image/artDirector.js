@@ -7,5 +7,5 @@ export class artDirector extends Format
 	ext        = [".art"];
 	magic      = ["Art Director :artdir:"];
 	fileSize   = 32512;
-	converters = ["recoil2png", "nconvert[format:artdir]"];
+	converters = ["recoil2png[format:ART.ArtDirector]", "nconvert[format:artdir]"];
 }

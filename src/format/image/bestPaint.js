@@ -6,5 +6,5 @@ export class bestPaint extends Format
 	ext           = [".bp"];
 	fileSize      = [4083];
 	matchFileSize = true;
-	converters    = ["recoil2png"];
+	converters    = ["recoil2png[format:BP]"];
 }

@@ -15,7 +15,7 @@ export class gem extends Format
 		"ffmpeg[format:gem_pipe][outType:png]",
 
 		// Recoil does second bes
-		"recoil2png[matchType:magic]", "deark[module:gemras]"
+		"recoil2png[format:IMG.StImg,XIMG,TIMG]", "deark[module:gemras]"
 		
 		// Abydos and nconvert handle the color in flag_b24 and tru256 (nconvert messes up some other images colorspaces (as usual for nconvert))
 		//`abydosconvert[format:${this.mimeType}]`, "nconvert[format:gem]",

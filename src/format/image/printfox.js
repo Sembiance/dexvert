@@ -19,5 +19,5 @@ export class printfox extends Format
 	// .bin doesn't convert correctly with nconvert, so if we detect it in a filename like shark.gb.bin then we check to see if .gb is a valid ext, otherwise we just use .gb
 	//safeExt    : state => (state.input.ext.toLowerCase()===".bin" ? (exports.meta.ext.find(v => v===path.extname(state.input.name).toLowerCase()) || ".gb") : state.input.ext.toLowerCase()),
 
-	converters = ["nconvert[format:prx]", "recoil2png[matchType:magic]"];
+	converters = ["nconvert[format:prx]", "recoil2png[format:BS,GB,PG]"];
 }

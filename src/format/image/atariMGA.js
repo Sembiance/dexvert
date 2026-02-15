@@ -4,5 +4,5 @@ export class atariMGA extends Format
 {
 	name       = "Atari MGA";
 	ext        = [".mga"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:MGA]"];
 }

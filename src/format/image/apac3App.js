@@ -6,5 +6,5 @@ export class apac3App extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Apac3_APP";
 	ext        = [".app", ".aps", ".ils", ".pls"];
 	magic      = ["APP raster bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ILS,PLS,APP,APS]"];
 }

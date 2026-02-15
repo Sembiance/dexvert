@@ -6,5 +6,5 @@ export class asciiArtEditor extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor";
 	ext        = [".art"];
 	priority   = this.PRIORITY.LOW;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ART.AsciiArtEditor]"];
 }

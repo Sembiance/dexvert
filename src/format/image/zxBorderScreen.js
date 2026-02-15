@@ -6,5 +6,5 @@ export class zxBorderScreen extends Format
 	website  = "http://fileformats.archiveteam.org/wiki/Border_Screen";
 	ext      = [".bmc4", ".bsc"];
 	fileSize = {".bsc" : 11136, ".bmc4" : 11904};
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:BSC,BMC4]"];
 }

@@ -8,5 +8,5 @@ export class artMaster88 extends Format
 	forbidExtMatch = true;
 	magic          = ["ArtMaster88"];
 	mimeType       = "image/x-artmaster";
-	converters     = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters     = ["recoil2png[format:IMG.ArtMaster88,ARV]", `abydosconvert[format:${this.mimeType}]`];
 }

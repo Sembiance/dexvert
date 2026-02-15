@@ -8,5 +8,5 @@ export class zp1 extends Format
 	ext        = [".zp1"];
 	magic      = TEXT_MAGIC;
 	weakMagic  = true;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ZP1]"];
 }

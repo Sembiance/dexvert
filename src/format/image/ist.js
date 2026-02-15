@@ -6,5 +6,5 @@ export class ist extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Atari_Interlaced_Studio";
 	ext        = [".ist"];
 	fileSize   = 17184;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:IST]"];
 }

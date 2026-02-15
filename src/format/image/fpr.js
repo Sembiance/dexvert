@@ -7,5 +7,5 @@ export class fpr extends Format
 	ext         = [".fpr", ".flp"];
 	unsupported = true;
 	notes       = "Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.";
-	converters  = ["recoil2png", "view64"];
+	converters  = ["recoil2png[format:FPR]", "view64"];
 }

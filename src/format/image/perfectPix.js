@@ -16,5 +16,5 @@ export class perfectPix extends Format
 	// Don't do anything with .pal files
 	untouched       = ({f}) => [".eve", ".odd"].includes(f.input.ext.toLowerCase());
 	verifyUntouched = false;
-	converters      = ["recoil2png"];
+	converters      = ["recoil2png[format:PPH]"];
 }

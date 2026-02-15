@@ -8,5 +8,5 @@ export class ami extends Format
 	forbidExtMatch = true;
 	magic          = ["Amica Paint :ami:"];
 	idCheck        = inputFile => inputFile.size>1000 && inputFile.size<14000;
-	converters     = ["recoil2png", "nconvert[format:ami]", "view64"];
+	converters     = ["recoil2png[format:AMI]", "nconvert[format:ami]", "view64"];
 }

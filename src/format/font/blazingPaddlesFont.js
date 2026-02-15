@@ -5,5 +5,5 @@ export class blazingPaddlesFont extends Format
 	name       = "Blazing Paddles - Font";
 	website    = "http://fileformats.archiveteam.org/wiki/Blazing_Paddles";
 	ext        = [".chr"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:CHR]"];
 }

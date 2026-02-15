@@ -6,5 +6,5 @@ export class c64c extends Format
 	ext        = [".64c"];
 	magic      = ["C64 8x8 font bitmap"];
 	weakMagic  = true;
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:64C]"];
 }

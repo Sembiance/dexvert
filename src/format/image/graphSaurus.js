@@ -26,5 +26,5 @@ export class graphSaurus extends Format
 
 	untouched       = ({f}) => f.input.ext.toLowerCase().startsWith(".pl");
 	verifyUntouched = false;
-	converters      = ["recoil2png"];
+	converters      = ["recoil2png[format:GL5,SR8,SR7,SR5,SRS,GL6,GL7,GL8,SR6]"];
 }

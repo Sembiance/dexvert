@@ -6,5 +6,5 @@ export class ags extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Atari_Graphics_Studio";
 	ext        = [".ags"];
 	magic      = ["Atari Graphics Studio bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:AGS]"];
 }

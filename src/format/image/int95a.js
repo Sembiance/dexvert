@@ -6,5 +6,5 @@ export class int95a extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/INT95a";
 	ext        = [".int"];
 	magic      = ["Atari INT95a bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:INT.Int]"];
 }

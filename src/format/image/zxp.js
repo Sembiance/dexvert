@@ -6,5 +6,5 @@ export class zxp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ZX-Paintbrush";
 	ext        = [".zxp"];
 	magic      = ["ZX-Paintbrush"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:ZXP]"];
 }

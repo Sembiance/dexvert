@@ -9,5 +9,5 @@ export class c64HiRes extends Format
 	weakMagic  = true;
 	trustMagic = true;
 	fileSize   = 8002;
-	converters = ["recoil2png", "view64", "nconvert[format:hir]", "nconvert[format:fgs]", "nconvert[format:gih]"];
+	converters = ["recoil2png[format:HBM,FGS,HPI.C64Hir,GIH]", "view64", "nconvert[format:hir]", "nconvert[format:fgs]", "nconvert[format:gih]"];
 }

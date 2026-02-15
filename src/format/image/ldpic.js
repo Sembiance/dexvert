@@ -5,5 +5,5 @@ export class ldpic extends Format
 	name       = "BBC Micro LdPic Image";
 	website    = "http://fileformats.archiveteam.org/wiki/LdPic";
 	ext        = [".bbg"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:BBG]"];
 }

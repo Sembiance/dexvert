@@ -4,5 +4,5 @@ export class hiresEditor extends Format
 {
 	name       = "Hires-Editor";
 	ext        = [".het"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:HET]"];
 }

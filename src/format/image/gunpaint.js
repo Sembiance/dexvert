@@ -8,5 +8,5 @@ export class gunpaint extends Format
 	magic      = ["IFLI :gun:", /^fmt\/1788( |$)/];
 	fileSize   = 33603;
 	byteCheck  = [{offset : 0, match : [0x00, 0x40]}];
-	converters = ["recoil2png", "nconvert[format:gun]", "view64"];
+	converters = ["recoil2png[format:GUN,VIC]", "nconvert[format:gun]", "view64"];
 }

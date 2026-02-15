@@ -1,0 +1,635 @@
+===========================================================================
+                     IFF ILBM Image Format Specification
+                    (Incorporating Real-World Observations)
+===========================================================================
+
+This document describes the IFF ILBM image format as implemented in
+practice, including undocumented extensions and format variants encountered
+"in the wild." It was compiled from studying the official IFF and ILBM
+specifications alongside the source code of RECOIL, deark, Abydos, and
+SDL_ILBM libraries, and from processing hundreds of sample files.
+
+
+1. IFF CONTAINER FORMAT
+===========================================================================
+
+IFF (Interchange File Format) is a generic container format developed by
+Electronic Arts for the Amiga in 1985. All multi-byte integers are stored
+in big-endian (Motorola) byte order.
+
+1.1 Basic Structure
+-------------------
+An IFF file consists of "chunks":
+
+    Offset  Size  Description
+    0       4     Chunk ID (4 ASCII characters)
+    4       4     Chunk data size (big-endian uint32, NOT including header)
+    8       N     Chunk data
+
+Chunks are padded to even byte boundaries. If the data size is odd, a
+padding byte follows the data (not counted in the size field).
+
+NOTE: Some files in the wild do NOT properly pad chunks to even boundaries.
+Parsers should detect this by checking if the aligned position contains a
+valid chunk ID; if not, try the unaligned position.
+
+1.2 FORM Container
+------------------
+The top-level chunk is always FORM:
+
+    Offset  Size  Description
+    0       4     "FORM"
+    4       4     Container data size
+    8       4     Form type (e.g., "ILBM", "PBM ", "ACBM", etc.)
+    12      ...   Contained chunks
+
+The form type identifies the data format within the container.
+
+1.3 Variant Containers
+----------------------
+Some files use non-standard top-level containers:
+
+  - "FCY!" (FantaVision): Contains ILBM data; parse identically to FORM.
+  - "DPST": Contains a FORM within; the inner FORM starts at offset 44
+    from the container start.
+  - "ANIM": Animation container; contains multiple FORM ILBM frames.
+    For static conversion, use the first ILBM frame.
+
+NOTE: Some files (notably Atari ST NEOchrome .neo files stored as IFF)
+append chunks AFTER the FORM container. The FORM's declared size does not
+include these trailing chunks. Parsers should scan beyond the FORM end for
+additional chunks such as RAST.
+
+
+2. ILBM FORMAT
+===========================================================================
+
+ILBM (Interleaved Bitmap) is the primary image format within IFF. The
+form type is "ILBM".
+
+2.1 Form Type Variants
+-----------------------
+  "ILBM" - Interleaved bitmap (standard)
+  "PBM " - Packed bitmap (chunky pixels, Deluxe Paint Enhanced)
+  "ACBM" - Amiga Contiguous Bitmap
+  "RGBN" - Direct RGB with 13-bit color + run-length encoding
+  "RGB8" - Direct RGB with 25-bit color + run-length encoding
+
+
+3. CHUNK TYPES
+===========================================================================
+
+3.1 BMHD - Bitmap Header (Required)
+------------------------------------
+Size: 20 bytes
+
+    Offset  Size  Type    Description
+    0       2     uint16  Width in pixels
+    2       2     uint16  Height in pixels
+    4       2     int16   X origin (usually 0)
+    6       2     int16   Y origin (usually 0)
+    8       1     uint8   Number of bitplanes (1-8 for indexed, 24/32 for truecolor)
+    9       1     uint8   Masking type:
+                            0 = no mask
+                            1 = has mask bitplane
+                            2 = has transparent color
+                            3 = mask via lasso
+    10      1     uint8   Compression type:
+                            0 = uncompressed
+                            1 = ByteRun1 (PackBits)
+                            2 = VDAT (vertical RLE, Atari ST)
+    11      1     uint8   Padding (should be 0)
+    12      2     uint16  Transparent color index
+    14      1     uint8   X aspect ratio
+    15      1     uint8   Y aspect ratio
+    16      2     int16   Page width (screen width)
+    18      2     int16   Page height (screen height)
+
+Width alignment: Bitplane rows are word-aligned. The actual bytes per
+bitplane row is: ((width + 15) // 16) * 2
+
+For palette-only files (e.g., .pal files), width and height may be 0
+with only a CMAP chunk present.
+
+3.2 CMAP - Color Map (Optional)
+-------------------------------
+Contains the palette as sequential RGB triplets, 3 bytes per color:
+
+    Offset  Size  Description
+    0       1     Red (0-255)
+    1       1     Green (0-255)
+    2       1     Blue (0-255)
+    ...repeated for each color...
+
+Number of colors = chunk_size / 3. Typical counts: 2, 4, 8, 16, 32, 64,
+128, 256. Usually matches 2^num_planes but may differ.
+
+OCS Palette Detection:
+If the image has <= 32 colors and ALL RGB components have their lower
+nibble equal to 0 (i.e., value & 0x0F == 0 for every R, G, B), the
+palette uses Amiga OCS 4-bit color values. Expand to 8-bit:
+    expanded = value | (value >> 4)
+Example: 0xA0 -> 0xAA
+
+3.3 CAMG - Amiga Viewport Mode (Optional)
+------------------------------------------
+Size: 4 bytes (uint32)
+
+Contains the Amiga viewport mode flags. Important bits:
+
+    Bit     Mask      Description
+    2       0x0004    LACE (interlace - doubles vertical resolution)
+    7       0x0080    EHB (Extra Half-Brite - 64 colors from 32)
+    11      0x0800    HAM (Hold-And-Modify)
+    15      0x8000    HIRES (doubles horizontal resolution)
+
+Bits 16-31 encode the monitor type:
+    0x00000 or 0x11000 = NTSC
+    0x21000            = PAL
+    0x41000            = A2024
+    0x51000 or 0x81000 = Multiscan
+    0x31000 or 0x61000 = 31 kHz
+    0x71000            = DBLNTSC
+    0xC1000            = DBLPAL
+
+Resolution Calculation (from CAMG):
+The CAMG value determines the pixel aspect ratio and output scaling.
+For the common 15 kHz modes, the relevant bits are filtered with
+camg & 0x802C. A log-based system determines the scaling:
+
+    log=0:  Amiga1x1  -> no scaling
+    log=-1: Amiga2x1  -> double width
+    log=-2: Amiga4x1  -> quadruple width
+    log=-3: Amiga8x1  -> 8x width
+    log=1:  Amiga1x2  -> double height
+    log=2:  Amiga1x4  -> quadruple height
+
+Horizontal bits (camg & 0x8220):
+    0x0000 = standard   (log unchanged)
+    0x8000 = HIRES      (log + 1)
+    0x8020 = SUPERHIRES (log + 2)
+
+Vertical bits (camg & 0xD):
+    0x0 = standard (log unchanged)
+    0x4 = LACE     (log - 1)
+    0x5 = LACE+    (log - 2)
+
+3.4 BODY - Image Data (Required for image files)
+-------------------------------------------------
+Contains the pixel data, potentially compressed.
+
+For ILBM (interleaved bitmap), the data is organized per scanline:
+  - For each scanline (top to bottom):
+    - Bitplane 0 row (bytes_per_plane_row bytes)
+    - Bitplane 1 row
+    - ...
+    - Bitplane N-1 row
+    - [Optional mask bitplane if masking == 1]
+
+bytes_per_plane_row = ((width + 15) // 16) * 2
+
+For PBM (packed bitmap), each scanline is a sequence of chunky pixels
+(one byte per pixel), padded to even length.
+
+For ACBM (contiguous bitmap), the BODY (or ABIT) chunk contains all
+bitplanes contiguously:
+  - All rows of bitplane 0, then all rows of bitplane 1, etc.
+
+3.5 SHAM - Sliced HAM Palette Changes
+--------------------------------------
+Per-scanline palette changes for HAM images. Contains an array of
+16-bit Amiga OCS color values (12-bit color):
+
+    Offset  Size     Description
+    0       2        Version (usually 0)
+    2       N*32     For each scanline: 16 colors * 2 bytes each
+
+Amiga OCS color format (16-bit word):
+    Bits 11-8: Red (4 bits)
+    Bits 7-4:  Green (4 bits)
+    Bits 3-0:  Blue (4 bits)
+Expand 4-bit to 8-bit: val_8 = val_4 | (val_4 << 4)
+
+3.6 CTBL / BEAM - Color Table
+------------------------------
+Similar to SHAM but without the version header. Contains per-scanline
+palette data as 16-bit Amiga OCS colors:
+
+    For each scanline: num_colors * 2 bytes
+
+3.7 PCHG - Palette Changes (Compressed)
+-----------------------------------------
+Compressed per-line palette changes. More space-efficient than SHAM.
+
+Header (20 bytes):
+    Offset  Size  Description
+    0       2     Compression type (0=none, 1=Huffman)
+    2       2     Flags (bit 0 = use 12-bit OCS color, bit 1 = use alpha)
+    4       2     Start line
+    6       2     End line
+    8       2     Max changes per line
+    10      2     Total changes
+    12      4     Min register
+    16      4     Max register
+
+Data structure:
+  - Line mask: bit array indicating which lines have changes
+  - Per-line change data: pairs of (register, color value)
+
+Huffman Compression:
+When compression type is 1, the change data is Huffman-encoded:
+  - Tree data: array of 2-byte entries defining the Huffman tree
+  - Compressed data split into two streams: commands and data
+  - Tree traversal: bit 0 = go back one level, bit 1 = check if leaf
+    (value 0 = leaf, else jump forward by the entry value)
+
+OCS Mode (flag bit 0 set):
+  - Colors are 12-bit (4 bits per component)
+  - Each change is 2 bytes: register index + color value
+  - Color is stored as: (byte >> 4 & 0xF) for red, etc.
+
+Non-OCS Mode:
+  - Colors are 24-bit (8 bits per component)
+  - Each change is 4 bytes: register + RGB
+
+3.8 RAST - Atari ST/STE Per-Line Palette
+------------------------------------------
+Per-line palette data for Atari ST and STE systems.
+
+Two formats exist:
+
+Format A (with line numbers):
+    For each entry:
+        Offset  Size         Description
+        0       2            Line number (big-endian uint16)
+        2       colors*2     ST/STE color words
+
+    entry_size = 2 + num_colors * 2
+    Entries are NOT necessarily sorted by line number.
+
+Format B (sequential, used by NEOchrome .RST companion files):
+    Same byte layout as Format A, but all line numbers are 0.
+    Entries are sequential: entry 0 = line 0, entry 1 = line 1, etc.
+
+Detection: If all entries have line_number == 0, use sequential mode.
+
+Atari ST Color Format (512 colors, 9-bit):
+    Word format: xxxx0RRR 0GGG0BBB
+    Each component is 3 bits. Expand 3-bit to 8-bit:
+        val_8 = (val_3 << 5) | (val_3 << 2) | (val_3 >> 1)
+
+Atari STE Color Format (4096 colors, 12-bit):
+    Word format: xxxxrRRR gGGGbBBB
+    The lowercase bit is the LSB of each 4-bit component.
+    Reconstruct 4-bit value: val_4 = (RRR << 1) | r
+    Expand 4-bit to 8-bit: val_8 = val_4 * 17  (or val_4 | (val_4 << 4))
+
+STE Detection: If any color word has bit 3 of the high byte set
+((byte[0] & 8) != 0) or bits 7 or 3 of the low byte set
+((byte[1] & 0x88) != 0), the palette uses STE format.
+
+NOTE: RAST chunks may appear OUTSIDE the FORM container (after the FORM's
+declared data), especially in files that embed NEOchrome RST data as IFF
+chunks.
+
+3.9 CRNG - Color Range (for animation)
+----------------------------------------
+Defines color cycling/palette shifting ranges.
+
+    Offset  Size  Description
+    0       2     Padding
+    2       2     Rate (steps per second * 2^14 / 60)
+    4       2     Flags (bit 0: active, bit 1: reverse)
+    6       1     Low color index
+    7       1     High color index
+
+3.10 DRNG - DPaint IV Color Range
+-----------------------------------
+Extended color cycling with optional cell definitions.
+
+    Offset  Size  Description
+    0       1     Min index
+    1       1     Max index
+    2       2     Rate
+    4       2     Flags
+    6       1     Number of true-color cells
+    7       1     Number of register cells
+    8+      ...   Cell data
+
+3.11 CCRT - Color Cycling
+---------------------------
+    Offset  Size  Description
+    0       2     Direction (0=none, 1=forward, -1=backward)
+    2       1     Start register
+    3       1     End register
+    4       4     Seconds between shifts
+    8       4     Microseconds between shifts
+
+
+4. COMPRESSION METHODS
+===========================================================================
+
+4.1 ByteRun1 (PackBits) - Compression Type 1
+----------------------------------------------
+The standard ILBM compression. Applied independently to each bitplane row.
+
+Read a signed byte n:
+  - n >= 0:    Copy the next (n + 1) bytes literally
+  - n < 0, n != -128:  Repeat the next byte (-n + 1) times
+  - n == -128: No-op (skip)
+
+4.2 VDAT - Compression Type 2 (Atari ST)
+------------------------------------------
+Column-first vertical compression. The BODY data consists of columns of
+16-bit words, processed vertically.
+
+For each column (there are bytes_per_plane_row/2 columns per bitplane,
+for each bitplane):
+
+Each column's data has TWO separate streams:
+  - Command stream: starts at offset 0
+  - Value stream: starts at offset given by the first 2 bytes
+
+Commands are single bytes:
+    b == 0:     Long literal - next value word gives count N, then N
+                words follow from the value stream
+    b == 1:     Long RLE - next value word gives count N, then one word
+                from values is repeated N times
+    2-127:      Short RLE - repeat next value word b times
+    128-255:    Short literal - copy (256-b) words from value stream
+
+Values are 16-bit big-endian words. They are written vertically: each
+word goes to consecutive rows at the same column position.
+
+
+5. DISPLAY MODES
+===========================================================================
+
+5.1 HAM (Hold-And-Modify)
+--------------------------
+Amiga's method for displaying more colors than the palette allows.
+Requires CAMG bit 0x800 or can be inferred from bitplane count.
+
+HAM6 (6 bitplanes = 4 palette + 2 mode bits):
+  For each pixel, the 6-bit value is split:
+    mode = value >> 4 (top 2 bits)
+    index = value & 0x0F (bottom 4 bits)
+
+    mode 0: Set pixel to palette[index]
+    mode 1: Hold R and G, set B = (index << 4) | index
+    mode 2: Hold G and B, set R = (index << 4) | index
+    mode 3: Hold R and B, set G = (index << 4) | index
+
+HAM8 (8 bitplanes = 6 palette + 2 mode bits):
+  Same as HAM6 but with 6-bit color values:
+    mode = value >> 6 (top 2 bits)
+    index = value & 0x3F (bottom 6 bits)
+
+    mode 0: Set pixel to palette[index]
+    mode 1: Hold R and G, set B = (index << 2) | (index >> 4)
+    mode 2: Hold G and B, set R = (index << 2) | (index >> 4)
+    mode 3: Hold R and B, set G = (index << 2) | (index >> 4)
+
+Each scanline starts with the previous pixel color initialized to
+palette[0].
+
+5.2 EHB (Extra Half-Brite)
+----------------------------
+Uses 6 bitplanes to display 64 colors from a 32-color palette.
+Requires CAMG bit 0x80.
+
+Palette indices 0-31: Use the CMAP palette directly
+Palette indices 32-63: Use palette[index-32] at half brightness
+    half_color = original_color >> 1   (per component)
+
+5.3 HAM-E (HAM Extended)
+--------------------------
+A third-party hardware extension for the Amiga that provides extended
+color capabilities. Uses 4 bitplanes (16 Amiga colors).
+
+Detection:
+HAM-E is detected by examining the first scanline. Each pair of
+consecutive 4-bit pixels forms one HAM-E byte (high nibble from even
+pixel, low nibble from odd pixel). The 4-bit pixel values are extracted
+via palette lookup and RGBI conversion:
+
+    nibble = ((palette[pixel_index] >> 20) & 8)  // R
+           | ((palette[pixel_index] >> 13) & 4)  // G
+           | ((palette[pixel_index] >> 6)  & 2)  // B
+           | ((palette[pixel_index] >> 4)  & 1)  // I
+
+The first 7 bytes must match the magic sequence:
+    0xA2, 0xF5, 0x84, 0xDC, 0x6D, 0xB0, 0x7F
+
+Byte 8 determines the mode:
+    0x18 = HAM-E (Hold-And-Modify extended)
+    0x14 = REG (Register/indexed mode)
+
+Palette Definition Lines:
+Lines matching the magic signature are palette definition lines. They
+are rendered as blank (black) pixels. Starting at byte position 8, each
+group of 3 consecutive bytes defines one palette entry (R, G, B), for
+64 entries per definition line.
+
+Palette entries accumulate across multiple definition lines: the first
+line sets entries 0-63, the second sets 64-127, etc., up to 256 entries
+per bank.
+
+For interlaced mode (Amiga2x1), odd and even scanlines use separate
+palette banks (offset 0 and 256 respectively).
+
+HAM-E Mode (0x18):
+Each pixel byte is decoded:
+    mode = byte >> 6
+    value = byte & 0x3F
+
+    mode 0, value < 60: Set to palette[bank + value]
+    mode 0, value >= 60: Switch palette bank to (value - 60) * 64
+    mode 1: Set blue  = value << 2, keep R and G
+    mode 2: Set red   = value << 18 (of packed RGB), keep G and B
+    mode 3: Set green = value << 10 (of packed RGB), keep R and B
+
+NOTE: The color expansion uses (value << 2) leaving the bottom 2 bits
+as 0. This differs from HAM8's expansion formula.
+
+REG Mode (0x14):
+Each pixel byte directly indexes the palette.
+
+Resolution:
+HAM-E halves the effective horizontal resolution (each HAM-E pixel
+occupies 2 Amiga pixels). For standard mode, the output width equals
+the BMHD width with each pixel doubled horizontally. For interlaced
+mode (Amiga1x2), the output is at half BMHD width with no pixel
+doubling.
+
+5.4 DCTV (Digital Composite Television)
+-----------------------------------------
+A third-party Amiga hardware device that encodes YUV-like color data
+in 4 bitplane images.
+
+Detection:
+DCTV is detected via an LFSR (Linear Feedback Shift Register) signature
+in the first scanline. The detection uses palette-based extraction:
+
+For each pixel, look up the palette color and extract a 7-bit value:
+    dctv_value = ((rgb << 2) & 0x40)    // bit from blue
+               | ((rgb >> 19) & 0x10)   // bit from red MSB
+               | ((rgb >> 5) & 0x04)    // bit from blue
+               | ((rgb >> 15) & 0x01)   // bit from red
+
+Bit 6 (the I bit) of the first pixel must be 0. Then for pixels 1-255,
+the I bit must follow an LFSR sequence:
+    Initial register: 0x7D
+    For each pixel:
+        if (dctv_value >> 6) == (register & 1): NOT DCTV
+        if (register & 1) != 0: register ^= (0xC3 << 1)
+        register >>= 1
+
+Decoding:
+DCTV encodes luma/chroma in alternating pixels. Even pixels carry one
+set of information, odd pixels another. The decoding produces YUV values
+that are converted to RGB.
+
+For interlaced images, both fields must pass the DCTV signature check.
+
+
+6. FORMAT VARIANTS
+===========================================================================
+
+6.1 PBM (Packed Bitmap)
+-------------------------
+Form type: "PBM "
+
+Similar to ILBM but uses chunky pixel format instead of bitplanes.
+Each scanline contains one byte per pixel (the palette index).
+Rows are padded to even byte length.
+
+6.2 ACBM (Amiga Contiguous Bitmap)
+------------------------------------
+Form type: "ACBM"
+
+Uses non-interleaved bitplanes. The pixel data is in an ABIT chunk
+(not BODY). Data layout:
+    All rows of bitplane 0, then all rows of bitplane 1, etc.
+
+6.3 RGBN / RGB8 (Direct Color)
+--------------------------------
+Form types: "RGBN", "RGB8"
+
+Direct color format with run-length encoding in the BODY chunk.
+
+RGBN (13-bit color):
+    Each pixel is 2 bytes:
+    Bits 15-12: Red (4 bits)
+    Bits 11-8:  Green (4 bits)
+    Bits 7-4:   Blue (4 bits)
+    Bits 3-0:   Run count (0 = use next byte for extended count)
+
+RGB8 (25-bit color):
+    Each pixel is 4 bytes:
+    Byte 0: Red
+    Byte 1: Green
+    Byte 2: Blue
+    Byte 3: Run count (0 = use next 2 bytes for extended count)
+
+For run count 0 in RGBN, the actual count is the next byte value. If
+that's also 0, use the next 2 bytes as a 16-bit count.
+
+
+7. PLANAR TO CHUNKY CONVERSION
+===========================================================================
+
+Converting ILBM bitplane data to pixel indices:
+
+For each pixel at position (x, y):
+    byte_index = x // 8
+    bit_position = 7 - (x % 8)
+    pixel_value = 0
+    for plane in range(num_planes):
+        offset = y * row_stride + plane * bytes_per_plane_row + byte_index
+        if (data[offset] >> bit_position) & 1:
+            pixel_value |= (1 << plane)
+
+Where:
+    bytes_per_plane_row = ((width + 15) // 16) * 2
+    row_stride = bytes_per_plane_row * num_planes
+                 (+ bytes_per_plane_row if masking == 1)
+
+
+8. PIXEL ASPECT RATIO
+===========================================================================
+
+The xAspect and yAspect fields in BMHD describe the pixel shape.
+When CAMG is not present, the aspect ratio determines scaling:
+
+    Ratio xa:ya     Resolution
+    xa > 6*ya       (8, 1)
+    xa > 3*ya       (4, 1)
+    2*xa > 3*ya     (2, 1)
+    ya > 3*xa       (1, 4)
+    2*ya > 3*xa     (1, 2)
+    otherwise       (1, 1)
+
+Common aspect values:
+    10:11 = NTSC non-interlaced (square-ish pixels)
+    20:11 = NTSC interlaced (2:1 wide pixels)
+    10:22 = HIRES (tall pixels)
+
+
+9. COMMON FILE EXTENSIONS
+===========================================================================
+
+    .iff     Standard IFF ILBM
+    .lbm     Same as .iff (Deluxe Paint convention)
+    .ilbm    Explicit ILBM extension
+    .ham6    HAM6 image
+    .ham8    HAM8 image (rarely seen as extension)
+    .HAM8    HAM8 image
+    .sham    SHAM (Sliced HAM) image
+    .pal     Palette-only file (CMAP without BODY)
+    .256     256-color indexed image
+    .pic     Generic picture
+    .neo     NEOchrome (may be native NEO format or IFF with .neo extension)
+    .beam    BEAM chunk palette image
+    .dct     DCTV image
+    .DCTV    DCTV image
+    .dr      Color register file
+    .mp      Multi-palette image
+    .fcy     FantaVision image (FCY! container)
+    .BL1/.BL2/.BL3  Multi-resolution variants
+
+
+10. IMPLEMENTATION NOTES
+===========================================================================
+
+10.1 Robustness
+- Always validate chunk sizes against remaining file data
+- Handle truncated files gracefully
+- Some files have chunks that extend beyond the FORM size
+- Chunk IDs should be printable ASCII; use this to validate alignment
+- The BODY may be shorter than expected; fill remaining pixels with 0
+
+10.2 HAM Rendering with Multi-Palette
+- When SHAM, CTBL, BEAM, PCHG, or RAST chunks are present, the palette
+  changes per scanline
+- Each scanline of HAM rendering should use the palette for that line
+- The carry color (hold value) continues across palette changes within
+  a scanline
+
+10.3 Atari ST Considerations
+- Atari ST files often use VDAT compression (type 2)
+- Atari ST files may have RAST chunks outside the FORM container
+- STE palette detection uses extended bits in the ST color words
+- Word-interleaved bitplane format differs from Amiga's sequential format
+
+10.4 Common Pitfalls
+- ByteRun1 compression operates on a per-row, per-bitplane basis. Do not
+  decompress across row boundaries.
+- HAM mode detection: CAMG 0x800 flag OR (6 planes with only 16 colors
+  in CMAP) can indicate HAM.
+- EHB mode: only valid with exactly 6 bitplanes and 32 colors in CMAP.
+- Palette-only files may have width=0, height=0 in BMHD.
+- CAMG values often contain garbage bits in the upper word; always mask
+  appropriately before testing individual flags.
+- DCTV and HAM-E detection relies on palette-mapped RGBI values, not raw
+  bitplane indices.

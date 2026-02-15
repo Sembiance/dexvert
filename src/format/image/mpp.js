@@ -7,5 +7,5 @@ export class mpp extends Format
 	ext        = [".mpp"];
 	mimeType   = "image/x-multi-palette-picture";
 	magic      = ["Multi Palette Picture bitmap", /^fmt\/1471( |$)/];
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["recoil2png[format:MPP]", `abydosconvert[format:${this.mimeType}]`];
 }

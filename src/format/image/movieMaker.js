@@ -6,5 +6,5 @@ export class movieMaker extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Movie_Maker";
 	ext        = [".bkg", ".shp"];
 	fileSize   = {".bkg" : 3856, ".shp" : [1024, 4384]};
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:SHP,BKG]"];
 }

@@ -1,0 +1,88 @@
+EXT        FORMAT_ID                FORMAT                                   PLATFORM
+---        ---------                ------                                   --------
+ART        ART.MonoArt              ART                                      Atari 8-bit
+ASC        ASC                      ASCII maker                              Atari 8-bit
+HR2        HR2                      HR2                                      Atari 8-bit
+MCM        MCM                      Multi Color Map                          Atari 8-bit
+PIX        PIX.Atari8Pix            PIX                                      Atari 8-bit
+PSF        PSF                      Print Shop                               Atari 8-bit
+BL1        BL1                      DEGAS Elite block                        Atari ST/STE
+BL2        BL2                      DEGAS Elite block                        Atari ST/STE
+BL3        BL3                      DEGAS Elite block                        Atari ST/STE
+BRUS       BRUS                     BASIC 8                                  Commodore 128
+PICT       PICT                     BASIC 8                                  Commodore 128
+BDP        BDP                      Boogie Down Paint                        Commodore 64
+BED        BED                      Dolphin Ed                               Commodore 64
+BFL        BFL                      Big FLI                                  Commodore 64
+CGX        CGX                      Commodore Grafix                         Commodore 64
+CWG        CWG                      Create with Garfield                     Commodore 64
+DDP        DDP                      Doodle                                   Commodore 64
+DOL        DOL                      Dolphin Ed                               Commodore 64
+EMC        EMC                      EMC-editor                               Commodore 64
+ESH        ESH                      Extend Super Hires Interlace Editor      Commodore 64
+FD2        FD2                      FLI Designer                             Commodore 64
+FED        FED                      FLI Editor                               Commodore 64
+FFL        FFL                      Flash FLI                                Commodore 64
+FLG        FLG                      FLI Graph                                Commodore 64
+FLM        FLM                      Flimatic                                 Commodore 64
+FLY        FLY                      Picasso 64                               Commodore 64
+FP         FP                       Fuckpaint                                Commodore 64
+GG         GG                       Koala Painter (compressed)               Commodore 64
+GIG        GIG.Iph                  Interpaint                               Commodore 64
+GIG        GIG.Koa                  Koala Painter                            Commodore 64
+HCB        HCB                      HCB-editor                               Commodore 64
+HIE        HIE                      Hires Interlace                          Commodore 64
+HIR        HIR.C64Hir               Hires-Bitmap                             Commodore 64
+HLE        HLE                      Hireslace Editor                         Commodore 64
+HPI        HPI.Iph                  Interpaint                               Commodore 64
+ILE        ILE                      Interlaced Logo Editor                   Commodore 64
+KLA        KLA                      Koala Painter                            Commodore 64
+KOA        KOA                      Koala Painter                            Commodore 64
+MPI        MPI                      Advanced Art Studio                      Commodore 64
+MPIC       MPIC                     Advanced Art Studio                      Commodore 64
+MUF        MUF                      MUFLI Editor                             Commodore 64
+MUI        MUI                      MUIFLI Editor                            Commodore 64
+MUP        MUP                      MUFLI Editor (compressed)                Commodore 64
+MWI        MWI                      Art Studio window                        Commodore 64
+MWIN       MWIN                     Art Studio window                        Commodore 64
+NUF        NUF                      NUFLI Editor                             Commodore 64
+NUP        NUP                      NUFLI Editor (compressed)                Commodore 64
+PBOT       PBOT                     PETSCII BOT                              Commodore 64
+PDR        PDR                      PetDraw64                                Commodore 64
+SH1        SH1                      Super-hires Editor I                     Commodore 64
+SH2        SH2                      Super-hires Editor II                    Commodore 64
+SHE        SHE                      Super Hires Editor                       Commodore 64
+SHE        SHE                      Super Hires Editor 2                     Commodore 64
+SHI        SHI                      Super Hires Interlace Editor             Commodore 64
+SHS        SHS                      Super Hires Studio                       Commodore 64
+SIF        SIF.C64Sif               Super Hires Interlace FLI Editor         Commodore 64
+UIF        UIF                      UIFLI-editor                             Commodore 64
+VHI        VHI                      Vertical Hires Interlace Editor          Commodore 64
+XFL        XFL                      X-FLI Editor                             Commodore 64
+ZOM        ZOM                      Zoomatic                                 Commodore 64
+PIC0       PIC0                     Picasso                                  Commodore VIC-20
+SH5        SH5                      SH5                                      MSX2
+SH6        SH6                      SH6                                      MSX2
+SH7        SH7                      SH7                                      MSX2
+SH8        SH8                      SH8                                      MSX2
+GLA        GLA                      GLA                                      MSX2+
+GLB        GLB                      GLB                                      MSX2+
+SCB        SCB                      Screen 10                                MSX2+
+SHA        SHA                      SHA                                      MSX2+
+SHB        SHB                      SHB                                      MSX2+
+SHC        SHC.GlYjk                SHC                                      MSX2+
+SRA        SRA                      Screen 10                                MSX2+
+KTY        KTY                      Kitty                                    NEC PC-88
+HIR        HIR.Hrs                  HIR                                      Oric
+THC        THC                      Hi-color                                 Timex 2048
+THR        THR                      Hi-res                                   Timex 2048
+SPR        SPR.VectorSpr            256                                      Vector-06C
+SEV        SEV                      SevenuP                                  ZX Spectrum
+ZXS        ZXS                      SpecSCII                                 ZX Spectrum
+TCU        TCU                      Timex hi-color ULAplus                   ZX Spectrum ULAplus
+546        546                      HGFX PAL546                              eLeMeNt ZX
+HAM        HAM.ElementZxHam         HGFX HAM                                 eLeMeNt ZX
+HGS        HGS                      HiResColor Gigascreen                    eLeMeNt ZX
+HKL        HKL                      HiResColor/KeyLayer                      eLeMeNt ZX
+HRC        HRC                      HiResColor                               eLeMeNt ZX
+SHR        SHR.Hgfx                 HGFX Ultra                               eLeMeNt ZX

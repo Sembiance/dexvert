@@ -7,5 +7,5 @@ export class tinyStuff extends Format
 	ext        = [".tn1", ".tn2", ".tn3", ".tn4", ".tny"];
 	magic      = ["Tiny Stuff format bitmap", "deark: tinystuff", "Tiny :tiny:"];
 	mimeType   = "image/x-tiny-stuff";
-	converters = ["wuimg[format:tiny]", "recoil2png[format:TNY,TN1,TN2,TN3,TN4]", "deark[module:tinystuff]", "nconvert[format:tiny][matchType:magic][hasExtMatch]", `abydosconvert[matchType:magic][hasExtMatch][format:${this.mimeType}]`];
+	converters = ["wuimg[format:tiny]", "recoil2png[format:TNY,TN1,TN2,TN3,TN4,TN5,TN6]", "deark[module:tinystuff]", "nconvert[format:tiny][matchType:magic][hasExtMatch]", `abydosconvert[matchType:magic][hasExtMatch][format:${this.mimeType}]`];
 }

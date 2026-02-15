@@ -8,5 +8,5 @@ export class interpaint extends Format
 	forbidExtMatch = true;
 	magic          = ["Interpaint bitmap", "Interpaint (Hires) :ciph:", "InterPaint Multicolor :cipt:"];
 	weakMagic      = true;
-	converters     = ["recoil2png[format:IPT,IPH]", "nconvert[format:ciph]", "nconvert[format:cipt]", "view64"];
+	converters     = ["recoil2png[format:IPT,IPH,HRE,LRE]", "nconvert[format:ciph]", "nconvert[format:cipt]", "view64"];
 }

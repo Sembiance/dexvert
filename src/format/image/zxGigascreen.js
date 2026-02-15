@@ -4,7 +4,7 @@ export class zxGigascreen extends Format
 {
 	name       = "ZX Spectrum Gigascreen";
 	website    = "http://fileformats.archiveteam.org/wiki/Gigascreen";
-	ext        = [".img"];
+	ext        = [".img", ".gsc"];
 	fileSize   = 13824;
-	converters = ["recoil2png[format:IMG.Gsc]"];
+	converters = ["recoil2png[format:IMG.Gsc,GSC]"];
 }

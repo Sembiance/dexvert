@@ -9,5 +9,5 @@ export class runPaint extends Format
 	magic      = ["Koala Paint", "RunPaint Multicolor :rpm:"];	// Shares magic with Koala Paint
 	weakMagic  = true;
 	trustMagic = true;	// Koala Paint is normally untrustworthy, but we trust it here
-	converters = ["recoil2png[format:RPM]", "nconvert[format:rpm]", "view64"];
+	converters = ["recoil2png[format:RPM,RPH,RPO]", "nconvert[format:rpm]", "view64"];
 }

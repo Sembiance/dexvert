@@ -9,5 +9,5 @@ export class hiEddi extends Format
 	mimeType      = "image/x-hi-eddi";
 	fileSize      = 9218;
 	matchFileSize = true;
-	converters    = ["nconvert[format:hed]", `abydosconvert[format:${this.mimeType}]`, "view64", "tomsViewer"];
+	converters    = ["recoil2png[format:HED]", "nconvert[format:hed]", `abydosconvert[format:${this.mimeType}]`, "view64", "tomsViewer"];
 }

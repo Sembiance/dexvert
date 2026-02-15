@@ -22,5 +22,5 @@ export class rag extends Format
 		return headerBuf[22]===0xFF ? ".ragc" : ".rag";
 	};
 	magic      = ["RAG-D bitmap"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png[format:RAG,RAGC]"];
 }

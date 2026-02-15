@@ -5150,15 +5150,23 @@ SGX        SGX                      SymbOS graphic                           Ams
 WIN        WIN                      Advanced OCP Art Studio                  Amstrad CPC
 HGR        HGR                      High Resolution                          Apple II
 SPR        SPR.AppleSpr             Sprites                                  Apple II
-3200       3200                     3200                                     Apple IIGS
+3200       SH3.3201                 3201                                     Apple IIGS
+3200       SH3.ApfShr               Apple Preferred Format                   Apple IIGS
+3200       SH3.Sh3                  3200                                     Apple IIGS
+3200       SH3.AppleIIShr           3200                                     Apple IIGS
 3201       3201                     3201                                     Apple IIGS
 32K        32K                      Multi-palette                            Apple IIGS
 GS         GS                       Apple Preferred Format                   Apple IIGS
 IIGS       IIGS                     Apple Preferred Format                   Apple IIGS
 PNT        PNT.ApfShr               Apple Preferred Format                   Apple IIGS
 PNT        PNT.Paintworks           Paintworks                               Apple IIGS
-SH3        SH3                      SH3                                      Apple IIGS
+PNT        PNT.AppleIIShr           PNT                                      Apple IIGS
+SH3        SH3.3201                 3201                                     Apple IIGS
+SH3        SH3.ApfShr               Apple Preferred Format                   Apple IIGS
+SH3        SH3.Sh3                  SH3                                      Apple IIGS
+SH3        SH3.AppleIIShr           SH3                                      Apple IIGS
 SHR        SHR.ApfShr               Apple Preferred Format                   Apple IIGS
+SHR        SHR.Sh3                  SHR                                      Apple IIGS
 SHR        SHR.AppleIIShr           SHR                                      Apple IIGS
 DHGR       DHGR                     Double High-Resolution                   Apple IIe
 DHR        DHR.AppleIIDhr           Double High-Resolution                   Apple IIe
@@ -5243,7 +5251,8 @@ IMN        IMN                      ICE MIN                                  Ata
 ING        ING                      ING 15                                   Atari 8-bit
 INP        INP                      InterPainter                             Atari 8-bit
 INS        INS                      InterPainter (SFDN compressed)           Atari 8-bit
-INT        INT                      INT95a                                   Atari 8-bit
+INT        INT.Inp                  InterPainter                             Atari 8-bit
+INT        INT.Int                  INT95a                                   Atari 8-bit
 IP2        IP2                      ICE PCIN+                                Atari 8-bit
 IPC        IPC                      ICE PCIN                                 Atari 8-bit
 IR2        IR2                      Super IRG 2                              Atari 8-bit
@@ -5425,6 +5434,7 @@ LPK        LPK                      Dali (compressed)                        Ata
 MPK        MPK                      Dali (compressed)                        Atari ST/STE
 MPP        MPP                      Multi Palette Picture                    Atari ST/STE
 MUR        MUR                      C.O.L.R. Object Editor                   Atari ST/STE
+NEO        NEO.Iff                  Interchange File Format                  Atari ST/STE
 NEO        NEO.Neo                  NEOchrome                                Atari ST/STE
 NEO        NEO.Neo                  NEOchrome Master                         Atari ST/STE
 NEO        NEO.Neo                  NEOchrome Master                         Atari ST/STE
@@ -5440,10 +5450,10 @@ PC3        PC3                      DEGAS Elite                              Ata
 PCI        PCI                      Tobias Richter Fullscreen Slideshow      Atari ST/STE
 PCS        PCS                      PhotoChrome                              Atari ST/STE
 PG0        PG0                      Paintworks                               Atari ST/STE
-PG1        PG1                      Graphics Processor                       Atari ST/STE
-PG1        PG1                      Paintworks                               Atari ST/STE
-PG2        PG2                      Graphics Processor                       Atari ST/STE
-PG2        PG2                      Paintworks                               Atari ST/STE
+PG1        PG.GraphicsProcessor     Graphics Processor                       Atari ST/STE
+PG1        PG.Sc                    Paintworks                               Atari ST/STE
+PG2        PG.GraphicsProcessor     Graphics Processor                       Atari ST/STE
+PG2        PG.Sc                    Paintworks                               Atari ST/STE
 PG3        PG3                      Graphics Processor                       Atari ST/STE
 PI1        PI1                      DEGAS                                    Atari ST/STE
 PI2        PI2                      DEGAS                                    Atari ST/STE
@@ -5731,11 +5741,13 @@ TIM        TIM                      TIM                                      Pla
 ICN        ICN.Psion3Pic            ICN                                      Psion Series 3
 PIC        PIC                      PIC                                      Psion Series 3
 LCE        LCE                      LCE                                      SAM Coupe
-SCS4       SCS4                     Mode 4                                   SAM Coupe
+SCS4       SS4.Ss4                  Mode 4                                   SAM Coupe
+SCS4       SS4.Ssx                  SCS4                                     SAM Coupe
 SS1        SS1                      Mode 1                                   SAM Coupe
 SS2        SS2                      Mode 2                                   SAM Coupe
 SS3        SS3                      Mode 3                                   SAM Coupe
-SS4        SS4                      Mode 4                                   SAM Coupe
+SS4        SS4.Ss4                  Mode 4                                   SAM Coupe
+SS4        SS4.Ssx                  SS4                                      SAM Coupe
 SSX        SSX                      SSX                                      SAM Coupe
 MAG        MAG                      Maki-chan Graphics                       Sharp X68000
 PIC        PIC                      PIC                                      Sharp X68000
@@ -5811,7 +5823,6 @@ SCR        SCR                      HiResindeXedColor/KeyLayer               eLe
 SHR        SHR.Hgfx                 HGFX Ultra                               eLeMeNt ZX
 SKL        SKL                      KeyLayer                                 eLeMeNt ZX
 XKL        XKL                      HiResindeXedColor/KeyLayer               eLeMeNt ZX
-
 
 
 >>> 7-zip 7zip sevenZip  (run 7z i)

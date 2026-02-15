@@ -312,6 +312,9 @@
   Dunno what can convert them, DeliPlayer seems to support it: https://www.exotica.org.uk/wiki/DeliPlayer
 	https://eab.abime.net/showpost.php?p=1041418&postcount=859
 
+* A bunch of recoil2png formats are 'seemingly' not in dexvert. See text/recoil2png_unhandled.txt
+  NOTE: Some of these might be in dexvert already, just need to add recoil format tag
+
 /--------------\
 | Low Priority |
 \--------------/

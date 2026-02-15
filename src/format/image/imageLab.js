@@ -7,5 +7,9 @@ export class imageLab extends Format
 	ext        = [".b_w", ".b&w"];
 	mimeType   = "image/x-imagelab";
 	magic      = ["ImageLab bitmap", "ImageLab :ilab:"];
-	converters = ["nconvert[format:ilab]", `abydosconvert[format:${this.mimeType}]`];
+	converters = [
+		"nconvert[format:ilab]",
+		"recoil2png"	// can't pass apresend as flag, so leave out format
+		//`abydosconvert[format:${this.mimeType}]`
+	];
 }

@@ -7,5 +7,5 @@ export class artist64 extends Format
 	ext        = [".a64", ".wig"];
 	magic      = ["Artist 64 :a64:"];
 	mimeType   = "image/x-artist-64";
-	converters = ["nconvert[format:a64]", `abydosconvert[format:${this.mimeType}]`];	// Too loose: view64		Not necessary: tomsViewer
+	converters = ["recoil2png[format:A64,WIG]", "nconvert[format:a64]", `abydosconvert[format:${this.mimeType}]`];	// Too loose: view64		Not necessary: tomsViewer
 }

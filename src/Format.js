@@ -136,7 +136,7 @@ export class Format
 			idCheck          : {type : "function", length : [0, 3]},
 			meta             : {type : "function", length : [0, 2]},
 			packed           : {type : "boolean"},
-			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
+			priority         : {types : ["number", "function"]},	// type : "number", enum : Object.values(format.PRIORITY)
 			simple           : {type : "boolean"},
 			skipClassify     : {type : "boolean"},
 			allow2ColorSVG   : {type : "boolean"},

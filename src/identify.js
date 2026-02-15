@@ -282,7 +282,6 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 				}
 			}
 
-			const priority = Object.hasOwn(format, "priority") ? format.priority : format.PRIORITY.STANDARD;
 			const extMatch = (format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext) || (format.matchPreExt && ext.toLowerCase()===f.input.preExt.toLowerCase()));
 			const filenameMatch = (format.filename || []).some(mfn => flexMatch(f.input.base, mfn, true));
 			const idMetaMatch = idMetaData && format.idMeta && format.idMeta(idMetaData);
@@ -361,6 +360,7 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 
 			const hasAnyMatch = (extMatch || filenameMatch || idMetaMatch || fileSizeMatch || magicMatch || customMatch);
 
+			const priority = Object.hasOwn(format, "priority") ? (typeof format.priority==="function" ? format.priority({inputFile, detections, extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, customMatch}) : format.priority) : format.PRIORITY.STANDARD;
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
 			if(format.website)
 				baseMatch.website = format.website;

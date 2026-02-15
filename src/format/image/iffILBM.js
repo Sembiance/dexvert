@@ -5,7 +5,7 @@ export class iffILBM extends Format
 {
 	name           = "IFF Interleaved Bitmap Image";
 	website        = "http://fileformats.archiveteam.org/wiki/ILBM";
-	ext            = [".lbm", ".ilbm", ".iff", ".beam", ".dhr", ".dr", ".mp", ".dctv"];
+	ext            = [".lbm", ".ilbm", ".iff", ".beam", ".dr", ".mp", ".dctv"];
 	mimeType       = "image/x-ilbm";
 	magic          = [
 		// generic

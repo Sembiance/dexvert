@@ -112,8 +112,10 @@ file it's converting well enough, often producing garbage or something when a fi
 Specify that this match should be processed DEAD LAST as a match of last resort, a fallback. Use with EXTREME CAUTION.
 
 >>> priority = C.PRIORITY.HIGH
+>>> priority = ({inputFile, detections, extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, customMatch}) => (C.PRIORITY.LOW)
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
+
 
 >>> unsupported = true
 If set to true, then this file can only be identified by not processed.

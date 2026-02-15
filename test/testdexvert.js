@@ -350,6 +350,7 @@ const FLEX_SIZE_FORMATS = {
 		x3f      : 0.1,	// dcraw
 
 		// takes a screenshot or a framegrab which can differ slightly on each run
+		fontasticCOM       : 50,
 		fractalImageFormat : 7,
 		grabber            : 15,
 		gifexe             : 300,

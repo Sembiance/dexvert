@@ -17,16 +17,17 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Continue working on authorware vibe extractor:
-	https://discmaster.textfiles.com/search?extension=-a4p+-a5p&format=authorware&limit=1000
-  Check .a6p, .a7p etc and other extensions listed in authorware.js, add to extension list above until all handled
-  Then look into whatever authorwareAPRArchive is, maybe can combine, maybe not
-  After adding, reprocess for sure:
-	https://discmaster.textfiles.com/admin/items?search=Imparo+Giocando
-  And of course all authorware/authorwareAPRArchive matches 
+* Update recoil2png to support a 'format' flag that passes it as --format=format
+  Go through every program that uses recoil2png
+	First search and handle these: recoil2png[
+	Then search and handle these (with regex on in src/format): recoil2png[^\]]
+  Run a `recoil2png --verbose <file>` for each one, add [format:<format>] to the converter list
+  Remove the item from the list in scratchpad.txt
+  Once all done, sync to dexdrone0, run testMany for 'font' then for 'image' and make sure everything still working ok
+  Finally look at the remaining list of extensions and see if I already support in dexvert or if I can find samples to add support
 
 * Create a new 'detect' app, that only works on exe's for now, call it like 'overlayID'
-  Vibe code this and base it on dexUtil.getEXEOverlayOffset but ensure it has full support for all exe types with no bugs
+  Ge claude to check my existing dexUtil.getEXEOverlayOffset but ensure it has full support for all exe types with no bugs
   Update that dexUtil to be dexUtil.extractEXEOverlay(inputFilePath, outputFilePath)
   Update exeUnPostContent to just be an 'exec = async r => {}' section instead of a bin/ program
   The detection program will extract that extra portion of data at the end of an exe and save it to a tmp file then run that through 'identify'
@@ -34,14 +35,6 @@
   Then I can get rid of dexmagic.exeAppended and those things in there should be detected by the new detection app
   So update those formats with the proper 'Overlay: <whatever>' magic
 	Exaine: https://gemini.google.com/app/1d58c08e3b5d457b
-
-* vibe code color shifting ILBM to animted webp, with DETECTION of whether it actualy has MEANINGFUL shifting.
-  See my notes in the ilbm.js and maybe below or other files about how some say they have shfiting data, but don't really
-  Then I can set animated:true or false in meta (see how I handle that for webpinfo and gifsicle_info)
-  See how this is handled in postProcess and also discmaster, but it should be the same way (not part of subprogram)
-
-* See about fixing:
-	poly/nif
 
 
 /---------------\
@@ -62,6 +55,13 @@
   If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
   After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
+* data from archive/borlandDelphiForm sometimes have embedded bitmap data (TFRMMAIN)
+  MAybe I can vibe code a better extractor than the current one (by feeding it both input and current output files)
+
+* vibe code an emf2svg converter: https://discmaster.textfiles.com/search?format=emf
+
+* could convert to a palette image similar to colFormatColorPalette: https://discmaster.textfiles.com/search?format=riffPalette
+
 * Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
   Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
 	https://discmaster.textfiles.com/search?format=mov&detection=qtvr&dedup=dedup
@@ -79,6 +79,8 @@
   Additionally I could then reliably record into meta how many 'glyphs' are in each font using something like: ttfdump TREK.TTF | ag numGlyphs
   Then this could be searched upon in discmaster with '# of <glyphs>'
   Of course then re-process ALL FONTS on discmaster
+  vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
+  Can give it code to existing converters to 'learn' about particular formats
   
 * archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc progrmatically connect to the VNC port and automate it
   So via code it would send keyboard and mouse clicks at various coordinates.
@@ -223,8 +225,13 @@
 * Go through the sandbox/txt/checkfor_GameExtractor.txt file to locate new files and format samples I should add support for
   Create new formats and adding to the reprocess list as necessary
 
+* See about fixing:
+	poly/nif
+  Maybe instead using assimp, see if I can vibe code into it support for this format
+
 * Look at ALL items below, including low priority (such as scummvm code leveraging for macromedia director extration)
   With each item, consider if vibe coding could help make it a 95% reality
+
 
 /-----------------\
 | Medium Priority |

@@ -5115,573 +5115,703 @@ Misc. Types
 	Speech BASIC
 	Turtle BASIC
 
->>> recoil2png (Linux - v6.3.0 - May 15, 2022) (IMAGE) (https://sourceforge.net/projects/recoil/  See: /usr/share/doc/recoil*/formats.html
-Platform	Extension	Description	Resolution	Depth	Frames
-Amiga	ABK	AMOS			1
-Amiga	ACBM	Amiga Continuous Bitmap			1
-Amiga	DEEP	TVPaint		16777216 colors	1
-Amiga	FLF	Turbo Rascal Syntax Error	up to 320x256		1
-Amiga	HAM, HAM6	Hold-And-Modify 6		4096 colors	1
-Amiga	HAM8	Hold-And-Modify 8		16777216 colors	1
-Amiga	IFF, 256	Interchange File Format			1
-Amiga	INFO	Icon		8 colors	1
-Amiga	LBM, ILBM	Interleaved Bitmap			1
-Amiga	DHR, DR, MP, BEAM	Multi-palette		4096 colors	1
-Amiga	RGB8	Turbo Silver		16777216 colors	1
-Amiga	RGBN	Turbo Silver		4096 colors	1
-Amiga	SHAM	Sliced HAM		4096 colors	1
-Amiga DCTV	DCT, DCTV	DCTV			1
-Amiga HAM-E	IFF	HAM-E	up to 384x480	184320 colors	1
-Amstrad CPC	CM5+GFX	Mode 5	288x256	27 colors	1
-Amstrad CPC	FLF	Turbo Rascal Syntax Error	up to 160x200	16 colors	1
-Amstrad CPC	FNT	8x8 font		mono	1
-Amstrad CPC	HGB	HinterGrundBild	512x256	mono	1
-Amstrad CPC	PPH+ODD+EVE	Perfect Pix	up to 384x272		2
-Amstrad CPC	SCR+PAL	Advanced OCP Art Studio			1
-Amstrad CPC	SGX	SymbOS graphic		16 colors	1
-Amstrad CPC	WIN+PAL	Advanced OCP Art Studio			1
-Apple II	HGR	High Resolution	280x192	mono	1
-Apple II	SPR	Sprites		mono	1
-Apple IIe	DHGR, DHR	Double High-Resolution	560x192	mono	1
-Apple IIGS	3201	3201	320x200	3200 colors	1
-Apple IIGS	32K	Multi-palette		3200 colors	1
-Apple IIGS	GS, IIGS, PNT, SHR	Apple Preferred Format		256 colors	1
-Apple IIGS	PNT	Paintworks	320x396	16 colors	1
-Apple IIGS	SH3, 3200		320x200	3200 colors	1
-Apple IIGS	SHR		320x200	256 colors	1
-Apple Macintosh	MAC, PNT, PNTG	MacPaint	576x720	mono	1
-Atari 8-bit	256, AP2	Paint 256	80x96	256 colors	1
-Atari 8-bit	4MI	AtariTools-800 4 missiles			1
-Atari 8-bit	4PL	AtariTools-800 4 players			1
-Atari 8-bit	4PM	AtariTools-800 4 players and 4 missiles			1
-Atari 8-bit	A4R	Anime 4ever	80x256	16-level grayscale	1
-Atari 8-bit	ACS	AtariTools-800 font		4 colors	1
-Atari 8-bit	AGP	AtariTools-800 graphic			1
-Atari 8-bit	AGS	Atari Graphics Studio			1
-Atari 8-bit	ALL	Graph	160x192	5 colors	1
-Atari 8-bit	AN2	Mad Studio ANTIC 2	up to 40x24 characters	mono	1
-Atari 8-bit	AN4	Mad Studio ANTIC 4	up to 40x24 characters	5 colors	1
-Atari 8-bit	AN5	Mad Studio ANTIC 5	up to 40x12 characters	5 colors	1
-Atari 8-bit	AP3, APV, DGI, DGP, ESC, ILC, PZM		80x192	256 colors	2
-Atari 8-bit	APA, APC, PLM		80x96	256 colors	1
-Atari 8-bit	APL	Atari Player Editor		4 colors	1
-Atari 8-bit	APP	Apac3 Linker-Viewer (SFDN compressed)	80x192	256 colors	2
-Atari 8-bit	APS	Any Point, Any Color (SFDN compressed)	80x96	256 colors	1
-Atari 8-bit	ART	Ascii-Art Editor	up to 64x24 characters	mono	1
-Atari 8-bit	ART (arbitrary)	Artist by David Eaton	160x80	4 colors	1
-Atari 8-bit	ART			mono	1
-Atari 8-bit	ASC	ASCII maker	40x24 characters	mono	1
-Atari 8-bit	BG9, G09		160x192	16-level grayscale	1
-Atari 8-bit	BGP	Bugbiter APAC239i	80x239	256 colors	2
-Atari 8-bit	BKG	Movie Maker background	160x96	4 colors	1
-Atari 8-bit	CCI	Champions' Interlace (compressed)	160x192		2
-Atari 8-bit	CHR	Blazing Paddles font		mono	1
-Atari 8-bit	CIN	Champions' Interlace	up to 160x200		2
-Atari 8-bit	CPI	Marco Pixel Editor	160x192	4 colors	1
-Atari 8-bit	CPR	Trzmiel (compressed)	320x192	mono	1
-Atari 8-bit	CUT	Cut Creator	96x99	mono	1
-Atari 8-bit	DIN		320x192	10 colors	2
-Atari 8-bit	DIT (arbitrary)	DrawIt	160x96	4 colors	1
-Atari 8-bit	DLM	Dir Logo Maker	11x16 characters	mono	1
-Atari 8-bit	DRG	Atari CAD	320x160	mono	1
-Atari 8-bit	F80	The Last Word font		mono	1
-Atari 8-bit	FGE	Floor Designer	64x40	16-level grayscale	1
-Atari 8-bit	FN2	Atari FontMaker		mono	1
-Atari 8-bit	FNT	8x8 font		mono	1
-Atari 8-bit	FWA	Fun with Art	160x192	128 colors	1
-Atari 8-bit	G10	Graphics 10	up to 80x240	9 colors	1
-Atari 8-bit	G11	Graphics 11	up to 80x240	16 colors	1
-Atari 8-bit	G2F	Graph2Font	up to 336x240	256 colors	1
-Atari 8-bit	G9S, SFD	Graphics 9 (SFDN compressed)	up to 80x240	16-level grayscale	1
-Atari 8-bit	GED	GED	160x200	128 colors	1
-Atari 8-bit	GHG	Gephard Hires Graphics	up to 320x200	mono	1
-Atari 8-bit	GR0, ASC, SCR	Mad Studio Graphics 0	40x24 characters	mono	1
-Atari 8-bit	GR1	Mad Studio Graphics 1	20x24 characters	5 colors	1
-Atari 8-bit	GR2	Mad Studio Graphics 2	20x12 characters	5 colors	1
-Atari 8-bit	GR3	Mad Studio Graphics 3	40x24	4 colors	1
-Atari 8-bit	GR7	Graphics 7	up to 160x120	4 colors	1
-Atari 8-bit	GR8	Graphics 8	up to 320x240	mono	1
-Atari 8-bit	GR9	Graphics 9	up to 80x240	16-level grayscale	1
-Atari 8-bit	GR9P	Graphics 9+	80x60	16-level grayscale	1
-Atari 8-bit	HCI, HR2		320x200	5 colors	2
-Atari 8-bit	HCM	Hard Color Map	128x192	9 colors	1
-Atari 8-bit	HIP	Hard Interlace Picture	160x200	30-level grayscale	2
-Atari 8-bit	HPM	Grass' Slideshow	160x192	4 colors	1
-Atari 8-bit	HPS	Hard Interlace Picture (SFDN compressed)	160x200	30-level grayscale	2
-Atari 8-bit	HR		256x239	3 colors	2
-Atari 8-bit	ICE	Interlace Character Editor font			2
-Atari 8-bit	ICN	ICE CIN	160x192	80 colors	2
-Atari 8-bit	IGE	Interlace Graphics Editor	128x96	16 colors	2
-Atari 8-bit	ILD	Interlace Logo Designer	128x128	7 colors	2
-Atari 8-bit	ILS	APACVIEW (SFDN compressed)	80x192	256 colors	2
-Atari 8-bit	IMN	ICE MIN	160x192	80 colors	2
-Atari 8-bit	ING	ING 15	160x200	7 colors	2
-Atari 8-bit	INP	InterPainter	160x200	7 colors	2
-Atari 8-bit	INS	InterPainter (SFDN compressed)	160x200	7 colors	2
-Atari 8-bit	INT	INT95a	up to 160x239	16 colors	2
-Atari 8-bit	IP2	ICE PCIN+	160x192	45 colors	2
-Atari 8-bit	IPC	ICE PCIN	160x192	35 colors	2
-Atari 8-bit	IR2	Super IRG 2	160x192	25 colors	2
-Atari 8-bit	IRG	Super IRG	160x192	15 colors	2
-Atari 8-bit	IST	Interlace Studio	160x200		2
-Atari 8-bit	JGP	Jet Graphics Planner		4 colors	1
-Atari 8-bit	KPR	Kompresor do Animatora		4 colors	1
-Atari 8-bit	KSS (arbitrary)	KSS-Paint	160x160	4 colors	1
-Atari 8-bit	LDM	Ludek Maker		4 colors	1
-Atari 8-bit	LEO	Larka Edytor Obiektów trybu $4+		5 colors	1
-Atari 8-bit	LUM+COL	Technicolor Dream	80x119	256 colors	1
-Atari 8-bit	KFX		56x60	mono	1
-Atari 8-bit	MAP	Envision			1
-Atari 8-bit	MAP	EnvisionPC			1
-Atari 8-bit	MAX	XL-Paint MAX	160x192		2
-Atari 8-bit	MBG	Mad Designer	512x256	mono	1
-Atari 8-bit	MCH	Graph2Font	up to 336x240	256 colors	1
-Atari 8-bit	MCP	McPainter	160x200	16 colors	2
-Atari 8-bit	MCPP	Paradox	160x100	16 colors	1
-Atari 8-bit	MCS		160x192	9 colors	1
-Atari 8-bit	MGA		80x96	256 colors	1
-Atari 8-bit	MGP (arbitrary)	Magic Painter	160x96		1
-Atari 8-bit	MIC	Micro Illustrator / Graphics 15	up to 160x240	4 colors	1
-Atari 8-bit	MIC (arbitrary)	AtariGraphics	160x192	4 colors	1
-Atari 8-bit	MIC+COL	Graph2Font	160x240	128 colors	1
-Atari 8-bit	MIC+PMG+RP+RP.INI	RastaConverter	up to 160x240	128 colors	1
-Atari 8-bit	MIS	AtariTools-800 missile	2x240	mono	1
-Atari 8-bit	MPL	Mad Studio multi-color player	up to 56x40	5 colors	1
-Atari 8-bit	MSL	Mad Studio missile	up to 2x34	mono	1
-Atari 8-bit	NLQ	Daisy-Dot font		mono	1
-Atari 8-bit	ODF	OD Font Editor		mono	1
-Atari 8-bit	PGR	PowerGraphics	up to 336x240	256 colors	1
-Atari 8-bit	PI8		up to 320x192		1
-Atari 8-bit	PI9				1
-Atari 8-bit	PIC	Graphic Arts Department	160x96	128 colors	1
-Atari 8-bit	PIC	Koala MicroIllustrator	160x192	4 colors	1
-Atari 8-bit	PIC	PIC v2	up to 320x192		1
-Atari 8-bit	PIC	Visualizer	160x79	4 colors	1
-Atari 8-bit	PIX		160x192	4 colors	1
-Atari 8-bit	PLA	AtariTools-800 player	8x240	mono	1
-Atari 8-bit	PLS	Plama 256 (SFDN compressed)	80x96	256 colors	1
-Atari 8-bit	PMD	PMG Designer by Henryk Karpowicz			1
-Atari 8-bit	PSF	Print Shop	88x52	mono	1
-Atari 8-bit	RAP	Vidig Paint	80x192	16 colors	1
-Atari 8-bit	RAW	XL-Paint MAX	160x192	16 colors	2
-Atari 8-bit	RGB	ColorViewSquash	up to 160x192		3
-Atari 8-bit	RIP	Rocky Interlace Picture	up to 320x239		1 or 2
-Atari 8-bit	RM0	Rambrandt	160x96	99 colors	1
-Atari 8-bit	RM1	Rambrandt	80x192	256 colors	1
-Atari 8-bit	RM2	Rambrandt	80x192	104 colors	1
-Atari 8-bit	RM3	Rambrandt	80x192	128 colors	1
-Atari 8-bit	RM4	Rambrandt	160x192	99 colors	1
-Atari 8-bit	RYS	Mamut	160x96	4 colors	1
-Atari 8-bit	SG3	Standard Graphics 3	40x24	4 colors	1
-Atari 8-bit	SGE	Semi-Graphic logos Editor	40x24 characters	mono	1
-Atari 8-bit	SHC	SAMAR Hi-res Interlace with Map of Colours	320x192		2
-Atari 8-bit	SHP	Blazing Paddles shape table		mono	1
-Atari 8-bit	SHP	Movie Maker shapes	160x96	4 colors	1
-Atari 8-bit	SIF	Super-IRG Font		4 colors	2
-Atari 8-bit	SKP	Sketch-PadDles	160x192	mono	1
-Atari 8-bit	SPC	The Graphics Magician Picture Painter	160x192	128 colors	1
-Atari 8-bit	SPR	Mad Studio sprite	up to 8x40	mono	1
-Atari 8-bit	SPR	SprEd		128 colors	1
-Atari 8-bit	SXS	16x16 font		mono	1
-Atari 8-bit	TIP	Taquart Interlace Picture	up to 160x119		2
-Atari 8-bit	TL4	Mad Studio ANTIC 4 tile	up to 16x40	5 colors	1
-Atari 8-bit	TX0	Texture Maker0 16x16x16	16x16	16 colors	1
-Atari 8-bit	TXE	Texture Editor by Mikey	80x96	16-level grayscale	1
-Atari 8-bit	TXS		16x16	16-level grayscale	1
-Atari 8-bit	VSC+G2F	Graph2Font vertical scroll		256 colors	1
-Atari 8-bit	VZI	VertiZontal Interlacing	160x200	31-level grayscale	2
-Atari 8-bit	WND	Blazing Paddles window	up to 160x192	4 colors	1
-Atari 8-bit	XLP	XL-Paint	up to 160x200	7 colors	2
-Atari 8-bit	ZM4	Zoom-4 graphics editor	64x64	16-level grayscale	1
-Atari 8-bit VBXE	DAP	SlideShow for VBXE	320x240	256 colors	1
-Atari 8-bit VBXE	G2F	Graph2Font	up to 336x240	256 colors	1
-Atari Portfolio	PGC		240x64	mono	1
-Atari Portfolio	PGF		240x64	mono	1
-Atari ST/STE	ART	Art Director	320x200	16 colors	1
-Atari ST/STE	ART	GFA Artist	320x200	512 colors	1
-Atari ST/STE	ART	Palette Master	320x200	512 colors	1
-Atari ST/STE	BIL	ColorSTar	320x200	16 colors	1
-Atari ST/STE	BL1	DEGAS Elite block		16 colors	1
-Atari ST/STE	BL2	DEGAS Elite block		4 colors	1
-Atari ST/STE	BL3	DEGAS Elite block		mono	1
-Atari ST/STE	BLD	MegaPaint		mono	1
-Atari ST/STE	BP1, BP2, BP4, C01, C02, C04	UIMG			1
-Atari ST/STE	BRU	DEGAS Elite brush	8x8	mono	1
-Atari ST/STE	CA1	CrackArt	320x200	16 colors	1
-Atari ST/STE	CA2	CrackArt	640x200	4 colors	1
-Atari ST/STE	CA3	CrackArt	640x400	mono	1
-Atari ST/STE	CE1	ComputerEyes	320x200	262144 colors	1
-Atari ST/STE	CE2	ComputerEyes	640x200	32768 colors	1
-Atari ST/STE	CE3	ComputerEyes	640x400	192-level grayscale	1
-Atari ST/STE	CEL	Cyber Paint Cell	up to 320x200	16 colors	1
-Atari ST/STE	CMP	Public Painter	up to 640x800	mono	1
-Atari ST/STE	COL	Atari Image Manager	up to 256x256	16777216 colors	1
-Atari ST/STE	CP3	Picworks	640x400	mono	1
-Atari ST/STE	CPT	Canvas (compressed)			1
-Atari ST/STE	CPT+HBL	Canvas (raster)	up to 640x200		1
-Atari ST/STE	CRG	Calamus Raster Graphic		mono	1
-Atari ST/STE	DA4	PaintShop	640x800	mono	1
-Atari ST/STE	DOO, ART	Doodle	640x400	mono	1
-Atari ST/STE	DU1, DUO		416x273	136 colors	2
-Atari ST/STE	DU2		832x273	10 colors	2
-Atari ST/STE	EZA	EZ-Art Professional	320x200	16 colors	1
-Atari ST/STE	FLF	Turbo Rascal Syntax Error	320x200		1
-Atari ST/STE	FNT	8x16 font		mono	1
-Atari ST/STE	FNT	GDOS font		mono	1
-Atari ST/STE	FUL	Canvas (raster)	up to 640x200		1
-Atari ST/STE	GFB	DeskPic			1
-Atari ST/STE	GRX	Grafix			1
-Atari ST/STE	HPK	Dali (compressed)	640x400	mono	1
-Atari ST/STE	HRM	HighresMedium	640x200		2
-Atari ST/STE	IC1	Imagic	320x200	16 colors	1
-Atari ST/STE	IC2	Imagic	640x200	4 colors	1
-Atari ST/STE	IC3	Imagic	640x400	mono	1
-Atari ST/STE	ICN	DEGAS Elite icon		mono	1
-Atari ST/STE	IFF	Interchange File Format			1
-Atari ST/STE	IM	Atari Image Manager	up to 256x256	256-level grayscale	1
-Atari ST/STE	IMG	GEM Bit Image			1
-Atari ST/STE	KID	Fullscreen Construction Kit	448x272	16 colors	1
-Atari ST/STE	LPK	Dali (compressed)	320x200	16 colors	1
-Atari ST/STE	MPK	Dali (compressed)	640x200	4 colors	1
-Atari ST/STE	MPP	Multi Palette Picture	up to 416x273		1 or 2
-Atari ST/STE	MUR+PAL	C.O.L.R. Object Editor	320x200	16 colors	1
-Atari ST/STE	NEO	NEOchrome			1
-Atari ST/STE	NEO	NEOchrome Master		512 colors	1
-Atari ST/STE	NEO+RST	NEOchrome Master	320x200	512 colors	1
-Atari ST/STE	OBJ	ColorSTar object	up to 320x200	16 colors	1
-Atari ST/STE	OBJ	MonoSTar object	up to 640x400	mono	1
-Atari ST/STE	P3C	D-GRAPH (compressed)	320x200	136 colors	2
-Atari ST/STE	PA3	Pablo Paint 2.5	640x400	mono	1
-Atari ST/STE	PAC	STAD	640x400	mono	1
-Atari ST/STE	PBX	QuantumPaint			1
-Atari ST/STE	PC1	DEGAS Elite	320x200	16 colors	1
-Atari ST/STE	PC2	DEGAS Elite	640x200	4 colors	1
-Atari ST/STE	PC3	DEGAS Elite	640x400	mono	1
-Atari ST/STE	PCI	Tobias Richter Fullscreen Slideshow	352x278		2
-Atari ST/STE	PCS	PhotoChrome	320x199		1 or 2
-Atari ST/STE	PG0	Paintworks	320x400	16 colors	1
-Atari ST/STE	PG1	Graphics Processor	320x200	16 colors	1
-Atari ST/STE	PG1	Paintworks	640x400	4 colors	1
-Atari ST/STE	PG2	Graphics Processor	640x200	4 colors	1
-Atari ST/STE	PG2	Paintworks	640x800	mono	1
-Atari ST/STE	PG3	Graphics Processor	640x400	mono	1
-Atari ST/STE	PI1	DEGAS	up to 416x560	16 colors	1
-Atari ST/STE	PI2	DEGAS	640x200	4 colors	1
-Atari ST/STE	PI3, SUH	DEGAS	640x400	mono	1
-Atari ST/STE	PIC	PaintPro ST			1
-Atari ST/STE	PL4		320x200	256 colors	2
-Atari ST/STE	PPP	Pablo Paint 1.1	320x200	16 colors	1
-Atari ST/STE	PSC	PaintShop (compressed)	up to 640x400	mono	1
-Atari ST/STE	RGB	RGB Intermediate	320x200	4096 colors	3
-Atari ST/STE	RGH	ZZ_ROUGH	320x200	16 colors	1
-Atari ST/STE	CL0, SC0	Paintworks	320x200	16 colors	1
-Atari ST/STE	CL1, SC1	Paintworks	640x200	4 colors	1
-Atari ST/STE	CL2, SC2	Paintworks	640x400	mono	1
-Atari ST/STE	SD0	Dali	320x200	16 colors	1
-Atari ST/STE	SD1	Dali	640x200	4 colors	1
-Atari ST/STE	SD2	Dali	640x400	mono	1
-Atari ST/STE	SPC	Spectrum 512 (compressed)	320x199	4096 colors	1
-Atari ST/STE	SPS	Spectrum 512 (smooshed)	320x199	512 colors	1
-Atari ST/STE	SPU	Spectrum 512	320x199	4096 colors	1
-Atari ST/STE	SPU	Spectrum 512 (enhanced)	320x199	29791 colors	2
-Atari ST/STE	SPX	Spectrum 512 (extended)	320x199	4096 colors	1
-Atari ST/STE	SRT	Synthetic Arts	640x200	4 colors	1
-Atari ST/STE	SSB	Sinbad Slideshow	320x200	16 colors	1
-Atari ST/STE	TN1, TN4	Tiny Stuff	320x200	16 colors	1
-Atari ST/STE	TN2, TN5	Tiny Stuff	640x200	4 colors	1
-Atari ST/STE	TN3, TN6	Tiny Stuff	640x400	mono	1
-Atari ST/STE	TNY	Tiny Stuff			1
-Atari ST/STE	XIMG	Extended GEM Bit Image			1
-Atari TT	PI4		320x480	256 colors	1
-Atari TT	PI5		640x480	16 colors	1
-Atari TT	PI6		1280x960	mono	1
-Atari Falcon	B&W, B_W	ImageLab		256-level grayscale	1
-Atari Falcon	BP6, BP8, C06, C08, C16, C24, C32	UIMG			1
-Atari Falcon	DC1	DuneGraph (compressed)	320x200	256 colors	1
-Atari Falcon	DEL	DelmPaint	320x240	256 colors	1
-Atari Falcon	DG1	DuneGraph	320x200	256 colors	1
-Atari Falcon	DPH	DelmPaint	640x480	256 colors	1
-Atari Falcon	ESM	TmS Cranach Paint/Studio			1
-Atari Falcon	FTC	Falcon True Color	384x240	65536 colors	1
-Atari Falcon	FUN	Funny Paint			1
-Atari Falcon	GOD	GodPaint		65536 colors	1
-Atari Falcon	HIR	Print-Technik		128-level grayscale	1
-Atari Falcon	IB3	ICDRAW icon	32x32	16 colors	1
-Atari Falcon	IBI	ICDRAW icon	32x32	16 colors	1
-Atari Falcon	IIM	InShape			1
-Atari Falcon	PI4, PI7, PI9	Fuckpaint	up to 640x480	256 colors	1
-Atari Falcon	PIX	PixArt			1
-Atari Falcon	PNT, TPI	Prism Paint			1
-Atari Falcon	RAG	RAG-D			1
-Atari Falcon	RAGC (arbitrary)	Music Compile 2		256 colors	1
-Atari Falcon	RAW, RWH, RWL	IMG Scan	up to 640x400	256-level grayscale	1
-Atari Falcon	TCP	Rembrandt		65536 colors	1
-Atari Falcon	TG1	COKE		65536 colors	1
-Atari Falcon	TIMG			32768 colors	1
-Atari Falcon	TRE	Spooky Sprites (compressed)		65536 colors	1
-Atari Falcon	TRP	EggPaint		65536 colors	1
-Atari Falcon	TRP	Spooky Sprites		65536 colors	1
-Atari Falcon	TRU	IndyPaint		65536 colors	1
-Atari Falcon	XGA			65536 colors	1
-BBC Micro	BB0	Mode 0	640x256	mono	1
-BBC Micro	BB1	Mode 1	320x256	4 colors	1
-BBC Micro	BB2	Mode 2	160x256	8 colors	1
-BBC Micro	BB4	Mode 4	320x256	mono	1
-BBC Micro	BB5	Mode 5	160x256	4 colors	1
-BBC Micro	BBG	LdPic	up to 640x256		1
-BBC Micro	FLF	Turbo Rascal Syntax Error	up to 320x256		1
-Commodore VIC-20	BP (arbitrary)	Best Paint	160x192	9 colors	1
-Commodore VIC-20	FLF	Turbo Rascal Syntax Error		8 colors	1
-Commodore VIC-20	MG	MINIPAINT	up to 160x192	10 colors	1
-Commodore VIC-20	PIC0 (arbitrary)+PIC1	Picasso	88x176	10 colors	1
-Commodore 64	4BT	GoDot	320x200	16 colors	1
-Commodore 64	64C	8x8 font		mono	1
-Commodore 64	A	SEUCK sprites		16 colors	1
-Commodore 64	A64, WIG	Wigmore Artist 64	160x200	16 colors	1
-Commodore 64	AAS, ART	Art Studio	320x200	16 colors	1
-Commodore 64	AFL	AFLI-editor	296x200	16 colors	1
-Commodore 64	AMI	Amica Paint	160x200	16 colors	1
-Commodore 64	BDP	Boogie Down Paint	160x200	16 colors	1
-Commodore 64	BFL, BFLI	Big FLI	148x400	16 colors	1
-Commodore 64	BML, FLI, FLG	FLI Graph	148x200	16 colors	1
-Commodore 64	BS	Printfox	320x200	mono	1
-Commodore 64	CDU	CDU-Paint	160x200	16 colors	1
-Commodore 64	CFLI	CFLI Designer	296x200	16 colors	1
-Commodore 64	CGX	Commodore Grafix		16 colors	1
-Commodore 64	CHE	Cheese	160x200	16 colors	1
-Commodore 64	CLE	Centauri Logo-Editor	160x200	4 colors	1
-Commodore 64	CLP	GoDot clip	up to 320x200	16 colors	1
-Commodore 64	CTM	CharPad		16 colors	1
-Commodore 64	CWG	Create with Garfield	160x200	16 colors	1
-Commodore 64	DD, DDP	Doodle	320x200	16 colors	1
-Commodore 64	DOL, BED	Dolphin Ed	160x200	16 colors	1
-Commodore 64	DRL, DLP	Drazlace	up to 320x200		2
-Commodore 64	DRZ, DRP	Drazpaint	160x200	16 colors	1
-Commodore 64	ECI	ECI Graphic Editor	296x200		2
-Commodore 64	ECP	ECI Graphic Editor (compressed)	296x200		2
-Commodore 64	EMC	EMC-editor	148x192	16 colors	1
-Commodore 64	ESH	Extend Super Hires Interlace Editor	192x200		2
-Commodore 64	FBI	Flip	148x200	16 colors	1
-Commodore 64	FCP, FPT	Face Painter	160x200	16 colors	1
-Commodore 64	FD2	FLI Designer	148x200	16 colors	1
-Commodore 64	FED	FLI Editor	148x200	16 colors	1
-Commodore 64	FFL, FFLI	Flash FLI	148x200		2
-Commodore 64	FLF	Turbo Rascal Syntax Error		16 colors	1
-Commodore 64	FLI	FLI	148x200	16 colors	1
-Commodore 64	FLM	Flimatic	up to 296x200	16 colors	1
-Commodore 64	FP	Fuckpaint	320x200		2
-Commodore 64	FUN, FP2	Funpaint	296x200		2
-Commodore 64	FPR	FLI Profi	160x200	16 colors	1
-Commodore 64	G	SEUCK font		mono	1
-Commodore 64	GB	Printfox	640x400	mono	1
-Commodore 64	GCD, MON		320x200	mono	1
-Commodore 64	GG	Koala Painter (compressed)	320x200	16 colors	1
-Commodore 64	GR, CS	Star Painter		mono	1
-Commodore 64	GUN, IFL	Gunpaint	296x200		2
-Commodore 64	HBM, HIR, HPI, FGS	Hires-Bitmap	320x200	mono	1
-Commodore 64	HCB	HCB-editor	148x200	16 colors	1
-Commodore 64	HED	Hi-Eddi	320x200	16 colors	1
-Commodore 64	HET	Hires-Editor	320x200	16 colors	1
-Commodore 64	HFC, HFD	Hires FLI Designer	296x112	16 colors	1
-Commodore 64	HIM	Hires Manager	296x192	16 colors	1
-Commodore 64	HLE	Hireslace Editor	320x200		2
-Commodore 64	HLF, HIE	Hires Interlace	320x200		2
-Commodore 64	HPC	Hi-Pic Creator	320x200	16 colors	1
-Commodore 64	IHE	Interlace Hires Editor	320x200	3 colors	2
-Commodore 64	ILE	Interlaced Logo Editor	320x48	10 colors	2
-Commodore 64	IPH, GIG, HPI, HRE	Interpaint	320x200	16 colors	1
-Commodore 64	IPT, LRE	Interpaint	160x200	16 colors	1
-Commodore 64	ISH	Image System	320x200	16 colors	1
-Commodore 64	ISH	Interlace-Super-Hires Painter	320x200		2
-Commodore 64	ISM	Image System	160x200	16 colors	1
-Commodore 64	JJ	Doodle (compressed)	320x200	16 colors	1
-Commodore 64	GIG, KLA, KOA	Koala Painter	160x200	16 colors	1
-Commodore 64	LP3	Logo Painter 3/3+	160x400	4 colors	1
-Commodore 64	MCI	True Paint	320x200		2
-Commodore 64	MIL	Micro Illustrator	160x200	16 colors	1
-Commodore 64	MLE	Multi-Lace Editor	320x56	10 colors	2
-Commodore 64	MUF	MUFLI Editor	296x200	16 colors	1
-Commodore 64	MUI	MUIFLI Editor	296x200		2
-Commodore 64	MUP	MUFLI Editor (compressed)	296x200	16 colors	1
-Commodore 64	MWI, MWIN	Art Studio window	up to 160x200	16 colors	1
-Commodore 64	NUF	NUFLI Editor	320x200	16 colors	1
-Commodore 64	NUP	NUFLI Editor (compressed)	320x200	16 colors	1
-Commodore 64	OCP, MPI, MPIC	Advanced Art Studio	160x200	16 colors	1
-Commodore 64	P64, FLY	Picasso 64	160x200	16 colors	1
-Commodore 64	PBOT	PETSCII BOT	up to 12x16 characters	16 colors	1
-Commodore 64	PDR	PetDraw64	40x25 characters	16 colors	1
-Commodore 64	PET	C64 OS screenshot v2	40x25 characters	16 colors	1
-Commodore 64	PET	PETSCII Editor	40x25 characters	16 colors	1
-Commodore 64	PG	Pagefox	up to 640x800	mono	1
-Commodore 64	PI, BPL	Blazing Paddles	160x200	16 colors	1
-Commodore 64	PMG	Paint Magic	160x200	16 colors	1
-Commodore 64	PP	Pixel Perfect	296x200		2
-Commodore 64	PPP	Pixel Perfect (compressed)	296x200		2
-Commodore 64	RP	Rainbow Painter	160x200	16 colors	1
-Commodore 64	RPH	Run Paint	320x200	16 colors	1
-Commodore 64	RPM	Run Paint	160x200	16 colors	1
-Commodore 64	RPO, GIH	Run Paint	320x200	mono	1
-Commodore 64	SAR	Saracen Paint	160x200	16 colors	1
-Commodore 64	SCR+COL	PETSCII Editor	40x25 characters	16 colors	1
-Commodore 64	SH1	Super-hires Editor I	96x168	16 colors	1
-Commodore 64	SH2	Super-hires Editor II	192x168	16 colors	1
-Commodore 64	SHE	Super Hires Editor	96x88	16 colors	1
-Commodore 64	SHE	Super Hires Editor 2	192x168	16 colors	1
-Commodore 64	SHF	Super Hires FLI Editor	up to 208x167	16 colors	1
-Commodore 64	SHI	Super Hires Interlace Editor	96x200		2
-Commodore 64	SHP	Loadstar	up to 320x200	16 colors	1
-Commodore 64	SHS	Super Hires Studio	320x200	16 colors	1
-Commodore 64	SHX	SHF-XL Edit	144x168	16 colors	1
-Commodore 64	SIF	Super Hires Interlace FLI Editor	96x167		2
-Commodore 64	SPD	SpritePad			1
-Commodore 64	UFL	UFLI-editor	288x200	16 colors	1
-Commodore 64	UIF	UIFLI-editor	288x200		2
-Commodore 64	VHI	Vertical Hires Interlace Editor	320x200		2
-Commodore 64	VIC		up to 320x200	16 colors	1
-Commodore 64	VID	Vidcom 64	160x200	16 colors	1
-Commodore 64	XFL	X-FLI Editor	192x167	16 colors	1
-Commodore 64	ZOM	Zoomatic	160x200	16 colors	1
-Commodore 64	ZS	Star Painter font		mono	1
-Commodore 16/116/Plus4	P4I	Botticelli	320x200	121 colors	1
-Commodore 16/116/Plus4	P4I	Multi Botticelli	160x200	121 colors	1
-Commodore 16/116/Plus4	P4I		128x64	4 colors	1
-Commodore 128	BM, VBM	VDC BitMap		mono	1
-Commodore 128	BRUS, PICT	BASIC 8		mono	1
-Commodore 128	IP	I Paint		16 colors	1
-Electronika BK	PIC		256x256	4 colors	1
-Electronika BK	BKS		up to 512x256		1 or 2
-Electronika MC 0515	SCR		640x200	mono	1
-FM Towns	PI				1
-FM Towns	PIC				1
-HP 48	GRB, GRO	GROB		mono	1
-MSX	SC2, GRP	Screen 2	256x192	15 colors	1
-MSX	SC3	Screen 3	64x48	15 colors	1
-MSX2	CMP+PL5	Dot Designer's Club (DD-Graph)	up to 256x212	16 colors	1
-MSX2	FNT	Dynamic Publisher font	512x160	mono	1
-MSX2	GL5, SH5+PL5			16 colors	1
-MSX2	GL6, SH6+PL6			4 colors	1
-MSX2	GL7, SH7+PL7			16 colors	1
-MSX2	GL8, SH8			256 colors	1
-MSX2	MAG, MAX	Maki-chan Graphics			1
-MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
-MSX2	MIG	MIG	up to 512x424		1 or 2
-MSX2	PCT	Dynamic Publisher screen	512x704	mono	1
-MSX2	PI				1
-MSX2	PIC	YPIC	up to 256x212		1
-MSX2	SC4	Screen 4	256x192	16 colors	1
-MSX2	SC5, GE5	Screen 5	up to 256x212	16 colors	1
-MSX2	SC5+S15	Screen 5 interlaced	up to 256x424	16 colors	2
-MSX2	SC6	Screen 6	up to 512x212	4 colors	1
-MSX2	SC6+S16	Screen 6 interlaced	up to 512x424	4 colors	2
-MSX2	SC7, GE7	Screen 7	512x212	16 colors	1
-MSX2	SC7+S17	Screen 7 interlaced	512x424	16 colors	2
-MSX2	SC8, GE8, PIC	Screen 8	256x212	256 colors	1
-MSX2	SC8+S18	Screen 8 interlaced	256x424	256 colors	2
-MSX2	SR5+PL5	Graph Saurus	up to 256x212	16 colors	1
-MSX2	SR6+PL6	Graph Saurus	up to 512x212	4 colors	1
-MSX2	SR7+PL7	Graph Saurus	512x212	16 colors	1
-MSX2	SR8	Graph Saurus	256x212	256 colors	1
-MSX2	SRI+PL7	Graph Saurus	512x424	16 colors	2
-MSX2	STP	Dynamic Publisher stamp		mono	1
-MSX2+	GLA, GLB, SHA, SHB+PLA			12515 colors	1
-MSX2+	GLC, GLS, SHC			19268 colors	1
-MSX2+	SCA, SCB	Screen 10	256x212	12515 colors	1
-MSX2+	SCA+S1A	Screen 10 interlaced	256x424	12515 colors	2
-MSX2+	SCC, SRS, YJK	Screen 12	up to 256x212	19268 colors	1
-MSX2+	SCC+S1C	Screen 12 interlaced	up to 256x424	19268 colors	2
-MSX V9990 VDP	G9B	GFX9k		32768 colors	1
-NEC PC-80	MAG	Maki-chan Graphics	up to 640x200	8 colors	1
-NEC PC-88	IMG	ArtMaster88	640x200	8 colors	1
-NEC PC-88	IMG	DaVinci	640x200	8 colors	1
-NEC PC-88	KTY	Kitty	640x200	8 colors	1
-NEC PC-88	MAG	Maki-chan Graphics		8 colors	1
-NEC PC-88	PI			8 colors	1
-NEC PC-88 VA	KT4	Kitty	640x400	8 colors	1
-NEC PC-88 VA	MAG	Maki-chan Graphics	up to 640x400		1
-NEC PC-88 VA	PIC		up to 640x400		1
-NEC PC-98	ARV	ARTV	640x400	16 colors	1
-NEC PC-98	EBD			16 colors	1
-NEC PC-98	MAG, MKI	Maki-chan Graphics		256 colors	1
-NEC PC-98	ML1	Mapletown Network ML1		128 colors	1
-NEC PC-98	MX1	Mapletown Network MX1		128 colors	1
-NEC PC-98	NL3	Mapletown Network NL3	160x100	64 colors	1
-NEC PC-98	PI			256 colors	1
-NEC PC-98	Q4	XLD4	640x400	16 colors	1
-NEC PC-98	ZIM	Z's Staff Kid98		16 colors	1
-Oric	CHS	6x8 font		mono	1
-Oric	HIR, HRS		240x200	8 colors	1
-PC	EPA	Award BIOS logo			1
-PC	HS2	Handy Scanner 2000 POSTERING		mono	1
-PC	FLF	Turbo Rascal Syntax Error	320x200		1
-PC	FNT	Image 72 font		mono	1
-PC	MSP	Microsoft Paint version 1 or 2		mono	1
-PlayStation	TIM	TIM			1
-Psion Series 3	PIC, ICN			mono	1
-SAM Coupe	LCE		256x384		2
-SAM Coupe	SS1	Mode 1	256x192	128 colors	1
-SAM Coupe	SS2	Mode 2	256x192	128 colors	1
-SAM Coupe	SS3	Mode 3	512x192	128 colors	1
-SAM Coupe	SS4, SCS4	Mode 4	256x192	128 colors	1
-SAM Coupe	SSX		up to 512x192		1
-Sharp X68000	MAG	Maki-chan Graphics		16 colors	1
-Sharp X68000	PIC			65536 colors	1
-Tandy 1000	PNT	DeskMate Paint	312x176	16 colors	1
-Timex 2048	HRG	Hi-res Gigascreen	512x192	4 colors	2
-Timex 2048	SCR, THC	Hi-color	256x192	15 colors	1
-Timex 2048	SCR, THR	Hi-res	512x192	mono	1
-TRS-80	HR		640x240	mono	1
-TRS-80	RLE	CompuServe RLE	256x192	mono	1
-TRS-80	SHR	MagicDraw	640x240	mono	1
-TRS-80 Color Computer	CLP		40x56	mono	1
-TRS-80 Color Computer	GRF, MAX, P41, PIX		256x192	mono	1
-TRS-80 Color Computer	P11		128x96	4 colors	1
-Vector-06C	SPR	256		16 colors	1
-ZX81	P	Sinclair BASIC	32x24 characters	mono	1
-ZX81	RAW	ZXPaintyONE v2.0	32x24 characters	mono	1
-ZX81	ZP1 (arbitrary)	ZXpaintyONE	32x24 characters	mono	1
-ZX Spectrum	3		256x192	8 colors	3
-ZX Spectrum	ATR	Attributes	32x24 characters	15 colors	1
-ZX Spectrum	BMC4	Border Screen Multicolor 8x4	384x304	15 colors	1
-ZX Spectrum	BSC	Border Screen	384x304	15 colors	1
-ZX Spectrum	BSP	Border Screen by Trefi	up to 384x304		1 or 2
-ZX Spectrum	CH$	CHR$			1 or 2
-ZX Spectrum	CH4	4x8 font		mono	1
-ZX Spectrum	CH6	6x8 font		mono	1
-ZX Spectrum	CH8	8x8 font		mono	1
-ZX Spectrum	CHX	Big font		15 colors	1
-ZX Spectrum	FLF	Turbo Rascal Syntax Error	256x192	15 colors	1
-ZX Spectrum	HLR	Attributes Gigascreen	32x24 characters		2
-ZX Spectrum	IFL	Multicolor 8x2	256x192	15 colors	1
-ZX Spectrum	GSC, IMG, SCR	Gigascreen	256x192		2
-ZX Spectrum	MC	Multicolor 8x1	256x192	15 colors	1
-ZX Spectrum	MG1	MultiArtist 8x1	256x192		2
-ZX Spectrum	MG2	MultiArtist 8x2	256x192		2
-ZX Spectrum	MG4	MultiArtist 8x4	256x192		2
-ZX Spectrum	MG8	MultiArtist 8x8	256x192		2
-ZX Spectrum	MLT		256x192	15 colors	1
-ZX Spectrum	RGB		256x192	8 colors	3
-ZX Spectrum	SCR		256x192	15 colors	1
-ZX Spectrum	SEV	SevenuP	up to 256x192	15 colors	1
-ZX Spectrum	STL	Stellar	64x48		2
-ZX Spectrum	ZXP	ZX-Paintbrush		15 colors	1
-ZX Spectrum	ZXS	SpecSCII	256x192	15 colors	1
-ZX Spectrum Profi	GRF	Profi	512x240	16 colors	1
-ZX Spectrum ULAplus	SCR	ULAplus	256x192	64 colors	1
-ZX Spectrum ULAplus	SCR, TCU	Timex hi-color ULAplus	256x192	64 colors	1
-ZX Evolution	SXG	Speccy eXtended Graphics		256 colors	1
-ZX-Uno	RAD, SCR	Radastan	128x96		1
-ZX Spectrum Next	NXI		256x192	256 colors	1
-eLeMeNt ZX	546	HGFX PAL546	720x546	4 colors	1
-eLeMeNt ZX	HAM	HGFX HAM	up to 512x192		1
-eLeMeNt ZX	HGH	HGFX High	512x192		1
-eLeMeNt ZX	HGL	HGFX Low	256x192		1
-eLeMeNt ZX	HGS, SCR	HiResColor Gigascreen	512x192		2
-eLeMeNt ZX	HKL, SCR	HiResColor/KeyLayer	512x192	15 colors	1
-eLeMeNt ZX	HRC, SCR	HiResColor	512x192	15 colors	1
-eLeMeNt ZX	HRX, SCR	HiResindeXedColor	512x192	32 colors	1
-eLeMeNt ZX	SHR	HGFX Ultra	512x384		1
-eLeMeNt ZX	SKL, SCR	KeyLayer	256x192	15 colors	1
-eLeMeNt ZX	XKL, SCR	HiResindeXedColor/KeyLayer	512x192	63 colors	1
+>>> recoil2png  (recoil2png --list)  (DevLab/vibe/recoil/)
+EXT        FORMAT                                   PLATFORM
+---        ------                                   --------
+256        Interchange File Format                  Amiga
+ABK        AMOS                                     Amiga
+ACBM       Amiga Continuous Bitmap                  Amiga
+BEAM       Multi-palette                            Amiga
+DEEP       TVPaint                                  Amiga
+DHR        Multi-palette                            Amiga
+DR         Multi-palette                            Amiga
+FLF        Turbo Rascal Syntax Error                Amiga
+HAM        Hold-And-Modify 6                        Amiga
+HAM6       Hold-And-Modify 6                        Amiga
+HAM8       Hold-And-Modify 8                        Amiga
+IFF        Interchange File Format                  Amiga
+ILBM       Interleaved Bitmap                       Amiga
+INFO       Icon                                     Amiga
+LBM        Interleaved Bitmap                       Amiga
+MP         Multi-palette                            Amiga
+RGB8       Turbo Silver                             Amiga
+RGBN       Turbo Silver                             Amiga
+SHAM       Sliced HAM                               Amiga
+DCT        DCTV                                     Amiga DCTV
+DCTV       DCTV                                     Amiga DCTV
+IFF        HAM-E                                    Amiga HAM-E
+CM5        Mode 5                                   Amstrad CPC
+FLF        Turbo Rascal Syntax Error                Amstrad CPC
+FNT        8x8 font                                 Amstrad CPC
+HGB        HinterGrundBild                          Amstrad CPC
+PPH        Perfect Pix                              Amstrad CPC
+SCR        Advanced OCP Art Studio                  Amstrad CPC
+SGX        SymbOS graphic                           Amstrad CPC
+WIN        Advanced OCP Art Studio                  Amstrad CPC
+HGR        High Resolution                          Apple II
+SPR        Sprites                                  Apple II
+3200       3200                                     Apple IIGS
+3201       3201                                     Apple IIGS
+32K        Multi-palette                            Apple IIGS
+GS         Apple Preferred Format                   Apple IIGS
+IIGS       Apple Preferred Format                   Apple IIGS
+PNT        Apple Preferred Format                   Apple IIGS
+PNT        Paintworks                               Apple IIGS
+SH3        SH3                                      Apple IIGS
+SHR        Apple Preferred Format                   Apple IIGS
+SHR        SHR                                      Apple IIGS
+DHGR       Double High-Resolution                   Apple IIe
+DHR        Double High-Resolution                   Apple IIe
+MAC        MacPaint                                 Apple Macintosh
+PNT        MacPaint                                 Apple Macintosh
+PNTG       MacPaint                                 Apple Macintosh
+256        Paint 256                                Atari 8-bit
+4MI        AtariTools-800 4 missiles                Atari 8-bit
+4PL        AtariTools-800 4 players                 Atari 8-bit
+4PM        AtariTools-800 4 players and 4 missiles  Atari 8-bit
+A4R        Anime 4ever                              Atari 8-bit
+ACS        AtariTools-800 font                      Atari 8-bit
+AGP        AtariTools-800 graphic                   Atari 8-bit
+AGS        Atari Graphics Studio                    Atari 8-bit
+ALL        Graph                                    Atari 8-bit
+AN2        Mad Studio ANTIC 2                       Atari 8-bit
+AN4        Mad Studio ANTIC 4                       Atari 8-bit
+AN5        Mad Studio ANTIC 5                       Atari 8-bit
+AP2        Paint 256                                Atari 8-bit
+AP3        AP3                                      Atari 8-bit
+APA        APA                                      Atari 8-bit
+APC        APC                                      Atari 8-bit
+APL        Atari Player Editor                      Atari 8-bit
+APP        Apac3 Linker-Viewer (SFDN compressed)    Atari 8-bit
+APS        Any Point, Any Color (SFDN compressed)   Atari 8-bit
+APV        APV                                      Atari 8-bit
+ART        Ascii-Art Editor                         Atari 8-bit
+ART        Artist by David Eaton                    Atari 8-bit
+ART        ART                                      Atari 8-bit
+ASC        ASCII maker                              Atari 8-bit
+ASC        Mad Studio Graphics 0                    Atari 8-bit
+BG9        BG9                                      Atari 8-bit
+BGP        Bugbiter APAC239i                        Atari 8-bit
+BKG        Movie Maker background                   Atari 8-bit
+CCI        Champions' Interlace (compressed)        Atari 8-bit
+CHR        Blazing Paddles font                     Atari 8-bit
+CIN        Champions' Interlace                     Atari 8-bit
+CPI        Marco Pixel Editor                       Atari 8-bit
+CPR        Trzmiel (compressed)                     Atari 8-bit
+CUT        Cut Creator                              Atari 8-bit
+DGI        DGI                                      Atari 8-bit
+DGP        DGP                                      Atari 8-bit
+DIN        DIN                                      Atari 8-bit
+DIT        DrawIt                                   Atari 8-bit
+DLM        Dir Logo Maker                           Atari 8-bit
+DRG        Atari CAD                                Atari 8-bit
+ESC        ESC                                      Atari 8-bit
+F80        The Last Word font                       Atari 8-bit
+FGE        Floor Designer                           Atari 8-bit
+FN2        Atari FontMaker                          Atari 8-bit
+FNT        8x8 font                                 Atari 8-bit
+FWA        Fun with Art                             Atari 8-bit
+G09        G09                                      Atari 8-bit
+G10        Graphics 10                              Atari 8-bit
+G11        Graphics 11                              Atari 8-bit
+G2F        Graph2Font                               Atari 8-bit
+G9S        Graphics 9 (SFDN compressed)             Atari 8-bit
+GED        GED                                      Atari 8-bit
+GHG        Gephard Hires Graphics                   Atari 8-bit
+GR0        Mad Studio Graphics 0                    Atari 8-bit
+GR1        Mad Studio Graphics 1                    Atari 8-bit
+GR2        Mad Studio Graphics 2                    Atari 8-bit
+GR3        Mad Studio Graphics 3                    Atari 8-bit
+GR7        Graphics 7                               Atari 8-bit
+GR8        Graphics 8                               Atari 8-bit
+GR9        Graphics 9                               Atari 8-bit
+GR9P       Graphics 9+                              Atari 8-bit
+HCI        HCI                                      Atari 8-bit
+HCM        Hard Color Map                           Atari 8-bit
+HIP        Hard Interlace Picture                   Atari 8-bit
+HPM        Grass' Slideshow                         Atari 8-bit
+HPS        Hard Interlace Picture (SFDN compressed) Atari 8-bit
+HR         HR                                       Atari 8-bit
+HR2        HR2                                      Atari 8-bit
+ICE        Interlace Character Editor font          Atari 8-bit
+ICN        ICE CIN                                  Atari 8-bit
+IGE        Interlace Graphics Editor                Atari 8-bit
+ILC        ILC                                      Atari 8-bit
+ILD        Interlace Logo Designer                  Atari 8-bit
+ILS        APACVIEW (SFDN compressed)               Atari 8-bit
+IMN        ICE MIN                                  Atari 8-bit
+ING        ING 15                                   Atari 8-bit
+INP        InterPainter                             Atari 8-bit
+INS        InterPainter (SFDN compressed)           Atari 8-bit
+INT        INT95a                                   Atari 8-bit
+IP2        ICE PCIN+                                Atari 8-bit
+IPC        ICE PCIN                                 Atari 8-bit
+IR2        Super IRG 2                              Atari 8-bit
+IRG        Super IRG                                Atari 8-bit
+IST        Interlace Studio                         Atari 8-bit
+JGP        Jet Graphics Planner                     Atari 8-bit
+KFX        KFX                                      Atari 8-bit
+KPR        Kompresor do Animatora                   Atari 8-bit
+KSS        KSS-Paint                                Atari 8-bit
+LDM        Ludek Maker                              Atari 8-bit
+LEO        Larka Edytor Obiektów trybu $4+         Atari 8-bit
+LUM        Technicolor Dream                        Atari 8-bit
+MAP        Envision                                 Atari 8-bit
+MAP        EnvisionPC                               Atari 8-bit
+MAX        XL-Paint MAX                             Atari 8-bit
+MBG        Mad Designer                             Atari 8-bit
+MCH        Graph2Font                               Atari 8-bit
+MCM        Multi Color Map                          Atari 8-bit
+MCP        McPainter                                Atari 8-bit
+MCPP       Paradox                                  Atari 8-bit
+MCS        MCS                                      Atari 8-bit
+MGA        MGA                                      Atari 8-bit
+MGP        Magic Painter                            Atari 8-bit
+MIC        Micro Illustrator / Graphics 15          Atari 8-bit
+MIC        AtariGraphics                            Atari 8-bit
+MIC        Graph2Font                               Atari 8-bit
+MIC        RastaConverter                           Atari 8-bit
+MIS        AtariTools-800 missile                   Atari 8-bit
+MPL        Mad Studio multi-color player            Atari 8-bit
+MSL        Mad Studio missile                       Atari 8-bit
+NLQ        Daisy-Dot font                           Atari 8-bit
+ODF        OD Font Editor                           Atari 8-bit
+PGR        PowerGraphics                            Atari 8-bit
+PI8        PI8                                      Atari 8-bit
+PI9        PI9                                      Atari 8-bit
+PIC        Graphic Arts Department                  Atari 8-bit
+PIC        Koala MicroIllustrator                   Atari 8-bit
+PIC        PIC v2                                   Atari 8-bit
+PIC        Visualizer                               Atari 8-bit
+PIX        PIX                                      Atari 8-bit
+PLA        AtariTools-800 player                    Atari 8-bit
+PLM        PLM                                      Atari 8-bit
+PLS        Plama 256 (SFDN compressed)              Atari 8-bit
+PMD        PMG Designer by Henryk Karpowicz         Atari 8-bit
+PSF        Print Shop                               Atari 8-bit
+PZM        PZM                                      Atari 8-bit
+RAP        Vidig Paint                              Atari 8-bit
+RAW        XL-Paint MAX                             Atari 8-bit
+RGB        ColorViewSquash                          Atari 8-bit
+RIP        Rocky Interlace Picture                  Atari 8-bit
+RM0        Rambrandt                                Atari 8-bit
+RM1        Rambrandt                                Atari 8-bit
+RM2        Rambrandt                                Atari 8-bit
+RM3        Rambrandt                                Atari 8-bit
+RM4        Rambrandt                                Atari 8-bit
+RYS        Mamut                                    Atari 8-bit
+SCR        Mad Studio Graphics 0                    Atari 8-bit
+SFD        Graphics 9 (SFDN compressed)             Atari 8-bit
+SG3        Standard Graphics 3                      Atari 8-bit
+SGE        Semi-Graphic logos Editor                Atari 8-bit
+SHC        SAMAR Hi-res Interlace with Map of Colours Atari 8-bit
+SHP        Blazing Paddles shape table              Atari 8-bit
+SHP        Movie Maker shapes                       Atari 8-bit
+SIF        Super-IRG Font                           Atari 8-bit
+SKP        Sketch-PadDles                           Atari 8-bit
+SPC        The Graphics Magician Picture Painter    Atari 8-bit
+SPR        Mad Studio sprite                        Atari 8-bit
+SPR        SprEd                                    Atari 8-bit
+SXS        16x16 font                               Atari 8-bit
+TIP        Taquart Interlace Picture                Atari 8-bit
+TL4        Mad Studio ANTIC 4 tile                  Atari 8-bit
+TX0        Texture Maker0 16x16x16                  Atari 8-bit
+TXE        Texture Editor by Mikey                  Atari 8-bit
+TXS        TXS                                      Atari 8-bit
+VSC        Graph2Font vertical scroll               Atari 8-bit
+VZI        VertiZontal Interlacing                  Atari 8-bit
+WND        Blazing Paddles window                   Atari 8-bit
+XLP        XL-Paint                                 Atari 8-bit
+ZM4        Zoom-4 graphics editor                   Atari 8-bit
+DAP        SlideShow for VBXE                       Atari 8-bit VBXE
+G2F        Graph2Font                               Atari 8-bit VBXE
+B&W        ImageLab                                 Atari Falcon
+BP6        UIMG                                     Atari Falcon
+BP8        UIMG                                     Atari Falcon
+B_W        ImageLab                                 Atari Falcon
+C06        UIMG                                     Atari Falcon
+C08        UIMG                                     Atari Falcon
+C16        UIMG                                     Atari Falcon
+C24        UIMG                                     Atari Falcon
+C32        UIMG                                     Atari Falcon
+DC1        DuneGraph (compressed)                   Atari Falcon
+DEL        DelmPaint                                Atari Falcon
+DG1        DuneGraph                                Atari Falcon
+DPH        DelmPaint                                Atari Falcon
+ESM        TmS Cranach Paint/Studio                 Atari Falcon
+FTC        Falcon True Color                        Atari Falcon
+FUN        Funny Paint                              Atari Falcon
+GOD        GodPaint                                 Atari Falcon
+HIR        Print-Technik                            Atari Falcon
+IB3        ICDRAW icon                              Atari Falcon
+IBI        ICDRAW icon                              Atari Falcon
+IIM        InShape                                  Atari Falcon
+PI4        Fuckpaint                                Atari Falcon
+PI7        Fuckpaint                                Atari Falcon
+PI9        Fuckpaint                                Atari Falcon
+PIX        PixArt                                   Atari Falcon
+PNT        Prism Paint                              Atari Falcon
+RAG        RAG-D                                    Atari Falcon
+RAGC       Music Compile 2                          Atari Falcon
+RAW        IMG Scan                                 Atari Falcon
+RWH        IMG Scan                                 Atari Falcon
+RWL        IMG Scan                                 Atari Falcon
+TCP        Rembrandt                                Atari Falcon
+TG1        COKE                                     Atari Falcon
+TIMG       TIMG                                     Atari Falcon
+TPI        Prism Paint                              Atari Falcon
+TRE        Spooky Sprites (compressed)              Atari Falcon
+TRP        EggPaint                                 Atari Falcon
+TRP        Spooky Sprites                           Atari Falcon
+TRU        IndyPaint                                Atari Falcon
+XGA        XGA                                      Atari Falcon
+PGC        PGC                                      Atari Portfolio
+PGF        PGF                                      Atari Portfolio
+ART        Art Director                             Atari ST/STE
+ART        GFA Artist                               Atari ST/STE
+ART        Palette Master                           Atari ST/STE
+ART        Doodle                                   Atari ST/STE
+BIL        ColorSTar                                Atari ST/STE
+BL1        DEGAS Elite block                        Atari ST/STE
+BL2        DEGAS Elite block                        Atari ST/STE
+BL3        DEGAS Elite block                        Atari ST/STE
+BLD        MegaPaint                                Atari ST/STE
+BP1        UIMG                                     Atari ST/STE
+BP2        UIMG                                     Atari ST/STE
+BP4        UIMG                                     Atari ST/STE
+BRU        DEGAS Elite brush                        Atari ST/STE
+C01        UIMG                                     Atari ST/STE
+C02        UIMG                                     Atari ST/STE
+C04        UIMG                                     Atari ST/STE
+CA1        CrackArt                                 Atari ST/STE
+CA2        CrackArt                                 Atari ST/STE
+CA3        CrackArt                                 Atari ST/STE
+CE1        ComputerEyes                             Atari ST/STE
+CE2        ComputerEyes                             Atari ST/STE
+CE3        ComputerEyes                             Atari ST/STE
+CEL        Cyber Paint Cell                         Atari ST/STE
+CL0        Paintworks                               Atari ST/STE
+CL1        Paintworks                               Atari ST/STE
+CL2        Paintworks                               Atari ST/STE
+CMP        Public Painter                           Atari ST/STE
+COL        Atari Image Manager                      Atari ST/STE
+CP3        Picworks                                 Atari ST/STE
+CPT        Canvas (compressed)                      Atari ST/STE
+CPT        Canvas (raster)                          Atari ST/STE
+CRG        Calamus Raster Graphic                   Atari ST/STE
+DA4        PaintShop                                Atari ST/STE
+DOO        Doodle                                   Atari ST/STE
+DU1        DU1                                      Atari ST/STE
+DU2        DU2                                      Atari ST/STE
+DUO        DUO                                      Atari ST/STE
+EZA        EZ-Art Professional                      Atari ST/STE
+FLF        Turbo Rascal Syntax Error                Atari ST/STE
+FNT        8x16 font                                Atari ST/STE
+FNT        GDOS font                                Atari ST/STE
+FUL        Canvas (raster)                          Atari ST/STE
+GFB        DeskPic                                  Atari ST/STE
+GRX        Grafix                                   Atari ST/STE
+HPK        Dali (compressed)                        Atari ST/STE
+HRM        HighresMedium                            Atari ST/STE
+IC1        Imagic                                   Atari ST/STE
+IC2        Imagic                                   Atari ST/STE
+IC3        Imagic                                   Atari ST/STE
+ICN        DEGAS Elite icon                         Atari ST/STE
+IFF        Interchange File Format                  Atari ST/STE
+IM         Atari Image Manager                      Atari ST/STE
+IMG        GEM Bit Image                            Atari ST/STE
+KID        Fullscreen Construction Kit              Atari ST/STE
+LPK        Dali (compressed)                        Atari ST/STE
+MPK        Dali (compressed)                        Atari ST/STE
+MPP        Multi Palette Picture                    Atari ST/STE
+MUR        C.O.L.R. Object Editor                   Atari ST/STE
+NEO        NEOchrome                                Atari ST/STE
+NEO        NEOchrome Master                         Atari ST/STE
+NEO        NEOchrome Master                         Atari ST/STE
+OBJ        ColorSTar object                         Atari ST/STE
+OBJ        MonoSTar object                          Atari ST/STE
+P3C        D-GRAPH (compressed)                     Atari ST/STE
+PA3        Pablo Paint 2.5                          Atari ST/STE
+PAC        STAD                                     Atari ST/STE
+PBX        QuantumPaint                             Atari ST/STE
+PC1        DEGAS Elite                              Atari ST/STE
+PC2        DEGAS Elite                              Atari ST/STE
+PC3        DEGAS Elite                              Atari ST/STE
+PCI        Tobias Richter Fullscreen Slideshow      Atari ST/STE
+PCS        PhotoChrome                              Atari ST/STE
+PG0        Paintworks                               Atari ST/STE
+PG1        Graphics Processor                       Atari ST/STE
+PG1        Paintworks                               Atari ST/STE
+PG2        Graphics Processor                       Atari ST/STE
+PG2        Paintworks                               Atari ST/STE
+PG3        Graphics Processor                       Atari ST/STE
+PI1        DEGAS                                    Atari ST/STE
+PI2        DEGAS                                    Atari ST/STE
+PI3        DEGAS                                    Atari ST/STE
+PIC        PaintPro ST                              Atari ST/STE
+PL4        PL4                                      Atari ST/STE
+PPP        Pablo Paint 1.1                          Atari ST/STE
+PSC        PaintShop (compressed)                   Atari ST/STE
+RGB        RGB Intermediate                         Atari ST/STE
+RGH        ZZ_ROUGH                                 Atari ST/STE
+SC0        Paintworks                               Atari ST/STE
+SC1        Paintworks                               Atari ST/STE
+SC2        Paintworks                               Atari ST/STE
+SD0        Dali                                     Atari ST/STE
+SD1        Dali                                     Atari ST/STE
+SD2        Dali                                     Atari ST/STE
+SPC        Spectrum 512 (compressed)                Atari ST/STE
+SPS        Spectrum 512 (smooshed)                  Atari ST/STE
+SPU        Spectrum 512                             Atari ST/STE
+SPU        Spectrum 512 (enhanced)                  Atari ST/STE
+SPX        Spectrum 512 (extended)                  Atari ST/STE
+SRT        Synthetic Arts                           Atari ST/STE
+SSB        Sinbad Slideshow                         Atari ST/STE
+SUH        DEGAS                                    Atari ST/STE
+TN1        Tiny Stuff                               Atari ST/STE
+TN2        Tiny Stuff                               Atari ST/STE
+TN3        Tiny Stuff                               Atari ST/STE
+TN4        Tiny Stuff                               Atari ST/STE
+TN5        Tiny Stuff                               Atari ST/STE
+TN6        Tiny Stuff                               Atari ST/STE
+TNY        Tiny Stuff                               Atari ST/STE
+XIMG       Extended GEM Bit Image                   Atari ST/STE
+PI4        PI4                                      Atari TT
+PI5        PI5                                      Atari TT
+PI6        PI6                                      Atari TT
+BB0        Mode 0                                   BBC Micro
+BB1        Mode 1                                   BBC Micro
+BB2        Mode 2                                   BBC Micro
+BB4        Mode 4                                   BBC Micro
+BB5        Mode 5                                   BBC Micro
+BBG        LdPic                                    BBC Micro
+FLF        Turbo Rascal Syntax Error                BBC Micro
+BM         VDC BitMap                               Commodore 128
+BRUS       BASIC 8                                  Commodore 128
+IP         I Paint                                  Commodore 128
+PICT       BASIC 8                                  Commodore 128
+VBM        VDC BitMap                               Commodore 128
+P4I        Botticelli                               Commodore 16/116/Plus4
+P4I        Multi Botticelli                         Commodore 16/116/Plus4
+P4I        P4I                                      Commodore 16/116/Plus4
+4BT        GoDot                                    Commodore 64
+64C        8x8 font                                 Commodore 64
+A          SEUCK sprites                            Commodore 64
+A64        Wigmore Artist 64                        Commodore 64
+AAS        Art Studio                               Commodore 64
+AFL        AFLI-editor                              Commodore 64
+AMI        Amica Paint                              Commodore 64
+ART        Art Studio                               Commodore 64
+BDP        Boogie Down Paint                        Commodore 64
+BED        Dolphin Ed                               Commodore 64
+BFL        Big FLI                                  Commodore 64
+BFLI       Big FLI                                  Commodore 64
+BML        FLI Graph                                Commodore 64
+BPL        Blazing Paddles                          Commodore 64
+BS         Printfox                                 Commodore 64
+CDU        CDU-Paint                                Commodore 64
+CFLI       CFLI Designer                            Commodore 64
+CGX        Commodore Grafix                         Commodore 64
+CHE        Cheese                                   Commodore 64
+CLE        Centauri Logo-Editor                     Commodore 64
+CLP        GoDot clip                               Commodore 64
+CS         Star Painter                             Commodore 64
+CTM        CharPad                                  Commodore 64
+CWG        Create with Garfield                     Commodore 64
+DD         Doodle                                   Commodore 64
+DDP        Doodle                                   Commodore 64
+DLP        Drazlace                                 Commodore 64
+DOL        Dolphin Ed                               Commodore 64
+DRL        Drazlace                                 Commodore 64
+DRP        Drazpaint                                Commodore 64
+DRZ        Drazpaint                                Commodore 64
+ECI        ECI Graphic Editor                       Commodore 64
+ECP        ECI Graphic Editor (compressed)          Commodore 64
+EMC        EMC-editor                               Commodore 64
+ESH        Extend Super Hires Interlace Editor      Commodore 64
+FBI        Flip                                     Commodore 64
+FCP        Face Painter                             Commodore 64
+FD2        FLI Designer                             Commodore 64
+FED        FLI Editor                               Commodore 64
+FFL        Flash FLI                                Commodore 64
+FFLI       Flash FLI                                Commodore 64
+FGS        Hires-Bitmap                             Commodore 64
+FLF        Turbo Rascal Syntax Error                Commodore 64
+FLG        FLI Graph                                Commodore 64
+FLI        FLI Graph                                Commodore 64
+FLI        FLI                                      Commodore 64
+FLM        Flimatic                                 Commodore 64
+FLY        Picasso 64                               Commodore 64
+FP         Fuckpaint                                Commodore 64
+FP2        Funpaint                                 Commodore 64
+FPR        FLI Profi                                Commodore 64
+FPT        Face Painter                             Commodore 64
+FUN        Funpaint                                 Commodore 64
+G          SEUCK font                               Commodore 64
+GB         Printfox                                 Commodore 64
+GCD        GCD                                      Commodore 64
+GG         Koala Painter (compressed)               Commodore 64
+GIG        Interpaint                               Commodore 64
+GIG        Koala Painter                            Commodore 64
+GIH        Run Paint                                Commodore 64
+GR         Star Painter                             Commodore 64
+GUN        Gunpaint                                 Commodore 64
+HBM        Hires-Bitmap                             Commodore 64
+HCB        HCB-editor                               Commodore 64
+HED        Hi-Eddi                                  Commodore 64
+HET        Hires-Editor                             Commodore 64
+HFC        Hires FLI Designer                       Commodore 64
+HFD        Hires FLI Designer                       Commodore 64
+HIE        Hires Interlace                          Commodore 64
+HIM        Hires Manager                            Commodore 64
+HIR        Hires-Bitmap                             Commodore 64
+HLE        Hireslace Editor                         Commodore 64
+HLF        Hires Interlace                          Commodore 64
+HPC        Hi-Pic Creator                           Commodore 64
+HPI        Hires-Bitmap                             Commodore 64
+HPI        Interpaint                               Commodore 64
+HRE        Interpaint                               Commodore 64
+IFL        Gunpaint                                 Commodore 64
+IHE        Interlace Hires Editor                   Commodore 64
+ILE        Interlaced Logo Editor                   Commodore 64
+IPH        Interpaint                               Commodore 64
+IPT        Interpaint                               Commodore 64
+ISH        Image System                             Commodore 64
+ISH        Interlace-Super-Hires Painter            Commodore 64
+ISM        Image System                             Commodore 64
+JJ         Doodle (compressed)                      Commodore 64
+KLA        Koala Painter                            Commodore 64
+KOA        Koala Painter                            Commodore 64
+LP3        Logo Painter 3/3+                        Commodore 64
+LRE        Interpaint                               Commodore 64
+MCI        True Paint                               Commodore 64
+MIL        Micro Illustrator                        Commodore 64
+MLE        Multi-Lace Editor                        Commodore 64
+MON        MON                                      Commodore 64
+MPI        Advanced Art Studio                      Commodore 64
+MPIC       Advanced Art Studio                      Commodore 64
+MUF        MUFLI Editor                             Commodore 64
+MUI        MUIFLI Editor                            Commodore 64
+MUP        MUFLI Editor (compressed)                Commodore 64
+MWI        Art Studio window                        Commodore 64
+MWIN       Art Studio window                        Commodore 64
+NUF        NUFLI Editor                             Commodore 64
+NUP        NUFLI Editor (compressed)                Commodore 64
+OCP        Advanced Art Studio                      Commodore 64
+P64        Picasso 64                               Commodore 64
+PBOT       PETSCII BOT                              Commodore 64
+PDR        PetDraw64                                Commodore 64
+PET        C64 OS screenshot v2                     Commodore 64
+PET        PETSCII Editor                           Commodore 64
+PG         Pagefox                                  Commodore 64
+PI         Blazing Paddles                          Commodore 64
+PMG        Paint Magic                              Commodore 64
+PP         Pixel Perfect                            Commodore 64
+PPP        Pixel Perfect (compressed)               Commodore 64
+RP         Rainbow Painter                          Commodore 64
+RPH        Run Paint                                Commodore 64
+RPM        Run Paint                                Commodore 64
+RPO        Run Paint                                Commodore 64
+SAR        Saracen Paint                            Commodore 64
+SCR        PETSCII Editor                           Commodore 64
+SH1        Super-hires Editor I                     Commodore 64
+SH2        Super-hires Editor II                    Commodore 64
+SHE        Super Hires Editor                       Commodore 64
+SHE        Super Hires Editor 2                     Commodore 64
+SHF        Super Hires FLI Editor                   Commodore 64
+SHI        Super Hires Interlace Editor             Commodore 64
+SHP        Loadstar                                 Commodore 64
+SHS        Super Hires Studio                       Commodore 64
+SHX        SHF-XL Edit                              Commodore 64
+SIF        Super Hires Interlace FLI Editor         Commodore 64
+SPD        SpritePad                                Commodore 64
+UFL        UFLI-editor                              Commodore 64
+UIF        UIFLI-editor                             Commodore 64
+VHI        Vertical Hires Interlace Editor          Commodore 64
+VIC        VIC                                      Commodore 64
+VID        Vidcom 64                                Commodore 64
+WIG        Wigmore Artist 64                        Commodore 64
+XFL        X-FLI Editor                             Commodore 64
+ZOM        Zoomatic                                 Commodore 64
+ZS         Star Painter font                        Commodore 64
+BP         Best Paint                               Commodore VIC-20
+FLF        Turbo Rascal Syntax Error                Commodore VIC-20
+MG         MINIPAINT                                Commodore VIC-20
+PIC0       Picasso                                  Commodore VIC-20
+BKS        BKS                                      Electronika BK
+PIC        PIC                                      Electronika BK
+SCR        SCR                                      Electronika MC 0515
+PI         PI                                       FM Towns
+PIC        PIC                                      FM Towns
+GRB        GROB                                     HP 48
+GRO        GROB                                     HP 48
+GRP        Screen 2                                 MSX
+SC2        Screen 2                                 MSX
+SC3        Screen 3                                 MSX
+G9B        GFX9k                                    MSX V9990 VDP
+CMP        Dot Designer's Club (DD-Graph)           MSX2
+FNT        Dynamic Publisher font                   MSX2
+GE5        Screen 5                                 MSX2
+GE7        Screen 7                                 MSX2
+GE8        Screen 8                                 MSX2
+GL5        GL5                                      MSX2
+GL6        GL6                                      MSX2
+GL7        GL7                                      MSX2
+GL8        GL8                                      MSX2
+MAG        Maki-chan Graphics                       MSX2
+MAX        Maki-chan Graphics                       MSX2
+MIF        MSX Interchange Format                   MSX2
+MIG        MIG                                      MSX2
+PCT        Dynamic Publisher screen                 MSX2
+PI         PI                                       MSX2
+PIC        YPIC                                     MSX2
+PIC        Screen 8                                 MSX2
+SC4        Screen 4                                 MSX2
+SC5        Screen 5                                 MSX2
+SC5        Screen 5 interlaced                      MSX2
+SC6        Screen 6                                 MSX2
+SC6        Screen 6 interlaced                      MSX2
+SC7        Screen 7                                 MSX2
+SC7        Screen 7 interlaced                      MSX2
+SC8        Screen 8                                 MSX2
+SC8        Screen 8 interlaced                      MSX2
+SH5        SH5                                      MSX2
+SH6        SH6                                      MSX2
+SH7        SH7                                      MSX2
+SH8        SH8                                      MSX2
+SR5        Graph Saurus                             MSX2
+SR6        Graph Saurus                             MSX2
+SR7        Graph Saurus                             MSX2
+SR8        Graph Saurus                             MSX2
+SRI        Graph Saurus                             MSX2
+STP        Dynamic Publisher stamp                  MSX2
+GLA        GLA                                      MSX2+
+GLB        GLB                                      MSX2+
+GLC        GLC                                      MSX2+
+GLS        GLS                                      MSX2+
+SCA        Screen 10                                MSX2+
+SCA        Screen 10 interlaced                     MSX2+
+SCB        Screen 10                                MSX2+
+SCC        Screen 12                                MSX2+
+SCC        Screen 12 interlaced                     MSX2+
+SHA        SHA                                      MSX2+
+SHB        SHB                                      MSX2+
+SHC        SHC                                      MSX2+
+SRA        Screen 10                                MSX2+
+SRS        Screen 12                                MSX2+
+YJK        Screen 12                                MSX2+
+MAG        Maki-chan Graphics                       NEC PC-80
+IMG        ArtMaster88                              NEC PC-88
+IMG        DaVinci                                  NEC PC-88
+KTY        Kitty                                    NEC PC-88
+MAG        Maki-chan Graphics                       NEC PC-88
+PI         PI                                       NEC PC-88
+KT4        Kitty                                    NEC PC-88 VA
+MAG        Maki-chan Graphics                       NEC PC-88 VA
+PIC        PIC                                      NEC PC-88 VA
+ARV        ARTV                                     NEC PC-98
+EBD        EBD                                      NEC PC-98
+MAG        Maki-chan Graphics                       NEC PC-98
+MKI        Maki-chan Graphics                       NEC PC-98
+ML1        Mapletown Network ML1                    NEC PC-98
+MX1        Mapletown Network MX1                    NEC PC-98
+NL3        Mapletown Network NL3                    NEC PC-98
+PI         PI                                       NEC PC-98
+Q4         XLD4                                     NEC PC-98
+ZIM        Z's Staff Kid98                          NEC PC-98
+CHS        6x8 font                                 Oric
+HIR        HIR                                      Oric
+HRS        HRS                                      Oric
+EPA        Award BIOS logo                          PC
+FLF        Turbo Rascal Syntax Error                PC
+FNT        Image 72 font                            PC
+HS2        Handy Scanner 2000 POSTERING             PC
+MSP        Microsoft Paint version 1 or 2           PC
+TIM        TIM                                      PlayStation
+ICN        ICN                                      Psion Series 3
+PIC        PIC                                      Psion Series 3
+LCE        LCE                                      SAM Coupe
+SCS4       Mode 4                                   SAM Coupe
+SS1        Mode 1                                   SAM Coupe
+SS2        Mode 2                                   SAM Coupe
+SS3        Mode 3                                   SAM Coupe
+SS4        Mode 4                                   SAM Coupe
+SSX        SSX                                      SAM Coupe
+MAG        Maki-chan Graphics                       Sharp X68000
+PIC        PIC                                      Sharp X68000
+HR         HR                                       TRS-80
+RLE        CompuServe RLE                           TRS-80
+SHR        MagicDraw                                TRS-80
+CLP        CLP                                      TRS-80 Color Computer
+GRF        GRF                                      TRS-80 Color Computer
+MAX        MAX                                      TRS-80 Color Computer
+P11        P11                                      TRS-80 Color Computer
+P41        P41                                      TRS-80 Color Computer
+PIX        PIX                                      TRS-80 Color Computer
+PNT        DeskMate Paint                           Tandy 1000
+HRG        Hi-res Gigascreen                        Timex 2048
+SCR        Hi-color                                 Timex 2048
+SCR        Hi-res                                   Timex 2048
+THC        Hi-color                                 Timex 2048
+THR        Hi-res                                   Timex 2048
+SPR        256                                      Vector-06C
+SXG        Speccy eXtended Graphics                 ZX Evolution
+3          3                                        ZX Spectrum
+ATR        Attributes                               ZX Spectrum
+BMC4       Border Screen Multicolor 8x4             ZX Spectrum
+BSC        Border Screen                            ZX Spectrum
+BSP        Border Screen by Trefi                   ZX Spectrum
+CH$        CHR$                                     ZX Spectrum
+CH4        4x8 font                                 ZX Spectrum
+CH6        6x8 font                                 ZX Spectrum
+CH8        8x8 font                                 ZX Spectrum
+CHX        Big font                                 ZX Spectrum
+FLF        Turbo Rascal Syntax Error                ZX Spectrum
+GSC        Gigascreen                               ZX Spectrum
+HLR        Attributes Gigascreen                    ZX Spectrum
+IFL        Multicolor 8x2                           ZX Spectrum
+IMG        Gigascreen                               ZX Spectrum
+MC         Multicolor 8x1                           ZX Spectrum
+MG1        MultiArtist 8x1                          ZX Spectrum
+MG2        MultiArtist 8x2                          ZX Spectrum
+MG4        MultiArtist 8x4                          ZX Spectrum
+MG8        MultiArtist 8x8                          ZX Spectrum
+MLT        MLT                                      ZX Spectrum
+RGB        RGB                                      ZX Spectrum
+SCR        Gigascreen                               ZX Spectrum
+SCR        SCR                                      ZX Spectrum
+SEV        SevenuP                                  ZX Spectrum
+STL        Stellar                                  ZX Spectrum
+ZXP        ZX-Paintbrush                            ZX Spectrum
+ZXS        SpecSCII                                 ZX Spectrum
+NXI        NXI                                      ZX Spectrum Next
+GRF        Profi                                    ZX Spectrum Profi
+SCR        ULAplus                                  ZX Spectrum ULAplus
+SCR        Timex hi-color ULAplus                   ZX Spectrum ULAplus
+TCU        Timex hi-color ULAplus                   ZX Spectrum ULAplus
+RAD        Radastan                                 ZX-Uno
+SCR        Radastan                                 ZX-Uno
+P          Sinclair BASIC                           ZX81
+RAW        ZXPaintyONE v2.0                         ZX81
+ZP1        ZXpaintyONE                              ZX81
+546        HGFX PAL546                              eLeMeNt ZX
+HAM        HGFX HAM                                 eLeMeNt ZX
+HGH        HGFX High                                eLeMeNt ZX
+HGL        HGFX Low                                 eLeMeNt ZX
+HGS        HiResColor Gigascreen                    eLeMeNt ZX
+HKL        HiResColor/KeyLayer                      eLeMeNt ZX
+HRC        HiResColor                               eLeMeNt ZX
+HRX        HiResindeXedColor                        eLeMeNt ZX
+SCR        HiResColor Gigascreen                    eLeMeNt ZX
+SCR        HiResColor/KeyLayer                      eLeMeNt ZX
+SCR        HiResColor                               eLeMeNt ZX
+SCR        HiResindeXedColor                        eLeMeNt ZX
+SCR        KeyLayer                                 eLeMeNt ZX
+SCR        HiResindeXedColor/KeyLayer               eLeMeNt ZX
+SHR        HGFX Ultra                               eLeMeNt ZX
+SKL        KeyLayer                                 eLeMeNt ZX
+XKL        HiResindeXedColor/KeyLayer               eLeMeNt ZX
+
 
 
 >>> 7-zip 7zip sevenZip  (run 7z i)

@@ -6,7 +6,7 @@ import {C} from "../../C.js";
 // these codes are known to match lots of random files based on current dexvert test samples, so just exclude them entirely from appearing
 const _WEAK_PREFIX_CODES =
 {
-	35 : ["NoExt_"],
+	40 : ["NoExt_"],
 	30 : ["BIN_", "DAT_", "NoExt_", "PAK_"],
 	25 : ["RES_", "WAD_"]
 };
@@ -50,4 +50,5 @@ export class gameextractorID extends Program
 		}
 	};
 	renameOut = false;
+	notes     = "Server version of gameextract vibe coded with claude code";
 }

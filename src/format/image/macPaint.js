@@ -1,13 +1,24 @@
 import {Format} from "../../Format.js";
 import {TEXT_MAGIC} from "../../Detection.js";
+import {flexMatch} from "../../identify.js";
+
+const MAGICS = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)", "Apple Macintosh MacPaint :mac:", /^fmt\/(161|1429)( |$)/, /^x-fmt\/161( |$)/];
+const WEAK_MAGIC = ["deark: macpaint"];
 
 export class macPaint extends Format
 {
-	name           = "MacPaint Image";
-	website        = "http://fileformats.archiveteam.org/wiki/MacPaint";
-	ext            = [".mac", ".pntg", ".pic", ".macp", ".pnt"];
-	forbidExtMatch = [".pic"];
-	magic          = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)", "deark: macpaint", "Apple Macintosh MacPaint :mac:", /^fmt\/(161|1429)( |$)/, /^x-fmt\/161( |$)/];
+	name             = "MacPaint Image";
+	website          = "http://fileformats.archiveteam.org/wiki/MacPaint";
+	ext              = [".mac", ".pntg", ".pic", ".macp", ".pnt"];
+	forbidExtMatch   = [".pic"];
+	magic            = [...MAGICS, ...WEAK_MAGIC];
+	confidenceAdjust = (inputFile, matchType, curConfidence, {detections}) =>
+	{
+		if(matchType!=="magic" || detections.filter(detection => MAGICS.some(m => flexMatch(detection.value, m))).length)
+			return 0;
+
+		return detections.filter(detection => WEAK_MAGIC.some(m => flexMatch(detection.value, m))).length ? -1 : 0;
+	};
 	//weakMagic      = ["deark: macpaint", /^x-fmt\/161( |$)/];
 	idMeta         = ({macFileType}) => macFileType==="PNTG";
 	mimeType       = "image/x-macpaint";

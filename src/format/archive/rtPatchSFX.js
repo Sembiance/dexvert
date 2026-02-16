@@ -6,6 +6,6 @@ export class rtPatchSFX extends Format
 	website        = "http://justsolve.archiveteam.org/wiki/RTPatch";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["RTPatch SFX"];
+	magic          = ["overlay: RTPatch SFX"];
 	converters     = ["dosEXEExtract"];
 }

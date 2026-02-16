@@ -1,6 +1,6 @@
 EXT        FORMAT_ID                FORMAT                                   PLATFORM
 ---        ---------                ------                                   --------
-ART        ART.MonoArt              ART                                      Atari 8-bit
+ART        ART.MonoArt              ART                                      Atari 8-bit  (see sandbox/fail/DOG.ART)
 ASC        ASC                      ASCII maker                              Atari 8-bit
 HR2        HR2                      HR2                                      Atari 8-bit
 MCM        MCM                      Multi Color Map                          Atari 8-bit

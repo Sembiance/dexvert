@@ -5,6 +5,6 @@ export class authorwareEXE extends Format
 	name           = "Authorware Wrapped EXE";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["AuthorwareEXE"];
-	converters     = ["exeUnPostContent[idstring:PCRS][ext:.app]"];	// probably more idstrings possible
+	magic          = ["overlay: archive/authorware"];
+	converters     = ["exeOverlayExtract[ext:.app] -> dexvert[asFormat:archive/authorware]"];
 }

@@ -6,6 +6,6 @@ export class diskExpressSFX extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Disk_Express";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["Disk Express SFX", "16bit DOS Disk eXPress SFX disk image Executable"];
+	magic          = ["overlay: Disk Express SFX", "16bit DOS Disk eXPress SFX disk image Executable"];
 	converters     = ["deark[module:dskexp]", "diskExpressSFX"];
 }

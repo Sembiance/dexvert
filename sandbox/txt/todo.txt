@@ -17,24 +17,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update recoil2png to support a 'format' flag that passes it as --format=format
-  Go through every program that uses recoil2png
-	First search and handle these: recoil2png[
-	Then search and handle these (with regex on in src/format): recoil2png[^\]]
-  Run a `recoil2png --verbose <file>` for each one, add [format:<format>] to the converter list
-  Remove the item from the list in scratchpad.txt
-  Once all done, sync to dexdrone0, run testMany for 'font' then for 'image' and make sure everything still working ok
-  Finally look at the remaining list of extensions and see if I already support in dexvert or if I can find samples to add support
-
-* Create a new 'detect' app, that only works on exe's for now, call it like 'overlayID'
-  Ge claude to check my existing dexUtil.getEXEOverlayOffset but ensure it has full support for all exe types with no bugs
-  Update that dexUtil to be dexUtil.extractEXEOverlay(inputFilePath, outputFilePath)
-  Update exeUnPostContent to just be an 'exec = async r => {}' section instead of a bin/ program
-  The detection program will extract that extra portion of data at the end of an exe and save it to a tmp file then run that through 'identify'
-  Then report back those detections as Overlay: <detection>
-  Then I can get rid of dexmagic.exeAppended and those things in there should be detected by the new detection app
-  So update those formats with the proper 'Overlay: <whatever>' magic
-	Exaine: https://gemini.google.com/app/1d58c08e3b5d457b
 
 
 /---------------\

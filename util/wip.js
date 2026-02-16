@@ -16,6 +16,7 @@ import {xmlParse} from "denoLandX";
 import {initRegistry} from "../src/dexUtil.js";
 import {C} from "../src/C.js";
 import {WEAK_VALUES} from "../src/WEAK.js";
+import {extractEXEOverlay} from "../src/exeOverlayUtil.js";
 
 const xlog = new XLog("info");
 

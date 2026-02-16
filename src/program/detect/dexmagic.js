@@ -3,7 +3,6 @@ import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {path} from "std";
-import {getEXEOverlayOffset} from "../../dexUtil.js";
 
 // Below are a couple additional detections based on magic numbers and other criteria that other identifiers like trid, file, etc. all miss
 // All offsets matches must match 'match' property
@@ -389,30 +388,6 @@ const DEXMAGIC_CUSTOMS = [
 		//	return;
 
 		return `Escal Compressed`;
-	},
-
-	async function exeAppended(r)
-	{
-		const overlayStartOffset = await getEXEOverlayOffset(r.f.input.absolute, r.f.input.size);
-
-		const overlayIDs =
-		[
-			{id : "BIKi",    name : "BinkEXE"},
-			{id : "PCRS",    name : "AuthorwareEXE"},
-			{id : "AS",      name : "Disk Express SFX", offset : 4},
-			{id : "JRchive", name : "JRchive SFX"},
-			{id : "KJd",     name : "RTPatch SFX"}
-		];
-
-		const overlayIDBuf = await fileUtil.readFileBytes(r.f.input.absolute, overlayIDs.map(o => o.id.length+(o.offset||0)).max(), overlayStartOffset);
-		for(const {id, name, offset=0} of overlayIDs)
-		{
-			if(overlayIDBuf.length<(id.length+offset))
-				continue;
-
-			if(overlayIDBuf.getString(offset, id.length)===id)
-				return name;
-		}
 	},
 	
 	async function fmTownsSND(r)

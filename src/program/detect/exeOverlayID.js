@@ -23,8 +23,12 @@ export class exeOverlayID extends Program
 		{
 			if(from!=="dexvert" || matchType!=="magic")
 				continue;
+
+			const dexid = `${family}/${formatid}`;
+			if(["other/nullBytes"].includes(dexid))
+				continue;
 			
-			r.meta.detections.push(Detection.create({value : `overlay: ${family}/${formatid}`, from : "exeOverlayID", confidence : 100, file : r.f.input}));
+			r.meta.detections.push(Detection.create({value : `overlay: ${dexid}`, from : "exeOverlayID", confidence : 100, file : r.f.input}));
 		}
 
 		const overlayIDs =

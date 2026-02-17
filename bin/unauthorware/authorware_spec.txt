@@ -6,7 +6,8 @@ Covers: .app (Authorware 1.x/Star packaged), .apr (Authorware 1.x/Star library),
         .apw/.asw (Authorware 2.x Windows), .aas (Authorware segments),
         .a3m (Authorware 3.x Mac), .a3w (Authorware 3.x Windows),
         .a4p, .a5p, .a6p, .a7p (packaged),
-        and .a4r, .a5r, .a6r, .a7r (library)
+        .a4r, .a5r, .a6r, .a7r (library),
+        and EXE-appended PCRS files
 Reverse-engineered from Macromedia Authorware 1.x/2.x/3.x/4.x/5.x/6.x/7.x sample files.
 
 Overview
@@ -99,6 +100,19 @@ actual file size on disk.
   (A5R-style)     5                 0xFFFFFFF8              10 bytes (PCRS)
   (A6R-style)     6                 0xFFFFFFF6/0xFFFFFFF7   10 bytes (PCRS)
 
+EXE-appended files are Authorware PCRS data that was originally appended
+to a Windows EXE runtime stub. When the EXE stub is stripped, the
+remaining PCRS data retains header offsets (table_offset, file_size) and
+entry data_offset values that reference positions within the original
+combined EXE file. To extract these files, a base offset must be
+computed: base_offset = header_file_size - actual_file_size. This base
+is subtracted from table_offset and all entry data_offset values. The
+adjusted table_offset is always 0x6A (standard PCRS position). Both
+10-byte PCRS and 30-byte ACRS entry formats are used, determined by the
+same entry_count * 30 vs table_total_size heuristic. EXE-appended files
+are distinguished from segment files (which also have file_size >
+actual_size) by their table_offset being != 0x6A before adjustment.
+
 Both formats share the same 64-byte header structure, icon type system,
 compression scheme, and data extraction logic. They store a collection
 of "icons" (display elements, interactions, scripts, images, text, etc.)
@@ -174,7 +188,8 @@ Offset  Size  Type      Description
 0x10    16    bytes     File metadata / checksum (may be zeros or 0xCC fill)
 0x20    4     uint32    Format version (4 for APP/APW v4/A3W/A3M,
                         2 for APW/ASW v2, 5 for A4P/A5P, 6 for A6P/A7P)
-0x24    4     uint32    File size in bytes (matches actual file size)
+0x24    4     uint32    File size in bytes (matches actual file size, except for
+                        segment files and EXE-appended files; see those sections)
 0x28    4     uint32    Total uncompressed data size
 0x2C    4     uint32    Table region total size (entry table + secondary table)
 0x30    4     uint32    Entry count (number of icon entries)

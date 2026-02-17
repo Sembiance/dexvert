@@ -209,7 +209,6 @@ export const WEAK_VALUES =
 	/^deark: rodraw$/,
 	/^deark: sauce$/,
 	/^deark: tivariable/,
-	/^deark: tga \(TGA\)$/,
 	/^deark: zlib$/,
 
 	// Detect-It-Easy
@@ -496,7 +495,6 @@ export const WEAK_VALUES =
 	/^NewsRoom :nsr:$/,
 	/^RIPTerm Image :ript:$/,
 	/^TealPaint :teal:$/,
-	/^Truevision TARGA.* :tga:$/,
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,

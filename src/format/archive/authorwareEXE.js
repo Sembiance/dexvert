@@ -6,5 +6,5 @@ export class authorwareEXE extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = ["overlay: archive/authorware"];
-	converters     = ["exeOverlayExtract[ext:.app] -> dexvert[asFormat:archive/authorware]"];
+	converters     = ["exeOverlayExtract[ext:.app][chainAs:archive/authorware]"];
 }

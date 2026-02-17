@@ -233,6 +233,97 @@ def decompress_vdat(body_data, width, height, num_planes):
     return bytes(frame_buf)
 
 
+# ---------- ADAT delta decompression (DPST/VDLT) ----------
+
+def decompress_adat(bitplane, adat_data, width, height):
+    """Apply ADAT delta compression to a single bitplane using XOR.
+
+    ADAT format (from DPaint Stamp VDLT frames):
+    - First 2 bytes: offset to value stream
+    - Bytes 2..offset: command stream (signed bytes)
+    - Bytes offset..end: value stream (16-bit big-endian words)
+
+    Commands:
+    - 0: long move (read 16-bit signed offset from value stream, advance dst by offset/2 words)
+    - positive: repeat (XOR next value word into dst, advancing by stride, b times)
+    - -1: long copy (read 16-bit count from value stream, then XOR count words)
+    - other negative: short copy (count = -1-b, XOR count words)
+
+    Returns (result_bitplane, success). On OOB access, aborts processing and
+    returns the bitplane with partial modifications applied up to that point,
+    matching Abydos reference behavior.
+    """
+    if len(adat_data) < 2:
+        return bitplane, True
+
+    bp = bytearray(bitplane)
+    val_offset = read_u16(adat_data, 0)
+    if val_offset < 2 or val_offset >= len(adat_data):
+        return bp, True
+
+    stride = width // 16  # in 16-bit words
+    dst_max = height * stride  # max word index
+
+    cmd_pos = 2
+    val_pos = val_offset
+    dst = 0  # word index into bitplane
+
+    while cmd_pos < val_offset and val_pos < len(adat_data):
+        b = adat_data[cmd_pos]
+        if b >= 128:
+            b = b - 256  # signed byte
+        cmd_pos += 1
+
+        if b == 0:
+            # Long move
+            if val_pos + 2 > len(adat_data):
+                break
+            move = read_i16(adat_data, val_pos)
+            val_pos += 2
+            dst += move // 2
+        elif b < 0:
+            # Copy with XOR — check bounds before starting (match Abydos)
+            if dst < 0 or dst >= dst_max:
+                return bytes(bp), False
+            if b == -1:
+                if val_pos + 2 > len(adat_data):
+                    break
+                count = read_u16(adat_data, val_pos)
+                val_pos += 2
+            else:
+                count = -1 - b
+            for _ in range(count):
+                if val_pos + 2 > len(adat_data):
+                    break
+                if 0 <= dst < dst_max:
+                    byte_off = dst * 2
+                    existing = (bp[byte_off] << 8) | bp[byte_off + 1]
+                    word = read_u16(adat_data, val_pos)
+                    result = existing ^ word
+                    bp[byte_off] = (result >> 8) & 0xFF
+                    bp[byte_off + 1] = result & 0xFF
+                val_pos += 2
+                dst += stride
+        else:
+            # Repeat with XOR — check bounds before starting (match Abydos)
+            if dst < 0 or dst >= dst_max:
+                return bytes(bp), False
+            if val_pos + 2 > len(adat_data):
+                break
+            word = read_u16(adat_data, val_pos)
+            val_pos += 2
+            for _ in range(b):
+                if 0 <= dst < dst_max:
+                    byte_off = dst * 2
+                    existing = (bp[byte_off] << 8) | bp[byte_off + 1]
+                    result = existing ^ word
+                    bp[byte_off] = (result >> 8) & 0xFF
+                    bp[byte_off + 1] = result & 0xFF
+                dst += stride
+
+    return bytes(bp), True
+
+
 # ---------- RGBN/RGB8 decompression ----------
 
 def decompress_rgbn(body_data, width, height, is_rgb8):
@@ -791,6 +882,11 @@ class ILBMDecoder:
         # PLTP (Plane-To-Pixel) mapping
         self.pltp_data = None
 
+        # DPST animation data (populated by _apply_dpst_deltas)
+        self._dpst_frames_data = None  # list of interleaved body bytes per frame
+        self._dpst_duration_ms = 100   # ms per frame
+
+
     def decode_file(self, filepath):
         """Read and decode an IFF/ILBM file, return a PIL Image."""
         with open(filepath, 'rb') as f:
@@ -811,7 +907,9 @@ class ILBMDecoder:
 
         # Handle wrapped containers (DPST, ANIM)
         offset = 8
+        is_dpst = False
         if self.form_type == b'DPST':
+            is_dpst = True
             # Skip DPST header, find inner FORM
             if len(data) > 52 and fourcc(data, 44) == b'FORM':
                 offset = 52
@@ -835,7 +933,230 @@ class ILBMDecoder:
         if end < len(data) - 7:
             self._parse_chunks(data, end, len(data))
 
+        # Apply DPST VDLT delta frames to build up the final image
+        if is_dpst and self.body_data is not None:
+            self._apply_dpst_deltas(data)
+
         return self._render()
+
+    def _reinterleave_bitplanes(self, bitplanes):
+        """Re-interleave separate bitplanes into standard interleaved format."""
+        bytes_per_plane_row = ((self.width + 15) // 16) * 2
+        result = bytearray(bytes_per_plane_row * self.num_planes * self.height)
+        for y in range(self.height):
+            for p in range(self.num_planes):
+                src_off = y * bytes_per_plane_row
+                dst_off = y * bytes_per_plane_row * self.num_planes + p * bytes_per_plane_row
+                result[dst_off:dst_off + bytes_per_plane_row] = bitplanes[p][src_off:src_off + bytes_per_plane_row]
+        return bytes(result)
+
+    def _apply_dpst_deltas(self, data):
+        """Apply VDLT delta frames from DPST container, storing all frames
+        for APNG animation output.
+
+        DPST (DPaint Stamp) animations contain XOR-delta frames that build up
+        an animation. All frames are stored for APNG output; the first frame
+        (keyframe) is used as body_data for the static render.
+        """
+        bytes_per_plane_row = ((self.width + 15) // 16) * 2
+        has_mask = self.masking == 1
+        total_planes = self.num_planes + (1 if has_mask else 0)
+        expected = bytes_per_plane_row * total_planes * self.height
+
+        # Parse DPAH timing: default_duration at offset 20 (first 2 bytes of DPAH data)
+        if len(data) > 22:
+            default_duration = read_u16(data, 20)
+            if default_duration > 0:
+                self._dpst_duration_ms = round(default_duration * 1000.0 / 60.0)
+            else:
+                self._dpst_duration_ms = 100
+
+        # Decompress keyframe body
+        if self.compression == 0:
+            interleaved = bytearray(self.body_data)
+            if len(interleaved) < expected:
+                interleaved.extend(b'\x00' * (expected - len(interleaved)))
+        elif self.compression == 1:
+            interleaved = bytearray(decompress_byterun1(self.body_data, expected))
+        elif self.compression == 2:
+            interleaved = bytearray(decompress_vdat(self.body_data, self.width, self.height, self.num_planes))
+            has_mask = False
+            total_planes = self.num_planes
+            expected = bytes_per_plane_row * total_planes * self.height
+        else:
+            return  # Unknown compression, can't apply deltas
+
+        # Deinterleave into separate bitplanes
+        bp_size = bytes_per_plane_row * self.height
+        bitplanes = []
+        for p in range(self.num_planes):
+            bp = bytearray(bp_size)
+            for y in range(self.height):
+                src_off = y * bytes_per_plane_row * total_planes + p * bytes_per_plane_row
+                dst_off = y * bytes_per_plane_row
+                if src_off + bytes_per_plane_row <= len(interleaved):
+                    bp[dst_off:dst_off + bytes_per_plane_row] = interleaved[src_off:src_off + bytes_per_plane_row]
+            bitplanes.append(bp)
+
+        # Find inner ILBM FORM end to locate VDLT frames
+        inner_form_start = 44
+        inner_form_len = read_u32(data, inner_form_start + 4)
+        vdlt_scan_start = inner_form_start + 8 + inner_form_len
+        if inner_form_len % 2:
+            vdlt_scan_start += 1
+
+        dpst_end = 8 + read_u32(data, 4)
+        if dpst_end > len(data):
+            dpst_end = len(data)
+
+        # Store keyframe as first frame
+        initial_bitplanes = [bytes(bp) for bp in bitplanes]
+        all_frames = [self._reinterleave_bitplanes(bitplanes)]
+
+        # Pass 1: Apply all VDLTs, skip corrupted ones, track bad indices
+        corrupted_vdlt_indices = []
+        vdlt_offsets = []  # file offsets of each VDLT FORM
+        pos = vdlt_scan_start
+        while pos < dpst_end - 12:
+            if fourcc(data, pos) != b'FORM':
+                break
+            form_len = read_u32(data, pos + 4)
+            form_type = fourcc(data, pos + 8)
+
+            if form_type == b'VDLT':
+                vdlt_idx = len(vdlt_offsets)
+                vdlt_offsets.append(pos)
+                saved_bitplanes = [bytes(bp) for bp in bitplanes]
+                inner_pos = pos + 12
+                inner_end = pos + 8 + form_len
+                plane = 0
+                vdlt_ok = True
+                while inner_pos < inner_end - 8 and plane < self.num_planes:
+                    chunk_id = fourcc(data, inner_pos)
+                    chunk_len = read_u32(data, inner_pos + 4)
+                    if chunk_id == b'\x00\x00\x00\x00':
+                        # Zeroed-out chunk — file corruption
+                        vdlt_ok = False
+                        break
+                    if chunk_id == b'ADAT':
+                        adat_data = data[inner_pos + 8:inner_pos + 8 + chunk_len]
+                        result, success = decompress_adat(
+                            bitplanes[plane], adat_data, self.width, self.height)
+                        bitplanes[plane] = result
+                        if not success:
+                            vdlt_ok = False
+                            break
+                        plane += 1
+                    inner_pos += 8 + chunk_len
+                    if chunk_len % 2:
+                        inner_pos += 1
+
+                if vdlt_ok:
+                    all_frames.append(self._reinterleave_bitplanes(bitplanes))
+                else:
+                    # OOB error or corrupted data — restore and mark
+                    bitplanes = [bytearray(bp) for bp in saved_bitplanes]
+                    corrupted_vdlt_indices.append(vdlt_idx)
+
+            pos += 8 + form_len
+            if form_len % 2:
+                pos += 1
+
+        # If exactly 1 corrupted VDLT, reconstruct its missing delta from the
+        # loop residual. For a looping XOR animation: d1 ⊕ d2 ⊕ ... ⊕ dN = 0,
+        # so the single missing delta = final_state ⊕ initial_state.
+        # For multiple corruptions this doesn't work (combined residual applied
+        # at one point makes other frames worse), so just skip those frames.
+        if len(corrupted_vdlt_indices) == 1:
+            residual_planes = []
+            has_residual = False
+            for p in range(self.num_planes):
+                r = bytearray(len(initial_bitplanes[p]))
+                for j in range(len(r)):
+                    r[j] = bitplanes[p][j] ^ initial_bitplanes[p][j]
+                if any(b != 0 for b in r):
+                    has_residual = True
+                residual_planes.append(r)
+
+            if has_residual:
+                # Pass 2: redo with reconstructed delta at the corruption point
+                bad_idx = corrupted_vdlt_indices[0]
+                bitplanes = [bytearray(bp) for bp in initial_bitplanes]
+                all_frames = [self._reinterleave_bitplanes(bitplanes)]
+
+                for vdlt_idx, vdlt_pos in enumerate(vdlt_offsets):
+                    form_len = read_u32(data, vdlt_pos + 4)
+
+                    if vdlt_idx == bad_idx:
+                        # Apply reconstructed delta
+                        for p in range(self.num_planes):
+                            bp = bytearray(bitplanes[p])
+                            for j in range(len(bp)):
+                                bp[j] ^= residual_planes[p][j]
+                            bitplanes[p] = bp
+                        all_frames.append(self._reinterleave_bitplanes(bitplanes))
+                    else:
+                        # Normal VDLT: apply deltas
+                        inner_pos = vdlt_pos + 12
+                        inner_end = vdlt_pos + 8 + form_len
+                        plane = 0
+                        while inner_pos < inner_end - 8 and plane < self.num_planes:
+                            chunk_id = fourcc(data, inner_pos)
+                            chunk_len = read_u32(data, inner_pos + 4)
+                            if chunk_id == b'ADAT':
+                                adat_data = data[inner_pos + 8:inner_pos + 8 + chunk_len]
+                                result, _ = decompress_adat(
+                                    bitplanes[plane], adat_data, self.width, self.height)
+                                bitplanes[plane] = result
+                                plane += 1
+                            inner_pos += 8 + chunk_len
+                            if chunk_len % 2:
+                                inner_pos += 1
+                        all_frames.append(self._reinterleave_bitplanes(bitplanes))
+
+        self._dpst_frames_data = all_frames
+
+        # Set body_data to keyframe for the static render
+        self.body_data = all_frames[0]
+        self.compression = 0
+        self.masking = 0
+
+    def get_dpst_animation(self):
+        """Generate APNG frame images from stored DPST animation data.
+
+        Returns (frames, duration_ms) where frames is a list of RGBA PIL Images
+        and duration_ms is the per-frame delay, or None if not a DPST animation.
+
+        Frames are RGBA with alternating corner alpha (254/255) to prevent
+        Pillow's APNG sub-frame optimization, which can cause rendering
+        artifacts in browsers.
+        """
+        if not self._dpst_frames_data or len(self._dpst_frames_data) <= 1:
+            return None
+
+        x_scale, y_scale = self._get_resolution()
+        out_w = self.width * x_scale
+        out_h = self.height * y_scale
+        flat_pal = self._build_flat_palette()
+
+        frames = []
+        for i, body_data in enumerate(self._dpst_frames_data):
+            pixel_indices, _ = planar_to_chunky(body_data, self.width, self.height,
+                                                 self.num_planes, has_mask=False)
+            pixel_bytes = self._build_scaled_pixel_bytes(pixel_indices, out_w, out_h,
+                                                          x_scale, y_scale)
+            img = Image.frombytes('P', (out_w, out_h), pixel_bytes)
+            img.putpalette(flat_pal)
+            rgba = img.convert('RGBA')
+            # Toggle corner alpha on odd frames to force full-frame APNG encoding
+            if i % 2 == 1:
+                px = rgba.getpixel((0, 0))
+                rgba.putpixel((0, 0), (px[0], px[1], px[2], 254))
+                px = rgba.getpixel((out_w - 1, out_h - 1))
+                rgba.putpixel((out_w - 1, out_h - 1), (px[0], px[1], px[2], 254))
+            frames.append(rgba)
+
+        return frames, self._dpst_duration_ms
 
     def _parse_chunks(self, data, offset, end):
         """Parse all IFF chunks."""
@@ -874,7 +1195,7 @@ class ILBMDecoder:
                 self.rast_data = chunk_data
             elif chunk_id == b'PLTP':
                 self.pltp_data = chunk_data
-            # Skip unknown chunks
+            # Skip unknown chunks (CRNG/DRNG/CCRT cycling ignored)
 
             # Advance to next chunk (word-aligned per IFF spec)
             next_aligned = (chunk_end + 1) & ~1
@@ -1280,14 +1601,18 @@ class ILBMDecoder:
         if self.width == 0 or self.height == 0:
             return self._render_palette_swatch()
 
-        # Generate default grayscale palette if no CMAP present
-        if not self.palette and self.num_planes <= 8:
-            num_colors = 1 << self.num_planes
-            self.palette = []
-            for c in range(num_colors):
-                v = c * 255 // num_colors
-                self.palette.append((v, v, v))
-            self.num_colors = num_colors
+        # Generate default grayscale palette if no CMAP present or all zeros
+        if self.num_planes <= 8:
+            need_grayscale = not self.palette
+            if not need_grayscale and self.palette:
+                need_grayscale = all(r == 0 and g == 0 and b == 0 for r, g, b in self.palette)
+            if need_grayscale:
+                num_colors = 1 << self.num_planes
+                self.palette = []
+                for c in range(num_colors):
+                    v = c * 255 // num_colors
+                    self.palette.append((v, v, v))
+                self.num_colors = num_colors
 
         # Fix palette
         self._fixup_palette()
@@ -1401,7 +1726,37 @@ class ILBMDecoder:
         if self.body_data is None:
             raise ValueError("No BODY data")
 
-        # PBM stores pixels as sequential bytes (chunky format)
+        # PBM 24-bit or 32-bit: each pixel is 3 or 4 bytes (RGB or RGBA)
+        if self.num_planes >= 24:
+            bpp = self.num_planes // 8  # 3 for 24-bit, 4 for 32-bit
+            row_bytes = self.width * bpp
+            if row_bytes % 2:
+                row_bytes += 1
+            expected = row_bytes * self.height
+
+            if self.compression == 0:
+                raw = self.body_data
+            elif self.compression == 1:
+                raw = decompress_byterun1(self.body_data, expected)
+            else:
+                raise ValueError(f"Unsupported PBM compression: {self.compression}")
+
+            out_w = self.width * x_scale
+            out_h = self.height * y_scale
+            img = Image.new('RGB', (out_w, out_h))
+            for y in range(self.height):
+                for x in range(self.width):
+                    off = y * row_bytes + x * bpp
+                    if off + 2 < len(raw):
+                        r, g, b = raw[off], raw[off + 1], raw[off + 2]
+                    else:
+                        r, g, b = 0, 0, 0
+                    for sy in range(y_scale):
+                        for sx in range(x_scale):
+                            img.putpixel((x * x_scale + sx, y * y_scale + sy), (r, g, b))
+            return img
+
+        # PBM indexed: each pixel is 1 byte (palette index)
         if self.compression == 0:
             raw = self.body_data
         elif self.compression == 1:
@@ -1417,33 +1772,59 @@ class ILBMDecoder:
         # Fix palette
         self._fixup_palette()
 
+        # For PBM, check if data values exceed palette size - generate grayscale
+        if self.palette:
+            row_bytes = self.width
+            if row_bytes % 2:
+                row_bytes += 1
+            max_val = 0
+            for i in range(min(len(raw), row_bytes * self.height)):
+                if raw[i] > max_val:
+                    max_val = raw[i]
+            if max_val >= len(self.palette):
+                # Data uses more indices than palette has entries - use grayscale
+                # Formula: (256-i)%256 gives black at 0, white at 1, descending
+                self.palette = [((256 - i) % 256, (256 - i) % 256, (256 - i) % 256) for i in range(256)]
+                self.num_colors = 256
+
         # Create image
         out_w = self.width * x_scale
         out_h = self.height * y_scale
-        img = Image.new('P' if self.palette else 'L', (out_w, out_h))
 
         if self.palette:
-            flat_pal = []
-            for r, g, b in self.palette:
-                flat_pal.extend([r, g, b])
-            while len(flat_pal) < 768:
-                flat_pal.extend([0, 0, 0])
+            # Build pixel bytes from PBM data
+            row_bytes = self.width
+            if row_bytes % 2:
+                row_bytes += 1
+            buf = bytearray(out_w * out_h)
+            for y in range(self.height):
+                for x in range(self.width):
+                    off = y * row_bytes + x
+                    val = raw[off] if off < len(raw) else 0
+                    if x_scale == 1 and y_scale == 1:
+                        buf[y * out_w + x] = val
+                    else:
+                        for sy in range(y_scale):
+                            r_off = (y * y_scale + sy) * out_w
+                            for sx in range(x_scale):
+                                buf[r_off + x * x_scale + sx] = val
+            pixel_bytes = bytes(buf)
+
+            img = Image.frombytes('P', (out_w, out_h), pixel_bytes)
+            flat_pal = self._build_flat_palette()
             img.putpalette(flat_pal)
-
-        row_bytes = self.width
-        if row_bytes % 2:
-            row_bytes += 1
-
-        for y in range(self.height):
-            for x in range(self.width):
-                off = y * row_bytes + x
-                if off < len(raw):
-                    val = raw[off]
-                else:
-                    val = 0
-                for sy in range(y_scale):
-                    for sx in range(x_scale):
-                        img.putpixel((x * x_scale + sx, y * y_scale + sy), val)
+        else:
+            img = Image.new('L', (out_w, out_h))
+            row_bytes = self.width
+            if row_bytes % 2:
+                row_bytes += 1
+            for y in range(self.height):
+                for x in range(self.width):
+                    off = y * row_bytes + x
+                    val = raw[off] if off < len(raw) else 0
+                    for sy in range(y_scale):
+                        for sx in range(x_scale):
+                            img.putpixel((x * x_scale + sx, y * y_scale + sy), val)
 
         return img
 
@@ -1629,6 +2010,34 @@ class ILBMDecoder:
 
         return img
 
+    def _build_scaled_pixel_bytes(self, pixel_indices, out_w, out_h, x_scale, y_scale):
+        """Build a flat bytes object of pixel indices with resolution scaling applied."""
+        buf = bytearray(out_w * out_h)
+        for y in range(self.height):
+            for x in range(self.width):
+                idx = pixel_indices[y][x] & 0xFF
+                if x_scale == 1 and y_scale == 1:
+                    buf[y * out_w + x] = idx
+                else:
+                    for sy in range(y_scale):
+                        row_off = (y * y_scale + sy) * out_w
+                        for sx in range(x_scale):
+                            buf[row_off + x * x_scale + sx] = idx
+        return bytes(buf)
+
+    def _build_flat_palette(self):
+        """Build a flat 768-byte palette list from self.palette."""
+        flat_pal = []
+        max_colors = max(1 << self.num_planes, len(self.palette))
+        for i in range(min(256, max_colors)):
+            if i < len(self.palette):
+                flat_pal.extend(self.palette[i])
+            else:
+                flat_pal.extend([0, 0, 0])
+        while len(flat_pal) < 768:
+            flat_pal.extend([0, 0, 0])
+        return flat_pal[:768]
+
     def _render_indexed(self, pixel_indices, mask_data, multi_pal, x_scale, y_scale):
         """Render standard indexed color image."""
         out_w = self.width * x_scale
@@ -1659,18 +2068,13 @@ class ILBMDecoder:
         if has_transparency:
             img = Image.new('RGBA', (out_w, out_h))
         else:
-            img = Image.new('P', (out_w, out_h))
+            pixel_bytes = self._build_scaled_pixel_bytes(pixel_indices, out_w, out_h,
+                                                          x_scale, y_scale)
+            img = Image.frombytes('P', (out_w, out_h), pixel_bytes)
             # Set palette
-            flat_pal = []
-            max_colors = max(1 << self.num_planes, len(self.palette))
-            for i in range(min(256, max_colors)):
-                if i < len(self.palette):
-                    flat_pal.extend(self.palette[i])
-                else:
-                    flat_pal.extend([0, 0, 0])
-            while len(flat_pal) < 768:
-                flat_pal.extend([0, 0, 0])
-            img.putpalette(flat_pal[:768])
+            flat_pal = self._build_flat_palette()
+            img.putpalette(flat_pal)
+            return img
 
         for y in range(self.height):
             for x in range(self.width):
@@ -1733,7 +2137,7 @@ class ILBMDecoder:
 # ---------- CLI ----------
 
 def convert_file(input_path, output_path=None):
-    """Convert an ILBM file to PNG."""
+    """Convert an ILBM file to PNG (or APNG for DPST animations)."""
     if output_path is None:
         base = os.path.splitext(input_path)[0]
         output_path = base + '.png'
@@ -1741,7 +2145,16 @@ def convert_file(input_path, output_path=None):
     decoder = ILBMDecoder()
     try:
         img = decoder.decode_file(input_path)
-        img.save(output_path, 'PNG')
+
+        # Check for DPST animation
+        anim = decoder.get_dpst_animation()
+        if anim:
+            frames, duration_ms = anim
+            frames[0].save(output_path, 'PNG', save_all=True,
+                           append_images=frames[1:],
+                           duration=duration_ms, loop=0)
+        else:
+            img.save(output_path, 'PNG')
         return True
     except Exception as e:
         print(f"Error converting {input_path}: {e}", file=sys.stderr)
@@ -1749,17 +2162,19 @@ def convert_file(input_path, output_path=None):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} <input.iff> [output.png]", file=sys.stderr)
-        print(f"       {sys.argv[0]} --batch <input_dir> <output_dir>", file=sys.stderr)
-        sys.exit(1)
+    import argparse
+    parser = argparse.ArgumentParser(description='Convert IFF/ILBM files to PNG')
+    parser.add_argument('input', nargs='?', help='Input IFF/ILBM file or directory (with --batch)')
+    parser.add_argument('output', nargs='?', help='Output PNG file or directory (with --batch)')
+    parser.add_argument('--batch', action='store_true', help='Batch convert directory')
+    args = parser.parse_args()
 
-    if sys.argv[1] == '--batch':
-        if len(sys.argv) < 4:
+    if args.batch:
+        if not args.input or not args.output:
             print("Usage: --batch <input_dir> <output_dir>", file=sys.stderr)
             sys.exit(1)
-        input_dir = sys.argv[2]
-        output_dir = sys.argv[3]
+        input_dir = args.input
+        output_dir = args.output
         os.makedirs(output_dir, exist_ok=True)
 
         success = 0
@@ -1777,9 +2192,10 @@ def main():
 
         print(f"Converted {success} files, {fail} failures")
     else:
-        input_path = sys.argv[1]
-        output_path = sys.argv[2] if len(sys.argv) > 2 else None
-        if not convert_file(input_path, output_path):
+        if not args.input:
+            print("Usage: ilbm2png.py <input.iff> [output.png]", file=sys.stderr)
+            sys.exit(1)
+        if not convert_file(args.input, args.output):
             sys.exit(1)
 
 

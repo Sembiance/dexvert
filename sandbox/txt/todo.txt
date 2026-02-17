@@ -17,7 +17,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* vibe code an emf2svg converter: https://discmaster.textfiles.com/search?format=emf
 
+* Formats exe/dll/windowsSCR now return meta data in dexvert from exiftool like: CompanyName, ProductVersion, Comments, LegalCopyright, etc....
+  I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
+  After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
 
 /---------------\
 | High Priority |
@@ -39,8 +43,6 @@
 
 * data from archive/borlandDelphiForm sometimes have embedded bitmap data (TFRMMAIN)
   MAybe I can vibe code a better extractor than the current one (by feeding it both input and current output files)
-
-* vibe code an emf2svg converter: https://discmaster.textfiles.com/search?format=emf
 
 * could convert to a palette image similar to colFormatColorPalette: https://discmaster.textfiles.com/search?format=riffPalette
 

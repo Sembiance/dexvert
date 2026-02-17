@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # vibe coded by claude code
 """
-Authorware Packaged/Library File Extractor (.app/.apr/.apw/.asw/.aas/.a3m/.a3w/.a4p/.a5p/.a6p/.a7p/.a4r/.a5r/.a6r/.a7r)
+Authorware Packaged/Library File Extractor (.app/.apr/.apw/.asw/.aas/.a3m/.a3w/.a4p/.a5p/.a6p/.a7p/.a4r/.a5r/.a6r/.a7r/.exe)
 
 Extracts images, text, scripts, and raw data from Macromedia Authorware
-packaged files (ACRS), library files (PCRS), and v3 files (WCRS/A3M).
+packaged files (ACRS), library files (PCRS), v3 files (WCRS/A3M),
+and EXE-appended PCRS files (Authorware data stripped from EXE wrappers).
 
 Usage: python3 unauthorware.py <inputFile> <outputDir>
 """
@@ -96,6 +97,19 @@ def read_header(data):
     hdr['table_offset'] = struct.unpack_from(f'{endian}I', data, 0x34)[0]
     hdr['table_size'] = struct.unpack_from(f'{endian}I', data, 0x38)[0]
     hdr['data_end'] = struct.unpack_from(f'{endian}I', data, 0x3C)[0]
+
+    # Detect EXE-appended format: PCRS data originally appended to an EXE file.
+    # The EXE stub has been stripped but header offsets still reference it.
+    # Distinguished from segment files (which also have file_size > len(data))
+    # by table_offset pointing beyond 0x6A (segments always have table_offset=0x6A).
+    hdr['base_offset'] = 0
+    if (hdr['magic'] == 'PCRS' and hdr['file_size'] > len(data)
+            and hdr['table_offset'] != 0x6A
+            and hdr['table_offset'] - (hdr['file_size'] - len(data)) == 0x6A):
+        hdr['base_offset'] = hdr['file_size'] - len(data)
+        hdr['table_offset'] = 0x6A
+        hdr['file_size'] = len(data)
+
     return hdr
 
 
@@ -103,6 +117,7 @@ def read_entries(data, hdr):
     """Parse the entry table (ACRS 30-byte records)."""
     entries = []
     table_off = hdr['table_offset']
+    base = hdr.get('base_offset', 0)
     for i in range(hdr['entry_count']):
         off = table_off + i * 30
         if off + 30 > len(data):
@@ -115,7 +130,7 @@ def read_entries(data, hdr):
         entry['decomp_size'] = struct.unpack_from('<I', data, off + 12)[0]
         entry['storage_type'] = struct.unpack_from('<H', data, off + 16)[0]
         entry['flags2'] = struct.unpack_from('<H', data, off + 18)[0]
-        entry['data_offset'] = struct.unpack_from('<I', data, off + 24)[0]
+        entry['data_offset'] = struct.unpack_from('<I', data, off + 24)[0] - base
         entry['parent'] = struct.unpack_from('<h', data, off + 28)[0]
         entries.append(entry)
     return entries
@@ -129,12 +144,13 @@ def read_entries_pcrs(data, hdr):
     """
     entries = []
     table_off = hdr['table_offset']
+    base = hdr.get('base_offset', 0)
     for i in range(hdr['entry_count']):
         off = table_off + i * 10
         if off + 10 > len(data):
             break
         entry = {}
-        entry['data_offset'] = struct.unpack_from('<I', data, off)[0]
+        entry['data_offset'] = struct.unpack_from('<I', data, off)[0] - base
         entry['decomp_size'] = struct.unpack_from('<I', data, off + 4)[0]
         entry['icon_type'] = data[off + 8]
         # PCRS uses 2=raw, 3=zlib; normalize to ACRS convention (1=raw, 2=zlib)

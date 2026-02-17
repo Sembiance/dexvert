@@ -69,7 +69,14 @@ export class exe extends Format
 		if(!Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS))
 			return [];
 		
-		return [
+		const overlays = [];
+		for(const id of dexState.ids)
+		{
+			if(id.from==="exeOverlayID")
+				overlays.push(`exeOverlayExtract[chainAs:${id.magic.split(" ").at(-1)}][subOutDir:overlay]`);
+		}
+
+		const standard = [
 			// Is it just a ZIP file of some sort?
 			"sevenZip[type:zip]",
 			
@@ -93,6 +100,8 @@ export class exe extends Format
 			"sevenZip[type:PE][rsrcOnly]",
 			"deark[module:exe]"
 		];
+
+		return overlays.length ? [standard, overlays] : standard;
 	};
 
 	post = dexState =>

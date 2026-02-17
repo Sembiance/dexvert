@@ -9,10 +9,11 @@ export class lsdvd extends Program
 	args    = r => ["-q", "-Ox", r.inFile()];
 	post    = r =>
 	{
-		if(!r.stdout.trim().startsWith("<?xml"))
+		const xmlIndex = r.stdout.trim().indexOf("<?xml");
+		if(xmlIndex===-1)
 			return;
 
-		for(const [k, v] of Object.entries(xmlParse(r.stdout.trim())?.lsdvd || {}))
+		for(const [k, v] of Object.entries(xmlParse(r.stdout.trim().substring(xmlIndex))?.lsdvd || {}))
 			r.meta[k.toCamelCase()] = v;
 	};
 	renameOut = false;

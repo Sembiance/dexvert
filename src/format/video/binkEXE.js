@@ -6,5 +6,5 @@ export class binkEXE extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = ["overlay: video/bink"];
-	converters     = ["exeOverlayExtract[ext:.bik] -> dexvert[asFormat:video/bink]"];
+	converters     = ["exeOverlayExtract[ext:.bik][chainAs:video/bink]"];
 }

@@ -24,24 +24,24 @@ cd /mnt/ram/tmp || exit
 
 sudo killall mount
 sudo killall -9 mount
-sudo umount ./*uniso
-sudo umount ./*photocd-info
-sudo umount ./*iso/*fuseiso
-sudo umount ./*/*
-sudo umount ./*
-sudo umount -f ./*/*
-sudo umount -f ./*
+sudo umount -q ./*uniso
+sudo umount -q ./*photocd-info
+sudo umount -q ./*iso/*fuseiso
+sudo umount -q ./*/*
+sudo umount -q ./*
+sudo umount -q -f ./*/*
+sudo umount -q -f ./*
 sudo killall mount
 sudo killall -9 mount
-sudo umount ./*/*
-sudo umount ./*
-sudo umount -f ./*/*
-sudo umount -f ./*
+sudo umount -q ./*/*
+sudo umount -q ./*
+sudo umount -q -f ./*/*
+sudo umount -q -f ./*
 if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -rf /mnt/ram/tmp/*
 fi
-sudo umount ./*/*
-sudo umount ./*
+sudo umount -q ./*/*
+sudo umount -q ./*
 if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -rf /mnt/ram/tmp/*
 fi
@@ -51,11 +51,12 @@ if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -f .X*lock
 	rm -rf 7777-runtime-dir.*
 	rm -f ink_ext*
+	rm -rf .org.chromium*
 fi
 rm -f OSL_PIPE*
 rm -f file??????
 fd magick -x rm {} \;
-rm -rf Ay_Emul* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
+rm -rf ge-server* Ay_Emul* cxf-tmp* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
 rm -f ./*.crash.txt
 rm -rf .vbox-sembiance-ipc system-commandline-sentinel-files gimp blender* .wine-7777
 rm -f ~/.mtab.fuseiso ~/.mtab.fuseiso.new

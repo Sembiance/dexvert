@@ -1,0 +1,353 @@
+Installer VISE Archive Format Specification
+============================================
+Version: 2026-02-20
+Source:   Reverse-engineered from sample files and ScummVM project (elasota, 2022)
+
+Installer VISE was a proprietary macOS (Classic Mac OS) installer creation tool
+by MindVision Software, widely used from the mid-1990s through early 2000s.
+The archive format stores Mac files (with both data and resource forks) in a
+compressed, obfuscated container.
+
+All multi-byte integers are BIG-ENDIAN (Motorola byte order).
+
+================================================================================
+FILE STRUCTURE OVERVIEW
+================================================================================
+
+A VISE archive consists of:
+
+  1. SVCT Header (44 bytes)
+  2. Compressed file data (variable length)
+  3. CVCT Catalog (variable length)
+     - DVCT entries (directories)
+     - FVCT entries (files)
+     - PACK entries (install packages)
+     - INDN entry (disk name table)
+
+For multi-segment (multi-disk) archives:
+  - Segment 1 contains the SVCT header, some/all compressed data, and the CVCT
+  - Segments 2+ contain only additional compressed data (no header or catalog)
+  - Each segment file begins with its own SVCT header
+
+================================================================================
+SVCT HEADER (44 bytes)
+================================================================================
+
+Offset  Size  Field                Description
+------  ----  -------------------  -------------------------------------------
+0x00    4     magic                "SVCT" (0x53564354)
+0x04    4     segment              Segment number (1 = first/catalog segment)
+0x08    8     unknown              Reserved/unknown fields
+0x10    4     version              Archive format version (see below)
+0x14    16    unknown              Reserved/unknown fields
+0x24    4     cvct_offset          Byte offset of CVCT catalog in this file
+0x28    4     unknown              Possibly total archive size or checksum
+
+Known version codes:
+  0x80010201  -  VISE format v2.01
+  0x80010202  -  VISE format v2.02 (Installer VISE 3.5 Lite)
+  0x80010300  -  VISE format v3.00 (Installer VISE 3.6 Lite)
+  0x80010301  -  VISE format v3.01
+  0x80010302  -  VISE format v3.02
+  0x80010303  -  VISE format v3.03
+  0x80010304  -  VISE format v3.04
+  0x80010306  -  VISE format v3.06
+  0x80010307  -  VISE format v3.07
+  0x80010308  -  VISE format v3.08
+  0x8001030a  -  VISE format v3.10
+  0x8001030b  -  VISE format v3.11
+  0x8001030c  -  VISE format v3.12
+  0x8001030d  -  VISE format v3.13
+
+The version code format is 0x8001XXYY where XX.YY is the version number.
+Versions v2.01 through v3.07 use DVCT/FVCT catalog markers.
+Versions v3.08+ appear to use an encrypted/obfuscated catalog format.
+
+================================================================================
+CVCT CATALOG HEADER (20 bytes)
+================================================================================
+
+Located at the byte offset specified by SVCT.cvct_offset.
+
+Offset  Size  Field                Description
+------  ----  -------------------  -------------------------------------------
+0x00    4     magic                "CVCT" (0x43564354)
+0x04    12    unknown              Reserved/unknown fields
+0x10    2     num_entries          Total number of catalog entries
+0x12    2     unknown              Reserved
+
+Immediately after the CVCT header, catalog entries follow sequentially.
+Each entry begins with a 4-byte magic identifier.
+
+================================================================================
+DVCT ENTRY (Directory)
+================================================================================
+
+Magic: "DVCT" (0x44564354)
+
+Offset  Size  Field                Description
+------  ----  -------------------  -------------------------------------------
+0x00    4     magic                "DVCT"
+0x04    78    directory_data       Directory metadata (see below)
+ +N     var   extra_bytes          Version-dependent extra bytes (see below)
+ +N     var   name                 Directory name (Mac Roman encoding)
+
+Directory data fields (offsets relative to directory_data start):
+  +68   2     containing_dir       Parent directory index (1-based, 0=root)
+  +76   1     name_length          Length of directory name in bytes
+
+Extra bytes before name (version-dependent):
+  v2.01, v2.02:  0 extra bytes
+  v3.00, v3.01:  6 extra bytes
+  v3.02+:        varies (auto-detect by entry size)
+
+Total entry size: 4 + 78 + extra_bytes + name_length
+
+================================================================================
+FVCT ENTRY (File)
+================================================================================
+
+Magic: "FVCT" (0x46564354)
+
+This is the primary file descriptor. It describes a single installable file
+with its Mac type/creator codes, compressed data sizes, and archive position.
+
+Offset  Size  Field                Description
+------  ----  -------------------  -------------------------------------------
+0x00    4     magic                "FVCT"
+0x04    120   file_data            File metadata (see below)
+ +N     var   name                 File name (Mac Roman encoding)
+
+File data fields (offsets relative to file_data start, i.e., byte 4 of entry):
+
+  +0    40    unknown              Various metadata (install flags, dates, etc.)
+  +40   4     file_type            Mac OS file type (e.g., "APPL", "TEXT")
+  +44   4     file_creator         Mac OS creator code (e.g., "ttxt", "MSWD")
+  +48   16    unknown              Additional metadata
+  +64   4     comp_data_size       Compressed data fork size in bytes
+  +68   4     uncomp_data_size     Uncompressed data fork size in bytes
+  +72   4     comp_rsrc_size       Compressed resource fork size in bytes
+  +76   4     uncomp_rsrc_size     Uncompressed resource fork size in bytes
+  +80   12    unknown              Additional metadata (possibly dates, flags)
+  +92   2     containing_dir       Parent directory index (1-based, 0=root)
+  +94   2     data_segment         Segment number containing this file's data
+  +96   4     position_in_archive  Byte offset of compressed data in segment
+  +100  18    unknown              Additional metadata
+  +118  1     name_length          Length of file name in bytes
+  +119  1     padding              Unused byte
+
+Total entry size: 4 + 120 + name_length
+
+Notes on compressed sizes for shared blobs:
+  When multiple FVCT entries share the same position_in_archive value, they
+  form a "shared blob" group. In this case:
+    - comp_data_size = total compressed size of the shared blob
+    - comp_rsrc_size = total UNCOMPRESSED size of all files in the group
+    - uncomp_data_size = this file's uncompressed data fork portion
+    - uncomp_rsrc_size = this file's uncompressed resource fork portion
+  The decompressed blob contains: [all data forks concatenated in catalog
+  order] followed by [all resource forks concatenated in catalog order].
+
+  When an FVCT entry has a unique position_in_archive, the standard layout
+  applies:
+    - Data fork: comp_data_size compressed bytes at position_in_archive
+    - Resource fork: comp_rsrc_size compressed bytes at
+      position_in_archive + comp_data_size
+
+Later versions (v3.04+) may have additional bytes in the file_data section,
+shifting name_length and position_in_archive to higher offsets. The fields
+at offsets +40 through +80 (type, creator, compressed sizes) remain stable
+across known versions.
+
+================================================================================
+PACK ENTRY (Install Package)
+================================================================================
+
+Magic: "PACK" (0x5041434b)
+
+Represents an installation package/option in the installer's UI. Structure
+is not fully documented. PACK entries are skipped during file extraction.
+
+================================================================================
+INDN ENTRY (Disk Name Table)
+================================================================================
+
+Magic: "INDN" (0x494e444e)
+
+Located after the last catalog entry (usually at the end of the file).
+Contains the names and metadata for each disk/segment in a multi-disk archive.
+
+Offset  Size  Field                Description
+------  ----  -------------------  -------------------------------------------
+0x00    4     magic                "INDN"
+0x04    1     unknown              Flags or version byte
+0x05    1     disk_count           Number of disk name entries
+
+For each disk:
+  +0    1     name_length          Length of disk name
+  +1    var   name                 Disk name (Mac Roman encoding)
+  +N    6     disk_info            Disk metadata (segment number, size, etc.)
+
+================================================================================
+COMPRESSION AND OBFUSCATION
+================================================================================
+
+VISE uses a three-step compression scheme (reverse-engineered by the ScummVM
+project from the installer's "Dcmp" resource):
+
+  1. BYTE-PAIR SWAP
+     Adjacent bytes are swapped in pairs:
+       for i = 1, 3, 5, ..., len-1:
+         swap(data[i], data[i-1])
+     (Odd-length data: last byte remains in place)
+
+  2. SUBSTITUTION CIPHER
+     Each byte is replaced using a fixed 256-byte lookup table:
+       for i = 0 to len-1:
+         data[i] = TABLE[data[i]]
+
+     The deobfuscation table (hex):
+       6A B7 36 EC 15 D9 C8 73  E8 38 9A DF 21 25 D0 CC
+       FD DC 16 D7 E3 43 05 C5  8F 48 DA F2 3F 10 23 6C
+       77 7C F9 A0 A3 E9 ED 46  8B D8 AC 54 CE 2D 19 5E
+       6D 7D 87 5D FA 5B 9B E0  C7 EE 9F 52 A9 B9 0A D1
+       FE 78 76 4A 3D 44 5A 96  90 1F 26 9D 58 1B 8E 57
+       59 C3 0B 6B FC 1D E6 A2  7F 92 4F 40 B4 06 72 4D
+       F4 34 AA D2 49 AD EF 22  1A B5 BA BF 29 68 89 93
+       3E 32 04 F5 DE E1 6F FB  67 E4 7E 08 AF F0 AB 41
+       82 EA 50 0F 2A C6 35 B3  A8 CA E5 4C 45 8A 97 AE
+       D6 66 27 53 C9 1C 3C 03  99 C1 09 2E 69 37 8D 2F
+       60 C2 A6 18 4E 7A B8 CF  A7 3A 17 D5 9E F1 84 51
+       0D A4 64 C4 1E B1 30 98  BB 79 01 F6 62 0E B2 63
+       91 CB FF 80 71 E7 D4 00  DB 75 2C BD 39 33 94 BC
+       8C 3B B6 20 85 24 88 2B  70 83 6E 7B 9C BE 14 47
+       65 4B 56 81 F8 12 11 28  EB 55 74 A1 31 F7 B0 13
+       86 DD 5F 42 D3 02 61 95  0C 5C A5 CD C0 07 E2 F3
+
+  3. RAW DEFLATE (RFC 1951)
+     The result of steps 1+2 is a headerless deflate stream (no zlib or
+     gzip header). Decompress using raw inflate (e.g., zlib with
+     wbits=-MAX_WBITS).
+
+     Known quirk: VISE's deflate implementation aligns stored blocks to
+     2-byte boundaries instead of the standard 1-byte boundary. This
+     rarely affects files in practice (stored blocks are uncommon in
+     compressible data), but may cause decompression failures for certain
+     files. ScummVM notes this as a known TODO.
+
+Decompression procedure:
+  1. Read comp_size bytes of compressed data from the archive
+  2. Swap byte pairs: for i in range(1, len, 2): swap [i] and [i-1]
+  3. Apply substitution table to every byte
+  4. Inflate as raw deflate to get uncomp_size bytes
+
+================================================================================
+FILE DATA LAYOUT IN ARCHIVE
+================================================================================
+
+Compressed file data is stored between the SVCT header (offset 44) and the
+CVCT catalog. The layout depends on whether files are individually stored or
+packed into shared blobs.
+
+INDIVIDUAL FILES:
+  position_in_archive points to the start of the file's compressed data.
+  Layout: [data_fork_compressed | resource_fork_compressed]
+  - Data fork: comp_data_size bytes → decompress to uncomp_data_size bytes
+  - Resource fork: comp_rsrc_size bytes → decompress to uncomp_rsrc_size bytes
+  - Resource fork immediately follows data fork (no padding)
+  - The next file's data immediately follows (no padding)
+
+SHARED BLOBS (multiple files at same position_in_archive):
+  A single compressed blob contains data for multiple files.
+  - Compressed blob: comp_data_size bytes at position_in_archive
+  - Decompresses to comp_rsrc_size bytes total (note: comp_rsrc_size here
+    means the total uncompressed size, NOT a compressed resource size)
+  - Decompressed layout: [file1_data | file2_data | ... | fileN_data |
+    file1_rsrc | file2_rsrc | ... | fileN_rsrc]
+  - Files are ordered by their position in the catalog
+  - Each file's uncomp_data_size bytes of data fork come first (all files)
+  - Then each file's uncomp_rsrc_size bytes of resource fork (all files)
+
+MULTI-SEGMENT ARCHIVES:
+  - Each file's data_segment field (FVCT +94) indicates which segment
+    contains its compressed data
+  - position_in_archive is relative to the start of that segment file
+  - Segment 1 always contains the catalog; other segments contain only data
+  - All segment files have their own SVCT header
+
+================================================================================
+MAC FILE ATTRIBUTES
+================================================================================
+
+Classic Mac OS files have two forks:
+  - Data fork: the primary data stream (e.g., document content, executable code)
+  - Resource fork: structured resource data (icons, dialogs, strings, etc.)
+
+Both forks are compressed and stored independently in the archive.
+
+File type and creator codes are 4-byte identifiers:
+  - Type: identifies the file format (e.g., "APPL"=application, "TEXT"=text)
+  - Creator: identifies the creating application (e.g., "ttxt"=TeachText)
+
+File names use Mac Roman encoding (a superset of ASCII with characters for
+accented letters, symbols, and Japanese katakana).
+
+================================================================================
+VERSION DIFFERENCES
+================================================================================
+
+v2.01 (0x80010201):
+  - DVCT: 4 + 78 bytes + name (no extra bytes)
+  - FVCT: 4 + 120 bytes + name
+  - Standard field offsets
+
+v2.02 (0x80010202) "Installer VISE 3.5 Lite":
+  - Same structure as v2.01
+  - Identical to ScummVM's supported format
+
+v3.00 (0x80010300) "Installer VISE 3.6 Lite":
+  - DVCT: 4 + 78 bytes + 6 extra bytes + name
+  - FVCT: 4 + 120 bytes + name (same as v2.x)
+  - Identical to ScummVM's supported format
+
+v3.01 (0x80010301):
+  - Same structure as v3.00
+
+v3.02-v3.03:
+  - DVCT extra bytes may differ
+  - FVCT mostly compatible with standard 120-byte layout
+  - Minor field variations in unused/unknown fields
+
+v3.04:
+  - FVCT file_data may have additional bytes (~16 extra)
+  - DVCT extra bytes: ~14 bytes
+  - Core fields (type, creator, sizes at +64-+80) remain stable
+
+v3.06-v3.07:
+  - FVCT file_data significantly larger (~62 extra bytes)
+  - position_in_archive shifted to higher offset
+  - name_length shifted to higher offset
+  - Core fields (type, creator, sizes at +64-+80) remain stable
+
+v3.08+ (0x80010308 and later):
+  - Catalog structure fundamentally changed
+  - DVCT/FVCT markers not present or not recognizable
+  - Catalog entries appear encrypted or obfuscated
+  - PACK and INDN markers may still be present
+  - Not currently decodable without additional reverse-engineering
+
+================================================================================
+REFERENCES
+================================================================================
+
+- ScummVM: common/compression/vise.cpp (GPLv3)
+  https://github.com/scummvm/scummvm
+  Reverse-engineered by elasota, 2022.
+  Supports v2.02 ("3.5 Lite") and v3.00 ("3.6 Lite") only.
+
+- MindVision Software (original developer, no longer in business)
+  Installer VISE was available for Classic Mac OS.
+
+================================================================================
+END OF SPECIFICATION
+================================================================================

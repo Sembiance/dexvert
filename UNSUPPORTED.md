@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,058)
+# Unsupported File Formats (4,057)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (313)
+## Archive (312)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -154,7 +154,6 @@ Family/Format | Name | Extensions | Notes
 [archive/lingvooArc1InstallData](https://discmaster.textfiles.com/search?format=lingvooArc1InstallData) | lingvooArc1 install data |  | 
 [archive/lzk00Archive](https://discmaster.textfiles.com/search?format=lzk00Archive) | LZK00 Archive | .lng | 
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?format=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
-[archive/macroMindProjector](https://discmaster.textfiles.com/search?format=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
 [archive/magixGEPacktArchive](https://discmaster.textfiles.com/search?format=magixGEPacktArchive) | MAGIX gepackt Archive |  | 
 [archive/majiroEngineResourceData](https://discmaster.textfiles.com/search?format=majiroEngineResourceData) | Majiro Engine resource data | .arc | 
 [archive/mameFloppyImage](https://discmaster.textfiles.com/search?format=mameFloppyImage) | MAME Floppy Image | .mfi | 
@@ -1002,7 +1001,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (177)
+## Music (178)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -1099,6 +1098,7 @@ Family/Format | Name | Extensions | Notes
 [music/msxProtrackerModule](https://discmaster.textfiles.com/search?format=msxProtrackerModule) | MSX Protracker Module | .pro | 
 [music/msxSME3Music](https://discmaster.textfiles.com/search?format=msxSME3Music) | MSX SME 3 music | .ply | 
 [music/musicBoxMusic](https://discmaster.textfiles.com/search?format=musicBoxMusic) | Music Box music | .sav | 
+[music/musicMacroLanguage](https://discmaster.textfiles.com/search?format=musicMacroLanguage) | Music Macro Language | .mus | [20 sample files](https://sembiance.com/fileFormatSamples/music/musicMacroLanguage/) - Tried vibe coding a converter, works for most regular DOS BASIC Play type files, but sooo much variety and multiple different platforms. Gave up in the end, though it kinda works. Bigger problem is identification, it's HARD.
 [music/musicStudioSong](https://discmaster.textfiles.com/search?format=musicStudioSong) | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://sembiance.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 [music/musicXPerformance](https://discmaster.textfiles.com/search?format=musicXPerformance) | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXPerformance/)
 [music/musicXSequence](https://discmaster.textfiles.com/search?format=musicXSequence) | [Music-X Sequence](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .seq | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXSequence/)
@@ -1185,7 +1185,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,775)
+## Other (2,774)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3251,7 +3251,6 @@ Family/Format | Name | Extensions | Notes
 [other/richMapFormat](https://discmaster.textfiles.com/search?format=richMapFormat) | Rich Map Format | .rmf | 
 [other/riffMSXF](https://discmaster.textfiles.com/search?format=riffMSXF) | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
 [other/riffMxSt](https://discmaster.textfiles.com/search?format=riffMxSt) | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
-[other/riffPalette](https://discmaster.textfiles.com/search?format=riffPalette) | RIFF Palette | .pal | 
 [other/riffSTYL](https://discmaster.textfiles.com/search?format=riffSTYL) | RIFF STYL File | .par | References a font for mac and windows and includes some text in a TEXT chunk
 [other/rightWriterConfiguration](https://discmaster.textfiles.com/search?format=rightWriterConfiguration) | RightWriter configuration | .dct | 
 [other/rightWriterMainDictionary](https://discmaster.textfiles.com/search?format=rightWriterMainDictionary) | RightWriter main dictionary | .dct | 

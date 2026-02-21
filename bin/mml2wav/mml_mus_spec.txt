@@ -1,0 +1,396 @@
+MML / BASIC PLAY .MUS File Format Specification
+=================================================
+
+1. OVERVIEW
+-----------
+MML (Music Macro Language) is a text-based music notation system used by
+Microsoft BASIC's PLAY statement to drive the PC internal speaker. Files
+with the .MUS extension contain MML commands as plain text (or BASIC-
+tokenized text) that describe melodies one note at a time: pitch, duration,
+octave, tempo, and articulation style.
+
+MML was supported across GW-BASIC, BASICA, QBasic, QuickBASIC, and many
+DOS-era BBS and game utilities (e.g. MUS.COM, SuperBBS yell configs).
+
+The format is monophonic (single voice) and case-insensitive.
+
+
+2. FILE FORMAT
+--------------
+
+2.1  Plain-text .MUS files
+
+The most common form. Each file contains one or more lines of MML commands
+as printable ASCII text. Lines are separated by CR, LF, or CR+LF.
+
+  - Optional comment lines (see section 3)
+  - MML command data on remaining lines
+  - Optional DOS EOF marker: byte 0x1A (Ctrl-Z) at end of file
+
+Whitespace (spaces, tabs), commas, and semicolons between commands are
+ignored and serve as visual separators only.
+
+
+2.2  BASIC-tokenized .MUS files
+
+When saved from GW-BASIC or BASICA with the default (tokenized) format,
+.MUS files have the high bit (bit 7) set on most data bytes. These files
+also contain BASIC line numbers and the "PLAY" keyword as binary tokens.
+
+To extract MML data from tokenized files:
+
+  1. Strip bit 7 from every byte  (byte &= 0x7F)
+  2. When ':' is encountered (BASIC statement separator), skip all bytes
+     until the next LF (0x0A).  This discards line numbers and keywords.
+  3. Convert lowercase letters to uppercase.
+  4. Skip control characters and whitespace (<= 0x20).
+  5. Collect the remaining characters as clean MML command text.
+
+After filtering, the result is identical to a plain-text .MUS file.
+
+
+3. COMMENT SYNTAX
+-----------------
+Comment lines are stripped before parsing. A line is a comment if its first
+non-whitespace character is one of:
+
+  :   Colon          (common in older .MUS files)
+  '   Apostrophe     (BASIC REM shorthand)
+  ;   Semicolon      (common in BBS configuration files)
+  %   Percent        (seen in academic transcriptions)
+  *   Asterisk       (seen in European transcriptions)
+
+There is no inline comment syntax. A comment prefix must be at the start
+of the line.
+
+
+4. MML COMMAND REFERENCE
+------------------------
+
+All commands are case-insensitive. Numeric arguments shown as <n> are
+decimal integers. Ranges noted are typical; some implementations extend
+them.
+
+
+4.1  Notes: A B C D E F G
+
+  Syntax:   <letter>[accidental][length][.]
+
+  Plays a note using the current octave and default length.
+
+  letter      One of A, B, C, D, E, F, G.
+              Some files also use H = B natural (German notation).
+
+  accidental  Optional modifier immediately after the letter:
+                +  or  #   Sharp (raise one semitone)
+                -          Flat  (lower one semitone)
+
+  length      Optional decimal integer overriding the current default
+              note length for this note only (same units as the L command).
+              Example: E6 = play E with length 1/6 of a whole note.
+
+  .           Dot: extends the note duration by half. Multiple dots
+              stack: first dot = +50%, second = +25%, third = +12.5%, etc.
+              Example: E8. = dotted eighth note = 1.5 * eighth duration.
+
+  Chromatic semitone mapping (C major scale):
+    C=0  C#=1  D=2  D#=3  E=4  F=5  F#=6  G=7  G#=8  A=9  A#=10  B=11
+
+
+4.2  Octave: O <n>
+
+  Set the current octave to <n>.
+
+  Range:      0 to 7 (some implementations allow 0-8)
+  Default:    4 (middle C octave)
+
+  O without a following number sets octave to 0 (per MUS.COM behavior).
+
+  MIDI note mapping:  midi_note = (octave + 1) * 12 + semitone
+    Example: O4 C  = (4+1)*12 + 0 = 60 = MIDI middle C
+
+
+4.3  Octave shift: >  <
+
+  >    Increment octave by 1
+  <    Decrement octave by 1
+
+  These provide relative octave changes without specifying an absolute
+  number.  Example: O3 G > C  = G3 then C4.
+
+
+4.4  Length: L <n>
+
+  Set the default note length to 1/<n> of a whole note.
+
+  Common values:
+    L1  = whole note        L8  = eighth note
+    L2  = half note         L16 = sixteenth note
+    L4  = quarter note      L32 = thirty-second note
+    L6  = dotted quarter    L64 = sixty-fourth note
+
+  Default:    4 (quarter note)
+  Range:      1 to 64 (some files use larger values like L1280 for
+              extremely short notes in rapid arpeggiation)
+
+  The length value can also be specified inline after a note letter,
+  overriding the default for that single note.
+
+
+4.5  Tempo: T <n>
+
+  Set the tempo in beats per minute.
+
+  Range:      32 to 255 (standard BASIC range; some files use values
+              outside this, e.g. T8, T16)
+  Default:    120 BPM
+
+  Multiple T commands may appear in a file, changing tempo mid-song.
+
+
+4.6  Note number: N <n>
+
+  Play a note by its absolute chromatic number.
+
+  N0          Rest (silence for the current default duration)
+  N1 - N84    Chromatic notes: N1 = C in octave 0, N84 = B in octave 6
+
+  Mapping:    midi_note = n + 11
+    Example: N37 = C3 = MIDI note 48
+
+
+4.7  Pause / Rest: P <n>   (or R <n>)
+
+  Insert a silence with the given length.
+
+  <n>         Length value in the same units as L (1/n of a whole note).
+              If omitted, uses the current default length.
+
+  Some MML dialects use R (rest) instead of or in addition to P (pause).
+  Both are equivalent.
+
+
+4.8  Music style: M <mode>
+
+  Set the articulation style, controlling the ratio of sounding time to
+  total note duration.
+
+  MN    Music Normal:    Note sounds for 7/8 of its duration, silent 1/8.
+  ML    Music Legato:    Note sounds for its full duration, no gap.
+  MS    Music Staccato:  Note sounds for 3/4 of its duration, silent 1/4.
+  MB    Music Background: (BASIC-specific, play in background; ignored
+        in MIDI conversion)
+  MF    Music Foreground: (BASIC-specific, play in foreground; ignored
+        in MIDI conversion)
+
+  Default:    MN (Normal)
+
+
+4.9  Staccato level: S <n>
+
+  Some MML dialects provide a numeric staccato control as a finer-grained
+  alternative to M commands.
+
+  S0    Legato (100% gate time)
+  S1    Normal (~87.5% gate)
+  S2    Moderate staccato (~75% gate)
+  S3    Full staccato (~62.5% gate)
+
+  This command is not part of standard GW-BASIC PLAY but appears in some
+  European .MUS files.
+
+
+4.10  Keyboard wait: K
+
+  Prevents the player from exiting on keypress. Equivalent to the /K
+  command-line switch in MUS.COM. Ignored in MIDI conversion.
+
+
+4.11  Dotted notes: .
+
+  The dot character extends the preceding note's duration by half.
+  Multiple consecutive dots further extend:
+    .    = 1.5x base duration
+    ..   = 1.75x base duration
+    ...  = 1.875x base duration
+
+  Dots may appear after a note letter, after an inline length, or both:
+    F.   = dotted F (default length * 1.5)
+    E8.  = dotted eighth E
+    C4.. = double-dotted quarter C
+
+
+4.12  Delimiters
+
+  The following characters are ignored between commands:
+    Space, Tab, Comma (,), Semicolon (;)
+
+  They serve only as visual separators for readability.
+
+
+5. NOTE FREQUENCY TABLE
+-----------------------
+The original MUS.COM uses a 12-entry frequency scaling table for the
+highest octave (octave 8), right-shifted to derive lower octaves:
+
+  Index  Note   Base Value   Formula for frequency
+  -----  ----   ----------   ---------------------
+  0      C      16744        PIT_divisor = 1,179,648 / (value >> (8 - octave))
+  1      C#     17736        Speaker_freq = 1,193,182 / PIT_divisor
+  2      D      18792
+  3      D#     19912
+  4      E      21096
+  5      F      22352
+  6      F#     23680
+  7      G      25088
+  8      G#     26576
+  9      A      28160
+  10     A#     29712
+  11     B      31616
+
+IMPORTANT: MUS.COM octaves are pitched ~2 octaves above standard A440
+tuning.  For example O4 C plays at ~1058 Hz (standard C6), not 262 Hz
+(standard C4).  This is intentional — the tiny PC speaker cannot
+reproduce low frequencies effectively.
+
+  Example actual frequencies (via MUS.COM table):
+    O3 E  -> shifted = 21096 >> 5 = 659,  PIT = 1179648/659 = 1789
+             freq = 1193182 / 1789 = ~667 Hz
+    O4 A  -> shifted = 28160 >> 4 = 1760, PIT = 1179648/1760 = 670
+             freq = 1193182 / 670  = ~1781 Hz
+
+For MIDI conversion, notes map to standard MIDI note numbers (A440 tuning):
+  midi_note = (octave + 1) * 12 + semitone_index
+
+  O4 C  (middle C) = (4+1)*12 + 0  = MIDI 60
+  O4 A  (A440)     = (4+1)*12 + 9  = MIDI 69
+  O0 C  (lowest)   = (0+1)*12 + 0  = MIDI 12
+  O6 B  (highest)  = (6+1)*12 + 11 = MIDI 95
+
+For WAV conversion, using the MUS.COM frequency table directly produces
+authentic PC speaker pitch.
+
+
+6. TIMING SYSTEM
+----------------
+
+6.1  Internal timing (MUS.COM / PC speaker)
+
+MUS.COM reprograms PIT channel 0 to run at 4x the normal rate:
+  Normal rate:   65536 divisor = 18.2065 Hz
+  MUS.COM rate:  16384 divisor = 72.826 Hz
+
+The custom timer ISR increments a tick counter at ~72.8 Hz. Every 4th
+tick chains to the original INT 08h to keep the DOS system clock correct.
+
+Duration formula (internal, all integer arithmetic):
+  raw_duration = 256 / L                        (from the L command)
+  tempo_value  = 256 - T                        (where T is BPM from T command)
+  delay_ticks  = (tempo_value * raw_duration) / 200 + 1
+
+The note-on and rest portions are computed separately before wait_ticks:
+  Normal (MN):   note_on = duration * 7/8,  rest = duration * 1/8
+  Legato (ML):   note_on = duration,        rest = 0
+  Staccato (MS): note_on = duration * 3/4,  rest = duration * 1/4
+  Each portion is independently fed through the delay formula above.
+
+Wait is implemented as a busy loop polling the tick counter.
+
+NOTE: The +1 in the delay formula means each wait (note-on AND rest) has
+a minimum duration of 1 tick (~13.7ms).  This causes MUS.COM's effective
+tempo to differ from standard BPM.  For example, at T120 L4 a quarter
+note takes ~0.62s instead of the standard 0.50s.  Composers compensated
+by adjusting T values.  Some files use extreme combinations (T16 L1280)
+for rapid arpeggiation that relies on the +1 minimum.
+
+
+6.2  MIDI timing
+
+For MIDI conversion, note durations are computed in standard MIDI ticks:
+  ticks_per_quarter_note = 960
+  whole_note_ticks = 3840
+  note_ticks = whole_note_ticks / L
+
+Tempo is expressed as microseconds per quarter note:
+  usec_per_quarter = 60,000,000 / BPM
+
+Each MML T command generates a MIDI tempo meta-event (FF 51 03).
+
+NOTE: MIDI timing uses standard BPM, which differs from MUS.COM's
+internal timing.  Files composed for MUS.COM (especially those using
+extreme T/L combinations) may sound different in MIDI.
+
+
+6.3  WAV timing
+
+For WAV conversion (mml2wav.py), the MUS.COM timing formula is used
+directly, converting tick counts to seconds via the 72.826 Hz tick rate.
+This produces the most authentic reproduction of the original playback.
+
+
+7. DIALECT VARIATIONS
+---------------------
+MML .MUS files exist in several dialects depending on the creating software.
+Key variations observed across real-world files:
+
+  Feature              Standard BASIC        Extended / Variant
+  -------------------  --------------------  -------------------------
+  Note range           A-G                   A-G, H (German B natural)
+  Sharp notation       # only                # or +
+  Flat notation        (not in all)          - after note letter
+  Octave command       O0-O6                 O0-O8, > (up), < (down)
+  Length range         L1-L64                L1-L1280+ (arbitrary)
+  Tempo range          T32-T255              T8-T255+
+  Style commands       MN, ML, MS            MN, ML, MS, MB, MF
+  Staccato levels      (none)                S0-S3+
+  Rest command         P                     P or R
+  Comment prefix       (none in BASIC)       : ' ; % *
+  Case sensitivity     Uppercase             Case-insensitive
+  Inline length        Yes (E8, D16, etc.)   Yes
+  Dotted notes         .                     . (stackable)
+
+When writing a parser, all of these variations should be handled for
+maximum compatibility.
+
+
+8. EXAMPLE FILES
+----------------
+
+Minimal example (Mary Had a Little Lamb):
+
+  T120 MN O3 L8
+  E6 D16 C D E E E4
+  D D D4
+  E G G4
+  E6 D16 C D E E E
+  D D E D C1
+
+
+Bach Prelude using rapid arpeggiation:
+
+  T16 L1280 S3
+  O5 C O3 C D+ G D F D+ G C D+ D+ O3 G D F
+  D+ G O5 C O3 C D+ G D F D+ G C D+ C+ G C
+
+
+Addams Family theme with flats and tempo changes:
+
+  MN O3 T220 L8 CDEF P4 O0 L4 F P8 F P8
+  O3 L8 DEF#G P4 O1 L4 G P8 G P8
+  P4 T187
+  O3 L8 CF.AF.D O2 B-. O3 G P4
+
+
+With octave shift operators:
+
+  O2 T120 MN
+  <B8 >D16 ML D8. MN D8 P16 ML
+  C16 <B16 MN A16 B8. >C8. C#8. D8.
+
+
+9. REFERENCE
+------------
+- GW-BASIC User's Guide: PLAY Statement
+- QBasic / QuickBASIC Online Help: PLAY Statement
+- MUS.COM reverse engineering analysis (see mus.com.analysis.txt)
+- PC Programmable Interval Timer (Intel 8253/8254) documentation

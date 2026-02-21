@@ -341,6 +341,7 @@ const FLEX_SIZE_FORMATS = {
 		ssiTLB           : 0.1,
 		theDraw          : 0.1,
 		windowsClipboard : 0.1,
+		xwd              : 20,
 
 		// differs depending on host
 		avif     : 1,	// avifdec

@@ -37,6 +37,7 @@ const EXCLUDED_SAMPLE_FORMATS = [
 	"archive/sgiVolumeImage",
 	"archive/sgsDAT",
 	"archive/starTrekOnlineGameData",
+	"archive/steamInstallSystem",
 	"archive/thumbsUpDatabase",
 	"archive/vmwareDiskImage",
 	"video/binkEXE",

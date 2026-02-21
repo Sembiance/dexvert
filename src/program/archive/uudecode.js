@@ -4,8 +4,8 @@ export class uudecode extends Program
 {
 	website   = "https://www.gnu.org/software/sharutils/";
 	package   = "app-arch/sharutils";
-	bin       = "uudecode";
-	args      = r => [r.inFile()];
-	cwd       = r => r.outDir();
+	bin       = Program.binPath("uudecodeWithDirs.sh");
+	args      = r => [r.inFile({absolute : true})];
+	cwd       = r => r.outDir({absolute : true});
 	renameOut = false;
 }

@@ -32,6 +32,7 @@ const DEXMAGIC_CHECKS = {
 	"Cryo Archive (BigFile variant)" : [{offset : 0, match : "BigFile 1.00"}],
 	"EDI Split File Archive"         : [{offset : 0, match : "EDISPLI"}, {offset : 7, match : [["T", "0"]]}],
 	"Empire Earth Game Archive"      : [{offset : 0, match : [0x72, 0x61, 0x73, 0x73, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
+	"Folio Infobase v1/2"		     : [{offset : 1292, match : "Copyright Folio Corp"}],
 	"Goosebumps CFS Archive"         : [{offset : 0, match : [0x46, 0x53, 0x48, 0x32]}],
 	"HTTP Response"                  : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
 	"Horde VDX Archive"              : [{offset : 2, match : "RATVID"}],
@@ -82,12 +83,14 @@ const DEXMAGIC_CHECKS = {
 	"Wintermute DCP Archive"         : [{offset : 0, match : [0xDE, 0xAD, 0xC0, 0xDE]}, {offset : 4, match : "JUNK"}],
 
 	// audio
-	"208 Audio (Ocean Games)" : [{offset : 0xCC, match : [0x1F, 0x7D, 0x98, 0x4D]}],
-	"AKAI Sample"             : [{offset : 0, match : [0x03, 0x01, 0x3C]}],
-	"EA BNK Audio"            : [{offset : 0, match : "BNKl"}],
-	"GameCube Music (IDSP)"   : [{offset : 0, match : "IDSP"}],
-	"KORG File"               : [{offset : 0, match : "KORG"}],
-	"RedSpark Audio"          : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
+	"208 Audio (Ocean Games)"        : [{offset : 0xCC, match : [0x1F, 0x7D, 0x98, 0x4D]}],
+	"AKAI Sample"                    : [{offset : 0, match : [0x03, 0x01, 0x3C]}],
+	"Audiokinetic WWISE Audio"       : [{offset : 0, match : "RIFF"}, {offset : 8, match : "WAVEfmt "}, {offset : 44, match : "vorb"}],
+	"Audiokinetic WWISE Audio (Alt)" : [{offset : 0, match : "RIFF"}, {offset : 8, match : "WAVEfmt "}, {offset : 20, match : [0xFF, 0xFF]}],
+	"EA BNK Audio"                   : [{offset : 0, match : "BNKl"}],
+	"GameCube Music (IDSP)"          : [{offset : 0, match : "IDSP"}],
+	"KORG File"                      : [{offset : 0, match : "KORG"}],
+	"RedSpark Audio"                 : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
 
 	// document
 	"ASCOM"                                   : [{offset : 0, match : [0xE9, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x8B, 0xFC, 0x36, 0x8B, 0x2D, 0x83, 0xC4, 0x02, 0x81, 0xED]}],

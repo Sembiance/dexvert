@@ -9,5 +9,4 @@ export class powerpaint extends Program
 	bin       = "java";
 	args      = async r => ["-jar", Program.binPath("powerpaint.jar"), "--convert", r.flags.format, r.inFile(), await r.outFile("out.png")];
 	renameOut = true;
-	notes     = "CLI convert capability vibe coded with claude code";
 }

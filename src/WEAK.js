@@ -290,6 +290,14 @@ export const WEAK_VALUES =
 	/^Windows \/ MS-DOS boot loader/,
 	/^YZ Archiv gefunden/,
 
+	// exeOverlayID: NOTE: These are not always "weak" it's just that when present there isn't any "special" action to take, so we just mark them weak so they don't appear as "new magics"
+	/^overlay: archive\/(arq|rsrc|swf|tar|zlib)$/,
+	/^overlay: audio\/(agsAudioData|downloadableSoundBank)$/,
+	/^overlay: executable\/exe$/,
+	/^overlay: image\/(acornSprite|degas.*|ico|pict|tga|wmf)$/,
+	/^overlay: other\/nullBytesAlternating$/,
+	/^overlay: video\/mpeg2$/,
+
 	// ffprobeID
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
@@ -349,7 +357,13 @@ export const WEAK_VALUES =
 	/^Video CCTV DAT \(luodat\)$/,
 	/^VPlayer subtitles \(vplayer\)$/,
 
-	// gameextractor
+	// gameextractor - Real but output files are useless
+	/^geArchive: PRM( |$)/,
+
+	// gameextractor - actually WEAK
+	// candidates
+	// SEEN  ONCE: DAT_RES, BAG_5, BAG_GABA_2, BIG, BNK, DTA, IMG, IMG_DAVILEX_2, PCK_6, WAV, WAV_2, WD_WD, TEXS_SXET, BDF, ARC_10, aRC_11, ARC_13, ARC_6, ARC_8, RAW_MHWANH, PAK_30, PAK_7, PCK_PACK, PAK_PACK_2, PAK_PACK_3, FST_FAST_2_FSAMPLE
+	// SEEN TWICE: 001_2, FSB_FSB5
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: A00( |$)/,
 	/^geArchive: ACE_SIMIS( |$)/,
@@ -358,6 +372,7 @@ export const WEAK_VALUES =
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
 	/^geArchive: BKF_2( |$)/,
+	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
 	/^geArchive: CAS( |$)/,
 	/^geArchive: CPN( |$)/,
@@ -366,9 +381,12 @@ export const WEAK_VALUES =
 	/^geArchive: DTA_DTA( |$)/,
 	/^geArchive: DAT_(11|42|48|53|57)( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
+	/^geArchive: FOG( |$)/,
 	/^geArchive: GME( |$)/,
 	/^geArchive: IMG_4( |$)/,
+	/^geArchive: IMG_LINK( |$)/,
 	/^geArchive: KDT( |$)/,
+	/^geArchive: LINK_LINK( |$)/,
 	/^geArchive: M02( |$)/,
 	/^geArchive: MEGA_MEGA( |$)/,
 	/^geArchive: MBUNDLE_BPLIST00( |$)/,
@@ -381,11 +399,14 @@ export const WEAK_VALUES =
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
-	/^geArchive: WAD_4( |$)/,
+	/^geArchive: SFS_AAMVHFSS( |$)/,
+	/^geArchive: UE\d_(Generic|\d)( |$)/,
+	/^geArchive: WAD_[48]( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 
 	/^geViewer: GLI_GLIB_IMG( |$)/,
+	/^geViewer: J2D_PLIB_PICTURE( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
 	/^geViewer: TGA( |$)/,
 

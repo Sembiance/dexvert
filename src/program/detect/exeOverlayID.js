@@ -5,12 +5,17 @@ import {extractEXEOverlay} from "../../exeOverlayUtil.js";
 import {fileUtil} from "xutil";
 import {identify} from "../../identify.js";
 
+let formats = null;
+
 export class exeOverlayID extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
 	loc  = "local";
 	exec = async r =>
 	{
+		if(!formats)
+			({formats} = await import("../../format/formats.js"));
+
 		r.meta.detections = [];
 
 		const tmpFilePath = await fileUtil.genTempPath();
@@ -19,7 +24,7 @@ export class exeOverlayID extends Program
 			return;
 
 		const {ids : identifications} = await identify(tmpFilePath, {xlog : r.xlog});
-		for(const {from, matchType, family, formatid} of identifications)
+		for(const {from, matchType, family, formatid, confidence} of identifications)
 		{
 			if(from!=="dexvert" || matchType!=="magic")
 				continue;
@@ -27,8 +32,9 @@ export class exeOverlayID extends Program
 			const dexid = `${family}/${formatid}`;
 			if(["other/nullBytes"].includes(dexid))
 				continue;
-			
-			r.meta.detections.push(Detection.create({value : `overlay: ${dexid}`, from : "exeOverlayID", confidence : 100, file : r.f.input}));
+
+			const format = formats[formatid];
+			r.meta.detections.push(Detection.create({value : `overlay: ${dexid}`, from : "exeOverlayID", weak : !!format.unsupported || confidence<20, confidence, file : r.f.input}));
 		}
 
 		const overlayIDs =

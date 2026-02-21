@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, runUtil, fileUtil} from "xutil";
 import {path, TextLineStream} from "std";
 
 const argv = cmdUtil.cmdInit({
@@ -31,53 +31,102 @@ for await (const line of await inputFile.readable.pipeThrough(new TextDecoderStr
 		{
 			inImage = false;
 			const uintData = Uint8Array.from(hexBytes);
-			let offset = 0;
-			const subType = uintData.getPascalString(0);
-			let ext = `.unknown`;
-			if(subType.length>0)
+
+			if(imageType==="Glyph")
 			{
-				offset += 1+subType.length;
-				switch(subType)
+				// Glyph.Data format: 4-byte LE size prefix + raw BMP file
+				const view = new DataView(uintData.buffer, uintData.byteOffset, uintData.byteLength);
+				const bmpSize = view.getUint32(0, true);
+
+				const imageFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}.bmp`);
+				await new Blob([encoder.encode(`<${path.basename(imageFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+				await Deno.writeFile(imageFilePath, uintData.subarray(4, 4 + bmpSize));
+				imageCounter++;
+			}
+			else if(imageType === "Bitmap")
+			{
+				// ImageList Bitmap format: 4-byte LE color BMP size + 4-byte LE image count + color BMP + mask BMP
+				const view = new DataView(uintData.buffer, uintData.byteOffset, uintData.byteLength);
+				const colorBmpSize = view.getUint32(0, true);
+
+				const colorFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}.bmp`);
+				await new Blob([encoder.encode(`<${path.basename(colorFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+				await Deno.writeFile(colorFilePath, uintData.subarray(8, 8+colorBmpSize));
+
+				const maskOffset = 8+colorBmpSize;
+				if(maskOffset<uintData.length && uintData[maskOffset]===0x42 && uintData[maskOffset+1]===0x4D)
 				{
-					case "TBitmap":
-						ext = ".bmp";
-						offset += 4;
-						break;
-					
-					case "TJPEGImage":
-						ext = ".jpg";
-						offset += 4;
-						break;
+					const maskFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}_mask.bmp`);
+					await Deno.writeFile(maskFilePath, uintData.subarray(maskOffset));
 
-					case "TGIFImage":
-						ext = ".gif";
-						offset += 4;
-						break;
-
-					case "TIcon":
-						ext = ".ico";
-						break;
-					
-					default:
-						console.log(`UNKNOWN subType: ${subType}`);
-						ext = `.${subType}`;
+					const pngFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}.png`);
+					await runUtil.run("magick", [colorFilePath, "(", maskFilePath, "-negate", ")", "-alpha", "off", "-compose", "CopyOpacity", "-composite", pngFilePath]);
+					if(await fileUtil.exists(pngFilePath))
+					{
+						await fileUtil.unlink(colorFilePath);
+						await fileUtil.unlink(maskFilePath);
+					}
 				}
+
+				imageCounter++;
 			}
-			else if(imageType==="Icon")
+			else
 			{
-				ext = ".ico";	// icon doesn't have any subType and so we just output directly to disk
+				let offset = 0;
+				const subType = uintData.getPascalString(0);
+				let ext = `.unknown`;
+				if(subType.length>0)
+				{
+					offset += 1+subType.length;
+					switch(subType)
+					{
+						case "TBitmap":
+							ext = ".bmp";
+							offset += 4;
+							break;
+						
+						case "TJPEGImage":
+							ext = ".jpg";
+							offset += 4;
+							break;
+
+						case "TGIFImage":
+							ext = ".gif";
+							offset += 4;
+							break;
+
+						case "TIcon":
+							ext = ".ico";
+							break;
+						
+						default:
+							console.log(`UNKNOWN subType: ${subType}`);
+							ext = `.${subType}`;
+					}
+				}
+				else if(imageType==="Icon")
+				{
+					ext = ".ico";	// icon doesn't have any subType and so we just output directly to disk
+				}
+		
+				const imageFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}${ext}`);
+				await new Blob([encoder.encode(`<${path.basename(imageFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+
+				await Deno.writeFile(imageFilePath, Uint8Array.from(uintData.subarray(offset)));
+				imageCounter++;
 			}
-
-			const imageFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}${ext}`);
-			await new Blob([encoder.encode(`<${path.basename(imageFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
-
-			await Deno.writeFile(imageFilePath, Uint8Array.from(uintData.subarray(offset)));
-			imageCounter++;
 		}
 	}
-	else if((/^(Picture|Icon)\.Data = {$/).test(line.trim()))
+	else if((/^(Picture|Icon|Glyph)\.Data = {$/).test(line.trim()))
 	{
 		imageType = line.trim().split(".")[0];
+		await new Blob([encoder.encode(line)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+		hexBytes.clear();
+		inImage = true;
+	}
+	else if((/^Bitmap = {$/).test(line.trim()))
+	{
+		imageType = "Bitmap";
 		await new Blob([encoder.encode(line)]).stream().pipeTo(outputFile.writable, {preventClose : true});
 		hexBytes.clear();
 		inImage = true;

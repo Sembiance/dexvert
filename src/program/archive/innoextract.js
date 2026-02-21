@@ -8,5 +8,4 @@ export class innoextract extends Program
 	bin       = "innoextract";
 	args      = r => ["--extract", "--output-dir", r.outDir({absolute : true}), r.inFile({absolute : true})];
 	renameOut = false;
-	notes     = "Additional inno format support vibe coded with claude code";
 }

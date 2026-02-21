@@ -17,7 +17,7 @@ export class akailist extends Program
 			if(type)
 				meta.files.push({type : type.trim(), size : +size, blockLocation : +blockLocation, name});
 		}
-		if(meta.files.every(o => o.type==="UNKNOWN"))
+		if(meta.files.every(o => o.type==="UNKNOWN" || o.type.endsWith("VOLUME")))
 			meta.files = [];
 		Object.assign(r.meta, meta);
 	};

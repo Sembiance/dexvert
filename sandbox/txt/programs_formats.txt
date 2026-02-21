@@ -12437,74 +12437,58 @@ Quattro Pro/DOS Files *.wq1
 SYLK Files *.slk
 
 
->>> assimp - linux https://github.com/assimp/assimp/tree/master
-COMMON INTERCHANGE FORMATS
-	Autodesk ( .fbx )
-	Collada ( .dae, .xml )
-	glTF ( .gltf, .glb )
-	3D Studio Max 3DS (.3ds)
-	3D Studio Max ASE (.ase)
-	Wavefront Object ( .obj )
-	Industry Foundation Classes (IFC/Step) ( .ifc )
-	XGL-3D-Format ( .xgl,.zgl )
-	Stanford Polygon Library ( .ply )
-	AutoCAD/AutoDesk DXF ( .dxf )
-	LightWave ( .lwo )
-	LightWave Scene ( .lws )
-	Modo ( .lxo )
-	Stereolithography ( .stl )
-	DirectX X ( .x )
-	AC3D ( .ac, .ac3d )
-	Milkshape 3D ( .ms3d )
-	TrueSpace ( .cob,.scn )
+>>> assimp - gen list with: assimp listinfo  linux https://github.com/assimp/assimp/tree/master
+EXTENSIONS                 NAME                                              WEBSITE/COMMENTS
+-------------------------  ------------------------------------------------  ----------------
+hmp                        3D GameStudio Heightmap (HMP) Importer            
+3mf                        3mf Importer                                      http://3mf.io/
+ac acc ac3d                AC3D Importer                                     
+amf                        Additive manufacturing file format(AMF) Importer  See documentation in source code. Chapter: Limitations.
+ase ask                    ASE Importer                                      Similar to 3DS but text-encoded
+assbin                     Assimp Binary Importer                            
+fbx                        Autodesk FBX Importer                             
+blend                      Blender 3D Importer (http://www.blender3d.org)    No animation support yet
+b3d                        BlitzBasic 3D Importer                            http://www.blitzbasic.com/
+bvh                        BVH Importer (MoCap)                              
+csm                        CharacterStudio Motion Importer (MoCap)           
+dae xml zae                Collada Importer                                  http://collada.org
+x                          Direct3D XFile Importer                           
+3ds prj                    Discreet 3DS Importer                             Limited animation support
+md5mesh md5camera md5anim  Doom 3 / MD5 Mesh Importer                        
+dxf                        Drawing Interchange Format (DXF) Importer         
+x3d x3db                   Extensible 3D(X3D, X3DB) Importer                 See documentation in source code. Chapter: Limitations.
+gltf glb                   glTF Importer                                     
+gltf glb vrm               glTF2 Importer                                    
+ifc ifczip step stp        Industry Foundation Classes (IFC) Importer        
+iqm                        Inter-Quake Model Importer                        
+xml irrmesh                Irrlicht Mesh Reader                              http://irrlicht.sourceforge.net/
+irr xml                    Irrlicht Scene Reader                             http://irrlicht.sourceforge.net/
+lws mot                    LightWave Scene Importer                          http://www.newtek.com/lightwave.html=
+lwo lxo                    LightWave/Modo Object Importer                    https://www.lightwave3d.com/lightwave_sdk/
+ms3d                       Milkshape 3D Importer                             http://chumbalum.swissquake.ch/
+pmx                        MMD Importer                                      surfaces supported?
+ndo                        Nendo Mesh Importer                               http://www.izware.com/nendo/index.htm
+enff nff                   Neutral File Format Importer                      
+off                        OFF Importer                                      
+mesh mesh.xml              Ogre3D Mesh Importer                              
+ogex                       Open Game Engine Exchange                         
+md2                        Quake II Mesh Importer                            
+bsp pk3                    Quake III BSP Importer                            
+md3                        Quake III Mesh Importer                           
+mdl                        Quake Mesh / 3D GameStudio Mesh Importer          
+q3o q3s                    Quick3D Importer                                  http://www.quick3d.com/
+raw                        Raw Importer                                      
+mdc                        Return To Castle Wolfenstein Mesh Importer        
+sib                        Silo SIB Importer                                 Does not apply subdivision.
+ply                        Stanford Polygon Library (PLY) Importer           
+stl                        Stereolithography (STL) Importer                  
+ter                        Terragen Heightmap Importer                       http://www.planetside.co.uk/
+cob scn                    TrueSpace Object Importer                         little-endian files only
+3d uc                      Unreal Mesh Importer                              
+smd vta                    Valve SMD Importer                                
+obj                        Wavefront Object Importer                         surfaces not supported
+xgl zgl                    XGL Importer                                      
 
-MOTION CAPTURE FORMATS
-	Biovision BVH ( .bvh )
-	CharacterStudio Motion ( .csm )
-
-GRAPHICS ENGINE FORMATS
-	Ogre ( .mesh.xml, .skeleton.xml, .material )
-	Irrlicht Mesh ( .irrmesh, .xml )
-	Irrlicht Scene ( .irr, .xml )
-
-GAME FILE FORMATS
-	Quake I ( .mdl )
-	Quake II ( .md2 )
-	Quake III Mesh ( .md3 )
-	Quake III Map/BSP ( .pk3 )
-	Return to Castle Wolfenstein RtCW ( .mdc )
-	Doom 3 ( .md5mesh, .md5anim, .md5camera)
-	Valve Model ( .smd,.vta )
-	Open Game Engine Exchange ( .ogex )
-	Unreal ( .3d )
-
-OTHER FILE FORMATS
-	BlitzBasic 3D ( .b3d )
-	Quick3D ( .q3d, .q3o, .q3s )
-	Neutral File Format ( .nff )
-	Sense8 WorldToolKit ( .nff )
-	Object File Format ( .off )
-	PovRAY Raw ( .raw )
-	Raw Triangles (.raw)
-	Terragen Terrain ( .ter )
-	3D GameStudio (3DGS) ( .mdl )
-	3D GameStudio (3DGS) Terrain ( .hmp )
-	Izware Nendo ( .ndo )
-	3D Manufacturing Format ( .3mf)
-	IQM-Format (.iqm)
-	ACC
-	AMJ
-	ASK
-	ENFF
-	HMB
-	M3D
-	MOT
-	PMX
-	PRJ
-	SIB
-	STP
-	UC
-	X3D
 
 
 >>> MilkShape 3D 1.8.5 BETA 1  windows https://www.chumba.ch/chumbalum-soft/index.html

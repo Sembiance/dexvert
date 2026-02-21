@@ -17,6 +17,7 @@ const argv = cmdUtil.cmdInit({
 		json          : {desc : "If set, will output results as JSON"},
 		jsonFile      : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
 		programFlag   : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
+		pretend       : {desc : "Don't actually run any converters, just output what would be done"},
 		forbidProgram : {desc : "A programid not to run. Used internally to prevent infinite recursions", hasValue : true, multiple : true},
 		skipVerify    : {desc : "Set to true to skip verifications of output files"},
 		fileMeta      : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true},
@@ -54,7 +55,7 @@ if(argv.programFlag)
 	}
 }
 
-["asFormat", "forbidProgram", "skipVerify"].forEach(k =>
+["asFormat", "forbidProgram", "skipVerify", "pretend"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];

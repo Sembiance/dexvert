@@ -100,7 +100,7 @@ export class polyTrans64 extends Program
 			WindowFailure("", "cannot be parsed.", -1, "{ESCAPE}")
 			return WinActive("PolyTrans|CAD 3D Translation, Viewing & Composition System - ", "")
 		EndFunc
-		$mainWindow = CallUntil("PostImportDialogs", ${xu.MINUTE*2.5})
+		$mainWindow = CallUntil("PostImportDialogs", ${xu.MINUTE*2})
 		If Not $mainWindow Then
 			Exit 0
 		EndIf

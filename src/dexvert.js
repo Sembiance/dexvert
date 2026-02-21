@@ -11,7 +11,7 @@ import {fileUtil, runUtil, printUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, pretend, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
 {
 	clearRuntime();
 	for(const [programid, flags] of Object.entries(programFlag))
@@ -246,8 +246,6 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				if(progProps.flags?.noPrevFailedVerify && prevFailedVerify)
 					return xlog.info`Skipping converter ${prog} due to noPrevFailedVerify flag and previously failed verify being true`, false;
 				
-				xlog.debug`Running converter ${prog}...`;
-
 				const flags = {};
 
 				// check to see if we are a packed format and we should set the program renameKeepFilename flag
@@ -259,6 +257,13 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 						flags.renameOut = {ext : "", outExt : ""};	// this is to prevent a default program.outExt (like deark's .png) from being applied when working with a packed format like archive/exePackPacked/MAC2GIF.EXE
 				}
 
+				if(pretend)
+				{
+					xlog.info`PRETEND: Would have ran program ${prog} with flags ${flags} and files:\n${dexState.f.pretty()}`;
+					return;
+				}
+
+				xlog.debug`Running converter ${prog}...`;
 				const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain, format, xlog, flags});
 				dexState.ran.push(r);
 

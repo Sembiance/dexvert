@@ -1,0 +1,1168 @@
+================================================================================
+MacroMind Director Resource Fork File Format Specification
+================================================================================
+Version:  1.1
+Date:     2026-02-20
+Covers:   MacroMind/Macromedia Director 3.x and 4.x (1993-1995)
+          Mac OS resource fork files wrapped in MacBinary II containers
+          File type: VWMD (VideoWorks Movie Document)
+          Creator:   MMDR (MacroMind Director)
+
+Vibe coded by Claude
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+  1. Overview
+  2. MacBinary II Container
+  3. Apple Resource Fork Structure
+     3.1  Resource Fork Header
+     3.2  Resource Data Region
+     3.3  Resource Map
+     3.4  Type List
+     3.5  Reference List
+     3.6  Name List
+  4. Director Resource Types
+     4.1  VWCF - VideoWorks Config
+     4.2  VWCR - VideoWorks Cast Record
+     4.3  VWCI - VideoWorks Cast Info
+     4.4  VWSC - VideoWorks Score
+     4.5  VWAC - VideoWorks Actions
+     4.6  VWFI - VideoWorks File Info
+     4.7  VWFM - VideoWorks Font Map
+     4.8  VWLB - VideoWorks Labels
+     4.9  BITD - Bitmap Data
+     4.10 snd  - Mac Sound Resource
+     4.11 STXT - Styled Text
+     4.12 CLUT/clut - Color Lookup Table
+     4.13 STR  - Pascal String
+     4.14 SCVW - Score View
+     4.15 vers - Version Info
+     4.16 Icon Resources (ICN#, ICON, icl8, icl4, ics#, ics8, ics4)
+     4.17 Code Resources (XCMD, XCOD, XFCN, SeLF, CCOD, C*DE, WDEF)
+     4.18 CURS - Mac Cursor
+     4.19 PICT - Mac Picture
+     4.20 STR# - String List
+     4.21 MooV - QuickTime Movie Reference
+     4.22 Additional Resource Types
+  5. PackBits Compression
+  6. Mac System Color Palette
+  7. Resource ID to Cast Member Mapping
+  8. Byte Accounting
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+MacroMind Director (later Macromedia Director) for classic Macintosh stores
+movie documents as resource-fork-only files. These files carry:
+
+  - File Type:    VWMD (VideoWorks Movie Document)
+  - Creator Code: MMDR (MacroMind Director)
+
+The "VW" prefix reflects Director's lineage from MacroMind VideoWorks. The
+resource fork uses the standard Apple Resource Manager format and contains
+Director-specific resource types for movie configuration, cast members
+(sprites, sounds, text), the score (animation timeline), and Lingo scripts.
+
+For archival and transport, these files are wrapped in MacBinary II containers
+which preserve both the data fork (empty in this case) and resource fork along
+with Finder metadata.
+
+All multi-byte integers are BIG-ENDIAN unless noted otherwise.
+
+================================================================================
+2. MACBINARY II CONTAINER
+================================================================================
+
+The MacBinary II format wraps a Macintosh file for transport. The structure is:
+
+  [128-byte header]
+  [data fork, padded to 128-byte boundary]
+  [resource fork, padded to 128-byte boundary]
+
+HEADER FORMAT (128 bytes):
+--------------------------------------------------------------------------------
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    version              Always 0x00
+1       1     uint8    name_length          Filename length (1-63)
+2       63    char[]   filename             Filename (Mac Roman, padded with 0)
+65      4     char[4]  file_type            Finder file type (e.g., "VWMD")
+69      4     char[4]  creator              Finder creator code (e.g., "MMDR")
+73      1     uint8    flags_high           Finder flags high byte
+74      1     uint8    zero1                Must be 0x00
+75      2     int16    v_position           Vertical position in Finder window
+77      2     int16    h_position           Horizontal position in Finder window
+79      2     uint16   folder_id            Folder/directory ID
+80      1     uint8    protected            Protected flag
+81      1     uint8    zero2                Must be 0x00
+82      1     uint8    zero3                Must be 0x00
+83      4     uint32   data_fork_length     Length of data fork in bytes
+87      4     uint32   res_fork_length      Length of resource fork in bytes
+91      4     uint32   creation_date        File creation date (Mac timestamp)
+95      4     uint32   modification_date    File modification date (Mac timestamp)
+99      2     uint16   get_info_length      Length of Get Info comment
+101     1     uint8    flags_low            Finder flags low byte
+102     4     bytes    signature            Should be 0x00000000 for MacBinary II
+106     16    bytes    reserved             Reserved (zero-filled)
+122     1     uint8    mb_version           MacBinary version (0x81 = MacBinary II)
+123     1     uint8    mb_min_version       Minimum version to read (0x81)
+124     2     uint16   crc                  CRC-16/CCITT of bytes 0-123
+126     2     bytes    padding              Reserved (zero-filled)
+--------------------------------------------------------------------------------
+
+Mac timestamps are seconds since January 1, 1904 00:00:00 UTC.
+To convert to Unix time: unix_time = mac_time - 2082844800
+
+For Director VWMD files, the data fork is always empty (data_fork_length = 0).
+The resource fork begins immediately at offset 128.
+
+FILE SIZE FORMULA:
+  total = 128 + ceil(data_fork_length / 128) * 128
+              + ceil(res_fork_length / 128) * 128
+
+Since data_fork_length = 0:
+  total = 128 + ceil(res_fork_length / 128) * 128
+
+
+================================================================================
+3. APPLE RESOURCE FORK STRUCTURE
+================================================================================
+
+The resource fork is a standard Apple Resource Manager structure. All offsets
+within the fork are relative to the start of the fork (byte 0 of the fork).
+
+3.1 RESOURCE FORK HEADER (16 bytes)
+--------------------------------------------------------------------------------
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   data_offset          Offset to resource data region
+4       4     uint32   map_offset           Offset to resource map
+8       4     uint32   data_length          Length of resource data region
+12      4     uint32   map_length           Length of resource map
+--------------------------------------------------------------------------------
+
+The data_offset is typically 256 (0x100) to allow for the system-reserved area
+(bytes 16-255 after the header). The resource map follows the data region.
+
+FORK LAYOUT:
+  [0x0000] Fork header (16 bytes)
+  [0x0010] System-reserved area (240 bytes, zero-filled)
+  [0x0100] Resource data region (data_length bytes)
+  [map_offset] Resource map (map_length bytes)
+
+
+3.2 RESOURCE DATA REGION
+--------------------------------------------------------------------------------
+The data region contains the actual resource data, stored as a sequence of
+length-prefixed data blocks:
+
+  For each resource:
+    4 bytes:  uint32   data_length   Length of this resource's data
+    N bytes:  bytes    data          The resource data (N = data_length)
+
+Resources are stored contiguously. The reference list entry for each resource
+contains an offset (relative to the start of the data region) pointing to
+the 4-byte length prefix of that resource's data block.
+
+
+3.3 RESOURCE MAP
+--------------------------------------------------------------------------------
+Offset  Size  Type     Field                Description
+(from map start)
+--------------------------------------------------------------------------------
+0       16    bytes    header_copy          Copy of the fork header
+16      4     uint32   next_map_handle      Reserved (used in memory only)
+20      2     uint16   file_ref_num         Reserved (used in memory only)
+22      2     uint16   attributes           Resource fork attributes
+24      2     uint16   type_list_offset     Offset to type list (from map start)
+26      2     uint16   name_list_offset     Offset to name list (from map start)
+--------------------------------------------------------------------------------
+
+Fork attributes (bit flags):
+  Bit 6 (0x40):  mapReadOnly    - resource fork is read-only
+  Bit 7 (0x80):  mapCompact     - compact resource map on update
+  Bit 8 (0x100): mapChanged     - resource map has been changed
+
+
+3.4 TYPE LIST
+--------------------------------------------------------------------------------
+Located at: map_start + type_list_offset
+
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   num_types_minus_1    Number of resource types minus 1
+2+      8     struct   type_entry[]         Array of type entries
+--------------------------------------------------------------------------------
+
+Each type entry (8 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     char[4]  type_code            4-character resource type (e.g., "BITD")
+4       2     uint16   num_res_minus_1      Number of resources of this type minus 1
+6       2     uint16   ref_list_offset      Offset to reference list for this type
+                                            (relative to start of type list)
+--------------------------------------------------------------------------------
+
+
+3.5 REFERENCE LIST
+--------------------------------------------------------------------------------
+Located at: type_list_start + ref_list_offset (for each type)
+
+Each reference list entry (12 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     int16    resource_id          Resource ID (signed, -32768 to 32767)
+2       2     int16    name_offset          Offset in name list (-1 = no name)
+4       1     uint8    attributes           Resource attributes
+5       3     uint24   data_offset          Offset in data region to this
+                                            resource's length-prefixed data
+8       4     uint32   handle               Reserved (used in memory only)
+--------------------------------------------------------------------------------
+
+Resource attributes (bit flags):
+  Bit 0 (0x01):  resSysHeap   - load into system heap
+  Bit 2 (0x04):  resPurgeable - purgeable from memory
+  Bit 3 (0x08):  resLocked    - locked in memory
+  Bit 4 (0x10):  resProtected - protected (read-only)
+  Bit 5 (0x20):  resPreload   - preload on open
+  Bit 6 (0x40):  resChanged   - resource has been changed
+
+
+3.6 NAME LIST
+--------------------------------------------------------------------------------
+Located at: map_start + name_list_offset
+
+The name list contains Pascal strings (length-prefixed) for named resources.
+Each entry:
+  1 byte:   uint8    name_length   Length of name string
+  N bytes:  char[]   name          Name string (Mac Roman encoding)
+
+The name_offset in a reference list entry points to the length byte of
+the corresponding name in the name list. Resources without names have
+name_offset = -1 (0xFFFF).
+
+
+================================================================================
+4. DIRECTOR RESOURCE TYPES
+================================================================================
+
+Director files contain standard Apple resource types (snd, STR, vers, icons)
+plus Director-specific types prefixed with "VW" (VideoWorks). Each file
+typically contains exactly one of each configuration/metadata type (VWCF,
+VWCR, VWSC, VWAC, VWFI) and multiple BITD/snd/STXT/VWCI resources
+corresponding to individual cast members.
+
+
+4.1 VWCF - VideoWorks Config
+--------------------------------------------------------------------------------
+Resource ID: 1024 (always)
+Occurrence:  Exactly 1 per file
+
+Contains global movie configuration. Fixed size: 48 bytes for Director 3/4.
+
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   data_size            Total size of config data (48)
+2       2     uint16   version              Config version (0x0400 = Director 4)
+4       2     int16    stage_top            Stage rectangle - top
+6       2     int16    stage_left           Stage rectangle - left
+8       2     int16    stage_bottom         Stage rectangle - bottom
+10      2     int16    stage_right          Stage rectangle - right
+12      2     int16    cast_array_start     First cast member slot index (1)
+14      2     int16    cast_array_end       Last cast member slot index
+16      1     uint8    frame_rate           Initial frame rate
+17      1     uint8    light_switch         Light switch flag
+18      2     bytes    unknown_18           Unknown
+20      2     uint16   comment_font         Comment font ID
+22      2     uint16   comment_size         Comment font size
+24      2     uint16   comment_style        Comment font style
+26      2     uint16   stage_color          Stage background color index
+28      2     uint16   bit_depth            Movie bit depth (1, 2, 4, 8, 16, 32)
+30      18    bytes    extended_fields      Additional D4+ fields
+--------------------------------------------------------------------------------
+
+Stage dimensions: width = stage_right - stage_left
+                  height = stage_bottom - stage_top
+
+Common stage sizes: 512x384, 640x480
+
+
+4.2 VWCR - VideoWorks Cast Record
+--------------------------------------------------------------------------------
+Resource ID: 1024 (always)
+Occurrence:  Exactly 1 per file (Director 2/3/early 4)
+
+Contains a sequential array of cast member records, one for each slot from
+cast_array_start to cast_array_end (as defined in VWCF). This resource ID
+(1024) is the "cast ID offset" used to map cast indices to resource IDs.
+
+FORMAT:
+  For each cast slot (cast_array_start to cast_array_end):
+    1 byte: uint8  record_size    Bytes of data following (0 = empty slot)
+    If record_size > 0:
+      N bytes: record_data      Cast member record (N = record_size)
+
+RECORD DATA (first byte is always cast_type):
+  Byte 0: uint8  cast_type       Cast member type
+
+CAST TYPE VALUES:
+  1  = bitmap           Has associated BITD resource
+  2  = film loop        Composite animation
+  3  = text             Has associated STXT resource
+  4  = palette          Color palette reference
+  5  = picture          PICT resource
+  6  = sound            Has associated snd resource
+  7  = button           Interactive button
+  8  = shape            Vector shape (rectangle, oval, line)
+  9  = movie            External movie reference
+  10 = digital video    QuickTime movie reference
+  11 = script           Lingo script
+
+BITMAP RECORD (cast_type = 1, record_size = 24 or 28):
+--------------------------------------------------------------------------------
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    cast_type            Always 1
+1       1     uint8    flags1               Flags byte
+2       2     uint16   _bytes               Bit 0x8000: color image; lower bits:
+                                            pitch or internal use
+4       2     int16    initial_top          Image rect - top
+6       2     int16    initial_left         Image rect - left
+8       2     int16    initial_bottom       Image rect - bottom
+10      2     int16    initial_right        Image rect - right
+12      2     int16    bounding_top         Bounding rect - top
+14      2     int16    bounding_left        Bounding rect - left
+16      2     int16    bounding_bottom      Bounding rect - bottom
+18      2     int16    bounding_right       Bounding rect - right
+20      2     int16    reg_y                Registration point Y
+22      2     int16    reg_x                Registration point X
+--- Following fields only present if _bytes & 0x8000 (color image) ---
+24      2     uint16   bits_per_pixel       Color depth (2, 4, 8, 16, 32)
+26      2     int16    clut_id              Palette reference (see below)
+--------------------------------------------------------------------------------
+
+  Image width  = initial_right - initial_left
+  Image height = initial_bottom - initial_top
+
+  For monochrome images (_bytes & 0x8000 == 0):
+    bits_per_pixel = 1, clut_id = 0
+    Record size = 24 bytes
+
+  For color images (_bytes & 0x8000 != 0):
+    Record size = 28 bytes
+
+SOUND RECORD (cast_type = 6, record_size = 1):
+  Only contains the type byte. Sound metadata is in the snd resource.
+
+TEXT RECORD (cast_type = 3, record_size = 30):
+--------------------------------------------------------------------------------
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    cast_type            Always 3
+1       1     uint8    text_flags           Text flags
+2       8     int16[4] text_rect            Text bounding rectangle
+10      8     int16[4] text_shadow          Text shadow rectangle
+18      12    bytes    text_properties      Additional text properties
+--------------------------------------------------------------------------------
+
+DIGITAL VIDEO RECORD (cast_type = 10, record_size = 14):
+  Contains QuickTime movie reference properties.
+
+SHAPE RECORD (cast_type = 8):
+  Contains shape type and bounding rectangle.
+
+BUTTON RECORD (cast_type = 7):
+  Contains button type indicator.
+
+
+4.3 VWCI - VideoWorks Cast Info
+--------------------------------------------------------------------------------
+Resource ID: cast_index + cast_id_offset (same as the cast member's data)
+Occurrence:  One per cast member that has metadata
+
+Contains metadata strings for a cast member, including name and Lingo scripts.
+Uses a string-table format shared with VWFI.
+
+STRING TABLE FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   unk1                 Unknown (typically 0x00000010 = 16)
+4       4     uint32   unk2                 Script reference/offset
+8       4     uint32   flags                Cast member flags
+12      4     uint32   script_id            Script cast member reference
+16      2     uint16   string_count         Number of strings (typically 5)
+18      var   uint32[] string_offsets       string_count + 1 cumulative offsets
+var     var   bytes    string_data          Concatenated string data
+--------------------------------------------------------------------------------
+
+String data for each index i spans from string_offsets[i] to
+string_offsets[i+1] (relative to start of string_data section).
+
+Each string is stored as a Pascal string: first byte = length, followed
+by that many bytes of string content (Mac Roman encoding).
+
+STRING INDICES:
+  Index 0: script      Lingo script source text
+  Index 1: name        Cast member name
+  Index 2: cProp03     Directory path (for external files)
+  Index 3: cProp04     File name (for external files)
+  Index 4: cProp05     File type (for external files)
+
+For Director 5+, additional indices exist:
+  Index 5-21: Various extended properties (creation time, comments, etc.)
+
+
+4.4 VWSC - VideoWorks Score
+--------------------------------------------------------------------------------
+Resource ID: 1024 (always)
+Occurrence:  Exactly 1 per file
+
+Contains the animation timeline (score) with frame-by-frame channel data
+using delta compression.
+
+HEADER (20 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   total_size           Total score data size
+4       4     uint32   header_marker        Should be 0x00000014 (20)
+8       4     uint32   frame_count          Number of frames
+12      2     uint16   unknown_01           Unknown
+14      2     uint16   frame_size           Bytes per sprite channel:
+                                            16 = Director 2/3
+                                            20 = Director 4
+                                            24 = Director 5
+16      2     uint16   channel_count        Number of channels per frame
+18      2     uint16   unknown_02           Unknown
+--------------------------------------------------------------------------------
+
+DELTA-ENCODED FRAMES:
+  After the header, frames are stored using delta compression. A persistent
+  channel buffer of (channel_count * frame_size) bytes is maintained.
+  Each frame records only changes from the previous state.
+
+  For each frame:
+    2 bytes: uint16  channel_size    Total bytes for this frame's delta data
+                                     (2 = no changes, frame identical to previous)
+
+    If channel_size > 2, delta blocks follow until channel_size bytes consumed:
+      2 bytes: uint16  delta_size    Number of bytes of new data
+      2 bytes: int16   delta_offset  Position in channel buffer to write
+      N bytes: bytes   delta_data    New data (N = delta_size)
+
+    The channel buffer is updated by copying delta_data to delta_offset.
+    After all deltas, the buffer represents the current frame state.
+
+CHANNEL BUFFER LAYOUT:
+  The buffer is divided into channel_count channels, each frame_size bytes.
+  Channel 0 (and part of channel 1) form the "main channel" containing
+  tempo, transition, sound, and script data. Channels 2+ are sprite channels.
+
+D4 MAIN CHANNEL (frame_size=20, occupies channels 0-1 = 40 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    unknown              Unknown
+1       3     bytes    transition_info      Transition duration, chunk size
+4       1     uint8    tempo                Tempo (frames per second)
+5       1     uint8    transition_type      Transition type enum
+6       2     uint16   sound1_cast_id       Sound channel 1 cast member ID
+8       2     uint16   sound2_cast_id       Sound channel 2 cast member ID
+10      6     bytes    extended_sound       Extended sound properties
+16      2     uint16   script_cast_id       Frame script cast member ID
+18      22    bytes    palette_and_more     Palette, color cycling data
+--------------------------------------------------------------------------------
+
+D4 SPRITE CHANNEL (20 bytes each, channels 2+):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    unused               Unused
+1       1     uint8    sprite_type          Sprite type
+2       1     uint8    fore_color           Foreground color index
+3       1     uint8    back_color           Background color index
+4       1     uint8    thickness            Line thickness (bits 0-6)
+5       1     uint8    ink_data             Bits 0-5: ink effect
+                                            Bit 6: trails
+                                            Bit 7: stretch
+6       2     uint16   cast_id              Cast member ID (0 = empty)
+8       2     int16    pos_y                Sprite Y position
+10      2     int16    pos_x                Sprite X position
+12      2     int16    height               Sprite height
+14      2     int16    width                Sprite width
+16      2     uint16   script_id            Sprite script cast member ID
+18      1     uint8    color_code           Bits 0-3: score color
+                                            Bit 4: fg is RGB
+                                            Bit 5: bg is RGB
+                                            Bit 6: editable
+                                            Bit 7: moveable
+19      1     uint8    blend_amount         Blend/transparency (0-100)
+--------------------------------------------------------------------------------
+
+INK EFFECT VALUES:
+  0 = Copy            8 = Matte           33 = Add Pin
+  1 = Transparent     9 = Mask            34 = Add
+  2 = Reverse        32 = Blend           35 = Subtract Pin
+  3 = Ghost          36 = Bg Transparent  37 = Lightest
+  4 = Not Copy       38 = Subtract        39 = Darkest
+  5 = Not Transparent
+  6 = Not Reverse
+  7 = Not Ghost
+
+
+4.5 VWAC - VideoWorks Actions
+--------------------------------------------------------------------------------
+Resource ID: 1024 (always)
+Occurrence:  Exactly 1 per file
+
+Contains frame-level Lingo script actions (frame behaviors).
+
+FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   count                Number of action entries
+2       var   struct   entries[]            Action entry table
+var     var   char[]   script_text          Concatenated Lingo script text
+                                            (Mac Roman encoding)
+--------------------------------------------------------------------------------
+
+Each action entry (4 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    frame_id             Frame number this action belongs to
+1       1     uint8    action_type          0x01 = frame script
+                                            0x03 = movie script
+                                            0x00 = end/separator
+2       2     uint16   text_offset          Offset into script_text section
+--------------------------------------------------------------------------------
+
+
+4.6 VWFI - VideoWorks File Info
+--------------------------------------------------------------------------------
+Resource ID: 1024 (always)
+Occurrence:  Exactly 1 per file
+
+Contains movie-level metadata and movie scripts. Uses the same string-table
+format as VWCI (see Section 4.3).
+
+STRING INDICES:
+  Index 0: script      Movie script (on startMovie, on stopMovie, etc.)
+  Index 1: name        Movie name
+  Index 2: directory   Original directory path
+  Index 3: fileName    Original file name
+  Index 4: fileType    File type identifier
+  Index 5: comment     Author/description comment
+  Index 6: copyright   Copyright information
+
+
+4.7 VWFM - VideoWorks Font Map
+--------------------------------------------------------------------------------
+Resource ID: 1024
+Occurrence:  0 or 1 per file
+
+Maps platform-specific font IDs to font names for cross-platform compatibility.
+
+FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   count                Number of font entries
+2       var   struct   entries[]            Font mapping entries
+--------------------------------------------------------------------------------
+
+Each font entry:
+  2 bytes: uint16   font_id              Platform font ID
+  1 byte:  uint8    name_length          Font name length
+  N bytes: char[]   font_name            Font name (Mac Roman)
+
+
+4.8 VWLB - VideoWorks Labels
+--------------------------------------------------------------------------------
+Resource ID: 1024
+Occurrence:  0 or 1 per file
+
+Contains named markers on the score timeline, used for "go to" navigation.
+
+FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   count                Number of label entries
+2       var   struct   entries[]            Label entry table
+var     var   char[]   label_strings        Concatenated label name strings
+--------------------------------------------------------------------------------
+
+Each label entry (4 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   frame_number         Frame this label marks
+2       2     uint16   string_offset        Offset into label_strings section
+--------------------------------------------------------------------------------
+
+
+4.9 BITD - Bitmap Data
+================================================================================
+Resource ID: cast_index + cast_id_offset
+Occurrence:  One per bitmap cast member
+
+Contains raw bitmap pixel data, typically PackBits-compressed (see Section 5).
+The BITD resource has NO HEADER - all metadata (width, height, bit depth,
+palette reference) comes from the corresponding VWCR record.
+
+DETERMINING COMPRESSION:
+  pitch = ((width * bits_per_pixel + 15) / 16) * 2    [word-aligned]
+  expected_size = pitch * height
+
+  If len(BITD_data) == expected_size: data is UNCOMPRESSED
+  If len(BITD_data) < expected_size:  data is PackBits COMPRESSED
+  If len(BITD_data) > expected_size:  treat as uncompressed (may have trailing)
+
+PIXEL DATA LAYOUT BY BIT DEPTH:
+
+  1-bit (monochrome):
+    8 pixels per byte, MSB first.
+    Bit 0 = white (background), Bit 1 = black (foreground).
+    Row pitch: ((width + 15) / 16) * 2 bytes.
+
+  2-bit (4 colors):
+    4 pixels per byte, high bits first.
+    Pixel extraction: (byte >> (6 - 2*(x%4))) & 0x03
+    Palette-indexed using system palette or CLUT.
+
+  4-bit (16 colors):
+    2 pixels per byte, high nibble first.
+    Pixel extraction: high = (byte >> 4) & 0x0F, low = byte & 0x0F
+    Palette-indexed.
+
+  8-bit (256 colors):
+    1 pixel per byte. Palette-indexed.
+    Row pitch: ((width + 1) / 2) * 2 bytes (width rounded to even).
+
+  16-bit (thousands of colors):
+    2 bytes per pixel, big-endian. RGB555 format:
+    Bit 15:    unused
+    Bits 14-10: Red (0-31)
+    Bits 9-5:   Green (0-31)
+    Bits 4-0:   Blue (0-31)
+
+  32-bit (millions of colors):
+    4 bytes per pixel in interleaved XRGB layout:
+    Byte 0: Padding/Alpha (unused, typically 0x00)
+    Byte 1: Red
+    Byte 2: Green
+    Byte 3: Blue
+    Row pitch = width * 4, padded to even byte count.
+
+
+4.10 snd - Mac Sound Resource
+================================================================================
+Resource ID: cast_index + cast_id_offset
+Occurrence:  One per sound cast member
+
+Uses the standard Macintosh Sound Manager resource format. The type code is
+"snd " (with trailing space).
+
+TOP-LEVEL HEADER:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   format               1 = format 1, 2 = format 2
+--------------------------------------------------------------------------------
+
+FORMAT 1 (with data format list):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+2       2     uint16   num_modifiers        Number of modifier entries
+4       var   struct   modifiers[]          Modifier entries (6 bytes each)
+                                            Each: uint16 type + uint32 init_bits
+var     2     uint16   num_commands          Number of sound commands
+var     var   struct   commands[]           Sound commands (8 bytes each)
+--------------------------------------------------------------------------------
+
+FORMAT 2 (simple):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+2       2     uint16   ref_count            Reference count
+4       2     uint16   num_commands          Number of sound commands
+6       var   struct   commands[]           Sound commands (8 bytes each)
+--------------------------------------------------------------------------------
+
+SOUND COMMAND (8 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   cmd                  Command code (bit 15 = data offset flag)
+2       2     uint16   param1               First parameter
+4       4     uint32   param2               Second parameter or data offset
+--------------------------------------------------------------------------------
+
+  Common command: 0x8051 = bufferCmd with data offset flag
+  When bit 15 is set, param2 is an offset from the start of the resource
+  to the sound data header.
+
+STANDARD SOUND HEADER (encode = 0x00):
+  Located at offset specified by bufferCmd's param2.
+
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   sample_ptr           Always 0 (samples follow header)
+4       4     uint32   num_samples          Number of audio samples
+8       4     uint32   sample_rate          Fixed-point 16.16 format
+                                            Common: 0x56EE8BA4 = 22254.55 Hz
+                                                    0x2B7745D2 = 11127.27 Hz
+12      4     uint32   loop_start           Loop start point (0 = no loop)
+16      4     uint32   loop_end             Loop end point (0 = no loop)
+20      1     uint8    encode               0x00 = stdSH (standard)
+                                            0xFF = extSH (extended)
+                                            0xFE = cmpSH (compressed)
+21      1     uint8    base_frequency       MIDI note number (60 = middle C)
+22      var   uint8[]  sample_data          Raw audio samples
+                                            8-bit unsigned PCM (0x80 = silence)
+--------------------------------------------------------------------------------
+
+EXTENDED SOUND HEADER (encode = 0xFF):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   sample_ptr           Always 0
+4       4     uint32   num_channels         Number of audio channels
+8       4     uint32   sample_rate          Fixed-point 16.16
+12      4     uint32   loop_start           Loop start point
+16      4     uint32   loop_end             Loop end point
+20      1     uint8    encode               0xFF
+21      1     uint8    base_frequency       MIDI note number
+22      4     uint32   num_frames           Number of sample frames
+26      10    bytes    aiff_sample_rate     80-bit IEEE 754 extended float
+36      4     uint32   marker_chunk         Reserved
+40      4     uint32   instrument_chunks    Reserved
+44      4     uint32   aes_recording        Reserved
+48      2     uint16   sample_size          Bits per sample (8 or 16)
+50      14    bytes    reserved             Reserved
+64      var   bytes    sample_data          Raw audio samples
+--------------------------------------------------------------------------------
+
+WAV CONVERSION:
+  8-bit unsigned PCM can be written directly to WAV format (WAV 8-bit is
+  also unsigned). Set: channels=1, bits=8, sample_rate from Fixed-point.
+
+
+4.11 STXT - Styled Text
+================================================================================
+Resource ID: cast_index + cast_id_offset
+Occurrence:  One per text cast member
+
+Contains plain text content with rich text formatting runs.
+
+HEADER (12 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   header_size          Always 12 (0x0C)
+4       4     uint32   text_length          Length of text data in bytes
+8       4     uint32   style_data_length    Length of formatting data
+--------------------------------------------------------------------------------
+
+TEXT DATA (text_length bytes, starting at offset 12):
+  Mac Roman encoded text. Line endings are \r (0x0D). Character \x01 is
+  escaped by doubling (\x01\x01).
+
+STYLE RUNS (following text data):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   num_runs             Number of style runs
+--------------------------------------------------------------------------------
+
+Each style run (20 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       4     uint32   start_offset         Byte position in text where run starts
+4       2     uint16   font_height          Line height
+6       2     uint16   font_ascent          Font ascent
+8       2     uint16   font_id              Font family ID (platform-specific)
+10      1     uint8    text_slant           Style flags:
+                                            Bit 0: bold
+                                            Bit 1: italic
+                                            Bit 2: underline
+11      1     uint8    padding              Reserved
+12      2     uint16   font_size            Point size
+14      2     uint16   red                  Text color red (0-65535)
+16      2     uint16   green                Text color green (0-65535)
+18      2     uint16   blue                 Text color blue (0-65535)
+--------------------------------------------------------------------------------
+
+
+4.12 CLUT/clut - Color Lookup Table
+================================================================================
+Resource ID: cast_index + cast_id_offset
+Occurrence:  Variable (0 to many per file)
+Note:        Both uppercase 'CLUT' (Director palette) and lowercase 'clut'
+             (standard Mac color table) use the same binary format.
+
+Director uses a simplified 6-bytes-per-entry palette format:
+
+SIZE: 1536 bytes (256 entries x 6 bytes)
+
+Each entry (6 bytes):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    red_high             Red component (0-255)
+1       1     uint8    red_low              Red low byte (usually ignored)
+2       1     uint8    green_high           Green component (0-255)
+3       1     uint8    green_low            Green low byte (usually ignored)
+4       1     uint8    blue_high            Blue component (0-255)
+5       1     uint8    blue_low             Blue low byte (usually ignored)
+--------------------------------------------------------------------------------
+
+To extract 8-bit RGB: R = byte[0], G = byte[2], B = byte[4].
+(The low bytes are the low 8 bits of 16-bit color components but are
+typically identical to or interpolations of the high bytes.)
+
+CLUT_ID PALETTE RESOLUTION:
+  clut_id > 0:  Cast member index referencing a palette cast member.
+                Resource ID = clut_id + cast_id_offset (typically + 1024).
+  clut_id = 0:  Movie default palette.  If the file contains CLUTs that no
+                bitmap explicitly references, the first CLUT is the movie
+                palette.  Otherwise, the Mac System Palette is used.
+  clut_id < 0:  Built-in Director palette.  In Director 3.x VWCR records,
+                the numbering starts at -1 (one higher than ScummVM's
+                PaletteType enum, which uses a frame-based numbering offset
+                by -1 from the header/cast record numbering):
+                -1 = Rainbow
+                -2 = Grayscale
+                -3 = Pastels
+                -4 = Vivid
+                -5 = NTSC
+                -6 = Metallic
+                Note: clut_id=0 already serves as "System Mac / movie default",
+                so -1 is the first non-default built-in palette.
+
+For bitmaps with bpp <= 4 (2-bit or 4-bit), Director uses a 16-color
+variant of each built-in palette, which has a different color mapping
+than the first 16 entries of the 256-color version.
+
+SHARED CAST / SIBLING PALETTE RESOLUTION:
+  Director projects often span multiple files: a main movie, sub-movies
+  (*.dir), and one or more Shared Cast files. Bitmaps in sub-movies may
+  reference palette cast members (positive clut_id) that only exist in
+  a Shared Cast or sibling file. When a clut_id references a CLUT not
+  found in the local file, CLUT resources from sibling files in the same
+  directory are searched (prioritizing files named "Shared Cast*").
+  The resource ID match uses: abs_id = clut_id + cast_id_offset.
+  If no exact match, the first sibling CLUT serves as the movie palette
+  fallback for unresolved references.
+
+
+4.13 STR - Pascal String
+================================================================================
+Resource ID: 1024 or -16396 (common values)
+Occurrence:  1-2 per file
+
+Standard Macintosh Pascal string resource ("STR " with trailing space).
+
+FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    length               String length (0-255)
+1       N     char[]   string               String data (Mac Roman, N = length)
+--------------------------------------------------------------------------------
+
+Common values found:
+  ID 1024:   Movie-specific identifier (e.g., "rollingSnds", "Sounds")
+  ID -16396: Application name ("Macromedia Director")
+
+
+4.14 SCVW - Score View
+================================================================================
+Occurrence: 0-3 per file (only in authoring files)
+
+Contains score window display state from the Director authoring environment.
+This is editor metadata, not playback data. Approximately 470-490 bytes of
+binary data describing channel visibility, zoom level, and window position.
+
+Stored as raw binary; no further parsing needed for extraction.
+
+
+4.15 vers - Version Info
+================================================================================
+Resource ID: 1 and/or 2
+Occurrence:  0-2 per file (common in projector/startup files)
+
+Standard Macintosh version resource format.
+
+FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       1     uint8    major_version        Major version number
+1       1     uint8    minor_bugfix         High nibble: minor, low nibble: bugfix
+2       1     uint8    development_stage    0x20 = development
+                                            0x40 = alpha
+                                            0x60 = beta
+                                            0x80 = release
+3       1     uint8    prerelease_version   Pre-release revision number
+4       2     uint16   country_code         Region code (0 = USA)
+6       var   pstring  short_version        Short version string (Pascal string)
+var     var   pstring  long_version         Long version string (Pascal string)
+--------------------------------------------------------------------------------
+
+vers ID 1: Application version (e.g., "1.0.2")
+vers ID 2: Authoring tool (e.g., "Macromedia Director 4.0")
+
+
+4.16 Icon Resources
+================================================================================
+Standard Macintosh icon family resources. All at the same resource ID
+(typically -16455 for bundle icons).
+
+TYPE     SIZE     DESCRIPTION
+------   ------   --------------------------------------------------
+ICN#     256      32x32 1-bit icon + 32x32 1-bit mask (128+128 bytes)
+ICON     128      32x32 1-bit icon (no mask)
+icl8     1024     32x32 8-bit indexed color icon (system palette)
+icl4     512      32x32 4-bit indexed color icon (first 16 palette entries)
+ics#     64       16x16 1-bit icon + 16x16 1-bit mask (32+32 bytes)
+ics8     256      16x16 8-bit indexed color icon
+ics4     128      16x16 4-bit indexed color icon
+
+ICN#/ics# layout: first half = icon data, second half = mask data.
+Pixels are packed MSB-first, one bit per pixel, row-major order.
+
+icl8/ics8: one byte per pixel, indexed into the Mac System Palette.
+icl4/ics4: one nibble per pixel (high nibble first), indexed into palette.
+
+
+4.17 Code Resources
+================================================================================
+These contain executable 68000 machine code for XCMDs, XObjects, and
+system extensions. Not meaningful for content extraction but preserved
+for completeness.
+
+TYPE     DESCRIPTION
+------   --------------------------------------------------
+XCMD     External Command (HyperCard/Director XCMD)
+XCOD     External Code Object (Director XObject)
+XFCN     External Function (HyperCard/Director external function)
+SeLF     Self-loading resource descriptor (64 bytes, contains
+         references to the component code resources)
+CCOD     Component code of a multi-part XCMD
+C*DE     Code resource (variant naming; the * is Mac Roman 0xA5
+         bullet character, displayed as C•DE in Unicode)
+WDEF     Window Definition Procedure
+
+All contain raw 68000 machine code, typically starting with a BRA (branch)
+instruction (opcode 0x60xx) or LINK A6 (opcode 0x4E56) frame setup.
+
+XCOD resources may contain embedded ASCII documentation strings at known
+offsets (e.g., version info, author credits).
+
+
+4.18 CURS - Mac Cursor
+================================================================================
+Occurrence: 0 to many per file (found in 92 of 1000 sample files)
+
+Standard Macintosh cursor resource: 16x16 1-bit image with mask and hotspot.
+
+FORMAT (68 bytes total):
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       32    bits     cursor_data          16x16 1-bit cursor image (MSB first)
+32      32    bits     cursor_mask          16x16 1-bit transparency mask
+64      2     int16    hotspot_y            Hotspot Y coordinate
+66      2     int16    hotspot_x            Hotspot X coordinate
+--------------------------------------------------------------------------------
+
+Cursor data is packed as 16 rows of 2 bytes each (16 bits per row), MSB first.
+Bit=1 means black pixel, bit=0 means white. The mask determines which pixels
+are visible (bit=1 = opaque).
+
+
+4.19 PICT - Mac Picture
+================================================================================
+Occurrence: Rare (found in 9 of 1000 sample files)
+
+Contains raw Macintosh PICT format image data. PICT is a complex metafile
+format supporting both QuickDraw opcodes and embedded pixel data. The
+resource data is the complete PICT data stream (without the 512-byte file
+header that .pict files on disk may have).
+
+Best handled by saving as a .pict file for conversion by external tools.
+
+
+4.20 STR# - String List
+================================================================================
+Occurrence: Rare (found in 2 of 1000 sample files)
+
+Standard Macintosh string list resource.
+
+FORMAT:
+Offset  Size  Type     Field                Description
+--------------------------------------------------------------------------------
+0       2     uint16   count                Number of strings in list
+2       var   pstring  strings[0]           First string (Pascal format)
+...     var   pstring  strings[N-1]         Last string
+--------------------------------------------------------------------------------
+
+Each string is Pascal-encoded: 1 byte length prefix + N bytes of text data.
+Strings are Mac Roman encoded.
+
+
+4.21 MooV - QuickTime Movie Reference
+================================================================================
+Occurrence: Moderate (found in 25 of 1000 sample files)
+
+Contains QuickTime movie data or references embedded in Director. Cast
+members of type 10 (digital video) reference these. The data may contain
+file path references to external .MOV files or embedded QuickTime atoms.
+
+
+4.22 Additional Resource Types
+================================================================================
+The following resource types appear in Director files but contain internal
+metadata that is not meaningful for content extraction:
+
+TYPE     FREQ   DESCRIPTION
+------   -----  --------------------------------------------------
+VWTL     39     VideoWorks Timeline data
+VWtc     31     VideoWorks text configuration
+MARK     42     Director markers/bookmarks
+FOND     19     Mac Font Family descriptor
+FONT     10     Mac bitmap font resource
+NFNT     21     Mac New Font resource (bitmap font)
+alis     3      Mac Alias record (file reference)
+fwst     5      Director font/window state metadata
+SHAP     10     Director shape definition
+DATA     2      Generic data resource
+DLOG     1      Mac Dialog template
+DITL     1      Mac Dialog Item List
+DRVR     2      Mac Device Driver resource
+
+Frequency values are out of 2007 sample files tested.
+
+FOND/FONT/NFNT resources are embedded Macintosh bitmap fonts used for
+rendering text cast members in the correct typeface. These are standard
+Mac font resources (see Inside Macintosh: Text for format details).
+
+DLOG/DITL/DRVR are standard Macintosh Toolbox resources occasionally
+embedded in Director files for custom dialogs or device drivers.
+
+
+================================================================================
+5. PACKBITS COMPRESSION
+================================================================================
+
+BITD bitmap data uses Apple's PackBits run-length encoding scheme. This is
+the same compression used in MacPaint and TIFF files.
+
+ALGORITHM:
+  Read the data as a stream of control bytes followed by data bytes:
+
+  Control byte N (signed int8, -128 to 127):
+
+  N = 0 to 127:     LITERAL RUN
+                     Copy the next (N + 1) bytes literally to output.
+
+  N = -1 to -127:   REPEAT RUN
+                     Read one byte and repeat it (1 - N) times.
+                     (Using unsigned: repeat (257 - N) times.)
+
+  N = -128 (0x80):  NO-OP
+                     Skip this byte (do nothing).
+
+DECOMPRESSION:
+  Continue reading control bytes until the output reaches the expected
+  size (pitch * height bytes).
+
+  Expected size: pitch = ((width * bpp + 15) / 16) * 2
+                 total = pitch * height
+
+
+================================================================================
+6. MAC SYSTEM COLOR PALETTE
+================================================================================
+
+When a bitmap's CLUT reference is 0 (or no CLUT resource exists), the
+standard Macintosh 256-color system palette is used.
+
+PALETTE STRUCTURE (256 entries):
+Source: ScummVM Director engine (macPalette / kClutSystemMac), extracted
+from the Director 4 projector resource fork.
+
+Indices 0-214:    6x6x6 Color Cube (215 entries, pure black omitted)
+  Levels per channel: 0xFF, 0xCC, 0x99, 0x66, 0x33, 0x00
+  Ordering: for R in levels, for G in levels, for B in levels
+  Index 0 = (0xFF, 0xFF, 0xFF) = white
+  Index 214 = (0x00, 0x00, 0x33) = near-black
+  Note: Pure black (0,0,0) would be index 215 in a full 6x6x6 cube but
+  is moved to index 255. The cube therefore contains only 215 entries.
+
+Indices 215-224:  Red Ramp (10 entries)
+  (V, 0, 0) for V in: 0xEE, 0xDD, 0xBB, 0xAA, 0x88, 0x77, 0x55, 0x44,
+                       0x22, 0x11
+
+Indices 225-234:  Green Ramp (10 entries)
+  (0, V, 0) for V in: same values as red ramp
+
+Indices 235-244:  Blue Ramp (10 entries)
+  (0, 0, V) for V in: same values as red ramp
+
+Indices 245-254:  Grayscale Ramp (10 entries)
+  (V, V, V) for V in: same values as red ramp
+
+Index 255:        Black (0x00, 0x00, 0x00)
+
+Note: Pure colors at full intensity (FF,00,00), (00,FF,00), (00,00,FF)
+are already present in the color cube. The ramp entries provide additional
+intermediate saturated values not covered by the cube's 6 levels.
+
+
+================================================================================
+7. RESOURCE ID TO CAST MEMBER MAPPING
+================================================================================
+
+Director maps cast member indices to resource IDs using a fixed offset:
+
+  resource_id = cast_index + cast_id_offset
+
+Where cast_id_offset = the resource ID of the VWCR resource (always 1024
+in the observed samples).
+
+This mapping applies to ALL per-cast-member resources:
+  - BITD: bitmap data for bitmap cast members
+  - snd:  sound data for sound cast members
+  - STXT: styled text for text cast members
+  - CLUT: palette for palette cast members
+  - VWCI: cast info/metadata for any cast member
+
+EXAMPLE:
+  cast_id_offset = 1024
+  Cast member #1 → BITD resource ID 1025, VWCI resource ID 1025
+  Cast member #2 → snd resource ID 1026, VWCI resource ID 1026
+  Cast member #27 → BITD resource ID 1051, VWCI resource ID 1051
+
+
+================================================================================
+8. BYTE ACCOUNTING
+================================================================================
+
+Every byte in the file is accounted for:
+
+MACBINARY LAYER:
+  128 bytes     MacBinary II header
+  0 bytes       Data fork (always empty for VWMD)
+  N bytes       Resource fork (= res_fork_length from header)
+  P bytes       Padding to 128-byte boundary
+                P = ceil(res_fork_length / 128) * 128 - res_fork_length
+  TOTAL = 128 + ceil(res_fork_length / 128) * 128
+
+RESOURCE FORK LAYER:
+  16 bytes      Fork header (offsets and lengths)
+  240 bytes     System-reserved area (bytes 16-255, zero-filled)
+  D bytes       Resource data region:
+                  For each resource: 4 bytes length prefix + data bytes
+  M bytes       Resource map:
+                  28 bytes     Map header (copy of fork header + reserved + offsets)
+                  2 bytes      Type count (num_types - 1)
+                  T*8 bytes    Type list entries (T = num_types)
+                  R*12 bytes   Reference list entries (R = total num_resources)
+                  N bytes      Name list (Pascal strings for named resources)
+  TOTAL = 256 + D + M
+
+  Where D = sum of (4 + resource_data_length) for all resources
+        M = 28 + 2 + T*8 + R*12 + sum(1 + name_length) for named resources
+
+================================================================================
+END OF SPECIFICATION
+================================================================================

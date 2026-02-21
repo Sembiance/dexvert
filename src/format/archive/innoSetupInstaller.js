@@ -8,7 +8,7 @@ export class innoSetupInstaller extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	keepFilename   = true;
-	magic          = [/^Inno Setup installer$/, "Installer: Inno Setup Module", "zlib-komprimierte Inno Setup Daten", /^Inno Setup data$/];
+	magic          = [/^Inno Setup installer$/, "Installer: Inno Setup Module", "zlib-komprimierte Inno Setup Daten", /^Inno Setup data$/, "overlay: archive/innoSetupArchive", "overlay: archive/innoSetupInstaller"];
 	auxFiles       = async (input, otherFiles) =>
 	{
 		const archiveFiles = [];
@@ -22,16 +22,5 @@ export class innoSetupInstaller extends Format
 		}
 		return archiveFiles.length ? archiveFiles : false;
 	};
-	converters = dexState =>
-	{
-		const r = [];
-		
-		// only use innoextract if we have actual aux files, as it doesn't handle extracting as much stuff from stand-alone exe files as innounp does (1674007302_setup.exe)
-		if(dexState.f.files?.aux?.length)
-			r.push("innoextract");
-
-		// skip including the aux files here, as they are often huge and if innoextract didn't handle them, likely these windows tools won't either
-		r.push("innounp[noAux]", "cmdTotal[noAux][wcx:InstExpl.wcx]");
-		return r;
-	};
+	converters = ["innoextract"];
 }

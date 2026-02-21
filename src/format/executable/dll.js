@@ -40,13 +40,26 @@ export class dll extends Format
 			return [];
 		}
 
-		return (Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS) ? [
+		if(!Object.keys(dexState.meta).includesAny(_WINDUMP_META_KEYS))
+			return [];
+		
+		const overlays = [];
+		for(const id of dexState.ids)
+		{
+			if(id.from==="exeOverlayID")
+				overlays.push(`exeOverlayExtract[chainAs:${id.magic.split(" ").at(-1)}][subOutDir:overlay]`);
+		}
+
+		const standard = [
 			// first make sure there it's not a Projector file with a director file hidden in it, then we want to extract it for sure
 			"director_files_extract",
 
 			// otheriwse just extract whatever resources we can
 			"sevenZip[type:PE][rsrcOnly]",
-			"deark[module:exe]"] : []);
+			"deark[module:exe]"
+		];
+
+		return overlays.length ? [standard, overlays] : standard;
 	};
 	post = dexState =>
 	{

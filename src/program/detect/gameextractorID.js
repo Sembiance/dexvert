@@ -50,5 +50,4 @@ export class gameextractorID extends Program
 		}
 	};
 	renameOut = false;
-	notes     = "Server version of gameextract vibe coded with claude code";
 }

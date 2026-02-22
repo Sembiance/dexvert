@@ -295,7 +295,7 @@ export const WEAK_VALUES =
 	/^overlay: audio\/(agsAudioData|downloadableSoundBank)$/,
 	/^overlay: executable\/exe$/,
 	/^overlay: image\/(acornSprite|degas.*|ico|pict|tga|wmf)$/,
-	/^overlay: other\/nullBytesAlternating$/,
+	/^overlay: other\/(msVisualFoxProApp|nullBytesAlternating)$/,
 	/^overlay: video\/mpeg2$/,
 
 	// ffprobeID
@@ -362,8 +362,8 @@ export const WEAK_VALUES =
 
 	// gameextractor - actually WEAK
 	// candidates
-	// SEEN  ONCE: DAT_RES, BAG_5, BAG_GABA_2, BIG, BNK, DTA, IMG, IMG_DAVILEX_2, PCK_6, WAV, WAV_2, WD_WD, TEXS_SXET, BDF, ARC_10, aRC_11, ARC_13, ARC_6, ARC_8, RAW_MHWANH, PAK_30, PAK_7, PCK_PACK, PAK_PACK_2, PAK_PACK_3, FST_FAST_2_FSAMPLE
-	// SEEN TWICE: 001_2, FSB_FSB5
+	// SEEN  ONCE: DAT_RES, BAG_5, BAG_GABA_2, BIG, BNK, DTA, IMG, IMG_DAVILEX_2, PCK_6, WAV, WAV_2, WD_WD, TEXS_SXET, BDF, ARC_10, aRC_11, ARC_13, ARC_6, ARC_8, RAW_MHWANH, PAK_30, PAK_7, PAK_PACK_3, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON
+	// SEEN TWICE: 001_2, FSB_FSB5,PCK_PACK, PAK_PACK_2, PAK_PACK_4
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: A00( |$)/,
 	/^geArchive: ACE_SIMIS( |$)/,
@@ -477,6 +477,17 @@ export const WEAK_VALUES =
 	/^Windows Verkn.*fungs Datei$/,
 	/^Wordperfect <unbekannt>/,
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
+
+	// izarc
+	/^idarc: ACB( |$)/,
+	/^idarc: ARG( |$)/,
+	/^idarc: HYP( |$)/,
+	/^idarc: LZH( |$)/,
+	/^idarc: PAK( |$)/,
+	/^idarc: Par( |$)/,
+	/^idarc: PKLite( |$)/,
+	/^idarc: RKive( |$)/,
+	/^idarc: TTComp( |$)/,
 
 	// lsar
 	/^Arc CBM$/,

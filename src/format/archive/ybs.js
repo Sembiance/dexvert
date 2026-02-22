@@ -5,6 +5,6 @@ export class ybs extends Format
 	name           = "YBS Archive";
 	ext            = [".ybs"];
 	forbidExtMatch = true;
-	magic          = [/^Ybs archive data/, "YBS compressed archive"];
+	magic          = [/^Ybs archive data/, "YBS compressed archive", /^idarc: Ybs \(Vadim Yoockin\)( |$)/];
 	converters     = ["ybs"];
 }

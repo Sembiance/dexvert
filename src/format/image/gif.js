@@ -10,7 +10,7 @@ export class gif extends Format
 	magic        = [
 		// generic GIF
 		"GIF image data", "GIF animated bitmap", "image/gif", "CompuServe Graphics Interchange Format (GIF) (gif)", "deark: gif", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, "Compuserve GIF", /^geViewer: GIF_GIF( |$)/, /^fmt\/(3|4)( |$)/,	//eslint-disable-line sonarjs/single-character-alternation
-		"GIF (with Length Prefix)",
+		"GIF (with Length Prefix)", /^idarc: GIF( |$)/,
 
 		// app specific
 		"Mac PageMill's GIF bitmap (MacBinary)", "Fractint saved bitmap", "Fractint Continuous Potential Image"

@@ -39,13 +39,14 @@ TABLE OF CONTENTS
      4.13 STR  - Pascal String
      4.14 SCVW - Score View
      4.15 vers - Version Info
-     4.16 Icon Resources (ICN#, ICON, icl8, icl4, ics#, ics8, ics4)
+     4.16 Icon Resources (ICN#, ICON, icl8, icl4, ics#, ics8, ics4, icm#, icm4, icm8)
      4.17 Code Resources (XCMD, XCOD, XFCN, SeLF, CCOD, C*DE, WDEF)
      4.18 CURS - Mac Cursor
      4.19 PICT - Mac Picture
      4.20 STR# - String List
      4.21 MooV - QuickTime Movie Reference
-     4.22 Additional Resource Types
+     4.22 TEXT - Mac Text Resource
+     4.23 Additional Resource Types
   5. PackBits Compression
   6. Mac System Color Palette
   7. Resource ID to Cast Member Mapping
@@ -916,8 +917,11 @@ icl4     512      32x32 4-bit indexed color icon (first 16 palette entries)
 ics#     64       16x16 1-bit icon + 16x16 1-bit mask (32+32 bytes)
 ics8     256      16x16 8-bit indexed color icon
 ics4     128      16x16 4-bit indexed color icon
+icm#     48       12x12 1-bit mini icon + 12x12 1-bit mask (24+24 bytes)
+icm4     72       12x12 4-bit indexed color mini icon
+icm8     144      12x12 8-bit indexed color mini icon
 
-ICN#/ics# layout: first half = icon data, second half = mask data.
+ICN#/ics#/icm# layout: first half = icon data, second half = mask data.
 Pixels are packed MSB-first, one bit per pixel, row-major order.
 
 icl8/ics8: one byte per pixel, indexed into the Mac System Palette.
@@ -1008,35 +1012,102 @@ members of type 10 (digital video) reference these. The data may contain
 file path references to external .MOV files or embedded QuickTime atoms.
 
 
-4.22 Additional Resource Types
+4.22 TEXT - Mac Text Resource
+================================================================================
+Standard Macintosh TEXT resource containing plain text data encoded in
+Mac Roman. Extracted as UTF-8 .txt files with Mac line endings (\r)
+converted to Unix line endings (\n).
+
+The data is the raw text string with no header or length prefix.
+Empty TEXT resources (whitespace only) are skipped.
+
+
+4.23 Additional Resource Types
 ================================================================================
 The following resource types appear in Director files but contain internal
 metadata that is not meaningful for content extraction:
 
+Director Metadata:
 TYPE     FREQ   DESCRIPTION
 ------   -----  --------------------------------------------------
 VWTL     39     VideoWorks Timeline data
 VWtc     31     VideoWorks text configuration
+VWCF     777    VideoWorks configuration (Director 4+)
+VWAC     375    VideoWorks Actions / auto-config
 MARK     42     Director markers/bookmarks
+SHAP     10     Director shape definition
+SCVW     var    Score/stage view data
+OVWD     var    Overview data
+VWAD     var    VideoWorks additional data
+VWst     var    VideoWorks state
+m5cr     var    Macromedia 5 cast record
+m5ax     var    Macromedia 5 auxiliary data
+MMPB     var    MacroMind playback data
+MMPb     var    MacroMind playback data (variant)
+Tdta     var    Transition data
+MMCF     var    MacroMind config
+ROWN     var    Row/column navigation
+MMdp     var    MacroMind display preferences
+ZERO     var    Zero-fill placeholder
+DREL     var    Director relation data
+RMIN     var    Resource minimum data
+CSND     var    Cast sound reference
+vers     777    Mac Version resource (standard)
+
+Mac Fonts:
 FOND     19     Mac Font Family descriptor
 FONT     10     Mac bitmap font resource
 NFNT     21     Mac New Font resource (bitmap font)
+sfnt     var    Mac TrueType/OpenType font data
+
+Mac UI/System Resources:
+ALRT     var    Mac Alert template
+DLOG     var    Mac Dialog template
+DITL     var    Mac Dialog Item List
+DLGX     var    Mac Extended Dialog template (System 7+)
+WIND     var    Mac Window template
+DATA     2      Generic data resource
+DRVR     2      Mac Device Driver resource
+SIZE     var    Mac SIZE resource (memory requirements)
+BNDL     var    Mac Bundle resource (icon binding)
+FREF     var    Mac File Reference resource
+PAT#     var    Mac Pattern List resource
+CMAP     var    Mac Colormap resource
+cicn     var    Mac Color Icon resource
+acur     var    Mac Animated Cursor resource
+dctb/wctb/cctb/mctb/actb  var  Mac Color Table resources (dialog/window/control/menu/alert)
 alis     3      Mac Alias record (file reference)
 fwst     5      Director font/window state metadata
-SHAP     10     Director shape definition
-DATA     2      Generic data resource
-DLOG     1      Mac Dialog template
-DITL     1      Mac Dialog Item List
-DRVR     2      Mac Device Driver resource
+hfdr     var    Help/finder metadata
+FCMT     var    Finder Comment
+FRev     var    File Revision data
+snth     var    Sound synthesizer resource
+bdrp     var    Backdrop resource
+lema     var    Lema (language/encoding) resource
 
-Frequency values are out of 2007 sample files tested.
+App/Tool-Specific:
+KATA     var    Katakana/Japanese input resource
+ASHI     var    Japanese text resource
+VYGR     var    Custom resource (VoyagerJapan tools)
+SitC     var    StuffIt compression resource
+DKH(tm)  1      DiskDoubler/Hook resource
+SAM(v)   2      SAM antivirus resource
 
-FOND/FONT/NFNT resources are embedded Macintosh bitmap fonts used for
+Frequency values are out of 2788 sample files tested. "var" indicates
+the type appears across multiple samples but exact frequency was not
+individually counted.
+
+FOND/FONT/NFNT/sfnt resources are embedded Macintosh fonts used for
 rendering text cast members in the correct typeface. These are standard
 Mac font resources (see Inside Macintosh: Text for format details).
 
-DLOG/DITL/DRVR are standard Macintosh Toolbox resources occasionally
-embedded in Director files for custom dialogs or device drivers.
+DLOG/DITL/DRVR/ALRT/WIND are standard Macintosh Toolbox resources
+occasionally embedded in Director files for custom dialogs, device
+drivers, or window definitions.
+
+C*DE code resources (CODE, C•DE, and variants matching the pattern
+C?DE) are handled along with XCMD, XCOD, XFCN, SeLF, CCOD, and WDEF
+as executable code resources.
 
 
 ================================================================================

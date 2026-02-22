@@ -25,10 +25,9 @@ export class iffILBM extends Format
 		// others
 		"IFF Sliced HAM bitmap",  "IFF Newtek Dynamic HAM bitmap", "IFF Palette Changes HAM bitMap", "IFF Atari ST Interleaved bitmap", "MandelBlitz IFF Mandelbrot bitmap"
 	];
-	forbiddenMagic = ["IFF Amiga Contiguous BitMap"];	// trid likes to identify IFF ACBM files as both ACBM and ILBM, so forbid the magic here and let iffACBM handle that
-	idMeta         = ({macFileType, macFileCreator}) => macFileType==="ILBM" || (macFileType==="IFF " && macFileCreator==="GKON");
-	metaProvider   = ["image"];
-	converters     = ["ilbm2png"];
+	idMeta       = ({macFileType, macFileCreator}) => macFileType==="ILBM" || (macFileType==="IFF " && macFileCreator==="GKON");
+	metaProvider = ["image"];
+	converters   = ["ilbm2png"];
 	/* PREV CONVERTER LIST:
 	converters = [
 		`recoil2png`,	// recoil2png produces the best still images for iffILBM files

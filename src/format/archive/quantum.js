@@ -5,6 +5,6 @@ export class quantum extends Format
 	name       = "Quantum Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/Quantum_compressed_archive";
 	ext        = [".pak", ".q"];
-	magic      = ["Quantum archive data", "Quantum compressed archive"];
+	magic      = ["Quantum archive data", "Quantum compressed archive", /^idarc: Quantum( |$)/];
 	converters = ["unpaq"];
 }

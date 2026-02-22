@@ -6,6 +6,6 @@ export class crush extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/CRUSH";
 	ext            = [".cru"];
 	forbidExtMatch = true;
-	magic          = ["Crush archive", /^Crush archive data/, "deark: crush (CRUSH archive)"];
+	magic          = ["Crush archive", /^Crush archive data/, "deark: crush (CRUSH archive)", /^idarc: Crush\/uncomp\.( |$)/];
 	converters     = ["deark[module:crush]", "uncrush"];
 }

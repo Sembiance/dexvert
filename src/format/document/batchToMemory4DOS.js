@@ -5,6 +5,6 @@ export class batchToMemory4DOS extends Format
 	name       = "4DOS Compressed Batch-To-Memory File";
 	website    = "http://fileformats.archiveteam.org/wiki/4DOS_compressed_batch_file";
 	ext        = [".btm"];
-	magic      = ["4DOS compressed Batch-To-Memory"];
+	magic      = ["4DOS compressed Batch-To-Memory", /^idarc: BatComp \(4DOS\)( |$)/];
 	converters = ["fourDecomp"];
 }

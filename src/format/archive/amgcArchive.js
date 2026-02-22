@@ -5,6 +5,6 @@ export class amgcArchive extends Format
 	name       = "AMGC Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/AMG_(compressed_archive)";
 	ext        = [".amg"];
-	magic      = ["AMGC compressed archive", /^AMGC archive data/];
+	magic      = ["AMGC compressed archive", /^AMGC archive data/, /^idarc: AMGC( |$)/];
 	converters = ["amgc"];
 }

@@ -6,6 +6,6 @@ export class dwcSelfExtracting extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DWC";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["DOS DWC SFX Executable"];
+	magic          = ["DOS DWC SFX Executable", /^idarc: DWC( |$)/];
 	converters     = ["dosEXEExtract"];
 }

@@ -7,7 +7,7 @@ export class akailist extends Program
 	package    = "app-arch/akaitools";
 	bin        = "akailist";
 	args       = r => ["-l", "-f", r.inFile()];
-	runOptions = ({timeout : xu.SECOND*10});
+	runOptions = ({timeout : xu.SECOND*10, timeoutSignal : "SIGKILL"});
 	post       = r =>
 	{
 		const meta = {files : []};
@@ -17,7 +17,7 @@ export class akailist extends Program
 			if(type)
 				meta.files.push({type : type.trim(), size : +size, blockLocation : +blockLocation, name});
 		}
-		if(meta.files.every(o => o.type==="UNKNOWN" || o.type.endsWith("VOLUME")))
+		if(meta.files.every(o => o.type==="UNKNOWN"))
 			meta.files = [];
 		Object.assign(r.meta, meta);
 	};

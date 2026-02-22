@@ -5,6 +5,6 @@ export class spinBakerSBX extends Format
 	name           = "SpinBaker SBX Archive";
 	ext            = [".sb"];
 	forbidExtMatch = true;
-	magic          = ["SBX SpinnerBaker eXtractor compressed archive", "SBX Archiv gefunden", /^SBX archive data/];
+	magic          = ["SBX SpinnerBaker eXtractor compressed archive", "SBX Archiv gefunden", /^SBX archive data/, /^idarc: SBX( |$)/];
 	converters     = ["spinBakerSBX"];
 }

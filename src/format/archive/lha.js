@@ -16,6 +16,7 @@ export class lha extends Format
 		// generic LHA
 		"LHARC/LZARK compressed archive", /^LHa .*archive data/, "LHA File Format", "LHARK compressed archive", "LHA self-extracting", "LHarc self-extracting archive", "LZH Archiv gefunden", "Self-extracting Amiga LhA", "application/x-lha",
 		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^MS-DOS .*LHarc self-extracting archive/, /^Self-extracting LZH$/, /^LZH$/, "deark: lha", "deark: car_lha", "Archive: LHA", /^LZH$/, /^fmt\/626( |$)/,
+		/^idarc: LZH( |$)/, /^idarc: LHark( |$)/,
 
 		// app specific LHA
 		"Amiga WHDLoad package (lha compressed)", "CAR compressed archive", "SDS Software SFX", "Atari ST LHArc SFX archive"

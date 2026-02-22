@@ -1278,9 +1278,9 @@ def decode_icon_to_png(data, icon_type, path):
         write_png_grayscale(path, 32, 32, bytes(pixels))
         return True
 
-    if icon_type in ('ICN#', 'ics#'):
+    if icon_type in ('ICN#', 'ics#', 'icm#'):
         # 1-bit icon with mask
-        size = 32 if icon_type == 'ICN#' else 16
+        size = 32 if icon_type == 'ICN#' else (12 if icon_type == 'icm#' else 16)
         expected = size * size // 8 * 2  # icon + mask
         if len(data) < expected // 2:
             return False
@@ -1295,18 +1295,18 @@ def decode_icon_to_png(data, icon_type, path):
         write_png_grayscale(path, size, size, bytes(pixels))
         return True
 
-    elif icon_type in ('icl8', 'ics8'):
+    elif icon_type in ('icl8', 'ics8', 'icm8'):
         # 8-bit indexed icon
-        size = 32 if icon_type == 'icl8' else 16
+        size = 32 if icon_type == 'icl8' else (12 if icon_type == 'icm8' else 16)
         if len(data) < size * size:
             return False
         pixels = data[:size * size]
         write_png_indexed(path, size, size, bytes(pixels), MAC_PALETTE)
         return True
 
-    elif icon_type in ('icl4', 'ics4'):
+    elif icon_type in ('icl4', 'ics4', 'icm4'):
         # 4-bit indexed icon
-        size = 32 if icon_type == 'icl4' else 16
+        size = 32 if icon_type == 'icl4' else (12 if icon_type == 'icm4' else 16)
         expected = size * size // 2
         if len(data) < expected:
             return False
@@ -1675,7 +1675,8 @@ def extract(input_file, output_dir, verbose=False):
             handled.add((res.type, res.id))
 
     # --- Extract icon resources ---
-    icon_types = ['ICN#', 'ICON', 'icl8', 'icl4', 'ics#', 'ics8', 'ics4']
+    icon_types = ['ICN#', 'ICON', 'icl8', 'icl4', 'ics#', 'ics8', 'ics4',
+                  'icm#', 'icm4', 'icm8']
     for itype in icon_types:
         if itype in by_type:
             for res in by_type[itype]:
@@ -1703,6 +1704,19 @@ def extract(input_file, output_dir, verbose=False):
                 f.write(res.data)
             handled.add((res.type, res.id))
 
+    # --- Extract TEXT resources ---
+    if 'TEXT' in by_type:
+        for res in by_type['TEXT']:
+            try:
+                text = res.data.decode('mac_roman').replace('\r', '\n')
+            except Exception:
+                text = res.data.decode('latin-1').replace('\r', '\n')
+            if text.strip():
+                with open(out(f'TEXT_{res.id}.txt'), 'w') as f:
+                    f.write(text)
+                counts['txt'] += 1
+            handled.add((res.type, res.id))
+
     # --- Extract STR# (string list) resources ---
     if 'STR#' in by_type:
         for res in by_type['STR#']:
@@ -1728,8 +1742,25 @@ def extract(input_file, output_dir, verbose=False):
             handled.add((res.type, res.id))
 
     # --- Verbose-only metadata: MARK, VWTL, VWtc, FOND, FONT, NFNT, alis, fwst, SHAP ---
-    verbose_only_types = ['MARK', 'VWTL', 'VWtc', 'FOND', 'FONT', 'NFNT',
-                          'alis', 'fwst', 'SHAP', 'DATA', 'DITL', 'DLOG', 'DRVR']
+    verbose_only_types = [
+        # Director metadata
+        'MARK', 'VWTL', 'VWtc', 'SHAP',
+        'OVWD', 'VWAD', 'm5cr', 'm5ax', 'VWst', 'VWCF', 'VWAC',
+        'MMPB', 'MMPb', 'Tdta', 'MMCF', 'ROWN', 'MMdp',
+        'ZERO', 'DREL', 'RMIN', 'CSND', 'vers',
+        # Mac fonts
+        'FOND', 'FONT', 'NFNT', 'sfnt',
+        # Mac UI/system resources
+        'ALRT', 'DLOG', 'DITL', 'DLGX', 'WIND',
+        'DATA', 'DRVR', 'SIZE', 'BNDL', 'FREF',
+        'PAT#', 'CMAP', 'cicn', 'acur',
+        'dctb', 'wctb', 'cctb', 'mctb', 'actb',
+        'alis', 'fwst', 'hfdr', 'FCMT', 'FRev',
+        'snth', 'bdrp', 'lema',
+        # App/tool-specific
+        'KATA', 'ASHI', 'VYGR', 'SitC',
+        'DKH\u2122', 'SAM\u02c7',
+    ]
     for vtype in verbose_only_types:
         if vtype in by_type:
             for res in by_type[vtype]:

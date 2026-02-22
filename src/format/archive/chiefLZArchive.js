@@ -5,6 +5,6 @@ export class chiefLZArchive extends Format
 	name       = "ChiefLZ LZA Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/ChiefLZ";
 	ext        = [".lza", ".lzz"];
-	magic      = ["LZA compressed archive", "LZA Archiv gefunden"];
+	magic      = ["LZA compressed archive", "LZA Archiv gefunden", /^idarc: ChiefLZA( |$)/];
 	converters = ["lzaArchive"];
 }

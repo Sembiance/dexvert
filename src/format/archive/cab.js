@@ -10,7 +10,7 @@ export class cab extends Format
 		// general cab
 		/^Microsoft Cabinet [Aa]rchive/, "CAB Archiv gefunden", "Archive: Microsoft Cabinet File", "Self-extracting CAB", "Win32 MS Cabinet Self-Extractor",  "application/vnd.ms-cab-compressed", /^CAB$/, "deark: cab", "Archive: CAB",
 		/^geArchive: CAB_MSCF( |$)/,
-		/^fmt\/1839( |$)/, /^x-fmt\/(216|414)( |$)/,
+		/^fmt\/1839( |$)/, /^x-fmt\/(216|414)( |$)/, /^idarc: Microsoft CAB( |$)/, /^idarc: Package for the Web( |$)/,
 		
 		// app specific cabs
 		"IncrediMail data (generic)", "IncrediMail Animation", "IncrediMail letter/ecard Flavor", "IncrediMail Image", "IncrediMail sound", "IncrediMail Notifier", "IncrediMail Skin", "IncrediMail Emoticon", "Diagnostic Cabinet",

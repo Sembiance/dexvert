@@ -6,6 +6,6 @@ export class esp extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ESP_(compressed_archive)";
 	ext            = [".esp"];
 	forbidExtMatch = true;
-	magic          = ["ESP - Extension Sort Packer compressed archive", "ESP Archiv gefunden"];
+	magic          = ["ESP - Extension Sort Packer compressed archive", "ESP Archiv gefunden", /^idarc: ESP( |$)/];
 	converters     = ["unesp"];
 }

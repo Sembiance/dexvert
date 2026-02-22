@@ -6,7 +6,7 @@ export class semone extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SEMONE";
 	ext            = [".one"];
 	forbidExtMatch = true;
-	magic          = ["SEMONE compressed archive", "SemOne archive data"];
+	magic          = ["SEMONE compressed archive", "SemOne archive data", /^idarc: SemOne( |$)/];
 	weakMagic      = true;
 	converters     = ["semone"];
 }

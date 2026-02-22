@@ -4,6 +4,6 @@ export class foxsqzArchive extends Format
 {
 	name       = "FOXSQZ Archive";
 	ext        = [".sqz"];
-	magic      = ["FOXSQZ compressed archive", "FoxSQZ archive data"];
+	magic      = ["FOXSQZ compressed archive", "FoxSQZ archive data", /^idarc: FOXSQZ( |$)/];
 	converters = ["foxsqz"];
 }

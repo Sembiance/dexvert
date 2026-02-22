@@ -2,7 +2,7 @@
 | Waiting on Others |
 \-------------------/
 * These formats don't detect with latest Detect-It-Easy: https://github.com/horsicq/Detect-It-Easy/issues/326
-	archive/packerPacked   and  archive/packerJESCOREPacked (I was able to find the old ID code for this one and add it)
+	archive/packerPacked   and  archive/packerJESCOREPacked (I was able to find the old ID code for this one and add it to dexmagic)
 
 * Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
 
@@ -21,24 +21,7 @@
   I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
   After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
 
-* Add support for Basic .MUS. This is a bit of work and should be done 'for fun'. See sandbox/wip/BasicMUS_mml2mid.js
-
-* Add extraction suport for these older MacroMind Projector files:
-	https://discmaster.textfiles.com/search?format=macBinary&detection=VWMD
-	https://discmaster.textfiles.com/search?format=macBinary&detection=MMPB
-	https://discmaster.textfiles.com/search?format=macBinary&detection=MMDR
-  Other:
-	https://discmaster.textfiles.com/search?qfields=name&detection=macroMindProjector
-	https://discmaster.textfiles.com/search?qfields=name&detection=DG06&strict=strict
-  History of this program:
-	https://www.lingoworkshop.com/articles/history
-	https://macromedia.fandom.com/wiki/MacroMind_VideoWorks
-	https://macromedia.fandom.com/wiki/MacroMind
-  Could start with VideoWorks on an infinite mac, create some sample output files: https://macintoshgarden.org/apps/videoworks
-  Then add 'detection' then figure out how to 'extract' the text, audio, images from within the output files.
-  Then move to Video Works 2, Macromind Director, etc
-
-* archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc progrmatically connect to the VNC port and automate it
+* WIP: archive/installerVISE: Could run a mac emulator in a virtualX, then via x11vnc progrmatically connect to the VNC port and automate it
   So via code it would send keyboard and mouse clicks at various coordinates.
   Maybe the installer could auto launch with something like: https://macintoshgarden.org/apps/oneclick
   MAYBE I can get away with doing this without scraping the video, but my hunch is I'll need to scrape video to some degree.
@@ -49,6 +32,7 @@
   Along the way updating the original HD with any new pre-requisites needed
   Other MacOS installers to target in a similar way:
 	Smaller Installer: https://discmaster.textfiles.com/browse/34905/HolyGrail%206.zip/HolyGrail%206/Gamez/Chaos%20Overlords%201.0.sit/Chaos%20Overlords%201.0.image/Install%20Chaos%20Overlords/Install%20Chaos%20Overlords.rsrc
+  https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&dedup=dedup&sortBy=b3sum
   OLD NOTES FOR THIS FORMAT:
 	Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
 	http://discmaster.textfiles.com/browse/4161/Miami%20Dolphins%20Cheerleaders%201998.iso/mac/Install/Install%20ScreenSaver
@@ -60,12 +44,97 @@
 		https://macintoshgarden.org/apps/developer-vise-3
 		https://macintoshgarden.org/apps/installer-vise-601
 
-https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&dedup=dedup&sortBy=b3sum
+* archive/os2FTCOMP		(117,604 files on discmaster2 (56,280 unique))
+
+* image/pmDraw			(101 files (33 unique))  (No known converter, would need Auto-It like functionality for OS/2 to control GUI)
+
+
+
+/-------------\
+| Vibe Viable |
+\-------------/
+* This can identify, extract and convert hundreds of visual novel file formats: https://github.com/shiikwi/GARbro (forked from https://github.com/morkt/GARbro)
+  Including 
+  It's written in C# .net but targets an old version 4.6 and references DLLs that they don't provide and author said they won't provide
+  I think it's best to clone that as a subdir to the main 'garbroServer' vibe
+  Goal is to vibe a server that provides /detect and /extract endpoints just like gameserver
+  ALSO want to vibe a one-time list of all 'magics' that I can search for in detections field to find things to reprocess (and store that in a garbroFormatstoFind.txt and add as a todo)
+  Probably best for it to not touch the main 'GARbro' folder at all, instructing the vibe tool that I may update that in the future with future pulls from the github
+  Instead it should create a script, that it will maintain, that will copy over the necessary files into a new garbroServer subdir
+  That subDir should be able to compile with latest dotnet and have everything it needs within that directory to compile with `dotnet build`
+  Samples and URLs to ensure working:
+	archive/repiPack
+	test/sample/unsupported/visualNovel/
+	test/sample/archive/fat12/*/*
+  	https://archive.org/details/pc-98_20230120
+  	https://www.pc98.org/main.html
+	http://discmaster.textfiles.com/browse/1123
+	https://strangecomforts.com/the-strange-world-of-japans-pc-98-computer/
+	https://archive.org/search?query=visual+novel&and%5B%5D=mediatype%3A%22software%22
+  	Old IADL (http://iadl.retromission.com/items?collectionid=cd-roms&collectionid=cdrom_contributions&collectionid=cdromimages&collectionid=cdromsoftware&collectionid=%40asromix&collectionid=%40gingerbeardman&collectionid=%40iamxray&collectionid=%40pascal_of_irate&collectionid=%40sembiance&collectionid=%40shivashaw&collectionid=adultcdroms&collectionid=ftpsites&collectionid=softwarecapsules&collectionid=softwarelibrary_mature&subject=visual%20novel&title=&priority=999&minfiles=0&maxfiles=0&minsize=0&maxsize=0&limit=1000)
+
+* Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
+  Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
+  Should probably come up with better magic/detection of each installer type and then make a separate format/unpacker for each
+  Peruse exe.js for installers:
+	* "Wise Installer executable", /^Installer: Wise Installer$/
+		https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
+		https://discmaster.textfiles.com/view/35008/HerculesXenaVol1.iso/pc/INSTALLERS/INSTALL%20VIEWER%20AND%20CARDS.EXE?details
+	  After it's supported and reprocessed, can reply to this message on discord: https://discord.com/channels/350407629849493504/1033065501984817252/1391987846856048700
+	* "Installer: Vise"		(not will need somethign other than 'unvise' maybe 'unvisewin')	https://discmaster.textfiles.com/search?extension=exe&format=installerVISE
+	* "InstallShield setup"  (such as these (note currently only showing 30M plus ones, lots more) https://discmaster.textfiles.com/search?extension=exe&format=exe&sizeMin=30m&detection=%22InstallShield+setup%22)
+	* "Installer: InstallUs"	https://discmaster.textfiles.com/view/39541/c64classix.iso/setup.exe
+	* "Installer: Setup-Specialist"		test/sample/executable/exe/SeTUp.eXe
+	* "Installer: BitRock Installer"	https://discmaster.textfiles.com/search?q=%22BitRock+Installer%22&qfields=name&qfields=t&format=xml
+	  I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
+	  But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/ (can share that as sample code to the viber)
+	* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
+	* All the other The various exe.js installer specific magics
+	* After all reprocessed, search for exe's like 10M or more, or search for "setup.exe" or "install.exe"
+	  See if you can find magic, or maybe it has a version/text file/image that is common amongst other installers of the same type
+
+* Improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
+  I could in theory "split" apart images generated by things like recoil2png, deark and imagemagick into something I can process into a bitmap font file
+  Additionally I could then reliably record into meta how many 'glyphs' are in each font using something like: ttfdump TREK.TTF | ag numGlyphs
+  Then this could be searched upon in discmaster with '# of <glyphs>'
+  Of course then re-process ALL FONTS on discmaster
+  vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
+  Can give it code to existing converters to 'learn' about particular formats
+
+* Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
+  Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
+	https://discmaster.textfiles.com/search?format=mov&detection=qtvr&dedup=dedup
+  First I'd need to properly extract the images/data. Next discmaster can then make a nice viewer for it
+  To extract/convert, look into:
+	https://github.com/fieldOfView/CuTy				https://fieldofview.com/projects/cuty
+	https://www.dr-lex.be/info-stuff/qtvr.html		https://github.com/rvanlaar/QTVR
+    Maybe I can just extract like an image and maybe set in it custom EXIF info that has the data needed to view it as a pano
+  Find a good panoramic viewer. Here are some options:
+	https://pannellum.org/ (open source)		https://github.com/mpetroff/pannellum
+	https://krpano.com/home/ (paid for)			https://sziget360.com/panorama/1320
+
+* Adopt these Filemaker Pro tools for ~9,771 unique files: https://github.com/evanmiller/fmptools
+  Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
+
+* Meshlab (https://github.com/cnr-isti-vclab/meshlab) uses vcglib which has support for these 3D formats: PLY, STL, OFF, OBJ, 3DS, COLLADA, PTX, V3D, PTS, APTS, XYZ, GTS, TRI, ASC, X3D, X3DV, VRML, ALN
+  Sadly the version in Gentoo as of Mar 2024 is 4 years old and attempts to compile it myself yielded a lost afternoon and lots of frustration
+
+* Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
+  Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
+    Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
+    Ask how hard it would be to leverage the SCUMMVM code to create a CLI tool that when given any director file can extract all assets
+	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
+	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
+  After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
+  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://discmaster.textfiles.com/admin/item?itemid=10456
 
 
 /---------------\
 | High Priority |
 \---------------/
+* Go through the sandbox/txt/checkfor_GameExtractor.txt file to locate new files and format samples I should add support for
+  Create new formats and adding to the reprocess list as necessary
+
 * Goal: Get rid of 86box
   If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism
   FIRST, try running win7 manually --cores=2 to see how it does
@@ -82,46 +151,6 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
   If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
   but ideally I'd just have win7 QEMU
   After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
-
-* Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
-  Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
-	https://discmaster.textfiles.com/search?format=mov&detection=qtvr&dedup=dedup
-  First I'd need to properly extract the images/data. Next discmaster can then make a nice viewer for it
-  To extract/convert, look into:
-	https://github.com/fieldOfView/CuTy				https://fieldofview.com/projects/cuty
-	https://www.dr-lex.be/info-stuff/qtvr.html		https://github.com/rvanlaar/QTVR
-    Maybe I can just extract like an image and maybe set in it custom EXIF info that has the data needed to view it as a pano
-  Find a good panoramic viewer. Here are some options:
-	https://pannellum.org/ (open source)		https://github.com/mpetroff/pannellum
-	https://krpano.com/home/ (paid for)			https://sziget360.com/panorama/1320
-
-* Improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
-  I could in theory "split" apart images generated by things like recoil2png, deark and imagemagick into something I can process into a bitmap font file
-  Additionally I could then reliably record into meta how many 'glyphs' are in each font using something like: ttfdump TREK.TTF | ag numGlyphs
-  Then this could be searched upon in discmaster with '# of <glyphs>'
-  Of course then re-process ALL FONTS on discmaster
-  vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
-  Can give it code to existing converters to 'learn' about particular formats
-
-* After mac x11vnc support, add Aldus Persuasion 2 support (these v2 files won't open in anything other than v2 of the program, won't work in v3):
-	https://discmaster.textfiles.com/view/23575/Apple%20R&P%20Lib%20Internal%20v8.0.iso/3-Presentations/Apple%20Computer%20Inc./Apple%20Computer/Corporate%20Overview/Corporate%20Overview/Corporate%20Overview
-	https://macintoshgarden.org/apps/aldus-persuasion-212
-
-* Create a way to launch an installer in QEMU, run the installer (so autoit is installed to help) then shutdown the system, extract the disk drive image and compare the files and use that as the output:
-  Will need a way to vnc into these 'while' running to debug of course
-  Essentially this 
-  First, WISE installers: https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
-  Second, figure out how to 'detect/find' these files better then go test on a TON of them until they all work
-  Once working, reply on #discmaster textfiles to eintei that it's been solved and things will be reprocesed over time to handle these
-  BEFORE I start re-processing potentially thousands of CDs, find more installers.
-  First, look at the list of 'installers' in exe.js and ones that seem to be more 'common' start looking at those.
-  Then, manually go through items, #1, #2, #2, #4 and run more installers. Might need a way to quicky launch my extractor QEMU with a downloaded .iso file
-  Then I can run the installer in the native environment and see how it is set up, figure out if I can 'detect' them and support them
-  Finally, only after I've done like a TON of common installers, now reprocess items as needed to support these.
-  It *might* be wise to tackle the hard problem now of partial re-processing, partial re-injestion and partial re-indexing. Maybe. That sounds tricky and error prone and dangerous, so if I skip on that now, I'll never do it likely.
-  Another installer to handle, Installer:InstallUs: https://discmaster.textfiles.com/view/39541/c64classix.iso/setup.exe?details
-  Also can search for format 'exe' with a particular minimum MB to help identify additional installers (also of course look at exe.js for other installers to search for in detection field)
-  Make sure I go and see if I can do all the 'Installer' marked sub-formats in exe.js, especially 'Setup-Specialist' which is also sample exe/SeTUp.eXe)
 
 >>> Blender 5
 * Update to Blender 5. I could go with the binary verison (https://download.blender.org/release/Blender5.0/) or Gentoo.
@@ -157,37 +186,30 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 	- Add support for: https://discmaster.textfiles.com/browse/22410/HOD_DEMO_GB.iso/Wads/jedi%20knight/dak_siege.zip/dak_siege.gob
 	  with: https://github.com/smlu/blender-sith
 	- Look at other formats I'm using things like cinema4D/polytrans/etc for conversion and see if there is a blender addon that does a good job
+* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
+* @Skyplayer37 on twitter to see if I can update their blender code to work with blender 4.0
+  Github code (backed up to sandbox/app/1993-Model-Importer): https://github.com/Skyplayer37/1993-Model-Importer
+  3D files: https://discmaster.textfiles.com/browse/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
+  Original Post: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 <<<
 
 * If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 
-* Add Classic MacOS support to "runIn", probably use this software: https://macintoshgarden.org/apps/oneclick
-  Probably spin up fresh mac instances each time with a custom HD image with the script and in/out folders pre-prepared
-  After it's working, I can then support 'Graphic Converter' and these formats:
+
+/-----------------\
+| Medium Priority |
+\-----------------/
+* See about fixing: poly/nif
+
+* Figure out how to extract archive/stackerCompressedVolume as these may be stacker:
+	https://discmaster.textfiles.com/search?family=unknown&sizeMin=20MB&detection=535441434b4552*&dedup=dedup
+	https://archive.org/details/cdrinc_IMSS_Jefatura_de_Servicios_de_Afiliacion_Catalogo_Region_1
 
 * scribus on linux isn't super solid, font substitution dialogs break the headless script
   So create a scribusWin program and install on win7 and use autoit to convert via GUI.
   Use this as the fallback next converter wherever scribus is currently used
   OR patch out the dialog to when in headless to just auto-accept (can get get vibe to help)
 
-* Figure out how to extract archive/stackerCompressedVolume as these may be stacker:
-	https://discmaster.textfiles.com/search?family=unknown&sizeMin=20MB&detection=535441434b4552*&dedup=dedup
-	https://archive.org/details/cdrinc_IMSS_Jefatura_de_Servicios_de_Afiliacion_Catalogo_Region_1
-
-* Go through the sandbox/txt/checkfor_GameExtractor.txt file to locate new files and format samples I should add support for
-  Create new formats and adding to the reprocess list as necessary
-
-* See about fixing:
-	poly/nif
-  Maybe instead using assimp, see if I can vibe code into it support for this format
-
-* Look at ALL items below, including low priority (such as scummvm code leveraging for macromedia director extration)
-  With each item, consider if vibe coding could help make it a 95% reality
-
-
-/-----------------\
-| Medium Priority |
-\-----------------/
 * Re-imagine how dexvert requests are tracked throughout it's life cycle.
   Create a new deno/sight/sight.js project. It's a generic thing that can be used in other projects that need to track 'lifecycles' of ops
   It'll expose functions: init, service
@@ -222,37 +244,32 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 		files/updates/win/
   I could do each subdir individually until I determine what is causing the crash. It can then be re-added to discmaster
 
-* Add support for QWK format: https://discmaster.textfiles.com/search?detection=Produced+by+Qmail&dedup=dedup
-
 * So dexvert still uses 7z from p7zip (instead of more modern 7zz from 7zip package). This is because p7zip handles i18n charsets better via the LANG env var
   The problem is that I've encountered a file test/sample/archive/zip/Masicsstory.zip that when extracted without LANG works fine, but when extracted with LANG=ja_JP is doesn't extract correctly
   You can see this by just running `7z l Masicsstory.zip` vs `LANG=ja_JP 7z l Masicsstory.zip` and notice the second listing loses all subdirs and ends up clobbering outputs and just produces 1 output file
   Problem is I couldn't figure out how to get 7zz to behave properly with i18n charsets. It doesn't seem to care about LANG env var? I found a -scs switch flag, but not sure it's mean for this purpose: file:///usr/share/doc/7zip-24.08/html/MANUAL/cmdline/switches/charset.htm
   Additionally 7z from p7zip might support other features and things that 7zz doesn't? I'd need to fully test all this out. For now, meh.
 
-* Adopt these Filemaker Pro tools for ~9,771 unique files: https://github.com/evanmiller/fmptools
-  Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
-
 * Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
   https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
 * Add POVRAY rendering support for the ~1,706 unique files (see the extensive notes in povRay.js)
-
 * Add moRay support for the ~2,300 unique files (sat on top of POV-RAY, see format moRay.js for notes): https://discmaster.textfiles.com/search?format=moRay&dedup=dedup
 
-* Add BitRock installer support for the ~20 files: https://discmaster.textfiles.com/search?q=%22BitRock+Installer%22&qfields=name&qfields=t&format=xml
-  I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
-  But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
+* A bunch of recoil2png formats are 'seemingly' not in dexvert. See text/recoil2png_unhandled.txt
+  NOTE: Some of these might be in dexvert already, just need to add recoil format tag
 
-* HFS+ CDs do not currently expose mac file type/creator codes (as uniso just mounts them with -t hfsplus)
-  In fact, if they have resource forks, I bet I'm entirelly skipping them.
-  I don't have clear examples of an HFS+ CD with type/creator codes and resource forks, but here are 2 random HFS plus CDs
-  	https://discmaster.textfiles.com/browse/22754/3DW_111.iso
-  	https://discmaster.textfiles.com/browse/31512/ART_153.iso
-  To get the content may be tricky. hfsplusutils might work, but I had real issues mounting the ISOs with it.
-  Probably better to try using hfsexplorer
+* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
+  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
+  Once I have that I could support certain formats like:
+	document/dartHypertext
+	document/envisionPublisherDoc
+	document/ibmStoryboardDocument
 
+/--------------\
+| Low Priority |
+\--------------/
 * Add support for 'Zoundmonitor' songs. Not sure there is any particular 'magic' and though they sometimes have .sng extension, not always
   For example this file: https://discmaster.textfiles.com/view/21003/BS1%20part%2039.zip/BS1%20part%2039/Ult.%20Soundtr.%20Collection.adf/ZOUNDMONSONGS/TrosSport
   Is the same as: https://modland.com/pub/modules/Zoundmonitor/The%20Balance/gravedriving.sng
@@ -260,12 +277,15 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
   Dunno what can convert them, DeliPlayer seems to support it: https://www.exotica.org.uk/wiki/DeliPlayer
 	https://eab.abime.net/showpost.php?p=1041418&postcount=859
 
-* A bunch of recoil2png formats are 'seemingly' not in dexvert. See text/recoil2png_unhandled.txt
-  NOTE: Some of these might be in dexvert already, just need to add recoil format tag
+* NOTE: This to-do may be out of date, I may be handling type/creator with HFS+, looks like I am with: hfsexplorer
+  HFS+ CDs do not currently expose mac file type/creator codes (as uniso just mounts them with -t hfsplus)
+  In fact, if they have resource forks, I bet I'm entirelly skipping them.
+  I don't have clear examples of an HFS+ CD with type/creator codes and resource forks, but here are 2 random HFS plus CDs
+  	https://discmaster.textfiles.com/browse/22754/3DW_111.iso
+  	https://discmaster.textfiles.com/browse/31512/ART_153.iso
+  To get the content may be tricky. hfsplusutils might work, but I had real issues mounting the ISOs with it.
+  Probably better to try using hfsexplorer
 
-/--------------\
-| Low Priority |
-\--------------/
 * Improve image/amosPicturePacker support for the ~57 unique files: https://discmaster.textfiles.com/search?format=amosPicturePacker&dedup=dedup
   It currently is only supported by abydos and it doesn't always get it right.
   It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/1106/CU%20Amiga%20Magazine's%20Super%20CD-ROM%2007%20(1997)(EMAP%20Images)(GB)(Track%201%20of%208)[!][issue%201997-02].iso/cucd/readers/readers_games/animal_pairs/pictures
@@ -313,15 +333,6 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 
 * Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
-* Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
-  Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
-    Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
-    Ask how hard it would be to leverage the SCUMMVM code to create a CLI tool that when given any director file can extract all assets
-	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
-	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
-  After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
-  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://discmaster.textfiles.com/admin/item?itemid=10456
-
 * Look into adding Atari ST VT-52 text/ansi art support: https://github.com/Sembiance/dexvert/issues/27
 
 * Would be nice to convert additional unreal UTX formats, such as textures: http://discmaster.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
@@ -329,20 +340,16 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
   Similar to how MacromediaDirector does it.
   Extra bonus points if I use UnrealEngine itself to create a 'tool' that can automatically open a .utx, read in all assets and convert them automatically to output files
 
-* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
-  I of course would need to properly identify them as something I can work with, don't see an easy way to do that.
-  Maybe see if I can just 'run' them and install to c:\out or something
-
 * Look at supporting Pro 24 sng's via hatari on win 7 (see notes in music/pro24SNG.js  NOTE: It's more than just running a program)
   Then re-process those in: https://discmaster.textfiles.com/browse/10762/Atari%20Forever%203.zip/Atari%20Forever%203.iso/PD_THEMA/MIDISONG/*/24_SNG/*
   Other items may also have these songs (especially the other Atari Forever cds) but would need to do some searches/checks
   These are the possible prefixes I've found, so look for these in 'detections':
-	0006AAD4
-	0006729A
-	0008FE2C
-	0007D950
-	00076D20
-	00078C80
+	0006AAD4*
+	0006729A*
+	0008FE2C*
+	0007D950*
+	00076D20*
+	00078C80*
 
 * Binwalk v3.0 is an entirely different program now, different flags, different output, so consider creating a 'binwalk3ID' identify program and checking it against all current stuff
   It's slotted in Gentoo so can have both 'binwalk' and 'binwalk3' executables/packages installed. Would need to update the printUtilSteps to explicitly install both
@@ -354,7 +361,7 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 * IsoBuster has had several updates since I last installed it and now supports more formats: https://www.isobuster.com/news/
 
 * Consider adding other detectors:
-  - Try latest magika model release: https://github.com/google/magika/tree/main/assets/models/standard_v2_1
+  - Try latest magika model release: https://github.com/google/magika/
 	See if I already have legacy code for it or not. Ensure it runs in CPU mode, and probably as a webserver I can send reqs to
 	Then run it against all samples using my util script
 	Then file bugs for misdirections 
@@ -384,14 +391,8 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 
 * Now that I emulate a real sound card with 86Box, I may be able to support music/famiTracker in winxp. See note
 
-* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
-
 * Add all formats the Konvertor supports, warning, it's a LOT (copy-paste the list of each category from programs_formats.txt)
-
-* Contact @Skyplayer37 on twitter to see if they are up for updating their blender code to work with blender 4.0
-  Github code (backed up to sandbox/app/1993-Model-Importer): https://github.com/Skyplayer37/1993-Model-Importer
-  3D files: https://discmaster.textfiles.com/browse/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
-  Original Post: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
+  WARNING THOUGH: It mostly just calls out to other programs, and I'd be better to go to those other programs directly, so maybe skip it
 
 * Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:
   https://codecs.multimedia.cx/2024/04/a-quick-look-at-gold-disk-animation/
@@ -402,56 +403,20 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
   Micrografx Graphics Suite (check out Picture Publisher, Designer and Simply 3D): https://winworldpc.com/product/micrografx-graphics-suite/2
   Micrografx Draw: https://winworldpc.com/product/micrografx-draw/60
 
-* There was a product called Macromedia Authorware (later Adobe Authorware) that could create interactive e-learning stuff
-  It was also oftne used for interactive stuff on CD's, such as: https://discmaster.textfiles.com/view/4/100%20Fonts.iso/FONTMGR/Demos/PtxDemo.exe/Finaldem.exe
-  It could be compiled to an .exe and supported both mac and pc.
-  About 25 or so unique ones can be found on discmaster: https://discmaster.textfiles.com/search?q=%22Authorware+file%22&qfields=filename&qfields=ext&qfields=content&family=text&formatid=txt&dedup=dedup
-  There may be more, as the search term I used may be pretty specific to the particular version 4 that the above example is from
-  It would be great if the authorware content could be 'extracted' from the .exe file somehow (probably protected/compressed) and then further extracted into the original media assets
-
 * It might be fun to write a parser for this obscure format: https://breakintochat.com/wiki/Instant_Graphics_and_Sound_(IGS)
   It's documented pretty well in sandbox/app/IGSED25.ZIP  -> MODEMS/MOD_A2L/IGSED25/IGS217.TXT
   It also does sound and music though, so maybe this is more of an archive producing both images and audio? or maybe a video?
-
-* So meshlab (https://github.com/cnr-isti-vclab/meshlab) uses vcglib which has support for these 3D formats: PLY, STL, OFF, OBJ, 3DS, COLLADA, PTX, V3D, PTS, APTS, XYZ, GTS, TRI, ASC, X3D, X3DV, VRML, ALN
-  Sadly the version in Gentoo as of Mar 2024 is 4 years old and attempts to compile it myself yielded a lost afternoon and lots of frustration
+  NOTE: The blog author has done extensive work with this format, might already have a rendering type program
+  Also note: No idea if there are enough samples on discmaster to make it worthwhile
 
 * Freecad (already in portage) has several formats: STEP, IGES, OBJ, STL, DXF, SVG, DAE, IFC or OFF, NASTRAN, VRML, FCStd  (from https://wiki.freecad.org/Feature_list)
   But it pulls in 40 other packages, some of them quite large including additional slotted versions of CLANG. Yuck. Pass for now.
   It also has additional addons' that support other formats from: https://github.com/FreeCAD/FreeCAD-addons
 
-* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
-  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
-  Once I have that I could support certain formats like:
-	document/dartHypertext
-	document/envisionPublisherDoc
-	document/ibmStoryboardDocument
-
 * Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
   Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on
   If host is omitted or is localhost then open locally.
   If host is a remote host then use vncRemote command
-
-* This program is able to identify, extract and convert hundreds of visual novel file formats: https://github.com/morkt/GARbro
-  Including archive/repiPack
-  It's written in C# .net but targets an old version 4.6. It also references several DLLs that they don't provide.
-  The author has said that they are proprietary and he doesn't care that it won't compile anyhere else. The main build is years old.
-  There is no working Console support, but there is a pull request that tries to fix that: https://github.com/morkt/GARbro/pull/394/commits   (https://github.com/Bioruebe/GARbro/tree/2112bde1cc13eb817b8d541c3bcc7a68c4f71883)
-  I've saved the full source code (as of Feb 2024) WITH the pull request merged to: sandbox/app/GARbro.tar.bz2
-  I could try using the new ebuild.txt C# tips to create a working ebuild... maybe.
-  With compilation not being an option and the build being so old (it didn't work right under wine anyways, I tried) just the code is useful
-  What needs to happen is I need to examine the code closely, see how it 'detects' formats, 'extracts' and 'converts'
-  Then I need to make a new .net mono project and slowly bring over the code, 1 file at a time, writing new API stub backings as needed
-  That's a TON of work. So while it would be awesome to detect these formats and handle them, it's on the back burner for a while
-  If I do do it, get 'detection' working first as another 'detect' program. Then get extraction and use these samples:
-	test/sample/unsupported/visualNovel/
-	test/sample/archive/fat12/*/*
-  	https://archive.org/details/pc-98_20230120
-  	https://www.pc98.org/main.html
-	http://discmaster.textfiles.com/browse/1123
-	https://strangecomforts.com/the-strange-world-of-japans-pc-98-computer/
-	https://archive.org/search?query=visual+novel&and%5B%5D=mediatype%3A%22software%22
-  	Old IADL (http://iadl.retromission.com/items?collectionid=cd-roms&collectionid=cdrom_contributions&collectionid=cdromimages&collectionid=cdromsoftware&collectionid=%40asromix&collectionid=%40gingerbeardman&collectionid=%40iamxray&collectionid=%40pascal_of_irate&collectionid=%40sembiance&collectionid=%40shivashaw&collectionid=adultcdroms&collectionid=ftpsites&collectionid=softwarecapsules&collectionid=softwarelibrary_mature&subject=visual%20novel&title=&priority=999&minfiles=0&maxfiles=0&minsize=0&maxsize=0&limit=1000)
 
 * See if I can detect and extract the compressed files in sandbox/fail/unsupportedCompression/*
   Maybe something from: https://www.sac.sk/files.php?d=7&l=
@@ -465,38 +430,9 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
   Add format support:
 	archive/sparseImage
 
-* Add RISC OS support, with one of these emulators:
-	https://www.marutan.net/rpcemu/index.php
-	http://arcem.sourceforge.net/
-	http://b-em.bbcmicro.com/arculator/
-	http://www.virtualacorn.co.uk/product.htm  (only runs on Windows)
-	http://www.riscos.com/shop/products/106/index.htm  
-  Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2
-  Then add support for:
-	unsupported/audio/audioWorksSoundSample
-	video/acornReplayVideo
-  More samples from:
-	https://archive.org/details/cine-clips
-	https://archive.org/details/acorn_replay_collection
-	https://archive.org/details/cdrom-riscos-clipart
-	https://archive.org/details/cdrom-riscos-risc-disc-1
-
 * Add Old 32bit Linux support then add (see notes for each format):
   music/beRoTracker	(no files actually detected on discmaster)
   music/synderSNG  	(VERY weak magic. no ACTUAL songs detected on discmaster, all are just false positives)
-
-* Learn how to crack old windows programs, specifically the decode.exe's from:
-	https://discmaster.textfiles.com/browse/6924/PCL_19.iso/charme/hard
-	https://discmaster.textfiles.com/browse/6923/cd.iso/charme/hard
-	https://discmaster.textfiles.com/browse/6928/CDROSE2.iso/hard
-    https://discmaster.textfiles.com/browse/16063/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France).7z/PC%20Loisirs%20-%20Supplement%20Interactif%20No.%2022%20(France)%20(Track%201).bin/charme/hard
-  These are 16bit Windows 95/98 programs. So using W32Dasm or OllyDbg doesn't work well because those only handle 32bit code.
-  Should be able to find some cracking tutotorials from back in the day and go through them. Idea is find the assembly where the password button checks validity and crack that to just be NOP or something or change from BEQ to BNE or something
-  Then add support for these files. Should be fun :)
-  Try asking an LLM for help on disassembly and finding the code to patch it out, etc. Might need to use an 'uncensored' LLM for this.
-  Try grok-2 on X, but can also try:
-	https://sebastian-petrus.medium.com/someone-has-mad-an-uncensored-version-of-qwq-32b-preview-and-it-is-awesome-f64769a60d03
-	which might be available here: https://openrouter.ai/qwen/qvq-72b-preview
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files to convert.
   Bonus points if I make a quick dirty 'dexvert.sh' bash script that folks can use that will convert via wget from CLI via dexvert.com
@@ -506,34 +442,8 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 * Add rendering of previews of full game maps supported by 'gamemap': https://github.com/Malvineous/libgamemaps
   Research them here: https://moddingwiki.shikadi.net
 
-* Could incorporate a new detectory, the DOS based identification program sandbox/app/idar215.exe (self extractor) http://fileformats.archiveteam.org/wiki/IDArc
-  Due to the overhead with DOSBox, would want to use 'dosemu2' to run this directrly from the linux console: https://github.com/dosemu2/dosemu2
-  I got it to install and compile, but the freedos (fdpp) linking wasn't correct yet and it failed to run IDARCH.EXE
-
-* Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
-  NOTE: Already started this a bit, got it installed into 86box and networkign working. Find it in sandbox/legacy/os2/
-  Next step would be to create a REXX script (see chatgpt history) that would do what supervisor did. Wget is available for OS/2 from Hobbes
-  I stopped because it takes 2x to 3x times longer to boot into OS/2 and there are only 4 formats that would benefit, only 1 would be automateable now and so meh.
-  Then add format support for:
-	archive/os2FTCOMP		(117,604 files on discmaster2 (56,280 unique))
-	image/pmDraw			(101 files (33 unique))  (No known converter, would need Auto-It like functionality for OS/2 to control GUI)
-	archive/iconHeaven		(702 files on discmaster2 (149 unique)) (WARNING: No known converter, even on OS/2)
-	document/os2Help		(56,493 files (11,240 unique))	(Already suport it pretty good) (maybe more converters maybe: https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
-	Find sample files for text/rexxAdventureSavedGame (since rexx-adventure is an OS/2 thing)
-
-* There are several 'detected' installer 'magic' in the 'exe.js' format, I could look into each of these and write extractors for them
-
 * xbox content can be better extracted with: https://github.com/multimediamike/xbfuse
-
-* Reverse engineer registration code for: ssbx.exe  (I forget the name of the program in dexvert, ssbx is the installer, but it is in there)
-	Use: https://binary.ninja/purchase/#non-commercial
-	Another alternative for older 16bit exes I hear: https://github.com/uxmal/reko
-
-* Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
-  https://discmaster.textfiles.com/search?format=folioDatabase
-  Afterwards, search 'itaitem' for: infobase     folio
-  FEB 2026 Update: Spent a few days with claude code with an MCP connection to an analyzed WAIS.EXE binary attempting vibe this.
-  It failed. See sandbox/legacy/unfolio/
+  This can mount XBOX/360 isos and then I could extract them
 
 
 /----------------\
@@ -557,19 +467,12 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
 
 * Use a doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
   I tried DM2VRML.EXE a little bit, it crashes a lot. Also, I had trouble locating Doom 1 WADs, but found lots of DOOM 2 wads.
+  Would be fun to have fully 'flyable' levels for doom, quake, etc
 
 * Add this detection program: https://github.com/google/magika
   It only detects a small handful of file formats, more modern ones too (v2 game out in 2024 and has a few hundred, but still not many)
   For that one, I'll need to spin up a server in dexvert that runs in the background as python and responses to web requests
   Make sure I also put it on info.txt App Updates section
-
-* Pay someone to add more formats to FFMPEG (gl/dl/ANIM/etc) or to improve existing formats: http://www.ffmpeg.org/consulting.html
-
-* Consider switching away from DOSBOX and use an authentic MS-DOS installation under 86Box
-   Pro: Compatability with some dexvert/dos/* programs that didn't work under dosbox (of which I don't know of any). Feels cleaner.
-  Cons: Would need to solve video recording & keyboard control (both of which I wrote custom code patches to DOSBOX to implement)
-  I could maybe add similar code to 86Box, but that would be harder to control from 'within' dos.
-  It's probably not worth doing since I can't think of many 'benefits' and what I have with DOSBox "works ok"
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
   Other 3DO extractor programs: https://forum.uqm.stack.nl/index.php?topic=3535.0
@@ -583,4 +486,18 @@ https://discmaster.textfiles.com/search?format=macOSExecutable&detection=VIS3&de
   See some tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
   Additional tools for CD-I from here (including animation stuff): https://archive.org/details/various.cd-i.utilities.3.5hd.os9
 
-* Create native C nodejs module for imagemagick/recoil and other libs (abydos, etc) for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native
+* Create native C deno module for imagemagick/recoil and other detector programs for speed.
+  Example existing image magick one for node: https://github.com/elad/node-imagemagick-native
+
+>>> failures
+* I tried to vibe in Aldus Persuasion support, but it's an undocumented vector drawing file format and it did NOT go well.
+  See sandbox/fail/aldusPersuasion
+
+* Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
+  https://discmaster.textfiles.com/search?format=folioDatabase
+  Afterwards, search 'itaitem' for: infobase     folio
+  FEB 2026 Update: Spent a few days with claude code with an MCP connection to an analyzed WAIS.EXE binary attempting vibe this.
+  It failed. See sandbox/fail/unfolio/
+
+* Tried adding Basic PLAY .MUS support, made progress vibing it, but in the end abandoned it due to the format being loosey goosey
+  See sandbox/fail/basicPlay_Music_Macro_Language/

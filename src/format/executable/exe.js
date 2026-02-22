@@ -3,7 +3,9 @@ import {_WINDUMP_META_KEYS} from "../../program/meta/winedump.js";
 
 const _INSTALLER_MAGICS = [
 	// installers: These actually do convert ok already with things like cmdTotal or other programs below
-	"Installer: Vise", "16bit DOS EXE SEZ sfx Zoo archive", "Wise Installer executable", /^Installer: Wise Installer$/,
+	"VICE Installer EXE", "Installer: Vise",
+	"16bit DOS EXE SEZ sfx Zoo archive",
+	"Wise Installer executable", /^Installer: Wise Installer$/,
 
 	// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
 	"InstallShield setup",

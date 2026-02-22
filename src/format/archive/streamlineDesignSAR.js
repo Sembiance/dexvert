@@ -6,7 +6,7 @@ export class streamlineDesignSAR extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SAR_(Streamline_Design)";
 	ext            = [".sar"];
 	forbidExtMatch = true;
-	magic          = ["Streamline compressed archive", "SAR Archiv gefunden", /^SAR archive data$/];
+	magic          = ["Streamline compressed archive", "SAR Archiv gefunden", /^SAR archive data$/, /^idarc: SAR( |$)/];
 	keepFilename   = true;
 	converters     = ["sar"];
 }

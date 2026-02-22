@@ -6,6 +6,6 @@ export class lzop extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Lzop";
 	ext            = [".lzo"];
 	forbidExtMatch = true;
-	magic          = ["lzop compressed", "LZO Archiv gefunden", "Archive: LZOP compressed data", "LZO compressed data", "application/x-lzop", /^lzop compressed data/];
+	magic          = ["lzop compressed", "LZO Archiv gefunden", "Archive: LZOP compressed data", "LZO compressed data", "application/x-lzop", /^lzop compressed data/, /^idarc: LZO( |$)/];
 	converters     = ["lzop"];
 }

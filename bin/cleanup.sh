@@ -27,22 +27,22 @@ sudo killall -9 mount
 sudo umount -q ./*uniso
 sudo umount -q ./*photocd-info
 sudo umount -q ./*iso/*fuseiso
-sudo umount -q ./*/*
-sudo umount -q ./*
-sudo umount -q -f ./*/*
-sudo umount -q -f ./*
+if [[ "$(hostname)" == dexdrone* ]]; then
+	sudo umount -q ./*/*
+	sudo umount -q ./*
+	sudo umount -q -f ./*/*
+	sudo umount -q -f ./*
+fi
 sudo killall mount
 sudo killall -9 mount
-sudo umount -q ./*/*
-sudo umount -q ./*
-sudo umount -q -f ./*/*
-sudo umount -q -f ./*
 if [[ "$(hostname)" == dexdrone* ]]; then
+	sudo umount -q ./*/*
+	sudo umount -q ./*
+	sudo umount -q -f ./*/*
+	sudo umount -q -f ./*
 	rm -rf /mnt/ram/tmp/*
-fi
-sudo umount -q ./*/*
-sudo umount -q ./*
-if [[ "$(hostname)" == dexdrone* ]]; then
+	sudo umount -q ./*/*
+	sudo umount -q ./*
 	rm -rf /mnt/ram/tmp/*
 fi
 

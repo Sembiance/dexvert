@@ -10,7 +10,7 @@ export class installShieldSelfExtractor extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	priority       = this.PRIORITY.HIGH;
-	magic          = ["InstallShield Self-Extractor", "Win16 InstallShield Self-Extracting Executable"];
+	magic          = ["InstallShield Self-Extractor", "Win16 InstallShield Self-Extracting Executable", /^idarc: InstallShield( |$)/];
 	idCheck        = async inputFile => inputFile.size>_MAGIC.length && (await fileUtil.readFileBytes(inputFile.absolute, _MAGIC)).indexOfX(_MAGIC)!==0;
 	forbiddenMagic = ["Win32 Dynamic Link Library"];
 	converters     = ["unISV3", "installShieldSelfExtractor", "deark[module:exe][opt:exe:sfx]"];

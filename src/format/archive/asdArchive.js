@@ -6,7 +6,7 @@ export class asdArchive extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ASD_Archiver";
 	ext            = [".asd"];
 	forbidExtMatch = true;
-	magic          = ["ASD Archiever compressed archive", "ASD Archiv gefunden", /^ASD archive data/];
+	magic          = ["ASD Archiever compressed archive", "ASD Archiv gefunden", /^ASD archive data/, /^idarc: ASD( |$)/];
 	weakMagic      = [/^ASD archive data/, "ASD Archiv gefunden"];
 	converters     = ["unasd"];
 }

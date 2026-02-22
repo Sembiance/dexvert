@@ -1,0 +1,170 @@
+QWK Mail Packet Format - MESSAGES.DAT Specification
+=====================================================
+
+Reverse-engineered from sample Qmail/OLX BBS offline mail packets.
+Vibe coded by Claude
+
+Overview
+--------
+QWK is an offline mail packet format created by Sparkware in 1987 for the
+Qmail door on PCBoard BBS systems. It was later adopted by many other BBS
+software packages and offline mail readers (OLX, BlueWave, etc.).
+
+The MESSAGES.DAT file contains all messages in the packet. The file is
+organized as a sequence of fixed-size 128-byte blocks (matching the old
+floppy disk sector size).
+
+General Structure
+-----------------
+  Block 0:        Copyright/identification header (128 bytes)
+  Block 1..N:     Message records (variable number of blocks each)
+  Trailing blocks: May be null-padded (all 0x00) at end of file
+
+All text fields use the CP437 (DOS/IBM PC) character encoding.
+Byte 0xE3 is used as the line separator within message bodies (instead of
+CR/LF). Readers should convert 0xE3 to newline when displaying.
+
+
+Block 0 - Copyright Header (128 bytes)
+---------------------------------------
+A text string identifying the software that produced the packet, padded
+with spaces (0x20) to fill 128 bytes. Typical contents:
+
+  "Produced by Qmail...Copyright 1987 by Sparkware.  All Rights Reserved."
+  "Produced by Qmail...Copyright (c) 1987 by Sparkware.  All Rights Reserved
+   Above for Compatibility with Qmail"
+
+This block is always present and is skipped when reading messages.
+
+
+Message Record
+--------------
+Each message consists of a 128-byte header block followed by zero or more
+128-byte body blocks. The total number of blocks (header + body) is
+specified in the header's "chunk count" field.
+
+Message Header (128 bytes)
+--------------------------
+Offset  Length  Type    Field
+------  ------  ------  --------------------------------------------------
+  0       1     char    Status flag
+  1       7     ASCII   Message number (space-padded, right-aligned or left)
+  8       8     ASCII   Date (MM-DD-YY)
+ 16       5     ASCII   Time (HH:MM)
+ 21      25     ASCII   To (recipient name, space-padded)
+ 46      25     ASCII   From (sender name, space-padded)
+ 71      25     ASCII   Subject (space-padded)
+ 96      12     ASCII   Password (space-padded, usually blank)
+108       8     ASCII   Reference message number (space-padded, 0 or blank=none)
+116       6     ASCII   Chunk count - total 128-byte blocks including header
+122       1     byte    Active flag (0xE1=225 means active/live message)
+123       2     uint16  Conference number (little-endian unsigned 16-bit)
+125       2     uint16  Logical message number (little-endian, often 0)
+127       1     byte    Net tag character (0x00 or 0x20 = none)
+
+All ASCII fields are padded with spaces (0x20). Numeric ASCII fields should
+be stripped of whitespace before converting to integers.
+
+
+Status Flag (byte 0)
+---------------------
+The status byte indicates the message type and read state:
+
+  ' ' (0x20)  Public message, unread
+  '-' (0x2D)  Public message, read (or private/comment to sysop)
+  '+' (0x2B)  Public message, marked/flagged
+  '*' (0x2A)  Public message, has been read
+  '~' (0x7E)  Comment to sysop, read
+  '`' (0x60)  Receiver-only (private), read
+  '%' (0x25)  Sender-only, read
+  '^' (0x5E)  Group password protected, read
+  '!' (0x21)  Group password protected, unread
+  '#' (0x23)  Receiver-only (private), unread
+  '$' (0x24)  Sender-only, unread
+
+Values observed in sample data: ' ', '-', '+', '*'
+
+
+Active Flag (byte 122)
+-----------------------
+  0xE1 (225)  Message is active (present in all sample data)
+  0xE2 (226)  Message is deleted / should be skipped
+
+
+Conference Number (bytes 123-124)
+---------------------------------
+A 16-bit little-endian unsigned integer identifying which conference
+(message area / forum) the message belongs to. Conference 0 is typically
+the main/general conference. Values observed in samples range from 0 to
+1000+.
+
+Conference names and descriptions are defined in CONTROL.DAT (not part of
+MESSAGES.DAT).
+
+
+Message Body
+------------
+The body immediately follows the 128-byte header. The number of body blocks
+is (chunk_count - 1). The body is:
+
+  - Encoded in CP437 (DOS code page 437)
+  - Line breaks represented by byte 0xE3 (NOT CR/LF)
+  - The last body block is padded with spaces (0x20) or NULs (0x00) to
+    fill the 128-byte boundary
+  - May also be terminated with 0x1A (Ctrl-Z / EOF marker)
+
+To extract readable text:
+  1. Read (chunk_count - 1) * 128 bytes after the header
+  2. Strip trailing spaces, NULs, and 0x1A bytes
+  3. Replace all 0xE3 bytes with newline (0x0A)
+  4. Decode from CP437 to UTF-8 (or desired encoding)
+
+
+Taglines and Kstrings
+----------------------
+Many messages include a tagline near the end, typically formatted as:
+
+  ---
+  <space>tagline_text
+
+Or preceded by the characters 0xFE (■ in CP437) used as bullet/separator.
+These are reader-inserted signatures and are part of the body text.
+
+
+File Layout Example
+-------------------
+For a MESSAGES.DAT with two messages (7 blocks and 4 blocks):
+
+  Offset    Block   Content
+  ------    -----   -------
+  0x0000    0       Copyright header (128 bytes)
+  0x0080    1       Message 1 header (chunk_count=7)
+  0x0100    2-7     Message 1 body (6 blocks = 768 bytes)
+  0x0380    8       Message 2 header (chunk_count=4)
+  0x0400    9-11    Message 2 body (3 blocks = 384 bytes)
+
+Null/empty blocks (all 0x00) may appear at the end of the file and should
+be skipped.
+
+
+Other QWK Packet Files (not in MESSAGES.DAT)
+---------------------------------------------
+A complete QWK packet (.QWK archive, typically ZIP) may also contain:
+
+  CONTROL.DAT   - BBS name, conferences list, user info (text file)
+  DOOR.ID       - Door identifier
+  TOREADER.EXT  - Extended info for the reader
+  *.NDX          - Index files (one per conference) for fast message lookup
+  PERSONAL.NDX  - Index of messages addressed to the user
+  BLT-x.y       - Bulletin files
+  NEWFILES.DAT  - New files listing
+
+This specification covers only the MESSAGES.DAT format as found in the
+sample data.
+
+
+References
+----------
+Original QWK format by Mark "Sparky" Herring, Sparkware, 1987.
+Used by: Qmail, OLX (Mustang Software), BlueWave, and many other BBS
+offline mail readers of the late 1980s-1990s era.

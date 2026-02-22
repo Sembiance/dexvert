@@ -5,6 +5,6 @@ export class hitArchive extends Format
 	name       = "HIT Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/HIT_(compressed_archive)";
 	ext        = [".hit"];
-	magic      = ["HIT archive data", "HIT compressed archive"];
+	magic      = ["HIT archive data", "HIT compressed archive", /^idarc: HIT \(Bogdan Ureche\)( |$)/];
 	converters = ["hit"];
 }

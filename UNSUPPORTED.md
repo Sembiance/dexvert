@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,057)
+# Unsupported File Formats (4,055)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (312)
+## Archive (311)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -133,9 +133,8 @@ Family/Format | Name | Extensions | Notes
 [archive/iffCompressedDataArchiveFile](https://discmaster.textfiles.com/search?format=iffCompressedDataArchiveFile) | IFF Compressed Data Archive File | .xar | 
 [archive/imageForWindowsDiskImage](https://discmaster.textfiles.com/search?format=imageForWindowsDiskImage) | Image for Windows Disk Image | .tbi | 
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?format=imageLibrarianArchive) | Image Librarian archive | .ril | 
-[archive/innoSetupArchive](https://discmaster.textfiles.com/search?format=innoSetupArchive) | Inno Setup Archive | .bin .0 .1 .2 .3 .4 .5 .6 .7 .8 .9 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/innoSetupArchive/)
+[archive/innoSetupArchive](https://discmaster.textfiles.com/search?format=innoSetupArchive) | Inno Setup Archive | .bin .0 .1 .2 .3 .4 .5 .6 .7 .8 .9 | 
 [archive/installationPackage](https://discmaster.textfiles.com/search?format=installationPackage) | Installation package | .d01 | 
-[archive/installerVISE](https://discmaster.textfiles.com/search?format=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 [archive/interfaze](https://discmaster.textfiles.com/search?format=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/internetExplorerCache](https://discmaster.textfiles.com/search?format=internetExplorerCache) | Internet Explorer cache |  | 
 [archive/quickBooksBackup](https://discmaster.textfiles.com/search?format=quickBooksBackup) | Intuit QuickBooks Backup | .qbb | 
@@ -1001,7 +1000,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (178)
+## Music (177)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -1098,7 +1097,6 @@ Family/Format | Name | Extensions | Notes
 [music/msxProtrackerModule](https://discmaster.textfiles.com/search?format=msxProtrackerModule) | MSX Protracker Module | .pro | 
 [music/msxSME3Music](https://discmaster.textfiles.com/search?format=msxSME3Music) | MSX SME 3 music | .ply | 
 [music/musicBoxMusic](https://discmaster.textfiles.com/search?format=musicBoxMusic) | Music Box music | .sav | 
-[music/musicMacroLanguage](https://discmaster.textfiles.com/search?format=musicMacroLanguage) | Music Macro Language | .mus | [20 sample files](https://sembiance.com/fileFormatSamples/music/musicMacroLanguage/) - Tried vibe coding a converter, works for most regular DOS BASIC Play type files, but sooo much variety and multiple different platforms. Gave up in the end, though it kinda works. Bigger problem is identification, it's HARD.
 [music/musicStudioSong](https://discmaster.textfiles.com/search?format=musicStudioSong) | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://sembiance.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 [music/musicXPerformance](https://discmaster.textfiles.com/search?format=musicXPerformance) | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXPerformance/)
 [music/musicXSequence](https://discmaster.textfiles.com/search?format=musicXSequence) | [Music-X Sequence](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .seq | [6 sample files](https://sembiance.com/fileFormatSamples/music/musicXSequence/)

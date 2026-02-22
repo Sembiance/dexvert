@@ -21,3 +21,6 @@ import {extractEXEOverlay} from "../src/exeOverlayUtil.js";
 const xlog = new XLog("info");
 
 await initRegistry(xlog);
+
+let result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : {inputFilePath : "/home/sembiance/Downloads/JUSTIFY.WAD", outputDirPath : "/home/sembiance/tmp/out"}, asJSON : true});
+xlog.info`${result}`;

@@ -5,6 +5,6 @@ export class limit extends Format
 	name       = "LIMIT Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/LIMIT";
 	ext        = [".lin"];
-	magic      = ["Limit compressed archive"];
+	magic      = ["Limit compressed archive", /^idarc: LIM( |$)/];
 	converters = ["limit"];
 }

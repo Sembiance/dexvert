@@ -6,6 +6,6 @@ export class jrchiveSFX extends Format
 	website        = "http://justsolve.archiveteam.org/wiki/JRchive";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["overlay: JRchive SFX"];
+	magic          = ["overlay: JRchive SFX", /^idarc: JRC( |$)/];
 	converters     = ["dosEXEExtract"];
 }

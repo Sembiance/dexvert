@@ -11,7 +11,7 @@ export const unp =
 		compackPacked  : {name : "COMPACK Packed", magic : ["Packer: COMPACK", "16bit DOS EXE COMPACK compressed"]},
 		icePacked      : {name : "ICE Packed", magic : ["ICE compressed/scrambled DOS Command", "Packer: ICE"]},
 		optlinkPacked  : {name : "OPTLINK Packed", magic : ["Packer: Optlink"]},
-		tinyProgPacked : {name : "TinyProg Packed", magic : ["16bit DOS EXE TinyProg compressed", "Packer: TinyProg"]}
+		tinyProgPacked : {name : "TinyProg Packed", magic : ["16bit DOS EXE TinyProg compressed", "Packer: TinyProg", /^idarc: TinyProg( |$)/]}
 	}
 };
 
@@ -19,7 +19,7 @@ export const cup386 =
 {
 	archive :
 	{
-		ainexePacked                : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE"]},
+		ainexePacked                : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE", "idarc: AINEXE"]},
 		amisetupPacked              : {name : "Amisetup Packed", magic : ["Packer: Amisetup loader[by Robert Muchsel]"]},
 		aPACKPacked                 : {name : "aPACK Packed", magic : ["Packer: aPACK", "16bit DOS EXE aPACK compressed"]},
 		avPackPacked                : {name : "AVPACK Packed", magic : ["Packer: AVPACK"]},
@@ -59,7 +59,7 @@ export const both =
 		axePacked                 : {name : "AXE Packed", magic : ["16bit DOS AXE compressed Executable", "16bit DOS EXE AXE compressed", "Packer: SEA-AXE"]},
 		cebeCompressExpandPacked  : {name : "CEBE Compress Expand Packed", magic : ["CEBE Compress Expand compressed DOS executable"]},
 		cheatPackerPacked         : {name : "Cheat Packer Packed", magic : ["Packer: Cheat packer"]},
-		dietPacked                : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed", "deark: diet (DIET-compressed COM"]},
+		dietPacked                : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed", "deark: diet (DIET-compressed COM", /^idarc: Diet( |$)/]},
 		executrixCompressorPacked : {name : "EXECUTRIX-COMPRESSOR Packed", magic : ["Packer: EXECUTRIX-COMPRESSOR[by Knowledge Dynamics Corp]"]},
 		lmt2ePacked               : {name : "LM-T2E Packed", magic : ["16bit DOS LM-T2E executable"]},
 		neobookPacked             : {name : "Neobook Packed", magic : ["Neobook compiled book executable"]},
@@ -69,7 +69,7 @@ export const both =
 		proPackPackedExe          : {name : "Pro-Pack Packed Executable", magic : ["Packer: PRO-PACK", /^16bit DOS EXE R[MN]C \/ PRO-PACK compressed/]},
 		scrnchPacked              : {name : "SCRNCH Packed", magic : ["Packer: SCRNCH", "SCRNCH compressed"]},
 		shrinkPacked              : {name : "Shrink Packed", magic : ["Shrink packed", "Packer: SHRINK"]},
-		ucexePacked               : {name : "UCEXE Packed", magic : ["Packer: UCEXE", "UCEXE compressed 16bit DOS executable"]},
-		wwpackPacked              : {name : "WWPACK Packed", magic : ["Packer: WWPACK", "16bit DOS EXE WWPACK compressed"]}
+		ucexePacked               : {name : "UCEXE Packed", magic : ["Packer: UCEXE", "UCEXE compressed 16bit DOS executable", /^idarc: UCEXE( |$)/]},
+		wwpackPacked              : {name : "WWPACK Packed", magic : ["Packer: WWPACK", "16bit DOS EXE WWPACK compressed", /^idarc: WWPack( |$)/]}
 	}
 };

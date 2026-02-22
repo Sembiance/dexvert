@@ -4,6 +4,6 @@ export class uhbc extends Format
 {
 	name       = "UHBC Compressed File";
 	website    = "http://fileformats.archiveteam.org/wiki/UHBC";
-	magic      = ["UHBC compressed", /^UHBC archive data/];
+	magic      = ["UHBC compressed", /^idarc: UHBC( |$)/, /^UHBC archive data/];
 	converters = ["uhbc"];
 }

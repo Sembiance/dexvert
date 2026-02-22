@@ -4,7 +4,7 @@ export class ttcomp extends Format
 {
 	name       = "TTComp Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/TTCOMP";
-	magic      = ["TTComp archive"];	// VERY weak, but alas.
+	magic      = ["TTComp archive", /^idarc: TTComp( |$)/];	// VERY weak, but alas.
 	priority   = this.PRIORITY.LOW;
 	trustMagic = true;
 	packed     = true;

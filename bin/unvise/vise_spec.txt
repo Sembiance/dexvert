@@ -1,6 +1,6 @@
 Installer VISE Archive Format Specification
 ============================================
-Version: 2026-02-20
+Version: 2026-02-21
 Source:   Reverse-engineered from sample files and ScummVM project (elasota, 2022)
 
 Installer VISE was a proprietary macOS (Classic Mac OS) installer creation tool
@@ -44,6 +44,8 @@ Offset  Size  Field                Description
 0x28    4     unknown              Possibly total archive size or checksum
 
 Known version codes:
+  0x00000001  -  VISE format v0.01
+  0x80010101  -  VISE format v1.01
   0x80010201  -  VISE format v2.01
   0x80010202  -  VISE format v2.02 (Installer VISE 3.5 Lite)
   0x80010300  -  VISE format v3.00 (Installer VISE 3.6 Lite)
@@ -51,6 +53,7 @@ Known version codes:
   0x80010302  -  VISE format v3.02
   0x80010303  -  VISE format v3.03
   0x80010304  -  VISE format v3.04
+  0x80010305  -  VISE format v3.05
   0x80010306  -  VISE format v3.06
   0x80010307  -  VISE format v3.07
   0x80010308  -  VISE format v3.08
@@ -58,10 +61,29 @@ Known version codes:
   0x8001030b  -  VISE format v3.11
   0x8001030c  -  VISE format v3.12
   0x8001030d  -  VISE format v3.13
+  0x8001030e  -  VISE format v3.14
+  0x80010a50  -  VISE format v10.80
+  0x80010b00  -  VISE format v11.00
 
 The version code format is 0x8001XXYY where XX.YY is the version number.
-Versions v2.01 through v3.07 use DVCT/FVCT catalog markers.
-Versions v3.08+ appear to use an encrypted/obfuscated catalog format.
+(Exception: v0.01 uses code 0x00000001.)
+
+Catalog format by version:
+  v0.01-v3.01:  Sequential parsing, uncompressed DVCT/FVCT entries
+  v3.02-v3.07:  Marker-based scanning, uncompressed DVCT/FVCT entries
+  v3.08-v3.11:  May be uncompressed (marker scan) OR compressed (same as v3.12+)
+  v3.12+:       Compressed catalog blob (byte-swap + raw deflate, NO substitution)
+                Decompressed catalog contains standard DVCT/FVCT entries
+
+Archives may be standalone (SVCT at offset 0) or embedded in self-extracting
+Mac OS applications (SVCT typically at offset 128).
+
+Archive data layout:
+  Most archives: [SVCT header][file data...][CVCT catalog]  (catalog at end)
+  Some archives: [SVCT header][CVCT catalog][file data...]  (catalog at start)
+  When the catalog is near the start (cvct_offset < ~4096), archive_pos values
+  in FVCT entries will be GREATER than cvct_offset. This is the "catalog-first"
+  layout seen in some multi-segment installers (e.g., QuickTime Installer v3.08).
 
 ================================================================================
 CVCT CATALOG HEADER (20 bytes)
@@ -72,12 +94,35 @@ Located at the byte offset specified by SVCT.cvct_offset.
 Offset  Size  Field                Description
 ------  ----  -------------------  -------------------------------------------
 0x00    4     magic                "CVCT" (0x43564354)
-0x04    12    unknown              Reserved/unknown fields
-0x10    2     num_entries          Total number of catalog entries
-0x12    2     unknown              Reserved
+0x04    4     catalog_data_size    For v3.08+: compressed catalog blob size (when compressed)
+0x08    4     unknown              Always 1
+0x0C    4     unknown              Always 0
+0x10    2     num_entries          Total number of catalog entries (DVCT + FVCT)
+0x12    2     unknown              Reserved (always 0)
 
-Immediately after the CVCT header, catalog entries follow sequentially.
-Each entry begins with a 4-byte magic identifier.
+Note: In some archives, the SVCT header's cvct_offset field does not point to
+the actual CVCT location. When the CVCT magic is not found at the claimed
+offset, search the data for a valid CVCT header (validate by checking that
+num_entries is reasonable, e.g. < 5000). If the CVCT is at a different
+position, all position_in_archive values in FVCT entries may need to be
+adjusted by the same offset difference (shift = actual_cvct - claimed_cvct).
+
+For v0.01-v3.11:
+  Immediately after the CVCT header, catalog entries follow sequentially.
+  Each entry begins with a 4-byte magic identifier.
+
+For v3.12+:
+  After the CVCT header (20 bytes), there is an 80-byte preamble:
+    +00..+27: 7 x 4-byte resource type tags:
+              "PACK" "BBrd" "CODE" "BDIR" "PROJ" "INDN" "DfIL"
+    +28..+79: 13 x uint32 offset values (absolute from SVCT header)
+  Then at offset +80, the compressed catalog blob (catalog_data_size bytes):
+    1. Byte-swap adjacent pairs (same as file data step 1)
+    2. Raw deflate decompress (NO substitution cipher - unlike file data)
+    3. The decompressed data contains standard DVCT/FVCT/PACK entries
+  Note: Some v3.12+ archives have an UNCOMPRESSED catalog (the blob starts
+  with a known marker like FVCT, DVCT, PACK, etc.). In this case, skip
+  byte-swap + deflate and use the raw blob data directly.
 
 ================================================================================
 DVCT ENTRY (Directory)
@@ -95,6 +140,9 @@ Offset  Size  Field                Description
 Directory data fields (offsets relative to directory_data start):
   +68   2     containing_dir       Parent directory index (1-based, 0=root)
   +76   1     name_length          Length of directory name in bytes
+
+For v10.80/v11.00, name_length is shifted by +2:
+  +78   1     name_length          (shifted from +76)
 
 Extra bytes before name (version-dependent):
   v2.01, v2.02:  0 extra bytes
@@ -120,15 +168,18 @@ Offset  Size  Field                Description
 
 File data fields (offsets relative to file_data start, i.e., byte 4 of entry):
 
-  +0    40    unknown              Various metadata (install flags, dates, etc.)
+  +0    40    unknown              Various metadata (install flags, etc.)
   +40   4     file_type            Mac OS file type (e.g., "APPL", "TEXT")
   +44   4     file_creator         Mac OS creator code (e.g., "ttxt", "MSWD")
-  +48   16    unknown              Additional metadata
+  +48   2     finder_flags         Finder flags (fdFlags from FInfo)
+  +50   6     unknown              Finder location/folder fields
+  +56   4     creation_date        Creation date (seconds since 1904-01-01)
+  +60   4     modification_date    Modification date (seconds since 1904-01-01)
   +64   4     comp_data_size       Compressed data fork size in bytes
   +68   4     uncomp_data_size     Uncompressed data fork size in bytes
   +72   4     comp_rsrc_size       Compressed resource fork size in bytes
   +76   4     uncomp_rsrc_size     Uncompressed resource fork size in bytes
-  +80   12    unknown              Additional metadata (possibly dates, flags)
+  +80   12    unknown              Additional metadata
   +92   2     containing_dir       Parent directory index (1-based, 0=root)
   +94   2     data_segment         Segment number containing this file's data
   +96   4     position_in_archive  Byte offset of compressed data in segment
@@ -136,7 +187,12 @@ File data fields (offsets relative to file_data start, i.e., byte 4 of entry):
   +118  1     name_length          Length of file name in bytes
   +119  1     padding              Unused byte
 
-Total entry size: 4 + 120 + name_length
+For v10.80/v11.00, all fields after +118 are shifted by +2:
+  +120  1     name_length          (shifted from +118)
+  +121  1     padding              Unused byte
+
+Total entry size: 4 + 120 + name_length (v0.01-v3.14)
+                   4 + 122 + name_length (v10.80, v11.00)
 
 Notes on compressed sizes for shared blobs:
   When multiple FVCT entries share the same position_in_archive value, they
@@ -189,6 +245,24 @@ For each disk:
   +N    6     disk_info            Disk metadata (segment number, size, etc.)
 
 ================================================================================
+PHANTOM ENTRIES
+================================================================================
+
+Some FVCT entries in the catalog are "phantom" entries — installer action
+references (e.g., package set definitions) rather than extractable files. These
+can be identified by their characteristic size field values:
+
+  - comp_data_size AND uncomp_data_size are both "phantom sizes"
+  - A phantom size is >= 0x8000 AND matches one of:
+      a) N * 65536 + M, where 1 <= N <= 8 and 0 <= M <= 8
+         (e.g., 0x10000, 0x10001, 0x10005, 0x20001, 0x40001, 0x40002, 0x80001)
+      b) An exact power of 2 (e.g., 0x8000, 0x10000, 0x40000)
+
+These values appear to be two packed 16-bit fields misinterpreted as one 32-bit
+value. Phantom entries should be filtered out during extraction as they do not
+contain decompressible file data.
+
+================================================================================
 COMPRESSION AND OBFUSCATION
 ================================================================================
 
@@ -235,6 +309,20 @@ project from the installer's "Dcmp" resource):
      compressible data), but may cause decompression failures for certain
      files. ScummVM notes this as a known TODO.
 
+     Known quirk: Some small files (URL bookmarks, etc.) have a 1-byte
+     prefix (typically 0x01 after deobfuscation) before a deflate stored
+     block with BFINAL=0. The stored block correctly contains the file data,
+     but trailing bytes after the block are invalid. Solution: limit the
+     decompressor's output buffer to the expected uncompressed size, which
+     stops the decompressor before it encounters the trailing garbage. If
+     standard decompression fails, retry after skipping the first byte with
+     the output limited to expected_size.
+
+     Known quirk: Some deflate streams produce MORE data than the expected
+     uncompressed size (common with shared blob members when tested
+     individually, or due to trailing stored blocks). The decompressor's
+     output should be limited to exactly the expected uncompressed size.
+
 Decompression procedure:
   1. Read comp_size bytes of compressed data from the archive
   2. Swap byte pairs: for i in range(1, len, 2): swap [i] and [i-1]
@@ -274,6 +362,17 @@ MULTI-SEGMENT ARCHIVES:
   - position_in_archive is relative to the start of that segment file
   - Segment 1 always contains the catalog; other segments contain only data
   - All segment files have their own SVCT header
+  - data_segment=0 typically means "data not in this archive" (CD/external)
+    or "alternate version." When seg=0 files share a position_in_archive
+    with seg=1 files in a shared blob group, the seg=0 files should be
+    excluded from the group to avoid corrupting the shared blob protocol.
+
+FILES WITH NO DATA PRESENT:
+  Some FVCT entries have uncomp_data_size > 0 but comp_data_size == 0 (or
+  similarly for resource forks). These files have catalog metadata but no
+  actual compressed data in the archive. They typically represent files that
+  would be installed from CD-ROM or another external source. These entries
+  should be skipped during extraction.
 
 ================================================================================
 MAC FILE ATTRIBUTES
@@ -325,16 +424,82 @@ v3.04:
 
 v3.06-v3.07:
   - FVCT file_data significantly larger (~62 extra bytes)
-  - position_in_archive shifted to higher offset
-  - name_length shifted to higher offset
-  - Core fields (type, creator, sizes at +64-+80) remain stable
+  - Variable-length entries; use marker scanning to find boundaries
+  - Core fields (type, creator, sizes at +64-+80, archive_pos at +96,
+    name_length at +118) remain at standard offsets
 
-v3.08+ (0x80010308 and later):
-  - Catalog structure fundamentally changed
-  - DVCT/FVCT markers not present or not recognizable
-  - Catalog entries appear encrypted or obfuscated
-  - PACK and INDN markers may still be present
-  - Not currently decodable without additional reverse-engineering
+v3.08-v3.11:
+  - Same marker-based catalog structure as v3.02-v3.07
+  - v3.11 can store file data AFTER the CVCT catalog (allow post-catalog
+    archive_pos values)
+  - Field offsets remain at standard positions
+
+v3.12-v3.14:
+  - Catalog is now compressed (see CVCT structure above)
+  - Uses byte-swap ONLY + raw deflate (NO substitution cipher)
+  - Decompressed catalog contains standard DVCT/FVCT/PACK entries
+  - File data still uses full deobfuscation (swap + substitution + deflate)
+  - Variable-length entries; use marker scanning on decompressed data
+  - Additional marker types in catalog: BBrd, CODE, BDIR, PROJ, DfIL
+  - File data may be stored after the catalog (allow post-catalog positions)
+
+v10.80 (0x80010a50):
+  - Same compressed catalog structure as v3.12+
+  - FVCT name_length shifted to +120 (instead of standard +118)
+  - DVCT name_length shifted to +78 (instead of standard +76)
+  - Entry sizes are 2 bytes larger than v3.12 equivalents
+  - All other field offsets (type, creator, sizes, archive_pos) unchanged
+  - Known samples are CD-based installers where most file data resides on
+    separate media (not in the archive file)
+
+v11.00 (0x80010b00):
+  - Same compressed catalog structure as v3.12+
+  - FVCT name_length shifted to +120 (same as v10.80)
+  - DVCT name_length shifted to +78 (same as v10.80)
+  - Shared blob format is heavily used (multiple files per archive_pos)
+  - File data stored after the catalog; uses standard deobfuscation
+
+================================================================================
+VALIDATION (sample11 corpus, 1378 archives)
+================================================================================
+
+Tested against a corpus of 1378 VISE archives spanning v0.01 through v3.14,
+sourced from various Classic Mac OS software distributions.
+
+Overall fork success rate: 97.1% (193,014 ok, 5,680 fail)
+
+Archive status breakdown:
+  PERFECT (all forks decompress):       850  (61.7%)
+  GOOD (>90% forks ok):                 267  (19.4%)
+  PARTIAL (50-90% forks ok):            158  (11.5%)
+  ERROR (can't parse archive):           59  ( 4.3%)
+  POOR (<50% forks ok):                   0  ( 0.0%)
+
+Non-extractable archives (59 ERROR):
+  - 30x "No extractable files": 28 are Netscape multi-segment stubs (valid
+    SVCT/CVCT but zero FVCT entries, all data on other segments); 2 are
+    uninstaller archives (e.g., "Remove Office 98") where all FVCT entries are
+    phantom entries (installer action references, not extractable files)
+  - 24x "No SVCT header": MacBinary-wrapped files that are either truncated
+    (128-byte header only) or non-VISE applications
+  - 5x "CVCT not found": Truncated Acrobat Reader archives where the catalog
+    extends past end of file
+
+Remaining failure categories (5,680 fork failures):
+  - ~4,400 deflate errors: Genuine data corruption. 98.3% of these cannot be
+    decompressed by any alternative method (raw, swap-only, skip-2, etc.).
+    Likely caused by bit rot, incomplete downloads, or CD-ROM read errors.
+  - ~900 multi-segment: Files whose data resides on disk segments 2-5 that
+    are not present in the archive file being tested.
+  - ~110 no-data: FVCT entries with uncomp_size > 0 but comp_size = 0.
+    These are catalog entries for files stored on external media (CD-ROM).
+  - ~35 size mismatch (under): Deflate stream produces fewer bytes than the
+    expected uncompressed size. Likely corrupt or misaligned data.
+
+Version distribution of tested archives:
+  v0.01: 4, v2.01: 54, v2.02: 158, v2.05: 1, v3.00: 176, v3.01: 56,
+  v3.02: 27, v3.03: 195, v3.04: 105, v3.05: 5, v3.06: 33, v3.07: 181,
+  v3.08: 153, v3.10: 51, v3.11: 58, v3.12: 73, v3.13: 15, v3.14: 9
 
 ================================================================================
 REFERENCES

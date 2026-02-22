@@ -6,8 +6,7 @@ export class installerVISE extends Format
 	website        = "https://en.wikipedia.org/wiki/Installer_VISE";
 	ext            = [".mac"];
 	forbidExtMatch = true;
-	magic          = ["Installer VISE Mac package", "VICE Installer EXE", "Installer: Vise"];
+	magic          = ["Installer VISE Mac package", "Installer: Vise"];
 	idMeta         = ({macFileCreator}) => macFileCreator==="VIS3";
 	converters     = ["unvise"];
-	unsupported    = true;
 }

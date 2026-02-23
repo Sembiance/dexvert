@@ -1,11 +1,11 @@
-# Supported File Formats (3,561)
+# Supported File Formats (3,562)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (552)
+## Archive (553)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -245,7 +245,7 @@ archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](http
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
 archive | Imperium Galactica 2 Game Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/imperiumGalactica2GameArchive/)
 archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innoextract](https://github.com/dscharrer/innoextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
-archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [unvise](https://github.com/Sembiance/dexvert) | [25 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
+archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [unvise](https://github.com/Sembiance/dexvert) | [22 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
 archive | [InstallShield Archive](http://fileformats.archiveteam.org/wiki/InstallShield_archive_(IBT)) | .ibt | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldArchive/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [UniExtract](https://www.legroom.net/software/uniextract) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldCAB/)
@@ -296,7 +296,7 @@ archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintos
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [projectorRays](https://github.com/ProjectorRays/ProjectorRays) [directorCastRipper12](https://github.com/n0samu/DirectorCastRipper) [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) | [63 sample files](https://sembiance.com/fileFormatSamples/archive/macromediaDirector/)
 archive | [Macromedia Flash Compiled EXE](http://fileformats.archiveteam.org/wiki/SWF) | .exe | [EXE2SWFExtractor](https://sothink.com/product/flashdecompiler/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/swfEXE/)
 archive | Macromedia Projector |  | [director_files_extract](https://github.com/n0samu/director-files-extract) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/macromediaProjector/)
-archive | MacroMind Projector/Director |  | [unmacromind](https://github.com/Sembiance/dexvert) | [31 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/)
+archive | MacroMind Projector/Director |  | [unmacromind](https://github.com/Sembiance/dexvert) | [34 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/)
 archive | MADS HAG Game Archive | .hag | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/madsHAGGameArchive/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Magic_Shadow_Archiver)) | .msa | [msa](https://web.archive.org/web/20060507110406/https://www.uni-ulm.de/~s_thuth/ix/msa-0.1.0.tar.gz) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox/MIME Entity](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [ripmime](https://github.com/inflex/ripMIME) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/mbox/)
@@ -304,7 +304,7 @@ archive | Mall Tycoon game data archive | .muk | [gameextractor](https://sourcef
 archive | [MAME Compressed Hard Disk image](https://www.psxdev.net/forum/viewtopic.php?t=3980) | .chd .hd | [chdman](https://github.com/mamedev/mame/releases) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/mameCHD/)
 archive | [MDCD Archive](http://fileformats.archiveteam.org/wiki/MDCD) | .md .cd | [deark](https://entropymine.com/deark/) [mdcd](http://cd.textfiles.com/megarom/megarom1/ARC_LBR/MDCD10.ZIP) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/mdcd/)
 archive | MegaPaint Symbols Library | .lib | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/megaPaintSymbolsLibrary/)
-archive | MENGx Archive | .mfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mengxArchive/)
+archive | MENGx Archive | .mfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/mengxArchive/)
 archive | Meyer/Glass Interactive Game Archive | .mgf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/meyerGlassGameArchive/)
 archive | [MGT Filesystem](https://sinclair.wiki.zxnet.co.uk/wiki/MGT_filesystem) | .mgt | [hcdisk](https://github.com/0sAND1s/HCDisk) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mgtFilesystem/)
 archive | [Microfox PUT Archive](http://fileformats.archiveteam.org/wiki/PUT) | .put .ins | [microfoxGET](https://archive.org/details/msdos_festival_PUT345) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/microfoxPUT/)
@@ -346,6 +346,7 @@ archive | [NuFX/ShrinkIt Archive](http://fileformats.archiveteam.org/wiki/NuFX) 
 archive | [Nullsoft Installer Package](http://fileformats.archiveteam.org/wiki/NSIS) |  | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [cmdTotal](https://totalcmd.net/plugring/cmdtotal.html) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/nullsoftInstallerPackage/)
 archive | [Oberon AsciiCoder archive](https://web.archive.org/web/20170312142117/http://www.ethoberon.ethz.ch/ethoberon/tutorial/Compress.html) |  | [asciidecoder](https://github.com/fzipp/oberon/blob/main/cmd/asciidecoder/main.go) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/oberonAsciiCoderArchive/)
 archive | Obscure HV PackFile game archive | .hvp .001 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/obscureHVPackFileGameArchive/)
+archive | OPK PAK | .osp .ovp .obp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/opkPAK/)
 archive | OPTLINK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/optlinkPacked/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [OS/2 Extended Attributes](http://fileformats.archiveteam.org/wiki/OS/2_extended_attributes) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/os2ExtendedAttributes/)
@@ -623,7 +624,7 @@ audio | [Gravis Ultrasound Patch](http://fileformats.archiveteam.org/wiki/Gravis
 audio | [GSM Audio](http://fileformats.archiveteam.org/wiki/GSM) | .gsm | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/gsm/)
 audio | HAL Laboratory HALPST Audio | .hps | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/halLabsAudio/)
 audio | High Compression Audio | .hca | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/highCompressionAudio/)
-audio | Huffman Compressed audio | .hcom | [sox](http://sox.sourceforge.net) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/huffmanCompressedAudio/)
+audio | Huffman Compressed audio | .hcom | [sox](http://sox.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/huffmanCompressedAudio/)
 audio | [Impulse Tracker Sample](http://fileformats.archiveteam.org/wiki/Impulse_Tracker_sample) | .its | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/impulseTrackerSample/)
 audio | iMUSE Audio | .imc .imx | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/iMUSE/)
 audio | [Interplay Compressed Audio](http://fileformats.archiveteam.org/wiki/Interplay_ACM) | .acm | [zxtune123](https://zxtune.bitbucket.io/) [acm2wav](http://return0.pisem.net/audio.html) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/interplayACM/)
@@ -963,7 +964,7 @@ Family | Name | Extensions | Converters | Notes
 executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/executable/epocExecutable/)
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [18 sample files](https://sembiance.com/fileFormatSamples/executable/macOSExecutable/)
 executable | [Microsoft Windows Dynamic Link Library](http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)) | .dll |  | [27 sample files](https://sembiance.com/fileFormatSamples/executable/dll/)
-executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe |  | [64 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
+executable | [MS-DOS/Windows or OS/2 Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe |  | [67 sample files](https://sembiance.com/fileFormatSamples/executable/exe/)
 executable | [Psion IMG/APP](http://fileformats.archiveteam.org/wiki/Psion_IMG/APP) | .app .img | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionAPP/)
 executable | [Psion OPO/OPA Executable](http://fileformats.archiveteam.org/wiki/Psion_OPO/OPA) | .opo .opa .app | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/psionOPL/)
 executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/executable/windowsSCR/) - Could be fun to 'run' these in Wine and record the output into a preview.mp4 video

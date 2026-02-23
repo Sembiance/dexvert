@@ -362,9 +362,13 @@ export const WEAK_VALUES =
 
 	// gameextractor - actually WEAK
 	// candidates
-	// SEEN  ONCE: DAT_RES, BAG_5, BAG_GABA_2, BIG, BNK, DTA, IMG, IMG_DAVILEX_2, PCK_6, WAV, WAV_2, WD_WD, TEXS_SXET, BDF, ARC_10, aRC_11, ARC_13, ARC_6, ARC_8, RAW_MHWANH, PAK_30, PAK_7, PAK_PACK_3, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON
-	// SEEN TWICE: 001_2, FSB_FSB5,PCK_PACK, PAK_PACK_2, PAK_PACK_4
+	// SEEN  ONCE:
+	// 		DAT_RES, BIG, BNK, WAV, WAV_2, TEXS_SXET, BDF, ARC_10, ARC_11, ARC_13, ARC_6, ARC_8, RAW_MHWANH, PAK_PACK_3, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, PAK_49
+	//		RMX, XFS, BIN_18, PAK_DATA, SLV_DATA, OFF, PRE_OPEN, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK
+	// SEEN TWICE:
+	// 		FSB_FSB5,PCK_PACK, PAK_PACK_2, PAK_PACK_4, WD_WD, BAG_5, BAG_GABA_2, DTA, IMG, IMG_DAVILEX_2, PCK_6
 	/^geArchive: 000_(5|PCW)( |$)/,
+	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
 	/^geArchive: ACE_SIMIS( |$)/,
 	/^geArchive: AR_DAVE( |$)/,
@@ -393,7 +397,7 @@ export const WEAK_VALUES =
 	/^geArchive: MXS( |$)/,
 	/^geArchive: NoExt_2( |$)/,
 	/^geArchive: PAC_2( |$)/,
-	/^geArchive: PAK_(11|41|42)( |$)/,
+	/^geArchive: PAK_(7|11|30|41|42)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
 	/^geArchive: PAK_PACK_6( |$)/,
 	/^geArchive: PCK5( |$)/,
@@ -481,10 +485,12 @@ export const WEAK_VALUES =
 	// izarc
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
+	/^idarc: Flash( |$)/,
 	/^idarc: HYP( |$)/,
 	/^idarc: LZH( |$)/,
 	/^idarc: PAK( |$)/,
 	/^idarc: Par( |$)/,
+	/^idarc: PC\/3270( |$)/,
 	/^idarc: PKLite( |$)/,
 	/^idarc: RKive( |$)/,
 	/^idarc: TTComp( |$)/,
@@ -2477,6 +2483,7 @@ export const WEAK_VALUES =
 	/^SFZ Sample definition \(with rem\)$/,
 	/^SGP Baltie Program$/,
 	/^SharePoint Portal Server Dashboard Web Part$/,
+	/^Sherlock Holmes: Nemesis save game$/,
 	/^Silent Hill: Origins game data archive$/,
 	/^Silver Scene$/,
 	/^SimAnt saved game \(Amiga\)$/,

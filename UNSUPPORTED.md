@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,055)
+# Unsupported File Formats (4,053)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (311)
+## Archive (310)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -275,7 +275,6 @@ Family/Format | Name | Extensions | Notes
 [archive/theLearningCompanyAssetsContainer](https://discmaster.textfiles.com/search?format=theLearningCompanyAssetsContainer) | The Learning Company assets container | .grp | 
 [archive/thePatcherPacked](https://discmaster.textfiles.com/search?format=thePatcherPacked) | The Patcher Packed | .exe | 
 [archive/printShopDAT](https://discmaster.textfiles.com/search?format=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
-[archive/simsCompactedResourceFile](https://discmaster.textfiles.com/search?format=simsCompactedResourceFile) | The Sims Compacted Resource file | .sims2pack | 
 [archive/softwareToolworksInstallArchive](https://discmaster.textfiles.com/search?format=softwareToolworksInstallArchive) | The Software Toolworks installation archive | .tzf | 
 [archive/tI99PC99TrackDump](https://discmaster.textfiles.com/search?format=tI99PC99TrackDump) | TI-99 PC99 Track Dump Format | .dsk .pc99dsk .dtk | 
 [archive/ti99SectorDump](https://discmaster.textfiles.com/search?format=ti99SectorDump) | TI-99 V9T9 Sector Dump | .dsk .tidisk | 
@@ -1183,7 +1182,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,774)
+## Other (2,773)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2361,7 +2360,6 @@ Family/Format | Name | Extensions | Notes
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?format=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?format=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/inertiaPlayerConfiguration](https://discmaster.textfiles.com/search?format=inertiaPlayerConfiguration) | Inertia Player Configuration | .cfg | 
-[other/infinityEngineFile](https://discmaster.textfiles.com/search?format=infinityEngineFile) | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
 [other/infinity2Project](https://discmaster.textfiles.com/search?format=infinity2Project) | Infinity2 Project | .ipr | 
 [other/infobaseNextPage](https://discmaster.textfiles.com/search?format=infobaseNextPage) | Infobase (NextPage) | .nfo | 
 [other/infoComicsGameData](https://discmaster.textfiles.com/search?format=infoComicsGameData) | InfoComics game data | .img .dat | 

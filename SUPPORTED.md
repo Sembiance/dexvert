@@ -1,11 +1,11 @@
-# Supported File Formats (3,562)
+# Supported File Formats (3,568)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (553)
+## Archive (558)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -79,7 +79,7 @@ archive | BIG game data archive | .big | [gameextractor](https://sourceforge.net
 archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/binHex/)
 archive | [BinSCII](http://fileformats.archiveteam.org/wiki/BinSCII) | .bsc .bsq | [binsciiPrepare](https://github.com/Sembiance/dexvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/binscii/)
-archive | BioWare Entity Resource File | .erf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
+archive | BioWare Entity Resource File | .erf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
 archive | Bizarre Creations Bank File | .baf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bizarreCreationsBankFile/)
 archive | BlakHole Archive | .bh | [izArc](https://www.izarc.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/blakHole/)
 archive | Blood & Lace Compressed |  | [bl_unpack](https://codecs.multimedia.cx/2026/01/blood-lace-unpacker/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/bloodLaceCompressed/)
@@ -218,6 +218,7 @@ archive | [Hammer](http://fileformats.archiveteam.org/wiki/Hammer_(compression))
 archive | Harry Potter: Quidditch World Cup archive | .ccd | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/harryPotterQuidditchWorldCupArchive/)
 archive | Hell: A Cayberpunk Thriller Library | .pl | [na_game_tool_extract](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/hellLib/)
 archive | [Hemera Thumbnails Archive](http://fileformats.archiveteam.org/wiki/HTA_(Hemera)) | .hta | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/hemeraThumbnailsArchive/)
+archive | HHA Archive | .hha | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/hhaArchive/)
 archive | [Highway Hunter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Highway_Hunter)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/highwayHunterGameArchive/)
 archive | Highway Pursuit game data archive | .hvd .hfd .hod .hsd .hmd .hgd | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/highwayPursuitGameDataArchive/)
 archive | [HIT Archive](http://fileformats.archiveteam.org/wiki/HIT_(compressed_archive)) | .hit | [hit](https://www.sac.sk/download/pack/hit.arj) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/hitArchive/)
@@ -244,6 +245,7 @@ archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-ima
 archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/impactILB/)
 archive | Imperium Galactica 2 Game Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/imperiumGalactica2GameArchive/)
+archive | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/infinityEngineFile/)
 archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innoextract](https://github.com/dscharrer/innoextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
 archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [unvise](https://github.com/Sembiance/dexvert) | [22 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
@@ -334,6 +336,7 @@ archive | NASCAR Heat game archive | .trk .car | [gameextractor](https://sourcef
 archive | NeoBook Cartoon | .car | [foremost](http://foremost.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/neoBookCartoon/)
 archive | Neobook Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/neobookPacked/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [aaruConvert](https://github.com/aaru-dps/Aaru) [dd](https://www.gnu.org/software/coreutils/) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/nrg/)
+archive | Neverwinter Nights MOD | .mod .nwm | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsMOD/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/news/) - Converter currently doesn't handle when just a single newsgroup message is saved in a file
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImage/)
 archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImageDump/)
@@ -367,7 +370,7 @@ archive | PACKIT Installation Archive | .ins | [sevenZip](http://p7zip.sourcefor
 archive | PACKWIN Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/packwinPacked/)
 archive | Pacman - Adventures in Time game archive | .pac | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/pacmanAdventuresInTimeGameArchive/)
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/paintShopProBrowserCache/)
-archive | PAK Archive | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/pakArchive/)
+archive | PAK Archive | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/pakArchive/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak .exe | [unar](https://github.com/incbee/Unarchiver) [arc](http://arc.sourceforge.net) [xarc](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus) [deark](https://entropymine.com/deark/) [izArc](https://www.izarc.org/) | [22 sample files](https://sembiance.com/fileFormatSamples/archive/arc/)
 archive | [PAKLEO Archive](http://fileformats.archiveteam.org/wiki/PAKLEO) | .pll | [unpakleo](https://www.sac.sk/download/pack/pakll106.zip) [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/pakleo/)
 archive | [PAKLEO Self-Extracting Archive](http://fileformats.archiveteam.org/wiki/PAKLEO) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/pakleoSelfExtracting/)
@@ -405,7 +408,8 @@ archive | [Print/Instant Artist](http://fileformats.archiveteam.org/wiki/Print_A
 archive | [PrintPartner Graphics Bitmaps](http://fileformats.archiveteam.org/wiki/PrintPartner) | .gph | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/printPartnerGraphics/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/Pro-Pack) | .rnc | [ancient](https://github.com/temisu/ancient_format_decompressor) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/rnc/)
 archive | Pro-Pack Packed Executable | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [17 sample files](https://sembiance.com/fileFormatSamples/archive/proPackPackedExe/)
-archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractorCLI](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/quakePAK/)
+archive | Project Aftermath DAT Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/projectAftermathDAT/)
+archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractorCLI](http://www.watto.org/game_extractor.html) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/quakePAK/)
 archive | [Quantum Archive](http://fileformats.archiveteam.org/wiki/Quantum_compressed_archive) | .pak .q | [unpaq](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/quantum/)
 archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/wiki/QIP_(Quarterdeck)) | .qip | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/quarterdeckInstallationPacakge/)
 archive | [Quasijarus Strong Compressed](http://fileformats.archiveteam.org/wiki/Quasijarus_Strong_Compression) | .z | [ancient](https://github.com/temisu/ancient_format_decompressor) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/quasijarus/)
@@ -444,7 +448,7 @@ archive | [SelectWare Technologies archive](https://moddingwiki.shikadi.net/wiki
 archive | [Self-Dissolving Archive](http://fileformats.archiveteam.org/wiki/SDA) | .sda | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfDissolvingArchive/)
 archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) [izArc](https://www.izarc.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
-archive | SEXT Textures | .textures | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/sextTextures/)
+archive | SEXT Textures | .textures | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sextTextures/)
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
 archive | SGA game data archive | .sga | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
 archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sgiVolumeImage/)
@@ -493,6 +497,7 @@ archive | Tenth Planet Soft Packer Packed | .exe .com | cup386 | [10 sample file
 archive | [The Compressor TC Aarchive](http://justsolve.archiveteam.org/wiki/The_Compressor_(John_Lauro)) | .arc .tc | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/tcArchive/)
 archive | [The Lost Vikings Game Archive](https://moddingwiki.shikadi.net/wiki/The_Lost_Vikings) |  | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lostVikingsGameArchive/)
 archive | [The Sims Archive](http://fileformats.archiveteam.org/wiki/FAR_(The_Sims)) | .far | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/simsArchive/)
+archive | The Sims Compacted Resource file | .sims2pack | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/simsCompactedResourceFile/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [deark](https://entropymine.com/deark/) [tscomp](http://fileformats.archiveteam.org/wiki/TSComp) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tscomp/)
 archive | [ThumbsUp/ThumbsPlus! Database](http://fileformats.archiveteam.org/wiki/ThumbsPlus_database) | .tud | [deark](https://entropymine.com/deark/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/thumbsUpDatabase/)
 archive | Thunder Compressed File | .jpm | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/thunderCompressed/)
@@ -1023,7 +1028,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (771)
+## Image (772)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1183,6 +1188,7 @@ image | [DataShow Graphic](http://fileformats.archiveteam.org/wiki/DataShow_GRA)
 image | DataShow Screen | .scr | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/dataShowScreen/)
 image | [DataShow Sprite](http://fileformats.archiveteam.org/wiki/DataShow_Sprite) | .spr | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [4 sample files](https://sembiance.com/fileFormatSamples/image/dataShowSprite/)
 image | [DaVinci](http://fileformats.archiveteam.org/wiki/DaVinci) | .img | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/daVinci/)
+image | DDS MIP Chain Image | .dds | [ddsMIPChain2png](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/image/ddsMIPChain/)
 image | [Degas Elite Brush](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush) | .bru | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/image/degasEliteBrush/)
 image | [DEGAS Elite Icon](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_icon) | .icn | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/degasEliteIcon/)
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [18 sample files](https://sembiance.com/fileFormatSamples/image/degasHi/)
@@ -1613,7 +1619,7 @@ image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/R
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [pabloDraw](http://picoe.ca/products/pablodraw/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/ripScrip/)
 image | Reunion Graphic | .pic | [wuimg](https://codeberg.org/kaleido/wuimg) | [8 sample files](https://sembiance.com/fileFormatSamples/image/reunionGraphic/)
 image | [Ricoh JSI Image](http://justsolve.archiveteam.org/wiki/J6I) | .j6i | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/ricohJ6I/)
-image | RIFF Palette | .pal | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/riffPalette/)
+image | RIFF Palette | .pal | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/riffPalette/)
 image | [RIP Icon](http://fileformats.archiveteam.org/wiki/RIPscrip_Icon) | .icn | [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/ripIcon/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [recoil2png](http://recoil.sourceforge.net) | [134 sample files](https://sembiance.com/fileFormatSamples/image/rockyInterlace/)
 image | RollerCoaster Tycoon Picture | .tp4 | [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [13 sample files](https://sembiance.com/fileFormatSamples/image/rollerCoasterTycoonPicture/)

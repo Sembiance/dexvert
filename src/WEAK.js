@@ -101,6 +101,9 @@ export const IGNORE_MAGICS =
 	// dexmagic
 	/^Generic RIFF file /,
 
+	// exeoverlayID
+	/^overlay: /,
+
 	// GT2
 	/^Ausf.*hrbare Sony PlayStation Datei$/,
 	/^BMF A\.i Bild/,
@@ -290,14 +293,6 @@ export const WEAK_VALUES =
 	/^Windows \/ MS-DOS boot loader/,
 	/^YZ Archiv gefunden/,
 
-	// exeOverlayID: NOTE: These are not always "weak" it's just that when present there isn't any "special" action to take, so we just mark them weak so they don't appear as "new magics"
-	/^overlay: archive\/(arq|rsrc|swf|tar|zlib)$/,
-	/^overlay: audio\/(agsAudioData|downloadableSoundBank)$/,
-	/^overlay: executable\/exe$/,
-	/^overlay: image\/(acornSprite|degas.*|ico|pict|tga|wmf)$/,
-	/^overlay: other\/(msVisualFoxProApp|nullBytesAlternating)$/,
-	/^overlay: video\/mpeg2$/,
-
 	// ffprobeID
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
@@ -363,10 +358,10 @@ export const WEAK_VALUES =
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		DAT_RES, BIG, BNK, WAV, WAV_2, TEXS_SXET, BDF, ARC_10, ARC_11, ARC_13, ARC_6, ARC_8, RAW_MHWANH, PAK_PACK_3, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, PAK_49
-	//		RMX, XFS, BIN_18, PAK_DATA, SLV_DATA, OFF, PRE_OPEN, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK
+	// 		BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, PAK_49, BIN_LINK, BIN_LINK_2
+	//		RMX, XFS, BIN_18, PAK_DATA, SLV_DATA, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK, G00S000
 	// SEEN TWICE:
-	// 		FSB_FSB5,PCK_PACK, PAK_PACK_2, PAK_PACK_4, WD_WD, BAG_5, BAG_GABA_2, DTA, IMG, IMG_DAVILEX_2, PCK_6
+	// 		OFF, PRE_OPEN, DAT_RES, ARC_6, ARC_8, ARC_10, ARC_11, ARC_13, PAK_PACK_3, PAK_PACK_4, WD_WD, BAG_5, BAG_GABA_2, DTA, IMG, IMG_DAVILEX_2, PCK_6, TEXS_SXET
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
@@ -385,6 +380,7 @@ export const WEAK_VALUES =
 	/^geArchive: DTA_DTA( |$)/,
 	/^geArchive: DAT_(11|42|48|53|57)( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
+	/^geArchive: FSB_FSB5( |$)/,
 	/^geArchive: FOG( |$)/,
 	/^geArchive: GME( |$)/,
 	/^geArchive: IMG_4( |$)/,
@@ -399,7 +395,8 @@ export const WEAK_VALUES =
 	/^geArchive: PAC_2( |$)/,
 	/^geArchive: PAK_(7|11|30|41|42)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
-	/^geArchive: PAK_PACK_6( |$)/,
+	/^geArchive: PAK_PACK_[26]( |$)/,
+	/^geArchive: PCK_PACK( |$)/,
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
@@ -482,7 +479,8 @@ export const WEAK_VALUES =
 	/^Wordperfect <unbekannt>/,
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
-	// izarc
+	// idarc
+	// SEEN ONCE: DitPack, WIC (Fake!), ZAR
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Flash( |$)/,

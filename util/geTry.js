@@ -16,8 +16,12 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 const outputDirPath = await fileUtil.genTempPath();
-const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : {inputFilePath : path.resolve(argv.inputFilePath), outputDirPath, codes : argv.codes.toString().split(",")}, asJSON : true});
 
+const args = {inputFilePath : path.resolve(argv.inputFilePath), outputDirPath};
+if(argv.codes!=="NONE")
+	args.codes = argv.codes.toString().split(",");
+
+const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : args, asJSON : true});
 
 xlog.info`${result};`;
 xlog.info`outputDirPath: ${outputDirPath};`;

@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,053)
+# Unsupported File Formats (4,039)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (310)
+## Archive (296)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -64,7 +64,6 @@ Family/Format | Name | Extensions | Notes
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?format=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
 [archive/colourGenieTapeImage](https://discmaster.textfiles.com/search?format=colourGenieTapeImage) | Colour Genie tape image | .cas | 
 [archive/comPackPacked](https://discmaster.textfiles.com/search?format=comPackPacked) | COM-Pack Packed | .com | 
-[archive/comancheVideoDataArchive](https://discmaster.textfiles.com/search?format=comancheVideoDataArchive) | Comanche Video Data archive | .kdv | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?format=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?format=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/corkCompressedData](https://discmaster.textfiles.com/search?format=corkCompressedData) | Cork compressed data | $ | 
@@ -93,15 +92,12 @@ Family/Format | Name | Extensions | Notes
 [archive/dosBackup33File](https://discmaster.textfiles.com/search?format=dosBackup33File) | [DOS BACKUP 3.3 file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-DOS)) |  | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?format=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/dragonUnPACKer5PluginPackage](https://discmaster.textfiles.com/search?format=dragonUnPACKer5PluginPackage) | Dragon UnPACKer 5 Plugin Package | .d5p | 
-[archive/drakanOrderOfTheFlameSavedGame](https://discmaster.textfiles.com/search?format=drakanOrderOfTheFlameSavedGame) | Drakan: Order Of The Flame Saved Game | .rsg .rlt | 
 [archive/dreamloadFileArchiveImage](https://discmaster.textfiles.com/search?format=dreamloadFileArchiveImage) | Dreamload File Archive image | .dfi | 
 [archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
-[archive/ekoSoftwareGameData](https://discmaster.textfiles.com/search?format=ekoSoftwareGameData) | Eko Software game data | .rck | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?format=emmaCompress) | EmmaCompress |  | 
 [archive/emtcopyDiskImage](https://discmaster.textfiles.com/search?format=emtcopyDiskImage) | EMTCOPY disk image | .emt | 
-[archive/escapeVelocityNovaGameDataArchive](https://discmaster.textfiles.com/search?format=escapeVelocityNovaGameDataArchive) | Escape Velocity Nova game data archive | .rez .off | 
 [archive/exeManagerProtected](https://discmaster.textfiles.com/search?format=exeManagerProtected) | EXE Manager Protected | .exe | 
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?format=exePackerPacked) | EXE Packer Packed |  | 
 [archive/exe32PackPacked](https://discmaster.textfiles.com/search?format=exe32PackPacked) | Exe32Pack Packed | .exe | 
@@ -112,7 +108,6 @@ Family/Format | Name | Extensions | Notes
 [archive/fcdVirtualCDROMFile](https://discmaster.textfiles.com/search?format=fcdVirtualCDROMFile) | FCD Virtual CD-ROM File | .fcd | 
 [archive/finearCompressedData](https://discmaster.textfiles.com/search?format=finearCompressedData) | FINEAR compressed data | _ | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?format=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
-[archive/flatoutGameDataArchive](https://discmaster.textfiles.com/search?format=flatoutGameDataArchive) | Flatout game data archive | .bfs | 
 [archive/flinkGameDataArchive](https://discmaster.textfiles.com/search?format=flinkGameDataArchive) | Flink game data archive | .wld | 
 [archive/floppyDiskFileImage](https://discmaster.textfiles.com/search?format=floppyDiskFileImage) | Floppy Disk File image | .fdf | 
 [archive/floppyDiskManagerDiskImage](https://discmaster.textfiles.com/search?format=floppyDiskManagerDiskImage) | Floppy Disk Manager disk image | .fdm | [1 sample file](https://sembiance.com/fileFormatSamples/archive/floppyDiskManagerDiskImage/)
@@ -138,10 +133,8 @@ Family/Format | Name | Extensions | Notes
 [archive/interfaze](https://discmaster.textfiles.com/search?format=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/internetExplorerCache](https://discmaster.textfiles.com/search?format=internetExplorerCache) | Internet Explorer cache |  | 
 [archive/quickBooksBackup](https://discmaster.textfiles.com/search?format=quickBooksBackup) | Intuit QuickBooks Backup | .qbb | 
-[archive/isiGMotorMASType0GameDataArchive](https://discmaster.textfiles.com/search?format=isiGMotorMASType0GameDataArchive) | ISI gMotor MAS type 0 game data archive | .gtl | 
 [archive/izPackArchive](https://discmaster.textfiles.com/search?format=izPackArchive) | IzPack Archive |  | 
 [archive/j2MERecordStore](https://discmaster.textfiles.com/search?format=j2MERecordStore) | J2ME RecordStore | .db | 
-[archive/jadeEmpireGameDataArchive](https://discmaster.textfiles.com/search?format=jadeEmpireGameDataArchive) | Jade Empire game data archive | .rim | 
 [archive/kdPackPacked](https://discmaster.textfiles.com/search?format=kdPackPacked) | JDPack Packed | .exe | 
 [archive/jfsFilesystemImage](https://discmaster.textfiles.com/search?format=jfsFilesystemImage) | JFS/JFS22 filesystem image | .img | 
 [archive/jmCryptExeProtected](https://discmaster.textfiles.com/search?format=jmCryptExeProtected) | JMCryptExe Protected | .exe | 
@@ -159,10 +152,8 @@ Family/Format | Name | Extensions | Notes
 [archive/massiveGameDataArchive](https://discmaster.textfiles.com/search?format=massiveGameDataArchive) | Massive game data archive | .pak | 
 [archive/masterDOSVDiskImage](https://discmaster.textfiles.com/search?format=masterDOSVDiskImage) | MasterDOS disk image | .dsk | 
 [archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?format=maximusInstallerArchive) | Maximus installer archive | .fiz | 
-[archive/maxisGameDataArchive](https://discmaster.textfiles.com/search?format=maxisGameDataArchive) | Maxis game data archive | .package | 
 [archive/mbpSHRINKPacked](https://discmaster.textfiles.com/search?format=mbpSHRINKPacked) | mbp SHRINK Packed | .exe | 
 [archive/mechWarrior2GameData](https://discmaster.textfiles.com/search?format=mechWarrior2GameData) | MechWarrior 2 game data | .prj | 
-[archive/mechWarrior4GameData](https://discmaster.textfiles.com/search?format=mechWarrior4GameData) | MechWarrior 4 game data | .mw4 | 
 [archive/megalitePacked](https://discmaster.textfiles.com/search?format=megalitePacked) | MEGALITE Packed | .exe | 
 [archive/messProtected](https://discmaster.textfiles.com/search?format=messProtected) | Mess Protected | .exe | 
 [archive/metaCardStack](https://discmaster.textfiles.com/search?format=metaCardStack) | MetaCard/Revolution Stack | .rev | [4 sample files](https://sembiance.com/fileFormatSamples/archive/metaCardStack/)
@@ -174,7 +165,6 @@ Family/Format | Name | Extensions | Notes
 [archive/mifDiskImage](https://discmaster.textfiles.com/search?format=mifDiskImage) | MIF disk image |  | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?format=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/moofDiskImage](https://discmaster.textfiles.com/search?format=moofDiskImage) | MOOF Macintosh floppy disk image | .moof | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moofDiskImage/)
-[archive/moonbaseCommanderGameDataArchive](https://discmaster.textfiles.com/search?format=moonbaseCommanderGameDataArchive) | Moonbase Commander game data archive | .cmp | 
 [archive/mpq](https://discmaster.textfiles.com/search?format=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/mozCompressedContainerFormat](https://discmaster.textfiles.com/search?format=mozCompressedContainerFormat) | MOZ Compressed Container format | .epk .eix | 
 [archive/mozillaARchive](https://discmaster.textfiles.com/search?format=mozillaARchive) | Mozilla ARchive | .mar | 
@@ -235,7 +225,7 @@ Family/Format | Name | Extensions | Notes
 [archive/realArcadeGameInstaller](https://discmaster.textfiles.com/search?format=realArcadeGameInstaller) | RealArcade Game Installer | .rgs | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realArcadeGameInstaller/)
 [archive/redArchive](https://discmaster.textfiles.com/search?format=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
-[archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | 
+[archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | [2 sample files](https://sembiance.com/fileFormatSamples/archive/relicChunkyContainerGameData/) - Over 200,000 of these on discmaster and they don't appear to extract into any files that can be acted upon, so just skip this
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 
 [archive/renPyArchive](https://discmaster.textfiles.com/search?format=renPyArchive) | Ren'Py Archive | .rpa | 
 [archive/repiPack](https://discmaster.textfiles.com/search?format=repiPack) | RepiPack archive | .dat | 
@@ -261,8 +251,6 @@ Family/Format | Name | Extensions | Notes
 [archive/spoonStudioPacked](https://discmaster.textfiles.com/search?format=spoonStudioPacked) | Spoon Studio Packed | .exe | 
 [archive/spreadPart](https://discmaster.textfiles.com/search?format=spreadPart) | SPREAD part |  | 
 [archive/sqwezArchive](https://discmaster.textfiles.com/search?format=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
-[archive/starWarsBattlefrontGameDataArchive](https://discmaster.textfiles.com/search?format=starWarsBattlefrontGameDataArchive) | Star Wars Battlefront game data archive | .lvl | 
-[archive/stardockEntertainmentGameDataArchive](https://discmaster.textfiles.com/search?format=stardockEntertainmentGameDataArchive) | Stardock Entertainment game data archive | .emp .mtd | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?format=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/superCardProFluxImage](https://discmaster.textfiles.com/search?format=superCardProFluxImage) | SuperCard Pro flux image | .scp | 
 [archive/symantecCompressedInstallPackage](https://discmaster.textfiles.com/search?format=symantecCompressedInstallPackage) | Symantec compressed install Package | .pk$ | 
@@ -272,7 +260,6 @@ Family/Format | Name | Extensions | Notes
 [archive/texModPackageFile](https://discmaster.textfiles.com/search?format=texModPackageFile) | TexMod package File | .tpf | 
 [archive/theBuilderPacked](https://discmaster.textfiles.com/search?format=theBuilderPacked) | The Builder Packed | .exe | 
 [archive/duplicatorToolkitDiskImage](https://discmaster.textfiles.com/search?format=duplicatorToolkitDiskImage) | The Duplicator Toolkit disk image | .img | 
-[archive/theLearningCompanyAssetsContainer](https://discmaster.textfiles.com/search?format=theLearningCompanyAssetsContainer) | The Learning Company assets container | .grp | 
 [archive/thePatcherPacked](https://discmaster.textfiles.com/search?format=thePatcherPacked) | The Patcher Packed | .exe | 
 [archive/printShopDAT](https://discmaster.textfiles.com/search?format=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 [archive/softwareToolworksInstallArchive](https://discmaster.textfiles.com/search?format=softwareToolworksInstallArchive) | The Software Toolworks installation archive | .tzf | 
@@ -295,7 +282,6 @@ Family/Format | Name | Extensions | Notes
 [archive/virtualBoxDiskImage](https://discmaster.textfiles.com/search?format=virtualBoxDiskImage) | VirtualBox Disk Image | .vdi | 
 [archive/vmsSaveset](https://discmaster.textfiles.com/search?format=vmsSaveset) | VMS SaveSet |  | 
 [archive/vz200300Image](https://discmaster.textfiles.com/search?format=vz200300Image) | VZ200/300 image | .vz | 
-[archive/warhammer40KTextures](https://discmaster.textfiles.com/search?format=warhammer40KTextures) | Warhammer 40K textures | .rsh | 
 [archive/wrp](https://discmaster.textfiles.com/search?format=wrp) | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/) - uaeunp says it supports it, and it will take an input .wrp and output a 'zipped.wrp' but that never converts to anything useful UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 [archive/warpINInstaller](https://discmaster.textfiles.com/search?format=warpINInstaller) | WarpIN Installer | .wpi | 
 [archive/winAPEIDEHardDiskImage](https://discmaster.textfiles.com/search?format=winAPEIDEHardDiskImage) | WinAPE IDE hard disk image | .ide | 

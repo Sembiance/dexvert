@@ -358,15 +358,16 @@ export const WEAK_VALUES =
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, PAK_49, BIN_LINK, BIN_LINK_2
-	//		RMX, XFS, BIN_18, PAK_DATA, SLV_DATA, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK, G00S000
+	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, BIN_LINK, BIN_LINK_2
+	//		XFS, BIN_18, PAK_DATA, SLV_DATA, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK, G00S000, LIB_DBIN, TXD_2, VPPPC
 	// SEEN TWICE:
-	// 		OFF, PRE_OPEN, DAT_RES, ARC_6, ARC_8, ARC_10, ARC_11, ARC_13, PAK_PACK_3, PAK_PACK_4, WD_WD, BAG_5, BAG_GABA_2, DTA, IMG, IMG_DAVILEX_2, PCK_6, TEXS_SXET
+	// 		OFF, PRE_OPEN, DAT_RES, PAK_49, PAK_PACK_3, PAK_PACK_4, WD_WD, BAG_5, BAG_GABA_2, DTA, IMG, IMG_DAVILEX_2, PCK_6, TEXS_SXET
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
 	/^geArchive: ACE_SIMIS( |$)/,
 	/^geArchive: AR_DAVE( |$)/,
+	/^geArchive: ARC_(6|8|10|11|13)( |$)/,
 	/^geArchive: ARF_AR( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
@@ -400,6 +401,7 @@ export const WEAK_VALUES =
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
+	/^geArchive: RMX( |$)/,
 	/^geArchive: SFS_AAMVHFSS( |$)/,
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
 	/^geArchive: WAD_[48]( |$)/,
@@ -480,9 +482,10 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN ONCE: DitPack, WIC (Fake!), ZAR
+	// SEEN ONCE: WIC (Fake!), X1
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
+	/^idarc: DitPack( |$)/,
 	/^idarc: Flash( |$)/,
 	/^idarc: HYP( |$)/,
 	/^idarc: LZH( |$)/,
@@ -492,6 +495,7 @@ export const WEAK_VALUES =
 	/^idarc: PKLite( |$)/,
 	/^idarc: RKive( |$)/,
 	/^idarc: TTComp( |$)/,
+	/^idarc: ZAR( |$)/,
 
 	// lsar
 	/^Arc CBM$/,

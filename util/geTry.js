@@ -24,4 +24,4 @@ if(argv.codes!=="NONE")
 const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : args, asJSON : true});
 
 xlog.info`${result};`;
-xlog.info`outputDirPath: ${outputDirPath};`;
+xlog.info`outputDirPath: ${outputDirPath}`;

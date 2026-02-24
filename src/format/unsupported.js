@@ -9,24 +9,6 @@ export default
 {
 	archive :
 	{
-		// Extracts with gameExtractor but does not yeild any useful files
-		comancheVideoDataArchive             : {name : "Comanche Video Data archive", ext : [".kdv"], magic : ["Comanche Video Data archive"]},
-		drakanOrderOfTheFlameSavedGame       : {name : "Drakan: Order Of The Flame Saved Game", ext : [".rsg", ".rlt"], magic : ["Drakan: Order Of The Flame Saved Game"], weakMagic : true},
-		escapeVelocityNovaGameDataArchive    : {name : "Escape Velocity Nova game data archive", ext : [".rez", ".off"], magic : ["Escape Velocity Nova game data archive"], weakMagic : true},
-		ekoSoftwareGameData                  : {name : "Eko Software game data", ext : [".rck"], magic : ["Eko Software game data"]},
-		flatoutGameDataArchive               : {name : "Flatout game data archive", ext : [".bfs"], magic : ["Flatout game data archive"]},
-		isiGMotorMASType0GameDataArchive     : {name : "ISI gMotor MAS type 0 game data archive", ext : [".gtl"], magic : ["ISI gMotor MAS type 0 game data archive"]},
-		jadeEmpireGameDataArchive            : {name : "Jade Empire game data archive", ext : [".rim"], magic : ["Jade Empire game data archive"]},
-		maxisGameDataArchive                 : {name : "Maxis game data archive", ext : [".package"], magic : ["Maxis game data archive", "Maxis Database Packed File"]},
-		mechWarrior4GameData                 : {name : "MechWarrior 4 game data", ext : [".mw4"], magic : ["MechWarrior 4 game data"]},
-		moonbaseCommanderGameDataArchive     : {name : "Moonbase Commander game data archive", ext : [".cmp"], magic : ["Moonbase Commander game data archive"]},
-		onesaneGameArchive                   : {name : "1nsane game data archive", ext : [".idf"], magic : ["1nsane game data archive"], weakMagic : true},
-		relicChunkyContainerGameData         : {name : "Relic Chunky container - game data", ext : [".sgb", ".whm", ".whe", ".rsh", ".wtp"], magic : ["Relic Chunky container - game data"]},
-		theLearningCompanyAssetsContainer    : {name : "The Learning Company assets container", ext : [".grp"], magic : ["The Learning Company assets container"], weakMagic : true},
-		stardockEntertainmentGameDataArchive : {name : "Stardock Entertainment game data archive", ext : [".emp", ".mtd"], magic : ["Stardock Entertainment game data archive"]},
-		starWarsBattlefrontGameDataArchive   : {name : "Star Wars Battlefront game data archive", ext : [".lvl"], magic : ["Star Wars Battlefront game data archive"]},
-		warhammer40KTextures                 : {name : "Warhammer 40K textures", ext : [".rsh"], magic : ["Warhammer 40K textures"]},
-
 		// Protected
 		ciphatorProtected       : {name : "cIPHATOR Protected", ext : [".exe"], magic : ["16bit DOS EXE cIPHATOR protected"]},
 		crackStopProtected      : {name : "CrackStop Protected", magic : ["16bit DOS EXE CrackStop protected"]},

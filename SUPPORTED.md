@@ -1,11 +1,11 @@
-# Supported File Formats (3,568)
+# Supported File Formats (3,583)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (558)
+## Archive (573)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -111,6 +111,7 @@ archive | Coktel Vision STK Archive | .stk | [na_game_tool_extract](https://niha
 archive | Coktel Vision STK2 Archive  | .itk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK2/)
 archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
+archive | Comanche Video Data archive | .kdv | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/comancheVideoDataArchive/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [deark](https://entropymine.com/deark/) [DirMaster](https://style64.org/dirmaster) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreDiskImage/)
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [DirMaster](https://style64.org/dirmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | COMPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/compackPacked/)
@@ -143,6 +144,7 @@ archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark
 archive | Dark Reign 2 game data archive | .zwp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/darkReign2GameDataArchive/)
 archive | [Dark Reign Game Archive](http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)) | .ftg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkReignGameArchive/)
 archive | [Delphi Borland Form](http://fileformats.archiveteam.org/wiki/Borland_Delphi_form) | .dfm | [dfm2txt](http://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/borlandDelphiForm/)
+archive | Demon Star GLB Archive | .glb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/demonStarGLB/)
 archive | Descent Game Archive | .hog | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [gamearch](https://github.com/Malvineous/libgamearchive) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/descentGameArchive/)
 archive | Destan game data archive | .3dn | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/destanGameDataArchive/)
 archive | DexEXE Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/dexEXEPacked/)
@@ -161,7 +163,9 @@ archive | [DOS BACKUP file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-D
 archive | [DOSIMG Disk Image](http://fileformats.archiveteam.org/wiki/IMG_(DOSIMG)) | .img | [aaru](https://github.com/aaru-dps/Aaru) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/dosimg/)
 archive | [Dr. Riptide Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/drRiptideGameArchive/)
 archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php?title=Tape%5CDisk_Preservation#VDK_File_Format) | .vdk | [dcopy](https://github.com/pulkomandy/ddosutils) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dragonVDK/)
+archive | Drakan: Order Of The Flame Saved Game | .rsg .rlt | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/drakanOrderOfTheFlameSavedGame/)
 archive | dump File |  | [restore](https://dump.sourceforge.io/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dumpFile/)
+archive | DWFB WAD | .wad | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dwfbWAD/)
 archive | [DWS Self-Extracting Archive](http://fileformats.archiveteam.org/wiki/DWC) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/dwcSelfExtracting/)
 archive | Dynamix Game Archive | .dyn | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dynamixGameArchive/)
 archive | [EA Archive](http://fileformats.archiveteam.org/wiki/EA_archive) | .ea .pea | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/eaArchive/)
@@ -169,6 +173,7 @@ archive | Earth and Beyond Game Archive | .mix .pkg | [gameextractor](https://so
 archive | [EDI Install Archive](http://fileformats.archiveteam.org/wiki/EDI_Install_archive) | $00 $01 $02 $04 $05 | [ediInstallArchiveExtractor](http://cd.textfiles.com/cica/cica9603/disk1/disc1/util/wramp12.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallArchive/)
 archive | [EDI Install LZS Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/os/aux/win2k/app/UNPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | [EDI Install LZSS2 Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZSS2/)
+archive | Eko Software game data | .rck | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ekoSoftwareGameData/)
 archive | Electronic Arts LIB Game Archive | .lib | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/electronicArtsLibGameArchive/)
 archive | Empire Earth 1 Game Archive | .ssa | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/empireEarth1GameArchive/)
 archive | Ensemble Studios Game Archive | .drs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ensembleStudiosGameArchive/)
@@ -179,6 +184,7 @@ archive | [EPOC Installation Package](http://fileformats.archiveteam.org/wiki/SI
 archive | [EPOC MultiBitmap](http://fileformats.archiveteam.org/wiki/EPOC_MBM) | .mbm | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/epocMBM/)
 archive | [Error Code Modeler](http://fileformats.archiveteam.org/wiki/Error_Code_Modeler) | .ecm | [unecm](https://web.archive.org/web/20140330233023/http://www.neillcorlett.com/cmdpack/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/errorCodeModeler/)
 archive | Escal Compressed File |  | [na_game_tool_extract](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/escalCompressed/)
+archive | Escape Velocity Nova game data archive | .rez .off | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/escapeVelocityNovaGameDataArchive/)
 archive | Eschalon Setup ARCV Container | .arv | [arcvExtractor](https://ia801900.us.archive.org/view_archive.php?archive=/29/items/ctib98_3/ctib98_3.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/eschalonSetupARCV/) - Not all formats are supported by the converter
 archive | [ESP Archive](http://fileformats.archiveteam.org/wiki/ESP_(compressed_archive)) | .esp | [unesp](https://www.sac.sk/download/pack/esp_v192.exe) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/esp/)
 archive | Etherlords 2 game data archive | .res | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/etherlords2GameDataArchive/)
@@ -192,6 +198,7 @@ archive | [File Imploder](http://fileformats.archiveteam.org/wiki/File_Imploder)
 archive | Final Fantasy 7 Game Archive | .lgp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/finalFantasy7GameArchive/)
 archive | Final Liberation/Holistic Design game archive | .muk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/finalLiberationGameArchive/)
 archive | [Flash Authoring File](http://fileformats.archiveteam.org/wiki/FLA) | .fla | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/flashAuthoringFile/) - This can be VASTLY improved by opening these in the original Flash programs that made them, then exporting to SWF and extracting from that. But I tried with Flash 5 and it only opened like 1 out of 5 files, so I'd need to research others.
+archive | Flatout game data archive | .bfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/flatoutGameDataArchive/)
 archive | FOXSQZ Archive | .sqz | [foxsqz](https://www.sac.sk/download/pack/ain232.exe) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/foxsqzArchive/)
 archive | FreeMotion Flash Movie | .sqf | [foremost](http://foremost.sourceforge.net/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/freeMotionFlashMovie/)
 archive | [Freeze Frozen Compressed File](http://fileformats.archiveteam.org/wiki/Freeze/Melt) | .f .lzc | [freeze](http://fileformats.archiveteam.org/wiki/Freeze/Melt) [ancient](https://github.com/temisu/ancient_format_decompressor) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/freeze/)
@@ -259,8 +266,10 @@ archive | Interstate Series Game Archive | .zfs | [gameextractor](https://source
 archive | [Ion Storm Resource Data File](http://fileformats.archiveteam.org/wiki/Image_Gallery_(Alchemy_Mindworks)) | .rdf | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/ionStormResourceDataFile/)
 archive | iPer Advanced Embedded Hypertext | .aeh | [foremost](http://foremost.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/iPerAEH/)
 archive | [IRIX IDB/SW Archive](http://fileformats.archiveteam.org/wiki/IRIX_software_distribution_format) | .idb | [irixswextract](https://github.com/Sembiance/irixswextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/irixIDBArchive/)
+archive | ISI gMotor game data archive | .gtl | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/isiGMotorGameDataArchive/)
 archive | [ISo Zipped](http://fileformats.archiveteam.org/wiki/AIN) | .isz | [ultraISO](https://www.ezbsystems.com/ultraiso/history.htm) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/isoZipped/)
 archive | Jacked game archive | .dat .old | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/jackedGameArchive/)
+archive | Jade Empire game data archive | .rim | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/jadeEmpireGameDataArchive/)
 archive | JAM Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/jamPacked/)
 archive | [JAM Packer Compressed File](http://fileformats.archiveteam.org/wiki/The_JAM_Packer) | .jpk | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) [ancient](https://github.com/temisu/ancient_format_decompressor) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/jamPacker/)
 archive | Jane's Longbow 2 Game Archive | .tre | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/janesLongbow2GameArchive/)
@@ -304,7 +313,9 @@ archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(M
 archive | [Mailbox/MIME Entity](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [ripmime](https://github.com/inflex/ripMIME) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/mbox/)
 archive | Mall Tycoon game data archive | .muk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mallTycoonGameDataArchive/)
 archive | [MAME Compressed Hard Disk image](https://www.psxdev.net/forum/viewtopic.php?t=3980) | .chd .hd | [chdman](https://github.com/mamedev/mame/releases) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/mameCHD/)
+archive | Maxis game data archive | .package | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/maxisGameDataArchive/)
 archive | [MDCD Archive](http://fileformats.archiveteam.org/wiki/MDCD) | .md .cd | [deark](https://entropymine.com/deark/) [mdcd](http://cd.textfiles.com/megarom/megarom1/ARC_LBR/MDCD10.ZIP) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/mdcd/)
+archive | MechWarrior 4 game data | .mw4 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/mechWarrior4GameData/)
 archive | MegaPaint Symbols Library | .lib | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/megaPaintSymbolsLibrary/)
 archive | MENGx Archive | .mfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/mengxArchive/)
 archive | Meyer/Glass Interactive Game Archive | .mgf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/meyerGlassGameArchive/)
@@ -323,6 +334,7 @@ archive | [MMFW Archive](https://github.com/david47k/mmex) | .mmp .mms .mmf .mma
 archive | MMFW Movies Archive | .mov | [mmvid_extractor](https://github.com/einstein95/mmvid_extractor) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mmfwMoviesArchive/)
 archive | [MoleBox Packed](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .exe | [demoleition](https://lifeinhex.com/updated-molebox-unpacker/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/moleBoxPacked/)
 archive | [Monster Bash Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Monster_Bash)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/monsterBashGameArchive/)
+archive | Moonbase Commander game data archive | .cmp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moonbaseCommanderGameDataArchive/)
 archive | MOZLZ4 Compressed | .mozlz4 .jsonlz4 | [mozlz4](https://github.com/jusw85/mozlz4) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mozlz4/)
 archive | MPAK game data archive | .mpak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mpakGameDataArchive/)
 archive | [MRNZ](http://fileformats.archiveteam.org/wiki/MRNZ) | _ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mrnz/)
@@ -475,6 +487,8 @@ archive | [Squeeze Archive](http://fileformats.archiveteam.org/wiki/Squeeze) |  
 archive | Squeeze It Archive | .sqz .exe | [squeezeIt](http://cd.textfiles.com/ftp.wwiv.com/pub/GENUTIL/sqz1083.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/squeezeIt/)
 archive | Stacker compressed volume | .dsk | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/stackerCompressedVolume/) - This code might help (I tried the mc extension, couldn't get it to do anything): https://cmp.felk.cvut.cz/~pisa/dmsdos/
 archive | Star Trek Online game data | .hogg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/starTrekOnlineGameData/)
+archive | Star Wars Battlefront game data archive | .lvl | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/starWarsBattlefrontGameDataArchive/)
+archive | Stardock Entertainment game data archive | .emp .mtd | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/stardockEntertainmentGameDataArchive/)
 archive | [Stargunner Game Archive](https://moddingwiki.shikadi.net/wiki/DLT_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/stargunnerGameArchive/)
 archive | Starsiege Game Archive | .vol | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/starsiegeGameArchive/)
 archive | [STAT Compressed](https://bellard.org/stat/) | .st | [stat_fabrice](https://bellard.org/stat/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/statCompressed/)
@@ -495,6 +509,7 @@ archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .
 archive | [Template Catalog Spinnaker](http://fileformats.archiveteam.org/wiki/Template_Catalog_(Spinnaker_.TCT)) | .tct | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/templateCatalogSpinnaker/)
 archive | Tenth Planet Soft Packer Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/tenthPlanetSoftPackerPacked/)
 archive | [The Compressor TC Aarchive](http://justsolve.archiveteam.org/wiki/The_Compressor_(John_Lauro)) | .arc .tc | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/tcArchive/)
+archive | The Learning Company assets container | .grp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/theLearningCompanyAssetsContainer/)
 archive | [The Lost Vikings Game Archive](https://moddingwiki.shikadi.net/wiki/The_Lost_Vikings) |  | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lostVikingsGameArchive/)
 archive | [The Sims Archive](http://fileformats.archiveteam.org/wiki/FAR_(The_Sims)) | .far | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/simsArchive/)
 archive | The Sims Compacted Resource file | .sims2pack | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/simsCompactedResourceFile/)
@@ -541,7 +556,7 @@ archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/v
 archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
-archive | [Wintermust DCP Archive](https://gist.github.com/RomanKharin/10668624) | .dcp | [quickbms](https://aluigi.altervista.org/quickbms.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/wintermuteDCP/)
+archive | [Wintermust DCP Archive](https://gist.github.com/RomanKharin/10668624) | .dcp | [quickbms](https://aluigi.altervista.org/quickbms.htm) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/wintermuteDCP/)
 archive | Wolfenstein game data | .spk .mpk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/wolfensteinGameData/)
 archive | [WOZ disk image](http://fileformats.archiveteam.org/wiki/WOZ) | .woz | [acx](https://github.com/AppleCommander/AppleCommander) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/wozDiskImage/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)

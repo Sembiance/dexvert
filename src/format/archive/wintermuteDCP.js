@@ -6,6 +6,6 @@ export class wintermuteDCP extends Format
 	website        = "https://gist.github.com/RomanKharin/10668624";
 	ext            = [".dcp"];
 	forbidExtMatch = true;
-	magic          = ["Archive: DCP", "Wintermute DCP Archive"];
-	converters     = ["quickbms[bms:wintermute_dcp]"];
+	magic          = ["Archive: DCP", "Wintermute DCP Archive", /^geArchive: DCP_JUNK( |$)/];
+	converters     = ["quickbms[bms:wintermute_dcp]", "gameextractor[codes:DCP_JUNK]"];
 }

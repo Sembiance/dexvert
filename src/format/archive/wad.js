@@ -10,6 +10,7 @@ export class wad extends Format
 		/^Format: (Internal|Personal) WAD file/, "deark: wad", "WAD3 :wad:", /^geArchive: WAD_(IWAD|PWAD|WAD3)( |$)/
 	];
 	idMeta     = ({macFileType, macFileCreator}) => (macFileType===".WAD" && ["Htic", "idSW"].includes(macFileCreator)) || (macFileType==="HXwd" && macFileCreator==="HEXN");
+	priority   = this.PRIORITY.LOW;
 	converters = dexState =>
 	{
 		const r = [];

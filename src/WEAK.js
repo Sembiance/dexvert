@@ -359,9 +359,9 @@ export const WEAK_VALUES =
 	// candidates
 	// SEEN  ONCE:
 	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, BIN_LINK, BIN_LINK_2
-	//		XFS, BIN_18, PAK_DATA, SLV_DATA, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK, G00S000, LIB_DBIN, TXD_2, VPPPC
+	//		XFS, BIN_18, PAK_DATA, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK, G00S000, LIB_DBIN, TXD_2, VPPPC, DAM_RZ, 0000_package
 	// SEEN TWICE:
-	// 		OFF, PRE_OPEN, DAT_RES, PAK_49, PAK_PACK_3, PAK_PACK_4, WD_WD, BAG_5, BAG_GABA_2, DTA, IMG, IMG_DAVILEX_2, PCK_6, TEXS_SXET
+	// 		OFF, PRE_OPEN, DAT_RES, PAK_49, PAK_PACK_3, PAK_PACK_4, WD_WD, SLV_DATA, TEXS_SXET
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
@@ -371,6 +371,7 @@ export const WEAK_VALUES =
 	/^geArchive: ARF_AR( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
+	/^geArchive: BAG_(5|GABA_2)( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
@@ -378,14 +379,13 @@ export const WEAK_VALUES =
 	/^geArchive: CPN( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
-	/^geArchive: DTA_DTA( |$)/,
+	/^geArchive: DTA(_DTA)?( |$)/,
 	/^geArchive: DAT_(11|42|48|53|57)( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
 	/^geArchive: FSB_FSB5( |$)/,
 	/^geArchive: FOG( |$)/,
 	/^geArchive: GME( |$)/,
-	/^geArchive: IMG_4( |$)/,
-	/^geArchive: IMG_LINK( |$)/,
+	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: KDT( |$)/,
 	/^geArchive: LINK_LINK( |$)/,
 	/^geArchive: M02( |$)/,
@@ -397,7 +397,7 @@ export const WEAK_VALUES =
 	/^geArchive: PAK_(7|11|30|41|42)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
 	/^geArchive: PAK_PACK_[26]( |$)/,
-	/^geArchive: PCK_PACK( |$)/,
+	/^geArchive: PCK_(6|PACK)( |$)/,
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
@@ -482,7 +482,7 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN ONCE: WIC (Fake!), X1
+	// SEEN ONCE: WIC (Fake!), X1, oPAQue
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: DitPack( |$)/,

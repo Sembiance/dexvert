@@ -1,11 +1,11 @@
-# Supported File Formats (3,583)
+# Supported File Formats (3,584)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (573)
+## Archive (574)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -278,6 +278,7 @@ archive | [JAR Archive (ARJ Software)](http://fileformats.archiveteam.org/wiki/J
 archive | JFFS2 Filesystem Image |  | [jefferson](https://github.com/onekey-sec/jefferson/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/jffs2Image/)
 archive | [JRchive Self-Extracting Archive](http://justsolve.archiveteam.org/wiki/JRchive) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/jrchiveSFX/)
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [deark](https://entropymine.com/deark/) [lbrate](http://www.svgalib.org/rus/lbrate.html) [unar](https://github.com/incbee/Unarchiver) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lbr/)
+archive | LECF Archive |  | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/lecfArchive/)
 archive | Lemmings Revolution game archive | .box | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/lemmingsRevolutionGameArchive/)
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [uaeunp](https://www.winuae.net/download/) [unar](https://github.com/incbee/Unarchiver) [unlzx](http://xavprods.free.fr/lzx/) [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/lzx/)
 archive | LGLZ Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/lglzPacked/)

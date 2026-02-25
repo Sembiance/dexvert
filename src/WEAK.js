@@ -358,10 +358,10 @@ export const WEAK_VALUES =
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, GJD, JFL_2, BIN_LINK, BIN_LINK_2
-	//		XFS, BIN_18, PAK_DATA, DAT_DG, PCK_5, SCH_SND, SOL_DISK, DAT_PAK, G00S000, LIB_DBIN, TXD_2, VPPPC, DAM_RZ, 0000_package
+	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR
+	//		XFS, BIN_18, SOL_DISK, DAT_PAK, LIB_DBIN, TXD_2, VPPPC, DAM_RZ, SFX_DSFX, TOD_TOD2
 	// SEEN TWICE:
-	// 		OFF, PRE_OPEN, DAT_RES, PAK_49, PAK_PACK_3, PAK_PACK_4, WD_WD, SLV_DATA, TEXS_SXET
+	// 		OFF, DAT_DG, PRE_OPEN, SCH_SND, DAT_RES, PAK_DATA, PCK_5, PAK_49, PAK_PACK_3, PAK_PACK_4, WD_WD, SLV_DATA, GJD, TEXS_SXET, 0000_package
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
@@ -384,6 +384,7 @@ export const WEAK_VALUES =
 	/^geArchive: FMF_FMF( |$)/,
 	/^geArchive: FSB_FSB5( |$)/,
 	/^geArchive: FOG( |$)/,
+	/^geArchive: G00S000( |$)/,
 	/^geArchive: GME( |$)/,
 	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: KDT( |$)/,
@@ -482,7 +483,7 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN ONCE: WIC (Fake!), X1, oPAQue
+	// SEEN ONCE: WIC (Fake!), X1, oPAQue, Arhangel
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: DitPack( |$)/,

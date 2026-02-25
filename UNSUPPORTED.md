@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,039)
+# Unsupported File Formats (4,034)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -654,7 +654,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (121)
+## Font (120)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -729,7 +729,6 @@ Family/Format | Name | Extensions | Notes
 [font/metagraphicsFont](https://discmaster.textfiles.com/search?format=metagraphicsFont) | Metagraphics Font | .fnt | 
 [font/micrografxBitfont](https://discmaster.textfiles.com/search?format=micrografxBitfont) | Micrografx Bitfont | .bez | 
 [font/micrografxFont](https://discmaster.textfiles.com/search?format=micrografxFont) | Micrografx Font | .mgf | 
-[font/msxFont](https://discmaster.textfiles.com/search?format=msxFont) | MSX Font | .alf | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?format=msxKanjiFont) | MSX Kanji Font |  | 
 [font/newsBitmapFont](https://discmaster.textfiles.com/search?format=newsBitmapFont) | NeWS bitmap font | .fb | 
 [font/odFontEditor](https://discmaster.textfiles.com/search?format=odFontEditor) | OD Font Editor | .odf | [1 sample file](https://sembiance.com/fileFormatSamples/font/odFontEditor/) - Just have an extension and never encountered one of these files 'in the wild' and recoil will convert things that are not an OD Font file into a garbage image.
@@ -1168,7 +1167,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,773)
+## Other (2,769)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1228,7 +1227,6 @@ Family/Format | Name | Extensions | Notes
 [other/absoluteMagicResourceData](https://discmaster.textfiles.com/search?format=absoluteMagicResourceData) | Absolute Magic Resource data | .res | 
 [other/abuseDemoData](https://discmaster.textfiles.com/search?format=abuseDemoData) | Abuse demo Data | .dat | 
 [other/abuseLevel](https://discmaster.textfiles.com/search?format=abuseLevel) | Abuse Level | .lvl .spe | 
-[other/abyssEngineImageFormat](https://discmaster.textfiles.com/search?format=abyssEngineImageFormat) | Abyss Engine Image format | .aei | 
 [other/accelProtelPrintedCircuitBoard](https://discmaster.textfiles.com/search?format=accelProtelPrintedCircuitBoard) | ACCEL/Protel Printed Circuit Board | .pcb | 
 [other/aceNotesPIMData](https://discmaster.textfiles.com/search?format=aceNotesPIMData) | AceNotes PIM data | .an2 | 
 [other/actContactLayoutV30](https://discmaster.textfiles.com/search?format=actContactLayoutV30) | ACT! Contact Layout | .cly | 
@@ -1612,7 +1610,6 @@ Family/Format | Name | Extensions | Notes
 [other/cadvance2DSymbol](https://discmaster.textfiles.com/search?format=cadvance2DSymbol) | CADVANCE 2D symbol | .sym .bin | 
 [other/caesarIIIGraphicsInfo](https://discmaster.textfiles.com/search?format=caesarIIIGraphicsInfo) | Caesar III graphics info | .sg2 | 
 [other/caimanFont](https://discmaster.textfiles.com/search?format=caimanFont) | Caiman Font | .fnt | 
-[other/caimanGraphics](https://discmaster.textfiles.com/search?format=caimanGraphics) | Caiman graphics | .dat | 
 [other/cakewalkDrumSynthModel](https://discmaster.textfiles.com/search?format=cakewalkDrumSynthModel) | Cakewalk drum synth Model | .mdl | 
 [other/cakewalkGroove](https://discmaster.textfiles.com/search?format=cakewalkGroove) | Cakewalk Groove | .bin | 
 [other/cakewalkMacroDOS](https://discmaster.textfiles.com/search?format=cakewalkMacroDOS) | Cakewalk Macro (DOS) | .ma | 
@@ -2447,7 +2444,6 @@ Family/Format | Name | Extensions | Notes
 [other/killingFloorMap](https://discmaster.textfiles.com/search?format=killingFloorMap) | Killing Floor Map | .rom | 
 [other/kingsoftAntivirusData](https://discmaster.textfiles.com/search?format=kingsoftAntivirusData) | Kingsoft Antivirus data | .psg .fsg .vsg .ksg | 
 [other/kiriKiriAdventureGameSystemPackage](https://discmaster.textfiles.com/search?format=kiriKiriAdventureGameSystemPackage) | KiriKiri Adventure Game System package | .xp3 | 
-[other/kissCELColorPalette](https://discmaster.textfiles.com/search?format=kissCELColorPalette) | KiSS CEL Color Palette | .kcf | 
 [other/klikNPlayGame](https://discmaster.textfiles.com/search?format=klikNPlayGame) | Klik'n'Play Game | .gam | 
 [other/klystrackInstrument](https://discmaster.textfiles.com/search?format=klystrackInstrument) | Klystrack instrument | .ki | 
 [other/kotorCompiledScript](https://discmaster.textfiles.com/search?format=kotorCompiledScript) | Knight Of The Old Republic compiled script | .ncs | 
@@ -3568,7 +3564,6 @@ Family/Format | Name | Extensions | Notes
 [other/elderScrolls4Plugin](https://discmaster.textfiles.com/search?format=elderScrolls4Plugin) | The Elder Scrolls IV: Oblivion Plugin | .esp | 
 [other/theGamesFactoryGame](https://discmaster.textfiles.com/search?format=theGamesFactoryGame) | The Games Factory Game | .gam | 
 [other/houseOfTheDeadGameDataContainer](https://discmaster.textfiles.com/search?format=houseOfTheDeadGameDataContainer) | The House of the Dead game data container | .rbh | 
-[other/houseOfTheDeadTextures](https://discmaster.textfiles.com/search?format=houseOfTheDeadTextures) | The House of the Dead textures | .vmc | 
 [other/huntForRedOctoberSavedGame](https://discmaster.textfiles.com/search?format=huntForRedOctoberSavedGame) | The Hunt for Red October Saved game | .sav | 
 [other/lostFilesOfSherlockHolmesResourcs](https://discmaster.textfiles.com/search?format=lostFilesOfSherlockHolmesResourcs) | The Lost Files of Sherlock Holmes Resources | .rrm | 
 [other/theMoviesEditorTextStringDatabase](https://discmaster.textfiles.com/search?format=theMoviesEditorTextStringDatabase) | The Movies Editor Text String Database | .lhts | 

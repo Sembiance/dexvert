@@ -1,4 +1,4 @@
-# Supported File Formats (3,584)
+# Supported File Formats (3,589)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -992,7 +992,7 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (46)
+## Font (47)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -1023,6 +1023,7 @@ font | [GRUB 2 PFF2 Font](http://fileformats.archiveteam.org/wiki/PFF2) | .pf2 |
 font | [Interlace Character Editor](http://fileformats.archiveteam.org/wiki/Interlace_Character_Editor_font) | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/font/ice/)
 font | [MacOS X Data Fork Font](http://fileformats.archiveteam.org/wiki/Data_Fork_Suitcase_font) | .dfont | [fontforge](https://fontforge.org) | [12 sample files](https://sembiance.com/fileFormatSamples/font/osXDataForkFont/)
 font | MacOS X Font | .fnt .wfn | [fontforge](https://fontforge.org) | [1 sample file](https://sembiance.com/fileFormatSamples/font/macOSFont/)
+font | MSX Alfabeto/Graphos III Font | .alf | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/font/msxFont/)
 font | Need For Speed Font | .ffn | [wuimg](https://codeberg.org/kaleido/wuimg) | [10 sample files](https://sembiance.com/fileFormatSamples/font/needForSpeedFont/)
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [convert](https://www.imagemagick.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/font/otf/)
 font | Oric Font | .chs | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/font/oricFont/)
@@ -1044,12 +1045,13 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (772)
+## Image (776)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
 image | [3D Browser Pro Catalogue](https://free.softking.com.tw/dl/17696/3D%20Browser%20Pro%206.0.html) | .obv | [konvertor](https://www.logipole.com/konvertor-en.htm) | [11 sample files](https://sembiance.com/fileFormatSamples/image/threeDBrowserProCatalogue/)
 image | [3D Construction Kit](http://fileformats.archiveteam.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://sembiance.com/fileFormatSamples/image/threeDCK/)
+image | Abyss Engine Image format | .aei | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/abyssEngineImageFormat/)
 image | ACE Texture | .ace | [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/aceTexture/)
 image | [ACiDDraw COM](http://fileformats.archiveteam.org/wiki/ACiDDraw_COM_file) | .com | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/aciddrawCOM/)
 image | [Acorn (RISC OS) Sprite](http://fileformats.archiveteam.org/wiki/Acorn_Sprite) | .acorn | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/acornSprite/)
@@ -1157,6 +1159,7 @@ image | [BSAVE Compressed](http://fileformats.archiveteam.org/wiki/PCPaint_BSAVE
 image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/bgp/)
 image | [C.O.L.R. Object Editor](http://fileformats.archiveteam.org/wiki/C.O.L.R._Object_Editor) | .mur .pal | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mur/)
 image | [C64 Hires-Bitmap](http://fileformats.archiveteam.org/wiki/Hires-Bitmap) | .hbm .hir .hpi .gih .fgs | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/c64HiRes/)
+image | Caiman graphics | .dat | [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/caimanGraphics/)
 image | [Calamus Raster Graphic](http://fileformats.archiveteam.org/wiki/Calamus_Raster_Graphic) | .crg | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) | [14 sample files](https://sembiance.com/fileFormatSamples/image/crg/)
 image | [Calamus Vector Graphic](http://fileformats.archiveteam.org/wiki/Calamus_Vector_Graphic) | .cvg | [scribus](https://www.scribus.net/) | [28 sample files](https://sembiance.com/fileFormatSamples/image/cvg/)
 image | [Canon Image File Format](http://fileformats.archiveteam.org/wiki/Camera_Image_File_Format) | .crw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://sembiance.com/fileFormatSamples/image/crw/)
@@ -1416,6 +1419,7 @@ image | JustButtons Button | .btn | [nconvert](https://www.xnview.com/en/nconver
 image | Kaboom Studios Bitmap Block | .bmb | [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/kaboomStudiosBitmapBlock/)
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tomsViewer](https://tomseditor.com/blog/viewer) | [13 sample files](https://sembiance.com/fileFormatSamples/image/viff/)
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [gimp](https://gimp.org) | [11 sample files](https://sembiance.com/fileFormatSamples/image/kissCel/)
+image | KiSS CEL Color Palette | .kcf | [wuimg](https://codeberg.org/kaleido/wuimg) | [6 sample files](https://sembiance.com/fileFormatSamples/image/kissCELColorPalette/)
 image | Kitty NEC PC-88 | .kt4 .kty | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/kittyNECPC88/)
 image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pic | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [35 sample files](https://sembiance.com/fileFormatSamples/image/koalaMicroillustrator/) - APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil or view64, they may be invalid/corrupt.
 image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .koa .gig .kla .gg .koala | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) [wuimg](https://codeberg.org/kaleido/wuimg) [tomsViewer](https://tomseditor.com/blog/viewer) | [11 sample files](https://sembiance.com/fileFormatSamples/image/koalaPaint/)
@@ -1718,6 +1722,7 @@ image | [Texture Maker0](http://fileformats.archiveteam.org/wiki/Texture_Maker0)
 image | [TGIF](https://bourbon.usc.edu/tgif/faq/format.html) | .obj | [tgif](http://bourbon.usc.edu/tgif/index.html) | [13 sample files](https://sembiance.com/fileFormatSamples/image/tgif/)
 image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .xcf | [xcf2png](http://henning.makholm.net/software) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/xcf/)
 image | [The Graphics Magician Picture Painter](http://fileformats.archiveteam.org/wiki/The_Graphics_Magician_Picture_Painter) | .spc | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/graphicsMagicianPainter/) - It's a vector format, so it would be nice to convert to SVG, but only program that I know of that can convert it is recoil2png which just produces PNG files.
+image | The House of the Dead textures | .vmc .vram | [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/houseOfTheDeadTextures/)
 image | [TheDraw .COM File](http://fileformats.archiveteam.org/wiki/TheDraw_COM_File) | .com | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/theDrawCOM/)
 image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/theDraw/)
 image | [Tilez texture](http://fileformats.archiveteam.org/wiki/Tilez_texture) | .til | [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/tilezTexture/)

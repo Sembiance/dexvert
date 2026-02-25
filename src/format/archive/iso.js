@@ -50,7 +50,7 @@ export class iso extends Format
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	idMeta = ({macFileType, macFileCreator}) => (["GImg", "HImg", "hImg"].includes(macFileType) && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
-
+	confidenceAdjust = (inputfile, matchType, curConfidence, {idMetaData, xlog}) => ((idMetaData.macFileType==="rohd" && idMetaData.macFileCreator==="ddsk") ? -10 : 0);	// allow appleDiskCopyNDIF to handle these
 	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
 	{
 		// this whole function is just to handle when we have an ext match to '.bin' or '.img' because they are so generic we need to check for other files. easier to do this than with a combination of 'auxFiles'

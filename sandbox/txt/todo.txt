@@ -23,10 +23,16 @@
 
 * archive/os2FTCOMP		(117,604 files on discmaster2 (56,280 unique))
 
+* Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
+
 
 /-------------\
 | Vibe Viable |
 \-------------/
+* Adopt Dragon Unpacker program to "/list", "/detect" and "/extract" with a server similar to how I did with GameExtractorServer
+  Code available from: https://github.com/elbereth/DragonUnPACKer/
+  https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
+
 * This can identify, extract and convert hundreds of visual novel file formats: https://github.com/shiikwi/GARbro (forked from https://github.com/morkt/GARbro)
   Including 
   It's written in C# .net but targets an old version 4.6 and references DLLs that they don't provide and author said they won't provide
@@ -102,6 +108,18 @@
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
   Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://discmaster.textfiles.com/admin/item?itemid=10456
 
+* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
+  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
+  Once I have that I could support certain formats like:
+	document/dartHypertext
+	document/envisionPublisherDoc
+	document/ibmStoryboardDocument
+  Though it may be easier to just vibe in support for these and other document formats
+
+* Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
+  https://preservation.tylerthorsted.com/2024/01/26/asksam/
+  Right now I just have it as a 'simple' file using strings, of which I already have some samples for
+
 
 /---------------\
 | High Priority |
@@ -134,6 +152,7 @@
 * BLENDER 4: If I choose NOT to go to Blender 5, I could go with binary version of blender 4.0.2 to avoid compile issues: https://download.blender.org/release/Blender4.0/blender-4.0.2-linux-x64.tar.xz
   Probably best to pack it into dexvert/bin/blender-4.0.2/
 * Will want to: cd /mnt/compendium/DevLab/dexvert && mv blender blender_4.0 && mkdir -p blender/addons/
+* NOTE: May be wise to vibe update each plugin's code so it can work with 5.x
 * Starting with Blender 4.2, the addons that were distributed may not be anymore: https://devtalk.blender.org/t/changes-to-add-on-and-themes-bundling-4-2-onwards/34593
   The Python API has changed with every version, so my python code (and possibly all the addons which I manually updated to even work with 4.0) will need to be update:
 	https://developer.blender.org/docs/release_notes/4.1/python_api/
@@ -149,7 +168,8 @@
  * SECOND: Blender distributed addons (3ds/dxf/fbx/x3d) see if they are in the 'addons_core' folder or if I need to get them from: http://extensions.blender.org/
 	Get each one working VISUALLY.
 	Then update blender.js with the necessary code and get them working with dexvert
-* THIRD: 3rd party addons
+* THIRD: See about fixing: poly/nif
+* FOURTH: 3rd party addons
 	For EVERY ONE look to see if there is an 'updated' or 'alternatve' plugin that supports the format from github or: http://extensions.blender.org/
     UPDATED NifTools version: https://github.com/DuncanWasHere/blender_niftools_addon
 	If no updated version, then rsync over from dexvert/blender_OLD/addons/<addon> to blender/addons/<addon>/
@@ -165,15 +185,19 @@
   Github code (backed up to sandbox/app/1993-Model-Importer): https://github.com/Skyplayer37/1993-Model-Importer
   3D files: https://discmaster.textfiles.com/browse/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
   Original Post: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
+* Lastly, maybe I could vibe code in some other formats, though when I tried with nif into assimp it failed horribly
 <<<
-
-* If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 
 
 /-----------------\
 | Medium Priority |
 \-----------------/
-* See about fixing: poly/nif
+* From discord:
+	.str files are .mus files that go with the right SID in a 2-SID setup. The .str and .mus should play at the same time.
+	.wds files are lyrics
+	https://discmaster.textfiles.com/search?q=sidfest&qfields=name&qfields=t
+
+* If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 
 * Figure out how to extract archive/stackerCompressedVolume as these may be stacker:
 	https://discmaster.textfiles.com/search?family=unknown&sizeMin=20MB&detection=535441434b4552*&dedup=dedup
@@ -218,32 +242,22 @@
 		files/updates/win/
   I could do each subdir individually until I determine what is causing the crash. It can then be re-added to discmaster
 
-* So dexvert still uses 7z from p7zip (instead of more modern 7zz from 7zip package). This is because p7zip handles i18n charsets better via the LANG env var
-  The problem is that I've encountered a file test/sample/archive/zip/Masicsstory.zip that when extracted without LANG works fine, but when extracted with LANG=ja_JP is doesn't extract correctly
-  You can see this by just running `7z l Masicsstory.zip` vs `LANG=ja_JP 7z l Masicsstory.zip` and notice the second listing loses all subdirs and ends up clobbering outputs and just produces 1 output file
-  Problem is I couldn't figure out how to get 7zz to behave properly with i18n charsets. It doesn't seem to care about LANG env var? I found a -scs switch flag, but not sure it's mean for this purpose: file:///usr/share/doc/7zip-24.08/html/MANUAL/cmdline/switches/charset.htm
-  Additionally 7z from p7zip might support other features and things that 7zz doesn't? I'd need to fully test all this out. For now, meh.
-
-* Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
-  https://preservation.tylerthorsted.com/2024/01/26/asksam/
-  Right now I just have it as a 'simple' file using strings, of which I already have some samples for
-
 * Add POVRAY rendering support for the ~1,706 unique files (see the extensive notes in povRay.js)
 * Add moRay support for the ~2,300 unique files (sat on top of POV-RAY, see format moRay.js for notes): https://discmaster.textfiles.com/search?format=moRay&dedup=dedup
 
 * A bunch of recoil2png formats are 'seemingly' not in dexvert. See text/recoil2png_unhandled.txt
   NOTE: Some of these might be in dexvert already, just need to add recoil format tag
 
-* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
-  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
-  Once I have that I could support certain formats like:
-	document/dartHypertext
-	document/envisionPublisherDoc
-	document/ibmStoryboardDocument
 
 /--------------\
 | Low Priority |
 \--------------/
+* So dexvert still uses 7z from p7zip (instead of more modern 7zz from 7zip package). This is because p7zip handles i18n charsets better via the LANG env var
+  The problem is that I've encountered a file test/sample/archive/zip/Masicsstory.zip that when extracted without LANG works fine, but when extracted with LANG=ja_JP is doesn't extract correctly
+  You can see this by just running `7z l Masicsstory.zip` vs `LANG=ja_JP 7z l Masicsstory.zip` and notice the second listing loses all subdirs and ends up clobbering outputs and just produces 1 output file
+  Problem is I couldn't figure out how to get 7zz to behave properly with i18n charsets. It doesn't seem to care about LANG env var? I found a -scs switch flag, but not sure it's mean for this purpose: file:///usr/share/doc/7zip-24.08/html/MANUAL/cmdline/switches/charset.htm
+  Additionally 7z from p7zip might support other features and things that 7zz doesn't? I'd need to fully test all this out. For now, meh.
+
 * Add support for 'Zoundmonitor' songs. Not sure there is any particular 'magic' and though they sometimes have .sng extension, not always
   For example this file: https://discmaster.textfiles.com/view/21003/BS1%20part%2039.zip/BS1%20part%2039/Ult.%20Soundtr.%20Collection.adf/ZOUNDMONSONGS/TrosSport
   Is the same as: https://modland.com/pub/modules/Zoundmonitor/The%20Balance/gravedriving.sng
@@ -267,8 +281,6 @@
 
 * Several audio/speex samples are a bit distorted. See if this can be fixed.
 
-* Potentially update GIMP from 2.99 to 3.00 (there are likely considerable python API changes, claude and perplexity both highlighted a lot, but I should find an actual blog post/changes news with actual API change info)
-
 * InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything.
   For example CABS from: https://archive.org/details/250TCF
   They take up 653MB of space but only 62MB is extracted.
@@ -278,34 +290,6 @@
 	https://archive.org/details/installshield1150premier
 
 * Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
-
-* ISOs/disk images I was unable to process:
-	Just a .bin file:
-		https://archive.org/details/A.R.T.S._Episode_Number_6_CDR
-	These don't convert for some reason, they both appear to be Mac CDs
-		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
-		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one
-	Raw mac partition dumps:
-		https://archive.org/details/apple-r-p-lib-internal-v-1.0
-		https://archive.org/details/apple-r-p-lib-internal-v-2.0
-		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
-	Could not figure these out (may be bad rips):
-		https://archive.org/details/cdrom-megabytemonster
-		https://archive.org/details/CitroenC5-2001
-		https://archive.org/details/LionShare
-		https://archive.org/details/cdrom-megabytemonster
-		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
-		https://archive.org/details/Lex-C-RomSharewareExpress
-		https://archive.org/details/Macworld_CD-ROM_April_1995
-		https://archive.org/download/Apple_Developer_Discs_1989-2009/1992/ADC%20Developer%20CD%20%281992-11%2C%2012%29%20%28%27%27Wayne%27s%20Gworld%27%27%29_mdf.rar
-	Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
-	Haven't investigated:
-		https://archive.org/details/cdrinc_Dr._Morse_1999-03-30
-		https://archive.org/details/iCreate02
-		https://archive.org/details/iCreate04
-		https://archive.org/details/iCreate07
-
-* Adopt Dragon Unpacker program to extract more game assets: https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
 
 * Look into adding Atari ST VT-52 text/ansi art support: https://github.com/Sembiance/dexvert/issues/27
 
@@ -463,7 +447,10 @@
 * Create native C deno module for imagemagick/recoil and other detector programs for speed.
   Example existing image magick one for node: https://github.com/elad/node-imagemagick-native
 
->>> failures
+
+/----------\
+| Failures |
+\----------/
 * I tried to vibe in Aldus Persuasion support, but it's an undocumented vector drawing file format and it did NOT go well.
   See sandbox/fail/aldusPersuasion
 

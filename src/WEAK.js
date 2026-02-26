@@ -361,7 +361,7 @@ export const WEAK_VALUES =
 	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR
 	//		XFS, BIN_18, SOL_DISK, DAT_PAK, LIB_DBIN, TXD_2, VPPPC, DAM_RZ, SFX_DSFX, TOD_TOD2
 	// SEEN TWICE:
-	// 		OFF, DAT_DG, PRE_OPEN, SCH_SND, DAT_RES, PAK_DATA, PCK_5, PAK_49, PAK_PACK_3, PAK_PACK_4, WD_WD, SLV_DATA, GJD, TEXS_SXET, 0000_package
+	// 		OFF, DAT_DG, PRE_OPEN, SCH_SND, DAT_RES, PAK_DATA, PCK_5, PAK_49, PAK_PACK_3, PAK_PACK_4, SLV_DATA, GJD, TEXS_SXET, 0000_package
 	/^geArchive: 000_(5|PCW)( |$)/,
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
@@ -408,6 +408,7 @@ export const WEAK_VALUES =
 	/^geArchive: WAD_[48]( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
+	/^geArchive: WD_WD( |$)/,
 
 	/^geViewer: GLI_GLIB_IMG( |$)/,
 	/^geViewer: J2D_PLIB_PICTURE( |$)/,

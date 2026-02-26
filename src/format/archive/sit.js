@@ -9,6 +9,7 @@ export class sit extends Format
 	magic          = [
 		"StuffIt compressed archive", "Macintosh StuffIt Archive", "Mac StuffIt Self-Extracting Archive", "application/x-stuffit", /^Archive: SIT$/, /^StuffIt( \d)?$/, /^StuffIt Archive/, "deark: stuffit (StuffIt",
 		/^idarc: Stuffit/, /^fmt\/(399|1459|1460)( |$)/];
-	idMeta     = ({macFileCreator, macFileType}) => ["SIT!", "SIT2", "SIT5", "SITD", "STin"].includes(macFileType) || (macFileType==="disk" && macFileCreator==="SITx") || (macFileType==="rohd" && macFileCreator==="ddsk");
-	converters = ["unar[type:StuffIt][mac]", "deark[module:stuffit][mac]", "macunpack[strongMatch]", "maconv[strongMatch]"];
+	idMeta           = ({macFileCreator, macFileType}) => ["SIT!", "SIT2", "SIT5", "SITD", "STin"].includes(macFileType) || (macFileType==="disk" && macFileCreator==="SITx") || (macFileType==="rohd" && macFileCreator==="ddsk");
+	confidenceAdjust = (inputfile, matchType, curConfidence, {idMetaData, xlog}) => ((idMetaData.macFileType==="rohd" && idMetaData.macFileCreator==="ddsk") ? -3 : 0); // allow appleDiskCopyNDIF to handle these
+	converters       = ["unar[type:StuffIt][mac]", "deark[module:stuffit][mac]", "macunpack[strongMatch]", "maconv[strongMatch]"];
 }

@@ -13,7 +13,7 @@ import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
 const MFS_MAGICS = ["MFS file system", /^Macintosh MFS data/];
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "deark: apm",
-	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/1757( |$)/
+	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/(1740|1757)( |$)/
 ];
 
 const _RAW_MAGICS = [/^Raw CD image, Mode [12]/, "deark: cd_raw"];
@@ -50,7 +50,7 @@ export class iso extends Format
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	idMeta = ({macFileType, macFileCreator}) => (["GImg", "HImg", "hImg"].includes(macFileType) && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
-	confidenceAdjust = (inputfile, matchType, curConfidence, {idMetaData, xlog}) => ((idMetaData.macFileType==="rohd" && idMetaData.macFileCreator==="ddsk") ? -10 : 0);	// allow appleDiskCopyNDIF to handle these
+	confidenceAdjust = (inputfile, matchType, curConfidence, {idMetaData, xlog}) => ((idMetaData.macFileType==="rohd" && idMetaData.macFileCreator==="ddsk") ? -2 : 0);	// allow appleDiskCopyNDIF to handle these
 	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
 	{
 		// this whole function is just to handle when we have an ext match to '.bin' or '.img' because they are so generic we need to check for other files. easier to do this than with a combination of 'auxFiles'
@@ -213,6 +213,9 @@ export class iso extends Format
 				// some ISO dumps are weird and don't work in anything other than IsoBuster and scummDumperCompanion (iso/Europe in the Round CD-ROM.iso)
 				if(dexState.hasMagics("Apple Partition Map (APM) disk image") && dexState.hasMagics("Old-style Apple partition map"))
 					r.push("scummDumperCompanion");	// Also possible here: "IsoBuster[subOutDir:dexvert_mac]"
+
+				if(dexState.hasMagics(/^fmt\/1740( |$)/))
+					r.push("uniso[hfsplus][offset:36864][sizelimit:733999104][subOutDir:dexvert_mac]");	// iCreate 02.iso and others like itf
 
 				return r;
 			},

@@ -9,6 +9,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		offset      : {desc : "If set, mount at the given offset", hasValue : true},
+		sizelimit   : {desc : "If set, mount with the given size limit", hasValue : true},
 		block       : {desc : "If set, specify a given block size for the ISO image.", hasValue : true},
 		hfs         : {desc : "If set, CD will be treated as HFS MAC cd"},
 		hfsplus     : {desc : "If set, CD will be treated as HFS+ MAC cd"},
@@ -41,6 +42,8 @@ async function extractNormalISO()
 	const mountOptions = ["loop", "ro", "nodev", "nosuid"];
 	if(argv.offset)
 		mountOptions.push(`offset=${argv.offset}`);
+	if(argv.sizelimit)
+		mountOptions.push(`sizelimit=${argv.sizelimit}`);
 	if(argv.block)
 		mountOptions.push(`block=${argv.block}`);
 	if(argv.options)
@@ -56,7 +59,7 @@ async function extractNormalISO()
 	else if(argv.type)
 		mountArgs.push("-t", argv.type);
 
-	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH], {liveOutput : xlog.atLeast("debug")});
+	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH], {verbose : xlog.atLeast("debug"), liveOutput : xlog.atLeast("debug")});
 
 	const {stdout : mountStatus} = await runUtil.run("sudo", ["findmnt", "--output", "FSTYPE", "--noheadings", MOUNT_DIR_PATH]);
 

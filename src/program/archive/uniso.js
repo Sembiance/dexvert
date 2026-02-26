@@ -7,6 +7,7 @@ export class uniso extends Program
 	package = "sys-fs/hfsutils";
 	flags   = {
 		offset     : "Extract ISO starting at this particular byte offset. Default: 0",
+		sizelimit  : "Mount with this size limit. Default: none",
 		block      : "Specify the block size in bytes",
 		hfs        : "Set this to true to process the iso as a MacOS HFS disc. Default: false",
 		hfsplus    : "Set this to true to process the iso as a MacOS HFS+ disc. Default: false",
@@ -21,6 +22,8 @@ export class uniso extends Program
 		const a = ["--ts", r.f.input.ts];
 		if(r.flags.offset)
 			a.push(`--offset=${r.flags.offset}`);
+		if(r.flags.sizelimit)
+			a.push(`--sizelimit=${r.flags.sizelimit}`);
 		if(r.flags.block)
 			a.push(`--block=${r.flags.block}`);
 		if(r.flags.hfs)

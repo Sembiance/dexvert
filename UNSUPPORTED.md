@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,032)
+# Unsupported File Formats (4,029)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1166,7 +1166,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,768)
+## Other (2,765)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1430,7 +1430,6 @@ Family/Format | Name | Extensions | Notes
 [other/atariGEMOBM](https://discmaster.textfiles.com/search?format=atariGEMOBM) | Atari GEM OBM File | .obm | [15 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariGEMOBM/)
 [other/atariLynxROM](https://discmaster.textfiles.com/search?format=atariLynxROM) | Atari Lynx ROM | .lnx | 
 [other/atari800WinPlusTrainer](https://discmaster.textfiles.com/search?format=atari800WinPlusTrainer) | Atari800Win Plus Trainer | .a8t | 
-[other/atgCoreCementGameDataArchive](https://discmaster.textfiles.com/search?format=atgCoreCementGameDataArchive) | ATG Core Cement game data archive | .rcf | 
 [other/atlantisWordProcessorSoundScheme](https://discmaster.textfiles.com/search?format=atlantisWordProcessorSoundScheme) | Atlantis Word Processor Sound Scheme | .asn | 
 [other/atokDictionary](https://discmaster.textfiles.com/search?format=atokDictionary) | ATOK Dictionary |  | 
 [other/atomicBombermanAnimation](https://discmaster.textfiles.com/search?format=atomicBombermanAnimation) | Atomic Bomberman Animation | .ani | 
@@ -2496,7 +2495,6 @@ Family/Format | Name | Extensions | Notes
 [other/listProData](https://discmaster.textfiles.com/search?format=listProData) | ListPro data |  | 
 [other/lithTechEngineSoundSection](https://discmaster.textfiles.com/search?format=lithTechEngineSoundSection) | LithTech engine sound Section | .sec | 
 [other/lithTechEngineSoundStyle](https://discmaster.textfiles.com/search?format=lithTechEngineSoundStyle) | LithTech engine sound Style | .sty | 
-[other/lithTechResourceData](https://discmaster.textfiles.com/search?format=lithTechResourceData) | LithTech Resource data | .rez | 
 [other/liveForSpeedData](https://discmaster.textfiles.com/search?format=liveForSpeedData) | Live for Speed data | .spr | 
 [other/liveForSpeedEngineSound](https://discmaster.textfiles.com/search?format=liveForSpeedEngineSound) | Live For Speed Engine sound | .eng | 
 [other/liveMotionProject](https://discmaster.textfiles.com/search?format=liveMotionProject) | LiveMotion project | .liv | 
@@ -3416,7 +3414,6 @@ Family/Format | Name | Extensions | Notes
 [other/starWarsJediKnightDarkForces2SaveGame](https://discmaster.textfiles.com/search?format=starWarsJediKnightDarkForces2SaveGame) | Star Wars: Jedi Knight - Dark Forces II save game | .jks | 
 [other/starWarsJediKnight2SaveGame](https://discmaster.textfiles.com/search?format=starWarsJediKnight2SaveGame) | Star Wars: Jedi Knight II - Jedi Outcast save game | .sav | 
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?format=starAmPlanGraphData) | StarAm Plan graph data | .gein | 
-[other/starbreezeStudiosGameDataArchive](https://discmaster.textfiles.com/search?format=starbreezeStudiosGameDataArchive) | Starbreeze Studios game data archive | .xw .xfc .xtc .xmd .xcd .xwc | 
 [other/starCalcData](https://discmaster.textfiles.com/search?format=starCalcData) | StarCalc data | .dat | 
 [other/starCalcDataIndex](https://discmaster.textfiles.com/search?format=starCalcDataIndex) | StarCalc data index | .bin | 
 [other/starCraft2SaveGameReplay](https://discmaster.textfiles.com/search?format=starCraft2SaveGameReplay) | StarCraft 2 save game/replay | .sc2save .sc2replay | 

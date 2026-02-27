@@ -17,19 +17,16 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Formats exe/dll/windowsSCR now return meta data in dexvert from exiftool like: CompanyName, ProductVersion, Comments, LegalCopyright, etc....
-  I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
-  After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
-
-* Continue going through 'scratchpad.txt' list of dragon unpacker detections, find samples to reprocess if any on discmaster
-  Then add those formats to dexvert and ensure discmaster reprocesses them too
-
 * Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt
 
 /-------------\
 | Vibe Viable |
 \-------------/
 * Investigate these 180,000 unknown image files: https://discmaster.textfiles.com/search?detection=50424d50*
+
+* Add more support for these samples: https://discmaster.textfiles.com/search?extension=xtc&detection=4d4f5320444154*
+  Right now dragonUnpacker supports some, but not many, but it identifies to all of them.
+  So it's a matter of downloading 100 unique items, and telling claude to go ensure the unpacker has support for these
 
 * This can identify, extract and convert hundreds of visual novel file formats: https://github.com/shiikwi/GARbro (forked from https://github.com/morkt/GARbro)
   Including 
@@ -122,6 +119,9 @@
 /---------------\
 | High Priority |
 \---------------/
+* Formats exe/dll/windowsSCR now return meta data in dexvert from exiftool like: CompanyName, ProductVersion, Comments, LegalCopyright, etc....
+  I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
+  After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
 
 * Goal: Get rid of 86box
   If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism

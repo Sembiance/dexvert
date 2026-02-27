@@ -10,6 +10,9 @@ C.IS_DEV_MACHINE = ["crystalsummit", "eaglehollow"].includes(Deno.hostname());
 C.GAMEEXTRACTOR_HOST = "127.0.0.1";
 C.GAMEEXTRACTOR_PORT = 25499;
 
+C.DRAGON_UNPACKER_HOST = "127.0.0.1";
+C.DRAGON_UNPACKER_PORT = 25596;
+
 C.OS_SERVER_HOST = "127.0.0.1";
 C.OS_SERVER_PORT = 17735;
 C.OSIDS = ["win2k", "winxp", "win7"];

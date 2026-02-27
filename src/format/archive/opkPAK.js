@@ -5,6 +5,6 @@ export class opkPAK extends Format
 	name           = "OPK PAK";
 	ext            = [".osp", ".ovp", ".obp"];
 	forbidExtMatch = true;
-	magic          = [/^geArchive: OPK_PAK( |$)/];
-	converters     = ["gameextractor[codes:OPK_PAK]"];
+	magic          = [/^geArchive: OPK_PAK( |$)/, "dragon: OPK "];
+	converters     = ["gameextractor[codes:OPK_PAK]", "dragonUnpacker[types:OPK]"];
 }

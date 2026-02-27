@@ -5,7 +5,7 @@ export class lucasArtsGameArchive extends Format
 	name           = "Lucas Arts Game Archive";
 	ext            = [".gob"];
 	forbidExtMatch = true;
-	magic          = ["LucasArts Game data archive", "Dark Forces Game data archive", "Archive: LucasArts Binary Archive", /^geArchive: GOB_GOB( |$)/];
+	magic          = ["LucasArts Game data archive", "Dark Forces Game data archive", "Archive: LucasArts Binary Archive", /^geArchive: GOB_GOB( |$)/, "dragon: DGOB "];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="DATA" && ["dRfD", "dRfO", "PPUP"].includes(macFileCreator);
-	converters     = ["gameextractor[codes:GOB_GOB]"];
+	converters     = ["gameextractor[codes:GOB_GOB]", "dragonUnpacker[types:DGOB]"];
 }

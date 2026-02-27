@@ -21,23 +21,21 @@
   I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
   After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
 
-* archive/os2FTCOMP		(117,604 files on discmaster2 (56,280 unique))
+* Continue going through 'scratchpad.txt' list of dragon unpacker detections, find samples to reprocess if any on discmaster
+  Then add those formats to dexvert and ensure discmaster reprocesses them too
 
-* Couldn't determine filesystem type for these compuserve drive images: https://archive.org/details/2015-05-compuserve-raw-disks
-
+* Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt
 
 /-------------\
 | Vibe Viable |
 \-------------/
-* Adopt Dragon Unpacker program to "/list", "/detect" and "/extract" with a server similar to how I did with GameExtractorServer
-  Code available from: https://github.com/elbereth/DragonUnPACKer/
-  https://www.elberethzone.net/en/dragon-unpacker-supported-games.html
+* Investigate these 180,000 unknown image files: https://discmaster.textfiles.com/search?detection=50424d50*
 
 * This can identify, extract and convert hundreds of visual novel file formats: https://github.com/shiikwi/GARbro (forked from https://github.com/morkt/GARbro)
   Including 
   It's written in C# .net but targets an old version 4.6 and references DLLs that they don't provide and author said they won't provide
   I think it's best to clone that as a subdir to the main 'garbroServer' vibe
-  Goal is to vibe a server that provides /detect and /extract endpoints just like gameserver
+  Goal is to vibe a server that provides /list and /detect and /extract endpoints just like gameserver and a 1-time checkfor_GARbro.txt
   ALSO want to vibe a one-time list of all 'magics' that I can search for in detections field to find things to reprocess (and store that in a garbroFormatstoFind.txt and add as a todo)
   Probably best for it to not touch the main 'GARbro' folder at all, instructing the vibe tool that I may update that in the future with future pulls from the github
   Instead it should create a script, that it will maintain, that will copy over the necessary files into a new garbroServer subdir
@@ -124,8 +122,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Go through the sandbox/txt/checkfor_GameExtractor.txt file to locate new files and format samples I should add support for
-  Create new formats and adding to the reprocess list as necessary
 
 * Goal: Get rid of 86box
   If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism

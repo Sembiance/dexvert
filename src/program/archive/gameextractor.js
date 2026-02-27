@@ -7,15 +7,18 @@ export class gameextractor extends Program
 	website = "https://sourceforge.net/projects/gameextractor/files/";
 	loc     = "local";
 	flags   = {
-		codes : "Specify which format code to treat the input file as. REQUIRED"
+		codes : "Specify which format code to treat the input file as, default: Let gameextractor decide"
 	};
 	checkForDups = true;
 	exec         = async r =>
 	{
-		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true}), codes : r.flags.codes.toString().split(",")}, asJSON : true});
+		const msg = {inputFilePath : r.inFile({absolute : true}), outputDirPath : r.outDir({absolute : true})};
+		if(r.flags.codes?.length)
+			msg.codes = r.flags.codes.toString().split(",");
+
+		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : msg, asJSON : true});
 		if(result?.error)
 			r.xlog.error`GameExtractor error for codes ${r.flags.codes}: ${result.error}`;
 	};
-	verify    = (r, dexFile) => dexFile.size<Math.max(r.f.input.size*3, xu.MB*5);		// some files are mistakenly identified as zlib and HUGE files are created
 	renameOut = false;
 }

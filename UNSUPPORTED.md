@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,034)
+# Unsupported File Formats (4,032)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (296)
+## Archive (295)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -187,7 +187,6 @@ Family/Format | Name | Extensions | Notes
 [archive/oricDisk](https://discmaster.textfiles.com/search?format=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 [archive/oricTape](https://discmaster.textfiles.com/search?format=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 [archive/originSystemsSetupArchive](https://discmaster.textfiles.com/search?format=originSystemsSetupArchive) | Origin Systems's setup Archive | .a01 .cam .flx | 
-[archive/os2FTCOMP](https://discmaster.textfiles.com/search?format=os2FTCOMP) | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/)
 [archive/outlookExchangeOfflineStorage](https://discmaster.textfiles.com/search?format=outlookExchangeOfflineStorage) | Outlook Exchange Offline Storage | .ost | 
 [archive/bvrpPAC](https://discmaster.textfiles.com/search?format=bvrpPAC) | PAC (BVRP Software) | .pac | 
 [archive/packMasterPacked](https://discmaster.textfiles.com/search?format=packMasterPacked) | Pack Master Packed | .exe | 
@@ -1167,7 +1166,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,769)
+## Other (2,768)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1425,7 +1424,6 @@ Family/Format | Name | Extensions | Notes
 [other/assaultWingSprite](https://discmaster.textfiles.com/search?format=assaultWingSprite) | Assault Wing Sprite | .spr | 
 [other/assettoCorsaGameData](https://discmaster.textfiles.com/search?format=assettoCorsaGameData) | Assetto Corsa game data | .kn5 | 
 [other/astoundActor](https://discmaster.textfiles.com/search?format=astoundActor) | Astound Actor | .act | 
-[other/asuraEngineResourcesPackageGeneric](https://discmaster.textfiles.com/search?format=asuraEngineResourcesPackageGeneric) | Asura engine Resources package | .asr | 
 [other/atari7800ROM](https://discmaster.textfiles.com/search?format=atari7800ROM) | Atari 7800 ROM | .a78 | 
 [other/atariCTBFile](https://discmaster.textfiles.com/search?format=atariCTBFile) | Atari CTB File | .ctb | [5 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCTBFile/)
 [other/atariFalconVideoDescriptor](https://discmaster.textfiles.com/search?format=atariFalconVideoDescriptor) | Atari Falcon Video Descriptor | .fv | 
@@ -2018,7 +2016,6 @@ Family/Format | Name | Extensions | Notes
 [other/eternityEngineSkin](https://discmaster.textfiles.com/search?format=eternityEngineSkin) | Eternity Engine Skin | .skn | 
 [other/euphoriaDatabaseSystem](https://discmaster.textfiles.com/search?format=euphoriaDatabaseSystem) | Euphoria Database System | .edb .hpc | 
 [other/eurekaMercuryConfiguration](https://discmaster.textfiles.com/search?format=eurekaMercuryConfiguration) | Eureka/Mercury Configuration | .cfg .eka | 
-[other/eveOnlineGameContentsArchive](https://discmaster.textfiles.com/search?format=eveOnlineGameContentsArchive) | EVE Online Game Contents archive | .stuff | 
 [other/evermoreSoftwareEIOfficeDocumentBinder](https://discmaster.textfiles.com/search?format=evermoreSoftwareEIOfficeDocumentBinder) | Evermore Software EIOffice document binder | .eio .eit | 
 [other/everNoteDatabase](https://discmaster.textfiles.com/search?format=everNoteDatabase) | EverNote database | .enb | 
 [other/everQuestGameData](https://discmaster.textfiles.com/search?format=everQuestGameData) | EverQuest Game data | .s3d .pak .pfs .eqg | 
@@ -3040,6 +3037,7 @@ Family/Format | Name | Extensions | Notes
 [other/pico8PODDataArchive](https://discmaster.textfiles.com/search?format=pico8PODDataArchive) | Pico-8 POD data archive | .dat .pod | 
 [other/picturePumpProjectFile](https://discmaster.textfiles.com/search?format=picturePumpProjectFile) | Picture Pump Project File | .ppp | 
 [other/piklibAnimationData](https://discmaster.textfiles.com/search?format=piklibAnimationData) | Piklib Animation data | .ann | 
+[other/pinballConstructionSetGame](https://discmaster.textfiles.com/search?format=pinballConstructionSetGame) | Pinball Construction Set game |  | 
 [other/pinnacleStudioScene](https://discmaster.textfiles.com/search?format=pinnacleStudioScene) | Pinnacle Studio Scene | .scn | 
 [other/pinnacleStudioVideoProject](https://discmaster.textfiles.com/search?format=pinnacleStudioVideoProject) | Pinnacle Studio Video Project | .stu | 
 [other/pixelBenderBytecode](https://discmaster.textfiles.com/search?format=pixelBenderBytecode) | Pixel Bender bytecode |  | 

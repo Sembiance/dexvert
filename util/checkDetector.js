@@ -9,13 +9,12 @@ import {formats} from "../src/format/formats.js";
 import {path} from "std";
 import {flexMatch} from "../src/identify.js";
 
-const xlog = new XLog("info");
-
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Test a new detector program and outputs all found non-weak magics that are not already in any formats magic list",
 	opts    :
 	{
+		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
 		showWeak : {desc : "If you set this to true, even matches marked 'weak' will show up"},
 		unique   : {desc : "Set this to filter out duplicated magic values and only show 1 of each magic string"},
 		program  : {desc : "Which program to run (or all)", required : true, hasValue : true, allowed : [...DETECTOR_PROGRAMS, "all"]},
@@ -25,6 +24,8 @@ const argv = cmdUtil.cmdInit({
 const detectorsToTest = argv.program==="all" ? Array.from(DETECTOR_PROGRAMS) : [argv.program];
 detectorsToTest.removeAll("amigaBitmapFontContentDetector");	// only checks 1 format
 detectorsToTest.removeAll("checkBytes");						// fairly narrow things it can return, all generic
+
+const xlog = new XLog(argv.logLevel);
 
 await initRegistry(xlog);
 
@@ -76,7 +77,7 @@ async function checkDetector(detectorid)
 	const matches = [];
 	await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	{
-		const r = await Program.runProgram(detectorid, await FileSet.create(path.dirname(sampleFilePath), "input", sampleFilePath), {xlog : new XLog("error")});
+		const r = await Program.runProgram(detectorid, await FileSet.create(path.dirname(sampleFilePath), "input", sampleFilePath), {xlog : xlog.atLeast("debug") ? xlog : new XLog("error")});
 		bar.increment();
 		if(!r?.meta?.detections?.length)
 			return;

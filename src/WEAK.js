@@ -293,6 +293,10 @@ export const WEAK_VALUES =
 	/^Windows \/ MS-DOS boot loader/,
 	/^YZ Archiv gefunden/,
 
+	// dragonUnpackerID
+	/^dragon: PACK /,
+	/^dragon: SLF /,
+
 	// ffprobeID
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
@@ -358,20 +362,29 @@ export const WEAK_VALUES =
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, CACHE_3, SB, CON, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR
-	//		XFS, BIN_18, SOL_DISK, DAT_PAK, LIB_DBIN, TXD_2, VPPPC, DAM_RZ, SFX_DSFX, TOD_TOD2
+	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD
+	//		XFS, BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, BANK_QL, SPR_3
 	// SEEN TWICE:
-	// 		OFF, DAT_DG, PRE_OPEN, SCH_SND, DAT_RES, PAK_DATA, PCK_5, PAK_49, PAK_PACK_3, PAK_PACK_4, SLV_DATA, GJD, TEXS_SXET, 0000_package
+	// 		OFF, PRE_OPEN, TXD_2, DAT_PAK, DAT_RES, SOL_DISK, PAK_DATA, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, 0000_package
 	/^geArchive: 000_(5|PCW)( |$)/,
+	/^geArchive: ARC_(6|8|10|11|13)( |$)/,
+	/^geArchive: BAG_(5|GABA_2)( |$)/,
+	/^geArchive: DAT_(11|42|48|53|57|DG)( |$)/,
+	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
+	/^geArchive: PAK_(7|11|30|41|42|49)( |$)/,
+	/^geArchive: PAK_PAK_2( |$)/,
+	/^geArchive: PAK_PACK_[26]( |$)/,
+	/^geArchive: PCK_(5|6|PACK)( |$)/,
+	/^geArchive: PCK5( |$)/,
+	/^geArchive: WAD_[48]( |$)/,
+	
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
 	/^geArchive: ACE_SIMIS( |$)/,
 	/^geArchive: AR_DAVE( |$)/,
-	/^geArchive: ARC_(6|8|10|11|13)( |$)/,
 	/^geArchive: ARF_AR( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
-	/^geArchive: BAG_(5|GABA_2)( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
@@ -380,13 +393,12 @@ export const WEAK_VALUES =
 	/^geArchive: DATA_KAPL( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
 	/^geArchive: DTA(_DTA)?( |$)/,
-	/^geArchive: DAT_(11|42|48|53|57)( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
 	/^geArchive: FSB_FSB5( |$)/,
 	/^geArchive: FOG( |$)/,
 	/^geArchive: G00S000( |$)/,
+	/^geArchive: GJD( |$)/,
 	/^geArchive: GME( |$)/,
-	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: KDT( |$)/,
 	/^geArchive: LINK_LINK( |$)/,
 	/^geArchive: M02( |$)/,
@@ -395,17 +407,14 @@ export const WEAK_VALUES =
 	/^geArchive: MXS( |$)/,
 	/^geArchive: NoExt_2( |$)/,
 	/^geArchive: PAC_2( |$)/,
-	/^geArchive: PAK_(7|11|30|41|42)( |$)/,
-	/^geArchive: PAK_PAK_2( |$)/,
-	/^geArchive: PAK_PACK_[26]( |$)/,
-	/^geArchive: PCK_(6|PACK)( |$)/,
-	/^geArchive: PCK5( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
 	/^geArchive: RMX( |$)/,
+	/^geArchive: SB( |$)/,
+	/^geArchive: SCH_SND( |$)/,
 	/^geArchive: SFS_AAMVHFSS( |$)/,
+	/^geArchive: SLV_DATA( |$)/,
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
-	/^geArchive: WAD_[48]( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
@@ -484,9 +493,11 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN ONCE: WIC (Fake!), X1, oPAQue, Arhangel
+	// SEEN  ONCE: WIC (Fake!), X1, Terse, PPMN (Max Smirnov), QuArk
+	// SEEN TWICE: oPAQue
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
+	/^idarc: Arhangel( |$)/,
 	/^idarc: DitPack( |$)/,
 	/^idarc: Flash( |$)/,
 	/^idarc: HYP( |$)/,

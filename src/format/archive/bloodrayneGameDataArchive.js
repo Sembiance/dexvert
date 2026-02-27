@@ -5,7 +5,7 @@ export class bloodrayneGameDataArchive extends Format
 	name           = "Bloodrayne game data archive";
 	ext            = [".pod"];
 	forbidExtMatch = true;
-	magic          = ["Bloodrayne game data archive", /^geArchive: POD_POD3( |$)/];
+	magic          = ["Bloodrayne game data archive", /^geArchive: POD_POD3( |$)/, "dragon: POD3 "];
 	weakMagic      = ["Bloodrayne game data archive"];
-	converters     = ["gameextractor[codes:POD_POD3]"];
+	converters     = ["gameextractor[codes:POD_POD3]", "dragonUnpacker[types:POD3]"];
 }

@@ -5,6 +5,6 @@ export class novalogicGameArchive extends Format
 	name           = "Novalogic Game Archive";
 	ext            = [".pff"];
 	forbidExtMatch = true;
-	magic          = ["Novalogic game data archive", /^geArchive: (PFF_PFF3_2|PFF_PFF3|PFF)( |$)/];
-	converters     = ["gameextractor[codes:PFF_PFF3_2,PFF_PFF3,PFF]"];
+	magic          = ["Novalogic game data archive", /^geArchive: (PFF_PFF3_2|PFF_PFF3|PFF)( |$)/, "dragon: PFF3 "];
+	converters     = ["gameextractor[codes:PFF_PFF3_2,PFF_PFF3,PFF]", "dragonUnpacker[types:PFF3]"];
 }

@@ -1,7 +1,5 @@
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
-import {fileUtil} from "xutil";
-import {detectPreRename} from "../../dexUtil.js";
 
 export class librempegprobeID extends Program
 {
@@ -9,12 +7,9 @@ export class librempegprobeID extends Program
 	package = "media-video/librempeg";
 	bin     = "librempegprobe";
 	loc     = "local";
-	pre     = detectPreRename;
-	args    = r => ["-v", "quiet", "-show_entries", "format=format_name,format_long_name", "-of", "default=noprint_wrappers=1:nokey=1", "-analyzeduration", "2000000", r.detectTmpFilePath];
-	post    = async r =>
+	args    = r => ["-v", "quiet", "-show_entries", "format=format_name,format_long_name", "-of", "default=noprint_wrappers=1:nokey=1", "-analyzeduration", "2000000", r.flags.detectTmpFilePath];
+	post    = r =>
 	{
-		await fileUtil.unlink(r.detectTmpFilePath);
-
 		r.meta.detections = [];
 
 		const matchValue = r.stdout.trim() || "";

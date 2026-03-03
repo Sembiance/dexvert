@@ -1,7 +1,5 @@
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
-import {fileUtil} from "xutil";
-import {detectPreRename} from "../../dexUtil.js";
 
 export class trid extends Program
 {
@@ -9,12 +7,9 @@ export class trid extends Program
 	package = "app-arch/trid";
 	bin     = "trid";
 	loc     = "local";
-	pre     = detectPreRename;
-	args    = r => ["-n", "5", r.detectTmpFilePath];
-	post    = async r =>
+	args    = r => ["-n", "5", r.flags.detectTmpFilePath];
+	post    = r =>
 	{
-		await fileUtil.unlink(r.detectTmpFilePath);
-
 		r.meta.detections = [];
 
 		r.stdout.split("\n").forEach(tridLine =>

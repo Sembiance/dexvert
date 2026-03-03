@@ -2,6 +2,7 @@ import {xu, fg} from "xu";
 import {validateClass} from "validator";
 import {DexFile} from "./DexFile.js";
 import {Program} from "./Program.js";
+import {fileUtil} from "xutil";
 import {WEAK_VALUES} from "./WEAK.js";
 
 export const DETECTOR_PROGRAMS = [
@@ -70,5 +71,13 @@ export class Detection
 
 export async function getDetections(f, {xlog, detectors=DETECTOR_PROGRAMS}={})
 {
-	return (await Promise.all(detectors.map(programid => Program.runProgram(programid, f, {xlog, autoUnlink : true})))).flatMap(o => o.meta.detections).filter(detection => !!detection);
+	// some programs are very sensitive to filenames, either failing to handle odd characters or just always assuming extension is right, so we need to create a safe filename for them
+	const detectTmpFilePath = await fileUtil.genTempPath();
+	await Deno.copyFile(f.input.absolute, detectTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
+
+	const r = (await Promise.all(detectors.map(programid => Program.runProgram(programid, f, { xlog, flags : { detectTmpFilePath }, autoUnlink : true })))).flatMap(o => o.meta.detections).filter(detection => !!detection);
+
+	await fileUtil.unlink(detectTmpFilePath);
+
+	return r;
 }

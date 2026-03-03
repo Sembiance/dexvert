@@ -1,7 +1,5 @@
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
-import {fileUtil} from "xutil";
-import {detectPreRename} from "../../dexUtil.js";
 
 export class xdgMime extends Program
 {
@@ -13,12 +11,9 @@ export class xdgMime extends Program
 	// FAILURE NOTE: In Jan 2025, Gentoo updated xdg-utils to make the 'perl' flag optional which cause it not to install dev-perl/File-MimeInfo (mimetype command) which then caused xdg-mime to not identify some files such as: test/sample/text/advancedStreamRedirector/beck.asx
 	// I added +perl to my package.use dexvert file and that fixes it, but making a note here just in case something similar happens in the future
 	// I think this is because the /usr/share/mime/* files change when that perl package is installed that causes xdg-mime (and also mimetype command) to properly pick up different file types
-	pre = detectPreRename;
-	args = r => ["query", "filetype", r.detectTmpFilePath];
-	post = async r =>
+	args = r => ["query", "filetype", r.flags.detectTmpFilePath];
+	post = r =>
 	{
-		await fileUtil.unlink(r.detectTmpFilePath);
-
 		r.meta.detections = [];
 
 		const mimeType = r.stdout.trim() || "";

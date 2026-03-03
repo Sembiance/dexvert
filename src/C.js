@@ -30,7 +30,7 @@ C.CLASSIFY_PORT = 17736;
 C.SIEGFRIED_HOST = "127.0.0.1";
 C.SIEGFRIED_PORT = 15138;
 
-C.GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir", "noPrevFailedVerify"];
+C.GLOBAL_FLAGS = ["bulkCopyOut", "detectTmpFilePath", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir", "noPrevFailedVerify"];
 
 C.POLY_THUMB_DEFAULT_FPS = 20;
 C.POLY_THUMB_DEFAULT_ROTATE_SPEED = 180;

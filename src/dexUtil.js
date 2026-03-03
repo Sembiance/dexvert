@@ -109,17 +109,3 @@ export async function initRegistry(xlog)
 	await initPrograms(xlog);
 	await initFormats(xlog);
 }
-
-export async function detectPreRename(r)
-{
-	r.detectTmpFilePath = await fileUtil.genTempPath();
-	try
-	{
-		if(await fileUtil.exists(r.inFile({absolute : true})))
-			await Deno.copyFile(r.inFile({absolute : true}), r.detectTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
-	}
-	catch(err)
-	{
-		r.xlog.warn`Failed to copy file to tmp file for ${r.programid}: ${err}`;
-	}
-}

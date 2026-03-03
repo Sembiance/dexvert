@@ -2,20 +2,16 @@ import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {C} from "../../C.js";
-import {fileUtil} from "xutil";
-import {detectPreRename} from "../../dexUtil.js";
 
 export class dragonUnpackerID extends Program
 {
 	website = "https://github.com/elbereth/DragonUnPACKer";
 	loc     = "local";
-	pre     = detectPreRename;
 	exec    = async r =>
 	{
 		r.meta.detections = [];
 
-		const result = await xu.fetch(`http://${C.DRAGON_UNPACKER_HOST}:${C.DRAGON_UNPACKER_PORT}/detect`, {json : {filePath : r.detectTmpFilePath}, asJSON : true});
-		await fileUtil.unlink(r.detectTmpFilePath);
+		const result = await xu.fetch(`http://${C.DRAGON_UNPACKER_HOST}:${C.DRAGON_UNPACKER_PORT}/detect`, {json : {filePath : r.flags.detectTmpFilePath}, asJSON : true});
 		if(result?.error)
 			return r.xlog.error`dragonUnpackerID error: ${result.error}`;
 

@@ -24,7 +24,7 @@ const OS = {
 	win7 :
 	{
 		debug     : false,
-		qty       : navigator.hardwareConcurrency===32 ? 8 : 2,
+		qty       : navigator.hardwareConcurrency>=32 ? 10 : 2,
 		ramGB     : 3,
 		cores     : 2,
 		scriptExt : ".au3",

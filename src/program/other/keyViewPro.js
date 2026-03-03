@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class keyViewPro extends Program
 {
 	website  = "https://archive.org/details/KeyViewPro/";
-	loc      = "win2k";
+	loc      = "win7";
 	flags = {
 		outType : "Which type to export to. Default: png"	// technically the KeyView converter allows exporting to a vector based image format too, but that's not currently supported here
 	};

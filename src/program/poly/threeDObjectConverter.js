@@ -14,7 +14,7 @@ export class threeDObjectConverter extends Program
 {
 	website = "http://3doc.i3dconverter.com/";
 	loc     = "win7";
-	bin     = "c:\\Program Files (x86)\\3D Object Converter 10.60\\3dconverter.exe";
+	bin     = "c:\\Program Files\\3D Object Converter 10.60\\3dconverter.exe";
 	flags   = {
 		outType : "Specify which format to output to"
 	};

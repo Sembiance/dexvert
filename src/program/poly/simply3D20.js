@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class simply3D20 extends Program
 {
 	website   = "https://archive.org/details/premier2_cd";
-	loc       = "win2k";
+	loc       = "win7";
 	bin       = "c:\\Program Files\\Micrografx\\Simply 3D 2\\S3D2.exe";
 	args      = r => [r.inFile()];
 	osData    = ({

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class corelPhotoPaint extends Program
 {
 	website  = "https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Corel\\Photo-Paint8\\Programs\\photopnt.exe";
 	flags   = {
 		outType : "Which format to output. png usually works and is the default, but sometimes png isn't available, then use tiff"

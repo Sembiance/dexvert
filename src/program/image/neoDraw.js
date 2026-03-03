@@ -5,7 +5,7 @@ export class neoDraw extends Program
 {
 	website  = "http://cd.textfiles.com/pier/pier09/cdrom/011/neodrw.zip";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\NEODRAW\\NEODRAW.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({

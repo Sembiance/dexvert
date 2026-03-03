@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 export class kwikDraw extends Program
 {
 	website  = "https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/KDRAW140.ZIP";
-	loc      = "winxp";
+	loc      = "win7";
 	unsafe   = true;
 	bin      = "C:\\dexvert\\KDRAW_FW.EXE";
 	args     = r => [r.inFile()];
@@ -22,10 +22,9 @@ export class kwikDraw extends Program
 			SendSlow("!fp")
 			WinWaitActive("PRINT", "", 10)
 			ControlClick("PRINT", "", "[CLASS:Button; TEXT:Print]")
-			WinWaitActive("Print to File", "", 10)
-			Send("c:\\out\\out.ps{ENTER}")
-			WinWaitClose("Print to File", "", 10)
-			Sleep(5000)
+			
+			HandleCutePDFPrint()
+
 			WinWaitActive("[CLASS:KWIKDRAW]", "", 10)
 			SendSlow("!fx")`
 	});

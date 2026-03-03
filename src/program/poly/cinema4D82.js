@@ -16,7 +16,7 @@ const _DEFAULT_INTERMEDIATE = "wavefrontOBJ";
 export class cinema4D82 extends Program
 {
 	website = "https://archive.org/details/twilight-dvd087";
-	loc     = "winxp";
+	loc     = "win7";
 	bin     = "c:\\Program Files\\Maxon Cinema 4D 8.2\\CINEMA_4D.exe";
 	flags   = {
 		outType : `Which intermediate format to output. Default: ${_DEFAULT_INTERMEDIATE}`

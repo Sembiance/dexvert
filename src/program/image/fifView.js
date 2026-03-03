@@ -5,7 +5,7 @@ export class fifView extends Program
 {
 	website  = "http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\FIFView\\FIFView.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

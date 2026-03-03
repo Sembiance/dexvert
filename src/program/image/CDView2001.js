@@ -5,7 +5,7 @@ import {path} from "std";
 export class CDView2001 extends Program
 {
 	website  = "https://archive.org/details/cdview-2001";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\CDView2001\\CDView2001_patched.exe";
 	osData   = r => ({
 		scriptPre : `

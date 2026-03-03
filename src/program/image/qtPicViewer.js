@@ -6,7 +6,7 @@ export class qtPicViewer extends Program
 {
 	website  = "https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "C:\\Program Files\\QuickTime\\PictureViewer.exe";
 	args     = r => [r.inFile()];
 	osData   = r => ({

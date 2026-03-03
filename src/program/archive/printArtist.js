@@ -5,7 +5,7 @@ export class printArtist extends Program
 {
 	website  = "https://winworldpc.com/product/instant-artist-print/60";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\SIERRA\\PA6\\PRTARTST.EXE";
 	osData   = ({
 		script : `

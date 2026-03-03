@@ -193,6 +193,19 @@ Func WaitForPID($pid, $max_duration)
 
 	return ProcessExists($pid)
 EndFunc`,
+	HandleCutePDFPrint : `
+Func HandleCutePDFPrint()
+	$cuteWindow = WindowRequire("CutePDF Writer", "", 20)
+	ClipPut("c:\\out\\out.pdf")
+	Send("{BACKSPACE}")
+	Sleep(250)
+	Send("^v")
+	Sleep(250)
+	Send("!s")
+	WinWaitClose($cuteWindow, "", 10)
+	WaitForStableFileSize("c:\\out\\out.pdf", ${xu.SECOND*2}, ${xu.SECOND*15})
+EndFunc
+`,
 	RunWaitWithTimeout : `
 Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
 	Local $pid = Run($program, $workingdir, $show_flag)
@@ -333,7 +346,8 @@ EndFunc`,
 };
 const AUTO_INCLUDE_FUNCS = ["GetTime", "TimeDiff", "KillAll"];
 const FUNC_REQ_FUNCS = {
-	WaitForStableDirCount : "DirFileCount"
+	WaitForStableDirCount : "DirFileCount",
+	HandleCutePDFPrint    : ["WindowRequire", "WaitForStableFileSize"]
 };
 
 export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, alsoKill=[], fullCmd, skipMouseMoving})

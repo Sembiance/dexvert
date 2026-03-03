@@ -7,7 +7,7 @@ export class UniExtract extends Program
 	flags   = {
 		type : `Which type of extraction to choose. Examples: "i3comp extraction" or "STIX extraction"`
 	};
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\uniextract161\\UniExtract.exe";
 	args     = r => [r.inFile()];
 	osData   = r => ({

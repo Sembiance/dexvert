@@ -31,7 +31,7 @@ export class noesis extends Program
 		type : `Which type of input file: poly | animated  REQUIRED`
 	};
 	loc    = "win7";
-	bin    = "c:\\dexvert\\noesisv4474\\Noesis64.exe";
+	bin    = "c:\\dexvert\\noesisv4474\\Noesis.exe";
 	args   = r => [r.inFile()];
 	osData = r => ({
 		script : `

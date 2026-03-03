@@ -5,7 +5,7 @@ export class replica extends Program
 {
 	website  = "https://gondwanaland.com/meta/history/";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\REPLICA\\REPLICA.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({
@@ -22,12 +22,7 @@ export class replica extends Program
 			$printWindow = WindowRequire("Print", "", 7)
 			Send("{ENTER}")
 
-			$savePDFWindow = WindowRequire("Save PDF File As", "", 7)
-			SendSlow("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($savePDFWindow, "", 5)
-			
-			$pleaseWaitWindow = WindowRequire("Please Wait", "", 7)
-			WinWaitClose($pleaseWaitWindow, "", 5)
+			HandleCutePDFPrint()
 
 			WinWaitActive($mainWindow, "", 5)
 

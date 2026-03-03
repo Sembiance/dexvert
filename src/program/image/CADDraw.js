@@ -4,7 +4,7 @@ export class CADDraw extends Program
 {
 	website  = "https://archive.org/details/t425l1e_zip";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\tscad4\\RELEASE4.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({

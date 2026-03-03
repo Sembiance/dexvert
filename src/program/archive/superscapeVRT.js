@@ -5,7 +5,7 @@ import {path} from "std";
 export class superscapeVRT extends Program
 {
 	website  = "https://archive.superscape.org/Software/VRT/VRT_5.60.0.4112.iso";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Superscape\\VRT\\WVRT.exe";
 	args     = r => [r.inFile()];
 	osData   = r => ({

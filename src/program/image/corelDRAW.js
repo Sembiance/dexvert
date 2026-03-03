@@ -5,7 +5,7 @@ import {path} from "std";
 export class corelDRAW extends Program
 {
 	website  = "https://winworldpc.com/product/corel-draw/50";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\COREL50\\PROGRAMS\\CORELDRW.EXE";
 	osData   = r => ({
 		script : `

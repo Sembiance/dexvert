@@ -5,7 +5,7 @@ export class irfanView extends Program
 {
 	website = "https://www.irfanview.com/";
 	unsafe  = true;
-	loc     = "winxp";
+	loc     = "win7";
 	bin     = "c:\\Program Files\\IrfanView\\i_view32.exe";
 	args    = r => [r.inFile(), "/silent", `/convert="c:\\out\\out.png"`];
 

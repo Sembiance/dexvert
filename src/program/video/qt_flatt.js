@@ -6,7 +6,7 @@ export class qt_flatt extends Program
 {
 	website      = "https://www.macdisk.com/quickten.php";
 	unsafe       = true;
-	loc          = "winxp";
+	loc          = "win7";
 	flags   = {
 		chainAs : "Chain as a particular format"
 	};

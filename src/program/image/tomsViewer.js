@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class tomsViewer extends Program
 {
 	website  = "https://tomseditor.com/blog/viewer";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\TomsViewer\\TomsViewer.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class ediUnpack extends Program
 {
 	website  = "https://github.com/Sembiance/dexvert/blob/master/os/aux/win2k/app/UNPACK.EXE";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\UNPACK.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

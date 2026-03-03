@@ -4,7 +4,7 @@ export class cardfile extends Program
 {
 	website  = "http://www.geert.com/CardFile.htm";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "cardfile.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

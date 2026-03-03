@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class totalCommander extends Program
 {
 	website = "https://totalcmd.net/plugring/totalcmd.html";
-	loc     = "win2k";
+	loc     = "win7";
 	bin     = "c:\\Program Files\\totalcmd\\TOTALCMD.EXE";
 	args    = r => [r.inFile(), "c:\\out", "/A"];
 	notes   = "Has the plugin: https://totalcmd.net/plugring/resextract.html";

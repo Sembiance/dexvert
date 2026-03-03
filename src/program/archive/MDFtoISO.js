@@ -5,7 +5,7 @@ export class MDFtoISO extends Program
 {
 	website  = "http://www.mdftoiso.com/";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\MDF to ISO\\mdftoiso.exe";
 	args     = () => [];
 	osData   = r => ({

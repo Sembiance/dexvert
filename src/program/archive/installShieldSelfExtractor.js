@@ -6,23 +6,23 @@ export class installShieldSelfExtractor extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
 	unsafe  = true;
-	loc     = "win2k";
+	loc     = "win7";
 	bin     = r => `c:\\in\\${path.basename(r.inFile())}`;
 	osData  = ({
 		alsoKill : ["SETUP.EXE"],
 		scriptPre : `
-			DirEmpty("c:\\WINNT\\Temp")`,
+			DirEmpty("c:\\Windows\\Temp")`,
 		script : `
 			Func WaitForFiles()
 				WindowDismiss("InstallShield ", "", "Y")
-				return FileExists("c:\\WINNT\\Temp\\_ISTMP0.DIR") And DirFileCount("c:\\WINNT\\Temp\\_ISTMP0.DIR") > 0
+				return FileExists("c:\\Windows\\Temp\\_ISTMP0.DIR") And DirFileCount("c:\\Windows\\Temp\\_ISTMP0.DIR") > 0
 			EndFunc
 			$foundDir = CallUntil("WaitForFiles", ${xu.MINUTE})
 			If Not $foundDir Then
 				Exit 0
 			EndIf
-			WaitForStableDirCount("c:\\WINNT\\Temp\\_ISTMP0.DIR", ${xu.SECOND*10}, ${xu.MINUTE*2})
-			DirCopyContents("c:\\WINNT\\Temp", "c:\\out")
+			WaitForStableDirCount("c:\\Windows\\Temp\\_ISTMP0.DIR", ${xu.SECOND*10}, ${xu.MINUTE*2})
+			DirCopyContents("c:\\Windows\\Temp", "c:\\out")
 
 			Local $plist = ProcessList()
 			For $i = 1 To $plist[0][0]

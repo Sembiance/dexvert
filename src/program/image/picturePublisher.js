@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class picturePublisher extends Program
 {
 	website  = "https://winworldpc.com/product/micrografx-graphics-suite/2";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Micrografx\\Picture Publisher\\Pp70.exe";
 	args     = r => [r.inFile()];
 	osData   = r => ({

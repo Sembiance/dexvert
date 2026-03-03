@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class canvas5 extends Program
 {
 	website  = "https://winworldpc.com/product/deneba-canvas/5x";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Canvas5\\Canvas5.exe";
 	flags   = {
 		vector : "Set this to true and it will be converted as a vector image."

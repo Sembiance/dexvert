@@ -6,7 +6,7 @@ export class demoleition extends Program
 {
 	website  = "https://lifeinhex.com/updated-molebox-unpacker/";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\demoleition.exe";
 	args     = r => [`c:\\out\\${path.basename(r.inFile())}`];
 	osData   = r => ({

@@ -5,7 +5,7 @@ import {path} from "std";
 export class cinema4D427 extends Program
 {
 	website = "https://archive.org/details/maxoncinema4dr4.27.7z";
-	loc     = "win2k";
+	loc     = "win7";
 	bin     = "c:\\dexvert\\Cinema 4D R4.27\\Cinema4D.exe";
 	args    = r => [r.inFile()];
 	osData  = r => ({

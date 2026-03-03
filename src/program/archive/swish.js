@@ -7,7 +7,7 @@ export class swish extends Program
 	website = "https://archive.org/details/onyxdvd-16";
 	bin     = "c:\\Program Files\\SWiSH v2.0\\Swish2.exe";
 	args    = r => [r.inFile()];
-	loc     = "win2k";
+	loc     = "win7";
 	osData  = r => ({
 		script : `
 			Func MainWindowOrFailure()

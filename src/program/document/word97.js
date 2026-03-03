@@ -4,7 +4,7 @@ export class word97 extends Program
 {
 	website  = "https://archive.org/details/office97standard_201912/";
 	notes    = "revisableFormText converter from: http://www.gmayor.com/downloads.htm";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Microsoft Office\\Office\\WINWORD.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({

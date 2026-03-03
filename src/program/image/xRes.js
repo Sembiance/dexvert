@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 
 export class xRes extends Program
 {
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Macromedia\\xRes3\\XRES3.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({

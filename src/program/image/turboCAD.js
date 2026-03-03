@@ -6,7 +6,7 @@ export class turboCAD extends Program
 {
 	website  = "https://archive.org/details/onyxdvd-16";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\IMSI\\TCW90\\Program\\Tcw90.exe";
 	args     = r => [r.inFile()];
 	osData   = r => ({

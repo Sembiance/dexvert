@@ -17,12 +17,33 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* This "Polygon File Format (Alt)" in dexmagic is wrong, rename it somethign else, remove from poloygonFileFormat.js and maybe vibe a different ply2obj.py converter
+
 * Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt
+
+* Goal: Get rid of 86box
+  If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism
+  ensure full test suite worked with new 2-cores win7
+  Process:
+    Start with winxp (only 33 programs), then later win2k (61 programs)
+  	Pick a program
+	Install on QEMU Win7
+	Get it to work (Can right click the exe and under Compatability can run it in Win2k/WinXP mode)
+	testdexvert any formats that call that program, make sure test still passes
+	do NOT uninstall it from win2k/winxp 86box image, just leave it there
+	Move on to next program
+  If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
+  but ideally I'd just have win7 QEMU
+  After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
 /-------------\
 | Vibe Viable |
 \-------------/
 * Investigate these 180,000 unknown image files: https://discmaster.textfiles.com/search?detection=50424d50*
+
+* Had to drop support for these due to win7 exclusive adoption. Vibe these:
+	hyperWriter (just the .hw3 versions)			https://discmaster.textfiles.com/search?extension=hw3&format=hyperWriter
+	accessDatabase  (msAccess95)		app-office/mdbtools  vibe to support the formats I was using msAccess95 for before
 
 * Add more support for these samples: https://discmaster.textfiles.com/search?extension=xtc&detection=4d4f5320444154*
   Right now dragonUnpacker supports some, but not many, but it identifies to all of them.
@@ -123,22 +144,6 @@
   I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
   After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
 
-* Goal: Get rid of 86box
-  If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism
-  FIRST, try running win7 manually --cores=2 to see how it does
-  If it loads just fine, no complaints, then reduce cores to 2 in os.js and then testdexvert some formats that use win7 converters
-  then run a full dexdrone0 test suite
-  Process:
-    Start with winxp (only 33 programs), then later win2k (61 programs)
-  	Pick a program
-	Install on QEMU Win7
-	Get it to work (Can right click the exe and under Compatability can run it in Win2k/WinXP mode)
-	testdexvert any formats that call that program, make sure test still passes
-	do NOT uninstall it from win2k/winxp 86box image, just leave it there
-	Move on to next program
-  If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
-  but ideally I'd just have win7 QEMU
-  After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
 >>> Blender 5
 * Update to Blender 5. I could go with the binary verison (https://download.blender.org/release/Blender5.0/) or Gentoo.

@@ -5,7 +5,7 @@ export class EXE2SWFExtractor extends Program
 {
 	website  = "https://sothink.com/product/flashdecompiler/";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "EXE2SWFExtractor.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

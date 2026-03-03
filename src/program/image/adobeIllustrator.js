@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class adobeIllustrator extends Program
 {
 	website  = "https://winworldpc.com/product/adobe-illustrator/80";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Adobe\\Illustrator 8.0\\Illustrator.exe";
 	unsafe   = true;
 	args     = r => [r.inFile()];

@@ -1,0 +1,60 @@
+New improvememts for HyperReader 3.3.
+
+Brief Description of HyperReader
+HyperReader is the royalty free runtime created by NTERGAID Inc. of Fairfield CT. for the display and use of hypermedia publications that are created with NTERGAID'S premier hypermedia authoring program HyperWriter. Unlike other authoring tools HyperWriter and HyperReader provide the author with tremedously powerfull capabilities to intergrate live video from CD's, animations, full sound, superVGA graphics and your text with the ease of a wordprocessor.
+
+For more information write:
+NTERGAID Inc.
+2490 Black Rock Tpke.
+Suite 337
+Fairfiled, CT 06430
+(203) 368-0632
+FAX: (203) 334-5658
+
+Please tell them Maurice Bergeron (a HyperWriter registered user)
+told you about their product. With HyperWriter 3.x we produce paperless bible related literature and study helps under the names of INGRACE(tm) and InSIGHTS!(tm) both are a ministry of InSIGHTS! Publications. We also produce electronic publications for third parties.
+
+New Features in version 3.3
+---------------------------
+
+SuperVGA Support
+HyperReader 3.03 now has extensive support for SuperVGA images supporting 
+images of 640x480x256 colors with support for over 17 different chip sets.  
+To use SuperVGA images in HyperWriter 3.03, the supplied SVCONFIG program must first be run.  This program displays a list of supported SuperVGA chip sets for you to select from.  After selecting the desired chip set, all the .INI files in the current directory for HyperReader are modified to indicate what chip set is installed in the system.
+
+SVCONFIG is the configuration program for choosing what SuperVGA chipset is 
+presently in your machine.  This program can be freely distributed with your 
+HyperWriter applications just as you distribute HyperReader.  If your 
+applications use SuperVGA images, your users will have to run SVCONFIG before running HyperReader.
+
+Auto Select 1st Button Option in HyperReader
+A new option in HyperReader, Auto Select 1st Button, automatically selects the first button or link in the current topic.  This allows significantly easier navigation in HyperReader.  To use this option, select the General options dialog box from the Options menu and then select the "Auto Select 1st Button" option with TAB and SPACEBAR.  
+
+Keep Paths with Filenames
+An option to HyperReader, Use Paths with Linked Files, has been added to
+HyperReader.  This option, acessed from the General command on the Options
+menu, instructs HyperReader whether or not to use stored pathnames when
+retrieving documents. 
+ 
+Hourglass on Access 
+An hourglass has been added to HyperReaders' mouse pointer.  This hourglass
+is automatically displayed when accessing a topic takes a significant amount
+of time (i.e. longer than 1/2 second).  This prevents confusion regarding delays due to file or network access. 
+
+Real Sound and Network Drivers 
+Due to network incompatibilities, Real Sound support (audio through the PC's
+speaker) has been automatically turned off if network driver software is
+discovered.  This prevents possibile network incompatibilities. 
+ 
+CTRL+PG UP and CTRL+PG DN 
+The Control Page Up and Control Page Down keystrokes have been added to
+HyperReaderr to move to the beginning and end of the presently displayed
+screen. 
+
+To Install
+----------
+Due to the practices of many BBS system and distributors the HRREAD* program files may be contained in either a self-extracting EXE library file or within a common ZIP, PAK, ARJ, or even a ZOO. Any diskette from 1.2meg or higher we will sufficient.
+
+Extract all files to a floppy and from there run zinstall.exe.
+Older versions will be overwritten so please make precuations such as backups if needed. All "HW3" files will not be over written.
+

@@ -6,7 +6,7 @@ export class dfm2txt extends Program
 	flags   = {
 		type : `Which type of input file, bin or res. Default: bin`
 	};
-	loc       = "win2k";
+	loc       = "win7";
 	bin       = "dfm2txt.exe";
 	args      = r => [r.flags.type || "bin", r.inFile(), "c:\\out\\out.txt"];
 	renameOut = true;

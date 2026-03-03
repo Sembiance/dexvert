@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class luraWave extends Program
 {
 	website  = "https://archive.org/download/plug-in-power-pack-for-netscape-communicator/Plug-In%20Power%20Pack%20for%20Netscape%20Communicator.iso/plugins%2Flw20free.exe";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\LuraWave20\\LuRaWave.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

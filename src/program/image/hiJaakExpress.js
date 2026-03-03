@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class hiJaakExpress extends Program
 {
 	website  = "https://archive.org/details/hijaak-express";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\IMSI\\HiJaak Express\\bin\\hjcvt32.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

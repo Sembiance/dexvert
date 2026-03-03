@@ -6,7 +6,7 @@ export class dirOpener extends Program
 {
 	website  = "https://www.buraks.com/swifty/xena.html";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "dirOpener300-850-1-PC.exe";
 	args     = () => [];
 	osData   = r => ({

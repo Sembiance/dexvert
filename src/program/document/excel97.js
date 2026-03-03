@@ -7,7 +7,7 @@ export class excel97 extends Program
 	flags   = {
 		outMethod : `How to output. Can specify 'print' to print to pdf, otherwise an .xls file is saved and chained to soffice.`
 	};
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Microsoft Office\\Office\\EXCEL.EXE";
 	unsafe   = true;
 	args     = r => [r.inFile()];
@@ -30,9 +30,7 @@ export class excel97 extends Program
 				$printWindow = WindowRequire("Print", "", 10)
 				Send("{ENTER}")
 			
-				$savePDFWindow = WindowRequire("Save PDF File As", "", 5)
-				Send("c:\\out\\out.pdf{ENTER}")
-				WinWaitClose($savePDFWindow)
+				HandleCutePDFPrint()
 			` : `
 				SendSlow("!fa")
 

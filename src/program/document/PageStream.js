@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 export class PageStream extends Program
 {
 	website  = "https://pagestream.org/";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\PageStream\\PageStream5.exe";
 	notes    = "This program is very finicky and fragile and slow. Often the PDF generation doesn't work and Print to PDF doesn't work either. Installed is version 5. I tried updated to 5.1.2 and it was WORSE. Bleh.";
 	args     = r => [r.inFile()];

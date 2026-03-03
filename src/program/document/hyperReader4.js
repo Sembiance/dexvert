@@ -6,7 +6,7 @@ import {path} from "std";
 export class hyperReader4 extends Program
 {
 	website  = "https://discmaster.textfiles.com/browse/21823/Pegasus_Windows_20.iso/pegasus/w_editor/hrw40.zip";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\hrw40\\HRW.EXE";
 	unsafe   = true;
 	args     = r => [r.inFile()];

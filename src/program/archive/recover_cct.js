@@ -6,7 +6,7 @@ export class recover_cct extends Program
 {
 	website  = "https://archive.org/details/recover_cct";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\recover-cct\\recover-cct.exe";
 	args     = () => [];
 	osData   = r => ({

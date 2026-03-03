@@ -1,13 +1,14 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class pageMaker4 extends Program
 {
 	website  = "https://winworldpc.com/product/aldus-pagemaker/40";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\PM4\\PM4.exe";
 	args     = r => [r.inFile()];
-	osData   = ({
+	osData   = r => ({
 		scriptPre : `
 			DirRemove("c:\\ALDUS", 1)
 			DirCopy("c:\\dexvert\\ALDUS4", "c:\\ALDUS", 1)`,
@@ -23,6 +24,8 @@ export class pageMaker4 extends Program
 				EndIf
 			EndFunc
 			CallUntil("PreOpenWindows", ${xu.SECOND*4})
+
+			$docWindow = WindowRequire("", "C:\\IN\\${path.basename(r.inFile()).toUpperCase()}", 25)
 
 			Send("^p")
 
@@ -44,9 +47,7 @@ export class pageMaker4 extends Program
 			EndFunc
 			CallUntil("PostPrintWindows", ${xu.SECOND*3})
 
-			$printAsWindow = WindowRequire("Save PDF File As", "", 5)
-			Send("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($printAsWindow, "", 3)
+			HandleCutePDFPrint()
 
 			Func PostPrintAsWindows()
 				WindowDismiss("[TITLE:Printers Folder]", "There was an error", "{TAB}{SPACE}")

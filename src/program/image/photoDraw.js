@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class photoDraw extends Program
 {
 	website  = "https://archive.org/details/PhotoDraw2000V2";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Microsoft Office\\Office\\PHOTODRW.EXE";
 	args     = () => [];
 	osData   = ({

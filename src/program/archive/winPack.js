@@ -5,7 +5,7 @@ export class winPack extends Program
 {
 	website  = "https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\WinPack300b\\WinPack.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

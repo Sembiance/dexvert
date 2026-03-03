@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class canvas extends Program
 {
 	website  = "http://fileformats.archiveteam.org/wiki/Canvas";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\ACD Systems\\Canvas 14\\Canvas14.exe";
 	flags   = {
 		nonRaster : "Set this to true and the raster enforcement check will be skipped. Warning, this can result in garbage output."

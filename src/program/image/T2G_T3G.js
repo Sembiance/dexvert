@@ -4,7 +4,7 @@ export class T2G_T3G extends Program
 {
 	website  = "https://archive.org/details/t425l1e_zip";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\tscad4\\T2G_T3G.EXE";
 	osData   = ({
 		script : `

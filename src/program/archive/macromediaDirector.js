@@ -5,7 +5,7 @@ import {path} from "std";
 export class macromediaDirector extends Program
 {
 	website  = "https://www.buraks.com/swifty/xena.html";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Macromedia\\Director MX 2004\\Director.exe";
 	//args     = r => [r.inFile()];	// Director DOES support opening the file directly by passing it as an arg, but then we don't get a chance to first "Enable" our movie restorer Xtra
 	notes    = "Sometimes a file can fail to copy over if there is severe CPU load on the host system. Adding more delays would slow down extraction too much. Adding logic to check that things are ready is probably the best approach, but meh.";

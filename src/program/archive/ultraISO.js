@@ -5,7 +5,7 @@ export class ultraISO extends Program
 {
 	website  = "https://www.ezbsystems.com/ultraiso/history.htm";
 	loc      = "win7";
-	bin      = "c:\\Program Files (x86)\\UltraISO\\UltraISO.exe";
+	bin      = "c:\\Program Files\\UltraISO\\UltraISO.exe";
 	args     = r => [r.inFile()];
 	osData   = () => ({
 		script : `

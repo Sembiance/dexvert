@@ -6,7 +6,7 @@ import {path} from "std";
 export class SID extends Program
 {
 	website  = "https://github.com/tylerapplebaum/setupinxhacking";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\SID\\sid.exe";
 	unsafe   = true;
 	args     = () => [];

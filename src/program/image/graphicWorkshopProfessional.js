@@ -5,7 +5,7 @@ import {path} from "std";
 export class graphicWorkshopProfessional extends Program
 {
 	website  = "http://www.mindworkshop.com/gwspro.html";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({

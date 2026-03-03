@@ -5,7 +5,7 @@ export class fastCAD extends Program
 {
 	website  = "https://fastcad2.com/";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "C:\\FCAD32D\\FCW32.EXE";
 	osData   = r => ({
 		script : `

@@ -20,7 +20,7 @@ const _FORMATS =
 export class milkShape3D extends Program
 {
 	website   = "http://www.milkshape3d.com/";
-	loc       = "winxp";
+	loc       = "win7";
 	bin       = "c:\\Program Files\\MilkShape 3D 1.8.4\\ms3d.exe";
 	flags   = {
 		format : "Which format is the input model"

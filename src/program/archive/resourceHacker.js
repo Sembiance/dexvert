@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class resourceHacker extends Program
 {
 	website  = "http://www.angusj.com/resourcehacker/";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\resource_hacker\\ResourceHacker.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class keyCADDeluxe3D extends Program
 {
 	website = "https://winworldpc.com/product/keycad/30-for-windows";
-	loc     = "win2k";
+	loc     = "win7";
 	bin     = "c:\\Program Files\\Creative Office\\KeyCAD Deluxe 3\\3D\\PROGRAM\\KCW3D.EXE";
 	args    = r => [r.inFile()];
 	osData  = ({

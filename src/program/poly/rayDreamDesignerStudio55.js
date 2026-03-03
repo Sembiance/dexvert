@@ -13,7 +13,7 @@ const _OUT_TYPE_DEFAULT = "quickDraw3D";
 export class rayDreamDesignerStudio55 extends Program
 {
 	website   = "https://archive.org/details/Ray_Dream_Studio_5.5_MetaCreations_1999";
-	loc       = "win2k";
+	loc       = "win7";
 	flags   = {
 		outType : `Which output file type to save as. Default: ${_OUT_TYPE_DEFAULT}`
 	};

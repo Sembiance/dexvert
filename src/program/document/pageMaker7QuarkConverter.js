@@ -5,7 +5,7 @@ import {path} from "std";
 export class pageMaker7QuarkConverter extends Program
 {
 	website  = "https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Adobe\\PageMaker 7.0\\Converter for MSP_QXP\\MSPublisher_Quark Converter.exe";
 	osData   = r => ({
 		dontMaximize : true,

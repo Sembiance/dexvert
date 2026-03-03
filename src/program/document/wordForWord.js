@@ -5,7 +5,7 @@ import {path} from "std";
 export class wordForWord extends Program
 {
 	website  = "https://archive.org/details/adobe-file-utilities-mac-win-1996";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\WFW\\WFWWIN32.EXE";
 	args     = r => [r.inFile()];
 	osData   = r => ({

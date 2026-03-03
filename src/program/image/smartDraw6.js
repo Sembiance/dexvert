@@ -6,7 +6,7 @@ export class smartDraw6 extends Program
 {
 	website  = "https://archive.org/details/twilight-dvd069";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\SmartDraw6\\SmartDraw.exe";
 	args     = r => [r.inFile()];
 	osData   = r => ({

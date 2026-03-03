@@ -8,7 +8,7 @@ export class awaveStudio extends Program
 	bin        = "c:\\Program Files\\Awave Studio\\Awave Studio.exe";
 	bruteFlags = { music : {} };
 	args       = () => ["-BATCH"];
-	loc        = "win2k";
+	loc        = "win7";
 	osData     = r => ({
 		script : `
 			WinWaitActive("Select conversion type", "", 10)

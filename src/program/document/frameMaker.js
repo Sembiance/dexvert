@@ -5,7 +5,7 @@ export class frameMaker extends Program
 {
 	website  = "https://winworldpc.com/product/framemaker/50";
 	unsafe   = true;
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\MAKER5\\FRAME.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({

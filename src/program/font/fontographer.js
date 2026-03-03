@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class fontographer extends Program
 {
 	website  = "https://www.fontlab.com/font-editor/fontographer/";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Fontlab\\Fontographer 5\\Fontographer 5.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

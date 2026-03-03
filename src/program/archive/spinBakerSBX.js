@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class spinBakerSBX extends Program
 {
 	website = "http://web.archive.org/web/20001218041900/www.spinnerbaker.com/sbx.htm";
-	loc     = "winxp";
+	loc     = "win7";
 	bin     = "c:\\Program Files\\Sbx\\Sbx.exe";
 	args    = r => [r.inFile()];
 	osData  = ({

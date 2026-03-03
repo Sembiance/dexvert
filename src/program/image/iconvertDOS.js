@@ -42,7 +42,7 @@ export class iconvertDOS extends Program
 {
 	website = "https://archive.org/details/IConvertV1.10DShareware";
 	unsafe  = true;
-	loc     = "win2k";	// this is a DOS program but doesn't run in dosbox, so we run it in win2k instead
+	loc     = "win7";	// this is a DOS program but doesn't run in dosbox, so we run it in win2k instead
 	bin     = "c:\\dexvert\\ICONVERT\\ICONVERT.COM";
 	flags   = {
 		format  : "Which format is the input picture",

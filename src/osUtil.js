@@ -4,7 +4,7 @@ import {RUNTIME} from "./Program.js";
 import {appendCommonFuncs} from "./autoItUtil.js";
 import {C} from "./C.js";
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scriptPre, timeout=xu.MINUTE*10, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
+export async function run({f, cmd, osid, args=[], cwd, meta, script, scriptPre, timeout=xu.MINUTE*10, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {
 	let fullCmd = cmd;
 	const osData = {osid, cmd, meta, timeout, outDirPath : f.outDir.absolute};

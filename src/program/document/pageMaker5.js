@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class pageMaker5 extends Program
 {
 	website  = "https://winworldpc.com/product/aldus-pagemaker/50";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "c:\\PM5\\PM5.exe";
 	args     = r => [r.inFile()];
 	osData   = ({
@@ -28,9 +28,7 @@ export class pageMaker5 extends Program
 			$printWindow = WindowRequire("Print", "", 5)
 			Send("{ENTER}")
 
-			$printAsWindow = WindowRequire("Save PDF File As", "", 5)
-			Send("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($printAsWindow, "", 3)
+			HandleCutePDFPrint()
 
 			Func PostPrintWindows()
 				WindowDismiss("[TITLE:Printers Folder]", "There was an error", "{TAB}{SPACE}")

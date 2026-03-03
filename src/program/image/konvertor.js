@@ -6,7 +6,7 @@ export class konvertor extends Program
 {
 	website = "https://www.logipole.com/konvertor-en.htm";
 	loc     = "win7";
-	bin     = "c:\\Program Files (x86)\\Konvertor\\KonvertorFM.exe";
+	bin     = "c:\\Program Files\\Konvertor\\KonvertorFM.exe";
 	args    = () => [];
 	osData  = r => ({
 		script : `

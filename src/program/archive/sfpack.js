@@ -7,7 +7,7 @@ export class sfpack extends Program
 	website = "https://archive.org/details/SFPack";
 	bin     = "c:\\dexvert\\SFPack\\SFPACK.EXE";
 	args    = r => [r.inFile()];
-	loc     = "win2k";
+	loc     = "win7";
 	osData  = r => ({
 		script : `
 			$mainWindow = WindowRequire("SFPack", "", 10)

@@ -6,7 +6,7 @@ export class ailink extends Program
 {
 	website = "https://ai.ansible.uk/ailink.html";
 	bin     = "c:\\dexvert\\ailink\\AILINK.EXE";
-	loc     = "win2k";
+	loc     = "win7";
 	args    = () => [];
 	osData  = r => ({
 		script : `

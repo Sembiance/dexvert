@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class quarkXPress6 extends Program
 {
 	website  = "https://archive.org/details/quarkxpress6.1version6.1r02004";
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\Program Files\\Quark\\QuarkXPress 6.1\\QuarkXPress Passport.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

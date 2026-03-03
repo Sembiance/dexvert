@@ -6,7 +6,7 @@ export class imjview extends Program
 {
 	website  = "https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/IMPACJ11.ZIP";
 	unsafe   = true;
-	loc      = "winxp";
+	loc      = "win7";
 	bin      = "c:\\dexvert\\IMPACJ11\\IMJVIEW.EXE";
 	args     = () => [];
 	osData   = r => ({

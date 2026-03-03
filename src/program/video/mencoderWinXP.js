@@ -8,7 +8,7 @@ export class mencoderWinXP extends Program
 		outType : `Which format to output: avi mp3. Default is avi`
 	};
 	unsafe       = true;
-	loc          = "winxp";
+	loc          = "win7";
 	checkForDups = true;
 	bin          = "c:\\dexvert\\mplayer\\mencoder.exe";
 	args         = r => [r.inFile(), "-o", `out.${r.flags.outType || "avi"}`, "-ovc", "lavc", "-oac", "pcm"];

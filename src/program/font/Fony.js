@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class Fony extends Program
 {
 	website  = "http://hukka.ncn.fi/?fony";
-	loc      = "win2k";
+	loc      = "win7";
 	bin      = "Fony.exe";
 	args     = r => [r.inFile()];
 	osData   = ({

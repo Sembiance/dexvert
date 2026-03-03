@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class wordStar extends Program
 {
 	website  = "https://en.wikipedia.org/wiki/WordStar";
-	loc      = "win2k";
+	loc      = "win7";
 	unsafe   = true;
 	bin      = "c:\\WSWIN\\WSWIN.EXE";
 	args     = r => [r.inFile()];
@@ -25,12 +25,8 @@ export class wordStar extends Program
 			$printWindow = WindowRequire("Print", "", 10)
 			Send("{ENTER}")
 		
-			$savePDFWindow = WindowRequire("Save PDF File As", "", 5)
-			Send("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($savePDFWindow)
-
-			; There are some windows in-between but they go too fast
-			WinWaitClose("Print Status", "", 10)
+			HandleCutePDFPrint()
+			
 			WinWaitActive($mainWindow, "", 15)
 
 			; This is the old export to .txt code

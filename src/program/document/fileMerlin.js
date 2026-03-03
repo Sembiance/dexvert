@@ -11,7 +11,7 @@ export class fileMerlin extends Program
 		type    : "Which format to specify for the input format. Default: AUTO (let FileMerlin decide)",
 		outType : "Which format to specify for the output. Default: PDF"
 	};
-	loc       = "winxp";
+	loc       = "win7";
 	bin       = "c:\\ACI Programs\\FMerlin\\fmn.exe";
 	args      = r => [`in(${path.basename(r.inFile())})`, `sfrm(${r.flags.type || "AUTO"})`, "out(c:\\out\\*.pdf)", `dfrm(${r.flags.outType || "PDF"})`];
 	osData    = ({

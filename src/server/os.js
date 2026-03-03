@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {runUtil, fileUtil, sysUtil, printUtil, webUtil, cmdUtil} from "xutil";
+import {runUtil, fileUtil, printUtil, webUtil, cmdUtil} from "xutil";
 import {path, delay} from "std";
 import {C} from "../C.js";
 import {XLog} from "xlog";
@@ -21,62 +21,29 @@ const OS_INSTANCE_DIR_PATH = "/mnt/dexvert/os";
 const OS_INSTANCE_START_INTERVAL = 500;
 
 const OS = {
-	win2k :
-	{
-		debug       : false,
-		qty         : navigator.hardwareConcurrency===32 ? 3 : 8,
-		ramGB       : 2,
-		scriptExt   : ".au3",
-		emu         : "86Box",
-		emuArgs     : () => (["86box.cfg"]),
-		copy        : ["86box.cfg", "nvr"],
-		hd          : ["hd.vhd"],
-		archiveType : "zip"
-	},
-	winxp :
-	{
-		debug       : false,
-		qty         : navigator.hardwareConcurrency===32 ? 3 : 8,
-		ramGB       : 2,
-		scriptExt   : ".au3",
-		emu         : "86Box",
-		emuArgs     : () => (["86box.cfg"]),
-		copy        : ["86box.cfg", "nvr"],
-		hd          : ["hd.vhd"],
-		archiveType : "zip"
-	},
 	win7 :
 	{
 		debug     : false,
-		qty       : navigator.hardwareConcurrency===32 ? 2 : 4,
-		ramGB     : 8,
-		cores     : 4,
+		qty       : navigator.hardwareConcurrency===32 ? 8 : 2,
+		ramGB     : 3,
+		cores     : 2,
 		scriptExt : ".au3",
 		emu       : "qemu-system-x86_64",
 		emuArgs   : instance => ([
-			"-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=2023-03-01T10:00:00", "-device", "virtio-rng-pci", "-m", `size=${OS[instance.osid].ramGB}G`, "-smp", `cores=${OS[instance.osid].cores}`, "-vga", "cirrus",
+			"-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=2026-03-03T07:12:00", "-cpu", "host", "-device", "virtio-rng-pci",
+			"-m", `size=${OS[instance.osid].ramGB}G`, "-smp", `cores=${OS[instance.osid].cores}`, "-vga", "std",
 			//"-audiodev", "none,id=audio0", "-device", "ac97,audiodev=audio0",	// Used to enable sound if you discover any programs that need it
-			"-drive", "format=qcow2,if=ide,index=0,file=hd.qcow2", "-boot", "order=c",
-			"-netdev", `user,net=192.168.51.0/24,dhcpstart=192.168.51.${20+instance.instanceid},id=nd1`, "-device", "rtl8139,netdev=nd1", "-drive", `if=floppy,media=disk,format=raw,file=${path.join(instance.dirPath, "instance.img")}`
+			"-drive", "format=qcow2,if=virtio,index=0,file=hd.qcow2,cache=writeback,aio=threads,discard=unmap", "-boot", "order=c",
+			"-netdev", `user,net=192.168.51.0/24,dhcpstart=192.168.51.${20+instance.instanceid},id=nd1`, "-device", "virtio-net-pci,netdev=nd1", "-drive",
+			`if=floppy,media=disk,format=raw,file=${path.join(instance.dirPath, "instance.img")}`
 		]),
 		hd          : ["hd.qcow2"],
 		archiveType : "zip"
 	}
 };
 
-const RAM_PERCENTAGE_TARGET = 0.8;
-const RAM_PERCENTAGE_TARGET_HOST = {eaglehollow : 0.4, crystalsummit : 0.4};
-
-// reduce instance quantity to fit in 40% of available cores or 1 each if set to debug
-const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.40);
-const totalDesiredCores = Object.values(OS).map(({qty}) => qty).sum();
 for(const o of Object.values(OS))
-	o.qty = o.debug ? 1 : Math.min(o.qty, Math.max(Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)), 2));	// eslint-disable-line sembiance/prefer-math-clamp
-
-// reduce instance quantity to fit in X% of available RAM
-const totalSystemRAM = (await sysUtil.memInfo()).total;
-while((Object.values(OS).map(({qty, ramGB}) => qty*ramGB).sum()*xu.GB)>(totalSystemRAM*(RAM_PERCENTAGE_TARGET_HOST[Deno.hostname()] || RAM_PERCENTAGE_TARGET)))
-	Object.values(OS).forEach(o => { o.qty = Math.max(1, o.qty-1); });
+	o.qty = o.debug ? 1 : o.qty;
 
 const HTTP_DIR_PATH = "/mnt/ram/dexvert/http";
 const HTTP_IN_DIR_PATH = path.join(HTTP_DIR_PATH, "in");
@@ -127,10 +94,10 @@ const startOS = async (osid, instanceid) =>
 
 	for(const v of OS[osid].hd)
 	{
-		if(v.endsWith(".vhd"))
-			await runUtil.run("VBoxManage", ["createmedium", "disk", "--filename", path.join(instance.dirPath, v), "--format", "VHD", "--diffparent", path.join(OS_INSTANCE_DIR_PATH, osid, v)]);
-		else if(v.endsWith(".qcow2"))
+		if(v.endsWith(".qcow2"))
 			await runUtil.run("qemu-img", ["create", "-F", "qcow2", "-b", path.join(OS_INSTANCE_DIR_PATH, osid, v), "-f", "qcow2", path.join(instance.dirPath, v)]);
+		else
+			xlog.error`unknown hd file type: ${v}`;
 	}
 
 	await fileUtil.writeTextFile(path.join(instance.dirPath, "instance.txt"), instanceid.toString());
@@ -140,8 +107,6 @@ const startOS = async (osid, instanceid) =>
 	if(instance.debug)
 	{
 		emuOpts.env.DISPLAY = ":0";
-		if(OS[osid].emu==="86Box")
-			emuOpts.env.EMU86BOX_MOUSE = "evdev";
 	}
 	else
 	{

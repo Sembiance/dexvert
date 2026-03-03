@@ -1,7 +1,1 @@
-win2k/hd.vhd
-win2k/nvr/
-
-winxp/*.vhd
-winxp/nvr/
-
 win7/*.qcow2

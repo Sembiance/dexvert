@@ -8,7 +8,7 @@ export class resourceEditor extends Program
 	loc      = "wine";
 	bin      = "c:\\dexvert\\ResourceEditor\\ResourceEditor.exe";
 	args     = r => [r.inFile()];
-	notes    = "This broke in 86Box. It's flaky in wine too, program doesn't seem to be able to export anything without errors. Blegh. So currently nothing is using this";
+	notes    = "This broke in 86Box. It's flaky in wine too, program doesn't seem to be able to export anything without errors. Blegh. So currently nothing is using this. Haven't tried win7 32bit yet";
 	wineData = r => ({
 		script : `
 			AutoItSetOption("SendKeyDelay", 20)

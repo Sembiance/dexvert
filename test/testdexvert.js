@@ -934,7 +934,11 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		if(diffFiles?.length && !FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
 		{
 			const caseInsensitiveDiff = diffUtil.diff(beforeKeys.map(v => v.toLowerCase()), afterKeys.map(v => v.toLowerCase()));
-			return await fail(`Created files are different: ${diffFiles.innerTruncate(3000)} (before: ${beforeKeys.length.toLocaleString()} files) (after: ${afterKeys.length.toLocaleString()} files) caseInsensitiveDiff: ${caseInsensitiveDiff.length ? `${caseInsensitiveDiff}` : "no differences"}${converterMismatch}`);
+			let msg = `Created files are different: ${diffFiles.innerTruncate(3000).trim()} (before: ${beforeKeys.length.toLocaleString()} files) (after: ${afterKeys.length.toLocaleString()} files)`;
+			if(caseInsensitiveDiff!==diffFiles.toLowerCase())
+				msg += ` caseInsensitiveDiff: ${caseInsensitiveDiff.length ? `${caseInsensitiveDiff}` : "no differences"}`;
+			msg += ` ${converterMismatch}`;
+			return await fail(msg);
 		}
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);

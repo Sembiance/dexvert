@@ -75,7 +75,6 @@ xu.waitUntil(async () =>
 	await stopDexserver();
 }, {interval : xu.SECOND*2});
 
-// We can't do them all at once because os/86Box is sensitive to CPU fluctuations and they won't boot properly if too much other CPU stuff is going on
 xlog.info`Starting ${SERVER_ORDER.length} servers...`;
 for(const serverid of SERVER_ORDER)
 {

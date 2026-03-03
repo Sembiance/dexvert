@@ -8,14 +8,16 @@ import {C} from "../src/C.js";
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexwine",
 	version : "1.0.0",
-	desc    : "Runs a program in a dex wine base prefix, to simulate it running in dexserver itself",
+	desc    : "Runs a program in a dex wine base prefix, to simulate it running in dexserver itself, can be used to install new software that needs an installer",
 	opts    :
 	{
 		base     : {desc : "What base to use", defaultValue : "base"},
 		arch     : {desc : "Which arch to use", defaultValue : "win32"},
 		console  : {desc : "Run the program in a console window"},
 		logLevel : {desc : "Log level to use", defaultValue : "trace"},
-		program  : {desc : "Use wineData from this program", hasValue : true}
+		program  : {desc : "Use wineData from this program", hasValue : true},
+		xvfb     : {desc : "Run the program in an xvfb window"},
+		cwd      : {desc : "Run the program in this directory, can use wine:// prefix", hasValue : true}
 	},
 	args :
 	[
@@ -28,6 +30,14 @@ const xlog = new XLog(argv.logLevel);
 const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getBaseEnv`)).json());
 if(existingEnv)
 	Deno.exit(xlog.error`Can't run this while dexserver is running!`);
+
+if(argv.xvfb)
+{
+	// Xvfb :99 -screen 0 1024x768x24 +extension GLX
+	// DISPLAY=:99 x11vnc
+	// change display below
+	// kill both when done
+}
 
 const wineBaseEnv = {
 	[argv.base] :
@@ -42,7 +52,16 @@ const routes = new Map();
 routes.set("/getBaseEnv", async () => Response.json(wineBaseEnv));	// eslint-disable-line require-await
 const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
 
-const wineData = {cmd : (await fileUtil.exists(argv.cmd) ? path.resolve(argv.cmd) : argv.cmd), args : argv.args || [], arch : argv.arch, base : argv.base, console : argv.console, xlog};
+const wineData = {
+	cmd     : (await fileUtil.exists(argv.cmd) ? path.resolve(argv.cmd) : argv.cmd),
+	args    : argv.args || [],
+	arch    : argv.arch,
+	base    : argv.base,
+	console : argv.console,
+	xlog
+};
+if(argv.cwd)
+	wineData.cwd = argv.cwd;
 if(argv.program)
 {
 	const programModule = await import(`../program/${argv.program}.js`);

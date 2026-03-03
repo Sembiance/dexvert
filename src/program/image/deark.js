@@ -55,7 +55,7 @@ export class deark extends Program
 			a.push("-main");
 		if(r.flags.file2)
 			a.push("-file2", r.flags.file2);
-		if(r.flags.recombine || r.flags.missingLetter || r.flags.restoreFilename)
+		if(r.flags.recombine || r.flags.missingLetter)
 			a.push("-d");
 		if(r.flags.extractAll)
 			a.push("-a");
@@ -153,10 +153,13 @@ export class deark extends Program
 
 		if(r.flags.missingLetter)
 		{
-			const {missingLetter} = (r.stdout.split("\n").find(line => line.trim().startsWith("DEBUG: missing filename char:")) || "").match(/missing filename char: '(?<missingLetter>.)'/)?.groups || {};
+			const missingLetterLine = (r.stdout.split("\n").find(line => line.trim().includes("missing filename char:")) || "");
+			const {missingLetter} = missingLetterLine.match(/missing filename char: (0x.. )?\(?'(?<missingLetter>.)'/)?.groups || {};
 			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
-			if(missingLetter && fileOutputPaths.length===1)
+			if(missingLetter && fileOutputPaths.length===1)	// eslint-disable-line unicorn/prefer-ternary
 				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext.substring(0, 3)}${r.originalInput.ext.substring(1, 3)===r.originalInput.ext.substring(1, 3).toUpperCase() ? missingLetter.toUpperCase() : missingLetter}`));
+			else
+				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext}`));
 		}
 
 		// so bsave images are very common, unfortunately there isn't a good way to determine what format that image is, so dexvert tries them all

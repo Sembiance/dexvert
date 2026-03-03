@@ -32,7 +32,7 @@ const EXTRA_PACKAGES =
 	"games-emulation/dosbox",
 	
 	// os.js (win2k & winxp & win7)
-	"app-emulation/86Box",
+	"app-emulation/86Box",	// still used by msdosUtil
 	"app-emulation/qemu",
 	"app-emulation/virtualbox",
 	"x11-misc/x11vnc",

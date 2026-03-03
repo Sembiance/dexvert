@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 
+
 export class quarkXPress6 extends Program
 {
 	website  = "https://archive.org/details/quarkxpress6.1version6.1r02004";
@@ -9,7 +10,12 @@ export class quarkXPress6 extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindow = WindowRequire("QuarkXPress Passport (tm)", "", 20)
+			Func MainWindowOrActivate()
+				WindowDismiss("Activate QuarkXPress 6.1", "", "{TAB}{ENTER}")
+				return WinActive("QuarkXPress Passport (tm)", "")
+			EndFunc
+			$mainWindow = CallUntil("MainWindowOrActivate", ${xu.SECOND*20})
+
 			Func PreOpenWindows()
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some settings saved with this project are different", "{ENTER}")
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "uses fonts not installed", "{TAB}{ENTER}")

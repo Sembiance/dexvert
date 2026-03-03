@@ -15,5 +15,5 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${C.WINE_WEB_HOST}:${C.WINE_WEB_PORT}/getBaseEnv`)).json());
-await runUtil.run("wine", [argv.winSpy ? `c:\\dexvert\\winspy.exe` : (argv.winSpector ? "c:\\Program Files\\Winspector\\WinspectorU.exe" : "c:\\Program Files\\AutoIt3\\Au3Info.exe")], {liveOutput : true, env : {WINEARCH : argv.arch, ...existingEnv[argv.base]}});
+await runUtil.run("wine", [argv.winSpy ? `c:\\dexvert\\winspy.exe` : (argv.winSpector ? "c:\\Program Files\\Winspector\\WinspectorU.exe" : `c:\\Program Files${argv.base==="win64" ? " (x86)" : ""}\\AutoIt3\\Au3Info.exe`)], {liveOutput : true, env : {WINEARCH : argv.arch, ...existingEnv[argv.base]}});
 

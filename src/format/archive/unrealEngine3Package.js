@@ -8,5 +8,6 @@ export class unrealEngine3Package extends Format
 	magic          = ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", /^Unreal (Audio|Engine) package/, /^Rune map$/, /^geArchive: U_\d+( |$)/, /^geArchive: UE3_\d+( |$)/];
 	forbiddenMagic = ["Unreal Music"];
 	idMeta         = ({macFileType, macFileCreator}) => ["UnDt", "UnMp", "UnMu", "UnSn", "UnTx"].includes(macFileType) && ["DsEx", "Rune", "Unrl", "UnTn"].includes(macFileCreator);
-	converters     = ["gameextractor"];
+	converters     = [`gameextractorCLI`];
 }
+

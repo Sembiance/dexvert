@@ -17,7 +17,7 @@ export class micrografxDraw extends Format
 		"canvas5[vector]",
 		
 		// raster
-		"corelDRAW", "hiJaakExpress", "photoDraw", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster][hasExtMatch]"
+		"corelDRAW", "hiJaakExpress", "photoDraw", "picturePublisher", "canvas[matchType:magic][nonRaster][hasExtMatch]"
 	];
 	verify         = ({meta}) => meta.colorCount>1;
 }

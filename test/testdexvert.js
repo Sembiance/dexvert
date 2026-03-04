@@ -25,6 +25,9 @@ const xlog = new XLog(argv.debug ? "debug" : "info", {alwaysEcho : !argv.json});
 if(argv.record && Deno.hostname()!==DEXDRONE_TRUTH_HOST)
 	Deno.exit(xlog.error`Recording new test results is only allowed on ${DEXDRONE_TRUTH_HOST}`);
 
+if(argv.argv?.length)
+	Deno.exit(xlog.error`Unexpected arguments ${argv.argv} did you forget --file ?`);
+
 const testLogLines = [];
 xlog.logger = line => testLogLines.push(line);
 
@@ -335,13 +338,14 @@ const FLEX_SIZE_FORMATS = {
 		lotusChart       : 5,
 		odg              : 20,  	// also differs per host
 		pes              : 0.1,
+		pictureIt        : 2,
 		pgx              : 10,
 		qpcImage         : 10,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
 		theDraw          : 0.1,
 		windowsClipboard : 0.1,
-		xwd              : 20,
+		xwd              : 30,
 
 		// differs depending on host
 		avif     : 1,	// avifdec
@@ -480,6 +484,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/archive\/linuxEXTFilesystem\/(2940-sbpcd-nonet\.img|filesys-ELF-2\.0\.x)$/, "archive", "iso"],
 	[/archive\/macBinary\/Guy's Mac Contacts\.cpt$/, "executable", "macOSExecutable"],
 	[/archive\/mdf\/R180 NG Media 1\.mdf$/, "archive", "iso"],
+	[/archive\/qwkMessages\/cblp9vyhu\.DAT$/, "text", "txt"],	// actually a proper handling by the unqwk, just has no message in it, so falls back to txt
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],

@@ -10,7 +10,7 @@ const _WEAK_PREFIX_CODES =
 	30 : ["BIN_", "DAT_", "NoExt_", "PAK_"],
 	25 : ["RES_", "WAD_"]
 };
-const _SKIP_CODES = new Set([
+const _SKIP_CODES = new Set([][
 	"AFS_AFS_WE00", "AMM_FORM", "ARC_ARC", "ARK_2", "CEG_GEKV", "BMP_BMP", "DBS", "DLL_MZ",
 	"FBZ_PK", "FLA", "GUT", "ISO", "JavaImagingUtilities", "LBM_FORM", "MHTML", "MP3",
 	"PAK_FORM", "PCG", "PCK_2", "PKBARC_BMT", "PKF", "PRJ_PROJ",

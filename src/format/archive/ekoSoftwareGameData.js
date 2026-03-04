@@ -5,6 +5,6 @@ export class ekoSoftwareGameData extends Format
 	name           = "Eko Software game data";
 	ext            = [".rck"];
 	forbidExtMatch = true;
-	magic          = ["Eko Software game data", /^geArchive: RCK_RKET( |$)/];
+	magic          = ["Eko Software game data", "How to Survive series game data", "Format: RCK", /^geArchive: RCK_RKET( |$)/];
 	converters     = ["gameextractor[codes:RCK_RKET]"];
 }

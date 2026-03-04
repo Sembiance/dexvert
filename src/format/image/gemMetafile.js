@@ -8,5 +8,5 @@ export class gemMetafile extends Format
 	magic      = [/^GEM [Mm]etafile/, /^fmt\/(542|543)( |$)/, /^x-fmt\/215( |$)/];
 	idMeta     = ({macFileType}) => macFileType==="GEM-";
 	notes      = "Vector file format that could be converted into SVG. abydos is working on adding support for this format.";
-	converters = ["corelPhotoPaint", "corelDRAW"];
+	converters = ["gem2svg", "corelDRAW"];
 }

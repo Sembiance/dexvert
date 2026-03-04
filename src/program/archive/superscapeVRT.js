@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {path} from "std";
+import {fileUtil} from "xutil";
 
 export class superscapeVRT extends Program
 {
@@ -39,14 +40,19 @@ export class superscapeVRT extends Program
 			SendSlow("ie")
 			WindowDismiss("VRML Export Options", "", "{ENTER}")
 			$exportVRMLWindow = WindowRequire("Export VRML File", "", 10)
-			Send("c:\\out\\world.wrl{ENTER}")
+			MouseClick("left", 731, 486)
+			SendSlow("+{TAB}+{TAB}{DOWN}{DOWN}{UP}c{ENTER}")
+			SendSlow("{TAB}{TAB}{DOWN}{UP}{ENTER}")
+			SendSlow("out{ENTER}")
+			SendSlow("{TAB}{TAB}{ENTER}")
+
 			WinWaitClose($exportVRMLWindow, "", 10)
 			$exportProgressWindow = WinWaitActive("Export VRML", "", 4)
 			If $exportProgressWindow Then
 				WinWaitClose($exportProgressWindow, "", 240)
 			EndIf
-			WaitForStableFileSize("c:\\out\\world.wrl", ${xu.SECOND*3}, ${xu.SECOND*25})
-
+			WaitForStableDirCount("c:\\out", ${xu.SECOND*3}, ${xu.SECOND*25})
+			
 			; Script
 			Send("!e")
 			SendSlow("sw")
@@ -114,7 +120,17 @@ export class superscapeVRT extends Program
 				Send("!f")
 				SendSlow("ie")
 				$saveImageWindow = WindowRequire("Save as Picture", "", 5)
-				Send("c:\\out\\" & $fileName & ".pcx{ENTER}")
+				MouseClick("left", 731, 486)
+				SendSlow("+{TAB}+{TAB}{DOWN}{DOWN}{UP}c{ENTER}")
+				SendSlow("{TAB}{TAB}{DOWN}{UP}{ENTER}")
+				SendSlow("out{ENTER}")
+				MouseClick("right", 731, 486)
+				SendSlow("{UP}{UP}{RIGHT}{ENTER}")
+				Send($fileName)
+				SendSlow("{ENTER}{ENTER}")
+				MouseClick("left", 731, 486)
+				SendSlow("{TAB}{TAB}{ENTER}")
+				;Send("c:\\out\\" & $fileName & ".pcx{ENTER}")
 				WinWaitClose($saveImageWindow, "", 5)
 				WinWaitActive($mainWindow, "", 5)
 				Send("!i")
@@ -138,7 +154,11 @@ export class superscapeVRT extends Program
 				Send("!f")
 				SendSlow("fa")
 				$saveSoundWindow = WindowRequire("Save Sound File", "", 5)
-				Send("c:\\out\\world.snd{ENTER}")
+				MouseClick("left", 731, 486)
+				SendSlow("+{TAB}+{TAB}{DOWN}{DOWN}{UP}c{ENTER}")
+				SendSlow("{TAB}{TAB}{DOWN}{UP}{ENTER}")
+				SendSlow("out{ENTER}")
+				SendSlow("{TAB}{TAB}{ENTER}")
 				WinWaitClose($saveSoundWindow, "", 5)
 			EndIf
 			
@@ -146,6 +166,19 @@ export class superscapeVRT extends Program
 			Send("x")
 			WinWaitClose($mainWindow, "", 5)`
 	});
+	postExec = async r =>
+	{
+		const outDirPath = r.outDir({absolute : true});
+		const dirOutputPaths = await fileUtil.tree(outDirPath, {nofile : true});
+		for(const dirOutputPath of dirOutputPaths)
+		{
+			const fileOutputPaths = await fileUtil.tree(dirOutputPath, {nodir : true});
+			if(fileOutputPaths.length!==1)
+				continue;
+			await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${path.basename(dirOutputPath)}${path.extname(fileOutputPaths[0])}`));
+			await fileUtil.unlink(dirOutputPath);
+		}
+	};
 	renameOut = false;
 	chain = "?nconvert";
 	chainCheck = (r, chainFile) => chainFile.ext.toLowerCase()===".pcx";

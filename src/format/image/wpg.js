@@ -12,5 +12,5 @@ export class wpg extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"convert", "deark[module:wpg]", "nconvert[format:wpg]", `abydosconvert[format:${this.mimeType}]`,
-		"keyViewPro", "photoDraw", "hiJaakExpress", "corelPhotoPaint", "pv[matchType:magic]", "canvas5[matchType:magic][vector]", "canvas[matchType:magic][nonRaster]"];
+		"keyViewPro", "photoDraw", "hiJaakExpress", "pv[matchType:magic]", "canvas5[matchType:magic][vector]", "canvas[matchType:magic][nonRaster]"];
 }

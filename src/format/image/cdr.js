@@ -18,6 +18,6 @@ export class cdr extends Format
 		"canvas5[vector]",
 		
 		// raster
-		"photoDraw", "nconvert[format:cdr]", "corelDRAW", "deark[module:cdr_wl]", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas"
+		"photoDraw", "nconvert[format:cdr]", "corelDRAW", "deark[module:cdr_wl]", "hiJaakExpress", "picturePublisher", "canvas"
 	];
 }

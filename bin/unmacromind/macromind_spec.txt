@@ -67,9 +67,14 @@ resource fork uses the standard Apple Resource Manager format and contains
 Director-specific resource types for movie configuration, cast members
 (sprites, sounds, text), the score (animation timeline), and Lingo scripts.
 
+Earlier VideoWorks movies may use:
+  - File Type:    VWSC (VideoWorks Score)
+  - Creator Code: MMVW (MacroMind VideoWorks)
+
 For archival and transport, these files are wrapped in MacBinary II containers
-which preserve both the data fork (empty in this case) and resource fork along
-with Finder metadata.
+which preserve both the data fork and resource fork along with Finder metadata.
+Files may also be encountered as raw Apple Resource Forks (without a MacBinary
+wrapper) or as data-fork-only files (score data without media resources).
 
 All multi-byte integers are BIG-ENDIAN unless noted otherwise.
 
@@ -1093,7 +1098,7 @@ SitC     var    StuffIt compression resource
 DKH(tm)  1      DiskDoubler/Hook resource
 SAM(v)   2      SAM antivirus resource
 
-Frequency values are out of 2788 sample files tested. "var" indicates
+Frequency values are out of 3130 sample files tested. "var" indicates
 the type appears across multiple samples but exact frequency was not
 individually counted.
 

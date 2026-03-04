@@ -19,6 +19,6 @@ export class gem extends Format
 		
 		// Abydos and nconvert handle the color in flag_b24 and tru256 (nconvert messes up some other images colorspaces (as usual for nconvert))
 		//`abydosconvert[format:${this.mimeType}]`, "nconvert[format:gem]",
-		//"canvas5[strongMatch][matchType:magic][hasExtMatch]", "hiJaakExpress[strongMatch]", "pv[strongMatch]", "corelPhotoPaint[strongMatch]"
+		//"canvas5[strongMatch][matchType:magic][hasExtMatch]", "hiJaakExpress[strongMatch]", "pv[strongMatch]"
 	];
 }

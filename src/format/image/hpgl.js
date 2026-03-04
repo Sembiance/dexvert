@@ -37,9 +37,6 @@ export class hpgl extends Format
 	converters     = [
 		// svg
 		"viewCompanion",
-
-		// png
-		"corelPhotoPaint",
 		
 		// svg, but super slow, so we only do it if we have both ext and magic match
 		"canvas[strongMatch][hasExtMatch][nonRaster]"

@@ -6,7 +6,8 @@ export class cazip extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/CAZIP";
 	ext            = [".caz", "_"];
 	forbidExtMatch = ["_"];
+	packed         = true;
 	magic          = ["CAZIP compressed file", "deark: cazip"];
-	converters     = ["cazip", "deark[module:cazip]"];
+	converters     = ["deark[module:cazip]", "cazip"];
 }
 

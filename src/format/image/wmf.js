@@ -17,6 +17,6 @@ export class wmf extends Format
 
 		// raster
 		"convert", "iio2png",
-		"photoDraw", "keyViewPro", "corelDRAW", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"
+		"photoDraw", "keyViewPro", "corelDRAW", "hiJaakExpress", "picturePublisher", "canvas[matchType:magic][nonRaster]"
 	];
 }

@@ -12,7 +12,7 @@ export class pcd extends Format
 	converters = [
 		"pcdtojpeg", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:pcd]",
 		
-		...["hiJaakExpress", "picturePublisher", "corelPhotoPaint", "photoDraw", "canvas", "tomsViewer", "corelDRAW", "pv"].map(v => `${v}[matchType:magic]`)
+		...["hiJaakExpress", "picturePublisher", "photoDraw", "canvas", "tomsViewer", "corelDRAW", "pv"].map(v => `${v}[matchType:magic]`)
 	];
 
 	// If it fails, it often produces a 2x2 or 1x1 image, so exclude those

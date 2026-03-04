@@ -12,7 +12,7 @@ export class adobeIllustrator extends Format
 		"adobeIllustrator[matchType:magic]", "canvas5[vector]",
 
 		// raster
-		"corelPhotoPaint", "picturePublisher", "hiJaakExpress", "corelDRAW"
+		"picturePublisher", "hiJaakExpress", "corelDRAW"
 	];
 	verify = ({meta}) => meta.colorCount>1;
 }

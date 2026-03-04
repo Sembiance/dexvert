@@ -9,5 +9,5 @@ export class fpx extends Format
 	magic        = ["Kodak FlashPix bitmap", /^OLE 2 Compound Document.*FlashPIX/, /^x-fmt\/56( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="FPix" && macFileCreator==="LPSH";
 	metaProvider = ["image"];
-	converters   = ["convert", "photoDraw", "corelPhotoPaint"];	// canvas also supports this format, but only in a non-raster way which I don't trust enough with this generatic magic/ext
+	converters   = ["convert", "photoDraw"];	// canvas also supports this format, but only in a non-raster way which I don't trust enough with this generatic magic/ext
 }

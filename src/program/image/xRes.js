@@ -9,24 +9,20 @@ export class xRes extends Program
 	osData   = ({
 		script : `
 			$mainWindow = WindowRequire("Macromedia xRes", "", 10)
+			Sleep(1000)
 			MouseClick("left", 14, 28, 1, 0)
-			Sleep(200)
+			Sleep(500)
 			SendSlow("en")
 
 			$saveWindow = WindowRequire("Save Image", "", 10)
-			Send("c:\\out\\out.png{ENTER}")
+			Send("{TAB}{TAB}{TAB}{TAB}c:\\out\\out.png{ENTER}")
 			WinWaitClose($saveWindow, "", 10)
 
 			$pngOptionsWindow = WindowRequire("PNG Options", "", 10)
 			SendSlow("{UP}{UP}{ENTER}")
 			WinWaitClose($pngOptionsWindow, "", 10)
 
-			$progressWindow = WinWaitActive("[CLASS:MeterClass]", "Writing File", 3)
-			If $progressWindow Then
-				WinWaitClose($progressWindow, "", 180)
-			EndIf
-
-			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*2}, ${xu.MINUTE*3})`
+			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*3}, ${xu.MINUTE*2})`
 	});
 	renameOut = true;
 }

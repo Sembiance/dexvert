@@ -39,8 +39,7 @@ export class pict extends Format
 
 		const clarisClipArtConverters =
 		[
-			"soffice[matchType:magic][outType:png]"//, // soffice sometimes produces just text that says "QuickTime and a Ph..." which doesn't get detected
-			//"corelPhotoPaint"		// corelPhotoPaint often just produces a 'QuickTime PICT' logo, not useful and not currently detected (see sample/image/pict/01 and sample/image/pict/747_007)
+			"soffice[matchType:magic][outType:png]" // soffice sometimes produces just text that says "QuickTime and a Ph..." which doesn't get detected
 		];
 
 		// If we have this magic, then the other converters are unlikely to produce an image, so put these first
@@ -71,7 +70,7 @@ export class pict extends Format
 			r.push(...clarisClipArtConverters);
 
 		r.push(
-			"tomsViewer[matchType:magic]",		// For some PICTS will only produce the 'thumbnail' (samples 35, 039 and 06). For these files, corelPhotoPaint produces a full image so this converter is tried after that one
+			"tomsViewer[matchType:magic]",		// For some PICTS will only produce the 'thumbnail' (samples 35, 039 and 06).
 			"nconvert[format:pict]",	// nconvert produces just a black image PICT v2 format picts: p#.pic
 			"convert"	// convert has a habit of just producing a black square
 		);

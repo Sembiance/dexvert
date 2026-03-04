@@ -6,5 +6,5 @@ export class corelWavelet extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Corel_Wavelet";
 	ext        = [".wi", ".wvl"];
 	magic      = ["Corel Wavelet Compressed bitmap", /^x-fmt\/202( |$)/];
-	converters = ["corelPhotoPaint"];
+	converters = ["wi2ppm"];
 }

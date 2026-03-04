@@ -17,6 +17,7 @@ export class gameextractor extends Program
 			msg.codes = r.flags.codes.toString().split(",");
 
 		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/extract`, {json : msg, asJSON : true});
+		r.xlog.trace`GameExtractor result: ${result}`;
 		if(result?.error)
 			r.xlog.error`GameExtractor error for codes ${r.flags.codes}: ${result.error}`;
 	};

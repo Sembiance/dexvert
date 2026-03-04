@@ -27,7 +27,7 @@ export class mov extends Format
 
 		const magicCount = _MOV_MAGIC.map(m => (dexState.hasMagics(m) ? 1 : 0)).sum();
 		if(magicCount>1 || (magicCount===1 && !dexState.hasMagics(_MOV_MAGIC_WEAK)))
-			r.push((dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"), ...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"].map(v => `${v}[matchType:magic]`) : []));
+			r.push((dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"), ...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "xanim"].map(v => `${v}[matchType:magic]`) : []));
 		
 		return r;
 	};

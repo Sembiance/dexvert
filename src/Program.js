@@ -834,7 +834,7 @@ export class Program
 			if(!name)
 				return;
 
-			const valFinal = (val.length>0 ? (val.isNumber() && (val.length>1 || !val.startsWith("0")) ? +val : (["true", "false"].includes(val) ? val==="true" : val)) : true);
+			const valFinal = (val.length>0 ? (val.isNumber() && (val.length===1 || !val.startsWith("0")) ? +val : (["true", "false"].includes(val) ? val==="true" : val)) : true);
 
 			// see if any of the flags are actually programOptions
 			if(["suffix"].includes(name))

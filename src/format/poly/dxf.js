@@ -21,6 +21,6 @@ export class dxf extends Format
 		"photoDraw", "irfanView",
 		
 		// raster
-		"corelPhotoPaint", "canvas[matchType:magic][nonRaster]"
+		"canvas[matchType:magic][nonRaster]"
 	];*/
 }

@@ -3,14 +3,14 @@ import {C} from "../src/C.js";
 import {XLog} from "xlog";
 import {path} from "std";
 import {printUtil, fileUtil} from "xutil";
-import {_SKIP_CODES, _SKIP_NAMES} from "../src/program/detect/gameextractorID.js";
+import {_SKIP_CODES} from "../src/program/detect/gameextractorID.js";
 
 const xlog = new XLog();
 
 const list = [];
 for(const {name, code, games, extensions} of await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/list`, {asJSON : true}))
 {
-	if(_SKIP_CODES.some(v => code.startsWith(v)) || _SKIP_NAMES.some(v => name.startsWith(v)))
+	if(_SKIP_CODES.has(code))
 		continue;
 
 	const o = {};

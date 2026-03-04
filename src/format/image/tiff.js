@@ -31,7 +31,7 @@ export class tiff extends Format
 
 		// only include certain long-running windows based converters if we're not dealing with a MacBinary file (archive/macBinary/1Sled Ride.EPS)
 		if(!dexState.hasMagics(_MACBINARY_MAGIC))
-			r.push("imageAlchemy", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "imjview", "gimp", "corelPhotoPaint", "canvas", "tomsViewer", "picturePublisher", "corelDRAW", "keyViewPro", "pv[matchType:magic]");
+			r.push("imageAlchemy", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "imjview", "gimp", "canvas", "tomsViewer", "picturePublisher", "corelDRAW", "keyViewPro", "pv[matchType:magic]");
 		return r;
 	};
 }

@@ -24,7 +24,7 @@ const OS = {
 	win7 :
 	{
 		debug     : false,
-		qty       : navigator.hardwareConcurrency>=32 ? 10 : 2,
+		qty       : navigator.hardwareConcurrency>=32 ? 16 : (navigator.hardwareConcurrency>=16 ? 4 : 2),
 		ramGB     : 3,
 		cores     : 2,
 		scriptExt : ".au3",
@@ -361,25 +361,11 @@ for(const osid of Object.keys(OS))
 
 	instanceids.push(...[].pushSequence(0, OS[osid].qty-1).map(v => ([osid, v])));
 
-	// we need to copy the parent/backing HD to the instance dir, because even though it's just a backing HD VBoxManage still modifies the thing and we don't want to touch the original at all otherwise we have to re-copy it to dexdrones every time
 	const osInstanceDirPath = path.join(OS_INSTANCE_DIR_PATH, osid);
 	await Deno.mkdir(osInstanceDirPath, {recursive : true});
 	for(const v of OS[osid].hd)
 		await runUtil.run("rsync", runUtil.rsyncArgs(path.join(OS_DIR_PATH, osid, v), path.join(osInstanceDirPath, v), {fast : true}), {liveOutput : true});
 }
-
-// startOS above calls VBoxManage createmedium which then 'registers' both the parent and child HDs in some VBoxManage config. This can cause issues during development if HD paths change, So we clear out all previous HDs here just to be safe
-xlog.info`Clearing previous VBoxManaged hdds...`;
-const {stdout : vboxDiskLines} = await runUtil.run("VBoxManage", ["list", "hdds"]);
-const vboxDiskPaths = [];
-for(const vboxDiskLine of vboxDiskLines.trim().split("\n"))
-{
-	if(vboxDiskLine.startsWith("Location:"))
-		vboxDiskPaths.push(vboxDiskLine.substring("Location:".length+1).trim());
-}
-
-for(const vboxDiskPath of vboxDiskPaths.sortMulti([v => Object.keys(OS).some(osid => v.startsWith(path.join(OS_INSTANCE_DIR_PATH, `${osid}-`)))], [true]))
-	await runUtil.run("VBoxManage", ["closemedium", "disk", vboxDiskPath]);
 
 xlog.info`Starting instances...`;
 await Promise.all(await instanceids.parallelMap(async ([osid, instanceid], i) =>

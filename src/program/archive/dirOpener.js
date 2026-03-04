@@ -71,6 +71,7 @@ export class dirOpener extends Program
 			Local $startTime = GetTime()
 			Do
 				WindowFailure("Macromedia Projector", "encountered a problem", -1, "D")
+				WindowFailure("Macromedia Projector", "Check online for a solution and close the program", -1, "{ENTER}")
 				WindowFailure("dirOpener", "Cannot parse", -1, "{ESCAPE}")
 				If Not ProcessExists("dirOpener300-850-1-PC.exe") Then ExitLoop
 

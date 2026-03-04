@@ -83,28 +83,6 @@ Func DirEmpty($dir)
 	FileClose($search)
 EndFunc
 `,
-	ListCDirs : `
-#include <Array.au3>
-Func ListCDirs()
-	Local $cSearch, $cDir, $cDirs[1]
-	$cSearch = FileFindFirstFile("C:\\*.*")
-	If $cSearch <> -1 Then
-		While 1
-			$cDir = FileFindNextFile($cSearch)
-			If @error Then ExitLoop
-
-			If StringInStr(FileGetAttrib("C:\\" & $cDir), "D") Then
-				ReDim $cDirs[UBound($cDirs) + 1]
-				$cDirs[UBound($cDirs) - 1] = $cDir
-			EndIf
-		WEnd
-		FileClose($cSearch)
-	EndIf
-	_ArraySort($cDirs)
-
-	return $cDirs
-EndFunc
-`,
 	MouseClickWin : `
 Func MouseClickWin($title, $button, $x, $y, $clicks=1)
 	Local $winPos = WinGetPos($title)

@@ -7,5 +7,5 @@ export class ediInstallLZS extends Format
 	ext            = ["$"];
 	forbidExtMatch = true;
 	magic          = ["EDI Install LZS compressed data", "EDI LZSS packed", "EDI LZSSLib packed", "deark: edi_pack (EDI Pack LZSS1)", "deark: edi_pack (EDI LZSSLib)"];
-	converters     = ["deark[module:edi_pack]", "ediUnpack"];
+	converters     = ["deark[module:edi_pack]"];
 }

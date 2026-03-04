@@ -12,17 +12,23 @@ export class photoDraw extends Program
 			$mainWindow = WindowRequire("Microsoft PhotoDraw", "", 10)
 
 			Send("!f")
-			Sleep(2500)
-			Send("h")
+			Sleep(500)
+			Send("aa{ENTER}")
 
 			WindowRequire("Batch Save Wizard: Select Batch Operation", "", 10)
 			Send("pn")
 
 			WindowRequire("Batch Save Wizard: Select a Folder of Pictures", "", 10)
+			Send("w")
+
+			$selectFolderWindow = WindowRequire("Select Folder", "", 5)
+			Send("c:\\in{ENTER}")
+			WinWaitClose($selectFolderWindow, "", 5)
 			Send("n")
 
 			WindowRequire("Batch Save Wizard: Save Options", "", 10)
 			Send("w")
+
 			$selectFolderWindow = WindowRequire("Select Folder", "", 5)
 			Send("c:\\out{ENTER}")
 			WinWaitClose($selectFolderWindow, "", 5)

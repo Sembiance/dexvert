@@ -15,7 +15,7 @@ export class cgm extends Format
 		"canvas5[vector]",
 		
 		// raster
-		"keyViewPro", "photoDraw", "corelDRAW", "irfanView", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"
+		"keyViewPro", "photoDraw", "corelDRAW", "irfanView", "hiJaakExpress", "picturePublisher", "canvas[matchType:magic][nonRaster]"
 		
 		// vector
 		//"soffice[outType:svg]"	// soffice SVG output includes crappy <script> code that only allows the SVG to render when viewed as a webpage (not even an <img> tag works). So it's not even worth including

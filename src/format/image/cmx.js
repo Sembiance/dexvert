@@ -10,6 +10,6 @@ export class cmx extends Format
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="CMX " && macFileCreator==="Cph1";
 	converters     = [
 		"soffice[outType:svg]", "uniconvertor[autoCrop]", "deark[module:corel_ccx]",
-		"hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]", "nconvert[format:cmx]"
+		"hiJaakExpress", "picturePublisher", "canvas[matchType:magic][nonRaster]", "nconvert[format:cmx]"
 	];
 }

@@ -1404,28 +1404,84 @@ def save_json(data, path):
 # Main Extraction Logic
 # ============================================================================
 
+def _try_raw_resource_fork(data):
+    """Try parsing raw data as an Apple Resource Fork (no MacBinary wrapper).
+    Returns list of Resource namedtuples or None if not a valid resource fork."""
+    if len(data) < 16:
+        return None
+    try:
+        data_off = struct.unpack_from('>I', data, 0)[0]
+        map_off = struct.unpack_from('>I', data, 4)[0]
+        data_len = struct.unpack_from('>I', data, 8)[0]
+        map_len = struct.unpack_from('>I', data, 12)[0]
+        # Sanity checks for raw resource fork
+        if data_off < 16 or data_off > len(data):
+            return None
+        if map_off < 16 or map_off > len(data):
+            return None
+        if data_off + data_len > len(data):
+            return None
+        if map_off + map_len > len(data):
+            return None
+        if map_len < 28:
+            return None
+        resources = parse_resource_fork(data)
+        if not resources:
+            return None
+        # Verify we got real resource types (4 printable chars)
+        for r in resources[:5]:
+            if len(r.type) != 4:
+                return None
+        return resources
+    except Exception:
+        return None
+
+
 def extract(input_file, output_dir, verbose=False):
     """Extract all resources from a MacBinary Director file."""
     with open(input_file, 'rb') as f:
         data = f.read()
 
-    # Parse MacBinary
-    mb = parse_macbinary(data)
-    print(f'Extracting "{mb["header"]["filename"]}" ...')
-    if verbose:
-        print(f'  type={mb["header"]["file_type"]} creator={mb["header"]["creator"]}')
-        print(f'  Data fork: {mb["header"]["data_fork_length"]} bytes')
-        print(f'  Resource fork: {mb["header"]["resource_fork_length"]} bytes')
+    # Try MacBinary first, then raw resource fork, then give up gracefully
+    mb = None
+    resources = None
+    input_format = 'macbinary'
+
+    try:
+        mb = parse_macbinary(data)
+        # Validate resource fork is actually parseable
+        parse_resource_fork(mb['resource_fork'])
+    except (ValueError, struct.error):
+        mb = None
+
+    if mb:
+        print(f'Extracting "{mb["header"]["filename"]}" ...')
+        if verbose:
+            print(f'  type={mb["header"]["file_type"]} creator={mb["header"]["creator"]}')
+            print(f'  Data fork: {mb["header"]["data_fork_length"]} bytes')
+            print(f'  Resource fork: {mb["header"]["resource_fork_length"]} bytes')
+    else:
+        # Try parsing entire file as raw resource fork
+        resources = _try_raw_resource_fork(data)
+        if resources:
+            input_format = 'raw_rsrc'
+            fname = os.path.basename(input_file)
+            print(f'Extracting "{fname}" (raw resource fork) ...')
+        else:
+            # Data fork only - no extractable resources
+            fname = os.path.basename(input_file)
+            print(f'Skipping "{fname}" - data fork only (no resource fork)')
+            return
 
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
     out = lambda name: os.path.join(output_dir, name)
 
-    if verbose:
-        save_json(mb['header'], out('macbinary_header.json'))
-
-    # Parse Resource Fork
-    resources = parse_resource_fork(mb['resource_fork'])
+    if mb:
+        if verbose:
+            save_json(mb['header'], out('macbinary_header.json'))
+        # Parse Resource Fork
+        resources = parse_resource_fork(mb['resource_fork'])
 
     # Organize resources by type
     by_type = {}

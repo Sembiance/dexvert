@@ -11,8 +11,13 @@ export class fastCAD extends Program
 		script : `
 			WindowRequire("[CLASS:FCW32]", "", 10)
 			Send("^o")
-			
-			$loadDrawingWindow = WindowRequire("[TITLE:Load Drawing]", "", 10)
+
+			Func PreOpenWindows()
+				WindowDismiss("FastCAD", "Save changes to", "n")
+				return WinActive("[TITLE:Load Drawing]", "")
+			EndFunc
+			$loadDrawingWindow = CallUntil("PreOpenWindows", ${xu.SECOND*7})
+
 			Send("c:\\in\\${r.inFile({backslash : true})}{ENTER}")
 			WinWaitClose($loadDrawingWindow, "", 10)
 
@@ -22,7 +27,7 @@ export class fastCAD extends Program
 			Send("^A")
 			
 			$renameSaveWindow = WindowRequire("[TITLE:Rename & Save]", "", 10)
-			Send("c:\\out\\out.bmp{TAB}b{ENTER}")
+			Send("c:\\out\\out{TAB}b{ENTER}")
 			WinWaitClose($renameSaveWindow, "", 10)
 
 			Sleep(1000)`

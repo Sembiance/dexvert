@@ -18,7 +18,7 @@ export class hiJaakExpress extends Program
 			If Not $mainWindow Then
 				Exit 0
 			EndIf
-			
+
 			Send("c:\\out\\out.bmp{ENTER}")
 			AutoItSetOption("WinTitleMatchMode", 2)
 			$failureWindow = WinWait("Application Error", "", 10)

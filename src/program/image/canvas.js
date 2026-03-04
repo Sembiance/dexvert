@@ -17,6 +17,7 @@ export class canvas extends Program
 		AutoItSetOption("PixelCoordMode", 0)
 		AutoItSetOption("SendKeyDelay", 40)
 
+		Local $lastClickTime = GetTime()
 		Func PreOpenWindows()
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")
 			WindowFailure("DWGdirect Exception", "", -1, "{ENTER}")
@@ -36,6 +37,12 @@ export class canvas extends Program
 			WindowDismiss("Open Images", "", "{TAB}1{ENTER}")
 			WindowDismiss("Select Layout", "", "{ENTER}")
 			WindowDismiss("Font Matching", "", "{ENTER}")
+			If WinExists("Canvas 14", "") Then
+				If TimeDiff($lastClickTime) > ${xu.SECOND} Then
+					$lastClickTime = GetTime()
+					MouseClick("left", 180, 9)
+				EndIf
+			EndIf
 			If WinActive("Canvas 14") Then
 				return ControlGetHandle("Canvas 14", "", "[CLASS:ViewClass]")
 			EndIf
@@ -76,11 +83,7 @@ export class canvas extends Program
 			WindowDismiss("Render Image", "", "{ENTER}")
 			WindowDismiss("Canvas Message", "Would you like to associate the current document with the new file", "n")
 		EndFunc
-		CallUntil("PostExportWindows", ${xu.SECOND*3})
-
-		WinWaitActive($mainWindow, "", 3)
-		Send("!x")
-		WindowDismissWait("Canvas Message", "Do you want to save", 2, "n")`
+		CallUntil("PostExportWindows", ${xu.SECOND*3})`
 	});
 	renameOut  = true;
 }

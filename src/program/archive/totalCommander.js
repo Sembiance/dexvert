@@ -16,7 +16,16 @@ export class totalCommander extends Program
 			$unpackWindow = WindowRequire("Unpack files", "", 10)
 			Send("{ENTER}")
 			WinWaitClose($unpackWindow, "", 15)
-			WinWaitActive($mainWindow, "", 60)
+
+			Sleep(2000)
+
+			Func WaitForUnpackComplete()
+				If WinActive("[CLASS:TOverWriteForm]", "") Then
+					SendSlow(">{DOWN}{DOWN}{ENTER}")
+				EndIf
+				return Not WinExists("[CLASS:TDLG2FILEACTIONMIN]", "") And WinActive($mainWindow, "")
+			EndFunc
+			CallUntil("WaitForUnpackComplete", ${xu.SECOND*20})
 			Send("!f")
 			Sleep(250)
 			Send("q")`

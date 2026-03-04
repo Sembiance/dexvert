@@ -20,5 +20,5 @@ export class psd extends Format
 	converters = [
 		"convert", "iio2png", "gimp", "deark[module:psd]", "iconvert", "nconvert[format:psd]",
 		"paintDotNet",
-		"hiJaakExpress", "corelPhotoPaint", "photoDraw", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "picturePublisher"];
+		"hiJaakExpress", "photoDraw", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "picturePublisher"];
 }

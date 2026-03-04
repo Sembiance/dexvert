@@ -41,10 +41,6 @@
 \-------------/
 * Investigate these 180,000 unknown image files: https://discmaster.textfiles.com/search?detection=50424d50*
 
-* Had to drop support for these due to win7 exclusive adoption. Vibe these:
-	hyperWriter (just the .hw3 versions)			https://discmaster.textfiles.com/search?extension=hw3&format=hyperWriter
-	accessDatabase  (msAccess95)		app-office/mdbtools  vibe to support the formats I was using msAccess95 for before
-
 * Add more support for these samples: https://discmaster.textfiles.com/search?extension=xtc&detection=4d4f5320444154*
   Right now dragonUnpacker supports some, but not many, but it identifies to all of them.
   So it's a matter of downloading 100 unique items, and telling claude to go ensure the unpacker has support for these
@@ -123,6 +119,7 @@
 	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
   After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
   Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://discmaster.textfiles.com/admin/item?itemid=10456
+  Certainly support archive/macromediaDirector/T4.cct  (a particular troublesome file)
 
 * Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
   I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/

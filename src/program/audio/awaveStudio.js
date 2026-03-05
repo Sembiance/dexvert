@@ -18,7 +18,7 @@ export class awaveStudio extends Program
 			ControlClick("Select input files", "", "[CLASS:Button; TEXT:Add files...]")
 
 			$openNewFileWindow = WindowRequire("Open new file", "", 5)
-			Sleep(250)
+			Sleep(750)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 			WinWaitClose($openNewFileWindow, "", 10)
 
@@ -31,7 +31,7 @@ export class awaveStudio extends Program
 				WindowFailure("", "The file doesn't contain", -1, "{ENTER}")
 				return WinActivate("Select input files", "");
 			EndFunc
-			CallUntil("ErrorWindows", ${xu.SECOND*4})
+			CallUntil("ErrorWindows", ${xu.SECOND*5})
 
 			$selectInputWindow = WindowRequire("Select input files", "", 10)
 			ControlClick($selectInputWindow, "", "[CLASS:Button; TEXT:&Next >]")
@@ -43,7 +43,7 @@ export class awaveStudio extends Program
 			ControlSetText($selectOutputWindow, "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
 			ControlClick($selectOutputWindow, "", "[CLASS:Button; TEXT:Finish]")
 
-			WaitForPID("Awave.exe", ${xu.MINUTE*5})`
+			WaitForPID("Awave.exe", ${xu.MINUTE*4})`
 	});
 	chain     = "sox";	// no type because I can't guarantee awave will produce a wav file every time
 	renameOut = {

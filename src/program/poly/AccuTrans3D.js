@@ -8,7 +8,9 @@ export class AccuTrans3D extends Program
 	loc       = "win7";
 	bin       = "c:\\dexvert\\AccuTrans3D\\at3d_2012-1-0.exe";
 	args      = r => ["-noshow", r.inFile()];
-	osData    = r => ({ script : `WaitForStableFileSize("c:\\out\\${path.basename(r.inFile())}.3ds", ${xu.SECOND*3}, ${xu.SECOND*30})` });
+	osData    = r => ({ script : `
+		WaitForStableFileSize("c:\\out\\${path.basename(r.inFile(), path.extname(r.inFile()))}.3ds", ${xu.SECOND*3}, ${xu.SECOND*30})
+	` });
 	renameOut = true;
 	chain     = "dexvert[asFormat:poly/threeDStudio]";
 }

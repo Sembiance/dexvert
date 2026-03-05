@@ -20,7 +20,7 @@ export class CDView2001 extends Program
 			SendSlow("${"{TAB}".repeat(9)}")
 			Send("{SPACE}")
 			$saveWindow = WindowRequire("Save As", "", 10)
-			Send("c:\\out\\out.bmp{ENTER}")
+			SendSlow("c:\\out\\out.bmp{ENTER}")
 			WinWaitClose($saveWindow, "", 10)`
 	});
 	renameOut = true;

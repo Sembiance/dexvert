@@ -1,0 +1,748 @@
+Corel Photo-Paint CPT File Format Specification
+================================================
+
+Covers both CPT7FILE and CPT9FILE variants.
+
+Reverse-engineered from ~2,060 sample files across Corel Photo-Paint 7/8/9+,
+with binary analysis of PhotoPnt.exe and CNSFlt80.dll.
+
+Validated against:
+  - 74 files with pixel-level reference comparisons (avg 99.0% match)
+  - 985 additional files decoded without errors (sample1)
+  - 999 additional files decoded without errors (sample2, incl. CPT9FILE)
+  - Versions 1, 5, 6, 10, and 14
+
+
+FILE OVERVIEW
+=============
+
+A CPT file stores a raster image as a set of independently-compressed
+tiles organized into blocks (layers). The format uses Windows BMP/DIB
+conventions throughout: BGR pixel order, DWORD-aligned scanline stride,
+and bottom-up row storage.
+
+Two format variants exist:
+  - CPT7FILE: Original format (Corel Photo-Paint 7/8). Header size 0x8C.
+  - CPT9FILE: Updated format (Corel Photo-Paint 9+). Header size 0x94
+    (8 bytes larger). Stores block table offset explicitly at 0x34.
+    Otherwise structurally identical.
+
+All multi-byte integers are little-endian (LE) unless noted otherwise.
+
+  +---------------------+  0x000
+  |   File Header       |  Magic, version, block count
+  +---------------------+  0x13C  (CPT7 v1/v5/v6) or per 0x34 (CPT9)
+  |   [Palette]         |  v10 only: RGB palette here, shifts table down
+  +---------------------+  0x13C + palette_size  (v10)  or  0x13C  (others)
+  |   Block Offset Table|  Array of file offsets to block headers
+  +---------------------+
+  |   Block 0 (Bg)      |  Header + tile table + tile data
+  +---------------------+
+  |   Block 1 (Mask)    |  Optional transparency mask
+  +---------------------+
+  |   Block 2 (Object)  |  Optional object layer
+  +---------------------+
+  |   Block 3 (Alpha)   |  Optional alpha for preceding object
+  +---------------------+
+  |   ...               |  More object/alpha pairs
+  +---------------------+
+  |   Block N (Thumb)   |  Thumbnail preview
+  +---------------------+
+
+
+========================================================================
+FILE HEADER
+========================================================================
+
+  Offset  Size  Field          Description
+  ------  ----  -----          -----------
+  0x00    8     magic          "CPT7FILE" or "CPT9FILE" (ASCII)
+  0x08    4     version        Format version: 1, 5, 6, 10, or 14  (LE32)
+  0x0C    4     palette_size   v10 only: palette size in bytes (e.g. 768).
+                               Ignored for other versions.
+  0x28    4     blocks_count   Number of entries in the block offset table  (LE32)
+  0x34    4     block_table_off  CPT9FILE only: explicit LE32 file offset to
+                               block offset table. Ignored for CPT7FILE.
+
+Supported versions:
+
+  v1   Corel Photo-Paint 7. RGB/grayscale/1-bit. mid24 or le32 tile tables.
+  v5   Corel Photo-Paint 8. Same structure as v1, typically le32 tile tables.
+  v6   Rare variant. Same structure as v1. Observed only with 1-bit images.
+  v10  Paletted (indexed color). Inserts a color palette before the block
+       offset table. Block headers and tile format otherwise identical to v1/v5.
+  v14  CPT9FILE only. Supports bpp=16 (2-channel gray+alpha). Otherwise
+       same structure as v1/v5.
+
+
+========================================================================
+VERSION 10 PALETTE
+========================================================================
+
+V10 files insert a color palette between the file header and the block
+offset table. The palette starts at file offset 0x13C (the same position
+where v1/v5/v6 store the block offset table).
+
+  - palette_size is read from file offset 0x0C.
+  - Typical value: 768 (256 RGB entries). One known file uses 708 (236 entries).
+  - Each entry is 3 bytes: R, G, B (NOT BGR -- the palette uses standard
+    RGB order even though pixel data uses BGR).
+  - The block offset table is shifted to 0x13C + palette_size.
+
+For CPT7FILE v1/v5/v6, the block offset table remains at 0x13C.
+For CPT9FILE, the block offset table location is read from file offset 0x34.
+
+
+========================================================================
+BLOCK OFFSET TABLE
+========================================================================
+
+Located at:
+  - CPT7FILE v1/v5/v6: 0x13C
+  - CPT7FILE v10: 0x13C + palette_size
+  - CPT9FILE: explicit offset from file[0x34]
+
+Contains blocks_count entries, each 8 bytes:
+  - Bytes 0-3: LE32 absolute file offset to the block header
+  - Bytes 4-7: Reserved / padding (typically 0)
+
+Blocks are numbered sequentially. The first block (index 0) is always
+the background layer. Subsequent blocks are masks, objects, alpha
+channels, or thumbnails.
+
+
+========================================================================
+BLOCK HEADER
+========================================================================
+
+Each block begins with a variable-length header describing the layer's
+dimensions, pixel format, type, and position. The tile table follows
+the header at a computable offset.
+
+  Offset  Size  Type    Field        Description
+  ------  ----  ----    -----        -----------
+  +0x00   4     LE32    width        Image/layer width in pixels
+  +0x04   4     LE32    height       Image/layer height in pixels
+  +0x08   4     LE32    tile_width   Tile width in pixels (commonly 144 or 256)
+  +0x0C   4     LE32    tile_height  Tile height in pixels (commonly 144 or 256)
+  +0x10   4     LE32    bpp          Bits per pixel: 1, 8, 16, 24, or 32
+  +0x18   4     LE32    block_type   Layer type (see Block Types below)
+  +0x20   4     LE32    header_size  Tile table is at: block + header_size + 0x3C
+  +0x44   4     LE32s   obj_x        Object X position (signed, BMP coords).
+                                     CPT7FILE type 8 blocks only. See fnio note.
+  +0x48   4     ASCII   fnio_tag     "fnio" if fnio sub-header present (CPT9FILE).
+                                     If absent, +0x44/+0x50/+0x64 are used directly.
+  +0x4C   4     LE32s   obj_x_fnio   Object X position when fnio present.
+  +0x50   4     LE32s   obj_y        Object Y position (CPT7FILE, no fnio).
+  +0x58   4     LE32s   obj_y_fnio   Object Y position when fnio present.
+  +0x64   4     LE32    opacity      Layer opacity 0-100 (CPT7FILE, no fnio).
+  +0x70   4     LE32    opacity_fnio Layer opacity 0-100 when fnio present.
+  +0x6C   var   ASCII   name         Null-terminated layer name
+
+  fnio sub-header note:
+    CPT9FILE object blocks (type 8) typically contain an "fnio" sub-header
+    identified by the ASCII tag "fnio" at block+0x48. When present, the
+    object position and opacity fields are shifted:
+      obj_x   = block+0x4C  (instead of +0x44)
+      obj_y   = block+0x58  (instead of +0x50)
+      opacity = block+0x70  (instead of +0x64)
+    CPT7FILE blocks do NOT have this sub-header; use the original offsets.
+    Detection: check if bytes at block+0x48 == "fnio" (ASCII).
+
+
+Block Types
+-----------
+
+  Value  Name         Description
+  -----  ----         -----------
+  1      Background   Canvas base layer. Defines the image dimensions.
+                      Always Block[0]. Pixel data is the flattened background.
+  2      Mask         Transparency/selection mask for single-layer images.
+                      8bpp grayscale. Combine with type-1 RGB as alpha for RGBA.
+  4      Alpha        Alpha channel for the immediately preceding type-8 object.
+                      8bpp grayscale, 0=transparent, 255=opaque.
+  8      Object       RGB (24bpp) or grayscale (8bpp) object layer. Positioned
+                      at (obj_x, obj_y). Composited using paired type-4 alpha.
+  16     Thumbnail    Small preview image. Ignore for decoding.
+
+
+Bits Per Pixel
+--------------
+
+  bpp  Channels  Description
+  ---  --------  -----------
+  1    1         1-bit monochrome. MSB first within each byte (BMP convention).
+                 White=1, Black=0. Stride = ((width + 31) / 32) * 4 bytes.
+  8    1         8-bit grayscale (v1/v5/v6) or palette index (v10).
+                 For v10, map through palette to get RGB.
+  16   2         16-bit gray+alpha (v14/CPT9FILE only). 2 bytes per pixel:
+                 byte 0 = gray value, byte 1 = alpha. No BGR swap needed.
+                 Output as LA (luminance+alpha) mode.
+  24   3         24-bit BGR. Stored as B, G, R per pixel. Convert to RGB on output.
+  32   4         32-bit BGRA. Stored as B, G, R, A. Convert to RGBA on output.
+
+
+========================================================================
+BLOCK ORGANIZATION PATTERNS
+========================================================================
+
+Single-layer image (blocks_count = 2-3):
+
+  Block[0]: type 1 (Background) -- the image pixels
+  Block[1]: type 2 (Mask)       -- optional transparency mask
+  Block[2]: type 16 (Thumbnail) -- optional preview
+
+  Output: If mask present and background is RGB, combine as RGBA.
+          Otherwise output background pixels directly.
+
+Multi-layer image (blocks_count >= 4):
+
+  Block[0]: type 1 (Background) -- canvas base
+  Block[1]: type 8 (Object)     -- first object layer
+  Block[2]: type 4 (Alpha)      -- alpha for first object
+  Block[3]: type 8 (Object)     -- second object layer (optional)
+  Block[4]: type 4 (Alpha)      -- alpha for second object (optional)
+  ...
+  Block[N]: type 16 (Thumbnail) -- preview
+
+  Output: Composite all (type-8, type-4) pairs onto background.
+
+Detection: if any block has type=8 with channels in {1, 3}, treat as
+multi-layer and composite. Otherwise treat as single-layer.
+
+
+========================================================================
+TILE TABLE
+========================================================================
+
+Each block's pixel data is divided into a rectangular grid of tiles.
+The tile table maps tile indices to file offsets and sizes.
+
+Grid layout:
+  tiles_x   = ceil(width / tile_width)
+  tiles_y   = ceil(height / tile_height)
+  num_tiles = tiles_x * tiles_y
+  Tile index = ty * tiles_x + tx  (row-major, top-to-bottom in BMP coords)
+
+Table format: num_tiles entries, 8 bytes each:
+  - Bytes 0-3: tile data offset (absolute file offset)
+  - Bytes 4-7: tile data size (in bytes)
+
+The offset/size values use one of two integer encodings (auto-detected):
+
+  le32   Standard LE32.  byte[0] | byte[1]<<8 | byte[2]<<16 | byte[3]<<24
+  mid24  Bytes 1-3 only. byte[1] | byte[2]<<8 | byte[3]<<16
+         (byte[0] is ignored. Backward-compatible with 16-bit for small values.)
+
+
+Tile Table Discovery
+--------------------
+
+The tile table location varies by file. Discovery uses a multi-step
+strategy, tried in order:
+
+1. FORMULA (most reliable):
+   tile_table_offset = block_offset + header_size + 0x3C
+   where header_size is the LE32 value at block + 0x20.
+   Try both le32 and mid24 readers; validate tile entries.
+
+2. DISCRIMINATOR MAP (fast path for known layouts):
+   The LE32 value at block + 0x44 identifies the block header variant:
+
+     Discriminator  Table Relative Offset  Reader
+     -------------  ---------------------  ------
+     0x01D1         0x88                   mid24
+     0x01D9         0xC4                   mid24
+     0x03D9         0xD0                   mid24
+     0x07D0         0xA4                   le32
+
+3. MARKER SEARCH (legacy fallback):
+   Some files have a sentinel fill tile (comp=4 with specific bytes)
+   immediately after the tile table. Search for this 16-byte marker
+   and compute the table start as: marker_offset - (num_tiles * 8).
+
+   Marker bytes: 04 00 00 00 05 00 05 00 00 00 00 00 FF FF FF 00
+
+4. TILE HEADER SCAN:
+   Scan for valid tile headers (comp_type in {1,2,4,5}, delta in {0,3})
+   within the block, then check if a valid tile table ends just before.
+
+5. BRUTE FORCE:
+   Try every 4-byte-aligned offset in the block's header area.
+
+Validation: For each candidate table, verify every tile entry:
+  - tile_offset >= 0x100 and within file bounds
+  - tile_size >= 4 and tile_offset + tile_size <= file_size
+  - First 4 bytes at tile_offset form valid (comp_type, delta_type)
+
+Lenient mode: Some tiles have no header (raw/headerless tiles, common
+in v10 and some v1 files). When strict validation fails for the formula
+approach, retry with lenient validation that skips comp/delta checking.
+
+
+========================================================================
+TILE FORMAT
+========================================================================
+
+Each tile stores compressed (or raw) pixel data for a rectangular region.
+Tiles that have a header use this 4-byte layout:
+
+  Offset  Size  Field
+  ------  ----  -----
+  0       2     comp_type   (LE16) -- compression method
+  2       2     delta_type  (LE16) -- prediction filter
+  4       ...   compressed data (or raw pixels for comp=1)
+
+EXCEPTION: comp_type=0 tiles have NO header. The tile data starts
+immediately with raw pixel bytes. tile_size equals the uncompressed
+data size exactly.
+
+EXCEPTION: Tiles with an unrecognized comp_type (neither 0,1,2,4,5)
+are treated as headerless raw data -- the entire tile_size bytes are
+raw pixels with no delta filter. This handles v10 paletted raw tiles
+and some v1 files with headerless BGR tiles.
+
+
+Compression Types
+-----------------
+
+  comp  Name              Header?  Description
+  ----  ----              -------  -----------
+  0     Raw (no header)   No       Uncompressed pixel data. tile_offset points
+                                   directly to raw pixels. tile_size ==
+                                   stride * tile_height exactly.
+  1     Raw (with header) Yes      Uncompressed pixel data after the 4-byte
+                                   header. Read stride*tile_height bytes from
+                                   offset 4.
+  2     LZW               Yes      LZW with TIFF-style early code size bump.
+                                   See LZW section.
+  4     Fill              Yes      Constant-color tile. Fill color at
+                                   tile_offset + 12. See Fill Tiles section.
+  5     VBW               Yes      Variable-bit-width compression.
+                                   See VBW section.
+
+
+Prediction Filters
+------------------
+
+  delta  Name                    Description
+  -----  ----                    -----------
+  0      None                    No prediction. Use decompressed data as-is.
+  3      H-delta + V-delta       Two-phase reconstruction filter (Mode 3).
+                                 See below.
+
+Mode 3 prediction filter (delta_type=3):
+
+  Phase 1 -- Horizontal cumulative sum on FIRST ROW ONLY:
+    for x in [channels .. stride):
+      byte[x] += byte[x - channels]
+
+  Phase 2 -- Vertical cumulative sum on ALL REMAINING ROWS:
+    for y in [1 .. num_rows):
+      for x in [0 .. stride):
+        row[y][x] += row[y-1][x]
+
+  All additions are modulo 256 (& 0xFF).
+  This reverses the encoder's vertical-then-horizontal delta.
+  Reverse-engineered from PhotoPnt.exe at 0x87D390.
+
+
+========================================================================
+SCANLINE STRIDE
+========================================================================
+
+Tile scanlines are DWORD-aligned (padded to 4-byte boundaries), matching
+the Windows BMP/DIB convention used by Corel Photo-Paint.
+
+For standard pixel formats (8bpp, 24bpp, 32bpp):
+  scanline_bytes = tile_width * channels
+  stride = (scanline_bytes + 3) & ~3
+
+For 1-bit images:
+  stride = ((tile_width + 31) / 32) * 4
+
+Total decompressed tile size = stride * tile_height
+
+When copying pixels from a decompressed tile to the output image:
+  source_offset = y * stride + x * channels
+
+Stride may be larger than tile_width * channels due to padding.
+The padding bytes at the end of each row are unused.
+
+
+========================================================================
+PIXEL BYTE ORDER
+========================================================================
+
+All pixel data uses Windows BGR/BGRA byte order:
+  24bpp: B, G, R  (blue first)
+  32bpp: B, G, R, A
+   8bpp: single grayscale or palette index byte
+   1bpp: MSB-first bit packing (bit 7 = leftmost pixel)
+
+Convert to RGB/RGBA on output. For 1-bit images, expand each bit to
+a full byte: 1 = 0xFF (white), 0 = 0x00 (black).
+
+
+========================================================================
+ROW ORDER (BMP BOTTOM-UP)
+========================================================================
+
+Tiles store pixel rows in BMP/DIB bottom-up order: row 0 of the tile
+is the BOTTOM row of that tile's region. Standard image formats (PNG)
+use top-down order, so the final assembled image must be flipped
+vertically before output.
+
+
+========================================================================
+VBW COMPRESSION (comp_type=5)
+========================================================================
+
+Variable-bit-width compression, reverse-engineered from CNSFlt80.dll
+function at 0x102af4b0.
+
+Initialization:
+  Load the first 4 bytes of compressed data into a 32-bit accumulator
+  (little-endian). Set bits_available = 24 (32 loaded minus 8 for the
+  first header extraction).
+
+Main loop (repeat until output is full):
+
+  1. Extract an 8-bit chunk header from the accumulator:
+       count   = (header & 0x1F) + 1     -- number of values (1-32)
+       bw_code = (header >> 5) & 0x07    -- bit width selector (0-7)
+
+  2. If bw_code == 0:
+       Output 'count' zero bytes (run-length zero encoding).
+
+  3. If bw_code >= 1:
+       bit_width = bw_code + 1  (so 2-8 bits per value)
+       For each of 'count' values:
+         a. Extract bit_width bits from the accumulator.
+         b. Sign-extend to 8 bits:
+              - Bit (bit_width - 1) is the sign bit.
+              - If set: pad upper bits with 1s (negative, two's complement).
+              - If clear: value is positive, upper bits are 0.
+         c. Output the sign-extended byte.
+
+Bit extraction procedure:
+  value = accumulator & ((1 << n) - 1)
+  accumulator >>= n
+  bits_available -= n
+  While bits_available < 0:
+    shift = bits_available + 8
+    accumulator |= next_source_byte << shift
+    bits_available = shift
+
+Sign extension for N-bit values:
+  threshold = 1 << (N - 1)
+  If value >= threshold: result = (0xFF << N) | value    (sign extend with 1s)
+  If value < threshold:  result = value & (threshold - 1) (mask lower bits)
+  Mask result to 8 bits (& 0xFF).
+
+Constants:
+  Max count per chunk:    32  (0x1F + 1)
+  Min bit width:           2  (bw_code=1)
+  Max bit width:           8  (bw_code=7)
+
+
+========================================================================
+LZW COMPRESSION (comp_type=2)
+========================================================================
+
+Standard LZW with these specific parameters:
+
+  - Initial code size: 9 bits
+  - Bit ordering: LSB-first (least significant bit first)
+  - Clear code: 256
+  - End code: 257
+  - First user code: 258
+  - Maximum code size: 16 bits
+  - Maximum dictionary size: 65536 entries
+
+  - EARLY CODE SIZE BUMP (TIFF convention):
+    Code width increases when next_code >= max_code - 1
+    (one entry BEFORE the dictionary is full). This differs from
+    GIF LZW which bumps AT max_code.
+
+  - Dictionary is initialized with single-byte entries 0-255.
+    On clear code, dictionary is reset and code size returns to 9.
+
+
+========================================================================
+FILL TILES (comp_type=4)
+========================================================================
+
+Fill tiles encode a rectangular region with a single constant color.
+
+Layout (16 bytes total):
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       2     comp_type = 4 (LE16)
+  2       2     delta_type = 0 (LE16)
+  4       4     sub-tile counts (2x LE16, unused for decoding)
+  8       4     reserved / zero
+  12      4     fill color as packed pixel value
+
+The fill color at offset 12 from tile start:
+  24bpp: bytes 12, 13, 14 = B, G, R
+   8bpp: byte 12 = grayscale value (or palette index for v10)
+   1bpp: byte 12, bit-packed
+
+Output: tile_width * tile_height pixels, all set to the fill color.
+Derived from CNSFlt80.dll at 0x10253a90.
+
+
+========================================================================
+MULTI-LAYER COMPOSITING
+========================================================================
+
+When a file contains type-8 (object) blocks, all layers are composited
+onto a background canvas:
+
+1. CANVAS INITIALIZATION:
+   Decode Block[0] (type 1, background).
+   a. If background has fill tiles (comp_type=4) OR non-zero pixel data:
+      Use decoded pixels as canvas.
+   b. If background is all-zero AND has no fill tiles:
+      Use white canvas (0xFF per byte). In Corel Photo-Paint, an all-zero
+      background in a multi-layer file means transparent canvas, which
+      renders as paper white.
+
+2. FOR EACH (type-8, type-4) PAIR in block order:
+   a. Decode object pixels from type-8 block.
+   b. Decode alpha mask from type-4 block (8bpp, 0=transparent 255=opaque).
+   c. Read object position:
+        X = signed LE32 at block + 0x44
+        Y = signed LE32 at block + 0x50
+      Positions are in BMP coordinates (origin at bottom-left).
+   d. Read layer opacity:
+        opacity = LE32 at block + 0x64  (0-100 percentage, default 100)
+   e. Alpha blend each pixel:
+        effective_alpha = (mask_alpha / 255.0) * (opacity / 100.0)
+        result = object * effective_alpha + canvas * (1 - effective_alpha)
+
+3. CLIPPING:
+   Object pixels outside canvas bounds (negative positions or overflow)
+   are silently clipped. Objects may be larger than the canvas.
+
+4. GRAYSCALE OBJECTS:
+   Type-8 blocks with 8bpp are grayscale object layers. Expand to RGB
+   (R = G = B = gray_value) before compositing onto the RGB canvas.
+
+5. OUTPUT:
+   The composited canvas is always RGB (3 channels). Flip vertically
+   for top-down output.
+
+
+========================================================================
+SINGLE-LAYER WITH TRANSPARENCY MASK
+========================================================================
+
+When blocks include type-2 (mask) but no type-8 (object), the file is
+single-layer with a separate transparency mask:
+
+1. Decode Block[0] (type 1) as RGB pixels.
+2. Decode the type-2 block as an 8bpp grayscale mask.
+3. Combine: output RGBA where A comes from the mask
+   (0 = fully transparent, 255 = fully opaque).
+4. Flip vertically for output.
+
+Without a type-2 mask, output the background pixels directly in their
+native format (RGB, grayscale, or RGBA).
+
+
+========================================================================
+VERSION 10 PALETTE MAPPING
+========================================================================
+
+V10 tiles contain 8-bit palette indices instead of direct pixel values.
+After decompressing and assembling tiles, map each byte through the
+palette to produce RGB output:
+
+  for each pixel index i:
+    R = palette[i * 3 + 0]
+    G = palette[i * 3 + 1]
+    B = palette[i * 3 + 2]
+
+Apply palette mapping AFTER tile assembly but BEFORE compositing or
+vertical flip. This applies to all block types (background, objects).
+
+For multi-layer v10 files, both background and object blocks contain
+palette indices that must be mapped.
+
+
+========================================================================
+1-BIT IMAGE HANDLING
+========================================================================
+
+Files with bpp=1 (observed in v6, possibly others) use 1-bit-per-pixel
+monochrome encoding.
+
+Stride calculation:
+  stride = ((tile_width + 31) / 32) * 4  bytes per row
+
+After decompression (VBW, LZW, or raw), unpack bits to bytes:
+
+  For each row y, each pixel x:
+    byte_index  = y * stride + (x >> 3)
+    bit_index   = 7 - (x & 7)                # MSB first (BMP convention)
+    pixel_value = (data[byte_index] >> bit_index) & 1
+    output      = 0xFF if pixel_value else 0x00
+
+The prediction filter (delta_type=3) operates on the packed bit data
+BEFORE unpacking. Apply the filter to stride-width rows of packed bytes,
+then unpack bits to bytes.
+
+Output is 8-bit grayscale (1 channel) after unpacking.
+
+
+========================================================================
+DECODING PROCEDURE SUMMARY
+========================================================================
+
+ 1. Read file header. Verify magic is "CPT7FILE" or "CPT9FILE".
+ 2. Read version. Reject if not in {1, 5, 6, 10, 14}.
+ 3. Determine block_table_offset:
+    - CPT9FILE: read explicit offset from file[0x34].
+    - CPT7FILE v10: read palette_size from 0x0C, read palette from 0x13C,
+      block_table_offset = 0x13C + palette_size.
+    - CPT7FILE v1/v5/v6: block_table_offset = 0x13C.
+ 4. Read blocks_count from 0x28.
+ 5. Read block offsets from block_table_offset (8-byte entries).
+ 6. For each block, read its header (width, height, bpp, type, etc.).
+ 7. Determine if multi-layer (any type-8 block with channels in {1,3}).
+ 8. For each block to decode:
+    a. Compute tile grid: tiles_x, tiles_y, num_tiles.
+    b. Find tile table (formula -> discriminator -> marker -> brute-force).
+    c. For each tile:
+       i.   Read (offset, size) from tile table.
+       ii.  Read comp_type and delta_type from tile data.
+       iii. Decompress based on comp_type (VBW/LZW/raw/fill).
+       iv.  Apply prediction filter if delta_type == 3.
+       v.   For 1-bit: unpack bits to bytes.
+       vi.  Copy visible pixels from tile to output image.
+            Convert BGR -> RGB (or BGRA -> RGBA) during copy.
+ 9. If v10: apply palette mapping (indices -> RGB).
+10. If multi-layer: composite all object layers onto background.
+    If single-layer with mask: combine RGB + mask -> RGBA.
+11. Flip image vertically (BMP bottom-up -> top-down).
+12. Output as PNG (or other format).
+
+
+========================================================================
+KNOWN QUIRKS AND EDGE CASES
+========================================================================
+
+All-zero background:
+  In multi-layer files, an all-zero (black) background without fill
+  tiles indicates a transparent canvas. Use white (0xFF) instead.
+  However, if the background contains fill tiles with color (0,0,0),
+  it is a genuinely black background -- use black.
+
+comp=0 has no header:
+  comp_type=0 tiles have NO 4-byte header. The bytes at the tile
+  offset are raw pixel data, not comp/delta fields. tile_size equals
+  the raw uncompressed size (stride * tile_height) exactly.
+
+Headerless raw tiles:
+  Some tiles (especially in v10 and certain v1 files) have no header
+  and an unrecognized comp_type when reading the first 2 bytes as
+  LE16. These are raw pixel data filling the entire tile_size.
+  tile_size may be padded beyond stride*tile_height (e.g. 0x10000).
+  Use the first stride*tile_height bytes. No delta filter.
+
+mid24 vs le32:
+  Tile table entries may use either mid24 or le32 encoding.
+  Both must be tried during discovery. mid24 ignores byte[0] of each
+  4-byte word, reading only bytes 1-3 as a 24-bit LE value.
+
+Object clipping:
+  Object layers can extend beyond canvas bounds in any direction.
+  Object positions (block+0x44, block+0x50) are signed integers.
+  Clip to canvas bounds during compositing.
+
+Alpha blending rounding:
+  Alpha blending rounding varies between implementations.
+  Using round-half-up (+ 0.5) matches most references within +/-1
+  per channel, but no single formula exactly matches the Corel
+  reference output for all files.
+
+V10 raw tile detection:
+  V10 raw tiles can be detected because their tile_size equals the
+  expected uncompressed size (stride * tile_height). Compressed tiles
+  are always smaller. However, the safest approach is to treat any
+  tile with an unrecognized comp_type as raw headerless data.
+
+Fill tile color byte order:
+  Fill tiles for 24bpp use BGR byte order at offset 12.
+  Fill tiles for 8bpp use a single byte at offset 12.
+  For 1bpp, the fill pattern is bit-packed at offset 12.
+
+bpp=16 (2-channel) tiles:
+  16bpp tiles store 2 bytes per pixel (gray, alpha). No BGR swap is
+  needed. During tile assembly, copy rows directly without channel
+  reordering. Output as PIL "LA" (luminance+alpha) mode.
+
+
+========================================================================
+CPT9FILE FORMAT DIFFERENCES
+========================================================================
+
+CPT9FILE is the updated format used by Corel Photo-Paint 9 and later.
+It is structurally identical to CPT7FILE with these differences:
+
+  1. Magic: "CPT9FILE" instead of "CPT7FILE" (8 bytes at offset 0).
+
+  2. Header size: 0x94 (148 bytes) vs 0x8C (140 bytes) for CPT7FILE.
+     The header is 8 bytes larger.
+
+  3. Block table offset: Stored explicitly as LE32 at file offset 0x34.
+     CPT7FILE computes this as 0x13C (or 0x13C + palette_size for v10).
+     CPT9FILE always reads it from the header.
+
+  4. Version 14: CPT9FILE introduces version 14, which supports bpp=16
+     (2-channel gray+alpha images). CPT7FILE does not use v14.
+
+  5. All compression types, tile formats, block types, and compositing
+     rules are identical between CPT7FILE and CPT9FILE.
+
+Observed version distribution in CPT9FILE samples:
+  - v1: most common (800+ files), same as CPT7FILE v1
+  - v5: common (68 files)
+  - v10: common (126 files), paletted format
+  - v14: rare (4 files), 2-channel gray+alpha
+  - v6: rare (1 file)
+
+
+========================================================================
+TRUNCATED FILE HANDLING
+========================================================================
+
+Some CPT files are truncated (incomplete). The decoder should handle
+this gracefully:
+
+  - During tile table validation: tiles whose offset extends past EOF
+    should be skipped (treated as missing), not rejected entirely.
+  - During tile decompression: if a tile's data extends past EOF,
+    read only the available bytes and pad with zeros as needed.
+  - A truncated file may still produce a partial image. Missing tiles
+    appear as black/zero regions.
+
+
+========================================================================
+DLL AND EXE REFERENCES
+========================================================================
+
+Key functions identified by reverse engineering:
+
+PhotoPnt.exe:
+  0x87D390   Prediction filter dispatcher (delta modes 0-3)
+
+CNSFlt80.dll (Corel filter library):
+  0x102af4b0  VBW decompressor main loop
+  0x102aeda0  Sign extension table builder
+  0x10254b50  Delta filter application
+  0x1025398e  Fill tile handler (setup)
+  0x10253a90  Fill tile handler (color extraction)

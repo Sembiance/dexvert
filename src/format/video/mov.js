@@ -27,7 +27,7 @@ export class mov extends Format
 
 		const magicCount = _MOV_MAGIC.map(m => (dexState.hasMagics(m) ? 1 : 0)).sum();
 		if(magicCount>1 || (magicCount===1 && !dexState.hasMagics(_MOV_MAGIC_WEAK)))
-			r.push((dexState.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"), ...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "xanim"].map(v => `${v}[matchType:magic]`) : []));
+			r.push("qtflatt", ...(dexState.f.input.size<(xu.MB*200) ? ["mencoderWinXP", "quickTimePlayer", "xanim"].map(v => `${v}[matchType:magic]`) : []));
 		
 		return r;
 	};
@@ -40,5 +40,5 @@ export class mov extends Format
 		In theor it might be possible to train a generative AI model to examine tens of thousands of working quicktime .mov files, examining the 'mdat' section and seeing how it relates to the 'moov' section.
 		Then maybe it would be possible to feed it some of these 'bare mdat' files and have it generate a 'moov' section that would work well enough to convert, but that's not something I'm capable of doing myself and it might not work anyways.
 		Some more info about the issue: https://preservation.tylerthorsted.com/2023/10/06/quicktime-moov/
-		Finally, ffmpeg itself can't deal with MacBinary 2 versions of quicktime movies (these include both the mdat data fork and moov resource fork data in 1 file), but the 'qtflat' tool can flatten these into a video file ffmpeg can work with`;
+		Finally, ffmpeg itself can't deal with MacBinary 2 versions of quicktime movies (these include both the mdat data fork and moov resource fork data in 1 file), but the 'qtflatt' tool can flatten these into a video file ffmpeg can work with`;
 }

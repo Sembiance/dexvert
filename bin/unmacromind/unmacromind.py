@@ -898,6 +898,101 @@ def _calc_pitch(width, bpp):
     return ((width * bpp + 15) // 16) * 2
 
 
+def _packbits_decompress_all(data):
+    """Decompress PackBits data without a target size. Returns all output bytes."""
+    out = bytearray()
+    i = 0
+    while i < len(data):
+        n = data[i]
+        if n > 127:
+            n = n - 256
+        i += 1
+        if n == -128:
+            continue
+        elif n >= 0:
+            count = n + 1
+            out.extend(data[i:i + count])
+            i += count
+        else:
+            count = 1 - n
+            if i < len(data):
+                out.extend([data[i]] * count)
+                i += 1
+    return bytes(out)
+
+
+def _infer_1bit_dimensions(decompressed_size):
+    """Infer (width, height, pitch) for a 1-bit bitmap from decompressed byte count.
+    Uses heuristics: prefers reasonable aspect ratios and common sizes."""
+    if decompressed_size <= 0:
+        return None
+    best = None
+    best_score = float('inf')
+    for pitch in range(2, min(512, decompressed_size + 1), 2):
+        if decompressed_size % pitch != 0:
+            continue
+        height = decompressed_size // pitch
+        if height < 1 or height > 2048:
+            continue
+        width = pitch * 8
+        if width > 2048:
+            continue
+        ratio = max(width, height) / max(1, min(width, height))
+        if ratio > 20:
+            continue
+        # Score: prefer closer to square, penalize extreme ratios
+        score = ratio
+        if best is None or score < best_score:
+            best = (width, height, pitch)
+            best_score = score
+    return best
+
+
+def _detect_actual_width(pixels, pitch, height):
+    """Detect actual bitmap width by finding rightmost non-zero bit across rows."""
+    max_bit = 0
+    for y in range(height):
+        row_start = y * pitch
+        for byte_idx in range(pitch - 1, -1, -1):
+            off = row_start + byte_idx
+            b = pixels[off] if off < len(pixels) else 0
+            if b != 0:
+                for bit in range(8):
+                    if b & (1 << bit):
+                        pixel_x = byte_idx * 8 + (7 - bit)
+                        if pixel_x + 1 > max_bit:
+                            max_bit = pixel_x + 1
+                break
+    return max_bit if max_bit > 0 else pitch * 8
+
+
+def _decode_bitd_1bit_inferred(bitd_data, path, max_compressed=500000):
+    """Decode a 1-bit BITD by inferring dimensions from PackBits decompressed size.
+    Used as fallback when no cast record exists (old VideoWorks VWSC files)."""
+    if len(bitd_data) > max_compressed:
+        return False
+    pixels = _packbits_decompress_all(bitd_data)
+    if not pixels:
+        return False
+    dims = _infer_1bit_dimensions(len(pixels))
+    if dims is None:
+        return False
+    width, height, pitch = dims
+    actual_w = _detect_actual_width(pixels, pitch, height)
+    gray = bytearray(actual_w * height)
+    for y in range(height):
+        for x in range(actual_w):
+            byte_idx = y * pitch + x // 8
+            bit = 7 - (x % 8)
+            if byte_idx < len(pixels):
+                px = (pixels[byte_idx] >> bit) & 1
+                gray[y * actual_w + x] = 0 if px else 255
+            else:
+                gray[y * actual_w + x] = 255
+    write_png_grayscale(path, actual_w, height, bytes(gray))
+    return True
+
+
 def decode_bitd_to_png(bitd_data, width, height, bpp, palette, path):
     """Decode BITD bitmap data and save as PNG."""
     if width <= 0 or height <= 0:
@@ -1614,6 +1709,8 @@ def extract(input_file, output_dir, verbose=False):
                 movie_palette_16 = movie_palette_256[:16]
 
     # --- Extract BITDs ---
+    # Use 1-bit fallback only for old VideoWorks files with no cast metadata
+    has_cast_metadata = bool(cast_records)
     if 'BITD' in by_type:
         for res in by_type['BITD']:
             cast_idx = res.id - cast_id_offset
@@ -1636,6 +1733,14 @@ def extract(input_file, output_dir, verbose=False):
                     counts['png'] += 1
                 elif verbose:
                     print(f'  WARNING: Failed to decode BITD {res.id} ({width}x{height}x{bpp})')
+            elif not has_cast_metadata:
+                # Fallback: infer 1-bit dimensions from PackBits decompressed size
+                # (old VideoWorks VWSC files without any VWCI/CASt cast records)
+                fname = f'{res.id}.png'
+                if _decode_bitd_1bit_inferred(res.data, out(fname)):
+                    counts['png'] += 1
+                elif verbose:
+                    print(f'  WARNING: No cast record for BITD {res.id}')
             elif verbose:
                 print(f'  WARNING: No cast record for BITD {res.id}')
             handled.add((res.type, res.id))

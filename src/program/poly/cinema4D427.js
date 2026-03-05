@@ -22,7 +22,7 @@ export class cinema4D427 extends Program
 			Sleep(1000)
 
 			Send("!f")
-			Send("{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{RIGHT}{UP}{ENTER}")
+			SendSlow("{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{RIGHT}{UP}{ENTER}")
 
 			Func WaitForSaveWindow()
 				WindowDismiss("CINEMA 4D", "Please select an object", "{ENTER}")
@@ -33,7 +33,7 @@ export class cinema4D427 extends Program
 				Exit 0
 			EndIf
 
-			Send("c:\\out\\out.q3d{ENTER}")
+			SendSlow("c:\\out\\out.q3d{ENTER}")
 			WinWaitClose($saveWindow, "", 10)
 			WaitForStableFileSize("c:\\out\\out.q3d", ${xu.SECOND*3}, ${xu.SECOND*30})` });
 	renameOut = true;

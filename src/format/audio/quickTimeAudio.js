@@ -15,25 +15,17 @@ export class quickTimeAudio extends Format
 	notes			 = `HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"`;
 	converters       = dexState =>
 	{
-		const validConverters = ["ffmpeg[outType:mp3]"];
+		const r = ["ffmpeg[outType:mp3]"];
 		if(RUNTIME.asFormat!=="audio/quickTimeAudio")
 		{
 			const magicCount = _MOV_MAGIC.map(m => (dexState.hasMagics(m) ? 1 : 0)).sum();
 			if(magicCount>1 || (magicCount===1 && !dexState.hasMagics(_MOV_MAGIC_WEAK)))
 			{
-				if(dexState.f.input.size<(xu.MB*25))
-				{
-					RUNTIME.forbidProgram.delete("qt_flatt");
-					validConverters.push("qt_flatt[chainAs:audio/quickTimeAudio]");
-				}
-				else
-				{
-					RUNTIME.forbidProgram.delete("qtflat");
-					validConverters.push("qtflat[chainAs:audio/quickTimeAudio]");
-				}
+				RUNTIME.forbidProgram.delete("qtflatt");
+				r.push("qtflatt[chainAs:audio/quickTimeAudio]");
 			}
 		}
 
-		return validConverters;
+		return r;
 	};
 }

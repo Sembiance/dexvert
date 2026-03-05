@@ -13,7 +13,7 @@ export class simply3D20 extends Program
 			Send("!f")
 			Send("a")
 			$saveWindow = WindowRequire("Save As", "", 10)
-			Send("{TAB}{DOWN}{END}{ENTER}")
+			Send("+{TAB}+{TAB}+{TAB}{DOWN}{END}{ENTER}")
 			Sleep(500)
 			Send("c:\\out\\out.wrl{ENTER}")
 			WinWaitClose($saveWindow, "", 10)

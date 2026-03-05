@@ -31,8 +31,11 @@ export class milkShape3D extends Program
 			$mainWindow = WindowRequire("MilkShape 3D 1.8.4 - untitled", "", 15)
 
 			MouseClick("left", 14, 29, 1, 0)
+			Sleep(1000)
 			MouseMove(40, 147, 0)
+			Sleep(1000)
 			MouseMove(214, 145, 5)
+			Sleep(1000)
 			MouseClick("left", 206, ${_FORMATS[r.flags.format].menuY}, 1, 5)
 
 			${_FORMATS[r.flags.format].window?.preOpenDismiss ? `WindowDismissWait("${_FORMATS[r.flags.format].window.name}", "${_FORMATS[r.flags.format].window.text || ""}", 5, "${_FORMATS[r.flags.format].window.preOpenDismiss}")` : ""}
@@ -40,7 +43,7 @@ export class milkShape3D extends Program
 			$openWindow = WindowRequire("Open", "", 10)
 			Send("c:\\in\\${r.inFile()}{ENTER}")
 			WinWaitClose($openWindow, "", 15)
-			Sleep(1000)
+			Sleep(1500)
 
 			Func MainWindowOrFailure()
 				WindowFailure("Error", "", -1, "{ENTER}")

@@ -18696,6 +18696,7 @@ Known extensions: 378
 [bif]      byLight                                  bif
 
 >>> na_game_tool 0.2.0  (na_game_tool --list-input-formats) AND (na_game_tool --list-archive-formats)  Linux https://nihav.org/game_tool.html
+Supported input plugins:
   7lev_movie 7th Level movie
   ace        Space Ace scenes
   acf        Time Commando ACF
@@ -18856,6 +18857,7 @@ Supported archive extractors:
  aac (AAC)
  ac3 (ETSI TS 102 366)
  ac3-multi (ETSI TS 102 366 (multiple frames))
+ adorage (proDAD Adorage)
  adpcm-dk3 (Duck DK3 ADPCM)
  adpcm-dk4 (Duck DK4 ADPCM)
  alac (Apple Lossless Audio Codec)
@@ -18922,6 +18924,7 @@ Supported archive extractors:
  mace-6 (MACE 6:1)
  midivid (MidiVid)
  midivid3 (MidiVid 3)
+ moviepak (RasterOps MoviePak)
  movingblocks (Acorn Moving Blocks)
  movingblockshq (Acorn Moving Blocks HQ)
  movinglines (Acorn Moving Lines)
@@ -18939,6 +18942,7 @@ Supported archive extractors:
  on2avc-500 (On2 AVC)
  on2avc-501 (On2 AVC)
  pcm (PCM)
+ pdq2 (PDQ2)
  pgvv (Radius Studio Video)
  pivideo (PI-Video)
  qdesign-music (QDesign Music)
@@ -18947,6 +18951,8 @@ Supported archive extractors:
  qpeg-dvc (QPEG video in DVC)
  qt-rle (Apple Animation)
  qt-smc (Apple Graphics)
+ qt-yuv2 (Raw YUV)
+ qt-yuv4 (libquicktime YUV4)
  qualcomm-purevoice (Qualcomm PureVoice)
  ra14.4 (RealAudio 14.4)
  ra28.8 (RealAudio 28.8)
@@ -18978,6 +18984,7 @@ Supported archive extractors:
  truemotionrt (TrueMotion RT)
  tta (True Audio codec)
  ulaw (mu-law PCM)
+ ultimotion (IBM Ultimotion)
  vivo1 (VivoActive Video 1.0)
  vivo2 (VivoActive Video 2.0)
  vmd-audio (VMD audio)

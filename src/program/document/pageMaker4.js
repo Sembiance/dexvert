@@ -22,30 +22,31 @@ export class pageMaker4 extends Program
 				If ControlGetHandle("", "", "[CLASS:Button; TEXT:Ignore &all]") Then
 					Send("!a")
 				EndIf
+				return WinActive("", "C:\\IN\\${path.basename(r.inFile()).toUpperCase()}")
 			EndFunc
-			CallUntil("PreOpenWindows", ${xu.SECOND*4})
-
-			$docWindow = WindowRequire("", "C:\\IN\\${path.basename(r.inFile()).toUpperCase()}", 25)
+			$docWindow = CallUntil("PreOpenWindows", ${xu.SECOND*25})
 
 			Send("^p")
 
 			Sleep(2000)
 			Send("{ENTER}")
 
-			If WindowDismissWait("PageMaker 4.0", "Page and paper orientation", 5, "{TAB}{SPACE}") Not = 0 Then
-				Sleep(1000)
-				SendSlow("!s{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{ENTER}^p")
-				Sleep(2000)
-				Send("{ENTER}")
-			EndIf
+			;If WindowDismissWait("PageMaker 4.0", "Page and paper orientation", 5, "{TAB}{SPACE}") Not = 0 Then
+			;	Sleep(1000)
+			;	SendSlow("!s{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{ENTER}^p")
+			;	Sleep(2000)
+			;	Send("{ENTER}")
+			;EndIf
 
 			Func PostPrintWindows()
 				WindowDismiss("[TITLE:PageMaker 4.0]", "Publication was not composed", "{ENTER}")
+				WindowDismiss("[TITLE:PageMaker 4.0]", "Page and paper orientations are different.", "{ENTER}")
 				If ControlGetHandle("", "", "[CLASS:Button; TEXT:&Print pub]") Then
 					Send("!p")
+					return 1
 				EndIf
 			EndFunc
-			CallUntil("PostPrintWindows", ${xu.SECOND*3})
+			CallUntil("PostPrintWindows", ${xu.SECOND*5})
 
 			HandleCutePDFPrint()
 

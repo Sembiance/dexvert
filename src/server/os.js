@@ -302,7 +302,7 @@ routes.set("/status", async () =>	// eslint-disable-line require-await
 routes.set("/osRun", async request =>
 {
 	const body = await request.json();
-	xlog.trace`Got osRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
+	xlog.debug`Got osRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
 	let response = null;
 	RUN_QUEUE.add({body, request, reply : v => { response = v; }});
 	await xu.waitUntil(() => !!response);

@@ -24,8 +24,12 @@ export class pageMaker5 extends Program
 			CallUntil("PreOpenWindows", ${xu.SECOND*3})
 
 			Send("^p")
+			Func PrePrintWindows()
+				WindowDismiss("PageMaker", "Default PPD will be substituted.", "{ENTER}")
+				return WinActive("Print", "")
+			EndFunc
+			$printWindow = CallUntil("PrePrintWindows", ${xu.SECOND*5})
 
-			$printWindow = WindowRequire("Print", "", 5)
 			Send("{ENTER}")
 
 			HandleCutePDFPrint()

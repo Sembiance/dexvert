@@ -16,18 +16,18 @@ export class fastCAD extends Program
 				WindowDismiss("FastCAD", "Save changes to", "n")
 				return WinActive("[TITLE:Load Drawing]", "")
 			EndFunc
-			$loadDrawingWindow = CallUntil("PreOpenWindows", ${xu.SECOND*7})
+			$loadDrawingWindow = CallUntil("PreOpenWindows", ${xu.SECOND*10})
 
-			Send("c:\\in\\${r.inFile({backslash : true})}{ENTER}")
+			SendSlow("c:\\in\\${r.inFile({backslash : true})}{ENTER}")
 			WinWaitClose($loadDrawingWindow, "", 10)
 
 			; Don't know of a better way to do this. The 'Unamed view' window is always there, and doesn't get renamed after it opens the file
-			Sleep(3000)
+			Sleep(5000)
 
 			Send("^A")
 			
 			$renameSaveWindow = WindowRequire("[TITLE:Rename & Save]", "", 10)
-			Send("c:\\out\\out{TAB}b{ENTER}")
+			SendSlow("c:\\out\\out{TAB}b{ENTER}")
 			WinWaitClose($renameSaveWindow, "", 10)
 
 			Sleep(1000)`

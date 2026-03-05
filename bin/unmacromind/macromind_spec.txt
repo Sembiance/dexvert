@@ -71,6 +71,12 @@ Earlier VideoWorks movies may use:
   - File Type:    VWSC (VideoWorks Score)
   - Creator Code: MMVW (MacroMind VideoWorks)
 
+VWSC/MMVW files typically lack VWCI cast records. Their BITD resources are
+1-bit (black and white) bitmaps whose dimensions must be inferred from the
+PackBits-decompressed byte count: pitch = decompressed_size / height, where
+pitch is word-aligned (even). The actual pixel width is detected by scanning
+for the rightmost non-zero bit across all rows.
+
 For archival and transport, these files are wrapped in MacBinary II containers
 which preserve both the data fork and resource fork along with Finder metadata.
 Files may also be encountered as raw Apple Resource Forks (without a MacBinary

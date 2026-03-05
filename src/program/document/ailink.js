@@ -7,7 +7,6 @@ export class ailink extends Program
 	website = "https://ai.ansible.uk/ailink.html";
 	bin     = "c:\\dexvert\\ailink\\AILINK.EXE";
 	loc     = "win7";
-	args    = () => [];
 	osData  = r => ({
 		script : `
 			$mainWindow = WindowRequire("LocoScript conversion", "", 10)

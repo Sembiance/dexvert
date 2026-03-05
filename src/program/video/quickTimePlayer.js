@@ -12,6 +12,7 @@ export class quickTimePlayer extends Program
 		script   : `
 			$mainWindow = WindowRequire("QuickTimePlayer", "", 10);
 			Sleep(5000)
+			WindowDismiss("[CLASS:MacDialog]", "You may experience problems", "{ENTER}")
 			SendSlow("!fa")
 			$saveWindow = WindowRequire("Save As", "", 5)
 			Send("c:\\out\\out.avi")

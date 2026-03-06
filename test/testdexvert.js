@@ -272,6 +272,7 @@ const FLEX_SIZE_FORMATS = {
 		dumpFile                 : 0.1,
 		isoZipped                : 0.1,
 		prehistorikGameArchive   : 0.1,
+		"vivBIGF:.iff"           : 0.1,
 
 		// different each time due to way it generates frames
 		swf    : 75,
@@ -536,6 +537,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/poly\/collada\/item_flashlight\.dae$/i, "text", "xml"],
 	[/poly\/dxf\/abydos\.r14\.dxf$/i, "image", true],
 	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", "imf"],
+	[/poly\/panda3DModel\/Spotlight \(1\)\.egg$/i, "text", "txt"],
 	[/poly\/polygonFileFormat\/example1\.ply$/i, "text", "txt"],
 	[/poly\/quickDraw3D\/testn\.3dmf$/i, "text", "txt"],
 	[/poly\/trueSpace3D\/dna\.cob$/i, "text", "txt"],

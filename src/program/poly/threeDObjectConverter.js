@@ -27,18 +27,19 @@ export class threeDObjectConverter extends Program
 				WindowDismiss("Warning", "", "{ENTER}")
 				return WinActive("3D Object Converter v10.60     [ ", "");
 			EndFunc
-			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*14})
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*20})
 			If Not $mainWindow Then
 				Exit 0
 			EndIf
 
 			Send("!f")
+			Sleep(250)
 			Send("s")
 
 			$saveWindow = WindowRequire("Save As", "", 10)
-			Send("{TAB}{DOWN}${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].keys}{ENTER}+{TAB}c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}")
-			WinWaitClose($saveWindow, "", 120)
-			WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*3}, ${xu.MINUTE*2})`
+			SendSlow("{TAB}{DOWN}${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].keys}{ENTER}+{TAB}c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}")
+			WinWaitClose($saveWindow, "", 160)
+			WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*4}, ${xu.MINUTE*3})`
 	});
 	renameOut = true;
 	chain     = r => `dexvert[asFormat:poly/${r.flags.outType || _OUT_TYPE_DEFAULT}]`;

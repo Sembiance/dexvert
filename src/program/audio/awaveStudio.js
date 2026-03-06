@@ -11,16 +11,16 @@ export class awaveStudio extends Program
 	loc        = "win7";
 	osData     = r => ({
 		script : `
-			WinWaitActive("Select conversion type", "", 10)
+			WinWaitActive("Select conversion type", "", 15)
 			ControlClick("Select conversion type", "", "[CLASS:Button; TEXT:&Next >]")
 
-			WinWaitActive("Select input files", "", 10)
+			WinWaitActive("Select input files", "", 15)
 			ControlClick("Select input files", "", "[CLASS:Button; TEXT:Add files...]")
 
-			$openNewFileWindow = WindowRequire("Open new file", "", 5)
-			Sleep(750)
+			$openNewFileWindow = WindowRequire("Open new file", "", 10)
+			Sleep(1500)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
-			WinWaitClose($openNewFileWindow, "", 10)
+			WinWaitClose($openNewFileWindow, "", 15)
 
 			Func ErrorWindows()
 				WindowFailure("", "No wave data found!", -1, "{ENTER}")
@@ -31,19 +31,19 @@ export class awaveStudio extends Program
 				WindowFailure("", "The file doesn't contain", -1, "{ENTER}")
 				return WinActivate("Select input files", "");
 			EndFunc
-			CallUntil("ErrorWindows", ${xu.SECOND*5})
+			CallUntil("ErrorWindows", ${xu.SECOND*10})
 
-			$selectInputWindow = WindowRequire("Select input files", "", 10)
+			$selectInputWindow = WindowRequire("Select input files", "", 15)
 			ControlClick($selectInputWindow, "", "[CLASS:Button; TEXT:&Next >]")
 
-			$selectOutputWindow = WindowRequire("Select output options", "", 10)
+			$selectOutputWindow = WindowRequire("Select output options", "", 15)
 
 			$formatWAV = ControlCommand($selectOutputWindow, "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
 			ControlCommand($selectOutputWindow, "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
 			ControlSetText($selectOutputWindow, "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
 			ControlClick($selectOutputWindow, "", "[CLASS:Button; TEXT:Finish]")
 
-			WaitForPID("Awave.exe", ${xu.MINUTE*4})`
+			WaitForPID("Awave.exe", ${xu.MINUTE*5})`
 	});
 	chain     = "sox";	// no type because I can't guarantee awave will produce a wav file every time
 	renameOut = {

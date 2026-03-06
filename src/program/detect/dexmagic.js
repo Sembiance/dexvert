@@ -129,6 +129,7 @@ const DEXMAGIC_CHECKS = {
 	"FONTEDIT Font"            : [{offset : 0, match : [0xEB, 0x33, 0x90]}, {offset : 10, match : "PC Magazine "}, {offset : 23, match : " Michael J. Mefford"}],
 	"FONTEDIT Font (Alt 1)"    : [{offset : 0, match : [0xEB, 0x32]}, {offset : 91, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
 	"FONTEDIT Font (Alt 2)"    : [{offset : 0, match : [0xEB, 0x33]}, {offset : 92, match : [0xB8, 0x10, 0x11, 0xCD, 0x10]}],
+	"MSX Font (Loose)"         : [{offset : 0, match : [0xFE, 0x00, 0x92, 0xFF]}, {offset : 5, match : [0x00, 0x92, 0x00]}],
 	"PCR Font"                 : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
 	"Signum 3 Compressed Font" : [{offset : 0, match : [0x00, 0x02]}, {offset : 2, match : "chset001"}],
 	"XCar Font (Loose)"               : [{offset : 0, match : "FNHD"}, {offset : 65, match : "PAL"}],

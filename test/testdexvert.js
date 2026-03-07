@@ -302,7 +302,7 @@ const FLEX_SIZE_FORMATS = {
 	document :
 	{
 		// these conversions sometimes differ WILDLY, haven't figured out why
-		envoy              : 80,
+		envoy              : 100,
 		farallonReplica    : 25,
 		hlp                : 50,
 		ibmBookManagerBook : 99999,

@@ -3,7 +3,7 @@ Convert **3,624** file formats (out of **7,653** known) into modern equivalents 
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 
-Utilizes **641** helper programs running on **6** different operating systems under various emulators.
+Utilizes **644** helper programs running on **6** different operating systems under various emulators.
 
 [discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly, submit an issue.
 

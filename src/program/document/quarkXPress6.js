@@ -10,15 +10,29 @@ export class quarkXPress6 extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
+			Func ProjectIsOpen()
+				$control = ControlGetHandle("", "", "[CLASS:XPressMDIProject]")
+				If Not $control Then
+					return 0
+				EndIf
+
+				$text = ControlGetText("", "", $control)
+				If StringInStr($text, "in : in") Then
+					return 1
+				EndIf
+
+				return 0
+			EndFunc
+
 			Func PreOpenWindows()
 				WindowDismiss("Activate QuarkXPress 6.1", "", "{TAB}{ENTER}")
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some settings saved with this project are different", "{ENTER}")
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "uses fonts not installed", "{TAB}{ENTER}")
 				WindowFailure("[TITLE:QuarkXPress (tm)]", "This file is not a valid Quark", -1, "{ESCAPE}")
-				return ControlGetHandle("", "", "[CLASS:XPressMDIProject]")
+				return ProjectIsOpen()
 			EndFunc
-			$controlExists = CallUntil("PreOpenWindows", ${xu.SECOND*30})
-			If Not $controlExists Then
+			$projectOpenAndReady = CallUntil("PreOpenWindows", ${xu.SECOND*30})
+			If Not $projectOpenAndReady Then
 				Exit 0
 			EndIf
 

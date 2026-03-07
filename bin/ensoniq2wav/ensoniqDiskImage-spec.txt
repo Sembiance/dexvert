@@ -1,0 +1,683 @@
+Vibe coded by Claude
+
+==============================================================================
+ENSONIQ DISK IMAGE FILE FORMAT SPECIFICATION
+==============================================================================
+
+This document describes the file formats used for Ensoniq sampler and
+synthesizer disk images. It covers both the container formats (GKH, Giebler)
+and the internal Ensoniq filesystem structure.
+
+Supported instruments: EPS, EPS-16 Plus, ASR-10/ASR-88, VFX-SD, SD-1, TS-10,
+TS-12, SQ-80.
+
+
+##############################################################################
+PART 1: CONTAINER FORMATS
+##############################################################################
+
+Ensoniq disk images are stored in one of several container formats that wrap
+the raw 512-byte block data from the original floppy or hard disk.
+
+==============================================================================
+1.1 GKH FORMAT (Goh King Wah / TDDFI)
+==============================================================================
+
+Extension: .GKH
+Creator: TDDFI (The Disk Drive Floppy Image) utility by Goh King Wah
+
+The GKH format stores a complete raw disk image with a small tag-based header.
+
+Structure:
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x0000 |    5 | Magic: "TDDFI" (54 44 44 46 49)               |
+  | 0x0005 |    1 | Unknown/version byte                          |
+  | 0x0006 |    2 | Number of tags (16-bit little-endian)          |
+  | 0x0008 |  n*10| Tag array (n = number of tags, 10 bytes each) |
+  |  ...   |  ... | (data offset determined by tags or default)   |
+  |  data  | var  | Raw disk data (contiguous 512-byte blocks)     |
+  +--------+------+-----------------------------------------------+
+
+Tag Format (10 bytes each):
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x00   |    1 | Tag type byte 1                               |
+  | 0x01   |    1 | Tag type byte 2                               |
+  | 0x02   |    8 | Tag data (meaning depends on tag type)        |
+  +--------+------+-----------------------------------------------+
+
+Known Tag Types:
+  (0x01, 0x04) - Format/version information
+    Bytes 2-9: Version-related data (exact meaning unknown)
+
+  (0x0A, 0x05) - Disk geometry
+    Bytes 2-3: Number of tracks/cylinders (16-bit LE), typically 80
+    Bytes 4-5: Number of heads (16-bit LE), typically 2
+    Bytes 6-7: Sectors per track (16-bit LE), 10 for DD, 20 for HD
+    Bytes 8-9: Bytes per sector (16-bit LE), typically 512
+
+  (0x0B, 0x0B) - Image data location
+    Bytes 2-5: Unknown
+    Bytes 6-9: Offset of raw disk data in file (32-bit LE)
+
+  (0x14, 0x0A) - Unknown tag
+  (0x15, 0x0A) - Unknown tag
+
+Data Section:
+  If no (0x0B, 0x0B) tag is present, the data starts immediately after
+  the tag array at offset 8 + (num_tags * 10).
+
+  The data section contains contiguous 512-byte blocks representing
+  the entire disk in linear order (track 0/head 0/sector 0 through
+  the last sector). Typical sizes:
+    - DD floppy: 80 * 2 * 10 * 512 = 819,200 bytes (1600 blocks)
+    - HD floppy: 80 * 2 * 20 * 512 = 1,638,400 bytes (3200 blocks)
+
+  Some GKH files contain trailing data after the disk image (73-267
+  extra bytes observed), which should be ignored.
+
+
+==============================================================================
+1.2 GIEBLER FORMAT (EDE/EDA/EDT/EDV)
+==============================================================================
+
+Extensions: .EDE, .EDA, .EDT, .EDV, .EDS
+Creator: Gary Giebler (Giebler Enterprises)
+
+The Giebler format uses a 512-byte header with a skip bitmap to compress
+all-zero blocks out of the file, reducing the file size significantly for
+mostly-empty disks.
+
+Header Structure (512 bytes / 0x200):
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x0000 |    2 | Signature: 0x0D 0x0A (CR LF)                  |
+  | 0x0002 |   76 | Text label (ASCII, e.g. "EPS Disk")           |
+  | 0x004E |    2 | 0x0D 0x0A (CR LF)                             |
+  |  ...   |  ... | Additional text/padding                       |
+  |  sig-3 |    3 | 0x0D 0x0A 0x1A (CR LF EOF)                    |
+  |  bmap  |  var | Skip bitmap (see below)                       |
+  | 0x01FF |    1 | Disk type indicator                            |
+  +--------+------+-----------------------------------------------+
+
+Disk Type Indicator (byte 0x1FF):
+  0x03 = EDE - EPS Double Density (1600 blocks)
+  0x07 = EDT - TS Double Density (1600 blocks)
+  0xCB = EDA - ASR High Density (3200 blocks)
+  0xCC = EDT - TS High Density (3200 blocks)
+
+Skip Bitmap:
+  The bitmap starts immediately after the 0x0D 0x0A 0x1A signature and
+  extends to byte 0x1FE (just before the disk type byte).
+
+  For Double Density disks (1600 blocks):
+    Bitmap offset: 0xA0
+    Bitmap size:   200 bytes (1600 bits)
+    Preceded by 0x0D 0x0A 0x1A at offsets 0x9D-0x9F
+
+  For High Density disks (3200 blocks):
+    Bitmap offset: 0x60
+    Bitmap size:   400 bytes (3200 bits)
+    Preceded by 0x0D 0x0A 0x1A at offsets 0x5D-0x5F
+
+  Bit ordering: MSB first within each byte.
+    Byte 0 bit 7 = block 0
+    Byte 0 bit 6 = block 1
+    ...
+    Byte 0 bit 0 = block 7
+    Byte 1 bit 7 = block 8
+    etc.
+
+  Bit values:
+    1 = Block is all zeros (skipped, not stored in file)
+    0 = Block has data (stored in file after header)
+
+Data Section:
+  Starting at offset 0x200 (after the 512-byte header), only non-skipped
+  blocks appear sequentially. To reconstruct the full disk image:
+
+  1. Read the skip bitmap
+  2. For each block 0..N-1:
+     - If bit is 1: block is all zeros
+     - If bit is 0: read the next 512 bytes from the file
+
+  The total reconstructed disk image is:
+    DD: 1600 * 512 = 819,200 bytes
+    HD: 3200 * 512 = 1,638,400 bytes
+
+Format-Specific Extensions:
+  .EDE = Ensoniq EPS/EPS-16 Double-density (disk type 0x03)
+  .EDA = Ensoniq ASR High-density (disk type 0xCB)
+  .EDT = Ensoniq TS Double or High-density (disk type 0x07 or 0xCC)
+  .EDV = Ensoniq VFX (uses EDE format with type 0x03)
+  .EDS = Ensoniq SQ/SD (uses EDE format with type 0x03)
+
+
+==============================================================================
+1.3 RAW FORMAT
+==============================================================================
+
+Extension: .IMG (or no extension)
+
+A raw disk image is simply the disk blocks stored contiguously with no
+header. Size determines the disk type:
+  819,200 bytes  = DD floppy (1600 blocks)
+  1,638,400 bytes = HD floppy (3200 blocks)
+
+
+##############################################################################
+PART 2: ENSONIQ FILESYSTEM
+##############################################################################
+
+All Ensoniq samplers and synthesizers use the same basic filesystem layout
+on floppy disks. The filesystem uses 512-byte blocks and supports a FAT
+(File Allocation Table) for file storage.
+
+==============================================================================
+2.1 DISK LAYOUT
+==============================================================================
+
+  Block(s) | Description
+  ---------+---------------------------------------------
+      0    | System Block / Boot Block
+      1    | Device ID Block
+      2    | OS Info Block
+    3-4    | Root Directory (2 blocks = 1024 bytes)
+    5-14   | FAT (File Allocation Table, 10 blocks)
+   15-1599 | Data area (DD) / 15-3199 for HD
+  ---------+---------------------------------------------
+
+
+==============================================================================
+2.2 BLOCK 0: SYSTEM BLOCK
+==============================================================================
+
+The system block (block 0) contains disk initialization data. Its exact
+contents vary by machine type but typically include formatting markers.
+On blank disks this block is often all zeros except for system identifiers.
+
+
+==============================================================================
+2.3 BLOCK 1: DEVICE ID BLOCK
+==============================================================================
+
+Block 1 contains a 40-byte device identification pattern that identifies
+the disk format and machine type.
+
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x00   |    5 | Unknown/reserved                              |
+  | 0x05   |    2 | Sectors per track (big-endian 16-bit)         |
+  |        |      |   0x000A (10) = DD floppy (EPS, EPS-16)       |
+  |        |      |   0x0014 (20) = HD floppy (ASR-10)            |
+  | 0x07   |    2 | Unknown                                       |
+  | 0x09   |    2 | Tracks/cylinders (big-endian 16-bit)          |
+  |        |      |   0x0050 (80) = standard floppy                |
+  | 0x0B   |   19 | Unknown/reserved                              |
+  | 0x1E   |    1 | Label flag (0xFF = label follows)             |
+  | 0x1F   |    7 | Disk label (ASCII, space-padded)              |
+  | 0x26   |    2 | "ID" signature (0x49 0x44)                    |
+  | 0x28   |  484 | Padding (typically zeros)                     |
+  +--------+------+-----------------------------------------------+
+
+
+==============================================================================
+2.4 BLOCK 2: OS INFO BLOCK
+==============================================================================
+
+Block 2 contains operating system information. On VFX-SD/SD-1 disks,
+bytes 8-9 are non-zero, which distinguishes these from EPS-family disks.
+The rest of this block contains OS-specific data.
+
+
+==============================================================================
+2.5 BLOCKS 3-4: ROOT DIRECTORY
+==============================================================================
+
+The root directory occupies 2 consecutive blocks (1024 bytes) and contains
+up to 39 directory entries of 26 bytes each. The first 10 bytes
+(1024 - 39*26 = 10) are unused padding at the end.
+
+Directory Entry Format (26 bytes):
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x00   |    1 | Type-dependent info                           |
+  |        |      |   EPS: reserved (0x00)                        |
+  |        |      |   VFX-SD: file attributes                     |
+  | 0x01   |    1 | File type (see File Types below)              |
+  | 0x02   |   12 | File name (ASCII, space-padded to 12 chars)   |
+  | 0x0E   |    2 | File size in blocks (big-endian 16-bit)       |
+  | 0x10   |    2 | Contiguous blocks (big-endian 16-bit)         |
+  | 0x12   |    4 | Starting block number (big-endian 32-bit)     |
+  | 0x16   |    1 | Multi-file index                              |
+  |        |      |   EPS-16: multi-instrument index               |
+  |        |      |   VFX-SD: file number/sequence                 |
+  | 0x17   |    3 | Extended info                                 |
+  |        |      |   VFX-SD: file size in bytes (big-endian 24b) |
+  |        |      |   EPS: reserved (zeros)                       |
+  +--------+------+-----------------------------------------------+
+
+File Types (byte 0x01):
+  0x00 = Empty entry (unused slot)
+  0x01 = Operating System
+  0x02 = Directory (subdirectory)
+  0x03 = EPS/EPS-16/ASR Instrument
+  0x04 = EPS Bank (multi-instrument)
+  0x05 = EPS Sequence
+  0x06 = EPS Song
+  0x07 = EPS System Exclusive Data
+  0x08 = Parent Directory (back-link "..")
+  0x09 = EPS Macro
+  0x17 = EPS-16 Plus Bank
+  0x18 = EPS-16 Plus Effect
+  0x19 = EPS-16 Plus Sequence
+  0x1A = EPS-16 Plus Song
+  0x1B = EPS-16 Plus OS
+  0x1D = ASR-10 Song
+  0x1E = ASR-10 Bank
+  0x1F = ASR-10 Audio Track
+
+File Size and Contiguous Blocks:
+  - "File size" is the total number of blocks used by the file
+  - "Contiguous blocks" is the number of blocks allocated sequentially
+    starting from the starting block
+  - If file size is 0, use contiguous blocks as the actual size
+  - If contiguous blocks equals file size, the file is fully contiguous
+    (no FAT chain needed)
+  - If contiguous < file size, the first 'contiguous' blocks are
+    sequential, then the FAT chain must be followed for the rest
+
+Subdirectories:
+  Entries with type 0x02 are subdirectories. The starting block number
+  points to another 2-block directory with the same 39-entry format.
+  The subdirectory will contain a parent-dir entry (type 0x08) that
+  points back to the parent directory.
+
+  Directories can be nested to arbitrary depth (limited only by disk space).
+
+
+==============================================================================
+2.6 BLOCKS 5-14: FAT (FILE ALLOCATION TABLE)
+==============================================================================
+
+The FAT occupies 10 consecutive blocks (blocks 5 through 14), providing
+storage mapping for the entire data area.
+
+FAT Block Structure (512 bytes):
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x000  |  510 | 170 FAT entries, 3 bytes each (big-endian)   |
+  | 0x1FE  |    2 | Signature: "FB" (0x46 0x42)                   |
+  +--------+------+-----------------------------------------------+
+
+FAT Entry Format (3 bytes, big-endian 24-bit unsigned):
+  Each entry maps a logical block number to the next block in a file chain.
+
+  Block N's FAT entry is at:
+    FAT block index = N / 170  (which FAT block, starting from block 5)
+    Entry index     = N % 170  (which entry within that FAT block)
+    Byte offset     = entry_index * 3  (within the FAT block)
+
+  Entry values:
+    0x000000 = Free block (unused, available for allocation)
+    0x000001 = End of file (last block in the chain)
+    0x000002 = Bad block (marked defective, not used)
+    0x000003+ = Next block number in the file chain
+
+  The total FAT capacity is 10 * 170 = 1700 entries, covering blocks
+  0-1699 (more than the 1600 blocks on a DD disk). HD disks (3200 blocks)
+  would require additional FAT blocks.
+
+  The 2-byte "FB" signature at the end of each FAT block (bytes 510-511)
+  serves as a validation marker.
+
+
+##############################################################################
+PART 3: INSTRUMENT FILE FORMAT
+##############################################################################
+
+Instrument files (file type 0x03) contain sampled audio waveforms along
+with synthesis parameters, envelope definitions, key mappings, and
+layer configurations. The internal format differs between EPS, EPS-16 Plus,
+and ASR-10 instruments.
+
+==============================================================================
+3.1 INSTRUMENT HEADER
+==============================================================================
+
+All instrument types share a common header region in the first few blocks.
+
+EPSlong Encoding:
+  Many multi-byte values in the instrument use "EPSlong" encoding:
+  two consecutive 16-bit big-endian words, where each word stores its
+  value in the upper 12 bits (lower 4 bits are unused/zero).
+
+  Decoding: Given two consecutive 16-bit BE words at offset N:
+    word_low  = (data[N] << 8) | data[N+1]
+    word_high = (data[N+2] << 8) | data[N+3]
+    value = ((word_high >> 4) << 12) | (word_low >> 4)
+
+  This gives a 24-bit effective value range (0x000000 to 0xFFFFFF).
+
+INTx16 Encoding:
+  Individual 16-bit parameter values use "INTx16" encoding:
+  the actual value is in the upper 12 bits of a 16-bit big-endian word.
+  Decoding: value = word >> 4
+
+Instrument Name Encoding:
+  Instrument names are 12 characters, stored as 12 consecutive 16-bit
+  big-endian words. The character is in the high byte of each word.
+  The low byte may contain zero (EPS) or parameter data (EPS-16).
+
+Common Header Fields:
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x00   |    4 | Instrument total size (EPSlong, in blocks)    |
+  | 0x04   |    4 | Machine ID (EPSlong)                          |
+  |        |      |   EPS: high byte = 0xFF (e.g. 0x00FFxxxx)     |
+  |        |      |   EPS-16: value < 0x2000                      |
+  | 0x08   |    2 | Unknown parameter                             |
+  | 0x0A   |   24 | Instrument name (12 chars, INTx16-encoded)    |
+  | 0x22   |    2 | Unknown parameter                             |
+  | 0x24   |    2 | Number of layers (INTx16)                     |
+  | 0x26   |  var | Layer definitions (see below)                 |
+  +--------+------+-----------------------------------------------+
+
+
+==============================================================================
+3.2 LAYER STRUCTURE
+==============================================================================
+
+Each instrument contains one or more layers. Each layer defines a
+key-split range and contains one or more wavesamples.
+
+Layer Header:
+  +--------+------+-----------------------------------------------+
+  | Offset | Size | Description                                   |
+  +--------+------+-----------------------------------------------+
+  | 0x00   |  var | Pre-name parameter words                     |
+  |  ...   |   24 | Layer name (12 chars, INTx16-encoded)         |
+  |  ...   |  var | Key mapping parameters                       |
+  |  ...   |  var | Wavesample headers (one per wavesample)       |
+  +--------+------+-----------------------------------------------+
+
+Layer parameters include:
+  - Key range (lowest/highest key for this layer)
+  - Velocity range
+  - Layer mixing/volume settings
+  - Transpose and tuning offsets
+
+
+==============================================================================
+3.3 WAVESAMPLE STRUCTURE
+==============================================================================
+
+Each wavesample represents a single sampled sound within a layer.
+The wavesample header contains:
+
+  - Sample size (EPSlong, number of samples)
+  - Wavesample name (12 chars, INTx16-encoded)
+  - Loop start point (EPSlong)
+  - Loop end point (EPSlong)
+  - Loop mode (forward, forward/backward, one-shot)
+  - Root key (the MIDI note at which the sample plays at original pitch)
+  - Fine tuning offset
+  - Sample rate (EPS-16/ASR only; EPS uses fixed ~30 kHz)
+  - Envelope generators (filter, amplitude)
+  - LFO parameters
+  - Modulation routings
+
+EPS-16 Plus Sample Rate Encoding:
+  The EPS-16 Plus supports 7 discrete sample rates:
+    Index 0: 44,100 Hz
+    Index 1: 33,000 Hz
+    Index 2: 30,000 Hz
+    Index 3: 27,000 Hz
+    Index 4: 22,050 Hz
+    Index 5: 15,200 Hz
+    Index 6: 11,200 Hz
+
+  The original EPS uses a fixed sample rate of approximately 30,000 Hz.
+
+
+==============================================================================
+3.4 AUDIO DATA
+==============================================================================
+
+Audio sample data follows the parameter/header section of the instrument
+file. All audio is stored as 16-bit big-endian signed PCM, mono.
+
+EPS Audio:
+  - 13-bit effective resolution (stored in 16-bit words)
+  - Lower 3 bits of each sample word are always zero
+  - Sample values range from -32768 to +32760 in steps of 8
+  - Fixed sample rate: approximately 30,000 Hz
+  - Samples are stored sequentially in big-endian byte order
+
+EPS-16 Plus Audio:
+  - Full 16-bit resolution
+  - Sample values range from -32768 to +32767
+  - Variable sample rate (see section 3.3)
+  - Samples are stored sequentially in big-endian byte order
+
+ASR-10 Audio:
+  - Full 16-bit resolution
+  - Variable sample rate
+  - Same storage format as EPS-16 Plus
+
+Audio Data Layout:
+  Within an instrument file, audio data for wavesamples is interleaved
+  with parameter/configuration blocks. A multi-wavesample instrument
+  typically has the following structure:
+
+    [Instrument header]
+    [Layer 1 parameters]
+    [Wavesample 1 parameters + audio data]
+    [Wavesample 2 parameters + audio data]
+    ...
+    [Layer N parameters]
+    [Wavesample M parameters + audio data]
+    [Trailing parameter/envelope data]
+
+  Audio regions can be distinguished from parameter regions by examining
+  512-byte blocks:
+
+  13-bit audio blocks (EPS):
+    - All 256 samples have their low 3 bits = 0 (value % 8 == 0)
+    - Fewer than 25 zero-valued samples per block (parameter/header
+      blocks have 33+ zero-valued samples due to INTx16 padding)
+
+  16-bit audio blocks (EPS-16 Plus / ASR-10):
+    - Samples do NOT cluster at mod-8 boundaries (<50 of 256 match)
+    - Very few zero bytes in the block (<30 of 512)
+
+  Parameter/header blocks:
+    - High zero-sample count (>25 per 256 samples) due to INTx16
+      encoding where the low 4 bits are always zero
+    - May contain ASCII text (effect names, parameter labels)
+    - May have repeating structured patterns (envelope data)
+
+  An instrument may contain both 13-bit and 16-bit audio regions
+  across different wavesamples. Audio regions smaller than 2048 bytes
+  (4 blocks) should be discarded as likely parameter data fragments
+  that happen to match audio characteristics.
+
+
+##############################################################################
+PART 4: MACHINE TYPE DETECTION
+##############################################################################
+
+The machine type (EPS, EPS-16 Plus, ASR-10, VFX-SD) can be detected
+through several methods:
+
+1. OS Info Block (Block 2):
+   If bytes 8-9 are non-zero, the disk is from a VFX-SD/SD-1
+   (these machines have a different OS structure).
+
+2. Device ID Block (Block 1):
+   - Sectors per track field (bytes 5-6):
+     10 sectors = EPS or EPS-16 (DD floppy)
+     20 sectors = ASR-10 (HD floppy)
+   - Label flag at byte 0x1E:
+     0xFF followed by label text suggests EPS-16 Plus
+
+3. Directory Entry File Types:
+   - Types 0x17-0x1B indicate EPS-16 Plus
+   - Types 0x1D-0x1F indicate ASR-10
+   - Type 0x03-0x09 indicate EPS (or generic)
+
+4. Instrument Machine ID:
+   - The EPSlong at offset 4 of an instrument file:
+     High byte 0xFF (mask 0x00FF0000) = EPS
+     Value < 0x2000 and > 0 = EPS-16 Plus
+
+
+##############################################################################
+PART 5: BANK FILES
+##############################################################################
+
+Bank files (types 0x04, 0x17, 0x1E) are multi-instrument containers.
+A bank stores multiple instruments as a single file, bundled together
+for convenient loading. The internal structure is a concatenation of
+individual instrument files with a bank header that provides an index
+to each contained instrument.
+
+
+##############################################################################
+PART 6: SEQUENCE AND SONG FILES
+##############################################################################
+
+Sequence files (types 0x05, 0x19) contain MIDI-like performance data
+recorded on the instrument's built-in sequencer.
+
+Song files (types 0x06, 0x1A, 0x1D) contain arrangements of multiple
+sequences with track assignments and mixing data.
+
+These files do not contain audio data.
+
+
+##############################################################################
+PART 7: AUDIO TRACK FILES (ASR-10 ONLY)
+##############################################################################
+
+Audio track files (type 0x1F) are a feature unique to the ASR-10 and
+ASR-88. They store linear audio recordings made using the ASR's
+audio-track recording capability. The audio is stored as 16-bit
+big-endian signed PCM, similar to instrument audio data.
+
+
+##############################################################################
+PART 8: SYSTEM EXCLUSIVE FILES
+##############################################################################
+
+System exclusive files (type 0x07) contain MIDI System Exclusive data
+dumps. These are used for backing up and restoring patch parameters,
+effects settings, and other configuration data via MIDI.
+
+
+##############################################################################
+APPENDIX A: BYTE-BY-BYTE DISK MAP
+##############################################################################
+
+Double Density Floppy (1600 blocks, 819,200 bytes):
+
+  Block | Byte Offset | Byte End   | Contents
+  ------+-------------+------------+----------------------------------
+     0  | 0x000000    | 0x0001FF   | System Block
+     1  | 0x000200    | 0x0003FF   | Device ID Block
+     2  | 0x000400    | 0x0005FF   | OS Info Block
+     3  | 0x000600    | 0x0007FF   | Root Directory (part 1)
+     4  | 0x000800    | 0x0009FF   | Root Directory (part 2)
+     5  | 0x000A00    | 0x000BFF   | FAT Block 0 (blocks 0-169)
+     6  | 0x000C00    | 0x000DFF   | FAT Block 1 (blocks 170-339)
+     7  | 0x000E00    | 0x000FFF   | FAT Block 2 (blocks 340-509)
+     8  | 0x001000    | 0x0011FF   | FAT Block 3 (blocks 510-679)
+     9  | 0x001200    | 0x0013FF   | FAT Block 4 (blocks 680-849)
+    10  | 0x001400    | 0x0015FF   | FAT Block 5 (blocks 850-1019)
+    11  | 0x001600    | 0x0017FF   | FAT Block 6 (blocks 1020-1189)
+    12  | 0x001800    | 0x0019FF   | FAT Block 7 (blocks 1190-1359)
+    13  | 0x001A00    | 0x001BFF   | FAT Block 8 (blocks 1360-1529)
+    14  | 0x001C00    | 0x001DFF   | FAT Block 9 (blocks 1530-1699)
+    15  | 0x001E00    | 0x0C7FFF   | Data Area (blocks 15-1599)
+  ------+-------------+------------+----------------------------------
+
+High Density Floppy (3200 blocks, 1,638,400 bytes):
+  Same layout as above but the data area extends from block 15 to
+  block 3199 (byte offset 0x001E00 to 0x18FFFF).
+
+
+##############################################################################
+APPENDIX B: FAT ENTRY CALCULATION
+##############################################################################
+
+To find the FAT entry for block number N:
+
+  fat_block_index = N / 170          (integer division)
+  fat_entry_index = N % 170          (remainder)
+  disk_block      = 5 + fat_block_index
+  byte_offset     = fat_entry_index * 3
+
+  entry = (disk[disk_block][byte_offset] << 16) |
+          (disk[disk_block][byte_offset + 1] << 8) |
+          (disk[disk_block][byte_offset + 2])
+
+Example: Block 500
+  fat_block_index = 500 / 170 = 2    -> disk block 7
+  fat_entry_index = 500 % 170 = 160  -> byte offset 480
+  Read 3 bytes at block 7, offset 480
+
+
+##############################################################################
+APPENDIX C: EPSLONG DECODING EXAMPLE
+##############################################################################
+
+Given bytes at offset: 0x23 0x40 0x00 0x10
+
+  word_low  = 0x2340
+  word_high = 0x0010
+
+  low_part  = 0x2340 >> 4  = 0x234
+  high_part = 0x0010 >> 4  = 0x001
+
+  value = (0x001 << 12) | 0x234 = 0x1234 = 4660 decimal
+
+
+##############################################################################
+APPENDIX D: DIRECTORY ENTRY CALCULATION
+##############################################################################
+
+The root directory spans blocks 3 and 4 (1024 bytes total).
+39 entries * 26 bytes = 1014 bytes, with 10 bytes unused at end.
+
+  entry_offset = entry_index * 26   (0-based, 0 to 38)
+
+Example: Entry 20 (21st entry)
+  byte_offset = 20 * 26 = 520
+  This falls in block 4 (offset 520 - 512 = 8 within block 4)
+
+Subdirectories use the same 2-block, 39-entry format at whatever
+starting block the directory entry specifies.
+
+
+##############################################################################
+REFERENCES
+##############################################################################
+
+- Giebler Enterprises: "Ensoniq Floppy Diskette Formats" (Gary Giebler)
+- EnsoniqFS TotalCommander Plugin (Thoralt Franz, GPL v2)
+  Source: disk.c, EnsoniqFS.c, EnsoniqFS.h, bank.c
+- TDDFI utility (Goh King Wah) - GKH format originator
+- eps16.py (EPS-16 Plus Python utilities)
+- Reverse engineering of sample disk images
+
+==============================================================================
+END OF SPECIFICATION
+==============================================================================

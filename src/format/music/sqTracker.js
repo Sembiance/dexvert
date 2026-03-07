@@ -8,6 +8,6 @@ export class sqTracker extends Format
 	magic        = ["SQ Tracker chiptune"];
 	weakMagic    = true;
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "ayEmul[strongMatch]"];
+	converters   = ["zxtune123"];
 	verify       = ({meta}) => meta.duration>=xu.SECOND*3;	// due to weak magic
 }

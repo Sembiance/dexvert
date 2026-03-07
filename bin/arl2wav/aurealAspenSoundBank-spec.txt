@@ -1,0 +1,306 @@
+Aureal Aspen Sound Bank File Format Specification
+===================================================
+
+Overview
+--------
+The Aureal Aspen Sound Bank is a binary file format used by Aureal
+Semiconductor's ASPEN wavetable synthesizer hardware. It is a variant of
+the SoundFont 2.0 (SF2) RIFF format with several modifications specific
+to the ASPEN platform.
+
+Files use the extension ".arl" or may have no extension.
+
+The format contains three major sections:
+  1. INFO - Metadata (bank name, copyright, creation date, etc.)
+  2. sdta - Sample data (raw 16-bit signed PCM audio)
+  3. pdta - Preset data (instruments, presets, generators, modulators,
+     sample headers)
+
+
+Overall File Layout
+-------------------
+All multi-byte integers are little-endian.
+
+Offset  Size  Description
+------  ----  -----------
+0x0000  4     "RIFF" magic identifier
+0x0004  4     RIFF size field (always 0 in ARL files)
+0x0008  4     Form type: "sfbk" (SoundFont Bank)
+0x000C  4     "LIST" chunk identifier
+0x0010  4     INFO LIST size field (always 0 in ARL files)
+0x0014  4     List type: "INFO"
+0x0018  var   INFO sub-chunks (see below)
+var     4     "LIST" chunk identifier
+var+4   4     sdta LIST size field (see note below)
+var+8   4     List type: "sdta"
+var+12  4     "smpl" sub-chunk identifier
+var+16  4     smpl data size in bytes
+var+20  var   Raw 16-bit signed PCM sample data
+var     4     "LIST" chunk identifier
+var+4   4     pdta LIST size
+var+8   4     List type: "pdta"
+var+12  var   pdta sub-chunks (see below)
+EOF-4   4     Trailing padding: 4 bytes of 0x00
+
+Notes on size fields:
+  - The RIFF size field at offset 0x04 is always set to 0 (non-standard;
+    in standard RIFF it would be file_size - 8).
+  - The INFO LIST size field at offset 0x10 is always set to 0
+    (non-standard; in standard RIFF it would be 4 + total INFO sub-chunk
+    bytes).
+  - The sdta LIST size field equals (smpl_chunk_header_size +
+    smpl_data_size) = (8 + smpl_data_size). This is 4 bytes less than
+    the standard RIFF convention which would include the 4-byte "sdta"
+    type field in the size.
+  - The pdta LIST size field is correct per standard RIFF convention
+    (includes the 4-byte "pdta" type field).
+
+
+INFO Sub-chunks
+---------------
+The INFO list contains standard SF2/RIFF INFO sub-chunks. Each sub-chunk
+has the format:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       4     Chunk ID (ASCII)
+  4       4     Chunk data size
+  8       var   Chunk data (null-terminated string or binary)
+
+If the data size is odd, one padding byte (0x00) follows to align to an
+even boundary.
+
+Observed INFO sub-chunks (in order):
+
+  Chunk ID  Description                        Typical Value
+  --------  -----------                        -------------
+  ifil      SoundFont version (major.minor)    0x00000000 (zeroed)
+  iver      ROM version                        0x00000000 (zeroed)
+  isng      Sound engine identifier            "$A$S$P$S$F" (ASPEN ID)
+  INAM      Bank name                          "New SoundFont Bank"
+  irom      ROM name                           (empty, 2 zero bytes)
+  ICRD      Creation date string               "Monday, March 31, 1997"
+  IENG      Engineers                          (empty, 2 zero bytes)
+  IPRD      Product                            "ASPEN"
+  ICOP      Copyright                          "Copyright (c) Aureal..."
+  ICMT      Comment                            "This is a ASPEN..."
+  ISFT      Software/tools                     "ASPEN Voicing Tools"
+
+The isng field "$A$S$P$S$F" serves as the Aureal ASPEN format
+identifier. The ifil and iver version fields are zeroed rather than
+containing standard SF2 version numbers.
+
+
+sdta (Sample Data) Section
+--------------------------
+The sdta LIST contains a single sub-chunk:
+
+  smpl  Raw 16-bit signed little-endian PCM audio data
+
+All samples are stored contiguously in the smpl chunk. Individual sample
+boundaries are defined by the shdr records in the pdta section. Sample
+offsets in shdr are in sample frames (not bytes); multiply by 2 to get
+byte offsets within the smpl data.
+
+Between consecutive samples there is typically a gap of 4 sample frames
+(8 bytes) containing zero values, used as inter-sample padding.
+
+Some shdr records may reference sample offsets beyond the actual smpl
+data size. These represent samples whose audio was not included in the
+file (metadata-only entries).
+
+
+pdta (Preset Data) Section
+--------------------------
+The pdta LIST contains 9 sub-chunks in order. Most follow the standard
+SF2 structure, but shdr, pmod, and imod have non-standard record sizes.
+
+  Chunk  Record Size  Description
+  -----  -----------  -----------
+  phdr   38 bytes     Preset headers (standard SF2)
+  pbag   4 bytes      Preset bags (standard SF2)
+  pmod   12 bytes     Preset modulators (NON-STANDARD: SF2 uses 10)
+  pgen   4 bytes      Preset generators (standard SF2)
+  inst   22 bytes     Instrument headers (standard SF2)
+  ibag   4 bytes      Instrument bags (standard SF2)
+  imod   12 bytes     Instrument modulators (NON-STANDARD: SF2 uses 10)
+  igen   4 bytes      Instrument generators (standard SF2)
+  shdr   48 bytes     Sample headers (NON-STANDARD: SF2 uses 46)
+
+
+phdr - Preset Header (38 bytes per record, standard SF2)
+--------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       20    char[]  achPresetName (null-terminated)
+  20      2     WORD    wPreset (MIDI preset number)
+  22      2     WORD    wBank (MIDI bank number)
+  24      2     WORD    wPresetBagNdx
+  26      4     DWORD   dwLibrary
+  30      4     DWORD   dwGenre
+  34      4     DWORD   dwMorphology
+
+The last record is always a terminal "EOP" record.
+
+
+pbag - Preset Bag (4 bytes per record, standard SF2)
+----------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       2     WORD    wGenNdx (index into pgen)
+  2       2     WORD    wModNdx (index into pmod)
+
+
+pmod - Preset Modulator (12 bytes per record, NON-STANDARD)
+-----------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       2     WORD    sfModSrcOper
+  2       2     WORD    sfModDestOper
+  4       2     SHORT   modAmount
+  6       2     WORD    sfModAmtSrcOper
+  8       2     WORD    sfModTransOper
+  10      2     WORD    wReserved (extra field; typically 0xFFFF)
+
+Standard SF2 modulator records are 10 bytes. The ARL format adds a
+2-byte reserved field at the end, typically set to 0xFFFF.
+
+
+pgen - Preset Generator (4 bytes per record, standard SF2)
+----------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       2     WORD    sfGenOper
+  2       2     varies  genAmount
+
+
+inst - Instrument Header (22 bytes per record, standard SF2)
+-----------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       20    char[]  achInstName (null-terminated)
+  20      2     WORD    wInstBagNdx
+
+The last record is always a terminal "EOI" record.
+
+
+ibag - Instrument Bag (4 bytes per record, standard SF2)
+-------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       2     WORD    wInstGenNdx (index into igen)
+  2       2     WORD    wInstModNdx (index into imod)
+
+
+imod - Instrument Modulator (12 bytes per record, NON-STANDARD)
+--------------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       2     WORD    sfModSrcOper
+  2       2     WORD    sfModDestOper
+  4       2     SHORT   modAmount
+  6       2     WORD    sfModAmtSrcOper
+  8       2     WORD    sfModTransOper
+  10      2     WORD    wReserved (extra field; typically 0xFFFF)
+
+Same layout as pmod. Standard SF2 uses 10 bytes; ARL adds 2 bytes.
+
+
+igen - Instrument Generator (4 bytes per record, standard SF2)
+-------------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       2     WORD    sfGenOper
+  2       2     varies  genAmount
+
+
+shdr - Sample Header (48 bytes per record, NON-STANDARD)
+--------------------------------------------------------
+  Offset  Size  Type    Field
+  ------  ----  ----    -----
+  0       20    char[]  achSampleName (null-terminated)
+  20      4     DWORD   dwStart (start offset in sample frames)
+  24      4     DWORD   dwEnd (end offset in sample frames)
+  28      4     DWORD   dwStartloop (loop start in sample frames)
+  32      4     DWORD   dwEndloop (loop end in sample frames)
+  36      4     DWORD   dwSampleRate (Hz)
+  40      1     BYTE    byOriginalPitch (MIDI key number, 0-127)
+  41      1     CHAR    chPitchCorrection (cents, -99 to +99)
+  42      2     WORD    wSampleLink (index of linked sample)
+  44      2     WORD    sfSampleType (see below)
+  46      2     WORD    wFlags (extra field, see below)
+
+Standard SF2 sample headers are 46 bytes. The ARL format adds a 2-byte
+flags field at the end.
+
+sfSampleType values:
+  0 = terminal (EOS)
+  1 = monoSample
+
+wFlags values observed:
+  0x0000 = Normal sample (most records)
+  0x0001 = Sample has an associated loop partner record
+  0xFFFF = This record is a loop partner (LP) metadata entry
+
+The 20-byte achSampleName is null-terminated. Bytes after the first null
+terminator within the 20-byte field are uninitialized and should be
+ignored.
+
+The last record in shdr is always a terminal "EOS" (End Of Samples)
+record with all fields set to zero and sfSampleType = 0.
+
+Sample offsets (dwStart, dwEnd, dwStartloop, dwEndloop) are in sample
+frames. For 16-bit mono PCM, multiply by 2 to get byte offsets within
+the smpl chunk data.
+
+Loop Partner (LP) Records:
+Some samples have an associated "LP" record immediately following them.
+The LP record has the same name with " LP" appended, dwStart == dwEnd
+(zero-length), and wFlags = 0xFFFF. These define alternative loop
+parameters for the preceding sample and do not contain separate audio
+data.
+
+
+Trailing Bytes
+--------------
+The file ends with exactly 4 bytes of 0x00 padding after the pdta LIST
+chunk. These are not part of any RIFF chunk.
+
+
+Complete Byte Map (Example: au30gm.arl, 5,188,936 bytes)
+---------------------------------------------------------
+  Offset      Size       Description
+  ----------  ---------  -----------
+  0x00000000  12         RIFF header ("RIFF" + size=0 + "sfbk")
+  0x0000000C  12         INFO LIST header ("LIST" + size=0 + "INFO")
+  0x00000018  290        INFO sub-chunks (11 chunks)
+  0x0000013A  12         sdta LIST header ("LIST" + size + "sdta")
+  0x00000146  8          smpl chunk header ("smpl" + size)
+  0x0000014E  5,063,930  smpl PCM data (16-bit signed LE mono)
+  0x004D4648  12         pdta LIST header ("LIST" + size + "pdta")
+  0x004D4654  5,214      phdr chunk (header + 137 records x 38 bytes)
+  0x004D5AB2  1,300      pbag chunk (header + 323 records x 4 bytes)
+  0x004D5FC6  2,312      pmod chunk (header + 192 records x 12 bytes)
+  0x004D68CE  25,764     pgen chunk (header + 6439 records x 4 bytes)
+  0x004DCD72  4,210      inst chunk (header + 191 records x 22 bytes)
+  0x004DDDE4  6,060      ibag chunk (header + 1513 records x 4 bytes)
+  0x004DF590  200        imod chunk (header + 16 records x 12 bytes)
+  0x004DF658  52,856     igen chunk (header + 13212 records x 4 bytes)
+  0x004EC4D0  26,744     shdr chunk (header + 557 records x 48 bytes)
+  0x004F2D44  4          Trailing zero padding
+  ----------
+  Total:      5,188,936  bytes (all bytes accounted for)
+
+
+Differences from Standard SoundFont 2.0
+----------------------------------------
+1. RIFF size field is always 0 (SF2: file_size - 8)
+2. INFO LIST size field is always 0 (SF2: actual content size)
+3. sdta LIST size field is 4 bytes less than SF2 convention (does not
+   include the 4-byte "sdta" type field in the count)
+4. ifil and iver version fields are zeroed (SF2: major.minor versions)
+5. isng contains "$A$S$P$S$F" as ASPEN engine identifier
+6. shdr records are 48 bytes (SF2: 46 bytes) with extra 2-byte wFlags
+7. pmod records are 12 bytes (SF2: 10 bytes) with extra 2-byte reserved
+8. imod records are 12 bytes (SF2: 10 bytes) with extra 2-byte reserved
+9. File has 4 trailing zero bytes after the pdta LIST chunk

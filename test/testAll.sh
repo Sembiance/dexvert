@@ -15,4 +15,4 @@ dra testMany.js --format=poly		# 34m 41s
 dra testMany.js --format=archive	# 44m 30s
 dra testMany.js --format=image		# 50m 21s
 
-# dra testMany.js --format=all  #  3h 29m 25s
+# dra testMany.js --format=all  #  3h 24m 53s

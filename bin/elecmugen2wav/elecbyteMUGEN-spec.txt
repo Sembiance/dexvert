@@ -1,0 +1,146 @@
+Elecbyte M.U.G.E.N. Sound File (.snd) Format Specification
+===========================================================
+
+Overview
+--------
+The .snd file is a container format used by Elecbyte's M.U.G.E.N. fighting game
+engine to store multiple WAV audio samples. Each sound is identified by a
+(group, sound) number pair. All multi-byte integer fields are unsigned 32-bit
+little-endian unless otherwise noted.
+
+
+File Layout
+-----------
+  +-----------------------------+
+  | File Header (512 bytes)     |   Offset 0x000 - 0x1FF
+  +-----------------------------+
+  | Subfile Entry 0             |   Offset 0x200
+  |   16-byte subfile header    |
+  |   WAV data (variable len)   |
+  +-----------------------------+
+  | Subfile Entry 1             |
+  |   16-byte subfile header    |
+  |   WAV data (variable len)   |
+  +-----------------------------+
+  | ...                         |
+  +-----------------------------+
+  | Subfile Entry N-1 (last)    |
+  |   16-byte subfile header    |
+  |   WAV data (variable len)   |
+  +-----------------------------+
+
+
+File Header (512 bytes, offset 0x000)
+-------------------------------------
+  Offset  Size  Description
+  ------  ----  -----------
+  0x000   12    Signature: "ElecbyteSnd\0" (ASCII string, null-terminated)
+  0x00C    4    Version field (see Version Encoding below)
+  0x010    4    Number of sounds (total count of subfile entries)
+  0x014    4    Offset to first subfile entry (always 0x00000200 = 512)
+  0x018  488    Reserved (zero-padded to fill the 512-byte header)
+
+
+Version Encoding (offset 0x00C, 4 bytes)
+-----------------------------------------
+The version field at offset 0x00C is 4 bytes. Two encodings are observed:
+
+  Format A (WinMUGEN / older):
+    Stored as a single uint32 LE value.
+    Observed value: 0x00000004 (version 4).
+    Byte layout: 04 00 00 00
+
+  Format B (MUGEN 1.0+ / newer):
+    Stored as 4 individual version-component bytes:
+      Offset 0x00C: verlo3   (patch2)
+      Offset 0x00D: verlo2   (patch1)
+      Offset 0x00E: verlo1   (minor)
+      Offset 0x00F: verhi    (major)
+    Observed value: bytes 00 01 00 01 → version 1.0.1.0
+    As uint32 LE this reads as 0x01000100.
+
+Both version formats use the identical subfile entry structure described below.
+The version field does not affect parsing.
+
+
+Subfile Entry (16-byte header + WAV data)
+-----------------------------------------
+Each subfile entry is stored contiguously. Entries form a singly-linked list
+via the "next offset" field.
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0x000    4    Next subfile offset: absolute byte offset from start of file
+                to the next subfile entry's header. For the last entry, this
+                value equals the total file size (i.e., one byte past the end
+                of the WAV data for this entry).
+  0x004    4    WAV data length: size in bytes of the WAV data that follows
+                this 16-byte header. This equals the complete size of the
+                embedded WAV file (RIFF header + all chunks).
+  0x008    4    Group number: user-assigned group identifier for this sound.
+  0x00C    4    Sound number: user-assigned sound identifier within the group.
+  0x010    N    WAV data: a complete, standalone WAV file (starts with "RIFF").
+                N = WAV data length from offset 0x004.
+
+Relationship between fields:
+  next_subfile_offset = current_entry_offset + 16 + wav_data_length
+
+For the last entry in the file:
+  next_subfile_offset = total file size
+
+
+Embedded WAV Data
+-----------------
+Each subfile's WAV data is a complete, self-contained WAV file. It begins with
+the standard RIFF/WAVE header:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0x000    4    "RIFF" chunk ID
+  0x004    4    RIFF chunk size (= WAV data length - 8)
+  0x008    4    "WAVE" format identifier
+  0x00C    4    "fmt " sub-chunk ID
+  0x010    4    fmt sub-chunk size (16 for PCM, 18 for non-PCM)
+  0x014    2    Audio format (1 = PCM)
+  0x016    2    Number of channels
+  0x018    4    Sample rate (Hz)
+  0x01C    4    Byte rate
+  0x020    2    Block align
+  0x022    2    Bits per sample
+  ...          (additional sub-chunks may follow, e.g. "fact")
+  ...     4    "data" sub-chunk ID
+  ...     4    data sub-chunk size
+  ...     N    Raw audio sample data
+
+The WAV data can be extracted verbatim and saved as a .wav file with no
+modification required.
+
+
+Traversal Algorithm
+-------------------
+  1. Read the file header (512 bytes).
+  2. Verify signature = "ElecbyteSnd\0".
+  3. Read number_of_sounds from offset 0x010.
+  4. Set current_offset = value at offset 0x014 (first subfile offset, 0x200).
+  5. For i = 0 to number_of_sounds - 1:
+       a. Seek to current_offset.
+       b. Read 16-byte subfile header.
+       c. Extract next_offset, wav_length, group_number, sound_number.
+       d. Read wav_length bytes of WAV data.
+       e. Set current_offset = next_offset.
+  6. After the last entry, current_offset should equal the file size.
+
+
+Byte Accounting Example (system.snd, 8976 bytes, 3 sounds)
+-----------------------------------------------------------
+  Bytes 0x0000-0x01FF:  File header (512 bytes)
+  Bytes 0x0200-0x0200+15:  Subfile 0 header (g=100, s=0)
+  Bytes 0x0210-0x06EC:  WAV data for subfile 0 (1245 bytes)
+  Bytes 0x06ED-0x06ED+15:  Subfile 1 header (g=100, s=1)
+  Bytes 0x06FD-0x16C8:  WAV data for subfile 1 (4044 bytes)
+  Bytes 0x16C9-0x16C9+15:  Subfile 2 header (g=100, s=2)
+  Bytes 0x16D9-0x230F:  WAV data for subfile 2 (3127 bytes)
+  Total: 512 + 3*(16) + 1245 + 4044 + 3127 = 8976 bytes ✓
+
+  Every byte in the file is accounted for:
+    512 (header) + sum_over_all_entries(16 + wav_data_length) = file_size

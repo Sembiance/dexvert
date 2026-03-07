@@ -10,6 +10,7 @@ export class PageStream extends Program
 	exclusive = "wine";
 	notes     = "This program is very finicky and fragile and slow. Often the PDF generation doesn't work and Print to PDF doesn't work either. Installed is version 5. I tried updated to 5.1.2 and it was WORSE. Bleh.";
 	wineData  = r => ({
+		cwd    : "wine://dexvert/PageStream",
 		script : `
 			$mainWindow = WindowRequire("PageStream5", "", 5)
 			Sleep(1000)

@@ -1,0 +1,800 @@
+===============================================================================
+  DLS (Downloadable Sound Bank) File Format Specification
+  -------------------------------------------------------
+  Specification covers DLS Level 1 (MMA/AMEI standard)
+===============================================================================
+
+1. OVERVIEW
+===============================================================================
+
+A DLS file is a RIFF (Resource Interchange File Format) container that stores
+a collection of sampled audio waveforms ("waves") organized into instruments.
+Each instrument maps MIDI note ranges and velocity ranges to wave samples via
+"regions". The format is used by software synthesizers to render MIDI music
+using custom sound banks.
+
+File extension: .dls (also .snd in some contexts)
+MIME type: audio/dls
+Byte order: Little-endian throughout
+
+The file is a single RIFF chunk with form type "DLS ":
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     "RIFF" (ASCII magic)
+    0x04    4     uint32 - Total file size minus 8 (size of all data after
+                  this field)
+    0x08    4     "DLS " (ASCII form type, note trailing space)
+    0x0C    ...   Child chunks (described below)
+
+
+2. RIFF CHUNK FORMAT (General)
+===============================================================================
+
+Every piece of data in a DLS file is stored in a RIFF chunk. All chunks share
+this common header:
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     FourCC tag (4 ASCII characters, space-padded on the right)
+    0x04    4     uint32 - Size of chunk data (excludes this 8-byte header)
+    0x08    ...   Chunk data (exactly 'size' bytes)
+
+If the chunk size is odd, one padding byte (0x00) follows the data to align
+the next chunk to an even offset. This pad byte is NOT included in the size
+field.
+
+Container chunks (RIFF, LIST) have an additional 4-byte form/list type
+immediately after the header:
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     "RIFF" or "LIST"
+    0x04    4     uint32 - Size (includes the 4-byte form type + all children)
+    0x08    4     Form/list type FourCC
+    0x0C    ...   Child chunks
+
+
+3. TOP-LEVEL DLS STRUCTURE
+===============================================================================
+
+The RIFF/DLS chunk contains these child chunks (order may vary; items marked
+[opt] are optional):
+
+    Chunk/LIST       Description
+    -----------      -----------
+    dlid       [opt] Globally Unique Identifier for this bank
+    colh             Collection Header - number of instruments
+    vers       [opt] Version information
+    msyn       [opt] Synthesis hardware flags
+    LIST/lins        Instrument List - contains all instruments
+    ptbl             Pool Table - byte offsets into the wave pool
+    LIST/wvpl        Wave Pool - contains all wave samples
+    LIST/INFO  [opt] Bank-level metadata (name, copyright, etc.)
+
+
+4. CHUNK DEFINITIONS
+===============================================================================
+
+4.1  dlid - DLS Identifier
+-------------------------------------------------------------------------------
+Optional. Contains a 16-byte GUID (Globally Unique Identifier) for the bank.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - Data1
+    0x04    2     uint16 - Data2
+    0x06    2     uint16 - Data3
+    0x08    8     byte[8] - Data4
+
+Total chunk data size: 16 bytes.
+
+
+4.2  colh - Collection Header
+-------------------------------------------------------------------------------
+Specifies the total number of instruments in the bank.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - cInstruments (number of instruments)
+
+Total chunk data size: 4 bytes.
+
+
+4.3  vers - Version
+-------------------------------------------------------------------------------
+Optional. Specifies the DLS format version.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwVersionMS
+                    High 16 bits: major version
+                    Low 16 bits: minor version
+    0x04    4     uint32 - dwVersionLS
+                    High 16 bits: build major
+                    Low 16 bits: build minor
+
+Total chunk data size: 8 bytes.
+
+Standard DLS Level 1 files use version 1.0.0.1 (dwVersionMS=0x00010000,
+dwVersionLS=0x00010000 or 0x00000001).
+
+
+4.4  msyn - MSynthesis
+-------------------------------------------------------------------------------
+Optional. Hardware synthesis capability flags.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - Synthesis flags
+                    Bit 0: 1 = requires hardware DLS support
+                    Other bits reserved (should be 0)
+
+Total chunk data size: 4 bytes.
+
+
+4.5  ptbl - Pool Table
+-------------------------------------------------------------------------------
+Maps wave indices (used by wlnk chunks in regions) to byte offsets within the
+wvpl LIST chunk data.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - cbSize (size of the header portion, typically 8)
+    0x04    4     uint32 - cCues (number of wave entries/offsets)
+    0x08    4*N   uint32[] - poolcue array, N = cCues entries
+                  Each value is a byte offset from the start of the wvpl
+                  LIST's data (after the "wvpl" form type) to the
+                  corresponding LIST/wave chunk.
+
+Total chunk data size: 8 + (4 * cCues) bytes.
+
+The wave index used in wlnk.ulTableIndex corresponds to the index into this
+array.
+
+
+4.6  LIST/lins - Instrument List
+-------------------------------------------------------------------------------
+Container LIST with form type "lins". Contains one or more LIST/ins chunks,
+each defining a single instrument.
+
+    LIST "lins"
+      +-- LIST "ins " (repeated for each instrument)
+
+
+4.7  LIST/ins - Instrument
+-------------------------------------------------------------------------------
+Container LIST with form type "ins " (note trailing space). Defines a single
+instrument with its key/velocity mapping regions and articulation data.
+
+    LIST "ins "
+      +-- insh           Instrument Header
+      +-- LIST "lrgn"    Region List
+      +-- LIST "lart"    Articulation List [opt]
+      +-- LIST "INFO"    Instrument metadata [opt]
+
+
+4.8  insh - Instrument Header
+-------------------------------------------------------------------------------
+Defines the instrument's MIDI bank/program assignment and region count.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - cRegions (number of regions in this instrument)
+    0x04    4     uint32 - ulBank (MIDI bank number, encoded):
+                    Bits 0-6:   CC0 (Bank Select MSB, coarse bank)
+                    Bits 7-13:  Unused (should be 0) -- wait, see below
+                    Bits 8-14:  CC32 (Bank Select LSB, fine bank)
+                    Bit 31:     Drum flag (1 = percussion, 0 = melodic)
+
+                  Encoding detail:
+                    MSB (CC0)  = (ulBank >> 8) & 0x7F
+                    LSB (CC32) = ulBank & 0x7F
+                    Drum       = (ulBank >> 31) & 1
+
+    0x08    4     uint32 - ulInstrument (MIDI program number, 0-127)
+
+Total chunk data size: 12 bytes.
+
+
+4.9  LIST/lrgn - Region List
+-------------------------------------------------------------------------------
+Container LIST with form type "lrgn". Contains one or more LIST/rgn chunks.
+
+    LIST "lrgn"
+      +-- LIST "rgn " (repeated for each region)
+
+
+4.10 LIST/rgn - Region
+-------------------------------------------------------------------------------
+Container LIST with form type "rgn " (note trailing space). Defines a mapping
+from a MIDI key/velocity range to a wave sample.
+
+    LIST "rgn "
+      +-- rgnh           Region Header
+      +-- wsmp           Wave Sample info (region-level overrides) [opt]
+      +-- wlnk           Wave Link (which wave sample to use)
+
+
+4.11 rgnh - Region Header
+-------------------------------------------------------------------------------
+Defines the MIDI note and velocity range for this region.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    2     uint16 - RangeKey.usLow (lowest MIDI note, 0-127)
+    0x02    2     uint16 - RangeKey.usHigh (highest MIDI note, 0-127)
+    0x04    2     uint16 - RangeVelocity.usLow (lowest velocity, 0-127)
+    0x06    2     uint16 - RangeVelocity.usHigh (highest velocity, 0-127)
+    0x08    2     uint16 - fusOptions:
+                    Bit 0: F_RGN_OPTION_SELFNONEXCLUSIVE
+                           (0 = region is self-exclusive, 1 = not)
+    0x0A    2     uint16 - usKeyGroup (key group for exclusive allocation;
+                           0 = no key group)
+
+Total chunk data size: 12 bytes.
+
+
+4.12 wsmp - Wave Sample
+-------------------------------------------------------------------------------
+Defines sample tuning and loop information. Can appear both at the wave level
+(inside LIST/wave) and at the region level (inside LIST/rgn). Region-level
+wsmp overrides the wave-level wsmp.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - cbSize (size of this fixed header, typically 20)
+    0x04    2     uint16 - usUnityNote (MIDI note at which the sample plays
+                           at its recorded pitch, 0-127)
+    0x06    2     int16  - sFineTune (pitch fine-tuning in cents,
+                           -32768 to +32767; 1 cent = 1/100 semitone)
+    0x08    4     int32  - lAttenuation (gain in 1/655360 dB units;
+                           0 = full volume, positive values = quieter)
+    0x0C    4     uint32 - fulOptions:
+                    Bit 0: F_WSMP_NO_TRUNCATION (1 = no truncation)
+                    Bit 1: F_WSMP_NO_COMPRESSION (1 = no compression)
+    0x10    4     uint32 - cSampleLoops (number of loop definitions, 0 or 1)
+
+Following the fixed header, if cSampleLoops > 0, there are loop structures:
+
+    WLOOP structure (16 bytes each):
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - cbSize (size of this structure, always 16)
+    0x04    4     uint32 - ulType:
+                    0 = WLOOP_TYPE_FORWARD (forward loop)
+                    1 = WLOOP_TYPE_RELEASE (release loop, DLS Level 2)
+    0x08    4     uint32 - ulStart (loop start, in samples from wave start)
+    0x0C    4     uint32 - ulLength (loop length in samples)
+
+Total chunk data size: cbSize + (cSampleLoops * 16) bytes.
+With no loops: 20 bytes. With 1 loop: 36 bytes.
+
+
+4.13 wlnk - Wave Link
+-------------------------------------------------------------------------------
+Links a region to a specific wave in the wave pool.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    2     uint16 - fusOptions:
+                    Bit 0: F_WAVELINK_PHASE_MASTER
+                           (1 = this channel is the phase reference)
+                    Bit 1: F_WAVELINK_MULTICHANNEL
+                           (1 = multi-channel interleave)
+    0x02    2     uint16 - usPhaseGroup (phase lock group; channels in the
+                           same group are phase-locked)
+    0x04    4     uint32 - ulChannel (channel placement bitmask):
+                    Bit 0: left channel
+                    Bit 1: right channel
+                    (for mono, typically set to 1)
+    0x08    4     uint32 - ulTableIndex (index into the ptbl pool table;
+                           identifies which wave sample to use)
+
+Total chunk data size: 12 bytes.
+
+
+4.14 LIST/lart - Articulation List
+-------------------------------------------------------------------------------
+Optional container LIST with form type "lart". Contains articulation data
+defining how the instrument responds to MIDI controllers, envelopes, LFOs, etc.
+
+    LIST "lart"
+      +-- art1           Articulation data (DLS Level 1)
+
+
+4.15 art1 - Articulation (Level 1)
+-------------------------------------------------------------------------------
+Defines a set of "connections" that map sources (MIDI controllers, LFOs,
+envelopes) to destinations (pitch, volume, filter, etc.) with scaling.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - cbSize (size of the fixed header, typically 8)
+    0x04    4     uint32 - cConnectionBlocks (number of connection entries)
+
+Followed by cConnectionBlocks connection block structures:
+
+    CONNECTION_BLOCK structure (12 bytes each):
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    2     uint16 - usSource (source enum, see table below)
+    0x02    2     uint16 - usControl (secondary source/controller)
+    0x04    2     uint16 - usDestination (destination enum, see table below)
+    0x06    2     uint16 - usTransform (transform applied to source):
+                    0 = CONN_TRN_NONE (linear)
+                    1 = CONN_TRN_CONCAVE
+                    2 = CONN_TRN_CONVEX (DLS Level 2)
+                    3 = CONN_TRN_SWITCH (DLS Level 2)
+    0x08    4     int32  - lScale (scaling value; interpretation depends
+                           on the destination, often in relative units
+                           like time-cents or 1/655360 dB)
+
+Total chunk data size: 8 + (cConnectionBlocks * 12) bytes.
+
+  Source enums (usSource):
+    0 = CONN_SRC_NONE (constant)
+    1 = CONN_SRC_LFO
+    2 = CONN_SRC_KEYONVELOCITY
+    3 = CONN_SRC_KEYNUMBER
+    4 = CONN_SRC_EG1 (volume envelope)
+    5 = CONN_SRC_EG2 (pitch/filter envelope)
+    6 = CONN_SRC_PITCHWHEEL
+    0x0081 = CONN_SRC_CC1 (mod wheel)
+    0x0082 = CONN_SRC_CC7 (channel volume)
+    0x0083 = CONN_SRC_CC10 (pan)
+    0x0084 = CONN_SRC_CC11 (expression)
+    0x00FE = CONN_SRC_RPN0 (pitch bend range)
+    0x00FF = CONN_SRC_RPN1 (fine tuning)
+    0x0100 = CONN_SRC_RPN2 (coarse tuning)
+
+  Destination enums (usDestination):
+    0 = CONN_DST_NONE
+    1 = CONN_DST_ATTENUATION (gain, in 1/655360 dB)
+    3 = CONN_DST_PITCH (pitch, in cents)
+    4 = CONN_DST_PAN (pan, 0.1% units, 0=left, 500=center, 1000=right)
+    0x0104 = CONN_DST_LFO_FREQUENCY
+    0x0105 = CONN_DST_LFO_STARTDELAY
+    0x0206 = CONN_DST_EG1_ATTACKTIME    (volume attack, time-cents)
+    0x0207 = CONN_DST_EG1_DECAYTIME     (volume decay, time-cents)
+    0x0208 = CONN_DST_EG1_RESERVEDFIELD
+    0x0209 = CONN_DST_EG1_RELEASETIME   (volume release, time-cents)
+    0x020A = CONN_DST_EG1_SUSTAINLEVEL  (volume sustain, 0.1%)
+    0x030A = CONN_DST_EG2_ATTACKTIME    (pitch attack, time-cents)
+    0x030B = CONN_DST_EG2_DECAYTIME     (pitch decay, time-cents)
+    0x030C = CONN_DST_EG2_RESERVEDFIELD
+    0x030D = CONN_DST_EG2_RELEASETIME   (pitch release, time-cents)
+    0x030E = CONN_DST_EG2_SUSTAINLEVEL  (pitch sustain, 0.1%)
+
+  Time-cents scale: time_seconds = 2^(value / (1200 * 65536))
+  Attenuation scale: dB = value / 655360
+
+
+4.16 LIST/wvpl - Wave Pool
+-------------------------------------------------------------------------------
+Container LIST with form type "wvpl". Contains all wave samples referenced
+by the pool table. Each wave is a LIST/wave chunk.
+
+    LIST "wvpl"
+      +-- LIST "wave" (repeated for each wave sample)
+
+
+4.17 LIST/wave - Wave Sample Data
+-------------------------------------------------------------------------------
+Container LIST with form type "wave". Contains the actual audio sample data
+for one wave, along with format and metadata. Structure mirrors a standard
+WAV file.
+
+    LIST "wave"
+      +-- wavu       [opt]  Wave chunk version/flags
+      +-- fmt              Audio format description
+      +-- smpl       [opt]  Sampler/loop info (standard RIFF format)
+      +-- wsmp       [opt]  DLS-specific wave sample tuning and loops
+      +-- data             Raw PCM audio data
+      +-- cue        [opt]  Cue points
+      +-- LIST "adtl" [opt] Associated data list (labels, text)
+      +-- LIST "INFO" [opt] Wave-level metadata
+
+
+4.18 wavu - Wave Version/Flags
+-------------------------------------------------------------------------------
+Optional. Wave chunk version or usage flags (vendor-specific).
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    2     uint16 - version/flags value
+
+Total chunk data size: 2 bytes. Typical value: 0x0001.
+
+
+4.19 fmt - Format
+-------------------------------------------------------------------------------
+Audio format descriptor, identical to the WAV file "fmt " chunk.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    2     uint16 - wFormatTag:
+                    1 = WAVE_FORMAT_PCM (uncompressed)
+                    3 = WAVE_FORMAT_IEEE_FLOAT
+                    Other values indicate compressed formats
+    0x02    2     uint16 - nChannels (1 = mono, 2 = stereo)
+    0x04    4     uint32 - nSamplesPerSec (sample rate, e.g. 22050, 44100)
+    0x08    4     uint32 - nAvgBytesPerSec (= nSamplesPerSec * nBlockAlign)
+    0x0C    2     uint16 - nBlockAlign (= nChannels * (wBitsPerSample / 8))
+    0x0E    2     uint16 - wBitsPerSample (8, 16, or 24)
+
+For PCM format (wFormatTag=1), the chunk may optionally include:
+    0x10    2     uint16 - cbSize (size of extra format data; typically 0)
+
+Total chunk data size: 16 bytes (minimum) or 18 bytes (with cbSize).
+
+DLS Level 1 mandates WAVE_FORMAT_PCM (uncompressed). Common configurations:
+  - 22050 Hz, 16-bit, mono
+  - 44100 Hz, 16-bit, mono
+  - 44100 Hz, 16-bit, stereo
+  - 11025 Hz, 16-bit, mono
+
+
+4.20 smpl - Sampler
+-------------------------------------------------------------------------------
+Optional. Standard RIFF sampler chunk (same as WAV files). Provides sample
+tuning and loop point information.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwManufacturer (MIDI manufacturer ID)
+    0x04    4     uint32 - dwProduct (MIDI product ID)
+    0x08    4     uint32 - dwSamplePeriod (nanoseconds per sample;
+                           = 1000000000 / sample_rate)
+    0x0C    4     uint32 - dwMIDIUnityNote (MIDI note for unshifted playback)
+    0x10    4     uint32 - dwMIDIPitchFraction (fractional pitch, 0 to
+                           0xFFFFFFFF maps 0.0 to < 1.0 semitones)
+    0x14    4     uint32 - dwSMPTEFormat (0, 24, 25, 29, 30)
+    0x18    4     uint32 - dwSMPTEOffset (SMPTE time offset)
+    0x1C    4     uint32 - cSampleLoops (number of loop definitions)
+    0x20    4     uint32 - cbSamplerData (size of optional sampler-specific
+                           data following the loop structures)
+
+If cSampleLoops > 0, followed by loop structures:
+
+    SAMPLE_LOOP structure (24 bytes each):
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwIdentifier (cue point ID)
+    0x04    4     uint32 - dwType:
+                    0 = loop forward
+                    1 = alternating (ping-pong)
+                    2 = loop backward
+    0x08    4     uint32 - dwStart (loop start sample)
+    0x0C    4     uint32 - dwEnd (loop end sample, inclusive)
+    0x10    4     uint32 - dwFraction (fractional sample position)
+    0x14    4     uint32 - dwPlayCount (0 = infinite loop)
+
+Total chunk data size: 36 + (cSampleLoops * 24) + cbSamplerData bytes.
+
+Note: When both smpl and wsmp are present in the same wave, the DLS wsmp
+chunk takes precedence for DLS playback. The smpl chunk may be retained for
+WAV compatibility.
+
+
+4.21 data - Wave Data
+-------------------------------------------------------------------------------
+Contains raw audio sample data.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    N     byte[] - Raw PCM samples
+
+For WAVE_FORMAT_PCM:
+  - 8-bit samples: unsigned, 0-255, 128 = silence
+  - 16-bit samples: signed little-endian, -32768 to 32767, 0 = silence
+
+Sample count = data_size / (channels * (bits_per_sample / 8))
+Duration = sample_count / sample_rate
+
+
+4.22 cue - Cue Points
+-------------------------------------------------------------------------------
+Optional. Defines named positions within the wave data.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwCuePoints (number of cue point entries)
+
+Followed by dwCuePoints cue point structures:
+
+    CUE_POINT structure (24 bytes each):
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwIdentifier (unique ID)
+    0x04    4     uint32 - dwPosition (play order position)
+    0x08    4     FourCC - fccChunk (chunk ID, usually "data")
+    0x0C    4     uint32 - dwChunkStart (byte offset of chunk containing
+                           the cue, from start of data)
+    0x10    4     uint32 - dwBlockStart (byte offset of block containing
+                           the cue position)
+    0x14    4     uint32 - dwSampleOffset (sample offset within the block)
+
+Total chunk data size: 4 + (dwCuePoints * 24) bytes.
+
+
+4.23 LIST/adtl - Associated Data List
+-------------------------------------------------------------------------------
+Optional container LIST with form type "adtl". Provides text labels and
+other metadata for cue points.
+
+    LIST "adtl"
+      +-- labl [opt]  Label for a cue point (repeated)
+      +-- ltxt [opt]  Text associated with a range (repeated)
+
+
+4.24 labl - Label
+-------------------------------------------------------------------------------
+Optional. Associates a text label with a cue point.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwIdentifier (cue point ID this label refers to)
+    0x04    N     char[] - Null-terminated ASCII label string
+
+Total chunk data size: 4 + string length (including null terminator).
+
+
+4.25 ltxt - Labeled Text
+-------------------------------------------------------------------------------
+Optional. Associates text and region info with a cue point range.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0x00    4     uint32 - dwIdentifier (cue point ID)
+    0x04    4     uint32 - dwSampleLength (length of region in samples)
+    0x08    4     FourCC - dwPurpose (purpose, e.g. "rgn ")
+    0x0C    2     uint16 - wCountry (country code)
+    0x0E    2     uint16 - wLanguage (language code)
+    0x10    2     uint16 - wDialect (dialect code)
+    0x12    2     uint16 - wCodePage (code page)
+    0x14    N     char[] - Labeled text string (optional, may be empty)
+
+Total chunk data size: 20 + text length bytes.
+
+
+4.26 LIST/INFO - Information
+-------------------------------------------------------------------------------
+Optional container LIST with form type "INFO". Can appear at the top level
+(bank metadata), inside LIST/ins (instrument metadata), or inside LIST/wave
+(wave metadata).
+
+Contains standard RIFF INFO sub-chunks, each holding a null-terminated ASCII
+string:
+
+    FourCC  Description
+    ------  -----------
+    IARL    Archival location
+    ICMT    Comments
+    ICOP    Copyright
+    IENG    Engineer / creator
+    INAM    Name / title
+    ISBJ    Subject / description
+    ISFT    Software used to create
+    DATE    Creation date (non-standard, but commonly present)
+    IGNR    Genre
+    IART    Artist
+
+Each INFO sub-chunk has the standard chunk header followed by a
+null-terminated ASCII string. Strings may be padded to even length.
+
+
+5. COMPLETE FILE LAYOUT (Byte Map)
+===============================================================================
+
+Below is the complete byte-level layout of a DLS file, showing exactly how
+every byte is accounted for:
+
+    Bytes 0-3:      "RIFF" (magic identifier)
+    Bytes 4-7:      uint32 riff_size (file_size - 8)
+    Bytes 8-11:     "DLS " (form type)
+
+    --- Top-level children (starting at byte 12) ---
+
+    [dlid chunk - optional, 24 bytes total]
+      Bytes +0..+3:   "dlid"
+      Bytes +4..+7:   uint32 size (16)
+      Bytes +8..+23:  16-byte GUID
+
+    [colh chunk - 12 bytes total]
+      Bytes +0..+3:   "colh"
+      Bytes +4..+7:   uint32 size (4)
+      Bytes +8..+11:  uint32 cInstruments
+
+    [vers chunk - optional, 16 bytes total]
+      Bytes +0..+3:   "vers"
+      Bytes +4..+7:   uint32 size (8)
+      Bytes +8..+11:  uint32 dwVersionMS
+      Bytes +12..+15: uint32 dwVersionLS
+
+    [msyn chunk - optional, 12 bytes total]
+      Bytes +0..+3:   "msyn"
+      Bytes +4..+7:   uint32 size (4)
+      Bytes +8..+11:  uint32 synthesis_flags
+
+    [LIST/lins - Instrument collection]
+      Bytes +0..+3:   "LIST"
+      Bytes +4..+7:   uint32 list_size
+      Bytes +8..+11:  "lins"
+      Bytes +12...:   LIST/ins children (repeated)
+
+        [LIST/ins - Single instrument]
+          Bytes +0..+3:   "LIST"
+          Bytes +4..+7:   uint32 list_size
+          Bytes +8..+11:  "ins "
+
+          [insh - 20 bytes total]
+            Bytes +0..+3:   "insh"
+            Bytes +4..+7:   uint32 size (12)
+            Bytes +8..+11:  uint32 cRegions
+            Bytes +12..+15: uint32 ulBank
+            Bytes +16..+19: uint32 ulInstrument
+
+          [LIST/lrgn - Region collection]
+            Bytes +0..+3:   "LIST"
+            Bytes +4..+7:   uint32 list_size
+            Bytes +8..+11:  "lrgn"
+
+            [LIST/rgn - Single region (repeated)]
+              Bytes +0..+3:   "LIST"
+              Bytes +4..+7:   uint32 list_size
+              Bytes +8..+11:  "rgn "
+
+              [rgnh - 20 bytes total]
+                Bytes +0..+3:   "rgnh"
+                Bytes +4..+7:   uint32 size (12)
+                Bytes +8..+9:   uint16 key_low
+                Bytes +10..+11: uint16 key_high
+                Bytes +12..+13: uint16 vel_low
+                Bytes +14..+15: uint16 vel_high
+                Bytes +16..+17: uint16 options
+                Bytes +18..+19: uint16 key_group
+
+              [wsmp - 28 or 44 bytes total (optional)]
+                Bytes +0..+3:   "wsmp"
+                Bytes +4..+7:   uint32 size (20 or 36)
+                Bytes +8..+11:  uint32 cbSize (20)
+                Bytes +12..+13: uint16 unity_note
+                Bytes +14..+15: int16 fine_tune
+                Bytes +16..+19: int32 attenuation
+                Bytes +20..+23: uint32 options
+                Bytes +24..+27: uint32 num_loops
+                [If num_loops > 0:]
+                Bytes +28..+31: uint32 loop_cb_size (16)
+                Bytes +32..+35: uint32 loop_type
+                Bytes +36..+39: uint32 loop_start
+                Bytes +40..+43: uint32 loop_length
+
+              [wlnk - 20 bytes total]
+                Bytes +0..+3:   "wlnk"
+                Bytes +4..+7:   uint32 size (12)
+                Bytes +8..+9:   uint16 options
+                Bytes +10..+11: uint16 phase_group
+                Bytes +12..+15: uint32 channel
+                Bytes +16..+19: uint32 table_index
+
+          [LIST/lart - optional]
+            Bytes +0..+3:   "LIST"
+            Bytes +4..+7:   uint32 list_size
+            Bytes +8..+11:  "lart"
+
+            [art1]
+              Bytes +0..+3:   "art1"
+              Bytes +4..+7:   uint32 size
+              Bytes +8..+11:  uint32 cbSize (8)
+              Bytes +12..+15: uint32 cConnectionBlocks
+              [Connection blocks, 12 bytes each:]
+              Bytes +16..+17: uint16 source
+              Bytes +18..+19: uint16 control
+              Bytes +20..+21: uint16 destination
+              Bytes +22..+23: uint16 transform
+              Bytes +24..+27: int32 scale
+              ... (repeated)
+
+          [LIST/INFO - optional instrument metadata]
+            (same structure as section 4.26)
+
+    [ptbl - Pool Table]
+      Bytes +0..+3:   "ptbl"
+      Bytes +4..+7:   uint32 size
+      Bytes +8..+11:  uint32 cbSize (8)
+      Bytes +12..+15: uint32 cCues
+      Bytes +16...:   uint32[] offsets (4 bytes each, cCues entries)
+
+    [LIST/wvpl - Wave Pool]
+      Bytes +0..+3:   "LIST"
+      Bytes +4..+7:   uint32 list_size
+      Bytes +8..+11:  "wvpl"
+
+      [LIST/wave - Single wave (repeated)]
+        Bytes +0..+3:   "LIST"
+        Bytes +4..+7:   uint32 list_size
+        Bytes +8..+11:  "wave"
+
+        [wavu - optional, 10 bytes total]
+          Bytes +0..+3: "wavu"
+          Bytes +4..+7: uint32 size (2)
+          Bytes +8..+9: uint16 version
+
+        [fmt - 24 or 26 bytes total]
+          Bytes +0..+3:   "fmt "
+          Bytes +4..+7:   uint32 size (16 or 18)
+          Bytes +8..+9:   uint16 format_tag
+          Bytes +10..+11: uint16 channels
+          Bytes +12..+15: uint32 sample_rate
+          Bytes +16..+19: uint32 avg_bytes_per_sec
+          Bytes +20..+21: uint16 block_align
+          Bytes +22..+23: uint16 bits_per_sample
+          [If size >= 18:]
+          Bytes +24..+25: uint16 cb_size (0)
+
+        [smpl - optional, 44+ bytes total]
+          Bytes +0..+3:   "smpl"
+          Bytes +4..+7:   uint32 size
+          Bytes +8..+11:  uint32 manufacturer
+          Bytes +12..+15: uint32 product
+          Bytes +16..+19: uint32 sample_period
+          Bytes +20..+23: uint32 unity_note
+          Bytes +24..+27: uint32 pitch_fraction
+          Bytes +28..+31: uint32 smpte_format
+          Bytes +32..+35: uint32 smpte_offset
+          Bytes +36..+39: uint32 num_loops
+          Bytes +40..+43: uint32 sampler_data_size
+          [If num_loops > 0, 24 bytes per loop:]
+          Bytes +44..+47: uint32 cue_id
+          Bytes +48..+51: uint32 loop_type
+          Bytes +52..+55: uint32 loop_start
+          Bytes +56..+59: uint32 loop_end
+          Bytes +60..+63: uint32 fraction
+          Bytes +64..+67: uint32 play_count
+
+        [wsmp - optional, wave-level tuning]
+          (same structure as region wsmp, section 4.12)
+
+        [data - audio samples]
+          Bytes +0..+3:   "data"
+          Bytes +4..+7:   uint32 size
+          Bytes +8..+N:   raw PCM audio data
+
+        [cue - optional]
+          (structure as section 4.22)
+
+        [LIST/adtl - optional]
+          (structure as section 4.23)
+
+        [LIST/INFO - optional wave metadata]
+          (structure as section 4.26)
+
+    [LIST/INFO - optional bank-level metadata]
+      (structure as section 4.26)
+
+
+6. ALIGNMENT AND PADDING
+===============================================================================
+
+Per the RIFF specification:
+- All chunks start at even byte offsets
+- If a chunk's data size is odd, one zero-padding byte follows the data
+- The padding byte is NOT included in the chunk's size field
+- The size field in RIFF/LIST headers includes the 4-byte form type
+
+
+7. REFERENCES
+===============================================================================
+
+- "Downloadable Sounds Level 1" specification, MIDI Manufacturers Association
+  (MMA), version 1.1b, 1999
+- Microsoft "Multimedia Programming Interface and Data Specifications 1.0"
+  (RIFF specification), August 1991
+- Microsoft DirectMusic DLS documentation
+- DLS Level 2 specification, MMA (extends Level 1 with additional features)
+
+
+===============================================================================
+  End of specification
+===============================================================================

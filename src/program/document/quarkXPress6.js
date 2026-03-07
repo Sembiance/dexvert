@@ -10,39 +10,29 @@ export class quarkXPress6 extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			Func MainWindowOrActivate()
-				WindowDismiss("Activate QuarkXPress 6.1", "", "{TAB}{ENTER}")
-				return WinActive("QuarkXPress Passport (tm)", "")
-			EndFunc
-			$mainWindow = CallUntil("MainWindowOrActivate", ${xu.SECOND*20})
-
 			Func PreOpenWindows()
+				WindowDismiss("Activate QuarkXPress 6.1", "", "{TAB}{ENTER}")
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some settings saved with this project are different", "{ENTER}")
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "uses fonts not installed", "{TAB}{ENTER}")
 				WindowFailure("[TITLE:QuarkXPress (tm)]", "This file is not a valid Quark", -1, "{ESCAPE}")
+				return ControlGetHandle("", "", "[CLASS:XPressMDIProject]")
 			EndFunc
-			CallUntil("PreOpenWindows", ${xu.SECOND*5})
+			$controlExists = CallUntil("PreOpenWindows", ${xu.SECOND*30})
+			If Not $controlExists Then
+				Exit 0
+			EndIf
 
-			SendSlow("!fed")
+			Send("^p")
 
-			$exportWindow = WindowRequire("Export as PDF", "", 5)
-			Send("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($exportWindow, "", 15)
-
-			Func PostExportWindows()
-				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some disk files for", "{ENTER}")
+			Func PrePrintWindows()
+				WindowDismiss("[TITLE:QuarkXPress (tm)]", "This document was built with other", "{ENTER}")
+				return WinActive("Print in", "")
 			EndFunc
-			CallUntil("PostExportWindows", ${xu.SECOND*5})
-			WaitForStableFileSize("c:\\out\\out.pdf", ${xu.SECOND*2}, ${xu.SECOND*30})
+			$printWindow = CallUntil("PrePrintWindows", ${xu.SECOND*7})
 
-			WinWaitActive($mainWindow, "", 10)
-			
-			Send("^q")
-			
-			$saveChangesVisible = WinWaitActive("[TITLE:QuarkXPress (tm)]", "Save changes to", 5)
-			If $saveChangesVisible Not = 0 Then
-				Send("n")
-			EndIf`
+			Send("{ENTER}")
+
+			HandleCutePDFPrint()`
 	});
 	renameOut = true;
 }

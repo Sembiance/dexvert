@@ -13,13 +13,7 @@ export class pageMaker7QuarkConverter extends Program
 			$mainWindow = WindowRequire("Converter for Microsoft", "", 10)
 			SendSlow("!os")
 			$chooseDestinationWindow = WindowRequire("Choose Destination", "", 5)
-			Send("+{TAB}")
-			Sleep(500)
-			Send("+{TAB}")
-			Sleep(500)
-			Send("+{TAB}")
-			Sleep(500)
-			SendSlow("{DOWN}{HOME}{DOWN}{DOWN}{DOWN}{DOWN}{TAB}{TAB}{DOWN}out{ENTER}{TAB}{ENTER}");
+			SendSlow("{DOWN}{DOWN}{END}c{DOWN}{DOWN}{ENTER}{TAB}{TAB}out{ENTER}{TAB}{ENTER}");
 			WinWaitClose($chooseDestinationWindow, "", 5)
 
 			Send("^o")

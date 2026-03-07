@@ -137,11 +137,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Formats exe/dll/windowsSCR now return meta data in dexvert from exiftool like: CompanyName, ProductVersion, Comments, LegalCopyright, etc....
-  I should push useful fields into 'textContent' so it can be searched upon (see where else I'm already getting meta info like title and author and it should probably go in the same place) (phase4.js?)
-  After deciding what content belongs in there, update view-other.js in discmaster to support showing these fields as extraMeta
-
-
 >>> Blender 5
 * Update to Blender 5. I could go with the binary verison (https://download.blender.org/release/Blender5.0/) or Gentoo.
   I'm really not sure which approach is better. Binary means it should work on all gentoo systems, BUT it may mean the exact opposite.

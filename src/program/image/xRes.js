@@ -15,7 +15,7 @@ export class xRes extends Program
 			SendSlow("en")
 
 			$saveWindow = WindowRequire("Save Image", "", 10)
-			Send("{TAB}{TAB}{TAB}{TAB}c:\\out\\out.png{ENTER}")
+			SendSlow("{DOWN}{UP}{ENTER}{TAB}{TAB}out{ENTER}{TAB}out.png{ENTER}")
 			WinWaitClose($saveWindow, "", 10)
 
 			$pngOptionsWindow = WindowRequire("PNG Options", "", 10)

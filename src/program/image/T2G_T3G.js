@@ -13,12 +13,15 @@ export class T2G_T3G extends Program
 			Send("{F2}")
 
 			$selectSourceWindow = WindowRequire("[TITLE:Select source file]", "", 10)
-			MouseClick("left", 490, 445, 2, 0)
+			MouseClick("left", 490, 455, 2, 0)
+			Sleep(250)
 			MouseClick("left", 298, 331, 2, 0)
 			WinWaitClose("[TITLE:Select source file]", "", 10)
 
 			$selectTargetWindow = WindowRequire("[TITLE:Select target file]", "", 10)
-			MouseClick("left", 490, 523, 2, 0)
+			MouseClick("left", 573, 452)
+			Sleep(250)
+			MouseClick("left", 469, 346, 2, 0)
 			Send("out.t3g{ENTER}")
 			WinWaitClose($selectTargetWindow, "", 10)
 

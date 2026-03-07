@@ -36,6 +36,11 @@ xlog.info`Preparing prefix bases...`;
 await fileUtil.unlink(C.WINE_PREFIX, {recursive : true});
 await Deno.mkdir(C.WINE_PREFIX, {recursive : true});
 
+// these are required for wine browse dialogs to work, otherwise drive_c/users/sembiance/<dirName> symlinks are broken and wine fails with: 0484:err:commdlg:IShellBrowserImpl_BrowseObject could not browse to folder
+xlog.info`Creating symlink targets...`;
+for(const dirName of ["Desktop", "Documents"])
+	await Deno.mkdir(path.join("/home/sembiance", dirName), {recursive : true});
+
 const winePrefixDirPaths = await fileUtil.tree(C.WINE_PREFIX_SRC, {nofile : true, depth : 1});
 for(const winePrefixDirPath of winePrefixDirPaths)
 {

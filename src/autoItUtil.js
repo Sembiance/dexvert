@@ -176,12 +176,12 @@ Func HandleCutePDFPrint()
 	$cuteWindow = WindowRequire("CutePDF Writer", "", 20)
 	ClipPut("c:\\out\\out.pdf")
 	Send("{BACKSPACE}")
-	Sleep(250)
+	Sleep(500)
 	Send("^v")
-	Sleep(250)
+	Sleep(500)
 	Send("!s")
-	WinWaitClose($cuteWindow, "", 10)
-	WaitForStableFileSize("c:\\out\\out.pdf", ${xu.SECOND*2}, ${xu.SECOND*15})
+	WinWaitClose($cuteWindow, "", 15)
+	WaitForStableFileSize("c:\\out\\out.pdf", ${xu.SECOND*2}, ${xu.SECOND*20})
 EndFunc
 `,
 	RunWaitWithTimeout : `
@@ -311,16 +311,16 @@ Func Pause($msg="pause")
 	MsgBox(0, "pause", $msg)
 EndFunc`,
 	DebugListWindowTitles : `
-	Func DebugListWindowTitles()
-		Local $aList = WinList()
+Func DebugListWindowTitles()
+	Local $aList = WinList()
 
-		; Loop through the array displaying only visible windows with a title.
-		For $i = 1 To $aList[0][0]
-			If $aList[$i][0] <> "" And BitAND(WinGetState($aList[$i][1]), 2) Then
-				MsgBox(0, "", "Title: [" & $aList[$i][0] & "]" & @CRLF & "Handle: " & $aList[$i][1])
-			EndIf
-		Next
-	EndFunc`
+	; Loop through the array displaying only visible windows with a title.
+	For $i = 1 To $aList[0][0]
+		If $aList[$i][0] <> "" And BitAND(WinGetState($aList[$i][1]), 2) Then
+			MsgBox(0, "", "Title: [" & $aList[$i][0] & "]" & @CRLF & "Handle: " & $aList[$i][1])
+		EndIf
+	Next
+EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["GetTime", "TimeDiff", "KillAll"];
 const FUNC_REQ_FUNCS = {

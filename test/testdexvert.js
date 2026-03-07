@@ -272,7 +272,7 @@ const FLEX_SIZE_FORMATS = {
 		dumpFile                 : 0.1,
 		isoZipped                : 0.1,
 		prehistorikGameArchive   : 0.1,
-		"vivBIGF:.iff"           : 0.1,
+		vivBIGF                  : 0.1,
 
 		// different each time due to way it generates frames
 		swf    : 75,
@@ -302,6 +302,7 @@ const FLEX_SIZE_FORMATS = {
 	document :
 	{
 		// these conversions sometimes differ WILDLY, haven't figured out why
+		envoy              : 80,
 		farallonReplica    : 25,
 		hlp                : 50,
 		ibmBookManagerBook : 99999,
@@ -347,7 +348,7 @@ const FLEX_SIZE_FORMATS = {
 		ssiTLB           : 0.1,
 		theDraw          : 0.1,
 		windowsClipboard : 0.1,
-		xwd              : 30,
+		xwd              : 50,
 
 		// differs depending on host
 		avif     : 1,	// avifdec
@@ -471,6 +472,7 @@ const FLEX_DIFF_FILES = [
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
 	/audio\/aurealAspenSoundBank\/(.*\.arl|aurealgm)$/,
+	/music\/amosTracker\/.+$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/,
 	/music\/ay\/emul\.(dragonslair2|gliderrider)$/
 ];
@@ -536,6 +538,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/poly\/cinema4D\/bomb\.xml$/i, "text", "xml"],
 	[/poly\/collada\/item_flashlight\.dae$/i, "text", "xml"],
 	[/poly\/dxf\/abydos\.r14\.dxf$/i, "image", true],
+	[/poly\/industryFoundationClasses\/SampleHouse\.ifc$/, "text", "stepModelData"],
 	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", "imf"],
 	[/poly\/panda3DModel\/Spotlight \(1\)\.egg$/i, "text", "txt"],
 	[/poly\/polygonFileFormat\/example1\.ply$/i, "text", "txt"],

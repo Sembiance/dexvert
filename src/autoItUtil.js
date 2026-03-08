@@ -301,7 +301,7 @@ Func CallUntil($funcName, $max_duration)
 	return $done
 EndFunc`,
 	SendSlow : `
-Func SendSlow($text, $delay=200)
+Func SendSlow($text, $delay=150)
 	$prevDelay = AutoItSetOption("SendKeyDelay", $delay)
 	Send($text)
 	AutoItSetOption("SendKeyDelay", $prevDelay)

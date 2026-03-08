@@ -4,11 +4,14 @@ import {Program} from "../../Program.js";
 
 export class quarkXPress6 extends Program
 {
-	website  = "https://archive.org/details/quarkxpress6.1version6.1r02004";
-	loc      = "win7";
-	bin      = "c:\\Program Files\\Quark\\QuarkXPress 6.1\\QuarkXPress Passport.exe";
-	args     = r => [r.inFile()];
-	osData   = ({
+	website = "https://archive.org/details/quarkxpress6.1version6.1r02004";
+	loc     = "win7";
+	bin     = "c:\\Program Files\\Quark\\QuarkXPress 6.1\\QuarkXPress Passport.exe";
+	args    = r => [r.inFile()];
+	flags   = {
+		outType : "Specify which format to export to. eps || pdf. Default: pdf"
+	};
+	osData = r => ({
 		script : `
 			Func ProjectIsOpen()
 				$control = ControlGetHandle("", "", "[CLASS:XPressMDIProject]")
@@ -36,17 +39,35 @@ export class quarkXPress6 extends Program
 				Exit 0
 			EndIf
 
+		${r.flags.outType==="eps" ? `
+			Send("!fv")
+
+			$epsWindow = WindowRequire("Save Page as EPS", "", 10)
+			SendSlow("c:\\out\\out.eps{ENTER}")
+			WinWaitClose($epsWindow, "", 10)
+			Func PostExportWindows()
+				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some disk files for pictures", "{ENTER}")
+			EndFunc
+			CallUntil("PostExportWindows", ${xu.SECOND*4})
+			WaitForStableFileSize("c:\\out\\out.eps", ${xu.SECOND*3}, ${xu.SECOND*20})
+		` : `
 			Send("^p")
 
 			Func PrePrintWindows()
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "This document was built with other", "{ENTER}")
+				WindowFailure("[TITLE:QuarkXPress (tm)]", "Cannot open the printer", -1, "{ENTER}")
 				return WinActive("Print in", "")
 			EndFunc
 			$printWindow = CallUntil("PrePrintWindows", ${xu.SECOND*7})
+			If Not $printWindow Then
+				Exit 0
+			EndIf
 
 			Send("{ENTER}")
 
-			HandleCutePDFPrint()`
+			HandleCutePDFPrint()`}
+		`
 	});
 	renameOut = true;
+	chain     = r => (r.flags.outType==="eps" ? "dexvert[asFormat:image/eps]" : null);
 }

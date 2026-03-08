@@ -11,6 +11,10 @@ export class quarkXPress extends Format
 		/^fmt\/(650|652|1317|1318|1319|1321|1322|1323|1325|1442|1443|1444)( |$)/, /^x-fmt\/182( |$)/
 	];
 	idMeta     = ({macFileType, macFileCreator}) => ["XDOC", "XTMP"].includes(macFileType) && macFileCreator.startsWith("XPR");
-	converters = ["quarkXPress6", "pageMaker7QuarkConverter"];
-	notes      = "Some samples don't convert: 1_8.5x11.qxd report, 10_11X14.qxd and 9_8.5X14.qxd report";
+	converters = [
+		"quarkXPress6",
+		"quarkXPress6[outType:eps]",	// quarkxpress6 is finicky and won't "print" some files, such as covers.qxd so we just try both printing (pdf) and eps
+		"pageMaker7QuarkConverter"
+	];
+	notes = "Some samples don't convert: 1_8.5x11.qxd report, 10_11X14.qxd and 9_8.5X14.qxd report";
 }

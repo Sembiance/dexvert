@@ -60,7 +60,7 @@ fd magick -x rm {} \;
 rm -rf ge-server* Ay_Emul* cxf-tmp* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
 rm -f ./*.crash.txt
 rm -f IWS.log UnrealArchiveDecompressed
-rm -rf .vbox-sembiance-ipc system-commandline-sentinel-files gimp blender* .wine-7777
+rm -rf .vbox-sembiance-ipc system-commandline-sentinel-files gimp blender* .wine-7777 torchinductor_sembiance jna-sembiance
 rm -f ~/.mtab.fuseiso ~/.mtab.fuseiso.new
 
 umount --quiet .mount_ink* 2> /dev/null

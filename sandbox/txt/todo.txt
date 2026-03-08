@@ -17,6 +17,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add hyperWriter .hw3 when converter finally ready		https://discmaster.textfiles.com/search?extension=hw3&format=hyperWriter
+
 * This "Polygon File Format (Alt)" in dexmagic is wrong, rename it somethign else, remove from poloygonFileFormat.js and maybe vibe a different ply2obj.py converter
 
 * Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt

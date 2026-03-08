@@ -104,6 +104,10 @@ export const IGNORE_MAGICS =
 	// exeoverlayID
 	/^overlay: /,
 
+	// gameextractorID
+	/^geArchive: DLL_MZ( |$)/,
+	/^geViewer: JavaImagingUtilities( |$)/,
+
 	// GT2
 	/^Ausf.*hrbare Sony PlayStation Datei$/,
 	/^BMF A\.i Bild/,
@@ -364,9 +368,9 @@ export const WEAK_VALUES =
 	// candidates
 	// SEEN  ONCE:
 	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD
-	//		XFS, BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, BANK_QL, SPR_3, LEV, CAR_FRAC
+	//		XFS, BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, BANK_QL, SPR_3, LEV, CAR_FRAC, FBZ_PK, BIN_P00P, ARC_ARC, GUT
 	// SEEN TWICE:
-	// 		OFF, PRE_OPEN, TXD_2, DAT_PAK, DAT_RES, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX
+	// 		OFF, PRE_OPEN, TXD_2, DAT_PAK, DAT_RES, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, TEXTURE, PCK_2, AFS_AFS_WE00, FLA, SHD, PCG
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13)( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
@@ -392,6 +396,7 @@ export const WEAK_VALUES =
 	/^geArchive: CAS( |$)/,
 	/^geArchive: CPN( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,
+	/^geArchive: DBS( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
 	/^geArchive: DTA(_DTA)?( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
@@ -408,6 +413,7 @@ export const WEAK_VALUES =
 	/^geArchive: MXS( |$)/,
 	/^geArchive: NoExt_2( |$)/,
 	/^geArchive: PAC_2( |$)/,
+	/^geArchive: PKF( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
 	/^geArchive: RMX( |$)/,
@@ -415,6 +421,7 @@ export const WEAK_VALUES =
 	/^geArchive: SCH_SND( |$)/,
 	/^geArchive: SFS_AAMVHFSS( |$)/,
 	/^geArchive: SLV_DATA( |$)/,
+	/^geArchive: U_Generic( |$)/,
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,

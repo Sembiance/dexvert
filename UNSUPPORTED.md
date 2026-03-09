@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,029)
+# Unsupported File Formats (4,030)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -779,7 +779,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (198)
+## Image (199)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -916,6 +916,7 @@ Family/Format | Name | Extensions | Notes
 [image/palmGrayPaintBitmap](https://discmaster.textfiles.com/search?format=palmGrayPaintBitmap) | Palm GrayPaint bitmap | .pdb | 
 [image/palmTealPaintDrawing](https://discmaster.textfiles.com/search?format=palmTealPaintDrawing) | Palm TealPaint drawing | .pdb | 
 [image/pattonFlowChartingTemplate](https://discmaster.textfiles.com/search?format=pattonFlowChartingTemplate) | Patton-Patton Flow Charting 4 Template | .gft .gf | 
+[image/pbmpPaletteImage](https://discmaster.textfiles.com/search?format=pbmpPaletteImage) | PBMP Palette Image | .bmp | Vibe coded converter in sandbox/app/pbmp2png/ without palette support
 [image/pcDraftCAD](https://discmaster.textfiles.com/search?format=pcDraftCAD) | PC-Draft-CAD Drawing | .dwg | 
 [image/pcrImage](https://discmaster.textfiles.com/search?format=pcrImage) | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://sembiance.com/fileFormatSamples/image/pcrImage/)
 [image/petsciiSeq](https://discmaster.textfiles.com/search?format=petsciiSeq) | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://sembiance.com/fileFormatSamples/image/petsciiSeq/) - Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences

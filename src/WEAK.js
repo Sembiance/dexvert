@@ -405,6 +405,7 @@ export const WEAK_VALUES =
 	/^geArchive: G00S000( |$)/,
 	/^geArchive: GJD( |$)/,
 	/^geArchive: GME( |$)/,
+	/^geArchive: ISO( |$)/,
 	/^geArchive: KDT( |$)/,
 	/^geArchive: LINK_LINK( |$)/,
 	/^geArchive: M02( |$)/,
@@ -431,6 +432,7 @@ export const WEAK_VALUES =
 	/^geViewer: J2D_PLIB_PICTURE( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
 	/^geViewer: TGA( |$)/,
+	/^geViewer: WAV_RIFF( |$)/,
 
 	// GT2
 	/^777 Archiv gefunden \(Auflistung ist deaktiviert\)$/,

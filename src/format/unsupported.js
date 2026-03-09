@@ -757,6 +757,7 @@ export default
 		palmGrayPaintBitmap            : {name : "Palm GrayPaint bitmap", ext : [".pdb"], magic : ["Palm GrayPaint bitmap"]},
 		palmTealPaintDrawing           : {name : "Palm TealPaint drawing", ext : [".pdb"], magic : ["Palm TealPaint drawing", /^TealPaint PalmOS/]},
 		pattonFlowChartingTemplate     : {name : "Patton-Patton Flow Charting 4 Template", ext : [".gft", ".gf"], magic : ["Patton-Patton Flow Charting 4 Template"]},
+		pbmpPaletteImage               : {name : "PBMP Palette Image", ext : [".bmp"], magic : ["PBMP Palette Image"], notes : "Vibe coded converter in sandbox/app/pbmp2png/ without palette support"},
 		phoneToolsInternalGraphic      : {name : "PhoneTools Internal Graphic Format", ext : [".dgr"], magic : ["PhoneTools Internal Graphic Format"]},
 		photoFiltreImageBitmap         : {name : "PhotoFiltre Image bitmap", ext : [".pfi"], magic : ["PhotoFiltre Image bitmap", "Photo Filtre Studio :pfi:"]},
 		pixelmatorGraphic              : {name : "Pixelmator graphic", ext : [".pxm"], magic : ["Pixelmator graphic"]},

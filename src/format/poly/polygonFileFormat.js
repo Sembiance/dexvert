@@ -7,5 +7,5 @@ export class polygonFileFormat extends Format
 	ext            = [".ply"];
 	forbidExtMatch = true;
 	magic          = ["PLY model", "Polygon File Format", "Polygon File Format (Alt)", /^fmt\/831( |$)/];
-	converters     = ["assimp", "blender[format:ply]", "polyTrans64[format:polygonFileFormat]", "threeDObjectConverter[outType:quickDraw3D]", "noesis[type:poly]"];
+	converters     = ["assimp", "blender[format:ply]", "threeDObjectConverter[outType:quickDraw3D]", "noesis[type:poly]"];
 }

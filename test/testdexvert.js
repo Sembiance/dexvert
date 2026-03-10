@@ -45,7 +45,6 @@ const FLAKY_CONVERTERS = [
 	"paintDotNet",
 	"pageMaker4",
 	"pageMaker7",
-	"polyTrans64",
 	"quarkXPress6",
 	"vcdxrip"
 ];
@@ -428,7 +427,6 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS = {
 
 // if any of the OUTPUT FILES from a conversion equal these regexes, then ignore their size completely
 const IGNORE_SIZE_FILEPATHS = [
-	/Human Meg\.glb$/,		// cinema4D82 doesn't always convert this and polyTrans64 takes over
 	/Legacy_of_the_Ancients \d\d\.mp3$/i,
 	/lem2\.webp$/,
 	/scripts\/.+\.as$/i,	// archive/swf/cookie-hamster often produces very different script/**/*.as files

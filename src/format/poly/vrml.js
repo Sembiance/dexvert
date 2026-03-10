@@ -13,14 +13,5 @@ export class vrml extends Format
 		return supportFiles.length===0 ? false : supportFiles;
 	};
 	keepFilename = true;
-	converters   = dexState =>
-	{
-		const r = [];
-		if(dexState.hasMagics(/^fmt\/94( |$)/))
-			r.push("polyTrans64[format:vrml2]");
-
-		r.pushUnique("polyTrans64[format:vrml1]");
-		r.push("AccuTrans3D", "blender[format:x3d]");
-		return r;
-	};
+	converters   = ["AccuTrans3D", "blender[format:x3d]"];
 }

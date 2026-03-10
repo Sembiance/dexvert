@@ -74,6 +74,8 @@ fi
 
 cd /mnt/ram || exit
 /mnt/compendium/bin/fixPerms
+chmod 777 tmp
+chmod 775 portage
 rm -rf dexvert
 
 if [[ "$(hostname)" == dexdrone* ]]; then

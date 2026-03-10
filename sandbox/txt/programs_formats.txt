@@ -12730,60 +12730,8 @@ QuickDraw 3D 		.q3d
 >>> glTF converters, see big list of formats various programs support here: https://github.khronos.org/glTF-Project-Explorer/
 
 
->>> PolyTrans    https://www.okino.com/conv/conv.htm
-Import Format	Ext
- 3D Studio R1-R4	.3ds
- 3MF (3D Manufacturing Format)	.3mf
- 3ds Max (via PolyTrans-for-3dsMax native plug-in system)	.max
- Acclaim Motion Capture	.amc, .asf
- Biovision Motion Capture	.bvh
- CINEMA 4D	.c4d
- COLLADA (best for Blender)	.dae
- DirectX	.x
- DXF R12	.dxf
- Electric Image FACT	.fact
- ESRI ShapeFile	.shp, .cshp
- FBX v5, v6, v7	.fbx
- glTF	.gltf, .glB
- IFC (Industry Foundation Classes)	.ifc
- Illustrator (Adobe; 2D curves)	.ai
- Inventor2 (SGI)	.iv
- LightWave	.lwo, .lws
- MOL Molecular Database	.mol
- Okino Transfer File Format	.bdf
- PLY	.ply
- Protein (Molecular) Database	.pdb
- Rhino-3D & OpenNURBS	.3dm
- SketchUp	.skp
- Stereo Lithography	.stl
- U3D	.u3d
- USD	.usd,.usda,.usdc
- USGS & Gtopo-30 DEM (and
-SDTS with external converter)	.dem
- VRML1	.wrl
- VRML2	.wrl
- Wavefront OBJ	.obj
- X3D	.x3d
- XGL & ZGL (for AVEVA PDMS)	.xgl & .zgl
+>>> PolyTrans    https://www.okino.com/conv/conv.htm    NO LONGER SUPPORT. win64 only, wine is flaky.
 
-CAD/PACK License Only:
-3D CAD Importer	Ext
- Autodesk Inventor	.iam (assemblies), .ipt (parts)
- Autodesk DWF-3D (for AutoCAD, Navisworks, Revit & Inventor)	.dwf, .hsf
- Autodesk DXF & DWG (all versions)	.dxf, .dwg
- Solid Edge	.asm (assemblies), .prt (parts)
- SOLIDWORKS	.sldasm (assemblies), .sldprt (parts)
-
-GRANITE/PACK License Only:
-3D CAD Importer	Extensions	File Format Version
- Creo Elements (Pro/Engineer)	.asm, .prt, .neu	Current PTC version
- Creo Elements/View (PTC ProductView)	.pvs, .pvz, .edz, .ed, .ol	Current PTC version
- DGN (MicroStation)	.dgn	All key versions
- IGES (all variations)	.igs or .iges	Various
- STEP	.stp, .step, .ste	AP203 and AP214
- Parasolid	.xmt, .xmt_txt, .xmt_bin .xmt_neu, .x_t, .x_b, .x_n	Various
- SAT (ACIS)	.sat	Various
- Granite "g-plugs"	.g	Various
 
 >>> i3DConverter (linux) / 3D Object Converter (Windows)	http://3doc.i3dconverter.com/formats.html
 Format Name   Extension   Geometry   Face Material   Vertex Color   Texture U,V   Texture Polygons   Textured View   Bone ; Vertex Bone Weight

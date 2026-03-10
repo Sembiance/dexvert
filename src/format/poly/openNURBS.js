@@ -6,5 +6,5 @@ export class openNURBS extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/3DM";
 	ext        = [".3dm"];
 	magic      = ["Rhinoceros 3D Model", /^x-fmt\/(432|433|434|435)( |$)/];
-	converters = ["polyTrans64[format:openNURBS]"];
+	converters = ["threeDM2GLB"];
 }

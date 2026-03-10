@@ -7,11 +7,20 @@ import {identify} from "../../identify.js";
 
 let formats = null;
 
+const SKIP_IDS = [
+	// not useful
+	"other/nullBytes",
+	"other/nullBytesAlternating",
+
+	// not trustworthy
+	"text/txt"
+];
+
 export class exeOverlayID extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
-	loc  = "local";
-	exec = async r =>
+	loc     = "local";
+	exec    = async r =>
 	{
 		if(!formats)
 			({formats} = await import("../../format/formats.js"));
@@ -30,7 +39,7 @@ export class exeOverlayID extends Program
 				continue;
 
 			const dexid = `${family}/${formatid}`;
-			if(["other/nullBytes"].includes(dexid))
+			if(SKIP_IDS.includes(dexid))
 				continue;
 
 			const format = formats[formatid];

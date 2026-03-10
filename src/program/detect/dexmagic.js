@@ -260,13 +260,13 @@ const DEXMAGIC_CHECKS = {
 	"ZZT World"                        : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 3, match : [0x00]}],
 
 	// poly
-	"Cinema 4D XML"             : [{size : 256, match : "<c4d_file"}],
-	"Google SketchUp Model"     : [{offset : 1, match : "SketchUp Model"}],
-	"IFF Cinema 4D file"        : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
-	"Inter-Quake Model"         : [{offset : 0, match : "INTERQUAKEMODEL"}],
-	"Polygon File Format (Alt)" : [{offset : 0, match : "EPLYBNDS"}],
-	"Quake Model"               : [{offset : 0, match : "IDPO"}, {offset : 4, match : [0x06]}],
-	"rtcwMDC"                   : [{offset : 0, match : "IDPC"}],
+	"Cinema 4D XML"         : [{size : 256, match : "<c4d_file"}],
+	"Google SketchUp Model" : [{offset : 1, match : "SketchUp Model"}],
+	"IFF Cinema 4D file"    : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
+	"Inter-Quake Model"     : [{offset : 0, match : "INTERQUAKEMODEL"}],
+	"EPLYBNDS Poly"         : [{offset : 0, match : "EPLYBNDS"}],
+	"Quake Model"           : [{offset : 0, match : "IDPO"}, {offset : 4, match : [0x06]}],
+	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
 
 	// text
 	"Gentoo ebuild"               : [{offset : 0, match : "EAPI="}],

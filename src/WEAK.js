@@ -370,7 +370,7 @@ export const WEAK_VALUES =
 	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD
 	//		XFS, BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, BANK_QL, SPR_3, LEV, CAR_FRAC, FBZ_PK, BIN_P00P, ARC_ARC, GUT
 	// SEEN TWICE:
-	// 		OFF, PRE_OPEN, TXD_2, DAT_PAK, DAT_RES, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, TEXTURE, PCK_2, AFS_AFS_WE00, FLA, SHD, PCG
+	// 		OFF, PRE_OPEN, DAT_PAK, DAT_RES, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, PCG
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13)( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
@@ -379,7 +379,7 @@ export const WEAK_VALUES =
 	/^geArchive: PAK_(7|11|30|41|42|49|DATA)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
 	/^geArchive: PAK_PACK_[26]( |$)/,
-	/^geArchive: PCK_(5|6|PACK)( |$)/,
+	/^geArchive: PCK_(2|5|6|PACK)( |$)/,
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: WAD_[48]( |$)/,
 	
@@ -399,6 +399,7 @@ export const WEAK_VALUES =
 	/^geArchive: DBS( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
 	/^geArchive: DTA(_DTA)?( |$)/,
+	/^geArchive: FLA( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
 	/^geArchive: FSB_FSB5( |$)/,
 	/^geArchive: FOG( |$)/,
@@ -420,17 +421,22 @@ export const WEAK_VALUES =
 	/^geArchive: RMX( |$)/,
 	/^geArchive: SB( |$)/,
 	/^geArchive: SCH_SND( |$)/,
+	/^geArchive: SHD( |$)/,
 	/^geArchive: SFS_AAMVHFSS( |$)/,
 	/^geArchive: SLV_DATA( |$)/,
+	/^geArchive: TEXTURE( |$)/,
+	/^geArchive: TXD_2( |$)/,
 	/^geArchive: U_Generic( |$)/,
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
 
+	/^geViewer: AFS_AFS_WE00( |$)/,
 	/^geViewer: GLI_GLIB_IMG( |$)/,
 	/^geViewer: J2D_PLIB_PICTURE( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
+	/^geViewer: PKBARC_BMT( |$)/,
 	/^geViewer: TGA( |$)/,
 	/^geViewer: WAV_RIFF( |$)/,
 

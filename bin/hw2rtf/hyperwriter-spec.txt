@@ -1,0 +1,809 @@
+HyperWriter 3 (.HW3) Binary File Format Specification
+======================================================
+Reverse-engineered from 100 sample files, March 2026.
+
+Versions observed: 0x0B (version 11), 0x0C (version 12).
+Character encoding: CP437 (IBM PC code page 437).
+
+
+=============================================================================
+1. SECTOR STRUCTURE
+=============================================================================
+
+The entire file is divided into fixed-size 64-byte sectors.
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    60    Data area (usable payload)
+  0x3C    4     Trailer (uint32_LE) - sector chain pointer
+
+The 4-byte trailer controls how multi-sector data is read:
+
+  Value         Meaning
+  ----------    -------
+  0x00000000    End of chain; continue to next consecutive sector
+  0xFFFFFFFF    Unused/padding sector; continue to next consecutive sector
+  Other         Jump to that sector number (sector chain pointer)
+
+To read any multi-sector data structure: start at the given sector,
+extract 60 bytes of payload, then follow the trailer. If the trailer is
+0 or 0xFFFFFFFF, advance to sector N+1. Otherwise, jump to the sector
+number indicated by the trailer. Repeat until sufficient data is read.
+
+Across 100 sample files (489,531 total sectors):
+  - 476,444 sectors have trailer 0x00000000
+  -   9,509 sectors have trailer 0xFFFFFFFF
+  -   3,578 sectors have non-trivial chain pointers
+
+The file size is always a multiple of 64 bytes.
+
+
+=============================================================================
+2. FILE HEADER (Sector 0)
+=============================================================================
+
+Sector 0 contains the file identification and global parameters.
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    12    Magic string: "HyperWriter!" (ASCII, 12 bytes)
+  0x0C    1     EOF marker: 0x1A (CP/M end-of-file convention)
+  0x0D    1     Version byte:
+                  0x0B = Version 11 (older format)
+                  0x0C = Version 12 (newer format)
+  0x0E    18    Reserved (always zeros in all observed files)
+
+  0x20    2     h[0]: uint16_LE - Primary index entry count
+                  Number of 6-byte entries in the primary index table.
+                  Observed range: 6-788.
+
+  0x22    2     h[1]: uint16_LE - Node index entry count
+                  Number of 6-byte entries in the node index table.
+                  Observed range: 1-400.
+
+  0x24    2     h[2]: uint16_LE - Unknown parameter
+                  Observed range: 0-440. Possibly related to resource count.
+
+  0x26    2     h[3]: uint16_LE - Unknown parameter
+                  Observed range: 0-61. Possibly related to link types.
+
+  0x28    2     h[4]: uint16_LE - Unknown parameter
+                  Observed range: 0-2557. Possibly total object count.
+
+  0x2A    2     h[5]: uint16_LE - FA/background block count
+                  Number of 0x00FA background frame blocks.
+                  Observed range: 0-366.
+
+  0x2C    2     h[6]: uint16_LE - Style definition count (approximate)
+                  Related to the number of style records. The actual
+                  style count is given by the count field of primary
+                  index entry [5].
+                  Observed range: 0-67.
+
+  0x2E    2     h[7]: uint16_LE - Format indicator
+                  Observed values: 5 or 8 (always one of these two).
+
+  0x30    12    Reserved (always zeros)
+
+Sector 0 trailer is always 0x00000000.
+Total header sector: 64 bytes (60 payload + 4 trailer).
+
+
+=============================================================================
+3. INDEX TABLES
+=============================================================================
+
+There are two separate index tables, each stored as a sector chain:
+
+  - PRIMARY INDEX: starts at sector 1
+  - NODE INDEX: starts at sector 2
+
+Both tables use the same entry format.
+
+3a. Index Entry Format (6 bytes)
+---------------------------------
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    2     uint16_LE: Starting sector number (0 = empty/unused)
+  0x02    2     uint16_LE: Reserved (always 0x0000 in observed files)
+  0x04    2     uint16_LE: Count/size parameter (meaning varies)
+
+3b. Primary Index (sector 1 chain)
+-----------------------------------
+
+The primary index has h[0] entries. The first 6 entries have fixed
+meanings:
+
+  Index  Purpose
+  -----  -------
+  [0]    Configuration/settings block
+  [1]    External file references (PCX images, HW3 files, DAT files)
+  [2]    Image/resource mapping table
+  [3]    External file paths (optional; sector=0 if absent)
+  [4]    Author/credits information (optional; sector=0 if absent)
+  [5]    STYLE DEFINITIONS - count field = number of style records
+
+Entries [6+] contain a mix of:
+  - 0x00FA background frame/screen blocks (identified by first two
+    bytes being 0x00 0xFA)
+  - Navigation/bookmark entries
+  - Other metadata blocks
+
+Empty entries have sector=0 and count=0.
+
+3c. Node Index (sector 2 chain)
+--------------------------------
+
+The node index has h[1] entries. Each entry references a text node
+(article, card, action block, or other node type). The count field's
+meaning for node entries is not fully determined but appears related
+to content complexity.
+
+
+=============================================================================
+4. EXTERNAL FILE REFERENCES (Primary Index [1])
+=============================================================================
+
+The external file reference block starts with a uint16_LE size field,
+followed by a series of length-prefixed filenames:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    2     uint16_LE: Total byte count of filename data following
+  0x02    N     Filename entries (repeated)
+
+Each filename entry:
+  <length_byte> <filename_ascii>
+
+Where length_byte is a uint8 giving the filename length, followed by
+that many ASCII bytes.
+
+Referenced file types:
+  .PCX   PC Paintbrush images (backgrounds, illustrations)
+  .HW3   Other HyperWriter documents (cross-document links)
+  .DAT   Data files
+  .BKG   Background definition files
+  .TXT   Plain text files
+  .DOC   Document files
+
+
+=============================================================================
+5. STYLE DEFINITIONS (Primary Index [5])
+=============================================================================
+
+Styles are stored as a continuous byte stream across consecutive sectors
+starting from the sector specified in primary index entry [5]. The number
+of style records equals the count field of that index entry.
+
+5a. Version 11 Style Record (60 bytes, no stream header)
+----------------------------------------------------------
+
+The style stream begins immediately with style records (no prefix header).
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       1     Font name length (N)
+  1       N     Font name (ASCII): "SERIF", "SANS", etc.
+  1+N   13-N    Font identifier bytes (total bytes 1 through 12):
+                  - Suffix characters indicating weight/variant:
+                    M  = Medium
+                    EM = Extended Medium
+                    FM = Fixed Medium (monospace)
+                    F  = Fixed width
+                  - Followed by font metrics/charset data
+                  - Remaining bytes filled to reach offset 13
+  13      1     Font size code (0x01-0x09 observed)
+  14-15   2     uint16_LE: Parameter A (commonly 4096, font metrics)
+  16-17   2     uint16_LE: Parameter B (line spacing, commonly 2560)
+  18-19   2     uint16_LE: Parameter C (additional spacing)
+  20-23   4     Indent/margin parameters (two uint16_LE values)
+  24-25   2     Flags word
+  26-28   3     Additional flags (commonly 00 01 02 or 00 01 01)
+  29-33   5     Reserved/parameters
+  34      1     Style name length (S)
+  35    35+S    Style name (ASCII)
+  35+S  60-35-S Color/attribute tail:
+                  - Contains 0x20 separator byte
+                  - Ends with 6 bytes of 0x5A ('Z') = default color marker
+                  - Some files use 0x46 ('F') instead of 0x5A
+
+Total record: 60 bytes.
+
+5b. Version 12 Style Record (72 bytes, with 2-byte stream header)
+------------------------------------------------------------------
+
+The v12 style stream begins with a 2-byte header: 0x48 0x00.
+After this header, each style record is 72 bytes:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       1     Font name length (N)
+  1       N     Font name (ASCII)
+  1+N   13-N    Font identifier bytes (same as v11)
+  13      1     Font size code
+  14-15   2     uint16_LE: Parameter A (font size metrics)
+  16-17   2     uint16_LE: Parameter B (line spacing)
+  18-19   2     uint16_LE: Parameter C (additional spacing)
+  20-21   2     uint16_LE: Parameter D (paragraph spacing)
+  22-23   2     uint16_LE: Left margin (in twip-like units)
+  24-25   2     uint16_LE: Right margin
+  26-27   2     Flags1 (commonly 0x0001)
+  28-29   2     Flags2 (alignment/style flags)
+  30-33   4     Reserved/parameters
+  34      1     Style name length (S)
+  35    35+S    Style name (ASCII)
+  35+S  72-35-S Color/attribute tail:
+                  - Contains 0x20 separator byte
+                  - 6 bytes of 0x5A ('Z') or 0x46 ('F') color markers
+                  - 9 additional bytes (zeros or color values) vs v11
+
+Total record: 72 bytes (12 bytes larger than v11).
+
+5c. Known Style Names
+-----------------------
+
+  Body Text, HEAD1, HEAD2, HEAD3, HEAD4, BULLET, LEFT 12, LEFT 14,
+  LEFT 18, LEFT 24, TOC ENTRY 1, TOC ENTRY 2, SPACER 8, SPACER 10,
+  PAGEBREAK, TABLE L, TABLE 1, TABLE 2, Head Small, Black Line,
+  Program Listing, Sans S12, and user-defined names.
+
+5d. Known Font Names
+----------------------
+
+  SERIF   - Proportional serif (Times-like)
+  SERIFM  - Serif Medium weight
+  SANS    - Proportional sans-serif (Helvetica-like)
+  SANSF   - Sans Fixed width
+  SANSEM  - Sans Extended Medium
+  SANSFM  - Sans Fixed Medium (monospace)
+
+
+=============================================================================
+6. TEXT NODE STRUCTURE
+=============================================================================
+
+Each text node occupies a sector chain starting from the sector specified
+in its node index entry. The node data is a continuous byte stream (60
+bytes per sector, trailers stripped and chain followed).
+
+6a. Node Envelope
+------------------
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       1     Always 0x00
+  1       1     Node type (see below)
+  2-3     2     uint16_LE: Content size in bytes (from offset 4 onward)
+  4+      var   Node content (header + body)
+
+6b. Node Types
+---------------
+
+  Type   Name      Description
+  ----   ----      -----------
+  0x01   Article   Regular page with scrollable text content
+  0x02   Script    Script/command block (variant of Action)
+  0x03   Card      Fixed-size overlay/dialog with position data
+  0x04   Action    Action/command block (triggers, macros)
+  0x0A   Data      Data/resource node
+  0x0B   Popup     Popup card (similar to Card with position data)
+
+Distribution across 100 files:
+  Article (0x01): 1186 nodes
+  Action  (0x04):  582 nodes
+  Card    (0x03):  395 nodes
+  Popup   (0x0B):  374 nodes
+  Data    (0x0A):  117 nodes
+  Script  (0x02):   32 nodes
+
+6c. Node Content Header
+-------------------------
+
+After the 4-byte envelope, the content begins with a variable-length
+header whose structure depends on node type.
+
+For Article nodes (type 0x01):
+  The header contains configuration bytes, style references, and
+  optionally a title. The header is terminated by a 0xFF byte which
+  marks the start of the paragraph body.
+
+  Typical Article header layout:
+    Offset  Description
+    0-1     Reserved (usually 0x0000)
+    2       Level/version indicator (0x07 or 0x01-0x02)
+    3       Node config byte
+    4+      Variable: style refs, config bytes
+    ...     0x0D <title_length> <title_text>  (optional)
+    ...     0xFF = body start marker
+
+For Card/Popup nodes (types 0x03, 0x0B):
+  The header includes position and dimension data:
+    Offset  Description
+    0-1     Reserved
+    2-3     uint16_LE: X position or width
+    4-5     uint16_LE: Y position
+    6-7     uint16_LE: Width
+    8-9     uint16_LE: Height
+    10-11   uint16_LE: Flags/config
+    12-13   Additional flags (commonly 0x03 0x13 0x00)
+    ...     Optional: 0x0D <title_length> <title_text>
+    ...     0xFF = body start marker
+
+For Action/Script nodes (types 0x02, 0x04):
+  Similar to Card nodes with position data, followed by command content
+  after the 0xFF marker.
+
+For Data nodes (type 0x0A):
+  Minimal header, often just 2 reserved bytes then 0x12 or data content.
+
+6d. Title Encoding
+-------------------
+
+The title is encoded within the node header as:
+
+  0x0D  <title_length>  <title_bytes>
+
+Where:
+  - 0x0D is the title marker byte
+  - title_length is a single byte (1-40 typical)
+  - title_bytes is CP437-encoded text
+
+The title marker appears at varying offsets depending on header content.
+Some nodes (especially actions and data nodes) have no title.
+
+6e. Body Start Marker
+-----------------------
+
+The body content begins after the first 0xFF byte in the node content.
+This acts as a delimiter between the variable-length header and the
+paragraph data stream.
+
+
+=============================================================================
+7. PARAGRAPH CONTENT FORMAT
+=============================================================================
+
+The text body within a node consists of a sequence of paragraphs.
+
+7a. Paragraph Structure
+------------------------
+
+Each paragraph is encoded as:
+
+  <size>  <style_byte>  <text_data>
+
+  Field       Size  Description
+  ----------  ----  -----------
+  size        2     uint16_LE: Byte count = 1 (style byte) + len(text_data)
+  style_byte  1     Style index (0x00-0xFF), references style table
+  text_data   var   Inline text with embedded control codes
+
+A size of 0x0000 indicates end of body content.
+
+When size = 1, the paragraph has no text content (empty paragraph /
+spacer). When size > 1, (size - 1) bytes of text data follow the
+style byte.
+
+7b. Inline Control Codes
+--------------------------
+
+Text data is a byte stream mixing printable characters with control
+codes. Printable ASCII (0x20-0x7E) and extended CP437 (0x80-0xFF)
+characters represent literal text. Bytes below 0x20 are control codes:
+
+  Code  Args        Description
+  ----  ----        -----------
+  0x00  none        Null padding (skip)
+  0x01  2-3 bytes   HYPERLINK START (see 7c)
+  0x02  none        Style reference / inline attribute
+  0x03  2-3 bytes   ACTION LINK START (see 7d)
+  0x04  none        Inline formatting byte (rarely seen)
+  0x05  none        Italic toggle (on/off)
+  0x06  none        Bold toggle (on/off)
+  0x07  none        Underline toggle (on/off)
+  0x08  none        Formatting byte (rarely seen)
+  0x09  0 or 7      Tab character or inline image embed (see 7g)
+  0x0B  1-2 bytes   Highlight/color start (see 7e)
+  0x0C  none        Highlight/color end
+  0x0D  varies      Section/title marker (in headers only)
+  0x0F  varies      Image embed or font command (see 7f)
+  0x10  none        Soft return / field delimiter (see 7j)
+  0x12  none        Hyperlink end marker
+  0x14  none        Action link end marker
+  0xFF  none        Node end / section terminator
+
+7c. Hyperlink (0x01)
+---------------------
+
+  0x01 <target_lo> <target_hi> [<arg>]
+
+  - target_lo, target_hi form a uint16_LE target node index
+  - arg (optional): link type/flags byte (present if < 0x20 and != 0x12)
+  - Link text follows as regular printable characters
+  - Terminated by 0x12 (LINK_END)
+
+Example:
+  01 84 00 01  "Nelson 87 0/2"  12
+  |  |     |   |____________|   |__ LINK_END
+  |  |     |__ arg=0x01
+  |  |__ target = 0x0084 (132)
+  |__ LINK_START
+
+7d. Action Link (0x03)
+-----------------------
+
+  0x03 <target_lo> <target_hi> [<arg>]
+
+  - Same format as hyperlink but targets an Action node
+  - Terminated by 0x14 (ACTION_END)
+
+7e. Highlight/Color (0x0B)
+---------------------------
+
+  0x0B <color_byte> [0x0B]
+
+  - color_byte specifies the highlight color
+  - Optionally followed by a second 0x0B byte
+  - Text between 0x0B and 0x0C is highlighted
+  - Terminated by 0x0C (HIGHLIGHT_END)
+
+7f. Image Embed / Font Command (0x0F)
+---------------------------------------
+
+The 0x0F byte is overloaded:
+
+  Paired image embed: 0x0F <header_bytes> ... 0x0F
+    When followed by 0x02, 0x04, or 0x0D, starts an image embed block.
+    Content between the two 0x0F bytes references an image from the
+    external file reference table. Terminated by a closing 0x0F.
+
+  Font/format command: 0x0F <arg_bytes>
+    When followed by other values, acts as an inline font or formatting
+    command. Argument bytes (values < 0x20) are consumed until a
+    printable character or another control code is reached.
+
+
+7g. Inline Image Embed (0x09)
+------------------------------
+
+The 0x09 byte is overloaded:
+
+  Simple tab: 0x09 (single byte)
+    When NOT followed by the image embed pattern, 0x09 is a tab character.
+
+  Image embed: 0x09 <image_id> 0x00 0x00 0x00 0x00 0x00 0x09
+    An 8-byte sequence embedding an inline icon/image. The <image_id> byte
+    references an image from the external file reference table. The five
+    zero bytes are reserved, and the sequence ends with a closing 0x09.
+
+    The middle bytes of the image embed (positions 1-6) must NOT be
+    interpreted as control codes. For example, if <image_id> is 0x07,
+    it must not be treated as an underline toggle.
+
+  Detection: Check if bytes i+2 through i+6 are all 0x00 and byte i+7
+  is 0x09. If so, consume all 8 bytes as an image embed. Otherwise,
+  treat as a tab character.
+
+
+=============================================================================
+7h. DICTIONARY COMPRESSION
+=============================================================================
+
+Some HW3 files (both v0B and v0C) use a fixed dictionary compression
+scheme where bytes 0x80-0xFE within paragraph text map to common English
+substrings. This compression is NOT indicated by any header flag or version
+byte; it must be detected by analyzing the text content.
+
+The compression dictionary is hardcoded in the HyperWriter application
+and is NOT stored in the .HW3 file. Approximately 100 entries map high
+bytes to 2-6 character English fragments:
+
+  Confirmed entries (partial list):
+    0x80 = ", "      0x87 = "ction "   0x89 = "ation"    0x96 = "able "
+    0x98 = " that "  0x99 = "tion "    0x9B = "ure "     0x9E = "ory "
+    0xA7 = "ame "    0xAB = "est "     0xBB = "een "     0xBE = "ver "
+    0xBF = "ore "    0xDC = "for "     0xE0 = "ing "     0xE1 = "and "
+    0xE3 = "the "    0xE6 = "ve "      0xEA = "to "      0xEB = "er "
+    0xEC = "n "      0xEF = "se "      0xF0 = "ly "      0xF1 = "nt "
+    0xF2 = "al "     0xF3 = "in "      0xF4 = "at "      0xF5 = "is "
+    0xF6 = "re"      0xF7 = "of "      0xF8 = "or "      0xF9 = "es "
+    0xFA = " a "     0xFB = "ed "      0xFC = "on "      0xFD = "he "
+    0xFE = "it "
+
+  0xFF within compressed text serves as a paragraph separator. The byte
+  following 0xFF is a style byte for the new paragraph.
+
+Compression detection heuristic:
+  1. Find the body start (first valid size-prefixed paragraph after 0xFF)
+  2. Sample the paragraph text (skip control codes)
+  3. Count ASCII bytes (0x20-0x7E) and high bytes (0x80-0xFE)
+  4. If ASCII ratio is 40-85% and high bytes > 5% with frequent
+     transitions between ASCII and high-byte regions, the text is
+     compressed. Non-compressed files with CP437 box-drawing characters
+     have similar high-byte counts but in long consecutive runs (low
+     transition rate).
+
+Paragraph structure is identical for compressed and non-compressed nodes:
+all paragraphs use the <size_le16> <style_byte> <text> format. The only
+difference is that compressed text uses dictionary substitution for bytes
+0x80-0xFE instead of CP437 character mapping.
+
+
+=============================================================================
+7i. EMBEDDED GRAPHICS BEYOND CONTENT_SIZE
+=============================================================================
+
+Some nodes (notably ~STARTUP.HW3) have embedded bitmap/font glyph data
+that fills the content_size region. In these cases:
+
+  - The content_size field (bytes 2-3 of the node envelope) only covers
+    the graphic/font data
+  - The actual text body starts BEYOND content_size in the chain data
+  - The 0xFF body start marker appears at a later offset in the chain
+
+To find the real body start:
+  1. Search for ALL 0xFF bytes in the node content (not just the first)
+  2. For each candidate, check if what follows is a valid size-prefixed
+     paragraph (uint16_LE size in range 1-10000, followed by printable
+     text)
+  3. Skip 0xFF bytes that appear within binary/bitmap data (these are
+     followed by more binary patterns, not valid paragraph structures)
+
+Binary data regions can be identified by:
+  - Long runs of high bytes (0x55, 0xFF, 0xC0, 0x80) without ASCII text
+  - Byte patterns typical of monochrome bitmap data (0x55 = alternating
+    bits, 0xFF = all bits set)
+
+
+7j. FIELD DELIMITER (0x10)
+=============================================================================
+
+A single 0x10 byte acts as a soft return (line break within paragraph),
+equivalent to Shift+Enter in modern word processors.
+
+However, when MULTIPLE consecutive 0x10 bytes appear (e.g. 10 10 10 10),
+they function as a field delimiter / tab-to-column separator. This pattern
+is seen in catalog-style files (e.g. disks_a.hw3) where each line has:
+
+  <program_name> <spaces> 10 10 10 10 <category_name>
+
+The multiple 0x10 bytes separate the program description from a right-
+aligned category tag (e.g. BUSINESS, WINDOWS, EDUCATION). These should
+be rendered as a tab stop, not as multiple line breaks.
+
+
+7k. ACTION COMMANDS IN TEXT NODES
+=============================================================================
+
+Some Article (type 1) and Card (type 3) nodes contain paragraphs with
+DOS or HyperWriter action commands. These are NOT meant for display and
+should be filtered from rendered output. Common patterns:
+
+  copy \path\file.txt prn    - DOS copy-to-printer command
+  @RESTART                   - HyperWriter restart command
+  run <program>              - DOS program execution
+  exec <command>             - Command execution
+
+These appear as full paragraphs (not inline) and can be identified by
+content-based pattern matching. They are distinct from Action nodes
+(type 4) which are already filtered by node type.
+
+
+7l. DISPLAY MODEL: 80-COLUMN MONOSPACE
+=============================================================================
+
+The original HyperWriter viewer displayed text content in a monospace
+font within approximately 80 columns of text width. This is consistent
+with DOS-era text display conventions.
+
+When converting to RTF/PDF, the output should use:
+  - Courier New or similar monospace font
+  - Page width that accommodates exactly 80 characters per line
+  - At 10pt Courier New (120 twips per character), 80 chars = 9600 twips
+  - Standard US Letter (12240 twips) with 1320-twip margins each side
+    yields exactly 9600 twips of text area = 80 monospace columns
+
+
+=============================================================================
+8. BACKGROUND FRAME (0x00FA) BLOCKS
+=============================================================================
+
+Background frames define the visual chrome: navigation buttons, screen
+layout, and decorative elements. They are referenced by primary index
+entries [6+] that begin with bytes 0x00 0xFA.
+
+8a. FA Block Header
+---------------------
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0-1     2     Marker: 0x00 0xFA
+  2-3     2     uint16_LE: Block content size
+  4-7     4     Unknown parameters
+  8-9     2     uint16_LE: Sub-element count or flags
+
+8b. FA Block Content
+---------------------
+
+The content contains button and UI element definitions with:
+  - Button text (ASCII with '&' for keyboard accelerator keys)
+  - Button positions and dimensions
+  - Target references (node indices or action IDs)
+  - PCX image references for backgrounds
+
+Known button text examples:
+  E&xit, &File, &Help, L&OOK, &MARK, SCROLL DOWN,
+  SCROLL &UPWARD, &PREVIOUS LINK, &HOME, &ANNOTATE,
+  &Next, &Back, &Index, &Print
+
+The internal structure of FA blocks is complex and not fully decoded.
+Button entries appear to use a mix of fixed-size fields and
+length-prefixed strings.
+
+
+=============================================================================
+9. CONFIGURATION BLOCK (Primary Index [0])
+=============================================================================
+
+The configuration block contains document-level settings. Its structure
+is a sequence of tagged entries. A partial decoding:
+
+  The block begins with a uint8 byte count, followed by configuration
+  entries of varying sizes. Each entry appears to contain:
+    - An entry identifier
+    - Parameter values (uint16_LE or uint32_LE)
+    - Configuration flags
+
+The full internal structure of the configuration block is not completely
+decoded, but it is consistently present in all files.
+
+
+=============================================================================
+10. IMAGE/RESOURCE MAPPING (Primary Index [2])
+=============================================================================
+
+The image mapping table associates image references used in the document
+with entries in the external file reference table. The block often
+contains zeros when no images are used, or mapping indices when images
+are present.
+
+The count field in the index entry indicates the number of image
+mappings.
+
+
+=============================================================================
+11. EXTERNAL FILE PATHS (Primary Index [3])
+=============================================================================
+
+When present (sector != 0), this block contains directory path
+information for locating external resources. The structure includes:
+  - A small header with count/size information
+  - Path entries with length-prefixed directory strings
+  - Entries reference the paths where external files (.PCX, .HW3)
+    can be found
+
+Example paths: \HR\FILES, \HR\GRAPHICS, \BUS\
+
+
+=============================================================================
+12. AUTHOR/CREDITS (Primary Index [4])
+=============================================================================
+
+Optional block (sector=0 when absent) containing author attribution
+and document credits information.
+
+
+=============================================================================
+13. VERSION DIFFERENCES (v11 vs v12)
+=============================================================================
+
+  Feature                Version 11 (0x0B)    Version 12 (0x0C)
+  -------                -----------------    -----------------
+  Style record size      60 bytes             72 bytes
+  Style stream header    None                 2 bytes (0x48 0x00)
+  Style color tail       ~6 bytes (ZZZZZZ)    ~18 bytes (with zeros)
+  Additional margins     2 uint16 fields      4 uint16 fields
+  h[7] values            Always 8             5 or 8
+
+Both versions share the same:
+  - 64-byte sector structure with 60-byte payloads
+  - 13-byte magic header + version byte
+  - 8 uint16_LE header parameters at offset 0x20
+  - Dual index table format (primary at sector 1, nodes at sector 2)
+  - 6-byte index entry format
+  - Text control code set
+  - Hyperlink and action link encoding
+  - FA background frame structure
+  - Node type codes
+  - Paragraph format (uint16_LE size + style byte + text)
+
+
+=============================================================================
+14. CHARACTER ENCODING
+=============================================================================
+
+All text in .HW3 files uses IBM Code Page 437 (CP437). This includes:
+  - Node titles
+  - Paragraph text content
+  - Style names
+  - Font names
+  - External file references
+  - Button text in FA blocks
+
+Bytes 0x20-0x7E are standard ASCII. Bytes 0x80-0xFF map to CP437
+extended characters including accented letters, box-drawing characters,
+Greek letters, and mathematical symbols.
+
+
+=============================================================================
+15. COMPLETE FILE LAYOUT (typical)
+=============================================================================
+
+  Sector 0        File header (magic + version + h[0-7])
+  Sector 1+       Primary index table (h[0] entries, 6 bytes each)
+  Sector 2+       Node index table (h[1] entries, 6 bytes each)
+  Sectors ...     Padding (0xFFFFFFFF trailer sectors)
+  Sectors N       Configuration block (primary[0])
+  Sectors ...     External file references (primary[1])
+  Sectors ...     Image/resource mapping (primary[2])
+  Sectors ...     External file paths (primary[3], if present)
+  Sectors ...     Style definitions (primary[5])
+  Sectors ...     FA/background frames (primary[6+], 0x00FA blocks)
+  Sectors ...     Other metadata (primary[6+], non-FA entries)
+  Sectors ...     Text nodes (node index entries)
+  Sectors ...     Author/credits (primary[4], if present)
+
+Sectors are NOT necessarily in sequential order. The index tables
+provide starting sectors, and chain pointers (trailers) link multi-
+sector blocks together. Both consecutive-sector continuation and
+cross-file jumps via trailer values are used.
+
+
+=============================================================================
+16. SUMMARY OF ALL BYTE RANGES
+=============================================================================
+
+Every byte in a valid .HW3 file falls into one of these categories:
+
+  1. Sector payload (bytes 0-59 of each 64-byte sector):
+     - File header data (sector 0)
+     - Primary index entries (sector 1 chain)
+     - Node index entries (sector 2 chain)
+     - Configuration block data
+     - External file reference data
+     - Image mapping data
+     - External path data
+     - Style definition records
+     - FA background frame data
+     - Other metadata block data
+     - Node content (envelope + header + paragraph body)
+     - Unused/padding (0x00 or 0xFF fill)
+
+  2. Sector trailers (bytes 60-63 of each 64-byte sector):
+     - 0x00000000: end-of-chain / continue next
+     - 0xFFFFFFFF: unused / continue next
+     - Other uint32_LE: chain pointer to next sector
+
+
+=============================================================================
+17. KNOWN UNKNOWNS
+=============================================================================
+
+Areas not fully decoded:
+
+  - Exact semantics of h[2], h[3], h[4] header fields
+  - h[7] significance (always 5 or 8)
+  - Configuration block internal structure (primary[0])
+  - FA block button layout coordinates and full element format
+  - Complete color encoding scheme (0x46/0x5A patterns in style tails)
+  - Font metrics bytes (bytes between font name and font size code)
+  - Image embed internal data between 0x0F...0x0F pairs
+  - Node content header byte-level semantics for each node type
+  - Card/Popup position coordinate units and reference frame
+  - Author/credits block internal format
+  - Purpose of 0x02 and 0x04 inline control codes
+  - Complete hyperlink argument byte semantics
+  - Navigation/bookmark entries in primary index [6+]
+  - Style flag bits in Flags1/Flags2 fields
+  - Embedded font glyph data (found in some files)

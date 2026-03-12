@@ -298,6 +298,7 @@ export const WEAK_VALUES =
 	/^YZ Archiv gefunden/,
 
 	// dragonUnpackerID
+	// SEEN ONCE: GTEX
 	/^dragon: FPK /,	// multi-versioned, so it detects as FPK but must pass like FPK4. This produces garbage though on non FPK4 archives. gameextractor handles these fine and much better, see sidMeiserFPK
 	/^dragon: PACK /,
 	/^dragon: SLF /,
@@ -367,16 +368,17 @@ export const WEAK_VALUES =
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD
-	//		XFS, BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, BANK_QL, SPR_3, LEV, CAR_FRAC, FBZ_PK, BIN_P00P, ARC_ARC, GUT
+	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, PAD, 000_SFDX, AMM_FORM
+	//		XFS, BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, BANK_QL, SPR_3, LEV, CAR_FRAC, BIN_P00P
 	// SEEN TWICE:
-	// 		OFF, PRE_OPEN, DAT_PAK, DAT_RES, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, PCG
+	// 		OFF, PRE_OPEN, DAT_PAK, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, FBZ_PK
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
-	/^geArchive: ARC_(6|8|10|11|13)( |$)/,
+	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
+	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
-	/^geArchive: DAT_(11|42|48|53|57|DG)( |$)/,
+	/^geArchive: DAT_(11|42|48|53|57|DG|RES)( |$)/,
 	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
-	/^geArchive: PAK_(7|11|30|41|42|49|DATA)( |$)/,
+	/^geArchive: PAK_(7|11|30|41|42|49|DATA|FORM)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
 	/^geArchive: PAK_PACK_[26]( |$)/,
 	/^geArchive: PCK_(2|5|6|PACK)( |$)/,
@@ -394,6 +396,7 @@ export const WEAK_VALUES =
 	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
 	/^geArchive: CAS( |$)/,
+	/^geArchive: CEG_GEKV( |$)/,
 	/^geArchive: CPN( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,
 	/^geArchive: DBS( |$)/,
@@ -406,8 +409,10 @@ export const WEAK_VALUES =
 	/^geArchive: G00S000( |$)/,
 	/^geArchive: GJD( |$)/,
 	/^geArchive: GME( |$)/,
+	/^geArchive: GUT( |$)/,
 	/^geArchive: ISO( |$)/,
 	/^geArchive: KDT( |$)/,
+	/^geArchive: LBM_FORM( |$)/,
 	/^geArchive: LINK_LINK( |$)/,
 	/^geArchive: M02( |$)/,
 	/^geArchive: MEGA_MEGA( |$)/,
@@ -415,6 +420,7 @@ export const WEAK_VALUES =
 	/^geArchive: MXS( |$)/,
 	/^geArchive: NoExt_2( |$)/,
 	/^geArchive: PAC_2( |$)/,
+	/^geArchive: PCG( |$)/,
 	/^geArchive: PKF( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
@@ -437,6 +443,7 @@ export const WEAK_VALUES =
 	/^geViewer: J2D_PLIB_PICTURE( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
 	/^geViewer: PKBARC_BMT( |$)/,
+	/^geViewer: TXT( |$)/,
 	/^geViewer: TGA( |$)/,
 	/^geViewer: WAV_RIFF( |$)/,
 
@@ -509,8 +516,8 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: WIC (Fake!), X1, Terse, PPMN (Max Smirnov), QuArk, BOA, 777, DZip (Nolan Pflug)
-	// SEEN TWICE: oPAQue
+	// SEEN  ONCE: WIC (Fake!), X1, Terse, uArk, BOA, 777, DZip (Nolan Pflug)
+	// SEEN TWICE: PPMN (Max Smirnov)
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,
@@ -518,6 +525,7 @@ export const WEAK_VALUES =
 	/^idarc: Flash( |$)/,
 	/^idarc: HYP( |$)/,
 	/^idarc: LZH( |$)/,
+	/^idarc: oPAQue( |$)/,
 	/^idarc: PAK( |$)/,
 	/^idarc: Par( |$)/,
 	/^idarc: PC\/3270( |$)/,

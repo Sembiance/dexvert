@@ -17,13 +17,12 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add hyperWriter .hw3 when converter finally ready		https://discmaster.textfiles.com/search?extension=hw3&format=hyperWriter
-
 * Add formats to poly2glb:
 	poly/sketchUp
 	poly/electricImage3DFile
 	poly/esriShape
 	poly/universal3D
+	poly/eplybndsPoly
 
 * Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt
 

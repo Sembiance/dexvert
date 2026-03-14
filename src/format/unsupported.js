@@ -1033,14 +1033,9 @@ export default
 	
 	other :
 	{
-		// Game - These actually work with gameextractor but produce totally game-specific worthless files out that just clog up everything
-		afsGameArchive              : {name : "AFS game archive", ext : [".afs"], magic : ["AFS game data archive"], weakMagic : true},
-		albionGameDataArchive       : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive"]},
-		americanConquestGameArchive : {name : "American Conquest game archive", ext : [".gp"], magic : ["American Conquest game data archive"]},
-		blackAndWhiteSoundsData     : {name : "Black and White sounds data", ext : [".sad"], magic : ["Black and White sounds data"], weakMagic : true},
-		evilGeniusGameDataArchive   : {name : "Evil Genius game data archive", ext : [".erb"], magic : ["Evil Genius game data archive"], weakMagic : true},
-		surrealSoftwareGameArchive  : {name : "Surreal Software Game Archive", ext : [".adu", ".sdu", ".tdu", ".gdu", ".vdu", ".mdu", ".xdu", ".wdu", ".odu", ".qdu1", ".ldu", ".lvl1", ".qdu", ".lvl", ".rrc"], magic : ["Surreal Software game data container"], weakMagic : true},
-		whirlwindGameDataPackage    : {name : "Whirlwind game data Package", ext : [".wpk"], magic : ["Whirlwind game data Package (v2.1)"], weakMagic : true},
+		// Game - These actually work with gameextractor but produce game-specific worthless files
+		albionGameDataArchive       : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
+		panzersPhase2Map            : {name : "Panzers - Phase 2 Map", ext : [".map"], magic : [/^geArchive: MAP_SR( |$)/]},
 
 		//////////
 		// Game //
@@ -2670,7 +2665,7 @@ export default
 		gammaCADSymbolLibrary                    : {name : "GammaCAD Symbol Library", ext : [".syl"], magic : ["GammaCAD Symbol Library"], weakMagic : true},
 		gapHelpSystemSix                         : {name : "GAP Help System Six", ext : [".six"], magic : ["GAP Help System Six format"]},
 		garminFlexibleInteroperableDataTransfer  : {name : "Garmin Flexible and Interoperable data Transfer", ext : [".fit"], magic : ["Garmin Flexible and Interoperable data Transfer", /^FIT Map data/], weakMagic : true},
-		garminMap                                : {name : "Garmin map", ext : [".img"], magic : [/^Garmin map/], weakMagic : true},
+		garminMap                                : {name : "Garmin map", ext : [".img"], magic : [/^Garmin (base)?map/], weakMagic : true},
 		garminMapSource                          : {name : "Garmin MapSource", ext : [".mps"], magic : ["Garmin MapSource data"]},
 		garminPointOfInterest                    : {name : "Garmin Point of Interest", ext : [".gpi"], magic : ["Garmin Point of Interest"]},
 		garminVoiceProcessingModule              : {name : "Garmin Voice Processing Module", ext : [".8e35f4fd_0783_47dd_9f30_fb1eaa0b6f21"], magic : ["Garmin Voice Processing Module"]},
@@ -3524,6 +3519,7 @@ export default
 		superScapeResource                       : {name : "SuperScape Resource", ext : [".rsc"], magic : ["SuperScape Resource"]},
 		superScapeSpriteImage                    : {name : "SuperScape Sprite/image", ext : [".spr"], magic : ["SuperScape Sprite/image"]},
 		superscapeDo3DTemplate                   : {name : "Superscape Do 3D Template", ext : [".vrt"], magic : ["Superscape Do 3D Template"]},
+		superWorksDictionary                     : {name : "SuperWorks dictionary", ext : [".sw2"], magic : ["SuperWorks dictionary"]},
 		swishEIndex                              : {name : "Swish-e index", ext : [".swi"], magic : ["Swish-e index"]},
 		swissEphemerisData                       : {name : "Swiss Ephemeris data", ext : [".se1"], magic : ["Swiss Ephemeris data"]},
 		symantecInternetToolsData                : {name : "Symantec Internet Tools Data", ext : [".ve2", ".vep"], magic : ["Symantec Internet Tools Daten Datei 1.0"]},

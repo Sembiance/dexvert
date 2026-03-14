@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,035)
+# Unsupported File Formats (4,031)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -628,7 +628,7 @@ Family/Format | Name | Extensions | Notes
 [executable/menuetOSApplication](https://discmaster.textfiles.com/search?format=menuetOSApplication) | MenuetOS application |  | 
 [executable/microsoftCompiledHelp2](https://discmaster.textfiles.com/search?format=microsoftCompiledHelp2) | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki/Microsoft_Help_2) | .HxS .HxI | 
 [executable/mipsECOFFExe](https://discmaster.textfiles.com/search?format=mipsECOFFExe) | MIPSL ECOFF Executable |  | 
-[executable/com](https://discmaster.textfiles.com/search?format=com) | [MS-DOS COM Executable](http://fileformats.archiveteam.org/wiki/DOS_executable_(.com)) | .com .c0m | [5 sample files](https://sembiance.com/fileFormatSamples/executable/com/)
+[executable/com](https://discmaster.textfiles.com/search?format=com) | [MS-DOS COM Executable](http://fileformats.archiveteam.org/wiki/DOS_executable_(.com)) | .com .c0m | [6 sample files](https://sembiance.com/fileFormatSamples/executable/com/)
 [executable/msDOSDriver](https://discmaster.textfiles.com/search?format=msDOSDriver) | MS-DOS Driver | .sys .drv | 
 [executable/msdosPMODEExtenderExecutable](https://discmaster.textfiles.com/search?format=msdosPMODEExtenderExecutable) | MS-DOS PMODE extender executable | .exe .bin | 
 [executable/msxTSR](https://discmaster.textfiles.com/search?format=msxTSR) | MSX Terminate and Stay Resident Executable | .tsr | 
@@ -1167,7 +1167,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,765)
+## Other (2,761)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1281,7 +1281,6 @@ Family/Format | Name | Extensions | Notes
 [other/aegisSonixMusic](https://discmaster.textfiles.com/search?format=aegisSonixMusic) | Aegis Sonix music | .snx | 
 [other/aesopEngineResourceData](https://discmaster.textfiles.com/search?format=aesopEngineResourceData) | AESOP engine Resource data | .res | 
 [other/affinityDocument](https://discmaster.textfiles.com/search?format=affinityDocument) | Affinity document | .afdesign | 
-[other/afsGameArchive](https://discmaster.textfiles.com/search?format=afsGameArchive) | AFS game archive | .afs | 
 [other/afterDarkForDOSResourceData](https://discmaster.textfiles.com/search?format=afterDarkForDOSResourceData) | After Dark for DOS Resource data | .rsc | 
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?format=afterlifeSavedGame) | Afterlife saved game |  | 
 [other/agathaChristieMurderOnTheOrientExpressSave](https://discmaster.textfiles.com/search?format=agathaChristieMurderOnTheOrientExpressSave) | Agatha Christie: Murder on the Orient Express save game | .ac2 | 
@@ -1332,7 +1331,6 @@ Family/Format | Name | Extensions | Notes
 [other/amazonGameData](https://discmaster.textfiles.com/search?format=amazonGameData) | Amazon game data |  | 
 [other/amazonKindlePageNumberIndex](https://discmaster.textfiles.com/search?format=amazonKindlePageNumberIndex) | Amazon Kindle Page Number index | .apnx | 
 [other/amberstarGameData](https://discmaster.textfiles.com/search?format=amberstarGameData) | Amberstar game data | .vga .mdi .all .dat .map .cha | 
-[other/americanConquestGameArchive](https://discmaster.textfiles.com/search?format=americanConquestGameArchive) | American Conquest game archive | .gp | 
 [other/americanSMcGeeSAliceSavedGameFile](https://discmaster.textfiles.com/search?format=americanSMcGeeSAliceSavedGameFile) | American's McGee's Alice Saved Game File | .pth | 
 [other/amiMetafileFormat](https://discmaster.textfiles.com/search?format=amiMetafileFormat) | Ami metafile format |  | 
 [other/amiBackConfiguration](https://discmaster.textfiles.com/search?format=amiBackConfiguration) | Ami-Back Configuration | .config | 
@@ -1533,7 +1531,6 @@ Family/Format | Name | Extensions | Notes
 [other/blackAndWhite2PathsData](https://discmaster.textfiles.com/search?format=blackAndWhite2PathsData) | Black and White 2 paths data | .pat | 
 [other/blackAndWhite2TerrainData](https://discmaster.textfiles.com/search?format=blackAndWhite2TerrainData) | Black and White 2 Terrain data | .ter | 
 [other/blackAndWhite2WallData](https://discmaster.textfiles.com/search?format=blackAndWhite2WallData) | Black and White 2 Wall data | .wal | 
-[other/blackAndWhiteSoundsData](https://discmaster.textfiles.com/search?format=blackAndWhiteSoundsData) | Black and White sounds data | .sad | 
 [other/blackViperGameData](https://discmaster.textfiles.com/search?format=blackViperGameData) | Black Viper game data | .edp | 
 [other/blackjackLabGame](https://discmaster.textfiles.com/search?format=blackjackLabGame) | Blackjack Lab game |  | 
 [other/blackjackLabRules](https://discmaster.textfiles.com/search?format=blackjackLabRules) | Blackjack Lab rules |  | 
@@ -2020,7 +2017,6 @@ Family/Format | Name | Extensions | Notes
 [other/everNoteDatabase](https://discmaster.textfiles.com/search?format=everNoteDatabase) | EverNote database | .enb | 
 [other/everQuestGameData](https://discmaster.textfiles.com/search?format=everQuestGameData) | EverQuest Game data | .s3d .pak .pfs .eqg | 
 [other/everythingIndex](https://discmaster.textfiles.com/search?format=everythingIndex) | Everything index | .db | 
-[other/evilGeniusGameDataArchive](https://discmaster.textfiles.com/search?format=evilGeniusGameDataArchive) | Evil Genius game data archive | .erb | 
 [other/examViewQuestionBank](https://discmaster.textfiles.com/search?format=examViewQuestionBank) | ExamView Question Bank | .bnk | 
 [other/exientXGSEngineModel](https://discmaster.textfiles.com/search?format=exientXGSEngineModel) | Exient XGS Engine Model | .xgm | 
 [other/expePointSet](https://discmaster.textfiles.com/search?format=expePointSet) | Expe PointSet | .pts | 
@@ -2964,6 +2960,7 @@ Family/Format | Name | Extensions | Notes
 [other/pandaSignatureFileSystem](https://discmaster.textfiles.com/search?format=pandaSignatureFileSystem) | Panda Signature file system | .sig | 
 [other/panda3DBamContainer](https://discmaster.textfiles.com/search?format=panda3DBamContainer) | Panda3D Bam container | .bam | 
 [other/panzerkriegForWindowsScenario](https://discmaster.textfiles.com/search?format=panzerkriegForWindowsScenario) | Panzerkrieg for Windows Scenario | .pks | 
+[other/panzersPhase2Map](https://discmaster.textfiles.com/search?format=panzersPhase2Map) | Panzers - Phase 2 Map | .map | 
 [other/paperPortSlideShot](https://discmaster.textfiles.com/search?format=paperPortSlideShot) | PaperPort Slide Show | .fss | 
 [other/papillonPalette](https://discmaster.textfiles.com/search?format=papillonPalette) | Papillon Palette | .pal .ppal | 
 [other/papyrusPrinterInformation](https://discmaster.textfiles.com/search?format=papyrusPrinterInformation) | Papyrus Printer Information | .pri | 
@@ -3477,8 +3474,8 @@ Family/Format | Name | Extensions | Notes
 [other/superScapeResource](https://discmaster.textfiles.com/search?format=superScapeResource) | SuperScape Resource | .rsc | 
 [other/superScapeSpriteImage](https://discmaster.textfiles.com/search?format=superScapeSpriteImage) | SuperScape Sprite/image | .spr | 
 [other/supersonicSoftwareGameDataArchive](https://discmaster.textfiles.com/search?format=supersonicSoftwareGameDataArchive) | Supersonic Software game data archive | .piz | 
+[other/superWorksDictionary](https://discmaster.textfiles.com/search?format=superWorksDictionary) | SuperWorks dictionary | .sw2 | 
 [other/surfsUpGameDataArchive](https://discmaster.textfiles.com/search?format=surfsUpGameDataArchive) | Surf's Up game data archive | .bin | 
-[other/surrealSoftwareGameArchive](https://discmaster.textfiles.com/search?format=surrealSoftwareGameArchive) | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | 
 [other/swishEIndex](https://discmaster.textfiles.com/search?format=swishEIndex) | Swish-e index | .swi | 
 [other/swissEphemerisData](https://discmaster.textfiles.com/search?format=swissEphemerisData) | Swiss Ephemeris data | .se1 | 
 [other/swordArtOnlineGameDataArchive](https://discmaster.textfiles.com/search?format=swordArtOnlineGameDataArchive) | Sword Art Online game data archive | .ofs3 .1psp | 
@@ -3784,7 +3781,6 @@ Family/Format | Name | Extensions | Notes
 [other/whatsappMessagesDatabase](https://discmaster.textfiles.com/search?format=whatsappMessagesDatabase) | Whatsapp messages Database | .db | 
 [other/whatsUpGoldVirtualDevice](https://discmaster.textfiles.com/search?format=whatsUpGoldVirtualDevice) | WhatsUp Gold Virtual Device | .dse | 
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?format=whdLoadSlave) | WHDLoad Slave | .slave | 
-[other/whirlwindGameDataPackage](https://discmaster.textfiles.com/search?format=whirlwindGameDataPackage) | Whirlwind game data Package | .wpk | 
 [other/whiteWolfProductionsHelp](https://discmaster.textfiles.com/search?format=whiteWolfProductionsHelp) | White Wolf Productions Help | .hlp | 
 [other/whiteWolfProductionsPalette](https://discmaster.textfiles.com/search?format=whiteWolfProductionsPalette) | White Wolf Productions Palette | .pal | 
 [other/whoFramedRogerRabbitMenu](https://discmaster.textfiles.com/search?format=whoFramedRogerRabbitMenu) | Who Framed Roger Rabbit Menu | .mnu | 

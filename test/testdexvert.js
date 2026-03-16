@@ -591,6 +591,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/archive\/(cdi|iso)\/.+\.(cue|toc|ccd)$/i, "text", true],
 	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", "pogNames"],
+	[/audio\/wbnkAudioArchive\/Unnamed File 00000[124]\.WBNK/, true, true],
 	[/font\/riscOSFont\/intmetric.*$/i, "other", "riscOSFontMetrics"],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],

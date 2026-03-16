@@ -1034,8 +1034,8 @@ export default
 	other :
 	{
 		// Game - These actually work with gameextractor but produce game-specific worthless files
-		albionGameDataArchive       : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
-		panzersPhase2Map            : {name : "Panzers - Phase 2 Map", ext : [".map"], magic : [/^geArchive: MAP_SR( |$)/]},
+		albionGameDataArchive : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
+		panzersPhase2Map      : {name : "Panzers - Phase 2 Map", ext : [".map"], magic : [/^geArchive: MAP_SR( |$)/]},
 
 		//////////
 		// Game //

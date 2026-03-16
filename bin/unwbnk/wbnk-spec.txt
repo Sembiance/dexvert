@@ -1,0 +1,256 @@
+WBNK File Format Specification
+===============================
+
+Version: 1.0 (reverse-engineered)
+Date:    2026-03-14
+
+
+1. OVERVIEW
+-----------
+
+WBNK is a binary container format for audio data. Each file stores one or
+more compressed audio streams as sequenced packets, optionally followed by a
+raw PCM audio data section.
+
+The format has no file-level magic number or header. Parsing begins
+immediately with the first packet entry.
+
+Byte order: All multi-byte integers are little-endian.
+
+
+2. FILE LAYOUT
+--------------
+
+A WBNK file consists of:
+
+    [Stream 1] [Gap?] [Stream 2] [Gap?] ... [Stream N] [Gap?] [PCM Data?]
+
+    Stream      = one or more Packet Entries (see Section 3)
+    Gap         = 0-3 bytes of 0x00 padding for 4-byte alignment
+    PCM Data    = optional raw PCM audio blob (see Section 5)
+
+Streams are contiguous sequences of packet entries. Adjacent streams may be
+separated by an alignment gap of 0-3 zero bytes so that each stream starts
+at a 4-byte-aligned offset.
+
+After the last stream (and its alignment gap, if any), the remainder of the
+file (if any) is raw PCM audio data.
+
+
+3. PACKET ENTRY
+---------------
+
+Each packet entry consists of a 32-byte header immediately followed by a
+variable-length payload.
+
+    Offset  Size  Type      Field              Description
+    ------  ----  --------  -----------------  ------------------------------------
+    0x00    4     uint32    flags              Entry flags (observed: always 0)
+    0x04    4     uint32    payload_size       Length of payload data in bytes
+    0x08    4     uint32    reserved           Reserved (observed: always 0)
+    0x0C    4     uint32    packet_flags       Bit field:
+                                                 0x000 = normal packet
+                                                 0x200 = end-of-stream (last packet)
+    0x10    8     int64     granule_position   Cumulative decoded sample count,
+                                               or -1 (0xFFFFFFFFFFFFFFFF) if not set
+    0x18    8     uint64    sequence           Packet sequence number within stream
+    0x20    var   bytes     payload            Compressed audio packet data
+
+Total entry size = 32 + payload_size bytes.
+
+
+4. STREAM STRUCTURE
+-------------------
+
+A stream represents one independent audio track. Streams have the following
+properties:
+
+  - Packet sequence numbers start at 3 and increment by 1 for each packet.
+    The first two sequence numbers (0-2) are not present in the file;
+    their purpose is unknown (possibly reserved for Vorbis-style header
+    packets stored externally).
+
+  - The last packet in every stream has packet_flags = 0x200 (end-of-stream).
+    All other packets have packet_flags = 0x000.
+
+  - Granule positions appear periodically (approximately every 15-25
+    packets) and represent the cumulative number of decoded PCM samples
+    up to and including that packet. Most packets have granule_position
+    set to -1 (0xFFFFFFFFFFFFFFFF), meaning "no checkpoint."
+
+  - Granule position differences between consecutive checkpoints are
+    typically multiples of 1024 samples, consistent with a Vorbis-family
+    codec using 1024-sample transform blocks.
+
+  - The end-of-stream packet always has a valid (non -1) granule position,
+    giving the total decoded sample count for the stream.
+
+
+4.1 Stream Boundaries
+---------------------
+
+To parse streams from the file:
+
+  1. Read packet entries sequentially.
+  2. When a packet has packet_flags = 0x200, it is the last packet of the
+     current stream.
+  3. After the stream ends, round up to the next 4-byte-aligned offset:
+         next_offset = (current_offset + 3) & ~3
+  4. If the next 32 bytes form a valid packet header (flags <= 1,
+     payload_size > 0, payload_size < 65536, sequence == 3), a new stream
+     begins. Otherwise, the remaining file data is raw PCM audio (Section 5).
+
+
+5. RAW PCM DATA SECTION (optional)
+-----------------------------------
+
+If present, the PCM data section occupies all remaining bytes after the last
+stream and its alignment gap. It contains raw, uncompressed audio samples.
+
+Observed characteristics:
+  - Sample format: signed 16-bit integers (little-endian)
+  - Channel layout: interleaved (L, R, L, R, ... for stereo)
+  - Channel count: varies per file (1 or 2 channels observed)
+  - Sample rate: not encoded in the format; likely 48000 Hz or 44100 Hz
+
+The PCM section has no header or framing. The sample rate, channel count,
+and bit depth must be determined from external metadata or heuristics.
+
+
+6. BYTE ACCOUNTING
+------------------
+
+Every byte in a WBNK file belongs to exactly one of:
+  - A 32-byte packet entry header
+  - A packet payload (payload_size bytes)
+  - An alignment gap (0-3 zero bytes between streams)
+  - The raw PCM data section
+
+There is no file header, footer, table of contents, or other metadata
+structure. The entire file is consumed by the above four categories.
+
+
+7. COMPRESSED AUDIO CODEC
+--------------------------
+
+The audio packets (seq >= 4) contain **standard Vorbis** audio data
+(RFC 5215 / Xiph Vorbis I specification), verified by:
+
+  a) Bit 0 (LSB-first) of every audio packet is 0, matching the Vorbis
+     audio packet type indicator.
+
+  b) Bit 1 encodes the mode number. Two modes are observed: mode 0
+     (short block, ~3-10% of packets, ~45-75 bytes) and mode 1 (long
+     block, ~90-97% of packets, ~200-300 bytes).
+
+  c) For mode 1 (long block) packets, bits 2-3 encode prev_window_flag
+     and next_window_flag. These flags are **100% consistent** with the
+     actual mode sequence of adjacent packets, confirming standard Vorbis
+     windowing semantics.
+
+  d) Block sizes solved from granule position equations:
+       - Most streams: blocksize_0 = 256, blocksize_1 = 2048
+       - Some streams: blocksize_0 = 512, blocksize_1 = 1024
+     These match standard Vorbis block size options.
+
+  e) Audio packets decode successfully when wrapped in Ogg Vorbis with a
+     borrowed setup packet of matching block sizes (audio is garbled due
+     to mismatched codebooks, but the decoder accepts the bitstream).
+
+
+7.1 First Packet (Setup/Configuration)
+---------------------------------------
+
+The first packet per stream (seq=3) is NOT a standard Vorbis setup packet.
+It is a proprietary configuration block (37-66 bytes) whose format is not
+yet decoded.
+
+Observations about the first packet:
+  - First byte is one of: 0x00, 0x9C, 0xA4, 0xAC, 0xDC, 0xF4
+  - All active streams in the same file share the same first byte value
+  - 0x00 indicates a 1-byte "empty" configuration (3 instances observed)
+  - The packet does NOT contain standard Vorbis codebook sync patterns
+    (no 'BCV' / 0x564342 marker)
+  - The packet is too small to contain inline Vorbis codebooks
+  - No standard Vorbis mode configuration (framing bit) found at the end
+
+The Vorbis codebooks and full setup configuration are NOT embedded in the
+WBNK file. They are likely:
+  a) Hardcoded in the game executable's audio engine, or
+  b) Stored in a separate external codebook file, or
+  c) Encoded in the first packet using a proprietary compact format
+
+The WBNK format is associated with **Koei Tecmo WaveBank** files (identified
+by vgmstream as meta_KWB with the .wbnk extension).
+
+
+7.2 Sequence Number Gap
+------------------------
+
+Packet sequence numbers start at 3 for each stream. The missing sequences
+0, 1, 2 likely correspond to the three standard Vorbis header packets:
+  - seq 0: Vorbis identification header (channels, sample rate, block sizes)
+  - seq 1: Vorbis comment header
+  - seq 2: Vorbis setup header (codebooks, floors, residues, mappings, modes)
+
+These packets are not present in the file; the decoder presumably supplies
+them internally. The first packet in the file (seq=3) may be a compact
+representation of parameters the decoder needs to reconstruct the missing
+standard Vorbis headers.
+
+
+7.3 Key Codec Parameters (Derived)
+------------------------------------
+
+  - Codec:       Standard Vorbis I (unmodified audio packets)
+  - Sample rate:  Likely 48000 Hz (consistent with granule timing)
+  - Channels:     1 or 2 (determined per-stream by external metadata)
+  - Block sizes:  Typically blocksize_0=256, blocksize_1=2048
+                   (some streams use 512/1024)
+  - Modes:        2 (mode 0 = short block, mode 1 = long block)
+  - Codebooks:    UNKNOWN (not embedded in file; external or hardcoded)
+
+
+8. EXAMPLE
+----------
+
+File with 2 streams and PCM data:
+
+    Offset  Content
+    ------  ---------------------------------
+    0x0000  Stream 1, Packet 1 (seq=3, 32+45 bytes)
+    0x004D  Stream 1, Packet 2 (seq=4, 32+225 bytes)
+    ...
+    0x1A00  Stream 1, Last Packet (seq=500, flags=0x200, 32+190 bytes)
+    0x1ABE  Alignment gap: 00 00  (2 bytes to reach 4-byte boundary)
+    0x1AC0  Stream 2, Packet 1 (seq=3, 32+51 bytes)
+    ...
+    0x3500  Stream 2, Last Packet (seq=300, flags=0x200, 32+48 bytes)
+    0x3550  Alignment gap: 00 00 00  (3 bytes)
+    0x3553  Raw PCM data (16-bit LE samples to end of file)
+
+
+APPENDIX A: FIELD SUMMARY TABLE
+--------------------------------
+
+    packet_flags values:
+        0x000    Normal packet
+        0x200    End of stream (last packet in stream)
+
+    granule_position values:
+        0xFFFFFFFFFFFFFFFF    Not set (no checkpoint)
+        Any other value       Cumulative decoded sample count
+
+    sequence values:
+        Starts at 3 for each stream, increments by 1
+
+
+APPENDIX B: SAMPLE FILE STATISTICS
+-----------------------------------
+
+    File 1: 4 streams, no PCM.   4,315,437 bytes.  17,969 total packets.
+    File 2: 1 stream  + PCM.     7,996,612 bytes.   2,146 total packets.
+    File 3: 1 stream  + PCM.     6,221,844 bytes.   2,259 total packets.
+    File 4: 5 streams, no PCM.   5,238,731 bytes.  22,968 total packets.
+    File 5: 4 streams, no PCM.   4,879,309 bytes.  19,987 total packets.
+    File 6: 4 streams + PCM.    39,705,772 bytes.  14,838 total packets.

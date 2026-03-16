@@ -2,7 +2,6 @@ import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {path} from "std";
 import {fileUtil} from "xutil";
-import {DOMParser} from "/mnt/compendium/DevLab/deno/deno-dom/deno-dom-native.ts";
 
 export class boo2html extends Program
 {
@@ -42,7 +41,7 @@ export class boo2html extends Program
 		}
 
 		// convert our anchor links
-		const doc = new DOMParser().parseFromString(outHTML, "text/html");
+		const doc = xu.fromHTML(outHTML);
 		for(const anchor of doc.querySelectorAll("a"))
 		{
 			const href = anchor?.getAttribute("href");

@@ -160,7 +160,7 @@ export default async function phase4({item, itemWebDirPath, taskRunner, xlog})
 					// but there were some old school object/vrml and other tags that people may want to search for directly, it's not just the text content that matters
 					// so even though this will cause searches for normal HTML tags like 'table' and 'script' to come back with a TON of HTML results, it's better than missing out
 					//if(textFileContent?.length && (fileData.content?.formatid || fileData.formatid)==="html")
-					//	textFileContent = (new DOMParser().parseFromString(textFileContent, "text/html"))?.body?.textContent;
+					//	textFileContent = xu.fromHTML(textFileContent)?.body?.textContent;
 				}
 				else
 				{

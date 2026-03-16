@@ -1,11 +1,11 @@
-# Supported File Formats (3,632)
+# Supported File Formats (3,635)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (621)
+## Archive (620)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -20,7 +20,7 @@ archive | [Acorn Spark Compressed Archive](http://fileformats.archiveteam.org/wi
 archive | [ActiveMime](http://fileformats.archiveteam.org/wiki/ActiveMime) | .mso | [activeMimeExtractor](https://github.com/idiom/activemime-format) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/activeMime/)
 archive | ADB Archive | .adb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/adbArchive/)
 archive | Adobe Photoshop Patterns | .pat | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/adobePhotoshopPatterns/)
-archive | ADX Audio Package | .afs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/adxAudioPackage/)
+archive | ADX Audio Package | .afs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/adxAudioPackage/)
 archive | [AFX compressed data](http://fileformats.archiveteam.org/wiki/Com2txt) |  | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/afxCompressedData/)
 archive | Age of Empires 3 BAR Archive | .bar | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ageOfEmpires3BAR/)
 archive | Agon game data archive | .sfl | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/agonGameDataArchive/)
@@ -34,8 +34,7 @@ archive | Aldus Zip Compressed File |  | [deark](https://entropymine.com/deark/)
 archive | Alien vs Predator game data container | .ffl | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/alienVsPredatorGameDataContainer/)
 archive | [Allegro Packfile](http://fileformats.archiveteam.org/wiki/Allegro_packfile) | .dat | [pack](https://liballeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/allegroPackfile/)
 archive | Allods 2 Rage Of Mages game archive | .res | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/allods2RageOfMagesGameArchive/)
-archive | American Conquest 2 game archive | .gs1 .gsc | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/americanConquest2GameArchive/)
-archive | American Conquest 2 game archvie | .gsc | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/americanConquest2GameArchvie/)
+archive | American Conquest 2 game archive | .gs1 .gsc | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/americanConquest2GameArchive/)
 archive | [AMGC Archive](http://fileformats.archiveteam.org/wiki/AMG_(compressed_archive)) | .amg | [amgc](https://www.sac.sk/download/pack/amgc22.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/amgcArchive/)
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [unadf](http://lclevy.free.fr/adflib/) [uaeunp](https://www.winuae.net/download/) [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/adfFFS/)
 archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [unar](https://github.com/incbee/Unarchiver) [uaeunp](https://www.winuae.net/download/) [unadf](http://lclevy.free.fr/adflib/) [extract_adf](https://github.com/mist64/extract-adf) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/adfOFS/) - Some Amiga disks (such as voyager.adf) are non DOS (NDOS) disks with custom filesystems. Others are crazy corrupted and produce lots of really bad files, such as 117.adf These cannot be mounted by the amiga nor extracted with unar/unadf/adf-extractor These are custom disk formats that demo and game coders came up with to squeeze data out of em. Sadly there isn't really any way to extract files from these disks, as they might not even have a concept of files at all.
@@ -415,7 +414,7 @@ archive | PACKIT Installation Archive | .ins | [sevenZip](http://p7zip.sourcefor
 archive | PACKWIN Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/packwinPacked/)
 archive | Pacman - Adventures in Time game archive | .pac | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/pacmanAdventuresInTimeGameArchive/)
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/paintShopProBrowserCache/)
-archive | PAK Archive | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/pakArchive/)
+archive | PAK Archive | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/pakArchive/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak .exe | [unar](https://github.com/incbee/Unarchiver) [arc](http://arc.sourceforge.net) [xarc](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus) [deark](https://entropymine.com/deark/) [izArc](https://www.izarc.org/) | [22 sample files](https://sembiance.com/fileFormatSamples/archive/arc/)
 archive | [PAKLEO Archive](http://fileformats.archiveteam.org/wiki/PAKLEO) | .pll | [unpakleo](https://www.sac.sk/download/pack/pakll106.zip) [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/pakleo/)
 archive | [PAKLEO Self-Extracting Archive](http://fileformats.archiveteam.org/wiki/PAKLEO) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/pakleoSelfExtracting/)
@@ -455,7 +454,7 @@ archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.o
 archive | Pro-Pack Packed Executable | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [17 sample files](https://sembiance.com/fileFormatSamples/archive/proPackPackedExe/)
 archive | Project Aftermath DAT Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/projectAftermathDAT/)
 archive | Psychonauts Archive | .isb .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/psychonautsArchive/)
-archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/quakePAK/)
+archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/quakePAK/)
 archive | [Quantum Archive](http://fileformats.archiveteam.org/wiki/Quantum_compressed_archive) | .pak .q | [unpaq](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/quantum/)
 archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/wiki/QIP_(Quarterdeck)) | .qip | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/quarterdeckInstallationPacakge/)
 archive | [Quasijarus Strong Compressed](http://fileformats.archiveteam.org/wiki/Quasijarus_Strong_Compression) | .z | [ancient](https://github.com/temisu/ancient_format_decompressor) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/quasijarus/)
@@ -632,7 +631,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (133)
+## Audio (134)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 208 Audio (Ocean Games) | .bnk | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/twoZeroEightAudio/)
@@ -664,7 +663,7 @@ audio | [CoreAudio Format](http://fileformats.archiveteam.org/wiki/Core_Audio_Fo
 audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/covoxADPCM/)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/voc/)
 audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/adxCRI/)
-audio | CRI AFS | .afs | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/criAFS/)
+audio | CRI AFS | .afs | [ffmpeg](https://ffmpeg.org/) | 
 audio | Cryo Interactive APC Audio | .apc | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/cryoInteractiveAPC/)
 audio | Cyberflix DreamFactory CFDF Audio | .trk | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/cyberflixDreamFactoryCFDFAudio/)
 audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwd | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/diamondWareDigitized/)
@@ -760,6 +759,7 @@ audio | [VOCPACK Compressed Audio](https://www.rarewares.org/rrw/vocpack.php) | 
 audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav .bwf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [29 sample files](https://sembiance.com/fileFormatSamples/audio/wav/)
 audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) [nihav](https://git.nihav.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
+audio | WBNK Audio Archive | .wbnk | [unwbnk](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/wbnkAudioArchive/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
 audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
 audio | Wwise sound Bank | .bnk | [ffmpeg](https://ffmpeg.org/) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/wwiseSoundBank/)
@@ -1092,7 +1092,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (776)
+## Image (777)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1314,6 +1314,7 @@ image | [ERDAS LAN/GIS](http://fileformats.archiveteam.org/wiki/ERDAS_LAN/GIS) |
 image | [ERI (Lashade Entis)](http://fileformats.archiveteam.org/wiki/ERI_(Lashade_Entis)) | .eri | [nconvertWine](https://discmaster.textfiles.com/browse/23608/PCWorld0410.iso/redakcyjne/programy/XnView%201.97/XnView-win-full.zip) | [15 sample files](https://sembiance.com/fileFormatSamples/image/eriLashadeEntis/)
 image | Eroiica EIF |  | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/eroiicaEIF/)
 image | [Esm Software PIX Image](http://fileformats.archiveteam.org/wiki/Esm_Software_PIX) | .pix | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/esmSoftwarePIX/)
+image | [ESRI/ArcView Shape](http://fileformats.archiveteam.org/wiki/Shapefile) | .shp | [esriShape2svg](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/esriShape/)
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/xb/)
 image | [Extended DEGAS Image](http://fileformats.archiveteam.org/wiki/Extended_DEGAS_image) | .pi4 .pi5 .pi6 .pi7 .pi8 .pi9 | [recoil2png](http://recoil.sourceforge.net) | [22 sample files](https://sembiance.com/fileFormatSamples/image/degasExtended/)
 image | [EZ-Art Professional](http://fileformats.archiveteam.org/wiki/EZ-Art_Professional) | .eza | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [12 sample files](https://sembiance.com/fileFormatSamples/image/eza/)
@@ -2320,7 +2321,7 @@ other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScr
 
 
 
-## Poly (65)
+## Poly (67)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 poly | [3D Manufacturing Format](http://fileformats.archiveteam.org/wiki/3MF) | .3mf | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) | [4 sample files](https://sembiance.com/fileFormatSamples/poly/threeMF/)
@@ -2339,6 +2340,7 @@ poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .
 poly | [Direct3D Object](http://fileformats.archiveteam.org/wiki/X_(DirectX)) | .x | [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/direct3DObject/)
 poly | [Doom 3 Mesh](https://modwiki.dhewm3.org/MD5MESH_(file_format)) | .md5mesh | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/doom3Mesh/)
 poly | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [AccuTrans3D](http://www.micromouse.ca/) [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/dxf/) - I would love to be able to determine if it's a flat 2D drawing or an actual 3D model, seems about 50/50 and when a 2D drawing is rendered as a polygon, it's hard to make out/see.
+poly | [Electric Image 3D File](http://fileformats.archiveteam.org/wiki/FACT) | .fact .fac | [poly2glb](https://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/electricImage3DFile/)
 poly | [Extensible 3D](http://fileformats.archiveteam.org/wiki/X3D) | .x3d .x3db .x3dv .x3dz .x3dbz .x3dvz | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/x3d/)
 poly | [Geomview Object File Format](http://fileformats.archiveteam.org/wiki/OFF_(Geomview_Object_File_Format)) | .off | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/objectFileFormat/)
 poly | [Ghoul 2 Model](http://fileformats.archiveteam.org/wiki/GLM) | .glm | [milkShape3D](http://www.milkshape3d.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/ghoul2Model/)
@@ -2381,6 +2383,7 @@ poly | SGI Open Inventor Scene Graph | .iv | [AccuTrans3D](http://www.micromouse
 poly | Shadowgrounds 3D model | .s3d | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/shadowgrounds3DModel/)
 poly | [Shockwave 3D Scene](http://fileformats.archiveteam.org/wiki/Wavefront_OBJ) | .w3d | [shockwave3DWorldConverter](https://github.com/tomysshadow/Shockwave-3D-World-Converter) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/shockwave3D/)
 poly | [Simply 3D Geometry](http://fileformats.archiveteam.org/wiki/Simply_3D_Geometry) | .ged | [simply3D20](https://archive.org/details/premier2_cd) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/simply3DGeometry/)
+poly | [SketchUp Model](http://fileformats.archiveteam.org/wiki/SKP) | .skp | [poly2glb](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/sketchUp/)
 poly | [Softimage XSI](http://fileformats.archiveteam.org/wiki/DotXSI) | .xsi | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/softimageXSI/)
 poly | [STereoLithography](http://fileformats.archiveteam.org/wiki/STL) | .stl | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [14 sample files](https://sembiance.com/fileFormatSamples/poly/stl/)
 poly | [TDDD TurboSilver/Imagine 3D Object](http://fileformats.archiveteam.org/wiki/TDDD) | .iob .tdd .tddd .cel .obj | [AccuTrans3D](http://www.micromouse.ca/) [blender](https://www.blender.org) [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [19 sample files](https://sembiance.com/fileFormatSamples/poly/iffTDDD/) - The import script does not handle many of the tags from the TDDD format (Spitfire.iob). An initial stab at handling some of the color info (CLST, RLST, TLST) didn't provide any results (see sandbox/legacy/blender/io_import_scene_tddd.py)

@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,031)
+# Unsupported File Formats (4,028)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -3934,7 +3934,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (103)
+## Poly (100)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3969,10 +3969,8 @@ Family/Format | Name | Extensions | Notes
 [poly/digitalElevationMap](https://discmaster.textfiles.com/search?format=digitalElevationMap) | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)
 [poly/dynaCADDPart](https://discmaster.textfiles.com/search?format=dynaCADDPart) | DynaCADD Part | .prt .dpt | 
 [poly/elasticRealityShape](https://discmaster.textfiles.com/search?format=elasticRealityShape) | Elastic Reality Shape | .er | 
-[poly/electricImage3DFile](https://discmaster.textfiles.com/search?format=electricImage3DFile) | [Electric Image 3D File](http://fileformats.archiveteam.org/wiki/FACT) | .fact .fac | [13 sample files](https://sembiance.com/fileFormatSamples/poly/electricImage3DFile/)
 [poly/eMachineShopModel](https://discmaster.textfiles.com/search?format=eMachineShopModel) | eMachineShop model | .ems | 
 [poly/eplybndsPoly](https://discmaster.textfiles.com/search?format=eplybndsPoly) | EPLYBNDS Poly | .ply | [7 sample files](https://sembiance.com/fileFormatSamples/poly/eplybndsPoly/)
-[poly/esriShape](https://discmaster.textfiles.com/search?format=esriShape) | [ESRI/ArcView Shape](http://fileformats.archiveteam.org/wiki/Shapefile) | .shp | [10 sample files](https://sembiance.com/fileFormatSamples/poly/esriShape/)
 [poly/expert4DModel](https://discmaster.textfiles.com/search?format=expert4DModel) | Expert 4D model | .maq | 
 [poly/fastRayObject](https://discmaster.textfiles.com/search?format=fastRayObject) | FastRay object |  | 
 [poly/fastRayScene](https://discmaster.textfiles.com/search?format=fastRayScene) | FastRay scene |  | 
@@ -4014,7 +4012,6 @@ Family/Format | Name | Extensions | Notes
 [poly/rotObject](https://discmaster.textfiles.com/search?format=rotObject) | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/) - Only 27 unique files on discmaster. Not sure what program created these files.
 [poly/sculptris3DModel](https://discmaster.textfiles.com/search?format=sculptris3DModel) | Sculptris 3D Model | .sc1 | 
 [poly/ydl](https://discmaster.textfiles.com/search?format=ydl) | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.
-[poly/sketchUp](https://discmaster.textfiles.com/search?format=sketchUp) | [SketchUp Model](http://fileformats.archiveteam.org/wiki/SKP) | .skp | [12 sample files](https://sembiance.com/fileFormatSamples/poly/sketchUp/)
 [poly/solidEdgeModel](https://discmaster.textfiles.com/search?format=solidEdgeModel) | Solid Edge part/model | .par | 
 [poly/solidWorksAssembly](https://discmaster.textfiles.com/search?format=solidWorksAssembly) | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
 [poly/solidWorksDrawing](https://discmaster.textfiles.com/search?format=solidWorksDrawing) | SolidWorks Drawing | .slddrw | [3 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksDrawing/)

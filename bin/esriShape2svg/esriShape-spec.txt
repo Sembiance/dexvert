@@ -1,0 +1,433 @@
+# Vibe coded by Claude
+
+================================================================================
+  ESRI/ArcView Shapefile (.shp) Binary Format Specification
+================================================================================
+
+  Reverse-engineered from 223 sample .shp files
+  Document date: 2026-03-15
+
+================================================================================
+
+
+TABLE OF CONTENTS
+-----------------
+
+  1. Overview
+  2. File Header (100 bytes)
+  3. Shape Types
+  4. Record Structure
+     4.1  Record Header
+     4.2  Shape Type 0 - Null Shape
+     4.3  Shape Type 1 - Point
+     4.4  Shape Type 3 - PolyLine (inferred)
+     4.5  Shape Type 5 - Polygon
+     4.6  Shape Type 8 - MultiPoint
+     4.7  Shape Type 11 - PointZ
+  5. Byte Order Summary
+  6. Key Observations
+  7. Known Quirks
+  8. Sample Corpus Statistics
+
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+The ESRI Shapefile format stores vector geospatial data. A single .shp file
+is a binary file consisting of a 100-byte fixed-length header followed by a
+variable number of variable-length records. Each record contains a record
+header and shape content.
+
+All multi-byte numeric values are either big-endian or little-endian depending
+on their position in the file (see Section 5 for details). The format uses a
+mixture of both byte orderings.
+
+Lengths in several header fields are expressed in 16-bit words (2 bytes each).
+To convert to byte counts, multiply by 2.
+
+All coordinate values are stored as IEEE 754 64-bit double-precision floats.
+
+
+================================================================================
+2. FILE HEADER (100 bytes, offset 0x00 - 0x63)
+================================================================================
+
+The file header is exactly 100 bytes and appears at the start of every .shp
+file. It contains file metadata, the shape type for the file, and the spatial
+bounding box.
+
+Offset  Length  Endian  Type    Description
+------  ------  ------  ------  ------------------------------------------------
+  0       4     Big     int32   File Code
+                                  Always 9994 (0x0000270A).
+                                  Used as a magic number to identify the format.
+
+  4      20     -       -       Unused
+                                  20 bytes of padding, always filled with zeros.
+
+ 24       4     Big     int32   File Length (in 16-bit words)
+                                  The total length of the file in 16-bit words,
+                                  including the 100-byte header. Multiply by 2
+                                  to obtain the file size in bytes.
+
+ 28       4     Little  int32   Version
+                                  Always 1000.
+
+ 32       4     Little  int32   Shape Type
+                                  The shape type for the file. All non-null
+                                  records in the file must match this type.
+                                  See Section 3 for valid shape type codes.
+
+ 36       8     Little  double  Bounding Box Xmin
+                                  Minimum X coordinate across all shapes.
+
+ 44       8     Little  double  Bounding Box Ymin
+                                  Minimum Y coordinate across all shapes.
+
+ 52       8     Little  double  Bounding Box Xmax
+                                  Maximum X coordinate across all shapes.
+
+ 60       8     Little  double  Bounding Box Ymax
+                                  Maximum Y coordinate across all shapes.
+
+ 68       8     Little  double  Bounding Box Zmin
+                                  Minimum Z value. Set to 0.0 for shape types
+                                  that do not use Z values.
+
+ 76       8     Little  double  Bounding Box Zmax
+                                  Maximum Z value. Set to 0.0 for shape types
+                                  that do not use Z values.
+
+ 84       8     Little  double  Bounding Box Mmin (measure min)
+                                  Minimum measure value. Set to 0.0 for shape
+                                  types that do not use measures.
+
+ 92       8     Little  double  Bounding Box Mmax (measure max)
+                                  Maximum measure value. Set to 0.0 for shape
+                                  types that do not use measures.
+
+
+================================================================================
+3. SHAPE TYPES
+================================================================================
+
+The following shape type codes were found across the 223 sample files:
+
+Value   Name         Description
+-----   ----------   -----------------------------------------------------------
+  0     Null         No geometry. Used for individual records within files that
+                     otherwise contain a different shape type. A Null record
+                     indicates that the feature has no geometric data.
+
+  1     Point        A single X,Y coordinate pair.
+
+  3     PolyLine     An ordered set of vertices forming one or more connected
+                     line segments. (Not found in sample files but the binary
+                     structure is identical to Polygon.)
+
+  5     Polygon      One or more closed polygon rings. Outer rings are wound
+                     clockwise; inner rings (holes) are counter-clockwise.
+
+  8     MultiPoint   An unordered set of points.
+
+ 11     PointZ       A single X,Y,Z coordinate with an associated measure (M)
+                     value.
+
+Note: PolyLine (type 3) was not present in the 223 sample files, but its
+record structure is documented here because it is identical to Polygon
+(type 5) except for the shape type code.
+
+
+================================================================================
+4. RECORD STRUCTURE
+================================================================================
+
+After the 100-byte file header, the remainder of the file consists of records.
+Each record has a fixed-size record header followed by variable-length content
+whose structure depends on the shape type.
+
+
+--------------------------------------------------------------------------------
+4.1  RECORD HEADER (8 bytes, big-endian)
+--------------------------------------------------------------------------------
+
+Every record begins with an 8-byte header. Both fields are big-endian.
+
+Offset  Length  Endian  Type    Description
+------  ------  ------  ------  ------------------------------------------------
+  0       4     Big     int32   Record Number
+                                  1-based, sequential. The first record is
+                                  record 1, the second is record 2, etc.
+
+  4       4     Big     int32   Content Length (in 16-bit words)
+                                  The length of the record content that follows
+                                  this header, measured in 16-bit words.
+                                  Multiply by 2 for byte count.
+
+The record content immediately follows this 8-byte header. The content always
+begins with a 4-byte little-endian shape type field.
+
+
+--------------------------------------------------------------------------------
+4.2  SHAPE TYPE 0 - NULL SHAPE
+--------------------------------------------------------------------------------
+
+A Null shape record contains no geometric data. It consists of only the shape
+type field.
+
+Offset  Length  Endian  Type    Description
+------  ------  ------  ------  ------------------------------------------------
+  0       4     Little  int32   Shape Type = 0
+
+Total content size: 4 bytes (2 sixteen-bit words)
+
+Null records can appear in any file regardless of the file-level shape type.
+They indicate that a particular feature has no geometry.
+
+
+--------------------------------------------------------------------------------
+4.3  SHAPE TYPE 1 - POINT
+--------------------------------------------------------------------------------
+
+A Point record stores a single location as an X,Y coordinate pair.
+
+Offset  Length  Endian  Type    Description
+------  ------  ------  ------  ------------------------------------------------
+  0       4     Little  int32   Shape Type = 1
+  4       8     Little  double  X coordinate
+ 12       8     Little  double  Y coordinate
+
+Total content size: 20 bytes (10 sixteen-bit words)
+
+
+--------------------------------------------------------------------------------
+4.4  SHAPE TYPE 3 - POLYLINE (inferred, not observed in samples)
+--------------------------------------------------------------------------------
+
+A PolyLine record stores one or more connected sequences of vertices. Its
+binary layout is identical to the Polygon type (Section 4.5), except:
+  - The shape type field contains 3 instead of 5.
+  - Parts are open line strings, not closed rings.
+  - There is no ring winding order convention.
+
+See Section 4.5 for the complete field layout.
+
+
+--------------------------------------------------------------------------------
+4.5  SHAPE TYPE 5 - POLYGON
+--------------------------------------------------------------------------------
+
+A Polygon record stores one or more closed rings of vertices. This same
+binary structure applies to PolyLine (type 3) records.
+
+Offset          Length          Endian  Type      Description
+--------------  --------------  ------  --------  --------------------------
+ 0               4              Little  int32     Shape Type = 5 (or 3)
+
+ 4               8              Little  double    Bounding Box Xmin
+
+12               8              Little  double    Bounding Box Ymin
+
+20               8              Little  double    Bounding Box Xmax
+
+28               8              Little  double    Bounding Box Ymax
+
+36               4              Little  int32     NumParts
+                                                    Number of rings (parts)
+                                                    in this polygon.
+
+40               4              Little  int32     NumPoints
+                                                    Total number of points
+                                                    across all parts.
+
+44               NumParts * 4   Little  int32[]   Parts Array
+                                                    Array of starting indices
+                                                    into the Points array for
+                                                    each part. The first entry
+                                                    is always 0. Each value
+                                                    gives the index of the
+                                                    first point belonging to
+                                                    that part.
+
+44+NumParts*4    NumPoints * 16 Little  Point[]   Points Array
+                                                    Array of X,Y coordinate
+                                                    pairs. Each point is 16
+                                                    bytes: an 8-byte double
+                                                    for X followed by an
+                                                    8-byte double for Y.
+
+Total content size: 4 + 32 + 4 + 4 + (NumParts * 4) + (NumPoints * 16) bytes
+                  = 44 + (NumParts * 4) + (NumPoints * 16) bytes
+
+Polygon ring conventions:
+  - Outer rings (shell boundaries) are wound CLOCKWISE.
+  - Inner rings (holes) are wound COUNTER-CLOCKWISE.
+  - Each ring must be closed: the first and last point must be identical.
+  - A record with NumParts > 1 is a multi-part polygon. Each part begins at
+    the index specified in the Parts array and extends to one less than the
+    start of the next part (or to the end of the points array for the last
+    part).
+
+Computing the number of points per part:
+  - For part i (0-based), the start index is Parts[i].
+  - The end index is Parts[i+1] - 1 for all parts except the last.
+  - For the last part, the end index is NumPoints - 1.
+  - The number of points in part i is:
+      Parts[i+1] - Parts[i]     (for i < NumParts - 1)
+      NumPoints - Parts[i]      (for the last part)
+
+
+--------------------------------------------------------------------------------
+4.6  SHAPE TYPE 8 - MULTIPOINT
+--------------------------------------------------------------------------------
+
+A MultiPoint record stores an unordered collection of points with a shared
+bounding box.
+
+Offset          Length          Endian  Type      Description
+--------------  --------------  ------  --------  --------------------------
+ 0               4              Little  int32     Shape Type = 8
+
+ 4               8              Little  double    Bounding Box Xmin
+
+12               8              Little  double    Bounding Box Ymin
+
+20               8              Little  double    Bounding Box Xmax
+
+28               8              Little  double    Bounding Box Ymax
+
+36               4              Little  int32     NumPoints
+                                                    Number of points in
+                                                    this record.
+
+40               NumPoints * 16 Little  Point[]   Points Array
+                                                    Array of X,Y coordinate
+                                                    pairs (each 16 bytes:
+                                                    double X + double Y).
+
+Total content size: 4 + 32 + 4 + (NumPoints * 16) bytes
+                  = 40 + (NumPoints * 16) bytes
+
+
+--------------------------------------------------------------------------------
+4.7  SHAPE TYPE 11 - POINTZ
+--------------------------------------------------------------------------------
+
+A PointZ record stores a single 3D point with X, Y, Z coordinates and an
+associated measure (M) value.
+
+Offset  Length  Endian  Type    Description
+------  ------  ------  ------  ------------------------------------------------
+  0       4     Little  int32   Shape Type = 11
+  4       8     Little  double  X coordinate
+ 12       8     Little  double  Y coordinate
+ 20       8     Little  double  Z coordinate
+ 28       8     Little  double  M (measure) value
+
+Total content size: 36 bytes (18 sixteen-bit words)
+
+The measure (M) value is an application-defined scalar associated with the
+point. It may represent distance along a route, elapsed time, or any other
+user-defined measurement.
+
+
+================================================================================
+5. BYTE ORDER SUMMARY
+================================================================================
+
+The shapefile format uses a mixed-endian encoding. The rules are:
+
+FILE HEADER (offset 0 - 99):
+  Big-endian fields:
+    - File Code (offset 0, 4 bytes)
+    - File Length (offset 24, 4 bytes)
+  Little-endian fields:
+    - Version (offset 28)
+    - Shape Type (offset 32)
+    - All bounding box values (offsets 36 - 99)
+
+RECORD HEADERS:
+  Big-endian:
+    - Record Number (4 bytes)
+    - Content Length (4 bytes)
+
+RECORD CONTENT:
+  Little-endian:
+    - All fields (shape type, coordinates, counts, indices)
+
+
+================================================================================
+6. KEY OBSERVATIONS
+================================================================================
+
+  - All coordinate values (X, Y, Z, M) are IEEE 754 64-bit double-precision
+    floating-point numbers (8 bytes each).
+
+  - The 20 bytes at offsets 4 through 23 in the file header are always zero
+    in all 223 sample files.
+
+  - Record numbers are strictly 1-based and sequential with no gaps.
+
+  - The File Length field in the header (when multiplied by 2) always exactly
+    matches the actual file size in bytes.
+
+  - The Z and M bounding box fields in the file header (offsets 68-99) are
+    set to 0.0 for shape types that do not carry Z or M values (Point,
+    Polygon, MultiPoint).
+
+  - A file's shape type (in the header) declares the type for all records.
+    Individual records may be either that type or Null (type 0), but no
+    other type.
+
+  - For Polygon records, a single record can contain multiple disjoint
+    polygons and/or polygons with holes by using multiple parts (rings).
+
+  - The minimum valid .shp file consists of the 100-byte header plus at least
+    one record. The smallest observed file was 156 bytes.
+
+
+================================================================================
+7. KNOWN QUIRKS
+================================================================================
+
+canada.shp content_length anomaly:
+
+  One file in the sample corpus (canada.shp) has record content_length fields
+  that are each 8 bytes (4 sixteen-bit words) too large. The content_length
+  values appear to include the 8-byte header of the NEXT record.
+
+  Recommendation for parsers: Compute the actual content size from the shape
+  structure fields (NumParts, NumPoints, etc.) rather than blindly trusting
+  the content_length field in the record header. This approach is more robust
+  against malformed files.
+
+
+================================================================================
+8. SAMPLE CORPUS STATISTICS
+================================================================================
+
+The following statistics were gathered from the 223 sample files used to
+reverse-engineer this specification:
+
+  Total files analyzed:            223
+  Total records across all files:  3,115,628
+
+  Files by shape type:
+    Point (type 1):        47 files
+    Polygon (type 5):     174 files
+    MultiPoint (type 8):    1 file
+    PointZ (type 11):       1 file
+
+  Notable counts:
+    Null records found:             30  (within non-null type files)
+    Multi-part polygon records:  5,400
+
+  File size range:
+    Smallest:    156 bytes       (2 point records)
+    Largest:     131,478,100 bytes (~125 MB)
+
+
+================================================================================
+END OF SPECIFICATION
+================================================================================

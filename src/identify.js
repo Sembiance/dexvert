@@ -346,6 +346,13 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 						strongMagicMatches.push(d);
 				}
 			}
+
+			if(weakMagicMatchesSoft.length)
+				xlog.trace`${formatid} weakMagicMatchesSoft: ${weakMagicMatchesSoft}`;
+			if(weakMagicMatchesHard.length)
+				xlog.trace`${formatid} weakMagicMatchesHard: ${weakMagicMatchesHard}`;
+			if(strongMagicMatches.length)
+				xlog.trace`${formatid} strongMagicMatches: ${strongMagicMatches}`;
 			const magicMatch = weakMagicMatchesHard.length || weakMagicMatchesSoft.length || strongMagicMatches.length;
 			let weakMatch = false;
 			if(!strongMagicMatches.length && (weakMagicMatchesSoft.length || weakMagicMatchesHard.length))

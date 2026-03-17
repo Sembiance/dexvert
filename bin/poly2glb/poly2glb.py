@@ -57,10 +57,34 @@ def convert_electricimage3d(input_path, output_path, verbose=False):
     print(f"Done. Output: {output_path}")
 
 
+def convert_openinventor(input_path, output_path, verbose=False):
+    """Convert an Open Inventor file to GLB."""
+    from openInventor import parse_iv, convert_to_glb
+
+    print(f"Parsing Open Inventor file: {input_path}")
+    nodes = parse_iv(input_path, verbose=verbose)
+
+    # Count nodes
+    def count_nodes(nlist):
+        total = 0
+        for n in nlist:
+            if hasattr(n, 'node_type'):
+                total += 1
+                total += count_nodes(n.children)
+        return total
+
+    print(f"  Nodes: {count_nodes(nodes)}")
+
+    print(f"Converting to GLB: {output_path}")
+    convert_to_glb(nodes, output_path, verbose=verbose)
+    print(f"Done. Output: {output_path}")
+
+
 # Converter registry - add new types here
 CONVERTERS = {
     'sketchUp': convert_sketchup,
     'electricImage3D': convert_electricimage3d,
+    'openInventor': convert_openinventor,
 }
 
 

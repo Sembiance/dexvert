@@ -12,6 +12,7 @@ export class bmp extends Format
 		"image/x-dib", "piped bmp sequence (bmp_pipe)", "PC bitmap", /Bitmap Bild \(Typ \d/, "image/bmp", "deark: bmp", "deark: dib", /^OS\/2 Bitmap :(bmp|dib|os2|pmsk):$/, /^geViewer: BMP_BMP( |$)/,
 		/^fmt\/(114|115|116|117|118|119)( |$)/, /^x-fmt\/270( |$)/
 	];
+	weakMagic    = ["image/bmp", /^geViewer: BMP_BMP( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => ["BMPp", ".BMP", "BMP_", "BMP ", "BMPf", "BMPM", "BWin"].includes(macFileType) || (macFileType==="BINA" && macFileCreator==="8BIM");
 	metaProvider = ["image"];
 	converters   = dexState =>

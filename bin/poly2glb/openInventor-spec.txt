@@ -1,0 +1,668 @@
+Open Inventor File Format Specification
+========================================
+SGI Open Inventor / VRML 1.0 Scene Graph Format (.iv)
+Reverse-engineered from 238 sample files
+Vibe coded by Claude
+
+
+1. FILE FORMAT OVERVIEW
+=======================
+
+Open Inventor is a scene graph format created by SGI for 3D graphics.
+Files use the .iv extension and come in two encodings: ASCII and binary.
+
+  Format     Count  Versions
+  ------     -----  --------
+  ASCII      103    V1.0 (11), V2.0 (59), V2.1 (33)
+  Binary     134    V2.0 (16), V2.1 (118)
+
+File sizes range from 71 bytes to 3.4 MB (median 8.5 KB).
+
+
+2. FILE HEADER
+==============
+
+Every file begins with an ASCII header line terminated by newline (0x0A):
+
+  "#Inventor V2.1 ascii"      ASCII format, version 2.1
+  "#Inventor V2.1 binary"     Binary format, version 2.1
+  "#Inventor V2.0 ascii"      ASCII format, version 2.0
+  "#Inventor V2.0 binary"     Binary format, version 2.0
+  "#Inventor V1.0 ascii"      ASCII format, version 1.0
+
+The header line may be padded with spaces before the newline.
+Binary files have the header as the ONLY ASCII content; all
+subsequent data is binary.
+
+Optional comment lines starting with '#' may follow the header
+in ASCII files. The scene graph data begins after comments.
+
+
+3. ASCII FORMAT
+===============
+
+3a. General Syntax
+------------------
+The ASCII format is human-readable with C-like syntax:
+
+  NodeType {
+      fieldName  value
+      fieldName  [ value1, value2, ... ]
+      ChildNodeType {
+          ...
+      }
+  }
+
+  - Whitespace (spaces, tabs, newlines) is ignored between tokens
+  - Comments start with '#' and extend to end of line
+  - Strings are double-quoted: "text"
+  - Arrays use square brackets: [ v1, v2, v3 ]
+  - Commas are optional separators (equivalent to whitespace)
+  - Node names are case-sensitive
+  - Negative numbers use '-' prefix (no space after)
+  - Scientific notation supported: 1.5e-3
+
+3b. Node References
+-------------------
+  DEF name NodeType { ... }    Define a named node
+  USE name                     Reference a previously DEF'd node
+
+  DEF assigns a name to a node instance. USE creates a reference
+  to a previously DEF'd node — the full subtree is reused without
+  re-parsing. USE nodes have no body (no braces).
+
+  Note: In binary V2.0/V2.1, DEF names may be auto-generated
+  (e.g., "+0", "+1") when nodes are unnamed in the original scene.
+
+3c. Field Value Syntax
+----------------------
+  Type          ASCII Syntax              Example
+  ----          ------------              -------
+  SFFloat       decimal number            1.5
+  SFInt32       integer                   42
+  SFBool        TRUE or FALSE             TRUE
+  SFEnum        identifier                COUNTERCLOCKWISE
+  SFBitMask     identifier(s) joined      (SIDES|BOTTOM)
+  SFString      "quoted string"           "hello world"
+  SFName        identifier                Helvetica
+  SFVec2f       2 floats                  0.5 0.5
+  SFVec3f       3 floats                  1.0 2.0 3.0
+  SFColor       3 floats (R G B)          1.0 0.0 0.0
+  SFRotation    4 floats (axis + angle)   0 1 0  1.5708
+  SFMatrix      16 floats (row-major)     1 0 0 0  0 1 0 0 ...
+  MF* types     [ value, value, ... ]     [ 1 0 0, 0 1 0 ]
+
+  MFInt32 arrays: [ 0, 1, 2, -1, 2, 3, 4, -1 ]
+  MFVec3f arrays: [ 1.0 0.0 0.0, 0.0 1.0 0.0 ]
+  MFString arrays: [ "hello", "world" ]
+
+3d. Extension Nodes (NOTBUILTIN)
+---------------------------------
+Non-built-in nodes (application extensions) declare their fields
+at the start of the node body:
+
+  ExtNodeType {
+      fields [ SFFloat myField, MFVec3f points ]
+      myField  1.5
+      points   [ 0 0 0, 1 1 1 ]
+  }
+
+  The "fields [...]" declaration lists type-name pairs for all fields
+  the extension node supports. Only fields with non-default values
+  appear after the declaration.
+
+
+4. BINARY FORMAT
+================
+
+All multi-byte values are BIG-ENDIAN (network byte order).
+This reflects Open Inventor's SGI IRIX heritage.
+
+4a. String Encoding
+-------------------
+Strings are length-prefixed and padded to 4-byte alignment:
+
+  u32_be(length) | chars[length] | zero_pad[0..3]
+
+  - length: number of characters (NOT including padding)
+  - Padding bytes are 0x00
+  - Padding brings (length) up to next multiple of 4
+  - If length is already a multiple of 4, NO padding is added
+  - Total bytes consumed: 4 + ceil4(length)
+
+  Example: "Separator" (9 chars) →
+    00 00 00 09  53 65 70 61  72 61 74 6F  72 00 00 00
+    [  length ]  [        9 chars        ]  [ 3 pad  ]
+
+4b. V2.1 Binary Node Structure
+-------------------------------
+  [STRING("DEF") STRING(def_name)]     -- optional, if node has DEF name
+  [STRING("USE") STRING(use_name)]     -- optional, USE reference (no body)
+  STRING(node_type_name)               -- e.g., "Separator", "Material"
+  u32(flags)                           -- bit 0: IS_ENGINE (0x01)
+                                       -- bit 1: IS_GROUP  (0x02)
+  u32(field_word)                      -- bits 0-7:  num_non_default_fields
+                                       -- bit 8:     NOTBUILTIN flag (0x100)
+  [field_type_descriptions]            -- ONLY if NOTBUILTIN flag set:
+                                       -- N pairs of STRING(type) STRING(name)
+  for each non-default field:
+      STRING(field_name)               -- field identifier
+      field_value_bytes                -- type-specific binary encoding
+      u32(field_flags)                 -- bit 0: IGNORED
+                                       -- bit 1: CONNECTED
+                                       -- bit 2: DEFAULT
+  if IS_GROUP:
+      u32(num_children)
+      children[]                       -- recursive node structures
+
+  IS_GROUP (flag bit 1) determines whether the node has a children
+  array. This is the authoritative source — do NOT rely on node name
+  matching against a hardcoded list.
+
+4c. V2.0 Binary Node Structure
+-------------------------------
+Key differences from V2.1:
+  1. NO flags word after node type name
+  2. Group detection requires a KNOWN SET of group node names
+  3. Bare "Group" node (no fields of its own) OMITS the field_count word
+  4. Field count is a plain u32 (no NOTBUILTIN flag packing)
+  5. SFImage stores 4 bytes per pixel regardless of component count
+  6. DEF/USE encoding is the same as V2.1
+
+  STRING(node_type_name)
+  [u32(num_fields)]                    -- OMITTED for bare Group node
+  for each non-default field:
+      STRING(field_name)
+      field_value_bytes
+      u32(field_flags)
+  if group node:
+      u32(num_children)
+      children[]
+
+  Known V2.0 group nodes: Separator, Group, Switch, TransformSeparator,
+  WWWAnchor, LOD, LevelOfDetail, Selection, Annotation, Array,
+  MultipleCopy.
+
+  Known V2.0 no-fieldData nodes: Group (the base class has no fields
+  of its own; its subclass Separator DOES have fields and writes a
+  field count).
+
+4d. Field Value Binary Encodings
+---------------------------------
+  Type           Size       Encoding
+  ----           ----       --------
+  SFFloat        4B         f32 BE
+  SFInt32        4B         i32 BE
+  SFBool         4B         u32 BE (0=FALSE, 1=TRUE)
+  SFEnum         var        STRING(enum_value_name)
+  SFBitMask      var        STRING(name1) STRING(name2)... STRING("")
+                            (empty string terminates the list)
+  SFString       var        STRING(value)
+  SFName         var        STRING(value)
+  SFColor        12B        3 × f32 BE (R, G, B)
+  SFVec2f        8B         2 × f32 BE (X, Y)
+  SFVec3f        12B        3 × f32 BE (X, Y, Z)
+  SFRotation     16B        4 × f32 BE (axis_X, axis_Y, axis_Z, angle)
+  SFMatrix       64B        16 × f32 BE (ROW-MAJOR 4×4 matrix)
+  SFNode         var        Recursive inline node structure
+  SFImage        var        i32(W) i32(H) i32(NC) + pixel_data
+                            V2.0: W×H×4 bytes (always 4 bytes/pixel)
+                            V2.1: W×H×NC bytes, padded to 4-byte boundary
+  MFFloat        var        u32(count) + count × f32 BE
+  MFInt32        var        u32(count) + count × i32 BE
+  MFUInt32       var        u32(count) + count × u32 BE
+  MFColor        var        u32(count) + count × 3 × f32 BE
+  MFVec2f        var        u32(count) + count × 2 × f32 BE
+  MFVec3f        var        u32(count) + count × 3 × f32 BE
+  MFVec4f        var        u32(count) + count × 4 × f32 BE
+  MFString       var        u32(count) + count × STRING
+
+4e. Field Type Context
+-----------------------
+Some field names have DIFFERENT types depending on the containing node:
+
+  Field Name     Node Type              Field Type
+  ----------     ---------              ----------
+  string         Info                   SFString
+  string         Text2, Text3           MFString
+  point          Coordinate3            MFVec3f
+  point          TextureCoordinate2     MFVec2f
+  translation    Transform              SFVec3f
+  translation    Texture2Transform      SFVec2f
+  parts          Cylinder, Cone         SFBitMask
+  scaleFactor    Transform              SFVec3f
+  scaleFactor    Texture2Transform      SFVec2f
+
+  The parser MUST use node-type-specific field type lookups,
+  falling back to a default table for unambiguous field names.
+
+
+5. SCENE GRAPH ARCHITECTURE
+============================
+
+Open Inventor uses a STATE-BASED scene graph. Nodes are traversed
+in depth-first order, and "state" nodes modify the current rendering
+state. Shape nodes consume the current state when encountered.
+
+5a. Grouping Nodes
+-------------------
+
+  Separator:
+    Pushes ALL traversal state on entry, pops on exit.
+    Children inherit but don't permanently modify parent state.
+    Fields: renderCaching, boundingBoxCaching, renderCulling, pickCulling
+    Most common grouping node (95% of ASCII files use it).
+
+  Group:
+    Like Separator but does NOT push/pop state.
+    State changes by children persist after the Group exits.
+    No fields of its own (base class for Separator).
+
+  TransformSeparator:
+    Pushes/pops ONLY the transform matrix (not material or other state).
+
+  Switch:
+    Only traverses child at index whichChild (-1 = none, -3 = all).
+    Field: whichChild (SFInt32)
+
+  LOD / LevelOfDetail:
+    Level-of-detail switching. For conversion, use first child only.
+    LOD field: range (MFFloat), center (SFVec3f)
+    LevelOfDetail field: screenArea (MFFloat)
+
+  WWWAnchor:
+    Hyperlink wrapper. Traverses children normally.
+
+5b. State Inheritance Rules
+----------------------------
+  Node                State Modified
+  ----                -----
+  Material            diffuseColor, ambientColor, specularColor,
+                      emissiveColor, shininess, transparency
+  BaseColor           rgb (diffuse color only)
+  MaterialBinding     How material colors map to geometry vertices
+  NormalBinding       How normals map to geometry vertices
+  Coordinate3         Current vertex position array (MFVec3f)
+  Normal              Current vertex normal array (MFVec3f)
+  TextureCoordinate2  Current texture coordinate array (MFVec2f)
+  ShapeHints          vertexOrdering, shapeType, faceType, creaseAngle
+  Transform           Accumulated 4×4 transformation matrix
+  MatrixTransform     Direct 4×4 matrix (replaces accumulated transform)
+  Translation         Adds translation to accumulated transform
+  Rotation            Adds rotation to accumulated transform
+  Scale               Adds scale to accumulated transform
+  RotationXYZ         Adds axis-aligned rotation to accumulated transform
+  LightModel          BASE_COLOR or PHONG lighting model
+
+5c. Binding Modes
+-----------------
+MaterialBinding and NormalBinding control per-vertex/per-face mapping:
+
+  Binding              Meaning
+  -------              -------
+  OVERALL              Single value for entire shape
+  PER_PART             One per primitive part (cone sides/bottom)
+  PER_PART_INDEXED     Indexed per part (via materialIndex/normalIndex)
+  PER_FACE             One per polygon face
+  PER_FACE_INDEXED     Indexed per face
+  PER_VERTEX           One per vertex, consumed sequentially
+  PER_VERTEX_INDEXED   One per coordIndex entry
+  DEFAULT              Context-dependent (usually OVERALL for materials,
+                       PER_VERTEX_INDEXED for normals if indices exist)
+
+
+6. GEOMETRY NODES
+=================
+
+6a. IndexedFaceSet (most common, 51 ASCII files)
+--------------------------------------------------
+Polygon mesh with explicit vertex indices.
+
+  Fields:
+    coordIndex         MFInt32  -- vertex indices, -1 delimited per face
+    materialIndex      MFInt32  -- material color indices (per binding)
+    normalIndex        MFInt32  -- normal indices
+    textureCoordIndex  MFInt32  -- texture coordinate indices
+    vertexProperty     SFNode   -- optional inline VertexProperty
+
+  coordIndex format: [v0, v1, v2, -1, v3, v4, v5, v6, -1, ...]
+  Each run of indices between -1 delimiters defines one face.
+  Faces can have 3+ vertices (triangles, quads, N-gons).
+
+  Vertex positions come from the current Coordinate3 state node
+  (or from vertexProperty if present). Normals from Normal node.
+  Materials from Material node, mapped via MaterialBinding.
+
+6b. IndexedTriangleStripSet (15 ASCII files)
+---------------------------------------------
+Triangle strips with explicit vertex indices.
+
+  Fields: same as IndexedFaceSet
+
+  coordIndex format: [v0, v1, v2, v3, v4, -1, v5, v6, v7, -1, ...]
+  Each strip between -1 delimiters: first 3 indices form the first
+  triangle, each subsequent index forms a new triangle with the
+  previous 2 vertices. Winding ALTERNATES per triangle:
+    Triangle 0: v0, v1, v2  (CCW)
+    Triangle 1: v1, v3, v2  (reversed for consistent facing)
+    Triangle 2: v2, v3, v4  (CCW)
+    ...
+
+6c. FaceSet (7 ASCII files)
+----------------------------
+Non-indexed polygon faces using sequential vertices.
+
+  Fields:
+    numVertices    MFInt32  -- vertex count per face
+    vertexProperty SFNode
+
+  Vertices consumed sequentially from Coordinate3 starting at index 0.
+  numVertices = [4, 3, 4] → quad (v0-v3), triangle (v4-v6), quad (v7-v10).
+  If numVertices is empty, all vertices form a single face.
+
+6d. TriangleStripSet (6 ASCII files)
+--------------------------------------
+Non-indexed triangle strips using sequential vertices.
+
+  Fields:
+    numVertices    MFInt32  -- vertex count per strip
+    startIndex     SFInt32  -- starting vertex offset (default 0)
+    vertexProperty SFNode
+
+6e. QuadMesh (5 ASCII files)
+-----------------------------
+Regular quadrilateral grid mesh.
+
+  Fields:
+    verticesPerRow     SFInt32
+    verticesPerColumn  SFInt32
+    vertexProperty     SFNode
+
+  Total vertices = verticesPerRow × verticesPerColumn.
+  Quads: for row r, column c:
+    (r * verticesPerRow + c),
+    (r * verticesPerRow + c + 1),
+    ((r+1) * verticesPerRow + c + 1),
+    ((r+1) * verticesPerRow + c)
+
+6f. Primitive Shapes
+--------------------
+  Cube:     width, height, depth (default 2.0 each, centered at origin)
+  Sphere:   radius (default 1.0, centered at origin)
+  Cone:     bottomRadius (1.0), height (2.0), parts (SIDES|BOTTOM|ALL)
+  Cylinder: radius (1.0), height (2.0), parts (SIDES|TOP|BOTTOM|ALL)
+
+  Cone apex at +Y, base at -Y. Cylinder axis along Y.
+  Parts field (SFBitMask) controls which sections are generated.
+  These are tessellated into triangles at conversion time.
+
+  Frequency: Cube (22), Sphere (9), Cone (8), Cylinder (7) in ASCII files.
+
+6g. VertexProperty
+------------------
+Inline vertex data attached to shape nodes via vertexProperty field.
+Overrides the current Coordinate3/Normal/MaterialBinding state.
+
+  Fields:
+    vertex              MFVec3f   -- vertex positions
+    normal              MFVec3f   -- vertex normals
+    texCoord            MFVec2f   -- texture coordinates
+    orderedRGBA         MFUInt32  -- per-vertex colors (packed RGBA)
+    materialBinding     SFEnum    -- binding mode for this shape
+    normalBinding       SFEnum    -- binding mode for normals
+
+  When a shape has a vertexProperty, its vertex/normal data takes
+  priority over the scene graph state (Coordinate3/Normal nodes).
+
+
+7. MATERIAL NODES
+=================
+
+7a. Material (45 ASCII files)
+------------------------------
+  Fields:
+    diffuseColor     MFColor  -- primary surface color(s)
+    ambientColor     MFColor  -- ambient reflection color(s)
+    specularColor    MFColor  -- specular highlight color(s)
+    emissiveColor    MFColor  -- self-illumination color(s)
+    shininess        MFFloat  -- specular exponent (0.0-1.0)
+    transparency     MFFloat  -- 0.0=opaque, 1.0=fully transparent
+
+  Multi-valued fields provide per-vertex or per-face colors when
+  used with PER_VERTEX or PER_FACE MaterialBinding.
+
+  For glTF conversion: diffuseColor[0] → baseColorFactor,
+  transparency[0] → alpha = 1.0 - transparency.
+
+7b. BaseColor (13 ASCII files)
+-------------------------------
+  Fields:
+    rgb              MFColor  -- simplified diffuse-only color(s)
+
+  Equivalent to Material with only diffuseColor set.
+
+7c. LightModel (15 ASCII files)
+---------------------------------
+  Fields:
+    model            SFEnum   -- BASE_COLOR or PHONG
+
+  BASE_COLOR disables lighting calculations, using material color
+  directly as the rendered color. PHONG enables standard lighting.
+
+
+8. TRANSFORM NODES
+==================
+
+Transforms accumulate by LEFT-MULTIPLICATION into the current
+transform matrix: new_transform = current_transform × node_matrix.
+
+8a. Transform (25 ASCII files)
+-------------------------------
+  Fields:
+    translation       SFVec3f     (default: 0 0 0)
+    rotation          SFRotation  (default: 0 0 1 0)
+    scaleFactor       SFVec3f     (default: 1 1 1)
+    scaleOrientation  SFRotation  (default: 0 0 1 0)
+    center            SFVec3f     (default: 0 0 0)
+
+  Composite matrix: M = T × C × R × SO × S × SO⁻¹ × C⁻¹
+  Where T=translation, C=center, R=rotation, SO=scaleOrientation,
+  S=scaleFactor.
+
+8b. MatrixTransform (4 ASCII files)
+-------------------------------------
+  Fields:
+    matrix            SFMatrix  (16 floats, row-major 4×4)
+
+  CRITICAL: Open Inventor stores matrices in ROW-MAJOR order with
+  ROW VECTORS. The convention is v_out = v_in × M, where v is a
+  row vector. Translation is in the LAST ROW (row 3, columns 0-2):
+
+    [Sx   Rxy  Rxz  0 ]
+    [Ryx  Sy   Ryz  0 ]
+    [Rzx  Rzy  Sz   0 ]
+    [Tx   Ty   Tz   1 ]
+
+  For column-vector math (M × v, as used in glTF/OpenGL), the
+  matrix must be TRANSPOSED: mat[col][row] = raw[row * 4 + col].
+
+8c. Simple Transform Nodes
+----------------------------
+  Translation (21 ASCII files):  translation SFVec3f
+  Scale (20 ASCII files):        scaleFactor SFVec3f
+  Rotation (4 ASCII files):      rotation SFRotation (axis + angle)
+  RotationXYZ (8 ASCII files):   axis SFEnum (X/Y/Z), angle SFFloat
+
+  Each contributes a single operation to the accumulated transform.
+
+
+9. COORDINATE SYSTEM
+====================
+
+Open Inventor uses RIGHT-HANDED, Y-UP coordinates — the same
+convention as glTF. No coordinate conversion is needed.
+
+Default face winding is COUNTERCLOCKWISE (same as glTF).
+ShapeHints node with vertexOrdering=CLOCKWISE indicates CW winding,
+which requires reversal for glTF output.
+
+
+10. SHAPEHINTS NODE
+====================
+
+ShapeHints controls rendering optimization and face generation.
+
+  Fields:
+    vertexOrdering   SFEnum   UNKNOWN_ORDERING, CLOCKWISE,
+                              COUNTERCLOCKWISE
+    shapeType        SFEnum   UNKNOWN_SHAPE_TYPE, SOLID
+    faceType         SFEnum   UNKNOWN_FACE_TYPE, CONVEX
+    creaseAngle      SFFloat  angle threshold for smooth normals (radians)
+
+  vertexOrdering=COUNTERCLOCKWISE: faces are CCW (default for glTF).
+  vertexOrdering=CLOCKWISE: faces are CW, must reverse for glTF.
+  shapeType=SOLID: backface culling enabled (single-sided rendering).
+  creaseAngle: edges sharper than this angle get hard normals.
+
+
+11. CONVERSION NOTES
+=====================
+
+11a. GLB Output Structure
+-------------------------
+- One mesh per shape node instance
+- Transforms baked into vertex positions (no glTF node hierarchy)
+- Materials deduplicated by diffuseColor value
+- Per-vertex normals when available via Normal node or VertexProperty
+- Flat per-face normals computed when no normals present
+- doubleSided=true on all materials
+- Transparency supported via Material.transparency field
+
+11b. MatrixTransform Transposition
+-----------------------------------
+Open Inventor's SFMatrix stores 16 floats in row-major order with
+row-vector convention (v × M). For column-vector math (M × v),
+the matrix must be transposed when loading. This affects:
+- MatrixTransform nodes in both ASCII and binary files
+- Verified by cross-referencing with reference GLB transforms
+
+11c. IndexedTriangleStripSet Winding
+--------------------------------------
+Triangle strips alternate winding per triangle:
+- Even triangles (0, 2, 4...): indices [i, i+1, i+2]
+- Odd triangles (1, 3, 5...):  indices [i+1, i+2+1, i+2] (swapped)
+This ensures consistent face orientation throughout the strip.
+
+11d. Handled Node Types
+-------------------------
+Geometry:  IndexedFaceSet, IndexedTriangleStripSet, FaceSet,
+           TriangleStripSet, QuadMesh, Cube, Sphere, Cone,
+           Cylinder, VertexProperty
+State:     Material, BaseColor, MaterialBinding, NormalBinding,
+           ShapeHints, Coordinate3, Normal, TextureCoordinate2,
+           Transform, MatrixTransform, Translation, Rotation,
+           Scale, RotationXYZ, LightModel
+Grouping:  Separator, Group, Switch, LOD, LevelOfDetail,
+           TransformSeparator, WWWAnchor, Array, MultipleCopy,
+           Annotation
+
+11e. Skipped Node Types (non-geometry)
+---------------------------------------
+Lights (PointLight, DirectionalLight, SpotLight), Cameras
+(PerspectiveCamera), Text (Text2, Text3, AsciiText), Font,
+DrawStyle, PickStyle, Complexity, Info, Label, Environment,
+Texture2 (image textures), manipulation draggers, profile nodes,
+File (external file references)
+
+
+12. FORMAT STATISTICS
+=====================
+
+238 sample files scored:
+  - 230 GOOD (≥70), 8 FAIR (40-69), 0 BAD, 0 errors
+  - Average visual score: 93.4
+  - 0 conversion failures across all 238 files
+
+Node type frequency (across 103 ASCII files):
+  Separator (95), Coordinate3 (62), IndexedFaceSet (51),
+  Material (45), ShapeHints (42), MaterialBinding (37),
+  Normal (26), NormalBinding (24), Transform (25), Cube (22),
+  Translation (21), Scale (20), IndexedTriangleStripSet (15),
+  BaseColor (13), LightModel (15), Complexity (13), Texture2 (11),
+  Sphere (9), RotationXYZ (8), Cone (8), Cylinder (7), FaceSet (7),
+  Group (7), TriangleStripSet (6), QuadMesh (5), Switch (4),
+  MatrixTransform (4), Rotation (4)
+
+
+Appendix A: Complete Node-to-Field Type Mapping
+================================================
+
+This table documents the field type for every field name that varies
+by containing node. Used by the binary parser for correct decoding.
+
+  Node                    Field            Type
+  ----                    -----            ----
+  Coordinate3             point            MFVec3f
+  Coordinate4             point            MFVec4f
+  TextureCoordinate2      point            MFVec2f
+  Normal                  vector           MFVec3f
+  Info                    string           SFString
+  RotationXYZ             axis             SFEnum
+                          angle            SFFloat
+  Complexity              type             SFEnum
+                          value            SFFloat
+                          textureQuality   SFFloat
+  LOD                     range            MFFloat
+                          center           SFVec3f
+  LevelOfDetail           screenArea       MFFloat
+  IndexedFaceSet          coordIndex       MFInt32
+                          materialIndex    MFInt32
+                          normalIndex      MFInt32
+                          textureCoordIndex MFInt32
+                          vertexProperty   SFNode
+  IndexedTriangleStripSet (same as IndexedFaceSet)
+  IndexedLineSet          (same as IndexedFaceSet)
+  TriangleStripSet        numVertices      MFInt32
+                          vertexProperty   SFNode
+  FaceSet                 numVertices      MFInt32
+                          vertexProperty   SFNode
+  QuadMesh                verticesPerColumn SFInt32
+                          verticesPerRow   SFInt32
+                          vertexProperty   SFNode
+  PointSet                startIndex       SFInt32
+                          numPoints        SFInt32
+  LineSet                 numVertices      MFInt32
+                          vertexProperty   SFNode
+  Cylinder                parts            SFBitMask
+                          radius           SFFloat
+                          height           SFFloat
+  Cone                    parts            SFBitMask
+                          bottomRadius     SFFloat
+                          height           SFFloat
+  Text2                   string           MFString
+                          spacing          SFFloat
+                          justification    SFEnum
+  Text3                   string           MFString
+                          spacing          SFFloat
+                          justification    SFEnum
+                          parts            SFBitMask
+  AsciiText               string           MFString
+                          spacing          SFFloat
+                          justification    SFEnum
+                          width            MFFloat
+  Font                    name             SFName
+                          size             SFFloat
+  Texture2Transform       translation      SFVec2f
+                          rotation         SFFloat
+                          scaleFactor      SFVec2f
+                          center           SFVec2f
+  VertexProperty          vertex           MFVec3f
+                          normal           MFVec3f
+                          texCoord         MFVec2f
+                          orderedRGBA      MFUInt32
+                          materialBinding  SFEnum
+                          normalBinding    SFEnum
+                          textureCoordBinding SFEnum
+  TextureCoordinateEnvironment viewModel   SFEnum
+  TextureCoordinatePlane  directionS       SFVec3f
+                          directionT       SFVec3f

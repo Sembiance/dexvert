@@ -1,0 +1,574 @@
+Electric Image 3D File Format Specification
+=============================================
+Reverse-engineered from 227 sample files (.fac, .fact, .fct)
+Created by Electric Image Animation System (EIAS)
+Vibe coded by Claude
+
+
+1. FILE CONTAINER
+=================
+
+Files come in two container formats:
+
+1a. Direct IFF
+--------------
+File starts directly with IFF FORM chunk at offset 0.
+  Byte 0: "FORM" magic
+  138 of 227 sample files use this format.
+
+1b. FACTEI Wrapper
+------------------
+128-byte header followed by IFF FORM at offset 0x80.
+89 of 227 sample files use this format.
+
+  Offset  Size  Type     Description
+  ------  ----  ----     -----------
+  0x00    2     u16 BE   Name length (N)
+  0x02    N     ASCII    Object name (e.g., "Cone", "2DoorBody.fact")
+  0x02+N  ...   zeros    Padding (name field totals 63 bytes: 0x02-0x40)
+  0x41    8     ASCII    Magic: "FACTEIAM" or "FACTEIBC"
+  0x49    1     u8       Version/flags (typically 0x00 or 0x01)
+  0x4A    10    bytes    Reserved (zeros)
+  0x54    3     u24 BE   Total IFF block size (FORM tag + size field + body)
+  0x57    1     u8       Zero padding
+  0x58    2     u16 BE   Unknown field
+  0x5A    1     u8       Unknown field
+  0x5B    4     bytes    Format identifier (matches TVER chunk content)
+  0x5F    4     bytes    Format identifier variant (often same as 0x5B, ±1)
+  0x63    23    bytes    Reserved (zeros)
+  0x7A    2     bytes    Signature (typically 0x8181)
+  0x7C    4     bytes    Checksum/flags
+  0x80    ...   IFF      FORM:3DFL data begins
+
+Detection: check for "FACTEI" (6 bytes) at offset 0x41. The remaining
+2 bytes of the magic distinguish format variants (AM vs BC).
+
+After the IFF data (at offset 0x80 + IFF block size), a trailing
+metadata section contains application info (author name, EIAS version,
+creation parameters, etc.). This trailing data is not needed for
+geometry conversion.
+
+
+2. IFF STRUCTURE
+================
+
+Standard IFF (Interchange File Format) with big-endian byte order
+throughout. All multi-byte integers and floats are big-endian.
+
+Chunk layout: 4-byte ASCII tag + 4-byte u32 BE size + data[size].
+FORM chunks: tag "FORM" + u32 size + 4-byte ASCII type + children.
+Chunks are padded to even byte boundaries (1 byte if size is odd).
+
+Top-level hierarchy:
+
+  FORM:3DFL                     Top-level container (every file)
+  │
+  ├─ FORM:FHDR                  File header (every file)
+  │  ├─ TVER                    Format version tag (8 bytes)
+  │  └─ FINF                    File info (52 bytes)
+  │
+  ├─ FORM:GRUP                  Geometry group (1 or more per file)
+  │  ├─ FORM:GHDR               Group header
+  │  │  ├─ TVER                 Format version tag
+  │  │  ├─ GINF                 Group info (76-858 bytes)
+  │  │  ├─ GATR                 Group attributes / colors (26-188 bytes)
+  │  │  ├─ GLNK                 Group links / hierarchy (290-522 bytes)
+  │  │  ├─ GSTR                 Group structure / transform (144 bytes)
+  │  │  ├─ [CNST]               Constraints (200 bytes, optional)
+  │  │  ├─ [ROTR]               Rotation order (optional)
+  │  │  ├─ [TMAP/TMEI/TATR]     Texture mapping params (optional)
+  │  │  └─ [BMAP/BMEI/BATR]     Bump mapping params (optional)
+  │  ├─ CORD or DCOR            Vertex coordinates
+  │  ├─ [NVRT]                  Per-vertex normals (optional)
+  │  ├─ [CVRT]                  Per-vertex colors (optional)
+  │  ├─ [TVRT]                  Per-vertex texture coordinates (optional)
+  │  ├─ ELEM                    Face element records
+  │  └─ [FORM:GMAT]             Per-face materials (optional)
+  │     ├─ refc                 Diffuse color (32 bytes)
+  │     ├─ refm                 Diffuse mix (8 bytes)
+  │     ├─ spcc/spcm/spcg/spcs  Specular properties
+  │     ├─ ambc/ambm            Ambient properties
+  │     ├─ lumc/lumm            Luminance/emissive properties
+  │     ├─ rflc/rflm            Mirror reflection properties
+  │     ├─ trpc/trpo            Transparency properties
+  │     ├─ trmc/trmm            Transmission properties
+  │     ├─ glwc/glwm            Glow/bloom properties
+  │     └─ olpc/olpt/olec/...   Outline properties
+  │
+  ├─ [FORM:LITE]                Light object (optional, rare)
+  │  └─ FORM:LHDR               Light header
+  │
+  └─ [FORM:MAPP]                Texture data (optional, rare)
+     └─ FORM:TRGB               RGB pixel data
+
+
+3. CHUNK FORMATS
+================
+
+3a. TVER (8 bytes) — Format Version
+------------------------------------
+  Offset  Size  Type     Description
+  0       4     u32 BE   Version number (typically 0)
+  4       4     bytes    Format identifier / creation signature
+
+  The 4-byte identifier appears in TVER, GINF, and the wrapper header.
+  Common values observed: 0xAEA79D88, 0xB9B76556.
+
+
+3b. FINF (52 bytes) — File Info
+-------------------------------
+  Offset  Size  Type     Description
+  0       4     u32 BE   Total vertex count (sum across all groups)
+  4       4     u32 BE   Total face count (sum across all groups)
+  8       4     u32 BE   Number of groups
+  12      4     f32 BE   Bounding box min X
+  16      4     f32 BE   Bounding box min Y
+  20      4     f32 BE   Bounding box min Z
+  24      4     f32 BE   Bounding box max X
+  28      4     f32 BE   Bounding box max Y
+  32      4     f32 BE   Bounding box max Z
+  36      16    bytes    Reserved (4 × f32, purpose unknown)
+
+  FINF is always exactly 52 bytes. The bounding box encompasses all
+  groups in the file.
+
+
+3c. GINF (76-858 bytes) — Group Info
+-------------------------------------
+  Offset  Size  Type     Description
+  0       4     u32 BE   Vertex count for this group
+  4       4     u32 BE   Face count for this group (includes metadata records)
+  8       4     u32 BE   Unknown (typically 0)
+  12      4     f32 BE   Bounding box min X
+  16      4     f32 BE   Bounding box min Y
+  20      4     f32 BE   Bounding box min Z
+  24      4     f32 BE   Bounding box max X
+  28      4     f32 BE   Bounding box max Y
+  32      4     f32 BE   Bounding box max Z
+  36      4     bytes    Unknown flags
+  40      1     u8       Name length (N)
+  41      N     ASCII    Group name (e.g., "CONE.GEOM 1", "Group 1")
+  41+N    var   bytes    0xFF padding to align to fixed boundary
+  ...     4     bytes    Format identifier (matches TVER content)
+  ...     var   bytes    Animation channel data (remainder of chunk)
+
+  Animation channels: up to 13 channels of keyframe data. Each channel
+  contains vertex_count entries of 6 bytes each. The 6-byte values use
+  a fixed-point format where 0x3FFF00008000 represents approximately 1.0
+  (identity). For static geometry, all channels contain identity values.
+
+  GINF size ranges from 76 bytes (minimal, no animation) to 858+ bytes.
+
+
+3d. GATR (26-188 bytes) — Group Attributes
+-------------------------------------------
+Legacy per-group rendering attributes using byte-level color encoding.
+
+  Offset  Size  Type     Description
+  0       2     bytes    Header/flags
+  2       1     u8       0xFF sentinel marker
+  3       1     u8       Diffuse Red (0-255)
+  4       1     u8       Diffuse Green (0-255)
+  5       1     u8       Diffuse Blue (0-255)
+  6+      var   bytes    Additional channels
+
+  Sub-structures within GATR:
+  - 0xFF sentinels precede RGB triplets throughout
+  - 'CH' (0x4348) text markers delimit channel boundaries
+  - Channels include: diffuse, specular, ambient colors
+  - Scalar values (opacity, shininess) stored as f32 BE
+
+  The diffuse color at bytes 3-5 is the primary group color used when
+  no GMAT material is present. Colors are byte-level (0-255), converted
+  to 0.0-1.0 range by dividing by 255.
+
+
+3e. CORD (variable) — Vertex Coordinates (f32)
+-----------------------------------------------
+  Array of vertex_count vertices, 12 bytes each:
+
+    Offset  Size  Type     Description
+    0       4     f32 BE   X coordinate
+    4       4     f32 BE   Y coordinate
+    8       4     f32 BE   Z coordinate
+
+  Total chunk size = vertex_count × 12 bytes.
+
+  Found in 3687 of 3840 groups (96%). Groups without CORD use DCOR.
+
+
+3f. DCOR (variable) — Vertex Coordinates (f64)
+-----------------------------------------------
+  Alternative to CORD using double-precision floats.
+  Array of vertex_count vertices, 24 bytes each:
+
+    Offset  Size  Type     Description
+    0       8     f64 BE   X coordinate
+    8       8     f64 BE   Y coordinate
+    16      8     f64 BE   Z coordinate
+
+  Total chunk size = vertex_count × 24 bytes.
+
+  Found in 153 of 3840 groups (4%). Used in newer files for higher
+  precision. Same coordinate system and winding as CORD.
+
+
+3g. NVRT (variable) — Per-Vertex Normals
+-----------------------------------------
+  Array of vertex_count normals, 12 bytes each:
+
+    Offset  Size  Type     Description
+    0       4     f32 BE   Normal X
+    4       4     f32 BE   Normal Y
+    8       4     f32 BE   Normal Z
+
+  Total chunk size = vertex_count × 12 bytes.
+  All normals are unit length (magnitude ≈ 1.0).
+
+  Found in 821 of 3840 groups (21%). When present, enables smooth
+  shading with shared vertices in the output. When absent, flat
+  per-face normals are computed from face geometry.
+
+
+3h. CVRT (variable) — Per-Vertex Colors
+----------------------------------------
+  Array of vertex_count color entries.
+  Size per vertex = chunk_size / vertex_count (typically 4 bytes).
+  Found in 153 groups. Not currently used for conversion.
+
+
+3i. TVRT (variable) — Per-Vertex Texture Coordinates
+-----------------------------------------------------
+  Array of vertex_count texture coordinates, 12 bytes each:
+
+    Offset  Size  Type     Description
+    0       4     f32 BE   U coordinate
+    4       4     f32 BE   V coordinate
+    8       4     f32 BE   W coordinate (typically 0.0 for 2D textures)
+
+  Total chunk size = vertex_count × 12 bytes.
+  Found in 153 groups. Not currently used for conversion.
+
+
+4. ELEM FORMAT — Face Elements
+==============================
+
+The ELEM chunk contains all face definitions for a group. Three index
+modes exist based on vertex count, plus polygon metadata records
+interleaved between face records.
+
+4a. Face Record Header (6 bytes, all modes)
+--------------------------------------------
+  Offset  Size  Type     Description
+  0       1     u8       Face type: 0x00-0x02
+  1       1     u8       Padding (always 0x00)
+  2       1     u8       Marker (always 0xFF)
+  3       3     bytes    Attributes (per-face color/smooth group flags)
+
+  Type byte values observed: 0x00 (most common), 0x01, 0x02.
+  All three represent valid face records; the type byte does NOT
+  determine the number of vertices (that is fixed by the index mode).
+
+  The 3 attribute bytes encode per-face rendering properties:
+  - 0xFF 0xFF 0xFF: smooth shading across all groups
+  - Other values: per-face color/material references (index into GATR
+    channels or smooth group bitmask)
+
+4b. u8 Index Mode (vertex_count ≤ 255)
+---------------------------------------
+  FIXED 10-byte records:
+    6-byte header + 4 bytes of index data
+
+  For quads: 4 × u8 vertex indices (1-based)
+  For triangles: 3 × u8 vertex indices (1-based) + 0x00 padding
+
+  All u8 face records are exactly 10 bytes regardless of triangle/quad.
+  This is confirmed by: ELEM_size = face_count × 10 + metadata_bytes.
+
+  Vertex indices are 1-based. Subtract 1 for 0-based arrays.
+  The 0x00 padding byte in triangles is NOT a valid index (since
+  indices are 1-based, 0 never appears as a vertex reference).
+
+4c. u16 Index Mode (256 ≤ vertex_count ≤ 65535)
+-------------------------------------------------
+  FIXED 14-byte records:
+    6-byte header + 4 × u16 BE vertex indices
+
+  All u16 face records are exactly 14 bytes.
+  Vertex indices are 1-based big-endian u16 values.
+
+  For triangles, the 4th index equals the 3rd (duplicated to pad).
+  Deduplicate when reading: if idx[3] == idx[2], treat as triangle.
+
+4d. u24 Index Mode (vertex_count > 65535)
+------------------------------------------
+  FIXED 18-byte records:
+    6-byte header + 4 × u24 BE vertex indices
+
+  Same as u16 but with 3-byte (24-bit) big-endian indices.
+  Vertex indices are 1-based. Deduplicate same as u16 mode.
+
+  Observed in 1 sample file (21437/Ground with 90,000 vertices).
+
+4e. Polygon Metadata Records
+-----------------------------
+  Interleaved between face records for N-gon polygon triangulations.
+
+  Format: 0x00 0x01 + u32 BE (byte_count) + data[byte_count]
+
+  The 0x00 0x01 header distinguishes metadata from face records
+  (face records have 0xFF at byte 2, metadata has 0x01 at byte 1).
+
+  The metadata data block contains:
+  - 0xFF + 3 attribute bytes (same format as face header attrs)
+  - u32 BE triangle count (N triangulated faces that follow)
+  - Original N-gon polygon vertex indices (informational)
+  - 0x00 terminator
+
+  After the metadata, N triangulated face records follow as normal
+  face records. The metadata is INFORMATIONAL ONLY — skip it and
+  use the triangulated face records for geometry.
+
+  GINF face_count = number of face records (NOT including metadata).
+  Verified: face_count × record_size + metadata_bytes = ELEM chunk size.
+
+  Metadata byte counts observed: 14, 16, 18, 24 bytes (for 5-8 sided
+  polygons). Most common is 14 bytes (pentagons → 3 triangles).
+
+4f. Record Size Summary
+------------------------
+  Mode    Record Size    Detection
+  ----    -----------    ---------
+  u8      10 bytes       vertex_count ≤ 255
+  u16     14 bytes       256 ≤ vertex_count ≤ 65535
+  u24     18 bytes       vertex_count > 65535
+
+  Verification formula:
+    ELEM_size = face_count × record_size + sum(metadata_block_sizes)
+
+
+5. GMAT FORMAT — Per-Face Materials
+====================================
+
+GMAT is a FORM container within GRUP, containing material property
+sub-chunks. Found in 20 of 227 sample files (167 GMAT instances
+across 3840 groups).
+
+When GMAT is present, the "refc" (reflection color) chunk provides
+the diffuse base color, which takes priority over GATR color.
+
+5a. Color Chunks (32 bytes)
+---------------------------
+  Tags: ambc, lumc, refc, spcc, rflc, trpc, trmc, glwc, olpc, olec, olsc
+
+  Offset  Size  Type     Description
+  0       8     f64 BE   Intensity multiplier (typically 1.0)
+  8       8     f64 BE   Red component (0.0-1.0)
+  16      8     f64 BE   Green component (0.0-1.0)
+  24      8     f64 BE   Blue component (0.0-1.0)
+
+  The intensity multiplier scales all RGB values. For conversion,
+  the effective color is: R×intensity, G×intensity, B×intensity.
+
+  Cross-reference validated: refc RGB values match reference GLB
+  baseColorFactor values exactly (distance < 0.0001).
+
+5b. Mix/Value Chunks (8 bytes)
+------------------------------
+  Tags: ambm, lumm, refm, spcm, rflm, trmm, glwm, trpo, spcg, spcs,
+        olpt, olet, olst
+
+  Offset  Size  Type     Description
+  0       8     f64 BE   Value (typically 0.0-1.0)
+
+  Mix values control the blend amount for each material property.
+  trpo = transparency opacity (1.0 = opaque, 0.0 = transparent).
+  spcg = specular glossiness, spcs = specular size.
+
+5c. Flag Chunks (4 bytes)
+-------------------------
+  Various tags for boolean/bitfield material flags.
+
+  Offset  Size  Type     Description
+  0       4     u32 BE   Bitfield flags
+
+5d. Material Property Reference
+---------------------------------
+  Prefix   Property            Color   Mix/Value Tags
+  ------   --------            -----   --------------
+  ref      Diffuse/Reflection  refc    refm
+  spc      Specular highlight  spcc    spcm, spcg, spcs
+  amb      Ambient             ambc    ambm
+  lum      Luminance/Emissive  lumc    lumm
+  rfl      Mirror reflection   rflc    rflm
+  trp      Transparency        trpc    trpo (opacity)
+  trm      Transmission        trmc    trmm
+  glw      Glow (post bloom)   glwc    glwm
+  olp      Outline primary     olpc    olpt (thickness)
+  ole      Outline edge        olec    olet (thickness)
+  ols      Outline silhouette  olsc    olst (thickness)
+
+  For glTF conversion:
+  - baseColorFactor = refc RGB values
+  - metallicFactor = 0.0 (non-metallic)
+  - roughnessFactor = 0.8 (default)
+  - opacity = trpo value (when < 1.0)
+
+
+6. OTHER CHUNK TYPES
+====================
+
+6a. GLNK (290-522 bytes) — Group Links
+---------------------------------------
+  Encodes parent-child hierarchy relationships and bounding transforms.
+  Contains fixed-point transform values in the same 6-byte format as
+  GINF animation channels. Found in 1863 of 3840 groups.
+
+6b. GSTR (144 bytes fixed) — Group Structure
+----------------------------------------------
+  Contains the group's local-to-world transform matrix and animation
+  state. Found in 1921 of 3840 groups.
+
+  The last 48 bytes contain a 3×4 transform matrix encoded as
+  12 f32 BE values (3 rows × 4 columns: rotation + translation).
+  Earlier bytes contain scale, animation state, and identity markers
+  using the same 6-byte fixed-point format as GINF.
+
+6c. CNST (200 bytes fixed) — Constraints
+------------------------------------------
+  Animation constraint data (IK targets, aim constraints, etc.).
+  Found in 269 of 3840 groups. Optional.
+
+6d. ROTR (variable) — Rotation Order
+--------------------------------------
+  Specifies Euler rotation order for animation. Optional, rare.
+
+6e. TMAP/TMEI/TATR — Texture Mapping
+--------------------------------------
+  Texture projection parameters within GHDR.
+  - TMAP: projection type, axis, scale/offset
+  - TMEI: texture map extra info
+  - TATR: texture attributes
+  Found in 10-53 groups across sample set.
+
+6f. BMAP/BMEI/BATR — Bump Mapping
+-----------------------------------
+  Same structure as texture mapping chunks but for bump/normal maps.
+  Found alongside TMAP chunks in the same groups.
+
+6g. FORM:LITE / FORM:LHDR — Lights
+-------------------------------------
+  Light object definitions. LITE is a FORM container with LHDR sub-form.
+  Contains light type, color, intensity, and attenuation parameters.
+  Found in 2 of 227 sample files (11 light instances).
+
+6h. FORM:MAPP / FORM:TRGB — Texture Data
+-------------------------------------------
+  Embedded texture image data. MAPP is a FORM container holding TRGB
+  sub-forms with raw RGB pixel data. Found in 2 of 227 sample files.
+
+
+7. COORDINATE SYSTEM AND WINDING
+==================================
+
+7a. Coordinate System
+---------------------
+EI3D uses a RIGHT-HANDED, Y-UP coordinate system:
+  - X axis: right
+  - Y axis: up
+  - Z axis: toward viewer (into screen)
+
+glTF uses Y-UP but with Z pointing away from viewer.
+
+Conversion to glTF:
+  glTF_X =  EI3D_X
+  glTF_Y =  EI3D_Y
+  glTF_Z = -EI3D_Z    (Z axis negated)
+
+Normal conversion follows the same negation:
+  glTF_NX =  EI3D_NX
+  glTF_NY =  EI3D_NY
+  glTF_NZ = -EI3D_NZ
+
+7b. Face Winding Order
+-----------------------
+EI3D face vertex order is CLOCKWISE (CW) when viewed from the front.
+glTF requires COUNTER-CLOCKWISE (CCW) front faces.
+
+Conversion: reverse the vertex order of each face.
+  - Triangle [a, b, c] → [c, b, a]
+  - Quad [a, b, c, d] → [d, c, b, a]
+
+This winding reversal is CRITICAL for correct rendering. Without it,
+face normals point inward, causing inverted shading — faces appear
+dark from the outside and lit from the inside. With doubleSided=true
+both sides render, but the shading is wrong, producing visible
+artifacts (dark patches, "missing" panels, wireframe-like distortion).
+
+Verified by comparing index buffers with reference GLB output: the
+reference converter reverses all face vertex orders.
+
+
+8. CONVERSION NOTES
+====================
+
+8a. Material Priority
+---------------------
+When both GMAT and GATR are present for a group:
+  1. Use GMAT "refc" RGB as the diffuse color (f64, higher precision)
+  2. Fall back to GATR bytes 3-5 as diffuse color (u8 per channel)
+  3. Default to (0.4, 0.4, 0.4) gray if neither is present
+
+8b. Normal Handling
+-------------------
+When NVRT chunk is present:
+  - Use per-vertex normals for SMOOTH shading
+  - Share vertices across faces via indexed rendering
+  - Apply Z-negation to normals same as coordinates
+
+When NVRT is absent:
+  - Compute per-face FLAT normals from face geometry
+  - Duplicate vertices per face (each triangle gets its own vertex copies)
+
+8c. Mesh Structure
+------------------
+The reference converter creates one mesh per group. Each group becomes
+a separate glTF mesh node with its own material. This preserves the
+original group separation and avoids Z-fighting between overlapping
+groups.
+
+8d. Quad Triangulation
+----------------------
+Quads are split into 2 triangles along the shorter diagonal:
+  - Compute d02 = distance(v0, v2) and d13 = distance(v1, v3)
+  - If d02 ≤ d13: triangles [v0,v1,v2] and [v0,v2,v3]
+  - If d13 < d02: triangles [v1,v2,v3] and [v1,v3,v0]
+
+This minimizes the visual impact of non-planar quads.
+
+
+9. FORMAT STATISTICS
+====================
+
+Across 227 sample files:
+  - 3840 total geometry groups
+  - 9 FORM types, 91+ unique leaf chunk tags
+  - Vertex counts range from 4 to 90,000 per group
+  - Face counts range from 1 to 22,500 per group
+  - File sizes range from 2,688 to 734,336 bytes
+
+FORM types: 3DFL, FHDR, GHDR, GRUP, GMAT, LITE, LHDR, MAPP, TRGB
+
+Most common leaf chunks:
+  GINF (3840), ELEM (3819), CORD (3687), GATR (3685),
+  GSTR (1921), GLNK (1863), NVRT (821), TVER (795),
+  CNST (269), FINF (227), DCOR (153), CVRT (153), TVRT (153)
+
+Material chunks (167 each, 20 files):
+  ambc, ambm, lumc, lumm, refc, refm, spcc, spcm, spcg, spcs,
+  rflc, rflm, trpc, trpo, trmc, trmm, glwc, glwm
+
+Texture/bump chunks (10-53 each):
+  TMAP, TMEI, TATR, BMAP, BMEI, BATR
+
+Conversion quality: 222/227 GOOD (≥70 visual score), avg 92.0

@@ -1,0 +1,1506 @@
+# Vibe coded by Claude
+#
+# SketchUp (.skp) Binary File Format Specification
+# =================================================
+#
+# DISCLAIMER: This specification is reverse-engineered from analysis of SKP
+# binary files and observation of the MFC CArchive serialization framework.
+# It is NOT an official specification from Trimble Inc. It may contain
+# inaccuracies, omissions, or errors. Use at your own risk. The SketchUp
+# file format is proprietary and subject to change without notice.
+#
+# Document date: 2026-03-15
+# Covers: SketchUp versions 1.x through 7.x+ (file format versions 1-7)
+#
+# All multi-byte integers are little-endian (LE) unless otherwise noted.
+# All floating-point values are IEEE 754 double-precision (8 bytes, LE).
+# All coordinates are in inches (SketchUp's internal unit).
+
+================================================================================
+1. FORMAT OVERVIEW
+================================================================================
+
+The SKP format is a proprietary binary format used by Trimble SketchUp (formerly
+Google SketchUp, originally @Last Software SketchUp). It uses Microsoft
+Foundation Classes (MFC) CArchive serialization for object storage.
+
+The file is a sequential stream of serialized C++ objects. There is no table of
+contents, no chunk-based structure, and no random-access capability. The entire
+file must be read from start to finish, maintaining an object map as classes and
+instances are encountered.
+
+Key characteristics:
+  - Sequential binary stream (no chunk headers or seek tables)
+  - MFC CArchive object serialization with class/object map
+  - Little-endian byte order throughout
+  - Coordinates stored as double-precision floats in inches
+  - Right-handed coordinate system with Z-axis up
+  - UTF-16LE strings in version 5+; ASCII strings in version 1-4
+
+================================================================================
+2. STRING ENCODING
+================================================================================
+
+Two string encoding modes exist, selected by the file format version.
+
+2.1 Wide Strings (Version 5+)
+------------------------------
+Used for all model-level strings (names, labels, version markers, etc.).
+
+  Byte sequence:
+    FF FE FF              - 3-byte BOM/marker indicating UTF-16LE string
+    <length>              - 1 byte: character count (number of UTF-16LE code units)
+    <data>                - length * 2 bytes: UTF-16LE encoded characters
+
+  Example: "Layer0" (6 chars)
+    FF FE FF 06 4C 00 61 00 79 00 65 00 72 00 30 00
+
+  Special case - empty wide string:
+    FF FE FF 00           - marker followed by zero length, no data bytes
+
+  IMPORTANT: Check raw bytes for the FF FE FF marker, NOT u16 values. Reading
+  a u16 first may consume part of the marker and desynchronize the stream.
+
+2.2 ASCII Strings (Version 1-4)
+--------------------------------
+Used in older version 1-4 files for all model-level strings.
+
+  Byte sequence:
+    <length>              - 1 byte: character count
+    <data>                - length bytes: ASCII characters
+
+  Special case - empty ASCII string:
+    00                    - zero length, no data bytes
+
+2.3 MFC Class Name Strings
+----------------------------
+Class names within MFC FFFF markers always use ASCII encoding regardless of
+file version:
+
+  Byte sequence:
+    <schema>              - 2 bytes (u16 LE): schema/version number for the class
+    <name_length>         - 2 bytes (u16 LE): length of the class name in bytes
+    <name>                - name_length bytes: ASCII class name (e.g., "CVertex")
+
+================================================================================
+3. FILE HEADER
+================================================================================
+
+The file begins with a header that identifies the format and version.
+
+3.1 Header Layout
+------------------
+
+  Offset  Size     Description
+  ------  -------  -----------------------------------------------------------
+  0       varies   Format identifier string: "SketchUp Model"
+                     Version 5+: FF FE FF + 1-byte length + UTF-16LE data
+                     Version 1-4: 1-byte length + ASCII data (pascal string)
+
+  varies  varies   Version string (e.g., "{5.0.135}", "{14.0.4384}")
+                     Version 5+: FF FE FF + 1-byte length + UTF-16LE data
+                     Version 1-4: 1-byte length + ASCII data (pascal string)
+
+  varies  16       MD5 checksum or GUID (16 raw bytes)
+
+  varies  varies   Source file path or empty string marker
+                     Version 5+: FF FE FF 00 (4 bytes, typically empty)
+                     Version 1-4: 1-byte length + ASCII data (source path)
+                       e.g., "S:\ftproot\Builds\2.0\Components\Doors\foo.skp"
+
+  varies  4        CRC32 or creation timestamp (u32 LE / f32)
+
+  varies  varies   MFC CVersionMap class introduction (see Section 5)
+
+3.2 Version String Format
+--------------------------
+The version string is enclosed in braces and contains:
+  {<major>.<minor>.<build>}
+
+Examples:
+  "{1.0.18}"      - SketchUp 1
+  "{2.0.88}"      - SketchUp 2
+  "{3.0.1140}"    - SketchUp 3
+  "{4.0.3050}"    - SketchUp 4
+  "{5.0.135}"     - SketchUp 5
+  "{6.0.14429}"   - SketchUp 6
+  "{7.0.xxxx}"    - SketchUp 7
+
+The major version number determines which class schemas and features are
+available, entity base sizes, string encoding, and CEdgeUse format.
+
+================================================================================
+4. MFC CArchive SERIALIZATION
+================================================================================
+
+All objects in the file are serialized using the MFC CArchive framework. This
+system maintains an internal map (1-indexed, with 0 representing NULL) that
+tracks both CRuntimeClass descriptors and object instances.
+
+4.1 Object Map
+---------------
+The map is a flat array indexed starting at 1. Index 0 is reserved for NULL.
+Entries are either:
+  - CRuntimeClass pointers (class descriptors)
+  - CObject pointers (object instances)
+
+Both share the same index space. The map_count variable tracks the next
+available index, starting at 1.
+
+CRITICAL: The map_count is a SINGLE incrementing counter shared by both class
+registrations (+2: one for class, one for first object) and object registrations
+(+1: for each new object created via class back-reference).
+
+4.2 Object Markers
+--------------------
+Each serialized object or reference begins with a 2-byte (u16 LE) marker:
+
+  Marker Value     Meaning
+  ---------------  -----------------------------------------------------------
+  0x0000           NULL pointer. No data follows. Consumes 0 map slots.
+
+  0x0001-0x7FFF    Object back-reference. The value is an index into the map
+                   referencing a previously serialized object. No additional
+                   data follows. Consumes 0 map slots.
+
+  0x8001-0xFFFE    Existing class back-reference. The class index is computed
+                   as (value & 0x7FFF). This references a CRuntimeClass
+                   already in the map. A new object instance is created using
+                   that class and registered at the next map_count.
+                   Consumes 1 map slot (for the new object).
+
+  0xFFFF           New class introduction. Followed by:
+                     - u16 LE: schema version
+                     - u16 LE: class name length
+                     - ASCII bytes: class name (NOT null-terminated)
+                   The CRuntimeClass is registered at map_count, then the
+                   new object instance is registered at map_count+1.
+                   Consumes 2 map slots (class + object).
+
+4.3 Map Slot Allocation Example
+---------------------------------
+
+  Step  Marker   Action                              Map Index
+  ----  -------  ----------------------------------  ---------
+  1     0xFFFF   New class "CVersionMap"              map[1] = CVersionMap class
+                                                      map[2] = CVersionMap object
+  2     0xFFFF   New class "CLayer"                   map[3] = CLayer class
+                                                      map[4] = CLayer object
+  3     0x8003   Existing class ref (3 = CLayer)      map[5] = new CLayer object
+  4     0x0004   Object back-ref to map[4]            (no new slot)
+  5     0x0000   NULL pointer                         (no new slot)
+
+IMPORTANT: CVersionMap is always the FIRST class registered, consuming map[1]
+(class) and map[2] (object). This offsets all subsequent registrations by 2.
+
+4.4 Class Index Tolerance
+---------------------------
+The writer's MFC map can be much larger than the reader's due to objects created
+during pre-geometry serialization that the reader skips (rendering options,
+shadow info, attribute containers, etc.). Use a tolerance of map_count + 500
+when validating class indices to avoid false rejections.
+
+================================================================================
+5. VERSION MAP (CVersionMap)
+================================================================================
+
+Immediately after the CRC32/timestamp in the header, the version map is
+serialized. It is introduced via the MFC new-class marker.
+
+5.1 Class Introduction
+-----------------------
+  FF FF           - u16 LE: new class marker (0xFFFF)
+  00 00           - u16 LE: schema version (0)
+  0B 00           - u16 LE: name length (11)
+  43 56 65 72 73 69 6F 6E 4D 61 70
+                  - ASCII: "CVersionMap"
+
+This registers CVersionMap as map[1] (class) and the instance as map[2].
+
+5.2 Version Map Entries
+------------------------
+The version map contains repeated entries, each consisting of:
+
+  <class_name>    - wstring (v5+) or astring (v1-v4): the class name
+  <schema_ver>    - u32 LE: the schema version for that class
+
+NOTE: The schema version is u32 (4 bytes), NOT u16+u16. Since schema values
+are small (0-32), the upper 2 bytes are always zero. Do not mistake this for
+two separate u16 fields.
+
+Entries continue until the terminator entry:
+
+  <class_name>    - wstring/astring: "End-Of-Version-Map"
+  <schema_ver>    - u32 LE: 0x00000000
+
+5.3 Purpose
+------------
+The version map establishes the expected schema version for each class in the
+file. When a class is later deserialized, its schema version from the version
+map determines which fields are present and how to parse them.
+
+Example entries:
+  "CVertex"                 0x00000000   (schema 0)
+  "CEdge"                   0x00000002   (schema 2)
+  "CFace"                   0x00000003   (schema 3)
+  "CCamera"                 ...
+  "CMaterial"               0x0000000C   (schema 12)
+  "CComponentDefinition"    0x0000000A   (schema 10)
+  "CComponentInstance"      0x00000004   (schema 4)
+  "End-Of-Version-Map"      0x00000000   (terminator)
+
+================================================================================
+6. PRE-DATA SECTION
+================================================================================
+
+After the version map, control values appear before the main data. The count
+depends on the file version:
+
+  Version  Count  Description
+  -------  -----  -----------------------------------------------------------
+  v1       0      No pre-data values (CDib immediately follows version map)
+  v2-v4    2      u32 format_flags (typically 1) + u32 thumbnail_hint
+  v5+      3      u32 format_flags + u32 thumbnail_hint + u32 extra_flags
+
+================================================================================
+7. DATA SECTION - SERIALIZATION ORDER
+================================================================================
+
+The main model data follows, driven by CSketchUpModel::Serialize(). Objects
+are serialized in a fixed order. Each object is introduced by an MFC marker
+(see Section 4.2) followed by class-specific data.
+
+7.1 CDib - Thumbnail Image
+----------------------------
+The first major data object is the embedded thumbnail, introduced via MFC
+new-class marker (FFFF) for CDib.
+
+  Field           Size     Description
+  --------------  -------  ------------------------------------------------
+  image_type      4        u32 LE: image format indicator (3 or 4)
+  image_size      4        u32 LE: size of image data in bytes
+  image_data      varies   Raw image bytes (image_size bytes)
+                             v1: BMP/DIB data or PNG
+                             v2+: PNG data (starts with 89 50 4E 47 magic)
+
+7.2 CThumbnail (v5+)
+----------------------
+In v5+ files, an additional CThumbnail object appears after model metadata.
+This embeds a CCamera object reference and optionally a CDib.
+
+  CRITICAL: The CCamera back-reference REGISTERS an object in the MFC map
+  (+1 map_count). Failing to account for this causes MFC drift for all
+  subsequent object references. This was the ROOT CAUSE of v5+ MFC drift.
+
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  null_ref           2        u16      Always 0x0000
+  camera_backref     2        u16      CCamera class back-reference (>= 0x8000)
+                                       Registers camera object (+1 map_count)
+  camera_data        151/176  bytes    CCamera serialized data:
+                                         v5: 151 bytes
+                                         v6+: 176 bytes
+  cdib_ref           2        u16      CDib reference:
+                                         0x0000 = empty thumbnail (no image)
+                                         >= 0x8000 = class backref → CDib data
+                                         0xFFFF = new CDib class → CDib data
+
+  When cdib_ref is non-NULL, CDib data follows (image_type + image_size +
+  image_data as in Section 7.1).
+
+7.3 Inline Model Metadata
+---------------------------
+Following the thumbnail, various inline model settings are serialized. These
+are NOT wrapped in MFC object markers but are raw values. The exact layout
+depends on the file version.
+
+7.3.1 v2 Model Metadata (exactly 251 bytes)
+
+  Offset  Size   Type     Description
+  ------  ----   ------   --------------------------------------------------
+  +0      3      u8[3]    Flags (typically 01 01 01; 01 01 00 for some files)
+  +3      4      u32      Null (always 0)
+  +7      1      u8       Null (always 0)
+  +8      88     f64[11]  CCamera data (see Section 7.4)
+  +96     1      u8       Perspective flag (1=perspective, 0=parallel)
+  +97     8      f64      FOV in degrees (e.g., 30.0)
+  +105    8      f64      Viewport image height (e.g., 133.0)
+  +113    130    bytes    Rendering/display data (see Section 7.5)
+  +243    8      bytes    Entity list preamble: u8(1) u8(1) u16(0) u32(count)
+  +251    ...             FFFF starts entity list
+
+  The entity list preamble u32 is an entity count hint (varies per file).
+  v2 metadata is EXACTLY 251 bytes across all observed v2 files.
+
+7.3.2 v3 Trailing Model Metadata (96-125 bytes)
+
+  After the entity list in v3 files, trailing metadata contains:
+    - Dimension font settings
+    - Rendering parameters
+    - Optional second font
+    - MFC object references
+  Total: 96-125 bytes depending on content. Fully consumed for stream coverage.
+
+7.3.3 v5+ Model Metadata
+
+  For v5+, this section is larger and includes CCamera, CRenderingOptions,
+  CShadowInfo, CSkpStyle, etc. as separate MFC-serialized objects.
+
+7.4 CCamera - Viewport Camera
+-------------------------------
+The camera defines the current viewport.
+
+In v2 files, CCamera is stored inline (not as a separate MFC object) within
+the model metadata at offset +8. In v5+, it is an MFC-serialized object.
+
+  CCamera data (11 doubles = 88 bytes):
+  Field              Size   Type     Description
+  -----------------  ----   ------   ------------------------------------------
+  eye_x              8      double   Camera eye position X (inches)
+  eye_y              8      double   Camera eye position Y (inches)
+  eye_z              8      double   Camera eye position Z (inches)
+  target_x           8      double   Look-at target X (inches)
+  target_y           8      double   Look-at target Y (inches)
+  target_z           8      double   Look-at target Z (inches)
+  up_x               8      double   Up vector X component
+  up_y               8      double   Up vector Y component
+  up_z               8      double   Up vector Z component
+  aspect_ratio       8      double   Viewport aspect ratio (1.0 = square)
+  far_clip           8      double   Far clipping distance (e.g., 1000.0)
+
+  After the 11 doubles:
+  perspective_flag   1      u8       1 = perspective, 0 = parallel projection
+  fov_degrees        8      double   Field of view in degrees
+  viewport_height    8      double   Viewport height in pixels
+
+  v5 CCamera total: 151 bytes
+  v6+ CCamera total: 176 bytes (additional rendering/display fields)
+
+7.5 Inline Rendering and Display Data (v2)
+--------------------------------------------
+After the camera (at metadata offset +113), rendering/display data follows.
+This section is exactly 130 bytes in v2 files.
+
+  v2 Rendering Layout (130 bytes):
+
+  Offset  Size   Type     Description
+  ------  ----   ------   --------------------------------------------------
+  +0      24     bytes    Zeros (reserved / unused fields)
+  +24     4      u32      Render mode (0=wireframe, 1=hidden_line, 2=shaded,
+                            3=textured, 4=monochrome; typically 2)
+  +28     2      u16      Reserved (0)
+  +30     2      u16      Edge display flag (1=show edges, 0=hide)
+  +32     2      u16      Reserved (0)
+  +34     4      RGBA     Background color (e.g., 255,255,255,255 = white)
+  +38     4      RGBA     Edge color (e.g., 0,0,0,255 = black)
+  +42     4      RGBA     Guide/construction line color
+  +46     4      RGBA     Default face color (e.g., 128,128,128,255 = gray)
+  +50     8      bytes    Shadow/display enable flags
+  +58     6      bytes    Display mode flags
+  +64     9      bytes    Zeros (padding)
+  +73     4      RGBA     Ground color
+  +77     4      RGBA     Sky color
+  +81     8      f64      Shadow darkness intensity (0.0-1.0)
+  +89     8      f64      Shadow lightness intensity (0.0-1.0)
+  +97     8      f64      Shadow/color data (model-dependent)
+  +105    2      u16      Reserved
+  +107    16     bytes    Default selection/highlight colors (4×RGBA)
+  +123    7      bytes    Zeros (padding)
+
+================================================================================
+8. ENTITY BASE - VERSION-DEPENDENT SIZES
+================================================================================
+
+Every geometric entity (CEdge, CFace, CVertex, etc.) has a version-dependent
+entity base that precedes the class-specific data. The entity base size is one
+of the most critical version-dependent aspects of the format.
+
+8.1 Entity Base Size Summary
+------------------------------
+
+  Component       v1-v2      v3        v4        v5+       v6+
+  -------------   --------   -------   -------   -------   -------
+  Entity base     7 bytes    9 bytes   11 bytes  12 bytes  12 bytes
+  CVertex prefix  0 bytes    0 bytes   2 bytes   2 bytes   2 bytes
+  CLoop data      2 bytes    2 bytes   4 bytes   4 bytes   4 bytes
+  CEdgeUse        linked     linked    7+ bytes  7+ bytes  7+ bytes
+  Pre-data u32s   0(v1)/2    2         2         2         3
+  String encoding ASCII      ASCII     ASCII     UTF-16LE  UTF-16LE
+
+8.2 v1-v2 Entity Base (7 bytes)
+---------------------------------
+Same layout for both CEdge and CFace.
+
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  entity_id          4      u32 LE   Unique entity identifier
+  flags              1      u8       Entity flags (0x01 = visible)
+  layer_ref          2      u16 LE   MFC object ref to CLayer (0x0000=default)
+
+  CRITICAL (v1 only): The layer_ref is a full MFC object tag:
+    0x0000 = NULL (no layer, no counter increment) — most entities
+    >= 0x8000 = class back-ref → creates NEW inline CLayer object (+1 mc)
+    The inline CLayer consumes additional bytes from the stream.
+
+  v1 CLayer inline formats:
+    Schema 0: name(astring) + null(1) + RGBA(4) + flags(u16)
+    Schema 1: name(astring) + null(1) + display_name(astring) + null(1) +
+              u8_flag(1) + RGBA(4) + flags(u16)
+
+  This layer_ref MFC registration is the ROOT CAUSE of v1 MFC drift.
+  Example: PlantHanging's CI has layer_ref=0x80E8, creating "Plant" layer
+  (green, RGBA 0,128,0,255), consuming 13 bytes inline and offsetting ALL
+  subsequent back-references by +1.
+
+8.3 v3 Entity Base (9 bytes)
+------------------------------
+
+  IMPORTANT: CFace has a DIFFERENT layout from CEdge in v3.
+
+  v3 CEdge entity base (9 bytes):
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  entity_id          4      u32 LE   Unique entity identifier
+  flags_upper        2      u16 LE   Upper flags
+  flags              2      bytes    Visibility flags
+  extra              1      u8       Additional data
+
+  v3 CFace entity base (9 bytes):
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  front_material     2      u16 LE   MFC object ref to front CMaterial (0=none)
+  flags_upper        2      u16 LE   Upper flags (always 0x0100)
+  flags              2      bytes    Visibility flags (01 00 typical)
+  layer_ref          2      u16 LE   MFC object ref to CLayer (0=default)
+  extra              1      u8       Additional data / padding
+
+  v3 mat_ref is always 0 in entity base (materials stored differently).
+  v3 CFace back material is NOT in entity base — see Section 10.6.
+
+8.4 v4 Entity Base (11 bytes)
+-------------------------------
+
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  entity_id          4      u32 LE   Unique entity identifier
+  flags              4      bytes    Visibility, shadow flags
+  layer_ref          2      u16 LE   MFC object ref to CLayer
+  extra              1      u8       Additional data
+
+  v4 mat_ref is always 0 in entity base (materials stored differently).
+
+8.5 v5+ Entity Base (12 bytes)
+--------------------------------
+
+  CRITICAL: CEdge and CFace have DIFFERENT entity base layouts in v5+.
+
+  CEdge entity base (12 bytes):
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  entity_id          4      u32 LE   Unique entity identifier
+  flags              4      bytes    Visibility, shadow, etc. flags
+                                     Pattern: e.g., 00 01 01 00
+  layer_ref          2      u16 LE   MFC object ref to CLayer (0=default)
+  material_ref       2      u16 LE   MFC object ref to CMaterial (0=none)
+
+  CFace entity base (12 bytes):
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  back_material      2      u16 LE   MFC object ref to back CMaterial (0=none)
+  front_material     2      u16 LE   MFC object ref to front CMaterial (0=none)
+  flags              4      bytes    Visibility, shadow, etc. flags
+                                     Pattern: e.g., 00 01 01 00
+  layer_ref          2      u16 LE   MFC object ref to CLayer (0=default)
+  extra              2      u16 LE   Additional data / padding
+
+  Both share the common flags pattern (bytes all ≤1 in CEdge), but the first
+  4 bytes differ in meaning. CEdge detection: check if entity base bytes 4-7
+  all have values ≤1 (flags pattern), which distinguishes CEdge from CFace.
+
+================================================================================
+9. ENTITY LIST (GEOMETRY)
+================================================================================
+
+The main geometry follows as a sequence of MFC-serialized objects. The entity
+list is a FLAT stream — each entity is introduced by its MFC marker (FFFF for
+first occurrence, 0x8000|class_idx for subsequent instances).
+
+Entity types in the stream:
+  - CFace objects (faces/surfaces) with inline CLoop + CEdgeUse chains
+  - CEdge objects (edges, often created inline within CEdgeUse)
+  - CVertex objects (3D points, often created inline within CEdge)
+  - CComponentInstance + CComponentDefinition pairs (scoped geometry)
+  - CGroup objects (inline geometry groups)
+  - CLayer objects (layer definitions)
+  - CRelationship objects (entity relationships, cut-opening pairs)
+  - CArcCurve objects (arc edge subclass)
+  - CAttributeContainer / CFaceTextureCoords (metadata, skip targets)
+
+9.1 Entity List Preamble
+--------------------------
+
+  v1:    Entity list starts immediately after CDib (no preamble)
+  v2:    u8(1) + u8(1) + u16(0) + u32(count_hint) → FFFF starts entities
+  v5+:   Entity list follows model metadata MFC objects
+
+9.2 Scope System
+------------------
+CComponentDefinition objects create nested SCOPES. The parser tracks:
+  - scope 0: root model geometry
+  - scope N: geometry belonging to CComponentDefinition N
+
+In v1/v2, a CI entity_base immediately preceding a CD opens a scope. The scope
+contains all entities until the corresponding scope-end metadata. In v5+, the
+CD's serialization directly contains its sub-entity list.
+
+================================================================================
+10. CLASS DATA FORMATS
+================================================================================
+
+10.1 CVertex (Schema 0)
+-------------------------
+A 3D point in space.
+
+  v1-v3: No entity_base prefix, just raw coordinates:
+  Field           Size   Type     Description
+  --------------  ----   ------   ------------------------------------------
+  x               8      double   X coordinate (inches, LE)
+  y               8      double   Y coordinate (inches, LE)
+  z               8      double   Z coordinate (inches, LE)
+  Total: 24 bytes
+
+  v4+: 2-byte entity_base prefix before coordinates:
+  Field           Size   Type     Description
+  --------------  ----   ------   ------------------------------------------
+  entity_base     2      u16 LE   Base entity data (typically 0x0000)
+  x               8      double   X coordinate (inches, LE)
+  y               8      double   Y coordinate (inches, LE)
+  z               8      double   Z coordinate (inches, LE)
+  Total: 26 bytes
+
+10.2 CEdge (Schema 2)
+-----------------------
+An edge connecting two vertices.
+
+  Inheritance chain: CEntity -> CDrawingElement -> CEdge
+
+  Edge-specific data (after entity base):
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  start_vertex       2+     MFC ref  MFC object marker for start CVertex
+  end_vertex         2+     MFC ref  MFC object marker for end CVertex
+  trailing           2      u16 LE   Context-dependent (see below)
+
+  start_vertex and end_vertex may be:
+    - FFFF new class introduction (vertex data follows)
+    - >= 0x8000 existing class ref (new vertex data follows)
+    - 0x0001-0x7FFF back-reference to existing vertex (no data)
+    - 0x0000 NULL (no vertex)
+
+  Trailing field rules:
+    v1-v2 inline (within CEdgeUse chain): NOT present
+    v1-v2 standalone (in entity list):    Present (edge-use ref or NULL)
+    v3 inline:    MFC object ref (NULL, backref, class backref, or FFFF)
+                  Can introduce CArcCurve inline (see Section 10.7)
+    v3 standalone: Present
+    v4+ (all contexts): ALWAYS present (partner edge-use ref or zero)
+
+10.3 CFace (Schema 3)
+-----------------------
+A planar face defined by edge loops.
+
+  Inheritance chain: CEntity -> CDrawingElement -> CFace
+
+  Field              Size   Type     Description
+  -----------------  ----   ------   ----------------------------------------
+  [entity_base]      varies -        Version-dependent (see Section 8)
+  normal_x           8      double   Face plane normal X component
+  normal_y           8      double   Face plane normal Y component
+  normal_z           8      double   Face plane normal Z component
+  distance_d         8      double   Plane distance D
+  num_loops          4      u32 LE   Number of loops (1 outer + N holes)
+  loops              varies -        Inline CLoop objects (num_loops count)
+
+  Plane equation: dot(normal, vertex) + d ≈ 0
+  NOTE: The equation is dot + d ≈ 0, NOT dot - d ≈ 0.
+
+  The normal direction determines front vs. back face orientation.
+  The first loop is the outer boundary. Subsequent loops are holes.
+
+  IMPORTANT for v5+ CI scopes: The stored face plane (normal + d) is in
+  WORLD space, but EU-resolved vertices for CI scopes are in LOCAL space.
+  Use vertex-derived coplanarity checks (RANSAC from vertex triplets)
+  instead of stored plane values for validation within CI scopes.
+
+10.4 CLoop (Schema 0-1)
+-------------------------
+A closed loop of edges forming a face boundary.
+
+  Field              Size     Type     Description
+  -----------------  -------  ------   ------------------------------------------------
+  header_data        2-4      -        v1-v3: 2 bytes, v4+: 4 bytes (flags/winding)
+
+  The CLoop is immediately followed by CEdgeUse objects in the stream.
+
+10.5 CEdgeUse (Schema 0-1)
+-----------------------------
+A directed use of an edge within a loop. The CEdgeUse format varies
+significantly between versions and is the most complex part of parsing.
+
+10.5.1 v1 CEdgeUse (Schema 0) — Singly-Linked List
+
+  Field              Size     Type     Description
+  -----------------  -------  ------   ------------------------------------------------
+  edge_ref           2+       MFC ref  Reference to CEdge (backref or inline creation)
+  reversed           1        u8       1 = reverse direction, 0 = forward
+  loop_ref           2+       MFC ref  Reference to owning CLoop
+  next_in_loop       2+       MFC ref  Next CEdgeUse in chain (linked list)
+
+  v1 chains interleave TWIN edge-uses from adjacent faces via next_ref. Some
+  own-loop EUs become orphaned (not reachable by following next_ref). The
+  parser must supplement chain EUs with orphan EUs (same loop_ref) and build
+  an edge connectivity graph to reconstruct correct face winding.
+
+  When edge_ref creates an inline CEdge:
+    entity_base(7 bytes) + start_vertex(MFC ref) + end_vertex(MFC ref)
+    NO trailing field after vertex refs in v1/v2 inline CEdge.
+
+  v1 Trailing Data (after chain loops back):
+  After the chain's next_ref points back to the first EU:
+    - N × u16 EU-index back-references
+    - Optional 4-byte zero separator (0x0000 0x0000)
+    - M × u16 edge back-references
+  This trailing data is REDUNDANT — the EU chain's directed edges already
+  give correct polygon winding. Consumed for stream alignment only.
+
+10.5.2 v2/v3 CEdgeUse (Schema 0) — Sequential File Order
+
+  Same field layout as v1, BUT:
+  - next_ref points to CLoop (TERMINATOR), NOT next CEdgeUse
+  - Chains are effectively 1-step (each EU is self-contained)
+  - Vertex order comes from SEQUENTIAL FILE ORDER of CEdgeUses between
+    CLoop boundaries, NOT from following next_ref chains
+  - The parser collects EUs sequentially by map_idx for v2/v3
+
+  When edge_ref creates an inline CEdge (v3):
+    entity_base(9 bytes) + start_vertex(MFC ref) + end_vertex(MFC ref)
+    + trailing curve_ref (MFC object ref)
+    The trailing field can be NULL, object backref, class backref, or FFFF
+    new class header (e.g., CArcCurve introduced inline).
+
+  v3 CEdgeUse peek-based detection: After edge_ref processing (including
+  any inline CEdge data and its trailing curve_ref), peek at the next byte:
+    - byte <= 1: reversed flag is present
+    - byte > 1: unconsumed CArcCurve arc data follows (skip reversed/loop/next)
+
+10.5.3 v4+ CEdgeUse (Schema 1) — Sequential with Inline Creation
+
+  Field              Size     Type     Description
+  -----------------  -------  ------   ------------------------------------------------
+  null_ref           2        u16      Usually NULL (0x0000), twin/partner EU
+  edge_ref           2+       MFC ref  Reference to CEdge (backref or class INST)
+  reversed           1        u8       1 = reverse direction, 0 = forward
+  loop_ref           2        u16      Reference to owning CLoop
+
+  v4 format is IDENTICAL to v5+ (not just 2 skip bytes!).
+
+  When edge_ref is a class back-reference (>= 0x8000), a NEW CEdge is created
+  inline. This is how NEW vertices are created per-face in v4+ files:
+    entity_base(11 for v4, 12 for v5+) + start_vertex(MFC ref) +
+    end_vertex(MFC ref) + trailing_u16 (always present)
+
+  v5+ CEdgeUses are associated with the last-parsed CFace. The parser tracks
+  `_last_parsed_face` to link sequential CEdgeUses after CLoop to their face.
+
+10.6 Face Material Assignment
+-------------------------------
+
+  Materials are assigned to faces differently depending on version:
+
+  v5+ CFace entity base:
+    - back_material at bytes 0-1, front_material at bytes 2-3
+
+  v3 CFace:
+    - front_material in entity base bytes 0-1
+    - back_material in EU trailing data (u16 after last CEdgeUse's next_ref)
+      0x0000 = no back material
+      Non-zero: MFC object ref to Material
+
+  v5+ EU trailing data:
+    - back_material as u16 object refs BETWEEN last EU and next entity tag
+    - Additional u16 values are CEdge object indices (consumed by main loop)
+    - Terminated by next entity tag (>= 0x8000)
+    - Structure: back_mat(u16) + [null(u16)|ref(u16)] + edge_refs(N × u16)
+
+  Material inheritance:
+    v3+ CI entity base first u16 is mat_ref. When a CI has a material, it
+    propagates to unmaterialed faces in its definition scope.
+
+10.7 CArcCurve (CEdge subclass, Schema 1)
+--------------------------------------------
+An arc curve represents a circular arc approximated by straight edge segments.
+
+  v3 format (introduced inline via CEdge's trailing curve_ref = FFFF):
+    - N inline CEdge class backrefs, each with:
+        entity_base(9) + sv(MFC) + ev(MFC) + curve_ref(backref to this arc)
+    - Arc params (117 bytes): 5 prefix + 14 f64
+
+  v4 format:
+    - null(2) + edge_backref(2) prefix
+    - N-1 inline CEdge class backrefs (one fewer, first chord edge already created)
+    - Arc params (117 bytes): same as v3
+
+  Arc params (117 bytes):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  arc_prefix         5        bytes    00 + u32 edge count hint
+  arc_center         24       3×f64    Center point (x, y, z) in inches
+  arc_normal         24       3×f64    Normal vector of the arc plane
+  arc_xaxis          24       3×f64    X-axis of arc's local coordinate system
+  arc_yaxis          24       3×f64    Y-axis of arc's local coordinate system
+  arc_radius         8        f64      Radius in inches
+  arc_angle          8        f64      Sweep angle in radians
+
+  Detection (end of inline edges): peek at next u16:
+    >= 0x8000: another inline CEdge class backref (continue loop)
+    else: end of inline edges, start of arc_prefix
+
+10.8 CMaterial (Schema 12)
+----------------------------
+A material definition (color and/or texture).
+
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  base_data          0/2      u16 LE   v5+ ONLY (2 bytes); absent in v3/v4
+  name               varies   string   Material name (wstring v5+, astring v3)
+  material_type      1        u8       0 = color only, 1 = textured
+
+  IMPORTANT: In v3/v4 files, base_data is NOT present. Serialization begins
+  directly with the name string. In v5+, the 2-byte base_data precedes the name.
+
+  For material_type 0 (color only):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  reserved           1        u8       Reserved
+  red                1        u8       Red channel (0-255, sRGB)
+  green              1        u8       Green channel (0-255, sRGB)
+  blue               1        u8       Blue channel (0-255, sRGB)
+  alpha              1        u8       Alpha channel (0-255, usually 255)
+  display_name       varies   string   User-visible material name
+  padding            8        bytes    Reserved/unused (always zeros)
+  transparency       8        f64      Transparency (0.0=opaque, 1.0=fully transparent)
+  use_alpha          1        u8       Flag: 1 = apply transparency, 0 = fully opaque
+
+  Color note: sRGB values should be scaled by 0.4x for correct PBR rendering
+  appearance in glTF. The transparency field is separate from RGBA alpha;
+  when use_alpha=1, material opacity = 1.0 - transparency.
+
+  For textured materials: baseColorFactor should be [1,1,1,α] when texture
+  is present (not tinted with the 0.4x color scaling).
+
+  For material_type 1 (textured):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  flags              4        u8[4]    Texture flags
+  texture_header     4        u32 LE   Texture data header
+  texture_size       4        u32 LE   Texture image data size in bytes
+  texture_data       varies   raw      Raw image bytes (typically PNG)
+  texture_params     varies   -        Additional texture mapping parameters
+  filename           varies   string   Original texture filename
+  additional         varies   -        Additional material settings
+
+10.9 CComponentDefinition
+---------------------------
+A reusable component template containing its own geometry.
+
+  v1/v2 (Schema 9):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  entity_base        7        -        7-byte base (all zeros for CD)
+  def_index          2        u16 LE   Definition index
+  null               2        u16 LE   Always 0x0000
+  Total: 11 bytes
+
+  v5+ (Schema 10):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  def_name           varies   wstring  Component definition name
+  description        varies   wstring  Component description
+  entity_list        varies   -        Sub-entity list (nested geometry)
+
+  In v1/v2, the CD entity is a minimal scope marker. The definition's geometry
+  follows immediately after the CD in the entity stream. A CI+CD pair (CI
+  immediately preceding CD) indicates an instantiated component.
+
+10.10 CComponentInstance
+--------------------------
+An instance of a component definition placed in the model.
+
+  Inheritance chain: CEntity -> CDrawingElement -> CComponentInstance
+
+  v1/v2 TWO TYPES:
+
+  1. CI+CD pairs (scope-opening):
+     entity_base(7+ bytes, variable due to layer_ref) + 0 trailing bytes.
+     CComponentDefinition tag follows immediately. NO inline transform.
+     Placement stored in CD scope-end metadata.
+
+  2. Standalone CIs (instances of existing definitions):
+     entity_base(7) + def_ref(u16) + 13-double transform + 4 trailing zero bytes.
+     These reference an existing CD.
+     Validated via orthogonal rotation matrix + scale ≈ 1.0.
+
+  v5+ (Schema 4-5):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  base_data          12       -        CDrawingElement base (12 bytes)
+  definition_ref     2        u16      MFC object ref to CComponentDefinition
+  transform          104      double   13 doubles (NOT 16):
+                                         rotation(9) + translation(3) + scale(1)
+  instance_name      varies   wstring  Instance name
+
+  Transformation matrix layout (13 doubles = 104 bytes):
+    Doubles 0-2:  [ Xx   Xy   Xz  ]   X-axis (row-major rotation row 1)
+    Doubles 3-5:  [ Yx   Yy   Yz  ]   Y-axis (row-major rotation row 2)
+    Doubles 6-8:  [ Zx   Zy   Zz  ]   Z-axis (row-major rotation row 3)
+    Doubles 9-11: [ Tx   Ty   Tz  ]   Translation (position in inches)
+    Double 12:    [ scale ]            Uniform scale factor (~1.0)
+
+  The 3x3 rotation sub-matrix row magnitudes are normally ~1.0.
+
+  Transform maps points from component-local space to model space:
+    P_model.x = P.x*Xx + P.y*Yx + P.z*Zx + Tx
+    P_model.y = P.x*Xy + P.y*Yy + P.z*Zy + Ty
+    P_model.z = P.x*Xz + P.y*Yz + P.z*Zz + Tz
+
+  CI PROBING: CComponentInstance may appear as an unknown MFC class back-ref
+  when the writer's MFC map has more entries than the reader's. Identify by
+  probing: 12 bytes base + 2 bytes def_ref + 13 doubles with rotation row
+  magnitudes ~1.0 and scale ~1.0. Use class_offset > 0 when needed.
+
+  NESTED CI TRANSFORMS: CIs can appear inside another CD's scope.
+  The nested CI's transforms are in the PARENT's LOCAL coordinate space.
+  They must be composed with the parent definition's world transform.
+  Process single-instance parent CIs first (baking their transform),
+  then compose nested multi-instance CI transforms.
+
+  MULTI-INSTANCE: Multiple CIs referencing the same CD share geometry.
+  Use glTF mesh instancing: store the definition's mesh once and create
+  multiple glTF nodes with transforms referencing the same mesh.
+
+  SELF-REFERENCING CIs:
+  1. v5+: When one CD covers ALL geometry (identical transforms → skip)
+  2. v1: CIs INSIDE their own definition scope (def_ref matches current
+     scope's map_idx ±1 → skip)
+
+  COVERS-ALL DETECTION: When a CD scope contains ≥90% of all faces AND
+  multiple CIs with genuinely different transforms exist (different rotation
+  matrices), this is a legitimate multi-instance case, NOT "one def covers
+  everything". Detect by checking if scope 0 has ZERO faces and CIs have
+  different rotation matrices.
+
+  CUT-OPENING CIs: CIs that cut holes in host faces serve a DUAL role —
+  they both cut holes AND render as visible geometry with proper positioning.
+  Do NOT skip their transforms during geometry application.
+
+10.11 CGroup (Schema 1)
+--------------------------
+A group of geometry entities, similar to a CI but with inline geometry.
+
+  Groups have structure similar to CComponentInstance but embed their geometry
+  directly rather than referencing a separate definition.
+
+  DUAL ROLE: A CGroup can contain its own inline faces AND reference a CD
+  via group_ref. When both are present, the group's faces use the group
+  transform, AND the group_ref creates an additional CI-style instance.
+
+  VERTEX SPACE: CGroup vertices may be stored in LOCAL space (relative to
+  the group's origin), not world space. When the group has a transform with
+  identity rotation + non-zero translation, check if vertices are closer to
+  the local origin or to the world-space expected position. If already local,
+  do NOT un-transform them (which would double-offset).
+
+10.12 CRelationship (Cut-Opening Pairs)
+------------------------------------------
+Encodes which faces have holes for which CComponentInstances.
+
+  v3 format (4 bytes):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  ref1               2        u16      MFC object ref (face or CI)
+  ref2               2        u16      MFC object ref (face or CI)
+
+  v4+ format (6 bytes):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  null_ref           2        u16      Always 0x0000
+  face_ref           2        u16      MFC object ref to host CFace
+  ci_ref             2        u16      MFC object ref to CComponentInstance
+
+  Cut-opening processing: compute convex hull of CI definition vertices
+  projected onto host face plane, then add as holes in the face.
+
+10.13 CLayer (Schema 0-1)
+----------------------------
+Layer definitions appear within the entity list as MFC objects.
+
+  v1 (schema 0):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  layer_name         varies   astring  Layer name (e.g., "Layer0")
+  null_sep           1        u8       0x00
+  rgba               4        4 bytes  RGBA color
+  flags              2        u16 LE   Layer flags
+
+  v2 (schema 1):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  layer_name         varies   astring  Layer name
+  null_sep           1        u8       0x00
+  display_name       varies   astring  User-visible name
+  null_sep2          1        u8       0x00
+  visibility         1        u8       1=visible, 0=hidden
+  rgba               4        4 bytes  RGBA color
+  flags              2        u16 LE   Layer flags
+
+  v5+ (schema 1+):
+  Field              Size     Type     Description
+  -----------------  -------  ------   ----------------------------------------
+  entity_base        2        u16 LE   Base entity data (usually 0x0000)
+  layer_name         varies   wstring  Internal layer name
+  flags              3        3 bytes  Visibility and boolean flags
+  display_name       varies   wstring  User-visible layer name
+  material_data      varies   -        Color/texture data
+  settings           ~13      -        Additional configuration bytes
+
+================================================================================
+11. SCOPE METADATA (v1/v2)
+================================================================================
+
+After the entity list in v1/v2 files, per-scope metadata provides transform
+and connectivity information for component definitions.
+
+11.1 v2 Scope Metadata Structure
+----------------------------------
+
+  1. CLayer (FFFF new class, schema=1):
+     Layer0 data (same format as Section 10.13 v2).
+
+  2. Per-scope definition metadata (innermost scope first, depth-first close):
+
+     Field              Size    Description
+     -----------------  ------  ------------------------------------------------
+     entity_base        7       Zero bytes (scope entity header)
+     map_counter        2       u16: writer's MFC map count at scope close time
+     guid               16      GUID (16 raw bytes, unique per definition)
+     def_name           varies  astring: definition name (e.g., "DoorKnob")
+     null_sep           1       u8: 0x00
+     source_path        varies  astring: empty or original file path
+     bounding_value     4       f32 LE: bounding sphere radius (~0.0005)
+     padding            35      Mostly zeros, may contain instance flags
+     placement_transform 104    13 doubles: placement in parent space
+
+     map_counter is CRITICAL for MFC synchronization. Sync the parser's
+     map_count to this value before processing each scope's face blocks
+     to align class back-references with the writer's expectations.
+
+     Optional additional CI instances (0 or more):
+       ci_class_backref 2       u16: CComponentInstance class backref (0x80xx)
+       entity_base      7       Instance entity header
+       def_ref          2       u16: reference to CComponentDefinition
+       instance_transform 104   13 doubles: instance placement
+
+  3. Per-scope face blocks (ADDITIONAL faces, NOT redundant):
+     Face blocks provide faces not in the main entity list. For example,
+     5 of 6 FlushDoor24 faces and 8 of 15 root frame faces are ONLY in
+     the scope metadata. These faces MUST be added to the model.
+
+     Orphan CEdge (standalone edge):
+       edge_class_backref(u16) + entity_base(7) + start_vertex(MFC) +
+       end_vertex(MFC)
+       IMPORTANT: Orphan CEdges have NO trailing bytes.
+
+     CFace block:
+       face_class_backref(u16) + entity_base(7) + plane(32) + loop_count(4) +
+       CLoop + CEdgeUse chain with inline CEdge/CVertex
+       (Same v2 inline CEdge: NO trailing u16)
+
+  4. Inter-scope separators:
+
+     Full separator:
+       u32(2) + CRelationship section + zero_padding + u32(1) + CLayer_backref
+       + CLayer_data
+
+     CRelationship variants:
+       (a) FFFF new class + 2 CRelationship objects + 10 zeros
+       (b) class backref + 2 CRelationship objects + 10 zeros
+
+     Lite separator (before root scope):
+       u32(0) + u32(2) + 2 object backrefs + 6 zeros + u32(1) + CLayer
+       NOTE: The u32(0) before lite separator is part of separator, NOT
+       the previous orphan CEdge's trailing data.
+
+  5. Root scope metadata:
+     CLayer_backref + CLayer_data + entity_base(7) + map_counter(u16) +
+     f32_bound + null(u8) + city(astring) + country(astring) +
+     f64 longitude + f64 latitude + f64 altitude +
+     view_state(135-212 bytes) + root options
+
+  6. Root options (typed key-value pairs):
+     u32(count) + repeated option groups:
+       group_name(astring) + repeated { key_name(astring) + type_tag(u8) +
+       value } + empty_astring(00) terminator
+
+     Type tags: 0x04=u32, 0x06=f64, 0x07=bool/u8, 0x09=RGBA, 0x0d=astring
+
+     Known groups: AxisOptions, SlideshowOptions, PageOptions, UnitsOptions
+
+11.2 v1 Scope Metadata
+-------------------------
+
+  CD scope-end metadata:
+    display_name(astring) + GUID(16) + def_name(astring) + null(1) +
+    source_path(astring) + 142 fixed bytes
+
+  The 142 fixed bytes contain: f32 + identity/placement transform data + flags.
+  Placement at offset 34 in the 142-byte block.
+
+  CLayer may be present between identity_pos and display_name when the layer
+  class is not yet registered (e.g., PlantHanging, Park Bench01).
+
+  Root scope-end: display_name(astr) + f32 + empty_astr + location(astr) +
+  country(astr) + f64 lon/lat/alt + model settings → runs to EOF.
+
+  Placement extraction: from identity_pos in scope-close. Structure:
+    identity(104B) + 20 zeros + [optional CLayer] + display_name(astr) +
+    GUID(16) + def_name(astr) + null + src_path(astr) + 142B fixed block.
+  Scale validation (≈1.0) rejects un-instantiated scopes with garbage data.
+
+11.3 v1 Scope Rendering Rules
+--------------------------------
+  Only render these scopes:
+  - Scope 0 (root)
+  - CI+CD pair scopes (CI entity immediately precedes CD)
+  - Scopes with valid placement transform (scale ≈ 1.0)
+  - Scopes referenced by standalone CIs
+
+  Standalone CDs without preceding CI → un-instantiated library definition →
+  exclude faces from output.
+
+================================================================================
+12. FACE RECONSTRUCTION
+================================================================================
+
+CFace objects store the plane equation (normal + distance) but do NOT directly
+list their vertices. Vertex-to-face association must be reconstructed from
+CEdgeUse chain data.
+
+12.1 CEdgeUse Chain Reconstruction (ALL versions)
+----------------------------------------------------
+The primary and most reliable method. Parse edge-use data to get exact vertex
+order per face:
+
+  v1: Follow linked list via next_in_loop_ref + supplement with orphan EUs
+      (same loop_ref, not reached by chain). Build edge connectivity graph.
+
+  v2/v3: Collect EUs sequentially by map_idx between CLoop boundaries.
+         next_ref points to CLoop (terminator), so chains are 1-step.
+
+  v4+: Sequential CEdgeUses after CLoop, associated via _last_parsed_face.
+
+  Inline CEdge/CVertex creation during EU parsing captures vertices that
+  don't exist in the main entity stream.
+
+12.2 Edge-Based Reconstruction (Fallback)
+--------------------------------------------
+  Loop finding, edge tracing, connected components for coplanar face groups.
+  Used when EU chains fail or are incomplete.
+
+12.3 Convex Ordering (Last resort)
+-------------------------------------
+  Angle-based ordering fallback when no edges available.
+
+12.4 Multi-Loop Faces (Holes)
+--------------------------------
+  Faces with num_loops > 1 have holes. The first loop is the outer boundary;
+  subsequent loops are holes. In EU reconstruction, subsequent loops for the
+  same face are stored as face.holes.
+
+  For glTF output, bridge-edge triangulation merges outer + holes into a
+  single polygon for ear-clipping. Ear-clipping handles degenerate bridge
+  vertices (near-zero distance removal).
+
+  Multi-loop reconstruction for v5+: when EU chains fail for multi-loop faces,
+  geometric reconstruction classifies on-plane vertices as outer (near bounding
+  rect) vs inner, clusters inner vertices into rectangular holes via grid
+  alignment.
+
+12.5 EU Plane Validation
+---------------------------
+  After EU chain assignment, validate that ALL face vertices lie within 0.5
+  units of the stored face plane. If any vertex exceeds this threshold, revert
+  the face (clear vertices, holes, edge_uses, eu_assigned flag).
+
+  For CI scopes: use RANSAC (best plane from vertex triplets) for coplanarity
+  validation instead of stored face plane (which is world-space for CI scopes
+  but EU-resolved vertices are local-space).
+
+  Off-plane vertex recovery: for each dropped vertex, search nearby edge_refs
+  (±5) for an Edge with an on-plane alternative vertex.
+
+================================================================================
+13. COORDINATE SYSTEM AND GLB CONVERSION
+================================================================================
+
+13.1 SketchUp Coordinate System
+----------------------------------
+  - All coordinates in INCHES (internal unit)
+  - Right-handed, Z-up coordinate system
+  - X-axis: red axis (east)
+  - Y-axis: green axis (north)
+  - Z-axis: blue axis (up/vertical)
+  - Ground plane is XY plane (Z = 0)
+
+13.2 glTF/GLB Coordinate Conversion
+--------------------------------------
+  glTF uses Y-up right-handed coordinate system:
+    gltf_x = skp_x
+    gltf_y = skp_z
+    gltf_z = -skp_y
+
+  Scale: INCHES_TO_METERS = 0.0254
+
+13.3 CComponentInstance Transform to glTF
+-------------------------------------------
+  SKP 13-double transform (Z-up, row-major) → glTF 4x4 matrix (Y-up,
+  column-major). Apply coordinate swap (Y↔Z, negate new Z) to both
+  rotation and translation components.
+
+13.4 Normal Splitting
+-----------------------
+  Normal splitting threshold: cos(32°) = 0.85 for smooth/hard edge detection.
+
+================================================================================
+14. COLOR ENCODING
+================================================================================
+
+Colors are stored as 4 consecutive bytes:
+
+  Byte  Channel  Range    Description
+  ----  -------  -------  -------------------
+  0     R        0-255    Red component
+  1     G        0-255    Green component
+  2     B        0-255    Blue component
+  3     A        0-255    Alpha (opacity)
+
+  Alpha 255 = fully opaque
+  Alpha 0   = fully transparent
+
+================================================================================
+15. VERSION HISTORY AND FORMAT DIFFERENCES
+================================================================================
+
+  File Ver  SketchUp     Entity Base   Strings    CEdgeUse        Pre-data
+  --------  -----------  -----------   --------   --------        --------
+  v1        1.x          7 bytes       ASCII      Linked list     0 u32s
+  v2        2.x          7 bytes       ASCII      Sequential      2 u32s
+  v3        3.x          9 bytes       ASCII      Sequential      2 u32s
+  v4        4.x          11 bytes      ASCII      7+ bytes seq    2 u32s
+  v5        5.x          12 bytes      UTF-16LE   7+ bytes seq    3 u32s
+  v6        6.x          12 bytes      UTF-16LE   7+ bytes seq    3 u32s
+  v7        7.x+         12 bytes      UTF-16LE   7+ bytes seq    3 u32s
+
+  Key version differences:
+  - v1: No pre-data, BMP/DIB thumbnails, CLayer inline in entity_base,
+        CI+CD pairs with scope-end placement, linked-list EU chains
+  - v2: 251-byte inline model metadata, scope metadata with face blocks
+        (NOT redundant), sequential EU chains, root options
+  - v3: 9-byte entity base, CFace front_mat in entity base, back_mat in EU
+        trailing data, CArcCurve inline, trailing model metadata
+  - v4: 11-byte entity base, 7-byte CEdgeUse (identical to v5+), CArcCurve
+        with edge_backref prefix, CRelationship 6-byte format
+  - v5: 12-byte entity base (CEdge≠CFace layout), UTF-16LE strings,
+        CThumbnail with CCamera MFC registration, 3 pre-data u32s
+  - v6: 176-byte CCamera (vs 151 in v5), otherwise same as v5
+  - v7: Tagless faces inside CComponentDefinitions (detection via unit normal
+        pattern before CLoop)
+
+  Schema versions for individual classes increase with newer file versions.
+  Newer schemas add fields at the END of the class data, preserving backward
+  compatibility.
+
+================================================================================
+16. PARSING STRATEGY
+================================================================================
+
+To parse an SKP file:
+
+  1. Read the header: identify file version from the version string.
+  2. Determine string encoding mode (wstring for v5+, astring for v1-v4).
+  3. Read the MD5/GUID (16 bytes).
+  4. Read the source path or empty string marker.
+  5. Read the CRC32/timestamp (4 bytes).
+  6. Parse the CVersionMap via MFC deserialization:
+     a. Read the FFFF marker and register CVersionMap class/object.
+     b. Read class_name + schema_version pairs until "End-Of-Version-Map".
+     c. Store the version map for later schema lookups.
+  7. Read the pre-data section (0/2/3 × u32 values depending on version).
+  8. Parse the CDib thumbnail (read image type, size, image data).
+  9. For v5+: parse CThumbnail (registers CCamera in MFC map!).
+  10. Parse inline model settings (version-dependent).
+  11. Parse the entity list:
+      a. Read MFC marker (FFFF or class backref).
+      b. Dispatch to class-specific parser based on class name.
+      c. Track scopes opened by CComponentDefinition.
+      d. Build face→vertex associations from CEdgeUse chains.
+      e. Register ALL created objects in the MFC map.
+  12. For v1/v2: parse scope metadata (transforms, additional faces).
+  13. For v3: parse trailing model metadata.
+
+  Throughout parsing, maintain the MFC object map. Each time a new class is
+  introduced (FFFF) or a new object is created (0x8001-0xFFFE), register it
+  in the map. Use the map to resolve back-references (0x0001-0x7FFF).
+
+================================================================================
+17. IMPLEMENTATION NOTES
+================================================================================
+
+17.1 General
+
+  - The format is sequential and does NOT support random access.
+  - Forward references do not occur; objects are always defined before referenced.
+  - The MFC map is shared between class descriptors and object instances.
+  - Embedded images are typically PNG; check header bytes to confirm.
+  - When encountering an unknown class, the parser cannot skip it because
+    there are no length-prefixed chunks.
+
+17.2 MFC Map Drift
+
+  A parser that skips or incompletely parses pre-geometry sections will have
+  a map_count LOWER than the writer's. This creates a consistent offset.
+
+  Detection: when a class back-ref doesn't match any known class, check if
+  (class_idx - offset) maps to a known class. Once detected, pre-register ALL
+  known classes at their offset-adjusted indices.
+
+  Root causes of MFC drift:
+  - CThumbnail CCamera backref registers object (+1 per thumbnail)
+  - v1 entity_base layer_ref creating inline CLayer (+1 per layer)
+  - Skipped rendering options, attribute containers, etc.
+
+  Resolution strategies:
+  - Fuzzy edge/vertex lookup (±15 search for nearby Edge objects)
+  - v2 scope metadata mc_ref synchronization
+  - CThumbnail deterministic parsing with CCamera object registration
+
+17.3 CEdge Entity Base Detection
+
+  In v5+, CEdge and CFace both have 12-byte entity bases but different layouts.
+  To detect CEdge vs CFace from an unknown class backref (e.g., Sawhorse class
+  collision where writer's CEdge class index collides with parser's CVertex):
+    Check if entity base bytes 4-7 all have values ≤1 (CEdge flags pattern).
+    CFace has material refs in bytes 0-3, which are typically non-zero.
+
+17.4 Dynamic Components
+
+  SketchUp Dynamic Components use formulas (e.g., `Pie!Slices-1`) to generate
+  copies programmatically. These would require a formula evaluator to handle,
+  which is beyond the scope of binary format parsing.
+
+================================================================================
+APPENDIX A: COMPLETE v2 BYTE MAP (Door2-0x6-8LH.skp, 9172 bytes)
+================================================================================
+
+This appendix provides a complete byte-level map of a representative v2 SKP
+file, demonstrating how every byte is accounted for.
+
+  Region               Start    End      Size    Description
+  -------------------  -------  -------  ------  --------------------------------
+  Header               0x0000   0x002F    48     Format string + version string
+  MD5 Checksum         0x002F   0x003F    16     16 raw bytes
+  Source Path          0x003F   0x007F   ~64     astring: original save path
+  CRC32                0x007F   0x0083     4     u32 LE checksum
+  Version Map          0x0083   0x029F   540     CVersionMap FFFF + 33 entries
+  Pre-data             0x029F   0x02A7     8     2 × u32 (format flags + hint)
+  CDib Thumbnail       0x02A7   0x05D2   811     FFFF + CDib class + PNG
+  Model Metadata       0x05D2   0x06CD   251     Inline settings (see 7.3.1)
+  Entity List          0x06CD   0x1966  4761     24F/79E/54V/2CI+2CD
+  Scope Metadata       0x1966   0x23D4  2670     Transforms + face blocks + root
+
+  Total: 9172 bytes (0x23D4), 100% accounted for.
+
+  Entity list breakdown (4761 bytes):
+    24 CFace objects     - entity_base(7) + plane(32) + loop_count(4) + CLoop + EU
+    79 CEdge objects     - entity_base(7) + sv_ref(2+) + ev_ref(2+) [+ trailing(2)]
+    54 CVertex objects   - 24 bytes (3 f64 coordinates)
+    2 CComponentInstance - entity_base(7) [+ def_ref + transform for standalone]
+    2 CComponentDefinition - entity_base(7) + def_index(2) + null(2)
+    CLayer, CLoop, CEdgeUse objects created inline
+
+  Scope metadata breakdown (2670 bytes):
+    CLayer(~22) + Scope#1 DoorKnob: def_meta(168) + extra_CI(120) + faces(648)
+    + CRelationship(58) + CLayer(26)
+    + Scope#0 FlushDoor24: def_meta(146) + faces(826)
+    + CRelationship(52) + CLayer(26)
+    + Root: metadata(267) + options(311)
+
+================================================================================
+APPENDIX B: KNOWN ISSUES AND EDGE CASES
+================================================================================
+
+B.1 v7 Tagless Faces
+  v7 faces inside CComponentDefinitions may lack class tags. Detection uses
+  unit normal pattern (3 f64 with magnitude ≈ 1.0) before CLoop. Current
+  detection finds ~54% of tagless faces; remaining are skipped.
+
+B.2 Self-Intersecting Polygons
+  Some faces (e.g., small eye shapes in 2D artwork) produce self-intersecting
+  boundaries from EU chains. The vertex ordering creates figure-8 shapes.
+  Near-duplicate vertex merging (distance < 0.1 inch) before triangulation
+  helps prevent degenerate sliver triangles.
+
+B.3 Concave Polygon Ear-Clipping
+  For bridge-edge merged polygons (multi-loop faces with holes), centroid-in-
+  polygon checks during ear-clipping prevent false ears that span across
+  openings. However, self-touching boundaries from bridge edges break ray-
+  casting, so skip centroid checks for bridge-merged polygons.
+
+B.4 v2 Scope Face Blocks are NOT Redundant
+  Despite appearing to duplicate entity list data, v2 scope metadata face
+  blocks contain ESSENTIAL faces not present in the entity list. Example:
+  5 of 6 FlushDoor24 faces and 8 of 15 root frame faces exist ONLY in
+  scope metadata. Always parse and add these faces.
+
+B.5 CGroup Local vs World Space
+  Some CGroup instances store vertices in local space (relative to group
+  origin), not world space. Applying un-transform to already-local vertices
+  produces double-offset. Detect by comparing vertex bbox center distance
+  to local origin vs world-space expected position.
+
+================================================================================
+APPENDIX C: REFERENCES
+================================================================================
+
+  - Microsoft Foundation Classes (MFC) CArchive documentation:
+    https://docs.microsoft.com/en-us/cpp/mfc/reference/carchive-class
+
+  - MFC Serialization mechanism:
+    https://docs.microsoft.com/en-us/cpp/mfc/serialization-in-mfc
+
+  - SketchUp Ruby API (for model structure understanding):
+    https://ruby.sketchup.com/
+
+  - SketchUp C API (for entity type reference):
+    https://extensions.sketchup.com/developer_center/sketchup_c_api
+
+================================================================================
+APPENDIX D: v6+ FORMAT DISCOVERIES (Sessions 46-47)
+================================================================================
+
+D.1 wstring v2 Files (v2.0.78, v2.1.34)
+  Some v2 files use UTF-16 wstring encoding throughout (FF FE FF header).
+  Detection: first 3 bytes of file = FF FE FF.
+  CLayer format differs: name + null + display(wstr) + null + vis + RGBA
+  + folder(wstr) + 8zeros (no flags u16).
+  CLayer inline in entity base uses same wstring format.
+  Scope metadata: different layout from ASCII v2. Face blocks can be
+  scanned via CFace class backref.
+  EU format in face blocks: edge_ref(u16) only per entry (no reversed,
+  loop_ref, next_ref). CEdgeUse tag appears once at chain start.
+  Multiple CEdgeUse class registrations possible (different schemas).
+
+D.2 v6 CComponentDefinition
+  v6 NEW: entity_base(12) + def_index(u16) + 8zeros + layer_count(u32)
+    + per layer: CLayer_backref(u16) + null(u16) + wstring(name)
+    + CLayer_data + mc_ref(u16) + cd_count(u32) [+ entity_count(u32)]
+  v6 INST variant A: null(u16) + wstring(name) + CLayer_data + preamble
+    (when next bytes are FF FE FF wstring)
+  v6 INST variant B: null(u16) + entity_base(12) + def_index(u16)
+    + padding(4) + layer_count(u32) + CLayer_INST
+    (when next bytes are NOT wstring)
+  v6 empty: no entity data (CAttributeContainer follows immediately,
+    detected by peek_u16() == 0xFFFF)
+
+D.3 v6 CLayer Data (shared format inside CDs and standalone)
+  null(u8) + gap(u16) + wstring(display) + null(u8) + vis(u8)
+  + RGBA(4) + wstring(folder) + 8zeros(8) + f64(8) + 5zeros(5)
+  + mc_ref(u16) + preamble
+  mc_ref is writer's MFC counter — MUST sync our counter to this value
+  to prevent drift on subsequent entity parsing.
+
+D.4 v6 Implicit Faces (after CLoop header)
+  Format: prefix(8) + normal(3*f64) + distance(f64) + loop_count(u32) = 44B
+  The 8-byte prefix is flags (00 01 01 00 00 00 00 00 typical), NOT material.
+  Normal starts at offset +8 from CLoop data end.
+
+D.5 v4/v5 Implicit Faces (after CLoop header)
+  Format: normal(3*f64) + distance(f64) + loop_count(u32) = 36 bytes
+  NO prefix/entity_base. Normal starts immediately after CLoop data.
+  Validate: next u16 after 36B must be CEdgeUse class tag.
+
+D.6 v1/v2 Implicit Faces (after CLoop header)
+  Format: NULL(2) + prefix(3) + normal(3*f64) + distance(f64)
+  + loop_count(u32) = 41 bytes.
+  Scan +0..+4 bytes ahead for valid unit normal (mag² ∈ [0.95, 1.05]).
+
+D.7 CThumbnail Camera Data Size
+  Size depends on CCamera SCHEMA version (from version map), NOT file version:
+    CCamera schema <= 5: 151 bytes
+    CCamera schema >= 6: 176 bytes
+  After camera data, CDib ref may be 0x0000 (empty). When empty, scan
+  byte-by-byte (up to 60 bytes) for CDib class backref — the actual CDib
+  may follow after metadata padding. Check ALL registered CDib class indices.
+
+D.8 CFaceTextureCoords (schema 4)
+  Appears inline before a face's entity base (wrapped in CAttributeContainer).
+  Structure: CAttributeContainer(FFFF+class+2null) → CFaceTextureCoords(FFFF+class)
+  → 154 bytes data: prefix(6zeros) + front_UV(9*f64=72B) + back_UV(9*f64=72B)
+  + trailing(4zeros)
+  UV matrices are 3x3 affine transforms mapping 3D→2D texture coords.
+  Face entity base follows AFTER the 154 bytes.
+  Face with FTXC has fmat=0 in entity base (material from texture context).
+
+D.9 v6 CEdge Trailing Ref
+  Standalone CEdges (not inline within CEdgeUse) have a trailing u16
+  partner ref after end_vertex that MUST be consumed. Without this,
+  subsequent entity data is misaligned by 2 bytes.
+
+D.10 MFC Class Index Drift
+  CLayer inline registrations within CDs can shift class indices by 1+.
+  When a class backref at index N isn't found, check N-1, N-2, N-3 for
+  known classes. Common pattern: CD backref uses class@(CCD_idx+1)
+  because the inline CLayer created an extra class entry.
+
+D.11 CI Material Inheritance
+  v5+ CI entity base uses CFace format: null(u16) + mat_ref(u16) +
+  flags(4) + layer_ref(u16) + extra(u16). NOT CEdge format.
+  CI material applies to unmaterialed faces (material_idx < 0) in
+  the CI's definition scope only.
+
+D.12 Container Definitions (Nested CI Instancing)
+  Some CDs contain no direct faces — only CIs to other CDs.
+  These "container" definitions have 0 target vertices but have nested
+  CIs with containing_scope matching the container's scope.
+  Register container transforms in ci_transforms so nested CIs can
+  compose their transforms with the container's transform.
+  When collecting def_face_ranges for multi-instance CDs with 0 direct
+  faces, include descendant scope faces.
+
+D.13 CComponentInstance with CAttributeContainer
+  v7+ CIs may have inline CAttributeContainer + CAttributeNamed before
+  entity base (Dynamic Components attribute data). Detect by checking
+  if first u16 is a CAttributeContainer class backref. Scan forward
+  for valid entity_base + 13-double transform pattern.
+
+D.14 Edge-Based Face Boundary Reconstruction
+  EU chains can produce vertices in wrong order (scrambled boundaries).
+  Detection: < 50% of consecutive vertex pairs are edge-connected.
+  Fix: trace edge loops using model edges to reconstruct correct polygon
+  boundary. Use ID-based adjacency first (exact), fall back to
+  coordinate-based (round to 4 decimal places) when face vertices
+  are different objects from edge vertices (inline EU edge creation).
+  Largest loop by area = outer boundary; smaller loops = holes.
+
+================================================================================
+END OF SPECIFICATION
+================================================================================

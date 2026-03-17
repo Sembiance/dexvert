@@ -1,11 +1,11 @@
-# Supported File Formats (3,635)
+# Supported File Formats (3,639)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (620)
+## Archive (623)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -103,6 +103,7 @@ archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/bzip2) | .bz2 
 archive | [C64 LiBRary](http://fileformats.archiveteam.org/wiki/LBR_(Commodore)) | .lbr | [DirMaster](https://style64.org/dirmaster) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/c64Library/)
 archive | [C64 NBZ Disk Image](https://c64preservation.com/dp.php?pg=nibtools) | .nbz | [nibconv](https://github.com/rittwage/nibtools) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/nbzDiskImage/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/Cabinet) | .cab | [cabextract](https://www.cabextract.org.uk/) [sqc](https://www.speedproject.com/download/old/) [deark](https://entropymine.com/deark/) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [34 sample files](https://sembiance.com/fileFormatSamples/archive/cab/)
+archive | Castle Strike Game Archive | .rda | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/castleStrikeGameArchive/)
 archive | [CAZIP File](http://fileformats.archiveteam.org/wiki/CAZIP) | .caz _ | [deark](https://entropymine.com/deark/) [cazip](https://support.broadcom.com/external/content/release-announcements/CAZIP.exe-CAZIPXP.exe-and-Applyptf/7844) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/cazip/)
 archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [hfsexplorer](https://github.com/unsound/hfsexplorer) [fuseiso](https://sourceforge.net/projects/fuseiso) [aaru](https://github.com/aaru-dps/Aaru) [deark](https://entropymine.com/deark/) [IsoBuster](https://www.isobuster.com/isobuster.php) [cabextract](https://www.cabextract.org.uk/) | [113 sample files](https://sembiance.com/fileFormatSamples/archive/iso/) - This is a pretty big catch-all for many iso-like formats. Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs as each CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
 archive | CEBE Compress Expand Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [11 sample files](https://sembiance.com/fileFormatSamples/archive/cebeCompressExpandPacked/)
@@ -343,7 +344,7 @@ archive | Maxis game data archive | .package | [gameextractor](https://sourcefor
 archive | [MDCD Archive](http://fileformats.archiveteam.org/wiki/MDCD) | .md .cd | [deark](https://entropymine.com/deark/) [mdcd](http://cd.textfiles.com/megarom/megarom1/ARC_LBR/MDCD10.ZIP) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/mdcd/)
 archive | MechWarrior 4 game data | .mw4 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/mechWarrior4GameData/)
 archive | MegaPaint Symbols Library | .lib | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/megaPaintSymbolsLibrary/)
-archive | MENGx Archive | .mfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/mengxArchive/)
+archive | MENGx Archive | .mfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mengxArchive/)
 archive | Meyer/Glass Interactive Game Archive | .mgf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/meyerGlassGameArchive/)
 archive | [MGT Filesystem](https://sinclair.wiki.zxnet.co.uk/wiki/MGT_filesystem) | .mgt | [hcdisk](https://github.com/0sAND1s/HCDisk) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mgtFilesystem/)
 archive | [Microfox PUT Archive](http://fileformats.archiveteam.org/wiki/PUT) | .put .ins | [microfoxGET](https://archive.org/details/msdos_festival_PUT345) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/microfoxPUT/)
@@ -394,6 +395,7 @@ archive | [Oberon AsciiCoder archive](https://web.archive.org/web/20170312142117
 archive | Obscure HV PackFile game archive | .hvp .001 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/obscureHVPackFileGameArchive/)
 archive | OPK PAK | .osp .ovp .obp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/opkPAK/)
 archive | OPTLINK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/optlinkPacked/)
+archive | Order of War Game Archive | .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/orderOfWarGameArchive/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [OS/2 Extended Attributes](http://fileformats.archiveteam.org/wiki/OS/2_extended_attributes) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/os2ExtendedAttributes/)
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [unpack2](https://github.com/Sembiance/dexvert) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/)
@@ -477,6 +479,7 @@ archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar .
 archive | RPG Maker Encrypted Archive | .rgss2a .rgss3a .rgssad | [rgssExtractor](https://github.com/KatyushaScarlet/RGSS-Extractor) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/rpgMakerEncryptedArchive/)
 archive | [RTPatch Self-Extracting Archive](http://justsolve.archiveteam.org/wiki/RTPatch) | .exe | [dosEXEExtract](https://github.com/Sembiance/dexvert/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/rtPatchSFX/)
 archive | Rumble Fighter game data archive | .nsz | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/rumbleFighterGameDataArchive/)
+archive | Runes of Magic Game Archive | .fdb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/runesOfMagicGameArchive/)
 archive | [SAB Diskette Utility disk image](http://fileformats.archiveteam.org/wiki/SABDU) | .sdu | [dd](https://www.gnu.org/software/coreutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/sabDisketteUtilityDiskImage/)
 archive | Sacred PAK Archive | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sacredPAK/)
 archive | [Sango Fighter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/sangoFighterGameArchive/)
@@ -759,7 +762,7 @@ audio | [VOCPACK Compressed Audio](https://www.rarewares.org/rrw/vocpack.php) | 
 audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav .bwf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [29 sample files](https://sembiance.com/fileFormatSamples/audio/wav/)
 audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | [sox](http://sox.sourceforge.net) [nihav](https://git.nihav.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wavPack/)
-audio | WBNK Audio Archive | .wbnk | [unwbnk](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/wbnkAudioArchive/)
+audio | WBNK Audio Archive | .wbnk | [unwbnk](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/audio/wbnkAudioArchive/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
 audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
 audio | Wwise sound Bank | .bnk | [ffmpeg](https://ffmpeg.org/) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/wwiseSoundBank/)
@@ -2321,7 +2324,7 @@ other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScr
 
 
 
-## Poly (67)
+## Poly (68)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 poly | [3D Manufacturing Format](http://fileformats.archiveteam.org/wiki/3MF) | .3mf | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) | [4 sample files](https://sembiance.com/fileFormatSamples/poly/threeMF/)
@@ -2341,6 +2344,7 @@ poly | [Direct3D Object](http://fileformats.archiveteam.org/wiki/X_(DirectX)) | 
 poly | [Doom 3 Mesh](https://modwiki.dhewm3.org/MD5MESH_(file_format)) | .md5mesh | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/doom3Mesh/)
 poly | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [AccuTrans3D](http://www.micromouse.ca/) [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/dxf/) - I would love to be able to determine if it's a flat 2D drawing or an actual 3D model, seems about 50/50 and when a 2D drawing is rendered as a polygon, it's hard to make out/see.
 poly | [Electric Image 3D File](http://fileformats.archiveteam.org/wiki/FACT) | .fact .fac | [poly2glb](https://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/electricImage3DFile/)
+poly | EPLYBNDS Poly | .ply | [poly2glb](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/poly/eplybndsPoly/)
 poly | [Extensible 3D](http://fileformats.archiveteam.org/wiki/X3D) | .x3d .x3db .x3dv .x3dz .x3dbz .x3dvz | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/x3d/)
 poly | [Geomview Object File Format](http://fileformats.archiveteam.org/wiki/OFF_(Geomview_Object_File_Format)) | .off | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/objectFileFormat/)
 poly | [Ghoul 2 Model](http://fileformats.archiveteam.org/wiki/GLM) | .glm | [milkShape3D](http://www.milkshape3d.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/ghoul2Model/)
@@ -2379,7 +2383,7 @@ poly | [RenderWare 3D Model](http://fileformats.archiveteam.org/wiki/RenderWare_
 poly | [Return to Castle Wolfenstein MDC](https://mino-git.github.io/rtcw-wet-blender-model-tools/publications/MDCFileFormat.pdf) | .mdc | [assimp](https://github.com/assimp/assimp) [milkShape3D](http://www.milkshape3d.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/rtcwMDC/)
 poly | [Rhino OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [threeDM2GLB](https://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/openNURBS/)
 poly | Sculpt 3D Scene | .scene | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/poly/sculpt3DScene/)
-poly | SGI Open Inventor Scene Graph | .iv | [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [15 sample files](https://sembiance.com/fileFormatSamples/poly/openInventor/)
+poly | SGI Open Inventor Scene Graph | .iv | [poly2glb](https://github.com/Sembiance/dexvert) [AccuTrans3D](http://www.micromouse.ca/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [19 sample files](https://sembiance.com/fileFormatSamples/poly/openInventor/)
 poly | Shadowgrounds 3D model | .s3d | [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/shadowgrounds3DModel/)
 poly | [Shockwave 3D Scene](http://fileformats.archiveteam.org/wiki/Wavefront_OBJ) | .w3d | [shockwave3DWorldConverter](https://github.com/tomysshadow/Shockwave-3D-World-Converter) | [11 sample files](https://sembiance.com/fileFormatSamples/poly/shockwave3D/)
 poly | [Simply 3D Geometry](http://fileformats.archiveteam.org/wiki/Simply_3D_Geometry) | .ged | [simply3D20](https://archive.org/details/premier2_cd) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/simply3DGeometry/)

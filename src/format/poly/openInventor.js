@@ -5,5 +5,5 @@ export class openInventor extends Format
 	name       = "SGI Open Inventor Scene Graph";
 	ext        = [".iv"];
 	magic      = ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor", /^fmt\/(832|833)( |$)/];
-	converters = ["AccuTrans3D[matchType:magic]", "threeDObjectConverter[matchType:magic]"];
+	converters = ["poly2glb[type:openInventor]", "AccuTrans3D[matchType:magic]", "threeDObjectConverter[matchType:magic]"];
 }

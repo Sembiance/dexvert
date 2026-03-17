@@ -18,7 +18,7 @@ export default async function README(xlog)
 	await fileUtil.writeTextFile(path.join(import.meta.dirname, "..", "..", "README.md"), `# dexvert - **D**ecompress **EX**tract con**VERT**
 Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern equivalents (png/svg/pdf/mp3/mp4/etc.)
 
-See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
+See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats.
 
 Utilizes **${Object.keys(programs).length.toLocaleString()}** helper programs.
 

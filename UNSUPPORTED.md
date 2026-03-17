@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,028)
+# Unsupported File Formats (4,027)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -3934,7 +3934,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (100)
+## Poly (99)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3970,7 +3970,6 @@ Family/Format | Name | Extensions | Notes
 [poly/dynaCADDPart](https://discmaster.textfiles.com/search?format=dynaCADDPart) | DynaCADD Part | .prt .dpt | 
 [poly/elasticRealityShape](https://discmaster.textfiles.com/search?format=elasticRealityShape) | Elastic Reality Shape | .er | 
 [poly/eMachineShopModel](https://discmaster.textfiles.com/search?format=eMachineShopModel) | eMachineShop model | .ems | 
-[poly/eplybndsPoly](https://discmaster.textfiles.com/search?format=eplybndsPoly) | EPLYBNDS Poly | .ply | [7 sample files](https://sembiance.com/fileFormatSamples/poly/eplybndsPoly/)
 [poly/expert4DModel](https://discmaster.textfiles.com/search?format=expert4DModel) | Expert 4D model | .maq | 
 [poly/fastRayObject](https://discmaster.textfiles.com/search?format=fastRayObject) | FastRay object |  | 
 [poly/fastRayScene](https://discmaster.textfiles.com/search?format=fastRayScene) | FastRay scene |  | 

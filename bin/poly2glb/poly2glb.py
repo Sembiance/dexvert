@@ -80,11 +80,30 @@ def convert_openinventor(input_path, output_path, verbose=False):
     print(f"Done. Output: {output_path}")
 
 
+def convert_eplybnds(input_path, output_path, verbose=False):
+    """Convert an EPLYBNDS file to GLB."""
+    from eplybnds import parse_eplybnds, convert_to_glb
+
+    print(f"Parsing EPLYBNDS file: {input_path}")
+    model = parse_eplybnds(input_path, verbose=verbose)
+
+    print(f"  Meshes: {len(model.meshes)}")
+    print(f"  Vertices: {model.vertex_count}")
+    print(f"  Stride: {model.vertex_stride}")
+    print(f"  Indices: {len(model.indices)}")
+    print(f"  Has colors: {len(model.colors) > 0}")
+
+    print(f"Converting to GLB: {output_path}")
+    convert_to_glb(model, output_path, verbose=verbose)
+    print(f"Done. Output: {output_path}")
+
+
 # Converter registry - add new types here
 CONVERTERS = {
     'sketchUp': convert_sketchup,
     'electricImage3D': convert_electricimage3d,
     'openInventor': convert_openinventor,
+    'eplybnds': convert_eplybnds,
 }
 
 

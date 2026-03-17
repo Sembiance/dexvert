@@ -368,15 +368,15 @@ export const WEAK_VALUES =
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, PAD, 000_SFDX, PRJ_PROJ, DSRES_DSIGTANK
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, AQA, MAP_2, 000_10, RSDK_RSDK, ARC_9, SND_SND2, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3
+	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK 000_SFDX, PRJ_PROJ, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, PAK_50
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, AQA, MAP_2, 000_10, RSDK_RSDK, ARC_9, SND_SND2, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3, SMA_SMA
 	// SEEN TWICE:
-	// 		XFS, DAT_PAK, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, CAR_FRAC, BANK_QL, CDF_TXTR
+	// 		XFS, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, CAR_FRAC, BANK_QL, CDF_TXTR, PAD
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
-	/^geArchive: DAT_(11|42|48|53|57|DG|RES)( |$)/,
+	/^geArchive: DAT_(11|42|48|53|57|DG|RES|PAK)( |$)/,
 	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
 	/^geArchive: PAK_(7|11|30|41|42|49|DATA|FORM)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
@@ -522,8 +522,8 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: WIC (Fake!), X1, Terse, QuArk, BOA, 777, DZip (Nolan Pflug), ZPack
-	// SEEN TWICE: PPMN (Max Smirnov)
+	// SEEN  ONCE: WIC (Fake!), X1, Terse, BOA, 777, DZip (Nolan Pflug), ZPack
+	// SEEN TWICE: PPMN (Max Smirnov), QuArk
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,

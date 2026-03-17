@@ -17,10 +17,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add formats to poly2glb:
-	poly/esriShape
-	poly/eplybndsPoly
-
 * Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt
 
 * Goal: Get rid of 86box

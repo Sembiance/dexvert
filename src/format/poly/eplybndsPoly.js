@@ -6,5 +6,5 @@ export class eplybndsPoly extends Format
 	ext            = [".ply"];
 	forbidExtMatch = true;
 	magic          = ["EPLYBNDS Poly"];
-	unsupported    = true;
+	converters     = ["poly2glb[type:eplybnds]"];
 }

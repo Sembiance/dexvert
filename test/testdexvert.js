@@ -227,7 +227,8 @@ const SUPPORTING_FILES = {
 	archive :
 	{
 		cloneCDImage : /\.ccd$/i,
-		pog          : /\.pnm$/i
+		pog          : /\.pnm$/i,
+		redArchive   : /TIMETREK\.001$/
 	},
 	document :
 	{
@@ -540,7 +541,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", "imf"],
 	[/poly\/panda3DModel\/Spotlight \(1\)\.egg$/i, "text", "txt"],
 	[/poly\/polygonFileFormat\/example1\.ply$/i, "text", "txt"],
-	[/poly\/quickDraw3D\/testn\.3dmf$/i, "text", "txt"],
+	[/poly\/quickDraw3D\/test[inp]\.3dmf$/i, "text", "txt"],
 	[/poly\/trueSpace3D\/dna\.cob$/i, "text", "txt"],
 	[/poly\/openGEX\/(artifact_advanced|Example|solar_engine)\.ogex$/i, "text", true],
 	[/video\/idRoQ\/(comrooms|introcom)\.gjd$/i, "image", "embeddedJPG"],

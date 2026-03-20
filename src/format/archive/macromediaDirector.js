@@ -1,5 +1,7 @@
 import {Format} from "../../Format.js";
 
+const GENERIC_MAGIC = [/^geArchive: (CXT_RIFX|CXT_XFIR)( |$)/, "Generic RIFX container"];	// can show up with macromediaProjector too
+
 export class macromediaDirector extends Format
 {
 	name           = "Macromedia Director";
@@ -7,11 +9,12 @@ export class macromediaDirector extends Format
 	ext            = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr"];
 	forbidExtMatch = true;
 	magic          = [
-		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", "Director Cast data", "Format: Director",
-		/^geArchive: (CXT_RIFX|CXT_XFIR)( |$)/,
+		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Macromedia Director Shockwave Cast", "Director Cast data", "Format: Director",
+		...GENERIC_MAGIC,
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
-	idMeta = ({macFileType, macFileCreator}) => (
+	weakMagic = GENERIC_MAGIC;
+	idMeta    = ({macFileType, macFileCreator}) => (
 		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MJ${suffix}`, `MV${suffix}`, "D!11", "D*11", "DC11", "FGDC", "FGDM"].includes(macFileType) &&
 			["AFTB", ...[0, 1, 3, 7].map(v => `MD0${v}`), ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||
 			(macFileType==="XOBJ" && macFileCreator==="MMDR") ||

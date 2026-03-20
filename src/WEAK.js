@@ -469,6 +469,7 @@ export const WEAK_VALUES =
 	/^geViewer: AFS_AFS_WE00( |$)/,
 	/^geViewer: GLI_GLIB_IMG( |$)/,
 	/^geViewer: J2D_PLIB_PICTURE( |$)/,
+	/^geViewer: MP3( |$)/,
 	/^geViewer: OGG_OGG( |$)/,
 	/^geViewer: PKBARC_BMT( |$)/,
 	/^geViewer: TXT( |$)/,

@@ -6,7 +6,7 @@ export class tga extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/TGA";
 	ext          = [".tga", ".targa", ".tpic", ".icb", ".vda", ".vst"];
 	mimeType     = "image/x-tga";
-	magic        = ["Truevision TGA", "Targa image data", "image/x-tga", "deark: tga (TGA)", /^geViewer: TGA( |$)/, /^Truevision TARGA \(Type \d+\) :(tga|vda):$/, /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
+	magic        = ["Truevision TGA", "Targa image data", "image/x-tga", "deark: tga (TGA)", /^geViewer: TGA( |$)/, "image:TgaFormat", /^Truevision TARGA \(Type \d+\) :(tga|vda):$/, /^fmt\/402( |$)/, /^x-fmt\/367( |$)/];
 	weakMagic    = ["image/x-tga"];
 	idMeta       = ({macFileType, macFileCreator}) => (macFileType==="TPIC" && ["8BIM", "GKON", "ogle", "xRes"].includes(macFileCreator)) || (macFileType==="TARG" && macFileCreator==="GKON");
 	metaProvider = ["image"];
@@ -20,7 +20,7 @@ export class tga extends Format
 		"deark[module:tga][matchType:magic][opt:tga:trans=0]", "deark[module:tga][matchType:magic][hasExtMatch][opt:tga:trans=0]", "wuimg[format:tga]", "imconv[format:tga][matchType:magic]", "iconvert",
 		...["imageAlchemy", "paintDotNet[hasExtMatch]", "keyViewPro", "corelDRAW[hasExtMatch]", "pv", "photoDraw"].map(v => `${v}[noPrevFailedVerify]`),
 		"nconvert[format:tga]", "gimp", "iio2png", "tkimgConvert", "gameextractor[renameOut][codes:TGA]",
-		...["noesis[type:image][matchType:magic]", "hiJaakExpress", "canvas5", "canvas"].map(v => `${v}[hasExtMatch][noPrevFailedVerify]`)
+		...["GARbro[types:image:TgaFormat][matchType:magic]", "noesis[type:image][matchType:magic]", "hiJaakExpress", "canvas5", "canvas"].map(v => `${v}[hasExtMatch][noPrevFailedVerify]`)
 	].map(converter => (["deark", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
 	// many converters will produce garbage with weak TGA magics. deark too, but if we have an extension+magic match, make an exception. recoil2png and iio2png seem to be pretty strict, so allow those as-is
 

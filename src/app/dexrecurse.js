@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil, urlUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil, sysUtil, urlUtil} from "xutil";
 import {path} from "std";
 import {initRegistry} from "../dexUtil.js";
 import {flexMatch} from "../identify.js";
@@ -318,6 +318,9 @@ routes.set("/status", async request =>
 
 	if(query?.verbose)
 	{
+		r.memInfo = await sysUtil.memInfo();
+		r.cpuIdle = await sysUtil.getCPUIdleUsage();
+		r.ioStatus = xu.parseJSON((await runUtil.run("iostat", ["-o", "JSON"]))?.stdout);
 		r.rpcStatus = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/status`, {asJSON : true});
 		r.osStatus = await xu.fetch(`http://${C.OS_SERVER_HOST}:${C.OS_SERVER_PORT}/status`, {asJSON : true});
 	}

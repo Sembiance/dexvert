@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,027)
+# Unsupported File Formats (4,026)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (295)
+## Archive (294)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -222,7 +222,6 @@ Family/Format | Name | Extensions | Notes
 [archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?format=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
 [archive/questPowerGUIPacked](https://discmaster.textfiles.com/search?format=questPowerGUIPacked) | Quest PowerGUI Packed | .dll | 
 [archive/realArcadeGameInstaller](https://discmaster.textfiles.com/search?format=realArcadeGameInstaller) | RealArcade Game Installer | .rgs | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realArcadeGameInstaller/)
-[archive/redArchive](https://discmaster.textfiles.com/search?format=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | [2 sample files](https://sembiance.com/fileFormatSamples/archive/relicChunkyContainerGameData/) - Over 200,000 of these on discmaster and they don't appear to extract into any files that can be acted upon, so just skip this
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 

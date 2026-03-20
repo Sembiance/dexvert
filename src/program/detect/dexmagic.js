@@ -267,6 +267,7 @@ const DEXMAGIC_CHECKS = {
 	"EPLYBNDS Poly"         : [{offset : 0, match : "EPLYBNDS"}],
 	"Quake Model"           : [{offset : 0, match : "IDPO"}, {offset : 4, match : [0x06]}],
 	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
+	"Starbreeze Model"      : [{offset : 0, match : "MOS DATAFILE"}, {offset : 0x30, match : ["EXTENDEDMODEL"]}],
 
 	// text
 	"Gentoo ebuild"               : [{offset : 0, match : "EAPI="}],
@@ -516,6 +517,133 @@ const DEXMAGIC_CUSTOMS = [
 			return;
 
 		return "Macromedia Projector (alt)";
+	},
+
+	async function qtvrFile(r)
+	{
+		// vibe coded by claude
+		/* eslint-disable no-bitwise, @stylistic/no-mixed-operators, unicorn/numeric-separators-style */
+		if(r.f.input.size<4096)
+			return;
+
+		const head = await fileUtil.readFileBytes(r.f.input.absolute, 128);
+		const p = r.f.input.absolute, fsize = r.f.input.size;
+		let moov = null, scanStart = 0, scanEnd = fsize;
+
+		// MacBinary II: byte 0 = 0, name length 1-63, file type "MooV"
+		const nameLen = (head.getUInt32BE(0)>>>16) & 0xFF;
+		if(fsize>=128 && (head.getUInt32BE(0)>>>24)===0 && nameLen>=1 && nameLen<=63 && head.getString(65, 4)==="MooV")
+		{
+			const dfLen = head.getUInt32BE(83), rfLen = head.getUInt32BE(87);
+			scanStart = 128;
+			scanEnd = 128 + dfLen;
+
+			if(rfLen>16)
+			{
+				const resStart = 128 + Math.ceil(dfLen/128)*128;
+				if(resStart+rfLen<=fsize)
+				{
+					const rf = await fileUtil.readFileBytes(p, rfLen, resStart);
+					const rdBase = rf.getUInt32BE(0), mapOff = rf.getUInt32BE(4);
+					if(mapOff+28<=rfLen)
+					{
+						const tlOff = rf.getUInt16BE(mapOff+24), numTypes = (rf.getUInt16BE(mapOff+tlOff)&0xFFFF)+1;
+						for(let t=0; t<numTypes && !moov; t++)
+						{
+							const te = mapOff+tlOff+2+t*8;
+							if(te+8>rfLen || rf.getString(te, 4)!=="moov")
+								continue;
+							const refOff = mapOff+tlOff+rf.getUInt16BE(te+6);
+							if(refOff+8>rfLen)
+								break;
+							const rdStart = rdBase+(rf.getUInt32BE(refOff+4)&0xFFFFFF);
+							if(rdStart+4>rfLen)
+								break;
+							const rdLen = rf.getUInt32BE(rdStart), ms = rdStart+4;
+							if(ms+rdLen>rfLen)
+								break;
+							const hasMoovHdr = rdLen>8 && rf.getString(ms+4, 4)==="moov";
+							moov = await fileUtil.readFileBytes(p, rdLen-(hasMoovHdr?8:0), resStart+ms+(hasMoovHdr?8:0));
+						}
+					}
+				}
+			}
+		}
+
+		// Scan atoms for moov
+		for(let off=scanStart; !moov && off+8<=scanEnd;)
+		{
+			const ah = await fileUtil.readFileBytes(p, 8, off);
+			const sz = ah.getUInt32BE(0);
+			if(sz<8 || off+sz>fsize)
+				return;
+			if(ah.getString(4, 4)==="moov")
+				moov = await fileUtil.readFileBytes(p, sz-8, off+8);
+			off += sz;
+		}
+
+		if(!moov)
+			return;
+
+		// Search moov for QTVR indicators
+		let ctyp=null, hasNAVG=false, hasPanoHdlr=false, trefObje=false;
+
+		for(let off=0; off+8<=moov.length;)
+		{
+			const sz = moov.getUInt32BE(off), tp = moov.getString(off+4, 4);
+			if(sz<8 || off+sz>moov.length)
+				break;
+
+			if(tp==="udta")
+			{
+				for(let uo=off+8; uo+8<=off+sz;)
+				{
+					const us = moov.getUInt32BE(uo), ut = moov.getString(uo+4, 4);
+					if(us<8)
+						break;
+					if(ut==="ctyp" && us>=12)
+						ctyp = moov.getString(uo+8, 4);
+					if(ut==="NAVG")
+						hasNAVG = true;
+					uo += us;
+				}
+			}
+
+			if(tp==="trak")
+			{
+				for(let to=off+8;to+8<=off+sz;)
+				{
+					const ts = moov.getUInt32BE(to), tt = moov.getString(to+4, 4);
+					if(ts<8)
+						break;
+					if(tt==="mdia")
+					{
+						for(let mo=to+8; mo+8<=to+ts;)
+						{
+							const ms = moov.getUInt32BE(mo), mt = moov.getString(mo+4, 4);
+							if(ms<8)
+								break;
+							if(mt==="hdlr" && ms>=20 && ["STpn", "stpn"].includes(moov.getString(mo+16, 4)))
+								hasPanoHdlr = true;
+							mo += ms;
+						}
+					}
+					if(tt==="tref" && ts>=16 && moov.getString(to+12, 4)==="obje")
+						trefObje = true;
+					to += ts;
+				}
+			}
+
+			off += sz;
+		}
+
+		if(ctyp==="STpn" || ctyp==="stpn" || hasPanoHdlr)
+			return "qtvrPano";
+		if(ctyp==="stna" || hasNAVG)
+			return "qtvrObject";
+		if(ctyp==="qtvr")
+			return trefObje ? "qtvrObject" : "qtvrPano";
+		/* eslint-enable no-bitwise, @stylistic/no-mixed-operators, unicorn/numeric-separators-style */
 	},
 
 	async function vCard(r)

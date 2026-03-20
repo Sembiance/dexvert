@@ -52,7 +52,7 @@ if [[ "$(hostname)" == dexdrone* ]]; then
 	rm -f .X*lock
 	rm -rf 7777-runtime-dir.*
 	rm -f ink_ext*
-	rm -rf .org.chromium*
+	fd --type=d ".org.chromium" -x rm -rf {} \;
 fi
 rm -f OSL_PIPE*
 rm -f file??????

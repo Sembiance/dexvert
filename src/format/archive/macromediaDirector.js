@@ -25,6 +25,9 @@ export class macromediaDirector extends Format
 		// Next, try going straight to directorCastRipper12, which will handle cast files more directly
 		"directorCastRipper12",
 
+		// this is based on SCUMMVM director support, I don't trust it 100% but it's pretty good
+		"undirector",
+
 		// Some files like easyData.dxr are not properly handled by directorCastRipper12. So we use 'dirOpener' which actually re-packs the file as a modern director file, and then pass that to directorCastRipper12
 		// This isn't super ideal because dirOpener can mess up assets, but it's better than having nothing at all
 		"projectorRays -> dirOpener -> directorCastRipper12",

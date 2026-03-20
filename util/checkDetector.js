@@ -94,7 +94,7 @@ async function checkDetector(detectorid)
 			return;
 
 		const [family, format] = path.relative(SAMPLES_DIR_PATH, sampleFilePath).split("/");
-		matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).replaceAll(/[\n\t\r]/g, " ").innerTruncate(30), magic : magic.innerTruncate(65), confidence : detection.confidence});
+		matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).replaceAll(/[\n\t\r]/g, " ").innerTruncate(35), magic : magic.innerTruncate(100), confidence : detection.confidence});
 	}, -1);
 
 	if(argv.unique)

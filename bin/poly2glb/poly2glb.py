@@ -98,12 +98,47 @@ def convert_eplybnds(input_path, output_path, verbose=False):
     print(f"Done. Output: {output_path}")
 
 
+def convert_fastfst(input_path, output_path, verbose=False):
+    """Convert a FastFST archive to GLB."""
+    from fastFST import parse_fst, convert_to_glb
+
+    print(f"Parsing FastFST file: {input_path}")
+    model = parse_fst(input_path, verbose=verbose)
+    print(f"  Meshes: {len(model.meshes)}")
+
+    print(f"Converting to GLB: {output_path}")
+    convert_to_glb(model, output_path, verbose=verbose)
+    print(f"Done. Output: {output_path}")
+
+
+def convert_starbreezemodel(input_path, output_path, verbose=False):
+    """Convert a Starbreeze XMD model to GLB."""
+    from starbreezeModel import parse_xmd, convert_to_glb
+
+    print(f"Parsing Starbreeze XMD file: {input_path}")
+    model = parse_xmd(input_path, verbose=verbose)
+
+    total_verts = sum(len(m.positions) for m in model.meshes)
+    total_tris = sum(len(m.triangles) // 3 for m in model.meshes)
+    print(f"  Variant: {model.variant}")
+    print(f"  Meshes: {len(model.meshes)}")
+    print(f"  Vertices: {total_verts}")
+    print(f"  Triangles: {total_tris}")
+    print(f"  Name: {model.name}")
+
+    print(f"Converting to GLB: {output_path}")
+    convert_to_glb(model, output_path, verbose=verbose)
+    print(f"Done. Output: {output_path}")
+
+
 # Converter registry - add new types here
 CONVERTERS = {
     'sketchUp': convert_sketchup,
     'electricImage3D': convert_electricimage3d,
     'openInventor': convert_openinventor,
     'eplybnds': convert_eplybnds,
+    'fastFST': convert_fastfst,
+    'starbreezeModel': convert_starbreezemodel,
 }
 
 

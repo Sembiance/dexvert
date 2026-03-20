@@ -1,0 +1,278 @@
+Starbreeze Model (XMD) File Format Specification
+=================================================
+Starbreeze Engine model files (.xmd) from Enclave / Riddick
+Reverse-engineered from 100 sample files
+Vibe coded by Claude
+
+
+1. OVERVIEW
+===========
+
+XMD files use the MOS DATAFILE2.0 container format, a generic
+hierarchical data format used across all Starbreeze Engine file types
+(xwc, xtc, xmd, xw, xsa, xfc). Each file contains a chain of
+48-byte directory entries followed by data sections.
+
+All multi-byte values are LITTLE-ENDIAN.
+
+
+2. MOS DATAFILE2.0 CONTAINER
+=============================
+
+2a. Header (48 bytes)
+---------------------
+  Offset  Size  Type     Description
+  0       16    ASCII    Magic: "MOS DATAFILE2.0\0"
+  16      8     bytes    Padding (zeros)
+  24      4     u32 LE   Directory chain offset
+  28      4     u32 LE   Unknown
+  32      16    bytes    Padding (zeros)
+
+2b. Directory Chain (48 bytes per entry)
+-----------------------------------------
+  Starting at the directory chain offset, entries are packed
+  sequentially (NOT at the offset indicated by the 'next' field).
+
+  Per entry (48 bytes):
+    Offset  Size  Type     Description
+    0       24    ASCII    Entry type (null-padded)
+    24      4     u32 LE   Next entry offset (0 = last in this level)
+    28      4     u32 LE   Child entry offset (0 = no children)
+    32      4     u32 LE   Data offset (byte position in file)
+    36      4     u32 LE   Data length (bytes)
+    40      4     u32 LE   Number of sub-entries in data section
+    44      4     u32 LE   Flags (usually 0)
+
+  Entries form a tree: EXTENDEDMODEL has children via 'child',
+  and siblings via 'next'. Multiple EXTENDEDMODEL entries
+  represent LOD levels (highest detail first).
+
+
+3. EXTENDEDMODEL STRUCTURE
+===========================
+
+Each EXTENDEDMODEL entry contains these child sections:
+
+  DIRECTORYHEADER    - Structural marker (no data)
+  VERSION            - Version info (8 bytes, num=769)
+  SURFACES           - Material definitions (num = surface count)
+  COMPRESSEDCLUSTERS - Compressed mesh geometry (num = cluster count)
+  SOLIDS             - Bounding volumes / collision (num = solid count)
+  SKELETON           - Bone hierarchy container
+    DIRECTORYHEADER  - Structural marker
+    NODES            - Bone definitions (34 bytes per node)
+    NODEINDICES      - Bone index mapping
+    ATTACHPOINTS     - Attachment point definitions (18 bytes each)
+  KEYS               - Metadata key-value strings
+  LODBIAS            - LOD distance thresholds (4 bytes per LOD)
+  BOUND              - Bounding box (28 bytes)
+
+Multiple EXTENDEDMODEL entries chained via 'next' represent LOD
+levels. The first is highest detail.
+
+
+4. SURFACES FORMAT
+==================
+
+Each surface (material) is a fixed-size record.
+Record size = data_len / num_entries.
+
+  Per surface record:
+    +0     2     u16      Flags (commonly 0x0202)
+    +2     4     bytes    Unknown
+    +6     4     u32 LE   Name length
+    +10    16    ASCII    Surface/material name (null-padded to 16)
+    +26    ...   bytes    Material properties (colors, shininess, etc.)
+                          Contains f32 values for material parameters:
+                          - Shininess (at ~+46, e.g., 30.0 = 0x41F00000)
+                          - Diffuse color RGBA
+                          - Specular values (0.1 = 0x3DCCCCCD)
+                          - Ambient (0.5 = 0x3F000000)
+
+  Surface names reference texture files and define render groups.
+
+
+5. COMPRESSEDCLUSTERS FORMAT
+============================
+
+Contains compressed mesh geometry using a custom codec.
+
+5a. Compression Header (28 bytes)
+----------------------------------
+  Offset  Size  Type     Description
+  0       4     u32 LE   Total decompressed data size
+  4       1     u8       Flag1 (always 1)
+  5       1     u8       Flag2 (always 1)
+  6       2     u16 LE   Vertex stride (always 30 = 0x1E)
+  8       4     bytes    u16(0) + u16(V0)
+  12      4     bytes    u16(0) + u16(V1)
+  16      4     bytes    u16(0) + u16(V2)
+  20      4     bytes    u16(0) + u16(V3)
+  24      4     bytes    u16(0) + u16(V4) (V4 always 1804)
+
+  V0..V3 are configuration values that scale with mesh complexity.
+  V4 = 1804 = 0x070C is a constant (compression parameter).
+
+5b. Compressed Payload
+-----------------------
+  After the 28-byte header: custom-compressed bitstream.
+  NOT standard zlib/deflate — uses a Starbreeze-proprietary codec.
+
+5c. Cluster Directory
+----------------------
+  After the compressed payload: a MOS-like directory describing
+  the decompressed data layout. Contains tagged section names:
+    CLUSTER, DIRECTORYHEADER, MISCELLANEOUS, VERTEXFRAME,
+    BONEINFO, TRIANGLE, PRIMITIVE
+
+  The decompressed data (5a total size) contains:
+    - VERTEXFRAME: Vertex positions + normals + UVs
+    - TRIANGLE: Triangle index data
+    - BONEINFO: Per-vertex bone weights
+    - MISCELLANEOUS: Additional mesh metadata
+
+5d. LZSS+Huffman Decompression (from MCCDyn.dll)
+-------------------------------------------------
+  Compression header (29+ bytes):
+    +0     4     u32 LE   Total decompressed data size
+    +4     1     u8       Huffman flag (1=Huffman+LZSS, 0=raw)
+    +5     1     u8       Compression flag
+    +6     4     u32 LE   Sub-stream 0 offset (flags)
+    +10    4     u32 LE   Sub-stream 1 offset (offset_lo)
+    +14    4     u32 LE   Sub-stream 2 offset (offset_hi)
+    +18    4     u32 LE   Sub-stream 3 offset (match_length)
+    +22    4     u32 LE   Sub-stream 4 offset (literals)
+    +26    1     u8       offset_bits (LZSS window = 2^offset_bits)
+    +27    1     u8       length_bits (for match length encoding)
+    +28    1     u8       min_match (minimum match length, usually 3)
+
+  Each sub-stream format:
+    +0     4     u32 LE   Decompressed size
+    +4     1     u8       Flag (0=raw, 1=Huffman coded)
+    +5     ...            Bitstream data
+
+  Huffman tree encoding (CHuffmanTree::Rebuild):
+    - 8 bits: symbol_bits (symbols are 2^symbol_bits values)
+    - 1 bit: encoding_flag
+      - If 1: read 1 bit per symbol (presence/absence)
+      - If 0: ALL symbols are present (no presence bits)
+    - For each present symbol:
+      - 1 bit: depth_flag
+      - depth_flag=0: 4 bits depth, depth_flag=1: 8 bits depth
+      - depth+1 bits: tree path (1 bit per level)
+    - Sub-byte symbols: packed into output bytes using BitWriter
+
+  LZSS decoding (CLZSS::DecompressWithHuffman):
+    - Linear sliding window (NOT ring buffer)
+    - write_pos tracks backref window, capped at window_size
+    - Flag bit 0: literal byte from stream 4
+    - Flag bit 1: backreference
+      - offset_lo = read_bits(stream 1, half_offset)
+      - offset_hi = read_bits(stream 2, other_half)
+      - combined = (offset_hi << half_offset) | offset_lo
+      - match_len = read_bits(stream 3, length_bits) + min_match
+      - src = current_output_pos + combined - write_pos
+      - Copy match_len bytes from src
+
+  Decompressed data IS a valid CDataFile (MOS DATAFILE2.0) with
+  standard 48-byte directory entries containing:
+    CLUSTER, DIRECTORYHEADER, MISCELLANEOUS, VERTEXFRAMES,
+    TVERTEXFRAMES, TRIANGLES, PRIMITIVES, EDGES, etc.
+
+5e. CLUSTERS (Uncompressed Variant)
+------------------------------------
+  Same CDataFile structure as decompressed COMPRESSEDCLUSTERS
+  but stored directly without compression. VERTEXFRAMES and
+  PRIMITIVES are nested under CLUSTER entries in the directory tree.
+
+5f. VERTEXFRAMES Format
+------------------------
+  Header (52 or 56 bytes):
+    +0     4     u32      Code (1, 512, 514, 516)
+    +4/8   24    6×f32    Bounding box (min XYZ, max XYZ)
+    +48/52 4     u32      Vertex count
+
+  Per-vertex (stride 9):
+    +0     6     3×i16    Position (quantized)
+    +6     3     3×i8     Normal
+
+  Position dequantization:
+    val = bmin + (i16 + 32768) / 65535 * (bmax - bmin)
+
+5g. PRIMITIVES Format
+----------------------
+  Optional 4-byte prefix in CLUSTERS variant:
+    +0     2     u16      Strip count
+    +2     2     u16      Padding (0)
+
+  Group entries (repeating):
+    +0     1     u8       Type (0x03=strip, 0x05=strip, 0x07=strip)
+    +1     1     u8       Total u16 count (includes header as 2 slots)
+    +2     1     u8       Extra
+    +3     1     u8       Padding
+    +4     N×2   u16[]    Strip indices (N = total_count - 2)
+
+  Triangle strips with degenerate restart (a==b or b==c skipped).
+
+
+6. SOLIDS FORMAT
+================
+
+Per-solid record (data_len / num entries):
+  Contains 4x4 transform matrices (16 × f32) defining
+  bounding volumes and collision geometry.
+
+
+7. NODES FORMAT
+===============
+
+Per-node (34 bytes):
+  +0     2     u16      Flags
+  +2     12    3×f32    Position (X, Y, Z)
+  +14    16    4×f32    Rotation quaternion (X, Y, Z, W)
+  +30    4     u32      Parent index (0xFFFFFFFF = root)
+
+
+8. KEYS FORMAT
+==============
+
+  +0     4     u32 LE   Number of key-value pairs
+  +4     4     u32 LE   Total string data length
+
+  Per key-value pair:
+    u32(name_length) + ASCII(name) + \0 +
+    u32(value_length) + ASCII(value) + \0
+
+  Common keys:
+    MODEL          - File path (e.g., "Weapons\BroadSword.xmd")
+    LOD_TEXTURELODS - LOD texture settings
+    OGR_RENDERFLAGS - Render mode ("Triangles+Solids")
+    SOURCE_SKELETON - Skeleton file reference
+
+
+9. BOUND FORMAT (28 bytes)
+===========================
+
+  +0     12    3×f32    Bounding box minimum (X, Y, Z)
+  +12    12    3×f32    Bounding box maximum (X, Y, Z)
+  +24    4     f32      Bounding sphere radius
+
+
+10. CONVERSION STATUS
+=====================
+
+100 sample files across 23 directories.
+Games: Enclave, The Chronicles of Riddick: Escape from Butcher Bay
+
+Container format (MOS DATAFILE2.0): FULLY DECODED
+Directory chain parsing: FULLY DECODED
+Surface/material definitions: PARTIALLY DECODED
+LZSS+Huffman decompression: FULLY DECODED (reverse-engineered from MCCDyn.dll)
+VERTEXFRAMES parsing: FULLY DECODED (i16 quantized positions + bounding box)
+PRIMITIVES parsing: FULLY DECODED (triangle strips with group headers)
+
+Result: 100/100 files convert to GLB (35 COMPRESSEDCLUSTERS + 65 CLUSTERS)
+
+No public documentation or tools exist for the XMD mesh format.
+The format is entirely proprietary to the Starbreeze Engine.
+Reverse-engineered using Binary Ninja MCP for decompilation of MCCDyn.dll.

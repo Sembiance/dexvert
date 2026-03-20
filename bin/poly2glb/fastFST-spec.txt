@@ -1,0 +1,398 @@
+FastFST File Format Specification
+===================================
+Crazy Machines: Elements / Golden Gears archive format (.fst)
+Reverse-engineered from 205 sample files
+Vibe coded by Claude
+
+
+1. OVERVIEW
+===========
+
+FST files are zlib-compressed archives used by Crazy Machines games.
+Each archive contains named entries of various types including FMesh
+(3D geometry), FTexture, FShaderGraph, FSimpleModel, and others.
+
+All multi-byte values are LITTLE-ENDIAN.
+
+
+2. FST ARCHIVE FORMAT
+=====================
+
+2a. Header (28 bytes)
+----------------------
+  Offset  Size  Type     Description
+  0       4     ASCII    Magic: "FAST"
+  4       2     u16 LE   Version 1 (always 1)
+  6       2     u16 LE   Version 2 (always 1)
+  8       4     u32 LE   Unknown (varies 1-394, correlates with content)
+  12      4     u32 LE   Unknown (always 0)
+  16      4     u32 LE   Number of entries
+  20      4     u32 LE   Directory offset (byte position in file)
+  24      4     bytes    Padding (zeros)
+
+2b. Post-Header Data
+---------------------
+  After the 28-byte header:
+  - u32 LE codec1_len + ASCII codec1 name (e.g., "FCodecZip")
+  - u32 LE codec2_len + ASCII codec2 name (e.g., "FCodecRaw")
+  - u8 archive_name_len + ASCII archive name
+
+  Then the compressed data blobs follow sequentially.
+
+2c. Data Blobs
+---------------
+  Each entry's data is stored at its recorded offset.
+  If the first byte is 0x78 (zlib magic), the blob is zlib-compressed.
+  Otherwise, it's raw (uncompressed).
+
+2d. Directory
+--------------
+  Located at the directory offset from the header.
+  The directory itself may be zlib-compressed (first byte 0x78).
+
+  Per entry:
+    u32 LE   filename_len
+    ASCII    filename
+    u32 LE   dirname_len
+    ASCII    dirname
+    u8       type_len
+    ASCII    type (e.g., "FMesh", "FTexture")
+    u64 LE   data_offset (byte position in file)
+    u64 LE   compressed_length
+    u32/u64  group_id (4 or 8 bytes — see 2e)
+
+2e. Group ID Size Variation
+----------------------------
+  The group_id field is EITHER 4 or 8 bytes depending on the file.
+  Of 205 sample files: 43 use 4 bytes, 152 use 8 bytes, 9 work with
+  either, 1 has compressed directory.
+
+  Auto-detection: try parsing with 8-byte grp first; if directory
+  entries produce invalid field lengths, retry with 4-byte grp.
+
+
+3. FMESH BINARY FORMAT
+=======================
+
+FMesh entries contain 3D mesh geometry.
+
+3a. Header
+-----------
+  Offset  Size  Type     Description
+  0       4     u32 LE   Unknown (always 0)
+  4       4     u32 LE   Name length (N)
+  8       N     ASCII    Mesh name (e.g., "Mirror.MirrorModel.MirrorMirrorMesh")
+
+3b. Metadata (24 bytes after name)
+-----------------------------------
+  Offset  Size  Type     Description
+  +0      4     u32 LE   Unknown (always 0)
+  +4      4     u32 LE   Unknown (always 0)
+  +8      4     u32 LE   Unknown (always 1, possibly LOD level)
+  +12     4     u32 LE   Format flags (0x00030000 common)
+  +16     4     u32 LE   Vertex count
+  +20     4     u32 LE   Triangle count
+
+3c. Vertex Positions
+---------------------
+  Immediately after metadata: vertex_count × 12 bytes
+  Each vertex: 3 × f32 LE (X, Y, Z position)
+
+3d. Triangle Indices
+---------------------
+  Immediately after positions: triangle_count × 12 bytes
+  Each triangle: 3 × u32 LE (vertex index 0, 1, 2)
+  All indices are 0-based and < vertex_count.
+
+3e. Adjacency Block (deterministic, variable length)
+------------------------------------------------------
+  After indices: a structured block with known size.
+
+  Format: u32(entry_count) + entry_count × 12B entries + 24B trailer
+  Total size: entry_count × 12 + 28 bytes
+
+  Entry (12 bytes each):
+    3 × u32 — adjacency data per submesh (0xFFFFFFFF = no neighbor)
+
+  Trailer (24 bytes = 6 × u32):
+    +0   u32   Unknown (matches entry_count)
+    +4   u32   Unknown
+    +8   u32   Unknown
+    +12  u32   Unknown
+    +16  u32   Normal/UV vertex count (≥ vertex_count usually,
+               may differ due to normal splitting at hard edges)
+    +20  u32   Always 0 (section terminator)
+
+  Observed entry_count values: 4 (80 meshes), 6 (19), 8 (1)
+  → block sizes: 76B, 100B, 124B
+
+  The normal_count at trailer[4] tells how many normal and UV entries
+  follow. When normal_count > vertex_count, extra entries are split
+  vertices with different normals at hard edges. When normal_count <
+  vertex_count (rare, 1 case), only partial normals are available.
+
+  This structure is FULLY DETERMINISTIC — no scanning required.
+
+  This data is used for shadow volume generation and is skipped
+  during geometry conversion.
+
+3f. Vertex Normals (nc entries)
+-------------------------------
+  Immediately after adjacency block: nc × 12 bytes
+  Each normal: 3 × f32 LE (NX, NY, NZ) — unit length (magnitude ≈ 1.0)
+
+  nc = normal_count from adjacency trailer (see 3e).
+  When nc > vc, the normals are in an EXPANDED vertex space with
+  duplicated entries at hard edges (different normals at same position).
+
+3g. UV Header + UV Coordinates
+-------------------------------
+  After normals: 16-byte header + max(nc, evc) × 8 bytes
+
+  UV Header (16 bytes):
+    +0   u32   Always 6
+    +4   u32   Always 3
+    +8   u32   evc = expanded UV vertex count (number of VALID UV entries)
+    +12  u32   Always 0
+
+  UV Data: max(nc, evc) × 8 bytes
+    Each UV: 2 × f32 LE (U, V)
+    Only the first evc entries contain valid UV coordinates.
+    Entries beyond evc may contain garbage (tangent/binormal data).
+
+  The evc value is typically different from both vc and nc:
+    - When nc == vc: evc may still differ (UV-only splitting)
+    - When nc > vc: evc is usually between vc and nc
+
+3h. Tangent / Extended Vertex Data (variable)
+----------------------------------------------
+  After UV data: variable-length tangent section containing
+  tangent vectors, binormal vectors, and optional skin weights.
+
+  Three structural variants observed:
+
+  Variant A (240 meshes): Subsection headers present
+    One or more tangent subsections, each with:
+      u32(type) + u32(2) + u32(count) + u32(0)  [16B header]
+      count × 3 × f32 LE tangent triplets        [count × 12B data]
+    Observed types: 4 (first, always present), 9 (second, always present),
+    0 (third, in 16 meshes with count=1).
+    Sub[0] type=4: count varies (not consistently vc/nc/evc).
+    Sub[1] type=9: count always equals vc.
+    Most meshes have 2 subsections (225), 16 have 3.
+
+    Optionally followed by a TYPE-7 SKIN WEIGHT block (85 meshes):
+      u32(7) + u32(1) + u32(vc) + u32(0)         [16B header]
+      vc × 20 bytes skin weight data              [5 × f32 per vertex]
+      16 bytes trailer                            [packed adjacency flags]
+    Skin weights are typically identity (1.0, 0, 0, 0, 1.0) for static
+    meshes, with non-trivial blending for articulated meshes (e.g.,
+    cannon=0.91/0.09, UFO alien=0.73/0.27).
+
+    NC-space indices follow immediately after the last subsection/block.
+
+  Variant B (170 meshes): No subsection headers
+    Raw tangent float data with no header markers.
+    Variable-length array of f32 tangent/binormal vectors.
+    Internal structure not fully decoded — no formula found
+    that predicts the size from vc, nc, evc, tc, or metadata.
+    May contain an embedded type-7 block (39 meshes) detectable
+    by scanning for the signature bytes (7, 1, vc, 0).
+
+  Detection: check if first 16 bytes match (X, 2, count, 0) pattern
+  where X < 100, count > 0 and count < 1000000.
+
+  For Variant B, the boundary between tangent data and nc-space
+  indices is found by forward scanning: tangent float bit patterns
+  (unit vectors with magnitudes ≈ 1.0) are structurally distinct from
+  small integer triangle indices (values 0..nc-1). Full validation
+  of all tc triangles against [0, nc) range eliminates false positives.
+
+3i. NC-Space Triangle Indices (tc × 12 bytes)
+-----------------------------------------------
+  After tangent section: tc × 3 × u32 LE
+  Each triangle: 3 vertex indices into the nc normal buffer (0..nc-1).
+
+  These triangles are in the SAME ORDER as the original compact
+  triangle indices (section 3d). For each triangle t:
+    position = compact_positions[compact_tri[t][j]]
+    normal = normals[nc_tri[t][j]]
+
+  This pairing is verified by checking that face normals computed
+  from compact positions align with nc normals (dot product > 0.3).
+
+3j. EVC-Space Triangle Indices (tc × 12 bytes, when evc != nc)
+---------------------------------------------------------------
+  After nc-space indices: tc × 3 × u32 LE
+  Each triangle: 3 vertex indices into the UV buffer (0..evc-1).
+
+  These triangles are also in the SAME ORDER as compact indices.
+  For each triangle t:
+    uv = uvs[evc_tri[t][j]]
+
+  Only present when evc differs from nc. When evc == nc, the
+  nc-space indices serve double duty for both normals AND UVs.
+
+  Detection: tc × 3 consecutive u32 values, all < evc, immediately
+  after the nc-space indices.
+
+3k. Per-Triangle-Corner Rendering
+----------------------------------
+  The complete vertex for triangle t, corner j is assembled from
+  THREE separate index buffers:
+
+    position = compact_positions[ compact_tri[t][j] ]
+    normal   = nc_normals[ nc_tri[t][j] ]
+    uv       = uvs[ evc_tri[t][j] ]   (or nc_tri[t][j] if evc == nc)
+
+  This allows different normal and UV values at the same position
+  (hard edges, UV seams) without duplicating position data.
+
+3l. Remaining Data
+-------------------
+  After the evc-space indices (or nc-space if evc == nc):
+  Edge connectivity data and other per-triangle metadata.
+  Structure varies. Not needed for geometry conversion.
+
+
+4. FSIMPLEMODEL FORMAT
+=======================
+
+FSimpleModel entries define complete 3D objects by referencing
+FMesh entries and FShaderGraph materials.
+
+  Header: u32(0) + u32(name_len) + name + metadata
+  Body: list of (mesh_ref, shader_ref, display_name, transform)
+
+  Each mesh reference contains:
+    u16(flags) + u16(more_flags) +
+    u32(1) + u32(mesh_name_len) + mesh_name +
+    padding + u32(1) + u32(shader_name_len) + shader_name +
+    padding + u8(display_name_len) + display_name +
+    padding + bounding_box (6 × f32) + transform (16 × f32)
+
+  The mesh_name references an FMesh entry by name.
+  The shader_name references an FShaderGraph entry by name.
+
+
+5. FTEXTURE FORMAT
+===================
+
+FTexture entries contain texture image data in a custom format.
+
+  Header: u32(0) + u32(name_len) + name + 36B metadata
+
+  Texture metadata (36 bytes after name):
+    +0   u32   Unknown (0)
+    +4   u32   Unknown (0)
+    +8   u32   Unknown (1)
+    +12  u32   Unknown (0)
+    +16  u32   Unknown (1)
+    +20  u32   Mipmap levels (log2(dimension) + 1)
+    +24  u32   Pixel format code (16, 20, etc.)
+    +28  u32   Width
+    +32  u32   Height
+
+  Pixel data follows in a game-specific compressed format
+  (NOT standard DDS, PNG, or JPEG). Common sizes:
+    128×128 with 8 mip levels
+    256×256 with 9 mip levels
+    512×512 with 10 mip levels
+
+  Pixel format codes observed:
+    16 — standard diffuse texture (most common)
+    20 — normal map texture
+
+  Pixel format is DXT (S3 Texture Compression):
+    fmt=1  → R8 grayscale, 1 byte/pixel (1 texture: cloud dome)
+    fmt=2  → RG16/LA8, 2 bytes/pixel (2 textures: specular maps)
+    fmt=6  → RGBA8 uncompressed, 4 bytes/pixel (3 textures: glass, snow)
+    fmt=16 → DXT1 (BC1): 8 bytes per 4×4 block, 1-bit alpha (410 textures)
+    fmt=18 → DXT5 (BC3): 16 bytes per 4×4 block, interpolated alpha (32 textures)
+    fmt=20 → DXT5 (BC3): 16 bytes per 4×4 block, interpolated alpha (124 textures)
+    fmt=25 → R8 grayscale, 1 byte/pixel (11 textures: masks, light cones)
+
+  DXT block decoding:
+    DXT1: 2 × u16 LE (RGB565 color endpoints) + u32 (2-bit indices × 16)
+    DXT5: 2 × u8 (alpha endpoints) + 6 bytes (3-bit alpha indices × 16)
+          + DXT1 color block (8 bytes)
+
+  Mipmap data is stored largest-first with no per-level headers.
+  Total data size = sum over levels of ceil(w/4) × ceil(h/4) × block_size.
+
+  Pixel storage order: top-down (row 0 = top of image).
+  Unlike BMP-style bottom-up formats, NO vertical flip is needed.
+
+  For conversion: decode base mip level to RGBA, encode as PNG,
+  embed in GLB as baseColorTexture. 169/202 meshes get textures.
+
+
+6. SHADER SYSTEM
+=================
+
+The shader system uses a node graph architecture:
+
+  FShaderGraph — top-level shader, references child nodes
+  FDefaultShaderNode — root output node with material defaults
+  FTextureParameterNode — texture input (references FTexture by name)
+  FTextureSampleNode — texture sampling operation
+  FColorConstantNode — constant RGBA color value
+  FFloat32ParameterNode — scalar parameter
+  FMultiplyNode, FAddNode, FMadNode — arithmetic operations
+  FColorToNormalNode — converts color texture to normal map
+
+  FColorConstantNode stores named RGBA values:
+    Header + name + metadata
+    u32(char_count) + char_count × u32 (wide-char color name)
+    4 × f32 (R, G, B, A) — the constant color value
+
+  The shader graph connects these nodes to produce the final
+  material appearance. For most objects, the visual appearance
+  is dominated by the diffuse texture.
+
+
+7. COORDINATE SYSTEM
+====================
+
+FMesh uses Y-UP coordinates consistent with glTF.
+No coordinate transformation needed.
+Face winding appears to be CCW (correct for glTF).
+
+
+5. ENTRY TYPE CENSUS
+====================
+
+Across 205 sample files (total entries varies per file):
+
+  Most common types:
+    FTextureSampleNode (725), FTextureParameterNode (702),
+    FMultiplyNode (551), FBoxShape (507), FTexture (501),
+    FMesh (358), FAddNode (323), FShaderGraph (275),
+    FDefaultShaderNode (274), FMadNode (250)
+
+  Geometry-related:
+    FMesh: 358 entries across 159 files
+    FSimpleModel: 173 (references FMesh entries)
+    FSkeletalModel: 56 (animated models)
+    FMeshShape: 67 (collision meshes)
+
+  Physics:
+    FRigidBodySetup: 239, FCompoundShape: 132,
+    FBoxShape: 507, FCapsuleShape: 99, FSphereShape: 52,
+    FConvexMeshShape: 81, FConstraintSetup: 74
+
+  Materials/Shading:
+    FShaderGraph: 275, FTexture: 501
+    Various shader nodes: multiply, add, lerp, fresnel, etc.
+
+
+6. CONVERSION STATISTICS
+=========================
+
+205 sample files:
+  - 202 files produce geometry (1+ FMesh entries)
+  - 3 files have no FMesh (logic/menu/particle-only files)
+  - 0 parse failures
+  - 358 total FMesh entries
+  - Vertex counts range from 4 to ~10,000 per mesh
+  - Triangle counts range from 2 to ~20,000 per mesh

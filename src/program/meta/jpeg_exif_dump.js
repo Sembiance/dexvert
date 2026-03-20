@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {xmlParse} from "std";
 
 export class jpeg_exif_dump extends Program
 {
@@ -21,6 +22,35 @@ export class jpeg_exif_dump extends Program
 			if((/^ffd[0-7] at offset/).test(line))
 				driCount++;
 		});
+
+		if(r.stdout.includes("<x:xmpmeta"))
+		{
+			try
+			{
+				const NUMBER_KEYS = ["FullPanoWidthPixels", "FullPanoHeightPixels", "CroppedAreaImageWidthPixels", "CroppedAreaImageHeightPixels", "CroppedAreaLeftPixels", "CroppedAreaTopPixels", "InitialViewHeadingDegrees", "InitialViewPitchDegrees", "InitialHorizontalFOVDegrees"];
+				const BOOL_KEYS = ["UsePanoramaViewer"];
+				const xmlDoc = xmlParse(new RegExp(/<x:xmpmeta.*<\/x:xmpmeta>/, "s").exec(r.stdout)[0]);
+				const rdf = xmlDoc.root.children.find(c => c.name?.raw === "rdf:RDF");
+				const description = rdf.children.find(c => c.name?.raw === "rdf:Description");
+				const gpano = {};
+
+				for(const [key, value] of Object.entries(description.attributes))
+				{
+					if(key.startsWith("GPano:"))
+					{
+						const objKey = key.replace("GPano:", "");
+						gpano[objKey] = NUMBER_KEYS.includes(objKey) ? +value : (BOOL_KEYS.includes(objKey) ? value.toLowerCase()==="true" : value);
+					}
+				}
+
+				if(Object.keys(gpano).length)
+					meta.gpano = gpano;
+			}
+			catch(err)
+			{
+				r.xlog.warn`jpeg_exif_dump failed to parse xmlData: ${err}`;
+			}
+		}
 
 		if(meta.driOffset)
 			Object.assign(meta, {driCount});

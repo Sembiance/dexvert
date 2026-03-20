@@ -10,7 +10,7 @@ export class pict extends Format
 	mimeType       = "image/pict";
 	magic          = [
 		"QuickDraw/PICT", "Macintosh Quickdraw/PICT", "Claris clip art", "Claris CAD drawing", "Macintosh Pict image (MacBinary)", "Mac PICT bitmap", "image/x-pict", "piped qdraw sequence (qdraw_pipe)", "deark: pict (PICT v",
-		/^Macintosh PICT (2 )?(\((DirectBits )?(Bitmap|Pixmap)\) )?:(bum|pict):$/,
+		/^Macintosh PICT (2 )?(\((DirectBits )?(Bitmap|Pixmap)\) )?:(bum|pict):$/, "image:Apple.PictFormat",
 		/^Macintosh QuickDraw PICT/, /^fmt\/341( |$)/, /^x-fmt\/80( |$)/
 	];
 	idMeta         = ({macFileType}) => macFileType==="PICT";
@@ -59,6 +59,7 @@ export class pict extends Format
 			
 		r.push(
 			"imageAlchemy",		// while this properly recombines sub-bitmaps, it's DOS based and so we don't trust it very much
+			"GARbro[types:image:Apple.PictFormat][matchType:magic]",
 			"powerpaint[format:pict][matchType:magic]",
 			"keyViewPro[matchType:magic]",
 			"graphicWorkshopProfessional[matchType:magic]",

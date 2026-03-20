@@ -84,6 +84,12 @@ const EXTRA_PACKAGES =
 	"media-libs/resvg",
 	"media-video/ffmpeg",
 
+	// unread
+	"dev-python/lhafile",
+
+	// qtvr2pano
+	"dev-python/PyAV",
+
 	// post processing: specific versions are needed to compile TensorFlow with full AVX2 support as of Feb 2026
 	"=dev-libs/cudnn-9.8.0*",
 	"=dev-util/nvidia-cuda-toolkit-12.8.1*",

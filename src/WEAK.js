@@ -298,8 +298,10 @@ export const WEAK_VALUES =
 	/^YZ Archiv gefunden/,
 
 	// dragonUnpackerID
-	// SEEN ONCE: GTEX
+	// SEEN  ONCE:
+	// SEEN TWICE:
 	/^dragon: FPK /,	// multi-versioned, so it detects as FPK but must pass like FPK4. This produces garbage though on non FPK4 archives. gameextractor handles these fine and much better, see sidMeiserFPK
+	/^dragon: GTEX /,
 	/^dragon: PACK /,
 	/^dragon: SLF /,
 
@@ -362,16 +364,35 @@ export const WEAK_VALUES =
 	/^Video CCTV DAT \(luodat\)$/,
 	/^VPlayer subtitles \(vplayer\)$/,
 
+	// GARbroID - Real but prefer not matching to it
+	/^archive:Macromedia.DxrOpener /,
+
+	// SEEN  ONCE: archive:Xuse.BinOpener, archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:BlackRainbow.DatOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:Pinky.A5rOpener, archive:CandySoft.FpkOpener
+	//             archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener
+	// SEEN TWICE:
+	/^archive:CandySoft\.FpkOpener /,
+	/^archive:Mink\.GrpOpener /,
+
+	// SEEN  ONCE: audio:RealLive.NwaAudio
+	/^audio:WaveAudio \(WAV\)/,
+
+	// SEEN  ONCE: image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat
+	/^image:Adobe\.PsdFormat /,
+	/^image:Desire.DesFormat /,
+	/^image:JpegFormat /,
+	/^image:System98\.GFormat /,
+	/^image:TifFormat /,
+
 	// gameextractor - Real but output files are useless
 	/^geArchive: PRM( |$)/,
 
 	// gameextractor - actually WEAK
 	// candidates
 	// SEEN  ONCE:
-	// 		AQA, BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK 000_SFDX, PRJ_PROJ, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, PAK_50
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, AQA, MAP_2, 000_10, RSDK_RSDK, ARC_9, SND_SND2, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3, SMA_SMA
+	// 		BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK 000_SFDX, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, DAT_100
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, MAP_2, RSDK_RSDK, ARC_9, SND_SND2, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3, XPR_XPR2, VOL, WAD_18, BANK_RIFF
 	// SEEN TWICE:
-	// 		XFS, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, CAR_FRAC, BANK_QL, CDF_TXTR, PAD
+	// 		XFS, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, PAD
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -391,6 +412,7 @@ export const WEAK_VALUES =
 	/^geArchive: ACE_SIMIS( |$)/,
 	/^geArchive: AR_DAVE( |$)/,
 	/^geArchive: ARF_AR( |$)/,
+	/^geArchive: AQA( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
 	/^geArchive: BKF_2( |$)/,
@@ -522,7 +544,7 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: WIC (Fake!), X1, Terse, BOA, 777, DZip (Nolan Pflug), ZPack
+	// SEEN  ONCE: WIC (Fake!), X1, Terse, BOA, 777, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin)
 	// SEEN TWICE: PPMN (Max Smirnov), QuArk
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -536,6 +558,7 @@ export const WEAK_VALUES =
 	/^idarc: Par( |$)/,
 	/^idarc: PC\/3270( |$)/,
 	/^idarc: PKLite( |$)/,
+	/^idarc: QuArk( |$)/,
 	/^idarc: RKive( |$)/,
 	/^idarc: TTComp( |$)/,
 	/^idarc: ZAR( |$)/,
@@ -2363,6 +2386,7 @@ export const WEAK_VALUES =
 	/^NES emulator Cheats \(var1\)$/,
 	/^NetStumbler NS1 log$/,
 	/^NEXO NS-1 Venue$/,
+	/^Nexus NX Archive$/,
 	/^NeXtMidas Macro \(with rem\)$/,
 	/^Nihilistic Scene Data$/,
 	/^Nimble package info/,

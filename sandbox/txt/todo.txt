@@ -17,51 +17,38 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert: sandbox/txt/checkfor_GameExtractor.txt
+* Go through and find find samples to reprocess if any on discmaster and formats to add on dexvert:
+	sandbox/txt/checkfor_GameExtractor.txt
+	sandbox/txt/garbroFormatsToFind.txt
 
-* Goal: Get rid of 86box
-  If I can get all programs (win2k AND winxp) running under QEMU win7, then I can spin up a lot more QEMUs for parallelism
-  ensure full test suite worked with new 2-cores win7
-  Process:
-    Start with winxp (only 33 programs), then later win2k (61 programs)
-  	Pick a program
-	Install on QEMU Win7
-	Get it to work (Can right click the exe and under Compatability can run it in Win2k/WinXP mode)
-	testdexvert any formats that call that program, make sure test still passes
-	do NOT uninstall it from win2k/winxp 86box image, just leave it there
-	Move on to next program
-  If still have winxp/win2k programs left, could try making a QEMU with win2k/winxp and seeing if they will run properly in there
-  but ideally I'd just have win7 QEMU
-  After all is done, if still have winxp/win2k 86box programs, that's ok, just reduce qty on those boxes to like 1
 
 /-------------\
 | Vibe Viable |
 \-------------/
-* Investigate these 180,000 unknown image files: https://discmaster.textfiles.com/search?detection=50424d50*
+>>> wip
+>>> NOTE: Some of these detections may already be present in the reprocess todo, check before adding each one
+* My own macromedia director extractor. dunno if I'll start using it or not. based on scummvm code
 
-* Add more support for these samples: https://discmaster.textfiles.com/search?extension=xtc&detection=4d4f5320444154*
-  Right now dragonUnpacker supports some, but not many, but it identifies to all of them.
-  So it's a matter of downloading 100 unique items, and telling claude to go ensure the unpacker has support for these
+* Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
+  Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
+	https://discmaster.textfiles.com/search?format=mov&detection=qtvr&dedup=dedup
+  First I'd need to properly extract the images/data. Next discmaster can then make a nice viewer for it
+  To extract/convert, look into:
+	https://github.com/fieldOfView/CuTy				https://fieldofview.com/projects/cuty
+	https://www.dr-lex.be/info-stuff/qtvr.html		https://github.com/rvanlaar/QTVR
+    Maybe I can just extract like an image and maybe set in it custom EXIF info that has the data needed to view it as a pano
+  Find a good panoramic viewer. Here are some options:
+	https://pannellum.org/ (open source)		https://github.com/mpetroff/pannellum
+	https://krpano.com/home/ (paid for)			https://sziget360.com/panorama/1320
+<<<
 
-* This can identify, extract and convert hundreds of visual novel file formats: https://github.com/shiikwi/GARbro (forked from https://github.com/morkt/GARbro)
-  Including 
-  It's written in C# .net but targets an old version 4.6 and references DLLs that they don't provide and author said they won't provide
-  I think it's best to clone that as a subdir to the main 'garbroServer' vibe
-  Goal is to vibe a server that provides /list and /detect and /extract endpoints just like gameserver and a 1-time checkfor_GARbro.txt
-  ALSO want to vibe a one-time list of all 'magics' that I can search for in detections field to find things to reprocess (and store that in a garbroFormatstoFind.txt and add as a todo)
-  Probably best for it to not touch the main 'GARbro' folder at all, instructing the vibe tool that I may update that in the future with future pulls from the github
-  Instead it should create a script, that it will maintain, that will copy over the necessary files into a new garbroServer subdir
-  That subDir should be able to compile with latest dotnet and have everything it needs within that directory to compile with `dotnet build`
-  Samples and URLs to ensure working:
-	archive/repiPack
-	test/sample/unsupported/visualNovel/
-	test/sample/archive/fat12/*/*
-  	https://archive.org/details/pc-98_20230120
-  	https://www.pc98.org/main.html
-	http://discmaster.textfiles.com/browse/1123
-	https://strangecomforts.com/the-strange-world-of-japans-pc-98-computer/
-	https://archive.org/search?query=visual+novel&and%5B%5D=mediatype%3A%22software%22
-  	Old IADL (http://iadl.retromission.com/items?collectionid=cd-roms&collectionid=cdrom_contributions&collectionid=cdromimages&collectionid=cdromsoftware&collectionid=%40asromix&collectionid=%40gingerbeardman&collectionid=%40iamxray&collectionid=%40pascal_of_irate&collectionid=%40sembiance&collectionid=%40shivashaw&collectionid=adultcdroms&collectionid=ftpsites&collectionid=softwarecapsules&collectionid=softwarelibrary_mature&subject=visual%20novel&title=&priority=999&minfiles=0&maxfiles=0&minsize=0&maxsize=0&limit=1000)
+* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
+  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
+  Once I have that I could support certain formats like:
+	9,770	document/dartHypertext   
+	1,474	document/envisionPublisherDoc
+	1,220	document/ibmStoryboardDocument
+  Though it may be easier to just vibe in support for these and other document formats
 
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
   Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
@@ -91,46 +78,20 @@
   vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
   Can give it code to existing converters to 'learn' about particular formats
 
-* Improve QTVR handling: https://discmaster.textfiles.com/browse/21427/MacHome%20CD%20Nov%201998.iso/Deneba/DenebaCAD%E2%84%A2%201.5/Goodies/QuickTime%20VR%20Movies
-  Have it be it's OWN "QuickTime VR" format. So will need to make sure I have proper detection.  I've heard ST TNG Tech Manual makes heavy use of this too, so make sure that's up on discmaster.
-	https://discmaster.textfiles.com/search?format=mov&detection=qtvr&dedup=dedup
-  First I'd need to properly extract the images/data. Next discmaster can then make a nice viewer for it
-  To extract/convert, look into:
-	https://github.com/fieldOfView/CuTy				https://fieldofview.com/projects/cuty
-	https://www.dr-lex.be/info-stuff/qtvr.html		https://github.com/rvanlaar/QTVR
-    Maybe I can just extract like an image and maybe set in it custom EXIF info that has the data needed to view it as a pano
-  Find a good panoramic viewer. Here are some options:
-	https://pannellum.org/ (open source)		https://github.com/mpetroff/pannellum
-	https://krpano.com/home/ (paid for)			https://sziget360.com/panorama/1320
-
-* Adopt these Filemaker Pro tools for ~9,771 unique files: https://github.com/evanmiller/fmptools
-  Right now I just 'strings' them which is good enough to find via a search but doesn't give much idea on layout/etc
-
-* Meshlab (https://github.com/cnr-isti-vclab/meshlab) uses vcglib which has support for these 3D formats: PLY, STL, OFF, OBJ, 3DS, COLLADA, PTX, V3D, PTS, APTS, XYZ, GTS, TRI, ASC, X3D, X3DV, VRML, ALN
-  Sadly the version in Gentoo as of Mar 2024 is 4 years old and attempts to compile it myself yielded a lost afternoon and lots of frustration
-
-* Make my own director ripper on linux that operates on the raw files directly. Would write my own code entirely, likely deno based.
-  Look at macromediaDirector.js format for notes on other converters for a head start. May be able to just massage SCUMM into doing it
-    Could consider contacting the folks who are committing to the SCUMM dierctor code and asking them directly
-    Ask how hard it would be to leverage the SCUMMVM code to create a CLI tool that when given any director file can extract all assets
-	Including converting all image formats to PNG (or something similar), audio to WAV, lingo scripts, text, etc
-	Possibly this person on mastodon/ivory: @felsqualle@manitu.social
-  After it fully extracts my current test files, then re-process items that have failed to process some macromedia director files.
-  Write a script to search injestion alerts for something like 'magic archive/macromediaDirector' for example: http://discmaster.textfiles.com/admin/item?itemid=10456
-  Certainly support archive/macromediaDirector/T4.cct  (a particular troublesome file)
-
-* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
-  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
-  Once I have that I could support certain formats like:
-	document/dartHypertext
-	document/envisionPublisherDoc
-	document/ibmStoryboardDocument
-  Though it may be easier to just vibe in support for these and other document formats
+* Add support for "databases", converting various databases into sqlite3 databases.
+  * First task is to add sqlite3 support to dexvert.
+    Then add support for 'viewing' an sqlite3 database on discmaster, or at least a sampling. Basically list all tables, with metadata about each table (number of rows, total size in bytes, etc)
+    Then for each table show a snippet of rows in HTML table form, making sure that any embedded binary content like images, etc are shown.
+  * Support converting sqlite2Database (which is in dexvert and discmaster already) into sqlite3
+  * Get mysql databases converting
+  * Get text/postgreSQLDatabaseDump converting
+  * Get document/fileMakerPro databases converting, utilize this which has ability to convert to sqlite:  https://github.com/evanmiller/fmptools
+  * Get unsupported/microsoftISAMDatabase
+  * Look for other "database" unsupported.js files to add support for converting
 
 * Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
   https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
-
 
 /---------------\
 | High Priority |

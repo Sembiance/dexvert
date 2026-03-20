@@ -1,0 +1,401 @@
+RED Archive Format Specification
+=================================
+Reverse-engineered specification for the RED (Knowledge Dynamics) archive
+format, as used by INSTALL for DOS and the "Reduce" utility from Knowledge
+Dynamics Corporation.
+
+Common file extensions: .red, .lif, .001, .zzz, and others.
+
+
+1  OVERALL STRUCTURE
+====================
+
+A RED archive is a contiguous sequence of member-file records.  There is no
+global archive header or footer; the archive begins immediately with the
+first member record and ends after the last byte of the last member's
+compressed data.
+
+If a member file is split across multiple archive volumes, each fragment of
+that file has its own header (see the fragment fields in section 2).
+
+    +-----------------+
+    | Member record 1 |   (header + compressed data)
+    +-----------------+
+    | Member record 2 |
+    +-----------------+
+    |      ...        |
+    +-----------------+
+    | Member record N |
+    +-----------------+
+    <EOF>
+
+
+2  MEMBER RECORD HEADER
+========================
+
+Each member record begins with a fixed 41-byte header.  All multi-byte
+integer fields are little-endian unless noted otherwise.
+
+Offset  Size  Description
+------  ----  ---------------------------------------------------------
+ 0       2    Signature: ASCII "RR" (0x52 0x52).
+ 2       1    Format version.  Always 0x01 in known files.
+ 3       1    Header size in bytes, measured from offset 0.
+              Always 41 (0x29) in known files.
+ 4       4    DOS date/time stamp (little-endian).
+              Encodes the file's last-modified time.
+              Low 16 bits = time, high 16 bits = date.
+              Time bits:  [15:11] hour, [10:5] minute, [4:0] seconds/2.
+              Date bits:  [15:9] year-1980, [8:5] month, [4:0] day.
+ 8       4    Compressed data size (little-endian).
+              Size in bytes of the compressed (or stored) payload that
+              follows this header.  For compression scheme 11 this
+              INCLUDES the per-segment CRC bytes (see section 4).
+              For multi-volume files this is the size of this fragment
+              only.
+12       4    Decompressed size (little-endian).
+              Original (uncompressed) file size.  For scheme 1 (stored),
+              this equals the compressed size.
+              For multi-volume files, every fragment header carries the
+              full original file size, not the fragment's contribution.
+16       2    CRC of compressed/stored data (little-endian).
+              For scheme 1 (uncompressed): CRC-16/IBM-3740 of the stored
+              data, which equals the decompressed CRC since the data is
+              identical.
+              For scheme 11 (LH5): set to 0xFFFF (unused).
+18       2    CRC of decompressed data (little-endian).
+              CRC-16/IBM-3740 of the original uncompressed file content.
+20       2    Fragment number (little-endian).
+              For non-split files: 0.
+              For the first fragment of a split file: 1.
+              Subsequent fragments increment by 1.
+22       2    Last-fragment flag (little-endian).
+              1 if this record contains the file in its entirety, or if
+              this is the final fragment of a split file.
+              0 if more fragments follow in subsequent volumes.
+24       2    Compression scheme (little-endian).
+              Known values:
+                1  = Stored (no compression).
+               11  = LH5 with segmented CRCs (see section 3).
+26      13    Filename.
+              Null-terminated ASCII string padded with zero bytes to fill
+              the 13-byte field.  Conforms to the DOS 8.3 naming
+              convention.
+39       2    Header CRC (BIG-endian).
+              CRC-16/IBM-3740 computed over header bytes 2 through 38
+              (i.e. everything except the 2-byte signature at offset 0
+              and this CRC field itself).  Stored in big-endian byte
+              order.
+41      ...   Compressed data payload.
+              Length is given by the compressed-size field at offset 8.
+
+
+3  COMPRESSION SCHEME 11 — LH5 WITH SEGMENTED CRCs
+====================================================
+
+Compression scheme 11 applies LHA's "lh5" algorithm to the original file
+data, then segments the resulting compressed bitstream and inserts a CRC
+after each segment.
+
+3.1  LH5 Algorithm
+-------------------
+LH5 is a Lempel-Ziv variant with adaptive Huffman coding and a sliding
+dictionary window of 8192 bytes (13-bit offset).  It is the same algorithm
+used by the LHA archiver's "-lh5-" method.  The compressed bitstream is a
+sequence of 16-bit-length-prefixed blocks, each containing Huffman tree
+descriptions followed by coded literal bytes and (length, distance) back-
+references.
+
+3.2  Segmentation
+------------------
+After compression, the raw LH5 bitstream is divided into fixed-size
+segments for integrity checking:
+
+    +-------------------------------+--------+
+    | 4094 bytes of LH5 data       | 2-byte |  <-- full segment
+    |                               |  CRC   |
+    +-------------------------------+--------+
+    |  ...                          |  ...   |
+    +-------------------------------+--------+
+    | Remaining LH5 data (< 4094)  | 2-byte |  <-- last segment
+    |                               |  CRC   |
+    +-------------------------------+--------+
+
+- Full segments contain exactly 4094 bytes of compressed data followed by
+  a 2-byte CRC, for a total of 4096 bytes per segment.
+- The last segment contains the remaining compressed data (fewer than 4094
+  bytes) followed by a 2-byte CRC.
+- Each segment's CRC is CRC-16/IBM-3740 computed over that segment's
+  compressed-data portion only, stored in big-endian byte order.
+- The "compressed size" field in the header (offset 8) is the total size
+  of all segments including their CRC bytes.
+
+To decompress, a reader must:
+  1. Walk the compressed data in 4096-byte steps (4094 data + 2 CRC),
+     with the last step being shorter.
+  2. Optionally verify each segment's CRC.
+  3. Concatenate the 4094-byte data portions to recover the raw LH5
+     bitstream.
+  4. Decompress the bitstream using the standard LH5 algorithm.
+
+
+4  COMPRESSION SCHEME 1 — STORED
+==================================
+
+Scheme 1 stores the file data with no compression.  The compressed size
+equals the decompressed size.  The payload bytes immediately following the
+header are an exact copy of the original file.
+
+For stored entries, both CRC fields in the header (offsets 16 and 18)
+contain the same value: the CRC-16/IBM-3740 of the file data.
+
+
+5  CRC ALGORITHM
+=================
+
+All CRC fields use CRC-16/IBM-3740 (also known as CRC-16/CCITT-FALSE or
+CRC-16/AUTOSAR):
+
+    Polynomial:  0x1021 (x^16 + x^12 + x^5 + 1)
+    Init value:  0xFFFF
+    Reflect In:  No
+    Reflect Out: No
+    XOR Out:     0x0000
+
+Byte order of CRC fields varies:
+
+    Header CRC (offset 39)       :  Big-endian
+    Decompressed data CRC (off 18):  Little-endian
+    Compressed data CRC (off 16)  :  Little-endian
+    Per-segment CRCs (scheme 11)  :  Big-endian
+
+
+6  MULTI-VOLUME ARCHIVES
+==========================
+
+When a file is too large for a single archive volume (e.g. when
+distributing on floppy disks), it may be split across multiple volumes.
+Volume files are typically numbered sequentially (.001, .002, .003, ...).
+Each volume file contains one or more member records.
+
+6.1  Fragment Fields
+---------------------
+- Fragment number (offset 20):
+    0 = file is not split (entirely within this volume).
+    1 = first fragment of a split file.
+    2, 3, ... = continuation fragments.
+- Last-fragment flag (offset 22):
+    1 = this is the only fragment, or the final fragment.
+    0 = more fragments follow in subsequent volumes.
+
+6.2  Two Types of Split Files
+------------------------------
+Split files come in two forms depending on whether the first fragment's
+compressed data fits entirely within its volume:
+
+(a) Non-truncated first fragment: The frag=1 entry's comp_size bytes of
+    data fit entirely within the volume.  The continuation fragment(s)
+    in subsequent volumes contain additional independently-segmented
+    compressed data.  The raw LH5 bitstream is continuous: desegment
+    each fragment independently, concatenate the resulting LH5 chunks,
+    and decompress as a single stream.  This case is fully understood
+    and supported.
+
+(b) Truncated first fragment: The frag=1 entry's comp_size EXCEEDS the
+    remaining space in the volume, so the data is physically cut off at
+    EOF.  The continuation fragment in the next volume also contains
+    independently-segmented data (its first segment has a valid CRC
+    starting at byte 0 of its data section).  However, the truncation
+    in the first volume cuts mid-segment, and the continuation's
+    segments do not align with or continue from the truncation point.
+    The exact reassembly algorithm for this case is NOT YET UNDERSTOOD
+    (see section 6.6).
+
+6.3  Volume-Boundary Truncation
+---------------------------------
+When the last entry in a volume has comp_size exceeding the remaining
+file space:
+
+- The header is written with the full comp_size value (which may
+  represent the total segmented data for the file, not just this
+  volume's portion — this is not confirmed).
+- Only the bytes from data_offset to EOF are actually present.
+- No further entries exist after a truncated entry within that volume.
+- The next volume begins with a continuation header (frag=2+).
+
+6.4  Continuation Fragment Headers
+------------------------------------
+Continuation fragments (frag >= 2) differ from first/only fragments:
+
+- Filename (offset 26): may not match the original filename from frag=1.
+  In observed samples, continuation fragments always use filename "0"
+  regardless of the actual file name.  The filename is only reliable for
+  frag=0 (non-split) and frag=1 (first fragment).
+- Decompressed size (offset 12): set to 0 (only frag=0 or frag=1
+  carries the true original file size).
+- Decompressed CRC (offset 18): set to 0xFFFF (only frag=0 or frag=1
+  carries the true CRC).
+- Compressed CRC (offset 16): set to 0xFFFF.
+
+6.5  Reassembly — Non-Truncated Case
+--------------------------------------
+When the first fragment's compressed data fits within its volume:
+  1. Locate the frag=1 header to obtain the filename, decompressed size,
+     and decompressed CRC.
+  2. Strip segment CRCs from frag=1's compressed data to recover its
+     portion of the raw LH5 bitstream.
+  3. For each continuation fragment (frag=2, 3, ...), strip segment CRCs
+     independently to recover additional LH5 data.
+  4. Concatenate all LH5 portions in fragment order.
+  5. Decompress the combined LH5 bitstream as a single stream.
+  6. Verify the decompressed result against the size and CRC from the
+     frag=1 header.
+
+Note: each fragment's compressed data is independently segmented (its
+own sequence of 4094+2 byte segments).  The segmentation does NOT span
+fragment boundaries.  However, the underlying LH5 bitstream IS
+continuous across fragments — the decoder state carries over.
+
+6.6  Reassembly — Truncated Case (UNSOLVED)
+---------------------------------------------
+When the first fragment's compressed data is truncated at the volume
+boundary, the exact reassembly procedure is unknown.  What has been
+established through testing:
+
+- The truncated volume contains complete segments up to the truncation
+  point, plus a partial tail (< 4096 bytes).
+- The continuation volume's data starts with its own independently
+  valid segments (first segment CRC verifies at byte 0 of data).
+- The continuation's segments do NOT align with the truncation point:
+  combining the partial tail with the start of the continuation data
+  does not produce a valid segment CRC.
+- Simple concatenation approaches (raw data, desegmented LH5, with or
+  without the partial tail) all produce corrupt LH5 Huffman tables
+  when decompressed.
+- Neither fragment can be decompressed independently.
+- The comp_size in the truncated frag=1 header (610387 in the observed
+  sample) exceeds the available data (380887) by exactly 229500 bytes.
+  The continuation fragment's comp_size is 714492, which is larger than
+  the deficit, suggesting the continuation contains more than just the
+  "missing" bytes.
+
+The original INSTALL tool presumably maintained internal decompression
+state across volume boundaries — reading and decompressing data
+incrementally as it streamed from each volume.  Reproducing this
+behavior requires understanding exactly how the segment boundaries,
+LH5 block boundaries, and volume boundaries interact during the
+streaming write process.  This remains an open reverse-engineering
+problem.
+
+
+7  IDENTIFICATION
+==================
+
+A RED archive can be identified by the first four bytes:
+
+    0x52 0x52 0x01 0x29    ("RR" + version 0x01 + header size 0x29)
+
+These four bytes appear at the very beginning of the file and at the start
+of each member record header within the archive.
+
+
+8  BYTE MAP — COMPLETE ACCOUNTING
+===================================
+
+Every byte in a well-formed RED archive volume is accounted for:
+
+    Bytes 0..1    of each record: "RR" signature
+    Bytes 2..38   of each record: header fields (version through filename)
+    Bytes 39..40  of each record: header CRC
+    Bytes 41..41+N of each record: compressed data payload
+
+    where N = compressed_size (offset 8).
+
+For single-volume archives, the next record begins immediately at byte
+41+N.  The archive ends when the file is exhausted (there is no
+end-of-archive marker).
+
+For multi-volume archives, the last entry's compressed data may be
+truncated at EOF when its comp_size exceeds the remaining file space
+(see section 6.2).  All bytes from offset 41 of that entry to EOF are
+compressed data belonging to that fragment.
+
+For scheme 11 payloads, within the N compressed bytes:
+    Every 4096-byte group: bytes 0..4093 are LH5 data, bytes 4094..4095
+    are the big-endian segment CRC.  The last group is shorter.
+
+
+9  FILENAMES AND INSTALL.DAT
+==============================
+
+9.1  Archive Entry Names
+-------------------------
+The 13-byte filename field in the header (offset 26) serves as an entry
+identifier but does NOT always contain the real output filename.  Two
+conventions have been observed:
+
+(a) Real filenames: The archive entry name is the actual DOS 8.3
+    filename (e.g. "CLMODE.EXE", "DOS4GW.EXE").  Common in single-
+    volume archives and archives where the entries already have
+    meaningful names.
+
+(b) Short identifiers: The entry name is a compact key such as "0",
+    "1", "A", "A0", "01", etc.  These are used in multi-volume
+    installer archives where the real filenames are stored externally
+    in an INSTALL.DAT script file.
+
+There is no in-archive flag to distinguish the two cases.
+
+9.2  INSTALL.DAT
+-----------------
+RED archives produced by the Knowledge Dynamics INSTALL system are
+typically accompanied by an INSTALL.DAT file in the same directory.
+This is a text-based installation script that contains (among other
+things) the mapping from archive entry names to real output filenames.
+
+The filename of this script is always "INSTALL.DAT" but may appear in
+any case on disk (e.g. "Install.dat", "install.dat").
+
+Two script dialects have been observed:
+
+Dialect 1 (multi-volume installer archives):
+
+    @DefineDisk
+        @Label = "Disk #1"
+        @BeginLib TIMETREK.001
+            @F 0 @S 2637421 @O TIMETREK.GRP
+        @EndLib
+    @EndDisk
+
+  - ``@BeginLib <filename>`` / ``@EndLib`` bracket entries for one
+    archive volume.
+  - ``@F <id> @S <size> @O <outputName>`` defines a new file: archive
+    entry *id*, decompressed *size* bytes, output as *outputName*.
+  - ``@F <id> @A <outputName>`` marks a continuation (append) fragment.
+  - A single archive volume may appear in multiple ``@BeginLib`` blocks
+    (e.g. when different installation options extract different subsets);
+    all blocks for the same library should be merged.
+
+Dialect 2 (single-volume driver/utility archives):
+
+    @BeginLib CLUTILS.RED
+        @File CLMODE.EXE  @Out \@Opt1230Dir\CLMODE.EXE
+        @File CLMODE.DAT  @Out \@Opt1230Dir\CLMODE.DAT
+    @EndLib
+
+  - ``@File <archiveName> @Out <path>`` maps an archive entry name to
+    an output path.  The basename of the ``@Out`` path is the real
+    output filename.  Variables like ``@Opt1230Dir`` are installation
+    directory placeholders.
+  - When two entries map to the same output basename but different
+    directory paths, the original installer would write them to separate
+    directories.  A flat-directory extractor will see collisions.
+
+9.3  Usage Notes
+-----------------
+- INSTALL.DAT is optional.  If absent, the archive entry names are
+  used as-is for output filenames.
+- The file should be located in the same directory as the archive
+  volume being extracted.
+- Lookups should be case-insensitive (both the INSTALL.DAT filename
+  and the library name references within it).

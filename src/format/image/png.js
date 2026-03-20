@@ -10,7 +10,7 @@ export class png extends Format
 	magic            = [
 		// generic
 		"Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", "PNG Bild", "PNG image, ", "image/png", "piped png sequence (png_pipe)", /^geViewer: PNG_PNG( |$)/,
-		"image/apng", "Animated Portable Network Graphics (apng)", "Animated Portable Network Graphics", "deark: png (PNG)", "deark: png (APNG)", /^deark: png$/, "Format: PNG",
+		"image/apng", "Animated Portable Network Graphics (apng)", "Animated Portable Network Graphics", "deark: png (PNG)", "deark: png (APNG)", /^deark: png$/, "Format: PNG", "image:PngFormat",
 		/^fmt\/(11|12|13|935)( |$)/,
 
 		// specific

@@ -6,16 +6,16 @@ export class dds extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/DirectDraw_Surface";
 	ext          = [".dds"];
 	mimeType     = "image/x-direct-draw-surface";
-	magic        = ["DirectX DirectDraw Surface", "Microsoft DirectDraw Surface", "DirectDraw Surface", "image/x-dds", "piped dds sequence (dds_pipe)", /^geViewer: DDS_DDS( |$)/, /^fmt\/1040( |$)/];
+	magic        = ["DirectX DirectDraw Surface", "Microsoft DirectDraw Surface", "DirectDraw Surface", "image/x-dds", "piped dds sequence (dds_pipe)", "image:DirectDraw.DdsFormat", /^geViewer: DDS_DDS( |$)/, /^fmt\/1040( |$)/];
 	metaProvider = ["image"];
 	converters   = [
-		
 		"ffmpeg[format:dds_pipe][outType:png]",
 		"gameextractor[renameOut][codes:DDS_DDS]",
 		"gimp",
+		"GARbro[types:image:DirectDraw.DdsFormat]",
 	
-		"paintDotNet",
-		"noesis[type:image]",
+		"paintDotNet[matchType:magic]",
+		"noesis[type:image][matchType:magic]",
 
 		// convert and nconvert sometimes produce an invalid image, but convert usually does better overall than the rest and gets the abydos test image better than iconvert does
 		"convert", "iconvert", "nconvert[format:dds]"

@@ -6,7 +6,7 @@ export class visualNovelDPK extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DPK";
 	ext            = [".dpk"];
 	forbidExtMatch = true;
-	magic          = ["Visual Novel DPK Archive"];
+	magic          = ["Visual Novel DPK Archive", "archive:SysD.DpkOpener"];
 	weakMagic      = true;
-	converters     = ["undpk"];
+	converters     = ["GARbro[types:archive:SysD.DpkOpener]", "undpk"];
 }

@@ -10,15 +10,16 @@ export {_MOV_MAGIC, _MOV_MAGIC_WEAK, _MOV_EXT};
 
 export class mov extends Format
 {
-	name         = "Apple QuickTime movie";
-	website      = "http://fileformats.archiveteam.org/wiki/QuickTime";
-	ext          = _MOV_EXT;
-	mimeType     = "video/quicktime";
-	magic        = _MOV_MAGIC;
-	idMeta       = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
-	trustMagic   = true;
-	metaProvider = ["mplayer"];
-	converters   = dexState =>
+	name           = "Apple QuickTime movie";
+	website        = "http://fileformats.archiveteam.org/wiki/QuickTime";
+	ext            = _MOV_EXT;
+	mimeType       = "video/quicktime";
+	magic          = _MOV_MAGIC;
+	forbiddenMagic = ["qtvrPano"];	// handled by image/qtvrPano
+	idMeta         = ({macFileType}) => macFileType?.toLowerCase()==="moov" || macFileType==="MMov";	// I've encountered MooV and Moov, so just lowercase it
+	trustMagic     = true;
+	metaProvider   = ["mplayer"];
+	converters     = dexState =>
 	{
 		const r = [
 			"ffmpeg", "nihav",

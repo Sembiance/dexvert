@@ -5,8 +5,8 @@ export class nsaArchive extends Format
 	name           = "NSA Archive";
 	ext            = [".nsa"];
 	forbidExtMatch = true;
-	magic          = [/^NSA$/];
+	magic          = [/^NSA$/, "archive:NScripter.NsaOpener"];
 	weakMagic      = true;
 	keepFilename   = true;
-	converters     = ["unar"];
+	converters     = ["GARbro[types:archive:NScripter.NsaOpener]", "unar"];
 }

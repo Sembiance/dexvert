@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {path} from "std";
-import { programDirPath} from "../program/programs.js";
+import {programDirPath} from "../program/programs.js";
 import {formatDirPath} from "../format/formats.js";
 import {fileUtil, webUtil, cmdUtil} from "xutil";
 import {initRegistry} from "../dexUtil.js";
@@ -20,7 +20,6 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const xlog = new XLog(argv.logLevel);
-const DEXVERT_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.85);
 const LOCKS = new Set();
 const RPC_RESPONSES = new Map();
 let RPCID_COUNTER = 1;
@@ -49,7 +48,7 @@ const onFail = ({reason, error}, {log, msg}) =>
 };
 
 const dexPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
-await dexPool.init();
+await dexPool.init({maxProcessDuration : C.DEX_AGENT_MAX_DURATION, watchdogInterval : xu.SECOND*10});
 
 const runEnv = {};
 for(const [key, value] of Object.entries(Deno.env.toObject()))
@@ -58,8 +57,8 @@ for(const [key, value] of Object.entries(Deno.env.toObject()))
 		runEnv[key] = value;
 }
 
-xlog.info`Starting ${DEXVERT_AGENT_COUNT} dex agents...`;
-await dexPool.start({qty : DEXVERT_AGENT_COUNT, runEnv});
+xlog.info`Starting ${C.DEX_AGENT_COUNT} dex agents...`;
+await dexPool.start({qty : C.DEX_AGENT_COUNT, runEnv});
 
 const monitors = [];
 if(C.IS_DEV_MACHINE)
@@ -83,7 +82,7 @@ xlog.info`Starting web RPC...`;
 
 const routes = new Map();
 
-routes.set("/agentCount", () => new Response(DEXVERT_AGENT_COUNT.toString()));
+routes.set("/agentCount", () => new Response(C.DEX_AGENT_COUNT.toString()));
 routes.set("/status", async () =>
 {
 	const status = await dexPool.status();

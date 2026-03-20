@@ -391,7 +391,7 @@ async function processNextQueue()
 			Object.assign(rpcData.dexvertOptions.programFlag, parseProgramFlags(fileProgramFlags[task.relFilePath]));
 		}
 
-		let {r, log} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true, timeout : (xu.HOUR*2)+(xu.MINUTE*15)}) || {};
+		let {r, log} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true, timeout : C.DEX_AGENT_MAX_DURATION+(xu.MINUTE*5)}) || {};
 		if(!r?.json)
 		{
 			r = {

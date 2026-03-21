@@ -1,0 +1,161 @@
+SIMIS Shape (.s) File Format Specification
+==========================================
+
+Microsoft Train Simulator (MSTS) / Open Rails shape file format.
+Binary variant with JINX subheader.
+
+Reference: MSTS shape file format spec, Open Rails ShapeFile.cs,
+           msts-tools tokens.csv
+
+
+1. OUTER CONTAINER
+==================
+
+Three variants exist:
+
+  Uncompressed: "SIMISA@@@@@@@@@@" (16 bytes) + inner data
+  Compressed:   "SIMISA@F" + u32(decomp_size) + "@@@@" + zlib DEFLATE payload
+  Raw JINX:     No outer wrapper, starts directly with JINX header
+
+All 100 sample files use the raw JINX variant.
+
+
+2. JINX HEADER (16 bytes)
+=========================
+
+  "JINX0s1b______\r\n"
+
+  JINX   = format family (Kuju engine)
+  0      = version prefix
+  s      = file type: shape
+  1      = format version 1
+  b      = encoding: b=binary, t=text
+  ______ = padding
+  \r\n   = line terminator
+
+
+3. BINARY BLOCK STRUCTURE
+=========================
+
+Each block (node) in the binary tree:
+
+  +0   2   u16 LE   Token ID (identifies block type)
+  +2   2   u16 LE   Token type (0x0000 for shape, 0x0004 for world objects)
+  +4   4   u32 LE   Content length (bytes after this 8-byte header)
+  +8   1   u8       Name length (0 = unnamed)
+  +9   N*2 UTF-16LE Name string (N = name length)
+  +9+N*2   Content data (child blocks and/or primitive values)
+
+Array-type blocks have a u32 count as the first 4 bytes of content,
+before any child blocks.
+
+
+4. SHAPE HIERARCHY
+==================
+
+  shape (0x0047) — root block
+    shape_header (0x0046): u32 flags
+    volumes (0x0044): u32 count → vol_sphere children
+    shader_names (0x0048): u32 count → named_shader (string) children
+    texture_filter_names (0x004A): u32 count → named_filter_mode children
+    points (0x0007): u32 count → point (0x0002: f32 X, Y, Z) children
+    uv_points (0x0009): u32 count → uv_point (0x0008: f32 U, V) children
+    normals (0x0005): u32 count → vector (0x0003: f32 X, Y, Z) children
+    sort_vectors (0x004C): u32 count → vector children
+    colours (0x000B): u32 count → colour children
+    matrices (0x0042): u32 count → matrix (0x0041: 12 f32, 3x4 row-major)
+    images (0x000E): u32 count → image (0x000D: string filename.ace)
+    textures (0x0010): u32 count → texture (0x000F: u32 imageIdx, ...)
+    light_materials (0x0012): u32 count → light_material children
+    light_model_cfgs (0x004F): u32 count → light_model_cfg children
+    vtx_states (0x002F): u32 count → vtx_state children
+    prim_states (0x0037): u32 count → prim_state (0x0036) children
+    lod_controls (0x001F): u32 count → lod_control children
+      lod_control (0x0020):
+        distance_levels_header (0x0021)
+        distance_levels (0x0024): u32 count → distance_level children
+          distance_level (0x0025):
+            distance_level_header (0x0022):
+              dlevel_selection (0x0023): f32 distance_threshold
+              hierarchy (0x0043): u32 count, s32[] parent_indices
+            sub_objects (0x0026): u32 count → sub_object children
+              sub_object (0x0027):
+                sub_object_header (0x0028)
+                vertices (0x0032): u32 count → vertex (0x0030) children
+                vertex_sets (0x0034): u32 count → vertex_set children
+                primitives (0x0035): u32 count
+                  prim_state_idx (0x0038): u32 primStateIdx
+                  indexed_trilist (0x003C):
+                    vertex_idxs (0x003F): u32 total, u32[] indices
+                    normal_idxs (0x0006): u32 count, (u32 idx, u32 pad)[]
+                    flags (0x0040): u32 count, u32[] per_tri_flags
+
+
+5. VERTEX FORMAT
+================
+
+  vertex (0x0030):
+    u32  flags
+    u32  pointIdx      → global points[i]
+    u32  normalIdx     → global normals[i]
+    u32  colour1       (typically 0xFFFFFFFF)
+    u32  colour2       (typically 0xFF000000)
+    vertex_uvs (0x0031): u32 count, u32[] uvPointIdx → global uv_points[i]
+
+
+6. GEOMETRY INDIRECTION
+=======================
+
+  indexed_trilist.vertex_idxs[i] → sub_object.vertices[i]
+  vertices[i].pointIdx → shape.points[j]        (3D position)
+  vertices[i].normalIdx → shape.normals[j]      (normal vector)
+  vertices[i].vertex_uvs[0] → shape.uv_points[k] (texture coordinate)
+
+
+7. DATA TYPES
+=============
+
+  uint    4 bytes   Unsigned 32-bit integer (LE)
+  sint    4 bytes   Signed 32-bit integer (LE)
+  float   4 bytes   IEEE 754 single precision (LE)
+  dword   4 bytes   Flags/bitfield
+  string  2+N*2     u16 char count + UTF-16LE characters
+
+
+8. LOD SYSTEM
+=============
+
+  distance_levels are ordered by distance threshold.
+  First distance_level = highest detail (closest).
+  Converter extracts only the first distance_level.
+
+
+9. CONVERSION STATUS
+====================
+
+100 sample files. Two variants detected:
+
+  Root 0x0047 (standard MSTS shape): 77 files — FULLY CONVERTED
+    - Global arrays: points, normals, UV coordinates
+    - Per-sub_object local vertex arrays with index dereferencing
+    - Indexed triangle lists
+    - Flat shading with face normals
+    - UVs output as TEXCOORD_0
+
+  Root 0x004E (non-standard variant): 23 files — NOT CONVERTED
+    - Uses same JINX binary container but different token semantics
+    - Global arrays (points, normals, UVs) parse correctly
+    - Geometry blocks (vertices, triangles) use incompatible encoding
+    - Likely from a different game engine (names suggest military/space game)
+    - Produces empty GLB (no errors)
+
+Result: 77/100 converted with geometry, 23 empty, 0 errors.
+
+
+10. REFERENCES
+==============
+
+  - MSTS shape file format: digital-rails.com
+  - Open Rails ShapeFile.cs: github.com/openrails/openrails
+  - msts-tools tokens.csv: github.com/twpol/msts-tools
+  - Open Rails SBR.cs binary reader

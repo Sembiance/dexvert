@@ -13,32 +13,32 @@ export class PageStream extends Program
 		cwd    : "wine://dexvert/PageStream",
 		script : `
 			$mainWindow = WindowRequire("PageStream5", "", 5)
-			Sleep(1000)
+			Sleep(2000)
 			MouseClick("left", 100, 100)
-			Sleep(250)
+			Sleep(590)
 			Send("^o")
 
-			$openWindow = WindowRequire("Open Document", "", 5)
+			$openWindow = WindowRequire("Open Document", "", 10)
 			SendSlow("c:\\in${r.wineCounter}\\${path.basename(r.inFile())}{ENTER}")
-			WinWaitClose($openWindow, "", 5)
+			WinWaitClose($openWindow, "", 10)
 
-			Sleep(500)
+			Sleep(1000)
 			Send("{ENTER}")
 
-			$fontSubstitutionWindow = WinWait("Font Substitution", "", 10)
+			$fontSubstitutionWindow = WinWait("Font Substitution", "", 15)
 			ControlClick($fontSubstitutionWindow, "", "[CLASS:Button; TEXT:OK]")
 
-			$mainWindow = WindowRequire("PageStream5", "", 5)
-			Sleep(1000)
+			$mainWindow = WindowRequire("PageStream5", "", 10)
+			Sleep(1500)
 
 			SendSlow("!fD")
 
-			$saveAsPDFWindow = WindowRequire("Save As PDF", "", 10)
+			$saveAsPDFWindow = WindowRequire("Save As PDF", "", 15)
 			ControlClick($saveAsPDFWindow, "", "[CLASS:Button; TEXT:Save]")
 			
-			$saveAsPDFWindow = WindowRequire("Save as PDF", "", 10)	; note the slightly different spelling, rofl, what a train wreck
+			$saveAsPDFWindow = WindowRequire("Save as PDF", "", 15)	; note the slightly different spelling, rofl, what a train wreck
 			SendSlow("c:\\out${r.wineCounter}\\out.pdf{ENTER}")
-			WinWaitClose($saveAsPDFWindow, "", 10)
+			WinWaitClose($saveAsPDFWindow, "", 15)
 
 			WaitForStableFileSize("c:\\out${r.wineCounter}\\out.pdf", ${xu.SECOND*5}, ${xu.SECOND*30})
 

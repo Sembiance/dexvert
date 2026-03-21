@@ -7,16 +7,16 @@
 * Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
 
 * Several WAVs and other audio formats (where WAVs are extracted with foremost -> sox) don't work with sox_ng (the sox replacement)
-  I've opened an issue about it: https://codeberg.org/sox_ng/sox_ng/issues/747
-  Once they fix that, I can update my system and install sox_ng (already have overlay for it) instead of sox
+  For now I've fallen back to the original 'sox' until they fix the issue in sox_ng: https://codeberg.org/sox_ng/sox_ng/issues/747
+  Once they fix that, I can update my system and install sox_ng (already have overlay for it, will need to update it) instead of sox
   Then need to run full test-suite again and ensure everything still works correctly
-
-* Add support for formats and the new program (once it's released): https://codecs.multimedia.cx/2025/09/new-obscure-formats/
 
 
 /--------------\
 | TOP Priority |
 \--------------/
+* Create an "option" that can be toggled on (via hard coded C.PROGRAM_TIME_ANALYSIS = true; that will record in arrays every duration of every program
+  Then in dexrecurse /status it can return the .average(), median, etc. etc. of that array to get an idea of slow programs to improve
 
 
 /-------------\

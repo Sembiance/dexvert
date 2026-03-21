@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,026)
+# Unsupported File Formats (4,024)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (294)
+## Archive (292)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -20,7 +20,6 @@ Family/Format | Name | Extensions | Notes
 [archive/actionPresentation](https://discmaster.textfiles.com/search?format=actionPresentation) | Action! presentation | .acp .act .sta | 
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?format=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
 [archive/adysGLUEPacked](https://discmaster.textfiles.com/search?format=adysGLUEPacked) | Ady's GLUE Packed | .exe | 
-[archive/afterlifeGameData](https://discmaster.textfiles.com/search?format=afterlifeGameData) | Afterlife game data | .000 | 
 [archive/aixBackupRestore](https://discmaster.textfiles.com/search?format=aixBackupRestore) | AIX/BFF backup/restore | .img .bff | 
 [archive/amiBackBackupDiskImage](https://discmaster.textfiles.com/search?format=amiBackBackupDiskImage) | Ami-Back backup disk image | .adf | 
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?format=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
@@ -240,7 +239,6 @@ Family/Format | Name | Extensions | Notes
 [archive/setupMVA](https://discmaster.textfiles.com/search?format=setupMVA) | Setup Program Archive | .mva .mvb | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?format=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
 [archive/shrinkerWindowsPacked](https://discmaster.textfiles.com/search?format=shrinkerWindowsPacked) | Shrinker Packed (Windows) | .exe | 
-[archive/simis](https://discmaster.textfiles.com/search?format=simis) | Simis | .s .ace .t .dat .mis | 
 [archive/simplePackPacked](https://discmaster.textfiles.com/search?format=simplePackPacked) | Simple Pack Packed | .exe | 
 [archive/singleFileSystemContainer](https://discmaster.textfiles.com/search?format=singleFileSystemContainer) | Single File System container | .sfs | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?format=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 

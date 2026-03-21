@@ -53,7 +53,7 @@ C.POST_PROCESS_HOST = "127.0.0.1";
 C.POST_PROCESS_PORT = 17532;
 
 C.DEX_AGENT_MAX_DURATION = xu.HOUR*1.5;
-C.DEX_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*(navigator.hardwareConcurrency<=16 ? 1.0 : 1.5));
+C.DEX_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*(navigator.hardwareConcurrency<=16 ? 1.0 : 1.1));
 
 C.POLY_THUMB_HEIGHT = 300;
 C.POLY_THUMB_WIDTH = 200;

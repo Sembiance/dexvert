@@ -111,6 +111,24 @@ def convert_fastfst(input_path, output_path, verbose=False):
     print(f"Done. Output: {output_path}")
 
 
+def convert_simisshape(input_path, output_path, verbose=False):
+    """Convert a SIMIS Shape (.s) file to GLB."""
+    from simisShape import parse_simis, convert_to_glb
+
+    print(f"Parsing SIMIS Shape file: {input_path}")
+    model = parse_simis(input_path, verbose=verbose)
+
+    total_verts = sum(len(m.positions) for m in model.meshes)
+    total_tris = sum(len(m.triangles) // 3 for m in model.meshes)
+    print(f"  Meshes: {len(model.meshes)}")
+    print(f"  Vertices: {total_verts}")
+    print(f"  Triangles: {total_tris}")
+
+    print(f"Converting to GLB: {output_path}")
+    convert_to_glb(model, output_path, verbose=verbose)
+    print(f"Done. Output: {output_path}")
+
+
 def convert_starbreezemodel(input_path, output_path, verbose=False):
     """Convert a Starbreeze XMD model to GLB."""
     from starbreezeModel import parse_xmd, convert_to_glb
@@ -139,6 +157,7 @@ CONVERTERS = {
     'eplybnds': convert_eplybnds,
     'fastFST': convert_fastfst,
     'starbreezeModel': convert_starbreezemodel,
+    'simisShape': convert_simisshape,
 }
 
 

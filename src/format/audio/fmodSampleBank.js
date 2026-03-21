@@ -6,6 +6,6 @@ export class fmodSampleBank extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/FMOD_Sample_Bank";
 	ext            = [".fsb", ".bank"];
 	forbidExtMatch = true;
-	magic          = ["FMOD Sample Bank format", "FMOD Sample Bank", /^geArchive: FSB_FSB4( |$)/];
+	magic          = ["FMOD Sample Bank format", "FMOD Sample Bank", /^geArchive: FSB_FSB4( |$)/, "audio:Fmod.Fsb5Audio"];
 	converters     = ["vgmstream[extractAll]", "zxtune123"];
 }

@@ -267,6 +267,7 @@ const DEXMAGIC_CHECKS = {
 	"EPLYBNDS Poly"         : [{offset : 0, match : "EPLYBNDS"}],
 	"Quake Model"           : [{offset : 0, match : "IDPO"}, {offset : 4, match : [0x06]}],
 	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
+	"SIMIS Shape"           : [{offset : 0, match : "JINX0s1b"}],
 	"Starbreeze Model"      : [{offset : 0, match : "MOS DATAFILE"}, {offset : 0x30, match : ["EXTENDEDMODEL"]}],
 
 	// text

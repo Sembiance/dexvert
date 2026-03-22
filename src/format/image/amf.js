@@ -6,7 +6,7 @@ export class amf extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Amiga_Metafile";
 	ext            = [".amf"];
 	forbidExtMatch = true;
-	magic          = ["IFF data, AMFF AmigaMetaFile format"];
 	mimeType       = "image/x-amff";
+	magic          = ["IFF data, AMFF AmigaMetaFile format"];
 	converters     = [`abydosconvert[format:${this.mimeType}]`];
 }

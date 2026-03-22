@@ -6,13 +6,14 @@ export class imageSystem extends Format
 	name           = "Image System";
 	website        = "http://fileformats.archiveteam.org/wiki/Image_System";
 	ext            = [".ish", ".ism"];
+	mimeType       = "image/x-image-system";
 	magic          = [/^Image System \((Hires|Multicolor)\) :cis[hm]:$/];
 	fileSize       = {".ism" : 10218};
 	matchFileSize  = true;
 	forbiddenMagic = TEXT_MAGIC;
 
 	// recoil2png doesn't properly handle some files, nconvert does a better job here
-	converters = ["nconvert[format:cism]", "nconvert[format:cish]", "recoil2png[format:ISH,ISM]", "view64"];
+	converters = ["nconvert[format:cism]", "nconvert[format:cish]", "recoil2png[format:ISH,ISM]", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 	// Due to not having a good magic, we reject any created images that have less than 5 colors
 	verify = ({meta}) => meta.colorCount>5;

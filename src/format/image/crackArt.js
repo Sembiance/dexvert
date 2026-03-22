@@ -5,6 +5,7 @@ export class crackArt extends Format
 	name       = "Crack Art";
 	website    = "http://fileformats.archiveteam.org/wiki/Crack_Art";
 	ext        = [".ca1", ".ca2", ".ca3"];
+	mimeType   = "image/x-crack-art";
 	magic      = ["Crack Art bitmap"];
-	converters = ["recoil2png[format:CA1,CA3,CA2]"];
+	converters = ["recoil2png[format:CA1,CA3,CA2]", `abydosconvert[format:${this.mimeType}]`];
 }

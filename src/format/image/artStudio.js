@@ -5,8 +5,9 @@ export class artStudio extends Format
 	name       = "Art Studio";
 	website    = "http://fileformats.archiveteam.org/wiki/Art_Studio";
 	ext        = [".art", ".aas"];
+	mimeType   = "image/x-art-studio";
 	magic      = ["C64 Hires bitmap", "Art Studio :ocp:"];
 	weakMagic  = true;
 	fileSize   = [...[].pushSequence(9000, 9010), 10018];
-	converters = ["recoil2png[format:ART.Iph,AAS]", "nconvert[format:ocp]", "view64[strongMatch]"];
+	converters = ["recoil2png[format:ART.Iph,AAS]", "nconvert[format:ocp]", `abydosconvert[format:${this.mimeType}][matchType:magic]`, "view64[strongMatch]"];
 }

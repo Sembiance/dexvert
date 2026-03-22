@@ -726,7 +726,6 @@ export default
 		infinityWardImage              : {name : "Infinity Ward Image", ext : [".iwi"], magic : ["Infinity Ward Image bitmap"], weakMagic : true},
 		intelligentImageQuality        : {name : "Intelligent Image Quality - Phase One RAW image", ext : [".iiq"], magic : ["Intelligent Image Quality - Phase One RAW image", /^fmt\/1061( |$)/], weakMagic : true},
 		islandDrawDocument             : {name : "IslandDraw document", ext : [".drw"], magic : ["IslandDraw document"], weakMagic : true},
-		khronosTexture                 : {name : "Khronos Texture", ext : [".ktx", ".dat"], magic : ["Khronos Texture", "image/ktx", /^Khronos KTX texture/, /^fmt\/970( |$)/], weakMagic : true},
 		kiriKiriBitmap                 : {name : "KiriKiri Bitmap", ext : [".tlg"], magic : ["KiriKiri TLG"], weakMagic : true},
 		kompasDrawing                  : {name : "KOMPAS Drawing", ext : [".cdw", ".lyt", ".lts", ".bss"], magic : ["KOMPAS Drawing", "Kompas drawing"], weakMagic : true},
 		lightningStrikeBitmap          : {name : "Lightning Strike bitmap", ext : [".cod"], magic : ["Lightning Strike bitmap"], weakMagic : true},

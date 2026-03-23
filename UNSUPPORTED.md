@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,024)
+# Unsupported File Formats (4,023)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -776,7 +776,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (199)
+## Image (198)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -875,7 +875,7 @@ Family/Format | Name | Extensions | Notes
 [image/irisShowcase](https://discmaster.textfiles.com/search?format=irisShowcase) | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 [image/islandDrawDocument](https://discmaster.textfiles.com/search?format=islandDrawDocument) | IslandDraw document | .drw | 
 [image/keyCADCompleteDrawing](https://discmaster.textfiles.com/search?format=keyCADCompleteDrawing) | KeyCAD Complete Drawing | .kcf | [7 sample files](https://sembiance.com/fileFormatSamples/image/keyCADCompleteDrawing/)
-[image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat | 
+[image/khronosTexture](https://discmaster.textfiles.com/search?format=khronosTexture) | Khronos Texture | .ktx .dat .ktx2 | [3 sample files](https://sembiance.com/fileFormatSamples/image/khronosTexture/)
 [image/kiriKiriBitmap](https://discmaster.textfiles.com/search?format=kiriKiriBitmap) | KiriKiri Bitmap | .tlg | 
 [image/kompasDrawing](https://discmaster.textfiles.com/search?format=kompasDrawing) | KOMPAS Drawing | .cdw .lyt .lts .bss | 
 [image/leonardsSketchDrawing](https://discmaster.textfiles.com/search?format=leonardsSketchDrawing) | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://sembiance.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
@@ -894,7 +894,7 @@ Family/Format | Name | Extensions | Notes
 [image/medusa2DCADDrawing](https://discmaster.textfiles.com/search?format=medusa2DCADDrawing) | Medusa 2D CAD drawing | .she | 
 [image/megamidGrayscaleBitMap](https://discmaster.textfiles.com/search?format=megamidGrayscaleBitMap) | Megamid Grayscale BitMap | .gbm .map | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?format=megaPaintVector) | MegaPaint Vector | .vek | 
-[image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
+[image/microIllustrator](https://discmaster.textfiles.com/search?format=microIllustrator) | Micro Illustrator | .mic .mil | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 [image/microsoftBorderArt](https://discmaster.textfiles.com/search?format=microsoftBorderArt) | Microsoft Border Art | .bdr | 
 [image/microsoftDocumentImagingFormat](https://discmaster.textfiles.com/search?format=microsoftDocumentImagingFormat) | Microsoft Document Imaging format | .mdi | 
 [image/xboxXPR0Texture](https://discmaster.textfiles.com/search?format=xboxXPR0Texture) | Microsoft Xbox XPR0 texture | .xbx | 
@@ -947,7 +947,6 @@ Family/Format | Name | Extensions | Notes
 [image/seam3DMaterial](https://discmaster.textfiles.com/search?format=seam3DMaterial) | SEAM 3D Material | .mat | 
 [image/serifDrawPlusDrawing](https://discmaster.textfiles.com/search?format=serifDrawPlusDrawing) | Serif DrawPlus Picture/drawing | .dpp | 
 [image/signumCDI](https://discmaster.textfiles.com/search?format=signumCDI) | Signum! CDI Image | .cdi .c01 | 
-[image/simpleVectorFormat](https://discmaster.textfiles.com/search?format=simpleVectorFormat) | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 [image/slpImage](https://discmaster.textfiles.com/search?format=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 [image/solidWorksSketch](https://discmaster.textfiles.com/search?format=solidWorksSketch) | SolidWorks Sketch | .ske | 
 [image/spriteArtistSprite](https://discmaster.textfiles.com/search?format=spriteArtistSprite) | Sprite Artist Sprite | .spr | 

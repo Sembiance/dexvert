@@ -10,7 +10,7 @@ export class replica extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script   : `
-			$mainWindow = WindowRequire("[CLASS:DPMDIFrameClass]", "", 20)
+			$mainWindow = WindowRequire("[CLASS:DPMDIFrameClass]", "", 22)
 
 			Func PreOpenWindows()
 				WindowFailure("Replica", "not a Replica document", -1, "{ENTER}")
@@ -19,7 +19,7 @@ export class replica extends Program
 		
 			SendSlow("!fp")
 
-			$printWindow = WindowRequire("Print", "", 7)
+			$printWindow = WindowRequire("Print", "", 10)
 			Send("{ENTER}")
 
 			HandleCutePDFPrint()

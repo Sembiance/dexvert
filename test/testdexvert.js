@@ -44,6 +44,7 @@ const FLAKY_CONVERTERS = [
 	"noesis",
 	"paintDotNet",
 	"pageMaker4",
+	"pageMaker5",
 	"pageMaker7",
 	"quarkXPress6",
 	"threeDObjectConverter",
@@ -483,6 +484,9 @@ const FLEX_DIFF_FILES = [
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP = [
+	// Sometimes gets converted as a sister format, not entirely sure why
+	[/document\/hlp\/QPW\.HLP$/, "document", "multimediaViewerBook"],
+	
 	// Mis-classified by classify as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
@@ -597,7 +601,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/archive\/(cdi|iso)\/.+\.(cue|toc|ccd)$/i, "text", true],
 	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", "pogNames"],
-	[/archive\/redArchive\/.*\.dat$/, "text", "installProfessionalProject"],
+	[/archive\/redArchive\/.*\.dat$/i, "text", "installProfessionalProject"],
 	[/audio\/wbnkAudioArchive\/Unnamed File 00000[124]\.WBNK/, true, true],
 	[/font\/riscOSFont\/intmetric.*$/i, "other", "riscOSFontMetrics"],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],

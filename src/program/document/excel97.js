@@ -20,29 +20,29 @@ export class excel97 extends Program
 				WindowDismiss("File Not Found", "", "{ESCAPE}")
 				return WinActive("Microsoft Excel - ", "")
 			EndFunc
-			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*15})
 			If Not $mainWindow Then
 				Exit 0
 			EndIf
 			
 			${r.flags.outMethod==="print" ? `
 				Send("^p")
-				$printWindow = WindowRequire("Print", "", 10)
+				$printWindow = WindowRequire("Print", "", 15)
 				Send("{ENTER}")
 			
 				HandleCutePDFPrint()
 			` : `
 				SendSlow("!fa")
 
-				$saveAsWindow = WindowRequire("[TITLE:Save As]", "", 10)
+				$saveAsWindow = WindowRequire("[TITLE:Save As]", "", 15)
 
-				Sleep(200)
+				Sleep(1000)
 				Send("{TAB}{DOWN}{HOME}{ENTER}")
 				Send("+{TAB}c:\\out\\outfile.xls{ENTER}")
 				
-				WinWaitClose($saveAsWindow, "", 5)`}
+				WinWaitClose($saveAsWindow, "", 10)`}
 
-			Sleep(200)
+			Sleep(500)
 			SendSlow("!fx")`
 	});
 	renameOut  = true;

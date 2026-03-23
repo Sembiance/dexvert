@@ -15,8 +15,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Create an "option" that can be toggled on (via hard coded C.PROGRAM_TIME_ANALYSIS = true; that will record in arrays every duration of every program
-  Then in dexrecurse /status it can return the .average(), median, etc. etc. of that array to get an idea of slow programs to improve
 
 
 /-------------\

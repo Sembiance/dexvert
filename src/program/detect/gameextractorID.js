@@ -16,9 +16,7 @@ const _SKIP_CODES = new Set([][
 	"PAK_FORM", "PCG", "PCK_2", "PKBARC_BMT", "PKF", "PRJ_PROJ",
 	"SHD", "SND_SND2", "TEXTURE", "TXT", "U_Generic", "WAV_RIFF", "ZBD_RIFF", "ZIP_PK"
 ]);
-const _SKIP_PREFIX_CODES = [];
-const _SKIP_PREFIX_NAMES = ["Unity3D Engine Resource"];
-export {_SKIP_CODES, _SKIP_PREFIX_CODES, _SKIP_PREFIX_NAMES};
+export {_SKIP_CODES};
 
 export class gameextractorID extends Program
 {
@@ -31,7 +29,7 @@ export class gameextractorID extends Program
 		const result = await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/detect`, {json : {filePath : r.inFile({absolute : true})}, asJSON : true});
 		for(const {type, code, name, rating, extensions, games, extensionMatch} of result?.matches || [])
 		{
-			if((!r.xlog || !r.xlog.atLeast("trace")) && (_SKIP_CODES.has(code) || _SKIP_PREFIX_CODES.some(v => code.startsWith(v)) || _SKIP_PREFIX_NAMES.some(v => name.startsWith(v))))
+			if((!r.xlog || !r.xlog.atLeast("trace")) && (_SKIP_CODES.has(code)))
 				continue;
 
 			const confidence = Math.clamp(rating - (extensionMatch ? 25 : 0), 0, 100);

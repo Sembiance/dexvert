@@ -247,7 +247,7 @@ export default
 		uclCompressedData                           : {name : "UCL compressed data", ext : [".ucl"], magic : ["UCL compressed data"]},
 		ufs2Filesystem                              : {name : "UFS2 file system", ext : [".img"], magic : [/^UFS2 file system/]},
 		ubiFSilesystem                              : {name : "UBIFS filesystem", ext : [".img"], magic : [/^UBIFS filesystem/, /^UBIfs image/]},
-		unityAssetBundle                            : {name : "Unity asset bundle", ext : [".unity3d"], magic : [/^Unity .*asset bundle/, "Unity binary serialized Assets (generic)", "Archive: Unity", "Unity Web Player scene"]},
+		unityAssetBundle                            : {name : "Unity asset bundle", ext : [".unity3d"], magic : [/^Unity .*asset bundle/, "Unity binary serialized Assets (generic)", /^Archive: Unity\/Unity(FS|Web)/, "Unity Web Player scene"]},
 		unrealPackage                               : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]},
 		valvePackage                                : {name : "Valve Package", ext : [".vpk"], magic : ["Valve Package", /^Valve Pak file/], weakMagic : true},
 		virtualBoxDiskImage                         : {name : "VirtualBox Disk Image", ext : [".vdi"], magic : ["VirtualBox Disk Image", "Format: Virtual Disk Image", "application/x-vdi-disk", /^fmt\/726( |$)/]},

@@ -378,7 +378,10 @@ export const WEAK_VALUES =
 	// SEEN  ONCE: audio:RealLive.NwaAudio
 	/^audio:WaveAudio \(WAV\)/,
 
-	// SEEN  ONCE: image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat, image:Ffa.Pt1Format
+	// SEEN  ONCE:
+	// 		image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat
+	// SEEN TWICE:
+	//		image:Ffa.Pt1Format
 	/^image:Adobe\.PsdFormat /,
 	/^image:Desire.DesFormat /,
 	/^image:JpegFormat /,
@@ -392,9 +395,9 @@ export const WEAK_VALUES =
 	// candidates
 	// SEEN  ONCE:
 	// 		BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, DAT_100, SAR_SARC
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, MAP_2, RSDK_RSDK, ARC_9, SND_SND2, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX,
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, MAP_2, RSDK_RSDK, ARC_9, SND_SND2, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX
 	// SEEN TWICE:
-	// 		XFS, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, CACHE_3, CON, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, PAD, BANK_RIFF, 000_SFDX
+	// 		XFS, SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, PAD, BANK_RIFF, 000_SFDX
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -420,7 +423,9 @@ export const WEAK_VALUES =
 	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
 	/^geArchive: CAS( |$)/,
+	/^geArchive: CACHE_3( |$)/,
 	/^geArchive: CEG_GEKV( |$)/,
+	/^geArchive: CON( |$)/,
 	/^geArchive: CPN( |$)/,
 	/^geArchive: CRH_MDMD( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,

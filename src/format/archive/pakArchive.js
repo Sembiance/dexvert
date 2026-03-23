@@ -6,11 +6,11 @@ export class pakArchive extends Format
 	ext            = [".pak"];
 	forbidExtMatch = true;
 	magic          = [
-		/^geArchive: PAK_MPAK( |$)/,
+		/^geArchive: PAK_(EMPACKFI|MPAK)( |$)/,
 		/^geArchive: PAK_PAK2( |$)/,
 		/^geArchive: PAK_PACK_[34]( |$)/,
 		/^geArchive: PAK_(37|57)( |$)/,
 		/^geArchive: PAK_(46|48)( |$)/	// These identify for ICON.PAK, WARI.PAK, WINDOWS.PAK but actually extract as PAK_57, which is why these are not listed below as codes, as I haven't encountered true archives as these yet
 	];
-	converters = ["gameextractor[codes:PAK_37,PAK_57,PAK_PACK_3,PAK_PACK_4,PAK_MPAK,PAK_PAK2]"];
+	converters = ["gameextractor[codes:PAK_37,PAK_57,PAK_PACK_3,PAK_PACK_4,PAK_MPAK,PAK_PAK2,PAK_EMPACKFI]"];
 }

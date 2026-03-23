@@ -34,12 +34,15 @@ const EXCLUDED_SAMPLE_FORMATS = [
 	"archive/mdx",
 	"archive/mTropolisArchive",
 	"archive/nrg",
+	"archive/sbpak",
 	"archive/sgiVolumeImage",
 	"archive/sgsDAT",
 	"archive/starTrekOnlineGameData",
 	"archive/steamInstallSystem",
+	"archive/stillLife2DAT",
 	"archive/thumbsUpDatabase",
 	"archive/vmwareDiskImage",
+	"archive/wintermuteDCP",
 	"video/binkEXE",
 
 	// names have to be generic/specific, so can't have more files in the same samples directory

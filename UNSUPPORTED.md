@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,023)
+# Unsupported File Formats (4,022)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (292)
+## Archive (291)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -20,7 +20,6 @@ Family/Format | Name | Extensions | Notes
 [archive/actionPresentation](https://discmaster.textfiles.com/search?format=actionPresentation) | Action! presentation | .acp .act .sta | 
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?format=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
 [archive/adysGLUEPacked](https://discmaster.textfiles.com/search?format=adysGLUEPacked) | Ady's GLUE Packed | .exe | 
-[archive/aixBackupRestore](https://discmaster.textfiles.com/search?format=aixBackupRestore) | AIX/BFF backup/restore | .img .bff | 
 [archive/amiBackBackupDiskImage](https://discmaster.textfiles.com/search?format=amiBackBackupDiskImage) | Ami-Back backup disk image | .adf | 
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?format=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
 [archive/amigaKickstartDiskImage](https://discmaster.textfiles.com/search?format=amigaKickstartDiskImage) | Amiga Kickstart disk image | .adf | 

@@ -1,0 +1,237 @@
+AIX BFF (Backup Format File) Specification
+===========================================
+Vibe coded by Claude
+
+Reverse-engineered from 379 sample files spanning AIX PS/2 v1.3 (1984)
+through AIX 4.3.3 (2001). All values are stored in LITTLE-ENDIAN byte order.
+
+1. OVERVIEW
+-----------
+The AIX BFF format is the native backup/restore archive format used by IBM AIX.
+It serves two primary purposes:
+
+  a) Software packaging (installp/LPP format): "by-name" backups containing
+     named files for software installation. Device fields contain "by name".
+
+  b) Filesystem backups: "by-inode" backups containing raw filesystem data.
+     Device fields contain device paths like "/dev/rhd7".
+
+A BFF file consists of:
+  - A 72-byte Volume Header
+  - A sequence of variable-length Records
+  - Optional trailing padding (zero bytes)
+
+Files typically have extensions: .bff, .img, .IMA, .pkg, .bck, or none.
+File sizes are often multiples of 512 bytes (tape block size).
+
+
+2. VOLUME HEADER (72 bytes, offset 0x00)
+-----------------------------------------
+Offset  Size  Field          Description
+------  ----  -----          -----------
+0x00    1     rec_type       Always 0x09 (volume header marker)
+0x01    1     rec_sub        Always 0x00 for the volume header
+0x02    1     checksum       Header checksum byte (0x60-0x7F range)
+0x03    1     magic          Always 0xEA (constant magic identifier)
+0x04    4     numclust       Cluster/block count (LE uint32)
+0x08    4     date           Backup timestamp (Unix epoch, LE uint32)
+0x0C    4     date2          Previous backup timestamp (LE uint32)
+0x10    4     numinodes      Max inode number or 0x7FFFFFFF (LE uint32)
+0x14    16    device1        Source device or "by name" (null-padded ASCII)
+0x24    16    device2        Mount point or "by name" (null-padded ASCII)
+0x34    16    user           Username who created backup (null-padded ASCII)
+0x44    4     cluster_sz     Cluster size indicator (typically 100 or 48)
+
+Total: 72 bytes (0x48)
+
+Magic validation: byte[3] == 0xEA && 0x60 <= byte[2] <= 0x7F && byte[0] == 0x09
+Format detection: device1 == "by name" => by-name format, otherwise by-inode.
+
+
+3. RECORD HEADER (4 bytes, common to all records)
+--------------------------------------------------
+Offset  Size  Field          Description
+------  ----  -----          -----------
+0x00    1     rec_type       Record type (0x01-0x0F)
+0x01    1     rec_sub        Sub-type / format version
+0x02    1     checksum       Per-record checksum byte (0x60-0x7F range)
+0x03    1     magic          Always 0xEA
+
+The checksum byte varies between records. The range 0x60-0x7F means:
+  - Bits 6-5: fixed format marker (0b01)
+  - Bits 4-0: checksum value (0-31)
+
+Record types observed in by-name format:
+  0x01  Special/continuation record (trailer, tape marks)
+  0x09  Inode record (same opcode as volume header, sub != 0x00)
+  0x0A  Inode record (common)
+  0x0B  Inode record (variant)
+  0x0C  Inode record (directory variant)
+  0x0D  Inode record (file data)
+  0x0E  Inode record (file data variant)
+
+Sub-type values determine the inode structure layout:
+  0x08  By-inode format - 16-bit mode/nlink/uid/gid, used in filesystem backups
+  0x09  By-name variant - 16-bit mode/nlink/uid/gid, 48-byte header, no meta2
+  0x0B  Standard format (AIX 3.2+/4.x POWER) - 64-byte header + 40-byte meta2
+  0x0C  Legacy format (AIX PS/2 x86) - 72-byte header, no meta2
+
+
+4. BY-NAME INODE RECORD, sub=0x0B (Standard)
+----------------------------------------------
+Record layout:
+  [64-byte fixed header] [filename\0] [align8 pad] [40-byte meta2] [file data] [align8 pad]
+
+4.1 Fixed Header (64 bytes):
+
+Offset  Size  Field          Description
+------  ----  -----          -----------
+0x00    4     rec_hdr        type(1) + sub(1) + checksum(1) + magic_0xEA(1)
+0x04    4     field1         Internal (checksum/sequence number)
+0x08    4     field2         Internal (inode number or file serial)
+0x0C    4     mode           POSIX st_mode (LE uint32)
+                             Lower 16 bits: standard POSIX mode
+                             - 0o170000 mask: file type
+                               0o040000 = directory
+                               0o100000 = regular file
+                               0o120000 = symbolic link
+                             - 0o07777 mask: permissions + setuid/gid/sticky
+                             Upper 16 bits: AIX-specific flags
+0x10    4     uid            Owner user ID (LE uint32)
+0x14    4     gid            Owner group ID (LE uint32)
+0x18    4     size           File data size in bytes (LE uint32)
+0x1C    4     atime          Access time (Unix epoch, LE uint32)
+0x20    4     mtime          Modification time (LE uint32)
+0x24    4     ctime          Status change time (LE uint32)
+0x28    4     blksize        Block size or block count
+0x2C    4     nlinks         Hard link count
+0x30    4     dev            Device number (major)
+0x34    4     rdev            Device number for special files
+0x38    4     size2          Redundant copy of size field
+0x3C    4     reserved       Always 0
+
+4.2 Filename (at header offset 0x40):
+  - Null-terminated ASCII, typically prefixed with "./"
+  - May omit "./" prefix in some packages
+
+4.3 Alignment: pad with 0x00 bytes to next 8-byte aligned absolute offset
+
+4.4 Post-filename Metadata (40 bytes):
+  Offset  Size  Description
+  0x00    4     fs_flags1 (typically 2)
+  0x04    4     fs_flags2 (typically 2)
+  0x08    4     fs_blksize (typically 16)
+  0x0C    4     reserved (0)
+  0x10    4     fs_devid
+  0x14    2     uid_field_size
+  0x16    2     gid_field_size
+  0x18    4     fs_blksize2
+  0x1C    4     mode_copy (duplicate of inode mode)
+  0x20    4     reserved (0)
+  0x24    4     reserved (0)
+
+4.5 File Data: raw file content, size from header offset 0x18
+  - Directories (mode & 0o170000 == 0o040000) with size 0: no data section
+  - Symlinks: data is the ASCII link target path
+  - Regular files: raw binary content
+
+4.6 End Padding: 0x00 bytes to next 8-byte boundary
+
+
+5. BY-NAME INODE RECORD, sub=0x0C (Legacy/PS2)
+------------------------------------------------
+Record layout:
+  [72-byte fixed header] [filename\0] [align8 pad] [file data] [align8 pad]
+
+5.1 Fixed Header (72 bytes):
+  Same as sub=0x0B offsets 0x00-0x3F, plus:
+  0x40    4     ext_field1     Link count or inode reference
+  0x44    4     ext_field2     Block offset
+
+5.2 Filename at header offset 0x48 (72 bytes from record start)
+
+5.3 NO post-filename metadata block
+
+5.4 File data follows immediately after aligned filename
+
+5.5 End padding to 8-byte boundary
+
+
+6. SPECIAL RECORD (type=0x01)
+------------------------------
+  Offset  Size  Description
+  0x00    4     Record header (0x01 + sub + checksum + 0xEA)
+  0x04    4     Context field
+  0x08    ...   Raw data (variable length, extends to next record)
+
+Sub-types: 0x03=bitmap, 0x07=continuation/trailer, 0x08=directory block.
+Used as tape marks, overflow containers, or section separators.
+
+
+7. MULTI-PACKAGE FILES
+-----------------------
+A BFF file may contain multiple LPP filesets concatenated:
+  [Volume Header] [Fileset 1 records...] [Special] [Fileset 2 records...] ...
+
+The ./lpp_name file (first file record) describes all filesets in the package.
+
+
+8. BY-INODE FORMAT (device1 != "by name")
+-------------------------------------------
+After the 72-byte volume header:
+
+8.1 Bitmap Record (type=0x01, sub=0x03):
+  56 bytes. Contains a bit map of which inodes are included in the backup.
+
+8.2 Inode Offset Table (type=0x3E, sub=0x01):
+  ~488 bytes. Maps inode numbers to file offsets within the archive.
+  Structure: 4-byte header + 2-byte checksum + 2-byte unknown +
+  80 x uint16 LE inode numbers + 80 x uint32 LE offset values.
+  Critical relationship: offset_value * 8 = absolute byte offset of that
+  inode's record in the file. Up to 64 used entries + 16 zero padding.
+
+8.3 Inode Records (type=0x06, sub=0x08):
+  Each record uses 16-bit fields for mode/nlink/uid/gid:
+  Offset  Size  Field
+  +0      4     Record header (type + sub + checksum + 0xEA)
+  +4      2     Checksum (uint16)
+  +6      2     Inode number (uint16)
+  +8      2     Mode (uint16, POSIX type + permissions)
+  +10     2     Nlinks (uint16)
+  +12     2     UID (uint16)
+  +14     2     GID (uint16)
+  +16     4     Size (uint32, data bytes)
+  +20     4     Mtime (uint32, Unix epoch)
+  +24     4     Constant (uint32)
+  +28     4     Ctime (uint32)
+  +32     4     Device number (uint32)
+  +36     4     Reserved (0)
+  +40     4     Alloc size (uint32, equals size)
+  +44     4     Reserved (0)
+  +48     var   Data: directory entries (16-byte: uint16 inode + 14-byte name)
+                or raw file content. Records padded to 8-byte alignment.
+
+8.4 Multi-Volume: Volume 1 has bitmap + offset table + records.
+  Continuation volumes have header + optional tail data + more records.
+  Path resolution requires volume 1's directory tree.
+
+
+9. ALIGNMENT RULES
+-------------------
+  - Records start at 8-byte aligned offsets
+  - Filenames: null-terminated, then padded to next 8-byte boundary
+  - File data: followed by padding to next 8-byte boundary
+  - Archive files often padded to 512-byte multiples
+
+
+10. ENDIANNESS
+--------------
+All integers: LITTLE-ENDIAN, regardless of target architecture.
+Strings: naturally-ordered ASCII with null padding.
+
+
+11. CHECKSUM BYTE
+------------------
+Byte[2] in every record header: range 0x60-0x7F (6 high bits = 0b011xxxxx).
+Low 5 bits carry a per-record checksum. Algorithm not fully determined.
+For parsing: validate byte[3]==0xEA and 0x60<=byte[2]<=0x7F.

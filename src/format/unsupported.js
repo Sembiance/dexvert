@@ -99,7 +99,6 @@ export default
 		acornDiscFilingSystemDiskImage              : {name : "Acorn Disc Filing System disk image", ext : [".adf"], magic : ["Acorn Disc Filing System disk image"]},
 		activeMARKProtectedArchive                  : {name : "ActiveMARK-protected archive", ext : [".cs", ".dso"], magic : ["ActiveMARK-protected archive"]},
 		actionPresentation                          : {name : "Action! presentation", ext : [".acp", ".act", ".sta"], magic : ["Action! presentation"]},
-		aixBackupRestore                            : {name : "AIX/BFF backup/restore", ext : [".img", ".bff"], magic : ["AIX backup/restore format file", "AIX Backup File Format", "Archive: BFF", "BFF volume header"]},
 		amiBackBackupDiskImage                      : {name : "Ami-Back backup disk image", ext : [".adf"], magic : ["Ami-Back backup disk image"]},
 		amigaKickstartDiskImage                     : {name : "Amiga Kickstart disk image", ext : [".adf"], magic : ["Amiga Kickstart disk"]},
 		amigaRigidDiskBlockImage                    : {name : "Amiga Rigid Disk block / Hard Disk File image", ext : [".rdb", ".hdf"], magic : ["Amiga Rigid Disk block / Hard Disk File image", "Amiga Rigid Disk partition map", /^Rigid Disk Block/], weakMagic : true},

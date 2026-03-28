@@ -6,7 +6,8 @@ export class allegroPackfile extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Allegro_packfile";
 	ext            = [".dat"];
 	forbidExtMatch = true;
-	magic          = ["Allegro datafile", "Allegro Packfile", "Allegro data"];
+	magic          = [/^Allegro datafile/, "Allegro Packfile", "Allegro data", /^geArchive: DAT_SLHALL( |$)/];
+	weakMagic      = [/^geArchive: DAT_SLHALL( |$)/];
 	packed         = true;
-	converters     = ["pack"];
+	converters     = ["gameextractor[codes:DAT_SLHALL]", "pack"];
 }

@@ -270,7 +270,7 @@ Family/Format | Name | Extensions | Notes
 [archive/ubiFSilesystem](https://discmaster.textfiles.com/search?format=ubiFSilesystem) | UBIFS filesystem | .img | 
 [archive/uclCompressedData](https://discmaster.textfiles.com/search?format=uclCompressedData) | UCL compressed data | .ucl | 
 [archive/ufs2Filesystem](https://discmaster.textfiles.com/search?format=ufs2Filesystem) | UFS2 file system | .img | 
-[archive/unityAssetBundle](https://discmaster.textfiles.com/search?format=unityAssetBundle) | Unity asset bundle | .unity3d | 
+[archive/unityAssetBundle](https://discmaster.textfiles.com/search?format=unityAssetBundle) | Unity asset bundle | .unity3d | [2 sample files](https://sembiance.com/fileFormatSamples/archive/unityAssetBundle/)
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?format=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?format=unrealPackage) | Unreal Package | .ut2 .uasset | 
 [archive/valvePackage](https://discmaster.textfiles.com/search?format=valvePackage) | Valve Package | .vpk | 

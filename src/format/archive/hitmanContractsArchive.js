@@ -6,5 +6,6 @@ export class hitmanContractsArchive extends Format
 	ext            = [".prm", ".tex"];
 	forbidExtMatch = true;
 	magic          = ["dragon: HMCPRM "];
+	weakMagic      = true;
 	converters     = ["dragonUnpacker[types:HMCPRM]"];
 }

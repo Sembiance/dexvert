@@ -7,5 +7,6 @@ export class unityAssetsFile extends Format
 	forbiddenExt   = [".unity3d"];	// archive/unityAssetBundle
 	forbidExtMatch = true;
 	magic          = [/^geArchive: ASSETS_\d+( |$)/, "Archive: Unity/Unity Asset", "archive:Unity.UnityAssetOpener"];
+	weakMagic      = true;
 	converters     = ["gameextractor[codes:NONE]", "GARbro[types:archive:Unity.UnityAssetOpener]"];
 }

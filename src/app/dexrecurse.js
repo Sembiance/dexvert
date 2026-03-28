@@ -34,6 +34,7 @@ const EXCLUDED_SAMPLE_FORMATS = [
 	"archive/mdx",
 	"archive/mTropolisArchive",
 	"archive/nrg",
+	"archive/npk0KPN",
 	"archive/sbpak",
 	"archive/sgiVolumeImage",
 	"archive/sgsDAT",

@@ -23,6 +23,9 @@
 >>> wip
 <<<
 
+* The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
+  After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile
+
 * Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
   I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
   Once I have that I could support certain formats like:

@@ -35,7 +35,7 @@ const exitHandler = async ({success, code, signal}) =>
 start = async () =>
 {
 	xlog.info`Starting gameextractor server...`;
-	({p} = await runUtil.run("java", ["-jar", "GameExtractorServer.jar"], {detached : true, cwd : path.join(import.meta.dirname, "..", "..", "bin"), exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
+	({p} = await runUtil.run("python3", ["supervisor.py", `--workers=10`, `--port=${C.GAMEEXTRACTOR_PORT}`], {detached : true, cwd : path.join(import.meta.dirname, "..", "..", "bin", "GameExtractorServer"), exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
 	await xu.waitUntil(async () => (await xu.fetch(`http://${C.GAMEEXTRACTOR_HOST}:${C.GAMEEXTRACTOR_PORT}/status`, {silent : true}))==="a-ok");
 };
 

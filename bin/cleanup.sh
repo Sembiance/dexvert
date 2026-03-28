@@ -13,7 +13,7 @@ kill "$(pidof -x dexserver)"
 sudo killall -q -9 winedevice.exe services.exe explorer.exe plugplay.exe svchost.exe rpcss.exe sf dosbox
 killall Xvfb
 killall -9 at-spi-bus-launcher helpdeco gimp-org-file-pnm 86Box timidity gimp x11vnc uadecore
-killall wineserver sf uniconvertor oosplash texi2dvi DirectorCastRipper.exe pdfetex pdflatex arj
+killall wineserver sf uniconvertor oosplash texi2dvi DirectorCastRipper.exe pdfetex pdflatex arj dragonUnpackerServer dragonUnpackerWorker GARbro.Proxy GARbro.Server
 
 if [[ "$(hostname)" == dexdrone* ]]; then
 	killall python3 identify convert ffmpeg java soffice.bin tail

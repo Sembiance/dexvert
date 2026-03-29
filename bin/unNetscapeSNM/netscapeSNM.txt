@@ -1,0 +1,451 @@
+Netscape SNM File Format Specification
+=======================================
+
+Netscape SNM (Summary/Netscape Mail) files are mail folder summary/cache files
+created by Netscape Communicator and Netscape Messenger (versions 2.x through
+4.x). They cache email message metadata and, in later versions, embedded
+message content for a mail folder.
+
+There are two distinct format versions:
+  - Version 1 (TEXT format): Used by Netscape 2.x/3.x
+  - Version 2 (BIN format): Used by Netscape Communicator 4.x
+
+All multi-byte integers are big-endian unless otherwise noted.
+
+
+================================================================================
+VERSION 1: TEXT FORMAT
+================================================================================
+
+Files begin with the ASCII text header:
+  "# Netscape folder cache\r\n"   (25 bytes, 0x19 hex)
+
+Followed by the binary body.
+
+
+1. FILE HEADER
+--------------
+
+Offset  Size  Type    Field              Description
+------  ----  ------  -----------------  -----------
+0x00    25    string  magic              "# Netscape folder cache\r\n"
+0x19    4     uint32  version            Always 4
+0x1D    4     uint32  mailbox_size       Size of the corresponding mbox file in bytes
+0x21    4     uint32  timestamp          Unix timestamp (seconds since epoch)
+0x25    4     uint32  mailbox_size2      Duplicate of mailbox_size
+0x29    4     uint32  message_count      Number of messages in the folder
+0x2D    4     uint32  highest_msg_num    Highest message sequence number
+0x31    4     uint32  unread_count       Number of unread messages (approximate)
+0x35    4     uint32  reserved           Always 0
+0x39    1     uint8   padding            Always 0x00
+0x3A    1     uint8   next_string_idx    Next available string index (= num_strings + 1)
+0x3B    1     uint8   padding2           Always 0x00
+
+Total header size: 60 bytes (0x3C)
+
+
+2. STRING TABLE
+---------------
+
+Immediately follows the header at offset 0x3C.
+
+Strings are stored as consecutive null-terminated ASCII sequences. They are
+1-indexed; string index 0 means "no value" / "empty".
+
+The number of strings is (next_string_idx - 1). The table contains message
+metadata fields: sender names/emails, recipient names/emails, subjects, and
+message-IDs, shared across all message records.
+
+Strings are referenced by 16-bit indices in the message records.
+
+Example:
+  String 1: "sender@example.com\0"
+  String 2: "Recipient Name\0"
+  String 3: "Subject Line\0"
+  String 4: "message-id@host\0"
+  ...
+
+The string table ends with the null terminator of the last string. Message
+records begin immediately after.
+
+
+3. MESSAGE RECORDS
+------------------
+
+Each message is represented by a fixed 30-byte record:
+
+Offset  Size  Type    Field        Description
+------  ----  ------  ----------   -----------
+0x00    2     uint16  sender       String index: sender name or email address
+0x02    2     uint16  recipient    String index: recipient name or email address
+0x04    2     uint16  subject      String index: message subject (0 = none)
+0x06    4     uint32  date         Unix timestamp of the message
+0x0A    4     uint32  msg_key      Message key/sequence number
+0x0E    4     uint32  offset       Byte offset of message in the mbox file
+0x12    4     uint32  size_lines   High 16 bits: number of lines in message body
+                                   Low 16 bits: message flags (see below)
+0x16    4     uint32  msg_size     Size of the message in bytes
+0x1A    2     uint16  message_id   String index: Message-ID header value
+0x1C    2     uint16  references   String index: References/In-Reply-To (0 = none)
+
+Total: 30 bytes per record.
+
+Note: The sender and recipient fields may both reference the same string if
+the sender name and email are identical or if one is not available separately.
+
+
+4. MESSAGE FLAGS (lower 16 bits of size_lines field)
+-----------------------------------------------------
+
+Bit   Value   Name                Description
+---   -----   ------------------  -----------
+0     0x0001  MSG_FLAG_READ       Message has been read
+1     0x0002  MSG_FLAG_REPLIED    Message has been replied to
+2     0x0004  MSG_FLAG_MARKED     Message is flagged/marked
+3     0x0008  MSG_FLAG_EXPUNGED   Message is marked for deletion
+4     0x0010  MSG_FLAG_HAS_RE     Subject begins with "Re:"
+5     0x0020  MSG_FLAG_ELIDED     Thread is collapsed in view
+6     0x0040  MSG_FLAG_OFFLINE    Message available offline
+7     0x0080  MSG_FLAG_WATCHED    Thread is being watched
+8     0x0100  MSG_FLAG_SENDER_AUTHENTICATED  Sender is authenticated
+9     0x0200  MSG_FLAG_PARTIAL    Only partial message downloaded
+10    0x0400  MSG_FLAG_QUEUED     Message is queued for sending
+11    0x0800  MSG_FLAG_FORWARDED  Message has been forwarded
+
+
+5. COMPLETE TEXT FORMAT FILE LAYOUT
+------------------------------------
+
++---------------------------+
+| Magic (25 bytes)          |  "# Netscape folder cache\r\n"
++---------------------------+
+| Header Fields (35 bytes)  |  version, sizes, counts
++---------------------------+
+| String Table (variable)   |  null-terminated strings, 1-indexed
++---------------------------+
+| Message Records           |  30 bytes per message
+| (30 * message_count)      |
++---------------------------+
+| Trailing References       |  Optional: additional uint16 string
+| (variable, 0+ bytes)      |  indices extending message reference chains
++---------------------------+
+
+The trailing references section (if present) contains additional uint16
+string indices that extend the In-Reply-To/References chain of preceding
+messages. Each entry is a 2-byte big-endian string index pointing into the
+string table. This section may be 0 bytes (absent) if no messages have
+extended reference chains.
+
+
+
+================================================================================
+VERSION 2: BIN FORMAT (Netscape Communicator 4.x)
+================================================================================
+
+Files begin with the 4-byte magic number: 00 1E 84 90
+
+
+1. FILE HEADER
+--------------
+
+Offset  Size  Type    Field          Description
+------  ----  ------  -----------    -----------
+0x00    4     uint32  magic          0x001E8490
+0x04    4     uint32  reserved       Always 0x00000000
+0x08    4     uint32  table_offset   Offset to index table, always 0x00000100 (256)
+0x0C    4     uint32  version        Database version: 2 or 9
+0x10    4     uint32  scope_count    Number of row scopes: 1 or 3
+0x14    4     uint32  block_size     Block/page size, always 0x00000400 (1024)
+
+Total header size: 24 bytes (0x18)
+
+Version values:
+  2 = Empty/minimal folder (no message content)
+  9 = Folder with message metadata and/or cached content
+
+Scope count:
+  1 = Only "null" scope (empty folders)
+  3 = "null", "mhid" (message header ID), and "shid" (sub-header ID) scopes
+
+
+2. DATA AREA (0x18 - 0xFF)
+----------------------------
+
+The 232-byte region from offset 0x18 to 0xFF is residual space from the
+first allocation block. Its contents are NOT structurally significant:
+  - May be all zeros (clean/newly created files)
+  - May contain residual data from previous content (HTML fragments,
+    binary code, random bytes)
+  - This data is leftover and should be preserved but not interpreted
+    as meaningful content
+
+
+3. INDEX TABLE (offset 0x100)
+-----------------------------
+
+The index table is a database table-of-contents describing the row scopes
+and their positions within the file. All records in the file are organized
+into rows, each identified by a row_id and associated with one or more
+scopes ("null", "mhid", "shid").
+
+3.1 TABLE HEADER (10 bytes)
+
+Offset  Size  Type    Field          Description
+------  ----  ------  -----------    -----------
+0x00    2     uint16  type_tag       Record type identifier (varies per file)
+0x02    2     uint16  pad            Always 0x0000
+0x04    2     uint16  marker         Always 0x0001
+0x06    2     uint16  version        Matches header version field (2 or 9)
+0x08    2     uint16  entry_count    Number of scope group entries
+
+The type_tag varies between files but follows a pattern where:
+  - High nibble 0xD = structural record
+  - High nibble 0xC = data record
+
+3.2 TABLE HEADER BODY
+
+After the 10-byte table header, there is a fixed set of fields:
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x0A    2     uint16  flags          (0x0100)
+0x0C    4     uint32  reserved       (0x00000100)
+0x10    8     bytes   zeros
+0x18    2     uint16  const_0838     (0x0838 - offset to root index)
+0x1A    8     bytes   zeros
+0x22    2     uint16  const_0007     (0x0007)
+0x24    6     bytes   zeros
+0x2A    1     uint8   scope_id       Entry scope identifier
+
+Then a null-terminated 4-byte token: "null\0"
+
+3.3 TABLE ROW ENTRIES
+
+Following the header, the table contains scope entries for each database row.
+Each row may have multiple scope entries.
+
+LONG ENTRY (defines a new row, ~35 bytes):
+  - Sub-entry count (1 byte)
+  - Sub-entry type indicator (1 byte)
+  - Row ID (4 bytes)
+  - Row type/flags (4 bytes)
+  - Data offset in file (4 bytes)
+  - Reserved (4 bytes)
+  - Constant 0x00000007 (4 bytes)
+  - Secondary offset (4 bytes)
+  - Row ID (4 bytes, repeated)
+  - Scope token ("null", 4 bytes + null)
+
+SHORT ENTRY (adds extra scope to preceding row, ~16 bytes):
+  - Sentinel 0xFFFFFFF8 (4 bytes, = -8 signed)
+  - Data offset (4 bytes)
+  - Row ID (4 bytes)
+  - Scope token ("mhid" or "shid", 4 bytes + null)
+
+Scope tokens:
+  "null" = Primary/default scope (every row has this)
+  "mhid" = Message Header ID scope
+  "shid" = Supplementary Header ID scope
+
+The table is zero-padded to the next block boundary.
+
+
+4. ROOT INDEX RECORD (offset 0x0838)
+--------------------------------------
+
+Located at a fixed offset of 0x0838 in all BIN files.
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x00    2     uint16  type_tag       Record type
+0x02    2     uint16  pad            0x0000
+0x04    2     uint16  marker         0x0001
+0x06    2     uint16  count          Number of row references
+0x08    4*N   uint32  row_ids        Array of referenced row IDs
+
+For version 2 (empty folders): references row 0x1F (folder info)
+For version 9 (with messages): references rows 0x1F, 0x29, 0x1D, 0x1C
+
+
+5. POINTER RECORDS (offset 0x0860+)
+-------------------------------------
+
+These records form B-tree navigation structures linking rows to their data.
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x00    2     uint16  type_tag
+0x02    2     uint16  pad            0x0000
+0x04    2     uint16  marker         0x0001
+0x06    2     uint16  pair_count     Number of (offset, key) pairs
+0x08    8*N   pairs   Each: 4-byte file offset + 4-byte hash key
+
+Allocated size is typically 264 bytes (8 header + 256 data) for data
+pointer records, or smaller for index pointers.
+
+
+6. FOLDER INFORMATION RECORD (offset 0x0968)
+----------------------------------------------
+
+A large fixed-layout record containing folder metadata. Located at offset
+0x0968 in all observed files.
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x00    2     uint16  type_tag
+0x02    2     uint16  pad            0x0000
+0x04    2     uint16  marker         0x0001
+0x06    2     uint16  record_type    0x000C (folder info type)
+0x08    4     uint32  zeros
+0x0C    4     uint32  flags1
+0x10    4     uint32  message_count  Number of messages in folder
+0x14    4     uint32  message_count2 Duplicate
+0x18    8     bytes   timestamps/counters
+0x20    4     uint32  timestamp      Unix timestamp (last modified)
+0x24    4     bytes   content data
+0x28    8     bytes   reserved
+0x30    4     uint32  constant_1
+0x34    12    bytes   reserved
+0x40    4     uint32  const_0012     (0x00000012)
+0x44    4     uint32  const_0180     (0x01800000)
+0x48    20    bytes   reserved
+0x5C    4     uint32  display_flags
+0x60    4     uint32  folder_flags
+0x64    28    bytes   reserved
+
+The folder name appears at offset 0x98 relative to the record start
+(i.e., absolute offset 0x0968 + 0x98 = 0x0A00). It is a null-terminated
+ASCII string, zero-padded to an 8-byte boundary.
+
+
+7. STRING RECORDS (version 9 only, offset 0x4000+)
+----------------------------------------------------
+
+Version 9 files contain message metadata stored as string records in the
+message metadata area, typically starting at offset 0x4000.
+
+STRING DATA RECORD:
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x00    2     uint16  type_tag       (high nibble 0xC)
+0x02    2     uint16  pad            0x0000
+0x04    2     uint16  marker         0x0001
+0x06    2     uint16  flags          Record sub-type
+0x08    4     uint32  next_offset    Offset to next related record
+0x0C    4     uint32  field_id       Field type (see below)
+0x10    4     uint32  field_flags
+0x14    4     uint32  reserved
+0x18    var   string  data           Null-terminated ASCII string,
+                                     padded to 8-byte boundary
+
+Total size: 0x18 + roundup(string_length + 1, 8) bytes
+
+String content varies by context within the B-tree:
+  - Message subjects
+  - Sender names and email addresses (in "Name <email>" format)
+  - Message-ID values
+  - Recipient addresses
+
+
+8. GROUP RECORDS (version 9 only)
+----------------------------------
+
+Group records collect references to related row IDs or offset/key pairs.
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x00    2     uint16  type_tag       (high nibble 0xD)
+0x02    2     uint16  pad            0x0000
+0x04    2     uint16  marker         0x0001
+0x06    2     uint16  count          Number of entries
+0x08    4*N   uint32  entries        Row IDs or offsets
+
+These records organize message rows into groups for the folder view.
+
+
+9. MESSAGE SUMMARY RECORDS (version 9 only)
+---------------------------------------------
+
+Per-message summary records contain metadata about individual messages.
+
+Offset  Size  Type    Field
+------  ----  ------  -----------
+0x00    2     uint16  type_tag       (high nibble 0xC)
+0x02    2     uint16  pad            0x0000
+0x04    2     uint16  marker         0x0001
+0x06    var   bytes   message data   Includes timestamps, sizes,
+                                     hash values, and flags
+
+
+10. MBOX CONTENT AREA (version 9, offset 0x8000+)
+---------------------------------------------------
+
+In version 9 files that cache message content, the actual email messages
+are stored starting at offset 0x8000 (block 32, where block_size = 1024).
+
+The content is in standard Unix mbox format:
+  - Each message begins with a "From " separator line
+  - Followed by RFC 822 headers (Date, From, To, Subject, Message-ID, etc.)
+  - Netscape adds X-Mozilla-Status and X-Mozilla-Status2 headers
+  - Message body follows after a blank line
+  - MIME-encoded content (multipart, base64 attachments) is preserved
+
+Not all version 9 files contain mbox content. Some only have metadata
+records without cached message bodies.
+
+
+11. COMPLETE BIN FORMAT FILE LAYOUT
+-------------------------------------
+
+VERSION 2 (empty folder):
+
+Offset    Size      Content
+------    --------  -------
+0x0000    0x0018    File header (24 bytes)
+0x0018    0x00E8    Data area (232 bytes, usually zeros)
+0x0100    ~0x0050   Index table (2 row entries)
+0x0150    ~0x06E8   Zero padding
+0x0838    0x0028    Root index record (40 bytes)
+0x0860    ~0x0108   Pointer record
+0x0968    ~0x0098   Folder info record
+0x0A00    variable  Folder name (null-terminated, 8-byte padded)
+(end)
+
+
+VERSION 9 (folder with messages):
+
+Offset    Size      Content
+------    --------  -------
+0x0000    0x0018    File header (24 bytes)
+0x0018    0x00E8    Data area (232 bytes, may contain residual data)
+0x0100    ~0x0200   Index table (9 row entries with multiple scopes)
+0x0300    ~0x0538   Zero padding or overflow data
+0x0838    variable  Root records (root index, pointers, folder info)
+0x0A00    variable  Folder name
+0x0A08    variable  B-tree index arrays and additional metadata
+0x4000    variable  Message metadata records (strings, groups, summaries)
+0x8000    variable  Mbox content (if present, to end of file)
+
+
+12. X-MOZILLA-STATUS FLAGS
+----------------------------
+
+In mbox content, the X-Mozilla-Status header is a 4-digit hex value:
+
+Bit   Value   Description
+---   -----   -----------
+0     0x0001  MSG_FLAG_READ
+1     0x0002  MSG_FLAG_REPLIED
+2     0x0004  MSG_FLAG_MARKED
+3     0x0008  MSG_FLAG_EXPUNGED
+4     0x0010  MSG_FLAG_HAS_RE
+5     0x0020  MSG_FLAG_ELIDED
+6     0x0040  MSG_FLAG_OFFLINE
+7     0x0080  MSG_FLAG_WATCHED
+12    0x1000  MSG_FLAG_SENDER_AUTHENTICATED
+13    0x2000  MSG_FLAG_PARTIAL
+14    0x4000  MSG_FLAG_QUEUED
+15    0x8000  MSG_FLAG_NEW
+
+The X-Mozilla-Status2 header provides extended flags as an 8-digit hex value.

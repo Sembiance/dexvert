@@ -1,0 +1,440 @@
+Amiga PFS Container Format Specification
+=========================================
+
+Vibe coded by Claude
+
+Overview
+--------
+PFS is a container/filesystem format used on Amiga systems. All PFS files begin
+with the 4-byte magic "PFS\0" (50 46 53 00). The format has four distinct
+variants identified by the header flags and internal structure markers.
+
+All multi-byte numeric values use big-endian byte order unless noted otherwise.
+Exceptions are the FAT Archive and Multitrack variants which use little-endian.
+
+
+================================================================================
+1. COMMON HEADER (all variants)
+================================================================================
+
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic: "PFS\0" (0x50 0x46 0x53 0x00)
+0x04    4     Flags/version: determines the variant
+                0x00000000 = PFS3 ADF, FAT Archive, or Data Records (see below)
+                0x04040000 = Multitrack Container
+
+For flags=0x00000000, the variant is distinguished by secondary markers:
+  - If bytes 0x20-0x24 contain "*FAT*" => FAT Archive
+  - If block 2 (offset 0x400) starts with "PFS\0" and nearby blocks have
+    "DB" or "AB" markers => PFS3 ADF
+  - Otherwise => Data Records
+
+
+================================================================================
+2. PFS3 ADF VARIANT (Amiga Floppy Disk Image with PFS3 Filesystem)
+================================================================================
+
+Used for: Standard Amiga ADF disk images (901120 bytes = 880 × 1024 bytes)
+Block size: 512 bytes
+Total blocks: 1760 (for standard DD floppy)
+Byte order: Big-endian
+
+2.1 BOOT BLOCK (Block 0, offset 0x000)
+---------------------------------------
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic: "PFS\0"
+0x04    4     Flags: 0x00000000
+0x08    504   Reserved (all zeros)
+
+Block 1 (offset 0x200): Reserved, typically all zeros.
+
+
+2.2 VOLUME BLOCK (Block 2, offset 0x400)
+-----------------------------------------
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic: "PFS\0"
+0x04    4     Flags: 0x00000000
+0x08    4     Reserved
+0x0C    2     Creation date: days since 1978-01-01 (u16 BE)
+0x0E    2     Creation time: minutes since midnight (u16 BE)
+0x10    2     Creation ticks: 1/50th second (u16 BE)
+0x12    2     Disk options (typically 0x00F0)
+0x14    1     Volume name length (N)
+0x15    N     Volume name (Latin-1 encoded)
+0x15+N  ...   Padding zeros
+0x37    1     Latest AB block pointer for seqnr=0 (or related config)
+0x60    2     Root directory anode number (u16 BE)
+0x62    2     Additional config pointer (u16 BE)
+0x64    2     Additional config pointer (u16 BE)
+0x66    ...   Padding zeros to end of block
+
+
+2.3 ANODE BLOCK (AB) - Block type marker "AB" (0x41 0x42)
+----------------------------------------------------------
+Anode blocks store the block-to-file mapping. Each file/directory has an anode
+number. The anode entry tells which disk blocks hold the file's data.
+
+AB Block Header (16 bytes):
+Offset  Size  Description
+------  ----  -----------
+0x00    2     Magic: "AB" (0x41 0x42)
+0x02    2     Unused (0x0000)
+0x04    4     Unused
+0x08    2     Unused
+0x0A    2     Sequence number (seqnr): determines which anodes this block holds
+0x0C    4     Unused
+
+Anode Entries (6 bytes each, starting at offset 16):
+Offset  Size  Description
+------  ----  -----------
+0x00    2     Cluster size: number of contiguous blocks in this extent (u16 BE)
+0x02    2     Block number: first block of this extent (u16 BE)
+0x04    2     Next anode: anode number for chain continuation, 0 = end (u16 BE)
+
+Special values:
+  - clustersize=0xFFFF: reserved/unused marker
+  - clustersize=0, blocknr=0, next=0: unused entry
+
+Each AB block holds (512 - 16) / 6 = 82 anode entries.
+AB block with seqnr=S contains anodes S*82 through S*82+81.
+
+Multiple AB blocks may exist for the same seqnr (journaling). The latest
+version (highest block number, or referenced by the volume block) is
+authoritative.
+
+
+2.4 DIRECTORY BLOCK (DB) - Block type marker "DB" (0x44 0x42)
+--------------------------------------------------------------
+Directory blocks store file and subdirectory entries for a parent directory.
+
+DB Block Header (16 bytes):
+Offset  Size  Description
+------  ----  -----------
+0x00    2     Magic: "DB" (0x44 0x42)
+0x02    2     Unused (0x0000)
+0x04    4     Unused
+0x08    4     Unused
+0x0C    2     Parent directory anode number (u16 BE)
+0x0E    2     Additional info (u16 BE)
+
+Directory entries follow immediately after the header, packed tightly:
+
+Directory Entry (variable size):
+Offset  Size  Description
+------  ----  -----------
+0x00    1     Entry size (total bytes including this byte)
+0x01    1     Type (signed):
+                -3 (0xFD) = regular file
+                 2 (0x02) = directory
+                -4 (0xFC) = hard link (file)
+                 4 (0x04) = hard link (directory)
+                 3 (0x03) = soft link
+                -5 (0xFB) = rollover file
+0x02    2     Anode number (u16 BE)
+0x04    4     File size in bytes (u32 BE), 0 for directories
+0x08    2     Date: days since 1978-01-01 (u16 BE)
+0x0A    2     Time: minutes since midnight (u16 BE)
+0x0C    2     Ticks: 1/50th second (u16 BE)
+0x0E    1     Protection bits (Amiga HSPARWED format)
+0x0F    1     Filename length (N)
+0x10    N     Filename (Latin-1 encoded)
+0x10+N  ...   Optional: comment_length (1 byte) + comment string
+              Padded to even total entry size with zero bytes
+
+An entry with size=0 marks the end of entries in the block.
+
+Multiple DB blocks may exist for the same parent directory. The latest version
+of each directory should be used (DB blocks may be duplicated for journaling).
+
+
+2.5 DATA BLOCKS
+-----------------
+All blocks not identified as PFS, AB, DB, or zero are data blocks containing
+raw file content. The anode chain for a file specifies which blocks and in what
+order they compose the file data.
+
+
+2.6 FILE RECONSTRUCTION
+-------------------------
+To extract a file:
+1. Look up the file's anode number (from the directory entry)
+2. Find the anode entry in the appropriate AB block (seqnr = anode_nr / 82)
+3. Read `clustersize` contiguous blocks starting at `blocknr`
+4. If `next_anode` is non-zero, follow the chain to the next anode entry
+5. Concatenate all block data and truncate to the file size from the dir entry
+
+
+================================================================================
+3. FAT ARCHIVE VARIANT
+================================================================================
+
+Used for: Resource archives (e.g., .dat files containing BMPs, ICOs, etc.)
+Byte order: Little-endian
+Block size: Variable (stored in header, typically 4096)
+
+3.1 SUPERBLOCK (Block 0)
+--------------------------
+The superblock contains two key entries: *FAT* and *ROOT*.
+
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic: "PFS\0"
+0x04    4     Flags: 0x00000000
+0x08    4     Block size in bytes (u32 LE, typically 0x00001000 = 4096)
+0x0C    4     Reserved
+0x10    4     FAT first block number (u32 LE, typically 1)
+0x14    4     FAT total size in bytes (u32 LE)
+0x18    4     Reserved
+0x1C    4     Additional flags
+0x20    5+    FAT marker: "*FAT*" + padding to 0x3F
+
+0x40    4     Root directory block number (u32 LE, typically 6)
+0x44    4     Block size (repeated, u32 LE)
+0x48    4     Total directory entry count (u32 LE)
+0x4C    4     Additional flags
+0x50    6+    ROOT marker: "*ROOT*" + padding to end of block
+
+
+3.2 FAT (File Allocation Table)
+---------------------------------
+Starting at the FAT first block, the FAT is an array of u32 LE values.
+Total entries = FAT size / 4.
+
+Each entry at index N represents block N:
+  - 0xFFFFFFFF = end of chain / standalone block
+  - Other value = next block number in chain
+  - 0x00000000 = free/unused
+
+Example chain: FAT[37]=38, FAT[38]=39, ..., FAT[61]=0xFFFFFFFF
+  => File occupies blocks 37, 38, 39, ..., 61
+
+
+3.3 DIRECTORY ENTRY BLOCK
+---------------------------
+Each directory block contains an array of 48-byte entries.
+
+Directory Entry (48 bytes):
+Offset  Size  Description
+------  ----  -----------
+0x00    4     First block number (u32 LE):
+                For directories: block containing child entries
+                For files: first data block
+0x04    4     Size (u32 LE):
+                For directories: block_size (e.g., 4096)
+                For files: compressed data size in bytes
+0x08    4     Attributes (u32 LE):
+                1 = directory
+                0x20 = file
+0x0C    1     Filename length (N)
+0x0D    3     Flags/hash bytes
+0x10    32    Filename (Latin-1, null-padded)
+
+Entries with all-zero bytes are empty/unused slots.
+
+
+3.4 FILE DATA BLOCKS
+----------------------
+File data blocks begin with a 5-byte header in the first block of the chain:
+
+File Data Header (5 bytes, first block only):
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Original (uncompressed) file size (u32 LE)
+0x04    1     Compression type:
+                0x00-0x03 = compression method identifier
+
+Following blocks in the chain contain pure file data (no per-block header).
+
+Total stored data = compressed_size bytes (from directory entry) starting
+at offset 5 of the first data block, continuing across chained blocks.
+
+
+================================================================================
+4. MULTITRACK CONTAINER VARIANT
+================================================================================
+
+Used for: Multi-track audio/MIDI containers
+Byte order: Little-endian
+Identified by: Flags = 0x04040000
+
+4.1 OVERALL LAYOUT
+--------------------
+Offset      Size    Description
+------      ----    -----------
+0x000       0x200   Header block (PFS magic + flags + reserved)
+0x200       0x200   Global metadata block (total data size at offset 0x04)
+0x400       0x400   Entry table (up to 16 entries, 64 bytes each)
+0x800       0x400   Track metadata / secondary header
+0xC00+      ...     Track data (as specified by entry table)
+
+4.2 HEADER BLOCK (0x000-0x1FF)
+-------------------------------
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic: "PFS\0"
+0x04    4     Flags: 0x04040000
+0x08    504   Reserved (zeros)
+
+4.3 METADATA BLOCK (0x200-0x3FF)
+----------------------------------
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Reserved (zeros)
+0x04    4     Total data payload size (u32 LE)
+0x08    504   Reserved (zeros)
+
+4.4 ENTRY TABLE (0x400-0x7FF)
+-------------------------------
+Up to 16 entries at 64-byte intervals:
+
+Entry (64 bytes):
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Reserved (zeros)
+0x04    4     Data offset within file (u32 LE, absolute)
+0x08    4     Data size in bytes (u32 LE)
+0x0C    52    Reserved (zeros)
+
+Note: The first entry's offset typically equals 0x400, meaning the entry table
+bytes overlap with the first track's data range. In practice, the meaningful
+track audio data begins after the structural headers.
+
+Entries are consecutive: entry[N+1].offset = entry[N].offset + entry[N].size
+
+4.5 TRACK METADATA (0x800-0xBFF)
+----------------------------------
+Contains per-track configuration data in a format specific to the audio engine.
+Exact structure depends on the application.
+
+4.6 TRACK DATA
+----------------
+Each track's raw data is at the offset/size specified in the entry table.
+Data may extend beyond the entry table region into the bulk data area.
+
+4.7 TRAILING DATA
+-------------------
+Data after the last entry's end offset may contain additional audio data or
+padding.
+
+
+================================================================================
+5. DATA RECORDS VARIANT
+================================================================================
+
+Used for: Financial/business data files (e.g., PFS.DTA)
+Byte order: Big-endian
+Identified by: Text content in header, no *FAT*/*ROOT* markers
+
+5.1 OVERALL LAYOUT
+--------------------
+Offset      Size    Description
+------      ----    -----------
+0x000       0x400   Header (1024 bytes): text metadata fields
+0x400       ...     Records array: fixed 16-byte records to end of file
+
+5.2 HEADER (0x000-0x3FF)
+--------------------------
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic: "PFS\0"
+0x04    4     Flags: 0x00000000
+0x08    ...   Null-terminated text fields (Latin-1 encoded):
+                - Company/organization name
+                - Account type code
+                - Account number
+                - Identifier/reference code
+              Fields are separated by one or more null bytes.
+              Remaining header bytes may contain additional binary metadata
+              or zeros.
+
+5.3 DATA RECORDS (0x400+)
+---------------------------
+Fixed 16-byte records in a flat array:
+
+Record (16 bytes):
+Offset  Size  Description
+------  ----  -----------
+0x00    2     Value 0 (u16 BE)
+0x02    2     Value 1 (u16 BE)
+0x04    2     Value 2 (u16 BE)
+0x06    2     Value 3 (u16 BE)
+0x08    2     Value 4 (u16 BE)
+0x0A    2     Value 5 (u16 BE)
+0x0C    2     Value 6 (u16 BE)
+0x0E    2     Value 7 (u16 BE)
+
+Records where all 16 bytes are zero are null/empty markers.
+Total record slots = (file_size - 1024) / 16.
+
+
+================================================================================
+6. AMIGA DATE FORMAT
+================================================================================
+
+PFS3 ADF uses the Amiga DateStamp format for timestamps:
+
+  days:    u16 - days since January 1, 1978
+  minutes: u16 - minutes since midnight (0-1439)
+  ticks:   u16 - 1/50th second ticks (0-2999)
+
+Example: days=5358, mins=991, ticks=2483
+  => 1978-01-01 + 5358 days = 1992-09-02, 991 minutes = 16:31, ticks~49.66s
+  => 1992-09-02 16:31:49
+
+
+================================================================================
+7. AMIGA PROTECTION BITS
+================================================================================
+
+The protection byte in PFS3 ADF directory entries uses the Amiga convention:
+
+  Bit 7 (0x80): H - Hold (pure, re-entrant)
+  Bit 6 (0x40): S - Script
+  Bit 5 (0x20): P - Pure
+  Bit 4 (0x10): A - Archive
+  Bit 3 (0x08): R - Read (inverted: 0=readable)
+  Bit 2 (0x04): W - Write (inverted: 0=writable)
+  Bit 1 (0x02): E - Execute (inverted: 0=executable)
+  Bit 0 (0x01): D - Delete (inverted: 0=deletable)
+
+Common values:
+  0x00 = rwed (all permissions)
+  0x02 = rw-d (no execute)
+  0x05 = r--d (read + delete only)
+  0x07 = r--- (read only)
+
+
+================================================================================
+8. BYTE COVERAGE
+================================================================================
+
+Every byte in a valid PFS file is accounted for by one of the structural
+elements described above:
+
+PFS3 ADF:
+  - Boot blocks (blocks 0-1): 1024 bytes
+  - Volume block (block 2): 512 bytes
+  - AB blocks: N × 512 bytes (anode mapping, including journal copies)
+  - DB blocks: M × 512 bytes (directory entries, including journal copies)
+  - Data blocks: remaining blocks (file content)
+  - Zero blocks: unused disk space (all zeros)
+
+FAT Archive:
+  - Superblock (block 0): block_size bytes
+  - FAT blocks: fat_size bytes
+  - Directory/file blocks: remaining blocks
+
+Multitrack Container:
+  - Header block: 512 bytes
+  - Metadata block: 512 bytes
+  - Entry table: 1024 bytes
+  - Track header: 1024 bytes
+  - Track data: sum of all entry sizes
+  - Trailing data: file_size - last_entry_end
+
+Data Records:
+  - Header: 1024 bytes
+  - Records: (file_size - 1024) bytes, divisible into 16-byte records

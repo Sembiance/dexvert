@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,022)
+# Unsupported File Formats (4,014)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (291)
+## Archive (283)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -21,7 +21,6 @@ Family/Format | Name | Extensions | Notes
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?format=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
 [archive/adysGLUEPacked](https://discmaster.textfiles.com/search?format=adysGLUEPacked) | Ady's GLUE Packed | .exe | 
 [archive/amiBackBackupDiskImage](https://discmaster.textfiles.com/search?format=amiBackBackupDiskImage) | Ami-Back backup disk image | .adf | 
-[archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?format=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
 [archive/amigaKickstartDiskImage](https://discmaster.textfiles.com/search?format=amigaKickstartDiskImage) | Amiga Kickstart disk image | .adf | 
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?format=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
 [archive/androidBootImage](https://discmaster.textfiles.com/search?format=androidBootImage) | Android boot image | .img | 
@@ -63,9 +62,7 @@ Family/Format | Name | Extensions | Notes
 [archive/colourGenieTapeImage](https://discmaster.textfiles.com/search?format=colourGenieTapeImage) | Colour Genie tape image | .cas | 
 [archive/comPackPacked](https://discmaster.textfiles.com/search?format=comPackPacked) | COM-Pack Packed | .com | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?format=c16Tape) | Commodore 16 Tape | .tap | 
-[archive/corelThumbnails](https://discmaster.textfiles.com/search?format=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/corkCompressedData](https://discmaster.textfiles.com/search?format=corkCompressedData) | Cork compressed data | $ | 
-[archive/cpmHUFArchive](https://discmaster.textfiles.com/search?format=cpmHUFArchive) | [CP/M HUF Archive](http://fileformats.archiveteam.org/wiki/HUF_(CP/M)) | .huf | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cpmHUFArchive/)
 [archive/cpcPlusCartridgeImage](https://discmaster.textfiles.com/search?format=cpcPlusCartridgeImage) | CPC Plus Cartridge image | .cpr | 
 [archive/cackrightPacked](https://discmaster.textfiles.com/search?format=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?format=crackStopProtected) | CrackStop Protected |  | 
@@ -105,7 +102,6 @@ Family/Format | Name | Extensions | Notes
 [archive/ezipPacked](https://discmaster.textfiles.com/search?format=ezipPacked) | EZip Packed | .exe | 
 [archive/fcdVirtualCDROMFile](https://discmaster.textfiles.com/search?format=fcdVirtualCDROMFile) | FCD Virtual CD-ROM File | .fcd | 
 [archive/finearCompressedData](https://discmaster.textfiles.com/search?format=finearCompressedData) | FINEAR compressed data | _ | 
-[archive/fizArchive](https://discmaster.textfiles.com/search?format=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/flinkGameDataArchive](https://discmaster.textfiles.com/search?format=flinkGameDataArchive) | Flink game data archive | .wld | 
 [archive/floppyDiskFileImage](https://discmaster.textfiles.com/search?format=floppyDiskFileImage) | Floppy Disk File image | .fdf | 
 [archive/floppyDiskManagerDiskImage](https://discmaster.textfiles.com/search?format=floppyDiskManagerDiskImage) | Floppy Disk Manager disk image | .fdm | [1 sample file](https://sembiance.com/fileFormatSamples/archive/floppyDiskManagerDiskImage/)
@@ -143,13 +139,11 @@ Family/Format | Name | Extensions | Notes
 [archive/legoRacersGameDataArchive](https://discmaster.textfiles.com/search?format=legoRacersGameDataArchive) | Lego Racers game data archive | .jam | 
 [archive/lingvooArc1InstallData](https://discmaster.textfiles.com/search?format=lingvooArc1InstallData) | lingvooArc1 install data |  | 
 [archive/lzk00Archive](https://discmaster.textfiles.com/search?format=lzk00Archive) | LZK00 Archive | .lng | 
-[archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?format=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/magixGEPacktArchive](https://discmaster.textfiles.com/search?format=magixGEPacktArchive) | MAGIX gepackt Archive |  | 
 [archive/majiroEngineResourceData](https://discmaster.textfiles.com/search?format=majiroEngineResourceData) | Majiro Engine resource data | .arc | 
 [archive/mameFloppyImage](https://discmaster.textfiles.com/search?format=mameFloppyImage) | MAME Floppy Image | .mfi | 
 [archive/massiveGameDataArchive](https://discmaster.textfiles.com/search?format=massiveGameDataArchive) | Massive game data archive | .pak | 
 [archive/masterDOSVDiskImage](https://discmaster.textfiles.com/search?format=masterDOSVDiskImage) | MasterDOS disk image | .dsk | 
-[archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?format=maximusInstallerArchive) | Maximus installer archive | .fiz | 
 [archive/mbpSHRINKPacked](https://discmaster.textfiles.com/search?format=mbpSHRINKPacked) | mbp SHRINK Packed | .exe | 
 [archive/mechWarrior2GameData](https://discmaster.textfiles.com/search?format=mechWarrior2GameData) | MechWarrior 2 game data | .prj | 
 [archive/megalitePacked](https://discmaster.textfiles.com/search?format=megalitePacked) | MEGALITE Packed | .exe | 
@@ -157,7 +151,6 @@ Family/Format | Name | Extensions | Notes
 [archive/metaCardStack](https://discmaster.textfiles.com/search?format=metaCardStack) | MetaCard/Revolution Stack | .rev | [4 sample files](https://sembiance.com/fileFormatSamples/archive/metaCardStack/)
 [archive/mewPacked](https://discmaster.textfiles.com/search?format=mewPacked) | Mew Packed | .exe | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?format=micrografxArchive) | Micrografx Archive | .mda | 
-[archive/msieCache](https://discmaster.textfiles.com/search?format=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
 [archive/microsoftOutLookPersonalFolder](https://discmaster.textfiles.com/search?format=microsoftOutLookPersonalFolder) | Microsoft OutLook Personal Folder | .pst | 
 [archive/microtan65Dump](https://discmaster.textfiles.com/search?format=microtan65Dump) | Microtan 65 dump | .m65 | 
 [archive/mifDiskImage](https://discmaster.textfiles.com/search?format=mifDiskImage) | MIF disk image |  | 
@@ -172,7 +165,6 @@ Family/Format | Name | Extensions | Notes
 [archive/multiMediaFusionApplication](https://discmaster.textfiles.com/search?format=multiMediaFusionApplication) | MultiMedia Fusion Application | .mfa | 
 [archive/neoLitePacked](https://discmaster.textfiles.com/search?format=neoLitePacked) | NeoLite Packed |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/neoLitePacked/) - Tried (see sandbox/app): RL!dePacker 1.4 & Neo-Executable-Decompressor & neolte20.zip
 [archive/neophyteGameDataArchive](https://discmaster.textfiles.com/search?format=neophyteGameDataArchive) | Neophyte game data archive | .stuff | 
-[archive/netscapeSNM](https://discmaster.textfiles.com/search?format=netscapeSNM) | Netscape SNM Archive | .snm | [5 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
 [archive/newtonPackage](https://discmaster.textfiles.com/search?format=newtonPackage) | Newton Package | .pkg | 
 [archive/nortonBackupFile](https://discmaster.textfiles.com/search?format=nortonBackupFile) | Norton Backup file | .001 | 
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?format=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 

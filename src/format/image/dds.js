@@ -12,7 +12,7 @@ export class dds extends Format
 		"ffmpeg[format:dds_pipe][outType:png]",
 		"gameextractor[renameOut][codes:DDS_DDS]",
 		"gimp",
-		"GARbro[types:image:DirectDraw.DdsFormat]",
+		"GARbro[types:image:DirectDraw.DdsFormat][matchType:magic]",
 	
 		"paintDotNet[matchType:magic]",
 		"noesis[type:image][matchType:magic]",

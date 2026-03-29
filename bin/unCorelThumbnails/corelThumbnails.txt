@@ -1,0 +1,344 @@
+Corel Thumbnails Archive Format (_THUMBNAIL_ streams)
+======================================================
+
+These files originate from CorelDRAW OLE2 compound document streams (CDR, CMX,
+CPT, etc.). Each _THUMBNAIL_ stream contains one or more thumbnail images
+representing pages or objects in the parent document.
+
+
+FILE STRUCTURE
+--------------
+
+Offset  Size    Description
+------  ----    -----------
+0x00    4       File header: always 00 00 00 00 (uint32 LE = 0)
+
+Followed by a sequence of thumbnail records packed end-to-end with no
+inter-record padding. The number of records is determined by reading until EOF.
+
+
+THUMBNAIL RECORD
+----------------
+
+Each record consists of:
+  1. Image metadata header  (76 bytes)
+  2. Separator + data type  (4 bytes)
+  3. Palette data           (variable, depends on data type)
+  4. CDRCOMP1 block size    (4 bytes)
+  5. CDRCOMP1 block         (variable)
+
+
+1. IMAGE METADATA HEADER (76 bytes)
+------------------------------------
+
+All multi-byte fields are unsigned little-endian unless noted.
+
+Offset  Size  Field           Description
+------  ----  -----           -----------
++0x00   2     thumb_type      Thumbnail type:
+                                3 = 8 bits per pixel, indexed color
+                                5 = 24 bits per pixel, direct RGB
++0x02   2     width           Image width in pixels
++0x04   2     (padding)       Always 0x0000
++0x06   2     height          Image height in pixels
++0x08   2     (padding)       Always 0x0000
++0x0A   2     planes_outer    Always 2
++0x0C   2     extra1          Varies per file (document-specific value)
++0x0E   2     extra2          Version-related value: 1, 8, or 10
++0x10   2     (padding)       Always 0x0000
++0x12   2     inner_flag      Always 1
++0x14   2     (padding)       Always 0x0000
++0x16   2     width2          Same as width (duplicate)
++0x18   2     (padding)       Always 0x0000
++0x1A   2     height2         Same as height (duplicate)
++0x1C   2     (padding)       Always 0x0000
++0x1E   2     planes_inner    Always 1
++0x20   2     (padding)       Always 0x0000
++0x22   2     bpp             Bits per pixel: 8 or 24
++0x24   2     (padding)       Always 0x0000
++0x26   4     stride          Row stride in bytes = width * (bpp / 8)
++0x2A   4     raw_pixel_size  Total uncompressed pixel data size
+                              = width * height * (bpp / 8)
++0x2E   2     (zero)          Always 0x0000
++0x30   2     (zero)          Always 0x0000
++0x32   4     coord1          Coordinate or ID value (varies)
++0x36   4     coord2          Coordinate or ID value (varies)
++0x3A   4     coord3          Coordinate or ID value (varies)
++0x3E   4     coord4          Coordinate or ID value (varies)
++0x42   2     (zero/flags)    Varies (sometimes zero, sometimes flags)
++0x44   2     (zero)          Typically 0x0000
++0x46   2     (zero)          Typically 0x0000
++0x48   2     (zero)          Typically 0x0000
++0x4A   2     (zero)          Typically 0x0000
+
+Total: 76 bytes (0x4C)
+
+
+2. SEPARATOR + DATA TYPE (4 bytes)
+-----------------------------------
+
+Offset  Size  Field       Description
+------  ----  -----       -----------
++0x00   2     separator   Always 0x0000
++0x02   2     data_type   Palette/color mode indicator:
+                            0x0004 = Custom palette (type 4)
+                            0x0005 = Halftone palette (type 5)
+                            0x0000 = No palette / 24-bit direct (type 0)
+
+
+3. PALETTE DATA (variable)
+---------------------------
+
+Depends on data_type:
+
+Type 4 (Custom palette):
+  Offset  Size          Field           Description
+  ------  ----          -----           -----------
+  +0x00   2             palette_count   Number of palette entries (typically 256)
+  +0x02   count * 3     palette_data    RGB triples, 3 bytes each (R, G, B)
+
+Type 5 (Halftone palette):
+  Offset  Size  Field           Description
+  ------  ----  -----           -----------
+  +0x00   2     palette_subtype Always 0x00EC (236 decimal)
+
+  The halftone palette is not stored in the file -- it is a well-known
+  6x6x6 RGB color cube (216 entries) plus 20 extra system/gray colors,
+  totaling 236 entries. See HALFTONE PALETTE section below.
+
+Type 0 (No palette):
+  No additional bytes. Pixel data is 24-bit BGR triples.
+
+
+4. PIXEL DATA BLOCK SIZE (4 bytes)
+------------------------------------
+
+  Offset  Size  Field       Description
+  ------  ----  -----       -----------
+  +0x00   4     block_size  uint32 LE: total size of the data block that follows
+
+
+5. PIXEL DATA BLOCK (variable)
+-------------------------------
+
+The block is either CDRCOMP1-compressed or raw uncompressed pixel data.
+Check the first 8 bytes for the "CDRCOMP1" magic to distinguish:
+
+CDRCOMP1 compressed block:
+  Offset      Size            Field               Description
+  ------      ----            -----               -----------
+  +0x00       8               magic               "CDRCOMP1" (ASCII, not null-terminated)
+  +0x08       4               uncompressed_size    uint32 LE: expected output size
+  +0x0C       block_size - 12 compressed_data      CDRCOMP1 compressed bitstream
+
+Raw uncompressed block:
+  If the first 8 bytes are NOT "CDRCOMP1", the entire block is raw pixel data.
+  In this case block_size equals raw_pixel_size (width * height * bpp / 8).
+  This variant is rare but occurs in some files (e.g., certain 24bpp thumbnails).
+
+
+CDRCOMP1 COMPRESSION FORMAT
+============================
+
+Reverse-engineered from CDRFLT40.DLL (Corel ArtShow 5, 1994).
+
+The compression is Huffman-coded LZSS with an 8192-byte (8 KB) circular sliding
+window. The bitstream is read MSB-first (most-significant bit first).
+
+Bitstream reader
+----------------
+The reader maintains a 16-bit lookahead buffer. Bits are consumed from the most
+significant end. When bits are exhausted, new bytes are read from the input
+stream sequentially.
+
+Unary coding
+------------
+A special "unary" encoding is used for code-length values:
+  - Read 3 bits from the buffer
+  - If the 3-bit value < 7: return it (values 0-6)
+  - If the 3-bit value == 7 (all ones): keep reading additional bits
+    counting consecutive 1-bits to extend the value; a 0-bit terminates
+  - Total bits consumed: 3 + (value - 4) for values >= 7
+
+Compressed stream structure
+---------------------------
+The compressed data consists of one or more BLOCKS. Each block is independent
+and contains:
+
+  1. Block count (uint16, 16 bits):
+     Number of symbols (literal bytes + back-references) in this block.
+     If zero, decompression ends.
+
+  2. Code-Length (CL) Huffman tree:
+     Encodes code lengths for the main tree. Up to 19 symbols.
+     - Read 5 bits: actual_count
+     - If actual_count == 0 (fill mode):
+         Read 5 more bits: fill_code
+         All CL decoding returns fill_code unconditionally.
+     - If actual_count > 0:
+         Read actual_count code-length values using unary coding.
+         After processing index 3, read a 2-bit zero-fill count and
+         insert that many zero-length entries.
+     Build canonical Huffman table from the resulting code lengths.
+
+  3. Main literal/length Huffman tree:
+     Up to 513 symbols (0-255 = literals, 256-512 = lengths).
+     - Read 9 bits: num_symbols
+     - If num_symbols == 0 (fill mode):
+         Read 9 bits: fill_symbol
+         All main decoding returns fill_symbol unconditionally.
+     - If num_symbols > 0:
+         Decode num_symbols code-length entries using the CL tree:
+           CL symbol 0: skip 1 position (one zero-length entry)
+           CL symbol 1: read 4 bits + 3 = N, skip N positions
+           CL symbol 2: read 9 bits + 20 = N, skip N positions
+           CL symbol 3+: code_length[i] = symbol - 2, advance 1 position
+     Build canonical Huffman table from the resulting code lengths.
+
+  4. Distance Huffman tree:
+     Up to 14 symbols.
+     - Read 4 bits: actual_count
+     - If actual_count == 0 (fill mode):
+         Read 4 bits: fill_code
+         All distance decoding returns fill_code.
+     - If actual_count > 0:
+         Read actual_count code-length values using unary coding.
+         (No zero-fill insertion for the distance tree.)
+     Build canonical Huffman table from the resulting code lengths.
+
+  5. Symbol decoding loop (block_count iterations):
+     Decode one symbol from the main Huffman tree:
+     - If symbol <= 255: emit literal byte to output.
+     - If symbol >= 256: back-reference:
+         length = symbol - 253
+         Decode one distance code from the distance Huffman tree.
+         If distance_code == 0: distance = 0
+         If distance_code N > 0:
+           Read (N - 1) extra bits from the bitstream.
+           distance = (1 << (N - 1)) + extra_bits
+         Copy length bytes from output[(write_pos - distance - 1) & 0x1FFF]
+         using the circular 8192-byte window.
+
+Multiple blocks may exist in a single compressed stream; decoding continues
+until block_count is zero or the expected output size is reached.
+
+Canonical Huffman table construction
+-------------------------------------
+Given an array of code lengths for N symbols:
+  1. Count the frequency of each code length.
+  2. Compute the starting code for each length:
+       code = 0
+       for length L from 1 to max_length:
+         code = (code + count[L-1]) << 1
+         next_code[L] = code
+  3. Assign codes to symbols in order:
+       for each symbol with code_length > 0:
+         table[(next_code[L], L)] = symbol
+         next_code[L] += 1
+
+Decoding: read bits one at a time, accumulating a code value, and look up
+(code, bits_read) in the table after each bit.
+
+
+HALFTONE PALETTE
+================
+
+The halftone palette (data_type 5, subtype 0x00EC = 236) is a well-known
+color palette not stored in the file. It consists of 236 entries:
+
+Indices 0-215: 6x6x6 RGB color cube
+  For index i (0 <= i <= 215):
+    R = (i % 6) * 0x33
+    G = ((i / 6) % 6) * 0x33
+    B = (i / 36) * 0x33
+
+  This yields evenly-spaced values: 0x00, 0x33, 0x66, 0x99, 0xCC, 0xFF
+
+Indices 216-235: 20 extra system/gray colors
+  216: (  0,   0,   0)    226: (255, 251, 240)
+  217: (128,   0,   0)    227: (160, 160, 164)
+  218: (  0, 128,   0)    228: (128, 128, 128)
+  219: (128, 128,   0)    229: (255,   0,   0)
+  220: (  0,   0, 128)    230: (  0, 255,   0)
+  221: (128,   0, 128)    231: (255, 255,   0)
+  222: (  0, 128, 128)    232: (  0,   0, 255)
+  223: (192, 192, 192)    233: (255,   0, 255)
+  224: (192, 220, 192)    234: (  0, 255, 255)
+  225: (166, 202, 240)    235: (255, 255, 255)
+
+Indices 236-255 are unused (black / zero).
+
+
+PIXEL DATA FORMAT
+=================
+
+After CDRCOMP1 decompression, the pixel data is:
+
+8bpp (thumb_type 3):
+  width * height bytes, one byte per pixel, top-down row order (first row
+  of data is the top of the image). Each byte is a palette index.
+
+24bpp (thumb_type 5):
+  width * height * 3 bytes, three bytes per pixel in BGR order (Blue, Green,
+  Red), top-down row order.
+
+No row padding is present in the decompressed pixel data; rows are exactly
+width * (bpp / 8) bytes.
+
+
+PSC FILES
+=========
+
+Some sample archives (e.g., samples 45773 and 45834) contain .psc files
+instead of thumbnail data. These are Corel PaintShop script files and begin
+with the 4-byte ASCII magic "PSC " (with trailing space). They are not
+thumbnail archives and should be handled separately (e.g., copied as-is).
+
+
+COMPLETE BYTE-BY-BYTE WALKTHROUGH
+==================================
+
+Using a hypothetical 8bpp file with custom palette and one thumbnail:
+
+  Offset  Bytes                           Meaning
+  ------  -----                           -------
+  0x0000  00 00 00 00                     File header (always zero)
+  0x0004  03 00                           thumb_type = 3 (8bpp)
+  0x0006  40 00                           width = 64
+  0x0008  00 00                           (padding)
+  0x000A  40 00                           height = 64
+  0x000C  00 00                           (padding)
+  0x000E  02 00                           planes_outer = 2
+  0x0010  00 00                           extra1 = 0
+  0x0012  0A 00                           extra2 = 10
+  0x0014  00 00                           (padding)
+  0x0016  01 00                           inner_flag = 1
+  0x0018  00 00                           (padding)
+  0x001A  40 00                           width2 = 64
+  0x001C  00 00                           (padding)
+  0x001E  40 00                           height2 = 64
+  0x0020  00 00                           (padding)
+  0x0022  01 00                           planes_inner = 1
+  0x0024  00 00                           (padding)
+  0x0026  08 00                           bpp = 8
+  0x0028  00 00                           (padding)
+  0x002A  40 00 00 00                     stride = 64
+  0x002E  00 10 00 00                     raw_pixel_size = 4096 (64*64)
+  0x0032  00 00 00 00                     (zeros)
+  0x0036  .. .. .. ..                     coord1
+  0x003A  .. .. .. ..                     coord2
+  0x003E  .. .. .. ..                     coord3
+  0x0042  .. .. .. ..                     coord4
+  0x0046  00 00                           (flags/zero)
+  0x0048  00 00 00 00                     (zeros)
+  0x004C  00 00 00 00                     (zeros)
+  --- end of 76-byte header at offset 0x0050 ---
+  0x0050  00 00                           separator = 0
+  0x0052  04 00                           data_type = 4 (custom palette)
+  0x0054  00 01                           palette_count = 256
+  0x0056  RR GG BB  (x256)               768 bytes of RGB palette data
+  0x0356  BB 00 00 00                     CDRCOMP1 block size (uint32 LE)
+  0x035A  43 44 52 43 4F 4D 50 31        "CDRCOMP1" magic
+  0x0362  00 10 00 00                     uncompressed_size = 4096
+  0x0366  .. .. .. ..                     compressed bitstream data
+  ...     (next record starts immediately after)

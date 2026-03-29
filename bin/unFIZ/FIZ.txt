@@ -1,0 +1,382 @@
+FIZ Archive File Format Specification
+=====================================
+Used by: Maximus BBS Installer (v1.x through v3.x, 1990-2002)
+
+Two distinct FIZ archive formats exist:
+
+  Old format  "ACOPY011a"  Maximus 1.x   LZW compression
+  New format  "FIZ\x1a"   Maximus 2.x+  LH5 compression
+
+Both formats use CRC-16/ARC checksums with polynomial 0xA001.
+
+Part I covers the old ACOPY format.  Part II covers the new FIZ format.
+
+************************************************************************
+PART I — OLD FORMAT (ACOPY011a, Maximus 1.x)
+************************************************************************
+Compression: LZW by P. Fitzsimmons and B. Trower (1988)
+
+========================================================================
+1. OVERALL STRUCTURE
+========================================================================
+
+A FIZ archive consists of three regions stored sequentially:
+
+    +---------------------------+
+    | Global Header (128 bytes) |
+    +---------------------------+
+    | File Directory            |
+    |   N records × 83 bytes    |
+    +---------------------------+
+    | Compressed Data Region    |
+    |   (variable length)       |
+    +---------------------------+
+
+Directory size = 128 + 83 × N  bytes, where N = file count.
+Data region size = sum of all per-file compressed sizes.
+Total archive size = directory size + data region size.
+
+========================================================================
+2. GLOBAL HEADER  (128 bytes, offset 0x0000)
+========================================================================
+
+Offset  Size  Description
+------  ----  ----------------------------------------------------------
+ 0x00     9   Magic signature: ASCII "ACOPY011a"
+ 0x09     1   DOS EOF marker: 0x1A
+ 0x0A     2   File count (uint16 LE)
+ 0x0C     4   Reserved (always 00 00 00 00)
+ 0x10   112   Title/description field, padded with '#' (0x23)
+
+The title field occupies bytes 0x10 through 0x7F.  In all known
+archives it is filled entirely with '#' characters (i.e., no embedded
+title text), serving as a visual separator when the file is TYPEd on
+a DOS console.
+
+========================================================================
+3. FILE DIRECTORY  (83 bytes per record)
+========================================================================
+
+Immediately after the global header, N records appear in sequence.
+Each record is 83 bytes: a 2-byte CRLF prefix followed by an 81-byte
+entry body.
+
+3.1  CRLF Prefix (2 bytes)
+     Always 0x0D 0x0A.
+
+3.2  Entry Body (81 bytes)
+
+Offset  Size  Description
+------  ----  ----------------------------------------------------------
+ +0x00    1   Compression method
+                0x01 = Stored (no compression)
+                0x02 = LZW compressed
+ +0x01   65   Filename field:
+                - Null-terminated ASCII filename (8.3 DOS format)
+                - Padded with '$' (0x24) to fill remaining space
+                - Terminated by a final 0x00 byte
+                Total: name + \0 + '$' padding + \0 = 65 bytes
+ +0x42    1   DOS file attribute byte (typically 0x20 = Archive)
+ +0x43    2   DOS packed time (uint16 LE)
+                Bits 15-11: hours (0-23)
+                Bits 10-5:  minutes (0-59)
+                Bits  4-0:  seconds/2 (0-29)
+ +0x45    2   DOS packed date (uint16 LE)
+                Bits 15-9:  year - 1980 (0-127)
+                Bits  8-5:  month (1-12)
+                Bits  4-0:  day (1-31)
+ +0x47    4   Original (uncompressed) file size (uint32 LE)
+ +0x4B    4   Compressed file size (uint32 LE)
+                For stored files: equals original size.
+ +0x4F    2   CRC-16 checksum of the original file data (uint16 LE)
+
+The filename field is always exactly 65 bytes.  The actual filename is
+stored null-terminated at the start, followed by as many '$' bytes as
+needed to reach 64 bytes, followed by a final null byte at position 64.
+
+========================================================================
+4. COMPRESSED DATA REGION
+========================================================================
+
+Immediately after the last directory record, the compressed (or stored)
+file data appears in sequence, one file after another, with no gaps or
+alignment padding.  Each file's data occupies exactly "compressed size"
+bytes as specified in its directory entry.
+
+4.1  Stored Files (method 0x01)
+
+The original file data is stored verbatim, byte for byte.
+
+4.2  LZW Compressed Files (method 0x02)
+
+The data is compressed using the Lempel-Ziv-Welch (LZW) algorithm with
+the following parameters:
+
+    Initial code width:    9 bits
+    Maximum code width:   13 bits
+    Maximum dictionary:   8192 entries (2^13)
+    Bit packing order:    LSB-first (least significant bit first)
+    Clear code:           256 (resets dictionary and code width)
+    End-of-info code:     257 (reserved; not observed in practice)
+    First dictionary code: 258
+
+ALGORITHM DETAILS:
+
+The LZW dictionary is initialized with 256 single-byte entries (codes
+0-255) representing each possible byte value.  Two special codes are
+reserved: 256 (CLEAR) and 257 (END).  User dictionary entries begin at
+code 258.
+
+The compressed bitstream is a sequence of variable-width codes packed
+LSB-first into bytes.  To read an N-bit code:
+
+    1. Accumulate bytes from the stream into a bit buffer.
+    2. Extract the lowest N bits of the buffer as the code.
+    3. Shift the buffer right by N bits.
+
+The code width starts at 9 bits.  It increases by 1 when the next
+dictionary entry to be assigned (next_code) reaches or exceeds
+2^(current_width).  The maximum width is 13 bits.
+
+    Width increases:  9→10 at code 512
+                     10→11 at code 1024
+                     11→12 at code 2048
+                     12→13 at code 4096
+
+When the dictionary fills (next_code reaches 8192), no more entries are
+added.  The encoder typically sends a CLEAR code at this point to reset
+the dictionary and code width.
+
+Decompression pseudocode:
+
+    initialize dictionary with codes 0-255
+    next_code = 258
+    code_size = 9
+
+    loop:
+        code = read_code(code_size)
+
+        if code == CLEAR:
+            reinitialize dictionary
+            next_code = 258
+            code_size = 9
+            old_code = NONE
+            continue
+
+        if code == END:
+            break
+
+        if old_code == NONE:
+            output byte(code)
+            old_code = code
+            continue
+
+        if code is in dictionary:
+            entry = dictionary[code]
+        elif code == next_code:
+            entry = dictionary[old_code] + first_byte(dictionary[old_code])
+        else:
+            error: invalid code
+
+        output entry
+
+        if next_code < 8192:
+            dictionary[next_code] = dictionary[old_code] + first_byte(entry)
+            next_code += 1
+
+        if next_code >= 2^code_size AND code_size < 13:
+            code_size += 1
+
+        old_code = code
+
+========================================================================
+5. CRC-16 CHECKSUM
+========================================================================
+
+The CRC is computed over the original (uncompressed) file data using
+CRC-16/ARC (also known as CRC-16/LHA):
+
+    Polynomial: 0xA001 (bit-reversed representation of 0x8005)
+    Initial value: 0x0000
+    Input reflection: yes (LSB-first processing)
+    Output reflection: yes
+    Final XOR: 0x0000
+
+Table-driven computation:
+
+    crc = 0
+    for each byte b in data:
+        crc = table[(crc XOR b) AND 0xFF] XOR (crc >> 8)
+
+    where table[i] is built by:
+        r = i
+        for 8 iterations:
+            if r AND 1:  r = (r >> 1) XOR 0xA001
+            else:        r = r >> 1
+        table[i] = r
+
+========================================================================
+6. SELF-EXTRACTING ARCHIVES
+========================================================================
+
+Some FIZ files (notably the original Maximus 1.x distribution) are
+self-extracting: a DOS executable stub is prepended before the
+ACOPY011a archive data.  The stub is approximately 20 KB and starts
+with "AC\x12\x00".  The ACOPY011a signature can be found by scanning
+for the string "ACOPY011a" within the file; the archive data begins at
+that offset.
+
+The stub contains a built-in copy of the LZW decompressor and the
+Maximus installer UI.
+
+========================================================================
+7. BYTE ACCOUNTING EXAMPLE
+========================================================================
+
+For an archive with 2 files:
+
+    Bytes 0x000-0x07F:  Global header (128 bytes)
+    Bytes 0x080-0x081:  CRLF for entry 1
+    Bytes 0x082-0x0D2:  Entry 1 body (81 bytes)
+    Bytes 0x0D3-0x0D4:  CRLF for entry 2
+    Bytes 0x0D5-0x125:  Entry 2 body (81 bytes)
+    Bytes 0x126-...:    Compressed data for entry 1
+    Bytes ...          Compressed data for entry 2
+
+    Directory size = 128 + 83 × 2 = 294 = 0x126
+    Total size = 294 + comp_size_1 + comp_size_2
+
+
+************************************************************************
+PART II — NEW FORMAT (FIZ\x1a, Maximus 2.x / 3.x)
+************************************************************************
+Compression: LH5 (LZSS + static Huffman) from Okumura's ar002
+Source code: https://github.com/sdudley/maximus  install/ directory
+
+========================================================================
+8. OVERALL STRUCTURE
+========================================================================
+
+Unlike the old format, the new FIZ format has NO global header or file
+directory.  Instead, each file has its own header immediately followed
+by its compressed data.  Files are concatenated until end-of-file:
+
+    +------------------------------+
+    | File 1 header (20 + N bytes) |
+    +------------------------------+
+    | File 1 compressed data       |
+    +------------------------------+
+    | File 2 header (20 + N bytes) |
+    +------------------------------+
+    | File 2 compressed data       |
+    +------------------------------+
+    | ...                          |
+    +------------------------------+
+
+========================================================================
+9. PER-FILE HEADER (struct _fizhdr, 20 bytes + filename)
+========================================================================
+
+Offset  Size  Description
+------  ----  ----------------------------------------------------------
+ 0x00     4   Magic: 0x1A5A4946 (uint32 LE) = ASCII "FIZ\x1a"
+ 0x04     1   Compression method
+                0x00 = Stored (no compression)
+                0x01 = LH5 compressed
+ 0x05     1   Filename length in bytes (fnlen)
+ 0x06     2   CRC-16 checksum of the original file data (uint16 LE)
+ 0x08     4   Original (uncompressed) file size (uint32 LE)
+ 0x0C     4   Compressed file size (uint32 LE)
+                For stored files: equals original size.
+ 0x10     4   DOS timestamp (uint32 LE)
+                Low 16 bits:  DOS packed time
+                High 16 bits: DOS packed date
+                (Same bit layouts as described in section 3.2.)
+
+Immediately after the 20-byte header, fnlen bytes of ASCII filename
+follow (NOT null-terminated).  Then compsize bytes of file data follow.
+
+To read all files: repeat reading header + filename + data until EOF.
+An archive ends when fewer than 20 bytes remain or the magic does not
+match.
+
+========================================================================
+10. STORED FILES (method 0x00)
+========================================================================
+
+The original file data is stored verbatim, byte for byte.
+
+========================================================================
+11. LH5 COMPRESSED FILES (method 0x01)
+========================================================================
+
+The data is compressed using LH5: LZSS with a sliding dictionary and
+static Huffman coding.  This is the same algorithm as LHA's "-lh5-"
+method, based on Haruhiko Okumura's ar002 public domain archiver.
+
+Parameters:
+
+    Sliding window:       8192 bytes (DICSIZ = 2^13)
+    Maximum match length: 256 (MAXMATCH)
+    Minimum match length: 3 (THRESHOLD)
+    Bit packing order:    MSB-first
+    Bit buffer width:     16 bits
+
+The compressed bitstream consists of blocks.  Each block has:
+
+  1. Block size: 16 bits — number of LZSS symbols in this block.
+
+  2. T-tree (tree-encoding Huffman lengths):
+     Read n = getbits(5).
+     If n == 0: single symbol, read symbol = getbits(5).
+     If n > 0:  read n bit-lengths encoded as:
+       - 3-bit value 0-6: literal length
+       - 3-bit value 7: unary extension (count additional 1-bits)
+       At position 3 (i_special): read getbits(2) for zero-skip count.
+     Build lookup table (8-bit, 19 symbols).
+
+  3. C-tree (character/length Huffman lengths):
+     Read n = getbits(9).
+     If n == 0: single symbol, read symbol = getbits(9).
+     If n > 0:  read n entries using T-tree to decode:
+       - T-symbol 0: insert 1 zero
+       - T-symbol 1: insert getbits(4)+3 zeros
+       - T-symbol 2: insert getbits(9)+20 zeros
+       - T-symbol 3+: bit-length = symbol - 2
+     Build lookup table (12-bit, 510 symbols).
+
+  4. P-tree (position Huffman lengths):
+     Same format as T-tree but with:
+       n = getbits(4), 14 symbols, no i_special.
+     Build lookup table (8-bit, 14 symbols).
+
+  5. Symbols: decode block_size symbols using C-tree and P-tree:
+     - Code 0-255: literal byte
+     - Code 256-509: match, length = code - 253
+       Position decoded from P-tree: if p-symbol != 0,
+       position = 2^(p-1) + getbits(p-1).
+
+The sliding window wraps at 8192 bytes.  The decoder processes
+blocks until the original file size is reached.
+
+========================================================================
+12. CRC-16 CHECKSUM (same for both formats)
+========================================================================
+
+Both old and new FIZ formats use the same CRC-16/ARC algorithm.
+See section 5 above for details.
+
+========================================================================
+13. BYTE ACCOUNTING EXAMPLE (new format)
+========================================================================
+
+For an archive with 2 files ("FOO.TXT" and "BAR.EXE"):
+
+    Bytes 0x000-0x013:  File 1 header (20 bytes)
+    Bytes 0x014-0x01A:  File 1 filename "FOO.TXT" (7 bytes)
+    Bytes 0x01B-...:    File 1 compressed data (compsize_1 bytes)
+    Bytes ...:          File 2 header (20 bytes)
+    Bytes ...:          File 2 filename "BAR.EXE" (7 bytes)
+    Bytes ...:          File 2 compressed data (compsize_2 bytes)
+
+    Total = (20 + 7 + compsize_1) + (20 + 7 + compsize_2)

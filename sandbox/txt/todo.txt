@@ -23,6 +23,10 @@
 >>> wip
 <<<
 
+* Search dexvert for "unsupported" in src/format/<checkEachHere>/
+  Then vibe support for any KNOWN unsupported formats
+  Left off at archive/mpq (skipping this for now)
+
 * The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
   After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile
 

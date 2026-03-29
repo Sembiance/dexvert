@@ -1,0 +1,507 @@
+Microsoft Internet Explorer Cache Index File Format Specification
+================================================================
+Vibe coded by Claude
+
+This document describes the binary format of Internet Explorer's cache index
+files (commonly "index.dat"), used by MSIE 3.x through 6.x and beyond. These
+files are memory-mapped files (MMF) that track cached web content, browsing
+history, and cookies.
+
+File names encountered: index.dat, INDEX.DAT, MM256.DAT, MM2048.DAT,
+F0000NNN, cc.dll, cc2.dll, and various numbered files (e.g. "64").
+
+
+================================================================================
+1. FILE HEADER
+================================================================================
+
+The file header occupies the area from offset 0x0000 to the start of the record
+area. Its size varies depending on the version.
+
+1.1 Signature (28 bytes)
+------------------------
+Offset  Size  Description
+0x0000  28    ASCII string "Client UrlCache MMF Ver X.Y\0"
+
+Known version strings:
+  "3.2" - Internet Explorer 3.x
+  "4.7" - Internet Explorer 4.x
+  "5.2" - Internet Explorer 5.x, 6.x, 7.x, 8.x, 9.x, 10.x, 11.x
+
+1.2 Common Header Fields (all versions)
+----------------------------------------
+Offset  Size  Type    Description
+0x001C  4     DWORD   FileSize - Total file size in bytes.
+0x0020  4     DWORD   HashTableOffset - File offset to the first HASH record.
+                      0 if no hash table exists (empty file or v3.2/v4.7
+                      header-only files).
+0x0024  4     DWORD   NumBlocks - Total number of 128-byte blocks in the
+                      record area (from the hash table offset to end of file).
+0x0028  4     DWORD   NumAllocatedBlocks - Number of blocks currently
+                      allocated (occupied by records or reserved).
+
+1.3 Version 5.2 Extended Header
+--------------------------------
+Offset  Size  Type    Description
+0x002C  4     DWORD   Padding/Reserved. Sometimes contains residual data
+                      (e.g. 0x20202020 in cookie databases).
+0x0030  8     QWORD   CacheLimit - Cache size limit in bytes (approximate),
+                      or reserved. Stored as little-endian 8 bytes.
+0x0038  8     QWORD   ExemptUsage - Exempt entry usage or FILETIME.
+0x0040  8     QWORD   Reserved / FILETIME.
+0x0048  4     DWORD   NumDirectories - Number of cache subdirectories
+                      (0 for history/cookie databases, up to 32 for content
+                      cache). Each directory is a randomly named 8-character
+                      folder under the cache path (e.g. "Content.IE5").
+0x004C  4     DWORD   Reserved.
+0x0050  var   ARRAY   DirectoryTable - Array of directory entries (see 1.4).
+                      Space is reserved for 32 entries regardless of
+                      NumDirectories.
+
+After the directory table:
+0x01D0  var           HeaderData - Additional metadata, counters, and
+                      statistics. Exact layout varies by cache type.
+0x0250  var   BITMAP  AllocationBitmap - Bit array where each bit represents
+                      one 128-byte block in the record area. A set bit means
+                      the block is allocated. Size = ceil(NumBlocks / 8) bytes.
+                      Bitmap is padded to byte boundary.
+Remaining bytes up to HashTableOffset are zero-padded.
+
+1.4 Directory Entry (12 bytes each)
+------------------------------------
+Offset  Size  Type    Description
+0x00    8     CHAR[8] DirectoryName - 8-character ASCII directory name.
+                      Empty slots have byte 0 = 0x00, remaining bytes = 0x20
+                      (space). Valid entries contain alphanumeric names like
+                      "H528QJ1J".
+0x08    4     DWORD   FileCount - Number of cached files in this directory.
+
+1.5 Version 4.7 Header
+-----------------------
+Similar to v5.2 but with differences:
+- Hash table offset at 0x20 may be 0 for the primary INDEX.DAT.
+- The primary INDEX.DAT stores inline hash entries at offset 0x50 (see 1.6).
+- A companion file (INDEX_1.DAT) contains the traditional HASH and URL records.
+
+Offset  Size  Type    Description
+0x002C  4     DWORD   Checksum or flags.
+0x0030  4     DWORD   CacheLimit (partial).
+0x0034  var           Zeros/reserved up to 0x50.
+0x0050  var   ARRAY   InlineHashEntries - 32 entries of 12 bytes each
+                      (see 1.6). Used for activity logging.
+
+1.6 Inline Hash Entry (v4.7, 12 bytes each)
+---------------------------------------------
+Offset  Size  Type    Description
+0x00    1     BYTE    Flags - 0x00 = empty slot, non-zero = occupied.
+0x01    3     BYTE[3] HashHigh - Upper 3 bytes of the hash value.
+0x04    4     DWORD   Data1 - Additional hash/pointer data.
+0x08    4     DWORD   Data2 - Additional hash/pointer data.
+
+1.7 Version 3.2 Header
+-----------------------
+The v3.2 format uses fixed-size record slots rather than variable-size
+block-based records. Two slot sizes are used:
+  - MM256.DAT files use 256-byte slots
+  - MM2048.DAT files use 2048-byte slots
+
+Header layout:
+Offset  Size  Type    Description
+0x001C  4     DWORD   FileSize.
+0x0020  4     DWORD   FirstRecordOffset - Byte offset to the first
+                      occupied record's data area. 0 if no records.
+0x0024  4     DWORD   NumHashSlots - Number of slots in the hash table
+                      (typically 28 = 0x1C).
+0x0028  4     DWORD   NumOccupiedSlots - Number of occupied record slots.
+0x002C  4     DWORD   Reserved (0).
+0x0030  4     DWORD   CacheLimit.
+
+Hash table:
+0x0040  var   ARRAY   HashTable - Array of NumHashSlots DWORDs. Each entry
+                      is a 4-byte hash value or status flag. Value 3 = free.
+
+Record area:
+Records begin at slot-aligned boundaries after the hash table area. For
+MM256 files, records start at offset 0x400 (the 4th 256-byte slot). For
+MM2048 files, records start at offset 0x800 (the 1st 2048-byte slot after
+the header).
+No allocation bitmap. No directory table.
+
+
+================================================================================
+2. RECORD AREA
+================================================================================
+
+The record area begins at the HashTableOffset (or at a fixed offset if no hash
+table exists). It extends to the end of the file.
+
+All records are aligned on 128-byte (0x80) boundaries. Records can span
+multiple 128-byte blocks. The block count field at offset 0x04 in each record
+specifies how many blocks the record occupies.
+
+There are four record types identified by their 4-byte ASCII signature:
+  "HASH" - Hash table record
+  "URL " - URL cache entry (note trailing space)
+  "REDR" - Redirect entry
+  "LEAK" - Leaked/orphaned cache entry
+
+Free (unused) blocks in the record area may contain one of two patterns:
+  0x0BADF00D - Repeated DWORD pattern ("bad food") marking freed blocks.
+  0xDEADBEEF - Repeated DWORD pattern marking cleared record data.
+  0x00000000 - Zero-filled blocks that were never allocated.
+
+Freed records may also have their signature overwritten with 0xDEADBEEF.
+
+
+================================================================================
+3. HASH RECORD
+================================================================================
+
+HASH records implement a hash table for looking up URL/REDR/LEAK records.
+Multiple HASH records can be chained together via a linked list.
+
+3.1 HASH Record Header
+-----------------------
+Offset  Size  Type    Description
+0x00    4     CHAR[4] Signature - "HASH"
+0x04    4     DWORD   NumBlocks - Number of 128-byte blocks this record
+                      occupies. Typically 32 (= 4096 bytes).
+0x08    4     DWORD   NextHashOffset - File offset of the next HASH record
+                      in the chain. 0 = end of chain.
+0x0C    4     DWORD   Reserved (0).
+
+3.2 Hash Entries (starting at offset 0x10 within the HASH record)
+-----------------------------------------------------------------
+Each hash entry is 8 bytes:
+
+Offset  Size  Type    Description
+0x00    4     DWORD   HashValue - Hash/flag value.
+                        - 0x00000003 = empty/free slot
+                        - 0x00000001 = deleted/tombstone slot
+                        - Other values = hash of the URL at the pointed record
+0x04    4     DWORD   RecordOffset - File offset of the URL/REDR/LEAK record
+                      this entry maps to. For free slots (flag=3), this value
+                      is 0x00000003.
+
+Number of entries per HASH record = (NumBlocks * 128 - 16) / 8.
+For a typical 32-block HASH record: (4096 - 16) / 8 = 510 entries.
+
+
+================================================================================
+4. URL RECORD (Version 5.2)
+================================================================================
+
+URL records store metadata about cached web content, visited URLs, and cookies.
+
+4.1 URL Record Header
+----------------------
+Offset  Size  Type       Description
+0x00    4     CHAR[4]    Signature - "URL " (with trailing space)
+0x04    4     DWORD      NumBlocks - Record size in 128-byte blocks.
+0x08    8     FILETIME   LastModifiedTime - When the cached file was last
+                         modified (Windows FILETIME, 100-ns intervals since
+                         1601-01-01 UTC). May be zero.
+0x10    8     FILETIME   LastAccessedTime - When the entry was last accessed.
+0x18    4     DWORD      ExpiryTimeLow - Expiration time (lower DWORD of
+                         FILETIME or DOS date format).
+0x1C    4     DWORD      ExpiryTimeHigh - Expiration time (upper DWORD).
+                         Combined 8 bytes may represent a full FILETIME.
+0x20    4     DWORD      CachedFileSize - Size of the cached file on disk
+                         (bytes, low DWORD).
+0x24    4     DWORD      CachedFileSizeHigh - High DWORD (usually 0).
+0x28    4     DWORD      Reserved (0).
+0x2C    4     DWORD      Reserved (0).
+0x30    4     DWORD      DataStartOffset - Offset within the record where
+                         the variable-length data area begins. Typically
+                         0x60 for content cache entries, 0x58 for history
+                         entries that lack the ExemptDelta and sentinel
+                         fields.
+0x34    4     DWORD      URLStringOffset - Offset from start of record to
+                         the null-terminated URL string.
+0x38    1     BYTE       DirectoryIndex - Index into the DirectoryTable
+                         (0x00-0x1F). 0xFE = no directory (history/cookies).
+0x39    3     BYTE[3]    SyncInfo - Synchronization count or flags.
+0x3C    4     DWORD      FilenameOffset - Offset from start of record to
+                         the null-terminated local filename string.
+                         0 = no filename.
+0x40    4     DWORD      CacheEntryType - Bitmask of entry type flags:
+                           0x00000001 = NORMAL_CACHE_ENTRY
+                           0x00000041 = NORMAL + COOKIE_CACHE_ENTRY (0x40)
+                           0x00000045 = COOKIE_CACHE_ENTRY + URLHISTORY
+                           0x00001041 = NORMAL + COOKIE + STICKY (0x1000)
+                           0x00200001 = NORMAL + URLHISTORY (0x200000)
+                           0x04000041 = NORMAL + COOKIE + EDITED (0x4000000)
+                         Common flag bits:
+                           0x00000001 = NORMAL_CACHE_ENTRY
+                           0x00000004 = STABLE_CACHE_ENTRY
+                           0x00000040 = COOKIE_CACHE_ENTRY
+                           0x00000100 = TRACK_OFFLINE_CACHE_ENTRY
+                           0x00000200 = TRACK_ONLINE_CACHE_ENTRY
+                           0x00000800 = SPARSE_CACHE_ENTRY
+                           0x00001000 = STICKY_CACHE_ENTRY
+                           0x00008000 = INSTALLED_CACHE_ENTRY
+                           0x00040000 = POST_RESPONSE_CACHE_ENTRY
+                           0x00200000 = URLHISTORY_CACHE_ENTRY
+                           0x04000000 = EDITED_CACHE_ENTRY
+0x44    4     DWORD      HeaderInfoOffset - Offset from start of record to
+                         the null-terminated HTTP response header string.
+                         0 = no headers.
+0x48    4     DWORD      HeaderInfoSize - Size of the header info in bytes.
+                         Includes HTTP headers and optional metadata like
+                         "~U:username" lines.
+0x4C    4     DWORD      FileExtensionOffset - Offset from start of record
+                         to a file extension string. Usually 0.
+0x50    4     DOSDATE    LastSyncDate - Last synchronization or server-side
+                         modification time, stored as a DOS date/time:
+                         lower 16 bits = date (7 bits year since 1980,
+                         4 bits month, 5 bits day), upper 16 bits = time
+                         (5 bits hour, 6 bits minute, 5 bits seconds/2).
+0x54    4     DWORD      HitCount - Number of times this entry was accessed.
+0x58    4     DWORD      UseCount - Current lock/use count (typically 0).
+0x5C    4     DOSDATE    LastCheckedDate - Last time IE verified the cache
+                         entry, stored as DOS date/time (same format as
+                         0x50).
+0x60    4     DWORD      ExemptDelta - Time in seconds before the entry
+                         becomes exempt from scavenging. May be 0. Not
+                         present in history entries (DataStartOffset=0x58).
+0x64    4     DWORD      Sentinel - Often 0xDEADBEEF as a marker/padding.
+                         Not present in history entries.
+
+4.2 Variable-Length Data Area (following the fixed header)
+----------------------------------------------------------
+Starting at URLStringOffset (and continuing through the record's allocated
+blocks):
+
+  - URL String: Null-terminated ASCII string containing the URL.
+    For history entries, prefixed with "Visited: username@" or
+    "Visited: @".
+    For cookie entries, prefixed with "Cookie:username@".
+
+  - Filename String: Null-terminated ASCII string containing the local
+    cache filename (e.g. "favicon[1].ico", "page[1].htm"). The
+    bracketed number is an IE uniqueness counter.
+
+  - Header Info String: Null-terminated ASCII string containing the
+    HTTP response headers (e.g. "HTTP/1.1 200 OK\r\nContent-Type: ...").
+    May include metadata lines starting with "~U:" (username) or other
+    "~" prefixed fields.
+
+  - Padding: Unused bytes in the data area are filled with 0xDEADBEEF
+    (byte pattern: EF BE AD DE) or zeros.
+
+
+================================================================================
+5. URL RECORD (Version 4.7)
+================================================================================
+
+The v4.7 URL record has a similar structure but with field offsets shifted.
+
+Offset  Size  Type       Description
+0x00    4     CHAR[4]    Signature - "URL "
+0x04    4     DWORD      NumBlocks
+0x08    8     FILETIME   LastModifiedTime
+0x10    8     FILETIME   LastAccessedTime
+0x18    8     FILETIME   ExpiryTime (full FILETIME, may be 0x7FFFFFFFFFFFFFFF
+                         for "never expires")
+0x20    4     DWORD      CachedFileSize
+0x24    4     DWORD      CachedFileSizeHigh
+0x28    4     DWORD      Reserved
+0x2C    4     DWORD      Reserved
+0x30    4     DWORD      Reserved
+0x34    4     DWORD      FileExtensionOffset (or reserved)
+0x38    4     DWORD      URLStringOffset
+0x3C    4     DWORD      FilenameOffset (0xFFFFFFFF = none)
+0x40    4     DWORD      DirectoryIndex (4-byte field, or reserved)
+0x44    4     DWORD      CacheEntryType
+0x48    4     DWORD      HeaderInfoOffset
+0x4C    4     DWORD      HeaderInfoSize
+0x50    4     DWORD      Reserved
+0x54    4     DWORD      LastSyncTimeLow
+0x58    4     DWORD      HitCount
+0x5C    4     DWORD      UseCount
+0x60    4     DWORD      Reserved
+0x64    4     DWORD      Reserved (no DEADBEEF sentinel in v4.7)
+
+Key differences from v5.2:
+  - URLStringOffset is at 0x38 (not 0x34)
+  - CacheEntryType is at 0x44 (not 0x40)
+  - HeaderInfoOffset is at 0x48 (not 0x44)
+  - HeaderInfoSize is at 0x4C (not 0x48)
+  - ExpiryTime is a full 8-byte FILETIME at 0x18
+  - FilenameOffset of 0xFFFFFFFF means no filename
+  - No DEADBEEF sentinel at 0x64
+
+
+================================================================================
+5.5 URL RECORD (Version 3.2)
+================================================================================
+
+The v3.2 URL record uses fixed-size slots (256 or 2048 bytes) and has no
+4-byte ASCII signature. Records are identified by their position in the
+slot array and by having a valid URL offset.
+
+Offset  Size  Type       Description
+0x00    4     DWORD      HashValue - Hash of the URL for this record.
+0x04    4     DWORD      Reserved (0).
+0x08    4     DWORD      NextRecordOffset - Absolute file offset to the next
+                         record in the hash chain. 0 = end of chain.
+0x0C    4     DWORD      Reserved (0).
+0x10    4     DWORD      Reserved (0).
+0x14    4     DWORD      URLStringOffset - Offset from record start to the
+                         URL string. Typically 0x70.
+0x18    4     DWORD      FilenameOffset - Offset to local filename. 0 = none.
+0x1C    12    BYTE[12]   Reserved (0).
+0x28    8     FILETIME   LastModifiedTime.
+0x30    8     FILETIME   LastAccessedTime.
+0x38    8     FILETIME   ExpiryTime (full FILETIME).
+0x40    4     DWORD      CacheEntryType - Same flag values as v5.2.
+0x44    4     DWORD      DataSize - Total size of variable data in the slot.
+0x48    4     DWORD      HeaderInfoSize - Size of header/title info data.
+0x4C    4     DWORD      Reserved.
+0x50    4     DWORD      HashValue2 - Secondary hash or checksum.
+0x54    4     DWORD      HitCount.
+0x58    24    BYTE[24]   Reserved (0).
+0x70    var   CHAR[]     URLString - Null-terminated URL.
+                         For history entries: "Visited: url" or
+                         "Visited: username@url".
+(after URL) var          HeaderInfo - Binary metadata followed by the page
+                         title string (e.g. "Microsoft Internet Explorer").
+                         Format varies; may contain binary length prefixes
+                         before the title text.
+
+
+================================================================================
+6. REDR RECORD (Redirect Entry)
+================================================================================
+
+REDR records store URLs that resulted in HTTP redirects (3xx responses).
+
+Offset  Size  Type       Description
+0x00    4     CHAR[4]    Signature - "REDR"
+0x04    4     DWORD      NumBlocks - Record size in 128-byte blocks.
+                         Typically 1, but can be larger for long URLs.
+0x08    4     DWORD      HashTableEntryOffset - Offset within the file to
+                         the hash table entry that references this record.
+0x0C    4     DWORD      HashValue - Hash value associated with this URL.
+0x10    var   CHAR[]     URLString - Null-terminated ASCII string containing
+                         the redirect URL.
+
+After the null terminator, remaining bytes in the record are padded with
+0xDEADBEEF (EF BE AD DE) or 0x0BADF00D (0D F0 AD 0B) pattern.
+
+Note: The padding byte directly after the null terminator may be a partial
+fill byte (e.g. 0xAD, 0xBE, 0xDE) depending on alignment.
+
+
+================================================================================
+7. LEAK RECORD (Orphaned Entry)
+================================================================================
+
+LEAK records are former URL records where the cached file on disk was not
+properly deleted. IE marks these for future cleanup by changing the signature
+from "URL " to "LEAK" and overwriting most fields with 0xDEADBEEF.
+
+The structure is identical to a URL record, but:
+  - Signature is "LEAK" instead of "URL "
+  - Most metadata fields are overwritten with 0xDEADBEEF
+  - The following fields may survive:
+    - NumBlocks at 0x04 (always preserved)
+    - CachedFileSize at 0x20 (sometimes preserved)
+    - DirectoryIndex byte at 0x38 (sometimes preserved)
+    - FilenameOffset at 0x3C (sometimes preserved)
+    - The local filename string in the data area (often preserved)
+
+The filename and directory index are retained so IE can locate and delete
+the orphaned cached file from disk.
+
+
+================================================================================
+8. FREE / UNUSED BLOCKS
+================================================================================
+
+Blocks in the record area that are not part of any active record contain
+fill patterns:
+
+  0x0BADF00D (bytes: 0D F0 AD 0B) - "Bad Food" pattern. Marks blocks that
+    were freed from a previously allocated record. The entire 128-byte block
+    is filled with this repeated 4-byte pattern.
+
+  0xDEADBEEF (bytes: EF BE AD DE) - "Dead Beef" pattern. Used within
+    records to fill unused portions of the data area, and also used to
+    overwrite freed record signatures.
+
+  0x00000000 - Zero-filled blocks that were never used.
+
+Additionally, "orphan continuation blocks" may exist in the record area.
+These are blocks that were formerly part of a multi-block record (e.g. a
+3-block URL record) but the record was freed and its first block(s) were
+reallocated to a new, smaller record. The orphan continuation blocks retain
+stale data from the old record (URL fragments, HTTP header remnants, etc.)
+but are not part of any current record. They can be identified by:
+  - Not starting with any known record signature
+  - Not matching a fill pattern (0x0BADF00D, 0xDEADBEEF, or all zeros)
+  - Often containing readable text (URL fragments, filenames, headers)
+
+
+================================================================================
+9. FILE ORGANIZATION
+================================================================================
+
+A typical index.dat file (v5.2) is organized as follows:
+
+  +---------------------------+  0x0000
+  | File Header               |
+  |  - Signature (28 bytes)   |
+  |  - Metadata fields        |
+  |  - Directory Table        |
+  |  - Allocation Bitmap      |
+  |  - Padding                |
+  +---------------------------+  HashTableOffset (e.g. 0x4000 or 0x5000)
+  | Record Area               |
+  |  - HASH records (chain)   |
+  |  - URL records            |
+  |  - REDR records           |
+  |  - LEAK records           |
+  |  - Free blocks            |
+  +---------------------------+  FileSize
+
+The header area size depends on the cache type:
+  - Small caches (history, cookies): header = 0x4000 (16 KB)
+  - Larger content caches: header = 0x5000 (20 KB) or more
+
+Files sizes are always a multiple of 0x4000 (16 KB).
+
+9.1 Hash Table Chain
+---------------------
+The first HASH record is at HashTableOffset. Each HASH record's
+NextHashOffset field points to the next HASH record, forming a singly
+linked list. When the current HASH record is full (all 510 entries
+occupied), a new HASH record is allocated and linked.
+
+9.2 Block Allocation
+---------------------
+Records are allocated in units of 128-byte blocks. A URL record may span
+1 to many blocks depending on the length of the URL, filename, and HTTP
+headers. The allocation bitmap tracks which blocks are in use.
+
+9.3 Multi-file Databases
+--------------------------
+IE cache databases may span multiple files:
+  - index.dat (primary) + index_1.dat, index_2.dat, ... (overflow)
+  - INDEX.DAT + INDEX_1.DAT through INDEX_N.DAT
+  - MM256.DAT, MM2048.DAT (v3.2 format files)
+  - F0000001, F0000002, ... (numbered files)
+Each file is self-contained with its own header and record area.
+
+
+================================================================================
+10. DATA TYPES
+================================================================================
+
+DWORD    - 32-bit unsigned integer, little-endian.
+QWORD    - 64-bit unsigned integer, little-endian.
+FILETIME - 64-bit Windows FILETIME (100-nanosecond intervals since
+           January 1, 1601 UTC), little-endian. To convert to Unix time:
+           unix_time = (filetime / 10000000) - 11644473600
+CHAR[N]  - ASCII string of N bytes.
+BYTE     - 8-bit unsigned integer.

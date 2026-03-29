@@ -1,0 +1,456 @@
+================================================================================
+macOS Self Mounting Image (SMI) File Format Specification
+================================================================================
+
+Vibe coded by Claude
+
+1. OVERVIEW
+================================================================================
+
+A Self Mounting Image (.smi) is a classic Mac OS disk image format created by
+Apple's Disk Copy application (creator code "oneb"). SMI files are executable
+Mac applications that, when double-clicked, mount an embedded HFS or HFS+ disk
+image on the user's desktop.
+
+The on-disk format consists of a MacBinary II wrapper encapsulating a Mac
+application whose data fork contains a compressed HFS/HFS+ volume in NDIF (New
+Disk Image Format), and whose resource fork contains the NDIF block map, the
+application code, and supporting resources.
+
+
+2. OUTER CONTAINER: MACBINARY II
+================================================================================
+
+All SMI files in this corpus are encoded as MacBinary II files. The MacBinary II
+format wraps a dual-fork Mac file into a single byte stream.
+
+2.1 MacBinary II Header (128 bytes)
+--------------------------------------------------------------------------------
+
+Offset  Size  Field                     Value/Notes
+------  ----  -----                     -----------
+0       1     Old version number        Always 0x00
+1       1     Filename length (N)       1..63
+2       63    Filename                  Pascal string (N bytes + zero padding)
+65      4     File type                 "APPL" (application)
+69      4     File creator             "oneb" (Disk Copy)
+73      1     Finder flags (high byte)  Typically 0x21 (has bundle + is inited)
+                                        or 0x20 or 0x01
+74      1     Zero fill                 0x00
+75      2     File vertical position    Icon position in Finder window
+77      2     File horizontal position  Icon position in Finder window
+79      2     Window/folder ID          Finder window ID
+81      1     Protected flag            0x00 or 0x01
+82      1     Zero fill                 0x00
+83      4     Data fork length          Big-endian uint32
+87      4     Resource fork length      Big-endian uint32
+91      4     Creation date             Mac OS epoch (seconds since 1904-01-01)
+95      4     Modification date         Mac OS epoch
+99      2     GetInfo comment length    Usually 0; some files have nonzero
+101     1     Finder flags (low byte)   Typically 0x00 or 0x40
+102     21    Reserved                  Zero fill (MacBinary II)
+122     1     MacBinary II version      0x00 in these samples (some tools write
+                                        0x81 for MacBinary II)
+123     1     Minimum version needed    0x00 in these samples
+124     2     CRC-16                    CRC-CCITT of bytes 0..123 (0x0000 in
+                                        these samples; computed on output)
+126     2     Padding                   0x0000
+
+Total header: 128 bytes.
+
+2.2 Data Fork
+--------------------------------------------------------------------------------
+
+Immediately follows the header. Contains the NDIF compressed disk image data.
+Padded with zero bytes to the next 128-byte boundary.
+
+2.3 Resource Fork
+--------------------------------------------------------------------------------
+
+Follows the padded data fork. Contains Mac resource fork data including the
+NDIF block map and SMI application resources.
+Padded with zero bytes to the next 128-byte boundary.
+
+2.4 GetInfo Comment (Optional)
+--------------------------------------------------------------------------------
+
+If the GetInfo comment length at offset 99 is nonzero, the comment data follows
+the resource fork (padded to 128-byte boundary). Only one sample file
+(hostal.bin) uses this field (81-byte comment).
+
+2.5 Total File Size
+--------------------------------------------------------------------------------
+
+  file_size = 128
+            + pad128(data_fork_length)
+            + pad128(resource_fork_length)
+            + pad128(comment_length)        // if comment_length > 0
+
+  where pad128(n) = ((n + 127) / 128) * 128
+
+
+3. RESOURCE FORK STRUCTURE
+================================================================================
+
+The resource fork uses the standard Mac OS Resource Manager format.
+
+3.1 Resource Fork Header (16 bytes)
+--------------------------------------------------------------------------------
+
+Offset  Size  Field
+------  ----  -----
+0       4     Offset to resource data section (from start of resource fork)
+4       4     Offset to resource map (from start of resource fork)
+8       4     Length of resource data section
+12      4     Length of resource map
+
+3.2 Resource Data Section
+--------------------------------------------------------------------------------
+
+Begins at the offset specified in the header. Each resource entry is stored as:
+
+  [4 bytes: data length (big-endian uint32)] [N bytes: resource data]
+
+Resource entries are packed sequentially with no padding between them.
+
+3.3 Resource Map
+--------------------------------------------------------------------------------
+
+Begins at the map offset specified in the header.
+
+Offset  Size  Field
+------  ----  -----
+0       16    Copy of resource fork header (reserved)
+16      4     Handle to next resource map (reserved, 0)
+20      2     File reference number (reserved)
+22      2     Resource file attributes
+24      2     Offset to type list (from start of resource map)
+26      2     Offset to name list (from start of resource map)
+
+3.4 Type List
+--------------------------------------------------------------------------------
+
+At the type list offset within the resource map:
+
+Offset  Size  Field
+------  ----  -----
+0       2     Number of types minus 1 (big-endian int16)
+2       8*N   Type entries (one per type)
+
+Each type entry (8 bytes):
+
+Offset  Size  Field
+------  ----  -----
+0       4     Resource type (4 ASCII characters)
+4       2     Number of resources of this type minus 1 (int16)
+6       2     Offset to reference list for this type (from type list start)
+
+3.5 Reference List Entry (12 bytes per resource)
+--------------------------------------------------------------------------------
+
+Offset  Size  Field
+------  ----  -----
+0       2     Resource ID (int16)
+2       2     Offset to resource name (from name list start; 0xFFFF = no name)
+4       1     Resource attributes
+5       3     Offset to resource data (from resource data section start)
+8       4     Reserved (handle, filled at runtime)
+
+
+4. RESOURCE TYPES IN SMI FILES
+================================================================================
+
+SMI files contain the following resource types:
+
+4.1 NDIF Block Map Resource
+--------------------------------------------------------------------------------
+
+Type: "bcem"  (Block Checksum/Map)
+ID: 128
+Purpose: Maps sectors in the output volume to compressed blocks in the data fork.
+
+This is the critical resource for reconstructing the disk image. See Section 5.
+
+4.2 Application Code Resources
+--------------------------------------------------------------------------------
+
+Type: "CODE"  (68K executable code segments)
+  ID=0: Jump table (208 bytes)
+  ID=1: Main code segment (~51 KB)
+  ID=2: Secondary code segment (~1.8 KB)
+
+Type: "DRVR"  (Device driver)
+  ID=0: Disk image driver (~37-42 KB)
+
+These provide the self-mounting functionality on classic Mac OS.
+
+4.3 Disk Image Handler Resources
+--------------------------------------------------------------------------------
+
+Type: "hdi1"  (68K code for image handlers)
+  IDs: 33, 128-131
+  Handler code for different disk image operations.
+
+Type: "hdi2"  (PowerPC code for image handlers)
+  IDs: 128-131
+  Start with 0xAAFE0700 (PPC fragment header).
+
+Type: "hdi3"  (Icons)
+  IDs: 32-33
+  Icon data for the mounted disk image.
+
+Type: "hdi4"  (Status messages)
+  ID: 32
+  Pascal strings for UI status messages.
+
+Type: "hdi5"  (Filesystem type identifiers)
+  ID: 32
+  List of supported filesystem types (HFS, MFS, ProDOS, ISO 9660, etc.)
+
+Type: "hdi6"  (File type/creator associations)
+  ID: 32
+  Maps file format signatures to type/creator codes.
+
+4.4 UI Resources
+--------------------------------------------------------------------------------
+
+Type: "BNDL"  Bundle resource mapping icons to file types
+Type: "FREF"  File reference for Finder
+Type: "ICN#"  Icon (1-bit + mask)
+Type: "icl4"  Large 4-bit color icon
+Type: "icl8"  Large 8-bit color icon
+Type: "ics#"  Small icon (1-bit + mask)
+Type: "ics4"  Small 4-bit color icon
+Type: "ics8"  Small 8-bit color icon
+Type: "DLOG"  Dialog template
+Type: "DITL"  Dialog item list
+Type: "ALRT"  Alert template
+Type: "CNTL"  Control template
+Type: "dctb"  Dialog color table
+Type: "dlgx"  Extended dialog info
+Type: "ppat"  Pixel pattern
+Type: "PAT "  Pattern
+Type: "STR#"  String list
+Type: "STR "  Single string
+Type: "PROC"  Procedure code
+Type: "hfdr"  Help Finder resource
+
+4.5 License Agreement Resources (optional)
+--------------------------------------------------------------------------------
+
+Type: "LPic"  License picture configuration
+Type: "TEXT"  License text (multiple IDs for multiple languages)
+Type: "styl"  Styled text formatting
+Type: "infn"  Installation font information
+
+4.6 Metadata Resources
+--------------------------------------------------------------------------------
+
+Type: "SIZE"  (ID=-1)  Application memory requirements
+Type: "oneb"  (ID=0)   Copyright string
+Type: "vers"  (ID=1)   Version information
+
+
+5. NDIF BLOCK MAP (bcem RESOURCE)
+================================================================================
+
+The bcem resource maps the compressed data in the data fork to sectors of the
+output HFS/HFS+ volume.
+
+5.1 bcem Header (128 bytes)
+--------------------------------------------------------------------------------
+
+Offset  Size  Field                   Description
+------  ----  -----                   -----------
+0       2     Signature/version       Observed values: 0x000B, 0x000C
+2       2     Reserved                Always 0x0000
+4       64    Image name              Pascal string (1 byte length + name +
+                                      zero padding to 64 bytes)
+68      4     Total sectors           Total number of 512-byte sectors in the
+                                      output volume (big-endian uint32)
+72      4     Flags/version           Observed: 0x00000201, 0x00000204,
+                                      0x00000000
+76      4     Reserved                0x00000000
+80      4     CRC/checksum            Volume checksum value
+84      36    Reserved                Zero fill
+120     4     Reserved                Zero fill
+124     4     Entry count             Number of block table entries (uint32)
+
+5.2 Block Table Entries (12 bytes each)
+--------------------------------------------------------------------------------
+
+Starting at offset 128. One entry per block region.
+
+Offset  Size  Field                   Description
+------  ----  -----                   -----------
+0       3     Sector number           Starting sector in the output volume
+                                      (big-endian, 24-bit unsigned)
+3       1     Block type              Encoding type for this block:
+                                        0x00 = Zero fill
+                                        0x02 = Raw (uncompressed) copy
+                                        0x83 = ADC compressed
+                                        0xFF = End marker
+4       4     Data fork offset        Byte offset into data fork (uint32)
+8       4     Data fork length        Number of bytes in data fork (uint32)
+
+The sector count for each entry is implicit: it equals the next entry's sector
+number minus this entry's sector number.
+
+Block types:
+  0x00  Zero fill: Output sectors are all zeros. Data fork offset/length = 0.
+  0x02  Raw copy: Copy data_fork[offset..offset+length] to output verbatim.
+        length = sector_count * 512.
+  0x83  ADC compressed: Decompress data_fork[offset..offset+length] using
+        Apple Data Compression to produce sector_count * 512 bytes.
+  0xFF  End of block table. Marks the total sector boundary.
+
+
+6. DATA FORK STRUCTURE
+================================================================================
+
+The data fork contains two regions:
+
+6.1 Compressed Block Data
+--------------------------------------------------------------------------------
+
+Occupies offsets 0 through the end-marker offset from the bcem. Contains the
+raw and ADC-compressed block data referenced by the bcem entries.
+
+6.2 NDIF Trailer
+--------------------------------------------------------------------------------
+
+After the compressed block data, the data fork contains a trailer with:
+
+Offset  Size  Field
+------  ----  -----
+0       var   Embedded file metadata (HFS catalog entries for Desktop DB/DF
+              and other volume files)
+var     var   Copy of the bcem resource (identical to the resource fork copy)
+var     var   Disk Copy signature string:
+                1 byte: length
+                N bytes: "Disk Copy" (Pascal string)
+              Followed by version info and image description string, e.g.:
+                "6.3.3&Mac\xAA OS HFS 1434K image\rCRC: $035EB140"
+var     var   Copy of trailer metadata header
+var     var   Resource type/ID list ("bcem", "STR ", "vers")
+var     var   Additional metadata and volume name
+
+The trailer is used by Disk Copy for validation but is not required for
+extraction (the bcem in the resource fork is authoritative).
+
+
+7. APPLE DATA COMPRESSION (ADC)
+================================================================================
+
+ADC is a simple LZ77-style compression scheme used for block type 0x83.
+
+7.1 Algorithm
+--------------------------------------------------------------------------------
+
+Read control bytes from the compressed stream. Each control byte determines
+the operation:
+
+  If bit 7 is set (control & 0x80):
+    LITERAL RUN
+    count = (control & 0x7F) + 1
+    Copy the next 'count' bytes from the compressed stream to output.
+
+  Else if bit 6 is set (control & 0x40):
+    3-BYTE MATCH (long distance)
+    count = (control & 0x3F) + 4
+    Read 2 more bytes: offset = (byte1 << 8) | byte2
+    Copy 'count' bytes from output[current_pos - offset - 1].
+    The offset is 0-based (offset=0 means 1 byte back).
+
+  Else (bits 7-6 are 00):
+    2-BYTE MATCH (short distance)
+    count = ((control >> 2) & 0x0F) + 3
+    Read 1 more byte: offset = ((control & 0x03) << 8) | byte1
+    Copy 'count' bytes from output[current_pos - offset - 1].
+    The offset is 0-based (offset=0 means 1 byte back).
+
+Match copies are byte-by-byte (supporting overlapping references for run-length
+encoding patterns).
+
+7.2 Decompression context
+--------------------------------------------------------------------------------
+
+Each bcem block entry is decompressed independently. The expected output size
+is sector_count * 512 bytes.
+
+
+8. EMBEDDED VOLUME FORMATS
+================================================================================
+
+The reconstructed volume (from all bcem blocks) is either:
+
+8.1 HFS Volume
+--------------------------------------------------------------------------------
+
+Identified by the Master Directory Block (MDB) signature 0x4244 at volume
+offset 1024 (sector 2).
+
+Volume layout:
+  Sectors 0-1:   Boot blocks (1024 bytes)
+  Sector 2:      Master Directory Block (512 bytes)
+  Sector 3+:     Volume bitmap, allocation blocks
+  Last sector-1: Alternate MDB (copy of sector 2)
+
+The MDB contains pointers to the Catalog B-tree and Extents Overflow B-tree.
+Files are enumerated by walking the Catalog B-tree leaf nodes.
+
+Some HFS volumes are wrapper volumes that embed an HFS+ volume. These are
+identified by drEmbedSigWord = 0x482B at MDB offset 124.
+
+8.2 HFS+ Volume
+--------------------------------------------------------------------------------
+
+Identified by the Volume Header signature 0x482B at volume offset 1024.
+
+The Volume Header contains fork data structures pointing to the Catalog B-tree,
+Extents Overflow B-tree, Allocation file, and Attributes file.
+
+HFS+ uses Unicode (UTF-16BE) filenames and 32-bit allocation block numbers.
+
+
+9. VARIANT: APPLEDOUBLE (.smi.rsrc)
+================================================================================
+
+Some SMI files are stored as AppleDouble files containing only the resource
+fork. These have:
+
+  Magic: 0x00051607 (AppleDouble)
+  Version: 0x00020000
+
+The resource fork contains the same resources as in a MacBinary SMI. However,
+the data fork (containing the NDIF compressed blocks) must be available
+separately for extraction. Without the data fork, the volume cannot be
+reconstructed.
+
+
+10. BYTE ACCOUNTING
+================================================================================
+
+Every byte in an SMI file is accounted for:
+
+  MacBinary header:       128 bytes (fixed)
+  Data fork:              Variable, contains:
+    - NDIF compressed blocks (referenced by bcem entries)
+    - NDIF trailer (metadata, bcem copy, Disk Copy signature)
+  Data fork padding:      0-127 bytes of zero fill (to 128-byte boundary)
+  Resource fork:          Variable, contains:
+    - Standard Mac resource fork with all resources listed in Section 4
+  Resource fork padding:  0-127 bytes of zero fill (to 128-byte boundary)
+  GetInfo comment:        0 or variable (if comment_length > 0 in header)
+  Comment padding:        0-127 bytes of zero fill (if comment present)
+
+
+11. FILE TYPE IDENTIFICATION
+================================================================================
+
+SMI files can be identified by:
+
+  1. MacBinary header with file type "APPL" and creator "oneb"
+  2. Presence of "bcem" resource (ID 128) in the resource fork
+  3. Common file extensions: .smi, .smi.bin, .bin
+  4. AppleDouble variant: magic 0x00051607 with extension .smi.rsrc

@@ -183,7 +183,6 @@ export default
 		mameFloppyImage                             : {name : "MAME Floppy Image", ext : [".mfi"], magic : ["MAME Floppy Image"]},
 		massiveGameDataArchive                      : {name : "Massive game data archive", ext : [".pak"], magic : ["Massive game data"], weakMagic : true},
 		masterDOSVDiskImage                         : {name : "MasterDOS disk image", ext : [".dsk"], magic : [/^MasterDOS v\d\.x bootable disk image/]},
-		maximusInstallerArchive                     : {name : "Maximus installer archive", ext : [".fiz"], magic : ["Maximus installer archive format (new)"], weakMagic : true},
 		mechWarrior2GameData                        : {name : "MechWarrior 2 game data", ext : [".prj"], magic : ["MechWarrior 2 game data"]},
 		metaCardStack                               : {name : "MetaCard/Revolution Stack", ext : [".rev"], magic : [/^MetaCard\/?(Revolution)?(\/LiveCode)? stack/, "Revolution MetaCard stack", "Revolution stack", /^fmt\/(1918|1919|1920)( |$)/]},
 		micrografxArchive                           : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},

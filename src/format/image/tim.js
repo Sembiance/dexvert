@@ -10,7 +10,7 @@ export class tim extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"convert", "deark[module:tim]", "wuimg[format:tim]", "nconvert[format:tim]", "gameextractor[renameOut][codes:TIM]",
-		"GARbro[matchType:magic][types:image:Sony.TimFormat]", "paintDotNet[matchType:magic]", "noesis[type:image]",
+		"GARbro[types:image:Sony.TimFormat][matchType:magic]", "paintDotNet[matchType:magic]", "noesis[type:image]",
 		"recoil2png[format:TIM]"
 	];
 }

@@ -1,0 +1,196 @@
+HUF Archive File Format Specification
+=====================================
+Vibe coded by Claude
+
+Overview
+--------
+The HUF format is a Huffman-compressed archive used by HI-TECH Software to
+distribute their Z80 CP/M C compiler (e.g. version 3.09). An archive bundles
+multiple source files into a single compressed file. All entries share one
+static Huffman tree built from a frequency-ordered character table.
+
+The companion CP/M utility DEHUFF.COM (also by HI-TECH) extracts or lists
+the contents of .HUF files.
+
+
+Byte Order
+----------
+All multi-byte integers are stored in little-endian byte order.
+
+
+File Structure
+--------------
+A HUF file consists of five consecutive sections:
+
+  Offset  Section
+  ------  -------
+  0x0000  Header              (10 bytes, fixed)
+  0x000A  Character Table     (num_chars bytes)
+          Huffman Tree         (variable, bit-packed)
+          File Entry Records   (num_files * 13 bytes)
+          Compressed Data      (filenames + contents, Huffman-encoded)
+          Zero Padding         (to 128-byte boundary)
+
+
+1. Header (10 bytes)
+--------------------
+  Offset  Size   Field          Description
+  ------  ----   -----          -----------
+  0x00    2      magic          Magic number: 0x01BD (bytes: BD 01)
+  0x02    2      num_files      Number of files in the archive (uint16)
+  0x04    2      num_chars      Number of unique byte values in the
+                                Huffman alphabet (uint16)
+  0x06    4      dir_offset     Byte offset from file start to the
+                                first file entry record (uint32)
+
+
+2. Character Table (num_chars bytes)
+------------------------------------
+Starts at offset 0x0A (immediately after the header).
+
+A sequence of num_chars distinct byte values representing the characters
+used in the archive. The bytes are ordered by descending frequency — the
+most common character appears first.
+
+This table serves two purposes:
+  - It defines the set of byte values present in the compressed data.
+  - It determines the order in which leaf nodes are assigned characters
+    during Huffman tree construction.
+
+Typical entries include ASCII printable characters plus TAB (0x09),
+LF (0x0A), CR (0x0D), and NUL (0x00).
+
+
+3. Huffman Tree (bit-packed, variable length)
+---------------------------------------------
+Immediately follows the character table.
+
+The tree is serialized as a preorder (depth-first) traversal, using one
+bit per node:
+
+  Bit value   Meaning
+  ---------   -------
+  1           Internal node. Its left subtree follows immediately,
+              then its right subtree.
+  0           Leaf node. The character is the next unused entry from
+              the character table (consumed in order, starting from
+              index 0).
+
+Total size: exactly (2 * num_chars - 1) bits, since a binary tree with
+N leaves has N-1 internal nodes, giving 2N-1 nodes total.
+
+Bit packing: bits are packed LSB-first within each byte. That is, the
+first bit read from a byte is bit 0 (the least significant bit), then
+bit 1, up through bit 7. After all 8 bits are consumed, the next byte
+is read.
+
+After the final tree bit, any remaining bits in the current byte are
+unused padding. The tree section ends on the next byte boundary.
+
+During Huffman DECODING of compressed data:
+  - Reading a 1 bit means: follow the LEFT child (the first subtree
+    in the preorder encoding).
+  - Reading a 0 bit means: follow the RIGHT child (the second subtree
+    in the preorder encoding).
+  - When a leaf is reached, its character value is the decoded byte.
+
+
+4. File Entry Records (num_files * 13 bytes)
+--------------------------------------------
+Located at byte offset dir_offset (from the header field). Each record
+is 13 bytes and describes one file in the archive:
+
+  Offset  Size   Field            Description
+  ------  ----   -----            -----------
+  0x00    4      name_offset      Byte offset (from file start) to the
+                                  Huffman-encoded filename (uint32)
+  0x04    4      content_size     Original (uncompressed) size of the
+                                  file content in bytes (uint32)
+  0x08    4      content_offset   Byte offset (from file start) to the
+                                  Huffman-encoded file content (uint32)
+  0x0C    1      mode_flag        File mode: 0 = text, non-zero = binary
+
+Records are stored contiguously with no padding between them. The
+dir_offset header field equals the byte offset to the first record,
+and record N is at (dir_offset + N * 13).
+
+The name_offset and content_offset fields are absolute byte positions
+within the archive file. The compressed data at those offsets always
+begins on a byte boundary.
+
+
+5. Compressed Data
+------------------
+The compressed data region follows the file entry records and contains
+two logical sections:
+
+  a) Filenames: All filenames are Huffman-encoded and stored
+     consecutively. Each filename is a null-terminated string (the NUL
+     byte 0x00 is Huffman-encoded like any other character). Filenames
+     are CP/M-style (e.g., "cleanup.c", "exec.as"). Each filename
+     starts on a byte boundary at the offset given by its record's
+     name_offset field.
+
+  b) File contents: All file contents are Huffman-encoded and stored
+     consecutively after the filenames. Each file's content starts on a
+     byte boundary at the offset given by its record's content_offset
+     field. The decoder reads exactly content_size characters to
+     extract the full original file.
+
+Between consecutive filenames and between consecutive file contents,
+any unused bits in the last byte of the previous entry are padding
+(the next entry starts on a fresh byte boundary).
+
+
+6. Zero Padding
+---------------
+The file is zero-padded at the end to the next 128-byte boundary,
+matching the CP/M disk sector size.
+
+
+Extraction Algorithm
+--------------------
+1. Read and validate the 10-byte header (check magic = 0x01BD).
+2. Read the character table (num_chars bytes starting at offset 0x0A).
+3. Build the Huffman tree from the bit-packed data immediately following
+   the character table.
+4. For each file (i = 0 to num_files - 1):
+   a. Read the 13-byte entry record at (dir_offset + i * 13).
+   b. Seek to name_offset, initialize bit reader, and Huffman-decode
+      characters until a NUL (0x00) is decoded — this is the filename.
+   c. Seek to content_offset, initialize bit reader, and Huffman-decode
+      exactly content_size bytes — this is the file content.
+   d. Write the decoded content to a file with the decoded filename.
+
+
+Format Relationships
+--------------------
+The following identity holds for a well-formed archive:
+
+  dir_offset = 10 + num_chars + ceil((2 * num_chars - 1) / 8)
+
+That is, the directory immediately follows the header, character table,
+and tree (rounded up to the next byte).
+
+The name_offset of the first file equals (dir_offset + num_files * 13),
+i.e., the compressed data begins right after the last entry record.
+
+The content_offset of the first file marks where the content section
+begins, after all the compressed filenames.
+
+File sizes are always a multiple of 128 bytes due to CP/M sector
+padding.
+
+
+Example
+-------
+Consider a HUF file with 42 files and 93 unique characters:
+
+  Header:        BD 01  2A 00  5D 00  7F 00 00 00
+                 magic  files  chars  dir_offset=0x7F
+
+  Char table:    93 bytes at offset 0x0A (bytes 0x0A..0x66)
+  Huffman tree:  185 bits = 24 bytes at offset 0x67 (bytes 0x67..0x7E)
+  Entry records: 42 * 13 = 546 bytes at offset 0x7F (bytes 0x7F..0x2A0)
+  Compressed:    filenames + contents starting at 0x2A1
+  Padding:       zero-filled to 128-byte boundary

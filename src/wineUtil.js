@@ -57,8 +57,10 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		{
 			for(const explorerPID of explorerPIDsRaw.split(" ").map(v => +v))
 			{
-				const envionRaw = await fileUtil.readTextFile(path.join("/proc", explorerPID.toString(), "environ"));
-				const environ = Object.fromEntries(envionRaw.split("\0").map(v => v.split("=")));
+				const environRaw = await xu.tryFallbackAsync(async () => await fileUtil.readTextFile(path.join("/proc", explorerPID.toString(), "environ")));
+				if(!environRaw?.length)
+					continue;
+				const environ = Object.fromEntries(environRaw.split("\0").map(v => v.split("=")));
 				if(environ.WINEID===wineid)
 					await runUtil.run("kill", [explorerPID.toString()]);
 			}

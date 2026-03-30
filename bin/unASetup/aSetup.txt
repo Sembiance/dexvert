@@ -1,0 +1,243 @@
+ASetup / Eschalon Setup Installer Archive (.ARV) File Format Specification
+==========================================================================
+Vibe coded by Claude
+
+Created by Eschalon Development Inc. (Robert Salesas).
+Used by ASetup / Eschalon Setup for Windows 3.x installer builder.
+Successor to the EDI Install packed file format (EDILZSS1/EDILZSS2).
+
+The format stores multiple files in a single archive with compression.
+Common filenames: SETUP.ARV, SETUPMN.ARV, SETUP_1.ARV, BDE.ARV.
+Multi-volume archives use extensions .A02, .A03, etc. for subsequent volumes.
+
+The SETUPMN.ARV file typically contains the installer engine (setupmn.exe),
+3D controls DLL (ctl3dv2.dll), setup script (setup.stx), and readme files.
+SETUP.ARV and SETUP_N.ARV files contain the application files to be installed.
+
+
+================================================================================
+1. ARCHIVE HEADER (14 bytes)
+================================================================================
+
+Offset  Size  Description
+------  ----  -----------
+0       4     Magic: "ARCV" (0x41 0x52 0x43 0x56)
+4       2     Format version (little-endian)
+                Value 0x0200 = version 2 (BLCK blocks) - all known samples
+                Value 0x01xx = version 1 (CHNK chunks) - theoretical
+6       2     Header size (little-endian) = 14 (always 0x0E 0x00)
+8       2     Disk count (little-endian)
+                Number of volumes in the archive set, or disk identifier.
+                Values observed: 1, 2, 4, 8
+10      2     Reserved (always 0x00 0x00)
+12      2     Volume number (little-endian)
+                This volume's sequence number within the set.
+                Values observed: 1, 2, 3, 4, 5
+
+Note: For multi-volume sets, the volume numbering does NOT always match
+across files in the same sample directory. Different .ARV files may belong
+to different logical archive groups.
+
+
+================================================================================
+2. BLOCK HEADER (version 2 - BLCK format)
+================================================================================
+
+Blocks follow immediately after the archive header and are contiguous:
+each block header is followed by its compressed data, then the next block.
+
+Offset  Size  Description
+------  ----  -----------
+0       4     Magic: "BLCK" (0x42 0x4C 0x43 0x4B)
+4       2     Block version (little-endian) = 0x0200 (always)
+6       2     Block header size (little-endian) = 45 + filename_length
+8       4     Method/flags (little-endian)
+                0x00000021 = method 1 (most common, ~99.8% of blocks)
+                0x00000022 = method 2 (very rare, 2 files observed)
+                0x00000024 = method 4 (very rare, 2 files observed)
+                0x00000028 = method 8 (very rare, 3 files observed)
+                The low nibble (1,2,4,8) may indicate dictionary size
+                or compression level. The 0x20 high nibble may be the
+                DOS "archive" attribute or a format flag.
+12      4     Compressed size (little-endian, bytes)
+16      1     Filename length (N)
+17      N     Filename (ASCII, may include subdirectory paths with '\')
+17+N    4     Original (uncompressed) size (little-endian, bytes)
+21+N    4     Compressed size duplicate (little-endian, same as offset 12)
+25+N    4     File attributes (little-endian, DOS attributes)
+                0x00000020 = Archive bit (the only value observed)
+29+N    4     File date/time (little-endian, DOS date+time packed format)
+                Bits 0-4:  seconds/2 (0-29)
+                Bits 5-10: minutes (0-59)
+                Bits 11-15: hours (0-23)
+                Bits 16-20: day (1-31)
+                Bits 21-24: month (1-12)
+                Bits 25-31: year - 1980
+33+N    2     File version minor (little-endian)
+35+N    2     File version major (little-endian)
+                Together these form dwFileVersionMS from Windows
+                VS_FIXEDFILEINFO (HIWORD=major, LOWORD=minor).
+                For non-DLL/EXE files: 0.0.
+37+N    2     File version build (little-endian)
+39+N    2     File version revision (little-endian)
+                Together these form dwFileVersionLS.
+41+N    4     CRC-32/JAMCRC (little-endian)
+                CRC-32 of the raw on-disk compressed payload bytes
+                (before any XOR deobfuscation, before decompression).
+                Same as standard CRC-32 but without final bit inversion
+                (CRC-32/JAMCRC algorithm: init=0xFFFFFFFF, no final XOR).
+
+Total header size: 45 + N bytes (matches the value at offset 6).
+
+
+================================================================================
+3. COMPRESSED DATA
+================================================================================
+
+Compressed data immediately follows the block header. The compressed data
+length is given by the "Compressed size" field in the header.
+
+When compressed_size == uncompressed_size, the data is stored verbatim
+(no compression applied). This occurs for very small files (typically
+under ~40 bytes) where compression overhead exceeds any savings.
+
+CRC FIELD:
+The CRC-32/JAMCRC checksum is computed on the raw on-disk payload bytes
+(before any deobfuscation). JAMCRC = standard CRC-32 with the final XOR
+step inverted (i.e., ~CRC32). Equivalently: init=0xFFFFFFFF, no final XOR.
+
+
+PAYLOAD DEOBFUSCATION (some builder versions only):
+Some ASetup builder versions apply a bytewise XOR-chain obfuscation to
+the compressed payload before writing it to the archive. This must be
+undone before decompression.
+
+  Algorithm:
+    state = initial_key
+    for each payload byte (cipher):
+        plain = cipher XOR state
+        state = plain        (feedback: state becomes the decrypted byte)
+
+  Known initial keys:
+    0x56  Most common. ASCII 'V', the last byte of "ARCV".
+    0xAB  Less common. Observed in ~4% of obfuscated archives.
+    0x00  Equivalent to no obfuscation (cipher XOR 0 = cipher).
+
+  Because the XOR chain uses feedback (state = plain), only the FIRST
+  byte is affected by the initial key. All subsequent bytes depend on
+  the previous plaintext byte, so the chain converges after byte 0
+  regardless of the starting key.
+
+  Detection strategy:
+  There is no header flag distinguishing obfuscated from non-obfuscated
+  archives. The recommended approach is to attempt decompression without
+  deobfuscation first. If the output size is wrong, retry with XOR key
+  0x56, then 0xAB. In practice:
+    - Eschalon Setup Pro (~1995-1996): typically NO obfuscation
+    - Older/different ASetup builds:   typically XOR with key 0x56 or 0xAB
+  Both styles use the same ARCV/BLCK container and same compression.
+
+
+COMPRESSION ALGORITHM (LZHUF variant):
+The compression is based on Yoshizaki's LZHUF algorithm (adaptive
+Huffman coding combined with LZSS sliding-window compression), as
+described in the widely-distributed "lzhuf.c" source code.
+
+All known archives (both obfuscated and non-obfuscated) use the SAME
+compression parameters:
+
+  N_CHAR  = 287  (256 literals + 1 EOF marker + 30 match-length codes)
+  T       = 573  (N_CHAR * 2 - 1, total Huffman tree nodes)
+  R       = 572  (T - 1, root node index)
+  MAX_FREQ = 0x8000 (tree reconstruction threshold)
+  N       = 4096 (ring buffer / sliding window size)
+  F       = 32   (maximum match length)
+
+Symbol encoding:
+  0-255     Literal byte value
+  256       End-of-stream marker
+  257-286   Back-reference, match length = symbol - 254 (i.e. 3 to 32)
+
+Algorithm details:
+  - Adaptive Huffman tree: Yoshizaki's frequency-swap method
+    - Tree initialized balanced (all leaf freq=1)
+    - Tree reconstructed when root freq reaches MAX_FREQ
+    - freq[], son[], prnt[] arrays as in lzhuf.c
+  - Bit reading: MSB first from a 16-bit buffer, refilled 8 bits at a time
+  - DecodeChar: traverse tree from son[R], bit selects left/right child
+  - DecodePosition: 8-bit lookup via custom d_code/d_len tables, then
+    read additional lower bits. Result = (d_code[i] << 6) | (lower & 0x3F)
+  - Ring buffer: 4096 bytes, initialized with 0x20 (space character)
+  - Ring buffer initial write position: arbitrary (commonly N - T = 3523
+    or N - F = 4064); the position is irrelevant to correctness because
+    match offsets are relative to the current write pointer.
+  - EOF marker: code 256 terminates decompression
+
+Custom d_code table (differs from standard lzhuf.c):
+  Index range  d_code  Count
+  0x00-0x1F    0       32
+  0x20-0x2F    1       16
+  0x30-0x3F    2       16
+  0x40-0x4F    3       16
+  0x50-0x57    4       8
+  0x58-0x5F    5       8
+   ...         ...     ...  (continues: 8×each for codes 4-11,
+  0x90-0x93    12      4     4×each for 12-23, 2×each for 24-47,
+   ...         ...     ...   1×each for 48-63)
+  0xF0-0xFF    48-63   16   (total 256 entries)
+
+Custom d_len table:
+  Index range  d_len  Count
+  0x00-0x1F    3      32
+  0x20-0x4F    4      48
+  0x50-0x8F    5      64
+  0x90-0xBF    6      48
+  0xC0-0xEF    7      48
+  0xF0-0xFF    8      16   (total 256 entries)
+
+The method field (0x21/0x22/0x24/0x28) likely indicates compression
+parameters but all observed samples use 0x21.
+
+
+================================================================================
+4. FILE LAYOUT
+================================================================================
+
+    +-------------------+
+    | ARCV Header (14)  |
+    +-------------------+
+    | BLCK Header 1     |
+    | (45 + name_len)   |
+    +-------------------+
+    | Compressed Data 1 |
+    | (comp_size bytes)  |
+    +-------------------+
+    | BLCK Header 2     |
+    +-------------------+
+    | Compressed Data 2 |
+    +-------------------+
+    | ...               |
+    +-------------------+
+    | BLCK Header N     |
+    +-------------------+
+    | Compressed Data N |
+    +-------------------+
+    (EOF)
+
+There is no end-of-archive marker; blocks continue until EOF.
+The file is fully accounted for: ARCV header + sum of all
+(block_header + compressed_data) sizes equals the file size exactly.
+
+
+================================================================================
+5. REFERENCES
+================================================================================
+
+- Eschalon Development Inc. by Robert Salesas
+- Deark file analysis tool: https://entropymine.com/deark/ (arcv module)
+- Just Solve the File Format Problem wiki:
+  http://justsolve.archiveteam.org/wiki/Eschalon_Setup_archive
+- TrID file identification database
+- Predecessor: EDI Install packed file (EDILZSS1/EDILZSS2 signatures)
+- InstallExplorer plugin for FAR Manager / Total Commander can extract
+  these archives (proprietary, Windows-only)

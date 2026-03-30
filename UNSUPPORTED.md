@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,014)
+# Unsupported File Formats (4,013)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (283)
+## Archive (282)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -32,7 +32,6 @@ Family/Format | Name | Extensions | Notes
 [archive/artsAndLettersClipArtLibrary](https://discmaster.textfiles.com/search?format=artsAndLettersClipArtLibrary) | Arts and Letters Clip Art Library | .yal | 
 [archive/asarElectronArchive](https://discmaster.textfiles.com/search?format=asarElectronArchive) | asar Electron Archive | .asar | 
 [archive/asdgFileSplit](https://discmaster.textfiles.com/search?format=asdgFileSplit) | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
-[archive/aSetup](https://discmaster.textfiles.com/search?format=aSetup) | ASetup Installer Archive | .arv | [4 sample files](https://sembiance.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
 [archive/asPackPacked](https://discmaster.textfiles.com/search?format=asPackPacked) | ASPack Packed |  | 
 [archive/asymetrixToolbookArchive](https://discmaster.textfiles.com/search?format=asymetrixToolbookArchive) | Asymetrix Toolbook Archive |  | 
 [archive/atariCassetteTapeImage](https://discmaster.textfiles.com/search?format=atariCassetteTapeImage) | Atari Cassette Tape Image | .cas | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCassetteTapeImage/)

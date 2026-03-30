@@ -6,7 +6,7 @@ export class grotag extends Program
 	website = "http://grotag.sourceforge.net/";
 	package = "app-text/grotag";
 	flags   = {
-		format : "Which output format to generate, pdf or html. Default: pdf (via docbook)"
+		format : "Which output format to generate, pdf or html. Default: pdf (via docbook)"	// NOTE: Can't actually get html output to work
 	};
 	bin = "grotag";
 

@@ -1,0 +1,193 @@
+1nsane Game IDF Archive File Format Specification
+==================================================
+
+Game: 1nsane (by Invictus Games, published by Codemasters, 2000)
+File extension: .idf (Invictus Data File)
+Byte order: Little-endian throughout
+Magic: "FFFL" (46 46 46 4C)
+
+Overview
+--------
+IDF files are flat archives containing multiple game assets (models, textures,
+sounds, maps, scripts, etc.) packed sequentially. File data is stored
+uncompressed. The table of contents (TOC) at the end of the file may be either
+plaintext or encrypted with a rolling XOR cipher.
+
+
+File Layout
+-----------
+
+  Offset 0x00  +--------------------------+
+               | Header (20 bytes)        |
+  Offset 0x14  +--------------------------+
+               | File Data                |
+               | (packed sequentially,    |
+               |  no padding between      |
+               |  entries)                |
+               +--------------------------+
+               | TOC Entry Count (4 bytes)|
+               +--------------------------+
+               | TOC Entries              |
+               | (N x 64 bytes each)     |
+               +--------------------------+
+               | TOC Entry Count (4 bytes)|
+  EOF          +--------------------------+
+
+
+Header (20 bytes)
+-----------------
+
+  Offset  Size  Type    Description
+  ------  ----  ------  -----------
+  0x00    4     char[]  Magic signature: "FFFL" (ASCII)
+  0x04    4     uint32  Header extra size (always 12 = 0x0C)
+  0x08    4     uint32  Archive type flag
+  0x0C    4     uint32  TOC offset value
+  0x10    4     uint32  Encryption key
+
+Field details:
+
+  Magic (0x00-0x03):
+    Always the 4 bytes 0x46 0x46 0x46 0x4C ("FFFL").
+
+  Header Extra Size (0x04-0x07):
+    Always 0x0000000C (12). Indicates the remaining header is 12 bytes
+    (bytes 0x08 through 0x13).
+
+  Archive Type (0x08-0x0B):
+    Determines whether the TOC is encrypted:
+      0x00010000 - Plaintext TOC (no encryption)
+      0x00010100 - Encrypted TOC (rolling XOR cipher)
+
+  TOC Offset (0x0C-0x0F):
+    Points to the start of the TOC section (the first entry count field).
+    - For plaintext archives (type 0x00010000): stored as-is.
+    - For encrypted archives (type 0x00010100): stored XOR'd with 0x123.
+      Real offset = stored_value XOR 0x00000123
+
+    This value always equals the sum of offset + size of the last TOC entry,
+    i.e., it points to the first byte after all file data.
+
+  Encryption Key (0x10-0x13):
+    For encrypted archives: the lowest byte (key & 0xFF) is used to derive
+    the initial rolling XOR cipher key. The highest byte is always 0x01.
+    All observed encrypted archives use key = 0x01000093.
+    For plaintext archives: this field varies and is not used for extraction.
+    Observed values correlate with content category (e.g., all plaintext map
+    archives use 0x0067FCD0, all Vehicles archives use 0x00409168, etc.).
+
+
+File Data Section
+-----------------
+
+Starts at offset 0x14 (20). Contains the raw contents of all archived files
+packed sequentially with no gaps and no compression. Each file's position and
+size are recorded in the corresponding TOC entry.
+
+
+TOC (Table of Contents)
+-----------------------
+
+Located at the end of the file. Structure:
+
+  Size          Type    Description
+  ----          ------  -----------
+  4             uint32  Entry count (N)
+  N x 64        bytes   TOC entries (encrypted or plaintext)
+  4             uint32  Entry count (N) repeated
+
+The entry count appears both before and after the entry block. Both values
+are always identical and stored as plaintext (never encrypted or XOR'd).
+
+
+TOC Entry (64 bytes each)
+-------------------------
+
+  Offset  Size  Type    Description
+  ------  ----  ------  -----------
+  0x00    56    char[]  File path (null-terminated, remaining bytes are
+                        undefined/garbage-padded)
+  0x38    4     uint32  File offset (absolute, from start of IDF file)
+  0x3C    4     uint32  File size (in bytes)
+
+Field details:
+
+  File Path (0x00-0x37):
+    56-byte field containing a null-terminated ASCII file path using
+    backslash (\) as the directory separator. Paths are relative, typically
+    beginning with "Data\". Bytes after the null terminator are undefined
+    (may be zero or contain leftover data from uninitialized memory).
+
+  File Offset (0x38-0x3B):
+    Absolute byte offset from the start of the IDF file where this entry's
+    data begins. The first file always starts at offset 0x14 (20). Files are
+    stored sequentially: entry[i].offset + entry[i].size == entry[i+1].offset.
+
+  File Size (0x3C-0x3F):
+    Size of this entry's file data in bytes.
+
+
+TOC Encryption
+--------------
+
+For encrypted archives (type 0x00010100), the TOC entry block (N x 64 bytes)
+is encrypted with a rolling XOR stream cipher. The entry count fields before
+and after the block are NOT encrypted.
+
+Decryption algorithm:
+
+  Given:
+    enc_key    = uint32 at header offset 0x10
+    key_byte   = enc_key & 0xFF
+    toc_data[] = encrypted TOC entry bytes
+
+  Initialize:
+    k = (0x27 + key_byte) & 0xFF
+
+  For each byte index i = 0, 1, 2, ..., (N * 64 - 1):
+    decrypted[i] = toc_data[i] XOR k
+    k = (decrypted[i] + i + k * 5) & 0xFF
+
+Key properties:
+  - The cipher key evolves with every byte processed
+  - The next key depends on the DECRYPTED byte (not the encrypted byte),
+    the byte index, and the previous key multiplied by 5
+  - All arithmetic is unsigned, modulo 256 (single byte)
+  - With the observed key 0x01000093, the initial k = (0x27 + 0x93) & 0xFF = 0xBA
+
+
+Complete Byte Accounting
+------------------------
+
+Every byte in an IDF file is accounted for:
+
+  Total file size =
+      20                    (header)
+    + sum(entry[i].size)    (all file data, contiguous from offset 20)
+    + 4                     (TOC entry count, before entries)
+    + N * 64                (TOC entries)
+    + 4                     (TOC entry count, after entries)
+
+There are no gaps, padding, or alignment bytes anywhere in the format.
+
+
+Example
+-------
+
+For an unencrypted archive with 3 files:
+
+  Offset  Content
+  ------  -------
+  0x00    46 46 46 4C                    "FFFL"
+  0x04    0C 00 00 00                    header extra size = 12
+  0x08    00 00 01 00                    type = 0x00010000 (plaintext)
+  0x0C    XX XX XX XX                    TOC offset (= 20 + total_data_size)
+  0x10    XX XX XX XX                    key (unused for plaintext)
+  0x14    [file 0 data...]
+          [file 1 data...]
+          [file 2 data...]
+          03 00 00 00                    entry count = 3
+          [entry 0: 56-byte path + offset + size]
+          [entry 1: 56-byte path + offset + size]
+          [entry 2: 56-byte path + offset + size]
+          03 00 00 00                    entry count = 3 (repeated)

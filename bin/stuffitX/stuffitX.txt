@@ -1,0 +1,486 @@
+StuffIt X (.sitx) File Format Specification
+============================================
+Vibe coded by Claude
+
+Reverse-engineered from sample files and the XADMaster open-source
+implementation (MacPaw Inc., LGPL 2.1).
+
+StuffIt X was introduced in September 2002 with StuffIt Deluxe 7.0 by
+Aladdin Systems (later Smith Micro Software). It is a proprietary,
+extensible archive format. File extensions: .sitx, .sit
+
+
+1. FILE STRUCTURE OVERVIEW
+==========================
+
+A StuffIt X file consists of:
+
+  Offset  Size   Description
+  ------  ----   -----------
+  0       8      Magic: "StuffIt!" (53 74 75 66 66 49 74 21)
+  8       *      Element stream (bit-oriented, LSB-first)
+
+Byte 7 is the encoding marker:
+  '!' (0x21) = standard archive
+  '?' (0x3F) = base-N encoded archive (rare, not covered here)
+
+After the 8-byte magic, the entire remainder of the file is a sequence of
+elements encoded at the bit level. Bits are read LSB-first within each byte.
+
+
+2. P2 VARIABLE-LENGTH INTEGER ENCODING
+=======================================
+
+The fundamental building block is the "SitxP2" variable-length integer:
+
+  Step 1 - Unary prefix:
+    n = 1
+    while (read_bit() == 1): n++
+    // The terminating 0-bit is consumed
+
+  Step 2 - Value body:
+    value = 0, bit_position = 1
+    while (n > 0):
+      if (read_bit() == 1):
+        n--
+        value |= bit_position
+      bit_position <<= 1
+
+  Step 3: return value - 1
+
+Examples:
+  Bits      Unary   n   Value bits   value   result
+  01        0       1   1            1       0
+  001       0       1   01           2       1
+  1011      10      2   11           3       2
+  0001      0       1   001          4       3
+  10101     10      2   101          5       4
+
+This encoding is used for ALL integer fields: element types, attribute
+keys/values, algorithm IDs, block lengths, etc.
+
+
+3. ELEMENT STRUCTURE
+====================
+
+Each element begins with:
+
+  Field          Encoding    Description
+  -----          --------    -----------
+  something      1 bit       Flag (purpose unclear, usually 1)
+  type           P2          Element type ID
+  attributes     P2 pairs    Key-value pairs, terminated by key=0
+  algorithm_list P2 pairs    Key-value pairs, terminated by key=0
+
+Attributes are read as:
+  loop:
+    key = P2()
+    if key == 0: break
+    value = P2()
+    store attribs[key-1] = value   // 1-indexed to 0-indexed
+
+Algorithm list is read as:
+  loop:
+    key = P2()
+    if key == 0: break
+    value = P2()
+    store alglist[key-1] = value   // 1-indexed to 0-indexed
+    if key == 4: alglist3_extra = P2()  // crypto has extra param
+
+After the header, the file position (byte-aligned) becomes the data offset
+for any element-specific data.
+
+
+3.1 Element Types
+-----------------
+
+  Type  Name           Description
+  ----  ----           -----------
+  0     end            End of archive
+  1     data           Compressed data stream
+  2     file           File entry
+  3     fork           Fork reference (data/resource fork)
+  4     directory      Directory entry
+  5     catalog        Metadata catalog
+  6     clue           Skip/hint data
+  7     root           Root element (first in archive)
+  8     boundary       Section boundary
+  9     (unknown)      No data
+  10    receipt        (uncommon)
+  11    index          Stream index (optional, at end)
+  12    locator        Locator info (optional, at end)
+  13    id             (uncommon)
+  14    link           (uncommon)
+  15    segment_index  Multi-segment index
+
+
+3.2 Attribute Keys
+------------------
+
+  Key  Index  Name      Used by         Description
+  ---  -----  ----      -------         -----------
+  1    [0]    objid     file,dir,data   Object identifier
+  2    [1]    parent    file,dir,fork   Parent object ID
+  3    [2]    stream    fork            Stream (data element) ID
+  4    [3]    index     fork            Position within stream
+  5    [4]    size      data,catalog    Uncompressed data size
+  6    [5]    (unused)
+  7    [6]    order     file,dir        Entry ordering number
+  8-10         (rare)
+
+
+3.3 Algorithm List Keys
+-----------------------
+
+  Key  Index  Name           Description
+  ---  -----  ----           -----------
+  1    [0]    compression    Compression algorithm ID
+  2    [1]    checksum       Checksum algorithm ID
+  3    [2]    preprocessing  Preprocessing filter ID
+  4    [3]    crypto         Encryption algorithm ID (+ extra P2 value)
+
+
+4. DATA BLOCKS
+==============
+
+Data and catalog elements contain compressed data stored as a sequence
+of length-prefixed blocks:
+
+  // Seek to dataoffset, flush bit buffer
+  loop:
+    length = P2()
+    if length == 0: break
+    // read 'length' bytes of raw data
+    // (skipBytes advances past the partially-consumed bit byte)
+
+  // Flush bit buffer
+  crc_length = P2()
+  if crc_length == 0:
+    // no checksum
+  else if crc_length == 4:
+    crc32 = read_uint32_be()    // RAW byte read (not bit-level!)
+    // Additional trailing blocks:
+    loop: length = P2(); if length == 0: break; skip length bytes
+  else:
+    // Other checksum size
+    skip crc_length bytes
+    // Additional trailing blocks
+
+IMPORTANT: The CRC32 is read as a raw 4-byte big-endian value, bypassing
+the bit buffer. This is different from other reads in the format which go
+through the bit buffer. After this raw read, the bit buffer is stale and
+will be invalidated on the next bit-level read.
+
+Between P2 block length reads and raw data skips, the bit buffer is
+implicitly flushed because skipBytes changes the file offset, which
+invalidates the bit buffer (CSHandle behavior).
+
+Block sizes are typically 65536 bytes, with the last block being smaller.
+
+
+5. COMPRESSION ALGORITHMS
+==========================
+
+5.0 No compression (alglist[0] = -1)
+-------------------------------------
+Raw data, no transformation.
+
+5.1 Brimstone / PPMd (alglist[0] = 0)
+--------------------------------------
+PPMd Variant G with Brimstone sub-allocator.
+Parameters: 2 bytes at start of decompressed block stream:
+  byte 0: exponent (alloc_size = 1 << exponent)
+  byte 1: max_order (PPMd model order)
+
+Used primarily for catalogs and some data streams. Based on Dmitry
+Shkarin's PPMd algorithm, adapted with a custom sub-allocator.
+
+5.2 Cyanide / BWT (alglist[0] = 1)
+-----------------------------------
+Burrows-Wheeler Transform with range-coded ternary symbols.
+
+Block format (within the decompressed block stream):
+  byte 0: skip byte (initialization)
+
+  Then repeating blocks:
+    byte:   marker (0x77 = block, 0xFF = end)
+    uint32: block_size (big-endian)
+    uint32: BWT first_index (big-endian)
+    byte:   num_symbols
+
+  Ternary coding uses a carryless range coder with:
+  - 14 Markov context groups (based on prev 3 ternary symbols)
+  - Frequency-sorted ternary symbols
+  - Hierarchical symbol encoding:
+    - tresym 0,1: stored directly
+    - tresym 2+: highbit model + lowbits model
+
+  After decoding: M1FFN (Move-1-From-Front-N) transform with order=2,
+  then inverse BWT unsort.
+
+This is the most common compression method for data streams.
+
+5.3 Darkhorse / LZSS (alglist[0] = 2)
+--------------------------------------
+LZSS with carryless range coder (adaptive binary weights).
+Parameters: 1 byte at start of decompressed block stream:
+  byte 0: window_exponent (window_size = max(1 << exp, 0x100000))
+
+Uses adaptive weighted bit decisions (weight/shift=12) for:
+  - Literal/match flags (4 contexts based on position & 3)
+  - Literal byte values (16 contexts based on prev/16, with next-byte prediction)
+  - Match lengths (4-bit short + 8-bit long models)
+  - Match distances (6-bit symbol + variable low bits)
+  - Recency table (4-entry MRU distance cache)
+
+End-of-stream: length value 0x10F (= 0x111 - 2 = 271 decimal raw)
+
+5.4 Deflate (alglist[0] = 3)
+-----------------------------
+Modified DEFLATE (RFC 1951) with one change:
+  In dynamic Huffman block headers, HDIST is encoded as 6 bits
+  (instead of standard 5 bits), allowing up to 64 distance codes.
+
+Parameters: 1 byte at start of decompressed block stream:
+  byte 0: window_bits (must be 15 in known files)
+
+5.5 Blend (alglist[0] = 4)
+---------------------------
+Multi-algorithm blend. Data consists of sub-blocks, each preceded by
+a 6-byte header:
+  byte 0:   marker (0x77)
+  byte 1:   algorithm (0=raw, 1=Darkhorse, 2=Cyanide, 3=Brimstone)
+  uint32:   sub-block size (big-endian)
+
+Each sub-block is decompressed independently using the specified algorithm.
+
+5.6 RC4 obfuscation (alglist[0] = 5)
+-------------------------------------
+Not true compression. Data is XOR'd with RC4 stream cipher.
+Parameters: 3 bytes at start of decompressed block stream:
+  byte 0-1: skip
+  byte 2:   RC4 key (single byte)
+
+The remaining data is decrypted with standard RC4 using the 1-byte key.
+
+5.7 Iron (alglist[0] = 6)
+--------------------------
+Advanced BWT variant with range coder. Uses configurable parameters
+including ST4 transform and fancy MTF. Not encountered in sample files.
+
+
+6. CHECKSUM ALGORITHM
+======================
+
+  ID   Algorithm
+  --   ---------
+  0    IEEE CRC-32 (conditioned): polynomial 0xEDB88320 (reflected),
+       initial value 0xFFFFFFFF, final XOR 0xFFFFFFFF
+
+
+7. PREPROCESSING FILTERS
+=========================
+
+Applied after decompression to reverse transformations:
+
+  ID   Name       Description
+  --   ----       -----------
+  0    English    English text filter using 100,366-word PPMd-compressed
+                  dictionary. Uses escape codes for non-dictionary content.
+  1    Biff       (undocumented)
+  2    x86        x86 executable filter. Converts relative E8/E9
+                  (CALL/JMP) addresses back to absolute.
+  3    PEFF       PowerPC PEF executable filter
+  4    M68k       Motorola 68000 executable filter
+  5    Sparc      SPARC executable filter
+  6    TIFF       TIFF image filter
+  7    WAV        WAV audio filter
+  8    WRT        Text filter
+
+Only filters 0, 2, and 4 are encountered in the sample files.
+
+
+8. CATALOG STRUCTURE
+====================
+
+The catalog (element type 5) is a compressed data stream containing
+metadata for all file/directory entries. It is decompressed using
+the same algorithm pipeline as data streams (typically Brimstone/PPMd
+with no checksum).
+
+After decompression, the catalog data is parsed as a sequence of
+per-entry records. Each entry's fields are key-value pairs:
+
+  loop (for each entry in order):
+    loop:
+      key = P2()
+      if key == 0: break  // end of this entry's metadata
+
+      switch (key):
+        1: filename       P2-length-prefixed UTF-8 string (byte-aligned)
+        2: mtime          8-byte uint64 big-endian (via bit reads)
+                          Windows FILETIME: 100ns intervals since 1601-01-01
+        3: (unknown)      4-byte uint32 big-endian (via bit reads)
+        4: finder_info    32 bytes (via bit reads)
+                          If starts with "slnkrhap": symbolic link
+        5: finder_info2   32 bytes (via bit reads)
+        6: posix          1 byte hasowner flag +
+                          4-byte uint32 permissions (via bit reads)
+                          if hasowner: +4-byte UID +4-byte GID
+        7: (unknown)      P2 integer
+        8: ctime          8-byte uint64 (same format as mtime)
+        9: comment        P2-length-prefixed UTF-8 string (byte-aligned)
+       10: string_array   P2 count, then count P2-length strings
+       11: string         P2-length-prefixed string
+       12: string         P2-length-prefixed string
+
+    flush_bits()  // align to next byte after each entry
+
+The catalog entries correspond to the file/directory elements in the
+element stream, in the same order they appear.
+
+
+9. ELEMENT FLOW
+================
+
+A typical archive has this element sequence:
+
+  root
+  [boundary]
+  [directory]*       // all directories (may be nested)
+  [file]*            // all files
+  catalog            // metadata for all entries above
+  [fork]*            // fork references linking entries to streams
+  [boundary]
+  [data]*            // compressed data streams
+  [index]            // optional stream index
+  [locator]          // optional locator
+  end
+
+For simple single-file archives:
+  root
+  file
+  catalog
+  fork (data fork)
+  [fork (resource fork)]
+  boundary
+  data (for data fork stream)
+  [data (for resource fork stream)]
+  end
+
+
+10. FORK SYSTEM
+================
+
+Mac files can have multiple forks (data and resource).
+
+Fork element attributes:
+  attribs[1] = entry_id    // which file/dir this fork belongs to
+  attribs[2] = stream_id   // which data element contains the data
+  attribs[3] = index       // position within the stream
+  attribs[4] = length      // byte length of this fork's data
+
+After the fork attributes, one additional P2 value is read:
+  fork_type = P2()
+    0 = data fork
+    1 = resource fork
+    3 = thumbnail (rare)
+
+Multiple forks can reference the same data stream (solid compression).
+The forks are concatenated within the stream in index order.
+
+When extracting, the data stream is decompressed as a whole, then
+split according to fork lengths and assigned to the correct entries.
+
+
+11. ARCHIVE VARIANTS
+=====================
+
+Two variants have been observed:
+
+Variant A (byte 8-9 = 0xA1, 0x0A pattern):
+  Standard element stream starting at byte 8.
+  All sample files except DVDInfo_X.sitx and Archive_1.sitx.
+
+Variant B (byte 8-9 = 0xA1, 0x59):
+  Both DVDInfo_X.sitx and Archive_1.sitx share identical bytes 8-26:
+    A1 59 05 B2 00 00 00 00 04 00 00 04 00 DF 00 16 0A DB 78
+  The bit-level parsing at byte 8 still produces valid elements (root,
+  catalog) but with unusual attribute/algorithm patterns. The element
+  stream terminates early, leaving most of the file as unreferenced data.
+  This variant may represent a newer StuffIt X version with an extended
+  header or different catalog architecture.
+
+
+12. BIT/BYTE INTERACTION SEMANTICS
+====================================
+
+The bit reading system uses an important invalidation mechanism:
+
+When bit-level reads (readBitsLE) consume a byte from the stream, the
+byte is loaded into a bit buffer and the file position advances. The
+position where the byte was loaded is recorded as "bitoffs".
+
+When byte-level operations (skipBytes, seekToFileOffset) change the file
+position, the bit buffer becomes stale. The next bit read detects this
+(file position != bitoffs) and resets the bit buffer, causing a fresh
+byte to be loaded from the new position.
+
+This means:
+- After a P2 read followed by skipBytes, any remaining bits in the
+  current byte are effectively discarded
+- The data block after a P2 length starts at the next byte boundary
+- CRC reads (readUInt32BE) are raw byte reads that bypass the bit
+  buffer entirely
+
+
+13. CRC-32 VERIFICATION
+========================
+
+When alglist[1] = 0 (checksum enabled), the decompressed data should
+match the CRC-32 stored after the data blocks.
+
+CRC-32 parameters:
+  Polynomial: 0xEDB88320 (reflected/reversed)
+  Initial:    0xFFFFFFFF
+  Final XOR:  0xFFFFFFFF
+  Conditioned: Yes (as per XADCRCHandle IEEECRC32)
+
+
+14. SAMPLE FILE ANALYSIS
+=========================
+
+File                              Size        Entries  Comp     Status
+----                              ----        -------  ----     ------
+picodrive.sis.sitx                41,765      1        Cyanide  OK
+Soundflower1.1.sit                37,798      1        Cyanide  OK
+JewelCase_1.6.sit                 211,804     1        Cyanide  OK
+Confidential Conduit.sitx         92,639      1        Cyanide  OK
+Galaxymap1.0.zip.hqx              95,295      1        RC4      OK
+Hypersonic_1.1_AU.dmg.sitx        9,049,839   1        Cyanide  OK
+Hypersonic_1.1_VST.dmg.sitx       8,939,172   1        Cyanide  OK
+AudioFinder.sit                   3,256,031   1        Cyanide  OK
+copypastex.sit                    2,646,921   1        Brimstone OK
+opmor.sit                         22,079,758  1        Cyanide  OK
+duke3d-macosx-12162004.dmg.sitx   20,334,745  1        Cyanide  OK
+Morph Age Release 2.2.dmg.sitx    6,327,322   1        Cyanide  OK
+ViperGlows.sitx                   208,809     1        Cyanide  OK
+Planet Rico.sitx                  1,138,009   1        Cyanide  OK
+Archive.sitx                      580,657     1        Brimstone OK
+Starwars_plug.sitx                1,685,724   2        Brimstone OK
+ec.sit                            1,794,999   32       Mixed    OK
+net_clipper_IIX.sit               943,507     6        Mixed    OK
+bidmaker.sitx                     6,116,942   13       Mixed    OK
+SIG03.app.sitx                    954,268     22       RC4      OK
+The DarthKev Plug v2.sitx         3,493,004   3        Deflate  Partial*
+The_DarthKev_Plug_.sitx           3,445,802   3        Deflate  Partial*
+The_DarthKev_Plug_v1_1.sitx       3,450,118   3        Deflate  Partial*
+DVDInfo_X.sitx                    527,371     1        Variant  N/A**
+Archive_1.sitx                    791,051     0        Variant  N/A**
+
+*  Small Deflate streams extract OK; large multi-block resource fork
+   streams fail due to the StuffIt X 6-bit HDIST Deflate variant
+   requiring a custom decoder for multi-block streams.
+
+** Format variant B with different element structure. Parser handles
+   every byte but the variant's catalog/data architecture differs.

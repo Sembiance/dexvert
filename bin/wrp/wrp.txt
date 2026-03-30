@@ -1,0 +1,318 @@
+Vibe coded by Claude
+
+================================================================================
+WRP File Format Specification — Warp v1.1 Disk Image
+================================================================================
+
+Overview
+--------
+WRP (Warp) is a compressed disk image format for the Commodore Amiga,
+created by the "Warp" disk compression tool. It stores Amiga floppy disk
+images (equivalent to standard ADF files) using a combination of LZW,
+Huffman, and RLE compression applied per half-track.
+
+The format stores data for a standard Amiga DD (double-density) floppy:
+  - 80 tracks (numbered 0–79)
+  - 2 sides per track (TOP = upper head, BOT = lower head)
+  - 11 sectors per side
+  - 512 bytes per sector
+  - Total uncompressed disk size: 80 × 2 × 11 × 512 = 901,120 bytes
+
+File extension: .wrp or .WRP
+Magic bytes: "Warp v1.1\0" (ASCII, 10 bytes)
+Byte order: Big-endian (Motorola 68000 native order)
+
+
+File Structure
+--------------
+A WRP file consists of a sequence of records, one per half-track (one side
+of one track), optionally followed by trailing padding bytes. The file may
+also contain non-track "extra" data blocks.
+
+  ┌─────────────────────────────┐
+  │ Record 0                    │  (header + compressed data)
+  ├─────────────────────────────┤
+  │ Record 1                    │
+  ├─────────────────────────────┤
+  │ ...                         │
+  ├─────────────────────────────┤
+  │ Record N-1                  │
+  ├─────────────────────────────┤
+  │ Optional trailing padding   │  (0x1A and/or 0x00 bytes)
+  └─────────────────────────────┘
+
+Records are stored sequentially with no alignment gaps. The order of
+records is not strictly defined; tracks may appear in any order and not
+all tracks need be present (missing tracks are treated as all-zeros).
+
+Some files include non-track "extra" records (identified by track=0xFFFF)
+which contain ancillary data such as trainer text, cracktro messages, or
+other metadata. These do not contribute to the disk image.
+
+
+Record Header (26 bytes)
+------------------------
+Each record begins with a fixed 26-byte header:
+
+  Offset  Size  Type     Field         Description
+  ------  ----  ----     -----         -----------
+  0       10    char[10] magic         "Warp v1.1\0" (including null)
+  10       2    uint16   track         Track number (0–79), or 0xFFFF
+  12       4    char[4]  side          "TOP\0", "BOT\0", or 0xFFFFFFFF
+  16       2    uint16   version       0x0001 for track records,
+                                       0xFFFF for extra data records
+  18       1    uint8    reserved      Always 0x00
+  19       1    uint8    algo          Compression algorithm (0–3)
+  20       2    uint16   crc           CRC-16 of decompressed data
+  22       4    uint32   data_size     Size of compressed data in bytes
+
+All multi-byte fields are big-endian.
+
+Immediately following the header are `data_size` bytes of compressed data.
+
+
+Record Types
+------------
+Track records:
+  track  = 0–79
+  side   = "TOP\0" (side 0, upper head) or "BOT\0" (side 1, lower head)
+  version = 0x0001
+
+  These records contain compressed track data. After decompression, the
+  data is 5,808 bytes: 11 sectors × (512 data bytes + 16 extra bytes).
+  Only the first 5,632 bytes (11 × 512) are the actual sector data;
+  the remaining 176 bytes (11 × 16) are per-sector metadata/gap data
+  that is not part of the standard ADF image.
+
+  Destination offset in the ADF image:
+    offset = track × 22 × 512 + side_index × 11 × 512
+  where side_index = 0 for TOP, 1 for BOT.
+
+Extra data records:
+  track   = 0xFFFF
+  side    = 0xFFFFFFFF
+  version = 0xFFFF
+
+  These records contain ancillary data (trainer text, intro screens, etc.)
+  that is not part of the disk image. They are decompressed and CRC-checked
+  but their data is stored separately from the ADF output. The decompressed
+  size varies.
+
+
+Compression Algorithms
+----------------------
+The `algo` field selects the compression method:
+
+  algo  Name           Description
+  ----  ----           -----------
+  0     Raw            No compression. Data bytes are used as-is.
+                       No RLE post-processing.
+
+  1     LZW + RLE      Unix Z-compress (LZW) followed by RLE decoding.
+                       First data byte: maxbits marker (always 0x0C = 12).
+                       Remaining bytes: LZW compressed stream.
+                       The LZW output is then RLE-decoded.
+
+  2     Squeeze + RLE  ARC Squeeze (Huffman) followed by RLE decoding.
+                       Data begins with a Huffman tree, followed by the
+                       Huffman-coded bitstream. The Huffman output is
+                       then RLE-decoded.
+
+  3     RLE only       Data is RLE-encoded only (no prior compression).
+                       Decoded directly through the RLE decoder.
+
+For algorithms 1, 2, and 3, the decompressed output passes through
+the RLE decoder as a final step (except algo 0 which skips RLE).
+
+
+LZW Compression (algo 1) — Unix Z-Compress
+-------------------------------------------
+This is compatible with the classic Unix compress(1) / uncompress(1)
+LZW algorithm.
+
+  - First byte of data: 0x0C (12), confirming maxbits=12.
+    This byte is consumed and not passed to the LZW decoder.
+
+  - Remaining data: LZW bitstream.
+
+  - Parameters:
+      maxbits       = 12 (maximum code size in bits)
+      block_compress = true (code 256 is used as a clear/reset code)
+      initial bits  = 9
+      first free code = 257
+
+  - Code reading: codes are packed LSB-first, read in groups of
+    `n_bits` bytes at a time. Within each group, the byte offset
+    and bit offset are used to extract individual codes.
+
+  - The LZW decoder initializes 256 literal codes (0–255).
+    Code 256 is the clear code which resets the dictionary.
+    New codes start at 257 and increment.
+
+  - When the free entry exceeds maxcode for the current n_bits,
+    n_bits is incremented (up to maxbits=12, maxmaxcode=4096).
+
+  - Output of the LZW stage is then passed through the RLE decoder.
+
+
+ARC Squeeze Compression (algo 2) — Huffman
+-------------------------------------------
+This uses the ARC archive Huffman ("squeeze") algorithm.
+
+  Data format:
+    - uint16 LE: numnodes (number of Huffman tree nodes, 0–256)
+    - numnodes × 2 × uint16 LE: tree node values (left/right pairs)
+    - Bitstream: Huffman-coded symbols (LSB-first bit reading)
+
+  Tree structure:
+    - Stored as a flat array of (left, right) pairs for each node.
+    - Node values are signed 16-bit integers (int16 LE).
+    - Non-negative values are internal node indices.
+    - Negative values are leaf nodes: symbol = -(value + 1).
+    - Special EOF symbol: SPEOF = 256, encoded as -(256 + 1) = -257.
+    - Default tree (before reading): both children of root = -(SPEOF+1),
+      so an empty tree immediately returns SPEOF.
+
+  Decoding:
+    - Start at node 0. Read one bit at a time.
+    - bit=0: follow left child (node[2*i+0]).
+    - bit=1: follow right child (node[2*i+1]).
+    - When a negative value is reached: symbol = -(value + 1).
+    - If symbol == SPEOF (256): end of data.
+    - Otherwise: output the symbol byte.
+
+  Output is then passed through the RLE decoder.
+
+
+RLE Encoding (0x90-escape scheme)
+---------------------------------
+All algorithms except algo 0 (raw) use 0x90-based RLE as a final
+decompression step. This is the same RLE scheme used in the ARC
+archiver and Apple II BinHex format.
+
+  Encoding rules:
+    - Normal byte (not 0x90): output the byte, remember it as "last byte"
+    - 0x90 (escape): begin repeat mode
+      - Followed by 0x00: output literal 0x90 byte
+      - Followed by N (1–255): output "last byte" N-1 additional times
+        (so total occurrences = 1 original + N-1 repeats = N copies)
+
+  State machine:
+    state = 0 initially (bits 0-7: last byte value, bit 8: repeat flag)
+
+    For each input byte:
+      If bit 8 of state is set (repeat mode):
+        If byte == 0x00: set state to 0x90, output one 0x90
+        Else: clear bit 8, output (byte - 1) copies of (state & 0xFF)
+      Else if byte == 0x90:
+        Set bit 8 of state (enter repeat mode), output nothing
+      Else:
+        Set state = byte, output one copy of byte
+
+
+CRC-16
+------
+Each record contains a CRC-16 checksum of the fully decompressed data
+(after all decompression stages including RLE).
+
+  Polynomial: 0xA001 (reflected representation)
+  Initial value: 0x0000
+  Input reflection: yes (LSB-first)
+
+  Table generation (reflected CRC):
+    for i in 0..255:
+      k = i
+      for j in 0..7:
+        if k & 1: k = (k >> 1) ^ 0xA001
+        else:     k >>= 1
+      table[i] = k
+
+  CRC computation:
+    crc = 0x0000
+    for each byte b in data:
+      crc = table[(crc ^ b) & 0xFF] ^ (crc >> 8)
+    result = crc & 0xFFFF
+
+A CRC of 0x0000 is valid and indicates the decompressed data is all zeros
+(empty/unused track).
+
+
+Trailing Padding
+----------------
+Some WRP files have padding bytes appended after the last record:
+  - 0x1A bytes (CP/M-style EOF marker, commonly used on Amiga)
+  - 0x00 bytes (null padding to align to a block/sector boundary)
+  - A mix of 0x1A followed by 0x00 to fill to a power-of-2 size
+
+These padding bytes are not part of any record and should be ignored.
+
+
+Output Reconstruction
+---------------------
+To reconstruct a standard ADF (Amiga Disk File) image:
+
+  1. Allocate 901,120 bytes initialized to 0x00.
+  2. For each track record (track 0–79, side TOP or BOT):
+     a. Decompress the record data using the specified algorithm.
+     b. Verify the CRC-16 of the decompressed data.
+     c. Copy the first 5,632 bytes of decompressed data to the ADF
+        at offset: track × 11,264 + side_index × 5,632
+        (where side_index = 0 for TOP, 1 for BOT).
+  3. Write the 901,120-byte buffer as the .adf file.
+
+Extra data records (track=0xFFFF) should be extracted separately.
+Missing tracks are left as all-zeros in the ADF output.
+
+
+Known Variations and Edge Cases
+-------------------------------
+  - Not all 160 half-tracks (80 tracks × 2 sides) need be present.
+    Files may contain only the tracks that have non-zero data.
+
+  - Empty (all-zero) half-tracks compressed with algo 1 have CRC=0x0000
+    and data_size=24. All such records contain the same 24 bytes of
+    LZW-compressed data representing 5,808 zero bytes.
+
+  - Some files have corrupt or truncated final records, where the
+    data_size field exceeds the remaining bytes in the file.
+
+  - One known file (bart.wrp) has misaligned records where 2 extra
+    bytes appear between certain records, requiring a magic-search
+    recovery strategy.
+
+  - The decompressed half-track size is always 5,808 bytes for track
+    records (11 × 528), but only 5,632 bytes (11 × 512) are sector data.
+
+  - Extra data records have variable decompressed sizes.
+
+
+References
+----------
+  - Original Warp support in libxad by Dirk Stoecker:
+    http://libxad.cvs.sourceforge.net/libxad/libxad/portable/clients/
+
+  - WinUAE Warp support by Toni Wilen:
+    https://github.com/tonioni/WinUAE/blob/master/archivers/wrp/
+
+  - qXpkLib C++ port by Ilkka Prusi:
+    https://github.com/ipr/qXpkLib
+
+
+Appendix: Hex Dump of a Minimal Record
+---------------------------------------
+A single empty half-track record (algo 1, CRC 0x0000, 24 bytes data):
+
+  00: 57 61 72 70 20 76 31 2E  31 00                 magic: "Warp v1.1\0"
+  0A: 00 00                                          track: 0
+  0C: 54 4F 50 00                                    side: "TOP\0"
+  10: 00 01                                          version: 1
+  12: 00                                             reserved: 0
+  13: 01                                             algo: 1 (LZW+RLE)
+  14: 00 00                                          crc: 0x0000
+  16: 00 00 00 18                                    data_size: 24
+
+  1A: 0C                                             LZW maxbits byte (12)
+  1B: 00 20 FD 0B 38 50 20 C1  83 06 13 16 5C 88 90  LZW compressed data
+  2A: A1 C2 86 10 1F 26 34 06                         (23 bytes)
+
+  Decompresses to 5,808 zero bytes via LZW → RLE pipeline.

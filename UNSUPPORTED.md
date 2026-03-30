@@ -1,17 +1,16 @@
-# Unsupported File Formats (4,013)
+# Unsupported File Formats (4,002)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (282)
+## Archive (271)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
 [archive/winUpackPacked](https://discmaster.textfiles.com/search?format=winUpackPacked) | (Win)Upack Packed | .exe | 
 [archive/updProtected](https://discmaster.textfiles.com/search?format=updProtected) | $UPD Protected | .exe | 
-[archive/onesaneGameArchive](https://discmaster.textfiles.com/search?format=onesaneGameArchive) | 1nsane game data archive | .idf | 
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?format=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?format=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 [archive/abackupDiskImage](https://discmaster.textfiles.com/search?format=abackupDiskImage) | ABackup Disk Image | .adf | 
@@ -25,7 +24,7 @@ Family/Format | Name | Extensions | Notes
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?format=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
 [archive/androidBootImage](https://discmaster.textfiles.com/search?format=androidBootImage) | Android boot image | .img | 
 [archive/apple2DiskImage](https://discmaster.textfiles.com/search?format=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
-[archive/sparseImage](https://discmaster.textfiles.com/search?format=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
+[archive/sparseImage](https://discmaster.textfiles.com/search?format=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Only *1* of these on discmaster, so not really worth bothering with, but I could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 [archive/PizazzCompressed](https://discmaster.textfiles.com/search?format=PizazzCompressed) | Application Techniques Pizazz compressed | ~ | 
 [archive/apriDisk](https://discmaster.textfiles.com/search?format=apriDisk) | [ApriDisk](http://fileformats.archiveteam.org/wiki/ApriDisk) | .dsk | [3 sample files](https://sembiance.com/fileFormatSamples/archive/apriDisk/) - The apridisk.exe program can write these to a real floppy, so maybe I could use DOSBOX and an inserted blank floppy to try and write these and then convert, but meh.
 [archive/artisoftInstallationPackage](https://discmaster.textfiles.com/search?format=artisoftInstallationPackage) | Artisoft installation Package | .pak | 
@@ -164,7 +163,6 @@ Family/Format | Name | Extensions | Notes
 [archive/multiMediaFusionApplication](https://discmaster.textfiles.com/search?format=multiMediaFusionApplication) | MultiMedia Fusion Application | .mfa | 
 [archive/neoLitePacked](https://discmaster.textfiles.com/search?format=neoLitePacked) | NeoLite Packed |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/neoLitePacked/) - Tried (see sandbox/app): RL!dePacker 1.4 & Neo-Executable-Decompressor & neolte20.zip
 [archive/neophyteGameDataArchive](https://discmaster.textfiles.com/search?format=neophyteGameDataArchive) | Neophyte game data archive | .stuff | 
-[archive/newtonPackage](https://discmaster.textfiles.com/search?format=newtonPackage) | Newton Package | .pkg | 
 [archive/nortonBackupFile](https://discmaster.textfiles.com/search?format=nortonBackupFile) | Norton Backup file | .001 | 
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?format=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 
 [archive/nosPackerPacked](https://discmaster.textfiles.com/search?format=nosPackerPacked) | NOS Packer Packed | .exe | 
@@ -173,8 +171,6 @@ Family/Format | Name | Extensions | Notes
 [archive/ntShellProtected](https://discmaster.textfiles.com/search?format=ntShellProtected) | NTShell Protected | .exe | 
 [archive/oberonCompresArchive](https://discmaster.textfiles.com/search?format=oberonCompresArchive) | Oberon compres archive | .arc | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?format=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
-[archive/oricDisk](https://discmaster.textfiles.com/search?format=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
-[archive/oricTape](https://discmaster.textfiles.com/search?format=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 [archive/originSystemsSetupArchive](https://discmaster.textfiles.com/search?format=originSystemsSetupArchive) | Origin Systems's setup Archive | .a01 .cam .flx | 
 [archive/outlookExchangeOfflineStorage](https://discmaster.textfiles.com/search?format=outlookExchangeOfflineStorage) | Outlook Exchange Offline Storage | .ost | 
 [archive/bvrpPAC](https://discmaster.textfiles.com/search?format=bvrpPAC) | PAC (BVRP Software) | .pac | 
@@ -226,7 +222,6 @@ Family/Format | Name | Extensions | Notes
 [archive/scoUnixWareBFSFilesystem](https://discmaster.textfiles.com/search?format=scoUnixWareBFSFilesystem) | SCO UnixWare BFS filesystem | .img | 
 [archive/scrambPacked](https://discmaster.textfiles.com/search?format=scrambPacked) | Scramb Packed | .exe | 
 [archive/secureProtected](https://discmaster.textfiles.com/search?format=secureProtected) | SECURE Protected | .exe | 
-[archive/setupMVA](https://discmaster.textfiles.com/search?format=setupMVA) | Setup Program Archive | .mva .mvb | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?format=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
 [archive/shrinkerWindowsPacked](https://discmaster.textfiles.com/search?format=shrinkerWindowsPacked) | Shrinker Packed (Windows) | .exe | 
 [archive/simplePackPacked](https://discmaster.textfiles.com/search?format=simplePackPacked) | Simple Pack Packed | .exe | 
@@ -237,7 +232,6 @@ Family/Format | Name | Extensions | Notes
 [archive/spoonStudioPacked](https://discmaster.textfiles.com/search?format=spoonStudioPacked) | Spoon Studio Packed | .exe | 
 [archive/spreadPart](https://discmaster.textfiles.com/search?format=spreadPart) | SPREAD part |  | 
 [archive/sqwezArchive](https://discmaster.textfiles.com/search?format=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
-[archive/stuffitX](https://discmaster.textfiles.com/search?format=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/superCardProFluxImage](https://discmaster.textfiles.com/search?format=superCardProFluxImage) | SuperCard Pro flux image | .scp | 
 [archive/symantecCompressedInstallPackage](https://discmaster.textfiles.com/search?format=symantecCompressedInstallPackage) | Symantec compressed install Package | .pk$ | 
 [archive/syneticAArchive](https://discmaster.textfiles.com/search?format=syneticAArchive) | Synetic Archive | .syn | 
@@ -264,18 +258,15 @@ Family/Format | Name | Extensions | Notes
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?format=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?format=unrealPackage) | Unreal Package | .ut2 .uasset | 
 [archive/valvePackage](https://discmaster.textfiles.com/search?format=valvePackage) | Valve Package | .vpk | 
-[archive/viacomNewMedia](https://discmaster.textfiles.com/search?format=viacomNewMedia) | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 [archive/virtualBoxDiskImage](https://discmaster.textfiles.com/search?format=virtualBoxDiskImage) | VirtualBox Disk Image | .vdi | 
 [archive/vmsSaveset](https://discmaster.textfiles.com/search?format=vmsSaveset) | VMS SaveSet |  | 
 [archive/vz200300Image](https://discmaster.textfiles.com/search?format=vz200300Image) | VZ200/300 image | .vz | 
-[archive/wrp](https://discmaster.textfiles.com/search?format=wrp) | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/) - uaeunp says it supports it, and it will take an input .wrp and output a 'zipped.wrp' but that never converts to anything useful UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 [archive/warpINInstaller](https://discmaster.textfiles.com/search?format=warpINInstaller) | WarpIN Installer | .wpi | 
 [archive/winAPEIDEHardDiskImage](https://discmaster.textfiles.com/search?format=winAPEIDEHardDiskImage) | WinAPE IDE hard disk image | .ide | 
 [archive/windevCompressedArchive](https://discmaster.textfiles.com/search?format=windevCompressedArchive) | WINDEV compressed archive | .wdz | 
 [archive/winDupeDiskImage](https://discmaster.textfiles.com/search?format=winDupeDiskImage) | WinDupe disk image | .wdf | 
 [archive/wizardryBootstrapDiskImage](https://discmaster.textfiles.com/search?format=wizardryBootstrapDiskImage) | Wizardry bootstrap disk image | .dsk | 
 [archive/wordPerfectInstallArchive](https://discmaster.textfiles.com/search?format=wordPerfectInstallArchive) | WordPerfect install archive |  | 
-[archive/wraptor](https://discmaster.textfiles.com/search?format=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?format=wwarpDiskImage) | WWarp Disk Image | .wwp | 
 [archive/xpackJariPacked](https://discmaster.textfiles.com/search?format=xpackJariPacked) | X-PACK Jari Packed | .com | 
 [archive/x64DiskImage](https://discmaster.textfiles.com/search?format=x64DiskImage) | X64 Disk Image | .x64 | [1 sample file](https://sembiance.com/fileFormatSamples/archive/x64DiskImage/)
@@ -284,10 +275,8 @@ Family/Format | Name | Extensions | Notes
 [archive/xldjDiskImage](https://discmaster.textfiles.com/search?format=xldjDiskImage) | XLDJ/XL/ST link Disk Image | .di | 
 [archive/xpackPacked](https://discmaster.textfiles.com/search?format=xpackPacked) | XPACK Packed |  | 
 [archive/yodasCrypterProtected](https://discmaster.textfiles.com/search?format=yodasCrypterProtected) | Yoda's Crypte Protected | .exe | 
-[archive/yuGiOhData](https://discmaster.textfiles.com/search?format=yuGiOhData) | Yu Gi Oh! data | .dat | Extractor could be written, see: https://yugiohextractor.sourceforge.net/documentation.htm
 [archive/zapCompressedDiskImage](https://discmaster.textfiles.com/search?format=zapCompressedDiskImage) | ZAP compressed disk image | .zap | 
 [archive/zipscrubPacked](https://discmaster.textfiles.com/search?format=zipscrubPacked) | ZIPSCRUB Packed |  | 
-[archive/zoomDiskImage](https://discmaster.textfiles.com/search?format=zoomDiskImage) | ZOOM Disk Image | .zom | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
 [archive/zPackageCompressedArchive](https://discmaster.textfiles.com/search?format=zPackageCompressedArchive) | ZPackage compressed archive | .zpk | 
 [archive/zxSpectrumTZXTape](https://discmaster.textfiles.com/search?format=zxSpectrumTZXTape) | ZX Spectrum TZX Tape | .tzx | 
 

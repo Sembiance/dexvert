@@ -1,0 +1,239 @@
+ORIC Tape File Format (.tap / .dat) Specification
+===================================================
+Vibe coded by Claude
+
+Based on analysis of the taptap utility by Chloe Avrillon (aka Ladywasky/Waskol),
+the "Oric tap file format.pdf" documentation, and binary analysis of sample files.
+
+
+1. OVERVIEW
+-----------
+
+ORIC tape files (.tap, .dat) are container images representing data stored on
+cassette tapes for the Oric family of 8-bit computers (Oric-1, Oric Atmos, Oric
+Telestrat). A single container file may hold one or more logical files laid out
+sequentially with no container-level header or footer.
+
+Multi-byte numeric values are stored BIG-ENDIAN (high byte first):
+
+    Value = byte1 * 256 + byte2
+
+
+2. CONTAINER STRUCTURE
+----------------------
+
+A .tap file is simply one or more file entries concatenated end-to-end:
+
+    [File Entry 1][File Entry 2]...[File Entry N]
+
+There is no global header, no file count field, and no end-of-archive marker.
+The end of the container is the end of the last file entry. Files are read
+sequentially; after parsing one entry's data, the next entry (if any) begins
+immediately at the next byte.
+
+
+3. FILE ENTRY STRUCTURE
+-----------------------
+
+Each file entry has the following structure:
+
+    [Sync Sequence][Header (9 bytes)][Filename (variable)][Data (variable)]
+
+There is no end-of-entry marker; the data size is determined from the header.
+
+
+4. SYNC SEQUENCE
+----------------
+
+    Offset  Size        Value   Description
+    ------  ----------  ------  -----------
+    0       N bytes     0x16    Synchronisation bytes (N >= 1, typically 3)
+    N       1 byte      0x24    End-of-synchronisation marker
+
+The sync sequence consists of one or more 0x16 bytes followed by a single 0x24
+byte. The Oric ROM uses 256 sync bytes for "slow" mode and 768 for "fast" mode,
+but tape images in practice use as few as 1-3 sync bytes. Parsers should accept
+any count >= 1.
+
+
+5. HEADER (9 bytes)
+-------------------
+
+Immediately after the 0x24 sync terminator:
+
+    Offset  Size    Field               Description
+    ------  ------  ------------------  -----------
+    0       1       reserved1           Unused / varies (not interpreted)
+    1       1       reserved2           Unused / varies (not interpreted)
+    2       1       type_flag           File type indicator (see below)
+    3       1       autorun             Auto-execution flag
+    4       1       addr_param1_hi      High byte of address parameter 1
+    5       1       addr_param1_lo      Low byte of address parameter 1
+    6       1       addr_param2_hi      High byte of address parameter 2
+    7       1       addr_param2_lo      Low byte of address parameter 2
+    8       1       reserved3           Unused / varies (not interpreted)
+
+5.1. type_flag (header byte 2)
+
+    Value   Meaning
+    -----   -------
+    0x00    BASIC program
+    0x80    Machine code or memory block
+    0x40    Array data (subtype determined by reserved1 and reserved2)
+
+5.2. autorun (header byte 3)
+
+    Value   Meaning
+    -----   -------
+    0x00    Auto-execution OFF
+    other   Auto-execution ON (commonly 0xC7, but other values occur)
+
+    When autorun is enabled, the Oric will automatically RUN (BASIC) or
+    execute (machine code) the program after loading.
+
+5.3. Address parameters (header bytes 4-7)
+
+    The interpretation of bytes 4-7 depends on the file type:
+
+    BASIC / Machine Code (type_flag = 0x00 or 0x80):
+        Bytes 4-5: End address   (EndAddr = byte4 * 256 + byte5)
+        Bytes 6-7: Start address (StartAddr = byte6 * 256 + byte7)
+        Data size = EndAddr - StartAddr + 1
+
+    Integer Array (type_flag = 0x40, reserved1 = 0x80, reserved2 = 0x00):
+        Bytes 4-5: Start address where array was saved
+        Bytes 6-7: SizeOfArray value
+        Data size = ((SizeOfArray - 6) / 2) * 2
+
+    Real Array (type_flag = 0x40, reserved1 = 0x00, reserved2 = 0x00):
+        Bytes 4-5: Start address where array was saved
+        Bytes 6-7: SizeOfArray value
+        Data size = ((SizeOfArray - 6) / 5) * 5
+
+    String Array (type_flag = 0x40, reserved1 = 0x00, reserved2 = 0xFF):
+        Bytes 4-5: Unused (0xFF, 0xFF)
+        Bytes 6-7: SizeOfArray value
+        Data size = descriptors + string data (see section 9)
+
+    Note: For arrays, the "SizeOfArray" value from header bytes 6-7 is related
+    to but not exactly equal to the data size. Due to a quirk in the Oric ROM,
+    SizeOfData = SizeOfArray - offset, where offset is typically 6 for
+    single-dimensional arrays and 8 for bi-dimensional arrays.
+
+
+6. FILENAME FIELD
+-----------------
+
+Immediately after the 9-byte header:
+
+    Offset  Size          Description
+    ------  ------------  -----------
+    0       1-16 bytes    ASCII filename (1-15 characters) + 0x00 terminator
+
+The filename is a null-terminated ASCII string. Maximum 15 characters plus the
+null terminator (16 bytes total for the field). An empty name is stored as a
+single 0x00 byte. Characters are in the range 0x20-0x7F (printable ASCII),
+though non-standard values may appear in some files.
+
+
+7. BASIC PROGRAM (type_flag = 0x00)
+------------------------------------
+
+    Header interpretation:
+        reserved1, reserved2:   Unused (any value)
+        type_flag:              0x00
+        autorun:                0x00 (off) or non-zero (on, typically 0xC7)
+        addr_param1 (bytes 4-5): End address (big-endian)
+        addr_param2 (bytes 6-7): Start address (big-endian), typically 0x0501
+
+    Data:
+        EndAddr - StartAddr + 1 bytes of tokenised BASIC program data.
+        The start address for BASIC programs is typically 0x0501 (the default
+        BASIC program area on the Oric).
+
+    BASIC programs are stored in tokenised form (not plain text). Each line
+    is encoded as:
+        [2 bytes: pointer to next line][2 bytes: line number][tokenised text][0x00]
+    The program ends with a 0x00 0x00 next-line pointer.
+
+
+8. MACHINE CODE / MEMORY BLOCK (type_flag = 0x80)
+--------------------------------------------------
+
+    Header interpretation:
+        reserved1, reserved2:   Unused (any value)
+        type_flag:              0x80
+        autorun:                0x00 (off) or non-zero (on)
+        addr_param1 (bytes 4-5): End address (big-endian)
+        addr_param2 (bytes 6-7): Start address (big-endian)
+
+    Data:
+        EndAddr - StartAddr + 1 bytes, representing raw memory contents
+        from StartAddr to EndAddr inclusive. Can contain machine code,
+        screen data, character sets, or any binary data.
+
+
+9. ARRAY TYPES (type_flag = 0x40)
+---------------------------------
+
+Array files are created by the BASIC STORE command and loaded with RECALL.
+They use the same sync, header, and filename structure, but the header fields
+and data layout differ from BASIC/MEM files.
+
+9.1. Integer Array (reserved1 = 0x80, reserved2 = 0x00)
+
+    Header byte 8: 0xFF (unused)
+    Data: Succession of 2-byte big-endian integers.
+    Count = (SizeOfArray - 6) / 2
+    Total data bytes = Count * 2
+    Values are stored sequentially without dimension or variable name.
+
+9.2. Real Array (reserved1 = 0x00, reserved2 = 0x00)
+
+    Header byte 8: 0xFF (unused)
+    Data: Succession of 5-byte Oric floating-point reals.
+    Count = (SizeOfArray - 6) / 5
+    Total data bytes = Count * 5
+    Values are stored sequentially without dimension or variable name.
+
+9.3. String Array (reserved1 = 0x00, reserved2 = 0xFF)
+
+    Header bytes 4-5: 0xFF, 0xFF (unused)
+    Header byte 8: 0xFF (unused)
+    Data has two sections:
+        a) String descriptors: Count * 3 bytes
+           Count = (SizeOfArray - 6) / 3
+           Each descriptor is 3 bytes: [length][addr_lo][addr_hi]
+           where length is the string's byte count and addr is unused.
+        b) String data: Concatenated raw string bytes
+           Total = sum of all descriptor length bytes
+    No separators between strings. Strings stored without variable name.
+
+
+10. NOTES
+---------
+
+- There is no end-of-file marker for individual entries or the container.
+  Parsing is purely sequential and size-driven.
+
+- The data section of a file may contain bytes that resemble sync patterns
+  (e.g. 0x16 followed by 0x24). These must NOT be interpreted as file
+  boundaries. Always use the calculated data size to determine where the
+  data ends.
+
+- The reserved header bytes (0, 1, and 8) vary between files and carry no
+  standard meaning. Different tools and Oric ROM versions may write
+  different values here.
+
+- Some files may be truncated (data section shorter than expected from the
+  header addresses). Parsers should handle this gracefully.
+
+- The container may theoretically contain gap bytes between file entries
+  that are neither sync bytes nor valid file data, though this is rare
+  in practice. Well-formed .tap files have entries immediately adjacent
+  with no gaps.
+
+- Common file extensions: .tap, .TAP, .dat, .DAT - all use the same format.
+
+- The autorun byte is most commonly 0x00 (off) or 0xC7 (on), but other
+  non-zero values (0x01, 0x04, 0x80, etc.) also signify auto-execution.

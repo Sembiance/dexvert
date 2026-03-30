@@ -1,0 +1,197 @@
+Vibe coded by Claude
+
+================================================================================
+Yu-Gi-Oh! Power of Chaos — KCEJYUGI Archive File Format Specification
+================================================================================
+
+Game:       Yu-Gi-Oh! Power of Chaos (PC) series
+Files:      Data.dat, Voice.dat
+Endianness: Little-endian throughout
+Magic:      "KCEJYUGI" (ASCII, 8 bytes) — "IGUYJECT" reversed; KCEJ = Konami
+            Computer Entertainment Japan, YUGI = the game character
+
+================================================================================
+1. OVERALL STRUCTURE
+================================================================================
+
+The archive is composed of three contiguous regions with no gaps or padding
+between them:
+
+  +---------------------+
+  | File Header         |  12 bytes
+  +---------------------+
+  | File Table          |  file_count × 268 bytes
+  +---------------------+
+  | File Data           |  remaining bytes until end of file
+  +---------------------+
+
+The File Table ends exactly where the first file's data begins. All file data
+blocks are stored contiguously with no padding. The last file's data ends
+exactly at the end of the archive. Every byte in the archive is accounted for.
+
+================================================================================
+2. FILE HEADER (12 bytes)
+================================================================================
+
+  Offset  Size  Type     Description
+  ------  ----  ------   ----------------------------------------
+  0x00    8     char[8]  Magic signature: "KCEJYUGI"
+  0x08    4     uint32   File count (number of entries in archive)
+
+================================================================================
+3. FILE TABLE (268 bytes per entry)
+================================================================================
+
+Immediately follows the header. Each entry is exactly 268 bytes:
+
+  Offset  Size  Type     Description
+  ------  ----  ------   ----------------------------------------
+  0x00    256   byte[256] Encrypted filename (see §4)
+  0x100   4     uint32   Data offset (absolute byte position in archive)
+  0x104   4     uint32   Uncompressed size (original file size in bytes)
+  0x108   4     uint32   Stored size (size of data as stored in archive)
+
+When uncompressed_size == stored_size, the file data is stored raw (no
+compression). When uncompressed_size != stored_size, the file data is LZSS
+compressed (see §5). When stored_size == 0, the file is empty (zero bytes).
+
+The data offset of entry 0 always equals 12 + file_count × 268 (immediately
+after the file table). Each subsequent entry's data offset equals the previous
+entry's offset plus the previous entry's stored size.
+
+================================================================================
+4. FILENAME ENCRYPTION
+================================================================================
+
+Each filename is stored in a 256-byte field, encrypted with a simple bitwise
+rotation. Unused bytes beyond the filename are zero.
+
+Encryption/decryption algorithm (symmetric — same operation in both directions):
+  For each byte in the 256-byte field:
+    Rotate the byte right by 4 bits (equivalent to swapping the high and low
+    nibbles).
+
+    decrypted_byte = ((encrypted_byte >> 4) | (encrypted_byte << 4)) & 0xFF
+
+This is equivalent to the C# reference implementation's loop of 4 single-bit
+right rotations:
+    for z in range(4):
+        temp = byte & 1
+        byte = (byte >> 1) | (temp << 7)
+
+After decryption, the filename is a null-terminated ASCII string. Paths use
+backslash ('\') as the directory separator.
+
+Example:
+  Encrypted:  26 96 E6 32 C5 36 16 27 46 F5 46 56 37 36 56 E6 76 E2 26 96 E6
+  Decrypted:  62 69 6E 23 5C 63 61 72 64 5F 64 65 73 63 65 6E 67 2E 62 69 6E
+  ASCII:      b  i  n  #  \  c  a  r  d  _  d  e  s  c  e  n  g  .  b  i  n
+  Filename:   bin#\card_desceng.bin
+
+================================================================================
+5. LZSS COMPRESSION
+================================================================================
+
+Files where uncompressed_size != stored_size use LZSS (Lempel-Ziv-Storer-
+Szymanski) compression. The compressed data has no header — decompression
+begins immediately from the first byte.
+
+Parameters:
+  - Ring buffer size:     4096 bytes (12-bit addressing)
+  - Ring buffer init:     All bytes set to 0x00
+  - Initial write pos:   0xFEE (4078)
+  - Min match length:     3
+  - Max match length:     18 (0x0F + 3)
+
+Decompression algorithm:
+
+  1. Read one flag byte.
+
+  2. Process 8 items controlled by the flag byte, from bit 0 (LSB) to bit 7
+     (MSB). For each bit:
+
+     a. If the bit is 1 — LITERAL:
+        Read 1 byte. Write it to the output buffer and the ring buffer at the
+        current write position. Advance the ring buffer write position by 1
+        (modulo 4096).
+
+     b. If the bit is 0 — BACK-REFERENCE:
+        Read 2 bytes (b1, b2). Decode:
+          ring_position = b1 | ((b2 & 0xF0) << 4)    — 12-bit ring buffer index
+          copy_length   = (b2 & 0x0F) + 3             — 3 to 18 bytes
+
+        Copy 'copy_length' bytes from the ring buffer starting at
+        'ring_position', writing each byte to both the output buffer and the
+        ring buffer at the current write position. Advance both the read
+        position and write position by 1 (modulo 4096) for each byte copied.
+
+  3. Repeat from step 1 until the output buffer reaches uncompressed_size.
+
+  4. All stored_size bytes of input are consumed exactly (no leftover bytes).
+
+Back-reference byte layout:
+
+  Byte 1 (b1):  PPPPPPPP   — low 8 bits of ring buffer position
+  Byte 2 (b2):  PPPPLLLL   — high 4 bits of position | 4-bit length - 3
+
+  ring_position = b1 | (b2 >> 4) << 8     [12 bits, range 0..4095]
+  copy_length   = (b2 & 0x0F) + 3         [ 4 bits, range 3..18  ]
+
+================================================================================
+6. FILE TYPES FOUND IN ARCHIVES
+================================================================================
+
+Data.dat typically contains:
+  - .bmp     Bitmap images (card art, UI graphics, backgrounds)
+  - .bin     Binary data (card descriptions, IDs, indices per language)
+  - .txt     Text files (popup messages, tutorials)
+  - .cur     Cursor files
+  - .ani     Animated cursor files
+  - .dat     Game data files
+  - .tga     Targa images
+  - .dll     Dynamic libraries
+
+Voice.dat typically contains:
+  - .wav     Waveform audio (voices, sound effects, music)
+  - .txt     Dummy/placeholder text files
+
+Path prefixes observed:
+  Data.dat:   bin#\    — binary game data
+              y\       — visual assets (images, UI, tutorials)
+  Voice.dat:  yugi\    — audio files organized by language
+
+================================================================================
+7. COMPLETE BYTE MAP
+================================================================================
+
+For an archive with N files:
+
+  Bytes 0..7:              File header magic "KCEJYUGI"
+  Bytes 8..11:             File count (N)
+  Bytes 12..12+N×268-1:    File table (N entries × 268 bytes each)
+  Bytes 12+N×268..EOF-1:   File data (contiguous, no gaps, no padding)
+
+  Total file table size:   12 + N × 268 bytes
+  Total data size:         Sum of all stored_size values
+  Archive size:            12 + N × 268 + sum(stored_size for all entries)
+
+Every byte in the archive belongs to exactly one of these regions. There are no
+alignment gaps, padding bytes, or trailing data.
+
+================================================================================
+8. SAMPLE FILE STATISTICS
+================================================================================
+
+Data.dat (139,268,607 bytes):
+  - 1682 files
+  - 1403 stored uncompressed
+  - 279 stored with LZSS compression (average 3.1x ratio)
+  - File table: 450,788 bytes (12 + 1682 × 268)
+  - File data: 138,817,819 bytes
+
+Voice.dat (78,873,500 bytes):
+  - 118 files
+  - 117 stored uncompressed, 1 empty (dummy.txt)
+  - 0 compressed files
+  - File table: 31,636 bytes (12 + 118 × 268)
+  - File data: 78,841,864 bytes

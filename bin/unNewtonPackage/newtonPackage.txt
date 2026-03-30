@@ -1,0 +1,350 @@
+Newton Package (.pkg) File Format Specification
+=================================================
+Vibe coded by Claude
+
+Overview
+--------
+The Newton Package format is the binary container used by the Apple Newton
+platform (MessagePad, eMate) to distribute and install software. A package
+contains one or more "parts", each holding serialized Newton object data
+(forms, auto-install scripts, books, etc.).
+
+All multi-byte integers are stored in big-endian (network) byte order.
+
+The file is divided into three consecutive regions:
+
+  +-------------------------------+
+  |  Package Header (52 bytes)    |  Fixed-size header with metadata
+  +-------------------------------+
+  |  Part Directory               |  num_parts × 32 bytes
+  +-------------------------------+
+  |  Variable-Length String Data   |  UTF-16BE and ASCII strings
+  +-------------------------------+  <-- offset = directory_size
+  |  Part Data                    |  Concatenated part binary data
+  +-------------------------------+  <-- offset = total_size (EOF)
+
+The "Package Header" + "Part Directory" + "Variable-Length String Data"
+together form the "directory" region, whose total byte size is given by
+the directory_size field in the header. Part data immediately follows.
+
+
+================================================================================
+1. PACKAGE HEADER  (52 bytes, offset 0x00)
+================================================================================
+
+Offset  Size  Type    Field              Description
+------  ----  ------  -----------------  ----------------------------------------
+0x00    8     char[]  signature          Format signature. One of:
+                                           "package0" — original format
+                                           "package1" — format with relocation
+                                         Byte 7 ('0' or '1') is the format
+                                         version indicator.
+
+0x08    4     char[]  type               Reserved type tag.
+                                         Always "xxxx" (0x78 0x78 0x78 0x78).
+
+0x0C    4     uint32  flags              Package-level bit flags:
+                                           Bit 31 (0x80000000): Auto-remove
+                                             Package is removed after install.
+                                           Bit 30 (0x40000000): Copy-protect
+                                             Package cannot be beamed/copied.
+                                           Bit 28 (0x10000000): No compression
+                                             Parts are stored uncompressed.
+                                           Bit 25 (0x02000000): Used in some
+                                             package1 files (purpose varies).
+                                         Multiple flags may be OR'd together.
+                                         0x00000000 means no special flags.
+
+0x10    4     uint32  version            Package version number. Set by the
+                                         package creator. Common values: 1, 2,
+                                         but can be any 32-bit value (e.g. 240).
+
+0x14    2     uint16  copyright_offset   Byte offset of the copyright string
+                                         within the variable-length string data
+                                         area. Always 0 in all observed files
+                                         (copyright is always first).
+
+0x16    2     uint16  copyright_length   Byte length of the copyright string
+                                         (UTF-16BE encoded, including the 2-byte
+                                         null terminator).
+
+0x18    2     uint16  name_offset        Byte offset of the package name string
+                                         within the variable-length string data
+                                         area. Always equals copyright_length
+                                         (name immediately follows copyright).
+
+0x1A    2     uint16  name_length        Byte length of the package name string
+                                         (UTF-16BE encoded, including the 2-byte
+                                         null terminator).
+
+0x1C    4     uint32  total_size         Total size of the entire package file
+                                         in bytes. Should equal the actual file
+                                         size. (Truncated files may have
+                                         total_size > actual file size.)
+
+0x20    4     uint32  creation_date      Package creation timestamp. Seconds
+                                         since 1904-01-01 00:00:00 UTC
+                                         (classic Mac/Newton epoch).
+
+0x24    4     uint32  modification_date  Package modification timestamp. Same
+                                         epoch as creation_date. May be 0
+                                         (especially in package1 files) or
+                                         equal to creation_date.
+
+0x28    4     uint32  reserved           Reserved. Always 0x00000000.
+
+0x2C    4     uint32  directory_size     Total byte size of the directory region
+                                         (header + part directory + string data).
+                                         This is the byte offset where part data
+                                         begins.
+
+0x30    4     uint32  num_parts          Number of parts in this package.
+                                         Typical values: 1–8.
+
+
+================================================================================
+2. PART DIRECTORY  (num_parts × 32 bytes, offset 0x34)
+================================================================================
+
+Immediately after the header, there are num_parts entries, each 32 bytes.
+The first entry starts at file offset 52 (0x34).
+
+Part Entry (32 bytes):
+
+Offset  Size  Type    Field              Description
+------  ----  ------  -----------------  ----------------------------------------
++0x00   4     uint32  data_offset        Byte offset of this part's data within
+                                         the part data area (relative to
+                                         directory_size). The absolute file
+                                         offset is: directory_size + data_offset.
+
++0x04   4     uint32  data_size          Size of this part's data in bytes
+                                         (as stored in the file). If the part is
+                                         compressed, this is the compressed size.
+
++0x08   4     uint32  data_size2         Uncompressed size of this part's data.
+                                         If the part is not compressed, this
+                                         equals data_size. A value of 0 also
+                                         indicates no compression (treat as
+                                         equal to data_size).
+
++0x0C   4     char[]  type               Part type as a 4-character ASCII tag:
+                                           "form" — Application form/layout
+                                           "auto" — Auto-install script/part
+                                           "book" — Newton Book (digital book)
+
++0x10   4     uint32  reserved1          Reserved. Always 0x00000000.
+
++0x14   4     uint32  flags              Part flags. Observed value is always
+                                         0x00000081 in all sample files.
+                                         Bit flags include:
+                                           Bit 7 (0x80): Protocol part
+                                           Bit 0 (0x01): Notify on install
+
++0x18   2     uint16  info_offset        Byte offset of this part's info string
+                                         within the variable-length string data
+                                         area.
+
++0x1A   2     uint16  info_length        Byte length of this part's info string
+                                         (ASCII, NOT null-terminated — length is
+                                         exact).
+
++0x1C   4     uint32  reserved2          Reserved. Always 0x00000000.
+
+Notes:
+  - Part entries are ordered by index (0 through num_parts-1).
+  - data_offset values are cumulative: part N's data_offset equals
+    the sum of data_size for all parts before it.
+  - The sum of all parts' data_size values must equal
+    (total_size - directory_size).
+
+
+================================================================================
+3. VARIABLE-LENGTH STRING DATA AREA
+================================================================================
+
+This area starts immediately after the last part directory entry, at file
+offset: 52 + (num_parts × 32).
+
+It extends to (directory_size - 1), inclusive.
+
+The area contains three categories of string, addressed by offset/length
+pairs stored in the header and part entries:
+
+3a. COPYRIGHT STRING
+    Encoding:  UTF-16 Big-Endian, null-terminated (0x0000)
+    Location:  string_area + copyright_offset, for copyright_length bytes
+    Content:   Package copyright notice, e.g.:
+               "©1993 Jesse Devine. All rights reserved."
+
+3b. PACKAGE NAME STRING
+    Encoding:  UTF-16 Big-Endian, null-terminated (0x0000)
+    Location:  string_area + name_offset, for name_length bytes
+    Content:   Package name, typically in "AppName:Publisher" format,
+               e.g.: "Keys:Jester", "CPremover:Namba"
+
+3c. PART INFO STRINGS (one per part)
+    Encoding:  ASCII (raw bytes, NOT null-terminated)
+    Location:  string_area + part[i].info_offset, for part[i].info_length bytes
+    Content:   Part-specific info string. Common values:
+                 "form", "auto", "book" (echoing the part type)
+                 "A Newton Toolkit application"
+                 "a test package"
+                 Descriptive text
+
+    The info strings for all parts are packed consecutively without null
+    terminators between them. The info_offset/info_length pairs provide
+    exact addressing.
+
+3d. REMAINING BYTES (padding/filler)
+    Any bytes between the end of the last defined string region and
+    directory_size are filler data. In practice, this area contains:
+      - An ASCII null-terminated string, typically the NTK (Newton
+        ToolKit) copyright: "Newton® ToolKit Package © 199X-199Y,
+        Apple Computer, Inc.\0"
+        (For Newton Press books: "Built with Newton Press\0")
+      - Padding bytes to reach directory_size alignment:
+        0xFF bytes (most common), or 0x00 bytes (in some book packages).
+
+    These filler bytes are not referenced by any header or directory
+    fields. They must be preserved for byte-exact round-tripping but
+    carry no semantic meaning.
+
+
+================================================================================
+4. PART DATA AREA
+================================================================================
+
+The part data area starts at file offset directory_size and extends to
+the end of the file (total_size).
+
+Each part's raw binary data is located at:
+  File offset:  directory_size + part[i].data_offset
+  Size:         part[i].data_size bytes
+
+Parts are stored contiguously. The data for part 0 is not necessarily at
+offset 0 in the data area — data_offset in each part entry gives the
+actual position. In practice, parts are stored sequentially in part-index
+order (part 0 first, part 1 next, etc.), but consumers should always use
+the data_offset field.
+
+The part data itself contains serialized Newton binary objects (NSOF —
+NewtonScript Object Format). The internal structure of part data is
+outside the scope of this package format specification.
+
+
+================================================================================
+5. DATE ENCODING
+================================================================================
+
+The creation_date and modification_date fields store seconds elapsed
+since the Mac/Newton epoch: 1904-01-01 00:00:00 UTC.
+
+To convert to Unix timestamp: unix_ts = newton_ts - 2082844800
+(2082844800 = seconds between 1904-01-01 and 1970-01-01)
+
+A value of 0 indicates "not set" (common for modification_date in
+package1 files).
+
+
+================================================================================
+6. FORMAT VERSION DIFFERENCES
+================================================================================
+
+"package0" (original):
+  - The standard Newton package format.
+  - modification_date is often equal to creation_date.
+
+"package1" (with relocation):
+  - Supports relocation information for parts.
+  - modification_date is often 0.
+  - May use flag bit 0x02000000.
+  - The basic header/directory/data layout is identical.
+
+Both versions use the same 52-byte header, 32-byte part entries, and
+string data layout described above.
+
+
+================================================================================
+7. KNOWN FLAG VALUES (offset 0x0C)
+================================================================================
+
+Observed flag combinations across 100 sample files:
+
+  0x00000000 — No flags (55 files)
+  0x02000000 — (19 files, package1)
+  0x10000000 — No compression (17 files)
+  0x40000000 — Copy-protect (2 files)
+  0x42000000 — Copy-protect + 0x02000000 (1 file)
+  0x50000000 — No compression + Copy-protect (4 files)
+  0x80000000 — Auto-remove (1 file)
+  0x90000000 — Auto-remove + No compression (1 file)
+
+
+================================================================================
+8. COMPLETE FILE LAYOUT EXAMPLE
+================================================================================
+
+Example: "Keys 1.0.pkg" (7632 bytes, 1 part)
+
+  Offset  Bytes  Description
+  ------  -----  -----------
+  0x0000     8   Signature: "package0"
+  0x0008     4   Type: "xxxx"
+  0x000C     4   Flags: 0x00000000
+  0x0010     4   Version: 1
+  0x0014     2   Copyright offset: 0
+  0x0016     2   Copyright length: 82
+  0x0018     2   Name offset: 82
+  0x001A     2   Name length: 24
+  0x001C     4   Total size: 7632
+  0x0020     4   Creation date: 0x00000000
+  0x0024     4   Modification date: 0x00000000
+  0x0028     4   Reserved: 0
+  0x002C     4   Directory size: 264
+  0x0030     4   Num parts: 1
+  --- Part 0 entry (32 bytes) ---
+  0x0034     4   Data offset: 0
+  0x0038     4   Data size: 7368
+  0x003C     4   Data size 2: 0 (no compression)
+  0x0040     4   Type: "form"
+  0x0044     4   Reserved: 0
+  0x0048     4   Flags: 0x00000081
+  0x004C     2   Info offset: 106
+  0x004E     2   Info length: 15
+  0x0050     4   Reserved: 0
+  --- Variable-length string data (180 bytes) ---
+  0x0054    82   Copyright (UTF-16BE): "©1993 Jesse Devine..."
+  0x00A6    24   Name (UTF-16BE): "Keys:Jester"
+  0x00BE    15   Part 0 info (ASCII): "a test package\0"
+  0x00CD    59   Filler: NTK copyright + 0xFF padding
+  --- Part data ---
+  0x0108  7368   Part 0 data (Newton objects)
+
+
+================================================================================
+9. COMPLETE FILE LAYOUT EXAMPLE (multi-part)
+================================================================================
+
+Example: "PT100_HB.pkg" (28872 bytes, 2 parts)
+
+  Offset  Bytes  Description
+  ------  -----  -----------
+  0x0000    52   Package header
+                   Signature: "package1", Flags: 0x10000000
+                   Copyright: offset=0, length=72
+                   Name: offset=72, length=36
+                   Total size: 28872, Dir size: 292, Parts: 2
+  --- Part 0 entry ---
+  0x0034    32   Part 0: type="auto", data_offset=0, data_size=804
+  --- Part 1 entry ---
+  0x0054    32   Part 1: type="book", data_offset=804, data_size=27776
+  --- String data (176 bytes) ---
+  0x0074    72   Copyright (UTF-16BE): "©1997 Scrawl..."
+  0x00BC    36   Name (UTF-16BE): "PT100 Help:Scrawl"
+  0x00E0     4   Part 0 info (ASCII): "auto"
+  0x00E4     4   Part 1 info (ASCII): "book"
+  0x00E8    58   Filler: NTK copyright + 0xFFFF
+  --- Part data ---
+  0x0124   804   Part 0 data (auto script)
+  0x0448 27776   Part 1 data (book content)

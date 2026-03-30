@@ -1,14 +1,15 @@
-# Supported File Formats (3,674)
+# Supported File Formats (3,685)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (649)
+## Archive (660)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 0000 Package Archive | .0000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/package0000Archive/)
+archive | 1nsane game data archive | .idf | [unOnesaneGameArchive](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/onesaneGameArchive/)
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
 archive | 624 Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sixTwoFourPacked/)
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/sevenZip/)
@@ -395,6 +396,7 @@ archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | 
 archive | Netscape SNM Archive | .snm | [unNetscapeSNM](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/)
 archive | Neverwinter Nights MOD | .mod .nwm | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsMOD/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/news/) - Converter currently doesn't handle when just a single newsgroup message is saved in a file
+archive | Newton Package | .pkg | [unNewtonPackage](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImage/)
 archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImageDump/)
 archive | Nibiru GRP Archive | .grp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/nibiruGRP/)
@@ -412,6 +414,8 @@ archive | Obscure HV PackFile game archive | .hvp .001 | [gameextractor](https:/
 archive | OPK PAK | .osp .ovp .obp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/opkPAK/)
 archive | OPTLINK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/optlinkPacked/)
 archive | Order of War Game Archive | .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/orderOfWarGameArchive/)
+archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [unORICDisk](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/)
+archive | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [unORICTape](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [OS/2 Extended Attributes](http://fileformats.archiveteam.org/wiki/OS/2_extended_attributes) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/os2ExtendedAttributes/)
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [unpack2](https://github.com/Sembiance/dexvert) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/)
@@ -518,6 +522,7 @@ archive | [SelectWare Technologies archive](https://moddingwiki.shikadi.net/wiki
 archive | [Self-Dissolving Archive](http://fileformats.archiveteam.org/wiki/SDA) | .sda | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfDissolvingArchive/)
 archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) [izArc](https://www.izarc.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
+archive | Setup Program Archive | .mva .mvb | [unSetupMVA](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 archive | SEXT Textures | .textures | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sextTextures/)
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
 archive | SGA game data archive | .sga | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
@@ -562,6 +567,7 @@ archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCr
 archive | STREAM Game Archive | .stream | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/streamGameArchive/)
 archive | [Streamline Archiving Utility Archive](http://fileformats.archiveteam.org/wiki/SAR_(Streamline_Design)) | .sar | [sar](https://www.sac.sk/download/pack/sar1.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/streamlineDesignSAR/)
 archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/StuffIt) | .sit .sea | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) [macunpack](https://github.com/wnayes/macutils) [maconv](https://github.com/ParksProjets/Maconv) | [24 sample files](https://sembiance.com/fileFormatSamples/archive/sit/)
+archive | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [unStuffitX](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 archive | Sun Package Data Stream | .pkg | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sunPackageDataStream/)
 archive | [SuperJPG Thumbnail Cache](http://fileformats.archiveteam.org/wiki/SuperJPG_thumbnail_cache) | .tnc | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/superJPGThumbnailCache/)
 archive | [Superscape World](https://archive.superscape.org/About%20Superscape.txt) | .vrt .xvr .svr | [superscapeVRT](https://archive.superscape.org/Software/VRT/VRT_5.60.0.4112.iso) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/superscapeWorld/)
@@ -609,6 +615,7 @@ archive | Unreal Engine 3 Package | .u .uasset .utx .uax .umx .unr .ut3 .upk | [
 archive | [UPX Packed](http://fileformats.archiveteam.org/wiki/UPX) | .exe .com | [upx](https://upx.github.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/upxPacked/)
 archive | [UU/XX Encoded Archive](http://fileformats.archiveteam.org/wiki/Uuencoding) | .uue .uu | [uudecode](https://www.gnu.org/software/sharutils/) [deark](https://entropymine.com/deark/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/uue/) - Haven't encountered may XX encoded files, those I have decode fine with uudecode. If find one that doesn't try using uudeview
 archive | Vampire Engine MageSlayer game archive | .vpk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/vampireEngineMageSlayerGameArchive/)
+archive | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [unViacomNewMedia](https://github.com/Sembiance/dexvert) | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/)
 archive | Vic2 Huffman Compressed |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/vic2Huffman/)
 archive | [Vinyl Goddess from Mars Game Archive](https://moddingwiki.shikadi.net/wiki/LBR_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/vinylGoddessGameArchive/)
 archive | [Visual Novel DPK Archive](http://fileformats.archiveteam.org/wiki/DPK) | .dpk | [GARbro](https://github.com/shiikwi/GARbro) [undpk](http://fileformats.archiveteam.org/wiki/DPK) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/visualNovelDPK/)
@@ -622,6 +629,7 @@ archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [dear
 archive | [WAD2 Game Archive](http://fileformats.archiveteam.org/wiki/Quake_WAD) | .wad | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/wad2GameArchive/)
 archive | [WARC Archive](http://fileformats.archiveteam.org/wiki/WARC) | .warc | [Warcat](https://pypi.org/project/Warcat) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warc/)
 archive | Warcraft 2 Game Archive | .war | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/warcraft2GameArchive/)
+archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [unWRP](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/)
 archive | Warrior Kings game data | .bcp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warriorKingsGameData/)
 archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
 archive | Whirlwind game data Package | .wpk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | 
@@ -634,6 +642,7 @@ archive | [Wintermust DCP Archive](https://gist.github.com/RomanKharin/10668624)
 archive | Witcher 2 Archive | .dzip | [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/witcher2Archive/)
 archive | Wolfenstein game data | .spk .mpk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/wolfensteinGameData/)
 archive | [WOZ disk image](http://fileformats.archiveteam.org/wiki/WOZ) | .woz | [acx](https://github.com/AppleCommander/AppleCommander) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/wozDiskImage/)
+archive | WRAptor Archive | .wra .wr3 | [unWraptor](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/)
 archive | WWPACK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/wwpackPacked/)
 archive | X68000 Floppy Disk Image | .xdf | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/x68000FloppyDiskImage/)
 archive | XBMC Texture Package | .xbt | [xbtfextractor](https://github.com/larshall/xbtfextractor) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xbmcTexturePackage/)
@@ -648,10 +657,12 @@ archive | YBS Archive | .ybs | [ybs](https://www.sac.sk/download/pack/ybs003fd.z
 archive | [yEnc Encoded Archive](http://fileformats.archiveteam.org/wiki/YEnc) | .ync .yenc | [yydecode](http://yydecode.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/yEnc/)
 archive | [Yet Another Compressor Archive](http://justsolve.archiveteam.org/wiki/YAC) | .yc | [yac](https://www.sac.sk/download/pack/yac102.zip) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/yacArchive/)
 archive | You Don't Know Jack Game Archive | .srf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/youDontKnowJackGameArchive/)
+archive | Yu Gi Oh! data | .dat | [unYuGiOhData](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/yuGiOhData/)
 archive | Z-Axis game sound data archive | .zsd | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zAxisGameSoundDataArchive/)
 archive | ZipIt |  | [unar](https://github.com/incbee/Unarchiver) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/zipIt/)
 archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [zlib_flate](https://qpdf.sourceforge.net/) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/zlib/)
 archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [zoo](https://packages.debian.org/jessie/zoo) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/zoo/)
+archive | ZOOM Disk Image | .zom | [unZoomDiskImage](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/)
 archive | ZP Packed GXL | .zp | [dd](https://www.gnu.org/software/coreutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/zpPackedGXL/)
 archive | [ZPAQ Archive](http://fileformats.archiveteam.org/wiki/ZPAQ) | .zpaq | [zpaq](http://mattmahoney.net/dc/zpaq.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/zpaq/)
 archive | ZSoft Package 2 | $ | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/zSoftPackage2/)

@@ -1,0 +1,432 @@
+Viacom New Media Sprite Archive File Format Specification
+=========================================================
+
+Version: 1.0
+Date: 2026-03-30
+Status: Fully reverse-engineered from sample files
+
+This document describes the file format used by Viacom New Media circa 1995
+for storing game sprites, bitmaps, and scene descriptors. Known games using
+this format include "Beavis and Butthead in Virtual Stupidity".
+
+Files use the extensions .VNM and .000. The format supports two distinct file
+types sharing the same signature: Sprite Archives and Game Scene Descriptors.
+
+
+================================================================================
+1. FILE IDENTIFICATION
+================================================================================
+
+Signature:  4 bytes  "VNM\x1A"  (hex: 56 4E 4D 1A)
+Byte order: Little-endian throughout
+
+The file type is determined by the Flags field (offset 0x04):
+  - Flags == 0x00000000: Sprite Archive (contains images with palette)
+  - Flags & 0x80000000: Game Scene Descriptor (contains scene metadata)
+
+
+================================================================================
+2. SPRITE ARCHIVE FORMAT (Flags == 0x00000000)
+================================================================================
+
+Sprite archives contain a color palette and a collection of indexed images
+stored as either raw bitmaps or RLE-compressed sprites with transparency.
+
+File extensions: .VNM (VSPR*.VNM) or .000 (BB*.000)
+
+2.1 File Layout
+---------------
+
+  Offset        | Content
+  --------------|------------------------------------------
+  0x0000        | File Header (40 bytes)
+  0x0028        | Palette Data (PaletteSize * 3 bytes)
+  (aligned)     | Padding (0-3 zero bytes for DWORD alignment)
+  Unknown1Off   | Unknown Table 1 (1024 bytes)
+  Unknown2Off   | Unknown Table 2 (1024 bytes)
+  ImageIndexOff | Image Offset Index (ImageCount * 4 bytes)
+  (varies)      | Image Headers and Pixel Data
+
+
+2.2 File Header (40 bytes at offset 0x00)
+-----------------------------------------
+
+  Offset  Size     Type      Field           Description
+  ------  ----     ----      -----           -----------
+  0x00    4        UINT32LE  Signature       File signature: 0x1A4D4E56 ("VNM\x1A")
+  0x04    4        UINT32LE  Flags           File type flags: 0x00000000 for sprite archives
+  0x08    4        UINT32LE  DataSize        Total file size in bytes
+  0x0C    4        UINT32LE  PaletteOffset   Offset to palette data (always 0x28 = 40)
+  0x10    4        UINT32LE  Unknown1Offset  Offset to Unknown Table 1
+  0x14    4        UINT32LE  Unknown2Offset  Offset to Unknown Table 2
+  0x18    4        UINT32LE  ImageIndexOff   Offset to the image offset index array
+  0x1C    4        UINT32LE  PaletteStart    First valid palette index (typically 10)
+  0x20    4        UINT32LE  PaletteSize     Number of palette entries stored (typically 236)
+  0x24    4        UINT32LE  ImageCount      Number of images in the archive
+
+Relationships between offsets:
+  Unknown1Offset = DWORD_ALIGN(PaletteOffset + PaletteSize * 3)
+  Unknown2Offset = Unknown1Offset + 1024
+  ImageIndexOff  = Unknown2Offset + 1024
+
+Where DWORD_ALIGN(x) rounds up x to the next multiple of 4.
+
+
+2.3 Palette Data
+----------------
+
+Located at PaletteOffset (0x28). Contains PaletteSize entries of 3 bytes each.
+
+Each entry is an RGB triplet in VGA 6-bit format (values 0-63):
+  Byte 0: Red   (6-bit, 0-63)
+  Byte 1: Green (6-bit, 0-63)
+  Byte 2: Blue  (6-bit, 0-63)
+
+To convert to standard 8-bit RGB (0-255):
+  R8 = (R6 << 2) | (R6 >> 4)
+  G8 = (G6 << 2) | (G6 >> 4)
+  B8 = (B6 << 2) | (B6 >> 4)
+
+Palette indices 0 through PaletteStart-1 are unused (typically transparent).
+Palette indices PaletteStart through PaletteStart+PaletteSize-1 have colors.
+Palette indices above PaletteStart+PaletteSize-1 are undefined.
+
+Observed PaletteSize values: 199, 214, 222, 223, 225, 226, 231, 232, 236.
+PaletteStart is always 10 in all observed samples.
+
+After the palette data, 0-3 zero bytes of padding align the next section
+to a DWORD (4-byte) boundary.
+
+
+2.4 Unknown Tables (1024 bytes each)
+-------------------------------------
+
+Two lookup tables of 256 UINT32LE entries each (256 * 4 = 1024 bytes),
+indexed by palette index (0-255).
+
+Unknown Table 1:
+  Located at Unknown1Offset.
+  Observed values:
+    - 0x80000000 (for lower palette indices, typically 0-63)
+    - 0x8000000A (variant seen in .000 files, indices 0-64)
+    - 0x80000100 (for higher palette indices, typically 64-255)
+
+Unknown Table 2:
+  Located at Unknown2Offset.
+  Observed values:
+    - 0x80000000 (most or all entries)
+    - 0x80000001 (indices 128-255 in some .000 files)
+
+These tables likely encode per-palette-index properties such as color
+remapping, transparency flags, or rendering hints. Bit 31 (0x80000000)
+appears to be a "valid" flag. The lower bits encode the property value.
+Their exact purpose is unknown but they are not required for image extraction.
+
+
+2.5 Image Offset Index
+-----------------------
+
+Located at ImageIndexOff. Contains ImageCount UINT32LE values.
+Each value is an absolute file offset to that image's Image Header.
+
+Special values:
+  - 0x00000000: Null/empty entry. This image slot is unused. Observed as
+    the first entry (index 0) in .VNM files. Never observed in .000 files.
+
+The image headers are stored contiguously starting immediately after the
+image index. However, image data can be located anywhere in the file
+(image headers contain their own data offset).
+
+
+2.6 Image Header (24 bytes)
+----------------------------
+
+  Offset  Size  Type      Field       Description
+  ------  ----  ----      -----       -----------
+  0x00    4     UINT32LE  DataOffset  Absolute file offset to pixel data
+  0x04    4     UINT32LE  Type        Image type: 0 = Bitmap, 1 = Sprite
+  0x08    4     INT32LE   Width       Image width in pixels
+  0x0C    4     INT32LE   Height      Image height in pixels
+  0x10    4     INT32LE   XPos        X position (sprite anchor/hotspot)
+  0x14    4     INT32LE   YPos        Y position (sprite anchor/hotspot)
+
+XPos and YPos are signed values, often negative, representing the sprite's
+anchor point offset. These are used for positioning when compositing sprites
+onto a scene canvas.
+
+
+2.7 Bitmap Image Data (Type 0)
+-------------------------------
+
+Raw uncompressed pixel data. Each byte is a palette index.
+
+Data starts at DataOffset and contains Width * Height bytes arranged in
+row-major order (left to right, top to bottom). Each byte directly maps
+to a palette index.
+
+Total size: Width * Height bytes.
+
+
+2.8 Sprite Image Data (Type 1)
+-------------------------------
+
+Sprite images use a per-row offset table for random access to row data.
+The encoding method depends on the image width.
+
+Data at DataOffset starts with a Row Offset Table:
+  Height UINT32LE values, each an absolute file offset to that row's
+  pixel data.
+
+Row Offset Table size: Height * 4 bytes.
+
+
+2.8.1 Wide Sprites (Width >= 256) - Raw with Row Offsets
+
+For images with Width >= 256, each row stores Width bytes of raw
+(uncompressed) pixel data at the file offset given by the Row Offset
+Table. Each byte is a direct palette index, identical to bitmap encoding
+but with per-row random access via the offset table.
+
+These wide images are typically full-screen backgrounds (320x240,
+600x240, 640x240) referenced by game scene files as layers.
+
+The palette for wide sprites is arranged so that only lower palette
+indices (below the escape threshold) are used as pixel values. This
+means wide sprites use fewer colors than the full palette range.
+
+
+2.8.2 Narrow Sprites (Width < 256) - RLE Compressed
+
+For images with Width < 256, rows are RLE compressed with transparency.
+
+2.8.2.1 Escape Threshold
+
+  ESCAPE = 0x100 - Width
+
+Any byte value >= ESCAPE is a transparency escape code.
+Any byte value < ESCAPE is a literal pixel (palette index).
+
+2.8.2.2 Row Decoding Algorithm
+
+For each row, starting at the offset from the Row Offset Table:
+
+  remaining = Width     (pixels left to fill)
+  is_first_byte = true
+
+  WHILE remaining > 0:
+    READ byte
+
+    IF byte >= ESCAPE:
+      // Transparency run
+      run_length = 0x100 - byte      // 1 to Width transparent pixels
+      run_length = MIN(run_length, remaining)
+      OUTPUT run_length transparent pixels
+      remaining -= run_length
+
+      IF remaining > 0:
+        READ and DISCARD 1 byte       // "skip byte" (see note below)
+
+    ELSE IF is_first_byte:
+      // Row header byte: skip it (does not produce a pixel)
+      is_first_byte = false
+      CONTINUE
+
+    ELSE:
+      // Literal pixel
+      OUTPUT byte as palette index
+      remaining -= 1
+      is_first_byte = false
+
+Note on skip bytes: After each non-terminal transparency escape code,
+a single byte is read and discarded. This byte's purpose is not fully
+understood; it may represent the palette index to use for the transparent
+color in certain rendering modes. The terminal escape (one that fills the
+remaining pixels to complete the row) does NOT have a skip byte.
+
+Note on row header bytes: If the first byte of a row's encoded data is
+below the escape threshold (i.e., it looks like a literal pixel), it is
+a row header/metadata byte and is discarded without producing a pixel.
+This occurs when a row starts directly with opaque pixels (no leading
+transparency). The byte value's purpose is not fully understood.
+
+2.8.3 Transparency
+
+Transparent pixels are represented by the absence of data (gaps between
+opaque pixel runs). In a paletted image, palette index 0 is conventionally
+used for transparency (RGBA 0,0,0,0). In RGBA output, transparent pixels
+have alpha = 0.
+
+
+================================================================================
+3. GAME SCENE DESCRIPTOR FORMAT (Flags & 0x80000000)
+================================================================================
+
+Game scene files describe interactive game locations. They reference sprites
+from companion Sprite Archive files and contain scene layout metadata,
+object coordinates, animation data, and location names.
+
+File extensions: .VNM (GAME*.VNM)
+
+These files do NOT contain image pixel data. Images are stored in separate
+Sprite Archive files (VSPR*.VNM or *.000).
+
+
+3.1 File Layout
+---------------
+
+  Offset        | Content
+  --------------|------------------------------------------
+  0x0000        | File Header (40 bytes)
+  0x0028        | Scene Data Block
+  ImageIndexOff | Layer Index (NumLayers * 4 bytes)
+  AfterIndexOff | Post-Index Data Block
+  (varies)      | End of file
+
+
+3.2 File Header (40 bytes at offset 0x00)
+-----------------------------------------
+
+  Offset  Size  Type      Field            Description
+  ------  ----  ----      -----            -----------
+  0x00    4     UINT32LE  Signature        0x1A4D4E56 ("VNM\x1A")
+  0x04    4     UINT32LE  Flags            0x80000000 (game scene flag)
+  0x08    4     UINT32LE  DataSize         Total file size in bytes
+  0x0C    4     UINT32LE  CanvasWidth      Scene canvas width in pixels
+  0x10    4     UINT32LE  CanvasHeight     Scene canvas height in pixels (always 240)
+  0x14    4     UINT32LE  NumLayers        Number of background/scene layers
+  0x18    4     UINT32LE  ImageIndexOff    Offset to layer sprite index array
+  0x1C    4     UINT32LE  AfterIndexOff    Offset to post-index data
+  0x20    4     UINT32LE  Field8           Always 0 in observed samples
+  0x24    4     UINT32LE  Field9           Varies (often 0xFFFFFFFF)
+
+Relationship: AfterIndexOff = ImageIndexOff + NumLayers * 4
+
+Observed CanvasWidth values: 320, 476, 600, 640.
+CanvasHeight is always 240 (matching VGA display modes).
+NumLayers ranges from 1 to 9.
+
+
+3.3 Scene Data Block (offset 0x28 to ImageIndexOff)
+----------------------------------------------------
+
+Contains structured game scene data including:
+
+  - Sentinel markers: Pairs of 0xFFFFFFFF UINT32LE values at approximately
+    fixed intervals (~0x4C apart, starting at offset 0x24). Purpose unknown,
+    possibly section delimiters.
+
+  - Sparse lookup tables: Large zero-filled regions interspersed with
+    small integer values at 4-byte-aligned positions.
+
+  - Coordinate data: Pairs of INT16LE values that appear to encode
+    sprite placement positions, hotspot regions, or walk-path coordinates.
+
+  - Incrementing index arrays: Sequential UINT32LE values (0, 1, 2, ...)
+    likely serving as sprite animation frame indices.
+
+  - Stride-2 byte arrays: Byte values at every other position with
+    intervening zero bytes, possibly flag or property arrays.
+
+The exact structure of this block is complex and game-logic specific.
+It is preserved as raw binary data during extraction.
+
+
+3.4 Layer Index
+---------------
+
+Located at ImageIndexOff. Contains NumLayers UINT32LE values.
+Each value is a sprite index into a companion Sprite Archive file.
+
+These indices identify which sprites from the VSPR*.VNM file serve as
+background layers for the scene. The indices are typically near the end
+of the companion archive's image list (i.e., the last N images in the
+VSPR file correspond to the N background layers).
+
+Example: GAME0001.VNM from sample 4320 has 7 layers with sprite indices
+645-651. The companion VSPR0001.VNM has 652 images total, so these are
+the last 7 images in the archive.
+
+
+3.5 Post-Index Data Block
+--------------------------
+
+Data from AfterIndexOff to end of file. Contains:
+
+  - Scene object descriptors: Structured data for interactive objects
+    including positions, dimensions, and behavior flags.
+
+  - Embedded ASCII strings: Null-terminated (or null-padded) ASCII
+    strings naming game locations, characters, interactive objects,
+    and animation triggers. Examples:
+      "Butthead", "Beavis", "School", "BurgerWorld", "HallGymDoor",
+      "ClassBVStabsFrog", "ParkYuppieCar", "BWFryer"
+
+  - Additional coordinate and flag data.
+
+The exact structure varies by scene complexity and is game-logic specific.
+It is preserved as raw binary data during extraction.
+
+
+================================================================================
+4. FILE NAMING CONVENTIONS
+================================================================================
+
+Sprite Archives:
+  VSPR####.VNM  - Sprite archive for scene/chapter ####
+  BB<name>.000  - Standalone sprite archive (mini-game specific)
+                  Examples: BBLOOGIE.000, BBTENNIS.000, BBANT.000,
+                  BBAIRG.000, BBGFX.000, BBGFX_1.000, BBGFX_2.000
+
+Game Scenes:
+  GAME####.VNM  - Game scene descriptor for scene/chapter ####
+  game####.vnm  - Same (case-insensitive filesystem)
+
+Scene numbers (####) in GAME files correspond to locations in the game.
+The matching VSPR file may have the same or different number depending
+on which sprites the scene requires.
+
+
+================================================================================
+5. NOTES ON TRUNCATED FILES
+================================================================================
+
+Some sample files have DataSize (header field at offset 0x08) larger than
+the actual file size on disk. These are truncated copies. The extractor
+handles this gracefully by:
+  - Extracting all images whose data fits within the actual file
+  - Skipping images whose headers or data extend beyond the file boundary
+  - Reporting the truncation in output metadata
+
+
+================================================================================
+6. BYTE-LEVEL SUMMARY
+================================================================================
+
+Every byte in a Sprite Archive file belongs to one of:
+  1. File Header (40 bytes, fixed)
+  2. Palette Data (PaletteSize * 3 bytes)
+  3. Alignment Padding (0-3 zero bytes after palette)
+  4. Unknown Table 1 (1024 bytes, 256 UINT32LE entries)
+  5. Unknown Table 2 (1024 bytes, 256 UINT32LE entries)
+  6. Image Offset Index (ImageCount * 4 bytes)
+  7. Image Headers (24 bytes each, contiguous)
+  8. Image Pixel Data (variable size per image)
+
+Every byte in a Game Scene file belongs to one of:
+  1. File Header (40 bytes, fixed)
+  2. Scene Data Block (variable, game-logic data)
+  3. Layer Index (NumLayers * 4 bytes)
+  4. Post-Index Data Block (variable, strings and metadata)
+
+
+================================================================================
+7. REFERENCES
+================================================================================
+
+- Shikadi ModdingWiki: Viacom New Media Graphics File Format
+  (Original reverse engineering by user "Napalm", 2015)
+- vnmgf-exporter: Go-based extractor (partial implementation with known
+  sprite decoding edge cases)
+- This specification: Extended from above sources with complete analysis
+  of all sample files, including Game Scene format documentation,
+  palette alignment behavior, and corrected sprite decoding algorithm.

@@ -1,0 +1,344 @@
+ZOOM Disk Image File Format Specification
+==========================================
+
+Version: 1.0
+Date: 2026-03-30
+
+Overview
+--------
+The ZOOM disk image format (.zom) is a compressed Amiga floppy disk archive
+format created by Olaf Barthel. It uses adaptive Huffman + LZSS compression
+("LH") derived from LhArc, with an optional byte-run (RLE) precompressor.
+
+Two format variants exist:
+  - "ZOOM" (magic 0x5A4F4F4D) - old format, versions 3-4
+  - "ZOM5" (magic 0x5A4F4D35) - new format, version 5
+
+All multi-byte values are stored in big-endian (Motorola) byte order.
+The target disk is an Amiga DD floppy: 80 cylinders, 2 heads, 11 sectors/track,
+512 bytes/sector = 901,120 bytes total.
+
+
+File Structure
+--------------
+A .zom file contains these sections in order:
+
+  1. File Header (72 bytes)
+  2. Header CRC (2 or 4 bytes)
+  3. Optional: Compressed Text Data + Text CRC
+  4. Track Box 0: Track Header + Track Header CRC + Compressed Data
+  5. Track Box 1: Track Header + Track Header CRC + Compressed Data
+  ...
+  N. Track Box N: (last box)
+  Optional: ZoomNote (92 bytes, at NoteOffset if non-zero)
+
+
+1. File Header (72 bytes)
+-------------------------
+Offset  Size  Type     Field          Description
+------  ----  ----     -----          -----------
+  0       4   char[4]  HeaderID       Magic identifier:
+                                        "ZOOM" (0x5A4F4F4D) for old format
+                                        "ZOM5" (0x5A4F4D35) for new format
+  4       1   int8     From           First cylinder number (usually 0)
+  5       1   int8     To             Last cylinder number (usually 79)
+  6       1   int8     Version        Zoom version that created the file
+                                        3 = Zoom v3 (old format)
+                                        4 = Zoom v4 (old format)
+                                        5 = Zoom v5 (new format)
+  7       1   int8     OnlyTracks     Non-zero if file only contains whole tracks
+  8       4   uint32   Flags          Bit flags:
+                                        Bit 0 (USEHEADER): If set, sector header
+                                        labels (16 bytes/sector) are stored alongside
+                                        the 512-byte sector data
+ 12      12   bytes    Date           AmigaDOS DateStamp (3 x uint32):
+                                        [0..3]  days since 1978-01-01
+                                        [4..7]  minutes since midnight
+                                        [8..11] ticks (1/50 sec) since last minute
+ 24       4   uint32   TextLength     Uncompressed size of attached text (0 = none)
+ 28       4   uint32   PackedLength   Compressed size of attached text (0 = none)
+ 32       4   int32    NoteOffset     Absolute file offset to ZoomNote (0 = none)
+ 36       1   int8     Encrypted      Non-zero if file is password-encrypted
+ 37       1   int8     Format         Format indicator (usually 0)
+ 38       2   int16    Reserved1      Reserved (0)
+ 40       4   uint32   root           Encryption key (product of password chars)
+ 44      28   bytes    Reserved2      Reserved (zeros)
+
+
+2. Header CRC
+--------------
+Immediately follows the 72-byte header.
+
+For ZOM5 (new format):
+  4 bytes - CRC32 of the 72-byte header
+  Algorithm: polynomial 0xEDB88320 (reflected), init=0, no final XOR
+
+For ZOOM (old format):
+  2 bytes - CRC-CCITT of the 72-byte header
+  Algorithm: polynomial 0x1021, variant 2 (see below), init=0
+
+CRC-CCITT variant 2:
+  for each byte b:
+    crc = table[(crc >> 8) & 0xFF] ^ ((crc << 8) ^ b)
+  where table is the standard CRC-CCITT 0x1021 lookup table.
+
+
+3. Optional Text Data
+---------------------
+Present only if TextLength > 0.
+
+  PackedLength bytes - LH-compressed text data
+  Then CRC:
+    ZOM5: 4 bytes CRC32 of the compressed data
+    ZOOM: 2 bytes CRC-CCITT of the compressed data
+
+The text is decompressed using the LH algorithm (see Section 7).
+No RLE stage is applied to text data.
+
+
+4. Track Boxes
+--------------
+Cylinders are packed into "boxes" of up to 5 cylinders each.
+The number of boxes = ceil((To - From + 1) / 5), minus any skipped
+cylinders (which are all-zeros and omitted entirely).
+
+Each box consists of:
+  a) Track Header (38 bytes)
+  b) Track Header CRC
+  c) Compressed track data
+
+A cylinder comprises 22 sectors (11 per head x 2 heads), each 512 bytes.
+Total uncompressed size per cylinder = 22 x 512 = 11,264 bytes.
+
+Cylinders NOT present in any box are filled with zeros in the output.
+
+
+5. Track Header (38 bytes on disk)
+-----------------------------------
+Offset  Size  Type      Field    Description
+------  ----  ----      -----    -----------
+  0       5   int8[5]   Tracks   Cylinder numbers in this box.
+                                   -1 = unused slot (padding)
+  5       1   byte      pad      Alignment padding byte (ignored)
+  6      20   uint32[5] Bits     Sector bitmask per cylinder.
+                                   Bit i (0-21): 1 = sector i has data,
+                                   0 = sector i is all zeros.
+                                   0x003FFFFF = all 22 sectors present.
+
+--- NEW FORMAT (ZOM5) fields at offset 26 ---
+ 26       2   uint16    Length          Compressed data size (bytes)
+ 28       2   uint16    SqueezedLength  Size after LH decompression (before RLE).
+                                          0 = no RLE stage was applied.
+ 30       2   uint16    FatLength       Original uncompressed size (unreliable;
+                                          must be recalculated from Bits[]).
+ 32       2   uint16    Packed          Non-zero if LH compression was applied
+ 34       4   uint32    CRC            CRC32 of the compressed data
+
+--- OLD FORMAT (ZOOM) fields at offset 26 ---
+ 26       2   uint16    Length          Compressed data size (bytes)
+ 28       2   uint8[2]  Bytes          Two RLE escape bytes (b1, b2)
+ 30       2   uint16    SqueezedLength  Size after LH decompression (before RLE)
+ 32       2   uint16    FatLength       Original uncompressed size (unreliable)
+ 34       2   uint16    Packed          Non-zero if LH compression was applied
+ 36       2   uint16    CRC            CRC-CCITT of the compressed data
+
+Note: FatLength should be recalculated as:
+  FatLength = (number of set bits across all valid Bits[] entries)
+              x (512 + 16 if USEHEADER, else 512)
+
+
+6. Track Header CRC
+--------------------
+Immediately follows the 38-byte track header.
+
+ZOM5: 4 bytes CRC32 of the 38 header bytes
+ZOOM: 2 bytes CRC-CCITT of the 38 header bytes
+
+Same algorithms as the file header CRC.
+
+
+7. Compressed Track Data
+------------------------
+Immediately follows the track header CRC.
+Size = Length field from the track header.
+
+The compressed data has its own CRC stored INSIDE the track header
+(the CRC field). This CRC covers the raw compressed bytes:
+  ZOM5: CRC32 of Length bytes
+  ZOOM: CRC-CCITT of Length bytes
+
+Decompression is a two-stage process:
+
+Stage 1 - LH Decompression (if Packed != 0):
+  Output size = SqueezedLength (if non-zero) or FatLength (if SqueezedLength == 0)
+  Algorithm: Adaptive Huffman + LZSS (see Section 8)
+
+Stage 2 - RLE Decompression (if SqueezedLength != 0):
+
+  NEW FORMAT (ZOM5) - RunDecode:
+    The LH output begins with a 4-byte header:
+      Bytes 0-2: 24-bit big-endian output size
+      Byte 3: pack byte (escape character)
+    Then for each subsequent byte:
+      If byte == pack_byte:
+        Read next byte as count. If count == 0: emit pack_byte once.
+        Otherwise read one more byte as fill; emit fill (count+1) times.
+      Else: emit byte literally.
+
+  OLD FORMAT (ZOOM) - RunDecodeOld:
+    Uses the Bytes field from the track header: b1 (byte 0) and b2 (byte 1).
+    Decodes BACKWARDS from end of source to start of destination.
+    For each byte (reading from end):
+      If byte == b1: read count, read fill; emit fill count times (0=256)
+      If byte == b2: read count; emit zero count times (0=256)
+      Else: emit byte literally.
+
+
+8. LH Compression Algorithm
+----------------------------
+Adaptive Huffman coding combined with LZSS (Lempel-Ziv-Storer-Szymanski).
+
+Parameters:
+  SeqMax = 60           Maximum match length
+  AnzChar = 317         256 literal bytes + 60 match lengths + 1 end marker
+  SizeTable = 633       AnzChar * 2 - 1
+  Root = 632            Tree root index
+  FreqLimit = 0x8000    Stop updating tree when root frequency reaches this
+
+Input: stream of 16-bit big-endian words.
+Bit reading: MSB-first from a 32-bit accumulator (bitbuf).
+
+Huffman Tree:
+  - 317 leaf symbols: 0-255 = literal bytes, 256-315 = match lengths 1-60,
+    316 = end-of-stream marker
+  - Initialized with uniform frequencies (all leaves = 1)
+  - Updated after each decoded symbol (if root freq < 0x8000)
+  - Tree nodes stored in arrays: freq[], son[], parent[], par_back[]
+  - Internal nodes at indices 317-632, leaves encoded as negative values
+  - Tree traversal: from son[Root], follow son[node] for bit=0, son[node+1] for bit=1
+
+Symbol Decoding:
+  If symbol < 256: literal byte
+  If symbol == 316: end of stream
+  If 256 <= symbol <= 315: match of length (symbol - 255)
+    Then decode distance:
+      Read 8 bits as byte value 'i'
+      Look up d_code_len[i] → (code, extra_bits)
+        code = (entry >> 8) & 0xFF; extra = entry & 0xFF
+      Read (extra + 1) more bits, appending to 'i'
+      distance = (i & 0x3F) | (code << 6)
+      Copy 'distance' bytes back from current output position
+
+Distance Table (d_code_len[256]):
+  Maps 8-bit values to packed (code, extra_bits) entries.
+  Codes 0x00-0x3F with 0-5 extra bits, yielding distances 0-4095.
+  Maximum lookback window: 4096 bytes.
+
+Adaptive Update:
+  After decoding each symbol, the frequency tree is updated using the
+  FGK (Faller-Gallager-Knuth) algorithm. Nodes are swapped to maintain
+  the sibling property (non-decreasing frequencies). The update traverses
+  from the decoded leaf to the root.
+
+  CRITICAL: The update loop uses do-while semantics (executes at least once),
+  matching the C implementation's `do { ... } while(i);` construct.
+
+  Bit Buffer: The 32-bit bitbuf accumulator is essential for correct distance
+  decoding. During tree traversal, bits shift into higher positions of the
+  32-bit value. The distance byte extraction uses `(bitbuf >> 16) & 0xFF`
+  to recover these bits.
+
+
+9. Track Unpacking
+------------------
+After decompression, the data contains only the non-zero sectors packed
+contiguously. The Bits[] bitmask indicates which sectors are present.
+
+For each cylinder at index 'pos' within a box:
+  1. Count set bits in Bits[0..pos-1] to find the byte offset in the buffer
+  2. For each of the 22 sector positions (bit 0 to bit 21):
+     - If Bits[pos] has bit i set: copy 512 bytes from the buffer
+     - If bit i is clear: fill 512 bytes with zeros
+  3. Sector stride is 512 bytes (or 528 if USEHEADER is set)
+
+When USEHEADER is set, each sector has 512 bytes of data followed by
+16 bytes of sector label. For ADF output, only the 512 data bytes are used.
+
+Output Layout (ADF):
+  Cylinder 0: sectors 0-10 (head 0), sectors 11-21 (head 1) = 11,264 bytes
+  Cylinder 1: same layout
+  ...
+  Cylinder 79: same layout
+  Total: 80 x 11,264 = 901,120 bytes
+
+
+10. ZoomNote (92 bytes, optional)
+---------------------------------
+Located at the absolute file offset specified by NoteOffset in the header.
+
+Offset  Size  Type      Field      Description
+------  ----  ----      -----      -----------
+  0      12   bytes     DateStamp  AmigaDOS DateStamp (3 x uint32)
+ 12      80   bytes     Note       Encrypted note text
+
+The note is decrypted with a simple cipher:
+  root = DateStamp[8..11] (uint32, big-endian)
+  For each byte i (0-79):
+    root = ((root * DateStamp[4..7]) & 0xFFFFFF + DateStamp[0..3]) & 0xFFFFFF
+    Note[i] ^= root % 256
+
+
+11. Encryption (optional)
+--------------------------
+If the Encrypted field in the header is non-zero, the compressed track data
+is encrypted before being written. The encryption key is derived from a
+password string.
+
+Key generation:
+  root = product of all password character values
+
+Encryption/Decryption (XOR cipher):
+  For each byte:
+    root = (((root * 4253261) & 0xFFFFFF) + 372837) & 0xFFFFFF
+    byte ^= (root % 256) ^ (~password[i % password_length])
+
+
+12. CRC32 Algorithm
+-------------------
+Polynomial: 0xEDB88320 (reflected form of 0x04C11DB7)
+Initial value: 0x00000000
+No final XOR (differs from standard zlib CRC32 which uses init=0xFFFFFFFF
+and final XOR=0xFFFFFFFF).
+
+Table generation:
+  for i in 0..255:
+    c = i
+    for bit in 0..7:
+      if c & 1: c = (c >> 1) ^ 0xEDB88320
+      else: c >>= 1
+    table[i] = c
+
+CRC computation:
+  crc = 0
+  for each byte b:
+    crc = table[(crc ^ b) & 0xFF] ^ (crc >> 8)
+
+
+13. Complete Byte Accounting
+-----------------------------
+Every byte in a .zom file is accounted for as follows:
+
+  [0..71]     File Header (72 bytes)
+  [72..73/75] Header CRC (2 bytes ZOOM, 4 bytes ZOM5)
+  [if TextLength > 0:]
+    [...+PackedLength]  Compressed text data
+    [...+2/4]           Text CRC
+  [for each track box:]
+    [...+38]            Track Header (38 bytes)
+    [...+2/4]           Track Header CRC
+    [...+Length]         Compressed track data
+  [if NoteOffset != 0:]
+    [NoteOffset..+92]   ZoomNote (92 bytes)
+
+The track data is contiguous - each box's compressed data immediately
+follows the previous box's track header CRC.

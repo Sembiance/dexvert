@@ -6,6 +6,5 @@ export class yuGiOhData extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	magic          = ["Yu Gi Oh! data"];
-	unsupported    = true;
-	notes          = "Extractor could be written, see: https://yugiohextractor.sourceforge.net/documentation.htm";
+	converters     = ["unYuGiOhData"];
 }

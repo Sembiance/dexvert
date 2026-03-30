@@ -6,5 +6,5 @@ export class onesaneGameArchive extends Format
 	ext            = [".idf"];
 	forbidExtMatch = true;
 	magic          = ["1nsane game data archive"];
-	unsupported    = true;
+	converters     = ["unOnesaneGameArchive"];
 }

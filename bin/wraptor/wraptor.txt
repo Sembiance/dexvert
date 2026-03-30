@@ -1,0 +1,364 @@
+Wraptor File Format Specification
+==================================
+Vibe coded by Claude
+
+Based on reverse engineering of 100 sample files (948 entries) from the
+sample0/ corpus, cross-referenced with Peter Schepers' WRA-WR3.TXT (v1.4,
+March 2004) and the GEOS VLIR specification.
+
+
+1. OVERVIEW
+-----------
+
+Wraptor is a compression/archiving utility by Bill Lucier (1995), published
+by Loadstar/Softdisk Publishing. It compresses C64/C128 files (including
+GEOS VLIR files) using a variant of the LZSS algorithm.
+
+File extensions:
+  .wra  - Wraptor versions 1.x and 2.x (had bugs with GEOS files)
+  .wr3  - Wraptor version 3.x (fixed GEOS handling; not backward-compatible)
+
+Some files in the wild have no extension at all but use the same format.
+
+Wraptor archives are simply a concatenation of individually compressed file
+entries. There is no global archive header, no file count, no offset table,
+and no version identifier.
+
+
+2. ARCHIVE STRUCTURE
+---------------------
+
+A Wraptor archive is a sequence of compressed file entries:
+
+  +------------------+------------------+-----+------------------+
+  |    Entry #1      |    Entry #2      | ... |    Entry #N      |
+  +------------------+------------------+-----+------------------+
+
+Each entry is self-contained. There are no inter-entry alignment requirements.
+Entries are located by scanning for the 4-byte signature.
+
+
+3. ENTRY FORMAT
+----------------
+
+Each entry has this layout:
+
+  Offset  Size      Field
+  ------  --------  ---------------------------------------------------
+  +0      4 bytes   Signature: FF 42 4C FF  ("BL" = Bill Lucier's initials)
+  +4      variable  Filename: null-terminated ASCII/PETASCII string
+                    (up to 16 characters for GEOS files, variable for others)
+  +N+1    1 byte    File type:
+                      01 = SEQ (Sequential)
+                      02 = PRG (Program)
+                      03 = USR (User) - may contain GEOS data
+                      04 = GEOS (GEOS file, Sequential or VLIR)
+  +N+2    variable  LZSS compressed data stream
+  +M      2 bytes   CRC-16 (little-endian: low byte, high byte)
+
+The CRC occupies the 2 bytes immediately after the compressed stream ends
+(as signaled by the LZSS EOF marker). This is always before the next entry's
+FF 42 4C FF signature, or at the end of the file for the last entry.
+
+IMPORTANT: The format stores no original or compressed file sizes, no offset
+to the next entry, and no version identifier. The file extension (.wra vs
+.wr3) is the only version discriminator.
+
+
+4. LZSS DECOMPRESSION ALGORITHM
+---------------------------------
+
+Wraptor uses a variant of LZSS (Lempel-Ziv-Storer-Szymanski) with variable-
+width dictionary offsets starting at 8 bits.
+
+Initialization:
+  read_bitsize = 8    (dictionary offset starts at 8 bits wide)
+  buffer = []         (output/dictionary buffer, up to 32768 bytes)
+
+Bit ordering: MSB (most significant bit) first within each byte.
+
+Main loop:
+  1. Read 1 control bit
+  2. If control = 0 (LITERAL):
+       - Read 8 bits -> literal byte value
+       - Append byte to output buffer
+  3. If control = 1 (DICTIONARY REFERENCE):
+       - Read read_bitsize bits -> dict_offset
+       - If dict_offset = 0:
+           - Read 1 more bit
+           - If bit = 0: END OF FILE (stop decompressing)
+           - If bit = 1: read_bitsize++ (grow dictionary address space)
+       - If dict_offset > 0:
+           - Read 5 bits -> rep_length (0-31)
+           - Copy rep_length bytes from buffer[dict_offset-1] onward
+             to end of buffer (note: overlapping copies are valid and
+             produce run-length repetition)
+  4. Repeat from step 1
+
+The dictionary offset is 1-indexed: dict_offset=1 refers to buffer[0].
+
+After the LZSS EOF signal, the remaining bits in the current byte are
+discarded. The next 2 bytes are the CRC.
+
+
+5. DECOMPRESSED DATA FORMAT BY FILE TYPE
+------------------------------------------
+
+5.1 SEQ (type 01) - Sequential Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The decompressed data is the raw sequential file content with no header.
+This is plain data (text, etc.) as stored on a C64 disk.
+
+5.2 PRG (type 02) - Program Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The decompressed data includes a 2-byte little-endian load address followed
+by the program data:
+
+  Offset  Size      Field
+  ------  --------  ------------------
+  +0      2 bytes   Load address (LE)
+  +2      variable  Program data
+
+Common load addresses:
+  $0801 = C64 BASIC start
+  $1C01 = C128 BASIC start
+  $0400 = GEOS application area
+
+5.3 USR (type 03) - User Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+USR files may contain either regular C64 data or GEOS file data. GEOS files
+on C64/C128 disks are stored with the USR file type, so Wraptor type 03
+preserves this original disk type.
+
+The decompressed data starts with a 9-byte GEOS directory entry header:
+
+  Offset  Size    Field
+  ------  ------  ------------------------------------------
+  +0      1 byte  GEOS file structure:
+                    00 = Sequential (or non-GEOS)
+                    01 = VLIR
+  +1      1 byte  GEOS file type:
+                    00 = Non-GEOS (regular USR file)
+                    01 = BASIC
+                    02 = Assembler
+                    03 = Data file
+                    04 = System File
+                    05 = Desk Accessory
+                    06 = Application
+                    07 = Application Data
+                    08 = Font File
+                    09 = Printer Driver
+                    0A = Input Driver
+                    0B = Disk Driver
+                    0C = System Boot File
+                    0D = Temporary
+                    0E = Auto-Execute File
+  +2      1 byte  Year (add 1900 for actual year)
+  +3      1 byte  Month (1-12)
+  +4      1 byte  Day (1-31)
+  +5      1 byte  Hour (0-23, 24-hour format)
+  +6      1 byte  Minute (0-59)
+  +7      2 bytes Size in sectors (LE: low byte, high byte)
+
+If GEOS file type (byte +1) is 00 (Non-GEOS):
+  The remaining data after the 9-byte header is the raw USR file content.
+
+If GEOS file type is non-zero:
+  The data continues with the GEOS info block and file data, structured
+  the same as type 04 (GEOS) entries. See section 5.4.
+
+5.4 GEOS (type 04) - GEOS Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The decompressed data has the same 9-byte header as USR type 03 (see above),
+followed by the GEOS info block and file data.
+
+Structure after the 9-byte header:
+
+  Offset  Size       Field
+  ------  ---------  ------------------------------------------
+  +9      254 bytes  GEOS Info Block (bytes $02-$FF of the disk
+                     sector; the 2-byte T/S link at $00-$01 is
+                     NOT included)
+
+  --- For Sequential GEOS files (structure = 00): ---
+  +263    variable   File data (all data sectors concatenated,
+                     with T/S links stripped; 254 bytes per full
+                     sector, last sector may be shorter)
+
+  --- For VLIR GEOS files (structure = 01): ---
+  +263    254 bytes  VLIR Record Table (bytes $02-$FF of the
+                     record block sector; T/S link NOT included).
+                     Contains up to 127 track/sector pairs:
+                       TT SS = Present record (original disk T/S)
+                       00 FF = Empty/deleted record
+                       00 00 = End of records
+  +517    variable   VLIR record data (all records' data sectors
+                     concatenated sequentially, with T/S links
+                     stripped)
+
+
+5.5 GEOS Info Block Layout
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The 254-byte info block (stored without the 2-byte T/S link) corresponds
+to bytes $02-$FF of a standard GEOS info sector:
+
+  Offset  Size       Field
+  (in IB)
+  ------  ---------  ------------------------------------------
+  +0      1 byte     Icon width in bytes (usually 3 = 24 pixels)
+  +1      1 byte     Icon height in pixels (usually 21)
+  +2      1 byte     ID byte 3 (usually $BF)
+  +3      63 bytes   Icon bitmap (sprite format)
+  +66     1 byte     C64 file type ($82=PRG, $83=USR, etc.)
+  +67     1 byte     GEOS file type (same values as header byte +1)
+  +68     1 byte     GEOS file structure (00=Seq, 01=VLIR)
+  +69     2 bytes    Program load address (LE)
+  +71     2 bytes    Program end address (LE)
+  +73     2 bytes    Program start address (LE)
+  +75     20 bytes   Class text (null-terminated ASCII)
+  +95     20 bytes   Author name (null-terminated ASCII)
+  +115    20 bytes   Parent application name (if document)
+  +135    32 bytes   Reserved / application-specific
+  +152    96 bytes   Description (null-terminated ASCII)
+
+Note: Offsets above are relative to the start of the 254-byte info block
+data as stored in the Wraptor stream (byte $02 of the disk sector = offset
+0 here). Add 2 to get the original disk sector offset.
+
+
+5.6 VLIR Record Table
+~~~~~~~~~~~~~~~~~~~~~~~
+The 254-byte record table contains up to 127 two-byte entries, each
+representing a VLIR record:
+
+  Byte pair   Meaning
+  ---------   ----------------------------------------
+  TT SS       Record present. TT/SS are the original
+              track/sector of the chain's first sector
+              on the source disk.
+  00 FF       Record is empty/unavailable.
+  00 00       End of record list. No more records follow.
+
+After the 00 00 terminator, remaining bytes are zero-padded.
+
+The record data following the table contains the concatenated data for
+all present records in order. The original disk T/S values in the record
+table do not encode sizes; they are preserved from the source disk.
+
+For reconstruction to a disk image, each record's data occupies a chain
+of 254-byte sectors (T/S links stripped). The last sector of each record
+may be shorter than 254 bytes. The total data size combined with the
+sector count from the header enables reconstruction.
+
+
+6. CRC
+-------
+
+Each entry ends with a 2-byte CRC stored in little-endian format (low byte
+first). The CRC algorithm is computed during decompression over literal
+bytes only (dictionary-copied bytes are NOT included in the CRC calculation).
+
+The exact CRC polynomial and initial value are not documented in the original
+specification. The CRC is useful for integrity verification but the specific
+algorithm requires analysis of the Wraptor C64 binary.
+
+
+7. LOCATING ENTRIES IN AN ARCHIVE
+-----------------------------------
+
+Two methods:
+
+  1. Sequential decompression: Decompress each file in turn. The LZSS EOF
+     marker signals the end of each entry's data. Skip the 2-byte CRC, then
+     the next entry begins at the next FF 42 4C FF signature.
+
+  2. Signature scanning: Scan the entire file for FF 42 4C FF byte sequences.
+     There is a small theoretical risk of false positives (the signature
+     appearing in compressed data), but this is extremely rare in practice.
+
+
+8. DIFFERENCES BETWEEN WRA AND WR3
+------------------------------------
+
+  - WRA (versions 1.x/2.x): Had bugs with GEOS file compression/decompression.
+    Some .wra files may have corrupted GEOS data, particularly for VLIR files.
+    The VLIR record table may contain zeroed or invalid T/S pairs.
+
+  - WR3 (version 3.x): Fixed GEOS handling. Not backward-compatible with WRA.
+    The compression algorithm is the same, but the GEOS data structure is
+    reliably encoded.
+
+  - Non-GEOS files (PRG, SEQ, plain USR): Identical format in both versions.
+
+  - Some late .wra entries may be truncated if the archive was incompletely
+    written. The LZSS decompressor will encounter an unexpected end-of-data
+    instead of the proper EOF marker.
+
+
+9. NOTES ON RECONSTRUCTION
+----------------------------
+
+To reconstruct a GEOS file on a C64/C128 disk image:
+
+  1. Allocate sectors for the info block, record block (VLIR), and data.
+  2. Write the info block sector (prepend 00 FF as the T/S link).
+  3. For Sequential: write data in a sector chain, updating T/S links.
+  4. For VLIR:
+     a. Write the record block sector (prepend 00 FF, update T/S pairs
+        to point to actual allocated sectors).
+     b. For each present record: write its data as a chain of sectors.
+     c. Update the directory entry with info block T/S, record block T/S,
+        and GEOS metadata.
+
+The CVT (Convert 2.5) format is a common intermediate format for GEOS
+files that stores the directory entry, info block, record table, and
+concatenated record data in a single file. The decompressed Wraptor data
+maps naturally to CVT format.
+
+
+10. SAMPLE HEX DUMP
+---------------------
+
+A PRG file entry (from Schepers' specification):
+
+  0000: FF 42 4C FF 50 4F 4F 59 41 4E 00 02 00 82 04 60
+  0010: 80 50 01 16 41 59 0C 14 ...
+
+  FF 42 4C FF     Signature
+  50 4F 4F 59     "POOY"
+  41 4E 00        "AN" + null terminator
+  02              File type = PRG
+  00 82 04 60...  Compressed LZSS data stream
+
+  Decompresses to: 01 08 ... ($0801 = C64 BASIC load address)
+
+A GEOS file entry (type 04):
+
+  0000: FF 42 4C FF 44 52 49 56 45 52 20 50 41 54 43 48
+  0010: 45 52 00 04 [compressed data...]
+
+  FF 42 4C FF       Signature
+  "DRIVER PATCHER"  Filename
+  00                Null terminator
+  04                File type = GEOS
+  [data]            Compressed LZSS stream
+
+  Decompresses to:
+    00              GEOS structure = Sequential
+    06              GEOS type = Application
+    58 0A 0C 16 28  Date: 1988/10/12 22:40
+    37 00           Size: 55 sectors
+    03 15 BF ...    Info block (icon width=3, height=21, id=BF, ...)
+    [file data]     Sequential file data
+
+
+11. REFERENCES
+---------------
+
+  - WRA-WR3.TXT by Peter Schepers (v1.4, March 2004)
+    http://ist.uwaterloo.ca/~schepers/formats/WRA-WR3.TXT
+
+  - GEOS VLIR File Format by Peter Schepers (v1.4, November 2005)
+    https://ist.uwaterloo.ca/~schepers/formats/GEOS.TXT
+
+  - Wraptor v3.0 by Bill Lucier (1997), distributed by Loadstar

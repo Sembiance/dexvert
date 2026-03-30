@@ -118,8 +118,8 @@ def rewrite_external_guide_link(resolved):
         return None
     safe_guide = url_quote(guidename, safe="")
     if basename.lower() in ("main.html", "main.htm"):
-        return f"{safe_guide}/{safe_guide}.html"
-    return f"{safe_guide}/{safe_guide}.html#{escape_href_fragment('file-' + basename)}"
+        return f"../{safe_guide}/{safe_guide}.html"
+    return f"../{safe_guide}/{safe_guide}.html#{escape_href_fragment('file-' + basename)}"
 
 
 def rewrite_html(html, current_file, known_files):

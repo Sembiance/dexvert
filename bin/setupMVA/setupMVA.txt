@@ -1,0 +1,273 @@
+SetupMVA / Setup Program Archive format
+======================================
+
+Scope
+-----
+
+This document is derived from every file under `sample0/`.
+
+Observed corpus totals:
+- 100 archive files
+- 454 file records
+- 3 payload methods
+
+The extractor/parser that accompanies this document (`unSetupMVA.py`) consumes every byte in every sample file:
+- archive header
+- every per-file record header
+- every payload byte
+- exact end-of-file alignment after the last payload
+
+
+Top-level structure
+-------------------
+
+The file starts with an 8-byte archive header:
+
+- `0x00..0x03`: ASCII `mflh`
+- `0x04..0x07`: little-endian `u32` archive version
+
+All samples use:
+- magic `mflh`
+- archive version `1`
+
+Immediately after the 8-byte archive header, the file is a straight concatenation of entry records. There is no central directory and no footer. EOF after the last payload is significant.
+
+
+Entry record layout
+-------------------
+
+Offsets below are relative to the start of the entry, which begins with ASCII `mfen`.
+
+All sample entries use:
+- entry magic `mfen`
+- entry version `1`
+- header size `0x015a`
+
+Known layout:
+
+```
+0x000  4  char[4]  entry magic = "mfen"
+0x004  2  u16      entry version = 1
+0x006  2  u16      entry header size = 0x015a in every sample
+0x008  4  u32      source-file timestamp, Unix seconds
+0x00c  4  u32      pack/build timestamp, Unix seconds
+0x010  0x10c       NUL-terminated source path, padded with zeroes
+0x114  4  u32      unpacked size
+0x118  4  u32      packed size
+0x11c  4  u32      opaque field A
+0x120  4  u32      opaque field B
+0x124  4  u32      payload method
+0x128  4  u32      reserved; always 0 in the sample corpus
+0x12c  4  u32      tag/attribute word
+0x130  2  u16      extra flag
+0x132  0x28        NUL-terminated description string, padded with zeroes
+0x15a  ...         payload bytes
+```
+
+
+Timestamps
+----------
+
+`0x008` and `0x00c` decode cleanly as Unix timestamps.
+
+Observed behavior:
+- `0x008` tracks the original source file time
+- `0x00c` tracks the time the archive entry was packed
+
+Example from `sample0/43882/ENGINE.MVA`:
+- `INOCUCMD.EXE`
+  - source timestamp: 1998-04-09 16:39:54 UTC
+  - packed timestamp: 1998-04-17 21:59:09 UTC
+
+
+Source path field
+-----------------
+
+`0x010..0x11b` is a fixed-width 268-byte string slot.
+
+It contains an absolute build path such as:
+- `C:\wizinput\eng\PDMMDENG.HLP`
+- `I:\INOCULAN.95\SIG\WORK\ENG\EXAMINE.EXE`
+- `P:\DOC2HELP\2.0\SETUP\FILES\WINSYS\HWDLL.DLL`
+
+Unused bytes in the slot are zero.
+
+
+Payload methods
+---------------
+
+Method is the little-endian `u32` at offset `0x124`.
+
+Observed methods:
+
+1. `2`
+   - stored, uncompressed
+   - `packed size == unpacked size`
+
+2. `3`
+   - raw LHA/LZH `-lh5-` bitstream
+   - not a complete `.lzh` file by itself
+   - the payload can be decoded by wrapping it in a minimal level-0 LHA header that declares method `-lh5-`
+
+3. `4`
+   - zlib stream
+
+Observed counts in the sample corpus:
+- method `2`: 36 records
+- method `3`: 2 records
+- method `4`: 416 records
+
+
+Method 3 details
+----------------
+
+The two method-3 samples are:
+- `sample0/34777/G25.MVA`
+- `sample0/41678/g6.mva`
+
+Treating their payloads as raw `-lh5-` compressed data yields valid executables:
+- `HWDLL.DLL` -> PE32 DLL
+- `D2HTOOLS.DLL` -> 16-bit NE DLL
+
+The payload is not a standalone LHA archive. The surrounding SetupMVA header supplies the packed and unpacked sizes, while the extractor synthesizes a tiny temporary LHA wrapper to decode the raw stream.
+
+
+Truncated / spanned members
+---------------------------
+
+Two sample entries are physically shorter than their advertised packed size:
+
+- `sample0/32904/pdesk_dnav.mva`
+- `sample0/42993/disk_02\uninstal.mva`
+
+Common traits:
+- method `4` (zlib)
+- `extra_flag == 1`
+- the payload begins with a valid zlib stream
+- inflation yields a valid executable prefix, but the stream does not reach `Z_STREAM_END` before EOF
+
+Best interpretation:
+- `packed size` stores the full logical compressed size
+- the archive file only contains the first fragment of a larger packed member
+- `extra_flag == 1` marks this spanned / incomplete case
+
+`unSetupMVA.py` handles these records by:
+- parsing them without dropping any input bytes
+- inflating the available zlib prefix
+- writing the recovered partial output
+- reporting that the member is partial/spanned
+
+
+Tag/attribute word
+------------------
+
+`0x12c..0x12f` behaves like two packed 16-bit values:
+
+- low 16 bits: signed tag value
+- high 16 bits: attribute word
+
+Common observed 32-bit values:
+- `0x00200000`
+- `0x00200001`
+- `0x00200002`
+- `0x00200003`
+- `0x00200007`
+- `0x00000000`
+
+Observed high-word values:
+- `0x0020` most often
+- `0x0000` often
+- `0x0021` once
+
+Observed low-word values:
+- `0`
+- `1`
+- `2`
+- `3`
+- `4`
+- `5`
+- `7`
+- `9`
+- `17`
+- `-2`
+- `-3`
+- `-4`
+
+The exact semantics of the low 16-bit tag are product-specific and were not required to extract any sample. The high word behaves like a DOS/Windows attribute field.
+
+
+Extra flag and description
+--------------------------
+
+`0x130..0x131` is usually zero. Two sample records use value `1`.
+
+`0x132..0x159` is a 40-byte NUL-terminated string slot.
+
+Observed uses:
+- empty string
+- `Always`
+- human-readable file descriptions, e.g. DATMAN sample entries
+
+This field is metadata only. It does not affect payload decoding.
+
+
+Opaque fields
+-------------
+
+Two 32-bit fields remain structurally accounted for but semantically unidentified:
+
+- `0x11c`: opaque field A
+- `0x120`: opaque field B
+
+They are not needed to decode any sample.
+
+Observed facts:
+- `0x128` is always zero, so there is no hidden secondary size or checksum there
+- corrupting or ignoring `0x11c` and `0x120` does not affect extraction logic for the sample corpus
+- `0x120` frequently looks pointer-like in older archives (`0x7ffdf000`, `0x006ffc26`, etc.)
+
+Best current interpretation:
+- preserve them as raw metadata
+- do not treat them as trusted checksums
+
+
+Parsing algorithm
+-----------------
+
+1. Read and validate the 8-byte archive header.
+2. Set the cursor to offset `0x08`.
+3. While the cursor is not EOF:
+   - validate `mfen`
+   - read the entry header
+   - read `packed size`
+   - payload starts at `entry_offset + header_size`
+   - payload ends at `payload_start + packed_size`
+   - decode payload according to method `2`, `3`, or `4`
+   - advance the cursor to `payload_end`
+4. Parsing is only valid if the cursor lands exactly on EOF.
+
+
+Extractor path policy
+---------------------
+
+The archive stores absolute Windows build paths, and some archives contain duplicate basenames in different directories.
+
+To avoid collisions, `unSetupMVA.py` writes files beneath the output directory using the stored source path:
+
+- `C:\wizinput\eng\PDMMDENG.HLP` -> `<outputDir>/C/wizinput/eng/PDMMDENG.HLP`
+- `I:\INOCULAN.95\SIG\WORK\ENG\EXAMINE.EXE` -> `<outputDir>/I/INOCULAN.95/SIG/WORK/ENG/EXAMINE.EXE`
+
+If an exact normalized path repeats, the extractor appends `__dupN` to keep both files.
+
+
+Validation summary
+------------------
+
+The reverse-engineered parser was validated against every file in `sample0/`:
+
+- all 100 archives parse cleanly
+- all 454 entry records are reachable through strict sequential parsing
+- all payload methods are decoded
+- every file ends exactly at the last record boundary
+
+That is sufficient to say the sample corpus is fully covered byte-for-byte.

@@ -1,11 +1,11 @@
-# Supported File Formats (3,668)
+# Supported File Formats (3,672)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (644)
+## Archive (648)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 0000 Package Archive | .0000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/package0000Archive/)
@@ -149,6 +149,7 @@ archive | [CPIO](http://fileformats.archiveteam.org/wiki/Cpio) | .cpio | [cpio](
 archive | Creative Assembly game resource data | .pack | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/creativeAssemblyGameResourceData/)
 archive | [CrLZH Compressed](http://fileformats.archiveteam.org/wiki/CrLZH) | .yyy | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) [lbrate](http://www.svgalib.org/rus/lbrate.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crLZH/)
 archive | [CROWD ANIM game data format](https://ja.wikipedia.org/wiki/CROWD) | .cwl | [gameViewerLinux](https://game-viewer.org/plugins.php) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crowdANIMGameDataFormat/)
+archive | Crowd Engine Audio Archive | .pck | [GARbro](https://github.com/shiikwi/GARbro) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/crowdEngineAudioArchive/)
 archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | [unar](https://github.com/incbee/Unarchiver) [lbrate](http://www.svgalib.org/rus/lbrate.html) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crunch/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunch-Mania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/crunchMania/)
 archive | Cruncher Packed | .exe .com | cup386 | [9 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
@@ -169,6 +170,7 @@ archive | [DIET](http://fileformats.archiveteam.org/wiki/DIET_(compression)) |  
 archive | Diet Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/dietPacked/)
 archive | [DietDisk Compressed](http://fileformats.archiveteam.org/wiki/Diet_Disk) |  | [dietDiskFatten](http://cd.textfiles.com/nightowl/nopv06/010A/DIETDISC.ZIP) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/dietDisk/)
 archive | Digital Illusions game archive | .pdo .rmpublisher .rmlanguage .pdt .dta | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/digitalIllusionsGameArchive/)
+archive | Digital Romance System Archive |  | [GARbro](https://github.com/shiikwi/GARbro) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/digitalRomanceSystemArchive/)
 archive | [Disk Doubler](http://justsolve.archiveteam.org/wiki/DiskDoubler) | .dd .sea | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/diskDoubler/)
 archive | [Disk Express](http://fileformats.archiveteam.org/wiki/Disk_Express) | .dxp | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/diskExpress/)
 archive | [Disk Express SFX](http://fileformats.archiveteam.org/wiki/Disk_Express) | .exe | [deark](https://entropymine.com/deark/) [diskExpressSFX](https://github.com/Sembiance/dexvert/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/diskExpressSFX/)
@@ -278,6 +280,7 @@ archive | [Icon Manager Icon Archive](http://fileformats.archiveteam.org/wiki/Ic
 archive | IFF CAT file | .iff | [iffCATExtract](https://github.com/Sembiance/iffCATExtract) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/iffCAT/)
 archive | IFF Fantavision |  | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/iffFantavision/) - Don't have support to convert this to a movie yet, so classify it as an archive and just extract what we can from it.
 archive | [IFF LIST File](https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF) |  | [unIFFLIST](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. The VAST MAJORITY of these files are for a program called 'Movie Setter' on the Amiga and contain ILBM's with custom 'FACE' properties. I'm not aware of a converter for either the Movie Setter files themselves or the resulting ILBM files sadly. Since the output IFFs from these are not useful (and it makes a LOT of them) I actually forbid that format from matching this, so it gets properly matched to the unsupported video/movieSetterSet format.
+archive | IKURA GDL Archive |  | [GARbro](https://github.com/shiikwi/GARbro) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/ikuraGDL/)
 archive | [ImageDisk Disk Image](http://fileformats.archiveteam.org/wiki/IMD) | .imd | [dskconv](http://www.seasip.info/Unix/LibDsk/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imageDisk/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/imageUSB/)
 archive | [IMP](http://fileformats.archiveteam.org/wiki/IMP) | .imp | [imp](https://www.sac.sk/download/pack/imp110d.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/imp/)
@@ -622,6 +625,7 @@ archive | Warcraft 2 Game Archive | .war | [gameextractor](https://sourceforge.n
 archive | Warrior Kings game data | .bcp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warriorKingsGameData/)
 archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
 archive | Whirlwind game data Package | .wpk | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | 
+archive | Will Co. Game Archive | .arc | [GARbro](https://github.com/shiikwi/GARbro) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/willCoArchive/)
 archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)

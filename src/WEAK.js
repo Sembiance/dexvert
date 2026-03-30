@@ -370,7 +370,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Xuse.BinOpener, archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:Pinky.A5rOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:Ail.DatOpener, archive:FrontWing.DatOpener
-	//		archive:Youkai.VoiceDatOpener, archive:Parsley.CgV1Opener
+	//		archive:Youkai.VoiceDatOpener, archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener
 	/^archive:Ankh\.GrpOpener /,

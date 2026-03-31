@@ -6,5 +6,5 @@ export class turboCADDrawing extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/TCW";
 	ext        = [".tcw"];
 	magic      = ["TurboCAD drawing", "KeyCAD Deluxe for Windows drawing", "KeyCAD Deluxe for Windows symbol"];
-	converters = ["tcw2svg"];
+	converters = ["vibe2svg"];
 }

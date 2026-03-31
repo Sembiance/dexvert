@@ -8,5 +8,5 @@ export class viacomNewMedia extends Format
 	ext            = [".vnm", ".000"];
 	forbidExtMatch = true;
 	magic          = ["Viacom New Media graphics", /^fmt\/1610( |$)/];
-	converters     = ["unViacomNewMedia"];
+	converters     = ["vibeExtract"];
 }

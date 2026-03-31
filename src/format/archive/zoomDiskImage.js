@@ -6,5 +6,5 @@ export class zoomDiskImage extends Format
 	ext            = [".zom"];
 	forbidExtMatch = true;
 	magic          = ["Zoom compressed disk image"];
-	converters     = ["unZoomDiskImage"];
+	converters     = ["vibeExtract[renameOut]"];
 }

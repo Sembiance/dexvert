@@ -6,5 +6,5 @@ export class amigaHardDiskPFS extends Format
 	ext            = [".hdf", ".adf"];
 	forbidExtMatch = true;
 	magic          = ["Amiga hard disk image (PFS)", "Amiga PFS file system"];
-	converters     = ["unAmigaPFS"];
+	converters     = ["vibeExtract"];
 }

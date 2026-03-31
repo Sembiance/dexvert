@@ -7,5 +7,5 @@ export class downloadableSoundBank extends Format
 	ext            = [".dls"];
 	forbidExtMatch = true;
 	magic          = ["DownLoadable Sound bank", "RIFF Datei: unbekannter Typ 'DLS '", /^Generic RIFF file DLS$/, "GigaSampler Sound bank", /^fmt\/955( |$)/];
-	converters     = ["dls2wav"];
+	converters     = ["vibe2wav"];
 }

@@ -8,5 +8,5 @@ export class oricTape extends Format
 	ext            = [".dat", ".tap"];
 	forbidExtMatch = true;
 	magic          = ["Oric Tape image", "Oric tape"];
-	converters     = ["unORICTape"];
+	converters     = ["vibeExtract"];
 }

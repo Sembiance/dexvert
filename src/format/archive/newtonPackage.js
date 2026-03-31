@@ -7,5 +7,5 @@ export class newtonPackage extends Format
 	ext            = [".pkg"];
 	forbidExtMatch = true;
 	magic          = ["Newton Package"];
-	converters     = ["unNewtonPackage"];
+	converters     = ["vibeExtract"];
 }

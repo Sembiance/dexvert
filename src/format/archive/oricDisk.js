@@ -8,5 +8,5 @@ export class oricDisk extends Format
 	ext            = [".dsk"];
 	forbidExtMatch = true;
 	magic          = ["Oric Image", "Oric disk image", "Oric MFM disk image"];
-	converters     = ["unORICDisk"];
+	converters     = ["vibeExtract"];
 }

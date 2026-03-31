@@ -4,5 +4,5 @@ export class amiga16vx extends Format
 {
 	name       = "Amiga 16VX Sound";
 	magic      = ["IFF data, 16SV", "Amiga IFF 16SVX Audio"];
-	converters = ["amiga16vx2wav"];
+	converters = ["vibe2wav[renameOut]"];
 }

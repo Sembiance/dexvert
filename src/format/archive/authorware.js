@@ -14,5 +14,5 @@ export class authorware extends Format
 		".a7p", ".a7r"
 	];
 	magic      = ["Authorware Application", "Unpackaged Authorware 3 for Windows file", "Authorware Packaged file", "Authorware APR Archive", "Authorware Archive"];
-	converters = ["unauthorware"];
+	converters = ["vibeExtract"];
 }

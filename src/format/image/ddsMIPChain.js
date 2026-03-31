@@ -4,5 +4,5 @@ export class ddsMIPChain extends Format
 {
 	name       = "DDS MIP Chain Image";
 	ext        = [".dds"];
-	converters = ["ddsMIPChain2png"];
+	converters = ["vibe2png"];
 }

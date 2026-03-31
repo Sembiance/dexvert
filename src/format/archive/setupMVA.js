@@ -6,5 +6,5 @@ export class setupMVA extends Format
 	ext            = [".mva", ".mvb"];
 	forbidExtMatch = true;
 	magic          = ["Setup Program Archive", "Archive: MVA"];
-	converters     = ["unSetupMVA"];
+	converters     = ["vibeExtract"];
 }

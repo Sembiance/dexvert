@@ -6,5 +6,5 @@ export class macOSSelfMountingImage extends Format
 	ext        = [".smi"];
 	website    = "http://fileformats.archiveteam.org/wiki/Apple_Disk_Image";
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="APPL" && macFileCreator==="oneb";
-	converters = ["unSMI"];
+	converters = ["vibeExtract"];
 }

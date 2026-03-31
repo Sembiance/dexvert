@@ -6,5 +6,5 @@ export class paintDotNetImage extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Paint.NET_image";
 	ext        = [".pdn"];
 	magic      = ["Paint.NET Image", /^Paint\.NET image data$/];
-	converters = ["pdn2png", "paintDotNet"];
+	converters = ["vibe2png", "paintDotNet"];
 }

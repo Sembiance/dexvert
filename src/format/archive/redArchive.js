@@ -13,5 +13,5 @@ export class redArchive extends Format
 		return supportingFiles?.length ? supportingFiles : false;
 	};
 	keepFilename = true;
-	converters   = ["unred"];
+	converters   = ["vibeExtract"];
 }

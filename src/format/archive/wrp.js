@@ -8,5 +8,5 @@ export class wrp extends Format
 	ext            = [".wrp"];
 	forbidExtMatch = true;
 	magic          = ["Warp compressed disk image"];
-	converters     = ["unWRP"];
+	converters     = ["vibeExtract"];
 }

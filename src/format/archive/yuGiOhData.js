@@ -6,5 +6,5 @@ export class yuGiOhData extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	magic          = ["Yu Gi Oh! data"];
-	converters     = ["unYuGiOhData"];
+	converters     = ["vibeExtract"];
 }

@@ -8,5 +8,5 @@ export class installerVISE extends Format
 	forbidExtMatch = true;
 	magic          = ["Installer VISE Mac package", "Installer: Vise"];
 	idMeta         = ({macFileCreator}) => macFileCreator==="VIS3";
-	converters     = ["unvise"];
+	converters     = ["vibeExtract"];
 }

@@ -6,5 +6,5 @@ export class fizArchive extends Format
 	ext            = [".fiz"];
 	forbidExtMatch = true;
 	magic          = ["FIZ archive data", "Maximus installer archive format"];
-	converters     = ["unFIZ"];
+	converters     = ["vibeExtract"];
 }

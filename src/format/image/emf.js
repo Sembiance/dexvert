@@ -9,7 +9,7 @@ export class emf extends Format
 	magic        = ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile", "image/emf", /^deark: emf \(EMF\+?\)$/, /^fmt\/(344|345)( |$)/, /^x-fmt\/153( |$)/];
 	metaProvider = ["image"];
 	converters   = [
-		"emf2svg",
+		"vibe2svg[autoCrop]",
 		"deark[module:emf]", "convert[format:emf][matchType:magic]", `abydosconvert[format:${this.mimeType}]`
 		//...["irfanView", "photoDraw", "hiJaakExpress", "canvas[nonRaster]"].map(v => `${v}[matchType:magic]`)
 	];

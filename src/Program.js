@@ -134,6 +134,8 @@ export class Program
 			r.chainParent = chainParent;
 		if(originalInput)
 			r.originalInput = originalInput;
+		if(format?.formatid)
+			r.format = format;
 		if(this.cwd)
 		{
 			const newCWD = await this.cwd(r);

@@ -7,5 +7,5 @@ export class soundFont1 extends Format
 	ext            = [".sbk"];
 	forbidExtMatch = true;
 	magic          = ["SoundFont 1.0", "Emu Sound Font (v1.0)"];
-	converters     = ["sbk2wav", "awaveStudio"];
+	converters     = ["vibe2wav", "awaveStudio"];
 }

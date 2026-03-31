@@ -6,5 +6,5 @@ export class ensoniqDiskImage extends Format
 	ext            = [".gkh", ".eds", ".eda", ".ede", ".edt", ".edv"];
 	forbidExtMatch = true;
 	magic          = [/^Ensoniq .*disk image/];
-	converters     = ["ensoniq2wav", "awaveStudio"];
+	converters     = ["vibe2wav", "awaveStudio"];
 }

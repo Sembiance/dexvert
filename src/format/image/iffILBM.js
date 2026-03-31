@@ -27,7 +27,7 @@ export class iffILBM extends Format
 	];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="ILBM" || (macFileType==="IFF " && macFileCreator==="GKON");
 	metaProvider = ["image"];
-	converters   = ["ilbm2png"];
+	converters   = ["vibe2png"];
 	/* PREV CONVERTER LIST:
 	converters = [
 		`recoil2png`,	// recoil2png produces the best still images for iffILBM files

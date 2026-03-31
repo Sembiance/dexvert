@@ -7,5 +7,5 @@ export class corelPhotoPaint extends Format
 	ext        = [".cpt"];
 	magic      = ["Corel Photo Paint bitmap", "Corel Photo-Paint image", /^x-fmt\/144( |$)/];
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="CPT8" && macFileCreator==="Cpnt";
-	converters = ["cpt2png"];
+	converters = ["vibe2png"];
 }

@@ -6,5 +6,5 @@ export class wraptor extends Format
 	ext            = [".wra", ".wr3"];
 	forbidExtMatch = true;
 	magic          = ["WRAptor compressed", "WRAptor packer", /^fmt\/1611( |$)/];
-	converters     = ["unWraptor"];
+	converters     = ["vibeExtract"];
 }

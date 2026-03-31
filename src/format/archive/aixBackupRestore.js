@@ -6,5 +6,5 @@ export class aixBackupRestore extends Format
 	ext            = [".bff", ".img"];
 	forbidExtMatch = true;
 	magic          = ["AIX backup/restore format file", "AIX Backup File Format", "Archive: BFF", "BFF volume header"];
-	converters     = ["unAIXBFF"];
+	converters     = ["vibeExtract"];
 }

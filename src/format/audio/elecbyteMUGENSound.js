@@ -6,5 +6,5 @@ export class elecbyteMUGENSound extends Format
 	ext            = [".snd"];
 	forbidExtMatch = true;
 	magic          = ["Elecbyte M.U.G.E.N. sound"];
-	converters     = ["elecmugen2wav"];
+	converters     = ["vibe2wav"];
 }

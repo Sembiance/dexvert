@@ -6,5 +6,5 @@ export class netscapeSNM extends Format
 	ext            = [".snm"];
 	forbidExtMatch = true;
 	magic          = ["Netscape folder cache", "Netscape Mail Message"];
-	converters     = ["unNetscapeSNM"];
+	converters     = ["vibeExtract"];
 }

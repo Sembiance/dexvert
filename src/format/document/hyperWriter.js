@@ -18,5 +18,5 @@ export class hyperWriter extends Format
 		return supportingFiles?.length ? supportingFiles : false;
 	};
 
-	converters = ["hyperReader4", "hw2rtf"];
+	converters = ["hyperReader4", "vibe2rtf"];
 }

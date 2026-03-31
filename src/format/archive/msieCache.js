@@ -7,5 +7,5 @@ export class msieCache extends Format
 	forbidExtMatch = true;
 	filename       = [/^index\.dat$/i];
 	magic          = ["Microsoft Internet Explorer cache", "Internet Explorer cache file", "Internet Explorer Cache Datei"];
-	converters     = ["unMSIECache"];
+	converters     = ["vibeExtract"];
 }

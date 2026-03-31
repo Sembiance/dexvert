@@ -8,5 +8,5 @@ export class cpmHUFArchive extends Format
 	forbidExtMatch = true;
 	magic          = ["CP/M HUF compressed archive", "Archive: HUFF"];
 	weakMagic      = true;
-	converters     = ["unCPMHUF"];
+	converters     = ["vibeExtract"];
 }

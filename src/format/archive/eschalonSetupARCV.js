@@ -6,5 +6,5 @@ export class eschalonSetupARCV extends Format
 	ext   = [".arv"];					// Also .a01, .a02, etc. but magic seems pretty strong
 	magic = ["Eschalon Setup ARCV", "Archive: ARCV 2", "ASetup Installer Archive"];
 	// This can be a multi-part archive, but each file can be extracted on it's own, so no need to use auxFiles and the filename doesn't need to be kept original either
-	converters = ["unASetup", "arcvExtractor"];		// This claims support, but couldn't extract any of my samples: cmdTotal[wcx:InstExpl.wcx]
+	converters = ["vibeExtract", "arcvExtractor"];		// This claims support, but couldn't extract any of my samples: cmdTotal[wcx:InstExpl.wcx]
 }

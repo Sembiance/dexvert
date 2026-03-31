@@ -8,7 +8,7 @@ export class adLibInstrumentBank extends Format
 	ext         = [".bnk"];
 	magic       = ["Adlib instruments/sound bank", "AdLib instrument data"];
 	weakMagic   = true;
-	unsupported = true;
+	unsupported = true;	// only contains patch settings, no actual audio
 	notes       = xu.trim`
 		These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music.
 		No actual sampled audio, just parameters and register settings for the OPL2 FM chip.`;

@@ -1,0 +1,260 @@
+Amiga 16SV (16-bit Sampled Voice) File Format Specification
+============================================================
+Vibe coded by Claude
+
+Overview
+--------
+The 16SV format is a 16-bit extension of the Amiga 8SVX (8-bit Sampled Voice)
+format. It uses the Interchange File Format (IFF) container structure, with the
+FORM type identifier "16SV". Audio samples are stored as signed 16-bit
+big-endian integers.
+
+The format was used by several Amiga audio tools including DIGI Booster Pro,
+SoundBox, SampleZ, WaveTracer DS, and SoundFX.
+
+
+Overall File Structure
+----------------------
+All multi-byte integers are stored in big-endian (Motorola) byte order.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     FORM identifier: ASCII "FORM" (0x464F524D)
+    4       4     FORM data size (file size minus 8, as UINT32 big-endian)
+    8       4     FORM type: ASCII "16SV" (0x31365356)
+    12      ...   Sequence of IFF chunks (see below)
+
+Total file size = FORM data size + 8.
+
+
+IFF Chunk Structure
+-------------------
+Each chunk within the FORM container follows the standard IFF layout:
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     Chunk ID: 4 ASCII characters
+    4       4     Chunk data size in bytes (UINT32 big-endian)
+    8       N     Chunk data (N = chunk data size)
+    8+N     0-1   Pad byte (0x00) if N is odd, to align next chunk to even offset
+
+The pad byte is NOT included in the chunk data size field.
+
+Chunks may appear in any order, though VHDR typically appears first and BODY
+last. The BODY chunk is the only required chunk besides VHDR.
+
+
+Chunk Types
+-----------
+
+### VHDR - Voice Header (Required)
+
+Chunk ID: "VHDR" (0x56484452)
+Size: 20 bytes (always)
+
+Describes the audio parameters of the sample. Directly based on the 8SVX
+VHDR structure.
+
+    Offset  Size  Type    Description
+    ------  ----  ------  -----------
+    0       4     UINT32  oneShotHiSamples - Number of samples in the one-shot
+                          portion (per channel). For non-looping samples, this
+                          is the total number of samples per channel.
+    4       4     UINT32  repeatHiSamples - Number of samples in the repeat
+                          (loop) portion. 0 if the sample does not loop.
+    8       4     UINT32  samplesPerHiCycle - Number of samples per cycle in
+                          the highest octave, or 0 if not applicable. Commonly
+                          set to 32.
+    12      2     UINT16  samplesPerSec - Playback sample rate in Hz.
+                          Common values: 16384, 16726, 22800, 25032, 28000,
+                          44100.
+    14      1     UINT8   ctOctave - Number of octaves of waveform data.
+                          Typically 1.
+    15      1     UINT8   sCompression - Compression type.
+                          0 = uncompressed (the only value observed in 16SV).
+    16      4     UINT32  volume - Playback volume as a 16.16 fixed-point
+                          number. 0x00010000 = unity (1.0). Some tools may
+                          write non-standard values in this field; decoders
+                          should treat any non-zero value as valid but may
+                          default to unity for playback.
+
+The total number of samples per channel is:
+    oneShotHiSamples + repeatHiSamples
+
+BODY size relationship:
+    Mono:   BODY size = (oneShotHiSamples + repeatHiSamples) * 2
+    Stereo: BODY size = (oneShotHiSamples + repeatHiSamples) * 2 * 2
+
+
+### BODY - Sample Data (Required)
+
+Chunk ID: "BODY" (0x424F4459)
+Size: variable
+
+Contains the raw audio sample data as signed 16-bit big-endian integers.
+Each sample is 2 bytes in the range -32768 to +32767.
+
+Mono layout:
+    sample[0], sample[1], sample[2], ..., sample[N-1]
+    where N = oneShotHiSamples + repeatHiSamples
+
+Stereo layout (planar, matching 8SVX convention):
+    Left channel:  L[0], L[1], ..., L[N-1]
+    Right channel: R[0], R[1], ..., R[N-1]
+    where N = oneShotHiSamples + repeatHiSamples
+
+    The left channel samples are stored first as a contiguous block, followed
+    by the right channel samples as a contiguous block. This is "planar" or
+    "non-interleaved" storage.
+
+
+### CHAN - Channel Disposition (Optional)
+
+Chunk ID: "CHAN" (0x4348414E)
+Size: 4 bytes
+
+Specifies the channel configuration. If absent, the sample is mono.
+
+    Offset  Size  Type    Description
+    ------  ----  ------  -----------
+    0       4     UINT32  Channel disposition:
+                          2 = left channel only
+                          4 = right channel only
+                          6 = stereo (left + right)
+
+For stereo (value 6), the BODY contains both channels in planar layout (see
+BODY section above). The BODY size is doubled compared to mono.
+
+
+### NAME - Sample Name (Optional)
+
+Chunk ID: "NAME" (0x4E414D45)
+Size: variable
+
+Contains the sample name as a null-terminated ASCII string. May be padded
+with null bytes to fill the declared chunk size. Some tools write a fixed
+32-byte NAME chunk regardless of the actual name length.
+
+
+### ANNO - Annotation (Optional)
+
+Chunk ID: "ANNO" (0x414E4E4F)
+Size: variable
+
+Contains a free-form annotation string, typically identifying the software
+that created the file. Null-terminated ASCII. May contain trailing spaces
+before the null terminator.
+
+Examples observed:
+    "DIGI Booster Pro v2.17 "
+    "SoundBox by Richard Koerber"
+    "SampleZ_fio_16sv.library V0.1"
+    "Sample created with WaveTracer DS Mark IV `020  "
+    "This sample was performed with SoundFX "
+
+
+### AUTH - Author (Optional)
+
+Chunk ID: "AUTH" (0x41555448)
+Size: variable
+
+Contains the author/creator name as a null-terminated ASCII string.
+
+
+### (c)  - Copyright (Optional)
+
+Chunk ID: "(c) " (0x28632920) - note the trailing space
+Size: variable
+
+Contains copyright information as a null-terminated ASCII string.
+
+
+### ADSR - Envelope (Optional)
+
+Chunk ID: "ADSR" (0x41445352)
+Size: 16 bytes
+
+Describes an amplitude envelope for the sample. Observed in files created by
+WaveTracer DS.
+
+    Offset  Size  Type    Description
+    ------  ----  ------  -----------
+    0       4     UINT32  Attack - attack duration in samples (0 = instant)
+    4       4     UINT32  Decay - decay duration in samples (0 = none)
+    8       4     UINT32  Sustain - sustain level or duration (0 = none)
+    12      4     UINT32  Release - release point in samples. Observed as
+                          oneShotHiSamples + 1, indicating the end of the
+                          sample data.
+
+This chunk provides metadata for envelope-aware playback software. Simple
+decoders can ignore it and play the BODY data as-is.
+
+
+Byte Order
+----------
+All multi-byte fields in headers and chunk metadata are big-endian (Motorola
+byte order), consistent with the Amiga platform's 68000 processor family.
+
+Audio sample data in the BODY chunk is also big-endian signed 16-bit.
+
+
+String Encoding
+---------------
+All text chunks (NAME, ANNO, AUTH, (c) ) use ASCII/Latin-1 encoding with null
+termination. Strings may be padded with spaces or null bytes to reach an even
+chunk size.
+
+
+Padding and Alignment
+---------------------
+Per the IFF specification, if a chunk's data size is odd, a single pad byte
+(0x00) is appended after the chunk data to align the next chunk to an even
+file offset. This pad byte is not included in the chunk size field.
+
+In practice, all observed 16SV files have even-sized chunks, so no pad bytes
+are present. Decoders should still handle the odd-size case per the IFF spec.
+
+
+Decoding Algorithm
+------------------
+1. Read and verify the FORM header (bytes 0-11).
+   - Confirm bytes 0-3 = "FORM"
+   - Read FORM size from bytes 4-7
+   - Confirm bytes 8-11 = "16SV"
+
+2. Parse chunks sequentially from offset 12.
+   - For each chunk, read the 4-byte ID and 4-byte size.
+   - Process known chunk types; skip unknown chunks.
+   - Advance by 8 + size + (1 if size is odd) bytes.
+
+3. Extract audio parameters from VHDR:
+   - Sample rate from samplesPerSec
+   - Total samples per channel from oneShotHiSamples + repeatHiSamples
+
+4. Determine channel count:
+   - If CHAN chunk present with value 6: stereo (2 channels)
+   - If CHAN chunk present with value 2 or 4: mono (1 channel, left or right)
+   - If CHAN chunk absent: mono
+
+5. Read BODY data:
+   - Interpret as signed 16-bit big-endian samples
+   - For stereo: first half is left channel, second half is right channel
+
+6. Convert for playback:
+   - Swap byte order from big-endian to little-endian (for x86/ARM platforms)
+   - For stereo: interleave L/R samples for standard PCM output
+
+
+Relationship to 8SVX
+---------------------
+The 16SV format is a direct extension of the Amiga 8SVX format (IFF FORM type
+"8SVX"). The key differences are:
+
+- FORM type is "16SV" instead of "8SVX"
+- Sample data is signed 16-bit (2 bytes per sample) instead of signed 8-bit
+- The ADSR chunk replaces the separate ATAK and RLSE chunks of 8SVX
+- All other chunk structures (VHDR, NAME, ANNO, AUTH, (c) , CHAN, BODY) are
+  identical in layout to their 8SVX counterparts
+
+The VHDR fields (oneShotHiSamples, repeatHiSamples, etc.) count samples,
+not bytes, so the same VHDR interpretation applies regardless of bit depth.

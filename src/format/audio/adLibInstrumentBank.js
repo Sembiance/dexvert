@@ -11,6 +11,5 @@ export class adLibInstrumentBank extends Format
 	unsupported = true;
 	notes       = xu.trim`
 		These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music.
-		Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh.
-		Awave Studio claims to support these, but under version 7 I couldn't get them to load.`;
+		No actual sampled audio, just parameters and register settings for the OPL2 FM chip.`;
 }

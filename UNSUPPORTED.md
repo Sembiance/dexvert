@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,002)
+# Unsupported File Formats (4,001)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -282,13 +282,12 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (73)
+## Audio (72)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
-[audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
+[audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. No actual sampled audio, just parameters and register settings for the OPL2 FM chip.
 [audio/sonixInstrument](https://discmaster.textfiles.com/search?format=sonixInstrument) | Aegis Sonix Instrument | .instr | [21 sample files](https://sembiance.com/fileFormatSamples/audio/sonixInstrument/) - The sampled .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 [audio/amSound](https://discmaster.textfiles.com/search?format=amSound) | AM Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/amSound/)
-[audio/amiga16vx](https://discmaster.textfiles.com/search?format=amiga16vx) | Amiga 16VX Sound |  | [1 sample file](https://sembiance.com/fileFormatSamples/audio/amiga16vx/)
 [audio/appleIIgsAudio](https://discmaster.textfiles.com/search?format=appleIIgsAudio) | Apple IIgs Audio |  | 
 [audio/appleIIgsSampledInstrumentFile](https://discmaster.textfiles.com/search?format=appleIIgsSampledInstrumentFile) | Apple IIgs Sampled Instrument File |  | 
 [audio/ariaSamplesBank](https://discmaster.textfiles.com/search?format=ariaSamplesBank) | ARIA Samples Bank | .bnk | 

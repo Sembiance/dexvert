@@ -7,5 +7,5 @@ export class unixArchiveOld extends Format
 	forbidExtMatch = true;
 	magic          = [/old (16|32)-bit-int (little|big)-endian archive/, "HP old archive"];
 	weakMagic      = true;
-	unsupported    = true;
+	unsupported    = true;	// wouldn't be useful to extract
 }

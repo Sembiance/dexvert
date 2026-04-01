@@ -1,0 +1,653 @@
+MoPaQ (MPQ) Archive Format Specification
+=========================================
+Vibe coded by Claude
+
+Based on reverse engineering of 41 sample files spanning Diablo I, Diablo II,
+StarCraft, Warcraft III, World of Warcraft, StarCraft II, and Blizzard
+Installer archives.
+
+Reference implementation: StormLib 9.31 by Ladislav Zezula
+  https://github.com/ladislav-zezula/StormLib
+
+
+1. OVERVIEW
+===========
+
+MoPaQ ("Mo'PaQ", Mike O'Brien Pack) is Blizzard Entertainment's proprietary
+archive format, used across most Blizzard games from 1996 to ~2014. It supports:
+
+  - Multiple compression algorithms (zlib, bzip2, LZMA, PKWARE DCL, Huffman,
+    IMA ADPCM mono/stereo, sparse/run-length)
+  - File encryption with key derived from filename
+  - Sector-based storage for streaming/random access
+  - Localized file variants (same path, different locale)
+  - Archive patching (incremental updates)
+  - Weak and strong digital signatures
+
+Four format versions exist:
+
+  Version 0 (v1): Original format. Header 0x20 bytes. Max 4 GB archives.
+                   Used by: Diablo I, StarCraft, Diablo II, Warcraft III.
+
+  Version 1 (v2): Extended format. Header 0x2C bytes. >4 GB via hi-block table.
+                   Used by: WoW (The Burning Crusade), SC2 maps, installers.
+
+  Version 2 (v3): Header 0x44 bytes. 64-bit archive size, HET/BET tables.
+                   Used by: WoW Cataclysm Beta.
+
+  Version 3 (v4): Header 0xD0 bytes. Adds MD5 checksums and raw chunk sizes.
+                   Used by: WoW Cataclysm+, Diablo III.
+
+All multi-byte integers are little-endian.
+
+
+2. FILE LAYOUT
+==============
+
+An MPQ file has the following general layout:
+
+  +---------------------------+  offset 0 (or MPQ offset for embedded archives)
+  |  User Data Header         |  (optional, only with MPQ\x1B signature)
+  |  (16 bytes)               |
+  +---------------------------+
+  |  User Data                |  (variable size, only if User Data Header present)
+  +---------------------------+
+  |  MPQ Header               |  (0x20, 0x2C, 0x44, or 0xD0 bytes)
+  +---------------------------+
+  |                           |
+  |  File Data                |  (compressed/encrypted file sectors)
+  |  (variable size)          |
+  |                           |
+  +---------------------------+
+  |  HET Table                |  (optional, v3/v4 only)
+  +---------------------------+
+  |  BET Table                |  (optional, v3/v4 only)
+  +---------------------------+
+  |  Hash Table               |  (encrypted, 16 bytes per entry)
+  +---------------------------+
+  |  Block Table              |  (encrypted, 16 bytes per entry)
+  +---------------------------+
+  |  Hi-Block Table           |  (optional, v2+ only, 2 bytes per entry)
+  +---------------------------+
+  |  Strong Signature         |  (optional, 256+4 bytes, outside archive)
+  +---------------------------+
+
+The MPQ header may appear at offset 0 or at a 512-byte-aligned offset
+within the file (e.g., embedded in an executable). StormLib searches for
+the MPQ\x1A signature at 512-byte boundaries.
+
+
+3. USER DATA HEADER
+===================
+
+Optional header preceding the MPQ header. Identified by magic MPQ\x1B.
+Used in StarCraft II maps for map preview thumbnails and metadata.
+
+  Offset  Size  Field
+  ------  ----  -----
+  0x00    4     Signature: 0x1B51504D ('MPQ\x1B')
+  0x04    4     Maximum user data size (bytes)
+  0x08    4     Offset to MPQ header, relative to start of this header
+  0x0C    4     User data header size
+
+The user data content follows this header and extends up to the
+user data size or the MPQ header offset, whichever comes first.
+
+NOT OBSERVED in the sample set. Documented for completeness as it is
+a defined part of the format (used in SC2 maps and D3 archives).
+
+
+4. MPQ HEADER
+=============
+
+4.1 Version 1 Header (0x20 bytes)
+----------------------------------
+
+  Offset  Size  Type    Field
+  ------  ----  ------  -----
+  0x00    4     DWORD   Signature: 0x1A51504D ('MPQ\x1A')
+  0x04    4     DWORD   Header size (0x20 for v1)
+  0x08    4     DWORD   Archive size (bytes, from start of header to end of archive)
+  0x0C    2     WORD    Format version (0 = v1)
+  0x0E    2     WORD    Sector size shift (sector_size = 512 << this_value)
+  0x10    4     DWORD   Hash table offset (relative to archive start)
+  0x14    4     DWORD   Block table offset (relative to archive start)
+  0x18    4     DWORD   Hash table entry count (must be power of 2)
+  0x1C    4     DWORD   Block table entry count
+
+Observed values in samples:
+  - Header size: 0x20 (all v1 archives)
+  - Format version: 0
+  - Sector size shift: 3 (sector = 4096 bytes), 5 (sector = 16384 bytes)
+  - Hash table sizes: 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 16384
+  - Block table sizes: 5 to 2910
+
+4.2 Version 2 Header Extension (0x2C bytes total)
+---------------------------------------------------
+
+Appended to the v1 header when format_version = 1:
+
+  Offset  Size  Type      Field
+  ------  ----  --------  -----
+  0x20    8     QWORD     Hi-block table offset (64-bit, relative to archive start)
+  0x28    2     WORD      Hash table offset high 16 bits
+  0x2A    2     WORD      Block table offset high 16 bits
+
+The full 64-bit hash/block table offsets are:
+  hash_table_offset_64  = hash_table_offset  | (hash_table_offset_hi  << 32)
+  block_table_offset_64 = block_table_offset | (block_table_offset_hi << 32)
+
+Observed: All hi-offset fields are 0 in the sample set (archives < 4 GB).
+
+4.3 Version 3 Header Extension (0x44 bytes total)
+---------------------------------------------------
+
+Appended to the v2 header when format_version = 2:
+
+  Offset  Size  Type    Field
+  ------  ----  ------  -----
+  0x2C    8     QWORD   Archive size (64-bit)
+  0x34    8     QWORD   BET table offset (relative to archive start)
+  0x3C    8     QWORD   HET table offset (relative to archive start)
+
+NOT OBSERVED in the sample set.
+
+4.4 Version 4 Header Extension (0xD0 bytes total)
+---------------------------------------------------
+
+Appended to the v3 header when format_version = 3:
+
+  Offset  Size  Type    Field
+  ------  ----  ------  -----
+  0x44    8     QWORD   Compressed hash table size (bytes)
+  0x4C    8     QWORD   Compressed block table size (bytes)
+  0x54    8     QWORD   Compressed hi-block table size (bytes)
+  0x5C    8     QWORD   Compressed HET table size (bytes)
+  0x64    8     QWORD   Compressed BET table size (bytes)
+  0x6C    4     DWORD   Raw data chunk size for MD5 verification
+  0x70    16    MD5     MD5 of block table (before decryption)
+  0x80    16    MD5     MD5 of hash table (before decryption)
+  0x90    16    MD5     MD5 of hi-block table
+  0xA0    16    MD5     MD5 of BET table (before decryption)
+  0xB0    16    MD5     MD5 of HET table (before decryption)
+  0xC0    16    MD5     MD5 of MPQ header (from offset 0x00 to 0xBF inclusive)
+
+NOT OBSERVED in the sample set.
+
+
+5. HASH TABLE
+=============
+
+The hash table provides the lookup mechanism for files. It is always encrypted
+with the key 0xC3AF3770, derived from HashString("(hash table)", MPQ_HASH_FILE_KEY).
+
+Each entry is 16 bytes:
+
+  Offset  Size  Type    Field
+  ------  ----  ------  -----
+  0x00    4     DWORD   Name hash A (HashString with hash type 0x100)
+  0x04    4     DWORD   Name hash B (HashString with hash type 0x200)
+  0x08    2     WORD    Locale (Windows LCID, 0 = neutral/English)
+  0x0A    1     BYTE    Platform (always 0)
+  0x0B    1     BYTE    Flags (reserved)
+  0x0C    4     DWORD   Block index (index into block table)
+
+Special block index values:
+  0xFFFFFFFF  Entry is empty (never used). Terminates hash chain searches.
+  0xFFFFFFFE  Entry was deleted. Does NOT terminate searches.
+
+File lookup algorithm:
+  1. Compute start_index = HashString(filename, MPQ_HASH_TABLE_INDEX) & (table_size - 1)
+  2. Walk the hash table from start_index (wrapping around)
+  3. Compare name_hash_A and name_hash_B with the stored values
+  4. If match and locale matches (or locale=0 for neutral), use block_index
+  5. If 0xFFFFFFFF encountered, file does not exist
+
+The hash table size MUST be a power of 2 to allow the bitmask operation.
+
+Observed locales in samples:
+  0     = Neutral (American English)
+  1028  = zh-TW (Chinese Traditional)
+  1029  = cs-CZ (Czech)
+  1031  = de-DE (German)
+  1033  = en-US (English US) - note: differs from neutral
+  1034  = es-ES (Spanish)
+  1036  = fr-FR (French)
+  1040  = it-IT (Italian)
+  1041  = ja-JP (Japanese)
+  1042  = ko-KR (Korean)
+  1045  = pl-PL (Polish)
+  1046  = pt-BR (Portuguese Brazil)
+  1049  = ru-RU (Russian)
+  2057  = en-GB (English UK)
+
+
+6. BLOCK TABLE
+==============
+
+The block table describes each file's location and attributes. It is always
+encrypted with the key 0xEC83B3A3, derived from
+HashString("(block table)", MPQ_HASH_FILE_KEY).
+
+Each entry is 16 bytes:
+
+  Offset  Size  Type    Field
+  ------  ----  ------  -----
+  0x00    4     DWORD   File position (offset from archive start)
+  0x04    4     DWORD   Compressed size (size of data in archive)
+  0x08    4     DWORD   Uncompressed size (0 if entry is not a file)
+  0x0C    4     DWORD   Flags
+
+File flags (bitmask):
+
+  Flag          Value       Description
+  ----------    ----------  ------------------------------------------------
+  IMPLODE       0x00000100  Compressed with PKWARE DCL implode
+  COMPRESS      0x00000200  Compressed with one or more methods (see sect. 9)
+  ENCRYPTED     0x00010000  File data is encrypted
+  KEY_V2        0x00020000  Encryption key adjusted by file offset (v2 key)
+  PATCH_FILE    0x00100000  File is a patch (BSdiff format with TPatchInfo)
+  SINGLE_UNIT   0x01000000  Stored as single unit (not split into sectors)
+  DELETE_MARKER 0x02000000  File is a deletion marker (for patch archives)
+  SECTOR_CRC    0x04000000  File has sector CRC checksums appended
+  EXISTS        0x80000000  File exists (set for valid entries)
+
+Observed flag combinations in samples:
+  0x80000000  EXISTS only (uncompressed, unencrypted)
+  0x80000100  IMPLODE|EXISTS
+  0x80000200  COMPRESS|EXISTS
+  0x80010000  ENCRYPTED|EXISTS (uncompressed but encrypted)
+  0x80010100  IMPLODE|ENCRYPTED|EXISTS
+  0x80010200  COMPRESS|ENCRYPTED|EXISTS
+  0x80030000  ENCRYPTED|KEY_V2|EXISTS
+  0x80030200  COMPRESS|ENCRYPTED|KEY_V2|EXISTS
+  0x81000000  SINGLE_UNIT|EXISTS
+  0x81000200  COMPRESS|SINGLE_UNIT|EXISTS
+  0x84000200  COMPRESS|SECTOR_CRC|EXISTS
+
+
+7. HI-BLOCK TABLE (Version 2+)
+================================
+
+For archives larger than 4 GB, a hi-block table provides the upper 16 bits
+of each file offset. Each entry is 2 bytes (WORD), indexed by block index.
+
+The full 64-bit file offset is:
+  offset_64 = block_entry.file_position | (hi_block_entry << 32)
+
+NOT OBSERVED in the sample set (all archives < 4 GB).
+
+
+8. HET AND BET TABLES (Version 3+)
+====================================
+
+These are alternative lookup structures for v3/v4 archives, using hash
+tables with extended name hashes (64-bit Jenkins hash) and bit-packed
+file entries.
+
+8.1 HET Table (Hash Extended Table)
+-------------------------------------
+
+  Signature: 0x1A544548 ('HET\x1A')
+
+  Header (32 bytes after common ExtHeader):
+    - Table size, entry count, total count
+    - Name hash bit size (bits per hash entry)
+    - Index size fields (total, extra, effective)
+    - Index table size
+
+  Contains:
+    - NameHash1 array: upper 8 bits of filename hash (1 byte each)
+    - BetIndex array: bit-packed indices into BET table
+
+8.2 BET Table (Block Extended Table)
+--------------------------------------
+
+  Signature: 0x1A544542 ('BET\x1A')
+
+  Header (88 bytes after common ExtHeader):
+    - Table size, entry count
+    - Table entry size (in bits)
+    - Bit indices and sizes for: file position, file size, compressed size,
+      flag index, and an unknown field
+    - NameHash2 fields (total bits, extra bits, effective bits, array size)
+    - Flag count and flag array
+
+  Contains:
+    - Bit-packed file table entries
+    - NameHash2 array (lower bits of filename hash)
+    - Flag array (unique flag values, referenced by flag index)
+
+NOT OBSERVED in the sample set.
+
+
+9. FILE DATA STORAGE
+=====================
+
+9.1 Sector-Based Storage
+--------------------------
+
+Files larger than the sector size are split into sectors. The sector size is
+determined by the header field:
+
+  sector_size = 512 << sector_size_shift
+
+Observed sector sizes:
+  sector_size_shift = 3  ->  4,096 bytes (4 KB) - most common
+  sector_size_shift = 5  -> 16,384 bytes (16 KB) - Blizzard installer archives
+
+For a compressed or imploded file (not SINGLE_UNIT), the file data starts
+with a sector offset table:
+
+  Sector Offset Table:
+    Array of (sector_count + 1) DWORDs
+    Entry[i] = byte offset of sector i relative to the file data start
+    Entry[sector_count] = total compressed data size
+    sector_count = ceil(uncompressed_size / sector_size)
+
+  If SECTOR_CRC flag is set, an additional sector_count DWORDs of CRC32
+  values follow the sector offset table.
+
+Each sector is independently compressed/encrypted:
+
+  Sector Data Layout:
+    - If ENCRYPTED: decrypt with file key (+ sector index for each sector)
+    - If COMPRESS: first byte is compression type mask, rest is compressed data
+    - If IMPLODE: data is PKWARE DCL imploded (no type byte)
+    - If neither: raw uncompressed data
+    - Last sector may be smaller than sector_size
+
+9.2 Single-Unit Storage
+-------------------------
+
+When SINGLE_UNIT flag is set, the entire file is stored as one unit:
+  - No sector offset table
+  - If compressed, first byte indicates compression type
+  - If encrypted, decrypted as a single block
+
+9.3 Encryption
+----------------
+
+MPQ file encryption uses a stream cipher based on a seed table:
+  - Base key = HashString(filename, MPQ_HASH_FILE_KEY)
+  - If KEY_V2: key = (base_key + file_offset) ^ file_size
+  - Sector offset table encrypted with key - 1
+  - Each sector encrypted with key + sector_index
+
+The encryption key can only be derived if the filename is known. Files with
+unknown names (listed as FileNNNNN.xxx) and ENCRYPTED flag cannot be
+decrypted.
+
+9.4 Compression Methods
+-------------------------
+
+When a sector has the COMPRESS flag, its first byte indicates the
+compression method(s) applied:
+
+  Byte  Method
+  ----  ------
+  0x01  Huffman (WAVE files only)
+  0x02  zlib (deflate)
+  0x08  PKWARE Data Compression Library (DCL/implode)
+  0x10  bzip2
+  0x12  LZMA (StarCraft II, NOT a bitmask combination)
+  0x20  Sparse/run-length encoding (StarCraft II)
+  0x40  IMA ADPCM mono (audio)
+  0x80  IMA ADPCM stereo (audio)
+
+Multiple methods can be combined as a bitmask (except 0x12/LZMA which is
+a distinct value). Decompression is applied in reverse order of compression.
+
+When IMPLODE flag is set instead of COMPRESS, PKWARE DCL is used directly
+without a compression type byte.
+
+
+10. INTERNAL (SPECIAL) FILES
+==============================
+
+MPQ archives may contain several internal files with reserved names:
+
+10.1 (listfile)
+-----------------
+A text file containing the paths of all files in the archive, one per line,
+using backslash (\) as the path separator. Without this file, file names
+are unknown and StormLib lists them as FileNNNNN.xxx.
+
+The (listfile) is the only way to recover filenames since the hash table
+stores only hashes, not actual names.
+
+10.2 (attributes)
+-------------------
+Contains extended file attributes. Format:
+
+  Offset  Size  Field
+  ------  ----  -----
+  0x00    4     Version (always 100 = v1.00)
+  0x04    4     Attribute flags bitmask:
+                  0x01 = CRC32 present
+                  0x02 = File time present
+                  0x04 = MD5 present
+                  0x08 = Patch bit present
+
+  Followed by arrays (one entry per block table entry):
+    - If flag 0x01: DWORD CRC32[block_table_size]
+    - If flag 0x02: QWORD FileTime[block_table_size]  (Windows FILETIME)
+    - If flag 0x04: BYTE MD5[block_table_size][16]
+    - If flag 0x08: Patch bit array (1 bit per entry, packed into bytes)
+
+10.3 (signature)
+------------------
+Contains a weak digital signature (512-bit RSA with Blizzard's public key).
+The signature covers a MD5 hash of the archive data.
+
+10.4 (patch_metadata)
+-----------------------
+Present in patch archives. Contains metadata about the patch.
+
+
+11. TRAILING DATA (OUTSIDE ARCHIVE)
+=====================================
+
+Some files contain data after the declared archive_size boundary.
+This data is NOT part of the MPQ archive proper but is part of the file.
+
+11.1 Weak Digital Signature (Post-Archive)
+--------------------------------------------
+
+  Offset  Size  Field
+  ------  ----  -----
+  0x00    4     Signature marker: 'NGIS' (0x5349474E little-endian)
+  0x04    256   RSA signature (2048-bit, Blizzard public key)
+
+  Total: 260 bytes
+
+Observed in: wow-final.MPQ, wow-partial-2.MPQ (sample 44881)
+
+11.2 SKIN Marker (Blizzard Downloader)
+-----------------------------------------
+
+  Offset  Size  Field
+  ------  ----  -----
+  0x00    4     Marker: 'NIKS' (0x534B494E little-endian, "SKIN" reversed)
+  0x04    4     Checksum/hash value (varies)
+  0x08    0-5   Padding (zero bytes, variable length)
+
+  Total: 8-13 bytes
+
+Observed in: 33586/[0], [0]_1, [0]_2, [0]_3 (Blizzard installer parts)
+This marker is appended by the Blizzard downloader/streaming installer
+to mark successfully downloaded archive segments.
+
+
+12. HASH STRING ALGORITHM
+===========================
+
+The MPQ hash function is critical for file lookup and table encryption.
+It uses a 1280-entry seed table initialized from a fixed algorithm.
+
+Seed Table Generation (StormCryptTable):
+
+  uint32_t seed = 0x00100001;
+  for (index1 = 0; index1 < 0x100; index1++) {
+      for (index2 = index1, i = 0; i < 5; i++, index2 += 0x100) {
+          seed = (seed * 125 + 3) % 0x2AAAAB;
+          temp1 = (seed & 0xFFFF) << 0x10;
+          seed = (seed * 125 + 3) % 0x2AAAAB;
+          temp2 = (seed & 0xFFFF);
+          StormBuffer[index2] = (temp1 | temp2);
+      }
+  }
+
+HashString Function:
+
+  uint32_t HashString(const char *key, uint32_t hash_type) {
+      uint32_t seed1 = 0x7FED7FED;
+      uint32_t seed2 = 0xEEEEEEEE;
+      for each char ch in key (uppercased):
+          seed1 = StormBuffer[hash_type + ch] ^ (seed1 + seed2);
+          seed2 = ch + seed1 + seed2 + (seed2 << 5) + 3;
+      return seed1;
+  }
+
+Hash types:
+  0x000 = MPQ_HASH_TABLE_INDEX  (hash table slot selection)
+  0x100 = MPQ_HASH_NAME_A       (first name verification hash)
+  0x200 = MPQ_HASH_NAME_B       (second name verification hash)
+  0x300 = MPQ_HASH_FILE_KEY     (encryption key derivation)
+
+Standard encryption keys:
+  Hash table key:  0xC3AF3770 = HashString("(hash table)", 0x300)
+  Block table key: 0xEC83B3A3 = HashString("(block table)", 0x300)
+
+
+13. TABLE ENCRYPTION/DECRYPTION
+=================================
+
+Both hash and block tables are encrypted using the same algorithm:
+
+  void DecryptBlock(uint32_t *data, uint32_t length, uint32_t key) {
+      uint32_t seed = 0xEEEEEEEE;
+      for (uint32_t i = 0; i < length; i++) {
+          seed += StormBuffer[0x400 + (key & 0xFF)];
+          uint32_t temp = data[i] ^ (key + seed);
+          key = ((~key << 0x15) + 0x11111111) | (key >> 0x0B);
+          seed = temp + seed + (seed << 5) + 3;
+          data[i] = temp;
+      }
+  }
+
+The key for each table:
+  - Hash table:  key = 0xC3AF3770
+  - Block table: key = 0xEC83B3A3
+  - File data:   key = HashString(plain_filename, 0x300) [+ modifications]
+
+
+14. SAMPLE FILE ANALYSIS
+==========================
+
+Complete analysis of all 41 sample files across 32 directories:
+
+  Dir    File                           Size        Ver  HdrSz  Sectors  HT      BT     Game
+  -----  -----------------------------  ----------  ---  -----  -------  ------  -----  ----
+  2462   [0]                            28,131,647  v1   0x20   4K       32      17     D2 (TRUNCATED)
+  11544  War3patch.mpq                  27,964,725  v1   0x20   4K       16384   774    WC3
+  11547  21)Shifters. Episode 21.scx    17,977,958  v1   0x20   4K       1024    9      SC1
+  11547  Patch_D2.mpq                   18,564,117  v1   0x20   4K       16384   1438   D2
+  11562  TToR323.mpq                    27,602,882  v1   0x20   4K       4096    449    WC3
+  11564  Wicked 1-1.scx                 18,470,087  v1   0x20   4K       1024    45     SC1
+  11564  Wicked 1-4.1(ADDON).scx        17,447,789  v1   0x20   4K       1024    45     SC1
+  12757  War3patch.mpq                  31,861,766  v1   0x20   4K       16384   674    WC3
+  12760  Patch_D2.mpq                   17,267,377  v1   0x20   4K       16384   966    D2
+  17771  Diablo II Speech               21,214,310  v1   0x20   4K       256     162    D2
+  22514  war3patch.mpq                  29,268,676  v1   0x20   4K       1024    422    WC3
+  23194  FuryWithin.mpq                 17,129,246  v1   0x20   4K       16384   461    WC3
+  23194  bg106_Patch_D2.mpq             19,387,324  v1   0x20   4K       16384   721    D2
+  23216  Patch_D2.mpq                   19,124,187  v1   0x20   4K       16384   1477   D2
+  29708  DIABDAT.MPQ                    3,797,812   v1   0x20   4K       4096    2910   D1 (TRUNCATED)
+  32042  Diablo II Graphics             20,786,750  v1   0x20   4K       4096    1010   D2
+  33586  [0]                            1,333,392   v2   0x2C   4K       256     102    Installer
+  33586  [0]_1                          2,084,832   v2   0x2C   4K       1024    456    Installer
+  33586  [0]_2                          555,920     v2   0x2C   4K       256     157    Installer
+  33586  [0]_3                          3,339,600   v2   0x2C   4K       1024    436    Installer
+  36304  war3patch.mpq                  36,189,446  v1   0x20   4K       2048    374    WC3
+  36554  Hex_d_2.8_EU-NA.SC2Map         2,187,551   v2   0x2C   4K       64      60     SC2
+  36845  BrooDat.mpq                    23,864,105  v1   0x20   4K       4096    965    SC:BW
+  37875  War3patch.mpq                  31,492,697  v1   0x20   4K       16384   627    WC3
+  37889  Patch_D2.mpq                   31,853,313  v1   0x20   4K       16384   1541   D2
+  38364  Diablo II Music                32,743,265  v1   0x20   4K       16      5      D2
+  39785  Patch_rt.mpq                   25,695,272  v1   0x20   4K       16384   928    SC:BW
+  41147  Starcraft Demo Data            29,005,415  v1   0x20   4K       4096    1420   SC1
+  41319  Patch_D2.mpq                   20,579,337  v1   0x20   4K       16384   386    D2
+  41376  Installer UI 1.MPQ             5,797,256   v2   0x2C   16K      256     116    Installer
+  41376  SkinUpdater.mpq                727,974     v2   0x2C   4K       256     157    Installer
+  41509  patch_d2.mpq                   29,207,860  v1   0x20   4K       16384   595    D2
+  41550  Installer UI 2.MPQ             40,865,740  v2   0x2C   16K      128     82     Installer
+  41698  install.exe                    18,592,914  v1   0x20   4K       1024    150    SC:BW (*)
+  42442  wow-partial-2.MPQ              30,820,230  v1   0x20   4K       4096    581    WoW
+  42442  wow-patch-backup.MPQ           24,873,162  v1   0x20   4K       4096    339    WoW
+  42447  wow-final.MPQ                  5,681,037   v2   0x2C   4K       256     152    WoW
+  42485  Patch_D2.mpq                   31,269,248  v1   0x20   4K       16384   629    D2
+  43240  Rus_Grapes_of_Wrath.mpq        21,416,208  v1   0x20   4K       1024    909    SC:BW
+  43240  Rus_Ressurection.mpq           18,919,569  v1   0x20   4K       1024    911    SC:BW
+  44881  wow-partial-2.MPQ              8,480,060   v2   0x2C   4K       512     248    WoW
+
+  (*) install.exe: MPQ archive with .exe extension (MPQ\x1A at offset 0)
+
+Total files across all non-truncated archives: 20,564
+
+Games represented:
+  D1     = Diablo I (1996)
+  D2     = Diablo II / Lord of Destruction (2000-2001)
+  SC1    = StarCraft (1998)
+  SC:BW  = StarCraft: Brood War (1998)
+  SC2    = StarCraft II (2010)
+  WC3    = Warcraft III: Reign of Chaos / The Frozen Throne (2002-2003)
+  WoW    = World of Warcraft (2004+)
+
+Truncated archives:
+  29708/DIABDAT.MPQ: Declared 143 MB, actual 3.8 MB (partial Diablo I CD image)
+  2462/[0]: Declared 52 MB, actual 28 MB (incomplete download/copy)
+  Hash and block tables are beyond EOF in both cases, preventing file enumeration.
+
+Trailing data:
+  33586/[0]:   8 bytes  (SKIN marker + checksum)
+  33586/[0]_1: 11 bytes (SKIN marker + checksum + padding)
+  33586/[0]_2: 8 bytes  (SKIN marker + checksum)
+  33586/[0]_3: 13 bytes (SKIN marker + checksum + padding)
+  42447/wow-final.MPQ:     260 bytes (NGIS weak digital signature)
+  44881/wow-partial-2.MPQ: 260 bytes (NGIS weak digital signature)
+
+
+15. BYTE-LEVEL FILE STRUCTURE
+===============================
+
+Every byte in an MPQ file falls into one of these regions:
+
+  Region                  Description
+  ----------------------  ------------------------------------------------
+  MPQ Header              Fixed-size header (0x20, 0x2C, 0x44, or 0xD0)
+  File Sector Data        Compressed/encrypted file data blocks
+  Hash Table              Encrypted file name hash lookup (16 bytes/entry)
+  Block Table             Encrypted file metadata (16 bytes/entry)
+  Hi-Block Table          High 16-bit file offsets (2 bytes/entry, v2+)
+  HET Table               Extended hash table (v3+)
+  BET Table               Extended block table (v3+)
+  User Data               Optional pre-header data (v2+ with MPQ\x1B)
+  Trailing Signature      NGIS weak digital signature (260 bytes, post-archive)
+  Trailing SKIN Marker    Blizzard downloader checksum (8-13 bytes, post-archive)
+  Gap/Padding             Alignment padding between structures (zero bytes)
+
+For a typical v1 archive:
+  [0x00..0x1F]                      MPQ Header (32 bytes)
+  [0x20..hash_table_offset-1]       File Sector Data
+  [hash_table_offset..block_table_offset-1]   Hash Table (encrypted)
+  [block_table_offset..archive_size-1]        Block Table (encrypted)
+  [archive_size..file_size-1]       Trailing data (signature/marker, if any)
+
+
+16. REFERENCES
+===============
+
+  - StormLib source code: https://github.com/ladislav-zezula/StormLib
+  - Blizzard MPQ format documentation (community): http://www.zezula.net/en/mpq/mpqformat.html
+  - Staredit Network MPQ specification: http://www.staredit.net/wiki/index.php/MoPaQ_Archive_Format

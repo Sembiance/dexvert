@@ -1,0 +1,440 @@
+FreeArc Archive Format Specification (.arc)
+============================================
+Vibe coded by Claude
+
+Reverse-engineered from FreeArc 0.60/0.666 archives.
+FreeArc by Bulat Ziganshin (http://freearc.org).
+
+
+1. OVERVIEW
+-----------
+
+A FreeArc archive is a sequence of blocks. Each control block (HEADER, DIR,
+FOOTER) consists of its compressed content followed by a local block
+descriptor. Data blocks have no descriptors; their metadata is stored in
+the DIR block that follows them.
+
+Overall archive layout:
+
+  [HEADER content (8 bytes)]
+  [HEADER descriptor]
+  [DATA BLOCK 0 (compressed)]
+  [DATA BLOCK 1 (compressed)]
+  ...
+  [DIR content (compressed)]
+  [DIR descriptor]
+  [FOOTER content (compressed)]
+  [FOOTER descriptor]
+
+For archives with multiple solid-block groups, the DATA+DIR pattern repeats.
+
+
+2. MAGIC SIGNATURE
+------------------
+
+All block descriptors and the header content begin with the 4-byte magic:
+
+  Offset  Size  Value
+  0       4     41 72 43 01  ("ArC" + 0x01)
+
+In little-endian as uint32: 0x01437241
+
+
+3. VARIABLE-LENGTH INTEGER ENCODING
+------------------------------------
+
+All non-fixed-width integers use a variable-length encoding (1-9 bytes).
+Values are stored little-endian. The low bits of the first byte(s) indicate
+the encoding width:
+
+  Condition              Width   Value extraction
+  (byte[0] & 1) == 0    1 byte  byte[0] >> 1            (0..127)
+  (word16 & 3) == 1     2 bytes word16 >> 2              (0..16383)
+  (word24 & 7) == 3     3 bytes word24 >> 3              (0..2097151)
+  (word32 & 15) == 7    4 bytes word32 >> 4              (0..268435455)
+  (word32 & 31) == 15   5 bytes word40 >> 5
+  (word32 & 63) == 31   6 bytes word48 >> 6
+  (word32 & 127) == 63  7 bytes word56 >> 7
+  (word32 & 255) == 127 8 bytes word64 >> 8
+  byte[0] == 255        9 bytes raw 8-byte LE value after byte[0]
+
+Encoding (write): value -> (value * 2^width_bits + tag) as width bytes
+  value < 128     -> (value*2 + 0) as 1 byte
+  value < 128^2   -> (value*4 + 1) as 2 bytes
+  value < 128^3   -> (value*8 + 3) as 3 bytes
+  value < 128^4   -> (value*16 + 7) as 4 bytes
+  ...and so on
+
+Exceptions: CRC fields, timestamps, and the archive signature are always
+fixed-width 4 bytes (uint32 little-endian).
+
+
+4. BLOCK TYPES
+--------------
+
+  Value  Name            Description
+  0      DESCR_BLOCK     (internal pseudo-type for descriptors)
+  1      HEADER_BLOCK    Archive header
+  2      DATA_BLOCK      Compressed file data (solid block)
+  3      DIR_BLOCK       Directory/catalog block
+  4      FOOTER_BLOCK    Archive footer
+  5      RECOVERY_BLOCK  Recovery information (optional)
+
+
+5. STRING ENCODING
+------------------
+
+All strings (filenames, compressor names, comments) are stored as UTF-8
+with a trailing NUL byte (0x00) terminator.
+
+
+6. HEADER BLOCK
+---------------
+
+The first block in the archive. Its content is always uncompressed (stored).
+
+Content (8 bytes):
+  Offset  Size  Field
+  0       4     Archive signature: 41 72 43 01
+  4       4     Archive version: make4byte(major_lo, major_hi, minor_lo, minor_hi)
+
+Observed versions:
+  00 00 03 09  = v0.3.9  (sample: empty.arc)
+  00 00 06 00  = v0.6.0  (samples: data1.arc, data2.arc, Data.arc)
+
+
+7. LOCAL BLOCK DESCRIPTOR
+--------------------------
+
+Immediately follows each control block's compressed content. This is the
+structure used for archive scanning and recovery.
+
+Fields (written sequentially):
+  #  Field              Encoding           Typical Size
+  1  Signature          Fixed uint32 LE    4 bytes
+  2  Block type         Varint             1-2 bytes
+  3  Compressor name    NUL-terminated     variable
+  4  Original size      Varint             1-5 bytes
+  5  Compressed size    Varint             1-5 bytes
+  6  Data CRC           Fixed uint32 LE    4 bytes
+  7  Descriptor CRC     Fixed uint32 LE    4 bytes
+
+The Descriptor CRC (field 7) is computed over bytes from field 1 through
+field 6 inclusive, using CRC-32 (see section 12).
+
+The block's compressed content is located at:
+  content_start = descriptor_position - compressed_size
+
+Example (header descriptor from empty.arc at offset 0x08):
+  41 72 43 01     signature
+  02              type = 1 (HEADER, varint: 1*2+0 = 0x02)
+  73 74 6f 72 69 6e 67 00  "storing\0"
+  10              origsize = 8 (varint: 8*2+0 = 0x10)
+  10              compsize = 8 (varint: 8*2+0 = 0x10)
+  0d 66 bf 1d     data CRC
+  b5 24 87 2a     descriptor CRC
+
+
+8. DIRECTORY BLOCK (DIR_BLOCK)
+------------------------------
+
+Placed immediately after the data (solid) blocks it describes. Contains
+all file metadata. The content is typically compressed with
+"lzma:1mb:normal:bt4:32".
+
+Content structure (struct-of-arrays layout):
+
+Part 1 -- Solid Block Descriptors:
+  Field                  Encoding
+  Number of solid blocks varint (N)
+  N x files-per-block    N varints
+  N x compressor name    N NUL-terminated strings
+  N x block offset       N varints (relative to DIR block position)
+  N x compressed size    N varints
+
+Part 2 -- Directory Names:
+  Field                  Encoding
+  Number of directories  varint (D)
+  D x directory path     D NUL-terminated UTF-8 strings
+
+  Directory paths use '/' as the separator. The root directory is stored
+  as an empty string.
+
+Part 3 -- File Metadata (F = total files across all solid blocks):
+  Field                  Encoding            Per-element Size
+  F x base filename      NUL-terminated      variable
+  F x directory index    varint              variable
+  F x file size          varint              variable
+  F x timestamp          Fixed uint32 LE     4 bytes (Unix time_t)
+  F x is-directory flag  1 byte (0 or 1)     1 byte
+  F x content CRC        Fixed uint32 LE     4 bytes
+
+Part 4 -- End Tag:
+  Field                  Encoding
+  TAG_END                varint (value 0)
+
+Block offsets are relative to the DIR block's content position. To compute
+the absolute offset of a data block:
+  absolute_offset = dir_content_start - stored_offset
+
+Files are stored in solid-block order. The files-per-block counts map each
+file to its solid block.
+
+
+9. DATA BLOCKS (Solid Blocks)
+------------------------------
+
+Data blocks contain raw compressed file data. They are NOT self-describing;
+their metadata (compressor, offset, compressed size) comes from the DIR
+block that follows them.
+
+Multiple files are concatenated before compression into a single "solid
+block." The DIR block records each file's individual size, allowing the
+unpacker to split the decompressed stream into individual files.
+
+Data blocks have no local descriptors.
+
+Compression pipelines use '+' to chain multiple compressor stages:
+  "rep:256mb+exe+delta+lzma:103mb:normal:bt4:128"
+
+Decompression applies stages in reverse order (right to left):
+  compressed -> lzma -> delta_inv -> exe_inv -> rep_inv -> original data
+
+Common compressor methods:
+  storing              No compression (identity)
+  lzma:Xmb:normal:bt4:Y  LZMA with X MB dictionary, bt4 match finder, Y fast bytes
+  ppmd:ORDER:Xmb       PPMd algorithm, order=ORDER, X MB memory
+  rep:Xmb              REP deduplication filter with X MB buffer
+  exe                  Executable (x86 BCJ) filter
+  delta                Delta filter
+  lzp:X:Y%:Z:hH:dXmb  LZ Prediction filter
+  dict:X:Y%:...        Dictionary compressor
+  tor:Xm:cY            Tornado compressor
+
+
+10. FOOTER BLOCK (FOOTER_BLOCK)
+--------------------------------
+
+The last control block in a standard archive. Contains an index of all
+preceding control blocks and archive-level metadata.
+
+To locate the footer:
+  1. Read last min(filesize, 4096) bytes
+  2. Scan backwards for the "ArC\x01" signature
+  3. Parse the local descriptor found there
+  4. Decompress the footer content using the described compressor
+
+Content structure:
+
+  Field                     Encoding
+  Number of control blocks  varint (C)
+  C x block entry:
+    Block type              varint
+    Compressor name         NUL-terminated string
+    Relative position       varint (relative to footer content position)
+    Original size           varint
+    Compressed size         varint
+    Data CRC                Fixed uint32 LE
+  Locked flag               1 byte (0 = unlocked, 1 = locked)
+  Old-format comment length varint (0 in modern archives)
+  Recovery record settings  NUL-terminated string (empty = "")
+
+  For archive version >= 0.6.0 (version bytes 00 00 06 00):
+    New-format comment length  varint
+    Comment data               comment_length bytes (UTF-8)
+
+Block positions in the footer are relative to the footer content position.
+To compute absolute position:
+  absolute_offset = footer_content_start - stored_relative_position
+
+The SFX module size (if any) equals the absolute position of the first
+block (the HEADER block).
+
+
+11. DECOMPRESSION OF CONTROL BLOCKS
+-------------------------------------
+
+Control blocks (DIR and FOOTER) typically use "lzma:1mb:normal:bt4:32"
+compression or "storing" (no compression).
+
+For LZMA-compressed control blocks:
+  - Algorithm: LZMA1 (not LZMA2)
+  - Dictionary size: 1 MB (1048576 bytes)
+  - Properties: lc=3, lp=0, pb=2 (standard LZMA defaults)
+  - The compressed data is a raw LZMA stream with NO header
+    (no properties byte, no dictionary size field, no uncompressed size field)
+  - The uncompressed size comes from the block descriptor's origsize field
+
+To decompress using standard tools, prepend a 13-byte LZMA-alone header:
+  Byte 0:    0x5D (properties: lc=3 + 9*(lp=0 + 5*pb=2) = 93)
+  Bytes 1-4: 00 00 10 00 (dictionary size 1048576 LE)
+  Bytes 5-12: uncompressed size as uint64 LE
+Then decompress as LZMA-alone format.
+
+
+12. CRC-32 ALGORITHM
+---------------------
+
+Uses the standard CRC-32 algorithm (same as pkzip/zlib):
+  Polynomial: 0xEDB88320 (reflected)
+  Initial value: 0xFFFFFFFF
+  Final XOR: 0xFFFFFFFF
+
+Equivalent to Python's zlib.crc32().
+
+CRC locations:
+  - Each file has a CRC in the DIR block (CRC of uncompressed file content)
+  - Each control block has a data CRC (CRC of uncompressed block content)
+  - Each local descriptor has a self-verification CRC (covers all descriptor
+    fields except the final 4-byte descriptor CRC itself)
+
+
+13. BYTE-LEVEL WALKTHROUGH: empty.arc (74 bytes, v0.3.9)
+----------------------------------------------------------
+
+Offset  Hex                          Description
+------  -------------------------    -----------------------------------------
+0x00    41 72 43 01                  HEADER content: signature "ArC\x01"
+0x04    00 00 03 09                  HEADER content: version v0.3.9
+0x08    41 72 43 01                  HEADER descriptor: signature
+0x0C    02                           HEADER descriptor: type=1 (varint)
+0x0D    73 74 6F 72 69 6E 67 00     HEADER descriptor: compressor "storing\0"
+0x15    10                           HEADER descriptor: origsize=8 (varint)
+0x16    10                           HEADER descriptor: compsize=8 (varint)
+0x17    0D 66 BF 1D                  HEADER descriptor: data CRC
+0x1B    B5 24 87 2A                  HEADER descriptor: descriptor CRC
+--- FOOTER content (20 bytes, uncompressed "storing") ---
+0x1F    02                           FOOTER content: 1 control block (varint)
+0x20    02                           Block 0: type=1/HEADER (varint)
+0x21    73 74 6F 72 69 6E 67 00     Block 0: compressor "storing\0"
+0x29    3E                           Block 0: relpos=31 (varint)
+0x2A    10                           Block 0: origsize=8 (varint)
+0x2B    10                           Block 0: compsize=8 (varint)
+0x2C    0D 66 BF 1D                  Block 0: data CRC
+0x30    00                           FOOTER content: locked=0 (byte)
+0x31    00                           FOOTER content: old_comment_len=0 (varint)
+0x32    00                           FOOTER content: recovery="" (NUL)
+--- FOOTER descriptor ---
+0x33    41 72 43 01                  FOOTER descriptor: signature
+0x37    08                           FOOTER descriptor: type=4 (varint)
+0x38    73 74 6F 72 69 6E 67 00     FOOTER descriptor: compressor "storing\0"
+0x40    28                           FOOTER descriptor: origsize=20 (varint)
+0x41    28                           FOOTER descriptor: compsize=20 (varint)
+0x42    37 B5 07 3F                  FOOTER descriptor: data CRC
+0x46    DC D9 D5 DD                  FOOTER descriptor: descriptor CRC
+                                     Total: 74 bytes (0x4A)
+
+
+14. BYTE-LEVEL WALKTHROUGH: data1.arc (53,310,311 bytes, v0.6.0)
+-----------------------------------------------------------------
+
+Offset        Hex                    Description
+----------    --------------------   ------------------------------------------
+0x00000000    41 72 43 01            HEADER content: signature
+0x00000004    00 00 06 00            HEADER content: version v0.6.0
+0x00000008    41 72 43 01            HEADER descriptor: signature
+0x0000000C    02                     HEADER descriptor: type=1 (varint)
+0x0000000D    73 74 6F..67 00        HEADER descriptor: "storing\0"
+0x00000015    10                     HEADER descriptor: origsize=8
+0x00000016    10                     HEADER descriptor: compsize=8
+0x00000017    EC 2A 14 19            HEADER descriptor: data CRC = 0x19142AEC
+0x0000001B    77 D7 5A 77            HEADER descriptor: desc CRC
+--- DATA BLOCK 0: 738 bytes (solid block for default.key) ---
+0x0000001F    [738 bytes]            Compressed with dict+lzp+ppmd pipeline
+--- DATA BLOCK 1: 53,308,857 bytes (solid block for 27 files) ---
+0x00000301    [53,308,857 bytes]     Compressed with rep+exe+delta+lzma pipeline
+--- DIR content: 538 bytes (LZMA compressed, decompresses to 894 bytes) ---
+0x032D70BA    [538 bytes]            DIR block compressed content
+--- DIR descriptor ---
+0x032D72D4    41 72 43 01            DIR descriptor: signature
+0x032D72D8    06                     DIR descriptor: type=3 (varint)
+0x032D72D9    6C 7A 6D..32 00       DIR descriptor: "lzma:1mb:normal:bt4:32\0"
+0x032D72F0    F9 0D                  DIR descriptor: origsize=894 (2-byte varint)
+0x032D72F2    69 08                  DIR descriptor: compsize=538 (2-byte varint)
+0x032D72F4    71 5D 3C F9            DIR descriptor: data CRC
+0x032D72F8    89 9C C9 0B            DIR descriptor: descriptor CRC
+--- FOOTER content: 69 bytes (LZMA compressed, decompresses to 58 bytes) ---
+0x032D72FC    [69 bytes]             FOOTER compressed content
+--- FOOTER descriptor ---
+0x032D7341    41 72 43 01            FOOTER descriptor: signature
+0x032D7345    08                     FOOTER descriptor: type=4 (varint)
+0x032D7346    6C 7A 6D..32 00       FOOTER descriptor: "lzma:1mb:normal:bt4:32\0"
+0x032D735D    74                     FOOTER descriptor: origsize=58 (varint)
+0x032D735E    8A                     FOOTER descriptor: compsize=69 (varint)
+            Wait - 0x8A as varint: (0x8A & 1) = 0, so value = 0x8A >> 1 = 69. ✓
+0x032D735F    EF D8 E7 E2            FOOTER descriptor: data CRC
+0x032D7363    E9 64 00 B8            FOOTER descriptor: descriptor CRC
+                                     Total: 53,310,311 bytes at 0x032D7367 ✓
+
+DIR content (decompressed, 894 bytes) contains:
+  2 solid blocks, 28 files total (1 + 27)
+  Block 0: compressor="dict:5kb:80%:l8192:m400:s100+lzp:5kb:92%:145:h13:d1mb+ppmd:16:384mb"
+           offset=53309595, compsize=738
+  Block 1: compressor="rep:256mb+exe+delta+lzma:103mb:normal:bt4:128"
+           offset=53308857, compsize=53308857
+  1 directory: "" (root)
+  28 files: default.key, catalog.dat, chardata.dat, FrontEnd.dat,
+            mission01-07.dat, mission01-07.sch, FrontEnd.sch,
+            CDS II.EXE, binkw32.dll, Mission01-07.dll
+
+FOOTER content (decompressed, 58 bytes) contains:
+  2 control blocks (HEADER at relpos=53310204, DIR at relpos=578)
+  locked=0, old_comment_len=0, recovery="", new_comment_len=0
+
+
+15. BYTE-LEVEL SUMMARY: data2.arc (58,465,186 bytes, v0.6.0)
+--------------------------------------------------------------
+
+Same structure as data1.arc:
+  HEADER at 0x00..0x1E (8+23 bytes)
+  DATA BLOCK 0: 158 bytes at 0x1F (dict+lzp+ppmd compressed)
+  DATA BLOCK 1: 58,464,406 bytes at 0xBD (rep+exe+delta+lzma compressed)
+  DIR descriptor at 0x037C1B0F (origsize=752, compsize=444)
+  FOOTER descriptor at 0x037C1B7C (origsize=58, compsize=69)
+
+DIR content: 2 solid blocks, 22 files (1 + 21)
+  Block 0: dict:1kb:80%:l8192:m400:s100+lzp:1kb:92%:145:h10:d1mb+ppmd:16:384mb
+  Block 1: rep:214mb+exe+delta+lzma:103mb:normal:bt4:128
+  1 directory: "" (root)
+  22 files: registry.REG, mission08-10.dat/sch, training01-04.dat/sch,
+            Mission08-10.dll, Training01-04.dll
+
+
+16. BYTE-LEVEL SUMMARY: Data.arc (465,331,613 bytes, v0.6.0)
+--------------------------------------------------------------
+
+  HEADER at 0x00..0x1E
+  DATA BLOCK 0: 0 bytes (storing, empty — directory-only block)
+  DATA BLOCK 1: 465,330,756 bytes at 0x1F (rep+exe+delta+lzma compressed)
+  DIR descriptor at 0x1BBC6509 (origsize=1128, compsize=678)
+  FOOTER descriptor at 0x1BBC6577 (origsize=59, compsize=70)
+
+DIR content: 2 solid blocks, 39 files (3 + 36)
+  Block 0: storing (compsize=0), contains 3 directory entries
+  Block 1: rep:486mb+exe+delta+lzma:103mb:normal:bt4:128
+  4 directories: "" (root), "Data", "Data/FMV", "Data/Sound"
+  3 directory entries: Data/, Data/FMV/, Data/Sound/
+  36 files: 27 .bik video files in Data/FMV/,
+            9 .psf sound files in Data/Sound/
+
+
+17. ARCHIVE OPENING PROCEDURE
+-------------------------------
+
+To open a FreeArc archive:
+  1. Read the last min(filesize, 4096) bytes
+  2. Scan backwards for "ArC\x01" signature — this locates the FOOTER descriptor
+  3. Parse the FOOTER descriptor to get compressor, sizes, CRCs
+  4. Validate the descriptor CRC
+  5. Locate FOOTER content at (descriptor_pos - compressed_size)
+  6. Decompress the FOOTER content
+  7. Validate the FOOTER content CRC
+  8. Parse the FOOTER to get locations of all control blocks
+  9. For each DIR block in the FOOTER's block list:
+     a. Compute absolute position from relative position
+     b. Read and decompress the DIR block content
+     c. Parse file metadata from the DIR block
+  10. For extraction, decompress each solid data block using its compressor
+      pipeline and split the output into individual files using sizes from
+      the DIR block metadata
+  11. Verify each extracted file's CRC-32 against the DIR block's stored CRC

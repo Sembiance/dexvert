@@ -516,14 +516,19 @@ For WIN platform entries:
   Followed by bounds rectangles and then image data.
 
   Shared palette (WIN only):
-    At offset 80 (0x50) from the start of the PIG entry, there is a
+    At offset 0x34 (52) from the start of the PIG entry, there is a
     256-color RGBQUAD palette (1024 bytes). This shared palette is used
     by 8bpp BITMAPINFOHEADER sub-images within the PIG. These 8bpp DIBs
     omit their own palette and rely on the PIG's shared palette at offset
-    80.
+    0x34. The palette can be validated by checking that every 4th byte
+    (the RGBQUAD reserved field) is 0.
 
-    Lower bit-depth sub-images (1bpp, 4bpp) include their own embedded
-    palettes within the BITMAPINFOHEADER structure as normal.
+    Some PIGs lack a shared palette at 0x34 (e.g., PIGs with many
+    sub-images where bounds data extends past 0x34, or very small PIGs).
+    In those cases, the 8bpp DIB includes its own embedded palette.
+
+    Lower bit-depth sub-images (1bpp, 4bpp) always include their own
+    embedded palettes within the BITMAPINFOHEADER structure.
 
   One or more BITMAPINFOHEADER sub-images follow at various bit depths.
   The highest bit-depth sub-image is typically the best quality version.

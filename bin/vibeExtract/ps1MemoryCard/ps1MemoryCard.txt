@@ -1,0 +1,306 @@
+PlayStation 1 Memory Card File Format Specification
+=====================================================
+Vibe coded by Claude
+
+Overview
+--------
+A PS1 memory card stores 128 KB (131072 bytes) of data, organized as 1024 frames
+of 128 bytes each, grouped into 16 blocks of 64 frames (8192 bytes) each.
+
+  Block 0:   Management (header, directory, broken sector info, write test)
+  Blocks 1-15: Save data storage (15 slots)
+
+Overall Layout
+--------------
+  Offset      Size    Description
+  ----------  ------  ---------------------------------------------------
+  0x0000      128     Header Frame (Frame 0)
+  0x0080      1920    Directory Frames (Frames 1-15, 15 x 128 bytes)
+  0x0800      128     Broken Sector List (Frame 16)
+  0x0880      2432    Broken Sector Replacement Data (Frames 17-35, 19 x 128 bytes)
+  0x1180      3456    Unused Frames (Frames 36-62, 27 x 128 bytes)
+  0x1F80      128     Write Test Frame (Frame 63)
+  0x2000      122880  Data Blocks 1-15 (15 x 8192 bytes)
+
+
+============================================================================
+HEADER FRAME (Frame 0) - Offset 0x0000, 128 bytes
+============================================================================
+
+  Offset  Size  Description
+  ------  ----  -------------------------------------------
+  0x00    2     Magic: ASCII "MC" (0x4D, 0x43)
+  0x02    125   Reserved (zero-filled)
+  0x7F    1     XOR checksum of bytes 0x00-0x7E
+
+
+============================================================================
+DIRECTORY FRAMES (Frames 1-15) - Offset 0x0080, 15 x 128 bytes
+============================================================================
+
+Each directory frame describes one of the 15 save slots. Directory frame N
+(0-indexed) corresponds to data block N+1 at file offset (N+1) * 0x2000.
+
+  Offset  Size  Description
+  ------  ----  -------------------------------------------
+  0x00    1     Block Allocation State (see below)
+  0x01    3     Reserved (zero-filled)
+  0x04    4     Save Size in bytes (uint32, little-endian)
+                  Only meaningful for first-link blocks (state 0x51/0xA1).
+                  Must be a multiple of 8192 (0x2000).
+                  Middle/end blocks store 0x00000000.
+  0x08    2     Next Block Pointer (uint16, little-endian)
+                  Index of the next directory entry in the block chain.
+                  Value range: 0-14 (maps to directory slots 0-14).
+                  0xFFFF = no next block (last or only block in chain).
+  0x0A    117   Filename (ASCII, null-terminated, zero-padded)
+                  Only populated for first-link blocks (state 0x51/0xA1).
+                  Format is typically: region+product_code[+extra]
+                  Examples: "BESLES-00477", "BASLUS-01041USCHRO00"
+                  The two-letter prefix indicates region:
+                    BA = America, BE = Europe, BI = Japan
+                  Followed by save type:
+                    S = save data
+                  Followed by license type:
+                    CUS = Sony of America
+                    CES = Sony of Europe
+                    LPS = Sony of Japan (old)
+                    LUS = Sony of America (old)
+  0x7F    1     XOR checksum of bytes 0x00-0x7E
+
+Block Allocation States:
+  0x51    Used, first link block (start of a save chain)
+  0x52    Used, middle link block (continuation of a multi-block save)
+  0x53    Used, end link block (last in a multi-block save chain)
+  0xA0    Free (unused slot)
+  0xA1    Deleted, was first link block (recoverable save)
+  0xA2    Deleted, was middle link block
+  0xA3    Deleted, was end link block
+  0x00    Uninitialized (some emulator formats leave unused entries zeroed)
+
+Note: For single-block saves, the state is 0x51 and next block is 0xFFFF.
+      The 0x52 and 0x53 states only appear in multi-block saves.
+
+Block Chain Example (3-block save starting at directory slot 4):
+  Slot 4: state=0x51, size=24576, next=5, filename="BESLES-0121900"
+  Slot 5: state=0x52, size=0,     next=6, filename=""
+  Slot 6: state=0x53, size=0,     next=0xFFFF, filename=""
+  Data is concatenated: block at 0xA000 + block at 0xC000 + block at 0xE000
+
+
+============================================================================
+BROKEN SECTOR LIST (Frame 16) - Offset 0x0800, 128 bytes
+============================================================================
+
+This frame tracks damaged sectors on the physical memory card.
+
+  Offset  Size  Description
+  ------  ----  -------------------------------------------
+  0x00    4     Broken sector entry 0 (uint32, little-endian)
+  0x04    4     Broken sector entry 1
+  ...           ... (up to 20 entries)
+  0x50    47    Padding
+  0x7F    1     XOR checksum of bytes 0x00-0x7E
+
+Each broken sector entry contains the sector number of a bad sector.
+A value of 0xFFFFFFFF means the entry is unused (no broken sector).
+In practice, most memory cards and emulator images have all entries set
+to 0xFFFFFFFF (no broken sectors).
+
+
+============================================================================
+BROKEN SECTOR REPLACEMENT DATA (Frames 17-35) - Offset 0x0880, 19 x 128 bytes
+============================================================================
+
+Replacement data for up to 20 broken sectors. Each 128-byte frame stores
+the replacement data for one broken sector. If no sectors are broken,
+these frames are typically zero-filled or contain 0xFF padding.
+
+Some emulator images use the same frame format as directory entries here
+(state byte + padding + XOR checksum).
+
+
+============================================================================
+UNUSED FRAMES (Frames 36-62) - Offset 0x1180, 27 x 128 bytes
+============================================================================
+
+Reserved for future use. Typically zero-filled. Some emulator images may
+write various patterns here. These bytes have no functional meaning.
+
+
+============================================================================
+WRITE TEST FRAME (Frame 63) - Offset 0x1F80, 128 bytes
+============================================================================
+
+The PS1 BIOS writes a copy of the header frame here as a write-test
+before performing card operations. In a properly functioning card image,
+this should be identical to the header frame at offset 0x0000.
+
+Some emulator images may leave this zeroed or contain stale data.
+
+
+============================================================================
+DATA BLOCKS (Blocks 1-15) - Offset 0x2000, 15 x 8192 bytes
+============================================================================
+
+Each data block is 8192 bytes. Directory entry N (0-14) maps to the data
+block at offset (N + 1) * 0x2000.
+
+  Directory Slot    Data Block Offset
+  --------------    -----------------
+  0                 0x2000
+  1                 0x4000
+  2                 0x6000
+  ...               ...
+  14                0x1E000
+
+The first data block of each save (the block referenced by a state=0x51
+directory entry) contains a Save Data Header followed by save data.
+Continuation blocks (referenced by state=0x52/0x53 entries) contain only
+raw save data with no additional header.
+
+
+============================================================================
+SAVE DATA HEADER - First 128-512 bytes of first data block
+============================================================================
+
+Located at the start of the first data block for each save:
+
+  Offset  Size  Description
+  ------  ----  -------------------------------------------
+  0x00    2     Magic: ASCII "SC" (0x53, 0x43) or "JG" (0x4A, 0x47)
+                  "SC" is the standard magic used by most games.
+                  "JG" is an alternate magic used by some games.
+                  Both use the identical header layout described below.
+  0x02    1     Icon Display Flag
+                  0x11 = Static icon, 1 frame
+                  0x12 = Animated icon, 2 frames
+                  0x13 = Animated icon, 3 frames
+  0x03    1     Block Count - number of data blocks this save occupies (1-15)
+  0x04    64    Save Title (Shift-JIS encoded, null-terminated, zero-padded)
+                  This is the title shown on the PS1 memory card manager.
+                  Uses Shift-JIS encoding which supports Japanese characters
+                  and full-width Latin characters.
+  0x44    28    Reserved / Game-Specific Data
+                  This region is under game control. Some games store:
+                  - Extended title text (Shift-JIS)
+                  - Identifiers (e.g. "CRD0" at offset 0x52)
+                  - Game-specific metadata
+                  - Zero padding
+  0x60    32    Icon Color Lookup Table (CLUT / Palette)
+                  16 colors, 2 bytes each, little-endian BGR555 format.
+  0x80    128   Icon Frame 1 (always present)
+                  16 x 16 pixels, 4 bits per pixel.
+  0x100   128   Icon Frame 2 (present if icon flag >= 0x12)
+  0x180   128   Icon Frame 3 (present if icon flag == 0x13)
+
+Total save header size:
+  1-frame icon: 256 bytes  (0x100)
+  2-frame icon: 384 bytes  (0x180)
+  3-frame icon: 512 bytes  (0x200)
+
+After the save header, the remaining data in the block (and any
+continuation blocks) contains the game's raw save data.
+
+
+============================================================================
+ICON CLUT FORMAT (BGR555, 16-bit, Little-Endian)
+============================================================================
+
+Each CLUT entry is a 16-bit value stored in little-endian byte order:
+
+  Bit    15     14-10    9-5      4-0
+         STP    Blue     Green    Red
+
+  STP:   Semi-Transparency Processing flag
+  Blue:  5-bit blue component  (0-31, maps to 0-255)
+  Green: 5-bit green component (0-31, maps to 0-255)
+  Red:   5-bit red component   (0-31, maps to 0-255)
+
+Color conversion to 8-bit RGB:
+  R8 = (R5 * 255) / 31    or equivalently:  (R5 << 3) | (R5 >> 2)
+  G8 = (G5 * 255) / 31    or equivalently:  (G5 << 3) | (G5 >> 2)
+  B8 = (B5 * 255) / 31    or equivalently:  (B5 << 3) | (B5 >> 2)
+
+Transparency rules for icons:
+  - Color value 0x0000: Fully transparent (RGBA = 0, 0, 0, 0)
+  - All other values: Fully opaque, convert BGR555 to RGB
+  - The STP bit does not affect icon transparency/opacity for extraction
+
+
+============================================================================
+ICON PIXEL DATA (4 Bits Per Pixel, 16x16)
+============================================================================
+
+Each icon frame is 128 bytes encoding a 16x16 pixel image at 4bpp.
+Each byte contains two horizontally adjacent pixels:
+
+  Byte layout:   [low nibble = left pixel] [high nibble = right pixel]
+
+  For byte value 0xAB:
+    Left pixel  = B (bits 3-0) = index into CLUT
+    Right pixel = A (bits 7-4) = index into CLUT
+
+Pixels are stored left-to-right, top-to-bottom:
+  Byte 0:   pixels (0,0) and (1,0)
+  Byte 1:   pixels (2,0) and (3,0)
+  ...
+  Byte 7:   pixels (14,0) and (15,0)
+  Byte 8:   pixels (0,1) and (1,1)
+  ...
+  Byte 127: pixels (14,15) and (15,15)
+
+
+============================================================================
+XOR CHECKSUM
+============================================================================
+
+Used in the header frame and all 15 directory frames. Computed as:
+
+  checksum = XOR of all bytes from offset 0x00 to 0x7E (127 bytes)
+  stored at offset 0x7F of the 128-byte frame
+
+Some emulator images may have incorrect checksums (e.g., zeroed out).
+Readers should validate but tolerate checksum mismatches.
+
+
+============================================================================
+FILE SIZE AND MAGIC
+============================================================================
+
+A valid PS1 memory card image is exactly 131072 bytes (128 KB = 0x20000).
+The file begins with the ASCII bytes "MC" (0x4D 0x43) at offset 0x0000.
+
+Common file extensions: .mcd, .mcr, .mc, .mem, .bin, .dat, .ps1
+
+
+============================================================================
+NOTES
+============================================================================
+
+1. All multi-byte integer fields are little-endian.
+
+2. Directory slot indices are 0-based (0-14), corresponding to blocks 1-15
+   in the memory card. The next-block pointer in directory entries uses
+   these same 0-based indices.
+
+3. The Shift-JIS title in the save data header uses full-width characters
+   for Latin letters and digits:
+     Full-width 'A' = 0x8260, 'a' = 0x8281, '0' = 0x824F
+     Full-width space = 0x8140
+   Standard ASCII may also appear in some titles.
+
+4. Multi-block saves use a linked-list chain through the directory entries.
+   The first block (state 0x51) contains the filename and save size.
+   Subsequent blocks (0x52, 0x53) have empty filenames and size=0.
+   Data blocks are concatenated in chain order to reconstruct the full save.
+
+5. Deleted saves (states 0xA1-0xA3) retain their directory metadata and
+   data blocks. The data can potentially be recovered until overwritten.
+
+6. A single-block save uses state 0x51 with next=0xFFFF.
+   The save data header's block count field should match the number of
+   blocks calculated from the directory entry's size field.
+
+7. The broken sector system is a hardware-level feature. Emulator images
+   virtually never have broken sectors.

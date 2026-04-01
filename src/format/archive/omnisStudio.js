@@ -6,5 +6,5 @@ export class omnisStudio extends Format
 	website     = "https://en.wikipedia.org/wiki/Omnis_Studio";
 	ext         = [".dap"];
 	magic       = ["Omnis 5 application"];
-	unsupported = true;
+	unsupported = true;	// only 7 unique samples on discmaster
 }

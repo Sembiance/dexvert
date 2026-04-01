@@ -7,6 +7,6 @@ export class sparseImage extends Format
 	website     = "https://en.wikipedia.org/wiki/Sparse_image";
 	ext         = [".sparseimage"];
 	magic       = ["Apple Sparse disk image"];
-	unsupported = true;
+	unsupported = true;	// only 1 on discmaster
 	notes       = `No known linux converter that I could find. Only *1* of these on discmaster, so not really worth bothering with, but I could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187`;
 }

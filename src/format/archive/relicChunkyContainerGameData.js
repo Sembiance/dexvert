@@ -7,6 +7,5 @@ export class relicChunkyContainerGameData extends Format
 	forbidExtMatch = true;
 	magic          = ["Relic Chunky container - game data", /^geArchive: RSH_RELICCHUNKY( |$)/];
 	converters     = ["gameextractor[codes:RSH_RELICCHUNKY]"];
-	unsupported    = true;
-	notes          = "Over 200,000 of these on discmaster and they don't appear to extract into any files that can be acted upon, so just skip this";
+	unsupported    = true;	// Over 200,000 of these on discmaster but they have widely varying extensions and spot checks don't appear to extract into any files that can be acted upon, so skip for now
 }

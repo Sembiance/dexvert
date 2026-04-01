@@ -7,5 +7,5 @@ export class sqwezArchive extends Format
 	ext         = [".sqz"];
 	magic       = ["SQWEZ Archiv gefunden", "SQWEZ compressed archive", "16bit DOS EXE SQWEZ self extracting archive", /^SQWEZ archive data/];
 	weakMagic   = true;
-	unsupported = true;
+	unsupported = true;	// only 1 file on discmaster
 }

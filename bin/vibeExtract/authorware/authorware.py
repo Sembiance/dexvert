@@ -176,7 +176,7 @@ def read_entries_pcrs(data, hdr):
     return entries
 
 
-def detect_icon_type(entry_data):
+def detect_icon_type(entry_data, entry_size=0):
     """Auto-detect icon type from data signatures (for WCRS files with no type field)."""
     if not entry_data or len(entry_data) < 4:
         return 0x06  # RawData
@@ -198,6 +198,13 @@ def detect_icon_type(entry_data):
             bpp = struct.unpack_from(f'{endian}H', entry_data, 14)[0]
             if 0 < w < 10000 and 0 < h < 10000 and planes == 1 and bpp in (1, 4, 8, 16, 24, 32):
                 return 0x35  # DIB
+    # Detect unsigned 8-bit PCM audio: large blocks with byte average ~128
+    sz = entry_size if entry_size else len(entry_data)
+    if sz >= 4096:
+        sample = entry_data[:min(len(entry_data), 512)]
+        avg = sum(sample) / len(sample)
+        if 112 < avg < 144:
+            return 0x37  # SoundData
     return 0x06  # RawData
 
 
@@ -236,7 +243,7 @@ def read_entries_wcrs(data, hdr):
         off = entry['data_offset']
         sz = entry['decomp_size']
         if off + sz <= len(data):
-            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)])
+            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)], sz)
 
     return entries
 
@@ -274,7 +281,7 @@ def read_entries_wcrs_v2(data, hdr):
         off = entry['data_offset']
         sz = entry['decomp_size']
         if off + sz <= len(data):
-            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)])
+            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)], sz)
 
     return entries
 
@@ -330,7 +337,7 @@ def read_entries_wpcr(data, hdr):
         off = entry['data_offset']
         sz = entry['decomp_size']
         if off + sz <= len(data):
-            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)])
+            entry['icon_type'] = detect_icon_type(data[off:off + min(sz, 64)], sz)
 
     return entries
 
@@ -420,9 +427,9 @@ def make_bmp_from_dib(dib_data):
 def dib_has_embedded_palette(pig_data, dib_offset):
     """Check if a DIB inside a PIG has its own palette or uses the PIG's shared one.
 
-    PIG entries store a shared 256-color palette at offset 80 for WIN.
-    The highest bpp DIB (8bpp) typically omits its own palette and uses
-    the shared one, while lower bpp DIBs include their own.
+    PIG entries store a shared 256-color palette at offset 0x34 for WIN.
+    8bpp DIBs use the shared palette when it exists; otherwise they have
+    their own embedded palette. 1bpp/4bpp DIBs always have their own.
     """
     if dib_offset + 44 > len(pig_data):
         return True  # assume it has one if we can't check
@@ -431,24 +438,9 @@ def dib_has_embedded_palette(pig_data, dib_offset):
     if bpp > 8:
         return False  # no palette needed
 
-    # Check first 4 bytes after header - palette starts with RGBQUAD (B,G,R,0)
-    # RLE data starts with run-length encoding (count, value pairs)
-    # Heuristic: if 4th byte of first "RGBQUAD" is 0, likely palette
-    after = pig_data[dib_offset + 40:dib_offset + 48]
-    if len(after) < 8:
-        return True
-
-    # For 1bpp/4bpp palettes, the entries should have byte[3]=0 (reserved)
-    # and reasonable RGB values. For 8bpp, check if the pixel data is RLE.
     if bpp == 8:
-        # 8bpp inside PIG: check if what follows looks like RLE8 or raw pixels
-        # RLE8 always starts with a count byte; if it's 0 it's an escape
-        # Palette RGBQUAD has reserved byte = 0
-        # Key insight: if byte at +43 (4th byte of first quad) is 0 AND
-        # byte at +47 is also 0, it's likely a palette.
-        # But the PIG shared palette already exists at offset 80, so
-        # 8bpp DIBs in PIGs almost always use the shared palette.
-        return False
+        # 8bpp: uses shared palette if available, otherwise has its own
+        return extract_pig_palette(pig_data) is None
     else:
         # 1bpp and 4bpp: include their own palette
         return True
@@ -485,12 +477,22 @@ def calc_dib_size(pig_data, offset, in_pig=False):
 
 
 def extract_pig_palette(pig_data):
-    """Extract the shared 256-color palette from a WIN PIG entry."""
-    if len(pig_data) < 80 + 1024:
-        return None
+    """Extract the shared 256-color palette from a WIN PIG entry.
+
+    The palette is 256 RGBQUAD entries (1024 bytes) at offset 0x34 in the PIG.
+    Each RGBQUAD has a reserved byte (4th byte) that must be 0. If the data
+    at 0x34 doesn't contain a valid palette, returns None.
+    """
     if pig_data[6:9] != b'WIN':
         return None
-    return pig_data[80:80 + 1024]
+    pal_off = 0x34
+    if len(pig_data) < pal_off + 1024:
+        return None
+    # Validate: all reserved bytes in the 256-entry palette must be 0
+    pal = pig_data[pal_off:pal_off + 1024]
+    if not all(pal[i + 3] == 0 for i in range(0, 1024, 4)):
+        return None
+    return pal
 
 
 def find_best_dib_in_pig(pig_data):
@@ -787,6 +789,7 @@ def main():
 
     extracted_count = 0
     audio_accum = None  # (start_eid, chunks) for combining consecutive 0x3C entries
+    pcm_accum = None    # (start_eid, chunks) for combining consecutive 0x37 entries (auto-detected)
     # Detect segment files (header file_size > actual data length)
     is_segment = hdr['file_size'] > len(data)
     skipped_segment = 0
@@ -980,12 +983,14 @@ def main():
 
         elif icon_type == 0x37:
             # Raw audio data - extract as WAV
-            # Look for preceding 0x36 SoundHeader to get sample rate
+            # Check if there's a preceding 0x36 SoundHeader (ACRS-style single entry)
+            has_header = False
             sample_rate = 22050  # default
             bits = 8
             channels = 1
             for prev in entries:
                 if prev['id'] == eid - 1 and prev['icon_type'] == 0x36:
+                    has_header = True
                     hdr_data = decompress_entry(data, prev)
                     if hdr_data and len(hdr_data) >= 42:
                         sample_rate = struct.unpack_from('<H', hdr_data, 40)[0]
@@ -996,13 +1001,50 @@ def main():
                         if channels == 0:
                             channels = 1
                     break
-            wav_data = make_wav(entry_data, sample_rate, bits, channels)
-            fname = f"{eid:03d}_{type_name}_{sample_rate}hz_{bits}bit.wav"
-            fpath = os.path.join(output_dir, fname)
-            with open(fpath, 'wb') as f:
-                f.write(wav_data)
-            print(f"  Entry {eid:3d} ({type_name}): WAV {sample_rate}Hz {bits}bit {channels}ch ({len(entry_data)} samples) -> {fname}")
-            extracted_count += 1
+            if has_header:
+                # Single ACRS-style SoundData with preceding header
+                wav_data = make_wav(entry_data, sample_rate, bits, channels)
+                fname = f"{eid:03d}_{type_name}_{sample_rate}hz_{bits}bit.wav"
+                fpath = os.path.join(output_dir, fname)
+                with open(fpath, 'wb') as f:
+                    f.write(wav_data)
+                print(f"  Entry {eid:3d} ({type_name}): WAV {sample_rate}Hz {bits}bit {channels}ch ({len(entry_data)} samples) -> {fname}")
+                extracted_count += 1
+            else:
+                # Auto-detected PCM (WPCR) - accumulate consecutive entries
+                if pcm_accum is None:
+                    # Check preceding entry for SoundHeader-like metadata
+                    pcm_sr = 22050
+                    pcm_bits = 8
+                    pcm_ch = 1
+                    cur_idx = entries.index(entry)
+                    if cur_idx > 0:
+                        prev = entries[cur_idx - 1]
+                        prev_data = decompress_entry(data, prev)
+                        if prev_data and 44 <= len(prev_data) <= 64:
+                            sr_val = struct.unpack_from('<H', prev_data, 0x28)[0] if len(prev_data) > 0x29 else 0
+                            if sr_val in (8000, 11025, 22050, 44100):
+                                pcm_sr = sr_val
+                                bps_val = prev_data[0x1B] if len(prev_data) > 0x1B else 8
+                                pcm_bits = bps_val if bps_val in (8, 16) else 8
+                                ch_val = struct.unpack_from('<H', prev_data, 4)[0] if len(prev_data) > 5 else 1
+                                pcm_ch = ch_val if 0 < ch_val <= 2 else 1
+                    pcm_accum = (eid, [entry_data], pcm_sr, pcm_bits, pcm_ch)
+                else:
+                    pcm_accum = (pcm_accum[0], pcm_accum[1] + [entry_data], pcm_accum[2], pcm_accum[3], pcm_accum[4])
+                next_idx = entries.index(entry) + 1
+                if next_idx >= len(entries) or entries[next_idx]['icon_type'] != 0x37:
+                    combined = b''.join(pcm_accum[1])
+                    start_eid, _, pcm_sr, pcm_bits, pcm_ch = pcm_accum
+                    wav_data = make_wav(combined, pcm_sr, pcm_bits, pcm_ch)
+                    fname = f"{start_eid:05d}_{type_name}_{pcm_sr}hz_{pcm_bits}bit.wav"
+                    fpath = os.path.join(output_dir, fname)
+                    with open(fpath, 'wb') as f:
+                        f.write(wav_data)
+                    duration = len(combined) / pcm_sr
+                    print(f"  Entry {start_eid}-{eid} ({type_name}): WAV {pcm_sr}Hz {pcm_bits}bit {pcm_ch}ch ({len(pcm_accum[1])} chunks, {duration:.1f}s) -> {fname}")
+                    extracted_count += 1
+                    pcm_accum = None
 
         elif icon_type == 0x3C:
             # Streaming audio - consecutive 0x3C entries form one file

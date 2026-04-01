@@ -1,0 +1,336 @@
+PAX Archive File Format Specification
+=====================================
+Vibe coded by Claude
+
+Format used by GEM-View (Atari ST) for distributing software archives.
+Compression library: LZFG by Dieter Fiebelkorn, (C) 1992-1993.
+Source path: F:\TC_WORK\PACKER\COD_LIB\LZFG.C (Turbo C, Atari ST).
+
+
+1. ARCHIVE STRUCTURE
+====================
+
+A .PAX file is a concatenation of independent LZF0 records, one per
+archived file. There is no global archive header or footer -- the file
+begins directly with the first record and ends after the last record's
+compressed data.
+
+    +------------------+
+    | LZF0 Record #1   |
+    +------------------+
+    | LZF0 Record #2   |
+    +------------------+
+    | ...               |
+    +------------------+
+    | LZF0 Record #N   |
+    +------------------+
+
+
+2. LZF0 RECORD FORMAT
+=====================
+
+Each record consists of a fixed 28-byte header, a 2-byte filename length
+field, a variable-length filename, and the compressed data stream.
+
+All multi-byte integer fields are big-endian (Motorola byte order).
+
+2.1 Fixed Header (28 bytes)
+----------------------------
+
+Offset  Size  Field       Description
+------  ----  ----------  ---------------------------------------------------
+  0      4    magic       Magic number: "LZF0" (0x4C 0x5A 0x46 0x30)
+  4      4    first       Preview: first 4 bytes of the uncompressed file data
+  8      4    fsize       Uncompressed file size in bytes (uint32)
+ 12      2    ftime       File time in TOS/DOS format (uint16)
+ 14      2    fdate       File date in TOS/DOS format (uint16)
+ 16      2    attrib      GEMDOS file attributes (uint16)
+ 18      2    head_len    Fixed header size, always 0x001C (28)
+ 20      2    crc         CRC-16 checksum of the decompressed file data
+ 22      1    pad         Padding byte, always 0x00
+ 23      1    code_type   Compression type character (see below)
+ 24      4    reserved    Reserved, always 0x00000000
+
+2.2 Filename Field
+-------------------
+
+Offset  Size  Field       Description
+------  ----  ----------  ---------------------------------------------------
+ 28      1    pad         Padding byte, always 0x00
+ 29      1    fname_len   Length of filename including null terminator (uint8)
+ 30      N    filename    Null-terminated filename string (N = fname_len bytes)
+
+Filenames use Atari ST path conventions with backslash (\) as the
+directory separator. Character encoding is Atari ST (similar to ISO 8859-1
+with Atari-specific extensions in 0x80-0xFF range).
+
+2.3 Compressed Data
+--------------------
+
+Immediately following the filename, the compressed data stream begins.
+It extends to the start of the next LZF0 record or to the end of the file.
+There is no explicit compressed-size field; boundaries are determined by
+scanning for the next "LZF0" magic signature.
+
+
+3. TIMESTAMP FORMAT
+===================
+
+File timestamps use TOS/GEMDOS packed format (identical to MS-DOS format).
+
+Time field (16 bits):
+    Bits 15-11: Hours (0-23)
+    Bits 10-5:  Minutes (0-59)
+    Bits  4-0:  Seconds / 2 (0-29, representing 0-58 seconds)
+
+Date field (16 bits):
+    Bits 15-9:  Year - 1980 (0-127, representing 1980-2107)
+    Bits  8-5:  Month (1-12)
+    Bits  4-0:  Day (1-31)
+
+
+4. FILE ATTRIBUTES
+==================
+
+The attrib field uses GEMDOS file attribute bits:
+
+    Bit 0: Read-only
+    Bit 1: Hidden
+    Bit 2: System
+    Bit 3: Volume label
+    Bit 4: Directory
+    Bit 5: Archive
+
+
+5. CRC-16 CHECKSUM
+==================
+
+The CRC is computed over the DECOMPRESSED (output) file data, NOT the
+compressed data stream.
+
+Algorithm: CRC-16 with polynomial 0x8005 (reflected/reversed as 0xA001)
+Initial value: 0x0000
+Input reflection: yes (LSB first)
+Output reflection: yes
+
+Lookup table generation (256 entries, 16-bit each):
+    for byte_val in 0..255:
+        crc = byte_val
+        for bit in 0..7:
+            if crc & 1:
+                crc = (crc >> 1) XOR 0xA001
+            else:
+                crc = crc >> 1
+        table[byte_val] = crc
+
+CRC computation:
+    crc = 0x0000
+    for each byte in decompressed_data:
+        index = (crc XOR byte) AND 0xFF
+        crc = (crc >> 8) XOR table[index]
+    result = crc AND 0xFFFF
+
+This is the standard CRC-16/ARC (also known as CRC-16/LHA, CRC-IBM).
+
+
+6. COMPRESSION TYPE
+===================
+
+The code_type byte at header offset 23 selects the compression algorithm:
+
+    'L' (0x4C): LZH compression (LZSS + adaptive Huffman coding)
+    'F' (0x46): Huffman-only compression
+    'N' (0x4E): No compression (stored)
+
+All sample files observed use type 'L' exclusively.
+
+
+7. LZH COMPRESSION FORMAT
+==========================
+
+The LZH compressed data stream consists of a parameter header followed
+by an encoded bitstream using LZSS with two adaptive Huffman trees.
+
+7.1 Bitstream Parameter Header (58 bits)
+-----------------------------------------
+
+The first 58 bits of the compressed data encode the compression parameters:
+
+Bits   Width  Parameter       Typical Value  Description
+-----  -----  --------------  -------------  --------------------------------
+ 0-3     4    dic_bits_hi           15        Dictionary address bits (high)
+ 4-7     4    dic_bits_lo           11        Position extra bits count
+ 8-12    5    threshold_adj          1        Dictionary size adjustment
+13-22   10    num_entries          254        Number of length Huffman symbols
+23-25    3    map_bits               3        Minimum match length
+26-41   16    pos_update          8192        Code tree rebuild interval
+42-57   16    len_update          4096        Length tree rebuild interval
+
+Note: Bits are read MSB-first from the byte stream.
+
+7.2 Derived Parameters
+-----------------------
+
+From the header parameters, the following values are computed:
+
+    threshold    = (1 << dic_bits_hi) - threshold_adj    [= 32767]
+    max_match    = num_entries + map_bits - 1             [= 256]
+    dic_size     = threshold + max_match                  [= 33023]
+    num_code_sym = (1 << (dic_bits_hi - dic_bits_lo)) + 256  [= 272]
+
+The dictionary (sliding window) is dic_size bytes, initialized with
+space characters (0x20). The write position starts at 0.
+
+7.3 Huffman Trees
+------------------
+
+Two adaptive Huffman trees are used:
+
+  Code Tree:
+    Symbols:          num_code_sym (typically 272)
+    Rebuild interval: pos_update (typically 8192)
+    Encodes:          Literal bytes (0-255) and position upper codes (256+)
+
+  Length Tree:
+    Symbols:          num_entries (typically 254)
+    Rebuild interval: len_update (typically 4096)
+    Encodes:          Match length codes (0 to num_entries-1)
+
+Both trees are initialized with all leaf frequencies set to 1 and built
+using the standard Huffman algorithm (combine two lowest-frequency nodes
+repeatedly). The initial rebuild threshold is num_symbols / 2.
+
+7.4 Adaptive Huffman Tree Rebuild
+----------------------------------
+
+After each symbol decode, the decoded leaf's frequency is incremented by 1.
+A running decode count is maintained per tree, starting at 0.
+
+When decode_count exceeds the current rebuild threshold:
+
+  1. Save the current (pre-halving) leaf frequencies for tree construction.
+  2. Halve all leaf frequencies > 1: freq = (freq + 1) / 2 (integer division).
+     This prevents frequency overflow during long decompressions.
+  3. Rebuild the tree using the PRE-HALVING frequencies:
+     a. Collect leaves with pre-halving freq <= 1 into a "low" queue,
+        ordered from highest index to lowest (descending).
+     b. Collect leaves with pre-halving freq > 1 into a "high" queue,
+        sorted by (freq, index) ascending.
+     c. Concatenate low queue + high queue into a single leaf buffer.
+     d. Build tree by repeatedly taking the two smallest entries from
+        the leaf buffer (sequential) or already-built internal nodes
+        (priority queue). Ties favor the leaf buffer.
+  4. Double the rebuild threshold, capped at the tree's max interval.
+  5. Reset the decode count to 0.
+
+7.5 Decoding Algorithm
+-----------------------
+
+Repeat until all uncompressed bytes are produced:
+
+  1. Decode a symbol from the Code Tree.
+
+  2. If symbol < 256:  (LITERAL)
+     - Output the byte value = symbol.
+     - Write it to the dictionary at the current write position.
+     - Maintain the mirror region: if write_pos < max_match, also write
+       to dictionary[write_pos + threshold].
+     - Advance write position by 1.
+
+  3. If symbol >= 256:  (BACK-REFERENCE)
+     a. Compute position:
+        pos_upper = symbol - 256
+        position = (pos_upper << dic_bits_lo) | ReadBits(dic_bits_lo)
+
+     b. Decode match length from the Length Tree:
+        length_symbol = HuffmanDecode(length_tree)
+        match_length = length_symbol + map_bits
+
+     c. Compute source position in circular dictionary:
+        source = (write_pos - position - match_length) MOD threshold
+
+     d. Copy match_length bytes from dictionary[source..] to the current
+        write position. If the source and destination regions overlap
+        (source < write_pos < source + match_length), copy the source
+        region to a temporary buffer first (memcpy semantics, not
+        byte-by-byte forward copy).
+
+     e. Maintain the mirror region for each byte written.
+
+  4. When write_pos reaches threshold (32767):
+     - Flush the dictionary buffer [0..threshold-1] to the output.
+     - Reset write_pos to 0.
+
+7.6 Match Position Encoding
+-----------------------------
+
+The position field encodes the distance from the current write position
+to the END of the matched region (not the start):
+
+    source_start = (write_pos - position - match_length) MOD threshold
+    source_end   = (write_pos - position - 1) MOD threshold
+
+The match copies bytes from source_start through source_end (inclusive)
+into the dictionary at write_pos onward.
+
+With num_code_sym = 272, there are 16 position upper codes (256-271).
+Each is expanded with dic_bits_lo (11) additional raw bits, giving a
+total position range of 0 to 32767 (matching the dictionary window size).
+
+7.7 Dictionary Mirror Region
+------------------------------
+
+The dictionary buffer is dic_size = threshold + max_match bytes long.
+The region from threshold to dic_size-1 is a mirror (copy) of positions
+0 to max_match-1. This allows match copies that span the dictionary
+wraparound point to read contiguously without bounds checking.
+
+Every byte written to a position p < max_match is also written to
+position p + threshold.
+
+7.8 Bit Reading
+----------------
+
+Bits are read from the compressed byte stream MSB-first (most significant
+bit first). The original implementation uses a 32-bit buffer that is
+refilled by reading 4 bytes at a time when exhausted.
+
+
+8. BYTE ACCOUNTING
+==================
+
+Every byte of an LZF0 record is accounted for:
+
+  Bytes 0-27:    Fixed header (28 bytes)
+  Bytes 28-29:   Filename length field (2 bytes: 1 pad + 1 length)
+  Bytes 30..N:   Null-terminated filename (fname_len bytes)
+  Bytes N+1..:   Compressed data stream (until next LZF0 or EOF)
+
+Within the compressed data stream:
+  Bits 0-57:     Bitstream parameter header (58 bits = 7.25 bytes)
+  Remaining:     Huffman-encoded LZSS data
+
+
+9. NOTES
+========
+
+- The format was created by Dieter Fiebelkorn for GEM-View, an image
+  viewer for the Atari ST/TT/Falcon series of computers.
+
+- The compression library is internally called "LZFG", likely referencing
+  the Fiala-Greene algorithm ("Data Compression with Finite Windows" by
+  Edward R. Fiala and Daniel H. Greene, 1989).
+
+- Archives can contain directory structures via the backslash-separated
+  paths in filenames. The extractor should create subdirectories as needed.
+
+- The "first" field (header bytes 4-7) serves as a quick preview of the
+  file content without decompression, and can be used for file type
+  identification (e.g., 0x601A indicates an Atari ST executable).
+
+- The head_len field is always 28 (0x001C) in all observed archives.
+  It indicates the size of the fixed header, potentially allowing for
+  future format extensions.
+
+- Archives may span GEM-View versions 2.x through 3.x (approximately
+  1992-1995). All observed archives use the same compression parameters.

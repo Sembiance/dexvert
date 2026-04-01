@@ -1,11 +1,11 @@
-# Unsupported File Formats (4,001)
+# Unsupported File Formats (3,994)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (271)
+## Archive (263)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -26,7 +26,6 @@ Family/Format | Name | Extensions | Notes
 [archive/apple2DiskImage](https://discmaster.textfiles.com/search?format=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
 [archive/sparseImage](https://discmaster.textfiles.com/search?format=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Only *1* of these on discmaster, so not really worth bothering with, but I could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 [archive/PizazzCompressed](https://discmaster.textfiles.com/search?format=PizazzCompressed) | Application Techniques Pizazz compressed | ~ | 
-[archive/apriDisk](https://discmaster.textfiles.com/search?format=apriDisk) | [ApriDisk](http://fileformats.archiveteam.org/wiki/ApriDisk) | .dsk | [3 sample files](https://sembiance.com/fileFormatSamples/archive/apriDisk/) - The apridisk.exe program can write these to a real floppy, so maybe I could use DOSBOX and an inserted blank floppy to try and write these and then convert, but meh.
 [archive/artisoftInstallationPackage](https://discmaster.textfiles.com/search?format=artisoftInstallationPackage) | Artisoft installation Package | .pak | 
 [archive/artsAndLettersClipArtLibrary](https://discmaster.textfiles.com/search?format=artsAndLettersClipArtLibrary) | Arts and Letters Clip Art Library | .yal | 
 [archive/asarElectronArchive](https://discmaster.textfiles.com/search?format=asarElectronArchive) | asar Electron Archive | .asar | 
@@ -104,7 +103,6 @@ Family/Format | Name | Extensions | Notes
 [archive/floppyDiskFileImage](https://discmaster.textfiles.com/search?format=floppyDiskFileImage) | Floppy Disk File image | .fdf | 
 [archive/floppyDiskManagerDiskImage](https://discmaster.textfiles.com/search?format=floppyDiskManagerDiskImage) | Floppy Disk Manager disk image | .fdm | [1 sample file](https://sembiance.com/fileFormatSamples/archive/floppyDiskManagerDiskImage/)
 [archive/foxProArchive](https://discmaster.textfiles.com/search?format=foxProArchive) | FoxPro Archive | .pak | 
-[archive/freeArc](https://discmaster.textfiles.com/search?format=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
 [archive/fsgPacked](https://discmaster.textfiles.com/search?format=fsgPacked) | FSG Packed | .exe | 
 [archive/gamosPackedGameDataArchive](https://discmaster.textfiles.com/search?format=gamosPackedGameDataArchive) | Gamos Packed game data archive | .gpf .vga .snd .ega | 
 [archive/gDevelopGameDataArchive](https://discmaster.textfiles.com/search?format=gDevelopGameDataArchive) | GDevelop game data archive | .egd | 
@@ -122,7 +120,6 @@ Family/Format | Name | Extensions | Notes
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?format=imageLibrarianArchive) | Image Librarian archive | .ril | 
 [archive/innoSetupArchive](https://discmaster.textfiles.com/search?format=innoSetupArchive) | Inno Setup Archive | .bin .0 .1 .2 .3 .4 .5 .6 .7 .8 .9 | 
 [archive/installationPackage](https://discmaster.textfiles.com/search?format=installationPackage) | Installation package | .d01 | 
-[archive/interfaze](https://discmaster.textfiles.com/search?format=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/internetExplorerCache](https://discmaster.textfiles.com/search?format=internetExplorerCache) | Internet Explorer cache |  | 
 [archive/quickBooksBackup](https://discmaster.textfiles.com/search?format=quickBooksBackup) | Intuit QuickBooks Backup | .qbb | 
 [archive/izPackArchive](https://discmaster.textfiles.com/search?format=izPackArchive) | IzPack Archive |  | 
@@ -154,7 +151,6 @@ Family/Format | Name | Extensions | Notes
 [archive/mifDiskImage](https://discmaster.textfiles.com/search?format=mifDiskImage) | MIF disk image |  | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?format=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/moofDiskImage](https://discmaster.textfiles.com/search?format=moofDiskImage) | MOOF Macintosh floppy disk image | .moof | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moofDiskImage/)
-[archive/mpq](https://discmaster.textfiles.com/search?format=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/mozCompressedContainerFormat](https://discmaster.textfiles.com/search?format=mozCompressedContainerFormat) | MOZ Compressed Container format | .epk .eix | 
 [archive/mozillaARchive](https://discmaster.textfiles.com/search?format=mozillaARchive) | Mozilla ARchive | .mar | 
 [archive/mpressPacked](https://discmaster.textfiles.com/search?format=mpressPacked) | MPRESS Packed | .exe | 
@@ -177,9 +173,7 @@ Family/Format | Name | Extensions | Notes
 [archive/packMasterPacked](https://discmaster.textfiles.com/search?format=packMasterPacked) | Pack Master Packed | .exe | 
 [archive/packmanPacked](https://discmaster.textfiles.com/search?format=packmanPacked) | Packman Packed |  | 
 [archive/palmMemoPadArchive](https://discmaster.textfiles.com/search?format=palmMemoPadArchive) | Palm Memo Pad Archive | .mpa | 
-[archive/palmWebContentRecord](https://discmaster.textfiles.com/search?format=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paragonDOSDiskImage](https://discmaster.textfiles.com/search?format=paragonDOSDiskImage) | Paragon DOS disk image | .sec .dsk .img | 
-[archive/paxArchive](https://discmaster.textfiles.com/search?format=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pciGeomaticsFormat](https://discmaster.textfiles.com/search?format=pciGeomaticsFormat) | PCI Geomatics format | .pix | 
 [archive/peDiminisherPacked](https://discmaster.textfiles.com/search?format=peDiminisherPacked) | PE Diminisher Packed | .exe | 
 [archive/pePackPacked](https://discmaster.textfiles.com/search?format=pePackPacked) | PE-PACK Packed |  | 
@@ -194,10 +188,8 @@ Family/Format | Name | Extensions | Notes
 [archive/powerArchiverEncrypted](https://discmaster.textfiles.com/search?format=powerArchiverEncrypted) | PowerArchiver Encrypted | .pae | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?format=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?format=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
-[archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?format=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
 [archive/protectIt2Protected](https://discmaster.textfiles.com/search?format=protectIt2Protected) | ProtectIt/2 Protected | .zie | 
 [archive/protectorProtected](https://discmaster.textfiles.com/search?format=protectorProtected) | protector Protected | .exe | 
-[archive/ps1MemoryCard](https://discmaster.textfiles.com/search?format=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/psxCompressedCDImage](https://discmaster.textfiles.com/search?format=psxCompressedCDImage) | pSX compressed CD image | .cdz | 
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?format=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
 [archive/py2exePacked](https://discmaster.textfiles.com/search?format=py2exePacked) | py2exe Packed | .exe | 
@@ -208,7 +200,7 @@ Family/Format | Name | Extensions | Notes
 [archive/questPowerGUIPacked](https://discmaster.textfiles.com/search?format=questPowerGUIPacked) | Quest PowerGUI Packed | .dll | 
 [archive/realArcadeGameInstaller](https://discmaster.textfiles.com/search?format=realArcadeGameInstaller) | RealArcade Game Installer | .rgs | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realArcadeGameInstaller/)
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
-[archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | [2 sample files](https://sembiance.com/fileFormatSamples/archive/relicChunkyContainerGameData/) - Over 200,000 of these on discmaster and they don't appear to extract into any files that can be acted upon, so just skip this
+[archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | [2 sample files](https://sembiance.com/fileFormatSamples/archive/relicChunkyContainerGameData/)
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 
 [archive/renPyArchive](https://discmaster.textfiles.com/search?format=renPyArchive) | Ren'Py Archive | .rpa | 
 [archive/repiPack](https://discmaster.textfiles.com/search?format=repiPack) | RepiPack archive | .dat | 
@@ -754,7 +746,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (198)
+## Image (199)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -909,6 +901,7 @@ Family/Format | Name | Extensions | Notes
 [image/printShopDeluxeBackdrop](https://discmaster.textfiles.com/search?format=printShopDeluxeBackdrop) | Print Shop Deluxe Backdrop | .pbk | 
 [image/printShopDeluxeBorder](https://discmaster.textfiles.com/search?format=printShopDeluxeBorder) | Print Shop Deluxe Border | .pbr | 
 [image/printShopDeluxeColumnsGraphic](https://discmaster.textfiles.com/search?format=printShopDeluxeColumnsGraphic) | Print Shop Deluxe Columns Graphic | .pcg | 
+[image/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?format=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | No known extractor program.
 [image/printShopDeluxeRowsGraphic](https://discmaster.textfiles.com/search?format=printShopDeluxeRowsGraphic) | Print Shop Deluxe Rows Graphic | .prg | 
 [image/printMasterDocument](https://discmaster.textfiles.com/search?format=printMasterDocument) | PrintMaster Document | .car | 
 [image/printPartnerBorder](https://discmaster.textfiles.com/search?format=printPartnerBorder) | PrintPartner Border | .bdr | 

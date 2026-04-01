@@ -1,0 +1,303 @@
+================================================================================
+The Music Studio - File Format Specification
+================================================================================
+
+Software:    The Music Studio / The Music Studio 88
+Developer:   Audio Light, Inc.
+Publisher:   Activision
+Platforms:   Atari ST/STe (primary), Commodore Amiga, Commodore 64, others
+Years:       1986 (v1), 1988 (v2 / "Music Studio 88")
+
+The Music Studio uses three distinct file formats:
+  1. Song Settings   (.snd)    - Instrument settings and MIDI configuration
+  2. Instrument Bank  (.sound)  - 15 instrument definitions with synthesis data
+  3. Waveform Sample  (.SND)    - Digitized PCM audio samples
+
+All Mstudio-format files (.snd, .sound) originate from the Motorola 68000
+(Atari ST) platform. The waveform sample files use little-endian byte order.
+
+================================================================================
+1. SONG SETTINGS FILE (.snd) - 460 bytes fixed size
+================================================================================
+
+These files store instrument settings for a song. They represent the first
+460 bytes of a full .SNG song file (without note data, title, or lyrics).
+
+Offset  Size  Type        Description
+------  ----  ----------  --------------------------------------------------
+0x000   1     byte        Magic byte: 0xCD
+0x001   7     ASCII       Identifier: "Mstudio"
+0x008   1     byte        Magic byte repeated: 0xCD
+0x009   1     byte        Version: 0x01 (v1/1986) or 0x02 (v2/1988)
+0x00A   150   10-byte×15  Atari instrument names (see Instrument Name below)
+0x0A0   120   8-byte×15   Atari instrument settings (see Instrument Settings)
+0x118   150   10-byte×15  MIDI/External instrument names
+0x1AE   15    byte×15     MIDI channel+octave bytes (see MIDI Settings)
+0x1BD   15    byte×15     MIDI preset/program numbers
+------  ----  ----------  --------------------------------------------------
+Total:  460 bytes
+
+1.1 Instrument Name (10 bytes each)
+------------------------------------
+Each name is a null-terminated ASCII string occupying exactly 10 bytes.
+If the name is shorter than 10 bytes, it is padded with null bytes (0x00).
+Bytes after the first null terminator may contain leftover data from
+previous names that occupied the same slot; only bytes up to (and not
+including) the first 0x00 are significant.
+
+There are two sets of 15 names:
+  - First set (offset 0x0A0): Names for the 15 Atari/internal instrument
+    channels as displayed on the Atari ST screen.
+  - Second set (offset 0x118): Names for the corresponding MIDI/Casio
+    external instrument assignments.
+
+1.2 Instrument Settings (8 bytes each)
+----------------------------------------
+Each of the 15 instruments has 8 bytes of YM2149 sound chip configuration
+data. The settings encode tone/noise mode and ADSR envelope parameters.
+
+Byte  Bits    Description
+----  ------  ----------------------------------------------------------
+0     [7]     Noise enable (inverted): 1 = noise OFF, 0 = noise ON
+      [6:5]   Reserved / unused
+      [4]     Tone enable (inverted): 1 = tone OFF, 0 = tone ON
+      [3:0]   ADSR Attack Vertical rate (0-15)
+1     [7:4]   Octave transpose (0-6)
+      [3:0]   ADSR Attack Horizontal rate (0-15)
+2     [7:4]   Reserved (typically 0)
+      [3:0]   ADSR Decay Vertical rate (0-15)
+3     [7:4]   Reserved (typically 0)
+      [3:0]   ADSR Decay Horizontal rate (0-15)
+4     [7:4]   Reserved (typically 0)
+      [3:0]   ADSR Sustain Vertical level (0-15)
+5     [7:4]   Reserved (typically 0)
+      [3:0]   ADSR Sustain Horizontal rate (0-15)
+6     [7:4]   Reserved (typically 0)
+      [3:0]   ADSR Release Vertical rate (0-15)
+7     [7:4]   Reserved (typically 0)
+      [3:0]   ADSR Release Horizontal rate (0-15)
+
+The ADSR envelope has four phases (Attack, Decay, Sustain, Release),
+each with a "vertical" component (amplitude change per step) and a
+"horizontal" component (time duration). Values range 0-15 where higher
+values produce more pronounced effects.
+
+Note: Byte 0 bit 7 and bit 4 follow the YM2149 mixer register convention
+where 0 = channel enabled, 1 = channel disabled.
+
+Typical configurations:
+  - Tonal instrument: byte 0 = 0x8X (noise off, tone on)
+  - Noise/percussion:  byte 0 = 0x1X (noise on, tone off)
+
+1.3 MIDI Settings (15 + 15 bytes)
+----------------------------------
+Following the second set of instrument names:
+
+Offset 0x1AE - MIDI Channel + Octave (15 bytes, one per instrument):
+  Bits [7:4] = MIDI octave offset (0-7)
+  Bits [3:0] = MIDI channel number (0-15)
+
+Offset 0x1BD - MIDI Preset/Program Number (15 bytes, one per instrument):
+  Value 0-127 = MIDI program change number
+
+================================================================================
+2. INSTRUMENT BANK FILE (.sound) - 1540 bytes fixed size
+================================================================================
+
+These files store 15 complete instrument definitions including additive
+synthesis waveform data and amplitude envelopes. The Music Studio creates
+instrument timbres by combining up to 7 harmonics (selected from 33
+available partials) with time-varying amplitudes.
+
+Offset  Size  Type        Description
+------  ----  ----------  --------------------------------------------------
+0x000   1     byte        Magic byte: 0xCE
+0x001   7     ASCII       Identifier: "Mstudio"
+0x008   1     byte        Magic byte repeated: 0xCE
+0x009   1     byte        Version: 0x01
+0x00A   150   10-byte×15  Instrument names (see 1.1 Instrument Name)
+0x0A0   1200  80-byte×15  Instrument definitions (see Instrument Definition)
+0x550   150   10-byte×15  MIDI/External instrument names
+0x5E6   15    byte×15     MIDI channel+octave bytes (see 1.3 MIDI Settings)
+0x5F5   15    byte×15     MIDI preset/program numbers
+------  ----  ----------  --------------------------------------------------
+Total:  1540 bytes
+
+2.1 Instrument Definition (80 bytes each)
+-------------------------------------------
+Each instrument definition consists of an amplitude envelope matrix and
+synthesis parameters that define the instrument's timbre.
+
+Offset  Size  Description
+------  ----  ----------------------------------------------------------
++0      56    Harmonic Amplitude Envelope (see 2.2)
++56     14    Harmonic Level Parameters (see 2.3)
++70     7     Harmonic Selection Indices (see 2.4)
++77     1     Waveform modifier / additional parameter
++78     2     Sustain/loop control bytes
+
+2.2 Harmonic Amplitude Envelope (56 bytes)
+-------------------------------------------
+A 7-row × 8-column matrix defining how each harmonic's amplitude changes
+over time. The instrument envelope progresses through 7 time steps.
+
+Row layout (8 bytes per row):
+  Bytes [0:6] = Amplitude of harmonics 1-7 at this time step (0-63)
+  Byte  [7]   = Control byte
+
+Row 0 (bytes +0 to +7):   Peak/attack amplitudes; byte 7 = volume (0-127)
+Row 1 (bytes +8 to +15):  Decay step 1; byte 7 = 0x00
+Row 2 (bytes +16 to +23): Decay step 2; byte 7 = 0x00
+Row 3 (bytes +24 to +31): Decay step 3; byte 7 = 0x00
+Row 4 (bytes +32 to +39): Sustain / Decay step 4; byte 7 = 0x00
+Row 5 (bytes +40 to +47): Release step 1; byte 7 = 0x00
+Row 6 (bytes +48 to +55): Release step 2 (final); byte 7 = 0x00
+
+Amplitude values range 0-63 (6 bits). A value of 0 means the harmonic
+is silent at that time step. Values decrease through successive rows as
+the sound decays.
+
+The volume byte in row 0 (byte +7) sets the overall instrument volume:
+  0x7F (127) = maximum volume
+  0x00       = silent
+
+2.3 Harmonic Level Parameters (14 bytes)
+------------------------------------------
+Seven 2-byte (big-endian) values defining additional harmonic properties:
+
+Byte pair layout:
+  High byte [7:6] = Flags: 0x00=normal, 0x40=flag1, 0x80=flag2, 0xC0=both
+  High byte [5:0] + Low byte = Harmonic level/tuning parameter
+
+The 7 pairs correspond to the 7 active harmonics. These parameters
+control the relative strength or fine-tuning of each harmonic in the
+additive synthesis.
+
+2.4 Harmonic Selection Indices (7 bytes)
+-----------------------------------------
+Each byte selects which of 33 available harmonics is used for that slot.
+The Music Studio offers harmonics numbered 0-32, representing frequency
+multiples of the fundamental:
+
+  Index 0 = subharmonic / fundamental variant
+  Index 1 = 1st harmonic (fundamental)
+  Index 2 = 2nd harmonic (octave)
+  Index 3 = 3rd harmonic
+  ...
+  Index 32 = 32nd harmonic
+
+Common patterns observed:
+  - Simple tones: 01 02 03 04 05 06 07 (consecutive harmonics)
+  - Bells/chimes: 03 07 0B 0F 13 17 1B (every 4th = inharmonic partials)
+  - Reed/wind:    09 0D 11 15 19 XX XX (odd-harmonic emphasis)
+
+2.5 Additional Parameters (3 bytes)
+-------------------------------------
+Byte +77: Waveform modifier (observed values: 0x00, 0x10, 0x18)
+          May control waveform symmetry, phase, or synthesis mode.
+Byte +78: Loop/sustain parameter 1 (commonly 0x01)
+Byte +79: Loop/sustain parameter 2 (commonly 0x01, 0x03, or 0x05)
+
+================================================================================
+3. WAVEFORM SAMPLE FILE (.SND) - Variable size (44-byte header + PCM data)
+================================================================================
+
+These files contain digitized audio samples, likely from The Music Studio 88
+version which added sampled sound support. The format stores 8-bit unsigned
+mono PCM audio at 11000 Hz.
+
+Offset  Size  Type        Description
+------  ----  ----------  --------------------------------------------------
+0x000   2     LE16        Magic: 0x001A (file type identifier = 26)
+0x002   2     LE16        Format version: 0x0001
+0x004   10    ASCII       Sample name (null-terminated, may have garbage
+                          bytes after the null from previous buffer contents)
+0x00E   2     LE16        Sample rate in Hz (observed: 11000 = 0x2AF8)
+0x010   1     byte        Unknown constant: 0xFF
+0x011   1     byte        Unknown constant: 0x03
+0x012   2     LE16        Unknown constant: 0xFFFF
+0x014   4     LE32        Data offset in bytes (always 44 = 0x0000002C)
+0x018   4     LE32        Reserved (always 0)
+0x01C   4     LE32        Reserved (always 0)
+0x020   4     LE32        Declared audio data length in bytes
+0x024   4     LE32        Reserved (always 0)
+0x028   4     LE32        Reserved (always 0)
+------  ----  ----------  --------------------------------------------------
+Header total: 44 bytes (0x2C)
+
+0x02C   var   bytes       Audio data: 8-bit unsigned PCM, mono
+                          Silence center point ≈ 0x78 (120 decimal)
+                          Values 0x00-0xFF map to the full amplitude range
+
+Audio encoding:
+  - 8-bit unsigned samples (0-255)
+  - Mono (single channel)
+  - Sample rate: 11000 Hz
+  - Nominal silence/center: 0x80 (128) per standard convention,
+    though some samples exhibit DC offset with center near 0x78 (120)
+
+Note: The declared data length at offset 0x20 may exceed the actual
+remaining file data if the file was truncated during storage. Converters
+should use min(declared_length, file_size - 44) as the effective length.
+
+================================================================================
+4. OBSERVED SAMPLE FILES
+================================================================================
+
+Directory structure: Files are organized in numbered subdirectories.
+The directory numbers may represent disk catalog IDs or collection indices.
+
+Dir    File              Size    Type         Notes
+-----  ----------------  ------  -----------  --------------------------------
+12732  STANDARD.SND         460  Song         Standard instrument preset
+14     SILENT.SND           460  Song         Silent/default preset
+14     goodking.snd         460  Song         "Good King Wenceslas" settings
+14     wewish.snd           460  Song         "We Wish You a Merry Xmas"
+17484  init.sound          1540  Instruments  Default instrument bank (v1)
+21003  file 1.sound        1540  Instruments  Custom instrument bank
+21003  file 2.sound        1540  Instruments  Custom instrument bank
+21003  french.sound        1540  Instruments  French horn focused bank
+21003  init.sound          1540  Instruments  Default instrument bank (v1)
+21220  somewhre.snd         460  Song         "Somewhere" (diverse MIDI cfg)
+29650  FUNKBASS.SND       12332  Waveform     Funk bass sample, 11000 Hz
+29650  PIANO.SND          22572  Waveform     Piano sample, 11000 Hz
+29650  PIPEORGN.SND       29740  Waveform     Pipe organ (truncated, decl 33792)
+29650  SNARE.SND           3116  Waveform     Snare drum hit, 11000 Hz
+29989  HIHAT.SND           1728  Waveform     Hi-hat cymbal, 11000 Hz
+29989  INIT.SND           22477  Waveform     Piano init sample, 11000 Hz
+33127  BRASS.SND          23596  Waveform     Brass section, 11000 Hz
+33127  CYMBAL.SND         14380  Waveform     Ride cymbal, 11000 Hz
+43000  file 2.sound        1540  Instruments  Custom instrument bank
+43130  ELECORGN.SND       14380  Waveform     Electric organ, 11000 Hz
+43130  VIOLIN.SND         21336  Waveform     Strings/violin, 11000 Hz
+
+================================================================================
+5. FORMAT IDENTIFICATION
+================================================================================
+
+File type can be determined by examining the first few bytes:
+
+  Song settings (.snd):
+    Byte 0 = 0xCD, Bytes 1-7 = "Mstudio", Byte 8 = 0xCD
+    Fixed size: 460 bytes
+
+  Instrument bank (.sound):
+    Byte 0 = 0xCE, Bytes 1-7 = "Mstudio", Byte 8 = 0xCE
+    Fixed size: 1540 bytes
+
+  Waveform sample (.SND):
+    Bytes 0-1 = 0x1A 0x00, Bytes 2-3 = 0x01 0x00
+    Variable size: 44 + audio_data_length bytes
+
+Note: The .SND extension is shared between song settings files and waveform
+sample files. The magic bytes must be used to distinguish them.
+
+================================================================================
+6. REFERENCES
+================================================================================
+
+- The Music Studio, Activision, 1986 (Atari ST)
+- Jim's Music Studio Utils: http://noniandjim.com/Jim/MusicStudio/MusicStudio.html
+- ArchiveTeam File Formats Wiki: The Music Studio
+- dexvert format identification: github.com/Sembiance/dexvert
+- YM2149 Programmable Sound Generator documentation (for sound chip details)

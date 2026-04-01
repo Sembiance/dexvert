@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,994)
+# Unsupported File Formats (3,988)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -274,7 +274,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (72)
+## Audio (66)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. No actual sampled audio, just parameters and register settings for the OPL2 FM chip.
@@ -291,7 +291,6 @@ Family/Format | Name | Extensions | Notes
 [audio/commonLoudspeaker](https://discmaster.textfiles.com/search?format=commonLoudspeaker) | [Common Loudspeaker](http://fileformats.archiveteam.org/wiki/Common_Loudspeaker_Format) | .cf1 .cf2 | 
 [audio/covoxSpeechThingAudioSample](https://discmaster.textfiles.com/search?format=covoxSpeechThingAudioSample) | Covox Speech Thing audio sample | .v8 | 
 [audio/creativeLabsInstrumentBank](https://discmaster.textfiles.com/search?format=creativeLabsInstrumentBank) | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://sembiance.com/fileFormatSamples/audio/creativeLabsInstrumentBank/) - gamemus supports reading this format, but doesn't have a way to convert or extract it
-[audio/dataShowSound](https://discmaster.textfiles.com/search?format=dataShowSound) | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://sembiance.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
 [audio/deluxeSoundSample](https://discmaster.textfiles.com/search?format=deluxeSoundSample) | Deluxe Sound Sample | .instr | 
 [audio/deskMateSound](https://discmaster.textfiles.com/search?format=deskMateSound) | DeskMate Sound | .snd | 
 [audio/digitalSymphonySoundSample](https://discmaster.textfiles.com/search?format=digitalSymphonySoundSample) | Digital Symphony Sound Sample |  | 
@@ -299,7 +298,6 @@ Family/Format | Name | Extensions | Notes
 [audio/dynamixSSMSoundAndMusic](https://discmaster.textfiles.com/search?format=dynamixSSMSoundAndMusic) | Dynamix SSM sound and music | .sng | 
 [audio/ensoniqWaveSetFormat](https://discmaster.textfiles.com/search?format=ensoniqWaveSetFormat) | Ensoniq WaveSet Format | .ecw | 
 [audio/fineArtistSound](https://discmaster.textfiles.com/search?format=fineArtistSound) | Fine Artist Sound |  | 
-[audio/fmTownsSND](https://discmaster.textfiles.com/search?format=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?format=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?format=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
 [audio/hyperStudioSampledSound](https://discmaster.textfiles.com/search?format=hyperStudioSampledSound) | HyperStudio sampled sound |  | 
@@ -313,11 +311,8 @@ Family/Format | Name | Extensions | Notes
 [audio/madeSoundFile](https://discmaster.textfiles.com/search?format=madeSoundFile) | MADE Sound File | .sfl | 
 [audio/maestroAudio](https://discmaster.textfiles.com/search?format=maestroAudio) | Maestro Audio |  | 
 [audio/magicOfEndoriaSoundSample](https://discmaster.textfiles.com/search?format=magicOfEndoriaSoundSample) | Magic of Endoria Sound Sample | .snd .smp | 
-[audio/maxonMagicSoundSample](https://discmaster.textfiles.com/search?format=maxonMagicSoundSample) | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://sembiance.com/fileFormatSamples/audio/maxonMagicSoundSample/)
-[audio/medSynthSound](https://discmaster.textfiles.com/search?format=medSynthSound) | MED Synth Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/medSynthSound/)
 [audio/microsoftSpeechData](https://discmaster.textfiles.com/search?format=microsoftSpeechData) | Microsoft Speech Data |  | 
 [audio/mioCompressedAudio](https://discmaster.textfiles.com/search?format=mioCompressedAudio) | MIO compressed audio | .mio | 
-[audio/musicStudioSound](https://discmaster.textfiles.com/search?format=musicStudioSound) | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://sembiance.com/fileFormatSamples/audio/musicStudioSound/)
 [audio/musiclineInstrument](https://discmaster.textfiles.com/search?format=musiclineInstrument) | [Musicline Instrument](https://www.musicline.org/) |  | [7 sample files](https://sembiance.com/fileFormatSamples/audio/musiclineInstrument/)
 [audio/outcastSoundEffects](https://discmaster.textfiles.com/search?format=outcastSoundEffects) | [Outcast Sound effects](https://playtechs.blogspot.com/2010/05/reading-outcast-sfx-files.html) | .sfx | 
 [audio/parisAudioFormat](https://discmaster.textfiles.com/search?format=parisAudioFormat) | PARIS Audio Format | .paf | 
@@ -345,7 +340,6 @@ Family/Format | Name | Extensions | Notes
 [audio/voxWareMetaVoiceEncodedAudio](https://discmaster.textfiles.com/search?format=voxWareMetaVoiceEncodedAudio) | VoxWare MetaVoice encoded audio | .vox | 
 [audio/vSampler3Soundbank](https://discmaster.textfiles.com/search?format=vSampler3Soundbank) | VSampler 3 soundbank | .vs3 .vc3 | 
 [audio/winGrooveSoundbank](https://discmaster.textfiles.com/search?format=winGrooveSoundbank) | WinGroove soundbank | .tpd | 
-[audio/dvsm](https://discmaster.textfiles.com/search?format=dvsm) | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
 [audio/wipeoutSoundEffects](https://discmaster.textfiles.com/search?format=wipeoutSoundEffects) | Wipeout sound effects | .fx0 .fx1 .fx2 .fx3 .fx4 .fx5 .fx6 .fx7 | 
 [audio/wonderSwanWSR](https://discmaster.textfiles.com/search?format=wonderSwanWSR) | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
 [audio/zyxelVoice](https://discmaster.textfiles.com/search?format=zyxelVoice) | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fileFormatSamples/audio/zyxelVoice/)

@@ -5,5 +5,5 @@ export class musiclineInstrument extends Format
 	name        = "Musicline Instrument";
 	website     = "https://www.musicline.org/";
 	magic       = ["Musicline instrument"];
-	unsupported = true;
+	unsupported = true;	// only 7 unique files on discmaster, all less than 700 bytes
 }

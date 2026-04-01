@@ -1,0 +1,117 @@
+DataShow Sound File Format (.SND) Specification
+================================================
+Vibe coded by Claude
+
+DataShow was a DOS-based presentation program. Its .SND files define
+monophonic music as a sequence of tones to be played through the PC speaker.
+The format is entirely text-based with CRLF line endings.
+
+Overview
+--------
+The file consists of:
+  1. A comment/header line
+  2. One or more note lines (frequency + duration pairs)
+  3. An optional DOS EOF marker byte (0x1A)
+
+All text lines are terminated with CRLF (0x0D 0x0A).
+
+Detailed Structure
+------------------
+
+1. HEADER LINE
+   Offset: 0
+   Format: ;DataShow [<version> ]music file: <filename>\r\n
+
+   Begins with a semicolon (;) acting as a comment marker.
+   The version string is optional and is separated from "DataShow" by a space.
+   Known version strings observed across samples:
+     - (none)    - header reads ";DataShow music file: <name>"
+     - "1.5B"    - header reads ";DataShow 1.5B music file: <name>"
+     - "2.0A"    - header reads ";DataShow 2.0A music file: <name>"
+     - "2.5A"    - header reads ";DataShow 2.5A music file: <name>"
+   The filename portion is the original .snd filename as authored.
+
+   Grammar (BNF-like):
+     header = ";" "DataShow" [SP version] SP "music" SP "file:" SP filename CRLF
+     version = 1*CHAR    ; e.g. "1.5B", "2.0A", "2.5A"
+     filename = 1*CHAR   ; original filename, e.g. "Napoleon.snd"
+
+2. NOTE LINES
+   Repeated for each tone/rest in the sequence.
+   Format: Freq: <freq>   Dur: <dur>\r\n
+
+   Field layout (fixed-format columns):
+     Columns 1-5:   "Freq:" (literal, 5 characters)
+     Columns 6-12:  Frequency value, right-justified in a 7-character field
+     Columns 13-15: "   " (3 space separator)
+     Columns 16-20: "Dur: " (literal, 5 characters)
+     Column 21+:    Duration value (variable-width integer, no padding)
+
+   Frequency (Hz):
+     - Integer value representing the tone frequency in Hertz.
+     - A value of 0 indicates silence (a rest / pause).
+     - Observed range across all samples: 0 to 1564 Hz.
+     - These correspond to PC speaker square-wave tones.
+
+   Duration (ms):
+     - Integer value representing the tone duration in milliseconds.
+     - Observed range across all samples: 50 to 1800 ms.
+
+   Example note lines:
+     Freq:    494   Dur: 400        (494 Hz tone for 400 ms)
+     Freq:      0   Dur: 360        (silence for 360 ms)
+     Freq:   1315   Dur: 270        (1315 Hz tone for 270 ms)
+     Freq:    621   Dur: 50         (621 Hz tone for 50 ms)
+
+3. OPTIONAL DOS EOF MARKER
+   Some files end with a single 0x1A byte (ASCII SUB / Ctrl-Z) immediately
+   after the final CRLF. This is the standard DOS end-of-file convention for
+   text files. It is not always present.
+
+   Files WITH the 0x1A marker:  versions (none), 2.0A, 2.5A
+   Files WITHOUT the marker:    versions (none), 1.5B
+   (The presence is not strictly determined by version; it varies per file.)
+
+Complete Byte Layout Example
+-----------------------------
+For a minimal 2-note file:
+
+  Offset  Bytes                              Meaning
+  ------  ---------------------------------  ----------------------------
+  0x0000  3B 44 61 74 61 53 68 6F 77 20      ";DataShow "
+          6D 75 73 69 63 20 66 69 6C 65      "music file"
+          3A 20 54 65 73 74 2E 73 6E 64      ": Test.snd"
+          0D 0A                              CRLF
+  0x001E  46 72 65 71 3A 20 20 20 20 34      "Freq:    4"
+          34 30 20 20 20 44 75 72 3A 20      "40   Dur: "
+          34 30 30 0D 0A                     "400" CRLF
+  0x0037  46 72 65 71 3A 20 20 20 20 20      "Freq:     "
+          20 30 20 20 20 44 75 72 3A 20      " 0   Dur: "
+          32 30 30 0D 0A                     "200" CRLF
+  0x0050  1A                                 DOS EOF (optional)
+
+Audio Interpretation
+--------------------
+DataShow played these files through the IBM PC speaker using the 8253/8254
+Programmable Interval Timer (PIT). The PC speaker produces square waves.
+
+To faithfully reproduce the audio:
+  - Each note with Freq > 0 produces a square wave at the given frequency.
+  - Each note with Freq = 0 produces silence.
+  - Duration is in milliseconds.
+  - Notes are played sequentially with no gaps between them.
+  - The resulting audio is monophonic (single channel).
+
+Sample File Inventory
+---------------------
+File                           Version  Notes  EOF    Size
+----                           -------  -----  ---    ----
+425/ENTRANCE.SND               (none)   48     0x1A   1198
+2277/JINGLE.SND                (none)   121    no     3062
+25/HAPPY.SND                   (none)   42     0x1A   1078
+16813/napoleon.snd             1.5B     80     no     2043
+2019/ENTRANCE_1.SND            1.5B     48     no     1202
+12547/NAPOLEON.SND             2.0A     80     0x1A   2044
+2019/ENTRANCE.SND              2.0A     48     0x1A   1203
+13207/NAPOLEON.SND             2.5A     80     0x1A   2044
+40217/ENTRANCE.SND             2.5A     48     0x1A   1203

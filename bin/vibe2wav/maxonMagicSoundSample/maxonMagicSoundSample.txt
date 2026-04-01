@@ -1,0 +1,236 @@
+MaxonMAGIC Sound Sample File Format Specification (.HSN / HSND)
+==============================================================
+
+Overview
+--------
+The MaxonMAGIC Sound Sample format (file extension .HSN, but sometimes no
+extension) is used by MAXON MAGIC, a multimedia screensaver and system sound
+event utility for the Commodore Amiga, developed by Maxon Computer GmbH
+(Germany), released circa 1993-1996.
+
+Files contain mono 8-bit signed PCM audio with a fixed-size header. Two
+format versions exist: HSND1.0 (48-byte header) and HSND1.1 (90-byte header,
+adds a 42-byte description field).
+
+All multi-byte integer fields are big-endian (Motorola 68000 byte order).
+
+Identification
+--------------
+Magic bytes at offset 0x00: "HSND1.0\0" or "HSND1.1\0" (8 bytes).
+
+
+Header Structure
+----------------
+
+=== Common Header (offsets 0x00 - 0x2F, 48 bytes, both versions) ===
+
+Offset  Size  Type       Description
+------  ----  ---------  ---------------------------------------------------
+0x00    8     char[8]    Magic and version identifier.
+                         "HSND1.0\0" (48-byte header, no description field)
+                         "HSND1.1\0" (90-byte header, includes description)
+
+0x08    4     char[4]    Source format tag. Contains the original source file
+                         extension or format identifier when the sample was
+                         imported from another format. Null-padded. Common
+                         values observed:
+                           ".HSN" (0x2E48534E) - native HSND format
+                           ".MOD" (0x2E4D4F44) - Amiga tracker module
+                           ".WAV" (0x2E574156) - Microsoft WAV
+                           ".AVR" (0x2E415652) - Audio Visual Research
+                           ".SMP" (0x2E534D50) - generic sample
+                           ".SND" (0x2E534E44) - Sound file
+                           ".POU" (0x2E504F55) - unknown format
+                           "HSN\0" (0x48534E00) - alternate HSN encoding
+                           "WAV\0" (0x57415600) - alternate WAV encoding
+                           "\0\0\0\0" - no source format / created natively
+                         Some files contain partially garbled or shifted
+                         values (e.g., "SN\0A", "N\0N\0") which appear to
+                         be fragments of the original filename.
+
+0x0C    8     pad[8]     Reserved. Always zero.
+
+0x14    4     uint32_be  Audio data length in bytes. This is the number of
+                         audio sample bytes following the header.
+                         Total file size = header_size + data_length.
+                         If the file is smaller than this, it is truncated.
+
+0x18    2     uint16_be  Sample rate divisor. The actual playback sample rate
+                         in Hz is this value multiplied by 10.
+                         Observed values:
+                            625 ->  6,250 Hz
+                           1250 -> 12,500 Hz  (most common)
+                           2205 -> 22,050 Hz
+                           2500 -> 25,000 Hz
+                           3200 -> 32,000 Hz
+
+0x1A    4     pad[4]     Reserved. Always zero.
+
+0x1E    2     uint16_be  Bits per sample indicator. Observed values:
+                           8 (0x0008) - standard, 98% of files
+                           1 (0x0001) - rare, audio data is identical
+                                        8-bit signed PCM format
+                         In both cases, the audio encoding is signed 8-bit
+                         PCM. This field may represent a format sub-type or
+                         encoding flag rather than literal bits per sample.
+
+0x20    1     pad[1]     Padding. Always 0x00.
+
+0x21    1     uint8      Flag byte. Observed values: 0 or 1.
+                         Appears to correlate with whether the sample was
+                         imported from an external format (1) or created
+                         natively within MAXON MAGIC (0), but the
+                         correlation is not perfect.
+
+0x22    2     uint16_be  Volume. Amiga audio volume level, range 0-64.
+                         Observed values: 26, 33, 40.
+                         40 is the default (62.5% of maximum).
+
+0x24    2     uint16_be  Playback parameter 1. Always 20 (0x0014).
+                         Purpose not fully determined; may relate to
+                         playback engine configuration.
+
+0x26    2     uint16_be  Playback parameter 2. Always 20 (0x0014).
+                         Purpose not fully determined; may relate to
+                         playback engine configuration.
+
+0x28    1     pad[1]     Padding. Always 0x00.
+
+0x29    1     uint8      Metadata byte A. Observed values: 8, 10, 11, 12.
+                         Together with metadata byte B, likely encodes a
+                         creation or modification date (month and day).
+                         Files created natively in MAXON MAGIC without
+                         importing typically have value 10.
+
+0x2A    1     pad[1]     Padding. Always 0x00.
+
+0x2B    1     uint8      Metadata byte B. Observed values: 7, 10, 11, 12.
+                         See metadata byte A description above.
+                         Files created natively typically have value 10.
+
+0x2C    4     uint32_be  Metadata field C. Varies per file.
+                         Zero for natively-created files without source
+                         format info. Non-zero values likely encode a
+                         timestamp (time of day or similar). For files
+                         sharing the same origin batch, this value is
+                         often identical.
+
+
+=== Extended Header (offsets 0x30 - 0x59, 42 bytes, HSND1.1 only) ===
+
+Offset  Size  Type       Description
+------  ----  ---------  ---------------------------------------------------
+0x30    42    char[42]   Description string. Null-terminated, remainder
+                         padded with zero bytes. Encoded in ISO 8859-1
+                         (Latin-1), consistent with AmigaOS character set.
+                         Contains a human-readable sample description,
+                         typically in German. Examples:
+                           "Jawohl (f\x81r nicht Bayern)"
+                           "Was l\x84uft denn da in's Glas?"
+                           "alte Schreibmaschine 'Return'"
+                           "Bleib cool du Pfeife"
+                         (\x81 = u-umlaut, \x84 = a-umlaut in Latin-1)
+                         May be all zeros (empty description).
+
+
+Audio Data
+----------
+Immediately follows the header:
+  - HSND1.0: audio starts at offset 0x30 (byte 48)
+  - HSND1.1: audio starts at offset 0x5A (byte 90)
+
+Encoding:
+  - 8-bit signed PCM (two's complement)
+  - Mono (single channel)
+  - Uncompressed
+  - Silence = 0x00 (signed zero)
+  - Full range: 0x80 (-128) to 0x7F (+127)
+
+This is the standard Amiga audio sample format as used by the Paula
+audio chip.
+
+The number of audio bytes equals the data length field at offset 0x14.
+Each byte is one sample. Total number of samples = data_length.
+Duration in seconds = data_length / (sample_rate_field * 10).
+
+
+File Size Calculation
+---------------------
+For a well-formed file:
+  file_size = header_size + data_length
+
+Where:
+  header_size = 48 for HSND1.0
+  header_size = 90 for HSND1.1
+
+If the actual file size is less than header_size + data_length, the file
+is truncated. Converters should read whatever audio data is available.
+
+
+WAV Conversion Notes
+--------------------
+When converting to WAV format:
+
+1. Sample rate: Multiply the field at offset 0x18 by 10 to get Hz.
+
+2. Bit depth: The WAV specification defines 8-bit audio as UNSIGNED
+   (range 0-255, silence at 128), while HSND uses SIGNED (range -128
+   to +127, silence at 0). Convert each byte by XORing with 0x80:
+     wav_byte = hsn_byte ^ 0x80
+   This is equivalent to: wav_byte = (hsn_byte + 128) & 0xFF
+
+3. Channel count: Always 1 (mono).
+
+4. WAV format tag: 1 (PCM).
+
+
+Version History
+---------------
+HSND1.0 - Basic format with 48-byte header. No description field.
+           Used for natively-created samples and early imports.
+
+HSND1.1 - Extended format with 90-byte header. Adds a 42-byte
+           description field at offset 0x30-0x59.
+
+
+Byte Map Summary
+----------------
+All 100 examined sample files have every byte accounted for:
+
+  HSND1.0 (48-byte header):
+    [0x00-0x07]  Magic "HSND1.0\0"           8 bytes
+    [0x08-0x0B]  Source format tag            4 bytes
+    [0x0C-0x13]  Reserved (zero)              8 bytes
+    [0x14-0x17]  Data length                  4 bytes
+    [0x18-0x19]  Sample rate / 10             2 bytes
+    [0x1A-0x1D]  Reserved (zero)              4 bytes
+    [0x1E-0x1F]  Bits per sample indicator    2 bytes
+    [0x20]       Padding (zero)               1 byte
+    [0x21]       Flag byte                    1 byte
+    [0x22-0x23]  Volume                       2 bytes
+    [0x24-0x25]  Playback parameter 1         2 bytes
+    [0x26-0x27]  Playback parameter 2         2 bytes
+    [0x28]       Padding (zero)               1 byte
+    [0x29]       Metadata byte A              1 byte
+    [0x2A]       Padding (zero)               1 byte
+    [0x2B]       Metadata byte B              1 byte
+    [0x2C-0x2F]  Metadata field C             4 bytes
+    [0x30-...]   Audio data (signed 8-bit)    data_length bytes
+                                              ---- Total: 48 + data_length
+
+  HSND1.1 (90-byte header):
+    [0x00-0x2F]  Same as HSND1.0             48 bytes
+    [0x30-0x59]  Description string          42 bytes
+    [0x5A-...]   Audio data (signed 8-bit)   data_length bytes
+                                              ---- Total: 90 + data_length
+
+
+Sample File Statistics (from 100 examined files)
+------------------------------------------------
+  Versions:        29 HSND1.0, 71 HSND1.1
+  Sample rates:    6250 Hz (8 files), 12500 Hz (84 files),
+                   22050 Hz (1 file), 25000 Hz (7 files), 32000 Hz (1 file)
+  Volume values:   26 (1 file), 33 (2 files), 40 (97 files)
+  File sizes:      506 bytes to 162,763 bytes
+  Durations:       0.016 seconds to 13.014 seconds
+  Truncated files: 3 (in directory 22208, data_length > available data)

@@ -1,0 +1,225 @@
+FM Towns SND Audio File Format Specification
+=============================================
+Vibe coded by Claude
+
+Overview
+--------
+The FM Towns SND format is a PCM audio container used by Fujitsu's FM Towns
+computer series. It stores 8-bit mono PCM audio with a 32-byte header containing
+playback metadata. The format was used extensively in FM Towns games for voice
+clips, sound effects, and short music samples.
+
+Microsoft Audio ID: 0x0300
+File Extension: .snd (.SND)
+Manufacturer: Fujitsu
+Platform: FM Towns / FM Towns Marty
+Audio Chip: Ricoh RF5C68 (RF5C164) PCM Controller
+
+
+Header Layout (32 bytes, all multi-byte fields are little-endian)
+-----------------------------------------------------------------
+
+Offset  Size  Type      Field           Description
+------  ----  --------  --------------  ------------------------------------
+0x00    8     char[8]   Name            Sample name. ASCII or Shift-JIS
+                                        encoded, null-padded (0x00) to fill
+                                        8 bytes. May contain the instrument
+                                        name, sound effect name, or a
+                                        tool-specific string such as
+                                        "FM-TOWNS" or "FMTOWNS". Not used
+                                        for playback.
+
+0x08    4     uint32le  ID              Authoring tool identifier. Not used
+                                        for playback. Values are arbitrary
+                                        and tool-specific. Common values
+                                        include 0 (unset), 1 (generic),
+                                        7926/0x1EF6 (common tool default),
+                                        and 123456/0x1E240 (placeholder).
+
+0x0C    4     uint32le  DataSize        Size of the audio data in bytes.
+                                        Always equals (FileSize - 32).
+                                        This is the number of PCM samples
+                                        since each sample is one byte.
+
+0x10    4     uint32le  LoopStart       Loop start point as a byte offset
+                                        into the audio data (0-indexed).
+                                        Value of 0 with LoopLength of 0
+                                        indicates no loop. When non-zero,
+                                        the sound driver loops playback
+                                        from this offset.
+
+0x14    4     uint32le  LoopLength      Length of the loop region in bytes
+                                        (samples). When non-zero, the
+                                        invariant LoopStart + LoopLength
+                                        == DataSize always holds. A value
+                                        of 0 with non-zero LoopStart means
+                                        "loop from LoopStart to end of
+                                        data" (LoopLength is implicitly
+                                        DataSize - LoopStart).
+
+0x18    2     uint16le  SampleRate      Playback rate encoding. This value
+                                        corresponds to the frequency step
+                                        register of the RF5C68 PCM chip.
+                                        To obtain the actual playback rate
+                                        in Hz, multiply by 10:
+
+                                          Hz = SampleRate * 10
+
+                                        This approximation derives from the
+                                        RF5C68 hardware formula:
+
+                                          Hz = FD * Fclk / (384 * 2048)
+
+                                        where Fclk ~ 8 MHz, giving a
+                                        multiplier of ~10.17. The x10
+                                        approximation is within 1.7% of
+                                        the hardware rate.
+
+                                        Observed values and their rates:
+                                          100 ->  1,000 Hz
+                                          402 ->  4,020 Hz
+                                          441 ->  4,410 Hz
+                                          490 ->  4,900 Hz
+                                          588 ->  5,880 Hz
+                                          686 ->  6,860 Hz
+                                          784 ->  7,840 Hz
+                                          901 ->  9,010 Hz
+                                          921 ->  9,210 Hz
+                                          940 ->  9,400 Hz
+                                          980 ->  9,800 Hz
+                                        1,024 -> 10,240 Hz
+                                        1,078 -> 10,780 Hz
+                                        1,080 -> 10,800 Hz
+                                        1,568 -> 15,680 Hz
+                                        1,862 -> 18,620 Hz
+                                        1,879 -> 18,790 Hz
+                                        1,880 -> 18,800 Hz
+                                        1,881 -> 18,810 Hz
+                                        1,960 -> 19,600 Hz
+
+0x1A    2     uint16le  Adjust          Fine-tuning adjustment value.
+                                        Usually 0. Rare non-zero values
+                                        (e.g., 100) may indicate pitch
+                                        correction in cents or a
+                                        tool-specific tuning parameter.
+                                        Not required for basic playback.
+
+0x1C    1     uint8     Note            MIDI note number indicating the
+                                        original pitch of the sample.
+                                        Used by the sound driver for
+                                        pitch-shifting when the sample is
+                                        played at different musical notes.
+                                        Common values:
+                                          60 (0x3C) = Middle C (C4)
+                                          64 (0x40) = E4
+                                          46 (0x2E) = Bb2
+                                        Not required for basic playback.
+
+0x1D    1     uint8     Reserved1       Reserved. Always 0 in all observed
+                                        files.
+
+0x1E    2     uint16le  Reserved2       Reserved. Always 0 in all observed
+                                        files.
+
+
+Audio Data (offset 0x20 to end of file)
+---------------------------------------
+The audio data begins immediately after the 32-byte header and continues
+to the end of the file. The data consists of DataSize bytes of 8-bit
+mono PCM samples.
+
+Encoding:
+  The PCM data uses SIGN-MAGNITUDE encoding, matching the native
+  format of the Ricoh RF5C68/RF5C164 PCM chip:
+
+    - Bit 7: sign flag (0 = positive, 1 = negative)
+    - Bits 6-0: magnitude (0 to 127)
+
+  This means:
+    - 0x00 = +0 (positive zero / silence)
+    - 0x01 = +1
+    - 0x7F = +127 (maximum positive amplitude)
+    - 0x80 = -0 (negative zero / silence)
+    - 0x81 = -1
+    - 0xFF = -127 (maximum negative amplitude)
+
+  Both 0x00 and 0x80 represent silence. Some files have leading
+  silence at 0x00, others at 0x80; both are correct.
+
+  The amplitude range is -127 to +127 (254 levels + two zeros).
+
+  To convert to unsigned 8-bit PCM (WAV format, center at 0x80):
+    - Positive bytes (0x00-0x7F): unsigned = byte + 128
+    - Negative bytes (0x80-0xFF): unsigned = 256 - byte
+
+  This maps sign-magnitude -127..+127 to unsigned 1..255, with
+  both zeros mapping to 128 (WAV silence). Zero crossings in the
+  waveform remain smooth after conversion.
+
+Channels: Mono (1 channel)
+Bit depth: 8 bits per sample
+Byte order: Not applicable (single-byte samples)
+
+
+Loop Behavior
+-------------
+When LoopStart and LoopLength are both 0, the sample plays once and stops.
+
+When loop parameters are set, the sound driver plays the sample from the
+beginning to (LoopStart + LoopLength), then loops back to LoopStart and
+repeats the region [LoopStart, LoopStart + LoopLength) indefinitely.
+
+Common loop patterns observed:
+
+  - No loop: LoopStart=0, LoopLength=0
+  - Full loop: LoopStart=0, LoopLength=DataSize
+    (entire sample repeats)
+  - Sustain: LoopStart=DataSize-1, LoopLength=1
+    (last sample held indefinitely; used for sustained tones)
+  - Partial loop: LoopStart>0, LoopLength>0
+    (attack portion plays once, then tail section loops)
+  - Implicit loop-to-end: LoopStart>0, LoopLength=0
+    (loop from LoopStart to end of data; LoopLength treated as
+    DataSize - LoopStart)
+
+
+File Size Invariant
+-------------------
+For all valid SND files:
+
+  FileSize = DataSize + 32
+
+This invariant holds for all 88 sample files examined.
+
+
+Hardware Context
+----------------
+The FM Towns uses the Ricoh RF5C68 (or its successor RF5C164) PCM
+controller, which provides 8 channels of PCM playback. The chip
+operates at a master clock of approximately 8 MHz and processes all
+8 channels in a round-robin cycle of 384 master clocks.
+
+Each channel has an 11-bit fractional address accumulator. The
+SampleRate value in the SND header corresponds to the frequency
+data (FD) register value. On each channel processing cycle, FD is
+added to the fractional accumulator. When the accumulator overflows
+(past 2048), the sample address advances by one.
+
+The precise playback rate formula is:
+
+  Hz = FD * Fclk / (384 * 2048)
+     = FD * 8,000,000 / 786,432
+     ~ FD * 10.1725
+
+The approximation Hz = FD * 10 is used for practical conversion,
+yielding rates accurate to within 1.7%.
+
+
+Encoding Notes
+--------------
+- Name field may contain Shift-JIS encoded Japanese text (e.g.,
+  katakana sound effect names), ASCII text, or null bytes.
+- The ID field appears to be a hash, checksum, or arbitrary value
+  set by the authoring tool. It has no effect on playback.
+- The maximum observed SampleRate value is 1960 (19,600 Hz),
+  consistent with the RF5C68's 11-bit FD register limit of 2047.

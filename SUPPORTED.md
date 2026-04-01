@@ -1,4 +1,4 @@
-# Supported File Formats (3,691)
+# Supported File Formats (3,697)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -418,7 +418,7 @@ archive | OPK PAK | .osp .ovp .obp | [gameextractor](https://sourceforge.net/pro
 archive | OPTLINK Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/optlinkPacked/)
 archive | Order of War Game Archive | .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/orderOfWarGameArchive/)
 archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [vibeExtract](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/)
-archive | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [vibeExtract](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
+archive | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [vibeExtract](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [OS/2 Extended Attributes](http://fileformats.archiveteam.org/wiki/OS/2_extended_attributes) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/os2ExtendedAttributes/)
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [unpack2](https://github.com/Sembiance/dexvert) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/)
@@ -676,7 +676,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (135)
+## Audio (141)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 208 Audio (Ocean Games) | .bnk | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/twoZeroEightAudio/)
@@ -712,6 +712,7 @@ audio | CRI ADX | .adx | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://githu
 audio | CRI AFS | .afs | [ffmpeg](https://ffmpeg.org/) | 
 audio | Cryo Interactive APC Audio | .apc | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/cryoInteractiveAPC/)
 audio | Cyberflix DreamFactory CFDF Audio | .trk | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/cyberflixDreamFactoryCFDFAudio/)
+audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/dataShowSound/)
 audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwd | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/diamondWareDigitized/)
 audio | [Digital Speech Standard](http://justsolve.archiveteam.org/wiki/Digital_Speech_Standard) | .dss | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/digitalSpeechStandard/)
 audio | DirectMusic Segment | .dmsg | [vgmstream](https://github.com/vgmstream/vgmstream) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/directMusicSegment/)
@@ -727,6 +728,7 @@ audio | [Electronic Arts Sound hEADer](http://fileformats.archiveteam.org/wiki/E
 audio | Ensoniq Disk Image | .gkh .eds .eda .ede .edt .edv | [vibe2wav](https://github.com/Sembiance/dexvert) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/ensoniqDiskImage/)
 audio | [eXtended Instrument](http://fileformats.archiveteam.org/wiki/Extended_instrument) | .xi | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/eXtendedInstrument/)
 audio | Flanker Sound Library | .sfx | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/flankerSoundLibrary/)
+audio | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/)
 audio | [FMOD Sample Bank](http://fileformats.archiveteam.org/wiki/FMOD_Sample_Bank) | .fsb .bank | [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/fmodSampleBank/)
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/flac/)
 audio | FSSD SoundEdit Mac Sound |  | [fssd2wav](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/fssdSound/)
@@ -750,12 +752,15 @@ audio | LucasArts SAUD | .sad | [ffmpeg](https://ffmpeg.org/) | [10 sample files
 audio | [MacroSystem Audio](http://fileformats.archiveteam.org/wiki/IFF-MAUD) | .maud | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/maud/)
 audio | [Matroska Audio](http://fileformats.archiveteam.org/wiki/Matroska_Audio) | .mka | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/mka/)
 audio | [Maxis XA Audio](https://wiki.multimedia.cx/index.php/Maxis_XA) | .xa | [sox](http://sox.sourceforge.net) [vgmstream](https://github.com/vgmstream/vgmstream) [zxtune123](https://zxtune.bitbucket.io/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/maxisXA/)
+audio | MaxonMAGIC Sound Sample | .hsn | [vibe2wav](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/maxonMagicSoundSample/)
+audio | MED Synth Sound |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/medSynthSound/)
 audio | Microsoft XWMA Audio | .xwma .xwm | [ffmpeg](https://ffmpeg.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/xwmaAudio/)
 audio | MIDI Sample Dump | .sds | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/midiSampleDump/)
 audio | [Monkey's Audio](http://fileformats.archiveteam.org/wiki/Monkey's_Audio) | .ape | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/monkeysAudio/)
 audio | [MPEG ADTS Layer II](http://fileformats.archiveteam.org/wiki/MPEG_Audio_Layer_II) | .mp2 | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/mp2/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 .mpga .mpg |  | [10 sample files](https://sembiance.com/fileFormatSamples/audio/mp3/)
 audio | [Musepack Audio](http://justsolve.archiveteam.org/wiki/Musepack_Audio) | .mpc .mp+ .mpp | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/musepack/)
+audio | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/musicStudioSound/)
 audio | Need for Speed: Underground audio | .abk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedUndergroundAudio/)
 audio | NIST Sphere Audio | .sd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/nistSphere/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/ogg/)
@@ -808,6 +813,7 @@ audio | [WavPack](http://fileformats.archiveteam.org/wiki/WavPack) | .wv .wvc | 
 audio | WBNK Audio Archive | .wbnk | [vibe2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/wbnkAudioArchive/)
 audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD) | .aud | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/westwoodStudiosAudio/) - Sample file 991.AUD converts to just silence, not sure why.
 audio | [Windows Media Audio](http://fileformats.archiveteam.org/wiki/WMA) | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/wma/)
+audio | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [vibe2wav](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/)
 audio | Wwise sound Bank | .bnk | [ffmpeg](https://ffmpeg.org/) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/wwiseSoundBank/)
 audio | XACT Wave Bank | .xwb | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/xactWaveBank/)
 audio | Xbox SDNS | .xma | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/xboxSDNS/)
@@ -1636,7 +1642,7 @@ image | [One Laptop Per Child 565](http://fileformats.archiveteam.org/wiki/OLPC_
 image | [OpenDocument Drawing](http://fileformats.archiveteam.org/wiki/OpenDocument_Drawing) | .odg .otg .fodg | [soffice](https://www.libreoffice.org) | [16 sample files](https://sembiance.com/fileFormatSamples/image/odg/)
 image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr | [abydosconvert](https://github.com/Sembiance/abydosconvert) [iconvert](https://github.com/AcademySoftwareFoundation/OpenImageIO) [ffmpeg](https://ffmpeg.org/) [gimp](https://gimp.org) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [11 sample files](https://sembiance.com/fileFormatSamples/image/exr/)
 image | [OpenRaster](http://fileformats.archiveteam.org/wiki/OpenRaster) | .ora | [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) | [1 sample file](https://sembiance.com/fileFormatSamples/image/ora/)
-image | [Oric Hires Screen](http://fileformats.archiveteam.org/wiki/Oric_HIRES_screen;) | .hrs .hir .tap | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://sembiance.com/fileFormatSamples/image/hrs/)
+image | [Oric Hires Screen](http://fileformats.archiveteam.org/wiki/Oric_HIRES_screen;) | .hrs .hir .tap | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://sembiance.com/fileFormatSamples/image/hrs/)
 image | [OS/2 Boot Logo](http://fileformats.archiveteam.org/wiki/OS/2_Boot_Logo) | .lgo | [deark](https://entropymine.com/deark/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/os2BootLogo/)
 image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/icoOS2/)
 image | [OS/2 Pointer](http://fileformats.archiveteam.org/wiki/OS/2_Pointer) | .ptr | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/os2Pointer/)

@@ -1,0 +1,443 @@
+MED Synth Sound File Format Specification (MSH)
+=================================================
+
+Overview
+--------
+MED Synth Sound files store synthetic instrument definitions used by
+OctaMED / MED Soundstudio on the Amiga. A synth instrument consists of
+one or more single-cycle waveforms plus two control programs (the volume
+sequence and waveform sequence) that modulate the sound over time.
+
+Files are identified by the ASCII magic "MSH\0" at offset 0. All multi-
+byte integers are big-endian (Motorola byte order). Waveform sample data
+is 8-bit signed PCM (two's complement: 0x00 = centre, 0x7F = +127,
+0x80 = -128).
+
+
+File Layout
+-----------
+
+  Offset  Size     Field
+  ------  ----     -----
+  0x00    4        Magic ("MSH\0", bytes 4D 53 48 00)
+  0x04    2        Type (signed int16: -1 = synth, -2 = hybrid)
+  0x06    1        Default decay
+  0x07    3        Reserved (always 00 00 00)
+  0x0A    2        Rep (repeat offset, uint16, typically 0)
+  0x0C    2        RepLen (repeat length, uint16, typically 0)
+  0x0E    2        VolTblLen - volume sequence table length in bytes
+  0x10    2        WfTblLen  - waveform sequence table length in bytes
+  0x12    1        VolSpeed  - initial volume sequence speed (ticks/step)
+  0x13    1        WfSpeed   - initial waveform sequence speed (ticks/step)
+  0x14    2        NumWF     - number of waveforms (uint16)
+  0x16    var      Volume sequence table (VolTblLen bytes)
+  var     var      Waveform sequence table (WfTblLen bytes)
+  var     var      Waveform offset table (NumWF x 4 bytes)
+  var     var      Waveform data blocks
+
+Total file size = 22 + VolTblLen + WfTblLen + (NumWF * 4)
+                  + sum of (2 + WfSizeWords[i] * 2) for each waveform
+
+
+Header (22 bytes fixed)
+-----------------------
+
+Bytes 0x00-0x03: Magic
+  Always "MSH\0" (4D 53 48 00). Identifies the file as a MED Synth
+  Sound. In the MMD module format, this field holds the struct length
+  instead; the standalone file replaces it with the magic signature.
+
+Bytes 0x04-0x05: Type (signed big-endian int16)
+  -1 (0xFFFF) = Synthetic instrument (waveforms only)
+  -2 (0xFFFE) = Hybrid instrument (waveforms + real sample)
+  All known standalone MSH files use type -1 (synth).
+
+Byte 0x06: Default Decay
+  Default volume decay rate. Typically 0 in standalone files.
+
+Bytes 0x07-0x09: Reserved
+  Always 00 00 00.
+
+Bytes 0x0A-0x0B: Rep (uint16)
+  Sample repeat start offset. Typically 0 in standalone files.
+
+Bytes 0x0C-0x0D: RepLen (uint16)
+  Sample repeat length. Typically 0 in standalone files.
+
+Bytes 0x0E-0x0F: VolTblLen (uint16)
+  Number of bytes in the volume sequence table. Range: 1-128 typical.
+
+Bytes 0x10-0x11: WfTblLen (uint16)
+  Number of bytes in the waveform sequence table. Range: 1-128 typical.
+
+Byte 0x12: VolSpeed
+  Initial speed divider for the volume sequence. The sequence advances
+  one step every VolSpeed ticks. Higher values = slower progression.
+  Range: 1-15 typical. Value 0 is treated as 1.
+
+Byte 0x13: WfSpeed
+  Initial speed divider for the waveform sequence. Same semantics as
+  VolSpeed but for the waveform sequence.
+
+Bytes 0x14-0x15: NumWF (uint16)
+  Number of waveforms stored in this instrument. Range: 1-64 typical,
+  maximum 128.
+
+
+Volume Sequence Table
+---------------------
+
+Immediately follows the header at offset 0x16. Contains VolTblLen bytes.
+
+Each byte is either a direct volume value or a command:
+
+  0x00-0xEF  Direct volume value (set volume to this level)
+             Standard Amiga range is 0-64 (0x00-0x40); values above 64
+             are clamped to 64 during playback.
+
+  0xF0-0xFF  Commands (see Volume Sequence Commands below)
+
+The sequence is processed step-by-step at the rate determined by
+VolSpeed. On each step, one direct value is consumed, or one or more
+commands are processed until a value, wait, halt, or end is reached.
+
+
+Waveform Sequence Table
+-----------------------
+
+Immediately follows the volume sequence table. Contains WfTblLen bytes.
+
+Each byte is either a direct waveform index or a command:
+
+  0x00-0xEF  Direct waveform index (switch to waveform N)
+             Valid range: 0 to NumWF-1.
+
+  0xF0-0xFF  Commands (see Waveform Sequence Commands below)
+
+Processed identically to the volume sequence but at WfSpeed rate.
+
+
+Waveform Offset Table
+---------------------
+
+Immediately follows the waveform sequence table. Contains NumWF entries,
+each a 4-byte big-endian unsigned integer (uint32) giving the absolute
+byte offset from the start of the file to that waveform's data block.
+
+
+Waveform Data Blocks
+--------------------
+
+Each waveform data block has the structure:
+
+  Offset  Size           Field
+  ------  ----           -----
+  +0x00   2              WfSizeWords (uint16, big-endian)
+  +0x02   WfSizeWords*2  Sample data (8-bit signed PCM bytes)
+
+WfSizeWords gives the waveform length in 16-bit words (Amiga hardware
+convention). The actual number of sample bytes is WfSizeWords * 2.
+
+Common waveform sizes (in words / bytes / samples):
+   8 words =   16 bytes =   16 samples
+  16 words =   32 bytes =   32 samples
+  32 words =   64 bytes =   64 samples
+  64 words =  128 bytes =  128 samples
+
+The waveform data represents one complete cycle of the sound wave. During
+playback, the waveform is looped continuously at a rate determined by
+the Amiga period register. The fundamental frequency of the sound equals:
+
+  freq = AMIGA_CLOCK / (period * waveform_length_in_samples)
+
+where AMIGA_CLOCK = 3546895 Hz (PAL) or 3579545 Hz (NTSC).
+
+Sample encoding:
+  0x00 = zero crossing (silence)
+  0x01-0x7F = positive values (+1 to +127)
+  0x80 = most negative value (-128)
+  0x81-0xFF = negative values (-127 to -1)
+
+
+Volume Sequence Commands
+------------------------
+
+Commands occupy one or two bytes. The first byte is the command opcode
+(0xF0-0xFF). Some commands are followed by a one-byte parameter.
+
+  Opcode  Mnemonic  Param  Description
+  ------  --------  -----  -----------
+  0xF0    SPD       yes    Set Speed. Sets the volume sequence speed
+                           divider to the parameter value. Higher values
+                           mean slower volume changes.
+
+  0xF1    WAI       yes    Wait. Pauses the volume sequence for the
+                           specified number of additional ticks before
+                           the next step is processed.
+
+  0xF2    CHD       yes    Change Down. Starts a continuous volume slide
+                           downward. Each tick, volume decreases by the
+                           parameter value. The slide persists until a
+                           new direct volume value or another CHD/CHU
+                           command is encountered.
+
+  0xF3    CHU       yes    Change Up. Starts a continuous volume slide
+                           upward. Each tick, volume increases by the
+                           parameter value.
+
+  0xF4    EN1       yes    Envelope One-shot. Uses the specified waveform
+                           (by index) as a volume envelope. The waveform
+                           data bytes are read sequentially as signed
+                           values and mapped to volume levels. Plays once
+                           through the envelope, then stops.
+
+  0xF5    EN2       yes    Envelope Looping. Same as EN1, but the
+                           envelope loops back to the beginning when it
+                           reaches the end, creating a repeating volume
+                           pattern.
+
+  0xF6    EST       no     Unknown / not implemented. Appears rarely.
+                           No parameter byte follows this command.
+
+  0xFA    JWS       yes    Jump Waveform Sequence. Cross-sequence control:
+                           sets the waveform sequence pointer to the
+                           specified position. Allows the volume program
+                           to control waveform playback.
+
+  0xFB    HLT       no     Halt. Stops the volume sequence at the current
+                           position. The sequence resumes from the byte
+                           AFTER HLT when a key-off (note release) event
+                           occurs. No parameter byte.
+
+  0xFE    JMP       yes    Jump. Sets the volume sequence pointer to the
+                           specified absolute byte position within the
+                           volume table. Used to create loops.
+
+  0xFF    END       no     End. Permanently stops the volume sequence.
+                           Volume remains at its last value. No parameter
+                           byte.
+
+Commands not listed (0xF7, 0xF8, 0xF9, 0xFC, 0xFD) are not used in
+volume sequences.
+
+
+Waveform Sequence Commands
+--------------------------
+
+  Opcode  Mnemonic  Param  Description
+  ------  --------  -----  -----------
+  0xF0    SPD       yes    Set Speed. Sets the waveform sequence speed
+                           divider to the parameter value.
+
+  0xF1    WAI       yes    Wait. Pauses the waveform sequence for the
+                           specified number of additional ticks.
+
+  0xF2    CHD       yes    Change Down (pitch). Starts a continuous
+                           pitch slide downward. Each tick, the Amiga
+                           period register is increased by the parameter
+                           value (higher period = lower pitch).
+
+  0xF3    CHU       yes    Change Up (pitch). Starts a continuous pitch
+                           slide upward. Each tick, the period register
+                           is decreased by the parameter value.
+
+  0xF4    VBD       yes    Vibrato Depth. Sets the vibrato modulation
+                           depth to the parameter value. Vibrato is not
+                           active until both depth and speed are nonzero.
+
+  0xF5    VBS       yes    Vibrato Speed. Sets the vibrato oscillation
+                           speed to the parameter value.
+
+  0xF6    RES       no     Reset Pitch. Resets the period register to
+                           the original note period, cancelling any
+                           accumulated pitch slides. No parameter byte.
+
+  0xF7    VWF       yes    Vibrato Waveform. Sets which waveform (by
+                           index) to use as the vibrato modulation shape.
+                           Default is a sine wave.
+
+  0xFA    JVS       yes    Jump Volume Sequence. Cross-sequence control:
+                           sets the volume sequence pointer to the
+                           specified position. Allows the waveform program
+                           to control volume envelope.
+
+  0xFB    HLT       no     Halt. Stops the waveform sequence. Resumes
+                           from the next byte on key-off. No parameter.
+
+  0xFC    ARP       var    Begin Arpeggio. The bytes following this
+                           command are arpeggio note offsets (semitone
+                           values), read until an ARE (0xFD) or END
+                           (0xFF) terminator. During playback, the pitch
+                           cycles through these offsets relative to the
+                           base note. Variable-length inline data.
+
+  0xFD    ARE       no     Arpeggio End. Marks the end of an arpeggio
+                           definition started by ARP. No parameter byte.
+
+  0xFE    JMP       yes    Jump. Sets the waveform sequence pointer to
+                           the specified position. If the target byte is
+                           END (0xFF), the sequence halts instead.
+
+  0xFF    END       no     End. Permanently stops the waveform sequence.
+                           The last selected waveform continues playing.
+                           No parameter byte.
+
+Commands not listed (0xF8, 0xF9) are unused in waveform sequences.
+
+
+Playback Engine
+---------------
+
+The synth engine runs at the Amiga vertical blank interrupt rate:
+50 Hz (PAL) or 60 Hz (NTSC). Each tick:
+
+  1. Volume sequence processing:
+     a. If waiting (WAI active), decrement wait counter and skip.
+     b. Decrement speed counter. When it reaches zero, reset counter
+        to VolSpeed and process the next volume sequence step.
+     c. Apply volume slide: volume += slide_value. Clamp to 0-64.
+     d. Apply volume envelope (EN1/EN2) if active.
+
+  2. Waveform sequence processing:
+     a. If waiting, decrement wait counter and skip.
+     b. Decrement speed counter. When zero, reset to WfSpeed and
+        process the next waveform sequence step.
+     c. Apply period slide: period += slide_value. Clamp to 113-6848.
+     d. Apply vibrato modulation if depth and speed are nonzero.
+     e. Cycle arpeggio index if arpeggio data is active.
+
+  3. Process deferred cross-sequence jumps (JWS/JVS).
+
+  4. Audio generation: loop the current waveform at the DMA rate
+     determined by the period register, scaled by the current volume.
+
+Audio output:
+  DMA sample rate = AMIGA_CLOCK / period
+  Waveform fundamental = DMA_rate / waveform_length_in_samples
+
+For a standard C-3 note (period 428) with a 128-sample waveform:
+  DMA rate = 3546895 / 428 ≈ 8289 Hz
+  Fundamental = 8289 / 128 ≈ 64.8 Hz
+
+
+Byte Accounting Example
+-----------------------
+
+File: Rechteck.syn (48 bytes, a square wave)
+
+  Offset  Bytes  Value       Field
+  ------  -----  -----       -----
+  0x00    4      4D534800    Magic "MSH\0"
+  0x04    2      FFFF        Type = -1 (synth)
+  0x06    1      00          Default decay = 0
+  0x07    3      000000      Reserved
+  0x0A    2      0000        Rep = 0
+  0x0C    2      0000        RepLen = 0
+  0x0E    2      0002        VolTblLen = 2
+  0x10    2      0002        WfTblLen = 2
+  0x12    1      03          VolSpeed = 3
+  0x13    1      03          WfSpeed = 3
+  0x14    2      0001        NumWF = 1
+
+  0x16    1      08          Vol seq: set volume to 8
+  0x17    1      FF          Vol seq: END
+
+  0x18    1      00          Wf seq: set waveform 0
+  0x19    1      FF          Wf seq: END
+
+  0x1A    4      0000001E    Wf offset[0] = 30 (0x1E)
+
+  0x1E    2      0008        Waveform 0: size = 8 words = 16 bytes
+  0x20    16     7F7F7F7F    Waveform 0: 8 positive samples (0x7F)
+                 7F7F7F7F
+                 80808080    followed by 8 negative samples (0x80)
+                 80808080    = perfect square wave
+
+  Total: 22 + 2 + 2 + 4 + 2 + 16 = 48 bytes ✓
+
+
+Byte Accounting Example (multi-waveform)
+-----------------------------------------
+
+File: Organ1.SYN (1251 bytes, 9 evolving organ waveforms)
+
+  Offset  Bytes  Value       Field
+  ------  -----  -----       -----
+  0x00    4      4D534800    Magic "MSH\0"
+  0x04    2      FFFF        Type = -1 (synth)
+  0x06    1      00          Default decay = 0
+  0x07    3      000000      Reserved
+  0x0A    2      0000        Rep = 0
+  0x0C    2      0000        RepLen = 0
+  0x0E    2      0004        VolTblLen = 4
+  0x10    2      0013        WfTblLen = 19
+  0x12    1      06          VolSpeed = 6
+  0x13    1      03          WfSpeed = 3
+  0x14    2      0009        NumWF = 9
+
+  0x16    4      40 30 20    Vol seq: vol=64, vol=48, vol=32, END
+                 FF          (3-stage decay envelope)
+
+  0x1A    19     00 01 02    Wf seq: cycle through waveforms 0-8
+                 03 04 05    then reverse 7-1, JMP to pos 0 (loop)
+                 06 07 08
+                 07 06 05
+                 04 03 02
+                 01 FE 00
+                 FF
+
+  0x2D    36     (9 x uint32) Waveform offset table
+                 00000051, 000000D3, 00000155,
+                 000001D7, 00000259, 000002DB,
+                 0000035D, 000003DF, 00000461
+
+  0x51    130    Waveform 0: size=64 words (128 bytes) + 2-byte header
+  0xD3    130    Waveform 1
+  0x155   130    Waveform 2
+  0x1D7   130    Waveform 3
+  0x259   130    Waveform 4
+  0x2DB   130    Waveform 5
+  0x35D   130    Waveform 6
+  0x3DF   130    Waveform 7
+  0x461   130    Waveform 8
+
+  Total: 22 + 4 + 19 + 36 + (9 × 130) = 1251 bytes ✓
+
+
+Cross-Sequence Control
+----------------------
+
+The JWS (0xFA in vol seq) and JVS (0xFA in wf seq) commands allow one
+sequence to control the other's playback position. This enables complex
+multi-stage envelopes where, for example, the waveform sequence triggers
+different volume levels via JVS at key moments.
+
+Example from medsy.hydr.0E12161A:
+  Vol seq: 40 FE 10 30 FE 10 10 FE 10 08 FE 10 04 FE 10 FB F1 04 F2 02 FF
+  Wf seq:  F4 10 F5 30 00 01 ... 08 FB FA 03 FE 00 FA 06 FE 00 ...
+
+The wf seq uses FA (JVS) to jump the vol seq to positions 3, 6, 9, 12
+at different stages, each setting a progressively lower volume (48, 16,
+8, 4) before jumping to the common decay tail at position 16.
+
+
+Arpeggio Definitions
+--------------------
+
+The ARP (0xFC) command in the waveform sequence defines inline arpeggio
+data. Bytes between ARP and ARE (0xFD) are semitone offsets that cycle
+continuously during playback.
+
+Example from basschord37:
+  Wf seq: FC 00 03 07 FD F4 06 F5 40 00 01 ...
+  → ARP defines offsets [0, 3, 7] = root, minor third, fifth
+  → ARE ends the definition
+  → Subsequent commands set vibrato and cycle waveforms
+
+
+References
+----------
+- OctaMED Soundstudio by Teijo Kinnunen (RIP)
+- libxmp source: src/med_extras.c, src/loaders/med.h
+- OpenMPT source: soundlib/Load_med.cpp
+- MMD File Format specification (MMD_FileFormat.doc)

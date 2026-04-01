@@ -19,7 +19,7 @@ sudo killall GARbro.Console.
 if [[ "$(hostname)" == dexdrone* ]]; then
 	killall python3 identify convert ffmpeg java soffice.bin tail
 	kill $(pgrep -f /mnt/compendium/DevLab/dexvert/bin/startDexserver)
-	killall inotifywait dbus-launch dexrecurse deno magick
+	killall inotifywait dbus-launch dexrecurse deno magick dbus-daemon
 fi
 
 cd /mnt/ram/tmp || exit

@@ -1,0 +1,372 @@
+DVSM File Format Specification
+==============================
+
+Overview
+--------
+DVSM (Digital Voice Sample Module) is a sample file format created by Andreas
+Binner for use with WinRec, a sound recording application for the Atari
+ST/Falcon series of computers (circa 1994). Files typically use the .DVS or
+.SND extension.
+
+All multi-byte integer fields are stored in big-endian (Motorola 68000) byte
+order. The Atari ST/Falcon uses a Motorola 68000-series CPU.
+
+
+Base Header (16 bytes)
+----------------------
+The minimum header is 16 bytes. In C (Atari ST conventions where int=16-bit,
+long=32-bit):
+
+    typedef struct {
+        char         magic[6];    /* offset  0: "DVSM\0\0"                */
+        int          headlen;     /* offset  6: header length (bytes)      */
+        unsigned int freq;        /* offset  8: sampling frequency         */
+        char         pack;        /* offset 10: compression type           */
+        char         mode;        /* offset 11: format mode bits           */
+        long         blocklen;    /* offset 12: packed block length        */
+    } DVSMHEAD;                   /* total: 16 bytes                       */
+
+Field details:
+
+  Offset  Size  Type      Field      Description
+  ------  ----  --------  ---------  -------------------------------------------
+  0       6     char[6]   magic      File signature: ASCII "DVSM" followed by
+                                     two null bytes (0x44 0x56 0x53 0x4D 0x00
+                                     0x00).
+
+  6       2     int16     headlen    Total header length in bytes, including any
+                                     extension blocks. Audio data begins at this
+                                     offset from the start of the file. Must be
+                                     an even value. Minimum value is 16 (no
+                                     extensions). Maximum is 65535.
+
+  8       2     uint16    freq       Sampling frequency. Two encoding modes:
+
+                                     0-7: Atari Falcon CODEC frequency index.
+                                     Rate = 25175000 / ((prescale+1) * 256).
+                                     WinRec indices map to hardware prescale
+                                     values 11, 9, 7, 5, 4, 3, 2, 1:
+
+                                       Index  Prescale  Divisor  Rate (Hz)
+                                       -----  --------  -------  ---------
+                                         0       11      3072      8195
+                                         1        9      2560      9834
+                                         2        7      2048     12293
+                                         3        5      1536     16390
+                                         4        4      1280     19668
+                                         5        3      1024     24585
+                                         6        2       768     32780
+                                         7        1       512     49170
+
+                                     >256: Direct sample rate in Hz. Values
+                                     found in practice include 24584 and 32779,
+                                     corresponding to CODEC indices 4 and 5
+                                     respectively.
+
+                                     Values 8-256 are reserved/unused.
+
+  10      1     int8      pack       Compression type:
+                                       0 = Unpacked (raw PCM)
+                                       2 = DVS delta packed
+                                       4 = DVS voice packed (WinRec Pro)
+                                       5 = ADPCM (WinRec Pro)
+
+  11      1     int8      mode       Format mode bits:
+                                       Bit 0: Resolution
+                                              0 = 8-bit samples
+                                              1 = 16-bit samples
+                                       Bit 1: Channel layout
+                                              0 = Stereo (interleaved L/R)
+                                              1 = Mono
+
+                                     Combined mode values:
+                                       0x00 = 8-bit stereo
+                                       0x01 = 16-bit stereo
+                                       0x02 = 8-bit mono
+                                       0x03 = 16-bit mono
+
+  12      4     int32     blocklen   Length of one packed data block in bytes.
+                                     Only meaningful when pack=2 or pack=4.
+                                     Should be an even value (though mono delta
+                                     pack produces odd values in practice).
+
+                                     Observed values:
+                                       32001 for 16-bit mono delta pack
+                                       64002 for 16-bit stereo delta pack
+
+
+Extension Blocks
+----------------
+If headlen > 16, the space between offset 16 and offset headlen contains
+extension blocks. Each block has the structure:
+
+    Offset  Size  Type      Field    Description
+    ------  ----  --------  -------  -------------------------------------------
+    0       4     char[4]   cookie   Block type identifier (ASCII)
+    4       2     uint16    len      Total block length (includes cookie + len)
+    6       N     bytes     data     Block data (len - 6 bytes)
+
+Programs should skip unrecognized extension blocks. Known block types:
+
+    Cookie  Data size     Description
+    ------  -----------   --------------------------------------------------
+    'CLCK'  2 bytes       Clock source: 0=internal, 1=external CD, 2=ext DAT
+    'PEAK'  4 bytes       Peak sample values: one uint16 per channel (L, R)
+    'DSPE'  variable      DSP effect program in binary format
+    'PARA'  variable      Parameters for DSPE effect (must follow DSPE)
+    'PACK'  128 or 8 b    Custom delta pack table (replaces standard table)
+    'INFO'  variable      Info text (e.g. track title), ASCII
+    'KARA'  variable      Karaoke text and timing data (see below)
+
+
+Audio Data Formats
+------------------
+
+All audio data begins at offset headlen from the start of the file.
+
+### Pack 0: Unpacked (Raw PCM)
+
+Samples are stored as raw PCM data with no compression.
+
+  8-bit samples:  Signed bytes (-128 to 127), where 0 = silence.
+                  For stereo: interleaved left, right, left, right, ...
+                  Each byte is one sample.
+
+  16-bit samples: Signed big-endian words (-32768 to 32767), where 0 = silence.
+                  For stereo: interleaved L(16), R(16), L(16), R(16), ...
+                  Each word is 2 bytes.
+
+Total audio bytes = frames * channels * (bits_per_sample / 8)
+
+
+### Pack 2: Delta Packed
+
+Delta packing compresses 16-bit audio by storing an initial sample value
+followed by 8-bit delta indices. Each delta byte is a lookup index into an
+exponential table that maps to a signed 16-bit distance value. The current
+sample is reconstructed by accumulating these deltas.
+
+This format is only used with 16-bit samples (mode bit 0 = 1).
+
+**Mono stream structure:**
+
+    Mono delta data is encoded as a single continuous stream, regardless of
+    the blocklen value in the header.  The blocklen field reflects the
+    recording buffer size used by WinRec but does NOT create block boundaries
+    with new initial samples in the data.
+
+    Offset  Size    Description
+    ------  ------  -------------------------------------------
+    0       2       Initial sample value (int16, big-endian)
+    2       N       Delta index bytes (all remaining audio data)
+
+    Total decoded samples = 1 + (audio_data_length - 2).
+
+    NOTE: The WinRec documentation describes blocklen as applying to both
+    mono and stereo, but empirical analysis of mono files shows the data is
+    a single continuous stream.  Attempting to split mono data into blocks
+    causes severe audio artifacts (pops/clicks at block boundaries) because
+    delta bytes at the would-be boundary get misinterpreted as initial
+    16-bit sample values.
+
+**Block structure (stereo, blocklen bytes):**
+
+    Offset  Size    Description
+    ------  ------  -------------------------------------------
+    0       2       Initial left sample (int16, big-endian)
+    2       2       Initial right sample (int16, big-endian)
+    4       N       Interleaved delta pairs: L(8), R(8), L(8), R(8), ...
+                    Total: blocklen - 4 bytes = (blocklen-4)/2 delta pairs
+
+    Each block decodes to 1 + (blocklen - 4) / 2 stereo sample pairs.
+    Typical blocklen: 64002 -> 32000 sample pairs per block.
+
+The audio data consists of consecutive blocks. The last block may be shorter
+than blocklen (a partial block extending to end of file).
+
+**Standard delta lookup table:**
+
+The 8-bit delta index (unsigned byte 0-255, interpreted as signed -128..127)
+maps to a 16-bit signed delta value via this exponential formula:
+
+    BASE = 1.084618362
+
+    For signed index x:
+      table[x] = 0                          if x == 0
+      table[x] = round(BASE ^ x)            if x > 0   (1 to 127)
+      table[x] = -round(BASE ^ (-x))        if x < 0   (-128 to -1)
+
+    Values are clamped to the signed 16-bit range [-32768, 32767].
+
+Selected table values (unsigned byte index -> signed delta):
+
+    Index (unsigned)  Index (signed)  Delta value
+    ----------------  --------------  -----------
+           0               0               0
+           1              +1              +1
+           5              +5              +2
+          10             +10              +2
+          20             +20              +5
+          30             +30             +11
+          40             +40             +26
+          50             +50             +57
+          60             +60            +129
+          70             +70            +290
+          80             +80            +651
+          90             +90           +1462
+         100            +100           +3283
+         110            +110           +7375
+         120            +120          +16566
+         127            +127          +30291
+         128            -128          -32768  (clamped from ~-32854)
+         200             -56            -290
+         220             -36             -57
+         240             -16              -5
+         255              -1              -1
+
+**Decoding algorithm:**
+
+    sample = read_initial_int16_bigendian()
+    output(sample)
+    for each delta_byte in block_data:
+        sample = sample + delta_table[delta_byte]
+        sample = clamp_or_wrap_to_int16(sample)
+        output(sample)
+
+The PACK extension block, if present, provides a custom delta table that
+replaces the standard exponential table.
+
+
+### Pack 4: Voice Packed
+
+Voice packing compresses 16-bit audio using 4-bit delta indices (nibbles).
+Each nibble indexes into a 16-entry table of power-of-two step sizes. This
+gives higher compression (4:1) but lower quality than delta packing (2:1).
+
+This format is only used with 16-bit samples (mode bit 0 = 1).
+
+**4-bit delta table (16 entries, indexed by nibble value 0-15):**
+
+    Index   Delta
+    -----   ------
+      0     -8192
+      1     -4096
+      2     -2048
+      3     -1024
+      4      -512
+      5      -256
+      6       -64
+      7         0
+      8       +64
+      9      +256
+     10      +512
+     11     +1024
+     12     +2048
+     13     +4096
+     14     +8192
+     15    +16384
+
+**Block structure (mono, blocklen bytes):**
+
+    Offset  Size    Description
+    ------  ------  -------------------------------------------
+    0       2       Initial sample value (int16, big-endian)
+    2       N       Packed nibble bytes (blocklen - 2 bytes)
+
+    Each byte encodes two samples:
+      High nibble (bits 7-4): first delta index
+      Low nibble (bits 3-0): second delta index
+
+    Each block decodes to 1 + 2 * (blocklen - 2) samples.
+
+**Block structure (stereo, blocklen bytes):**
+
+    Offset  Size    Description
+    ------  ------  -------------------------------------------
+    0       2       Initial left sample (int16, big-endian)
+    2       2       Initial right sample (int16, big-endian)
+    4       N       Packed nibble bytes (blocklen - 4 bytes)
+
+    Each byte encodes one stereo sample pair:
+      High nibble (bits 7-4): left channel delta index
+      Low nibble (bits 3-0): right channel delta index
+
+    Each block decodes to 1 + (blocklen - 4) stereo sample pairs.
+
+
+### Pack 5: ADPCM
+
+ADPCM compression (WinRec Pro only). Format details are not publicly
+documented. Not encountered in known sample collections.
+
+
+Karaoke Text Extension
+----------------------
+The KARA extension block contains synchronized lyrics:
+
+    Offset  Size       Description
+    ------  ---------  -------------------------------------------
+    0       2          Text length in bytes (uint16, big-endian)
+    2       textlen    ASCII text of lyrics
+    2+N     M*4        Timing table: one uint32 per word, containing
+                       the time offset to the next word in units of
+                       1/sampling_frequency seconds
+
+
+Byte-Level Accounting
+---------------------
+For any valid DVSM file:
+
+    Total file size = headlen + audio_data_size
+
+    Where:
+      headlen >= 16 (base header + optional extension blocks)
+      audio_data_size = file_size - headlen
+
+    The base header is exactly 16 bytes.
+    Extension blocks (if any) fill bytes 16 through headlen-1.
+    Audio data fills bytes headlen through end-of-file.
+
+Every byte in the file belongs to exactly one of these regions.
+
+For pack=2 delta-packed audio:
+  - Mono: audio divides into blocks of blocklen bytes (last may be shorter)
+    Each block: 2-byte initial sample + (block_size - 2) delta bytes
+  - Stereo: blocks of blocklen bytes (last may be shorter)
+    Each block: 4-byte initial samples + (block_size - 4) paired delta bytes
+
+For pack=0 unpacked audio:
+  - 8-bit mono: each byte is one sample
+  - 8-bit stereo: each pair of bytes is one frame (left, right)
+  - 16-bit mono: each 2 bytes is one sample (big-endian signed)
+  - 16-bit stereo: each 4 bytes is one frame (left 16-bit, right 16-bit)
+
+
+Observed Configurations in Sample Files
+----------------------------------------
+From analysis of 100 sample files across 10 collections:
+
+  Pack  Mode  Bits  Ch     Freq values used       Blocklen    Count
+  ----  ----  ----  -----  ---------------------  ----------  -----
+    0   0x02    8   mono   CODEC 0 (8195 Hz)           1         7
+    0   0x00    8   stereo CODEC 2 (12292 Hz)          1         1
+    2   0x03   16   mono   CODEC 3-7, 24584, 32779  32001      91
+    2   0x01   16   stereo CODEC 7 (49170 Hz)       64002        1
+
+No files were found using pack=4 (voice) or pack=5 (ADPCM).
+No files were found with extension blocks (all have headlen=16).
+No files were found with 16-bit unpacked data.
+
+
+Notes
+-----
+- WinRec was authored by Andreas Binner for the Atari ST/Falcon platform.
+- The format name "DVSM" likely stands for "Digital Voice Sample Module" or
+  "DVS Module" (DVS being the common file extension).
+- The Atari Falcon's CODEC rates derive from a 25.175 MHz master clock
+  (shared with the video subsystem) divided by hardware prescalers.
+- The delta pack exponential base (1.084618362) provides approximately
+  logarithmic distribution of step sizes, matching human auditory perception.
+  Small deltas (near 0) encode quiet/smooth sections; large deltas (near
+  +/-127) encode loud transients.
+- File extensions .DVS and .SND are both used; the format is identical.

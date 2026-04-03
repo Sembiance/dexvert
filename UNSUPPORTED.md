@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,988)
+# Unsupported File Formats (3,981)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -274,11 +274,10 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (66)
+## Audio (59)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. No actual sampled audio, just parameters and register settings for the OPL2 FM chip.
-[audio/sonixInstrument](https://discmaster.textfiles.com/search?format=sonixInstrument) | Aegis Sonix Instrument | .instr | [21 sample files](https://sembiance.com/fileFormatSamples/audio/sonixInstrument/) - The sampled .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 [audio/amSound](https://discmaster.textfiles.com/search?format=amSound) | AM Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/amSound/)
 [audio/appleIIgsAudio](https://discmaster.textfiles.com/search?format=appleIIgsAudio) | Apple IIgs Audio |  | 
 [audio/appleIIgsSampledInstrumentFile](https://discmaster.textfiles.com/search?format=appleIIgsSampledInstrumentFile) | Apple IIgs Sampled Instrument File |  | 
@@ -321,7 +320,6 @@ Family/Format | Name | Extensions | Notes
 [audio/prolineVoice](https://discmaster.textfiles.com/search?format=prolineVoice) | Proline Voice | .pvd | [8 sample files](https://sembiance.com/fileFormatSamples/audio/prolineVoice/)
 [audio/psionAIKAudio](https://discmaster.textfiles.com/search?format=psionAIKAudio) | Psion AICA Audio | .aik | [3 sample files](https://sembiance.com/fileFormatSamples/audio/psionAIKAudio/)
 [audio/psm2CompressedSound](https://discmaster.textfiles.com/search?format=psm2CompressedSound) | PSM 2 compressed sound | .dat | 
-[audio/quattroProSound](https://discmaster.textfiles.com/search?format=quattroProSound) | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://sembiance.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
 [audio/raveEJaySampleAudio](https://discmaster.textfiles.com/search?format=raveEJaySampleAudio) | Rave eJay sample audio |  | 
 [audio/rex2AudioSampleLoop](https://discmaster.textfiles.com/search?format=rex2AudioSampleLoop) | REX2 audio sample loop | .rx2 .rex | 
 [audio/richMusicFormat](https://discmaster.textfiles.com/search?format=richMusicFormat) | Rich Music Format | .rmf | [4 sample files](https://sembiance.com/fileFormatSamples/audio/richMusicFormat/)
@@ -330,19 +328,14 @@ Family/Format | Name | Extensions | Notes
 [audio/sonixSoundSample](https://discmaster.textfiles.com/search?format=sonixSoundSample) | Sonix Sound Sample | .ss | [18 sample files](https://sembiance.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
 [audio/sonyCompressedVoiceFile](https://discmaster.textfiles.com/search?format=sonyCompressedVoiceFile) | Sony Compressed Voice File | .dvf .msv | [4 sample files](https://sembiance.com/fileFormatSamples/audio/sonyCompressedVoiceFile/)
 [audio/sonyWave64RIFFData](https://discmaster.textfiles.com/search?format=sonyWave64RIFFData) | Sony Wave64 RIFF data | .acd | 
-[audio/soundBlasterInstrument](https://discmaster.textfiles.com/search?format=soundBlasterInstrument) | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbi | [10 sample files](https://sembiance.com/fileFormatSamples/audio/soundBlasterInstrument/)
 [audio/soundImagesSoundSample](https://discmaster.textfiles.com/search?format=soundImagesSoundSample) | Sound Images sound sample | .bin | 
 [audio/soundPlayDigitizedAudio](https://discmaster.textfiles.com/search?format=soundPlayDigitizedAudio) | Sound Play digitized audio | .snd | 
-[audio/stoneTrackerSample](https://discmaster.textfiles.com/search?format=stoneTrackerSample) | StoneTracker Sample | .sps | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stoneTrackerSample/)
-[audio/stosSample](https://discmaster.textfiles.com/search?format=stosSample) | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stosSample/)
-[audio/superscapeSounds](https://discmaster.textfiles.com/search?format=superscapeSounds) | Superscape Sounds | .snd | [1 sample file](https://sembiance.com/fileFormatSamples/audio/superscapeSounds/) - Not yet supported. This can convert it: sox -t raw -r 11025 -e signed -b 16 -c 2 sounds.snd b.wav In the UI you can see the 'pitch' which corresponds to the rate: 64===11025hz and 40===44100hz However there are several sounds packed into this file, not just 1 sound, and they may differ in rate/pitch, etc. So ideally the format needs to be figured out so each sound can be extracted separately.
 [audio/turtleBeachWaveFrontSoundBank](https://discmaster.textfiles.com/search?format=turtleBeachWaveFrontSoundBank) | Turtle Beach WaveFront sound Bank | .wfb | 
 [audio/voxWareMetaVoiceEncodedAudio](https://discmaster.textfiles.com/search?format=voxWareMetaVoiceEncodedAudio) | VoxWare MetaVoice encoded audio | .vox | 
 [audio/vSampler3Soundbank](https://discmaster.textfiles.com/search?format=vSampler3Soundbank) | VSampler 3 soundbank | .vs3 .vc3 | 
 [audio/winGrooveSoundbank](https://discmaster.textfiles.com/search?format=winGrooveSoundbank) | WinGroove soundbank | .tpd | 
 [audio/wipeoutSoundEffects](https://discmaster.textfiles.com/search?format=wipeoutSoundEffects) | Wipeout sound effects | .fx0 .fx1 .fx2 .fx3 .fx4 .fx5 .fx6 .fx7 | 
 [audio/wonderSwanWSR](https://discmaster.textfiles.com/search?format=wonderSwanWSR) | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
-[audio/zyxelVoice](https://discmaster.textfiles.com/search?format=zyxelVoice) | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fileFormatSamples/audio/zyxelVoice/)
 
 
 

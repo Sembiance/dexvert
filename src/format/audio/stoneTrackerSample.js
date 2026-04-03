@@ -2,8 +2,9 @@ import {Format} from "../../Format.js";
 
 export class stoneTrackerSample extends Format
 {
-	name        = "StoneTracker Sample";
-	ext         = [".sps"];
-	magic       = ["StoneTracker Samples"];
-	unsupported = true;
+	name           = "StoneTracker Sample";
+	ext            = [".sps"];
+	forbidExtMatch = true;
+	magic          = ["StoneTracker Samples"];
+	converters     = ["vibe2wav"];
 }

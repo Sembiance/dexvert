@@ -1,0 +1,221 @@
+ZyXEL Voice Data File Format Specification
+==========================================
+Vibe coded by Claude
+
+Overview
+--------
+ZyXEL Voice Data files store digitized voice recordings from ZyXEL modems,
+PBX systems, ISDN adapters, and VoIP devices. Common file extensions include
+.ZVD, .ZAD, .PVF, .VOX, .MSG, .AD2, .DAT, .BIN, .zyxel, .zv, and sometimes
+no extension at all. All variants share the same 16-byte header structure.
+
+
+File Structure
+--------------
+  Offset  Size  Description
+  ------  ----  --------------------------------------------------------
+  0x00    5     Magic bytes: ASCII "ZyXEL" (hex: 5A 79 58 45 4C)
+  0x05    1     Format version (always 0x02)
+  0x06    1     Flags byte
+  0x07    1     Subtype byte
+  0x08    2     Reserved (always 0x00 0x00)
+  0x0A    2     Compression type (16-bit little-endian)
+  0x0C    4     Reserved (always 0x00 0x00 0x00 0x00)
+  0x10    ...   Audio data (to end of file)
+
+Total header: 16 bytes. Audio data begins at offset 0x10.
+
+
+Header Fields
+-------------
+
+Magic (offset 0x00, 5 bytes):
+  Always the ASCII string "ZyXEL" (hex: 5A 79 58 45 4C).
+  This identifies the file as a ZyXEL Voice Data container.
+
+Format Version (offset 0x05, 1 byte):
+  Always 0x02 in all observed samples. Indicates format version 2.
+
+Flags (offset 0x06, 1 byte):
+  0x00 = Standard voice data (most files)
+  0x20 = Auto-answer data marker (observed in .ZAD files:
+         ZyXEL Auto-answer Data used for outgoing greetings)
+
+Subtype (offset 0x07, 1 byte):
+  0x00 = Standard (most files)
+  0x03 = ADPCM subtype marker (observed in .AD2 and .ZAD files)
+  When flags=0x20 and subtype=0x03, the file is a ZAD (auto-answer) file.
+  When flags=0x00 and subtype=0x03, the file is an AD2 (ADPCM-2) file.
+  This byte does not affect the audio codec selection; the compression
+  type field determines the codec.
+
+Reserved (offset 0x08, 2 bytes):
+  Always 0x00 0x00. Purpose unknown; possibly reserved for future use.
+
+Compression Type (offset 0x0A, 2 bytes, little-endian uint16):
+  Identifies the audio codec. The encoding of this field varies by device
+  family, as different ZyXEL products used different numbering schemes:
+
+  Value   Codec                         Device Context
+  -----   ----------------------------  --------------------------------
+    0     Auto-detect required          Older devices (codec varies)
+    1     ZyXEL 2-bit ADPCM            PBX, ISDN, VoIP devices
+    2     ZyXEL 3-bit ADPCM    -or-    PBX/DECT (when types 1,3 present)
+          ZyXEL 2-bit ADPCM            Modems/ZFax (when type 1 absent)
+    3     ZyXEL 4-bit ADPCM            PBX/DECT devices
+    5     ZyXEL 4-bit ADPCM            ISDN devices (alternate numbering)
+   20     G.726 32kbps 4-bit ADPCM     Modems/ZFax (XOR 0x55 inverted)
+  256     ZyXEL 2-bit ADPCM            .zyxel files (byte10=0, byte11=1)
+  257     ZyXEL 2-bit ADPCM            .zv files (byte10=1, byte11=1)
+
+  Note on Type 2 ambiguity: Type 2 has two meanings depending on the source
+  device. On PBX/DECT systems (which also use types 1 and 3), type 2 means
+  3-bit ADPCM. On voice modems using ZFax software (which only use type 2
+  alongside type 20), type 2 means 2-bit ADPCM. A decoder can distinguish
+  these by attempting 3-bit decode first and falling back to 2-bit if the
+  accumulator diverges.
+
+Reserved (offset 0x0C, 4 bytes):
+  Always 0x00 0x00 0x00 0x00. Purpose unknown.
+
+
+Audio Codecs
+============
+
+1. ZyXEL ADPCM (2-bit, 3-bit, 4-bit)
+--------------------------------------
+The primary codec is a proprietary Adaptive Differential Pulse Code Modulation
+algorithm reverse-engineered from ZyXEL's "vcnvt" voice conversion utility.
+The algorithm is documented in the mgetty/vgetty open-source project
+(voice/libpvf/zyxel.c) and the Linux kernel (drivers/isdn/i4l/isdn_audio.c).
+
+Sample rate: 8000 Hz (mono)
+Bit packing: MSB-first (big-endian bit order within the byte stream)
+
+State variables:
+  a  = accumulator/predictor (signed integer, initialized to 0)
+  d  = step size (unsigned integer, initialized to 5)
+
+Adaptation multiplier table Mx[nbits-2][magnitude]:
+  2-bit:  [0x3800, 0x5600]
+  3-bit:  [0x399A, 0x3A9F, 0x4D14, 0x6607]
+  4-bit:  [0x3556, 0x3556, 0x399A, 0x3A9F, 0x4200, 0x4D14, 0x6607, 0x6607]
+
+Per-sample decode algorithm (for each N-bit code word):
+  1. Read N bits from the stream (MSB-first packing).
+     Let the code word be 'e' (range 0 to 2^N - 1).
+
+  2. Special case: if N=4 and e=0, force d=4 (silence optimization).
+
+  3. Extract sign and magnitude:
+       sign = -1  if bit (N-1) of e is set, else +1
+       mag  = e AND ((1 << (N-1)) - 1)
+
+  4. Apply leaky integrator to predictor (decay ≈ 0.99927):
+       a = (a * 4093 + 2048) >> 12
+
+  5. Reconstruct delta and add to predictor:
+       a += (sign * ((mag << 1) + 1) * d) >> 1
+
+  6. Rounding correction:
+       if d is odd:  a += 1
+
+  7. Output sample value = a
+     (In PVF format: output a << 10 as 32-bit; for 16-bit WAV: normalize)
+
+  8. Adapt step size:
+       d = (d * Mx[N-2][mag] + 0x2000) >> 14
+       if d < 5:  d = 5
+
+Data rates:
+  2-bit ADPCM: 16,000 bps  (4 samples per byte)
+  3-bit ADPCM: 24,000 bps  (8 samples per 3 bytes)
+  4-bit ADPCM: 32,000 bps  (2 samples per byte)
+
+
+2. G.726 16kbps ADPCM with XOR 0x55 Inversion (Compression Type 20)
+--------------------------------------------------------------------
+Used by some ZyXEL modems and the ZFax software for Windows. The header
+value 0x14 (20) corresponds to the Microsoft WAVE format tag 0x0014 for
+G.723/G.726 ADPCM.
+
+Sample rate: 8000 Hz (mono)
+Bit packing: MSB-first (4 bits per sample, 2 samples per byte)
+Data rate: 32,000 bps
+
+IMPORTANT: Before decoding, every data byte must be XORed with 0x55 to
+reverse the A-law even-bit inversion (from ITU-T G.711) that is applied
+during storage. Without this step, all standard G.726 decoders produce
+garbled output. The 0x55 XOR toggles every other bit (01010101).
+
+In G.726 4-bit, silence encodes as alternating codes 0 and F (nibbles
+representing near-zero delta). These correspond to raw bytes 0x00 and
+0xFF, which after XOR 0x55 become 0x55 and 0xAA -- the dominant byte
+values in the silence regions of these files.
+
+The G.726 codec uses a 2nd-order adaptive predictor and logarithmic
+quantization. Decoding requires an ITU G.726 implementation (e.g.,
+ffmpeg: ffmpeg -f g726 -code_size 2 -ar 8000 -i data.raw output.wav).
+
+
+File Extensions
+===============
+All extensions share the same 16-byte header; the extension is informational:
+
+  .ZVD    ZyXEL Voice Data (generic recorded voice)
+  .ZAD    ZyXEL Auto-answer Data (outgoing greeting/announcement)
+          Header flags byte = 0x20, subtype byte = 0x03
+  .PVF    Portable Voice Format (standard voice prompt, PBX firmware)
+  .VOX    Voice file (various devices)
+  .MSG    Message file (voicemail recordings)
+  .AD2    ADPCM 2-bit (explicitly 2-bit encoded, subtype byte = 0x03)
+  .DAT    Generic data file
+  .BIN    Binary file
+  .zyxel  ZyXEL format (compression type stored as 16-bit LE value 256)
+  .zv     ZyXEL Voice (compression type stored as 16-bit LE value 257)
+  (none)  No extension (from ZFax software or embedded systems)
+
+
+Device Families and Numbering Schemes
+=====================================
+Three distinct compression type numbering schemes have been identified:
+
+Scheme A - PBX/DECT Phones (German firmware, Prestige series):
+  Type 1 = ZyXEL 2-bit ADPCM
+  Type 2 = ZyXEL 3-bit ADPCM
+  Type 3 = ZyXEL 4-bit ADPCM
+  Directories typically contain SYSVOICE_*, OUTVOICE_* system prompts.
+
+Scheme B - Voice Modems (ZFax/US firmware):
+  Type 2  = ZyXEL 2-bit ADPCM
+  Type 20 = G.726 32kbps 4-bit ADPCM (XOR 0x55 inverted)
+  Files often have no extension; content is IVR prompts (numbers, months).
+
+Scheme C - ISDN Adapters:
+  Type 1 = ZyXEL 2-bit ADPCM
+  Type 5 = ZyXEL 4-bit ADPCM
+  Files are typically numbered (D7.ZVD, D16.ZVD) or named prompts.
+
+
+Output Conversion
+=================
+To convert to WAV:
+  1. Read and validate the 16-byte header (verify "ZyXEL" magic).
+  2. Determine codec from the compression type field (with auto-detection
+     heuristics for ambiguous types 0 and 2).
+  3. Decode audio data starting at offset 0x10 to PCM samples.
+  4. Normalize peak amplitude to ~90% of 16-bit range.
+  5. Write as 16-bit signed PCM WAV at 8000 Hz mono.
+
+Every byte after the 16-byte header is audio data; there are no footers,
+padding, or embedded metadata. The file size minus 16 gives the exact
+audio data length.
+
+
+References
+==========
+- mgetty/vgetty: voice/libpvf/zyxel.c (ZyXEL ADPCM codec)
+- mgetty/vgetty: voice/libpvf/lib.c (bit reader, bitmask table)
+- Linux kernel: drivers/isdn/i4l/isdn_audio.c (ZyXEL ADPCM for ISDN)
+- ITU-T G.726: "40, 32, 24, 16 kbit/s ADPCM" (for type 20 files)
+- ITU-T G.711: A-law and mu-law companding (related telephony codecs)

@@ -1,0 +1,218 @@
+StoneTracker Sample (SPS) File Format Specification
+=====================================================
+Vibe coded by Claude
+
+Overview
+--------
+StoneTracker is an 8-voice tracker and mixer for the Amiga, created by Emmanuel
+Marty and Michael Lavaire. The SPS (StoneTracker Player Song) format stores
+multi-song modules containing instrument sample definitions, pattern/sequence
+data, and audio sample data. A related format, SPM (StoneTracker Player Module),
+stores single-song modules without embedded sample data.
+
+The SPS format exists in two variants:
+  - Type 0 (uncompressed): Raw 8-bit signed PCM sample data
+  - Type 1 (compressed): DeltaHuffMan compressed sample data with pattern data
+
+All multi-byte integer values in the sample entry table use big-endian byte order,
+consistent with the Motorola 68000 processor used in Amiga computers.
+
+
+File Structure
+--------------
+
++--------+------+-----------------------------------------------------------+
+| Offset | Size | Description                                               |
++--------+------+-----------------------------------------------------------+
+| 0      | 3    | Magic bytes: "SPS" (0x53 0x50 0x53)                       |
+| 3      | 1    | Format version: 0x01 or 0x02                              |
+| 4      | 1    | Type flag: 0x00 = uncompressed, 0x01 = compressed (PSN)   |
+| 5      | 1    | Number of sample entries (N)                               |
+| 6      | N*32 | Sample entry table (32 bytes per entry)                   |
+| 6+N*32 | var  | Data section (raw audio or PSN section)                   |
++--------+------+-----------------------------------------------------------+
+
+
+Sample Entry Table (32 bytes per entry)
+---------------------------------------
+
+Each sample entry describes one instrument/sample:
+
++--------+------+--------+----------------------------------------------+
+| Offset | Size | Type   | Description                                  |
++--------+------+--------+----------------------------------------------+
+| 0      | 10   | ASCII  | Sample name (null-padded)                    |
+| 10     | 2    | BE u16 | Data offset, low 16 bits (within audio data) |
+| 12     | 2    | BE u16 | Reserved (always 0x0000)                     |
+| 14     | 2    | BE u16 | Sample length in bytes (number of samples)   |
+| 16     | 2    | BE u16 | Page number (offset >> 16, informational)    |
+| 18     | 2    | BE u16 | Loop start offset, low 16 bits               |
+| 20     | 2    | BE u16 | Reserved (always 0x0000)                     |
+| 22     | 2    | BE u16 | Loop length in bytes (0 = no loop)           |
+| 24     | 2    | BE u16 | Volume (0-64, Amiga standard; 0x0040 = max)  |
+| 26     | 2    | BE u16 | Finetune / transpose value                   |
+| 28     | 2    | BE u16 | Reserved (always 0x0000)                     |
+| 30     | 2    | BE u16 | Reserved (always 0x0000)                     |
++--------+------+--------+----------------------------------------------+
+
+Sample Offset Reconstruction:
+  Audio samples are stored contiguously in the order they appear in the entry
+  table. The 16-bit offset field wraps at 65536 (0x10000). To compute the true
+  byte offset of each sample within the audio data:
+    - Sample 0 starts at offset 0
+    - Sample N starts at (end of sample N-1) = sum of all preceding lengths
+  The "page" field at offset 16 tracks the high 16 bits of the cumulative
+  offset (i.e., cumulative_offset >> 16) but is not always perfectly accurate;
+  sequential reconstruction from lengths is authoritative.
+
+Audio Format:
+  - 8-bit signed PCM (-128 to +127)
+  - Mono, single channel
+  - Base sample rate: 8363 Hz (Amiga C-2 tuning, PAL)
+  - Actual playback rate depends on the note period in pattern data
+
+
+Type 0: Uncompressed Data Section
+----------------------------------
+
+For type 0 (byte 4 = 0x00), the audio sample data immediately follows the
+sample entry table as raw 8-bit signed PCM bytes. The total size of the audio
+data equals the sum of all sample lengths.
+
++-------------------+------+------------------------------------------------+
+| Offset            | Size | Description                                    |
++-------------------+------+------------------------------------------------+
+| 6 + N*32          | var  | Raw 8-bit signed PCM audio data                |
++-------------------+------+------------------------------------------------+
+
+Total audio bytes = sum(sample[i].length for i in 0..N-1)
+
+
+Type 1: Compressed Data Section (PSN)
+--------------------------------------
+
+For type 1 (byte 4 = 0x01), the data section begins with a PSN header followed
+by pattern/sequence data and DeltaHuffMan compressed audio.
+
+PSN Header (8 bytes):
+
++--------+------+--------+------------------------------------------------+
+| Offset | Size | Type   | Description                                    |
++--------+------+--------+------------------------------------------------+
+| 0      | 3    | ASCII  | Section tag: "psn" (0x70 0x73 0x6E)           |
+| 3      | 1    | u8     | Symbol count minus 1 (num_huffman_symbols - 1) |
+| 4      | 4    | BE u32 | Total decompressed audio data size in bytes    |
++--------+------+--------+------------------------------------------------+
+
+The decompressed audio size at PSN+4 always equals the sum of all sample
+lengths from the entry table.
+
+Huffman Code Table (variable size, follows PSN header):
+
+The Huffman table encodes the mapping from variable-length bit codes to delta
+values used in the DeltaHuffMan compression. The number of entries equals
+(flag_byte + 1), where flag_byte is the byte at PSN offset 3.
+
+Each table entry:
++--------+------+--------+------------------------------------------------+
+| Offset | Size | Type   | Description                                    |
++--------+------+--------+------------------------------------------------+
+| 0      | 1    | u8     | Delta symbol value (0-255, signed as -128..127)|
+| 1      | 1    | u8     | Huffman code length in bits                    |
+| 2      | var  | bytes  | Code bits, big-endian, variable length         |
++--------+------+--------+------------------------------------------------+
+
+Number of code bytes = min(code_length >> 3, 3) + 1
+  - code_length 1-7:   1 byte
+  - code_length 8-15:  2 bytes
+  - code_length 16-23: 3 bytes
+  - code_length 24-31: 4 bytes
+
+Code bits are stored big-endian (MSB first). The least significant
+code_length bits contain the actual Huffman code, where bit 0 (LSB)
+represents the first (root-level) decision in the Huffman tree.
+
+After the last table entry, the data is padded to the next even byte boundary.
+
+Compressed Bitstream (remainder of file):
+
+The bitstream is organized as a sequence of 16-bit big-endian words. Bits are
+consumed MSB-first from each word. To decode one audio sample:
+
+  1. Starting from the Huffman tree root
+  2. Read one bit from the bitstream
+  3. If bit = 1: follow the left child
+     If bit = 0: follow the right child
+  4. If the current node is a leaf: output its delta value
+     Otherwise: go to step 2
+  5. Add the delta value to the running accumulator (mod 256)
+  6. Output the accumulator as one audio byte
+
+Huffman Tree Construction:
+  The tree is built from the code table entries. For each entry with symbol S,
+  code length L, and code bits C:
+    - Starting from root, for each bit i from 0 to L-1:
+      - If bit i of C is 1: descend to left child
+      - If bit i of C is 0: descend to right child
+    - Mark the reached leaf node with symbol value S
+
+
+DeltaHuffMan Compression Algorithm
+------------------------------------
+
+The compression used by StoneTracker is a two-stage process:
+
+1. Delta Encoding: Each audio sample byte is converted to the difference
+   from the previous byte:
+     delta[0] = sample[0] - 0
+     delta[i] = sample[i] - sample[i-1]   (mod 256, wrapping)
+
+2. Huffman Coding: The delta values (0-255) are assigned variable-length
+   binary codes based on their frequency of occurrence. More common delta
+   values (like 0, +1, -1) receive shorter codes, while rare values receive
+   longer codes. This achieves lossless compression.
+
+The compression is performed by the StonePacker.library (by Emmanuel Marty),
+which supports three compression methods identified by magic bytes:
+  - DHUF: DeltaHuffMan (delta + Huffman)
+  - CRM2: Unknown method
+  - SCMK: Unknown method
+
+Typical compression ratios range from 1.27:1 to 1.90:1 depending on audio
+content, with simpler/more repetitive audio achieving better compression.
+
+
+Non-Audio SPS File Types
+-------------------------
+
+The SPS prefix is shared by several file types from the StoneTracker
+application ecosystem. These are NOT audio sample files and have different
+structures:
+
+  Magic/ID      | Description
+  --------------|--------------------------------------------
+  SPSP          | Player data files (players.bin)
+  SPSUIT*.WMF   | Graphics/skin resource files
+  SPSP*.LNG     | Language/localization files
+  SPS!BPat      | Bar Pattern patch (68K executable code)
+  SPS!BP12      | Bar Pattern v12 patch (68K code)
+  SPS!DlKy      | Dialog Key patch (68K code)
+  SPSC          | Configuration/version files (.spp)
+  SPSS$ASL      | Amiga shared library references
+  SPSSINST      | Installer checklist files
+  SPSETUP       | Setup checklist files
+  SPSPEC/SPSPOOL| Object library records (.RND)
+  SPS\x00       | Particle effect definitions (.spscrea2)
+  SPS1.0        | Shape/part definitions (.sps)
+  SPS.XRF/.RDB  | Window Book document files (unrelated)
+
+Only files with magic "SPS" + version byte (0x01 or 0x02) + type byte (0x00
+or 0x01) at offsets 0-4 are StoneTracker audio module files.
+
+
+References
+----------
+- StoneTracker 1.26 free edition: Aminet mus/edit/stonefree1-3.lha
+- StonePacker.library: Compression library by Emmanuel Marty (v39.2, 1995)
+- StonePlayer.Library: Playback library by Michael Lavaire (v39.98, 1995)
+- ExoticA wiki: https://www.exotica.org.uk/wiki/StoneTracker

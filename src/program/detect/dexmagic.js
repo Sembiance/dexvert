@@ -72,6 +72,8 @@ const DEXMAGIC_CHECKS = {
 	"Superscape VRT"                 : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
 	"Superscape XVR"                 : [{offset : 0, match : "XVR"}],
 	"Superscape Sounds"              : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file SOUNDS\x2ESND"}],
+	"Superscape Sounds (World)"      : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file WORLD\x2ESND"}],
+	"Superscape Sounds (Misc)"       : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file MISC\x2ESND"}],
 	"Template Catalog Spinnaker"     : [{offset : 0, match : "CAT "}, {offset : 8, match : "TPLTFORM"}],
 	"TPK Archive"                    : [{offset : 2, match : [0x2D, 0x54, 0x4B]}, {offset : 5, match : [[0x30, 0x31]]}, {offset : 6, match : [0x2D]}],
 	"TTW Compressed File"            : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
@@ -91,6 +93,7 @@ const DEXMAGIC_CHECKS = {
 	"GameCube Music (IDSP)"          : [{offset : 0, match : "IDSP"}],
 	"KORG File"                      : [{offset : 0, match : "KORG"}],
 	"RedSpark Audio"                 : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
+	"SoundBlaster Instrument Patch"  : [{offset : 0, match : [0x53, 0x42, 0x49, 0x1A]}],
 
 	// document
 	"ASCOM"                                   : [{offset : 0, match : [0xE9, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x8B, 0xFC, 0x36, 0x8B, 0x2D, 0x83, 0xC4, 0x02, 0x81, 0xED]}],

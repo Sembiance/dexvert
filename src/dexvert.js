@@ -216,6 +216,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, prete
 					await cleanup();
 					break;
 				}
+				else
+				{
+					xlog.info`Format ${format.formatid} is untouched but failed verification (set verifyUntouched in format to false to ignore)`;
+				}
 			}
 
 			// run any pre-converter pre format function

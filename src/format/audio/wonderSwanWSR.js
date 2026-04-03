@@ -6,5 +6,5 @@ export class wonderSwanWSR extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/WSR";
 	ext         = [".wsr"];
 	magic       = ["WonderSwan WSR Audio"];
-	unsupported = true;
+	unsupported = true;	// just 1 known sample
 }

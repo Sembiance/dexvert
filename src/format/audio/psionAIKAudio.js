@@ -5,5 +5,5 @@ export class psionAIKAudio extends Format
 	name        = "Psion AICA Audio";
 	ext         = [".aik"];
 	magic       = ["Psion serie 3 AICA Sound Compressor audio"];
-	unsupported = true;
+	unsupported = true;	// only 3 unique files on discmaster
 }

@@ -1,0 +1,129 @@
+Sound Blaster Instrument (SBI) File Format - Complete Specification
+====================================================================
+Vibe coded by Claude
+
+IDENTIFICATION:
+  Sound Blaster Instrument files are identified by three features:
+    1. 4-byte record magic: "SBI\x1a" (53 42 49 1A) or "2OP\x1a" (32 4F 50 1A)
+       The \x1a byte (decimal 26, ASCII SUB/EOF) at offset 3 is the key
+       discriminator from other unrelated formats that share the "SBI" prefix.
+    2. File size is always an exact multiple of 52 bytes (one 52-byte record
+       per instrument patch).
+    3. Every 52-byte boundary starts with one of the two valid 4-byte magics.
+
+File extensions: .sb, .sbi, .DAT
+Identified in samples: 2032/std.sb, 10602/SFX.DAT
+
+
+OVERVIEW:
+  Contains one or more OPL2/OPL3 FM synthesis instrument patch definitions.
+  These define the register settings for the Yamaha YM3812 (OPL2) or YMF262
+  (OPL3) FM synthesizer chip found on Sound Blaster cards. Each instrument
+  defines how two sine-wave operators (modulator + carrier) interact to
+  produce a timbre.
+
+
+STRUCTURE:
+  The file is a flat sequence of fixed-size 52-byte records with no global
+  file header. Each record is self-contained.
+
+
+RECORD LAYOUT (52 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    4     Magic identifier:
+                  "SBI\x1a" (53 42 49 1A) - Standard SBI instrument
+                  "2OP\x1a" (32 4F 50 1A) - Explicit 2-operator instrument
+                Both magics define an identical 2-operator FM instrument.
+                The difference is historical: SBI\x1a was the original Creative
+                Labs format; 2OP\x1a was used by later utilities and banks.
+
+  0x04    32    Instrument name field:
+                  Bytes 0-19: ASCII instrument name, null-terminated, padded
+                              with 0x00 bytes.
+                  Bytes 20-24: Usually 0x00 padding.
+                  Bytes 25-27: Extended metadata (often non-zero):
+                    Byte 25: Transpose/base note hint
+                    Byte 26: Fine tuning / secondary note parameter
+                    Byte 27: Percussion mapping note (frequently 0x4A = 74)
+                  Byte 28: Additional flag (0x4C seen for some SBI records,
+                           0x00 for most 2OP records)
+                  Bytes 29-31: Usually 0x00, occasionally hold flags
+                    (e.g., vibrato depth, tremolo depth indicators)
+
+  0x24    16    OPL2/OPL3 register data:
+                  Byte 0  (offset 0x24): Modulator characteristics
+                    Bits 7:   AM (Amplitude Modulation / Tremolo enable)
+                    Bits 6:   VIB (Vibrato enable)
+                    Bits 5:   EGT (Envelope Generator Type: 1=sustained, 0=percussive)
+                    Bits 4:   KSR (Key Scale Rate)
+                    Bits 3-0: MULTI (Frequency Multiplier select)
+                              Values: 0=x0.5, 1=x1, 2=x2, 3=x3, 4=x4, 5=x5,
+                                      6=x6, 7=x7, 8=x8, 9=x9, 10=x10, 11=x10,
+                                      12=x12, 13=x12, 14=x15, 15=x15
+
+                  Byte 1  (offset 0x25): Carrier characteristics
+                    Same bit layout as Modulator (byte 0)
+
+                  Byte 2  (offset 0x26): Modulator Key Scale Level / Output Level
+                    Bits 7-6: KSL (Key Scale Level: 0=0dB/oct, 1=3dB/oct,
+                              2=1.5dB/oct, 3=6dB/oct)
+                    Bits 5-0: TL (Total Level / attenuation, 0=max volume,
+                              63=max attenuation, each step = 0.75 dB)
+
+                  Byte 3  (offset 0x27): Carrier Key Scale Level / Output Level
+                    Same bit layout as Modulator (byte 2)
+
+                  Byte 4  (offset 0x28): Modulator Attack / Decay rates
+                    Bits 7-4: AR (Attack Rate, 0=slowest/off, 15=fastest/instant)
+                    Bits 3-0: DR (Decay Rate, 0=no decay, 15=fastest)
+
+                  Byte 5  (offset 0x29): Carrier Attack / Decay rates
+                    Same bit layout as Modulator (byte 4)
+
+                  Byte 6  (offset 0x2A): Modulator Sustain Level / Release Rate
+                    Bits 7-4: SL (Sustain Level, 0=max, 15=min/silence.
+                              Each step = 3 dB attenuation)
+                    Bits 3-0: RR (Release Rate, 0=slowest, 15=fastest)
+
+                  Byte 7  (offset 0x2B): Carrier Sustain Level / Release Rate
+                    Same bit layout as Modulator (byte 6)
+
+                  Byte 8  (offset 0x2C): Modulator Waveform Select
+                    Bits 2-0: WS (Waveform type)
+                      0 = Sine wave
+                      1 = Half-sine (positive half only, negative = 0)
+                      2 = Absolute sine (|sin|, full-wave rectified)
+                      3 = Quarter sine (positive rising quarter only)
+                      4 = Alternating sine (double frequency, silent negative) [OPL3]
+                      5 = Camel sine (|sin| at double frequency) [OPL3]
+                      6 = Square wave [OPL3]
+                      7 = Derived logarithmic sawtooth [OPL3]
+
+                  Byte 9  (offset 0x2D): Carrier Waveform Select
+                    Same bit layout as Modulator (byte 8)
+
+                  Byte 10 (offset 0x2E): Feedback / Connection
+                    Bits 5:   Right speaker enable (OPL3 stereo)
+                    Bits 4:   Left speaker enable (OPL3 stereo)
+                    Bits 3-1: FB (Feedback amount for modulator self-modulation)
+                              0 = no feedback
+                              1-7 = feedback, phase offset = (out[n-1]+out[n-2]) * 2pi * 2^(FB-7)
+                    Bit  0:   CNT (Connection/synthesis type)
+                              0 = FM synthesis (carrier modulated by modulator)
+                              1 = Additive synthesis (both operators summed)
+
+                  Bytes 11-15 (offset 0x2F-0x33): Reserved / Extended data
+                    Usually 0x00. In some banks, bytes 13-14 may hold
+                    additional voice parameters (e.g., secondary volume for
+                    2OP banks where value 0x3F appears).
+
+
+BANK SIZES:
+  std.sb:   6,656 bytes = 128 records (General MIDI instrument set)
+            Records 0-127 map to GM program numbers 0-127
+            Magic types: 71 SBI\x1a + 57 2OP\x1a records
+  SFX.DAT:  7,592 bytes = 146 records (Sound effect patches)
+            All records use SBI\x1a magic
+
+================================================================================

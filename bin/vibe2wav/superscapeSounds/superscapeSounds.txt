@@ -1,0 +1,206 @@
+Superscape Sounds (.SND) File Format Specification
+====================================================
+Vibe coded by Claude
+
+This document describes the binary file format used by Superscape VRT (Virtual
+Reality Toolkit) and VR Toolkit for storing sound resources. Files use the
+extension .SND (or .snd) and may contain one or more named sound entries.
+
+================================================================================
+OVERALL FILE STRUCTURE
+================================================================================
+
+  Offset      Size    Description
+  ----------  ------  ----------------------------------------------------------
+  0x000       240     Text Header Block
+  0x0F0       4       Name Table Offset (LE uint32)
+  0x0F4       4       "SOUN" Magic Identifier
+  0x0F8       2       Reserved (LE uint16, always 0x0000)
+  0x0FA       2       Revision Number (LE uint16)
+  0x0FC       2       Reserved (LE uint16, always 0x0000)
+  0x0FE       1       Format Version Major
+  0x0FF       1       Format Version Minor
+  0x100       2       Section Flags (LE uint16)
+  0x102       varies  Sound Data Entries (concatenated)
+  varies      varies  Name Table Entries (40 bytes each)
+  EOF-4       4       End Marker (0xFFFFFFFF)
+
+Total file size = Name Table Offset + (Num_Names * 40) + 4
+
+================================================================================
+1. TEXT HEADER BLOCK (offset 0x000, 240 bytes)
+================================================================================
+
+A fixed 240-byte (0xF0) region containing human-readable ASCII text followed by
+zero-byte padding.
+
+Content:
+  - Copyright string: "SuperScape (c) New Dimension International Ltd.\0"
+  - File info: "\n\n\r file <FILENAME> revision <N>\n\r"
+  - Version info: "Saved from VRT version <X.XX>\n\r\x1A"
+           or:    "Saved from VR Toolkit version <X.XX>\n\r\x1A"
+
+The byte 0x1A (CP/M/DOS end-of-file marker) terminates the meaningful text.
+Remaining bytes up to offset 0xEF are zero-padded. Some files contain leftover
+text fragments from previous save operations after the first 0x1A marker; these
+are not meaningful.
+
+Known version strings:
+  - "VRT version 5.10"     (format version 05.0A)
+  - "VR Toolkit version 2.19" (format version 02.13)
+
+================================================================================
+2. SOUN SECTION HEADER (offset 0x0F0, 18 bytes)
+================================================================================
+
+  Offset  Size  Type       Description
+  ------  ----  ---------  ----------------------------------------------------
+  0x0F0   4     LE uint32  Name Table Offset - absolute byte offset from start
+                           of file to the first name table entry.
+  0x0F4   4     char[4]    Magic identifier, always "SOUN" (0x534F554E).
+  0x0F8   2     LE uint16  Reserved. Always 0x0000 in all observed files.
+  0x0FA   2     LE uint16  Revision number. Matches the revision in the text
+                           header. Incremented on each save.
+  0x0FC   2     LE uint16  Reserved. Always 0x0000 in all observed files.
+  0x0FE   1     uint8      Format version major. Known values:
+                             0x05 - VRT version 5.x files
+                             0x02 - VR Toolkit version 2.x files
+  0x0FF   1     uint8      Format version minor. Known values:
+                             0x0A - VRT version 5.10
+                             0x13 - VR Toolkit version 2.19
+  0x100   2     LE uint16  Section flags. Usually 0x0000. Value 0x0001 observed
+                           in some files; purpose unknown.
+
+================================================================================
+3. SOUND DATA ENTRIES (offset 0x102 to Name_Table_Offset)
+================================================================================
+
+Sound data entries are stored sequentially with no gaps between them. Each entry
+contains one sound's header and raw audio sample data.
+
+Entry Structure:
+  Offset  Size  Type       Description
+  ------  ----  ---------  ----------------------------------------------------
+  +0      4     LE uint32  Entry Size - total size of this entry in bytes,
+                           including these 4 bytes and the audio data.
+  +4      1     uint8      Sample Rate Code - encodes the playback sample rate.
+                           The formula depends on the format version:
+                             VRT 5.x  (05.0A): rate = code * 44100 / 256
+                             VR Toolkit 2.x (02.13): rate = code * 44100 / 128
+                           Known values and resulting rates (VRT 5.x / VR Toolkit 2.x):
+                             0x28 (40)  ->  6,891 / 13,781 Hz
+                             0x30 (48)  ->  8,269 / 16,538 Hz
+                             0x34 (52)  ->  8,958 / 17,916 Hz
+                             0x35 (53)  ->  9,130 / 18,260 Hz
+                             0x38 (56)  ->  9,647 / 19,294 Hz
+                             0x40 (64)  -> 11,025 / 22,050 Hz  (most common)
+                             0x54 (84)  -> 14,468 / 28,935 Hz
+  +5      1     uint8      Flags / attributes byte. Purpose varies; may encode
+                           loop behavior, playback priority, or other engine-
+                           specific properties. Known values include 0x00
+                           (most common), 0x01, 0x03, 0x20, 0x43, 0xC6, 0xFF.
+                           Does not affect audio decoding.
+  +6      2     LE uint16  Format Type. Known values:
+                             0x0003 - Standard raw PCM audio (most common).
+                                      Audio is 8-bit signed PCM; some entries
+                                      with rate code 0x28 contain 16-bit signed
+                                      little-endian PCM.
+                             0x0001 - Also raw PCM audio. Observed in some files.
+                             0x0000 - Observed in very small entries (5 bytes
+                                      audio). Minimal/placeholder entries.
+                             0x6570 - Observed in entries with game resource
+                                      names (e.g. "health", "ammo"). May
+                                      indicate non-audio resource data stored
+                                      in the sound container.
+                             Other values (e.g. 0xCDCD, 0x5DEC) appear in
+                             isolated entries and may be artifacts or alternate
+                             format codes.
+  +8      N     bytes      Audio sample data. Length = Entry_Size - 8.
+
+Audio Encoding:
+  There is no explicit bit-depth indicator in the entry header. The same
+  format_type value (0x0003) is used for both 8-bit and 16-bit audio. The
+  bit depth must be detected from the audio data itself.
+
+  - 8-bit entries: Signed int8 PCM, mono. Values range from -128 to +127, with
+    0 representing silence. To convert to WAV 8-bit unsigned format, XOR each
+    byte with 0x80.
+  - 16-bit entries: Signed int16 little-endian PCM, mono. Audio length is
+    always even for 16-bit entries.
+
+  Detection method (skip-difference metric): Compare the average absolute
+  difference between adjacent bytes (step-1 diff) vs every-other byte
+  (step-2 diff) in a middle section of the audio. In 16-bit LE data, adjacent
+  bytes alternate between low and high bytes of each sample, creating large
+  step-1 diffs. Step-2 diffs compare like-bytes (low-to-low or high-to-high),
+  which are smoother. If step2_diff / step1_diff < 1.0, the data is 16-bit.
+  For true 8-bit audio, step2 > step1 because skipping a sample increases
+  the expected difference.
+
+The entries are indexed sequentially starting from 0. Entry N in the data block
+corresponds to name table entry with sound_index = N.
+
+================================================================================
+4. NAME TABLE (offset Name_Table_Offset to EOF)
+================================================================================
+
+Immediately following the last sound data entry is the name table. It consists
+of zero or more 40-byte name entries followed by a 4-byte end marker.
+
+Name Entry Structure (40 bytes each):
+  Offset  Size  Type       Description
+  ------  ----  ---------  ----------------------------------------------------
+  +0      2     LE uint16  Entry Marker. Always 0xFFFF.
+  +2      2     LE uint16  Entry Type. Always 0x0006 in all observed files.
+  +4      2     LE uint16  Entry Data Size. Always 0x0026 (38) in all observed
+                           files. Equals NAME_ENTRY_SIZE - 2 (size of remaining
+                           data after the entry marker).
+  +6      2     LE uint16  Sound Index. Zero-based index into the sound data
+                           entries. Maps this name to the corresponding audio
+                           data entry.
+  +8      32    char[32]   Sound name. Null-terminated ASCII string. Bytes after
+                           the null terminator may contain leftover data from
+                           previous save operations and should be ignored.
+
+Name entries appear in arbitrary order (not necessarily matching the sound data
+entry order). Each sound data entry should have exactly one corresponding name
+entry; the Sound Index field provides the mapping.
+
+Special name "__EMPTY" indicates a placeholder entry with no meaningful audio.
+
+End Marker (4 bytes):
+  The name table is terminated by two consecutive 0xFFFF values (4 bytes total:
+  0xFF 0xFF 0xFF 0xFF). This is the final data in the file.
+
+================================================================================
+5. COMPLETE BYTE ACCOUNTING
+================================================================================
+
+Every byte in a valid .snd file is accounted for:
+
+  Bytes 0x000 to 0x0EF:  Text Header Block (240 bytes, fixed)
+  Bytes 0x0F0 to 0x0F3:  Name Table Offset field (4 bytes)
+  Bytes 0x0F4 to 0x0F7:  "SOUN" magic (4 bytes)
+  Bytes 0x0F8 to 0x101:  SOUN section header fields (10 bytes)
+  Bytes 0x102 to NTO-1:  Sound data entries, where NTO = Name Table Offset
+  Bytes NTO to EOF-5:     Name table entries (N * 40 bytes)
+  Bytes EOF-4 to EOF-1:   End marker 0xFFFFFFFF (4 bytes)
+
+  Total = 240 + 4 + 4 + 10 + SoundDataSize + (NumNames * 40) + 4 = FileSize
+
+  Where SoundDataSize = NTO - 0x102
+  And   NumNames = (FileSize - NTO - 4) / 40
+
+================================================================================
+6. NOTES
+================================================================================
+
+- File byte order is little-endian throughout.
+- The format was used by Superscape VRT (Virtual Reality Toolkit) versions 2.x
+  and 5.x, produced by Superscape Ltd (formerly New Dimension International).
+- A single .snd file can contain many sounds (up to 20+ observed).
+- Sound names can be up to 31 characters (32-byte field with null terminator).
+- The sample rate code 0x40 (11,025 Hz) is by far the most common, consistent
+  with typical 1990s PC game audio using Sound Blaster compatible hardware.
+- The rate code formula (rate * 44100 / 256) derives from the standard CD audio
+  rate of 44,100 Hz, where 0x40 (64/256 = 1/4) gives exactly 11,025 Hz.

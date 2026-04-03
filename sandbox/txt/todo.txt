@@ -24,8 +24,14 @@
 <<<
 
 * Search dexvert for "unsupported" in src/format/<checkEachHere>/
-  Then vibe support for any KNOWN unsupported formats
-  Left off at archive/mpq (skipping this for now)
+  Then vibe support for any KNOWN unsupported formats. Families remaining:
+	image
+	music
+	video
+	other
+	document
+	font
+	poly
 
 * The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
   After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile

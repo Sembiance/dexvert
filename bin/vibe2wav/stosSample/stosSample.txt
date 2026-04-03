@@ -1,0 +1,166 @@
+STOS BASIC Sample File Format Specification
+=============================================
+Vibe coded by Claude
+
+Overview
+--------
+STOS BASIC (by François Lionet, 1988) is a game creation toolkit for the
+Atari ST computer. It stores sampled audio in a simple format identified by
+the magic bytes "JON". These samples are played back through the Yamaha YM2149
+PSG (Programmable Sound Generator) chip using timer-driven interrupt routines.
+
+The format is used for standalone sample files (.SAM, .SPL, .SMP) as well as
+within STOS memory banks (.MBK) where the bank type is $81 (data) and the
+data magic is $4A4F4E?? ("JON" + frequency byte).
+
+
+File Structure
+--------------
+All values are stored in big-endian (Motorola 68000) byte order, though only
+single bytes are used, making endianness irrelevant for this format.
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       3     Magic identifier: "JON" (bytes 0x4A 0x4F 0x4E)
+  3       1     Frequency byte (Timer A Data Register value, range 1-255)
+  4       N     Raw unsigned 8-bit PCM audio sample data
+
+  Total file size = 4 + N bytes (every byte is accounted for)
+
+
+Header (4 bytes)
+----------------
+Bytes 0-2: ASCII string "JON" (0x4A 0x4F 0x4E)
+  This is the magic identifier for STOS sample files. The origin of the name
+  "JON" is unclear but may refer to a developer involved in the sound routines.
+
+Byte 3: Sample rate in kHz
+  This value directly encodes the sample playback rate in kilohertz.
+  Valid range: 1-255 (typical observed range: 5-32 kHz).
+
+
+Audio Data (offset 4 to end of file)
+-------------------------------------
+Format: Raw unsigned 8-bit PCM (Pulse Code Modulation)
+  - Each byte represents one audio sample
+  - Value range: 0x00 (0) to 0xFF (255)
+  - Center/silence value: 0x80 (128)
+  - Values < 128 represent negative displacement
+  - Values > 128 represent positive displacement
+  - Mono channel (single channel only)
+  - No compression, no interleaving
+
+
+Sample Rate Calculation
+-----------------------
+The sample rate byte directly encodes the playback rate in kilohertz:
+
+  sample_rate = frequency_byte × 1000 Hz
+
+This was determined empirically by analyzing speech fundamental frequencies
+in voice samples (GETREADY.SAM, PLAYER1.SAM, LEVEL.SAM) and verifying
+that the resulting F0 values match natural male speech (~100-200 Hz).
+
+The resulting rates match the STOS Maestro documented sampling frequency
+range of 5 kHz to 32 kHz.
+
+Common frequency values observed in sample files:
+
+  Freq Byte  Sample Rate (Hz)  Notes
+  ---------  ----------------  -----
+     5         5,000           Lower quality, longer samples
+     6         6,000
+     7         7,000           Most common rate
+     8         8,000           Common for speech/music samples
+     9         9,000           Common for drum samples
+    10        10,000
+    11        11,000
+    12        12,000
+    14        14,000
+    15        15,000
+    16        16,000
+    32        32,000           Highest quality observed
+
+The playback duration in seconds is:
+  duration = (file_size - 4) / sample_rate
+
+
+Playback Mechanism (Atari ST Hardware)
+--------------------------------------
+On the original Atari ST (non-STE), samples are played through the YM2149 PSG:
+
+1. The sample rate byte (in kHz) is converted to MFP Timer A register
+   settings internally. Timer A of the MC68901 MFP generates interrupts
+   at the specified rate using an appropriate prescaler and data register
+   combination.
+
+2. Each timer interrupt reads the next sample byte and writes a 4-bit volume
+   value to the YM2149's channel registers (only 4-bit resolution available
+   per channel, giving 16 discrete output levels).
+
+3. The 68000 CPU handles interrupts at rates up to ~32 kHz, well within the
+   capabilities of a minimal interrupt handler on the 8 MHz 68000.
+
+
+File Extensions
+---------------
+.SAM  - Standard STOS sample file (single sample)
+.SPL  - STOS sample file (identical format to .SAM)
+.SMP  - STOS sample file (identical format to .SAM)
+
+All three extensions use the same binary format. There is no structural
+difference between them. Files without extensions (e.g., "NUKIE", "BASE")
+may also use this format.
+
+
+Identification
+--------------
+A file is a valid STOS sample if:
+1. It is at least 5 bytes long (4-byte header + at least 1 audio byte)
+2. Bytes 0-2 are 0x4A 0x4F 0x4E ("JON")
+3. Byte 3 is in the range 0x01-0x3F (valid frequency values for audio)
+4. The average value of the audio data bytes is approximately 128 (±48),
+   consistent with unsigned 8-bit PCM centered at 0x80
+
+Note: Many non-audio files from Atari ST games coincidentally begin with
+"JON" as part of text strings (e.g., "JONATHAN", "JONES", "JON THE
+PROGRAMMER"). These can be distinguished because:
+  - Byte 3 is typically an ASCII letter (0x41-0x7A) rather than a small number
+  - The data average is far from 128 (typically < 80)
+
+
+Conversion to WAV
+------------------
+Since WAV files also store 8-bit audio as unsigned PCM, conversion is
+straightforward:
+1. Read and validate the 4-byte JON header
+2. Calculate sample rate from frequency byte: rate = freq_byte * 1000
+3. Write a standard WAV header (RIFF/WAVE format) with:
+   - Format: PCM (format code 1)
+   - Channels: 1 (mono)
+   - Bits per sample: 8
+   - Sample rate: calculated value
+4. Copy the raw audio data bytes directly (no transformation needed)
+
+
+Within STOS Memory Banks (.MBK)
+-------------------------------
+When stored in an MBK file, the sample is wrapped in a bank header:
+  - 10 bytes: "Lionpoubnk" magic
+  -  4 bytes: Bank number (1-15)
+  -  1 byte:  Bank type (0x81 for data bank)
+  -  3 bytes: Bank size (rounded to next 256-byte multiple)
+  - [Bank data begins: JON header + audio data]
+
+The standalone .SAM/.SPL/.SMP files omit the MBK wrapper and contain
+only the JON header followed by audio data.
+
+
+References
+----------
+- STOS BASIC by François Lionet (Mandarin Software, 1988)
+- MC68901 MFP datasheet (Motorola)
+- YM2149 PSG datasheet (Yamaha)
+- Atari ST hardware documentation
+- STOS memory bank format: http://fileformats.archiveteam.org/wiki/STOS_memory_bank
+- Atari Wiki STOS.MBK: https://www.atari-wiki.com/index.php?title=STOS.MBK

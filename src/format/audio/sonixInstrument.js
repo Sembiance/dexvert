@@ -3,14 +3,17 @@ import {Format} from "../../Format.js";
 
 export class sonixInstrument extends Format
 {
-	name        = "Aegis Sonix Instrument";
-	ext         = [".instr"];
-	magic       = ["Sonix sampled sound Instrument", "Sonix synthesised Instrument"];
-	weakMagic   = true;
-	unsupported = true;
-	notes       = xu.trim`
-		The sampled .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds.
-		These files are used as the instruments in .smus files.
-		In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file.
-		Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic`;
+	name         = "Aegis Sonix Instrument";
+	ext          = [".instr", ".ss"];
+	magic        = ["Sonix sampled sound Instrument", "Sonix synthesised Instrument"];
+	weakMagic    = true;
+	keepFilename = true;
+
+	// Both .instr and .ss are required
+	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
+
+	// Don't do anything with .ss files
+	untouched = ({f}) => f.input.ext.toLowerCase()===".ss";
+	verifyUntouched = false;
+	converters = ["vibe2wav"];
 }

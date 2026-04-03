@@ -1,4 +1,4 @@
-# Supported File Formats (3,697)
+# Supported File Formats (3,703)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -676,7 +676,7 @@ archive | ZX Spectrum Tape Image | .tap | [hcdisk](https://github.com/0sAND1s/HC
 
 
 
-## Audio (141)
+## Audio (147)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 audio | 208 Audio (Ocean Games) | .bnk | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/twoZeroEightAudio/)
@@ -686,6 +686,7 @@ audio | [Acorn Replay Audio](http://fileformats.archiveteam.org/wiki/Acorn_Repla
 audio | [Adaptive Multi-Rate](http://fileformats.archiveteam.org/wiki/Adaptive_Multi-Rate_Audio) | .amr .3ga | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/amr/)
 audio | [Advanced Audio Coding](http://fileformats.archiveteam.org/wiki/AAC) | .aac .m4a .mp4 .ima | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/aac/)
 audio | Adventure Game Studio Audio Data | .vox | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/agsAudioData/)
+audio | Aegis Sonix Instrument | .instr .ss | [vibe2wav](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/sonixInstrument/)
 audio | AKAI Sample | .a1s .a3s | [dd](https://www.gnu.org/software/coreutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/akaiSample/)
 audio | Amiga 16VX Sound |  | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/amiga16vx/)
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8-Bit_Sampled_Voice) | .8svx .iff | [ffmpeg](https://ffmpeg.org/) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/amiga8svx/) - Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates. SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX
@@ -792,14 +793,18 @@ audio | Sonic Foundry Sample Resource | .sfr | [awaveStudio](https://archive.org
 audio | Sony OpenMG Audio | .aa3 | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/sonyOpenMG/)
 audio | Sony PS3 MSF | .msf | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/sonyPS3MSF/)
 audio | Sony PS3 XVAG | .xvag | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/sonyXVAG/)
+audio | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbo .sb .dat | [vibe2wav](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/soundBlasterInstrument/)
 audio | Sound Designer Audio | .dig .sd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [5 sample files](https://sembiance.com/fileFormatSamples/audio/soundDesignerAudio/)
 audio | Sounder | .snd | [sox](http://sox.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sounder/)
 audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [vibe2wav](https://github.com/Sembiance/dexvert) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [9 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont1/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/soundFont2/)
 audio | SoundTool | .snd | [sox](http://sox.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/soundTool/)
 audio | [Speex Encoded Audio](http://fileformats.archiveteam.org/wiki/Speex) | .spx | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/audio/speex/)
-audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
+audio | STEVE SND | .snd | [steve2wav](https://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/audio/steveSND/)
+audio | StoneTracker Sample | .sps | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stoneTrackerSample/)
+audio | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [vibe2wav](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/audio/stosSample/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [15 sample files](https://sembiance.com/fileFormatSamples/audio/au/)
+audio | Superscape Sounds | .snd | [vibe2wav](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/superscapeSounds/)
 audio | The Need for Speed Sound Bank | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/needForSpeedSoundBank/)
 audio | [TrueAudio Lossless Audio](https://wiki.hydrogenaud.io/index.php?title=TTA) | .tta | [ffmpeg](https://ffmpeg.org/) [ttaenc](https://tta.sourceforge.net) [nihav](https://git.nihav.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/trueAudio/)
 audio | [Turtle Beach Sample Vision Audio](http://fileformats.archiveteam.org/wiki/Sample_Vision) | .smp | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/sampleVision/)
@@ -820,6 +825,7 @@ audio | Xbox SDNS | .xma | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https
 audio | [Xilam DERF Audio](https://wiki.multimedia.cx/index.php/Xilam_DERF) | .adp | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/xilamDERFAudio/)
 audio | [Yamaha Synthetic Music Mobile Application Format](https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF) | .mmf | [smaf825](https://github.com/but80/smaf825) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/yamahaSMAF/) - OK, this uses smaf825 to dump the music info to JSON and then uses a 'barely passable' vibe coded mmf2mid converter along with a period appropriate sound font. It's better than nothing but FAR from good. See sandbox/app/SMAF3.06e.pdf for info.
 audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/audio/yamahaTX/)
+audio | ZyXEL Voice Data | .zvd .zyx | [vibe2wav](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/audio/zyxelVoice/)
 
 
 
@@ -1805,7 +1811,7 @@ image | [STOS Memory/Sprite Bank](http://fileformats.archiveteam.org/wiki/STOS_m
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp3 .pp2 .pp1 | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [23 sample files](https://sembiance.com/fileFormatSamples/image/picturePacker/)
 image | [STOS Picture Packer (DAJ Variant)](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .daj | [deark](https://entropymine.com/deark/) [konvertor](https://www.logipole.com/konvertor-en.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/image/picturePackerDAJ/)
 image | [Structured Fax](http://fileformats.archiveteam.org/wiki/Structured_Fax_File) | .sff | [nconvertWine](https://discmaster.textfiles.com/browse/23608/PCWorld0410.iso/redakcyjne/programy/XnView%201.97/XnView-win-full.zip) [irfanView](https://www.irfanview.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/structuredFax/)
-image | [Sun Icon](http://fileformats.archiveteam.org/wiki/Sun_icon) | .ico .icon | [nconvert](https://www.xnview.com/en/nconvert/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) | [13 sample files](https://sembiance.com/fileFormatSamples/image/sunIcon/) - Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.
+image | [Sun Icon/Cursor](http://fileformats.archiveteam.org/wiki/Sun_icon) | .ico .icon .cursor .pr .image .im .cicon .h | [nconvert](https://www.xnview.com/en/nconvert/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) | [19 sample files](https://sembiance.com/fileFormatSamples/image/sunIcon/) - Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.
 image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) | .ras .rast .rs .scr .sr .sun .im1 .im8 .im24 .im32 | [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tkimgConvert](http://tkimg.sourceforge.net/) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [keyViewPro](https://archive.org/details/KeyViewPro/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/sunRaster/)
 image | [Sun TAAC Bitmap](http://fileformats.archiveteam.org/wiki/Sun_TAAC_image) | .iff .vff .suniff taac | [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/sunTAACBitmap/)
 image | [Super IRG/Super IRG 2](http://fileformats.archiveteam.org/wiki/Super_IRG) | .irg .ir2 | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/superIRG/)

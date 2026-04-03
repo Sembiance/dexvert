@@ -1,0 +1,409 @@
+Aegis Sonix Instrument File Format Specification
+=================================================
+
+Vibe coded by Claude
+
+Overview
+--------
+Aegis Sonix was a music composition, software synthesizer, and score editor
+for the Commodore Amiga, created by Mark Riley and published by Aegis
+Development (1987-1991). It uses two proprietary file types:
+
+  .instr  - Instrument definition (SampledSound or Synthesis type)
+  .ss     - Sampled Sound audio data (paired with SampledSound .instr files)
+
+Music scores are stored in IFF SMUS format (or proprietary TINY/SNX variants)
+and reference instruments by name. The Sonix program loads instrument files
+from an "Instruments/" directory relative to the score file.
+
+
+================================================================================
+.instr FILE FORMAT - SampledSound Type (128 bytes)
+================================================================================
+
+A SampledSound instrument is a meta-file that references a corresponding .ss
+file containing the actual audio data. The .instr file stores the instrument
+name, sample file reference, and playback parameters.
+
+All multi-byte integer values are stored in big-endian (Motorola 68000) byte
+order.
+
+Offset  Size  Type      Description
+------  ----  --------  -------------------------------------------------------
+0x00    12    char[12]  Magic identifier: ASCII "SampledSound"
+0x0C    20    byte[20]  Zero padding (fills out the 32-byte header block)
+
+--- In-memory instrument descriptor starts here (offset 0x20) ---
+At runtime, the Sonix program treats bytes 0x20 onward as the instrument
+descriptor structure. The first 4 bytes and the 4 bytes at 0x64 are
+overwritten with runtime pointers when the instrument is loaded.
+
+0x20     1    uint8     Reserved (always 0x00)
+
+0x21     1    uint8     Instrument type flag (typically 0x02)
+
+0x22     2    uint16    Sample rate in Hz (big-endian)
+                        The recording sample rate for the associated .ss data.
+                        Observed values:
+                          12060 Hz (0x2F1C) - most instruments (Amiga period ~294)
+                          10268 Hz (0x281C) - loverly-drums (Amiga period ~345)
+                        NOTE: At load time, the EaglePlayer Sonix adapter
+                        overwrites all 4 bytes at 0x20-0x23 with a SSTech
+                        function pointer. However, the ORIGINAL Sonix program
+                        preserves this field (it stores its runtime pointer at
+                        a different offset). The values in saved files are the
+                        original recording parameters.
+
+0x24    32    char[32]  Instrument name field
+                        Null-terminated ASCII string containing the instrument
+                        name (e.g., "love-me", "true-drums").
+                        Bytes after the null terminator contain undefined ghost
+                        data - typically remnants of the full filename path
+                        including the ".instr" extension that was not cleared
+                        from the buffer. This ghost data is NOT meaningful.
+
+0x44    32    char[32]  Sample reference name field
+                        Null-terminated ASCII string naming the .ss file to
+                        load (without the ".ss" extension). For example,
+                        "searching" references "searching.ss".
+                        NOTE: This may differ from the instrument name. For
+                        example, "searching-soft.instr" references
+                        "searching.ss" (same audio, different playback params).
+                        Ghost data after the null is not meaningful.
+
+0x64     4    uint32    Runtime .ss data pointer (STALE in saved files)
+                        At load time, Sonix overwrites this with the memory
+                        address of the loaded .ss sample data. The value in
+                        the saved file is a leftover pointer from the previous
+                        session.
+
+0x68    24    uint16[12] Playback parameters (12 big-endian 16-bit values)
+                        Each parameter is stored as a uint16 where the high
+                        byte is always 0x00 and the low byte carries the value
+                        (range 0x00-0xFF).
+
+Parameter index and typical values:
+
+  Index  Offset  Description              Typical Value
+  -----  ------  -----------------------  ---------------------------
+  [0]    0x68    Volume / Attack level     0x00FF (max), 0x0060/0x0058 (soft)
+  [1]    0x6A    Envelope parameter 2      0x00FF
+  [2]    0x6C    Envelope parameter 3      0x00FF
+  [3]    0x6E    Envelope parameter 4      0x00FF
+  [4]    0x70    Decay parameter           0x00FF (normal), 0x00F8 (drums)
+  [5]    0x72    Envelope parameter 6      0x00FF
+  [6]    0x74    Sustain level             0x0098 (= 152 decimal)
+  [7]    0x76    Sustain parameter 2       0x0098
+  [8]    0x78    Sustain parameter 3       0x0098
+  [9]    0x7A    LFO depth                 0x0000 (off)
+  [10]   0x7C    LFO speed                 0x0000 (off)
+  [11]   0x7E    Envelope rate             0x0000 (off)
+
+  The volume parameter [0] controls the instrument's output level:
+    0xFF (255) = full volume
+    0x60 (96)  = ~37% volume (used in "searching-soft")
+    0x58 (88)  = ~34% volume (used in "true-love-soft")
+
+  Parameters [6]-[8] (sustain) use 0x98 (152) which is ~60% of max.
+
+  "Soft" instrument variants typically share the same .ss file as their
+  non-soft counterpart but have a reduced volume parameter [0].
+
+Total file size: exactly 128 bytes.
+
+
+================================================================================
+.instr FILE FORMAT - Synthesis Type (502 bytes)
+================================================================================
+
+A Synthesis instrument is a self-contained file that stores waveform data
+for software-synthesized sounds. No companion .ss file is needed.
+
+Offset   Size  Type       Description
+------   ----  ---------  ------------------------------------------------------
+0x00     12    char[12]   Magic identifier: "Synthesis\x00\x00\x00"
+                          (9 ASCII chars + 3 null bytes to fill 12 bytes)
+0x0C     20    byte[20]   Zero padding (fills 32-byte header block)
+0x20      4    uint32     Runtime pointer (STALE - same as SampledSound)
+0x24     32    char[32]   Instrument name (null-terminated, ghost data after null)
+0x44    128    int8[128]  Waveform 1: Primary waveform
+                          128 signed 8-bit samples representing one complete
+                          cycle of the synthesized sound. Range: -128 to +127.
+0xC4    128    int8[128]  Waveform 2: Modulation / secondary waveform
+0x144   128    int8[128]  Waveform 3: Additional modulation / LFO waveform
+0x1C4    50    byte[50]   Synthesis parameters
+                          Envelope, filter, LFO, and other synthesis control
+                          parameters. Internal format is Sonix-specific.
+
+Total file size: exactly 502 bytes.
+
+Synthesis instrument playback:
+  The Sonix driver loops the 128-byte waveform at a rate determined by the
+  note being played. The base period constant is $D5C8 (54728 decimal).
+  Period = (54728 * chromatic_scale[note % 12]) >> (octave + 17)
+  where chromatic_scale[] is a 12-entry equal temperament table.
+
+
+================================================================================
+.ss FILE FORMAT - Sampled Sound (variable size)
+================================================================================
+
+The .ss file contains the actual audio sample data for SampledSound instruments.
+Audio is stored as signed 8-bit monaural PCM.
+
+Structure:
+  [Header: 62 bytes] [Audio Data: variable] [Footer: 4 bytes]
+
+HEADER (62 bytes, offset 0x00-0x3D)
+------------------------------------
+
+Offset  Size  Type    Description
+------  ----  ------  ----------------------------------------------------------
+0x00     2    uint16  w1: Base waveform unit length
+                      The fundamental sample unit size. Total audio data for
+                      each octave n is w1 * 2^n bytes.
+                      For all observed files: ranges from 655 to 2467.
+
+0x02     2    uint16  w2: Loop/repeat control
+                      Controls looping behavior when played by the Sonix engine:
+                        w2 = 0:    One-shot playback. When the note duration
+                                   exceeds the sample length, the entire sample
+                                   repeats from the beginning. Used for drums
+                                   and percussive sounds.
+                        w2 = w1:   No loop. Sample plays once then stops
+                                   (silence buffer used for the repeat region).
+                                   Used for vocal/melodic one-shot samples.
+                        0 < w2 < w1: Partial loop. Sample plays from start,
+                                   then loops from byte offset w2*2^octave to
+                                   the end. Loop length = (w1-w2)*2^octave bytes.
+
+0x04     1    uint8   min_octave: Minimum octave number present
+                      Determines the lowest-resolution waveform stored.
+                      All observed files: 5.
+
+0x05     1    uint8   max_octave: Maximum octave number present
+                      Determines the highest-resolution waveform stored.
+                      All observed files: 5.
+                      When min_octave = max_octave, only one octave of audio
+                      data is present (the common case).
+
+0x06     1    uint8   Reserved: Always 0x00
+
+0x07     1    uint8   Flags: Always 0xFF
+                      Purpose not fully determined; may be a volume/enable flag.
+
+0x08    54    byte[54] Reserved padding: All zeros
+                      May be used for extended header fields in other versions.
+
+OCTAVE SYSTEM
+-------------
+The Sonix engine supports multiple octaves of the same sample at different
+resolutions. Higher octave numbers have more samples (better quality, lower
+pitch). Lower octave numbers have fewer samples (for higher-pitched playback).
+
+  Octave n contains: w1 * 2^n bytes of audio data
+
+Audio data is stored sequentially from min_octave to max_octave:
+
+  Offset in audio region for octave n:
+    sum(w1 * 2^i for i in range(min_octave, n))
+
+  = w1 * (2^n - 2^min_octave)
+
+For the common case min_octave = max_octave = 5:
+  Only one octave present: w1 * 2^5 = w1 * 32 bytes of audio
+
+The Sonix driver maps MIDI notes to octaves:
+  internal_octave = 10 - (midi_note / 12)
+  MIDI note 60 (C5) → internal octave 5
+
+So with min=max=5, the instrument plays notes C5 through B5 (one octave).
+The chromatic pitch variation within the octave is achieved by varying the
+Amiga hardware's playback period (rate).
+
+
+AUDIO DATA (variable size, offset 0x3E to end-4)
+-------------------------------------------------
+Signed 8-bit monaural PCM audio samples.
+
+  Encoding:    Signed integer, 8 bits per sample
+  Channels:    1 (mono)
+  Sample rate:  ~16574 Hz (PAL) or ~16726 Hz (NTSC)
+                Based on Amiga period 214 (double the standard ProTracker rate).
+                The Sonix driver's base period constant $1AB9 (6841) divides
+                by 16 to ~428 for C5 playback. However, the Sonix recording
+                function captures at period 214 (2x playback rate), so the
+                native sample rate is ~16726 Hz (NTSC) for correct speed.
+  Value range: -128 to +127 (0x80 to 0x7F)
+  Silence:     0x00
+
+Total audio bytes = sum(w1 * 2^n for n in range(min_octave, max_octave + 1))
+
+For min=max=5: total = w1 * 32 bytes
+
+
+FOOTER (4 bytes)
+----------------
+ASCII string "AMII" (bytes: 0x41 0x4D 0x49 0x49)
+
+This serves as a file format signature / validation marker. Present in all
+observed .ss files. Likely stands for "Amiga Instrument Information" or
+similar Aegis identifier.
+
+
+FILE SIZE FORMULA
+-----------------
+  file_size = 62 (header) + audio_data_bytes + 4 (AMII footer)
+
+  For single-octave files (min=max=5):
+    file_size = 62 + w1 * 32 + 4 = 66 + w1 * 32
+
+  For multi-octave files (min < max):
+    file_size = 66 + sum(w1 * 2^n for n in range(min_octave, max_octave + 1))
+
+This formula has been verified to be byte-exact for all 11 .ss sample files.
+
+
+================================================================================
+PLAYBACK PARAMETERS (from UADE Sonix Driver source)
+================================================================================
+
+Period Calculation (SampledSound):
+  The EaglePlayer Sonix driver adaptation uses:
+    period = (6841 * chromatic_scale[note % 12]) >> 15
+
+  The original Sonix driver uses:
+    period = (54728 * chromatic_scale[note % 12]) >> 15
+
+  The ratio 54728 / 6841 = 8, suggesting the original Sonix has internal
+  8x scaling in its playback routine.
+
+  The effective Amiga hardware period is ~428 (standard), giving a sample
+  rate of approximately 8363 Hz (NTSC) or 8287 Hz (PAL).
+
+Chromatic Scale Table (12 entries, equal temperament):
+  $8000, $78D1, $7209, $6BA2, $6598, $5FE4,
+  $5A82, $556E, $50A3, $4C1C, $47D6, $43CE
+
+  These are 16-bit fixed-point ratios (1.0 = $8000 = 32768):
+  C=1.0, C#=0.9439, D=0.8909, D#=0.8409, E=0.7937, F=0.7492,
+  F#=0.7071, G=0.6674, G#=0.6300, A=0.5946, A#=0.5612, B=0.5297
+
+Direct Frequency Mode:
+  When the note value >= 128, it's treated as a frequency in Hz:
+    period = 57337232 / frequency
+  This constant ($369E990) encodes an internal Sonix clock value.
+
+Period Calculation (Synthesis):
+  period = (54728 * chromatic_scale[note % 12]) >> (octave + 17)
+  The variable shift accounts for the octave, since the 128-byte waveform
+  cycle length is fixed.
+
+DMA Setup:
+  For a note at internal octave D2:
+    sample_address = ss_data + 0x3E + (2^D2 - 2^min_octave) * w1
+    sample_length  = w1 * 2^D2 / 2  (in 16-bit words)
+    loop_address   = sample_address + w2 * 2^D2  (if w2 != w1)
+    loop_length    = (w1 - w2) * 2^D2 / 2  (in words, if w2 != w1)
+
+
+================================================================================
+SAMPLE FILES ANALYZED
+================================================================================
+
+.instr files (SampledSound, 128 bytes each):
+  feel?.instr         → feel?.ss         vol=0xFF  one-shot
+  love-me.instr       → love-me.ss       vol=0xFF  no-loop
+  love-you.instr      → love-you.ss      vol=0xFF  no-loop
+  loverly-drums.instr → loverly-drums.ss vol=0xFF  one-shot   decay=0xF8
+  loverly-thing.instr → loverly-thing.ss vol=0xFF  no-loop
+  loves-a.instr       → loves-a.ss       vol=0xFF  no-loop
+  searching.instr     → searching.ss     vol=0xFF  no-loop
+  searching-soft.instr→ searching.ss     vol=0x60  no-loop   (soft variant)
+  true-drums.instr    → true-drums.ss    vol=0xFF  one-shot
+  true-love.instr     → true-love.ss     vol=0xFF  no-loop
+  true-love-soft.instr→ true-love.ss     vol=0x58  no-loop   (soft variant)
+  true.instr          → true.ss          vol=0xFF  no-loop
+  when-i.instr        → when-i.ss        vol=0xFF  one-shot   decay=0xF8
+
+.ss files (variable size):
+  File              Size     w1     w2    Oct  Audio    Duration
+  feel?.ss          79010    2467   0     5-5  78944    4.72s
+  love-me.ss        21474    669    669   5-5  21408    1.28s
+  love-you.ss       21346    665    665   5-5  21280    1.27s
+  loverly-drums.ss  39746    1240   0     5-5  39680    2.37s
+  loverly-thing.ss  21026    655    655   5-5  20960    1.25s
+  loves-a.ss        22274    694    694   5-5  22208    1.33s
+  searching.ss      65954    2059   2059  5-5  65888    3.94s
+  true-drums.ss     42402    1323   0     5-5  42336    2.53s
+  true-love.ss      41762    1303   1303  5-5  41696    2.49s
+  true.ss           22818    711    711   5-5  22752    1.36s
+  when-i.ss         67170    2097   0     5-5  67104    4.01s
+
+Pattern: w2=0 (one-shot) for drum/percussion samples; w2=w1 (no-loop) for
+vocal/melodic samples. All files use octave 5 only.
+
+
+================================================================================
+RELATIONSHIP TO OTHER FORMATS
+================================================================================
+
+- NOT IFF format: Despite being for the Amiga, .instr and .ss files do NOT
+  use the IFF (Interchange File Format) container structure.
+
+- SMUS scores: Sonix scores use IFF SMUS (Simple Musical Score) format with
+  an "SNX1" extension chunk. The score references instruments by name.
+
+- IFF 8SVX / AIFF: Sonix can also load standard IFF 8SVX and AIFF instrument
+  files (detected by "FORM" magic). These use a separate IFFTECH code path.
+
+- The .ss format is proprietary to Aegis Sonix and not used by any other
+  known Amiga software.
+
+
+================================================================================
+COMPLETE BYTE MAP
+================================================================================
+
+.instr SampledSound (128 bytes):
+  Byte 0x00-0x0B: "SampledSound" (magic, 12 bytes ASCII)
+  Byte 0x0C-0x1F: Zero padding (20 bytes, all 0x00)
+  Byte 0x20:      Reserved (1 byte, always 0x00)
+  Byte 0x21:      Instrument type flag (1 byte, typically 0x02)
+  Byte 0x22-0x23: Sample rate in Hz (uint16 BE, e.g. 12060)
+  Byte 0x24-0x43: Instrument name field (32 bytes, null-terminated + ghost data)
+  Byte 0x44-0x63: Sample name field (32 bytes, null-terminated + ghost data)
+  Byte 0x64-0x67: Stale runtime pointer (4 bytes, not meaningful)
+  Byte 0x68-0x69: Parameter 0 - Volume (uint16 BE)
+  Byte 0x6A-0x6B: Parameter 1 - Envelope (uint16 BE)
+  Byte 0x6C-0x6D: Parameter 2 - Envelope (uint16 BE)
+  Byte 0x6E-0x6F: Parameter 3 - Envelope (uint16 BE)
+  Byte 0x70-0x71: Parameter 4 - Decay (uint16 BE)
+  Byte 0x72-0x73: Parameter 5 - Envelope (uint16 BE)
+  Byte 0x74-0x75: Parameter 6 - Sustain (uint16 BE)
+  Byte 0x76-0x77: Parameter 7 - Sustain (uint16 BE)
+  Byte 0x78-0x79: Parameter 8 - Sustain (uint16 BE)
+  Byte 0x7A-0x7B: Parameter 9 - LFO depth (uint16 BE)
+  Byte 0x7C-0x7D: Parameter 10 - LFO speed (uint16 BE)
+  Byte 0x7E-0x7F: Parameter 11 - Envelope rate (uint16 BE)
+
+.instr Synthesis (502 bytes):
+  Byte 0x000-0x00B: "Synthesis\x00\x00\x00" (magic, 12 bytes)
+  Byte 0x00C-0x01F: Zero padding (20 bytes)
+  Byte 0x020-0x023: Stale runtime pointer (4 bytes)
+  Byte 0x024-0x043: Instrument name field (32 bytes)
+  Byte 0x044-0x0C3: Waveform 1 (128 bytes, signed 8-bit)
+  Byte 0x0C4-0x143: Waveform 2 (128 bytes, signed 8-bit)
+  Byte 0x144-0x1C3: Waveform 3 (128 bytes, signed 8-bit)
+  Byte 0x1C4-0x1F5: Synthesis parameters (50 bytes)
+
+.ss Sampled Sound:
+  Byte 0x00-0x01: w1 - base unit length (uint16 BE)
+  Byte 0x02-0x03: w2 - loop control (uint16 BE)
+  Byte 0x04:      min_octave (uint8)
+  Byte 0x05:      max_octave (uint8)
+  Byte 0x06:      reserved (uint8, always 0x00)
+  Byte 0x07:      flags (uint8, always 0xFF)
+  Byte 0x08-0x3D: reserved padding (54 bytes, all 0x00)
+  Byte 0x3E-...:  audio data (signed 8-bit PCM, variable length)
+  Last 4 bytes:   "AMII" footer (ASCII, 4 bytes)

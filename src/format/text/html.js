@@ -12,7 +12,7 @@ const WEAK_MAGIC = [
 
 const STRONG_MAGIC = [
 	// generic
-	"HTML start and end tags",
+	"HTML start and end tags", "HTML and HEAD tags",
 
 	// app specific HTML
 	"IBrowse Hotlist / bookmark (v2)", "Internet Explorer history (v1-3)", "Internet Explorer bookmark", "Netscape Bookmark", "Expression Media template"

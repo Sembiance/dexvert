@@ -460,15 +460,16 @@ const DEXMAGIC_CUSTOMS = [
 		if(r.f.input.size<(checkSize*2))
 			return;
 
-		const header = await fileUtil.readFileBytes(r.f.input.absolute, checkSize);
-		if(!(/^\s*<html>/s).test(header.getString(0, checkSize).toLowerCase()))
+		const header = (await fileUtil.readFileBytes(r.f.input.absolute, checkSize)).getString(0, checkSize).toLowerCase();
+		if(!(/^\s*<html>/s).test(header))
 			return;
 
-		const footer = await fileUtil.readFileBytes(r.f.input.absolute, checkSize, -checkSize);
-		if(!(/<\/html>\s*$/s).test(footer.getString(0, checkSize).toLowerCase()))
-			return;
+		const footer = (await fileUtil.readFileBytes(r.f.input.absolute, checkSize, -checkSize)).getString(0, checkSize).toLowerCase();
+		if((/<\/html>\s*$/s).test(footer))
+			return `HTML start and end tags`;
 
-		return `HTML start and end tags`;
+		if((/<head>/s).test(header))
+			return `HTML and HEAD tags`;
 	},
 
 	async function installIt(r)

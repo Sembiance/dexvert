@@ -29,5 +29,5 @@ export class cab extends Format
 	};
 	untouched = dexState => dexState.id?.auxFiles?.length && dexState.original?.input?.ext!==".1";	// If we do have aux files, then we are a multi-part cabinet and we need to only process the first part as it gets everything
 	keepFilename = true;
-	converters   = ["cabextract", "sqc", "deark[module:cab]", "gameextractor[codes:CAB_MSCF]", "izArc", "UniExtract[matchType:magic]"];
+	converters   = dexState => [dexState.hasMagics("Microsoft Windows CE installation Cabinet Archive") ? "cabextract[winCEInstall]" : "cabextract", "sqc", "deark[module:cab]", "gameextractor[codes:CAB_MSCF]", "izArc", "UniExtract[matchType:magic]"];
 }

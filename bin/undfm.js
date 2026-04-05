@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, runUtil, fileUtil} from "xutil";
-import {path, TextLineStream} from "std";
+import {path, TextLineStream, writeAll} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -39,7 +39,7 @@ for await (const line of await inputFile.readable.pipeThrough(new TextDecoderStr
 				const bmpSize = view.getUint32(0, true);
 
 				const imageFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}.bmp`);
-				await new Blob([encoder.encode(`<${path.basename(imageFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+				await writeAll(outputFile, encoder.encode(`<${path.basename(imageFilePath)}>}\n`));
 				await Deno.writeFile(imageFilePath, uintData.subarray(4, 4 + bmpSize));
 				imageCounter++;
 			}
@@ -50,7 +50,7 @@ for await (const line of await inputFile.readable.pipeThrough(new TextDecoderStr
 				const colorBmpSize = view.getUint32(0, true);
 
 				const colorFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}.bmp`);
-				await new Blob([encoder.encode(`<${path.basename(colorFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+				await writeAll(outputFile, encoder.encode(`<${path.basename(colorFilePath)}>}\n`));
 				await Deno.writeFile(colorFilePath, uintData.subarray(8, 8+colorBmpSize));
 
 				const maskOffset = 8+colorBmpSize;
@@ -110,7 +110,7 @@ for await (const line of await inputFile.readable.pipeThrough(new TextDecoderStr
 				}
 		
 				const imageFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}${ext}`);
-				await new Blob([encoder.encode(`<${path.basename(imageFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+				await writeAll(outputFile, encoder.encode(`<${path.basename(imageFilePath)}>}\n`));
 
 				await Deno.writeFile(imageFilePath, Uint8Array.from(uintData.subarray(offset)));
 				imageCounter++;
@@ -120,20 +120,20 @@ for await (const line of await inputFile.readable.pipeThrough(new TextDecoderStr
 	else if((/^(Picture|Icon|Glyph)\.Data = {$/).test(line.trim()))
 	{
 		imageType = line.trim().split(".")[0];
-		await new Blob([encoder.encode(line)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+		await writeAll(outputFile, encoder.encode(line));
 		hexBytes.clear();
 		inImage = true;
 	}
 	else if((/^Bitmap = {$/).test(line.trim()))
 	{
 		imageType = "Bitmap";
-		await new Blob([encoder.encode(line)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+		await writeAll(outputFile, encoder.encode(line));
 		hexBytes.clear();
 		inImage = true;
 	}
 	else
 	{
-		await new Blob([encoder.encode(`${line}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
+		await writeAll(outputFile, encoder.encode(`${line}\n`));
 	}
 }
 

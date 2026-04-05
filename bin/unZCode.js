@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, runUtil, fileUtil} from "xutil";
-import {TextLineStream} from "std";
+import {TextLineStream, writeAll} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -38,7 +38,7 @@ for await (const line of inputFile.readable.pipeThrough(new TextDecoderStream())
 	if(skip)
 		continue;
 	
-	await new Blob([encoder.encode(line + "\n")]).stream().pipeTo(outputFile.writable, {preventClose : true});	// eslint-disable-line prefer-template
+	await writeAll(outputFile, encoder.encode(line + "\n"));	// eslint-disable-line prefer-template
 }
 
 outputFile.close();

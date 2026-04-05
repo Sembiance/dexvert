@@ -14,7 +14,7 @@ export class file extends Program
 		// We do some hacky trickery here to try and determine where one match ends and another begins, but it's not great. It mostly relies on there being a comma whenever a match 'continues'
 		// This sort of wonky output formatting is in libmagic itself, so writing a custom file program to directly call into libmagic.so doesn't gain us anything
 		// Without --raw then file has a BUG that outputs truncated data when it encounters certain characters like \r\n See: sample/text/txt/DORINFO1.DEF
-		// The file source code itself is VERY messy and gross, so trying to modify/patch it to output a better seperator when --keep-going (MAGIC_CONTINUE) is used would be painful, I couldn't figure out where it's even happening at exactly
+		// The file source code itself is VERY messy and gross, so trying to modify/patch it to output a better separator when --keep-going (MAGIC_CONTINUE) is used would be painful, I couldn't figure out where it's even happening at exactly
 		// So in the end we just do our best here, knowing that we'll get some grossness in the detections for some files, but hopefully this will improve with time as I discover more edge cases. Sigh.
 		// Other problematic files to use to test logic:
 		//	archive/iso/The Girls of GLITZ.iso
@@ -100,7 +100,7 @@ export class file extends Program
 		fileText = fileText.replace(/\n- (.?),/g, "$1,");
 		r.xlog.trace`F fileText:\n${fileText}`;
 
-		// Now handle remaining newline prefixes as a match seperator
+		// Now handle remaining newline prefixes as a match separator
 		fileText = fileText.replace(/\n- /g, "§");
 		r.xlog.trace`G fileText:\n${fileText}`;
 

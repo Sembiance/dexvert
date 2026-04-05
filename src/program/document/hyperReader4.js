@@ -66,7 +66,7 @@ export class hyperReader4 extends Program
 	postExec = async r =>
 	{
 		const pageFilePaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true, regex : /P\d+\.TXT$/});
-		await fileUtil.concat(pageFilePaths.sortMulti([pageFilePath => +path.basename(pageFilePath).match(/^P(?<num>\d+)\.TXT$/).groups.num]), await r.outFile("out.txt", {absolute : true}), {seperator : "\n\n\n"});
+		await fileUtil.concat(pageFilePaths.sortMulti([pageFilePath => +path.basename(pageFilePath).match(/^P(?<num>\d+)\.TXT$/).groups.num]), await r.outFile("out.txt", {absolute : true}), {separator : "\n\n\n"});
 		await pageFilePaths.parallelMap(async pageFilePath => await fileUtil.unlink(pageFilePath));
 	};
 	renameOut = true;

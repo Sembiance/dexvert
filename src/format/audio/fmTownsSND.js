@@ -9,5 +9,6 @@ export class fmTownsSND extends Format
 	forbidExtMatch = true;
 	magic          = ["FM-Towns SND"];
 	weakMagic      = true;
-	converters     = ["vibe2wav[renameOut]"];
+	metaProvider   = ["ffprobe[libre]"];
+	converters     = ["ffmpeg[libre][format:fmtowns][outType:mp3]", "vibe2wav[renameOut]"];
 }

@@ -7,6 +7,7 @@ export class rtf extends Format
 	ext            = [".rtf"];
 	forbidExtMatch = true;
 	magic          = ["Rich Text Format", "Format: RTF", "Marcel document", "Marcel RTF document", "application/rtf", /^fmt\/(45|50|52|53|355|969)( |$)/];
+	forbiddenMagic = ["Rich Text Format Directory"];
 	idMeta         = ({macFileType}) => macFileType==="RTF ";
 
 	// fileMerlin will convert RTF too, but it produces artifacts (page 30, 31, etc in document/rtf/DIGITIZE.RTF)

@@ -9,5 +9,5 @@ export class seattleFilmWorks extends Format
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="SFWI" && macFileCreator==="PWMV";
 	mimeType     = "image/x-seattle-filmworks";
 	metaProvider = ["image"];
-	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:sfw]", "nconvert[format:pmp]"];	// the pmp is for a few that don't properly convert to sfw but are indeed SFW files
+	converters   = ["convert", "nconvert[format:sfw]", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:pmp]"];	// the pmp is for a few that don't properly convert to sfw but are indeed SFW files
 }

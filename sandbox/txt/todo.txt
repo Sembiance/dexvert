@@ -212,6 +212,8 @@
 	.wds files are lyrics
 	https://discmaster.textfiles.com/search?q=sidfest&qfields=name&qfields=t
 
+* From discord: CD+G / CD+EG (Karokoe discs) decoder: https://github.com/hcs64/cdg-decode
+
 * If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 
 * Figure out how to extract archive/stackerCompressedVolume as these may be stacker:

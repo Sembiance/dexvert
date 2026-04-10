@@ -10,7 +10,7 @@ export class pcd extends Format
 	idMeta     = ({macFileType, macFileCreator}) => macFileType==="PCDI" && ["aMOS", "PCDv"].includes(macFileCreator);
 	// Used to have a metaProvider from convert, but oh boy is it unreliable at determining the width x height: http://discmaster.textfiles.com/view/731/PCD1235.BIN/photo_cd/images/img0067.pcd
 	converters = [
-		"pcdtojpeg", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert[format:pcd]",
+		"pcdtojpeg", "convert", `abydosconvert[format:${this.mimeType}][matchType:magic]`, "nconvert[format:pcd]",
 		
 		...["hiJaakExpress", "picturePublisher", "photoDraw", "canvas", "tomsViewer", "corelDRAW", "pv"].map(v => `${v}[matchType:magic]`)
 	];

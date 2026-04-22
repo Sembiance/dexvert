@@ -1,0 +1,154 @@
+Fontasy Preview (.PV) File Format Specification
+================================================
+
+Overview
+--------
+Fontasy Preview files (.PV) are monochrome clip art preview/thumbnail image
+containers used by the Fontasy DOS clip art software. Each file contains one
+or more monochrome bitmap images stored with simple RLE compression.
+
+The file extension is .PV (PreView). The files use little-endian byte order
+throughout.
+
+
+File Header (404 bytes, offset 0x000-0x193)
+-------------------------------------------
+
+Offset  Size  Description
+------  ----  -----------
+0x000   3     Magic signature: ASCII "PVV"
+0x003   1     Image count (N): number of images in this file (1-100)
+0x004   N*4   Image offset table: N little-endian 32-bit offsets, one per image
+              Each offset points to the start of that image's data within the file.
+              The first offset is always 0x0194 (404), immediately after the header.
+0x004+N*4     Zero padding to fill the remaining space up to offset 0x193.
+              The offset table has room for up to 100 entries (400 bytes).
+
+The header is always exactly 404 bytes. Image data begins at offset 0x0194.
+
+
+Image Data Format
+-----------------
+
+Each image is stored as a sequence of compressed monochrome scanlines.
+
+Image Header (2 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    2     Height: number of scanlines (little-endian 16-bit unsigned)
+                Typical range: 1-400. Values above ~400 may indicate a variant
+                encoding (see Variant Encoding section).
+
+Following the 2-byte image header is the scanline data.
+
+
+Scanline Encoding
+-----------------
+
+Each scanline is encoded as:
+
+  Byte 0:   row_width  - Number of decompressed bytes for this scanline.
+                         If 0, the scanline is blank (all white pixels).
+  Byte 1:   fill_byte  - Fill/metadata byte (see below).
+  Bytes 2+: compressed data - RLE-compressed pixel data that decompresses to
+                              exactly row_width bytes.
+
+The row_width value can vary per scanline. Images use sparse encoding: only
+the leftmost row_width bytes are stored; any pixels beyond that position in
+the full image width are implicitly white (zero). The image width is the
+maximum row_width across all scanlines.
+
+Fill Byte:
+  When fill_byte is 0x00, this is a standard scanline.
+  When fill_byte is non-zero, this indicates a variant encoding mode used in
+  some Fontasy versions for more compact storage (see Variant Encoding below).
+  In standard mode, the fill_byte is consumed but does not affect rendering.
+
+
+RLE Compression
+---------------
+
+The pixel data within each scanline uses a simple Run-Length Encoding scheme:
+
+  - Escape byte 0x55 followed by two bytes: 0x55 NN VV
+    Repeat byte value VV exactly NN times.
+    NN can be 0-255 (0 produces no output).
+    VV can be any byte value 0x00-0xFF.
+
+  - Any other byte value (0x00-0x54, 0x56-0xFF):
+    Literal byte - output as-is.
+
+To encode a literal 0x55 byte, the encoder uses: 0x55 0x01 0x55
+(repeat 0x55 one time).
+
+The decoder reads compressed bytes until exactly row_width decompressed bytes
+have been produced. If an RLE run would produce more bytes than needed, the
+excess is discarded and the compressed stream position advances past the
+complete RLE instruction (all 3 bytes consumed).
+
+
+Pixel Format
+------------
+
+Each decompressed byte represents 8 monochrome pixels, MSB first:
+  - Bit 7 (0x80) = leftmost pixel
+  - Bit 0 (0x01) = rightmost pixel
+  - Bit value 1 = black pixel
+  - Bit value 0 = white pixel
+
+The image width in pixels is: max(row_width) * 8
+
+
+Variant Encoding (Non-Zero Fill Byte)
+-------------------------------------
+
+Some Fontasy versions use a variant encoding for certain images, indicated
+by a non-zero fill_byte in the scanline header. In this variant:
+
+  - The row_width may be larger than the actual image width, with the
+    decompressed data representing multiple scanlines concatenated together
+    (a multi-row block). The sub-row width matches the image width derived
+    from standard (fill_byte=0) scanlines.
+
+  - The fill_byte value (e.g. 0xFF, 0x55, 0xAA) may represent a background
+    fill pattern for padding within the multi-row block.
+
+  - All images using variant encoding also contain standard scanlines
+    (fill_byte=0), allowing the true image width to be determined from
+    those rows.
+
+  - The image height field accounts for the total number of rendered
+    scanlines after expanding multi-row blocks.
+
+This variant encoding is found in a subset of files from certain Fontasy
+clip art collections. The standard encoding (all fill_bytes = 0x00) is
+more common and produces identical visual results when both encodings
+exist for the same image content.
+
+
+Example Decoding
+----------------
+
+Given scanline bytes: 0D 00 55 0C 00 40
+
+  row_width = 0x0D = 13 bytes
+  fill_byte = 0x00 (standard)
+  Compressed data: 55 0C 00 40
+
+  Decompress:
+    55 0C 00 -> repeat 0x00 twelve times: 00 00 00 00 00 00 00 00 00 00 00 00
+    40       -> literal byte: 40
+    Total: 13 bytes (matches row_width)
+
+  Pixel output (104 pixels):
+    000000000000000000...0000000001000000
+    (96 white pixels, then 0, 1, 0, 0, 0, 0, 0, 0)
+
+
+File Size Constraints
+---------------------
+  - Maximum images per file: 100 (limited by offset table size)
+  - Maximum image height: typically under 400 scanlines
+  - Maximum scanline width: 255 bytes (2040 pixels), though most images
+    are under 80 bytes (640 pixels)
+  - Minimum file size: 408 bytes (404 header + 4 bytes minimum image data)

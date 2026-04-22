@@ -6,6 +6,6 @@ export class drawStudio extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/DrawStudio";
 	ext         = [".dsdr"];
 	magic       = ["DrawStudio Drawing"];
-	unsupported = true;
+	unsupported = true;	// only 160 unique files on discmaster
 	notes       = "Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU";
 }

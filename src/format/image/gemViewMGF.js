@@ -6,5 +6,5 @@ export class gemViewMGF extends Format
 	ext         = [".mgf"];
 	magic       = ["GEMView MGF"];
 	weakMagic   = true;
-	unsupported = true;
+	unsupported = true;	// only 2 unique files on discmaster
 }

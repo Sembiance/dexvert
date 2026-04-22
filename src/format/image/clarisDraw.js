@@ -5,5 +5,5 @@ export class clarisDraw extends Format
 	name        = "Claris Draw";
 	ext         = [".cdd"];
 	magic       = ["Claris Draw document"];
-	unsupported = true;
+	unsupported = true;	// only 46 unique files on discmaster
 }

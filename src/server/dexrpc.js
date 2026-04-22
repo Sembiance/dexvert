@@ -57,8 +57,9 @@ for(const [key, value] of Object.entries(Deno.env.toObject()))
 		runEnv[key] = value;
 }
 
-xlog.info`Starting ${C.DEX_AGENT_COUNT} dex agents...`;
-await dexPool.start({qty : C.DEX_AGENT_COUNT, runEnv});
+const agentCount = Math.floor(C.IS_DEV_MACHINE ? navigator.hardwareConcurrency*0.6 : navigator.hardwareConcurrency*1.1);
+xlog.info`Starting ${agentCount} dex agents...`;
+await dexPool.start({qty : agentCount, runEnv});
 
 const monitors = [];
 if(C.IS_DEV_MACHINE)

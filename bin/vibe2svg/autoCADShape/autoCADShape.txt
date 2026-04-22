@@ -1,0 +1,396 @@
+AutoCAD Compiled Shape File (.SHX) — Binary Format Specification
+================================================================
+
+Vibe coded by Claude
+
+
+1. OVERVIEW
+-----------
+AutoCAD compiled shape files (.SHX) store vector drawing definitions used as
+fonts and symbol libraries. Each file contains one or more numbered shapes,
+where each shape is a sequence of pen-movement and arc-drawing commands.
+
+There are four format variants sharing the .SHX extension:
+
+  Variant      Header Identifier           Purpose
+  -------      -----------------           -------
+  shapes 1.0   AutoCAD-86 shapes 1.0       Standard fonts, shape libraries
+  shapes 1.1   AutoCAD-86 shapes 1.1       Extended standard fonts (>255 chars)
+  unifont 1.0  AutoCAD-86 unifont 1.0      Unicode fonts
+  bigfont 1.0  AutoCAD-86 bigfont 1.0      CJK double-byte fonts
+
+All four variants share the same drawing command encoding (Section 8) but
+differ in file structure and shape indexing.
+
+
+2. FORMAT A: SHAPES 1.0 / 1.1
+-------------------------------
+
+2.1  FILE STRUCTURE
+
+  Offset   Size    Description
+  ------   ----    -----------
+  0        24      Header string (fixed)
+  24       2       Start shape number (uint16 LE)
+  26       2       Highest shape number (uint16 LE)
+  28       2       Number of shapes (uint16 LE)
+  30       N*4     Shape index table (N = number of shapes)
+  30+N*4   var     Shape data blocks (concatenated)
+  end      3       Optional "EOF" marker (ASCII)
+
+2.2  HEADER (24 bytes)
+
+  An ASCII string terminated by CR LF SUB (0x0D 0x0A 0x1A):
+    "AutoCAD-86 shapes 1.0\r\n\x1a"  (24 bytes)
+    "AutoCAD-86 shapes 1.1\r\n\x1a"  (24 bytes)
+
+2.3  METADATA (6 bytes at offset 24)
+
+  Three little-endian unsigned 16-bit integers:
+
+    Offset  Field            Description
+    ------  -----            -----------
+    24      start            First shape number in the file.
+                             0 for font files (shape 0 = descriptor).
+                             Non-zero for pure shape libraries.
+    26      max_shape        Highest shape number defined in the file.
+    28      count            Total number of shapes (entries in index table).
+
+2.4  SHAPE INDEX TABLE (count * 4 bytes)
+
+  Each entry is two little-endian unsigned 16-bit values:
+
+    +0  shape_number     Shape identifier (0–258 in practice).
+    +2  data_length      Byte count of this shape's data block.
+
+  Entries are in ascending order by shape number. Data blocks follow the
+  index table in the same order, concatenated with no gaps.
+
+2.5  SHAPE DATA BLOCKS
+
+  Each block is exactly data_length bytes:
+
+    [name_string \0] [spec_bytes...] [\0]
+
+    name_string:  Null-terminated ASCII name.
+                  Version 1.0: Always empty (just the \0 byte).
+                  Version 1.1: May contain a descriptive name, or empty.
+    spec_bytes:   Drawing command bytes (see Section 8).
+    \0:           End-of-shape terminator (command code 0x00).
+
+2.6  FONT DESCRIPTOR (shape number 0)
+
+  Shape 0 in font files stores metadata instead of drawing commands:
+
+    [font_name \0] [above] [below] [modes] [\0]
+
+    font_name:  Null-terminated ASCII string (font name / copyright).
+    above:      uint8 — height above baseline in vector units.
+    below:      uint8 — depth below baseline for descenders.
+    modes:      uint8 — 0 = horizontal text only.
+                         2 = dual orientation (horizontal + vertical).
+
+2.7  VERSION DIFFERENCES
+
+  Feature                  Version 1.0              Version 1.1
+  -------                  -----------              -----------
+  Shape number range       0–255                    0–258+
+  Shape names in data      Always empty (\0)        May contain ASCII names
+  Drawing command encoding Identical                Identical
+
+  Version 1.1 extended shape numbers:
+    256 = uppercase accented characters
+    257 = lowercase accented characters
+    258 = special symbols (degree, plus-minus, diameter, etc.)
+
+2.8  SUBSHAPE REFERENCE
+
+  In shapes 1.0/1.1, command 0x07 reads ONE byte for the shape number
+  (range 0–255).
+
+2.9  EOF MARKER AND PADDING
+
+  Most files end with the 3-byte ASCII string "EOF" (0x45 0x4F 0x46).
+  Some files have additional padding:
+    - Ctrl-Z padding (0x1A bytes): CP/M-era sector alignment.
+    - Null padding (0x00 bytes): sector alignment to 512 bytes.
+
+2.10  BYTE-LEVEL ACCOUNTING
+
+  file_size = 24 + 6 + count*4 + sum(data_lengths) + 3("EOF") + padding
+
+
+3. FORMAT B: UNIFONT 1.0
+--------------------------
+
+3.1  FILE STRUCTURE
+
+  Offset   Size    Description
+  ------   ----    -----------
+  0        25      Header string (fixed)
+  25       2       Number of shapes including descriptor (uint16 LE)
+  27       2       Reserved, always 0 (uint16 LE)
+  29       2       Descriptor byte count (uint16 LE)
+  31       var     Font descriptor (defbytes bytes)
+  31+D     var     Inline shape records (sequential)
+
+3.2  HEADER (25 bytes)
+
+  "AutoCAD-86 unifont 1.0\r\n\x1a"  (25 bytes)
+
+  One byte longer than shapes headers because "unifont" is 7 characters
+  versus "shapes" at 6.
+
+3.3  FONT DESCRIPTOR
+
+  Occupies exactly defbytes bytes starting at offset 31:
+
+    [font_name \0] [above] [below] [modes] [pad] [pad] [pad]
+
+    font_name:  Null-terminated ASCII string.
+    above:      uint8 — height above baseline.
+    below:      uint8 — depth below baseline.
+    modes:      uint8 — 0 = horizontal only, 2 = dual orientation.
+    pad:        3 padding bytes (typically 0x00).
+
+3.4  INLINE SHAPE RECORDS
+
+  There is NO separate index table. Each shape record is stored inline:
+
+    [shape_number:uint16 LE] [data_length:uint16 LE] [data:data_length bytes]
+
+  Repeated (num_shapes - 1) times (the font descriptor is counted as one).
+  Shape numbers can exceed 255, supporting Unicode code points.
+
+3.5  SHAPE DATA BLOCKS
+
+  Same structure as shapes format:
+    [name_string \0] [spec_bytes...] [\0]
+
+3.6  SUBSHAPE REFERENCE
+
+  In unifont, command 0x07 reads TWO bytes for the shape number, stored
+  in big-endian order (high byte first, low byte second):
+
+    0x07 <high_byte> <low_byte>    shape = high*256 + low
+
+  This allows referencing shapes in the full 0–65535 range. In practice,
+  subshape targets are typically helper shapes numbered below 256, with the
+  high byte being 0x00.
+
+
+4. FORMAT C: BIGFONT 1.0
+--------------------------
+
+4.1  FILE STRUCTURE
+
+  Offset   Size    Description
+  ------   ----    -----------
+  0        25      Header string (fixed)
+  25       2       Entry size indicator, always 8 (uint16 LE)
+  27       2       Number of index entries (uint16 LE)
+  29       2       Number of lead-byte ranges (uint16 LE)
+  31       R*4     Lead-byte range table (R = num_ranges)
+  31+R*4   2       Range terminator, always 0 (uint16 LE)
+  +2       6       Font descriptor
+  +6       N*8     Shape index (N = num_entries)
+  var      var     Shape data at absolute file offsets
+
+4.2  HEADER (25 bytes)
+
+  "AutoCAD-86 bigfont 1.0\r\n\x1a"  (25 bytes)
+
+4.3  LEAD-BYTE RANGE TABLE
+
+  Defines which input byte values trigger this bigfont. Each range is:
+
+    [range_start:uint16 LE] [range_end:uint16 LE]
+
+  Examples: GB2312 Chinese fonts use (0xA1, 0xFE) or (0xB0, 0xFF).
+  Shift-JIS Japanese fonts use multiple ranges like (0x81, 0x9F) and
+  (0xE0, 0xEA).
+
+  Followed by a 2-byte terminator of 0x0000.
+
+4.4  FONT DESCRIPTOR (6 bytes)
+
+    [above:uint8] [below:uint8] [default_char:uint16 LE] [modes:uint16 LE]
+
+    above:         Height above baseline.
+    below:         Depth below baseline (often 0 for CJK fonts).
+    default_char:  Default/fallback character code.
+    modes:         0 = horizontal only, 1 = dual orientation.
+
+4.5  SHAPE INDEX (num_entries * 8 bytes)
+
+  Random-access index with absolute file offsets. Each entry:
+
+    +0  shape_code     2 bytes, big-endian (lead byte, trail byte)
+    +2  data_length    uint16 LE — byte count of shape data
+    +4  data_offset    uint32 LE — absolute file offset to shape data
+
+  Empty entries have all 8 bytes = 0 and should be skipped.
+  The index may be sparse (not all entries correspond to valid shapes).
+
+4.6  SHAPE DATA BLOCKS
+
+  Located at various absolute offsets throughout the file (not sequential).
+  Same internal structure as other formats:
+    [name_string \0] [spec_bytes...] [\0]
+
+  For dual-mode fonts (modes=1), shape data may contain both horizontal
+  and vertical drawing definitions. The horizontal definition comes first
+  and ends with 0x00 (END). A vertical definition may follow.
+
+4.7  SUBSHAPE REFERENCE
+
+  Same as unifont: command 0x07 reads TWO bytes in big-endian order.
+  Helper shapes (typically numbered < 256) provide common setup/teardown
+  operations like scaling initialization and position restoration.
+
+4.8  DESCRIPTION STRING
+
+  A null-terminated ASCII string (font name/credits) may appear in the
+  gap between the end of the index table and the first shape data offset.
+
+
+5. DRAWING COMMAND ENCODING (all formats)
+-------------------------------------------
+
+Each byte in the spec_bytes region is either a special command (0x00–0x0E)
+or a direction-length vector (0x10–0xFF).
+
+The pen starts in the DOWN (drawing) state at position (0, 0) for each shape.
+The coordinate system has X increasing rightward and Y increasing upward.
+
+5.1  SPECIAL COMMANDS
+
+  Code   Name              Extra Bytes   Description
+  ----   ----              -----------   -----------
+  0x00   END               0             Terminates the shape definition.
+  0x01   PEN_DOWN          0             Enables drawing mode.
+  0x02   PEN_UP            0             Disables drawing.
+  0x03   DIVIDE            1             Divides scale factor by next byte.
+                                         Cumulative within shape.
+  0x04   MULTIPLY          1             Multiplies scale factor by next byte.
+                                         Cumulative within shape.
+  0x05   PUSH              0             Pushes current (x, y) onto stack
+                                         (max depth 4).
+  0x06   POP               0             Pops (x, y) from stack.
+  0x07   SUBSHAPE          1 or 2        Draws referenced shape inline.
+                                         shapes 1.0/1.1: 1 byte (0–255).
+                                         unifont/bigfont: 2 bytes big-endian.
+  0x08   XY_DISP           2             Moves/draws by (dx, dy) signed bytes,
+                                         scaled by current scale factor.
+  0x09   MULTI_XY          variable      Signed byte pairs until (0, 0).
+  0x0A   OCTANT_ARC        2             Circular arc. See Section 6.1.
+  0x0B   FRACTIONAL_ARC    5             High-precision arc. See Section 6.2.
+  0x0C   BULGE_ARC         3             Chord+curvature arc. See Section 6.3.
+  0x0D   MULTI_BULGE       variable      Signed byte triplets until dx=0,dy=0.
+                                         No bulge byte after terminator.
+  0x0E   VERTICAL_TEXT     0             Next command executes only in vertical
+                                         mode; skipped in horizontal mode
+                                         (including all argument bytes).
+
+5.2  DIRECTION-LENGTH VECTORS (bytes 0x10–0xFF)
+
+  For any byte where the high nibble is non-zero:
+
+    length    = (byte >> 4) & 0x0F     (1–15 vector units)
+    direction = byte & 0x0F            (0–15, see table below)
+
+  The displacement is (dir_x * length * scale, dir_y * length * scale).
+
+  Direction table:
+    Code  Angle     dx     dy    Name
+    ----  -----     --     --    ----
+    0x0   0.0°     +1.0    0.0   East
+    0x1   22.5°    +1.0   +0.5   ENE
+    0x2   45.0°    +1.0   +1.0   NE
+    0x3   67.5°    +0.5   +1.0   NNE
+    0x4   90.0°     0.0   +1.0   North
+    0x5   112.5°   -0.5   +1.0   NNW
+    0x6   135.0°   -1.0   +1.0   NW
+    0x7   157.5°   -1.0   +0.5   WNW
+    0x8   180.0°   -1.0    0.0   West
+    0x9   202.5°   -1.0   -0.5   WSW
+    0xA   225.0°   -1.0   -1.0   SW
+    0xB   247.5°   -0.5   -1.0   SSW
+    0xC   270.0°    0.0   -1.0   South
+    0xD   292.5°   +0.5   -1.0   SSE
+    0xE   315.0°   +1.0   -1.0   SE
+    0xF   337.5°   +1.0   -0.5   ESE
+
+  Note: diagonal directions use non-unit vectors. NE (direction 2)
+  displaces by (length, length), not (length/sqrt(2), length/sqrt(2)).
+
+
+6. ARC ENCODINGS
+-----------------
+
+6.1  OCTANT ARC (command 0x0A)
+
+  Format: 0x0A <radius:uint8> <arc_spec:int8>
+
+  radius:    Arc radius in vector units, scaled by current scale factor.
+
+  arc_spec:  Signed byte encoding start position, span, and direction:
+
+    val = abs(arc_spec)
+    start_octant = (val >> 4) & 0x07    (0–7, each = 45 degrees)
+    span         = val & 0x07           (1–7, or 0 meaning 8 = full circle)
+    clockwise    = (arc_spec < 0)
+
+  Octant numbering (counterclockwise from East):
+    0 = 0°(East)  1 = 45°(NE)  2 = 90°(N)  3 = 135°(NW)
+    4 = 180°(W)   5 = 225°(SW) 6 = 270°(S) 7 = 315°(SE)
+
+  Arc center:
+    start_angle = start_octant * 45°
+    center_x = current_x - radius * cos(start_angle)
+    center_y = current_y - radius * sin(start_angle)
+
+  Arc endpoint:
+    end_angle = start_angle ± span * 45°   (+ for CCW, - for CW)
+    new_x = center_x + radius * cos(end_angle)
+    new_y = center_y + radius * sin(end_angle)
+
+6.2  FRACTIONAL ARC (command 0x0B)
+
+  Format: 0x0B <start_offset:u8> <end_offset:u8>
+               <radius_hi:u8> <radius_lo:u8> <arc_spec:int8>
+
+  radius = radius_hi * 256 + radius_lo   (16-bit radius)
+  arc_spec: same encoding as octant arc.
+
+  Angular offsets from octant boundaries:
+    offset_degrees = offset_value * 45 / 256
+
+  CCW: actual_start = start_octant*45 + start_offset_deg
+       actual_end   = (start_octant+span)*45 - end_offset_deg
+  CW:  actual_start = start_octant*45 - start_offset_deg
+       actual_end   = (start_octant-span)*45 + end_offset_deg
+
+6.3  BULGE ARC (commands 0x0C and 0x0D)
+
+  Single (0x0C): 0x0C <dx:int8> <dy:int8> <bulge:int8>
+  Multi  (0x0D): 0x0D { <dx:int8> <dy:int8> <bulge:int8> }* <0x00> <0x00>
+
+  dx, dy:  Signed chord displacement, scaled by current scale factor.
+  bulge:   Curvature factor (-127 to +127).
+           0 = straight line. ±127 = semicircle.
+           Positive = counterclockwise. Negative = clockwise.
+           Sagitta: H = |bulge| * chord_length / (2 * 127)
+           Radius:  R = (chord² + 4H²) / (8H)
+
+  Multi-bulge terminator is dx=0,dy=0 with NO trailing bulge byte.
+
+
+7. EOF MARKER AND PADDING
+----------------------------
+Most shapes-format files end with the 3-byte ASCII string "EOF".
+Unifont and bigfont files typically do not include an EOF marker.
+
+Some files have trailing padding:
+  - 0x1A bytes: CP/M-era sector alignment.
+  - 0x00 bytes: sector alignment to 512 bytes.

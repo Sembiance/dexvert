@@ -1,0 +1,301 @@
+Continuous Edge Graphics (CEG) Bitmap File Format Specification
+================================================================
+
+Created by Edsun Laboratories, Inc. circa 1990-1991.
+The CEG format was used with the Edsun Continuous Edge Graphics display board,
+a VGA-era graphics card capable of displaying thousands of simultaneous colors
+through inline palette redefinition and anti-aliased edge interpolation.
+
+
+1. FILE STRUCTURE
+-----------------
+
+  Offset  Size   Description
+  ------  ----   -----------
+  0x0000  1000   Header (fixed size)
+  0x03E8  W*H    Pixel data stream
+
+
+  Total file size = 1000 + (Width * Height) bytes.
+
+
+2. HEADER (1000 bytes)
+----------------------
+
+  Offset  Size  Type     Description
+  ------  ----  ----     -----------
+  0x0000  2     uint16   Version identifier (always 01 00)
+  0x0002  9     string   Magic signature: "Edsun CEG" (ASCII)
+  0x000B  1     uint8    Sub-version (always 0x01)
+  0x000C  8     bytes    Software metadata (varies; may contain version numbers,
+                         program parameters, or residual memory from the
+                         creating application)
+  0x0014  82    string   Copyright notice, zero-padded. Typically:
+                         "(C) Copyright 199x. Edsun Laboratories, Inc.
+                          All Rights Reserved."
+                         Bytes beyond the copyright string may contain residual
+                         program data (error messages, variable names, etc.)
+                         from the CEG driver/software.
+  0x0066  1     uint8    Mode flags (see section 3)
+  0x0067  2     uint16   Image width in pixels (little-endian)
+  0x0069  2     uint16   Image height in pixels (little-endian)
+  0x006B  5     bytes    Extended metadata (varies; may contain additional
+                         parameters or residual data)
+  0x0070  920   bytes    Remainder of header. Contains a mix of:
+                         - Embedded program strings (e.g., "Parse Error %1")
+                         - Software lookup tables
+                         - Color calibration data
+                         - Padding (zero bytes)
+                         The contents of this region are software-dependent
+                         and not required for image decoding. The pixel data
+                         always begins at fixed offset 0x03E8 (1000).
+
+
+3. MODE FLAGS (byte at offset 0x0066)
+-------------------------------------
+
+  The mode flags byte controls how pixel data is interpreted.
+  Observed values: 0x01, 0x05, 0x0D, 0x0F.
+
+  Bit layout:
+    Bit 0 (0x01): Always set. Indicates a valid CEG file.
+    Bit 1 (0x02): Edge interpolation codes enabled.
+                  When set, byte values 0xC0-0xDF in the pixel stream that
+                  do NOT have an inline palette definition are treated as
+                  edge interpolation pixels (see section 5).
+    Bit 2 (0x04): Color mode.
+                  When set, the image uses color (EGA base palette or
+                  multi-color line art encoding).
+                  When clear, the image is monochrome/grayscale.
+    Bit 3 (0x08): Inline palette (BF entries) enabled.
+                  When set, the pixel stream may contain 0xBF palette
+                  definition commands (see section 4).
+
+  Common mode combinations:
+    0x0F (1111): Full CEG mode. Inline BF palette + edge interpolation.
+                 Used for photographic and complex color images.
+                 Supports thousands of simultaneous colors.
+    0x0D (1101): Palette + color, no dedicated edge codes.
+                 Used for EGA-compatible 16-color images with anti-aliased
+                 edges (e.g., AutoCAD wireframe captures) or images where
+                 the full byte range is used for palette indices.
+    0x05 (0101): Color line art mode, no inline palette.
+                 Used for anti-aliased colored vector graphics (arcs,
+                 ellipses, text). Uses 3-bit color + 5-bit weight encoding.
+    0x01 (0001): Monochrome/grayscale mode.
+                 Used for anti-aliased monochrome content (text, line art).
+                 Each byte represents opacity/weight of a single foreground
+                 color against black background.
+
+
+4. PIXEL DATA STREAM
+--------------------
+
+  The pixel data begins at offset 0x03E8 (1000) and contains exactly
+  Width * Height bytes. Every byte in the stream maps to exactly one
+  pixel position, scanned left-to-right, top-to-bottom.
+
+  The interpretation of each byte depends on the mode flags:
+
+
+  4.1 Full CEG Mode (flags & 0x0F == 0x0F)
+  -----------------------------------------
+
+  The pixel stream contains three types of byte sequences:
+
+  a) PALETTE DEFINITION (BF command):
+     When byte 0xBF is encountered with at least 4 following bytes:
+
+       Byte 0:  0xBF   - Palette definition marker
+       Byte 1:  R      - Red component (0-255)
+       Byte 2:  G      - Green component (0-255)
+       Byte 3:  B      - Blue component (0-255)
+       Byte 4:  Index  - Palette slot to define (0-255, except 0xBF)
+
+     This consumes 5 bytes from the stream, producing 5 pixel positions.
+     These 5 pixel positions display the color of the most recent
+     palette-defined pixel to the left on the current scanline (or
+     black if none exists on the current scanline).
+
+     The palette is cumulative: definitions persist for all subsequent
+     pixels. A palette index may be redefined multiple times throughout
+     the stream, allowing the effective palette to change per-scanline.
+     This mechanism enables thousands of simultaneous colors despite
+     using a single-byte index per pixel.
+
+     The byte value 0xBF is reserved as the marker and cannot be used
+     as a palette index.
+
+  b) PALETTE-INDEXED PIXEL:
+     Any byte value from 0x00-0xBE or 0xE0-0xFF that has been defined
+     by a prior BF command is a palette-indexed pixel. The pixel
+     displays the RGB color most recently assigned to that index.
+
+     Byte values that have NOT been defined by any BF command and fall
+     outside the 0xC0-0xDF range display as black (0,0,0).
+
+  c) EDGE INTERPOLATION PIXEL (0xC0-0xDF):
+     Byte values 0xC0 through 0xDF that do NOT have a palette definition
+     are edge interpolation codes. These create smooth color transitions
+     at boundaries between differently-colored regions.
+
+     The interpolation weight is: W = byte - 0xC0 (range 0-31).
+
+     The pixel color is computed by blending between the nearest
+     palette-colored pixel to the LEFT and to the RIGHT on the
+     same scanline:
+
+       color = left_color * (W/32) + right_color * (1 - W/32)
+
+     Where:
+       W=0  → 100% of right neighbor color
+       W=31 → ~97% of left neighbor color
+
+     If a byte value in 0xC0-0xDF range HAS been defined by a BF
+     palette command, it is treated as a normal palette-indexed pixel,
+     NOT an edge code. This allows the full range to be used for
+     palette indices when edge interpolation is not needed at that
+     index value.
+
+
+  4.2 EGA + Edge Mode (flags == 0x0D, values 0x00-0x0F present)
+  ---------------------------------------------------------------
+
+  Pixel values 0x00-0x0F map to the standard 16-color EGA palette:
+
+    Index  Color            RGB
+    -----  -----            ---
+      0    Black            (0, 0, 0)
+      1    Blue             (0, 0, 170)
+      2    Green            (0, 170, 0)
+      3    Cyan             (0, 170, 170)
+      4    Red              (170, 0, 0)
+      5    Magenta          (170, 0, 170)
+      6    Brown            (170, 85, 0)
+      7    Light Gray       (170, 170, 170)
+      8    Dark Gray        (85, 85, 85)
+      9    Light Blue       (85, 85, 255)
+     10    Light Green      (85, 255, 85)
+     11    Light Cyan       (85, 255, 255)
+     12    Light Red        (255, 85, 85)
+     13    Light Magenta    (255, 85, 255)
+     14    Yellow           (255, 255, 85)
+     15    White            (255, 255, 255)
+
+  Values 0xC0-0xDF are edge interpolation codes (same formula as 4.1c).
+  This mode is used for EGA-compatible images (e.g., AutoCAD screen
+  captures) with anti-aliased edges.
+
+
+  4.3 Color Line Art Mode (flags == 0x05)
+  ----------------------------------------
+
+  Each non-zero byte encodes a colored anti-aliased pixel:
+
+    Bits 7-5:  Color index (0-7), selecting from 8 line colors
+    Bits 4-0:  Anti-aliasing weight (0-31)
+
+  Byte value 0x00 is the background (black).
+
+  The 8 color slots are hardware-defined line colors used for
+  vector graphics rendering. The pixel opacity is proportional to
+  the weight value relative to the maximum weight present in the file.
+
+  This mode is used for demonstrating the CEG board's anti-aliased
+  vector rendering capabilities (arcs, circles, ellipses, text).
+
+
+  4.4 Monochrome Mode (flags == 0x01)
+  ------------------------------------
+
+  Similar to color line art (4.3) but with a single foreground color.
+  Each non-zero byte value encodes the anti-aliasing weight of a
+  white foreground pixel against a black background.
+
+  Higher values produce brighter/more opaque pixels.
+  This mode is used for anti-aliased text and monochrome line art.
+
+
+  4.5 Direct Palette Mode (flags == 0x0D, wide value range)
+  ----------------------------------------------------------
+
+  When flags == 0x0D and pixel values span beyond 0x0F, the file
+  uses direct palette-indexed encoding with BF palette commands
+  (if present), similar to Full CEG mode but without the 0xC0-0xDF
+  edge interpolation code range. All byte values except 0xBF are
+  treated as palette indices.
+
+  Files with few or no BF definitions in this mode may render as
+  grayscale using the raw byte value as luminance.
+
+
+5. EDGE INTERPOLATION ALGORITHM
+--------------------------------
+
+  The "Continuous Edge" technology is the defining feature of the CEG
+  format. It produces smooth, anti-aliased transitions between color
+  regions using inline interpolation codes.
+
+  Algorithm for resolving edge pixels on each scanline:
+
+    1. First pass: resolve all palette-indexed pixels and BF-command
+       pixels to their RGB colors.
+
+    2. Second pass: for each contiguous run of edge pixels (0xC0-0xDF
+       without palette definitions):
+
+       a. Find the nearest resolved pixel to the LEFT of the run.
+          Use its RGB color as "left_color". If none exists on the
+          current scanline, use black (0,0,0).
+
+       b. Find the nearest resolved pixel to the RIGHT of the run.
+          Use its RGB color as "right_color". If none exists, use
+          black (0,0,0).
+
+       c. For each edge pixel with weight W = byte - 0xC0:
+            R = left_R * (W/32) + right_R * (1 - W/32)
+            G = left_G * (W/32) + right_G * (1 - W/32)
+            B = left_B * (W/32) + right_B * (1 - W/32)
+
+  This interpolation creates smooth color gradients at region
+  boundaries, producing the "continuous edge" effect. Combined with
+  the dynamic palette (which redefines colors per-scanline), this
+  enables photographic-quality images with thousands of simultaneous
+  colors using only 1 byte per pixel.
+
+
+6. NOTES
+--------
+
+  - The file format was designed for the Edsun CEG display board,
+    a VGA-compatible graphics card from circa 1990-1991.
+
+  - The header contains residual program memory from the CEG driver
+    software, including error message strings, variable names, and
+    lookup tables. This data varies between software versions but
+    does not affect image decoding.
+
+  - The copyright year in the header string indicates the software
+    version: "1990" for the initial release, "1991" for updated
+    versions with additional features.
+
+  - File extensions: .CEG (uppercase on DOS systems) or .ceg.
+
+  - Image dimensions observed in samples: 640x480 (standard VGA)
+    and 321x200 (lower resolution mode).
+
+  - The format supports up to 255 palette entries per redefinition
+    cycle (index 0xBF is reserved). Through progressive redefinition
+    across scanlines, the total number of unique colors can exceed
+    26,000 (as documented in sample file metadata: "CEG image 26888
+    simultaneous colors").
+
+  - Horizontal banding artifact: Because the palette is redefined
+    per-scanline group, the same palette index can map to completely
+    different RGB values on adjacent groups of scanlines. This creates
+    visible horizontal banding in photographic images when viewed at
+    1:1 pixel resolution on modern displays. On the original CRT
+    hardware, the analog beam profile would partially smooth these
+    per-scanline discontinuities. This banding is an inherent
+    characteristic of the CEG format's palette-reuse strategy, not
+    a decoding error.

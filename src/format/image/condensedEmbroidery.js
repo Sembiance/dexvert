@@ -7,5 +7,5 @@ export class condensedEmbroidery extends Format
 	ext            = [".cnd"];
 	forbidExtMatch = true;
 	magic          = ["cnd/Dos Condensed embroidery format"];
-	unsupported    = true;
+	unsupported    = true;	// only 20 unique files on discmasters
 }

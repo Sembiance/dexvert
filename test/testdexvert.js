@@ -1105,11 +1105,14 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 		xlog.info`Attempting file: ${sampleSubFilePath}`;
 	xlog.debug`Running dex with options: ${o}`;
 
+	const startedAt = performance.now();
 	const {r, log, err} = await xu.fetch(`http://${C.DEXRPC_HOST}:${C.DEXRPC_PORT}/dex`, {json : o, asJSON : true});
 	if(err)
 		console.error(`${log.join("\n")}\n${err}`.trim());
 	xlog.debug`dex result: ${{...r, pretty : null}}`;
 	await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), log?.length ? log.join("\n") : (r.pretty?.length ? r.pretty : ""));
+	if(argv.serial)
+		xlog.info`Done. Took: ${(performance.now()-startedAt).msAsHumanReadable()}`;
 		
 	await workercb({sampleFilePath, tmpOutDirPath, dexData : r.json});
 }, argv.serial ? 1 : Math.min(sampleFilePaths.length, NUM_WORKERS));

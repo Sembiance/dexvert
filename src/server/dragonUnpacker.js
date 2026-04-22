@@ -36,7 +36,7 @@ const exitHandler = async ({success, code, signal}) =>
 start = async () =>
 {
 	xlog.info`Starting dragonUnpacker server...`;
-	({p} = await runUtil.run(path.join(Program.binPath("dragonUnpackerServer"), "dragonUnpackerServer"), [], {detached : true, exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
+	({p} = await runUtil.run(path.join(Program.binPath("dragonUnpackerServer"), "dragonUnpackerServer"), [`--workerCount=${C.IS_DEV_MACHINE ? 3 : 10}`, `--port=${C.DRAGON_UNPACKER_PORT}`], {detached : true, exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
 	await xu.waitUntil(async () => (await xu.fetch(`http://${C.DRAGON_UNPACKER_HOST}:${C.DRAGON_UNPACKER_PORT}/status`, {silent : true}))?.trim()==="a-ok");
 };
 

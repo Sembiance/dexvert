@@ -1,0 +1,494 @@
+DraftChoice Drawing File Format (.DCH) Specification
+=====================================================
+
+DraftChoice was a DOS-era vector clipart/drawing program. Its native file
+format (.DCH) stores vector images as sequences of filled polygons, primarily
+horizontal scan-line rectangles that together form filled shapes. Some files
+also contain outline polygons (for map boundaries) and diagram elements
+(lines, arcs, text).
+
+All multi-byte integers are little-endian (LE16, LE32).
+All floating-point values use the Turbo Pascal 6-byte Real48 format.
+
+
+1. TURBO PASCAL REAL48 FORMAT
+-----------------------------
+
+Each coordinate/dimension value is stored as a 6-byte Real48:
+
+  Byte[0]:    Exponent (biased by 129). If 0, the entire value is 0.0.
+  Byte[1]:    Mantissa bits 0-7 (least significant)
+  Byte[2]:    Mantissa bits 8-15
+  Byte[3]:    Mantissa bits 16-23
+  Byte[4]:    Mantissa bits 24-31
+  Byte[5]:    Bit 7 = sign (0=positive, 1=negative)
+              Bits 6-0 = mantissa bits 32-38 (most significant)
+
+Decoding:
+  If exponent == 0: value = 0.0
+  Otherwise:
+    sign = (byte[5] >> 7) & 1
+    mantissa_bits = ((byte[5] & 0x7F) << 32) | (byte[4] << 24)
+                  | (byte[3] << 16) | (byte[2] << 8) | byte[1]
+    mantissa = 1.0 + mantissa_bits / 2^39
+    value = (-1)^sign * mantissa * 2^(exponent - 129)
+
+Examples:
+  81 00 00 00 00 00 = 1.0
+  82 00 00 00 00 40 = 3.0
+  84 00 00 00 00 70 = 15.0
+  86 00 00 00 00 00 = 32.0
+  88 00 00 00 00 4A = 202.0
+  82 00 00 00 00 80 = -2.0
+  00 00 00 00 00 00 = 0.0
+
+
+2. FILE HEADER (56 bytes)
+-------------------------
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       2     Padding (always 00 00)
+  2       2     LE16: Format code (equals header Real[0] as integer)
+                  0x0000 (0)   = Diagram format (DFD, BUHR diagrams)
+                  0x009B (155) = Map/technical drawing format (variant)
+                  0x009D (157) = Map/technical drawing format
+                  0x00C8 (200) = Drawing/mixed format (variant)
+                  0x00C9 (201) = Drawing/mixed format (variant, incl. DCW files)
+                  0x00CA (202) = Clipart format (most common)
+                  0x00CC (204) = Drawing/mixed format (variant)
+  4       2     LE16: Version (always 2)
+  6       2     LE16: Always 0x0030 (48)
+  8       12    Reserved / origin offsets
+                  Format 0x00CA: always zeros
+                  Format 0x009D: two Real48 values (X/Y origin offsets)
+  20      6     Real48: Header value (matches format code as float for 0x00CA)
+  26      6     Real48: Scale factor 1 (or 1.0 for clipart)
+  32      6     Real48: Scale factor 2 / X bounds
+  38      6     Real48: Scale factor 3 / Y bounds
+  44      6     Real48: Scale factor 4 / grid X
+  50      6     Real48: Scale factor 5 / grid Y
+
+
+3. RECORD FORMAT
+----------------
+
+After the 56-byte header, the file contains a sequence of records.
+Each record has a 4-byte header:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       2     LE16: Record type
+  2       2     LE16: Payload length in bytes
+
+The payload immediately follows the 4-byte record header.
+The total record size = 4 + payload_length.
+
+The file ends with a 4-byte terminator: LE16 type (usually 0x0001)
+followed by LE16 length = 0x0000.
+
+
+4. METADATA RECORDS
+-------------------
+
+These appear between the file header and the drawing records. They define
+layers, views, and drawing settings.
+
+4.1 Type 3 - Configuration (len=2)
+  Payload: LE16 value (typically 1)
+
+4.2 Type 4 - Drawing Parameters (len=40)
+  6 Real48 values (grid/snap settings) + 4 bytes of flags.
+
+4.3 Type 5 - Additional Parameters (len=12)
+  2 Real48 values.
+
+4.4 Type 8 - Color/Pen Table (len=22)
+  1 byte (0xFF) + 10 LE16 values defining EGA color indices for layers.
+
+4.5 Type 9 - Layer Line Widths (len=60)
+  9 Real48 values (line widths for up to 9 layers) + 6 trailing bytes.
+  NOTE: The stated length (60) overstates the useful payload by 6 bytes
+  in format 0x009D files. The actual layer data is 54 bytes (9 reals).
+
+4.6 Type 10 - Drawing Flags (len=34)
+  34 bytes of boolean/flag settings for grid, snap, ortho, etc.
+
+4.7 Type 11 - Layer Definition (len=17)
+  Byte 0:     Name length (always 12)
+  Bytes 1-12: Layer name (ASCII, space-padded to 12 chars)
+  Byte 13-14: LE16 flags (always 0x0001)
+  Byte 15-16: LE16 EGA color index for this layer
+  There are always 16 of these records (layers 1-16).
+
+4.8 Type 12 - View Definition (len=33)
+  Byte 0:     Name length (always 8)
+  Bytes 1-8:  View name (e.g., "View-1  ")
+  Bytes 9-32: 4 Real48 values (view boundary coordinates)
+  There are always 8 of these records (views 1-8).
+
+4.9 Type 13 - Global Settings (len=150)
+  Complex record with mixed Real48 values and byte fields defining
+  drawing defaults (line width, text height, angle settings, etc.).
+
+4.10 Type 14 - Pen/Style Settings (len=66)
+  66 bytes of drawing style configuration.
+
+4.11 Type 15 - Boolean Flags (len=23)
+  23 bytes of boolean settings.
+
+
+5. DRAWING RECORD TYPE 30 (0x1E) - FILLED POLYGON
+--------------------------------------------------
+
+This is the primary drawing record for all three format types. It defines
+a closed, filled polygon using a start point and delta coordinate pairs.
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       2     LE16: Flags (typically 0x0000)
+  2       1     Padding (0x00)
+  3       1     EGA color index (0-15)
+  4       2     LE16: Drawing mode
+                  0x0002 = Filled scanline (used in clipart)
+                  0x0000 = Outline/polygon path (used in maps)
+  6       2     LE16: Attribute
+                  0x0001 = Standard fill
+                  0x0005 = Polygon outline (maps)
+  8       6     Real48: Line spacing / pen width
+  14      6     Real48: Start X coordinate
+  20      6     Real48: Start Y coordinate
+  26      2     LE16: Fill flag (0, 1, or 0xFFFF)
+                  0x0000 = closed filled polygon
+                  0x0001 = closed filled polygon (alt)
+                  0xFFFF = last segment in a multi-part path
+  28      2     LE16: Number of delta coordinate pairs (N)
+  30      N*12  N pairs of (Real48 deltaX, Real48 deltaY)
+
+Total payload = 30 + N * 12 bytes.
+
+The polygon is defined by accumulating delta coordinates from the start point:
+  Point[0] = (startX, startY)
+  Point[i] = Point[i-1] + (deltaX[i], deltaY[i])  for i = 1..N
+
+The polygon is implicitly closed (last point connects back to first).
+
+5.1 Clipart Scanline Records (mode=2, attr=1, N=3)
+
+For standard clipart images, each record has exactly 3 delta pairs forming
+a 1-unit-tall horizontal rectangle:
+
+  Delta 1: (halfWidth, 0)        -> move right
+  Delta 2: (0, 1)                -> move down 1 unit
+  Delta 3: (-halfWidth, 0)       -> move left (close)
+
+This creates a filled rectangle from (startX, startY) extending halfWidth
+in both X directions and 1 unit in the Y direction. The image is composed
+of hundreds or thousands of these scanline rectangles stacked vertically.
+
+5.2 Outline/Map Records (mode=0, attr=1 or attr=5, N>3)
+
+For map outlines and complex shapes, the deltas trace an arbitrary polygon
+path. These records typically have 9 to 99 delta pairs and represent
+geographic boundaries (state/county outlines) or complex shapes.
+
+The Start X/Y coordinates may be geographic (longitude/latitude) for map
+files, or arbitrary drawing coordinates.
+
+
+6. DIAGRAM DRAWING RECORDS
+--------------------------
+
+All diagram drawing records (formats 0x0000 and 0x009D) share a common
+8-byte prefix:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       2     LE16: Flags (always 0x0000)
+  2       1     Dash flags (0-2)
+  3       1     Color/pen index (0-15)
+  4       1     Line dash pattern (0x00=solid, 0x3A, 0x9D, 0xF0, 0xFF)
+  5       1     Reserved (0x00)
+  6       1     Pen flag (always 0x01)
+  7       1     Reserved (0x00)
+
+Format 0x009D inserts an extra Real48 (line width) immediately after the
+8-byte prefix, shifting all coordinate fields by 6 bytes compared to
+format 0x0000.
+
+
+6.1 Type 0x11 (17) - Line Segment
+
+  Format 0x0000 (32 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix
+  8-13    6     Real48: X1 (start X)
+  14-19   6     Real48: Y1 (start Y)
+  20-25   6     Real48: dX (delta to endpoint)
+  26-31   6     Real48: dY (delta to endpoint)
+
+  Endpoint = (X1+dX, Y1+dY). Uses delta encoding.
+
+  Format 0x009D (38 bytes): Same but with line_width Real at offset 8,
+  coordinates start at offset 14.
+
+
+6.2 Type 0x13 (19) - Circular Arc
+
+  Format 0x0000 (44 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix
+  8-13    6     Real48: Center X
+  14-19   6     Real48: Center Y
+  20-25   6     Real48: Radius
+  26-31   6     Real48: Start angle (radians, 0 at 3 o'clock)
+  32-37   6     Real48: Aspect ratio (1.0 for circle)
+  38-43   6     Real48: Sweep angle (radians; 0 = full circle; negative = CW)
+
+
+6.3 Type 0x12 (18) - Ellipse
+
+  Format 0x0000 (44 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix
+  8-13    6     Real48: Center X
+  14-19   6     Real48: Center Y
+  20-25   6     Real48: Semi-axis X (half-width)
+  26-31   6     Real48: Semi-axis Y (half-height)
+  32-37   6     Real48: Rotation angle (radians)
+  38-43   6     Real48: Reserved (0.0)
+
+
+6.4 Type 0x16 (22) - Bezier Curve Segment
+
+  Format 0x0000 (44 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix
+  8-13    6     Real48: Knot X (start/anchor point)
+  14-19   6     Real48: Knot Y
+  20-25   6     Real48: Control point 1 delta X
+  26-31   6     Real48: Control point 1 delta Y
+  32-37   6     Real48: Control point 2 delta X
+  38-43   6     Real48: Control point 2 delta Y
+
+  Multiple consecutive type-0x16 records form a continuous spline path.
+
+
+6.5 Type 0x17 (23) - Elliptical Arc
+
+  Same 44-byte structure as type 0x13 but with explicit start angle
+  (not always 0) and sweep angle that can exceed 2*pi.
+
+
+6.6 Type 0x14 (20) - Text
+
+  Format 0x0000 (variable, minimum 46 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix
+  8-13    6     Real48: Anchor X
+  14-19   6     Real48: Anchor Y
+  20-25   6     Real48: Character width
+  26-31   6     Real48: Character height
+  32-37   6     Real48: cos(angle) -- rotation via cos/sin pair
+  38-43   6     Real48: sin(angle)
+  44      1     String length (N)
+  45      N     ASCII text string
+
+
+6.7 Type 0x19 (25) - Symbol Instance
+
+  Format 0x0000 (46 bytes):
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix
+  8-13    6     Real48: Placement X
+  14-19   6     Real48: Placement Y
+  20-25   6     Real48: Scale X
+  26-31   6     Real48: Scale Y
+  32-37   6     Real48: Rotation angle (radians)
+  38-43   6     Reserved (zeros)
+  44-45   2     LE16: Group reference (1-based index into type-6 records)
+
+
+6.8 Type 0x06 (6) - Group Name (Symbol Definition Header)
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0       2     LE16: Member count (drawing records belonging to this group)
+  2       1     String length (M)
+  3       M     ASCII group name (e.g., "HDSTR-L", "FCT-S", "DATA-RT")
+
+  The next `member_count` records in the stream belong to this group and
+  define a reusable symbol. Groups are numbered 1-based in order of
+  appearance. Symbol instance records (type 0x19) reference these indices.
+
+  Symbol coordinates are in the symbol's LOCAL coordinate system. When
+  a symbol is instantiated via type 0x19, the local coordinates are
+  transformed (scaled, rotated, translated) to page coordinates:
+
+    page_x = scale_x * local_x * cos(angle) - scale_y * local_y * sin(angle) + placement_x
+    page_y = scale_x * local_x * sin(angle) + scale_y * local_y * cos(angle) + placement_y
+
+
+6.9 Type 0x1E (30) - Polygon (Diagram variant)
+
+  In diagram format, type-0x1E uses a different layout than clipart:
+
+  Format 0x0000 (variable):
+  Offset   Size  Description
+  ------   ----  -----------
+  0-7      8     Prefix
+  8-13     6     Real48: Center X
+  14-19    6     Real48: Center Y
+  20-21    2     LE16: Reserved (0x0000)
+  22-23    2     LE16: Vertex count (N)
+  24+      N*12  Vertex deltas: (Real48 dX, Real48 dY) relative to center
+
+
+6.10 Type 0x21 (33) - Polygon (Extended)
+
+  Same structure as type 0x1E polygon (section 6.9) but always includes the
+  extra line_width Real48 at offset 8 (like format 0x009D). Found in format
+  0x00CC (204) files alongside regular type-30 clipart scanlines.
+
+
+6.11 Type 0x18 (24) - Arc (Extended)
+
+  Same structure as type 0x13 arc (section 6.2). Found in DCW workspace files.
+
+
+6.12 Type 0x1C (28) - Dimension Line
+
+  8-byte prefix + 7 Real48 values (pen_width, x, y, angle, length,
+  arrow_width, arrow_height) + 2 trailing bytes. Found in DCW workspace files.
+
+
+6.13 Type 0x26 (38) - Filled Rectangle / Annotation
+
+  8-byte prefix + extra line_width Real + 6 Real48 values (x, y, width,
+  height, angle, param) + 2 trailing bytes. Found in format 0x00CC files.
+
+
+6.14 Type 0xF5 (245) - Workspace Marker
+
+  Payload: 2 bytes (always 00 00). Marks the boundary between DCW workspace
+  metadata and drawing records.
+
+
+6.15 Type 0x01 (1) - End Marker
+  Payload length: 0. Terminates the record stream.
+
+
+7. TEXT IN MAP FILES (Type 0x14 in Format 0x00CA)
+-------------------------------------------------
+
+Map files embedded in clipart packages use the same 8-byte prefix:
+
+  Offset  Size  Description
+  ------  ----  -----------
+  0-7     8     Prefix (flags, mode=5)
+  8-13    6     Real48: Pen width
+  14-19   6     Real48: Anchor X (longitude for geographic maps)
+  20-25   6     Real48: Anchor Y (latitude for geographic maps)
+  26-31   6     Real48: Character width
+  32-37   6     Real48: Character height
+  38-43   6     Real48: cos(angle)
+  44-49   6     Real48: sin(angle)
+  50      1     String length (N)
+  51      N     ASCII text string (e.g., "Thurston, WA")
+
+
+8. FORMAT-SPECIFIC NOTES
+------------------------
+
+8.1 Format 0x00CA (202) - Clipart
+
+The most common format. Files contain either:
+  a) Only type-30 records (simple clipart): No metadata headers present.
+     Drawing records start at offset 56.
+  b) Metadata + type-30 records: Has types 3, 11-15 metadata followed by
+     type-30 records. Some also have type-30 polygon outlines (maps embedded
+     in clipart packages) and type-20 text records.
+
+All clipart images use EGA color index 3 (dark cyan: #00AAAA) as the
+fill color. The line_spacing Real48 value represents the vertical distance
+between scan lines (typically 1/16 = 0.0625 for simple clipart).
+
+8.2 Formats 0x009B (155) and 0x009D (157) - Map/Technical Drawing
+
+Contains "compact" metadata types 3, 4, 5, 10, 8, 9 (different from clipart).
+Due to the type-9 record overstating its length by 6 bytes, drawing records
+begin at offset 244 (not 250 as the record chain implies).
+
+Drawing records may include:
+  - Type 30 (filled polygons) for geographic outlines
+  - Type 6 (groups) + type 0x11 (lines) + type 0x13 (arcs) for diagrams
+
+The coordinate system uses real-world units (often feet, with header
+scale factors of 0.3048 = 1 foot in meters). These formats add one extra
+Real48 (line width) as the first field after the 8-byte prefix in every
+diagram record type, increasing each by 6 bytes.
+
+8.3 Format 0x0000 (0) - Diagram
+
+Contains metadata types 3, 4, 5, 8 only (no types 9, 10).
+Drawing records begin at offset 148.
+
+Supports the full set of diagram record types (0x11 lines, 0x12 ellipses,
+0x13 arcs, 0x14 text, 0x16 beziers, 0x17 elliptical arcs, 0x19 symbol
+instances, 0x1E polygons) plus type 0x06 group names and type 0x01 end
+markers.
+
+8.4 Formats 0x00C8 (200), 0x00C9 (201), 0x00CC (204) - Drawing Variants
+
+These formats can use EITHER metadata structure:
+  a) Compact metadata (types 3,4,5,10,8,9): drawing at offset 244, same as
+     format 0x009D. Found in some 200-format files.
+  b) Layer metadata (types 3,11,12,13,14,15): drawing follows metadata, same
+     as format 0x00CA. Most common for these format codes.
+
+Format 201 files include DCW (DraftChoice Workspace) files that use 128
+layer records (instead of 16) and may include a type-245 workspace marker
+between metadata and drawing records.
+
+These files may contain mixed content: clipart scanlines (type 30) alongside
+diagram records (types 0x11, 0x13, 0x16, 0x17, 0x21, 0x26). Type 0x21 is
+an extended polygon with the extra line_width field.
+
+
+9. EGA COLOR PALETTE
+--------------------
+
+  Index  Color          Hex
+  -----  -----          ---
+  0      Black          #000000
+  1      Dark Blue      #0000AA
+  2      Dark Green     #00AA00
+  3      Dark Cyan      #00AAAA
+  4      Dark Red       #AA0000
+  5      Dark Magenta   #AA00AA
+  6      Brown          #AA5500
+  7      Light Gray     #AAAAAA
+  8      Dark Gray      #555555
+  9      Light Blue     #5555FF
+  10     Light Green    #55FF55
+  11     Light Cyan     #55FFFF
+  12     Light Red      #FF5555
+  13     Light Magenta  #FF55FF
+  14     Yellow         #FFFF55
+  15     White          #FFFFFF
+
+
+10. FILE TERMINATOR
+-------------------
+
+Every DCH file ends with a 4-byte terminator:
+  Byte 0-1: LE16 type (typically 0x0001)
+  Byte 2-3: LE16 length = 0x0000
+
+The zero length signals the end of the record stream.

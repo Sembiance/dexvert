@@ -2,10 +2,9 @@ import {Format} from "../../Format.js";
 
 export class atariGraphDiagram extends Format
 {
-	name        = "Atari ST Graph Diagram";
+	name        = "Atari ST Graph Diagram";	// by Hans-Christoph Ostendorf
 	ext         = [".dia"];
 	magic       = ["Graph Diagram"];
 	weakMagic   = true;
-	unsupported = true;
-	notes       = "No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.";
+	unsupported = true;	// Only 12 unique files on discmaster
 }

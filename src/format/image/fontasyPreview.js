@@ -8,6 +8,5 @@ export class fontasyPreview extends Format
 	forbidExtMatch = true;
 	magic          = ["FONTASY Preview"];
 	weakMagic      = true;
-	unsupported    = true;
-	//converters     = ["iconvertDOS[format:fontasyPV]"];	// not supported yet, see iconvertDOS.js
+	converters     = ["vibe2png"];	// also iconvertDOS[format:fontasyPV] see iconvertDOS.js
 }

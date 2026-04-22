@@ -7,5 +7,5 @@ export class pcrImage extends Format
 	ext            = [".pcr"];
 	forbidExtMatch = true;
 	magic          = ["PCR Image"];
-	unsupported    = true;
+	unsupported    = true;	// only 1 real pcr image on discmaster
 }

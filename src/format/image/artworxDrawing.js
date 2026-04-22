@@ -5,5 +5,5 @@ export class artworxDrawing extends Format
 	name        = "Artworx Drawing";
 	ext         = [".cwg"];
 	magic       = ["Artworx drawing"];
-	unsupported = true;
+	unsupported = true;	// only 18 unique files on discmaster
 }

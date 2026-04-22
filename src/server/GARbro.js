@@ -34,7 +34,7 @@ const exitHandler = async ({success, code, signal}) =>
 start = async () =>
 {
 	xlog.info`Starting GARbro server...`;
-	({p} = await runUtil.run("GARbro.Proxy", [`--port=${C.GARBRO_PORT}`, `--workers=15`, ...(xlog.atLeast("debug") ? ["--verbose"] : [])], {detached : true, exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
+	({p} = await runUtil.run("GARbro.Proxy", [`--port=${C.GARBRO_PORT}`, `--workers=${C.IS_DEV_MACHINE ? 3 : 15}`, ...(xlog.atLeast("debug") ? ["--verbose"] : [])], {detached : true, exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
 	await xu.waitUntil(async () => (await xu.fetch(`http://${C.GARBRO_HOST}:${C.GARBRO_PORT}/status`, {silent : true}))?.trim()==="a-ok");
 };
 

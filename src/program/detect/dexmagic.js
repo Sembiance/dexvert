@@ -87,6 +87,7 @@ const DEXMAGIC_CHECKS = {
 	// audio
 	"208 Audio (Ocean Games)"        : [{offset : 0xCC, match : [0x1F, 0x7D, 0x98, 0x4D]}],
 	"AKAI Sample"                    : [{offset : 0, match : [0x03, 0x01, 0x3C]}],
+	"Alpha Ogg Audio"                : [{offset : 0, match : "ALPHAOGG"}],
 	"Audiokinetic WWISE Audio"       : [{offset : 0, match : "RIFF"}, {offset : 8, match : "WAVEfmt "}, {offset : 44, match : "vorb"}],
 	"Audiokinetic WWISE Audio (Alt)" : [{offset : 0, match : "RIFF"}, {offset : 8, match : "WAVEfmt "}, {offset : 20, match : [0xFF, 0xFF]}],
 	"EA BNK Audio"                   : [{offset : 0, match : "BNKl"}],

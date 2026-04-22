@@ -1,0 +1,537 @@
+=============================================================================
+macOS Installer Tome File Format
+=============================================================================
+
+The "Tome" format is the archive container written by the classic Mac OS
+Installer SDK (Apple Installer 3.x / 4.x). A tome holds one or more
+classic-Mac files (each of which may have a data fork and a resource
+fork, plus Finder metadata) and stores each fork either raw (in 64 KiB
+chunks) or InstaCompOne-compressed.
+
+Every tome file produced by the Installer is wrapped in a single
+MacBinary II container whose type code is 'idcp' and whose creator
+code is 'kakc'. The tome proper lives in the MacBinary data fork.
+The MacBinary resource fork carries installer-private bytes that are
+not part of the archived content.
+
+All multi-byte integers are big-endian. File names are MacRoman
+Pascal strings (a length byte followed by that many bytes of text).
+
+All byte offsets below are zero-based from the start of the named
+region. Every byte of every sample file in sample0/ (107,559,680
+bytes across 100 files) is accounted for by the layout below.
+
+
+=============================================================================
+1. OUTER MACBINARY II WRAPPER
+=============================================================================
+
+  offset   size   field
+  ------   ----   -----
+  +0x00    1      old version; always 0x00
+  +0x01    1      filename length (1..63)
+  +0x02    63     filename (MacRoman, zero-padded)
+  +0x41    4      file type      : always 'idcp' (0x69 64 63 70)
+  +0x45    4      creator        : always 'kakc' (0x6B 61 6B 63)
+  +0x49    1      Finder flags high byte
+  +0x4A    1      always 0x00
+  +0x4B    2      Finder window vertical position
+  +0x4D    2      Finder window horizontal position
+  +0x4F    2      window / folder ID
+  +0x51    1      protected flag
+  +0x52    1      always 0x00
+  +0x53    4      DATA fork length in bytes (uint32)
+  +0x57    4      RSRC fork length in bytes (uint32)
+  +0x5B    4      creation date (Mac timestamp, seconds since 1904-01-01)
+  +0x5F    4      modification date
+  +0x63    2      Get Info comment length (typically 0)
+  +0x65    1      Finder flags low byte
+  +0x66    14     reserved
+  +0x74    4      unpacked length (secondary header field, typically 0)
+  +0x78    2      secondary header length (typically 0)
+  +0x7A    1      MacBinary II version written by: 0x81
+  +0x7B    1      minimum MacBinary II version required: 0x81
+  +0x7C    2      CRC-16 CCITT (poly 0x1021, init 0x0000) over bytes 0..123
+  +0x7E    2      reserved
+                  -------
+                  128 bytes total
+
+The data fork follows the header immediately and is then zero-padded
+to the next 128-byte boundary. The resource fork follows that, also
+zero-padded. The file ends at that point; no trailing bytes exist in
+any sample.
+
+
+=============================================================================
+2. TOME DATA-FORK LAYOUT
+=============================================================================
+
+The data fork of the MacBinary wrapper holds the actual tome:
+
+  +0x00         36 bytes       Tome header (section 3)
+  +0x24         128 * N bytes  N back-to-back file-entry records
+                               (where N is the value at offset 0x1A of
+                                the tome header, section 3)
+  after the     variable       Stored fork payloads, in any order but
+  entries                      in every observed sample they appear in
+                               file-index order with data fork first
+                               followed immediately by resource fork.
+
+The tome file-entry records give the offset and length of each stored
+fork, so the order of payloads is not otherwise constrained. In every
+observed sample there are no gaps between payloads and no bytes after
+the last payload.
+
+
+=============================================================================
+3. TOME HEADER (36 bytes)
+=============================================================================
+
+  offset   size   value / meaning
+  ------   ----   ---------------
+  +0x00    2      magic 'kc' (0x6B63)
+  +0x02    2      version, always 0x0001
+  +0x04    4      sub-header length, always 0x00000010 (= 16)
+  +0x08    4      constant, always 0x000007FA (= 2042). Meaning unknown.
+  +0x0C    4      constant, always 0x00008000 (= 32768). Meaning unknown
+                  but matches the Installer's internal working buffer.
+  +0x10    4      total uncompressed size of every stored payload
+                  (sum of dfork_size + rfork_size over all entries)
+  +0x14    2      unknown; varies per tome. Looks like an archive
+                  checksum / tail word.
+  +0x16    2      always 0x0000
+  +0x18    2      offset of the first file-entry record, always 0x0024
+  +0x1A    2      NUMBER OF FILE ENTRIES in this tome (N)
+  +0x1C    4      secondary file count. In most tomes this equals N.
+                  In multi-tome Installer packages it is the total
+                  logical file count across volumes and can be larger
+                  than N. The parser must use the value at +0x1A.
+  +0x20    4      always 0x00000000
+
+The constants at +0x04, +0x08, +0x0C, +0x18, +0x20 and the version at
++0x02 are identical across all 100 samples.
+
+
+=============================================================================
+4. FILE-ENTRY RECORD (128 bytes)
+=============================================================================
+
+  offset   size   field
+  ------   ----   -----
+  +0x00    2      entry flag / version, always 0x0001
+  +0x02    4      1-based file index (1, 2, 3, ...)
+  +0x06    1      filename length (0..31)
+  +0x07    31     filename (MacRoman, fixed 31-byte field; bytes
+                  beyond the name contain uninitialised buffer
+                  residue from the encoder)
+  +0x26    4      Mac file type   (four-char code)
+  +0x2A    4      Mac file creator(four-char code)
+  +0x2E    4      creation date   (Mac timestamp)
+  +0x32    4      modification date
+  +0x36    2      unknown (appears to be a version field; constant per tome)
+  +0x38    2      unknown
+  +0x3A    2      Finder flags (low 16 bits of the Mac fdFlags field)
+  +0x3C    4      DATA fork uncompressed size in bytes
+  +0x40    4      DATA fork offset from start of the tome data fork
+  +0x44    4      DATA fork STORED size in bytes (compressed or
+                  chunk-overhead-inclusive raw)
+  +0x48    4      DATA fork 32-bit checksum (algorithm unknown;
+                  preserved verbatim)
+  +0x4C    4      RSRC fork uncompressed size
+  +0x50    4      RSRC fork offset from start of the tome data fork
+  +0x54    4      RSRC fork STORED size
+  +0x58    4      RSRC fork 32-bit checksum
+  +0x5C    36     entry trailer - a block whose interpretation is
+                  unknown. Its values are constant across entries
+                  within a single tome but vary between tomes.
+                  Preserve verbatim when round-tripping.
+
+"Empty fork" entries have both size == 0 and stored == 0; their offset
+field is then undefined. Entries with an empty data fork and a
+non-empty resource fork (or vice versa) are common; the layout above
+still applies in full.
+
+
+=============================================================================
+5. STORED FORK PAYLOADS
+=============================================================================
+
+--- 5.1  Classifying a stored fork ---
+
+A fork can be stored either raw (split into chunks) or InstaCompOne
+compressed. The classification is done by the STORED SIZE, not by
+looking at the first four bytes (which can occur in either mode).
+
+A raw-chunked fork has exactly this stored size:
+
+    stored = uncompressed + (pad64k(uncompressed) / 16384)
+
+where pad64k(n) rounds n UP to the next multiple of 65536. That is,
+each 64 KiB of (padded) uncompressed payload contributes exactly 4
+bytes of chunk-marker overhead:
+
+    1 byte      -> 1 chunk,  stored = uncompressed + 4
+    65470 byte  -> 1 chunk,  stored = uncompressed + 4
+    67793 byte  -> 2 chunks, stored = uncompressed + 8
+    321072 byte -> 5 chunks, stored = uncompressed + 20
+    1506304 byte-> 23 chunks, stored = uncompressed + 92
+
+Any other stored size means "InstaCompOne compressed".
+
+--- 5.2  Raw-chunked storage ---
+
+A raw-chunked fork is a sequence of chunks. Each chunk has the layout:
+
+  +0    4        chunk marker (commonly 0x01476600, but the decoder
+                 should not rely on the exact bytes)
+  +4    <=65536  up to 65536 bytes of the fork's original content,
+                 copied verbatim
+
+Chunks appear back-to-back with no separator. The last chunk may be
+shorter than 65536 bytes. The total content over all chunks equals
+`uncompressed`, and the total stored bytes equal `stored` from
+section 5.1.
+
+--- 5.3  InstaCompOne compressed storage ---
+
+A compressed fork begins with a 4-byte marker followed immediately by
+an MSB-first bitstream. The marker exists so the Installer can tell
+the two codec variants apart; the decoder needs only byte +1 of the
+marker to pick a variant and otherwise skips all four bytes before
+starting to read bits:
+
+  Header bytes           Meaning
+  --------------         -------
+  0x00 0x00 0x00 0x00    TEXT variant  (7-bit literals, text distance
+                         dispatcher; used for Mac file types TEXT /
+                         ttro / mlts / CUdt in the sample corpus)
+  0x00 0x01 0x00 0x00    BINARY variant(8-bit literals, binary distance
+                         dispatcher; used for every other compressed
+                         fork, including all resource forks)
+  other 4 bytes          Rare tail markers observed in the corpus
+                         (0x1B4E812A and 0x40BC4950); byte +1 is not
+                         0x01 so they decode as the TEXT variant.
+
+The two variants share the same LZ77 main loop, the same 131072-byte
+ringbuffer, the same literal-length Huffman code, and the same 15
+distance sub-functions. They differ in exactly three places:
+
+  * the match-length Huffman code          (section 5.4)
+  * the distance dispatcher thresholds     (section 5.5)
+  * the number of bits per literal byte    (7 for text, 8 for binary)
+
+At every 65536 bytes of output the decoder realigns to a byte
+boundary, consumes 32 bits (the next raw chunk's 4-byte marker) and
+resets mode = 1. This chunking is applied to compressed blocks as
+well as to raw blocks; very large compressed forks are split into
+multiple independently-primed 65536-byte segments. Distance
+references themselves are bounded only by the 131072-byte ringbuffer,
+not by the segment boundary.
+
+This specification was derived by disassembling Apple's TomeViewer
+PowerPC binary. In particular the routines
+`lz_decompress_plus`, `codeword_dec`, `codeword_dec_bin`,
+`text_read_matchlen`, `text_read_litlen`, `text_read_distance`,
+`bin_read_matchlen`, `bin_read_litlen`, `bin_read_distance` and the
+15 shared distance sub-functions give every bit of the format below.
+
+--- 5.4  Match-length Huffman codes ---
+
+Both variants read a unary "ones run" of up to 10 leading 1-bits
+followed optionally by a 0 terminator, giving a count K in 0..10.
+K then selects one of eleven branches. The two variants share this
+unary prefix but decode K differently.
+
+BINARY variant (`bin_read_matchlen`):
+
+    K=0   read 1 bit x        -> value = x                  (0..1)
+    K=1   read 1 bit x1
+          if x1 == 0          -> value = 2
+          else read 1 bit x2  -> value = 3 + x2             (3..4)
+    K=2   read 1 bit x1
+          if x1 == 0 read 1 bit x2  -> value = 5 + x2       (5..6)
+          else       read 2 bits  y -> value = 7 + y        (7..10)
+    K=3   read 3 bits y   -> value = 11  + y                (11..18)
+    K=4   read 3 bits y   -> value = 19  + y                (19..26)
+    K=5   read 5 bits y   -> value = 27  + y                (27..58)
+    K=6   read 6 bits y   -> value = 59  + y                (59..122)
+    K=7   read 7 bits y   -> value = 123 + y                (123..250)
+    K=8   read 8 bits y   -> value = 251 + y                (251..506)
+    K=9   read 9 bits y   -> value = 507 + y                (507..1018)
+    K=10  read 10 bits y  -> value = 1019 + y               (1019..2042)
+
+TEXT variant (`text_read_matchlen`):
+
+    K=0   read 2 bits y   -> value = y                      (0..3)
+    K=1   read 2 bits y   -> value = 4   + y                (4..7)
+    K=2   read 2 bits y   -> value = 8   + y                (8..11)
+    K=3   read 3 bits y   -> value = 12  + y                (12..19)
+    K=4   read 4 bits y   -> value = 20  + y                (20..35)
+    K=5   read 5 bits y   -> value = 36  + y                (36..67)
+    K=6   read 6 bits y   -> value = 68  + y                (68..131)
+    K=7   read 7 bits y   -> value = 132 + y                (132..259)
+    K=8   read 8 bits y   -> value = 260 + y                (260..515)
+    K=9   read 9 bits y   -> value = 516 + y                (516..1027)
+    K=10  read 10 bits y  -> value = 1028 + y               (1028..2051)
+
+The text variant simply uses an increasing power-of-two layout; the
+binary variant subdivides K=0..2 non-uniformly so short-range
+matches have a shorter average encoding.
+
+--- 5.4b  Literal-length Huffman code (shared) ---
+
+`text_read_litlen` and `bin_read_litlen` have byte-for-byte identical
+machine code. Both produce a run length in 1..63 from at most 10
+bits:
+
+    read 1 bit a
+    if a == 0:                          value = 1
+    else:
+        read 2 bits b
+        if b == 0:                      value = 2
+        elif b == 1:                    value = 3
+        elif b == 2:                    read 2 bits c -> value = 4 + c    (4..7)
+        else (b == 3):
+            read 4 bits d
+            if d <= 7:                  value = 8 + d                     (8..15)
+            elif d <= 11:               read 2 bits e
+                                        value = ((d-8) << 2) + e + 16     (16..31)
+            else (d in 12..15):         read 3 bits e
+                                        value = ((d-12) << 3) + e + 32    (32..63)
+
+--- 5.5  Distance codes ---
+
+The distance ("how far back in the output to copy from") is encoded
+in two stages:
+
+  stage 1 - a "dispatcher" picks one of 15 sub-functions based on the
+            current output position (delta) and on the total unpack
+            size of the fork (unpack_size).
+
+  stage 2 - the chosen sub-function reads the actual distance from
+            the bit stream using three prefix-based cases whose width
+            also depends on delta.
+
+The 15 sub-functions are shared by both variants; only the
+dispatcher table differs between text and binary.
+
+Shared sub-function `dist_sub(i, delta)` for i in 0..14:
+
+    let large_bias = 5 * (1 << i) + 1       (5*2^i + 1)
+    let mid_bias   = (1 << i) + 1           (2^i + 1)
+
+    read bit b0
+    if b0 == 0:                       # "low" case; distance 1..2^i
+        if i == 0: return 1
+        return getbits(i) + 1
+    read bit b1
+    if b1 == 0:                       # "mid" case; distance 2^i+1..5*2^i
+        return getbits(i+2) + mid_bias
+    # "high" case; distance 5*2^i+1..21*2^i. Pick the number of data
+    # bits k from delta's bucket and return getbits(k) + large_bias:
+    for k = 1, 2, ..., i+3:
+        threshold = large_bias + (1 << k) - 1
+        if i == 7 and k == 10: threshold = 1644   # encoder quirk
+        if delta <= threshold:
+            return getbits(k) + large_bias
+    # delta is higher than any bucket threshold: final catch-all uses
+    # (i+4) data bits, which reaches the maximum distance 21*2^i.
+    return getbits(i+4) + large_bias
+
+The i == 7 / k == 10 special case is the only irregularity in the
+encoding: TomeViewer's sub-function 7 uses 1644 as its k=10 boundary
+rather than the algebraically expected 1664, which means delta values
+1645..1664 fall into the k=11 branch (11 data bits) instead of k=10.
+(This is the same boundary that deark's InstaCompOne decoder patches
+with its `bd in 1644..1664 -> n3 = 11` hack; it is a real feature of
+the encoder, not a reverse-engineering error.)
+
+TEXT dispatcher (`text_read_distance`):
+
+    delta <= 10         -> dist_sub(0)
+    delta <= 20         -> dist_sub(1)
+    delta <= 40         -> dist_sub(2)
+    delta <= 80         -> dist_sub(3)
+    delta <= 160        -> dist_sub(4)
+    delta <= 320        -> dist_sub(5)
+    delta <= 832        -> dist_sub(6)
+    delta <= 1280   OR unpack_size <= 0x00800  -> dist_sub(7)
+    delta <= 2560   OR unpack_size <= 0x01000  -> dist_sub(8)
+    delta <= 5120   OR unpack_size <= 0x02000  -> dist_sub(9)
+    delta <= 10240  OR unpack_size <= 0x04000  -> dist_sub(10)
+    delta <= 30000  OR unpack_size <= 0x08000  -> dist_sub(11)
+    delta <= 50000  OR unpack_size <= 0x10000  -> dist_sub(12)
+    delta <= 172032 OR unpack_size <= 0x20000  -> dist_sub(13)
+    otherwise                                   -> dist_sub(14)
+
+BINARY dispatcher (`bin_read_distance`):
+
+    delta <= 10         -> dist_sub(0)
+    delta <= 20         -> dist_sub(1)
+    delta <= 40         -> dist_sub(2)
+    delta <= 80         -> dist_sub(3)
+    delta <= 160        -> dist_sub(4)
+    delta <= 672        -> dist_sub(5)
+    delta <= 1000       -> dist_sub(6)
+    delta <= 2688   OR unpack_size <= 0x00800  -> dist_sub(7)
+    delta <= 5376   OR unpack_size <= 0x01000  -> dist_sub(8)
+    delta <= 10752  OR unpack_size <= 0x02000  -> dist_sub(9)
+    delta <= 21504  OR unpack_size <= 0x04000  -> dist_sub(10)
+    delta <= 43008  OR unpack_size <= 0x08000  -> dist_sub(11)
+    delta <= 70000  OR unpack_size <= 0x10000  -> dist_sub(12)
+    delta <= 172032 OR unpack_size <= 0x20000  -> dist_sub(13)
+    otherwise                                   -> dist_sub(14)
+
+The `unpack_size <= ...` alternative exists so that small files use
+smaller sub-functions even when delta has grown past the main bucket
+threshold. It is an encoder-side "never reach for a longer code than
+the maximum possible distance in this file" optimisation.
+
+Once a distance d has been decoded, the source byte is read from
+position `curpos - d` in a zero-initialised 131072-byte ringbuffer
+(with wrap-around). Unlike deark's InstaCompOne decoder there is NO
+`- 1` offset here; the distance d is the exact signed index into the
+ring.
+
+--- 5.6  InstaCompOne main loop ---
+
+The decoder uses an output-side buffer, a 131072-byte ringbuffer
+initialised to zero, a "mode" flag that starts at 1 (literal), and a
+per-fork unpack_size (the entry's size field) that feeds into the
+distance dispatcher:
+
+    pick variant:  is_bin = (marker[1] == 0x01)
+    skip 32 bits   (the 4-byte marker)
+    lit_bits       = 8 if is_bin else 7
+    next_chunk     = 65536
+    mode           = 1
+
+    while output_pos < unpack_size:
+
+        # 65536-byte chunk boundary: realign to a byte and consume
+        # the next 4-byte raw-chunk marker, then reset mode.
+        if output_pos >= next_chunk:
+            align_to_byte()
+            getbits(32)
+            next_chunk += 65536
+            mode = 1
+
+        mlc = read_matchlen(is_bin)
+        if mlc > 0 or mode == 0:
+            matchlen = mlc + 2
+            if mode == 0: matchlen += 1           # minimum length 3
+            dist     = read_distance(is_bin, output_pos, unpack_size)
+            copy `matchlen` bytes from ringbuffer[output_pos - dist]
+            mode = 1
+        else:
+            litlen = read_litlen()
+            for _ in range(litlen):
+                emit getbits(lit_bits)
+            mode = 0 if litlen < 63 else 1
+
+The `mode` flag encodes "the last token was a literal run, so the
+next zero-valued matchlen code is still a match (of length 3)
+instead of starting another literal run". Setting mode = 1 after a
+full-length (63) literal run preserves the Installer's observed
+behaviour of allowing long literal runs to be composed out of
+maximum-sized segments without forcing a match in between.
+
+--- 5.7  Relationship to Apple's ExtendedResource header ---
+
+The 4-byte marker at the start of each compressed fork superficially
+matches the layout of bytes +0x0E..+0x11 of Apple's ExtendedResource
+header from `Decompression.a` / `DeCompressDefProc*.a`:
+
+    signature      4 bytes  (= 0xA89F6572 'RobustnessData', stripped)
+    headerLength   2 bytes  (= 18, stripped)
+    headerVersion  1 byte   (8 = Donn, 9 = Greggy, stripped)
+    extendedAttr   1 byte   (stripped)
+    actualSize     4 bytes  (from tome entry metadata, stripped)
+    +--- start of marker bytes in the tome ---+
+    decompressID   2 bytes
+    cTableID       2 bytes
+
+Under that reading, 0x00010000 would mean `decompressID = 1,
+cTableID = 0` and 0x00000000 would mean `decompressID = 0,
+cTableID = 0`. In Apple's system-wide resource manager scheme, dcmp
+ID 1 is the byte-token decompressor in `DeCompressDefProc1.a`, which
+is not the bitstream codec we see in the tome. Apple's Installer
+therefore either assigns its own meaning to these bytes, or treats
+them purely as a 4-byte opaque codec flag (the latter is how the
+TomeViewer binary actually uses them: it reads only byte +1 of the
+marker to pick between the text and binary variants and otherwise
+discards the marker before starting to read bits).
+
+
+=============================================================================
+6. BYTE ACCOUNTING
+=============================================================================
+
+For every byte B of the input file, B is described by exactly one of:
+
+  a) a byte of the 128-byte MacBinary II header            (section 1)
+  b) a byte inside the MacBinary data fork, which is one of
+       i)   a byte of the 36-byte tome header              (section 3)
+       ii)  a byte of a 128-byte file-entry record         (section 4)
+       iii) a byte of a raw-chunked fork payload           (section 5.2)
+       iv)  a byte of an InstaCompOne-compressed fork      (section 5.3)
+  c) a zero-padding byte between the data fork and the 128-byte
+     boundary that marks the start of the resource fork
+  d) a byte of the MacBinary resource fork (installer-private;
+     not part of the tome content)
+  e) a zero-padding byte between the resource fork and the 128-byte
+     boundary that marks the end of the file.
+
+The 100 samples in sample0/ (107,559,680 bytes total) contain no
+bytes outside these categories. In particular:
+
+    * no gaps between consecutive stored-fork payloads inside the
+      tome data fork,
+    * no trailing bytes after the last fork payload,
+    * no trailing bytes after the outer MacBinary wrapper.
+
+The reference extractor `macOSInstallTome.py` asserts this by
+tagging every byte of the data fork as either header, entry, or
+fork-payload before writing output, and raising TomeError if any
+byte is unaccounted for.
+
+
+=============================================================================
+7. OUTPUT FORMAT OF THE REFERENCE EXTRACTOR
+=============================================================================
+
+`macOSInstallTome.py <inputFile> <outputDir>` writes each contained
+file into `outputDir`, naming each file by its original MacRoman
+filename (with no added extension; '/' and NUL characters are
+replaced with '_'). The output shape depends on which forks exist:
+
+    * Both forks present OR resource fork only:
+      A MacBinary II file carrying both forks and the original Mac
+      metadata (type, creator, Finder flags, creation and
+      modification dates). The MacBinary CRC at bytes 124..125 is
+      freshly computed.
+
+    * Data fork only:
+      The raw data-fork bytes written as a plain file, with no
+      MacBinary wrapper. The Mac metadata is dropped because
+      MacBinary's purpose is to preserve a resource fork that
+      doesn't exist here.
+
+If two entries sanitise to the same filename, the second and
+subsequent outputs are disambiguated with " (2)", " (3)", ... before
+the file extension (if any).
+
+No .raw sidecar files are ever produced. The InstaCompOne decoder
+handles both the 0x00010000 (binary) and 0x00000000 (text) marker
+variants exactly, so every output file carries byte-exact fork
+content and MacBinary metadata.
+
+If the input file is not a valid MacOS Installer tome (bad MacBinary
+II header, body length mismatch, empty data fork, or data fork
+without the 'kc' tome signature) the extractor raises a TomeError
+BEFORE creating the output directory and writes nothing. Apple's
+Installer packages use the 'idcp' / 'kakc' type-creator pair for
+several non-tome companion files as well (standalone resource
+archives, PowerPC executables, ASCII version strings, compressed
+installer payloads), so the type-creator alone is never taken as
+evidence that a file is a tome.

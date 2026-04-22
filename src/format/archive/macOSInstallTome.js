@@ -6,5 +6,5 @@ export class macOSInstallTome extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Tome";
 	magic       = ["Mac Installation Tome", "deark: tome"];
 	idMeta      = ({macFileType, macFileCreator}) => macFileType==="idcp" && macFileCreator==="kakc";
-	converters  = ["deark[mac][module:tome]"];
+	converters  = ["vibeExtract"];
 }

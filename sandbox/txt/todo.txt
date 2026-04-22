@@ -12,77 +12,13 @@
   Then need to run full test-suite again and ensure everything still works correctly
 
 
+Checked out is a video/audio converter program that supports various file formats. I'm going to give you a name of a format, and then I want you to examine the code responsible for detecting and loading that format. My goal is then go to a custom search engine I have to locate sample files in this format. My custom search engine can find files based on any bytes within the first 16 bytes, can also search on extension and file size. So based on format handling code, you will tell me if there are magic bytes I can search for or specific file sizes or what not to help find these formats. I will then move on to another format.
+
+Then tell me what sort of "magic bytes" that code checks for, or specific file sizes, extensions or other things I can use to help "locate" these 
+
 /--------------\
 | TOP Priority |
 \--------------/
-* Add these new 'librempeg' formats: https://github.com/librempeg/librempeg/
-  For each one, search github for that name and use claude to determine "magic bytes" from a copy-paste of the code and then search discmaster
-	D   9tav            Konami 9TAV
-	D   ahv             Amuze AHV
-	D   ao              AlphaOgg
-	DE  apm             Ubisoft APM
-	D   ast0            Marvelous AST
-	D   baka            BAKA (KCE Tokyo)
-	D   bg00            Cave BG00
-	D   dcidvi          Capcom Dreamcast IDVI
-	D   dckcey          Konami Dreamcast KCEY
-	D   dcnaomi         Dreamcast Naomi ADPCM
-	D   dcstr           Sega Dreamcast STR
-	D   dcswav          Utero Dreamcast DCS/WAV
-	D   dsi             DSI PS2 Movie
-	D   exst            Sony EXST
-	D   filma           Sega FILM (abridged)
-	D   gcub            Sega GCub
-	D   hxd             Tecmo PS2 HXD
-	D   iab             Runtime IAB Audio
-	D   ips             IPS PS2 Movie
-	D   kat             Sega Dreamcast KAT
-	D   ktac            KTAC (Koei Tecmo)
-	D   mhwk            Broderbund's Mohawk
-	D   mraw            3DO MRAW
-	D   ngcdspstm       NGC (Nintendo DSP) STM
-	D   nst             Monster GameCube NST
-	D   nxa1            Entergram NXA1
-	D   nxof            Nihon Falcom FDK
-	D   ogl             Shin'en OGL
-	D   psnd            Polarbit PSND
-	D   pxnd            Pixelbite PXND
-	D   rcavoc          RCA VOC
-	D   sab             Square Enix SAB
-	D   seg             Stormfront SEG
-	D   sgxd            Sony/SCEI SGX
-	D   smss            Treasure SMSS
-	D   sndx            Sony SNDX
-	D   sndz            Sony SNDZ
-	D   spsd            Dreamcast Naomi SPSD
-	D   sthd            Dream Factory STHD
-	DE  thp             THP
-	D   ubibao          Ubisoft BAO
-	D   ubibnm          Ubisoft SBx BNM
-	D   ue3xma          Unreal Engine 3 XMA
-	D   ue4opus         UE4 Opus
-	D   ueopus          UE5 Opus
-	D   vid1            Factor 5 VID1
-	D   vsstr           VS STR
-	D   vxds            Actimagine VX DS
-	D   wave            EngineBlack WayForward
-	D   wbat            Firebrand Wave Batch
-	D   wbk             Treyarch WBK
-	D   wd              Square Wave WD
-	D   xa30            Reflections XA30
-	D   xau             XPEC Entertainment XAU
-	D   xnb             XNA Game Studio
-	D   xssb            Artoon XSSB
-	D   xwv             Valve XWV
-	D.V.L. actimagine_vx        Actimagine VX Video
-	DEVIL. thp                  Nintendo Gamecube THP video
-	D.AIL. adpcm_ima_awc        ADPCM IMA AWC
-	D.AIL. adpcm_ima_fsb        ADPCM IMA FSB
-	DEAIL. adpcm_ima_xbox       ADPCM IMA Xbox
-	D.AIL. adpcm_ima_xbox_mono  ADPCM IMA Xbox (Mono)
-	D.AIL. rcavoc               RCA VOC
-	D.AIL. relic                Relic
-	D.AIL. wwvorbis             Audiokinetic Wwise Vorbis
 
 
 /-------------\
@@ -92,7 +28,8 @@
 <<<
 
 * Search dexvert for "unsupported" in src/format/<checkEachHere>/
-  Then vibe support for any KNOWN unsupported formats. Families remaining:
+  Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
+  Families remaining:
 	image
 	music
 	video

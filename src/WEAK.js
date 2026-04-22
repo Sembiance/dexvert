@@ -1638,7 +1638,6 @@ export const WEAK_VALUES =
 	/^Portable Float Map grayscale bitmap$/,
 	/^PR archiving tool archive$/,
 	/^Pretty Good Privacy \(PGP\) Private\/Secret Keyring/,
-	/^PreTracker module$/,
 	/^PrintFox\/Pagefox bitmap/,
 	/^PROGRESS Procedure Library \(v\d+\)$/,
 	/^ProHance Mouse Keys Definition table/,

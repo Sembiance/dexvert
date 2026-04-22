@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,981)
+# Unsupported File Formats (3,982)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -819,7 +819,7 @@ Family/Format | Name | Extensions | Notes
 [image/gsDrawDrawing](https://discmaster.textfiles.com/search?format=gsDrawDrawing) | GS Draw drawing | .grs | 
 [image/harvardMontageAlbum](https://discmaster.textfiles.com/search?format=harvardMontageAlbum) | Harvard Montage Album | .abx .abm | 
 [image/hitachiRaster](https://discmaster.textfiles.com/search?format=hitachiRaster) | Hitachi Raster Format bitmap | .hrf | [1 sample file](https://sembiance.com/fileFormatSamples/image/hitachiRaster/)
-[image/homeBrewIcon](https://discmaster.textfiles.com/search?format=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
+[image/homeBrewIcon](https://discmaster.textfiles.com/search?format=homeBrewIcon) | [HomeBrew Icon](http://www.shikadi.net/moddingwiki/Gateworld) | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
 [image/ibmAVCStillVideoImage](https://discmaster.textfiles.com/search?format=ibmAVCStillVideoImage) | IBM Audio Visual Connection Still Video Image | .dsp ._im | 
 [image/iffPlanarBitmap](https://discmaster.textfiles.com/search?format=iffPlanarBitmap) | IFF Planar Bitmap | .plbm | 
 [image/imageKnifeRawBitmap](https://discmaster.textfiles.com/search?format=imageKnifeRawBitmap) | ImageKnife Raw bitmap | .raw | 
@@ -938,7 +938,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (177)
+## Music (178)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -1058,6 +1058,7 @@ Family/Format | Name | Extensions | Notes
 [music/piyoPiyoMusic](https://discmaster.textfiles.com/search?format=piyoPiyoMusic) | PiyoPiyo Music | .pmd | 
 [music/playerPro](https://discmaster.textfiles.com/search?format=playerPro) | PlayerPro Module | .mad | [6 sample files](https://sembiance.com/fileFormatSamples/music/playerPro/)
 [music/pollyTracker](https://discmaster.textfiles.com/search?format=pollyTracker) | PollyTracker Module | .mod | [4 sample files](https://sembiance.com/fileFormatSamples/music/pollyTracker/)
+[music/preTrackerModule](https://discmaster.textfiles.com/search?format=preTrackerModule) | [PreTracker Module](https://www.pouet.net/prod.php?which=91409) | .prt | [7 sample files](https://sembiance.com/fileFormatSamples/music/preTrackerModule/)
 [music/proTrekkr](https://discmaster.textfiles.com/search?format=proTrekkr) | Pro Trekkr Module | .ixs | [6 sample files](https://sembiance.com/fileFormatSamples/music/proTrekkr/)
 [music/propellerheadSoftwareReasonSong](https://discmaster.textfiles.com/search?format=propellerheadSoftwareReasonSong) | Propellerhead Software Reason Song | .rps | 
 [music/propellerheadsReasonSongFile](https://discmaster.textfiles.com/search?format=propellerheadsReasonSongFile) | Propellerheads Reason Song file | .rns | 

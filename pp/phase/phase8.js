@@ -1,11 +1,9 @@
 /* eslint-disable no-loop-func */
 import {xu} from "xu";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil} from "xutil";
 import {C} from "../../src/C.js";
 import {path} from "std";
-
-const MAX_LINES_BYTES_WAIT_THRESHOLD = xu.MB*500;
-const MAX_LINES_BYTES_RESUME_THRESHOLD = xu.MB*100;
+import {Sparkey} from "Sparkey";
 
 // some index data is also needed in fileData for the web UI, so we copy it over here
 function transferIndexDataToFileData(item, indexData, fileData)
@@ -32,36 +30,15 @@ function transferIndexDataToFileData(item, indexData, fileData)
 	}
 }
 
-// Phase 8 - Create our .JSONL files for indexing
+// Phase 8 - Create our index db
 export default async function phase8({item, itemDirPath, itemWebDirPath, taskRunner, reportFilePath})
 {
-	const indexFilePath = path.join(itemDirPath, `${item.itemid}.jsonl`);
+	const db = await Sparkey.create(path.join(itemDirPath, `${item.itemid.toString()}_index`));
+	db.truncate();
 
-	// Otherwise we need to create an index file based on the fileData.indexData created in phase 4/5/6
 	let indexedCount = 0;
-	const indexFile = await Deno.open(indexFilePath, {create : true, write : true, truncate : true});
-	const encoder = new TextEncoder();
 
-	const lines = [];
-	let linesByteUsage = 0;
-	let finishedFindingLines = false;
-	const lineIndexer = async function lineIndexer()
-	{
-		while(!finishedFindingLines || lines.length)	// eslint-disable-line no-unmodified-loop-condition
-		{
-			await xu.waitUntil(() => lines.length || finishedFindingLines);
-			if(!lines.length && finishedFindingLines)
-				return;
-
-			const line = lines.pop();	// we use .pop() for performance vs .shift() because line order doesn't matter
-			linesByteUsage-=line.length;
-			await new Blob([encoder.encode(line + "\n")]).stream().pipeTo(indexFile.writable, {preventClose : true});	// eslint-disable-line prefer-template
-			indexedCount++;
-		}
-	};
-	const activeLineIndexer = lineIndexer();
-
-	taskRunner.startProgress(0, "Generating .JSONL index files...");
+	taskRunner.startProgress(0, "Generating index db...");
 	const folderPaths = await fileUtil.tree(itemWebDirPath, {nofile : true, sort : true, relative : true});
 	folderPaths.unshift("");
 	for(const folderPath of folderPaths)
@@ -97,12 +74,10 @@ export default async function phase8({item, itemDirPath, itemWebDirPath, taskRun
 			if(invalidKeys.length)
 				taskRunner.addError(`Found invalid indexData keys for itemid ${item.itemid}: ${invalidKeys.join(", ")}`);
 
-			const line = JSON.stringify(indexData);
-			linesByteUsage+=line.length;
-			lines.push(line);
-
-			if(linesByteUsage>MAX_LINES_BYTES_WAIT_THRESHOLD)
-				await xu.waitUntil(() => linesByteUsage<MAX_LINES_BYTES_RESUME_THRESHOLD);
+			const fileid = indexData.fileid;
+			delete indexData.fileid;
+			db.putText(fileid, JSON.stringify(indexData));
+			indexedCount++;
 
 			delete fileData.indexData;
 			await fileUtil.writeTextFile(webFilePath, JSON.stringify(fileData));
@@ -110,11 +85,8 @@ export default async function phase8({item, itemDirPath, itemWebDirPath, taskRun
 		});
 	}
 
-	finishedFindingLines = true;
-	await activeLineIndexer;
-
-	indexFile.close();
-	await runUtil.run("pigz", [indexFilePath]);
+	await db.compress();
+	db.unload();
 
 	const report = xu.parseJSON(await fileUtil.readTextFile(reportFilePath));
 	report.postProcess.indexedCount = indexedCount;

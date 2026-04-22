@@ -14,8 +14,8 @@ export default async function phase10({item, itemDirPath, itemWebDirPath, itemTh
 	// I suppose in theory you could parallize web/thumb/file but you are already thrashing the disk enough as it is
 	for(const [type, typeDirPath] of [["web", itemWebDirPath], ["thumb", itemThumbDirPath], ["file", itemFileDirPath]])
 	{
-		const webDB = new Sparkey(path.join(itemDirPath, `${item.itemid.toString()}_${type}`));
-		await webDB.truncate();
+		const db = await Sparkey.create(path.join(itemDirPath, `${item.itemid.toString()}_${type}`));
+		await db.truncate();
 		const folderPaths = await fileUtil.tree(typeDirPath, {nofile : true, sort : true, relative : true});
 		folderPaths.unshift("");
 		taskRunner.startProgress(0, `Packing type [${type}] sparkey files...`);
@@ -63,18 +63,20 @@ export default async function phase10({item, itemDirPath, itemWebDirPath, itemTh
 
 			if(keys.length>0)
 			{
-				webDB.putMany(keys, vals);
+				db.putMany(keys, vals);
 				taskRunner.incrementBy(keys.length);
 			}
 		}
 
 		for(const {sparkeyKey, filePath} of largeFiles)
 		{
-			await webDB.putFile(sparkeyKey, filePath);
+			await db.putFile(sparkeyKey, filePath);
 			taskRunner.incrementBy(1);
 		}
 
-		webDB.unload();
+		if(type==="web")
+			await db.compress();
+		db.unload();
 	}
 
 	taskRunner.phaseComplete();

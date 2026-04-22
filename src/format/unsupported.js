@@ -872,6 +872,7 @@ export default
 		noteWorthyComposerSong             : {name : "NoteWorthy Composer song", ext : [".nwc"], magic : ["NoteWorthy Composer song", "Noteworthy Composer data file"], weakMagic : true},
 		pc98Music                          : {name : "PC-98 Music", ext : [".m", ".m2"], magic : ["PC-98 Music", "PC9801 rip"], weakMagic : true},
 		piyoPiyoMusic                      : {name : "PiyoPiyo Music", ext : [".pmd"], magic : ["PiyoPiyo Music"], weakMagic : true},
+		preTrackerModule                   : {name : "PreTracker Module", ext : [".prt"], magic : ["PreTracker module"], website : "https://www.pouet.net/prod.php?which=91409", weakMagic : true},
 		propellerheadsReasonSongFile       : {name : "Propellerheads Reason Song file", ext : [".rns"], magic : ["Propellerheads Reason Song file"], weakMagic : true},
 		propellerheadSoftwareReasonSong    : {name : "Propellerhead Software Reason Song", ext : [".rps"], magic : ["Propellerhead Software Reason Song"], weakMagic : true},
 		psgmodModule                       : {name : "PSGMOD module", ext : [".psgmod"], magic : ["PSGMOD module"]},
@@ -3609,7 +3610,7 @@ export default
 		tuxGuitarTablature                       : {name : "TuxGuitar Tablature", ext : [".tg"], magic : ["TuxGuitar Tablature"]},
 		tvgenialSkin                             : {name : "TVgenial Skin", ext : [".tvgskin", ".hpk"], magic : ["TVgenial Skin"], weakMagic : true},
 		tvPaintProject                           : {name : "TVPaint Project", ext : [".tvpp", ".deep", ".aur"], magic : ["TVPaint Project"]},
-		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", "SPSS Type Library", /^Type Library \((legacy SLTG|MSFT) format|Type[12]\)$/, /^Format: Microsoft Type Library$/, /^fmt\/(1601|1602)( |$)/]},                                                                                                                             	// eslint-disable-line sonarjs/anchor-precedence
+		typeLibrary                              : {name : "Type Library", ext : [".tlb"], magic : ["Microsoft Typelibrary file", "SPSS Type Library", /^Type Library \((legacy SLTG|MSFT) format|Type[12]\)$/, /^Format: Microsoft Type Library$/, /^fmt\/(1601|1602)( |$)/]},
 		typo3Extension                           : {name : "TYPO3 extension", ext : [".t3x"], magic : ["Compressed TYPO3 extension"]},
 		uaeSavedState                            : {name : "UAE Saved State", ext : [".uss"], magic : ["UAE Saved State"], weakMagic : true},
 		ucDOSConfiguration                       : {name : "UCDOS Configuration", ext : [".cfg"], magic : ["UCDOS Configuration"]},

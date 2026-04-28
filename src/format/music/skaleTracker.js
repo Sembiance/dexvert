@@ -5,5 +5,5 @@ export class skaleTracker extends Format
 	name        = "Skale Tracker Module";
 	ext         = [".skm"];
 	magic       = ["Skale Tracker module"];
-	unsupported = true;
+	unsupported = true;	// 0 files on discmaster
 }

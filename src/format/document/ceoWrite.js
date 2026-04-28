@@ -5,7 +5,7 @@ export class ceoWrite extends Format
 	name        = "CEOWrite";
 	website     = "https://en.wikipedia.org/wiki/Data_General";
 	ext         = [".cw"];
-	unsupported = true;
+	unsupported = true;	// only identified via extension, not reliable
 	converters  = ["softwareBridge[format:ceoWrite]"];
 	notes       = "Old word processor. Haven't investigated it for magic.";
 }

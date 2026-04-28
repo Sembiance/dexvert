@@ -7,5 +7,5 @@ export class lotusSmartIcon extends Format
 	forbidExtMatch = true;
 	magic          = ["Lotus Smart Icon"];
 	weakMagic      = true;
-	unsupported    = true;
+	unsupported    = true;	// these are NOT raster images, rather meta data that just give toolbar definitions. see legacy/lotusSmartIcon for more info
 }

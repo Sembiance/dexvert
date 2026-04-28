@@ -93,6 +93,7 @@ const FORMAT_FILE_META = {
 	"image/a2HighRes"            : { "Gs.256k" : {proDOSTypeCode : "FOT"} },
 	"image/apple2Icons"          : { "Softdisk.Icon" : {proDOSTypeCode : "ICN"} },
 	"image/printShopGSGraphic"   : { "*" : {proDOSType : "F8", proDOSTypeAux : "C323"} },
+	"music/concertWare"          : { "*" : {macFileType : "CWMF", macFileCreator : "CWMP"} },
 	"other/appleIIgsShellScript" : { "*" : {proDOSTypeCode : "EXE"} },
 	"other/integerBASICProgram"  : { "*" : {proDOSTypeCode : "INT"} },
 	"text/appleIIgsSourceCode"   : { "*" : {proDOSTypeCode : "SRC"} }

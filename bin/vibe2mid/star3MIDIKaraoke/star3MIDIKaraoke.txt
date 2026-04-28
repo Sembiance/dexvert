@@ -1,0 +1,190 @@
+Vibe coded by Codex
+
+Star 3 MIDI Karaoke (.st3) format notes
+=======================================
+
+Status of this document
+-----------------------
+
+This document describes the Star 3 MIDI Karaoke structures needed for every
+file in the sample0 corpus. The compression details were confirmed from byte
+analysis and static inspection of Kar2ST3.exe and SrCore.dll. The supplied
+converter recognizes all sample0 files and converts every sample0 music block
+to a Standard MIDI file.
+
+Container signature
+-------------------
+
+All sample0 files begin with one of these 20-byte signatures:
+
+  53 54 41 52 20 44 41 54 41 20 56 33 2e 30 30 1a 0e 01 00 00
+  ASCII "STAR DATA V3.00", DOS EOF byte 1a, then 0e 01 00 00.
+
+  53 54 41 52 20 44 41 54 41 20 56 33 2e 35 30 1a 11 01 00 00
+  ASCII "STAR DATA V3.50", DOS EOF byte 1a, then 11 01 00 00.
+
+The following fixed-size metadata area is common in the samples:
+
+  0x014  char[48]  title, NUL padded, single-byte Windows text
+  0x044  char[32]  composer, NUL padded
+  0x064  char[32]  lyricist, NUL padded
+  0x084  char[64]  artist, NUL padded
+  0x0c4  char[32]  source/creator, NUL padded
+  0x0e4  char[32]  memo/comment, NUL padded
+
+V3.50 CEVENT chunk
+------------------
+
+V3.50 files contain a CEVENT chunk followed by a LYRICS chunk.
+
+CEVENT header at offset C:
+
+  C+0x00  char[8]   "CEVENT\0\0"
+  C+0x08  uint16le  reserved, always 0 in sample0
+  C+0x0a  uint16le  prefix length field
+  C+0x0c  uint16le  MIDI division, ticks per quarter note
+  C+0x0e  uint16le  event track count
+  C+0x10  uint16le  melody track index hint
+  C+0x12  uint16le  second track hint
+  C+0x14  uint32le  uncompressed CEVENT data length
+  C+0x18  uint32le  stored CEVENT data length
+  C+0x1c  byte[]    prefix/trailer area, length = prefix_length_field - 12
+  ...     byte[]    stored CEVENT data
+
+For uncompressed V3.50 files, stored length equals uncompressed length, and the
+stored CEVENT data starts after the prefix/trailer area and ends exactly at the
+LYRICS chunk.
+
+For compressed V3.50 files, stored length is smaller than uncompressed length.
+The prefix length must be at least 4. Stored CEVENT data starts at:
+
+  C + 0x1c + (prefix_length_field - 12) - 4
+
+It occupies exactly stored length bytes and is followed by a 4-byte CEVENT
+trailer immediately before LYRICS. Any bytes before the stored data are the
+leading prefix bytes.
+
+V3.50 compression is Okumura-style LZSS encrypted by XOR before storage:
+
+  key = cb 78 16 22 4f 8c 7b e8 91 32 9c 68
+        b4 a7 5e 14 50 e6 98 bd 44 0a 98 08
+
+After XORing each stored byte with key[index % 24], decompress with a 4096-byte
+zero-filled sliding window, starting write pointer 0xfee. Tokens are controlled
+by low-to-high bits of a flag byte. If a flag bit is 1, the next byte is a
+literal. If it is 0, read two bytes A,B:
+
+  copy offset = A | ((B & 0xf0) << 4)
+  copy length = (B & 0x0f) + 3
+
+The decompressed byte count must equal the uncompressed CEVENT data length and
+the compressed input must be consumed exactly.
+
+CEVENT event stream
+-------------------
+
+Static inspection of Kar2ST3.exe shows that each event is written as:
+
+  varlen   delta ticks since previous event in that stream
+  varlen   duration ticks
+  uint8    event opcode
+  byte[]   opcode-specific payload
+
+The variable-length integer is the standard MIDI 7-bit big-endian varlen form.
+
+Supported event opcodes:
+
+  0x00  MIDI channel event. Payload starts with a MIDI status byte. Cn/Dn
+        statuses have one data byte; 8n/9n/An/Bn/En statuses have two data
+        bytes. For note-on events, Star3 uses the duration field instead of a
+        stored note-off event.
+
+  0x01  Time signature. Four payload bytes match MIDI meta FF 58 data.
+
+  0x02  Tempo. Three payload bytes are little-endian microseconds per quarter.
+        MIDI stores this value big-endian in meta FF 51.
+
+  0x03  Key signature. Two payload bytes match MIDI meta FF 59 data.
+
+  0x41..0x47  Text-like events. Payload is uint16le byte length followed by
+        text bytes. 0x43 is used for track names.
+
+  0x0c  Extended 6-byte event. The converter ignores this event.
+
+V3.50 LYRICS chunk
+------------------
+
+The LYRICS chunk begins with "LYRICS\0\0". The samples then contain reserved
+zero bytes followed by a uint32le lyric-text byte length and a single-byte text
+payload. The text uses Windows-1252/Latin-1 style bytes in the Portuguese
+samples. The converter currently ignores lyrics because the requested output is
+plain MIDI playback.
+
+V3.00 layout
+------------
+
+The V3.00 files in sample0 use an older layout:
+
+  0x104  uint16le  lyric/syllable count
+  0x106  uint16le  main lyric text length, including NUL when present
+  0x108  uint16le  constant 0x000b in sample0
+  0x10a  uint16le  melody/track hint
+  0x10c  uint32le  zero in sample0
+  0x110  uint32le  optional intro/prompt value
+  0x114  byte[14]  playback/display flags; values are 0, 1, or 2 in sample0
+  0x122  uint32le  intro text byte length
+  0x126  byte[]    intro text
+
+After the intro text:
+
+  uint32le block1 stored length
+  uint32le block1 uncompressed length
+  byte[]   block1 compressed data
+  byte[]   main lyric text
+  uint32le block2 total stored size field
+  uint8    block2 reserved zero
+  uint24le block2 uncompressed MIDI size
+  uint8    block2 compression marker zero
+  byte[]   block2 encrypted LZSS data
+
+Every V3.00 sample0 block2 wrapper begins:
+
+  00 01 37 42 43 18 af 80 ...
+
+The first byte above is the compression marker. The encrypted LZSS stream starts
+at the following byte, so the first encrypted byte is 01 in all sample0 V3.00
+music blocks.
+
+V3.00 music compression uses the same LZSS token format as V3.50 but a different
+20-byte XOR key:
+
+  key = ee 7a 16 2b 7c 44 70 5d 1c 20
+        fe fb ea 7a f1 ad 84 a4 c2 2f
+
+The encrypted LZSS byte count is:
+
+  block2 total stored size field - 5
+
+The stream starts one byte after the compression marker and extends four bytes
+past the nominal end implied by the total stored size field. Decompression must
+produce exactly the uint24le uncompressed MIDI size and consume exactly the
+encrypted input. The decompressed payload is a Standard MIDI file. A few V3.00
+samples have MIDI chunk lengths or header track counts that do not cover all
+decompressed bytes; the converter rewrites only MThd/MTrk container counts and
+length fields so every decompressed MIDI byte is retained in the output file.
+
+Converter behavior
+------------------
+
+star3MIDIKaraoke.py supports:
+
+  * V3.50 files with uncompressed CEVENT data.
+  * V3.50 files with XOR-encrypted LZSS CEVENT data.
+  * V3.00 files with XOR-encrypted LZSS MIDI music blocks.
+
+star3MIDIKaraoke.py rejects any file with inconsistent chunk lengths, unsupported
+event opcodes, truncated compressed streams, bad decompressed sizes, invalid MIDI
+headers, or an unknown signature.
+
+On rejection, the converter removes any temporary/target output and returns a
+non-zero exit status.

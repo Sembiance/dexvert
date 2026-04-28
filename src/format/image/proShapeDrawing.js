@@ -5,6 +5,5 @@ export class proShapeDrawing extends Format
 	name        = "ProShape Drawing";
 	ext         = [".psp"];
 	magic       = ["ProShape drawing"];
-	unsupported = true;
-	notes       = "No known converter.";
+	unsupported = true;	// only 13 unique files on discmaster
 }

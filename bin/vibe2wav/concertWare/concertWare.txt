@@ -1,0 +1,176 @@
+Vibe coded by Codex
+
+ConcertWare sample file format notes
+====================================
+
+Scope
+-----
+This specification is reverse engineered from every file in sample0/.  It
+describes the bytes needed by concertWare.py to validate, decode, and render all
+provided samples.  It is intentionally conservative: fields whose visual-editor
+meaning is not proven are still accounted for by type, offset, and byte width.
+
+Container
+---------
+All samples are big-endian classic Macintosh ConcertWare score documents.  The
+file is a single data fork, with no wrapper, archive, PCM audio, AIFF, MIDI
+header, or resource-map signature.
+
+Top-level layout:
+
+  0x00..0x03  ASCII version marker: "1.00", "2.00", or "4.01"
+  0x04..0x37  52-byte big-endian header field block
+  0x38..N     Pascal metadata strings
+  N..M        version 4.01 settings block only; absent in 1.00/2.00
+  M..EOF      score bytecode stream
+
+Header
+------
+The header is always 56 bytes including the version marker.  Bytes 0x04..0x37
+are numeric fields used by ConcertWare for playback and score layout state.
+They are stored big-endian and can be interpreted safely as either thirteen
+32-bit words or twenty-six 16-bit words.  Across the samples these fields hold
+small state values, file offsets or tick positions, and packed editor settings.
+The converter validates the full header length, preserves every byte, and
+exposes both 32-bit and 16-bit views internally.
+
+Metadata strings
+----------------
+Starting at 0x38, metadata is a run of Pascal strings:
+
+  uint8 length
+  uint8[length] MacRoman text payload
+
+Version 1.00 files in the sample set contain 7 strings:
+
+  title, composer, notes, instrument 1, instrument 2, instrument 3, instrument 4
+
+Version 2.00 files contain 11 strings:
+
+  title, composer, notes, instrument 1 through instrument 8
+
+Version 4.01 files contain 11 or 12 strings:
+
+  title, composer, notes, instrument 1 through instrument 8, optional credit/blank
+
+Empty strings are encoded as a single zero byte.  Text is MacRoman; bytes
+0x80..0xff are legal text bytes in this region.  The metadata run ends at the
+first byte that cannot be the length of a printable Pascal string.
+
+Version 4.01 settings block
+---------------------------
+Version 4.01 adds a binary settings block between metadata and the score
+bytecode.  In the two samples it begins immediately after the last Pascal string
+and ends at the first score control byte, a byte in 0xf0..0xff.  The observed
+sizes are 64 bytes and 152 bytes.  The block contains small channel/instrument
+tables and zero-padded numeric data.  The converter accounts for every byte as a
+prescore settings blob and starts rendering at the following score control.
+
+Score bytecode
+--------------
+The score stream is a bytecode made of one-byte controls with one operand, note
+pairs, and rare unary rest/delay bytes.  This grammar consumes every byte in all
+provided samples:
+
+  score       := record*
+  record      := control | note_pair | unary_delay
+  control     := opcode operand
+  opcode      := 0xf0..0xff
+  operand     := uint8
+  note_pair   := raw_duration raw_pitch, where both bytes are < 0xf0
+  unary_delay := raw_duration, only when a low byte is immediately followed by
+                 EOF or a control byte
+
+Control opcodes seen in the samples:
+
+  f0  version-4 control 0
+  f1  version-4/control 1
+  f2  version-4 control 2
+  f3  note modifier/articulation control
+  f4  staff/layout control 4
+  f5  phrase/measure control 5
+  f6  part/control 6
+  f7  part/control 7
+  f8  playback or tempo setup
+  f9  key/transposition setup
+  fa  layout/control A
+  fb  layout/control B
+  fc  layout/control C
+  fd  layout/control D
+  fe  meter/beat setup
+  ff  staff/layout control F
+
+All controls are two bytes total in the sample corpus.  Controls f6 and f7 with
+operands 0x00..0x0f select a logical playback part.  In files with dense ff
+switches and no f5 measure markers, ff operands 0x18/0x28/0x38/0x48/0x58/0x68
+select monophonic lanes inside the current part.  That distinction matters in
+files such as Low_Canzon, where ff controls are interleaved voice lanes, and in
+files such as Greensleeves, where f5 measure markers make the same ff bytes
+unsafe to treat as global track resets.
+
+Some partless files use fa/fb/fc layout controls around printed-score padding.
+When a rest-only data block has the same decoded length as both neighboring
+note-bearing blocks, the converter consumes those bytes as layout padding and
+does not advance playback time.  The sample that exposes this most clearly is
+Axel_F: treating the middle all-rest block as music creates a false multi-second
+gap after the opening phrase.
+
+One partless layout style also contains long inline pitch-zero filler events
+encoded as raw_duration 0x7c or 0x80.  The converter only suppresses those
+events when the file has no explicit f4/f5/f6/ff part or measure controls and
+those filler rests account for at least one quarter of the decoded timeline.
+This keeps ordinary rests intact while preventing visual staff padding from
+creating long silent holes in files such as Axel_F.
+
+Note pair encoding
+------------------
+For each note_pair:
+
+  raw_duration low 6 bits encode duration ticks
+  raw_duration high 2 bits are articulation/beam/tie flags
+  low 6 bits equal 0 means 64 ticks when any high flag bit is set
+  raw_duration 0 is a zero-duration padding/placeholder event
+  raw_pitch low 6 bits encode a diatonic staff pitch
+  raw_pitch high 2 bits are accidental flags:
+    0x40 raises the diatonic pitch by one semitone
+    0x80 lowers the diatonic pitch by one semitone
+    0xc0 is retained as a natural/notation flag
+  raw_pitch low 6 bits equal 0 means a rest
+
+For synthesis, the converter maps pitch code 0x18 to MIDI note 60 (middle C)
+and interprets neighboring codes as diatonic staff steps in C major.  Duration
+flags are retained in raw_duration but do not alter the synthesized envelope
+beyond the decoded tick length.  The samples also contain key controls, but
+their exact editor semantics are not completely proven; those bytes are still
+parsed and retained.
+
+Rendering model
+---------------
+concertWare.py renders each logical part on an independent tick cursor.  Notes
+advance only their current part; rests and unary delays also advance the current
+part unless they match one of the layout-padding rules above.  The final WAV
+length is the longest part length.  The renderer currently uses 0.0225 seconds
+per decoded duration tick, calibrated from the Bridal_Chorus sample.  Files
+whose first f8 playback control is 0x24 use a 2x slowdown.  Files whose first f8
+playback control is 0x44 use the same inverse-delay curve anchored at 0x24,
+which gives a scale of 1.709 and matches the too-fast group much more closely
+than the default timebase.  Other f8 values remain decoded and retained but are
+not yet trusted enough to alter playback speed.  Output is mono, 16-bit PCM WAV
+at 22050 Hz, synthesized from additive oscillator tones.  This is not original
+Macintosh audio hardware emulation, but it renders the complete decoded score
+event stream for listening and verification.
+
+Validation and failure behavior
+-------------------------------
+The converter fails before writing output unless all of these are true:
+
+  file length is at least 56 bytes
+  version marker is one of "1.00", "2.00", or "4.01"
+  at least one Pascal metadata string is found
+  score bytecode is present
+  every score byte is consumed by the grammar above
+  at least one playable note exists
+  rendered length is within the converter safety limit
+
+On failure, any temporary output file is removed and the final WAV path is not
+created.

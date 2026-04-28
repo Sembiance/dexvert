@@ -6,8 +6,7 @@ export class petsciiSeq extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/PETSCII";
 	ext         = [".seq"];
 	mimeType    = "text/x-petscii-sequence";
-	unsupported = true;
-	notes       = "Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences";
+	unsupported = true;	// can't reliably detect as extension isn't even reliable and abydosconvert will convert anything
 	converters  = [`abydosconvert[format:${this.mimeType}]`];
 }
 

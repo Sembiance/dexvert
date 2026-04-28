@@ -5,5 +5,5 @@ export class mvsTracker extends Format
 	name        = "MVSTracker Module";
 	ext         = [".mus"];
 	magic       = ["MVSTracker Music module"];
-	unsupported = true;
+	unsupported = true;	// 0 files on discmaster
 }

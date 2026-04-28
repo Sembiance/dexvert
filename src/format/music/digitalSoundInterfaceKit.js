@@ -5,5 +5,5 @@ export class digitalSoundInterfaceKit extends Format
 	name        = "Digital Sound Interface Kit Module";
 	ext         = [".dsm"];
 	magic       = ["Digital Sound Interface Kit module"];
-	unsupported = true;
+	unsupported = true;	// only 9 unique files on discmaster
 }

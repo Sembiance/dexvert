@@ -5,5 +5,5 @@ export class playerPro extends Format
 	name        = "PlayerPro Module";
 	ext         = [".mad"];
 	magic       = ["PlayerPro module"];
-	unsupported = true;
+	unsupported = true;	// only 46 unique files on discmaster
 }

@@ -6,5 +6,5 @@ export class quartet4V extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/4v";
 	ext         = [".4v"];
 	magic       = ["Quartet module"];
-	unsupported = true;
+	unsupported = true;	// 243 unique files on discmaster, but due to having external samples, passed on vibe coding a converter
 }

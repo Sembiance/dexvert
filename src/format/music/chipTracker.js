@@ -8,5 +8,5 @@ export class chipTracker extends Format
 	weakExt      = [".mod"];
 	magic        = ["Chip Tracker module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "openmpt123"];
 }

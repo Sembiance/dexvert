@@ -7,5 +7,5 @@ export class universalBitMapFormat extends Format
 	ext            = [".ubf"];
 	forbidExtMatch = true;
 	magic          = ["Universal BitMap Format"];
-	unsupported    = true;
+	converters     = ["vibe2png"];
 }

@@ -6,5 +6,5 @@ export class gameMusicCreator extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Game_Music_Creator";
 	ext          = [".gmc"];
 	metaProvider = ["musicInfo"];
-	converters   = ["uade123", "xmp"];
+	converters   = ["uade123", "xmp", "openmpt123"];
 }

@@ -1,0 +1,280 @@
+AXS Module File Format Specification
+=====================================
+Vibe coded by Claude
+
+Overview
+--------
+AXS Module (.axs / .AXS) is a tracker music file format used by the AXS
+(Advanced eXtended Sequencer) software, developed by NWS Team. It stores
+both sequencer pattern data and embedded PCM audio samples in a single file.
+
+The container is based on the IFF (Interchange File Format) structure with
+a "FORM" outer wrapper and "AXSF" type identifier. Unlike standard IFF,
+AXS does NOT pad chunks to even byte boundaries.
+
+File Layout
+-----------
+All multi-byte integers in chunk headers (IDs, sizes) are big-endian.
+Field data within chunks uses mixed endianness as documented per chunk.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     Magic: "FORM" (0x464F524D)
+    4       4     BE uint32: total file size minus 8
+    8       4     Type: "AXSF" (0x41585346)
+    12      ...   Chunk data (sequence of chunks until end of FORM)
+
+The FORM size field equals (file_size - 8), covering everything after the
+initial 8-byte FORM header.
+
+Chunk Structure
+---------------
+Each chunk within the AXSF container:
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     Chunk ID (4 ASCII characters)
+    4       4     BE uint32: chunk data size (excludes this 8-byte header)
+    8       N     Chunk data (exactly the number of bytes specified)
+
+Chunks are NOT padded to even boundaries. The next chunk begins immediately
+after the current chunk's data, regardless of alignment.
+
+Chunk Ordering
+--------------
+Chunks always appear in this order:
+
+    1. USER   (1x)     - Creator/author string
+    2. SHDR   (1x)     - Song header
+    3. SONG   (1x)     - Song arrangement / playlist
+    4. BLOK + TRAK*16  - Repeated N times (one BLOK followed by 16 TRAKs)
+    5. INST   (8x)     - Instrument definitions
+    6. INNM   (8x)     - Instrument names
+    7. DNOT   (Mx)     - Default note / sample mapping entries
+    8. SAMP   (Px)     - Embedded PCM audio samples
+
+Detailed Chunk Descriptions
+============================
+
+USER Chunk (variable size, typically 8-22 bytes)
+-------------------------------------------------
+Contains the creator/author identification string as raw ASCII text.
+
+    Offset  Size      Description
+    ------  --------  -----------
+    0       N         ASCII string (not null-terminated), e.g. "NWS Team"
+
+Known values: "NWS Team", "Free version", "Radium 1.998-Deepz0ne "
+
+
+SHDR Chunk (always 20 bytes)
+-----------------------------
+Song header containing global playback settings.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       1     Version major (always 0x02)
+    1       1     Version minor (always 0x02)
+    2       1     Tempo / BPM (observed range: 0x68-0x9C / 104-156)
+    3       1     Speed (ticks per row, observed: 0x03, 0x06)
+    4       1     Flags byte 1 (observed: 0x00, 0x40)
+    5       1     Playback setting (observed range: 0x02-0x06)
+    6       1     Flags byte 2 (observed: 0x05, 0x25)
+    7       1     Global volume (observed range: 0x37-0x7F; 0x7F = max)
+    8       1     Song parameter 1 (varies)
+    9       1     Song parameter 2 (varies)
+    10-11   2     Song parameters 3-4 (varies)
+    12-19   8     Extended parameters (often zero-filled)
+
+
+SONG Chunk (variable size, multiple of 8)
+------------------------------------------
+Song arrangement / playlist defining the playback order of blocks.
+Contains (chunk_size / 8) entries of 8 bytes each.
+
+    Per entry (8 bytes):
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     LE uint32: Block index (0-based, references the Nth BLOK)
+    4       2     LE uint16: Track mute bitmask. Each bit corresponds to one
+                  of the 16 tracks (bit 0 = track 0, bit 15 = track 15).
+                  1 = track is active (audible), 0 = track is muted.
+    6       2     Flags (observed values: 0x0000 or 0xFFFF)
+
+The song plays each entry's block in order, with the mute bitmask
+controlling which tracks are audible at each position. This enables
+song arrangement techniques like build-ups and breakdowns by
+selectively muting/unmuting tracks.
+
+
+BLOK Chunk (always 24 bytes)
+-----------------------------
+Block (pattern) header. Each BLOK is followed by exactly 16 TRAK chunks.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     Number of tracks: always 0x10 in byte 0 (16 decimal)
+    4       4     Steps per track: always 0x40 in byte 0 (64 decimal)
+    8       16    Track channel assignment, one byte per track.
+                  Low nibble (bits 0-3) = channel number:
+                    0x00-0x06: Synth channel 1-7. The track plays pitched
+                      notes using the built-in subtractive synthesizer.
+                      The channel number indexes the INST/INNM slots.
+                    0x07: Sampler channel (channel 8). The track triggers
+                      PCM samples from the SAMP pool via DNOT mapping.
+                  High nibble (bits 4-7): Flags (observed: 0x00, 0x10).
+                    0x10 may indicate an alternate mode or routing.
+
+
+TRAK Chunk (always 256 bytes)
+------------------------------
+Track pattern data. Contains 64 steps of 4 bytes each (64 * 4 = 256).
+
+    Per step (4 bytes):
+    Offset  Size  Description
+    ------  ----  -----------
+    0       1     Note value:
+                    0x00 = empty (no note)
+                    0x01-0x7F = MIDI-style note number
+                    0x81 = note off / key release
+    1       1     Volume / velocity:
+                    High nibble (bits 7-4): volume level (0-7 scale,
+                      where 7 = loudest). 0 with a note = default volume.
+                    Low nibble (bits 3-0): sub-parameter or fine volume.
+    2       1     Effect command number (0x00 = none)
+    3       1     Effect parameter value
+
+A step of 0x00000000 is an empty step (no note, no effect).
+
+
+INST Chunk (always 128 bytes)
+------------------------------
+Instrument definition. Always exactly 8 INST chunks per file, one per
+instrument slot (0-7).
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     Reserved / flags (often 0x00000000)
+    4       1     Finetune
+    5       1     Transpose
+    6       1     Unused
+    7       1     Volume (0x00-0x7F)
+    8       1     Default note
+    9-14    6     Envelope / modulation parameters
+    15      1     Panning
+    16-31   16    Amplitude envelope (attack, decay, sustain, release +
+                  additional envelope points)
+    32-47   16    Filter / pitch envelope parameters
+    48-63   16    LFO and modulation settings
+    64-79   16    Effect routing and additional synthesis parameters
+    80-95   16    Extended parameters (vibrato, tremolo, etc.)
+    96-127  32    Reserved / padding (often zero)
+
+
+INNM Chunk (always 9 bytes)
+-----------------------------
+Instrument name. Always exactly 8 INNM chunks per file, one per instrument
+slot (0-7), in order matching the INST chunks.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       9     Instrument name: up to 8 ASCII characters followed by a
+                  null terminator (0x00). Bytes after the first null within
+                  the 9-byte field may contain residual data.
+
+Examples: "BASS-3", "RESOSTR1", "--------" (unused slot marker)
+
+
+DNOT Chunk (always 40 bytes)
+------------------------------
+Drum note / sample mapping entry. Maps MIDI note numbers to PCM
+samples for the sampler channel. Also provides sample-based fallback
+for synth channels that share a DNOT key with the instrument index.
+
+    All fields are little-endian uint32 unless noted.
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       4     LE uint32: DNOT key. For sampler tracks, this is the MIDI
+                  drum note number (e.g. 36=kick, 38=snare in GM mapping).
+                  Sampler track notes reference this as (note_value - 1).
+                  For synth tracks, if the key matches the instrument index
+                  (0-6), the sample is used as a waveform source.
+    4       4     LE uint32: Base note / root key (MIDI note at which the
+                  sample plays at its native rate, e.g. 64 = E4)
+    8       4     LE uint32: Reserved (observed: always 0)
+    12      4     LE uint32: Default velocity (0-127)
+    16      4     LE uint32: Parameter 1 (varies)
+    20      4     LE uint32: Parameter 2 (varies)
+    24      4     LE uint32: Sample slot reference (1-based, maps to SAMP)
+    28      2     LE uint16: Flags / sub-parameter
+    30      2     LE uint16: Note range upper bound (observed: 0x0041 = 65)
+    32      4     LE uint32: Volume override (0-127, or 0x7F = use default)
+    36      4     LE uint32: Reserved (observed: always 0)
+
+    Sampler note mapping: When a sampler track (BLOK channel 7) plays
+    note N, the system looks up the DNOT entry where key == (N - 1),
+    retrieves the sample slot, and plays that sample at its native rate.
+    This offset exists because note value 0 means "no note" (empty step),
+    so playable notes start at 1 while DNOT keys start at 0.
+
+
+SAMP Chunk (variable size)
+---------------------------
+Embedded PCM audio sample. Contains sample metadata and raw audio data.
+
+    Chunk data size = 176 + (sample_count * 2)
+
+    Offset  Size  Description
+    ------  ----  -----------
+    0       1     Sample slot number (1-based index, unique within file)
+    1       3     Padding / reserved (always 0x000000)
+    4       32    Sample name: ASCII, null-terminated, space-padded to fill
+                  the 32-byte field.
+    36      128   Original file path: ASCII, null-terminated, zero-padded.
+                  Contains the DOS/Windows path where the sample was
+                  originally loaded from (e.g. "C:\SAMPLES\FRUITY\1005.WAV")
+    164     4     LE uint32: Sample count (number of audio frames)
+    168     4     LE uint32: Sample rate in Hz (e.g. 22050, 32000, 44100,
+                  48000). Observed rates: 11025, 22050, 32000, 32075,
+                  38461, 44100, 48000.
+    172     4     Cached data pointer (application runtime value; varies
+                  between files for identical samples; not meaningful for
+                  playback — should be preserved but ignored during
+                  extraction)
+    176     N     Raw PCM audio data: 16-bit signed little-endian mono
+                  samples. N = sample_count * 2 bytes.
+
+    Empty sample slots have sample_count = 0, an empty name, and no
+    audio data (chunk size = 176).
+
+Audio Data Format
+-----------------
+    Encoding:    PCM (uncompressed)
+    Bit depth:   16-bit signed
+    Byte order:  Little-endian
+    Channels:    1 (mono)
+    Sample rate:  As specified in the SAMP chunk header (varies per sample)
+
+    Sample values range from -32768 to +32767, centered around 0.
+
+File Size Verification
+----------------------
+    file_size = 8 + FORM_size
+    FORM_size = 4 (AXSF) + sum of (8 + chunk_data_size) for all chunks
+
+    For each SAMP chunk:
+        chunk_data_size = 176 + sample_count * 2
+
+Notes
+-----
+- The format always contains exactly 8 instrument slots (INST + INNM),
+  even if not all are used.
+- Each BLOK is always followed by exactly 16 TRAK chunks.
+- The number of DNOT and SAMP chunks varies per file.
+- SAMP slot numbers are not necessarily contiguous; they correspond to
+  the sample slots referenced by the instrument/note mapping system.
+- The "cached data pointer" field in SAMP chunks (offset 172) appears to
+  store a memory address or internal pointer from the original application.
+  It varies for identical samples across different files and has no bearing
+  on audio extraction or playback.

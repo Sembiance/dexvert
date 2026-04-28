@@ -1,0 +1,220 @@
+Music-X Performance / MSCX file format notes
+Reverse engineered from every file under sample0/.
+
+Scope
+-----
+The sample corpus contains 100 files. Every file is an Electronic Arts IFF
+FORM whose form type is MSCX. The converter validates the full byte stream:
+the top-level FORM size must match the file size, every top-level chunk must
+be a known Music-X chunk, fixed-size chunks must have the exact size listed
+below, SEQU chunks must be parseable into fixed records, and embedded samples
+must be parseable as IFF FORM 8SVX objects.
+
+IFF container
+-------------
+All multi-byte integers are big-endian. Chunks use the standard IFF layout:
+
+  bytes 0..3   chunk id
+  bytes 4..7   payload byte count
+  bytes 8..n   payload
+  optional pad byte if the payload count is odd
+
+Top-level file layout:
+
+  FORM <u32 size> MSCX <chunks...>
+
+The top-level FORM size is file_size - 8 for every corpus file.
+
+Top-level MSCX chunks
+---------------------
+AUTH, variable size:
+  Latin-1 author/copyright text. Size range in the corpus is 0..64 bytes.
+
+NAME, variable size:
+  Latin-1 song/performance title. Size range in the corpus is 0..32 bytes.
+
+TSIG, 4 bytes:
+  u16 numerator, u16 denominator-code. Observed values are 0004 0002,
+  0002 0002, and 0006 0003.
+
+TMPO, 4 bytes:
+  u16 beats-per-minute, then two zero bytes. The renderer uses this tempo.
+
+CUES, 24 bytes:
+  Six u32 cue locations. Zero means unused. Non-zero values use the same tick
+  domain as SEQU events.
+
+SEQU, variable size:
+  A Music-X sequence. The size is always 40 + n*10 bytes, with n >= 1.
+  See the SEQU section below.
+
+OUTC, 16 bytes:
+  One output-channel mapping byte per MIDI channel. Most files map channels
+  0..15 to outputs 0..15, while some route channel 0 to output 0x0a.
+
+SYNC, 4 bytes:
+  Synchronization setting. Observed values are 00000104, 00000105,
+  00000100, and 00000000.
+
+TCDD, 6 bytes:
+  Time-code/display data. Observed values are 000300000000 and 000100000000.
+
+AUDI, 2 bytes:
+  Audio option word. Observed values are 0000 and ffff.
+
+MXFL, 2 bytes:
+  Music-X flags word. The corpus value is always 0000.
+
+SWIT, 4 bytes:
+  Switch/option bit field. Observed values are 00000863, 00000823,
+  000008c3, 0000082b, and 00000803.
+
+FILT, 18 bytes:
+  MIDI filter definition. The first u32 is the filter/channel index, followed
+  by option bytes and status bytes. Felicidad.Perf and ClickTrack.Perf contain
+  one FILT chunk for each channel 0..15.
+
+SLOT, 4 bytes:
+  u32 sample slot number, 0..15. When followed by FORM 8SVX, the 8SVX sample
+  is assigned to that slot. In ClickTrack.Perf, empty SLOT chunks also define
+  slots used by following KMAP chunks.
+
+FORM, variable size:
+  Embedded IFF FORM 8SVX sample. See the 8SVX section below.
+
+KMAP, 388 bytes:
+  Sample key map. Layout is u32 slot, then three 128-byte tables. In the
+  corpus these tables are constant default maps: MIDI status 0x90, note/key
+  slot value, and velocity 0x40. ClickTrack.Perf contains eight KMAP chunks.
+
+SEQU chunk
+----------
+SEQU payload layout:
+
+  bytes 0..3    u32 sequence-list index
+  bytes 4..33   30-byte Latin-1 sequence name, NUL padded
+  byte 34       sequence/list enable flag, observed 0 or 1
+  byte 35       reserved, always 0 in the corpus
+  byte 36       output route flag, 1 for Amiga/sample-output sequences
+  byte 37       reserved, always 0 in the corpus
+  bytes 38..39  signed sequence transpose/offset word
+  bytes 40..    n fixed 10-byte event records
+
+Event record layout:
+
+  bytes 0..2    u24 absolute start tick
+  byte 3        MIDI-style status byte, or Music-X internal/meta status
+  byte 4        data byte 1
+  byte 5        data byte 2
+  bytes 6..8    u24 absolute end/release tick for note records; auxiliary
+                location/zero for non-note records
+  byte 9        release velocity/flags
+
+MIDI-style statuses observed and handled:
+
+  0x90..0x9f  note-on. Music-X stores the matching note release in bytes 6..9,
+              so no separate note-off pairing is required.
+  0x80..0x8f  note-off/status data retained; no additional rendering needed
+              because note-on records already carry release ticks.
+  0xa0..0xaf  poly aftertouch, retained as event data.
+  0xb0..0xbf  control change. The renderer applies controller 7 volume,
+              controller 10 pan, and controller 11 expression.
+  0xc0..0xcf  program change. The renderer uses the program byte to select a
+              simple synthesis family.
+  0xd0..0xdf  channel pressure, retained as event data.
+  0xe0..0xef  pitch-bend style data, retained as event data.
+
+Music-X internal/meta statuses observed:
+
+  0x00  end/empty marker. Text-only/comment sequences consist only of this.
+  0x01  one corpus-only marker in Felicidad.Perf.
+  0x04  metronome/sample marker in the ClickTrack/sfz metronome sequences.
+  0x05  time-signature event; data bytes match TSIG in pattern files.
+  0x70  sequence/list event.
+  0x72  tempo event; data byte 1 is the tempo value when present.
+
+The renderer uses TMPO as the global tempo and treats tempo/status metadata
+records as already accounted for in the sequence timing. All event bytes are
+still parsed and validated as fixed records.
+
+Timing
+------
+Music-X is a 192 PPQN sequencer. The 24-bit event locations are not linear
+tick counters. They are packed bar/clock values:
+
+  raw_time = (bar_number << 12) | clock_within_bar
+
+The low 12 bits are a 192-PPQN clock offset inside the current bar. For a 4/4
+file, one bar is 4 * 192 = 768 clocks, so a transition from 0002fe to 001000
+is a two-clock move into the next bar, not a 3330-clock rest. The bar length
+is derived from TSIG as:
+
+  bar_clocks = numerator * 192 * 4 / denominator
+  denominator = 2 ** denominator_code
+
+All note-event clock offsets in the corpus are within the derived bar length.
+The renderer unpacks every start and release location before converting it to
+seconds with TMPO.
+
+Embedded FORM 8SVX samples
+--------------------------
+The sample-bearing files contain SLOT followed by FORM 8SVX. Inside the 8SVX
+FORM the nested chunks are:
+
+  VHDR, 20 bytes:
+    u32 oneShotHiSamples
+    u32 repeatHiSamples
+    u32 samplesPerHiCycle
+    u16 samplesPerSec
+    u8  ctOctave
+    u8  sCompression, always 0 in the corpus
+    u32 volume, 16.16 fixed-point; 0x00010000 is full volume
+
+  NAME, variable:
+    Latin-1 sample name.
+
+  ATAK, 6 or 60 bytes:
+    Attack envelope as 6-byte envelope points.
+
+  RLSE, 6 or 30 bytes:
+    Release envelope as 6-byte envelope points.
+
+  BODY, variable:
+    Signed 8-bit PCM sample data. The renderer plays BODY data directly and
+    resamples from VHDR.samplesPerSec to the output WAV sample rate.
+
+Malformed embedded 8SVX size in ClickTrack.Perf
+-----------------------------------------------
+ClickTrack.Perf has a FORM 8SVX at offset 0x000000cc with declared size 0x302.
+Parsing the nested 8SVX chunks consumes exactly 0x300 bytes, ending at offset
+0x000003d4, where the next valid top-level SLOT chunk begins. The declared
+8SVX size is therefore two bytes too large and would consume the "SL" prefix
+of the next SLOT chunk. The converter resolves this without scanning: when an
+embedded 8SVX's own nested chunk structure ends two bytes before its declared
+FORM payload and those two bytes are "SL", the natural nested 8SVX length is
+used and the next top-level chunk begins at that offset.
+
+WAV rendering
+-------------
+The output is mono 16-bit PCM at 22050 Hz. Music-X performance files are
+mostly MIDI/sequencer performances rather than ready-made audio, so rendering
+uses a deterministic built-in synthesizer:
+
+  * MIDI channel 10 (zero-based channel 9) uses procedural percussion.
+  * Other MIDI notes use simple General-MIDI-inspired oscillator families
+    selected from program-change events.
+  * Sample-output sequences with byte 36 set and a matching SLOT use the
+    embedded 8SVX sample for that channel.
+  * Unknown but valid metadata events affect parsing/accounting but not audio.
+
+Unsupported inputs
+------------------
+The converter fails before writing a WAV if:
+
+  * the file is not FORM/MSCX,
+  * the top-level FORM size is inconsistent,
+  * an unknown top-level chunk appears,
+  * a fixed-size chunk has the wrong size,
+  * a SEQU chunk is not 40 + n*10 bytes,
+  * an embedded sample is not uncompressed FORM 8SVX,
+  * an embedded 8SVX has an unrecognized nested-chunk layout.

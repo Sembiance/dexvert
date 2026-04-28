@@ -7,5 +7,5 @@ export class multiTracker extends Format
 	ext          = [".mtm"];
 	magic        = [/^Multi[Tt]racker /, /^fmt\/719( |$)/];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123[largeQuota]"];
+	converters   = ["zxtune123[largeQuota]", "openmpt123"];
 }

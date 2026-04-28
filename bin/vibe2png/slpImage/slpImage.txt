@@ -1,0 +1,308 @@
+SLP Image File Format Specification
+====================================
+Vibe coded by Claude
+
+Overview
+--------
+SLP (Shape Library Picture) is a sprite/image format used by the Genie game
+engine in Age of Empires (1997) and Age of Empires II (1999). An SLP file
+stores one or more frames of pixel data using run-length encoded (RLE)
+commands. Pixels reference a 256-color palette (typically palette 50500
+from interfac.drs). SLP files are commonly archived inside DRS (Data
+Resource Files).
+
+All multi-byte integers are stored in little-endian byte order.
+
+
+File Header (32 bytes)
+----------------------
+Offset  Size  Type      Field         Description
+------  ----  --------  -----------   -------------------------------------------
+0x00    4     char[4]   version       File version string. Always "2.0N".
+0x04    4     uint32    num_frames    Number of frames in this SLP file.
+0x08    24    char[24]  comment       Null-terminated comment string.
+                                      Typically "ArtDesk 1.00 SLP Writer\0"
+                                      or "RGE RLE shape file\0\0\0\0\0\0".
+
+Total header size: 32 bytes.
+
+
+Frame Info Array (32 bytes per frame)
+-------------------------------------
+Immediately following the file header is an array of num_frames frame info
+structures. Each is 32 bytes:
+
+Offset  Size  Type      Field                Description
+------  ----  --------  -------------------  ----------------------------------
+0x00    4     uint32    cmd_table_offset     Absolute file offset of this frame's
+                                             command offset table.
+0x04    4     uint32    outline_table_offset Absolute file offset of this frame's
+                                             row edge (outline) table.
+0x08    4     uint32    palette_offset       Palette offset (always 0 in practice).
+0x0C    4     uint32    properties           Frame properties bitfield.
+                                             Observed values: 0x00, 0x10, 0x18.
+0x10    4     int32     width                Frame width in pixels.
+0x14    4     int32     height               Frame height in pixels.
+0x18    4     uint32    hotspot_x            X coordinate of the frame's hotspot
+                                             (anchor/origin point).
+0x1C    4     uint32    hotspot_y            Y coordinate of the frame's hotspot.
+
+Total frame info array size: num_frames * 32 bytes.
+
+
+Per-Frame Data
+--------------
+Each frame contains three data sections, located at the absolute file offsets
+specified in the frame info structure:
+
+  1. Row Edge Table (outline_table_offset)
+  2. Command Offset Table (cmd_table_offset)
+  3. Command Data (immediately after the command offset table)
+
+
+1. Row Edge Table (4 bytes per row)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Located at outline_table_offset. Contains one entry per row (height entries
+total). Each entry is 4 bytes:
+
+Offset  Size  Type    Field   Description
+------  ----  ------  ------  ------------------------------------------------
+0x00    2     uint16  left    Number of transparent pixels on the left edge.
+0x02    2     uint16  right   Number of transparent pixels on the right edge.
+
+A row is fully transparent (contains no pixel data and has no commands other
+than End of Row) when:
+  - left == 0x8000 and right == 0x8000, OR
+  - left + right >= width
+
+The visible content region of a non-transparent row spans from pixel column
+'left' to pixel column 'width - right - 1' (inclusive), giving a content
+width of (width - left - right) pixels.
+
+Total row edge table size: height * 4 bytes.
+
+
+2. Command Offset Table (4 bytes per row)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Located at cmd_table_offset. Contains one uint32 per row, giving the
+absolute file offset where that row's drawing commands begin.
+
+Total command offset table size: height * 4 bytes.
+
+
+3. Command Data
+~~~~~~~~~~~~~~~~
+Variable-length drawing commands for each row. Commands are processed
+sequentially. Each command begins with a single command byte that encodes
+both the command type and sometimes a pixel count.
+
+Command identification uses the lower bits of the command byte:
+
+  Priority 1 - Exact byte match:
+    0x0F  End of Row
+    0x4E  Outline (1 pixel)
+    0x5E  Outline Span
+
+  Priority 2 - Lower 4 bits (byte & 0x0F):
+    0x02  Big Color List
+    0x03  Big Skip
+    0x06  Player Color List
+    0x07  Fill
+    0x0A  Player Color Fill
+    0x0B  Shadow Transparent
+    0x0E  Shadow Player
+
+  Priority 3 - Lower 2 bits (byte & 0x03):
+    0x00  Color List
+    0x01  Skip
+
+
+Pixel Count Encoding
+~~~~~~~~~~~~~~~~~~~~~
+Commands encode pixel counts in several ways:
+
+  >>2           The command byte right-shifted by 2 bits.
+  >>4           The command byte right-shifted by 4 bits.
+  >>2 or next   byte >> 2 if non-zero; otherwise the next byte.
+  >>4 or next   byte >> 4 if non-zero; otherwise the next byte.
+  >>4*256+next  (byte >> 4) * 256 + next_byte. Combines upper bits of the
+                command byte with the full next byte for large counts.
+  next          The count is stored entirely in the next byte.
+
+
+Command Reference
+~~~~~~~~~~~~~~~~~
+
+0x00 - Color List
+  Identification: byte & 0x03 == 0x00
+  Count: byte >> 2
+  Data: 'count' palette index bytes follow
+  Effect: Draws 'count' pixels using the specified palette indices.
+
+0x01 - Skip
+  Identification: byte & 0x03 == 0x01
+  Count: byte >> 2; if zero, read next byte as count
+  Data: none
+  Effect: Skips 'count' pixels (transparent).
+
+0x02 - Big Color List
+  Identification: byte & 0x0F == 0x02
+  Count: (byte >> 4) * 256 + next_byte
+  Data: 'count' palette index bytes follow (after the count byte)
+  Effect: Same as Color List but supports counts > 63.
+
+0x03 - Big Skip
+  Identification: byte & 0x0F == 0x03
+  Count: (byte >> 4) * 256 + next_byte
+  Data: none
+  Effect: Same as Skip but supports counts > 63.
+
+0x06 - Player Color List
+  Identification: byte & 0x0F == 0x06
+  Count: byte >> 4; if zero, read next byte as count
+  Data: 'count' player-relative color index bytes follow
+  Effect: Draws 'count' pixels. Each data byte is a sub-index (0-7)
+          into the current player's color range. The actual palette
+          index is: player_number * 16 + 16 + sub_index.
+
+0x07 - Fill
+  Identification: byte & 0x0F == 0x07
+  Count: byte >> 4; if zero, read next byte as count
+  Data: 1 palette index byte (after the optional count byte)
+  Effect: Fills 'count' pixels with the single palette color.
+
+0x0A - Player Color Fill
+  Identification: byte & 0x0F == 0x0A
+  Count: byte >> 4; if zero, read next byte as count
+  Data: 1 player-relative color index byte
+  Effect: Fills 'count' pixels with the player color. Palette index
+          is: player_number * 16 + 16 + sub_index.
+
+0x0B - Shadow Transparent
+  Identification: byte & 0x0F == 0x0B
+  Count: byte >> 4; if zero, read next byte as count
+  Data: none
+  Effect: Draws 'count' semi-transparent shadow pixels. Typically
+          rendered as 50% opacity black.
+
+0x0E - Shadow Player
+  Identification: byte & 0x0F == 0x0E (and byte != 0x4E, 0x5E)
+  Count: next byte
+  Data: none
+  Effect: Draws 'count' shadow pixels with player coloring.
+
+0x0F - End of Row
+  Identification: exact byte 0x0F
+  Count: 0
+  Data: none
+  Effect: Marks the end of commands for this row. Every row
+          (including fully transparent ones) ends with this command.
+
+0x4E - Outline
+  Identification: exact byte 0x4E
+  Count: 1
+  Data: none
+  Effect: Draws a single outline pixel. When the unit is visible,
+          this renders as a normal pixel. When the unit is behind
+          an object, this renders in the player's team color.
+
+0x5E - Outline Span
+  Identification: exact byte 0x5E
+  Count: next byte
+  Data: none
+  Effect: Same as Outline but for multiple consecutive pixels.
+
+
+Player Colors
+~~~~~~~~~~~~~
+The Player Color List (0x06) and Player Color Fill (0x0A) commands
+store sub-indices (0-7) that map into a player's color range using:
+  palette_index = player_number * 16 + 16 + sub_index
+
+The exact palette indices for each player depend on which palette is
+loaded (see Palette section below). In the AoE2 palette, the standard
+player color ranges are:
+
+  Player 0 (Blue):   palette indices 16-23
+  Player 1 (Red):    palette indices 32-39
+  Player 2 (Green):  palette indices 48-55
+  Player 3 (Yellow): palette indices 64-71
+  Player 4 (Orange): palette indices 80-87
+  Player 5 (Teal):   palette indices 96-103
+  Player 6 (Purple): palette indices 112-119
+  Player 7 (Grey):   palette indices 128-135
+
+
+Complete File Layout
+~~~~~~~~~~~~~~~~~~~~
+A typical SLP file is laid out as follows:
+
+  [File Header - 32 bytes]
+  [Frame Info 0 - 32 bytes]
+  [Frame Info 1 - 32 bytes]
+  ...
+  [Frame Info N-1 - 32 bytes]
+
+  -- Frame 0 data --
+  [Row Edge Table - height0 * 4 bytes]
+  [Command Offset Table - height0 * 4 bytes]
+  [Command Data - variable length]
+
+  -- Frame 1 data --
+  [Row Edge Table - height1 * 4 bytes]
+  [Command Offset Table - height1 * 4 bytes]
+  [Command Data - variable length]
+
+  ...
+
+  -- Frame N-1 data --
+  [Row Edge Table - heightN * 4 bytes]
+  [Command Offset Table - heightN * 4 bytes]
+  [Command Data - variable length]
+
+Every byte in the file is accounted for by one of these structures.
+There is no padding or alignment between sections.
+
+
+Properties Field
+~~~~~~~~~~~~~~~~
+The properties field in the frame info structure is a bitfield.
+Observed values across sample files:
+
+  0x00 (0)  - Default
+  0x10 (16) - Common; suspected to indicate a specific palette variant
+  0x18 (24) - Less common
+
+The exact meaning of individual bits has not been definitively documented.
+In practice, all frames use the same base palette (palette 50500) regardless
+of this field's value.
+
+
+Palette
+~~~~~~~
+SLP files do not embed palette data. The renderer must supply an external
+256-color palette. Palette index 0 is treated as transparent.
+
+The SLP format is shared across multiple Genie engine games. Each game
+uses a different 256-color palette, and the palettes are NOT compatible
+(nearly all 256 entries differ between games). The two main palette
+variants are:
+
+  AoE2 palette (Age of Empires II: Age of Kings / The Conquerors)
+    Player colors at predictable ranges (16-23 blue, 32-39 red, etc.).
+    Includes vivid blues, greens, and teals for water and foliage.
+    System colors at indices 1-9 (water blues) and 241-254.
+
+  AoE1 palette (Age of Empires I: Rise of Rome)
+    Stored as palette ID 50500 in Interfac.drs (JASC-PAL format).
+    Base palette has magenta placeholders at indices 10-15 and 208-223
+    which get replaced at runtime with map-specific colors. Variant
+    palettes 50501-50509 provide complete 256-color replacements for
+    different terrain types (desert, grassland, etc.). All 256 entries
+    differ between variants. Windows VGA system colors at indices 1-9
+    and 249-254.
+
+There is no field in the SLP file that indicates which palette to use.
+The correct palette is determined by the game version and runtime
+context (map type, scenario). A renderer must be told which palette
+to apply.

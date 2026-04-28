@@ -1,0 +1,532 @@
+IRIS Showcase File Format Specification
+=======================================
+
+SGI IRIS Showcase was a presentation and drawing application for Silicon Graphics
+IRIX workstations, produced roughly 1991-1997. Files use the extension .sc,
+.showcase, .shw, .sho, .help, .about, or sometimes no extension at all.
+
+All multi-byte integers and floats are stored in big-endian (network) byte order.
+Floating point values use IEEE 754 single-precision (32-bit) format.
+
+
+1. FILE HEADER (16 bytes)
+=========================
+
+Offset  Size  Description
+------  ----  -----------
+0x00    4     Magic bytes: "SCFM" (0x53 0x43 0x46 0x4D)
+0x04    1     Version major: always 3
+0x05    1     Version minor: 0x01=3.1, 0x02=3.2, 0x03=3.3, 0x04=3.4, 0xFF=3.0
+0x06    2     Byte order mark: 0xFFFE (standard) or 0xD8DF (variant)
+0x08    4     uint32 - Token table self-reference ID (always 0x00000016 = 22,
+              which is the ID of the "token table" token itself)
+0x0C    4     uint32 - Token table size in bytes (total bytes occupied by all
+              token table entries; does NOT include the 16-byte file header)
+
+
+2. TOKEN TABLE
+==============
+
+Immediately follows the file header at offset 16 (0x10). The token table maps
+numeric type IDs to human-readable names used in the data record section.
+
+Each entry is exactly 24 bytes:
+  Offset  Size  Description
+  ------  ----  -----------
+  0x00    4     uint32 - Token ID (0, 2, 3, 4, ...; ID 1 is never used)
+  0x04    20    ASCII name, right-padded with spaces (0x20), may end with 0x00
+
+The number of entries is (token_table_size / 24). Different format versions
+define different numbers of tokens:
+
+  Version 3.0 (0x03FF): 39 entries, IDs 0-39 (936 bytes)
+  Version 3.1 (0x0301): 39 entries (936 bytes)
+  Version 3.2 (0x0302): 39 entries (936 bytes)
+  Version 3.3 (0x0303): 40 entries, adds "I18N text block" ID 40 (960 bytes)
+  Version 3.4 (0x0304): 43 entries, adds "page table" (41), "linked text
+                         table" (42), "item id table" (43) (1032 bytes)
+
+Standard Token IDs and Names:
+  ID  Name                    Description
+  --  ----                    -----------
+   0  pattern                 Fill pattern data
+   2  paragraph style         Text paragraph formatting
+   3  default tab             Default tab stop settings
+   4  maximum page size       Document page dimensions
+   5  arrow size              Arrow head dimensions
+   6  slide show script       Slide transition script
+   7  template name           Template reference name
+   8  circle                  Circle/ellipse drawing object
+   9  old arc                 Legacy arc object (pre-3.0)
+  10  rectangle               Rectangle drawing object
+  11  old text block          Legacy text block (pre-3.0)
+  12  3D viewer               3D viewport object
+  13  polygon                 Polygon/polyline drawing object
+  14  old group               Legacy group container (pre-3.0)
+  15  rounded rect            Rounded rectangle drawing object
+  16  new page                Page boundary marker
+  17  image                   Embedded raster image
+  18  text block              Formatted text block object
+  19  arc                     Arc/curve drawing object
+  20  note page               Speaker notes page
+  21  tab count               Tab stop count
+  22  token table             Self-referencing token table ID
+  23  current item number     Last assigned item ID counter
+  24  audio clip              Embedded audio data
+  25  old templates           Legacy template data
+  26  encapsulated PS         Embedded PostScript object
+  27  current page number     Current page counter
+  28  templates               Template definitions
+  29  version string          Human-readable version string
+  30  page image              Page thumbnail image
+  31  back pointer            Backward reference offset
+  32  font name               Font definition with fallback
+  33  inventor 3D object      Open Inventor 3D scene data
+  34  live video frame        Video frame placeholder
+  35  Japanese text block     Japanese text (Kanji support)
+  36  version code            Machine-readable version numbers
+  37  group                   Group container for sub-objects
+  38  starting script         Script run on presentation start
+  39  ending script           Script run on presentation end
+  40  I18N text block         Internationalized text block (v3.3+)
+  41  page table              Page index/offset table (v3.4+)
+  42  linked text table       Linked text flow table (v3.4+)
+  43  item id table           Item ID cross-reference table (v3.4+)
+
+
+3. DATA RECORDS
+===============
+
+Data records follow immediately after the token table. Each record has:
+
+  Offset  Size     Description
+  ------  ----     -----------
+  0x00    4        uint32 - Token ID (references the token table)
+  0x04    4        uint32 - Data length in bytes (N)
+  0x08    N        Record data (format depends on token type)
+
+Records continue sequentially until the end of file or an end marker.
+
+End markers:
+  0xFFFFFFFF - Standard end of data / end of group
+  0xFFFFFFF0 - Alternate end marker (seen in some v3.4 files)
+
+
+4. PAGE SEPARATOR
+=================
+
+The literal 4-byte sequence 0x00 0x09 0x05 0x54 appears as a separator
+between the metadata records and the page/object section. This marker
+always appears exactly once before the first "new page" record.
+
+In version 3.4 files, a second occurrence may appear after all page objects,
+before the page table and back pointer records.
+
+The separator is NOT a standard record (it has no length field). Parsers
+must detect and skip these 4 bytes.
+
+
+5. METADATA RECORDS
+====================
+
+These records appear before the page separator and define document-level
+settings.
+
+5.1 Version Code (token 36, length 12)
+  +0x00  uint32  Major version (always 3)
+  +0x04  uint32  Minor version (0, 1, 2, 3, or 4)
+  +0x08  uint32  Flags (0xFFFFFFFF = no additional info)
+
+5.2 Version String (token 29, length 40 or 44)
+  Null-terminated ASCII string, e.g. "This file created by IRIS Showcase 3.3"
+  Padded with null bytes to the specified length.
+
+5.3 Maximum Page Size (token 4, length 8)
+  +0x00  uint16  Page width in points (1 point = 1/72 inch)
+  +0x02  uint16  Page height in points
+  +0x04  uint16  Unused (0)
+  +0x06  uint16  Unused (0)
+  Common sizes: 612x792 (US Letter), 576x360 (landscape), 702x144 (banner)
+
+5.4 Arrow Size (token 5, length 8)
+  +0x00  uint32  Arrow length in points
+  +0x04  uint32  Arrow width in points
+
+5.5 Paragraph Style (token 2, length 132 or 179)
+  +0x00  uint32  Style index
+  +0x04  float32 Font size
+  +0x08  float32 Line spacing
+  +0x0C  uint32  Number of tab stops
+  ...remaining bytes define tab positions, alignment, and indent values.
+  Each style is referenced by index from text block objects.
+  The 179-byte variant includes additional formatting options in later versions.
+
+5.6 Font Name (token 32, variable length)
+  +0x00  uint32  Font index (1-based)
+  +0x04  uint32  Font name length (N)
+  +0x08  N bytes Font name (ASCII, null-terminated), e.g. "Helvetica-Bold"
+  +0x08+N uint32 Fallback font name length (M)
+  +0x0C+N M bytes Fallback font name, e.g. "Helvetica"
+  Font names follow PostScript/X11 naming conventions.
+
+5.7 Current Item Number (token 23, length 4)
+  +0x00  uint32  Highest item ID assigned in the document
+
+5.8 Current Page Number (token 27, length 4)
+  +0x00  uint32  Total number of pages
+
+5.9 Slide Show Script (token 6, length 12)
+  +0x00  uint32  Transition type
+  +0x04  uint32  Duration (milliseconds)
+  +0x08  uint32  Flags
+
+5.10 Templates (token 28, variable length)
+  Contains template slide data including embedded objects.
+  Templates can be very large as they contain full page definitions.
+
+5.11 Pattern (token 0, length 0 or 36)
+  Fill pattern bitmap definition. Length 0 means default pattern.
+  When 36 bytes: 4-byte header + 32-byte 8x8 monochrome bitmap pattern.
+
+5.12 Starting/Ending Script (tokens 38/39, variable length)
+  Script commands executed at presentation start/end.
+
+5.13 Audio Clip (token 24, variable length)
+  Embedded audio data (PCM format).
+
+
+6. PAGE RECORDS
+===============
+
+6.1 New Page (token 16, length 32 or 82)
+
+Standard format (32 bytes):
+  +0x00  uint16  Page width in points
+  +0x02  uint16  Page height in points
+  +0x04  uint32  Flags (typically 0x00000010 = 16)
+  +0x08  uint32  Unknown (typically 1)
+  +0x0C  uint32  Page number (1-based)
+  +0x10  uint32  Flags/background reference
+  +0x14  uint32  Background ID or transition flags
+  +0x18  uint32  Reserved (0)
+  +0x1C  uint32  Reserved (0)
+
+Extended format (82 bytes):
+  Same as standard format for first 32 bytes, followed by 50 bytes of
+  additional page properties including background color, transition
+  effects, and timing data.
+
+6.2 Note Page (token 20, length 32)
+  Same structure as New Page but represents speaker notes.
+
+All drawing objects following a page record belong to that page, until
+the next page record or end marker.
+
+
+7. DRAWING OBJECT COMMON HEADER (64 bytes)
+===========================================
+
+All drawing objects (rectangle, circle, polygon, arc, text block, image,
+rounded rect, group, encapsulated PS) share a common 64-byte header:
+
+  Offset  Size    Type     Description
+  ------  ----    ----     -----------
+  +0x00   4       uint32   Line/outline color (0x00RRGGBB format)
+  +0x04   4       uint32   Fill color (0x00RRGGBB format, 0 = no fill)
+  +0x08   4       uint32   Item number (unique ID within document)
+  +0x0C   4       uint32   Flags (typically 0)
+  +0x10   4       uint32   Object type flags
+  +0x14   4       float32  X coordinate of corner point 1
+  +0x18   4       float32  Y coordinate of corner point 1
+  +0x1C   4       float32  X coordinate of corner point 2
+  +0x20   4       float32  Y coordinate of corner point 2
+  +0x24   4       float32  X coordinate of corner point 3
+  +0x28   4       float32  Y coordinate of corner point 3
+  +0x2C   1       uint8    Line width code (4=normal, 6=thick)
+  +0x2D   1       uint8    Line cap/join style
+  +0x2E   1       uint8    Arrow flags
+  +0x2F   1       uint8    Reserved
+  +0x30   4       uint32   Shape flags (bit 0: has stroke, bit 16: closed)
+  +0x34   4       uint32   Line style (dash pattern selector)
+  +0x38   4       float32  Line width in points
+  +0x3C   4       float32  Miter limit or extra parameter
+
+Color format: 0x00RRGGBB where RR=red (0-255), GG=green, BB=blue.
+A value of 0x00000000 means black or "no fill" depending on context.
+
+Coordinate system: Origin is at top-left of the page. X increases rightward,
+Y increases downward. Units are points (1/72 inch). The three corner points
+(p1, p2, p3) define a bounding parallelogram. The fourth corner is computed
+as p4 = p2 + (p3 - p1). For axis-aligned objects, p1 is top-left of the
+bounding box and p1==p2 in X or Y.
+
+
+8. RECTANGLE (token 10, length 128-202)
+========================================
+
+  +0x00   64      Common object header
+  +0x40   64      4x4 transformation matrix (16 float32 values, row-major):
+                  [sx   0    0   0 ]   sx = signed width
+                  [0    sy   0   0 ]   sy = signed height (negative = Y-flip)
+                  [0    0    1   0 ]
+                  [tx   ty   0   1 ]   tx,ty = translation (origin point)
+
+  The matrix encodes scaling, rotation, and translation. For axis-aligned
+  rectangles: sx = width, sy = -height, tx = left edge, ty = top edge.
+
+  Lengths > 128 indicate additional pattern fill data appended after the
+  matrix. The extra bytes store fill pattern references or gradient data.
+
+
+9. CIRCLE / ELLIPSE (token 8, length 128-182)
+===============================================
+
+Same structure as rectangle. The three corner points define the bounding
+parallelogram of the ellipse. For a circle, the parallelogram is a square.
+The transformation matrix contains equal width/height scaling for circles,
+or unequal for ellipses. Variable lengths indicate pattern fill data.
+
+
+10. POLYGON (token 13, length 124-5856)
+=========================================
+
+  +0x00   64      Common object header
+  +0x40   4       uint32 - Vertex count (N)
+  +0x44   4       uint32 - Polygon flags (0 = standard, other = extended)
+
+  Vertex data follows at +0x48. Each vertex occupies a variable number of
+  bytes depending on whether Bezier curve handles are present:
+
+  - Straight-line polygons: ~36 bytes per vertex
+    Per vertex:
+      +0x00  uint32  Vertex flags (0 = line, 1 = curve start)
+      +0x04  float32 X position
+      +0x08  float32 Y position
+      +0x0C  float32 Z position (always 0)
+      +0x10  uint32  Curve flags
+      +0x14  float32 Handle weight
+      +0x18  float32 Tangent dX
+      +0x1C  float32 Tangent dY
+      +0x20  float32 Handle scale
+
+  - Bezier curve polygons: ~44-56 bytes per vertex
+    Additional fields store incoming and outgoing Bezier control point
+    offsets relative to the vertex position.
+
+  The vertex data section ends with 4-12 bytes of trailing metadata
+  containing the polygon closing flag and edge count.
+
+  Special case: When the uint32 at +0x40 exceeds 10000 or appears as
+  0x00320001, the polygon uses an alternate encoding with packed int16
+  coordinates (seen in some v3.1/3.2 files).
+
+
+11. ARC (token 19, length 372)
+===============================
+
+  +0x00   64      Common object header
+  +0x40   64      4x4 transformation matrix (same format as rectangle)
+  +0x80   4       float32 - Start angle in radians
+  +0x84   4       float32 - End angle in radians
+  +0x88   4       uint32  - Number of arc segments for approximation
+  +0x8C   4       uint32  - Segment point count
+  +0x90   varies  Per-segment Bezier control point data:
+                  Each segment stores 4 control points as (x, y) float pairs.
+
+  The arc is defined by a center (from the transformation matrix translation),
+  radii (from the matrix scaling), and angular sweep (start/end angles).
+
+  Legacy arcs (token 9 "old arc") have a simpler format but same total size.
+
+
+12. ROUNDED RECTANGLE (token 15, length 444-537)
+==================================================
+
+  +0x00   64      Common object header
+  +0x40   64      4x4 transformation matrix
+  +0x80   4       float32 - Corner radius
+  +0x84   varies  Per-corner Bezier approximation data
+
+  Each rounded corner is defined by a quarter-circle Bezier curve.
+  The corner radius at +0x80 specifies the rounding amount in points.
+  Variable length accounts for different levels of curve approximation detail.
+
+
+13. TEXT BLOCK (token 18, variable length 144-5632)
+====================================================
+
+  +0x00   64      Common object header
+  +0x40   4       uint32  - Text rendering flags
+  +0x44   4       uint32  - Reserved (0)
+  +0x48   4       uint32  - Reserved (0)
+  +0x4C   4       uint32  - Paragraph style index reference
+  +0x50   64      4x4 transformation matrix
+  +0x90   varies  Formatted text stream (see section 14)
+
+  The bounding box from the common header defines the text frame.
+  Text flows within this frame using the referenced paragraph style.
+
+  I18N text blocks (token 40) and Japanese text blocks (token 35) use
+  the same structure but may contain multi-byte character encodings.
+
+
+14. TEXT FORMATTING STREAM
+===========================
+
+The text stream at offset +0x90 of a text block uses inline escape
+sequences for formatting. Text is stored as raw ASCII bytes with
+formatting commands embedded using the escape byte 0xFF.
+
+Format command structure:
+  0xFF 0x01 CMD LEN DATA[LEN]
+
+Where:
+  CMD  - Command type (1 byte)
+  LEN  - Data length (1 byte, 0-255)
+  DATA - Command-specific data (LEN bytes)
+
+Total bytes consumed per command: 4 + LEN
+
+Command types:
+  CMD=0x01  Font/style selection (LEN=3 typically)
+            DATA[0]: Font index (references font name record)
+            DATA[1]: Style flags (bit 0=bold, bit 1=italic, bit 5=underline)
+            DATA[2]: Size encoding (raw point size or scaled value)
+
+  CMD=0x03  Paragraph style change (LEN=varies)
+            Switches to a different paragraph style by index.
+
+  CMD=0x05  Tab/spacing control (LEN=2-4)
+            DATA[0]: Sub-command (0x04 = set font size)
+            DATA[1]: Value (font size in points when sub-cmd is 0x04)
+
+  CMD=0x06  Text color (LEN=12)
+            DATA[0-3]:  float32 - Red component (0.0 to 1.0)
+            DATA[4-7]:  float32 - Green component (0.0 to 1.0)
+            DATA[8-11]: float32 - Blue component (0.0 to 1.0)
+
+  CMD=0x07  Simple color change (LEN=2)
+            DATA[0-1]: Color index or packed color value
+
+  CMD=0x0D  Font switch (LEN=1-2)
+            DATA[0]: Font index
+
+Plain text bytes (0x20-0x7E) are rendered directly. Newlines may appear
+as 0x0A, 0x0D, or the sequence 0x0D 0x0A.
+
+
+15. IMAGE (token 17, variable length)
+======================================
+
+  +0x00   64      Common object header (defines position/size on page)
+  +0x40   24      Image-specific metadata:
+                  +0x40  uint32  Unknown flags
+                  +0x44  uint32  Unknown (0)
+                  +0x48  uint32  Image type flag (1 = embedded SGI)
+                  +0x4C  uint32  Reserved
+                  +0x50  uint32  Reserved
+                  +0x54  uint32  Reserved
+  +0x58   4       uint32  Image pixel width
+  +0x5C   4       uint32  Image pixel height
+  +0x60   4       uint32  SGI image data size in bytes
+  +0x64   varies  SGI image data (IRIS RGB format)
+
+  The embedded image uses the SGI RGB image format (also known as
+  "IRIS RGB" or ".rgb/.sgi" format):
+
+  SGI Image Header (512 bytes):
+    +0x00  uint16  Magic: 0x01DA
+    +0x02  uint8   Storage: 0=verbatim (uncompressed), 1=RLE compressed
+    +0x03  uint8   Bytes per channel: 1 (8-bit) or 2 (16-bit)
+    +0x04  uint16  Dimension: 1=scanline, 2=2D, 3=2D+channels
+    +0x06  uint16  X size (width in pixels)
+    +0x08  uint16  Y size (height in pixels)
+    +0x0A  uint16  Z size (number of channels: 1=gray, 3=RGB, 4=RGBA)
+    +0x0C  uint32  Minimum pixel value
+    +0x10  uint32  Maximum pixel value (typically 255)
+    +0x14  4       Unused
+    +0x18  80      Image name (null-terminated ASCII)
+    +0x68  uint32  Color map ID
+    +0x6C  404     Padding (zeros)
+
+  For RLE-compressed images (storage=1), a scanline offset table follows
+  the 512-byte header:
+    Offsets: (ysize * zsize) uint32 values - byte offset of each scanline
+    Lengths: (ysize * zsize) uint32 values - byte length of each scanline
+
+  RLE encoding per scanline:
+    Each byte encodes: bit 7 = literal flag, bits 0-6 = count
+    If literal flag set: next 'count' bytes are pixel values
+    If literal flag clear: next 1 byte is repeated 'count' times
+    Count of 0 marks end of scanline
+
+  Image data is stored channel-planar: all rows of channel 0, then
+  channel 1, etc. Rows are stored bottom-to-top (row 0 = bottom).
+
+
+16. GROUP (token 37, variable length)
+======================================
+
+  +0x00   64      Common object header (bounding box of all children)
+  +0x40   varies  Child records (same format as top-level records:
+                  token_id + length + data for each child object)
+  Last 4 bytes:   0xFFFFFFFF end marker
+
+  Groups can contain any drawing object type including nested groups.
+  The group's common header provides the aggregate bounding box of
+  all children. Children are rendered in order (first record = backmost).
+
+  Old groups (token 14) use the same structure.
+
+
+17. ENCAPSULATED POSTSCRIPT (token 26, variable length)
+========================================================
+
+  +0x00   64      Common object header
+  +0x40   varies  Embedded EPS data (PostScript program text)
+
+  The EPS content can be extracted and rendered by a PostScript interpreter.
+
+
+18. INVENTOR 3D OBJECT (token 33, variable length)
+====================================================
+
+  +0x00   64      Common object header
+  +0x40   varies  Open Inventor scene graph data (ASCII or binary IV format)
+
+  Contains 3D scene descriptions in SGI Open Inventor format.
+
+
+19. TRAILING RECORDS (v3.4+)
+=============================
+
+After the last page's objects, v3.4 files may contain:
+
+19.1 Page Table (token 41, variable length)
+  +0x00  uint32  Number of pages
+  +0x04  uint32  First page number
+  +0x08  uint32  Offset to first page record in file
+  Additional entries follow for each page (12 bytes each).
+
+19.2 Back Pointer (token 31, length 4)
+  +0x00  uint32  File offset pointing back to the page table record.
+
+19.3 Linked Text Table (token 42, variable length)
+  Links text blocks that flow text from one to the next.
+
+19.4 Item ID Table (token 43, variable length)
+  Cross-reference table mapping item IDs to file offsets.
+
+These records are preceded by a second page separator (0x00090554).
+
+
+20. FILE SIZE AND LIMITS
+=========================
+
+Observed file sizes range from 619 bytes (token table only, no pages)
+to over 99 MB (large presentations with many embedded images).
+
+Page counts range from 1 to over 40 pages per file.
+Object counts can exceed 1000 per page in complex drawings.
+Polygon vertex counts range from 3 to 294 vertices.
+Image dimensions up to 1280x1024 pixels observed.

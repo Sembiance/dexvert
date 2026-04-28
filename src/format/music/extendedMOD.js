@@ -6,5 +6,6 @@ export class extendedMOD extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Extended_MOD";
 	ext          = [".emd"];
 	magic        = ["Extended MOD module", "Extended MOD sound data"];
-	unsupported  = true;
+	weakMagic    = true;
+	unsupported  = true;	// only 2 unique files on discmaster (a vibe coder was started though, see vibe/legacy/extendedMOD/)
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Vibe coded by Claude
 #
-# macOSInstallTome.py <inputFile> <outputDir>
+# macOSInstallTome.py [--macjapanese] <inputFile> <outputDir>
 #
 # Extracts files from a classic Mac OS Installer "Tome" archive
 # (MacBinary-II wrapped, type 'idcp' / creator 'kakc'). Each contained
@@ -23,10 +23,15 @@
 #   * A tome whose outer MacBinary data fork is empty is written
 #     back as its original MacBinary wrapper.
 #
+# Filenames inside the tome are auto-detected as either Mac Roman or
+# Macintosh Japanese (Shift-JIS). Use --macjapanese to force Japanese
+# decoding when auto-detection is insufficient.
+#
 # Every byte of every input file is accounted for by known structural
 # regions (MacBinary header, data fork, data fork padding, resource
 # fork, resource fork padding). The extractor asserts this at runtime.
 
+import argparse
 import os
 import sys
 import struct
@@ -480,11 +485,26 @@ def _make_macbinary(meta, dfork, rfork):
 
 # ===== Extractor entry point ==============================================
 
-def _sanitize(name_bytes):
+def _detect_encoding(entries):
+    """Auto-detect Shift-JIS filenames by looking for double-byte sequences."""
+    for e in entries:
+        name = e["name"]
+        i = 0
+        while i < len(name):
+            b = name[i]
+            if (0x81 <= b <= 0x9F or 0xE0 <= b <= 0xEF) and i + 1 < len(name):
+                trail = name[i + 1]
+                if 0x40 <= trail <= 0x7E or 0x80 <= trail <= 0xFC:
+                    return "x-mac-japanese"
+            i += 1
+    return "mac_roman"
+
+
+def _sanitize(name_bytes, encoding="mac_roman"):
     try:
-        s = name_bytes.decode("mac_roman")
+        s = name_bytes.decode(encoding)
     except Exception:
-        s = name_bytes.decode("latin-1", errors="replace")
+        s = name_bytes.decode("mac_roman", errors="replace")
     s = "".join("_" if ch in ("/", "\x00") else ch for ch in s)
     return s.strip() or "unnamed"
 
@@ -503,7 +523,7 @@ def _unique_path(output_dir, name):
         i += 1
 
 
-def extract_tome(input_path, output_dir):
+def extract_tome(input_path, output_dir, encoding=None):
     # Validate the whole file BEFORE creating the output directory. If
     # the input is not a MacOS Installer tome (bad MacBinary header, bad
     # body length, empty data fork, no 'kc' tome signature, ...) we raise
@@ -560,10 +580,12 @@ def extract_tome(input_path, output_dir):
         raise TomeError("tome data fork has gaps between known regions")
 
     # All validation passed; now it's safe to create the output dir.
+    if encoding is None:
+        encoding = _detect_encoding(entries)
     os.makedirs(output_dir, exist_ok=True)
 
     for entry in entries:
-        name = _sanitize(entry["name"])
+        name = _sanitize(entry["name"], encoding)
         df = extract_fork(
             data_fork, entry["dfork_off"], entry["dfork_stored"], entry["dfork_size"]
         )
@@ -598,10 +620,20 @@ def extract_tome(input_path, output_dir):
 
 
 def main():
-    if len(sys.argv) != 3:
-        print("usage: macOSInstallTome.py <inputFile> <outputDir>", file=sys.stderr)
-        sys.exit(2)
-    extract_tome(sys.argv[1], sys.argv[2])
+    parser = argparse.ArgumentParser(
+        description="Extract files from a classic Mac OS Installer Tome archive."
+    )
+    parser.add_argument("inputFile", help="MacBinary-wrapped tome file")
+    parser.add_argument("outputDir", help="directory to write extracted files")
+    parser.add_argument(
+        "--macjapanese",
+        action="store_true",
+        help="decode filenames as Macintosh Japanese (Shift-JIS) instead of "
+             "Mac Roman; without this flag, encoding is auto-detected",
+    )
+    args = parser.parse_args()
+    encoding = "x-mac-japanese" if args.macjapanese else None
+    extract_tome(args.inputFile, args.outputDir, encoding=encoding)
 
 
 if __name__ == "__main__":

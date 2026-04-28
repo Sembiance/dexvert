@@ -1,0 +1,224 @@
+Vibe coded by Codex
+
+ClariSSA Super Smooth Animation IFF format notes
+================================================
+
+Scope
+-----
+This describes the animation files in sample0 that begin with an IFF-like
+`FORM` whose type is `SSA `, `SSA5`, or `SSAd`. Files whose first child is
+`MDHD` are ClariSSA editor/project files, not playable animation bitstreams.
+
+All integer fields are big-endian unless this document says otherwise. IFF
+chunks are 2-byte padded. Several samples contain non-standard `FORM` size
+fields, so the decoder validates child chunks and accepts both size conventions
+seen in the set.
+
+Top-level container
+-------------------
+
+```
+FORM <u32 size> <formType>
+  ANIM <u32 size> <ANIM header>
+  FORM <u32 size> DLTA ...
+  ...
+  [FORM <u32 size> BEST ...]    only in SSAd
+```
+
+`formType`:
+
+* `SSA `: original ClariSSA animation.
+* `SSA5`: extended header variant, otherwise the same frame structure.
+* `SSAd`: stores every frame's BEST/DAST image data concatenated in one final
+  top-level `FORM BEST` pool.
+
+The top-level `FORM` size is not reliable in the sample corpus. Most files
+store fileLength - 20, some store fileLength - 12, and one sample stores a
+larger value than the physical file. Child chunk structure is authoritative.
+
+ANIM chunk
+----------
+
+The sampled `ANIM` payload lengths are 26, 44, and 92 bytes. Common fields:
+
+```
+u16 magic0       always 0x0104
+u16 magic1       always 0x0400
+u16 zero0        always 0
+u16 zero1        always 0
+u16 width        output pixel width
+u16 height       output pixel height
+u16 bitplanes    1..8 Amiga planar bitplanes
+u16 variant      0 or 2 in samples
+u16 mode         display-mode flags
+u16 zero2        always 0
+u16 frameCount   number of DLTA frames
+u16 ext0         extension/reserved
+u16 ext1         extension/reserved
+...              SSA5/SSAd extension words
+```
+
+The converter writes at 25 fps; sample names such as `*.ssa7sek` and
+`*.ssa12sek` match 175/25 and 300/25 seconds.
+
+Observed `mode` bits:
+
+* bit 0x0800: HAM display. HAM6 is 6 bitplanes; HAM8 is 8 bitplanes.
+* bit 0x8000: high-resolution Amiga display mode.
+* bit 0x1000: extended/AGA-like mode flag.
+* bit 0x0004: present on all sampled animations.
+
+DLTA frame FORM
+---------------
+
+Frame forms contain one of these chunk orders:
+
+```
+DSCR [COST] [BEST] [DAST] [SPST]
+dscr
+```
+
+`FORM DLTA` sizes have two variants in the samples:
+
+* normal IFF: size includes the `DLTA` form type;
+* old files: size excludes the `DLTA` form type.
+
+Some final frames have a stale size field; parsing to the next top-level
+`FORM` or EOF recovers the complete child chunks.
+
+DSCR chunk
+----------
+
+Normal `DSCR` is 6 bytes:
+
+```
+u8 method        1 = SSA opcode stream, 3 = RLE opcode stream
+u8 buffer        1 or 2 selects the target playback buffer; 3 updates both
+u8 flags0        always 0
+u8 flags1        always 0
+u16 ext          always 0 in inline SSA/SSA5 samples
+```
+
+`SSAd` uses a 10-byte `DSCR`:
+
+```
+u8 method
+u8 field
+u8 flags0
+u8 flags1
+u16 bestSize     byte count of this frame's BEST segment in the shared pool
+u32 dastSize     byte count of this frame's DAST segment in the shared pool
+```
+
+Lowercase `dscr` is a 4-byte hold/reference marker found in two older samples.
+It has no image chunks; the current frame buffer is displayed again.
+
+
+Playback buffering
+------------------
+
+The second DSCR byte selects which playback buffer receives the decoded delta.
+A value of 1 targets buffer 0, 2 targets buffer 1, and 3 initializes/updates
+both buffers. For buffer values 1 and 2, the target buffer is first copied from
+the previously displayed buffer, then the delta is applied, and finally the
+target buffer is displayed. This matches the double-buffered playback model and
+prevents stale two-frames-old pixels from remaining after movement.
+
+COST chunk
+----------
+
+Palette updates. A COST payload is one or more tables:
+
+```
+u8 tag           always 2 in samples
+u8 countMinus1
+repeat countMinus1+1 times:
+  u16 index
+  u8  zero
+  u8  red
+  u8  green
+  u8  blue
+```
+
+Many files carry two identical COST tables for the same frame. Palette index 0
+is often omitted and remains black until explicitly set.
+
+BEST and DAST chunks
+--------------------
+
+`BEST` is the opcode stream. `DAST` is a big-endian 16-bit word data stream.
+Decoded words are written into Amiga bitplanes in plane order. A row is word
+aligned:
+
+```
+rowBytes = ceil(width / 16) * 2
+planeBytes = rowBytes * height
+```
+
+SSA method 1 opcodes
+--------------------
+
+The sampled method-1 stream is byte-coded. Odd opcode values are invalid.
+
+* `00`: end current bitplane.
+* `02 xx`: skip `(xx + 1)` 16-bit words.
+* `04`: read one DAST word and skip that many 16-bit words.
+* `06 xx`: copy `xx * 2 + 2` DAST words.
+* `08 xx`: copy `xx * 2 + 3` DAST words.
+* `0A xx`: repeat one DAST word `xx * 2 + 2` times.
+* `0C xx`: repeat one DAST word `xx * 2 + 3` times.
+* `0E..1C`: copy 1..8 DAST words.
+* `1E..2A`: repeat one DAST word 2..8 times.
+* `2C..3A`: skip 1..8 16-bit words.
+* `3C..9C xx`: skip `xx` bytes, then copy 1..49 DAST words.
+* `9E..DC xx`: skip `xx` bytes, then repeat one DAST word 1..32 times.
+
+Method-1 frames sometimes contain a BEST chunk without DAST; that is a valid
+empty data stream.
+
+RLE method 3 opcodes
+--------------------
+
+The method-3 samples use a compact opcode stream with byte skip counts and
+DAST word copies/repeats:
+
+* `00`: either skip/end control or plane delimiter.
+* `01..EF xx`: skip `xx` bytes, then copy that many DAST words.
+* `F0..FF xx`: skip `xx` bytes, then repeat one DAST word `256-opcode` times.
+
+For older SSAd streams, a leading `00` can be a plane delimiter when the next
+DAST word is not a valid in-plane skip. The converter handles that variant.
+
+SPST chunk
+----------
+
+`SPST` is always 4 bytes in samples. It appears to store a small stream/status
+identifier and is not needed for pixel reconstruction.
+
+Pixel reconstruction
+--------------------
+
+Decoded plane words are Amiga bitplanes, MSB first within each byte. Plane 0 is
+the least significant pixel bit.
+
+For indexed modes, the pixel value indexes the current COST palette. For 6-plane
+non-HAM modes, unset palette entries 32..63 are treated as Extra-Half-Brite
+fallbacks of entries 0..31.
+
+For HAM modes:
+
+* HAM6 uses 6 planes: top 2 bits are command, low 4 bits are data.
+* HAM8 uses 8 planes: top 2 bits are command, low 6 bits are data.
+* command 0: direct palette lookup.
+* command 1: modify blue.
+* command 2: modify red.
+* command 3: modify green.
+
+The modified component is expanded to 8-bit RGB by `v*17` for HAM6 and
+`(v << 2) | (v >> 4)` for HAM8.
+
+
+Progressive AVI output
+----------------------
+
+ClariSSA playback is field based: the normal player displays alternating semi-frames sequentially on interlaced Amiga video. A progressive AVI/browser preview cannot present those CRT fields directly without combing/static. The converter therefore turns DSCR buffer values 1 and 2 into progressive frames by selecting the matching scanline parity from the decoded frame and line-doubling it to the declared frame height. This avoids weaving two different instants together while preserving the moving semi-frame.

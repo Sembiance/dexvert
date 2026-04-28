@@ -6,5 +6,5 @@ export class musicXSequence extends Format
 	website     = "http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/";
 	ext         = [".seq"];
 	magic       = ["Music-X Sequence"];
-	unsupported = true;
+	unsupported = true;	// not convinced this is music, I think it might just be some meta info
 }

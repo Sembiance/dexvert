@@ -1,0 +1,344 @@
+Vibe coded by Codex
+
+Piston Collage / PxTone Sample File Format Notes
+================================================
+
+Scope
+-----
+
+This specification describes every byte pattern used by the 100 files in
+sample0/.  The corpus contains 57 song/module files, 36 PTNOISE instrument
+files, and 7 PTVOICE instrument files.  It covers these magic/version values:
+
+* PTTUNE--20060115
+* PTTUNE--20060930
+* PTTUNE--20071119
+* PTCOLLAGE-060930
+* PTCOLLAGE-071119
+* PTVOICE-
+* PTNOISE-
+
+All multi-byte fixed-width integers and floats are little-endian.  "varint"
+means the PxTone 1-to-5-byte unsigned integer: each byte contributes 7 payload
+bits, bit 7 means another byte follows, and no value in these samples uses more
+than five bytes.
+
+
+Top-Level Song Files: .pttune and .ptcop
+----------------------------------------
+
+Song files start with a 16-byte ASCII version string.  Every version in this
+corpus then has:
+
+* uint16 exe_version
+* uint16 reserved, always zero
+
+The remainder is an 8-byte-tag chunk stream.  Most chunks store int32 size
+immediately after the tag.  The final chunk is:
+
+* tag "pxtoneND"
+* uint32 zero terminator size
+* EOF
+
+The renderer rejects any unknown tag, non-zero terminator size, or trailing byte.
+
+
+Song Chunk Tags
+---------------
+
+MasterV5
+
+* uint32 size, always 15
+* int16 beat_clock
+* int8 beat_num
+* float32 beat_tempo
+* int32 repeat_clock
+* int32 last_clock
+
+Event V5
+
+* int32 declared_size
+* int32 event_count
+* repeated event_count times:
+  * varint clock_delta
+  * uint8 unit_no
+  * uint8 event_kind
+  * varint value
+
+Important: several samples have a declared_size larger than the actual encoded
+event payload.  The original engine reads by event_count and ignores the declared
+size; the next 8 bytes after the last event are the next chunk tag.  Those bytes
+are therefore fully accounted for as a stale advisory size, not padding.
+
+evenMAST
+
+Old master-event chunk used by 20060115/20060930 files.
+
+* int32 declared_size
+* uint16 data_num, always 3
+* uint16 reserved, always zero in accepted data
+* uint32 event_count
+* repeated event_count times:
+  * varint status
+  * varint clock_delta
+  * varint value
+
+Valid statuses are old master event kinds: beat clock, tempo, beat count,
+repeat, and last.  As with Event V5, the engine reads by count rather than
+trusting declared_size.
+
+evenUNIT
+
+Old per-unit event chunk.
+
+* int32 declared_size
+* uint16 unit_index
+* uint16 event_kind
+* uint16 data_num, always 2
+* uint16 reserved, zero for 20060930 and later files
+* uint32 event_count
+* repeated event_count times:
+  * varint clock_delta
+  * varint value
+
+pxtnUNIT
+
+Old unit declaration.
+
+* int32 size, always 4
+* uint16 woice_type
+* uint16 group
+
+num UNIT
+
+New unit-count declaration.
+
+* int32 size, always 4
+* int16 unit_count
+* int16 reserved, always zero
+
+textNAME / textCOMM
+
+* int32 size
+* exactly size bytes of Shift-JIS/8-bit text payload; no required NUL
+
+effeDELA
+
+* int32 size, always 12
+* uint16 delay_unit
+* uint16 group
+* float32 rate
+* float32 frequency
+
+effeOVER
+
+* int32 size, always 16
+* uint16 reserved0, always zero
+* uint16 group
+* float32 cut
+* float32 amp
+* float32 reserved1, always zero
+
+assiWOIC
+
+* int32 size, always 20
+* uint16 woice_index
+* uint16 reserved, always zero
+* char[16] woice name
+
+assiUNIT
+
+* int32 size, always 20
+* uint16 unit_index
+* uint16 reserved, always zero
+* char[16] unit name
+
+
+Embedded Material Chunks
+------------------------
+
+matePCM
+
+* int32 size
+* uint16 old_unit_no
+* uint16 basic_key
+* uint32 voice_flags
+* uint16 channels, 1 or 2 in this corpus
+* uint16 bits_per_sample, 8 or 16 in this corpus
+* uint32 samples_per_second
+* float32 tuning
+* uint32 data_size
+* data_size bytes of PCM sample data
+
+size must equal 24 + data_size.
+
+matePTN
+
+* int32 size
+* uint16 old_unit_no
+* uint16 basic_key
+* uint32 voice_flags
+* float32 tuning
+* int32 revision, 0 or 1
+* embedded PTNOISE payload occupying the remaining bytes
+
+matePTV
+
+* int32 size
+* uint16 old_unit_no
+* uint16 reserved, always zero
+* float32 old_x3x_tuning
+* int32 ptvoice_payload_size
+* embedded PTVOICE payload occupying the remaining bytes
+
+size must equal 12 + ptvoice_payload_size.
+
+mateOGGV
+
+* int32 size
+* uint16 reserved_channel_field
+* uint16 basic_key
+* uint32 voice_flags
+* float32 tuning
+* int32 channels
+* int32 samples_per_second
+* int32 sample_count
+* int32 ogg_size
+* ogg_size bytes starting with "OggS"
+
+size must equal 28 + ogg_size.
+
+
+Event Kinds
+-----------
+
+The event kind byte/field uses these values:
+
+* 0 null
+* 1 note on, value is note duration in clocks
+* 2 key
+* 3 pan volume
+* 4 velocity
+* 5 volume
+* 6 portamento duration
+* 7 beat clock, old master only
+* 8 beat tempo, old master only
+* 9 beat number, old master only
+* 10 repeat point, old master only
+* 11 last point, old master only
+* 12 voice number
+* 13 group number
+* 14 tuning; value bits reinterpret as float32
+* 15 pan time
+
+
+PTVOICE Files
+-------------
+
+PTVOICE files are self-contained synthesized instrument definitions.
+
+Header:
+
+* char[8] "PTVOICE-"
+* int32 version; samples use 20060111 or older
+* int32 declared_total_bytes
+
+The original reader does not use declared_total_bytes for seeking.  One sample
+has a stale value that is one byte short; the parser accounts for this by
+parsing the full voice structure to EOF or to its containing matePTV boundary.
+
+Body:
+
+* varint x3x_basic_key
+* varint reserved0, always zero
+* varint reserved1, always zero
+* varint voice_count, 1 or 2 in this corpus
+
+Per voice:
+
+* varint basic_key
+* varint volume
+* varint pan
+* varint tuning_bits; reinterpret as float32
+* varint voice_flags
+* varint data_flags
+
+If data_flags has bit 0 (wave):
+
+* varint wave_type
+* type 0 coordinate wave:
+  * varint point_count
+  * varint resolution
+  * point_count pairs of uint8 x and int8 y
+* type 1 overtone wave:
+  * varint point_count
+  * point_count pairs of varint x and varint y
+
+If data_flags has bit 1 (envelope):
+
+* varint frames_per_second
+* varint head_point_count
+* varint body_point_count, always zero in accepted files
+* varint tail_point_count, always one in accepted files
+* head+body+tail pairs of varint x and varint y
+
+
+PTNOISE Files
+-------------
+
+PTNOISE files are procedural noise instruments.
+
+Header:
+
+* char[8] "PTNOISE-"
+* uint32 version; newest accepted version is 20120418
+* varint sample_count_at_44100
+* int8 unit_count, 0..4
+
+Per unit:
+
+* varint flags
+* if flags bit 0x0004:
+  * varint envelope_point_count, 0..3
+  * that many pairs of varint x and varint y
+* if flags bit 0x0008:
+  * int8 pan
+* if flags bit 0x0010: main oscillator
+* if flags bit 0x0020: frequency oscillator
+* if flags bit 0x0040: volume oscillator
+
+Each oscillator is:
+
+* varint wave_type, 0..15
+* varint reverse_flag
+* varint frequency_times_10
+* varint volume_times_10
+* varint offset_times_10
+
+Unknown flag bits outside the documented mask are rejected.
+
+
+Rendering Rules Used by pistonCollage.py
+----------------------------------------
+
+The Python converter expects a compiled helper named `pxtone_render` in the
+same directory as `pistonCollage.py`.  Build or refresh it with:
+
+    ./build_pxtone_render.sh
+
+The build script compiles `pistonCollage_support/render.cpp` plus the vendored
+PxTone engine sources and places the resulting executable at `./pxtone_render`.
+
+For .ptcop/.pttune files, the converter renders the complete non-looped song
+from sample 0 to the engine's adjusted last measure at stereo 44,100 Hz,
+16-bit PCM.  This matches the PxTone "Moo" engine timing:
+
+samples_per_clock = 60 * sample_rate / (beat_tempo * beat_clock)
+
+For standalone .ptvoice and .ptnoise files, there is no song timeline.  The
+converter renders a deterministic three-second preview: a two-second default
+key note plus a one-second release window, stereo 44,100 Hz, 16-bit PCM.
+
+Unsupported versions, unknown tags, unknown flags, malformed sizes, malformed
+varints, and trailing unaccounted bytes are rejected before any output WAV is
+committed.

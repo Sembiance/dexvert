@@ -7,5 +7,5 @@ export class astoundPresentation extends Format
 	ext            = [".asd", ".smp", ".asv"];
 	forbidExtMatch = true;
 	magic          = ["Astound Presentation document"];
-	unsupported    = true;
+	unsupported    = true;	// only 17 unique files on discmaster
 }

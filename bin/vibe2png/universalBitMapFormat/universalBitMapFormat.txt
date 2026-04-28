@@ -1,0 +1,176 @@
+Universal BitMap Format (UBF92a) Specification
+===============================================
+
+Designed by Bonijoni and Mr.Spock, circa 1992.
+Format version identifier: "UBF92a"
+
+UBF is a bitmap font format from the DOS BBS/demo scene era. Each file
+stores a set of character glyphs as indexed-color bitmaps with an optional
+256-color VGA palette and an optional character mapping table. Pixel data
+may be stored raw or compressed with LZHUF (LZSS + adaptive Huffman).
+
+
+1. File Structure Overview
+--------------------------
+
+  +------------------+
+  | Header (10 bytes)|
+  +------------------+
+  | Conversion Table |  (variable, present if flags bit 0 is set)
+  +------------------+
+  | Palette          |  (768 bytes, present if flags bit 1 is set)
+  +------------------+
+  | Pixel Data       |  (to EOF, raw or LZHUF-compressed)
+  +------------------+
+
+
+2. Header (10 bytes)
+--------------------
+
+  Offset  Size  Type    Description
+  ------  ----  ------  ----------------------------------------
+  0       6     char[]  Magic identifier: ASCII "UBF92a"
+  6       1     uint8   Number of character glyphs in the file
+  7       1     uint8   Width of each character glyph in pixels
+  8       1     uint8   Height of each character glyph in pixels
+  9       1     uint8   Flags bitfield (see below)
+
+  Flags byte (offset 9):
+    Bit 0 (0x01) - Conversion table present
+    Bit 1 (0x02) - Palette present
+    Bit 2 (0x04) - RLE compression (reserved, never used)
+    Bit 3 (0x08) - LZHUF compression
+
+  All observed files use flags 0x0B (conv + palette + LZHUF) or
+  0x0A (palette + LZHUF, no conversion table). Bits 4-7 are unused.
+
+
+3. Conversion Table (variable length)
+--------------------------------------
+
+  Present only when flags bit 0 is set.
+
+  Offset: immediately after the header (byte 10).
+  Length: NumChars bytes (one byte per glyph).
+
+  Each byte maps a glyph index to the character code it represents.
+  Entry 0 is the character code for glyph 0, entry 1 for glyph 1, etc.
+  Values are typically printable ASCII (A-Z, 0-9, punctuation) but may
+  include values above 0x7F for extended characters.
+
+  When absent, glyphs have no character mapping and are referenced by
+  index alone.
+
+
+4. Palette (768 bytes)
+-----------------------
+
+  Present only when flags bit 1 is set.
+
+  Offset: immediately after the conversion table (or after the header
+  if no conversion table).
+  Length: exactly 768 bytes (256 entries x 3 bytes each).
+
+  Each entry is 3 bytes: Red, Green, Blue, in VGA DAC 6-bit format.
+  Component values range from 0 to 63. To convert to standard 8-bit
+  color: output = (value << 2) | (value >> 4), which maps 0->0 and
+  63->255.
+
+  The palette defines 256 indexed colors. Each pixel in the glyph
+  data is an index (0-255) into this palette.
+
+
+5. Pixel Data
+--------------
+
+  Offset: immediately after the palette (or after the conversion table
+  if no palette, or after the header if neither is present).
+  Length: extends to end of file.
+
+  The decompressed pixel data is exactly NumChars * Width * Height
+  bytes. Each byte is a palette index (0-255).
+
+  5a. Storage Order (column-major per glyph)
+
+    Glyphs are stored sequentially, glyph 0 first through glyph
+    NumChars-1 last. Within each glyph, pixels are stored in
+    COLUMN-MAJOR order:
+
+      For each column X from 0 to Width-1:
+        For each row Y from 0 to Height-1:
+          One byte: palette index at pixel (X, Y)
+
+    The byte offset for pixel (X, Y) within glyph G is:
+      G * Width * Height + X * Height + Y
+
+    This column-major order matches the VGA rendering loop in the
+    original viewer (UBFVIEW.PAS), which copies pixels down each
+    column of the 320-pixel-wide Mode 13h screen buffer.
+
+  5b. LZHUF Compression (flags bit 3)
+
+    When flags bit 3 is set, the pixel data region contains a LZHUF
+    compressed stream. LZHUF combines LZSS (Lempel-Ziv-Storer-Szymanski)
+    sliding window compression with adaptive Huffman coding.
+
+    The compressed stream begins with a 4-byte little-endian uint32
+    giving the original (decompressed) size. This value must equal
+    NumChars * Width * Height.
+
+    LZHUF parameters used by UBF:
+      - Ring buffer size (N):        256 bytes
+      - Look-ahead buffer size (F):   60 bytes
+      - Match threshold:               2 (minimum match length = 3)
+      - Huffman alphabet size:       314 symbols (256 literals +
+                                       58 length codes)
+      - Huffman tree size (T):       627 nodes
+      - Max cumulative frequency: 0x8000 (triggers tree reconstruction)
+
+    The algorithm is the standard LZHUF implementation by Haruhiko
+    Okumura (LZSS) and Haruyasu Yoshizaki (adaptive Huffman), as
+    published in LZHUF.C (English version 1.0, 1988) and ported to
+    Turbo Pascal by Peter Sawatzki.
+
+    Decoding overview:
+      1. Read 4-byte LE original size
+      2. Initialize ring buffer (first N-F bytes = 0x20 space, rest = 0)
+      3. Initialize adaptive Huffman tree (uniform frequencies)
+      4. Repeat until original size bytes produced:
+         a. Decode a Huffman symbol
+         b. If symbol < 256: emit as literal byte
+         c. If symbol >= 256: interpret as length code, decode a
+            position from the ring buffer, copy match
+
+  5c. Raw Data (no compression flags set)
+
+    When neither bit 2 nor bit 3 of the flags byte is set, the pixel
+    data is stored uncompressed. The region from after the palette
+    to end of file must be exactly NumChars * Width * Height bytes.
+
+
+6. Byte Accounting
+-------------------
+
+  Every byte in a valid UBF file is accounted for:
+
+    FileSize = 10
+             + (NumChars if flags bit 0 else 0)
+             + (768 if flags bit 1 else 0)
+             + CompressedDataSize
+
+  The compressed data (when LZHUF) includes the 4-byte original size
+  prefix plus the compressed bitstream. The bitstream's final byte may
+  contain unused padding bits.
+
+
+7. Rendering as a Font Atlas
+-----------------------------
+
+  To display the complete font, arrange all glyphs in a grid. The
+  original UBFVIEW.PAS places floor(319 / Width) glyphs per row on a
+  320-pixel-wide VGA Mode 13h screen, with 1 pixel vertical spacing
+  between rows.
+
+  The conversion table (when present) indicates which character each
+  glyph represents. Glyph 0 corresponds to conv_table[0], glyph 1
+  to conv_table[1], and so on.

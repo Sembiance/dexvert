@@ -1,0 +1,160 @@
+Microsoft Agent Character file format notes
+Vibe coded by Codex
+
+Scope
+This extractor handles the Microsoft Agent v2-era single-file character
+container used by .acs and .acg samples with signature 0xABCDABC3, and
+the ACF core-character container with signature 0xABCDABC4. The sample set
+also contains five prefix/truncated ACS files; their first four bytes match
+ACS, but required header locators point beyond EOF, so they are not complete
+files and are rejected before output is written.
+
+Additional validation
+The sample1 directory contains two ZIP archives plus 52 .acs character files
+inside expanded archive folders. The ZIP archives are ordinary PKZIP files,
+not Microsoft Agent character containers. All 52 sample1 .acs files are
+complete ACS containers and are fully handled by the same byte-accounted ACS
+structures described below; no additional sample1-only fields were needed.
+
+Integer and string encoding
+All multi-byte integers are little-endian. BOOL is one byte. GUID uses the
+standard Windows binary GUID layout: u32, u16, u16, then eight bytes. ACS
+strings are u32 character count followed by UTF-16LE characters and, when
+the count is nonzero, a UTF-16LE NUL terminator that is not included in the
+count. ACF strings are u32 character count followed by UTF-16LE characters
+with no terminator.
+
+Agent compression
+Compressed byte streams begin with 0x00 and end with six 0xff sentinel bytes.
+The sentinel bytes remain part of the readable bit stream because the 20-bit
+end marker can straddle them. Bits are consumed least-significant bit first
+within each byte. A sequence starts with a one-bit kind: 0 means the next
+8 bits are one literal byte; 1 means a back-reference. Back-references start
+with a unary prefix of up to three 1 bits, selecting offset bit widths of
+6, 9, 12, or 20. The decoded offset adds 1, 65, 577, or 4673 respectively.
+A 20-bit raw offset of 0xfffff is the end marker. A 20-bit non-terminal
+offset also adds one to the initial copy length. Copy length starts at 2,
+then adds the numeric value represented by the run of length-prefix 1 bits,
+then skips the terminating 0 bit, then adds that many following value bits.
+Bytes are copied from the already-decoded output and may overlap.
+
+Sized blocks
+DATABLOCK is u32 byte size followed by that many bytes. ACS image pixel data
+uses DATABLOCK, with an additional compression BOOL immediately before it.
+COMPRESSED blocks used by ACS image regions store u32 compressed_size then
+u32 uncompressed_size; if compressed_size is zero, the following bytes are
+uncompressed. ACF character data in the samples stores the two size fields in
+the opposite order: u32 uncompressed_size then u32 compressed_size.
+
+ACS file layout
+An ACS/ACG file starts with:
+u32 signature = 0xABCDABC3
+ACSLOCATOR character_info
+ACSLOCATOR animation_list
+ACSLOCATOR image_list
+ACSLOCATOR audio_list
+
+ACSLOCATOR is u32 absolute byte offset from BOF and u32 byte size. Every
+locator must lie wholly inside the file. The union of the header, the four
+top-level locator ranges, and all nested resource locators must cover the
+entire file with no gaps or overlaps. The character_info range contains the
+character core followed immediately by the localized-info list pointed to by
+the localized_info locator in the core.
+
+ACS character core
+u16 minor_version
+u16 major_version
+ACSLOCATOR localized_info
+GUID character_id
+u16 character_width
+u16 character_height
+u8 transparent_palette_index
+u32 flags
+u16 animation_set_major_version
+u16 animation_set_minor_version
+optional VOICEINFO when flags has 0x20
+optional BALLOONINFO when flags has 0x200
+u32 palette_count followed by palette_count RGBQUADs
+u8 tray_icon_enabled
+optional TRAYICON
+u16 state_count followed by STATEINFO entries
+
+RGBQUAD is red, green, blue, reserved. VOICEINFO is GUID TTS engine, GUID
+TTS mode, u32 speed, u16 pitch, u8 extra_data_present, then optional u16
+language_id, string dialect, u16 gender, u16 age, string style. BALLOONINFO
+is u8 text_lines, u8 chars_per_line, three RGBQUAD colors, string font_name,
+i32 font_height, i32 font_weight, u8 italicized, u8 unknown. TRAYICON is
+u32 monochrome ICONIMAGE size plus bytes, then u32 color ICONIMAGE size plus
+bytes. STATEINFO is string state_name and a u16-counted list of strings.
+LOCALIZEDINFO is u16 count, then u16 language_id and three strings for name,
+description, and extra_data.
+
+ACS animation list and animation data
+The top-level animation list is u32 count followed by entries of string
+animation_name and ACSLOCATOR animation_data. Each animation_data range is:
+string animation_name
+u8 transition_type
+string return_animation
+u16 frame_count
+ACSFRAMEINFO entries
+
+Frame data is u16 image_ref_count followed by image refs, then u16 audio_index,
+u16 duration_centiseconds, i16 exit_frame_index, u8 branch_count with branch
+entries, and u8 overlay_count with overlay entries. Image refs are u32 image
+index, i16 x, i16 y. Branch entries are u16 frame_index and u16 probability.
+Overlay entries for major_version >= 2 are u8 overlay_type, u8 replace_top,
+u16 image_index, u8 unknown, u8 region_present, i16 x, i16 y, u16 width_half,
+u16 height_half, and optional DATABLOCK region. Overlay entries for the
+major_version 1 sample omit replace_top and are otherwise the same. Audio
+index 0xffff means no audio. Frames are rendered linearly in file order; branch
+metadata is extracted but not used to choose alternate playback paths.
+
+ACS image list and image data
+The top-level image list is u32 count followed by entries of ACSLOCATOR
+image_data and u32 checksum. A normal image_data range is:
+u8 unknown
+u16 width
+u16 height
+u8 pixel_data_is_compressed
+DATABLOCK pixel_data
+COMPRESSED region_data
+
+Pixel data is 8-bit palette-indexed DIB bits with one plane and no bitmap
+compression after Agent decompression. Row stride is (width + 3) & ~3. Rows
+are stored bottom-up. The transparent palette index from the character core
+is used as alpha 0 when exporting PNGs and rendering animation frames. Some
+complete samples contain one-byte image slots whose only byte is 0x00; these
+are empty image-table placeholders and are extracted as empty raw/region files.
+
+ACS audio list and audio data
+The top-level audio list is u32 count followed by entries of ACSLOCATOR
+audio_data and u32 checksum. Non-empty audio_data ranges are complete RIFF
+WAVE files. The extractor writes each block as audio_NNNN.wav. AVI rendering
+places each referenced WAVE at the start time of the frame that references it.
+
+ACF file layout
+An ACF file starts with u32 signature 0xABCDABC4, then compressed character
+data with u32 uncompressed_size, u32 compressed_size, and compressed bytes.
+The decompressed ACF character data is:
+u16 minor_version
+u16 major_version
+u16 animation_count
+animation refs: string name, string ACA filename, string return animation,
+  u32 ACA checksum
+GUID character_id
+LOCALIZEDINFO list inline
+u16 character_width
+u16 character_height
+u8 transparent_palette_index
+u32 flags
+u16 animation_set_major_version
+u16 animation_set_minor_version
+optional VOICEINFO when flags has 0x20
+optional BALLOONINFO when flags has 0x200
+palette list
+optional tray icon
+state list
+
+ACF files do not contain frame images, audio, or animation frame timelines.
+They reference external ACA files by name and checksum; no complete ACA files
+were present in sample0.

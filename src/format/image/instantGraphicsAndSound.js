@@ -11,6 +11,6 @@ export class instantGraphicsAndSound extends Format
 	magic       = ["Instant Graphics and Sound", ...TEXT_MAGIC];
 	weakMagic   = true;
 	idCheck     = async inputFile => (await fileUtil.readFileBytes(inputFile.absolute, Math.min(xu.KB, inputFile.size))).indexOfX([0x47, 0x23])!==-1;
-	unsupported = true;
+	unsupported = true;	// only 46 unique files on discmaster: https://discmaster.textfiles.com/search?detection=4723%3F%3F3e*&dedup=dedup
 	notes       = "No known converter yet. Seen a recent resurgence in interest in 2024";
 }

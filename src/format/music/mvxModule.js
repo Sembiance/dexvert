@@ -5,5 +5,5 @@ export class mvxModule extends Format
 	name        = "MVX Module";
 	ext         = [".mvm"];
 	magic       = ["MVX Module"];
-	unsupported = true;
+	unsupported = true;	// 0 files on discmaster
 }

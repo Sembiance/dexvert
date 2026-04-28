@@ -1,0 +1,263 @@
+Vibe coded by Codex
+
+Gold Disk Animation Works Movie / GDAW file format
+==================================================
+
+Scope
+-----
+This note documents every byte class found in the 100 files in sample0/.
+All sample files, including sample0/19404/reptile.exe, are GDAW files.
+
+The format is a strict, unpadded little-endian chunk container. There is no
+RIFF-style even-byte padding. Odd-sized chunks are followed immediately by the
+next chunk header.
+
+Root container
+--------------
+Offset  Size  Meaning
+0       4     ASCII "GDAW"
+4       4     uint32 little-endian payload size; always file_size - 8
+8..end        Uppercase chunk stream
+
+Every sample has exactly these top-level chunks in this order:
+
+VERS  version/copyright typed stream
+PREF  movie preferences and preview image typed stream
+RSRC  resource chunk stream
+SEEN  scene/timeline typed stream
+
+Uppercase chunk stream
+----------------------
+Uppercase chunk tags are four bytes in A-Z/0-9, followed by uint32 little-endian
+payload size and exactly that many payload bytes. They can contain either another
+uppercase chunk stream (GDAW root and RSRC) or a typed stream (resource bodies,
+SEEN/FRAM, PATH/PRTK/PTIN).
+
+Uppercase chunks observed in the sample set:
+
+Top/resource chunks:
+VERS PREF RSRC SEEN PALT BKGD ACTR SWND WIPE
+
+Timeline/nested chunks:
+FRAM TMEV BKEV SCEV CREV SNEV PTEV WPEV PLEV PATH PRTK PTIN MKEV DSEV CHTK EAEV
+
+Typed stream fields
+-------------------
+Lowercase or mixed-case four-byte tags encode their payload type in the first
+two bytes. The stream ends by consuming exactly the parent payload size; nndn is
+an end marker used by the application, not the container parser.
+
+Prefix  Payload
+ps      Pascal string: uint8 length, then length bytes, Latin-1 text
+fn      Pascal string filename: uint8 length, then length bytes, Latin-1 text
+wd      uint16 little-endian
+dw      uint32 little-endian
+pt      two int16 little-endian values: x, y
+rc      four int16 little-endian values: left, top, right, bottom
+by      uint8
+td      uint32 little-endian byte count, then raw data bytes
+tz      uint32 little-endian byte count, then DCL-fragmented compressed bytes
+nn      marker only, no payload bytes
+
+Typed tags observed in the sample set:
+
+byal bygt bypw byty
+dw2c dwbc dwbs dwcs dwdt dwfs dwrb dwtc dwti dwvr
+fnfn
+nnak nnan nndd nndn nnel nnen nnfd nngb nngd nnhi nnmg nnml nnmr nnon nnsh nnws nnwv nnww
+pscr psfn psmt psnm pspl pssn psst pstc pswn
+pt1b pt1r ptac ptan ptbs ptev ptex ptge ptgs ptgx ptmo ptof ptps ptpx ptrg ptsp ptsv
+rccr rctr
+tdbi tdbs tdds tdel tdgc tdie tdim tdlf tdof tdpe tdpi tdtx
+tzbi tzfd tzim tzpi
+wdal wdcn wdd< wdd> wddi wddo wddr wddy wdek wdfi wdfn wdfo wdft wdia wdif wdig wdik wdkd wdlp wdmc wdnc wdne wdnf wdni wdnl wdnn wdno wdnp wdnv wdnw wdpd wdpk wdsf wdsh wdst wdti wdto wdty wdvr wdwp wdxf wdzz
+
+DCL-compressed tz fields
+------------------------
+tz payloads are byte-counted containers holding one or more PKWARE Data
+Compression Library "implode" streams. Each fragment is:
+
+uint32 compressed_size
+uint32 uncompressed_size
+compressed_size bytes of DCL compressed data
+
+The concatenation of all expanded fragments is the field's decoded payload.
+The converter validates that every fragment expands to its declared size.
+
+Observed tz field meanings:
+
+tzpi  PREF preview BMP
+tzim  ACTR cel BMP
+tzfd  BKGD BMP or SWND WAV data
+tzbi  text actor 1-bit rendered glyph bitmap
+
+VERS
+----
+VERS is a typed stream. All samples contain:
+
+dwvr  version word pair stored as one uint32 in the stream bytes
+pscr  Pascal copyright string: "(C) Copyright 1992 Gold Disk Inc."
+dwdt  uint32 date/build value
+nndn  end marker
+
+PREF
+----
+PREF is a typed stream. All samples contain wdzz, tzpi, ptex, ptan, nndn.
+tzpi expands to a BMP preview image, usually 160x120 or 160x160. ptex and ptan
+are stored as points; ptan is often (-1,-1). ptex is the stored movie window
+size. When frame 1 selects a bitmap BKGD with BKEV, the playable stage uses that
+bitmap's decoded dimensions; this is how background-only 580-pixel-wide movies
+avoid being presented in the corner of a larger work area.
+
+RSRC resources
+--------------
+RSRC is an uppercase resource chunk stream. Resource names are stored with psnm.
+
+PALT:
+Palette resource. wdne is the palette entry count. tdpe is wdne entries of four
+bytes each: red, green, blue, flag. Indexed BMP/DIB payloads store palette bytes
+as blue, green, red, reserved, so the converter maps PALT entries into DIB byte
+order when an image names a palette with pspl.
+
+BKGD:
+Background resource. byty identifies the kind. byty='b' can contain tzfd BMP
+image data or a generated background. pspl names the palette. Generated gradient
+backgrounds use bygt, ptgs, ptge, ptgx, and tdgc. tdgc is a dword color list in
+the same COLORREF-style byte order as dwrb; ptgs/ptge give the gradient vector.
+BKEV chooses backgrounds by psnm or chooses a solid dwbc color. Bitmap
+backgrounds are drawn at their native decoded size at the origin; they are not
+stretched to the movie canvas.
+
+ACTR:
+Actor/sprite resource. Bitmap actors contain one or more cel blocks. Each cel is
+introduced with nnel and has ptex dimensions, ptps library position, ptrg
+registration/target point, tzim BMP data, and dwrb transparent RGB key. dwrb uses
+COLORREF-style byte order: rr gg bb flag in the file, or numerically
+0xFFBBGGRR where the high byte is a flag value in the samples. Some indexed
+actor cels have no pixels matching dwrb but have a single dominant non-gray
+border matte color; in those cases the border matte color is the transparent
+color used by the converter.
+
+Text actors use tdlf font-logical data, wdal alignment, dwtc text color, dwbc
+background color, rctr text rectangle, tdtx text bytes, dwbs bitmap byte count,
+tzbi 1-bit glyph bitmap, wdmc character count, rccr per-character rectangles,
+and wdwp/wdlp word/line position tables. Text cels do not carry ptrg in the
+samples; their path point is the center of the rendered tzbi bitmap.
+
+SWND:
+Sound resource. wdty identifies the sound type; psnm is the sound name. dwfs is
+the expanded file size when embedded data is present. tzfd expands to RIFF/WAVE
+audio for sampled sounds, or Standard MIDI data beginning with MThd for MIDI
+music resources. fnfn can store an original external filename; these references
+do not include embedded audio bytes in the GDAW file.
+
+WIPE:
+Scene transition resource. psnm is the transition name. wdnp/wdnv are transition
+parameters. tdbs and tdof are parameter blobs. The converter parses and validates
+these fields but does not render transition effects.
+
+SEEN timeline
+-------------
+SEEN starts with:
+
+psnm  movie name
+wdnf  frame count
+wdnn  object/event count
+nndn
+FRAM  event chunk stream
+
+Event chunks use wdif as the 1-based frame number where the event applies.
+
+TMEV:
+Timing event. wddy is the frame delay in 1/60-second ticks. The converter writes
+AVI at a constant 60 fps and repeats each logical Animation Works frame for the
+active wddy tick count, preserving variable timing changes within a movie.
+
+BKEV:
+Background event. psnm selects a BKGD resource. dwbc selects a solid color.
+byal is an alpha/display flag.
+
+SCEV, CREV:
+Scene/camera/crop metadata. They carry points and marker flags such as ptsp,
+ptev, ptsv, ptac, ptpx, nnhi, nnsh, nnan.
+
+SNEV:
+Sound event. wdty is the sound type and pssn names an SWND resource. The
+converter muxes embedded WAV SWND resources at their SNEV frame times. Embedded
+MIDI resources and external fnfn-only references are parsed and documented but
+not synthesized into the AVI audio track.
+
+PTEV:
+Palette event. psnm selects a palette name.
+
+WPEV:
+Wipe event. wddr is direction/duration metadata.
+
+PLEV:
+Playback/loop/end event. byty and wdft are control values. When wddy is present
+and positive, it is a per-frame hold time in 1/60-second ticks for the event's
+wdif frame. This is distinct from TMEV, which changes the default timing for
+subsequent frames. When byty is 108, psmt names an MKEV marker and wdcn is a
+repeat count for the inclusive marker..wdif frame range. A wdcn value of 65534
+is the sentinel used in the samples for "repeat until the active sound finishes".
+
+MKEV:
+Marker event. psnm stores a playback marker name used by PLEV loop events.
+
+DSEV, CHTK, EAEV:
+Additional application events. The samples' bytes are fully parsed by the typed
+field grammar. They are metadata/control events and are not needed for basic
+frame rasterization.
+
+PATH / PRTK / PTIN animation tracks
+-----------------------------------
+PATH contains PRTK chunks, each holding a PTIN track. PTIN fields used for video
+rasterization are:
+
+wdfn  1-based start frame
+psnm  track name
+psst  target actor/resource name
+ptbs  base x,y position
+ptof  offset point
+wdsh  shape/visibility metadata
+wdsf  start-frame metadata
+tdel  repeated 8-byte motion/cel record
+nndn
+
+Each tdel record is four little-endian int/word values:
+
+int16 x_offset
+int16 y_offset
+uint16 cel_number, 1-based
+uint16 visibility/control flag
+
+For frame F, record index F - wdfn is applied when present. The track is active
+only while that index is inside the tdel list; after the last tdel record the
+object is no longer drawn. The rendered position is ptbs + (x_offset, y_offset).
+That position is the actor/cel registration point, so the bitmap top-left is
+ptbs + offset - ptrg for bitmap cels, or ptbs + offset - (width/2,height/2) for
+text cels with no explicit ptrg. Active tracks are composited in increasing
+ptbs.y + y_offset order, with file order breaking ties. This is the depth order
+used by overlapping moving actors such as RACECAR's foreground/background cars.
+
+When a PATH track has no tdel record for the current source frame, that actor is
+not drawn for that frame. The renderer does not synthesize held actor poses
+after a track's explicit motion data ends.
+
+Rendering model implemented by animationWorks.py
+------------------------------------------------
+1. Strictly parse and validate the whole file before writing output.
+2. Decompress all tz fields and verify every DCL fragment's declared size.
+3. Decode BKGD BMP images and ACTR cel BMP images.
+4. Apply dwrb transparent color keys, or the dominant border matte color when
+   dwrb is absent from the cel pixels, to actor cels.
+5. Decode tzbi text masks for text actors.
+6. Render source frames 1..wdnf on a 60 Hz timebase, then expand the playback
+   timeline with MKEV/PLEV loops, TMEV.wddy timing, and same-frame PLEV.wddy
+   hold overrides.
+7. Apply BKEV backgrounds and PATH actor tracks using y-depth actor ordering.
+8. Mix embedded WAV SWND resources at SNEV event times.
+9. Encode the rendered RGB frames into an MJPEG AVI file with ffmpeg and mux
+   PCM audio when embedded WAV events are present.
+
+Transition effects are parsed and validated but not rendered.

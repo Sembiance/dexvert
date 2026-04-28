@@ -30,10 +30,6 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
 * Search dexvert for "unsupported" in src/format/<checkEachHere>/
   Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
   Families remaining:
-	image
-	music
-	video
-	other
 	document
 	font
 	poly
@@ -86,6 +82,7 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
   * Get text/postgreSQLDatabaseDump converting
   * Get document/fileMakerPro databases converting, utilize this which has ability to convert to sqlite:  https://github.com/evanmiller/fmptools
   * Get unsupported/microsoftISAMDatabase
+  * document/clarianDatabase
   * Look for other "database" unsupported.js files to add support for converting
 
 * Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase

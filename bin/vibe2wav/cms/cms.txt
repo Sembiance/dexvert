@@ -1,0 +1,144 @@
+Vibe coded by Codex
+
+Creative Music System .CMS song file format
+===========================================
+
+Scope
+-----
+
+This document describes the .CMS files in sample0/.  The format is the song
+format written by Creative Music System Composer 3.x for playback by PLAYER.EXE
+and CMSDRV.COM.  The files are not PCM audio; they are compact score data plus a
+32-entry instrument table for the two Philips SAA1099 chips on the C/MS/Game
+Blaster card.
+
+Container layout
+----------------
+
+All sample files are an integer number of 256-byte blocks.
+
+Block 0 is the file header.
+Block 1 is reserved and is all zero in the samples.
+Block 2 is the instrument table.
+Block 3 is reserved and is all zero in the samples.
+Blocks 4 and later are linked score blocks for up to 12 voices.
+
+Header, block 0
+---------------
+
+Offset  Size  Meaning
+0x00    2     Signature: ASCII "CM".
+0x02    12    Voice start block table.  Byte 0 is voice 1, byte 11 is voice 12.
+              A zero byte means the voice is absent.  Nonzero values are block
+              numbers and are always 4 or greater.
+0x0e    3     Reserved zero bytes.
+0x11    13    Channel allocation marker.  The samples use 01 followed by twelve
+              03 bytes.  The first byte appears to identify the first chip/side;
+              each 03 marks a normal enabled voice channel.
+0x1e    2     Reserved zero bytes.
+0x20    32    Title, CP437/ASCII, NUL padded.
+0x40    32    Composer, CP437/ASCII, NUL padded.
+0x60    32    Message, CP437/ASCII, NUL padded.
+0x80    3     Fixed header marker: 05 19 61 in every sample.  It resembles
+              packed default playback state, but it is not the same byte order
+              used by the in-stream tempo opcode.
+0x83    125   Reserved zero bytes.
+
+Instrument table, block 2
+-------------------------
+
+The 256-byte instrument table contains 32 entries of 8 bytes each.  Preset
+number N is stored at offset 0x200 + (N - 1) * 8.
+
+These 8-byte records are copied from PRESET.PST or from Composer's instrument
+definitions.  The player uses them as SAA1099 amplitude/envelope/noise shape
+parameters.  The converter preserves and validates every byte.  Preset number
+alone does not make a note a noise/percussion event; explicit W/X/Y notation
+does that in the sample corpus.
+
+Score block chains
+------------------
+
+Each score block is 256 bytes:
+
+Byte 0    Back-link byte.
+Bytes 1-254  Score payload bytes.
+Byte 255  Forward-link byte.
+
+The header gives the first block for each voice.  The forward-link byte gives
+the next block in that voice, or zero for the end of the chain.  No nonzero data
+block is shared by two voices in the samples.
+
+The back-link byte is zero for the first block in a voice and also for the first
+extension after an original start block.  For later continuation blocks it is
+the previous block number.  This rule accounts for every first byte in every
+score block in sample0/.
+
+Score payload bytecode
+----------------------
+
+Payload bytes are a compacted form of the Composer .THM notation.  NUL bytes are
+padding and are ignored.  Printable ASCII bytes are notation characters.  Binary
+opcodes are:
+
+01 kk       Set global key signature.  The tonic semitone is (kk - 5) mod 12,
+            so C is 05, A is 02, F is 0a.
+02 td       Set time signature.  The high nibble is numerator and the low nibble
+            is denominator, e.g. 24 for 2/4 and 34 for 3/4.
+03 hh ll    Set global tempo.  hhll is a big-endian timer divisor.  BPM is
+            approximately 2,982,600 / divisor.  Known values include
+            6119 = 120 BPM, 533a = 140 BPM, 48d3 = 160 BPM, 91a6 = 80 BPM.
+05 vv       Set voice volume, 0..255.
+06 ss       Set stereo mask.  Low nibble is left amplitude, high nibble is right
+            amplitude.  0f is left, f0 is right, ff is both.
+07 pp       Set preset/instrument, 1..32.
+09 xx       Articulation/effect marker generated from Composer's P/Q/q notation.
+            The samples mostly use 09 50 and 09 51.  It affects expression in
+            the original driver; the converter accepts it and treats it as a
+            non-timing marker.
+
+No other binary payload byte is needed for the sample0/ corpus after block link
+bytes are removed.
+
+Notation characters
+-------------------
+
+Bars (|) and spaces separate groups.  Notes are 1..7 in the current key's major
+scale.  0 is a rest.  W, X, Y and their lowercase forms are percussion/noise
+events.  Numeric notes remain pitched notes even when a drum-like preset is
+selected.  A..H select an absolute octave; D is the normal default.  + raises
+the current octave and _ lowers it.  # sharpens a scale degree, @ flattens it,
+and ~ returns it to natural.  Accidentals are tracked per scale degree and last
+until the next bar line, matching samples such as AXELF.CMS where "#4 ... 4"
+means repeated sharp-4 notes in the same bar.
+
+Duration marks are stored before the group they affect, even though .THM source
+writes them after notes.  No mark means 1 beat.  / means 1/2 beat, // means 1/4,
+/// means 1/8.  A dot means dotted duration.  A run of hyphens extends duration:
+- is 2 beats, -- is 3, --- is 4.  T marks the following group as triplets; the
+converter applies a 2/3 multiplier to the group's note duration.
+
+Global timing
+-------------
+
+Composer's S, T and key parameters are global even when the compiled bytecode
+stores the opcode in only one voice.  cms.py therefore first scans all voices in
+musical beats, builds global tempo/key timelines from opcodes 01 and 03, and
+then converts every voice from beats to seconds with the same timeline.  This is
+required for songs such as JOY.CMS, where the lead voice contains the initial
+tempo and the accompaniment voices omit it.
+
+Validation policy used by cms.py
+--------------------------------
+
+The converter fails before writing output unless all of these are true:
+
+* The file has the CM signature and a 256-byte block size.
+* Reserved blocks/bytes match the sample format.
+* Voice start blocks are valid and unique.
+* Every voice chain is acyclic, in range, and has the expected back-link bytes.
+* Every nonzero block after block 3 is owned by exactly one voice chain.
+* Every payload byte is either padding, a known opcode with enough arguments, or
+  printable notation.
+
+This accounts for every byte of every .CMS file in sample0/.

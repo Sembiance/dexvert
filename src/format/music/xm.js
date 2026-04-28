@@ -8,5 +8,5 @@ export class xm extends Format
 	magic        = ["Fasttracker II module sound data", "FastTracker 2 eXtended Module", "audio/x-xm", /^fmt\/323( |$)/];
 	idMeta       = ({macFileType, macFileCreator}) => macFileType==="XM  " && ["MOD!", "SNPL"].includes(macFileCreator);
 	metaProvider = ["musicInfo"];
-	converters   = ["xmp", "zxtune123"];
+	converters   = ["xmp", "zxtune123", "openmpt123"];
 }

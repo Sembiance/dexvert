@@ -5,5 +5,5 @@ export class shroomPlayer extends Format
 	name        = "ShroomPlayer Module";
 	ext         = [".sho"];
 	magic       = ["ShroomPlayer module"];
-	unsupported = true;
+	unsupported = true;	// only 6 unique files on discmaster
 }

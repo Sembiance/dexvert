@@ -1,0 +1,342 @@
+PMDraw (.PMD) File Format Specification
+========================================
+
+PMDraw was a presentation drawing/clipart application for IBM OS/2 Presentation
+Manager, produced circa 1992-1994. Files use the .PMD extension and contain
+vector graphics organized into pages (symbols).
+
+1. FILE SIGNATURE
+-----------------
+Offset  Size  Value
+0x00    8     Magic: "ACW RFW\0" (41 43 57 20 52 46 57 00)
+
+All valid PMD files begin with this 8-byte signature.
+
+2. FILE HEADER (0x00 - 0x5F)
+-----------------------------
+Offset  Size  Type     Field
+0x00    8     bytes    Magic signature "ACW RFW\0"
+0x08    2     uint16   Uninitialized memory (varies per file, not meaningful)
+0x0A    2     uint16   Format version:
+                         0x0017 = Version 23 (1992, earliest)
+                         0x0019 = Version 25 (1993, transitional)
+                         0x001A = Version 26 (1993-1994, latest)
+0x0C    2     uint16   Year (0x07C8=1992, 0x07C9=1993, 0x07CA=1994)
+0x0E    2     uint16   Month (1-12)
+0x10    2     uint16   Day (1-31)
+0x12    2     uint16   Hour (0-23)
+0x14    2     uint16   Minute (0-59)
+0x16    2     uint16   Format sub-type:
+                         0x000E = v17 format (no palette, no paths)
+                         0x0210 = v19/v1A format (has palette and paths)
+0x18    28    bytes    Application constants (identical in all files):
+                       4F 00 0E 00 52 00 3C 00 42 00 04 00 1A 00
+                       3A 00 88 00 3E 00 50 00 16 00 2E 00 42 00
+0x34    8     bytes    Residual application memory (not meaningful)
+0x3C    2     uint16   Font count (0-12)
+0x3E    2     uint16   Page/symbol count (1-90)
+0x40    32    bytes    Residual application memory (not meaningful)
+
+3. PAGE OFFSET TABLE (0x60)
+---------------------------
+Starts at offset 0x60. Contains page_count entries, each a signed 32-bit
+little-endian integer.
+
+  Positive values: absolute file offset to the page entry.
+  Negative values: the page is an Index/thumbnail page. The absolute value
+                   gives the file offset.
+
+4. FONT TABLE
+-------------
+Immediately follows the page offset table at offset 0x60 + page_count * 4.
+Contains font_count entries, each 32 bytes of null-padded ASCII text.
+
+Font names use OS/2 Presentation Manager face name conventions:
+  v17: "Helv", "Helv Bold", "Courier"
+  v19/v1A: "Helvetica", "Tms Rmn Bold Italic", etc.
+
+5. POST-FONT METADATA (16 bytes)
+---------------------------------
+Follows the font table. Contains echoed page count and display settings.
+
+Offset  Size  Field
++0      2     Page count (echoed)
++2      2     Reserved (0)
++4      4     Flags
++8      2     Zoom/display setting (common value: 25)
++10     6     Additional metadata
+
+6. COLOR PALETTE (v19/v1A only, 256 bytes)
+-------------------------------------------
+Present only when sub-type = 0x0210. Contains 64 entries of 4 bytes each
+in RGBX format (Red, Green, Blue, padding=0x00), organized as a 4x4x4 color
+cube (4 levels per channel: 0, 85, 170, 255).
+
+Entry 0 is always black (0,0,0) and entry 63 is always white (255,255,255).
+
+NOTE: In v19/v1A files, color index 63 (white) is used as the default
+foreground/outline color. This was designed for OS/2 PM's dark desktop
+background. When rendering on a white background, index 63 should be
+treated as black to preserve visibility.
+
+v17 files use an implicit 16-color CGA/EGA palette:
+  0: Black        4: Red          8: Dark Gray    12: Bright Red
+  1: Dark Blue    5: Magenta      9: Bright Blue  13: Bright Magenta
+  2: Green        6: Brown       10: Bright Green 14: Yellow
+  3: Cyan         7: Light Gray  11: Bright Cyan  15: White
+
+v17 and v19/v1A use different index numbering for the same visual colors.
+For example, "black outlines" use index 0 in v17 but index 63 in v1A.
+
+7. FILE PATHS (v19/v1A only)
+-----------------------------
+Two null-terminated ASCII strings containing the original save path:
+  1. Full path (e.g., "M:\PMDRAW\SAMPLES\CHESS.PMD")
+  2. Short path (e.g., "\CHESS.PMD")
+
+8. DOCUMENT SETTINGS (v1A only, ~228 bytes)
+---------------------------------------------
+Contains page dimension parameters, grid/snap settings, and two additional
+32-byte font name fields using TrueType names (e.g., "Times New Roman").
+
+9. PAGE ENTRY (79 bytes each)
+------------------------------
+Each page/symbol starts at the offset given in the page offset table.
+The entry is exactly 79 bytes:
+
+Offset  Size  Field
++0      var   Page name (null-terminated ASCII, e.g., "main", "Index", "Bishop-B")
++name   var   Page metadata:
+                - Page dimensions (width, height in mils)
+                - Drawing object references
+                - Bounding box data
+                - Internal memory pointers (from the application)
+                Total of 79 bytes including the name.
+
+Drawing records begin immediately after the 79-byte page entry.
+
+10. DRAWING RECORDS
+--------------------
+All drawing records share a common 12-byte header:
+
+Offset  Size  Type     Field
++0      2     uint16   Record type (see type table below)
++2      2     uint16   Record constant:
+                         0x0010 = standard (most records)
+                         0x0011 = variant (valid for any record type)
+                         0x0000 = variant (rare, seen in trailing records)
+                         0x0090 = variant (type 0x10 page definitions)
++4      4     uint32   Address 1 (internal memory pointer, not used for rendering)
++8      4     uint32   Address 2 (internal memory pointer, not used for rendering)
+
+10.1 STYLE BLOCK (12 bytes)
+Used by line, rectangle, ellipse, curve, and arc records:
+
+Offset  Size  Type     Field
++12     2     uint16   Background color (palette index)
++14     2     uint16   Foreground/outline color (palette index)
++16     2     uint16   Line style (0=solid)
++18     2     uint16   Fill background color (palette index)
++20     2     uint16   Fill foreground color (palette index)
++22     2     uint16   Fill pattern:
+                         0 = no fill (transparent)
+                         1 = solid fill
+                         2+ = pattern fills (hatching, crosshatch, etc.)
+
+NOTE: fill_pattern=0 means no fill regardless of fill_bg/fill_fg values.
+The fill_bg field is only meaningful when fill_pattern >= 2 (pattern fills).
+
+10.2 RECORD TYPE TABLE
+
+Type  Name         Fixed Size  Description
+0x0A  TEXT         variable    Text label with font, transform, and string
+0x0B  LINE          74        Line segment with cap decoration points
+0x0C  CURVE        variable   Polyline/polygon with variable point count
+0x0D  RECTANGLE    40         Rectangle defined by 4 corner points
+0x0E  ELLIPSE      72         Ellipse with center, corner, 2x2 transform, offset
+0x0F  ARC          ~150       Arc with transform (internal coord space)
+0x10  PAGE_DEF     76         Page/symbol definition (used on Index pages)
+0x12  PAGE_SEP     36         Page/symbol separator with bounding box
+
+10.3 TYPE 0x0B - LINE (74 bytes)
+
+Despite being labeled "polygon" in some documentation, this record
+represents a single line segment with decorative cap control points.
+
+Offset  Size  Content
++0      12    Record header
++12     12    Style block
++24     2     Line width (uint16)
++26     20    Start cap: 5 fillet control points (5 x uint16 x,y pairs)
++46     20    End cap: 5 fillet control points (5 x uint16 x,y pairs)
++66     8     Line endpoints: 2 coordinate points (2 x uint16 x,y pairs)
+
+The 5 start cap and 5 end cap control points define spline curves for
+line terminators (arrows, rounded caps, etc.) in the original application.
+Only the 2 endpoint coordinates at +66 define the actual visible line.
+
+The cap control points cluster around their respective endpoint and
+describe the shape of the line terminator decoration.
+
+10.4 TYPE 0x0D - RECTANGLE (40 bytes)
+
+Offset  Size  Content
++0      12    Record header
++12     12    Style block
++24     16    4 corner points (8 x uint16): x1,y1, x2,y2, x3,y3, x4,y4
+
+Corners are typically in order: top-left, top-right, bottom-right, bottom-left.
+
+10.5 TYPE 0x0E - ELLIPSE (72 bytes)
+
+Offset  Size  Content
++0      12    Record header
++12     12    Style block
++24     4     Center point (uint16 x, uint16 y)
++28     4     Corner point (uint16 x, uint16 y) - defines radii
++32     32    2x2 transform matrix (4 x IEEE 754 double, little-endian):
+              M[0][0], M[0][1], M[1][0], M[1][1]
+              Identity = [1.0, 0.0, 0.0, 1.0]
++64     8     Offset (int32 x, int32 y) - translation applied after transform
+
+The ellipse radii are: rx = |corner_x - center_x|, ry = |corner_y - center_y|.
+The actual position is center + offset.
+
+10.6 TYPE 0x0A - TEXT (variable size: 96 + string_length)
+
+Offset  Size  Content
++0      12    Record header
++12     2     Font index (uint16, indexes into font table)
++14     2     Font size in points (uint16)
++16     2     Color index (uint16, palette index)
++18     16    Font metrics and cell dimensions
++34     4     Bounding box data
++38     4     Additional metrics
++42     4     Unknown
++46     4     Font height metric (IEEE 754 float32)
++50     32    2x2 transform matrix (4 x IEEE 754 double)
++82     8     Position (int32 x, int32 y)
+--- String sub-record ---
++90     2     String length including null terminator (uint16)
++92     4     String address (internal pointer)
++96     N     Null-terminated ASCII text string
+
+10.7 TYPE 0x0C - CURVE (variable size: 80 + count * 4)
+
+Offset  Size  Content
++0      12    Record header
++12     12    Style block
++24     4     Flags (typically 0x00000000)
++28     2     Line width (uint16, application-internal value)
++30     20    Start cap fillet control points (5 x uint16 pairs)
++50     20    End cap fillet control points (5 x uint16 pairs)
++70     4     Separator marker (0x0000 followed by line_width echo)
++74     2     Path point count (uint16)
++76     4     Internal pointer (uint32)
++80     N     Path coordinate points (count x 4 bytes: uint16 x, uint16 y)
+
+The 5 start cap and 5 end cap control points define spline curves for
+line terminators (arrows, caps). The separator (0x0000 followed by the
+line width value) marks the transition from cap data to path data.
+
+Curves with fill_pattern=0 are open polylines (pen strokes).
+Curves with fill_pattern>=1 are closed filled polygons.
+
+Some curves contain multiple disjoint sub-paths concatenated into a
+single point list, with no explicit pen-up marker between them.
+
+Total record size = 80 + count * 4.
+
+10.8 TYPE 0x0F - ARC (~150 bytes, variable)
+
+Offset  Size  Content
++0      12    Record header
++12     12    Style block
++24     12    Arc definition: center point, reference point, arc endpoint
+              (3 x uint16 x,y pairs)
++36     58    Arc parameters (angles, GPI drawing orders, control data)
++94     32    2x2 transform matrix (4 x IEEE 754 double)
++126    8     Padding/reserved
++134    8     Additional transform data
++142    4     X position offset (int32)
++146    4     Y position offset (int32)
+
+The dominant size is 150 bytes (body = 138). Some arcs are smaller
+(64, 48 bytes) when they lack transform data.
+
+The arc coordinates are in an internal transformed coordinate space.
+Correct rendering requires applying the transform matrix and position
+offset to map into the page coordinate space.
+
+10.9 TYPE 0x10 - PAGE DEFINITION (76 bytes)
+
+Used on Index pages to reference other pages/symbols. Contains page
+reference data including the constant 0x2AF82134, a transform matrix,
+and bounding coordinates for the symbol's thumbnail placement.
+
+The record constant field may be 0x0010 or 0x0090.
+
+10.10 TYPE 0x12 - PAGE SEPARATOR (36 bytes)
+
+Offset  Size  Content
++0      12    Record header (constant field may be 0x0010 or 0x0011)
++12     4     Flags/record count
++16     4     Internal pointer
++20     16    Bounding box (4 corner coordinates as uint16 pairs)
+
+Marks the boundary of a page/symbol within the file.
+
+11. COORDINATE SYSTEM
+---------------------
+- All coordinates are unsigned 16-bit integers (0-65535).
+- Origin is bottom-left (OS/2 Presentation Manager convention).
+- Y axis increases upward (must be flipped for SVG/screen rendering).
+- Units are device-independent drawing units.
+- Typical page canvas: approximately 10000 x 10000 units.
+
+12. MULTI-PAGE STRUCTURE
+------------------------
+Files with multiple symbols contain:
+1. An optional Index page (negative offset) with thumbnail layout
+2. One or more content pages, each with:
+   - A 79-byte page entry (name + metadata)
+   - A PAGE_SEP record (type 0x12) as the first record
+   - Drawing records for that page's content
+3. Pages are stored sequentially; each page's records extend from
+   its offset + 79 to the next page's offset.
+
+13. FORMAT VERSION DIFFERENCES
+------------------------------
+v17 (0x17, sub-type 0x000E, year 1992):
+  - No embedded color palette (uses system default 16-color CGA/EGA)
+  - No file path strings
+  - No document settings section
+  - OS/2 GPI short font names ("Helv", "Courier")
+  - Color index 0 = black (default foreground)
+
+v19 (0x19, sub-type 0x0210, year 1993):
+  - Adds 64-entry RGBX color palette (256 bytes)
+  - Adds file path strings
+  - Transitional format with some uninitialized regions
+  - Color index 63 = white = default foreground (for dark backgrounds)
+
+v1A (0x1A, sub-type 0x0210, years 1993-1994):
+  - Same palette and path support as v19
+  - Adds document settings section (~228 bytes)
+  - Includes TrueType font name mapping
+  - Most complete format version
+  - Color index 63 = white = default foreground (for dark backgrounds)
+
+14. BYTE ACCOUNTING
+-------------------
+Every byte in a valid PMD file falls into one of:
+  - File header (0x00-0x5F): 96 bytes
+  - Page offset table: page_count * 4 bytes
+  - Font table: font_count * 32 bytes
+  - Post-font metadata: 16 bytes
+  - Color palette (v19/v1A): 256 bytes
+  - File paths (v19/v1A): variable
+  - Document settings (v1A): ~228 bytes
+  - Residual/uninitialized memory between header sections
+  - Page entries: 79 bytes each
+  - Drawing records: variable per record type

@@ -7,5 +7,5 @@ export class renoise extends Format
 	ext         = [".xrns", ".rns"];
 	magic       = ["Renoise module"];
 	notes       = "The XRNS format is just a ZIP file with samples inside as FLACS and a song XML. The archive/zip format will end up handling that. I tried using renoise program, but it doesn't have CLI conversion nor did it even work anyways to render a song. Sigh.";
-	unsupported = true;
+	unsupported = true;	// only 39 unique .rns and 16 unique xrns files on discmaster
 }

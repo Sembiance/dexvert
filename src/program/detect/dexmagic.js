@@ -183,6 +183,7 @@ const DEXMAGIC_CHECKS = {
 	"multiArtist"                     : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],
 	"NAPLPS Image"                    : [{offset : 0, match : [0x0C, 0x0E, 0x20, 0x4C, 0x6F, 0x21, 0x48, 0x40, 0x40, 0x49, 0x3E, 0x40, 0x3C, 0x40, 0x40, 0x40, 0x3E]}],
 	"Ninell Graphic"        		  : [{offset : 0, match : "NGF"}, {offset : 3, match : [0x01]}, {offset : 4, match : [0x00]}],
+	"Painter Classic RIFF"            : [{offset : 0, match : [0x00, 0x02, 0x00, 0x01, 0x01]}],
 	"PaintWorks"                      : [{offset : 54, match : "ANvisionA"}],
 	"PBMP Palette Image"              : [{offset : 0, match : "PBMP"}, {offset : 8, match : "head"}],
 	"PCR Image"                       : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x10]}],

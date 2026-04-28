@@ -6,5 +6,5 @@ export class pixie extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)";
 	ext         = [".pxi", ".pxs"];
 	magic       = ["Pixie vector graphic"];
-	unsupported = true;
+	unsupported = true;	// only 2 unique files on discmaster
 }

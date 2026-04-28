@@ -1,0 +1,361 @@
+# Windows FAX Cover Page File Format Specification
+# Vibe coded by Claude
+#
+# File extensions: .cpe, .cov, .CP, .bin
+# Date: 2026-04-22
+
+================================================================================
+OVERVIEW
+================================================================================
+
+Windows FAX Cover Page files use two format versions:
+
+  - VER003/VER004 (.cpe format) - MFC CArchive-serialized draw objects
+  - VER005 (.cov format) - Embedded EMF with object metadata
+
+All integers are little-endian. Coordinates are in hundredths of an inch
+(0.01") with origin at page center, Y axis pointing up.
+
+================================================================================
+VER003 HEADER (30 bytes, offset 0x00)
+================================================================================
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
+0x00    15    ASCII    Magic: "FAXCOVER-VER003"
+0x0F    1     BYTE     Always 0x9C
+0x10    2     WORD     Always 0x0087
+0x12    2     WORD     Reserved (0x0000)
+0x14    2     WORD     Paper type: 1=Letter, 9=A4
+0x16    2     WORD     Always 0x0001
+0x18    4     DWORD    Background COLORREF (0x00FFFFFF = white)
+0x1C    2     WORD     Object count
+0x1E    -     -        Object stream begins
+
+================================================================================
+VER004 HEADER (32 bytes, offset 0x00)
+================================================================================
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
+0x00    15    ASCII    Magic: "FAXCOVER-VER004"
+0x0F    1     BYTE     Always 0x9C
+0x10    2     WORD     Always 0x0087
+0x12    2     WORD     Reserved (0x0000)
+0x14    2     WORD     Scale percentage (always 100 = 0x0064)
+0x16    2     WORD     Paper type: 1=DMPAPER_LETTER, 9=DMPAPER_A4
+0x18    2     WORD     Always 0x0001
+0x1A    4     DWORD    Background COLORREF (0x00FFFFFF = white)
+0x1E    2     WORD     Object count
+0x20    -     -        Object stream begins
+
+Paper dimensions in hundredths of inch:
+
+  Letter (1):  850 x 1100  (8.50" x 11.00")
+  A4     (9):  827 x 1169  (8.27" x 11.69")
+
+================================================================================
+VER003/VER004 OBJECT STREAM (MFC CArchive)
+================================================================================
+
+Objects are serialized using MFC's CArchive class registry:
+
+  New class:      0xFFFF (WORD) + schema (WORD) + name_length (WORD)
+                  + name (ASCII bytes)
+                  Registers class at next_pid, object at next_pid+1
+
+  Back-reference: (class_pid | 0x8000) as WORD
+                  Creates object at next_pid
+
+PID counter starts at 1, increments by 2 for new classes, 1 for back-references.
+
+--------------------------------------------------------------------------------
+CDrawObj Base (52 bytes) - shared by all object types
+--------------------------------------------------------------------------------
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
++0x00   4     INT32    Bounding rect: left
++0x04   4     INT32    Bounding rect: top
++0x08   4     INT32    Bounding rect: right
++0x0C   4     INT32    Bounding rect: bottom
++0x10   2     WORD     bPen: 0=no outline, 1=draw outline
++0x12   4     DWORD    Pen style (0=SOLID, 5=NULL, 6=INSIDEFRAME)
++0x16   4     INT32    Pen width X
++0x1A   4     INT32    Pen width Y
++0x1E   4     DWORD    Pen COLORREF
++0x22   2     WORD     bBrush: 0=no fill, 1=fill
++0x24   4     DWORD    Brush style (0=SOLID, 1=NULL/HOLLOW)
++0x28   4     DWORD    Brush COLORREF
++0x2C   4     DWORD    Brush hatch pattern
++0x30   4     DWORD    Layer/z-order (1=normal, higher=background)
+
+--------------------------------------------------------------------------------
+CDrawRect (52 bytes total) - Rectangle
+--------------------------------------------------------------------------------
+
+Just the CDrawObj base. Bounding rect defines the rectangle.
+
+--------------------------------------------------------------------------------
+CDrawEllipse (52 bytes total) - Ellipse
+--------------------------------------------------------------------------------
+
+Just the CDrawObj base. Bounding rect defines the ellipse.
+
+--------------------------------------------------------------------------------
+CDrawLine (52 bytes total) - Line
+--------------------------------------------------------------------------------
+
+Just the CDrawObj base. Rect (left,top) and (right,bottom) define the two
+endpoints.
+
+--------------------------------------------------------------------------------
+CDrawRoundRect (60 bytes total) - Rounded Rectangle
+--------------------------------------------------------------------------------
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
++0x00   52    -        CDrawObj base
++0x34   4     DWORD    Corner ellipse width
++0x38   4     DWORD    Corner ellipse height
+
+--------------------------------------------------------------------------------
+CDrawText (variable size) - Static Text
+--------------------------------------------------------------------------------
+
+Offset  Size  Type       Description
+------  ----  ---------  --------------------------------------------------------
++0x00   52    -          CDrawObj base
++0x34   60    LOGFONT    Font information (see below)
++0x70   4     DWORD      Text alignment: 0=left, 1=center, 2=right
++0x74   var   MFC String Display text with trailing 0x0A newline
++var    4     DWORD      Padding (always 0)
++var    var   MFC String Display text without trailing newline
+
+--------------------------------------------------------------------------------
+LOGFONT Structure (60 bytes)
+--------------------------------------------------------------------------------
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
++0x00   4     INT32    lfHeight (negative = char height in logical units)
++0x04   4     INT32    lfWidth
++0x08   4     INT32    lfEscapement
++0x0C   4     INT32    lfOrientation
++0x10   4     INT32    lfWeight (200=ExtraLight, 400=Normal, 700=Bold)
++0x14   1     BYTE     lfItalic
++0x15   1     BYTE     lfUnderline
++0x16   1     BYTE     lfStrikeOut
++0x17   1     BYTE     lfCharSet (0=ANSI)
++0x18   1     BYTE     lfOutPrecision
++0x19   1     BYTE     lfClipPrecision
++0x1A   1     BYTE     lfQuality
++0x1B   1     BYTE     lfPitchAndFamily
++0x1C   32    char[]   lfFaceName (null-terminated ASCII, trailing bytes may be
+                        uninitialized)
+
+--------------------------------------------------------------------------------
+MFC String Encoding
+--------------------------------------------------------------------------------
+
+Length prefix:
+
+  If byte < 0xFF:    length = byte (1 byte prefix)
+  If byte == 0xFF:   read next WORD as length (3 byte prefix)
+  If that WORD == 0xFFFF: read next DWORD as length (7 byte prefix)
+
+Followed by `length` bytes of string data (single-byte encoded text).
+
+--------------------------------------------------------------------------------
+CFaxProp (CDrawText + 2 bytes) - Fax Property Field
+--------------------------------------------------------------------------------
+
+Same as CDrawText followed by a 2-byte property ID (WORD).
+
+Known Property IDs:
+
+  ID      Hex      Property
+  ------  -------  ------------------------------------------
+  2001    0x07D1   Recipient Name
+  2003    0x07D3   Recipient Fax Number
+  2005    0x07D5   Recipient's Company
+  2007    0x07D7   Recipient's Street Address
+  2011    0x07DB   Recipient's Department
+  2017    0x07E1   Recipient's Office Telephone #
+  2023    0x07E7   Sender Name
+  2025    0x07E9   Sender Fax #
+  2027    0x07EB   Sender's Company
+  2029    0x07ED   Sender's Address
+  2037    0x07F5   Sender's Home Telephone #
+  2039    0x07F7   Sender's Office Telephone #
+  2041    0x07F9   Subject
+  2043    0x07FB   Time Sent
+  2045    0x07FD   # of Pages
+  2047    0x07FF   # of Attachments
+  2063    0x080F   Note
+
+--------------------------------------------------------------------------------
+CDrawOleObj (variable size) - Embedded OLE Object
+--------------------------------------------------------------------------------
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
++0x00   52    -        CDrawObj base
++0x34   4     DWORD    OLE extent cx (logical width)
++0x38   4     DWORD    OLE extent cy (logical height)
++0x3C   var   -        CDrawItem sub-object (with MFC class tag)
+
+--------------------------------------------------------------------------------
+CDrawItem Sub-Object
+--------------------------------------------------------------------------------
+
+MFC class tag (new or back-ref) followed by:
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
++0x00   1     BYTE     Activation state (always 0)
++0x01   1     BYTE     Object created flag (always 1)
++0x02   2     WORD     User type (always 0)
++0x04   4     DWORD    Item number (unique per document)
++0x08   4     DWORD    Embedded flag (0 or 1)
++0x0C   2     WORD     Reserved (0)
++0x0E   4     DWORD    Format indicator (usually 1)
++0x12   4     DWORD    OLE compound file size in bytes
++0x16   var   bytes    OLE Compound Binary File
+                        (magic: D0 CF 11 E0 A1 B1 1A E1)
+
+The OLE compound file typically contains:
+
+  \x01Ole         OLE link data (20 bytes)
+  \x02OlePres000  Presentation data (WMF metafile)
+  CDraw           Optional embedded drawing data
+  Ole10Native     Optional OLE1 native data
+
+--------------------------------------------------------------------------------
+OlePres000 Format
+--------------------------------------------------------------------------------
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
+0       4     INT32    Clipboard format (-1 = self-describing)
+4       4     DWORD    Target device
+8       4     DWORD    Aspect
+12      4     INT32    Lindex
+16      4     INT32    Tymed
+20      4     DWORD    Unknown
+24      4     DWORD    Reserved
+28      4     DWORD    Width in HIMETRIC (0.01mm)
+32      4     DWORD    Height in HIMETRIC
+36      4     DWORD    Data size
+40      var   bytes    Presentation data (WMF starting with 01 00 09 00)
+
+After the OLE compound file, some files contain additional polygon data
+(INT16 x,y coordinate pairs) used for native rendering outlines. This data
+extends to the next MFC class tag or end of file.
+
+================================================================================
+VER005 HEADER (36 bytes, offset 0x00)
+================================================================================
+
+Offset  Size  Type     Description
+------  ----  -------  ----------------------------------------------------------
+0x00    15    ASCII    Magic: "FAXCOVER-VER005"
+0x0F    1     BYTE     Always 0x77 ('w')
+0x10    4     DWORD    Always 0x00000087
+0x14    4     DWORD    EMF data size in bytes
+0x18    4     DWORD    Number of cover page objects
+0x1C    4     DWORD    Page width in hundredths of inch
+0x20    4     DWORD    Page height in hundredths of inch
+0x24    -     -        EMF data begins
+
+================================================================================
+VER005 EMF SECTION (offset 0x24, length = field at 0x14)
+================================================================================
+
+Complete Enhanced Metafile (EMR_HEADER starts at 0x24). Uses MM_LOENGLISH
+mapping (1 unit = 0.01"). Window origin set to (-page_w/2, page_h/2) to
+center the coordinate system at the page center.
+
+EMF record types used:
+
+  EMR_HEADER              (1)
+  EMR_EOF                 (14)
+  EMR_SETMAPMODE          (17)
+  EMR_SETWINDOWORGEX      (10)
+  EMR_CREATEPEN           (38)
+  EMR_CREATEBRUSHINDIRECT (39)
+  EMR_SELECTOBJECT        (37)
+  EMR_DELETEOBJECT        (40)
+  EMR_RECTANGLE           (43)
+  EMR_ELLIPSE             (42)
+  EMR_MOVETOEX            (27)
+  EMR_LINETO              (54)
+  EMR_SETARCDIRECTION     (57)
+
+The EMF draws bounding boxes and decorative lines; it does NOT contain text
+rendering.
+
+================================================================================
+VER005 SECTION 1 - OBJECT RENDER DATA (after EMF)
+================================================================================
+
+Contains exactly [object_count] objects stored consecutively. Each object:
+
+Component    Size   Description
+-----------  -----  -----------------------------------------------------------
+Rect         16     Bounding rectangle: left, top, right, bottom (4 x INT32)
+Flags        8      Two DWORDs (typically both 0x00000000)
+LOGFONT      92     Windows LOGFONT with 32 WCHAR (UTF-16LE) face name
+Post-LOGFONT 8+     Type-dependent data (see below)
+
+Post-LOGFONT format:
+
+  Text object (first WORD == 0):
+    4 bytes zero + 4 bytes text_length + text_length bytes UTF-16LE text
+
+  Property object (first WORD != 0):
+    2 bytes property_id + 6 bytes padding
+
+The 92-byte LOGFONT uses the standard Windows LOGFONT structure but with
+lfFaceName as 32 WCHAR (64 bytes UTF-16LE) instead of the ASCII version
+used in VER003/VER004.
+
+================================================================================
+VER005 SECTION 2 - MFC CLASS ARCHIVE (after Section 1, to EOF)
+================================================================================
+
+Contains the full MFC CArchive data with detailed object definitions for the
+editor. Includes class names (CFaxProp, CDrawText, CDrawLine, CDrawRect,
+CDrawEllipse), bounding rectangles, extended properties, font info, and text
+strings encoded as FF FE FF <charcount> <UTF-16LE>.
+
+================================================================================
+COORDINATE SYSTEM
+================================================================================
+
+Both formats use the same coordinate system:
+
+  - Origin at page center (0, 0)
+  - X axis: positive = right, negative = left
+  - Y axis: positive = up, negative = down
+  - Units: hundredths of an inch (0.01")
+  - Font heights (lfHeight): negative values indicate character height in the
+    same units
+
+================================================================================
+COLORREF FORMAT
+================================================================================
+
+  0x00BBGGRR (blue, green, red as individual bytes)
+
+================================================================================
+STOCK GDI OBJECTS (used in EMF)
+================================================================================
+
+  Handle        Name          Description
+  ----------    -----------   -------------------------
+  0x80000000    WHITE_BRUSH   Solid white fill
+  0x80000004    BLACK_BRUSH   Solid black fill
+  0x80000005    NULL_BRUSH    Hollow / no fill
+  0x80000007    BLACK_PEN     1px black outline
+  0x80000008    NULL_PEN      No outline

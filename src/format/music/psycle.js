@@ -5,5 +5,5 @@ export class psycle extends Format
 	name        = "Psycle Module";
 	ext         = [".psy"];
 	magic       = ["Psycle module"];
-	unsupported = true;
+	unsupported = true;	// only 7 unique files on discmaster
 }

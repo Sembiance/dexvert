@@ -5,5 +5,5 @@ export class squirrelModule extends Format
 	name        = "Squirrel Module";
 	ext         = [".sqm"];
 	magic       = ["Squirrel Module"];
-	unsupported = true;
+	unsupported = true;	// only 1 unique file on discmaster
 }

@@ -5,5 +5,5 @@ export class musicMakerModule extends Format
 	name        = "MusicMaker Module";
 	ext         = [".mm8"];
 	magic       = ["MusicMaker v8 module"];
-	unsupported = true;
+	unsupported = true;	// only 21 unique files on discmaster
 }

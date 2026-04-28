@@ -6,5 +6,5 @@ export class gmod extends Format
 	website     = "https://www.exotica.org.uk/wiki/MultiPlayer";
 	ext         = [".gmod"];
 	magic       = ["GMOD format module"];
-	unsupported = true;
+	unsupported = true;	// only 1 unique file on discmaster
 }

@@ -1,0 +1,137 @@
+Vibe coded by Codex
+
+Magic Lantern DIFF Animation format, as used by sample0/
+=========================================================
+
+All multi-byte integers are big-endian. A valid file begins with:
+
+  0x00  char[4]   "DIFF"
+  0x04  uint32    0x48A89A61 cookie
+  0x08  uint32    zero
+  0x0C  uint32    header byte count
+
+The sample set uses header sizes 18 and 30. The counted header begins
+immediately after the size field at 0x10:
+
+  0x10  uint16    display family (0 for native Amiga planar, 4 for board/AGA)
+  0x12  uint16    width
+  0x14  uint16    height
+  0x16  uint8     bit depth
+  0x17  uint8     playback frame rate
+  0x18..          display-specific mode words, retained by the player
+
+Chunks start at 0x10 + header_size. Each chunk is:
+
+  uint32 type
+  uint32 payload_size
+  uint8  payload[payload_size]
+
+The chunk stream ends with type 0x0000FFFF and size 0. Two Gong samples
+then carry an index:
+
+  uint32 frame_count
+  uint32 index_size
+  repeated uint32 type, uint32 size entries for every chunk including END
+  uint32 indexed_chunk_count
+  uint32 0x48A89A61
+
+Chunk types handled from the samples:
+
+  1   256-byte display setup block.
+  6   Amiga 12-bit RGB palette words, 0x0RGB.
+  9   24-bit RGB palette, three bytes per entry.
+  10  Uncompressed video buffer.
+  12  RLE video buffer. First uint32 is decoded byte count.
+  15  Uncompressed planar video buffer in the Gong samples.
+  21  Delta video buffer.
+  22  Delta video buffer.
+  25  Zero-size no-change/timing video chunk.
+  26  Zero-size no-change/timing video chunk.
+  30  Embedded mono audio sample.
+  32  Board/player ancillary data block.
+  65535 End marker.
+
+RLE chunk 12:
+
+  After the decoded-size field, bytes are PackBits-like command bytes.
+  0x01..0x7E copy that many literal bytes from the stream.
+  0x80..0xFF repeat the following byte (256 - command) times.
+  0x7F is an end-of-column marker. The decoded byte count determines image
+  completion. Samples may retain the final 0x7F and one pad byte after the
+  declared output has been reached.
+
+  The emitted data is stored column-by-column. For chunky images the column
+  count is width. For planar images it is the Amiga row-byte count:
+  ((width + 15) // 16) * 2. Decoders transpose the column stream to normal
+  row-major order before display.
+
+Delta chunks 21 and 22:
+
+  Type 21 begins with a uint16 destination start offset, then a skip/copy stream
+  over the current buffer. Type 22 has no start-offset field and begins directly
+  with skip/copy records.
+
+    uint16 start_offset (type 21 only)
+    uint8 skip
+    uint8 count
+    uint8 data[count]
+
+  The destination cursor advances by skip, then count bytes are copied. In type
+  21, skip 0xFF is a long-skip escape. The next byte 0xFF terminates the delta;
+  otherwise the escaped skip is a little-endian uint16, with the low byte after
+  0xFF and the high byte after that. The chunk boundary also terminates the
+  stream; when the final record is clipped by the chunk boundary, only available
+  bytes are copied. If a skip moves past the buffer, the remaining bytes are
+  terminal padding for that delta.
+
+  Type 21 is used as the byte-linear delta mode in these samples. Type 22 is
+  the Gong vertical planar delta mode. In type 22, the destination buffer is
+  eight 352-pixel page slots laid out side-by-side in vertical byte-column
+  order: page 0 column 0, page 0 column 1, ..., page 7 column 43. The exported
+  image is page 0. A skip byte of 0xFF does not copy data; its count byte skips
+  that many additional byte-columns after advancing past the current column.
+  0xFF 0xFF terminates the delta, though the Gong samples instead end at the
+  chunk boundary with either no trailing byte or one zero pad byte. Any other
+  bytes after the parsed delta are invalid. Type 22 data bytes are XORed into
+  the eight-page column-major plane buffer, not copied over it. In the Gong
+  samples these type 22 chunks are parsed and applied to validate their bytes,
+  but they are not displayed as video frames; the visible timeline is made from
+  complete bitplane refreshes.
+
+Audio chunk 30:
+
+  The audio chunk found in six samples is:
+
+    uint32 volume       0..64; every sample here uses 64
+    uint16 sample_rate  playback rate in Hz
+    int8[] pcm          signed mono PCM sample bytes
+
+  The converter writes this audio to AVI as mono PCM. Because AVI stores the
+  common 8-bit PCM flavor as unsigned samples, ffmpeg converts the signed input
+  sample stream to unsigned 8-bit PCM while muxing. Audio starts when the chunk
+  appears in the video chunk timeline; the converter inserts signed-zero silence
+  before the sample when preceding video frames have already been displayed.
+
+Video buffer interpretation:
+
+  Native Amiga and HAM samples are planar. One video chunk updates one bitplane;
+  depth chunks make one displayed frame. Bitplane 0 is the least significant
+  palette/HAM bit. Planes are padded to 16-pixel word boundaries.
+
+  The Gong samples use the type 22 eight-page planar mode. The initial RLE
+  bitplane set and each later type 15 bitplane set are complete visible frames;
+  each complete frame is held for three exported frames. The header rate is 20,
+  so the displayed AVI rate is 10 fps. The trailing index frame_count is 100 for
+  these files; the chunk stream yields 33 complete visible frames held for 99
+  exported images, and the index count appears to include the player's initial
+  display interval rather than an extra stored bitmap.
+
+  Chunky 8-bit board samples use one byte per pixel and chunk 9 as the palette.
+  24-bit samples use RGB byte triplets. The Opal sample in this corpus stores
+  an 8-bit indexed frame as four packed 2-bit component buffers. Each component
+  packs four pixels per byte, high bits first; four component chunks compose one
+  displayed frame with component 0 in bits 0..1, component 1 in bits 2..3, etc.
+
+  HAM6/HAM8 frames use the Amiga hold-and-modify rule: the top two bits are
+  control and the remaining bits are data. Control 0 selects a base palette
+  entry, 1 modifies blue, 2 modifies red, and 3 modifies green.

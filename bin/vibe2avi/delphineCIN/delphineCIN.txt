@@ -1,0 +1,256 @@
+Vibe coded by Codex
+
+Delphine CIN video format, as used by the valid files in sample0/
+===================================================================
+
+Scope
+-----
+
+The valid Delphine Software International CIN files in this sample set are:
+
+sample0/10820/ealogo.cin
+sample0/10820/logo.cin
+sample0/10820/mor_elec.cin
+sample0/11084/mor_arak.cin
+sample0/16138/fade1.cin
+sample0/17147/congrat.cin
+sample0/21851/mor_lasr.cin
+sample0/21992/mor_glue.cin
+sample0/22798/mor_expl.cin
+sample0/33985/fade2.cin
+sample0/7028/DDCONGR.CIN
+sample0/8180/DDGAMEOV.CIN
+sample0/978/congrat.cin
+sample0/978/ddtitle.cin
+sample0/978/intro.cin
+
+Other files in sample0/ share the leading 00 00 AA 55 byte sequence but do not have valid CIN dimensions, frame headers, payload sizes, or frame markers. The converter rejects them before writing an output file.
+
+All integer fields are little endian.
+
+
+Top-level layout
+----------------
+
+FileHeader, 20 bytes
+Frame 0
+Frame 1
+...
+Frame N-1
+EOF
+
+There is no file-level frame count. A reader walks frames until EOF. A valid file must end exactly after the final declared frame payload; trailing bytes or truncated payloads are invalid.
+
+
+FileHeader, 20 bytes
+--------------------
+
+Offset  Size  Meaning
+0       4     Signature marker, uint32 0x55AA0000. Stored bytes: 00 00 AA 55.
+4       4     Maximum decoded video frame size in bytes. For all valid samples this equals width * height.
+8       2     Video width in pixels.
+10      2     Video height in pixels.
+12      4     Audio metadata field.
+16      1     Audio bits field.
+17      1     Audio stereo field.
+18      2     Audio frame-size metadata field.
+
+The valid sample dimensions are 320x200 and 320x160. The video is 8-bit paletted internally, so width * height is also the decoded frame byte count.
+
+The audio fields are container metadata, not the only authority for whether audio exists. Frame audio type and frame audio size define actual audio payloads.
+
+Audio-bearing samples:
+
+Offset 12 uint32 = 11025
+Offset 16 uint8  = 16
+Offset 17 uint8  = 1
+Offset 18 uint16 = 3676
+
+Despite the 11025 field value, the DPCM stream in these samples decodes and synchronizes as 22050 Hz mono PCM. The repeated normal packet size is 1838 bytes, which is one 12 fps video frame of 22050 Hz audio rounded up. The first audio packet is a 4-second pre-roll packet of 88226 bytes.
+
+No-audio samples:
+
+All frame audio types are 0xFF and every frame audio size is zero. Their file-header audio fields may be all zero, or may contain legacy nonzero values. Since no audio payload exists, those fields are ignored after the frame stream proves to be no-audio.
+
+
+FrameHeader, 16 bytes
+---------------------
+
+Each frame begins with:
+
+Offset  Size  Meaning
+0       1     Video frame type.
+1       1     Audio frame type.
+2       2     Signed palette color count.
+4       4     Encoded video payload size in bytes.
+8       4     Encoded audio payload size in bytes.
+12      4     Frame marker, uint32 0xAA55AA55. Stored bytes: 55 AA 55 AA.
+
+Immediately after the header:
+
+PaletteData[palette byte count]
+VideoData[encoded video payload size]
+AudioData[encoded audio payload size]
+
+The palette byte count is derived from the signed palette color count:
+
+If the signed int16 value is >= 0:
+  palette_type = 0
+  palette_count = value
+  PaletteData is palette_count RGB triples.
+  The triples replace palette entries 0 through palette_count - 1.
+
+If the signed int16 value is < 0:
+  palette_type = 1
+  palette_count = -value
+  PaletteData is palette_count indexed updates.
+  Each update is: uint8 palette_index, uint8 red, uint8 green, uint8 blue.
+
+palette_count must not exceed 256. A palette_count of zero means no palette bytes and the previous palette remains active. Palette entries are 8-bit RGB values.
+
+
+Video frame types
+-----------------
+
+All decoded video buffers are width * height bytes of palette indices. The previous-frame buffer starts as all zero bytes. Delta frames add the previous decoded frame bytewise to the newly decoded frame, modulo 256, and then the current frame becomes the previous frame for the next frame.
+
+Type 9:
+  RLE decode to current frame.
+
+Type 34:
+  RLE decode to current frame, then apply delta from previous frame.
+
+Type 35:
+  Huffman decode to an intermediate byte stream, then RLE decode that stream to current frame.
+
+Type 36:
+  Huffman decode to an intermediate byte stream, RLE decode that stream to current frame, then apply delta from previous frame.
+
+Type 37:
+  Huffman decode directly to current frame.
+
+Type 38:
+  LZSS decode to current frame.
+
+Type 39:
+  LZSS decode to current frame, then apply delta from previous frame.
+
+
+RLE video decoding
+------------------
+
+Repeat until all source bytes are consumed and exactly width * height output bytes have been produced:
+
+Read uint8 code.
+
+If code has bit 7 set:
+  length = code - 0x7F
+  Read uint8 value.
+  Emit value repeated length times.
+
+Otherwise:
+  length = code + 1
+  Read length literal bytes.
+  Emit those bytes.
+
+It is invalid for the RLE stream to end in the middle of a repeat or literal. It is invalid for the stream to leave unconsumed bytes or produce a decoded size other than the expected target size.
+
+
+Huffman video decoding
+----------------------
+
+The first 15 bytes are a code table for nibble values 0 through 14. Nibble value 15 is an escape.
+
+After the table, process bytes until the encoded source bytes are consumed or the requested output limit is reached:
+
+Read uint8 code.
+
+High nibble:
+  If code >> 4 is 15:
+    Read uint8 b.
+    Emit ((code << 4) & 0xFF) | (b >> 4).
+    The low nibble to process next is b & 15.
+  Otherwise:
+    Emit table[code >> 4].
+    The low nibble to process next is code & 15.
+
+Low nibble:
+  If output limit has already been reached, stop.
+  If low nibble is 15:
+    If physical EOF has been reached, stop. This is the odd-nibble terminator used by valid type-36 frames.
+    Otherwise read uint8 b and emit b.
+  Otherwise:
+    Emit table[low nibble].
+
+For type 37, the Huffman output must be exactly width * height bytes. For types 35 and 36, the Huffman output is an intermediate RLE stream; the Huffman stream must consume all source bytes, and the following RLE stream must consume all intermediate bytes and decode exactly width * height bytes.
+
+
+LZSS video decoding
+-------------------
+
+Repeat until all source bytes are consumed and exactly width * height output bytes have been produced:
+
+Read uint8 flags.
+For bit positions 0 through 7, low bit first:
+  If source EOF or output full has been reached, stop processing the current flags byte.
+  If the flag bit is set:
+    Read one literal byte and emit it.
+  If the flag bit is clear:
+    Read uint16 command.
+    offset = command >> 4
+    length = (command & 15) + 2
+    Copy length bytes from already-decoded output at current_output_pos - offset - 1.
+    The copy is byte-by-byte and intentionally permits overlap.
+
+It is invalid for a back-reference to point before the start of the decoded output. It is invalid for source bytes to remain unconsumed or for the decoded size to differ from width * height.
+
+
+Delta frame decoding
+--------------------
+
+For each byte position:
+
+current[i] = (current[i] + previous[i]) & 0xFF
+
+The previous frame buffer is initialized to zero before the first frame. After every frame, whether delta or not, the decoded current frame becomes the previous frame.
+
+
+Audio frame types
+-----------------
+
+Type 0xFF:
+  No audio. The audio payload size must be zero.
+
+Type 1:
+  16-bit mono DPCM. The decoded playback rate for the valid samples is 22050 Hz.
+
+Audio packet decoding is stateful across frames. The first nonempty type-1 packet begins with a little-endian int16 initial sample. That sample is output. Every remaining byte in that packet, and every byte in subsequent packets, is an index into the delta table below. The selected signed delta is added to the prior sample and clipped to int16 range; the result is output as little-endian signed 16-bit PCM.
+
+Delta table, indices 0 through 255:
+
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, -30210, -27853, -25680, -23677, -21829, -20126, -18556, -17108, -15774, -14543, -13408, -12362, -11398,
+-10508, -9689, -8933, -8236, -7593, -7001, -6455, -5951, -5487, -5059, -4664, -4300, -3964, -3655, -3370, -3107,
+-2865, -2641, -2435, -2245, -2070, -1908, -1759, -1622, -1495, -1379, -1271, -1172, -1080, -996, -918, -847,
+-781, -720, -663, -612, -564, -520, -479, -442, -407, -376, -346, -319, -294, -271, -250, -230,
+-212, -196, -181, -166, -153, -141, -130, -120, -111, -102, -94, -87, -80, -74, -68, -62,
+-58, -53, -49, -45, -41, -38, -35, -32, -30, -27, -25, -23, -21, -20, -18, -17,
+-15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0,
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+17, 18, 20, 21, 23, 25, 27, 30, 32, 35, 38, 41, 45, 49, 53, 58,
+62, 68, 74, 80, 87, 94, 102, 111, 120, 130, 141, 153, 166, 181, 196, 212,
+230, 250, 271, 294, 319, 346, 376, 407, 442, 479, 520, 564, 612, 663, 720, 781,
+847, 918, 996, 1080, 1172, 1271, 1379, 1495, 1622, 1759, 1908, 2070, 2245, 2435, 2641, 2865,
+3107, 3370, 3655, 3964, 4300, 4664, 5059, 5487, 5951, 6455, 7001, 7593, 8236, 8933, 9689, 10508,
+11398, 12362, 13408, 14543, 15774, 17108, 18556, 20126, 21829, 23677, 25680, 27853, 30210, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+
+AVI conversion choices
+----------------------
+
+delphineCIN.py validates the full CIN container before creating final output. It writes to a temporary file and atomically replaces the requested AVI only after all video and audio packets decode successfully.
+
+Video is written as uncompressed 24-bit BI_RGB/DIB at 12 fps. The internal CIN bitmap order matches bottom-up DIB storage, so rows are emitted in decoded order. Palette indices are converted to BGR triples for AVI.
+
+Audio, when present, is written as 22050 Hz, mono, signed 16-bit PCM.

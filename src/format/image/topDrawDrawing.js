@@ -6,5 +6,5 @@ export class topDrawDrawing extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Top_Draw";
 	ext         = [".tdr", ".td"];
 	magic       = ["Top Draw Drawing"];
-	unsupported = true;
+	unsupported = true;	// only 5 unique files on discmaster
 }

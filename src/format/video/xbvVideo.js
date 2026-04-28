@@ -7,6 +7,6 @@ export class xbvVideo extends Format
 	website     = "https://wiki.multimedia.cx/index.php/XBV";
 	ext         = [".xbv"];
 	magic       = ["XBV video"];
-	idCheck    = async inputFile => inputFile.size>=12 && (await fileUtil.readFileBytes(inputFile.absolute, 4, 4)).getUInt32LE()===inputFile.size;
-	unsupported = true;
+	idCheck     = async inputFile => inputFile.size>=12 && (await fileUtil.readFileBytes(inputFile.absolute, 4, 4)).getUInt32LE()===inputFile.size;
+	unsupported = true;	// 0 files on discmaster
 }

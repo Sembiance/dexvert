@@ -1,0 +1,198 @@
+Vibe coded by Codex
+
+Optonica Videostream VAXL file format
+======================================
+
+This describes the VAXL samples in sample0/.  The format is an IFF big-endian
+FORM container whose payload type is VAXL.  All multi-byte values in VAXL and
+chunk headers are big-endian.  The AVI converter decodes only files that match
+this complete structure and refuses mismatched or truncated streams before
+creating output.
+
+Top-level file
+--------------
+
+Offset  Size  Meaning
+0       4     "FORM"
+4       4     FORM payload size, exactly file_size - 8
+8       4     "VAXL"
+12      ...   IFF chunks
+
+Every chunk is:
+
+Offset  Size  Meaning
+0       4     chunk id
+4       4     payload size N
+8       N     payload
+8+N     0/1   one zero IFF pad byte when N is odd
+
+The samples use only even-sized chunks, so no implicit one-byte IFF pads occur.
+All alignment padding is explicit PAD0 chunks.
+
+Chunk order
+-----------
+
+The complete stream is:
+
+FORM "VAXL"
+  VXHD
+  PAD0       initial zero padding through byte offset 512
+  Frame 0
+  Frame 1
+  ...
+
+Each frame is:
+
+TMCD
+COLS
+BMAP
+SAMP
+PAD0       present when another sector-aligned frame follows; also present at
+           EOF in the 30-byte-VXHD/16-COLS-byte variant
+
+Every complete frame begins on a 512-byte sector boundary.  Every PAD0 payload
+is all zeroes and its chunk end lands on the next 512-byte boundary.
+
+VXHD
+----
+
+VXHD is the stream header.  The corpus has two byte-for-byte variants.
+
+Common fields:
+
+Payload offset  Size  Meaning
+8               2     width, always 144
+10              2     height, always 103
+12              2     bitplanes, always 6
+14              2     reserved/flags, always 0
+16              2     HAM marker, always 0x0800
+18              2     reserved, always 0
+20              2     mono 8-bit audio playback rate
+
+28-byte VXHD variant:
+
+Payload offset  Size  Meaning
+0               8     reserved producer metadata, all zero
+22              2     reserved, 0
+24              2     palette byte budget marker, 0x0040
+26              2     audio/display mode marker, 0x0007
+
+This variant is followed by 64-byte COLS chunks, meaning 32 RGB4 color words.
+Only the first 16 color words are addressable by HAM6 direct-color pixels; the
+remaining color registers are still part of the source data and are validated.
+
+30-byte VXHD variant:
+
+Payload offset  Size  Meaning
+0               2     reserved, 0
+2               2     header variant marker, 1
+4               4     producer clip/catalog metadata
+22              2     palette byte budget marker, 0x0040
+24              2     audio/display mode marker, 0x0007
+26              2     reserved, 0
+28              2     producer timing marker, 0x3200
+
+This variant is followed by 32-byte COLS chunks, meaning 16 RGB4 color words.
+
+Frame chunks
+------------
+
+TMCD
+  Size: 8 bytes.
+  Payload: 00 00 00 00 00 00 00 05.
+  The final word is the frame display duration in 60 Hz ticks.  5 ticks gives
+  12 frames per second.  The converter writes the AVI video stream with
+  dwScale=5 and dwRate=60.
+
+COLS
+  Size: 32 bytes in the 30-byte VXHD variant; 64 bytes in the 28-byte VXHD
+  variant.
+  Payload: 16 or 32 big-endian RGB4 color words, one word per palette register.
+  Bits 15..12 are always zero.  Bits 11..8 are red, 7..4 are green, 3..0 are
+  blue.  A nibble expands to 8-bit color by multiplying by 17.
+
+BMAP
+  Size: 11124 bytes.
+  Layout: six full bitplanes, plane-major.
+  Row bytes per plane: ((144 + 15) // 16) * 2 = 18.
+  Total: 6 planes * 103 rows * 18 bytes = 11124.
+  Within each byte, pixels are stored most-significant bit first.  Pixel code
+  bit 0 comes from plane 0, bit 5 comes from plane 5.
+
+  The six-bit code is Amiga HAM6:
+
+  Bits 5..4  Bits 3..0 meaning
+  00         direct color register 0..15
+  01         replace blue nibble of current pixel color
+  10         replace red nibble of current pixel color
+  11         replace green nibble of current pixel color
+
+  At the start of each scanline, the current HAM color is color register 0.
+  Each emitted pixel updates the current HAM color according to the command.
+
+SAMP
+  Size: constant per file, either 1500 or 1506 bytes in the samples.
+  Payload: signed 8-bit mono PCM.  The converter preserves every sample and
+  writes it as AVI/WAVE unsigned 8-bit PCM by XORing each byte with 0x80.
+  The AVI audio sample rate is the VXHD rate word at payload offset 20.
+
+PAD0
+  Size: variable.  Payload is all zeroes.
+  Initial PAD0 makes the first frame begin at byte 512.
+  Inter-frame PAD0 makes the next frame begin at a 512-byte sector boundary.
+
+Frame byte accounting
+---------------------
+
+The 30-byte VXHD / 16-color-COLS variant has 12800 bytes per frame including
+PAD0, and the final frame also has PAD0:
+
+1500-byte SAMP:
+  TMCD 16 + COLS 40 + BMAP 11132 + SAMP 1508 + PAD0 104 = 12800.
+  The PAD0 payload is 96 bytes.
+
+1506-byte SAMP:
+  TMCD 16 + COLS 40 + BMAP 11132 + SAMP 1514 + PAD0 98 = 12800.
+  The PAD0 payload is 90 bytes.
+
+The 28-byte VXHD / 32-color-COLS variant has 12800 bytes per inter-frame record
+but no final PAD0:
+
+  TMCD 16 + COLS 72 + BMAP 11132 + SAMP 1508 + PAD0 72 = 12800.
+  The PAD0 payload is 64 bytes.
+
+  Final frame without PAD0:
+  TMCD 16 + COLS 72 + BMAP 11132 + SAMP 1508 = 12728.
+
+Unsupported or incomplete sample files
+--------------------------------------
+
+The converter intentionally refuses files where the declared FORM size does not
+match the real file size or where any chunk overruns EOF.  This is fail-fast
+behavior so that no bytes are silently ignored.
+
+sample0/21053/question11.vaxl:
+  FORM size is 0x80000001 instead of file_size - 8, and the file ends inside a
+  BMAP chunk.
+
+sample0/21053/question6.vaxl:
+  FORM size is larger than file_size - 8, and the file ends inside a BMAP chunk.
+
+sample0/4699/images.snip.vaxl:
+  The contained complete frames stop on a sector boundary, but the FORM size
+  declares a longer original stream than the bytes present in the file.
+
+AVI mapping
+-----------
+
+The converter writes one RIFF AVI with two streams:
+
+Stream 0:
+  FourCC DIB, 24-bit uncompressed BGR, bottom-up rows, 144x103, 12 fps.
+
+Stream 1:
+  WAVE_FORMAT_PCM, mono, 8-bit unsigned PCM, sample rate from VXHD.
+
+All source video, palette, audio, and padding bytes are validated.  The decoded
+AVI intentionally does not carry PAD0 bytes because they are structural sector
+alignment bytes, not media samples.

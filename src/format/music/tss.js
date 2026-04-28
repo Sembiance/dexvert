@@ -5,5 +5,6 @@ export class tss extends Format
 	name        = "T'SoundSystem Source Module";
 	ext         = [".tss"];
 	magic       = ["T'SoundSystem Source"];
-	unsupported = true;
+	weakMagic   = true;
+	unsupported = true;	// 0 files on discmaster
 }

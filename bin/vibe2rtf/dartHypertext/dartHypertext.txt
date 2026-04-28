@@ -1,0 +1,244 @@
+Vibe coded by Codex
+
+Dart Hypertext file format notes
+================================
+
+Scope
+-----
+
+This describes the Dart Hypertext files found in sample0/. The converter
+dartHypertext.py validates the outer wrapper and block compression strictly,
+then renders the decoded Dart document stream as monospaced CP437 RTF.
+
+Container
+---------
+
+All samples begin with this 35-byte signature:
+
+    43 6f 6d 70 72 65 73 73 65 64 20 66 69 6c 65 2e
+    20 55 73 65 20 44 61 72 74 20 74 6f 20 76 69 65
+    77 2e 1a
+
+ASCII: "Compressed file. Use Dart to view." followed by 0x1a.
+
+The signature is followed by one of these 8-byte initial wrapper prefixes:
+
+    15 00 01 00 00 00 00 00
+    15 09 00 00 00 00 00 00
+
+The first block header follows immediately:
+
+    offset  size  meaning
+    ------  ----  -----------------------------------------------
+    +0      7     method bytes
+    +7      2     uncompressed block size, little endian
+    +9      2     stored/compressed payload size, little endian
+    +11     n     payload
+
+Initial method bytes:
+
+    00 80 f0 00 00 00 00    stored block
+    00 83 f0 00 00 00 00    NoGate Distilled compressed block
+
+Continuation blocks follow directly after the previous payload. They do not
+repeat the signature or the 8-byte initial wrapper prefix.
+
+    offset  size  meaning
+    ------  ----  -----------------------------------------------
+    +0      6     method bytes
+    +6      2     uncompressed block size, little endian
+    +8      2     stored/compressed payload size, little endian
+    +10     n     payload
+
+Continuation method bytes:
+
+    80 f0 00 00 00 00       stored block
+    83 f0 00 00 00 00       NoGate Distilled compressed block
+
+The sample files end either exactly after the final payload or with a two-byte
+00 00 terminator. No other trailing bytes are valid.
+
+Stored blocks
+-------------
+
+For stored blocks, the payload bytes are the document bytes. The compressed
+payload size must equal the uncompressed size.
+
+Compressed blocks
+-----------------
+
+Compressed blocks use the NoGate PAK "Distilled" bitstream. Multi-byte and
+variable-width bit fields are read least-significant-bit first.
+
+The compressed payload begins with:
+
+    size  meaning
+    ----  ---------------------------------------------------------
+    2     Huffman node count, little endian
+    1     bits per Huffman table entry
+    n     node table: node_count entries, each entry node_bits bits
+    ...   compressed symbol stream
+
+The root Huffman node is node_count - 2. To decode a symbol, read one bit and
+select table[node_index + bit]. If the selected value is less than node_count,
+it is the next internal node index. Otherwise the decoded symbol is:
+
+    selected_value - node_count
+
+Symbol meanings:
+
+    0..255     literal byte
+    256        end marker
+    257..314   LZ copy, length = symbol - 254, producing lengths 3..60
+
+Any other symbol is invalid.
+
+LZ history uses an 8192-byte circular buffer initialized with spaces (0x20).
+The write pointer starts at zero. Literal and copied bytes are both written to
+history as they are emitted.
+
+Copy offsets are stored as a high part plus a low part. First decode the high
+part with this fixed prefix code:
+
+    000=0 0100=1 0010=2 0011=3
+    10000=4 01100=5 01010=6 01110=7
+    10001=8 01101=9 01011=10 01111=11
+    101000=12 100100=13 101100=14 101010=15
+    100110=16 101110=17 101001=18 100101=19
+    101101=20 101011=21 100111=22 101111=23
+    1100000=24 1110000=25 1101000=26 1100100=27
+    1110100=28 1101100=29 1100010=30 1110010=31
+    1101010=32 1100110=33 1110110=34 1101110=35
+    1100001=36 1110001=37 1101001=38 1100101=39
+    1110101=40 1101101=41 1100011=42 1110011=43
+    1101011=44 1100111=45 1110111=46 1101111=47
+    11110000=48 11111000=49 11110100=50 11111100=51
+    11110010=52 11111010=53 11110110=54 11111110=55
+    11110001=56 11111001=57 11110101=58 11111101=59
+    11110011=60 11111011=61 11110111=62 11111111=63
+
+Then read the low offset bits. Let H = 60 + bytes_already_emitted_in_this_block.
+
+    H range       low bits
+    -----------   --------
+    < 64          0
+    < 128         1
+    < 256         2
+    < 512         3
+    < 1024        4
+    < 2048        5
+    < 4096        6
+    otherwise     7
+
+The final offset is:
+
+    (high << low_bit_count) | low
+
+The source byte for each copied byte is:
+
+    history[(history_pos - offset - 1) & 0x1fff]
+
+The converter rejects any block that cannot produce exactly the declared
+uncompressed size.
+
+Decoded document stream
+-----------------------
+
+The decoded stream is CP437 text plus Dart control bytes. The samples use two
+presentation forms.
+
+1. Fixed screen records
+
+Some files are already laid out as DOS screen pages with CP437 box drawing.
+These streams start with a one-byte row style value followed by a box-drawing
+row-start byte. Row style bytes observed are ASCII 0..7 and ':'.
+
+The row style byte is not visible text. The following bytes are row text until
+the next row style byte followed by a CP437 border/row-start byte. Bytes ` and
+~ inside the row are inline style toggles and do not occupy a screen column.
+
+2. Length-prefixed text records
+
+Other files are a sequence of text records. A nonzero byte gives the number of
+payload bytes that follow. A 00 byte between records is a paragraph/blank-line
+separator. A candidate length record is valid only if the declared payload fits
+inside the decoded stream and does not contain 00 or 1a; otherwise the byte is
+handled by the raw text/control stream rules below. This accounts for the mixed
+record/plain tails used by several samples.
+
+Text/control byte meanings used for RTF output
+----------------------------------------------
+
+    00             paragraph or blank-line separator
+    01..1f         Dart control/style byte; not emitted as visible text
+    09             tab-like spacing when it appears inside payload text
+    1a             DOS EOF/end marker; ignored
+    60 (`)         toggle bold
+    7e (~)         toggle underline
+    ff             hard space; rendered as a normal space
+    all others     CP437 character
+
+The RTF renderer uses Courier New, emits CP437 characters as Unicode escapes,
+and maps Dart's in-band bold/underline markers to RTF \b and \ul controls.
+
+Hypertext links
+---------------
+
+Dart jump targets appear in the decoded text as visible quoted or angle-bracket
+constructs, usually with a trailing asterisk:
+
+    "p21.#"*
+    <R.#01 HIS DIVINITY>*
+    <MoneyB-B.#03 Business Cycle>*
+
+The converter emits RTF HYPERLINK fields for these constructs.
+
+Labels are visible Dart lines whose rendered text begins with ':'. For example:
+
+    :QUESTIONS
+    :His Birth:
+
+The converter creates an RTF bookmark at each label line. Bookmark names are
+deterministic: a DART_ prefix, a sanitized label fragment, and a SHA-1-derived
+suffix. Internal jumps use:
+
+    HYPERLINK \l "bookmark_name"
+
+Angle targets whose first token names the current Dart source file, ignoring
+case, are treated as intra-document label jumps. For example, inside R.#01:
+
+    <R.#01 HIS DIVINITY>*
+
+links to the local bookmark for the label "HIS DIVINITY".
+
+Targets whose first token looks like another Dart file name are emitted as
+external file links without checking the filesystem. If the target also has a
+label part, the RTF field includes a bookmark switch using the same deterministic
+bookmark naming scheme:
+
+    HYPERLINK "MoneyB-B.#03" \l "DART_Business_Cycle_e533337d6a"
+
+This intentionally links as if the referenced converted document exists, but
+the converter does not search for, require, or hardcode that other file.
+
+Validation behavior
+-------------------
+
+dartHypertext.py fails without writing the output file when:
+
+    - the signature is missing
+    - the initial prefix is not one of the observed Dart prefixes
+    - a block method is unknown
+    - a block header or payload is truncated
+    - stored block sizes do not match
+    - a compressed Huffman/LZ stream is malformed
+    - decoded block output does not match the declared uncompressed size
+    - bytes after the final block are not EOF or the 00 00 terminator
+
+Sample coverage
+---------------
+
+The implementation was run over all 100 files under sample0/. Every byte of
+each sample is consumed by the container parser, the NoGate Distilled
+decompressor or stored-block path, and the decoded document renderer described
+above.

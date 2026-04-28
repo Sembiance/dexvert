@@ -6,5 +6,5 @@ export class pcDraftCAD extends Format
 	ext            = [".dwg"];
 	forbidExtMatch = true;
 	magic          = ["PC-Draft-CAD drawing"];
-	unsupported    = true;
+	unsupported    = true;	// only 7 unique files on discmaster
 }

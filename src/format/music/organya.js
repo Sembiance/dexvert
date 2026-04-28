@@ -5,5 +5,5 @@ export class organya extends Format
 	name        = "Organya Module";
 	ext         = [".org"];
 	magic       = ["Organya module", "Organya 2 module"];
-	unsupported = true;
+	unsupported = true;	// only 49 unique files on discmaster
 }

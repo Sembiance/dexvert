@@ -7,5 +7,5 @@ export class digitalSymphony extends Format
 	ext          = [".dsym"];
 	magic        = ["Digital Symphony relocatable module", "Digital Symphony song"];
 	metaProvider = ["musicInfo"];
-	converters   = ["xmp", "zxtune123"];
+	converters   = ["xmp", "zxtune123", "openmpt123"];
 }

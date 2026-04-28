@@ -6,5 +6,5 @@ export class imagesMusicSystem extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Images_Music_System";
 	ext          = [".ims"];
 	metaProvider = ["musicInfo"];
-	converters   = ["uade123", "xmp", "zxtune123"];
+	converters   = ["uade123", "xmp", "zxtune123", "openmpt123"];
 }

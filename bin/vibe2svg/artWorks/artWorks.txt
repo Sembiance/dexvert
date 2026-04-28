@@ -1,0 +1,484 @@
+ArtWorks RISC OS Vector Image File Format Specification
+=======================================================
+
+Reverse-engineered from 100 sample files across various ArtWorks versions.
+
+Overview
+--------
+ArtWorks files are binary vector image files created by the ArtWorks
+application for RISC OS. They use little-endian byte ordering throughout.
+The coordinate system uses "draw units" with origin at bottom-left, Y axis
+pointing upward.
+
+Unit conversion:
+  1 draw unit  = 1/256 RISC OS unit
+  1 inch       = 46080 draw units
+  1 mm         = 46080/25.4 ≈ 1814.17 draw units
+
+
+1. FILE HEADER (128 bytes, offset 0x00-0x7F)
+---------------------------------------------
+
+Offset  Size  Type    Field            Description
+------  ----  ------  ---------------  -------------------------------------------
+0x00    4     char[]  magic1           "Top!" (0x54 0x6F 0x70 0x21)
+0x04    4     uint32  version          File format version (9 or 10 observed)
+0x08    8     char[]  magic2           "TopDraw\0"
+0x10    4     uint32  reserved         Always 0
+0x14    4     uint32  header_size      Always 128 (0x80)
+0x18    4     uint32  doc_width        Document width in draw units
+0x1C    4     uint32  doc_height       Document height in draw units
+0x20    4     uint32  flags            Document flags (typically 0x80000000)
+0x24    4     uint32  edit_state       Small integer, editor session state
+0x28    4     int32   ref1             Usually 0xFFFFFFFF
+0x2C    4     int32   ref2             Usually 0xFFFFFFFF
+0x30    4     uint32  body_size        Size of record body area
+0x34    4     uint32  paper_width      Paper width in draw units
+                                        (391680 = US Letter 215.9mm)
+0x38    4     uint32  paper_height     Paper height in draw units
+                                        (506880 = US Letter 279.4mm)
+0x3C    4     uint32  color_table_off  Absolute file offset to color palette
+0x40    4     int32   unknown_40       Usually 0xFFFFFFFF
+0x44    4     uint32  unknown_44       Usually 0
+0x48    4     uint32  grid_spacing_x   Grid spacing in draw units (typically 768)
+0x4C    4     uint32  grid_spacing_y   Grid spacing in draw units (typically 768)
+0x50    4     uint32  zoom_level       View zoom (16.16 fixed-point, 65536=100%)
+0x54    8     int32   viewport_xy      Viewport/scroll position (2 x int32)
+0x5C    36    bytes   padding          Always zero
+
+
+Common page sizes in draw units:
+  A4 portrait:   width=380976  height=538808
+  A4 landscape:  width=538808  height=380976
+  US Letter:     width=391680  height=506880
+
+
+2. RECORD CHAIN (offset 0x80 to end of records)
+-------------------------------------------------
+
+Records form a doubly-linked chain starting at offset 0x80. Each record
+has a standard header:
+
+Offset  Size  Type    Field         Description
+------  ----  ------  -----------   -------------------------------------------
++0x00   4     int32   back_link     Negative of previous record's size (0 for
+                                     first record in chain)
++0x04   4     uint32  size          Total size of this record in bytes. A value
+                                     of 0 normally indicates end of chain, but
+                                     see "Fill-to-End" below.
++0x08   4     int32   sub_hdr       For containers: offset from record start to
+                                     first child record. For paths: offset to
+                                     inline attributes. 0 for leaf records.
++0x0C   4     int32   parent_link   Negative byte offset to parent record (0
+                                     for top-level records)
++0x10   4     uint32  type          Record type (low byte). Upper bytes may
+                                     contain flags and should be masked with
+                                     0xFF to get the base type.
++0x14   4     uint32  id            Unique object identifier
+
+Type-specific data follows at +0x18.
+
+The chain terminates with a record where back_link equals the negative of the
+previous record's size and size=0.
+
+Fill-to-End Records:
+  When a record has size=0 but the sub_hdr and type fields at +0x08 and +0x10
+  contain valid values (sub_hdr > 0 and type is a known object type), the
+  record extends to the end of its parent container. This is commonly used
+  for single-child layers where one group or path fills the entire layer.
+
+  This pattern also occurs within inline attribute chains inside path and
+  text objects. The LAST attribute in the chain frequently has size=0 and
+  extends to the end of its parent object record. This is very common for
+  fill color (0x26) and stroke color (0x24) attributes - nearly every path
+  object uses this encoding for its final attribute. The type at +0x10 of
+  the size=0 record identifies which attribute it is.
+
+
+3. RECORD TYPES
+----------------
+
+Type  Hex   Name                  Description
+----  ----  --------------------  -------------------------------------------
+0x01  0x01  Text Object           Text with positioned characters
+0x02  0x02  Path Object           Vector path with bezier curves and lines
+0x06  0x06  Group                 Container grouping multiple child objects
+0x0A  0x0A  Layer                 Named layer container (Background/Foreground)
+
+0x22  0x22  Palette Config        Print/palette configuration data (248 bytes)
+0x23  0x23  File Path             Original save path as ASCII string
+0x24  0x24  Stroke Color          Stroke color attribute (palette index)
+0x25  0x25  Line Width            Stroke line width in draw units
+0x26  0x26  Fill Color            Fill color (flat, linear gradient, or radial)
+0x27  0x27  Mitre Limit           Mitre limit for stroke joins
+0x28  0x28  Flatness              Path flatness tolerance
+0x29  0x29  Winding Rule          Fill winding rule (0=non-zero, else=even-odd)
+0x2A  0x2A  Join Style            Stroke join (0=mitre, 1=round, 2=bevel)
+0x2B  0x2B  Cap Style             Stroke cap (0=butt, 1=round, 2=square)
+0x2C  0x2C  Unknown               Rare, purpose unknown
+0x2D  0x2D  Dash Pattern /        Line dash pattern definition (in paths) OR
+            Text Character        character glyph record (within text objects)
+0x2F  0x2F  Font Reference        Font name string (e.g. "AvantG.Book")
+0x30  0x30  Text Style            Font size and text rendering parameters
+
+0x33  0x33  Extended Path         Path with extended header (24 extra bytes
+                                   before path data, starting at +0x40)
+0x34  0x34  Distorted Path        Path with distortion envelope (24 extra bytes
+                                   before path data, starting at +0x40)
+0x35  0x35  Blend Path            Path variant used in blend groups; path data
+                                   at +0x28, inline attrs at sub_hdr
+0x37  0x37  Path Variant          Path variant (similar to 0x02); path data
+                                   at +0x28, sub_hdr typically 224
+0x38  0x38  Perspective Path      Path with perspective transform; path data
+                                   at +0x28, extra transform data between
+                                   END_PATH and sub_hdr (sub_hdr typically 176)
+0x39  0x39  File Info             ASCII metadata (CreationDate, Creator,
+                                   SerialNumber, SaveVersion)
+0x3A  0x3A  Compound Path         Container for compound/clipping paths
+0x3B  0x3B  Compound Sentinel     End marker within compound path
+0x3E  0x3E  Settings 2            Document configuration defaults
+0x3F  0x3F  Settings 1            Document configuration defaults
+
+
+4. ATTRIBUTE DATA FORMAT
+-------------------------
+
+All attribute records (types 0x24-0x30) share a common layout after the
+24-byte record header:
+
+  +0x18 to +0x27:  16 bytes reserved (always zero)
+  +0x28 onwards:   Type-specific attribute values
+
+This means the actual attribute value is at offset +0x28 from the record
+start, or equivalently at byte offset 16 within the type-specific data
+(which starts at +0x18).
+
+
+4a. Fill Color Attribute (type 0x26)
+-------------------------------------
+
+Flat Fill (record size = 52):
+  +0x28   4   uint32   fill_type       0 = flat color fill
+  +0x2C   4   uint32   palette_ptr     Runtime pointer (ignore during conversion)
+  +0x30   4   int32    palette_index   Index into color palette table.
+                                        -1 (0xFFFFFFFF) = transparent/no fill
+
+Linear Gradient Fill (record size = 72, fill_type = 1):
+  +0x28   4   uint32   fill_type       1 = linear gradient
+  +0x2C   4   uint32   palette_ptr     Runtime pointer
+  +0x30   4   int32    start_x         Gradient start X in draw units
+  +0x34   4   int32    start_y         Gradient start Y in draw units
+  +0x38   4   int32    end_x           Gradient end X in draw units
+  +0x3C   4   int32    end_y           Gradient end Y in draw units
+  +0x40   4   uint32   start_color     Palette index of gradient start color
+  +0x44   4   uint32   end_color       Palette index of gradient end color
+
+Radial Gradient Fill (record size = 72, fill_type = 2):
+  Same layout as linear gradient. The start point is the center and the
+  end point defines the radius.
+
+
+4b. Stroke Color Attribute (type 0x24)
+---------------------------------------
+
+  +0x28   4   int32    palette_index   Index into color palette table.
+                                        -1 = transparent/no stroke
+
+
+4c. Line Width Attribute (type 0x25)
+-------------------------------------
+
+  +0x28   4   uint32   width           Stroke width in draw units.
+                                        A value of 0 means "hairline" — the
+                                        thinnest possible stroke (1 device pixel),
+                                        NOT invisible. Only palette_index=-1 on
+                                        the stroke color attribute suppresses
+                                        the stroke entirely.
+
+
+4d. Other Attributes
+---------------------
+
+Join Style (0x2A):     +0x28: uint32 (0=mitre, 1=round, 2=bevel)
+Cap Style (0x2B):      +0x28: uint32 (0=butt, 1=round, 2=square)
+Winding Rule (0x29):   +0x28: uint32 (0=non-zero, non-zero=even-odd)
+Mitre Limit (0x27):    +0x28: uint32 in draw units
+Flatness (0x28):       +0x28: uint32 flatness tolerance
+
+
+5. PATH OBJECT (type 0x02)
+---------------------------
+
+  +0x18   4   int32    bbox_x0         Bounding box minimum X
+  +0x1C   4   int32    bbox_y0         Bounding box minimum Y
+  +0x20   4   int32    bbox_x1         Bounding box maximum X
+  +0x24   4   int32    bbox_y1         Bounding box maximum Y
+  +0x28   ...          path_data       Sequence of path elements (see below)
+  ...
+  +sub_hdr ...         inline_attrs    Chain of attribute records overriding
+                                        default fill/stroke/width etc.
+
+For extended paths (type 0x33) and distorted paths (type 0x34), an additional
+24 bytes of data (six int32 values forming a distortion envelope or extended
+bounding area) appear between the bounding box and path data:
+
+  +0x28   24  bytes    extra_data      Distortion/envelope coordinates
+  +0x40   ...          path_data       Path elements start here instead of +0x28
+
+
+Path Elements:
+  Each element is a 4-byte tag word followed by coordinate data. The tag's
+  low byte identifies the element type; upper bytes may contain flags.
+
+  Tag    Hex   Name       Coordinates              Total Size
+  -----  ----  ---------  -----------------------  ----------
+  END    0x00  End        (none)                   4 bytes
+  MOVE   0x02  Move To    x, y (2 x int32)         12 bytes
+  CLOSE  0x05  Close      (none)                   4 bytes
+  BEZIER 0x06  Bezier     cp1x,cp1y,cp2x,cp2y,    28 bytes
+                           endx,endy (6 x int32)
+  LINE   0x08  Line To    x, y (2 x int32)         12 bytes
+
+  Tag flags (upper bytes of the FIRST MOVE_TO only):
+    0x80000000  Even-odd fill rule for this path. When set, sub-paths
+                with opposite winding directions create holes (essential
+                for glyphs like 'o', 'a', '0', '9'). When clear, the
+                path uses the non-zero winding rule. This flag takes
+                precedence over the winding rule attribute (type 0x29).
+    0x00200000  Additional path rendering hint (purpose not fully known)
+
+
+6. TEXT OBJECT (type 0x01)
+---------------------------
+
+  +0x18   4   int32    bbox_x0         Bounding box minimum X
+  +0x1C   4   int32    bbox_y0         Bounding box minimum Y
+  +0x20   4   int32    bbox_x1         Bounding box maximum X
+  +0x24   4   int32    bbox_y1         Bounding box maximum Y
+  +0x28   24  bytes    text_params     Text baseline, column parameters
+  +0x40   32  bytes    column_rect     4 corner coordinates of text column
+  +0x60   24  bytes    reserved        Zeros
+
+  +sub_hdr (typically 120):
+    Inline records containing:
+    - Type 0x2D records: individual character glyphs
+    - Type 0x26: fill color
+    - Type 0x24: stroke color
+    - Type 0x2F: font reference
+    - Type 0x30: text style (font size)
+
+  Character Glyph (type 0x2D within text, 60 bytes each):
+    +0x18   8   int32x2  glyph_bbox     Glyph bounding box (x0,y0)
+    +0x20   8   int32x2  glyph_extent   Glyph extent (x1,y1)
+    +0x28   4   uint32   char_code      Character code (low byte = ASCII/Latin-1)
+    +0x2C   8   int32x2  baseline_pos   Baseline position (x, y)
+    +0x34   4   uint32   advance_flags  Advance width and flags
+
+
+7. GROUP (type 0x06) AND LAYER (type 0x0A)
+--------------------------------------------
+
+Group:
+  +0x18   4   int32    bbox_x0         Group bounding box
+  +0x1C   4   int32    bbox_y0
+  +0x20   4   int32    bbox_x1
+  +0x24   4   int32    bbox_y1
+  +sub_hdr:   children                  Child record chain
+
+Layer:
+  +0x18   16  bytes    reserved        Zeros
+  +0x28   4   uint32   flags           Layer flags/visibility (9=visible)
+  +0x2C   32  bytes    name            Layer name, null-terminated ASCII
+                                        (e.g. "Background", "Foreground")
+  +sub_hdr:   children                  Child record chain
+
+Standard files have two layers: "Background" (usually empty) and
+"Foreground" (containing all visible objects).
+
+
+8. COMPOUND PATH (type 0x3A)
+------------------------------
+
+  +0x18   4   int32    bbox_x0         Compound bounding box
+  +0x1C   4   int32    bbox_y0
+  +0x20   4   int32    bbox_x1
+  +0x24   4   int32    bbox_y1
+  +0x28   ...          extra_data      Additional compound path parameters
+  +sub_hdr:   children                  Contains:
+                                         - Attribute records (fill, stroke)
+                                         - Path object(s) (type 0x02)
+                                         - Sentinel record (type 0x3B)
+
+
+9. FILE INFO (type 0x39)
+-------------------------
+
+Contains ASCII text metadata padded with spaces (0x20). Format:
+
+  [ CreationDate
+  HH:MM:SS DD-Mon-YYYY
+  ]
+
+  [ For
+  Owner Name
+  ]
+
+  [ CreatorVersion
+  Version String
+  ]
+
+  [ SerialNumber
+  NNNNNN
+  ]
+
+  [ SaveVersion
+  Version String
+  ]
+
+
+10. COLOR PALETTE TABLE
+-------------------------
+
+Located at the absolute file offset given by header field color_table_off
+(offset 0x3C in the file header).
+
+Each palette entry is 48 bytes:
+
+Offset  Size  Type     Field          Description
+------  ----  ------   -----------    -------------------------------------------
++0x00   4     uint32   entry_flags    Flags/sentinel (first entry often has
+                                       count of total allocated entries)
++0x04   4     uint32   entry_id       Entry identifier/type
++0x08   24    char[]   name           Color name, null-terminated ASCII
+                                       (e.g. "Black", "Red", "90% Black")
++0x20   4     bytes    color_bgr_m    Color value: byte 0=R, 1=G, 2=B,
+                                       3=model (0x20 = valid RGB entry)
++0x24   4     uint32   cmyk_cyan      CMYK Cyan (0 to 0x7FFFFFFF = 0-100%)
++0x28   4     uint32   cmyk_magenta   CMYK Magenta
++0x2C   4     uint32   cmyk_yellow    CMYK Yellow
+
+Standard palettes contain 17 entries (the basic RISC OS color set):
+  Index  Name          RGB
+  -----  -----------   ---------
+  0      Black         (0,0,0)
+  1      90% Black     (25,25,25)
+  2      80% Black     (51,51,51)
+  3      70% Black     (76,76,76)
+  4      60% Black     (102,102,102)
+  5      50% Black     (128,128,128)
+  6      40% Black     (153,153,153)
+  7      30% Black     (179,179,179)
+  8      20% Black     (204,204,204)
+  9      10% Black     (230,230,230)
+  10     White         (255,255,255)
+  11     Red           (255,0,0)
+  12     Green         (0,255,0)
+  13     Blue          (0,0,255)
+  14     Cyan          (0,255,255)
+  15     Magenta       (255,0,255)
+  16     Yellow        (255,255,0)
+
+Files may have additional custom colors appended after the standard set.
+
+The total number of allocated palette entries is given by the low byte of
+the first entry's entry_flags field (word at +0x00). Typical values are
+0x11 (17 entries) for standard palettes and 0x31 (49 entries) for extended
+palettes.
+
+IMPORTANT: The palette may contain gaps — entries where the model byte is
+not 0x20. These entries are invalid (often containing undo buffer data or
+garbage) and should be treated as empty slots. Valid color entries can
+appear AFTER a run of invalid entries. Parsers must iterate through ALL
+allocated entries (not stop at the first invalid one) and check each
+entry's model byte individually.
+
+
+11. POST-PALETTE DATA
+-----------------------
+
+After the record chain terminator and before the palette, there is a 32-byte
+fixed block:
+
+  Offset  Size  Description
+  ------  ----  -------------------------------------------
+  +0x00   8     Zeros
+  +0x08   4     0x00000021 (palette format marker)
+  +0x0C   4     0x00000400 (palette flags)
+  +0x10   16    Zeros
+
+After the palette table, remaining bytes contain the undo buffer:
+  - Variable size (8 to ~1400 bytes typically)
+  - May contain ASCII undo history strings (e.g. "<Nothing>", "Redo",
+    "paste", "move")
+  - Final 8 bytes often contain a footer marker
+
+The undo buffer data is not needed for file conversion and can be ignored.
+
+
+12. TOP-LEVEL RECORD ORDER
+----------------------------
+
+Records at the top level appear in this general order (with variations
+across file versions):
+
+  1. Settings 1 (type 0x3F) - Document configuration
+  2. File Info (type 0x39) - Metadata text (may be omitted)
+  3. Settings 2 (type 0x3E) - More configuration
+  4. Palette Config (type 0x22) - Print settings
+  5. Font Table (type 0x2F) - Available font names
+  6. Text Style (type 0x30) - Default text style
+  7. Join Style (type 0x2A) - Default join = mitre
+  8. Cap Style (type 0x2B) - Default cap = butt
+  9. Winding Rule (type 0x29) - Default = non-zero
+  10. Flatness (type 0x28) - Default flatness
+  11. Mitre Limit (type 0x27) - Default mitre limit
+  12. Fill Color (type 0x26) - Default fill
+  13. Stroke Color (type 0x24) - Default stroke
+  14. Line Width (type 0x25) - Default line width
+  15. File Path (type 0x23) - Original save path
+  16. Layer "Background" (type 0x0A) - Usually empty
+  17. Layer "Foreground" (type 0x0A) - Contains all drawing objects
+  18. End sentinel (size=0)
+
+Some files omit the File Info record or have a shorter sequence of default
+attribute records. The order of types 0x3F and 0x3E may be swapped.
+
+
+13. INLINE ATTRIBUTE INHERITANCE
+----------------------------------
+
+Each path or text object may contain inline attribute records that override
+the file-level defaults. If a particular attribute type is not present in
+the inline chain, the default value from the corresponding top-level record
+is used.
+
+The inline attribute chain within an object starts at the sub_hdr offset
+and uses the same back_link/size/type record format as the top-level chain.
+The chain terminates with a size=0 sentinel.
+
+
+14. COORDINATE SYSTEM
+-----------------------
+
+ArtWorks uses a Cartesian coordinate system:
+  - Origin at bottom-left of the page
+  - X increases to the right
+  - Y increases upward
+  - All coordinates are signed 32-bit integers in draw units
+
+For SVG conversion, the Y axis must be flipped (SVG has origin at top-left
+with Y increasing downward).
+
+
+15. FILE SIZE ACCOUNTING
+--------------------------
+
+A complete ArtWorks file consists of:
+
+  [0x00 - 0x7F]                     File header (128 bytes)
+  [0x80 - record_chain_end]         Record chain (variable)
+  [record_chain_end + 8 - gap_end]  Fixed 32-byte inter-section block
+  [color_table_off - palette_end]   Color palette (N x 48 bytes)
+  [palette_end - EOF]               Undo buffer / footer (variable)
+
+Every byte in the file belongs to one of these sections.

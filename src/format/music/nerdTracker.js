@@ -5,5 +5,5 @@ export class nerdTracker extends Format
 	name        = "NerdTracker Module";
 	ext         = [".ned"];
 	magic       = ["Nerdtracker II module"];
-	unsupported = true;
+	unsupported = true;	// 0 files on discmaster
 }

@@ -6,5 +6,5 @@ export class symphonie extends Format
 	ext          = [".symmod"];
 	magic        = ["Symphonie SymMOD music file", "Symphonie Module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "openmpt123"];
 }

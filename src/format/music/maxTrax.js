@@ -5,5 +5,5 @@ export class maxTrax extends Format
 	name        = "MaxTrax Module";
 	ext         = [".mxtx"];
 	magic       = ["MaxTrax module"];
-	unsupported = true;
+	unsupported = true;	// only 84 unique files on discmaster
 }

@@ -14,8 +14,14 @@ code is 'kakc'. The tome proper lives in the MacBinary data fork.
 The MacBinary resource fork carries installer-private bytes that are
 not part of the archived content.
 
-All multi-byte integers are big-endian. File names are MacRoman
-Pascal strings (a length byte followed by that many bytes of text).
+All multi-byte integers are big-endian. File names are Pascal
+strings (a length byte followed by that many bytes of text) encoded
+in the Macintosh character set of the creating system — Mac Roman
+for Western-language installers, or Mac Japanese (a Shift-JIS
+variant) for Japanese installers. No encoding indicator is stored
+in the tome; the extractor auto-detects Japanese filenames by
+scanning for Shift-JIS double-byte lead sequences (0x81-0x9F or
+0xE0-0xEF followed by a valid trail byte).
 
 All byte offsets below are zero-based from the start of the named
 region. Every byte of every sample file in sample0/ (107,559,680

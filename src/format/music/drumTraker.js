@@ -6,5 +6,5 @@ export class drumTraker extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Drum_Traker_module";
 	ext         = [".dtl"];
 	magic       = ["Drum Traker module"];
-	unsupported = true;
+	unsupported = true;	// only 15 unique files on discmaster
 }

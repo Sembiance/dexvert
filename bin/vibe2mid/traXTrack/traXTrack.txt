@@ -1,0 +1,166 @@
+TraX Music Track / Master Tracks .MTS format notes
+
+This document describes every byte class observed in the 100 files under
+sample0/. The files are Passport/GVOX Trax or Master Tracks MIDI-sequencer
+songs, not sampled audio. The converter emits Standard MIDI format 1.
+
+General layout
+
+All multi-byte integers are little-endian in the .MTS file. Chunks use an
+8-byte header:
+
+  offset  size  meaning
+  0       4     chunk id
+  4       4     chunk size in bytes, including this 8-byte header
+
+The top-level chunk sequence is:
+
+  RO\0\0 root chunk, always size 0x40
+  TK00 conductor track chunk, header size 0x40, followed by conductor records
+  TKnn music/text track chunks, header size 0x40, followed by measure blocks
+  optional MARK chunk
+  optional N?TE chunk
+
+Track ids are decimal ASCII after "TK". They are usually sequential, but some
+files skip deleted track numbers, such as TK10 or TK16. TK00 is always the
+conductor.
+
+RO root chunk, size 0x40
+
+  offset  size  meaning
+  0x00    4     "RO\0\0"
+  0x04    4     0x40
+  0x08    32    NUL-padded source file/path text
+  0x28    2     song window/UI state word
+  0x2a    2     MIDI time division; all samples are 240 PPQ
+  0x2c    2     saved UI/window state word
+  0x2e    2     0xffff sentinel
+  0x30    2     reserved, zero in all samples
+  0x32    2     number of conductor records/measures
+  0x34    2     saved UI/window state word
+  0x36    2     saved UI/window state word
+  0x38    2     reserved, zero in all samples
+  0x3a    2     reserved, zero in all samples
+  0x3c    2     saved option flag
+  0x3e    2     saved option flag
+
+TK track header, size 0x40
+
+  offset  size  meaning
+  0x00    4     "TK" plus decimal track number
+  0x04    4     0x40
+  0x08    32    NUL-padded track name
+  0x28    2     record count: conductor records for TK00, measure blocks otherwise
+  0x2a    2     track window/display x coordinate
+  0x2c    2     track window/display y coordinate
+  0x2e    2     track type/flags; TK00 uses 0x0010, normal tracks use 0
+  0x30    2     channel assignment word; high byte is 1-based MIDI channel when low byte is set
+  0x32    2     default MIDI program/patch, zero when unset
+  0x34    2     transpose/key/display option word
+  0x36    2     track playback/display option word
+  0x38    2     reserved/option word
+  0x3a    2     reserved/option word
+  0x3c    2     reserved/option word
+  0x3e    2     reserved/option word
+
+TK00 conductor records
+
+TK00 contains exactly the count at TK00+0x28 records. Each record is:
+
+  offset  size  meaning
+  0x00    2     payload length after this field
+  0x02    2     starting tempo for the measure, BPM
+  0x04    2     reserved, zero
+  0x06    2     ticks per notated beat for this measure
+  0x08    2     ticks per measure/bar
+  0x0a    1     time-signature numerator
+  0x0b    1     time-signature denominator as a normal number, e.g. 4, 8, 16
+  0x0c    4     32-bit little-endian float: cached real-time seconds for the measure
+  0x10    2     cached fractional timing/display word
+  0x12    var   optional intra-measure tempo points
+
+When the payload length is 0x10, there are no intra-measure tempo points.
+Longer records append zero or more tempo points and a 0xffff terminator:
+
+  repeated 4-byte tempo point: u16 tick_in_measure, u16 tempo_bpm
+  terminator:                 0xffff
+
+The converter writes MIDI Set Tempo and Time Signature meta events from these
+records and uses ticks-per-measure to compute absolute measure starts.
+
+Normal track measure blocks
+
+Every non-TK00 track contains exactly the count at TK+0x28 measure blocks. A
+measure block starts with a 16-bit length and ends with 0xffff:
+
+  offset  size  meaning
+  0x00    2     byte offset from block start to the 0xffff terminator
+  0x02    var   event records
+  len     2     0xffff terminator
+
+An empty measure is therefore:
+
+  02 00 ff ff
+
+MIDI event records inside a measure
+
+Every event begins with a u16 tick offset from the start of the measure and a
+MIDI status byte. Running status is not used.
+
+Note records, 10 bytes:
+
+  offset  size  meaning
+  0x00    2     tick offset in measure
+  0x02    1     MIDI note status; observed samples use 0x9n
+  0x03    1     MIDI note number
+  0x04    1     note-on velocity
+  0x05    1     note-off/release velocity
+  0x06    2     notation voice/flag word; observed values 0, 1, 2, 3
+  0x08    2     duration in ticks
+
+The converter writes a MIDI Note On at tick offset and a Note Off at
+tick offset + duration.
+
+Controller, pressure, program, and pitch records, 6 bytes:
+
+  offset  size  meaning
+  0x00    2     tick offset in measure
+  0x02    1     MIDI status 0xAn, 0xBn, 0xCn, 0xDn, or 0xEn
+  0x03    1     first MIDI data byte
+  0x04    1     second MIDI data byte, or zero pad for 0xCn/0xDn
+  0x05    1     pad, zero in all samples
+
+The converter writes 2-data-byte MIDI messages for 0xAn, 0xBn, and 0xEn, and
+1-data-byte messages for 0xCn and 0xDn.
+
+MARK chunk
+
+MARK chunks use the normal chunk header. The payload is an array of marker
+records. Two record sizes are present in the sample set: 48 bytes and 112
+bytes. The first 48 bytes share this layout:
+
+  offset  size  meaning
+  0x00    2     marker option/display word
+  0x02    2     measure index for the marker
+  0x04    4     marker option/display dword
+  0x08    4     cached tick/time hint
+  0x0c    4     marker option/display dword
+  0x10    32    NUL-padded marker text
+
+The 112-byte form is the same first 48 bytes plus 64 bytes of saved marker
+window/display padding. The converter writes marker text as MIDI Marker meta
+events at the stored measure index.
+
+N?TE chunk
+
+One sample has a final N?TE chunk. It uses the normal chunk header and contains
+a NUL-terminated Latin-1 notepad text payload. The converter writes it as a MIDI
+Text meta event at tick zero.
+
+Conversion and validation behavior
+
+traXTrack.py validates the RO signature, chunk sizes, conductor record lengths,
+measure block counts and terminators, event statuses, event data-byte ranges,
+note notation flags, MARK record sizing, and N?TE sizing. Output is written to
+a temporary file and atomically renamed only after parsing and MIDI generation
+succeed; on failure the requested output file is removed.

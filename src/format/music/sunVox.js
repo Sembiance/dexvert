@@ -5,5 +5,5 @@ export class sunVox extends Format
 	name        = "SunVox Module";
 	ext         = [".psy"];
 	magic       = ["SunVox module"];
-	unsupported = true;
+	unsupported = true;	// only 105 unique files on discmaster
 }

@@ -5,5 +5,5 @@ export class xCADDrawing extends Format
 	name        = "X-CAD Drawing";
 	ext         = [".xdr"];
 	magic       = ["X-CAD Drawing"];
-	unsupported = true;
+	unsupported = true;	// only 11 unique files on discmaster
 }

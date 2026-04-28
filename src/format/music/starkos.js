@@ -5,5 +5,5 @@ export class starkos extends Format
 	name        = "STarKos Module";
 	ext         = [".psy"];
 	magic       = ["STarKos song"];
-	unsupported = true;
+	unsupported = true;	// only 61 unique files on discmaster
 }

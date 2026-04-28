@@ -5,5 +5,5 @@ export class ixalance extends Format
 	name        = "Ixalance Module";
 	ext         = [".ixs"];
 	magic       = ["Ixalance module"];
-	unsupported = true;
+	unsupported = true;	// only 24 unique files on discmaster
 }

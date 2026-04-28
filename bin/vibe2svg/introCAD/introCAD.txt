@@ -1,0 +1,227 @@
+IntroCAD Drawing File Format Specification
+==========================================
+
+IntroCAD was a 2D vector drawing / CAD application for the Commodore Amiga
+computer (Motorola 68000 processor, big-endian architecture). This document
+describes the binary file format used to store IntroCAD drawings.
+
+Files may use the .cad extension or have no extension (component library files).
+
+
+1. FILE STRUCTURE
+-----------------
+
+An IntroCAD file consists of:
+
+  [Magic]  [Record 0]  [Record 1]  ...  [Record N]
+
+There is no explicit record count or end-of-file marker. Records are packed
+contiguously from immediately after the magic bytes until EOF. The file size
+must equal exactly: 4 + sum of all record sizes.
+
+
+2. MAGIC BYTES (4 bytes)
+------------------------
+
+Offset  Size  Value       Description
+------  ----  ----------  -----------
+0       4     00 12 D6 44 File format identifier (constant)
+
+All valid IntroCAD drawing files begin with these four bytes.
+
+
+3. RECORD FORMAT (6 + N*8 bytes)
+--------------------------------
+
+Each record describes a polyline, polygon, or point marker.
+
+Offset  Size  Field        Description
+------  ----  -----------  -----------
+0       1     npoints      Number of vertices (0-255)
+1       1     color        Color/pen index (0-15 for standard palette)
+2       1     line_style   Line dash pattern (0=solid, 1-6=dashed variants)
+3       1     fill_flag    Polygon fill (0=outline only, 1=filled)
+4       1     flag_b4      Additional attribute byte
+5       1     flag_b5      Additional attribute byte
+6       N*8   coordinates  Vertex data: N pairs of (x, y) as MFFP floats
+
+Total record size: 6 + npoints * 8 bytes.
+
+
+3.1 NPOINTS FIELD (byte 0)
+
+  Number of coordinate pairs that follow. Valid range 0-255.
+
+  - npoints=0: Empty record (6 bytes total, no coordinate data).
+  - npoints=1: Single point marker.
+  - npoints=2: Line segment.
+  - npoints>=3: Polyline or polygon.
+
+  If the first and last vertices are identical, the shape is explicitly closed.
+
+
+3.2 COLOR FIELD (byte 1)
+
+  Index into the drawing color palette. Standard range is 0-15, corresponding
+  to the Amiga's 16-color display mode. Colors are application-defined; a
+  typical default mapping:
+
+    0  = Background (dark blue)     8  = Teal
+    1  = Black (primary pen)        9  = Purple
+    2  = Red                        10 = Brown-red
+    3  = Orange                     11 = Olive
+    4  = Blue                       12 = Dark cyan
+    5  = Green                      13 = Brown
+    6  = Magenta                    14 = Dark magenta
+    7  = Dark yellow                15 = Gray
+
+  Values > 15 may appear in certain files containing embedded non-vector data
+  (such as complex symbol definitions). Records with color > 15 should be
+  treated as opaque data and skipped during rendering.
+
+
+3.3 LINE_STYLE FIELD (byte 2)
+
+  Controls the dash pattern of the line stroke:
+
+    0 = Solid line (default)
+    1 = Short dash (equal on/off)
+    2 = Long dash
+    3 = Dash-dot
+    4 = Short dot
+    5 = Long dot
+    6 = Center line (long-short-long)
+
+  Higher values may appear but are uncommon.
+
+
+3.4 FILL_FLAG FIELD (byte 3)
+
+  Commonly 0 or 1. Despite its position, this byte does NOT control
+  polygon fill rendering. It appears on both open polylines (text character
+  strokes, pin labels) and closed shapes alike, including closed-path
+  letters such as B, D, O, 0, and 8. Applying fill based on this flag
+  produces incorrect visual results.
+
+  The exact purpose is unclear — it may relate to editing group membership,
+  selection state, or drawing mode within the IntroCAD application. For
+  rendering, all shapes should be drawn as stroke-only paths (no interior
+  fill).
+
+
+3.5 FLAG_B4 AND FLAG_B5 (bytes 4-5)
+
+  Additional rendering attributes. Observed values:
+
+    flag_b4: Commonly 0 or 1. May indicate closed-path rendering or
+             grouping membership. Values 0-14 observed in standard drawings.
+
+    flag_b5: Commonly 0. Values 0-14 observed. Purpose not fully determined;
+             likely related to layer or rendering priority.
+
+  These bytes are secondary to the core rendering attributes (color,
+  line_style, fill_flag) and may be safely defaulted to 0 for basic rendering.
+
+
+4. COORDINATE ENCODING: MOTOROLA FAST FLOATING POINT (MFFP)
+------------------------------------------------------------
+
+Each coordinate value is a 4-byte Motorola Fast Floating Point number stored
+in big-endian byte order. This is NOT IEEE 754 — it is the native floating-
+point format of the Amiga's mathffp.library.
+
+Byte layout (big-endian on disk):
+
+  Byte 0 (MSB): Mantissa bits 23-16
+  Byte 1:       Mantissa bits 15-8
+  Byte 2:       Mantissa bits 7-0
+  Byte 3 (LSB): [Sign:1] [Exponent:7]
+
+Fields:
+  - Mantissa: 24-bit unsigned integer (bits 31-8 of the 32-bit word)
+  - Sign:     1 bit (bit 7 of byte 3). 0=positive, 1=negative
+  - Exponent: 7-bit unsigned integer (bits 6-0 of byte 3), biased by 64
+
+Decoding formula:
+
+  If all 4 bytes are zero: value = 0.0
+  Otherwise:
+    value = (-1)^sign * mantissa * 2^(exponent - 88)
+
+  Where: exponent_unbiased = (exponent_field - 64)
+         and the shift is (exponent_unbiased - 24) = (exponent_field - 88)
+
+The mantissa is normalized with bit 23 (MSB) always set for non-zero values,
+giving an effective precision of 24 bits (~7 decimal digits).
+
+Example:
+  Bytes: F8 00 00 43
+  As 32-bit BE: 0xF8000043
+  Mantissa: 0xF80000 = 16252928
+  Byte 3: 0x43 = 0100_0011
+    Sign: 0 (positive)
+    Exponent: 100_0011 = 67, unbiased = 67-64 = 3
+  Value = 16252928 * 2^(67-88) = 16252928 * 2^(-21) = 7.75
+
+Each vertex is stored as two consecutive MFFP values: X then Y.
+The coordinate system uses Y-increasing-upward (mathematical/engineering
+convention), consistent with standard CAD practice. To render in screen
+coordinate systems (Y-down), negate all Y values.
+
+
+5. COORDINATE PAIRS
+--------------------
+
+Within a record, the N coordinate pairs are stored sequentially:
+
+  Offset 6:   X0 (4 bytes MFFP)
+  Offset 10:  Y0 (4 bytes MFFP)
+  Offset 14:  X1 (4 bytes MFFP)
+  Offset 18:  Y1 (4 bytes MFFP)
+  ...
+  Offset 6+(N-1)*8:   X(N-1) (4 bytes MFFP)
+  Offset 6+(N-1)*8+4: Y(N-1) (4 bytes MFFP)
+
+
+6. NON-DRAWING FILES
+---------------------
+
+Some files sharing the IntroCAD magic bytes are not vector drawings but
+rather project configuration or settings files (e.g., INFO_* files). These
+files contain the same 4-byte magic but their content after the magic does
+not conform to the record structure described above. A parser should validate
+that all records fit within the file boundaries; if any record's coordinate
+data would extend past EOF, the file is not a valid drawing file.
+
+
+7. EMBEDDED NON-VECTOR DATA
+-----------------------------
+
+Certain complex drawing files (notably large symbol libraries) may contain
+records with color indices > 15 and unusual flag values. These records still
+conform to the 6+N*8 byte structure but their coordinate data does not
+represent valid MFFP floating-point vertices. They likely encode embedded
+bitmap data, text rendering information, or symbol reference tables. A
+renderer should skip records where color > 15 to avoid visual artifacts.
+
+
+8. FILE SIZE CONSTRAINTS
+------------------------
+
+  Minimum valid file: 4 bytes (magic only, zero records)
+  Maximum record size: 6 + 255*8 = 2046 bytes
+  No upper limit on file size or record count.
+
+The file size must satisfy:
+  file_size = 4 + sum(6 + record[i].npoints * 8) for all records i
+
+
+9. AMIGA PALETTE CONTEXT
+--------------------------
+
+IntroCAD ran on Amiga systems using the Amiga chipset's color register
+system. In 16-color mode (4 bitplanes), colors 0-15 are available. Color 0
+is traditionally the background/paper color. The actual RGB values for each
+color index were configurable per-drawing via the IntroCAD preferences system
+(stored separately from the drawing data, e.g., in INFO files). Without the
+associated preferences, renderers should use a reasonable default palette.

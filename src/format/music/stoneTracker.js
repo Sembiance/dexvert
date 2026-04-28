@@ -6,6 +6,6 @@ export class stoneTracker extends Format
 	ext         = [".spm", ".sps"];
 	matchPreExt = true;
 	magic       = ["StoneTracker Module"];
-	unsupported = true;
+	unsupported = true;	// only 11 unique files on discmaster
 }
 

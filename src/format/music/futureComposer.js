@@ -7,5 +7,5 @@ export class futureComposer extends Format
 	ext          = [".fc", ".fc13", ".fc14", ".smc", ".smod", ".bsi"];
 	magic        = ["Future Composer "];	// trailing space on purpose
 	metaProvider = ["musicInfo"];
-	converters   = ["uade123"];
+	converters   = ["uade123", "openmpt123"];
 }

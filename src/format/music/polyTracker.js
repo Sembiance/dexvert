@@ -7,5 +7,5 @@ export class polyTracker extends Format
 	ext          = [".ptm"];
 	magic        = ["Poly Tracker PTM Module", "Poly Tracker Module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "openmpt123"];
 }

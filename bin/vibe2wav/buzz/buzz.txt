@@ -1,0 +1,401 @@
+Vibe coded by Codex
+
+Jeskola Buzz module container notes for sample0/
+================================================
+
+Scope
+-----
+
+The files in sample0/ are Jeskola Buzz song/module files with the magic
+string "Buzz".  The container and every section tag observed in the sample set
+are handled by buzz.py.  The converter is intentionally strict: if it cannot
+validate the container, or if the only audio is plugin-generated or stored in
+Buzz's proprietary CWAV compressor, it fails before writing output.
+
+Important limitation: a Buzz song is not self-contained PCM in the general
+case.  Synthesis, effects, routing behavior, and many tracker-like note events
+are implemented by external Buzz machine DLLs.  Reconstructing the full audible
+song requires those machine DSP implementations.  The public BMX/BMW container
+format identifies the CWAV compressor as proprietary and does not provide
+compressed block sizes, so a decoder is required before later compressed wave
+headers can even be located.  buzz.py therefore converts only embedded raw
+16-bit WAVE wavetable data.  It does not emulate Buzz machines.
+
+
+File header
+-----------
+
+All multi-byte integer fields are little-endian.
+
+Offset  Size  Meaning
+0       4     ASCII "Buzz"
+4       4     Number of active section directory entries, maximum 31
+8       372   31 fixed directory entries, 12 bytes each
+
+Each directory entry:
+
+Offset  Size  Meaning
+0       4     Four-character section tag
+4       4     Absolute file offset of section payload
+8       4     Declared payload size in bytes
+
+The active directory entries are followed by zero-filled unused entries.  In
+the sample set, the first section begins at offset 380.  Sections are stored
+contiguously in directory order.  One sample, sample0/23764/abulfeda.bmx, has a
+declared final CWAV size shorter than the remaining file bytes; buzz.py treats
+the extra final bytes as continuation bytes of that final section so the whole
+file is accounted for.
+
+
+Observed section order and tags
+-------------------------------
+
+The sample set uses these section tags:
+
+BVER  Buzz version string
+PARA  Machine parameter descriptions
+MACH  Machine instances, state, attributes
+CONN  Machine connections
+WAVT  Wavetable metadata
+PATT  Per-machine patterns
+SEQU  Sequence/order list
+BLAH  Song info text
+PDLG  Parameter dialog window positions
+MIDI  MIDI controller bindings
+WAVE  Raw wave data
+CWAV  Proprietary compressed wave data
+
+No other section tag is accepted by buzz.py.
+
+
+BVER
+----
+
+Payload is one zero-terminated Latin-1 string.  It records the Buzz build
+version/date.  The string terminator must consume the last byte of the section.
+
+
+PARA
+----
+
+PARA exists in newer files and describes parameter widths used by MACH state
+and by pattern data.
+
+Offset  Size      Meaning
+0       u32       Machine count
+
+Repeated for each machine:
+
+Size      Meaning
+asciiz    Machine instance name
+asciiz    Machine type/DLL display name
+u32       Number of global parameters
+u32       Number of track parameters
+
+Repeated for all global parameters, then all track parameters:
+
+Size      Meaning
+u8        Parameter kind
+asciiz    Parameter name
+i32       Minimum value
+i32       Maximum value
+i32       No-value sentinel
+i32       Flags
+i32       Default value
+
+Parameter widths observed/used by Buzz state:
+
+Kind  Width  Meaning used by Buzz machines
+0     1      Note-like value
+1     1      Switch/trigger
+2     1      Byte parameter
+3     2      Word parameter
+
+
+MACH
+----
+
+Offset  Size      Meaning
+0       u16       Machine count
+
+Repeated for each machine:
+
+Size      Meaning
+asciiz    Machine instance name
+u8        Machine kind: 0 master, 1 generator, 2 effect
+asciiz    DLL/machine type name, present only for kind 1 or 2
+f32       X coordinate in machine view
+f32       Y coordinate in machine view
+u32       Machine-specific data byte count
+bytes     Machine-specific data
+u16       Attribute count
+
+Repeated for each attribute:
+
+Size      Meaning
+asciiz    Attribute key
+u32       Attribute value
+
+After attributes, parameter state follows.  When PARA exists, buzz.py validates
+it as:
+
+bytes     Global parameter state, sum of PARA global parameter widths
+u16       Current track count
+bytes     Track parameter state for each track, track_count * sum of PARA track
+          parameter widths
+
+Older files without PARA still have this state, but the widths are machine-DLL
+dependent.  buzz.py preserves that MACH payload as an opaque validated section
+instead of guessing record boundaries.
+
+
+CONN
+----
+
+Offset  Size  Meaning
+0       u16   Connection count
+
+Repeated for each connection:
+
+Size  Meaning
+u16   Source machine index
+u16   Destination machine index
+u16   Amp
+u16   Pan
+
+
+WAVT
+----
+
+Offset  Size      Meaning
+0       u16       Wavetable wave count
+
+Repeated for each wave:
+
+Size      Meaning
+u16       Wave index
+asciiz    Full source file path
+asciiz    Wave display name
+f32       Volume
+u8        Flags
+
+Wave flags:
+
+Bit  Meaning
+0    Loop
+1    Do not save
+2    Floating-point sample memory format
+3    Stereo
+4    Bidirectional loop
+7    Envelopes follow
+
+If bit 7 is set:
+
+Size  Meaning
+u16   Envelope count
+
+Repeated for each envelope:
+
+Size  Meaning
+u16   Attack time
+u16   Decay time
+u16   Sustain level
+u16   Release time
+u8    ADSR subdivide
+u8    ADSR flags
+u16   Point count; bit 15 means the envelope is disabled
+
+Repeated for point_count & 0x7fff points:
+
+Size  Meaning
+u16   X
+u16   Y
+u8    Point flags
+
+After optional envelopes:
+
+Size  Meaning
+u8    Level count
+
+Repeated for each level:
+
+Size  Meaning
+u32   Number of sample frames
+u32   Loop begin
+u32   Loop end
+u32   Samples per second
+u8    Root note
+
+
+WAVE
+----
+
+WAVE stores raw wavetable sample bytes.
+
+Offset  Size  Meaning
+0       u16   Number of wave data records
+
+Repeated for each wave data record:
+
+Size   Meaning
+u16    Wave index matching a WAVT entry
+u8     Format; buzz.py supports only 0
+u32    Number of bytes in all levels for this wave
+bytes  Raw sample bytes for all levels concatenated
+
+For format 0, the public Buzz format defines raw 16-bit little-endian PCM.
+The expected byte count for each level is:
+
+sample_frames * channel_count * sample_size
+
+channel_count is 2 when WAVT flag bit 3 is set, otherwise 1.  sample_size is 4
+when WAVT flag bit 2 is set, otherwise 2.  buzz.py emits only non-floating
+16-bit samples.
+
+
+CWAV
+----
+
+CWAV has the same top-level purpose as WAVE, but Buzz format 1 is a proprietary
+compressed stream.  The public file-format note does not define the codec, and
+the stream does not carry independent compressed sizes before each wave record.
+Without a decoder, a parser cannot safely locate subsequent wave headers in
+multi-wave CWAV payloads.  buzz.py therefore rejects non-empty CWAV sections
+instead of guessing.
+
+
+PATT
+----
+
+PATT stores patterns for each machine.  The documented outer structure is:
+
+Repeated for each machine:
+
+Size    Meaning
+u16     Number of patterns
+u16     Number of tracks in the machine pattern data
+
+Repeated for each pattern:
+
+Size    Meaning
+asciiz  Pattern name
+u16     Pattern length in ticks/rows
+bytes   Pattern data
+
+The pattern byte layout is machine-parameter-dependent and varies across old
+and new Buzz files.  PARA provides enough width information for many simple
+fixed-width rows, but several sample0 files use pattern encodings that are not
+described by the public note.  Since buzz.py does not emulate machine events,
+it preserves PATT as an opaque section after validating the outer container.
+
+
+SEQU
+----
+
+SEQU stores pattern order events.
+
+Offset  Size  Meaning
+0       u32   End of song in ticks
+4       u32   Loop begin in ticks
+8       u32   Loop end in ticks
+12      u16   Sequence count
+
+Repeated for each sequence:
+
+Size  Meaning
+u16   Machine index
+u32   Event count
+
+If Event count is zero, the sequence record ends here.  If non-zero:
+
+Size  Meaning
+u8    Bytes per event position: observed 1, 2, or 4
+u8    Bytes per event value: observed 1, 2, or 4
+bytes Event list: repeated position, value pairs
+
+Event values:
+
+0x00       Mute
+0x01       Break
+0x02       Thru
+0x10+n     Pattern n
+bit 7 set  Loop marker flag
+
+
+BLAH
+----
+
+Offset  Size  Meaning
+0       u32   Text byte count
+4       bytes Raw song-info text, not zero-terminated
+
+
+PDLG
+----
+
+Offset  Size  Meaning
+0       u8    Flags; bit 1 means dialogs visible
+
+Then zero or more entries, terminated by a zero byte:
+
+Size    Meaning
+asciiz  Machine name
+44      Win32 WINDOWPLACEMENT structure
+
+
+MIDI
+----
+
+MIDI stores zero or more controller bindings, terminated by a zero byte.
+
+Size    Meaning
+asciiz  Machine name
+u8      Parameter group
+u8      Parameter track
+u8      Parameter number
+u8      MIDI channel
+u8      MIDI controller number
+
+
+sample0/ conversion result
+--------------------------
+
+There are 100 files in sample0/.
+
+6 files contain supported raw WAVE wavetable audio.  Those files produced 17
+separate sample/instrument WAV files in out/ by the one-time run used for
+buzz.html.  Each output filename is derived from the wave display name stored
+in the file's WAVT section:
+
+sample0/17113/SpaceEgg.bmx
+sample0/21901/Line In Vocoder.bmx
+sample0/21901/more raverb basslines.bmx
+sample0/23764/Slicer - Second chance.bmx
+sample0/23764/stir_fry_our_souls_bender_test.bmx
+sample0/7814/TAP_BUZ1.BMX
+
+Produced sample files:
+
+out/2dchance.wav
+out/909-05.wav
+out/909-08.wav
+out/909-10.wav
+out/HipHop06.wav
+out/clav.wav
+out/ct-icey3.wav
+out/drum2.wav
+out/drum_11.wav
+out/drum_16.wav
+out/drum_17.wav
+out/drum_19.wav
+out/drum_23.wav
+out/drum_28.wav
+out/kick9.wav
+out/percuss3.wav
+out/white512.wav
+
+9 files contain non-empty proprietary CWAV compressed audio and are rejected by
+buzz.py until a CWAV decoder is implemented.
+
+85 files contain no embedded raw WAVE audio for this converter to write; their
+audible output depends on Buzz machine/plugin synthesis or external behavior.

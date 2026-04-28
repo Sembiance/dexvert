@@ -1,0 +1,197 @@
+Vibe coded by Codex
+
+Zoetrope Animation RIFF/VRUN file format
+=========================================
+
+Scope
+-----
+
+This describes the Zoetrope Animation files in sample0/.  The files use the
+ASCII magic "RIFF", but the Zoetrope container fields are big-endian.  The
+stored picture data is Amiga-style bitplane video with a per-frame 12-bit RGB
+palette.  No sample contains audio or any audio-related chunk; the converter
+therefore emits silent AVI files.
+
+One sample, sample0/21003/supermanani.rif, is physically truncated: its first
+VRUN chunk declares 0x30e4 payload bytes at file offset 0x88, but the file ends
+before that payload is complete.  The converter treats this specific class of
+EOF truncation leniently after the VRUN header has been validated: it decodes
+all complete byte-vertical operations available, leaves missing mode-1 data as
+cleared pixels, leaves missing mode-2 data as previous-frame pixels, emits the
+salvaged frame, and stops at EOF.  Other malformed tags, dimensions, reserved
+fields, unsupported compression modes, and non-EOF structural errors still fail.
+sample0/11573/sachiko.riff contains 34 valid declared frames and then an
+unreferenced partial extra VRUN fragment; the declared animation is converted,
+and the trailing fragment is documented below as damaged residue outside the
+declared frame set.
+
+Top-level layout
+----------------
+
+All multi-byte fields in this section are big-endian.
+
+Offset  Size  Meaning
+0x00    4     ASCII "RIFF".
+0x04    4     Declared RIFF payload size.  For most files this is file_size-8,
+              but several samples contain stale or incorrect values.  The frame
+              table and VRUN chunk sizes are authoritative for decoding.
+0x08    4     Reserved, always 0 in handled samples.
+0x0c    2     Width in pixels.  All samples are 320.
+0x0e    2     Height in pixels.  All samples are 200.
+0x10    2     Bitplane depth.  Samples are 5 planes except ssachiko2.riff,
+              which is 4 planes.
+0x12    2     Reserved, always 0.
+0x14    2     Primary frame count.
+0x16    2     Frame delay in Amiga jiffies, 1/60 second units.  A zero value
+              means no explicit delay was stored; the converter uses Zoetrope's
+              observed default of 4 jiffies (15 fps) for AVI timing.
+0x18    2     Secondary frame count.  It is either 0 or equal to the primary
+              frame count in every sample.  Decoding uses the primary count.
+0x1a    38    Reserved, always 0.
+0x40    4*n   Frame offset table, n = primary frame count.  Entries are
+              absolute byte offsets from the beginning of the file to VRUN
+              chunks.
+
+Normal files have a populated offset table.  sachiko.riff has an all-zero
+table; its 34 declared VRUN chunks are stored sequentially starting immediately
+after the table at 0x40 + 4*n.  That is a structural variant in the sample, not
+a scan heuristic: the declared count and each chunk's declared size determine
+the 34 frame boundaries exactly.
+
+VRUN chunk layout
+-----------------
+
+All multi-byte fields in this section are big-endian.  A VRUN chunk starts at a
+frame offset from the table or sequential derivation:
+
+Offset from chunk  Size  Meaning
+0x00               4     ASCII "VRUN".
+0x04               4     Payload size in bytes.
+0x08               ...   Payload, exactly the declared size.
+
+VRUN payload layout:
+
+Payload offset  Size  Meaning
+0x00            4     Reserved, always 0.
+0x04            2     Width; matches top-level width.
+0x06            2     Height; matches top-level height.
+0x08            2     Bitplane depth; matches top-level depth.
+0x0a            2     Reserved, always 0.
+0x0c            20    Five plane descriptors.  Each descriptor is:
+                      u16 compression_mode, u16 byte_count.
+                      Descriptors beyond the stored depth are (0, 0).
+0x20            16    Reserved, always 0.
+0x30            64    Palette: 32 big-endian 12-bit Amiga RGB words.
+                      Bits 11..8 are red, 7..4 green, 3..0 blue.
+                      Expand each nibble to 8-bit color by multiplying by 17.
+0x70            ...   Plane byte streams in descriptor order.  The byte_count
+                      values account for every stream byte.
+
+The payload size is exactly:
+
+    0x70 + sum(all five descriptor byte_count values)
+
+For a 4-plane file the fifth descriptor byte_count is zero.
+
+Plane data and alignment bytes
+------------------------------
+
+Each plane is 320/8 = 40 byte-columns by 200 rows.  Compression is vertical:
+the stream describes column 0 from top to bottom, then column 1, through column
+39.  Each column starts with an 8-bit op count.  Descriptor byte_count values
+include the compressed column data plus 0 to 3 alignment/trailer bytes.  The
+decoder stops after all 40 columns; the remaining 0 to 3 bytes are counted
+alignment bytes.  In the samples those alignment bytes are often zero but are
+not reliably initialized, so their content has no image meaning.
+
+For an otherwise valid file that ends inside the final VRUN payload, the
+converter's salvage path decodes only complete operations.  A truncated
+operation stops the current plane, and absent later planes are left in their
+initial state for that compression mode.  This behavior is used by the damaged
+supermanani.rif sample.
+
+Compression mode 1: full-frame vertical RLE
+-------------------------------------------
+
+Mode 1 reconstructs the entire plane from scratch into a cleared destination.
+For each of 40 columns:
+
+1. Read op_count.
+2. Repeat op_count operations:
+   - If op byte has bit 7 set, count = op & 0x7f.  Copy the next count bytes
+     literally into successive rows of this column.
+   - If op byte has bit 7 clear, count = op.  Read one value byte and repeat it
+     count times into successive rows of this column.
+3. The operations must fill exactly 200 rows.
+
+The first frame in every valid sample uses mode 1 for each active plane.
+
+Compression mode 2: byte-vertical delta
+---------------------------------------
+
+Mode 2 is Jim Kent's byte-vertical delta coding as used by Amiga ANIM method 5.
+It applies changes to the same plane from the previous decoded frame.  For each
+of 40 columns:
+
+1. Read op_count.  If it is 0, the column is unchanged.
+2. Repeat op_count operations with a current row cursor:
+   - Skip op: op is 1..127.  Advance the row cursor by op rows, leaving those
+     bytes unchanged.
+   - Literal op: op has bit 7 set.  count = op & 0x7f.  Copy the next count
+     bytes into successive rows of this column.
+   - Same op: op is 0.  Read count byte and value byte.  Store value into the
+     next count successive rows of this column.
+3. The row cursor may stop before row 200; the remaining rows are unchanged.
+
+Image conversion
+----------------
+
+The decoded planes are Amiga planar bitmap data.  For a pixel at x,y:
+
+1. byte_index = y * (width/8) + floor(x/8)
+2. bit = 7 - (x % 8)
+3. For each plane p, bit p of the chunky palette index is:
+       (plane[p][byte_index] >> bit) & 1
+4. Look up the resulting index in the frame's 32-entry palette.
+
+The AVI converter writes 24-bit uncompressed DIB frames.  No audio is emitted
+because the Zoetrope samples contain no audio bytes or audio chunk type.
+
+Sample audit
+------------
+
+The table below accounts for every sample file at the container level.  "decl"
+is the 0x04 declared RIFF payload size.  "end" is the byte offset immediately
+after the last declared, usable frame.  "trail" is physical file bytes after
+that frame set.
+
+sample0/11573/alien.riff: len 168004, decl 176540, depth 5, frames 16, delay 4, populated table, end 168004, trail 0.
+sample0/11573/sachiko.riff: len 565576, decl 563288, depth 5, frames 34, delay 0, all-zero table with sequential frames, end 563120, trail 2456.  The trail begins with an unreferenced VRUN header for a 0x44f8-byte payload but is truncated.
+sample0/119/dinonew.rif: len 13696, decl 13688, depth 5, frames 10, delay 17, populated table, end 13696, trail 0.
+sample0/119/li'lguy.rif: len 15348, decl 15340, depth 5, frames 8, delay 6, populated table, end 15348, trail 0.
+sample0/119/zoedemo1.rif: len 87284, decl 87276, depth 5, frames 42, delay 4, populated table, end 87284, trail 0.
+sample0/119/zoesparklet.rif: len 179628, decl 179620, depth 5, frames 74, delay 4, populated table, end 179628, trail 0.
+sample0/1390/Ray1: len 109760, decl 109752, depth 5, frames 16, delay 0, populated table, end 109760, trail 0.
+sample0/1390/Ray2: len 105872, decl 109568, depth 5, frames 16, delay 4, populated table, end 105872, trail 0.
+sample0/1390/Ray3: len 110772, decl 109136, depth 5, frames 16, delay 4, populated table, end 110772, trail 0.
+sample0/1390/Ray4: len 118876, decl 110764, depth 5, frames 16, delay 4, populated table, end 118876, trail 0.
+sample0/1390/Ray5: len 98296, decl 98288, depth 5, frames 14, delay 0, populated table, end 98296, trail 0.
+sample0/1390/Ray6: len 92016, decl 92008, depth 5, frames 13, delay 0, populated table, end 92016, trail 0.
+sample0/1390/Ray7: len 69160, decl 57592, depth 5, frames 16, delay 4, populated table, end 69160, trail 0.
+sample0/14381/dino.rif: len 10012, decl 10004, depth 5, frames 8, delay 7, populated table, end 10012, trail 0.
+sample0/14381/dinotitle.rif: len 11760, decl 11752, depth 5, frames 8, delay 7, populated table, end 11760, trail 0.
+sample0/14381/ee-logo.rif: len 34844, decl 34836, depth 5, frames 53, delay 4, populated table, end 34844, trail 0.
+sample0/14381/fish.rif: len 5200, decl 5192, depth 5, frames 4, delay 4, populated table, end 5200, trail 0.
+sample0/14381/mrblob.rif: len 83232, decl 83224, depth 5, frames 42, delay 4, populated table, end 83232, trail 0.
+sample0/14381/shdw+sprk.rif: len 88916, decl 88908, depth 5, frames 28, delay 4, populated table, end 88916, trail 0.
+sample0/14381/stars.rif: len 126332, decl 126324, depth 5, frames 75, delay 3, populated table, end 126332, trail 0.
+sample0/17484/samurai.rif: len 48048, decl 48040, depth 5, frames 22, delay 7, populated table, end 48048, trail 0.
+sample0/21003/LoadMeFor_ZOETROPE.rif: len 69620, decl 69612, depth 5, frames 30, delay 4, populated table, end 69620, trail 0.
+sample0/21003/foreman.rif: len 24492, decl 24484, depth 5, frames 12, delay 5, populated table, end 24492, trail 0.
+sample0/21003/li'lguy.rif: len 14100, decl 14092, depth 5, frames 8, delay 6, populated table, end 14100, trail 0.
+sample0/21003/supermanani.rif: len 9760, decl 242288, depth 5, frames 18, delay 4, populated table, first VRUN is EOF-truncated; one salvaged frame is emitted from the available partial payload.
+sample0/21003/supermanani2.rif: len 257200, decl 257192, depth 5, frames 15, delay 4, populated table, end 257200, trail 0.
+sample0/21003/zoecircle.rif: len 28308, decl 28300, depth 5, frames 20, delay 4, populated table, end 28308, trail 0.
+sample0/4693/backflip.rif: len 323604, decl 323596, depth 5, frames 146, delay 4, populated table, end 323604, trail 0.
+sample0/6987/RRH.rif: len 196072, decl 196064, depth 5, frames 77, delay 4, populated table, end 196072, trail 0.
+sample0/6987/ssachiko2.riff: len 152596, decl 152588, depth 4, frames 31, delay 0, populated table, end 152596, trail 0.

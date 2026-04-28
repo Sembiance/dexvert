@@ -7,6 +7,6 @@ export class beRoTracker extends Format
 	forbidExtMatch = true;
 	magic          = ["BeRoTracker module"];
 	weakMagic      = true;
-	unsupported    = true;
+	unsupported    = true;	// 0 sample files on discmaster
 	notes          = "A 32bit linux 1997 player in: sandbox/app/BeRoLinuxPlayer v1.0.rar  Could get an OLD linux OS emulated: https://soft.lafibre.info/";
 }

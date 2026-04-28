@@ -1,0 +1,106 @@
+Adorage Animation / FEE SSA file format
+Vibe coded by Codex
+
+This documents the FEE_Anim_V1.0 Adorage Animation samples in sample0/.
+All multi-byte integers are big-endian.
+
+Top-level layout:
+
+1. 16-bit byte length, then magic bytes. The only accepted magic is
+   "FEE_Anim_V1.0" with length 13.
+2. 16-bit byte length, then the 14-byte format block:
+   - u16 display width
+   - u16 display height
+   - u8 zero
+   - u8 bitplane count / palette depth, 1..8
+   - u16 coded width
+   - u16 coded height
+   - u8 zero
+   - u8 display-mode high byte
+   - u8 display-mode low byte
+   - u8 playback quantum, 4 in all samples
+3. 16-bit byte length, then the palette block. The first byte repeats
+   the bitplane count. It is followed by 2^depth RGB triplets.
+4. Six u32 stream words:
+   - word 0: sample-specific timing/position value
+   - word 1: sample-specific timing/position value
+   - word 2: number of output frames
+   - word 3: number of following chunks
+   - word 4: stream flags, either 0 or 0xffffffff in the samples
+   - word 5: stream version, always 1 in the samples
+5. The counted chunk stream. Each chunk is stored as u32 payload length
+   followed by exactly that many payload bytes.
+
+Chunk classes:
+
+- 12-byte chunk: skipped bitplane update. Bytes 0..3 contain the Amiga
+  destination address used by the original loader. Bytes 4..11 are zero.
+  It consumes one bitplane slot and leaves that plane unchanged.
+- 16-byte chunk: repeated-frame marker. Bytes 0..9 are zero, byte 10 is
+  20, and byte 11 is zero. Bytes 12..15 carry marker parameters that vary
+  by sample. It emits one output frame without consuming a bitplane slot.
+- Other chunks: compressed bitplane update. Bytes 0..3 are the original
+  Amiga destination address, bytes 4..9 are zero loader scratch fields,
+  and bytes 10..end are an RLE opcode stream for the current bitplane.
+
+Bitplane order and frame timing:
+
+Compressed and 12-byte skip chunks advance a cyclic bitplane counter from
+0 to depth-1. A frame is emitted each time the counter wraps back to zero.
+The 16-byte repeated-frame chunk emits an extra copy of the current frame
+without advancing that counter. This exactly reproduces the frame count in
+stream word 2 for every sample.
+
+Bitplane storage:
+
+Each bitplane is a persistent buffer. The stride is word-aligned:
+
+    row_bytes = ((coded_width + 15) // 16) * 2
+    plane_size = row_bytes * coded_height
+
+Opcodes update 16-bit words inside the current bitplane. The first skip
+inside an opcode is an absolute byte offset from the start of the plane.
+Subsequent skips inside the same opcode are relative to the end of the
+previous write. A zero opcode with zero count terminates the RLE stream.
+
+RLE opcodes:
+
+- 00 00: end of compressed chunk. No trailing bytes are allowed.
+- 14,18,1C,34,38,3C,40,44,48,6C,74,7C,84,8C,94,9C:
+  copy 1..16 literal 16-bit words respectively. The count byte is repeat
+  count minus one; each iteration reads u16 skip then the literal words.
+- 14,4C,50,54,58,5C,60,64,68,70,78,80,88,90,98,A0:
+  repeat one 16-bit word 1..16 times respectively. The count byte is
+  repeat count minus one; each iteration reads u16 skip then the word.
+  Opcode 14 is shared because copying and repeating one word are identical.
+- 04 and 0C: double literal copy. Each iteration reads u16 skip, two
+  one-byte run descriptors A and B, A-run literal words, u16 second skip,
+  then B-run literal words. For opcode 04, each descriptor expands to
+  descriptor * 2 + 2 words. For opcode 0C it expands to descriptor * 2 + 3
+  words.
+- 08 and 10: double pair-repeat. They use the same descriptor expansion
+  as 04 and 0C, but each run stores two 16-bit words which are alternated
+  until the expanded word count is reached.
+- 20 and 24: singular literal copy. Read u16 skip, then copy
+  (count + 1) 32-bit values.
+- 2C: singular literal copy with a tail word. Read u16 skip, then copy
+  (count + 1) 32-bit values plus one final 16-bit value.
+- 28 and 30: repeated 32-bit pixel-pair. Read u16 skip and one 32-bit
+  pair, then repeat that pair (count + 1) times.
+
+Rendering:
+
+After each frame event, the persistent planes are converted from Amiga
+planar pixels to chunky palette indices. For each pixel, bitplane N
+contributes bit N of the palette index. The converter writes the display
+width and display height from the format block, cropping the top-left
+portion of the coded frame when coded dimensions are larger.
+
+Coverage note:
+
+The container, frame timing, planar rendering, skip chunks, repeat-frame
+chunks, and the RLE opcode grammar above validate all bytes in 23 of the
+25 sample0 files. The two sample0/1067/probd*.ado files contain later RLE
+payloads whose opcode streams diverge from this grammar after initially
+valid chunks. The converter fails fast and leaves no output for those
+payloads rather than inventing a heuristic.

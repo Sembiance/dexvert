@@ -7,5 +7,5 @@ export class extremesTracker extends Format
 	ext          = [".ams"];
 	magic        = ["Extreme Tracker AMS Module", "Extreme's Tracker module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "openmpt123"];
 }

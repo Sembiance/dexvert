@@ -7,5 +7,5 @@ export class realTracker extends Format
 	ext          = [".rtm"];
 	magic        = ["Real Tracker module", "RTM Module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["xmp", "zxtune123"];
+	converters   = ["xmp", "zxtune123", "openmpt123"];
 }

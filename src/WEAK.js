@@ -2290,7 +2290,7 @@ export const WEAK_VALUES =
 	/^JustSystems format \(generic\)$/,
 	/^K\+K Research TAC compressed audio$/,
 	/^Kaitai Struct language \(with rem\)$/,
-	/^Karl Morton (Music|Sound) format$/,
+	/^Karl Morton Sound format$/,
 	/^Kazaa Playlist$/,
 	/^KBOOM11 compressed$/,
 	/^Kega Fusion Save State$/,

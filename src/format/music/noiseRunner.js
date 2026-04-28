@@ -6,5 +6,5 @@ export class noiseRunner extends Format
 	ext            = [".nru", ".nr"];
 	forbidExtMatch = true;
 	magic          = ["NoiseRunner song/module"];
-	converters     = ["uade123", "xmp"];
+	converters     = ["uade123", "xmp"];	// glitchy: "openmpt123"
 }

@@ -30,10 +30,11 @@ const {stdout : mikmodInfoRaw} = await runUtil.run("mikmodInfo", [argv.inputFile
 const {stdout : timidityInfoRaw} = await runUtil.run("timidity", ["-Ow", "-o", "/dev/null", argv.inputFilePath], runOptions);
 const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], {stdoutUnbuffer : true, ...runOptions});
 const {stderr : adplayRaw} = await runUtil.run("adplay", ["--once", "--instruments", "-O", "disk", "-d", "/dev/null", argv.inputFilePath], runOptions);
+const {stdout : cmsRaw} = await runUtil.run("python3", [path.join(import.meta.dirname, "vibe2wav", "cms", "cms.py"), "--info", argv.inputFilePath], runOptions);
 await runUtil.run("asapconv", ["-o", path.join(tmpDirPath, "%n:_:%a.wav"), argv.inputFilePath], runOptions);
 
 if(argv.debug)
-	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw], ["adplayRaw", adplayRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));
+	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw], ["adplayRaw", adplayRaw], ["cmsRaw", cmsRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));
 
 const musicInfo = {};
 
@@ -46,12 +47,13 @@ try { infos.timidity = parseTimidity(timidityInfoRaw); } catch {}
 try { infos.zxtune = parseZXTune(zxtuneRaw); } catch {}
 try { infos.adplay = parseAdplay(adplayRaw); } catch {}
 try { infos.asap = await parseASAP(); } catch {}
+try { infos.cms = parseCMS(cmsRaw); } catch {}
 
 if(argv.debug)
 	console.log(infos);
 
 // Earlier program entries produce better meta data and are processed in priority order
-for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune", "adplay", "asap"])
+for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune", "adplay", "asap", "cms"])
 {
 	const subInfo = infos[type];
 
@@ -320,6 +322,24 @@ function parseZXTune(infoRaw="")
 	}
 
 	return info;
+}
+
+function parseCMS(infoRaw="")
+{
+	const info = xu.parseJSON(infoRaw);
+
+	const r = {};
+	if(info?.title)
+		r.title = info.title;
+	if(info?.composer)
+		r.author = info.composer;
+	if(info?.message)
+		r.message = info.message;
+
+	if(!Object.keys(r).length)
+		return undefined;
+
+	return {type : "cms", ...r};
 }
 
 function parseAdplay(infoRaw="")

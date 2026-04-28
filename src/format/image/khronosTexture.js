@@ -7,7 +7,7 @@ export class khronosTexture extends Format
 	forbidExtMatch = true;
 	mimeType       = "image/ktx";
 	magic          = ["Khronos Texture", "image/ktx", /^Khronos KTX texture/, /^fmt\/970( |$)/];
-	weakMagic      = true;	// only due to being unsupported right now
-	unsupported    = true;
-	//converters     = [`abydosconvert[format:${this.mimeType}]`, `abydosconvert[format:image/ktx2]`];	// abydos claims support, but could not get it to convert
+	weakMagic      = true;	// only due to not being supported right now
+	unsupported    = true;	// only 3 unique files on discmaster and couldn't actually convert with abydos despite it claiming support
+	//converters     = [`abydosconvert[format:${this.mimeType}]`, `abydosconvert[format:image/ktx2]`];
 }

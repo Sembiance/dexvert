@@ -5,5 +5,5 @@ export class beepola extends Format
 	name        = "Beepola Module";
 	ext         = [".bbsong"];
 	magic       = ["Beepola chiptune"];
-	unsupported = true;
+	unsupported = true;	// no samples on discmaster
 }

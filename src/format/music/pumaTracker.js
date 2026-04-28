@@ -6,5 +6,5 @@ export class pumaTracker extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Pumatracker_module";
 	ext          = [".puma"];
 	metaProvider = ["musicInfo"];
-	converters   = ["uade123"];
+	converters   = ["uade123", "openmpt123"];
 }

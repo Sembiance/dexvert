@@ -6,5 +6,5 @@ export class pollyTracker extends Format
 	name        = "PollyTracker Module";
 	ext         = [".mod"];
 	magic       = ["Polly Tracker module"];
-	unsupported = true;
+	unsupported = true;	// only 1 unique file on discmaster
 }

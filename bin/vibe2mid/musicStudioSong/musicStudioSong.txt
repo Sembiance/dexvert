@@ -1,0 +1,165 @@
+# Vibe coded by Codex
+
+Music Studio Song / Music Studio 88 Song file format notes
+==========================================================
+
+Scope
+-----
+
+This document describes the two Activision Atari ST Music Studio song
+variants present in sample0/: the original Music Studio signature and the
+larger Music Studio 88 signature.  The companion converter
+musicStudioSong.py validates and consumes every byte in those samples.  A file
+with the right signature but an invalid score stream is rejected before MIDI
+output is created.
+
+All multi-byte scalar values in the recognized fields below are byte arrays,
+not native CPU integers, unless explicitly stated.  Text is Atari/Latin-1 era
+single-byte text, null-padded.
+
+Signatures
+----------
+
+Original Music Studio:
+
+    Offset  Size  Meaning
+    0x000   10    cd 4d 73 74 75 64 69 6f cd 02
+                  "\xcdMstudio\xcd\x02"
+
+Music Studio 88:
+
+    Offset  Size  Meaning
+    0x000   10    ce 4d 73 74 75 64 69 6f ce 02
+                  "\xceMstudio\xce\x02"
+
+Original Music Studio header
+----------------------------
+
+    Offset  Size  Meaning
+    0x00a   150   15 sound/instrument names, 10 bytes each
+    0x0a0   120   15 YM/ST-sound instrument definitions, 8 bytes each
+    0x118   150   15 MIDI/display instrument names, 10 bytes each
+    0x1ae    30   15 two-byte per-voice preset/channel assignments
+    0x1cc    20   reserved/application state bytes
+    0x1e0    32   song title/info text
+    0x200     9   score prefix/state bytes
+    0x209   var   score event stream
+
+Music Studio 88 header
+----------------------
+
+Music Studio 88 keeps the same signature and first 15-name table, then stores
+larger instrument definition blocks before the final name/map/title/score area.
+The samples use two sizes for this larger area.
+
+For the normal Music Studio 88 layout:
+
+    Offset  Size  Meaning
+    0x00a   150   15 sound/instrument names, 10 bytes each
+    0x0a0  1200   15 larger sound definitions, 80 bytes each
+    0x550   150   15 MIDI/display instrument names, 10 bytes each
+    0x5e6    30   15 two-byte per-voice preset/channel assignments
+    0x604    20   reserved/application state bytes
+    0x618    32   song title/info text
+    0x638     9   score prefix/state bytes
+    0x641   var   score event stream
+
+One sample, sample0/17484/song3.song, uses a shortened Music Studio 88 layout
+where the final area begins ten bytes earlier:
+
+    Offset  Size  Meaning
+    0x546   150   15 MIDI/display instrument names, 10 bytes each
+    0x5dc    30   15 two-byte per-voice preset/channel assignments
+    0x5fa    20   reserved/application state bytes
+    0x60e    32   song title/info text
+    0x62e     9   score prefix/state bytes
+    0x637   var   score event stream
+
+The converter recognizes Music Studio 88 by the score event preamble at 0x641
+or, for the shortened layout, 0x637.
+
+Score prefix/state bytes
+------------------------
+
+The nine bytes immediately before the score stream are part of the saved song
+state.  They vary by song and include bit flags used by Music Studio.  The
+converter does not interpret them musically, but it validates their location and
+accounts for them as a fixed field before the event stream.
+
+Score event stream
+------------------
+
+The stream is a bytecode.  It ends at the first 0xff byte.  Bytes after that
+terminator are trailer text/lyrics/info and are not score bytecode; they are
+still part of the file and are preserved in parsing metadata.
+
+Recognized event records:
+
+    Bytes                 Meaning
+    00                    End current event group.  Advances time.
+    ff                    End score stream.  Remaining bytes are trailer data.
+    60                    One-byte phrase/notation marker.
+    80 aa bb              Initial meter/key/grid state.
+    81 tt                 Tempo change/state.  tt is treated as BPM for MIDI.
+    82 00                 Bar/measure marker.  Ends current event group.
+                          82 followed by any non-zero byte is parsed as the
+                          first byte of a note record instead.
+    83 aa                 Initial rhythmic grid/division state.
+    84 aa bb              Initial volume/level state.
+    85 aa                 Auxiliary state command when aa <= 04 and the
+                          following stream byte is a delimiter/end.
+    86 aa                 Repeat/section marker.  Ends current event group.
+    vv dd pp              Note event, for all other bytes.
+
+Note event fields:
+
+    vv  Voice and display flags.
+        Low nibble is the Music Studio voice number, 1..15.
+        High nibble carries original notation/articulation flags.
+
+    dd  Duration and flags.
+        Low 7 bits are the duration in Music Studio timing units.
+        High bit is a notation/playback flag.  The converter maps it to lower
+        MIDI velocity but keeps the raw byte validated.
+
+    pp  Pitch and flags.
+        Low 7 bits are the MIDI-compatible pitch number, including 0.
+        High bit is a notation/playback flag used in a few files.
+
+Timing model used by the converter
+----------------------------------
+
+The stream groups note starts between delimiters.  Notes in a group start at
+the same Music Studio time.  When a delimiter is read, time advances by the
+shortest duration in that group; an empty delimiter advances by one timing unit.
+The converter writes MIDI at 96 ticks per quarter, with each Music Studio
+timing unit mapped to 8 MIDI ticks.
+
+Validation rules
+----------------
+
+The converter fails fast and leaves no output file when any of these are true:
+
+* The file does not start with one of the two signatures above.
+* The file is too short for the required fixed fields.
+* A Music Studio 88 score preamble is not at a recognized offset.
+* A control or note event is truncated.
+* A note has zero duration after parsing.
+* A note voice nibble is outside 1..15.
+* The score stream does not contain a 0xff terminator.
+
+Sample coverage
+---------------
+
+The valid files in sample0/ are completely consumed as:
+
+* fixed header bytes,
+* score prefix/state bytes,
+* score bytecode through the 0xff terminator,
+* optional trailer text/lyrics/info after the terminator.
+
+sample0/14/leadvocl.sng has the original signature and matching title/header
+area, but the expected score stream area is zero-filled and then contains
+68000-looking code bytes.  At offset 0x235 the score parser reaches an
+impossible zero-duration note record, so the converter rejects it as not a
+valid handled Music Studio song file.

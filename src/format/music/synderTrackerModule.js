@@ -5,5 +5,5 @@ export class synderTrackerModule extends Format
 	name        = "Synder Tracker Module";
 	ext         = [".sng"];
 	magic       = ["Synder Tracker module"];
-	unsupported = true;
+	unsupported = true;	// 0 files on discmaster
 }

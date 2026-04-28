@@ -4,6 +4,6 @@ export class amigaWriter extends Format
 {
 	name        = "AmigaWriter Documet";
 	magic       = ["AmigaWriter "];
-	unsupported = true;
+	unsupported = true;	// only 15 unique files on discmaster
 	notes       = "Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.";
 }

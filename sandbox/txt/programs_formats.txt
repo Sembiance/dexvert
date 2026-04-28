@@ -7541,6 +7541,108 @@ XMI	R+W	Miles Sound System Extended MIDI file.
  *	R	Unrecognized formats prompts user to supply basic info. ()
 
 
+>>> openmpt123
+Extension  Format name                           Category                   Source condition             Installed openmpt123 help
+---------  ------------------------------------  -------------------------  ---------------------------  -------------------------
+.mptm      OpenMPT                               module format              always in this source table  yes                      
+.mod       ProTracker                            module format              always in this source table  yes                      
+.mod       ChipTracker                           module format              always in this source table  yes                      
+.mod       TCB Tracker                           module format              always in this source table  yes                      
+.s3m       Scream Tracker 3                      module format              always in this source table  yes                      
+.xm        FastTracker 2                         module format              always in this source table  yes                      
+.it        Impulse Tracker                       module format              always in this source table  yes                      
+.667       Composer 667                          module format              always in this source table  yes                      
+.669       Composer 669 / UNIS 669               module format              always in this source table  yes                      
+.amf       ASYLUM Music Format                   module format              always in this source table  yes                      
+.amf       DSMI Advanced Music Format            module format              always in this source table  yes                      
+.ams       Extreme's Tracker                     module format              always in this source table  yes                      
+.ams       Velvet Studio                         module format              always in this source table  yes                      
+.c67       CDFM / Composer 670                   module format              always in this source table  yes                      
+.cba       Chuck Biscuits / Black Artist         module format              always in this source table  yes                      
+.dbm       DigiBooster Pro                       module format              always in this source table  yes                      
+.digi      DigiBooster                           module format              always in this source table  yes                      
+.dmf       X-Tracker                             module format              always in this source table  yes                      
+.dmf       DSMI Advanced Music Format (Compact)  module format              always in this source table  yes                      
+.dsm       DSIK Format                           module format              always in this source table  yes                      
+.dsm       Dynamic Studio                        module format              always in this source table  yes                      
+.dsym      Digital Symphony                      module format              always in this source table  yes                      
+.dtm       Digital Tracker                       module format              always in this source table  yes                      
+.etx       EasyTrax                              module format              always in this source table  yes                      
+.far       Farandole Composer                    module format              always in this source table  yes                      
+.fc        Future Composer                       module format              always in this source table  yes                      
+.fc13      Future Composer                       module format              always in this source table  yes                      
+.fc14      Future Composer                       module format              always in this source table  yes                      
+.fmt       FM Tracker                            module format              always in this source table  yes                      
+.fst       ProTracker                            module format              always in this source table  yes                      
+.ftm       Face The Music                        module format              always in this source table  yes                      
+.imf       Imago Orpheus                         module format              always in this source table  yes                      
+.ims       Images Music System                   module format              always in this source table  yes                      
+.ice       Ice Tracker                           module format              always in this source table  yes                      
+.itp       Impulse Tracker Project               module format              #ifdef MPT_EXTERNAL_SAMPLES  no                       
+.j2b       Galaxy Sound System                   module format              always in this source table  yes                      
+.m15       Soundtracker                          module format              always in this source table  yes                      
+.mdl       Digitrakker                           module format              always in this source table  yes                      
+.med       OctaMED                               module format              always in this source table  yes                      
+.mms       MultiMedia Sound                      module format              always in this source table  yes                      
+.mt2       MadTracker 2                          module format              always in this source table  yes                      
+.mtm       MultiTracker                          module format              always in this source table  yes                      
+.mtp       MegaTracker                           module format              #ifdef MPT_EXTERNAL_SAMPLES  no                       
+.mus       Karl Morton Music Format              module format              always in this source table  yes                      
+.nru       NoiseRunner                           module format              always in this source table  no                       
+.nst       NoiseTracker                          module format              always in this source table  yes                      
+.okt       Oktalyzer                             module format              always in this source table  yes                      
+.plm       Disorder Tracker 2                    module format              always in this source table  yes                      
+.psm       Epic Megagames MASI                   module format              always in this source table  yes                      
+.pt36      ProTracker                            module format              always in this source table  yes                      
+.ptm       PolyTracker                           module format              always in this source table  yes                      
+.puma      Puma Tracker                          module format              always in this source table  yes                      
+.rtm       Real Tracker 2                        module format              always in this source table  yes                      
+.sfx       SoundFX                               module format              always in this source table  yes                      
+.sfx2      SoundFX                               module format              always in this source table  yes                      
+.smod      Future Composer                       module format              always in this source table  yes                      
+.ss        SoundSmith                            module format              #ifdef MPT_EXTERNAL_SAMPLES  no                       
+.st26      SoundTracker 2.6                      module format              always in this source table  yes                      
+.stk       Soundtracker                          module format              always in this source table  yes                      
+.stm       Scream Tracker 2                      module format              always in this source table  yes                      
+.stx       Scream Tracker Music Interface Kit    module format              always in this source table  yes                      
+.stp       Soundtracker Pro II                   module format              always in this source table  yes                      
+.symmod    Symphonie                             module format              always in this source table  yes                      
+.tcb       TCB Tracker                           module format              always in this source table  yes                      
+.gmc       Game Music Creator                    module format              always in this source table  yes                      
+.gtk       Graoumf Tracker                       module format              always in this source table  yes                      
+.gt2       Graoumf Tracker 1 / 2                 module format              always in this source table  yes                      
+.ult       UltraTracker                          module format              always in this source table  yes                      
+.unic      UNIC Tracker                          module format              always in this source table  yes                      
+.wow       Mod's Grave                           module format              always in this source table  yes                      
+.xmf       Astroidea XMF                         module format              always in this source table  yes                      
+.gdm       General Digital Music                 module format              always in this source table  yes                      
+.mo3       Un4seen MO3                           module format              always in this source table  yes                      
+.oxm       OggMod FastTracker 2                  module format              always in this source table  yes                      
+.mdz       Compressed ProTracker                 module format              #ifndef NO_ARCHIVE_SUPPORT   no                       
+.mdr       Compressed Module                     module format              #ifndef NO_ARCHIVE_SUPPORT   no                       
+.s3z       Compressed Scream Tracker 3           module format              #ifndef NO_ARCHIVE_SUPPORT   no                       
+.xmz       Compressed FastTracker 2              module format              #ifndef NO_ARCHIVE_SUPPORT   no                       
+.itz       Compressed Impulse Tracker            module format              #ifndef NO_ARCHIVE_SUPPORT   no                       
+.mptmz     Compressed OpenMPT                    module format              #ifndef NO_ARCHIVE_SUPPORT   no                       
+.umx       Unreal Music                          container / packed format  always in this source table  yes                      
+.xpk       XPK packed                            container / packed format  always in this source table  yes                      
+.ppm       PowerPack PP20                        container / packed format  always in this source table  yes                      
+.mmcmp     Music Module Compressor               container / packed format  always in this source table  yes                      
+.wav       Wave                                  container / packed format  #ifdef MODPLUG_TRACKER       no                       
+.uax       Unreal Sounds                         container / packed format  #ifdef MODPLUG_TRACKER       no                       
+(none)     Generic Archive                       container / packed format  #ifdef MODPLUG_TRACKER       no                       
+.mid       MIDI                                  other tracker-only format  #ifdef MODPLUG_TRACKER       no                       
+.rmi       MIDI                                  other tracker-only format  #ifdef MODPLUG_TRACKER       no                       
+.smf       MIDI                                  other tracker-only format  #ifdef MODPLUG_TRACKER       no   
+
+Notes
+- Installed openmpt123 advertised 68 extensions: .mptm, .mod, .s3m, .xm, .it, .667, .669, .amf, .ams, .c67, .cba, .dbm, .digi, .dmf, .dsm, .dsym, .dtm, .etx, .far, .fc, .fc13, .fc14, .fmt, .fst, .ftm, .imf, .ims, .ice, .j2b, .m15, .mdl, .med, .mms, .mt2, .mtm, .mus, .nst, .okt, .plm, .psm, .pt36, .ptm, .puma, .rtm, .sfx, .sfx2, .smod, .st26, .stk, .stm, .stx, .stp, .symmod, .tcb, .gmc, .gtk, .gt2, .ult, .unic, .wow, .xmf, .gdm, .mo3, .oxm, .umx, .xpk, .ppm, .mmcmp
+- Extensions are advisory. OpenMPT identifies many formats by magic bytes and loader probing, not by extension alone.
+- Several extensions map to multiple loaders or subformats, e.g. .mod, .amf, .ams, .dmf, .dsm, .fc, .sfx, and .gt2.
+- Container / packed formats can wrap modules rather than being tracker formats themselves.
+- Entries under #ifdef MPT_EXTERNAL_SAMPLES, #ifndef NO_ARCHIVE_SUPPORT, or #ifdef MODPLUG_TRACKER depend on build configuration.
+- `openmpt123 --info <file>` is still the reliable way to see the exact detected type for a particular file.
+
 >>> QuickView (Quick View) Plus / QVP Conversion SDK - Documents (http://www.avantstar.com/ittrium/visit/A1xd7x1x66y1x115x1x69y1x116x1x7dy1xa35x1x7d)
 Archive Formats
 	7-Zip

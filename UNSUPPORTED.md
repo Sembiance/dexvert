@@ -3318,7 +3318,7 @@ Family/Format | Name | Extensions | Notes
 [other/springEngineTile](https://discmaster.textfiles.com/search?format=springEngineTile) | Spring Engine Tile | .smt | 
 [other/sprintHelp](https://discmaster.textfiles.com/search?format=sprintHelp) | Sprint Help | .hlp | 
 [other/sproutGameDataArchive](https://discmaster.textfiles.com/search?format=sproutGameDataArchive) | Sprout game data archive | .saf | 
-[other/sPSSChartLook](https://discmaster.textfiles.com/search?format=sPSSChartLook) | SPSS Chart Look | .clo | 
+[other/spssChartLook](https://discmaster.textfiles.com/search?format=spssChartLook) | SPSS Chart Look | .clo | 
 [other/spssForWindowsData](https://discmaster.textfiles.com/search?format=spssForWindowsData) | SPSS for Windows Data | .sav | 
 [other/spssTableLook](https://discmaster.textfiles.com/search?format=spssTableLook) | SPSS Table Look | .tlo | 
 [other/spyBotSearchAndDestroySignature](https://discmaster.textfiles.com/search?format=spyBotSearchAndDestroySignature) | SpyBot-Search-and-Destroy Signature | .sig | 

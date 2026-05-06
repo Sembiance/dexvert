@@ -72,8 +72,8 @@ export default async function phase2({item, itemFileDirPath, itemMetaDirPath, it
 			if(fileData.ts && (+fileData.ts.split("-")[0])<1970)
 				delete fileData.ts;
 
-			// if we are original to this item or don't have a timestamp, we should set the ts to the date of our item
-			if(metaData.originalFile || !fileData.ts)
+			// if we are original to this item and are not item #7 or we don't have a timestamp, we should set the ts to the date of our item
+			if((metaData.originalFile && item.itemid!==7) || !fileData.ts)
 				fileData.ts = `${item.year}-01-01`;
 		
 			const dexid = getDexid(dexData);

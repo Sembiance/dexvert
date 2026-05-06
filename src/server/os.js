@@ -347,7 +347,7 @@ routes.set("/osDONE", async request =>
 	return new Response("", {status : 200});
 });
 
-const webServer = webUtil.serve({hostname : C.OS_SERVER_HOST, port : C.OS_SERVER_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.OS_SERVER_HOST, port : C.OS_SERVER_PORT}, await webUtil.route(routes, undefined, {xlog}), {xlog});
 
 await Deno.mkdir(path.join(OS_INSTANCE_DIR_PATH), {recursive : true});
 

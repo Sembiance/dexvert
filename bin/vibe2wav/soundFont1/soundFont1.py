@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Vibe coded by Codex
 # Vibe coded by Claude
 
 """
@@ -14,6 +15,10 @@ import struct
 import sys
 import os
 import wave
+
+
+EMU8000_UNITY_PITCH = 0x4000
+EMU8000_OUTPUT_RATE = 44100
 
 
 def read_riff_chunks(data, start, end):
@@ -105,21 +110,26 @@ def extract_sample_headers(shdr_data):
     return headers
 
 
+def emu8000_pitch_to_sample_rate(pitch):
+    """Convert an EMU8000 linear pitch increment to a WAV sample rate."""
+    return round(pitch * EMU8000_OUTPUT_RATE / EMU8000_UNITY_PITCH)
+
+
 def extract_sample_rates(pdta):
-    """Walk igen generators to find sample rate (gen 55) per sampleID (gen 53)."""
+    """Walk igen generators to find sample playback rate (gen 55) per sampleID."""
     igen_data = pdta.get('igen', b'')
     sample_rates = {}
-    current_rate = None
+    current_pitch = None
 
     num_gens = len(igen_data) // 4
     for i in range(num_gens):
         gen_op, gen_val = struct.unpack_from('<HH', igen_data, i * 4)
-        if gen_op == 55:  # sampleRate (SF1-specific generator)
-            current_rate = gen_val
+        if gen_op == 55:  # EMU8000 pitch increment (SF1-specific generator)
+            current_pitch = gen_val
         elif gen_op == 53:  # sampleID
-            if current_rate is not None:
-                sample_rates[gen_val] = current_rate
-            current_rate = None
+            if current_pitch is not None:
+                sample_rates[gen_val] = emu8000_pitch_to_sample_rate(current_pitch)
+            current_pitch = None
 
     # Also check pgen for a default sample rate
     pgen_data = pdta.get('pgen', b'')
@@ -128,9 +138,50 @@ def extract_sample_rates(pdta):
     for i in range(num_pgens):
         gen_op, gen_val = struct.unpack_from('<HH', pgen_data, i * 4)
         if gen_op == 55:
-            default_rate = gen_val
+            default_rate = emu8000_pitch_to_sample_rate(gen_val)
 
     return sample_rates, default_rate
+
+
+def classify_embedded_sample_ranges(headers, total_frames):
+    """Return sample indices that point at non-overlapping embedded PCM data."""
+    extractable = set()
+    skip_reasons = {}
+    valid_ranges = []
+
+    for i, hdr in enumerate(headers):
+        start = hdr['start']
+        end = hdr['end']
+
+        if start >= total_frames or end > total_frames:
+            skip_reasons[i] = f"offsets ({start}-{end}) exceed smpl data ({total_frames})"
+        elif end <= start:
+            skip_reasons[i] = f"zero or negative length ({start}-{end})"
+        else:
+            valid_ranges.append((start, end, i))
+
+    accepted_ranges = []
+    for start, end, i in sorted(valid_ranges):
+        overlap = next(
+            (
+                (accepted_start, accepted_end, accepted_index)
+                for accepted_start, accepted_end, accepted_index in accepted_ranges
+                if start < accepted_end and end > accepted_start
+            ),
+            None,
+        )
+        if overlap:
+            accepted_start, accepted_end, accepted_index = overlap
+            skip_reasons[i] = (
+                f"overlaps embedded sample {accepted_index} "
+                f"({accepted_start}-{accepted_end}); likely ROM/non-embedded reference"
+            )
+            continue
+
+        accepted_ranges.append((start, end, i))
+        extractable.add(i)
+
+    return extractable, skip_reasons
 
 
 def sanitize_filename(name):
@@ -207,6 +258,14 @@ def main():
 
     # Extract and write each sample
     total_samples_in_smpl = len(smpl_data) // 2  # 16-bit samples
+    extractable_samples, skip_reasons = classify_embedded_sample_ranges(
+        sample_headers,
+        total_samples_in_smpl,
+    )
+    overlap_skips = sum('overlaps embedded sample' in reason for reason in skip_reasons.values())
+    if overlap_skips:
+        print(f"  Detected {overlap_skips} sample headers that overlap embedded PCM data; treating them as ROM/non-embedded references.")
+
     extracted = 0
     skipped = 0
 
@@ -220,14 +279,10 @@ def main():
         start = hdr['start']
         end = hdr['end']
 
-        # Validate sample boundaries
-        if start >= total_samples_in_smpl or end > total_samples_in_smpl:
-            print(f"  Warning: Sample {i} ({name}) offsets ({start}-{end}) exceed smpl data ({total_samples_in_smpl}), skipping")
-            skipped += 1
-            continue
-
-        if end <= start:
-            print(f"  Warning: Sample {i} ({name}) has zero or negative length ({start}-{end}), skipping")
+        # Validate that this header points at a unique embedded PCM range.
+        if i not in extractable_samples:
+            reason = skip_reasons.get(i, "does not point at embedded sample data")
+            print(f"  Warning: Sample {i} ({name}) {reason}, skipping")
             skipped += 1
             continue
 

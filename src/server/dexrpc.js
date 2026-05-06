@@ -83,7 +83,7 @@ xlog.info`Starting web RPC...`;
 
 const routes = new Map();
 
-routes.set("/agentCount", () => new Response(C.DEX_AGENT_COUNT.toString()));
+routes.set("/agentCount", () => new Response(agentCount.toString()));
 routes.set("/status", async () =>
 {
 	const status = await dexPool.status();
@@ -126,7 +126,7 @@ routes.set("/unlock", async request =>
 	return new Response("true");
 });
 
-const webServer = webUtil.serve({hostname : C.DEXRPC_HOST, port : C.DEXRPC_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.DEXRPC_HOST, port : C.DEXRPC_PORT}, await webUtil.route(routes, undefined, {xlog}), {xlog});
 await fileUtil.writeTextFile(argv.startedFilePath, "");
 
 // wait until we are told to stop

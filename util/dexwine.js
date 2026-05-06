@@ -50,7 +50,7 @@ const wineBaseEnv = {
 
 const routes = new Map();
 routes.set("/getBaseEnv", async () => Response.json(wineBaseEnv));	// eslint-disable-line require-await
-const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes, undefined, {xlog}), {xlog});
 
 const wineData = {
 	cmd     : (await fileUtil.exists(argv.cmd) ? path.resolve(argv.cmd) : argv.cmd),

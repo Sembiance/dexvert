@@ -25,7 +25,8 @@ samples are played in response to MIDI events.
 Unlike SoundFont 2.0 (.SF2), the SBK format:
   - Uses 16-byte sample headers (no sample rate, pitch, or link fields in shdr)
   - Stores sample names in a separate 'snam' chunk (not inside shdr)
-  - Uses generator 55 to store sample playback rate (reserved/unused in SF2)
+  - Uses generator 55 to store the EMU8000 playback pitch increment
+    (reserved/unused in SF2)
   - Uses 6-byte modulator records (vs 10 bytes in SF2)
   - Does NOT require word-alignment padding between chunks
 
@@ -212,8 +213,8 @@ The genAmount field is interpreted as:
 Key preset-level generators:
   - 41 (instrument): Index into inst array. Links this zone to an instrument.
   - 43 (keyRange): MIDI key range (lo=low key, hi=high key).
-  - 55 (sampleRate): Default playback rate in Hz (SF1-specific, can be
-    overridden at instrument level).
+  - 55 (samplePitch): Default EMU8000 playback pitch increment
+    (SF1-specific, can be overridden at instrument level).
 
 The last generator in the entire pgen array is a terminal record (op=0, val=0).
 
@@ -263,8 +264,9 @@ instrument zone. Structure identical to pgen (see Section 5.4).
 Key instrument-level generators:
   - 53 (sampleID): Index into the shdr/snam arrays identifying which sample
     this zone uses. This is the terminal generator for each zone.
-  - 55 (sampleRate): Playback sample rate in Hz. This SF1-specific generator
-    defines the rate at which the sample data should be played back.
+  - 55 (samplePitch): EMU8000 playback pitch increment. This SF1-specific
+    generator defines the rate at which the sample data should be played back.
+    Convert to Hz with: sampleRate = pitch * 44100 / 0x4000.
     Overrides any preset-level default.
   - 58 (overridingRootKey): MIDI key number at which the sample plays at its
     original pitch (0-127).
@@ -385,10 +387,11 @@ ID   Name                     Value Type    Description
                                               1 = loop continuously
                                               3 = loop during key depression,
                                                   then play remainder
-55   sampleRate               UINT16        Playback sample rate in Hz (SF1 only).
-                                            Typical values: 5000-12000 Hz for
-                                            EMU8000 wavetable data. This generator
-                                            is reserved/unused in SoundFont 2.0.
+55   samplePitch              UINT16        EMU8000 playback pitch increment
+                                            (SF1 only). Convert to Hz with:
+                                            sampleRate = pitch * 44100 / 0x4000.
+                                            This generator is reserved/unused
+                                            in SoundFont 2.0.
 56   scaleTuning              INT16         Scale tuning (cents/key, default 100).
 57   exclusiveClass           INT16         Exclusive class for choke groups.
 58   overridingRootKey        INT16         Root key override (MIDI note 0-127).
@@ -457,7 +460,7 @@ The data structures form a three-level hierarchy:
     +-- Zone (ibag) -- contains generators (igen) and modulators (imod)
     |     |
     |     +-- Generator 53 (sampleID) -> points to SAMPLE HEADER (shdr)
-    |     +-- Generator 55 (sampleRate) -> playback rate in Hz
+    |     +-- Generator 55 (samplePitch) -> EMU8000 playback pitch increment
     |     +-- Generator 58 (overridingRootKey) -> root MIDI note
     |     +-- Generator 43 (keyRange) -> which keys trigger this sample
     |     +-- Generator 54 (sampleModes) -> loop mode
@@ -492,7 +495,7 @@ Sample header (shdr)       16 bytes (4 DWORDs)        46 bytes (20-char name +
                                                       correction/link/type)
 Sample names               Separate 'snam' chunk      Embedded in shdr records
                            (20 bytes per name)        (20 bytes per record)
-Sample rate storage        Generator 55 in igen/pgen  dwSampleRate in shdr
+Sample rate storage        Generator 55 pitch value   dwSampleRate in shdr
 Modulator record size      6 bytes                    10 bytes
 Chunk alignment            No padding required        Word-aligned (2-byte)
 Sample data format         16-bit signed LE mono      16-bit signed LE mono

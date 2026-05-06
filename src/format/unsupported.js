@@ -3462,7 +3462,7 @@ export default
 		spilImageLibrary                         : {name : "SPIL Image Library", ext : [".ilb", ".slb"], magic : ["SPIL Image Library"]},
 		sPlanSchematic                           : {name : "sPlan schematic", ext : [".lib", ".spl"], magic : ["sPlan schematic"], weakMagic : true},
 		sprintHelp                               : {name : "Sprint Help", ext : [".hlp"], magic : ["Sprint Help"], weakMagic : true},
-		sPSSChartLook                            : {name : "SPSS Chart Look", ext : [".clo"], magic : ["SPSS Chart Look"]},
+		spssChartLook                            : {name : "SPSS Chart Look", ext : [".clo"], magic : ["SPSS Chart Look"]},
 		spssForWindowsData                       : {name : "SPSS for Windows Data", ext : [".sav"], magic : ["SPSS for Windows Data", "SPSS System File", "application/x-spss-sav", /^fmt\/638( |$)/], weakMagic : true},
 		spssTableLook                            : {name : "SPSS Table Look", ext : [".tlo"], magic : ["SPSS Table Look"]},
 		spyBotSearchAndDestroySignature          : {name : "SpyBot-Search-and-Destroy Signature", ext : [".sig"], magic : [/^SpyBot-Search-and-Destroy [\d.]+ Signature File/]},

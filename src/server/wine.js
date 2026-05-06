@@ -95,7 +95,7 @@ routes.set("/getWineCounter", async () =>
 	return new Response(wineCounterNum);
 });
 
-const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.WINE_WEB_HOST, port : C.WINE_WEB_PORT}, await webUtil.route(routes, undefined, {xlog}), {xlog});
 
 xlog.debug`wineBaseEnv: ${wineBaseEnv}`;
 xlog.info`Wine started`;

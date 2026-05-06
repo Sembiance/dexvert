@@ -336,7 +336,7 @@ routes.set("/status", async request =>
 	return Response.json(r);
 });
 
-const webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes, undefined, {xlog}), {xlog});
 const bar = argv.headless ? null : printUtil.progress({barWidth : 25, max : taskQueue.length});
 
 const SAMPLE_PATH_SUMS = {};
@@ -360,8 +360,11 @@ async function isNewSampleFile(dexformatid, sampleFilePath)
 async function processNextQueue()
 {
 	const taskProps = taskQueue.shift();
+	//xlog.debug`Checking task queue... grabbed ${taskProps} with ${taskQueue.length.toLocaleString()} left in queue and ${taskActive.size.toLocaleString()} active tasks`;
+	
 	if((argv.ignorePath || []).some(ignoredPath => taskProps.rel.strip(argv.suffix).startsWith(ignoredPath)) || path.basename(taskProps.rel, path.extname(taskProps.rel)).endsWith(argv.suffix))
 	{
+		//xlog.debug`Skipping ${taskProps} due to ignorePath or suffix rules`;
 		taskFinishedCount++;
 		bar?.increment();
 		return;
@@ -520,6 +523,8 @@ async function processNextQueue()
 
 await xu.waitUntil(async () =>	// eslint-disable-line require-await
 {
+	//xlog.debug`Checking if recurse is done... ${taskQueue.length.toLocaleString()} in queue, ${taskActive.size.toLocaleString()} active, ${taskFinishedCount.toLocaleString()} finished, ${taskHandledCount.toLocaleString()} handled`;
+
 	if(taskActive.size===0 && taskQueue.length===0)
 		return true;
 

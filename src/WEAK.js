@@ -369,10 +369,10 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Xuse.BinOpener, archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:Pinky.A5rOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener
-	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:Ail.DatOpener, archive:FrontWing.DatOpener
+	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:FrontWing.DatOpener
 	//		archive:Youkai.VoiceDatOpener, archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener
+	//		archive:Will.ArcOpener, archive:Ail.DatOpener
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
 	/^archive:CandySoft\.FpkOpener /,
@@ -385,9 +385,9 @@ export const WEAK_VALUES =
 	/^audio:WaveAudio \(WAV\)/,
 
 	// SEEN  ONCE:
-	// 		image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat, image:KAAS.PicFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:Leaf.PxFormat
+	// 		image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:Leaf.PxFormat, image:CsWare.BpcFormat, image:MAGES.BinFormat
 	// SEEN TWICE:
-	//
+	//		image:KAAS.PicFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:Desire\.DesFormat /,
 	/^image:Ffa\.Pt1Format /,
@@ -399,13 +399,12 @@ export const WEAK_VALUES =
 	// gameextractor - Real but output files are useless
 	/^geArchive: PRM( |$)/,
 
-	// gameextractor - actually WEAK
-	// candidates
+	// gameextractor
 	// SEEN  ONCE:
 	// 		BIG, BNK, WAV, WAV_2, BDF, RAW_MHWANH, FST_FAST_2_FSAMPLE, JFL_2, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, MAP_2, RSDK_RSDK, ARC_9, SOL_DISK, DAV_SLIB, COD_UNIQUE, UOP_MYP, VOL_VOL, VOL_VOL_3, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, BIN_P00P, RWS_2, MAP_2, RSDK_RSDK, ARC_9, DAV_SLIB, COD_UNIQUE, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, SOL_DISK
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -1154,6 +1153,7 @@ export const WEAK_VALUES =
 	/^OS\/2, hotspot/,
 	/^OS9\/(68K|6809) module/,
 	/^overlay object file/,
+	/^P\/ECE executable/,
 	/^PA-RISC\d/,
 	/^PAK archive data/,
 	/^Palm OS operating system patch data/,
@@ -1324,6 +1324,7 @@ export const WEAK_VALUES =
 	/^Windows [Ss]etup I(NF|nf)ormation/,
 	/^Windows (SYSTEM|WIN).INI/,
 	/^WinImage archive data/,
+	/^WonderSwan ROM image/,
 	/^WordPerfect block/,
 	/^WWPack archive data/,
 	/^X image$/,

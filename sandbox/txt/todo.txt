@@ -29,6 +29,7 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
 
 * Search dexvert for "unsupported" in src/format/<checkEachHere>/
   Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
+  NOTE: If codex won't "fully complete" a tricky format, use /goal
   Families remaining:
 	document
 	font

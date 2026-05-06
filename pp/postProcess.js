@@ -180,7 +180,7 @@ routes.set("/status", () =>
 		r.complete = true;
 	return Response.json(r);
 });
-const webServer = webUtil.serve({hostname : C.POST_PROCESS_HOST, port : C.POST_PROCESS_PORT}, await webUtil.route(routes), {xlog});
+const webServer = webUtil.serve({hostname : C.POST_PROCESS_HOST, port : C.POST_PROCESS_PORT}, await webUtil.route(routes, undefined, {xlog}), {xlog});
 
 taskRunner.startProgress(2, `Post Processing ${itemDirPath} as itemid ${item.itemid}...`);
 

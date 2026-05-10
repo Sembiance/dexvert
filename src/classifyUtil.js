@@ -33,7 +33,7 @@ export async function preProcessPNG(modelName, imagePath, outDir)
 	await runUtil.run("magick", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 	
 	const tmpTrimPath = await fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), ".png");
-	await runUtil.run("magick", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
+	await runUtil.run("magick", [...C.CONVERT_PNG_ARGS, pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
 	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
 	for(const CROP_METHOD of CROP_METHODS)
@@ -56,7 +56,7 @@ export async function classifyImage(imagePath, modelName, xlog)
 		await runUtil.run("magick", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 
 	const tmpTrimPath = await fileUtil.genTempPath(path.join(C.CLASSIFY_PATH, "tmp"), ".png");
-	await runUtil.run("magick", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
+	await runUtil.run("magick", [...C.CONVERT_PNG_ARGS, pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
 	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
 	const confidences = [];

@@ -74,18 +74,24 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
   vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
   Can give it code to existing converters to 'learn' about particular formats
 
-* Add support for "database" (as a new family?), converting various databases into sqlite3 databases
+* Add support for "database" (as a new family), converting various databases into sqlite3 databases
   * First task is to add sqlite3 support to dexvert.
-    Then add support for 'viewing' an sqlite3 database on discmaster, or at least a sampling. Basically list all tables, with metadata about each table (number of rows, total size in bytes, etc)
-    Then for each table show a snippet of rows in HTML table form, making sure that any embedded binary content like images, etc are shown.
-  * Support converting sqlite2Database (which is in dexvert and discmaster already) into sqlite3
-  * Get mysql databases converting
-  * Get text/postgreSQLDatabaseDump converting
-  * Get document/fileMakerPro databases converting, utilize this which has ability to convert to sqlite:  https://github.com/evanmiller/fmptools
-  * Get unsupported/microsoftISAMDatabase
-  * document/clarianDatabase
-  * Look for other "database" unsupported.js files to add support for converting
-
+    It should "extract" all binary data columns as "files" so that embedded images and what not are "visible" in a recurse.
+	These extracted "files" should sit alongside the .sqlite3 db, possibly a subdir per "table" and then a col_row#.png so if table was pics, col was pic, you'd have pics/pic_1.png ...
+	Then add support for 'viewing' an sqlite3 database on discmaster, show metadata about the database along with a list of tables and metadata about each table (# rows, total size, etc)
+	Then show each table as a <table>, extracted binary data show as links to the file (unless it was converted as image/audio/video then inline it in the <table> csv)
+  * Now create a vibe2sqlite converter and support then vibe-convert the following:
+    - sqlite2 (and sqlite 1?)
+    - document/fileMakerPro databases converting, give this to vibe code to help it write a converter to sqlite:  https://github.com/evanmiller/fmptools
+	  Can use this one as a test: https://discmaster.textfiles.com/view/6284/PD-ROM%20F95.toast/Telecom/Info/Info%20A-J/Internet%20Index
+	  Someone on discord discovered an old copy of the microsoft.com webpage as HTML in this: https://discord.com/channels/1140706605789368492/1297670690295517266/1502881381087444993
+	- MySQL
+	- Postgresql and text/postgreSQLDatabaseDump
+	- unsupported/microsoftISAMDatabase
+	- MSSQL
+	- Microsoft Access databases
+	- document/clarianDatabase
+    - Look for other "database" unsupported.js files to add support for converting
 * Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
   https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for

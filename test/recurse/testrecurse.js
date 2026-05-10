@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
+import {Sparkey} from "Sparkey";
 import {XLog} from "xlog";
 import {C} from "../../src/C.js";
 
@@ -69,12 +70,14 @@ async function testSample(samplePath)
 	if(durationDiffPercent>5)
 		xlog.warn`Report postProcess.duration of ${resultReport.postProcess.duration.msAsHumanReadable({short : true})} is ${durationDiff.msAsHumanReadable({short : true})} (${durationDiffPercent.toFixed(1)}%) vs expected ${expectedReport.postProcess.duration.msAsHumanReadable({short : true})}`;
 
-	for(const type of ["file", "web", "thumb"])
+	for(const type of ["file", "web", "thumb", "index"])
 	{
-		const {stdout : expectedKeysRaw} = await runUtil.run("/mnt/compendium/bin/sparkeyListKeys", [path.join(expectedDirPath, `${sampleDirName}_${type}`)]);
-		const expectedKeys = expectedKeysRaw.trim().split("\n").filter(v => v?.length);
-		const {stdout : resultKeysRaw} = await runUtil.run("/mnt/compendium/bin/sparkeyListKeys", [path.join(outDirPath, `${sampleDirName}_${type}`)]);
-		const resultKeys = resultKeysRaw.trim().split("\n").filter(v => v?.length);
+		const dbExpected = await Sparkey.create(path.join(expectedDirPath, `${sampleDirName}_${type}`));
+		const expectedKeys = await dbExpected.listKeys();
+
+		const dbResult = await Sparkey.create(path.join(outDirPath, `${sampleDirName}_${type}`));
+		const resultKeys = await dbResult.listKeys();
+
 		const missingKeys = expectedKeys.subtractAll(resultKeys);
 		if(missingKeys.length>0)
 			xlog.error`${missingKeys.length.toLocaleString()} Missing ${type} sparkey keys:\n\t${[...missingKeys.slice(0, 10), ...(missingKeys.length>10 ? ["<capped to 10> ..."] : [])].join("\n\t")}`;
@@ -82,6 +85,42 @@ async function testSample(samplePath)
 		const extraKeys = resultKeys.subtractAll(expectedKeys);
 		if(extraKeys.length>0)
 			xlog.error`${extraKeys.length.toLocaleString()} Extra ${type} sparkey keys:\n\t${[...missingKeys.slice(0, 10), ...(extraKeys.length>10 ? ["<capped to 10> ..."] : [])].join("\n\t")}`;
+
+		if(type==="index" && expectedKeys.length)
+		{
+			for(const resultKey of resultKeys)
+			{
+				const o = xu.parseJSON(dbResult.getText(resultKey));
+				const expected = xu.parseJSON(dbExpected.getText(resultKey));
+				if(!expected)
+				{
+					xlog.error`Result index sparkey has unexpected key: ${resultKey}`;
+					continue;
+				}
+
+				for(const key of ["cat", "genre", "unsupported", "name", "ext", "family", "format", "width", "height", "size", "b3sum", "itemid", "animated", "nsfw", "duration"])
+				{
+					if(expected[key]!==o[key])
+						xlog.error`Result index file entry ${o.fileid} has unexpected value for key ${key}: ${o[key]} !== ${expected[key]}`;
+				}
+
+				const expectedTextContent = (expected.textContent || []).join(" ");
+				if(expectedTextContent?.length && expectedTextContent!==(o.textContent || []).join(" "))
+				{
+					xlog.error`Result index file entry ${o.fileid} has unexpected textContent: ${(o.textContent || []).join(" ")} !== ${expectedTextContent}`;
+					continue;
+				}
+
+				for(const key of ["v", "va"])
+				{
+					if(expected[key]?.length && expected[key].length!==o[key]?.length)
+						xlog.error`Result index file entry ${o.fileid} has unexpected length for key ${key}: ${o[key]?.length} !== ${expected[key]?.length}`;
+				}
+			}
+		}
+
+		dbExpected.unload();
+		dbResult.unload();
 	}
 
 	const totalBytesDiff = resultReport.postProcess.totalBytes-expectedReport.postProcess.totalBytes;
@@ -100,39 +139,6 @@ async function testSample(samplePath)
 		if(expectedReport.postProcess.familyCounts[type]!==resultReport.postProcess.familyCounts[type])
 			xlog.error`Report postProcess.familyCounts[${type}] of ${resultReport.postProcess.familyCounts[type].toLocaleString()} !== ${expectedReport.postProcess.familyCounts[type].toLocaleString()}`;
 	}
-
-	const expectedIndex = {};
-	await fileUtil.readJSONLFile(path.join(expectedDirPath, `${sampleDirName}.jsonl.gz`), o =>
-	{
-		expectedIndex[o.fileid] = o;
-	});
-
-	let resultIndexCount = 0;
-	await fileUtil.readJSONLFile(path.join(outDirPath, `${sampleDirName}.jsonl.gz`), o =>
-	{
-		resultIndexCount++;
-		if(!expectedIndex[o.fileid])
-			return xlog.error`Result index file has unexpected entry: ${o}`;
-
-		for(const key of ["cat", "genre", "unsupported", "name", "ext", "family", "format", "width", "height", "size", "b3sum", "itemid", "animated", "nsfw", "duration"])
-		{
-			if(expectedIndex[o.fileid][key]!==o[key])
-				return xlog.error`Result index file entry ${o.fileid} has unexpected value for key ${key}: ${o[key]} !== ${expectedIndex[o.fileid][key]}`;
-		}
-
-		const expectedTextContent = (expectedIndex[o.fileid].textContent || []).join(" ");
-		if(expectedTextContent?.length && expectedTextContent!==(o.textContent || []).join(" "))
-			return xlog.error`Result index file entry ${o.fileid} has unexpected textContent: ${(o.textContent || []).join(" ")} !== ${expectedTextContent}`;
-
-		for(const key of ["v", "va"])
-		{
-			if(expectedIndex[o.fileid][key]?.length && expectedIndex[o.fileid][key].length!==o[key]?.length)
-				return xlog.error`Result index file entry ${o.fileid} has unexpected length for key ${key}: ${o[key]?.length} !== ${expectedIndex[o.fileid][key]?.length}`;
-		}
-	});
-
-	if(resultIndexCount!==Object.keys(expectedIndex).length)
-		xlog.error`Result index file has ${resultIndexCount.toLocaleString()} !== ${Object.keys(expectedIndex).length.toLocaleString()} expected`;
 
 	// TODO don't delete outDir if there were any errors (not warnings, just errors)
 	// xlog.info`Output in (up to you to delete it): ${outDirPath}`;

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,949)
+# Unsupported File Formats (3,951)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -542,7 +542,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (58)
+## Executable (60)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?format=aDotOutExecutable) | a.out Executable | .o | 
@@ -585,6 +585,8 @@ Family/Format | Name | Extensions | Notes
 [executable/msDOSDriver](https://discmaster.textfiles.com/search?format=msDOSDriver) | MS-DOS Driver | .sys .drv | 
 [executable/msdosPMODEExtenderExecutable](https://discmaster.textfiles.com/search?format=msdosPMODEExtenderExecutable) | MS-DOS PMODE extender executable | .exe .bin | 
 [executable/msxTSR](https://discmaster.textfiles.com/search?format=msxTSR) | MSX Terminate and Stay Resident Executable | .tsr | 
+[executable/msxDOSCommandInterpreter](https://discmaster.textfiles.com/search?format=msxDOSCommandInterpreter) | MSX-DOS Command interpreter | .com | 
+[executable/msxDOSSystemKernel](https://discmaster.textfiles.com/search?format=msxDOSSystemKernel) | MSX-DOS System kernel | .sys | 
 [executable/orbWorksPocketCCEApplication](https://discmaster.textfiles.com/search?format=orbWorksPocketCCEApplication) | OrbWorks PocketC CE Application | .app | 
 [executable/palmOSDynamicLibrary](https://discmaster.textfiles.com/search?format=palmOSDynamicLibrary) | Palm OS Dynamic Library | .prc | 
 [executable/playStation2IOPModule](https://discmaster.textfiles.com/search?format=playStation2IOPModule) | PlayStation 2 IOP module | .irx | 

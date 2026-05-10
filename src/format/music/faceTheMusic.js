@@ -8,5 +8,5 @@ export class faceTheMusic extends Format
 	forbidExtMatch = true;
 	magic          = ["FaceTheMusic module", "Face The Music module"];
 	metaProvider   = ["musicInfo"];
-	converters     = ["openmpt123"]
+	converters     = ["openmpt123"];
 }

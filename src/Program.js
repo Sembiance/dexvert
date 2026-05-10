@@ -31,7 +31,7 @@ export function clearRuntime()
 	delete RUNTIME.asFormat;
 }
 
-const CONVERT_PNG_ARGS = ["-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time"];
+const CONVERT_PNG_ARGS = ["-strip", ...C.CONVERT_PNG_ARGS];
 export {CONVERT_PNG_ARGS};
 
 export class Program

@@ -31,7 +31,7 @@ export class convert extends Program
 
 		const outType = (r.flags.outType || "png");
 		if(outType==="png")
-			a.push("-define", "png:exclude-chunks=time");
+			a.push("-define", "png:exclude-chunks=time,iCCP");
 		if(r.flags.flip)
 			a.push("-flip");
 		if(r.flags.removeAlpha)

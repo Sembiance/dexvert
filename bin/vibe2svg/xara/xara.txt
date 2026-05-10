@@ -1,0 +1,327 @@
+Vibe coded by Codex
+
+Xara XAR/WEB File Format Notes for sample0
+===========================================
+
+Scope and status
+----------------
+This document describes the byte-level container and the subset of the Xara graphic model implemented in xara.py. The parser was verified against every file under sample0/: 100 files, 97,015 logical records, 282 raw-deflate compression sections, and no unaccounted trailing bytes. Every physical byte in the samples is consumed as one of the following: the 8-byte file identifier, a record header, record payload, raw-deflate bytes, or the uncompressed TAG_ENDCOMPRESSION CRC/length payload.
+
+The SVG renderer is not a complete Xara renderer. It implements the documented core records needed to produce an SVG approximation for every sample, but it does not faithfully implement all Xara effects. Unsupported or approximate render areas are listed below. The parser still validates record framing, decompression CRCs, and tree navigation for those records.
+
+Top-level byte structure
+------------------------
+All sample files start with this exact 8-byte identifier:
+
+    58 41 52 41 a3 a3 0d 0a    ASCII "XARA" + marker + CR LF
+
+The rest of the file is a stream of records. All normal multi-byte fields are little-endian unless a record explicitly says otherwise.
+
+Record header:
+
+    UINT32 Tag
+    UINT32 Size
+    BYTE   Payload[Size]
+
+TAG_FILEHEADER is always the first logical record after the identifier. TAG_ENDOFFILE is always the final logical record. TAG_DOWN and TAG_UP records impose the document tree. A TAG_DOWN makes subsequent records children of the previous non-navigation record until its matching TAG_UP.
+
+Compression sections
+--------------------
+TAG_STARTCOMPRESSION has Size=4. The payload is three version bytes plus a compression type byte; all samples use compression type 0. Despite the historical spec calling this zlib, the sample files use raw DEFLATE streams with no zlib wrapper.
+
+Immediately after TAG_STARTCOMPRESSION payload, raw-deflate data begins. Inflating it yields normal records. The last inflated record is TAG_ENDCOMPRESSION, but only its 8-byte header is inside the compressed stream. Its Size field is 8. The following 8 physical bytes in the outer file are not deflated and contain:
+
+    UINT32 CRC32 of the inflated bytes
+    UINT32 number of inflated bytes
+
+xara.py validates both fields. This is how it can account for compressed sections exactly while still presenting a single logical record stream to the renderer.
+
+Core scalar types
+-----------------
+BYTE: unsigned 8-bit integer.
+UINT16/UINT32: little-endian unsigned integers.
+INT32/LONG/MILLIPOINT: little-endian signed 32-bit integers.
+COORD: two INT32 values, X then Y, in millipoints. The coordinate system has X increasing right and Y increasing upward. SVG output negates Y while serializing geometry, text anchors, image transforms, and paint-server coordinates so SVG text and embedded bitmaps remain upright.
+FIXED16: INT32 divided by 65536.
+DOUBLE: IEEE-754 little-endian 64-bit float.
+COLOURREF/BITMAPREF/REF: signed 32-bit sequence reference. Positive references point to prior logical records. Negative references point to built-in defaults.
+STRING: user-visible strings are UTF-16LE in the samples; file-header producer strings are ASCII NUL-terminated.
+
+Implemented rendering records
+-----------------------------
+The converter renders these records directly or as close SVG equivalents:
+
+- TAG_PATH and TAG_PATH_* variants: absolute verb/coordinate paths.
+- TAG_PATH_RELATIVE and TAG_PATH_RELATIVE_* variants: refined paths, with each entry stored as one verb byte plus an interleaved big-endian coordinate. The first coordinate is absolute; subsequent coordinates store previous-current deltas.
+- TAG_PATHREF_TRANSFORM: transforms a previously seen path by the documented 2D matrix.
+- TAG_DEFINECOMPLEXCOLOUR: uses the fallback RGB triplet at the start of the record.
+- TAG_FLATFILL, TAG_FLATFILL_NONE/BLACK/WHITE, TAG_LINECOLOUR, TAG_LINECOLOUR_NONE/BLACK/WHITE.
+- TAG_LINEWIDTH, TAG_STARTCAP, TAG_JOINSTYLE, TAG_WINDINGRULE, and default TAG_DASHSTYLE values.
+- TAG_FLATTRANSPARENTFILL and TAG_LINETRANSPARENCY as SVG opacity for mix-style transparency.
+- TAG_LAYERDETAILS visibility flags are honored; layers whose visible bit is clear, such as MouseOver and hidden photo layers in the website samples, are parsed but not rendered.
+- Multi-page web-template files that encode several pages as repeated Page background/MouseOff layer blocks at the same spread coordinates are split into separate SVG files. Later page phase blocks are parsed and rendered independently, with each output restricted to that page's visible layer set.
+- TAG_LINEARFILL, TAG_LINEARFILL3POINT, TAG_CIRCULARFILL, TAG_ELLIPTICALFILL, and TAG_CONICALFILL as SVG paint servers. TAG_FILLEFFECT_FADE emits the normal two-stop RGB interpolation. TAG_FILLEFFECT_RAINBOW and TAG_FILLEFFECT_ALTRAINBOW emit sampled HSV hue ramps using the documented shortest/longest hue route; conical fills use the same colour interpolation for their wedge colours. Conical fills are emitted as user-space angular SVG patterns built from wedge polygons because SVG has no native conical gradient in the target profile.
+- TAG_SQUAREFILL is mapped to the same three-point radial paint server used for elliptical fills. TAG_FOURCOLFILL is mapped to a transformed SVG pattern that approximates the four-corner colour interpolation with layered linear gradients. TAG_SQUARETRANSPARENTFILL updates fill opacity from its start/end transparency bytes.
+- TAG_BITMAPFILL and TAG_CONTONEBITMAPFILL as SVG pattern paint servers. Contone remapping is not applied.
+- TAG_DEFINEBITMAP_JPEG, TAG_DEFINEBITMAP_JPEG8BPP, TAG_DEFINEBITMAP_PNG, TAG_NODE_BITMAP, and bitmap fill references as embedded SVG images. TAG_DEFINEBITMAP_PNG 32bpp RGBA alpha is normalized by inverting the stored alpha channel as specified by the XAR format; without this, Xara's internally stored alpha-channel PNGs render in browsers with opaque black transparent regions. TAG_NODE_BITMAP stores its four corners as top-left, top-right, bottom-right, bottom-left, followed by the bitmap reference.
+- TAG_ELLIPSE_SIMPLE, TAG_ELLIPSE_COMPLEX, TAG_RECTANGLE_SIMPLE, TAG_RECTANGLE_SIMPLE_ROUNDED, TAG_RECTANGLE_COMPLEX, TAG_RECTANGLE_COMPLEX_ROUNDED, and TAG_REGULAR_SHAPE_PHASE_2. Rectangle quickshapes use the documented bounding-ellipse construction: the stored width/height or major/minor axes describe the ellipse, and the upright rectangle corners are the four equally spaced points on that ellipse, so the actual rectangle side vectors are scaled by 1/sqrt(2). TAG_REGULAR_SHAPE_PHASE_2 flag bit 0x01 is circular, bit 0x02 is stellated, bit 0x04 enables primary curvature, and bit 0x08 enables stellation curvature. Circular regular shapes are rendered as ellipses, not stars; stellation offset is a ratio of one side angle, not degrees. The two embedded edge paths that follow the fixed 75-byte phase-2 header are parsed; straight two-point edges and single-Bezier custom edge templates are rendered by scaling/rotating the edge template to each regular-shape side, matching Xara's InsertShapeEdge construction.
+- TAG_POLYGON_COMPLEX and TAG_POLYGON_COMPLEX_ROUNDED_STELLATED approximated as polygon/star paths. Rounded corner geometry is not faithfully reproduced.
+- TAG_RECTANGLE_COMPLEX_STELLATED and TAG_POLYGON_COMPLEX_STELLATED are rendered as stellated regular-shape paths using the stored centre, axes, stellation radius ratio, and stellation offset ratio.
+- Simple TAG_BLEND records now generate intermediate paths. When adjacent source/destination objects have compatible path command layouts their commands are interpolated directly. Incompatible path layouts fall back to sampled-polyline interpolation so files such as Watch4.xar still render blend interiors instead of only endpoints. TAG_BLENDER stores start/end path indexes; TAG_BLENDERADDITIONAL stores curve/object index metadata and the reverse flag. Blend-on-curve and non-path object conversion are still simplified.
+- TAG_SHADOWCONTROLLER/TAG_SHADOW wall, floor, and glow shadows are mapped to SVG filter effects. Wall shadows use the stored X/Y offset, penumbra blur, shadow colour, transparency, and darkness; floor shadows render a transformed shadow-only alpha copy using the recorded floor angle, floor height, offset, penumbra, shadow colour, transparency, and darkness; glow shadows use a zero-offset blur. Feather shadow transforms are not implemented.
+- TAG_FLATTRANSPARENTFILL is emitted as SVG fill opacity. TAG_LINEARTRANSPARENTFILL, TAG_CIRCULARTRANSPARENTFILL, TAG_ELLIPTICALTRANSPARENTFILL, TAG_SQUARETRANSPARENTFILL, and TAG_LINEARTRANSPARENTFILL3POINT are emitted as SVG alpha masks with user-space linear or radial gradients, so Xara colour fills and transparency fills remain independent. TAG_FEATHER is emitted as a path-shaped SVG alpha mask blurred with feGaussianBlur using the recorded feather width; this supports feathered bitmap-filled shapes such as vignette.xar. If a filled-and-stroked object has a gradient transparency fill or feather, the converter emits separate fill and stroke paths so the mask affects the fill only. Xara transparency type 2 (stained glass) maps to SVG mix-blend-mode:multiply and type 3 (bleach) maps to mix-blend-mode:screen; the other SVG-addressable blend modes are mapped where CSS has an equivalent. Bitmap/fractal and conical transparency fills are still reduced to a flat average opacity.
+- Basic text story/string/font-size/justification/typeface/style records are converted to SVG text. Text is emitted as styled runs, so nested fill color, gradient fill, font family, size, bold, italic, tracking, and baseline changes inside a text story are preserved where SVG has a direct equivalent. TAG_TEXT_STORY_COMPLEX and the complex start/end-left/right variants use their story matrices converted from Xara's Y-up coordinates into SVG's Y-down coordinate space; TAG_TEXT_LINE and TAG_TEXT_LINE_INFO records are used for hard line breaks, recorded line offsets, and recorded line extents. Single-run straight text lines with a recorded width are emitted with SVG textLength/lengthAdjust so browser font metrics do not shrink or expand the line relative to Xara's layout. TAG_TEXT_JUSTIFICATION_FULL is recognized, but SVG output leaves it as start-aligned text because SVG text has no direct automatic full-justification equivalent in this renderer.
+- Text stories that contain a single path child and one text line are emitted as SVG textPath content. This handles the text-on-curve construction used by samples such as photo_corner_bottom_right.xar; the path is stored in defs and the text is anchored with the story's justification.
+- Text lines whose story has a wrap width are moved to the right of overlapping bitmap-filled objects on the same vertical line, matching the text-repel/floating-photo layout used by the website samples.
+- TAG_PREVIEWBITMAP_GIF is parsed and can be used as a fallback only if no visible SVG elements are produced.
+
+Converter output behavior
+-------------------------
+xara.py takes an input XAR/WEB file and an existing output directory:
+
+    xara.py <inputFile> <outputDirectory>
+
+It renders every discovered page block as a separate SVG in that directory. When the file supplies page names with TAG_4372, the SVG filenames are the sanitized page names, for example index.svg, products.svg, store.svg, news.svg, gallery.svg, contact.svg, blog.svg, and about.svg in the trader_website sample. If no page name is present, the converter uses a generated page name or, for a single unnamed page, the input file stem.
+
+Fail-fast behavior
+------------------
+xara.py writes page SVGs through temporary files and renames them only after all pages render successfully. It requires the output directory to already exist. It fails on missing magic, malformed record headers, record sizes that exceed the stream, unsupported compression type, raw-deflate failure, compression CRC mismatch, compression length mismatch, malformed path records, unbalanced TAG_DOWN/TAG_UP navigation, or a non-directory output path.
+
+Known incomplete areas and next steps
+-------------------------------------
+This is not a full Xara renderer. The following sample-present features are parsed but either skipped or approximated:
+
+- Blends: only compatible path-to-path blends are interpolated. Xara's full blend algorithm, object mapping, blend-on-curve, and non-path object conversion are not fully implemented.
+- Moulds: TAG_MOULD_PERSPECTIVE records with quadrilateral mould paths are rendered by remapping emitted path, bitmap-corner, and fill-control coordinates through a projective transform from the source bounding box to the mould quadrilateral. TAG_MOULD_ENVELOPE records use a bilinear corner mapping. This handles the perspective mould stacks in Watch4.xar much more faithfully than bbox scaling, but it is still not Xara's full curve-by-curve envelope deformation engine.
+- Compound rendering/effects: TAG_COMPOUNDRENDER and higher Xtreme effect records are not rendered as offscreen composited bitmaps.
+- Live/locked effects, brush records, set/bar metadata, and newer 43xx/44xx records are not fully specified by the supplied 2007 PDF and are not rendered faithfully. Feather attributes are handled for filled paths and bitmap nodes, but full Xara feather-effect offscreen compositing is still more sophisticated than this SVG mask mapping.
+- Bitmap/fractal transparency fills, conical transparency fills, multi-stage transparency ramps, fill profiles, transparency modes without direct SVG/CSS equivalents, and repeat/inverted-repeat tiling modes are simplified.
+- Text layout is improved but still simplified; exact shaping, kerning, font substitution, aspect-ratio scaling, exact tab-stop positioning, arbitrary vector-object text repel, and path-fitted text are not reproduced.
+- Rounded QuickShape corners are approximated for some polygon/star cases.
+
+To make this complete, the next engineering step would be to obtain the newer Xara record definitions for the 4161-4434 tag range and implement a real rendering model for blends, moulds, transparency compositing, feather/effect bitmaps, and all fill geometries. The parser is structured so those can be added record-by-record without changing the byte accounting layer.
+
+Sample tag inventory
+--------------------
+Columns: tag, name used by xara.py, record count across sample0, total payload bytes, maximum payload bytes.
+
+0	TAG_UP	14697	0	0
+1	TAG_DOWN	14697	0	0
+2	TAG_FILEHEADER	100	5339	72
+3	TAG_ENDOFFILE	100	0	0
+10	TAG_ATOMICTAGS	128	4380	124
+12	TAG_TAGDESCRIPTION	59	6610	278
+30	TAG_STARTCOMPRESSION	282	1128	4
+31	TAG_ENDCOMPRESSION	282	2256	8
+40	TAG_DOCUMENT	100	0	0
+41	TAG_CHAPTER	100	0	0
+42	TAG_SPREAD	100	0	0
+43	TAG_LAYER	251	0	0
+45	TAG_SPREADINFORMATION	123	2091	17
+46	TAG_GRIDRULERSETTINGS	123	2091	17
+47	TAG_GRIDRULERORIGIN	123	984	8
+48	TAG_LAYERDETAILS	227	5391	57
+49	TAG_GUIDELAYERDETAILS	24	456	19
+51	TAG_DEFINECOMPLEXCOLOUR	1635	62163	85
+53	TAG_SPREADSCALING_INACTIVE	123	2952	24
+61	TAG_PREVIEWBITMAP_GIF	55	265406	12105
+67	TAG_DEFINEBITMAP_JPEG	161	7368797	434000
+68	TAG_DEFINEBITMAP_PNG	20	336636	106534
+71	TAG_DEFINEBITMAP_JPEG8BPP	1	1819	1819
+80	TAG_VIEWPORT	100	1600	16
+81	TAG_VIEWQUALITY	28	28	1
+82	TAG_DOCUMENTVIEW	100	2400	24
+87	TAG_DEFINE_DEFAULTUNITS	100	800	8
+90	TAG_DOCUMENTCOMMENT	5	198	54
+91	TAG_DOCUMENTDATES	100	800	8
+92	TAG_DOCUMENTUNDOSIZE	100	400	4
+93	TAG_DOCUMENTFLAGS	100	400	4
+104	TAG_GROUP	2194	0	0
+105	TAG_BLEND	50	150	3
+106	TAG_BLENDER	53	424	8
+107	TAG_MOULD_ENVELOPE	55	220	4
+108	TAG_MOULD_PERSPECTIVE	3	12	4
+109	TAG_MOULD_GROUP	58	0	0
+110	TAG_MOULD_PATH	58	6550	121
+111	TAG_PATH_FLAGS	6678	413479	7233
+112	TAG_GUIDELINE	173	865	5
+115	TAG_PATH_RELATIVE_STROKED	1042	27945	360
+116	TAG_PATH_RELATIVE_FILLED_STROKED	3587	2684349	65097
+118	TAG_PATHREF_TRANSFORM	1991	55748	28
+150	TAG_FLATFILL	5692	22768	4
+151	TAG_LINECOLOUR	1363	5452	4
+152	TAG_LINEWIDTH	6488	25952	4
+153	TAG_LINEARFILL	921	34376	40
+154	TAG_CIRCULARFILL	28	992	40
+155	TAG_ELLIPTICALFILL	50	2064	48
+156	TAG_CONICALFILL	89	3448	40
+157	TAG_BITMAPFILL	211	9236	44
+158	TAG_CONTONEBITMAPFILL	11	572	52
+159	TAG_FRACTALFILL	1	69	69
+160	TAG_FILLEFFECT_FADE	122	0	0
+162	TAG_FILLEFFECT_ALTRAINBOW	10	0	0
+163	TAG_FILL_REPEATING	121	0	0
+164	TAG_FILL_NONREPEATING	200	0	0
+165	TAG_FILL_REPEATINGINVERTED	4	0	0
+166	TAG_FLATTRANSPARENTFILL	858	1716	2
+167	TAG_LINEARTRANSPARENTFILL	378	12958	35
+168	TAG_CIRCULARTRANSPARENTFILL	32	816	35
+169	TAG_ELLIPTICALTRANSPARENTFILL	195	7665	43
+170	TAG_CONICALTRANSPARENTFILL	2	70	35
+171	TAG_BITMAPTRANSPARENTFILL	6	282	47
+172	TAG_FRACTALTRANSPARENTFILL	4	192	48
+173	TAG_LINETRANSPARENCY	931	1862	2
+174	TAG_STARTCAP	15	15	1
+175	TAG_ENDCAP	15	15	1
+176	TAG_JOINSTYLE	1650	1650	1
+177	TAG_MITRELIMIT	6	24	4
+178	TAG_WINDINGRULE	4	4	1
+179	TAG_QUALITY	24	96	4
+180	TAG_TRANSPARENTFILL_REPEATING	122	0	0
+181	TAG_TRANSPARENTFILL_NONREPEATING	8	0	0
+183	TAG_DASHSTYLE	7	28	4
+185	TAG_ARROWHEAD	3	36	12
+186	TAG_ARROWTAIL	21	252	12
+189	TAG_USERVALUE	451	16520	60
+190	TAG_FLATFILL_NONE	21	0	0
+193	TAG_LINECOLOUR_NONE	3815	0	0
+198	TAG_NODE_BITMAP	6	216	36
+206	TAG_FILL_REPEATING_EXTRA	1	0	0
+1000	TAG_ELLIPSE_SIMPLE	57	912	16
+1001	TAG_ELLIPSE_COMPLEX	178	4272	24
+1100	TAG_RECTANGLE_SIMPLE	20	320	16
+1104	TAG_RECTANGLE_SIMPLE_ROUNDED	8	192	24
+1108	TAG_RECTANGLE_COMPLEX	10	240	24
+1112	TAG_RECTANGLE_COMPLEX_ROUNDED	6	192	32
+1114	TAG_RECTANGLE_COMPLEX_ROUNDED_STELLATED	6	336	56
+1200	TAG_POLYGON_COMPLEX	5	130	26
+1216	TAG_POLYGON_COMPLEX_ROUNDED_STELLATED	7	406	58
+1901	TAG_REGULAR_SHAPE_PHASE_2	613	72947	119
+2000	TAG_FONT_DEF_TRUETYPE	97	3952	82
+2100	TAG_TEXT_STORY_SIMPLE	725	8660	12
+2101	TAG_TEXT_STORY_COMPLEX	16	448	28
+2110	TAG_TEXT_STORY_SIMPLE_START_LEFT	1	12	12
+2150	TAG_TEXT_STORY_WORD_WRAP_INFO	742	3710	5
+2151	TAG_TEXT_STORY_INDENT_INFO	742	5936	8
+2200	TAG_TEXT_LINE	2653	0	0
+2201	TAG_TEXT_STRING	2390	160150	270
+2202	TAG_TEXT_CHAR	119	238	2
+2203	TAG_TEXT_EOL	1483	0	0
+2204	TAG_TEXT_KERN	27	216	8
+2206	TAG_TEXT_LINE_INFO	2653	31836	12
+2900	TAG_TEXT_LINESPACE_RATIO	355	1420	4
+2901	TAG_TEXT_LINESPACE_ABSOLUTE	211	844	4
+2903	TAG_TEXT_JUSTIFICATION_CENTRE	382	0	0
+2904	TAG_TEXT_JUSTIFICATION_RIGHT	30	0	0
+2906	TAG_TEXT_FONT_SIZE	1894	7576	4
+2907	TAG_TEXT_TYPEFACE	1271	5084	4
+2908	TAG_TEXT_BOLD_ON	632	0	0
+2909	TAG_TEXT_BOLD_OFF	18	0	0
+2910	TAG_TEXT_ITALIC_ON	58	0	0
+2918	TAG_TEXT_TRACKING	13	52	4
+2919	TAG_TEXT_ASPECT_RATIO	136	544	4
+2920	TAG_TEXT_BASELINE	140	560	4
+3506	TAG_WEBADDRESS	89	4005	45
+3507	TAG_WEBADDRESS_BOUNDINGBOX	89	1335	15
+3509	TAG_3509	288	288	1
+4001	TAG_4001	2	56	28
+4002	TAG_4002	2	8	4
+4012	TAG_4012	10	160	16
+4015	TAG_4015	7	187	27
+4020	TAG_4020	46	2574	142
+4021	TAG_4021	101	6694	72
+4030	TAG_4030	4	20	5
+4031	TAG_4031	85	2380	28
+4040	TAG_4040	600	36946	94
+4041	TAG_4041	14	1046	106
+4042	TAG_4042	27	108	4
+4050	TAG_4050	118	3422	29
+4051	TAG_4051	118	2832	24
+4052	TAG_4052	16	384	24
+4057	TAG_4057	16	0	0
+4070	TAG_4070	58	0	0
+4071	TAG_4071	133	47200	1238
+4072	TAG_4072	42	2016	48
+4073	TAG_BLENDERADDITIONAL	44	748	17
+4086	TAG_FEATHER	10	200	20
+4087	TAG_4087	58	232	4
+4114	TAG_4114	58	232	4
+4115	TAG_BITMAP_PROPERTIES	177	2124	12
+4116	TAG_4116	58	290	5
+4119	TAG_CURRENTATTRIBUTES	110	110	1
+4120	TAG_CURRENTATTRIBUTEBOUNDS	279	4464	16
+4121	TAG_LINEARFILL3POINT	45	2160	48
+4123	TAG_LINEARTRANSPARENTFILL3POINT	1	43	43
+4124	TAG_4124	56	448	8
+4128	TAG_COMPOUNDRENDER	5	100	20
+4129	TAG_OBJECTBOUNDS	16	256	16
+4131	TAG_SPREAD_PHASE2	23	0	0
+4132	TAG_CURRENTATTRIBUTES_PHASE2	2	2	1
+4134	TAG_SPREAD_FLASHPROPS	62	744	12
+4136	TAG_DOCUMENTINFORMATION	6	72	12
+4161	TAG_4161	46	368	8
+4162	TAG_4162	45	360	8
+4163	TAG_4163	45	360	8
+4164	TAG_4164	45	360	8
+4165	TAG_4165	45	360	8
+4166	TAG_4166	45	360	8
+4167	TAG_4167	46	92	2
+4168	TAG_4168	45	90	2
+4169	TAG_4169	45	90	2
+4170	TAG_4170	45	90	2
+4171	TAG_4171	45	90	2
+4172	TAG_4172	45	90	2
+4173	TAG_4173	45	90	2
+4174	TAG_4174	45	90	2
+4175	TAG_4175	45	360	8
+4176	TAG_4176	40	360	9
+4177	TAG_4177	40	360	9
+4178	TAG_4178	40	360	9
+4179	TAG_4179	40	320	8
+4181	TAG_4181	1	9	9
+4200	TAG_TEXT_TAB	5	0	0
+4201	TAG_TEXT_LEFT_INDENT	66	264	4
+4202	TAG_TEXT_FIRST_INDENT	66	264	4
+4203	TAG_TEXT_RIGHT_INDENT	64	256	4
+4204	TAG_TEXT_RULER	65	135	7
+4205	TAG_TEXT_STORY_HEIGHT_INFO	67	268	4
+4206	TAG_TEXT_STORY_LINK_INFO	26	234	9
+4207	TAG_TEXT_STORY_TRANSLATION_INFO	67	536	8
+4208	TAG_TEXT_SPACE_BEFORE	60	240	4
+4209	TAG_TEXT_SPACE_AFTER	60	240	4
+4216	TAG_4216	89	356	4
+4217	TAG_4217	26	0	0
+4330	TAG_4330	1	0	0
+4331	TAG_4331	120	0	0
+4350	TAG_4350	55	20897	971
+4351	TAG_4351	2	192	136
+4352	TAG_4352	56	448	8
+4361	TAG_4361	25	100	4
+4362	TAG_4362	25	100	4
+4363	TAG_4363	25	100	4
+4372	TAG_4372	11	230	26
+4375	TAG_4375	128	2048	16
+4376	TAG_4376	2	44	22
+4380	TAG_4380	12	614	54
+4382	TAG_4382	43	1118	26
+4383	TAG_4383	7	28	4
+4394	TAG_4394	4	32	8
+4395	TAG_4395	4	48	12
+4398	TAG_4398	1	46	46
+4399	TAG_4399	1	4	4
+4400	TAG_4400	1	4	4
+4401	TAG_4401	1	4	4
+4402	TAG_4402	1	4	4
+4403	TAG_4403	1	4	4
+4404	TAG_4404	5	50	10
+4405	TAG_4405	15	0	0
+4407	TAG_4407	25	0	0
+4408	TAG_4408	1	4	4
+4409	TAG_4409	9	0	0
+4411	TAG_4411	9	432	48
+4419	TAG_4419	22	792	36
+4420	TAG_4420	22	0	0
+4422	TAG_4422	170	2720	16
+4423	TAG_4423	9	90	10
+4430	TAG_4430	142	0	0
+4434	TAG_4434	16	400	25

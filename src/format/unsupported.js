@@ -515,6 +515,8 @@ export default
 		microsoftCompiledHelp2               : {name : "Microsoft Compiled Help 2", ext : [".HxS", ".HxI"], magic : ["Microsoft compiled help format 2"], website : "http://fileformats.archiveteam.org/wiki/Microsoft_Help_2"},
 		mipsECOFFExe                         : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
 		msDOSDriver                          : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/, "ZSoft scanner driver", "SYSPACK compressed DOS SYS driver"], weakMagic : true},
+		msxDOSCommandInterpreter             : {name : "MSX-DOS Command interpreter", ext : [".com"], magic : ["MSX-DOS Command interpreter", "MSX-DOS2 Command interpreter"]},
+		msxDOSSystemKernel                   : {name : "MSX-DOS System kernel", ext : [".sys"], magic : ["MSX-DOS System kernel", "MSX-DOS2 System kernel"]},
 		msxTSR                               : {name : "MSX Terminate and Stay Resident Executable", ext : [".tsr"], magic : ["MSX Software Team TSR"]},
 		orbWorksPocketCCEApplication         : {name : "OrbWorks PocketC CE Application", ext : [".app"], magic : ["OrbWorks PocketC CE Application"], weakMagic : true},
 		palmOSDynamicLibrary                 : {name : "Palm OS Dynamic Library", ext : [".prc"], magic : ["Palm OS dynamic library"], weakMagic : true},

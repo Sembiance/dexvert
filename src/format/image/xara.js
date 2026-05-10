@@ -7,5 +7,5 @@ export class xara extends Format
 	ext            = [".xar", ".web"];
 	forbidExtMatch = [".web"];
 	magic          = ["Xara graphics file", "Corel Xara Web document", "Xara drawing", "Xara :xar:", /^fmt\/922( |$)/];
-	converters     = ["uniconvertor[autoCrop]", "nconvert[format:xar]", "graphicWorkshopProfessional", "tomsViewer"];
+	converters     = ["vibe2svg[multiple][renameOut]", "uniconvertor[autoCrop]", "nconvert[format:xar]", "graphicWorkshopProfessional", "tomsViewer"];
 }

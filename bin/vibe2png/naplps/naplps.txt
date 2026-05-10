@@ -1,0 +1,234 @@
+# Vibe coded by Codex
+
+NAPLPS sample0 file format notes
+================================
+
+Scope
+-----
+
+The files in `sample0/` are NAPLPS drawing streams, not container files.  A
+decoder reads bytes sequentially and updates a terminal graphics state.  The
+converter in `naplps.py` implements the profile present in the corpus and
+renders the final screen to one 640x480 PNG per input stream.
+
+Code sets and byte classes
+--------------------------
+
+NAPLPS is built on ISO-style C and G sets.
+
+* `00`-`1F` are C0 controls.  The samples use `CAN`, `LF`, `FF`, `CR`, `SO`,
+  `SI`, `SS3`, `NSR`, and service delimiters.  `NSR` resets the graphics/text
+  state and may take two cursor-position bytes.
+* `1B` starts escape sequences.  The samples designate C1, ASCII, PDI, and
+  related G sets, use escaped C1 bytes, and contain a small number of
+  multi-byte `ESC 24 2B 30` G3 designations for East Asian text.
+* `80`-`9F` are C1 controls in 8-bit form.  The sample profile includes
+  `DEF TEXTURE`, `END`, `REPEAT`, video/text-size controls, underline,
+  cursor controls, and protected-field no-ops.
+* `20`-`7F` are interpreted through the current GL G-set.
+* `A0`-`BF` are PDI commands when GR is G1/PDI.  They map to PDI `20`-`3F`.
+* `C0`-`FF` are PDI data bytes when GR is G1/PDI.  Their payload is the low
+  six bits.
+
+The common stream prologue in the corpus is:
+
+* `18`: cancel active macros.
+* `1B 22 46`: designate C1.
+* Optional `85` or `1B 45`: END outside a definition, harmless.
+* `1F 40 40`: non-selective reset with row/column zero.
+
+PDI records
+-----------
+
+A Picture Description Instruction begins with a PDI command byte and continues
+with PDI data bytes.  It terminates at the next non-data byte or next PDI
+command.  Data bytes contribute six payload bits (`byte & 0x3F`).
+
+Implemented PDI commands:
+
+* `20 RESET`: selective reset, screen clearing, color/domain/text/texture reset.
+* `21 DOMAIN`: coordinate dimensionality, single-value length, multi-value
+  length, logical pel size.
+* `22 TEXT`: text spacing/path/rotation metadata and character field size.
+* `23 TEXTURE`: fill pattern, filled-object outline flag, line texture, pattern
+  mask size.
+* `24`-`27`: absolute/relative point set and point draw.
+* `28`-`2B`: absolute/relative lines and set-and-line forms.
+* `2C`-`2F`: circular arcs and filled arcs.
+* `30`-`33`: outlined/filled rectangles and set-and-rectangle forms.
+* `34`-`37`: outlined/filled polygons and set-and-polygon forms.
+* `38 FIELD`: active field origin and dimensions.
+* `39 INCREMENTAL POINT`: packed bitmap pels inside the active field.
+* `3A`-`3B`: incremental line and filled incremental polygon.
+* `3C SET COLOR`: direct RGB color or palette-entry definition.
+* `3D WAIT`: parsed and ignored for static rendering.
+* `3E SELECT COLOR`: mode 0/1/2 and foreground/background palette selection.
+* `3F BLINK`: parsed and ignored for static rendering.
+
+Filled objects honor the NAPLPS fill-pattern selector.  The sample-compatible
+static renderer treats the basic hatch selectors as solid foreground fills,
+which matches the provided expected images.  Programmable masks A-D are
+rasterized when defined.  Outlined filled objects draw their outline in black
+in color modes 0 and 1, and in the active background color in color mode 2.
+Line texture selectors draw dotted, dashed, and dot-dash line segments.
+Untextured horizontal and vertical PDI lines are rasterized as pel-anchored
+rectangles rather than centered vector strokes.  This follows the same pel cell
+origin as point drawing: a horizontal line covers from the encoded Y coordinate
+up by the current pel height, and a vertical line covers from the encoded X
+coordinate right by the current pel width.  The distinction matters for adjacent
+filled regions that rely on an axis-aligned line to seal a raster seam, such as
+the cyan background pieces in `16775/GARFIELD.NAP`.  Solid filled polygons with
+sub-pixel logical pels also seal their horizontal and vertical boundaries with
+one display-pixel coverage in the fill color.  This matches the pel-cell
+boundary coverage used by high-resolution polygon art and prevents white
+background scanline gaps between adjoining filled shapes.
+Filled rectangles normally use Cartesian positive Y.  If a filled rectangle
+starts at the top text/home line and a positive height would be clipped above
+the visible display while the corresponding downward extent intersects the
+screen, the renderer treats it as the top-origin screen/page fill form seen in
+`13675/OLDPHONE.NAP`.  Small top-overflow rectangles use the actual overshoot
+distance to keep control-panel fills aligned with their top-edge details, and
+the same overflow region is applied to later pel, polygon, and rectangle details
+inside that panel so buttons and knobs are not clipped above the screen, as in
+`4594/APPLS.NAP`.  Shallow filled polygons that sit wholly above the visible top
+edge also establish a top-overflow region; the appliance cap and the later
+refrigerator face/details in `4594/APPLS.NAP` use this form.  `SET & RECT`
+streams in the sample corpus may repeat absolute point and size pairs in a
+single PDI record; this is used as compact raster run encoding by
+`30056/EAGCD.NAP`.  Filled rectangles whose encoded width or height is zero
+still cover one logical pel on that axis, and unpatterned filled rectangles are
+rasterized directly as axis-aligned pixel rectangles so single-pel raster runs
+do not collapse into mathematical lines.
+
+Operands
+--------
+
+Single-value operands are one to four data bytes.  Their six-bit payloads are
+concatenated most-significant first.
+
+Two-dimensional multi-value operands are one to eight data bytes.  The first
+byte contains X sign, two X value bits, Y sign, and two Y value bits.  Each
+following byte contributes three X bits and three Y bits.  Values are signed
+binary fractions of the unit screen: for a negative value, the collected value
+bits are interpreted as `bits - 2^precision`, so all-one value bits represent a
+tiny negative delta rather than almost `-1.0`.
+
+Three-dimensional operands are decoded similarly with two payload bits per
+coordinate after the first byte; Z is consumed and ignored for rendering.
+
+Arc operands are chained relative values.  The start point is either the
+current drawing point or the first operand for the set-and-arc forms.  The
+intermediate point is a relative displacement from that start point, and the
+end point is a relative displacement from the intermediate point.  If the end
+point is omitted, it coincides with the start point and the intermediate point
+defines a circle diameter.
+
+Color operands use the payload bits as `G R B G R B`, repeated for every data
+byte, and scale each channel to 8-bit RGB.
+
+Screen model
+------------
+
+The logical unit screen is Cartesian with `(0,0)` at the lower-left.  The
+visible display is the 4:3 region from `(0,0)` to `(1,0.75)`.  The converter
+maps that region to 640x480.  Objects outside the viewport are clipped by the
+Pillow rasterizer.
+
+The default 16-entry palette used by the samples is:
+
+`#000000 #202020 #414141 #616161 #828282 #9E9E9E #BEBEBE #DFDFDF`
+`#0000FF #BE00FF #FF0082 #FF4100 #FFFF00 #41FF00 #00FF82 #00BEFF`
+
+Text and mosaics
+----------------
+
+ASCII text is drawn on the final 640x480 pixel grid, thresholded to one-bit
+coverage, and then copied into the supersampled drawing buffer as exact 3x3
+pixel blocks.  This keeps text hard-edged after the final image is reduced,
+matching the no-antialiasing behavior of period terminals.  The default glyph
+source is the local X11/Red Hat classic Times PCF bitmap family when available;
+`NAPLPS_FONT_FAMILY` can be set to `times-pcf`, `helvetica-pcf`, `courier-pcf`,
+`charter-pcf`, `new-century-pcf`, `utopia-pcf`, `times`, `courier`, `arial`,
+`bodoni`, `nimbus-roman`, `nimbus-sans`, `nimbus-sans-narrow`, or `unifont` to
+compare alternate local fonts without changing the NAPLPS parser.
+
+Glyphs in normal and large text cells are rendered into a common line box to
+keep baselines stable.  Proportional display cells of 100 pixels or taller use
+a stronger upward placement band, with a second band for cells of 150 pixels or
+taller; this matches the tall title lettering used by pages such as
+`13849/HAUNT.NAP` and `13849/BEER.NAP`.  Small/medium proportional menu cells
+are shifted upward by size and color bands to keep menu labels aligned with
+adjacent icons and above associated underline/dash graphics.
+Very small bright
+text cells crop to the actual ink before fitting into the cell and use one-bit
+stroke expansion so menu labels remain legible.  Very small dark text keeps
+punctuation in the full font line box and uses a thinner alphanumeric fit so
+paragraph text such as `10855/ICOSAMP.NAP` does not turn into blocky bold
+glyphs.  The stream controls the character
+field size, character path, field rotation, negative-dimension mirroring,
+cursor/drawing-point relationship, cursor style/visibility, repeat,
+active-field-aware automatic carriage-return/linefeed when the cursor is inside
+the active field, full-screen text advance when explicit positioning moves the
+cursor outside that field, suppression of an immediate explicit CR/LF after
+automatic wrap, linefeed/vertical-tab, active field carriage return, underline,
+reverse video, protected/unprotected field state, and common C1 text sizes.  The
+`TEXT` PDI inter-character code `11` is proportional spacing: ASCII bytes are
+classified with the NAPLPS ten-class table, cursor advances use the small-width
+table for fields below 12/256 wide and the scaled adjustment algorithm for wider
+fields, and glyph ink is fitted to the same proportional advance width.
+Supplementary characters that appear rarely are mapped to Unicode where useful
+and otherwise rendered as spaces.
+
+Mosaic characters are rendered as 2x3 block cells using the NAPLPS bit layout.
+The observed multi-byte G3 text designations are consumed as text-cell advances
+for static rendering; this preserves stream state but does not draw those glyphs.
+
+Definitions
+-----------
+
+The corpus contains definition blocks.  `DEF MACRO` bodies are stored and
+expanded when the macro G-set is invoked.  `DEF TEXTURE` (`84`) bodies are
+rendered into monochrome masks and tiled when fill patterns A-D are selected.
+`DEF DRCS` is supported for completeness by rendering the recorded glyph stream
+to a monochrome glyph and scaling it into the current character field, although
+the provided sample corpus does not contain DRCS definitions.
+
+Validation behavior
+-------------------
+
+The converter rejects empty inputs, malformed escape/designation sequences,
+or PDI data bytes that occur without an active PDI.  It writes through a
+temporary file and only renames on success, so rejected inputs leave no output.
+The command line is `naplps.py <inputFile> <outputFile.png>`.  The second
+argument is the exact PNG path to write; it is not treated as a directory and
+the converter does not invent or uniquify the output filename.
+
+Completeness statement
+----------------------
+
+Every byte in the `sample0/` corpus is classified and consumed by the parser:
+C0 control, C1 control, escape/designation sequence, text/mosaic byte, PDI
+command, PDI data, or definition payload.  This implementation is a practical
+static renderer for the sample profile, not a full interactive NAPLPS terminal.
+
+Known unsupported or approximate areas:
+
+* The NAPLPS standard does not define a mandatory ASCII glyph design.  The
+  renderer uses local bitmap/scalable substitutes and includes a generated
+  `naplps_font_compare.html` page to compare ten candidate fonts against a few
+  expected samples.  The parser and text metrics are implemented, but exact
+  glyph artwork remains terminal-dependent unless the original service or
+  terminal font ROM is identified.
+* User-editing behavior for unprotected fields is recorded structurally but is
+  not interactive because this converter renders static input streams rather
+  than running as a terminal accepting user keystrokes.
+* Temporal behavior is static.  WAIT/BLINK/palette animation are consumed or
+  reduced to the final still image rather than emitting timed frames.
+* Some PDI semantics are sample-profile approximations: nonprogrammable hatch
+  patterns render as solid fills, line texture behavior is simplified, and
+  object fill/outline edge rules are not pixel-identical to a specific terminal.
+* DRCS and double-byte character sets are minimal.  DRCS definitions can be
+  replayed into a monochrome glyph, but full character-set semantics and exact
+  font-cell layout are not complete.
+* Bitmap and active-field clipping/scrolling are implemented only to the degree
+  exercised by these still-image samples.

@@ -57,7 +57,7 @@ C.DEX_AGENT_MAX_DURATION = xu.HOUR*1.5;
 C.POLY_THUMB_HEIGHT = 300;
 C.POLY_THUMB_WIDTH = 200;
 C.CONVERT_ARGS = ["-define", "filename:literal=true"];
-C.CONVERT_PNG_ARGS = [...C.CONVERT_ARGS, "-define", "png:exclude-chunks=time"];
+C.CONVERT_PNG_ARGS = [...C.CONVERT_ARGS, "-define", "png:exclude-chunks=time,iCCP"];
 C.DEXVERT_TMP_DIR = "/mnt/dexvert/tmp";
 C.POLY_TMP_DIR = path.join(C.DEXVERT_TMP_DIR, "poly");
 C.DEFAULT_IMG_URL = "/image/multipleImages.png";
@@ -128,7 +128,7 @@ C.IMAGE_VARIANT_FORMATS =
 // see above, these should pick the last child image, not the first
 C.IMAGE_VARIANT_FORMATS_LAST = ["palmBitmap", "xCursor"];
 
-/* eslint-disable @stylistic/array-bracket-spacing, @stylistic/indent */
+/* eslint-disable @stylistic/array-bracket-spacing, @stylistic/indent, @stylistic/no-multi-spaces */
 /* Arranged in a table to make it easier to read, but will be converted into key : value pairs */
 // optional: true means that the field is optional
 //    facet: true means that the field is facetable (group by)
@@ -170,7 +170,7 @@ C.SEARCH_SCHEMA =
 	          v : [   "fvec",  true,       false,   false,  false  ],	// 768 count float vector for images/poly thumbs, used for similarity search
 			 va : [   "fvec",  true,       false,   false,  false  ]	// 512 count float vector for audio, used for similarity search
 };
-/* eslint-enable @stylistic/array-bracket-spacing, @stylistic/indent */
+/* eslint-enable @stylistic/array-bracket-spacing, @stylistic/indent, @stylistic/no-multi-spaces */
 C.SEARCH_SCHEMA = Object.fromEntries(Object.entries(C.SEARCH_SCHEMA).map(([fieldKey, fieldOptions]) => ([fieldKey, Object.fromEntries(fieldOptions.map((k, i) => ([C.SEARCH_SCHEMA._options[i], k])))])));
 delete C.SEARCH_SCHEMA._options;
 

@@ -5,5 +5,5 @@ export class astroideaXMF extends Format
 	name         = "Astroidea XMF";
 	ext          = [".xmf"];
 	metaProvider = ["musicInfo"];
-	converters   = ["openmpt123"]
+	converters   = ["openmpt123"];
 }

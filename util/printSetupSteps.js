@@ -93,6 +93,9 @@ const EXTRA_PACKAGES =
 	// vibeExtract
 	"app-arch/stormlib",
 
+	// tridServer
+	"dev-python/stringzilla",
+
 	// post processing: specific versions are needed to compile TensorFlow with full AVX2 support as of Feb 2026
 	"=dev-libs/cudnn-9.8.0*",
 	"=dev-util/nvidia-cuda-toolkit-12.8.1*",

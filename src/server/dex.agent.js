@@ -7,6 +7,7 @@ import {initRegistry} from "../dexUtil.js";
 import {programChanged} from "../program/programs.js";
 import {formatChanged} from "../format/formats.js";
 import {agentInit} from "AgentPool";
+import {RUNTIME} from "../Program.js";
 
 await initRegistry();
 
@@ -54,4 +55,4 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 	}
 
 	return {[typeof r==="string" ? "err" : "r"] : r};
-}, () => Array.from(logLines));
+}, () => ({log : Array.from(logLines), programDurations : RUNTIME.programDurations}));

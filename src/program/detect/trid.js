@@ -1,29 +1,28 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
+import {C} from "../../C.js";
 
 export class trid extends Program
 {
 	website = "https://mark0.net/soft-trid-e.html";
-	package = "app-arch/trid";
-	bin     = "trid";
 	loc     = "local";
-	args    = r => ["-n", "5", r.flags.detectTmpFilePath];
-	post    = r =>
+	exec    = async r =>
 	{
 		r.meta.detections = [];
 
-		r.stdout.split("\n").forEach(tridLine =>
+		const result = await xu.fetch(`http://${C.TRID_SERVER_HOST}:${C.TRID_SERVER_PORT}/detect`, {json : {filePath : r.inFile({absolute : true})}, asJSON : true});
+		if(result?.error)
+			return r.xlog.error`trid /detect error: ${result.error}`;
+
+		r.xlog.debug`trid /detect result: ${result}`;
+		
+		for(const {percent, extension, fileType} of result?.matches || [])
 		{
-			const parts = tridLine.match(/^\s*(?<confidence>\d+\.\d)% \((?<extension>[^)]+)\) (?<value>.+) \([^)]+\)$/);
-			if(!parts)
-				return;
-			
-			const tridMatch = {confidence : +parts.groups.confidence, value : parts.groups.value, file : r.f.input};
-			tridMatch.extensions = parts.groups.extension.includes("/") ? parts.groups.extension.split("/").map(ext => (ext.charAt(0)==="." ? "" : ".") + ext) : [parts.groups.extension];
-			tridMatch.extensions.mapInPlace(ext => ext.toLowerCase());
-			tridMatch.from = "trid";
+			const tridMatch = {from : "trid", confidence : percent, value : fileType, file : r.f.input};
+			tridMatch.extensions = (extension.includes("/") ? extension.split("/") : [extension]).map(ext => ext.toLowerCase()).map(ext => (ext.charAt(0)==="." ? "" : ".") + ext);
 			r.meta.detections.push(Detection.create(tridMatch));
-		});
+		}
 	};
 	renameOut = false;
 }

@@ -15,13 +15,16 @@ import {C} from "./C.js";
 
 const MAX_FILENAME_LENGTH = 245;
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
+const DEBUG_PROGRAM_DURATIONS = false;
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
 {
-	globalFlags   : {},
-	forbidProgram : new Set()
+	globalFlags      : {},
+	forbidProgram    : new Set()
 };
+if(DEBUG_PROGRAM_DURATIONS)
+	RUNTIME.programDurations = {};
 export {RUNTIME};
 
 export function clearRuntime()
@@ -177,6 +180,9 @@ export class Program
 				xlog.info`Program ${fg.orange(this.programid)} lock acquired`;
 			}
 
+			if(DEBUG_PROGRAM_DURATIONS)
+				RUNTIME.programDurations[this.programid] ||= [];
+			const programStartTime = performance.now();
 			if(this.exec)
 			{
 				// run arbitrary javascript code
@@ -196,6 +202,7 @@ export class Program
 
 				xlog.info`Program ${fg.orange(this.programid)} executing locally: \`${r.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
 				xlog.debug`  with options ${printUtil.inspect(r.runOptions).squeeze()}`;
+				
 				const {stdout, stderr, status} = await runUtil.run(r.bin, r.args, r.runOptions);
 				Object.assign(r, {stdout, stderr, status});
 			}
@@ -246,7 +253,9 @@ export class Program
 				xlog.debug`  with osData: ${printUtil.inspect(r.osData).squeeze()}`;
 				r.status = await runOS(r.osData);
 			}
-			xlog.debug`Program ${fg.orange(this.programid)} execution finished ${JSON.stringify(r.status)}`;
+			if(DEBUG_PROGRAM_DURATIONS)
+				RUNTIME.programDurations[this.programid].push(performance.now()-programStartTime);
+			xlog.debug`Program ${fg.orange(this.programid)} execution finished, took ${(performance.now()-programStartTime).msAsHumanReadable()}:${JSON.stringify(r.status)}`;
 
 			if(this.postExec)
 			{

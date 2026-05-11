@@ -1,34 +1,29 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
+import {C} from "../../C.js";
 
 export class binwalkID extends Program
 {
 	website = "https://github.com/OSPG/binwalk";
-	package = "app-misc/binwalk";
-	bin     = "binwalk";
 	loc     = "local";
-	args    = r => ["--length=512", r.inFile()];
-	post    = r =>
+	exec    = async r =>
 	{
 		r.meta.detections = [];
 
-		const magic = [];
-		for(const line of r.stdout.trim().split("\n"))
+		const result = await xu.fetch(`http://${C.BINWALK_SERVER_HOST}:${C.BINWALK_SERVER_PORT}/detect`, {json : {filePath : r.inFile({absolute : true})}, asJSON : true});
+		if(result?.error)
+			return r.xlog.error`binwalkID error: ${result.error}`;
+
+		r.xlog.debug`binwalkID /detect result: ${result}`;
+
+		for(const {offset, description} of result?.matches || [])
 		{
-			if(!line.trim().length)
+			if(offset!==0)
 				continue;
 
-			if(["---", "DECIMAL"].some(v => line.startsWith(v)))
-				continue;
-
-			const {offset, magicValue} = line.match(/^(?<offset>\d+)\s+\S+\s+(?<magicValue>.+)$/)?.groups || {};
-			if((+offset)===0 && magicValue?.trim().length)
-				magic.push(magicValue.trim());
+			r.meta.detections.push(Detection.create({value : description, confidence : 100, from : "binwalkID", file : r.f.input}));
 		}
-
-		if(magic.length)
-			r.meta.detections.push(Detection.create({value : magic.join(" "), confidence : 100, from : "binwalkID", file : r.f.input}));
 	};
 	renameOut = false;
 }

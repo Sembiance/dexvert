@@ -369,10 +369,10 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Xuse.BinOpener, archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:Pinky.A5rOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener
-	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:Electriciteit.DatOpener
+	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener
 	//		archive:Youkai.VoiceDatOpener, archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener, archive:FrontWing.DatOpener
+	//		archive:Will.ArcOpener, archive:FrontWing.DatOpener, archive:Electriciteit.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -403,9 +403,9 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, COD_UNIQUE, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, COD_UNIQUE, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, CMF
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, BIN_P00P, PSF_PSF, JFL_2, RSDK_RSDK
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, BIN_P00P, PSF_PSF
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -451,6 +451,7 @@ export const WEAK_VALUES =
 	/^geArchive: GME( |$)/,
 	/^geArchive: GUT( |$)/,
 	/^geArchive: ISO( |$)/,
+	/^geArchive: JFL_2( |$)/,
 	/^geArchive: KDT( |$)/,
 	/^geArchive: LBM_FORM( |$)/,
 	/^geArchive: LINK_LINK( |$)/,
@@ -469,6 +470,7 @@ export const WEAK_VALUES =
 	/^geArchive: PRE_OPEN( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
 	/^geArchive: RMX( |$)/,
+	/^geArchive: RSDK_RSDK( |$)/,
 	/^geArchive: SB( |$)/,
 	/^geArchive: SCH_SND( |$)/,
 	/^geArchive: SHD( |$)/,

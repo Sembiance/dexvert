@@ -6,5 +6,5 @@ export class magicLanternDIFF extends Format
 	ext            = [".diff"];
 	forbidExtMatch = true;
 	magic          = ["Magic Lantern DIFF animation"];
-	converters     = ["vibe2avi"];
+	converters     = ["vibe2avi", "na_eofdec[format:diff]"];
 }

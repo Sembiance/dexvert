@@ -286,14 +286,17 @@ const DEXMAGIC_CHECKS = {
 	"Twist Form"                  : [{offset : 0, match : "Listob field:256 label:"}],
 
 	// video
+	"ACG Movie" 							   : [{offset : 0, match : "ACG"}, {offset : 3, match : [[" ", "_"]]}, {offset : 4, match : "MOVIE"}],
 	"Adeline XCF Video"                        : [{offset : 0, match : "FrameLen"}],
 	"Arc Developments HUF Video"               : [{offset : 0, match : "[AVF-95]"}],
 	"AVF Video (old)"                          : [{offset : 0, match : "ALG"}],
 	"CRH Video"                                : [{offset : 0, match : [0x01, 0x00, 0x22, 0x56]}],
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
 	"Dorling Kindersley Animation"             : [{offset : 0, match : [0x01, 0x00]}, {offset : 52, match : "funky!"}],
+	"FM Towns MVB Video" 			           : [{offset : 0, match : [0x42, 0x4D, 0x41, 0x50, 0x14, 0x00, 0x00, 0x00]}],
 	"Gates of Skeldal Video" 			       : [{offset : 0, match : "MGIF97"}],
 	"GTE Vantage Animation"                    : [{offset : 0, match : "GAV "}],
+	"HsMovie"                                  : [{offset : 0, match : "RAWMOVIE "}],
 	"IFF SSAd file"                            : [{offset : 0, match : "FORM"}, {offset : 8, match : "SSAd"}],
 	"Interactive Pictures VID"                 : [{offset : 0, match : "VID\x01"}],
 	"JAM Video"                                : [{offset : 0, match : "JAM\0"}],
@@ -310,6 +313,8 @@ const DEXMAGIC_CHECKS = {
 	"Sesame Street STR Video" 				   : [{offset : 0, match : "STHD"}],
 	"Stargunner FLC"                           : [{offset : 0, match : "PGBP"}],
 	"Talisman ANI"                             : [{offset : 0, match : [0x34, 0x12, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00]}, {offset : 28, match : [0x21, 0x43, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00]}],
+	"TMM Fractal Video"                        : [{offset : 0, match : [0xBF, 0x0E, 0x7C, 0x00, 0x7C, 0x00]}],
+	"Video Toaster RTV"                        : [{offset : 0, match : [0x46, 0x4D, 0x54, 0x52, 0x01, 0x00, 0x00, 0x00]}],
 	"VPX1 Video Package"                       : [{offset : 0, match : "VPX1  video interflow packing exalter"}],
 	"Zork PMV Video"                           : [{offset : 0, match : "MOVE"}, {offset : 8, match : "MHED"}],
 

@@ -6,5 +6,5 @@ export class iffVAXL extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/VAXL";
 	ext        = [".vaxl"];
 	magic      = ["Optonica Videostream VAXL video"];
-	converters = ["vibe2avi"];
+	converters = ["na_eofdec[format:vaxl]", "vibe2avi"];
 }

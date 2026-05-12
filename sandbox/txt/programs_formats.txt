@@ -18925,6 +18925,29 @@ Supported archive extractors:
   stk        Coktel Vision STK
   stk2       Coktel Vision STK2
 
+>>> na_eofdec  https://nihav.org/eofdec.html    (na_eofdec --list-input-formats     and    na_eofdec --list-archive-formats)
+Supported input plugins:
+  acg        ACG movie
+  acg_m24    ACG movie (24-bit)
+  diff       Magic Lantern DIFF
+  electricimg Electric Image
+  f16        Rainbow Technology F16
+  golem-xfl  Golem into
+  hsmovie    HsMovie
+  lantern-iff Lantern MOV v2
+  lantern-riff Lantern MOV v3
+  mxv        MXVideo
+  ssa-fee    ClariSSA (FEE)
+  ssa-iff    ClariSSA (IFF)
+  tmm-frac   TMM Fractal
+  towns-mvb  FM Towns MVB
+  vaxl       Optonica Videostream VAXL
+  vtoaster-rtv Video Toaster RTV
+Supported archive extractors:
+  jpegseq    JPEG Archive
+  kudosdb    Kudos thumbnail database
+
+
 >>> nihav linux https://git.nihav.org/		(nihav-encoder --list-decoders | sort)
  aac (AAC)
  ac3 (ETSI TS 102 366)

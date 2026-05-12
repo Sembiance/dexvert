@@ -1,4 +1,4 @@
-# Supported File Formats (3,746)
+# Supported File Formats (3,754)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -484,7 +484,7 @@ archive | Pro-Pack Packed Executable | .exe .com | [unp](https://sites.google.co
 archive | Project Aftermath DAT Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/projectAftermathDAT/)
 archive | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [vibeExtract](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 archive | Psychonauts Archive | .isb .pkg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/psychonautsArchive/)
-archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/quakePAK/)
+archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/quakePAK/)
 archive | [Quantum Archive](http://fileformats.archiveteam.org/wiki/Quantum_compressed_archive) | .pak .q | [unpaq](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/quantum/)
 archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/wiki/QIP_(Quarterdeck)) | .qip | [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/quarterdeckInstallationPacakge/)
 archive | [Quasijarus Strong Compressed](http://fileformats.archiveteam.org/wiki/Quasijarus_Strong_Compression) | .z | [ancient](https://github.com/temisu/ancient_format_decompressor) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/quasijarus/)
@@ -1374,7 +1374,7 @@ image | Electric Image |  | [nconvert](https://www.xnview.com/en/nconvert/) | [1
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKPIC/)
 image | Electronika BKS | .bks | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/electronikaBKS/)
 image | eLeMeNt ZX | .hgl .hgh .skl .xkl .hrx | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://sembiance.com/fileFormatSamples/image/elementZX/)
-image | Embedded JPEG File |  | [nconvert](https://www.xnview.com/en/nconvert/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/embeddedJPG/)
+image | Embedded JPEG File |  | [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/embeddedJPG/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [keyViewPro](https://archive.org/details/KeyViewPro/) | [32 sample files](https://sembiance.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
 image | [Enhanced Compressed Wavelet](http://fileformats.archiveteam.org/wiki/ECW) | .ecw | [mrsiddecode](https://www.extensis.com/support/developers) | [4 sample files](https://sembiance.com/fileFormatSamples/image/enhancedCompressedWavelet/)
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/esm/)
@@ -1915,7 +1915,7 @@ image | [X-face Image](http://fileformats.archiveteam.org/wiki/X-Face) |  | [dea
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | [wuimg](https://codeberg.org/kaleido/wuimg) [convert](https://www.imagemagick.org/) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [tkimgConvert](http://tkimg.sourceforge.net/) | [21 sample files](https://sembiance.com/fileFormatSamples/image/xbm/)
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | [convert](https://www.imagemagick.org/) [gimp](https://gimp.org) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [nconvert](https://www.xnview.com/en/nconvert/) [tkimgConvert](http://tkimg.sourceforge.net/) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/xpm/)
 image | [X11 Puzzle Image](http://fileformats.archiveteam.org/wiki/Puzzle_image_(X11)) | .cm .pzl | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) | [7 sample files](https://sembiance.com/fileFormatSamples/image/x11Puzzle/)
-image | [Xara XAR Graphic](http://fileformats.archiveteam.org/wiki/Xar_(vector_graphics)) | .xar .web | [vibe2svg](https://github.com/Sembiance/dexvert) [uniconvertor](https://sk1project.net/uc2/) [nconvert](https://www.xnview.com/en/nconvert/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [tomsViewer](https://tomseditor.com/blog/viewer) | [34 sample files](https://sembiance.com/fileFormatSamples/image/xara/)
+image | [Xara XAR Graphic](http://fileformats.archiveteam.org/wiki/Xar_(vector_graphics)) | .xar .web | [vibe2svg](https://github.com/Sembiance/dexvert) [uniconvertor](https://sk1project.net/uc2/) [nconvert](https://www.xnview.com/en/nconvert/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [tomsViewer](https://tomseditor.com/blog/viewer) | [35 sample files](https://sembiance.com/fileFormatSamples/image/xara/)
 image | XCar Graphics/Bethesda GXA | .gxa | [wuimg](https://codeberg.org/kaleido/wuimg) | [11 sample files](https://sembiance.com/fileFormatSamples/image/xCarGraphics/)
 image | [XFig](http://fileformats.archiveteam.org/wiki/Fig) | .fig | [fig2dev](https://www.xfig.org/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/fig/) - It's a vector format, but embedded bitmaps don't convert to SVG. So we convert to both SVG and PNG.
 image | [XGA](http://fileformats.archiveteam.org/wiki/XGA_(Falcon)) | .xga | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/xga/)
@@ -3666,12 +3666,13 @@ text | ZIM Wiki |  |  | [9 sample files](https://sembiance.com/fileFormatSamples
 
 
 
-## Video (145)
+## Video (153)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [3GP/3GPP2 Video](http://fileformats.archiveteam.org/wiki/3GP) | .3gp .3g2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/threeGVideo/)
 video | [4X Movie Video](https://wiki.multimedia.cx/index.php/4xm_Format) | .4xm | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/fourXMovieVideo/)
 video | 7th Level Video | .mov_data .mov_toc | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/seventhLevelVideo/)
+video | ACG Movie | .wdf .m24 | [na_eofdec](https://nihav.org/eofdec.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/acgMovie/)
 video | [Acorn Replay Video](http://fileformats.archiveteam.org/wiki/Acorn_Replay) | .rpl | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [15 sample files](https://sembiance.com/fileFormatSamples/video/acornReplayVideo/)
 video | [Adeline XCF video](https://wiki.multimedia.cx/index.php/Adeline_XCF) | .acf | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/adelineXCF/)
 video | Adorage Animation | .awm | [vibe2avi](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/video/adorageAnimation/)
@@ -3698,7 +3699,7 @@ video | Bureau 13 Video |  | [na_game_tool](https://nihav.org/game_tool.html) | 
 video | [CA2 Video](https://wiki.multimedia.cx/index.php/CA2) | .ca2 | [na_game_tool](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/video/ca2Video/)
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/cdxl/)
 video | Celestial Impact DXV Video | .dxv | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/celestialImpactDXV/)
-video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [vibe2avi](https://github.com/Sembiance/dexvert) | [19 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Vibe coded converter still has many artifacts and issues, but it's better than nothing at all.
+video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim .ssad | [na_eofdec](https://nihav.org/eofdec.html) [vibe2avi](https://github.com/Sembiance/dexvert) | [19 sample files](https://sembiance.com/fileFormatSamples/video/iffSSA/) - Vibe coded converter still has many artifacts and issues, but it's better than nothing at all.
 video | [CNM Video](https://wiki.multimedia.cx/index.php/CNM) | .cnm .ci2 | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/cnmVideo/)
 video | [CorelMOVE Animation](http://fileformats.archiveteam.org/wiki/CorelMOVE) | .cmv | [corelMOVE](https://winworldpc.com/product/corel-draw/50) | [12 sample files](https://sembiance.com/fileFormatSamples/video/corelMOVE/)
 video | [CRH Video](https://wiki.multimedia.cx/index.php/CRH) | .crh | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/crhVideo/)
@@ -3717,11 +3718,13 @@ video | [DXA Video](https://wiki.multimedia.cx/index.php/DXA) | .dxa | [ffmpeg](
 video | [Electronic Arts TCQ/TGV Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_TGV) | .tgv | [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/eaTCQ/)
 video | [Electronic Arts TQI Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_TQI) | .tgq | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/eaTQI/)
 video | [eTreppid Video](https://wiki.multimedia.cx/index.php/ETV) | .etv | [na_game_tool](https://nihav.org/game_tool.html) | [8 sample files](https://sembiance.com/fileFormatSamples/video/eTreppidVideo/)
+video | F16 Video | .f16 | [na_eofdec](https://nihav.org/eofdec.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/f16Video/)
 video | [Fantavision Movie](http://fileformats.archiveteam.org/wiki/Fantavision) | .mve | [fantavsn](https://winworldpc.com/product/fantavision/1x-dos) | [11 sample files](https://sembiance.com/fileFormatSamples/video/fantavision/)
 video | [Flash Video](http://fileformats.archiveteam.org/wiki/FLV) | .flv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/flv/)
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [ffmpeg](https://ffmpeg.org/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [19 sample files](https://sembiance.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) [na_game_tool](https://nihav.org/game_tool.html) | [15 sample files](https://sembiance.com/fileFormatSamples/video/fli/)
 video | FLK Animation | .flk | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/flkAnimation/)
+video | FM Towns MVB Video | .mvb | [na_eofdec](https://nihav.org/eofdec.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/fmTownsMVBVideo/)
 video | [FutureVision FST video](https://wiki.multimedia.cx/index.php/FutureVision_FST) | .fst | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/futureVisionFSTVideo/)
 video | GameCube THP Video | .thp | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://sembiance.com/fileFormatSamples/video/gameCubeTHPVideo/)
 video | Gates of Skeldal Video | .mgf | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/gatesOfSkeldalVideo/)
@@ -3729,6 +3732,7 @@ video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_
 video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Digital_Video) | .gdv | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) | [12 sample files](https://sembiance.com/fileFormatSamples/video/gremlinDigitalVideo/)
 video | GTE Vantage Animation | .gav | [na_game_tool](https://nihav.org/game_tool.html) | [2 sample files](https://sembiance.com/fileFormatSamples/video/gteVantageAnimation/)
 video | [Harro Media VDO video](https://wiki.multimedia.cx/index.php/Harrow_Media_VDO) | .vdo .vd | [na_game_tool](https://nihav.org/game_tool.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/vdoVideo/)
+video | HsMovie | .mov | [na_eofdec](https://nihav.org/eofdec.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/hsMovie/)
 video | [IBM PhotoMotion MM Video](https://wiki.multimedia.cx/index.php/IBM_PhotoMotion) | .mm | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/video/ibmPhotoMotion/)
 video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [na_game_tool](https://nihav.org/game_tool.html) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/video/iffYAFA/)
@@ -3744,12 +3748,14 @@ video | [Interspective Animation](https://wiki.multimedia.cx/index.php/Interspec
 video | [JAM Video](https://wiki.multimedia.cx/index.php/JAM) | .jam | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/jamVideo/)
 video | [Jazz Jackrabbit 2 Video](https://wiki.multimedia.cx/index.php/Jazz_Jackrabbit_2_J2V) | .j2v | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/jazzJackrabbit2Video/)
 video | [KDV video](https://wiki.multimedia.cx/index.php/KDV) | .kdv | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/kdvVideo/)
+video | Lantern Movie | .mov | [na_eofdec](https://nihav.org/eofdec.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/lanternMovie/)
 video | [Legend Entertainment Q Video](https://wiki.multimedia.cx/index.php/Legend_Entertainment_Q) | .q | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/legendEntertainmentQ/)
 video | Little Big Adventure FLA Video | .fla | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/littleBigAdventureFLAVideo/)
 video | [Loki SDL MJPEG Video](https://wiki.multimedia.cx/index.php/SMJPEG) | .mjpg | [ffmpeg](https://ffmpeg.org/) | [8 sample files](https://sembiance.com/fileFormatSamples/video/smjpeg/)
 video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) [nihav](https://git.nihav.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/smush/)
 video | [Machine Hunter FMV Video](https://wiki.multimedia.cx/index.php/Machine_Hunter_FMV) | .fmv | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/machineHunterFMVVideo/)
-video | Magic Lantern DIFF Animation | .diff | [vibe2avi](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/video/magicLanternDIFF/)
+video | Magic Lantern DIFF Animation | .diff | [vibe2avi](https://github.com/Sembiance/dexvert) [na_eofdec](https://nihav.org/eofdec.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/magicLanternDIFF/)
+video | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [na_eofdec](https://nihav.org/eofdec.html) | [7 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 video | [Mailestrom ANM](https://wiki.multimedia.cx/index.php/Maelstrom_ANM) | .anm | [na_game_tool](https://nihav.org/game_tool.html) | [9 sample files](https://sembiance.com/fileFormatSamples/video/maelstromANM/)
 video | [Matroska Video](http://fileformats.archiveteam.org/wiki/MKV) | .mkv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/mkv/)
 video | Microids GRN Video | .grn | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/microidsGRN/)
@@ -3770,7 +3776,7 @@ video | [NuppelVideo](https://wiki.multimedia.cx/index.php/Nuppelvideo) | .nuv |
 video | [NXL Video](https://wiki.multimedia.cx/index.php/NXL) | .nxl | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/nxlVideo/)
 video | [Ogg Theora Video](http://fileformats.archiveteam.org/wiki/Theora) | .ogg .ogv | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://sembiance.com/fileFormatSamples/video/oggTheoraVideo/)
 video | [On2 VP6 encoded video](https://wiki.multimedia.cx/index.php/On2_VP6) | .vp6 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/vp6EncodedVideo/)
-video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [vibe2avi](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/)
+video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [na_eofdec](https://nihav.org/eofdec.html) [vibe2avi](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/)
 video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://sembiance.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
 video | Palm TealMovie Video | .pdb | [nihav](https://git.nihav.org/) | [5 sample files](https://sembiance.com/fileFormatSamples/video/palmTealMovieVideo/)
 video | [PH Video](https://wiki.multimedia.cx/index.php/PH_Video) | .ph | [na_game_tool](https://nihav.org/game_tool.html) | [12 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/)
@@ -3799,10 +3805,12 @@ video | [Surface Tension/Soul Hunt Video](https://wiki.multimedia.cx/index.php/S
 video | [Talisman ANI](https://wiki.multimedia.cx/index.php/Talisman_ANI) | .ani | [na_game_tool](https://nihav.org/game_tool.html) | [11 sample files](https://sembiance.com/fileFormatSamples/video/talismanANI/)
 video | [Terminal Reality TVI Video](https://wiki.multimedia.cx/index.php/TVI) | .tvi | [na_game_tool](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/video/tviVideo/)
 video | The Complete Animator Film | .tca | [nihav](https://git.nihav.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/completeAnimatorFilm/)
+video | TMM Fractal Video | .xxx | [na_eofdec](https://nihav.org/eofdec.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/tmmFractalVideo/)
 video | Trilobyte ROQ | .roq | [na_game_tool](https://nihav.org/game_tool.html) | [1 sample file](https://sembiance.com/fileFormatSamples/video/trilobyteROQ/)
 video | [Trilobyte VDX](https://wiki.multimedia.cx/index.php/VDX) | .vdx | [na_game_tool](https://nihav.org/game_tool.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/trilobyteVDX/)
 video | [UMV Video](https://wiki.multimedia.cx/index.php/UMV) | .umv | [na_game_tool](https://nihav.org/game_tool.html) | [13 sample files](https://sembiance.com/fileFormatSamples/video/umvVideo/)
 video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/video/videoMasterFilm/)
+video | Video Toaster RTV Video | .rtv | [na_eofdec](https://nihav.org/eofdec.html) | [3 sample files](https://sembiance.com/fileFormatSamples/video/videoToasterRTV/)
 video | [VivoActive Streaming Video](https://wiki.multimedia.cx/index.php/Vivo) | .viv | [nihav](https://git.nihav.org/) [ffmpeg](https://ffmpeg.org/) | [18 sample files](https://sembiance.com/fileFormatSamples/video/vivo/)
 video | [VPX1 Video Package](https://wiki.multimedia.cx/index.php/VPX1) | .vpx | [na_game_tool](https://nihav.org/game_tool.html) | [4 sample files](https://sembiance.com/fileFormatSamples/video/vpx1VideoPackage/)
 video | [WEBM Video](http://fileformats.archiveteam.org/wiki/WebM) | .webm | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://sembiance.com/fileFormatSamples/video/webmVideo/)

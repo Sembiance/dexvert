@@ -3988,13 +3988,13 @@ Family/Format | Name | Extensions | Notes
 [video/evaVideo](https://discmaster.textfiles.com/search?format=evaVideo) | EVA3/EVA5 video | .eva | [3 sample files](https://sembiance.com/fileFormatSamples/video/evaVideo/)
 [video/fmTownsMovieVideo](https://discmaster.textfiles.com/search?format=fmTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?format=fujitsuMovie) | Fujitsu Movie | .mve | 
+[video/golemInto](https://discmaster.textfiles.com/search?format=golemInto) | Golem Into Video | .xfl | 
 [video/iavfVideo](https://discmaster.textfiles.com/search?format=iavfVideo) | IAVF video | .avi .iavf | 
 [video/imperiumGalacticaAnimation](https://discmaster.textfiles.com/search?format=imperiumGalacticaAnimation) | Imperium Galactica Animation | .ani | [1 sample file](https://sembiance.com/fileFormatSamples/video/imperiumGalacticaAnimation/)
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?format=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/kheopsStudioVideo](https://discmaster.textfiles.com/search?format=kheopsStudioVideo) | Kheops Studio Video | .ksv | [5 sample files](https://sembiance.com/fileFormatSamples/video/kheopsStudioVideo/)
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?format=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php/Space_Adventure_MOV) | .mov | 
 [video/lzaAnimationVideo](https://discmaster.textfiles.com/search?format=lzaAnimationVideo) | LZA animation/video | .lza | 
-[video/magixVideo](https://discmaster.textfiles.com/search?format=magixVideo) | [MAGIX Video](http://fileformats.archiveteam.org/wiki/MAGIX_Video) | .mxv | [6 sample files](https://sembiance.com/fileFormatSamples/video/magixVideo/)
 [video/mdecVideoStream](https://discmaster.textfiles.com/search?format=mdecVideoStream) | MDEC video stream | .str | [4 sample files](https://sembiance.com/fileFormatSamples/video/mdecVideoStream/)
 [video/metaStream3DObject](https://discmaster.textfiles.com/search?format=metaStream3DObject) | MetaStream 3D object | .mts | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?format=movieSetterSet) | MovieSetter Set | .set | 

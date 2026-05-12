@@ -1013,7 +1013,6 @@ export default
 		kheopsStudioVideo             : {name : "Kheops Studio Video", ext : [".ksv"], magic : ["Kheops Studio Video"], weakMagic : true},
 		knowledgeAdventureMovie       : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php/Space_Adventure_MOV"},
 		lzaAnimationVideo             : {name : "LZA animation/video", ext : [".lza"], magic : ["LZA animation/video"], weakMagic : true},
-		magixVideo                    : {name : "MAGIX Video", ext : [".mxv"], magic : ["MAGIX Video"], website : "http://fileformats.archiveteam.org/wiki/MAGIX_Video"},
 		mdecVideoStream               : {name : "MDEC video stream", ext : [".str"], magic : [/^MDEC video stream/], weakMagic : true},
 		metaStream3DObject            : {name : "MetaStream 3D object", ext : [".mts"], magic : ["MetaStream 3D object"], weakMagic : true},
 		movieSetterSet                : {name : "MovieSetter Set", ext : [".set"], magic : ["Movie Setter Set"]},

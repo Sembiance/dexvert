@@ -3402,6 +3402,7 @@ export default
 		seam3DProject                            : {name : "SEAM 3D Project", ext : [".s3d"], magic : ["SEAM 3D Project"]},
 		searchNDestroyConfigurationDataBase      : {name : "Search'n'Destroy Configuration Data Base", ext : [".cdb"], magic : ["Search'n'Destroy Configuration Data Base"]},
 		secureCapsuleFirmwareUpdate              : {name : "Secure Capsule firmware update", ext : [".scap"], magic : ["Secure Capsule firmware update", "EFI capsule"], weakMagic : true},
+		seeYouAirspace                           : {name : "SeeYou Airspace", magic : ["SeeYou Airspace"]},
 		segaDreamcastVMUGameImage                : {name : "Sega Dreamcast VMU game image", ext : [".vms"], magic : ["Sega Visual Memory System image", /^Sega Dreamcast VMU game image/], weakMagic : true},
 		semSnapshot                              : {name : "SEM Snapshot", ext : [".sem"], magic : ["SEM Snapshot"], weakMagic : true},
 		sentrySpellingEngineLexicon              : {name : "Sentry Spelling-Checker Engine Lexicon", ext : [".clx"], magic : ["Sentry Spelling-Checker Engine Lexicon", /^W.*rterbuch Datei \(Wintertree Software\)$/]},

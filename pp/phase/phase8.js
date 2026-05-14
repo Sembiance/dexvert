@@ -76,7 +76,7 @@ export default async function phase8({item, itemDirPath, itemWebDirPath, taskRun
 
 			const fileid = indexData.fileid;
 			delete indexData.fileid;
-			db.putText(fileid, JSON.stringify(indexData));
+			db.put(fileid, JSON.stringify(indexData));
 			indexedCount++;
 
 			delete fileData.indexData;

@@ -388,7 +388,8 @@ export const WEAK_VALUES =
 	/^audio:WaveAudio \(WAV\)/,
 
 	// SEEN  ONCE:
-	// 		image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:Leaf.PxFormat, image:MAGES.BinFormat, image:Mapl.Mi2Format, image:Softpal.PicFormat
+	// 		image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:Leaf.PxFormat, image:MAGES.BinFormat, image:Mapl.Mi2Format, image:Softpal.PicFormat, image:Silky.IgfFormat
+	//		image:RSystem.RsgFormat
 	// SEEN TWICE:
 	//		image:KAAS.PicFormat, image:CsWare.BpcFormat
 	/^image:Adobe\.PsdFormat /,
@@ -405,9 +406,9 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, COD_UNIQUE, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, COD_UNIQUE, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, BANK_QL, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CMF
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CMF
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -429,6 +430,7 @@ export const WEAK_VALUES =
 	/^geArchive: AQA( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
+	/^geArchive: BANK_QL( |$)/,
 	/^geArchive: BIN_P00P( |$)/,
 	/^geArchive: BDF( |$)/,
 	/^geArchive: BKF_2( |$)/,
@@ -570,10 +572,11 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE: WIC (Fake!), Terse, 777, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin)
-	// SEEN TWICE: PPMN (Max Smirnov), BOA, QuArk, X1
+	// SEEN TWICE: PPMN (Max Smirnov), QuArk, X1
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,
+	/^idarc: BOA( |$)/,
 	/^idarc: DitPack( |$)/,
 	/^idarc: Flash( |$)/,
 	/^idarc: HYP( |$)/,
@@ -2056,6 +2059,7 @@ export const WEAK_VALUES =
 	/^Bochs configuration \(with rem\)$/,
 	/^Borland Reflex Screen driver$/,
 	/^BrainStorm document$/,
+	/^Brigade Commander specifications$/,
 	/^BRender Material script/,
 	/^BrioQuery$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Vibe coded by Claude
+# Vibe coded by Codex
 """
 qtvr2pano.py - Convert QuickTime VR movie files to equirectangular panorama images.
 
@@ -183,6 +183,10 @@ def parse_v2_pano_sample(data):
         if tp == b"sean":
             for ctp, cid, ccc, cleaf in parse_v2_atoms(leaf):
                 if ctp == b"pdat" and len(cleaf) >= 60:
+                    pano_type = None
+                    if len(cleaf) >= 80 and cleaf[76:80] != b"\x00\x00\x00\x00":
+                        pano_type = cleaf[76:80].decode("ascii", errors="replace")
+
                     return {
                         "minPan": read_float32(cleaf, 12),
                         "maxPan": read_float32(cleaf, 16),
@@ -195,6 +199,8 @@ def parse_v2_pano_sample(data):
                         "imageSizeY": read_uint32(cleaf, 52),
                         "imageNumFramesX": read_uint16(cleaf, 56),
                         "imageNumFramesY": read_uint16(cleaf, 58),
+                        "flags": read_uint32(cleaf, 72) if len(cleaf) >= 76 else 0,
+                        "panoType": pano_type,
                     }
     return None
 
@@ -428,6 +434,8 @@ def parse_qtvr(file_path):
         frames_x = pdat["imageNumFramesX"]
         frames_y = pdat["imageNumFramesY"]
         num_frames = frames_x * frames_y
+        pano_flags = pdat["flags"]
+        pano_type = pdat["panoType"]
 
         nodes = []
         for i in range(num_node_samples):
@@ -503,6 +511,9 @@ def parse_qtvr(file_path):
 
     frames_per_node = frames_x * frames_y
     num_nodes = max(len(nodes), num_samples // frames_per_node if frames_per_node else 1)
+    if qtvr_version == 1:
+        pano_flags = None
+        pano_type = None
 
     return {
         "file_data": file_data,
@@ -526,6 +537,9 @@ def parse_qtvr(file_path):
         "sample_to_chunk": sample_to_chunk,
         "nodes": nodes,
         "num_nodes": num_nodes,
+        "qtvr_version": qtvr_version,
+        "pano_flags": pano_flags,
+        "pano_type": pano_type,
     }
 
 
@@ -536,6 +550,37 @@ def decode_frame(codec, data):
     if frames:
         return frames[0].to_image()
     return None
+
+
+def should_rotate_mosaic(info, image):
+    """Return whether a pasted QTVR frame mosaic needs panorama orientation."""
+    pano_type = info.get("pano_type")
+    if pano_type in ("hcyl", "cube"):
+        return False
+    if pano_type == "vcyl":
+        return True
+
+    # QuickTime VR 2.2+ uses panoType for cylindrical orientation. Older v2
+    # files can leave panoType nil and use the low bit of flags for horizontal.
+    pano_flags = info.get("pano_flags")
+    if info.get("qtvr_version") == 2 and pano_flags is not None:
+        if pano_flags & 1:
+            return False
+
+        haov = abs(info["h_pan_end"] - info["h_pan_start"])
+        vaov = abs(info["v_pan_top"] - info["v_pan_bottom"])
+        if haov > 0 and vaov > 0:
+            expected_aspect = haov / vaov
+            raw_aspect = image.width / image.height
+            rotated_aspect = image.height / image.width
+            raw_error = abs(math.log(raw_aspect / expected_aspect))
+            rotated_error = abs(math.log(rotated_aspect / expected_aspect))
+            return rotated_error < raw_error
+
+    haov = abs(info["h_pan_end"] - info["h_pan_start"])
+    vaov = abs(info["v_pan_top"] - info["v_pan_bottom"])
+
+    return image.height > image.width and haov >= vaov
 
 
 def assemble_node(info, node_index):
@@ -604,7 +649,8 @@ def assemble_node(info, node_index):
 
         sample_offset += sample_sizes[sample_id]
 
-    dst = dst.rotate(-90, expand=True)
+    if should_rotate_mosaic(info, dst):
+        dst = dst.rotate(-90, expand=True)
     return dst
 
 

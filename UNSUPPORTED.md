@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,951)
+# Unsupported File Formats (3,943)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -339,7 +339,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (197)
+## Document (192)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -382,7 +382,7 @@ Family/Format | Name | Extensions | Notes
 [document/dbVISTADB](https://discmaster.textfiles.com/search?format=dbVISTADB) | db_VISTA Database | .dbd | 
 [document/dBaseCompiledForm](https://discmaster.textfiles.com/search?format=dBaseCompiledForm) | dBase Compiled Form | .fro .fmo | 
 [document/dBaseIVDesign](https://discmaster.textfiles.com/search?format=dBaseIVDesign) | dBase IV design | .frm .scr | 
-[document/wpsPlus](https://discmaster.textfiles.com/search?format=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | [1 sample file](https://sembiance.com/fileFormatSamples/document/wpsPlus/) - VAX based word processor. Haven't investigated it for magic.
+[document/wpsPlus](https://discmaster.textfiles.com/search?format=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | [1 sample file](https://sembiance.com/fileFormatSamples/document/wpsPlus/)
 [document/deskMateWorksheet](https://discmaster.textfiles.com/search?format=deskMateWorksheet) | DeskMate worksheet | .wks | 
 [document/digitalDocumentInterchangeFormat](https://discmaster.textfiles.com/search?format=digitalDocumentInterchangeFormat) | DIGITAL Document Interchange Format | .ddif .doc_decwrite | 
 [document/dramaticaStory](https://discmaster.textfiles.com/search?format=dramaticaStory) | Dramatica story | .dsf .ssi .dcf .dr5 | 
@@ -393,7 +393,7 @@ Family/Format | Name | Extensions | Notes
 [document/endNoteConnection](https://discmaster.textfiles.com/search?format=endNoteConnection) | EndNote Connection | .enz | 
 [document/endNoteFilter](https://discmaster.textfiles.com/search?format=endNoteFilter) | EndNote Filter | .enf | 
 [document/endNoteStyle](https://discmaster.textfiles.com/search?format=endNoteStyle) | EndNote Style | .ens | 
-[document/envisionPublisherDoc](https://discmaster.textfiles.com/search?format=envisionPublisherDoc) | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://sembiance.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
+[document/envisionPublisherDoc](https://discmaster.textfiles.com/search?format=envisionPublisherDoc) | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://sembiance.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. So either vibe code a converter or set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 [document/epicTFP](https://discmaster.textfiles.com/search?format=epicTFP) | [Epic TFP Document](https://www.vogons.org/viewtopic.php?f=5&t=35657&start=40) | .tfp | Used in EPIC games. Supposedly can contain hyperlinks, graphics and animations all in a single document format
 [document/eurekaMercuryHelp](https://discmaster.textfiles.com/search?format=eurekaMercuryHelp) | Eureka/Mercury Help | .hlp | 
 [document/excellenceDocument](https://discmaster.textfiles.com/search?format=excellenceDocument) | Excellence! Document | .doc | 
@@ -429,7 +429,7 @@ Family/Format | Name | Extensions | Notes
 [document/iceBookReaderEBook](https://discmaster.textfiles.com/search?format=iceBookReaderEBook) | ICE Book Reader eBook | .book .ibk | 
 [document/ichitaroDocument](https://discmaster.textfiles.com/search?format=ichitaroDocument) | Ichitaro document | .jtd .jaw .jsw .jbw | 
 [document/improvSpreadsheet](https://discmaster.textfiles.com/search?format=improvSpreadsheet) | Improv spreadsheet | .imp | 
-[document/installShieldCompiledScript](https://discmaster.textfiles.com/search?format=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
+[document/installShieldCompiledScript](https://discmaster.textfiles.com/search?format=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/)
 [document/interBaseDB](https://discmaster.textfiles.com/search?format=interBaseDB) | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
 [document/interSpreadSpreadsheet](https://discmaster.textfiles.com/search?format=interSpreadSpreadsheet) | InterSpread Spreadsheet |  | 
 [document/interWriteReaderDocument](https://discmaster.textfiles.com/search?format=interWriteReaderDocument) | InterWrite Reader document | .gwb | 
@@ -445,10 +445,8 @@ Family/Format | Name | Extensions | Notes
 [document/masterCook](https://discmaster.textfiles.com/search?format=masterCook) | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 [document/matrixSpreadsheet](https://discmaster.textfiles.com/search?format=matrixSpreadsheet) | Matrix spreadsheet | .mtx | 
 [document/maxiPlanSpreadsheet](https://discmaster.textfiles.com/search?format=maxiPlanSpreadsheet) | MaxiPlan spreadsheet | .plan | 
-[document/mediaPaqDCF](https://discmaster.textfiles.com/search?format=mediaPaqDCF) | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 [document/mediaViewDocument](https://discmaster.textfiles.com/search?format=mediaViewDocument) | MediaView document | .mdvw .mdv | 
 [document/memotechMTXBASICSource](https://discmaster.textfiles.com/search?format=memotechMTXBASICSource) | Memotech MTX BASIC source | .bas | 
-[document/microsoftAdvisorHelp](https://discmaster.textfiles.com/search?format=microsoftAdvisorHelp) | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 [document/microsoftISAMDatabase](https://discmaster.textfiles.com/search?format=microsoftISAMDatabase) | Microsoft ISAM database | .db3 .mdb | 
 [document/microsoftOneNote](https://discmaster.textfiles.com/search?format=microsoftOneNote) | Microsoft OneNote | .one .onetoc2 | 
 [document/miniOfficeSpreadsheet](https://discmaster.textfiles.com/search?format=miniOfficeSpreadsheet) | Mini Office Spreadsheet | .spr | 
@@ -461,7 +459,6 @@ Family/Format | Name | Extensions | Notes
 [document/textraWriter](https://discmaster.textfiles.com/search?format=textraWriter) | Norton Textra Writer | .doc | 
 [document/omniPageDocument](https://discmaster.textfiles.com/search?format=omniPageDocument) | OmniPage Document | .opd | 
 [document/openAccessDocument](https://discmaster.textfiles.com/search?format=openAccessDocument) | Open Access Document | .doc | 
-[document/opHelp](https://discmaster.textfiles.com/search?format=opHelp) | OPHelp | .hlp | [5 sample files](https://sembiance.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
 [document/orCADSchematic](https://discmaster.textfiles.com/search?format=orCADSchematic) | OrCAD Schematic | .sch .sht .dsn .dbk | 
 [document/pSuite](https://discmaster.textfiles.com/search?format=pSuite) | P-Suite |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/pSuite/)
 [document/palmListDatabase](https://discmaster.textfiles.com/search?format=palmListDatabase) | Palm List database | .pdb | 
@@ -469,7 +466,6 @@ Family/Format | Name | Extensions | Notes
 [document/peachCalcSpreadsheet](https://discmaster.textfiles.com/search?format=peachCalcSpreadsheet) | PeachCalc spreadsheet | .cal | 
 [document/penPalDatabase](https://discmaster.textfiles.com/search?format=penPalDatabase) | Pen Pal Database | .flr | 
 [document/penPalDocument](https://discmaster.textfiles.com/search?format=penPalDocument) | Pen Pal Document | .wtr | 
-[document/perfectForms](https://discmaster.textfiles.com/search?format=perfectForms) | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
 [document/perfectWorksDatabase](https://discmaster.textfiles.com/search?format=perfectWorksDatabase) | PerfectWorks database | .wpw | 
 [document/perfectWorksDocument](https://discmaster.textfiles.com/search?format=perfectWorksDocument) | PerfectWorks document | .wpw | 
 [document/perfectWorksSpreadsheet](https://discmaster.textfiles.com/search?format=perfectWorksSpreadsheet) | PerfectWorks spreadsheet | .wpw | 
@@ -519,7 +515,6 @@ Family/Format | Name | Extensions | Notes
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?format=trueBASICCompiledCode) | True BASIC compiled code |  | 
 [document/turboPascalMicroCalcSpreadsheet](https://discmaster.textfiles.com/search?format=turboPascalMicroCalcSpreadsheet) | Turbo Pascal MicroCalc Spreadsheet | .mca .mcs | 
 [document/turboBaseDB](https://discmaster.textfiles.com/search?format=turboBaseDB) | TurboBase DB | .tbp | 
-[document/turboCalc](https://discmaster.textfiles.com/search?format=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 [document/txt2exeJohnPalma](https://discmaster.textfiles.com/search?format=txt2exeJohnPalma) | [TXT2EXE (John De Palma)](http://fileformats.archiveteam.org/wiki/TXT2EXE.COM_(John_De_Palma)) | .exe .com | [2 sample files](https://sembiance.com/fileFormatSamples/document/txt2exeJohnPalma/)
 [document/txt2exePFischer](https://discmaster.textfiles.com/search?format=txt2exePFischer) | [TXT2EXE (P. Fischer-Haaser)](http://fileformats.archiveteam.org/wiki/TXT2EXE_(P._Fischer-Haaser)) | .exe | [2 sample files](https://sembiance.com/fileFormatSamples/document/txt2exePFischer/)
 [document/typePlusFontWorksDocument](https://discmaster.textfiles.com/search?format=typePlusFontWorksDocument) | TypePlus / FontWorks document | .tpp | 
@@ -528,11 +523,11 @@ Family/Format | Name | Extensions | Notes
 [document/upShotManual](https://discmaster.textfiles.com/search?format=upShotManual) | UpShot Manual | .mnl | 
 [document/venturaPublisherChapter](https://discmaster.textfiles.com/search?format=venturaPublisherChapter) | Ventura Publisher Chapter | .chp | 
 [document/vizawriteDocument](https://discmaster.textfiles.com/search?format=vizawriteDocument) | Vizawrite Document |  | 
-[document/volkswriter](https://discmaster.textfiles.com/search?format=volkswriter) | [Volkswriter](https://winworldpc.com/product/volkswriter) | .vw | [1 sample file](https://sembiance.com/fileFormatSamples/document/volkswriter/) - DOS based word processor. Haven't investigated it for magic.
-[document/wangIWP](https://discmaster.textfiles.com/search?format=wangIWP) | [WANG Integrated Word Processor](https://archive.org/details/wangeditor) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/wangIWP/) - DOS based word processor. Haven't investigated it for magic.
+[document/volkswriter](https://discmaster.textfiles.com/search?format=volkswriter) | [Volkswriter](https://winworldpc.com/product/volkswriter) | .vw | [1 sample file](https://sembiance.com/fileFormatSamples/document/volkswriter/)
+[document/wangIWP](https://discmaster.textfiles.com/search?format=wangIWP) | [WANG Integrated Word Processor](https://archive.org/details/wangeditor) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/wangIWP/)
 [document/winkPresentation](https://discmaster.textfiles.com/search?format=winkPresentation) | Wink presentation | .wnk | 
 [document/winWorksSpreadsheet](https://discmaster.textfiles.com/search?format=winWorksSpreadsheet) | WinWorks spreadsheet | .wpl .sst | 
-[document/wordMARC](https://discmaster.textfiles.com/search?format=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/) - VAX based word processor. Haven't investigated it for magic.
+[document/wordMARC](https://discmaster.textfiles.com/search?format=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/)
 [document/wordPerfectHelp](https://discmaster.textfiles.com/search?format=wordPerfectHelp) | WordPerfect help | .fil .hlp | 
 [document/wordPerfectNotebook](https://discmaster.textfiles.com/search?format=wordPerfectNotebook) | WordPerfect Notebook | .nb | 
 [document/wordsAndFiguresDocument](https://discmaster.textfiles.com/search?format=wordsAndFiguresDocument) | Words and Figures document | .waf | 
@@ -1098,7 +1093,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,762)
+## Other (2,765)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3022,6 +3017,7 @@ Family/Format | Name | Extensions | Notes
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?format=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?format=premiereTitleData) | Premiere Title data | .ptl | 
 [other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?format=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
+[other/primateLabsArchive](https://discmaster.textfiles.com/search?format=primateLabsArchive) | Primate Labs Archive | .plar | 
 [other/princeOfPersiaWarriorWithinSaveGame](https://discmaster.textfiles.com/search?format=princeOfPersiaWarriorWithinSaveGame) | Prince of Persia: Warrior Within save game | .sav | 
 [other/printShopDeluxeAutograph](https://discmaster.textfiles.com/search?format=printShopDeluxeAutograph) | Print Shop Deluxe Autograph | .pau | 
 [other/printShopDeluxeCardLayout](https://discmaster.textfiles.com/search?format=printShopDeluxeCardLayout) | Print Shop Deluxe Card Layout | .cly | 
@@ -3112,6 +3108,7 @@ Family/Format | Name | Extensions | Notes
 [other/raptorGLBEncryptedContainer](https://discmaster.textfiles.com/search?format=raptorGLBEncryptedContainer) | Raptor GLB Encrypted Container | .glb | 
 [other/rarConfiguration](https://discmaster.textfiles.com/search?format=rarConfiguration) | RAR Configuration | .cfg | 
 [other/raveReportsProject](https://discmaster.textfiles.com/search?format=raveReportsProject) | Rave Reports Project | .rav | 
+[other/ravenObjectFileFormat](https://discmaster.textfiles.com/search?format=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | 
 [other/ravenSoftCompiledScript](https://discmaster.textfiles.com/search?format=ravenSoftCompiledScript) | Raven Software Compiled Script | .ibi | 
 [other/ravenloftAnimation](https://discmaster.textfiles.com/search?format=ravenloftAnimation) | Ravenloft Animation | .anm | 
 [other/raysMediaData](https://discmaster.textfiles.com/search?format=raysMediaData) | Rays Media data | .mda | 
@@ -3219,6 +3216,7 @@ Family/Format | Name | Extensions | Notes
 [other/secretMissionLZSCompressedGameData](https://discmaster.textfiles.com/search?format=secretMissionLZSCompressedGameData) | Secret Mission LZS compressed game data | .lzs | 
 [other/secretMissionScenarioData](https://discmaster.textfiles.com/search?format=secretMissionScenarioData) | Secret Mission scenario data | .rse .rs_ | 
 [other/secureCapsuleFirmwareUpdate](https://discmaster.textfiles.com/search?format=secureCapsuleFirmwareUpdate) | Secure Capsule firmware update | .scap | 
+[other/seeYouAirspace](https://discmaster.textfiles.com/search?format=seeYouAirspace) | SeeYou Airspace |  | 
 [other/segaDreamcastVMUGameImage](https://discmaster.textfiles.com/search?format=segaDreamcastVMUGameImage) | Sega Dreamcast VMU game image | .vms | 
 [other/genesisROM](https://discmaster.textfiles.com/search?format=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?format=segaMasterSystemROM) | Sega Master System ROM | .sms | 
@@ -3866,7 +3864,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (99)
+## Poly (93)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
@@ -3879,7 +3877,6 @@ Family/Format | Name | Extensions | Notes
 [poly/threeDX3DModel](https://discmaster.textfiles.com/search?format=threeDX3DModel) | 3DX 3D model | .asc | 
 [poly/aegisAnimatorPolygon](https://discmaster.textfiles.com/search?format=aegisAnimatorPolygon) | Aegis Animator Polygon | .poly | 
 [poly/aliasStudioWireFile](https://discmaster.textfiles.com/search?format=aliasStudioWireFile) | Alias Studio Wire File |  | 
-[poly/amapi3DModel](https://discmaster.textfiles.com/search?format=amapi3DModel) | Amapi 3D Model | .a3d .x | [6 sample files](https://sembiance.com/fileFormatSamples/poly/amapi3DModel/)
 [poly/amiraMesh](https://discmaster.textfiles.com/search?format=amiraMesh) | AmiraMesh | .am | 
 [poly/artOfIllusion3DScene](https://discmaster.textfiles.com/search?format=artOfIllusion3DScene) | Art Of Illusion 3D scene |  | 
 [poly/ashlarVellum3DModel](https://discmaster.textfiles.com/search?format=ashlarVellum3DModel) | Ashlar-Vellum 3D model | .ar .co .xe .vcp | 
@@ -3907,42 +3904,38 @@ Family/Format | Name | Extensions | Notes
 [poly/fastRayScene](https://discmaster.textfiles.com/search?format=fastRayScene) | FastRay scene |  | 
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?format=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
 [poly/powerVRObject](https://discmaster.textfiles.com/search?format=powerVRObject) | fmt/782 PowerVR Object | .pod | 
-[poly/granny3DModel](https://discmaster.textfiles.com/search?format=granny3DModel) | [Granny 3D Model](http://fileformats.archiveteam.org/wiki/COLLADA) | .gr2 | I tried using https://github.com/SWTOR-Slicers/Granny2-Plug-In-Blender-2.8x but it didn't work for any of the old GR2 models I gave it. Found another imported but it says it only works for Metin2 game models
 [poly/hardTruck3DModel](https://discmaster.textfiles.com/search?format=hardTruck3DModel) | Hard Truck 3D model | .b3d | 
 [poly/hexagonModel](https://discmaster.textfiles.com/search?format=hexagonModel) | Hexagon model | .hxn | 
 [poly/hoops3DStreamFormat](https://discmaster.textfiles.com/search?format=hoops3DStreamFormat) | HOOPS 3D Stream Format | .hsf | 
 [poly/ibmCAD3XDrawing](https://discmaster.textfiles.com/search?format=ibmCAD3XDrawing) | IBM CAD/3X drawing | .dwg | 
-[poly/infiniDScene](https://discmaster.textfiles.com/search?format=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
+[poly/infiniDScene](https://discmaster.textfiles.com/search?format=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/)
 [poly/irit3DModel](https://discmaster.textfiles.com/search?format=irit3DModel) | IRIT 3D model | .irt .dat | 
 [poly/kml](https://discmaster.textfiles.com/search?format=kml) | [Keyhole Markup Language](http://fileformats.archiveteam.org/wiki/KML) | .kml .kmz | [4 sample files](https://sembiance.com/fileFormatSamples/poly/kml/)
 [poly/legiModelData](https://discmaster.textfiles.com/search?format=legiModelData) | LEGO model data | .model | 
 [poly/mastercam9Geometry](https://discmaster.textfiles.com/search?format=mastercam9Geometry) | Mastercam 9 geometry | .mc9 | 
-[poly/mayaScene](https://discmaster.textfiles.com/search?format=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - So the discmaster site only has like 64 unique maya files. Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
+[poly/mayaScene](https://discmaster.textfiles.com/search?format=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
 [poly/meshworkModel](https://discmaster.textfiles.com/search?format=meshworkModel) | Meshwork model | .mesh | 
 [poly/msFlightSimulator3DModel](https://discmaster.textfiles.com/search?format=msFlightSimulator3DModel) | Microsoft Flight Simulator 3D model | .mdl | 
 [poly/mobile3DGraphic](https://discmaster.textfiles.com/search?format=mobile3DGraphic) | [Mobile 3D Graphic](http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html) | .m3g | 
-[poly/moRay](https://discmaster.textfiles.com/search?format=moRay) | MoRay 3D Model | .mdl | [18 sample files](https://sembiance.com/fileFormatSamples/poly/moRay/) - A shareware program that sat 'on top' of a required POV-Ray installation. Just like POV-Ray, MoRay is super sensitive to version changes and using the last release v3.5 yielded an error where it stated to use 3.2 to open DOS moray files.
 [poly/ninja3DModel](https://discmaster.textfiles.com/search?format=ninja3DModel) | Ninja 3D Model | .nj | 
-[poly/northCAD3D](https://discmaster.textfiles.com/search?format=northCAD3D) | NorthCAD-3D | .n3d | Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. DOS based. No export capability.
+[poly/northCAD3D](https://discmaster.textfiles.com/search?format=northCAD3D) | NorthCAD-3D | .n3d | 
 [poly/obEd3DObject](https://discmaster.textfiles.com/search?format=obEd3DObject) | ObEd 3D Object | .obj | 
 [poly/objectsToSee3DObject](https://discmaster.textfiles.com/search?format=objectsToSee3DObject) | Objects to See 3D object | .o2c | 
 [poly/openCascade3DModel](https://discmaster.textfiles.com/search?format=openCascade3DModel) | Open Cascade Technology 3D model | .brp | 
 [poly/painter3DModel](https://discmaster.textfiles.com/search?format=painter3DModel) | Painter 3D model | .d | 
 [poly/parasolidModel](https://discmaster.textfiles.com/search?format=parasolidModel) | Parasolid model | .x_t | 
 [poly/playStationRSDPolygons](https://discmaster.textfiles.com/search?format=playStationRSDPolygons) | PlayStation RSD Polygons | .ply | 
-[poly/polyfilm](https://discmaster.textfiles.com/search?format=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/) - Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.
-[poly/povRay](https://discmaster.textfiles.com/search?format=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV-RAY files: https://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV https://discmaster.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov I need a better way to DETECT them though, I'm sure there are some that don't have the .pov extension, so figuring out some sort of magic for them would be POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert (may not longer be the case now since I have improved TGA support) Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format, which is ok assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
+[poly/polyfilm](https://discmaster.textfiles.com/search?format=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/)
+[poly/povRay](https://discmaster.textfiles.com/search?format=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV-RAY files: https://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV https://discmaster.textfiles.com/search?q=POV-Ray&qfields=name&qfields=t&extension=pov I need a better way to DETECT them though, I'm sure there are some that don't have the .pov extension, so figuring out some sort of magic for them would be POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Also, povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky Because these external files include 'includes' and pointers to images/textures and MORE. All in different parent directories, or who knows where. So there would need to be some sort of pre-parser that recursively walks and travels the file and all dependencies and pulls them all in, from the original file path. Challenging for sure. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert (may not longer be the case now since I have improved TGA support) Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format, which is ok assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
 [poly/racer3DModel](https://discmaster.textfiles.com/search?format=racer3DModel) | Racer 3D model | .dof | 
 [poly/radCadDrawing](https://discmaster.textfiles.com/search?format=radCadDrawing) | Rad Cad Drawing | .cad | 
-[poly/ravenObjectFileFormat](https://discmaster.textfiles.com/search?format=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | [4 sample files](https://sembiance.com/fileFormatSamples/poly/ravenObjectFileFormat/)
-[poly/real3D](https://discmaster.textfiles.com/search?format=real3D) | Real 3D | .real .obj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.
 [poly/renderit3DData](https://discmaster.textfiles.com/search?format=renderit3DData) | Renderit3D Data | .r3d | 
-[poly/renderManRIB](https://discmaster.textfiles.com/search?format=renderManRIB) | RenderMan RIB | .rib | i3dconverter claims support, but resulting .glb files are not useful
+[poly/renderManRIB](https://discmaster.textfiles.com/search?format=renderManRIB) | RenderMan RIB | .rib | 
 [poly/renderWare4Model](https://discmaster.textfiles.com/search?format=renderWare4Model) | RenderWare 4 model | .rx2 .rx3 | 
 [poly/residentEvilPlayerModel](https://discmaster.textfiles.com/search?format=residentEvilPlayerModel) | Resident Evil player model | .emw .emd | 
-[poly/rotObject](https://discmaster.textfiles.com/search?format=rotObject) | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/) - Only 27 unique files on discmaster. Not sure what program created these files.
+[poly/rotObject](https://discmaster.textfiles.com/search?format=rotObject) | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/)
 [poly/sculptris3DModel](https://discmaster.textfiles.com/search?format=sculptris3DModel) | Sculptris 3D Model | .sc1 | 
-[poly/ydl](https://discmaster.textfiles.com/search?format=ydl) | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.
+[poly/ydl](https://discmaster.textfiles.com/search?format=ydl) | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/)
 [poly/solidEdgeModel](https://discmaster.textfiles.com/search?format=solidEdgeModel) | Solid Edge part/model | .par | 
 [poly/solidWorksAssembly](https://discmaster.textfiles.com/search?format=solidWorksAssembly) | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
 [poly/solidWorksDrawing](https://discmaster.textfiles.com/search?format=solidWorksDrawing) | SolidWorks Drawing | .slddrw | [3 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksDrawing/)
@@ -3951,7 +3944,6 @@ Family/Format | Name | Extensions | Notes
 [poly/strata3DDesign](https://discmaster.textfiles.com/search?format=strata3DDesign) | Strata 3D Design | .s3d | 
 [poly/strata3DShape](https://discmaster.textfiles.com/search?format=strata3DShape) | Strata 3D Shape | .ssh | 
 [poly/strataStudioProVis](https://discmaster.textfiles.com/search?format=strataStudioProVis) | Strata StudioPro Vis |  | 
-[poly/superscapeDo3DObject](https://discmaster.textfiles.com/search?format=superscapeDo3DObject) | Superscape Do 3D VCA | .vca | I was able to open these in Superscape VRT, but exporting to VRML didn't produce a usable result. The 'Do 3D' program doesn't work any better (also requires CD in drive)
 [poly/superScapeVR](https://discmaster.textfiles.com/search?format=superScapeVR) | SuperScape Virtual Reality | .svr | 
 [poly/swift3D3DGraphic](https://discmaster.textfiles.com/search?format=swift3D3DGraphic) | Swift 3D 3D Graphic | .txt .t3d | 
 [poly/techland3DModel](https://discmaster.textfiles.com/search?format=techland3DModel) | Techland 3D model | .3da | 
@@ -3959,8 +3951,8 @@ Family/Format | Name | Extensions | Notes
 [poly/uleadCOOL3D](https://discmaster.textfiles.com/search?format=uleadCOOL3D) | Ulead COOL 3D | .uez | 
 [poly/ultimateStuntsBinary3D](https://discmaster.textfiles.com/search?format=ultimateStuntsBinary3D) | Ultimate Stunts binary 3D geometry | .glb | 
 [poly/universal3D](https://discmaster.textfiles.com/search?format=universal3D) | [Universal 3D](http://fileformats.archiveteam.org/wiki/U3D) | .u3d | [6 sample files](https://sembiance.com/fileFormatSamples/poly/universal3D/)
-[poly/valveModelVertices](https://discmaster.textfiles.com/search?format=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.
-[poly/vertexBinary](https://discmaster.textfiles.com/search?format=vertexBinary) | Vertex Binary 3D Object | .3d | Only 5 uniques of these files are on discmaster, all samples from an Amiga app called Vertex.
+[poly/valveModelVertices](https://discmaster.textfiles.com/search?format=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/)
+[poly/vertexBinary](https://discmaster.textfiles.com/search?format=vertexBinary) | Vertex Binary 3D Object | .3d | 
 [poly/virtusVRScene](https://discmaster.textfiles.com/search?format=virtusVRScene) | Virtus VR Scene | .vvr | 
 [poly/wings3DMesh](https://discmaster.textfiles.com/search?format=wings3DMesh) | Wings 3D mesh | .wings | 
 [poly/xboxDashboard3DModel](https://discmaster.textfiles.com/search?format=xboxDashboard3DModel) | Xbox Dashboard 3D model | .xbg | 

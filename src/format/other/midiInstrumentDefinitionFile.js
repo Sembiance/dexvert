@@ -7,5 +7,5 @@ export class midiInstrumentDefinitionFile extends Format
 	ext            = [".idf"];
 	forbidExtMatch = true;
 	magic          = ["MIDI Instrument Definition File", "RIFF Datei: unbekannter Typ 'IDF '", /^Generic RIFF file IDF$/, /^RIFF.* MIDI Instrument Definition File/];
-	converters     = ["strings"];
+	converters     = ["strings"];	// only 16 unique files on discmaster
 }

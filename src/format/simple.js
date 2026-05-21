@@ -67,7 +67,7 @@ export default
 		kamasOutline             : {name : "KAMAS Outline", ext : [".kam"], magic : ["KAMAS Outline"]},
 		locomotiveBASIC          : {name : "Locomotive BASIC", ext : [".bas"], magic : ["Amstrad CPC Locomotive BASIC tokenized source"]},
 		logistixMessages         : {name : "Logistix Messages", ext : [".msg"], magic : ["Logistix Messages"]},
-		lotusNotes               : {name : "Lotus Notes Storage Facility", ext : [".nsf", ".ntf"], magic : ["Lotus Notes Storage Facility", "Lotus Notes 4.5 Datenbank", "Lotus Note Template"]},
+		lotusNotes               : {name : "Lotus Notes Storage Facility", ext : [".nsf", ".ntf"], magic : ["Lotus Notes Storage Facility", "Lotus Notes 4.5 Datenbank", "Lotus Note Template", /^Notes Storage Facility database$/]},
 		lotusScreenCamScript     : {name : "Lotus ScreenCam Caption Script", ext : [".scs"], magic : ["Lotus ScreenCam Caption Script"]},
 		maxonWORD                : {name : "MaxonWORD", ext : [".dok"], magic : ["MaxonWORD document"]},
 		magneticPages            : {name : "Magnetic Pages Article", magic : ["Magnetic Pages article"]},

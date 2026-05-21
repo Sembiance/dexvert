@@ -1,0 +1,193 @@
+Vibe coded by Codex
+
+Perfect Forms .FRM sample0 format notes
+========================================
+
+Scope
+-----
+
+This document describes the Perfect Forms formats observed in sample0/.  Two
+container families occur:
+
+1. Compact V-format files, beginning with byte 56 00.
+2. Raw FRM-plane files, with bytes 6..8 equal to ASCII "FRM".
+
+The converter perfectForms.py validates one of those two families, consumes all
+bytes in the file as header, rendered plane, metadata, terminator, or padding,
+and fails without writing output when the observed structure is not matched.
+
+Important completeness note: the visual page format is implemented for every
+sample.  Some compact files contain non-rendered formula/metadata bytes after
+the visible plane, and some compact headers contain option bytes before the
+title.  Those bytes are identified, consumed, bounded, and documented below, but
+their full Perfect Forms application-level semantics are not known from the
+sample corpus alone.
+
+
+Character set and display bytes
+-------------------------------
+
+Printable form characters are IBM code page 437 bytes.  Box drawing bytes such
+as B3, C4, DA, BF, C0, D9, CD, BA, C9, BB, C8, and BC are rendered through CP437.
+
+The following byte values are observed as visual blank cells rather than printed
+glyphs:
+
+  00  empty cell
+  01 02 04 05 07  observed field/attribute cells
+  10 80 90        observed fill-field marker cells
+  7E              Perfect Forms visible-space marker
+
+Byte 20 is an ordinary ASCII space.  The distinction among 00, 20, 7E, 10, 80,
+and 90 appears to encode field/protection/fill state in the Perfect Forms
+editor, but the rendered output is a blank cell.
+
+
+Compact V-format
+----------------
+
+Header:
+
+  Offset  Size  Meaning
+  0       1     56, compact file signature
+  1       1     00
+  2       1     Half of the rendered row count.  Rendered rows = this byte * 2.
+  3       1     Rendered column count.  Observed: 47, 4F, 50, 82, 84, 88.
+  4       1     4D, literal "M"
+  5..N    var   Optional pre-information bytes, or immediately 49.
+  N       1     49, literal "I", starts the information block.
+  N+1     1     Title length.
+  N+2     var   Title bytes, CP437/ASCII, exactly Title length bytes.
+  ...     9     Settings bytes.  Observed examples include:
+                46 2E 2E 2E 36 2E 2E 2E 2E
+                46 2E 2E 2E 36 2E 2E 53 2E
+                46 2E 2E 2E 2E 38 2E 53 2E
+                64 42 46 2E 2E 2E 36 2E 4C
+
+The converter locates the information block by requiring that the title and
+9-byte settings block are followed by a valid body marker.
+
+Observed optional pre-information byte sequences:
+
+  44 04 48 01
+  44 05 3D 01
+  4E 03 30 05 31 32 33 34 35 44 05 30 00
+  4E 03 30 05 31 32 33 35 32 44 05 30 00
+
+The exact editor meaning of those option bytes is not determined.  They are
+preserved in parser notes and are not rendered.
+
+Body prefix:
+
+  00 00 01 KK RR RR RR RR RR RR RR RR 42
+
+KK is the stream kind.  Observed values:
+
+  42  complete standard stream
+  58  alternate/continuation stream
+
+The eight RR bytes are usually all zero.  Three samples use:
+
+  50 00 00 00 00 00 00 00
+
+After the final 42 byte, the body stream begins.
+
+Body stream:
+
+The visible plane has:
+
+  rows    = header[2] * 2
+  columns = header[3]
+  cells   = rows * columns
+
+The stream is a byte stream with one run-length command:
+
+  08 VV CC
+
+This expands to CC copies of byte VV.  CC is non-zero in all handled samples.
+Any other byte is a literal cell byte.  Expanded cells are wrapped at the column
+count.
+
+For complete streams, exactly rows*columns cells are decoded.  If additional
+bytes follow the visible plane, they are non-rendered metadata and the file must
+end with terminator byte 2A.  Most files have no post-plane metadata and consist
+only of the terminator after the visible plane.
+
+Post-plane metadata:
+
+Two invoice samples contain formula-like ASCII bytecode after the visible plane
+and before the 2A terminator.  These records contain references such as L42C72,
+operators, and record identifiers such as Me, Mf, Mg, etc.  The converter
+consumes this region as metadata and does not render it into the SVG output.
+
+Partial stream:
+
+sample0/16617/PSC04B.FRM has stream kind 58 and ends without a 2A terminator
+before the declared visible plane is complete.  The converter renders all
+available decoded cells and records the file as an unterminated partial stream.
+
+
+Raw FRM-plane format
+--------------------
+
+Raw files have a 127-byte header followed by an uncompressed CP437 character
+plane.
+
+Header:
+
+  Offset  Size  Meaning
+  0..2    3     Either ASCII "APP", or geometry bytes.
+  3..5    3     00 00 00
+  6..8    3     ASCII "FRM"
+  9..126  118   Reserved/zero in the samples.
+
+If bytes 0..2 are "APP", the column count is 80 and no reliable row count is
+stored in the header.  The converter renders the body from offset 127, wrapped
+at 80 columns.
+
+If byte 2 is 50 and byte 1 is a known column count, byte 0 is the declared row
+count and byte 1 is the declared column count.  Observed:
+
+  3F 50 50  63 rows, 80 columns
+  34 82 50  52 rows, 130 columns
+  54 82 50  84 rows, 130 columns
+
+For declared-geometry raw files, exactly rows*columns bytes after offset 127 are
+the visible plane.  Any later bytes are padding.  Observed padding bytes are
+spaces, NULs, hyphens, vertical bars, 7E blanks, and 07 attribute cells.
+
+
+SVG conversion
+--------------
+
+The converter writes a standalone SVG document.  CP437 box-drawing bytes are not
+emitted as font glyphs.  Instead, the visible CP437 plane is treated as a fixed
+character grid, and each line-art cell is converted into directional topology:
+left, right, up, and down, with single or double style.
+
+The renderer emits merged SVG rectangles for maximal horizontal and vertical
+line runs.  All coordinates come from cell boundaries and cell centers, so
+adjacent line cells share identical endpoints instead of relying on font glyph
+metrics.  Mixed single/double corners and junctions receive deterministic center
+joins so vertical and horizontal components meet cleanly.
+
+ASCII line-art candidates are handled only when they behave like line runs in
+the surrounding grid: vertical bar (7C), hyphen (2D), underscore (5F), and equals
+(3D).  This preserves ordinary text punctuation while allowing raw forms that
+use ASCII borders to render as geometry.
+
+Shaded CP437 bytes B0, B1, B2, and DB are emitted as filled SVG rectangles.
+Text bytes that are not classified as line art or shading are emitted as SVG
+text with a monospace font, so normal form text remains selectable.
+
+For compact V-format files, the expanded stream is stored as alternating visible
+rows and attribute/protection rows; only the visible row of each pair is
+rendered.  Fully blank presentation rows, compact attribute/protection rows,
+metadata, and padding bytes are still parsed and classified before output is
+written.
+
+Failure behavior
+----------------
+
+perfectForms.py writes through a temporary file.  If validation or conversion
+fails, it removes the requested output path and exits non-zero.

@@ -8,5 +8,5 @@ export class greenstreetPublisher extends Format
 	forbidExtMatch = true;
 	magic          = ["Greenstreet Publisher document", "Greenstreet Publisher snippet", /^fmt\/(1415|1416)( |$)/];
 	notes          = "Some of these opened in Win2k with Publishing Suite 99, but it can't save in ANY other format, maybe I could 'print' to a PDF or something. But not all worked and not too many files out there, so not supported for now.";
-	unsupported    = true;
+	unsupported    = true;	// .dtp and also .art and others (greenstreetDrawing) but not many samples and it's kinda a pain format, so vibe coder abandoned. Also see: https://preservation.tylerthorsted.com/2023/05/12/greenstreet/
 }

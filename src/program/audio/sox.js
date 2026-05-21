@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class sox extends Program
 {
 	website     = "http://sox.sourceforge.net";
-	package     = "media-sound/sox";
+	package     = "media-sound/sox_ng";
 	bin         = "sox";
 	flags       = {
 		bits        : "Input bits per sample",

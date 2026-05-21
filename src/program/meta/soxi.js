@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class soxi extends Program
 {
 	website = "http://sox.sourceforge.net";
-	package = "media-sound/sox";
+	package = "media-sound/sox_ng";
 	bin     = "soxi";
 	args    = r => [r.inFile()];
 	post    = r =>

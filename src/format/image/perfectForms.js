@@ -7,5 +7,5 @@ export class perfectForms extends Format
 	ext            = [".frm"];
 	forbidExtMatch = true;
 	magic          = ["Perfect Forms Form"];
-	unsupported    = true;
+	converters     = ["vibe2svg"];
 }

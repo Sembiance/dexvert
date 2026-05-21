@@ -7,5 +7,5 @@ export class txt2exePFischer extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = ["16bit DOS TXT2EXE (P.Fischer-Haaser)"];
-	unsupported    = true;
+	unsupported    = true;	// newer detection and thus an unknown number of these on discmaster
 }

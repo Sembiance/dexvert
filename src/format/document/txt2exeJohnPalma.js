@@ -7,5 +7,5 @@ export class txt2exeJohnPalma extends Format
 	ext            = [".exe", ".com"];
 	forbidExtMatch = true;
 	magic          = ["16bit DOS TXT2EXE (John De Palm) executable"];
-	unsupported    = true;
+	unsupported    = true;	// newer detection and thus an unknown number of these on discmaster
 }

@@ -5,7 +5,6 @@ export class renderManRIB extends Format
 	name        = "RenderMan RIB";
 	ext         = [".rib"];
 	magic       = ["Renderman RIB"];
-	unsupported = true;
-	notes       = "i3dconverter claims support, but resulting .glb files are not useful";
 	converters  = ["threeDObjectConverter"];
+	unsupported = true;	// only 2 unique files on discmaster. i3dconverter claims support, but resulting .glb files were not useful
 }

@@ -6,5 +6,5 @@ export class ultraCardStack extends Format
 	name           = "UltraCard Stack";
 	magic          = ["UltraCard Stack"];
 	forbiddenMagic = TEXT_MAGIC;
-	converters     = ["strings"];
+	converters     = ["strings"];	// only 255 unique files on discmaster
 }

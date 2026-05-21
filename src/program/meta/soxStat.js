@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 export class soxStat extends Program
 {
 	website = "http://sox.sourceforge.net";
-	package = "media-sound/sox";
+	package = "media-sound/sox_ng";
 	bin     = "sox";
 	args    = r => [r.inFile(), "-n", "stat"];
 	post    = r =>

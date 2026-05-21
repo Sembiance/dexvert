@@ -7,5 +7,5 @@ export class textExeLRC extends Format
 	ext            = [".exe"];
 	forbidExtMatch = true;
 	magic          = ["TextExe generated doc viewer"];
-	unsupported    = true;
+	unsupported    = true;	// newer detection and thus an unknown number of these on discmaster
 }

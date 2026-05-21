@@ -1,0 +1,138 @@
+Vibe coded by Codex
+
+Microsoft Advisor / QuickHelp file format notes
+=============================================
+
+Scope
+-----
+
+The files are DOS Microsoft Advisor / QuickHelp databases, identified by the
+two byte signature "LN" followed by version 0x0002. A physical file may contain
+one database segment or several database segments concatenated back to back.
+All multi-byte integer fields are little endian, and all offsets in a segment
+are relative to that segment's first byte.
+
+Fixed segment header and directory
+----------------------------------
+
+Offset  Size  Meaning
+0x00    2     Signature, ASCII "LN".
+0x02    2     Version. The samples use 0x0002.
+0x04    2     Attribute flags. Observed values: bit 0 case-sensitive lookup,
+              bit 1 locked/non-decodable flag. The converter records and
+              validates the value but does not need it for rendering.
+0x06    1     Command/control character. The samples use ':'.
+0x07    1     Padding; normally zero.
+0x08    2     Topic count.
+0x0A    2     Context string count.
+0x0C    1     Display width used by the original help viewer.
+0x0D    1     Padding; normally zero.
+0x0E    2     Predefined context count. The standard samples use zero.
+0x10    14    NUL-terminated database filename, padded with NUL bytes.
+0x1E    4     Stamp/reserved bytes. Observed as zeroes or "JCK\x13".
+0x22    4     Topic index offset.
+0x26    4     Context string table offset.
+0x2A    4     Context map offset.
+0x2E    4     Keyword dictionary offset, or zero when no dictionary is used.
+0x32    4     Huffman tree offset, or zero when no Huffman coding is used.
+0x36    4     Topic text offset.
+0x3A    4     Pre-index reserved DWORD; normally zero.
+0x3E    4     Pre-index reserved DWORD; normally zero.
+0x42    4     Segment size. In valid complete segments this equals the last
+              topic index entry.
+
+Sections
+--------
+
+The topic index has topic_count + 1 unsigned 32-bit offsets. Entry i is topic
+i's start, and entry i+1 is its end. The first entry equals topic_text_offset.
+The final entry is the segment size. The converter rejects a file if these
+offsets are not monotonic or point beyond the available bytes.
+
+The context string table is a sequence of NUL-terminated CP437 strings. The
+context map follows it and contains context_count unsigned 16-bit topic indexes;
+context string i maps to topic context_map[i].
+
+The keyword dictionary, when present, is a sequence of one-byte length-prefixed
+CP437 byte strings. A zero length byte terminates the dictionary; remaining
+bytes before the Huffman section must be zero.
+
+The Huffman section, when present, is an array of 16-bit nodes followed by a
+zero word terminator. Node counts vary across the samples. A node with bit 15
+set is a leaf and emits node & 0xff. An internal node's zero-bit child is
+node_value / 2; its one-bit child is the following node. Encoded topic bits are
+read most-significant-bit first.
+
+Topic stream
+------------
+
+Each topic is stored as:
+
+  uint16 expanded_length
+  byte[] encoded_topic_payload
+
+If a Huffman tree exists, encoded_topic_payload is Huffman decoded to a compact
+stream. Otherwise encoded_topic_payload is already the compact stream.
+
+The compact stream expands with these byte codes:
+
+  0x00-0x0f, 0x1b-0xff  literal byte
+  0x10-0x17             dictionary reference; next byte is the low index byte.
+                         index = ((code & 0x03) << 8) | next_byte.
+                         If code & 0x04, append one space after the dictionary
+                         string.
+  0x18                  space run; next byte is the count.
+  0x19                  byte run; next byte is the byte, following byte count.
+  0x1a                  escape; next byte is copied literally.
+
+The original reader stops after expanded_length output bytes. A final compact
+token may expand beyond that length; the surplus generated characters are not
+part of the topic.
+
+Expanded topic records
+----------------------
+
+The expanded topic is a sequence of counted line records:
+
+  uint8 text_count
+  byte[text_count - 1] text
+  uint8 attr_count
+  byte[attr_count - 1] attributes
+
+Text is CP437. Lines beginning with the segment control character are command
+lines. Observed commands include :c context, :n title, :f external reference,
+and :z viewer state. Visible text can contain 0x10 and 0x11 formatting/link
+sentinels. Attribute bytes are counted and validated by the converter; their
+complete display semantics are not fully decoded in this implementation.
+
+Implementation completeness
+---------------------------
+
+microsoftAdvisorHelp.py fully parses and accounts for the header, all directory
+sections, keyword streams, Huffman coding, compact topic coding, and counted
+topic records for the files it accepts. It renders topic text and creates RTF
+bookmarks plus a linked table of contents.
+
+This implementation does not fully render the attribute bytecode stream. The
+bytes are handled structurally so no accepted input bytes are skipped, but bold,
+underline, invisible-link ranges, and exact hotspot targets are not faithfully
+represented in the RTF.
+
+The strict converter rejects incomplete or malformed inputs rather than guessing.
+In sample0, 90 files convert and 10 are rejected:
+
+  29652/qbasic.hlp        topic offsets declare 130810 bytes; file has 32768
+  29996/MSGS31.HL         impossible header/section offsets
+  29999/TUTOR.DA          impossible header/section offsets
+  30003/OVER31.HL         impossible header/section offsets
+  30010/PWB.HLP           topic offsets declare 391152 bytes; file has 358400
+  30128/QB45ADVR.HLP      first topic compact stream ends before its length
+  33120/QP.HLP            topic offsets declare 304458 bytes; file has 63452
+  38087/HELP.bin          decoded topic record has an invalid attribute count
+  38182/qbasic.bin        decoded topic record has an invalid attribute count
+  43408/mfc               decoded topic record has an invalid text count
+
+Next steps for exact fidelity would be to reverse engineer the attribute bytecode
+stream and investigate the rejected files against known-good originals or the
+original Microsoft Advisor reader to determine whether they are damaged samples
+or a separate variant.

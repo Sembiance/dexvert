@@ -1,0 +1,124 @@
+IBM Storyboard Text Maker Document format
+Vibe coded by Codex
+
+This describes the IBM Storyboard Text Maker document files represented by the
+sample0 corpus. The files are screen documents, not word-processor streams: each
+document stores one 80-column by 25-row IBM PC text-mode screen as a character
+plane plus a color-attribute plane.
+
+File layout
+
+Offset  Size  Description
+0       7     Signature: 45 50 5f 43 41 50 00, ASCII "EP_CAP\0".
+7       8     Fixed header bytes: 03 50 00 00 a0 00 19 00.
+              In the samples these are constant. 0x50 is the 80-column width
+              and 0x19 is the 25-row height.
+15      2     Little-endian content-block length in bytes. This value includes
+              these two length bytes.
+17      N-2   RLE-compressed screen data.
+15+N    12    Zero trailer: 00 00 00 00 00 00 00 00 00 00 00 00.
+
+The total file size must therefore equal 15 + content_length + 12. A conforming
+reader should reject the file if the signature, fixed header, declared length,
+or trailer does not match exactly.
+
+RLE-compressed screen data
+
+The screen data contains two RLE planes in this order:
+
+1. Character plane: expands to exactly 2,000 bytes.
+2. Attribute plane: expands to exactly 2,000 bytes.
+
+The character plane is terminated by a zero-length literal run. The attribute
+plane is not zero-terminated inside the declared block; it ends exactly when it
+has expanded to 2,000 bytes, and that point must also be the end of the declared
+RLE screen data.
+
+RLE run encoding
+
+Every run starts with two bytes: low, high.
+
+If high has bit 7 clear, the run is a literal run:
+
+  count = low + high * 256
+
+If count is nonzero, the next count bytes are copied verbatim into the current
+plane. If count is zero, this is the character-plane terminator. The terminator
+is valid only in the character plane and only after exactly 2,000 bytes have
+been produced.
+
+If high has bit 7 set, the run is a repeat run:
+
+  count = low + (high & 0x7f) * 256
+
+The next single byte is repeated count times into the current plane. Repeat runs
+must have a nonzero count and must not expand the plane past 2,000 bytes.
+
+Screen geometry
+
+The expanded planes are indexed row-major:
+
+  offset = row * 80 + column
+
+Rows are 0 through 24 and columns are 0 through 79. The character byte and
+attribute byte at the same offset form one screen cell.
+
+Character bytes
+
+Character bytes are IBM PC display characters. Bytes 0x20 through 0xff use code
+page 437. Bytes 0x00 through 0x1f are the IBM PC text-mode control-area glyphs,
+not control commands in this file. The converter maps them to their common
+Unicode equivalents; byte 0x00 is rendered as a blank cell.
+
+Attribute bytes
+
+Attribute bytes use the standard IBM PC color attribute layout:
+
+  bits 0-3: foreground color, 0 through 15
+  bits 4-6: background color, 0 through 7
+  bit 7:    blink flag
+
+The 16 foreground color indexes are the CGA/EGA palette:
+
+0 black, 1 blue, 2 green, 3 cyan, 4 red, 5 magenta, 6 brown, 7 light gray,
+8 dark gray, 9 light blue, 10 light green, 11 light cyan, 12 light red,
+13 light magenta, 14 yellow, 15 white.
+
+The background color is the same palette's indexes 0 through 7. When bit 7 is
+set, the file requests blink; the supplied RTF converter parses that flag and
+emits an RTF animation control, but many modern RTF/PDF renderers ignore blink.
+
+ANSI output implemented by ibmStoryboardDocument.py
+
+The converter writes an ANSI art file containing CP437 character bytes plus ANSI
+SGR color escapes. It emits one continuous 2,000-cell 80-column stream and relies
+on ANSI renderer wrapping at column 80; it does not add CRLF after each row,
+because an ANSI renderer such as ansilove will otherwise wrap at column 80 and
+then advance a second time, creating blank rows. Attribute bytes are converted
+to ANSI foreground, background, bright, and blink controls. CGA/EGA color indexes
+are translated to ANSI SGR color order; for example, CGA index 1 is blue
+(ANSI 34/44) and CGA index 4 is red (ANSI 31/41).
+
+Most character bytes are emitted literally. Byte 0x00 is emitted as a space
+because it is a blank screen cell in these documents. Bytes 0x1a and 0x1b are
+mapped to ">" and "<" respectively because an ANSI stream cannot safely contain
+them as literal display glyphs: 0x1a is commonly treated as DOS EOF/SUB, and
+0x1b starts ANSI escape sequences. This affects four cells across the sample0
+corpus. For exact byte-for-byte text-mode rendering of those two glyphs, the
+expanded character and attribute planes should be emitted as a raw text-mode
+memory image and rendered with ansilove's BIN input type.
+
+Validation rules implemented by ibmStoryboardDocument.py
+
+The converter fails without producing output unless all of the following are
+true:
+
+- The header bytes and 12-byte trailer match exactly.
+- The declared content length matches the actual file size.
+- The character plane terminates after exactly 2,000 expanded bytes.
+- The attribute plane reaches exactly 2,000 expanded bytes at the end of the
+  declared RLE data.
+- No run overruns its plane or the content block.
+- No extra bytes remain after the attribute plane.
+
+All 200 files in sample0 satisfy this specification.

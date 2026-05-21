@@ -6,5 +6,5 @@ export class microsoftAdvisorHelp extends Format
 	ext            = [".hlp"];
 	forbidExtMatch = true;
 	magic          = ["MS Advisor help file", "Microsoft Advisor Help"];
-	unsupported    = true;
+	converters     = ["vibe2rtf"];
 }

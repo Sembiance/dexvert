@@ -299,6 +299,7 @@ export const WEAK_VALUES =
 
 	// dragonUnpackerID
 	// SEEN  ONCE:
+	//		DNI
 	// SEEN TWICE:
 	/^dragon: FPK /,	// multi-versioned, so it detects as FPK but must pass like FPK4. This produces garbage though on non FPK4 archives. gameextractor handles these fine and much better, see sidMeiserFPK
 	/^dragon: GTEX /,
@@ -368,11 +369,11 @@ export const WEAK_VALUES =
 	/^archive:Macromedia.DxrOpener /,
 
 	// SEEN  ONCE:
-	// 		archive:Xuse.BinOpener, archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:Pinky.A5rOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener
+	// 		archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:Pinky.A5rOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener
 	//		archive:Youkai.VoiceDatOpener, archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener
+	//		archive:Xuse.BinOpener, archive:Will.ArcOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -388,14 +389,15 @@ export const WEAK_VALUES =
 	/^audio:WaveAudio \(WAV\)/,
 
 	// SEEN  ONCE:
-	// 		image:Discovery.Pr1Format, image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:Leaf.PxFormat, image:MAGES.BinFormat, image:Mapl.Mi2Format, image:Softpal.PicFormat, image:Silky.IgfFormat
+	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:MAGES.BinFormat, image:Mapl.Mi2Format, image:Softpal.PicFormat, image:Silky.IgfFormat
 	//		image:RSystem.RsgFormat
 	// SEEN TWICE:
-	//		image:KAAS.PicFormat, image:CsWare.BpcFormat
+	//		image:Discovery.Pr1Format, image:CsWare.BpcFormat, image:Leaf.PxFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:Desire\.DesFormat /,
 	/^image:Ffa\.Pt1Format /,
 	/^image:JpegFormat /,
+	/^image:KAAS\.PicFormat /,
 	/^image:MayBeSoft\.HhpFormat /,
 	/^image:System98\.GFormat /,
 	/^image:TifFormat /,
@@ -406,9 +408,9 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, COD_UNIQUE, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FLX, FUK_XV4
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, CAR_FRAC, CDF_TXTR, PAK_50, PRJ_PROJ, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CMF
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CMF, COD_UNIQUE
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -436,9 +438,11 @@ export const WEAK_VALUES =
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
-	/^geArchive: CAS( |$)/,
 	/^geArchive: CACHE_3( |$)/,
+	/^geArchive: CAR_FRAC( |$)/,
+	/^geArchive: CAS( |$)/,
 	/^geArchive: CEG_GEKV( |$)/,
+	/^geArchive: CDF_TXTR( |$)/,
 	/^geArchive: CON( |$)/,
 	/^geArchive: CPN( |$)/,
 	/^geArchive: CRH_MDMD( |$)/,
@@ -473,6 +477,7 @@ export const WEAK_VALUES =
 	/^geArchive: PKF( |$)/,
 	/^geArchive: PKG_ZPKG( |$)/,
 	/^geArchive: PRE_OPEN( |$)/,
+	/^geArchive: PRJ_PROJ( |$)/,
 	/^geArchive: RMDP_?\d?( |$)/,
 	/^geArchive: RMX( |$)/,
 	/^geArchive: RSDK_RSDK( |$)/,
@@ -492,6 +497,8 @@ export const WEAK_VALUES =
 	/^geArchive: WD_WD( |$)/,
 	/^geArchive: XFS( |$)/,
 
+	// SEEN ONCE:
+	//		DAT_KYRA_TEX
 	/^geViewer: AFS_AFS_WE00( |$)/,
 	/^geViewer: GLI_GLIB_IMG( |$)/,
 	/^geViewer: J2D_PLIB_PICTURE( |$)/,
@@ -571,7 +578,7 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: WIC (Fake!), Terse, 777, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin)
+	// SEEN  ONCE: WIC (Fake!), Terse, 777, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA
 	// SEEN TWICE: PPMN (Max Smirnov), QuArk, X1
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -633,6 +640,10 @@ export const WEAK_VALUES =
 
 	// pc98ripperID
 	/^PC-98 ElfDOS/,
+
+	// soxi
+	// SEEN ONCE:
+	//		soxi: mpc2k
 
 	// xdgMime
 	/^application\/its\+xml$/,
@@ -941,6 +952,7 @@ export const WEAK_VALUES =
 	/^Ext3 file system Volume/,
 	/^Extended display identification data dump/,
 	/^Extensible storage engine,/,
+	/^EXTPROC script executed by /,	// actually is valid, but not really worth making a format for
 	/^Exuberant Ctags tag file/,
 	/^FGDC-STD-001-1998$/,
 	/^FIGlet controlfile/,

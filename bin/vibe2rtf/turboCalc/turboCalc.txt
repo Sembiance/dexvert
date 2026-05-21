@@ -1,0 +1,246 @@
+Vibe coded by Codex
+
+TurboCalc .TCD file format notes
+================================
+
+Scope
+-----
+
+This document describes the TurboCalc spreadsheet files present in sample0/.
+The companion converter, turboCalc.py, validates and consumes every byte in all
+100 supplied samples. It renders the spreadsheet cell grid to RTF. It does not
+draw TurboCalc chart/object binary tails into the RTF; those bytes are validated
+as known trailing object data and preserved only by the parser as tail data.
+
+Byte order and stream structure
+-------------------------------
+
+Multi-byte integers in the record stream are big-endian.
+
+Most top-level records have:
+
+  byte    record type
+  uint16  declared payload size
+  bytes   payload
+
+The first record must be FILE_START (type 0x01), and its 12-byte payload starts
+with ASCII "TURBOCALC". Files normally end with FILE_END:
+
+  00 00 00
+
+Several samples then contain trailing chart/object binary data. One sample has
+three orphan trailing bytes after the final valid record. The converter accepts
+only these observed trailer forms: empty, <= 3 orphan bytes, or tails beginning
+with 00, 04, or 05. Other trailers are rejected.
+
+Record types seen
+-----------------
+
+The enum names below match the public Leu/TCDReaderUnit.pas names where known:
+
+  0x00 FILE_END
+  0x01 FILE_START
+  0x02 FILE_VERSION
+  0x03 FILE_PASSWORD
+  0x04 FILE_OPT0
+  0x05 FILE_OPT1
+  0x06 FILE_WIDTH
+  0x07 FILE_HEIGHT
+  0x08 FILE_CELL
+  0x09 FILE_LCELL
+  0x0A FILE_NAME
+  0x0B FILE_OPT2
+  0x0C FILE_WINDOW
+  0x0D FILE_FONTS
+  0x0E FILE_SCREEN
+  0x0F FILE_COLOR
+  0x10 FILE_DIAGRAM
+  0x11 FILE_STDFONTS
+  0x12 FILE_PATTERNS
+  0x13 FILE_COLUMNFLAGS
+  0x14 FILE_ROWFLAGS
+  0x15 FILE_SHEETSIZE
+  0x16 FILE_SYSTEMFONTS
+  0x17 FILE_FROZEN
+  0x18 FILE_SAVEOPT
+  0x19 FILE_CRYPT
+  0x1A FILE_DIAGRAM2
+  0x1B FILE_GLOBALFLAGS
+  0x1C FILE_OBJECT
+  0x1D FILE_STDCHART
+  0x1E FILE_OPT3
+  0x1F FILE_LASTFILES
+  0x20 FILE_CURSOR
+  0x21 FILE_STARTUPOPTIONS
+  0x22 FILE_TURBOCALCOWNER
+  0x23 FILE_FILEINFO
+  0x24..0x34 additional TurboCalc records observed in the corpus
+
+Text fields
+-----------
+
+Text fields are:
+
+  uint16  byte length N
+  bytes   N bytes of Latin-1 text
+
+This form is used by cells, formulas, names, fonts, print strings, and many
+options records. The converter decodes cell text as Latin-1 for RTF output.
+
+Cells
+-----
+
+FILE_CELL (0x08) payload starts with 16-bit coordinates:
+
+  uint16  column, zero-based
+  uint16  row, zero-based
+  byte    cell type
+
+FILE_LCELL (0x09) uses 32-bit coordinates instead:
+
+  int32   column, zero-based
+  int32   row, zero-based
+  byte    cell type
+
+Cell type values seen/handled:
+
+  0  empty
+  1  no visible scalar value; often macro/formula-only
+  2  float: 4 mode bytes, then an IEEE-754 big-endian double
+  3  integer/date serial class: 8 data bytes, first int32 is rendered
+  4  date serial: 8 data bytes, first int32 is rendered
+  5  time serial: 8 data bytes, first int32 is rendered
+  6  boolean: 8 data bytes, first int32 is rendered as TRUE/FALSE
+  7  text: text field
+  8  unknown value class: 8 data bytes
+  9  error value: 8 data bytes
+
+After the value, the cell has one of two tails:
+
+1. Non-formula tail:
+
+     8 bytes display/format data
+
+2. Formula tail:
+
+     uint16  formula byte length F
+     bytes   F formula bytecode/text
+     6 bytes display/format data
+
+In 721 sample records, the record header's declared payload size is one byte
+larger than the parsed formula/name payload. The next byte is the following
+record type. turboCalc.py treats this as a documented TurboCalc writer quirk:
+the byte is consumed as the next record header, not as cell data.
+
+The first six display/format bytes are:
+
+  byte 0  background pen, low 6 bits; high 2 bits are pattern
+  byte 1  text pen, low 6 bits; high 2 bits are pattern
+  byte 2  border flags: left 0x03, right 0x0C, top 0x30, bottom 0xC0
+  byte 3  font/style: bit 0 underline, bit 1 bold, bit 2 italic, bits 3..7 font id
+  byte 4  text/number format id
+  byte 5  flags: low 3 bits horizontal alignment, bits 3..4 vertical alignment
+
+For non-formula cells, the two extra bytes after these six are retained as part
+of the raw display/format tail. They appear to be label/format extension bytes.
+
+Formula bytecode
+----------------
+
+Formula fields are a mixed byte stream. Printable Latin-1 bytes often appear
+directly. Known token forms:
+
+  0x08..0x0B int16 col_delta_or_abs int16 row_delta_or_abs
+      Cell reference. Low flag bits on the token distinguish relative/absolute
+      column and row. Relative references are resolved against the current cell.
+
+  0x04 function_id
+  0x05 function_id
+      Built-in function token. The converter maps common function ids such as
+      SUM, MIN, MAX, IF, SIN, COS, LEFT, RIGHT, LEN, COUNT, and PRODUCT.
+
+Macro sheets also contain bytecode tokens that look like short control
+sequences and are not fully decoded. The converter does not fail on those; it
+renders undecoded bytes in angle brackets in formula-only cells so no byte is
+silently dropped.
+
+Colors
+------
+
+FILE_COLOR (0x0F) payload:
+
+  uint16  color count C
+  C entries
+
+Two entry encodings are supported:
+
+  4-byte RGB form: r, g, b, pad
+  2-byte nibble form: 0x0BGR expanded to 8-bit channels
+
+The supplied samples use the 4-byte RGB form. Cell background/text pens are
+1-based indexes into this color table.
+
+Columns, rows, and sheet size
+-----------------------------
+
+FILE_WIDTH (0x06):
+
+  int32   column index
+  uint16  width
+
+FILE_HEIGHT (0x07):
+
+  int32   row index
+  uint16  height
+
+FILE_SHEETSIZE (0x15):
+
+  int32   max column/limit x
+  int32   max row/limit y
+  int32   reserved/pad
+
+Names
+-----
+
+FILE_NAME (0x0A) is special. Its declared size does not include the leading
+name text field:
+
+  record header: type 0x0A, uint16 value_size
+  text field:    defined name
+  bytes:         value payload of value_size bytes
+
+Some name records have the same +1 declared-size overlap quirk as formula
+cells.
+
+Rendering choices in turboCalc.py
+---------------------------------
+
+The RTF output is intentionally conservative:
+
+  * It emits one RTF table containing used cells.
+  * Text cells render as Latin-1 text.
+  * Left/default-aligned text cells overflow through empty cells to the right,
+    matching normal spreadsheet display behavior. This is emitted as horizontal
+    RTF cell merges because RTF table cells cannot visually overflow.
+  * Integers, floats, booleans, date serials, and time serials render as their
+    stored scalar value.
+  * Formula cells render the stored scalar result; formula-only cells render
+    the decoded/escaped formula byte stream.
+  * Basic bold, italic, underline, text color, background color, border, and
+    horizontal alignment are mapped to RTF.
+  * Charts, diagrams, embedded objects, print settings, windows, frozen panes,
+    passwords, file-info metadata, and application options are parsed as records
+    or accepted trailers but are not visually rendered.
+
+Known incompleteness
+--------------------
+
+The converter is sample-complete for byte consumption and spreadsheet-grid RTF
+conversion, but it is not a complete TurboCalc application renderer. The next
+reverse-engineering steps would be:
+
+  * Fully decode every formula/macro bytecode token.
+  * Decode and render FILE_DIAGRAM, FILE_DIAGRAM2, FILE_OBJECT, and trailing
+    chart/object binary data.
+  * Interpret TurboCalc date/time serials and number-format ids rather than
+    showing raw stored serial values.

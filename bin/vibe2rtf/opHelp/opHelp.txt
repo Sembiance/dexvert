@@ -1,0 +1,181 @@
+OPHelp OPH1 file format
+Vibe coded by Codex
+
+Scope
+=====
+
+This documents the OPHelp files in sample0/.  Every sample begins with the
+ASCII signature "OPH1" and uses the same text compression and topic markup.
+There are two table-size variants:
+
+* 16-bit table variant: 99 samples.
+* 32-bit table variant: 1 sample, sample0/21539/ERACER2.HLP.
+
+All integer fields are little-endian.
+
+
+16-bit table variant
+====================
+
+Header:
+
+Offset  Size  Meaning
+0x00    4     Signature, ASCII "OPH1".
+0x04    2     Context count.  This is the number of title-offset and topic
+              record slots.  Context ids are one-based indexes into these
+              arrays.
+0x06    2     Application/index value.  The samples do not need this value to
+              locate or decode topic data; it is preserved as metadata.
+0x08    2     Contents count.  This is the number of context ids in the
+              table-of-contents list.
+0x0A    2     Title string blob length in bytes.
+0x0C    2     Application/index value.  Preserved as metadata.
+0x0E    2     Application/index value.  Preserved as metadata.
+0x10    2     Application/index value.  Preserved as metadata.
+0x12    16    Compression character table.
+0x22    ...   Context title-offset table, uint16[context_count].
+
+After the title-offset table:
+
+1. Title string blob, title_blob_length bytes.
+2. Contents id table, uint16[contents_count].
+3. Topic record table, one record per context id:
+   * uint32 compressed_offset
+   * uint16 compressed_length
+   The empty-record sentinel is offset 0xFFFFFFFF and length 0xFFFF.
+4. Compressed topic data.  Non-empty topic records normally cover every byte
+   from the end of the record table to EOF.
+
+
+32-bit table variant
+====================
+
+Header:
+
+Offset  Size  Meaning
+0x00    4     Signature, ASCII "OPH1".
+0x04    4     Context count.
+0x08    4     Application/index value.
+0x0C    4     Contents count.
+0x10    4     Title string blob length in bytes.
+0x14    2     Application/index value.
+0x16    2     Application/index value.
+0x18    2     Application/index value.
+0x1A    16    Compression character table.
+0x2A    ...   Context title-offset table, uint32[context_count].
+
+After the title-offset table:
+
+1. Title string blob, title_blob_length bytes.
+2. Contents id table, uint32[contents_count].
+3. Topic record table, one record per context id:
+   * uint32 compressed_offset
+   * uint32 compressed_length
+   The empty-record sentinel is offset 0xFFFFFFFF and length 0xFFFFFFFF.
+4. Compressed topic data.
+
+The only 32-bit-table sample still uses 16-bit hyperlink target ids inside
+topic text.
+
+
+Title records
+=============
+
+The title-offset table is indexed by context_id - 1.  A missing title is
+0xFFFF.  Otherwise the offset points into the title string blob.
+
+A title record is:
+
+* marker byte
+* inverted CP437 title bytes
+
+The marker low seven bits encode the title length:
+
+    length = 0x7F - (marker & 0x7F)
+
+The marker high bit is a flag.  The samples use both values; the converter
+preserves it internally but does not need it for RTF output.
+
+Each title byte is stored as bitwise NOT of the CP437 byte:
+
+    decoded_byte = 0xFF - stored_byte
+
+
+Topic compression
+=================
+
+Topic records point to byte-aligned compressed streams.  The stream is read
+as nibbles in low-nibble, then high-nibble order for each byte.
+
+For each nibble:
+
+* 0x0 through 0xE: output compression_character_table[nibble].
+* 0xF: literal escape.  Read the next two nibbles as lo, hi and output
+  (hi << 4) | lo.
+
+The decompressed topic is terminated by byte 0x00.  Because the NUL literal
+uses three nibbles, the final byte may contain one unused high nibble.  The
+converter ignores the single decoded padding character after the last NUL.
+
+
+Topic markup
+============
+
+Topic text bytes are CP437 plus OPHelp inline controls:
+
+0x00
+    Topic terminator.
+
+0x01
+    Toggle emphasis.  Rendered as bold in RTF.
+
+0x02
+    Toggle emphasis.  Rendered as bold in RTF.
+
+0x03
+    Toggle emphasis.  Rendered as italic in RTF.
+
+0x04
+    Hyperlink start:
+
+        0x04 target_low target_high [optional prefix bytes] 0x05 link_text 0x05
+
+    The target is a little-endian uint16 context id.  Some samples include
+    prefix bytes, usually a space, before the first 0x05 delimiter; the
+    converter renders those prefix bytes before the hyperlink.  Target id 0
+    is treated as a link back to the generated table of contents.
+
+0x05
+    Link delimiter when inside a 0x04 hyperlink.  Outside hyperlinks it is a
+    standalone emphasis toggle, rendered as underline in RTF.
+
+0x09
+    Tab.
+
+0x0A
+    Ignored when paired with CR-style text.
+
+0x0B, 0x0C, 0x0D
+    Line break controls.  0x0D is the normal line separator used by the
+    samples.
+
+Other bytes 0x01 through 0x1F, when not consumed by the controls above, are
+DOS CP437 display glyphs such as arrows and triangles.  The converter maps
+those to Unicode equivalents in RTF.
+
+
+Observed directory inconsistency
+================================
+
+sample0/5699/FEPPLA.HLP has one inconsistent topic directory entry:
+
+* context 8 ends six bytes before context 9's listed offset;
+* context 9's listed length runs six bytes into context 10;
+* shifting context 9's compressed start back by exactly six bytes makes all
+  compressed topic spans contiguous, restores the missing "Some te" prefix in
+  the context 9 body, and removes the duplicated start of context 10.
+
+opHelp.py implements this only for the general balanced case where a gap
+before one record is exactly matched by that record's overlap into the next
+record.  Any other gap, overlap, out-of-range pointer, missing terminator, or
+malformed hyperlink fails conversion and leaves no output file.

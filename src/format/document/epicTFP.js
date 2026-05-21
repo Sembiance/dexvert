@@ -6,6 +6,6 @@ export class epicTFP extends Format
 	website     = "https://www.vogons.org/viewtopic.php?f=5&t=35657&start=40";
 	ext         = [".tfp"];
 	magic       = ["Epic TFP format"];
-	unsupported = true;
+	unsupported = true;	// only 65 unique files on discmaster, 90% are just ORDER forms for the games
 	notes       = "Used in EPIC games. Supposedly can contain hyperlinks, graphics and animations all in a single document format";
 }

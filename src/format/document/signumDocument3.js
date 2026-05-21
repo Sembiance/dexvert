@@ -6,5 +6,5 @@ export class signumDocument3 extends Format
 	ext            = [".sdk"];
 	forbidExtMatch = true;
 	magic          = ["Signum 3/4 Document"];
-	unsupported    = true;
+	unsupported    = true;	// only 40 unique files on discmaster
 }

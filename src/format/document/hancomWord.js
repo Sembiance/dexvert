@@ -6,5 +6,5 @@ export class hancomWord extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/HWP";
 	ext         = [".hwp"];
 	magic       = ["Hangul (Korean) Word Processor File", "Hangul (Korean) Word Processor document", "Hangul Word Processor document", /^Hancom HWP \(Hangul Word Processor\)/, "application/x-hwp", /^fmt\/(1083|1084)( |$)/];
-	unsupported = true;
+	unsupported = true;	// only 121 unique files on discmaster
 }

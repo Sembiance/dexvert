@@ -5,5 +5,5 @@ export class iesHyperText extends Format
 	name        = "I.E.S. HyperText";
 	ext         = [".hyp"];
 	magic       = ["I.E.S. HyperText"];
-	unsupported = true;
+	unsupported = true;	// only 40 unique files on discmaster
 }

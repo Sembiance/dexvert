@@ -1,0 +1,128 @@
+MediaPaq DCF / PAQ Catalog File Format
+Vibe coded by Codex
+
+Scope
+This document describes the MediaPaq catalog files present in sample0/.  The
+files use the same EKIF container for .DCF and .PAQ extensions.  All multi-byte
+integer fields are little-endian.
+
+File Header
+Offset  Size  Description
+0x00    4     ASCII magic "EKIF".
+0x04    4     Record hint.  In the samples this points at a catalog metadata
+              or recently active object record.  Some files contain stale
+              values, so the extractor records it but does not trust it for
+              layout.
+0x08    4     Absolute offset of the trailing table of contents.
+
+The object area starts at offset 0x0c and continues up to the table offset.
+Objects can be indexed by the table or unindexed.  Unindexed objects in the
+samples are valid records too: they include catalog metadata records, duplicated
+or deleted objects, and the two Small2.dct dictionary records.
+
+Table Of Contents
+The table begins at the header's table offset and ends one byte before EOF.  The
+last byte of every sample is 0x00 and is a table terminator.
+
+Offset  Size  Description
+0x00    2     Indexed object count.
+0x02    2     Table view field 0.  DCF samples usually store a capacity or view
+              slot count; the PAQ sample stores 128.
+0x04    2     Table view field 1.  DCF samples usually store 8; the PAQ sample
+              stores 128.
+
+Each indexed entry then follows:
+
+Offset  Size  Description
+0x00    2     Object marker 0x009b.
+0x02    4     Absolute object record offset.
+0x06    4     Object record length.
+0x0a    2     Name byte length.
+0x0c    var   Name bytes, usually an original DOS/Windows filename.
+
+Object Records
+Most records begin with 0x0096:
+
+Offset  Size  Description
+0x00    2     Record signature 0x0096.
+0x02    4     Format tag.  The samples use 0x23, 0x24, and 0x25.
+0x06    2     Application id 0x03e7.
+0x08    var   NUL-terminated label/path.  For indexed media this is normally
+              the original Windows path.  For catalog metadata it is usually
+              "EmilyMarieDaunt".
+...     var   Application metadata.  This includes stored filenames, timestamps,
+              dimensions, palette data, and catalog bookkeeping.  It ends at
+              the four-byte resource-length field immediately preceding an
+              embedded resource signature, or at the native-only marker below.
+
+Length-prefixed embedded resource:
+
+Offset  Size  Description
+-0x04   4     Embedded preview resource length.
+0x00    var   Embedded preview bytes.  Sample signatures are GIF87a/GIF89a,
+              BM, II*\0, MM\0*, JPEG, or PNG.
+after   6/18  Trailer if no native payload follows, or native bridge if a
+              native payload follows.
+
+6-byte trailer / bridge:
+Offset  Size  Description
+0x00    4     Stored length.  If this equals the remaining bytes after this
+              6-byte field, it is a native payload length.
+0x04    2     Format code.  Native bridge samples use 1.
+
+18-byte trailer / bridge:
+Offset  Size  Description
+0x00    4     Stored length.  If this equals the remaining bytes after this
+              18-byte field, it is a native payload length.
+0x04    4     Stored/original length field.
+0x08    4     Stored/original length field.
+0x0c    2     Width or x extent.
+0x0e    2     Height or y extent.
+0x10    2     Format code.
+
+Native payloads are either:
+* Placeable WMF, beginning d7 cd c6 9a.
+* ZIP local file data, beginning PK 03 04.  The sample ZIP containers contain
+  exactly one deflated temporary file; the decompressed member is the native
+  resource and is extracted under the catalog name.
+* Direct native data for PAQ text records.
+
+Native-only records use this descriptor near the end of the metadata:
+
+Offset  Size  Description
+0x00    4     Marker f7 ff ff ff.
+0x04    4     Native payload length.
+0x08    2     Format code 1.
+0x0a    var   Native payload bytes.
+
+Special Small2.dct Record
+The two 430-byte font samples contain one unindexed 225-byte record beginning
+00 00 00 followed by the NUL-terminated dictionary name "Small2.dct".  It is a
+catalog dictionary/index record and contains no extractable media payload.  The
+remaining indexed 0x0096 record is catalog metadata.
+
+Extractor Behavior
+mediaPaqDCF.py validates the EKIF header, table terminator, table entries,
+record signatures, resource length fields, trailers/bridges, and native ZIP
+containers before writing final output.  Output is staged in a temporary
+directory; invalid inputs remove the temporary directory and leave no output.
+
+By default the extractor emits only extracted resources directly in the output
+directory.  Preview files use a "_preview" suffix and native/original files use
+a "_native" suffix.  No metadata JSON is written by default.
+
+With --full, the extractor also emits:
+* manifest.json with offsets, lengths, TOC membership, metadata byte counts,
+  trailer fields, resource sizes, and CRC-32 values.
+* Raw ZIP native containers, when present, directly in the output directory with
+  a "_container.zip" suffix.
+
+Completeness Note
+The extractor accounts for every byte in every sample by assigning it to the
+header, an indexed or unindexed object record, a table entry, a table terminator,
+record metadata, a preview resource, a native-resource trailer/bridge, a native
+payload, or a native ZIP container.  The one part not decoded into named
+business fields is the variable application metadata blob inside 0x0096 records;
+the extractor validates its extent and preserves its offsets in manifest.json,
+but it does not assign human-readable meaning to every timestamp, palette,
+dimension, and catalog bookkeeping subfield inside that blob.

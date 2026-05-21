@@ -7,5 +7,5 @@ export class pocketWordDocument extends Format
 	forbidExtMatch = true;
 	idCheck        = (inputFile, detections, {extMatch}) => extMatch || (/\.\d+$/i).test(inputFile.ext);
 	magic          = ["Pocket Word document", "application/x-pocket-word", /^x-fmt\/(94|95)( |$)/];
-	unsupported    = true;
+	unsupported    = true;	// only 33 unique files on discmaster
 }

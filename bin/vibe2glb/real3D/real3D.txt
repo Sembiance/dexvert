@@ -1,0 +1,781 @@
+Vibe coded by Codex
+
+Real 3D sample0 file format notes
+==================================
+
+Status
+------
+
+This document describes the byte-exact polygon-object subsets implemented by
+real3D.py.  They are proven from the sample0 files by container size checks,
+record-boundary checks, vertex/face count equations, and index validation.
+
+It is not a complete specification for every Real 3D family present in sample0.
+The converter currently accepts 177 of 200 sample files.  It covers the AMIG
+polygon and parametric ROBJ records listed here, the WIND/RVRS subset listed
+below, REAL/INFO polygon containers, and the fixed-layout legacy `object `
+stream subset.  Remaining files are detected and rejected at exact byte offsets
+rather than guessed.
+
+Supported top-level container
+-----------------------------
+
+All supported polygon samples are Amiga IFF-style files:
+
+0x0000  4 bytes   ASCII "FORM"
+0x0004  4 bytes   uint32 FORM payload size, big endian
+0x0008  4 bytes   ASCII "REAL"
+0x000c  ...       IFF chunks; each chunk is:
+
+chunk+0  4 bytes  ASCII chunk id
+chunk+4  4 bytes  uint32 payload size, same endian as FORM size
+chunk+8  N bytes  payload
+after N          one pad byte when N is odd
+
+For RVRS/ROBJ files, the FORM size must equal file_size - 8 and the final
+parsed offset must equal the file size exactly.  The supported ROBJ
+polygon-object layout has these required chunks:
+
+1. RVRS, size 12
+2. ROBJ, size variable
+
+The converter also accepts intervening AMIG material/color chunks.  RMTR
+payloads are exactly 2020 bytes and carry a zero-padded material name at
+payload+14.  RCOL payloads are exactly 38 bytes and carry a zero-padded color
+name at payload+14, RGB bytes at payload+30..32, and an 8-bit color id at
+payload+37.  For RMTR material colors, payload+54 is a big-endian RCOL id when
+that id exists; otherwise payload+50 is a big-endian 12-bit 0RGB color, with 4
+bits per channel.  Zero RMTR colors are treated as "no override" and leave the
+ROBJ inline RGB in place.
+
+A second supported polygon-object layout is the nested REAL/INFO/APPR/POLY
+container documented below.
+
+A third supported layout is the legacy `object ` stream documented below.
+
+A fourth supported layout is the WIND/RVRS ROBJ grid-mesh subset documented
+below.
+
+RVRS chunk
+----------
+
+For converted files the RVRS payload is:
+
+0x00  4 bytes  ASCII "AMIG"
+0x04  4 bytes  uint32 major version, big endian; supported values: 2 or 3
+0x08  4 bytes  uint32 minor version, big endian
+
+Other sample0 RVRS platform/version combinations are identified but not
+converted.  In particular, WIND stores RVRS numeric fields little endian in the
+samples, and several WIND files also use little-endian IFF chunk sizes.
+
+ROBJ chunk
+----------
+
+The supported ROBJ chunk is a sequential stream of records.  There is no
+per-record size field; record size is determined from the 32-byte record header
+and, for polygon records, the validated vertex and face counts.
+
+Every record starts with:
+
+record+0x00  16 bytes  zero-padded Latin-1 name
+record+0x10   1 byte   object type
+record+0x11   1 byte   flags; supported value 0
+record+0x12   1 byte   reserved; supported value 0
+record+0x13   1 byte   subtype
+record+0x14  12 bytes  reserved; supported all zero
+
+Supported node records
+----------------------
+
+Node records are hierarchy/group records.  They have no payload beyond the
+32-byte header and are ignored for geometry output.
+
+Supported values:
+
+object type 2, subtype 2
+object type 3, subtype 1
+object type 3, subtype 2
+
+The other header bytes must match the common record constraints above.
+
+Supported polygon records
+-------------------------
+
+Polygon records have object type 4 or 5 and subtype 29.  Their size is:
+
+56 + vertex_count * 24 + face_count * 10 bytes
+
+The 56-byte header is:
+
+record+0x00  16 bytes  zero-padded Latin-1 name
+record+0x10   1 byte   object type: 4 or 5
+record+0x11   1 byte   0
+record+0x12   1 byte   0
+record+0x13   1 byte   subtype: 29
+record+0x14  12 bytes  zero
+record+0x20   1 byte   material/color mode; supported value 2
+record+0x21   3 bytes  RGB object color, 8 bits per channel
+record+0x24   6 bytes  zero
+record+0x2a   2 bytes  uint16 vertex_count, big endian
+record+0x2c   4 bytes  zero
+record+0x30   2 bytes  uint16 face_count, big endian
+record+0x32   2 bytes  zero
+record+0x34   4 bytes  uint32 smooth/shading flag, big endian; observed 0 or 1
+
+Vertex array:
+
+record+0x38                 start of vertices
+each vertex, 24 bytes       3 big-endian IEEE-754 float64 values: x, y, z
+
+Face array:
+
+record+0x38 + vertex_count * 24      start of faces
+each face, 10 bytes:
+  +0x00  2 bytes  uint16 vertex index A, big endian
+  +0x02  2 bytes  uint16 vertex index B, big endian
+  +0x04  2 bytes  uint16 vertex index C, big endian
+  +0x06  4 bytes  face attribute bytes; all converted samples use ff ff ff 00
+
+All face indices must be less than vertex_count.  The converter preserves the
+input winding and emits normal one-sided GLB materials; Real 3D scene planes
+such as walls are oriented surfaces, and forcing all faces double-sided makes
+the outside of scene backdrops hide the model.
+
+Supported rectangle records
+---------------------------
+
+Rectangle records have object type 4 or 5 and subtype 10.  Their size is 138
+bytes:
+
+record+0x00  32 bytes  common ROBJ header
+record+0x20   1 byte   material/color selector
+record+0x21   3 bytes  RGB object color, 8 bits per channel
+record+0x24   6 bytes  zero
+record+0x2a  72 bytes  three big-endian float64 corner points: A, B, C
+record+0x72  24 bytes  big-endian float64 normal vector
+
+The fourth corner is not stored.  It is derived as B + C - A.  The GLB triangles
+are emitted as (A, C, B) and (B, C, D), with D being the derived fourth corner.
+
+Supported mapped-surface records
+--------------------------------
+
+Mapped-surface records have object type 12 or 13 and subtype 10.  They are not
+additional polygon geometry; in the converted samples they reference the same
+surface basis used by nearby rectangles and carry an SMAT material binding.
+
+record+0x00  32 bytes  common ROBJ header
+record+0x20   1 byte   material/color selector
+record+0x21   3 bytes  RGB object color, 8 bits per channel
+record+0x24   6 bytes  zero
+record+0x2a  72 bytes  three big-endian float64 surface points
+record+0x72  24 bytes  big-endian float64 normal vector
+record+0x8a   4 bytes  ASCII "SMAT"
+record+0x8e   4 bytes  material internal id/timestamp
+record+0x92   4 bytes  uint32 material-name byte count, big endian
+record+0x96   N bytes  material name, NUL terminated; N is the count above
+after name    8 bytes  zero padding
+
+The total record size is 158 + N bytes before the next record.  The converter
+validates the surface points, normal, SMAT tag, NUL terminator, and alignment
+padding.  The SMAT material name is bound to the following target record name
+at the next ROBJ header; it is carried forward to the target's renderable child
+meshes and used only when an RMTR color for that material is known.
+
+Supported AMIG point-light records
+----------------------------------
+
+Point-light records have object type 5 and subtype 33.  They are non-geometry
+records and are ignored after validation.
+
+record+0x00  32 bytes  common ROBJ header
+record+0x20   1 byte   light/color selector
+record+0x21   3 bytes  RGB color
+record+0x24   6 bytes  zero
+record+0x2a  24 bytes  big-endian float64 light position
+
+The fixed record size is 66 bytes.
+
+Supported AMIG parametric and grid records
+------------------------------------------
+
+AMIG parametric records use the same 32-byte ROBJ header as polygon records and
+store big-endian float64 payloads beginning at record+0x2a after six zero
+bytes at record+0x24..0x29.
+
+Subtype 11 box records, object type 4, 5, or 13:
+record+0x2a  72 bytes  three corner points, 3 big-endian float64 values each
+record+0x72  24 bytes  extrusion vector, 3 big-endian float64 values
+total size   138 bytes
+
+Subtype 14 old polygon records, object type 4, 5, or 13:
+record+0x2a  uint16 polygon vertex count, big endian
+record+0x2c  4 bytes zero
+record+0x30  24 bytes control vector, 3 big-endian float64 values
+record+0x48  vertex_count vertices, each 3 big-endian float64 values
+
+Object type 13 stores three additional 24-byte control/footer vectors after
+the polygon vertex loop.  These bytes are validated and counted in the record
+size but are not polygon vertices.  The emitted mesh triangulates only the
+declared vertex_count as a fan.
+
+Subtype 15 prism/polyhedron records, object type 4, 5, or 13:
+record+0x2a  uint16 base vertex count, big endian
+record+0x2c  4 bytes zero
+record+0x30  24 bytes extrusion vector, 3 big-endian float64 values
+record+0x48  base vertex loop, each 3 big-endian float64 values
+
+The total size is 48 + (base_count + 1) * 24 bytes before optional AMIG
+properties.  The converter emits the base loop, a second loop translated by the
+extrusion vector, fan caps, and two triangles for each side wall.
+
+Subtype 22 ellipsoid records, object type 4, 5, or 13:
+record+0x2a  14 big-endian float64 values: center xyz, three axis vectors, and
+              two trailing zero angle/control values
+total size   154 bytes before optional AMIG properties
+
+Subtype 18 ellipse records, object type 4, 5, or 13:
+record+0x2a  12 big-endian float64 values: center xyz, two axis vectors, and a
+              normal vector
+record+0x8a  18-byte tail: either all zero, or 2-byte mode 0x0200, 8 zero
+              bytes, and one finite big-endian float64 angular value
+total size   156 bytes before optional AMIG properties
+
+Subtype 19 cylinder, subtype 21 cutcone, and subtype 23/24 two-ring surface
+records, object type 4, 5, or 13:
+record+0x2a  32 big-endian float64 values.  Values 12..29 define two ring
+              centers and two axis vectors per ring.  Values 30..31 are angular
+              controls when finite and ordered; otherwise the sample records
+              use them as sentinel/control words and the converter emits a full
+              360-degree surface.
+total size   298 bytes before optional AMIG properties
+
+Subtype 20 cone records, object type 4, 5, or 13:
+record+0x2a  23 big-endian float64 values.  Values 0..2 define the tip, values
+              12..20 define the base-ring center and two base axes, and values
+              21..22 are angular controls when finite and ordered.
+total size   226 bytes before optional AMIG properties
+
+Object type 13 subtype 20 records whose Latin-1 name begins with `light_` are
+spotlight volume/helper records in the AMIG samples.  Their 226-byte cone body
+and optional properties are fully validated and counted, but they are not
+emitted as polygon meshes.
+
+Some subtype 21 and mapped subtype 21 records carry an immediate counted-index
+extension after the 298-byte parametric body:
+
+extension+0x00  uint16 vertex_count, big endian
+extension+0x02  uint16 index_word_count, big endian
+extension+0x04  6 bytes ff ff 00 00 00 00
+extension+0x0a  vertex_count vertices, each 3 big-endian float64 values
+then             index_word_count uint16 words, big endian
+
+Index words are 1-based with zero run delimiters.  The converter range-checks
+the words and triangulates each run as a fan.
+
+Subtype 26 grid records, object type 4, 5, 12, or 13:
+record+0x2a  uint16 row count, big endian
+record+0x2c  uint16 column count, big endian
+record+0x2e  uint32 metadata/control word
+record+0x32  uint32 metadata/control word
+record+0x36  rows * columns vertices, each 3 big-endian float64 values
+
+The converter validates finite vertices and emits two triangles per grid cell.
+
+Supported AMIG property/non-render records
+------------------------------------------
+
+The AMIG parser accounts common scene/helper records without emitting geometry:
+node records (object type 2 or 3, subtype 1 or 2), container records (object
+type 8, 9, 10, or 11, subtype 2), subtype 27 group-reference records, subtype
+28 container records, subtype 32 skeleton/control records, subtype 33 light and
+point/vector-helper records, subtype 34 line records, subtype 35/36
+coordsys/view records, subtype 37 aimpoint records, subtype 38 material-wrapper
+records, mapped material records with SMAT, and mapped subtype 19/21/23/24
+two-ring records.
+
+Supported AMIG property tags include VPHS, VSPI, VVEL, DDIV, DDIR, VTIM, VTIE,
+VTIS, VCRE, VFRQ, VMOV, VROT, VSCA, VSHE, VPOS, MCOG, FMAS, FFRI, FKNO, FORC,
+ITRA, ITRF, IFLG, IOCT, ISKE, IINH, ILBR, FLSF, SMTH, SFOR, SDEL, SCRE, SCOP,
+SIDE, SOBJ, and SMAT.  Numeric properties are validated as finite big-endian
+float64 values or bounded integer fields.  String properties carry a big-endian
+byte count and a NUL-terminated Latin-1 string, with either immediate
+continuation, bounded continuation words, or zero padding as observed in the
+samples.
+
+REAL/INFO/APPR/POLY polygon container
+-------------------------------------
+
+Eight sample files use a nested polygon container:
+
+FORM REAL
+  INFO, size 8: zero-padded object name
+  FORM OBJT, size 32
+    FORM ORNT, size 4
+    EXTE, size 7
+  FORM APPR
+    FORM POLY
+
+MECHO.EOR and DANE.EOR omit the final IFF pad byte.  The converter accepts only
+that exact one-byte-short condition at the top container end; all internal chunk
+boundaries must still match exactly.
+
+The supported POLY form has this exact child order:
+
+INFO, size 1
+FORM DETA
+VERT
+FORM TXMS
+FORM TRIS
+optional FORM QUAD
+ATTR
+
+DETA is structurally accounted as an opaque detail/level table.  TXMS is
+structurally accounted as an opaque texture-map form.  These chunks are not
+needed to reconstruct polygon geometry.
+
+VERT chunk:
+
+chunk+0x00  4 bytes  ASCII "VERT"
+chunk+0x04  4 bytes  uint32 payload size, big endian; must be vertex_count * 12
+payload     records  each vertex is 3 little-endian int32 values: x, y, z
+
+FORM TRIS:
+
+payload type is ASCII "TRIS".  It contains FACE and MAPS chunks.
+
+FACE chunk:
+  size must be triangle_count * 8
+  each record is 4 little-endian uint16 values:
+    word 0: source face/material code; observed values include 1, 6, and 38405
+    word 1: vertex index A
+    word 2: vertex index B
+    word 3: vertex index C
+
+MAPS chunk:
+  texture-coordinate/map payload.  It is structurally accounted but not used by
+  the GLB writer.
+
+FORM QUAD:
+
+payload type is ASCII "QUAD".  It contains the same FACE/MAPS structure, but
+FACE records are 10 bytes:
+
+  word 0: source face/material code
+  words 1..4: four vertex indices
+
+The converter triangulates each quad as (A, B, C) and (A, C, D).
+
+ATTR chunk:
+
+chunk+0x00  4 bytes  ASCII "ATTR"
+chunk+0x04  4 bytes  uint32 payload size, big endian
+payload     records  9 bytes per source face
+
+The ATTR size must equal (TRIS source face count + QUAD source face count) * 9.
+All face indices from TRIS and QUAD must be less than the VERT vertex count.
+
+Legacy object stream subset
+---------------------------
+
+Twenty-two legacy files begin with the 8-byte signature `object \0` rather than an
+IFF FORM container.  The supported subset is a sequential object stream:
+
+file+0x00   8 bytes  ASCII `object \0`
+file+0x08  19 bytes  printable/NUL object name field
+file+0x1b  59 bytes  root object metadata
+file+0x56  ...       legacy records to end of file
+
+Three record types are supported.
+
+Legacy group/helper record:
+
+record+0x00  19 bytes  printable/NUL name field
+record+0x13  59 bytes  metadata/pointer fields
+
+The fixed size is 78 bytes.  These records emit no mesh.
+
+Legacy mesh record:
+
+record+0x00   19 bytes  printable/NUL name field
+record+0x13   ...       object metadata and bounding/pointer fields.  For
+                         visible 8-point type-4 block records this field starts
+                         with 0x15; records of the same type/count whose
+                         record+0x13 byte is 0x00 are accounted as non-render
+                         fill/helper records.
+record+0x56    2 bytes  uint16 point_count, big endian
+record+0x5c    2 bytes  uint16 index_word_count, big endian
+record+0x60   24 bytes  placement vector, 3 big-endian float64 values
+record+0x100  19 bytes  material-name field; a printable NUL-terminated prefix
+                         is required, and remaining bytes may contain binary
+                         record data in newer fixed-layout legacy records
+record+base   records   point records
+after points  records   index stream, index_word_count big-endian uint16 words
+
+Three named point-array starts are validated: `base = 0x120`, `base = 0x130`,
+and `base = 0x318`.  The record size equation is:
+
+base + point_count * 32 + index_word_count * 2
+
+Each point record is four big-endian float64 values.  The supported fixed-layout
+legacy subset uses the first three values as local xyz coordinates, adds the
+record+0x60 placement vector, and validates that all source and placement values
+are finite.  The fourth point value is structurally accounted as part of the
+32-byte point record.
+
+The index stream is 1-based, with zero words separating runs.  Every non-zero
+index word must be less than or equal to point_count.  Several common legacy
+primitive patterns need shape-specific triangulation:
+
+type 2, point_count 30, index_word_count 39:
+  sphere/ball.  The 30 points are three orthogonal great-circle loops.  The
+  converter computes the convex hull of the supplied finite points so the
+  emitted surface is a rounded ball rather than intersecting fan planes.
+
+type 12, point_count 24, index_word_count 60:
+  cylinder/stroke.  Points 1..12 and 13..24 are two stored rings.  The
+  converter emits side quads between corresponding ring points; rounded end
+  geometry is represented by adjacent type-2 ball records in the samples.
+
+type 4, point_count 8, index_word_count 19:
+  box/block.  Points 1..4 and 5..8 are two rectangular loops.  The converter
+  emits the six box faces directly.
+
+Other legacy index streams fall back to the generic 1-based run parser: runs
+with three or more indices are triangulated as polygon fans, and consecutive
+two-index runs are triangulated as quads between adjacent pairs.  The parser
+accepts a legacy file only when a complete sequence of 78-byte group records and
+validated mesh records lands exactly at the file end.
+
+Legacy continuation mesh record:
+
+Some legacy streams omit the 0x4e-byte name/metadata prefix for a mesh body
+that follows a normal named record or group record.  The continuation starts at
+the same byte pattern that appears at `record+0x4e` in a named mesh:
+
+record+0x00  4 bytes  marker bytes 0f 05 05 06
+record+0x08  2 bytes  uint16 point_count, big endian
+record+0x0e  2 bytes  uint16 index_word_count, big endian
+record+0x12 24 bytes  placement vector, 3 big-endian float64 values
+record+0xb2  19 bytes material-name field
+record+base  records  point records
+after points records  index stream
+
+The supported continuation point-array starts are the named bases minus 0x4e:
+`base = 0xd2`, `base = 0xe2`, and `base = 0x2ca`.  The same finite-coordinate
+and index range validation is applied, and the record size equation is:
+
+base + point_count * 32 + index_word_count * 2
+
+Continuation meshes whose fourth point-record values are all large sentinel
+control values, and continuation type-4 8-point block records, are structurally
+accounted but not emitted.  In the samples these records are broad fill/helper
+polygons for legacy glyph construction, not visible polygon model surfaces.
+
+WIND ROBJ grid-mesh subset
+--------------------------
+
+WIND files use the same outer FORM/REAL and chunk ids, but the RVRS numeric
+fields are little endian:
+
+RVRS payload:
+0x00  4 bytes  ASCII "WIND"
+0x04  4 bytes  uint32 major version, little endian
+0x08  4 bytes  uint32 minor version, little endian
+
+The IFF chunk size words may be either big endian or little endian; the
+converter chooses the byte order only when the FORM size equals file_size - 8.
+
+WIND ROBJ record headers differ from AMIG ROBJ headers:
+
+record+0x00  16 bytes  zero-padded Latin-1 name
+record+0x10   1 byte   object type
+record+0x11   1 byte   flags
+record+0x12   1 byte   subtype
+record+0x13   1 byte   zero
+record+0x14  12 bytes  record-specific flags/reserved bytes
+
+Supported WIND node records:
+
+object type 2 or 3, subtype 1 or 2, exactly 32 bytes.
+
+Supported WIND line records:
+
+subtype 34 line/polyline records are validated but not emitted as GLB geometry.
+The samples contain four counted header variants:
+
+variant A:
+record+0x2c  2 bytes  uint16 point count, little endian
+record+0x38  records  each point is 3 little-endian float64 values
+
+variant B:
+record+0x2a  2 bytes  uint16 point count, little endian
+record+0x30  4 bytes  zero or dimension/flag pair
+record+0x34  records  each point is 3 little-endian float64 values
+
+variant C:
+record+0x2c  2 bytes  uint16 point count, little endian
+record+0x2e  2 bytes  small line parameter, observed 0 or 0x50
+record+0x30  4 bytes  record id/pointer
+record+0x34  4 bytes  zero or dimension/flag pair
+record+0x38  records  each point is 3 little-endian float64 values
+
+variant D:
+record+0x20  2 bytes  uint16 point count, little endian
+record+0x2c  2 bytes  same point count, little endian
+record+0x30  4 bytes  record id/pointer
+record+0x34  4 bytes  dimension/flag pair
+record+0x38  records  each point is 3 little-endian float64 values
+
+The converter validates line vertices but does not emit line geometry in GLB.
+
+Supported WIND container/property records:
+
+Object type 8, 9, 10, or 11 with subtype 2, and object type 8 or 12 with
+subtype 28, contain a 32-byte WIND ROBJ header followed by one or more property
+records.  The supported property tags are:
+
+FSIZ  16 bytes: tag, 4-byte id, one little-endian float64 scalar
+DDIV  32 bytes: tag, 4-byte id, three little-endian float64 values
+DDIR  32 bytes: tag, 4-byte id, three little-endian float64 values
+MCOG  40 bytes: tag, 4-byte id, three little-endian float64 values, 8 zero bytes
+SPRV  variable: tag, 4-byte id, uint32 little-endian name byte count, NUL
+      terminated name, 8 zero bytes
+FFRI  16 bytes: tag, 4-byte id, one little-endian float64 scalar
+VSPI  32 bytes: tag, 4-byte id, three little-endian float64 values
+ICSM  12 or 20 bytes: tag plus two uint32 little-endian values, optionally
+      followed by 8 zero bytes
+VVEL  32 bytes: tag, 4-byte id, three little-endian float64 values
+FMAS  24 bytes: tag, 4-byte id, one little-endian float64 scalar, 8 zero bytes
+VTIM/VTIE/VTIS  32 bytes: tag, 4-byte id, three little-endian float64 values
+VCRE  32 bytes: tag, 4-byte id, three little-endian float64 values
+SMTH/SFOR/SDEL/SCRE/SIDE/SOBJ  variable: tag, 4-byte id, uint32
+      little-endian string byte count, NUL terminated string, optionally
+      followed by 8 zero bytes
+ITRF/ITRA  12 or 20 bytes: tag, two uint32 little-endian values, optionally
+      followed by 8 zero bytes
+FORC  16 bytes: tag, 4-byte id, one little-endian float64 scalar
+ISKE  12 bytes: tag and two uint32 little-endian values
+IFLG/IOCT  12 bytes in containers, or a standalone 20-byte zero-padded tail
+SMAT  variable standalone material binding: tag, 4-byte id, uint32
+      little-endian string byte count, NUL terminated material name, 8 zero bytes
+
+These are transform, hierarchy, preview, and particle/force properties.  They
+are validated and skipped because they do not directly emit polygon geometry.
+
+Supported WIND rectangle, box, pyramid, mapped-surface, point-light, and
+ellipsoid records:
+
+WIND subtype 10 rectangle and mapped-surface records mirror the AMIG structures
+but store all numeric fields little endian.  Object type 4 or 5 emits a
+rectangle mesh from three stored corner points plus a derived fourth corner.
+Object type 12 validates and skips the SMAT material-binding form.
+
+WIND subtype 11 box records use the same surface-vector layout as rectangles:
+three base points plus an extrusion vector.  Object type 4, 5, or 13 emits a
+six-sided box.
+
+WIND subtype 12 object type 13 pyramid records use the same 42-byte aligned
+surface-vector layout: three base points plus an apex point.  The converter
+emits a base rectangle and four side triangles.
+
+WIND subtype 15 object type 4 prism/polyhedron records are fixed 144-byte
+records.  record+0x2a stores a little-endian uint16 count, supported value 3.
+record+0x30 stores one extrusion vector followed by three base-triangle
+vertices, all little-endian float64.  The converter emits a triangular prism.
+
+WIND subtype 33 point-light records are non-geometry records with 42-byte or
+44-byte aligned xyz payloads.  The converter validates finite light positions
+and exact record boundaries.
+
+WIND subtype 22 ellipsoid records with object type 4 or 5 store a center vector
+and three axis vectors as little-endian float64 values, followed by two zero
+float64 values.  Two header variants are observed:
+
+variant A: numeric payload starts at record+0x2a, total size 154 bytes
+variant B: numeric payload starts at record+0x2c, total size 156 bytes
+
+The converter emits a triangulated ellipsoid approximation from those four
+vectors.  Object type 12 subtype 22 validates and skips the matching SMAT
+material-binding form.  Object type 13 subtype 22 uses the same emitted
+ellipsoid layout.
+
+Supported WIND ellipse, cylinder, cone, and cutcone records:
+
+WIND subtype 18 ellipse records store 15 little-endian float64 values:
+center xyz, two axis vectors, a normal vector, two zero scalars, and one angular
+scalar in the range 0..2*pi.  The converter emits a filled triangulated ellipse.
+
+WIND subtype 19 cylinder records store 32 little-endian float64 values:
+a reference center, two radius axes, an orientation vector, a first ring center
+with two radius axes, a second ring center with two radius axes, and two angular
+span scalars.  The converter emits a capped two-ring mesh.
+
+WIND subtype 20 cone records store 23 little-endian float64 values:
+an apex, two reference axes, an orientation vector, a base center, two base
+axes, and two angular span scalars.  The converter emits a capped cone mesh.
+
+WIND subtype 21 cutcone records use the same 32-value two-ring layout as
+cylinder records, with independently sized second-ring axes.  The converter
+emits a capped two-ring mesh.
+
+WIND subtype 23 and 24 records in the samples use the same two-ring numeric
+layout as subtype 19.  The converter validates the 32 little-endian float64
+values and emits a capped two-ring mesh.
+
+Supported WIND camera/helper and material wrapper records:
+
+Subtype 35 coordsys records, subtype 36 viewpoint records, subtype 37 aimpoint
+records, and subtype 33 lights are validated as non-mesh spatial helper
+records.  They use 42-byte or 44-byte aligned little-endian float64 vector
+payloads.
+
+Subtype 38 material/morph wrapper records contain either an immediate SMAT
+binding at record+0x20 or an FKNO key-value block at record+0x20 followed by
+SMAT at record+0x30.  FKNO stores a finite little-endian float64 key value.
+The wrapper itself emits no mesh; parsing resumes at the next child record.
+
+Subtype 27 group-reference records contain either a short VPHS/SIDE reference
+payload or an eight-entry uint32 offset table followed by SOBJ, VPHS, and SIDE
+properties.  VPHS in this record family is 32 bytes: tag, 4-byte id, and three
+little-endian float64 values.  These records emit no mesh.
+
+Supported WIND grid-mesh records:
+
+subtype 26.  Two header variants are validated:
+
+variant A:
+  record+0x2c  uint16 row count, little endian
+  record+0x2e  uint16 column count, little endian
+  record+0x38  rows * columns vertices, each 3 little-endian float64 values
+
+variant B:
+  record+0x2a  uint16 row count, little endian
+  record+0x2c  uint16 column count, little endian
+  record+0x36  rows * columns vertices, each 3 little-endian float64 values
+
+For each grid cell, the converter emits two triangles:
+
+(r,c), (r+1,c), (r+1,c+1)
+(r,c), (r+1,c+1), (r,c+1)
+
+Every generated index is derived from the validated row/column counts.
+
+Byte accounting proven for converted samples
+--------------------------------------------
+
+The converter accepts 177 of 200 sample0 files.
+
+For every accepted ROBJ chunk, summing the validated records and property
+lengths lands exactly on the ROBJ chunk end.  For every accepted FORM/REAL
+file, chunk parsing lands exactly on the FORM end and the file end.  Polygon
+face indices and generated grid/parametric indices are range-checked before GLB
+output.
+
+The accepted REAL/INFO/APPR/POLY files contain:
+
+8 VERT chunks
+804 vertices
+1243 source triangle records
+19 source quad records, triangulated to 38 GLB triangles
+0 face-index overruns
+0 unexplained internal chunk bytes
+
+The accepted legacy `object ` set contains 22 files.  It includes 78-byte
+group/helper records, fixed-layout mesh records whose total sizes are validated
+from the point-array base, point_count, and index_word_count fields, and the
+continuation mesh records documented above.  Every accepted legacy stream lands
+exactly at the file end.
+
+Legacy type-1 polygon meshes use their index words as outline declarations.
+When the index stream is `1..N`, all N points are a planar outline.  When the
+stream is `1..N-1, 1, N`, point N is a normal/control point and is accounted but
+not emitted; duplicate coordinate closures split the preceding points into
+outer and inner contours, which are triangulated as a polygon with holes.
+
+Legacy paired side-wall meshes begin with consecutive two-index runs
+`1,2,0,3,4,0,...`.  The following odd/even long runs are guide rails for the
+same surface, not caps.  The converter emits quads between adjacent pairs and
+does not fan-triangulate those guide rails.
+
+Legacy type-12 cylinder/tube records contain two 12-point rings followed by
+pair guide runs.  The converter emits only the side wall quads and orients each
+triangle outward from the validated point cloud so one-sided GLB rendering does
+not hide alternating tube segments.
+
+The accepted WIND/RVRS set contains 35 files.  It includes grid meshes,
+rectangles, boxes, pyramids, triangular prisms, ellipsoids, ellipses,
+cylinders, cones, cutcones, two-ring subtype 23/24 surfaces, point lights,
+camera/helper records, material wrappers, group-reference records, line
+records, and the container/property records listed above.  Every accepted WIND
+ROBJ stream lands exactly on the ROBJ end after summing the validated record
+sizes and property lengths; line/control records that do not represent polygons
+are accounted but not emitted.
+
+The accepted AMIG/RVRS set contains 112 files.  It now includes subtype 29
+polygon records, old subtype 14 polygons, subtype 15 prisms/polyhedra,
+rectangles, boxes, ellipsoids, ellipse disks, cylinders, cones, cutcones,
+subtype 23/24 two-ring surfaces, grids, lights, mapped material bindings,
+group references, line/control/skeleton records, and the AMIG property records
+listed above.  AMGD RVRS payloads in the samples use the same big-endian record
+layout and are treated as AMIG.
+
+AMIG subtype 14 old-polygon records are triangulated as planar outlines rather
+than triangle fans.  Coordinate-closed repeated vertices split a single record
+into multiple contours, allowing glyph counters such as the hole in `1064/9` to
+remain open.  Concave outlines are triangulated by ear clipping after projection
+onto their dominant plane.
+
+AMIG subtype 26 records with row count 2 are glyph side-wall strips in the
+sample set.  Their vertices are stored as adjacent front/back pairs
+`0,1`, `2,3`, ... rather than row-major grids.  The converter emits quads
+between adjacent pairs for these records; higher row-count subtype 26 records
+remain row-major grids.
+
+AMIG subtype 20 records are emitted as true cones only when the first ring axes
+are zero.  When the first ring has non-zero axes, the record stores two rings
+and is emitted as a capped frustum/cylinder.  This is required for rounded glyph
+terminals and umlaut dots in files such as `1064/Ä`.
+
+AMIG rectangle records in bare object files without RMTR material tables use the
+record's own normal vector to choose one-sided GLB winding.  RMTR scene/project
+files keep the previously validated scene-facing rectangle winding so backdrop
+planes do not hide the model.
+
+Rejected sample families
+------------------------
+
+The remaining 23 sample files are rejected deliberately:
+
+10 files are not converted FORM/REAL containers.  These include material or
+animation files rather than standalone polygon models.
+
+Only one remaining WIND/RVRS sample in the current pass is fully parsed but not
+converted: `30110/DIRECT2.PR` contains line/control records and no supported
+polygonal mesh to emit.  Four other WIND files contain zero or multiple ROBJ
+chunks and are treated as scene/setup/material files rather than single model
+objects.
+
+Several scene/setup/material-only files contain chunk layouts involving RSET,
+RANI, RSCR, RWIN, RATT, RMTR, RCOL, and RGRI but no single supported model ROBJ
+to emit.
+
+No remaining sample is skipped because of an unsupported AMIG ROBJ subtype.  The
+remaining AMIG/RVRS skips are scene/setup/material-only chunk layouts or an
+ROBJ with no polygon mesh to emit.
+
+GLB conversion notes
+--------------------
+
+real3D.py writes glTF 2.0 binary GLB files.  Each Real 3D polygon record becomes
+one GLB primitive with:
+
+POSITION accessor: float32 x/y/z positions converted from the source float64
+indices accessor: uint32 triangles copied from source face indices
+material: baseColorFactor from the polygon record RGB bytes
+material overrides: AMIG SMAT bindings use RMTR/RCOL colors when present
+face culling: normal glTF one-sided rendering
+
+The converter writes through a temporary file and removes any target output on
+failure, so unsupported inputs fail fast and leave no partial GLB.

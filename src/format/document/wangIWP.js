@@ -5,7 +5,6 @@ export class wangIWP extends Format
 	name        = "WANG Integrated Word Processor";
 	website     = "https://archive.org/details/wangeditor";
 	ext         = [".doc"];
-	unsupported = true;
+	unsupported = true;	// no known magic, DOS based word processor
 	converters  = ["softwareBridge[format:wangIWP]", "wordForWord"];
-	notes       = "DOS based word processor. Haven't investigated it for magic.";
 }

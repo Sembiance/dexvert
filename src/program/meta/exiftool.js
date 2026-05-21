@@ -10,7 +10,9 @@ export class exiftool extends Program
 	post      = r =>
 	{
 		const meta = xu.parseJSON(r.stdout?.trim() || "[{}]")?.[0] || {};
-		for(const key of ["SourceFile", "ExifToolVersion", "FileName", "Directory", "FileSize", "FileModifyDate", "FileAccessDate", "FileInodeChangeDate", "FilePermissions", "TimeStamp", "FileTypeExtension", "MIMEType", "Warning"])
+		if(meta.Error==="File format error")
+			return;
+		for(const key of ["SourceFile", "ExifToolVersion", "FileName", "Directory", "FileSize", "FileModifyDate", "FileAccessDate", "FileInodeChangeDate", "FilePermissions", "TimeStamp", "FileTypeExtension", "MIMEType", "Warning", "Error"])
 			delete meta[key];
 		Object.assign(r.meta, meta);
 	};

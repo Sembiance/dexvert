@@ -6,6 +6,5 @@ export class valveModelVertices extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data";
 	ext         = [".vvd"];
 	magic       = ["Valve Studio Model Vertex Data", "Format: VVD"];
-	unsupported = true;
-	notes       = "I think this is only useful when paired with some aux files, but I didn't really investigate any further.";
+	unsupported = true;	// 25,000 unique files on discmaster but I think it's only useful with other files and doesn't contain actual polygon data, just vertex data and thus no textures/etc
 }

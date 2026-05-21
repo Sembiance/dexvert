@@ -46,6 +46,16 @@ export class fc_scan extends Program
 				delete meta[key];
 		});
 
+		if(meta.family?.toLowerCase()==="in")
+		{
+			delete meta.family;
+			for(const key of ["fullName", "postscriptName"])
+			{
+				if(meta[key] && (meta[key].toLowerCase()==="in" || meta[key].toLowerCase().startsWith("in ")))
+					delete meta[key];
+			}
+		}
+
 		Object.assign(r.meta, meta);
 	};
 	renameOut = false;

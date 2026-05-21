@@ -1,0 +1,539 @@
+================================================================================
+Granny 3D Model (.GR2 / .gr2) - Binary File Format Specification
+================================================================================
+
+Vibe coded by Claude. This document describes every byte of the variant
+of the Granny2 (RAD Game Tools) file format actually present in the
+sample0/ corpus (250 files, 82 sub-directories, ~80 MB total). All
+observations were derived by reading the raw bytes of those samples and
+cross-checking offsets, sizes, counts, alignment, and pointer fixup
+targets against the structural invariants described below. No heuristic
+guesses are used by the converter; any byte that is not accounted for by
+the structures here will cause it to fail fast.
+
+Conventions used throughout this document:
+  - All multi-byte integers and floats are LITTLE ENDIAN.
+  - "uint32" = 4-byte unsigned, "int32" = 4-byte signed, "float" = IEEE-754
+    32-bit, "u8/i8/u16/i16" sized accordingly.
+  - "offset" without qualification means file-absolute byte offset.
+  - "(sec, off)" tuple = "section index, offset relative to the start of
+    that section's DECOMPRESSED data" - this is the address space all
+    cross-references use internally.
+
+--------------------------------------------------------------------------------
+1. File layout overview
+--------------------------------------------------------------------------------
+
+A Granny file consists of three contiguous regions:
+
+  [ MAGIC + outer header        16 + 16 bytes  ]
+  [ GrnFileHeader (version 6)        56 bytes  ]
+  [ SectionTable             N_sections * 44   ]   (N from header)
+  [ Per-section data, fixup arrays, payload ...]
+
+All offsets, counts and sizes in the file are self-describing. The total
+file size is recorded redundantly in the GrnFileHeader.TotalSize field
+and matches len(file) exactly for every sample.
+
+Every sample in sample0/ uses:
+  - Version 6 GrnFileHeader
+  - 32-bit pointer width (intaddr = uint32)
+  - The same magic identifying the 32-bit little-endian variant
+  - HeaderFormat = 0 (no outer header compression)
+
+--------------------------------------------------------------------------------
+2. Magic (offset 0, length 16)
+--------------------------------------------------------------------------------
+
+The first 16 bytes are always:
+
+  B8 67 B0 CA  F8 6D B1 0F  84 72 8C 7E  5E 19 00 1E
+
+This is RAD's published "Little-Endian 32-bit pointer Granny2" magic.
+Files whose first 16 bytes differ are not Granny GR2 files and the
+converter rejects them outright.
+
+--------------------------------------------------------------------------------
+3. Outer header (offset 16, length 16)
+--------------------------------------------------------------------------------
+
+  +16  uint32  HeaderSize        Total bytes of everything before the first
+                                 section's data, i.e.
+                                     16 (magic)
+                                   + 16 (this outer header)
+                                   + 56 (GrnFileHeader)
+                                   +  N_sections * 44 (SectionTable)
+                                 = 88 + 44 * N_sections.
+
+                                 Observed in samples:
+                                     N=1 -> 132 (20 samples)
+                                     N=2 -> 176 (1 sample)
+                                     N=6 -> 352 (44 samples)
+                                     N=8 -> 440 (185 samples)
+
+  +20  uint32  HeaderFormat      Compression applied to the GrnFileHeader
+                                 and section-table region. ALWAYS 0 in
+                                 every observed sample. Non-zero values
+                                 would mean the entire header is itself
+                                 compressed - we reject any non-zero value.
+
+  +24  uint64  Reserved          Always zero in every observed sample. We
+                                 reject non-zero.
+
+--------------------------------------------------------------------------------
+4. GrnFileHeader (offset 32, length 56)
+--------------------------------------------------------------------------------
+
+Fourteen consecutive uint32 fields:
+
+  +32  uint32  Version                 Format version. Always 6 in samples.
+  +36  uint32  TotalSize               Equals filesize. Always matches.
+  +40  uint32  CRC32                   CRC32 of all bytes after this header.
+                                       Not validated by the converter.
+  +44  uint32  SectionArrayOffset      Offset from the start of THIS
+                                       GrnFileHeader (i.e. from file offset
+                                       32) at which the section table
+                                       begins. Always 56 in samples, so the
+                                       section table begins at file offset
+                                       32 + 56 = 88.
+  +48  uint32  SectionArrayCount       N_sections. Observed: 1, 2, 6 or 8.
+  +52  uint32  RootObjectTypeDef.Sec   Section index of the root object's
+                                       type-definition.
+  +56  uint32  RootObjectTypeDef.Off   Byte offset within that section.
+  +60  uint32  RootObject.Sec          Section index where the root object
+                                       (a GrnFileInfo struct) starts.
+  +64  uint32  RootObject.Off          Byte offset within that section.
+                                       Always 0 in samples.
+  +68  uint32  TypeTag                 Versioning tag for the root type
+                                       definition. Observed: 0x80000010
+                                       (most), 0x80000013, 0x8000000f.
+  +72  uint32  ExtraTag[0]             Reserved tags. All four are zero in
+  +76  uint32  ExtraTag[1]             every sample.
+  +80  uint32  ExtraTag[2]
+  +84  uint32  ExtraTag[3]
+
+If RootObjectTypeDef points at a section whose decompressed data is empty
+or contains a single Type=0 (End) entry, the file has no readable struct
+graph (a "stub" file - common for stripped animation data). The converter
+reports such files as having no convertible content.
+
+--------------------------------------------------------------------------------
+5. Section table (offset 88, length 44 * N_sections)
+--------------------------------------------------------------------------------
+
+A flat array of N_sections SectionEntry records. Each entry is 44 bytes
+(eleven uint32 fields):
+
+  +0   uint32 Compression       0 = none, 1 = "Oodle0" (older), 2 =
+                                 "Oodle1" (newer). 0/1/2 are the only
+                                 values seen in the corpus.
+  +4   uint32 DataOffset        File-absolute offset of the (possibly
+                                 compressed) section payload.
+  +8   uint32 DataSize          Byte length on disk (compressed size).
+  +12  uint32 ExpandedSize      Byte length after decompression. Equals
+                                 DataSize when Compression == 0.
+  +16  uint32 Alignment         Alignment of the decompressed data
+                                 (1, 4 or 32 in samples). Informational.
+  +20  uint32 First16Offset     If the section's decompressed payload
+                                 contains separate sub-regions of 32-bit,
+                                 16-bit and 8-bit data (used both for the
+                                 Oodle1 three-pass codec and for cross-
+                                 endian byte swapping), this is the offset
+                                 where the 16-bit region begins. For
+                                 sections with no such division it equals
+                                 ExpandedSize ("everything is 32-bit").
+  +24  uint32 First8Offset      Offset where the 8-bit region begins.
+                                 First16Offset <= First8Offset <=
+                                 ExpandedSize.
+  +28  uint32 PointerFixupArr   File offset of the section's PointerFixup
+                                 array (12 bytes per entry).
+  +32  uint32 PointerFixupCnt   Number of PointerFixup entries.
+  +36  uint32 MarshalFixupArr   File offset of the section's
+                                 MarshallingFixup array (16 bytes/entry).
+  +40  uint32 MarshalFixupCnt   Number of MarshallingFixup entries.
+
+Empty sections in the corpus carry DataSize = ExpandedSize = 0 and the
+"offset" fields point to a sentinel (typically the start of the next
+section's data); they contribute zero bytes and zero fixups.
+
+--------------------------------------------------------------------------------
+6. PointerFixup arrays (per section)
+--------------------------------------------------------------------------------
+
+Located at SectionEntry.PointerFixupArr in the file. Each entry is 12
+bytes:
+
+  +0   uint32 FromOffset       Offset (within THIS section's decompressed
+                               data) at which a 4-byte pointer slot lives.
+  +4   uint32 TargetSection    Section index the pointer points into.
+  +8   uint32 TargetOffset     Offset (within TargetSection's decompressed
+                               data) where the pointed-to data starts.
+
+Semantics: when the file is loaded, the four bytes at
+(this_section, FromOffset) are replaced with the resolved memory address
+of (TargetSection, TargetOffset). The on-disk content of those four
+bytes is meaningless (typically the file's compile-time pointer value).
+
+The converter does NOT mutate the section data; it keeps a dictionary
+{(sec, off) -> (target_sec, target_off)} and consults it whenever it
+walks across a pointer field.
+
+--------------------------------------------------------------------------------
+7. MarshallingFixup arrays (per section)
+--------------------------------------------------------------------------------
+
+Located at SectionEntry.MarshalFixupArr. Each entry is 16 bytes:
+
+  +0   uint32 Count            Number of array elements to byte-swap.
+  +4   uint32 FromOffset       Offset of the first element within this
+                               section's decompressed data.
+  +8   uint32 TypeSection      Section of the array element's type def.
+  +12  uint32 TypeOffset       Offset of the type def.
+
+These describe runs of typed data that need byte-swapping when the
+machine's endianness differs from the file's. Since our samples are all
+little-endian-32 and we run on a little-endian host, no swap is needed.
+The converter records every fixup but only uses Count*TypeSize*offset
+bookkeeping to confirm bytes are accounted for.
+
+Observed counts: 0 in 248 of 250 samples; 6 in cherry_lod1.gr2 and 2 in
+iraqi_bystander3_LOD3.gr2 (both attached to per-vertex inner-array
+sections of typed primitives).
+
+--------------------------------------------------------------------------------
+8. Section payload (per section)
+--------------------------------------------------------------------------------
+
+The section's compressed bytes start at SectionEntry.DataOffset and run
+for SectionEntry.DataSize bytes.
+
+  - Compression == 0 (None):
+        The payload is exactly the decompressed data; DataSize must
+        equal ExpandedSize.
+
+  - Compression == 2 (Granny "Oodle1", arithmetic-coded LZ):
+        The payload begins with three 12-byte parameter blocks (36
+        bytes total) followed by an arithmetic-coded bit-stream. Each
+        parameter block packs bit-fields:
+
+            bits  0- 8 : decoded_value_max  (literal alphabet size)
+            bits  9-31 : backref_value_max  (max backref distance + 1)
+            bits 32-40 : decoded_count      (literal seed count)
+            bits 41-50 : padding (unused)
+            bits 51-63 : highbit_count      (offset window seed count)
+            bytes 8-11 : sizes_count[4]     (length-window seed counts)
+
+        Decompression proceeds in three passes whose boundaries are
+        First16Offset and First8Offset; each pass initializes a new
+        dictionary state but the arithmetic-decoder bit position is
+        carried over.
+
+        Algorithm details (implemented faithfully in granny3DModel.py):
+
+          * Decoder maintains numer/denom (range coder) and ingests
+            8 bits at a time straddling byte boundaries:
+                LSB of stream[k] becomes bit 7 of the next ingest,
+                bits 1-7 of stream[k+1] become bits 0-6.
+          * Each WeighWindow is an adaptive alphabet with up to N
+            symbols, weighted by frequency, with periodic
+            renormalization (rebuild_ranges) and decay (rebuild_weights)
+            triggered when totals cross thresh_range_rebuild /
+            thresh_weight_rebuild.
+          * Each step emits either a literal byte (size 0 in the
+            current size window) - read via the 4 "decoded_windows"
+            indexed by (output_position & 3) - or a backref of the
+            given length, with offset assembled from three sub-windows
+            (lowbit, highbit, midbit[highbit]) using the formula
+                  offset = (highbit << 10) + (midbit << 2) + lowbit + 1.
+          * Backref length is RepeatLengthTable[code] where code <= 60
+            yields code+1 and codes 61..64 yield 128/192/256/512.
+
+  - Compression == 1 (Granny "Oodle0", older codec):
+        RAD deprecated this format and never published its specification.
+        No clean-room reference decoder exists. The converter delegates
+        these sections to the real granny2.dll: a small mingw-w64
+        wrapper (granny2/wrap.exe) calls the DLL's exported
+        GrannyDecompressData under wine, one section at a time. Any
+        Granny2 DLL whose GrannyDecompressData export is the @32 form
+        (8 arguments: Format, ByteReversed, CompSize, CompPtr, Stop0,
+        Stop1, DecSize, DecPtr) recognises Format=1 and handles both
+        Oodle0 and Oodle1.
+
+        The default DLL shipped here is granny2/granny2-2004-11.dll
+        (timestamped 2004-11-11 - the earliest @32 build).
+
+After decompression, the per-section data is treated as a flat byte
+array indexable by the (sec, off) addresses recorded in fixups and root
+references.
+
+--------------------------------------------------------------------------------
+9. Per-section semantic role
+--------------------------------------------------------------------------------
+
+Granny doesn't hard-wire section indices to a meaning, but every sample
+in this corpus follows the convention:
+
+  Section 0 : "Main" - regular structured data, all strings (the FileInfo
+              struct itself plus most named string constants live here).
+  Section 1 : "RigidVertex" - rigid-mesh vertex blobs (often empty).
+  Section 2 : "RigidIndex" - rigid-mesh index buffers (often empty).
+  Section 3 : "DeformableVertex" - skinned vertex data.
+  Section 4 : "DeformableIndex" - skinned mesh index buffers.
+  Section 5 : "TextureData" - embedded pixel data (always empty in this
+              corpus - all textures are external references).
+  Section 6 : "Discardable" - the TYPE TREE (entries describing structs)
+              plus per-bone inverse-bind matrices.
+  Section 7 : "Unloaded" - never populated in the corpus.
+
+The converter reads the actual data from wherever the type tree directs
+it; nothing depends on section indices having particular meanings.
+
+--------------------------------------------------------------------------------
+10. Type-definition entries (32 bytes each)
+--------------------------------------------------------------------------------
+
+A type-definition is an array of GrnDataTypeDefinition entries
+terminated by an entry whose first uint32 (Type) is zero. Each entry is
+exactly 32 bytes:
+
+  +0   uint32  Type            One of:
+                                  0  End (terminator)
+                                  1  Inline       (embedded struct)
+                                  2  Reference    (T*)
+                                  3  ReferenceToArray (uint32 N + T*)
+                                  4  ArrayOfReferences (uint32 N + T**)
+                                  5  VariantReference (typedef* + T*)
+                                  6  *removed - never seen*
+                                  7  ReferenceToVariantArray
+                                        (typedef* + uint32 N + T*)
+                                  8  String       (char*)
+                                  9  Transform    (68-byte rigid xform)
+                                 10  Real32       (float)
+                                 11  Int8
+                                 12  UInt8
+                                 13  BinormalInt8 (signed normalized i8)
+                                 14  NormalUInt8  (unsigned normalized u8)
+                                 15  Int16
+                                 16  UInt16
+                                 17  BinormalInt16
+                                 18  NormalUInt16
+                                 19  Int32
+                                 20  UInt32
+                                 21  Real16  (IEEE half float)
+                                 22  EmptyReference  (always null pointer)
+  +4   uint32  Name*           Pointer to a null-terminated ASCII name.
+                               Gets replaced via a PointerFixup.
+  +8   uint32  SubType*        Pointer to the FIRST entry of the
+                               child type-definition array (for Inline /
+                               Reference / *ToArray / *OfReferences /
+                               VariantReference / *ToVariantArray). NULL
+                               for leaf types.
+  +12  uint32  ArrayWidth      If > 0, the member is a FIXED-LENGTH array
+                               of that many elements (e.g. Position
+                               float[3] is Type=10, ArrayWidth=3).
+  +16  uint32  Extra[0]        Type-specific tag bytes (e.g., enum used
+  +20  uint32  Extra[1]        by RAD's annotation system). Not required
+  +24  uint32  Extra[2]        for any sample we convert.
+  +28  uint32  Ignored         Always zero in samples.
+
+Member sizes (32-bit pointers):
+  End:0  Inline:0(struct)  Ref:4  RefToArr:8  ArrOfRefs:8
+  VarRef:8  RefToVarArr:12  String:4  Transform:68
+  Real32:4  Int8/UInt8/BNI8/NUI8:1  Int16/UInt16/BNI16/NUI16:2
+  Int32:4  UInt32:4  Real16:2  EmptyRef:4
+
+Member alignments (used when laying out the parent struct):
+  All composite/reference/string/transform/32-bit types align to 4.
+  16-bit types align to 2. 8-bit types align to 1.
+
+A struct's total size is computed by walking its member array and
+accumulating each member's (size * max(1,ArrayWidth)) after padding the
+current offset up to the member's alignment, then rounding up the final
+offset to the struct's max alignment.
+
+--------------------------------------------------------------------------------
+11. Root object: GrnFileInfo
+--------------------------------------------------------------------------------
+
+In samples that carry content, the root object is the well-known
+GrnFileInfo struct (referenced by RootObject and described by
+RootObjectTypeDef). Members observed in this corpus:
+
+  Reference                _GrannyFileStringTable*  (Granny-internal)
+  Reference                ArtToolInfo*
+  Reference                ExporterInfo*
+  String                   FromFileName
+  ArrayOfReferences        Textures
+  ArrayOfReferences        Materials
+  ArrayOfReferences        Skeletons
+  ArrayOfReferences        VertexDatas
+  ArrayOfReferences        TriTopologies
+  ArrayOfReferences        Meshes
+  ArrayOfReferences        Models
+  ArrayOfReferences        TrackGroups
+  ArrayOfReferences        Animations
+  [Reference               ExtendedData]   (present in some files)
+
+  ArtToolInfo:
+    String   FromArtToolName
+    Int32    ArtToolMajorRevision
+    Int32    ArtToolMinorRevision
+    Real32   UnitsPerMeter
+    Real32[3] Origin
+    Real32[3] RightVector
+    Real32[3] UpVector
+    Real32[3] BackVector
+
+  These three basis vectors are how the converter knows whether the
+  file is Z-up (3DS Max convention) or Y-up (Maya convention) and what
+  unit the model is authored in. We project every vertex onto
+  (Right, Up, Back) to express it in glTF's standard frame (X-right,
+  Y-up, +Z toward the viewer).
+
+--------------------------------------------------------------------------------
+12. Skeleton / VertexData / TriTopology / Mesh / Model
+--------------------------------------------------------------------------------
+
+The corpus contains all of these types, and the converter walks them
+generically through the type tree. The on-disk layout is whatever the
+file's type tree says it is; field NAMES are stable and the converter
+keys off them.
+
+  Skeleton:
+    String                 Name
+    ReferenceToArray       Bones  (each Bone has:)
+        String   Name
+        Int32    ParentIndex          (-1 for root)
+        Transform LocalTransform      (17 floats: flags + 3 + 4 + 9)
+        Real32[16] InverseWorld4x4    (bind-pose inverse, column-major)
+        Real32   LODError
+        Reference LightInfo*          (optional)
+        Reference CameraInfo*         (optional)
+        Reference ExtendedData*       (optional)
+
+  VertexData:
+    ReferenceToVariantArray Vertices  (array of inline structs whose
+                                       member set is what we infer the
+                                       glTF vertex attribute layout
+                                       from: Position, Normal, Tangent,
+                                       Binormal, TextureCoordinates[N],
+                                       BoneIndices, BoneWeights,
+                                       DiffuseColor, ...)
+    ReferenceToArray        VertexComponentNames
+    ArrayOfReferences       VertexAnnotationSets
+
+  TriTopology:
+    ReferenceToArray  Groups  (MaterialIndex, TriFirst, TriCount)
+    ReferenceToArray  Indices    (int32 per triangle vertex)
+    ReferenceToArray  Indices16  (int16 alternative)
+    ReferenceToArray  VertexToVertexMap
+    ReferenceToArray  VertexToTriangleMap
+    ReferenceToArray  SideToNeighborMap
+    ReferenceToArray  BonesForTriangle
+    ReferenceToArray  TriangleToBoneIndices
+    ArrayOfReferences TriAnnotationSets
+
+  Mesh:
+    String                 Name
+    Reference              PrimaryVertexData -> VertexData
+    ArrayOfReferences      MorphTargets
+    Reference              PrimaryTopology   -> TriTopology
+    ArrayOfReferences      MaterialBindings
+    ReferenceToArray       BoneBindings
+    Reference              ExtendedData
+
+  Model:
+    String                 Name
+    Reference              Skeleton -> Skeleton
+    Transform              InitialPlacement
+    ArrayOfReferences      MeshBindings (each binds a Mesh to a Skeleton)
+
+Each "ArrayOfReferences" of size N is laid out as
+    uint32 count    pointer to N consecutive 4-byte pointers
+and each of those N pointers undergoes its own PointerFixup, so the
+converter de-references each independently.
+
+Indices arrays come in two forms (Indices = int32, Indices16 = int16)
+and each is internally an array of single-member structs whose only
+field is named "Int32" or "Int16" - so consumers always unwrap to a
+flat list of integers.
+
+--------------------------------------------------------------------------------
+13. Byte-accounting summary
+--------------------------------------------------------------------------------
+
+Every byte in a Granny GR2 file is reachable from one of:
+  - The 16-byte magic.
+  - The 16-byte outer header.
+  - The 56-byte GrnFileHeader.
+  - The 44 * N_sections section table.
+  - Each section's PointerFixupCnt * 12 bytes of pointer fixups, located
+    at PointerFixupArr.
+  - Each section's MarshalFixupCnt * 16 bytes of marshalling fixups,
+    located at MarshalFixupArr.
+  - Each section's DataSize bytes of (possibly compressed) payload at
+    DataOffset, which expands to ExpandedSize bytes of typed data.
+
+The converter constructs the implied set of (start, end) byte ranges
+from the header and verifies that they cover [0, TotalSize) without
+overlapping (modulo empty sections that share a sentinel offset). Any
+gap or overlap is treated as a structural error.
+
+--------------------------------------------------------------------------------
+14. What is NOT supported by the converter
+--------------------------------------------------------------------------------
+
+  * (Resolved.) Oodle0-compressed (Format=1) sections used to be
+    unsupported because no public Oodle0 decoder exists. The converter
+    now delegates them to the real granny2.dll under wine, so any
+    file containing only Format 0/1/2 sections converts correctly.
+
+  * Compression formats 3 ("Bitknit1") and 4 ("Bitknit2"). None of the
+    samples in this corpus use them; the converter rejects them with a
+    clear error.
+
+  * Files claiming a version other than 6 or a HeaderFormat other than 0.
+    Such files would carry a different GrnFileHeader layout or a
+    pre-compressed outer header; the converter does not attempt either.
+
+  * 64-bit Granny files (signaled by a different magic). The magic check
+    rejects them on entry.
+
+  * Granny animation tracks. The converter ignores TrackGroups and
+    Animations - those describe time-sampled bone curves and have no
+    glTF static-mesh counterpart.
+
+  * Morph targets are not exported.
+
+  * (Resolved.) Granny Materials, Textures, and per-TriTopology.Group
+    primitive splitting ARE now exported into glTF:
+        - One glTF Material per unique Granny Material (deduped by Name
+          + texture path + sub-material structure).
+        - baseColorFactor derived from ExtendedData diffuse-color triples
+          (Maya: diffuseColorR/G/B, defaultColorR/G/B; 3DS Max: "Diffuse
+          Color R/G/B", etc.).
+        - baseColorTexture pointing at the Granny Texture's FromFileName
+          basename (loadable if you place the .dds/.tga next to the GLB).
+        - doubleSided flag from ExtendedData "Two-sided".
+        - Each Mesh.PrimaryTopology.Group becomes a separate glTF
+          primitive carrying its own indices and material assignment
+          (resolved through Mesh.MaterialBindings[group.MaterialIndex]).
+        - Per-vertex DiffuseColor is exported as COLOR_0.
+
+  * Embedded texture pixel data (Texture.Images[*].MIPLevels[*].Pixels):
+        - If Encoding == 0 (raw RGBA with a recognised Layout), the
+          pixels are decoded to an RGBA bitmap and embedded as a
+          base64 data: URI PNG inside the GLB.
+        - If Encoding == 3 (Bink-compressed RAD textures, the only
+          embedded form seen in this corpus, e.g. soldat_england's two
+          DXT-encoded textures), the pixels are NOT embedded. The
+          glTF Image's uri falls back to the file basename and the name
+          is marked "(Bink-compressed; not embedded)". Decoding Bink
+          textures requires GrannyBinkDecompressTexture from granny2.dll;
+          the SDK's signature for that function isn't publicly
+          documented and a naive call attempt produced an access
+          violation, so we left it disabled.
+
+================================================================================
+End of specification.
+================================================================================

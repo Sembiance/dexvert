@@ -1,0 +1,117 @@
+Amapi 3D Model Format Specification
+====================================
+
+This document describes the binary file format of Amapi 3D Model files (.a3d, .x).
+
+1. File Header
+--------------
+All Amapi 3D Model files start with a fixed 8-byte magic header:
+  `AMAP\x12\x03\x01\x01` (or generally matching prefix `AMAP`)
+
+If the file does not start with this magic sequence, it is not a valid Amapi 3D Model file.
+
+2. Chunk-Based Architecture
+---------------------------
+Following the file header, the file is structured as a sequence of nested chunks.
+Each chunk contains:
+  - Name (8 bytes): ASCII string, padded with spaces or nulls (e.g. `BLOKSHAP`, `blokgeom`).
+  - Length (4 bytes): Big-endian unsigned 32-bit integer, representing the size of the payload.
+  - Payload (Length bytes): The binary data of the chunk.
+
+3. Container Chunks & Nesting
+------------------------------
+Certain chunks act as containers for other chunks:
+  - `BLOKSHAP`: A high-level container representing a 3D object/shape. Contains sub-chunks directly.
+  - `blokctrl`: Another container chunk type, parsed recursively in the same manner as `BLOKSHAP`.
+  - `blokgrup`: A container representing a group of objects.
+    - The first 4 bytes of its payload is a big-endian 32-bit integer representing the child count (number of child sequences).
+    - Following the child count, the sub-chunks of the group are parsed recursively.
+  - `blokinfo`: A metadata container. Contains sub-chunks sequentially.
+
+4. Sequence Terminators
+-----------------------
+Within containers like `blokgrup` that contain sequences of multiple objects, the end of each object/block sequence is terminated by a special 4-byte chunk:
+  `eof ` (hex: `65 6f 66 20`)
+
+This terminator has NO length field and NO payload. It is simply the 4-byte sequence `b'eof '`. When encountered, the parser marks the end of the current block/object sequence and resumes parsing the next sequence or parent chunk immediately after the 4 bytes.
+
+5. Chunk Registry
+-----------------
+- `BLOKMEAS`: Measurement metadata (typically 80-92 bytes).
+- `BLOKORIG`: Origin settings and coordinates (typically 16-28 bytes).
+- `BLOKSHAP`: High-level container for a 3D shape.
+- `BLOKTSWP`: Sweep/generative path parameters.
+- `BLOKUNIT`: Unit of measurement configuration (typically 12-24 bytes).
+- `BLOKVIEW`: Viewport settings, camera orientation, grid settings (typically 24-36 bytes).
+- `blokcame`: Camera settings.
+- `blokcolr`: Color chunk. First 3 bytes of the payload represent RGB (0-255).
+- `blokctrl`: Sub-shape/control container chunk.
+- `blokgeom`: Standard polygon geometry chunk.
+- `blokgrup`: Logical group container chunk.
+- `blokinfo`: Metadata block (layer names, editing history, etc.).
+- `blokmatx`: Matrix chunk (60-72 bytes) containing translation and rotation axes.
+- `blokname`: Object name chunk. Payload is a null-terminated ASCII string (typically 20-32 bytes).
+- `bloknurb`: NURBS parameters (spline definitions, control points, and weights).
+- `blokocce`, `blokoccf`, `blokoccv`: OpenCASCADE geometry representation chunks (edge, face, vertex).
+- `blokref`: Reference/instancing chunk.
+- `bloksmoo`: Smoothing/subdivision settings.
+- `blokspot`: Spot light configuration.
+- `bloktmpi`: Evaluated geometry chunk containing high-fidelity world-space coordinates.
+- `eof`: Block terminator marker.
+
+6. Geometry Chunk (blokgeom)
+----------------------------
+The `blokgeom` chunk contains the 3D polygon mesh. It uses a mix of big-endian headers and big-endian data arrays:
+
+A. Header (36 bytes):
+   Consists of 9 fields of 4-byte big-endian integers. Most count values are scaled by 256 (shifted left by 8 bits):
+     - Field 0: Flags/Version (typically `0x00000100` = 256)
+     - Field 1: `v_count` * 256 (Vertex count, divide by 256 or shift right by 8 to get actual count)
+     - Field 2: `e_count` * 256 (Edge count, shift right by 8)
+     - Field 3: `f_count` * 256 (Face count, shift right by 8)
+     - Field 4: `i_count` * 256 (Face list element index count, shift right by 8)
+     - Fields 5, 6, 7: Reserved / zero.
+     - Field 8: Metadata value.
+
+B. Alignment Padding (3 bytes):
+   Immediately following the 36-byte header, there is a fixed 3-byte padding (typically `0x000000`), meaning the actual coordinate data arrays are shifted by 3 bytes to offset 39. This shift of 3 bytes carries through the entire rest of the payload, aligning all subsequent arrays to start 3 bytes after a multiple of 4.
+
+C. Vertex Array (v_count * 16 bytes):
+   Starts at offset 39 of the payload. Each vertex is a 16-byte structure:
+     - `X` coordinate (4-byte big-endian float)
+     - `Y` coordinate (4-byte big-endian float)
+     - `Z` coordinate (4-byte big-endian float)
+     - Attribute/Padding (4-byte big-endian value)
+
+D. Edge Array (e_count * 8 bytes):
+   Starts immediately after the Vertex Array at offset `39 + v_count * 16`. Each edge consists of two 4-byte big-endian integers representing the connected vertex indices.
+
+E. Face Array:
+   Starts immediately after the Edge Array at offset `39 + v_count * 16 + e_count * 8`.
+   It consists of sequential face descriptions (no additional face header is present):
+     - Each face description starts with a 4-byte big-endian integer representing the vertex count of this face (`vcount`).
+     - Followed by `vcount` elements, each being a 4-byte big-endian integer containing the 0-based vertex index (`v_idx`).
+
+7. Evaluated Geometry Chunk (bloktmpi)
+--------------------------------------
+Some files (specifically NURBS and generated shape representations) store their final evaluated geometry in the `bloktmpi` chunk instead of `blokgeom`.
+
+A. Header (4 bytes):
+   - A 4-byte big-endian integer representing the vertex count (`v_count`).
+
+B. Vertex Array (v_count * 12 bytes):
+   - Starts at offset 4 of the payload.
+   - Each vertex consists of three 4-byte big-endian floats (`X`, `Y`, `Z`) representing the world-space coordinates directly.
+
+C. Face Array:
+   - Starts immediately after the Vertex Array.
+   - First 4 bytes: `f_count` (big-endian 32-bit integer, representing the number of faces).
+   - Next 4 bytes: `idx_count` (big-endian 32-bit integer, representing the total index count).
+   - Followed by `f_count` face descriptions:
+     - Each face description starts with a 4-byte big-endian integer representing the vertex count of this face (`vcount`).
+     - Followed by `vcount` elements of 4-byte big-endian integers representing the 0-based vertex indices.
+
+8. Geometry Triangulation & Rendering Best Practices
+----------------------------------------------------
+- **Ear Clipping Triangulation**: Polygon faces with more than 4 vertices can be non-convex (e.g. annulus/rings). Standard fan triangulation produces self-intersecting or overlapping geometry. To resolve this, project the 3D polygon onto its best-fit 2D plane (using the coordinate plane perpendicular to the largest component of the polygon's Newell normal) and perform Ear Clipping triangulation.
+- **Double-Sided Rendering**: Legacy CAD tools render both front and back faces of geometry. To prevent holes due to differing winding orders, set `'doubleSided': true` on all materials in the target GLB file.

@@ -11,7 +11,7 @@ const ALLOWED_EXTS =
 export class soxiID extends Program
 {
 	website = "http://sox.sourceforge.net";
-	package = "media-sound/sox";
+	package = "media-sound/sox_ng";
 	bin     = "soxi";
 	loc     = "local";
 	args    = r => ["-t", ALLOWED_EXTS.includes(r.f.input.ext?.toLowerCase()) ? r.inFile() : r.flags.detectTmpFilePath];

@@ -94,9 +94,11 @@ await agentInit(async ({dexid, meta, filePath, content, itemWebDirPath, itemFile
 			// convert messes up some filenames in the output, even though I specify -define filename:literal=true ()
 			if(await fileUtil.exists(tmpImagePath))
 			{
-				const safeOutImagePath = await fileUtil.genTempPath(undefined, ".gif");
+				let safeOutImagePath;
 				if(meta?.animated && ["gif", "webp"].includes(dexid.formatid))
 				{
+					safeOutImagePath = await fileUtil.genTempPath(undefined, ".gif");
+
 					// I could convert .webp animated files to WEBP output, but GIF is small enough at thumbnail size and is more compatible with older browsers, so "just choose GIF" (tm)
 					// Coalesce will ensure all frames are the full size of the image before resizing and then deconstruct will reduce frames down to their minimum size neded which saves on file size
 					({stdout, stderr} = await runUtil.run("magick", [...C.CONVERT_ARGS, tmpImagePath, "-coalesce", "-resize", `${thumbWidth}x${thumbHeight}>`, "-deconstruct", `GIF:${safeOutImagePath}`], RUN_OPTIONS));
@@ -107,6 +109,8 @@ await agentInit(async ({dexid, meta, filePath, content, itemWebDirPath, itemFile
 				}
 				else
 				{
+					safeOutImagePath = await fileUtil.genTempPath(undefined, ".png");
+
 					// font previews are always PNG and we should just crop to top left for a nice big preview
 					if(parentFileData?.dexid?.family==="font")
 						({stdout, stderr} = await runUtil.run("magick", [...C.CONVERT_PNG_ARGS, `${tmpImagePath}[0]`, "-crop", `${thumbWidth}x${thumbHeight}+0+0`, `PNG:${safeOutImagePath}`], RUN_OPTIONS));

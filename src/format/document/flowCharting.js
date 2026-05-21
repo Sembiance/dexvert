@@ -7,5 +7,5 @@ export class flowCharting extends Format
 	ext            = [".cht", ".fcd", ".gfc", ".pdq", ".fc5", ".fcx"];
 	forbidExtMatch = true;
 	magic          = ["Flow Charting 3 Drawing", /^fmt\/14(06|07|08|09|10|11|12)( |$)/];
-	unsupported    = true;
+	unsupported    = true;	// 483 unique files on discmaster, but these cover multiple format types and major versions, so not really worth supporting at this time
 }

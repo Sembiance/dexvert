@@ -9,8 +9,9 @@ export class tim extends Format
 	weakMagic    = ["TIM image", "PSX TIM"];
 	metaProvider = ["image"];
 	converters   = [
-		"convert", "deark[module:tim]", "wuimg[format:tim]", "nconvert[format:tim]", "gameextractor[renameOut][codes:TIM]",
-		"GARbro[types:image:Sony.TimFormat][matchType:magic]", "paintDotNet[matchType:magic]", "noesis[type:image]",
+		"convert", "deark[module:tim]", "wuimg[format:tim][hasExtMatch]", "nconvert[format:tim]", "gameextractor[renameOut][codes:TIM]",
+		"GARbro[types:image:Sony.TimFormat][matchType:magic][hasExtMatch]", "paintDotNet[matchType:magic][hasExtMatch]", "noesis[type:image][matchType:magic][hasExtMatch]",
 		"recoil2png[format:TIM]"
 	];
+	verify = ({meta}) => meta.colorCount>1;
 }

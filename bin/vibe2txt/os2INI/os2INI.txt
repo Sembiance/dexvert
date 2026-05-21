@@ -1,0 +1,111 @@
+Vibe coded by Codex
+
+OS/2 Binary INI/Profile File Format
+
+This document describes the OS/2 binary INI/profile files handled by
+os2INI.py. The description is based on the valid profile files in sample0.
+All multi-byte integers are little-endian.
+
+File Header
+
+Offset  Size  Type    Meaning
+0x00    4     u32     Magic value, always 0xffffffff.
+0x04    4     u32     Header size/version. The supported value is 0x14.
+0x08    4     u32     Stored file size. It must equal the physical byte size.
+0x0c    4     u32     Total byte count of allocatable free payload spans.
+0x10    4     u32     Offset of the first free-list descriptor, or zero.
+
+The first application record starts at offset 0x14. This is also why the
+first application's next-application pointer is physically adjacent to the
+file header.
+
+Application Record
+
+Each application record is 20 bytes:
+
+Offset  Size  Type    Meaning
++0x00   4     u32     Offset of the next application record, or zero.
++0x04   4     u32     Offset of the first key record owned by this application.
++0x08   4     u32     Reserved. The supported files store zero.
++0x0c   2     u16     Application name used length, including trailing NUL.
++0x0e   2     u16     Application name allocated capacity.
++0x10   4     u32     Offset of the application name allocation.
+
+The name allocation must fit inside the file, the used length must be at least
+one byte and no larger than the capacity, and the last used byte must be NUL.
+Bytes after the used length and before the capacity are name slack.
+
+Key Record
+
+Each key record is 24 bytes:
+
+Offset  Size  Type    Meaning
++0x00   4     u32     Offset of the next key record in this application, or zero.
++0x04   4     u32     Reserved. The supported files store zero.
++0x08   2     u16     Key name used length, including trailing NUL.
++0x0a   2     u16     Key name allocated capacity.
++0x0c   4     u32     Offset of the key name allocation.
++0x10   2     u16     Value allocated capacity.
++0x12   2     u16     Value used length.
++0x14   4     u32     Offset of the value allocation.
+
+The value length/capacity order is important: capacity comes first. Some
+sample files have values where the capacity is larger than the used length.
+The converter preserves both the used value bytes and the trailing value slack.
+Values are arbitrary bytes and are not assumed to be strings.
+
+Free List
+
+If the header free-list head is nonzero, it points to a singly-linked list of
+12-byte free descriptors:
+
+Offset  Size  Type    Meaning
++0x00   4     u32     Offset of the next free descriptor, or zero.
++0x04   4     u32     Offset of a free payload span.
++0x08   4     u32     Length of that free payload span.
+
+The sum of all free payload lengths must equal the header total at offset 0x0c.
+The descriptor bytes themselves are allocator metadata, not counted in that
+payload total. Some files also contain small unreferenced slack spans left by
+the allocator around descriptors or old data; these bytes are not active
+application/key data and are emitted separately by the converter.
+
+Validation Rules
+
+The converter fails without writing output unless all of these are true:
+
+1. The magic is 0xffffffff.
+2. The header size is 0x14.
+3. The stored file size equals the physical file size.
+4. Application, key, name, value, and free-list pointers stay inside the file.
+5. Application and key linked lists do not cycle.
+6. Reserved fields in application and key records are zero.
+7. Name used lengths include a trailing NUL byte.
+8. Value used length is no larger than value capacity.
+9. Free-list payload lengths sum to the header free-payload total.
+10. Parsed allocations do not overlap.
+
+Files that only happen to start with ff ff ff ff 14 00 00 00, but do not
+match this structure, are rejected as false positives.
+
+Text Dump Representation
+
+os2INI.py writes a content-focused text dump. Each application is emitted as a
+section, and each key is emitted as a name/value line:
+
+[Application]
+Key = Value
+
+Values that decode cleanly as printable OS/2 code page 850 text are shown as
+text. A single trailing NUL byte on a text value is treated as the string
+terminator and is not printed. Values that contain binary data are shown as
+hex views with offsets, hex bytes, and a code page 850 text preview:
+
+BinaryKey = hexview:
+  00000000  01 02 00 ff                                      |....|
+
+The converter still validates the complete binary file structure before
+writing output, including allocator metadata, free-list data, slack regions,
+and all offsets. Those internal bytes are not printed in the normal text dump
+because the dump is intended for reviewing the actual INI application/key
+content.

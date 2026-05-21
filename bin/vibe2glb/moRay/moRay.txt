@@ -1,0 +1,962 @@
+moRay sample format notes
+
+Status
+
+This reverse engineering pass implements MDLS chunked polygon models, both
+observed MDL! polygon variants, the observed MDL2 indexed polygon variant, the
+observed binary MDLZ Studio polygon model, the supported MDL NUL object-record
+and chunked binary-table layouts, MDLC wrapper decoding, and a conservative MDLX
+scene primitive converter for supported primitive records. It also supports the
+observed MDL\5 counted mesh scenes and MDLA compressed bitmap wrappers as
+textured preview planes. MDLS materials can load same-directory external PCX
+texture files, convert them to PNG, and embed them in the output GLB. The
+converter rejects every other signature and writes no output for it.
+
+Sample signature inventory
+
+192 files: MDL!   supported non-chunked polygon model family
+87 files:  MDL2   indexed polygon model family; 85 convert and 2 fail validation
+58 files:  MDLS   chunked polygon model family; 55 convert and 3 fail validation
+23 files:  MDL\0  object-record and chunked binary-table model family; 22 convert
+                  and 1 large binary-table/container variant remains unsupported
+14 files:  MDLX   procedural scene/model family; 11 contain supported primitive
+                  scene records and convert; 3 do not
+9 files:   MDLC   supported encoded wrapper; all decoded sample payloads are MDLX
+                  scenes; 7 contain supported primitive scene records and convert
+7 files:   MDLA   supported compressed bitmap wrappers converted as preview planes
+4 files:   MDL7   unsupported model family
+2 files:   MDL\5  supported counted mesh scenes
+1 file:    MDLZ   supported Studio polygon model in sample0/36679/basket1.mdl
+1 file:    ASCII xxd dump of an MDLZ file in sample0/42131/sackassort3.mdl; not a binary model input
+1 file:    MDL\3 archive/container family in sample0/36683/models.pak; outer archive recognized, embedded GRN not converted
+1 file:    MDLU   unsupported model/image family
+
+Current sample0 + sample1 conversion status
+
+400 files total: 377 convert and 23 are still rejected.
+
+Remaining unsupported groups across both sample directories:
+
+6 files:   MDL\0 binary-table variants that are not the supported object-record layout.
+5 files:   MDLX/MDLC scene files whose headers decode/validate but whose scene records
+           are not supported primitive records under the current checks.
+4 files:   MDL7 signature family.
+3 files:   MDLS-looking invalid/nonstandard containers. One sample1 file has a valid
+           declared MDLS chunk stream followed by additional non-padding data including
+           LightWave-looking FORM/LWOB sections, so it is rejected rather than ignored.
+2 files:   MDL2 block-word-2 files with extra control/index tables that are not yet
+           fully mapped to triangle lists.
+1 file:    MDLU signature family.
+1 file:    MDL\3 archive of embedded Granny/RAD .GRN assets. The archive table is
+           decoded, but the embedded GRN polygon format is not implemented.
+1 file:    ASCII xxd dump of an MDLZ binary.
+
+Supported MDLS file structure
+
+All numeric fields are little-endian. Chunk payloads are followed by zero bytes
+until the next 4-byte boundary. All offsets below are from the beginning of the
+file unless stated otherwise.
+
+Fixed file header, 44 bytes:
+
+0x00, 4 bytes: signature, ASCII "MDLS".
+0x04, u32: payload_size. This must equal file_size - 8.
+0x08, 36 bytes: nine u32 metadata words. The converter preserves their byte
+meaning as file-level metadata and validates the surrounding size accounting.
+Across valid samples the first word is 0x00000200.
+
+Top-level chunks start at 0x2c and continue exactly to EOF. Every top-level
+chunk uses:
+
+0x00, char[4]: chunk tag.
+0x04, u32: payload byte length, excluding this 8-byte chunk header and excluding
+alignment padding.
+0x08, byte[payload length]: chunk payload.
+then zero padding to 4-byte alignment.
+
+Known top-level chunks:
+
+STRS: string table. Payload is NUL-separated latin-1 text. A final NUL may be
+present. Strings are used by point/material metadata.
+
+PNTS: hardpoint table. Payload size must be a multiple of 16. Each observed
+record is 12 bytes of float32 position followed by a u32 string-table reference.
+The converter validates size/count and records the count, but does not emit
+hardpoints into GLB.
+
+MATS: material table. The payload is a byte-exact sequence of material slots,
+with a possible trailing texture-reference list. POLY material_id values index
+this table directly. There is no separate table-count word in the observed
+layout; early values that look like small counts are the mode word of material
+slot 0.
+
+Each MATS material slot has one of the following layouts. All string offsets are
+u32 byte offsets into STRS and must point to a NUL-terminated string record.
+Offset 0 is valid when STRS has a record at 0 and can also represent an empty or
+fallback texture name.
+
+Single-reference slot, 28 bytes:
+  +0x00, u32: mode. Observed values: 0, 2, 3, 4, 5, 0x23, 0x25.
+  +0x04, u8[4]: RGB color plus an observed alpha/control byte 0 or 255.
+         The converter emits RGB/255 as the GLB baseColorFactor and treats
+         all observed slots as opaque.
+  +0x08, float32: material/UV value A.
+  +0x0c, float32: material/UV value B.
+  +0x10, float32: material/UV value C.
+  +0x14, u32: zero.
+  +0x18, u32: STRS texture/name offset.
+
+Paired-reference slot A, 32 bytes:
+  +0x00, u32: first STRS texture/name offset.
+  +0x04, u32: second STRS texture/name offset.
+  +0x08, u32: mode.
+  +0x0c, u8[4]: RGB color plus alpha/control byte.
+  +0x10, float32: material/UV value A.
+  +0x14, float32: material/UV value B.
+  +0x18, float32: material/UV value C.
+  +0x1c, u32: zero.
+
+Paired-reference slot B, 32 bytes:
+  +0x00, u32: first STRS texture/name offset.
+  +0x04, u32: mode.
+  +0x08, u8[4]: RGB color plus alpha/control byte.
+  +0x0c, float32: material/UV value A.
+  +0x10, float32: material/UV value B.
+  +0x14, float32: material/UV value C.
+  +0x18, u32: zero.
+  +0x1c, u32: second STRS texture/name offset.
+
+Paired-reference slot with separator, 36 bytes:
+  +0x00, u32: first STRS texture/name offset.
+  +0x04, u32: zero separator.
+  +0x08, u32: second STRS texture/name offset.
+  +0x0c, u32: mode.
+  +0x10, u8[4]: RGB color plus alpha/control byte.
+  +0x14, float32: material/UV value A.
+  +0x18, float32: material/UV value B.
+  +0x1c, float32: material/UV value C.
+  +0x20, u32: zero.
+
+After the material slots, some samples have a trailing list of u32 STRS
+texture/name offsets and zero separators shorter than one full material slot.
+Those trailing references are validated and preserved as byte-accounted material
+metadata, but they are not referenced by any observed POLY material_id.
+
+External MDLS texture files:
+
+MATS texture/name strings are resolved against files beside the input model.
+Lookup is case-insensitive and accepts either the exact string or the string
+with ".pcx" appended. Supported PCX textures are ZSoft PCX files with:
+
+0x00, u8: manufacturer 0x0a.
+0x02, u8: encoding 1 (RLE).
+0x03, u8: bits_per_pixel 8.
+0x04, u16 xmin; 0x06, u16 ymin; 0x08, u16 xmax; 0x0a, u16 ymax.
+0x41, u8: color_planes, required as 1.
+0x42, u16: bytes_per_line, required >= width.
+0x80..palette_marker-1: RLE image stream. It must expand exactly to
+height * bytes_per_line bytes. Each byte >= 0xc0 is a run marker with the low
+six bits as count and the following byte as value; other bytes are literals.
+EOF-769, u8: VGA palette marker 0x0c.
+EOF-768..EOF-1, u8[768]: 256 RGB palette entries.
+
+The converter crops each decoded row to the visible width, converts palette
+indices to opaque RGBA, writes PNG data with an in-process PNG encoder, and
+embeds the PNG in the GLB. Duplicate PCX payloads referenced by multiple
+material slots are embedded once and shared by GLB texture indices. GLB samplers
+use CLAMP_TO_EDGE because the MDLS UVs address atlas regions and observed values
+can land on, or barely beyond, 1.0; repeating would wrap to unrelated atlas
+pixels.
+
+MDLS LOD material groups:
+
+Several MDLS files store alternate LOD/detail sets in the same MOD0 polygon
+stream. The MATS texture names identify these as base_lod_part strings, for
+example KFF_1_1, KFF_2_1, and KFF_3_1. When a base name has multiple numeric
+LOD groups, the converter emits only the lowest numeric LOD group, observed as
+the highest-detail group, instead of drawing all overlapping LODs at once.
+This removes duplicate/coincident geometry from files such as sample1/45679/kff.mod.
+
+MOD0: polygon model block. A file can contain one or more MOD0 chunks.
+
+MOD0 payload structure, offsets relative to the start of the MOD0 payload:
+
+0x00, u32: vertex_count.
+0x04, u32: polygon_count.
+0x08, char[4]: nested chunk tag, always "VTXS" in valid samples.
+0x0c, u32: VTXS payload size. This must equal vertex_count * 12.
+0x10, vertex_count records: each record is three float32 values, x/y/z.
+after VTXS: polygon_count POLY chunks, one after another with no padding.
+The final POLY must end exactly at the end of the MOD0 payload.
+
+POLY payload structure:
+
+0x00, char[4]: nested chunk tag, ASCII "POLY".
+0x04, u32: POLY payload size. Valid observed sizes are 104 for triangles and
+132 for quads.
+
+POLY payload, offsets relative to the byte after the POLY chunk header:
+
+0x00, u32: corner_count. Valid observed values are 3 and 4.
+0x04, u32: material_id.
+0x08, float32[3]: face normal.
+0x14, corner records, corner_count entries of 28 bytes each:
+  +0x00, u32: vertex reference. The low 16 bits are the vertex index into the
+         MOD0 VTXS table and must be < vertex_count. The high 16 bits are an
+         observed per-corner flag/submesh value; valid samples use both 0 and 1.
+  +0x04, float32[3]: per-corner normal.
+  +0x10, float32[3]: per-corner auxiliary vector. In the samples this is
+         usually zero and is not required for polygon reconstruction.
+
+The POLY payload size must equal:
+
+8 + 12 + corner_count * 28
+
+where 8 is corner_count/material_id, 12 is face normal, and each corner is
+28 bytes. The converter triangulates quads as corners (0,1,2) and (0,2,3).
+
+Validated MDLS sample accounting
+
+The following valid MDLS files close exactly under the structure above:
+
+sample0/22433/shield.mod
+sample0/26815/fdd_brk.mod
+sample0/33850/fcl.mod
+sample0/36850/BorgAssimilator.MOD
+sample0/36850/D6_brk.mod
+sample0/36850/K'tinga_BRK.mod
+sample0/36850/SparrowHawk_brk.mod
+sample0/41773/Erg.mod
+sample0/41773/fca.mod
+sample0/41773/ldn.mod
+sample0/41773/space09.mod
+sample0/41775/PlanetFire.mod
+sample0/41775/fff.mod
+sample0/41775/hdn_brk.mod
+sample0/41775/idn.mod
+sample0/41775/kca.mod
+sample0/41775/lff.mod
+sample0/41775/lsb.mod
+sample0/41775/space18.mod
+sample0/41775/space29.mod
+sample0/41775/xss.mod
+sample0/41775/zcx_brk.mod
+
+sample0/41729/_ma_25.otm starts with MDLS but fails the MDLS chunk table
+validation: after the fixed header, the next bytes do not form a recognized
+STRS/PNTS/MATS/MOD0 top-level chunk stream with valid chunk sizes.
+
+Converter behavior
+
+moRay.py accepts valid MDLS, MDL!, MDL2, supported MDL NUL object-record and
+chunked-table files, MDLC-wrapped supported MDLX, native supported MDLX, MDLZ,
+MDLA, and MDL\5 files. It fails fast for unsupported signatures, invalid sizes,
+bad padding, unknown chunks, invalid vertex references, unsupported polygon
+vertex counts, MDL NUL files with no supported object or chunked geometry
+records, MDLX scenes with no supported primitive records, and any trailing bytes
+after a validated geometry table. On failure it removes the requested output
+file if it exists.
+
+GLB output expands polygons into triangle streams with POSITION and NORMAL
+attributes, and emits TEXCOORD_0 when texture coordinates are available. MDLS
+materials use the RGB values and texture/name references from MATS. If a
+referenced PCX file is present beside the model, it is embedded as a GLB PNG
+texture; textured GLB materials use a white baseColorFactor so the texture is
+not darkened by the MATS preview color, and preserve the decoded MATS color in
+material extras. If the referenced texture file is absent, the decoded MATS RGB
+is used as the material base color. Formats that do not carry decoded material
+colors still use deterministic preview colors.
+
+Known incomplete work
+
+MDL7, MDLU, and embedded MDL\3 GRN files still require separate reverse
+engineering before they can be honestly converted. MDL NUL support is still
+partial only for sample0/28728/TIGA_MODELCONV_mdl.MDL, whose header is a larger
+table/container form rather than either supported object records or the 0x201
+chunked table described below. MDLX scene support is also still not complete:
+the converter handles the observed primitive object records for cubes, spheres,
+cylinders, cones, tori, and discs when their record header and transform block
+match the proven layouts below. It does not yet implement translational sweeps,
+rotational sweeps, triangle meshes/TMesh records, UDO records, Bezier sheets,
+height fields, superquadrics, blob/metaball objects, full CSG boolean evaluation,
+material texture semantics, cameras, or lights. Unsupported files fail fast and
+produce no GLB.
+
+All numeric fields in the supported MDL NUL object records are little-endian.
+The signature is:
+
+0x00, char[4]: "MDL\0".
+
+The bytes before the first supported object record contain material tables,
+state/LOD names, and bounding metadata. Those bytes are scanned but not emitted
+to GLB. Object records are accepted only when the following structure validates:
+the object name and material name are printable NUL-terminated latin-1 strings,
+the vertex table has finite float32 records, the triangle table count is
+explicit, and every u16 triangle index is in range for the object vertex table.
+
+Layout A object record:
+
+char[]: object name, NUL-terminated.
+char[]: material name, NUL-terminated.
+float32[3]: object vector/bounds metadata. This is byte-accounted and validated
+as finite but not needed for static GLB output.
+u32: vertex_count.
+vertex_count records of 32 bytes:
+  +0x00, float32[3]: position.
+  +0x0c, float32[3]: normal.
+  +0x18, float32[2]: texture coordinate.
+u32: triangle_count.
+triangle_count records of u16[3]: triangle vertex indices.
+
+Layout B object record:
+
+char[]: object name, NUL-terminated.
+u32: object metadata word.
+float32[5]: object bounds/placement metadata. This is byte-accounted and
+validated as finite but not needed for static GLB output.
+u32: material metadata word.
+char[]: material name, NUL-terminated.
+u32: vertex_count.
+vertex_count records of 32 bytes:
+  +0x00, float32[3]: position.
+  +0x0c, float32[3]: normal.
+  +0x18, float32[2]: texture coordinate.
+u32: triangle_count.
+triangle_count records of u16[3]: triangle vertex indices.
+
+Validated MDL NUL object-record samples
+
+The following MDL NUL samples contain supported object records and convert:
+
+sample0/23674/Everston.mdl: 6 object records, 1,274 vertices, 992 triangles.
+sample0/35890/f51.mdl: 48 object records, 908 vertices, 942 triangles.
+sample0/36605/Yonpo AB.mdl: 8 object records, 276 vertices, 170 triangles.
+sample0/37157/Seoul Rnd Build.mdl: 8 object records, 192 vertices, 96 triangles.
+sample0/39361/TestYak.mdl: 27 object records, 514 vertices, 515 triangles.
+sample0/41709/City_SE.mdl: 20 object records, 237 vertices, 221 triangles.
+sample0/41709/Hammer Head.mdl: 34 object records, 618 vertices, 645 triangles.
+sample0/41709/Malatia_N Grid.mdl: 24 object records, 144 vertices, 72 triangles.
+sample0/41709/Malatia_S Grid.mdl: 25 object records, 184 vertices, 92 triangles.
+sample1/37928/Wonsan Harbor.mdl: 8 object records, 438 vertices, 364 triangles.
+sample1/41709/Cho_C Grid.mdl: 35 object records, 248 vertices, 124 triangles.
+sample1/41709/Harbor_N.mdl: 68 object records, 1,617 vertices, 1,213 triangles.
+sample1/41709/Ndai Grid.mdl: 5 object records, 24 vertices, 12 triangles.
+sample1/41709/Tar_TrackCurve_SW.mdl: 21 object records, 750 vertices, 766 triangles.
+sample1/41709/Zindo Hovertank_EW.mdl: 4 object records, 171 vertices, 352 triangles.
+sample1/41709/Zindo PT Boat.mdl: 6 object records, 384 vertices, 438 triangles.
+sample1/45383/Mig15grey.mdl: 42 object records, 582 vertices, 513 triangles.
+
+Supported MDL NUL chunked-table structure
+
+The chunked MDL NUL files also start with:
+
+0x00, char[4]: "MDL\0".
+0x04, u32: version word 0x00000201.
+
+Two fixed prefixes are validated:
+
+Common table prefix:
+0x08, bytes[4]: 00 64 00 14.
+0x0c, u32: descriptor count, observed and required as 4.
+0x10, u32: vertex_count.
+0x14: first chunk.
+
+Compact table prefix:
+0x08, bytes[4]: 00 64 00 0a.
+0x0c, u32: descriptor count, observed and required as 1.
+0x10, bytes[6]: 00 14 04 00 00 00.
+0x16, u32: vertex_count.
+0x1a: first chunk.
+
+All chunks use the same leading header:
+
+u8: tag.
+u24 little-endian: payload size, not including the tag/size bytes or the flag.
+u8: flag, observed and required as 0.
+payload[size].
+
+Array chunks:
+
+0x15: position array. Payload is u32 count, u32 dimension=3, then
+count*3 float32 values.
+0x16: normal array. Payload is u32 count, u32 dimension=3, then
+count*3 float32 values.
+0x17: optional auxiliary/color-vector array. Payload is u32 count,
+u32 dimension=3, then count*3 float32 values.
+0x18: texture coordinate array. Payload is u32 count, u32 dimension=2, then
+count*2 float32 values.
+
+The array counts must match the prefix vertex_count and the array payload size
+must close exactly at the chunk end.
+
+Index chunk 0x32:
+
+u32: index group count.
+u32: vertex_count copy A.
+u32: vertex_count copy B.
+For each group:
+  u8: material page, observed values 0 and 1.
+  u8: primitive type. 4 is triangle list, 5 is triangle strip, 6 is triangle fan.
+  u8: material index used for preview material grouping.
+  u8: index width, required as 2.
+  u32: index_count.
+  u16[index_count]: vertex indices.
+
+All indices must be less than vertex_count, and the converter triangulates the
+OpenGL-style primitive stream. Degenerate triangles are dropped.
+
+Optional color section 0x78:
+
+u32: color set count.
+For each color set:
+  char[4]: "COL\1".
+  Four nested chunks with tags 1, 3, 4, and 5. Each nested chunk has the same
+  u8/u24/u8 chunk header, size 12, flag 0, and a float32[3] payload.
+  u8: zero terminator.
+
+Optional texture-name section 0x96:
+
+u16: printable texture-name length, not including the terminator.
+char[length]: texture name.
+u8: zero terminator.
+
+Material section 0x97:
+
+The payload starts with an MTL block. An MTL block is:
+char[4]: "MTL\0".
+nested chunk tag 1, size 73, flag 0: material properties. The first 64 bytes
+are 16 finite float32 values; the remaining 9 bytes are material flags/params.
+Optional nested chunk tag 2: the same u16 length plus printable texture name
+and zero terminator used by section 0x96.
+Optional nested chunk tag 3, size 64, flag 0: float32[16] material matrix.
+Optional nested chunk tag 4: material container. Payload is u32 child_count
+followed by that many MTL blocks.
+u8: zero terminator.
+
+After the final chunk, the only permitted remaining bytes are zero padding.
+
+Validated MDL NUL chunked-table samples
+
+sample0/23943/file0173.bin: 160 vertices, 152 triangles.
+sample0/39980/file0169.bin: 402 vertices, 134 triangles.
+sample1/23943/file0161.bin: 24 vertices, 12 triangles.
+sample1/23943/file0186.bin: 86 vertices, 168 triangles.
+sample1/38689/file0195.bin: 868 vertices, 500 triangles.
+
+Unsupported MDL NUL binary-table sample
+
+sample0/28728/TIGA_MODELCONV_mdl.MDL starts with "MDL\0" but its version word
+is not 0x201 and it does not contain the supported object-record layout. The
+outer table fields validate as a different large binary-table/container form
+and need a separate offset/count derivation before it can be converted honestly.
+
+Supported MDLX scene structure
+
+MDLX is a Moray scene format, not a simple polygon mesh format. The converter
+recognizes the file signature, version text, fixed header size, and the leading
+viewport/camera records for all observed MDLX versions. It then scans the scene
+payload for supported primitive object records. The scan is constrained by the
+record's version-specific name encoding, object type byte position, and a finite
+transform block. It does not emit geometry from strings or records that do not
+match those structural checks.
+
+MDLX fixed header:
+
+0x00, char[4]: signature, ASCII "MDLX".
+0x04, char[2]: ASCII version text. Observed values are "22", "24", "29", "36",
+"37", "41", "60", "73", and "77".
+0x06, header payload: version-dependent scene metadata.
+
+Observed fixed header byte sizes:
+
+versions "22", "24", "29", "36", "41", "73", "77": 30 bytes.
+version "60": 32 bytes.
+
+Leading viewport/camera records:
+
+versions "22", "24", "29": three records immediately after the fixed header.
+Each record is 48 bytes of float64 viewport/camera values followed by 4 bytes of
+flags/metadata. The scene payload starts at 0xba.
+
+versions "36" and "37": four records immediately after the fixed header. Each
+record is 48 bytes of float64 viewport/camera values, 6 bytes of
+flags/type/name metadata, then name_length bytes of latin-1 text where
+name_length is the final metadata byte. Observed scene payload starts vary
+because viewport names may be empty or non-empty.
+
+versions "41" and "60": four records immediately after the fixed header. Each
+record is 48 bytes of float64 viewport/camera values, 7 bytes of
+flags/type/name metadata, then name_length bytes of latin-1 text where
+name_length is the final metadata byte. Observed scene payload starts vary
+because viewport names may be empty or non-empty.
+
+versions "73" and "77": no decoded viewport records are claimed yet. The fixed
+30-byte header is recognized, but the following section begins with a repeated
+aa/ b4 byte pattern in the samples. Later in the payload, version "77" samples
+contain supported length-named primitive records that are converted. The version
+"73" sample only exposes unsupported TMesh records under the proven checks, so
+it is still rejected.
+
+MDLX primitive scene records
+
+The supported primitive object type bytes are:
+
+0x02: cube.
+0x03: sphere.
+0x04: cylinder.
+0x11: cone.
+0x12: torus.
+0x16: disc.
+
+Versions "22", "24", and "29" use NUL-terminated latin-1 object names for the
+supported primitive records. The primitive type byte is three bytes before the
+first name byte. The object transform block starts after the terminating NUL and
+10 prefix bytes:
+
++0x00, float32[3]: scale.
++0x0c, float32[3]: rotation in degrees.
++0x18, float64[3]: translation.
+
+Versions "36" and "41" also use NUL-terminated latin-1 object names for the
+supported primitive records. The primitive type byte is three bytes before the
+first name byte. The transform block still contains scale, rotation, and
+translation in the same byte types and order, but observed records carry a
+version/object-dependent prefix before the scale. The converter accepts only the
+observed prefix lengths 6, 7, 8, 10, 12, or 0 bytes when the resulting transform
+is finite and scale values are non-zero.
+
+Versions "60", "73", and "77" use one-byte length-prefixed latin-1 names for
+the supported primitive records. The name length byte is immediately before the
+first name byte. The primitive type byte is four bytes before the first name
+byte. The transform block starts immediately after the name bytes:
+
++0x00, float32[3]: scale.
++0x0c, float32[3]: rotation in degrees.
++0x18, float64[3]: translation.
+
+The converter tessellates supported MDLX primitives as preview meshes: cubes as
+12 triangles, spheres as a 16 by 12 latitude/longitude mesh, cylinders/cones and
+discs as 24-segment meshes, and tori as a 24 by 12 mesh. This recovers scene
+placement and primitive class from the MDLX scene records, but it is not a full
+POV-Ray/Moray evaluator.
+
+Validated MDLX prefix accounting
+
+The native MDLX samples validate through these offsets and conversion statuses:
+
+sample0/16907/PC.MDL: MDLX22, scene payload starts at 0xba, 4 primitive records converted.
+sample0/16907/usa.mdl: MDLX22, scene payload starts at 0xba, 313 primitive records converted.
+sample0/18153/TUTOR02A.MDL: MDLX41, scene payload starts at 0xfa, no supported primitive records found.
+sample0/21653/TUTOR02D.MDL: MDLX36, scene payload starts at 0x118, 1 primitive record converted.
+sample0/2900/aarnet.mdl: MDLX29, scene payload starts at 0xba, 7 primitive records converted.
+sample0/2900/abacus.mdl: MDLX24, scene payload starts at 0xba, 25 primitive records converted.
+sample0/35537/TorusDeform.mdl: MDLX73, fixed header validated to 0x1e, no supported primitive records found.
+sample0/7860/KC.MDL: MDLX22, scene payload starts at 0xba, 1 primitive record converted.
+sample0/7860/RC.MDL: MDLX22, scene payload starts at 0xba, 4 primitive records converted.
+
+The six decoded MDLC inner MDLX streams validate through these offsets:
+
+sample0/12109/AllObjects.mdl: MDLX77, fixed header validated to 0x1e, 18 primitive records converted.
+sample0/12109/TUTOR03A.MDL: MDLX60, scene payload starts at 0x114, no supported primitive records found.
+sample0/12109/TUTOR06C.MDL: MDLX60, scene payload starts at 0x114, 2 primitive records converted.
+sample0/12519/cata4.mdl: MDLX41, scene payload starts at 0x116, 34 primitive records converted.
+sample0/12529/OJOTUNEL.MDL: MDLX41, scene payload starts at 0x112, 4 primitive records converted.
+sample0/35537/Tutor04a1.mdl: MDLX60, scene payload starts at 0x102, 7 primitive records converted.
+
+Supported MDLZ file structure
+
+All numeric fields are little-endian. The observed binary MDLZ sample is
+sample0/36679/basket1.mdl. It is a Studio-MDL-like polygon model, not a zlib
+stream. The signature differs from classic IDST Studio MDL, but the fixed header
+uses the same broad table-of-counts-and-offsets pattern.
+
+Fixed header and classic metadata:
+
+0x00, char[4]: signature, ASCII "MDLZ".
+0x04, u32: version. Observed supported value is 14.
+0x08, char[64]: NUL-padded latin-1 model file name, "basket1.mdl".
+0x48, u32: file length. This must equal the exact input file size.
+0x4c..0x87, float32 metadata vectors for eye position, bounds, render bounds,
+and related Studio header values.
+0x88..0xf7, 28 u32 classic Studio-style count/offset/reserved words. The
+converter validates the observed one-bone, one-hitbox, one-sequence,
+one-sequence-group, one-texture, one-skin-family, one-bodypart layout and
+requires unsupported controller/attachment counts to be zero.
+
+Observed classic metadata table:
+
+bone_count=1, bone_offset=0x1e4.
+bone_controller_count=0.
+hitbox_count=1, hitbox_offset=0x260.
+sequence_count=1, sequence_offset=0x2a0.
+sequence_group_count=1, sequence_group_offset=0x360.
+texture_count=1, texture_offset=0x420.
+skin_ref_count=1, skin_family_count=1, skin_offset=0x4b0.
+bodypart_count=1, bodypart_offset=0x3d0.
+attachment_count=0.
+
+MDLZ geometry extension, fixed offsets in the header:
+
+0xf8, u32: extension_count. Observed supported value is 1.
+0xfc, u32: vertex_count. Observed value is 88.
+0x100, u32: index_count. Observed value is 336 and must be divisible by 3.
+0x104, u32: index table offset. Observed 0x1960.
+0x108, u32: position table offset. Observed 0x4c0.
+0x10c, u32: normal table offset. Observed 0x1120.
+0x110, u32: texture-coordinate table offset. Observed 0x16a0.
+0x114, u32: reserved extension offset. Observed zero.
+0x118, u32: transform/weight table offset. Observed 0xba0.
+0x11c, u32: color/attribute table offset. Observed 0xa40.
+0x120, u32: matrix table offset. Observed 0x1c00.
+0x124, u32: model-record offset. Observed 0x1c60.
+
+Geometry tables:
+
+position table: vertex_count records of float32[4]. The first three values are
+XYZ position and the fourth homogeneous value is 1.0.
+color/attribute table: vertex_count records of u32. Observed value is
+0xffffff00 for every vertex.
+transform/weight table: vertex_count records of float32[4]. The converter
+validates finite values and accounts for the bytes; these values are not needed
+for static polygon output.
+normal table: vertex_count records of float32[4]. The first three values are
+the vertex normal and the fourth homogeneous value is 1.0.
+texture-coordinate table: vertex_count records of float32[2].
+index table: index_count records of u16. Every index must be less than
+vertex_count. Triangles are consecutive triples.
+matrix table: 12 float32 values. The converter validates finite values and
+accounts for the bytes; it does not currently apply this matrix because the
+stored positions are already in model space for the observed sample.
+model record: begins with a 32-byte NUL-padded latin-1 model name, "basket1".
+
+Validated MDLZ sample accounting
+
+sample0/36679/basket1.mdl closes under this layout: 7,408 bytes, 88 source
+vertices, 112 triangles, max index 87, all homogeneous position/normal w values
+are 1.0, all color/attribute words are 0xffffff00, and all table ranges are
+inside the file and non-overlapping.
+
+sample0/42131/sackassort3.mdl is not a binary MDLZ file. It is ASCII text
+containing an xxd-style dump of basket1.mdl, so the converter rejects it as a
+non-model input and writes no output.
+
+Supported MDLC wrapper structure
+
+MDLC is an encoded wrapper, not a separate polygon layout in the observed
+samples. The converter decodes and validates the wrapper bytes, then dispatches
+the inner stream if it is a supported polygon or supported MDLX primitive scene
+family. All six observed MDLC samples decode to MDLX scene streams; five contain
+supported primitive records and one contains only unsupported records under the
+current MDLX scene checks.
+
+MDLC fixed wrapper header:
+
+0x00, char[4]: signature, ASCII "MDLC".
+0x04, char[2]: inner MDLX version text. Observed values are "29", "37", "41",
+"60", and "77".
+0x06, byte[]: encoded payload, continuing to EOF.
+
+MDLC payload decoding:
+
+1. Let E be the encoded bytes starting at file offset 0x06.
+2. Build a byte-differenced stream D:
+   D[0] = E[0]
+   D[i] = E[i] xor E[i-1] for every i > 0
+3. XOR D with the repeating ASCII key:
+   SoftTronics (C) 1994, Munich, Germany
+4. The key phase is version-dependent. Observed phase values are:
+   version "41": start at key byte 31
+   version "37": start at key byte 31
+   version "29": start at key byte 31
+   version "60": start at key byte 0
+   version "77": start at key byte 0
+5. The decoded stream starts with a 6-byte MDLC wrapper prefix. The inner stream
+is reconstructed as:
+   "MDLX" + version_text + decoded_stream[6:]
+
+Validated MDLC sample accounting
+
+All sample0 MDLC samples and the supported sample1 MDLC samples consume every
+byte through the decode transform above and produce an MDLX inner stream:
+
+sample0/12109/AllObjects.mdl: MDLC version "77", inner MDLX77, 129,886 bytes.
+sample0/12109/TUTOR03A.MDL: MDLC version "60", inner MDLX60, 1,108 bytes.
+sample0/12109/TUTOR06C.MDL: MDLC version "60", inner MDLX60, 9,995 bytes.
+sample0/12519/cata4.mdl: MDLC version "41", inner MDLX41, 13,345 bytes.
+sample0/12529/OJOTUNEL.MDL: MDLC version "41", inner MDLX41, 7,386 bytes.
+sample0/35537/Tutor04a1.mdl: MDLC version "60", inner MDLX60, 3,021 bytes.
+sample1/12493/spitfire.mdl: MDLC version "29", inner MDLX29, 5,448 bytes.
+sample1/12529/LIBRO3.MDL: MDLC version "37", inner MDLX37, 6,029 bytes.
+sample1/12529/MARS2.MDL: MDLC version "41", inner MDLX41, 2,792 bytes; header
+and wrapper decode validate, but no supported primitive records are found.
+
+Supported MDL2 file structure
+
+All numeric fields are little-endian. This variant is used by all MDL2 samples
+in sample0/26986 and sample0/41595. All 44 files close exactly under this
+layout. The file is an indexed triangle-list mesh with one or more mesh blocks.
+
+Fixed file header, 160 bytes:
+
+0x00, char[4]: signature, ASCII "MDL2".
+0x04, float32[3]: file-level minimum bounds. In all samples these are the
+observed sentinel bytes ca f2 49 f1 repeated three times.
+0x10, float32[3]: file-level maximum bounds. In all samples these are the
+observed sentinel bytes ca f2 49 71 repeated three times.
+0x1c, u32: MDL2 kind. Observed supported values are 1 and 2. Both use the same
+geometry block layout. Sample1 also contains kind 8 and block-word-2 records;
+those records are recognized as MDL2 but still rejected because their extra
+control/index tables are not fully mapped to triangle lists.
+0x20, char16[64]: first mesh-block name as UTF-16LE, NUL-padded to 128 bytes.
+Padding after the first NUL code unit must be zero.
+
+The first mesh block starts immediately at 0xa0. Additional mesh blocks are
+preceded by another 128-byte UTF-16LE NUL-padded mesh-block name, then the same
+mesh-block payload described below. The final mesh block must end exactly at
+EOF.
+
+MDL2 mesh-block payload:
+
+0x00, float32[3]: block bounding-box minimum. This must equal the component-wise
+minimum of the following vertex table.
+0x0c, float32[3]: block bounding-box maximum. This must equal the component-wise
+maximum of the following vertex table.
+0x18, u32: vertex_count.
+0x1c, u32: index_count. This is a count of u32 vertex indices and must be a
+multiple of 3 because the table is a triangle list.
+0x20, u32: block word A. Observed value is 1 in all samples.
+0x24, u32: block word B. Observed value is 1 in all samples.
+0x28, vertex_count records of float32[3]: vertex positions.
+then vertex_count records of float32[3]: per-vertex normals.
+then vertex_count records of float32[2]: per-vertex texture coordinates.
+then vertex_count records of u32: per-vertex attribute word. Observed value is
+0xffffffff for every vertex in every sample. The converter validates this
+constant because no non-constant example exists in the sample corpus.
+then index_count records of u32: triangle-list vertex indices. Every index must
+be less than vertex_count. Triangles are indices (0,1,2), (3,4,5), and so on.
+
+The exact byte length of a mesh-block payload is:
+
+40 + vertex_count*36 + index_count*4
+
+where 40 is the fixed block header, each vertex contributes 12 bytes of
+position, 12 bytes of normal, 8 bytes of texture coordinate, and 4 bytes of
+attribute word, and each index is a u32.
+
+Validated MDL2 sample accounting
+
+The 44 MDL2 files contain 67 mesh blocks, 10,954 source vertices, and 4,376
+triangles. All block payloads end exactly at their computed offsets; every
+inter-block name is a valid 128-byte UTF-16LE field; every index is in range;
+every index count is divisible by 3; every block bounds field matches the
+decoded vertex table; every fixed block word is 1; and every per-vertex
+attribute word is 0xffffffff.
+
+Supported MDL! v2 file structure
+
+All numeric fields are little-endian. This variant is used by all MDL! samples
+in sample0/19629.
+
+Fixed header, 96 bytes:
+
+0x00, char[4]: signature, ASCII "MDL!".
+0x04, u32: version, always 2.
+0x08, u32: texture path flag. Observed values are 0 and 1.
+0x0c, char[64]: NUL-padded latin-1 texture path.
+0x4c, u32: vertex_count.
+0x50, u32: texcoord_count.
+0x54, u32: triangle_count.
+0x58, u32: normal_count.
+0x5c, u32: tag_count.
+
+Payload after the fixed header:
+
+0x60, float32[3]: bounding-box minimum.
+0x6c, float32[3]: bounding-box maximum.
+then vertex_count records of float32[3] vertex positions.
+then texcoord_count records of float32[2] texture coordinates.
+then triangle_count records of six u16 values:
+  vertex_index_0, vertex_index_1, vertex_index_2,
+  texcoord_index_0, texcoord_index_1, texcoord_index_2.
+All vertex indices must be < vertex_count and all texcoord indices must be
+< texcoord_count.
+then normal_count records of float32[3]. These are accounted for but not needed
+to reconstruct the indexed triangle mesh because triangle records do not carry
+normal indices.
+then tag_count records of 56 bytes:
+  char[32] NUL-padded tag name,
+  float32[6] tag transform/parameter values.
+
+The exact file size must equal:
+
+96 + 24 + vertex_count*12 + texcoord_count*8 + triangle_count*12
+   + normal_count*12 + tag_count*56
+
+Supported MDL! v1 file structure
+
+This variant is used by all MDL! samples in sample0/11549 and sample0/12764.
+All files in those directories close under this prefix plus a scene/object
+trailer.
+
+Fixed header, 54 bytes:
+
+0x00, char[4]: signature, ASCII "MDL!".
+0x04, u16: render_vertex_count.
+0x06, u16: triangle_count.
+0x08, u16: material/group metadata.
+0x0a, u8: material_name_count.
+0x0b..0x35: format flags and metadata words. The converter preserves these
+bytes in the parsed metadata and uses the count fields above for validation.
+
+Payload after the fixed header:
+
+0x36, 16 records of float32[3]: bounds/collision-box vertices.
+0xf6, float32: radius.
+0xfa, u32: object count or scene count hint; observed values include 0, 1, and 2.
+0xfe, u32: triangle count hint. Often matches triangle_count, but not for all
+samples; the authoritative triangle count is the header field at 0x06.
+0x102, material_name_count material names. Each name is one u8 byte length
+followed by that many latin-1 bytes, with no NUL terminator.
+then render_vertex_count records of 32 bytes:
+  +0x00, float32[3]: position.
+  +0x0c, float32[3]: normal.
+  +0x18, float32[2]: texture coordinate.
+then triangle_count records of 10 bytes:
+  +0x00, u16: local vertex index 0 within the group-table vertex span.
+  +0x02, u16: local vertex index 1 within the group-table vertex span.
+  +0x04, u16: local vertex index 2 within the group-table vertex span.
+  +0x06, u16: local flags. The low byte is observed zero in validated samples;
+         the high byte is an observed flag with values 0 or 1.
+  +0x08, u16: reserved, observed zero in all samples.
+then group_count records of 15 bytes, where group_count is the u16 at fixed
+header offset 0x08:
+  +0x00, u8: 1-based material id. The converter stores this as material_id - 1
+         for preview coloring. Some files have more material ids here than
+         names in the material-name table, so this byte is not constrained by
+         material_name_count.
+  +0x01, u8: object/submesh id.
+  +0x02, u16: first triangle index in the triangle table.
+  +0x04, u16: number of triangles in this group.
+  +0x06, u16: first render vertex index in the render vertex table.
+  +0x08, u16: number of render vertices in this group.
+  +0x0a, byte[5]: group tail flags. Most sample0 values are zero. The
+         sample1/12764/castle2_in.mdl file uses non-zero values here while the
+         group ranges, local triangle indices, and vertex spans still validate.
+         These bytes are therefore preserved/accounted as group metadata rather
+         than treated as padding.
+
+The triangle table's three vertex indices are local to the group's vertex span.
+For GLB output the converter computes:
+
+global_vertex_index = group.first_render_vertex_index + triangle.local_vertex_index
+
+This group-local index rule is essential; treating MDL! v1 triangle indices as
+global indices produces spiked/jumbled meshes.
+
+After the group table comes a variable scene/object trailer. The trailer begins
+immediately after the group table and continues to EOF. The converter
+byte-accounts this trailer and rejects no MDL! v1 sample because of it, but the
+trailer is not required for polygon reconstruction and is not emitted to GLB.
+
+The polygon geometry prefix size is:
+
+54 + 16*12 + 12 + material-name-bytes + render_vertex_count*32
+   + triangle_count*10 + group_count*15
+
+Supported MDL\5 file structure
+
+All numeric mesh fields are little-endian unless noted. The observed MDL\5
+samples are counted scene files with a camera/light prefix, a contiguous object
+mesh table, a material table, and optional animation/controller records.
+
+Fixed header, 29 bytes:
+
+0x00, char[4]: signature bytes 4d 44 4c 05.
+0x04, u8: observed version byte, always 1.
+0x05, u16: object_count.
+0x07, u8: observed zero.
+0x08, big-endian u16: material_count.
+0x0a, u16: observed zero.
+0x0c, u32[4]: scene/frame metadata. The converter preserves these words and
+uses the counted tables below as authoritative.
+
+Prefix scene records start at 0x1d and continue until the first mesh object.
+Each record starts with one u8 byte length and a printable latin-1 name. The
+observed "Camera*" record body is 32 bytes of float32 values. The observed
+"Omni*" light record body is 28 bytes of float32 values.
+
+Each of object_count mesh records has:
+
+u8 + bytes: object name.
+u8 + bytes: material name.
+u16: vertex_count.
+u16: triangle_count.
+vertex_count records of float32[3] positions.
+triangle_count records of u32[3] vertex indices.
+vertex_count records of float32[2] texture coordinates.
+12 bytes: float32[3] object trailer/bounds value.
+
+The object records must close contiguously. The converter rejects any triangle
+index outside the object's vertex table.
+
+The material table immediately follows the object table and has material_count
+records:
+
+u8 + bytes: material name.
+u8 + bytes: texture path.
+float32[3]: texture/material scale, observed 1.0, 1.0, 1.0.
+24 bytes: observed zero tail.
+
+The sample1 cemetery file has four post-material animation/controller records.
+They are length-prefixed by target name and have a 20-byte u32 header followed
+by one of the observed fixed-width key tables:
+
+Camera01: header[0] records of 40 bytes.
+Camera01.Target: header[0] records of 16 bytes.
+Cav_GrilleD and Cav_GrilleG: header[3] records of 28 bytes.
+
+These animation/controller bytes are fully accounted and validated for closure,
+but they are not needed for static polygon GLB output.
+
+Supported MDLA file structure
+
+MDLA samples are not polygon meshes. They are compressed bitmap wrappers whose
+file name field ends in ".WMF". The converter emits a single textured rectangle
+using the decoded bitmap so the asset is still inspectable in GLB viewers.
+
+0x00, char[4]: signature, ASCII "MDLA".
+0x04, NUL-terminated printable wrapper name, for example "G262.WMF".
+0x0d..0x48: wrapper metadata/padding preserved for accounting.
+0x49, char[2]: bitmap marker "BM".
+0x4b, u32: zlib compressed payload byte length. The payload must end at EOF.
+0x4f, u16: observed zero.
+0x51, u32: bitmap wrapper word, preserved as metadata.
+0x55, u16: bitmap wrapper word, preserved as metadata.
+0x57, BITMAPINFOHEADER of 40 bytes:
+  width, height, planes, bit depth, compression, image size, and four zero
+  trailing DIB metadata words.
+0x7f, zlib stream beginning with bytes 78 da.
+
+Supported bit depths are 16-bit BI_RGB with 4-byte aligned rows and 32-bit
+BI_RGB with one observed 4-byte decompressed prefix before the image payload.
+The converter validates the decompressed image size, converts the pixels to RGBA
+PNG, embeds that PNG into the GLB, and maps it onto a rectangle whose aspect
+ratio matches the bitmap.
+
+MDL\3 archive note
+
+sample0/36683/models.pak starts with signature bytes 4d 44 4c 03 and has a
+counted outer archive table:
+
+0x04, u32: entry_count, observed 4,993.
+0x08..0x1b: additional archive summary words.
+0x100, entry_count records of 12 bytes:
+  u32: observed record flag. Values are 0x40 for 1,572 model entries and 0x41
+       for 3,421 motion/animation entries.
+  u32: entry byte offset.
+  u32: entry byte size.
+
+The entry offsets and sizes identify embedded assets such as BAT.GRN, BEAR.GRN,
+and other Granny/RAD .GRN files. The outer archive is understood well enough to
+locate entries, but the embedded GRN polygon format is separate and is not
+implemented here, so MDL\3 still fails fast and writes no GLB.

@@ -7,5 +7,5 @@ export class hotHelpText extends Format
 	ext            = [".txt", ".hdr"];
 	forbidExtMatch = true;
 	magic          = ["HotHelp Text", "HotHelp Header"];
-	unsupported    = true;
+	unsupported    = true;	// only 67 unique files on discmaster
 }

@@ -15,7 +15,7 @@ export class povRay extends Format
 		return supportFiles.length===0 ? false : supportFiles;
 	};
 	keepFilename = true;
-	unsupported  = true;
+	unsupported  = true;	// complicated to support, see notes
 	notes        = xu.trim`
 	    POV-RAY files:
 			https://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
@@ -24,8 +24,9 @@ export class povRay extends Format
 		POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/
 		So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest
 		I have compiled povray1 as dexvert/bin/povray/povray1
-		Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky
-		These are both 'includes' and pointers to images.
+		Also, povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory which may be tricky
+		Because these external files include 'includes' and pointers to images/textures and MORE. All in different parent directories, or who knows where.
+		So there would need to be some sort of pre-parser that recursively walks and travels the file and all dependencies and pulls them all in, from the original file path. Challenging for sure.
 		Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case
 		POVRAY1 also generates broken TGA output that only seems to convert with nconvert (may not longer be the case now since I have improved TGA support)
 		Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format, which is ok

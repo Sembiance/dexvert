@@ -1,0 +1,346 @@
+Superscape Do 3D VCA object notes
+Vibe coded by Codex
+
+Scope
+
+These notes document the Superscape Do 3D .vca object files in sample0 and
+sample1 as implemented by superscapeDo3DObject.py.  The combined corpus has
+400 supplied sample files.  The converter validates the container,
+member ranges, SHP record lengths, Type 0 vertex stream consumption, polygon
+edge references, palette payload, and WLD placement records before writing any
+output.
+
+This is still not a vendor-equivalent editor/runtime.  The remaining known
+semantic gaps are Type 7 animation/control streams, Type 8 bitmap placement/UV
+emission, animation playback for multi-coordinate Type 0 rows, and full naming
+of the long WLD node tail fields.  Those bytes are either fail-fast rejected
+when they affect static geometry (Type 7) or length-accounted and validated
+structurally but not fully emitted into the static GLB.
+
+Container layout
+
+All observed numeric fields are little-endian.
+
+0x0000..  ASCII text signature:
+          "SuperScape (c) New Dimension International Ltd.\0"
+          followed by CR/LF text naming a VRT file and save version.
+
+0x00F4    Archive marker ".VRT\0".
+0x00FA    u16 archive revision; sample value 3.
+0x0100    u16 member count; all samples have 4 members.
+0x0102    Member directory.  Each entry is:
+          ASCIIZ member name, normally NOTNAMED.THM/SHP/PAL/WLD
+          u8     entry flag byte
+          u32le  absolute member offset
+          u32le  stored member byte size
+
+The converter requires all member offset/size spans to be in-bounds,
+non-overlapping, and to account for the file through EOF.  The object data is
+read from the SHP, PAL, and WLD members.
+
+Embedded member headers
+
+SHP, PAL, and WLD members start with the same SuperScape text signature.  The
+binary member marker is at relative offset 0x00F4.
+
+SHP:
+  0x00F0 u32le active stream length or member-local length value.  It is
+         positive and inside the member in the samples.
+  0x00F4 "SHAP"
+  0x00F8 u16 zero
+  0x00FA u16 shape revision
+  0x00FC u32 version word bytes 00 00 05 0A
+  records begin at relative 0x0100 when the next words are type 6/length 16,
+  otherwise at relative 0x0108.
+
+PAL:
+  0x00F4 "PALT"
+  0x00F8 u16 zero
+  0x00FA u16 palette revision
+  0x00FC u32 version word bytes 00 00 05 0A
+  0x0102 u16 observed palette payload size 0x0304 or 0x0300
+  0x0106 256 RGB triples used as the GLB vertex color palette.
+
+WLD:
+  0x00F4 "WRLD"
+  0x00F8 u16 zero
+  0x00FA u16 world revision
+  0x00FC u32 version word bytes 00 00 05 0A
+  placement records start at relative 0x0102.
+
+SHP record stream
+
+Records are:
+
+  u16 type
+  u16 byte_length, including the four-byte header
+  payload bytes
+
+A standalone u16 0xFFFF is a separator and consumes two bytes.  An immediate
+0xFFFF after a Type 6 record is also consumed as a separator.
+
+Type 6: transform/scale
+  length is 16.
+  payload is three i32le values.  These are X/Y/Z scale factors for the
+  following geometry block.
+
+Type 0: vertex stream
+  u16 count
+  u16 mode
+  followed by a mixed stream of exactly count vertex entries.  The converter
+  rejects the record unless every payload word is consumed by these entries.
+
+  Entry forms:
+
+  Direct vertex:
+      marker in {1, -32767, -32766, -32759, -32758}, x, y, z
+
+  Derived/interpolated vertex:
+      marker in {2, 10}, source_vertex_id_a, source_vertex_id_b,
+      unsigned_fraction
+
+  Multi-coordinate row:
+      marker in {-32767, -32766, -32759, -32758}
+      mode triples of i16 x,y,z coordinates
+
+  For mode 1, a direct vertex and a multi-coordinate row are both four words,
+  so the forms collapse to marker,x,y,z.  For non-1 modes, the row length is
+  1 + mode*3 words.  The static GLB uses the first coordinate triple in each
+  multi-coordinate row; the remaining triples are animation/control positions
+  and are consumed but not emitted as animation.
+
+  Observed modes now parsed by this grammar:
+      1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 14, 15, 16, 18, 22, 23, 24,
+      25, 26, 29, 32, 40, 45, 50, 64
+
+  Derived vertices with marker 2 and marker 10 are recursively resolved with
+  the same interpolation rule.  Marker 10 is observed in sample1/34408/Flag.vca
+  paired with row marker -32758.  Vertex ids 0..7 are implicit cuboid corners,
+  and explicit ids are biased by +8.  The interpolation fraction is unsigned
+  16-bit: 0 selects A, 0x8000 is halfway, and 0xFFFF is just short of B.
+  Recursive cycles are rejected.
+
+Implicit vertices:
+  0=(0,0,0), 1=(0x4000,0,0), 2=(0,0,0x4000), 3=(0x4000,0,0x4000),
+  4=(0,0x4000,0), 5=(0x4000,0x4000,0), 6=(0,0x4000,0x4000),
+  7=(0x4000,0x4000,0x4000)
+
+Type 1: edge table
+  u16 count
+  count pairs of u16 vertex ids
+  This is accepted as an edge table only when length == 6 + count*4.  Type 1
+  records of length 38 occur in trailing name/metadata tables in all 400
+  sample files.
+
+  In the metadata tail, the layout is:
+      u16 type = 1
+      u16 byte_length = 38
+      i16 shape id, where -1 is the group/root label
+      32 bytes of name/tag data
+
+  The 32-byte name/tag field is mostly NUL-padded printable ASCII.  Some
+  samples contain multiple NUL-separated printable fragments, and a few font
+  entries have non-printable bytes after the readable name.  The converter
+  preserves the fixed 32-byte field, extracts printable ASCII segments, assigns
+  the first segment to the corresponding SHP shape, and writes the resulting
+  shape-name list into the GLB top-level extras.superscapeShapeNames array.
+
+  sample1/8058/Landing Pad.vca has a tail terminator record:
+      u16 type = 2
+      u16 byte_length = 6
+      u16 count = 0
+
+  The first non-edge Type 1 record ends the polygon stream; the converter then
+  parses the remaining SHP records as this metadata tail.
+
+Type 2: polygon table
+  u16 face_count
+  repeated face_count times:
+      u16 edge_count_and_flags
+      u16 material_or_face_id
+      edge_count u16 edge references
+
+  edge_count is the low byte of edge_count_and_flags.  The high byte is
+  retained as flags.  An edge reference uses bit 15 as a reverse-direction flag
+  and bits 0..14 as the edge-table index.  Directed edge loops are converted
+  to polygon vertex loops.  Polygons with at least three distinct vertices are
+  triangulated by projecting to their dominant plane and ear-clipping the
+  resulting 2D polygon; degenerate polygons fall back to a fan.
+
+Type 2 material_or_face_id values below 0x80 are renderable face/material
+  identifiers.  Values 0x80..0xFF are observed on control or non-render faces;
+  emitting them creates large opaque helper slabs, for example on the Sedan Car.
+  The converter consumes those face records for byte accounting but does not
+  emit triangles for them.
+
+Font glyph construction faces:
+  SHP groups whose metadata names begin with FONT_, MBEFONT:, or ALPH: are
+  text glyph libraries.  In those groups, some Type 2 faces reference the
+  implicit cuboid corner vertex ids 0..7 even though the group is not an
+  implicit cuboid.  These ids are used both for real side faces and for
+  construction/backfill faces around the glyph bounds.
+
+  Font groups use a different implicit corner order from ordinary implicit
+  cuboids:
+      0=(0,0,0), 1=(0x4000,0,0), 2=(0,0x4000,0),
+      3=(0x4000,0x4000,0), 4=(0,0,0x4000),
+      5=(0x4000,0,0x4000), 6=(0,0x4000,0x4000),
+      7=(0x4000,0x4000,0x4000)
+
+  With that font-specific implicit order, same-z mixed explicit/implicit faces
+  are glyph caps and are emitted.  Flat all-implicit faces on one z plane are
+  bounds caps and are consumed but not emitted.  Mixed-depth explicit/implicit
+  faces are non-planar construction/backfill panels and are consumed but not
+  emitted; these are the large rectangles that obscure the Superscape letter
+  samples.  Ordinary non-font shapes keep the standard implicit order and are
+  not filtered by this rule because many non-font models use implicit vertices
+  for real visible geometry.
+
+Type 3: face color bytes
+  Payload bytes after the header are a material-id-to-palette-index table, not
+  a face-ordinal list.  Type 2 material_or_face_id values below 0x80 index this
+  table as material_id - 1.  This explains the records that have more Type 3
+  bytes than polygon faces: those shapes use sparse or high material ids.  For
+  example, sample0/16069/Dual Wall W.vca has five faces with material ids
+  [27,1,2,3,4] and 27 Type 3 bytes; face material 27 uses byte 26 of the table.
+
+  Across sample0+sample1, 1,383 Type 3 material tables are parsed in the 389
+  convertible files, and 33,625 faces receive their GLB vertex color from this
+  material-id lookup.  If a renderable face has no matching Type 3 table entry,
+  the converter falls back to the material low byte.
+
+Type 8: palette-index bitmap
+  u16 height
+  u16 width
+  width*height u8 palette indices, row-major
+  All observed Type 8 records satisfy byte_length == 8 + width*height.  Across
+  sample0+sample1, 44 Type 8 records occur in 34 sample files.  They are decoded
+  and validated, but not emitted because the matching placement/UV mapping is
+  not yet proven.
+
+Multiple geometry sets
+
+Multiple Type 1/2/3 sets may occur under one Type 6 transform.  When a new edge
+table appears after completed faces or colors, it starts a new SHP shape using
+the current transform and staged vertices.  This keeps WLD shape ids aligned.
+
+WLD placement records
+
+The instance record used by these objects is Type 0x0044.  Its declared length
+is respected exactly.
+
+Known fields:
+
+  +0x00 u16 type = 0x0044
+  +0x02 u16 byte length
+  +0x04 i16 object id
+  +0x06 u16 first-child byte offset from this record, or 0
+  +0x0A u16 next-sibling byte offset from this record, or 0
+  +0x18 i32 x dimension
+  +0x1C i32 y dimension
+  +0x20 i32 z dimension
+  +0x24 i32 x location inside the parent
+  +0x28 i32 y location inside the parent
+  +0x2C i32 z location inside the parent
+  +0x34 i16 SHP shape id, or -1 for a grouping node
+  +0x38 i16 x rotation
+  +0x3A i16 y rotation
+  +0x3C i16 z rotation
+  +0x3E u16 render/control flags
+
+first-child and next-sibling offsets form a pre-order scene tree.  Group nodes
+establish coordinate spaces for their children.  Shape nodes reference SHP
+shape ids and transform 0..0x4000 vertex coordinates into the node dimensions.
+Rotations use 4096 units per full turn.  The earlier 65536-unit interpretation
+rotated common 0x1000 values by only 22.5 degrees; the sample geometry shows
+0x1000 is a full turn/no-op in these WLD records.
+
+All 400 files have Type 0x0044 records with bytes after +0x40.  The converter
+accounts for the tail by declared length, but the fields include metadata,
+materials, animation/control data, and values that are not fully named yet.
+
+The common WLD tail appearance block starts with a zero word followed by a
+subrecord header:
+
+  +0x40 u16 zero
+  +0x42 u16 appearance kind
+  +0x44 u16 appearance byte length, including the kind and length words
+  +0x46 payload bytes
+
+The converter now parses these WLD tail subrecords by declared length and keeps
+the payload words/bytes on the parsed instance.  A 0xFFFF subrecord is a
+terminator/control marker with one following argument word.  In
+sample0/8058/Wooden Doorway.vca, the two non-cuboid door instances use kind 4
+length 14 subrecords followed by a 0xFFFF/0 terminator; those bytes are decoded
+as WLD appearance/control payloads and do not change static polygon geometry.
+
+WLD kind 4 length 14 is observed on representation/LOD-controlled instances.
+Its payload is two u32le threshold-like values followed by one u16 control id:
+
+  u32le threshold/range value A
+  u32le threshold/range value B
+  u16   control id
+
+Objects often contain a primary shape and one or more shape names ending in
+"Rep", "Rep1", "Rep 2", etc. at the same placement.  Rendering all of those
+states together creates stacked duplicate geometry; sample0/8058/Wooden
+Doorway.vca has Door North, Door North Rep 1, and Door North Rep 2 at the same
+door placement.  For a static GLB the converter keeps the primary non-Rep
+instance when it exists and suppresses same-base Rep instances.  This implements
+static representation selection without hardcoding the sample name.
+
+Appearance kind 1 is an instance-level material palette for repeated implicit
+cuboids.  Its payload bytes are palette indices keyed by Type 2 material id as
+material_id - 1.  For implicit cuboid instances, these bytes override the SHP
+Type 3 material table for that WLD instance only.  In this instance palette,
+payload values 0, 191, and 255 are non-render entries; faces mapped to those
+values are suppressed.  This is needed for repeated generic cuboids, for
+example sample0/8058/Wooden Doorway.vca, where the shared Cube shape has
+placeholder SHP colors but each WLD instance supplies its own visible face
+colors.  In that file, palette index 191 is assigned to the broad side/back/top
+faces that become the large incorrect rectangles when emitted.  The converter
+intentionally does not apply kind 1 globally to arbitrary non-cuboid shapes;
+those longer payloads are not yet proven to be the same simple face palette.
+
+The +0x3E word is not a fourth rotation.  Its low byte is always zero in the
+combined corpus and the observed unsigned values are high-byte flag
+combinations:
+0x0000, 0x0200, 0x0C00, 0x0E00, 0x4000, 0x4200, 0x8000, 0x8200, 0x8E00,
+0x8C00, 0xC000, 0xC200, 0xCC00, and 0xCE00.  Treating those values as angles
+produces bad static placements.  The converter parses the word as
+render/control flags and does not apply it to the transform matrix.
+
+Some WLD shape instances reference six-face implicit cuboids that are not
+visible model geometry.  These are helper/bounds/control nodes.  The converter
+skips an implicit cuboid instance when the WLD tail appearance word is 3, when
+the appearance pair is 0xFFFF/0xFFFF with non-zero render flags, or when the
+specific observed helper combination flags=0x8E00 and appearance=1 is present.
+This removes the hidden slabs around the Superscape letter/number objects and
+the flat helper box on Sedan Car while preserving ordinary cuboid model parts.
+
+Other observed SHP records
+
+Types 7, 9, 10, 11, 16, and 32 occur in the combined corpus.
+
+Type 7 appears in eleven animated/control objects and is now fail-fast
+rejected.  In sample1/8058/Animated Cone.vca it follows a 40-coordinate-row
+vertex stream and precedes a secondary control stream; using only the first
+coordinate triple creates the visibly wrong flat rectangle, so rejecting this
+record is safer than emitting a misleading static GLB.
+
+Types 9/10/11/16/32 appear in a small number of files as length-delimited
+non-polygon metadata or control data and are currently ignored by the static
+polygon converter after structural byte accounting.  Unknown record types cause
+fail-fast rejection.
+
+Known remaining work
+
+1. Emit Type 8 bitmaps as textured GLB primitives once their placement and UV
+   linkage is proven.
+2. Decode Type 7 animation/control streams and map them to GLB animations or
+   static representative states.
+3. Convert the extra coordinates in non-1 Type 0 rows into GLB morph targets or
+   animations instead of using only the first coordinate triple.
+4. Fully name WLD Type 0x0044 tail fields and render/control flag bits.  The
+   converter now handles the helper/bounds cases observed in sample0 and
+   sample1, but the rest of the tail vocabulary remains only partially named.

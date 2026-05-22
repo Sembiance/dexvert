@@ -1,0 +1,773 @@
+# Vibe coded by Codex
+
+Common Ground Digital Paper sample format notes
+=============================================
+
+Scope
+-----
+
+This document describes the file structures implemented by commonGround.py for
+the sample0 corpus. The implementation handles all 200 sample files at the
+container level. CGDC files with identifiable PICT page streams are written
+directly as PDF pages with absolute-positioned bitmap images and selectable text
+operators. DPL2 files are now expanded, decoded, and written directly as PDF
+pages using the DPL2 PICT-v2 display records.
+
+Important completeness note: this is a sample-corpus specification, not a
+claim that every possible Common Ground file ever produced is covered. The
+converter validates every outer byte boundary for raw data-fork files,
+MacBinary files, and EOF-anchored Windows self-viewer payloads, and it handles
+all observed DPL2 record classes, display opcodes, image records, vector
+records, style records, CPFR fonts, and trailer resource boundaries used by
+sample0. A future file that uses an unobserved QuickDraw opcode or resource
+variant should fail fast until that variant is decoded.
+
+
+Wrappers
+--------
+
+The samples occur in three wrappers.
+
+1. Raw Common Ground data fork
+
+   The Common Ground stream starts at file byte 0. The format signature is at
+   byte 8 and is either CGDC or DPL2.
+
+2. MacBinary-wrapped Macintosh file
+
+   The MacBinary header is 128 bytes. The implemented validator requires:
+
+   - byte 0 = 0
+   - byte 1 = Pascal file-name length, 1..63
+   - bytes 65..68 = Macintosh file type "CGDC"
+   - bytes 69..72 = creator, seen as "CGVM" or "RcDs"
+   - bytes 83..86 = big-endian data-fork length
+   - bytes 87..90 = big-endian resource-fork length
+   - data fork starts at byte 128
+   - resource fork starts after the data fork rounded up to a 128-byte boundary
+   - both fork padding ranges are zero-filled
+
+   The Common Ground document is the MacBinary data fork. The resource fork is
+   preserved as a parsed wrapper range but is not needed for text conversion in
+   these samples.
+
+3. Windows self-viewer executable
+
+   sample0/32768/1213PIPN.EXE is an NE Windows executable with an embedded CGDC
+   payload at file offset 0x18d00. The converter accepts embedded payloads only
+   when exactly one CGDC/DPL2 candidate is found whose own length table consumes
+   the rest of the file.
+
+
+CGDC stream
+-----------
+
+CGDC is the older Common Ground stream signature.
+
+Header:
+
+Offset  Size  Type       Meaning
+0       4     uint32be   body length, including this header and body bytes
+4       4     uint32be   trailer length
+8       4     char[4]    "CGDC"
+12      4     uint32be   version/flags; all supported samples use 0
+
+Validation rule:
+
+    uint32be[0] + uint32be[4] == data-fork length
+
+The body occupies bytes [0, body length). The trailer occupies the remaining
+bytes. The trailer contains resource and metadata structures, with visible
+resource names such as OFST, PERS, PREC, PRVS, VERS, CAPN, REDU, SINF, FTYP,
+FBTS, FPIC, clut, FMTS, and FNMS in some files. This implementation validates
+the trailer boundary but does not decode the trailer resource map.
+
+The CGDC body contains one or more Macintosh QuickDraw PICT v2 drawing streams.
+In sample0/12012, ten page-sized PICT streams begin with the opcode signature:
+
+    00 11 02 FF 0C 00
+
+That is PICT VersionOp followed by HeaderOp. The converter now locates these
+page starts with find_cgdc_pict_pages(). The first sample0/12012 page starts at
+body offset 0x20; subsequent page starts are 0x2B168, 0x3CDC2, 0x6735E,
+0x119EFE, 0x14CEAA, 0x176F69, 0x1B9D36, 0x1F1E8E, and 0x219B62.
+
+The eight bytes immediately before each located PICT VersionOp are the PICT
+page frame rectangle:
+
+Offset  Size  Type       Meaning
+-8      2     int16be    top
+-6      2     int16be    left
+-4      2     int16be    bottom
+-2      2     int16be    right
+
+For sample0/12012 this frame is top=0, left=0, bottom=3040, right=2300.
+Smaller user-guide style CGDC documents commonly use top=0, left=0,
+bottom=730, right=552. The page raster compositor uses this frame as the base
+canvas and adds only the small bleed required by actual negative or overhanging
+draw coordinates.
+
+Wrapping a page stream with a normal 512-byte PICT file prefix plus a synthetic
+PICT size/frame lets deark parse it as Macintosh PICT. Deark validates and
+extracts the same PackBits image records that the converter decodes internally.
+Deark does not produce a fully composited page image for these streams, so the
+converter performs page composition itself from the ordered PICT text and image
+operators.
+
+
+DPL2 stream
+-----------
+
+DPL2 is a later Common Ground stream signature used by most sample0 files.
+
+Outer header:
+
+Offset  Size  Type       Meaning
+0       4     uint32be   outer header length; all supported samples use 24
+4       4     uint32be   observed body-related length; not sufficient alone
+8       4     char[4]    "DPL2"
+12      4     uint32be   flags; supported sample values are 0 and 0x00000A00
+16      8     bytes      zero in supported samples
+
+Inner header starts at offset 24:
+
+Offset  Size  Type       Meaning
+24      4     uint32be   inner header length; all supported samples use 24
+28      4     uint32be   inner total length, including the 24-byte inner header
+32      4     uint32be   inner payload length
+36      4     uint32be   trailer length
+40      8     bytes      document-specific values; not decoded
+
+Validation rules:
+
+    uint32be[0] == 24
+    uint32be[24] == 24
+    uint32be[32] == uint32be[28] - uint32be[24]
+    file length == 24 + uint32be[28] + uint32be[36]
+
+The DPL2 display-list/resource-data body occupies bytes [48, 24 + inner total
+length). The DPL2 trailer follows that body. The converter validates these
+ranges, validates the trailer resource map, and scans the body for page
+geometry, resource, image, and text operators.
+
+DPL2 trailer resource map:
+
+The DPL2 trailer is a Macintosh resource-map structure whose resource data area
+is the DPL2 body. It does not include a separate resource data fork. The first
+16 bytes are the normal resource fork header copy:
+
+Offset  Size  Type       Meaning
+0       4     uint32be   resource data offset; observed 24
+4       4     uint32be   resource map offset; equals 24 + body length
+8       4     uint32be   resource data length; equals DPL2 body length
+12      4     uint32be   resource map length; equals DPL2 trailer length
+
+Map bytes 16..23 are zero in all samples. At map byte 24 is the uint16 type-list
+offset; at byte 26 is the uint16 name-list offset. The observed name-list offset
+is zero and all resource references use name offset -1, so no resource names are
+present in the trailer map. The type list begins with uint16 type_count_minus_1,
+followed by 8-byte type entries:
+
+    char[4] resource type
+    uint16be resource_count_minus_1
+    uint16be reference_list_offset, relative to the type-list start
+
+Each reference-list entry is 12 bytes:
+
+    int16be resource id
+    int16be name offset; observed -1
+    uint8 attributes; observed 0
+    uint24be resource data offset, relative to the DPL2 body/resource data area
+    uint32be handle; observed 0
+
+At the referenced body offset is uint32be resource_data_length followed by that
+many data bytes. All 167 DPL2 samples validate this structure. The observed
+resource-map types are AUTH, BASE, CAPN, CBTS, CLUT, CNMS, CPFR, CPIC, CRCT,
+CTYP, DESC, DISP, DSIG, EDTR, HLNK, LAYR, LLFL, PAGE, PERS, PINF, PLAT, PRVS,
+PSSW, SUBJ, TITL, TOC, and VERS. Across the corpus the map contains 13,927
+references, and every reference points to a complete length-prefixed resource
+inside the DPL2 body.
+
+DPL2 body byte coverage:
+
+The DPL2 body is both a record stream and the resource data area referenced by
+the trailer map. In the samples, all body bytes are covered by one or both of
+those structures except 21 ten-byte page-label suffixes in the 40693 sample
+family. Those labels are fixed ASCII strings of the form "NN (Page 1", where
+NN is the last two digits of the page/sample label. The converter validates
+that every otherwise-uncovered body byte is one of these page-label suffixes;
+any other uncovered body byte fails the input before output is written.
+
+
+Text operators implemented
+--------------------------
+
+The implemented CGDC text extractor recognizes these display-list operator
+layouts:
+
+Opcode  Layout
+0x0028  00 28 xx xx yy yy nn <nn text bytes>
+0x0029  00 29 aa nn <nn text bytes>
+0x002A  00 2A aa nn <nn text bytes>
+0x002B  00 2B aa bb nn <nn text bytes>
+
+Observed behavior:
+
+- 0x0028 starts text at an explicit coordinate. In CGDC samples the first
+  16-bit big-endian value is the vertical baseline and the second signed
+  16-bit big-endian value is the horizontal position.
+- 0x0029 continues a current text run after an unsigned horizontal advance.
+- In CGDC, 0x002A advances the current vertical baseline by its unsigned
+  one-byte parameter and starts/continues text at that new baseline.
+- 0x002B starts or continues text with compact positioning parameters. The
+  observed parameters are unsigned horizontal and vertical advances.
+- Japanese CGDC files commonly store text as one glyph per operator: 0x0028
+  starts a line and many 0x0029 operators append one CP932 character each.
+- Latin CGDC files commonly store complete line fragments as one operator.
+- Some justified Latin CGDC lines store each glyph, including literal one-byte
+  space and punctuation glyphs, as separate 0x0029 continuation operators.
+  Those glyphs are preserved.
+- Some wrapped Latin text uses a one-byte punctuation 0x0028 LongText record at
+  the end of a sentence before a 0x0029 continuation begins the next sentence.
+  These records are emitted and update the current X position.
+- Whitespace-only text records are not visible glyph content, but they are still
+  stateful QuickDraw text operations. A blank 0x0028 record updates the current
+  text point, and later 0x0029/0x002A/0x002B records continue from that point.
+  Whitespace in continuation records remains emitted text because it is used for
+  justified word spacing.
+- Some display streams contain valid text operators whose payload is a
+  one-byte non-printing control value. These operators are consumed, update the
+  same QuickDraw text state as visible text, and emit no PDF text glyphs. This
+  keeps the byte stream aligned so later image operators on the same page are
+  reached.
+- Some Latin CGDC files split one visual line into several same-baseline
+  drawing records for styling or superscript marks. The PDF backend draws these
+  records at their PICT coordinates and emits them as selectable text.
+- For adjacent same-baseline records, the PDF backend may use the next text
+  record's X coordinate as the target end position for the current record. This
+  compensates for remaining differences between original QuickDraw font metrics
+  and the locally available compatible TrueType fonts, preserving word joins
+  such as styled suffixes. End-of-line records are not expanded to fill the
+  column; they are only compressed if needed to avoid running off the page.
+- Page drawing stops at the PICT 0x00FF EndOfPicture opcode. Bytes after that
+  marker belong to trailing page data/resources and are not interpreted as text
+  drawing records.
+- Short text records drawn above the current baseline are treated as raised
+  marks for page composition: the mark draws at its own Y coordinate, while the
+  next 0x0029 horizontal continuation returns to the surrounding baseline. This
+  handles raised marks such as the trademark symbol in the magazine sample
+  title.
+
+DPL2 class 0x0081 display records expand to QuickDraw PICT-v2 style streams.
+After expansion the text payloads are normal Macintosh Roman counted strings,
+not the subset glyph-token stream that appears in the compressed bytes. The PDF
+backend walks these streams sequentially and handles the same LongText, DHText,
+DVText, and DHDVText operators as CGDC, including explicit baseline positions
+and compact horizontal/vertical continuations.
+
+DPL2 record compression:
+
+Record class 0x0001 stores document resources, including old-version PFR0
+TrueDoc font resources. Its 32-bit field at record offset 12 is the expanded
+payload length. If that length differs from the stored payload length, the
+payload is compressed with an LZSS stream:
+
+- The sliding window is 4096 bytes and is initially zero-filled.
+- The initial write position is 4078 (4096 - 18).
+- One flag byte controls eight items, least-significant bit first.
+- A set flag bit stores one literal byte.
+- A clear flag bit stores a two-byte backreference. The first byte is the low
+  eight bits of the source window offset. The high nibble of the second byte is
+  the high four bits of the source window offset. The low nibble of the second
+  byte plus three is the match length.
+- Backreference bytes are copied through the same sliding window as they are
+  emitted, so overlapping matches work normally.
+
+This LZSS decoder expands every class 0x0001 record in every DPL2 sample
+(9,847 records total). The CPFR trailer-map resources contain the same PFR
+font data inside a 12-byte Common Ground wrapper:
+
+Offset  Size  Type       Meaning
+0       4     bytes      01 01 00 0C
+4       4     bytes      observed 00 00/00 01, 01 01
+8       4     uint32be   expanded PFR0 size
+12      ...   bytes      raw PFR0 if stored size equals expanded size, otherwise
+                         DPL2 LZSS-compressed PFR0 payload
+
+The decompressed PFR resources are old PFR version 1, 3, or 4 TrueDoc
+resources. Version 1 resources use a 43-byte header and can omit font ID extra
+items; version 3 resources use a 54-byte header; version 4/newer resources use
+the 58-byte header. The public FreeType PFR loader expects the newer header, so
+the converter parses the header, logical-font directory, physical-font records,
+font IDs, character advance tables, and glyph-program pointers itself. The old
+54-byte header is the modern PFR header through num_phy_fonts; the logical font
+directory starts immediately at byte 54.
+
+The logical-font directory is a count followed by 5-byte entries:
+
+Offset  Size  Type       Meaning
+0       2     uint16be   logical font record size
+2       3     uint24be   logical font record offset
+
+Observed v1 logical font records begin with four signed 24-bit matrix values,
+then a flags byte, optional stroke/bold/extra-item fields controlled by that
+flags byte, and a physical-font pointer:
+
+Offset  Size  Type       Meaning
+0       12    s24[4]     logical transform matrix. For the old DPL2 CPFR
+                         samples this is [size*512, 0, 0, -size*512]; the
+                         derived size matches the active PICT 0x000D text size.
+12      1     uint8      PFR logical flags
+13      ...   bytes      optional flag-controlled fields
+...     2     uint16be   physical font record size
+...     3     uint24be   physical font record offset
+...     1     uint8      observed zero terminator/padding in v1 records
+
+When a physical font has a PFR font-ID extra item, that ID is the normal lookup
+key. If a v1 CPFR bundle omits font IDs, the converter groups the actual DPL2
+text bytes by active PICT font name, emphasis, and size, then assigns unnamed
+physical fonts only when their character/glyph coverage is complete. Ties are
+resolved by the logical matrix size and the physical-font pointer, not by sample
+file name. This decodes the observed old Arial/Times v1 bundle in
+40692/readme.dp and the earlier one-font Berkeley-family bundle.
+
+The PDF compositor uses these per-file PFR character advances for text fitting
+whenever the active PICT font name/emphasis has a matching CPFR font. Same-
+family companion subsets are also recognized: for example active Palatia plus
+bold emphasis maps to Palatia_b when that CPFR subset is present. This covers
+the observed Palatia/Palatia_b split subsets without falling back to local
+substitute font metrics.
+
+PFR glyph programs:
+
+The PFR physical-font character descriptors contain the advance width plus a
+glyph program size and glyph program offset. Glyph program offsets are relative
+to the PFR GPS section offset from the PFR header. The converter parses both
+simple and compound PFR glyph programs:
+
+- Simple glyph flag bit 7 clear. Bit 2 stores x/y control counts packed into
+  one byte; otherwise bits 1 and 0 indicate separate x and y count bytes.
+  Control coordinates are delta or absolute values controlled by an eight-bit
+  mask per group of eight control values.
+- Simple glyph operators use the high nibble for the drawing operation and the
+  low nibble for point argument format. Implemented operations are end glyph,
+  line, horizontal line, vertical line, move, close-and-move, and the two fixed
+  curve formats plus general curve format.
+- Compound glyph flag bit 7 set. Low six bits are the component count; bit 6
+  enables extra items before component records. Component records provide
+  optional x/y scale, x/y translation, and 8/16-bit size plus 16/24-bit glyph
+  program offset. Components are recursively parsed and transformed.
+
+All 27,221 unique PFR glyph references used by DPL2 text in sample0 parse
+without error. Matching normal text fonts are emitted as embedded PDF Type3
+fonts whose CharProcs are built from the original PFR outlines and whose
+ToUnicode CMaps preserve selectable/copyable text. Symbol, MathematicalPi-Six,
+and FuturaBookFractions also use PFR Type3 outlines when their CPFR glyphs are
+present; their Type3 ToUnicode maps use the explicit semantic mappings described
+above rather than literal Macintosh Roman punctuation bytes.
+
+Across the 167 DPL2 samples, 1,040,040 text bytes are drawn with matching CPFR
+PFR metrics/outlines, and the converter's corpus audit confirms zero missing
+PFR advances or glyph programs for those bytes.
+
+Implemented DPL2 count-byte positions:
+
+Opcode  Count byte  Text starts
+0x0015  state/position record; not emitted as text
+0x0028  +6          +7
+0x0029  +3          +4
+0x002A  +3          +4
+0x002B  +4          +5
+
+DPL2 display records:
+
+- Record class 0x0081 payload starts with a four-byte display compression
+  header. Payload byte 0 is the stream flag, observed as 0x20 or 0x40.
+- If the record expanded-length field equals stored payload length minus four,
+  bytes after the four-byte header are already an expanded PICT stream.
+- Otherwise the compressed stream begins at the FE ED F1 marker. Payload bytes
+  1..3 are the first compressed chunk length. If bytes 4 through the marker are
+  present, they are additional uint16 compressed chunk lengths. The sum of the
+  chunk lengths must equal the byte count from the marker through the payload
+  end.
+- A 0x20 display record expands chunks to 8192-byte units. A 0x40 display
+  record expands chunks to 16384-byte units. Each chunk has a fresh zero-filled
+  LZSS window and initial write position 4078. The final chunk may be shorter.
+  If a stored chunk length exactly equals the chunk unit size, that chunk is
+  stored uncompressed. The concatenated chunk outputs must exactly match the
+  record's expanded-length field.
+- The expanded display stream begins with a QuickDraw rectangle:
+  uint16 top, uint16 left, uint16 bottom, uint16 right, then the PICT v2
+  00 11 02 FF 0C 00 header sequence. The observed display-prefix-only catalog
+  pages use top=0, left=0, bottom=3300, right=2550, which is a portrait
+  8.5-by-11-inch page at 300 dpi. To feed this to generic PICT tools, the
+  converter synthesizes a normal two-byte PICT size plus that frame rectangle.
+- Normal page geometry is also stored in class 0x0000 records with 18-byte
+  payloads:
+  00 01 00 01 00 00 00 00, uint16 width, uint16 height,
+  uint16 x dpi, uint16 y dpi, uint16 scale percent. The samples use 300 dpi.
+- Some DPL2 streams contain raw two-byte 00 00 separators between normal
+  records. These are class 0x0000 separators and do not terminate the record
+  stream.
+- DPL2 PAGE/BASE layout is decoded from the trailer resource graph, not from
+  runs of class 0x0000 records. Those class 0x0000 records can be normal
+  CPIC resource records; treating them as page-break markers incorrectly
+  classifies compact picture data as layout.
+- Each PAGE resource is a class 0x0001 LZSS-compressed graph record. The
+  expanded PAGE payload begins with a 0x22-byte header. Bytes 12-19 are
+  uint16 top, left, bottom, right placement bounds for that PAGE node. The
+  later resource-reference table stores four-byte resource tags followed by a
+  uint16 resource id, uint16 variant id, and uint16 edge code. For the recipe
+  DPL2 files the CPIC, CTYP, and related PAGE child edges commonly appear as
+  three target-resolution variants: 0x0048 (72), 0x0060 (96), and 0x012C
+  (300). The converter selects the edge whose code matches the document dpi
+  when drawing CPIC children. The converter resolves the
+  observed tags BASE, CBTS, CLUT, CNMS, CPFR, CPIC, CRCT, and CTYP against
+  the trailer resource map. PAGE resources contain exactly one BASE reference
+  in the handled samples; that BASE id binds the PAGE node to the class 0x0081
+  display record with the same BASE resource id. CPIC references are retained
+  as child compact-picture ids for that PAGE node.
+- LLFL is a two-byte uint16 layout/list count in the observed recipe-family
+  DPL2 files. It is not the physical page count: many recipe files store
+  LLFL=0x000f while producing a different number of PDF pages after PAGE
+  rectangle composition.
+- Within a composed page, each display record's PAGE rectangle is tracked. If
+  the next PAGE rectangle collides with bounds already placed on the current
+  page, it starts a new PDF page. This keeps placement decisions tied to
+  decoded PAGE geometry rather than raw byte-pattern inference.
+
+Encoding:
+
+- CGDC text is decoded as CP932 when the extracted byte stream contains clear
+  Japanese text; otherwise it is decoded as Macintosh Roman.
+- DPL2 display text is decoded as Macintosh Roman after display-stream LZSS
+  expansion. Matching old PFR/TrueDoc font resources are emitted as live
+  embedded PDF Type3 fonts with original glyph outlines and ToUnicode maps.
+  Local TrueType fonts are used only when the DPL2 run has no matching embedded
+  PFR font.
+
+
+CGDC style controls implemented
+-------------------------------
+
+The CGDC scanner tracks these stateful controls while walking the display-list
+body. The active state is copied to each following text operator and emitted as
+PDF font/color/text controls.
+
+Opcode  Layout              Implemented meaning
+0x0003  00 03 ff ff         active QuickDraw font id
+0x0004  00 04 ss 00         emphasis selector
+0x000D  00 0D 00 nn         text size selector
+0x001A  00 1A rr rr gg gg bb bb
+                              six-byte QuickDraw-style 16-bit RGB ink/color
+                              attribute; black resets to default black, and
+                              every other value, including white, is mapped to
+                              PDF text/image color
+0x002C  00 2C ll ll ff ff nn <nn MacRoman font-name bytes>
+                              PICT FontName record; registers a font id/name
+                              pair for following 0x0003 font selections
+
+Observed 0x0004 values:
+
+- ss = 0: normal emphasis
+- ss = 1: bold in the current PDF output
+- ss = 2: italic in the current PDF output
+- ss = 3: bold italic in the current PDF output
+
+Observed 0x000D values in Latin files include 12, 14, and 18, which correspond
+to familiar point sizes. Some Japanese and magazine-layout CGDC files use
+larger device-size values. The converter maps values up to 24 as points and
+scales larger values down to half-points so headings remain visibly larger.
+
+These style controls affect all 33 CGDC sample files. Emphasis changes occur in
+31 CGDC files, size changes occur in 32 CGDC files, and 0x001A ink/color
+records occur in 32 CGDC files. Non-black/non-white 0x001A text colors are
+emitted for 25 CGDC files. The PDF compositor maps observed PICT font names
+including Times and Helvetica to locally available Times New Roman/Arial
+TrueType fonts. Those TrueType font programs are embedded into generated PDFs
+with per-character width tables so PDF viewers render with the same metrics the
+converter used for text fitting. Exact original Macintosh font metrics are still
+limited by the absence of the original Mac font suitcase resources.
+
+
+CGDC bitmap operators implemented
+---------------------------------
+
+The CGDC scanner recognizes the 0x0090 BitsRect, 0x0091 BitsRgn, 0x0098
+PackBitsRect, and 0x0099 PackBitsRgn drawing operators used for visible drop
+caps, mastheads, color strips, and other bitmap artwork in magazine-layout
+samples. These are Macintosh QuickDraw PICT opcodes. Image-only CGDC pages can
+also use PICT 0x009A DirectBitsRect or 0x8200 CompressedQuickTime records
+instead of Common Ground text records.
+
+0x0090 1-bit uncompressed bitmap layout:
+
+Offset  Size  Type       Meaning
+0       2     bytes      00 90
+2       2     uint16be   bitmap rowBytes
+4       8     rect       source/bounds rect: top, left, bottom, right, int16be
+12      8     rect       source rect; may be an inset crop of the bitmap bounds
+20      8     rect       destination rect: top, left, bottom, right, int16be
+28      2     uint16be   transfer mode; observed values 0, 1, 3, and 64
+30      ...   raw rows   rowBytes * source-height uncompressed bitmap bytes
+
+When the source rect differs from the bitmap bounds, the converter crops the
+decoded 1-bit rows at bit precision before placing the image at the destination
+rectangle.
+
+0x0091 BitsRgn adds an embedded QuickDraw region immediately after the transfer
+mode and before the raw row data. The region begins with a uint16 size word and
+is skipped on a word-aligned boundary; clipping is applied by the surrounding
+PICT clip state and destination rectangle.
+
+The 0x0090 form is used by narrow title glyphs in sample0/12012, including
+letters such as i and l in the page-three "Within the Cellophane" header.
+
+0x0098 1-bit PackBits bitmap layout:
+
+Offset  Size  Type       Meaning
+0       2     bytes      00 98
+2       2     uint16be   bitmap rowBytes
+4       8     rect       source/bounds rect: top, left, bottom, right, int16be
+12      8     rect       repeated source/bounds rect
+20      8     rect       destination rect: top, left, bottom, right, int16be
+28      2     uint16be   transfer mode; observed values 0, 1, 3, and 64
+30      ...   PackBits   one compressed row for each source-rect scanline
+
+For rowBytes <= 250, each scanline starts with a one-byte compressed length,
+followed by classic PackBits packets. For rowBytes > 250, the compressed length
+is a two-byte big-endian value. The decoded row must exactly match rowBytes.
+
+Indexed PixMap layout:
+
+When the rowBytes word has bit 15 set, the record contains a PixMap instead of
+a 1-bit BitMap. The implemented PixMap branch handles the 1-bit, 2-bit, 4-bit,
+and 8-bit indexed-color forms used by the samples:
+
+Offset  Size  Type       Meaning
+0       2     bytes      00 98
+2       2     uint16be   rowBytes with bit 15 set; low bits are the row stride
+4       8     rect       pixmap bounds
+12      2     uint16be   pmVersion
+14      2     uint16be   packType
+16      4     uint32be   packSize
+20      4     fixed      hRes
+24      4     fixed      vRes
+28      2     uint16be   pixelType; implemented value 0
+30      2     uint16be   pixelSize; implemented values 1, 2, 4, and 8
+32      2     uint16be   cmpCount; implemented value 1
+34      2     uint16be   cmpSize; implemented value equal to pixelSize
+36      4     uint32be   planeBytes
+40      4     uint32be   pmTable
+44      4     uint32be   pmReserved
+48      ...   ColorTable seed, flags, size, and 8-byte ColorSpec entries
+...     8     rect       source rect
+...     8     rect       destination rect
+...     2     uint16be   transfer mode
+...     ...   region     only for 0x0099 PackBitsRgn; uint16-sized QuickDraw
+                         region, word aligned
+...     ...   PackBits   one compressed row for each pixmap scanline
+
+For packed 1-bit, 2-bit, and 4-bit PixMaps, each decoded row is unpacked from
+the most-significant bits of each byte toward the least-significant bits, then
+cropped in pixel coordinates by the source rectangle. The converter turns
+decoded 1-bit bitmap, 1-bit indexed, 2-bit indexed, 4-bit indexed, and 8-bit
+indexed rows into PNGs.
+Foreground pixels in 1-bit images use the active 0x001A color state, or black
+when no color is active. Indexed PixMap pixels use the embedded ColorTable.
+When the ColorTable flags word has bit 15 set, the converter uses the ordinal
+ColorSpec entry number as the pixel index; otherwise it uses the ColorSpec
+value word. Several 13620 screenshots use the flagged form and store zero in
+every ColorSpec value field.
+Observed indexed PixMap transfer modes 0, 1, 3, 36, and 39 are accepted. In CGDC
+PDF mode, every decoded 0x0098/0x0099 image whose offset falls inside a located
+PICT page is embedded as a PDF image XObject at its destination rectangle in
+byte-stream order.
+
+Some samples contain zero-height indexed PixMap records whose source and
+destination rectangles are also zero-height. QuickDraw treats these as empty
+image records with zero pixel data. The parser validates the PixMap header,
+ColorTable, transfer mode, and optional region, consumes the record, and emits
+no image so the following drawing operators remain aligned.
+
+PDF output:
+
+- CGDC files with located PICT pages are emitted as direct PDF pages.
+- CGDC PDF pages draw 0x0098 bitmap/PixMap records and 0x0028/0x0029/
+  0x002A/0x002B text records in original byte-stream order, so page assignment
+  and normal z-order come from the PICT stream.
+- Text is emitted with PDF text operators and is selectable for WinAnsi-mappable
+  characters using embedded TrueType fonts with WinAnsi encoding. Characters
+  outside WinAnsi are emitted through an embedded Identity-H Unicode/CID
+  TrueType font. The PDF character code is the Unicode BMP codepoint, a
+  CIDToGIDMap maps that codepoint to the actual embedded font glyph, and a
+  ToUnicode CMap maps the same codepoint back to Unicode for text extraction.
+- CGDC text encoding is detected from the sampled text bytes. Japanese CGDC
+  files use CP932/Shift-JIS for normal text while still carrying occasional
+  Macintosh symbol bytes in the same PICT streams. The decoder therefore
+  selects CP932 when the sampled byte stream contains substantial kana/kanji,
+  decodes each text record with a mixed CP932/MacRoman fallback, maps the
+  observed CP932 private QuickTime trademark byte to U+2122, and maps the
+  observed Osaka-font title pair 85 7E to U+301C wave dash.
+- The PDF compositor maps observed 0x0004 emphasis and style words embedded in
+  PICT font names such as Bold, Black, Italic, Oblique, and Obl to matching PDF
+  font resources. Times New Roman and Arial-compatible TrueType fonts are
+  embedded for normal serif/sans output. Helvetica-Condensed family names map
+  to embedded Nimbus Sans Narrow TrueType fonts so the dominant DPL2 table text
+  uses a condensed face instead of regular-width Arial. Futura-family names map
+  to embedded URW Gothic fonts, Berkeley-family names map to embedded URW
+  Bookman fonts, and Palatia/Schneid names map to embedded P052
+  Palatino-compatible fonts. Helvetica/Geneva names map to the Arial/Helvetica
+  PDF family. When the DPL2 CPFR PFR0 resource contains a matching font ID or a
+  fully covered inferred unnamed font, the compositor uses the original PFR
+  outlines and per-character advance widths for PDF drawing, line fitting, and
+  continuation positioning. The compositor maps 0x000D text size to page
+  coordinates, maps 0x0006 SpExtra and 0x0016
+  ChExtra fixed-point spacing to PDF TJ spacing adjustments, maps 0x0010 TxRatio
+  fixed-point
+  numerator/denominator pairs to PDF horizontal text scaling, maps 0x0015
+  PnLocHFrac to subpixel text X placement, and maps 0x001A RGB state to
+  rendered text and 1-bit bitmap foreground color. The observed 0x002E
+  glyphState value is constant, 00 04 00 00 FF 00, and is treated as the
+  fractional-width text state expressed by the surrounding text operators.
+  Observed 0x001B RGBBkCol is retained as bitmap background color; 1-bit
+  bitmap transfer mode 0 paints zero bits with that background color instead
+  of treating them as transparent.
+- DPL2 streams with an explicit class 0x0000 18-byte page-geometry record use
+  the older scaled text-size interpretation above. DPL2 streams that lack that
+  explicit geometry record derive their page geometry from the PICT display
+  prefix; in those display-prefix-only streams, 0x000D TxSize is already in
+  the same document units as the 300 dpi coordinate grid. The compositor maps
+  those TxSize bytes directly and uses the deterministic 72/dpi point scale,
+  instead of doubling small TxSize values and compensating with baseline-fit
+  guesses. This is the mode used by the dense 40684/40694 catalog pages such
+  as sample0/40694/0259.dp and sample0/40684/0910.dp.
+- DPL2 text runs whose active PICT font name is Symbol use the PDF Symbol base
+  font instead of Times/Helvetica substitution. The observed raw Symbol bytes
+  are 20, 34, and B4; B4 is emitted as Symbol encoding byte B4, which is the
+  multiplication glyph, and the generated PDF includes a ToUnicode map for the
+  observed Symbol bytes.
+- DPL2 text runs whose active PICT font name is MathematicalPi-Six use an
+  observed-byte Unicode mapping instead of literal Macintosh Roman letters. The
+  only observed bytes are 20, 62, and 63. A temporary inspection of the
+  MathematicalPi-Six glyph outlines identifies 62 as a solid left-pointing
+  triangle and 63 as a solid right-pointing triangle, so the PDF emits U+25C0
+  and U+25B6 with selectable Unicode text.
+- DPL2 text runs whose active PICT font name is FuturaBookFractions use an
+  observed-byte Unicode mapping instead of literal Macintosh Roman punctuation.
+  The observed sample0 byte meanings are 5E = one half, A3 = one eighth,
+  B4 = three quarters, C4 = one quarter, DB = two thirds, and E4 = one third.
+  The mapping was derived from surrounding recipe measurements, for example
+  cup, tsp, lb, and hour quantities, and the PDF emits the corresponding
+  selectable Unicode fraction characters.
+- If a CGDC file has text but no located PICT pages, the converter falls back to
+  a direct text-flow PDF.
+- DPL2 streams use direct PDF pages. Text remains selectable. Every class
+  0x0081 display stream in the samples is paired with a decoded PAGE graph
+  node whose BASE reference names the display resource id. Some DPL2 families
+  store the PAGE graph record before the display stream; others store it after
+  the display stream. The PAGE graph record starts with 00 00 00 22, carries
+  placement bounds at bytes 12-19, and contains the literal BASE tag followed
+  by the display id and variant id. These PAGE rectangles are retained as
+  placement metadata for page grouping and z-order.
+- DPL2 PAGE graph edge records are fixed 10-byte entries:
+  four-byte resource type, uint16 resource id, uint16 graph variant, and uint16
+  target resolution or zero for resolution-independent children. PAGE graph
+  children observed in sample0 are BASE, CBTS, CLUT, CNMS, CPFR, CPIC, CRCT,
+  and CTYP. CBTS and CTYP carry 72/96/300-dpi variants, CPIC carries compact
+  picture children for those same target resolutions, and CRCT identifies the
+  reusable layout slot used by the BASE. Zero-bounds PAGE nodes with empty BASE
+  streams are layout separators rather than visible pages. In the recipe-family
+  DPL2 files, a left reusable CRCT slot followed by a disjoint right-side CRCT
+  slot is a graph reset: the following BASE begins the next logical view even
+  when the rectangles do not geometrically overlap. This prevents the left
+  ingredient/equipment/prep panels from being composited over the next
+  quantity/directions view.
+- DPL2 display streams normally begin at byte 40 after the PICT v2 header.
+  Some streams insert an 18-byte DPL2 drawing-state prologue first: 6 bytes of
+  RGB color, 00 01, 00 0A, and four signed coordinate words. In those streams
+  the first QuickDraw opcode begins at byte 58.
+- PICT 0x0090/0x0091/0x0098/0x0099 bitmap and PackBits/PixMap images are
+  decoded locally for the observed 1-bit bitmap, 1-bit indexed, 2-bit indexed,
+  4-bit indexed, and 8-bit indexed forms, including cropped source rectangles,
+  BitsRgn/PackBitsRgn embedded regions, mode 3 and mode 64 bitmap transfers,
+  and PackBits rows whose encoded runs overfill the nominal row and must be
+  clipped to rowBytes. In image-heavy records, irregular or incomplete PixMap
+  PackBits rows are padded with transparent/zero pixels after the encoded
+  payload is exhausted; representative formerly external-decoder-backed PixMap
+  records match deark pixel-for-pixel.
+- QuickDraw variable-size records and same-shape opcodes are consumed on their
+  documented word-aligned boundaries. SameRect, SameRoundRect, and SameOval
+  opcodes carry no rectangle payload; SameArc opcodes carry only the two angle
+  words.
+- PICT 0x009A DirectBits images are decoded locally for the observed 16-bit
+  RGB555 PackBits rows and 32-bit component-plane rows, including three- and
+  four-component 32-bit rows and observed transfer modes 0, 1, 3, and 36. The
+  local DirectBits decoder matched deark pixel-for-pixel on representative
+  16-bit, three-component 32-bit, and four-component 32-bit PICT images. The
+  DPL2 traversal does not invoke deark for any sample0 display record.
+- DPL2 CPIC resources are compact PAGE-child picture records, not Macintosh
+  PICT streams. They use the normal DPL2 resource wrapper; class 0x0001 CPIC
+  records use the same LZSS expansion as other resource graph records, while
+  class 0x0000 CPIC records are stored directly after the 12-byte wrapper.
+  The first uint16 in the expanded payload is an observed command/list count.
+  The implemented subset decodes compact coordinate tags introduced by byte
+  0x80. In 18109/BA032CK.dp's 300-dpi CPIC children, small signed 32-bit
+  coordinate words are whole device units, while larger signed 32-bit words
+  carry an 8-bit fractional byte. The emitted subset supports the observed
+  move, horizontal, vertical, line, close, and subpath-break commands used by
+  BA032CK's rule strokes. CPIC drawing is clipped to the owning PAGE graph
+  rectangle; degenerate zero-length paths and paths wholly outside that
+  rectangle are consumed without emitting PDF marks. Other observed CPIC
+  opcodes remain opaque and are not emitted yet.
+- Some DPL2 PAGE children use a class 0x0081 BASE display stream as a
+  non-visual object label for a CPIC child. In BA032CK these labels are the
+  four one-word "bowl" BASE records. The selected CPIC children for those PAGE
+  nodes have no drawable coordinate payload in any emitted target variant, and
+  the label text overlaps visible ingredient/prep PAGE rectangles. The
+  converter suppresses this narrow form only when a PAGE has CPIC children,
+  the selected CPIC children emit no drawing events, and the BASE display is
+  exactly one lowercase label token. Across sample0 this currently suppresses
+  only BA032CK's four "bowl" labels.
+- CGDC PICT pages with no locally decoded drawing events use a bounded fallback.
+  PICT 0x8200 CompressedQuickTime records are decoded directly when they contain
+  JPEG-backed QTIF image payloads: the 32.32 matrix scale, integer translation,
+  embedded JPEG dimensions, and JPEG bytes determine the PDF image placement.
+  The LeMansGTBack sample contains six such JPEG strips. Some QuickTime/JPEG
+  strips are followed by a 1-bit PackBits fallback bitmap with the same
+  destination rectangle whose visible payload says "JPEG not installed"; after
+  a successful QuickTime decode the compositor consumes that fallback record
+  without drawing it, matching a viewer with JPEG support. Other QuickTime/JPEG
+  records are followed by fallback poster text inside the same destination
+  rectangle, such as "QuickTime™ and a", "Photo - JPEG decompressor", and
+  "are needed to see this picture"; those fallback text records are likewise
+  consumed but not emitted after the JPEG payload has decoded. If a 0x8200
+  record does not contain a decodable JPEG, the record is still consumed by its
+  uint32be payload size so the following operators remain aligned. If there are
+  no 0x8200 records, the converter asks deark to rasterize the whole PICT page
+  and embeds the resulting PNG at the decoded 0x0098/0x009A destination
+  rectangle. The WWDC Annoucement sample uses this path for its mode-64
+  DirectBits image.
+- DPL2 QuickDraw vector drawing now emits PDF vector operators for observed
+  Line, LineFrom, ShortLine, ShortLineFrom, rectangle/round-rectangle/oval box,
+  and frame/paint/erase/fill polygon records. The emitted objects follow the
+  original display-stream byte order, use the current 0x0007 pen width, and
+  participate in normal z-order with decoded bitmaps and selectable text.
+  Observed 0x000A FillPat state is preserved as an 8x8 PDF tiling pattern for
+  filled polygon operations that use the active fill pattern.
+- DPL2 QuickDraw 0x0001 Clip region records are tracked as drawing state. The
+  observed corpus contains 858 clip records in 149 DPL2 files; almost all are
+  rectangular size-10 regions. Each emitted text, image, and vector draw event
+  now carries the active clip bounding rectangle and is wrapped in a PDF clip
+  path, so later clip changes do not permanently constrain the whole page.
+  The two non-rectangular regions in the corpus are standard QuickDraw region
+  run lists in 18109/IGL-C15.dp; their y rows and x-pair runs are decoded into
+  675 and 677 one-scanline PDF clip rectangles, clamped to the region bbox.
+- PICT 0x00A1 LongComment kind 0x8003 is a Common Ground private filled-span
+  operator in the DPL2 samples. Its payload is uint16 span_count followed by
+  span_count records of four signed uint16 values: top, left, bottom, right.
+  All 389 observed payloads in 97 DPL2 files exactly match this structure,
+  totaling 16,569 spans. The PDF compositor emits these spans as filled vector
+  rectangles in stream order with the active foreground color and clip.
+- Unsupported or structurally invalid input fails before writing the requested
+  output file.

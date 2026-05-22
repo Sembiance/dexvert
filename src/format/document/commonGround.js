@@ -8,6 +8,5 @@ export class commonGround extends Format
 	forbidExtMatch = true;
 	magic          = ["Common Ground Digital Paper document"];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="CGDC" && ["CGVM", "RcDs"].includes(macFileCreator);
-	notes          = "Can probably only be converted properly with the Common Ground software itself, which I was unable to locate.";
-	converters     = ["strings"];
+	converters     = ["vibe2pdf"];	// vibe converter not complete, but good enough for now
 }

@@ -1,0 +1,1809 @@
+Asymetrix ToolBook sample format notes
+======================================
+
+Scope
+-----
+
+These notes document what was verified from the sample0 corpus in this
+directory. The implemented extractor is deliberately conservative: it accepts
+only files that contain the observed ToolBook stream signature, preserves the
+complete byte stream, extracts deterministic embedded standard media objects,
+and emits a byte map for audit.
+
+This is not a complete semantic decoder for the native ToolBook object model.
+The unresolved parts are listed at the end.
+
+Observed container forms
+------------------------
+
+1. Plain ToolBook book stream
+
+   Offset  Size  Meaning
+   0x0000  4     Signature: 03 4A 42 4F
+   0x0004  4     Version/build discriminator. Observed examples:
+                 72 13 42 1C
+                 71 13 42 1C
+                 03 00 00 02
+                 01 00 00 03
+                 01 00 00 04
+                 01 00 10 04
+                 01 00 00 05
+   0x0008  ...   Fixed header and descriptor area. The first 0x100 bytes are
+                 retained verbatim in manifest.json as toolbook_header_hex.
+
+2. PE-wrapped ToolBook application
+
+   Some .tbk files begin with a normal Windows MZ/PE executable. The extractor
+   validates the PE header, then locates the embedded ToolBook stream by the
+   same 03 4A 42 4F signature. In the observed samples this is a launcher or
+   application wrapper with the book stream embedded after the PE header and
+   resource area.
+
+   The extractor writes:
+
+   wrapper_stub.exe        bytes before the ToolBook stream
+   toolbook_payload.tbkbin bytes from the ToolBook signature through EOF
+
+Header observations
+-------------------
+
+The first four bytes identify the native ToolBook stream:
+
+03 4A 42 4F
+
+Static analysis of example0/TBOOK.EXE and example0/TBKBASE.DLL shows that the
+Runtime ToolBook 1.5 loader validates the first eight bytes as four little
+endian 16-bit words:
+
+Offset  Size  Meaning
+0x0000  2     Signature word 0: 0x4A03
+0x0002  2     Signature word 1: 0x4F42
+0x0004  2     Format/build word 0. Runtime ToolBook 1.5 expects 0x1372.
+0x0006  2     Format/build word 1. Runtime ToolBook 1.5 expects 0x1C42.
+
+The byte form of the Runtime ToolBook 1.5 format/build words is therefore:
+
+72 13 42 1C
+
+One example0 file, CATALIST.TBK, uses this exact Runtime ToolBook 1.5 signature.
+Some sample0 files use 71 13 42 1C, which appears to be a very close 1.x
+variant. Later-looking samples commonly use little endian word pairs such as
+01 00 00 03, 01 00 00 04, 01 00 10 04, and 01 00 00 05. Those are recognized as
+observed ToolBook streams, but the ToolBook 1.5 runtime in example0 is not proof
+of their complete loader semantics.
+
+The fixed file header is 0x100 bytes. Runtime ToolBook 1.5 actually reads
+0x116 bytes during open: the 0x100-byte fixed header plus the first 0x16 bytes
+of the native stream beginning at offset 0x100. That is why native record bytes
+at 0x100 are part of the runtime's first validation/read path, but they are not
+part of the fixed header.
+
+Values with the byte pattern 14 00 00 xx occur repeatedly in the fixed header
+and also inside native object data. The samples and runtime code indicate that
+these are ToolBook-native descriptor/control words, but their complete
+field-level semantics were not fully resolved.
+
+Runtime code landmarks
+----------------------
+
+example0 contains the Runtime ToolBook 1.5 parser/viewer:
+
+* TBOOK.EXE is the Windows 3.x runtime shell.
+* TBKBASE.DLL owns book loading, native object access, drawing, and image
+  storage. Export CDBFILEOPEN is at segment 14:0064.
+* TBKCOMP.DLL owns script compilation/decompilation support. Its exports include
+  SCRIPTCOMPILE, SCRIPTEXPANDTEXT, SCRIPTSTRIPTEXT, and SCRIPTCODELENGTH.
+* TBKUTIL.DLL contains runtime UI/property resources, including object type
+  names such as Book, Background, Page, Button, Field, Picture, PaintObject, and
+  Hotword.
+
+Static disassembly of TBKBASE.DLL shows this open path for Runtime ToolBook 1.5:
+
+* CDBFILEOPEN canonicalizes the path, checks for an already-open book, then calls
+  the storage loader in segment 101.
+* The storage loader reads 0x116 bytes from file offset zero.
+* It checks words at offsets 0x0000 and 0x0002 for 0x4A03 and 0x4F42.
+* It checks words at offsets 0x0004 and 0x0006 against the format words supplied
+  by the caller. For CDBFILEOPEN those are 0x1372 and 0x1C42.
+* It copies fixed-header bytes 0x0008 through 0x00FA into its in-memory book
+  context, then uses selected values near 0x00F8-0x0106 and the first native
+  record prefix at 0x0100.
+
+This gives a first-principles boundary for the first part of the file: the magic
+and 1.5 format words are not guessed from sample bytes; they are checked by the
+original runtime loader.
+
+Runtime object type names
+-------------------------
+
+TBKUTIL.DLL contains a ToolBook string-manager resource with type 0x80D5. The
+resource format observed in TBKUTIL is:
+
+Offset  Size  Meaning
+0x0000  2     Number of strings in the resource.
+0x0002  2     First string ID.
+0x0004  2     Last string ID.
+0x0006  n*6   String entries, one per string:
+              uint16 string_id
+              uint16 byte_length
+              uint16 offset_from_string_pool
+...     ...   NUL-separated string pool. The byte_length field excludes the
+              trailing NUL.
+
+Resource 0x80D5/name 3 starts with count 123, first ID 0x0BB8, last ID 0x0E44.
+Its first entries are the runtime's object/type labels:
+
+Index  String ID  Text
+0      0x0BB8     None
+1      0x0BB9     Book
+4      0x0BBC     Background
+5      0x0BBD     Page
+8      0x0BC0     Rectangle
+9      0x0BC1     Button
+10     0x0BC2     Field
+11     0x0BC3     Group
+12     0x0BC4     Ellipse
+13     0x0BC5     RoundedRectangle
+14     0x0BC6     Line
+15     0x0BC7     Polygon
+16     0x0BC8     IrregularPolygon
+17     0x0BC9     Arc
+18     0x0BCA     Pie
+19     0x0BCB     AngledLine
+20     0x0BCC     Curve
+21     0x0BCD     PaintObject
+22     0x0BCE     RecordField
+23     0x0BCF     Hotword
+24     0x0BD0     Hotword
+25     0x0BD1     Picture
+27     0x0BD3     MultipleSelection
+28     0x0BEA     Object
+29     0x0BEB     Graphic
+30     0x0BEC     Graphics
+
+This table is runtime metadata, not yet a direct parse of a .TBK object record.
+It does give the authoritative vocabulary and ordering used by the original
+ToolBook runtime when it names object classes and property dialogs.
+
+Data and resource observations
+------------------------------
+
+The book stream contains several classes of data:
+
+* Native ToolBook page/object/script data. These records contain readable object
+  names, OpenScript source fragments, property names, font names, palette data,
+  page names, paths, and binary page/object state.
+* Native image-like data. Many samples contain long runs that look like indexed
+  or packed bitmap data but do not include a standalone BMP file header.
+* Standard embedded media files. These are true standalone files embedded inside
+  the larger ToolBook stream and can be extracted exactly by validating their
+  own file formats.
+
+Standard embedded media extraction
+----------------------------------
+
+The extractor recognizes only media whose own internal length/structure can be
+validated without guessing and whose full byte range lies inside an active
+ToolBook native record reached through the native index:
+
+* BMP: starts with BM, has a valid BITMAPFILEHEADER size, valid DIB header size,
+  and byte range lies inside the input.
+* RIFF: starts with RIFF, has a valid RIFF size, and observed form type WAVE,
+  AVI, or RMID.
+* JPEG: starts with FF D8 FF and is parsed by JPEG marker segments through EOI.
+* GIF: starts with GIF87a or GIF89a and is parsed through image/extension
+  sub-blocks to the GIF trailer.
+* ZIP: starts with PK 03 04 and is bounded by a valid end-of-central-directory
+  record.
+
+When valid embedded media ranges overlap, the earliest non-overlapping valid
+range is kept. This avoids emitting duplicate nested detections inside a larger
+already-extracted media file. Media signatures in inactive/free/deleted native
+storage are ignored.
+
+ToolBook bitmap-info descriptors
+--------------------------------
+
+Some native records contain a BITMAPINFOHEADER and palette whose calculated
+pixel start is immediately followed by another ToolBook native object record,
+not by pixel bytes. Earlier reports grouped these under unhandled ToolBook
+bitmap records because the header is inside a ToolBook bitmap envelope. They
+are now classified separately as ToolBook bitmap-info descriptors without
+contiguous pixels. They are useful display/object metadata, but they are not
+standalone extractable bitmap payloads in their observed byte layout.
+
+ToolBook DIB/property-stream descriptors
+----------------------------------------
+
+Some active Page and Background records contain a BITMAPINFOHEADER and color
+table, but the byte position where a normal DIB's pixel array would begin is a
+ToolBook native property stream. The most common property name at that position
+is PHYSSIZE. The property stream is not guessed from image-looking bytes: it is
+identified by the explicit CP1252 property name in the native object record and
+by the local-offset dword immediately after the property name, which points
+within the enclosing indexed native record.
+
+The extractor now handles the subset where the source bytes contain all of the
+following structural evidence:
+
+* The DIB's computed pixel start contains the literal native property
+  ":PHYSSIZE".
+* The PHYSSIZE value is a 4-byte value equal to width * 15 and height * 15
+  twips, matching the DIB dimensions.
+* The word immediately before the DIB header is a local pointer into the same
+  indexed native record and lands in the post-property image-data region.
+* The pixel byte count implied by the DIB header remains inside the owning
+  indexed native record.
+
+For these records, the native property stream is removed and a BMP is emitted
+from the DIB header/color table plus the pixel bytes that begin immediately
+after the PHYSSIZE value and its following 4-byte native property-control word.
+In --verbose output these rows are listed in content_index.tsv as
+native_property_stream_dib.
+
+Property-stream descriptors that fail the pixel-payload checks are no longer
+all lumped together. If a source-side PHYSSIZE property is present and its
+width/height twips match the DIB header, the remaining record is classified as
+ToolBook native property metadata rather than as an image. The extractor now
+recognizes both observed metadata layouts:
+
+* direct_physsize_value: after the ":PHYSSIZE" name and a 4-byte local pointer,
+  the value is a 2-byte length of 4 followed by width * 15 and height * 15.
+* compound_physsize_value: the same 2-byte length and twip pair appear later in
+  the same bounded property record, before the next PHYSSIZE property marker.
+
+Those rows are reported as toolbook_property_stream_descriptor_metadata when no
+direct nested DIB header is inside the following bounded window, or
+toolbook_property_stream_with_nested_dib_descriptor when the native metadata
+precedes another valid DIB header. This is intentional: examples such as
+sample0/10262/TBK15.TBK have PHYSSIZE metadata followed by ToolBook
+object/script bytes instead of a contiguous pixel array, so extracting them
+would reintroduce static garbage.
+
+Some records have an outer DIB-info header whose property stream does not
+itself carry matching physical dimensions, but the stream immediately contains
+a nested DIB-info header whose own pixel start has a direct PHYSSIZE value
+matching the nested DIB dimensions. Those outer rows are classified as
+toolbook_property_stream_container_with_nested_physsize_descriptor.
+
+Only property-stream records that do not satisfy either the strict extraction
+rule or this metadata rule remain listed as property-stream unknowns. If a
+PHYSSIZE property is present but no matching twip pair is found, the rows are
+reported as toolbook_property_stream_unmatched_physsize or
+toolbook_property_stream_unmatched_physsize_with_nested_dib. These are native
+ToolBook property streams, but their property value semantics are still not
+fully decoded.
+
+Other DIB-info descriptor classes
+---------------------------------
+
+Rejected DIB headers are separated by their source-side structure:
+
+* toolbook_compressed_dib_descriptor: the DIB header/palette is followed by a
+  ToolBook-native compressed pixel payload. The first payload dword is a local
+  pointer into the same indexed native record and terminates before the next
+  nested DIB header/name descriptor. The payload is source-bounded but its
+  compression opcodes are not fully decoded yet, so no BMP is emitted. The
+  compressed byte range starts at computed_pixel_offset + 4 and ends at
+  owning_native_record_offset + first_payload_dword.
+* toolbook_property_stream_descriptor_metadata: the computed DIB pixel start is
+  a ToolBook native property stream. The PHYSSIZE property exactly matches the
+  DIB dimensions in twips, but the bytes after it are native metadata rather
+  than a proven contiguous pixel payload.
+* toolbook_property_stream_with_nested_dib_descriptor: the same PHYSSIZE
+  metadata rule applies, and another valid DIB header appears later in the
+  same native record. The earlier descriptor is not emitted as a bitmap because
+  the bytes before the nested DIB are native object/property structure.
+* toolbook_property_stream_container_with_nested_physsize_descriptor: the
+  outer computed pixel start is a ToolBook property/container stream, and the
+  first nested DIB descriptor inside that stream has its own dimension-matched
+  PHYSSIZE value. The outer header is not emitted as a bitmap.
+* toolbook_property_stream_unmatched_physsize: the computed DIB pixel start is
+  a ToolBook native property stream containing PHYSSIZE, but the observed
+  property value does not match the DIB dimensions under the decoded direct or
+  compound layouts.
+* toolbook_property_stream_unmatched_physsize_with_nested_dib: the same
+  unmatched PHYSSIZE condition applies, and another valid DIB header appears
+  later in the same native record.
+* toolbook_bitmap_info_container_with_nested_dib_descriptor: the DIB is backed
+  by a decoded ToolBook bitmap envelope, but the computed pixel start begins a
+  native object/container record and that container reaches another DIB header
+  before the outer DIB's expected pixel end.
+* toolbook_bitmap_info_descriptor_with_native_payload: the DIB is backed by a
+  decoded ToolBook bitmap envelope, but the computed pixel start is native
+  object/script payload with no nested DIB header in the bounded pixel window.
+  These bytes are content/handler data, not a bitmap pixel array.
+* toolbook_native_record_container_with_nested_dib_descriptor: the computed
+  pixel start begins a native object/container record and reaches another DIB
+  header, but the outer DIB header is not backed by a decoded ToolBook bitmap
+  envelope.
+* toolbook_nested_dib_container_with_extracted_dib: the outer computed pixel
+  range contains a nested DIB header, and that nested DIB has a complete
+  contiguous pixel payload inside the same active native record. The nested DIB
+  is emitted as native_nested_dib; the outer descriptor remains metadata.
+* toolbook_nested_dib_chain_crosses_native_metadata: the outer descriptor
+  reaches one or more nested DIB headers and the terminal header is internally
+  plausible, but its computed physical byte range crosses decoded native index
+  or page metadata. Treating those physical bytes as a contiguous DIB recreates
+  static/garbage images, so these records are not emitted.
+* toolbook_nested_dib_chain_spans_native_records: the same nested-chain pattern
+  ends in a plausible DIB header whose computed range runs past the owning
+  native record into later native records. This is source-backed native image
+  structure, but not a decoded standalone pixel array yet.
+* toolbook_nested_dib_chain_to_property_stream_metadata: a nested-DIB chain
+  terminates at a descriptor whose computed pixel start is a dimension-matched
+  PHYSSIZE property stream with no proven pixel payload.
+* toolbook_nested_dib_chain_to_property_stream_with_nested_dib_descriptor: a
+  nested-DIB chain terminates at a dimension-matched PHYSSIZE property stream
+  that itself precedes another nested DIB descriptor.
+* toolbook_nested_dib_chain_to_unmatched_physsize_property_stream: a
+  nested-DIB chain terminates at a property stream containing PHYSSIZE, but the
+  observed value layout is not one of the decoded direct/compound layouts.
+* toolbook_nested_dib_chain_to_invalid_metadata: a nested-DIB chain terminates
+  in DIB-shaped metadata whose computed range is invalid. These rows are
+  metadata, not emitted pixels.
+* toolbook_dib_info_with_native_payload: the computed pixel start begins native
+  object/script payload and no nested DIB header appears in the bounded pixel
+  window. These bytes are not a bitmap pixel array.
+* toolbook_dib_info_with_native_record_at_pixel_start: the computed DIB pixel
+  start begins with another ToolBook native record header.
+* toolbook_dib_info_with_nested_dib_header: the computed pixel range contains
+  another valid DIB header before the first DIB could end.
+* toolbook_dib_info_with_nested_native_descriptor: the header is nested inside
+  a larger native descriptor record.
+* invalid_dib_metadata: the DIB header dimensions and bit depth are internally
+  plausible, but the computed pixel range runs outside the file or active
+  record.
+* suppressed_dib_metadata: tiny 1x1 DIB-shaped values suppressed because the
+  record shape is metadata rather than user-visible content in the observed
+  corpus.
+
+These classes are still unextracted content/metadata, but they are no longer
+reported as generic DIB-like guesses.
+
+Native class-41 icon resources
+------------------------------
+
+Native records whose object header has type_word 0x001B, class_id 41, and
+object_id 0x0201 store ToolBook image/icon resource data. Many of these records
+contain normal BMP files; those are extracted by the embedded-media path from
+their BM file headers.
+
+The same class-41 records also store headerless Windows icon image payloads.
+The source-side proof for these is:
+
+* the enclosing active native record is class_id 41 with type_word 0x001B and
+  object_id 0x0201;
+* the image starts with a BITMAPINFOHEADER;
+* the dword immediately before the DIB is 0x00000016, the size of a single
+  ICONDIR plus one ICONDIRENTRY;
+* the dword eight bytes before the DIB is the stored allocation size for the
+  icon payload;
+* the DIB height is the Windows icon doubled height: XOR bitmap height plus
+  AND-mask height;
+* the stored allocation size is at least the computed DIB + XOR + AND-mask
+  payload size, and any surplus bytes in that allocation are zero padding.
+
+The extractor emits these as .ico files using the DIB payload unchanged inside
+a generated one-image ICONDIR wrapper. Observed extracted payloads are 32x32
+icons at 1, 4, or 8 bits per pixel. Two observed class-41 descriptors in
+sample0/13403/clothng.tbk have a stored allocation size of 728 bytes for a
+32x64 4-bpp icon payload whose computed DIB + masks require 744 bytes; those
+are reported as native_class41_icon_descriptor_size_mismatch and are not
+extracted.
+
+Native index and active records
+-------------------------------
+
+Static analysis of TBKBASE.DLL segment 109 and the sample files identifies the
+native allocation/index tree used by Runtime ToolBook 1.x and by the observed
+01 00 00 03/04 and 03 00 00 02 families.
+
+The fixed header ends at 0x100. The bytes at 0x100 are the prefix of the first
+native stream descriptor:
+
+Offset  Size  Meaning
+0x0100  2     Size of the root/native control block.
+0x0102  2     Descriptor flags/check value.
+0x0104  4     Payload-relative offset of the root/native control block.
+0x0108  4     Payload-relative end/secondary offset of that block.
+0x010C  2     Native control record size, 0x0054 in the decoded samples.
+0x010E  4     Payload-relative offset of the native index root page.
+0x0112  2     Declared native record count.
+0x0114  2     Native index flags.
+
+The native index root page is 0x140 bytes. Index pages contain 16 descriptors.
+Two descriptor sizes are used:
+
+0x140-byte page: 16 descriptors * 20 bytes
+0x180-byte page: 16 descriptors * 24 bytes
+
+The descriptor layout is:
+
+Offset  Size  Meaning
+0x00    4     Payload-relative file offset of a child page or active record.
+0x04    4     Alternate/loaded pointer field; normally zero on disk.
+0x08    2     Flags. Child page descriptors have bit 0x0004 set.
+0x0A    2     Unit/tag. The decoded index descriptors use 0x0006.
+0x0C    2     Byte length. This is a 16-bit field.
+0x0E    2     Handle/cache field. It is separate from the byte length.
+0x10    4     Count/range/record-id field.
+0x14    4     Additional record id/extra field, only present in 24-byte leaf
+              descriptors.
+
+The 0x0C length field is important. Earlier analysis incorrectly treated
+0x0C..0x0F as one 32-bit size, which made valid records with a nonzero handle
+look invalid and caused the extractor to scan stale bytes outside active
+records. The current extractor uses the runtime-compatible 16-bit length plus
+separate 16-bit handle layout.
+
+A descriptor with a nonzero offset, flags bit 0x0004, unit 0x0006, and length
+0x0140 or 0x0180 is a child index page. A descriptor with a nonzero offset and
+another nonzero length is an active native record. Null descriptors with offset
+zero are empty slots and are not content.
+
+Pointer base:
+
+* Plain ToolBook streams use payload-relative offsets. For those files, a
+  descriptor offset of 0x00000116 points to file offset 0x00000116.
+* PE-wrapped ToolBook applications in the sample corpus use file-absolute
+  offsets inside the native index and root/native control descriptors. For
+  example, 15951/AEGYPTEN.TBK embeds its ToolBook stream at file offset 0x0E00,
+  but the native index root field is 0x00000F16, which is the actual file
+  offset 0x0F16, not payload offset 0x0F16. Interpreting those fields as
+  file-absolute resolves 42 active records and 6 index pages with zero bad
+  entries, matching the declared record count.
+
+The extractor tries both bases where applicable and accepts only a clean tree:
+no bad entries and a resolved active record count equal to the descriptor count
+or exactly one less for an empty/deleted slot.
+
+Default extraction is now active-record based:
+
+* Standard embedded media is emitted only when the whole media file lies inside
+  an active native record.
+* Headerless DIB reconstruction is attempted only inside active native records.
+* text.txt and references.txt are generated from active native records, not
+  from free/deleted gaps. The diagnostic content_index.tsv is generated only
+  with --verbose.
+* Bytes in index pages, root/native control blocks, inactive gaps, PE wrappers,
+  and deleted/free storage are not treated as extractable content.
+
+This change intentionally removes earlier garbage outputs such as
+12773/ERGOOPEN.TBK image_0001_off_00004329_578x61_4bpp.bmp. That DIB-shaped
+range is not reached through the active native index. With --verbose, the
+active ERGOOPEN image descriptor at 0x0003087e is listed in content_index.tsv
+as unresolved native bitmap metadata because its computed pixel range is not a
+direct DIB pixel payload.
+
+Extractor output
+----------------
+
+By default, asymetrixToolbook.py writes content-oriented files only, directly in
+the requested output directory:
+
+embedded_####_off_XXXXXXXX.ext
+  Validated standalone embedded media, currently mainly complete BMP files.
+
+image_####_off_XXXXXXXX_WxH_Bbpp.bmp
+  Reconstructed Windows BMP files made from ToolBook-stored headerless DIB
+  payloads. Descriptor-only DIB headers whose following bytes are ToolBook
+  native records are not emitted as images.
+
+text.txt
+  Labels, body text, handler names, menus, and references recovered from native
+  ranges.
+
+references.txt
+  File/book/program/image references found in native ranges.
+
+Use --verbose to additionally write diagnostic files:
+
+manifest.json
+content/content_index.tsv
+  Tab-separated diagnostic index of extracted media, reconstructed DIBs, clean
+  external file references, and native bitmap descriptor records that are not
+  emitted as images because their pixel ranges point to native ToolBook
+  records.
+  Input size/hash, wrapper kind, ToolBook offset, version bytes, fixed header
+  bytes, media list, and completion note.
+
+toolbook_payload.tbkbin
+  Complete native ToolBook stream from the 03 4A 42 4F signature to EOF.
+
+wrapper_stub.exe
+  Only for PE-wrapped samples; contains all bytes before the ToolBook stream.
+
+embedded_media/*
+  Deterministically validated standard embedded media files.
+
+strings.txt
+  Offset-tagged ASCII strings from the complete input. This is an aid for
+  verification and reverse engineering, not a format boundary.
+
+byte_map.json and byte_map.csv
+  Top-level byte accounting for the complete input. Every input byte belongs to
+  exactly one top-level range:
+
+  * pe_wrapper_stub, when present
+  * toolbook_payload
+
+  Embedded media ranges are listed as overlay ranges because they are byte
+  ranges inside the ToolBook payload rather than separate top-level container
+  allocation units.
+
+native_map.json
+  Native-structure analysis. This includes fixed-header 32-bit words, the
+  decoded native index descriptor/tree, active record list, media envelope
+  prefixes, and classified ASCII records from active native records.
+
+native_index.json
+  Verbose-only decoded native index tree: descriptor fields, index pages,
+  active record descriptors, bad entries if any, and active/inactive byte
+  counts.
+
+native_records.json
+  Verbose-only top-level native record map. For each active record this decodes
+  the record key, declared length, auxiliary length words, class/id/name fields,
+  resolved 14 00 <record-key> references, and content text blocks that fall
+  inside that record. It also decodes the class-2 Page/Background directories
+  and the header-pointed class-3 name hash tables that validate against typed
+  string values. For Page and Background records it also lists decoded stored
+  text values whose value body contains a zero prefix word, a storage/capacity
+  word, an explicit byte length, and CP1252 text bytes. This is deterministic
+  and index-backed, but it is still not a complete semantic decode of every
+  object payload byte.
+
+native_segments/*
+  Binary slices for active native records reached through the native index.
+  These are not additional files from the book; they are record byte ranges
+  split out for inspection.
+
+Native structure found in example0/CATALIST.TBK
+-----------------------------------------------
+
+CATALIST.TBK is a plain Runtime ToolBook 1.5 stream, 460222 bytes, SHA-256:
+
+61fc5c77b886da09989575dffe732b9d5ed4aa87a75ae8d395b4f7d78bf54b0e
+
+The decoded native index accounts for every byte in the file: the 0x100-byte
+fixed header, the first native descriptor at 0x0100, 22 index pages, 284 active
+records, the root/control block at 0x704fc..0x7056a, and the final 0x54-byte
+native control tail at 0x7056a..0x705be. There are no inactive or unassigned
+byte ranges in this file.
+
+CATALIST byte categories:
+
+Category                         Bytes
+Fixed header plus open probe       278
+Native index pages                8192
+Root/control block                 110
+Final native control tail           84
+Active native records           451558
+Total                           460222
+
+Active record bytes by decoded class:
+
+Class  Runtime name  Records  Bytes
+1      Book          1         3080
+2      native dir    2         3880
+3      name/list     35        8494
+4      Background    8         33904
+5      Page          238       402200
+
+The 284 active records all start with the same top-level native object header:
+
+Offset  Size  Meaning
+0x00    2     Record key used by 14 00 <record-key> references.
+0x02    2     Declared body length. For all CATALIST records this plus 2 equals
+              the byte length from the native index.
+0x04    2     Auxiliary length/offset word. Exact semantic role remains
+              class-specific.
+0x06    2     Auxiliary length/used-size word. Exact semantic role remains
+              class-specific.
+0x08    1     Count/flags byte.
+0x09    1     Status flags.
+0x0A    2     Type word. Observed values include 0x0045 for the Book record,
+              0x0063 for Background records, 0x0055 for Page records, and
+              0x0019 for class-3 list/index records.
+0x0C    2     Class id.
+0x0E    2     Object id.
+0x10    2     Owner/reserved word.
+0x12    32    NUL-padded CP1252 name/storage field. For Background and Page
+              records this is the direct object name field. For Book, class-2,
+              and class-3 records the bytes are present, but the field appears
+              to be class-specific payload rather than a direct object name.
+
+CATALIST class counts from this header:
+
+Class  Runtime name  Count  Notes
+1      Book          1      Book-level state, fonts, palette, page lists.
+2      unknown       2      Native directory records. One directory maps 237
+                            live Page records; the other maps 7 Background
+                            records. These are internal records rather than
+                            public object labels.
+3      unknown       35     List/index records; many contain 14 00 references
+                            to Page records and short catalog/page names.
+4      Background    8      Background records such as Location Page, UDel Card,
+                            Library Card, Main Menu, and Master List.
+5      Page          238    Page records with catalog entries, handlers, and
+                            page text. One Page-class record has object id
+                            0xffff and is not present in the live page
+                            directory.
+
+Book payload records
+--------------------
+
+The Book record is class id 1. Its common native record header is followed by
+book-level tables, palettes, font/property descriptors, and OpenScript handler
+storage. The extractor now decodes several source-backed Book payload
+containers.
+
+Resolved Book record-reference blocks are grouped from consecutive
+14 00 <record-key> markers whose keys resolve through the active native record
+index. In CATALIST this decodes 9 Book reference blocks. The largest block
+contains 19 class-3 name/list references; the other blocks point to the hidden
+Page record, class-2 Page/Background directories, and smaller class-3 tables.
+
+CATALIST also contains a Book-level 64-entry color table:
+
+Offset  Size  Meaning
+0x00    2     Palette marker word 0x0301.
+0x02    2     Zero.
+0x04    256   64 RGBQUAD entries, stored as blue, green, red, reserved.
+
+The palette is accepted only when all 64 reserved bytes are zero. In CATALIST
+the palette starts at Book-local offset 0x01f6 and accounts for 260 bytes.
+
+The Book record also contains counted local-pointer tables. These are accepted
+only when the table start is itself the value of another even-aligned
+Book-local pointer word outside the table, the count is 2..64, every entry is a
+nonzero even-aligned local offset inside the same Book record, and the table
+does not overlap a previously decoded Book payload segment.
+
+Offset  Size  Meaning
+0x00    2     Entry count N.
+0x02    2*N   Book-local target offsets.
+
+The 2-byte words that point to accepted local-pointer tables are emitted as
+book_local_pointer_table_reference segments when they do not overlap another
+decoded Book segment. These fields are part of the same source-backed structure
+as the table: they are the pointer fields that make the table start
+deterministic.
+
+Some Book pointer tables are immediately preceded by a fixed 50-byte descriptor
+block plus one or more pointer-table reference words. A pre-table descriptor is
+accepted only when it is bounded by already decoded Book structures, has exactly
+50 bytes, starts with a word equal to the following table's local offset plus
+one, has a zero word at +0x02, and contains a nonempty CP1252 NUL-terminated
+name at +0x04.
+
+Offset  Size  Meaning
+0x00    2     Following pointer-table local offset plus one.
+0x02    2     Zero.
+0x04    ...   CP1252 NUL-terminated descriptor name.
+...     ...   Descriptor tail. The tail is source-bounded but its individual
+              fields are not fully named yet.
+
+The Book record can also contain a compact named descriptor immediately before
+the first pointer-target payload. This is accepted only when the descriptor is
+bounded by decoded Book structures, has an id word of 1, has a payload pointer
+equal to the descriptor end, has a pointer-table word equal to an accepted
+pointer table's local offset plus one, has a zero word at +0x06, and the
+remaining bytes are a nonempty printable CP1252 name fragment. In some books
+the following payload continues the font face name, so this field is not always
+the complete name.
+
+Offset  Size  Meaning
+0x00    2     Descriptor id. Observed accepted value: 1.
+0x02    2     Local offset of the following payload.
+0x04    2     Accepted pointer-table local offset plus one.
+0x06    2     Zero.
+0x08    ...   Printable CP1252 descriptor name fragment, bounded by the
+              payload offset.
+
+The compact descriptor's payload region starts at the local payload pointer and
+ends at the linked pointer table. Bytes in that region may already be decoded
+as more specific structures, such as zero padding or pointer-table references.
+Any remaining unclaimed ranges inside that source-bounded region are emitted as
+book_compact_descriptor_payload_fragment segments. These fragments are payload
+containers; their internal fields are not fully named yet.
+
+A second small pre-table descriptor is accepted only when it occupies exactly
+the six bytes immediately before an accepted pointer table, has a zero middle
+word, and its third word equals the following pointer table entry count plus
+one.
+
+Offset  Size  Meaning
+0x00    2     Local payload pointer at or after the following table.
+0x02    2     Zero.
+0x04    2     Following pointer-table entry count plus one.
+
+A named payload-reference descriptor is accepted only when it is the whole
+unclaimed range immediately before a decoded pointer-table reference, starts
+with a local payload pointer that lands after that reference, has a zero word
+at +0x02, and then stores a printable CP1252 NUL-terminated name. The bytes
+after that NUL may be all zero padding, or zero padding followed by one or more
+Book-local offset words. Descriptors with those extra offset words are emitted
+as descriptors but are not used yet to infer a payload fragment, because the
+extra-word semantics are not proven.
+
+Offset  Size  Meaning
+0x00    2     Local payload pointer.
+0x02    2     Zero.
+0x04    ...   Printable CP1252 NUL-terminated name, optional zero padding,
+              and optional extra Book-local offset words.
+
+The descriptor's payload pointer and the following pointer-table reference
+define a bounded payload region ending at the referenced local pointer table.
+Any still-unclaimed bytes inside that region are emitted as
+book_named_payload_reference_payload_fragment segments. In CATALIST the
+descriptor named UuLqqNbDU points to a payload at local 0x077b and the
+following reference points to the table at local 0x0936; the unclaimed payload
+fragment 0x077b..0x0905 accounts for 394 bytes.
+
+CATALIST also has an extended named payload-reference descriptor at
+0x0444..0x0458 named CATALIST 1.0. It stores payload pointer 0x045d, a zero
+word, the NUL-terminated name, two zero pad bytes, and one extra Book-local
+offset word 0x0490 before the following pointer-table reference. That descriptor
+is byte-accounted as source-bounded metadata, but the extractor does not use it
+to infer the larger payload region until the extra word is understood from the
+runtime.
+
+These tables are not image or text payloads by themselves. They name source
+owned lists of Book-local descriptors, including font/property/script storage
+areas that still need deeper semantic decoding.
+
+Accepted pointer-table entries also define source-owned payload targets. When
+a pointer-table entry points to a local offset, the target's source-bounded
+span ends at the next decoded pointer-table target or the next strong decoded
+Book structure, whichever comes first. A 2-byte
+book_local_pointer_table_reference does not by itself truncate the source-owned
+target span; if such a reference word falls inside a target span, the reference
+word remains separately decoded and only the unclaimed bytes around it are
+emitted as book_pointer_target_payload_fragment segments.
+All-zero runs inside a pointer-target span do not terminate that span; they can
+remain separately accounted as padding while the later nonzero bytes are still
+owned by the same source-bounded local-pointer-table target.
+These fragments are ownership/accounting ranges, not fully decoded semantic
+records. In CATALIST this accounts for fifteen fragments, 547 bytes total,
+including the previously split target descriptor bytes at 0x06af..0x06c7,
+0x06e3..0x0710, and the 0xffffffff sentinel at 0x072e..0x0732. Across the
+current sample corpus plus example0 this strict source-bounded rule accounts
+for 2554 pointer-target fragments and 275852 bytes.
+
+Stripped Book-local OpenScript objects are decoded from the TBKCOMP.DLL
+script runtime rather than from text-pattern matching. TBKCOMP exports
+SCRIPTCOMPILETEXT, SCRIPTSTRIPTEXT, SCRIPTENUM, SCRIPTHANDLERCODEBIAS, and
+SCRIPTCODELENGTH. Those routines prove the following serialized script header
+fields for compiled script blocks whose type word is 0x0104:
+
+Offset  Size  Meaning
+0x00    2     Script object type. Accepted value: 0x0104.
+0x02    2     Offset of script section 0, when nonzero.
+0x04    2     Offset of script section 1, when nonzero.
+0x06    2     Offset of script section 2, when nonzero.
+0x08    2     Source-text offset. SCRIPTCOMPILETEXT initializes this to 0x001e;
+              SCRIPTSTRIPTEXT zeros it after removing stored source text. The
+              current extractor accepts only stripped objects where this is 0.
+0x0A    2     Compiled bytecode start. SCRIPTCODELENGTH uses this as the start
+              of the code range.
+0x0C    2     Compiled bytecode end. SCRIPTCODELENGTH returns this minus +0x0A.
+0x0E    2     Reserved/zero word in the decoded stripped examples.
+0x10    10    Script timestamp/version words copied by SCRIPTCOMPILETEXT.
+0x1A    4     Remaining header bytes before the first section.
+
+The extractor accepts a book_openscript_object only when the whole declared
+range from the 0x0104 type word through the code-end offset is inside an
+otherwise unclaimed Book gap, the section offsets are sorted and land before
+the code start, the source-text offset is zero, and the reserved word is zero.
+Book pointer-table reference words found inside an accepted script range are
+removed from the Book pointer-reference count because they are bytecode or
+string data, not Book-level pointers. It does not disassemble OpenScript
+bytecode tokens yet. In CATALIST this
+decodes one stripped Book script object at local offset 0x098a, 344 bytes
+long, including 286 runtime-confirmed bytecode bytes. Across sample0 this
+same strict rule currently decodes 18 stripped Book script objects. The
+largest is DAYBOOK.TBK's 8217-byte Book script object, including 7550
+runtime-confirmed bytecode bytes.
+
+For Book records that contain a stripped OpenScript object, the Book record
+header extension at local 0x0012..0x0019 is decoded when the first two words
+are zero, the third word equals the stripped script object's byte length, and
+the fourth word equals the script object's local offset plus 6. This is emitted
+as book_openscript_record_link. The rule currently matches all 18 stripped Book
+scripts in sample0 and the stripped Book script in example0/CATALIST.TBK.
+
+Some stripped Book scripts are followed by allocation/storage bytes that the
+Book header's aux_length_0 and aux_length_1 fields point into. A post-script
+tail is accepted only when both header aux fields are equal, that local offset
+lands shortly after a decoded stripped OpenScript object, the region is
+otherwise unclaimed, and every byte from the aux offset through the next decoded
+Book structure exactly duplicates a suffix of the just-decoded script object.
+This matches the TBKCOMP SCRIPTSTRIPTEXT behavior: it compacts the script object
+and returns the shorter code-end length, but the surrounding storage can retain
+the old bytes after the compacted object. The small region between the script
+code end and the header aux offset is emitted as
+book_openscript_auxiliary_prefix; the exact duplicated retained bytes are
+emitted as book_openscript_duplicate_tail. These are byte-accounting/storage
+segments, not separately displayed content. In CATALIST the prefix at
+0x0ae2..0x0ae8 consists of words 0x0000, 0x077a, 0x0000, and the header aux
+offset 0x0ae8 starts a 288-byte tail that exactly duplicates script-local
+0x09c2..0x0ae2.
+
+Small nonzero regions bounded by resolved Book record-reference blocks are
+emitted as book_record_reference_control_descriptor segments. These are not
+guessed from text or media signatures: both sides of the range are already
+decoded source references, the candidate range must be even-sized, nonzero, at
+most 64 bytes, and bounded by at least one resolved Book record-reference
+block. The descriptor stores its little-endian words in native_records.json.
+In CATALIST this accounts for four descriptors: the 44-byte initial Book
+control block at 0x001e..0x004a, a 12-byte block at 0x0108..0x0114, and the
+two 6-byte blocks at 0x012a..0x0130 and 0x01b0..0x01b6. Across the current
+sample corpus plus example0 this strict rule accounts for 680 descriptors and
+15394 bytes. The runtime purpose of the individual words is not fully named
+yet; repeated corpus forms show pointers/count-or-flag words that organize the
+following resolved record-reference lists.
+
+The small descriptor immediately after a Book palette and immediately before a
+Book local-pointer-table reference is emitted as
+book_palette_pointer_control_descriptor. It is accepted only when the four
+bytes are otherwise unclaimed, the previous strong decoded segment is the
+64-color Book palette, the next strong decoded segment begins after the
+pointer-reference word, the second word is zero, and the first word points
+inside that following strong segment. In CATALIST this accounts for
+0x02fa..0x02fe, whose first word 0x030a points inside the following compact
+named descriptor. Across the current sample corpus plus example0 this strict
+rule accounts for 39 descriptors and 156 bytes.
+
+The example0 Runtime 1.5 TBKBASE.DLL confirms that ToolBook's runtime font
+cache uses 0x35-byte in-memory font records. Exported functions LOCKFONT,
+GETFONTHANDLE, FMGETPAGEFONTHANDLE, FONTASCENT, FONTDESCENT, and
+FONTCHARWIDTH index that cache by multiplying the 1-based font id by 0x35.
+The first 37 bytes are copied from a font description argument, with a
+32-byte face-name field followed by five font attribute bytes/words; the
+remaining runtime-only fields store lock count, Windows font handles, ascent,
+descent, character width, and optional width-table pointers. The Book-local
+font descriptor bytes are not yet proven to be the same serialized layout:
+CATALIST clearly contains face names such as System, Roman, Tms Rmn, Helv, and
+TPX in the regions targeted by the Book pointer tables, but some local table
+entries point into or immediately after variable-length name storage. The
+extractor therefore does not yet label those descriptor bodies as decoded font
+records.
+
+When an accepted Book local-pointer-table entry lands on or immediately next
+to the NUL word of a CP1252 name, the unclaimed leading bytes of that name are
+emitted as book_pointer_target_name_prefix. This is source-bounded by the
+accepted pointer-table entry rather than by a text scan: the name prefix must
+end at the pointer-table target, the NUL terminator must be within two bytes
+of that target, the bytes before the target must be otherwise unclaimed, and
+the byte before the name must not be another printable character. In CATALIST
+this accounts for the target-owned name prefixes Helv at 0x056c..0x0572,
+System at 0x05be..0x05c4, and Tms Rmn at 0x095a..0x0960. Across the current
+sample corpus plus example0 this strict rule accounts for 408 prefixes and
+2335 bytes. These prefixes are part of the Book pointer-target/font/property
+storage records; the remaining adjacent header/attribute words are still being
+decoded separately.
+
+The otherwise-unclaimed word ranges immediately before those accepted
+pointer-target name prefixes are emitted as
+book_pointer_target_leading_descriptor when they are exactly bounded by the
+previous decoded segment and the name prefix. The accepted range must be 4..32
+bytes, even-sized, nonzero, and still unclaimed when the name prefix has already
+been source-bounded by a local-pointer-table target. The extractor stores the
+little-endian words, NUL byte offsets, and printable sub-runs for further
+analysis. In CATALIST this accounts for 0x0552..0x056c before Helv, containing
+the printable run :PRINTLAYOUT; 0x05ba..0x05be before System; and
+0x0952..0x095a before Tms Rmn. Across the current sample corpus plus example0
+this strict rule accounts for 343 descriptors and 2398 bytes. These leading
+descriptors are pointer-target property/header records; the individual word
+semantics still need names from the runtime code.
+
+For a named payload-reference descriptor, an otherwise-unclaimed byte range
+between the following local-pointer-table reference word and the descriptor's
+explicit payload local offset is emitted as
+book_named_payload_reference_inline_prefix. This is accepted only when the
+descriptor is already payload-eligible, the pointer-reference target bounds the
+payload region, and the prefix is short. In CATALIST this accounts for the
+five bytes 0x0776..0x077b before the UuLqqNbDU named payload; those bytes are
+source-owned by that named payload descriptor but their individual fields are
+not named yet. Across the current sample corpus plus example0 this strict rule
+currently accounts for 1 inline prefix and 5 bytes.
+
+Long all-zero runs inside the Book record are emitted as book_zero_padding
+segments. After all other Book structures are decoded, an otherwise-unclaimed
+gap is emitted as book_zero_reserved_gap only when the entire gap is zero and
+is bounded by decoded segments. These are byte-accounting containers, not
+semantic object records. In CATALIST the current Book decoder identifies 91
+Book payload segments
+consisting of 1 common native record header, 1 OpenScript record link, 9
+reference blocks, 4 record-reference control descriptors, 1 palette-pointer
+control descriptor, 3 pointer-target name prefixes, 3 pointer-target leading
+descriptors, 1 named payload inline prefix, 1 palette, 17 local-pointer table
+reference words, 1 compact named descriptor, 4 pre-table descriptor blocks, 8
+local-pointer tables, 1 compact descriptor payload fragment, 1 named
+payload-reference descriptor, 1 extended named payload-reference descriptor, 1
+named payload-reference payload fragment,
+1 stripped OpenScript object, 1 OpenScript auxiliary prefix, 1 OpenScript
+duplicate tail, 15 pointer-target payload fragments, 1
+pre-table count descriptor, and 10 zero-padding runs plus 4 bounded
+zero/reserved gaps. These segments cover all 3080
+unique Book bytes. The
+local-pointer tables contain 58 entries and occupy 132 bytes; their validating
+reference words occupy 34 bytes; the compact named descriptor occupies 14
+bytes; its remaining payload fragment occupies 16 bytes; the named
+payload-reference descriptors occupy 34 bytes; the bounded eligible payload
+fragment occupies 394 bytes; the common native record header occupies 18 bytes;
+the OpenScript record link occupies 8 bytes; the Book control descriptors
+occupy 72 bytes; the pointer-target name prefixes occupy 18 bytes;
+the pointer-target leading descriptors occupy 38 bytes;
+the named payload inline prefix occupies 5 bytes;
+the stripped OpenScript object
+occupies 344 bytes; the
+OpenScript auxiliary prefix occupies 6 bytes; the OpenScript duplicate tail
+occupies 288 bytes; the pointer-target payload fragments occupy 547 bytes; the fixed pre-table
+descriptors occupy 200 bytes; the pre-table count descriptor occupies 6 bytes;
+the bounded
+zero/reserved gaps occupy 16 bytes.
+There are no unassigned Book bytes in CATALIST; remaining Book work is naming
+the fields inside source-bounded descriptor/payload records and disassembling
+OpenScript bytecode tokens.
+
+The two class-2 native directory records have a decoded payload form:
+
+Offset  Size  Meaning
+0x13    ...   Repeated 12-byte entries, unaligned.
+
+Each 12-byte class-2 directory entry is:
+
+Offset  Size  Meaning
+0x00    4     Directory value 0. Its exact semantic name is not fully proven.
+0x04    4     Directory value 1. In every decoded CATALIST entry this equals
+              the target Page/Background object id.
+0x08    2     Reference marker 0x0014.
+0x0A    2     Target active record key.
+
+For CATALIST record 270, this decodes 237 page-directory entries followed by
+229 zero padding bytes. Record 73 is Page-class but has object id 0xffff and is
+not in that directory. Record 271 decodes 7 background-directory entries
+followed by 685 zero padding bytes.
+
+All CATALIST class-3 records have a decoded name hash table. These class-3
+records use type word 0x0019, class id 3, and object id equal to the expected
+number of name entries. Their common top-level count byte is
+2 * (object id + 1).
+
+The top-level header word at 0x10 points six bytes past the start of a repeated
+4-byte hash table:
+
+Offset  Size  Meaning
+0x00    2     Hash/sort word for a name.
+0x02    2     Local offset of the name text bytes.
+
+The target text offset is not accepted by string scanning alone. It must point
+back six bytes to an observed typed string value:
+
+Offset  Size  Meaning
+-0x06   2     Value type. Observed decoded class-3 name values are type 1, with
+              one type-3 variant in a record whose hash table is not yet fully
+              decoded.
+-0x04   2     Local link/offset word. Its exact semantic role is not fully
+              named.
+-0x02   2     Text length including the NUL terminator.
+ 0x00   ...   CP1252 text bytes followed by NUL.
+
+Each unique typed string value reached by the hash table is now emitted as a
+class3_typed_string_value_record. The value record starts at the six-byte typed
+string header above. Its end is source-bounded by the next typed string value
+start, the class-3 hash-table start when that lies after the value, or the
+record end for values stored after the hash table. The variable bytes after the
+NUL-terminated text remain part of that value record; they commonly contain
+record-reference markers and local link words, but not every field has its
+runtime name yet. The 4-byte class-3 short-name field at 0x12..0x16 is emitted
+when it immediately precedes the first value record and its reserved word is
+zero.
+
+This decodes all 238 of 238 expected class-3 name-table entries in CATALIST,
+238 class3_typed_string_value_record spans occupying 6698 bytes, 35 short-name
+fields occupying 140 bytes, 35 common native headers occupying 630 bytes, and
+952 bytes of hash-table entries.
+
+The remaining small class-3 gaps are decoded only when they are bounded by
+already decoded class-3 structures and have a matching source rule:
+
+* class3_zero_padding is an all-zero gap between decoded class-3 segments.
+* class3_extra_hash_table_entries is a post-table group of 4-byte hash/text
+  slots whose text offsets point to already decoded class-3 value text, with
+  optional trailing zero bytes.
+* class3_post_table_reference_tail starts with the class-3 object id and a zero
+  word, followed by resolved 0x0014 record-reference markers and optional
+  trailing zero bytes.
+* class3_post_table_value_prefix is a short even-sized word prefix between the
+  counted hash table and a typed string value reached by one of that table's
+  entries.
+
+For CATALIST these rules account for 2 extra hash-table-entry segments
+occupying 10 bytes, 2 post-table reference tails occupying 30 bytes, 1
+post-table value prefix occupying 8 bytes, and 11 zero-padding segments
+occupying 26 bytes. CATALIST class-3 source-bounded segment coverage is now
+8494 of 8494 bytes. Across the current sample corpus plus example0 the strict
+class-3 rules account for 6637 typed string value records and 310182
+value-record bytes, 125 extra hash-table-entry segments and 520 bytes, 89
+post-table reference tails and 1080 bytes, 29 post-table value prefixes and 196
+bytes, and 108 zero-padding segments and 238 bytes. The remaining class-3 work
+is semantic naming of the variable words inside those bounded value and tail
+records, plus the 70 class-3 records in the wider corpus whose table layout
+does not match the CATALIST rule.
+
+Page and Background stored text values
+--------------------------------------
+
+CATALIST Page and Background records also contain stored text value bodies. The
+decoded form is:
+
+Offset  Size  Meaning
+0x00    2     Reserved/zero word observed before the stored value.
+0x02    2     Storage/capacity word. Observed CATALIST values include 0x0020,
+              0x0040, 0x0060, 0x0080, 0x00a0, 0x00c0, 0x00e0, 0x0100, and
+              larger rounded capacities. Earlier notes called this field a
+              value type because many short text values use 0x0040.
+0x04    2     Explicit text byte length.
+0x06    ...   CP1252 text bytes of the declared length. CR/LF are preserved.
+...     1     Optional NUL byte after the declared byte length. Some longer
+              values are length-delimited and do not have this terminator at
+              the declared end.
+
+The extractor only accepts these inside indexed Page/Background records, and
+only when the capacity/length pair is internally consistent and the declared
+text bytes are valid ToolBook CP1252 text. In CATALIST this recovers 415 stored
+text values across 237 Page/Background records, tied to their owning
+Page/Background record. These include
+displayed page titles such as
+"Michigan Technological University", button/help text such as "Click here to
+search", and notebook/dismiss text on backgrounds. The normal text.txt output
+now writes these stored text values first and excludes their byte ranges from
+the later generic printable-fragment pass, so this content is not duplicated.
+
+Three additional CATALIST title values use the same 10-byte class-11 inline
+object prefix as the ordinary inline stored text values, but their capacity word
+is not aligned to the older 0x20 rule. These are accepted only when the class-11
+object prefix is immediately before the value descriptor. This recovers the THS,
+LPE, and EDS short display titles as class_11_inline_prefix_relaxed_capacity
+values.
+
+CATALIST also contains one 22-byte extended inline text descriptor. Its first
+word plus one points to the text bytes, its fourth word equals text_start + 2,
+its capacity word bounds the allocation, and its length word declares the
+current CP1252 byte length. This recovers the BOS bibliographic text block that
+starts with the truncated "TLE" label. The descriptor is accepted only when its
+byte range does not overlap another decoded typed text value.
+
+Together these forms currently recover 540 CATALIST typed text values: 415
+ordinary stored values, 121 larger Field values, 3 class-11 inline relaxed
+capacity values, and 1 extended 22-byte inline value. Of those, 539 have a
+decoded native object owner or native object-local pointer owner; the remaining
+extended descriptor is still tied to its Page record and source bytes.
+
+The storage/capacity word also gives an exact source-backed allocation bound:
+
+Offset  Size  Meaning
+0x06+N  ...   Allocated tail bytes, ending at 0x06 + storage/capacity.
+
+These tail bytes are not guessed from printable text. Their range is defined by
+the same storage/capacity word that bounds the current declared text value. The
+extractor classifies each tail as zero allocation tail, printable allocation
+tail, or mixed allocation tail. Printable tail bytes are emitted to text.txt
+after the declared value and all tail ranges are excluded from the later generic
+printable-fragment pass. These bytes appear to be unused allocated text-buffer
+contents or stale text after edits rather than necessarily the currently
+displayed value, so the extractor reports them separately instead of merging
+them into the declared text. In CATALIST this accounts for 412 stored text
+allocation tails, 21210 bytes total, 12657 nonzero bytes, and 143 printable
+tail texts. Including the larger Field descriptors described below, CATALIST
+now has 481 typed-text allocation tails, 26527 bytes total, 17815 nonzero
+bytes, and 209 printable tail texts.
+
+CATALIST also contains a second larger Field-owned text-storage descriptor.
+This form was found by its internal local pointers, not by scanning for
+printable text. Two current variants are decoded.
+
+The first variant stores the text byte length in the descriptor itself. The
+descriptor starts 0x78 bytes after a class-10 Field object header. The Field
+header word at +0x4A points to descriptor_offset + 7.
+
+Descriptor offset  Size  Meaning
+0x00               2     text_start - 1
+0x02               2     Zero
+0x04               2     Zero
+0x06               2     text_start + 2
+0x08               2     text_end + 8.
+0x0A               2     Zero
+0x0C               2     Text byte length
+0x0E               2     Object-specific text/layout word, not fully named
+0x10               ...   CP1252 text bytes of the declared length
+
+The matching Field object header is:
+
+Descriptor offset  Size  Meaning
+-0x78              2     Field-local pointer/name word
++0x02              2     Native object class id 10, Field
++0x04              2     Object id
++0x06              2     Object flags/state
+...
++0x4A              2     Local pointer equal to descriptor_offset + 7
+
+The second variant has a current length word after the descriptor and an
+allocated capacity word in the descriptor. It also starts 0x78 bytes after a
+class-10 Field object header. The Field header word at +0x4A points to
+descriptor_offset + 9.
+
+Descriptor offset  Size  Meaning
+0x00               2     Constant 4.
+0x02               2     text_start - 1.
+0x04               2     Zero.
+0x06               2     Zero.
+0x08               2     text_start + 2.
+0x0A               2     First source-linked child-object state pointer,
+                         equal to child_header + 7.
+0x0C               2     Zero.
+0x0E               2     Allocated text capacity in bytes.
+0x10               2     Current text byte length.
+0x12               ...   CP1252 text bytes of the declared length, followed by
+                         allocated tail bytes up to text_start + capacity.
+
+In CATALIST this decodes 121 large Field text values: 52 using the inline
+length-at-0x0C variant and 69 using the embedded length-at-0x10 variant. These
+include long connection instructions and page body/location lists that
+previously only appeared as generic printable fragments. The normal text.txt
+output now writes these values as large_field_text entries and excludes their
+text byte ranges and capacity tails from the generic printable-fragment pass.
+
+A subset of these stored text values are now also tied to embedded native
+object headers. The verified pattern is:
+
+Offset  Size  Meaning
+0x00    2     Local pointer equal to stored_text_value_local_offset - 3.
+0x02    2     Native object class id. The decoded CATALIST matches currently
+              use class id 10, Field.
+0x04    2     Object id within the owning Page/Background record.
+0x06    2     Object flags/state word.
+0x08    2     Next object-specific word. In some Field objects this is the
+              14 00 record-reference marker; in others it is a local offset or
+              state word whose full meaning is not named yet.
+
+In CATALIST this Field object-pointer pattern matches 49 of the 415 stored text
+values.
+
+A second stored-text owner pattern is present immediately before many title and
+body values:
+
+Offset  Size  Meaning
+0x00    2     Object-local prefix/state word.
+0x02    2     Native object class id 11, Group, from the runtime object table.
+0x04    2     Object id within the owning Page/Background record.
+0x06    2     Object flags/state word.
+0x08    2     Trailing object-local state word.
+
+In CATALIST this class-11 inline-prefix pattern matches another 209 stored text
+values. Combined with the Field pointer pattern, 258 of the 415 CATALIST stored
+text values now have a decoded embedded native object owner. The unmatched
+values are still owner-tied to their Page/Background records.
+
+The verbose native_records.json file promotes these two owner patterns to
+embedded_native_objects entries. A third Field-owner form is also decoded for
+named fields: the object prefix begins earlier with a pointer to a NUL-terminated
+field name, class id 10, object id, flags, and a text pointer at prefix offset
+0x36 that equals value_body_offset - 3.
+
+For CATALIST this currently decodes native
+text-bearing embedded objects:
+
+* 49 Field objects with a 64-byte prefix immediately before the stored text
+  value. The first word of this prefix is value_body_offset - 3, followed by
+  class id 10, object id, flags, object state words, and a five-word text
+  storage descriptor at prefix offset 0x36.
+* 35 named Field objects with a 0x4e- or 0x54-byte prefix before the stored text
+  value. The first word points to the field name and the word at prefix offset
+  0x36 points to value_body_offset - 3.
+* Variable-offset object text pointers where a nearby known ToolBook object
+  class contains a word equal to value_body_offset - 3. The relative pointer
+  offset varies by object class/variant, so the extractor records the exact
+  pointer offset and raw prefix words instead of assigning names to every field.
+* 209 class-11 objects with a 10-byte inline prefix immediately before the
+  stored text value.
+
+The remaining CATALIST stored text values have native storage prefixes rather
+than directly decoded object headers. Two forms are currently verified:
+
+Text allocation prefix:
+
+Offset  Size  Meaning
+-0x0A   2     Local offset equal to value_body_offset + 5, one byte before the
+              declared text bytes.
+-0x08   2     Zero.
+-0x06   2     Either zero or value_body_offset + capacity + 16.
+-0x04   2     Local offset equal to value_body_offset + 8.
+-0x02   2     Either one or a local offset near value_body_offset + capacity.
+
+Title/body storage prefix:
+
+Offset  Size  Meaning
+-0x0A   2     Local offset equal to value_body_offset + 5.
+-0x08   2     Zero.
+-0x06   2     0x8001.
+-0x04   2     Local offset equal to value_body_offset - 14.
+-0x02   2     Local offset near value_body_offset + capacity.
+
+Extended storage prefix:
+
+Offset  Size  Meaning
+-0x10   2     Local offset equal to value_body_offset + 5.
+-0x0E   2     Zero.
+-0x0C   2     Local offset equal to value_body_offset + capacity + 16.
+-0x0A   2     Local offset equal to value_body_offset + 8.
+-0x08   2     Small state word, observed zero or one.
+-0x06   2     Zero.
+-0x04   2     Zero.
+-0x02   2     Local offset equal to value_body_offset + capacity + 13.
+
+In the current CATALIST decode all 415 stored text values have an embedded
+native object owner. In sample0/14531/3DFIELD.TBK, the two short duplicated
+buffer examples that are not object-owned use the extended storage prefix. The
+extractor records storage_prefix annotations separately from object ownership.
+
+The record map resolves 1666 instances of the byte pattern 14 00 followed by an
+active record key. Every active record key is referenced at least once this way.
+There are also 529 other 14 00 byte pairs whose following word is not an active
+record key; those are treated only as unresolved candidate markers, not as
+record references.
+
+Page/background self-reference offset tables
+--------------------------------------------
+
+CATALIST Page and Background records contain one or more offset tables anchored
+by a resolved self-reference marker. This is not found by looking for plausible
+object bytes. The table is accepted only when a 14 00 <record-key> marker points
+back to the same active record and the following local pointers satisfy the
+observed record-internal bounds:
+
+Offset  Size  Meaning
+0x00    2     Reference marker 0x0014.
+0x02    2     Active record key of the owning Page or Background record.
+0x04    2     Local offset of the first 6-byte table entry.
+0x06    2     Local pointer seven bytes into the first body/object item.
+
+The offset table occupies:
+
+table_start = word_at(marker + 0x04)
+table_end   = word_at(marker + 0x06) - 7
+
+The byte count from table_start to table_end must be non-zero and divisible by
+six. Each entry is:
+
+Offset  Size  Meaning
+0x00    2     Entry id/slot word. When this entry describes a text-bearing
+              embedded object, this equals that embedded object's object id.
+              In other tables it is a class-specific line/list id.
+0x02    2     Entry state word. CATALIST uses zero for the decoded object-list
+              tables; nonzero values are present in coordinate/index tables.
+0x04    2     Local pointer into the referenced body/object item. For decoded
+              text-bearing objects this pointer lands inside the object prefix,
+              usually near its local reference or state words.
+
+For CATALIST this decodes 221 validated self-reference object-directory
+tables, 1719 table entries, 1202 nonzero local-pointer entries, 111 table
+entries linked directly to decoded text-bearing embedded objects, and 10314
+table bytes across Page and Background records. Earlier parser revisions also
+counted marker-shaped compact offset vectors as self-reference tables when
+their byte size happened to be divisible by six; those are now separated as
+Page/Background offset vectors below. Representative examples:
+
+* Page TAR record 83 has a table at 0x66..0x7e with four entries and a second
+  table at 0x9a..0xa0 with one entry.
+* Page 2ND25 record 2 has an object-directory table at 0x27c..0x618.
+* Background Library Card record 272 has a table at 0x222..0x366.
+
+The extractor writes these tables in verbose native_records.json as
+self_reference_offset_tables. The entries are now byte-accounted and tied to
+their source marker. Entries whose id and local pointer match a decoded
+text-bearing object contain a linked_embedded_text_object object. The full
+semantic name of every entry id/state/pointer combination is not complete yet.
+
+For most nonzero CATALIST entries, the local pointer has a second deterministic
+meaning: pointer - 10 is the start of a child object header whose object id
+equals the table entry id and whose class id is present in the runtime object
+class table. The extractor records this as child_object_header:
+
+Offset  Size  Meaning
+-0x0A   2     Object-local first word. For named/text-bearing objects this is
+              commonly a local pointer; for other objects it is class-specific.
+-0x08   2     Runtime object class id.
+-0x06   2     Object id, equal to the table entry id.
+-0x04   2     Object flags/state word.
+-0x02   2     Word immediately before the table entry pointer. Often 0x0014
+              for object records that reference another active ToolBook record;
+              other class-specific values occur for hotword/list items.
+ 0x00   ...   Table entry local pointer target.
+
+For CATALIST this verifies 1209 child object headers, covering 12090 bytes.
+The class distribution of those source-linked headers is:
+
+Class  Runtime name        Count
+23     Hotword             580
+9      Button              243
+10     Field               191
+11     Group               133
+16     IrregularPolygon    36
+8      Rectangle           21
+22     RecordField         4
+21     PaintObject         1
+
+Field hotword run tables
+------------------------
+
+Some Field stored-text values are immediately followed by a run table that ties
+text offsets to source-linked Hotword child objects. This is not detected by
+looking for plausible words. The table starts at the end of the Field text
+allocation range and its own header gives the row allocation count. Nonzero row
+pointers are accepted for current rows only when pointer - 10 is a previously
+verified Hotword child object header reached from the Page/Background
+self-reference table.
+
+Header offset  Size  Meaning
+0x00           2     Local pointer to first child object state, equal to first
+                     child header + 7.
+0x02           2     Zero.
+0x04           2     Row allocation count plus one.
+0x06           2     Current-row count word. In one CATALIST table this points
+                     one row past the monotonic current prefix, so the extractor
+                     preserves this header word and also reports the monotonic
+                     current prefix length.
+0x08           2     Zero.
+0x0A           2     One.
+0x0C           2     Zero.
+0x0E           1     Zero.
+0x0F           ...   7-byte rows.
+
+Each 7-byte row is:
+
+Row offset  Size  Meaning
+0x00        2     Offset into the Field's allocated text buffer.
+0x02        2     Row state word. Observed current rows use 1.
+0x04        2     Local pointer to a Hotword child object state, or zero for
+                  the end of the current run.
+0x06        1     Zero.
+
+In CATALIST this decodes 8 Field hotword run tables, 1061 rows, 606 current
+rows, 297 current rows linked to verified Hotword child headers, and 7547
+bytes. Two large tables belong to the ATOM and NTOZ pages; these account for
+the former 3228-byte unresolved gaps between the large allocated text buffer
+and the first Hotword child object.
+
+When a Page or Background record has source-linked child object headers, the
+extractor also emits bounded child object spans. A span starts at a
+source-linked child object header and ends at the next source-linked child
+object header in the same native record. When the child is the last
+source-linked child in that native record, the span is bounded by the indexed
+native record end and marked with span_end_reason native_record_end rather than
+next_source_linked_child_object_header. Child headers can be reached either from
+validated self-reference object-directory entries or from the compact
+Page/Background offset vectors described below. This is still source-bounded by
+the native index and by a decoded pointer table; it does not mean every
+internal object word is semantically named. In CATALIST this defines 1469
+bounded child object spans covering 368268 bytes, including 239
+final-child-to-record-end spans covering 49872 bytes. Of those spans, 1209 are
+reached through self-reference object-directory entries and 254 are reached
+through Page/Background offset vectors. A final 6 are reached through one
+terminal child pointer table. Across the current sample corpus plus example0
+this rule accounts for 73602 child object spans and 15291836 bytes, including
+3311 final-child-to-record-end spans and 1651574 bytes. These spans are
+byte-accounting containers; many fields inside the spans, especially OpenScript
+bytecode and class-specific geometry/state words, remain to be named.
+
+Page/Background payload maps
+----------------------------
+
+For Page and Background records the extractor now emits a complete
+source-bounded payload map. This map is not produced by scanning for plausible
+strings or image signatures. It is assembled from the indexed native record
+boundary, the fixed common native header, the fixed name field, typed text
+allocation descriptors, embedded text-object prefixes, self-reference tables,
+Field hotword run tables, and child object spans reached through
+self-reference table pointers.
+
+The named Page/Background payload segment kinds are:
+
+* page_background_common_native_header
+* page_background_name_field
+* page_background_control_stream
+* page_background_self_reference_marker
+* page_background_self_reference_table_descriptor_tail
+* page_background_self_reference_offset_table
+* page_background_offset_vector
+* page_background_terminal_child_pointer_table
+* page_background_text_value_allocation
+* page_background_embedded_text_object_prefix
+* page_background_field_hotword_run_table
+* page_background_child_object_span
+* page_background_pre_child_descriptor
+* page_background_link_tail
+* page_background_zero_alignment_byte
+
+The page_background_offset_vector segment is a compact list descriptor found
+after some object-directory tables. It starts with a 12-byte descriptor whose
+second word is the observed 6-byte entry stride, followed by a self-keyed
+0x0014 marker, a zero word, a declared count of 16-bit offsets, and sometimes
+a 6-byte high-bit trailer. These offsets are not object-directory triples and
+are therefore no longer decoded as self-reference entries. For CATALIST this
+accounts for 238 offset vectors, 1347 declared offsets, 697 nonzero offsets,
+and 9238 bytes. Across the current sample corpus plus example0 this accounts
+for 2785 offset vectors and 123710 bytes.
+
+The page_background_control_stream segment covers the native control/script
+stream that begins immediately after the 32-byte Page/Background name field and
+ends at the next decoded source-backed structure. The stream starts with the
+same 0x0014 native marker pattern as other native references and can contain
+OpenScript handler bytecode and object-control words. The extractor also names
+the fixed descriptor tail between a self-reference marker and its table, small
+link tails between adjacent decoded structures, and single zero alignment
+bytes. In CATALIST these additional names account for 246 control streams
+covering 12498 bytes, 221 self-reference table descriptor tails covering 1768
+bytes, 221 link tails covering 1850 bytes, and 2 zero alignment bytes.
+
+CATALIST Page 279 has one terminal child pointer table at the end of the
+record. Its source bytes contain a prefix word, a 6-entry count, a zero word,
+six 6-byte entries, and zero padding through the indexed record end. Each entry
+stores a local pointer that lands 10 bytes inside a valid child object header.
+This accounts for one 56-byte page_background_terminal_child_pointer_table
+segment and the 6 child spans reached from it.
+
+CATALIST Page 274 has one 28-byte pre-child descriptor immediately before a
+vector-linked child object span. The descriptor is accepted only because words
+inside it point to child_start - 4 and child_start + 7, tying the descriptor to
+the following source-linked child object rather than to a byte-pattern scan.
+
+After those source-linked segments are merged, any remaining gap inside the
+same indexed Page/Background native record is emitted as
+page_background_bounded_payload_fragment. The fragment records its previous and
+next decoded segment kind. This gives exact byte accounting for the record but
+does not claim that every internal word in the fragment has a final semantic
+name.
+
+For CATALIST this maps 246 Page/Background payloads into 4299 segments covering
+436104 bytes. There are now 0 page_background_bounded_payload_fragment
+segments and 0 bounded-fragment bytes in CATALIST Page/Background records. The
+mapped bytes exactly equal the indexed class payload sizes: Background records
+cover 33904/33904 bytes and Page records cover 402200/402200 bytes.
+
+Across the current sample corpus plus example0, this maps 10923
+Page/Background payloads covering 31718300 bytes. Of those, 36827 segments and
+4896939 bytes are bounded payload fragments awaiting
+finer semantic names.
+
+This is the current byte-accurate status for CATALIST.TBK: 100% of bytes are
+assigned to header/index/control/active-record containers, the common top-level
+record header is decoded for all 284 active records, the two class-2 native
+directories are decoded, all 35 class-3 name hash tables are decoded, the
+Page/Background self-reference offset tables are decoded, and the child object
+headers and bounded child object spans reached through those table pointers are
+decoded. Page and Background payloads are now also 100.0%
+source-bounded byte-categorized. The remaining non-100% part is semantic: the
+internal list/tree bytes inside the now source-bounded class-3 value/tail
+records, finer field names inside child object spans, Book payload field names,
+and OpenScript bytecode tokens are not fully named from runtime code yet. The
+bounded Page/Background payload fragments that remain in the wider corpus also
+need the same source-backed treatment CATALIST has now received. With the large
+Field text descriptors, Field hotword run tables, child spans, and
+Page/Background payload maps accounted, conservative semantic/source-bounded
+coverage for CATALIST active records is now:
+Page 100.0% source-bounded byte-categorized, Background 100.0%
+source-bounded byte-categorized, class-3 name/list records 100.0%
+source-bounded byte-categorized, class-2 directories 100% named, and Book
+100.0% source-bounded byte-categorized.
+
+Runtime-assisted object-loader status
+-------------------------------------
+
+example0/TBKBASE.DLL is a 16-bit Windows NE DLL. Its exported names include
+CDBFILEOPEN, CDBCREATEPAGEREF, CDBCREATEBKGNDREF, CDBCREATEGRAPHICREF,
+CDBNEWOBJECT, CDBCHUNKFIND, CDBCHUNKEND, CDBCHUNKLAST, CDBIMAGESTORE, IMDRAW,
+and IMSHOWBMP.
+
+Disassembly of CDBNEWOBJECT shows a class-indexed table of 0x15-byte entries
+in the automatic data segment. The routine reads a caller-supplied object
+descriptor, copies or translates fields at descriptor offsets such as +0x0A,
++0x0C, +0x33..+0x42, and dispatches class-specific creation paths for Button,
+Field, Polygon, and RecordField-like objects. That evidence is not currently
+used by the extractor because it is not yet proven that the caller-supplied
+descriptor pointer is the on-disk child object span at entry_pointer - 10. A
+validation attempt against CATALIST Field spans showed these descriptor offsets
+can land inside stored text bytes, so treating CDBNEWOBJECT offsets as direct
+file offsets would be an unsupported heuristic.
+
+The next runtime-assisted target is the lower-level CDBFILEOPEN/CDBCHUNK*
+loader path, which manipulates loaded chunk/value objects with fields at
+in-memory offsets +0x80..+0x9F. Those offsets describe runtime heap objects,
+not yet the on-disk TBK record fields. They need to be tied to reads from the
+native index stream before they can be added to the extractor.
+
+Native structure found in plane.tbk
+-----------------------------------
+
+sample0/16047/plane.tbk is a useful small example because it contains five
+standalone BMP payloads and a modest amount of native data.
+
+The complete file is 124868 bytes. The decoded native index has:
+
+* 5 index pages.
+* 18 active native records.
+* 120942 bytes of active native record payload.
+* 5 validated BMP payloads inside active records.
+
+The index root is at 0x00000116. Its first child page is at 0x00000256. Leaf
+records include the BMP-bearing ranges; for example the large active records at
+0x00005270, 0x0000a366, 0x0000f49c, 0x00014590, and 0x000196a8 contain the
+five validated BMP files.
+
+The prefix region contains readable page/object/script data. In plane.tbk,
+strings identify:
+
+* page/object names such as Ebenen, pl11_4, Polygone, Inhalt, Ausschneiden.
+* event handlers such as enterpage, leavepage, buttonUp, update.
+* external references such as bmp\plane\pl11_4.bmp and inhalt.tbk.
+* German body text stored directly as single-byte text.
+* tokenized OpenScript where readable words are mixed with non-ASCII opcodes.
+
+Native records and scripts
+--------------------------
+
+The native record stream is not just a simple file table. It contains object
+records and tokenized OpenScript. A handler name such as buttonUp or enterpage
+is stored as text, followed by compact bytecode/token data. Some source words
+remain readable inside the token stream, while operators, keywords, object
+references, and string/number encodings are stored as single-byte or multibyte
+tokens.
+
+For this reason strings.txt and native_map.json can locate scripts and many
+source fragments, but they are not full decompilers.
+
+Failure behavior
+----------------
+
+The extractor fails before writing output when:
+
+* the input is neither a plain ToolBook stream nor a valid PE file containing a
+  ToolBook stream,
+* the ToolBook payload is shorter than the fixed header area,
+* the stream does not start with 03 4A 42 4F,
+* the version/build discriminator is zero,
+* the fixed header descriptor area appears empty, or
+* the native index descriptor/tree cannot be decoded into active record ranges,
+* the output directory already exists and is non-empty.
+
+Completeness status
+-------------------
+
+Incomplete. The extractor now decodes the native index tree for the supported
+families and extracts content only from active records. It supports both
+payload-relative and PE-wrapper file-absolute index pointers. Five observed
+files still fail fast because the native index/root offsets declared in their
+headers point beyond EOF and no alternate index page is present in the bytes:
+
+* sample0/29629/LESS7311.TBK
+* sample0/29629/LESS7412.TBK
+* sample0/29682/HELP7.TBK
+* sample0/29712/CIRCULAT.TBK
+* sample0/30048/LESS7317.TBK
+
+Those look incomplete or externally dependent from the bytes currently present,
+but this is not proven from an original distribution manifest. The extractor
+still does not fully decode every ToolBook-native object, page, script, palette,
+raw bitmap, or descriptor field. Therefore it does not meet a strict "fully
+understood every byte semantically" standard.
+
+object_model.json and handlers/*
+--------------------------------
+
+The extractor now emits a candidate object-model layer:
+
+object_model.json
+  Probable named objects, handler locations, and reference edges. These entries
+  are inferred from native record markers around strings and from handler names
+  such as buttonUp, enterpage, leavepage, update, enterbook, and leavesystem.
+
+handlers/*
+  One text file per located handler. Each file includes readable strings found
+  in the tokenized OpenScript context plus a hex dump of the surrounding bytes.
+  This is a script locator/disassembler aid, not a complete OpenScript
+  decompiler.
+
+For plane.tbk, this candidate layer finds page/object-style names such as
+Inhalt, Ebenen, Ausschneiden, Sterne, Schnittstudie, and Polygone; 20 handler
+blocks; and references to bmp\plane\pl11_4.bmp, draw.exe, and inhalt.tbk.
+
+Object-model support status
+---------------------------
+
+Supported enough for inspection:
+
+* locating probable named object/page/menu records,
+* locating event handlers and writing per-handler context files,
+* extracting readable script fragments from tokenized OpenScript,
+* listing external/book/bitmap reference strings,
+* excluding validated embedded media payloads from native object scans.
+
+Not fully supported:
+
+* exact class/type names for every object record,
+* parent/child ownership graph for book/background/page/object hierarchy,
+* complete allocation table resolution,
+* full field-level decoding of object property records,
+* OpenScript bytecode token table and lossless source decompilation.
+
+Content extraction
+------------------
+
+In default mode these files are written directly in the output directory. In
+--verbose mode the same content views are written under content/:
+
+image_NNNN_off_XXXXXXXX_WxH_Bbpp.bmp
+  Headerless DIB images reconstructed as normal BMP files. ToolBook often wraps
+  Windows DIB data without the 14-byte BM file header. The extractor only emits
+  these while iterating decoded ToolBook image envelopes, not by accepting bare
+  DIB-like byte patterns. The envelope must declare the payload size and
+  dimensions, and the DIB itself is also validated for BITMAPINFOHEADER-style
+  dimensions, bit depth, palette size, compression, and image size. Descriptor
+  records that only carry bitmap metadata are skipped until their native object
+  image storage is fully decoded. A nested DIB is emitted only when an outer
+  source descriptor points into it and the nested DIB's complete contiguous
+  pixel payload validates inside the same active native record; in --verbose
+  output these rows are listed as native_nested_dib in content_index.tsv.
+  Recursive nested-DIB chains are followed, but terminal DIBs that cross native
+  index/page metadata or run into later native records are reported as chain
+  metadata rather than emitted as BMPs.
+
+Decoded ToolBook DIB envelope record types currently recognized:
+
+* 07 04
+* 07 01
+* 0F 01
+* 0F 04
+
+Recognition of those types does not by itself mean an image is emitted. The
+following pixel bytes must also be contiguous DIB pixel data. Several active
+records in the Finnish 43945 books and in 32603/pis*.tbk have valid envelopes
+and BITMAPINFOHEADER metadata, but their computed pixel area starts with another
+ToolBook native record. If that native record contains another DIB descriptor,
+the outer row is reported as a bitmap-info/native-record container. If no nested
+DIB header appears in the bounded window, the outer row is reported as
+toolbook_bitmap_info_descriptor_with_native_payload. Neither case is emitted as
+a bitmap because the outer computed pixel bytes are native structure or script
+payload, not pixels.
+
+content/text_blocks.json (--verbose)
+  Filtered text blocks from native ToolBook ranges. These are decoded as CP1252
+  so Western European text such as German umlauts survives. Bytes already
+  belonging to extracted media are excluded.
+
+content/text.txt
+  A readable text view of labels, body text, handler names, menus, and
+  references. In default mode this is written directly as text.txt.
+
+content/references.json (--verbose)
+  File/book/program/image references found in native ranges.
+
+content/content_index.tsv (--verbose)
+  Compact diagnostic content index. The context column is a nearby native
+  string/name hint, not a proven ToolBook ownership edge.
+
+This content layer is meant for practical recovery from active records. It may
+contain some script fragments or labels that are not user-facing prose. The
+original bytes are preserved in toolbook_payload.tbkbin and active records are
+split under native_segments/ only when --verbose is used.
+
+DIB row-shift caveat
+--------------------
+
+Some ToolBook-stored DIBs are valid Windows DIBs but display with a cyclic row
+wrap if reconstructed by simply prepending a BMP file header. Earlier outputs
+from 15951/AEGYPTEN.TBK showed 8bpp Egypt photos where a left strip belonged on
+the right side. The current extractor no longer emits those as reconstructed
+DIBs because the active index shows the book mainly stores external references
+such as aegypten\agy1.bmp through aegypten\agy28.bmp, plus five small embedded
+navigation BMPs. The former large Egypt-photo DIB outputs were not active,
+source-backed embedded images.
+
+The current extractor no longer applies an automatic visual heuristic to fix
+these. The ToolBook resource envelope clearly contains relative DIB and pixel
+offset fields, but the exact stored crop/row-origin field has not yet been
+proven. Until that is understood from source bytes, default output keeps the
+direct DIB reconstruction and documents the limitation instead of guessing.
+
+Native bitmap descriptor caveat
+-------------------------------
+
+Some image records contain a valid BITMAPINFOHEADER and palette, but the bytes
+at the computed pixel start are not bitmap pixels. In 15954/ferien_a.tbk, the
+former outputs at offsets 0x00010db4, 0x0004ca38, 0x000d1c68, and 0x000db2d4
+fall into this class: their expected pixel ranges begin with ToolBook native
+record words or another nested DIB header. The default extractor now rejects
+those records instead of writing static-looking BMPs.
+
+15951/AEGYPTEN.TBK also contains DIB headers nested inside short native bitmap
+descriptor records and at least one native bitmap record type other than the
+direct 07 04 form. Rows backed by a decoded ToolBook bitmap record marker are
+listed as toolbook_bitmap_descriptor. Valid-looking DIB/native metadata without
+that source-side record proof is listed as dib_like_native_record, not as a
+proven bitmap resource.
+
+DIB headers whose computed pixel area begins with a ToolBook PHYSSIZE/property
+stream are extracted only when the source-side PHYSSIZE/local-pointer rule
+above identifies the pixel bytes. The remaining cases that still have a
+dimension-matched PHYSSIZE value are classified as property-stream metadata, not
+direct bitmap payloads. Records with a PHYSSIZE property whose value layout is
+still unmatched are reported separately instead of being treated as images.
+
+Rows classified as toolbook_compressed_dib_descriptor have a tighter native
+byte range than the older nested-DIB bucket: the record points to the end of a
+shorter compressed payload before the next named DIB descriptor begins. The
+extractor now reports those as compressed ToolBook image descriptors rather
+than generic nested headers, but the compression stream itself still needs to
+be decoded before they can be emitted as BMPs.
+
+Observed compressed-DIB layout:
+
+* The DIB header and palette are normal BITMAPINFO-style metadata.
+* The first dword at the computed pixel position is not pixel data; it is a
+  native-record-local end pointer.
+* The compressed bytes are the range after that dword up to the pointed end.
+* The first word of the compressed byte range is a first-substream byte count.
+  The following first_substream_size bytes form substream 1; all remaining
+  bytes up to the end pointer form substream 2. This field is now exposed in
+  verbose compressed_dib_payloads/index.tsv.
+* Several compressed descriptors are followed nearby by uncompressed nested
+  DIBs with related dimensions. Those pairs are useful references, but the
+  compressed stream is not standard BI_RLE8, PackBits, or PCX-style RLE in the
+  tested examples.
+* In --verbose mode, these source-bounded descriptor byte ranges are written
+  under compressed_dib_payloads/ as .tbkcdib files, with index.tsv documenting
+  the source offset, native record, end pointer, DIB dimensions, and payload
+  size. They are not written in default mode because the pixel codec remains
+  undecoded.
+
+Nested-DIB chain rows are now split by terminal byte ownership. If the terminal
+DIB is fully inside the same active native record, it is emitted. If it crosses
+native index/page metadata or extends into later native records, it is not
+emitted because the physical byte stream is not a single contiguous bitmap
+payload. The remaining work is to decode the ToolBook-native object/image
+storage model that explains how those child descriptors and later records are
+assembled for display.
+
+Default extraction now requires a decoded ToolBook image envelope around each
+headerless DIB. Bare DIB-like byte patterns without an envelope are listed as
+missing_toolbook_bitmap_envelope instead of being extracted.
+
+Those skipped records are not decoded content yet. Source-backed
+toolbook_bitmap_descriptor rows are evidence of a ToolBook-native image/object
+structure where dimensions and palette data are stored separately from the
+displayed bitmap or where the displayed bitmap is made from child image records.
+toolbook_class41_icon_descriptor rows are class-41 image descriptors whose
+stored allocation size does not match the icon payload size and are therefore
+not emitted. dib_like_native_record rows are weaker evidence: their DIB-shaped
+metadata is internally valid, but a ToolBook image envelope has not been
+decoded for them. Decoding that structure is still open work. In --verbose
+mode these classes are listed in content_index.tsv so the remaining work is
+auditable without creating garbage BMP files.
+
+Recommended next steps to complete the format:
+
+1. Build a corpus-wide map of all 14 00 00 xx descriptor records and correlate
+   their fields with known page/object/script strings.
+2. Identify native allocation or object directory tables in the first 0x100 to
+   0x300 bytes for each version family.
+3. Continue decoding native bitmap/object records beyond the now-supported
+   class-41 icon resources, especially descriptors whose pixel start points to
+   ToolBook property streams or child object records.
+4. Validate native record boundaries by round-tripping against the original
+   ToolBook runtime or comparing with exports from ToolBook itself.
+5. Extend the extractor from byte-accounting/carving to typed native resources
+   once those boundaries are proven.

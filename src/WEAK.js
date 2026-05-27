@@ -373,17 +373,18 @@ export const WEAK_VALUES =
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener
 	//		archive:Youkai.VoiceDatOpener, archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
 	// SEEN TWICE:
-	//		archive:Xuse.BinOpener, archive:Will.ArcOpener
+	//		archive:Will.ArcOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
+	/^archive:Broccoli\.MpegVideoOpener /,
 	/^archive:CandySoft\.FpkOpener /,
+	/^archive:Circus\.DatOpener /,
 	/^archive:Electriciteit\.DatOpener /,
 	/^archive:FrontWing\.DatOpener /,
-	/^archive:Circus\.DatOpener /,
 	/^archive:Guyzware.GdpOpener /,
 	/^archive:Mink\.GrpOpener /,
-	/^archive:Broccoli\.MpegVideoOpener /,
+	/^archive:Xuse\.BinOpener /,
 
 	// SEEN  ONCE: audio:RealLive.NwaAudio
 	/^audio:WaveAudio \(WAV\)/,
@@ -408,7 +409,7 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FLX, FUK_XV4
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FLX, FUK_XV4, CAR_RAC
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CMF, COD_UNIQUE
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
@@ -642,8 +643,7 @@ export const WEAK_VALUES =
 	/^PC-98 ElfDOS/,
 
 	// soxi
-	// SEEN ONCE:
-	//		soxi: mpc2k
+	/^soxi: mpc2k$/,
 
 	// xdgMime
 	/^application\/its\+xml$/,

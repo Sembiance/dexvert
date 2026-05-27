@@ -19,7 +19,16 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
 /--------------\
 | TOP Priority |
 \--------------/
-
+* ANSI files (and other ANSI-like files, ICE, etc) are just treated as "images" in terms of fetching content text and just use OCR.
+  But that OCR just isn't very reliable, infact you can see that in pp/phase/phase.js with the TEXT_IMAGE_FORMATS exceptions
+  Using TEXT_IMAGE_FORMATS as a list of formats to do the following with is a good starting point.
+  So on the dexvert side, ideally as some sort of "meta" provider, the format converters (ansilove, etc) could hopefully output the raw .txt
+  Then I could throw that into a meta field like contentText : "" or something
+  Then pp could pick that up, use that as the text INSTEAD OF the OCR, then delete the contentText key from meta (since it might be very big)
+  Make sure to remove the TEXT_IMAGE_FORMATS custom handling in pp/phase/phase4.js
+  For discmaster reprocessing, ensure you only re-process things that have a height>=1500, because smaller screens OCR handles "well enough"
+  So to pick up this one for instance: https://discmaster.textfiles.com/view/53/YPA.ISO/other_goodies/dup_stuff/dup_mar.lha/Dark_Unicorn_Dispatch/DUP_MAR.ANSI
+  Use something like for each format type: https://discmaster.textfiles.com/search?format=ans&heightMin=1500
 
 /-------------\
 | Vibe Viable |

@@ -13,6 +13,7 @@ export class authorware extends Format
 		".a6p", ".a6r",
 		".a7p", ".a7r"
 	];
-	magic      = ["Authorware Application", "Unpackaged Authorware 3 for Windows file", "Authorware Packaged file", "Authorware APR Archive", "Authorware Archive"];
-	converters = ["vibeExtract"];
+	forbidExtMatch = [".app", ".apr", ".aas"];
+	magic          = ["Authorware Application", "Unpackaged Authorware 3 for Windows file", "Authorware Packaged file", "Authorware APR Archive", "Authorware Archive"];
+	converters     = ["vibeExtract"];
 }

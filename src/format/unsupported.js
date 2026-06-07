@@ -3570,7 +3570,6 @@ export default
 		threeDProfessionalLathePlate             : {name : "3-D Professional Lathe Plate", magic : ["3-D Professional lathe plate"]},
 		threeDProfessionalLight                  : {name : "3-D Professional light", magic : ["3-D Professional light"]},
 		threeDTextAnimatorCharacter              : {name : "3D Text Animator character", magic : ["3D Text Animator character"]},
-		threeDUltraCoolDataFile                  : {name : "3D Ultra Cool data file", ext : [".tbv"], magic : ["3D Ultra Cool data file"], weakMagic : true},
 		threeDSMaxCharacterStudioBipedMocapData  : {name : "3DS Max Character Studio Biped mocap data", ext : [".bip"], magic : ["3DS Max Character Studio Biped mocap data"]},
 		threeDWohnungsPlanProject                : {name : "3D WohnungsPlan project", ext : [".wds"], magic : ["3D WohnungsPlan project"]},
 		thxTrackerInstrument                     : {name : "THX Tracker Instrument", ext : [".ins"], magic : ["THX Tracker instrument"]},

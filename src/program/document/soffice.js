@@ -4,10 +4,10 @@ import {fileUtil} from "xutil";
 
 export class soffice extends Program
 {
-	website   = "https://www.libreoffice.org";
-	package   = "app-office/libreoffice";
-	unsafe    = true;
-	flags     = {
+	website = "https://www.libreoffice.org";
+	package = "app-office/libreoffice";
+	unsafe  = true;
+	flags   = {
 		format      : "Specify the input file format.",	// https://cgit.freedesktop.org/libreoffice/core/tree/filter/source/config/fragments/filters
 		outType     : `Which format to convert into ("svg", "csv", "pdf", "png", etc). Default is "pdf"`,
 		autoCropSVG : "If set to true, the output SVG will be autocropped"
@@ -38,6 +38,7 @@ export class soffice extends Program
 		
 		return [...args, "--convert-to", (r.flags.outType || "pdf"), "--outdir", r.outDir(), r.inFile()];
 	};
+	//verify    = r => !r.stderr.includes("parser error : Document is empty");		// WARNING: Do NOT use this. It'll output this for totally valid documents like document/wp/CALENDAR.WP5 and many others
 	osData    = ({timeout : xu.MINUTE*2});
 	chain     = r => (r.flags.outType==="svg" ? `deDynamicSVG${r.flags.autoCropSVG ? "[autoCrop]" : ""}` : null);
 	renameOut = true;

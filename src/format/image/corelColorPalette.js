@@ -6,5 +6,6 @@ export class corelColorPalette extends Format
 	ext            = [".cpl"];
 	forbidExtMatch = true;
 	magic          = ["Corel Color Palette"];
+	idMeta         = ({macFileType, macFileCreator}) => macFileType===".CPL" && macFileCreator==="Cdrw";
 	converters     = ["uniconvertor"];
 }

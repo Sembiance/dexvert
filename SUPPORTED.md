@@ -1,15 +1,16 @@
-# Supported File Formats (3,769)
+# Supported File Formats (3,771)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (670)
+## Archive (672)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 0000 Package Archive | .0000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/package0000Archive/)
 archive | 1nsane game data archive | .idf | [vibeExtract](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/onesaneGameArchive/)
+archive | 3D Ultra Cool data file | .tbv | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/threeDUltraCoolDataFile/)
 archive | 4kZIP Packed | .exe .com | cup386 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
 archive | 624 Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sixTwoFourPacked/)
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/sevenZip/)
@@ -386,6 +387,7 @@ archive | [Monster Bash Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_F
 archive | MOON Archive | .000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moonArchive/)
 archive | Moonbase Commander game data archive | .cmp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moonbaseCommanderGameDataArchive/)
 archive | MoPaQ Archive | .mpq | [vibeExtract](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/mpq/)
+archive | Motorhead PDI game archive | .pdi | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | 
 archive | MOZLZ4 Compressed | .mozlz4 .jsonlz4 | [mozlz4](https://github.com/jusw85/mozlz4) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mozlz4/)
 archive | MPAK game data archive | .mpak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mpakGameDataArchive/)
 archive | [MRNZ](http://fileformats.archiveteam.org/wiki/MRNZ) | _ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mrnz/)
@@ -402,7 +404,7 @@ archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | 
 archive | Netscape SNM Archive | .snm | [vibeExtract](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/)
 archive | Neverwinter Nights MOD | .mod .nwm | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsMOD/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/news/) - Converter currently doesn't handle when just a single newsgroup message is saved in a file
-archive | Newton Package | .pkg | [vibeExtract](https://github.com/Sembiance/dexvert) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
+archive | Newton Package | .pkg | [vibeExtract](https://github.com/Sembiance/dexvert) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImage/)
 archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImageDump/)
 archive | Nibiru GRP Archive | .grp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/nibiruGRP/)
@@ -1086,7 +1088,7 @@ document | Wingz Help |  | [strings](https://www.gnu.org/software/binutils/) | [
 document | Wingz Spreadsheet | .wkz | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/wingzSpreadsheet/)
 document | WinWorks Document | .wpd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/winWorks/)
 document | [Word Document](http://fileformats.archiveteam.org/wiki/DOC) | .doc .dot | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) [keyViewPro](https://archive.org/details/KeyViewPro/) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) [antiword](http://www.winfield.demon.nl) | [23 sample files](https://sembiance.com/fileFormatSamples/document/wordDoc/)
-document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [soffice](https://www.libreoffice.org) [keyViewPro](https://archive.org/details/KeyViewPro/) [fileMerlin](http://www.file-convert.com/flmn.htm) [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [20 sample files](https://sembiance.com/fileFormatSamples/document/wp/)
+document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [soffice](https://www.libreoffice.org) [keyViewPro](https://archive.org/details/KeyViewPro/) [fileMerlin](http://www.file-convert.com/flmn.htm) [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [21 sample files](https://sembiance.com/fileFormatSamples/document/wp/)
 document | [WordStar Document](http://fileformats.archiveteam.org/wiki/WordStar) | .ws .ws3 .ws5 .ws7 .ws2 .wsd | [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) [wordStar](https://en.wikipedia.org/wiki/WordStar) [fileMerlin](http://www.file-convert.com/flmn.htm) [keyViewPro](https://archive.org/details/KeyViewPro/) [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) | [13 sample files](https://sembiance.com/fileFormatSamples/document/wordStar/)
 document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/wordWorth/)
 document | [WriteNow Document](http://fileformats.archiveteam.org/wiki/WriteNow) |  | [soffice](https://www.libreoffice.org) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [10 sample files](https://sembiance.com/fileFormatSamples/document/writeNow/)
@@ -1316,7 +1318,7 @@ image | Corel Color Palette | .cpl | [uniconvertor](https://sk1project.net/uc2/)
 image | [Corel Draw Pattern](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .pat | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/corelDrawPattern/) - Only the preview image is supported at the moment.
 image | [Corel Gallery](http://fileformats.archiveteam.org/wiki/Corel_Gallery) | .bmf .gal | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/corelGallery/) - Only the thumbnail is extracted, the actual vector file doesn't have a known converter (except Corel Gallery itself of course).
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [soffice](https://www.libreoffice.org) [uniconvertor](https://sk1project.net/uc2/) [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [nconvert](https://www.xnview.com/en/nconvert/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/cmx/)
-image | [Corel Photo-Paint Image](http://fileformats.archiveteam.org/wiki/Corel_Photo-Paint_image) | .cpt | [vibe2png](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/image/corelPhotoPaint/)
+image | [Corel Photo-Paint Image](http://fileformats.archiveteam.org/wiki/Corel_Photo-Paint_image) | .cpt | [vibe2png](https://github.com/Sembiance/dexvert) | [13 sample files](https://sembiance.com/fileFormatSamples/image/corelPhotoPaint/)
 image | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [vibeExtract](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/image/corelThumbnails/)
 image | [Corel Wavelet](http://fileformats.archiveteam.org/wiki/Corel_Wavelet) | .wi .wvl | wi2ppm | [11 sample files](https://sembiance.com/fileFormatSamples/image/corelWavelet/)
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [scribus](https://www.scribus.net/) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [16 sample files](https://sembiance.com/fileFormatSamples/image/cdr/)
@@ -1334,7 +1336,7 @@ image | [Degas Elite Brush](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_
 image | [DEGAS Elite Icon](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_icon) | .icn | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/degasEliteIcon/)
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [18 sample files](https://sembiance.com/fileFormatSamples/image/degasHi/)
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 .suh | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/degasHiPI/)
-image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [28 sample files](https://sembiance.com/fileFormatSamples/image/degasLow/)
+image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [32 sample files](https://sembiance.com/fileFormatSamples/image/degasLow/)
 image | [Degas Low Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi1 | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [24 sample files](https://sembiance.com/fileFormatSamples/image/degasLowPI/)
 image | [Degas Medium Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc2 | [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](https://github.com/Sembiance/abydosconvert) [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/image/degasMed/)
 image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi2 | [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [15 sample files](https://sembiance.com/fileFormatSamples/image/degasMedPI/)
@@ -2101,7 +2103,7 @@ music | Jason Brooke | .jb | [uade123](http://zakalwe.fi/uade) | [6 sample files
 music | [Jason Page/Steve Turner Audio](http://fileformats.archiveteam.org/wiki/Jason_Page) | .jpo .jpn | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://sembiance.com/fileFormatSamples/music/jasonPage/)
 music | JBM AdLib | .jbm | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://sembiance.com/fileFormatSamples/music/jbmAdLib/)
 music | [Jeroen Tel Module](http://fileformats.archiveteam.org/wiki/Jeroen_Tel) | .jt | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://sembiance.com/fileFormatSamples/music/jeroenTel/)
-music | Jeskola Buzz Module | .bmx .bmw | [vibe2wav](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/music/buzz/) - Only audio samples are extracted right now, the song is not rendered.
+music | Jeskola Buzz Module | .bmx .bmw | [vibe2wav](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/music/buzz/) - Only audio samples are extracted right now, the song is not rendered.
 music | Jesper Olsen Module | .jo | [uade123](http://zakalwe.fi/uade) | [10 sample files](https://sembiance.com/fileFormatSamples/music/jesperOlsen/)
 music | Karl Morton Music | .mus | [openmpt123](https://lib.openmpt.org/libopenmpt/) | [5 sample files](https://sembiance.com/fileFormatSamples/music/karlMortonMusic/)
 music | Kefrens-Sound Machine Module | .ksm | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/music/kefrens/)
@@ -2670,7 +2672,7 @@ text | Cadence OrCAD/Allegro CAM status | .cam .pcb |  | [3 sample files](https:
 text | CADSTAR data (generic) | .rgf |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cadstarData/)
 text | Calamus ASCII Translation Table | .att |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/calamusASCIITranslationTable/)
 text | Call Of Duty weapons data |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/callOfDutyWeaponsData/)
-text | Canoma scene | .3dv |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/canomaScene/)
+text | Canoma scene | .3dv |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/canomaScene/)
 text | Canon Design Essentials printer info | .csc |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/canonDesignEssentialsPrinterInfo/)
 text | Cartoon Studio Script | .css |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cartoonStudioScript/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets) | .css |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/css/)
@@ -3482,7 +3484,7 @@ text | Terragen project | .tgd |  | [2 sample files](https://sembiance.com/fileF
 text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/texFontAliases/)
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [108 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [109 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
 text | TextGrid annotation | .textgrid |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/textGridAnnotation/)

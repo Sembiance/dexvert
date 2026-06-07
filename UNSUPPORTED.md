@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,943)
+# Unsupported File Formats (3,942)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1093,7 +1093,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,765)
+## Other (2,764)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1122,7 +1122,6 @@ Family/Format | Name | Extensions | Notes
 [other/threeDMovieMaker](https://discmaster.textfiles.com/search?format=threeDMovieMaker) | 3D Movie Maker | .3mm .3th .chk .3cn | 
 [other/threeDStudioProject](https://discmaster.textfiles.com/search?format=threeDStudioProject) | 3D Studio Project | .prj | 
 [other/threeDTextAnimatorCharacter](https://discmaster.textfiles.com/search?format=threeDTextAnimatorCharacter) | 3D Text Animator character |  | 
-[other/threeDUltraCoolDataFile](https://discmaster.textfiles.com/search?format=threeDUltraCoolDataFile) | 3D Ultra Cool data file | .tbv | 
 [other/threeDWohnungsPlanProject](https://discmaster.textfiles.com/search?format=threeDWohnungsPlanProject) | 3D WohnungsPlan project | .wds | 
 [other/threeDPinballTableData](https://discmaster.textfiles.com/search?format=threeDPinballTableData) | 3D-Pinball for Windows table Data | .dat | 
 [other/threeDFXGlideDriver](https://discmaster.textfiles.com/search?format=threeDFXGlideDriver) | 3DFX Glide driver | .dxe | 

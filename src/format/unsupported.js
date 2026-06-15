@@ -845,6 +845,7 @@ export default
 		improviseMusicData                 : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
 		kandinskyMusicPainterMusic         : {name : "Kandinsky Music Painter music", ext : [".kmp"], magic : ["Kandinsky Music Painter music"]},
 		katorzerMusic                      : {name : "Katorzer music", ext : [".kat"], magic : ["Katorzer music"]},
+		kawaiMusicScore                    : {name : "Kawai music score", ext : [".ptn"], magic : ["Kawai music score"], idMeta : ({macFileType, macFileCreator}) => macFileType==="PTN " && macFileCreator==="SCO2"},
 		koustrackerModule                  : {name : "Koustracker Module", ext : [".sok"], magic : ["Koustracker module"]},
 		logicSong                          : {name : "Logic Song", ext : [".lso"], magic : ["Logic Song"]},
 		lucasfilmGamesMIDIMusic            : {name : "Lucasfilm Games MIDI music", ext : [".gmd"], magic : ["Lucasfilm Games MIDI music"]},

@@ -1,0 +1,324 @@
+C-Dilla Protected File Format
+=============================
+
+Status
+------
+
+This document describes the verified single-file C-Dilla CD-Secure/CD-Compress
+protected-file container implemented by cDilla.py.
+
+The implementation is intentionally conservative. It extracts containers whose
+metadata and payload transforms are described below. It rejects all other
+C-Dilla variants before writing output.
+
+Payload selector 0x0012 is implemented for raw-key descriptors and for the
+verified licence-bound product descriptor prefixes listed in this document.
+The underlying selector 0x0012 byte transform is understood, but the general
+C-Dilla runtime process that derives arbitrary licence-bound product masks is
+not fully specified.
+
+All multi-byte integer fields are little-endian.
+
+Physical Layout
+---------------
+
+A protected file begins with an 8-byte magic value:
+
+    47 f4 62 af c2 51 05 f4
+
+The metadata record chain starts at absolute file offset 0x00000008. The bytes
+at that offset are also the first metadata record header.
+
+Metadata record header:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u16   Metadata transform key. Zero means the tag bytes are plain.
+    +2      u16   Metadata tag byte count.
+    +4      u32   Absolute offset of the next metadata record, or zero.
+    +8      n     Metadata tag bytes, transformed when the key is non-zero.
+
+The verified runtime reads metadata records into a 0x5000-byte buffer, including
+the 8-byte record header. cDilla.py therefore rejects record tag areas longer
+than 0x4ff8 bytes.
+
+Metadata Record Transform
+-------------------------
+
+When the record key is non-zero, the tag area is decoded with a self-inverse
+transform. The same operation encrypts and decrypts.
+
+The transform uses this 32-bit linear congruential generator:
+
+    state = (state * 0xf2a534e5 + 0x361962e9) mod 2^32
+
+The keyed block size is:
+
+    block_size = (key mod 31) + 33
+
+For each full block, and again for the final partial block, a permutation is
+generated from the key:
+
+1. Seed the generator with the record key.
+2. For each output index i, advance the generator when i mod 4 is zero.
+3. Use byte i mod 4 of the generated 32-bit value as the candidate index,
+   reduced modulo the block length.
+4. If that index is already present, walk backward for even i and forward for
+   odd i, wrapping at the block ends, until an unused index is found.
+
+The transform first swaps bytes in pairs named by the permutation:
+
+    (perm[0], perm[1]), (perm[2], perm[3]), ...
+
+It then reseeds the generator with the record key and XORs each 32-bit word of
+the tag area with successive generated 32-bit values. Any trailing one to three
+bytes are XORed with the low byte of successive generated values.
+
+Metadata Tags
+-------------
+
+The decrypted metadata area is a sequence of tags:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u16   Tag type.
+    +2      u16   Tag value length.
+    +4      n     Tag value.
+
+Tag type 0 terminates the tag stream. No non-zero bytes may follow it in the
+implemented subset.
+
+Implemented tag 1, payload location:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u16   Runtime field carried through by cDilla.py.
+    +2      u32   Absolute offset of the protected payload.
+    +6      u32   Logical output size in bytes.
+
+Implemented tag 4, payload transform descriptor:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u16   Runtime transform descriptor word 0.
+    +2      u16   Runtime transform descriptor word 1.
+    +4      u16   Runtime transform descriptor word 2.
+    +6      u16   Runtime transform descriptor word 3.
+    +8      u16   Runtime transform descriptor word 4.
+    +10     u32   Payload transform key.
+    +14     u16   Payload transform selector.
+    +16     u16   Runtime descriptor suffix word.
+
+The runtime descriptor words are parsed and exposed by the extractor, but only
+the payload transform key and selector are needed for the implemented stored
+payload transforms. Their deeper licence/runtime meaning is not yet fully
+specified.
+
+Implemented tag 5, optional compression extension:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u16   Compression extension word 0.
+    +2      u16   Compression marker. This must match tag 6 offset +4.
+
+Tag 5 is present only for tag 6 compression mode 1. Mode 0 compressed files do
+not use tag 5.
+
+Implemented tag 6, compressed block table descriptor:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u16   Uncompressed block size.
+    +2      u16   Compression mode. Implemented values are 0 and 1.
+    +4      u16   Compression marker. Repeated by tag 5 when mode is 1.
+    +6      u32   Absolute offset of the compressed block offset table.
+    +10     u32   Compressed block offset table byte count.
+
+For the implemented files, tag 6 offset +6 equals the end of the metadata
+record chain. Tag 6 offset +10 equals:
+
+    payload_offset - metadata_end
+
+The bytes between the end of the metadata record chain and the protected
+payload are therefore not padding for compressed files. They are a table of
+little-endian u32 offsets into the physical compressed payload. If the logical
+size from tag 1 and the uncompressed block size from tag 6 imply N compressed
+blocks, the table has N + 1 entries:
+
+    table_size == (ceil(logical_size / block_size) + 1) * 4
+
+The first table entry must be zero. The last table entry must equal the
+physical payload size. Entries must be monotonic. For block i, the compressed
+byte range is:
+
+    payload[table[i] : table[i + 1]]
+
+Inputs using metadata tags other than 0, 1, 4, 5, or 6 are rejected.
+
+Payload
+-------
+
+The implemented subset contains one protected payload and no embedded filename.
+The extractor writes the decoded payload using the input file basename.
+
+Stored, uncompressed payloads have no tag 6. For those files, the physical
+payload length must exactly equal the logical size from metadata tag 1:
+
+    file_size == payload_offset + logical_size
+
+Non-zero bytes between the end of the metadata record chain and the payload
+offset are rejected for stored files.
+
+Compressed payloads have tag 6. Each compressed block is first decoded with the
+payload transform from tag 4, using the block's physical payload offset as the
+logical transform offset. The transformed block is then decompressed as a
+PKWARE Data Compression Library implode stream, also known as a DCL explode or
+blast stream.
+
+Each transformed compressed block begins with the DCL stream header:
+
+    Offset  Size  Meaning
+    ------  ----  -------
+    +0      u8    Literal coding flag. Implemented values are 0 and 1.
+    +1      u8    Dictionary size code. Implemented values are 4, 5, and 6.
+
+The DCL stream is a bitstream stored least-significant-bit first. Each item
+begins with a one-bit kind:
+
+    0 = literal byte
+    1 = length/distance copy
+
+When the literal coding flag is zero, literal bytes are stored as uncoded
+8-bit values. When it is one, literals use the fixed DCL literal Huffman table.
+Length and distance codes use the fixed DCL length and distance Huffman tables.
+A decoded length value of 519 terminates the block. Every compressed block must
+produce exactly its expected uncompressed size, which is the tag 6 block size
+except for the final block, where it is the remaining logical byte count. Every
+compressed byte named by the offset table must be consumed.
+
+Payload Transform Selectors
+---------------------------
+
+Selector 0xffff, or no tag 4:
+
+    The payload bytes are stored directly.
+
+Selector 0x0010:
+
+    The low 32 bits of tag 4 offset +10 seed the same 32-bit generator used by
+    metadata records. Generate 32 successive 32-bit values and concatenate them
+    little-endian into a 128-byte table.
+
+    For each payload byte at logical position p:
+
+        output[p] = input[p] xor ((p >> 7) & 0xff) xor table[p & 0x7f]
+
+Selector 0x0011:
+
+    The low 16 bits of tag 4 offset +10 are the XOR key. Starting at logical
+    offset zero, XOR each little-endian 16-bit word with this key. If the output
+    length is odd, XOR the final byte with the low byte of the key.
+
+    The transform also supports non-zero read offsets: if a read starts at an
+    odd logical offset, the first byte is XORed with the high byte of the key
+    before word-aligned processing resumes. cDilla.py extracts whole files from
+    logical offset zero.
+
+Selector 0x0012:
+
+    This selector is the Fed18 transform used by later C-Dilla runtimes.
+
+    First derive the 32-bit seed. If descriptor word 3, tag 4 offset +6, does
+    not have bit 15 set, the seed is the 32-bit payload transform key at tag 4
+    offset +10.
+
+    If descriptor word 3 has bit 15 set, the runtime uses a product mask before
+    constructing the transform:
+
+        seed = transform_key xor product_mask
+
+    The verified product masks are:
+
+        Descriptor prefix              Product mask
+        -----------------------------  ------------
+        00 c0 56 bd 03 02 00 80 00 00  0x5bc41a78
+        00 20 0a b0 03 02 00 80 01 00  0xd6020be0
+        00 20 0a b0 0b 02 00 80 01 00  0xd6020be0
+        00 b0 4c bd 03 02 00 80 00 00  0xd49f22a3
+        00 70 75 bd 03 02 00 80 00 00  0xce1871f6
+        00 90 4c bd 03 02 00 80 00 00  0xb8eea68e
+        00 f0 0a b0 03 00 00 80 00 00  0xffa3bf09
+        00 a0 4c bd 03 02 00 80 00 00  0x46c6a9b8
+        00 10 41 bd 03 02 00 80 00 00  0x2c9e5893
+        00 d0 4c bd 03 02 00 80 00 00  0xf04e85e8
+        00 80 4c bd 03 02 00 80 00 00  0x2b16a833
+        00 c0 40 bd 03 02 00 80 00 00  0x07e8cac9
+        00 90 75 bd 03 02 00 80 00 00  0xe9cfc63b
+        00 60 1d b0 03 00 00 80 00 00  0xd7e70b30
+        00 c0 0c b0 0b 00 00 80 00 00  0x8da9f55b
+        00 70 e0 b1 03 02 00 80 00 00  0xfe4b07f6
+        00 80 6d bd 03 02 00 80 00 00  0xec26fd0a
+        00 10 0d b0 0b 00 00 80 00 00  0x9da3c125
+        00 90 1c b0 03 00 00 80 00 00  0xe16f6e82
+        00 80 14 b0 03 00 00 80 00 00  0x4116efca
+
+    Licence-bound selector 0x0012 descriptors with any other prefix are
+    rejected because the general product-mask derivation has not been fully
+    specified.
+
+    Generate a 128-byte table from the seed. For each byte of the table,
+    advance the same 32-bit generator used by metadata records and store the
+    high byte of the new state:
+
+        table[i] = high8(state)
+
+    The transform uses this fixed 256-byte substitution table:
+
+        ab 62 1e 58 21 ac fc 25 53 b3 9a f8 1d 3e dc f5
+        96 da 3d ea bd 8a 7d 9b 92 e5 35 1c 57 67 02 e4
+        c8 ca a2 5e bc 46 ef ae c2 d4 24 d6 70 aa 4b 38
+        e0 29 66 37 07 56 fb 0f e6 6a 51 c3 d8 d0 4e b2
+        44 f1 83 b6 16 fe 45 2c d5 78 36 eb cb 60 a6 3f
+        1f a7 0a 48 d2 2a f4 b9 be ee d7 7a 0d 80 49 6b
+        08 c5 de 41 c7 20 88 61 8f a9 ff 64 5c bb 2d f7
+        10 5a e8 14 ec ed 52 ba c6 59 e1 cc 76 c9 04 d3
+        90 74 63 0e 54 f9 22 f2 1a 27 6e dd 05 94 87 e3
+        81 85 95 50 b7 7e a1 9f cf 79 ad a4 6d 69 4a e2
+        c0 40 4d 8b b5 28 9e c1 fd 23 55 75 93 39 e7 30
+        89 5b f6 97 7f 9d 3a a5 8d 82 47 11 cd 7b 01 3b
+        00 b8 bf ce 15 b0 d1 9c 31 43 c4 42 98 73 af 26
+        b4 1b 65 03 7c 34 a0 84 33 4f b1 0b f3 6f 2f 12
+        2b 13 f0 e9 2e 32 09 17 8e 72 06 18 5d 99 71 df
+        91 5f 86 68 fa a3 8c 19 0c 77 4c a8 6c db 3c d9
+
+    For each payload byte at logical position p:
+
+        output[p] = input[p]
+                  xor sbox[table[p mod 123] xor table[p mod 127]]
+                  xor table[p mod 128]
+
+Extractor Completeness
+----------------------
+
+cDilla.py fully accounts for every byte in files that satisfy all of these
+conditions:
+
+* The magic value matches.
+* The metadata record chain is valid, acyclic, and within the file.
+* Metadata records are at most 0x4ff8 transformed bytes each.
+* Metadata tags are limited to types 1, 4, 5, and 6, with an optional terminal
+  type 0.
+* Tag 1 has length 10 and supplies the payload offset and logical size.
+* Tag 4, when present, uses selector 0xffff, 0x0010, 0x0011, or the
+  implemented selector 0x0012 subset described above.
+* Stored payloads have no tag 6, have only zero bytes between metadata and
+  payload, and the physical payload extends exactly to end of file.
+* Compressed payloads have tag 6, a valid u32 compressed-block offset table,
+  and every transformed block is a valid PKWARE DCL stream producing exactly
+  the expected logical block size.
+
+The extractor is not a complete implementation of all C-Dilla
+CD-Secure/CD-Compress variants. Known missing pieces are arbitrary
+licence-bound selector 0x0012 product-mask derivation, metadata tags other than
+0, 1, 4, 5, and 6, compression tag 6 modes other than 0 and 1, and the full
+semantic meaning of the non-key descriptor words in tag 4.

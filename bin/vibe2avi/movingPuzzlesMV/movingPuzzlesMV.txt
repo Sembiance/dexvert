@@ -1,0 +1,333 @@
+Moving Puzzle MV File Format
+Vibe coded by Codex
+
+Overview
+========
+
+Moving Puzzle MV is a little-endian, QuickTime-inspired, flat media
+container. A file contains a header atom table followed by media samples. The
+documented profile contains one indexed-color video track and one palette
+track. Audio is not present in this profile.
+
+All integer fields are little-endian. Four-character atom and codec tags are
+stored byte-reversed compared with their readable names. For example, the file
+bytes "dhvm" identify the movie header atom "mvhd", and codec bytes "sszl"
+identify "lzss".
+
+
+Top-Level Layout
+================
+
+Offset  Size  Description
+0       4     Header size in bytes, including this 4-byte field.
+4       ...   A flat sequence of atoms ending exactly at Header size.
+Header  ...   Media sample data described by the track sample tables.
+
+There is no enclosing media-data atom. The chunk offsets in the header are
+absolute file offsets. Valid files have no byte gaps or overlaps in the media
+sample ranges; the sorted ranges cover every byte from Header size through end
+of file.
+
+
+Atom Layout
+===========
+
+Each atom in the header has:
+
+Offset  Size  Description
+0       4     Atom size in bytes, including this 8-byte atom header.
+4       4     Atom tag, stored byte-reversed.
+8       ...   Atom payload.
+
+Atoms are not nested. Track ownership is positional: the first "dhrt" track
+header starts a track, and subsequent atoms belong to that track until the next
+"dhrt" atom or the end of the header table.
+
+The documented profile uses these atoms:
+
+Stored tag  Readable tag  Meaning
+dhvm        mvhd          Movie header.
+dhrt        trhd          Track header.
+sfoc        cofs          Chunk offsets.
+pmsc        csmp          Sample-to-chunk map.
+ziss        ssiz          Sample sizes.
+ruds        sdur          Sample duration table.
+rcsd        dscr          Sample description.
+csds        sdsc          Codec-specific description.
+yeks        skey          Keyframe table.
+
+
+Movie Header Atom: dhvm
+=======================
+
+Payload size is 30 bytes.
+
+Offset  Size  Description
+0       4     Format signature. The documented value is 0x00419014.
+4       4     Movie timescale. The documented value is 90 ticks per second.
+8       4     Movie duration in timescale ticks.
+12      4     Reserved, zero.
+16      4     Playback rate declaration. The documented value is 1.
+20      4     Reserved, zero.
+24      2     Track count. The documented profile uses 2.
+26      4     File data-size declaration. This is bookkeeping metadata and is
+              not needed to locate samples; the sample tables are authoritative.
+
+For the documented profile, Movie duration equals:
+
+    video_frame_count * movie_timescale / video_frame_rate
+
+
+Track Header Atom: dhrt
+=======================
+
+The first track is the video track and has a 46-byte payload.
+
+Offset  Size  Description
+0       4     Track flags/application field.
+4       4     Track frame rate/time scale. The documented video rate is 15.
+8       4     Video frame count.
+12      4     Reserved, zero.
+16      4     Average compressed sample size declaration.
+20      4     Data-rate/buffer declaration.
+24      4     Track type tag. Video uses stored bytes "tdiv" ("vidt").
+28      4     Reserved, zero.
+32      2     Display width in pixels.
+34      2     Display height in pixels.
+36      4     Video descriptor version, 1.
+40      4     Fixed-point horizontal resolution, 0x00010000.
+44      2     Depth/default marker, 0xffff.
+
+The second track is the palette track and has a 32-byte payload.
+
+Offset  Size  Description
+0       4     Track flags/application field.
+4       4     Track frame rate/time scale.
+8       4     Video frame count covered by the palette.
+12      4     Reserved, zero.
+16      4     Palette sample size, 1024.
+20      4     Data-rate/buffer declaration.
+24      4     Track type tag. Palette uses stored bytes "tlap" ("palt").
+28      4     Palette descriptor version, 1.
+
+
+Chunk Offset Atom: sfoc
+=======================
+
+Payload:
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Chunk count.
+8       4*n   Absolute file offset of each chunk.
+
+
+Sample-to-Chunk Atom: pmsc
+==========================
+
+Payload:
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Entry count.
+8       8*n   Entries.
+
+Each entry is:
+
+Offset  Size  Description
+0       4     First chunk index using this mapping. Chunk indexes are zero-based.
+4       4     Number of samples stored in each matching chunk.
+
+The first entry must start at chunk 0. An entry applies through the chunk before
+the next entry's first-chunk index, or through the final chunk if there is no
+next entry. Sample offsets are expanded by walking chunks in order and laying
+each chunk's samples contiguously according to the sample-size table.
+
+
+Sample Size Atom: ziss
+======================
+
+Payload:
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Sample count for variable-size tables. In fixed-size one-sample
+              tables this field may be zero.
+8       4     Default sample size. If nonzero, all samples have this size. If
+              zero, the table continues with one 32-bit size per sample. When
+              Default sample size is nonzero and Sample count is zero, the
+              number of samples is derived from the sample-to-chunk map.
+12      4*n   Per-sample sizes, present only when Default sample size is zero.
+
+
+Sample Duration Atom: ruds
+==========================
+
+Payload begins with:
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Entry count. The documented profile uses 1.
+8       4     First duration entry sample count field.
+12      4     First duration entry duration field.
+
+For the video track, the duration entry describes uniform one-tick frame
+duration in the video track time base. For the palette track, entries schedule
+palette samples over frame ranges: the first value is the palette sample index,
+and the second value is the number of video frames for which that palette is
+active. Palette durations must sum to the video frame count.
+
+
+Sample Description Atom: rcsd
+=============================
+
+Payload size is 16 bytes.
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Entry count, 1.
+8       4     Codec or sample-description tag.
+12      4     Reserved, zero.
+
+Video codec tags in the documented profile:
+
+Stored tag  Readable tag  Description
+sszl        lzss          Moving Puzzle LZSS video.
+" elr"      "rle "        Moving Puzzle RLE video.
+
+The palette track uses a zero tag.
+
+
+Codec-Specific Description Atom: csds
+=====================================
+
+Payload size is 16 bytes.
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Entry count, 1.
+8       4     Codec-specific value, zero in the documented profile.
+12      4     Reserved, zero.
+
+
+Keyframe Atom: yeks
+===================
+
+Payload:
+
+Offset  Size  Description
+0       4     Reserved/version, zero.
+4       4     Keyframe count.
+8       4*n   Zero-based video frame indexes that are random-access points.
+
+The table may be empty. Sequential playback does not require this table, but a
+demuxer should parse and validate it.
+
+
+Palette Track
+=============
+
+The palette track has one or more 1024-byte samples. Each sample contains 256
+entries of four bytes each:
+
+Offset  Size  Description
+0       1     Blue.
+1       1     Green.
+2       1     Red.
+3       1     Reserved/alpha byte, zero in the documented profile.
+
+Video frames are 8-bit palette indexes. The decoder converts indexes through
+this table for RGB output.
+
+
+Video Frame Buffer
+==================
+
+Both video codecs decode into a persistent 8-bit indexed frame buffer. The
+visible image width is the width declared in the video track header. The coded
+row stride is the visible width rounded up to the next multiple of four bytes:
+
+    stride = (width + 3) & ~3
+
+The coded frame-buffer size is:
+
+    stride * height
+
+Only the first width bytes of each decoded row are visible. Padding bytes are
+decoded because they are part of the compressed byte stream, but they are not
+displayed.
+
+
+LZSS Video Codec
+================
+
+Each LZSS packet decodes one frame.
+
+Packet header:
+
+Offset  Size  Description
+0       1     Bit layout: high nibble is offset_bits, low nibble is length_bits.
+1       3     Per-packet metadata bytes. The token bitstream starts after these
+              bytes. They are not entropy-coded token data.
+4       ...   Continuous MSB-first token bitstream.
+
+Token stream:
+
+1. Read one flag bit.
+2. If the flag bit is 1:
+   - Read 8 bits.
+   - Write that byte at the current frame-buffer position.
+   - Advance the position by 1.
+3. If the flag bit is 0:
+   - Read offset_bits bits as raw_offset.
+   - Read length_bits bits as raw_length.
+   - length = raw_length + 2.
+   - If raw_offset is zero, advance the position by length without writing.
+     Those bytes retain their previous-frame values.
+   - Otherwise copy length bytes from:
+
+         source = current_position - (1 << offset_bits) + raw_offset
+
+     to the current position, advancing both source and destination by one byte
+     per copied byte. Overlapping copies are legal.
+
+Decoding stops exactly when stride * height bytes have been traversed. The
+token stream must end exactly on the packet's final byte; no unused packet bytes
+are permitted.
+
+
+RLE Video Codec
+===============
+
+Each RLE packet decodes one frame into the persistent frame buffer.
+
+Packet header:
+
+Offset  Size  Description
+0       1     RLE format marker, 1.
+1       1     Mode. 0 means intra values; 1 means inter/delta values.
+2       ...   RLE commands.
+
+Commands start with one signed 8-bit integer.
+
+If command > 0:
+    Read one value byte. The run length is command. In intra mode, write that
+    value for command bytes. In inter mode, add that value modulo 256 to each
+    existing destination byte for command bytes.
+
+If command < 0:
+    The literal count is -command. Read that many value bytes. In intra mode,
+    copy them directly. In inter mode, add each value modulo 256 to the existing
+    destination byte.
+
+Command value zero is invalid. Decoding stops exactly when stride * height bytes
+have been written/updated, and the command stream must also be exactly at the
+packet end.
+
+
+AVI Conversion Notes
+====================
+
+The native format stores indexed frames and one global palette. The supplied
+converter expands frames to RGB and writes a 15 fps AVI video stream. Since the
+documented profile has no audio track, the AVI output has no audio stream.

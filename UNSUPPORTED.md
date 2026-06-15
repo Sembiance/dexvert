@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,942)
+# Unsupported File Formats (3,943)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -921,7 +921,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (166)
+## Music (167)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/adamMusicComposerScript](https://discmaster.textfiles.com/search?format=adamMusicComposerScript) | A'dam Music Composer Script | .scr | 
@@ -986,6 +986,7 @@ Family/Format | Name | Extensions | Notes
 [music/jayTrax](https://discmaster.textfiles.com/search?format=jayTrax) | JayTrax Module | .jxs | [4 sample files](https://sembiance.com/fileFormatSamples/music/jayTrax/)
 [music/kandinskyMusicPainterMusic](https://discmaster.textfiles.com/search?format=kandinskyMusicPainterMusic) | Kandinsky Music Painter music | .kmp | 
 [music/katorzerMusic](https://discmaster.textfiles.com/search?format=katorzerMusic) | Katorzer music | .kat | 
+[music/kawaiMusicScore](https://discmaster.textfiles.com/search?format=kawaiMusicScore) | Kawai music score | .ptn | 
 [music/klystrack](https://discmaster.textfiles.com/search?format=klystrack) | [Klystrack Module](http://fileformats.archiveteam.org/wiki/Klystrack_module) | .kt | [6 sample files](https://sembiance.com/fileFormatSamples/music/klystrack/)
 [music/korgSong](https://discmaster.textfiles.com/search?format=korgSong) | Korg Song | .sng | 
 [music/koustrackerModule](https://discmaster.textfiles.com/search?format=koustrackerModule) | Koustracker Module | .sok | 

@@ -1,227 +1,339 @@
-IntroCAD Drawing File Format Specification
-==========================================
-
-IntroCAD was a 2D vector drawing / CAD application for the Commodore Amiga
-computer (Motorola 68000 processor, big-endian architecture). This document
-describes the binary file format used to store IntroCAD drawings.
-
-Files may use the .cad extension or have no extension (component library files).
-
-
-1. FILE STRUCTURE
------------------
-
-An IntroCAD file consists of:
-
-  [Magic]  [Record 0]  [Record 1]  ...  [Record N]
-
-There is no explicit record count or end-of-file marker. Records are packed
-contiguously from immediately after the magic bytes until EOF. The file size
-must equal exactly: 4 + sum of all record sizes.
-
-
-2. MAGIC BYTES (4 bytes)
-------------------------
-
-Offset  Size  Value       Description
-------  ----  ----------  -----------
-0       4     00 12 D6 44 File format identifier (constant)
-
-All valid IntroCAD drawing files begin with these four bytes.
-
-
-3. RECORD FORMAT (6 + N*8 bytes)
---------------------------------
-
-Each record describes a polyline, polygon, or point marker.
-
-Offset  Size  Field        Description
-------  ----  -----------  -----------
-0       1     npoints      Number of vertices (0-255)
-1       1     color        Color/pen index (0-15 for standard palette)
-2       1     line_style   Line dash pattern (0=solid, 1-6=dashed variants)
-3       1     fill_flag    Polygon fill (0=outline only, 1=filled)
-4       1     flag_b4      Additional attribute byte
-5       1     flag_b5      Additional attribute byte
-6       N*8   coordinates  Vertex data: N pairs of (x, y) as MFFP floats
-
-Total record size: 6 + npoints * 8 bytes.
-
-
-3.1 NPOINTS FIELD (byte 0)
-
-  Number of coordinate pairs that follow. Valid range 0-255.
-
-  - npoints=0: Empty record (6 bytes total, no coordinate data).
-  - npoints=1: Single point marker.
-  - npoints=2: Line segment.
-  - npoints>=3: Polyline or polygon.
-
-  If the first and last vertices are identical, the shape is explicitly closed.
-
-
-3.2 COLOR FIELD (byte 1)
-
-  Index into the drawing color palette. Standard range is 0-15, corresponding
-  to the Amiga's 16-color display mode. Colors are application-defined; a
-  typical default mapping:
-
-    0  = Background (dark blue)     8  = Teal
-    1  = Black (primary pen)        9  = Purple
-    2  = Red                        10 = Brown-red
-    3  = Orange                     11 = Olive
-    4  = Blue                       12 = Dark cyan
-    5  = Green                      13 = Brown
-    6  = Magenta                    14 = Dark magenta
-    7  = Dark yellow                15 = Gray
-
-  Values > 15 may appear in certain files containing embedded non-vector data
-  (such as complex symbol definitions). Records with color > 15 should be
-  treated as opaque data and skipped during rendering.
-
-
-3.3 LINE_STYLE FIELD (byte 2)
-
-  Controls the dash pattern of the line stroke:
-
-    0 = Solid line (default)
-    1 = Short dash (equal on/off)
-    2 = Long dash
-    3 = Dash-dot
-    4 = Short dot
-    5 = Long dot
-    6 = Center line (long-short-long)
-
-  Higher values may appear but are uncommon.
-
-
-3.4 FILL_FLAG FIELD (byte 3)
-
-  Commonly 0 or 1. Despite its position, this byte does NOT control
-  polygon fill rendering. It appears on both open polylines (text character
-  strokes, pin labels) and closed shapes alike, including closed-path
-  letters such as B, D, O, 0, and 8. Applying fill based on this flag
-  produces incorrect visual results.
-
-  The exact purpose is unclear — it may relate to editing group membership,
-  selection state, or drawing mode within the IntroCAD application. For
-  rendering, all shapes should be drawn as stroke-only paths (no interior
-  fill).
-
-
-3.5 FLAG_B4 AND FLAG_B5 (bytes 4-5)
-
-  Additional rendering attributes. Observed values:
-
-    flag_b4: Commonly 0 or 1. May indicate closed-path rendering or
-             grouping membership. Values 0-14 observed in standard drawings.
-
-    flag_b5: Commonly 0. Values 0-14 observed. Purpose not fully determined;
-             likely related to layer or rendering priority.
-
-  These bytes are secondary to the core rendering attributes (color,
-  line_style, fill_flag) and may be safely defaulted to 0 for basic rendering.
-
-
-4. COORDINATE ENCODING: MOTOROLA FAST FLOATING POINT (MFFP)
-------------------------------------------------------------
-
-Each coordinate value is a 4-byte Motorola Fast Floating Point number stored
-in big-endian byte order. This is NOT IEEE 754 — it is the native floating-
-point format of the Amiga's mathffp.library.
-
-Byte layout (big-endian on disk):
-
-  Byte 0 (MSB): Mantissa bits 23-16
-  Byte 1:       Mantissa bits 15-8
-  Byte 2:       Mantissa bits 7-0
-  Byte 3 (LSB): [Sign:1] [Exponent:7]
-
-Fields:
-  - Mantissa: 24-bit unsigned integer (bits 31-8 of the 32-bit word)
-  - Sign:     1 bit (bit 7 of byte 3). 0=positive, 1=negative
-  - Exponent: 7-bit unsigned integer (bits 6-0 of byte 3), biased by 64
-
-Decoding formula:
-
-  If all 4 bytes are zero: value = 0.0
-  Otherwise:
-    value = (-1)^sign * mantissa * 2^(exponent - 88)
-
-  Where: exponent_unbiased = (exponent_field - 64)
-         and the shift is (exponent_unbiased - 24) = (exponent_field - 88)
-
-The mantissa is normalized with bit 23 (MSB) always set for non-zero values,
-giving an effective precision of 24 bits (~7 decimal digits).
-
-Example:
-  Bytes: F8 00 00 43
-  As 32-bit BE: 0xF8000043
-  Mantissa: 0xF80000 = 16252928
-  Byte 3: 0x43 = 0100_0011
-    Sign: 0 (positive)
-    Exponent: 100_0011 = 67, unbiased = 67-64 = 3
-  Value = 16252928 * 2^(67-88) = 16252928 * 2^(-21) = 7.75
-
-Each vertex is stored as two consecutive MFFP values: X then Y.
-The coordinate system uses Y-increasing-upward (mathematical/engineering
-convention), consistent with standard CAD practice. To render in screen
-coordinate systems (Y-down), negate all Y values.
-
-
-5. COORDINATE PAIRS
---------------------
-
-Within a record, the N coordinate pairs are stored sequentially:
-
-  Offset 6:   X0 (4 bytes MFFP)
-  Offset 10:  Y0 (4 bytes MFFP)
-  Offset 14:  X1 (4 bytes MFFP)
-  Offset 18:  Y1 (4 bytes MFFP)
-  ...
-  Offset 6+(N-1)*8:   X(N-1) (4 bytes MFFP)
-  Offset 6+(N-1)*8+4: Y(N-1) (4 bytes MFFP)
-
-
-6. NON-DRAWING FILES
----------------------
-
-Some files sharing the IntroCAD magic bytes are not vector drawings but
-rather project configuration or settings files (e.g., INFO_* files). These
-files contain the same 4-byte magic but their content after the magic does
-not conform to the record structure described above. A parser should validate
-that all records fit within the file boundaries; if any record's coordinate
-data would extend past EOF, the file is not a valid drawing file.
-
-
-7. EMBEDDED NON-VECTOR DATA
------------------------------
-
-Certain complex drawing files (notably large symbol libraries) may contain
-records with color indices > 15 and unusual flag values. These records still
-conform to the 6+N*8 byte structure but their coordinate data does not
-represent valid MFFP floating-point vertices. They likely encode embedded
-bitmap data, text rendering information, or symbol reference tables. A
-renderer should skip records where color > 15 to avoid visual artifacts.
-
-
-8. FILE SIZE CONSTRAINTS
-------------------------
-
-  Minimum valid file: 4 bytes (magic only, zero records)
-  Maximum record size: 6 + 255*8 = 2046 bytes
-  No upper limit on file size or record count.
-
-The file size must satisfy:
-  file_size = 4 + sum(6 + record[i].npoints * 8) for all records i
-
-
-9. AMIGA PALETTE CONTEXT
---------------------------
-
-IntroCAD ran on Amiga systems using the Amiga chipset's color register
-system. In 16-color mode (4 bitplanes), colors 0-15 are available. Color 0
-is traditionally the background/paper color. The actual RGB values for each
-color index were configurable per-drawing via the IntroCAD preferences system
-(stored separately from the drawing data, e.g., in INFO files). Without the
-associated preferences, renderers should use a reasonable default palette.
+================================================================================
+IntroCAD Drawing File Format  (.cad)
+================================================================================
+
+IntroCAD is an object-oriented 2D drawing / CAD program for the Commodore
+Amiga, written by Tim Mooney and published by Progressive Peripherals &
+Software.  It shipped in three known revisions that all read and write the
+same drawing-file format:
+
+    Intro-CAD  v1.9    (1987)
+    IntroCAD Plus v3.0.7 (1990, adds layers, hatch and richer line types)
+    IntroCAD .020      (1990, 68020 build of v3.0.7)
+
+A drawing file (conventionally suffixed ".cad", although many of the sample
+files and "Part" library files carry no extension at all) is a single, flat,
+big-endian binary stream:
+
+    +-----------------------------+
+    | 4-byte file magic           |
+    +-----------------------------+
+    | object record 0             |
+    +-----------------------------+
+    | object record 1             |
+    +-----------------------------+
+    |            ...              |
+    +-----------------------------+
+    | object record k-1           |
+    +-----------------------------+
+
+There is no file-level object count, no directory, no index and no trailer.
+Records run back-to-back until end of file.  All multi-byte values are stored
+big-endian (Motorola 68000 byte order).
+
+This format description accounts for 100% of every byte in every valid sample
+file: a parser reads the 4 magic bytes and then consumes records until the
+byte offset exactly equals the file length.
+
+--------------------------------------------------------------------------------
+1. File magic  (4 bytes, offset 0)
+--------------------------------------------------------------------------------
+
+    Offset  Size  Value
+    ------  ----  ---------------------------------------------------------
+    0       4     00 12 D6 44      (hex)
+
+The four magic bytes are the 32-bit constant 0x0012D644, which is 1,234,500 in
+decimal.  Every IntroCAD drawing begins with exactly these four bytes.  The
+loader reads them as one big-endian 32-bit word and rejects the file if they
+do not match (the program prints "File not of required type").
+
+A file that does not start with this magic is not an IntroCAD drawing and must
+be rejected.
+
+Note: the magic alone is not sufficient proof of a drawing.  IntroCAD's own
+settings/scratch files (e.g. the sample "INFO_130") also begin with the magic
+but their bodies are not object records; they fail the record-structure and
+coordinate-validity checks described below and must likewise be rejected.
+
+--------------------------------------------------------------------------------
+2. Object record
+--------------------------------------------------------------------------------
+
+Every drawing primitive -- line, poly-line, box, circle, arc, freehand stroke,
+character of text -- is stored as one object record.  IntroCAD is a poly-line
+engine: each record is simply an ordered list of points joined by straight
+line segments.  Curved and text shapes are flattened into many short segments
+when the drawing is saved, so the on-disk representation never contains arcs,
+beziers, radii or glyph indices -- only points.
+
+A record is a fixed 6-byte header followed by N points of 8 bytes each:
+
+    Offset  Size      Field
+    ------  --------  ------------------------------------------------------
+    0       1         pointCount   N   (number of points, 1..255)
+    1       1         color            (palette index, 0..15)
+    2       1         lineType         (see 2.3)
+    3       1         groupFlag        (see 2.4)
+    4       1         renderFlags      (see 2.5)
+    5       1         layer            (see 2.6)
+    6       N*8       points[N]        (N (x,y) pairs, see section 3)
+
+Total record size in bytes = 6 + N*8.
+
+The header bytes were verified against the IntroCAD and IntroCAD Plus 68000
+executables (the object load/save routines) and against an exhaustive census
+of all sample files.  Their meaning:
+
+2.1  pointCount  (byte 0)
+     Unsigned 8-bit count of points that follow the header.  Always >= 1 in a
+     valid file; a zero count never occurs in real data and is used here as a
+     hard "this is not / no longer a drawing" signal.  The maximum observed in
+     the sample corpus is well under 255; the field is a single byte so the
+     hard limit is 255 points per record.  (Drawing tools that would exceed
+     this -- e.g. a very long freehand stroke -- are split by the editor into
+     multiple records.)
+
+2.2  color  (byte 1)
+     Palette index 0..15 selecting one of IntroCAD's 16 screen colors.  The
+     RGB values are NOT stored in the drawing; they come from the separate
+     "IntroCAD.rgb" palette file (see section 4).  Index 0 is the paper /
+     background color; index 4 (black in the default palette) is IntroCAD's
+     default plot color, which is why it dominates the corpus.
+
+2.3  lineType  (byte 2)
+     Only the low 3 bits are used (values 0..6); the upper 5 bits are always
+     zero.  Selects a 16-bit on/off line stipple (see section 5):
+
+         0  solid
+         1  dotted
+         2  dashed
+         3  long-dash
+         4  dash-dot
+         5  dash-dot-dot-ish
+         6  dense-dash
+
+     Text is always rendered solid by the editor regardless of this field.
+
+2.4  groupFlag  (byte 3)
+     Only bit 0 is used (value 0 or 1); the other bits are always zero.
+     bit 0 = 1 means "this object is grouped together with the object that
+     follows it" -- i.e. a run of consecutive records whose groupFlag is 1,
+     terminated by the next record whose groupFlag is 0, forms one user-level
+     "group".  Grouping is an editing convenience only and has no effect on how
+     the drawing is rendered, so a converter can ignore it.
+
+2.5  renderFlags  (byte 4)
+     A bit field.  Only bits 0 and 2 are ever set in the corpus; all other
+     bits are always zero.
+
+         bit 0 (0x01)  thick / heavy line.  The object is stroked with a
+                       heavier pen.  (In IntroCAD Plus this sets the internal
+                       line-type "thick" bit, drawn at higher weight.)
+         bit 2 (0x04)  filled.  The poly-line is treated as a closed filled
+                       polygon painted solid in the object's color, instead of
+                       being stroked.  Used for solid blocks such as the
+                       coloured panels of the "Amiga" sample drawing.
+
+2.6  layer  (byte 5)
+     Drawing layer number (an IntroCAD Plus feature).  In v1.9 drawings this
+     byte is always 0.  In Plus drawings it carries the layer the object lives
+     on; observed values are 0..8 and 14.  Internally the loader computes a
+     layer bit mask as (1 << layer).  Layers are a visibility/editing feature;
+     all layers are part of the same drawing and are rendered together, so a
+     converter can treat this field as informational.
+
+--------------------------------------------------------------------------------
+3. Point coordinates -- Motorola Fast Floating Point (FFP)
+--------------------------------------------------------------------------------
+
+Each point is two 32-bit values: X then Y, each in Motorola "Fast Floating
+Point" (FFP, a.k.a. "ffp" / motorola.lib format), big-endian, 8 bytes per
+point total.
+
+FFP packs a real number into 32 bits:
+
+      byte 0      byte 1      byte 2      byte 3
+    MMMMMMMM    MMMMMMMM    MMMMMMMM    S EEEEEEE
+    \------------ 24-bit mantissa -----/ |  \--- 7-bit exponent (excess-64)
+                                         sign
+
+    - bits 31..8 : 24-bit mantissa, normalised so that the most significant
+                   bit (bit 31) is 1 for every non-zero value.  The binary
+                   point sits immediately to the LEFT of the mantissa, so the
+                   mantissa represents a fraction in [0.5, 1.0).
+    - bit 7      : sign (1 = negative)
+    - bits 6..0  : exponent, biased by 64 (excess-64)
+
+    value = (-1)^sign * (mantissa / 2^24) * 2^(exponent - 64)
+
+    Zero is represented by the single all-bits-zero word (00 00 00 00).
+
+Decoding in integer arithmetic:
+
+    m = (b0 << 16) | (b1 << 8) | b2          # 24-bit mantissa
+    if m == 0: value = 0.0
+    else:
+        sign = b3 >> 7
+        exp  = b3 & 0x7F
+        value = (m / 16777216.0) * 2.0**(exp - 64)
+        if sign: value = -value
+
+Validity check: because every non-zero FFP value is normalised, the high bit
+of byte 0 (the mantissa MSB) is always 1 unless the whole word is zero.  A
+4-byte coordinate word is therefore only valid if (byte0 & 0x80) != 0 OR the
+word is exactly 00 00 00 00.  This single rule reliably distinguishes genuine
+coordinate data from corruption or non-drawing data, and is used by the
+converter to fail fast.
+
+Coordinate units: the values are IntroCAD drawing units (inches on the design
+grid for most drawings; some drawings such as the kitchen plans use a larger
+unit, e.g. millimetres).  The origin is the lower-left of the drawing; X grows
+to the right and Y grows UPWARD (mathematical orientation).  When converting
+to SVG (whose Y grows downward) the Y axis must be negated/flipped.
+
+A poly-line is drawn by moving to points[0] and drawing straight segments
+through points[1..N-1].  Closed shapes (boxes, circles, filled polygons) store
+their closing point explicitly as a final point equal to the first point;
+there is no separate "closed" flag and no implicit closing is required.
+
+--------------------------------------------------------------------------------
+4. Color palette  (external; default values)
+--------------------------------------------------------------------------------
+
+The 16 RGB colors are not part of the drawing file.  They live in a separate
+ASCII text file named "IntroCAD.rgb" that the program reads at start-up; the
+"Save Colors" menu item writes it.  Its format is 16 whitespace-separated
+hexadecimal triplets, one per color register, each digit a 4-bit (0..F) R, G
+and B component, e.g.:
+
+    dca b00 cba 0 0 c0 f00 f a50 ff0 ff f7f 2a f00 fda fff
+
+A value with fewer than three digits is right-justified into RGB (so "c0"
+means 0,C,0 = green and "f" means 0,0,F = blue).
+
+Default palette shipped with IntroCAD Plus v3.0.7 (4-bit per channel, expanded
+to 8-bit by replicating each nibble, i.e. n -> n*17):
+
+    idx  hex   R    G    B    role
+    ---  ----  ---  ---  ---  -----------------------------------
+     0   dca   DD   CC   AA   paper / background
+     1   b00   BB   00   00   dark red
+     2   cba   CC   BB   AA   light tan / grey
+     3   000   00   00   00   black
+     4   000   00   00   00   black  (default plot color)
+     5   0c0   00   CC   00   green
+     6   f00   FF   00   00   red
+     7   00f   00   00   FF   blue
+     8   a50   AA   55   00   brown
+     9   ff0   FF   FF   00   yellow
+    10   0ff   00   FF   FF   cyan
+    11   f7f   FF   77   FF   pink
+    12   02a   00   22   AA   dark blue
+    13   f00   FF   00   00   red
+    14   fda   FF   DD   AA   peach
+    15   fff   FF   FF   FF   white
+
+Because palettes are external and user-editable, a drawing's colors are only
+exactly reproducible with the matching IntroCAD.rgb file; the default palette
+above is the canonical choice and is what the converter uses.
+
+--------------------------------------------------------------------------------
+5. Line-type stipple patterns
+--------------------------------------------------------------------------------
+
+lineType (byte 2 of a record) indexes this table of 16-bit on/off stipples
+(extracted from the IntroCAD executable's pattern table).  Bits are consumed
+most-significant-bit first; a 1 bit paints, a 0 bit skips:
+
+    lineType  mask     binary               appearance
+    --------  ------   ------------------   --------------------------
+       0      0xFFFF   1111111111111111     solid
+       1      0xCCCC   1100110011001100     dotted (2 on, 2 off)
+       2      0xF0F0   1111000011110000     dashed (4 on, 4 off)
+       3      0xFFF0   1111111111110000     long dash (12 on, 4 off)
+       4      0xFFCC   1111111111001100     dash-dot
+       5      0xFF3C   1111111100111100     dash-dot variant
+       6      0xFCCC   1111110011001100     dense dash-dot
+
+When converting to SVG these masks become stroke-dasharray run-lengths (the
+lengths of successive 1- and 0-runs around the 16-bit pattern).
+
+--------------------------------------------------------------------------------
+6. Validation and the best-effort reading policy
+--------------------------------------------------------------------------------
+
+The 4-byte magic is the single gate that verifies a file really is an IntroCAD
+file.  A reader MUST reject (and produce no output for) any file that does not
+begin with 00 12 D6 44.
+
+Once the magic is confirmed, the body is read on a best-effort basis: object
+records are decoded back-to-back for as long as they stay well-formed, where a
+record is well-formed iff
+
+       - at least 6 bytes remain for its header,
+       - pointCount (byte 0) is >= 1,
+       - its 6 + pointCount*8 bytes fit within the file, and
+       - every coordinate word is a legal FFP value
+         ((byte0 & 0x80) != 0, or the word is 00 00 00 00).
+
+A fully intact drawing's records parse cleanly and exactly fill the file (the
+read offset ends equal to the file length).  If instead a record fails to parse
+before end of file, the drawing is truncated or corrupt: the reader keeps every
+object decoded up to that point and renders that valid prefix, rather than
+discarding the whole file.  (A converter should warn that the input was
+truncated/corrupt and report where parsing stopped.)
+
+The only post-magic case that yields no output is a file whose magic is present
+but from which NOT EVEN ONE drawable record can be decoded -- there is then
+genuinely nothing to render.
+
+Applying this policy to the provided sample set:
+
+    sample0/14378/Volt_Freq.cad  - corrupt: a 4392-byte run was zeroed out in
+                                   the middle of the object stream.  The first
+                                   320 objects parse and are rendered; the rest
+                                   is lost.  (Clean, fully-parsable copies of the
+                                   same drawing exist at sample0/17484 and
+                                   sample0/29111.)
+    sample0/21003/enterprise     - corrupt: only the first ~32 KB is valid (520
+                                   objects -- the saucer section of a starship
+                                   drawing); those are rendered, the garbage tail
+                                   is dropped.
+    sample0/39757/INFO_130       - NOT a drawing: an IntroCAD settings/scratch
+                                   file that shares the 4-byte magic but whose
+                                   body is not object records (the very first
+                                   record's coordinates are invalid).  No
+                                   drawable object can be decoded, so it produces
+                                   no output.
+
+The other 276 sample files parse cleanly with every byte accounted for.
+
+--------------------------------------------------------------------------------
+7. On-disk layout example (annotated)
+--------------------------------------------------------------------------------
+
+The smallest sample, "sample0/14378/AND" (a 90-byte logic-gate part), begins:
+
+    00 12 D6 44                  file magic
+    0A                           pointCount = 10
+    04                           color      = 4  (black)
+    00                           lineType   = 0  (solid)
+    00                           groupFlag  = 0
+    00                           renderFlags= 0
+    00                           layer      = 0
+    AB 22 9F 43  BD 92 3D 43     point 0  (x = FFP, y = FFP)
+    BC 12 BB 43  BD 92 3D 43     point 1
+    ... 8 more points ...        points 2..9
+    (next record header follows immediately, or EOF)
+
+Decoding point 0's X word AB 22 9F 43:
+    mantissa = 0xAB229F = 11215519
+    sign     = 0x43 >> 7 = 0
+    exp      = 0x43 & 0x7F = 67
+    value    = (11215519 / 16777216) * 2^(67-64)
+             = 0.6684970... * 8 = 5.34798...   (drawing units)
+
+================================================================================
+End of IntroCAD format description.
+================================================================================

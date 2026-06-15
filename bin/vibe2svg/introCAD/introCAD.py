@@ -1,230 +1,314 @@
+#!/usr/bin/env python3
 # Vibe coded by Claude
-# IntroCAD to SVG converter
-# Converts IntroCAD vector drawing files to SVG format
+#
+# introCAD.py - Convert an IntroCAD (Amiga) drawing file into an SVG vector image.
+#
+#   usage: introCAD.py <inputFile> <outputFile>
+#
+# IntroCAD was an object-oriented 2D drawing/CAD program for the Commodore
+# Amiga, written by Tim Mooney and published by Progressive Peripherals &
+# Software (1987-1990).  Every drawing it saves is a flat list of "primitive
+# objects", each of which is simply a poly-line: an ordered list of (x, y)
+# points connected by straight segments.  Curved shapes (circles, arcs, text,
+# freehand) are pre-flattened into many short segments at save time, so a
+# faithful renderer only has to stroke/fill poly-lines.
+#
+# The complete byte-level file format is documented in introCAD.txt.
+#
+# The 4-byte magic verifies the file is genuinely an IntroCAD file; if it is
+# missing the converter fails fast (non-zero exit, nothing written).  Past the
+# magic the body is read best-effort: every object that parses is rendered, and
+# if the stream is truncated or corrupt the valid prefix is still emitted (with
+# a warning on stderr).  Output is withheld only when the magic is present but
+# not a single drawable object can be decoded.
 
-import struct
 import sys
 import os
-import math
+import struct
 
-MAGIC = b'\x00\x12\xD6\x44'
+MAGIC = b"\x00\x12\xd6\x44"          # 0x0012D644 == 1234500 decimal
+HEADER_LEN = 6                        # per-object header, in bytes
+POINT_LEN = 8                         # one (x, y) point: two 32-bit FFP floats
 
-PALETTE = [
-    "#0055AA",  # 0  dark blue (Amiga background)
-    "#000000",  # 1  black
-    "#DD0000",  # 2  red
-    "#FF8800",  # 3  orange
-    "#0000CC",  # 4  blue
-    "#00AA00",  # 5  green
-    "#CC00CC",  # 6  magenta
-    "#AAAA00",  # 7  dark yellow
-    "#00AAAA",  # 8  teal
-    "#8800CC",  # 9  purple
-    "#CC4400",  # 10 brown-red
-    "#448800",  # 11 olive
-    "#006688",  # 12 dark cyan
-    "#884400",  # 13 brown
-    "#880088",  # 14 dark magenta
-    "#666666",  # 15 gray
+
+class IntroCADError(Exception):
+    """Raised when the input is not a parseable IntroCAD drawing."""
+
+
+# --------------------------------------------------------------------------
+# Motorola "Fast Floating Point" (FFP) decoder
+#
+# FFP packs a real number into 32 bits, big-endian:
+#     bits 31..8  (3 bytes) : 24-bit mantissa, normalised so bit 31 == 1
+#     bit  7              : sign (1 == negative)
+#     bits 6..0           : exponent, excess-64 (bias 64)
+# The binary point sits immediately to the left of the mantissa, so the
+# mantissa is a fraction in [0.5, 1.0) and the value is:
+#     (-1)^sign * (mantissa / 2**24) * 2**(exponent - 64)
+# Zero is the single all-bits-zero word.  Any other word whose mantissa MSB
+# is clear is not a legal normalised FFP value -- we use that fact to
+# validate that we are really looking at coordinate data.
+# --------------------------------------------------------------------------
+def ffp_is_valid(word):
+    return (word[0] & 0x80) != 0 or word == b"\x00\x00\x00\x00"
+
+
+def ffp_decode(word):
+    mant = (word[0] << 16) | (word[1] << 8) | word[2]
+    if mant == 0:
+        return 0.0
+    sign = word[3] >> 7
+    exp = word[3] & 0x7F
+    val = (mant / 16777216.0) * (2.0 ** (exp - 64))
+    return -val if sign else val
+
+
+# --------------------------------------------------------------------------
+# IntroCAD's default 16-entry screen palette (from the shipped IntroCAD.rgb).
+# Each Amiga register holds 4-bit R/G/B; we expand to 8-bit.  Index 0 is the
+# paper / background colour; index 4 (black) is the default plot colour.
+# --------------------------------------------------------------------------
+_PALETTE_4BIT = [
+    "dca", "b00", "cba", "000", "000", "0c0", "f00", "00f",
+    "a50", "ff0", "0ff", "f7f", "02a", "f00", "fda", "fff",
 ]
 
-DASH_PATTERNS = {
-    0: None,
-    1: "4,4",
-    2: "8,4",
-    3: "8,4,2,4",
-    4: "2,4",
-    5: "2,8",
-    6: "12,4,4,4",
-}
+
+def _expand(nibbles):
+    r, g, b = (int(c, 16) for c in nibbles)
+    return (r * 17, g * 17, b * 17)
 
 
-def decode_mffp(data, offset):
-    """Decode a 4-byte Motorola Fast Floating Point value (big-endian on disk)."""
-    val = int.from_bytes(data[offset:offset + 4], 'big')
-    if val == 0:
-        return 0.0
-    mantissa = (val >> 8) & 0xFFFFFF
-    sign = (val >> 7) & 1
-    exponent = val & 0x7F
-    result = mantissa * (2.0 ** (exponent - 88))
-    if sign:
-        result = -result
-    return result
+PALETTE = [_expand(c) for c in _PALETTE_4BIT]
 
 
-def parse_introcad(filepath):
-    """Parse an IntroCAD file. Returns list of records or raises ValueError."""
-    with open(filepath, 'rb') as f:
-        data = f.read()
-
-    if len(data) < 4:
-        raise ValueError("File too small")
-    if data[:4] != MAGIC:
-        raise ValueError("Invalid magic bytes")
-
-    records = []
-    offset = 4
-
-    while offset < len(data):
-        if offset + 6 > len(data):
-            raise ValueError(f"Truncated record header at offset {offset}")
-
-        npoints = data[offset]
-        color = data[offset + 1]
-        line_style = data[offset + 2]
-        fill_flag = data[offset + 3]
-        flag_b4 = data[offset + 4]
-        flag_b5 = data[offset + 5]
-
-        needed = 6 + npoints * 8
-        if offset + needed > len(data):
-            raise ValueError(
-                f"Truncated coordinate data at offset {offset}: "
-                f"need {needed} bytes, have {len(data) - offset}"
-            )
-
-        points = []
-        for i in range(npoints):
-            coff = offset + 6 + i * 8
-            x = decode_mffp(data, coff)
-            y = -decode_mffp(data, coff + 4)
-            points.append((x, y))
-
-        records.append({
-            'npoints': npoints,
-            'color': color,
-            'line_style': line_style,
-            'fill_flag': fill_flag,
-            'flag_b4': flag_b4,
-            'flag_b5': flag_b5,
-            'points': points,
-        })
-
-        offset += needed
-
-    return records
+# --------------------------------------------------------------------------
+# Line-type dash masks, lifted from the IntroCAD executable.  Each is a
+# 16-bit repeating on/off stipple, drawn most-significant-bit first.
+# Index 0 (solid) is rendered without a dash array.
+# --------------------------------------------------------------------------
+LINE_PATTERNS = [0xFFFF, 0xCCCC, 0xF0F0, 0xFFF0, 0xFFCC, 0xFF3C, 0xFCCC]
 
 
-def records_to_svg(records, margin_pct=0.02):
-    """Convert parsed records to SVG string."""
-    valid_records = [r for r in records if r['npoints'] > 0 and r['color'] <= 15]
-
-    if not valid_records:
-        all_pts = [(x, y) for r in records for (x, y) in r['points']
-                   if r['npoints'] > 0 and abs(x) < 1e10 and abs(y) < 1e10]
-        if not all_pts:
-            return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"></svg>'
-        valid_records = [r for r in records if r['npoints'] > 0]
-
-    all_x = []
-    all_y = []
-    for r in valid_records:
-        for x, y in r['points']:
-            if abs(x) < 1e10 and abs(y) < 1e10:
-                all_x.append(x)
-                all_y.append(y)
-
-    if not all_x:
-        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"></svg>'
-
-    min_x, max_x = min(all_x), max(all_x)
-    min_y, max_y = min(all_y), max(all_y)
-
-    width = max_x - min_x
-    height = max_y - min_y
-
-    if width < 1e-6:
-        width = 1.0
-    if height < 1e-6:
-        height = 1.0
-
-    margin_x = width * margin_pct
-    margin_y = height * margin_pct
-    vb_x = min_x - margin_x
-    vb_y = min_y - margin_y
-    vb_w = width + 2 * margin_x
-    vb_h = height + 2 * margin_y
-
-    svg_w = 800
-    svg_h = int(800 * vb_h / vb_w) if vb_w > 0 else 800
-    if svg_h < 100:
-        svg_h = 100
-    if svg_h > 4000:
-        svg_h = 4000
-
-    stroke_w = max(width, height) * 0.002
-
-    lines = []
-    lines.append(f'<svg xmlns="http://www.w3.org/2000/svg" '
-                 f'width="{svg_w}" height="{svg_h}" '
-                 f'viewBox="{vb_x} {vb_y} {vb_w} {vb_h}">')
-    lines.append(f'<rect x="{vb_x}" y="{vb_y}" width="{vb_w}" height="{vb_h}" fill="white"/>')
-
-    for r in valid_records:
-        if r['npoints'] < 1:
-            continue
-
-        color_idx = r['color'] % len(PALETTE)
-        color = PALETTE[color_idx]
-        pts = r['points']
-        ls = r['line_style']
-
-        if any(abs(x) > 1e10 or abs(y) > 1e10 for x, y in pts):
-            continue
-
-        if r['npoints'] == 1:
-            x, y = pts[0]
-            r_size = stroke_w * 1.5
-            lines.append(f'<circle cx="{x}" cy="{y}" r="{r_size}" fill="{color}"/>')
-            continue
-
-        is_closed = (len(pts) >= 3 and
-                     abs(pts[0][0] - pts[-1][0]) < 1e-4 and
-                     abs(pts[0][1] - pts[-1][1]) < 1e-4)
-
-        points_str = " ".join(f"{x},{y}" for x, y in pts)
-
-        style_parts = [f'fill="none" stroke="{color}"']
-        style_parts.append(f'stroke-width="{stroke_w}"')
-        style_parts.append('stroke-linecap="round"')
-        style_parts.append('stroke-linejoin="round"')
-
-        dash = DASH_PATTERNS.get(ls)
-        if dash:
-            scaled_dash = ",".join(
-                str(float(v) * stroke_w * 3) for v in dash.split(",")
-            )
-            style_parts.append(f'stroke-dasharray="{scaled_dash}"')
-
-        style = " ".join(style_parts)
-
-        if is_closed:
-            lines.append(f'<polygon points="{points_str}" {style}/>')
+def pattern_to_dash(mask, unit):
+    """Turn a 16-bit stipple into an SVG stroke-dasharray run list (in `unit`)."""
+    if mask in (0xFFFF, 0x0000):
+        return None
+    bits = [(mask >> (15 - i)) & 1 for i in range(16)]
+    # Rotate so the array starts on an "on" run (dasharray must start with a dash).
+    start = bits.index(1)
+    bits = bits[start:] + bits[:start]
+    runs = []
+    cur = bits[0]
+    length = 0
+    for bit in bits:
+        if bit == cur:
+            length += 1
         else:
-            lines.append(f'<polyline points="{points_str}" {style}/>')
+            runs.append(length)
+            cur = bit
+            length = 1
+    runs.append(length)
+    if len(runs) % 2:                 # dasharray needs dash/gap pairs
+        runs.append(0)
+    return " ".join("%.4g" % (r * unit) for r in runs if True)
 
-    lines.append('</svg>')
-    return "\n".join(lines)
+
+# --------------------------------------------------------------------------
+# Object model
+# --------------------------------------------------------------------------
+class CadObject(object):
+    __slots__ = ("points", "color", "line_type", "thick", "filled",
+                 "grouped", "layer")
+
+    def __init__(self, points, color, line_type, thick, filled, grouped, layer):
+        self.points = points
+        self.color = color
+        self.line_type = line_type
+        self.thick = thick
+        self.filled = filled
+        self.grouped = grouped
+        self.layer = layer
 
 
-def convert(input_path, output_path):
-    """Convert an IntroCAD file to SVG."""
+def parse(data):
+    """Best-effort parse of an IntroCAD file.
+
+    The 4-byte magic is the gate that verifies the file really is an IntroCAD
+    file; a missing/wrong magic raises IntroCADError (the caller writes nothing).
+
+    Past the magic we decode object records back-to-back for as long as they
+    remain well-formed.  The moment a record fails to parse -- a zero point
+    count, a record that runs off the end, or a coordinate that is not a legal
+    FFP value -- we stop and keep everything decoded so far.  This salvages the
+    valid prefix of a truncated or corrupted drawing instead of discarding it.
+
+    Returns (objects, consumed, total, stop_reason):
+      objects     - list of CadObject successfully decoded
+      consumed    - byte offset at which parsing stopped
+      total       - file length in bytes
+      stop_reason - None if the records parsed cleanly all the way to EOF,
+                    otherwise a human-readable description of where/why parsing
+                    stopped early (i.e. the file is truncated or corrupt).
+    """
+    if len(data) < 4 or data[:4] != MAGIC:
+        raise IntroCADError("not an IntroCAD file (bad magic)")
+
+    objects = []
+    pos = 4
+    n = len(data)
+    stop_reason = None
+    while pos < n:
+        if pos + HEADER_LEN > n:
+            stop_reason = "truncated object header at offset %d" % pos
+            break
+        count = data[pos]
+        color = data[pos + 1]
+        line_byte = data[pos + 2]
+        group_byte = data[pos + 3]
+        flag_byte = data[pos + 4]
+        layer = data[pos + 5]
+        if count == 0:
+            stop_reason = "zero-point object at offset %d" % pos
+            break
+        end = pos + HEADER_LEN + count * POINT_LEN
+        if end > n:
+            stop_reason = "object at offset %d overruns end of file" % pos
+            break
+
+        pts = []
+        off = pos + HEADER_LEN
+        bad_off = None
+        for _ in range(count):
+            xw = data[off:off + 4]
+            yw = data[off + 4:off + 8]
+            if not ffp_is_valid(xw) or not ffp_is_valid(yw):
+                bad_off = off
+                break
+            pts.append((ffp_decode(xw), ffp_decode(yw)))
+            off += POINT_LEN
+        if bad_off is not None:
+            stop_reason = "invalid coordinate data at offset %d" % bad_off
+            break
+
+        objects.append(CadObject(
+            points=pts,
+            color=color & 0x0F,
+            line_type=line_byte & 0x07,
+            thick=bool(flag_byte & 0x01),
+            filled=bool(flag_byte & 0x04),
+            grouped=bool(group_byte & 0x01),
+            layer=layer,
+        ))
+        pos = end
+
+    return objects, pos, n, stop_reason
+
+
+# --------------------------------------------------------------------------
+# SVG emitter
+# --------------------------------------------------------------------------
+def to_svg(objects):
+    xs = [p[0] for o in objects for p in o.points]
+    ys = [p[1] for o in objects for p in o.points]
+    if xs:
+        minx, maxx = min(xs), max(xs)
+        miny, maxy = min(ys), max(ys)
+    else:
+        # an empty (records-free) drawing: emit a valid 1x1 canvas
+        minx, maxx, miny, maxy = 0.0, 1.0, 0.0, 1.0
+    width = maxx - minx
+    height = maxy - miny
+    span = max(width, height, 1e-6)
+
+    margin = span * 0.02
+    thin = span * 0.0015
+    thick = span * 0.0035
+    dash_unit = span * 0.006
+
+    vb_x = minx - margin
+    vb_y = -maxy - margin                 # SVG y grows downward; we flip world y
+    vb_w = width + 2 * margin
+    vb_h = height + 2 * margin
+
+    paper = "#%02x%02x%02x" % PALETTE[0]
+
+    out = []
+    out.append(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<svg xmlns="http://www.w3.org/2000/svg" '
+        'viewBox="%.4f %.4f %.4f %.4f" '
+        'shape-rendering="geometricPrecision">' % (vb_x, vb_y, vb_w, vb_h)
+    )
+    out.append('<rect x="%.4f" y="%.4f" width="%.4f" height="%.4f" fill="%s"/>'
+               % (vb_x, vb_y, vb_w, vb_h, paper))
+
+    for o in objects:
+        col = "#%02x%02x%02x" % PALETTE[o.color]
+        d = "M " + " L ".join("%.4f %.4f" % (x, -y) for x, y in o.points)
+        attrs = ['d="%s"' % d]
+        if o.filled:
+            attrs.append('fill="%s"' % col)
+            attrs.append('stroke="none"')
+        else:
+            attrs.append('fill="none"')
+            attrs.append('stroke="%s"' % col)
+            attrs.append('stroke-width="%.4f"' % (thick if o.thick else thin))
+            attrs.append('stroke-linecap="round"')
+            attrs.append('stroke-linejoin="round"')
+            dash = pattern_to_dash(LINE_PATTERNS[o.line_type], dash_unit)
+            if dash:
+                attrs.append('stroke-dasharray="%s"' % dash)
+        out.append("<path %s/>" % " ".join(attrs))
+
+    out.append("</svg>\n")
+    return "\n".join(out)
+
+
+def main(argv):
+    if len(argv) != 3:
+        sys.stderr.write("usage: introCAD.py <inputFile> <outputFile>\n")
+        return 2
+    in_path, out_path = argv[1], argv[2]
+
     try:
-        records = parse_introcad(input_path)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        with open(in_path, "rb") as fh:
+            data = fh.read()
+    except OSError as exc:
+        sys.stderr.write("cannot read %s: %s\n" % (in_path, exc))
+        return 1
 
-    svg = records_to_svg(records)
+    try:
+        objects, consumed, total, stop_reason = parse(data)
+    except IntroCADError as exc:
+        # Only reached when the file is not an IntroCAD file at all (bad magic):
+        # fail fast and write nothing.
+        sys.stderr.write("%s: %s\n" % (in_path, exc))
+        return 1
 
-    with open(output_path, 'w') as f:
-        f.write(svg)
+    if not objects and stop_reason is not None:
+        # The IntroCAD magic is present but not a single drawable record could
+        # be decoded -- there is genuinely nothing to render (e.g. a settings
+        # file that merely shares the magic).  Fail rather than emit a blank.
+        sys.stderr.write("%s: no drawable objects (%s)\n" % (in_path, stop_reason))
+        return 1
+
+    if stop_reason is not None:
+        # Salvaged the valid prefix of a truncated/corrupt drawing.
+        sys.stderr.write(
+            "%s: warning: input appears truncated or corrupt -- rendered the "
+            "first %d object(s); stopped at offset %d of %d (%s)\n"
+            % (in_path, len(objects), consumed, total, stop_reason))
+
+    svg = to_svg(objects)
+    try:
+        with open(out_path, "w") as fh:
+            fh.write(svg)
+    except OSError as exc:
+        sys.stderr.write("cannot write %s: %s\n" % (out_path, exc))
+        return 1
+    return 0
 
 
-if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <inputFile> <outputFile>", file=sys.stderr)
-        sys.exit(1)
-
-    convert(sys.argv[1], sys.argv[2])
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

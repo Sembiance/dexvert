@@ -1,0 +1,300 @@
+TWV file format
+================
+
+Overview
+--------
+
+TWV is a little-endian QuickTime-like container. The top level contains one
+movie atom (`moov`) followed by one media-data atom (`mdat`). A supported TWV
+movie contains two tracks:
+
+* a movie-handler `tflp` track, used as a 10 Hz timing/control track
+* a sound-handler `raw ` track, containing mono PCM audio at 22050 Hz
+
+The supported format does not contain encoded raster video frames. The `tflp`
+track carries fixed-size control records and the `mdat` prefix carries a color
+palette, but there is no pixel payload to render. A converter should validate
+the timing/control track and preserve the actual media by copying the decoded
+PCM audio to WAV.
+
+Byte order
+----------
+
+All integer fields are little-endian.
+
+Atom layout
+-----------
+
+Every atom begins with:
+
+Offset  Size  Field
+0       4     uint32 atom size, including this 8-byte header and all payload
+4       4     ASCII atom type
+
+Container atoms (`moov`, `trak`, `mdia`, `minf`, `stbl`) have an additional
+reserved uint32 immediately after the type. It must be zero. Child atoms begin
+12 bytes after the container start.
+
+Leaf atoms begin their payload immediately after the 8-byte header.
+
+`mdat` is a top-level media-data atom. Like container atoms, it has a reserved
+uint32 zero after the type. Media chunk offsets are relative to byte 12 of the
+`mdat` atom, immediately after this reserved field.
+
+Top-level layout
+----------------
+
+Offset  Size      Field
+0       variable  `moov` atom
+...     variable  `mdat` atom
+
+No trailing bytes are permitted after `mdat`.
+
+Movie atom
+----------
+
+`moov` contains one `mvhd` atom followed by two `trak` atoms.
+
+`mvhd` payload:
+
+Offset  Size  Field
+0       4     movie flags/capabilities
+4       4     creation timestamp
+8       4     modification timestamp
+12      4     movie timescale
+16      4     movie duration in movie timescale units
+20      4     playback-rate field
+24      4     packed playback/volume field
+28      60    reserved zero bytes
+
+The converter uses the track headers for media timing and validates only the
+`mvhd` length.
+
+Track atom
+----------
+
+Each `trak` contains:
+
+* `tkhd`
+* `mdia`
+
+`tkhd` payload:
+
+Offset  Size  Field
+0       4     track flags
+4       4     creation timestamp
+8       4     modification timestamp
+12      4     enabled/track field
+16      4     track-type field
+20      4     reserved zero
+
+The `mdia` atom contains:
+
+* `mdhd`
+* `hdlr`
+* `minf`
+
+`mdhd` payload:
+
+Offset  Size  Field
+0       4     flags, must be zero
+4       4     creation timestamp
+8       4     modification timestamp
+12      4     media timescale
+16      4     media duration in media timescale units
+
+`hdlr` payload:
+
+Offset  Size  Field
+0       4     flags, must be zero
+4       4     handler class (`mhlr` for movie-handler tracks, `shlr` for sound)
+8       4     handler subtype (`tflp` or `raw `)
+12      4     handler-specific descriptor
+
+For `tflp`, the descriptor is zero.
+
+For `raw `, the descriptor defines the PCM encoding:
+
+Descriptor bytes  Meaning
+04 04 22 56       16-bit signed little-endian mono PCM, 22050 Hz
+02 02 22 56       8-bit unsigned mono PCM, 22050 Hz
+
+Sample table
+------------
+
+`minf` contains `stbl`. `stbl` contains `stsd`, `stts`, `stss`, `stsc`, `stsz`,
+and `stco`.
+
+All table atoms use the same first eight payload bytes:
+
+Offset  Size  Field
+0       4     flags, must be zero
+4       4     entry count
+
+`stsd`
+------
+
+For the `tflp` track:
+
+Offset  Size        Field
+0       4           flags, zero
+4       4           entry count, zero
+8       4           number of `tflp` records
+12      8 * count   zero-filled per-record descriptors
+
+For the `raw ` track:
+
+Offset  Size  Field
+0       4     flags, zero
+4       4     entry count, zero
+8       4     reserved zero
+
+`stts`
+------
+
+Each entry is:
+
+Offset  Size  Field
+0       4     sample count
+4       4     table delta field
+
+For `tflp`, there is one entry. The sample count equals the number of 10 Hz
+control records and the table delta field is 100. The media duration in `mdhd`
+is the authoritative duration and equals the number of `tflp` records.
+
+For `raw `, the audio duration is the `mdhd` duration. For 16-bit PCM, duration
+equals audio byte count divided by 2. For 8-bit PCM, duration equals audio byte
+count. Both are in 22050 Hz sample units.
+
+`stss`
+------
+
+Each entry is a uint32 sync-sample number. `tflp` uses a single sync sample
+with value 1. `raw ` may have an empty sync table.
+
+`stsc`
+------
+
+Each entry is:
+
+Offset  Size  Field
+0       4     first chunk number, 1-based
+4       4     samples per chunk
+8       4     sample-description identifier
+
+The chunk ranges are interpreted as in QuickTime: an entry applies from its
+`first chunk` through the chunk before the next entry's `first chunk`, or to the
+last chunk if it is the final entry.
+
+`stsz`
+------
+
+Payload:
+
+Offset  Size              Field
+0       4                 flags, zero
+4       4                 default sample size; zero means explicit sizes follow
+8       4                 sample count
+12      4 * sample count  explicit sample sizes, present only when default is zero
+
+Every `tflp` sample is 17 bytes.
+
+`stco`
+------
+
+Payload:
+
+Offset  Size             Field
+0       4                flags, zero
+4       4                chunk count
+8       4 * chunk count  chunk offsets
+
+Chunk offsets are relative to byte 12 of `mdat`.
+
+Media data
+----------
+
+`mdat` layout:
+
+Offset  Size      Field
+0       4         atom size
+4       4         ASCII `mdat`
+8       4         reserved zero
+12      variable  palette prefix
+...     variable  sample data referenced by `stco`/`stsc`/`stsz`
+
+The palette prefix begins at `mdat` offset 12 and ends at the smallest chunk
+offset. Its length is a multiple of 4. Each entry is:
+
+Offset  Size  Field
+0       1     blue
+1       1     green
+2       1     red
+3       1     reserved, zero
+
+The palette is part of the format even though the supported `tflp` records do
+not reference pixel indices.
+
+`tflp` records
+--------------
+
+Every `tflp` sample is exactly 17 bytes:
+
+Offset  Size  Field
+0       1     record length marker, always 17
+1       7     reserved zero bytes
+8       1     control opcode
+9       2     signed int16 value 0
+11      2     signed int16 value 1
+13      2     signed int16 value 2
+15      2     signed int16 value 3
+
+The supported format uses opcodes 4, 5, 6, and 7. The four signed values are the
+sentinel rectangle `(9999, 9999, -9999, -9999)`, meaning no dirty raster region
+is present. Therefore the control track establishes frame count and timing but
+does not encode pixels.
+
+Raw audio
+---------
+
+The `raw ` samples are concatenated in sample-table order.
+
+For descriptor `04 04 22 56`, samples are signed 16-bit little-endian mono PCM
+at 22050 Hz. `mdhd.duration` equals the total byte count divided by 2.
+
+For descriptor `02 02 22 56`, samples are unsigned 8-bit mono PCM at 22050 Hz.
+`mdhd.duration` equals the total byte count.
+
+Validation rules
+----------------
+
+A strict decoder should reject a file if:
+
+* top-level atoms are not exactly `moov` followed by `mdat`
+* any atom size is smaller than its header or extends past its parent
+* any container reserved uint32 is non-zero
+* any required atom is missing or duplicated in a track
+* the two tracks are not exactly one `mhlr/tflp` and one `shlr/raw `
+* `tflp` is not 10 Hz or its duration does not equal its sample count
+* any `tflp` sample is not exactly 17 bytes or fails the record layout above
+* the `raw ` descriptor is not one of the two PCM descriptors above
+* audio duration does not match the PCM byte count
+* sample references overlap, point outside `mdat`, or leave any unaccounted
+  non-palette media-data region
+* the palette prefix is not made of 4-byte entries with a zero reserved byte
+
+WAV conversion
+--------------
+
+The converter writes a RIFF/WAVE file with:
+
+* PCM format code 1
+* one mono audio channel
+* 22050 Hz sample rate
+* 8-bit unsigned PCM for raw descriptor `02 02 22 56`
+* 16-bit signed little-endian PCM for raw descriptor `04 04 22 56`
+* sample bytes copied from the concatenated `raw ` samples
+
+This preserves the actual media content exactly for the supported format. The
+`tflp` track is still parsed and validated, but it is not emitted because it
+does not contain audio or raster frame data.

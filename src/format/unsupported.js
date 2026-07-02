@@ -2763,6 +2763,7 @@ export default
 		iFFGeometryData                          : {name : "IFF Geometry Data", ext : [".dem"], magic : ["IFF Geometry Data"]},
 		iffGXUI                                  : {name : "Amiga IFF GXUI", ext : [".gui"], magic : ["IFF GXUI file"]},
 		iffPrefs                                 : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
+		igorProPackedExperimentData              : {name : "Igor Pro Packed experiment data", ext : [".pxp"], magic : ["Igor Pro Packed experiment data"], idMeta : ({macFileType, macFileCreator}) => macFileType==="IGsU" && macFileCreator==="IGR0"},
 		ikMultimediaPreset                       : {name : "IK Multimedia Preset", ext : [".ikmp"], magic : ["IK Multimedia Preset"]},
 		il2cppGlobalMetadata                     : {name : "IL2CPP global metadata", ext : [".dat"], magic : ["IL2CPP global metadata"], weakMagic : true},
 		iliumEWalletData                         : {name : "Ilium eWallet data", magic : ["Ilium eWallet data"]},

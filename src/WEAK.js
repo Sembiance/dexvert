@@ -256,6 +256,7 @@ export const WEAK_VALUES =
 	/^Format: UPC$/,
 	/^Format: Windows Minidump \(\.DMP\)$/,
 	/^Format: Windows Write document$/,
+	/^Format: XPAT Compiled Script \(\.XCS\)\(MA\)$/,
 	/^Installer: Adveractive/,
 	/^Installer: InstallShield/,
 	/^Installer: SQX Archive Installer/,
@@ -392,8 +393,8 @@ export const WEAK_VALUES =
 	/^audio:WaveAudio \(WAV\)/,
 
 	// SEEN  ONCE:
-	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat
-	//		image:RSystem.RsgFormat
+	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
+	//		image:RSystem.RsgFormat, image:Herb.GrpFormat
 	// SEEN TWICE:
 	//		image:Discovery.Pr1Format, image:Mapl.Mi2Format, image:Softpal.PicFormat
 	/^image:Adobe\.PsdFormat /,
@@ -413,10 +414,10 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, WAD_WAD, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, BIN_7L, SAD_SAUD
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SHP_110, LIB_5, SKX_SKEX, BBA_BAF
+	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, BIN_7L
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SHP_110, SKX_SKEX, BBA_BAF
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, COD_UNIQUE, CAR_RAC, CWG_VW, BUNDLE_BNDL, FLX
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, COD_UNIQUE, CAR_RAC, CWG_VW, BUNDLE_BNDL, FLX, WAD_WAD, LIB_5, SAD_SAUD
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -426,9 +427,9 @@ export const WEAK_VALUES =
 	/^geArchive: PAK_(7|11|30|41|42|49|DATA|FORM)( |$)/,
 	/^geArchive: PAK_PAK_2( |$)/,
 	/^geArchive: PAK_PACK_[26]( |$)/,
-	/^geArchive: PCK_(2|5|6|PACK)( |$)/,
+	/^geArchive: PCK_([256]|PACK)( |$)/,
 	/^geArchive: PCK5( |$)/,
-	/^geArchive: WAD_[48]( |$)/,
+	/^geArchive: WAD_([48]|WAD)( |$)/,
 	
 	/^geArchive: 001_2( |$)/,
 	/^geArchive: A00( |$)/,
@@ -505,6 +506,8 @@ export const WEAK_VALUES =
 	/^geArchive: XFS( |$)/,
 
 	// SEEN ONCE:
+	//
+	// SEEN TWICE:
 	//		DAT_KYRA_TEX
 	/^geViewer: AFS_AFS_WE00( |$)/,
 	/^geViewer: GLI_GLIB_IMG( |$)/,
@@ -585,8 +588,8 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: WIC (Fake!), Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, Codec, Blink (D.T.S.)
-	// SEEN TWICE: QuArk, 777
+	// SEEN  ONCE: Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, Codec
+	// SEEN TWICE: QuArk, 777, Blink (D.T.S.)
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,
@@ -606,6 +609,7 @@ export const WEAK_VALUES =
 	/^idarc: RKive( |$)/,
 	/^idarc: SKY( |$)/,
 	/^idarc: TTComp( |$)/,
+	/^idarc: WIC \(Fake!\)$/,
 	/^idarc: X1( |$)/,
 	/^idarc: ZAR( |$)/,
 

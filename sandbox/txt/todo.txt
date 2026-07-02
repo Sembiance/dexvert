@@ -34,6 +34,11 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
 | Vibe Viable |
 \-------------/
 >>> wip
+* These appear to be sound files? Lots of different extensions....
+  https://discmaster.textfiles.com/search?detection=4d48574b%3F%3F%3F%3F%3F%3F%3F%3F5741564544617461
+
+* Microsoft Encarta Yearbook extractor: https://discmaster.textfiles.com/search?q=%E2%80%9C98-028.txt%E2%80%9D&qfields=name&qfields=t
+  See sandbox/wip/encarta.png
 <<<
 
 * Search dexvert for "unsupported" in src/format/<checkEachHere>/

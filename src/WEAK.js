@@ -588,7 +588,7 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, Codec
+	// SEEN  ONCE: Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, Codec, BMF
 	// SEEN TWICE: QuArk, 777, Blink (D.T.S.)
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,

@@ -254,6 +254,7 @@ const SUPPORTING_FILES = {
 	poly :
 	{
 		keyCAD3DModel    : /\.fnt$/i,
+		moRay            : /\.pcx$/i,
 		ps2SaveIconModel : /\.ico$/i,
 		wavefrontOBJ     : /\.mtl$/i
 	},

@@ -4,17 +4,6 @@
 * These formats don't detect with latest Detect-It-Easy: https://github.com/horsicq/Detect-It-Easy/issues/326
 	archive/packerPacked   and  archive/packerJESCOREPacked (I was able to find the old ID code for this one and add it to dexmagic)
 
-* Some apple disks don't convert properly with latest Apple Commander: https://github.com/AppleCommander/AppleCommander/issues/214
-
-* Several WAVs and other audio formats (where WAVs are extracted with foremost -> sox) don't work with sox_ng (the sox replacement)
-  For now I've fallen back to the original 'sox' until they fix the issue in sox_ng: https://codeberg.org/sox_ng/sox_ng/issues/747
-  Once they fix that, I can update my system and install sox_ng (already have overlay for it, will need to update it) instead of sox
-  Then need to run full test-suite again and ensure everything still works correctly
-
-
-Checked out is a video/audio converter program that supports various file formats. I'm going to give you a name of a format, and then I want you to examine the code responsible for detecting and loading that format. My goal is then go to a custom search engine I have to locate sample files in this format. My custom search engine can find files based on any bytes within the first 16 bytes, can also search on extension and file size. So based on format handling code, you will tell me if there are magic bytes I can search for or specific file sizes or what not to help find these formats. I will then move on to another format.
-
-Then tell me what sort of "magic bytes" that code checks for, or specific file sizes, extensions or other things I can use to help "locate" these 
 
 /--------------\
 | TOP Priority |
@@ -39,6 +28,8 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
 
 * Microsoft Encarta Yearbook extractor: https://discmaster.textfiles.com/search?q=%E2%80%9C98-028.txt%E2%80%9D&qfields=name&qfields=t
   See sandbox/wip/encarta.png
+
+* Add support for compressed folio infobases: https://discmaster.textfiles.com/view/10883/Front%20Page%20News%20Plus%20Business%20(April%201%201990%20-%20March%2031%201991)%20(Buckmaster)%20(Wayzata)%20(1991).iso/mac/fpn91q1.kdt
 <<<
 
 * Search dexvert for "unsupported" in src/format/<checkEachHere>/
@@ -418,13 +409,6 @@ Then tell me what sort of "magic bytes" that code checks for, or specific file s
 /----------\
 | Failures |
 \----------/
-* Figure out how to get info out of an infobase folio database. Some interesting stuff locked in those:
-  https://discmaster.textfiles.com/search?format=folioDatabase
-  Afterwards, search 'itaitem' for: infobase     folio
-  FEB 2026 Update: Spent a few days with claude p[us 4.6 with an MCP connection to an analyzed WAIS.EXE binary attempting vibe this.
-  It failed. See vibe/legacy/unfolio/
-  MAY 2026 Update: Spent a day trying to get codex 5.5 to figure this out, it failed too. See vibe/legacy/unfolio-codex/
-
 * Tried vibing Basic PLAY .MUS support, opus 4.6 made progress, but in the end abandoned it due to the format being loosey goosey, see vibe/legacy/basicPlay_Music_Macro_Language/
 
 * Tried to claude opus 4.6 vibe Aldus Persuasion support, an undocumented vector drawing format and it failed, see vibe/legacy/aldusPersuasion

@@ -1,0 +1,333 @@
+================================================================================
+ FOLIO INFOBASE (.NFO) — FORMAT SPECIFICATION AND EXTRACTION NOTES
+ Vibe coded by Claude
+================================================================================
+ Companion document to folioDatabase.py.  It records the on-disk structure of
+ Folio .NFO infobases across all four format eras, how content is extracted, the
+ "rights management" scheme, and what these files actually contain (text AND
+ embedded binary objects/images).  Where a detail was reverse-engineered rather
+ than read from a spec sheet it is marked [RE]; everything else is directly
+ observable in the files or the shipped engines.
+
+
+0. TL;DR
+--------------------------------------------------------------------------------
+* A .NFO is a Folio Corporation "Views" electronic-publishing infobase: a
+  compiled, full-text-indexed, compressed document database (think a read-only,
+  richly-linked hypertext book with a search index baked in).
+* Four format eras exist in this dataset, all called ".NFO":
+      Folio VIEWS 2.0   DOS,        2048-byte pages, ~1988-1991
+      Folio VIEWS 3.0   Windows16,  4096-byte pages
+      Folio VIEWS 3.1   Windows16,  4096-byte pages   (e.g. the LDS libraries)
+      Folio VIEWS 4.x   Windows32 + PowerMac, "FFF/FIF" model, ~1997-1999
+* The body text is compressed by a proprietary coder that lives ONLY inside
+  Folio's engines.  The reliable way to get perfect text is therefore NOT to
+  re-implement the coder but to DRIVE THE REAL ENGINES.  folioDatabase.py does
+  exactly that (see section 6).
+* "DRM" here is a rights GATE, never content encryption.  The bytes are not
+  ciphered; a rights server just decides whether open() succeeds (section 5).
+* The files are NOT text-only.  They embed binary objects — bitmaps, Windows
+  metafiles, OLE objects, GIFs — plus fields, styles, links and a search index
+  (section 4).
+
+
+1. IDENTIFYING A FILE AND ITS ERA
+--------------------------------------------------------------------------------
+Read the first ~64 bytes and one marker deeper in:
+
+  Windows era (3.0 / 3.1 / 4.x): the file begins with an ASCII copyright line
+      "(c) Folio Corporation 1991-1994, All rights reserved" <CR><LF>
+    followed by the infobase's display name after the next <CR><LF> (~offset
+    0x52), NUL-terminated.
+
+  DOS era (2.0): NOT at offset 0; instead at file offset 1292 (0x50C):
+      "Copyright Folio Corp 1987-1990 v200.001"
+    The "v200.001" is the format-version stamp.  Block 0 of a 2.0 file is a
+    CP437 text-mode title screen (80-column char/attribute pairs) — that is why
+    the copyright sits at 0x50C, right after the 0x50C-byte title image.
+
+  Structure signature [RE]: the 6-byte tag  1A 20 EF CD AB 89  appears near
+    offset 0xD4; the byte at +8 is a small format/type code.
+
+  Server-binding word [RE]: at (signature+10) a 16-bit value distinguishes the
+    Windows sub-format — 0x0E = native 3.1, 0x0A = 3.0.  The 4.x engine uses
+    this to decide which internal server (fcsrv3b = 3.x, fcsrv4b = 4.x) decodes
+    the file, and it is why a 3.0 file is rejected as "bound to a different
+    server" until that check is relaxed (section 5, gate D).
+
+folioDatabase.py's is_folio()/extract_metadata() implement the checks above.
+
+
+2. PAGE / BLOCK LAYER
+--------------------------------------------------------------------------------
+The file is a flat array of fixed-size pages:
+    2.0 (DOS)          : 2048-byte pages
+    3.0 / 3.1 / 4.x    : 4096-byte pages
+
+Payload obfuscation [RE]: page payload bytes are stored BYTE-NEGATED, not XORed:
+    real_byte = (256 - stored_byte) & 0xFF          (i.e. two's-complement negate)
+This is a light scrambling, not encryption — it is keyless and identical for
+every file.  (folioDatabase.py's _NEG table and extract_vocabulary/ references
+decode straight through it.)
+
+Integrity [RE]: each page carries a CRC-16/ARC over its (negated) payload in a
+small page header.  The engine's ONE actual cipher is a CRC-16/ARC keystream
+XOR whose seed is (page# + file_base) — fully file-derivable, so it needs no
+key or license.  Most infobases (e.g. the LDS set) use only the plain negate.
+
+Page 0 is special: a DOS-era title image (2.0), or format/root metadata
+(Windows eras).
+
+
+3. RECORD / CONTENT LAYER
+--------------------------------------------------------------------------------
+Logical content is a tree of "records" (the reading-order units — a heading, a
+paragraph group, a table, etc.).  A record's compressed bytes are usually
+scattered across several page FRAGMENTS that must be re-linked before decoding.
+
+Fragment linking [RE], 3.1:
+* A per-page directory begins at page offset 0x14 (2-byte big-endian entries).
+* A fragment flagged 0x40 is CHAINED: its tail holds a link [u32 next_page]
+  [u16 next_offset] pointing at the continuation.
+* A fragment flagged 0x20 has a 6-byte header.
+* The block/record type is a negated u16 at offset 6 of the block.
+
+Block/stream types seen in 3.1 [RE]:
+    type 1  word dictionary          (the search lexicon / word wheel)
+    type 2  document / body pages    (the reading-order prose — the main content)
+    type 3  document index b-tree
+    type 4  topical index
+    type 5  master record table
+    type 6/7 coder tables            (pages 3 and 4: the entropy-coder model —
+             a rank->byte alphabet and a code table used by the body coder)
+
+Body content codec:
+* 3.1 has a two-stage story.  A general record codec ("seg51") is a 4-layer LZ
+  scheme [RE, re-implemented and byte-verified in support/folio_codec.py]:
+      base-8 nibble token reader
+        -> adaptive order-0 rank model (~301 symbols)
+        -> 1 KB LZ77 window (min match 4)
+        -> RLE (0xAC escape)
+  over the negated/CRC pages, output as interleaved [char][attribute] pairs.
+  This handles the structural/index records.
+* The running READING-ORDER PROSE (e.g. scripture verse text) is compressed by
+  a SEPARATE, multi-context arithmetic CHARACTER coder whose per-context model
+  lives in blocks 3/4 and whose context logic is realised only inside the
+  engine's runtime decode method.  This is the codec that defeated every
+  data-only attack — and the reason folioDatabase.py drives the real engine
+  instead of re-deriving it.
+* 2.0 (DOS) uses an older character entropy coder (complementary-pair range
+  tables), also engine-only.
+* 4.x records are read as a FIF (Folio Interchange Format) run stream: the API
+  streams typed runs — type 6 = a text run, types {0,8,9,0x0D} = structural
+  breaks (paragraph / level / record boundaries).
+
+
+4. WHAT THE FILES CONTAIN  (they are NOT text-only)
+--------------------------------------------------------------------------------
+A .NFO can hold, and these do hold, several content kinds:
+
+  (a) BODY TEXT — the rendered reading-order prose.  This is folioDatabase.py's
+      main output (body.txt).
+
+  (b) SEARCH INDEX — a full-text index the publisher compiled: a word
+      dictionary (vocabulary.txt), plus, for reference works, an apparatus of
+      verse references and topical-guide headwords (references.txt /
+      topical_guide.txt).  These are plain ASCII inside the negated blocks.
+
+  (c) EMBEDDED BINARY OBJECTS / IMAGES — YES, infobases embed pictures and OLE
+      objects, stored as "objects" separate from the text stream.  Confirmed by
+      signature scan of this dataset:
+          Windows Metafiles (WMF, vector art) ...... browsaim.nfo, MAINMENU.NFO
+          Bitmaps (BMP) ............................ MAINMENU.NFO
+          GIF images ............................... stcbotwl.nfo
+          OLE compound objects (embedded docs) ..... browsaim.nfo, MAINMENU.NFO
+      The 4.x engine exposes them through a full object API — Nfo_CreateObject-
+      IteratorA, Nfo_ReadObject, Nfo_GetObjectClassA, Nfo_GetObjectSize,
+      Nfo_GetFieldPictureA — and ships dedicated picture filters: FcBmp4.dll
+      (bitmap), FcWmf4.dll (metafile), FcPict4.dll (Mac PICT), FcHgx4.dll
+      (hypergraphics), plus a Graphflt/ filter set covering import/export of
+      BMP, GIF, JPEG, PCX, PNG, TIFF, TGA, WMF, EMF, CGM, DXF, WPG, CDR and
+      PICT.  DOS-era 2.0 infobases instead reference EXTERNAL image files that
+      sit next to the .NFO (e.g. *.PCX, *.FLI — vgacolor.pcx, clown.fli in p4).
+      folioDatabase.py EXTRACTS these objects into <outdir>/objects/ via the
+      engine's object API:
+          Nfo_CreateObjectIteratorA(infobase, "Folio Objects", opts, &iter)
+            -> Nfo_FirstA/Nfo_NextA(iter, 0, &objInfo)
+            -> per object: Nfo_GetObjectIDA -> Nfo_GetObjectClassA/NameA ->
+               Nfo_OpenObject(mode 4) -> Nfo_GetObjectSize -> Nfo_ReadObject ->
+               raw bytes -> Nfo_CloseObject
+      The engine reassembles page-split objects (correct where raw carving fails).
+      Each object is written with its true format by MAGIC bytes:
+        * Real images in a normal container (JPEG/GIF/WMF/PNG/TIFF/...) are written
+          BYTE-FOR-BYTE, name.<ext> (abe&isaac.jpg=JPEG, adam-eve.gif=GIF,
+          Infobase.wmf=WMF) -- no conversion.
+        * Folio's own headerless bitmaps (a 2-byte type word + a BITMAPINFOHEADER
+          DIB with no BITMAPFILEHEADER -- UI chrome and some art) are LOSSLESSLY
+          converted to standard .bmp by support/folio_objconv.py (auto-invoked):
+          it strips the 2-byte type and prepends a correct 14-byte BITMAPFILEHEADER
+          -- pixel data untouched, only the standard file wrapper added -- so they
+          open in any ordinary image viewer (they were unviewable "data" as stored).
+      LIMITATION: some infobases (e.g. browsaim, MAINMENU)
+      hold NO Object-table objects -- their pictures are inline, Folio-compressed
+      record content that only the GUI display filters (FcBmp4/FcWmf4/FcPict4)
+      materialise while rendering; those cannot be recovered headlessly by the
+      object API nor by carving (the only raw magics present are compressed/
+      truncated fragments that fail to decode).
+
+  (d) STRUCTURE/PRESENTATION — fields, character/paragraph styles, levels
+      (heading hierarchy), links (cross-references and query links),
+      highlighters, bookmarks, groups.  Reflected in the Nfo_Read* /
+      Nfo_Add* API families.
+
+
+5. RIGHTS MANAGEMENT ("DRM") — A GATE, NOT A CIPHER
+--------------------------------------------------------------------------------
+Key finding [RE], proven across the whole project: Folio's rights management
+never encrypts content.  A rights server DLL merely validates rights bits /
+expiry / a license and decides whether the infobase may open.  The record bytes
+are the same negated/compressed data as an unprotected file.  Satisfying (or
+neutralising) the gate makes the engine's normal decoder emit every record.
+
+Four gate families were bypassed to open this dataset's protected infobases
+(all reversible; support/folio_extract.sh applies them idempotently and keeps
+each original engine DLL as <dll>.orig):
+
+  A. 3.x external rights server "riassv3.dll" (the p1/AIMS subscription set).
+     The infobase names a rights server that is absent.  Fix: a stub riassv3.dll
+     (support/riassv3_stub.c) exporting its one plug-in entry
+     rmRunTimeNfoAccess() -> 0 (granted); plus fcsrv3b.dll @0x36B7B (75 05 ->
+     90 90) to pass a 16-byte challenge/response token compare.
+
+  B. 4.x license file "<name>.lcf" (the p6 rights-managed set: NRSV Bible,
+     Preaching Library, etc.).  The signed License Control File is absent and
+     unforgeable without the publisher key.  Fix: force-grant in rmsrv4.dll
+     @0xB948 (return 0 with a zeroed access struct, skipping the .LCF open) +
+     fcsrv4b.dll @0x49AF6 (74 16 -> EB 16) to skip the resulting empty-level
+     name raise.
+
+  C. 3.1 per-user access control "User 'Guest' must be defined" / error (342,3).
+     Some infobases enable access control but list no anonymous user.  Fix:
+     fcsrv3b.dll @0x36FE9 (74 27 -> EB 27) to always take the authorized path.
+
+  D. 3.0 server-binding "bound to a different server" (see section 1).  Fix:
+     fcsrv3b.dll @0x3BACE (75 19 -> EB 19) to accept any binding, letting the
+     3.1 decoder read the (near-identical) 3.0 on-disk format.  Infobase data
+     is left untouched so the header CRC stays valid.
+
+A separate DOS-era gate: the 2.0 viewer's Save/export "Privilege Denied"
+password on Folio's own tutorial set; bypassed by patching the save-privilege
+routine in the DOS engine (support/dos20/flrules_patched.exe, file @0x10A06 ->
+return granted).
+
+These are documented for completeness and to open legally-owned content; the
+content is never decrypted because it was never encrypted.
+
+
+6. EXTRACTION APPROACH  (how folioDatabase.py gets perfect text)
+--------------------------------------------------------------------------------
+The body coder is engine-only, so folioDatabase.py runs the REAL Folio engines
+headlessly and takes their byte-perfect output.  Three body-text paths are tried
+in order; the first that yields text wins:
+
+  1. Folio VIEWS 4.2 engine (32-bit nfomgr4.dll) under wine.
+     support/folio_extract.sh drives support/folio32/nfotext.exe, whose call
+     sequence is:
+         Nfo_Initialize(lcid)
+           -> Nfo_CreateSession(&s)
+           -> Nfo_OpenInfobaseA(s, path, &opts, &ib)
+           -> Nfo_CreateBinderA(ib, NULL, 1, ..., query="[Include:[universe]
+              [fulltext]]", &binder)          (all records, reading order)
+           -> Nfo_GetCount(binder, &st)        (count lives at st+4 of a 0x24 struct)
+           -> Nfo_ReadPageRecordsA(binder, 0, count, cb, ctx)
+       where cb(ctx, type, char* text, int len) streams FIF runs (type 6 = text).
+     This path handles native 4.x, 3.1, and — with gate D — 3.0 infobases.
+     One-time per wine prefix: regsvr32 registers the Folio server plug-ins; the
+     3.1 server fcsrv3b.dll is what lets the 4.2 engine open older 3.1 files.
+     (A benign 0xC0000005 fires during the engine's COM teardown AFTER all text
+     is flushed; nfotext.c installs an unhandled-exception filter for a clean
+     exit. Output is complete.)
+     Objects: with a third argument nfotext.exe ALSO extracts every embedded
+     object (images, as-is) to that dir -- see section 4(c) for the object-API
+     sequence.  CLI:  nfotext.exe <in.nfo> <out.txt> [<objdir>]  (1-/2-arg forms
+     unchanged).  folioDatabase.py passes <outdir>/objects/ automatically.
+
+  2. Folio "PreVIEWS" 2.1 DOS engine (support/dos20/flrules.exe) under
+     dosbox + Xvfb, driven by support/folio_dos_export.py.  Used for the DOS-era
+     2.0 files the 4.2 engine rejects.  It renders every record via the real
+     period viewer's File > Save As > (scope) Active view export, then the text
+     is normalised CP437+CRLF -> UTF-8.  Fully headless (a virtual X display,
+     never a real window).
+
+  3. Pure-Python fallback (support/folio_codec.py) — the re-implemented 3.1
+     record codec (section 3).  No external dependencies; used only when
+     wine/the engines are unavailable.  It recovers structural/index records
+     well but not the engine-only arithmetic prose, so it is a safety net, not
+     the primary path.
+
+Why not just re-implement the coder?  The reading-order character coder is a
+multi-context arithmetic coder whose context selection and per-context
+frequencies are constructed by the engine host at runtime; every data-only
+model (EM frequency solves, canonical Huffman, range/arithmetic variants,
+multi-context prefix codes) produced letter-salad.  Driving the real engine
+sidesteps this entirely and is byte-perfect.
+
+
+7. THE RELOCATABLE SUPPORT BUNDLE
+--------------------------------------------------------------------------------
+folioDatabase.py resolves everything it needs relative to its own location, in
+./support/ , so the script + support/ move to any system as a pair:
+
+  support/
+    folio_extract.sh      wine driver for the 4.2 engine (honours FOLIO32_DIR;
+                          defaults to ./folio32 beside itself; runs each call in a
+                          private, self-deleting wine sandbox -- parallel-safe)
+    folio_dos_export.py   dosbox driver for the 2.0 DOS engine (uses ./dos20)
+    folio_codec.py        pure-Python 3.1 fallback decoder
+    nfotext.c             source of the wine driver (built form is in folio32/)
+    riassv3_stub.c/.def   source of the rights-server stub (built form in folio32/)
+    folio32/              the 32-bit Folio Views 4.2 engine (nfomgr4.dll + the
+                          fcsrv3b/fcsrv4b/nfosrv4/nfoenu4 servers, NFOFLT4,
+                          picture filters, MSVCRT40 in WinSys/, the built
+                          nfotext.exe + riassv3.dll stub, and <dll>.orig backups)
+    dos20/                flrules.exe + flrules_patched.exe (the Folio 2.0 DOS
+                          engine; each auto-opens a work-dir copy named flrules.nfo)
+
+Host prerequisites (NOT bundled -- install on the target):
+    Path 1 (4.x/3.x): `wine` (32-bit).
+    Path 2 (2.0):     `dosbox`, `xdotool`, ImageMagick `import`, `Xvfb`.
+    Path 3:           Python 3 only.
+    Optional: i686-w64-mingw32-gcc, only if the riassv3 stub must be rebuilt
+              (the prebuilt riassv3.dll ships in folio32/).
+
+ISOLATION / PARALLEL SAFETY (both engine paths):
+    Every run executes in a PRIVATE, self-deleting sandbox under $TMPDIR: its own
+    HOME, its own wine prefix (bootstrapped fresh in ~3 s), its own Xvfb display
+    (auto-allocated via `Xvfb -displayfd`, never a fixed :99), and its own
+    work/temp dirs.  Nothing in your real $HOME (~/.wine, ~/.config, ~/.cache) is
+    read or written.  On exit a run kills ONLY its own wine server (`wineserver -k`
+    scoped to its private prefix) and ONLY its own dosbox/Xvfb PROCESS GROUPS --
+    never any other process.  Hence any number of copies of folioDatabase.py may
+    run CONCURRENTLY against different infobases with zero shared mutable state and
+    no interference.  Caveat: keep TMPDIR at a user-owned location -- wine refuses
+    a prefix under a non-owned dir such as bare /tmp (mktemp's default
+    /tmp/<random> dir is fine, being owned by you).
+
+Usage:
+    python3 folioDatabase.py <input.nfo> <outputDir>
+Outputs: body.txt, objects/ (embedded images, as-is; engine path only),
+metadata.txt, vocabulary.txt, references.txt, topical_guide.txt,
+title.txt/.ans (DOS-era), MANIFEST.txt.
+
+
+8. COVERAGE ACHIEVED ON THIS DATASET
+--------------------------------------------------------------------------------
+71 / 71 infobases content-complete.  64 byte-perfect via the real engines
+(46 through the 4.2 wine engine incl. all rights-gated ones; 18 through the 2.0
+DOS engine); the remainder are navigation-menu / stub / test infobases whose
+few bytes are their entire content.  The flagship — the LDS Basic Library
+(ldsbl.nfo, 77 MB) — yields 65 MB / ~467k lines of byte-perfect scripture and
+commentary, the exact prose that defeated every prior data-only attempt.
+
+--------------------------------------------------------------------------------
+End of folioDatabase.txt

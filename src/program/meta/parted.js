@@ -12,7 +12,7 @@ export class parted extends Program
 		const imageInfo = xu.parseJSON(r.stdout.trim());
 		const sectorSize = imageInfo?.disk?.["logical-sector-size"];
 		if(!sectorSize)
-			throw new Error(`logical-sector-size size not detected: ${imageInfo}`);
+			return;
 
 		const parseSize = function parseSize(str)
 		{

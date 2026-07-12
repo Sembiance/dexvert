@@ -114,9 +114,14 @@ export class DexState
 	get ran() { return this.phase?.ran; }
 	get id() { return this.phase?.id; }
 
+	magicsCount(magics, {strong, format}={})
+	{
+		return (strong ? this.ids.filter(id => !id.weak && (!format || !Array.isArray(format.weakMagic) || !format.weakMagic.some(m => flexMatch(id.magic, m)))) : this.ids).filter(id => Array.force(magics).some(matchAgainst => flexMatch(id.magic, matchAgainst))).length;
+	}
+
 	hasMagics(magics, {strong, format}={})
 	{
-		return (strong ? this.ids.filter(id => !id.weak && (!format || !Array.isArray(format.weakMagic) || !format.weakMagic.some(m => flexMatch(id.magic, m)))) : this.ids).some(id => Array.force(magics).some(matchAgainst => flexMatch(id.magic, matchAgainst)));
+		return this.magicsCount(magics, {strong, format})>0;
 	}
 
 	serialize()

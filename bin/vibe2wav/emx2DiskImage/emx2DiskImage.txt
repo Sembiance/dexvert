@@ -1,0 +1,453 @@
+E-mu EMAX-II EMX2 SyQuest Hard-Disk Image Format
+=================================================
+
+Status and scope
+----------------
+
+This document specifies the 512-byte-sector EMX2 hard-disk profile used by an
+E-mu EMAX-II on removable SCSI media.  It covers the disk container, allocation
+structures, directory, operating-system extent, sound-bank extents, standalone
+EB2 conversion, preset directory, sample descriptors, PCM extraction, sample
+loops, sample rates, sequencer appendix, and otherwise unallocated bytes.
+
+All multibyte integers are unsigned little-endian unless stated otherwise.
+Offsets are byte offsets.  A "word address" in a sound bank counts 16-bit words.
+Sector and cluster numbers are zero-based physical quantities, but usable FAT
+cluster numbers begin at 1.
+
+The profile is intentionally strict.  A reader must reject a file when a fixed
+value, checksum, cross-reference, extent boundary, chain terminator, or bank
+invariant below is wrong.  It must not search for replacement structures.
+
+
+1. Physical organization
+------------------------
+
+The physical sector size is 512 bytes.  The image length is an integral number
+of sectors.  The filesystem structures occupy sectors named by the superblock;
+bytes beyond the last filesystem address are media tail space and remain part
+of the image.
+
+Sector 0 is the superblock.  The locations used by this profile normally form
+this sequence:
+
+    allocation map, FAT, directory header, directory, data
+
+The exact sector numbers are stored in the superblock and cross-checked as
+described below.
+
+
+2. Superblock, sector 0
+-----------------------
+
+Offset  Size  Meaning
+------  ----  -------
+0x0000     4  ASCII magic "EMX2".
+0x0004     4  Logical sector span.  This equals
+              (maximum_cluster + 1) * sectors_per_cluster.
+0x0008     4  Directory-header sector number.
+0x000c     4  Allocation-map sector number; 1 in this profile.
+0x0010     4  Directory sector number.
+0x0014     4  Sound-bank sector bias relative to the directory sector.
+0x0018     4  First FAT sector number.
+0x001c     4  Number of FAT sectors.
+0x0020     4  Cluster size in KiB.
+0x0024     4  Maximum usable FAT cluster number.
+0x0028    14  EMX2 configuration signature:
+              01 01 ab 52 01 00 00 00 00 00 01 0d 01 01
+0x0036   456  Reserved; all zero.
+0x01fe     2  Superblock checksum.
+
+The checksum is the sum modulo 65536 of the 255 little-endian 16-bit words at
+0x0000 through 0x01fd.  The stored checksum word is not included in the sum.
+
+Required structural relationships are:
+
+    sectors_per_cluster       = cluster_size_KiB * 1024 / 512
+    logical_sector_span       = (maximum_cluster + 1)
+                                * sectors_per_cluster
+    FAT_sector                = allocation_map_sector + 1
+    directory_header_sector   = FAT_sector + FAT_sector_count
+    directory_sector          = directory_header_sector + 1
+
+
+3. Allocation-map sector
+------------------------
+
+Offset  Size  Meaning
+------  ----  -------
+0x0000     4  First operating-system data sector.  It equals
+              directory_sector + 1.
+0x0004   508  Format fill, every byte 0x80.
+
+The first value is also the origin for the unshifted operating-system cluster
+address transform in section 7.
+
+
+4. File allocation table
+------------------------
+
+The FAT occupies the number of sectors declared at superblock offset 0x001c.
+It is a packed array of 16-bit entries.  Entry indexes are cluster numbers.
+
+Value   Meaning
+-----   -------
+0x0000  Free cluster.
+0x0001 through maximum_cluster
+        Number of the next cluster in a file chain.
+0x7fff  End of chain.
+0x8000  Reserved entry.
+
+Entry 0 is 0x8000.  Entries 1 through maximum_cluster describe the usable
+clusters.  Every array slot after maximum_cluster through the end of the FAT is
+0x8000.  A valid image has no cycles, cross-links, premature ends, overlong
+chains, or allocated entries not owned by a directory entry.
+
+
+5. Directory header
+-------------------
+
+The directory header is one sector.
+
+Offset  Size  Meaning
+------  ----  -------
+0x0000    16  ASCII signature "Designed by S&M."
+0x0010     2  Directory load address, 0x4000.
+0x0012     2  Directory sector number; matches the superblock.
+0x0014    12  Marker bytes, all 0xff.
+0x0020   480  Padding, all zero.
+
+
+6. Directory
+------------
+
+The directory is one sector containing sixteen 32-byte entries.  Used entries
+are contiguous from entry 0; every byte in every remaining entry is zero.
+
+Offset  Size  Meaning
+------  ----  -------
+0x00      16  Printable ASCII name, NUL-terminated and NUL-padded.  Spaces
+              before the first NUL are part of the stored field; readers trim
+              trailing spaces for display.
+0x10       1  Reserved, zero.
+0x11       1  Bank number.  The operating-system entry uses 0x78.  Live sound
+              bank numbers are unique but can be sparse or out of directory
+              order.
+0x12       2  First FAT cluster.
+0x14       2  Number of clusters in the FAT chain.
+0x16       2  Number of used sectors in the last allocated cluster, 1 through
+              sectors_per_cluster.
+0x18       2  Used bytes in the final sector, an even value from 2 through 512.
+0x1a       2  Entry flags.  Bit 7 marks a live allocated entry.  Live values
+              are 0x0080 or 0x0081.  A zero value is a deleted directory
+              remnant and does not own a FAT chain.
+0x1c       4  Reserved, zero.
+
+The exact byte length represented by an entry is:
+
+    (cluster_count - 1) * cluster_size
+    + (used_sectors_in_last_cluster - 1) * 512
+    + used_bytes_in_final_sector
+
+Entry 0 is named "EMAX2 Software", has bank number 0x78, begins at cluster 1,
+occupies four clusters, and is live.  Following nonzero entries are live sound
+banks or deleted directory remnants.  A deleted record's old extent fields are
+forensic metadata only; its clusters are free or can have been reallocated.
+
+
+7. Translating cluster chains to physical bytes
+------------------------------------------------
+
+There are two address transforms.  In each formula c is a FAT cluster number
+and cluster_size is in bytes.
+
+Operating-system cluster c begins at:
+
+    allocation_map.data_sector * 512 + (c - 1) * cluster_size
+
+Sound-bank cluster c begins at:
+
+    (directory_sector + superblock.sound_bank_sector_bias) * 512
+    + (c - 1) * cluster_size
+
+The second transform is the format's deliberate shifted cluster space.  It is
+not a guessed alignment and must not be replaced by a signature search.
+
+To read an entry, follow exactly directory.cluster_count FAT entries, append a
+full cluster for every cluster except the last, and take only the remaining
+declared bytes from the last.  The final FAT entry must contain 0x7fff.
+
+The operating-system extent is emitted without modification as an .emx file.
+
+
+8. Sound-bank extent and EB2 representation
+--------------------------------------------
+
+A sound-bank directory extent begins with a two-byte disk marker ac 81.  The
+complete extent length is the directory byte length from section 6.  The bank
+contains a 0x7000-byte metadata/RAM image, sample allocations, and optionally a
+sequencer appendix.
+
+An EMAX-II standalone EB2 bank has the same bytes and length except that byte 0
+is 0xad instead of the hard-disk value 0xac.  No other byte changes.  Thus an
+exact disk-bank copy and a usable EB2 copy can both be produced losslessly.
+
+
+9. Bank metadata, offsets 0x0000 through 0x6fff
+------------------------------------------------
+
+This region is the EMAX-II's native bank state.  It contains global bank state,
+100 preset pointers, variable preset records, and a downward-growing sample
+descriptor stack.  Unused space remains part of the state and is preserved.
+
+9.1 Preset pointer table
+
+Offsets 0x0000 through 0x00c7 contain 100 16-bit pointers.  In a hard-disk bank
+each has bit 15 set.  Its bank-file target offset is pointer & 0x7fff.  Pointer
+0 is 0x81ac.  In an undamaged table targets are strictly increasing and begin
+at or after 0x01ac.
+
+The first twelve bytes at a target are the preset name, padded with spaces.  A
+zero first byte marks an unused preset slot.  For slots 0 through 98, the next
+preset pointer is the exclusive end of that slot's native preset region.  The
+slot 99 export region ends at the lowest used sample descriptor and can include
+unused heap bytes after its logical record.  Preset records store the sampler's
+complete native voice/zone/parameter state and are retained in the metadata
+image as well as in individual pointer-delimited native-region exports.
+
+The preset heap grows upward.  It may extend beyond 0x5e00 by using sample
+descriptor slots that are not active.  A reader must compare its end against
+the lowest active descriptor rather than imposing 0x5e00 as a heap limit.
+
+9.2 Sample-memory end pointer
+
+The 32-bit word at metadata offset 0x01a8 is the exclusive word address of the
+last sample allocation.  It must equal the end_word of the final descriptor.
+The corresponding bank-file byte offset is:
+
+    0x7000 + 2 * sample_memory_end_word
+
+If the directory extent is longer than this value, the remaining bytes are the
+sequencer appendix described in section 12.
+
+9.3 Sample descriptor stack
+
+The descriptor arena has 144 possible 32-byte slots.  Slot s begins at:
+
+    0x5e00 + s * 32, for 0 <= s < 144
+
+Descriptors are allocated from the top downward.  A bank whose sample-memory
+end pointer is 44 has no sample descriptors.  Otherwise sample 1 uses slot 143,
+sample 2 uses slot 142, and so on.  The first descriptor has start_word 44.
+Each following descriptor's start_word equals the preceding descriptor's
+end_word.  The first slot that breaks this chain is unused; the final chained
+end_word must equal the value at metadata offset 0x01a8.
+
+Each descriptor contains eight 32-bit fields:
+
+Offset  Meaning
+------  -------
+0x00    Nonzero sample identifier/check value.  Zero marks an allocated but
+        unused sample and suppresses WAV creation.
+0x04    Allocation start word address.
+0x08    Allocation end word address, exclusive.
+0x0c    Sustain-loop start word address.
+0x10    Sustain-loop end word address.
+0x14    Release-loop start word address.
+0x18    Release-loop end word address.
+0x1c    Sample format word.
+
+In an undamaged descriptor all four loop addresses lie inside the allocation.
+In the format word, bits 0-1 are the EMAX loop flags; zero means no loop and a
+nonzero value enables the stored forward loop.  Bits 8-15 are the sample-rate
+code.  Other firmware state bits are preserved with the descriptor.  Invalid
+loop addresses do not invalidate otherwise bounded PCM; a recovery reader
+exports that WAV without a smpl chunk and records a warning.
+
+Rate code  Sample rate (Hz)
+---------  ----------------
+0          10000
+1          15625
+2          20000
+3          22050
+4          27778
+5          31250
+6          41667
+7          44100
+8          39063
+
+The non-monotonic ordering of codes 7 and 8 is intentional.
+
+
+10. Sample allocations and PCM
+------------------------------
+
+For a descriptor with start word S and exclusive end word E, its allocation is:
+
+    bank[0x7000 + 2*S : 0x7000 + 2*E]
+
+The allocation has exactly this layout:
+
+    2 leading 16-bit native words
+    E - S - 42 signed 16-bit little-endian mono PCM frames
+    40 trailing 16-bit native words
+
+The leading and trailing native words are not PCM.  They are retained in the
+exported sample-allocation .bin file.  The WAV data begins at word S + 2 and
+ends before word E - 40.
+
+When loop flags are nonzero, inclusive WAV smpl-loop frame indexes are:
+
+    loop_start = sustain_start_word - S - 2
+    loop_end   = sustain_end_word   - S - 3
+
+The WAV is PCM, mono, 16-bit little-endian, at the table rate.  Its smpl sample
+period is floor(1,000,000,000 / sample_rate), MIDI unity note is 60, and the
+loop type is forward.  Disabled loops produce no smpl chunk.
+
+
+11. Exact WAV chunk order
+-------------------------
+
+Without a loop:
+
+    RIFF/WAVE, fmt  (16-byte PCM format), data
+
+With a loop:
+
+    RIFF/WAVE, fmt  (16-byte PCM format), smpl (60 bytes), data
+
+The data chunk is always even-sized because every frame is 16 bits.
+
+
+12. Sequencer appendix
+----------------------
+
+The sequencer appendix is present when the sound-bank directory extent extends
+beyond 0x7000 + 2 * sample_memory_end_word.  Its length is therefore exact and
+requires no terminator search.
+
+It is a sequence of two-byte cells:
+
+    byte 0 of every cell: 0x05 tag
+    byte 1 of every cell: one native sequencer payload byte
+
+The appendix length is even and every tag byte is 0x05.  Removing the tag byte
+from each cell yields the native sequencer payload stream.  Both the encoded
+appendix and decoded stream are resources; the encoded form permits exact bank
+reconstruction.
+
+
+13. Complete byte ownership
+---------------------------
+
+Every source byte belongs to exactly one of these classes:
+
+* superblock;
+* allocation-map sector;
+* FAT sectors;
+* directory-header sector;
+* directory sector;
+* operating-system extent bytes;
+* sound-bank extent bytes, including metadata, sample allocations, and any
+  sequencer appendix;
+* unallocated, allocation-slack, or physical media-tail bytes.
+
+The last class has no live filesystem owner.  Its contents can include stale
+data and are not required to be zero.  A forensic extractor preserves each
+contiguous region and records its original offset and length.  Sorting all
+regions by source offset must cover [0, image_length) with no overlap or gap.
+
+
+14. Required rejection conditions
+---------------------------------
+
+A conforming strict reader rejects the image before writing output if any of
+the following is true:
+
+* bad magic, configuration signature, fixed marker, padding, or checksum;
+* inconsistent sector, FAT, cluster, or directory geometry;
+* a referenced byte range lies outside the image;
+* malformed names or directory ordering;
+* illegal, cyclic, cross-linked, orphaned, premature, or overlong FAT chains;
+* an incorrect operating-system entry or duplicate live bank numbers;
+* an incorrect hard-disk bank marker or first preset pointer;
+* a broken descriptor allocation chain or mismatched sample-memory end;
+* an unknown rate code or invalid sample allocation;
+* malformed sequencer cell tags; or
+* byte-accounting overlap or incomplete coverage.
+
+Malformed secondary preset pointers and enabled loop addresses outside PCM are
+resource-local damage, not container-identification failures.  The exact bank
+is retained, valid presets are inventoried, PCM is extracted, invalid WAV loop
+metadata is omitted, and warnings identify the affected bank, preset slot, or
+sample.  Pointer-delimited preset-region files are omitted for an entire bank
+when its pointer table is not structurally reliable; bank-metadata.bin and EB2
+still preserve every byte.
+
+This rejection policy deliberately supports only the profile documented here.
+Other E-mu families, partition wrappers, alternate EMX2 configuration profiles,
+and damaged images are not accepted by signature scanning or other heuristics.
+
+
+15. Extraction modes and resource set
+-------------------------------------
+
+The default command is:
+
+    emx2DiskImage.py input.img output_directory
+
+It writes only standalone EB2 banks and playable WAV samples.  Every file is
+placed directly in output_directory.  Bank files are named:
+
+    NN - Bank Name.eb2
+
+WAV files are named:
+
+    NN - Bank Name - Sample SSS.wav
+
+NN is the two-digit bank number and SSS is the three-digit sample number.
+Allocated sample descriptors whose identifier is zero do not produce a WAV.
+
+The exhaustive command is:
+
+    emx2DiskImage.py --all input.img output_directory
+
+In this mode a complete extraction consists of:
+
+A complete extraction consists of:
+
+* the five exact filesystem metadata regions;
+* the exact operating-system .emx extent;
+* an inventory of deleted directory remnants, without treating their stale
+  extent fields as live files;
+* one exact disk-bank extent and one marker-adjusted .eb2 file per bank;
+* the complete 0x7000-byte native bank metadata image;
+* preset inventory with slot, name, native offsets, and one pointer-delimited
+  native-region file for every active preset;
+* every complete sample allocation, including allocated-but-unused samples;
+* one WAV for every nonzero sample descriptor;
+* encoded and decoded sequencer data when present;
+* every unowned byte region; and
+* manifests containing all chains, sizes, offsets, hashes, descriptors, and a
+  non-overlapping source-byte accounting map.
+
+
+16. Semantic boundary
+---------------------
+
+This specification completely delineates and losslessly extracts the supported
+disk container and its resources.  Several resources are native sampler state,
+not independent interchange formats.  Their bytes are preserved, but the
+following firmware-level semantics are not assigned parameter-by-parameter:
+
+* the individual synthesizer, voice, and zone fields inside a preset body;
+* the algorithm that produced the descriptor's sample identifier/check value;
+* the musical purpose of the two leading and forty trailing native sample
+  words; and
+* the event grammar inside the decoded native sequencer payload.
+
+Consequently, the extracted EB2 banks retain these features exactly and remain
+the authoritative representation.  The individual preset regions, complete
+sample allocations, and encoded/decoded sequencer streams expose the same data
+without inventing meanings that cannot be established from the container.

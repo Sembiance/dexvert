@@ -1,0 +1,148 @@
+MSZP RESOURCE COMPRESSION FORMAT
+================================
+
+Status
+------
+
+MSZP is a little-endian, block-compressed wrapper for exactly one byte-stream
+resource.  It is not an archive: it stores no resource name, directory,
+timestamp, media type, permissions, checksum, or table of contents.  If a set
+of MSZP members represents a resource tree, the association between each
+member and its resource path is external to this format.
+
+All offsets and sizes in this document are byte counts.  All integers are
+unsigned and little-endian.  Every compressed block contains one MSZIP stream:
+the MSZIP CK signature followed by raw DEFLATE as defined by RFC 1951.  It has
+neither the two-byte zlib header nor a zlib/gzip checksum trailer.  DEFLATE
+decoding trees end with each block, while the 32 KiB output history window is
+retained across consecutive blocks of the same member.  A later block may
+therefore back-reference bytes produced by an earlier block.
+
+
+Top-level layout
+----------------
+
+Offset  Size  Type       Meaning
+------  ----  ---------  ----------------------------------------------------
+0x00       4  byte[4]    Signature: 6D 73 7A 70 (lowercase ASCII "mszp")
+0x04       4  uint32le   Total uncompressed resource size
+0x08       4  uint32le   Maximum uncompressed block size
+0x0C     ...  blocks     Zero or more compressed-block records
+...         2  uint16le  Terminator, always zero
+
+The terminator is the complete two-byte value 00 00.  It is not a shortened
+block record and therefore has no compressed-size field or payload after it.
+The terminator must be the final two bytes of the member.  Appended bytes are
+not padding and make the member invalid.
+
+The maximum uncompressed block size must be in the range 1 through 32768,
+inclusive.  The uint16le can represent larger values, but MSZIP limits one
+block to 32 KiB of uncompressed data.  The total uncompressed size may be zero;
+such a member contains no block records and has the terminator immediately
+after its 12-byte header.
+
+
+Compressed-block record
+-----------------------
+
+Relative  Size  Type       Meaning
+--------  ----  ---------  --------------------------------------------------
++0x00        2  uint16le   Uncompressed byte count U; never zero
++0x02        2  uint16le   Stored payload byte count S
++0x04        2  byte[2]    Block marker: 43 4B (uppercase ASCII "CK")
++0x06      S-2  byte[]     One complete raw RFC 1951 DEFLATE stream
+
+S counts the CK marker as well as the raw DEFLATE bytes.  Consequently the
+entire record occupies 4 + S bytes, and S must be greater than 2.  An MSZIP
+payload is at most 32768 + 12 = 32780 bytes, including CK.  The next block's U
+field, or the final zero terminator, begins exactly 4 + S bytes after the start
+of the current record.
+
+Each DEFLATE stream begins immediately after CK and ends within the declared
+S-byte payload.  It must reach a DEFLATE final block, consume all S - 2
+compressed bytes, and produce exactly U bytes.  Huffman/decoding trees are
+discarded between MSZIP blocks.  The LZ77 history available to block zero is
+empty; for every later block it is the last at most 32768 uncompressed bytes
+from all preceding blocks.  Extra compressed bytes after the end of the
+DEFLATE stream, an incomplete stream, or a back-reference outside that history
+makes the MSZP member invalid.  There is no per-block or global checksum field.
+
+
+Block sizing and termination invariants
+---------------------------------------
+
+Let T be the total uncompressed size from offset 0x04 and B be the maximum
+block size from offset 0x08.  Before each block, let P be the sum of the U
+values of all preceding blocks.  The block's required length is:
+
+    U = min(B, T - P)
+
+Thus every block except possibly the last is exactly B uncompressed bytes.
+The last block contains the remaining 1 through B bytes.  The zero terminator
+must occur precisely when P equals T.  It is invalid to terminate early, to
+encode a block after P reaches T, or for the U values to sum to anything other
+than T.
+
+The number of block records is therefore zero when T is zero; otherwise it is
+ceil(T / B).
+
+
+Complete byte accounting
+------------------------
+
+For N blocks with stored payload lengths S[0] through S[N-1], the exact member
+length is:
+
+    12 + sum(4 + S[i], i = 0..N-1) + 2
+
+The terms account for the 12-byte global header, each four-byte block
+descriptor, every CK marker and every DEFLATE byte through S[i], and the final
+two-byte terminator.  There are no alignment bytes, padding regions, reserved
+fields, optional headers, data descriptors, or bytes outside this equation.
+
+
+Strict decoding procedure
+-------------------------
+
+1. Read exactly 12 bytes.  Verify the four signature bytes and decode T and B.
+2. Reject B outside 1..32768.
+3. Set P to zero and initialize an empty 32 KiB history window.
+4. Read one uint16le U.
+5. If U is zero, accept only if P equals T and physical end-of-file follows
+   immediately.
+6. Otherwise require P < T and U = min(B, T - P).
+7. Read uint16le S, require S > 2, then read exactly S payload bytes.
+8. Require S <= 32780 and the first two payload bytes to be CK.  Inflate the
+   remaining S - 2 bytes as one raw-DEFLATE stream using the retained history
+   from prior blocks.  Require complete compressed-input consumption and
+   exactly U output bytes.
+9. Append those U bytes to the resource and to the history, retaining only the
+   newest 32768 history bytes.  Add U to P and return to step 4.
+
+The decoder must reject truncation at every fixed-size field and payload, a
+wrong-case or otherwise altered signature/marker, integer-inconsistent block
+sizes, malformed DEFLATE, premature termination, and trailing data.
+
+
+Extractor path convention
+-------------------------
+
+Because MSZP has no stored filename, mszp.py derives the output resource path
+from the input member's basename.  It performs one UTF-8 percent-decoding pass
+on that basename.  A leading slash in the decoded name denotes the supplied
+output directory and is removed; decoded interior slashes create directories.
+For example, a basename encoding "/docs/page.htm" is written as
+"outputDir/docs/page.htm".  NUL, backslash, empty components, ".", and ".."
+are rejected so the result cannot escape outputDir.  A basename with no
+percent escapes is preserved as one ordinary resource name.
+
+Usage is:
+
+    python3 mszp.py [--all] <inputFile> <outputDir>
+
+outputDir may already exist.  The complete input is validated and decompressed
+to staging before outputDir is modified.  A format error therefore produces no
+output.  On success the extracted resource is created with user/group read and
+write permission.  With --all, and only with --all, a generated JSON structural
+metadata file named "<resource>.mszp.json" is also written.  Without --all the
+resource itself is the sole output.

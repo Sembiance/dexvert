@@ -1,0 +1,413 @@
+MYRIAD INSTALL SELF-EXTRACTING ARCHIVE FORMAT
+==============================================
+
+Scope
+-----
+
+This document describes the 32-bit Windows Myriad Install self-extracting
+format used by installer revisions 3.0, 3.5, and 4.1. All integers are
+unsigned little-endian unless explicitly stated otherwise. Text is NUL-
+terminated Windows code page 1252. Offsets are byte offsets.
+
+An installer has two layers:
+
+  1. an ordinary PE32 executable containing the installer program and its
+     normal Windows resources; and
+  2. one or more Myriad archive blocks appended after the PE image.
+
+There is no end-directory and no signature scan. The archive boundary is
+derived from the PE section table.
+
+
+Finding the archive
+-------------------
+
+Validate the DOS signature "MZ". Read e_lfanew at DOS offset 0x3c and
+validate "PE\0\0" there. In the COFF header, NumberOfSections is at PE+6 and
+SizeOfOptionalHeader is at PE+20. The 40-byte section table starts at:
+
+    PE offset + 24 + SizeOfOptionalHeader
+
+For every section, read SizeOfRawData at section+16 and PointerToRawData at
+section+20. The first archive byte is:
+
+    maximum(PointerToRawData + SizeOfRawData)
+
+Zero-sized sections do not affect the maximum. Section raw ranges must be
+inside the physical file.
+
+At the archive boundary there may be a four-byte legacy wrapper marker:
+
+    0x02081967
+
+When present, the first archive block begins immediately after it. The next
+four bytes must always be the archive magic:
+
+    0x15620001
+
+The legacy wrapper selects the revision-3.5 variable layout unless the fixed
+header discriminator described below is present. Without the wrapper, the
+revision-4.1 variable layout is used.
+
+
+Layout discriminator and chaining
+---------------------------------
+
+The revision-3.0 fixed header is exactly 0x610 bytes and contains a second
+0x15620001 at header offset 0x60c. This second marker is the fixed-layout
+discriminator. A fixed-layout executable contains one archive block.
+
+Variable-layout blocks are chained. The next block begins exactly after the
+last stored file payload in the current block and starts with a new
+0x15620001. The chain ends exactly at physical end-of-file. Gaps, overlaps,
+and trailing bytes are invalid.
+
+
+Common logical header fields
+----------------------------
+
+All three layouts express these values:
+
+    archive magic          u32   must be 0x15620001
+    file count             u16   number of file/action records
+    archive version        u16   must be 1
+    uninstall enabled      u16   Boolean 0 or 1
+    association count      u16   number of file-association records
+    total stored bytes     u32   sum of stored_size for every file record
+
+"Uninstall enabled" controls creation of the installer's uninstall command
+log. Association records describe Windows extension/class registrations and
+do not contain file payloads.
+
+
+Revision-3.0 fixed header (0x610 bytes)
+---------------------------------------
+
+    Offset  Size       Description
+    ------  ---------  -----------------------------------------------
+    0x000   4          archive magic
+    0x004   2          file count
+    0x006   2          archive version
+    0x008   2          uninstall enabled
+    0x00a   2          association count
+    0x00c   4          total stored bytes
+    0x010   255        default installation directory string
+    0x10f   255        uninstall display/program name string
+    0x20e   255        semicolon-separated shortcut specifications
+    0x30d   255        installer title string
+    0x40c   255        copyright string
+    0x50b   255        product release/version string
+    0x60a   2          zero compiler alignment padding
+    0x60c   4          second archive magic
+
+Each 255-byte string field must contain a NUL. Shortcut specifications are
+separated by semicolons. A specification uses a comma between the displayed
+shortcut name and its target.
+
+Immediately after the header are file_count fixed file records, followed by
+association_count fixed association records.
+
+
+Revision-3.0 fixed file record (0x68 bytes)
+------------------------------------------------
+
+    Offset  Size       Description
+    ------  ---------  -----------------------------------------------
+    0x00    32         output file name, NUL-terminated
+    0x20    32         destination directory, NUL-terminated
+    0x40    1          reserved selection byte; serialized as zero
+    0x41    5          component/group name, NUL-terminated
+    0x46    2          MS-DOS date
+    0x48    2          MS-DOS time
+    0x4a    2          zero compiler alignment padding
+    0x4c    4          stored payload size
+    0x50    4          expanded output size
+    0x54    4          output content check word
+    0x58    1          record method/action
+    0x59    1          zero compiler alignment padding
+    0x5a    2          component number
+    0x5c    4          cumulative progress offset
+    0x60    4          payload offset relative to archive-block start
+    0x64    4          flag bit field; only bits 0..2 are defined
+
+The fixed file-table check word is the MD5-fold (defined below) of the exact
+concatenation of all 0x68-byte fixed file records. Association records are not
+included in that check.
+
+
+Revision-3.0 fixed association record (0x48 bytes)
+---------------------------------------------------
+
+    Offset  Size       Description
+    ------  ---------  -----------------------------------------------
+    0x00    4          extension string, NUL-terminated
+    0x04    32         Windows class name, NUL-terminated
+    0x24    1          reserved selection byte; serialized as zero
+    0x25    32         associated application path, NUL-terminated
+    0x45    1          zero compiler alignment padding
+    0x46    2          icon index
+
+
+Variable header, revisions 3.5 and 4.1
+---------------------------------------
+
+The variable header begins with the 16-byte common logical header. It is
+followed immediately by:
+
+    cstring              default installation directory
+    cstring              uninstall display/program name
+    u8                   shortcut count
+    cstring[]            that many shortcut specifications
+    cstring              installer/block title
+    cstring              copyright
+    cstring              product release/version
+
+Each shortcut specification has the same "display name,target" grammar as in
+the fixed layout.
+
+Revision 4.1 then has three u32 display parameters. The installer treats them
+as signed values: if any is positive, the triple overrides three default
+installer-window parameters; otherwise defaults remain in force. Revision
+3.5 does not contain this triple.
+
+The file records and association records follow immediately.
+
+
+Variable file record
+--------------------
+
+Variable records have no length prefix. Parse fields in this exact order:
+
+    cstring              output file name
+    cstring              destination directory
+    cstring              component/group name
+    u16                  MS-DOS date
+    u16                  MS-DOS time
+    u32                  stored payload size
+    u32                  expanded output size
+    u32                  output content check word
+    u8                   record method/action
+    u16                  component number
+    u32                  cumulative progress offset
+    u32                  payload offset relative to archive-block start
+    Boolean bytes        record flags
+
+Revision 3.5 stores two flag bytes. Revision 4.1 stores three. Each Boolean
+byte is 0 or 1. They become bits 0, 1, and (where present) 2 in the logical
+flag field.
+
+The cumulative progress offset is the sum of stored sizes of preceding
+payload records in the block. A payload offset points directly to the stored
+stream, not to a per-file header.
+
+
+Variable association record
+---------------------------
+
+Parse association_count records, each in this order:
+
+    cstring              extension
+    cstring              Windows class name
+    cstring              associated application path
+    u16                  icon index
+
+
+Table terminator and global display resource
+--------------------------------------------
+
+After all file and association records, every layout contains:
+
+    u32                  second archive magic (0x15620001 in variable layout)
+                         [fixed layout stores this in its header instead]
+    u32                  table check/build word
+    u32                  stored global-resource size
+
+For the fixed layout, the post-table sequence begins with the table check
+word because its second magic is already at header+0x60c.
+
+The fixed-layout table check/build word must equal the MD5-fold of its fixed
+file table. In variable revisions the word is a producer build cookie: the
+reader consumes but deliberately does not compare or otherwise use it. It is
+therefore an unconstrained u32 at the format/reader level. Empty variable
+tables conventionally use MD5-fold(empty), but consumers must not require it.
+
+If stored global-resource size is nonzero, the following fields exist:
+
+    u32                  expanded global-resource size
+    u16                  display mode
+    byte[]               LH5-compressed resource stream
+
+The byte-array length is the stored global-resource size. The expanded data
+is a Windows bitmap used as the installer background. Display mode is passed
+to the installer window's bitmap renderer (mode 1 selects its alternate
+rendering path). The global resource ends immediately before the first file
+payload.
+
+
+File payload area
+-----------------
+
+Nonempty file payload ranges must tile the rest of their block in increasing
+offset order. There are no alignment bytes and no per-file headers. The block
+ends at:
+
+    max(block_start + data_offset + stored_size)
+
+Zero-sized records occupy no payload bytes. Variable blocks with no payloads
+end immediately after their post-table fields.
+
+
+Record methods/actions
+----------------------
+
+    0   Stored file. stored_size must equal expanded_size; bytes are copied.
+
+    1   Compressed file. The stored bytes are a headerless LH5 stream and
+        expand to exactly expanded_size bytes.
+
+    2   Windows font-install action. It refers to a font path produced by
+        another record and has no payload of its own.
+
+    3   Windows scalable-font-resource action. It refers to an existing font
+        resource and has no payload of its own.
+
+    4   Windows INI/profile assignment action. Consecutive method-4 records
+        encode section/key-value work in their name and destination strings.
+        They have no payload.
+
+Methods 2, 3, and 4 are installer side effects rather than extractable files.
+Their stored size, expanded size, and content check are zero. An extractor
+records them as metadata but does not invent an output file.
+
+
+Record flags
+------------
+
+The low three bits are installer policies, not compression controls:
+
+    bit 0   post-process special embedded path directives after extraction
+            (used by linked HTML/manual content)
+    bit 1   preserve/handle an already existing destination specially
+    bit 2   compare the existing file's DOS timestamp and retain a newer
+            destination; absent from revision 3.5 records
+
+The raw payload extracted by an archive tool is the content before these
+installation-time policies are applied.
+
+
+Destination macros
+------------------
+
+Destination strings use installer macros at the start of a path:
+
+    $D   selected installation directory
+    $W   Windows directory
+    $S   Windows system directory
+    $F   Windows fonts directory
+    $T   temporary directory
+
+Backslash is the path separator. A safe cross-platform extractor maps $D to
+its output root and preserves other macro namespaces in a visibly separate
+directory rather than writing to operating-system locations.
+
+
+MS-DOS timestamps
+-----------------
+
+The date word contains year-1980 in bits 15..9, month in bits 8..5, and day
+in bits 4..0. The time word contains hour in bits 15..11, minute in bits
+10..5, and two-second units in bits 4..0.
+
+
+LH5 payload codec
+-----------------
+
+Streams are headerless LZH "-lh5-" data with an 8192-byte sliding window.
+Bits are read most-significant-bit first. There is no EOS symbol; decoding
+stops after exactly the expanded size declared by the record/resource.
+
+Constants:
+
+    window size (N)       8192
+    literal/length count  510 (NC)
+    position count        14  (NP)
+    temporary count       19  (NT)
+    C count bits          9
+    position count bits   4
+    temporary count bits  5
+
+At the start of a Huffman block:
+
+  1. read a 16-bit symbol count;
+  2. read an NT temporary code-length tree with read_pt_len(19, 5, 3);
+  3. use it to read the 510-entry literal/length tree;
+  4. read the position tree with read_pt_len(14, 4, no-special-index).
+
+Code lengths form canonical Huffman codes. read_pt_len first reads n using
+the supplied count-bit width. If n is zero, the next value of the same width
+is the constant symbol and no tree bits follow. Otherwise n lengths follow.
+A length begins as three bits; value 7 is extended by counting subsequent
+one bits until a zero. At special index 3, a two-bit value inserts that many
+zero lengths.
+
+The literal/length tree begins with a 9-bit n. A zero n is followed by a
+9-bit constant symbol. Otherwise temporary-tree symbols encode lengths:
+
+    0       one zero length
+    1       getbits(4) + 3 zero lengths
+    2       getbits(9) + 20 zero lengths
+    >= 3    one length equal to symbol - 2
+
+Decoded C symbols 0..255 are literal bytes. A symbol >=256 begins a match of:
+
+    length = symbol - 253
+
+Decode a position-tree symbol p. Position is zero when p is zero; otherwise:
+
+    position = 2^(p-1) + getbits(p-1)
+
+Copy from (current_window_position - position - 1) modulo 8192. The window
+is initially all zero. The only unused stream bits allowed are zero padding
+bits in the final partially used byte; unused whole bytes are invalid.
+
+
+Integrity checks
+----------------
+
+MD5-fold(data) means:
+
+  1. calculate the 16-byte MD5 digest of data;
+  2. interpret the digest as four little-endian u32 words; and
+  3. XOR the four words.
+
+The file content check is:
+
+    check = 0xCAFEDECA
+    for each consecutive 8192-byte output chunk:
+        check ^= MD5-fold(chunk)
+
+The installer's read loop also processes one zero-length chunk for an empty
+file, so an empty file has:
+
+    0xCAFEDECA XOR MD5-fold(empty)
+
+A nonzero stored file check must match. A zero check disables the per-file
+comparison. Fixed tables additionally use the table check described above.
+
+
+Strict validation and extraction behavior
+-----------------------------------------
+
+A conforming strict extractor validates all PE bounds, both magic values,
+layout-specific zero padding, version and Boolean values, table integrity
+where defined, all offsets and sizes, contiguous byte coverage, LH5 trees and
+padding, expanded sizes, total stored bytes, and every enabled file content
+check before creating output.
+
+The reference extractor writes normal payloads, zero-byte files, and the
+global bitmap resource. File/association/action metadata is written only when
+--all is requested. Differing payloads that target the same case-insensitive
+Windows path are preserved beneath _myriad_variants; identical duplicates are
+written once. Non-$D destination macros are preserved beneath
+_myriad_system. No installer side effect (registry changes, INI writes, font
+registration, shortcut creation, or program execution) is performed.

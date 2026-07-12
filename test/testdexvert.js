@@ -229,9 +229,10 @@ const IGNORED_META_KEYS = {
 const SUPPORTING_FILES = {
 	archive :
 	{
-		cloneCDImage : /\.ccd$/i,
-		pog          : /\.pnm$/i,
-		redArchive   : /TIMETREK\.001$/
+		cloneCDImage            : /\.ccd$/i,
+		pog                     : /\.pnm$/i,
+		redArchive              : /TIMETREK\.001$/,
+		softdiskForWindowsSetup : /\.w02$/i
 	},
 	audio :
 	{

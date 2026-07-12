@@ -393,10 +393,10 @@ export const WEAK_VALUES =
 	/^audio:WaveAudio \(WAV\)/,
 
 	// SEEN  ONCE:
-	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:Gs.PicFormat, image:Ego.AntFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
+	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
 	//		image:RSystem.RsgFormat, image:Herb.GrpFormat
 	// SEEN TWICE:
-	//		image:Discovery.Pr1Format, image:Mapl.Mi2Format, image:Softpal.PicFormat
+	//		image:Discovery.Pr1Format, image:Mapl.Mi2Format, image:Gs.PicFormat, image:Ego.AntFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
@@ -406,6 +406,7 @@ export const WEAK_VALUES =
 	/^image:Leaf\.PxFormat /,
 	/^image:KAAS\.PicFormat /,
 	/^image:MayBeSoft\.HhpFormat /,
+	/^image:Softpal\.PicFormat /,
 	/^image:System98\.GFormat /,
 	/^image:TifFormat /,
 

@@ -1,0 +1,578 @@
+InstallUs Self-Extracting Installer Format
+==========================================
+
+1. Scope and notation
+---------------------
+
+This document specifies the 32-bit InstallUs self-extracting installer profile
+whose payload uses SPIS TCompress "LZH" archives. It describes every byte from
+the beginning of the executable through the four-byte footer, including the
+outer InstallUs header, concatenated TCompress archives, stored entries, and
+the exact LZHUF bitstream used by compressed entries.
+
+All multibyte integers are little-endian. Offsets are absolute file offsets
+unless stated otherwise. `u8`, `u16`, and `u32` are unsigned integers;
+`i16` is a signed 16-bit integer. Sizes exclude the field that contains the
+size unless explicitly stated. Text fields have no on-disk terminator.
+
+The original program was an ANSI Windows application. Human-readable byte
+strings are normally interpreted with Windows code page 1252, but their raw
+bytes are authoritative because the format contains no code-page identifier.
+
+
+2. Complete top-level layout
+----------------------------
+
+The file is laid out in this order:
+
+    +-------------------------------+ offset 0
+    | PE32 x86 executable image     |
+    +-------------------------------+ PE_END
+    | skipped byte                  | 1 byte
+    +-------------------------------+ STRING_OFFSET
+    | ten Pascal ShortStrings       | variable
+    +-------------------------------+ ARCHIVE_OFFSET
+    | bootstrap archive region      | REGION_SIZE_0 bytes
+    +-------------------------------+
+    | main archive region           | REGION_SIZE_1 bytes
+    +-------------------------------+ FILE_SIZE - 4
+    | InstallUs footer              | 4 bytes
+    +-------------------------------+ FILE_SIZE
+
+There are no unaccounted gaps. Consequently:
+
+    FILE_SIZE = PE_END + 1 + SHORTSTRING_BYTES
+                + REGION_SIZE_0 + REGION_SIZE_1 + 4
+
+
+3. PE32 executable image
+------------------------
+
+The leading portion is a normal little-endian Microsoft PE32 image for the
+Intel 386 machine type (IMAGE_FILE_MACHINE_I386, 0x014C). It contains a DOS
+`MZ` header, an `e_lfanew` pointer to a `PE\0\0` signature, a COFF header, a
+PE32 optional header (magic 0x010B), a section table, and file-backed section
+data.
+
+`PE_END` is determined from the section table, not by searching for an archive
+signature:
+
+    PE_END = max(section.PointerToRawData + section.SizeOfRawData)
+
+for every section with nonzero `SizeOfRawData`. PE headers, sections, gaps
+mandated by `FileAlignment`, and section padding all belong to the PE image.
+The custom InstallUs layout begins exactly at `PE_END`.
+
+The PE resource data directory is a standard three-level Windows resource
+tree:
+
+    resource type -> resource name/ID -> language -> IMAGE_RESOURCE_DATA_ENTRY
+
+An entry name whose high bit is set points to a length-prefixed UTF-16LE
+resource name. Other names are numeric IDs. A leaf has the standard fields
+`OffsetToData` (RVA), `Size`, `CodePage`, and zero `Reserved`. Resource bytes
+are located by mapping `OffsetToData` through the PE section table. Bitmap,
+icon, cursor, group-icon, and group-cursor leaves are the native resource
+payloads; for example, an RT_BITMAP leaf is a DIB rather than a 14-byte-header
+BMP file. Extraction must preserve each leaf byte-for-byte.
+
+This format profile does not place an Authenticode certificate between the PE
+sections and the InstallUs overlay. A nonzero PE certificate directory changes
+that boundary and is outside this profile.
+
+
+4. Skipped byte and four-byte footer
+------------------------------------
+
+The byte at `PE_END` is deliberately skipped by the loader. It is not a flag,
+language selector, key, checksum, or part of the first ShortString. Its value
+is unconstrained and must still be included in byte accounting.
+
+The final four bytes encode the location of the ShortString block:
+
+    Offset  Size  Meaning
+    0       2     Q, u16
+    2       1     R, decimal remainder in the range 0..9
+    3       1     Footer terminator, exactly 0xDE
+
+The loader calculates:
+
+    STRING_OFFSET = 10 * Q + R + 1
+
+Canonical files also satisfy:
+
+    PE_END       = 10 * Q + R
+    STRING_OFFSET = PE_END + 1
+
+Thus Q and R are the quotient and remainder of `PE_END` divided by ten, and
+the added one skips the otherwise unused byte. This footer is the authoritative
+pointer to the ten ShortStrings; scanning for `SPIS` is neither necessary nor
+valid format detection.
+
+
+5. Outer ShortString block
+--------------------------
+
+A Pascal ShortString is:
+
+    u8 byte_length
+    u8 data[byte_length]
+
+Exactly ten consecutive ShortStrings occur at `STRING_OFFSET`:
+
+    Index  Meaning
+    0      Cancel-button caption
+    1      Pre-setup explanatory prompt
+    2      unsupported/old-Windows warning
+    3      setup-starting status text
+    4      temporary-file decompression error text
+    5      waiting/progress text
+    6      setup-launch failure text
+    7      pre-setup window/phase caption
+    8      bootstrap archive-region size as canonical ASCII decimal
+    9      main archive-region size as canonical ASCII decimal
+
+The first eight strings are display text. Strings 8 and 9 consist only of
+ASCII digits `0` through `9`, are nonempty, have no leading zero unless the
+entire value is zero, and are interpreted as base-10 byte counts. Both region
+sizes are positive in this profile.
+
+The first archive region starts immediately after ShortString 9. The byte at
+that position must begin a TCompress archive header. The two decimal sizes must
+land exactly at `FILE_SIZE - 4`; this both locates the footer and prevents
+trailing or unparsed data.
+
+
+6. Archive regions and concatenation
+------------------------------------
+
+Each of the two outer regions is a concatenation of one or more TCompress
+multi-file archives. The first region contains the files needed by the
+pre-setup stage. The second region contains the installation payload.
+
+Every TCompress archive begins with the 21-byte packed header below and
+contains one or more file records. At an exact file-record boundary:
+
+* `SPIS 1A` begins another concatenated archive in the same outer region.
+* Otherwise, the next bytes begin another 25-byte file header in the current
+  archive.
+* The outer region boundary ends the last archive in that region.
+
+This rule is unambiguous: a file header starts with an `i16` filename length in
+the range 1..255, so the first two signature bytes `53 50` cannot also be a
+valid filename length.
+
+
+7. Packed TCompress archive header
+----------------------------------
+
+The archive header has no alignment padding:
+
+    Offset  Size  Type  Meaning
+    0       5     bytes Signature: `53 50 49 53 1A` (`SPIS` + Ctrl-Z)
+    5       3     bytes Method identifier: `4C 5A 48` (`LZH`)
+    8       4     u32   Sum of the uncompressed sizes of this archive's files
+    12      1     u8    Archive type: 1 (`caMulti`)
+    13      4     u32   Archive checksum: 0 for a multi-file archive
+    17      4     u32   Reserved: 0
+
+Although older TCompress documentation described the aggregate size as unused
+for `caMulti`, InstallUs writes it, and it must equal the exact sum of all file
+record `FullSize` fields in that archive.
+
+
+8. Packed TCompress file record
+-------------------------------
+
+Each record is a 25-byte packed header, immediately followed by its filename
+and stored data:
+
+    Offset  Size  Type  Meaning
+    0       2     i16   FilenameLength, 1..255
+    2       4     u32   original DOS date/time
+    6       2     u16   low 16 bits of original Windows file attributes
+    8       4     u32   FullSize, uncompressed byte count
+    12      4     u32   CompressedSize, stored byte count
+    16      1     u8    compression mode
+    17      4     u32   checksum of expanded data
+    21      4     u32   reserved, exactly 0
+    25      N     bytes filename, where N = FilenameLength
+    25+N    C     bytes data, where C = CompressedSize
+
+The DOS date/time splits into a high date word and low time word:
+
+    date = value >> 16
+      day   = date bits 0..4
+      month = date bits 5..8
+      year  = 1980 + date bits 9..15
+
+    time = value & 0xFFFF
+      second = 2 * time bits 0..4
+      minute = time bits 5..10
+      hour   = time bits 11..15
+
+The attributes field preserves the low 16 bits of Windows file attributes,
+including values such as READONLY (0x0001), HIDDEN (0x0002), SYSTEM (0x0004),
+DIRECTORY (0x0010), ARCHIVE (0x0020), NORMAL (0x0080), COMPRESSED (0x0800),
+OFFLINE (0x1000), NOT_CONTENT_INDEXED (0x2000), and ENCRYPTED (0x4000).
+
+The filename is an ANSI byte string. Both slash styles may represent path
+separators. Its bytes must be retained even when a host filesystem requires a
+safe, reversible spelling.
+
+Compression modes in this InstallUs/TCompress profile are:
+
+    0  coNone: data is stored verbatim
+       CompressedSize == FullSize and Checksum == 0.
+
+    2  coLZH: data uses the LZHUF stream in section 9
+       A nonempty original has nonempty compressed data. TCompress changes to
+       coNone when compression would not make the data smaller.
+
+Other TCompress products define RLE, custom, and LZH5 modes, but those modes
+are not part of this InstallUs profile and cannot be inferred from a header
+whose archive method identifier is `LZH`.
+
+For mode 2, the checksum is:
+
+    checksum = sum(all uncompressed u8 values) modulo 2^32
+
+
+9. Exact coLZH bitstream (LZHUF)
+--------------------------------
+
+9.1 Parameters and initial dictionary
+
+The compressor combines a 4 KiB LZSS ring with adaptive Huffman coding:
+
+    N          = 4096       ring size
+    F          = 60         maximum match length
+    THRESHOLD  = 2          matches have length greater than this
+    N_CHAR     = 256 - THRESHOLD + F = 314
+    T          = 2 * N_CHAR - 1 = 627
+    R          = T - 1 = 626 (adaptive Huffman root)
+    MAX_FREQ   = 0x8000
+
+The logical ring is 4096 bytes. Initially bytes 0..4035 are ASCII space
+(0x20), bytes 4036..4095 are zero, and the write index is 4036 (`N - F`).
+The zero tail is significant; initializing the whole ring to spaces produces
+incorrect output.
+
+There is no size or magic inside the bitstream. `FullSize` says when decoding
+must stop, and `CompressedSize` bounds the stored bitstream.
+
+
+9.2 MSB-first bit reader
+
+Maintain a 16-bit `getbuf`, initially 0, and a bit count `getlen`, initially 0.
+Input is consumed most-significant bit first. The original decoder keeps more
+than eight lookahead bits:
+
+    GetBit():
+      while getlen <= 8:
+        getbuf |= ReadByte() << (8 - getlen)
+        getlen += 8
+      old = getbuf
+      getbuf = (getbuf << 1) & 0xFFFF
+      getlen -= 1
+      return old >> 15
+
+    GetByte():
+      while getlen <= 8:
+        getbuf |= ReadByte() << (8 - getlen)
+        getlen += 8
+      old = getbuf
+      getbuf = (getbuf << 8) & 0xFFFF
+      getlen -= 8
+      return old >> 8
+
+At physical EOF, `ReadByte()` returns an implicit zero without advancing the
+stored-data position. A canonical stream needs exactly one such zero read to
+maintain lookahead while decoding its final symbol. The encoder pads the low
+bits of its last stored byte with zeros. After exactly `FullSize` output bytes,
+all `CompressedSize` bytes have been consumed and the remaining shifted
+padding bits are zero.
+
+
+9.3 Adaptive Huffman tree
+
+Use arrays `freq[0..T]`, `son[0..T-1]`, and
+`prnt[0..T+N_CHAR-1]` of 16-bit values.
+
+Initialization is:
+
+    for i = 0 .. N_CHAR-1:
+      freq[i] = 1
+      son[i] = i + T
+      prnt[i + T] = i
+
+    i = 0
+    j = N_CHAR
+    while j <= R:
+      freq[j] = freq[i] + freq[i + 1]
+      son[j] = i
+      prnt[i] = j
+      prnt[i + 1] = j
+      i += 2
+      j += 1
+
+    freq[T] = 0xFFFF
+    prnt[R] = 0
+
+To decode a symbol:
+
+    c = son[R]
+    while c < T:
+      c = son[c + GetBit()]
+    c -= T
+    Update(c)
+    return c
+
+`Update(c)` first calls `Reconstruct()` if `freq[R] == MAX_FREQ`, then starts
+at `c = prnt[c + T]`. It is a do/while operation: node zero is updated when it
+is the initial parent of symbol zero.
+
+    do:
+      k = ++freq[c]
+      l = c + 1
+      if k > freq[l]:
+        do l += 1 while k > freq[l]
+        l -= 1
+
+        freq[c] = freq[l]
+        freq[l] = k
+
+        i = son[c]
+        prnt[i] = l
+        if i < T: prnt[i + 1] = l
+
+        j = son[l]
+        son[l] = i
+        prnt[j] = c
+        if j < T: prnt[j + 1] = c
+        son[c] = j
+        c = l
+      c = prnt[c]
+    while c != 0
+
+`Reconstruct()` halves all leaf frequencies, reconnects pairs in frequency
+order, and rebuilds parents:
+
+    j = 0
+    for i = 0 .. T-1:
+      if son[i] >= T:
+        freq[j] = (freq[i] + 1) / 2 using integer division
+        son[j] = son[i]
+        j += 1
+
+    i = 0
+    j = N_CHAR
+    while j < T:
+      f = freq[i] + freq[i + 1]
+      freq[j] = f
+      k = j - 1
+      while f < freq[k]: k -= 1
+      k += 1
+      move freq[k..j-1] and son[k..j-1] one element upward
+      freq[k] = f
+      son[k] = i
+      i += 2
+      j += 1
+
+    for i = 0 .. T-1:
+      k = son[i]
+      if k >= T:
+        prnt[k] = i
+      else:
+        prnt[k] = i
+        prnt[k + 1] = i
+
+
+9.4 Match-position code
+
+The upper six bits of a 12-bit backward position use this canonical static
+prefix code. `p_len[index]` is the code length and `p_code[index]` is the code
+left-aligned in one byte:
+
+    p_len =
+      3,
+      4,4,4,
+      5,5,5,5,5,5,5,5,
+      6,6,6,6,6,6,6,6,6,6,6,6,
+      7,7,7,7,7,7,7,7,7,7,7,7,
+      7,7,7,7,7,7,7,7,7,7,7,7,
+      8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
+
+    p_code =
+      00,20,30,40,50,58,60,68,70,78,80,88,90,94,98,9C,
+      A0,A4,A8,AC,B0,B4,B8,BC,C0,C2,C4,C6,C8,CA,CC,CE,
+      D0,D2,D4,D6,D8,DA,DC,DE,E0,E2,E4,E6,E8,EA,EC,EE,
+      F0,F1,F2,F3,F4,F5,F6,F7,F8,F9,FA,FB,FC,FD,FE,FF
+
+For decoding, make 256-entry tables by assigning each possible first byte to
+the unique prefix above. Then:
+
+    i = GetByte()
+    position = d_code[i] << 6
+    bits = d_len[i] - 2
+    while bits != 0:
+      i = (i << 1) + GetBit()
+      bits -= 1
+    position |= i & 0x3F
+
+
+9.5 Producing bytes
+
+Repeatedly decode an adaptive-Huffman symbol until exactly `FullSize` bytes
+have been written:
+
+* Symbol 0..255 is a literal byte. Write it, put it at the ring write index,
+  and advance the index modulo 4096.
+* Symbol 256..313 is a match. Decode `position`, then calculate:
+
+      source = (write_index - position - 1) & 0x0FFF
+      length = symbol - 255 + THRESHOLD   (3..60)
+
+  Copy `length` bytes one at a time from the ring beginning at `source`, also
+  inserting every copied byte at the advancing write index. Forward overlap
+  is intentional.
+
+A match may not cross the declared `FullSize`. The final expanded byte count,
+additive checksum, compressed-byte consumption, EOF-fill count, and zero bit
+padding are all independently checkable integrity conditions.
+
+
+10. Bootstrap metadata and installation destinations
+----------------------------------------------------
+
+The bootstrap region is a temporary pre-setup bundle. It contains the setup
+engine and support files used to display the installer UI, validate the host,
+decompress the main region, register components, and provide uninstall
+support. These files are expanded into a temporary working directory by the
+installer; they are not, as a group, the application files copied to the
+user-selected installation directory.
+
+Two bootstrap files describe placement of the main payload:
+
+* `setup.inf` is a byte-oriented Windows INI file containing install options,
+  destination-directory expressions, UI text, shortcuts, registry actions,
+  and other setup policy.
+* `iuslst.dat` is a packed array with exactly one 16-byte record for each
+  archive in the main region, in main-region archive order.
+
+Each `iuslst.dat` record is:
+
+    Offset  Size  Type  Meaning
+    0       4     u32   one-based destination index K
+    4       4     u32   archive offset relative to the main region
+    8       4     u32   installation-medium number (1 for embedded data)
+    12      4     u32   complete stored archive size, header included
+
+Each main-region archive contains exactly one installable file. A section
+named `[Option_N]` describes the files belonging to option N. For file X:
+
+    fX=<exact archive filename>
+    lX=4 * <zero-based main archive ordinal>
+
+The matching `[dirs_N]` section contains `dK=<destination expression>`, where
+K is the first `u32` in that archive's `iuslst.dat` record. Thus placement is
+resolved without guessing from the filename or archive order alone:
+
+    archive ordinal = lX / 4
+    destination      = [dirs_N].dK
+    installed path   = destination + fX
+
+Destination expressions are rooted in runtime variables. `%SetupDir%` is the
+installation directory selected or calculated for the product. `%System%`
+and `%Windows%` are host operating-system directories. Other variables, such
+as `%Install%`, may be resolved from detected software or setup policy. Their
+concrete absolute paths therefore cannot be known from the installer file
+alone.
+
+The installer visits main archives in order. If multiple selected entries
+resolve to the same case-insensitive Windows path, a later write determines
+the final file contents. Install options and host/OS conditions may select a
+subset at runtime; the extractor's default installed-layout view emits the
+union of all declared installable files, applying the same later-write rule.
+
+
+11. Strict recognition and rejection
+-------------------------------------
+
+A strict extractor validates the entire input before publishing output. At a
+minimum it rejects:
+
+* malformed, overlapping, out-of-bounds, non-x86, or non-PE32 sections;
+* a certificate/overlay layout outside this profile;
+* malformed, cyclic, over-deep, duplicate, or out-of-bounds PE resources;
+* a footer with a non-0xDE terminator, noncanonical remainder, or wrong target;
+* anything other than exactly ten bounded ShortStrings;
+* invalid decimal region sizes or sizes that do not account for EOF exactly;
+* bad archive/file signatures, types, methods, sizes, or reserved fields;
+* invalid filename lengths or unsafe absolute/relative output paths;
+* unsupported compression modes;
+* an archive aggregate size that differs from its file-size sum;
+* a truncated stream, unused compressed bytes, excessive EOF fill, nonzero
+  padding bits, output overrun, wrong expanded size, or checksum mismatch;
+* missing, duplicate, inconsistent, or out-of-range `setup.inf`/`iuslst.dat`
+  mappings needed to construct the installed layout.
+
+Transactional extraction uses a temporary sibling directory and removes it on
+any validation error. A new output directory is published with one rename. A
+pre-existing real directory is also accepted: unrelated files and byte-exact
+duplicates are preserved, while any differing file collision, symlink, or
+file-versus-directory collision is rejected before publication. Newly added
+files are rolled back if an ordinary publication error occurs. Consequently,
+a rejected input does not modify a pre-existing output directory and does not
+leave a new requested output directory or partial published files.
+
+
+12. Extractor output mapping
+----------------------------
+
+The reference extractor is invoked as:
+
+    installUs.py [--all] <inputFile> <outputDir>
+
+By default it omits the temporary bootstrap bundle and writes the union of
+declared installed files in a symbolic target tree. The runtime destination
+variable becomes the first output component, without percent signs:
+
+    %SetupDir%\program.exe       -> SetupDir/program.exe
+    %SetupDir%\Help\manual.html -> SetupDir/Help/manual.html
+    %System%\shared.dll          -> System/shared.dll
+    %Windows%\component.dll      -> Windows/component.dll
+    %Install%\extension.dat      -> Install/extension.dat
+
+This representation keeps destinations distinct without pretending to know a
+user-selected directory, Windows version, drive letter, or detected third-
+party installation path. Duplicate Windows destinations are collapsed, with
+the later main archive supplying the final contents.
+
+With `--all`, the extractor instead writes the complete forensic archive view:
+
+    payload/bootstrap/archive_NNNN/entry_NNNN/<stored name>
+    payload/main/archive_NNNN/entry_NNNN/<stored name>
+
+It also writes exact PE resource leaves below `pe_resources/` and creates
+`installus_manifest.json`. No bootstrap, PE-resource, manifest, or report
+sidecar is emitted by the default installed-layout mode.
+
+The archive and entry indices preserve duplicates without overwriting them.
+Stored path separators create subdirectories. Unsafe bytes in a filename
+component are reversibly encoded as `%HH`; original filename bytes also appear
+in the JSON manifest when `--all` is selected.
+
+Before publication, output files are made readable by their owning user and
+group, and output directories are made readable and traversable by both.
+
+Archive streams are independent. The reference extractor decodes independent
+destination groups concurrently with up to eight worker processes. Entries
+that resolve to the same case-insensitive installed path stay in one ordered
+group, so parallel execution does not change the later-write rule or output.
+
+The optional `installus_manifest.json` records input offsets and sizes for all
+top-level segments, PE sections and resource leaves, every archive and file
+record, original metadata, output paths, additive checksums, SHA-256 digests,
+counts, and expanded/stored totals. Its top-level byte-accounting sum must
+equal the input file size.

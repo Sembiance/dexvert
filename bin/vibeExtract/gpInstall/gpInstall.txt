@@ -1,0 +1,353 @@
+GP-INSTALL 5 SELF-EXTRACTING INSTALLER FORMAT
+============================================================
+
+Status and scope
+----------------
+
+This document specifies the GP-Install 5 self-extracting executable format
+handled by gpInstall.py.  It covers the complete outer container, the two
+embedded TCompress archives, every archive and member field, literal storage,
+the checksum, and the raw LH5 bitstream.  Integers are little-endian unless a
+bitstream field is explicitly described as MSB-first.
+
+An installer's executable code and archived file bodies are opaque byte
+payloads.  Their bytes are not padding or ignored data: the PE bytes form the
+bootstrap program, and every archived body is either copied literally or
+expanded to the declared file content.  File bodies may themselves use any
+application-level format (EXE, DLL, text, bitmap, Delphi TPF0 form, and so on).
+
+
+Primitive types
+---------------
+
+u8       unsigned 8-bit integer
+u16le    unsigned 16-bit little-endian integer
+u32le    unsigned 32-bit little-endian integer
+byte[n]  exactly n uninterpreted bytes
+
+The original Delphi declarations call filename length and attributes
+"Smallint" and several other fields "Longint".  Their on-disk representations
+are the 16-bit and 32-bit bit patterns described here.
+
+All structures are packed.  There is no implicit alignment or padding.
+
+
+Top-level layout
+----------------
+
+    +----------------------------+
+    | Windows PE32 bootstrap     |
+    +----------------------------+  overlay_offset
+    | archive_0_size : u32le     |
+    | archive 0 : byte[size]     |  bootstrap/support archive
+    +----------------------------+
+    | archive_1_size : u32le     |
+    | archive 1 : byte[size]     |  installed-payload archive
+    +----------------------------+  end of file
+
+There are exactly two framed archives and no bytes before, between, or after
+the items shown.  Each size counts only the following TCompress archive; it
+does not count its own four-byte size field.
+
+The first part is a standard little-endian Windows PE32 image.  Locate the PE
+header through the u32le e_lfanew field at DOS-header offset 0x3c, validate the
+"PE\0\0" signature and PE32 optional-header magic 0x010b, and read the COFF
+section table.  The overlay begins at the largest of SizeOfHeaders and every
+nonempty section's PointerToRawData + SizeOfRawData.  Section raw ranges must
+be within the input and must not overlap.  All bytes before overlay_offset,
+including PE headers, section padding, and section data, belong to the PE
+bootstrap.
+
+Archive 0 contains the installer engine and its private configuration,
+language, and support resources.  Archive 1 contains the files selected by the
+installer author for installation.  The paths in archive 1 are logical
+Windows paths.  Their first component is normally an installer file-group
+name such as "Program Files" or "System Files"; the configuration resource in
+archive 0 maps such a group to a machine-dependent destination at run time.
+An environment-independent extractor must preserve that logical component.
+
+
+TCompress multi-file archive
+----------------------------
+
+Each framed archive starts with this 21-byte header:
+
+Offset  Size  Type       Name                 Meaning
+------  ----  ---------  -------------------  -------------------------------
+0x00       5  byte[5]    ComId                ASCII "SPIS" followed by 0x1a
+0x05       3  byte[3]    ComMethodId          ASCII "LH5" or "NON"
+0x08       4  u32le      FullSize             unused for a multi-file archive
+0x0c       1  u8         ArchiveType          1 = caMulti
+0x0d       4  u32le      Checksum             unused for caMulti; must be zero
+0x11       4  u32le      Locked               locking/encryption state
+
+FullSize is a producer-carried field with no semantic use when ArchiveType is
+caMulti.  It must still be read and retained; it is not a length and must not
+be used to locate any boundary.
+
+ComMethodId summarizes the archive's storage.  "LH5" permits LH5 members and
+literal fallback members; "NON" is an uncompressed multi-file archive whose
+members use coNone.  Each member's CompressedMode remains authoritative.
+
+Locked has the historical TCompress meanings 0 = unprotected, 1 = legacy
+locked, and 2 = encrypted.  This specification's extractable GP-Install
+profile requires 0.  A nonzero value requires a key and protection algorithm
+outside this profile and must be rejected before writing output.
+
+Immediately after the archive header is a sequence of zero or more member
+records.  There is no member count and no end marker.  Records are read until
+exactly the framed archive size is consumed.  Ending in the middle of a header,
+name, or body is corruption.
+
+
+Member record
+-------------
+
+Every member begins with this packed 25-byte header:
+
+Offset  Size  Type       Name                 Meaning
+------  ----  ---------  -------------------  -------------------------------
+0x00       2  u16le      FilenameLength       following name length, 1..255
+0x02       4  u32le      DateTime             packed DOS local date and time
+0x06       2  u16le      Attributes           low 16 Win32 file-attribute bits
+0x08       4  u32le      FullSize             expanded size in bytes
+0x0c       4  u32le      CompressedSize       stored body size in bytes
+0x10       1  u8         CompressedMode       TCompressionMethod enumeration
+0x11       4  u32le      Checksum             checksum of expanded bytes
+0x15       4  u32le      Locked               member protection state
+
+The header is followed immediately by:
+
+    Filename : byte[FilenameLength]
+    Body     : byte[CompressedSize]
+
+The filename is a non-NUL-terminated, single-byte Windows ANSI string.  The
+format carries no code-page identifier.  Backslash is the path separator; no
+drive designator is stored.  An extractor must not guess a locale from these
+bytes.  On POSIX, gpInstall.py uses the filesystem surrogate-escape mapping so
+every non-ASCII filename byte is preserved exactly; ASCII bytes retain their
+usual spelling.  Absolute paths, empty components, dot components, and parent
+components are invalid for extraction.
+
+Duplicate destination names are legal records.  Members are applied in archive
+order, matching installer overwrite behavior.  If multiple checksum-valid
+members resolve to the same ASCII-case-insensitive path (and byte-exact non-ASCII path), the last one
+is the final extracted file.  A corrupt later duplicate does not erase an
+earlier valid occurrence.
+
+DateTime is the DOS packed timestamp:
+
+    bits  0..4   seconds divided by 2
+    bits  5..10  minute
+    bits 11..15  hour
+    bits 16..20  day of month
+    bits 21..24  month
+    bits 25..31  year minus 1980
+
+Attributes uses the standard Win32 FILE_ATTRIBUTE_* bit assignments.  Common
+values include 0x0001 readonly, 0x0002 hidden, 0x0020 archive, 0x0080 normal,
+0x0800 compressed, and 0x2000 not-content-indexed.  Combinations are allowed.
+
+CompressedMode is the Delphi TCompressionMethod ordinal:
+
+    0  coNone    literal storage
+    1  coRLE     TCompress run-length encoding
+    2  coLZH     TCompress LZH1
+    3  coCustom  application-defined method
+    4  coLZH5    raw LH5
+
+The GP-Install profile specified here permits modes 0 and 4.  Modes 1 through
+3 describe other TCompress formats and must be rejected rather than guessed.
+Locked has the same historical values as the archive header and must be zero
+in this profile.
+
+
+Literal members (CompressedMode 0)
+----------------------------------
+
+FullSize and CompressedSize must be equal.  The body is the output without
+transformation.  Checksum is zero because TCompress does not checksum coNone
+members.
+
+
+LH5 members (CompressedMode 4)
+------------------------------
+
+The member body is a headerless LH5 stream.  Bits are consumed most-
+significant-bit first within each byte.  Multi-bit integers are formed in
+normal binary order: the first bit read is their most significant bit.
+
+Decoder state consists of a 16,384-byte circular history buffer initialized
+entirely to ASCII space (0x20), a history write position initialized to zero,
+and an output stream.  The LH5 command alphabet has 510 symbols numbered
+0..509.  Decoding proceeds as a series of blocks.
+
+Each block begins with three table descriptions:
+
+    CommandCount       16 bits
+    TemporaryTree      variable
+    CommandTree        variable
+    OffsetTree         variable
+
+CommandCount is the exact number of literal/copy commands in this block and
+must be nonzero.
+
+
+Code-length value
+~~~~~~~~~~~~~~~~~
+
+Read three bits as L.  If L is less than 7, that is the value.  If L is 7,
+read one bit at a time, adding one to L for every consecutive 1, and stop on
+the first 0.  Code lengths greater than 32 are invalid.
+
+
+Temporary tree
+~~~~~~~~~~~~~~
+
+Read a 5-bit count N.
+
+* If N is zero, read a 5-bit symbol and construct a degenerate tree that
+  always returns that symbol without consuming further bits.
+* Otherwise, read N code-length values.  Immediately after reading the third
+  length (index 2), read a 2-bit value S and insert S additional zero lengths.
+  The resulting list must contain exactly N entries.  Construct a canonical
+  Huffman tree whose symbols are the list indices.
+
+
+Command tree
+~~~~~~~~~~~~
+
+Read a 9-bit count N.
+
+* If N is zero, read a 9-bit symbol in 0..509 and construct a degenerate tree.
+* Otherwise N must be at most 510.  Decode symbols from the temporary tree to
+  build exactly N command-tree lengths:
+
+      temporary symbol 0: append one zero length
+      temporary symbol 1: read 4 bits V; append V + 3 zero lengths
+      temporary symbol 2: read 9 bits V; append V + 20 zero lengths
+      symbol 3 or more:   append one length equal to symbol - 2
+
+  A zero run may not pass N.  Construct a canonical Huffman tree whose symbols
+  are the list indices.
+
+
+Offset tree
+~~~~~~~~~~~
+
+Read a 4-bit count N.
+
+* If N is zero, read a 4-bit symbol in 0..13 and construct a degenerate tree.
+* Otherwise N must be at most 15.  Read N code-length values and construct a
+  canonical Huffman tree whose symbols are the list indices.
+
+
+Canonical Huffman construction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Length zero means the symbol is absent.  For each positive length, assign
+codes in ascending length and then ascending symbol order.  Equivalently, with
+Count[L] equal to the number of codes of length L:
+
+    Next[1] = 0
+    Next[L] = (Next[L-1] + Count[L-1]) << 1    for L > 1
+
+Symbol S with length L receives Next[L], after which Next[L] is incremented.
+The lengths must describe one complete, non-oversubscribed binary tree.
+
+
+Command decoding
+~~~~~~~~~~~~~~~~
+
+Decode exactly CommandCount symbols from the command tree.
+
+For symbol C < 256, C is a literal byte.  Append it to output, store it at the
+current history write position, and advance that position modulo 16,384.
+
+For symbol C >= 256, the copy length is:
+
+    CopyLength = C - 256 + 3
+
+Decode an offset-tree symbol B and obtain Offset as follows:
+
+    B = 0:  Offset = 0
+    B = 1:  Offset = 1
+    B >= 2: Offset = 2^(B-1) + read_bits(B-1)
+
+The copy source is:
+
+    Source = (HistoryPosition - Offset - 1) modulo 16384
+
+Copy CopyLength bytes one at a time from successive circular history
+positions.  Every copied byte is also appended to output and written back at
+the current history position.  Byte-at-a-time behavior is required because a
+copy may overlap the bytes it is producing.
+
+Start another block whenever its command count reaches zero and more expanded
+bytes are required.  Decoding must end simultaneously at FullSize bytes and at
+the end of a command block.  It may not overshoot FullSize.  The only remaining
+bits through the end of the final CompressedSize byte are zero padding; at most
+seven such bits can exist.  Extra whole bytes or nonzero padding bits are
+corruption.
+
+
+Checksum
+--------
+
+For an LH5 member, the checksum is the unsigned sum of every expanded byte,
+reduced modulo 2^32:
+
+    Checksum = (byte[0] + byte[1] + ... + byte[FullSize-1]) mod 4294967296
+
+Validate it only after producing exactly FullSize bytes.  A mismatch is
+corruption.  That member is not recoverable, although other independently
+bounded members can still be recovered.
+
+
+Extraction behavior and validation
+----------------------------------
+
+Normal extraction writes only archive 1, retaining each complete logical
+stored path.  This yields the files the installer installs without inventing a
+particular machine's Windows, system, or chosen application directory.
+
+With --all, archive 0 is additionally written below
+"_gpinstall/bootstrap/", and a generated JSON description is written as
+"_gpinstall/manifest.json".  Generated metadata is never emitted without
+--all.
+
+Whether or not archive 0 is requested as output, every structurally reachable
+member in both archives is decoded and validated.  A parser also validates PE
+bounds, outer lengths, archive headers, member boundaries, declared sizes, LH5
+structures, checksums, command boundaries, padding bits, safe paths, and exact
+EOF.  A malformed or unrelated format still fails before output.  Damage after
+a valid GP-Install identity invokes the automatic recovery rules below.
+
+
+Automatic recovery
+------------------
+
+Recovery is the default behavior and needs no option.  It relaxes only the
+completeness requirement.  It does not relax format identification, invent
+boundaries, scan for signatures, or accept a member whose data does not
+validate.  The PE bootstrap and first SPIS/LH5 multi-file header must still be
+valid, and the recoverable bootstrap must contain Installer/GPInstall.exe.
+The supported archive signatures are SPIS + 0x1a + "LH5" and SPIS + 0x1a +
+"NON".
+
+Starting at each length-derived archive boundary, recovery walks member
+records in order.  A member is recoverable only when its complete 25-byte
+header, complete filename, and all CompressedSize body bytes are present and
+its decompression, FullSize, checksum, command boundary, and padding bits all
+validate.  A complete but corrupt member is skipped while later records remain
+reachable from its declared size.  An incomplete header, filename, or body
+ends traversal of that archive because the location of any later record is no
+longer knowable without a heuristic.  If a framed archive extends beyond EOF,
+the next outer archive is not reachable and is not guessed.
+
+Because an input truncated before archive 1 may contain only support resources,
+automatic recovery writes every recovered archive-0 member below
+"_gpinstall/bootstrap/" as well as recovered archive-1 members at their normal
+logical paths.  It prints every omission as a warning.  It generates no
+metadata file unless --all is supplied; that manifest records the recovery
+warnings.

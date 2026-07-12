@@ -17,7 +17,9 @@ export class akailist extends Program
 			if(type)
 				meta.files.push({type : type.trim(), size : +size, blockLocation : +blockLocation, name});
 		}
-		if(meta.files.every(o => o.type==="UNKNOWN"))
+
+		// akailist will read almost ANY file and output gibberish, so only include listings if at least 80% of the files are *VOLUME*
+		if((meta.files.map(o => (o.type.toLowerCase().includes("volume") ? 1 : 0)).sum()/meta.files.length)<0.8)
 			meta.files = [];
 		Object.assign(r.meta, meta);
 	};

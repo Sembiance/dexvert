@@ -1,0 +1,364 @@
+AOL RS SETUP SELF-EXTRACTOR FORMAT
+==================================
+
+Scope
+-----
+
+This document specifies the 32-bit AOL Setup self-extracting file family whose
+installer database begins with the two bytes "RS".  It covers the Setup and
+Install executable lineages, their compiled configuration revisions, the
+common file-table suffix, raw files, ZIP files, and truncated carriers.  It
+does not describe unrelated executables that use an "RSRC"
+application-resource overlay.
+
+All multibyte integers are unsigned little-endian values.  All strings are
+8-bit ASCII and are not NUL terminated.  An LPString is:
+
+    uint16  byte_count
+    byte    text[byte_count]
+
+Every byte in a file belongs, in order, to one of these regions:
+
+    +-------------------------------+
+    | outer PE32 executable         |
+    +-------------------------------+  end of last file-backed PE section
+    | RS compiled configuration     |
+    | common FileRecord table       |
+    +-------------------------------+
+    | embedded DUNZIPNT.DLL PE32    |
+    +-------------------------------+
+    | one-file ZIP member 0         |
+    +-------------------------------+
+    | one-file ZIP member 1         |
+    +-------------------------------+
+    | ...                           |
+    +-------------------------------+
+    | optional prefix of next ZIP   |  only when the carrier is truncated
+    +-------------------------------+  physical end of file
+
+There are no alignment bytes between these regions.  The last byte of one
+region is immediately followed by the first byte of the next.
+
+
+1. Outer executable and format selection
+-----------------------------------------
+
+The outer region is a standard Microsoft PE32 image for machine 0x014c
+(Intel i386).  Its exact on-disk end is:
+
+    max(section.PointerToRawData + section.SizeOfRawData)
+
+over every IMAGE_SECTION_HEADER with nonzero SizeOfRawData.  PE headers,
+sections, resource data, relocations, and any gaps within that range are all
+part of the ordinary PE image.  The first two bytes at the computed end must
+be 0x52 0x53 (ASCII "RS").  Searching the file for those bytes is incorrect.
+
+The Name RVA in IMAGE_EXPORT_DIRECTORY identifies the executable lineage:
+
+    Export module name   Database generation
+    ------------------   -------------------
+    SETUP.EXE            Setup generation
+    INSTALL.EXE          Install generation
+
+The input's filesystem name has no significance.  The export name distinguishes
+the two lineages, but it is not a complete database-schema version: multiple
+stub revisions with the same export name compile different configuration
+grammars into their executable code.
+
+
+2. Common database primitives
+------------------------------
+
+StringCollection(paired) has this encoding:
+
+    uint16  count
+    repeat count times:
+        LPString first       (maximum encoded length: 127)
+        if paired:
+            LPString second  (maximum encoded length: 127)
+
+UInt16Array has this encoding:
+
+    uint16  count
+    uint16  value[count]
+
+FileRecord has this encoding:
+
+    LPString path            (maximum encoded length: 259)
+    uint32   unpacked_size
+    uint32   stored_span
+
+Paths in FileRecords use DOS/Windows syntax.  A backslash separates directory
+components.  The database path, rather than the basename inside the ZIP, is
+the installed path.  Comparisons are case-insensitive because the original
+target filesystem was case-insensitive.
+
+The FileRecord table is the stable, self-validating suffix shared by all known
+compiled configuration revisions.  It is located without guessing offsets as
+follows:
+
+  1. The first record names DUNZIPNT.DLL or DUNZIP32.DLL, case-insensitively.
+  2. The uint16 immediately before that LPString is its exact string length.
+  3. The preceding uint16 is file_record_count and therefore the table start.
+  4. Parsing exactly file_record_count records must end on an MZ byte pair.
+  5. Record 0 must have unpacked_size == stored_span.
+  6. Exactly stored_span bytes at that MZ pair must be a complete i386 PE32
+     whose export module name begins with DUNZIP.
+  7. There must be exactly one table/helper pairing satisfying all conditions.
+
+These invariants make the table boundary intrinsic.  Signature searching by
+itself, accepting the first occurrence, or choosing a plausible offset is not
+valid parsing.
+
+
+3. One Setup-lineage compiled configuration grammar
+----------------------------------------------------
+
+One Setup-lineage stub revision uses the following configuration prefix before
+the common FileRecord table:
+
+    byte[2]  signature = "RS"
+
+    LPString header_string_1   maximum 256 bytes; default destination
+    LPString header_string_2   maximum  63 bytes; publisher
+    LPString header_string_3   maximum 127 bytes; product display name
+    LPString header_string_4   maximum  63 bytes; principal executable
+    LPString header_string_5   maximum  63 bytes; setup window title
+    LPString header_string_6   maximum  31 bytes; product version
+    LPString header_string_7   maximum 511 bytes; optional installer text
+    LPString header_string_8   maximum 255 bytes; optional installer text
+    LPString header_string_9   maximum  31 bytes; optional parameter
+    LPString header_string_10  maximum  31 bytes; optional parameter
+
+    uint16  scalar[4]         installer option and feature words
+
+    uint16  resource_id_count
+    uint32  resource_id[resource_id_count]
+
+    StringCollection(true)    sound/event name and sound-file pairs
+    StringCollection(true)    preservation/action pattern pairs
+    StringCollection(false)   destination-directory list
+    StringCollection(false)   related-file list
+    StringCollection(false)   preservation/action pattern list
+    StringCollection(false)   optional action list A
+    StringCollection(false)   optional action list B
+
+    UInt16Array array_1       indexes into action/pattern lists
+    UInt16Array array_2       indexes into action/pattern lists
+
+    common FileRecord table
+
+The 32-bit resource identifiers are opaque Windows resource/action IDs used by
+the executable's user-interface and install logic.  They are values, not file
+offsets.  The counts and fixed element widths make their boundaries exact.
+
+
+4. One Install-lineage compiled configuration grammar
+------------------------------------------------------
+
+One Install-lineage stub revision uses the following extended configuration
+prefix before the common FileRecord table:
+
+    byte[2]  signature = "RS"
+
+    LPString header_string_1   maximum 256 bytes; default destination
+    LPString header_string_2   maximum  63 bytes; publisher
+    LPString header_string_3   maximum 127 bytes; product display name
+    LPString header_string_4   maximum 127 bytes; offer/marketing title
+    LPString header_string_5   maximum  63 bytes; principal executable
+    LPString header_string_6   maximum  63 bytes; setup window title
+    LPString header_string_7   maximum  31 bytes; product version
+    LPString header_string_8   maximum 511 bytes; optional installer text
+    LPString header_string_9   maximum 255 bytes; optional installer text
+    LPString header_string_10  maximum  31 bytes; optional parameter
+    LPString header_string_11  maximum  31 bytes; optional parameter
+    LPString header_string_12  maximum  31 bytes; optional parameter
+    LPString header_string_13  maximum  31 bytes; optional parameter
+    LPString header_string_14  maximum  31 bytes; optional parameter
+    LPString header_string_15  maximum  63 bytes; campaign identifier
+    LPString header_string_16  maximum  63 bytes; partner identifier
+    LPString header_string_17  maximum  63 bytes; optional partner parameter
+    LPString header_string_18  maximum  31 bytes; post-install reference file
+    LPString header_string_19  maximum   5 bytes; string-encoded option
+    LPString header_string_20  maximum   5 bytes; string-encoded option
+    LPString header_string_21  maximum   5 bytes; string-encoded option
+    LPString header_string_22  maximum   5 bytes; string-encoded option
+
+    uint16  scalar[5]         installer option and feature words
+
+    uint16  resource_id_count
+    uint32  resource_id[resource_id_count]
+
+    StringCollection(true)    sound/event name and sound-file pairs
+    StringCollection(true)    preservation/action pattern pairs
+    StringCollection(false)   destination-directory list
+    StringCollection(false)   related-file list
+    StringCollection(false)   preservation/action pattern list
+    StringCollection(false)   optional action list A
+    StringCollection(false)   optional action list B
+
+    UInt16Array array_1       action/pattern indexes
+    UInt16Array array_2       action/pattern indexes
+    UInt16Array array_3       action/pattern indexes
+
+    StringCollection(false)   extended action list A
+    StringCollection(true)    extended action-pair list
+    StringCollection(false)   extended action list B
+
+    uint16 install_scalar_1
+    uint16 install_scalar_2
+
+    uint16 complex_group_count
+    repeat complex_group_count times:
+        LPString name              (maximum encoded length: 31)
+        uint32   value
+        uint16   dword_count
+        uint32   dword[dword_count]
+        uint16   string_count
+        repeat string_count times:
+            LPString string        (maximum encoded length: 31)
+
+    common FileRecord table
+
+All ten StringCollections occur even when their count is zero.  Likewise, a
+zero complex_group_count omits only the repeated complex-group bodies, not the
+count word itself.
+
+Other compiled revisions place a different configuration prefix between "RS"
+and the common FileRecord table.  That prefix contains the installer's UI,
+registry, preservation, campaign, and action data and is consumed according to
+the parser compiled into that particular outer PE.  It has no independent
+schema-version word.  It does not control payload boundaries: the universally
+encoded FileRecord table does.  An extractor that does not emulate installer
+side effects may preserve this entire prefix verbatim and identify it by its
+exact length and digest while still parsing every payload boundary
+deterministically.
+
+
+5. Embedded helper record and helper PE
+---------------------------------------
+
+FileRecord 0 is special.  Its path is DUNZIPNT.DLL or DUNZIP32.DLL
+(case-insensitive), and its
+unpacked_size equals its stored_span.  Immediately after the last FileRecord
+is exactly stored_span bytes containing the uncompressed DUNZIPNT.DLL PE32
+image used by the setup program.  The helper's own final file-backed PE section
+must end exactly at the helper boundary.  It is a temporary setup component,
+not an installed application file.
+
+Every FileRecord after record 0 describes one installed file.  Their payloads
+occur in FileRecord order after the helper.
+
+
+6. Installed-file storage forms
+--------------------------------
+
+Every installed FileRecord uses one of two unambiguous storage forms:
+
+    stored_span == unpacked_size    raw bytes
+    stored_span != unpacked_size    independent one-file ZIP
+
+For a raw record, exactly stored_span bytes are the installed file bytes.  No
+ZIP header, filename, timestamp, or checksum surrounds them.  The database path
+is the installed path.  The raw form is used for files that should not be
+compressed and can occur anywhere in FileRecord order.
+
+For a ZIP record, the following rules apply.
+
+Each ZIP-form installed file is stored as an independent, complete,
+single-entry ZIP archive.  It is not one entry in a shared ZIP.  Its first byte
+is at:
+
+    database_end + file[0].stored_span
+        + sum(file[i].stored_span for preceding installed records i)
+
+The independent ZIP has the ordinary PKZIP structure:
+
+    Local file header                 signature 0x04034b50
+    local filename
+    local extra field
+    compressed file data
+    Central directory file header     signature 0x02014b50
+    central filename
+    central extra field
+    central comment
+    End of central directory          signature 0x06054b50
+
+There is exactly one local header and one central header.  Both disk numbers
+are zero, both entry counts are one, the local-header offset in the central
+entry is zero, and the end record has no archive comment.  The central fields
+for version-needed, flags, compression, DOS time/date, CRC-32, compressed size,
+and uncompressed size equal the corresponding local fields.  Data descriptors,
+encryption, multi-disk ZIP fields, and unknown compression methods are not part
+of this AOL carrier format.
+
+The ZIP entry's name is only the basename.  Its spelling is conventionally
+uppercase.  It must equal the basename of the FileRecord path without regard
+to ASCII case.  The FileRecord's unpacked_size equals the ZIP uncompressed
+size.  FileRecord.stored_span equals the entire independent ZIP size, including
+both headers, both copies of the name, extras, comments, and the 22-byte end
+record.  The extracted bytes must match both the uncompressed size and CRC-32.
+
+The defined payload encodings are ZIP method 0 (stored) and method 8 (raw
+DEFLATE).  Method 8 data is the raw RFC 1951 bitstream required by ZIP, without
+a zlib or gzip wrapper.  DOS timestamps from the ZIP header are the installed
+file timestamps.
+
+
+7. Truncated prefix images
+--------------------------
+
+A physical carrier may be a prefix of the complete self-extractor described by
+the database.  This condition is unambiguous because every complete member's
+stored_span is known before payload parsing.
+
+A valid prefix image contains the complete outer PE, complete RS database,
+complete helper PE, zero or more complete ZIP members in FileRecord order, and
+then either:
+
+  * physical EOF exactly on a member boundary, or
+  * a byte-for-byte syntactically valid prefix of the next declared ZIP member.
+
+For a cut within compressed data, the available raw-DEFLATE bytes must be a
+valid stream prefix.  The partial member is not extractable because its stream,
+CRC, and uncompressed byte count cannot be validated.
+
+If physical EOF occurs after all compressed bytes but within the central
+directory or end record, the installed payload is recoverable.  The extractor
+must decode the complete payload and require its local-header size and CRC-32
+to match.  Any available central-directory/end-record bytes must be a valid
+prefix consistent with the local header.  The recovered installed file is then
+emitted even though its independent ZIP wrapper is truncated.
+
+There is no padding and no unexplained tail: every available byte is part of
+the next member.  A bad signature, database/header disagreement, invalid
+DEFLATE prefix, out-of-order member, or bytes after the final declared member
+makes the carrier invalid.
+
+For a cut within a raw record, all remaining physical bytes are the prefix of
+that record.  It is not extracted because the database-declared byte count is
+not present.
+
+
+8. Validation and safe extraction
+----------------------------------
+
+A strict extractor performs all validation before writing output:
+
+  1. Validate PE32 headers and obtain the exact overlay offset.
+  2. Validate the RS signature and executable lineage.
+  3. Locate the unique common FileRecord-table/helper pairing using all seven
+     structural invariants above; decode a known compiled configuration grammar
+     when applicable and otherwise preserve its exact prefix boundary.
+  4. Validate the helper as an exact-length PE32 image.
+  5. Walk payloads only with stored_span values from the database.
+  6. Copy exact-length raw records; validate every complete ZIP structure,
+     basename, size, DEFLATE stream, and CRC.  Recover a payload whose data and
+     CRC are complete even if its central directory/end record is truncated.
+  7. Reject absolute paths, drives, empty components, dot components, parent
+     components, duplicate case-insensitive paths, and path/file collisions.
+
+By default, extraction emits only complete installed files.  An archival/all
+mode may additionally preserve the non-installed helper, the final partial ZIP
+bytes, and a decoded metadata representation.  Such metadata is not present in
+the source format and must be clearly separated from installed files.

@@ -1,0 +1,303 @@
+Microsoft MediaView Resource Archive Container (M20/M21/M22/M53/YBK/IVT/IVI)
+============================================================================
+
+Status and scope
+----------------
+
+This document specifies the complete resource-container layer identified by
+the four-byte signatures 3F 5F 04 01 and 3F 5F 04 11.  It covers the main
+header, free-space chain, allocated resource byte streams, and directory B+
+tree.
+
+The container is found with multiple filename extensions, including `.m20`,
+`.m21`, `.m22`, `.m53`, `.ybk`, `.ivt`, and `.ivi`.  The extension is not a
+binary version field: identification and parsing depend on the on-disk
+signature and structures described here.  IVT and IVI InfoViewer files add the
+explicitly defined 36-byte suffix documented below.
+Resource payloads are stored verbatim.  Their individual formats (for example,
+WAVE, DIB, KWAJ, or application database data) are independent formats and are
+not part of the M20 container syntax.
+
+All multibyte integers are unsigned little-endian unless a field is explicitly
+described as signed.  All offsets are absolute from byte zero of the archive.
+An interval written [A, B) includes A and excludes B.
+
+
+Overall layout
+--------------
+
+The archive is a complete, non-overlapping partition of these extents:
+
+    [0, 36)                              main header
+    [36, FreeChainOffset)                zero padding
+    free-chain blocks                     allocator metadata
+    allocated resource extents            directory-named payloads
+    active free extents                   allocator-described unused bytes
+    [DirectoryOffset,
+     DirectoryOffset + DirectorySize)     directory B+ tree
+    [ArchiveSize, PhysicalSize)            optional IVT suffix
+
+The directory can occur between allocated extents: incrementally updated
+archives can retain a freed old resource before the directory and place its
+replacement after the directory.  Apart from the fixed header/padding prefix,
+the resource, active-free, free-chain-block, and directory extents collectively
+fill [0, ArchiveSize) without holes or overlaps.  When present, the IVT suffix
+then fills [ArchiveSize, PhysicalSize).  Extents need not be ordered by
+directory name.  An archive reader must validate the whole partition before
+extracting anything.
+
+
+Main header (36 bytes)
+----------------------
+
+Offset  Size  Type     Meaning
+0       4     bytes    Signature: 3F 5F 04 01 or 3F 5F 04 11.
+4       8     uint64   DirectoryOffset.
+12      8     uint64   FreeChainOffset, address of the first free-chain block.
+20      8     uint64   ArchiveSize, logical end of the MediaView container.
+28      8     uint64   DirectorySize, exact byte length of the B+ tree.
+
+Bytes from offset 36 through FreeChainOffset-1 are alignment/reserved padding
+and must all be zero.  FreeChainOffset must be at least 36 and strictly less
+than DirectoryOffset.
+
+Signature 3F 5F 04 01 is the packed layout: the directory ends exactly at
+ArchiveSize.  Signature 3F 5F 04 11 has flag 0x10 set and is the incremental
+layout: live resource extents may follow the directory.  In both layouts,
+DirectoryOffset + DirectorySize may not exceed ArchiveSize.
+
+For an ordinary container, ArchiveSize equals the physical input length.  For
+an IVT file with the suffix below, the physical input length is exactly
+ArchiveSize + 36.  Any other mismatch means the file is truncated, extended
+with an unknown structure, or corrupt.
+
+
+IVT/IVI suffix (36 bytes, optional)
+-----------------------------------
+
+InfoViewer IVT and IVI files append this structure at absolute offset
+ArchiveSize:
+
+Offset  Size  Type     Meaning
+0       4     uint32   UnixTimestamp, seconds since 1970-01-01 00:00:00 UTC.
+4       20    bytes    Reserved, exactly twenty zero bytes.
+24      4     bytes    Suffix signature, exactly ASCII "IVTV".
+28      4     uint32   SuffixVersion, exactly 6.
+32      4     uint32   SuffixSize, exactly 36.
+
+The suffix is container metadata, not a directory-listed resource.  Its
+signature, version, size, and reserved bytes must all validate before resource
+extraction begins.  The timestamp is retained in `--all` manifest metadata.
+
+
+Free-space chain
+----------------
+
+Each free-chain block is exactly 8,168 bytes.  The first block is at
+FreeChainOffset.  Further blocks, when present, are reached through NextBlock.
+A block has this layout:
+
+Offset  Size       Type               Meaning
+0       2          uint16             Count, active records in this block.
+2       2          uint16             Capacity, exactly 510.
+4       4          uint32             NextBlock absolute offset, or zero.
+8       510 * 16   FreeSpan[510]      Fixed-capacity record array.
+
+Each FreeSpan is:
+
+Offset  Size  Type     Meaning
+0       8     uint64   Offset of an unallocated extent.
+8       8     uint64   Size of that extent in bytes.
+
+Only records 0 through Count-1 are active.  Their sizes must be nonzero, and
+their extents must lie wholly inside the archive without intersecting the
+directory.  Records Count through 509 are unused and both integers in each
+must be zero.  Count may not exceed 510.  NextBlock must be zero or address
+another complete block outside the directory.  The linked list must be
+acyclic.  Free-chain blocks, active free spans, the directory, and allocated
+resources may not overlap.
+
+
+Resource payload area
+---------------------
+
+Every live resource is described by one directory leaf record.  Its stored
+bytes are exactly the interval:
+
+    [ResourceOffset, ResourceOffset + ResourceSize)
+
+There is no per-resource M20 header and no alignment padding between adjacent
+resource extents.  An extent may be before or, in the incremental layout,
+after the directory, but may never intersect it.  Compression signatures found
+at the beginning of a payload belong to the payload's own file format.
+Extracting the M20 resource means copying this exact interval without altering
+it.
+
+Resource names are length-prefixed byte strings.  They are not NUL-terminated.
+The byte string may be empty.  Nonempty names conventionally contain ANSI/ASCII
+file names or internal names beginning with '>' or '|'.  A host extractor must
+prevent path traversal and separator injection when mapping these opaque names
+to host file names; this specification uses the injective host name `%EMPTY`
+for an empty name and escapes a literal percent byte as `%25`.  M20 names are
+unique within an archive.
+
+
+ULEB128 integer encoding
+------------------------
+
+Directory resource offsets and sizes use canonical unsigned LEB128.  Starting
+with the least-significant seven bits, each byte contributes bits 0 through 6.
+Bit 7 is one when another byte follows and zero in the final byte:
+
+    value = sum((byte[i] & 0x7F) << (7*i))
+
+More than ten bytes, a value greater than uint64, an unterminated sequence, or
+a multi-byte sequence whose final seven-bit group is zero is invalid.
+
+
+Directory region
+----------------
+
+DirectoryOffset points directly to a 48-byte B+ tree header; it does not point
+to a separate file wrapper and need not be the last allocated extent.
+DirectorySize is exactly:
+
+    48 + TotalPages * PageSize
+
+The fixed-size pages immediately follow the header.  Page number N begins at:
+
+    DirectoryOffset + 48 + N * PageSize
+
+
+Directory B+ tree header (48 bytes)
+----------------------------------
+
+Offset  Size  Type     Meaning
+0       2     uint16   Magic, exactly 0x293B (bytes 3B 29).
+2       2     uint16   Flags, exactly 0x0102.
+4       2     uint16   PageSize, exactly 8,192.
+6       16    bytes    Record description: "VOO1" followed by twelve zeroes.
+22      4     uint32   ReservedZero, exactly zero.
+26      4     uint32   PageSplits, allocator-maintained split counter.
+30      4     uint32   RootPage, page number of the B+ tree root.
+34      4     uint32   ReservedMinusOne, exactly 0xFFFFFFFF.
+38      4     uint32   TotalPages in the page array.
+42      2     uint16   Levels, with leaf pages counted as level 1.
+44      4     uint32   TotalEntries across all leaf pages.
+
+TotalPages and Levels are nonzero.  RootPage is less than TotalPages.  Every
+page in the page array is reachable exactly once from RootPage at the declared
+depth.  PageSplits records construction history and need not equal TotalPages.
+
+The record-description characters state the leaf record fields:
+
+    V   one-byte length followed by that many value bytes
+    O   canonical ULEB128 unsigned integer
+    O   canonical ULEB128 unsigned integer
+    1   one one-byte integer
+
+For this directory they mean name, absolute payload offset, payload size, and
+resource flags, respectively.
+
+
+Common page prefix and unused storage
+-------------------------------------
+
+All pages begin with:
+
+Offset  Size  Type     Meaning
+0       2     uint16   UnusedBytes at the end of this page.
+2       2     uint16   EntryCount in this page.
+
+The semantically used prefix ends at PageSize - UnusedBytes.  Parsing exactly
+EntryCount records must finish at that boundary.  The final UnusedBytes bytes
+have no current meaning.  They are allocator workspace and can be zero or can
+retain stale bytes from records that existed before a B+ tree page split.
+Readers must neither parse nor require zeroes in this unused suffix.  Thus all
+page bytes are accounted for: a live header/record prefix followed by an
+explicitly sized inactive suffix.
+
+
+Leaf page
+---------
+
+A page at tree level 1 has a 12-byte header:
+
+Offset  Size  Type    Meaning
+0       2     uint16  UnusedBytes.
+2       2     uint16  EntryCount.
+4       4     int32   PreviousLeaf page number, or -1 for the first leaf.
+8       4     int32   NextLeaf page number, or -1 for the last leaf.
+12      ...           EntryCount leaf records.
+
+Each leaf record is:
+
+    uint8 NameLength
+    byte  Name[NameLength]
+    ULEB128 ResourceOffset
+    ULEB128 ResourceSize
+    uint8 ResourceFlags
+
+NameLength and ResourceSize may be zero.  A zero-size record represents a live
+empty resource and consumes no payload extent.  ResourceFlags is zero in this
+format revision; nonzero values are not defined.  A nonempty payload extent
+must lie wholly inside the archive and must not intersect the directory.
+
+Leaf pages form one doubly linked list in the same order produced by walking
+the B+ tree from left to right.  The first PreviousLeaf and last NextLeaf are
+-1; every other link must name its immediate neighbor.
+
+The directory collation places an empty name first, followed by three
+leading-name classes: names beginning with '>' sort first, names beginning
+with '|' sort second, and ordinary names sort third.  Within a class,
+comparison is lexicographic and case-insensitive for ASCII letters.  The
+underscore has its legacy collation weight between slash and digit zero
+(`'/' < '_' < '0'`), rather than its ASCII byte position after uppercase
+letters.  All other ASCII bytes retain byte order after case folding.  Leaf
+records are in this order.
+
+
+Index page
+----------
+
+A page above level 1 begins with the four-byte common prefix, followed by one
+initial child and EntryCount separator records:
+
+Offset  Size  Type     Meaning
+0       2     uint16   UnusedBytes.
+2       2     uint16   EntryCount (number of separator keys).
+4       4     uint32   FirstChild page number.
+8       ...            EntryCount separator records.
+
+Each separator record is:
+
+    uint8 NameLength
+    byte  Name[NameLength]
+    uint32 RightChild
+
+An index page therefore has EntryCount + 1 children.  A separator name is
+exactly the first leaf name reachable through its RightChild.  All children
+are one tree level below their parent.  This layout repeats without change for
+trees with more than two levels.
+
+
+Complete validation and extraction procedure
+--------------------------------------------
+
+1. Read the complete input without creating the output directory.
+2. Validate the main header, logical/physical size relationship, optional IVT
+   suffix, zero padding, and directory bounds.
+3. Walk and validate the acyclic free-space chain.
+4. Validate the directory header and its exact page-array size equation.
+5. Walk the B+ tree from RootPage at Levels, checking page reachability,
+   used-byte boundaries, separator keys, leaf links, and TotalEntries.
+6. Validate unique resource names and every resource extent.
+7. Sort the header, padding, directory, free-chain blocks, live payload
+   extents, and active free extents by offset.  They must partition
+   [0, ArchiveSize) exactly once, with no gap or overlap.  When an IVT suffix
+   exists, it must occupy exactly [ArchiveSize, PhysicalSize).
+8. Only after every check succeeds, create or reuse the output directory and
+   copy each resource extent verbatim.
+
+This procedure accounts for every archive byte and makes rejection atomic with
+respect to format errors: an invalid input produces no extracted output.

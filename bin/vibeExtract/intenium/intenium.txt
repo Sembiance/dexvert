@@ -1,0 +1,240 @@
+INTENIUM STGC INSTALLER FORMAT
+==============================
+
+Scope
+-----
+
+This document specifies the INTENIUM installer representation whose payload is
+one or more `stgc_hdr` containers appended to a 32-bit x86 Windows PE image. All
+integers are little-endian. Offsets within an STGC container are unsigned byte
+offsets relative to the first byte of that container. Sizes are byte counts.
+
+The PE image and an optional Authenticode certificate table use their standard
+Microsoft PE/COFF definitions. The format-specific data begins at the greatest
+of `SizeOfHeaders` and every section's `PointerToRawData + SizeOfRawData`.
+
+File layout
+-----------
+
+    +-------------------------------+  file offset 0
+    | PE32 x86 image                |
+    +-------------------------------+  end of final raw PE section
+    | STGC container 0              |
+    +-------------------------------+
+    | STGC container 1              |
+    +-------------------------------+
+    | ...                           |
+    +-------------------------------+  end of final STGC container
+    | zero alignment bytes (0..7)   |  signed files only
+    +-------------------------------+  8-byte aligned
+    | PE WIN_CERTIFICATE table      |  signed files only
+    +-------------------------------+  end of file
+
+Every STGC container declares its own total size. The next container starts
+immediately after the preceding one. There is no separator and no scanning for
+signatures. In an unsigned file, the final container ends at end of file. In a
+signed file, zero bytes align the standard PE certificate table to eight bytes.
+The PE security data-directory entry contains the certificate table's absolute
+file offset and size; unlike other PE data-directory addresses, it is not an
+RVA. Each WIN_CERTIFICATE entry is advanced by its `dwLength` rounded up to an
+eight-byte boundary.
+
+STGC container header
+---------------------
+
+The fixed portion is 44 (0x2c) bytes:
+
+    Offset  Size  Type       Meaning
+    ------  ----  ---------  -----------------------------------------------
+    0x00       8  bytes      ASCII magic `stgc_hdr`
+    0x08       4  uint32     Header version; value 1
+    0x0c       4  uint32     Rotate/XOR checksum described below
+    0x10       4  uint32     Total container size, including this header
+    0x14       8  uint64     Container creation/modification time, FILETIME
+    0x1c       4  uint32     Offset of NUL-terminated package-kind string
+    0x20       4  uint32     Offset of NUL-terminated package identifier
+    0x24       4  bytes      ASCII marker `data`
+    0x28       4  uint32     Number of root entry records
+    0x2c       -  records    Root records begin here
+
+The package kind describes the destination namespace or package role. The
+package identifier uniquely names that package and is also used when resolving
+a game installation root. Both fields are byte strings in the Windows ANSI
+code page used when the installer was built. No code-page number is stored.
+
+Checksum
+--------
+
+The checksum covers the byte range `[0x28, container_size)`. The initial value
+is zero. For every byte in order, rotate the 32-bit value left by three bits,
+then XOR the byte into its low eight bits:
+
+    value = 0
+    for byte in container[0x28:container_size]:
+        value = ROTL32(value, 3) XOR byte
+
+The resulting uint32 must equal the field at offset 0x0c. Thus the root count,
+all records and strings, all compressed payload bytes, and the two package
+strings are integrity-protected. The magic, version, checksum, total size,
+FILETIME, the two package-string offsets, and `data` marker are not covered.
+
+Entry records
+-------------
+
+Every entry record is exactly 32 (0x20) bytes:
+
+    Offset  Size  Type       Meaning
+    ------  ----  ---------  -----------------------------------------------
+    0x00       8  uint64     Entry modification time, Windows FILETIME
+    0x08       4  uint32     Data offset; interpretation depends on type
+    0x0c       4  uint32     Uncompressed file size; zero for a directory
+    0x10       4  uint32     Compressed file size; zero for a directory
+    0x14       4  uint32     Offset of the entry's NUL-terminated name
+    0x18       4  uint32     Name length in bytes, excluding the NUL
+    0x1c       4  uint32     Entry flags: 0 = raw file, 1 = zlib file,
+                             2 = directory
+
+The `root_count` root records occupy a contiguous array beginning at container
+offset 0x2c. Child records use the same representation.
+
+Names are individual path components, not complete paths. A name's byte at
+`name_offset + name_length` is NUL. Directory ancestry supplies the complete
+path. Names use the same untagged Windows ANSI representation as the package
+strings. A conforming path component cannot be empty, `.` or `..`, contain a
+NUL, a slash or backslash, or specify a drive with a colon.
+
+Directory data
+--------------
+
+For a type-2 record, `data_offset` points to this structure:
+
+    Offset  Size                  Meaning
+    ------  --------------------  ------------------------------------------
+    0x00       4                  uint32 child_count
+    0x04      32 * child_count    Contiguous child entry records
+
+The directory record's uncompressed and compressed sizes are both zero. A
+directory with no children has a four-byte child count of zero. Directory
+records can nest without a format-defined depth limit. Cycles are invalid.
+
+File data and compression
+-------------------------
+
+The entry field at 0x1c is a flag value. Bit 0 selects zlib compression and bit
+1 selects a directory. The defined file encodings are therefore:
+
+    Flags 0: raw file
+        `compressed_size` is zero. `data_offset` points to exactly
+        `uncompressed_size` literal bytes. For an empty raw file, both sizes and
+        the unused data offset can be zero.
+
+    Flags 1: zlib-compressed file
+        `data_offset` points to exactly `compressed_size` bytes. Those bytes are
+        one complete RFC 1950 zlib stream. The stream contains an RFC 1951
+        DEFLATE payload and its normal Adler-32 trailer. It must reach
+        end-of-stream at exactly the declared compressed boundary: trailing
+        bytes, truncated streams, and unused input are invalid. Decompression
+        must produce exactly `uncompressed_size` bytes.
+
+Compressed records can be used even when the encoded stream is larger than the
+source and even for very small files. Entry-flag values other than 0, 1, and 2
+are outside this version of the format.
+
+Physical ordering and byte accounting
+-------------------------------------
+
+Records, names, directory tables, package strings, and compressed streams may
+be placed in any physical order. Their offsets, counts, and sizes are the only
+authoritative boundaries. Content signatures, zlib header searches, filename
+extensions, and alignment guesses must not be used to locate them.
+
+For a canonical container, these regions form an exact partition of the byte
+range `[0, container_size)`:
+
+* the 44-byte fixed header;
+* every reachable 32-byte entry record;
+* every directory's four-byte child count;
+* each NUL-terminated entry name;
+* the two NUL-terminated package strings; and
+* every file's declared compressed stream.
+
+No byte is padding. No byte is unreferenced, and no two regions overlap. A
+reader can and should enforce this partition after recursively visiting all
+roots. This rule rejects hidden suffixes, ambiguous aliases, unexplained gaps,
+and partially understood format variants.
+
+Destination namespaces
+----------------------
+
+Root directory records may name installer variables. The defined variables in
+this installer family are:
+
+    `%DIR_GAME%` or `#DIR_GAME#`
+        The installation directory of the current game package. Because an
+        installer may contain several games, a filesystem extractor can map it
+        to `games/<package_identifier>/` beneath its chosen output directory.
+
+    `%DIR_GP%`
+        The shared GamePlayer installation directory. A filesystem extractor
+        can map it to one shared `GamePlayer/` directory.
+
+    `~Info`
+        Private package metadata consumed by the installer, not an installed
+        payload root. Examples of its role include installation instructions,
+        package descriptions, artwork, and license material. It can be exposed
+        by an explicit include-metadata mode, namespaced by package identifier.
+
+Other root names are literal directory names. Variable expansion supplies a
+destination base only; every descendant filename and subdirectory remains
+unchanged.
+
+Duplicate destinations
+----------------------
+
+Containers are processed in file order. Separate containers can refer to the
+same expanded output path. Installation uses last-write semantics: the later
+record supplies the final bytes and timestamp. Identical earlier data can be
+coalesced. A diagnostic/all-resources extraction can preserve differing
+superseded versions in a separate, container-identified namespace.
+
+Windows time values
+-------------------
+
+The two timestamp fields are unsigned 64-bit Windows FILETIME values: the count
+of 100-nanosecond intervals since 1601-01-01 00:00:00 UTC. A value of zero means
+that no timestamp is supplied. Conversion to a Unix timestamp is:
+
+    unix_seconds = filetime / 10,000,000 - 11,644,473,600
+
+PE resources and optional complete extraction
+---------------------------------------------
+
+The carrier's `.rsrc` content is a normal PE resource directory rather than an
+STGC extension. Its tree consists of IMAGE_RESOURCE_DIRECTORY,
+IMAGE_RESOURCE_DIRECTORY_ENTRY, UTF-16 resource-name strings, and
+IMAGE_RESOURCE_DATA_ENTRY structures, addressed relative to the PE resource
+directory or by RVA as defined by PE/COFF. These resources belong to the
+installer user interface and bootstrap executable; they are not files installed
+from STGC. A complete/diagnostic extraction mode may emit their raw payloads and
+generated structural names separately from installed files.
+
+Recognition and rejection requirements
+--------------------------------------
+
+A strict reader for this format performs all of the following before writing
+output:
+
+1. Validate the PE32 x86 carrier and locate the end of its raw sections.
+2. Validate the optional standard PE certificate table and its alignment.
+3. Require one or more consecutive `stgc_hdr` version-1 containers.
+4. Validate each total size, fixed marker, checksum, string, record, type,
+   directory table, zlib boundary, and expanded size.
+5. Require the exact non-overlapping byte partition described above.
+6. Require the final container to end at EOF or at the zero alignment preceding
+   the PE certificate table.
+7. Validate all output components and destination collisions before writing.
+
+An older structure recognizable by the different eight-byte magic `sstg__hd` is a
+different container format and is outside this specification. A reader limited
+to this document must reject it rather than search for embedded STGC-like data
+or guess compatible fields.

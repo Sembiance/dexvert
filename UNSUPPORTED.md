@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,943)
+# Unsupported File Formats (3,942)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1093,7 +1093,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,765)
+## Other (2,764)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3114,7 +3114,6 @@ Family/Format | Name | Extensions | Notes
 [other/raysMediaData](https://discmaster.textfiles.com/search?format=raysMediaData) | Rays Media data | .mda | 
 [other/rcSimulatorGameData](https://discmaster.textfiles.com/search?format=rcSimulatorGameData) | RC Simulator game data | .par | 
 [other/rdfzGameDataContainer](https://discmaster.textfiles.com/search?format=rdfzGameDataContainer) | RDFZ game data container |  | 
-[other/realTimeFile](https://discmaster.textfiles.com/search?format=realTimeFile) | Real Time File | .rtf | 
 [other/realDRAWProject](https://discmaster.textfiles.com/search?format=realDRAWProject) | Real-DRAW Project | .rdw | 
 [other/realBasicProject](https://discmaster.textfiles.com/search?format=realBasicProject) | RealBasic Project | .rbp | 
 [other/realmsOfTheHauntingSoundEffects](https://discmaster.textfiles.com/search?format=realmsOfTheHauntingSoundEffects) | Realms of the Haunting Sound Effects | .sfx | 

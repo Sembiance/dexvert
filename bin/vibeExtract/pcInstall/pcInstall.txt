@@ -1,0 +1,262 @@
+20/20 SOFTWARE PC-INSTALL 4 CONTAINER FORMAT
+============================================
+
+Status and scope
+----------------
+
+This document specifies the single-file 32-bit PC-Install 4 container and the
+version-2, single-volume PC-Shrink archive stored in it. All integers are
+unsigned little-endian unless stated otherwise. All offsets in the outer
+container are absolute offsets from the beginning of the input file.
+
+The outer file is a PE32 installer bootstrap followed by a Windows PIF object,
+zero or more linked embedded-file records, and a locator trailer. An embedded
+file can either be a file installed verbatim or a PC-Shrink archive whose
+members are installed after decompression.
+
+The format deliberately contains bytes copied from uninitialized fixed-size
+buffers and process data structures. Such bytes are marked "undefined" below.
+They are present and framed, but do not encode persistent information and must
+not be used for identification or interpretation.
+
+
+Outer container
+---------------
+
+The regions, in file order, are:
+
+    PE32 bootstrap
+    Windows PIF object
+    embedded-file record 0, if present
+    [16-byte link + embedded-file record] repeated as needed
+    16-byte final locator trailer
+
+1. PE32 bootstrap
+
+The file begins with an ordinary i386 PE32 image: an MZ header, a PE\0\0
+signature at the offset in MZ field 0x3c, a 0x10b optional-header magic, and a
+section table. Let PE_END be the largest value of
+
+    section.PointerToRawData + section.SizeOfRawData
+
+over all file-backed sections. PE_END is the beginning of the PC-Install
+overlay. Bytes before PE_END belong to the normal Microsoft PE format. They
+include installer code, data, imports, relocations, icons, dialogs, strings,
+and section padding; they have no additional PC-Install container meaning.
+
+2. PIF object and the first-link locator
+
+At PE_END is a Windows Program Information File used to launch the DOS shell.
+Its first fields, as used by the container, are:
+
+    Offset  Size  Meaning
+    0       8     ASCII "[20/20]" followed by NUL: 5b 32 30 2f 32 30 5d 00
+    8       4     FIRST_LINK, or zero when no embedded-file records exist
+    12      ...   Remaining PIF data, interpreted as a Windows PIF object
+
+When FIRST_LINK is nonzero, it points to the 16-byte link immediately before
+embedded-file record 0. That link is also the last 16 bytes of the PIF region,
+so the PIF ends at FIRST_LINK + 16.
+
+When FIRST_LINK is zero, the container has no embedded files. The PIF extends
+through the final locator trailer at end of file. In this case the two locator
+fields in that trailer both equal PE_END + 8.
+
+3. Final locator trailer
+
+The last 16 bytes of every complete container are:
+
+    Offset  Size  Meaning
+    0       8     5b 32 30 2f 32 30 5d 00 ("[20/20]" plus NUL)
+    8       4     PE_END + 8, the location of the FIRST_LINK field
+    12      4     LAST_LINK, the link immediately before the last record;
+                  PE_END + 8 when there are no records
+
+The trailer is mandatory. A missing trailer makes record completeness
+unknowable and means that the single-file container is truncated or invalid.
+
+4. Embedded-file links and records
+
+Every record is immediately preceded by a 16-byte link:
+
+    Offset  Size  Meaning
+    0       4     Absolute offset of the next link; zero on the last link
+    4       12    Undefined transient process-state bytes
+
+The first link is at FIRST_LINK. Each nonzero next-link value must equal the
+first byte after the current record's data. LAST_LINK from the final trailer
+must locate the last link, its next-link value must be zero, and the last
+record's data must end exactly where the final locator trailer begins. These
+rules account for every inter-record byte without scanning for signatures.
+
+The record beginning 16 bytes after its link is:
+
+    Offset  Size       Meaning
+    0       4          DATA_SIZE
+    4       256        CP437 filename buffer, NUL-terminated
+    260     DATA_SIZE  Embedded file bytes
+
+Only bytes through the filename's first NUL are meaningful. Remaining bytes
+in the 256-byte filename buffer are undefined allocator residue and need not be
+zero. DATA_SIZE frames the data exactly.
+
+Record 0 is the PC-Install control script. The builder can append a second,
+byte-identical copy of that same name and data as its last record. Control
+scripts are installer metadata, not installed payloads. Other records are
+installed verbatim unless their complete data is a PC-Shrink archive as
+specified below. PC-Shrink archive records are containers; their decompressed
+members, rather than the .SHR container itself, are installed.
+
+
+PC-Shrink version-2 single-volume archive
+-----------------------------------------
+
+All offsets in this section are relative to the first byte of an embedded
+file's DATA field.
+
+Archive header (58 bytes):
+
+    Offset  Size  Value or meaning
+    0       14    Zero
+    14      2     0x0074, version-2 signature
+    16      2     MEMBER_COUNT
+    18      2     0x0074, single-volume marker
+    20      38    Zero
+
+A marker of 0x0075 denotes a multipart archive. Its companion volumes are not
+inside a single-file container and are outside this specification.
+
+Exactly MEMBER_COUNT members follow consecutively. There is no central
+directory and no byte may remain after the last member.
+
+Member header (168 bytes):
+
+    Offset  Size  Meaning
+    0       128   CP437 path buffer, NUL-terminated
+    128     1     DOS attributes
+    129     7     Zero
+    136     4     COMPRESSED_SIZE
+    140     4     Extended DOS date: DOS date in low 16 bits, high 16 zero
+    144     4     Extended DOS time: DOS time in low 16 bits, high 16 zero
+    148     20    Zero
+    168     ...   COMPRESSED_SIZE bytes of member data
+
+Only the path bytes through the first NUL are meaningful. The rest of the
+128-byte path buffer is undefined fixed-buffer residue and need not be zero.
+Backslash and slash are path separators. Paths are relative to the extraction
+root.
+
+Observed DOS attribute meanings are the standard bits 0x01 read-only, 0x02
+hidden, 0x04 system, 0x08 volume, 0x10 directory, and 0x20 archive, plus 0x80
+used by PC-Shrink for a normal file. Bit 0x40 is reserved. A directory must
+have COMPRESSED_SIZE zero. A non-directory with COMPRESSED_SIZE zero is an
+empty file. Other member data is one complete PKWARE Data Compression Library
+(DCL) implode stream.
+
+The DOS date fields are:
+
+    bits 15..9  years since 1980
+    bits 8..5   month, 1 through 12
+    bits 4..0   day, 1 through 31
+
+The DOS time fields are:
+
+    bits 15..11 hour, 0 through 23
+    bits 10..5  minute, 0 through 59
+    bits 4..0   seconds divided by two
+
+
+PKWARE DCL implode stream
+-------------------------
+
+This is PKWARE Data Compression Library implode, not ZIP method 6. Bits are
+read least-significant bit first within each byte.
+
+The first byte is LITERAL_MODE: 0 means literal bytes are stored as eight raw
+bits; 1 means literals use the fixed literal Huffman code. The second byte is
+DICT_BITS and must be 4, 5, or 6. Its dictionary size is 2^(DICT_BITS + 6), or
+1024, 2048, or 4096 bytes.
+
+The rest is a sequence of tokens. A one-bit token flag is 0 for a literal and
+1 for a length/distance pair.
+
+For a literal, read either eight raw bits or one symbol from the fixed literal
+code, according to LITERAL_MODE, and append that byte.
+
+For a pair, decode a symbol 0..15 with the fixed length code. Add the indicated
+number of raw extra bits to its base:
+
+    Symbol:  0  1  2  3  4  5  6  7   8   9  10  11  12  13  14  15
+    Base:    3  2  4  5  6  7  8  9  10  12  16  24  40  72 136 264
+    Extra:   0  0  0  0  0  0  0  0   1   2   3   4   5   6   7   8
+
+A resulting length of 519 is the end marker. Otherwise, decode a symbol 0..63
+with the fixed distance code. Let LOW_BITS be 2 when length is 2, otherwise
+DICT_BITS. The backward distance is:
+
+    (distance_symbol << LOW_BITS) + read_bits(LOW_BITS) + 1
+
+Copy length bytes forward from that distance behind the output position.
+Overlapping copies are allowed. A distance before the output beginning is
+invalid. The end marker must occur within COMPRESSED_SIZE, no unused whole byte
+may follow it, and any unused high padding bits in its last byte are zero.
+
+The three fixed Huffman codes are canonical codes encoded in reversed bit
+order. Code lengths are expanded from these repeat arrays. For each array byte,
+repeat its low nibble (high nibble + 1) times:
+
+Literal symbols 0..255:
+
+    11 124 8 7 28 7 188 13 76 4 10 8 12 10 12 10 8 23 8 9 7 6 7 8 7 6
+    55 8 23 24 12 11 7 9 11 12 6 7 22 5 7 24 6 11 9 6 7 22 7 11 38 7
+    9 8 25 11 8 11 9 12 8 12 5 38 5 38 5 11 7 5 6 21 6 10 53 8 7 24
+    10 27 44 253 253 253 252 252 252 13 12 45 12 45 12 61 12 45 44 173
+
+Length symbols 0..15:
+
+    2 35 36 53 38 23
+
+Distance symbols 0..63:
+
+    2 20 53 230 247 151 248
+
+For canonical decoding, count symbols of each length. Starting with length 1,
+read stream bits one at a time, invert each bit, and build a most-significant-
+bit-first code. Symbols are ordered first by code length and then by symbol
+number. The first code at the shortest length is all ones in the stored stream;
+subsequent equal-length stored codes decrement, which is why decoder bits are
+inverted.
+
+
+Validation and extraction behavior
+----------------------------------
+
+A conforming parser validates the PE bounds, both PC-Install magic values,
+all absolute locators, every size and link, all required zero/reserved fields,
+DOS timestamps, archive member count, exact archive termination, the complete
+DCL stream, and safe relative output paths before writing any output.
+
+Normal extraction emits only directly installed outer records and decompressed
+PC-Shrink file members. It does not emit the PE bootstrap, PIF, control script,
+duplicate control script, link bytes, archive containers, or generated
+manifests. A diagnostic "all" mode may emit those items separately.
+
+
+Known format-family boundaries
+------------------------------
+
+This specification does not cover the older PC-Shrink version-1 header or the
+0x0075 multipart form, because they require different record layouts or
+external volume files. A single-file extractor must reject those forms rather
+than scan heuristically. It also cannot recover a container whose mandatory
+final locator trailer or framed record data is missing; the correct next step
+for such an input is to obtain an untruncated copy (and, for multipart data, all
+companion volumes) before extraction.
+
+
+Implementation note
+-------------------
+
+The DCL decoding description and fixed tables agree with Mark Adler's blast.c
+(zlib contrib/blast), Copyright (C) 2003, 2012, 2013 Mark Adler. The extractor
+contains an attributed Python adaptation under blast.c's permissive license.

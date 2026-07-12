@@ -1,0 +1,241 @@
+CD-i Real Time File Sector Stream Format
+========================================
+
+Overview
+--------
+
+A CD-i Real Time File (RTF) is a sequential stream of CD-ROM XA / CD-i Mode 2
+sectors intended for 75-sector-per-second real-time playback. Sectors carry a
+duplicated subheader that identifies the logical file number, channel number,
+sector type, form, record boundaries, and payload coding. Real-time image data is
+stored as one or more Video Data Sequences (VDSQs), each beginning at a sector
+boundary and occupying a whole number of sectors.
+
+Two byte serializations are used by extracted RTF data:
+
+* Raw Mode 2 sector stream: 2352 bytes per sector. Each sector includes the
+  12-byte sync pattern, 3-byte MSF address, 1-byte mode, 8-byte subheader, user
+  data, and integrity fields.
+* Stripped Mode 2 sector-data stream: 2336 bytes per sector. Each sector starts
+  with the 8-byte subheader and omits the 16-byte sync/MSF/mode prefix.
+
+Both serializations carry the same subheader, user data, EDC, and ECC bytes. The
+only difference is whether the raw 16-byte sector prefix is present.
+
+Raw 2352-Byte Sector Layout
+---------------------------
+
+Offset  Size  Description
+0       12    Sync pattern: 00 FF FF FF FF FF FF FF FF FF FF 00
+12      1     Minute address, BCD
+13      1     Second address, BCD
+14      1     Frame address, BCD, 0..74
+15      1     Mode, always 02 for CD-i Mode 2
+16      8     CD-i subheader, stored as two identical 4-byte copies
+24      var   User data
+...     4     EDC, little-endian CD-ROM EDC
+...     var   Form-dependent ECC bytes, if present
+
+Stripped 2336-Byte Sector Layout
+--------------------------------
+
+Offset  Size  Description
+0       8     CD-i subheader, stored as two identical 4-byte copies
+8       var   User data
+...     4     EDC, little-endian CD-ROM EDC
+...     var   Form-dependent ECC bytes, if present
+
+Subheader
+---------
+
+The subheader is 8 bytes. Bytes 0..3 and 4..7 must be identical.
+
+Byte  Name                Description
+0     File number         Logical file number
+1     Channel number      Logical channel within the file
+2     Submode             Bit flags described below
+3     Coding information  Type-specific coding byte
+4     File number         Duplicate of byte 0
+5     Channel number      Duplicate of byte 1
+6     Submode             Duplicate of byte 2
+7     Coding information  Duplicate of byte 3
+
+Submode byte bits:
+
+Bit  Mask  Name       Meaning
+7    80    EOF        Last sector of the file
+6    40    RT         Real-time sector
+5    20    FORM2      0 = Form 1, 1 = Form 2
+4    10    TRIGGER    Playback synchronization trigger
+3    08    DATA       Program/data sector; must be Form 1
+2    04    AUDIO      ADPCM audio sector; must be Form 2
+1    02    VIDEO      Video sector
+0    01    EOR        Last sector of a logical real-time record
+
+Only one of DATA, AUDIO, or VIDEO may be set in a non-empty sector.
+
+Forms and Integrity Fields
+--------------------------
+
+Form 1 sectors contain 2048 bytes of user data. The 4-byte EDC follows the user
+data and is followed by 276 bytes of ECC, for a total post-subheader length of
+2328 bytes.
+
+Form 2 sectors contain 2324 bytes of user data followed by a 4-byte EDC. Some
+Form 2 producers write a zero EDC instead of the computed value; this is an
+allowed extraction case because the byte is still accounted for as the Form 2 EDC
+field.
+
+The EDC is the standard CD-ROM EDC over the subheader and user-data bytes. For
+raw sectors this is the byte range beginning at raw offset 16 and ending before the
+EDC field. For stripped sectors it begins at stripped offset 0 and ending before the
+EDC field. The EDC is stored little-endian.
+
+Video Coding Information Byte
+-----------------------------
+
+For VIDEO sectors, the coding information byte is bit-encoded:
+
+Bit  Mask  Name   Meaning
+7    80    ASCF   0 = Green Book coding, 1 = application-specific coding
+6    40    EOLF   Even/odd line split flag for error concealment
+5    20    RES1   Resolution bit 1
+4    10    RES0   Resolution bit 0
+3..0 0F    CODE   Pixel coding method
+
+Resolution codes:
+
+Code  Meaning
+0     Normal resolution
+1     Double resolution
+2     Reserved
+3     High resolution
+
+Pixel coding codes:
+
+Code  Name
+0     CLUT4
+1     CLUT7
+2     CLUT8
+3     RL3
+4     RL7
+5     DYUV
+6     RGB555 lower bytes
+7     RGB555 upper bytes
+8     QHY
+9-F   Reserved
+
+Video Data Sequences
+--------------------
+
+A VDSQ starts at the beginning of a video sector and occupies an integral number
+of video sectors. Video data elements inside a VDSQ are packed without gaps. The
+unused tail of the final sector, if any, is zero-filled padding.
+
+One real-time record can contain one VDSQ or several consecutive VDSQs. A new
+VDSQ is started when the sector stream changes away from the current video run,
+changes video coding/file/channel, or reaches EOR/EOF.
+
+Normal-resolution full-screen image dimensions are:
+
+Format              Dimensions
+625-line/PAL        384 x 280
+525-line TV/NTSC    384 x 240
+525-line monitor    360 x 240
+
+The sector stream itself does not contain arbitrary partial-update width/height
+metadata; that is normally supplied by the application and its play/display control
+state. A standalone extractor can only decode partial updates whose dimensions are
+defined by the extraction profile. The implemented profile treats normal-resolution
+partial updates as full-width 384-pixel rows followed by zero padding in the final
+sector.
+
+Palette Data Blocks
+-------------------
+
+Program DATA Form 1 sectors can carry palette blocks used by subsequent CLUT
+video sectors. The palette block format is:
+
+Offset  Size  Description
+0       2     First CLUT index, big-endian
+2       2     Entry count, big-endian
+4       3*n   RGB888 entries, in index order
+...     var   Zero fill through the 2048-byte Form 1 user-data area
+
+The parsed palette is expanded to 256 RGB888 entries. Entries outside the supplied
+range default to black.
+
+CLUT7 and CLUT8 Decoding
+------------------------
+
+CLUT7 and CLUT8 video data use one byte per pixel in normal resolution.
+
+For CLUT7, bit 7 of each pixel byte must be zero and bits 6..0 index the active
+palette. For CLUT8, the whole byte indexes the active palette. Pixels are ordered
+left to right, then top to bottom. Rows are contiguous; there is no row padding
+inside the image data.
+
+DYUV Decoding
+-------------
+
+DYUV stores two pixels in two bytes:
+
+Byte 0 high nibble: U delta code for the even pixel pair position
+Byte 0 low nibble:  Y delta code for the even pixel
+Byte 1 high nibble: V delta code for the even pixel pair position
+Byte 1 low nibble:  Y delta code for the odd pixel
+
+The 4-bit delta-code inverse table is:
+
+Code:   0  1  2  3   4   5   6   7    8    9   10   11   12   13   14   15
+Delta:  0  1  4  9  16  27  44  79  128  177  212  229  240  247  252  255
+
+All component additions are modulo 256. Each line starts with absolute values
+Y=16, U=128, V=128 for the supported pure-data still image profile.
+
+For each pair:
+
+1. Decode the even pixel Y from the previous Y plus byte 0 low-nibble delta.
+2. Decode the odd pixel Y from the even Y plus byte 1 low-nibble delta.
+3. Decode the pair U from the previous U plus byte 0 high-nibble delta.
+4. Decode the pair V from the previous V plus byte 1 high-nibble delta.
+5. The even pixel uses the decoded pair U/V.
+6. The odd pixel uses a rounded average of this pair U/V and the next pair U/V.
+   At the end of the row, it uses the current pair U/V.
+
+The RGB conversion used for extraction is the CD-i decoder integer form:
+
+B = Y + floor(444 * (U - 128) / 256)
+G = Y - floor(86 * (U - 128) / 256) - floor(179 * (V - 128) / 256)
+R = Y + floor(351 * (V - 128) / 256)
+
+RGB values are clamped to 0..255.
+
+Extractor Support
+-----------------
+
+The extractor implements and validates:
+
+* raw 2352-byte and stripped 2336-byte sector streams
+* duplicated subheaders
+* consecutive raw MSF addresses
+* EOF on the final sector and EOR on the final real-time record
+* Form 1 and Form 2 byte accounting
+* Form 1 EDC validation
+* Form 2 EDC validation when the stored EDC is nonzero
+* Form 1 palette data blocks
+* normal-resolution CLUT7, CLUT8, and DYUV video images
+* zero padding in the final VDSQ sector
+* rejection of empty/message-only sector streams with no extractable resources
+* rejection of blank single-byte inferred partial-update payloads
+
+By default the extractor writes one PNG for each decoded image, one PNG swatch
+sheet for each palette block, and a manifest.json file. The `--all` option also
+writes byte-for-byte `.bin` sidecars for each VDSQ payload, decoded image byte
+range, and final-sector padding range.
+
+The extractor fails before writing output for unsupported inputs. Unsupported
+payload classes include ADPCM audio, application-specific video coding, split
+even/odd-line VDSQs, RGB555, CLUT3/CLUT4, RL3/RL7, QHY, arbitrary program
+data records, and partial-update dimensions not defined by the standalone
+extraction profile.

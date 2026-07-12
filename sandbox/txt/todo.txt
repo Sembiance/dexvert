@@ -9,34 +9,47 @@
 | TOP Priority |
 \--------------/
 * ANSI files (and other ANSI-like files, ICE, etc) are just treated as "images" in terms of fetching content text and just use OCR.
-  But that OCR just isn't very reliable, infact you can see that in pp/phase/phase.js with the TEXT_IMAGE_FORMATS exceptions
+  But that OCR just isn't very reliable, infact you can see that in pp/phase/phase#.js with the TEXT_IMAGE_FORMATS exceptions
   Using TEXT_IMAGE_FORMATS as a list of formats to do the following with is a good starting point.
-  So on the dexvert side, ideally as some sort of "meta" provider, the format converters (ansilove, etc) could hopefully output the raw .txt
+  On the dexvert side, as a "meta" provider, the format converters (ansilove, deark, etc) could hopefully output the raw .txt without control codes
   Then I could throw that into a meta field like contentText : "" or something
-  Then pp could pick that up, use that as the text INSTEAD OF the OCR, then delete the contentText key from meta (since it might be very big)
-  Make sure to remove the TEXT_IMAGE_FORMATS custom handling in pp/phase/phase4.js
+  Then pp could pick that up, use that as the text INSTEAD OF the OCR, then DELETE the value/key from meta (since it might be very big) (maybe not delete?)
+  Make sure to remove the TEXT_IMAGE_FORMATS custom handling in pp/phase/phase4.js (and other phases?)
   For discmaster reprocessing, ensure you only re-process things that have a height>=1500, because smaller screens OCR handles "well enough"
   So to pick up this one for instance: https://discmaster.textfiles.com/view/53/YPA.ISO/other_goodies/dup_stuff/dup_mar.lha/Dark_Unicorn_Dispatch/DUP_MAR.ANSI
   Use something like for each format type: https://discmaster.textfiles.com/search?format=ans&heightMin=1500
+
 
 /-------------\
 | Vibe Viable |
 \-------------/
 >>> wip
-* These appear to be sound files? Lots of different extensions....
-  https://discmaster.textfiles.com/search?detection=4d48574b%3F%3F%3F%3F%3F%3F%3F%3F5741564544617461
+* Use selectiveReprocess with: dra selectiveReprocess.js --reset --agent=installerFinder "https://discmaster.textfiles.com/search?q=setup.exe&format=exe&dedup=dedup"
+  Then tar/gz it on discmaster2, copy it down to Assorted and vibe-init for: setupSpecialist
+  See: test/sample/executable/exe/SeTUp.eXe
 
-* Microsoft Encarta Yearbook extractor: https://discmaster.textfiles.com/search?q=%E2%80%9C98-028.txt%E2%80%9D&qfields=name&qfields=t
-  See sandbox/wip/encarta.png
+* See if I can find sandbox/wip/encarta.png in: https://discmaster.textfiles.com/admin/item?itemid=46485
+	https://discmaster.textfiles.com/search?q=%E2%80%9C98-028.txt%E2%80%9D&qfields=name&qfields=t
+  If not, look at the encarta files and see about vibe coding an extractor
 
-* Add support for compressed folio infobases: https://discmaster.textfiles.com/view/10883/Front%20Page%20News%20Plus%20Business%20(April%201%201990%20-%20March%2031%201991)%20(Buckmaster)%20(Wayzata)%20(1991).iso/mac/fpn91q1.kdt
+* Installer: CreateInstall
 <<<
 
-* Search dexvert for "unsupported" in src/format/<checkEachHere>/
-  Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
-  NOTE: If codex won't "fully complete" a tricky format, use /goal
-  Families remaining:
-	font
+* Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
+  NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess
+  Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
+  Should probably come up with better magic/detection of each installer type and then make a separate format/unpacker for each
+  Each one should have this included: metaProvider = ["winedump", "exiftool"];
+  Peruse exe.js for installers:
+	* "Wise Installer executable", /^Installer: Wise Installer$/
+		https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
+		https://discmaster.textfiles.com/view/35008/HerculesXenaVol1.iso/pc/INSTALLERS/INSTALL%20VIEWER%20AND%20CARDS.EXE?details
+	  After it's supported and reprocessed, can reply to this message on discord: https://discord.com/channels/350407629849493504/1033065501984817252/1391987846856048700
+	* "Installer: Vise"		(not will need somethign other than 'unvise' maybe 'unvisewin')	https://discmaster.textfiles.com/search?extension=exe&format=installerVISE
+	* "InstallShield setup"  (such as these (note currently only showing 30M plus ones, lots more) https://discmaster.textfiles.com/search?extension=exe&format=exe&sizeMin=30m&detection=%22InstallShield+setup%22)
+	* All the other The various exe.js installer specific magics
+	* After all reprocessed, search for exe's like 10M or more, or search for "setup.exe" or "install.exe"
+	  See if you can find magic, or maybe it has a version/text file/image that is common amongst other installers of the same type
 
 * Improve font handling. Have it so it must always produce either a bitmap or vector font file and then discmaster can make a thumbnail of that in injest step and maybe add a slightly more robust (showing all chars) view-font page
   I could in theory "split" apart images generated by things like recoil2png, deark and imagemagick into something I can process into a bitmap font file
@@ -45,26 +58,8 @@
   Of course then re-process ALL FONTS on discmaster
   vibe code this? first ask about different formats I may want to convert "into" and settle on 1 bitmap, 1 vector
   Can give it code to existing converters to 'learn' about particular formats
-
-* Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
-  Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
-  Should probably come up with better magic/detection of each installer type and then make a separate format/unpacker for each
-  Peruse exe.js for installers:
-	* "Wise Installer executable", /^Installer: Wise Installer$/
-		https://discmaster.textfiles.com/view/35001/cyberaction.iso/DATA/INSTALLS/WIN/CYBERACTION%20INSTALL/Install_Viewer.exe?details
-		https://discmaster.textfiles.com/view/35008/HerculesXenaVol1.iso/pc/INSTALLERS/INSTALL%20VIEWER%20AND%20CARDS.EXE?details
-	  After it's supported and reprocessed, can reply to this message on discord: https://discord.com/channels/350407629849493504/1033065501984817252/1391987846856048700
-	* "Installer: Vise"		(not will need somethign other than 'unvise' maybe 'unvisewin')	https://discmaster.textfiles.com/search?extension=exe&format=installerVISE
-	* "InstallShield setup"  (such as these (note currently only showing 30M plus ones, lots more) https://discmaster.textfiles.com/search?extension=exe&format=exe&sizeMin=30m&detection=%22InstallShield+setup%22)
-	* "Installer: InstallUs"	https://discmaster.textfiles.com/view/39541/c64classix.iso/setup.exe
-	* "Installer: Setup-Specialist"		test/sample/executable/exe/SeTUp.eXe
-	* "Installer: BitRock Installer"	https://discmaster.textfiles.com/search?q=%22BitRock+Installer%22&qfields=name&qfields=t&format=xml
-	  I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
-	  But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/ (can share that as sample code to the viber)
-	* All the 'Softdisk for Windows' SETUP.EXE files are custom unpackers, so would be nice to extract the files from them properly
-	* All the other The various exe.js installer specific magics
-	* After all reprocessed, search for exe's like 10M or more, or search for "setup.exe" or "install.exe"
-	  See if you can find magic, or maybe it has a version/text file/image that is common amongst other installers of the same type
+  Then handle the "unsupported" fonts. Search dexvert for "unsupported" in src/format/font/
+  Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
 
 * Add support for "database" (as a new family), converting various databases into sqlite3 databases
   * First task is to add sqlite3 support to dexvert.

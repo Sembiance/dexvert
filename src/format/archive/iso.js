@@ -256,7 +256,7 @@ export class iso extends Format
 					r.push("deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]");
 
 					// IsoBuster works here, but I prefer my own hfsutils implementation
-					if(!dexState.hasMagics(HFS_MAGICS) && !dexState.hasMagics(_APPLE_DISK_COPY_MAGIC))
+					if(!dexState.hasMagics(HFS_MAGICS) && !dexState.hasMagics(_APPLE_DISK_COPY_MAGIC) && dexState.magicsCount(this.magic)>1)
 						r.push("IsoBuster[matchType:magic]");
 				}
 

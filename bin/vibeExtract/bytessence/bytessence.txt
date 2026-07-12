@@ -1,0 +1,265 @@
+BYTESSENCE INSTALLMAKER EXECUTABLE FORMAT
+=========================================
+
+Scope
+-----
+
+This document specifies the 32-bit self-extracting installer format emitted by
+Bytessence InstallMaker 5.x. Two archive plug-ins occur in this format:
+
+  * BLPUnpack32.dll, whose archive is the Bytessence BLZMA format versions 1
+    and 2; and
+  * ZIPUnpack32.dll, whose archive is an SFX-style ZIP archive.
+
+Integers are unsigned and little-endian unless stated otherwise. Offsets are
+absolute file offsets unless a structure explicitly defines another origin.
+Strings in BLZMA are Windows-1252. The bundled Windows ZIP writer uses
+Windows-1252 when the ZIP UTF-8 flag is clear and UTF-8 when it is set. "DWORD"
+means 4 bytes and "QWORD" means 8 bytes.
+
+
+Top-level executable layout
+---------------------------
+
+  Offset                         Length       Meaning
+  -----------------------------  -----------  -------------------------------
+  0                              PE_extent    Installer PE32 image
+  PE_extent                      20           "$_BIM_CONFIG_START_$"
+  after start marker             12 or 16     Configuration header
+  after configuration header     module_size  Embedded decompression DLL
+  after embedded DLL             20           "$_BIM_CONFIG_END_$"
+  after end marker               to EOF       BLZMA or ZIP archive
+
+There is no alignment padding between these regions. The final archive must
+end at physical EOF. Consequently, a parser can assign every byte to exactly
+one region and must reject trailing data.
+
+The first region is an ordinary i386 PE32 image. PE_extent is the maximum of
+SizeOfHeaders and PointerToRawData + SizeOfRawData for every section. The PE
+headers, section contents, resource tree, inter-section padding covered by raw
+section extents, and PE header padding all have their standard Microsoft PE32
+meaning. Packed embedded modules can legally have raw sections that overlap
+the range described by SizeOfHeaders, so that overlap is not an error.
+
+
+Configuration headers
+---------------------
+
+Two header layouts exist. They have no explicit version tag. They are
+unambiguously distinguished by parsing each candidate and requiring that
+exactly one candidate has all of the following properties:
+
+  * reserved is zero;
+  * the declared module starts with a valid i386 PE32 image;
+  * the embedded PE raw extent equals module_size;
+  * its following bytes are exactly the configuration end marker; and
+  * for layout 2, module_crc32 is correct.
+
+Layout 1 (older):
+
+  Relative offset  Size  Field
+  ---------------  ----  -----------------------------------------------
+  +0                4     requires_elevation (0 or 1)
+  +4                4     module_size
+  +8                4     reserved (zero)
+  +12               ...   embedded decompression DLL
+
+Layout 2 (newer):
+
+  Relative offset  Size  Field
+  ---------------  ----  -----------------------------------------------
+  +0                4     requires_elevation (0 or 1)
+  +4                4     CRC32 of the complete embedded DLL
+  +8                4     module_size
+  +12               4     reserved (zero)
+  +16               ...   embedded decompression DLL
+
+requires_elevation controls whether the installer must elevate. CRC32 is the
+standard reflected CRC-32/ISO-HDLC value (polynomial 0xEDB88320, initial and
+final XOR 0xFFFFFFFF), as returned by zlib.crc32.
+
+The embedded module is a complete UPX-packed PE32 DLL. It is not needed by a
+portable extractor, but it is part of the container and layout 2 protects it
+with CRC32. The ASCII DLL identity stored in it is BLPUnpack32.dll for BLZMA
+and ZIPUnpack32.dll for ZIP.
+
+
+BLZMA archive
+-------------
+
+The BLZMA archive begins immediately after the configuration end marker.
+
+Global header:
+
+  Relative offset  Size  Field
+  ---------------  ----  -----------------------------------------------
+  +0                5     ASCII signature "BLZMA"
+  +5                4     format_version (1 or 2)
+  +9                4     archive_time, Unix time_t seconds
+  +13               8     entry_count
+  +21               8     total_compressed_size
+  +29               8     total_uncompressed_size
+  +37               5     LZMA1 properties shared by every block
+  +42               ...   first entry
+
+total_compressed_size is the sum of entry compressed_size values. It excludes
+all global, entry, and per-block headers. total_uncompressed_size is the sum of
+entry uncompressed_size values. Both sums must match exactly.
+
+The five LZMA properties bytes have the normal LZMA-alone interpretation, but
+the stream does not carry an LZMA-alone header:
+
+  properties[0] = ((pb * 5) + lp) * 9 + lc
+  properties[1..4] = dictionary size as a little-endian DWORD
+
+Valid values satisfy properties[0] < 225 and lc + lp <= 4. Blocks are raw
+LZMA1 range-coded streams using these shared settings.
+
+
+BLZMA entry record
+------------------
+
+Entries immediately follow one another. There is no index or footer.
+
+  Size                         Field
+  ---------------------------  --------------------------------------------
+  4                            filename_byte_count
+  filename_byte_count          filename buffer
+  4                            modification_time
+  4                            Windows file attributes
+  8                            compressed_size
+  8                            uncompressed_size
+  4                            uncompressed CRC32
+  4 in version 1; 1 in v2      encrypted flag
+  variable                     zero or more compressed blocks
+
+The filename buffer is Windows-1252. Its byte count is authoritative. The
+producer normally includes one terminal NUL in the count, but some internal
+records omit it; a reader removes one final NUL when present. An embedded NUL
+or an empty result is invalid. Backslash is the path separator.
+
+modification_time is Unix time_t seconds. The attributes DWORD is the Windows
+GetFileAttributes bit mask (for example FILE_ATTRIBUTE_ARCHIVE 0x20,
+FILE_ATTRIBUTE_NORMAL 0x80, FILE_ATTRIBUTE_COMPRESSED 0x800, and
+FILE_ATTRIBUTE_NOT_CONTENT_INDEXED 0x2000 can be combined). CRC32 is computed
+over exactly uncompressed_size logical bytes.
+
+All supported records have encrypted equal to zero. Version 1 serialized this
+boolean as a DWORD; version 2 reduced it to one byte. A nonzero value denotes
+an encrypted entry and requires an encryption-capable BLP implementation.
+
+A zero-length file has compressed_size = uncompressed_size = CRC32 = 0 and has
+no block header or block data. Otherwise, blocks continue until the sums of
+their two size fields equal the entry totals:
+
+  Size               Field
+  -----------------  ------------------------------------------------------
+  4                  block_compressed_size
+  4                  block_uncompressed_size
+  block_compressed_size  raw LZMA1 bytes
+
+Each size is nonzero. The producer normally splits logical data into blocks of
+at most 1 MiB, although correctness depends on the entry totals rather than
+that implementation detail. Large entries therefore contain multiple blocks.
+
+The raw streams omit an end marker. Decoding is bounded by
+block_uncompressed_size. Range-coder finalization bytes can make an unbounded
+decoder emit one or two additional zero bytes; those bytes are coding padding,
+not logical file data. A strict decoder verifies that any such surplus is zero,
+discards it, and includes every compressed input byte in the block. Concatenate
+the logical portion of all decoded blocks, then check the entry CRC32.
+
+After entry_count records, the next position must be physical EOF. Thus these
+checks account for every BLZMA byte: the fixed global header, each counted
+filename and metadata record, every block header, and every compressed byte.
+
+
+ZIP archive
+-----------
+
+The alternate archive starts with PK 03 04 and uses ordinary ZIP structures:
+
+  * a sequence of local file headers and their compressed byte ranges;
+  * a central-directory entry for every local entry; and
+  * one end-of-central-directory record whose comment ends at physical EOF.
+
+The observed writer stores sizes and CRC32 in each local header and does not
+use data descriptors. It uses method 8 (raw DEFLATE), no encryption, no ZIP64,
+no multi-disk fields, no per-entry extra data, and no comments. Central and
+local filenames, methods, flags, DOS timestamps, CRC32 values, sizes, extras,
+and offsets must agree. The writer's central-directory and local-header offsets
+are absolute executable-file offsets. A tolerant SFX reader may also accept
+otherwise identical offsets relative to the archive start.
+
+For general non-ZIP64 records, bit 11 selects UTF-8 filenames. When that bit is
+clear, this writer stores the current Windows ANSI representation; the profile
+documented here is Windows-1252. This differs from the generic ZIP CP437
+default and is visible when a filename contains a Windows punctuation byte.
+Method 0 is stored data and method 8 is raw DEFLATE. The DOS timestamp is local
+time at two-second resolution. The standard central external-attributes field
+carries file attributes. All lengths in local, central, and end records are
+authoritative, so extras and comments, if present, are still completely bounded
+and accounted for.
+
+
+Installer namespaces and extraction mapping
+-------------------------------------------
+
+An archive combines installer resources with files destined for installation.
+Internal resources use this grammar:
+
+  _$_INSTALLER_Data_<decimal>_$_\<internal path>
+
+There is exactly one decimal internal namespace per installer. Its mandatory
+Config\Script.bim is Windows-1252 INI-style text and declares component IDs in
+the Items value of its [Components] section.
+
+Every installable entry begins with one of those decimal component IDs:
+
+  <component ID>\<installed relative path>
+
+The component ID is a staging namespace, not part of the installed filename.
+An extractor removes that first segment and writes the remainder below the
+chosen output directory. Component sections in Script.bim describe the real
+Windows installation roots through InstallationPath and PathVariable values;
+those machine-dependent roots are intentionally represented by the caller's
+output directory during offline extraction.
+
+By default, an offline extractor emits only these mapped payload entries. An
+"all" mode may additionally expose internal installer resources, the embedded
+decompression DLL, and generated structural metadata. Generated metadata is
+not an installed file and must not appear in default output.
+
+
+Required validation and fail-fast behavior
+------------------------------------------
+
+A strict implementation validates the entire input before touching the output
+directory:
+
+  1. Validate the outer PE32 and derive its exact raw extent.
+  2. Validate both literal configuration markers and the one valid header
+     layout, including embedded PE extent and the layout-2 CRC32.
+  3. Identify the matching embedded plug-in and archive signature.
+  4. Parse every archive structure with bounded integer/range checks.
+  5. Decode every payload, verify every CRC32 and size, verify aggregate totals
+     or ZIP central-directory duplication, and require archive end = EOF.
+  6. Reject absolute paths, dot segments, duplicate case-insensitive Windows
+     paths, undeclared component IDs, and namespace inconsistencies.
+  7. Only after all checks succeed, map component staging paths into output.
+
+This ordering prevents a malformed, truncated, foreign, path-traversing, or
+internally inconsistent executable from producing any output.
+
+
+Implementation profile and explicit limits
+------------------------------------------
+
+The accompanying extractor completely implements the unencrypted BLZMA v1,
+BLZMA v2, and non-ZIP64 ZIP variants described above. It intentionally rejects
+nonzero BLZMA encrypted flags, ZIP encryption/data descriptors, ZIP64, split
+ZIP archives, unknown PE machines, and unknown archive signatures before
+output. Those features do not occur in this InstallMaker executable profile.
+Adding encrypted BLZMA support would require an encrypted fixture and the
+corresponding password/key contract; adding ZIP64 would require the standard
+ZIP64 extra-field and locator structures plus fixtures that exercise them.

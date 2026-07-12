@@ -125,6 +125,9 @@ export default async function phase4({item, itemWebDirPath, taskRunner, xlog})
 
 				// index various metadata from files that may be useful for searching
 				[
+					// executable
+					"Comments", "CompanyName", "FileDescription", "FileVersion", "InternalName", "OriginalFilename", "LegalCopyright", "LegalTrademarks", "ProductName", "ProductVersion",
+
 					// music & video
 					"title",
 

@@ -1,0 +1,254 @@
+RNSETUP EXECUTABLE AND RZT ARCHIVE FORMAT
+Vibe coded by Codex
+
+Status
+======
+
+This document describes the RealNetworks RNSetup executable container, its
+embedded .rzt archive, both observed solid-stream encodings, and the RNSetup
+variant of POSIX ustar used to carry installed files.  Integer fields are
+unsigned unless stated otherwise.  "BE" and "LE" mean big- and little-endian.
+Offsets are relative to the structure being described.
+
+One implementation limitation remains: the Faster version-6 adaptive entropy
+coder is identified and framed below, but its complete probability-model and
+bit-renormalization rules have not been converted into independent pseudocode.
+The extractor executes a fixed, integrity-checked copy of the format's x86
+decoder core in a Unicorn CPU sandbox.  Thus the supplied extractor handles the
+complete Faster byte stream deterministically, but this prose is not yet a
+fully independent bit-level reimplementation specification for that one layer.
+
+
+1. Outer executable
+===================
+
+The outer file is a 32-bit little-endian Microsoft Portable Executable (PE32):
+
+* DOS e_magic is "MZ" and e_lfanew locates "PE\0\0".
+* COFF Machine is 0x014c (Intel 386).
+* OptionalHeader.Magic is 0x010b (PE32).
+* The PE resource data-directory entry identifies the .rsrc tree.
+* The embedded archive is the single resource whose type name is the UTF-16
+  string "BINARY" and whose item name is "ARCHIVE".  The language is normally
+  0x0409, but language is not part of archive identification.
+* IMAGE_RESOURCE_DATA_ENTRY.OffsetToData is an RVA.  Translate it through the
+  section table; Size is the exact RZT byte length; CodePage is informational;
+  Reserved must be zero.
+
+All bytes outside that resource belong to the ordinary PE image: DOS/PE
+headers, section-alignment gaps, executable code, import data, initialized
+data, dialogs, icons, strings, version information, and final FileAlignment
+padding.  A file is physically truncated if any declared section raw range or
+resource range extends past physical EOF.  The archive never starts at a
+guessed file offset and is never located by scanning for a magic value.  When
+the named archive data entry is present but its declared Size crosses physical
+EOF, the available resource prefix can be processed using section 7.
+
+
+2. RZT archive header and directory
+===================================
+
+All multibyte RZT integers are BE.  The exact layout is:
+
+Offset  Size  Meaning
+------  ----  -------
+0       4     ASCII magic ".rzt"
+4       2     Flags/version.  Defined value is 0x0000.
+6       2     Directory span, measured from offset 8 through the end of the
+              final file entry.  Therefore directory_end = 8 + this value.
+8       4     Number of installed-file entries N.
+12      ...   N variable-length file entries.
+
+Each file entry is:
+
+Offset  Size  Meaning
+------  ----  -------
+0       1     Filename byte length L; L must be nonzero.
+1       L     Filename bytes, Windows code page 1252, no terminator.
+1+L     4     Installed file size in bytes, BE.
+
+The byte immediately after entry N must equal directory_end.  Names in this
+table are basenames; installed component subdirectories are carried by the
+ustar prefix fields described below.  The table order is the installed-file
+record order in the solid stream.  It does not include directory-marker
+records.
+
+
+3. Manifest preview and compressed payload
+===========================================
+
+Immediately at directory_end:
+
+Offset  Size  Meaning
+------  ----  -------
+0       4     Preview byte length M, BE.
+4       M     LF-delimited product/component manifest preview.  This may be
+              empty and contains no NUL byte.  It is packaging information,
+              not an installed file.
+4+M     ...   One complete compressed solid payload, extending exactly to the
+              end of the BINARY/ARCHIVE resource.
+
+The first payload bytes select one of two generations.  Selection is by an
+exact stream signature, not a filename or size guess.
+
+
+4. Legacy zlib solid encoding
+=============================
+
+A payload whose first two bytes form a valid RFC 1950 header (compression
+method 8, CINFO no greater than 7, and the BE header divisible by 31) is one
+zlib stream containing RFC 1951 DEFLATE data.  The zlib stream must reach its
+end marker, its Adler-32 must validate, and it must consume every payload byte.
+The uncompressed value is the ustar-record sequence in section 6 with 512-byte
+body padding enabled.
+
+
+5. Faster version-6 solid encoding
+==================================
+
+The payload is one or more concatenated Faster streams.  Each stream starts:
+
+Offset  Size  Meaning
+------  ----  -------
+0       1     0xfe
+1       1     0x49 (ASCII "I")
+2       1     Codec version 0x06
+
+The stream then contains blocks:
+
+Offset  Size  Meaning
+------  ----  -------
+0       1     Block-present byte.  Value 1 introduces a block.  Any other
+              value terminates this Faster stream.
+1       4     Decoded block length B, LE.
+5       ...   If B < 512: exactly B literal bytes.
+              If B >= 512: a 4-byte LE Burrows-Wheeler primary index followed
+              by the Faster adaptive entropy-coded BWT last column.
+
+For a compressed block, the decoder initializes a 256-symbol adaptive model,
+decodes the BWT last column, accumulates the per-symbol occurrence totals, and
+applies the usual LF-mapping inverse BWT beginning at the stored primary index.
+The entropy layer uses a 0x1000-byte input reservoir, adaptive cumulative
+frequency tables rescaled at total 0x2800, and secondary models for the
+move-to-front/rank representation.  Blocks are independent.  The largest
+normal block is approximately one million decoded bytes.
+
+The bytes produced by those blocks have one further RNSetup RLE transform:
+
+* Any byte other than 0xa7 is emitted and becomes PREVIOUS.
+* 0xa7 0x00 emits one literal 0xa7 and makes it PREVIOUS.
+* 0xa7 N, for nonzero N, emits PREVIOUS exactly N additional times.
+
+The concatenated result is the ustar-record sequence in section 6 with body
+padding disabled.  After a Faster terminator, another fe 49 06 starts a fresh
+Faster stream and resets all codec/RLE state.  No bytes may remain after the
+last stream.
+
+
+6. Installed-file record stream (RNSetup ustar)
+================================================
+
+Every record starts with a 512-byte POSIX ustar header.  Numeric fields are
+NUL/space-padded ASCII octal.  The relevant standard fields are:
+
+Offset  Size  Meaning
+------  ----  -------
+0       100   Basename, NUL terminated when shorter than the field.
+100     8     Mode.
+108     8     UID (normally zero).
+116     8     GID (normally zero).
+124     12    Body size.
+136     12    Modification time.
+148     8     Header checksum.
+156     1     Typeflag: ASCII "0" or NUL for a regular record.
+157     100   Link name (empty).
+257     6     "ustar\0".
+263     2     "00".
+265     32    User name (empty).
+297     32    Group name (empty).
+329     8     Device major (zero).
+337     8     Device minor (zero).
+345     155   Component-directory prefix, code page 1252.
+500     12    Zero fill.
+
+The normal ustar checksum rule applies: treat bytes 148..155 as eight ASCII
+spaces and sum all 512 unsigned header bytes.  RNSetup has one deliberate
+exception: for a directory marker (below), it computes the checksum before it
+fills bytes 345..499, so the prefix bytes are omitted from that record's sum.
+
+A regular file record is followed by exactly the size from offset 124.  Its
+basename and size must exactly match the next RZT table entry.  Its output path
+is PREFIX + path separator + BASENAME when PREFIX is nonempty, otherwise just
+BASENAME.
+
+A component-directory marker has basename "rnempty0", size zero, and a
+nonempty prefix.  It consumes no RZT table entry and causes that prefix
+directory to exist.  It is not an installed file.
+
+Body alignment differs by generation:
+
+* zlib generation: zero bytes pad every body to the next 512-byte boundary.
+* Faster generation: no body padding; the next 512-byte header immediately
+  follows the final body byte and can therefore be unaligned in the solid
+  stream.
+
+The final body (plus legacy padding, if applicable) must end exactly at solid
+EOF.  Every RZT entry must be consumed once, in order.  Paths must be relative,
+must not contain dot/dot-dot components or a drive prefix, and must not collide
+case-insensitively.
+
+
+7. Validation, truncation recovery, and byte accounting
+========================================================
+
+A conforming extractor validates, before creating normal complete output:
+
+1. All PE header, section, resource-tree, data-entry, and physical-file ranges.
+2. Exactly one named BINARY/ARCHIVE resource.
+3. RZT magic, zero flags, directory span, entry count, names, sizes, manifest
+   length, and exact resource end.
+4. The selected compressor's integrity/end condition and exact byte use.
+5. Every ustar signature, numeric field, checksum, type, body, and required
+   padding byte.
+6. Exact one-to-one correspondence between ustar files and RZT entries.
+7. Safe, unique output paths and exact solid-stream end.
+
+This accounts for every archive-resource byte.  The remaining executable bytes
+are accounted for by their standard PE structures and alignment ranges.
+
+Physical-EOF recovery is permitted only when all of the following are true:
+
+* The PE headers and resource tree positively identify one BINARY/ARCHIVE item.
+* Its data entry is present and its declared Size extends beyond physical EOF.
+* The complete RZT header, directory, and manifest preview are available and
+  valid, so expected filenames and sizes are known without guessing.
+* The compressor produces a valid prefix before requesting bytes beyond EOF.
+* Each recovered ustar header, table match, path, checksum, and complete file
+  body validates.  A body cut by EOF is discarded.  For legacy ustar, a body
+  completed immediately before EOF is recoverable even if only its zero padding
+  was cut.
+
+Recovery stops at the first incomplete header or body.  It never writes a
+partial file, never searches for later signatures, and records recovered versus
+declared file counts in metadata.  A physically complete resource with a
+checksum, codec, or record error is corruption rather than truncation and still
+fails without partial output.
+
+
+8. Extractor command line
+=========================
+
+    rnSetup.py [--all] <inputFile> <outputDir>
+
+The output directory may already exist.  Ordinary operation writes only
+installed files and required component directories.  --all additionally writes
+.rnsetup/manifest-preview.txt and .rnsetup/metadata.json.  Parsing and complete
+validation of every recovered record happen before outputDir is changed.
+Existing unrelated files are left in place; extracted files of the same path
+are replaced.  Metadata status is "partial" when physical EOF recovery was used
+and includes the cutoff reason and unrecovered table-entry count.
+
+The Faster decoder requires the Python unicorn package.  The embedded x86
+decoder image is SHA-256 checked before execution, receives input only through
+bounded callbacks, writes only to a bounded memory buffer, and has no operating-
+system API access.

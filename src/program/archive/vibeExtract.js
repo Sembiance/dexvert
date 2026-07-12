@@ -8,6 +8,6 @@ export class vibeExtract extends Program
 	flags   = {
 		singleFile : "Extractor just converts to a single file"
 	};
-	args      = async r => [path.join(Program.binPath("vibeExtract"), r.format.formatid, `${r.format.formatid}.py`), r.inFile(), r.flags.singleFile ? await r.outFile("out.ans") : r.outDir()];
+	args      = async r => [path.join(Program.binPath("vibeExtract"), r.format.formatid, `${r.format.formatid}.py`), r.inFile(), r.flags.singleFile ? await r.outFile("outfile") : r.outDir()];
 	renameOut = false;
 }

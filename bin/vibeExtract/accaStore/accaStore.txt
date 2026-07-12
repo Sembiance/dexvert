@@ -1,0 +1,332 @@
+ACCAStore raw payload object format
+===================================
+
+Status and scope
+----------------
+
+An ACCAStore download object is a raw file payload.  It is not, by itself, an
+archive or an installer database.  There is no ACCAStore magic value, wrapper
+header, embedded filename table, target-directory table, compression envelope,
+or per-file checksum table around the object.  Byte 0 of the object is byte 0 of
+the file that ACCAStore stages or installs, and the final object byte is the
+final byte of that file.
+
+The installation recipe is a separate ACCAStore catalog/manifest object.  That
+external recipe supplies facts such as the store object identifier, destination
+path, execution actions, dependencies, and ordering.  None of those facts can
+be reconstructed from a raw object alone.  A raw object has exactly one
+recoverable output: the complete input byte string, using the download
+filename supplied outside the byte stream.
+
+This document specifies the signed Intel PE32 payload profile supported by
+accaStore.py.  The profile is deliberately strict so a malformed or unrelated
+file is rejected before output is touched.  It is a profile of the standard
+Microsoft Portable Executable format, not an ACCA-specific archive layer.
+
+
+Integer and notation conventions
+--------------------------------
+
+All PE integers are unsigned little-endian unless stated otherwise.  u8, u16,
+u32, and u64 mean one-, two-, four-, and eight-byte unsigned integers.  RVA
+means relative virtual address.  File offsets are zero-based.  align(x, n)
+means (x + n - 1) rounded down to a multiple of n; n is a power of two.
+
+An RVA range maps to file bytes through the one section for which:
+
+    VirtualAddress <= RVA
+    RVA + range_size <= VirtualAddress + SizeOfRawData
+
+The file offset is PointerToRawData + RVA - VirtualAddress.  An RVA below
+SizeOfHeaders may map directly to the same file offset.  Virtual zero-fill
+beyond SizeOfRawData has no bytes in the file and cannot back a data directory
+or resource payload in this profile.
+
+
+Top-level byte layout
+---------------------
+
+The complete file has four consecutive regions:
+
+    [0, e_lfanew)                       DOS header and DOS stub
+    [e_lfanew, SizeOfHeaders)           PE headers and header padding
+    [SizeOfHeaders, Security.Offset)    contiguous section raw data
+    [Security.Offset, file_size)        WIN_CERTIFICATE table
+
+There may be no gaps or overlaps among nonempty raw sections.  The first raw
+section starts at SizeOfHeaders, every following raw section starts at the end
+of the previous raw section, and the last ends at Security.Offset.  The
+security directory is terminal and ends exactly at file_size.  Thus every byte
+is classified as a header/stub byte, section payload byte, or certificate-table
+byte.  Overlays and unclassified gaps are rejected.
+
+
+IMAGE_DOS_HEADER and DOS stub
+-----------------------------
+
+The first 64 bytes are IMAGE_DOS_HEADER:
+
+Offset  Size  Field
+0x00    u16   e_magic; must be 0x5A4D (ASCII "MZ")
+0x02    u16   e_cblp; bytes on the last DOS page
+0x04    u16   e_cp; DOS page count
+0x06    u16   e_crlc; relocation count
+0x08    u16   e_cparhdr; header size in paragraphs
+0x0A    u16   e_minalloc; minimum extra paragraphs
+0x0C    u16   e_maxalloc; maximum extra paragraphs
+0x0E    u16   e_ss; initial relative stack segment
+0x10    u16   e_sp; initial stack pointer
+0x12    u16   e_csum; DOS checksum
+0x14    u16   e_ip; initial instruction pointer
+0x16    u16   e_cs; initial relative code segment
+0x18    u16   e_lfarlc; relocation-table offset
+0x1A    u16   e_ovno; overlay number
+0x1C    8     e_res[4]; reserved DOS words
+0x24    u16   e_oemid; OEM identifier
+0x26    u16   e_oeminfo; OEM information
+0x28    20    e_res2[10]; reserved DOS words
+0x3C    u32   e_lfanew; file offset of the PE signature
+
+The bytes from offset 64 to e_lfanew are the DOS-mode stub and its padding.
+They are executable/diagnostic payload for DOS compatibility and are copied
+unchanged.  e_lfanew must be at least 64, four-byte aligned, and leave room for
+the PE signature and COFF header.
+
+
+PE signature and IMAGE_FILE_HEADER
+----------------------------------
+
+At e_lfanew are four bytes 50 45 00 00 ("PE\0\0"), followed by the 20-byte
+IMAGE_FILE_HEADER:
+
+Offset  Size  Field
++0x00   u16   Machine; 0x014C (Intel 386) is required
++0x02   u16   NumberOfSections; range 1 through 96
++0x04   u32   TimeDateStamp; Unix timestamp assigned by the linker
++0x08   u32   PointerToSymbolTable; must be zero
++0x0C   u32   NumberOfSymbols; must be zero
++0x10   u16   SizeOfOptionalHeader
++0x12   u16   Characteristics
+
+Characteristics must contain IMAGE_FILE_EXECUTABLE_IMAGE (0x0002) and
+IMAGE_FILE_32BIT_MACHINE (0x0100).  Other bits preserve the normal PE meanings.
+The object-file symbol and line-number forms are outside this profile.
+
+
+IMAGE_OPTIONAL_HEADER32
+-----------------------
+
+The PE32 optional header immediately follows IMAGE_FILE_HEADER.  Despite its
+historical name, it is required for an executable image.  Its fixed 96-byte
+prefix is:
+
+Offset  Size  Field
++0x00   u16   Magic; must be 0x010B (PE32)
++0x02   u8    MajorLinkerVersion
++0x03   u8    MinorLinkerVersion
++0x04   u32   SizeOfCode
++0x08   u32   SizeOfInitializedData
++0x0C   u32   SizeOfUninitializedData
++0x10   u32   AddressOfEntryPoint; nonzero and file-backed
++0x14   u32   BaseOfCode
++0x18   u32   BaseOfData
++0x1C   u32   ImageBase
++0x20   u32   SectionAlignment; power of two and >= FileAlignment
++0x24   u32   FileAlignment; power of two in [512, 65536]
++0x28   u16   MajorOperatingSystemVersion
++0x2A   u16   MinorOperatingSystemVersion
++0x2C   u16   MajorImageVersion
++0x2E   u16   MinorImageVersion
++0x30   u16   MajorSubsystemVersion
++0x32   u16   MinorSubsystemVersion
++0x34   u32   Win32VersionValue; reserved by PE
++0x38   u32   SizeOfImage
++0x3C   u32   SizeOfHeaders
++0x40   u32   CheckSum
++0x44   u16   Subsystem
++0x46   u16   DllCharacteristics
++0x48   u32   SizeOfStackReserve
++0x4C   u32   SizeOfStackCommit
++0x50   u32   SizeOfHeapReserve
++0x54   u32   SizeOfHeapCommit
++0x58   u32   LoaderFlags; reserved by PE
++0x5C   u32   NumberOfRvaAndSizes
+
+SizeOfHeaders is a multiple of FileAlignment and covers the DOS data, PE
+signature, COFF header, optional header, section table, and header padding.
+SizeOfImage equals the section-aligned end of the highest virtual section.
+NumberOfRvaAndSizes is at least 16, and SizeOfOptionalHeader must contain its
+entire declared directory array.  Additional declared directory entries are
+preserved and validated like ordinary RVA directories.
+
+
+Data directories
+----------------
+
+At optional-header offset 0x60 are NumberOfRvaAndSizes entries.  Each entry is
+u32 VirtualAddress followed by u32 Size.  Both members must be zero for an
+absent directory.  A present non-security directory must map uniquely to
+file-backed header or section bytes.  Standard indices are:
+
+0 Export                 8 Global pointer
+1 Import                 9 Thread-local storage
+2 Resource              10 Load configuration
+3 Exception             11 Bound import
+4 Security              12 Import address table
+5 Base relocation       13 Delay import
+6 Debug                 14 CLR runtime header
+7 Architecture          15 Reserved (must be zero)
+
+The security entry is the sole exception to RVA addressing: its VirtualAddress
+member is an absolute file offset.  This document calls it Security.Offset.
+
+
+IMAGE_SECTION_HEADER
+--------------------
+
+NumberOfSections 40-byte records immediately follow the optional header:
+
+Offset  Size  Field
++0x00   8     Name; printable ASCII, NUL-padded
++0x08   u32   VirtualSize
++0x0C   u32   VirtualAddress
++0x10   u32   SizeOfRawData
++0x14   u32   PointerToRawData
++0x18   u32   PointerToRelocations; must be zero
++0x1C   u32   PointerToLinenumbers; must be zero
++0x20   u16   NumberOfRelocations; must be zero
++0x22   u16   NumberOfLinenumbers; must be zero
++0x24   u32   Characteristics
+
+Each VirtualAddress is SectionAlignment-aligned.  Nonempty raw ranges have
+FileAlignment-aligned offsets and sizes and are wholly inside the file.
+Virtual ranges use max(VirtualSize, SizeOfRawData), rounded to
+SectionAlignment, and may not overlap.  A zero-size raw section represents
+loader-created memory (commonly uninitialized data) and contributes no file
+payload bytes.
+
+Characteristics describes whether section bytes are code, initialized data,
+relocations, resources, readable, writable, executable, discardable, and so
+on, using the standard IMAGE_SCN_* bit definitions.  The raw bytes are the
+program's machine code and application data.  ACCAStore does not transform
+them: extraction copies them as part of the single executable payload.
+
+
+PE checksum
+-----------
+
+CheckSum must be nonzero and correct.  To calculate it, iterate over the whole
+file as little-endian u16 words, using zero for both u16 words occupied by the
+four-byte CheckSum field.  Add each word to an accumulator and fold carry bits
+above bit 15 back into its low 16 bits.  Fold once more after the last word,
+then add the file size and retain the low 32 bits.  A final odd byte is a u16
+whose high byte is zero.
+
+
+Resource directory
+------------------
+
+Data-directory index 2 is required and must contain a nonempty, file-backed
+standard Windows resource tree.  All internal offsets in the tree are relative
+to the start RVA/file offset of this resource directory.
+
+An IMAGE_RESOURCE_DIRECTORY is 16 bytes:
+
+Offset  Size  Field
++0x00   u32   Characteristics
++0x04   u32   TimeDateStamp
++0x08   u16   MajorVersion
++0x0A   u16   MinorVersion
++0x0C   u16   NumberOfNamedEntries
++0x0E   u16   NumberOfIdEntries
+
+It is followed by the declared number of eight-byte entries.  Named entries
+come first and ID entries follow.  Each IMAGE_RESOURCE_DIRECTORY_ENTRY is:
+
+Offset  Size  Field
++0x00   u32   Name
++0x04   u32   OffsetToData
+
+If Name bit 31 is clear, its low 31 bits are the numeric identifier.  If bit 31
+is set, the low 31 bits locate a length-prefixed UTF-16LE string: u16 character
+count followed by exactly that many code units, without a terminator.
+
+If OffsetToData bit 31 is set, the low 31 bits locate another directory.  If it
+is clear, the value locates a 16-byte IMAGE_RESOURCE_DATA_ENTRY:
+
+Offset  Size  Field
++0x00   u32   OffsetToData; RVA of resource payload
++0x04   u32   Size; byte count
++0x08   u32   CodePage
++0x0C   u32   Reserved; must be zero
+
+The tree has exactly three key levels: resource type, resource name/ID, and
+language ID.  Leaves occur after the language level.  Cycles, shared directory
+nodes, duplicate identifiers, wrong named/ID ordering, out-of-range relative
+offsets, invalid UTF-16LE, and non-file-backed payloads are rejected.  Resource
+payloads include icons, bitmaps, forms, strings, manifests, version records,
+and arbitrary application RCDATA.  They are runtime components of the one PE
+file, not separately installed filesystem files, so normal extraction retains
+them inside the byte-identical executable.
+
+
+Authenticode certificate table
+------------------------------
+
+Data-directory index 4 is required.  Security.Offset is eight-byte aligned,
+equals the end of section raw data, and Security.Size reaches exactly EOF.
+The range contains one or more aligned WIN_CERTIFICATE records:
+
+Offset  Size  Field
++0x00   u32   dwLength; record byte count including this header
++0x04   u16   wRevision; must be 0x0200
++0x06   u16   wCertificateType; must be 0x0002 (PKCS SignedData)
++0x08   ...   DER-encoded PKCS#7 SignedData
+
+dwLength is at least eight.  The DER payload begins with a SEQUENCE tag (0x30),
+uses a definite minimally encoded DER length, and fits in dwLength.  Any bytes
+inside dwLength after the DER object and any bytes up to the next eight-byte
+record boundary are zero padding.  Aligned records exactly fill Security.Size.
+The PKCS#7 bytes carry the Authenticode signatures and certificate chain.
+Cryptographic trust/policy verification is separate from structural parsing;
+the complete DER data is preserved byte-for-byte.
+
+
+Extraction algorithm and output contract
+----------------------------------------
+
+1. Read the whole input without creating outputDir.
+2. Validate every structure and coverage rule in this document, including the
+   PE checksum, resource tree, certificate records, and exact EOF.
+3. If any check fails, report an error and make no output-side change.
+4. Create outputDir if needed.  It may already exist.
+5. Atomically write the complete input bytes to outputDir/basename(inputFile).
+6. Set the emitted file readable and writable by owner and group and readable
+   by others (mode 0664 where POSIX modes apply).
+
+The output digest must equal the input digest.  No PE resource is split out,
+renamed, transcoded, decompressed, or synthesized during normal extraction.
+
+If --all is supplied, the extractor additionally writes
+basename.accastore.json.  That generated metadata inventories header values,
+data directories, sections and their hashes, WIN_CERTIFICATE records, every
+resource leaf and hash, and the three complete byte-coverage intervals.  No
+generated metadata file is written without --all.
+
+
+Recognition boundary and wider ACCAStore support
+------------------------------------------------
+
+Because a raw store object has no ACCAStore signature, origin cannot be proven
+from its bytes.  The extractor recognizes the signed PE32 structural profile
+above, not membership in a particular online catalog.  Unsigned PE images,
+PE32+ images, PE files with overlays or gaps, non-PE payloads, and outer
+ACCAStore setup programs are outside this profile and fail fast.
+
+Recovering a multi-file installation layout requires the external ACCAStore
+catalog information that accompanied the raw objects.  A future multi-file
+implementation needs representative catalog .info/XML records or a complete
+offline package containing Setup.EXE plus DataFiles.  The manifest grammar,
+object-to-destination mapping, dependency graph, and actions can then be
+specified and implemented without guessing.  None of that information is
+encoded in the raw payload object described here.

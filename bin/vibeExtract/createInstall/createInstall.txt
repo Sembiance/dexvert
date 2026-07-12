@@ -1,0 +1,497 @@
+# Vibe coded by Codex
+
+CREATEINSTALL SELF-EXTRACTING FILE FORMAT
+=========================================
+
+Scope and conventions
+---------------------
+
+This specification describes the two single-file CreateInstall generations
+implemented by createInstall.py:
+
+  * the classic aWAW generation; and
+  * the GEA 1.0 generation, including its optional embedded CAB transform.
+
+Both are 32-bit Windows PE self-extractors.  Generation selection is made at
+the end of the PE image, never by a filename or a scan for payload magic.
+Unless stated otherwise, integers are unsigned little-endian, offsets and
+sizes are bytes, and all stated bounds are mandatory.
+
+CreateInstall path strings are byte strings in the Windows ANSI code page
+active on the builder machine.  Neither generation records a code-page number
+or locale identifier.  Consequently, an extractor cannot uniquely turn every
+non-ASCII name into Unicode.  createInstall.py uses Latin-1 as a reversible
+byte-to-code-point mapping; --all also records the authoritative original
+bytes as hexadecimal.  CAB records carrying the CAB UTF-8 attribute are the
+exception and are decoded as UTF-8.
+
+
+Common PE envelope and generation dispatch
+------------------------------------------
+
+Validate the DOS MZ header, e_lfanew, PE\0\0 signature, COFF header, optional
+header, section table, and every section's physical range.  The payload begins
+at:
+
+  pe_end = max(section.PointerToRawData + section.SizeOfRawData)
+
+for all sections.  The four bytes at pe_end select the generation:
+
+  61 57 41 57    classic aWAW
+  02 06 0A 04    GEA 1.0 loader/configuration prefix
+
+Any other value is unsupported.  Finding one of these strings at any other
+offset does not identify an archive.
+
+
+PART I: CLASSIC aWAW GENERATION
+===============================
+
+Classic physical layout
+-----------------------
+
+  +---------------------------+
+  | PE32 loader image          |
+  +---------------------------+ pe_end
+  | compressed runtime block  | runtime_size bytes; starts 61 57 41 57
+  +---------------------------+ header_offset
+  | setup/archive header      | 77, 78, or 79 bytes
+  +---------------------------+
+  | configuration byte table  | configuration_size bytes
+  +---------------------------+
+  | installed-record stream   | ends exactly at EOF
+  +---------------------------+
+
+The loader contains exactly one complete x86 instruction sequence:
+
+  57 8D 45 FC 50 68 xx xx xx xx
+
+The final immediate is runtime_size.  In context it is the byte count passed
+to ReadFile for the embedded runtime.  The following revisions are supported:
+
+  runtime_size   setup-header size
+  ------------   -----------------
+       32500             77
+       32600             77
+       32800             77
+       33000             77
+       33200             78
+       33300             79
+       33400             79
+
+The first terminated compressed stream in the runtime block expands to one
+complete PE32 DLL.  The rest of runtime_size is revision padding and belongs
+to the runtime, not to the archive header.
+
+
+Classic setup/archive header
+----------------------------
+
+Let H be the setup-header size from the table above.  The header begins at
+pe_end + runtime_size.
+
+  Offset  Size  Meaning
+  ------  ----  -------
+    0      4    Total physical installer size; must equal EOF.
+    4      4    Sum of all installed-file uncompressed sizes.
+    8      4    Size of the following configuration region.
+   12    H-28   Revision-specific setup-control descriptor.
+   H-16    4    Offset of configuration subtable A, or zero.
+   H-12    4    Offset of configuration subtable B, or zero.
+   H-8     4    Offset of configuration subtable C, or zero.
+   H-4     4    Offset of configuration subtable D, or zero.
+
+The setup-control descriptor contains installer UI selection flags, command
+table counts, optional embedded setup-resource offset/size pairs, and dialog
+color data.  It is consumed by the runtime and has no fields that alter the
+boundaries, names, sizes, timestamps, attributes, or compression method of
+the installed-file records.  H is selected from the runtime revision rather
+than inferred from descriptor contents.
+
+The configuration region is exactly configuration_size bytes and ends in
+NUL.  It is a packed collection of NUL-terminated ANSI installer strings and
+command data.  A nonzero subtable offset is relative to the configuration
+region and identifies a string boundary.  This region controls installer
+behavior and is not itself an installed file.  createInstall.py retains every
+byte in memory and emits it as configuration_hex only with --all.
+
+
+Classic installed-record stream
+-------------------------------
+
+Every record has this 17-byte fixed header:
+
+  Offset  Size  Meaning
+  ------  ----  -------
+    0      1    Record type.
+    1      1    Replacement/install policy for a file record.
+    2      4    Windows file attributes for a file record.
+    6      8    Windows FILETIME, 100-ns ticks since 1601-01-01 UTC.
+   14      1    Storage: zero = compressed; nonzero = stored.
+   15      2    Path-byte count for type 1 or 2.
+
+Record types and following bytes are:
+
+  1  File
+     path-byte-count path bytes, u32 uncompressed size, then content.  Stored
+     content occupies exactly uncompressed-size bytes.  Compressed content is
+     one or more complete codec streams; concatenate their output until the
+     declared file size is reached.
+
+  2  Directory
+     path-byte-count path bytes.  There is no size or content.
+
+  3  Reset current installation root
+     No variable data follows.
+
+  4  End
+     No variable data follows and this fixed header ends exactly at EOF.
+
+The sum of type-1 sizes must equal the expanded-size field in the setup
+header.  Unknown record types, over-expansion, under-expansion, incomplete
+fields, or bytes after the end record invalidate the complete input.
+
+
+Classic adaptive-Huffman/LZ codec
+---------------------------------
+
+Bits are read most-significant-bit first from each source byte.  get_bits(n)
+places the first consumed bit into result bit zero, so a multi-bit integer is
+assembled least-significant-bit first.
+
+There are 629 symbols and 1,257 tree nodes:
+
+  internal nodes             1..628
+  leaf for symbol s          629+s, s=0..628
+  initial children of n      2*n and 2*n+1
+  initial parent of n        floor(n/2)
+  initial weight nodes 2..1257 = 1; root starts at 0
+
+Walk from node 1; bit zero selects its left child and bit one its right child.
+A node above 628 yields symbol node-629.  After each symbol, increment its
+leaf's 16-bit weight, update ancestor sums, and exchange subtrees according to
+the dynamic-Huffman sibling-property update.  Weights wrap as uint16 but tree
+ordering comparisons interpret them as signed int16.  When the root's raw
+uint16 value equals 2000, arithmetic-shift every node weight right by one.
+
+Symbol meanings are:
+
+    0..255  literal byte
+       256  end of this compressed stream
+   257..628 LZ match
+
+For match symbol s:
+
+  group  = floor((s - 257) / 62)
+  length = s - group*62 - 254
+
+  group        0    1    2     3      4       5
+  extra bits   4    6    8    10     12      14
+  base         0   16   80   336   1360    5456
+
+  distance = base[group] + get_bits(extra_bits[group]) + length
+
+Copy length bytes from distance bytes behind the current position in a
+21,904-byte circular, initially zero-filled history.  Overlap is allowed.
+Each terminated stream begins with a fresh tree and history window.
+
+
+PART II: GEA 1.0 GENERATION
+===========================
+
+GEA physical layout
+-------------------
+
+  +----------------------------------+
+  | PE32 GEA loader                  |
+  +----------------------------------+ pe_end
+  | fixed embedded runtime blob      | first_size bytes
+  +----------------------------------+
+  | packed configuration/bytecode    | second_size bytes
+  +----------------------------------+ initial_size / gea_offset
+  | 31-byte GEA header               |
+  | packed group-description stream  |
+  | rotated group payload region     |
+  +----------------------------------+ gea_end
+  | zero alignment (optional)        |
+  | PE WIN_CERTIFICATE table         | optional; extends exactly to EOF
+  +----------------------------------+
+
+This revision is identified both structurally and by its runtime code:
+
+  SHA-256 of the PE .text raw section:
+  7e7c6eaeb55c94bd2af105027b4632bb6f120597685a521259ba8e06c5a1ed1f
+
+  SHA-256 of the first embedded runtime blob:
+  0bf1779ce9a1ef46f5d44d3840d2f9e139bfed275d4a0aca3dd1172eb7c91d5c
+
+These hashes identify a CreateInstall runtime revision, not an individual
+installer.  Rejecting other hashes prevents unknown executable revisions from
+being emulated or silently interpreted as this format.
+
+
+GEA loader constants and preliminary regions
+--------------------------------------------
+
+PE RVA 0x5000 maps to seven consecutive u32 values:
+
+  Offset  Meaning
+  ------  -------
+    0     initial_size: file offset of the GEA archive.
+    4     declared pe_end.
+    8     first_size: fixed embedded-runtime size.
+   12     second_size: packed configuration/bytecode size.
+   16     complement of CRC-32 for [pe_end, initial_size).
+   20     loader flags; exactly 1 in this revision.
+   24     raw file offset corresponding to this RVA.
+
+The mandatory relationships are:
+
+  initial_size = pe_end + first_size + second_size
+  checksum = bitwise_not(crc32(file[pe_end:initial_size])) & 0xffffffff
+
+The second region is one bounded Gentee PPMd-I stream.  Its envelope is:
+
+  Offset  Size  Meaning
+  ------  ----  -------
+    0      4    PPM parameters; see "GEA PPMd-I envelope" below.
+    4/5    4    Packed block-size field (location depends on flag bit 2).
+    8/9    N    Packed or stored bytes; consumes the region exactly.
+
+Its expanded value is Gentee setup configuration/bytecode.  It is runtime
+control data, not an installed file; --all records it as configuration_hex.
+
+
+GEA archive header
+------------------
+
+The archive begins at initial_size with this exact 31-byte header:
+
+  Offset  Size  Meaning
+  ------  ----  -------
+    0      4    47 45 41 00 ("GEA" followed by NUL).
+    4      2    Header size, exactly 31.
+    6      2    GEA version, exactly 1.
+    8      4    Archive flags, exactly 0.
+   12      4    GEA physical size, measured from this header through the
+                rotated group region; excludes signing alignment/certificate.
+   16      3    Revision bytes 01 01 00.
+   19      4    Rotation count for the physical group-data region.
+   23      4    Logical group-data byte count.
+   27      4    End/single-volume sentinel, exactly ffffffff.
+
+At offset 31 is the packed group-description stream.  For this revision its
+parameters are 02 04 14 03, followed at offset 35 by u32 packed_size and then
+exactly packed_size compressed bytes.  Therefore group physical data starts
+at archive offset 39 + packed_size.
+
+Let P be those logical-size bytes as physically stored after the description,
+and R be the rotation field.  R must be no larger than len(P).  Reconstruct:
+
+  logical_group_data = P[R:] + P[:R]
+
+The sum of all group payload sizes in the expanded description must equal
+len(P), so every byte belongs to exactly one group.
+
+If the GEA region does not reach EOF, round gea_end upward to an eight-byte
+boundary.  Intervening bytes must be zero, and the PE Security Directory must
+begin at that boundary and end exactly at EOF.  Each WIN_CERTIFICATE has u32
+length, u16 revision 0x0200, u16 type 1 or 2, certificate bytes, and zero pad
+to eight-byte alignment.  The records must cover the Security Directory
+exactly.
+
+
+Expanded GEA group description
+------------------------------
+
+Descriptors are concatenated with no count or terminator; the expanded
+description size is their outer boundary.  Each group descriptor is:
+
+  Offset  Size  Meaning
+  ------  ----  -------
+    0      2    Total group-descriptor size.
+    2      4    Corresponding group payload size.
+    6      4    Group identifier; nonzero.
+   10      2    File-record count.
+   12      V    Tagged group options, ending with tag ff.
+           ...  Exactly file-record-count file descriptors.
+
+Group identifier 1 is the installed-file group.  Other identifiers contain
+setup UI/resource/auxiliary files: they are fully decompressed and validated,
+but they are not written during normal extraction because the installer does
+not install them as application files.
+
+Group-option tags are:
+
+  ff                 end of option list
+  01 CCCCCCCC        password-protect this group; the u32 value is the Gentee
+                     raw CRC-32 of the installation password
+  02 01 03 SSSSSSSS  transform the group's single logical file as a CAB;
+                     the u32 value is the expected sum of CAB output sizes
+
+Any other group option or more than one CAB input record is unsupported.
+The password CRC verifies a user-supplied password but is not the password
+itself.  Without the original installation password, normal recovery reports
+and skips protected groups while continuing with unprotected groups; --strict
+rejects the archive.  The CRC uses polynomial edb88320, initial register
+ffffffff, and no final complement.
+
+Each file descriptor is:
+
+  Offset  Size  Meaning
+  ------  ----  -------
+    0      2    Total file-descriptor size.
+    2      4    Expanded file size before an optional CAB transform.
+    6      1    Volume number, exactly 1 for this single-file revision.
+    7      4    Windows file attributes.
+   11      8    Windows FILETIME.
+   19      V    Tagged option fields extending exactly to descriptor end.
+
+File-option tags are:
+
+  02 HHHHHHHH LLLLLLLL  u32 version high and u32 version low
+  04 name 00             NUL-terminated ANSI archive path
+
+The name tag is mandatory and unique.  A version tag is optional and unique.
+Unknown, duplicate, truncated, or boundary-crossing tags invalidate the
+archive.
+
+
+GEA group payload blocks and PPMd-I
+----------------------------------
+
+Each group's payload begins with a compression context header:
+
+  * one byte 00 means a stored context; or
+  * four PPM parameter bytes; when parameter byte 3 has bit 2 set, one extra
+    context byte follows, making the header five bytes.
+
+For nonzero parameters, byte 0 is the model allocation in MiB and byte 1 is
+the model order (2 through 16).  Bytes 2 and 3 are Gentee PPMd-I control
+parameters.  Bit 0 of byte 3 requests the lightweight model restart after a
+compressed preceding block; otherwise the next block uses full reinit.
+
+After the context come blocks:
+
+  u32 packed_field
+  (packed_field & 0x7fffffff) payload bytes
+
+High bit 1 means the payload bytes are stored; high bit 0 means Gentee PPMd-I
+compressed.  In a zero context all blocks are stored.  Blocks are assigned in
+descriptor order until each file's exact expanded size is reached.  PPM state
+is maintained or reset between blocks according to the context flags and
+whether the preceding block was stored.  A group may end with exactly four
+zero bytes; no other trailing data is allowed.
+
+Gentee PPMd-I is the PPM variant implemented by the CreateInstall GEA runtime,
+not the incompatible 7-Zip PPMd-H variant.  createInstall.py first uses
+pyppmd-gentee.  For the one reset behavior that the library does not reproduce
+identically, it executes only the two decoder routines from the SHA-256-
+identified loader .text under 32-bit Unicorn.  It does not execute entry-point
+or installer code from the input.  Each block must reproduce a nonzero amount
+without crossing its file's declared size, and each group must consume its
+payload exactly.
+
+The raw description/configuration PPM envelope consists of four parameters,
+an optional fifth context byte when control bit 2 is set, u32 packed_field,
+and exactly the indicated payload.  High bit 1 is stored; otherwise decoding
+must encounter the PPM end marker within a caller-supplied output bound.
+
+
+Embedded CAB transform
+----------------------
+
+The group tag, not an MSCF signature guess, requests CAB expansion.  The
+group first decompresses to exactly one standard Microsoft Cabinet file.  Its
+CFHEADER begins MSCF and supplies cabinet size, CFFILE-table offset, folder
+count, file count, flags, and cabinet index.  The physical CAB size must equal
+the group output.  This revision accepts one self-contained cabinet (index 0)
+and rejects previous/next-cabinet continuation flags.
+
+Each CFFILE record supplies uncompressed size, folder-relative offset, folder
+index, DOS date/time, attributes, and a NUL-terminated name.  Folder indexes
+must refer to an internal CFFOLDER.  Attribute bit 0x80 selects UTF-8 names;
+otherwise the common ANSI rule applies.  The sum of all CFFILE sizes must
+equal the group option's expanded-size value.
+
+CFFOLDER/CFDATA decompression and checksums are validated by cabextract.  The
+supported payloads use Microsoft's LZX cabinet compression.  cabextract is
+first invoked in test mode, then in stdout mode; it never writes CAB paths to
+the destination.  createInstall.py splits that stdout strictly by the parsed
+CFFILE sizes and applies its own safe paths, timestamps, and attributes.
+
+
+Path mapping and overwrite behavior
+===================================
+
+Backslashes are separators.  Surrounding double quotes are removed.  A
+leading "%installpath%\\" is the extraction root and is removed.  Other
+installer-variable roots remain grouped as safe literal subdirectories, with
+percent signs mapped to underscores.  Drive-absolute paths are placed below
+_drive_X, root-relative paths below _root, and each .. component below
+_parent.  No archive path can escape outputDir.
+
+CreateInstall targets case-insensitive Windows filesystems.  If records differ
+only by case, the first spelling is retained and later content overwrites it
+in record order.  Existing output directories are permitted.  Symlink output
+components and file/directory type conflicts are rejected.
+
+Read-only attributes remove write bits after extraction.  Every output remains
+readable by its user and group.  FILETIME is applied where the host permits.
+
+
+Validation, output transaction, and dependencies
+================================================
+
+The extractor first performs a strict parse of the complete input.  All
+installed content and all GEA resource groups are decoded before outputDir is
+created or changed.  An unsupported generation always fails without output.
+
+For a positively identified supported generation that is damaged, normal
+mode performs bounded recovery:
+
+  * classic aWAW recovery writes only complete records preceding the damaged
+    record.  A file that stops midway through decoding is not emitted under
+    its original name;
+  * GEA recovery requires the complete description and rotated group region,
+    then decodes groups independently.  A damaged group or failed CAB is
+    skipped while other complete groups remain recoverable; and
+  * damage before any installed-file boundary may legitimately recover zero
+    files and create an empty output directory.
+
+Partial recovery exits successfully but prints a prominent diagnostic naming
+the strict error and the recovery stop point.  --strict disables recovery and
+restores all-or-nothing rejection.  Parsing/recovery still finishes before
+the write phase, so a later format failure cannot leave a half-written current
+record.  Filesystem errors during the write phase are reported normally.
+
+Normal mode writes only files/directories that the installer installs.  The
+runtime, configuration, setup resources, and signing certificate are not
+installed files.  --all additionally writes createInstall-metadata.json with
+raw configuration bytes, byte-exact archive names, record fields, and parser
+totals.  No generated metadata is written without --all.
+For a partial extraction that JSON also contains partial_extraction,
+recovery_error, recovery_stop, and generation-specific recovery totals.
+
+Classic extraction uses only the Python standard library.  GEA extraction
+requires the non-standard pyppmd-gentee Python package.  The verified decoder
+fallback also requires the non-standard unicorn Python package.  A GEA group
+carrying the explicit CAB transform requires the external cabextract utility.
+No workspace-relative support/data file is required.
+
+
+Completeness boundary
+=====================
+
+The extractor implements every byte and installed-file path of the classic
+runtime revisions and the hash-identified GEA 1.0 single-file revision above,
+including stored/compressed blocks, multi-block files, non-install resource
+validation, nested LZX CABs, data rotation, and optional Authenticode trailers.
+Password-protection descriptors are parsed and bounded, but protected payload
+content cannot be decoded without the original external password.
+
+A different classic runtime size, different GEA loader/runtime hash, different
+GEA header version, multi-volume GEA/CAB continuation, or unknown transform is
+a different unsupported revision and is rejected rather than guessed.  Adding
+one requires a separate, positively identified revision parser; the checks
+above must not be relaxed to make unrelated inputs appear valid.

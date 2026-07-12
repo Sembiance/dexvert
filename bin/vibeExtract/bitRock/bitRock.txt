@@ -1,0 +1,534 @@
+BitRock InstallBuilder Executable File Format
+==============================================
+
+Status and scope
+----------------
+
+This document specifies the 32-bit Windows BitRock InstallBuilder bundle
+family handled by bitRock.py. It covers both distributions stored directly in
+the installer filesystem and distributions stored in an attached CookFS 1.2
+filesystem. All integer encodings, boundaries, compression selectors, indexes,
+integrity values, filename rules, and end records needed to parse and extract
+the bundle are specified below.
+
+The terms MUST, MUST NOT, and SHOULD are normative. Offsets are zero-based.
+Unless an encoding is stated explicitly, a multi-byte integer is unsigned.
+
+
+1. Overall executable layout
+----------------------------
+
+A bundle is one of these two layouts:
+
+    PE32_IMAGE | [TCLKIT_LAUNCHER] | METAKIT | BITROCK_TRAILER |
+        [ALIGNMENT | WIN_CERTIFICATE]
+
+or:
+
+    PE32_IMAGE | [TCLKIT_LAUNCHER] | COOKFS | METAKIT | BITROCK_TRAILER |
+        [ALIGNMENT | WIN_CERTIFICATE]
+
+An older bundle may end immediately after METAKIT and omit BITROCK_TRAILER.
+The delimiters are linked structures, not guessed byte patterns:
+
+* PE32_IMAGE ends at the greatest of SizeOfHeaders, every section's
+  PointerToRawData + SizeOfRawData, and a COFF symbol/string-table range.
+* METAKIT ends at the start of BITROCK_TRAILER, or at end of file when the
+  trailer is omitted.
+* The Metakit footer links backward to the exact METAKIT start.
+* When COOKFS is present, its 16-byte end record ends exactly where METAKIT
+  begins and its page-size table links backward exactly to PE32_IMAGE end.
+* With no COOKFS, METAKIT MUST begin exactly at PE32_IMAGE end.
+  If TCLKIT_LAUNCHER is present, its exact 256 bytes intervene and METAKIT
+  begins immediately after it instead.
+
+No unexplained overlay gap is permitted.
+
+
+1.1 PE32_IMAGE
+
+The executable prefix uses the standard little-endian PE32 layout:
+
+* DOS e_magic is "MZ" and e_lfanew points to "PE\0\0".
+* COFF Machine is 0x014c (Intel 386).
+* OptionalHeader.Magic is 0x010b (PE32).
+* NumberOfSections section records follow the optional header.
+* Each nonempty section's raw interval is
+  [PointerToRawData, PointerToRawData + SizeOfRawData).
+* Optional-header data-directory entry 4, when nonempty, is the PE security
+  directory. Unlike other PE directories, its first value is a file offset.
+* If COFF PointerToSymbolTable is nonzero, the symbol records are 18 bytes
+  each. A little-endian uint32 string-table length follows the last symbol and
+  includes its own four bytes. The PE image extends through that string table.
+  A zero symbol count with a nonempty string table is valid.
+
+All bytes before the computed PE end belong to the native installer runtime:
+DOS header/stub, PE/COFF headers, section data, PE resources, alignment, and
+the COFF tables. A security-directory certificate may be located after the
+BitRock overlay; it is then the suffix described in 1.4 rather than part of the
+PE prefix. BitRock adds no further substructure to PE prefix bytes.
+
+
+1.2 Optional TCLKIT_LAUNCHER
+
+Some Metakit-only starpacks place the standard Tclkit launcher between the PE
+image and the Metakit header. It is exactly 256 bytes. Its first 96 bytes are:
+
+    #!/bin/sh\n
+    # \\\n
+    exec tclkit "$0" ${1+"$@"}\n
+    package require starkit\n
+    starkit::header mk4 -readonly\n
+    \x1a
+
+Here the displayed \n sequences denote single LF bytes, the second line is
+the three bytes "#", space, backslash followed by LF, and \x1a is one SUB
+byte. The remaining 160 bytes are ASCII '#'. No NUL terminator is present.
+The launcher must match all 256 bytes; partial or modified launchers are not
+accepted as padding.
+
+
+1.3 BITROCK_TRAILER
+
+The trailer is the following exact 48 ASCII bytes, with no terminator:
+
+    bitrock-lzma-4.0mFC3acAOJrQinu5aEHu0uH7N5XSQ3Z14
+
+Its offset is the Metakit serialization end. The same text may exist inside
+the executable runtime; only an occurrence after the PE image whose preceding
+Metakit links and following suffix both validate is an end trailer.
+
+
+1.4 Optional appended WIN_CERTIFICATE
+
+A signed suffix after BITROCK_TRAILER is:
+
+    zero_alignment | WIN_CERTIFICATE | zero_alignment
+
+The first zero string aligns WIN_CERTIFICATE to an 8-byte file offset.
+WIN_CERTIFICATE consists of these little-endian fields:
+
+    +0  uint32  dwLength, including this 8-byte header
+    +4  uint16  wRevision = 0x0200
+    +6  uint16  wCertificateType = 0x0002 (PKCS#7 signed data)
+    +8  byte[]  one DER SEQUENCE occupying dwLength - 8 bytes
+
+The whole record is rounded up to an 8-byte boundary with zero bytes. No data
+may follow it. This suffix authenticates the executable and is not a resource
+installed by the bundle.
+
+If PE data-directory entry 4 declares this record, its file offset MUST equal
+the aligned WIN_CERTIFICATE start, its size MUST reach end of file, and those
+values MUST agree with the independently parsed suffix. A zero security entry
+is also permitted for a structurally valid appended certificate.
+
+
+2. Metakit serialization
+------------------------
+
+METAKIT is a new-style, little-endian Metakit database. Its logical layout is:
+
+    HEADER | DATA_AREA | TABLE_OF_CONTENTS | FOOTER
+
+DATA_AREA may contain live item vectors and holes left by database updates.
+Holes have no logical content. Every byte not covered by the header, a live
+item vector, the table of contents, or the footer is such a hole.
+
+
+2.1 Header
+
+The header is eight bytes:
+
+    +0  byte[2]  "JL" (little-endian Metakit marker)
+    +2  uint8    0x1a (valid/new header)
+    +3  uint8    0x00 (new-style header type)
+    +4  uint32BE serialization end offset relative to this header
+
+The last field MUST equal the length from this header through the footer. It
+therefore points at BITROCK_TRAILER, or end of file if that trailer is absent.
+Metakit updates this field for a new commit but leaves older, fully linked
+commit footers in the serialization. Section 2.10 defines the one case in
+which an older footer may be used after physical truncation.
+
+
+2.2 Byte-packed integer (bpInt)
+
+Metakit structural integers use a canonical base-128 encoding. Payload groups
+are most-significant first. Bits 6..0 carry payload and bit 7 is set only on
+the final byte.
+
+    0       -> 80
+    20      -> 94
+    128     -> 01 80
+
+A negative integer is a 00 prefix followed by the encoding of its one's
+complement. Thus -1 is 00 80. Redundant leading groups are forbidden.
+
+
+2.3 Item-vector reference
+
+An item-vector reference is:
+
+    bpInt byte_size
+    if byte_size != 0:
+        bpInt position
+
+position is relative to the Metakit header. A zero size has no position field.
+Ranges MUST remain inside the serialization. Exact reuse of a range is valid;
+partially overlapping live item vectors are invalid.
+
+
+2.4 Adaptive integer vector
+
+An integer column is stored at one fixed width for every row. Allowed widths
+are 0, 1, 2, 4, 8, 16, 32 and 64 bits. Sub-byte values are packed least-
+significant field first in each byte. Widths of 8 or more use little-endian
+two's-complement values. A zero-byte vector means width 0 and all values zero.
+
+Normally width = (vector_byte_size * 8) / row_count and the result must be an
+allowed width. Metakit has a canonical small-vector padding table. Rows select
+a table row and vector bytes select a column:
+
+                    vector bytes
+    rows       1    2    3    4    5    6
+      1        8   16    1   32    2    4
+      2        4    8    1   16    2    -
+      3        2    4    8    1    -   16
+      4        2    4    -    8    1    -
+      5        1    2    4    -    8    -
+      6        1    2    4    -    -    8
+      7        1    2    -    4    -    -
+
+A dash is invalid. Integer file sizes and dates are signed values in storage,
+but valid file sizes are nonnegative.
+
+
+2.5 String and binary column map
+
+A variable-width S or B column has:
+
+    direct_data_ref
+    if direct_data_ref.byte_size != 0:
+        direct_sizes_ref
+    memo_catalog_ref
+
+direct_sizes_ref is an adaptive integer vector with one size per row.
+direct_data is the concatenation of rows having a nonzero direct size. If
+direct_data is empty, direct_sizes_ref is omitted and all direct sizes are
+implicitly zero.
+
+memo_catalog_ref contains repeated records until its declared byte size is
+consumed:
+
+    bpInt rows_to_skip
+    item-vector-reference memo_data
+
+Starting with row zero, add rows_to_skip, assign memo_data to that row, then
+advance one row before processing the next record. A memo position of zero
+means the bytes are inline: all such byte strings follow the catalog vector in
+catalog order. A zero-size memo denotes an empty value.
+
+Rows not supplied by direct data or a memo are empty. S values include one
+trailing NUL in their stored size; remove that NUL and decode the remainder as
+UTF-8. B values are arbitrary bytes and have no terminator.
+
+
+2.6 Subview column map
+
+A subview column is one item-vector reference. The referenced bytes contain a
+subview map for every parent row:
+
+    bpInt 0                 subview marker
+    bpInt row_count
+    if row_count != 0:
+        one column map for each column in the subview schema
+
+
+2.7 Table of contents and fixed BitRock schema
+
+The table of contents is itself the Metakit root walk:
+
+    bpInt 0
+    bpInt schema_byte_length
+    byte[schema_byte_length] schema_utf8
+    bpInt root_row_count
+    root column maps
+
+The schema and root count for this format are exactly:
+
+    dirs[name:S,parent:I,files[name:S,size:I,date:I,contents:B]]
+    root_row_count = 1
+
+The root's sole dirs subview contains directory rows:
+
+    name:S       one UTF-8 path component
+    parent:I     directory-row index, or -1 for the root
+    files:subview
+
+Directory row zero is name "<root>" and parent -1. Every later parent index
+must refer to an earlier row. Each files subview contains:
+
+    name:S       one UTF-8 filename component
+    size:I       uncompressed byte length
+    date:I       Unix modification time, or zero if unspecified
+    contents:B   stored resource bytes
+
+Names are structural path components. Empty names, dot components, dot-dot,
+slashes, backslashes and NULs are invalid.
+
+
+2.8 Footer
+
+The final 16 bytes are two Metakit file marks. All multi-byte fields here are
+big-endian:
+
+    +0   uint8    0x80
+    +1   uint24BE 0 (skip-mark length)
+    +4   uint32BE distance from header to footer
+    +8   uint8    0x80
+    +9   uint24BE table-of-contents byte size
+    +12  uint32BE table-of-contents position relative to header
+
+The distance at +4 MUST equal serialization_length - 16. The range named by
+the second mark MUST be wholly before the footer and parse with no bytes left.
+
+
+2.9 Metakit resource compression
+
+For each files row, compare contents' stored length with size:
+
+* Equal lengths: contents is the literal resource.
+* Different lengths: contents is one complete RFC 1950 zlib stream. Inflate it
+  and require the result length to equal size.
+
+The length field makes this selection unambiguous. In a complete bundle a
+decode failure or length mismatch invalidates the entire bundle; section 2.10
+defines resource-level skipping for an already proven truncated bundle.
+
+
+2.10 Earlier commits and truncated input recovery
+
+Metakit commits are append-only. A later commit updates the header length and
+appends new vectors, a table of contents, and a footer; the preceding commit's
+footer and referenced vectors remain in the byte stream. This permits exact
+recovery when the physical file ends before the header's declared current end.
+
+Truncation recovery is allowed only after the file has been identified by all
+of these structural conditions:
+
+* a valid PE32_IMAGE ends at the computed payload boundary;
+* an exact METAKIT header is either at that boundary (after an optional exact
+  TCLKIT_LAUNCHER) or follows a completely validated COOKFS end record;
+* the header's declared serialization end is beyond physical end of file, or
+  a complete current commit is followed by a nonempty strict prefix of the
+  exact BITROCK_TRAILER or its structurally declared WIN_CERTIFICATE suffix;
+* a complete footer before the cut links exactly back to that METAKIT header;
+* the footer's table of contents parses with the exact BitRock schema and all
+  vectors referenced by that commit remain in bounds.
+
+The newest commit satisfying every condition is the recovered commit. Its
+header length is allowed to be greater than its footer-linked length because
+the former describes the interrupted newer commit. No byte-pattern match by
+itself identifies a bundle, and no guessed file boundary or filename is used.
+
+Every resource wholly referenced by the recovered commit is extracted. A
+resource whose complete stored bytes or compression stream cannot be decoded
+is skipped while other complete resources are retained. A truncated CookFS
+can be recovered only when its end record, size/hash tables, index, and all
+pages used by the recovered filesystem are complete; without those backward
+links there is no unambiguous page boundary and no CookFS file is guessed.
+
+
+3. Attached CookFS 1.2 distribution
+----------------------------------
+
+COOKFS is present only when the 16 bytes immediately before METAKIT end in
+ASCII "CFS0002" and the complete CookFS links validate. It is mounted at the
+UTF-8 path stored in the Metakit root resource named "origindist".
+
+COOKFS layout is:
+
+    PAGE_DATA | PAGE_HASHES | PAGE_SIZES | COMPRESSED_INDEX | END_RECORD
+
+
+3.1 End record and backward location
+
+The 16-byte end record is:
+
+    +0  uint32BE compressed index byte size
+    +4  uint32BE page count
+    +8  uint8    default codec ID
+    +9  byte[7]  "CFS0002"
+
+Supported default codec IDs are 0, 1 and 255. If E is the end-record end,
+I the index size, and N the page count, then:
+
+    PAGE_HASHES offset = E - 16 - I - N*20
+
+PAGE_HASHES has N consecutive 16-byte records. PAGE_SIZES follows with N
+uint32BE stored page sizes. COMPRESSED_INDEX follows with I bytes. Subtracting
+the sum of PAGE_SIZES from PAGE_HASHES offset gives PAGE_DATA start; it MUST
+equal PE32_IMAGE end.
+
+
+3.2 Page and index compression
+
+Every stored page and COMPRESSED_INDEX begins with an explicit codec byte:
+
+    0     remaining bytes are literal
+    1     remaining bytes are a raw RFC 1951 DEFLATE stream (no zlib wrapper)
+    255   remaining bytes are an LZMA-Alone stream
+
+An LZMA-Alone stream contains the standard 13-byte header: one properties byte,
+four little-endian dictionary-size bytes, and an eight-byte little-endian
+uncompressed size, followed by the range-coded LZMA data. The decoder must
+reach its end marker with no error.
+
+Stored pages are concatenated in page-number order. PAGE_SIZES gives their
+exact boundaries, so codec detection never scans for signatures.
+
+
+3.3 Page integrity
+
+Normally PAGE_HASHES entry n is MD5(decoded_page_n). If filesystem-index
+metadata cookfs.pagehash has value "crc32", the 16 bytes are instead:
+
+    +0  uint64BE 0
+    +8  uint32BE decoded page size
+    +12 uint32BE CRC-32/ISO-HDLC of decoded page
+
+Every page is decompressed and checked before extraction.
+
+
+3.4 Filesystem index
+
+After decompression, the index begins with exact ASCII "CFS2.200", followed by
+one recursively encoded root directory. Integer fields are big-endian:
+
+    directory :=
+        uint32 entry_count
+        entry[entry_count]
+
+    entry :=
+        uint8 filename_utf8_byte_count
+        byte[filename_utf8_byte_count] filename_utf8
+        uint8 0
+        uint64 modification_time
+        int32 block_count
+        if block_count == -1:
+            directory
+        else:
+            block[block_count]
+
+    block :=
+        uint32 page_number
+        uint32 offset_in_decoded_page
+        uint32 byte_count
+
+Each file is the concatenation of its block slices. Page numbers and block
+ranges MUST be valid. Empty files have zero blocks or zero-length blocks.
+
+After the root directory is metadata:
+
+    uint32 metadata_count
+    repeat metadata_count times:
+        uint32 byte_count
+        byte[byte_count] key_utf8 | 00 | value_bytes
+
+Keys must be nonempty and unique. No bytes may remain after metadata.
+
+
+4. Logical extraction
+---------------------
+
+The internal virtual filesystem has two classes of content:
+
+* The path named by the UTF-8 root resource "origindist" is the embedded
+  distribution payload. Its conventional value is "dist". Direct bundles
+  store its files as Metakit rows; CookFS bundles mount the CookFS root there.
+* Other top-level Metakit paths are the private InstallBuilder runtime and
+  installer-definition resources. They include the Tcl/Tk libraries, engine
+  modules, user-interface messages and images, wrapper entry points, logging,
+  XML utilities, project.xml, manifest.txt, and boot scripts. These resources
+  execute or describe the installer but are not distribution files copied to
+  the target system.
+
+Normal extraction selects only descendants of origindist and removes that
+leading mount path. Thus "dist/component/path/file" is written as
+"component/path/file" below outputDir. This is analogous to extracting the
+contents of a distribution archive rather than exposing the archive's mount
+directory. A CookFS file is treated identically: its path is already relative
+to the origindist mount and is written directly below outputDir.
+
+The --all option instead materializes the complete Metakit dirs tree at output
+root and places CookFS below origindist. It preserves the internal mount path,
+so the payload remains below "dist" when that is the declared mount. It also
+adds the generated metadata file described in section 6.
+
+The payload is not a simulation of every installation side effect. The
+installer definition can create shortcuts, services, registry values or
+generated files, download data at runtime, conditionally select components,
+and expand destination variables. Such effects have no standalone embedded
+file bytes to extract. Payload subdirectories can therefore remain logical
+component and destination identifiers rather than final host paths.
+
+InstallBuilder splits very large logical files. A base file can be followed in
+the same directory by:
+
+    base_name___bitrockBigFile1
+    base_name___bitrockBigFile2
+    ...
+
+The numbered chunks MUST start at 1 and be contiguous. Append them in numeric
+order to base_name, then omit the artificial chunk names from final output.
+This operation is determined solely by the exact suffix grammar above.
+
+Extracted regular files are mode 0664 and directories mode 0775, ensuring user
+and group readability. Nonzero stored Unix times are applied when the host
+filesystem accepts them.
+
+
+5. Validation, recovery, and failure behavior
+---------------------------------------------
+
+A parser must validate the entire structure before committing output:
+
+* PE bounds, machine type, COFF string table, and any security-directory link;
+* exact overlay adjacency and all forward/backward links;
+* the complete 256-byte Tclkit launcher when present;
+* Metakit magic, footer marks, canonical bpInts, schema, vector widths,
+  vector ranges, row counts, string terminators and complete map consumption;
+* every zlib resource and its declared result size;
+* CookFS boundaries, codecs, every page hash, complete recursive index,
+  metadata, and every file block;
+* exact BitRock trailer and optional certificate suffix;
+* safe structural path components and contiguous big-file chunks.
+
+For a complete input, any violation prevents staged files from being copied to
+the requested output. A file that cannot be structurally identified as this
+BitRock format likewise produces no output.
+
+The sole exception is proven physical truncation under section 2.10. In that
+case the extractor stages every complete resource from the newest recoverable
+commit, reports that the result is partial, and commits that subset. It never
+uses a damaged current table of contents, an incomplete vector, guessed
+offsets, or signature-only carving. Consequently a truncated file with no
+complete recoverable BitRock commit may yield no files even when it contains
+opaque payload bytes.
+
+An existing output directory is allowed; successful complete or partial
+extraction merges into it. Staging occurs before the destination is changed.
+
+
+6. Extractor interface
+----------------------
+
+    python3 bitRock.py [--all] inputFile outputDir
+
+Without --all, only the contents of the origindist payload are written and the
+mount path itself is removed. With --all, the complete internal installer VFS
+is written with origindist preserved, plus __bitrock_metadata__.json. That JSON
+is generated diagnostic metadata (hashes, offsets, counts, codec information
+and Metakit hole ranges). For a partial extraction it also records the
+truncation reason, recovered commit, and skipped resources. It is never
+generated without --all.

@@ -96,6 +96,12 @@ const EXTRA_PACKAGES =
 	// tridServer
 	"dev-python/stringzilla",
 
+	// vibeExtract rnSetup
+	"dev-util/unicorn",
+
+	// vibeExtract createInstall
+	"dev-python/pyppmd-gentee",
+
 	// post processing: specific versions are needed to compile TensorFlow with full AVX2 support as of Feb 2026
 	"=dev-libs/cudnn-9.8.0*",
 	"=dev-util/nvidia-cuda-toolkit-12.8.1*",

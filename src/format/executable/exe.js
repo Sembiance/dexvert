@@ -7,21 +7,27 @@ const _INSTALLER_MAGICS = [
 	"16bit DOS EXE SEZ sfx Zoo archive",
 	"Wise Installer executable", /^Installer: Wise Installer$/,
 
+	// acts as just a zip file and 7z handles it just fine
+	"Installer: CNetX",
+
+	// less than 3 found on discmaster
+	"Installer: Astrum", "Installer: ACCAStore",
+
 	// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
 	"InstallShield setup",
 
 	"Win16 EDI Install Pro executable", "Win16 InstallShield Self-Extracting Executable", "Easy SFX Installer 16-bit DOS executable", "JRchive self-extracting 16bit DOS executable", "aPackage sfx archiver Win32 executable",
 	"Sydex SXD Self eXtraciting Disk image Executable",
 
-	"Installer: Gentee Installer", "Installer: Eschalon Installer", "Installer: AOLSetup", "Installer: Pantaray QSetup", "Installer: STATICSUP", "Installer: O'Setup95", "Installer: Setup Factory", "Installer: Tarma Installer", "Installer: InstallUs",
-	"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "Installer: CSDD's installer", "Installer: RNsetup",
-	"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: Ghost Installer", "Installer: Squirrel Installer",
-	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer", "Installer: Blizzard PrePatch(2.xx)", "Installer: Box Stub", "Installer: WiX Toolset installer", "Installer: BitRock Installer", "Installer: Tarma InstallMate",
-	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: Bytessence Install Maker", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer", "Installer: Actual Installer",
+	"Installer: Gentee Installer", "Installer: Eschalon Installer", "Installer: Pantaray QSetup", "Installer: STATICSUP", "Installer: O'Setup95", "Installer: Setup Factory", "Installer: Tarma Installer",
+	"Installer: LucasArts Update Installer", "Installer: Setup-Specialist", "Installer: Silver Creek Entertainment[zlib]", "Installer: CSDD's installer",
+	"Installer: InstallAnywhere", "Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: Ghost Installer", "Installer: Squirrel Installer",
+	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer", "Installer: Blizzard PrePatch(2.xx)", "Installer: Box Stub", "Installer: WiX Toolset installer", "Installer: Tarma InstallMate",
+	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer", "Installer: Actual Installer",
 	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
-	"Installer: BulletProofSoft installer", "Installer: DeployMaster", "Installer: distutils", "Installer: INTENIUM install system", "Installer: CrypKey", "Installer: CSDD's", "Installer: I-D Media installer", "Installer: ACCAStore",
-	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Astrum", "Installer: Quick Install", "Installer: custom installer with SZDD-archives", "Installer: VMWare Installation Launcher",
-	"Installer: Sax Software installer", "Installer: INTENIUM", "Installer: THEMEPAK", "Installer: Myriad Install", "Installer: CNetX",
+	"Installer: BulletProofSoft installer", "Installer: distutils", "Installer: CrypKey", "Installer: CSDD's", "Installer: I-D Media installer",
+	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Quick Install", "Installer: custom installer with SZDD-archives", "Installer: VMWare Installation Launcher",
+	"Installer: Sax Software installer",
 	
 	/^NSIS$/
 ];

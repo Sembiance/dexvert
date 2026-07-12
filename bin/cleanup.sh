@@ -58,7 +58,7 @@ fi
 rm -f OSL_PIPE*
 rm -f file??????
 fd magick -x rm {} \;
-rm -rf ge-server* Ay_Emul* cxf-tmp* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
+rm -rf ge-server* Ay_Emul* cxf-tmp* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp* folio* .folio*
 rm -f ./*.crash.txt
 rm -f IWS.log UnrealArchiveDecompressed
 rm -rf .vbox-sembiance-ipc system-commandline-sentinel-files gimp* blender* .wine-7777 torchinductor_sembiance jna-sembiance

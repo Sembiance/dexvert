@@ -1,0 +1,362 @@
+Softdisk for Windows Setup executable and continuation-volume format
+====================================================================
+
+Scope and conventions
+---------------------
+
+This document specifies the supported 16-bit Softdisk for Windows Setup
+containers.  They were produced by several related Wise installer loader and
+script generations.  A container is either one SETUP.EXE file or the logical
+concatenation of SETUP.EXE followed immediately by SETUP.W02.  There is no
+separator, header, or padding inserted between volumes.
+
+All multibyte integers are unsigned little-endian.  Script strings are
+NUL-terminated CP1252 strings.  Offsets are zero-based.  Raw-DEFLATE means an
+RFC 1951 stream with neither a zlib nor gzip wrapper.  A stored member in a CRC
+dialect consists of one raw-DEFLATE stream followed by the uint32 CRC32 of the
+inflated bytes.
+
+The extractor accepts an input path naming the first-volume executable.  If
+the script-declared logical size exceeds that file, the first file must equal
+the script's media-capacity field and a file named SETUP.W02 (more generally,
+the input stem plus ".W02") must exist in exactly the same directory.  Name
+matching is case-insensitive.  Exactly one matching regular file is required.
+
+
+Recognition and useful fixed signatures
+----------------------------------------
+
+Every supported first volume has all of these structural properties:
+
+* Bytes 0..1 are "MZ".
+* The uint32 at 0x3C points to an "NE" header.
+* NE target OS is 2, Microsoft Windows.
+* The first NE resident name is exactly "INSTALL".
+* The appended archive begins at the greatest physical end of every declared
+  NE segment and NE resource.  This end is 16-byte aligned.
+
+The supported loader generations are identified by SHA-256 over bytes from
+physical offset zero up to, but not including, the derived archive start:
+
+    3639abb3bcf2196aa4cf89f833353f4b1ceb05bd7574a8afad3cf884cd406008
+    fe4249ceba2bd1fb2352d128f9e5888fc26c7646434b5cd0410cee941ce48775
+    0da10577a6927a5eb25ef2695be00c93d224082a71c90612e7df5ec0eae82ea7
+    3e956ba9cbe66a0006d8da2d8e653f1f3c246bd93244f3c82e5ddbe65785d759
+
+These are loader-generation signatures, not whole-file hashes.  Payloads,
+scripts, and continuation data may vary freely while the loader digest stays
+constant.
+
+For quick identification, the generations currently specified have these
+derived values.  A recognizer should still validate the NE structures and
+loader digest rather than relying on an offset alone.
+
+Generation          NE header   Archive start   Archive header
+------------------  ----------  --------------  --------------
+legacy              0x0080      0x7740          4 bytes
+CRC-v1              0x0400      0x3DC0          0x1E bytes
+CRC-v2              0x0400      0x3E10          0x1E bytes
+CRC-v3              0x0400      0x3C30          0x22 bytes
+
+Thus a simple high-confidence test is "MZ" at 0, "NE" at the uint32 stored at
+0x3C, resident module name "INSTALL", one of the four derived archive starts,
+and the corresponding loader digest.  SETUP.W02 has no standalone magic: it
+normally begins in the middle of a DEFLATE member and is identifiable only in
+the context of its first volume.
+
+
+NE image boundary
+-----------------
+
+Let A be the appended archive start.  It is derived as follows:
+
+* A segment begins at its uint16 sector value shifted left by the NE segment
+  alignment shift.  Its uint16 stored length is its length, except zero means
+  65,536 bytes.
+* The first uint16 of the NE resource table is its alignment shift.  Each
+  resource offset and length is its corresponding uint16 shifted left by that
+  value.
+* A is the greatest end offset of every segment and resource.
+
+The resource table records are parsed completely, including type, ID, flags,
+zero handle, and zero usage fields.  With --all, every declared NE resource is
+written verbatim under _setup/ne_resources/.
+
+
+Legacy archive layout
+---------------------
+
+The legacy archive has no member CRCs and no embedded runtime member.
+
+Offset         Size       Meaning
+-------------  ---------  -----------------------------------------------
+A              4          C, compressed script length
+A + 4          C          One complete raw-DEFLATE script
+A + 4 + C      variable   Concatenated raw-DEFLATE payload resources
+
+Let S be the inflated script size, R be the end of the last contiguous script
+resource range, and T = A + 4 + C + R be the required logical container size.
+The script's expanded-layout field must satisfy:
+
+    expanded_layout_size = T - 4 - C + S
+
+Each script resource range excludes any wrapper or checksum; its entire range
+must be consumed by exactly one raw-DEFLATE stream.
+
+
+CRC archive layouts
+-------------------
+
+CRC-v1 and CRC-v2 use a 0x1E-byte archive header.  CRC-v3 uses 0x22 bytes.
+
+Header offset  Size       Meaning
+-------------  ---------  -----------------------------------------------
+0x00           14         Loader UI/colour/configuration control bytes
+0x0E           4          Inflated script size
+0x12           4          Stored script-member size, DEFLATE plus CRC32
+0x16           4          Stored Wise-runtime-member size, plus CRC32
+0x1A           4 or 8     Generation-specific loader configuration bytes
+
+The first 14 and final 4/8 bytes are loader-owned configuration state.  They
+have no effect on archive boundaries.  They are retained byte-for-byte in
+_setup/ArchiveHeader.bin and recorded as hexadecimal values in the manifest.
+The three size fields are validated and determine all following boundaries.
+
+The physical order is:
+
+    [NE loader through A)
+    [archive header]
+    [raw-DEFLATE script][script CRC32]
+    [raw-DEFLATE Wise runtime][runtime CRC32]
+    [script-declared resource members]
+
+The runtime must inflate to an MZ executable.  It is emitted as
+_setup/WiseRuntime.bin with --all.  Let P be the byte immediately after the
+runtime CRC.  Every script resource offset is relative to P.  The script's
+resource_data_size must equal the end of its last range, and the required
+logical size is:
+
+    T = P + resource_data_size
+
+Resource ranges in a CRC dialect include their trailing four-byte CRC.  Thus
+a range [start,end) contains DEFLATE bytes at [start,end-4) and the stored
+CRC32 at [end-4,end).  CRC32 uses the standard ZIP polynomial and is computed
+over the inflated bytes.
+
+
+Volume splitting
+----------------
+
+The script and, for CRC dialects, the embedded runtime are entirely on the
+first volume.  Script ranges define T before continuation data is opened.
+
+* If T equals the SETUP.EXE length, the archive is single-volume.
+* If T is greater, SETUP.EXE must equal media_capacity, SETUP.W02 is required,
+  and len(SETUP.EXE) + len(SETUP.W02) must equal T exactly.
+* A smaller sum is truncation; a larger sum is trailing data.  Both are fatal.
+
+The split can occur at any byte, including inside a DEFLATE bitstream.  The
+logical input to decompression is always SETUP.EXE || SETUP.W02.  SETUP.W02
+therefore cannot be parsed or completely extracted by itself.
+
+
+Inflated script headers
+-----------------------
+
+All dialects begin with these common fields:
+
+Offset  Size  Meaning
+------  ----  -------------------------------------------------------------
+0x00    5     Script control prefix
+0x05    4     Expanded layout size (legacy) or resource-data size (CRC)
+0x09    4     Media capacity; nonzero and aligned to 4096 bytes
+
+The prefix's byte 1 and byte 4 are zero.  Legacy accepts byte 0 values 0x48
+(single-volume control) and 0x08 (spanned-media control).  CRC-v1 accepts 0x08
+or 0x18, CRC-v2 accepts 0x15 or 0x18, and CRC-v3 accepts 0x15.  Prefix bytes
+2..3 are loader UI control values.
+
+Legacy continuation:
+
+Offset  Size  Meaning
+------  ----  -------------------------------------------------------------
+0x0D    4     Zero
+0x11    1     Zero
+0x12    1     Language count, exactly 1
+0x13    var.  31 UI strings
+
+CRC-v1 continuation:
+
+Offset  Size  Meaning
+------  ----  -------------------------------------------------------------
+0x0D    7     Zero
+0x14    1     Language count, exactly 1
+0x15    1     Zero language-table terminator
+0x16    var.  38 UI strings
+
+CRC-v2 continuation:
+
+Offset  Size  Meaning
+------  ----  -------------------------------------------------------------
+0x0D    7     Zero
+0x14    var.  Nonempty UI font-name string
+next    2     UI font size
+next    1     Language count, exactly 1
+next    var.  One language-name string; it may be empty
+next    var.  42 UI strings
+
+CRC-v3 is CRC-v2 with four additional zero bytes between the font size and
+language count, and has 44 UI strings.  The operation stream begins
+immediately after the last UI-string terminator and ends exactly at inflated
+script EOF.  It has no operation count or end marker.
+
+
+Script operation stream
+-----------------------
+
+Each record starts with a one-byte opcode.  string[n] means n consecutive
+NUL-terminated strings.  L is language_count and is one in this format.
+
+Opcode 0x00: compressed install file
+
+    byte       flags
+    byte       record_control             CRC-v2 and CRC-v3 only
+    uint32     stored_start
+    uint32     stored_end
+    uint16     MS-DOS date
+    uint16     MS-DOS time
+    uint32     inflated_size
+    string     destination pathname
+    string[L]  descriptions
+    string[L]  supplemental descriptions CRC-v3 only
+
+The stored range is relative to P.  The date uses years since 1980 in bits
+15..9, month in 8..5, and day in 4..0.  The time uses hour in 15..11, minute
+in 10..5, and two-second units in 4..0.
+
+Opcode 0x03: message dialog
+
+    byte          flags
+    string[L * 2] title/message pairs
+
+Opcode 0x04: loader/form action
+
+    byte       action number
+    string[L]  action data
+
+Opcode 0x05: edit INI data
+
+    string  pathname
+    string  section
+    string  values
+
+Opcode 0x06: primary compressed installer graphic/resource
+
+    byte    control
+    byte    extended_control   CRC-v2 and CRC-v3 only
+    uint16  control_value_1
+    uint16  control_value_2
+    uint32  stored_start
+    uint32  stored_end
+    uint32  inflated_size      all CRC dialects only
+
+Opcode 0x07: execute program
+
+    byte    flags
+    string  pathname
+    string  command line
+    string  working directory  all CRC dialects only
+
+Opcode 0x08: end conditional/action block
+
+    byte    control            all CRC dialects only
+
+Opcode 0x09: call internal or DLL function
+
+    byte       flags
+    string     library pathname; empty selects an internal function
+    string     function name
+    string[L]  arguments
+
+An argument string can use byte 0x7F as an internal field separator.  It
+remains one script string.
+
+Opcode 0x0B: delete file
+
+    byte    flags
+    string  pathname
+
+Opcode 0x0C: conditional
+
+    byte    comparison operator
+    string  variable
+    string  comparison value
+
+Opcode 0x0D: else branch; no body.
+
+Opcode 0x0F: begin form/action block; no body.
+
+Opcode 0x10: end form/action block; no body.
+
+Opcode 0x11: create/declare directory; CRC dialects only
+
+    string  pathname
+
+Opcode 0x14: secondary compressed installer graphic/resource; CRC dialects
+only
+
+    byte    control
+    uint32  stored_start
+    uint32  stored_end
+    uint32  inflated_size
+
+No other opcode belongs to these dialects.  An unknown opcode is fatal.
+
+
+Resource coverage and validation
+--------------------------------
+
+Every opcode 0x00, 0x06, and 0x14 contributes one resource range.  After
+sorting by stored_start, the following invariants are mandatory:
+
+1. The first range starts at zero.
+2. Every range is nonempty.
+3. Each range starts exactly at the preceding range's end.
+4. No range is duplicated.
+5. The final end equals the physical payload length (legacy) or the script's
+   resource_data_size (CRC dialects).
+6. Each range contains exactly one complete raw-DEFLATE member.
+7. CRC members have a correct trailing CRC32.
+8. Every stored inflated_size equals the actual inflated length.
+9. Every install-file MS-DOS date and time is valid.
+
+These rules account for every byte from physical offset zero through logical
+EOF.  There are no searched signatures, inferred member endings, ignored
+gaps, or tolerated trailers.
+
+
+Extraction behavior
+-------------------
+
+Without --all, every opcode-0x00 install file is emitted.  With --all, the
+extractor additionally emits:
+
+    _manifest.json
+    _setup/ArchiveHeader.bin
+    _setup/WiseScript.bin
+    _setup/WiseRuntime.bin             CRC dialects only
+    _setup/graphic_NNN.bin             opcodes 0x06 and 0x14
+    _setup/ne_resources/*.bin
+
+Windows backslashes become host path separators.  Parent-directory components
+are forbidden and Windows-forbidden filename characters are replaced with
+underscores.  Scripts can declare the same destination in multiple branches;
+all such resources are retained with deterministic ".duplicate_NNN" names.
+If a destination is also needed as a directory, its file member receives a
+".resource" suffix.  The manifest records the original destination.
+
+The output directory may already exist.  All parsing, size checks, DEFLATE
+checks, CRC checks, pathname checks, collision resolution, and output planning
+finish before it is modified.  Invalid input therefore produces no output.
+Files are mode 0664 and directories are mode 0775 so they are readable by
+both user and group.

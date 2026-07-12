@@ -1,0 +1,225 @@
+DeployMaster 2.x Setup Package Format
+=====================================
+
+Scope
+-----
+
+This specification describes the 32-bit setup packages emitted by DeployMaster
+2.5.3 through 2.8.0.  These are PE32 executables with a DeployMaster package in
+the PE overlay.  The format is independent of the file's extension.  Later
+DeployMaster releases use other compression and package revisions and are not
+covered here.
+
+All multi-byte integers are little-endian.  All text in package records uses the
+active Windows Western code page used by these format revisions (normally
+Windows-1252).  A "z-record" has this exact representation:
+
+    uint32  stored_size
+    byte    zlib_stream[stored_size]
+
+The zlib stream must reach its end marker on the last byte of the record.  It is
+an error for it to end early, require later bytes, or have an invalid Adler-32.
+The stored size includes the two-byte zlib header and four-byte Adler-32.
+
+Outer PE32 image
+----------------
+
+The setup begins as a standard i386 PE32 executable.  The end of the mapped PE
+image is the largest PointerToRawData + SizeOfRawData among all section headers.
+The package begins at precisely that offset.  FileAlignment and all raw section
+ranges must be valid.  The PE version resource identifies DeployMaster and the
+package revision.
+
+IMAGE_DIRECTORY_ENTRY_SECURITY, when nonzero, contains one or more standard,
+8-byte-aligned WIN_CERTIFICATE entries.  These setup generators use revision
+0x0200 and certificate type 2 (PKCS#7) for Authenticode signatures.  Some signed
+2.8 packages place a 320-byte DeployMaster signing auxiliary record after the
+last WIN_CERTIFICATE while still including it in the security-directory size:
+
+    uint32  zero
+    uint8   kind                 // 2
+    uint8   name_length          // 0..31
+    char    name[name_length]    // ASCII
+    byte    zero_padding[...]    // auxiliary record totals 320 bytes
+
+Zero alignment padding is also permitted at the end of the security directory.
+
+Embedded installer engine
+-------------------------
+
+The first overlay member is one complete bzip2 stream.  Its uncompressed bytes
+are the actual DeployMaster installer engine, itself a complete i386 PE32 image.
+The byte immediately following the bzip2 end-of-stream begins the package data.
+There is no size word before this bzip2 member; its mandatory bzip2 end marker
+defines its length.
+
+Package prefix
+--------------
+
+The package data begins with:
+
+    uint32  marker               // 0xFFFFFFFF
+    z-record language_table
+    z-record project_record
+
+language_table expands to CRLF-separated installer UI strings.
+
+project_record expands to 15 or 18 form-feed-separated (0x0C) byte strings.  A
+terminal NUL belongs to the final field.  Fields are:
+
+     0  publisher name
+     1  publisher URL
+     2  product name
+     3  product URL
+     4  product version string
+     5  release date as a decimal Delphi date value
+     6  copyright string
+     7  setup icon resource file name
+     8  readme resource file name
+     9  license resource file name
+    10  identity/support DLL resource file name
+    11  default %APPFOLDER% expansion
+    12  default %APPCOMMONFOLDER% expansion
+    13  default %APPMENU% expansion
+    14  short form: terminator; long form: background bitmap name
+    15  long form only: product display text
+    16  long form only: publisher display text
+    17  long form only: identity/feature bit field and terminator
+
+An empty resource-name field means that its resource record is absent.
+
+If bit 0 of the final project byte is set, two identity z-records follow.  They
+contain the registry identity test and its validation expression.  A zero
+uint32 terminates this pair.
+
+Project authentication and appearance
+-------------------------------------
+
+The identity records, or the project record when identity is disabled, are
+followed by a 67-byte project authentication value.  DeployMaster treats it as
+an indivisible authentication field; it is not a payload and is never installed.
+
+For revisions before 2.7, the next appearance header is four bytes.  For 2.7
+and 2.8 it is 43 bytes and contains the same appearance flags plus a fixed
+Pascal short string for the installer font (one length byte and 31 data/padding
+bytes), font metrics, and presentation flags.  The final byte in either header
+is boolean.  When nonzero, one appearance-settings z-record immediately follows.
+This record contains colors, font/display choices, and other installer UI state;
+it is not a file resource.
+
+Project resources
+-----------------
+
+External project resources follow as z-records, but only for nonempty project
+fields.  Their exact order is:
+
+    project field 7   setup icon
+    project field 8   readme
+    project field 9   license
+    project field 14  background bitmap (18-field project records only)
+    project field 10  identity/support DLL
+
+These resources are used by the installer UI or installer logic.  They are not
+automatically installed.  A resource that the author also added to the Files
+page appears separately in the installable-file table.
+
+Components and file names
+-------------------------
+
+The resource records are followed by:
+
+    uint8   component_count
+    z-record component[component_count]
+    z-record file_name_list
+
+Each component record contains its component flags, Pascal strings, hierarchy,
+and descriptive text.  file_name_list is a nonempty CRLF-terminated list with
+one base name for every installable payload.  Directory separators are not
+stored in these names; destinations are represented in the directive area.
+
+Central file table
+------------------
+
+Let R be the number of present project resource records and F be the number of
+names in file_name_list.  Let M = R + F.  Six parallel arrays immediately follow
+file_name_list:
+
+    int32   payload_record_offset[M]
+    uint32  dos_date_time[M]
+    int64   file_version[M]
+    uint32  uncompressed_size[M]
+    uint32  crc32[M]
+
+The first R entries describe the project resources, in resource order.  Their
+payload offsets are -1 because their z-records appeared earlier.  The remaining
+F entries describe installable files, in file-name-list order.  Their offsets
+are absolute offsets from the start of the setup executable and point to the
+uint32 stored_size of a z-record.
+
+dos_date_time has the MS-DOS date in the high word and MS-DOS time in the low
+word.  file_version stores the four Windows file-version words when a version
+was obtained; signed decimal -1234567890 is the no-version sentinel.
+
+uncompressed_size and crc32 cover the expanded bytes.  They apply equally to
+project resources and installable files and are mandatory integrity checks.
+Offsets for installable payloads are monotonically increasing, and each payload
+z-record ends where the next begins.
+
+Installer directive area
+------------------------
+
+The central table ends at the directive area.  Its exact end is the smallest
+nonnegative installable payload offset in the table.  Thus its size is declared,
+not found by scanning.
+
+The leading portion is a destination/action tree.  A destination descriptor is
+zero or more 0xFF tree-return operators, zero or more Pascal byte strings, and a
+0xFE terminator.  It is followed by a z-record.  A path beginning with a percent
+placeholder is absolute in DeployMaster's standard-folder namespace.  A path
+without such a placeholder is relative to %APPFOLDER%; an empty path also means
+%APPFOLDER%.
+
+Expanded file-assignment records are arrays of three-byte tuples:
+
+    uint8   deployment_flags     // high bit set
+    uint16  internal_item_id
+
+Internal IDs are sparse because project resources and generated installer items
+share the ID namespace.  In ascending-ID order, table-backed IDs correspond to
+the file table.  Generated support or uninstall IDs can remain after all F table
+items have been assigned.  Other destination-tree records encode shortcuts and
+begin with their own action opcode (commonly 0x40), followed by Pascal strings,
+component IDs, icon indexes, show modes, and argument data.
+
+After the destination tree, the remainder of the bounded directive area stores
+the registry tree, file-type verbs and associations, uninstall command data,
+and final installer behavior flags.  These records affect installation actions
+but do not add file payloads.  The complete bounded area must be consumed as
+installer directives; no part of it can be interpreted as payload data.
+
+Installable payloads and package ending
+---------------------------------------
+
+Each table-backed file is the z-record at its absolute offset.  Expansion must
+match both uncompressed_size and crc32.  A valid extractor must perform all
+three checks: exact z-record framing, expanded size, and CRC-32.
+
+The last payload is followed by zero padding up to the Authenticode security
+directory or end of file.  Unsigned 2.7 packages may instead contain a 260-byte
+legacy DeployMaster package signature in this location.  The signature is an
+authentication value, not a file.  No other nonzero trailing bytes are allowed.
+
+Extraction behavior
+-------------------
+
+Default extraction writes only table-backed installable files, under their
+symbolic DeployMaster destination folders such as %APPFOLDER% and %SYSTEM%.
+Keeping placeholders symbolic avoids inventing a target Windows installation.
+Project UI resources and decoded package metadata are supplemental output and
+should be emitted only when explicitly requested.
+
+A parser should validate the entire PE structure, bzip2 engine member, every
+z-record boundary, all central-table offsets, every expanded size and CRC-32,
+package padding/signature, and the PE certificate directory before creating any
+output.  This permits fail-fast operation with no output from a malformed or
+unsupported input.

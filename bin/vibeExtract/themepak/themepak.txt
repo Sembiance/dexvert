@@ -1,0 +1,263 @@
+THEMEPAK INSTALLER FILE FORMAT
+==============================
+
+Scope
+-----
+
+This document describes the self-extracting THEMEPAK Installer format emitted by
+the 1997, 32-bit x86 installer engine.  It is unrelated to the later CAB-based
+Windows .themepack format.  All multibyte integers are unsigned little-endian.
+Bit fields in the compression stream are consumed least-significant bit first.
+
+A file consists of a fixed PE32 installer engine, a block-compressed sequence of
+file records, zero alignment padding, and a CRC-32 trailer.  There is no archive
+directory, magic number, version field, per-file checksum, or per-block checksum.
+The PE engine identity, the .theme section, and the final CRC together identify
+and delimit this format.
+
+
+Top-level layout
+----------------
+
+  Offset      Length                         Meaning
+  ----------  -----------------------------  -------------------------------
+  0x00000000  0x00002e00                     PE32 installer engine
+  0x00002e00  .theme.VirtualSize - 4          Compressed archive payload
+  next        .theme.SizeOfRawData -          Zero alignment padding
+              .theme.VirtualSize
+  EOF - 4     4                              File CRC-32, little-endian
+
+The final four bytes occupy the last four bytes of the aligned .theme raw
+section.  They are not adjacent to the payload unless no alignment padding is
+needed.
+
+The CRC is the conventional reflected CRC-32 used by ZIP and zlib: polynomial
+0xedb88320, initial register 0xffffffff, and final XOR 0xffffffff.  It covers
+every file byte except the four-byte stored CRC itself, including PE bytes,
+payload bytes, and zero alignment padding.
+
+
+PE32 wrapper
+------------
+
+The first 0x2e00 bytes are a normal Microsoft PE32 executable.  Standard DOS,
+COFF, PE optional-header, section-table, import-table, and resource-directory
+rules define those bytes.  The installer engine has these defining properties:
+
+  Machine                  0x014c (Intel 386)
+  NumberOfSections         5
+  SizeOfOptionalHeader     0x00e0
+  OptionalHeader.Magic     0x010b (PE32)
+  ImageBase                0x00400000
+  SectionAlignment         0x00001000
+  FileAlignment            0x00000200
+  AddressOfEntryPoint      RVA 0x00001000
+  PE/COFF timestamp        0x342ef943
+
+Its sections are:
+
+  Name     RVA         Virtual     Raw offset  Raw size    Characteristics
+  -------  ----------  ----------  ----------  ----------  ---------------
+  .text    0x00001000  0x00000b1f  0x00000400  0x00000c00  0x60000020
+  .data    0x00002000  0x00000854  0x00001000  0x00000a00  0xc0000040
+  .idata   0x00003000  0x00000362  0x00001a00  0x00000400  0xc0000040
+  .rsrc    0x00004000  0x00000e7c  0x00001e00  0x00001000  0x40000040
+  .theme   0x00005000  variable    0x00002e00  variable    0x42000040
+
+The sections respectively contain installer/decompressor code; fixed strings and
+the 512-entry hash table; KERNEL32/USER32 imports; installer UI resources; and
+the archive, alignment padding, and CRC.
+
+The first four sections and their unused raw padding are fixed installer-engine
+bytes.  The .rsrc section contains two RT_ICON resources, a dialog named PRG, a
+string-table block, and a group icon named ICON1; these are installer UI
+resources and are not installed archive files.
+
+For exact engine recognition, copy bytes 0 through 0x2dff, replace the following
+four fields with four zero bytes each, and calculate SHA-256:
+
+  OptionalHeader.SizeOfInitializedData
+  OptionalHeader.SizeOfImage
+  .theme.Misc.VirtualSize
+  .theme.SizeOfRawData
+
+The required normalized digest is:
+
+  dbc0cf967ac2936a2bb69082234d03c5b9b77d2d49a88c310538c9b60c84b585
+
+This identity check is exact rather than a search for section names or strings.
+
+Exactly four 32-bit fields in the 0x2e00-byte engine vary with archive length:
+
+  OptionalHeader.SizeOfInitializedData
+      = .theme.SizeOfRawData + 0x1e00
+
+  OptionalHeader.SizeOfImage
+      = align_up(0x5000 + .theme.VirtualSize, 0x1000)
+
+  .theme.Misc.VirtualSize
+      = compressed payload byte length + 4
+
+  .theme.SizeOfRawData
+      = align_up(.theme.VirtualSize, 0x200)
+
+The .theme.PointerToRawData is 0x2e00.  The raw section ends at EOF.  Bytes from
+the end of the compressed payload through EOF-4 are all zero.  The four bytes at
+EOF-4 are the CRC described above.  VirtualSize includes four bytes for that CRC
+even though physical alignment places the CRC at the end of SizeOfRawData.
+
+
+Archive stream and file records
+-------------------------------
+
+The archive payload is a concatenation of independently delimited compression
+blocks.  Every block expands to exactly 4096 bytes.  The first block of each file
+starts with a 24-byte record header; file content follows its path in that block
+and continues at byte zero of as many following blocks as needed.
+
+The first expanded block for a file is:
+
+  Offset  Size  Meaning
+  ------  ----  -------------------------------------------------------------
+  0x00    4     Installed file size in bytes
+  0x04    8     Creation time as a Windows FILETIME
+  0x0c    8     Last-write time as a Windows FILETIME
+  0x14    4     Path byte length N
+  0x18    N     Path bytes, not NUL-terminated
+  0x18+N  ...   First file-content bytes
+
+A FILETIME is the count of 100-nanosecond intervals since 1601-01-01 00:00:00
+UTC.  The installer passes both values to SetFileTime after writing the file.
+
+The path is passed to Win32 ANSI functions.  In this engine's normal Western
+Windows environment it uses Windows code page 1252.  A terminator is generated
+in memory; no path terminator is stored.  The original engine prepends its
+temporary-directory path and requires N to fit the Win32 MAX_PATH buffer.  It
+does not create archive-specified subdirectories, so producer output is a flat
+list of filenames even though Win32 path separator bytes are syntactically
+possible.
+
+Let first_capacity = 4096 - 24 - N.  The first block contributes
+min(file_size, first_capacity) bytes.  Each later block contributes
+min(4096, bytes_remaining).  Expanded bytes after the end of a file in its last
+block are ignored.  The next physical block begins the next file record.  Parsing
+continues until the declared compressed payload length is exhausted.  There is
+no stored file count and no end record.
+
+
+Physical block coding
+---------------------
+
+Each physical block begins with a 16-bit value H.
+
+1. H == 0: raw block
+
+   The header is followed by exactly 4096 literal bytes.  Physical length is
+   4098 bytes.
+
+2. H == 1: repeated-dword block
+
+   The header is followed by one four-byte value.  Repeating that value 1024
+   times produces the 4096-byte block.  Physical length is 6 bytes.
+
+3. Every other H: compressed block
+
+   L = H & 0x0fff is the total physical length, including the two bytes that
+   hold H.  L therefore locates the next physical block.  The complete block is
+   treated as an LSB-first bitstream.  Its first 12 bits are L; decoding begins
+   at bit 12.  The next 8 bits are the first output byte.  Tokens then continue
+   until the implicit end marker described below.
+
+The native decoder temporarily writes four 0xff bytes at physical offset L.
+Those bytes are not stored in the installer and do not count in L.  They supply
+the implicit terminal token, so bit lookahead may extend by at most 32 bits past
+the physical block.  A valid compressed block produces exactly 4096 bytes before
+the terminal token.
+
+
+Compressed token grammar
+------------------------
+
+Bits below are written in consumption order.  Each nK field is an unsigned,
+K-bit, LSB-first integer.  H9 is a 9-bit hash-table index.  A leading zero is a
+literal; all other data tokens either copy a hash match or repeat the preceding
+output byte.
+
+  Bits / fields                     Action
+  --------------------------------  ------------------------------------------
+  0 n8                              Output literal byte n8
+  10 H9                             Hash match, length 2
+  110 H9                            Hash match, length 3
+  1110 n1 H9                        Hash match, length 4 + n1
+  11110 H9                          Hash match, length 6
+  111110 n1 H9                      Hash match, length 7 + n1
+  1111110 n2 H9, n2 != 0            Hash match, length 8 + n2
+  1111110 00 0 n1                   Repeat last byte 2 + n1 times
+  1111110 00 1 0 n5                 Repeat last byte 4 + n5 times
+  1111110 00 1 1 n12                Repeat last byte n12 times
+  11111110 n3 H9                    Hash match, length 12 + n3
+  111111110 n4 H9                   Hash match, length 20 + n4
+  111111111 n5 H9, n5 != 31         Hash match, length 36 + n5
+  111111111 31 n12 H9, n12 != 4095  Hash match, length n12
+  111111111 31 4095                 End compressed block
+
+The terminal token is normally completed by the synthetic 0xff bytes.  Repeat
+lengths are encoded exactly as shown; the format itself does not add one to the
+12-bit form.
+
+
+Hash-match state
+----------------
+
+The 512-entry table and the 4096-byte output buffer persist across all archive
+blocks.  The table is initialized to null pointers when the installer process
+starts.  Initial output-buffer bytes are immaterial because no table entry can
+address them.  Raw and repeated-dword blocks overwrite the output buffer but do
+not update the table.  Compressed blocks overwrite the same buffer and update the
+table as described here.  Persisting both objects is necessary for correct
+decoding.
+
+Define the hash of a two-byte little-endian word W as:
+
+  hash(W) = (W + (W >> 6)) & 0x1ff
+
+Table values are positions one byte beyond the start of a two-byte pair.  A hash
+match with index H9 performs these operations in order:
+
+  source = table[H9] - 1
+  table[H9] = destination + 1
+  copy length bytes from source to destination using forward byte copies
+
+Forward copying gives normal LZ overlap behavior.  Referring to an uninitialized
+table entry is invalid.
+
+The decoder also tracks whether the preceding token ended with a pending literal
+pair.  It starts true after the mandatory first byte.  For a literal written at
+position P, if the flag is true, table[hash(output[P-1:P+1])] is set to P; the
+flag is then true.  For a hash match beginning at P, after the match copy, if the
+flag was true, table[hash(output[P-1:P+1])] is set to P; the flag is then false.
+
+A repeat token sets the flag false.  If its repeated byte is B and its run starts
+at P, it sets table[hash(B | (B << 8))] to P+1 after establishing the first two
+bytes of the run.  This update is made even when a longer overlapping repeat is
+used.
+
+
+Extraction validation
+---------------------
+
+A strict reader can reject an input without writing output by validating, in
+this order:
+
+  * file CRC-32;
+  * exact PE32 installer-engine identity and the four length relationships;
+  * .theme placement, raw extent, and all-zero alignment padding;
+  * every physical block boundary and every compressed token;
+  * exactly 4096 expanded bytes per block;
+  * every record header, path length, safe relative path, and file extent;
+  * exact exhaustion of the declared payload at a record boundary.
+
+The executable wrapper and its UI resources are not installed.  Normal
+extraction therefore outputs only the file records.  Diagnostic manifests,
+checksums, converted previews, or other generated metadata are outside the
+archive format and should be emitted only when explicitly requested.

@@ -1,0 +1,332 @@
+Mohawk WAVEData File Format
+===========================
+
+Status
+------
+
+This document specifies the self-contained Mohawk WAVEData resource format and
+the strict physical-file profile accepted by mohawkWAVE.py. Multi-byte values in
+the Mohawk file are big-endian. Byte offsets are hexadecimal and are measured
+from the start of the containing structure unless stated otherwise.
+
+A WAVEData resource is a Mohawk tagged container. It is not a Microsoft RIFF
+WAVE file despite the WAVE form tag. The audio codecs are unsigned PCM, signed
+PCM, headerless DVI IMA ADPCM, or MPEG Audio Layer II.
+
+
+Primitive types
+---------------
+
+u8       unsigned 8-bit integer
+u16be    unsigned 16-bit big-endian integer
+s16be    signed 16-bit two's-complement big-endian integer
+u32be    unsigned 32-bit big-endian integer
+FourCC   four literal, case-sensitive bytes
+
+
+Top-level MHWK form
+-------------------
+
+Offset  Size  Type    Meaning
+------  ----  ------  ---------------------------------------------------------
+0x00       4  FourCC  "MHWK"
+0x04       4  u32be   formSize
+0x08       4  FourCC  "WAVE"
+0x0C       *          WAVE chunks
+
+formSize is the number of logical bytes after the formSize field. Therefore the
+logical form ends at absolute offset 8 + formSize. It includes the four WAVE
+bytes, every chunk header and body, and any chunk-alignment bytes. It does not
+include the initial "MHWK" and formSize fields.
+
+The logical form contains zero or more metadata chunks followed by exactly one
+Data chunk. Data is terminal. The defined metadata chunks are ADPC and Cue#.
+Unknown chunk tags are not part of this specification and must be rejected by a
+strict reader.
+
+
+Generic chunk layout and alignment
+----------------------------------
+
+Offset  Size       Type    Meaning
+------  ---------  ------  ----------------------------------------------------
+0x00            4  FourCC  chunk tag
+0x04            4  u32be   chunkSize
+0x08    chunkSize          chunk body
+...         0 or 1  u8      alignment byte
+
+chunkSize counts only the chunk body. It excludes the eight-byte chunk header
+and excludes the alignment byte.
+
+Chunks are aligned to two-byte boundaries. If chunkSize is odd and another
+logical byte follows, one zero alignment byte follows the body. A terminal
+odd-sized chunk may end directly at the form boundary or may have the zero
+alignment byte; formSize identifies which representation is present. No byte
+may be inferred: a reader compares the computed chunk end to the declared form
+end.
+
+
+Data chunk
+----------
+
+Tag: "Data" (capital D, lowercase ata)
+
+Offset  Size  Type    Field
+------  ----  ------  ---------------------------------------------------------
+0x00       2  u16be   sampleRate
+0x02       4  u32be   sampleCount
+0x06       1  u8      bitsPerSample
+0x07       1  u8      channelCount
+0x08       2  u16be   encoding
+0x0A       2  u16be   loopCount
+0x0C       4  u32be   loopStart
+0x10       4  u32be   loopEnd
+0x14       *          encoded audio bytes
+
+The fixed Data header is exactly 20 bytes, so its encoded audio length is
+Data.chunkSize - 20. Data.chunkSize must be at least 20.
+
+sampleRate is audio sample frames per second and must be nonzero.
+
+sampleCount is the decoded number of sample frames. One mono frame contains one
+sample and one stereo frame contains a left/right pair. It is not generally an
+encoded byte count.
+
+bitsPerSample is the nominal sample precision. For raw encoding it also selects
+the stored PCM word width. Compressed encodings have codec-defined stored
+precision and decode to signed 16-bit PCM.
+
+channelCount is 1 for mono or 2 for stereo.
+
+encoding selects the audio representation:
+
+  0  Raw PCM
+  1  Headerless DVI IMA ADPCM
+  2  MPEG Audio Layer II
+
+loopCount is zero when looping is disabled. 0xFFFF means repeat forever. Other
+nonzero values are a finite repeat count. With an active loop, loopStart is the
+first decoded frame in the loop and loopEnd is the exclusive decoded-frame end;
+the required relation is loopStart < loopEnd <= sampleCount. The loop fields are
+metadata and are not additional audio bytes.
+
+
+Encoding 0: raw PCM
+-------------------
+
+Samples are frame-interleaved. Mono stores one sample per frame. Stereo stores
+left then right for each frame.
+
+bitsPerSample = 8:
+
+  Each sample is one unsigned byte. Silence is 0x80.
+
+bitsPerSample = 16:
+
+  Each sample is a signed two's-complement s16be word. A RIFF/WAVE converter
+  must byte-swap each word because ordinary PCM WAVE data is little-endian.
+
+The exact raw payload equation is:
+
+  encodedBytes = sampleCount * channelCount * (bitsPerSample / 8)
+
+One writer variant places a literal 0xC1 terminator immediately after the PCM
+samples and includes it in Data.chunkSize while leaving sampleCount equal to the
+number of real samples. This representation is defined only for unsigned PCM8
+mono and has the exact equation:
+
+  Data.chunkSize - 20 = sampleCount + 1
+  final Data body byte = 0xC1
+
+The first sampleCount bytes are audio and 0xC1 is not a sample. A strict reader
+must not use waveform shape or a silence threshold to recognize it. Any other
+surplus length or final value is invalid.
+
+No other raw bit depth is defined by this profile.
+
+
+Encoding 1: headerless DVI IMA ADPCM
+-----------------------------------
+
+The encoded stream has no per-block headers. Decoder state begins at predictor
+0 and step-table index 0 independently for each channel. Each byte is decoded
+high nibble first, then low nibble.
+
+For mono, both nibbles are consecutive mono samples. For stereo, the high
+nibble is the left sample and the low nibble is the right sample of one frame.
+Thus:
+
+  encodedBytes * 2 = sampleCount * channelCount
+
+For a nibble code c, predictor p, index i, and step s = stepTable[i]:
+
+  magnitude = c & 7
+  delta = ((2 * magnitude + 1) * s) >> 3
+  if c & 8: p = p - delta
+  otherwise: p = p + delta
+  p = clamp(p, -32768, 32767)
+  i = clamp(i + indexAdjust[magnitude], 0, 88)
+
+The emitted sample is the new p. The tables are:
+
+  indexAdjust = -1, -1, -1, -1, 2, 4, 6, 8
+
+  stepTable =
+       7,     8,     9,    10,    11,    12,    13,    14,
+      16,    17,    19,    21,    23,    25,    28,    31,
+      34,    37,    41,    45,    50,    55,    60,    66,
+      73,    80,    88,    97,   107,   118,   130,   143,
+     157,   173,   190,   209,   230,   253,   279,   307,
+     337,   371,   408,   449,   494,   544,   598,   658,
+     724,   796,   876,   963,  1060,  1166,  1282,  1411,
+    1552,  1707,  1878,  2066,  2272,  2499,  2749,  3024,
+    3327,  3660,  4026,  4428,  4871,  5358,  5894,  6484,
+    7132,  7845,  8630,  9493, 10442, 11487, 12635, 13899,
+   15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794,
+   32767
+
+
+Encoding 2: MPEG Audio Layer II
+--------------------------------
+
+The payload is an unmodified sequence of MPEG Audio Layer II frames. It has no
+Mohawk-specific subheader. Frame sample rate and channel mode must agree with
+sampleRate and channelCount. Layer II produces 1,152 decoded frames per MPEG
+frame, and the complete decoded frame count must agree with sampleCount. A
+strict converter rejects malformed, truncated, non-Layer-II, or metadata-
+inconsistent MPEG payloads rather than guessing.
+
+
+ADPC decoder-status chunk
+-------------------------
+
+Tag: "ADPC"
+
+ADPC is optional and is meaningful only for encoding 1. It stores decoder
+checkpoints so a player can seek without decoding from frame zero.
+
+Offset  Size  Type    Meaning
+------  ----  ------  ---------------------------------------------------------
+0x00       2  u16be   itemCount
+0x02       2  u16be   channelCount (1 or 2)
+0x04       *          itemCount status items
+
+Each status item is:
+
+Offset  Size                    Type    Meaning
+------  ----------------------  ------  ---------------------------------------
+0x00                         4  u32be   sampleFrame
+0x04  4 * channelCount bytes           per-channel state
+
+Each per-channel state is:
+
+Offset  Size  Type    Meaning
+------  ----  ------  ---------------------------------------------------------
+0x00       2  s16be   last decoded sample/predictor
+0x02       2  u16be   step-table index, 0 through 88
+
+ADPC.chunkSize must equal:
+
+  4 + itemCount * (4 + 4 * channelCount)
+
+Status items are ordered by increasing sampleFrame. Their channel count must
+match Data.channelCount, and no sampleFrame may exceed Data.sampleCount. The
+table changes seeking cost, not the result of a linear decode, so it has no
+direct RIFF/WAVE equivalent.
+
+
+Cue# synchronization chunk
+--------------------------
+
+Tag: "Cue#"
+
+Offset  Size  Type    Meaning
+------  ----  ------  ---------------------------------------------------------
+0x00       2  u16be   pointCount
+0x02       *          pointCount variable-length point records
+
+Each point record is:
+
+Offset  Size        Type    Meaning
+------  ----------  ------  ---------------------------------------------------
+0x00             4  u32be   sampleFrame
+0x04             1  u8      nameLength
+0x05    nameLength  bytes   cue name; not NUL-terminated
+...          0 or 1  u8      zero record-alignment byte
+
+The record alignment byte is present exactly when nameLength is even. This
+makes the complete record (five fixed bytes plus name bytes plus padding) even
+in length. sampleFrame is a decoded frame offset and may equal sampleCount.
+
+A RIFF/WAVE converter can preserve these as cue points in a "cue " chunk and
+their byte strings as "labl" records in a LIST/adtl chunk.
+
+
+Physical extracted-resource tails
+---------------------------------
+
+formSize defines the logical end of the MHWK form. Some physically extracted
+resources retain deterministic bytes after that logical end. These bytes are
+not a chunk and are not audio. Two physical tail representations are defined.
+
+Detached NUL tail:
+
+  P = L + 1
+  file[L] = 0x00
+
+This zero byte is outside formSize. It is a physical resource terminator, not a
+chunk-alignment byte.
+
+Sector-repeat tail:
+
+This form is produced when a 2,048-byte extraction buffer wraps within the last
+storage sector. It is accepted only by the following exact rule.
+
+Let:
+
+  L = 8 + formSize
+  P = physical file length
+  R = ceil(L / 2048) * 2048
+  N = P - L
+
+The ordinary representation has P = L. The sector-repeat representation is
+valid only if all of these conditions hold:
+
+  L >= 2048
+  P = R
+  N > 0
+  file[L : P] = file[L - 2048 : L - 2048 + N]
+
+The equality is byte-for-byte. These are structural rules, not similarity
+tests. Any other bytes beyond L make the physical file invalid. A recognized
+tail must be validated and then excluded from decoding.
+
+
+Strict validation procedure
+---------------------------
+
+1. Require at least 12 bytes, the exact MHWK tag, the exact WAVE form type, and
+   a declared logical end that is not past the physical end.
+2. Validate that the physical end is the logical end, the exact detached-NUL
+   form, or the exact sector-repeat form above.
+3. Walk chunks only inside the logical form. Bounds-check every header and body.
+4. Validate every required zero alignment byte and every chunk-specific length
+   equation. Do not skip unknown tags.
+5. Require at most one ADPC, at most one Cue#, exactly one Data, and no logical
+   bytes after the terminal Data chunk and its optional alignment byte.
+6. Cross-check channel counts, sample-frame positions, loop endpoints, codec
+   metadata, encoded byte count, and decoded sample count.
+7. Decode the entire payload before creating output. On any failure, create no
+   output file.
+
+
+RIFF/WAVE conversion
+--------------------
+
+The decoded output uses Microsoft PCM format code 1. Unsigned PCM8 bytes are
+copied unchanged. Signed PCM16 words are written little-endian. The WAVE data
+chunk contains exactly sampleCount * channelCount samples. Mohawk loops are
+written as a WAVE "smpl" chunk; the exclusive Mohawk loopEnd becomes inclusive
+WAVE end loopEnd - 1, and Mohawk 0xFFFF becomes WAVE play count 0 (infinite).
+Cue# points are written as WAVE cue/label metadata. All RIFF chunks use the
+standard little-endian sizes and zero padding for odd-sized bodies.

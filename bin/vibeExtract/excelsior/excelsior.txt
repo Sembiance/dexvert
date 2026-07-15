@@ -1,0 +1,411 @@
+EXCELSIOR INSTALLER II CONTAINER FORMAT
+=======================================
+
+Scope
+-----
+
+This document specifies the 32-bit Windows Excelsior Installer II container
+used by serialized metadata schema versions 1.0, 1.5, 1.6, and 1.7.  All
+multibyte integers are little-endian.  Offsets in the outer header are absolute
+file offsets.  Offsets inside decoded metadata are relative to the first byte
+of that metadata.  Sizes and offsets are unsigned unless a field is explicitly
+described as signed.
+
+The format has four layers:
+
+  1. a conventional PE32 x86 launcher;
+  2. a 40-byte overlay header;
+  3. a primary compressed stream containing the bootstrap DLL and payloads;
+  4. a compressed metadata stream, optionally followed by an Authenticode
+     certificate table.
+
+No filename scan, signature scan, or alignment guess is needed to locate any
+part of the container.
+
+
+Locating the overlay
+--------------------
+
+Parse the PE32 image normally.  Let PE_RAW_END be the maximum of
+SizeOfHeaders and, for every section with SizeOfRawData != 0,
+PointerToRawData + SizeOfRawData.  The overlay header begins at PE_RAW_END.
+The PE Certificate Table data-directory entry is special: as required by PE,
+its VirtualAddress member is a file offset rather than an RVA.  It does not
+participate in the PE_RAW_END calculation.
+
+
+Overlay header (40 bytes)
+-------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00      12    bytes     ASCII signature "ExcelsiorII1"
+0C       4    u32       Total size of the metadata LZMA record
+10       8    u64       Absolute file offset of the metadata LZMA record
+18       4    u32       Metadata uncompressed size
+1C       4    u32       Raw size of the bootstrap DLL in the primary output
+20       8    u64       Absolute file offset of the primary LZMA record
+
+The primary record offset must equal PE_RAW_END + 40.  Its total size is not
+stored directly in this header; it is:
+
+    metadata_record_offset - primary_record_offset
+
+The metadata record must be at least 13 bytes, as must the primary record.
+
+
+LZMA records
+------------
+
+Both compressed streams use the same record envelope:
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       8    u64       Exact uncompressed byte count
+08       5    bytes     LZMA1 property block
+0D       *    bytes     Raw LZMA1 range-coded stream
+
+These are raw LZMA1 streams, not .lzma or XZ files.  They deliberately omit an
+LZMA end marker; the u64 output count terminates decompression.  The five-byte
+property block is decoded as follows:
+
+    property = byte[0]
+    lc = property % 9
+    property = property / 9 (integer division)
+    lp = property % 5
+    pb = property / 5
+    dictionary_size = little_endian_u32(byte[1..4])
+
+The original property byte must be below 225 and dictionary_size must be
+nonzero.  Range-coder flush bytes can remain buffered when the declared output
+count is reached; they are part of the compressed stream, not another field.
+
+The overlay's u32 metadata size must equal the metadata record's leading u64.
+The primary uncompressed size is only present in the primary record.
+
+
+x86 BCJ decoding
+----------------
+
+After LZMA1 decompression, both outputs are still transformed by the LZMA SDK
+x86 branch/call filter.  Run the SDK x86 converter in decode mode with IP = 0
+and state = 0 over the complete output.  The converter processes through
+output_size - 5 and leaves the final four bytes unchanged.
+
+For an independent implementation, candidate opcodes are bytes for which
+(byte & FEh) == E8h.  The converter's mask tables are:
+
+    mask_allowed = [1, 1, 1, 0, 1, 0, 0, 0]
+    mask_bits    = [0, 1, 2, 2, 3, 3, 3, 3]
+
+Initialize position=0, previous_position=-1, previous_mask=0, and IP=5.  For
+each candidate no later than size-5:
+
+  * Let distance = position - previous_position.  If distance > 3, clear the
+    mask.  Otherwise left-shift the mask by distance-1, retain three bits, and
+    apply the two mask tables exactly as in the LZMA SDK x86 converter.
+  * Only convert a four-byte operand whose most-significant byte is 00h or FFh.
+  * Read the operand as a u32.  In decode mode compute
+    destination = source - (IP + position), modulo 2^32.
+  * If a previous mask is active, use mask_bits[mask] to test the relevant high
+    byte.  While that byte is 00h or FFh, replace source with
+    destination XOR (2^(32-index)-1) and recompute destination.
+  * Store the low 24 destination bits in operand bytes 0..2.  Store operand
+    byte 3 as FFh when destination bit 24 is set, otherwise 00h.
+  * Advance five bytes after a converted operand.  After a rejected candidate,
+    update previous_mask to ((previous_mask << 1) | 1) & 7 and advance one.
+
+This transform must be applied to metadata too: its integer offsets can contain
+byte patterns that the encoder changed.
+
+
+Primary uncompressed address space
+----------------------------------
+
+The decoded primary stream is one concatenated address space:
+
+    [0, bootstrap_size)                    bootstrap PE32 DLL
+    [internal.payload_offset, ... )        internal-resource file data
+    [installed.payload_offset, ... )       installed-file data
+
+The first bytes are an MZ/PE32 DLL.  Its computed PE raw extent must equal the
+overlay bootstrap-size field.  The two package descriptors in metadata define
+the other boundaries.  Required relationships are:
+
+    internal.payload_offset = bootstrap_size
+    installed.payload_offset = internal.payload_offset + internal.payload_size
+    primary_uncompressed_size = installed.payload_offset
+                                + installed.payload_size
+
+Within each package, regular-file bodies are concatenated in record order.
+Directory records consume no primary bytes.  Therefore each regular record's
+payload offset is obtained by starting at descriptor.payload_offset and adding
+all preceding non-directory sizes.  The sum must equal descriptor.payload_size.
+
+
+Decoded metadata: common fixed portion
+--------------------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00      12    bytes     ASCII signature "ExcelsiorII1"
+0C       1    u8        Metadata schema major version
+0D       1    u8        Metadata schema minor version
+0E       1    u8        Metadata schema update/build version
+0F       1    u8        Runtime configuration byte 0
+10       1    u8        Generator/runtime family selector
+11       1    u8/bool   Runtime feature flag 0
+12       1    u8        Runtime configuration byte 1
+13       1    u8/bool   Runtime feature flag 1
+14       1    u8/bool   Runtime feature flag 2
+15       1    u8/bool   Runtime feature flag 3
+16       1    u8        Runtime mode value
+17       1    u8/bool   Runtime feature flag 4
+18       8    u64       Copy of primary LZMA record absolute file offset
+20       8    u64       Copy of primary LZMA record total size
+28      32    struct    Internal-resource package descriptor
+48      32    struct    Installed-file package descriptor
+68       4    str_off   Product name
+6C       4    str_off   Display name
+70       4    str_off   Publisher/product-family string
+74       4    str_off   Product registry/identity path
+78       4    str_off   License text
+7C       4    str_off   Splash-image path
+80       4    str_off   Uninstaller filename
+84       4    str_off   Custom installer-library filename
+88       4    str_off   Auxiliary installer-library filename
+8C       4    str_off   Custom uninstaller-library filename
+90       4    u32       Installer option value 0
+94       4    u32       Installer option value 1
+98       4    str_off   Optional root option string
+9C       4    u32       Unconditional post-install command count
+A0       4    offset    Command-pair table offset; records are 8 bytes
+A4       4    str_off   Optional pair name
+A8       4    str_off   Optional pair value
+AC       4    str_off   Default installation directory
+B0       4    str_off   Product short name / program-folder name
+
+A str_off is a u32 metadata-relative offset to a NUL-terminated UTF-16LE
+string.  Zero means absent.  An empty present string points directly to a UTF-16
+NUL.  The command-pair table contains two str_off values per record: executable
+then command-line arguments.
+
+
+Package descriptor (32 bytes)
+-----------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    u32       File/directory record count
+04       4    u32       Reserved; must be zero
+08       8    u64       Offset in decoded primary output of package payload
+10       8    u64       Total bytes belonging to regular files
+18       8    u64       Metadata-relative file-record table offset
+
+
+File/directory record (24 bytes)
+--------------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    str_off   Windows-style relative installation path
+04       4    u32       Modification time as a Unix timestamp
+08       8    i64       File size, or -1 for a directory
+10       4    u32       Auxiliary file property
+14       1    bool      Alternate/postprocessing property
+15       3    bytes     Storage padding
+
+For regular files, the auxiliary value and processing flag are file
+properties.  The flag can mark payloads that later post-install commands
+process; it does not change the bytes stored in the primary stream.  For a
+directory, bytes 04..17 are not consumed by the installer and can contain
+uninitialized writer storage.  A size below -1 is invalid.
+
+
+Metadata root schema 1.6 and 1.7
+--------------------------------
+
+Minor versions 6 and 7 use this tail:
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+B4       4    str_off   Launcher/variant option string
+B8       4    u32       Shortcut count
+BC       4    offset    Shortcut table
+C0       4    u32       File-association count
+C4       4    offset    File-association table
+C8       4    u32       Post-install choice/action count
+CC       4    offset    Post-install choice/action table
+D0       4    u32       Windows-service count
+D4       4    offset    Windows-service table
+D8       4    u32       Removal-path count
+DC       4    offset    Removal-path str_off array
+E0       4    u32       Generated-path count
+E4       4    offset    Generated-path str_off array
+
+The fixed root is exactly E8h bytes.
+
+
+Metadata root schema 1.0 and 1.5
+--------------------------------
+
+Minor versions 0 and 5 use two strings before the collection pairs and one
+path array:
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+B4       4    str_off   Legacy option string
+B8       4    str_off   Launcher/variant option string
+BC       4    u32       Shortcut count
+C0       4    offset    Shortcut table
+C4       4    u32       File-association count
+C8       4    offset    File-association table
+CC       4    u32       Post-install choice/action count
+D0       4    offset    Post-install choice/action table
+D4       4    u32       Windows-service count
+D8       4    offset    Windows-service table
+DC       4    u32       Generated-path count
+E0       4    offset    Generated-path str_off array
+E4       4    bytes     Zero padding to an eight-byte boundary
+
+There is one precisely identified 1.0 family variant: when the family selector
+at offset 10h is 2, an additional legacy path-array count/offset pair occupies
+E4h/E8h, followed by four zero bytes at ECh..EFh.  Its first package record can
+therefore begin at F0h.  Other 1.0 and 1.5 roots end logically at E4h and align
+to E8h.
+
+
+Shortcut record (28 bytes)
+--------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    u32       Shortcut location/kind enum
+04       4    str_off   Display title
+08       4    str_off   Optional icon path
+0C       4    u32       Icon index
+10       4    str_off   Working directory
+14       4    str_off   Target path
+18       4    str_off   Arguments
+
+
+File-association record (24 bytes)
+----------------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    str_off   Extension without the leading dot
+04       4    str_off   File type / ProgID name
+08       4    str_off   Description
+0C       4    str_off   Executable
+10       4    str_off   Arguments
+14       1    bool      Association option flag
+15       3    bytes     Storage padding
+
+
+Post-install choice/action record (20 bytes)
+--------------------------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    u32       Action kind (execute/restart family)
+04       4    str_off   UI label; may be an empty present string
+08       4    str_off   Executable or action value
+0C       4    str_off   Arguments
+10       1    u8        Action mode
+11       1    bool      Selected/enabled by default
+12       2    bytes     Storage padding
+
+
+Windows-service record (28 bytes)
+---------------------------------
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    str_off   Service name
+04       4    str_off   Display name
+08       4    str_off   Description
+0C       4    str_off   Executable/command
+10       4    u32       Dependency count
+14       4    offset    Dependency str_off array
+18       1    u8        Start-type mode
+19       1    u8        Error-control mode
+1A       1    bool      Service option flag
+1B       1    byte      Storage padding
+
+
+Metadata object graph and byte coverage
+---------------------------------------
+
+All variable tables and strings are reached through explicit offsets in the
+fixed root, the two package descriptors, or a service record.  Tables need not
+be adjacent to their owner.  Counts and fixed strides determine their exact
+extent.  UTF-16 terminators determine string extents.  Shared string offsets
+are legal.
+
+After marking the fixed root, its defined zero alignment, every counted table,
+and every referenced terminated string, no decoded metadata bytes remain.
+Unreferenced bytes, nonzero root-alignment bytes, an out-of-range offset, an
+unterminated string, or a payload-size mismatch indicate damage.
+
+
+End of file and Authenticode
+----------------------------
+
+For an unsigned container, the metadata LZMA record ends at end of file.
+
+For a signed container, the PE Certificate Table follows metadata.  The writer
+inserts 8 - (metadata_end mod 8) zero bytes, a value from one through eight;
+there is therefore a full eight-byte pad when metadata_end is already aligned.
+The PE security-directory file offset follows this padding.
+
+The security directory consists of one or more standard WIN_CERTIFICATE
+records.  Each has:
+
+Offset  Size  Type      Meaning
+------  ----  --------  ------------------------------------------------------
+00       4    u32       Record byte length including this header
+04       2    u16       Certificate revision (0100h or 0200h)
+06       2    u16       Nonzero certificate type
+08       *    bytes     Certificate data
+
+Each record advances by its length rounded up to eight bytes; rounding bytes
+must be zero.  The final aligned record ends exactly at the security-directory
+size, and the security directory ends at EOF.
+
+
+Recognition, damage, and extraction behavior
+--------------------------------------------
+
+A conforming recognizer validates the DOS header, PE32/x86 headers and section
+extents, requires the signature exactly at PE_RAW_END, and requires the overlay
+stream relationships before treating a file as this format.  It must not scan
+the input for the signature.
+
+For intact data, both LZMA outputs must reach their declared sizes, all duplicate
+offset/size fields must agree, the bootstrap DLL extent must agree, the package
+payload equations must hold, the metadata graph must cover every byte, and the
+EOF/certificate layout must be exact.
+
+Damage after positive recognition is recoverable where possible.  LZMA1 may
+yield a valid output prefix before reporting corruption or exhaustion.  With
+intact metadata, every regular file whose complete end lies inside the safe
+decoded-primary prefix can be recovered.  The last four bytes of an incomplete
+BCJ output prefix are not safe because a following input byte could have made
+them part of a five-byte converter window.  Files crossing that boundary are
+not complete and must not be emitted.  If damaged metadata does not provide a
+complete, valid path record, that record cannot safely be extracted.
+
+
+Extractor mapping
+-----------------
+
+Normal extraction emits only the installed package.  Backslashes in recorded
+paths are directory separators.  Absolute paths, drive-qualified paths, parent
+components, duplicate files, and file/directory collisions are invalid.
+Regular-file timestamps come from the u32 Unix timestamp.
+
+An archival/all-resources mode may additionally expose the bootstrap DLL,
+internal-resource package, decoded metadata, Authenticode table, and a generated
+manifest.  Those objects are installer machinery rather than files placed by a
+normal installation, so they must not appear in normal extraction output.

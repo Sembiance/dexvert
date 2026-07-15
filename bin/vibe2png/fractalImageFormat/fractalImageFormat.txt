@@ -1,0 +1,1554 @@
+FRACTAL IMAGE FORMAT FAMILY: FTC AND FIF1
+=========================================
+
+Scope
+-----
+
+This document specifies the Fractal Image Format variants identified by
+`FTC\0` and `FIF\x01`.  It covers the fixed FTC 1.1 profile, the region-based
+FTC 3.1, 3.2 and 3.3 containers with transform codec profiles 1 and 2, and
+the progressive FIF1 container.  It also covers P.OEM Video 2.0 grayscale
+and color streams (FTC profiles 0x0201 and 0x0202), plus the compact-affine
+FJF video stream (FTC 2.2 profile 0x0202).  It defines their containers, entropy
+streams, transform expansion, iterative reconstruction, color conversion,
+palettes, video timing and motion compensation, the generation-2 encoder
+stamp, optional RIFF/WAVE attachment, and the optional reference to an
+external Fractal Transform Template (FTT).  An FTC file whose directory has
+no FTT reference is self-contained.  One whose entropy stream selects FTT
+classes is intentionally not self-contained: its referenced FTT byte stream
+is an additional required decode input.  P.OEM video is self-contained.  No
+DLL or executable is part of any format specified here.
+
+Recognition is signature-first.  An implementation must select exactly one
+of the profiles below and then validate every field belonging to that
+profile.  A file that matches a signature but violates a required invariant
+is malformed; it must not be reinterpreted as another profile.
+
+
+Conventions
+-----------
+
+* Byte offsets begin at zero.
+* Header integers are unsigned little-endian unless explicitly called signed.
+* Payload bits are numbered from zero and read least-significant bit first:
+  bit 0 of a byte, then bit 1, through bit 7, then bit 0 of the next byte.
+* `W` and `H` are the canvas width and height.
+* `N` is the compressed payload length.
+* `trunc(a/b)` means signed integer division truncated toward zero.
+* `clamp8(x)` means the legacy 10-bit clamp described under “RGB conversion.”
+* Arrays and record grids are row-major unless stated otherwise.
+* FTC streams never receive implicit bits.  FIF1 regional restart readers use
+  the zero extension defined in the FIF1 section.
+
+
+Profile dispatch
+----------------
+
+    signature/version                     profile
+    ------------------------------------  -----------------------------------
+    FTC 00, outer 1.1, generation 2.1     fixed FTC profile (next section)
+    FTC 00, outer 1.1, generation 1.2     grayscale P.OEM Video (Part IV)
+    FTC 00, outer 1.1, generation 2.2     color P.OEM Video (Part IV)
+    FTC 00, outer 2.2, generation 2.2     compact-affine FJF video (Part V)
+    FTC 00, outer minor 3, major 1..4     region FTC 3.1/3.2/3.3
+    FIF 01, unit/version bytes 75 00      progressive FIF1
+
+Other signatures, unsupported generations, and noncanonical reserved fields
+are not members of these profiles.  The 0x0202 selector is a video profile;
+it must never be interpreted using a still-image length or transform header.
+
+
+PART I: FIXED FTC 1.1 PROFILE
+=============================
+
+
+Top-level layout
+----------------
+
+    offset  size  description
+    ------  ----  ----------------------------------------
+    0x00      67  fixed-profile header
+    0x43       N  compressed transform stream
+
+The physical file length must equal `67 + N`; there is no trailer.
+
+
+Header
+------
+
+    offset  size  value/type       operational meaning
+    ------  ----  ---------------  -----------------------------------------
+    0x00      4   46 54 43 00      ASCII `FTC` followed by NUL
+    0x04      1   01               outer major version
+    0x05      1   01               outer minor version
+    0x06      1   02               FTC profile generation
+    0x07      1   01               FTC profile revision
+    0x08      2   u16 = W          output canvas width
+    0x0A      2   u16 = H          output canvas height
+    0x0C      2   u16 = 24         output depth, bits per pixel
+    0x0E      2   u16 = 1          one-image/profile selector
+    0x10      4   u32 = 67         header byte length
+    0x14      4   u32 = N          payload byte length
+    0x18      4   u32 = 0          absent outer auxiliary section
+    0x1C      1   01               transform-stream major version
+    0x1D      1   01               transform-stream minor version
+    0x1E      2   u16 = 16         legacy reconstruction-depth constant
+    0x20      2   u16 = 0          canvas origin X
+    0x22      2   u16 = 0          canvas origin Y
+    0x24      2   u16 = W          transform canvas width
+    0x26      2   u16 = H          transform canvas height
+    0x28      2   u16 = 0          variable extension byte length
+    0x2A      2   u16 = 0          region-section byte length; implicit
+                                    full-canvas region
+    0x2C      2   u16 = 4          range-block width
+    0x2E      2   u16 = 4          range-block height
+    0x30      2   u16 = 2 or 8     domain-grid spatial step `DS`
+    0x32      1   03               symmetry-index bit count
+    0x33      1   07               quantization-index bit count
+    0x34      1   04               quantizer step code (internal step 32)
+    0x35      2   s16 = 0          quantizer origin code
+    0x37      2   u16 = 1          transform-definition count
+    0x39      2   u16 = 6          transform-definition type
+    0x3B      2   u16 = 8          component precision
+    0x3D      1   00 if DS=2;      domain-step profile companion flag
+                     01 if DS=8
+    0x3E      5   all zero         reserved tail
+
+The value at 0x1E is copied into legacy decoder state but selects no alternate
+operation in this version-1.1 path. It is nevertheless a normative profile
+constant. The zero-length region section causes one implicit region at
+`(0,0,W,H)`; therefore there are no region bytes and no later RGB-region edge
+filter.
+
+The companion flag at 0x3D is tied to `DS` as shown. The version-1.1 decoder
+does not use it in a separate arithmetic operation; it distinguishes the two
+stored domain-step profiles and is therefore validated rather than ignored.
+
+`W` and `H` must be positive multiples of eight and must match at both header
+locations. `DS` must be 2 or 8. `N` must be nonzero. Every fixed and reserved
+value above is normative. One canonical header comparison, after substituting
+`W`, `H`, `DS`, and `N`, accounts for all 67 bytes and rejects unsupported
+profiles immediately.
+
+
+Payload organization
+--------------------
+
+The payload codes two consecutive record planes:
+
+1. Primary/luminance plane: range canvas `W` by `H`; domain grid
+   `ceil(W/DS)` by `ceil(H/DS)`.
+2. Secondary/chroma plane: range canvas `W` by `H/2`; domain grid
+   `ceil(W/DS)` by `ceil(H/DS) + ceil((H/2)/DS)`. The first term's rows
+   refer to the primary half-resolution canvas and the second term's rows
+   refer to the secondary canvas.
+
+The primary plane ends with zero bits through the next byte boundary. The
+secondary plane ends at an arbitrary bit position. From zero through seven
+unused high bits may remain in the last payload byte, and all must be zero.
+Eight or more unused terminal bits mean unexplained trailing data and are
+invalid.
+
+Each range block is 4 by 4 pixels. The primary record grid is `(W/4)` by
+`(H/4)`. The secondary grid is `(W/4)` by `(H/8)`. After parsing, records are
+stored as the complete primary grid followed by the complete secondary grid.
+
+
+Range-block traversal permutation
+---------------------------------
+
+For mask coding, a range-record grid is padded upward to multiples of four in
+both axes. Padded positions do not consume mask entries. Four-by-four tiles
+are visited left-to-right and top-to-bottom. Within a tile, ordinal positions
+0 through 15 use these `(row,column)` coordinates:
+
+    ordinal:  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+    row:      0  0  1  1  0  0  1  1  2  2  3  3  2  2  3  3
+    column:   0  1  0  1  2  3  2  3  0  1  0  1  2  3  2  3
+
+“Ordinal” below means the position in this padded, tiled traversal, not the
+row-major record index.
+
+
+Run-length code
+---------------
+
+A mask begins with one state bit. Runs alternate between state zero and state
+one. To decode one positive run length:
+
+1. Count leading one bits until a zero bit is read; call the count `k`.
+2. If `k = 0`, the run is 1.
+3. Otherwise read `k-1` additional bits LSB-first as integer `v`; the run is
+   `2^(k-1) + v + 1`.
+
+No run may exceed the number of candidates still present in that mask. More
+than 31 leading ones is invalid.
+
+
+Four classification masks
+-------------------------
+
+Start with every valid ordinal as a candidate and label zero. For each mask,
+state zero selects/marks its run and state one passes its run to the next
+mask. A later mask is absent when the preceding mask has no survivors:
+
+1. Mark selected ordinals as class 2.
+2. Among survivors, mark selected ordinals as reserved class 6.
+3. Among survivors, mark selected ordinals as class 1.
+4. Among survivors, state-zero runs become class 1 and state-one runs remain
+   class 0.
+
+Reserved class 6 requires transform components not present in this exact
+24-bit profile. Any class-6 result is invalid here. The class-6 mask is still
+always present and consumed; normally it selects no entries.
+
+
+Transform records and sharing
+-----------------------------
+
+Records are then read in three passes over padded ordinal order:
+
+* Class 2: one base record for each ordinal group of 16 containing class-2
+  entries. All class-2 blocks in the group derive from that base.
+* Class 1: one base record for each ordinal group of 4 containing class-1
+  entries. All class-1 blocks in the group derive from that base.
+* Class 0: one independent record per class-0 block.
+
+A base record consists of:
+
+    bits  field
+    ----  ---------------------------------------------------------------
+      7   quantization index QI
+      D   row-major domain index DI
+      3   symmetry S, in the range 0..7
+
+`D = bit_length(domain_width * domain_height - 1)`, equivalently the minimum
+number of bits that can represent the largest valid domain index. `DI` must
+be smaller than the domain cell count; unused binary codes are invalid.
+
+The ungrouped full-resolution domain origin is:
+
+    domain_x = (DI mod domain_width) * DS
+    domain_y = floor(DI / domain_width) * DS
+
+
+Grouped domain deltas
+---------------------
+
+For a shared record, let `G` be 4 for class 2 and 2 for class 1. Let `i` be
+the ordinal modulo `G*G`, and obtain `row,column` from the first `G*G`
+entries of the traversal table. Define arrays indexed by symmetry `S`:
+
+    S:             0  1  2  3  4  5  6  7
+    DX_column:     1 -1  1 -1  0  0  0  0
+    DY_column:     0  0  0  0  1  1 -1 -1
+    DX_row:        0  0  0  0  1 -1  1 -1
+    DY_row:        1  1 -1 -1  0  0  0  0
+
+For `G=4`:
+
+    start_x:       0  3  0  3  0  3  0  3
+    start_y:       0  0  3  3  0  0  3  3
+
+For `G=2`:
+
+    start_x:       0  1  0  1  0  1  0  1
+    start_y:       0  0  1  1  0  0  1  1
+
+The derived record origin is the base origin plus:
+
+    delta_x = 8 * (start_x[S] + DX_row[S]*row + DX_column[S]*column)
+    delta_y = 8 * (start_y[S] + DY_row[S]*row + DY_column[S]*column)
+
+Every source footprint produced by the derived origin must remain inside the
+packed half-resolution canvas. Otherwise the stream is invalid.
+
+
+Symmetries
+----------
+
+For source coordinate `(r,c)` in a square whose extent argument is `E`, the
+eight symmetry mappings are:
+
+    S=0: (r,       c)
+    S=1: (r,       E-1-c)
+    S=2: (E-1-r,   c)
+    S=3: (E-1-r,   E-1-c)
+    S=4: (c,       r)
+    S=5: (c,       E-1-r)
+    S=6: (E-1-c,   r)
+    S=7: (E-1-c,   E-1-r)
+
+
+Quantization and affine transform
+---------------------------------
+
+Build 128 signed quantization values in index order:
+
+    current = -2048 * 16
+    repeat 128 times:
+        adjusted = max(current, -0x6000)
+        if adjusted < 0: adjusted -= 5
+        else:            adjusted += 6
+        quantized[QI] = trunc(adjusted / 12) + 2048
+        current += 32 * 16
+
+Build the 8192-byte affine lookup `A`:
+
+    A[0..2047] = 0
+    for t in 2048..8191:
+        A[t] = min(floor((32 + 6*(t-2048)) / 64), 255)
+
+Applying a record with quantized value `q` to an unsigned source sample `p`
+returns `A[q + 8*p]`. The index must lie in `0..8191`.
+
+
+Packed reconstruction canvas
+----------------------------
+
+Reconstruction uses a packed full canvas of `W` by `3H/2` bytes and a packed
+half canvas of `W/2` by `3H/4` bytes. In the full canvas:
+
+* Rows `0 .. H-1` are luminance Y.
+* Rows `H .. 3H/2-1` contain chroma. Each row's first `W/2` samples are U and
+  its last `W/2` samples are V.
+
+Each row-major record owns a 4-by-4 full block and a corresponding 2-by-2
+half block. Primary records precede secondary records, so ordinary row-major
+record indexing maps directly onto the packed canvases.
+
+
+Half-resolution graph initialization
+------------------------------------
+
+For each record and each target half-block coordinate `r,c` in `0..1`:
+
+1. Transform `(2r,2c)` with symmetry `S` and extent `E=4`.
+2. Add the record domain origin divided by two.
+3. Store that half-canvas location as this target node's dependency, and
+   store the record's `q` at the target node.
+
+Resolve the resulting functional dependency graph in increasing target-node
+index. A dependency already resolved is transformed directly. For an
+unresolved chain, follow at most 513 nodes. If it reaches a resolved node,
+use that node's value. If it reaches a cycle or the chain bound, append 32
+more dependency nodes, seed with value 128, apply the last 32 transforms in
+reverse order, discard those 32 seed nodes, then apply the remaining chain in
+reverse order. Mark each resulting node resolved. This fixed 32-step cycle
+seed is normative; it is not an until-stable loop.
+
+
+Half-resolution convergence
+---------------------------
+
+Sweep unconverged records in row-major order. For each of its four half-block
+targets `r,c`:
+
+1. Transform `(2r,2c)` using extent `E=3`.
+2. At that source position, average the 2-by-2 half-canvas square as
+   `floor((sum+2)/4)`.
+3. Apply the record's affine transform and immediately replace the target
+   value.
+
+For a replacement, compute `(new-old) mod 256`. It is significant if the
+result is from 5 through 251 inclusive, equivalent to a signed byte change
+whose magnitude exceeds four. A block with no significant replacements in a
+sweep is permanently marked converged. Repeat sweeps until no unconverged
+block has a significant replacement. In-place row-major update order is
+normative.
+
+
+Full-resolution expansion
+-------------------------
+
+For each record's full 4-by-4 target and every `(r,c)` in `0..3`, transform
+`(r,c)` using extent `E=4`, add the record domain origin divided by two, read
+that half-canvas sample, apply the record affine transform, and write the
+full-canvas target.
+
+
+Transform-group boundary filter
+-------------------------------
+
+Filtering operates on the packed `W` by `3H/2` canvas. The record grid has
+`W/4` columns and `3H/8` rows. Give each record marker `1 << class`: class 0
+is 1, class 1 is 2, and class 2 is 4.
+
+Construct boundary flags only for:
+
+* marker 2 in aligned 2-by-2 record groups;
+* marker 4 in aligned 4-by-4 record groups.
+
+For every record on a matching group's left, right, top, or bottom edge, set
+respectively flag bit 0, 1, 2, or 3 at that boundary. A right/bottom flag is
+stored at the grid line immediately after the group. Clear flags at the
+outer top and left borders. Also clear horizontal flags at the Y/chroma row
+boundary and vertical flags at the U/V column boundary within chroma rows.
+
+Build two signed correction tables indexed by `i = delta & 0x1ff`.
+
+For `0 <= i < 256`:
+
+    near[i] = min(floor((2*i+2)/5), 16)
+    far[i]  = min(floor((i+1)/6), 16)
+
+For `256 <= i < 512`:
+
+    n = trunc((2*i-0x402)/5) + 256
+    f = trunc((i-0x201)/10) + 256
+
+For each of `n` and `f`, replace a value below 240 with 240 and a value above
+255 with zero, then interpret the low byte as signed. These become `near[i]`
+and `far[i]`.
+
+At a flagged boundary let sample positions be `m2,m1,p0,p1`, two on either
+side. Compute:
+
+    cn = near[(p0-m1) & 0x1ff]
+    cf = far [(p1-m2) & 0x1ff]
+    half = trunc(cn/2)
+
+If bit 0 is set, update the plus side:
+
+    p0 = clamp8(p0 - cn + cf)
+    p1 = clamp8(p1 - half)
+
+If bit 1 is set, update the minus side:
+
+    m1 = clamp8(m1 + cn - cf)
+    m2 = clamp8(m2 + half)
+
+Process record blocks row-major. At each block, process its vertical boundary
+first for all four rows, then its horizontal boundary for all four columns.
+All changes are in-place.
+
+
+YUV 4:2:0 upsampling
+--------------------
+
+For output pixel `(x,y)`, start with chroma sample `(floor(x/2),floor(y/2))`.
+Clamp a requested next chroma coordinate at the right or bottom edge.
+
+* even x, even y: use the one sample;
+* odd x, even y: average the two horizontal samples as `(sum+1)/2`;
+* even x, odd y: average the two vertical samples as `(sum+1)/2`;
+* odd x, odd y: average the four samples as `(sum+2)/4`.
+
+Use integer floor division after adding the stated rounding constant. Perform
+this independently for U and V.
+
+
+RGB conversion
+--------------
+
+Build three signed tables. For indices `i=0..127`:
+
+    red_from_v[i]   = trunc((-0x804   + 0x10*i)  / 10)
+    green_from_v[i] = trunc((-0x34187 + 0x683*i) / 16)
+    green_from_u[i] = trunc((-0x31A8F + 0x635*i) / 32)
+
+For indices `i=128..255`, let `j=i-128`:
+
+    red_from_v[i]   = trunc((0x05 + 0x10*j)  / 10)
+    green_from_v[i] = trunc((0x08 + 0x683*j) / 16)
+    green_from_u[i] = trunc((0x10 + 0x635*j) / 32)
+
+The legacy clamp first computes `k = value & 0x3ff`, then returns:
+
+    k          if 0 <= k < 256
+    255        if 256 <= k < 640
+    0          if 640 <= k < 1024
+
+For each filtered luminance `Y` and interpolated chroma `U,V`, write standard
+PNG channel order:
+
+    R = clamp8(Y + red_from_v[V])
+    G = clamp8(Y - ((green_from_u[U] + green_from_v[V]) >> 7))
+    B = clamp8(Y - 256 + 2*U)
+
+The right shift is an arithmetic signed shift.
+
+
+Strict recognition and failure behavior
+---------------------------------------
+
+A strict decoder performs these checks before publishing output:
+
+1. Validate the entire canonical 67-byte header, dimensions, and exact file
+   length.
+2. Decode all four masks for both planes, rejecting run overflows, reserved
+   class 6, truncation, and excessive run prefixes.
+3. Decode the exact required transform records, rejecting invalid domain
+   codes and out-of-canvas grouped sources.
+4. Require zero primary byte-alignment bits and zero terminal padding of at
+   most seven bits. Do not read beyond `N`.
+5. Reconstruct, filter, upsample, and convert the complete raster.
+6. Only after every prior operation succeeds, encode and atomically publish
+   one `W` by `H`, 8-bit truecolor PNG.
+
+There is no checksum field. Structural parsing, bounds, complete consumption,
+and zero-padding checks provide stream integrity detection. A malformed or
+unsupported input has no partial image result.
+
+
+PART II: REGION FTC 3.1, 3.2, AND 3.3
+=====================================
+
+
+Physical layout
+---------------
+
+    offset                                      contents
+    ------------------------------------------  ----------------------------
+    0                                           48-byte fixed outer header
+    48                                          remainder of main header
+    main_size                                   optional palette bytes
+    main_size + auxiliary_size                  region payload area
+    main_size + auxiliary_size + payload_size   optional generation-1/2 stamp,
+                                                or attachment descriptor
+    previous + 106                              optional RIFF/WAVE bytes for
+                                                later outer generations
+
+The exact file size is `main_size + auxiliary_size + payload_size` when
+`secondary_size` is zero.  For outer generation 1 or 2, a nonzero value counts
+a literal trailing encoder stamp.  For outer generations 3 and 4, a nonzero
+value counts RIFF/WAVE bytes and the physical tail is 106 bytes larger because
+its associated-data descriptor precedes the WAVE stream.
+
+
+Outer header
+------------
+
+    off   size  field
+    ----  ----  -------------------------------------------------------------
+    0       4   `46 54 43 00`
+    4       1   outer encoder generation: 1, 2, 3, or 4
+    5       1   outer family, exactly 3
+    6       2   color code: 0101 gray, 0102 YUV, or 0104 EUV
+    8       4   encoder-owned fields; decoded image semantics do not use them
+    12      2   output depth: 8 for 0101, 24 for 0102/0104
+    14      2   entropy profile: 1 (bit/RLE) or 2 (arithmetic)
+    16      2   main_size
+    18      2   auxiliary_size
+    20      4   payload_size
+    24      4   generation-1/2 stamp size, or later attachment data size
+    28      1   transform major, exactly 3
+    29      1   transform minor: 1, 2, or 3
+    30      2   transform-header length, equal to region_size + 20
+    32      2   output origin x, zero in this profile
+    34      2   output origin y, zero in this profile
+    36      2   output width
+    38      2   output height
+    40      2   stored width, equal to output width
+    42      2   stored height, equal to output height
+    44      2   transform-header extension byte count E
+    46      E   extension bytes; this profile permits only zero bytes
+    46+E    2   region_size
+
+The four bytes at 8 are encoder information. The reference reconstruction
+path never reads them; they do not alter pixels or delimit another object.
+They remain part of the main header and are covered by `main_size`.
+
+
+Generation-1/2 encoder stamps
+-----------------------------
+
+An outer-generation-1 or -2 file may end in a 14-byte product/version stamp.
+In that case `secondary_size` is 14 and these bytes begin immediately after
+the last region payload byte.  Two stamp values are defined:
+
+    relative offset  bytes/ASCII
+    ---------------  -------------------------------------------
+    0                 56 53 23 23       `VS##`
+    4                 49 46 58 30 30 30 `IFX000`
+    10                56 50 32 30       `VP20`
+
+or, as one complete 14-byte value:
+
+    56 53 23 23 4C 54 53 30 30 30 53 54 33 30   `VS##LTS000ST30`
+
+The three fields are an encoder vendor/version identification record.  They
+have no reconstruction action, but all fourteen bytes are structural and must
+match one defined value exactly; they are neither entropy data nor arbitrary
+padding.  A zero `secondary_size` means that this stamp is absent. Other trailer
+lengths or stamp values are outside this profile.
+
+
+Region directory
+----------------
+
+The `region_size` bytes immediately following its u16 length are:
+
+    rel off  size              meaning
+    -------  ----------------  ----------------------------------------------
+    0          4               nonzero encoder target/budget
+    4          4               nonzero encoder plane/layout code
+    8          1               zero, reserved
+    9          4               nonzero encoder workspace limit
+    13         1               region count R, or zero escape
+    14         8*R             R region rectangles
+    14+8*R     1               external FTT-reference count T
+    next       variable        T external FTT-reference records
+
+When the one-byte count is zero, bytes 9..12 are also the little-endian
+32-bit region count. Consequently the zero escape and workspace-limit use
+are mutually exclusive encodings of the same four bytes. Each rectangle is
+`u16 x, u16 y, u16 width, u16 height`. Coordinates and sizes are multiples
+of eight and sizes are nonzero. Regions must not overlap. Their union must
+cover the requested output rectangle; gaps elsewhere in the coded canvas
+are permitted.
+
+Each external FTT-reference record is byte-aligned and has this form:
+
+    rel off  size  meaning
+    -------  ----  ---------------------------------------------------------
+    0          2   expected FTT source width
+    2          2   expected FTT source height
+    4          4   expected FTT identity value
+    8          1   filename byte count L
+    9          L   locale/OEM byte filename allocation
+
+The dimensions and filename length are nonzero. The filename allocation is
+either fully occupied or contains one NUL followed only by zero padding. The
+occupied bytes are a DOS/Windows locale string; the path separators and `.ftt`
+suffix are invariant ASCII. The filename conventionally contains the encoder's
+DOS path and ends in `.ftt`; a decoder uses its basename
+to locate the separately supplied resource in the FIF file's directory rather
+than requiring that obsolete absolute path to exist. Basename matching is
+case-insensitive. There is no padding between records and the last name ends
+exactly at `region_size`.
+
+An FTT is a header followed by a row-major, one-byte grayscale source raster:
+
+    off   size  value/meaning
+    ----  ----  -------------------------------------------------------------
+    0       4   `FTT\0`
+    4       2   zero, reserved
+    6       2   FTT version, 0101 hex
+    8       2   source-raster width FW
+    10      2   source-raster height FH
+    12      2   sample depth, 8
+    14      2   zero, reserved
+    16      2   payload offset/header size, 26
+    18      4   payload byte length, exactly FW*FH
+    22      4   template identity value
+    26   FW*FH  unsigned source samples, rows top-to-bottom, columns left-right
+
+The dimensions and identity must equal the values in the FTC reference or the
+resource is the wrong template. Physical FTT length is exactly `26+FW*FH`; no
+palette, row padding, or trailer exists. The FTT payload is not duplicated
+anywhere in the FTC container.
+
+The budget, layout code, and workspace limit are encoder-side allocation
+hints. The decoder accounts for them and requires the non-escape fields to
+be nonzero, but they neither size a byte stream nor change reconstruction.
+
+
+Transform descriptor and quantizers
+-----------------------------------
+
+The descriptor follows the directory:
+
+    rel off  size  value
+    -------  ----  ----------------------------------------------------------
+    0          2   range side, 4
+    2          2   domain sample side, 4
+    4          2   domain grid step, 2
+    6          1   symmetry width, 3 bits
+
+For transform 3.1, bytes 7..12 are `u8 bits, u8 step, s16 base, u16 Q`,
+followed by Q u16 quantizer kinds. All Q quantizers share bits/step/base.
+For 3.2 and 3.3, bytes 7..8 are Q, followed by Q six-byte entries
+`u16 kind, u8 bits, u8 step, s16 base`. Q is 1 or 2, bits is 1..12, step is
+nonzero, and kind is one of 4, 5, 6, 7, 8.
+
+Let `raw=0..2^bits-1`. A quantizer produces an affine-table index as follows.
+For 3.1 begin with `current=8*base-2048`, `increment=8*step`; for later
+versions use `current=base-2048`, `increment=step`.
+
+* kind 4: double current and increment; value is
+  `max(current,-2048)+2048`.
+* kinds 5, 6, 7: shift current and increment left four. Let `(D,L,NR,PR)`
+  be `(10,-0x5000,4,5)`, `(12,-0x6000,5,6)`, or
+  `(14,-0x7000,6,7)`. Value is
+  `trunc((max(current,L) + (PR if current>=0 else -NR))/D)+2048`.
+* kind 8: value is `max(current,-2048)+2048`.
+
+Advance current once per entry. Every generated value must be in 0..8191.
+
+Thirteen bytes follow the quantizers and describe transforms whose source is
+the external FTT raster:
+
+    rel off  size  meaning
+    -------  ----  ---------------------------------------------------------
+    0          2   external-transform kind, 8
+    2          2   encoder-only FTT tuning value, 1 or 3
+    4          2   zero, reserved
+    6          2   FTT domain-grid step TS, 1
+    8          1   FTT symmetry width, 3 bits
+    9          1   FTT offset width BB, 1..12
+    10         1   FTT offset step SS, nonzero
+    11         2   signed FTT offset base OO
+
+The tuning value is retained in the container but is not copied into decoder
+state and does not change the bitstream grammar. For external records, begin
+`current=OO-256`; entry r
+of the native biased saturation table is `max(current+r*SS,-512)`. In the
+FTT profile using biased base 0x2000, remove that 0x2000 bias to obtain the
+signed brightness offset applied to an FTT sample. The result is saturated to
+0..255. Thus the canonical `OO=0x2000, SS=1` table maps raw r to offset r-256.
+
+For 3.3, the next byte D is followed by D signed byte quantizer deltas, then
+four encoder-statistic bytes. In the supported arithmetic form D is three;
+the first delta is selected by a zero side bit, otherwise a second side bit
+selects delta one or two. For earlier transforms, a one-quantizer descriptor
+has no statistic bytes; a two-quantizer descriptor has five, beginning with
+zero. The statistic bytes record encoder tuning and have no decode action.
+`main_size` ends immediately after these fields.
+
+
+Auxiliary palette
+-----------------
+
+An empty auxiliary section means no palette. Otherwise it is `u16 count`
+followed by exactly `count` RGB triples. This is an output-colormap resource,
+not indexed source imagery. Truecolor reconstruction therefore parses and
+validates it but does not remap the decoded YUV/EUV samples through it.
+
+
+Region payload framing
+----------------------
+
+There are R consecutive records in directory order. Each is `u32 L` followed
+by exactly L compressed bytes. L is nonzero. The last stream must end exactly
+at `payload_size`; no payload trailer exists.
+
+
+Common range-block order and grouping
+-------------------------------------
+
+Each plane contains 4 by 4 range blocks. Pad its block grid to a multiple of
+four in each direction. Visit padded 4 by 4 tiles row-major, using this order
+inside each tile (coordinates shown as `y,x`):
+
+    00 01 10 11  02 03 12 13  20 21 30 31  22 23 32 33
+
+Padded cells do not create output records. Class 2 shares one transform over
+a 4 by 4 block group; class 1 shares one over a 2 by 2 group; class 0 stores
+one transform per block. A shared transform is expanded with the selected
+dihedral symmetry. For group side G=4 or 2, the base-domain displacement is
+eight times the symmetry-transformed `(row,column)` within the group.
+
+Symmetry values map an output `(row,column)` in an extent S to source:
+
+    0 (row,column)             1 (row,S-1-column)
+    2 (S-1-row,column)         3 (S-1-row,S-1-column)
+    4 (column,row)             5 (column,S-1-row)
+    6 (S-1-column,row)         7 (S-1-column,S-1-row)
+
+
+Profile-1 bit/RLE entropy
+-------------------------
+
+Bits and multi-bit integers are LSB-first. A run length is coded as a unary
+prefix of K one bits then zero. K=0 means length 1; otherwise read K-1 bits V
+and return `2^(K-1)+V+1`. More than 31 prefix ones is invalid.
+
+Starting with all real padded-order cells as candidates, decode alternating
+runs. Each mask begins with a state bit; state zero marks the named class and
+state one passes cells to the next mask.
+
+1. class-2 mask;
+2. class-6/dictionary mask on survivors;
+3. class-1 mask;
+4. class-5/dictionary mask;
+5. final class-0/class-4 mask, where state one marks class 4.
+
+Classes 4, 5, and 6 require source fragments from the referenced FTT and are
+invalid when the directory FTT-reference count is zero. If such a class is
+selected and the matching external FTT bytes were not supplied, reconstruction
+is impossible: the omitted fragment samples directly affect output pixels.
+
+Records are serialized by class 2, class 1, class 0, class 6, class 5, then
+class 4. For ordinary classes 0..2, a 3.1 record is
+`raw[shared bits], selector[1 if Q=2], domain_index, symmetry[3]`; for 3.2+
+the selector precedes raw and raw uses the selected quantizer width.
+`domain_index` has `ceil(log2(domain_columns*domain_rows))` bits and must be
+in range. Its coordinates are `(index % columns)*2, (index / columns)*2`.
+
+An external class 4..6 record is
+`raw[BB], ftt_domain_index, symmetry[3]` and has no ordinary-quantizer selector.
+The FTT grid is `ceil(FW/TS)` by `ceil(FH/TS)` and the domain index uses the
+minimum bit width for that product. Its source origin is
+`(index % columns)*TS, (index / columns)*TS`. Sampling applies the same
+dihedral symmetry and replicated-edge extension as an ordinary domain, then
+adds the record's signed FTT brightness offset and saturates to 0..255.
+
+Decode the Y plane first. Color files then have zero bits through its byte
+boundary and a packed secondary plane of width W and height H/2. Its domain
+row numbering is prefixed by `ceil(H/2)` Y-domain rows. At most seven zero
+terminal bits may remain after the last plane.
+
+
+Profile-2 arithmetic entropy
+----------------------------
+
+This is a 24-bit integer range coder. On start or restart, read three bytes
+big-endian into `code` and set `interval=0x1000000`. A model is a descending
+cumulative array beginning 0x4000 and ending zero. Select symbol i when
+
+    interval*cumulative[i+1]/0x4000 <= code
+        < interval*cumulative[i]/0x4000.
+
+Subtract the lower bound, replace interval by upper-lower, and while interval
+is below 0x8000 shift it eight and append one input byte to code. Uniform
+alphabets used by the format have 2, 4, or 16 symbols.
+
+To transmit a model of C symbols:
+
+* C<32: read C uniform-16 values and square each to obtain weights.
+* C>=32: read four uniform-16 seeds. Normalize them into a four-action model.
+  Generate weights with previous=0 and delta=1. At previous zero, actions
+  select 0,1,4,12 for both value and delta. Subsequently action 0 retains
+  delta; action 1 replaces it by `trunc((sign-adjusted - delta)/2)`; action 2
+  replaces it by `trunc((sign-adjusted + delta)/2)`; action 3 doubles it.
+  The new weight is max(previous+delta,0).
+
+Normalize the reverse cumulative weight sums to 0x4000. A zero total is bad.
+
+Class coding begins with a uniform-4 flag value. Model-coded 16-symbol nibbles
+describe four cells apiece. Flag bit 0 enables dictionary bits. Flag bit 1
+chooses per-four-cell class nibbles; otherwise one class nibble covers sixteen
+cells. Separate zero nibbles distinguish class 0 from classes 1/2. Any final
+dictionary class is invalid here. Form class-2, class-1, then class-0 groups.
+
+For all groups columnarly decode: optional quantizer selector, up to nine
+high quantizer bits, any remaining low part, symmetry, domain x, then domain y.
+Each field uses one transmitted model. Domain axes each begin with a uniform
+predictive flag. Without prediction use the decoded coordinate. With it use
+
+    (range_coordinate/2 - domain_count/2 + value) mod domain_count.
+
+Multiply the result by two. In 3.3, apply the raw side-channel delta described
+above to every grouped (class 1/2) cell. The side channel is LSB-first in bytes
+at the arithmetic cursor. Before a color secondary plane, byte-align it; 3.3
+then restarts the 24-bit coder. At most three unread bytes may remain as the
+range coder's terminal register state.
+
+
+Reconstruction shared by fixed and region FTC
+---------------------------------------------
+
+Pack Y followed by a secondary plane of height H/2. For color, each secondary
+row holds U in its left W/2 bytes and V in its right W/2. Gray has only Y.
+The half-resolution working raster is half the width and packed height.
+Domain edges use replicated samples.
+
+Each 4 by 4 record creates four half-resolution nodes. Initialize dependencies
+from symmetry-transformed coordinates `(0,0),(0,2),(2,0),(2,2)`. Resolve
+acyclic chains directly. For a cycle, append 32 dependency steps, start at
+128, and apply those affine maps backwards. Then apply the remaining chain.
+
+For affine index A, sample P, and quantizer kind/slope S:
+
+    table_index = A + 8*P
+    result = 0                         when table_index < 2048
+    result = min((32+(index-2048)*S)/64,255) otherwise
+
+Kind 6 uses the equivalent canonical 8192-byte table. Iterate unresolved
+2 by 2 blocks in-place, each time box-averaging four transformed source
+samples with `(sum+2)/4`. A block converges when every byte difference is in
+0..4 or 252..255 modulo 256. Stop when an entire pass changes no unconverged
+block. Expand each record to its full 4 by 4 block from the converged half
+raster and apply the same affine map.
+
+Apply the transform-boundary filter, chroma interpolation, and RGB conversion
+specified in Part I. Color code 0102 uses the Part-I YUV formula. For EUV
+(0104), interpolate the two secondary components identically, then compute:
+
+    shared = ((2*(E1+E2)+1)/3 + Y + 0x56) & 0x3ff
+    R = clamp8(shared - 2*E1)
+    G = clamp8(shared - 0x100)
+    B = clamp8(shared - 2*E2)
+
+Gray replicates Y into R, G, and B. Reconstruct each region independently,
+paste its Y and chroma rectangles into the coded canvas, validate non-overlap
+and output coverage, then crop the declared output rectangle.
+
+
+Optional associated sound
+-------------------------
+
+When `secondary_size` is nonzero, exactly 106 descriptor bytes follow the
+image payload:
+
+    0..3    u32 1
+    4..5    u16 1
+    6..37   NUL-terminated ASCII `Image Carousel image/sound file`, zero fill
+    38..85  48 metadata bytes
+    86..89  u32 equal to secondary_size
+    90..105 sixteen zero reserved bytes
+
+The following bytes are a complete RIFF/WAVE whose RIFF size is physical
+length minus eight. Walk every chunk as four-byte id, u32 size, payload, and
+a zero pad byte for odd size. A single PCM `fmt ` chunk of at least 16 bytes
+must have consistent channels/rate/alignment/bit depth; a `data` chunk must
+exist. The sound is ancillary and is not placed in the PNG.
+
+
+PART III: PROGRESSIVE FIF1
+==========================
+
+
+Container header
+----------------
+
+All integers are little-endian. The fixed portion is 56 bytes:
+
+    off   size  value/meaning
+    ----  ----  -------------------------------------------------------------
+    0       4   `46 49 46 01`
+    4       2   container unit/version marker `75 00`
+    6       4   requested output width
+    10      4   requested output height
+    14      2   header_size, end of all chunks
+    16      4   exact physical file size
+    20      4   source components: `EUV\0` or `Y\0\0\0`
+    24      4   output representation: `BGR\0` or `Y\0\0\0`
+    28      2   scale, 1
+    30      2   coded canvas width W
+    32      2   coded canvas height H
+    34      1   luminance domain step, 2
+    35      1   chroma domain step, 4
+    36      1   initial range exponent, 4
+    37      1   progressive level count, 5
+    38      2   tile width TW
+    40      2   tile height TH
+    42      4   primary-component transform limit
+    46      4   aggregate per-tile transform limit
+    50      1   progressive codec, 10 hex
+    51      1   chunk count
+    52      3   zero, reserved
+    55      1   encoder quality percentage; informational
+
+The paired component tags must be EUV/BGR for color or Y/Y for gray. Canvas
+and tile dimensions and both transform limits are nonzero; the primary limit
+does not exceed the aggregate limit. The coded canvas is cropped at its upper
+left to the requested dimensions after reconstruction.
+
+
+Header chunks
+-------------
+
+Chunks start at 56. Each is `u8 type, u16 length, length payload bytes`.
+Their canonical order is C0, optional 31, FF, 03, and their exact end is
+`header_size`.
+
+* C0 has length two and contains u16 value 2 or 4. It is a vendor encoder
+  extension recorded with the image; the progressive reconstruction path
+  does not branch on it.
+* 31 is an optional display palette, legal only for color. Its payload is
+  `u16 count`, then one bit width for each of the three components, then
+  count entries packed LSB-first in component order. Widths are 1..8 and no
+  trailing bits are allowed. Like the FTC palette, this is output-display
+  metadata and does not replace the EUV source planes for truecolor output.
+* FF is exactly 16 bytes: `FTU\0 01 01 08 00`, then u32 output width and
+  height. These dimensions must repeat the fixed header.
+* 03 is the progressive offset directory described next.
+
+
+Tiles and offset directory
+--------------------------
+
+Let `C=ceil(W/TW)`, `R=ceil(H/TH)`, and `T=C*R`. Tiles are row-major and edge
+tiles are clipped to the canvas. The directory is exactly
+`(1+T)*5*4` bytes. First are five global u32 level offsets. Next are five
+arrays of T u32 tile offsets, level-major. Every offset is between header_size
+and physical size. Each global sequence and each tile sequence is
+nondecreasing. The first global offset equals the first tile's level-zero
+offset.
+
+The offsets are restart points, not disjoint lengths. Fine-level readers can
+overlap later restart points. Global model streams are bounded by the next
+distinct offset and end with at most seven zero padding bits. Regional
+readers advance independently from their five offsets and may consume
+physical bytes that another reader also consumes. Byte-alignment fill between
+a completed symbol and another restart has no prescribed bit value. A gap of
+any length between the combined read intervals is offset-delimited restart
+slack. Its bytes have no prescribed value and are intentionally skipped. Thus
+every payload byte is either consumed by one or more readers or belongs to
+restart slack bounded by the directory/file-size declarations.
+
+At the physical end, a regional entropy reader receives implicit zero bits.
+This is part of FIF1 restart semantics, not a physical trailer. A safe decoder
+may bound this virtual extension at `16*aggregate_limit+32` bytes because all
+decode loops are already bounded by the tile geometry and transform limits.
+
+
+Fixed prefix books
+------------------
+
+FIF1 uses fixed LSB-first lookup books, not canonical codes inferred from
+frequency. Appendix A supplies the complete normative byte table. Treat its
+first byte as logical address 110310D0 hex. To decode a symbol, peek 24 bits,
+use the low eight as index I, read a little-endian signed 16-bit symbol at
+`symbol_table+2*I`, and a u8 length at `length_table+I`; advance that many
+bits. Length is 1..16.
+
+Symbols of 500 or more are extensions. Look up `base=u16[11033310+2*symbol]`,
+read extra width from `extension_metadata+2*base`, peek that many low bits,
+replace the symbol with `s16[extension_symbols+2*(base+suffix)]`, and advance
+the extra width. Width is 1..8.
+
+    use                 symbol      length      ext metadata  ext symbols
+    ------------------  ----------  ----------  ------------  -----------
+    selection, size 2   110310D0    110312D0    -             -
+    selection, size 4   110313D0    110315D0    110316D0      110316D2
+    selection, size 8   11031858    11031A58    11031B58      11031B5A
+    selection, size 16  11031CE0    11031EE0    -             -
+    intensity kind 0    11031FE0    110321E0    110322E0      110322E2
+    intensity kind 1    110324E8    110326E8    110327E8      110327EA
+    intensity kind 2    110329F0    11032BF0    11032CF0      11032CF2
+    local domain 21     11032DF8    11032FF8    -             -
+    local domain 11/4   110330F8    110332F8    -             -
+    local domain 11/8   110333F8    110335F8    -             -
+
+The domain-symbol coordinate tables are signed bytes at 11033770 (x for 21),
+110337B0 (y for 21), 110337F0 (x for 11), and 11033810 (y for 11).
+
+
+Global model streams
+--------------------
+
+Level zero has no model stream. Levels one through four begin with u8 model
+count 1..3. Each model is:
+
+    6 bits  domain kind: 11, 21, or 22 hex
+    2 bits  component applicability: 1=Y, 2=chroma, 3=both
+    4 bits  symmetry alphabet count code
+    4 bits  symmetry base code
+    4 bits  affine alphabet count code
+    4 bits  affine base code
+
+Each nibble indexes:
+
+    0,1,2,3,4,5,6,7,8,12,16,24,32,48,64,128
+
+The two alphabet counts must be nonzero. A model applies to Y unless its
+component code is 2 and applies to either chroma component unless the code is
+1. Model order is significant.
+
+
+Progressive transform decoding
+------------------------------
+
+Decode Y, then E1 and E2 for color, using the same five tile readers without
+resetting them between components. Chroma uses half the tile width and height.
+Start with one parent per 16 by 16 full-resolution range; chroma coordinates
+are correspondingly subsampled. The base parent count must be nonzero,
+four-aligned, and consistent with geometry.
+
+At level zero, decode one kind-0 intensity residual for every Y parent and one
+kind-1 residual for every chroma parent. Predict 128 for the first value, the
+previous value across the first row, and the value directly above thereafter.
+Set `level_value=clamp8(predictor-residual)`.
+
+At each later level, first select models. For each four parents, decode a
+selection symbol appropriate to twice the current range size and split it
+into four two-bit assignments, low pair first. Assignment zero means split
+the parent; 1..3 select the corresponding applicable model. A selected parent
+becomes a nonconstant transform at its current range position and is not
+split. A split parent creates children in top-left, top-right, bottom-left,
+bottom-right order. The first child keeps the parent value; for each other
+child decode an intensity residual and set
+`child=clamp8(parent-residual)`.
+
+Y intensity kind is 2 when the full range is below three, otherwise 0. Chroma
+uses kind 1 for full range 8 or 16, kind 0 for 4, and kind 2 thereafter. At
+the final level, remaining children are one-pixel constant transforms. The
+unpacked record array contains selected model groups in descriptor order,
+followed by those constants; this ordering is significant.
+
+The side channels are columnar across the entire level, not interleaved per
+model. In descriptor order, first decode every selected transform's domain
+for every model. Make a second descriptor-order pass that decodes every
+symmetry, then a third descriptor-order pass that decodes every affine value.
+Within each model, transforms retain selection order. Domain decoding is:
+
+* kind 22: read a direct index into
+  `ceil(tile_width/encoded_step) * ceil(tile_height/encoded_step)` and multiply
+  its x/y coordinates by the working domain step.
+* kind 21: decode the local-domain-21 symbol. Let radius be half the current
+  range, or zero when below the encoded domain step. Domain is range position
+  plus the signed coordinate-table delta times working step, minus radius.
+  Its initial symmetry is zero.
+* kind 11: use the /8 book when twice the range is eight, otherwise /4.
+  Domain is range position plus the signed table delta times working step.
+  Its initial symmetry is eight, marking a same-scale local dependency.
+
+Working domain step is encoded step divided by two for Y and by four for
+chroma. Decode `ceil(log2(symmetry_count))` and
+`ceil(log2(affine_count))` bits per transform, reject values outside the
+declared counts, then add the respective bases. Final symmetry is 0..15 and
+affine selector is valid only in 0..12 for reconstruction. The primary and
+aggregate decoded transform counts may not exceed the header limits.
+
+
+Progressive FIF1 reconstruction
+-------------------------------
+
+Reconstruct each tile and component independently. For a component tile of
+size w by h, create a half raster of w/2 by h/2. Every nonconstant range with
+code 2,4,8,16 covers a square of half that side and is initialized to its
+level value. Group final constants four at a time and initialize their shared
+half pixel to the floor of their four-value sum divided by four. These blocks
+must cover the half raster exactly.
+
+Affine selector A uses these 16.16 contrast factors:
+
+    A=0..11: 0.5 + A/8       A=12: 0.125
+
+For an ordinary half-resolution transform, symmetry-transform each domain
+coordinate and sum its 2 by 2 source box. Let M be the rounded mean of all
+such four-sample sums. Each output is
+
+    clamp8(level_value + round((sum-M)/4 * contrast[A])).
+
+Same-scale transforms (symmetry bit 3 set) sample the current output without
+box reduction and use `sample-M` instead. The source allocation has a
+replicated boundary apron; equivalently clamp each requested x/y coordinate
+to the nearest tile edge.
+
+Perform four synchronous passes. In each pass copy the previous half raster,
+apply all ordinary transforms from the previous raster, then apply same-scale
+transforms in dependency order in-place. Dependency order is obtained by the
+format's in-place overlap sort. On the half-resolution dependency grid, a
+transform's side is `range_code/2`. Repeatedly mark every active local-domain
+footprint, identify ranges that intersect that mask, and use a non-stable
+two-ended partition to move the intersecting records to the active prefix.
+Continue with that prefix while it changes and contains more than eight
+records. Finally, in reverse end order, compare each active end record with
+every earlier record and swap when the end range origin lies above and left
+of the earlier range's lower-right bound. Symmetry for sampling is its low
+three bits.
+
+Expand half to full resolution. Ordinary transforms sample the converged half
+raster at the transformed 4/8/16-square domain and write their full range.
+Write constants directly. Finally apply same-scale transforms to the full
+output in dependency order, in-place. Transform ranges plus constants must
+cover the full tile exactly.
+
+Paste tile planes into the coded canvas. Color stores full Y and half-size E1
+and E2, packed as in Part II. Convert EUV with the Part-II formula; gray
+replicates Y. Crop to the requested output size.
+
+
+Strict FIF1 failure rules
+-------------------------
+
+A conforming decoder rejects an incorrect marker, declared size mismatch,
+unknown, reordered, or duplicate chunks, bad palette packing, bad FTU
+dimensions, directory length or offset errors, invalid global models, invalid
+fixed-book symbols, selection/model/alphabet overflows, transform-limit
+overflows, and uncovered reconstruction pixels. It never guesses a version
+from a filename or from partially plausible bytes.
+
+
+PART IV: P.OEM VIDEO 2.0 / FTC 0x0201 AND 0x0202
+=================================================
+
+
+Scope and top-level layout
+--------------------------
+
+P.OEM Video 2.0 has two animated FTC 1.1 profiles. Grayscale uses selector
+bytes `46 54 43 00 01 01 01 02` (profile word 0x0201); color uses
+`46 54 43 00 01 01 02 02` (profile word 0x0202). They are unrelated to the
+fixed still-image payload described in Part I despite sharing `FTC\0`.
+
+    offset  size  description
+    ------  ----  -----------------------------------------------
+    0x00      66  video header
+    0x42       2  first frame payload length L0
+    0x44      L0  first frame payload
+              2  next frame payload length L1
+             L1  next frame payload
+             ...  records continue to physical EOF
+
+There is no frame count, index, or trailer.  A length is u16.  Every payload
+length is at least 10, is even, and every record must fit entirely in the file.
+EOF must occur exactly after a payload, so all file bytes are accounted for.
+
+
+Video header
+------------
+
+    offset  size  value/type       operational meaning
+    ------  ----  ---------------  -----------------------------------------
+    0x00      4   46 54 43 00      ASCII `FTC` followed by NUL
+    0x04      1   01               outer major version
+    0x05      1   01               outer minor version
+    0x06      1   01 or 02         sample layout: gray or planar color
+    0x07      1   02               profile revision (P.OEM Video 2.0)
+    0x08      2   u16 = W          display width
+    0x0A      2   u16 = H          display height
+    0x0C     16   opaque bytes     encoder workspace/reserved field
+    0x1C     36   byte string      NUL-terminated display title
+    0x40      1   u8 = F           frames per second, 1 through 30
+    0x41      1   u8               opaque encoder field; no decode action
+
+The defined geometries are 160 by 100, 160 by 120, and 256 by 160.  The
+16-byte field at 0x0C has no decoding or presentation semantics and may hold
+arbitrary encoder residue.  In the title field, bytes before the first NUL
+are a DOS-era display label; the bytes after that NUL are unused fixed-field
+residue and have no semantics.  A NUL must occur within the 36 bytes. Byte
+0x41 is likewise copied encoder state and is not read by reconstruction.
+These regions are still physically part of the header and are not payload.
+
+
+Frame payload and flags
+-----------------------
+
+    offset  size                 description
+    ------  -------------------  -------------------------------------------
+    0x00       2                 u16 flags
+    0x02       variable          LSB-first block-program bitstream
+             0..15 bits         zero padding to a 16-bit boundary
+               optional         palette record when flag bit 1 is set
+
+Only these flag bits are defined:
+
+* Bit 0, fractal frame.  Execute the same block program 16 times, swapping
+  source and destination buffers after every execution.  Otherwise execute
+  it once.
+* Bit 1, palette update in the color profile. A palette record follows the
+  aligned block program. This bit is undefined and must be zero for grayscale.
+
+Bits 2 through 15 are zero. The first color frame has flags 3, establishing
+both an iterated image and the initial palette. The first grayscale frame has
+flags 1. Its two reconstruction buffers
+begin filled with byte AB hex.  Later frames retain both reconstruction state
+and palette state.
+
+The block program stops after it has produced its exact block count; it has
+no terminator opcode.  Round that bit position upward to a multiple of 16.
+All intervening padding bits are zero.  If bit 1 is clear, that aligned point
+is the end of the frame payload.  If bit 1 is set, it is the first byte of the
+palette record, whose known length then locates the payload end.  Thus every
+payload byte and bit has one unambiguous owner.
+
+
+Reconstruction raster and block order
+-------------------------------------
+
+In color, each reconstruction buffer has `3*W*H/2` bytes and can be treated
+as a single `W` by `3*H/2` raster for transform and motion operations. Its
+layout is:
+
+1. `W*H` full-resolution green samples, row-major.
+2. `H/2` chroma rows of W bytes each.  A row contains `W/2` red samples,
+   followed by `W/2` blue samples.  Red and blue are horizontally and
+   vertically subsampled by two.
+
+In grayscale the buffer is simply the `W*H` row-major display-index raster;
+its fixed presentation palette maps index v to `(v,v,v)`. No palette record
+is present. The output is divided into consecutive 4 by 4 blocks across the
+applicable raster. Blocks are row-major with `W/4` blocks per row, for a total
+of
+
+    Bcolor = 3*W*H/32
+    Bgray  = W*H/16.
+
+For block number b, the top-left byte offset is
+
+    floor(b/(W/4))*4*W + (b mod (W/4))*4.
+
+The block program must produce exactly B blocks.  A run may not cross B.
+
+
+Motion-vector preamble and table
+--------------------------------
+
+Every execution starts by reading six 8-bit motion-table indices.  Define
+motion slot 0 as `(0,0)` and slots 1 through 6 as the table entries selected
+by those indices.  The following table is exhaustive; indices 61 through 63
+are undefined.
+
+    index   dx   dy       index   dx   dy       index   dx   dy
+    -----  ---  ---       -----  ---  ---       -----  ---  ---
+       0     0    0          21    -1    2          42    -3    3
+       1    -1   -1          22     0    2          43    -2    3
+       2     0   -1          23     1    2          44     2    3
+       3     1   -1          24     2    2          45     3    3
+       4    -1    0          25    -1   -3          46    -1    4
+       5     1    0          26     0   -3          47     0    4
+       6    -1    1          27     1   -3          48     1    4
+       7     0    1          28    -3   -1          49    -4    0
+       8     1    1          29     3   -1          50     4   -1
+       9    -2   -2          30    -3    0          51    -4   -1
+      10    -1   -2          31     3    0          52     3   -2
+      11     0   -2          32    -3    1          53    -3   -2
+      12     1   -2          33     3    1          54     3   -3
+      13     2   -2          34    -1    3          55     2   -3
+      14    -2   -1          35     0    3          56    -2   -3
+      15     2   -1          36     1    3          57    -3   -3
+      16    -2    0          37     4    0          58     1   -4
+      17     2    0          38    -4    1          59     0   -4
+      18    -2    1          39     4    1          60    -1   -4
+      19     2    1          40    -3    2
+      20    -2    2          41     3    2
+
+`dx` and `dy` are byte/pixel displacements.  Their linear displacement is
+`dy*W + dx` in the combined raster.
+
+
+Block opcodes
+-------------
+
+Read a 4-bit opcode for the next block:
+
+* 0 through 7: one affine/fractal block, described below.
+* 8 through 14: a motion run using motion slot `opcode-8`.
+* 15: one motion block.  Read a 6-bit table index directly.
+
+For a motion run, read its positive block count with this prefix, where bits
+in the prefix are shown in read order:
+
+    prefix   following bits   count
+    ------   --------------   --------------------------------
+      0            none       1
+      10           4          value + 2
+      110          6          value + 18
+      111         12          value
+
+A count of zero is invalid.  To copy one motion block, let D be its top-left
+offset and let M be the selected linear displacement.  Copy four bytes from
+the previous buffer at `D+M+r*W` to the next buffer at `D+r*W` for each row
+`r=0..3`.  Source bytes must remain inside the combined raster.  Motion reads
+only the previous buffer even when runs contain adjacent blocks.
+
+
+Affine/fractal block
+--------------------
+
+After opcode m in 0 through 7, read:
+
+    bits  field
+    ----  --------------------------------------------------------------
+      8   domain X code Xd
+      7   domain Y code Yd
+      8   unsigned offset code Q
+
+The 8 by 8 domain begins at byte offset `2*Yd*W + 2*Xd` in the previous
+combined raster and must fit there.  Each destination sample uses one of the
+domain's even coordinates.  For destination `(x,y)`, where x and y are 0..3,
+the source coordinate `(sx,sy)` is:
+
+    m   sx        sy
+    -   --------  --------
+    0   2*y       6-2*x
+    1   6-2*x     6-2*y
+    2   6-2*y     2*x
+    3   6-2*x     2*y
+    4   6-2*y     6-2*x
+    5   2*x       6-2*y
+    6   2*y       2*x
+    7   2*x       2*y
+
+If S is that source byte, write
+
+    clamp to 0..255( floor((3*S + 2)/4) + 2*(Q - 128) ).
+
+Q is biased unsigned: 00 hex means -128, 80 hex means zero, and FF hex means
++127 before the multiplication by two.  It is not a signed byte.
+
+
+Palette record and RGB presentation
+-----------------------------------
+
+A palette record begins at the aligned point and has this exact structure:
+
+    size          description
+    ------------  ----------------------------------------------------------
+       2          u16 P = 126
+     3*P          P interleaved VGA DAC triples: red, green, blue
+       P          red-low array
+       P          green-low array
+       P          blue-low array
+       P          red-high array
+       P          green-high array
+       P          blue-high array
+
+DAC components are 0..63.  Convert one to 8-bit display precision by
+`(v << 2) | (v >> 4)`.  Every bound is 0..31 and every low bound is at most
+its corresponding inclusive high bound.
+
+This record exists only in the color profile. The 126 inclusive RGB boxes
+must be disjoint and must partition all 32768
+points of 5-bit RGB space.  Palette updates alternate between indices 4..129
+and 130..255, starting with 4..129.  Record i updates display palette index
+`bank_base+i` and assigns that same index to every 5-bit point in its box.
+The other bank retains its preceding palette values.
+
+For output pixel `(x,y)`, take green from the full plane and take red and blue
+from `(floor(x/2),floor(y/2))` in their half-resolution planes.  Quantize each
+with `component >> 3`.  The historical lookup table is addressed as
+
+    (green5 << 10) | (red5 << 5) | blue5.
+
+This bit ordering is only an implementation address order; the box arrays
+and VGA triples retain the RGB order specified above.  The table value is the
+8-bit palette index displayed for that pixel.
+
+
+Presentation timing and strict failure rules
+--------------------------------------------
+
+Each decoded record is one display frame lasting `1/F` second.  There is no
+per-frame timing field.  A GIF writer, whose delay unit is 1/100 second,
+should distribute rounded frame boundaries so that nonintegral delays such
+as 30 fps alternate appropriately and do not accumulate drift.
+
+A conforming decoder rejects the wrong selector, an undefined geometry or
+frame rate, a missing title terminator, a partial or
+odd frame, undefined flag bits or motion indices, a zero/overlong run, a
+motion or affine source outside the combined raster, nonzero alignment bits,
+a missing or malformed palette, overlapping or incomplete palette boxes,
+bytes after a decoded frame payload, or EOF between records.  It must not
+fall back to a still-image profile after recognizing either video selector.
+
+
+PART V: COMPACT-AFFINE FJF VIDEO / FTC 2.2 0x0202
+==================================================
+
+
+Container and header
+--------------------
+
+This animated profile uses selector bytes `46 54 43 00 02 02 02 02` and the
+fixed geometry 256 by 160. It shares the color raster, motion table, opcode
+language, palette boxes, and presentation lookup from Part IV, but changes
+the affine fields and adds a terminal-frame field.
+
+    offset  size  value/type       operational meaning
+    ------  ----  ---------------  -----------------------------------------
+    0x00      8   selector         `FTC 00 02 02 02 02`
+    0x08      2   u16 = 256        display width
+    0x0A      2   u16 = 160        display height
+    0x0C     16   opaque bytes     encoder workspace/reserved field
+    0x1C     32   byte string      NUL-terminated display title
+    0x3C      4   u32 = T          exclusive terminal frame number
+    0x40      1   u8 = F           frames per second, 1 through 30
+    0x41      1   u8               opaque encoder field; no decode action
+    0x42      2   u16 = L0         first frame payload length
+    0x44     L0   bytes            first frame payload
+              2   u16 = L1         next frame payload length
+             L1   bytes            next frame payload, continuing to EOF
+
+The title must contain a NUL. The bytes after it in the 32-byte allocation,
+the workspace field, and byte 0x41 are encoder state without reconstruction
+semantics. They are nevertheless owned header bytes, not padding between
+records. Frame records are numbered beginning at one and T is the exclusive
+terminal value, so a complete stream contains exactly `T-1` physical records.
+EOF must follow the last payload exactly. Each u16 length is even, at least
+10, and includes the two-byte flags at the start of its payload.
+
+
+Frame flags and compact block program
+-------------------------------------
+
+The first payload has flags 3: execute its program 16 times and consume its
+initial palette record. Every later payload has flags 4 or 6. Bit 2 marks a
+temporal/delta frame; bit 1 optionally supplies a palette update; bit 0 is
+clear, so its program executes once. No other flag combinations or bits are
+defined for this profile. Reconstruction buffers start at AB hex and persist
+between records exactly as in Part IV.
+
+Every program begins with the same six motion-table bytes and produces the
+same `3*W*H/32 = 3840` color-raster blocks. Opcodes 8 through 15, the run
+prefix, motion copies, 16-bit zero alignment, and optional 126-entry palette
+record are byte-for-byte the Part-IV definitions.
+
+For an affine opcode 0 through 7, FJF reads these compact fields instead:
+
+    bits  field
+    ----  --------------------------------------------------------------
+      7   domain X code Xd
+      7   domain Y code Yd
+      7   unsigned offset code Q
+
+The domain begins at `2*Yd*W + 2*Xd`; use the Part-IV symmetry table and even
+8-by-8 domain coordinates. If S is a selected source byte, write
+
+    clamp to 0..255( floor((3*S + 2)/4) + 4*(Q - 64) ).
+
+Thus Q is a biased seven-bit value: 0 means -64, 64 means zero, and 127 means
++63 before multiplication by four. The first frame therefore has exactly
+`48 + 3840*(4+7+7+7) = 96048` block-program bits when every record is affine;
+this identity locates its 16-bit boundary without guessing.
+
+
+Presentation and strict failure rules
+-------------------------------------
+
+Convert the retained planar raster through the Part-IV palette lookup and
+display every physical record for `1/F` second. A GIF writer distributes
+hundredth-second delays by rounded cumulative frame boundaries as in Part IV.
+
+A conforming decoder rejects a selector or geometry mismatch, zero or
+inconsistent terminal frame number, missing title terminator, invalid frame
+rate, partial/odd/short record, wrong flag sequence, undefined motion index,
+run overflow, source outside the combined raster, nonzero alignment bits,
+bad palette partition, trailing bytes within a frame, a physical record count
+other than `T-1`, or EOF inside a declared record. A truncated stream produces
+no partial animation.
+
+
+APPENDIX A: NORMATIVE FIF1 PREFIX/COORDINATE TABLE
+==================================================
+
+Concatenate the following lines without whitespace, decode with RFC 1924
+Base85 (Python `base64.b85decode`), and zlib-decompress. The result must be
+exactly 0x2798 bytes and is addressed from 110310D0 hex as described above.
+This representation is only a compact publication of fixed format constants;
+it is not data taken from an input file and is not an external dependency.
+
+    c-
+    rk*33ycH6+Lg>G7l1x5E94&2@saB%Ay7YD!8C6)M5*?g;s3q2DMrXRnP(!tl~l~*h&?&xM78=X%&@NMQbWzE3MKB
+    YEi)|Rj8UalWp?m_Pl@oOvB*hQNz-
+    Y@G^hicfXS}XYRk8d*5UVfGNo3IGw}busCdv$s8Ryn((n4lQ?oTel|x|GdzfYn&yxDl>B4*heF@5_+zUdOaHbEhj
+    *u0d=%pm%)+bq4jw|pSb{I(U3?WYaXF@<+7Qm&g}4CyaR)viUXS~51s>qMt;g-
+    e*P_OF64T(}9DGFlaeN)G;b&L}7i%>CL)?ZC=3xf$tMGkH$6v|6ALna+1N9%n)rb<Wq5kXCufW2D{toKjjT;an-j
+    n)oDgD}n{x7LNAD3Vw@qbc(1NCpkl?nX^slN>?@i6hHssEnRUy;!F^M7CG|7ME(SL^)uq{#mlI{!CP<lkNAzdJ?#
+    ?REZ7rO5x=I{yVJ^1oB(Uz#HSOLhK>J|X|G<A%eQ>x7+f*s*N;zp<SZADy_3ez*wNVma=`=a7k?<1T!RZ=wL_p%1
+    QygLCOBlkpW?gC6(^mSH@8jBL8m7x4_z@f)=Ea$uqz2H;HGgCTUOe;^;_cmli78#mI;euOmoR3iq{;U?i%_#=kX*
+    E-`SyiFg=z$qApljvsOz`s#~v+z^Ah*9_~mg4Vt0eLtX-
+    $NaG;W!lHPw0fcn2R6c7CeG~VK077Z*<TBBXKh(VmrEE1g^s?7=+*9d2GSA@LgPni?JACoPjy`Gj?JqK93?)VlxI
+    }G`@!4qZlXPM2x`%Jc@28!z#Rlm+>6l!Qb!&I`)_7y0h^YRO7eUgsu1t{(vg{0MDW;j>oBL9;Wb|T)<r!;Z9wtVt
+    ;R6$o;yO``eFQo{ef_huX=0ypHE)I)uCUEfwF!y<bfiix>~9_yeAY2f5SN@_hU8?L1%A#%ki*RQwQ~=^UPksayd+
+    o~88tllrQPZ=n7LrGKZ2?^F6$D5vq`*QkHL(tlsYYm|OZ;tN%LH}z|k{zer)p!C}le@w;iQvW@r|4dT;^He;O`lU
+    *LY*PLoso10b>q_59%72K8`&0j8rJtUZf0l|br~Z7UA4|$Vs^VLz|Dn>ilk&Gzd<XR#l>V7X`M;^+3hF<p^y`!IU
+    !mgl)W1^cUj)<Sapb`?P1kW9+ub*I+@l@0=|E4@Yx>dc9lU`WI>9yco85Svr+yC|>MD9uHXZ6I)|-
+    3jPz&f+*VCDL(5ces0j>9;;q;;LtQHw`yFT=o-t@R-
+    bi#bP+}re_8|h6q(fvy3kuT5*%IQS|=sfq(nR4kNL+M$M(2MfuRWH&ndeNJnpzjQ#qcqY-UZEG=Oa~iD$LK`28be
+    pPh0ZaGepE?sa_Crn=}AlJVI$~Z&(m=V=|eBmsp{xd6X|ht=zLq~Qv>O0bLm27(OWL2+iarmOrY2J&hic&=TSOM7
+    v)aH^sw3Vsw(=?I6BuVdQvsrYA2oNGJ4Uo^rchjLuK?M=zei>v%V3!Z-
+    nj}p?gv2o)fy4gzi5Ngm3A4Q~x^df8@7TKPO55w8O0b|CWEp1m6g;E8cfF&4&F6BdoD-
+    3j9F%ZY%i*MIW4_5a%b8p5pT48;D9wiclq^Q70wzZyzru9ub!(Tg1nQ5g$jq3~~NmiSu_$oWDz|WIXX55>fo^66b
+    G~IDZTA3B)%`YW+z8`cne*rz!oKl=?FQ^ed%h{f*MHeucE0|9WXzzdS&HU4Z@?rC*y;|1PC(TNc}5%TagNa-
+    5_%84m~GL43EB{DZA;v6{|gzd4)LWj+?Ma;=gTvRszR5?L$@WS-y<UnXnpGWK38F-I<yS#tg%SKR*-
+    tY)vbmd}jm%5<43XCL-YV6%R2U_bO6`;3>^H*90g-
+    pO8h5Bu4O>NzLM8FGq@kr6Un21`HbCB;%8xsoMm;)rn&K5>X=&*eFbiOsX*$HEhm!#FDW3A{>tJR(hak-|$-
+    ^7o35@0L{jYQx7P#;4WarQUysv`)XqXxsVM8m4Jkw#gUoj>%WEIBfFO0`3Ih2f%laxISylAU;);u~uwleb{^iTxc
+    }=!tw0tD_L7BSRW7nC-
+    D2mX_$d>R@XJGkcaydIQvzjrrOZt&_O<#T)moVN|Un(`)Cf@b0tjnBBfl9^Z3k_$yIUq6gY@$Q*G>(8un%$&(tvW
+    okhIYYTy|x<IKhRmE!Zaa~&^H{0i~;Te+qY#V;41zlF0r8}VMn=WkXszOVk=0R8y^`ilbeuM5y$B`xc(ke2nAOUw
+    F8rDgpk0s4yr^cMu^&r8y`ZQJ3?arNCvijQ{O+V8|ApP;tT3;CCU4(fYA6B%fy>S-o-
+    A^0qx#hvKm9T8S|Hg}wlcVd0@@f-
+    |Rc&_Gm*7dlH=I7x!h39L2f%?8OghI{liXjT`ruju$zgY9TW2nM=Xns$vU!wWF)VE^>dTV|kt>0JkOEFyG{WQP7)
+    *qnx195yn{wD<Fe_}xXWdZq*2*`hAK>jBM<UcAP|Ir9pVVlFzceky@S@6H}PUjjss&C9zbJ?D29A@l4vHN%j_1_e
+    O>(g1`X<TC;H@U_>p20Pa^9wY;Q1iPgJd<l2=ND;yvF0DsKeGCcWwIEUcC*o@Vt@Wk&Ra*$i^Dm|R&hJdzaOWo`8
+    PSAxf<`RVt@W^_5Z~@&Cl0(f#w&gI77|9&+n%3BF!&WaVC!GA6b1qAlm*zqP{zAEe3n<MeM;W<8<R%W0T>An%W{W
+    oLPMG!sI5)&{s%broODiAB6a{?Sxa_6PM6`VhD*C20WM&iwWP=KqIVJEEE#Y6T>tOM7dH8a6Hd6W1bhIVyGD%qzm
+    bYvn574NRP$Y;%Pca*X)?*^F6PTQc+^{s6(y9yvArleI05f8jE^S4_;$47<Kgx(MB&OHHfM|Xv)V;&&umQWbD<6m
+    ~Y)qIdJ?+)Aw|J{|^;AZA<

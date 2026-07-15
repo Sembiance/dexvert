@@ -28,11 +28,11 @@
   Then tar/gz it on discmaster2, copy it down to Assorted and vibe-init for: setupSpecialist
   See: test/sample/executable/exe/SeTUp.eXe
 
+* image/fractalImageFormat
+
 * See if I can find sandbox/wip/encarta.png in: https://discmaster.textfiles.com/admin/item?itemid=46485
 	https://discmaster.textfiles.com/search?q=%E2%80%9C98-028.txt%E2%80%9D&qfields=name&qfields=t
   If not, look at the encarta files and see about vibe coding an extractor
-
-* Installer: CreateInstall
 <<<
 
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)

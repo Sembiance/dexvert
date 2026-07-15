@@ -8,6 +8,8 @@ export class fractalImageFormat extends Format
 	forbidExtMatch = true;
 	magic          = ["Fractal Image Format bitmap", /^x-fmt\/320( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="FIF " && macFileCreator==="FIFd";
-	converters     = ["fifView", "graphicWorkshopProfessional"];
+	auxFiles       = (input, otherFiles) => (otherFiles?.some(file => file.ext.toLowerCase()===".ftt") ? otherFiles.filter(file => file.ext.toLowerCase()===".ftt") : false);
+	keepFilename   = true;
+	converters     = ["vibe2png", "fifView", "graphicWorkshopProfessional"];
 	notes          = "The 256C versions don't convert with any program I could find. With GenuineFractal 4 (GF-PP4-TR-Win32.exe) and PS7 (app/ps7.zip) I was not able to open any .fif files.";
 }

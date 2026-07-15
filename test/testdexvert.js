@@ -244,9 +244,10 @@ const SUPPORTING_FILES = {
 	},
 	image :
 	{
-		doomPicture      : /PNAMES$/,
-		printMasterShape : /\.sdr$/i,
-		quakeGFXLMP      : /palette\.lmp$/
+		doomPicture        : /PNAMES$/,
+		fractalImageFormat : /\.ftt$/i,
+		printMasterShape   : /\.sdr$/i,
+		quakeGFXLMP        : /palette\.lmp$/
 	},
 	music :
 	{

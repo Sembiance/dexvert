@@ -1,11 +1,11 @@
-# Supported File Formats (3,794)
+# Supported File Formats (3,795)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (691)
+## Archive (692)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 0000 Package Archive | .0000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/package0000Archive/)
@@ -93,7 +93,7 @@ archive | BIG game data archive | .big | [gameextractor](https://sourceforge.net
 archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) [deark](https://entropymine.com/deark/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/binary2/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/binHex/)
 archive | [BinSCII](http://fileformats.archiveteam.org/wiki/BinSCII) | .bsc .bsq | [binsciiPrepare](https://github.com/Sembiance/dexvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/binscii/)
-archive | BioWare Entity Resource File | .erf .erf1 .rim .crf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
+archive | BioWare Entity Resource File | .erf .erf1 .rim .crf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/bioWareEntityResourceFile/)
 archive | BitRock Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/bitRock/)
 archive | Bizarre Creations Bank File | .baf | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/bizarreCreationsBankFile/)
 archive | Black and White 2 STUFF | .stuff | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | 
@@ -227,6 +227,7 @@ archive | Etherlords 2 game data archive | .res | [gameextractor](https://source
 archive | Europa Archive | .pak | [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/europaArchive/)
 archive | EVE Online Game Contents archive | .stuff | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/eveOnlineGameContentsArchive/)
 archive | Evil Genius game data archive | .erb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/evilGeniusGameDataArchive/)
+archive | Excelsior Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/excelsior/)
 archive | EXECUTRIX-COMPRESSOR Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/executrixCompressorPacked/)
 archive | ExeLITE Packed | .exe .com | cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/exeLITEPacked/)
 archive | [EXEPACK Packed](http://fileformats.archiveteam.org/wiki/EXEPACK) | .exe .com | [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/exePackPacked/)
@@ -639,7 +640,7 @@ archive | [UHARC](http://fileformats.archiveteam.org/wiki/UHARC) | .uha | [uharc
 archive | [UHBC Compressed File](http://fileformats.archiveteam.org/wiki/UHBC) |  | [uhbc](https://www.sac.sk/download/pack/uhbc10.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/uhbc/)
 archive | Ultima 7 Game Archive | .vga | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/ultima7GameArchive/)
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UltraCompressor_II) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/ultraCompressor2/)
-archive | Unity Assets File | .assets | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [GARbro](https://github.com/shiikwi/GARbro) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/unityAssetsFile/)
+archive | Unity Assets File | .assets | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [GARbro](https://github.com/shiikwi/GARbro) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/unityAssetsFile/)
 archive | [Unix Fast File system (UFS)](http://fileformats.archiveteam.org/wiki/UFS) |  | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ufsFS/)
 archive | Unreal Engine 3 Package | .u .uasset .utx .uax .umx .unr .ut3 .upk | [gameextractorCLI](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/unrealEngine3Package/)
 archive | [UPX Packed](http://fileformats.archiveteam.org/wiki/UPX) | .exe .com | [upx](https://upx.github.io/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/upxPacked/)
@@ -1444,7 +1445,7 @@ image | [Fontastic .COM File](http://fileformats.archiveteam.org/wiki/Fontastic_
 image | [Fontasy Picture](http://fileformats.archiveteam.org/wiki/FONTASY_graphics) | .pic .tem | [iconvertDOS](https://archive.org/details/IConvertV1.10DShareware) | [10 sample files](https://sembiance.com/fileFormatSamples/image/fontasyPicture/)
 image | [Fontasy Preview](http://fileformats.archiveteam.org/wiki/FONTASY_graphics) | .pv | [vibe2png](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/image/fontasyPreview/)
 image | [Fractal Image and Sequence Codec](http://fileformats.archiveteam.org/wiki/FIASCO) | .fco | [fiascotopnm](http://netpbm.sourceforge.net/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/fiasco/)
-image | [Fractal Image Format](http://fileformats.archiveteam.org/wiki/Fractal_Image_Format) | .fif | [fifView](http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [11 sample files](https://sembiance.com/fileFormatSamples/image/fractalImageFormat/) - The 256C versions don't convert with any program I could find. With GenuineFractal 4 (GF-PP4-TR-Win32.exe) and PS7 (app/ps7.zip) I was not able to open any .fif files.
+image | [Fractal Image Format](http://fileformats.archiveteam.org/wiki/Fractal_Image_Format) | .fif | [vibe2png](https://github.com/Sembiance/dexvert) [fifView](http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [39 sample files](https://sembiance.com/fileFormatSamples/image/fractalImageFormat/) - The 256C versions don't convert with any program I could find. With GenuineFractal 4 (GF-PP4-TR-Win32.exe) and PS7 (app/ps7.zip) I was not able to open any .fif files.
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | [abydosconvert](https://github.com/Sembiance/abydosconvert) [wuimg](https://codeberg.org/kaleido/wuimg) | [2 sample files](https://sembiance.com/fileFormatSamples/image/flif/)
 image | [FreeHand Drawing](http://fileformats.archiveteam.org/wiki/FreeHand) | .fh .fh2 .fh3 .fh4 .fh5 .fh6 .fh7 .fh8 .fh9 .fh10 | [soffice](https://www.libreoffice.org) [scribus](https://www.scribus.net/) | [13 sample files](https://sembiance.com/fileFormatSamples/image/freeHandDrawing/)
 image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/Fujifilm_RAF) | .raf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [9 sample files](https://sembiance.com/fileFormatSamples/image/raf/)
@@ -1632,7 +1633,7 @@ image | [Manager Windowing System Bitmap](http://fileformats.archiveteam.org/wik
 image | [Mapletown Network](http://fileformats.archiveteam.org/wiki/Mapletown_Network) | .ml1 .mx1 .nl3 | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/mapletownNetwork/)
 image | [Matlab MAT](http://fileformats.archiveteam.org/wiki/MAT) | .mat | [convert](https://www.imagemagick.org/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/mat5/) - I believe a .mat file can contain more than images, thus maybe this should be an archive, but right now we only support converting images.
 image | Maxon Cinema 4D Catalog | .cat | [deark](https://entropymine.com/deark/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/maxonCinema4DCatalog/)
-image | Maya Icons/Swatches | .swatches | [wuimg](https://codeberg.org/kaleido/wuimg) | [5 sample files](https://sembiance.com/fileFormatSamples/image/mayaIconsOrSwatches/)
+image | Maya Icons/Swatches | .swatches | [wuimg](https://codeberg.org/kaleido/wuimg) | [7 sample files](https://sembiance.com/fileFormatSamples/image/mayaIconsOrSwatches/)
 image | [McPainter](http://fileformats.archiveteam.org/wiki/McPainter) | .mcp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/mcPainter/)
 image | [Mean Streets MLDF File](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [31 sample files](https://sembiance.com/fileFormatSamples/image/mldf/)
 image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | [deark](https://entropymine.com/deark/) [wuimg](https://codeberg.org/kaleido/wuimg) [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://sembiance.com/fileFormatSamples/image/bld/)

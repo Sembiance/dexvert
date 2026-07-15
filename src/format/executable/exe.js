@@ -10,8 +10,8 @@ const _INSTALLER_MAGICS = [
 	// acts as just a zip file and 7z handles it just fine
 	"Installer: CNetX",
 
-	// less than 3 found on discmaster
-	"Installer: Astrum", "Installer: ACCAStore",
+	// less than 3 unique examples found on discmaster
+	"Installer: Astrum", "Installer: ACCAStore", "Installer: CSDD's",
 
 	// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
 	"InstallShield setup",
@@ -24,8 +24,8 @@ const _INSTALLER_MAGICS = [
 	"Installer: InstallAnywhere", "Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: Ghost Installer", "Installer: Squirrel Installer",
 	"Installer: Multimedia Fusion Installer", "Installer: Multimedia Fusion Installer", "Installer: Blizzard PrePatch(2.xx)", "Installer: Box Stub", "Installer: WiX Toolset installer", "Installer: Tarma InstallMate",
 	"Installer: Mioplanet installer", "Installer: Install4j Installer", "Installer: QT installer", "Installer: TrueCrypt-VeraCrypt installer", "Installer: distutils installer", "Installer: Actual Installer",
-	"Installer: VMWare Software Installer", "Installer: Excelsior Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
-	"Installer: BulletProofSoft installer", "Installer: distutils", "Installer: CrypKey", "Installer: CSDD's", "Installer: I-D Media installer",
+	"Installer: VMWare Software Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
+	"Installer: BulletProofSoft installer", "Installer: distutils", "Installer: CrypKey", "Installer: I-D Media installer",
 	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Quick Install", "Installer: custom installer with SZDD-archives", "Installer: VMWare Installation Launcher",
 	"Installer: Sax Software installer",
 	

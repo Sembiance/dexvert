@@ -615,7 +615,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/other\/riscOSFontMetrics\/outline.*$/i, "font", "riscOSFont"]
 ];
 
-// These are sensitive files that sometimes convert, sometimes don't
+// These are sensitive files that sometimes convert, sometimes don't. Or sometimes they are this format, but can't match due to weak XYZ and thus don't complete
 const ALLOW_PROCESS_FAILURES = {
 	archive :
 	{
@@ -628,7 +628,8 @@ const ALLOW_PROCESS_FAILURES = {
 	document :
 	{
 		hlp         : ["qtim.dll"],
-		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"]
+		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"],
+		wp          : ["OTM.Judas_Priest"]
 	},
 	image :
 	{

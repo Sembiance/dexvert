@@ -795,7 +795,7 @@ export default
 		uleadPhotoExpressTemplate      : {name : "Ulead Photo Express Template", ext : [".tpx"], magic : ["Ulead Photo Express Template"], weakMagic : true},
 		ultraDesignDrawing             : {name : "UltraDesign drawing", ext : [".ulb", ".uvw"], magic : ["UltraDesign drawing"]},
 		unrealTexture                  : {name : "Unreal Texture", ext : [".utx", ".u", ".unr"], magic : ["Unreal Texture"]},
-		vectorWorksDrawing             : {name : "VectorWorks Drawing", ext : [".mcd", ".vwx", ".sta"], magic : ["VectorWorks Drawing", /^fmt\/1139( |$)/]},
+		vectorWorksDrawing             : {name : "VectorWorks Drawing", ext : [".mcd", ".vwx", ".sta"], magic : ["VectorWorks Drawing", /^fmt\/(1139|1140)( |$)/]},
 		variCADDrawing                 : {name : "VariCAD Drawing", ext : [".dwb", ".bkb"], magic : ["VariCAD Drawing"], weakMagic : true},
 		versaCAD2DDrawing              : {name : "VersaCAD 2D drawing", ext : [".2d"], magic : ["VersaCAD 2D drawing"], weakMagic : true},
 		visualCADDDrawing              : {name : "Visual CADD Drawing", ext : [".vcd"], magic : ["Visual CADD Drawing"]},

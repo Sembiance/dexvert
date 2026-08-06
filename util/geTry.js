@@ -11,7 +11,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Attempts to extract a file with GameExtractorServer",
 	args :
 	[
-		{argid : "codes", desc : "Codes to try, can be comma delimited", required : true},
+		{argid : "codes", desc : "Codes to try, can be comma delimited (enter NONE to try all)", required : true},
 		{argid : "inputFilePath", desc : "Input file to scan", required : true}
 	]});
 

@@ -373,9 +373,9 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
-	//		archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, StudioSakura.DatOpener
+	//		archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener, archive:Youkai.VoiceDatOpener, archive:Mokopro.NNNNOpener
+	//		archive:Will.ArcOpener, archive:Mokopro.NNNNOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -388,6 +388,7 @@ export const WEAK_VALUES =
 	/^archive:Guyzware.GdpOpener /,
 	/^archive:Mink\.GrpOpener /,
 	/^archive:Xuse\.BinOpener /,
+	/^archive:Youkai\.VoiceDatOpener /,
 
 	// SEEN  ONCE: audio:RealLive.NwaAudio
 	/^audio:WaveAudio \(WAV\)/,
@@ -396,16 +397,17 @@ export const WEAK_VALUES =
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
 	//		image:RSystem.RsgFormat, image:Herb.GrpFormat
 	// SEEN TWICE:
-	//		image:Discovery.Pr1Format, image:Mapl.Mi2Format, image:Gs.PicFormat, image:Ego.AntFormat
+	//		image:Discovery.Pr1Format, image:Gs.PicFormat, image:Ego.AntFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
 	/^image:Desire\.DesFormat /,
 	/^image:Ffa\.Pt1Format /,
 	/^image:JpegFormat /,
-	/^image:Leaf\.PxFormat /,
 	/^image:KAAS\.PicFormat /,
+	/^image:Leaf\.PxFormat /,
 	/^image:MayBeSoft\.HhpFormat /,
+	/^image:Mapl\.Mi2Format /,
 	/^image:Softpal\.PicFormat /,
 	/^image:System98\.GFormat /,
 	/^image:TifFormat /,
@@ -415,10 +417,11 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BIN_LINK, BIN_LINK_2, BFL_CMPR, PACK_PACK, DSRES_DSIGTANK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, BIN_7L
+	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3
 	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SHP_110, SKX_SKEX, BBA_BAF
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, COD_UNIQUE, CAR_RAC, CWG_VW, BUNDLE_BNDL, FLX, WAD_WAD, LIB_5, SAD_SAUD
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CAR_RAC, CWG_VW, BUNDLE_BNDL, FLX, WAD_WAD, LIB_5, SAD_SAUD
+	//		BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -452,6 +455,7 @@ export const WEAK_VALUES =
 	/^geArchive: CEG_GEKV( |$)/,
 	/^geArchive: CDF_TXTR( |$)/,
 	/^geArchive: CMF( |$)/,
+	/^geArchive: COD_UNIQUE( |$)/,
 	/^geArchive: CON( |$)/,
 	/^geArchive: CPN( |$)/,
 	/^geArchive: CRH_MDMD( |$)/,

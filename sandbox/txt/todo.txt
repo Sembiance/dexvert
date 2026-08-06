@@ -8,6 +8,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* These appear to already be supported, just need to add a 'dexmagic' match for them: https://github.com/Sembiance/dexvert/issues/45
+  See: https://discmaster.textfiles.com/search?detection=434f50594449534b*
+
+* The 'pallete' files in here are able to be processed right now by gameextractor: https://discmaster.textfiles.com/browse/38733/maccd%2083.iso/spiele/%20Add-Ons/Tactical%20Ops%20b2.00%20Installer/Install/Help/TO2Manual/Spinex.utx
+  The textures can probably be done, would need to pass both texture AND palette into gameextractor I think, but current archive/gameextractor doesn't seem to support aux files
+  My hunch is the game extractor server expects inputFilePath to just be a string. I suppose I'd need to vibe it to add an auxFiles :[] optional array of paths to aux files like palettes
+  And verify with vube that the files in the above link convert correctly
+
 * ANSI files (and other ANSI-like files, ICE, etc) are just treated as "images" in terms of fetching content text and just use OCR.
   But that OCR just isn't very reliable, infact you can see that in pp/phase/phase#.js with the TEXT_IMAGE_FORMATS exceptions
   Using TEXT_IMAGE_FORMATS as a list of formats to do the following with is a good starting point.

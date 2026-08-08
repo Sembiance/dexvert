@@ -11,9 +11,9 @@ import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
 // NOTE: This isn't strictly 'just ISO files'. There are some disk images in here too because the converters are the same, but technically those should probably be in rawPartition.js but meh
 
-const MFS_MAGICS = ["MFS file system", /^Macintosh MFS data/];
+const MFS_MAGICS = ["MFS file system", /^Macintosh MFS data/, /^fmt\/2068( |$)/];
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "deark: apm",
-	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/(1740|1757|2068)( |$)/
+	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/(1740|1757)( |$)/
 ];
 
 const _RAW_MAGICS = [/^Raw CD image, Mode [12]/, "deark: cd_raw"];

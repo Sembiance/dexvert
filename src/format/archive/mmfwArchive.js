@@ -8,5 +8,5 @@ export class mmfwArchive extends Format
 	forbidExtMatch = true;
 	magic          = [/^MMFW (Blobs|data|Films|Pictures|Script|Sounds)/, "MMFW resource data", "deark: mmfw (MMFW resource file", /^geArchive: MMP_MMFW( |$)/];
 	priority       = this.PRIORITY.LOW;
-	converters     = ["deark[module:mmfw]", "gameextractor[codes:MMP_MMFW]"];	// produces garbage: , "mmex"
+	converters     = ["deark[module:mmfw]", "gameextractor[codes:MMP_MMFW]"];
 }

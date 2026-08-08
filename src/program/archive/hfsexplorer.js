@@ -6,7 +6,7 @@ import {fileUtil, runUtil} from "xutil";
 export class hfsexplorer extends Program
 {
 	website = "https://github.com/unsound/hfsexplorer";
-	bin     = Program.binPath("hfsexplorer/dist/bin/unhfs");
+	bin     = "bin/unhfs";
 	flags   = {
 		partition : "Which partition to extract. Default: 0"
 	};

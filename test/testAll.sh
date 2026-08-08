@@ -3,10 +3,12 @@
 shopt -s expand_aliases
 source /mnt/compendium/sys/bash/bash_aliases
 
-dra testMany.js --format=executable	#     44s
-dra testMany.js --format=font		#  1m 51s
-dra testMany.js --format=other		#  2m 30s
-dra testMany.js --format=video		# 14m 55s
+dra testMany.js --format=executable	#     34s
+dra testMany.js --format=font		#  1m 55s
+dra testMany.js --format=other		#  2m 32s
+dra testMany.js --format=video		# 16m  1s
+
+
 dra testMany.js --format=audio		# 18m 46s
 dra testMany.js --format=text		# 19m  1s
 dra testMany.js --format=document	# 20m 43s

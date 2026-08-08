@@ -36,6 +36,8 @@ export class ffprobe extends Program
 					return;
 
 				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? (key==="duration" ? (+value)*xu.SECOND : +value) : value;
+				if(key==="startTime" && r.meta.startTime<0)
+					r.meta.startTime = 0;
 			}
 		});
 	};

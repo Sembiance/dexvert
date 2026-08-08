@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Vibe coded by Claude
+# Vibe coded by Codex
 
 """
 Music Studio Sound File Converter
@@ -409,7 +409,6 @@ def convert_instrument_bank(data, output_dir, input_basename):
     print(f"  Version:     {info['version']}")
     print()
 
-    base_name = os.path.splitext(input_basename)[0]
     output_files = []
 
     for i in range(15):
@@ -434,7 +433,7 @@ def convert_instrument_bank(data, output_dir, input_basename):
             safe_name = name.replace(" ", "_").replace(".", "_").replace("/", "_")
             if not safe_name:
                 safe_name = f"inst{i}"
-            wav_name = f"{base_name}_{i:02d}_{safe_name}.wav"
+            wav_name = f"{i:02d}_{safe_name}.wav"
             wav_path = os.path.join(output_dir, wav_name)
             write_wav(wav_path, 11000, samples)
             output_files.append(wav_path)

@@ -43,6 +43,8 @@
   If not, look at the encarta files and see about vibe coding an extractor
 <<<
 
+* video/grasp some don't convert anymore like l&hardy.gl and v7vga.gl
+
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
   NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess
   Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"

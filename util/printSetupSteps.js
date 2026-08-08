@@ -55,7 +55,7 @@ const EXTRA_PACKAGES =
 	// needed for inkscape
 	"dev-python/tinycss2",
 
-	// needed for gameViewerLinux and other python things
+	// needed for gameViewerLinux and other python things in dexvert/bin/*
 	"dev-lang/python:3.12",
 	"dev-python/pillow",
 	"dev-python/numpy",

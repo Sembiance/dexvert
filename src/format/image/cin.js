@@ -6,6 +6,6 @@ export class cin extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Cineon";
 	ext        = [".cin"];
 	mimeType   = "image/x-cineon";
-	magic      = ["Kodak Cineon bitmap", "Cineon image data", "Kodak Cineon :cin:"];
+	magic      = ["Kodak Cineon bitmap", "Cineon image data", "Kodak Cineon :cin:", /^fmt\/2051( |$)/];
 	converters = ["nconvert[format:cin]", "iconvert", `abydosconvert[format:${this.mimeType}]`];
 }

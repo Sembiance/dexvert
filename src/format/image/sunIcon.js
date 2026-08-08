@@ -7,7 +7,7 @@ export class sunIcon extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Sun_icon";
 	ext            = [".ico", ".icon", ".cursor", ".pr", ".image", ".im", ".cicon", ".h"];
 	forbidExtMatch = true;
-	magic          = ["Sun Icon/Cursor :icon:", ...TEXT_MAGIC];
+	magic          = ["Sun Icon/Cursor :icon:", "Sun Icon/Cursor bitmap", ...TEXT_MAGIC];
 	weakMagic      = TEXT_MAGIC;
 	notes          = "Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.";
 	converters     = ["nconvert[format:icon]", "imconv[format:icon]"];

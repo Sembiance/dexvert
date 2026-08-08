@@ -6,7 +6,7 @@ export class commonGround extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Common_Ground";
 	ext            = [".dp"];
 	forbidExtMatch = true;
-	magic          = ["Common Ground Digital Paper document"];
+	magic          = ["Common Ground Digital Paper document", /^fmt\/(2077|2078)( |$)/];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="CGDC" && ["CGVM", "RcDs"].includes(macFileCreator);
 	converters     = ["vibe2pdf"];	// vibe converter not complete, but good enough for now
 }

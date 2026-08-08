@@ -6,7 +6,7 @@ export class redArchive extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)";
 	ext            = [".red", ".lif", ".001", ".002", ".003", ".004"];
 	forbidExtMatch = true;
-	magic          = ["RED files library", "deark: red	"];
+	magic          = ["RED files library", /^deark: red$/, "RED installer/archive/library"];
 	auxFiles       = (input, otherFiles) =>
 	{
 		const supportingFiles = otherFiles?.filter(file => (/\.\d{3}$/).test(file.ext) || file.base.toLowerCase()==="install.dat");

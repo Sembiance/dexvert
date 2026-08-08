@@ -95,8 +95,8 @@ export class cadius extends Program
 		for(const outputFile of r.f.files.new || [])
 		{
 			const relPath = path.relative(r.outDir(), outputFile.rel);
-			if(r.meta.fileMeta[relPath]?.when)
-				outputFile.setTS(r.meta.fileMeta[relPath]?.when.getTime());
+			const relMeta = r.meta.fileMeta[relPath] || r.meta.fileMeta[relPath.replace(/#[\dA-F]{6}(_ResourceFork\.bin)?$/, "")];
+			outputFile.setTS(relMeta?.when?.getTime() || (r.originalInput || r.f.input).ts);
 		}
 
 		for(const key of Object.keys(r.meta.fileMeta))

@@ -6,6 +6,6 @@ export class eaArchive extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/EA_archive";
 	ext            = [".ea", ".pea"];
 	forbidExtMatch = true;
-	magic          = ["deark: ea_arch"];
+	magic          = ["deark: ea_arch", "EA archive"];
 	converters     = ["deark[module:ea_arch]"];
 }

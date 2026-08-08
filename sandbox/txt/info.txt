@@ -25,12 +25,13 @@ reboot
 /---------------------------\
 | App Updates (Non-Portage) |
 \---------------------------/
-App								Last Update		URL
----								-----------		---
+App								Last Update		URL															Notes
+---								-----------		---															-----
+bin/tridServer					2026-08-07		https://mark0.net/soft-trid-e.html							stopDexserver && ./updateDefs.sh
 bin/activemime-format			2019-05-20		https://github.com/idiom/activemime-format
 bin/amiga-bitmap-font-tools		2023-02-03		https://github.com/smugpie/amiga-bitmap-font-tools
+bin/hfsexplorer					2026-04-09		https://github.com/unsound/hfsexplorer
 bin/soundFont2tomid				2023-10-07		https://github.com/grimmdude/MidiWriterJS
-bin/hfsexplorer					2024-03-06		https://github.com/unsound/hfsexplorer
 
 
 /------------------------------------\

@@ -5,7 +5,7 @@ export class compuServeRLE extends Format
 	name       = "CompuServe RLE";
 	website    = "http://fileformats.archiveteam.org/wiki/CompuServe_RLE";
 	ext        = [".rle"];
-	magic      = ["CompuServe RLE bitmap", "deark: cserve_rle", /^fmt\/1538( |$)/];
+	magic      = ["CompuServe RLE bitmap", "deark: cserve_rle", "Color RLE bitmap", /^fmt\/1538( |$)/];
 	notes      = "RRCP1.RLE isn't able to be converted by recoil2png and cistopbm handles it better, but still a bit corrupted.";
 	converters = ["wuimg[format:cisrle][matchType:magic]", "recoil2png[format:RLE]", "deark[module:cserve_rle]", "cistopbm"];
 }

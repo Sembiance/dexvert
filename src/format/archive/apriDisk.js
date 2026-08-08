@@ -6,6 +6,6 @@ export class apriDisk extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ApriDisk";
 	ext            = [".dsk"];
 	forbidExtMatch = true;
-	magic          = ["ACT Apricot disk image"];
+	magic          = ["ACT Apricot disk image", "ApriDisk disk image"];
 	converters     = ["dskconv[inType:APRIDISK]"];
 }

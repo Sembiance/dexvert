@@ -13,7 +13,7 @@ import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
 const MFS_MAGICS = ["MFS file system", /^Macintosh MFS data/];
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "deark: apm",
-	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/(1740|1757)( |$)/
+	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,", /^fmt\/(1740|1757|2068)( |$)/
 ];
 
 const _RAW_MAGICS = [/^Raw CD image, Mode [12]/, "deark: cd_raw"];

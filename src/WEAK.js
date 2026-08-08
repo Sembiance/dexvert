@@ -237,7 +237,7 @@ export const WEAK_VALUES =
 	/^Format: COFF Library \(\.LIB\)/,
 	/^Format: Collision Data$/,
 	/^Format: CTRK$/,
-	/^Format: DBase Database \(\.DBF\)/,
+	/^Format: dBase Database \(\.DBF\)/,
 	/^Format: empty file$/,
 	/^Format: GPG$/,
 	/^Format: Guitar Pro Soundbank\(6\.x\)$/,

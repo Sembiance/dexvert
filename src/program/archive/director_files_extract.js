@@ -9,7 +9,7 @@ export class director_files_extract extends Program
 	args          = r => [path.join(Program.binPath("director-files-extract"), "shock.py"), r.inFile()];
 	cwd           = r => r.outDir();
 	mirrorInToCWD = "copy";
-	postExec = async r =>
+	postExec      = async r =>
 	{
 		const outDirPath = r.outDir({absolute : true});
 		const relFilePaths = await fileUtil.tree(outDirPath, {relative : true, nodir : true});
@@ -21,5 +21,5 @@ export class director_files_extract extends Program
 			await Deno.rename(path.join(outDirPath, relFilePath), path.join(outDirPath, path.basename(relFilePath)));
 		});
 	};
-	renameOut     = true;
+	renameOut = true;
 }

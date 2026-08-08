@@ -13,7 +13,10 @@ export class macromediaDirector extends Format
 		...GENERIC_MAGIC,
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
-	weakMagic = GENERIC_MAGIC;
+	weakMagic = [
+		...GENERIC_MAGIC,
+		"Format: Director"		// these are fairly weak and incorrectly match archive/macromediaProjector files such as mub1zse7.2 and mub2ol2e
+	];
 	idMeta    = ({macFileType, macFileCreator}) => (
 		(["07", "08", "85", ...[3, 4, 5, 6, 7].map(v => `9${v}`)].some(suffix => [`M*${suffix}`, `M!${suffix}`, `MC${suffix}`, `MJ${suffix}`, `MV${suffix}`, "D!11", "D*11", "DC11", "FGDC", "FGDM"].includes(macFileType) &&
 			["AFTB", ...[0, 1, 3, 7].map(v => `MD0${v}`), ...[3, 4, 5, 6, 7].map(v => `MD9${v}`), "FLSY", "FXTM", "LSSP", "paST"].includes(macFileCreator))) ||

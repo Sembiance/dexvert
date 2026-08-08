@@ -6,6 +6,6 @@ export class multiMate extends Format
 	website        = "https://winworldpc.com/product/multimate";
 	ext            = [".doc", ".dox", ".fnx", ".pat"];
 	forbidExtMatch = true;
-	magic          = [/^x-fmt\/347( |$)/];
+	magic          = ["MultiMate Advantage II Document", /^x-fmt\/347( |$)/];
 	converters     = ["softwareBridge[format:multiMate]", "wordForWord"];
 }

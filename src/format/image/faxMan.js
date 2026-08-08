@@ -6,6 +6,6 @@ export class faxMan extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/FaxManager";
 	ext            = [".fmf"];
 	forbidExtMatch = true;
-	magic          = ["Fax man :fmf:"];
+	magic          = ["Fax man :fmf:", "FaxMan/ImageMan image"];
 	converters     = ["nconvert[format:fmf]"];
 }

@@ -6,6 +6,6 @@ export class activeMime extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ActiveMime";
 	ext            = [".mso"];
 	forbidExtMatch = true;
-	magic          = ["ActiveMime"];
+	magic          = ["ActiveMime", /^fmt\/1915( |$)/];
 	converters     = ["activeMimeExtractor"];
 }

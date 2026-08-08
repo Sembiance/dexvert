@@ -7,6 +7,6 @@ export class sierraRobotAnimation extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Robot_Animation";
 	ext            = [".rbt"];
 	forbidExtMatch = true;
-	magic          = ["Sierra Robot Animation"];
+	magic          = ["Sierra Robot Animation", "Format: Robot Animation"];
 	converters     = ["na_game_tool[format:rbt]"];
 }

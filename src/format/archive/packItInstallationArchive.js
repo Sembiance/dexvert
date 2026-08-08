@@ -5,6 +5,6 @@ export class packItInstallationArchive extends Format
 	name           = "PACKIT Installation Archive";
 	ext            = [".ins"];
 	forbidExtMatch = true;
-	magic          = ["PACKIT Installation Archive"];
+	magic          = ["PACKIT Installation Archive", "PACKIT by MJP Installation archive"];
 	converters     = ["sevenZip"];
 }

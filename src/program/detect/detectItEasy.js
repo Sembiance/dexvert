@@ -27,7 +27,7 @@ export class detectItEasy extends Program
 		{
 			for(const value of detect?.values || [])
 			{
-				if(["Archive", "Format", "Installer", "Packer"].includes(value.type))
+				if(["archive", "format", "installer", "packer"].includes(value.type?.toLowerCase()))
 					r.meta.detections.push(Detection.create({value : value.string, confidence : 100, from : "detectItEasy", file : r.f.input}));
 			}
 		}

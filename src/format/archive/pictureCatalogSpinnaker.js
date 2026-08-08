@@ -6,6 +6,6 @@ export class pictureCatalogSpinnaker extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Picture_Catalog_(Spinnaker_.CAT)";
 	ext            = [".cat"];
 	forbidExtMatch = true;
-	magic          = ["Picture Catalog Spinnaker", "deark: pic_cat_sp (spcat)"];
+	magic          = ["Picture Catalog Spinnaker", "deark: pic_cat_sp (spcat)", "Spinnaker picture Catalog"];
 	converters     = ["deark[module:pic_cat_sp]"];
 }

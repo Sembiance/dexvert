@@ -6,6 +6,6 @@ export class readAMatic extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Read-A-Matic";
 	ext            = [".exe"];
 	forbidExtMatch = true;
-	magic          = ["Read-A-Matic"];
+	magic          = ["Read-A-Matic", "16bit DOS Read-A-Matic Executable"];
 	converters     = ["deark[module:readamatic][opt:text:encconv=0]"];
 }

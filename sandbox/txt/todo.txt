@@ -97,50 +97,6 @@
 * The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
   After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile
 
->>> Blender 5
-* NOTE: As an alternative to keeping Blender plugins updated and working, I could just stay at CURRENT version
-  IF a time comes when the current version simply won't compile anymore, then at that point use vibe coding to create standalone vibe2glb converters for any remaining formats relying on blender
-* Update to Blender 5. I could go with the binary verison (https://download.blender.org/release/Blender5.0/) or Gentoo.
-  I'm really not sure which approach is better. Binary means it should work on all gentoo systems, BUT it may mean the exact opposite.
-  I'm leaning towards using the Gentoo version as I then have full control over which features are compiled in or NOT compiled in
-  As a quick test, I did download binary blender 5.0.1 and it opened ok, so shouldn't be an issue to switch to binary if I choose that
-* BLENDER 4: If I choose NOT to go to Blender 5, I could go with binary version of blender 4.0.2 to avoid compile issues: https://download.blender.org/release/Blender4.0/blender-4.0.2-linux-x64.tar.xz
-  Probably best to pack it into dexvert/bin/blender-4.0.2/
-* Will want to: cd /mnt/compendium/DevLab/dexvert && mv blender blender_4.0 && mkdir -p blender/addons/
-* NOTE: May be wise to vibe update each plugin's code so it can work with 5.x
-* Starting with Blender 4.2, the addons that were distributed may not be anymore: https://devtalk.blender.org/t/changes-to-add-on-and-themes-bundling-4-2-onwards/34593
-  The Python API has changed with every version, so my python code (and possibly all the addons which I manually updated to even work with 4.0) will need to be update:
-	https://developer.blender.org/docs/release_notes/4.1/python_api/
-	https://developer.blender.org/docs/release_notes/4.2/python_api/
-	https://developer.blender.org/docs/release_notes/4.3/python_api/
-	https://developer.blender.org/docs/release_notes/4.4/python_api/
-	https://developer.blender.org/docs/release_notes/5.0/python_api/
-* FIRST: Get 'native' support formats working (collada/obj/ply/stl):
-  	Test them VISUALLY with: BLENDER_USER_SCRIPTS=/mnt/compendium/DevLab/dexvert/blender blender-?.?
-  	Once they all work, take the program/poly/blender.js python code and hand craft a script to test with against
-  	Get that working CLI with the args seen in blender.js
-  	NOW update blender.js with this new python script and then test and get working that one addon in dexvert for all native formats
- * SECOND: Blender distributed addons (3ds/dxf/fbx/x3d) see if they are in the 'addons_core' folder or if I need to get them from: http://extensions.blender.org/
-	Get each one working VISUALLY.
-	Then update blender.js with the necessary code and get them working with dexvert
-* THIRD: See about fixing: poly/nif
-* FOURTH: 3rd party addons
-	For EVERY ONE look to see if there is an 'updated' or 'alternatve' plugin that supports the format from github or: http://extensions.blender.org/
-    UPDATED NifTools version: https://github.com/DuncanWasHere/blender_niftools_addon
-	If no updated version, then rsync over from dexvert/blender_OLD/addons/<addon> to blender/addons/<addon>/
-	Then will have to manually update the python code according to the API changes above. Test VISUALLY within blender until it works
-	Then proceed to the next addon
-* LASTLY: Run a poly test suite on an old server, like dexdrone0 and run one on eaglehollow. Compare visually, make sure it's an improvement
-* BONUS ADDONS:
-	- Add support for: https://discmaster.textfiles.com/browse/22410/HOD_DEMO_GB.iso/Wads/jedi%20knight/dak_siege.zip/dak_siege.gob
-	  with: https://github.com/smlu/blender-sith
-* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
-* @Skyplayer37 on twitter to see if I can update their blender code to work with blender 4.0
-  Github code (backed up to sandbox/app/1993-Model-Importer): https://github.com/Skyplayer37/1993-Model-Importer
-  3D files: https://discmaster.textfiles.com/browse/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
-  Original Post: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
-* Lastly, maybe I could vibe code in some other formats, though when I tried with nif into assimp it failed horribly
-<<<
 
 /---------------\
 | High Priority |
@@ -364,6 +320,41 @@
 * xbox content can be better extracted with: https://github.com/multimediamike/xbfuse
   This can mount XBOX/360 isos and then I could extract them
 
+>>> Blender
+* Blender is currently frozen at 4.0.2 as blender-bin. 
+  Starting with Blender 4.2, the addons that were distributed may not be anymore: https://devtalk.blender.org/t/changes-to-add-on-and-themes-bundling-4-2-onwards/34593
+  The Python API has changed with every version, so my python code (and possibly all the addons which I manually updated to even work with 4.0) will need to be update:
+	https://developer.blender.org/docs/release_notes/4.1/python_api/
+	https://developer.blender.org/docs/release_notes/4.2/python_api/
+	https://developer.blender.org/docs/release_notes/4.3/python_api/
+	https://developer.blender.org/docs/release_notes/4.4/python_api/
+	https://developer.blender.org/docs/release_notes/5.0/python_api/
+* FIRST: Get 'native' support formats working (collada/obj/ply/stl):
+  	Test them VISUALLY with: BLENDER_USER_SCRIPTS=/mnt/compendium/DevLab/dexvert/blender blender-?.?
+  	Once they all work, take the program/poly/blender.js python code and hand craft a script to test with against
+  	Get that working CLI with the args seen in blender.js
+  	NOW update blender.js with this new python script and then test and get working that one addon in dexvert for all native formats
+ * SECOND: Blender distributed addons (3ds/dxf/fbx/x3d) see if they are in the 'addons_core' folder or if I need to get them from: http://extensions.blender.org/
+	Get each one working VISUALLY.
+	Then update blender.js with the necessary code and get them working with dexvert
+* THIRD: See about fixing: poly/nif
+* FOURTH: 3rd party addons
+	For EVERY ONE look to see if there is an 'updated' or 'alternatve' plugin that supports the format from github or: http://extensions.blender.org/
+    UPDATED NifTools version: https://github.com/DuncanWasHere/blender_niftools_addon
+	If no updated version, then rsync over from dexvert/blender_OLD/addons/<addon> to blender/addons/<addon>/
+	Then will have to manually update the python code according to the API changes above. Test VISUALLY within blender until it works
+	Then proceed to the next addon
+* LASTLY: Run a poly test suite on an old server, like dexdrone0 and run one on eaglehollow. Compare visually, make sure it's an improvement
+* BONUS ADDONS:
+	- Add support for: https://discmaster.textfiles.com/browse/22410/HOD_DEMO_GB.iso/Wads/jedi%20knight/dak_siege.zip/dak_siege.gob
+	  with: https://github.com/smlu/blender-sith
+* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
+* @Skyplayer37 on twitter to see if I can update their blender code to work with blender 4.0
+  Github code (backed up to sandbox/app/1993-Model-Importer): https://github.com/Skyplayer37/1993-Model-Importer
+  3D files: https://discmaster.textfiles.com/browse/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
+  Original Post: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
+* Lastly, maybe I could vibe code in some other formats, though when I tried with nif into assimp it failed horribly
+<<<
 
 /----------------\
 | Probably Never |

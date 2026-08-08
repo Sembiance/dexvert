@@ -5,6 +5,6 @@ export class sesameStreetSTR extends Format
 	name           = "Sesame Street STR Video";
 	ext            = [".str"];
 	forbidExtMatch = true;
-	magic          = ["Sesame Street STR Video"];
+	magic          = ["Sesame Street STR Video", "Sesame Street STR animation"];
 	converters     = ["na_game_tool[format:ssstr]"];
 }

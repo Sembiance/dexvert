@@ -21,7 +21,7 @@ export class wad extends Format
 		if(!dexState.hasMagics("WAD3 :wad:"))
 			r.push("gameextractor[codes:WAD_WAD3,WAD_PWAD,WAD_IWAD]");
 		
-		r.push("dragonUnpacker[types:WAD3]", "gamearch");
+		r.push("dragonUnpacker[types:WAD3]", "gamearch[format:wad-doom]");
 		return r.map(v => `${v} & noesis[type:poly]`);
 	};
 }

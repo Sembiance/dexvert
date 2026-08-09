@@ -7,5 +7,5 @@ export class homeBrewGameArchive extends Format
 	ext            = [".gw1", ".gw2", ".gw3"];
 	forbidExtMatch = true;
 	magic          = ["HomeBrew File Folder game data archive", /^geArchive: GW1_HOME( |$)/];
-	converters     = ["gameextractor[codes:GW1_HOME]", "gamearch"];
+	converters     = ["gameextractor[codes:GW1_HOME]", "gamearch[format:gwx-homebrew]"];
 }

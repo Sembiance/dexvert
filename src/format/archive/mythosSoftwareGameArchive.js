@@ -7,5 +7,5 @@ export class mythosSoftwareGameArchive extends Format
 	ext            = [".lib"];
 	forbidExtMatch = true;
 	magic          = ["Mythos Software LIB game data container", /^geArchive: TBD( |$)/];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:lib-mythos]"];
 }

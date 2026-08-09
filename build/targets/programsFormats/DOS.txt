@@ -1,0 +1,873 @@
+>>> gdview ::: v0.92 ::: http://www.demelo.org/gdm/gdv/formats.f.html
+Images
+	1st Publisher ART
+	Advanced Art Studio
+	Alias PIX / Alias Mask / Vivid IMG
+	Art Director
+	Artist 64
+	Atari Image Manager (AIM)
+	Autodesk Animator Pro CEL
+	Blazing Paddles
+	CBM hi-res format
+	CDU Paint
+	CMU wm raster
+	ColoRIX
+	Corel Draw
+	Craig Bruce's BM format
+	DCX
+	Degas / Degas Elite uncompressed
+	Degas Elite compressed
+	Device Independent Bitmap (DIB/BMP)
+	Doodle (Atari ST)
+	Draw256
+	Encapsulated PostScript (EPS) - TIFF preview
+	Face
+	FLI (C64)
+	GEM Image
+	Giffer QDV
+	Girls & Poker for Windows data
+	Graphics Interchange Format (GIF)
+	Grasp Library (GL)
+	Halo CUT
+	Handy Scanner 2000
+	HRZ
+	HSI Raw
+	ILBM (IFF)
+	IM
+	JPEG/JFIF
+	Koala Painter
+	MacPaint
+	MCUREDIT (toolbox)
+	MS Paint
+	MS Windows cursor
+	MS Windows icon
+	MS Word CAPTURE screen
+	MTV
+	Neochrome
+	OS/2 icon
+	OS/2 pointer
+	PC Paintbrush PCX
+	PCJ
+	PCPAINT / Pictor PIC
+	Photo CD
+	Picture Publisher 4 and 5
+	Portable Bit/Gray/Pix/Anymap
+	Portable Network Graphics (PNG)
+	Psion Series 3 Bitmap (PIC)
+	QRT RAW / DKB RAW / POV Dump
+	Raw graphical image
+	RGB Intermediate Format
+	RIFF DIB (RDIB)
+	SGI Image format
+	Specem PRG
+	SPECTRUM / VGASPEC SP
+	Spectrum 512 compressed (SPC)
+	Spectrum 512 uncompressed (SPU)
+	Strip BlackJack / Stripoid data
+	Sun Icon
+	Sun RASter
+	TGA
+	TIFF
+	Tiny
+	TZ Strip Poker
+	Vidcom 64
+	VIS
+	X Bitmap (XBM)
+	X Puzzle
+	XIMG
+	YBM
+	YUV
+	ZX Spectrum Screen
+	ZX Spectrum Snapshot (SNA)
+Animations
+	FLIC
+	Tempra FLX
+Binary Data
+	Aiken BCD
+	Binary Coded Decimal (BCD)
+	Binary display
+	Decimal display
+	Excess 3 BCD
+	Hexadecimal display
+	Octal display
+Text
+	1st Word
+	Adobe Standard text
+	Adobe Symbol text
+	Adobe Zapf Dingbats text
+	AmigaGuide
+	ANSI X3.4-1968 text
+	Apple II text
+	ASCII with Unicode codes
+	ASMO 449 text
+	Atari ATASCII text
+	Atari ST/TT text
+	BALTIC text
+	BS 4730 text
+	BS VIEWDATA text
+	Code Page 037 (EBCDIC - United States) text
+	Code Page 038 (EBCDIC-INT) text
+	Code Page 10000 (Macintosh Roman 10000) text
+	Code Page 10006 (Macintosh Greek 1) text
+	Code Page 10007 (Macintosh Cyrillic) text
+	Code Page 10029 (Macintosh Latin 2) text
+	Code Page 1004 (OS/2 Latin 1) text
+	Code Page 1006 (Urdu - ISO) text
+	Code Page 10079 text
+	Code Page 1008 (Arabic Windows - original) text
+	Code Page 10081 text
+	Code Page 1025 (Cyrillic - EBCDIC) text
+	Code Page 1026 text
+	Code Page 1027 (Japan (Latin) - EBCDIC) text
+	Code Page 1028 (Hebrew - Publishing) text
+	Code Page 1038 (PostScript Symbol Set) text
+	Code Page 1041 (Japan SAA) text
+	Code Page 1043 (Taiwan SAA) text
+	Code Page 1046 (Arabic - EBCDIC) text
+	Code Page 1047 text
+	Code Page 1051 (HP Roman 8) text
+	Code Page 1088 (Korea KS) text
+	Code Page 1089 (Arabic - ISO 8859-6) text
+	Code Page 1092 (PC Symbols) text
+	Code Page 1097 (Farsi - EBCDIC) text
+	Code Page 1098 (Farsi) text
+	Code Page 1112 (Baltic - EBCDIC) text
+	Code Page 1114 (Taiwan Big-5) text
+	Code Page 1115 (China GB) text
+	Code Page 1116 (Estonia) text
+	Code Page 1117 (Latvia) text
+	Code Page 1118 (Lithuania) text
+	Code Page 1119 (Lithusanian and Russian) text
+	Code Page 1122 (Estonia - EBCDIC) text
+	Code Page 1123 text
+	Code Page 1124 text
+	Code Page 1250 (MS Windows Eastern Europe) text
+	Code Page 1251 (MS Windows Cyrillic) text
+	Code Page 1252 (MS Windows ANSI) text
+	Code Page 1253 (MS Windows Greek) text
+	Code Page 1254 (MS Windows Turkish) text
+	Code Page 1255 text
+	Code Page 1256 text
+	Code Page 1257 text
+	Code Page 1258 (MS Windows Vietnamese) text
+	Code Page 1275 (Apple Latin 1) text
+	Code Page 1276 (Adobe PS Standard Encoding) text
+	Code Page 1277 (Adobe PS ISOLatin1 Encoding) text
+	Code Page 1280 (Apple Greece) text
+	Code Page 1281 (Apple Turkey) text
+	Code Page 1282 (Apple Central European) text
+	Code Page 1283 (Apple Cyrillic) text
+	Code Page 256 text
+	Code Page 259 (Symbols WP - EBCDIC) text
+	Code Page 273 text
+	Code Page 274 text
+	Code Page 275 text
+	Code Page 277 text
+	Code Page 278 text
+	Code Page 280 text
+	Code Page 282 text
+	Code Page 284 text
+	Code Page 285 text
+	Code Page 290 text
+	Code Page 293 (APL - EBCDIC) text
+	Code Page 297 text
+	Code Page 361 (International - Publishing) text
+	Code Page 363 (Symbols - Publishing) text
+	Code Page 367 (G0 - ASCII) text
+	Code Page 382 (Austria, Germany - Publishing) text
+	Code Page 383 (Belgium - Publishing) text
+	Code Page 385 (Canada (French) - Publishing) text
+	Code Page 386 (Denmark, Norway - Publishing) text
+	Code Page 387 (Finland, Sweden - Publishing) text
+	Code Page 388 (France - Publishing) text
+	Code Page 389 (Italy - Publishing) text
+	Code Page 391 (Portugal - Publishing) text
+	Code Page 392 (Spain - Publishing) text
+	Code Page 393 (Latin America - Publishing) text
+	Code Page 394 (United Kingdom - Publishing) text
+	Code Page 395 (United States - Publishing) text
+	Code Page 420 text
+	Code Page 423 text
+	Code Page 424 text
+	Code Page 437 (USA) text
+	Code Page 500 (EBCDIC) text
+	Code Page 737 (Greek II or IBM Greek) text
+	Code Page 775 ("BaltRim") text
+	Code Page 813 (Greece - ISO 8859-7) text
+	Code Page 819 (Latin 1 - ISO 8859-1) text
+	Code Page 829 (Math Symbols - Publishing) text
+	Code Page 833 (Korea - EBCDIC) text
+	Code Page 836 (China - EBCDIC) text
+	Code Page 838 (Thai - EBCDIC) text
+	Code Page 850 (Latin I - multilingual) text
+	Code Page 851 text
+	Code Page 852 (Latin II - slavic) text
+	Code Page 853 (Multilingual Latin 3) text
+	Code Page 855 (Cyrillic I) text
+	Code Page 856 (Hebrew - old) text
+	Code Page 857 (Turkish) text
+	Code Page 860 (Portuguese) text
+	Code Page 861 (Icelandic) text
+	Code Page 862 text
+	Code Page 863 (French Canadian) text
+	Code Page 864 text
+	Code Page 865 (Nordic) text
+	Code Page 866 (Cyrillic 2 or Russian) text
+	Code Page 868 text
+	Code Page 869 (Greek I or IBM Modern Greek) text
+	Code Page 870 text
+	Code Page 871 text
+	Code Page 874 text
+	Code Page 875 text
+	Code Page 878 (Russia - Internet) text
+	Code Page 880 text
+	Code Page 891 text
+	Code Page 895 (Japan G0 (Latin) - EUC) text
+	Code Page 896 (Japan G2 (Katakana) - EUC) text
+	Code Page 897 (Japan) text
+	Code Page 903 text
+	Code Page 904 text
+	Code Page 907 (APL) text
+	Code Page 909 (APL2 Extended) text
+	Code Page 910 (APL2) text
+	Code Page 912 (Latin 2 - ISO 8859-2) text
+	Code Page 913 (Latin 3 - ISO 8859-3) text
+	Code Page 914 (Latin 4 - ISO 8859-4) text
+	Code Page 915 (Cyrillic - ISO 8859-5) text
+	Code Page 916 (Israel - ISO 8859-8) text
+	Code Page 918 text
+	Code Page 920 (Latin 5 - ISO 8859-9) text
+	Code Page 921 (Baltic) text
+	Code Page 922 (Estonia) text
+	CSA Z243.4-1985-1 text
+	CSA Z243.4-1985-2 text
+	CSA Z243.4-1985-GR text
+	CSN 369103 text
+	CWI text
+	DEC-MCS text
+	DIN 66003 text
+	DS 2089 text
+	EBCDIC text (generic version)
+	EBCDIC-AT-DE text
+	EBCDIC-AT-DE-A text
+	EBCDIC-CA-FR text
+	EBCDIC-DK-NO text
+	EBCDIC-DK-NO-A text
+	EBCDIC-ES text
+	EBCDIC-ES-A text
+	EBCDIC-ES-S text
+	EBCDIC-FI-SE text
+	EBCDIC-FI-SE-A text
+	EBCDIC-FR text
+	EBCDIC-IS-FRISS text
+	EBCDIC-IT text
+	EBCDIC-PT text
+	EBCDIC-UK text
+	EBCDIC-US text
+	ECMA-CYRILLIC text
+	Epson Denmark text
+	Epson England text
+	Epson France text
+	Epson Italy text
+	Epson Japan text
+	Epson Spain text
+	Epson Sweden text
+	Exec MemoMaker
+	GB 1988-80 text
+	GOST 19768-74 text
+	GREEK-CCITT text
+	GREEK7 text
+	GREEK7-OLD text
+	HP 48 text
+	HP-ROMAN8 text
+	Hypertext Markup Language (HTML)
+	INIS text
+	INIS-8 text
+	INIS-CYRILLIC text
+	INVARIANT text
+	ISO 10646
+	ISO 2033-1983 text
+	ISO 5427 text
+	ISO 5427:1981 text
+	ISO 5428:1980 text
+	ISO 646-ES text
+	ISO 646-ES2 text
+	ISO 646-IT text
+	ISO 646-PT text
+	ISO 646-PT2 text
+	ISO 646.BASIC:1983 text
+	ISO 646.IRV:1983 text
+	ISO 8859-10:1993 text
+	ISO 8859-1:1987 text
+	ISO 8859-2:1987 text
+	ISO 8859-3:1988 text
+	ISO 8859-4:1988 text
+	ISO 8859-5:1988 text
+	ISO 8859-6:1987 text
+	ISO 8859-7:1987 text
+	ISO 8859-8:1988 text
+	ISO 8859-9:1989 text
+	ISO 8859-SUPP text
+	JIS C6220-1969-JP text
+	JIS C6220-1969-RO text
+	JIS C6229-1984-A text
+	JIS C6229-1984-B text
+	JIS C6229-1984-B-ADD text
+	JIS C6229-1984-HAND text
+	JIS C6229-1984-HAND-ADD text
+	JIS C6229-1984-KANA text
+	JUS I.B1. 002 text
+	JUS I.B1.003-MAC text
+	JUS I.B1.003-SERB text
+	KOI-8R text
+	KSC 5636 text
+	LATIN-GREEK text
+	LATIN-GREEK-1 text
+	Lotus Ami / Lotus Ami Pro
+	Magnatype
+	MS Windows "MS LineDraw" font text
+	MS Windows "Symbol" font text
+	MS Windows "Wingdings" font text
+	MS Windows 3.0 ANSI text
+	MS Windows Write (WRI)
+	MS Word for DOS
+	MS Word for Macintosh
+	MS Word for Windows, MS Windows 95/NT WordPad
+	MS Works for DOS word processor
+	MSZ 7795/3 text
+	Multimate, Multimate Advantage
+	Navy DIF
+	NC NC00-10:81 text
+	NEXTSTEP text
+	NF Z 62-010 (1973) text
+	NF Z 62-010 text
+	nroff
+	NS 4551-1 text
+	NS 4551-2 text
+	PC Write
+	Protext
+	Rich-Text Format
+	SAMI text
+	SEN 850200 B text
+	SEN 850200 C text
+	SGML, XML
+	T.61-7BIT text
+	Unicode V1.0 text
+	Unicode V1.0.1 text
+	Unicode V1.1/2.0 text
+	UTF-8
+	WordPerfect
+	WordStar 2000
+	WordStar
+	XyWrite
+Palettes
+	6 bit raw palette
+	8 bit raw palette
+Fonts
+	Commodore 64/128 font
+	Fontedit (Chris Howe) font
+	Letters font
+	Raw BIOS font
+	The Font Editor font
+	The Graphics Engine font
+	ZX Spectrum Big font
+	ZX Spectrum Standard font
+Sounds
+	8SVX
+	AVR
+	Creative Music (CMF)
+	Creative Voice (VOC)
+	DEC Audio
+	GTS Sound Sample
+	Headerless Sound Sample (raw)
+	Psion Series 3 Wave
+	RIFF Wave (WAV)
+	Scream Tracker 3/DigiPlayer sample
+	Sounder
+	SoundTool / Wired for Sound
+	Sun/NeXT Audio (AU)
+	Totosampler
+	VoiceMaster
+Terminal Codes
+	ANSI music
+	ANSI X3.64 data stream (*.ANS)
+	Avatar data stream
+	IBM PC text mode screen image (binary)
+	iCE Color ANSI
+	PC Board color codes text
+	Renegade Pipe Code text
+	The Last Video Interface (LVI) data stream
+	TTY
+	WildCat 3.0+ color code text
+	WWIV color code text
+Databases/Worksheets
+	dBASE / FoxBase / FoxBase+
+	dbLite
+	FoxPro, FoxPro for Windows
+	Lotus 1-2-3 (and compatible formats)
+	System Data Format (SDF)
+File Archives/Compressed Data
+	AMG
+	Apple Macintosh resource fork data
+	AR
+	ARC
+	ARJ
+	CBM ARC
+	Crunch
+	Crush
+	Descent .HOG
+	Duke Nukem 3D .GRP
+	DWC
+	gzip (.gz)
+	HA
+	Hyper
+	id software WAD
+	LARC
+	LHarc / LHA / LHice
+	LZEXE compressed EXE
+	MacBinary
+	MAR
+	MDCD
+	MS Cabinet (.CAB)
+	MS Windows clipboard
+	MS Windows resource
+	Novosielski library (LBR)
+	PAK
+	PUTGET
+	Quake PACK
+	Quake WAD2
+	RAR
+	SAR
+	Squeeze
+	SQueezed files
+	Stuff-It
+	SWAG compressed archive
+	T64
+	Unix compress (.z)
+	Unix Standard tape archiver (tar)
+	YellowPoint disk set
+	ZIP
+	ZOO
+Executables/Decodable Data
+	BOO encoded data
+	BTOA
+	Caesar
+	Device Independent Bitmap - Embedded
+	Executables (EXE, COM, BAT, associations)
+	HQX (BinHex)
+	Intel Hex
+	MIME Base64
+	MIME Quoted Printable
+	ROT 13
+	UU-Encoded data
+	WordPerfect 7-bit transfer format
+	XX-Encoded data
+Misc. Types
+@BASIC
+	Commodore BASIC 1.0
+	Commodore BASIC 10.0
+	Commodore BASIC 2.0 w/ Super Extender
+	Commodore BASIC 2.0
+	Commodore BASIC 3.5
+	Commodore BASIC 4.0 Expansion for C64
+	Commodore BASIC 4.0
+	Commodore BASIC 7.0
+	Program Information File (PIF)
+	QWK Mail MESSAGES.DAT
+	Simon's BASIC
+	Speech BASIC
+	Turtle BASIC
+
+
+>>> Graphic Workshop ::: http://discmaster.textfiles.com/view/17093/Technotools%20(Chestnut%20CD-ROM)(1993).ISO/utils/gws/gws.doc
+Macpaint
+GEM/IMG
+PC Paintbrush PCX
+CompuServe GIF
+TIFF
+WordPerfect Graphics WPG
+Deluxe Paint/Amiga IFF/LBM
+PC Paint Pictor PIC
+Truevision Targa TGA
+Windows 3 BMP
+Microsoft Paint MSP
+Encapsulated PostScript EPS
+Self-displaying EXE pictures
+Text files
+Halo CUT
+
+
+>>> ICONVERT ::: 1.52a ::: http://fileformats.archiveteam.org/wiki/Iconvert
+ASCII           	(8x8, 8x14)
+BASICA BLOAD    	(2 color, 4 color)
+Compuserve			(GIF, RLE)
+Dr Halo II			(CUT)
+Doodle				(CBM)
+First Publisher		(ART, MAC)
+Fontasy				(BLK, PIC, PV)
+GEM					(IMG)
+IFF					(IFF)
+MacPaint			(MAC)
+NewsMaster			(SHP)
+Newsroom			(CA)
+PC Paint            (CLP, PIC)
+PC PaintBrush       (PCC, PCX)
+PrintMaster		    (SHP, GRA)
+Print Shop		  	(DAT, PS)
+TIFF				(TIF)
+Windows Paint		(MSP)
+
+
+>>> imageAlchemy (DOS - v1.11 - 1998) - IMAGE (http://fileformats.archiveteam.org/wiki/Image_Alchemy)
+Image Alchemy format	Extensions	Refer to	Remarks
+ADEX	.img, .rle
+Adobe PDF	.pdf	PDF
+Adobe Photoshop	.psd	PSD
+Alias PIX / Vivid IMG	.img, .als	Alias PIX, Vivid IMG
+Alpha Microsystems BMP	.bmp	Alpha Microsystems BMP
+Alps	.prn
+Autodesk PIC/CEL	.pic, .cel
+Autologic	.gm, .gm2, .gm4
+AVHRR	.sst
+AVS X	.x	AVS X image
+Binary (BIF)	.bif, .raw	BIF (Image Alchemy), Raw bitmap
+Calcomp CCRF	.crf, .ccrf, .prn
+CALS	.cal	CALS raster
+Core IDC	.idc
+Cubicomp PictureMaker	.r8, .g8, .b8, .a8
+Dr. Halo CUT	.pal, .cut	Dr. Halo
+Encapsulated PostScript	.epsi, .eps, .epi	Encapsulated PostScript
+Epson Stylus	.prn
+ER Mapper Raster	.ers, (none)	ER Mapper Raster
+Erdas LAN/GIS/IMG	.lan, .gis, .img	ERDAS LAN/GIS, ERDAS Imagine IMG	IMG support is read-only.
+Explore TDI	.tdi	Maya IFF	read-only
+Fargo Primera	.prn
+FBM	.fbm	FBM image
+First Publisher ART	.art	ART (PFS: First Publisher)
+FLC	.flc, .fli	FLIC	read-only
+Freedom of Press	.fop, .001, ...	Freedom of Press
+Gem VDI Image	.img	GEM Raster
+GIF	.gif	GIF
+GOES	.goe		(GARS, McIDAS)
+Histogram	.hst	HSI Raw
+Hitachi Raster	.hrf
+HP PCL	.pcl	PCL
+HP PhotoSmart	.prn
+HP Raster Transfer Language (RTL)	.rtl
+HP-48sx Graphic Object (GROB)	.grb, .asc	GROB
+HSI JPEG	.hsi, .jpg	HSI JPEG
+HSI Palette	.pal
+HSI Raw	.raw	HSI Raw
+IBM Picture Maker	.pic
+IDRISI	.img, .doc
+IFF/ILBM	.lbm, .iff, .ilbm	ILBM
+Imaging Technology	.img
+Img Software Set	.img, .p, .a	Img Software Set
+Intergraph	.rgb	Intergraph Raster
+JEDMICS CCITT4	.c4	JEDMICS C4
+Jovian VI	.vi	Jovian Logic VI
+JPEG	.jpg	JPEG
+Lumena CEL	.cel	Lumena CEL
+Macintosh PICT	.pict, .pic	PICT
+MacPaint	.mac	MacPaint
+MIFF	.miff, .mif	MIFF
+Mimaki MRL-1	.mrl
+MTV	.mtv	MTV ray tracer bitmap
+Multi-Image Palette	.pal
+OS/2 BMP	.bmp	BMP
+OS/2 Icon	.ico	OS/2 Icon
+PCPaint/Pictor	.pic, .clp	PCPaint PIC
+PCX	.pcx, .dcx, .p13	PCX, DCX
+PDS	.ibg, .imq	PDS
+PhotoCD	.pcd	Photo CD	read-only
+Pixar PIC	.pic	Pixar picture
+Pixel Power Collage	(varies)
+PNG	.png	PNG
+Portable BitMap (PBM)	.pnm, .pbm, .pgm, .ppm	Netpbm formats
+Puzzle	.pzl, .puzzle, .cm	Puzzle image (X11)
+Q0	.q0, .rgb, .fal	Q0
+QDV	.qdv	QDV (Giffer)
+QRT Raw	.raw	QRT Ray Tracer bitmap
+Raster Graphics	.rg		"Used by Raster Graphics printers"
+RIX	.scx, .rix	ColoRIX
+RLC	.rlc
+Scitex CT / Iris CT	.ct	Scitex CT
+Scodl	.scd
+SGI Image	.sgi	SGI (image file format)
+Sharp GPB	.img
+Spaceward	.r, .g, .b, .a	Spaceward Graphics
+SPOT Image	.hdr, .bil, .clr, .dat, .stx
+Stork	.idx, .pre, .tab		"Used by Stork's color proofing machines"
+Sun Icon	.icon, .ico	Sun icon
+Sun Raster	.rast, .ras, .im, .im1, .im8, .im24, .im32	Sun Raster
+Targa	.tga	TGA
+TIFF	.tiff, .tif	TIFF
+US Patent Image	.pat
+Utah RLE	.rle	Utah RLE
+Verity Image Format (VIF)	.vif	Verity Image
+VIFF	.xv	VIFF
+VITec	.vit	VITec
+Wavefront RLA	.rla, .rlb	RLA	read-only
+Windows BMP	.bmp	BMP
+WPG	.wpg	WordPerfect Graphics
+XBM	.xbm, .bm	XBM
+XIM	.xim	Xim
+XPM	.xpm, .pm	XPM
+XWD	.xwd	XWD
+
+
+>>> OPTIKS ::: 3.01 (sandbox/app/OK301.ZIP) ::: http://fileformats.archiveteam.org/wiki/OPTIKS  
+    File       Optiks  File  Description/
+  Extension    Support Type  Software Source
+  =========    ======= ====  ==================
+    .001       Yes     R     Complete FAX page file
+    .ART       Yes     R     PFS First Publisher Clip Art
+    .BAS       Yes     R     Basic Bload/Bsave
+    .BSG       Yes     R     FONTASY (same as .RAW)
+    .CA        Read    RB    NewsRoom Pro
+    .CUT       Yes     R     Dr. Halo, Cut files
+    .DAT       Read    RB    PrintShop
+    .DCX       Read    RB    Panasonic Fax PCX libraries.
+    .EPS       Some    VRL   Encapsulated Post Script
+    .GIF       Some    R     Cserve Graphics Interchange format
+    .HPC(L)    Some    RV    Hewlett Packard's LaserJet Graphics
+    .IFF       Yes     R     Amiga Interchange Format File
+    .IMG       Yes     R     DataCopy Wips
+    .IMG       Yes     R     GEM Paint
+    .IMG       Yes     R     IBM Image support Facility
+    .MAC       Yes     R     Apple Macintosh Macpaint
+    .MAK       Yes     R     Apple Macintosh Macpaint, No Header
+    .MSP       Yes     R     Microsoft Windows Paint
+    .PCR       Yes     R     OPTIKS/PCRGB
+    .PCX .PCC  Yes     R     Zsoft PC Paintbrush
+    .PDA       Yes     R     Palantir Scanner Graphics Files
+    .PI1 .PI2  Yes     R     Atari Degas uncompressed images
+    .PIC       Some    V     Lotus
+    .PIC       v1.5    R     Mouse systems PC Paint
+    .PIG       Yes     R     Ricoh Pixel Image Generator file
+    .PRN       Some    VLR   Post Script, Any print image file
+    .RAS       Yes     R     Show file Ras format
+    .RAW       Yes     R     Basic Array format
+    .RLE       Yes     R     Cserve, Teletext Run Length Encoded
+    .SLD       Some    V     AutoCad Slide
+    .SFL       Yes     R     Soft Font Single Letter
+    .SFP       Yes     R     HP Soft Font
+    .SHP       Read    RB    Printmaster, Newsmaster
+    .TIF       Yes     R     Aldus/Microsoft Tag Image Format
+
+
+>>> PV.exe
+JPG         Baseline JPEG 8R8.
+TIF IBM and Macintosh, image processing software and desktop
+            Applications such as Pagemaker, Designer, Photostyler.
+TGA         Targa compatible Software.
+PCX         Paintbrush, Publisher.
+PIC PcPaint, Painter.
+SCx,RIX     Colorix, Winrix, RIX-Present.
+CUT         Dr Halo, Halovision, A4TECH - Scanner.
+LBM,IFF     Deluxe Paint fuer IBM und Commodore.
+GIF         Autodesk Animator, VPIC, VGIF, CSHOW, GWS...
+BMP,RLE,DIB Windows 3.0 and OS/2 applications.
+IMG,DTA Kontron IBAS, ZEISS DSM electron microscopes.
+PCD         Kodak Photo CD Base Format 768x512.
+CVP         Passbildphotografiereinheit (Cannon/Kodak?) 512x512 24Bit.
+JPG,JIF     Baseline JPEG 9R6 ( Image Alchemy ), lossless JPEG.
+JTF TIFF with JPEG compression.
+CEG         Edsun Continuous Edge Graphics (Mode d und f).
+GEM-IMG,XIMG images from GEM and Ventura Publisher, Atari ST.
+MSP images from MS Paint ,Windows 2.0.
+MAC Images from Macintosh -Paint.
+PIC         Macintosh PICT in 1,2,4,8 BPS.
+WPG word processing with raster graphics integration Word Perfect.
+ICO         Windows Icons
+PMC         A4TECH scanner.
+SFI         SIS Framegrabber.
+EPS         Encapsulated Postscript mit Rasterdatenfeld.
+RAS Sun raster file uncompressed.
+VI          Jovian.
+DCX         FAX Format mit PCC.
+IM KO-23 satellite image with 109 block error correction.
+SGF Starwriter word processing with graphics (Star Division Hamburg).
+SAT Eumetsat Wettersatellitenbild (BTXSAT Austria)
+RAW
+PNM         UNIX portable Bitmap 1,8,24 Bps (Jef Poskanzer);
+ACB,BBM     IFF Brushes , ACBM Files.
+DAT images of the frame grabber Video 1000/2000 by Fricke.
+FLM Uncompressed images of the Screenmachine I and II by FAST.
+FLI         Autodesk Animator FLIC's.
+FLC         Autodesk Animator Pro FLIC's.
+ANI The first image from Amiga animation files.
+DL          Animation.
+GL images contained in GRASP files.
+TXT,DOC,HLP,BAT text files with up to 128x73 characters.
+
+
+>>> RL!dePacker ::: 1.4 ::: NOTE: I tried a few of these and they ALL failed, so. meh.
+aUS [Advanced UPX Scrambler] 0.4 - 0.5
+ASPack 1.x - 2.x
+ASPack Scrambler 0.1
+ASDPack 2.0
+AHPack 1.x
+AlexProtector 1.x
+ARMProtector 0.x
+BJFNT 1.3
+BeRoEXEPacker 1.x
+BamBam 0.x
+CryptoPeProtector 0.9x
+Crunch x.x
+CodeCrypt 0.16x
+dot Fake Signer 3.x
+dePack
+eXPressor 1.2.x - 1.5.x
+EZip 1.0
+EP Protector 0.3
+Escargot 0.x
+EXEStealth 2.x
+ExeSax 0.9x
+FSG 1.xx & 2.0
+Fusion x.x
+Goat's PE Mutilator 1.6
+hmimys-Packer 1.x
+Hmimys PePack 1.0
+HidePX 1.4
+HidePE 2.1
+ID Application Protector 1.2
+JDPack 1.x
+JDProtect 0.9
+Just Another Pe Packer 0.5
+KByS Packer 0.2x
+Krypton 0.x
+LameCrypt 1.0
+MEW 1.x
+mkfpack
+NackedPack 1.0
+nSPack 2.x - 3.x
+nPack 1.x
+NeoLite 1.x - 2.0
+NWCC
+OrIEN 2.1x
+PECompact 1.x - 2.x
+PeX 0.99
+PC Shrink 0.71
+Polyene 0.01
+PackMan 0.0.0.1 & 1.0
+PE Diminisher 0.1
+PolyCrypt PE 2.1.5
+PeTite 1.x
+PEStubOEP 1.6
+PELockNT 2.x
+PePack 1.0
+PC PE Encryptor alpha
+PackItBitch
+PEncrypt 4.0
+PEnguinCrypt 1.0
+PeLockNt 2.x
+PeLock 1.0x
+PESHiELD 0.25
+Perplex PE-Protector 1.x
+PeTite 1.0 - 1.3
+PKLITE32 1.x
+RLP 0.6.9 - 0.7.x
+RLPack Basic Edition 1.x
+RLPack Modifier Edition 1.x
+ReCrypt 0.15 - 0.80
+Stone`s PE Encryptor 2.0
+StealthPE 2.1
+Software Compress 1.x
+SPLayer 0.08
+ShrinkWarp 1.4
+SPEC b3
+SmokesCrypt 1.2
+Simple UPX-Scrambler
+SimplePack 1.x
+SLVc0deProtector 1.x
+tELock 0.x
+UPX 0.8x - 2.x
+UPXRedir
+UPXCrypt
+UPX Inkvizitor
+UPXFreak 0.1
+UPolyX 0.x
+UPXLock 1.x
+UG Chruncher 0.x
+UPX-Scrambler RC 1.x
+UPX Protector 1.0x
+UPXs*** 0.06 & 0.0.1
+UPXScramb 2.x
+VirogenCrypt 0.75
+VPacker 0.02.10
+WWPack32 1.x
+WinUPack 0.2x - 0.3x
+Winkript 1.0
+yC 1.x
+yZPack 1.x - 2.x
+32Lite 0.3a
+!EP (ExE Pack) 1.x
+[G!X]`s Protector 1.2
+
+
+>>> SoftwareBridge ::: 3.x ::: https://winworldpc.com/product/software-bridge%20/3x
+ASCII
+CEOwrite
+DCA/FFT
+DCA/RFT
+DIF
+DW2/3 (TXT)
+DX
+Microsoft Word
+MS Word 5
+MultiMate
+Samna
+Sprint
+Volkswriter 3
+WangIWP
+WordMarc
+WordPerfect
+WordPerfect 5
+WordStar 2000
+
+
+>>> UNP
+AINEXE V2.1
+ANTIBODY
+AVPACK V1.20
+AXE V2.2
+CENTRAL POINT ANTI-VIRUS V1, V1.1
+COM2CRP V1.0
+COMLOCK V0.10
+COMPACK V4.4, V4.5
+CRYPTA V1.00
+CRYPTCOM
+DELTAPACKER V0.1
+DIET V1.00, V1.00d, V1.02b, V1.10a, V1.20, V1.44, V1.45f
+ENCRCOM V2.0
+EPW V1.2, V1.21, V1.30
+EXELITE V1.00aF
+EXEPACK V4.00, V4.03, V4.05, V4.06
+F-XLOCK V1.16
+ICE V1.00
+IMPLODE V1.0 Alpha
+KVETCH V1.02�
+LINK /EXEPACK V3.60, V3.64, V3.65, V3.69, V5.01.21
+LZEXE V0.90, V0.91, V1.00a
+MCLOCK V1.2, V1.3
+MEGALITE V1.18a, V1.20a
+OPTLINK
+PACKEXE V1.0
+PACKWIN V1.0�
+PASSCOM V2.0
+PGMPAK V0.13, V0.14, V0.15
+PKLITE V1.00�, V1.00, V1.03, V1.05, V1.12, V1.13, V1.14, V1.15, V1.20, V1.50
+POJCOM V1.0
+PRO-PACK V2.08, V2.14
+PROCOMP V0.82
+PROTECT! EXE/COM V1.0, V1.1, V2.0, V3.0, V3.1, V4.0, V5.0
+SELF-DISINFECT V0.90�
+SHRINK V1.0
+SCRNCH V1.00, V1.02
+SYRINGE
+TINYPROG V1.0, V3.0, V3.3, V3.6, V3.8, V3.9
+TURBO ANTI-VIRUS V7.02A, V9.40
+UCEXE V2.3
+USERNAME V2.00, V2.10, V3.00
+WWPACK V3.00, V3.01, V3.02

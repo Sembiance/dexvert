@@ -6,5 +6,5 @@ export class bloodLaceCompressedTGA extends Format
 	ext            = [".tga"];
 	forbidExtMatch = true;
 	magic          = ["Blood & Lace Compressed TGA"];
-	converters     = ["bl_unpack -> dexvert[asFormat:image/tga]"];
+	converters     = ["deark[module:jgf5]", "bl_unpack -> dexvert[asFormat:image/tga]"];
 }

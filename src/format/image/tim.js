@@ -11,7 +11,8 @@ export class tim extends Format
 	converters   = [
 		"convert", "deark[module:tim]", "wuimg[format:tim][hasExtMatch]", "nconvert[format:tim]", "gameextractor[renameOut][codes:TIM]",
 		"GARbro[types:image:Sony.TimFormat][matchType:magic][hasExtMatch]", "paintDotNet[matchType:magic][hasExtMatch]", "noesis[type:image][matchType:magic][hasExtMatch]",
-		"recoil2png[format:TIM]"
+		"recoil2png[format:TIM]",
+		"gimp[matchType:magic][hasExtMatch]"
 	];
 	verify = ({meta}) => meta.colorCount>1;
 }

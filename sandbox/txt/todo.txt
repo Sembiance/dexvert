@@ -43,6 +43,39 @@
   If not, look at the encarta files and see about vibe coding an extractor
 <<<
 
+* imtools including support for --list-formats
+	ImTools/LibIm aka imconv (old unix code that doesn't compile on modern linux, sadly)  https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
+		bmp    Microsoft Windows bitmap image file
+		cur    Microsoft Windows cursor image file
+		eps    Adobe Encapsulated PostScript file
+		gif    Compuserve Graphics image file
+		hdf    Hierarchical Data File
+		ico    Microsoft Windows icon image file
+		icon   Sun Icon and Cursor file
+		iff    Sun TAAC Image File Format
+		jpeg   JPEG image file format
+		miff   ImageMagick's image file format
+		mpnt   Apple Macintosh MacPaint file
+		pbm    PBM Portable Bit, Gray, and Pixel Map files
+		pcx    ZSoft IBM PC Paintbrush file
+		pic    PIXAR picture file
+		pict   Apple Macintosh QuickDraw/PICT file
+		pix    Alias image file
+		ps     Adobe PostScript file
+		ras    Sun Rasterfile
+		rgb    SGI RGB image file
+		rla    Wavefront raster image file
+		rle    Utah Run length encoded image file
+		synu   SDSC Synu image file
+		tga    Truevision Targa image file
+		tiff   Tagged image file
+		viff   Khoros Visualization image file
+		x      AVS X image file
+		xbm    X11 bitmap file
+		xpm    X11 pixmap file
+		xwd    X Window System window dump image file
+
+
 * video/grasp some don't convert anymore like l&hardy.gl and v7vga.gl
 
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
@@ -115,6 +148,8 @@
 	https://discmaster.textfiles.com/search?q=sidfest&qfields=name&qfields=t
 
 * From discord: CD+G / CD+EG (Karokoe discs) decoder: https://github.com/hcs64/cdg-decode
+
+* Add support for this wombat file tools and the games it supports extrating from: https://szevvy.com/
 
 * If a dexvert process crashes (such as wineSelfExtractor (can be caused by doing path.relative(r.wineTreeRootDirPath, undefined) in pre())) while a lock is held, then the lock is never released. When I call /lock it should also require an some sort of 'agentid' and I'll need to add a 'crashcb' option and call in AgentPool.exitHandler and then in the parent dexrpc? I need to handle that crash and then remove any locks belonging to that agentid
 

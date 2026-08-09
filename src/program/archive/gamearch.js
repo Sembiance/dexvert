@@ -4,8 +4,11 @@ export class gamearch extends Program
 {
 	website      = "https://github.com/Malvineous/libgamearchive";
 	package      = "dev-libs/libgamearchive";
+	flags   = {
+		format : "Specify which format to convert as. Default: let gamearch decide"	// for list run: gamearch --list-types
+	};
 	bin          = "gamearch";
-	args         = r => ["-X", r.inFile()];
+	args         = r => [...(r.flags.format ? ["--type", r.flags.format] : []), "-X", r.inFile()];
 	cwd          = r => r.outDir();
 	checkForDups = true;
 	failOnDups   = true;

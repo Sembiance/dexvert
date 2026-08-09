@@ -7,5 +7,5 @@ export class krisChipTracker extends Format
 	ext          = [".kris"];
 	magic        = ["Kris Tracker / ChipTracker song/module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["uade123"];
+	converters   = ["zxtune123", "uade123"];
 }

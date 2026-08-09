@@ -7,5 +7,5 @@ export class lostVikingsGameArchive extends Format
 	filename       = [/^data\.dat$/i];
 	magic          = [/^geArchive: DAT_26( |$)/];
 	weakMagic      = true;
-	converters     = ["gameextractor[codes:DAT_26]", "gamearch"];
+	converters     = ["gameextractor[codes:DAT_26]", "gamearch[format:dat-lostvikings]"];
 }

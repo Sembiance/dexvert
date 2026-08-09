@@ -6,5 +6,5 @@ export class cba extends Format
 	ext            = [".cba"];
 	forbidExtMatch = true;
 	magic          = ["Chuck Biscuits/Black Artist module"];
-	converters     = ["openmpt123"];
+	converters     = ["zxtune123", "openmpt123"];
 }

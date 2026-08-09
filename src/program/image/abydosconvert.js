@@ -4,7 +4,7 @@ import {runUtil} from "xutil";
 
 export class abydosconvert extends Program
 {
-	website  = "https://github.com/Sembiance/abydosconvert";
+	website  = "http://snisurset.net/code/abydos/";
 	package  = "media-gfx/abydosconvert";
 	unsafe   = true;
 	bin      = "abydosconvert";

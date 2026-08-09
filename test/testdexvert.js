@@ -465,6 +465,9 @@ const FLEX_DIFF_FILES = [
 	/archive\/swf\/.+$/,
 	/archive\/swfEXE\/.+$/,
 
+	// sometimes a PDF sometimes an SVG
+	/document\/quarkXPress\/Tutorial Instructions$/,
+	
 	// not sure why, but sometimes I get a .txt sometimes I get a .pdf weird
 	/document\/pageStreamDocument\/ASyncIO_2\.part2\.pgs$/,
 	/document\/wordDoc\/POWWOW\.DOC$/,
@@ -481,6 +484,7 @@ const FLEX_DIFF_FILES = [
 	// other
 	/archive\/iso\/WIKINGOWIE\.iso$/,
 	/audio\/aurealAspenSoundBank\/(.*\.arl|aurealgm)$/,
+	/audio\/xactWaveBank\/Effects_intro\.xwb$/,
 	/music\/amosTracker\/.+$/,
 	/music\/sid\/Legacy_of_the_Ancients.sid$/,
 	/music\/ay\/emul\.(dragonslair2|gliderrider)$/
@@ -525,6 +529,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],
 	[/text\/forthSource\/.*\.txt$/i, "text", "txt"],
 	[/text\/hpME10Database\/COGWHEEL\.txt$/, "text", "txt"],
+	[/text\/hsqlDBConfiguration\/rapla-hsqldb\.properties/, "text", "txt"],
 	[/text\/ini\/b3e_property.fst$/, "text", "txt"],
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/playmationAction\/.*\.txt$/i, "text", "txt"],
@@ -540,6 +545,9 @@ const DISK_FAMILY_FORMAT_MAP = [
 	// These files have garbage on the end that prevent them from detected as what they should be. I used to 'trim' files on a 2nd and 3rd attempt to detect, but now with perlTextCheck, this can't be done and isn't needed
 	[/text\/c\/.+\.C/i, "text", "txt"],
 	[/text\/latexAUXFile\/(LCAU\.AUX|LATEX\.BUG)$/i, "text", "txt"],
+
+	// These files are corrupted in some way and don't validate, and thus don't convert
+	[/image\/svg\/(CDPINOUT_elcapmeter|SVGAbout)\.svg$/, "text", "xml"],
 
 	// These files don't convert with my converters and get identified to other things
 	[/archive\/installShieldSelfExtractor\/(SWREG\.EXE|MonkeyMinimum\.exe)$/, "executable", "exe"],
@@ -634,8 +642,7 @@ const ALLOW_PROCESS_FAILURES = {
 	document :
 	{
 		hlp         : ["qtim.dll"],
-		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"],
-		wp          : ["OTM.Judas_Priest"]
+		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"]
 	},
 	image :
 	{
@@ -687,6 +694,7 @@ const UNPROCESSED_ALLOW_NO_IDS = [
 	"audio/mp3",	// TCD_tombseq1.mtc
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
+	"document/wp",
 	"image/bbcDisplayRAM",
 	"image/cgm",	// sadly we don't match on magic alone due to how loose the magic is and how easily non-CGM files convert into garabge and 'family2' has no .cgm extension
 	"image/ecchi",	// ISAKU53.ECC

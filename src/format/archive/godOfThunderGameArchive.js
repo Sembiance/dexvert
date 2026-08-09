@@ -7,5 +7,5 @@ export class godOfThunderGameArchive extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	filename       = [/^gotres\.dat$/i];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:dat-got]"];
 }

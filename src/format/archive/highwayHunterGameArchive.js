@@ -7,5 +7,5 @@ export class highwayHunterGameArchive extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	filename       = [/^123\.dat$/i];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:dat-highway]"];
 }

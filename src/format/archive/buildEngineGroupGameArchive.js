@@ -8,5 +8,5 @@ export class buildEngineGroupGameArchive extends Format
 	forbidExtMatch = true;
 	magic          = ["Build engine group file", "Build Engine GRP container", /^geArchive: GRP_KEN( |$)/, "dragon: KSGRP"];
 	idMeta         = ({macFileType, macFileCreator}) => macFileType==="data" && ["Duke", "ShdW"].includes(macFileCreator);
-	converters     = ["gameextractor[codes:GRP_KEN]", "dragonUnpacker[types:KSGRP]", "gamearch"];
+	converters     = ["gameextractor[codes:GRP_KEN]", "dragonUnpacker[types:KSGRP]", "gamearch[format:grp-duke3d]"];
 }

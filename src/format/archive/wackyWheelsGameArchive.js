@@ -8,5 +8,5 @@ export class wackyWheelsGameArchive extends Format
 	forbidExtMatch = true;
 	filename       = [/^wacky\.(dat|lid)$/i];
 	//magic          = [/^Wacky Wheels Archive$/, /^geArchive: DAT_3( |$)/];	// These ARE valid, but are TOO LOOSE and end up matching things like sangoFighterGameArchive/PATHER.DAT
-	converters     = ["gameextractor[codes:DAT_3]", "gamearch"];
+	converters     = ["gameextractor[codes:DAT_3]", "gamearch[format:dat-wacky]"];
 }

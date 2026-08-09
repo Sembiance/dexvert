@@ -127,7 +127,6 @@ export default
 		chopArchive                                 : {name : "Chop archive", magic : ["Chop archive (v1.00)"]},
 		coloradoMemorySystemPackage                 : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
 		colourGenieTapeImage                        : {name : "Colour Genie tape image", ext : [".cas"], magic : ["Colour Genie high level tape image", "EACA Colour Genie virtual tape image"]},
-		corkCompressedData                          : {name : "Cork compressed data", ext : ["$"], magic : ["Cork compressed data"]},
 		cpcPlusCartridgeImage                       : {name : "CPC Plus Cartridge image", ext : [".cpr"], magic : ["CPC Plus Cartridge image"]},
 		ctRawDiskImage                              : {name : "CT Raw disk image", ext : [".raw"], magic : ["CT Raw disk image"]},
 		daemonToolsProDiskImage                     : {name : "Daemon Tools Pro disk image", ext : [".sav"], magic : ["Daemon Tools Pro disk image"]},

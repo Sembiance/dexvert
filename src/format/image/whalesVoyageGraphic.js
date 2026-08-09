@@ -6,5 +6,5 @@ export class whalesVoyageGraphic extends Format
 	ext            = [".brs"];
 	forbidExtMatch = true;
 	magic          = ["Whale's Voyage graphic"];
-	converters     = ["wuimg[format:ilbm]"];
+	converters     = ["deark[module:wv_brs][renameOut] -> dexvert[asFormat:image/iffILBM]", "wuimg[format:ilbm]"];
 }

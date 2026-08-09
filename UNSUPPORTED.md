@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,942)
+# Unsupported File Formats (3,941)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (263)
+## Archive (262)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -59,7 +59,6 @@ Family/Format | Name | Extensions | Notes
 [archive/colourGenieTapeImage](https://discmaster.textfiles.com/search?format=colourGenieTapeImage) | Colour Genie tape image | .cas | 
 [archive/comPackPacked](https://discmaster.textfiles.com/search?format=comPackPacked) | COM-Pack Packed | .com | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?format=c16Tape) | Commodore 16 Tape | .tap | 
-[archive/corkCompressedData](https://discmaster.textfiles.com/search?format=corkCompressedData) | Cork compressed data | $ | 
 [archive/cpcPlusCartridgeImage](https://discmaster.textfiles.com/search?format=cpcPlusCartridgeImage) | CPC Plus Cartridge image | .cpr | 
 [archive/cackrightPacked](https://discmaster.textfiles.com/search?format=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?format=crackStopProtected) | CrackStop Protected |  | 

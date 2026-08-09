@@ -3,8 +3,6 @@
 \----------------/
 * Run util/formatsWebsiteStats.js twice, alternating which line is uncommented at the bottom of the file
 
-* See if these folks have created any new extractors (last: SPEx): https://codeberg.org/CYBERDEV?q=&tab=repositories&sort=newest
-
 /-----------------\
 | Kill dexrecurse |
 \-----------------/
@@ -82,8 +80,3 @@ https://www.digipres.org/formats/sources/trid/
 https://fileinfo.com/
 https://www.amiga-stuff.com/crunchers-id.html
 https://www.loc.gov/preservation/digital/formats/fdd/browse_list.shtml
-
-/------------------------\
-| Reverse Engineer Folks |
-\------------------------/
-https://github.com/BJNFNE

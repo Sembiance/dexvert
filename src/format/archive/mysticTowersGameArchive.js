@@ -7,5 +7,5 @@ export class mysticTowersGameArchive extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	filename       = [/mystus\.dat$/i];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:dat-mystic]"];
 }

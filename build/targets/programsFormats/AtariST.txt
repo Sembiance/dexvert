@@ -1,0 +1,231 @@
+>>> MI-3 ::: https://www.atari-forum.com/viewtopic.php?t=28191
+MI-3 and MI-9   Low 320*200 16 colors   Medium 640*200 4 colors High 640*400 2 colors
+Arabesque <= 640*400            ABM PUF
+Art Director    I ART
+Calamus         CRG
+Canvas  CNV CPT FUL CNV CPT FUL CNV CPT FUL
+Chagall v02.11          ESM
+Crack Art   CA1 CA2 CA3
+Cyber Paint v2.0 <= 320*200 CEL
+Dali    SD0 LPK SD1 MPK SD2 HPK
+DatiST v2.5         DPI
+Degas   PI1 PCI PI 2 PC2    PI 3 PC3
+Despic vl.05    GFB GFB GFB
+Doodle          DOO
+Dpaint 1.0  DFT DFT DFT
+Ecpaint!            MSP
+Ezart   EZA
+Funny Paint FUN FUN | FUN
+Gfa Artist  ART
+Grafix Art  | GRX | ■■■■■■■■■
+Graphic Processor   PG1 PG2 PG3
+Homework    HMP
+Invision 2.00 R0? <= size resolution    IFF R01 R04 IFF R01 R02 IFF R01
+Imagic  IC1 IC2 IC3
+Jack-Paint          BD
+Mega Paint <=640*400            BLD
+MI 1-3 MI-9 Mil PL1 MI2 PL2 MI3
+Neochrome   NEO IFF NEO IFF NEO IFF
+Pablo   PPP     PA3
+Paintshop 2.03          PSC
+Paint Work  SCO CL0 SCI CL1 SC2 CL2
+Pic Pack    | PP1   PP2 PP3
+Picture Only Open all extentions 32000 bytes    DOO ECR PIC D01 ECR PIC DO2 ECR PIC
+Picworks vl         CP3
+Plus Paint 1.2  PIC DOO PIC DOO PIC DOO
+Public Painter vl.l         CMP
+Positive image  BMP IFF BMP IFF BMP IFF
+Prism Paint 1.1 PNT PNT PNT
+Professional Graphics vl.2  PF1 PF2 PF3
+Public painter vl.l         CMP
+Signum2 and The Creator         IMC
+Synthetic Art 1.1   SRT
+Spectrum    SPC SPU
+Stad            PAC
+The ArtiST          ART
+Tiny    TNY TNI TNY TN2 TNY TN3
+True Paint 1.03 TPI TPI TPI
+Windows BMP 4 and 24 bits   BMP 4 and 24 bits   BMP 1 and 24 bits
+Zz Rought   RGH
+Packed by Ice 2.4   PI1 ICE PI2 ICE PI3 ICE
+Paked By Atomik 3.5 PI1 ATM PI 2 ATM    PI 3 ATM
+Packed by Automation 2.3R 5.01  PI1 LSD PI1 AU5 PI 2 LSD PI 2 AU5   PI 3 LSD PI 3 AU5
+Color Palette   PAL PAL PAL
+Fading Palette  FAD FAD
+
+
+>>> smurf ::: http://discmaster.textfiles.com/view/22197/TCE_DEMO_CD2.iso/demo_cd_.2/mags/atos/atos9701.arj/atos9701/ATOS/SMURF.HTM
+1st Publisher	.ART
+Adex ChromaGraph	.IMG
+Alpha Microsystems	.BMP
+Amiga IFF/ILBM	.IFF, .LBM
+Art Director	.ART
+Atari PCP	.PCP
+Atari Public Painter	.CMP
+Atari Spectrum 512	.SPC
+Atari-Grafikformat	.PCP
+Autologic Bitmap	.GM
+CAS Fax	.DCX
+Compuserve VIDTEX	.RLE
+Cubicomp Picturemaker	.R8
+Degas	.PI1-.PI3, .PC1-.PC3
+Doodle	.DOO
+Dr. Halo Import	.CUT + .PAL
+EGA-Paint/Colorix	.RIX
+ERDAS-Image	.LAN
+Edsun Labs	.CEG
+Enhanced Simplex	.ESM
+Falcon	.XGA
+Fontasy Bitmap	.BSG
+GEM-IMG	.IMG
+GIF	.GIF
+GOES Satellite Bitmap	.GOE
+HSI-File	.RAW
+Highlight PC-Format	.PIC
+IBM-Picturemaker	.PIC
+Indypaint	.TRU
+Inshape Images	.IIM
+Kodak Photo CD	.PCD
+Kontron IBAS	.IMG
+MTV Raytracer	.MTV
+Mac PICT 2	.PIC
+MacPaint	.MAC
+Macintosh Giffer	.QDV
+Microsoft Paint	.MSP
+NASA-PDS Image	.IBG
+NeoN Mapfile	.MAP
+Neochrome	.NEO
+OS/2 V1.x BMP	.BMP
+OS/2 V2.x BMP	.BMP
+PC-Paint/Picturepage	.PIC
+Photoshop Document	.PSD
+Portable Bitmap	.PPM
+Q0 Japan Image File	.FAL
+QRT Ray Tracer	.RAW
+RIFF Bitmap	.RIF
+Scodl File	.SCD
+Silicon Graphics Image	.SGI
+Stad	.PAC
+Sun Rasterfile	.RAS
+TIFF	.TIF
+Targa	.TGA
+True Paint Image	.TPI
+Turbo Pascal Image	.TPI
+Vivid Raytracer	.IMG
+Windows BMP	.BMP
+Windows Clipboard v	.CLP
+Atari Icons	.ICN
+X Bitmap	.XBM
+ZSoft Paintbrush	.PCX
+Zeiss Bivas	.DTA
+
+
+>>> zview ::: https://github.com/th-otto/zview
+                        Name                                                    Extensions
+----------------------------------------------------     --------------------------------------------------------
+AIM (Atari Image Manager)                                col,im
+Animaster (Sprite Bank)                                  asb,msk
+Animatic (Film)                                          flm
+Arabesque Bitmap                                         abm,puf
+Art Director, Palette Master, GFA Artist, The ArtiST     art
+ASCII art (grayscale)                                    txt
+Atari Portfolio Graphics                                 pgf,pgc,pgx
+Autodesk Animator FLIC                                   flc,flh,fli
+C.O.L.R. Object Editor                                   ce1,ce2,ce3
+C.O.L.R. Object Editor                                   mur
+Calamus (Raster Graphic)                                 crg
+Canvas                                                   cnv,cpt,ful
+COKE Format                                              tg1
+ColorBurst II                                            bst
+colorSTar (Object), monoSTar (Object)                    obj
+CompuServe RLE                                           rle
+CrackArt                                                 ca1,ca2,ca3
+Cyber Paint (Animation)                                  seq
+Cyber Paint (Image)                                      cel
+Cybermate (Animation)                                    dlt
+Cybermate (Animation)                                    sd0,sd1,sd2,lpk,mpk,hpk
+D-GRAPH                                                  p3c,p32
+DCTV - Interchange File Format                           dct,dctv
+Degas Extended, FuckPaint                                pi4,pi5,pi6,pi7,pi9
+Degas/Degas Elite                                        pi1,pi2,pi3,pc1,pc2,pc3
+DelmPaint                                                del,dph
+DeskPic                                                  gfb
+Dr. Doodle                                               doo
+DuneGraph                                                dg1,dc1
+DUO                                                      duo,du1,du2
+EggPaint/Spooky Sprites                                  trp
+Eureka RAW                                               raw
+EZ-Art Professional                                      eza
+Falcon True Color                                        ftc,xga
+FULLSHOW                                                 kid,kil,kit
+Funny Paint                                              fun
+GDOS, Degas Font, Warp9 Font                             fnt
+GEM Bitmap                                               img
+GemView MGF                                              mgf
+GFA Artist (Font)                                        gft
+GFA RayTrace (Animation)                                 sal,sah
+GFA RayTrace (Image)                                     sul,scl,suh,sch
+GodPaint                                                 god
+Grafix                                                   grx
+Graphics Interchange Format                              gif
+HighResMode                                              hrm
+Image format for the Web                                 web,webp
+ImageLab                                                 b_w,b&w
+Imagic (Image)                                           ic1,ic2,ic3
+IMG Scan (Seymor-Radix)                                  rwl,rwm,rwh
+IndyPaint                                                tru
+InShape                                                  iim
+INVISION Elite Color                                     r01,r02,r04,r08
+Joint Photographic Experts Group                         jpg,jpe,jpeg,jif,jfif,jfi
+MacPaint                                                 mac,pntg
+MegaPaint (Raster)                                       bld
+Microsoft Paint                                          msp
+MTV Raytracer Image                                      mtv
+Multi Palette Picture                                    mpp
+NEOchrome                                                neo
+NEOchrome (Animation)                                    ani
+Overscan Interlaced                                      pci
+Pablo Paint                                              ppp,pa3,bib,src
+PaintPro ST/PlusPaint ST                                 pic
+PaintShop+                                               psc,da4
+Paintworks, Graphics Processor                           cl0,cl1,cl2,pg0,pg1,pg2,pg3,sc0,sc1,sc2
+PC Paintbrush                                            pcx
+Picture Packer                                           pp1,pp2,pp3
+Picworks                                                 cp3
+PixArt                                                   pix
+PL4                                                      pl4
+PlayStation                                              tim
+PNM (Portable Any Map)                                   ppm,pgm,pbm,pam
+Portable Network Graphics                                png
+Printer Control Language                                 pcl
+Prism Paint, TruePaint                                   pnt,tpi,tpa
+PRO89xx (Print-Technik)                                  hir
+Public Painter                                           cmp
+Public Painter                                           pcs
+Quantum Paintbox                                         pbx
+Quick Ray Tracer                                         qrt
+Quite OK Image Format                                    qoi
+Rag-D (Risk Aided Graphics Design)                       rag
+RECOIL - Retro Computer Image Library                    *
+Rembrandt True Color Picture                             tcp
+RGB Intermediate Format                                  rgb
+RGB8/RGBN - Interchange File Format                      tsi
+Scalable Vector Graphics                                 svg,svgz
+Signum! (Image)                                          imc
+Silicon Graphics Image                                   sgi
+Slideshow Sinbad                                         ssb
+Spectrum 512                                             spu,spc,sps
+Spectrum 512 Extended                                    spx
+Spooky Sprites                                           tre
+ST Aided Design                                          pac
+Sun Raster                                               sun,ras,rast
+SuperView Graphics                                       sgx
+Synthetic Arts                                           srt,bit
+Tagged Image File Format                                 tif,tiff
+Tiny Stuff                                               tny,tn1,tn2,tn3,tn4,tn5,tn6
+TmS Cranach (Paint/Studio)                               esm
+Truevision Targa                                         tga
+Turbo Rascal Syntax Error                                flf
+uConvert bitmap format                                   uim,uimg,c01,c02,c04,c08,c16,c24,c32,bp1,bp2,bp4,bp6,bp8
+Windows Bitmap, OS/2 Bitmap                              bmp
+ZZ_ROUGH                                                 rgh

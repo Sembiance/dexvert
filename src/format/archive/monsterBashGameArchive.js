@@ -7,5 +7,5 @@ export class monsterBashGameArchive extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	filename       = [/^bash\d\.dat$/i];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:dat-bash]"];
 }

@@ -7,5 +7,5 @@ export class stellar7GameArchive extends Format
 	ext            = [".res"];
 	forbidExtMatch = true;
 	filename       = [/^(stellar|cockpit|draxon|voice|stelart|scenex|level\d+)\.res$/i];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:res-stellar7]"];
 }

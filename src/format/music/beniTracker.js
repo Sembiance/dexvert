@@ -9,4 +9,5 @@ export class beniTracker extends Format
 	magic          = ["Beni Tracker module"];
 	weakMagic      = true;	// just bytes 0x00 01 02 03 04 05 06 at pos 3
 	unsupported    = true;	// no authentic sample files on discmaster
+	converters     = ["adplay"];
 }

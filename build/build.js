@@ -3,7 +3,9 @@ import {XLog} from "xlog";
 import {printUtil, cmdUtil} from "xutil";
 import {path} from "std";
 
-const TARGET_NAMES = ["README", "SUPPORTED", "UNSUPPORTED"];
+const TARGET_NAMES = ["README", "SUPPORTED", "UNSUPPORTED", "programsFormats"];
+const ALL_EXEMPT = ["programsFormats"];
+
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Builds one or more targets",
@@ -18,7 +20,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.silent ? "none" : "info");
 
-const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES : argv.target);
+const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES.subtractOnce(ALL_EXEMPT) : argv.target);
 for(const [i, targetid] of Object.entries(targetids))
 {
 	xlog.info`${printUtil.majorHeader(targetid, +i>0 ? {prefix : "\n"} : {})}`;

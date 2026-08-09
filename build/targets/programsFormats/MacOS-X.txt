@@ -1,0 +1,304 @@
+>>> GraphicConverter ::: v11.2.2 - August 5, 2020 ::: https://www.lemkesoft.de/en/products/graphicconverter/
+>>> Formats: https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats/
+>>> JS Code to rip formats: Array.from(document.querySelectorAll("#c315 table tr")).map(tr => Array.from(tr.querySelectorAll("td")).map(td => td.textContent.trim())).join("\n")
+Format,Import,Export,Metadata *),Comment
+.D,X,-,-,320x200 pixel at 1 bit
+8BIM,X,-,ICC,old Photoshop 2.0 formatsupports 1, 8 and 24 bit per pixel
+AAI,X,-,-,-
+Acorn Sprite,X,-,-,contains sprites from Acorn computers
+AFP,X,-,-,variant of the TIFF format for 1 bit images
+ALIAS,X,-,-,Alias Pix formatSupports 256 grays or 24 bit.
+AMBER ARR,X,-,-,Used by a microscopeSupports 256 grays.
+AMC,X,-,-,-
+Analyze,X,-,-,Format from medical technology that is made up of two files: .hdr contains the header and .img contains the image data.
+ANI,X,-,-,Animations from the NeoChrome application
+ANI,X,-,-,Animated Windows Cursor
+ANPA,X,-,IPTC,Format with IPTC details.
+Apple File Icon,-,X,-,These files only contain the file icon. By pressing Command-I in the operating system, you can click and copy it in the dialog that opens before setting it for another file with Command-V.
+Apple Preferred,X,-,-,Format des images Apple IIgs
+ART,X,-,-,Format of First PublisherSupports 1 bit per pixel
+ARW,X,-,-,-
+ASCII,X,X,-,option for importing and exporting images as ASCII characters.
+Atari Portfolio,X,-,-,-
+B3D,X,-,-,Maxon format of their 3D render application
+Bio,X,-,-,Bio-Formats of medical devices and microscopes (Glencoe SDK)
+BioRad,X,-,-,BioRad file formatSupport 256 grays
+BLD,X,X,-,Format of Mega Paint
+BMP,X,X,-,Standard Windows formatSupports 1, 4, 8, 15 and 24 bit per pixel
+BSB,X,-,-,Format for maps
+BSP,X,-,-,-
+BUF,X,-,-,Supports 32 bit
+BUM,X,X,-,Variant of the BMP or PICT format
+Byte-Array Hea- der File (.H),-,X,-,Image is converted to C source code, e.g. for games console developers
+CALS,X,-,-,CCITT 4 compressed black and white graphics
+c4,X,-,-,JEDMICS C4 format.
+CAM,X,-,-,Format of the Casio QV-10/100Variant of the JPEG format
+CALS,X,-,-,CCITT 4 compressed black & white images
+CEL,X,X,-,CEL format
+CGM,X,-,-,International standarized file format for exchange of image with vector and bitmap content
+Chyron,X,X,-,The export option only covers the basic elements.
+cicn,-,X,-,Icons
+CINEON,X,-,-,-
+CISCOIpPhoneI mages,X,X,-,-
+CLP,X,-,-,clipboard format of Windows
+cri,X,-,-,-
+CRW,X,-,IPTC,see Photo Raw
+CR2,X,-,IPTC,see Photo Raw
+csource,X,X,-,csource file format (image as csource).
+CT,X,-,-,Scitex color images
+CUR,X,X,-,Cursor format
+CVG,X,-,-,Calamus vector format
+CWK,X,-,-,Apple Works document format. All images contained are imported.
+DCS,X,-,-,.C, .M, .Y, .K documents are combined in a complete CMYK image
+DCR,X,-,-,see Photo Raw
+DCX,X,-,-,Contains multiple PCX files.
+DDS,X,X,-,Native format of graphic cards. Used in some games. Supported variants: DXT1, DXT3, DXT5
+DeltaVision,X,-,-,DeltaVision format.
+DESR VFF,X,-,-,-
+DICoM,X,-,-,Medical format
+Direct icns,X,X,-,-
+Diskus YUV,X,X,-,Format from television production
+DJ1000,X,-,-,Camera format
+DL,X,-,-,Animation format with 320 x 200 pixel at 8 bit.Contains normally x-rated content.
+dm2/dm3,X,-,-,Gatan format from digital microscopes
+DNG,X,-,-,Digital Negative
+Doodle,X,-,-,-
+DPX,X,-,-,-
+Dr. Halo,X,-,-,1. Format of the Dr. Halo application2. Uses 256 colors.
+DrawIT,X,-,-,DrawIT PDB format on PalmOS.
+ECW,X 10),X 10),-,ECW wavelet format. Used for large maps.
+ElectronicImage,X,X,-,Electric Image format.It may contain animations.
+EPSF,X 2),X,-,Postscript format.
+ESM,X,-,-,ESM format
+Facesaver,X,-,-,-
+Favicon ICO,X,X,-,Format for pictures with 16x16 pixels that are displayed in the address bar in front of the URL. Windows ICONS is used as the file format. Adapt and insert the following HTML code in your Web site and copy the favicon.ico image to your server.<link rel="shortcut icon" href="http:// www.lemkesoft.de/favicon.ico"> <link rel="icon" href="http://www.lemkesoft.de/ favicon.ico" type="image/ico">
+FAX,X,-,-,CCITT 3 encoded fax file
+FaxSTF,X,-,-,Format from the FaxSTF software
+fep,X,-,-,-
+fig,X,-,-,With installed xfig fink package on X
+First Publisher art,X,-,-,-
+FireViewer PDB,X,-,-,Palm OS format.Supports b&w, 4 and 16 grays and 256 colors.
+FITS,X,X,-,Flexible Image Transport System format.Normally used for science.
+FLH/FLI/FLC,X,-,-,Animation from the Autodesk Animator.FLI supports 8 bits at 320 x 200 pixel.FLC support 8 bits at 640 x 480 pixel.FLH supports high color.
+FPX,X 6),-,-,FlashPix file format.
+Freehand 10,X 4),-,-,-
+FUJI,X,-,-,-
+GATAN,X,-,-,Format of a microscope.Supports 256 grays.
+GEM,X,-,-,Vector images (GEM-Metafile) from the GEM-Draw application.
+GFX,X,-,-,Format of Xgrabber
+GIF,X,X,COM,Supports 1 to 8 bit per pixel.Format was created by CompuServe Inc.
+GrayPaint,X,-,-,GrayPaint PDB format on PalmOS.
+GRP,X,-,-,Uses 1 or 4 bit per pixel.
+HAM,X,-,-,Format Interchange File Format (IFF)
+HD Photo (wdp),X,-,-,GraphicConverter can only open this Microsoft format in the UB version.
+HDR,X,-,-,Radiance (HDRI) format
+HEIC/HEIF,,,,
+HEIC/HEIF,X (>=10.13),X (>=10.13),X (>=10.13),High Efficiency Format
+HP-GL/2,X,X,-,Vector images.This format is normally used from plotters.
+HGT,X,-,-,-
+HMR,X,-,-,Variation of the TIFF format
+HTC splashscreens,X,X,-,Format of HTC Smartphones (*.rgb565)
+IBL,X,X,-,-
+IBM PIC,X,-,-,Supports 16 bit per pixel.
+IC ? Imagic,X,-,-,Format of the ATARI application Imagic. Supports the three color modes of the ATARI.
+lcd5,X,-,-,RAW format of some iPod games
+ICo/ICN,X,X,-,Format of the Windows file icons.
+IFF/LBM,X,X,-,Standard file format of the Amiga.Supports all color depths.
+IM,X,-,-,Chyron Liberty Paint format.
+Image ->Finder,-,X,-,Creates an image in a folder by creating custom file icons ; this is very usefull for cd-rom creation
+ImageLab/PrintTechnic,X,-,-,Images with 256 grays.
+IMG/XIMG,X,X,-,GEM-Draw
+           file format. Supports 1 to 8 bit per pixel. The specificiations of the
+           24 bit per pixel variant was never offical released.
+IMQ,X,-,-,Satellite image format.
+IPLab,X,-,-,-
+ithmb,X,-,-,iPod Photo format
+IRIS,X,-,-,IRIS (.fep) format
+ISS,X,-,-,-
+j6i,X,-,-,Variant of the JPEG format.
+JBI,X,-,-,Variant of the TIFF format
+JEDMICS C4,X,-,-,Used by NASA
+JIF,X,X,-,New format based on GIF.But it uses the zlib compression.
+JNG,X,-,-,-
+JPEG/JFIF,X,X,IPTC, EXIF, ICC, XMP, COM,Supports 24 bits per pixel or 256 grays.Uses lossy compression.Additional EXIF information (from digital cameras) is supported.
+JPEG 2000,X,X,ICC,Supports 24 bits per pixel or 256 grays.Uses lossy compression.
+JPF,X,X,-,Like gif but with zlib compression
+JPX,X,-,-,JPEG variant
+KDC,X 3),-,-,Format of the Kodak digital camera
+Keynote PICT,X,-,-,Variant of the PICT format created by Keynote.
+KISS CEL,X,X,-,-
+Koala,X,-,-,C64 format
+Kodak DCS,X,-,-,-
+KoNTRoN,X,-,-,Format of the Kontron microscopeContains images that use 256 grays.
+LDF,X,-,-,LuraDokument Format. In the UB version of GraphicConverter, LDF documents cannot be imported and exported as no SDKs are available. If necessary, use the X version of GraphicConverter under Rosetta.
+Liberty IM,X,-,-,-
+LIFF,X,-,-,-
+LOGO,X,X,-,Nokia telephone logos
+Lotus-PIC,X,-,-,1. Vector format of the Lotus spreadsheet application.
+LuraDocument,X,-,-,Document management format
+LWF (LuraWave),X,X 9),-,LuraWave wavelet compression technology
+MacDraw I,X,-,-,MacDraw I format.
+MacPaint,X,X,-,Black and white image with 576 x 720 pixels
+MAG,X,-,-,MAKIchan graphic format
+MAYA-IFF,X,-,-,Variant of the IFF format.
+MBM (Psion 5),X,X,-,Images of the PSIoN serie 5
+Meteosat 5,X,-,-,Format of the meteosat satellite.
+MDC,X,-,-,Raw format of the Minolta RD-175 digital cameras.
+Meteosat 5,X,-,-,Meteosat satellite format
+MHT,X,-,-,web archive format; which can contain images
+MonkeyLogo,X,X,-,MonkeyLogo PDB format.
+MonkeyCard,X,X,-,MonkeyCard PDB format.
+Mov,X,X,-,QuickTime movie file format
+MPO,X,-,-,-
+MP2,X,-,-,MP2 files can only be displayed if you purchase the MP2 add-on for QuickTime from www.apple.com.
+MRC,X,-,-,Format of microscops.
+MrSID,X 11),-,-,Highly compressed file format. This is a lot used at the US government.
+MRW,X,-,-,see Photo Raw
+MSP,X,-,-,1 bit images from Microsoft Paint (Windows 2.0).
+MSX MSX2, MSX+ - MSX2+,X,-,-,-
+NAA/IPTC,X,-,-,-
+NASA Raster Metafile,X,-,-,Format (with or without multiple frames) from the NASA missions.
+NEF,X,-,IPTC,see Photo Raw
+NEO,X,-,-,Format of the ATARI application NeoChrome. Supports 320 x 200 pixel at 16 colors.
+NGG/NCG,X,X,-,Format of Nokia mobile phones.
+NIF,X,-,-,-
+NIST PCT,X,-,-,-
+Nokia .pict,X,-,-,Export via the .logo form
+NoL,X,X,-,Format of Nokia mobile phones.
+NV12,X,-,-,Format for single images of a Microsoft video format
+ODF,X,-,-,Format for multipage documents
+oNCoR,X,-,-,Supports 256 grays.
+ORF,X,-,-,see Photo Raw
+OTA,X,X,-,OTA bitmap format.
+P ? ? Degas,X,-,-,Format of the ATARI application Degas320 x 200 pixel, 16 colors (*.PI1, *.PC1)640 x 200 pixel, 4 colors (*.PI2, *.PC2)640 x 400 pixel, 2 colors (*.PI3, *.PC3)
+Palette,-,X,-,color table
+Palm image stream,X,-,-,Format of the Palm organizer (.stream)
+PAM,X,-,-,Open Source Format
+PAC STAD,X,-,-,Black & white 640 x 400 pixel images of the ATARI application STAD.
+PaperPort (MAX),X,-,-,Archive format from Visioneer Paperport. Supports 1, 4, 8 and 32 bit. Can be multipage.
+PBM/PGM/PPM,X,X,-,Standard UNIX file format for easy exchange of images.Support 1, 8 or 24 bit per pixel.The files can be encoded binary or ASCII
+PCD,X,-,-,Kodak PhotoCD format
+PCX,X,X,-,Format of PC-Paintbrush.Support 1, 4 and 8 bit per pixel. The new variant supports 24 bit per pixel, too.
+PIC (32K),X,-,-,Black & white 640 x 400 pixel image of the ATARI..
+PIC,X,-,-,B&W ATARI image format (640x400 pixel)
+PIC,X,-,-,Format from PC Paint
+PIC,X,X,-,Format of the Psion.Supports 1 or 2 bit per pixel.
+PICS,X,X,-,Animations PICT.
+PICT,X,X,ICC,standard Mac OS file formatcontains vector and/or bitmap images
+PICT resource,X,X,-,PICT that is written/read from the resource fork of a file
+PDB,X,X,-,Palm Pilot database format.GraphicConverter supports currently the following variants
+           FireViewer
+            TealPaint
+            ScreenShot Hack
+            Tiny Viewer
+            JPEG PDB
+PDF,X 7),X 7),-,Portable Document File format
+PDS3,X,-,-,*.IMQ files with MOC compression
+PEF,X,-,-,see Photo Raw
+PFM,X,-,-,Open Source Format
+PGC/PGF,X,X,-,-
+Photo PDB,X,X,-,(JPEG)
+Photostudio,X,-,-,Format used under Mac OS 9
+PGPF,X,X,-,Sony Clie file format
+PGC/PGF,X,-,-,-
+Photo Raw,X,-,-,Many digital cameras can create raw files.The following formats are supported:
+           CRW - Canon
+            CR2 - Canon
+            NEF - Nikon
+            DCR - Kodak
+            ORF - Olympus
+            X3F - Sigma
+            RDC - Rollei
+            RAF - Fuji
+            SRF - Sony
+            PEF - Pentax
+            MRW - Konica/Minolta
+PIX,X,-,-,Modified BMP format used by some iPod games
+PM,X,-,-,Format of the UNIX xv application.
+PNG,X,X,ICC, XMP, COM,New internet file format.It supports 1, 2, 4, 8 and 24 bits per pixel.
+PoRST,X,-,-,Photo on disk format.Variant of the JPEG format.
+PowerPoint,X,-,-,Format of scanners with automatic feed
+Ppat,X,X,-,-
+PSD,X,X,IPTC, XMP, ICC,Photoshop 3.x or later file format.Supports 1, 8, 24 bit per pixel.
+PSP,X,-,-,Paintshop Pro file format
+PTG,X,-,-,ArtRage
+PWP,X,-,-,Format of a developing service
+Pxx - Degas,X,-,-,Atari Degas program format 320 x 200 pixels, 16 colors (*.PI1, *.PC1) 640 x 200 pixels, 4 colors (*.PI2, *.PC2) 640 x 400 pixels, 2 colors (*.PI3, *.PC3)
+QDV,X,-,-,Giffer formatSupports 1, 4 and 8 bits per pixel.
+QNT,X,-,-,-
+QTIF,X 5),-,-,QuickTime image format.
+QTL,X,X,-,-
+RAF,X,-,-,see Photo Raw
+RAW,X,X,-,You
+           can use the raw filter to import raw data. You have to specify the
+           width, height and color depth during opening or saving such a file.
+RDC,X,-,-,see Photo Raw
+RIFF,X,-,-,Contains color and black & white images (format of the Painter software)
+RLA,X,-,-,-
+RLE,X,-,-,Images of the Utah Raster toolkit.
+RSB,X,X,-,sprite and background format in games
+RTF,-,X,-,Rich Text Format.
+RW2,X,-,-,-
+SCR,X,-,-,Sinclair screenshots. Bitte beachten Sie, dass die Endung SCR auch vom Capture Tool von Word für DOS verwendet wird.
+SCR,X,X,-,Images of the capture tool of word for DoS. The format is identical with PCX.
+Scrap,X,-,-,-
+ScreenShot Hack PDB,X,-,-,Palm OS ScreenShots; support for Handera and Sony CLIE (V1.5)
+SCX,X,-,-,Format of ColoRIXSupports 8 bit per pixel
+SFF,X,-,-,Structured Fax File format.
+SFW,X,X,-,Seattle Filmworks photo on disk format.Variant of the JPEG format.
+SGI,X,-,-,Silicon Graphics Image format.Supports 256 grays or 24 bit.
+SHP,X,-,-,Format of the image library of Lighting Press or Printmaster.Support 1 bit per pixel.
+SHS,X,-,-,-
+SIGMA SD10 raw,X,-,-,RAW-Format of the camera Sigma SD 10
+Sinclair QL,X,-,-,Format of the Sinclair QL
+SIXEL,X,-,-,Terminal format from the VAX world.
+SKETCH,X,-,-,Variant of the MBM format.
+SMV,X,-,-,format of a microscope
+SNX,X,-,-,A modification of the JPEG format
+SoFTIMAGE,X,X,-,Format of Softimage.Supports 32 bits per pixel.Used for video applications.
+SPC,X,-,-,Image of the Spectrum application.Supports 320 x 200 pixel at 512 colors.
+SRF,X,-,-,see Photo Raw
+ST X SBIG,X,-,-,Supports 256 grays.
+StartupScreen s,X,X,-,This file can be placed in the system folder ; so, the Mac OS will display the image during startup
+STV,X,-,-,Medizinisches Format
+SUN,X,-,-,SUN Raster file format.Supports 8 or 24 bit per pixel.
+Super-Hi-Res 3200,X,-,-,Images with 32000 colors of the Apple Iigs
+SVG,X 8),X,-,Scaleable Vector Graphics
+SWF,X,X,-,Using QuickTime (Macromedia Flash)
+System 7 clip,-,X,-,Clipboard format when copying or moving data on System 7 or higher
+TBC,X,-,-,TBCPlus
+TCL,X,-,-,TCL format
+TealPaint PDB,X,-,-,Palm OS format.Supports b&w and 256 colors (default Palm color table).
+TEX,X,-,-,Texture
+TGA,X,X,-,Format from Truevision TargaSupport 1, 8, 15 and 24 bits per pixel.
+TIFF,X,X,IPTC, ICC, XMP, EXIF, COM,complex format for all color depthsGraphicConverter can import and export the following compression kinds : uncompressed, packbits, lzw, ccitt3, ccitt4, fax3, fax4
+TIM PSX,X,-,-,-
+Tiny Viewer PDB,X,-,-,Format of the Tiny Viewer on PalmOS
+TN ?,X,-,-,Format of the ATARI application TINY
+TRS-80,X,X,-,Format of the TRS-80-
+VBM,X,-,-,-
+VFF,X,-,-,Uses 4 bit per pixel
+VGS-8,X,-,-,Used by a microscope.Supports 256 grays.
+VITRoNIC,X,-,-,Vitronic format.Supports 256 grays.
+VoXEL,X,-,-,512 x 512 pixel at 256 grays format.
+VPB,X,X,-,Format of the Quantel video system.
+VPM,X,-,-,-
+WBIN,X,X,-,Format of the MacWavelets application
+WBMP,X,X,-,Format for the new WAP technology.
+wbz,X,-,-,Five variants are recognized
+wdb,X,-,-,HD photo format from Microsoft. (*) Can only be imported with the UB version of GraphicConverter.
+Webp,X,X,-,Format for the Internet without meta data.
+Winfax (FXM),X,-,-,Winfax file format; can be multipage
+Winmail.dat,X,-,-,All readable images it contains will be opened in a multiple-page document.
+WMF,X,X,-,Windows Meta File. Contains vector and bitmap images.
+WPG,X,-,-,Graphic file format of Word Perfect.It can contain bitmap and vector images.
+X11,X,-,-,Bitmap.
+X3F,X,-,-,see Photo Raw
+XBM,X,X,-,Black & white format that is C encoded.
+XCF,X 8),-,-,GIMP native document
+XFIG,X 1),-,-,X-FIG drawings
+X-Face,X,X,-,Supports 48 x 48 pixel at 1 bit.Used for small photos in newsgroups.
+XPM,X,X,-,Bitmap ASCII.
+XWD,X,X,-,Dump of X - Windows.
+YUV,X,-,-,Diskus format.
+Z04, Z08, Z16, Z24, Z32,X,-,-,z3d format

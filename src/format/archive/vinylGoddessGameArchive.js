@@ -6,5 +6,5 @@ export class vinylGoddessGameArchive extends Format
 	website        = "https://moddingwiki.shikadi.net/wiki/LBR_Format";
 	filename       = [/^goddess\.lbr$/i];
 	magic          = [/^geArchive: LBR( |$)/];
-	converters     = ["gamearch", "gameextractor[codes:LBR]"];
+	converters     = ["gamearch[format:lbr-vinyl]", "gameextractor[codes:LBR]"];
 }

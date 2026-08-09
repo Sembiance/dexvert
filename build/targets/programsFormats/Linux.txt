@@ -1,0 +1,740 @@
+>>> 98ripper ::: 7.0.0_p20260804 ::: https://gitlab.com/bunnylin/98ripper
+Format              Common extensions Description
+----------------------------------------------------------------------------
+FAT12 / FAT16       (none)            Raw or containerized FAT filesystem
+FAT8                (none)            NEC DISK BASIC 1-byte FAT filesystem
+FAT-DO              (none)            FAT-DO filesystem
+MAKO-DOS            (none)            MAKO-DOS filesystem
+Elf DOS             (none)            Elf DOS filesystem
+HDM                 .hdm              Headerless raw disk image
+ISO-9660            .iso              ISO-9660 optical disc image
+Disk Copy Pro       .dcp, .dcu        Disk Copy Pro floppy image
+DIM                 .dim              DIFC disk image
+NHD                 .nhd              T98-Next hard drive image
+D88                 .d88              Pasopia floppy disk image
+FDD                 .fdd              Virtual-98 floppy disk dump
+FDI                 .fdi              Floppy disk image
+HDI                 .hdi              Hard disk image
+DIP                 .dip              Disk image
+NFD                 .nfd              T98-Next floppy disk image
+FIM                 .fim              Wizard98 floppy image
+
+
+>>> Audio Overload ::: v2.0 - Nov 30, 2020 ::: https://www.bannister.org/software/ao.htm
+>>> NOTE: Just a player UI. Has some sort of UI to output to WAV but it seems only in 'realtime' so meh.
+AHX - Commodore Amiga
+AY - Amstrad CPC/Spectrum ZX/Atari ST
+COP - Sam Coupe
+DSF - Sega Dreamcast
+GBS - Nintendo Gameboy
+GSF - Nintendo Gameboy Advance
+GYM - Sega Megadrive/Genesis
+HES - PC Engine
+HVL - Commodore Amiga
+IMF - PC-compatibles, various Apogee games
+KSS - MSX
+MDX - Sharp X68000
+MOD - Commodore Amiga
+NSF - Nintendo NES
+NSFE - Nintendo NES (enhanced tags)
+ORC - TRS-80 Orchestra-90
+PSF - Sony PlayStation
+PSF2 - Sony PlayStation II
+QSF - Capcom QSound
+RAW - PC-compatibles with an AdLib
+ROL - PC-compatibles, AdLib Visual Composer
+S3M - PC-compatibles with a GUS or SoundBlaster
+S98 - NEC PC-98
+SAP - Atari XL/XE
+SCI - PC-compatibles, various Sierra games
+SNDH - Atari ST
+SPC - Super Nintendo
+SPU - Sony Playstation
+SSF - Sega Saturn
+VGM - Sega Master System/Game Gear (and lots more)
+VTX - Spectrum Vortex Tracker
+WSR - Bandai WonderSwan/Wonderswan Color
+YM - Amstrad CPC/Spectrum ZX/Atari ST
+
+
+>>> Ay_Emul ::: https://bulba.untergrund.net/emulator_e.htm
+Dumps (or logs) of sound chip registers recorded in many computers' emulators:
+	OUT (produced by a ZX Spectrum emulator 'Z80' v3.xx by G.A. Lunter);
+	PSG (produced by a ZX Spectrum emulator 'Z80 Stealth' by Mr.Kirill, and in many other emulators);
+	EPSG (recorded in a ZX Spectrum emulator 'Z80 Stealth');
+	YM ('StSound Project' by Leonard/Oxygen files; the supported subtypes are YM2, YM3, YM3b, YM5 and YM6);
+	VTX (files made with 'Vortex Project' by V_Soft);
+	ZXAY (custom-made for Ay_Emul).
+Popular ZX Spectrum musical editors' module formats:
+	ST1: Sound Tracker v1.xx non-compiled;
+	AY type ST11: Sound Tracker v1.1 non-compiled, an analog of ST1;
+	STC, ZXS: Sound Tracker v1.xx, Super Sonic v1.xx;
+	ST3: STC recompiled (in KSA's S.T. Music's Recompiler);
+	PSC: Pro Sound Creator v1.xx;
+	AS0, ASC: ASC Sound Master v0.xx-2.xx;
+	PT1, PT2, PT3: Pro Tracker v1.xx-3.xx, Vortex Tracker II v1.0;
+	STF: Sound Tracker Pro non-compiled;
+	STP: Sound Tracker Pro;
+	FTC: Fast Tracker v1.xx;
+	FLS: Flash Tracker;
+	SQT: SQ-Tracker;
+	GTR: Global Tracker v1.x;
+	FXM: Fuxoft AY Language;
+	AY type AMAD: Amadeus modules, analogous to FXM;
+	PSM: Pro Sound Maker.
+ZX Spectrum, Atari ST/STe or Amstrad CPC's memory dumps which include the player for Z80 or MC68000 processors:
+	AY type EMUL (DeliAY and AYPlay project files);
+	AYM (RDOSPLAY project files);
+	SNDH (Atari ST or Atari STe music files).
+MIDI files:
+	MID, MIDI: MIDI standard format;
+	RMI: MID files wrapped in the RIFF container;
+	KAR: standard MID files with song texts for karaoke;
+	XMI: Miles Design XMIDI format.
+Files played by BASS library:
+	MP3, MP2, MP1: MPEG-1 encoded waveform sound recording;
+	OGG: Vorbis-encoded audio;
+	WAV: any codecs of PCM audio that are installed in the system;
+	WMA: Windows Media encoded audio (via basswma extension);
+	APE: Monkey's Audio records (via bass_ape extension);
+	FLAC: Free Lossless Audio Codec audio (via bassflac extension);
+	WV: WavPack audio (via basswv extension);
+	AC3: multichannel Dolby AC3 encoded audio;
+	AAC: Advanced Audio Coding records;
+	M4A, MP4: MPEG-4 wrapped audio (Advanced Audio Coding, Apple Lossless Audio Codec)
+	DFF, DSF: Direct Stream Digital (Sony/Philips audio format)
+	MO3: modules with MP3/OGG encoded samples;
+	IT: Impulse Tracker;
+	XM: Fast Tracker 2;
+	S3M: Scream Tracker 3;
+	MTM: MultiTracker;
+	MOD: Sound/Noise/Star/Pro/FastTracker (and many more) module format;
+	UMX: Unreal Tournament music package;
+	HTTP:// and FTP:// shoutcast streams (internet radio, etc.).
+
+
+>>> AYAM ::: https://ayam.sourceforge.net/features.html
+RIB, DXF, 3DM, 3DMF, OBJ, X3D
+
+
+>>> Camoto-Studio ::: NOT INSTALLED ::: https://github.com/Malvineous/camoto-studio    http://www.shikadi.net/camoto/desktop/
+Captain Comic
+Captain Comic II: Fractured Reality
+Catacomb
+Catacomb II
+Cosmo's Cosmic Adventures
+Crystal Caves
+Dangerous Dave
+Dark Ages
+Doofus
+Duke Nukem
+Duke Nukem II
+God of Thunder
+Halloween Harry
+Highway Hunter
+Hocus Pocus
+Hugo 1: Hugo's House of Horrors
+Jill of the Jungle
+Kiloblaster
+Major Stryker
+Monster Bash
+Mystic Towers
+Raptor
+Rockford
+Scubaventure
+Secret Agent
+Solar Winds
+Trugg
+Vinyl Goddess From Mars
+Wacky Wheels
+Word Rescue
+Xargon
+Zone 66
+
+
+>>> c-flod ::: https://github.com/rofl0r/c-flod
+Brian Postma's SoundMon 1.0/2.0/3.0
+David Whittaker
+Delta Music 1.0
+Delta Music 2.0/2.2
+Digital Mugician
+Digital Mugician 7 voices
+D.O.C. Soundtracker 9/2.0
+FastTracker II XM (PC)
+FredEd
+Future Composer 1.0/1.3
+Future Composer 1.4
+His Master's NoiseTracker
+Jochen Hippel
+Jochen Hippel COSO
+NoiseTracker 1.0/1.1/2.0
+ProTracker 1.0/1.1/1.2
+Rob Hubbard
+SidMON
+SidMON II
+SoundFX 1.0/1.8/1.9/2.0
+Soundtracker 2.3/2.5
+Ultimate Soundtracker, The (Karsten Obarski)
+
+
+>>> CrossCad/Ware ::: https://www.datakit.com/en/crosscad_ware.php
+3DVIA / CATIA / SOLIDWORKS Composer
+3Shape DCM
+ACIS
+CADDS
+CATIA V4 3D
+CATIA V5 3D
+CATIA V6 / 3DEXPERIENCE 3D
+CEREC - Sirona Dental
+CGR
+Creo View
+DWG / DXF 3D
+FBX
+Fusion 360
+glTF
+IFC
+IGES
+Inventor
+JT
+Navisworks
+OBJ
+Parasolid
+PLMXML
+Procera
+ProE / Creo Parametric 3D
+Revit
+Rhino
+Robcad
+Solid Edge 3D
+SOLIDWORKS 3D
+STEP
+STL
+UG NX 3D
+VDA
+
+
+>>> drawview ::: https://github.com/martenjj/drawview
+Plain Draw file	DrawFile (AFF)	Draw, many others
+Draw file with extra data	DrawFile (AFF)	DrawPlus
+Compressed Draw	CmprDraw (C4B)	Chameleon, Poster, Vector
+Compressed with extras	VecFile (C56)	Vector
+Draw with tagged objects	Poster (CC3)	Poster
+Object library	DrawLib (810)	DrawPlus, Vector
+
+
+>>> Freecad :::  https://github.com/FreeCAD/FreeCAD		https://wiki.freecad.org/Feature_list
+STEP, IGES, OBJ, STL, DXF, SVG, DAE, IFC or OFF, NASTRAN, VRML, FCStd
+More formats from: https://github.com/FreeCAD/FreeCAD-addons
+
+
+>>> Game Viewer  (adopted to linux in dexvert/bin/gameViewerLinux)  plugins from: https://game-viewer.org/plugins.php
+Plugin Filename									Game Name												File Extensions
+---------------									---------												---------------
+1_year_hare                                     Year of the hare                                        *.scr,*.snd,*.res,*.dll,*.dat,*.flm,*.exe
+12_chairs                                       12 chairs how it really was                             *.SID    12 chairs
+7_sins                                          7 Sins                                                  *.pak,*.rws
+adventure_harry_evidence_for_underwear          Harry's adventures under the underwear                  *.res
+agast                                           AGAST                                                   game.data
+alcachofa_soft                                  Alcachofa Soft                                          *.alg    alg Images
+                                                                                                        *.an0    an0 Images
+                                                                                                        *.ani    ani Images
+                                                                                                        *.snd    snd Sound
+                                                                                                        *.svs    svs Images
+                                                                                                        *.vhs    vhs Images
+alcachofa_soft_2                                Alcachofa Soft 2                                        *.emc
+arcade_lab                                      Arcade Lab                                              *.gfx    gfx Images
+awe_productions                                 AWE Productions                                         *.aca    aca Images
+                                                                                                        *.acg    acg Images
+                                                                                                        *.act    act Text
+                                                                                                        *.acv    acv Sound
+                                                                                                        *.bak    bak Images
+                                                                                                        *.bmp    bmp Images
+                                                                                                        *.css    css Text
+                                                                                                        *.gif    gif Images
+                                                                                                        *.ico    ico Images
+                                                                                                        *.jpg    jpg Images
+                                                                                                        *.mp3    mp3 Sound
+                                                                                                        *.psd    psd Images
+                                                                                                        *.raa    raa Images
+                                                                                                        *.rag    rag Images
+                                                                                                        *.rav    rav Sound
+                                                                                                        *.sbg    sbg Images
+                                                                                                        *.sbv    sbv Sound
+                                                                                                        *.tga    tga Images
+                                                                                                        *.txt    txt Text
+beavis_and_butt_head_do_u                       Beavis and Butt-Head Do U                               *.act,*.bg,*.fnt
+beavis_and_butt_head_in_virtual_stupidity       Beavis and Butt-Head in Virtual Stupidity               *.000,*.vnm
+blood_code                                      Blood Code                                              *.rpa    Blood Code Pack
+book_of_the_dead_lost_souls                     Book of dead souls                                      *.pak
+br_pilots_2014                                  Brothers pilots version 2014-2015                       *.ico    ico Images
+                                                                                                        *.log    log Text
+                                                                                                        *.mp3    mp3 Sound
+                                                                                                        *.ogg    ogg Sound
+                                                                                                        *.png    png Images
+                                                                                                        *.tex    tex Images
+                                                                                                        *.tga    tga Images
+                                                                                                        *.txt    txt Text
+                                                                                                        *.wav    wav Sound
+bud_redhead                                     Bud Redhead The Time Chase                              *.gfx    gfx Images
+captain_pronin                                  Captain Pronin - one against all                        *.RMT
+chukcha                                         Chukchi in a big city                                   *.npk
+clue                                            Clue: Murder at Boddy Mansion                           *.a,*.res
+cmyta                                           Troubles - revived dead                                 *.dat,*.res,*.spr
+comulti_multimedia                              Comulti Multimedia                                      *.vfs,*.pak,*.txt
+constructor_mediahouse                          Comics and cartoons designer from media house           *.lib
+cottage_leopold                                 Dacha Cat Leopold, or Features of Mouse Hunting         00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,*.bas,*.flm
+cpal2                                           Morozko: Adventure of Santa Claus, Ivan and Nastya      *.res    Morozko
+crazy_sacked                                    Crazy Sacked                                            *.ogd
+crowd_anim_engine                               Crowd Anim Engine                                       *.zbm,*.cwl,*.cwd,*.cwp,*.dat,*.bdt,*.pck,*.inx,*.eog,*.gax,*.bmp,*.crp,*.psb
+deadhunt                                        Deadhunt                                                *.idx,*.pk5
+diamond_bird                                    Diamond Ptah                                            *.flt
+dip_interactive                                 DIP Interactive                                         *.res
+druuna_morbus_gravis                            Druuna Morbus Gravis                                    *.dat,*.imf
+e_pie_entertainment                             E-Pie Entertainment                                     *.pck
+eighth_voyage_of_sinbad_the_curse_karamogula    Eighth journey of Sinbad: Curse Karamogul               *.dat
+elf_all_stars_datsui_jan                        Elf All Stars Datsui Jan                                *.arc
+eugene_onegin                                   Evgeny Onegin                                           *.PAK
+faberge_eggs                                    Faberge eggs. Adventure                                 *.zip
+fools_for_lawlessness                           Ground for lawlessness                                  *.GMD
+frogwares_pak                                   Frogwares pak                                           *.pak    Frogwares
+fuguriya                                        Fuguriya                                                BGM,DATA,MGD,MSD,SE,VOICE
+golden_palace_in_search_of_the_golden_beetle    Golden Palace. In search of a golden beetle             *.dat,*.sd,*.ss,*.ira,*.res,*.cfg,*.ini,*.msk
+green_green                                     Green Green                                             *.DAT,*.PCG
+green_green_2_3                                 Green Green 2-3                                         *.ARC
+grom                                            Grom                                                    *.pak,*.p01
+gromada                                         Gromada                                                 *.res
+hidden_dinosaures                               Hidden Dinosaures                                       *.CSA
+hooligans                                       Hooligans                                               *.x13
+legal_crime                                     Legal Crime                                             *.bmp       bmp Images
+                                                                                                        *.config    config Text
+                                                                                                        *.epi       epi Text
+                                                                                                        *.map       map Text
+                                                                                                        *.sce       sce Text
+                                                                                                        *.tile      tile Text
+                                                                                                        *.txt       txt Text
+                                                                                                        *.wav       wav Sound
+lost_paradise                                   Lost paradise                                           *.dat
+lula                                            Lula                                                    *.tap,*.tgp,*.tvp,*.gfx,*.sfx,*.adh,*.ddf,*.old,*.taf,*.ta1,*.bak
+neighbours                                      Neighbours from Hell                                    *.bnd    Neighbours Pack
+new_adventures_musketeers                       New adventures of musketeers                            *.atx     atx Text
+                                                                                                        *.bmp     bmp Images
+                                                                                                        *.dat     dat Text
+                                                                                                        *.mp3     mp3 Sound
+                                                                                                        *.spr     spr Images
+                                                                                                        *.tga     tga Images
+                                                                                                        *.txt     txt Text
+                                                                                                        *.wav     wav Sound
+                                                                                                        *.zspr    zspr Images
+new_russian_fairy_tales                         New Russian tales                                       *.png    png Images
+                                                                                                        *.spr    spr Images
+                                                                                                        *.tga    tga Images
+nine_prince                                     Nine princes of Amber                                   *.dir,npa.exe    Nine prince Pack
+on_the_trail_of_the_murderer                    In the wake of the killer                               *.002    002 Images
+                                                                                                        *.003    003 Images
+                                                                                                        *.005    005 Images
+                                                                                                        *.006    006 Images
+                                                                                                        *.010    010 Sound
+                                                                                                        *.011    011 Sound
+                                                                                                        *.chn    chn tex
+                                                                                                        *.dat    dat tex
+                                                                                                        *.drg    drg tex
+                                                                                                        *.fme    fme tex
+                                                                                                        *.gif    gif Images
+                                                                                                        *.jpg    jpg Images
+                                                                                                        *.lks    lks tex
+                                                                                                        *.obj    obj tex
+                                                                                                        txt      txt tex
+pacany                                          Boys do not cry                                         *.pac    Pacany Pack
+perfil_de_riesgo_casos_federales                Perfil de Riesgo. Casos Federales                       *.res
+pink_panther                                    Pink Panther                                            *.orb
+prominence                                      Prominence                                              *.res
+reportage                                       Reportage                                               *.anm    anm Sound
+                                                                                                        *.sfx    sfx Images
+sabotain                                        Sabotage - Break the Rules                              *.sab    Sabotain: Break the Rules
+sakura_wars                                     Sakura Wars                                             *.spr,*.bin,*.tab
+sh_awakened                                     Sherlock Holmes: The Awakened                           *.img,*.dat,*.snd
+shards_of_infinity                              Shards of Infinity                                      *.xpack
+shtirliz_oa                                     Shtyrlitz: Opening America                              *.res,MP.DLL
+sin                                             SiN                                                     *.sin
+step_creative_group                             Step Creative Group                                     *.bpk
+sting                                           The Sting!                                              *.wld,*.exe
+syberia                                         Syberia                                                 *.mp3    MP3 Sound
+                                                                                                        *.syj    SYJ Images
+                                                                                                        *.wav    WAV Sound
+tales_birch_bark                                Fairy tales on birch bark: walking for distant lands    *.000
+the_lost_paradise                               Lost islands                                            *.pak
+the_mystery_of_the_third_planet                 The secret of the third planet                          *.carc,LData
+the_sec_rep                                     The Second Reproduction                                 *.nsa    The Second Reproduction Pack
+the_simpsons_virtual_springfield                The Simpsons Virtual Springfield                        *.vs3    vs3 Images
+                                                                                                        *.vsa    vsa Images
+                                                                                                        *.vsb    vsb Images
+three_heroes                                    Three heroes or a very terrible fairy tale              *.dat    DAT Game Pack
+tonny                                           Tonny                                                   *.mpr,*.vdb    Tonny Pack
+torrente_el_juego                               Torrente: El Juego                                      *.jpg    jpg Images
+                                                                                                        *.rut    rut Text
+                                                                                                        *.tex    tex Images
+                                                                                                        *.wav    wav Sound
+treasure_island                                 Treasure Island                                         *.dat
+trickster_games                                 Trickster Games                                         *.pak,*.vid
+trickster_games_2                               Trickster Games 2                                       *.toc,*.ogg,*.ogm
+vlyapli                                         Pillowed!                                               *.alp,*.sca,*.scn,*.scp
+voodoo_kid                                      Voodoo Kid                                              *.kid
+watchmaker                                      Watchmaker                                              *.wm
+will_co_engine                                  Will Co. Engine                                         *.arc
+will_co_engine_2                                Will Co. Engine 2                                       *.arc
+yuka                                            Yuka                                                    *.ykc
+zanzarah                                        Zanzarah The Hidden Portal                              *.pak,*.bcf
+
+
+>>> glTF converters, see big list of formats various programs support here: https://github.khronos.org/glTF-Project-Explorer/
+
+
+>>> iff-convert ::: http://www.boomerangsworld.de/cms/tools/iff-convert.html
+ILBM - almost full support for all variants, 2-256 colors, 64 extra-half-brite, HAM and HAM8 support, 24 bit depth. output images as ppm files and separate pgm mask file.
+DEEP - support for IFF DEEP files with Red, Green, Blue, and alpha component, the other components are not yet supported. output images as ppm files and separate pgm mask file.
+ANIM - support for ANIM types 2, 3, 4, 5, 7 and 8, but not all option variants. output frames as individual ppm files and separate pgm mask file.
+8SVX - output contained samples as wav files.
+FANT - FantaVision files. Extracts ILBM images.
+FTXT - extract text chunks as utf8 text.
+WOWO - WordWorth files. extract text chunks as utf8 text.
+SWRT - FinalWriter files. extract text chunks as utf8 text.
+SSA  - Clarissa animations. File are not fully valid IFF files as chunk lengths are not correctly written. iff-convert contains special handling for those chunks.
+
+
+>>> macutils ::: 2.0.0 ::: https://github.com/wnayes/macutils
+BinHex 5.0, MacBinary 1.0 and UMCP (with caveat)
+Compress It
+ShrinkToFit
+MacCompress
+PackIt
+StuffIt and StuffIt Deluxe
+Diamond
+Compactor
+Zoom
+MacLHa
+DiskDoubler and AutoDoubler
+
+
+>>> nulib2 ::: https://github.com/fadden/nulib2
+.SHK
+.BXY
+.SEA (as created by GS/ShrinkIt)
+.BSE
+.BNY and .BQY Binary II archives
+
+
+>>> Pandoc ::: v2.10.1, July 24, 2020 ::: https://github.com/jgm/pandoc
+commonmark (CommonMark Markdown)
+commonmark_x (CommonMark Markdown with extensions)
+creole (Creole 1.0)
+csv (CSV table)
+docbook (DocBook)
+docx (Word docx)
+dokuwiki (DokuWiki markup)
+epub (EPUB)
+fb2 (FictionBook2 e-book)
+gfm (GitHub-Flavored Markdown), or the deprecated and less accurate markdown_github; use markdown_github only if you need extensions not supported in gfm.
+haddock (Haddock markup)
+html (HTML)
+ipynb (Jupyter notebook)
+jats (JATS XML)
+jira (Jira/Confluence wiki markup)
+json (JSON version of native AST)
+latex (LaTeX)
+markdown (Pandoc's Markdown)
+markdown_mmd (MultiMarkdown)
+markdown_phpextra (PHP Markdown Extra)
+markdown_strict (original unextended Markdown)
+mediawiki (MediaWiki markup)
+man (roff man)
+muse (Muse)
+native (native Haskell)
+odt (ODT)
+opml (OPML)
+org (Emacs Org mode)
+rst (reStructuredText)
+t2t (txt2tags)
+textile (Textile)
+tikiwiki (TikiWiki markup)
+twiki (TWiki markup)
+vimwiki (Vimwiki)
+
+
+>>> VCG Library (used by Meshlab) ::: https://vcg.isti.cnr.it/vcglib/fileformat.html
+import: PLY, STL, OFF, OBJ, 3DS, COLLADA, PTX, V3D, PTS, APTS, XYZ, GTS, TRI, ASC, X3D, X3DV, VRML, ALN
+export: PLY, STL, OFF, OBJ, 3DS, COLLADA, VRML, DXF, GTS, U3D, IDTF, X3D
+
+
+>>> xanim ::: 2.80.3 ::: http://xanim.polter.net/
+    +  FLI and FLC animations.
+    +  IFF animations/images.
+        + Color cycling during single images and anims.
+        + IFF Compressions Supported:
+            + Anim3
+            + Anim5
+            + Anim7
+            + Anim8
+            + AnimJ (Movies)
+            + Animl
+        + Following Amiga display modes are supported:
+            + normal (Bit-Planes)    depth 1-8.
+            + EHB (Extra Half-Brite) depth 6.
+            + HAM (Hold And Modify)  depth 6 and 8.
+    +  GIF87a and GIF89a images/animations.
+        + single and multiple images supported.
+        + GIF89a animation extensions supported.
+    +  a kludgy text file listing gifs and what order to show them in.
+    +  DL animations. Formats 1, 2 and most of 3.
+    +  Amiga PFX(PageFlipper Plus F/X) animations. DISABLED TEMPORARILY.
+    +  Amiga MovieSetter animations(For those Eric Schwartz fans).
+    +  Utah Raster Toolkit RLE images and anims.
+    +  AVI animations.
+        + AVI Video Codecs supported:
+            + IBM Ultimotion     (ULTI) depth 16.
+            + JPEG               (JPEG) depth 24.
+            + Motion JPEG        (MJPG) depth 24.
+            + Intergraph JPEG    (IJPG) depth 24.
+            + Microsoft Video 1  (CRAM) depth 8 and 16.
+            + Microsoft Video 1  (WHAM) depth 8 and 16.
+            + Microsoft Video 1  (MSVC) depth 8 and 16.
+            + Radius Cinepak     (CVID) depth 24. (see cinepak.readme)
+            + Intel Indeo R3.1   (IV31) depth 24. (see indeo.readme)
+            + Intel Indeo R3.2   (IV32) depth 24. (see indeo.readme)
+            + Intel Indeo R4.1   (IV41) depth 24. (see README.dll)
+            + Intel Indeo R5.0   (IV50) depth 24. (see README.dll)
+            + CCITT H.261        (H261) depth 24. (see README.dll)
+            + CCITT H.263        (M263) depth 24. (see README.dll)
+            + Intel RAW YUV9     (YUV9) depth 24. (see indeo.readme)
+            + Creative CYUV	 (CYUV) depth 16. (see creative.readme)
+            + Uncompressed	 (RGB ) depth 4,8,16,24.
+            + Run length encoded (RLE8) depth 8.
+            + YUY2 4:2:2         (YUY2) depth 24.
+            + YV12               (YV12) depth 24.
+            + V422               (V422) depth 24.
+            + VYUY               (VYUY) depth 24.
+            + I420               (I420) depth 24.
+            + Y41P               (Y41P) depth 24.
+            + RainbowRunner JPG  (DMB1) depth 24.
+            + Editable MPEG	 (XMPG) depth 24.
+            + Broadway MPEG	 (BW10) depth 24.
+        + AVI Audio Codecs supported:
+            + PCM                0x0001 mono/stereo and 8/16 bits.
+            + MS ADPCM           0x0002 mono/stereo     4 bits.
+            + ALAW               0x0006 mono            8 bits.
+            + ULAW               0x0007 mono            8 bits.
+            + DVI/IMA ADPCM	 0x0011 mono/stereo     4 bits. * Old Format
+            + DVI/IMA ADPCM	 0x0011 mono/stereo     4 bits. * New Format
+            + GSM 6.10           0x0011 mono
+    +  Quicktime Animations.
+        + Quicktime Video Codecs supported:
+            + Uncompressed	(RAW )      depth  1,4,8,16,24 and 24+
+            + Uncompressed	(RAW ) Gray depth  1,4 and 8.
+            + Apple Graphics    (RLE )      depth  1,8,16 and 24.
+            + Apple Graphics    (RLE ) Gray depth  8.
+            + Apple Animation   (SMC )      depth  8.
+            + Apple Animation   (SMC ) Gray depth  8.
+            + Apple Video	(RPZA)      depth 16.
+            + Radius Cinepak    (CVID) Gray depth 24. (see cinepak.readme)
+            + Radius Cinepak    (CVID) Gray depth  8. (see cinepak.readme)
+            + Intel Indeo R3.1  (IV31)      depth 24. (see indeo.readme)
+            + Intel Indeo R3.2  (IV32)      depth 24. (see indeo.readme)
+            + Intel Indeo R4.1  (IV41)      depth 24. (see README.dll)
+            + Intel Indeo R5.0  (IV50)      depth 24. (see README.dll)
+            + Intel RAW YUV9    (YUV9)      depth 24. (see indeo.readme)
+            + Component Video   (YUV2)      depth 24.
+            + Photo JPEG        (JPEG)      depth  8 and 24.
+            + Motion JPEG A     (MJPA)      depth  8 and 24.
+            + Kodak Photo CD    (KPCD)      depth 24.
+            + Microsoft Video 1 (CRAM)      depth 8 and 16.
+            + Microsoft Video 1 (WHAM)      depth 8 and 16.
+            + Microsoft Video 1 (MSVC)      depth 8 and 16.
+            + Photoshop         (8BPS)      depth 8,16,24 and 32.
+            + Photoshop         (8BPS) Gray depth 8.
+        + Quicktime Audio Codecs supported:
+            + PCM               (raw )      mono/stereo  and 8/16 bits
+            + Signed PCM        (twos)      mono/stereo  and 8/16 bits
+            + IMA ADPCM         (ima4)      mono/stereo  and  4   bits
+            + uLAW              (ulaw)      mono/stereo
+            + GSM 6.10          (agsm)      mono
+        + Compressed Headers.
+        + Supports multiple video trak's.
+        + Supports animations with multiple codecs.
+    + NOTE: support for separated .rsrc/.data forks has been temporarily
+               	commented out.
+    +  Replay Movie Format(for Acorn computers).
+        + Replay Movie Video Codecs supported:
+            + Moving Lines RGB              depth 24
+            + Moving Lines YUV              depth 24
+        + Replay Movie Audio Codecs supported:
+            + Signed PCM                    mono/stereo  and 8/16 bits
+            + Logarithmic                   mono/stereo  and 8/16 bits
+    +  SGI Movie Format.
+        + SGI Movie Video Codecs supported:
+            + MVC1
+            + MVC2
+            + JPEG
+        + SGI Movie Audio Codecs supported:
+            + Signed PCM   	            mono/stereo  and 8/16 bits
+    +  JFIF images. NOTE: use XV for single images. This is more
+                          for animation of a sequence of JPEG images.
+                          or "xanim +bC1d image.jpg"
+    +  MPEG animations. NOT FULLY SUPPORTED
+                       	Currently only Type  I  Frames  are
+                       	displayed.  Type  B  and Type P frames
+                       	are currently ignored, but will be added
+                       	in future revs.
+    +  WAV audio files. The audio may either be added to the
+                       	animation preceding it or played by itself.
+        + WAV Audio Codecs supported:
+            + PCM                0x0001 mono/stereo and 8/16 bits.
+            + MS ADPCM           0x0002 mono/stereo     4 bits.
+            + ALAW               0x0006 mono            8 bits.
+            + ULAW               0x0007 mono            8 bits.
+            + DVI/IMA ADPCM	 0x0011 mono/stereo     4 bits. * Old Format
+            + DVI/IMA ADPCM	 0x0011 mono/stereo     4 bits. * New Format
+            + GSM 6.10           0x0011 mono
+    +  AU audio files. The audio may either be added to the
+                       	animation preceding it or played by itself.
+        + AU Audio Codecs supported:
+            + ulaw        	 1 mono  8 bits.
+            + PCM                2 mono/stereo  8 bits.
+            + PCM                3 mono/stereo 16 bits.
+    +  any combination of the above  on  the  same  command
+       line.
+  * DVI ADPCM format has two implementations. The old way and the new way.
+    Unfortunately, it is impossible for a software program to distinguish
+    between the two.  If it sounds bad, use the +k2 option to tell XAnim
+    to use the Old DVI ADPCM Format. k is for kludge by the way.
+
+
+>>> xine ::: http://xine.sourceforge.net/features
+File formats (System layer / media types)
+	direct DVD playback (of unlocked/unencrypted DVDs, see below)
+	Video CD
+	Audio CD
+	BluRay
+	mpeg program streams (.mpg, .mpeg)
+	mpeg transport streams (.ts)
+	ogg (.ogg, .ogm)
+	avi (.avi)
+	asf (.asf, .wmv, .wma)
+	quicktime (.mov, .mp4)
+	mpeg-video (.mpv, .m2v)
+	mpeg-audio (.mp2, .mp3)
+	Sega Saturn FILM (.cpk)
+	Id Software RoQ (.roq)
+	wav (.wav)
+	Autodesk FLIC (.fli)
+	real (.rm, .ra, .ram)
+	raw dv (.dv)
+	network graphics format (.png, .mng)
+	Creative Voice (.voc)
+	Sun/NeXT SND/AU (.snd, .au)
+	Wing Commander III (.mve)
+	Westwood Studios files (.vqa, .aud)
+	Electronic Arts WVE (.wve)
+	AIFF (.aif, .aiff)
+	YUV4MPEG2 (.y4m)
+	SMJPEG (.mjpg)
+	raw AC3 (.ac3)
+	Dialogic VOX (.vox)
+	TechnoTrend PVA (.pva)
+	Playstation STR (.str)
+	Nullsoft Video (.nsv)
+	4X Technologies (.4xm)
+
+Audio codecs
+	mpeg audio (layer 1,2,3)
+	a/52 (aka ac3, dolby digital)
+	aac (used in .mp4 files)
+	dts (via external decoder)
+	vorbis
+	pcm
+	adpcm (MS/IMA/DVI/Dialogic)
+	mu-law and A-law
+	roq dpcm
+	Real Media dnet audio
+	Real Media 28.8 audio
+	DivX audio (WMA)
+	GSM 6.10
+	FLAC
+	NSF (NES sound format)
+	Speex
+	via external binary/win32 codecs (not included in xine):
+		MS GSM
+		Intel Music Coder
+		Voxware Metasound
+		ACELP.net
+		Real Media Sipro/Cook/dnet
+		QDesign Music 1/2 (QDM1/QDM2)
+	currently unsupported/untested Formats:
+		some formats frequently found in quicktime streams (Qualcomm Pure Voice…)
+
+Video codecs
+	mpeg 1/2
+	mpeg 4 (aka OpenDivX)
+	H.264
+	H.265 (HEVC)
+	AV1
+	VC-1
+	VP8, VP9
+	ms mpeg 4
+	divx 3/4/5
+	windows media video 7 & 8
+	motion jpeg
+	Cinepak
+	DV
+	ms video 1 (msvc)
+	ms rle
+	Sorenson SVQ1/SVQ3 (often used in Quicktime trailers)
+	creative yuv (cyuv)
+	roq video
+	QT RLE, SMC, RPZA
+	theora
+	via external binary/win32 codecs (not included in xine):
+		Indeo 3.1-5.0
+		Window Media Video 8,9
+		On2 VP3.1
+		I263
+		Real Media 2.0, 3.0, 4.0
+	unsupported/untested Formats:
+		3ivx
+		h263 (aka Real Video 1.0)
+		hardware decoding support:
+		VAAPI - mpeg2, mpeg4, H.264, H.265
+		VDPAU - mpeg2, mpeg4, H.264
+		MMAL (Raspberry PI) - mpeg2, mpeg4, H.264
+
+
+>>> xv
+BMP
+FITS
+GIF
+HIPS
+IFF
+IRIS
+JP2K
+JPEG
+MAG
+MAKI
+MGCSFX
+PBM
+PCD
+PCX
+PDS
+PI
+PIC
+PIC2
+PM
+PNG
+PSD
+RLE
+SUNRAS
+TARGA
+TIFF
+WBMP
+WEBP
+XBM
+XPM
+XWD
+ZX

@@ -7,5 +7,5 @@ export class drRiptideGameArchive extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	filename       = [/^(riptide|ccedit)\.dat$/i, /^galvoice\.voc$/i];
-	converters     = ["gamearch"];
+	converters     = ["gamearch[format:dat-riptide]"];
 }

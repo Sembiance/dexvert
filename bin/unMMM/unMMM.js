@@ -3,6 +3,7 @@ import {cmdUtil, fileUtil, runUtil} from "xutil";
 import {XLog} from "xlog";
 import {assert, path} from "std";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
+import {C} from "../../src/C.js";
 
 const xlog = new XLog("info");
 
@@ -122,7 +123,7 @@ for(const chunk of chunks)
 	else if(["SND ", "snd "].includes(chunk.tag))
 	{
 		const filename = data.strPascal();
-		const tmpRawFilePath = await fileUtil.genTempPath(undefined, ".raw");
+		const tmpRawFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".raw");
 		await data.writeToDisk(data.remaining(), tmpRawFilePath);
 		await runUtil.run("sox", ["-t", "raw", "-r", "22050", "-c", "1", "-b", "8", "-e", "unsigned", tmpRawFilePath, path.join(argv.outputDirPath, `${chunk.seq}_${filename}.wav`)]);
 		await fileUtil.unlink(tmpRawFilePath);

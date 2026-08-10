@@ -124,7 +124,7 @@ if(renderData?.frames?.length)
 			lastFrame = renderData.frames[i];
 	}
 
-	const framesDirPath = await fileUtil.genTempPath();
+	const framesDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 	await Deno.mkdir(framesDirPath);
 	await Object.entries(renderData.frames).parallelMap(async ([i, pngFrame]) =>
 	{

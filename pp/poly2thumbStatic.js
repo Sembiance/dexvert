@@ -84,7 +84,7 @@ await fileUtil.unlink(tmpHTMLFilePath);
 
 if(renderDataRaw)
 {
-	const frameFilePath = await fileUtil.genTempPath();
+	const frameFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 	await Deno.writeFile(`${frameFilePath}.png`, base64Decode(renderDataRaw.substring(renderDataRaw.indexOf("base64,")+"base64,".length)));
 	await runUtil.run("magick", [...C.CONVERT_PNG_ARGS, `${frameFilePath}.png`, `PNG:${argv.thumbFilePath}`], {liveOutput : true});
 	await fileUtil.unlink(frameFilePath, {recursive : true});

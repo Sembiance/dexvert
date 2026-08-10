@@ -4,6 +4,7 @@ import {Detection} from "../../Detection.js";
 import {extractEXEOverlay} from "../../exeOverlayUtil.js";
 import {fileUtil} from "xutil";
 import {identify} from "../../identify.js";
+import {C} from "../../C.js";
 
 let formats = null;
 
@@ -27,7 +28,7 @@ export class exeOverlayID extends Program
 
 		r.meta.detections = [];
 
-		const tmpFilePath = await fileUtil.genTempPath();
+		const tmpFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 		await extractEXEOverlay(r.inFile({absolute : true}), tmpFilePath);
 		if(!(await fileUtil.exists(tmpFilePath)))
 			return;

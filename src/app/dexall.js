@@ -12,7 +12,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Dexverts one or more files",
 	opts    :
 	{
-		outputDir : {desc : "Output directory. Default: Random Directory", hasValue : true, defaultValue : await fileUtil.genTempPath()},
+		outputDir : {desc : "Output directory. Default: Random Directory", hasValue : true, defaultValue : await fileUtil.genTempPath(C.DEXVERT_TMP_DIR)},
 		relative  : {desc : "On the report, show the paths as relative to the current working directory"}
 	},
 	args :

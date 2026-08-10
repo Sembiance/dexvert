@@ -10,6 +10,7 @@ import {DexFile} from "./DexFile.js";
 import {fileUtil, runUtil, printUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
+import {C} from "./C.js";
 
 export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, pretend, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
 {
@@ -97,7 +98,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, prete
 		xlog.info`\nAttempting to process identification: ${id.pretty()}`;
 
 		// create a temporary cwd where all programs will run at (by default)
-		const cwd = await fileUtil.genTempPath(undefined, `${id.family}_${id.formatid}`);
+		const cwd = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, `${id.family}_${id.formatid}`);
 		await Deno.mkdir(cwd, {recursive : true});
 
 		// create a temporary fileSet with the original input file and aux files so we can rsync to our cwd

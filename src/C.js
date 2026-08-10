@@ -30,7 +30,7 @@ C.WINE_WEB_HOST = "127.0.0.1";
 C.WINE_WEB_PORT = 17737;
 C.WINESERVER_VNC_BASE_PORT = 9940;
 C.WINE_PREFIX_SRC = path.join(import.meta.dirname, "..", "wine");
-C.WINE_PREFIX = "/mnt/ram/dexvert/wine";
+C.WINE_PREFIX = "/mnt/dexvert/wine";
 
 C.CLASSIFY_PATH = "/mnt/ram/dexvert/classify";
 C.CLASSIFY_HOST = "127.0.0.1";
@@ -134,7 +134,7 @@ C.IMAGE_VARIANT_FORMATS =
 // see above, these should pick the last child image, not the first
 C.IMAGE_VARIANT_FORMATS_LAST = ["palmBitmap", "xCursor"];
 
-/* eslint-disable @stylistic/array-bracket-spacing, @stylistic/indent, @stylistic/no-multi-spaces */
+/* eslint-disable @stylistic/array-bracket-spacing, @stylistic/indent */
 /* Arranged in a table to make it easier to read, but will be converted into key : value pairs */
 // optional: true means that the field is optional
 //    facet: true means that the field is facetable (group by)
@@ -176,7 +176,7 @@ C.SEARCH_SCHEMA =
 	          v : [   "fvec",  true,       false,   false,  false  ],	// 768 count float vector for images/poly thumbs, used for similarity search
 			 va : [   "fvec",  true,       false,   false,  false  ]	// 512 count float vector for audio, used for similarity search
 };
-/* eslint-enable @stylistic/array-bracket-spacing, @stylistic/indent, @stylistic/no-multi-spaces */
+/* eslint-enable @stylistic/array-bracket-spacing, @stylistic/indent */
 C.SEARCH_SCHEMA = Object.fromEntries(Object.entries(C.SEARCH_SCHEMA).map(([fieldKey, fieldOptions]) => ([fieldKey, Object.fromEntries(fieldOptions.map((k, i) => ([C.SEARCH_SCHEMA._options[i], k])))])));
 delete C.SEARCH_SCHEMA._options;
 

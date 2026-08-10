@@ -1,5 +1,6 @@
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
+import {C} from "../../C.js";
 
 export class dblatex extends Program
 {
@@ -11,7 +12,7 @@ export class dblatex extends Program
 	bin  = "dblatex";
 	args = async r =>
 	{
-		r.doxBookTmpPath = await fileUtil.genTempPath(undefined, ".xml");
+		r.doxBookTmpPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".xml");
 		// some files (such as AmigaChannel5.xml) have invalid XML entity codes in them (search for reseÏa  dir) produced by grotag. So we filter out the hex entities entirely to be safe
 		await runUtil.run("sed", ["-e", "s/&#[A-Za-z0-9]\\+;//g", r.inFile()], {cwd : r.f.root, stdoutEncoding : "binary", stdoutFilePath : r.doxBookTmpPath});
 		return ["--quiet", `--type=${r.flags.format || "pdf"}`, "-o", await r.outFile("out.pdf"), r.doxBookTmpPath];

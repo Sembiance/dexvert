@@ -1,11 +1,11 @@
-# Vibe coded by Claude
+# Vibe coded by Codex
 """
-unvise.py - Extract files from Installer VISE archives (Mac OS)
+installerVISE.py - Extract files from Installer VISE archives (Mac OS)
 
-Usage: python3 unvise.py <inputFile> <outputDir>
+Usage: python3 installerVISE.py <inputFile> <outputDir>
 
-Supports Installer VISE versions 1.x through 3.x.
-Handles both standalone VISE files and self-extracting installers (SVCT at offset 128).
+Supports known Installer VISE formats v0.01 through v11.00.
+Handles standalone VISE files and MacBinary-wrapped installers (SVCT at offset 128).
 Decompression based on reverse-engineering by the ScummVM project (elasota, 2022).
 """
 
@@ -80,6 +80,229 @@ def deobfuscate(raw):
     return bytes(data)
 
 
+class _ViseBitReader:
+    """Little-endian bit reader for VISE's DEFLATE-compatible bitstream."""
+
+    def __init__(self, data):
+        self.data = data
+        self.bit_pos = 0
+
+    def read(self, count):
+        if self.bit_pos + count > len(self.data) * 8:
+            raise ValueError("Unexpected end of compressed VISE stream")
+        value = 0
+        for bit_index in range(count):
+            byte = self.data[self.bit_pos >> 3]
+            value |= ((byte >> (self.bit_pos & 7)) & 1) << bit_index
+            self.bit_pos += 1
+        return value
+
+    def align(self, bit_count):
+        """Advance to the next bit_count boundary."""
+        self.bit_pos = ((self.bit_pos + bit_count - 1) // bit_count) * bit_count
+
+    def read_bytes(self, count):
+        if self.bit_pos & 7:
+            raise ValueError("VISE stored block is not byte-aligned")
+        start = self.bit_pos >> 3
+        end = start + count
+        if end > len(self.data):
+            raise ValueError("Unexpected end of VISE stored block")
+        self.bit_pos += count * 8
+        return self.data[start:end]
+
+
+def _reverse_bits(value, count):
+    reversed_value = 0
+    for _ in range(count):
+        reversed_value = (reversed_value << 1) | (value & 1)
+        value >>= 1
+    return reversed_value
+
+
+def _build_huffman(code_lengths):
+    """Build a canonical DEFLATE Huffman lookup keyed by (bits, length)."""
+    max_bits = max(code_lengths, default=0)
+    if max_bits == 0:
+        return {}, 0
+
+    counts = [0] * (max_bits + 1)
+    for length in code_lengths:
+        if length:
+            counts[length] += 1
+
+    code = 0
+    next_code = [0] * (max_bits + 1)
+    for length in range(1, max_bits + 1):
+        code = (code + counts[length - 1]) << 1
+        next_code[length] = code
+
+    table = {}
+    for symbol, length in enumerate(code_lengths):
+        if not length:
+            continue
+        canonical_code = next_code[length]
+        next_code[length] += 1
+        table[(_reverse_bits(canonical_code, length), length)] = symbol
+    return table, max_bits
+
+
+def _read_huffman_symbol(reader, huffman):
+    table, max_bits = huffman
+    code = 0
+    for length in range(1, max_bits + 1):
+        code |= reader.read(1) << (length - 1)
+        symbol = table.get((code, length))
+        if symbol is not None:
+            return symbol
+    raise ValueError("Invalid Huffman code in compressed VISE stream")
+
+
+_FIXED_LITERAL_HUFFMAN = _build_huffman(
+    [8] * 144 + [9] * 112 + [7] * 24 + [8] * 8
+)
+_FIXED_DISTANCE_HUFFMAN = _build_huffman([5] * 32)
+_LENGTH_BASE = (
+    3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31,
+    35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258,
+)
+_LENGTH_EXTRA = (
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+    3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0,
+)
+_DISTANCE_BASE = (
+    1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129,
+    193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145,
+    8193, 12289, 16385, 24577,
+)
+_DISTANCE_EXTRA = (
+    0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6,
+    6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13,
+)
+_CODE_LENGTH_ORDER = (16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4,
+                      12, 3, 13, 2, 14, 1, 15)
+
+
+def _read_dynamic_huffman_tables(reader):
+    literal_count = reader.read(5) + 257
+    distance_count = reader.read(5) + 1
+    code_length_count = reader.read(4) + 4
+
+    code_length_lengths = [0] * 19
+    for index in range(code_length_count):
+        code_length_lengths[_CODE_LENGTH_ORDER[index]] = reader.read(3)
+    code_length_huffman = _build_huffman(code_length_lengths)
+    if code_length_huffman[1] == 0:
+        raise ValueError("Empty VISE code-length Huffman table")
+
+    lengths = []
+    required = literal_count + distance_count
+    while len(lengths) < required:
+        symbol = _read_huffman_symbol(reader, code_length_huffman)
+        if symbol <= 15:
+            lengths.append(symbol)
+        elif symbol == 16:
+            if not lengths:
+                raise ValueError("VISE Huffman repeat has no previous length")
+            lengths.extend([lengths[-1]] * (reader.read(2) + 3))
+        elif symbol == 17:
+            lengths.extend([0] * (reader.read(3) + 3))
+        elif symbol == 18:
+            lengths.extend([0] * (reader.read(7) + 11))
+        if len(lengths) > required:
+            raise ValueError("VISE Huffman lengths overrun their table")
+
+    literal_huffman = _build_huffman(lengths[:literal_count])
+    distance_huffman = _build_huffman(lengths[literal_count:])
+    if literal_huffman[1] == 0:
+        raise ValueError("Empty VISE literal Huffman table")
+    return literal_huffman, distance_huffman
+
+
+def _inflate_vise_word_aligned(raw, expected_size):
+    """Inflate VISE's DEFLATE variant with 16-bit-aligned stored blocks.
+
+    Standard DEFLATE aligns stored blocks to the next byte. The original VISE
+    decompressor consumes 16-bit words and instead flushes stored blocks to the
+    next two-byte boundary. All Huffman-coded block types remain RFC 1951.
+    """
+    reader = _ViseBitReader(raw)
+    output = bytearray()
+
+    while len(output) < expected_size:
+        final_block = reader.read(1)
+        block_type = reader.read(2)
+
+        if block_type == 0:
+            reader.align(16)
+            stored_size = reader.read(16)
+            stored_size_complement = reader.read(16)
+            if stored_size ^ stored_size_complement != 0xFFFF:
+                # Some compressor builds emit a complete zero padding word
+                # before LEN/NLEN when flushing their 16-bit input buffer.
+                if stored_size == 0:
+                    stored_size = stored_size_complement
+                    stored_size_complement = reader.read(16)
+                if stored_size ^ stored_size_complement != 0xFFFF:
+                    raise ValueError("Invalid VISE stored-block length")
+            if len(output) + stored_size > expected_size:
+                raise ValueError("VISE stored block exceeds expected output size")
+            output.extend(reader.read_bytes(stored_size))
+            # A stored payload with odd length also leaves the word-based VISE
+            # reader on a half-word boundary. Its next block starts on the next
+            # 16-bit boundary rather than immediately after the last byte.
+            reader.align(16)
+
+        elif block_type in (1, 2):
+            if block_type == 1:
+                literal_huffman = _FIXED_LITERAL_HUFFMAN
+                distance_huffman = _FIXED_DISTANCE_HUFFMAN
+            else:
+                literal_huffman, distance_huffman = _read_dynamic_huffman_tables(reader)
+
+            while True:
+                symbol = _read_huffman_symbol(reader, literal_huffman)
+                if symbol < 256:
+                    if len(output) >= expected_size:
+                        raise ValueError("VISE stream exceeds expected output size")
+                    output.append(symbol)
+                elif symbol == 256:
+                    break
+                elif 257 <= symbol <= 285:
+                    length_index = symbol - 257
+                    match_length = _LENGTH_BASE[length_index]
+                    match_length += reader.read(_LENGTH_EXTRA[length_index])
+
+                    distance_symbol = _read_huffman_symbol(reader, distance_huffman)
+                    if distance_symbol >= len(_DISTANCE_BASE):
+                        raise ValueError("Invalid VISE distance symbol")
+                    distance = _DISTANCE_BASE[distance_symbol]
+                    distance += reader.read(_DISTANCE_EXTRA[distance_symbol])
+                    if distance > len(output):
+                        raise ValueError("VISE match distance exceeds available output")
+                    if len(output) + match_length > expected_size:
+                        raise ValueError("VISE match exceeds expected output size")
+                    for _ in range(match_length):
+                        output.append(output[-distance])
+                else:
+                    raise ValueError("Invalid VISE literal/length symbol")
+        else:
+            raise ValueError("Invalid VISE DEFLATE block type")
+
+        if final_block:
+            if len(output) == expected_size:
+                break
+            # Large forks may be represented as concatenated raw streams. VISE
+            # word-aligns the beginning of the following stream.
+            reader.align(16)
+
+    if len(output) != expected_size:
+        raise ValueError(
+            f"Decompressed size {len(output)} != expected {expected_size}"
+        )
+    return bytes(output)
+
+
 def decompress_vise(raw, expected_size):
     """Deobfuscate and decompress a VISE compressed stream.
 
@@ -109,6 +332,26 @@ def decompress_vise(raw, expected_size):
                     return result2
             except Exception:
                 pass
+        # VISE's original inflater aligns stored blocks to a 16-bit boundary,
+        # while RFC 1951 and zlib align them to a byte boundary. Restrict the
+        # slower compatibility inflater to the failure shapes caused by stored
+        # blocks or concatenated streams; unrelated corrupt data can otherwise
+        # resemble a huge valid Huffman stream before eventually failing.
+        error_text = str(first_err)
+        try_word_aligned = (
+            isinstance(first_err, ValueError)
+            or 'invalid stored block lengths' in error_text
+            or 'invalid block type' in error_text
+        )
+        if try_word_aligned:
+            try:
+                return _inflate_vise_word_aligned(deobf, expected_size)
+            except Exception:
+                if len(deobf) > 1:
+                    try:
+                        return _inflate_vise_word_aligned(deobf[1:], expected_size)
+                    except Exception:
+                        pass
         raise first_err
 
 
@@ -204,18 +447,73 @@ def build_macbinary(filename, ftype, fcreator, finder_flags, creation_date,
     return b''.join(parts)
 
 
-def find_svct_offset(data):
-    """Find the SVCT header in a file. Returns offset, or -1 if not found.
+def _is_plausible_svct(data, offset):
+    """Reject incidental ``SVCT`` strings in application code/resources."""
+    if offset < 0 or offset + 44 > len(data):
+        return False
+    if data[offset:offset + 4] != b'SVCT':
+        return False
 
-    VISE archives may be standalone (SVCT at offset 0) or embedded in
-    self-extracting installers (SVCT typically at offset 128).
-    """
-    if len(data) >= 44 and data[0:4] == b'SVCT':
-        return 0
-    idx = data.find(b'SVCT')
-    if idx >= 0 and idx + 44 <= len(data):
-        return idx
+    segment = struct.unpack('>I', data[offset + 4:offset + 8])[0]
+    version = struct.unpack('>I', data[offset + 16:offset + 20])[0]
+    cvct_offset = struct.unpack('>I', data[offset + 36:offset + 40])[0]
+    repeated_version = struct.unpack('>I', data[offset + 40:offset + 44])[0]
+
+    # All observed VISE formats use 0x8001MMmm, except the earliest v0.01
+    # format. Segment numbers are small and nonzero. Byte +40 repeats the
+    # version in every known first-segment header and is a strong guard against
+    # four coincidental ASCII bytes inside executable code.
+    # Preserve password/encryption-flag archives whose high byte is 0xC4; the
+    # format family/version bytes and repeated version still validate them.
+    known_version_shape = version == 0x00000001 or (version & 0x00FF0000) == 0x00010000
+    if not known_version_shape or not (1 <= segment <= 100):
+        return False
+    if segment == 1 and cvct_offset < 44:
+        return False
+    # v10.80 and v11.00 retain 0x80010a00 in this compatibility field rather
+    # than repeating their more specific version value.
+    high_version_compat = (version in (0x80010A50, 0x80010B00)
+                           and repeated_version == 0x80010A00)
+    if (version != 0x00000001 and repeated_version != version
+            and not high_version_compat):
+        return False
+    return True
+
+
+def find_svct_offset(data):
+    """Find a validated SVCT header in a standalone or MacBinary file."""
+    # These are the two real locations in the known corpus. Checking them first
+    # avoids choosing a later marker-like byte sequence from a resource fork.
+    for offset in (0, 128):
+        if _is_plausible_svct(data, offset):
+            return offset
+
+    pos = 0
+    while pos <= len(data) - 44:
+        offset = data.find(b'SVCT', pos)
+        if offset < 0:
+            break
+        if _is_plausible_svct(data, offset):
+            return offset
+        pos = offset + 1
     return -1
+
+
+def slice_archive_data(full_data, svct_offset):
+    """Return only bytes belonging to the VISE archive's data fork.
+
+    A MacBinary file stores its resource fork after a padded data fork. The
+    resource fork contains installer code and can include marker-like bytes;
+    treating it as archive data creates false extraction attempts for PPC and
+    external-media installers.
+    """
+    if (svct_offset == 128 and len(full_data) >= 128 and full_data[0] == 0
+            and 1 <= full_data[1] <= 63):
+        data_fork_size = struct.unpack('>I', full_data[83:87])[0]
+        data_fork_end = 128 + data_fork_size
+        if data_fork_end <= len(full_data):
+            return full_data[svct_offset:data_fork_end]
+    return full_data[svct_offset:]
 
 
 def parse_svct_header(data):
@@ -404,6 +702,62 @@ def parse_fvct_entry(entry, cvct_offset=0, allow_post_catalog=False):
         'data_segment': data_segment,
         'archive_pos': archive_pos,
     }
+
+
+def _adjust_inline_fvct_positions(data, files):
+    """Skip validated FVCT records embedded immediately before file data.
+
+    A v0.01 writer used by several DesignWorkshop installers serializes a
+    complete FVCT descriptor at every ``position_in_archive`` and puts the
+    compressed forks immediately after that descriptor.  The terminal catalog
+    repeats the same descriptors.  Only adjust a position when the inline
+    name, size fields, segment, and recorded position all match the catalog;
+    catalogs can otherwise contain unrelated FVCT markers at the same numeric
+    offset by chance.
+    """
+    for file_entry in files:
+        position = file_entry['archive_pos']
+        if position < 0 or position + 124 > len(data):
+            continue
+        if data[position:position + 4] != b'FVCT':
+            continue
+
+        file_data = data[position + 4:position + 124]
+        inline_sizes = struct.unpack_from('>IIII', file_data, FVCT_COMP_DATA)
+        catalog_sizes = (
+            file_entry['comp_data'], file_entry['uncomp_data'],
+            file_entry['comp_rsrc'], file_entry['uncomp_rsrc'],
+        )
+        inline_segment = struct.unpack_from('>H', file_data, FVCT_DATA_SEGMENT)[0]
+        inline_position = struct.unpack_from('>I', file_data, FVCT_ARCHIVE_POS)[0]
+        if (inline_sizes != catalog_sizes
+                # Inline descriptors use segment 0 as "this record" while the
+                # terminal catalog names the physical segment explicitly.
+                or inline_segment not in (0, file_entry['data_segment'])
+                or inline_position != position):
+            continue
+
+        # v0.01-v3.14 use a 120-byte fixed descriptor.  Retain the
+        # v10.80/v11.00 shifted-name candidate so the detection remains safe
+        # for later writers if the same layout is encountered there.
+        candidates = ((FVCT_NAME_LEN, 120), (120, 122))
+        for name_length_offset, fixed_size in candidates:
+            field_offset = position + 4 + name_length_offset
+            if field_offset >= len(data):
+                continue
+            name_length = data[field_offset]
+            record_end = position + 4 + fixed_size + name_length
+            if not (1 <= name_length <= 63) or record_end > len(data):
+                continue
+            inline_name = data[record_end - name_length:record_end].decode(
+                'mac_roman', errors='replace'
+            )
+            if inline_name != file_entry['name']:
+                continue
+            file_entry['inline_fvct_offset'] = position
+            file_entry['inline_fvct_size'] = record_end - position
+            file_entry['archive_pos'] = record_end
+            break
 
 
 def parse_dvct_entry(entry):
@@ -651,6 +1005,8 @@ def parse_catalog(data, version, cvct_offset):
             else:
                 f['full_path'] = f['name']
 
+    _adjust_inline_fvct_positions(data, files)
+
     return directories, files, pack_entries
 
 
@@ -757,11 +1113,14 @@ def extract_files(data, files, output_dir, current_segment=1):
     Returns (success_data, success_rsrc, fail_count, file_metadata) where
     file_metadata is a dict keyed by relative output path with type/creator/etc.
     """
-    # Group files by archive_pos, preserving catalog order within each group
+    # Collect candidates first so bounds checks can distinguish shared blobs
+    # from the ordinary two-fork layout. In a shared blob, comp_rsrc is an
+    # uncompressed-size field and does not consume bytes in the archive.
     data_len = len(data)
     groups = OrderedDict()
     skipped_segments = 0
     no_data_count = 0
+    candidates = []
     for i, f in enumerate(files):
         seg = f.get('data_segment', 1)
         if seg != current_segment and seg != 0:
@@ -770,15 +1129,19 @@ def extract_files(data, files, output_dir, current_segment=1):
         # Files with uncomp sizes but zero comp sizes have no data in this archive
         has_uncomp = f['uncomp_data'] > 0 or f['uncomp_rsrc'] > 0
         has_comp = f['comp_data'] > 0 or f['comp_rsrc'] > 0
+        # Empty catalog placeholders are not shared-blob members. Keeping one in
+        # a position group can make the following real file inherit a zero blob
+        # size from the placeholder (seen in v3.11 definition updaters).
+        if not has_uncomp and not has_comp:
+            continue
         if has_uncomp and not has_comp:
             no_data_count += 1
             continue
+        candidates.append((i, f))
+
+    # Group files by archive_pos, preserving catalog order within each group.
+    for i, f in candidates:
         pos = f['archive_pos']
-        # If the compressed data extends beyond the file, it's on a missing segment
-        total_comp = f['comp_data'] + f.get('comp_rsrc', 0)
-        if pos + total_comp > data_len and total_comp > 0:
-            skipped_segments += 1
-            continue
         if pos not in groups:
             groups[pos] = []
         groups[pos].append((i, f))
@@ -794,6 +1157,29 @@ def extract_files(data, files, output_dir, current_segment=1):
                 removed = len(group) - len(filtered)
                 groups[pos] = filtered
                 no_data_count += removed
+
+    # Check stored extents only after the final shared groups are known. A
+    # shared group's comp_rsrc is not a stored byte count.
+    for pos in list(groups.keys()):
+        group = groups[pos]
+        if len(group) > 1:
+            stored_size = group[0][1]['comp_data']
+            has_local_extent = stored_size > 0 and pos + stored_size <= data_len
+        else:
+            f = group[0][1]
+            data_end = pos + f['comp_data']
+            has_local_data = (f['comp_data'] > 0 and f['uncomp_data'] > 0
+                              and data_end <= data_len)
+            has_local_rsrc = (f.get('comp_rsrc', 0) > 0
+                              and f['uncomp_rsrc'] > 0
+                              and data_end + f['comp_rsrc'] <= data_len)
+            # A data fork may be complete even when the following resource fork
+            # extends onto absent media. Preserve every independently complete
+            # fork instead of discarding the whole catalog entry.
+            has_local_extent = has_local_data or has_local_rsrc
+        if not has_local_extent:
+            skipped_segments += len(group)
+            del groups[pos]
 
     if skipped_segments > 0:
         print(f"  Skipped {skipped_segments} files on other segments", file=sys.stderr)
@@ -913,49 +1299,62 @@ def parse_indn(data, cvct_offset):
     """Parse the INDN disk name table at the end of the file."""
     pos = cvct_offset
     while pos < len(data) - 4:
-        if data[pos:pos + 4] == b'INDN':
-            break
-        pos += 1
-    else:
-        return None
+        indn_start = data.find(b'INDN', pos)
+        if indn_start < 0:
+            return None
+        candidate_pos = indn_start + 5  # magic plus unknown byte
+        if candidate_pos >= len(data):
+            return None
+        disk_count = data[candidate_pos]
+        candidate_pos += 1
 
-    indn_start = pos
-    result = {'offset': indn_start, 'disks': []}
-    pos += 4
+        # The v3.08+ catalog preamble contains the literal type tag "INDN".
+        # Validate the whole candidate instead of interpreting its following
+        # offset-table bytes as disk names.
+        if not (1 <= disk_count <= 32):
+            pos = indn_start + 4
+            continue
 
-    if pos >= len(data):
-        return result
-    pos += 1  # unknown byte
-    if pos >= len(data):
-        return result
-    disk_count = data[pos]
-    pos += 1
+        disks = []
+        valid = True
+        for _ in range(disk_count):
+            if candidate_pos >= len(data):
+                valid = False
+                break
+            name_len = data[candidate_pos]
+            candidate_pos += 1
+            if not (1 <= name_len <= 63) or candidate_pos + name_len + 6 > len(data):
+                valid = False
+                break
+            disk_name = data[candidate_pos:candidate_pos + name_len].decode(
+                'mac_roman', errors='replace'
+            )
+            candidate_pos += name_len
+            if ('\x00' in disk_name
+                    or sum(ch.isprintable() for ch in disk_name) / len(disk_name) < 0.8):
+                valid = False
+                break
+            disk_info = data[candidate_pos:candidate_pos + 6]
+            candidate_pos += 6
+            disks.append({'name': disk_name, 'info': disk_info})
 
-    for _ in range(disk_count):
-        if pos >= len(data):
-            break
-        name_len = data[pos]
-        pos += 1
-        if pos + name_len > len(data):
-            break
-        disk_name = data[pos:pos + name_len].decode('mac_roman', errors='replace')
-        pos += name_len
-        disk_info = data[pos:pos + 6] if pos + 6 <= len(data) else b''
-        pos += 6
-        result['disks'].append({'name': disk_name, 'info': disk_info})
+        if valid and len(disks) == disk_count:
+            return {'offset': indn_start, 'disks': disks}
+        pos = indn_start + 4
 
-    return result
+    return None
 
 
 def version_string(version):
     """Convert a VISE version code to a human-readable string."""
     major = (version >> 8) & 0xFF
     minor = version & 0xFF
+    encrypted_suffix = " (encrypted)" if (version >> 24) == 0xC4 else ""
     if version == 0x80010202:
         return f"{major}.{minor:02d} (Installer VISE 3.5 Lite)"
     elif version == 0x80010300:
         return f"{major}.{minor:02d} (Installer VISE 3.6 Lite)"
-    return f"{major}.{minor:02d}"
+    return f"{major}.{minor:02d}{encrypted_suffix}"
 
 
 def main():
@@ -975,8 +1374,9 @@ def main():
         print(f"Error: No SVCT header found in {input_file}", file=sys.stderr)
         sys.exit(1)
 
-    # Slice data so all offsets are relative to SVCT header
-    data = full_data[svct_off:]
+    # Slice data so all offsets are relative to SVCT and, for MacBinary input,
+    # stop at the end of the data fork rather than reading installer resources.
+    data = slice_archive_data(full_data, svct_off)
 
     # Parse header
     version, cvct_offset, segment = parse_svct_header(data)
@@ -989,6 +1389,11 @@ def main():
         print(f"  SVCT offset: {svct_off} (self-extracting)")
     print(f"  CVCT offset: 0x{cvct_offset:x} ({cvct_offset})")
     print(f"  File size: {len(full_data)} bytes")
+
+    if (version >> 24) == 0xC4:
+        print("  Error: This archive uses VISE password/encryption flag 0xC4; "
+              "decryption is not supported.", file=sys.stderr)
+        sys.exit(1)
 
     if segment > 1:
         print(f"  Note: This is segment {segment} of a multi-segment archive.")

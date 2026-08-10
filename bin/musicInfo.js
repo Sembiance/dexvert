@@ -2,6 +2,7 @@
 import {xu, fg} from "xu";
 import {runUtil, cmdUtil, fileUtil, printUtil} from "xutil";
 import {path} from "std";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -18,7 +19,7 @@ const argv = cmdUtil.cmdInit({
 
 const musicWAVFilePath = path.join(path.dirname(argv.inputFilePath), "music.wav");
 const noMusicWAV = await fileUtil.exists(musicWAVFilePath);
-const tmpDirPath = await fileUtil.genTempPath(undefined, "musicInfo");
+const tmpDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "musicInfo");
 await Deno.mkdir(tmpDirPath);
 
 const runOptions = {timeout : xu.SECOND*5};

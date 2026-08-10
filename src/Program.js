@@ -753,11 +753,11 @@ export class Program
 
 			f = await FileSet.create(srcFiles[0].root, "input", safeFiles || srcFiles);
 			
-			const outDirPath = await fileUtil.genTempPath(undefined, "", {maxFilenameLength : 8});	// an empty suffix ensures no .tmp default suffix and won't generate a path > 8 chars which would be a problem for DOS
+			const outDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "", {maxFilenameLength : 8});	// an empty suffix ensures no .tmp default suffix and won't generate a path > 8 chars which would be a problem for DOS
 			await Deno.mkdir(outDirPath, {recursive : true});
 			await f.add("outDir", outDirPath);
 
-			const homeDirPath = await fileUtil.genTempPath(undefined, `${programid}_home`);
+			const homeDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, `${programid}_home`);
 			await Deno.mkdir(homeDirPath, {recursive : true});
 			await f.add("homeDir", homeDirPath);
 		}
@@ -785,7 +785,7 @@ export class Program
 		let noAuxFiles = [];
 		if(flags.noAux && f.files?.aux?.length)
 		{
-			tmpAuxDir = await fileUtil.genTempPath(undefined, "noAux");
+			tmpAuxDir = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "noAux");
 			await Deno.mkdir(tmpAuxDir);
 			noAuxFiles = f.files.aux;
 			delete f.files.aux;

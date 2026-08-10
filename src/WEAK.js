@@ -1579,7 +1579,7 @@ export const WEAK_VALUES =
 	/^ISO 9660 Translation Table/,
 	/^ISO base media container$/,
 	/^Jack Nicklaus Golf Signature Ed\. course data$/,
-	/^Janome NH10000 Sewing Machine Stitch$/,	// eslint-disable-line unicorn/better-regex
+	/^Janome NH10000 Sewing Machine Stitch$/,
 	/^Java serialized data$/,	// It's just 2 bytes and haven't been able to find a reliable way to convert into something else like JSON
 	/^JCALG1 compressed data$/,
 	/^JCL script \(with rem\)$/,

@@ -3,6 +3,8 @@ import {fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
+import {C} from "./C.js";
+
 const DOS_SRC_PATH = path.join(import.meta.dirname, "..", "dos");
 
 // Keys from: https://sourceforge.net/p/dosbox/code-0/HEAD/tree/dosbox/trunk/include/keyboard.h
@@ -132,7 +134,7 @@ export async function run({cmd, args=[], root, outDir, preExec, autoExec, postEx
 			}
 		}
 
-		scriptFilePath = await fileUtil.genTempPath(undefined, "dos_script");
+		scriptFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "dos_script");
 		await fileUtil.writeTextFile(scriptFilePath, `${scriptData.join(",")},`);
 		runOptions.env.SCRIPT = scriptFilePath;
 	}

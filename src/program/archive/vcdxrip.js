@@ -3,6 +3,7 @@ import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
 import {FileSet} from "../../FileSet.js";
+import {C} from "../../C.js";
 
 export class vcdxrip extends Program
 {
@@ -18,7 +19,7 @@ export class vcdxrip extends Program
 		if(!r.flags.reRip)
 			return [`--nofiles`, `--bin-file=${r.inFile({absolute : true})}`];
 
-		r.tmpBINCUEDirPath = await fileUtil.genTempPath(undefined, "_vcdxrip_bincue");
+		r.tmpBINCUEDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "_vcdxrip_bincue");
 		await Deno.mkdir(r.tmpBINCUEDirPath);
 		await Program.runProgram("cdemuReRip", await FileSet.create(r.f.root, "input", r.f.input, "outDir", r.tmpBINCUEDirPath), {xlog : r.xlog});
 		return [`--nofiles`, `--bin-file=${path.join(r.tmpBINCUEDirPath, "out.bin")}`];

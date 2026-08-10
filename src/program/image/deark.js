@@ -3,6 +3,7 @@ import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {encodeUtil, fileUtil, runUtil, imageUtil} from "xutil";
 import {path} from "std";
 import {quickConvertImages} from "../../dexUtil.js";
+import {C} from "../../C.js";
 
 const BAD_FILENAMES_TO_SKIP_CHAINING =
 [
@@ -131,7 +132,7 @@ export class deark extends Program
 			// if we have a width and height and more than 1 part and none of those parts have the same x/y coordinate (PICT_2021.pict) then we can recombine them
 			if(imgInfo.w && imgInfo.h && imgInfo.parts.length>1 && imgInfo.parts.length===imgInfo.parts.map(({x, y}) => `${x}x${y}`).unique().length)
 			{
-				const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
+				const combinedFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".png");
 				await runUtil.run("magick", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);
 				for(const part of imgInfo.parts)
 				{
@@ -156,7 +157,7 @@ export class deark extends Program
 			const missingLetterLine = (r.stdout.split("\n").find(line => line.trim().includes("missing filename char:")) || "");
 			const {missingLetter} = missingLetterLine.match(/missing filename char: (0x.. )?\(?'(?<missingLetter>.)'/)?.groups || {};
 			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
-			if(missingLetter && fileOutputPaths.length===1)	// eslint-disable-line unicorn/prefer-ternary
+			if(missingLetter && fileOutputPaths.length===1)
 				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext.substring(0, 3)}${r.originalInput.ext.substring(1, 3)===r.originalInput.ext.substring(1, 3).toUpperCase() ? missingLetter.toUpperCase() : missingLetter}`));
 			else
 				await Deno.rename(fileOutputPaths[0], path.join(outDirPath, `${r.originalInput.name}${r.originalInput.ext}`));

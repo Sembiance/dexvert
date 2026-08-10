@@ -2,6 +2,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {fileUtil, runUtil, cmdUtil} from "xutil";
 import {path, delay} from "std";
+import {C} from "../C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexserver",
@@ -44,7 +45,7 @@ for(const dir of ["test", "sample"])
 	await Deno.mkdir(path.join("/mnt/dexvert", dir), {recursive : true});
 }
 
-const serverStatusDirPath = await fileUtil.genTempPath(undefined, "dexserver-serverStatus");
+const serverStatusDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "dexserver-serverStatus");
 await Deno.mkdir(serverStatusDirPath);
 
 const serverProcs = {};

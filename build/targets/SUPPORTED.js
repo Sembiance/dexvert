@@ -8,12 +8,13 @@ import {FileSet} from "../../src/FileSet.js";
 import {Identification} from "../../src/Identification.js";
 import {programs} from "../../src/program/programs.js";
 import {initRegistry} from "../../src/dexUtil.js";
+import {C} from "../../src/C.js";
 
 const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "..", "test", "sample");
 
-const DUMMY_FILE_PATH = await fileUtil.genTempPath();
+const DUMMY_FILE_PATH = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 await fileUtil.writeTextFile(DUMMY_FILE_PATH, "x");
-const DUMMY_DIR_PATH = await fileUtil.genTempPath();
+const DUMMY_DIR_PATH = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 await Deno.mkdir(DUMMY_DIR_PATH);
 
 export default async function SUPPORTED(xlog)

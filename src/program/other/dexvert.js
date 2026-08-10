@@ -3,6 +3,7 @@ import {Program, RUNTIME} from "../../Program.js";
 import {fileUtil} from "xutil";
 import {path} from "std";
 import {DexFile} from "../../DexFile.js";
+import {C} from "../../C.js";
 
 export class dexvert extends Program
 {
@@ -34,7 +35,7 @@ export class dexvert extends Program
 			dexOpts.forbidProgram.push(r.flags.forbidProgram);
 
 		const outDirPath = r.outDir({absolute : true});
-		const tmpOutDirPath = await fileUtil.genTempPath(undefined, "_program_other_dexvert");
+		const tmpOutDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "_program_other_dexvert");
 		await Deno.mkdir(tmpOutDirPath);
 		const subState = await dexvertFunc(await DexFile.create(r.inFile({absolute : true})), await DexFile.create(tmpOutDirPath), dexOpts);
 		if(subState?.phase?.meta?.fileMeta)

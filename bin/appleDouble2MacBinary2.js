@@ -4,6 +4,7 @@ import {cmdUtil, fileUtil, encodeUtil, hashUtil, runUtil} from "xutil";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
 import {XLog} from "xlog";
 import {assert, path, writeAll} from "std";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -124,7 +125,7 @@ outHeader.setUInt8(123, 129);	// min version
 outHeader.setUInt16BE(124, await hashUtil.hashData("CRC-16/XMODEM", outHeader.subarray(0, 124)));	// CRC
 outHeader.setUInt16BE(126, 0);	// padding?
 
-const tmpOutFilePath = await fileUtil.genTempPath();
+const tmpOutFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 const tmpOutFile = await Deno.open(tmpOutFilePath, {create : true, write : true, truncate : true});
 await writeAll(tmpOutFile, outHeader);
 
@@ -144,10 +145,10 @@ tmpOutFile.close();
 // Make sure our resulting file isn't basically the same thing as the original file
 if((await Deno.stat(tmpOutFilePath)).size===(await Deno.stat(argv.originalFilePath)).size)
 {
-	const beforeFilePath = await fileUtil.genTempPath();
+	const beforeFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 	await runUtil.run("dd", [`if=${tmpOutFilePath}`, `of=${beforeFilePath}`, "bs=128", "skip=1"]);
 
-	const afterFilePath = await fileUtil.genTempPath();
+	const afterFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 	await runUtil.run("dd", [`if=${argv.originalFilePath}`, `of=${afterFilePath}`, "bs=128", "skip=1"]);
 
 	const areEqual = await fileUtil.areEqual(beforeFilePath, afterFilePath);

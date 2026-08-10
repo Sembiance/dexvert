@@ -1,5 +1,6 @@
 import {Program} from "../../Program.js";
 import {fileUtil, imageUtil} from "xutil";
+import {C} from "../../C.js";
 
 export class ffmpeg extends Program
 {
@@ -26,7 +27,7 @@ export class ffmpeg extends Program
 		
 		if(inFilePaths.length>1)
 		{
-			r.imagesListFilePath = await fileUtil.genTempPath(undefined, ".txt");
+			r.imagesListFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".txt");
 			inFileArgs.push("-i", r.imagesListFilePath);
 
 			for(const inFilePath of inFilePaths)

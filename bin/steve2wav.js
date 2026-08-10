@@ -3,6 +3,7 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
 import {assert} from "std";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -23,7 +24,7 @@ assert(sampleSize<=(reader.remaining()-21));
 reader.skip(19);
 const frequency = reader.uint16();	// this value doesn't make sense, so we will just hardcod it below to 8900 which is what version 1 is hardcoded at
 
-const tmpRawFilePath = await fileUtil.genTempPath(undefined, ".raw");
+const tmpRawFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".raw");
 await reader.writeToDisk(sampleSize, tmpRawFilePath);
 await runUtil.run("sox", ["-t", "raw", "-r", "8900", "-c", "1", "-b", "8", "-e", "unsigned", tmpRawFilePath, argv.outputFilePath]);
 await fileUtil.unlink(tmpRawFilePath);

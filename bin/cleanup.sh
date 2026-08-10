@@ -84,3 +84,6 @@ if [[ "$(hostname)" == dexdrone* ]]; then
 fi
 
 echo 0 | sudo tee /sys/kernel/mm/ksm/run > /dev/null
+
+cd /mnt/dexvert/tmp || exit
+rm -rf ./*

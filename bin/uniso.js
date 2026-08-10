@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, encodeUtil} from "xutil";
 import {path, dateParse} from "std";
 import {XLog} from "xlog";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -32,7 +33,7 @@ const xlog = new XLog(argv.logLevel);
 const IN_FILE_PATH = path.resolve(argv.inputFilePath);
 const OUT_DIR_PATH = path.resolve(argv.outputDirPath);
 
-const MOUNT_DIR_PATH = await fileUtil.genTempPath(undefined, "_uniso");
+const MOUNT_DIR_PATH = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "_uniso");
 await Deno.mkdir(MOUNT_DIR_PATH);
 
 async function extractNormalISO()

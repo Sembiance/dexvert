@@ -166,7 +166,7 @@ const performRun = async (instance, runArgs) =>
 		const outarchiveFilePath = path.join(HTTP_OUT_DIR_PATH, instance.osid, `${instance.instanceid}.${OS[instance.osid].archiveType}`);
 
 		// Copy our target files to a tmp dir. We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-		const tmpInDirPath = await fileUtil.genTempPath(undefined, "oshttp");
+		const tmpInDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "oshttp");
 		await Deno.mkdir(tmpInDirPath, {recursive : true});
 		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", inFilePath, path.join(tmpInDirPath, "/")]));
 
@@ -174,7 +174,7 @@ const performRun = async (instance, runArgs) =>
 		await fileUtil.writeTextFile(tmpGoFilePath, body.script);
 
 		// We create to a temp archive, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-		const tmpInArchiveFilePath = await fileUtil.genTempPath(undefined, `.${OS[instance.osid].archiveType}`);
+		const tmpInArchiveFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, `.${OS[instance.osid].archiveType}`);
 		if(OS[instance.osid].archiveType==="zip")
 			await runUtil.run("zip", ["-r", tmpInArchiveFilePath, "."], {cwd : tmpInDirPath});
 		else if(OS[instance.osid].archiveType==="lha")

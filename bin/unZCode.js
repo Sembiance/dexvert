@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, runUtil, fileUtil} from "xutil";
 import {TextLineStream, writeAll} from "std";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -11,7 +12,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputFilePath", desc : "Output file to write", required : true}
 	]});
 
-const txdOutFilePath = await fileUtil.genTempPath(undefined, ".txt");
+const txdOutFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".txt");
 await runUtil.run("txd", [argv.inputFilePath], {stdoutFilePath : txdOutFilePath});
 
 if(!await fileUtil.exists(txdOutFilePath) || (await Deno.stat(txdOutFilePath)).size===0)

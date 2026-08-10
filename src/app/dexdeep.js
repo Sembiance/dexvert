@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
+import {C} from "../C.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexdeep",
@@ -35,7 +36,7 @@ const progress = printUtil.progress({max : FILE_SIZE});
 {
 	for(let offset=(partid*partSize);offset<Math.min(FILE_SIZE-1, ((partid+1)*partSize));offset++)
 	{
-		const tmpInputFilePath = await fileUtil.genTempPath(undefined, undefined);
+		const tmpInputFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, undefined);
 		await runUtil.run("dd", ["bs=1", `skip=${offset}`, `if=${argv.inputFilePath}`, `of=${tmpInputFilePath}`]);
 
 		const outputDirPath = path.join(path.resolve(argv.outputDirPath), offset.toString());

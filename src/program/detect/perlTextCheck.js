@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {fileUtil, runUtil} from "xutil";
+import {C} from "../../C.js";
 
 export class perlTextCheck extends Program
 {
@@ -15,7 +16,7 @@ export class perlTextCheck extends Program
 	// we include the --newlines flag because sometimes the 0x00 and 0x01A bytes are interspersed with trailing \n and \r characters
 	pre = async r =>
 	{
-		r.trimmedFilePath = await fileUtil.genTempPath();
+		r.trimmedFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 		if(r.f.input.size<xu.MB*15)
 			await runUtil.run("trimGarbage", ["--newlines", r.inFile({absolute : true}), r.trimmedFilePath]);
 		if(!await fileUtil.exists(r.trimmedFilePath))

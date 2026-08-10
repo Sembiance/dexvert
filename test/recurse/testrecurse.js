@@ -30,13 +30,13 @@ async function testSample(samplePath)
 	const sampleDirName = path.relative(SAMPLE_DIR_PATH, samplePath);
 	console.log(printUtil.minorHeader(`Testing sample: ${sampleDirName}`, {prefix : "\n"}));
 
-	const outDirPath = await fileUtil.genTempPath(undefined, `-testrecurse-${path.basename(samplePath)}.NOSUFFIX`);
+	const outDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, `-testrecurse-${path.basename(samplePath)}.NOSUFFIX`);
 	await Deno.mkdir(outDirPath);
 
 	const expectedDirPath = path.join(import.meta.dirname, "expected", path.basename(samplePath));
 	const expectedReport = xu.parseJSON(await fileUtil.readTextFile(path.join(expectedDirPath, "report.json")));
 
-	const itemMetaURLFilePath = await fileUtil.genTempPath(undefined, ".json");
+	const itemMetaURLFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".json");
 	await fileUtil.writeTextFile(itemMetaURLFilePath, JSON.stringify(expectedReport.postProcess.item));
 	await runUtil.run("deno", runUtil.denoArgs("dexrecurse.js", "--postProcess", `--itemMetaURL=file://${itemMetaURLFilePath}`, samplePath, outDirPath), runUtil.denoRunOpts({cwd : path.join(import.meta.dirname, "..", "..", "src", "app"), liveOutput : true}));
 	await fileUtil.unlink(itemMetaURLFilePath);

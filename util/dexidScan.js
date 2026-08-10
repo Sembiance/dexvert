@@ -4,6 +4,7 @@ import {fileUtil, runUtil, cmdUtil, printUtil} from "xutil";
 import {path} from "std";
 import {identify} from "../src/identify.js";
 import {initRegistry} from "../src/dexUtil.js";
+import {C} from "../src/C.js";
 
 // THIS IS IS VERY VERY VERY VERY VERY VERY VERY VERY SLOW THING. I don't think I've ever used it for anything and find anything. Just too slow.
 
@@ -39,7 +40,7 @@ await [].pushSequence(0, atOnce).parallelMap(async partid =>
 	{
 		if(offset<argv.startAt)
 			continue;
-		const tmpInputFilePath = await fileUtil.genTempPath(undefined, path.extname(argv.inputFilePath));
+		const tmpInputFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, path.extname(argv.inputFilePath));
 		await runUtil.run("dd", ["bs=1", `skip=${offset}`, `if=${argv.inputFilePath}`, `of=${tmpInputFilePath}`]);
 
 		const {ids : r} = await identify(tmpInputFilePath, {xlog : new XLog("none")});

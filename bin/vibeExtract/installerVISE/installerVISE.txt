@@ -1,7 +1,8 @@
 Installer VISE Archive Format Specification
 ============================================
-Version: 2026-02-21
-Source:   Reverse-engineered from sample files and ScummVM project (elasota, 2022)
+Version: 2026-08-09
+Source:   Reverse-engineered from sample files (including sample13-sample15)
+          and the ScummVM project (elasota, 2022)
 
 Installer VISE was a proprietary macOS (Classic Mac OS) installer creation tool
 by MindVision Software, widely used from the mid-1990s through early 2000s.
@@ -24,6 +25,12 @@ A VISE archive consists of:
      - PACK entries (install packages)
      - INDN entry (disk name table)
 
+The archive may be the data fork of a MacBinary II wrapper. In that case the
+SVCT header is normally at physical file offset 128. Only the MacBinary data
+fork belongs to the VISE archive. The padded resource fork that follows it is
+the installer application's resource fork and MUST NOT be treated as archive
+payload or scanned for catalog-entry boundaries.
+
 For multi-segment (multi-disk) archives:
   - Segment 1 contains the SVCT header, some/all compressed data, and the CVCT
   - Segments 2+ contain only additional compressed data (no header or catalog)
@@ -41,7 +48,8 @@ Offset  Size  Field                Description
 0x10    4     version              Archive format version (see below)
 0x14    16    unknown              Reserved/unknown fields
 0x24    4     cvct_offset          Byte offset of CVCT catalog in this file
-0x28    4     unknown              Possibly total archive size or checksum
+0x28    4     repeated_version     Repeats version in v2.x-v3.x; v10.80 and
+                                   v11.00 store compatibility value 0x80010a00
 
 Known version codes:
   0x00000001  -  VISE format v0.01
@@ -68,6 +76,18 @@ Known version codes:
 The version code format is 0x8001XXYY where XX.YY is the version number.
 (Exception: v0.01 uses code 0x00000001.)
 
+Header validation:
+  - segment is a small nonzero number
+  - segment 1 has cvct_offset >= 44; data-only segments may use 0
+  - v2.x and later repeat the version at +0x28
+  - the format-family bytes are 0x01XXYY
+  - 0xC401XXYY uses the same structural version as 0x8001XXYY but sets an
+    archive-encryption/password flag; the remaining version bytes and
+    repeated_version still identify the catalog layout
+
+These checks are important because the ASCII bytes "SVCT" also occur by chance
+inside some application code and resource forks.
+
 Catalog format by version:
   v0.01-v3.01:  Sequential parsing, uncompressed DVCT/FVCT entries
   v3.02-v3.07:  Marker-based scanning, uncompressed DVCT/FVCT entries
@@ -77,6 +97,11 @@ Catalog format by version:
 
 Archives may be standalone (SVCT at offset 0) or embedded in self-extracting
 Mac OS applications (SVCT typically at offset 128).
+
+For a MacBinary wrapper, read data_fork_length from physical offset 83 and
+limit the VISE view to [128, 128 + data_fork_length). Archive offsets remain
+relative to the SVCT at physical offset 128. Do not include MacBinary padding
+or the resource fork in this view.
 
 Archive data layout:
   Most archives: [SVCT header][file data...][CVCT catalog]  (catalog at end)
@@ -194,6 +219,10 @@ For v10.80/v11.00, all fields after +118 are shifted by +2:
 Total entry size: 4 + 120 + name_length (v0.01-v3.14)
                    4 + 122 + name_length (v10.80, v11.00)
 
+In the inline-FVCT v0.01 layout described below, position_in_archive points to
+an inline copy of this complete record. The compressed stream begins after the
+fixed descriptor and its name rather than at position_in_archive itself.
+
 Notes on compressed sizes for shared blobs:
   When multiple FVCT entries share the same position_in_archive value, they
   form a "shared blob" group. In this case:
@@ -201,6 +230,17 @@ Notes on compressed sizes for shared blobs:
     - comp_rsrc_size = total UNCOMPRESSED size of all files in the group
     - uncomp_data_size = this file's uncompressed data fork portion
     - uncomp_rsrc_size = this file's uncompressed resource fork portion
+
+  Bounds validation must be performed after identifying repeated archive_pos
+  groups. For a shared blob, only comp_data_size bytes are stored at archive_pos;
+  comp_rsrc_size is overloaded as an uncompressed total and MUST NOT be added to
+  the stored extent. For a unique-position entry, the complete stored extent
+  remains comp_data_size + comp_rsrc_size, but each fork must be validated and
+  recovered independently. A complete data fork can end inside the current
+  segment even when its following resource fork extends onto absent media;
+  requiring the combined extent before attempting either fork loses that valid
+  data fork. Adding both fields before grouping also falsely rejects valid
+  shared blobs located near the end of an installer's data fork.
   The decompressed blob contains: [all data forks concatenated in catalog
   order] followed by [all resource forks concatenated in catalog order].
 
@@ -303,11 +343,24 @@ project from the installer's "Dcmp" resource):
      gzip header). Decompress using raw inflate (e.g., zlib with
      wbits=-MAX_WBITS).
 
-     Known quirk: VISE's deflate implementation aligns stored blocks to
-     2-byte boundaries instead of the standard 1-byte boundary. This
-     rarely affects files in practice (stored blocks are uncommon in
-     compressible data), but may cause decompression failures for certain
-     files. ScummVM notes this as a known TODO.
+     VISE DEFLATE VARIANT (confirmed in sample13):
+     VISE's original inflater consumes 16-bit words. Huffman-coded blocks are
+     standard RFC 1951, but stored blocks use word-oriented flushing that a
+     normal zlib inflater does not accept:
+
+       - before stored-block LEN/NLEN, align to a 16-bit boundary rather than
+         the RFC 1951 8-bit boundary
+       - some writer builds emit an additional zero padding word before a
+         valid LEN/NLEN pair
+       - after an odd-length stored payload, align the following block to the
+         next 16-bit boundary
+       - a large fork may concatenate multiple raw DEFLATE streams; the next
+         stream begins on a 16-bit boundary
+
+     A compatible decoder should try ordinary raw DEFLATE first, then retry
+     with these word-alignment rules for stored-block/alignment failures. This
+     recovered the previously rejected Planets resource forks and both large
+     Studio Vision Pro forks in sample13.
 
      Known quirk: Some small files (URL bookmarks, etc.) have a 1-byte
      prefix (typically 0x01 after deobfuscation) before a deflate stored
@@ -328,6 +381,8 @@ Decompression procedure:
   2. Swap byte pairs: for i in range(1, len, 2): swap [i] and [i-1]
   3. Apply substitution table to every byte
   4. Inflate as raw deflate to get uncomp_size bytes
+  5. If zlib reports a stored-block/alignment error or stops before the
+     expected size, retry with the VISE word-aligned DEFLATE rules above
 
 ================================================================================
 FILE DATA LAYOUT IN ARCHIVE
@@ -356,6 +411,32 @@ SHARED BLOBS (multiple files at same position_in_archive):
   - Each file's uncomp_data_size bytes of data fork come first (all files)
   - Then each file's uncomp_rsrc_size bytes of resource fork (all files)
 
+EMPTY PLACEHOLDERS AT A SHARED POSITION:
+  Catalogs can contain a zero-size FVCT placeholder at the same archive
+  position as a real file. A placeholder with all four compressed/uncompressed
+  sizes equal to zero is not a shared-blob member and must be removed before
+  grouping. Otherwise its zero comp_data_size is incorrectly used as the group
+  blob size. This pattern occurs in the v3.11 VirusBarrier definition updater.
+
+INLINE FVCT RECORDS BEFORE FILE DATA:
+  Four v0.01 DesignWorkshop-family archives in sample14/sample15 serialize a
+  complete FVCT record immediately before every file's compressed forks. The
+  terminal CVCT catalog repeats the same descriptors, but its
+  position_in_archive values address the inline "FVCT" marker. For these
+  records the actual data position is:
+
+    position_in_archive + 4 + 120 + name_length
+
+  The inline descriptor uses data_segment=0 even when its matching terminal
+  catalog descriptor uses segment 1. An extractor must validate the inline
+  name, four fork size fields, and recorded archive position against the
+  terminal catalog before skipping it; an unrelated catalog FVCT can occur at
+  the same numeric offset by coincidence. This rule recovers 44 forks from:
+    - dw68kdem.hqx
+    - dwunivde.hqx
+    - dwppcdem.hqx
+    - DesignWorkshop PPC.sea
+
 MULTI-SEGMENT ARCHIVES:
   - Each file's data_segment field (FVCT +94) indicates which segment
     contains its compressed data
@@ -373,6 +454,46 @@ FILES WITH NO DATA PRESENT:
   actual compressed data in the archive. They typically represent files that
   would be installed from CD-ROM or another external source. These entries
   should be skipped during extraction.
+
+================================================================================
+CATALOG-ONLY, PPC LOADER, AND PASSWORD-PROTECTED INSTALLERS
+================================================================================
+
+CATALOG-FIRST EXTERNAL-MEDIA STUBS:
+  A common CD/web installer form has CVCT immediately after SVCT
+  (cvct_offset=44). In the sample13 family, every parsed FVCT in these files
+  has data_segment=0. The positions begin at 44 as if they addressed a separate
+  archive, so they overlap the in-application CVCT catalog and/or extend past
+  the MacBinary data fork. These 124 files contain installer actions/catalog
+  metadata but not their referenced payload. Catalog bytes must not be passed
+  to the file decompressor. The matching CD/data segment is required.
+
+PPC LOADER DATA FORKS:
+  PowerPC installers may place a PEF executable directly after SVCT. The PEF
+  signature "Joy!peff" is commonly at SVCT+48 (four bytes after the header).
+  A PEF signature alone does not imply missing payload: self-contained VISE
+  installers can append compressed data after the loader. However, if FVCT
+  ranges point into the PEF image and no valid compressed stream exists there,
+  the catalog references external media. Twenty-four sample13 files have this
+  loader-only/missing-payload form. Three additional PPC files are truncated
+  before their claimed CVCT catalog.
+
+PASSWORD-PROTECTED PAYLOADS:
+  Some installers contain a 'PsWd' resource and encrypt their compressed
+  payload. This encryption is separate from the standard VISE byte substitution
+  and DEFLATE format. The sample13 files VideoScript Install/Update,
+  Agromyzidae Installer, and Orchids I Installer use this form. The first is
+  also a catalog-only external-media stub. Password decryption is not specified
+  here; an extractor must report these archives rather than treating encrypted
+  bytes as corrupt DEFLATE.
+
+  A second encrypted form is identified directly by the SVCT version flag:
+  0xC401XXYY instead of 0x8001XXYY. Seven sample14/sample15 inputs use this
+  flag (Consultant, P2I, SFU at Home, and Illustrator 9 families). Their
+  catalogs follow the low-word structural version, but neither their catalogs
+  nor file streams use ordinary VISE deobfuscation/DEFLATE. Several display a
+  password prompt even without a PsWd resource. Treat 0xC401 as encrypted, not
+  as a damaged 0x8001 header; decryption remains unspecified.
 
 ================================================================================
 MAC FILE ATTRIBUTES
@@ -444,6 +565,7 @@ v3.12-v3.14:
   - File data may be stored after the catalog (allow post-catalog positions)
 
 v10.80 (0x80010a50):
+  - SVCT repeated_version stores compatibility value 0x80010a00
   - Same compressed catalog structure as v3.12+
   - FVCT name_length shifted to +120 (instead of standard +118)
   - DVCT name_length shifted to +78 (instead of standard +76)
@@ -453,11 +575,43 @@ v10.80 (0x80010a50):
     separate media (not in the archive file)
 
 v11.00 (0x80010b00):
+  - SVCT repeated_version stores compatibility value 0x80010a00
   - Same compressed catalog structure as v3.12+
   - FVCT name_length shifted to +120 (same as v10.80)
   - DVCT name_length shifted to +78 (same as v10.80)
   - Shared blob format is heavily used (multiple files per archive_pos)
   - File data stored after the catalog; uses standard deobfuscation
+
+================================================================================
+VALIDATION (sample0-sample10 regression corpus, 2360 archives)
+================================================================================
+
+Every archive was rescanned and compared against the prior report by archive
+path and by successful fork identity (catalog path, type/creator, fork kind,
+and expected size). No previously successful data or resource fork was lost.
+
+The directories contain 2,395 filesystem inputs in total. The prior report's
+2,360 inputs are all files with an SVCT candidate in their first 256 bytes. The
+other 35 were also checked: 28 are truncated MacBinary wrappers, five are raw
+resource forks, one is a complete MacBinary application with no SVCT anywhere,
+and one is a standalone "VISE" data container (CIM Data.vct) with no SVCT/CVCT
+installer catalog. None is a complete Installer VISE archive that this format
+can extract.
+
+Prior report:   319,086 forks extracted; 7,795 fork failures
+Current result: 323,365 forks extracted; 2,565 fork failures
+
+The catalog total changed from 279,651 to 279,599 only because the old report
+treated the 52 encrypted entries in the 0xC401 sample as ordinary files. The
+current extractor identifies that archive as password/encrypted before parsing
+its protected catalog. The on-other-segment count remains 8,073.
+
+Two regressions found during this audit were corrected:
+  - v10.80/v11.00 SVCT validation now accepts their 0x80010a00 compatibility
+    value instead of requiring an exact repeated version.
+  - Unique-position entries validate the data and resource extents separately,
+    preserving a complete data fork when a following resource fork continues
+    beyond the supplied segment.
 
 ================================================================================
 VALIDATION (sample11 corpus, 1378 archives)
@@ -500,6 +654,60 @@ Version distribution of tested archives:
   v0.01: 4, v2.01: 54, v2.02: 158, v2.05: 1, v3.00: 176, v3.01: 56,
   v3.02: 27, v3.03: 195, v3.04: 105, v3.05: 5, v3.06: 33, v3.07: 181,
   v3.08: 153, v3.10: 51, v3.11: 58, v3.12: 73, v3.13: 15, v3.14: 9
+
+================================================================================
+VALIDATION AND CLASSIFICATION (sample13 corpus, 197 inputs)
+================================================================================
+
+The sample13 corpus was classified by validated headers, MacBinary fork
+boundaries, catalog/data positions, PEF signatures, PsWd resources, and actual
+fork decompression. The categories below are mutually exclusive:
+
+  - 5 fully extracted VISE archives, 645 forks, zero failures:
+      DragThing 2.9 Installer                  133 data + 211 resource
+      Starry Night Basic 2.1                   88 data +  81 resource
+      Starry Night Basic 2.0                   60 data +  68 resource
+      Studio Vision Pro 3.5.2 Update            1 data +   1 resource
+      VirusBarrier Definitions 2001.05          1 data +   1 resource
+  - 124 catalog-first external-media stubs (CVCT=44, all FVCT segment=0)
+  - 24 PPC PEF loaders whose referenced payload is not present
+  - 6 multi-segment/catalog archives whose required data segments are absent
+  - 3 VISE PPC files truncated before their claimed CVCT catalog
+  - 4 password-protected/encrypted installers (not decoded; one uses 0xC401)
+  - 1 archive with damaged local streams (corrupt/incomplete bytes)
+  - 30 inputs that are not complete VISE archives:
+      24 complete MacBinary applications/components with no valid SVCT,
+       4 truncated MacBinary files, 1 AppleDouble sidecar, and 1 raw resource
+
+The recoverable changes were MacBinary data-fork bounding, VISE word-aligned
+stored-block inflation (including padding and concatenated streams), and removal
+of empty placeholders before shared-position grouping. Strict SVCT validation
+also prevents incidental marker strings in six non-VISE applications from being
+misidentified as archive headers.
+
+================================================================================
+VALIDATION AND CLASSIFICATION (sample14/sample15 corpora, 687 inputs)
+================================================================================
+
+All 687 new inputs were checked structurally and representative local streams
+were decompressed. The mutually exclusive structural classification is:
+
+  - 638 validated VISE SVCT headers; 49 non-VISE/truncated wrapper inputs
+  - within the validated set:
+      335 catalog-first external-media stubs
+      144 PPC Joy!peff loaders without the referenced companion payload
+       44 archives missing the claimed CVCT catalog/data segment
+        9 PsWd-resource password-encrypted archives
+        7 0xC401 password/encryption-flag archives
+        4 v0.01 inline-FVCT archives (newly supported; 44/44 forks verified)
+       95 ordinary embedded/multi-segment archives using known layouts
+
+The ordinary embedded group includes exact-family duplicates of prior samples,
+fully and partially extractable installers, absent secondary segments, and a
+small set of damaged streams. Forcing standard raw DEFLATE, the VISE
+word-aligned inflater, swap-only decoding, and alternate prefix handling on the
+remaining failures recovered no additional stream grammar. No other compatible
+compression or catalog variant was found.
 
 ================================================================================
 REFERENCES

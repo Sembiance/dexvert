@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/better-regex, camelcase */
+/* eslint-disable camelcase */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
@@ -40,6 +40,7 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 const FLAKY_CONVERTERS = [
 	"canvas5",
 	"cinema4D82",
+	"corelDRAW",
 	"Crowbar & noesis",
 	"noesis",
 	"paintDotNet",
@@ -179,7 +180,7 @@ const FORMAT_PROGRAM_FLAG = {
 	}
 };
 
-// these formats produce a files, but the namee are always different
+// these formats produce a files, but the names are always different
 const FILE_DYNAMIC_NAMES = [
 	"document/ibmBookManagerBook"
 ];
@@ -416,6 +417,14 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS = {
 		shrinkerPacked      : ["NOTES.EXE"],	// different each time, not sure why
 		sapThomsonDiskImage : ["TURBOCUP.SAP"]	// corrupted archive, different stuff extracted each time
 	},
+	audio :
+	{
+		xactWaveBank : ["Effects_intro.xwb", "Francais_intro.xwb"]	// varies wildly each run
+	},
+	executable :
+	{
+		dll : ["236"]	// the produced .svg varies wildly, dunno why
+	},
 	document :
 	{
 		pageMaker          : ["*"],	// pageMaker is sensitive and doesn't always work and it often fallsback to other pageMaker versions
@@ -428,6 +437,10 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS = {
 		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time
 		wpg             : ["test.wpg"],		// convert converts this to SVG incorrectly and is wildly different on different hosts
 		xbm             : ["fig.icon.X", "photon00.m.cbm", "pirhanna.rm", "world.xbm"]	// sometimes it's hiJaakExpress, sometimes it's canvas
+	},
+	other :
+	{
+		microsoftAgentCharacter : ["sample0_12093_Reaper_audio_fallback.acs"]	// the render warning is diffrent each time
 	},
 	video :
 	{
@@ -471,6 +484,9 @@ const FLEX_DIFF_FILES = [
 	// not sure why, but sometimes I get a .txt sometimes I get a .pdf weird
 	/document\/pageStreamDocument\/ASyncIO_2\.part2\.pgs$/,
 	/document\/wordDoc\/POWWOW\.DOC$/,
+
+	// sometimes svg, sometimes png
+	/image\/micrografxDraw\/BLAKE10\.DRW$/,
 
 	// on some hosts, scribus fails to process this file, not sure why
 	/image\/cdr\/test\.cdr$/,
@@ -976,7 +992,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			const caseInsensitiveDiff = diffUtil.diff(beforeKeys.map(v => v.toLowerCase()), afterKeys.map(v => v.toLowerCase()));
 			let msg = `Created files are different: ${diffFiles.innerTruncate(3000).trim()} (before: ${beforeKeys.length.toLocaleString()} files) (after: ${afterKeys.length.toLocaleString()} files)`;
 			if(caseInsensitiveDiff!==diffFiles.toLowerCase())
-				msg += ` caseInsensitiveDiff: ${caseInsensitiveDiff.length ? `${caseInsensitiveDiff}` : "no differences"}`;
+				msg += ` caseInsensitiveDiff: ${caseInsensitiveDiff.length ? caseInsensitiveDiff : "no differences"}`;
 			msg += ` ${converterMismatch}`;
 			return await fail(msg);
 		}

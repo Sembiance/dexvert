@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {cmdUtil, runUtil, fileUtil} from "xutil";
 import {XLog} from "xlog";
 import {path} from "std";
+import {C} from "../src/C.js";
 
 const xlog = new XLog("info");
 
@@ -29,7 +30,7 @@ const RATES = {
 	4 : 5564
 };
 
-const wipDirPath = await fileUtil.genTempPath(undefined, "ffsd2wav");
+const wipDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "ffsd2wav");
 await Deno.mkdir(wipDirPath, {recursive : true});
 
 // first seperate the rsrc and data forks

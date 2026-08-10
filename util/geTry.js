@@ -15,7 +15,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "Input file to scan", required : true}
 	]});
 
-const outputDirPath = await fileUtil.genTempPath();
+const outputDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
 
 const args = {inputFilePath : path.resolve(argv.inputFilePath), outputDirPath};
 if(argv.codes!=="NONE")

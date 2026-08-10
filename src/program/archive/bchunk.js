@@ -1,6 +1,7 @@
 import {Program} from "../../Program.js";
 import {base64Decode} from "std";
 import {fileUtil} from "xutil";
+import {C} from "../../C.js";
 
 export class bchunk extends Program
 {
@@ -23,7 +24,7 @@ export class bchunk extends Program
 		let cueFilePath = new TextDecoder().decode(base64Decode(r.flags.cueFilePath));
 		if(r.flags.forceMode1)
 		{
-			r.tmpCueFilePath = await fileUtil.genTempPath(undefined, ".cue");
+			r.tmpCueFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".cue");
 			await Deno.copyFile(cueFilePath, r.tmpCueFilePath);
 			await fileUtil.searchReplace(r.tmpCueFilePath, "MODE2/", "MODE1/");
 			cueFilePath = r.tmpCueFilePath;

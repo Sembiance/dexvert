@@ -3,6 +3,7 @@ import {cmdUtil, fileUtil, runUtil, sysUtil} from "xutil";
 import {CONVERT_PNG_ARGS} from "../src/Program.js";
 import {path} from "std";
 import {XLog} from "xlog";
+import {C} from "../src/C.js";
 
 const IMAGE_REF_REGEXES =
 [
@@ -30,7 +31,7 @@ const argv = cmdUtil.cmdInit({
 
 const inputFilePath = path.resolve(argv.inputFilePath);
 const inputFileStats = await Deno.stat(inputFilePath);
-const tmpDirPath = await fileUtil.genTempPath(undefined, "-unHLPMVB-tmp");
+const tmpDirPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "-unHLPMVB-tmp");
 
 await Deno.mkdir(tmpDirPath);
 

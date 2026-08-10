@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
+import {C} from "../src/C.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -10,7 +11,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "File path to identify", required : true}
 	]});
 
-const MOUNT_DIR_PATH = await fileUtil.genTempPath(undefined, "-photocd-info");
+const MOUNT_DIR_PATH = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, "-photocd-info");
 await Deno.mkdir(MOUNT_DIR_PATH);
 
 // fuseiso does a pretty good job at mounting photo cds, so use it to see if a photo_cd is detected

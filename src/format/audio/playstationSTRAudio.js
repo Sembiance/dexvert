@@ -6,5 +6,6 @@ export class playstationSTRAudio extends Format
 	ext            = [".str"];
 	forbidExtMatch = true;
 	magic          = ["Sony Playstation STR (psxstr)"];
+	weakMagic      = true;
 	converters     = ["ffmpeg[libre][format:psxstr][outType:mp3]"];
 }

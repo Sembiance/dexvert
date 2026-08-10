@@ -1,6 +1,7 @@
 import {Program} from "../../Program.js";
 import {path} from "std";
 import {fileUtil} from "xutil";
+import {C} from "../../C.js";
 
 const progBasePath = Program.binPath("amiga-bitmap-font-tools");
 
@@ -10,7 +11,7 @@ export class amigaBitmapFontContentToOTF extends Program
 	bin     = path.join(progBasePath, "env/bin/python3");
 	args    = async r =>
 	{
-		r.ufoTmpPath = await fileUtil.genTempPath(undefined, ".ufo");
+		r.ufoTmpPath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".ufo");
 		return [path.join(progBasePath, "amiga-bitmap-font-tools", "python", "openAmigaFont.py"), "-i", r.inFile(), "-o", await r.outFile("out.otf"), "-f", "otf", "-t", r.ufoTmpPath];
 	};
 	runOptions = {env : {VIRTUAL_ENV : path.join(progBasePath, "env")}};

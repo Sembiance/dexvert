@@ -76,7 +76,7 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		appendCommonFuncs(scriptLines, {script, timeout, fullCmd : cmd, skipMouseMoving : true});
 		scriptLines.push(script);
 
-		const tmpScriptFilePath = await fileUtil.genTempPath(undefined, ".au3");
+		const tmpScriptFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR, ".au3");
 		await fileUtil.writeTextFile(tmpScriptFilePath, scriptLines.join("\n"));
 
 		const autoItRunOptions = { env : runOptions.env};

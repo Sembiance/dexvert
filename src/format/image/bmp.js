@@ -25,7 +25,7 @@ export class bmp extends Format
 		
 		// if we were explictly told to convert as this format, skip some of these converters because if we didn't convert from the above converters, none of the ones below are likely to succeed
 		// This specifically can happen from deark's chaining from resource_dasm for samples such as archive/rsrc/DrawIntl.DLL.rsrc
-		if(!RUNTIME.asFormat)
+		if(!dexState.asFormat)
 		{
 			r.push("iconvert", "gimp", "nconvert[format:bmp]", "ffmpeg[format:bmp_pipe][outType:png]", "wuimg[format:bmp]", "wuimg[format:dib]", "imconv[format:bmp][matchType:magic]");
 			r.push("powerpaint[format:bmp][matchType:magic]", "GARbro[types:image:BmpFormat][matchType:magic]");

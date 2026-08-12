@@ -43,7 +43,6 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, prete
 	let asFormatFormat = null;
 	if(asFormat)
 	{
-		RUNTIME.asFormat = asFormat;
 		const [asFamilyid, asFormatid] = asFormat.split("/");
 		if(!formats[asFormatid])
 			throw new Error(`Invalid asFormat option specified, no such format: ${asFormatid}`);
@@ -89,6 +88,8 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, prete
 
 	let prevFailedVerify = false;
 	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, ids, idMeta, xlog});
+	if(asFormat)
+		dexState.asFormat = asFormat;
 	for(const id of ids)
 	{
 		if(id.from!=="dexvert" || id.unsupported)

@@ -31,7 +31,6 @@ export function clearRuntime()
 {
 	Object.clear(RUNTIME.globalFlags);
 	RUNTIME.forbidProgram.clear();
-	delete RUNTIME.asFormat;
 }
 
 const CONVERT_PNG_ARGS = ["-strip", ...C.CONVERT_PNG_ARGS];

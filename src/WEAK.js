@@ -672,6 +672,7 @@ export const WEAK_VALUES =
 	/^application\/pgp-keys$/,
 	/^application\/smil\+xml$/,
 	/^application\/sparql-query$/,
+	/^application\/typescript$/,
 	/^application\/vnd\.apple\.pages$/,
 	/^application\/vnd\.fastcopy-disk-image$/,
 	/^application\/vnd\.framemaker$/,

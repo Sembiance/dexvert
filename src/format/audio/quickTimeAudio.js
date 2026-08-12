@@ -16,7 +16,7 @@ export class quickTimeAudio extends Format
 	converters       = dexState =>
 	{
 		const r = ["ffmpeg[outType:mp3]"];
-		if(RUNTIME.asFormat!=="audio/quickTimeAudio")
+		if(dexState.asFormat!=="audio/quickTimeAudio")
 		{
 			const magicCount = _MOV_MAGIC.map(m => (dexState.hasMagics(m) ? 1 : 0)).sum();
 			if(magicCount>1 || (magicCount===1 && !dexState.hasMagics(_MOV_MAGIC_WEAK)))

@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {RUNTIME} from "../../Program.js";
 
 export class bmp extends Format
 {
@@ -20,12 +21,19 @@ export class bmp extends Format
 		const r = [];
 		if(dexState.hasMagics("Mac BMP bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.bmp]");
-		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert[format:bmp]", "ffmpeg[format:bmp_pipe][outType:png]", "wuimg[format:bmp]", "wuimg[format:dib]", "imconv[format:bmp][matchType:magic]");
-		r.push("powerpaint[format:bmp][matchType:magic]", "GARbro[types:image:BmpFormat][matchType:magic]");
-		r.push(...["tkimgConvert", "noesis[type:image]"].map(v => `${v}[matchType:magic]`));
-		r.push(...["paintDotNet", "keyViewPro", "imageAlchemy", "canvas[matchType:magic][hasExtMatch]", "tomsViewer"].map(v => `${v}[matchType:magic][strongMatch]`));
-		// Not reliable and can produce garbage, even with strong matches with extensions: "graphicWorkshopProfessional", "canvas5", "hiJaakExpress", "pv"
-		r.push(...["photoDraw"].map(v => `${v}[matchType:magic][strongMatch][hasExtMatch]`));
+		r.push("convert", "iio2png", "deark[module:bmp]");
+		
+		// if we were explictly told to convert as this format, skip some of these converters because if we didn't convert from the above converters, none of the ones below are likely to succeed
+		// This specifically can happen from deark's chaining from resource_dasm for samples such as archive/rsrc/DrawIntl.DLL.rsrc
+		if(!RUNTIME.asFormat)
+		{
+			r.push("iconvert", "gimp", "nconvert[format:bmp]", "ffmpeg[format:bmp_pipe][outType:png]", "wuimg[format:bmp]", "wuimg[format:dib]", "imconv[format:bmp][matchType:magic]");
+			r.push("powerpaint[format:bmp][matchType:magic]", "GARbro[types:image:BmpFormat][matchType:magic]");
+			r.push(...["tkimgConvert", "noesis[type:image]"].map(v => `${v}[matchType:magic]`));
+			r.push(...["paintDotNet", "keyViewPro", "imageAlchemy", "canvas[matchType:magic][hasExtMatch]", "tomsViewer"].map(v => `${v}[matchType:magic][strongMatch]`));
+			// Not reliable and can produce garbage, even with strong matches with extensions: "graphicWorkshopProfessional", "canvas5", "hiJaakExpress", "pv"
+			r.push(...["photoDraw"].map(v => `${v}[matchType:magic][strongMatch][hasExtMatch]`));
+		}
 		return r;
 	};
 }

@@ -1,7 +1,7 @@
 Installer VISE Archive Format Specification
 ============================================
-Version: 2026-08-09
-Source:   Reverse-engineered from sample files (including sample13-sample15)
+Version: 2026-08-11
+Source:   Reverse-engineered from sample files (including sample13-sample16)
           and the ScummVM project (elasota, 2022)
 
 Installer VISE was a proprietary macOS (Classic Mac OS) installer creation tool
@@ -31,10 +31,23 @@ fork belongs to the VISE archive. The padded resource fork that follows it is
 the installer application's resource fork and MUST NOT be treated as archive
 payload or scanned for catalog-entry boundaries.
 
+Some Internet-distributed .bin files contain a second complete MacBinary file
+inside an outer MacBinary transfer wrapper. For these nested files the inner
+header is at physical offset 128 and SVCT is at 256. Bound the VISE view using
+the inner header's data_fork_length, not the outer resource-fork boundary.
+
 For multi-segment (multi-disk) archives:
   - Segment 1 contains the SVCT header, some/all compressed data, and the CVCT
   - Segments 2+ contain only additional compressed data (no header or catalog)
   - Each segment file begins with its own SVCT header
+
+A related split-file layout puts the segment-1 catalog in an installer
+application but stores the compressed bytes in a separate VIS4/VIS3 MacBinary
+data file. This payload has no SVCT header: position_in_archive is relative to
+the first byte of its data fork. The catalog and payload must be supplied
+together; neither file alone contains enough information for extraction. VISE
+normally derives the companion pathname by appending ".data" to the installer
+application's filename.
 
 ================================================================================
 SVCT HEADER (44 bytes)
@@ -448,6 +461,40 @@ MULTI-SEGMENT ARCHIVES:
     with seg=1 files in a shared blob group, the seg=0 files should be
     excluded from the group to avoid corrupting the shared blob protocol.
 
+HEADERLESS EXTERNAL DATA FORKS:
+  Nineteen sample16 files ending in ".data" are MacBinary VIS4/VIS3 files whose
+  data forks begin directly with ordinary VISE-compressed bytes. Their matching
+  installer applications contain the CVCT catalog, typically alongside a PEF
+  loader. In the observed v3.11/v3.12 files:
+
+  - the external payload has no SVCT or CVCT marker
+  - catalog entries use data_segment=1
+  - position_in_archive=0 addresses byte zero of the external data fork
+  - the normal VISE byte swap, substitution, and DEFLATE rules are unchanged
+
+  A decoder must parse FVCT/DVCT from the segment-1 installer but read each
+  compressed extent from the separate payload view. When the companion is in
+  the same directory and is named "<installer filename>.data", the extractor
+  detects and uses it automatically with the ordinary two-argument command:
+
+    installerVISE.py "Installer application" outputDir
+
+  If the files have been separated or renamed, the reverse form remains
+  available as an explicit fallback:
+
+    installerVISE.py payload.data outputDir --catalog "Installer application"
+
+  The same option supplies a segment-1 catalog when inputFile is an SVCT
+  segment 2 or later. Representative verification recovered all 56 forks from
+  GRAPHICS SUITE 10 UPDATE.data and 2,373 of 2,374 populated entries from the
+  large French Painter 7 payload; the one remaining stream is locally damaged.
+
+  The sample17 Tropico pair confirms the naming rule. Both 68K/PPC portions of
+  the installer contain a Pascal string with length 5 and value ".data"; the
+  complete companion name is not serialized. Its catalog extents end at
+  200,955,474, exactly the external data-fork length. Automatic pairing
+  extracted 651 data forks and 60 resource forks from its 656 file entries.
+
 FILES WITH NO DATA PRESENT:
   Some FVCT entries have uncomp_data_size > 0 but comp_data_size == 0 (or
   similarly for resource forks). These files have catalog metadata but no
@@ -494,6 +541,17 @@ PASSWORD-PROTECTED PAYLOADS:
   nor file streams use ordinary VISE deobfuscation/DEFLATE. Several display a
   password prompt even without a PsWd resource. Treat 0xC401 as encrypted, not
   as a damaged 0x8001 header; decryption remains unspecified.
+
+QUICKTIME IDf CACHE CONTAINERS (NOT VISE ARCHIVES):
+  138 sample16 files named QuickTime Install Cache (including localized names)
+  use Mac type/creator VIS4/VIS3, but their data forks begin with "IDfh" (128
+  files) or "IDdh" (10 files), not SVCT or compressed VISE extents. They have no
+  CVCT catalog, and VISE catalog positions from superficially related QuickTime
+  installers do not decode their bytes. These are auxiliary Apple QuickTime
+  cache containers that reused VISE Finder metadata; their internal IDf record
+  grammar is a separate, substantially different format and is outside this
+  archive specification. An extractor should identify and report them instead
+  of scanning their random-looking body for incidental VISE markers.
 
 ================================================================================
 MAC FILE ATTRIBUTES
@@ -708,6 +766,32 @@ small set of damaged streams. Forcing standard raw DEFLATE, the VISE
 word-aligned inflater, swap-only decoding, and alternate prefix handling on the
 remaining failures recovered no additional stream grammar. No other compatible
 compression or catalog variant was found.
+
+================================================================================
+VALIDATION AND CLASSIFICATION (sample16 corpus, 315 inputs)
+================================================================================
+
+Every sample16 input was classified using MacBinary fork extents, case-sensitive
+type/creator codes, validated SVCT headers, leading data-fork signatures, and
+paired-catalog decompression. The mutually exclusive result is:
+
+  - 16 nested MacBinary .bin files with segment-1 SVCT at physical offset 256;
+    15 extract their locally stored forks normally, while the nested QuickTime
+    installer is a valid catalog-only stub for a separate IDf cache
+  - 71 genuine VISE segments 2-9 with SVCT at physical offset 128; these need
+    the matching segment-1 catalog, now accepted with --catalog
+  - 19 headerless VIS4/VIS3 external VISE payload forks; these need their
+    matching catalog application, and use the ordinary compression grammar
+  - 138 QuickTime IDfh/IDdh cache containers; VISE-related auxiliary files,
+    but not SVCT/CVCT Installer VISE archives and substantially different
+  - 71 StrataVision applications, models, shapes, and preferences with creator
+    code "Vis3" (lowercase "is"); these are unrelated application data, not
+    Installer VISE files
+
+No new SVCT version code, CVCT entry layout, obfuscation table, or compression
+method was found. The new supported cases are composition/wrapping variants:
+nested MacBinary bounds and a catalog view separate from the payload/segment
+view.
 
 ================================================================================
 REFERENCES

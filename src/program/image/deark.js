@@ -125,7 +125,7 @@ export class deark extends Program
 					imgInfo.parts.push({filename : filenameInfo.filename, x : imgInfo.x, y : imgInfo.y});
 					delete imgInfo.x;
 					delete imgInfo.y;
-					continue;		// eslint-disable-line sonarjs/no-redundant-jump
+					continue;		// eslint-disable-line sonarjs/no-redundant-jump, unicorn/no-useless-continue
 				}
 			}
 

@@ -2,10 +2,13 @@
 """
 installerVISE.py - Extract files from Installer VISE archives (Mac OS)
 
-Usage: python3 installerVISE.py <inputFile> <outputDir>
+Usage: python3 installerVISE.py <inputFile> <outputDir> [--catalog <catalogFile>]
 
 Supports known Installer VISE formats v0.01 through v11.00.
-Handles standalone VISE files and MacBinary-wrapped installers (SVCT at offset 128).
+Handles standalone VISE files, MacBinary-wrapped/nested installers, and
+catalog-less VISE data or secondary segments when their segment-1 catalog is
+supplied with --catalog.
+An adjacent external payload named "<inputFile>.data" is detected automatically.
 Decompression based on reverse-engineering by the ScummVM project (elasota, 2022).
 """
 
@@ -499,6 +502,29 @@ def find_svct_offset(data):
     return -1
 
 
+def macbinary_data_fork(full_data, header_offset=0):
+    """Return a complete MacBinary data fork, or None for a non-wrapper.
+
+    ``header_offset`` permits an inner MacBinary file embedded in an outer
+    MacBinary/StuffIt transfer wrapper. MacBinary I files do not necessarily
+    carry the later version bytes, so validation uses the invariant header
+    fields and the declared data-fork extent.
+    """
+    if header_offset < 0 or header_offset + 128 > len(full_data):
+        return None
+    header = full_data[header_offset:header_offset + 128]
+    name_length = header[1]
+    if (header[0] != 0 or not (1 <= name_length <= 63)
+            or header[74] != 0 or header[82] != 0):
+        return None
+    data_fork_size = struct.unpack('>I', header[83:87])[0]
+    data_start = header_offset + 128
+    data_end = data_start + data_fork_size
+    if data_end > len(full_data):
+        return None
+    return full_data[data_start:data_end]
+
+
 def slice_archive_data(full_data, svct_offset):
     """Return only bytes belonging to the VISE archive's data fork.
 
@@ -507,13 +533,81 @@ def slice_archive_data(full_data, svct_offset):
     treating it as archive data creates false extraction attempts for PPC and
     external-media installers.
     """
-    if (svct_offset == 128 and len(full_data) >= 128 and full_data[0] == 0
-            and 1 <= full_data[1] <= 63):
-        data_fork_size = struct.unpack('>I', full_data[83:87])[0]
-        data_fork_end = 128 + data_fork_size
-        if data_fork_end <= len(full_data):
-            return full_data[svct_offset:data_fork_end]
+    # SVCT begins at the start of a MacBinary data fork. Usually the wrapper
+    # header is physical offset 0 and SVCT is at 128; sample16 also contains
+    # transfer files with an inner MacBinary header at 128 and SVCT at 256.
+    wrapper_offset = svct_offset - 128
+    wrapped_data = macbinary_data_fork(full_data, wrapper_offset)
+    if wrapped_data is not None:
+        return wrapped_data
     return full_data[svct_offset:]
+
+
+def find_adjacent_external_payload(input_file, archive_data, files,
+                                   current_segment=1):
+    """Return a validated ``<installer>.data`` payload when one is required.
+
+    Split Installer VISE applications derive the companion name by appending
+    the Pascal suffix ``.data`` to their own filename. Their FVCT positions
+    address byte zero of that separate data fork, unlike a self-contained
+    archive whose first possible compressed byte follows the 44-byte SVCT.
+
+    The returned tuple is ``(path, data_fork)``. QuickTime IDfh/IDdh caches use
+    the same VIS4/VIS3 Finder metadata but are a different format and are never
+    accepted as VISE payloads.
+    """
+    candidate_path = input_file + '.data'
+    if not os.path.isfile(candidate_path):
+        return None
+
+    with open(candidate_path, 'rb') as fh:
+        candidate_full = fh.read()
+
+    candidate_data = macbinary_data_fork(candidate_full)
+    if candidate_data is not None:
+        # A wrapped companion must carry the Installer VISE data-file codes.
+        if (candidate_full[65:69] != b'VIS4'
+                or candidate_full[69:73] != b'VIS3'):
+            return None
+    else:
+        # Also accept a decoded/raw data fork stored without MacBinary.
+        candidate_data = candidate_full
+
+    if candidate_data[:4] in (b'IDfh', b'IDdh', b'SVCT', b'CVCT'):
+        return None
+
+    groups = OrderedDict()
+    for f in files:
+        segment = f.get('data_segment', 1)
+        if segment not in (0, current_segment):
+            continue
+        has_uncomp = f['uncomp_data'] > 0 or f['uncomp_rsrc'] > 0
+        has_comp = f['comp_data'] > 0 or f['comp_rsrc'] > 0
+        if has_uncomp and has_comp:
+            groups.setdefault(f['archive_pos'], []).append(f)
+
+    required_end = 0
+    usable_candidate_extent = False
+    starts_before_svct_data = False
+    for pos, group in groups.items():
+        if len(group) > 1:
+            stored_size = group[0]['comp_data']
+        else:
+            stored_size = group[0]['comp_data'] + group[0]['comp_rsrc']
+        if stored_size <= 0:
+            continue
+        extent_end = pos + stored_size
+        required_end = max(required_end, extent_end)
+        usable_candidate_extent |= extent_end <= len(candidate_data)
+        starts_before_svct_data |= pos < 44
+
+    # A same-named sidecar is selected only when the catalog cannot describe a
+    # normal self-contained layout and at least one stored extent is present.
+    needs_external = (starts_before_svct_data
+                      or required_end > len(archive_data))
+    if not needs_external or not usable_candidate_extent:
+        return None
+    return candidate_path, candidate_data
 
 
 def parse_svct_header(data):
@@ -1358,50 +1452,120 @@ def version_string(version):
 
 
 def main():
-    if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <inputFile> <outputDir>", file=sys.stderr)
+    usage = (f"Usage: {sys.argv[0]} <inputFile> <outputDir> "
+             "[--catalog <catalogFile>]")
+    if len(sys.argv) not in (3, 5):
+        print(usage, file=sys.stderr)
+        sys.exit(1)
+    if len(sys.argv) == 5 and sys.argv[3] != '--catalog':
+        print(usage, file=sys.stderr)
         sys.exit(1)
 
     input_file = sys.argv[1]
     output_dir = sys.argv[2]
+    catalog_file = sys.argv[4] if len(sys.argv) == 5 else None
 
     with open(input_file, 'rb') as fh:
         full_data = fh.read()
 
-    # Find SVCT header (may be at offset 0 or embedded at offset 128+)
+    # The input can be a complete/catalog VISE archive, a secondary SVCT
+    # segment, or a headerless external payload whose catalog is supplied
+    # separately. The extraction data and catalog data therefore need not be
+    # the same byte view.
     svct_off = find_svct_offset(full_data)
+    data = None
+    catalog_data = None
+    catalog_svct_off = None
+    external_payload = False
+
     if svct_off < 0:
-        print(f"Error: No SVCT header found in {input_file}", file=sys.stderr)
-        sys.exit(1)
+        payload_data = macbinary_data_fork(full_data)
+        if payload_data is None:
+            payload_data = full_data
+        payload_magic = payload_data[:4]
+        if payload_magic in (b'IDfh', b'IDdh'):
+            print(f"Error: {input_file} is a QuickTime IDf cache container, "
+                  "not an Installer VISE archive or raw VISE payload.", file=sys.stderr)
+            print("  It has VIS4/VIS3 Finder metadata but no SVCT/CVCT catalog; "
+                  "the Installer VISE decompressor is not applicable.", file=sys.stderr)
+            sys.exit(1)
+        if catalog_file is None:
+            is_vis4 = (len(full_data) >= 73
+                       and full_data[65:69] == b'VIS4'
+                       and full_data[69:73] == b'VIS3')
+            if is_vis4:
+                print(f"Error: {input_file} is a catalog-less VISE data payload.",
+                      file=sys.stderr)
+                print("  Supply its segment-1 installer catalog with --catalog.",
+                      file=sys.stderr)
+            else:
+                print(f"Error: No SVCT header found in {input_file}", file=sys.stderr)
+            sys.exit(1)
+        data = payload_data
+        segment = 1
+        external_payload = True
+    else:
+        # Slice data so offsets are relative to SVCT and stop at the end of the
+        # containing MacBinary data fork, including for nested wrappers.
+        data = slice_archive_data(full_data, svct_off)
+        input_version, input_cvct_offset, segment = parse_svct_header(data)
 
-    # Slice data so all offsets are relative to SVCT and, for MacBinary input,
-    # stop at the end of the data fork rather than reading installer resources.
-    data = slice_archive_data(full_data, svct_off)
-
-    # Parse header
-    version, cvct_offset, segment = parse_svct_header(data)
-    ver_minor = version & 0xFFFF
+    if external_payload or segment > 1:
+        if catalog_file is None:
+            print(f"VISE Archive: {os.path.basename(input_file)}")
+            print(f"  Version: 0x{input_version:08x} ({version_string(input_version)})")
+            print(f"  Segment: {segment}")
+            if svct_off > 0:
+                print(f"  SVCT offset: {svct_off}")
+            print(f"  Note: This is segment {segment} of a multi-segment archive.")
+            print("  Segment files contain only data; supply segment 1 with --catalog.")
+            sys.exit(0)
+        with open(catalog_file, 'rb') as fh:
+            catalog_full_data = fh.read()
+        catalog_svct_off = find_svct_offset(catalog_full_data)
+        if catalog_svct_off < 0:
+            print(f"Error: No validated SVCT header found in catalog {catalog_file}",
+                  file=sys.stderr)
+            sys.exit(1)
+        catalog_data = slice_archive_data(catalog_full_data, catalog_svct_off)
+        version, cvct_offset, catalog_segment = parse_svct_header(catalog_data)
+        if catalog_segment != 1:
+            print(f"Error: Catalog input is segment {catalog_segment}; segment 1 is required.",
+                  file=sys.stderr)
+            sys.exit(1)
+    else:
+        if catalog_file is not None:
+            print("Error: --catalog is only used with a catalog-less payload or "
+                  "secondary segment.", file=sys.stderr)
+            sys.exit(1)
+        catalog_data = data
+        version = input_version
+        cvct_offset = input_cvct_offset
 
     print(f"VISE Archive: {os.path.basename(input_file)}")
     print(f"  Version: 0x{version:08x} ({version_string(version)})")
-    print(f"  Segment: {segment}")
+    if external_payload:
+        print("  Segment: external data payload (catalog segment 1)")
+    else:
+        print(f"  Segment: {segment}")
     if svct_off > 0:
-        print(f"  SVCT offset: {svct_off} (self-extracting)")
+        print(f"  SVCT offset: {svct_off} (wrapped/self-extracting)")
+    if catalog_file is not None:
+        print(f"  Catalog: {catalog_file}")
+        if catalog_svct_off > 0:
+            print(f"  Catalog SVCT offset: {catalog_svct_off}")
     print(f"  CVCT offset: 0x{cvct_offset:x} ({cvct_offset})")
     print(f"  File size: {len(full_data)} bytes")
+    if external_payload:
+        print(f"  Payload data fork: {len(data)} bytes")
 
     if (version >> 24) == 0xC4:
         print("  Error: This archive uses VISE password/encryption flag 0xC4; "
               "decryption is not supported.", file=sys.stderr)
         sys.exit(1)
 
-    if segment > 1:
-        print(f"  Note: This is segment {segment} of a multi-segment archive.")
-        print(f"  Segment files contain only data; catalog is in segment 1.")
-        sys.exit(0)
-
     # Verify CVCT magic (with fallback search if not at claimed offset)
-    actual_cvct, pos_shift = find_cvct_offset(data, cvct_offset)
+    actual_cvct, pos_shift = find_cvct_offset(catalog_data, cvct_offset)
     if actual_cvct is None:
         print(f"  Error: CVCT magic not found at offset 0x{cvct_offset:x}", file=sys.stderr)
         sys.exit(1)
@@ -1409,16 +1573,33 @@ def main():
         print(f"  Note: CVCT found at 0x{actual_cvct:x} (claimed 0x{cvct_offset:x}, shift={pos_shift:+d})")
         cvct_offset = actual_cvct
 
-    num_entries = struct.unpack('>H', data[cvct_offset + 16:cvct_offset + 18])[0]
+    num_entries = struct.unpack(
+        '>H', catalog_data[cvct_offset + 16:cvct_offset + 18]
+    )[0]
     print(f"  Catalog entries: {num_entries}")
 
     # Parse catalog
-    directories, files, pack_entries = parse_catalog(data, version, cvct_offset)
+    directories, files, pack_entries = parse_catalog(
+        catalog_data, version, cvct_offset
+    )
 
     # Adjust archive positions if CVCT was at a different offset than claimed
     if pos_shift != 0:
         for f in files:
             f['archive_pos'] += pos_shift
+
+    # Split-file installers conventionally place a raw VIS4/VIS3 data fork
+    # beside the application and append ".data" to the application filename.
+    # Select it only after the catalog proves that local SVCT-relative bytes
+    # cannot be the intended payload.
+    if catalog_file is None and not external_payload and segment == 1:
+        adjacent_payload = find_adjacent_external_payload(
+            input_file, data, files, segment
+        )
+        if adjacent_payload is not None:
+            adjacent_path, data = adjacent_payload
+            print(f"  External data: {adjacent_path} (auto-detected)")
+            print(f"  External data fork: {len(data)} bytes")
 
     print(f"  Directories: {len(directories)}")
     print(f"  Files: {len(files)}")
@@ -1461,7 +1642,7 @@ def main():
         print(f"  Metadata written to _metadata.json ({len(file_metadata)} files)")
 
     # Parse INDN
-    indn = parse_indn(data, cvct_offset)
+    indn = parse_indn(catalog_data, cvct_offset)
     if indn and indn['disks']:
         print(f"\n  Disk names:")
         for disk in indn['disks']:

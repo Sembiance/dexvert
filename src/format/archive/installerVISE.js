@@ -7,6 +7,8 @@ export class installerVISE extends Format
 	ext            = [".mac"];
 	forbidExtMatch = true;
 	magic          = ["Installer VISE Mac package", "Installer: Vise"];
+	keepFilename   = true;
+	auxFiles       = (input, otherFiles) => (otherFiles.filter(file => file.ext.toLowerCase()===".data").length ?  otherFiles.filter(file => file.ext.toLowerCase()===".data") : false);
 	idMeta         = ({macFileCreator}) => macFileCreator==="VIS3";
 	converters     = ["vibeExtract"];
 }

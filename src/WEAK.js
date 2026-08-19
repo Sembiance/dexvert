@@ -301,8 +301,10 @@ export const WEAK_VALUES =
 
 	// dragonUnpackerID
 	// SEEN  ONCE:
-	//		DNI
+	//		???, ???
 	// SEEN TWICE:
+	//		???, ???
+	/^dragon: DNI /,
 	/^dragon: FPK /,	// multi-versioned, so it detects as FPK but must pass like FPK4. This produces garbage though on non FPK4 archives. gameextractor handles these fine and much better, see sidMeiserFPK
 	/^dragon: GTEX /,
 	/^dragon: PACK /,
@@ -323,6 +325,7 @@ export const WEAK_VALUES =
 	/^Electronic Arts Layer 3 \(ealayer3\)$/,	// librempeg
 	/^Electronic Arts Multimedia \(ea\)$/,
 	/^FLI\/FLC\/FLX animation \(flic\)$/,
+	/^FM Towns Sound \(fmtowns\)$/,		// librempeg
 	/^Game Music Emu demuxer \(libgme\)$/,
 	/^IEC 61937 \(compressed data in S\/PDIF\) \(spdif\)$/,
 	/^IFF \(Interchange File Format\) \(iff\)$/,
@@ -340,6 +343,7 @@ export const WEAK_VALUES =
 	/^Naxat ASD \(naxat_asd\)$/,
 	/^NGC \(Nintendo DSP Standard\) \(ngcdspstd\)$/,
 	/^NC camera feed \(nc\)$/,
+	/^NGC \(Nintendo DSP\) STM \(ngcdspstm\)$/,		// librempeg
 	/^Nintendo GC DTK \(adp\)$/,	// librempeg
 	/^Nullsoft Streaming Video \(nsv\)$/,
 	/^Ogg \(ogg\)$/,
@@ -373,7 +377,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
-	//		archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener
+	//		archive:Parsley.CgV1Opener, archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat
 	// SEEN TWICE:
 	//		archive:Will.ArcOpener, archive:Mokopro.NNNNOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
@@ -397,12 +401,13 @@ export const WEAK_VALUES =
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
 	//		image:RSystem.RsgFormat, image:Herb.GrpFormat
 	// SEEN TWICE:
-	//		image:Discovery.Pr1Format, image:Gs.PicFormat, image:Ego.AntFormat
+	//		image:Discovery.Pr1Format, image:Ego.AntFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
 	/^image:Desire\.DesFormat /,
 	/^image:Ffa\.Pt1Format /,
+	/^image:Gs\.PicFormat /,
 	/^image:JpegFormat /,
 	/^image:KAAS\.PicFormat /,
 	/^image:Leaf\.PxFormat /,
@@ -417,11 +422,11 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ARC_A20, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SHP_110, SKX_SKEX, BBA_BAF
+	// 		BIG, BNK, WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CAR_RAC, CWG_VW, BUNDLE_BNDL, FLX, WAD_WAD, LIB_5, SAD_SAUD
-	//		BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, PSF_PSF, CAR_RAC, CWG_VW, FLX, WAD_WAD, LIB_5, SAD_SAUD
+	//		BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -444,11 +449,13 @@ export const WEAK_VALUES =
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: AST_SCHI( |$)/,
 	/^geArchive: BANK_QL( |$)/,
-	/^geArchive: BIN_P00P( |$)/,
+	/^geArchive: BBA_BAF( |$)/,
 	/^geArchive: BDF( |$)/,
+	/^geArchive: BIN_P00P( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
+	/^geArchive: BUNDLE_BNDL( |$)/,
 	/^geArchive: CACHE_3( |$)/,
 	/^geArchive: CAR_FRAC( |$)/,
 	/^geArchive: CAS( |$)/,
@@ -593,11 +600,13 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, Codec, BMF
-	// SEEN TWICE: QuArk, 777, Blink (D.T.S.)
+	// SEEN  ONCE: Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, BMF
+	// SEEN TWICE: QuArk, Blink (D.T.S.), ELI 5750, Codec
+	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
 	/^idarc: Arhangel( |$)/,
+	/^idarc: Blink \(D\.T\.S\.\)( |$)/,
 	/^idarc: BOA( |$)/,
 	/^idarc: DitPack( |$)/,
 	/^idarc: Disintegrator( |$)/,
@@ -664,6 +673,7 @@ export const WEAK_VALUES =
 	/^soxi: mpc2k$/,
 
 	// xdgMime
+	/^application\/buildstream\+yaml$/,
 	/^application\/its\+xml$/,
 	/^application\/mathematica$/,
 	/^application\/mbox$/,
@@ -674,6 +684,7 @@ export const WEAK_VALUES =
 	/^application\/sparql-query$/,
 	/^application\/typescript$/,
 	/^application\/vnd\.apple\.pages$/,
+	/^application\/vnd\.dart$/,
 	/^application\/vnd\.fastcopy-disk-image$/,
 	/^application\/vnd\.framemaker$/,
 	/^application\/vnd\.microsoft\.portable-executable$/,
@@ -685,6 +696,7 @@ export const WEAK_VALUES =
 	/^application\/x-ccd$/,
 	/^application\/x-cisco-vpn-settings$/,
 	/^application\/x-coff$/,
+	/^application\/x-commodore-d90-disk$/,
 	/^application\/x-daa$/,
 	/^application\/x-dar$/,
 	/^application\/x-dosexec$/,
@@ -714,11 +726,13 @@ export const WEAK_VALUES =
 	/^application\/x-qed-disk$/,
 	/^application\/x-sharedlib$/,
 	/^application\/x-shellscript$/,
+	/^application\/x-spectrum-tap$/,
 	/^application\/x-spectrum-z80$/,
 	/^application\/x-subrip$/,
 	/^application\/x-wii-wad$/,
 	/^application\/xhtml\+xml$/,	// only cheks for the top header which oddly is all that's in some text files out there that should remain as text
 	/^audio\/vnd\.dts$/,
+	/^audio\/x-669$/,
 	/^audio\/x-adpcm$/,
 	/^audio\/x-mod$/,
 	/^font\/ttf$/,
@@ -728,21 +742,28 @@ export const WEAK_VALUES =
 	/^image\/x-fpx$/,
 	/^image\/x-kodak-kdc$/,
 	/^image\/x-pic$/,
+	/^image\/x-sct$/,
 	/^image\/x-tga$/,
 	/^image\/x-tim$/,
 	/^image\/x-win-bitmap$/,
 	/^message\/rfc822$/,
+	/^text\/julia$/,
 	/^text\/rust$/,
+	/^text\/slint$/,
 	/^text\/vnd\.graphviz$/,
 	/^text\/x-csrc$/,
 	/^text\/x-devicetree-source$/,
 	/^text\/x-emacs-lisp$/,
+	/^text\/x-groovy$/,
+	/^text\/x-kotlin$/,
 	/^text\/x-makefile$/,
 	/^text\/x-matlab$/,
 	/^text\/x-microdvd$/,
 	/^text\/x-modelica$/,
 	/^text\/x-mpl2$/,
 	/^text\/x-mpsub$/,
+	/^text\/x-nim$/,
+	/^text\/x-objc\+\+src$/,
 	/^text\/x-objcsrc$/,
 	/^text\/x-patch$/,
 	/^text\/x-qml$/,
@@ -847,6 +868,7 @@ export const WEAK_VALUES =
 	/^Bagpipe, /,
 	/^BALANCE NS32000/,
 	/^basic-16 executable/,
+	/^BBC Micro ROM /,
 	/^BCache (backing|cache) device/,
 	/ BCS executable/,
 	/^Beetle VM object file$/,
@@ -943,6 +965,7 @@ export const WEAK_VALUES =
 	/^DSDIFF audio bitstream data/,
 	/^DSF audio bitstream data/,
 	/^dSYM companion file$/,
+	/^DTSZ compressed data/,
 	/^DuckDB database file/,
 	/^Dyalog APL/,
 	/^Dzip archive data/,
@@ -1363,6 +1386,7 @@ export const WEAK_VALUES =
 	/^VBOX voice message data/,
 	/^very short file/,
 	/^very old \(C\/A\/T\) troff output data/,
+	/Video: (NTSC|PAL) Locale:/,
 	/^VISX image file/,
 	/^VISUAL OBJECTS,/,
 	/^VMS Alpha executable$/,
@@ -1417,6 +1441,7 @@ export const WEAK_VALUES =
 	/^7th Level game data$/,
 	/^AAX compressed data$/,
 	/^ABC notation \(old\)$/,
+	/^Ableton data \(generic\)$/,
 	/^AFS game data archive$/,
 	/^Access Video$/,
 	/^Adaptive Prediction Tree \(APT\) encoded bitmap$/,
@@ -1432,6 +1457,7 @@ export const WEAK_VALUES =
 	/^AngelCode Bitmap Font \(binary\)$/,
 	/^Any Password data$/,
 	/^APE ProSystem Atari 8-bit disk image/,
+	/^Arahne weave$/,
 	/^ArcMac compressed archive$/,
 	/^ARHANGEL compressed archive$/,
 	/^ArtBorder data$/,
@@ -1441,6 +1467,7 @@ export const WEAK_VALUES =
 	/^Atari XE Executable$/,
 	/^ATF Texture$/,
 	/^Atlantis Evolution game data archive$/,
+	/^Austin MOJO \(generic\)$/,
 	/^AutoDesk Revit Indexed Point Cloud$/,
 	/^AVZ Antiviral Toolkit data$/,
 	/^Award BIOS logo bitmap \(\d+x\d+\)/,
@@ -1475,6 +1502,7 @@ export const WEAK_VALUES =
 	/^CheeseCutter Tune$/,
 	/^Chromadrome 2 game data archive/,
 	/^Circuit Designer Macro$/,
+	/^Commandos: Strike Force save game$/,
 	/^Commodore 64 PCLINK container$/,
 	/^Commodore .*BASIC .*program/,
 	/^Compact compressed data/,
@@ -1567,6 +1595,7 @@ export const WEAK_VALUES =
 	/^GNU Privacy Guard public keyring \(generic\)$/,
 	/^GP32 Free eXecutable Encrypted$/,
 	/^Graham Systems Disk Sqeezer disk image$/,
+	/^Grapher for DOS Symbol$/,
 	/^GraphiCode Programmable Device Format$/,
 	/^HA compressed archive$/,
 	/^Hi-MD Minidisc ATRAC3\+? audio data container$/,
@@ -2330,6 +2359,7 @@ export const WEAK_VALUES =
 	/^IPLab image sequence \(type m\)$/,
 	/^IRIX Arena data$/,
 	/^ISO BMFF byte stream format$/,
+	/^ISO BMFF container/,
 	/^Java Web Start application descriptor$/,
 	/^Java serialization stream/,
 	/^JB BAHN layout$/,

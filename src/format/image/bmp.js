@@ -1,5 +1,4 @@
 import {Format} from "../../Format.js";
-import {RUNTIME} from "../../Program.js";
 
 export class bmp extends Format
 {

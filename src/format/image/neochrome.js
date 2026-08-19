@@ -2,14 +2,15 @@ import {Format} from "../../Format.js";
 
 export class neochrome extends Format
 {
-	name     = "Neochrome";
-	website  = "http://fileformats.archiveteam.org/wiki/NEOchrome";
-	ext      = [".neo", ".rst"];
-	magic    = ["deark: neochrome", "Neochrome :neo:"];
-	idMeta   = ({macFileType}) => macFileType==="NeoC";
-	mimeType = "image/x-neo";
-	fileSize = {".neo" : 32128};
-	auxFiles = (input, otherFiles) =>
+	name      = "Neochrome";
+	website   = "http://fileformats.archiveteam.org/wiki/NEOchrome";
+	ext       = [".neo", ".rst"];
+	magic     = ["deark: neochrome", "Neochrome :neo:", /^Atari NEOchrome bitmap/];
+	weakMagic = [/^Atari NEOchrome bitmap/];
+	idMeta    = ({macFileType}) => macFileType==="NeoC";
+	mimeType  = "image/x-neo";
+	fileSize  = {".neo" : 32128};
+	auxFiles  = (input, otherFiles) =>
 	{
 		// .neo can convert on it's own, but optionally uses an .rst
 		const otherFile = otherFiles.find(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));

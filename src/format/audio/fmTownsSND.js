@@ -7,7 +7,7 @@ export class fmTownsSND extends Format
 	website        = "https://wiki.multimedia.cx/index.php/FM_TOWNS_SND";
 	ext            = [".snd"];
 	forbidExtMatch = true;
-	magic          = ["FM-Towns SND", "FM Towns Sound (fmtowns)"];
+	magic          = ["FM-Towns SND"];	// This one is WAAY to weak: FM Towns Sound (fmtowns)
 	weakMagic      = true;
 	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:fmtowns][outType:mp3]", "vibe2wav[renameOut]"];

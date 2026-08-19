@@ -1,0 +1,374 @@
+TG Byte Software Setup Specialist Self-Extracting Installer Format
+=================================================================
+
+Scope
+-----
+
+This document specifies the Setup Specialist single-file installer dialect read
+by setupSpecialist.py.  It covers installer versions 1.30, 1.40, and 1.50, both
+known version-1.50 checksum modes, the older Win32s loader construction, stored
+and compressed members, automatic continuation-volume discovery, multi-volume
+fragments, and damaged/truncated input.
+
+Integer notation and encoding
+-----------------------------
+
+Unless a field says otherwise, every integer in a TGCF on-disk structure is
+unsigned and big-endian.  Unix timestamps are seconds since 1970-01-01 00:00:00
+UTC.  Names are byte strings from the Windows ANSI environment that built the
+installer; CP1252 is the appropriate display decoding.  Archive member names
+are NUL-terminated but their NUL bytes do not participate in header CRCs.
+
+Overall executable construction
+-------------------------------
+
+The file begins with a standard 16-bit Windows MZ/NE executable.  The NE header
+is located through the little-endian MZ e_lfanew field at file offset 0x3c.  A
+Setup Specialist bootstrap is identified by all of the following:
+
+  * MZ signature at offset 0;
+  * NE signature at e_lfanew;
+  * NE linker version 7.01; and
+  * the first name in the NE resident-name table is SSPBOOT.
+
+The resident-name table offset is the little-endian word at NE+0x26 and is
+relative to the NE header.  Its first item is a one-byte length followed by the
+module name and a two-byte ordinal.
+
+The standard NE image accounts for every byte before the first TGCF package.
+Setup Specialist uses one of two overlay constructions:
+
+  New construction:
+
+      SSPBOOT MZ/NE image
+      main TGCF package (archive kind 0x0024)
+
+  Win32s-compatible construction:
+
+      SSPBOOT MZ/NE image
+      bootstrap TGCF package (archive kind 0x0022)
+      zero separator/padding
+      optional WN32SLDR MZ/NE image
+      1024-byte TGPL volume table
+      main TGCF package (archive kind 0x0024)
+
+The bootstrap package is named ~SETUP.DCS and contains the temporary 32-bit
+setup executable.  When present, the loader is a normal NE program whose
+resident module name is WN32SLDR.  Installers that do not need the Win32s loader
+put only zero padding before TGPL.  No locator in the NE header points at TGCF.
+A reader locates TGCF records by their magic and then accepts a candidate only
+after its complete header and CRC validate.  This is deterministic record
+resynchronization, not a text or filename search.
+
+TGPL volume table
+-----------------
+
+The older construction has a fixed 1024-byte table ending exactly where the
+main TGCF package begins.  Its layout is:
+
+Offset  Size  Type  Meaning
+------  ----  ----  -------
+0x00       4  char  ASCII "TGPL"
+0x04       4  u32   little-endian total payload-file count
+0x08       -        consecutive per-volume records
+variable   1  u8    zero terminator
+variable   -        zero fill through byte 0x3ff
+
+Each per-volume record consists of a file count followed by a one-byte volume
+number.  Counts 1 through 254 use one byte.  A larger count is encoded as 0xff
+followed by a little-endian u16.  Volume numbers are consecutive beginning at
+one, and the sum of all counts must equal the total at 0x04.  TGPL therefore
+describes payload members across every volume even when the current executable
+contains only the first volume.  Its fixed size and position locate the end of
+WN32SLDR without guessing from an executable length field.
+
+TGCF package header
+-------------------
+
+Offset  Size  Type  Meaning
+------  ----  ----  -------
+0x00       4  char  ASCII "TGCF"
+0x04       2  u16   package kind: 0x0022 bootstrap, 0x0024 main
+0x06       2  u16   writer/version: 0x0130, 0x0140, or 0x0150
+0x08       2  u16   minimum reader version (0x0130)
+0x0a       1  u8    flags: 0x01 for bootstrap, 0x03 for main
+0x0b       2  u16   reserved (zero)
+0x0d       1  u8    platform (2, Windows)
+0x0e       4  u32   creation time
+0x12       4  u32   modification time
+0x16       2  u16   volume number (1 in a self-extracting first volume)
+0x18       2  u16   reserved (zero)
+0x1a       2  u16   archive-name byte length N
+0x1c       N  byte  archive name, without a NUL terminator
+0x1c+N     4  u32   header CRC
+
+Version words are BCD-like hexadecimal display values: 0x0130 is 1.30,
+0x0140 is 1.40, and 0x0150 is 1.50.  The package header ends immediately after
+its CRC; its first file record follows with no alignment.
+
+TGCF package trailer
+--------------------
+
+An intact package ends in this ten-byte trailer:
+
+Offset  Size  Type  Meaning
+------  ----  ----  -------
+0x00       4  char  ASCII "TGCF"
+0x04       6  u48   package length
+
+The length is big-endian and counts from the package-header T in TGCF through
+the byte immediately preceding the trailer.  Consequently:
+
+    package_header_offset = trailer_offset - trailer_length
+
+The trailer itself is not included.  It is unambiguous when scanning because
+bytes 0x04 and 0x05 are zero for these package sizes and because the six-byte
+back-pointer must land on a checked package header.  A missing trailer denotes
+a truncated package; checked records preceding the truncation remain usable.
+
+Continuation-volume files
+-------------------------
+
+Volume 1 is the self-extracting MZ/NE file.  A continuation is a standalone
+TGCF main package with no executable prefix.  Its package header begins at file
+offset zero, its volume field is 2 or greater, and its archive name is its own
+filename.  An intact continuation trailer points back to offset zero.
+
+Continuation names are derived from the volume-1 package name.  The final
+extension is removed and replaced with a decimal volume number.  Thus a package
+named NAME.EXE requests NAME.2, followed by NAME.3, and so on.  Lookup is only
+in the input executable's directory and is Windows-style case-insensitive.  A
+name is accepted only when exactly one directory entry matches.  Before any
+bytes are consumed, the continuation must also have:
+
+  * a valid package-header CRC;
+  * kind 0x0024 and the expected volume number;
+  * an embedded package name matching the derived filename;
+  * the same writer version, reader version, flags, platform, and CRC mode as
+    volume 1; and
+  * a first checked member header matching the pending split member.
+
+The extractor looks for the next volume only while the last logical member is
+an unfinished record with record-flag bit 0x0002.  Missing, ambiguous, or
+invalid companions are not guessed or searched for elsewhere: the currently
+recoverable prefix is emitted as partial and a warning identifies the rejected
+or absent volume.
+
+TGCF file record
+----------------
+
+Every member begins immediately after the previous member data.
+
+Offset  Size  Type  Meaning
+------  ----  ----  -------
+0x00       4  char  ASCII "TGCF"
+0x04       2  u16   record/header kind
+0x06       2  u16   writer/version
+0x08       2  u16   minimum reader version (0x0130)
+0x0a       1  u8    flags, equal to the containing package flags
+0x0b       2  u16   record flags
+0x0d       2  u16   compression method
+0x0f       1  u8    reserved (zero)
+0x10       4  u32   modification time
+0x14       4  u32   stored-data byte count C
+0x18       4  u32   expanded-data byte count U
+0x1c       4  u32   CRC of the U expanded bytes
+0x20       4  u32   Windows FILE_ATTRIBUTE_* bit mask
+0x24       4  u32   optional field, present only when record_flags & 4
+variable    -       three NUL-terminated strings, in order:
+                      1. canonical/8.3 source name
+                      2. original-case source name
+                      3. comment or password field
+variable    4  u32   file-header CRC
+variable    C  byte  stored member data
+
+Known record/header kinds are:
+
+  0x033a  bootstrap-package record used by version 1.30
+  0x033c  main-package record used by versions 1.30 and 1.40 and by one
+          version-1.50 writer configuration
+  0x0048  main-package record used by version 1.50
+
+Record-flag bit 0x0002 marks a volume-boundary fragment.  The last record in one
+volume and first record in the next repeat the logical member identity and each
+contains exactly its own C stored bytes.  Repeated identity fields are record
+kind/version/flags, method, modification time, expanded size, attributes,
+optional value, and all three names.  The stored-data pieces are concatenated
+in volume order.  A method-4 continuation starts in the middle of the existing
+zlib stream and therefore has no new zlib header.
+
+The data-CRC field in the fragment that completes the stream is the CRC of the
+complete expanded member.  A non-final fragment's field is structurally covered
+by that fragment's header CRC but is not required to equal either the final CRC
+or the CRC of its currently expanded prefix.  Completion is established by the
+zlib end marker, expanded size, and the completing fragment's data CRC.  For
+method 0, completion is established by expanded size and CRC.  Bit 0x0004
+inserts the optional u32 shown above.  Other record-flag bits are not defined in
+this dialect.
+
+Compression method 0 stores bytes verbatim.  Compression method 4 is a normal
+zlib-wrapped DEFLATE stream (zlib header, DEFLATE data, and Adler-32 trailer).
+No encryption layer is present.  The comment/password strings are ordinarily
+empty but are still structurally required.
+
+The attribute word is the Win32 dwFileAttributes value.  Values commonly
+meaningful here include 0x00000001 read-only, 0x00000002 hidden, 0x00000020
+archive, 0x00000080 normal, and 0x00000800 compressed.  Bits may be combined.
+The extractor makes output readable by user and group rather than recreating a
+read-only bit that would conflict with that requirement.
+
+CRC algorithms and logical byte order
+-------------------------------------
+
+A package chooses one CRC mode.  The mode is discovered by checking its stored
+package-header CRC and is then used for all member-header and expanded-data CRCs
+in that package.
+
+  standard mode:
+      ordinary reflected CRC-32/ISO-HDLC as returned by zlib.crc32(data)
+
+  legacy mode:
+      zlib.crc32(data, 0xffffffff) XOR 0xffffffff
+
+Versions 1.30 and 1.40 use standard mode.  Version 1.50 exists in both standard
+and legacy modes; the record kind alone does not select it.  Both algorithms
+produce zero for an empty byte string.
+
+Although integers are big-endian on disk, a header CRC covers the logical
+in-memory record serialized little-endian as follows.  The stored CRC field is
+never included.
+
+Package-header CRC byte sequence:
+
+    "TGCF"
+    LE16(kind), LE16(writer), LE16(minimum_reader)
+    u8(flags)
+    LE16(reserved)
+    u8(platform)
+    LE32(created), LE32(modified)
+    LE16(volume), LE16(reserved2), LE16(name_length)
+    name bytes
+
+File-header CRC byte sequence:
+
+    "TGCF"
+    LE16(record_kind), LE16(writer), LE16(minimum_reader)
+    u8(flags)
+    LE16(record_flags), LE16(compression_method)
+    u8(reserved)
+    LE32(modified), LE32(stored_size), LE32(expanded_size)
+    LE32(expanded_data_crc), LE32(attributes)
+    [LE32(optional_field), only if record_flags & 4]
+    canonical-name bytes, without NUL
+    original-name bytes, without NUL
+    comment/password bytes, without NUL
+
+The member data CRC is calculated over expanded bytes, never compressed bytes.
+A complete member is valid only when the header CRC, physical stored length,
+DEFLATE end marker when applicable, expanded size, and expanded-data CRC all
+agree.
+
+SETUP.INF project database and install destinations
+---------------------------------------------------
+
+The main archive contains a project database named SETUP.INF.  Runtime support
+members can precede it.  The database begins with ASCII TGJN followed by its
+project-format revision and Setup Specialist configuration data.  It is itself
+an ordinary TGCF member; therefore its complete byte content is already covered
+by the member length and CRC rules above.
+
+TGJN strings used by its file-action table have this self-delimiting encoding:
+
+  length 0 through 254:
+      u8 length, that many bytes, NUL
+
+  length 255 through 65534:
+      0xff, LE16 length, that many bytes, NUL
+
+  length 65535 or greater:
+      0xff, 0xffff, LE32 length, that many bytes, NUL
+
+A file-action record is tagged by byte 0x02 and starts:
+
+    u8  tag = 0x02
+    TGJN_STRING source_name
+    u32 little-endian file-action flags
+    TGJN_STRING destination_directory
+
+The rest of the project database holds installer presentation, components,
+registry edits, shortcuts, INI edits, license/readme content, and optional
+billboard resources.  Those fields control installation behavior but do not
+change TGCF member boundaries or bytes and are preserved verbatim with
+--all.  Extraction needs only the checked member table and the file-action
+prefix above.
+
+The source_name can be either the full source path or its basename, depending
+on the Setup Specialist project option used when building the archive.  The
+TGCF original-case member name supplies the corresponding form.  Matching is
+case-insensitive, exact source path first, then exact basename.  Multiple file
+actions can deliberately reference one archived member; every distinct
+non-empty destination is an install action.  An empty destination means the
+default installation directory, but is ignored when the same member also has a
+non-empty action (the empty occurrence is then a non-install resource reference
+such as a billboard).  Members not present in the file-action table are still
+resources and are extracted under SOURCE using their archived source path.
+
+Output path model
+-----------------
+
+Windows destination variables cannot be expanded meaningfully on a non-Windows
+analysis host.  The extractor therefore produces a safe virtual installation
+root while retaining the installer layout:
+
+    %INSTALLDIR%       -> INSTALLDIR/
+    %WINSYSDIR%        -> WINSYSDIR/
+    %WINDIR%           -> WINDIR/
+    %COMMONFILESDIR%   -> COMMONFILESDIR/
+    any %NAME%         -> NAME/
+    C:\path             -> ABSOLUTE/C/path/
+    \\server\share      -> UNC/server/share/
+    unassigned member  -> SOURCE/[drive/]source/path
+
+The destination field is a directory.  The basename of the member source name
+is appended to it.  Path traversal components are neutralized.  Identical
+duplicate writes are coalesced; different bytes aimed at the same path are
+retained with a .duplicate-N suffix.  Recovered incomplete streams use a
+.partial suffix and complete streams that fail size/CRC validation use a
+.damaged suffix, preventing recovered corrupt bytes from masquerading as the
+intended installed file.
+
+Runtime members through SETUP.INF are installer internals rather than installed
+payload.  They are omitted by default.  --all adds them under
+_setup_specialist/internal, extracts the bootstrap-package members, separates
+the raw SSPBOOT, optional WN32SLDR, and TGPL layers, preserves separator
+padding, and writes a generated _setup_specialist/manifest.json.  No generated
+metadata is written without --all.  The manifest lists every consumed volume
+with its path, volume number, size, and SHA-256 digest, and lists each logical
+member's physical fragment offsets.
+
+Recognition, damage, and byte accounting
+----------------------------------------
+
+Recognition occurs before the output directory is created.  It requires the
+exact SSPBOOT NE identity and a supported checksummed main-package header.  A
+main header can therefore still identify a correctly formatted file truncated
+before its first complete member.  Failure of the identity checks is an
+unsupported format and produces no output.
+
+After recognition, damage is local rather than fatal.  Each valid file header
+states an exact data length.  A truncated stored region is fed to zlib so its
+valid prefix can be recovered.  A non-final DEFLATE stream with no validated
+continuation is partial.  If a header is damaged, the reader advances only to a
+later TGCF file header whose complete structure and CRC validate in the same
+package; the intervening bytes are reported as damaged.  Thus recovery does not
+depend on a compressed-data signature or guessed length.  Continuation
+filenames follow the exact package naming rule above and every consumed
+continuation is independently checked.
+
+Every input byte belongs to exactly one of these classes: standard MZ/NE image,
+checked package header, checked file header, member stored data, package trailer,
+documented zero separator, optional standard WN32SLDR MZ/NE image, TGPL table,
+or a specifically reported damaged/truncated range.  Member expanded bytes are
+either installed payload/resources, runtime internals made available by --all,
+or a reported unrecoverable stream.  This classification is also recorded with
+exact offsets in the --all JSON manifest.

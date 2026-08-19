@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 const _DMG_DISK_IMAGE_MAGIC = [/^fmt\/1071( |$)/];
 export {_DMG_DISK_IMAGE_MAGIC};
 
-const DMG_MAGIC = ["Macintosh Disk image", "zlib compressed data", "ZLIB compressed data", "Apple UDIF disk image", "Format: Universal Disk Image Format", "application/x-apple-diskimage"];
+const DMG_MAGIC = ["Macintosh Disk image", "zlib compressed data", "ZLIB compressed data", "Apple UDIF disk image", "Format: Universal Disk Image Format", "application/x-apple-diskimage", /Apple DMG, version \d+$/];
 
 export class dmg extends Format
 {

@@ -6,6 +6,7 @@ export class ldacAudio extends Format
 	ext            = [".ldac"];
 	forbidExtMatch = true;
 	magic          = ["LDAC (ldac)"];
+	weakMagic      = true;
 	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:ldac][outType:mp3]"];
 }

@@ -7,7 +7,7 @@ export class quarkXPress extends Format
 	ext        = [".qxd", ".qxp", ".qxd report"];
 	safeExt    = "";
 	magic      = [
-		"Quark XPress document", "QuarkXpress project", "QuarkXPress Tags", "XPress Tags", "Intel Quark Express Document", "QuarkXPress Document", /Quark Express Document/,
+		"Quark XPress document", "QuarkXpress project", "QuarkXPress Tags", "XPress Tags", "Intel Quark Express Document", "QuarkXPress Document", /Quark Express Document/, "application/vnd.quark.quarkxpress",
 		/^fmt\/(650|652|1317|1318|1319|1321|1322|1323|1325|1442|1443|1444)( |$)/, /^x-fmt\/182( |$)/
 	];
 	idMeta     = ({macFileType, macFileCreator}) => ["XDOC", "XTMP"].includes(macFileType) && macFileCreator.startsWith("XPR");

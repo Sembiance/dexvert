@@ -95,6 +95,7 @@ export default
 
 		// Other Archives
 		abackupDiskImage                            : {name : "ABackup Disk Image", ext : [".adf"], magic : ["ABackup backup disk image"]},
+		abletonSkin                                 : {name : "Ableton Skin", ext : [".ask"], magic : ["Ableton Skin"]},
 		acornCPMDiskImage                           : {name : "Acorn CP/M disk image", ext : [".dsk"], magic : ["Acorn CP/M disk image"]},
 		acornDiscFilingSystemDiskImage              : {name : "Acorn Disc Filing System disk image", ext : [".adf"], magic : ["Acorn Disc Filing System disk image"]},
 		activeMARKProtectedArchive                  : {name : "ActiveMARK-protected archive", ext : [".cs", ".dso"], magic : ["ActiveMARK-protected archive"]},
@@ -268,6 +269,7 @@ export default
 
 	audio :
 	{
+		abletonSoundData                : {name : "Ableton Sound Data", ext : [".asd"], magic : ["Ableton Sound Data"]},
 		appleIIgsAudio                  : {name : "Apple IIgs Audio", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="SND"},
 		appleIIgsSampledInstrumentFile  : {name : "Apple IIgs Sampled Instrument File", magic : ["Apple IIgs Sampled Instrument File"]},
 		audioSimAnalogueSoundfile       : {name : "AudioSim analogue Soundfile", ext : [".snd"], magic : ["AudioSim analogue Soundfile"]},
@@ -542,6 +544,7 @@ export default
 
 	font :
 	{
+		abletonFont                      : {name : "Ableton Font", ext : [".fnt"], magic : ["Ableton Font"]},
 		aladdin4DFont                    : {name : "Aladdin 4D Font", ext : [".4df", ".4dff"], magic : ["Aladdin 4D Font"], weakMagic : true},
 		allwaysScreenFont                : {name : "Allways Screen Font", ext : [".asf"], magic : ["Allways Screen Font"], weakMagic : true},
 		alterImageFont                   : {name : "AlterImage Font", ext : [".aif"], magic : ["AlterImage Font"], weakMagic : true},
@@ -685,6 +688,7 @@ export default
 		cadvanceDrawing                : {name : "CADVANCE drawing", ext : [".vwf", ".bin"], magic : ["CADVANCE drawing"]},
 		cadVantageDrawing              : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
 		calamusVectorDocument          : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
+		canvasDrawing                  : {name : "Canvas drawing)", ext : [".cnv"], magic : ["Canvas drawing"]},
 		chasysDrawIESDrawing           : {name : "Chasys Draw IES drawing", ext : [".cd5"], magic : ["Chasys Draw IES drawing", /^fmt\/665( |$)/], weakMagic : true},
 		coMaFAXPage                    : {name : "CoMa FAX page", ext : [".f01", ".f02", ".f03"], magic : ["CoMa FAX page"]},
 		comicSetterProject             : {name : "Comic Setter project", magic : ["Comic Setter project"]},
@@ -1142,7 +1146,7 @@ export default
 		civilizationIIISaveGame                       : {name : "Civilization III save game", ext : [".bic", ".bix"], magic : [/^Civilization III BI[CX] save game/]},
 		civilWarBattleData                            : {name : "The Civil War Battle data", ext : [".btl"], magic : ["The Civil War Battle data"]},
 		clawCustomLevel                               : {name : "Claw custom level", ext : [".wwd"], magic : ["Claw custome level"], weakMagic : true},
-		clickAndCreateGameDataArchive                 : {name : "Click and Create game data Archive", ext : [".cca", ".gam", ".ccn"], magic : ["Click and Create game data Archive", "Archive: Click & Create Archive (.CCA)"]},
+		clickAndCreateGameDataArchive                 : {name : "Click and Create game data Archive", ext : [".cca", ".gam", ".ccn"], magic : ["Click and Create game data Archive", "Archive: Click & Create Archive (.CCA)", "Click and Create protected game data Archive"]},
 		cliveBarkersJerichoSaveGame                   : {name : "Clive Barker's Jericho save game", ext : [".cbjericho"], magic : ["Clive Barker's Jericho save game"]},
 		cocktailFileModule                            : {name : "Cocktail File Module", magic : ["Cocktail File Module"]},
 		commanderKeen6Config                          : {name : "Commander Keen 6 config", ext : [".ck6"], magic : ["Commander Keen 6 config"], weakMagic : true},
@@ -2061,6 +2065,7 @@ export default
 		abilityDataBase                          : {name : "Ability DataBase", ext : [".xdb"], magic : ["Ability DataBase"], weakMagic : true},
 		abilityGraphic                           : {name : "Ability Graphic", ext : [".xgr"], magic : ["Ability Graphic"], weakMagic : true},
 		abilitySpreadSheet                       : {name : "Ability SpreadSheet", ext : [".xss"], magic : ["Ability SpreadSheet"], weakMagic : true},
+		abletonAnimationData                     : {name : "Ableton Animation data", ext : [".ani"], magic : ["Ableton Animation data"]},
 		abletonProjectConfiguration              : {name : "Ableton project configuration", ext : [".cfg"], magic : ["Ableton project configuration"]},
 		abletonWarpAnalysis                      : {name : "Ableton Warp Analysis", ext : [".asd"], magic : ["Ableton Warp Analysis"], weakMagic : true},
 		aboveDISCConfiguration                   : {name : "Above DISC Configuration", ext : [".cfg"], magic : ["Above DISC Configuration"]},
@@ -2320,6 +2325,7 @@ export default
 		caligariTrueSpaceData                    : {name : "Caligari TrueSpace Data", magic : [/^Caligari TrueSpace data/]},
 		callusSavestate                          : {name : "Callus savestate", ext : [".cs0"], magic : ["Callus savestate"], weakMagic : true},
 		calmiraAlias                             : {name : "Calmira Alias", ext : [".als"], magic : ["Calmira Alias"], weakMagic : true},
+		canvasPenBrushSettings                   : {name : "Canvas Pen/brush settings", ext : [".apn", ".dpn", ".npn", ".ppn", ".spn"], magic : ["Canvas Pen/brush settings"]},
 		capellaGalleryDataFile                   : {name : "Capella gallery data file", ext : [".cag"], magic : ["Capella gallery data file"]},
 		capellaMusicNotation                     : {name : "Capella music notation", ext : [".cap"], magic : ["Capella music notation"]},
 		cardSoftPCMCIACardLibrary                : {name : "CardSoft PCMCIA Card Library", ext : [".clb"], magic : ["CardSoft PCMCIA Card Library"], weakMagic : true},
@@ -2598,7 +2604,7 @@ export default
 		fileExpressQuickScan                     : {name : "File Express Quick Scan", ext : [".qss"], magic : ["File Express Quick Scan"]},
 		fileStar2ToolBar                         : {name : "FileStar/2 toolBar", ext : [".bar"], magic : ["FileStar/2 toolBar"]},
 		fileWizardConfiguration                  : {name : "File Wizard Configuration", ext : [".cfg", ".swp"], magic : ["File Wizard Configuration"]},
-		finalCutProject                          : {name : "Final Cut project", ext : [".fcp"], magic : ["Final Cut project"]},
+		finalCutProject                          : {name : "Final Cut project", ext : [".fcp"], magic : ["Final Cut project", /^fmt\/2087( |$)/]},
 		finaleEnigmaBinaryFormat                 : {name : "Finale Enigma Binary Format", ext : [".bin"], magic : ["Finale (generic binary format)", /^fmt\/397( |$)/]},
 		finaleGuitar                             : {name : "Finale Guitar", ext : [".mus", ".lib", ".ftm"], magic : ["Finale Guitar"]},
 		finaleNotePad                            : {name : "Finale NotePad", ext : [".mus"], magic : ["Finale NotePad"], weakMagic : true},
@@ -3735,6 +3741,7 @@ export default
 		windowsNTLDRBootLoader                   : {name : "Windows NTLDR boot loader", magic : ["Windows NTLDR boot loader"]},
 		windowsNT4OPL3DriverPatchBank            : {name : "Windows NT4 OPL3 driver Patch bank", ext : [".pat"], magic : ["Windows NT4 OPL3 driver Patch bank"]},
 		windowsPolicyData                        : {name : "Windows Policy data", ext : [".pol"], magic : ["Windows Policy data"]},
+		windowsPrinterDescription                : {name : "Windows Printer Description", ext : [".wpd"], magic : ["Windows Printer Description"]},
 		windowsShimDatabase                      : {name : "Windows Shim Database", ext : [".sdb"], magic : ["Windows application compatibility Shim DataBase", "Windows Shim Database"]},
 		windowsSidebarStyle                      : {name : "Windows Sidebar Style", magic : ["Windows Sidebar Style"]},
 		windowsTerminalConfiguration             : {name : "Windows Terminal Configuration", ext : [".trm"], magic : ["Windows Terminal Configuration Settings (v3.3)"]},

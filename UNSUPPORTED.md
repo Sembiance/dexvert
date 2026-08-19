@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,941)
+# Unsupported File Formats (3,948)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (262)
+## Archive (263)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -14,6 +14,7 @@ Family/Format | Name | Extensions | Notes
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?format=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?format=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 [archive/abackupDiskImage](https://discmaster.textfiles.com/search?format=abackupDiskImage) | ABackup Disk Image | .adf | 
+[archive/abletonSkin](https://discmaster.textfiles.com/search?format=abletonSkin) | Ableton Skin | .ask | 
 [archive/acornCPMDiskImage](https://discmaster.textfiles.com/search?format=acornCPMDiskImage) | Acorn CP/M disk image | .dsk | 
 [archive/acornDiscFilingSystemDiskImage](https://discmaster.textfiles.com/search?format=acornDiscFilingSystemDiskImage) | Acorn Disc Filing System disk image | .adf | 
 [archive/actionPresentation](https://discmaster.textfiles.com/search?format=actionPresentation) | Action! presentation | .acp .act .sta | 
@@ -273,9 +274,10 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (59)
+## Audio (60)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
+[audio/abletonSoundData](https://discmaster.textfiles.com/search?format=abletonSoundData) | Ableton Sound Data | .asd | 
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?format=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. No actual sampled audio, just parameters and register settings for the OPL2 FM chip.
 [audio/amSound](https://discmaster.textfiles.com/search?format=amSound) | AM Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/amSound/)
 [audio/appleIIgsAudio](https://discmaster.textfiles.com/search?format=appleIIgsAudio) | Apple IIgs Audio |  | 
@@ -601,11 +603,12 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (120)
+## Font (121)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
 [font/threeDStudioDOSVectorFont](https://discmaster.textfiles.com/search?format=threeDStudioDOSVectorFont) | 3DStudio DOS vector Font | .fnt | 
+[font/abletonFont](https://discmaster.textfiles.com/search?format=abletonFont) | Ableton Font | .fnt | 
 [font/aladdin4DFont](https://discmaster.textfiles.com/search?format=aladdin4DFont) | Aladdin 4D Font | .4df .4dff | 
 [font/allwaysScreenFont](https://discmaster.textfiles.com/search?format=allwaysScreenFont) | Allways Screen Font | .asf | 
 [font/alterImageFont](https://discmaster.textfiles.com/search?format=alterImageFont) | AlterImage Font | .aif | 
@@ -727,7 +730,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (186)
+## Image (187)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -764,6 +767,7 @@ Family/Format | Name | Extensions | Notes
 [image/cadStdDrawing](https://discmaster.textfiles.com/search?format=cadStdDrawing) | CadStd drawing | .cad | 
 [image/cadvanceDrawing](https://discmaster.textfiles.com/search?format=cadvanceDrawing) | CADVANCE drawing | .vwf .bin | 
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?format=calamusVectorDocument) | Calamus Vector Document | .cvd | 
+[image/canvasDrawing](https://discmaster.textfiles.com/search?format=canvasDrawing) | Canvas drawing) | .cnv | [12 sample files](https://sembiance.com/fileFormatSamples/image/canvasDrawing/)
 [image/chasysDrawIESDrawing](https://discmaster.textfiles.com/search?format=chasysDrawIESDrawing) | Chasys Draw IES drawing | .cd5 | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?format=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
 [image/coMaFAXPage](https://discmaster.textfiles.com/search?format=coMaFAXPage) | CoMa FAX page | .f01 .f02 .f03 | 
@@ -1092,7 +1096,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,764)
+## Other (2,767)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1143,6 +1147,7 @@ Family/Format | Name | Extensions | Notes
 [other/abilityDataBase](https://discmaster.textfiles.com/search?format=abilityDataBase) | Ability DataBase | .xdb | 
 [other/abilityGraphic](https://discmaster.textfiles.com/search?format=abilityGraphic) | Ability Graphic | .xgr | 
 [other/abilitySpreadSheet](https://discmaster.textfiles.com/search?format=abilitySpreadSheet) | Ability SpreadSheet | .xss | 
+[other/abletonAnimationData](https://discmaster.textfiles.com/search?format=abletonAnimationData) | Ableton Animation data | .ani | 
 [other/abletonProjectConfiguration](https://discmaster.textfiles.com/search?format=abletonProjectConfiguration) | Ableton project configuration | .cfg | 
 [other/abletonWarpAnalysis](https://discmaster.textfiles.com/search?format=abletonWarpAnalysis) | Ableton Warp Analysis | .asd | 
 [other/aboveDISCConfiguration](https://discmaster.textfiles.com/search?format=aboveDISCConfiguration) | Above DISC Configuration | .cfg | 
@@ -1548,6 +1553,7 @@ Family/Format | Name | Extensions | Notes
 [other/callOfDutyGameData](https://discmaster.textfiles.com/search?format=callOfDutyGameData) | Call of Duty game data | .ff | 
 [other/callusSavestate](https://discmaster.textfiles.com/search?format=callusSavestate) | Callus savestate | .cs0 | 
 [other/calmiraAlias](https://discmaster.textfiles.com/search?format=calmiraAlias) | Calmira Alias | .als | 
+[other/canvasPenBrushSettings](https://discmaster.textfiles.com/search?format=canvasPenBrushSettings) | Canvas Pen/brush settings | .apn .dpn .npn .ppn .spn | 
 [other/capellaGalleryDataFile](https://discmaster.textfiles.com/search?format=capellaGalleryDataFile) | Capella gallery data file | .cag | 
 [other/capellaMusicNotation](https://discmaster.textfiles.com/search?format=capellaMusicNotation) | Capella music notation | .cap | 
 [other/cardSoftPCMCIACardLibrary](https://discmaster.textfiles.com/search?format=cardSoftPCMCIACardLibrary) | CardSoft PCMCIA Card Library | .clb | 
@@ -3750,6 +3756,7 @@ Family/Format | Name | Extensions | Notes
 [other/windowsNT4OPL3DriverPatchBank](https://discmaster.textfiles.com/search?format=windowsNT4OPL3DriverPatchBank) | Windows NT4 OPL3 driver Patch bank | .pat | 
 [other/windowsNTLDRBootLoader](https://discmaster.textfiles.com/search?format=windowsNTLDRBootLoader) | Windows NTLDR boot loader |  | 
 [other/windowsPolicyData](https://discmaster.textfiles.com/search?format=windowsPolicyData) | Windows Policy data | .pol | 
+[other/windowsPrinterDescription](https://discmaster.textfiles.com/search?format=windowsPrinterDescription) | Windows Printer Description | .wpd | 
 [other/windowsShimDatabase](https://discmaster.textfiles.com/search?format=windowsShimDatabase) | Windows Shim Database | .sdb | 
 [other/windowsSidebarStyle](https://discmaster.textfiles.com/search?format=windowsSidebarStyle) | Windows Sidebar Style |  | 
 [other/windowsTerminalConfiguration](https://discmaster.textfiles.com/search?format=windowsTerminalConfiguration) | Windows Terminal Configuration | .trm | 

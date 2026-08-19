@@ -1,11 +1,11 @@
-# Supported File Formats (3,841)
+# Supported File Formats (3,843)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (694)
+## Archive (695)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 0000 Package Archive | .0000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/package0000Archive/)
@@ -60,9 +60,9 @@ archive | AOLSetup Installer | .exe | [vibeExtract](https://github.com/Sembiance
 archive | aPACK Packed | .exe .com | cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/aPACKPacked/)
 archive | [Apple 2MG Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .2mg | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/apple2MG/)
 archive | Apple Disk Copy Image | .img .image .bin | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/diskCopyImage/)
-archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .dmg | [dmg2img](http://vu1tur.eu.org/tools) [sevenZip](http://p7zip.sourceforge.net/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/dmg/)
+archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .dmg | [dmg2img](http://vu1tur.eu.org/tools) [sevenZip](http://p7zip.sourceforge.net/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/dmg/)
 archive | [Apple DiskCopy](https://www.discferret.com/wiki/Apple_DiskCopy_4.2) |  | [dd](https://www.gnu.org/software/coreutils/) [IsoBuster](https://www.isobuster.com/isobuster.php) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopy/)
-archive | Apple DiskCopy NDIF |  | [undiskcopy](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopyNDIF/)
+archive | Apple DiskCopy NDIF |  | [undiskcopy](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopyNDIF/)
 archive | [Apple DOS Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Apple_II)) | .dsk .po .hdv | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [19 sample files](https://sembiance.com/fileFormatSamples/archive/appleDOSDiskImage/)
 archive | Apple II Pascal Disk Image | .dsk | [acx](https://github.com/AppleCommander/AppleCommander) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/apple2PascalDiskImage/)
 archive | [Apple Safari Webarchive](http://fileformats.archiveteam.org/wiki/Webarchive_(Safari)) | .webarchive | [pywebarchive](https://pypi.org/project/pywebarchive/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/appleSafariWebarchive/)
@@ -307,7 +307,7 @@ archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/
 archive | Imperium Galactica 2 Game Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/imperiumGalactica2GameArchive/)
 archive | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/infinityEngineFile/)
 archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Setup_self-extracting_archive) | .exe | [innoextract](https://github.com/dscharrer/innoextract) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/)
-archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [vibeExtract](https://github.com/Sembiance/dexvert) | [29 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
+archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [vibeExtract](https://github.com/Sembiance/dexvert) | [38 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
 archive | [InstallShield Archive](http://fileformats.archiveteam.org/wiki/InstallShield_archive_(IBT)) | .ibt | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldArchive/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [UniExtract](https://www.legroom.net/software/uniextract) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldCAB/)
@@ -363,12 +363,12 @@ archive | M88 Movie Archive | .m88 | [na_game_tool_extract](https://nihav.org/ga
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt .sea | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [28 sample files](https://sembiance.com/fileFormatSamples/archive/compactPro/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [34 sample files](https://sembiance.com/fileFormatSamples/archive/macBinary/) - We include MacBinary 1, 2, 3 into this single format
 archive | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [vibeExtract](https://github.com/Sembiance/dexvert) | [25 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/)
-archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [resource_dasm](https://github.com/fuzziqersoftware/resource_dasm) [deark](https://entropymine.com/deark/) | [39 sample files](https://sembiance.com/fileFormatSamples/archive/rsrc/)
+archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [resource_dasm](https://github.com/fuzziqersoftware/resource_dasm) [deark](https://entropymine.com/deark/) | [40 sample files](https://sembiance.com/fileFormatSamples/archive/rsrc/)
 archive | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .smi | [vibeExtract](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [projectorRays](https://github.com/ProjectorRays/ProjectorRays) [directorCastRipper12](https://github.com/n0samu/DirectorCastRipper) [undirector](https://github.com/Sembiance/dexvert/) [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) | [63 sample files](https://sembiance.com/fileFormatSamples/archive/macromediaDirector/)
 archive | [Macromedia Flash Compiled EXE](http://fileformats.archiveteam.org/wiki/SWF) | .exe | [EXE2SWFExtractor](https://sothink.com/product/flashdecompiler/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/swfEXE/)
 archive | Macromedia Projector |  | [director_files_extract](https://github.com/n0samu/director-files-extract) | [18 sample files](https://sembiance.com/fileFormatSamples/archive/macromediaProjector/)
-archive | MacroMind Projector/Director |  | [vibeExtract](https://github.com/Sembiance/dexvert) | [34 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/)
+archive | MacroMind Projector/Director |  | [vibeExtract](https://github.com/Sembiance/dexvert) | [36 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/)
 archive | MADS HAG Game Archive | .hag | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/madsHAGGameArchive/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Magic_Shadow_Archiver)) | .msa | [msa](https://web.archive.org/web/20060507110406/https://www.uni-ulm.de/~s_thuth/ix/msa-0.1.0.tar.gz) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox/MIME Entity](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [ripmime](https://github.com/inflex/ripMIME) | [20 sample files](https://sembiance.com/fileFormatSamples/archive/mbox/)
@@ -402,7 +402,7 @@ archive | Monkey Island 3 Archive | .bun | [gameextractor](https://sourceforge.n
 archive | [Monster Bash Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Monster_Bash)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/monsterBashGameArchive/)
 archive | MOON Archive | .000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moonArchive/)
 archive | Moonbase Commander game data archive | .cmp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/moonbaseCommanderGameDataArchive/)
-archive | MoPaQ Archive | .mpq | [vibeExtract](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/mpq/)
+archive | MoPaQ Archive | .mpq | [vibeExtract](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/mpq/)
 archive | Motorhead PDI game archive | .pdi | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/motorheadPDI/)
 archive | MOZLZ4 Compressed | .mozlz4 .jsonlz4 | [mozlz4](https://github.com/jusw85/mozlz4) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mozlz4/)
 archive | MPAK game data archive | .mpak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/mpakGameDataArchive/)
@@ -421,7 +421,7 @@ archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | 
 archive | Netscape SNM Archive | .snm | [vibeExtract](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/)
 archive | Neverwinter Nights MOD | .mod .nwm | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsMOD/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/news/) - Converter currently doesn't handle when just a single newsgroup message is saved in a file
-archive | Newton Package | .pkg | [vibeExtract](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
+archive | Newton Package | .pkg | [vibeExtract](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImage/)
 archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImageDump/)
 archive | Nibiru GRP Archive | .grp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/nibiruGRP/)
@@ -536,7 +536,7 @@ archive | Rumble Fighter game data archive | .nsz | [gameextractor](https://sour
 archive | Runes of Magic Game Archive | .fdb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/runesOfMagicGameArchive/)
 archive | [SAB Diskette Utility disk image](http://fileformats.archiveteam.org/wiki/SABDU) | .sdu | [dd](https://www.gnu.org/software/coreutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/sabDisketteUtilityDiskImage/)
 archive | Sacred PAK Archive | .pak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/sacredPAK/)
-archive | [Sango Fighter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/sangoFighterGameArchive/)
+archive | [Sango Fighter Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/sangoFighterGameArchive/)
 archive | [SAP Thomson Disk Image](http://nostalgies.thomsonistes.org/transfert.html) | .sap | [sapfs](http://nostalgies.thomsonistes.org/transfert.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sapThomsonDiskImage/)
 archive | SAR Archive | .sar | [unar](https://github.com/incbee/Unarchiver) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sarArchive/)
 archive | SAVERAM Data | .fls .ram | [loadram](https://discmaster.textfiles.com/view/29622/ibm0040-0049/ibm0047.tar/ibm0047/LEGATOB1.ZIP/LOADRAM.EXE) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/saveramData/)
@@ -553,6 +553,7 @@ archive | [Self-Dissolving Archive](http://fileformats.archiveteam.org/wiki/SDA)
 archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .sfx | [unar](https://github.com/incbee/Unarchiver) [DirMaster](https://style64.org/dirmaster) [izArc](https://www.izarc.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/selfExtractingLHA/)
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
 archive | Setup Program Archive | .mva .mvb | [vibeExtract](https://github.com/Sembiance/dexvert) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
+archive | Setup Specialist Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/setupSpecialist/)
 archive | SEXT Textures | .textures | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sextTextures/)
 archive | SFPack Compressed SoundFont | .sfpack | [sfpack](https://archive.org/details/SFPack) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/sfpackPacked/)
 archive | SGA game data archive | .sga | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/sgaGameDataArchive/)
@@ -1071,7 +1072,7 @@ document | PCP Help Text | .pag | [strings](https://www.gnu.org/software/binutil
 document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/peterNortonHelp/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [10 sample files](https://sembiance.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/PostScript) | .ps | [ps2pdf](https://ghostscript.com/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/ps/)
-document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx .potx | [soffice](https://www.libreoffice.org) | [21 sample files](https://sembiance.com/fileFormatSamples/document/powerPoint/)
+document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx .potx | [soffice](https://www.libreoffice.org) | [22 sample files](https://sembiance.com/fileFormatSamples/document/powerPoint/)
 document | Professional Page Document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/professionalPage/)
 document | [Professional Write Document](http://fileformats.archiveteam.org/wiki/Pfs:Write) | .pfs | [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/document/pfsWrite/)
 document | ProText Document |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/proText/)
@@ -1083,7 +1084,7 @@ document | Psion Spreadsheet | .spr | [strings](https://www.gnu.org/software/bin
 document | Psion TCR eBook | .tcr | [ebook_convert](https://calibre-ebook.com/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/psionTCReBook/)
 document | [Python Compiled Bytecode](http://fileformats.archiveteam.org/wiki/Python) | .pyc .pyo | [pycdc](https://github.com/zrax/pycdc) | [11 sample files](https://sembiance.com/fileFormatSamples/document/pythonCompiled/)
 document | Q&A Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/qAndADocument/)
-document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [quarkXPress6](https://archive.org/details/quarkxpress6.1version6.1r02004) [pageMaker7QuarkConverter](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) | [21 sample files](https://sembiance.com/fileFormatSamples/document/quarkXPress/) - Some samples don't convert: 1_8.5x11.qxd report, 10_11X14.qxd and 9_8.5X14.qxd report
+document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [quarkXPress6](https://archive.org/details/quarkxpress6.1version6.1r02004) [pageMaker7QuarkConverter](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) | [22 sample files](https://sembiance.com/fileFormatSamples/document/quarkXPress/) - Some samples don't convert: 1_8.5x11.qxd report, 10_11X14.qxd and 9_8.5X14.qxd report
 document | [Quattro Pro](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .wq1 .wq2 .wb1 .wb2 .wb3 .qpw | [soffice](https://www.libreoffice.org) [excel97](https://archive.org/details/office97standard_201912/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/quattroPro/)
 document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?title=Quill) | .doc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/quill/)
 document | RapidFile Memo | .mmo | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/rapidFileMemo/)
@@ -1741,7 +1742,7 @@ image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 
 image | [PABX Background](http://fileformats.archiveteam.org/wiki/PABX_background) | .pix | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pabxBackground/)
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) | [1 sample file](https://sembiance.com/fileFormatSamples/image/pmg/)
 image | [Paint.NET Image](http://fileformats.archiveteam.org/wiki/Paint.NET_image) | .pdn | [vibe2png](https://github.com/Sembiance/dexvert) [paintDotNet](https://archive.org/details/paint.net.4.3.12) | [16 sample files](https://sembiance.com/fileFormatSamples/image/paintDotNetImage/)
-image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [painterClassic](https://archive.org/details/Painter_Classic_Z-PTC-C10-R-001_MetaCreations_1998/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/painterRIF/)
+image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [painterClassic](https://archive.org/details/Painter_Classic_Z-PTC-C10-R-001_MetaCreations_1998/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/painterRIF/)
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | [recoil2png](http://recoil.sourceforge.net) | [13 sample files](https://sembiance.com/fileFormatSamples/image/paintPro/)
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop_(Atari_ST)) | .da4 .psc | [recoil2png](http://recoil.sourceforge.net) | [17 sample files](https://sembiance.com/fileFormatSamples/image/paintShop/)
 image | [PaintShop Pro](http://fileformats.archiveteam.org/wiki/PaintShop_Pro) | .psp .pspimage .pspbrush | [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/paintShopPro/)
@@ -2576,7 +2577,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (1,163)
+## Text (1,164)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | .NET assembly Installation Log | .installlog |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/dotNetAssemblyInstallLog/)
@@ -2604,6 +2605,7 @@ text | Adobe Illustrator Action | .aia |  | [10 sample files](https://sembiance.
 text | Adobe InDesign printing instructions report |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobeInDesignPrintingInstructionsReport/)
 text | Adobe Photoshop Lightroom template | .agtemplate |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/adobePhotoshopLightroomTemplate/)
 text | Adobe Portable Document Catalog Index | .pdx |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/adobePortableDocumentCatalogIndex/)
+text | Adobe PostScript Character Map | .ps |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/adobePostScriptCharacterMap/)
 text | Advanced Gravis Phoenix configuration | .phx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/advancedGravisPhoenixConfiguration/)
 text | Advanced Stream Redirector | .asx |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/advancedStreamRedirector/)
 text | Adventure Game Toolkit Messages | .msg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adventureGameToolkitMessages/)

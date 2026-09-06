@@ -219,11 +219,11 @@ export const WEAK_VALUES =
 	/^deark: tivariable/,
 	/^deark: zlib$/,
 
-	// Detect-It-Easy
+	// detectItEasy
 	// SEEN ONCE:
-	//		Format: Video and Media Data
-	// SEEN TWICE:
 	//		???
+	// SEEN TWICE:
+	//		Format: Video and Media Data
 	/^Archive: André Osterhues's Code Compression Algorithm \(ACCA\.\)$/,
 	/^Archive: (DCL|INSA|LZMA|Resources)$/,
 	/^Archive: Index of packed git objects/,
@@ -314,7 +314,11 @@ export const WEAK_VALUES =
 	/^dragon: PACK /,
 	/^dragon: SLF /,
 
-	// ffprobeID
+	// ffmpeg/ffprobeID
+	// SEEN ONCE:
+	//		Sega Dreamcast KAT (kat)
+	// SEEN TWICE:
+	//		???
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
 	/^AGSC Bank \(Metroid Prime 1\/2 GC\) \(agsc\)$/,
@@ -405,11 +409,12 @@ export const WEAK_VALUES =
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
 	//		image:RSystem.RsgFormat, image:Herb.GrpFormat
 	// SEEN TWICE:
-	//		image:Discovery.Pr1Format, image:Ego.AntFormat
+	//		image:Discovery.Pr1Format
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
 	/^image:Desire\.DesFormat /,
+	/^image:Ego\.AntFormat /,
 	/^image:Ffa\.Pt1Format /,
 	/^image:Gs\.PicFormat /,
 	/^image:JpegFormat /,
@@ -426,7 +431,7 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8
+	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, SND_3
 	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, CAR_RAC, CWG_VW, FLX, WAD_WAD, LIB_5, SAD_SAUD

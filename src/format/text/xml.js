@@ -2,7 +2,7 @@ import {Format} from "../../Format.js";
 
 const _XML_MAGIC = [
 	// generic XML
-	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", "XML Schema", "application/xml", /^fmt\/101( |$)/, /^x-fmt\/280( |$)/,
+	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", "XML Schema", "application/xml", /^fmt\/(101|875)( |$)/, /^x-fmt\/280( |$)/,
 	
 	// app specific XML	(NOTE: I could make a 'format/xmlFiles.js' that has each of these as it's own magic, but I would want to ensure that it's actually XML then by verifying it's valid xml)
 	// Also, some of these could be processed into something more usable, such as'Photo Font' etc.
@@ -54,6 +54,7 @@ const _XML_MAGIC = [
 	"Adobe Application Manager Package Info", "3ds Max XML Animation File", "QNX Package Manifest", "QNX Repository Manifest", "Keyhole - Google Earth Overlay", "DITA conditional processing profile", "News Industry Text Format", "Irrlicht Mesh",
 	"RealProducer Server Destination", "QGIS GRASS module definition", "VTK XML", "ParaView Data", /^Expression SketchFlow (data|Feedback)/, "Windows Communication Foundation reference", "Fritzing Part", "Azure Cloud Service Package Manifest",
 	"Azure Service Definition schema", "RetroPlatform Player RP9 manifest", "JMeter XML test plan", /^OpenShot (effect|export preset)/, "Intel VTune Amplifier XE Project", "eXtensible Music and Instruments Xml", "Xbox 360 User Interface",
+	/^Ghost Recon Engine (Environment|Gun|Kit|Mission|Projectile|sounds volume)$/,
 	/^Visual Studio (C\+\+ project Filters|Code Analysis Rule Set|Data Source|((\.NET )?(Visual )?[CJ]#?\+?\+?|Intel Fortran|JavaScript|Shared Code|SQL Server|Visual Basic) [Pp]roject|Natvis visualization|Publish profile|Project User Options|Settings|Test Metadata|Tools for Office add-in|unit test configuration)/,
 	/^fmt\/(205|243|333|475|570|896|932|979|982|983|986|1134|1219|1357|1463|1474|1613|1677|1729|1776|1796|1803|1824|1825|1853|1883|1962|2032|2033|2034)( |$)/, /^x-fmt\/227( |$)/
 ];

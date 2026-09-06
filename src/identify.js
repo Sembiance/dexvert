@@ -226,9 +226,7 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 
 	// find the largest byteChecks check and read that many bytes in
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => Array.force(format.byteCheck || [])).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
-	let byteCheckBuf = null;
-	if(await fileUtil.exists(f.input.absolute))
-		byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
+	const byteCheckBuf = await fileUtil.exists(f.input.absolute) ? await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize) : null;
 
 	xlog.debug`Identify calling getIdMeta`;
 	const idMetaData = await getIdMeta(inputFile);
@@ -355,16 +353,13 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 				xlog.trace`${formatid} strongMagicMatches: ${strongMagicMatches}`;
 			const magicMatch = weakMagicMatchesHard.length || weakMagicMatchesSoft.length || strongMagicMatches.length;
 			let weakMatch = false;
-			if(!strongMagicMatches.length && (weakMagicMatchesSoft.length || weakMagicMatchesHard.length))
+			if(!strongMagicMatches.length && (weakMagicMatchesSoft.length || weakMagicMatchesHard.length))	// eslint-disable-line unicorn/prefer-ternary
 				weakMatch = true;
 
 			if((format.weakFileSize || []).includes(f.input.size))
 				weakMatch = true;
 
-			let customMatch = false;
-			if(format.customMatch)
-				customMatch = await format.customMatch({inputFile, detections, otherFiles, otherDirs, xlog});
-
+			const customMatch = format.customMatch ? await format.customMatch({inputFile, detections, otherFiles, otherDirs, xlog}) : false;
 			const hasAnyMatch = (extMatch || filenameMatch || idMetaMatch || fileSizeMatch || magicMatch || customMatch);
 
 			const priority = Object.hasOwn(format, "priority") ? (typeof format.priority==="function" ? format.priority({inputFile, detections, extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, customMatch}) : format.priority) : format.PRIORITY.STANDARD;

@@ -1,4 +1,4 @@
-Generated on: 2026-08-28
+Generated on: 2026-09-06
 
 /-------\
 | Linux |
@@ -9139,7 +9139,7 @@ Supported archive extractors:
   kudosdb    Kudos thumbnail database
 
 
->>> na_game_tool ::: media-video/na_game_tool-0.5.0 ::: https://nihav.org/game_tool.html
+>>> na_game_tool ::: media-video/na_game_tool-0.6.0 ::: https://nihav.org/game_tool.html
 Supported input plugins:
   7lev_movie 7th Level movie
   ace        Space Ace scenes
@@ -9147,13 +9147,17 @@ Supported input plugins:
   ad_mvi     Archimedean Dynasty/Schleichfahrt MVI
   ai_cda     Alien Incident CDA
   amf        Manic Karts AMF
+  and        The Koshan Conspiracy animation
   arc-huf    Arc Developments HUF
   ark-an     Ark of Time animation
   ascon      Asc(ar)on animation
+  asc_anim   Ascaron animation
   av_ani     Alien Virus animation
   avenger    Road Avenger BIN
   avf        American Laser Games / Her Interactive Video
   avx        Jack Orlando AVX
+  ax101      A/X-101 BIN
+  ax101ns    A/X-101 BIN (no sound)
   azmov      Azrael's Tear MOV
   b13_fli    Bureau 13 video
   bal        Baldies animation
@@ -9187,9 +9191,13 @@ Supported input plugins:
   flh        Conquest Earth FLH
   fli        FLIC
   flk        FLK
+  fpk        Crusade FPK
   fst        FutureVision video
   fvf        Spectrum Holobyte FVF
+  fx         Elige Tu Muerte FX
   gav        GTE Vantage Animation
+  gg-15      Guts'n'Garters video/image
+  gg-ani     Guts'n'Garters animation
   grn        Microids GRN
   guilty     Innocent Until Caught 1/2 cutscenes
   h2o        The Pandora Directive video
@@ -9200,12 +9208,14 @@ Supported input plugins:
   hnm4       Cryo HNM4
   hnm5       Cryo UBB
   hnm6       Cryo HNM6
+  ibm        World Fairy Tales IBM
   imv        ICOM video
   imx        Fable video
   ivas       Tsunami Media video
   ivd        Interactive Pictures VID
   jam        JAM video
   jazz2      Jazz Jackrabbit 2 cutscene
+  kamov2     Knowledge Adventure MOVv2
   kdv24      Comanche video
   kdv-c      Comanche video
   kdv-af     Armored Fist video
@@ -9215,8 +9225,10 @@ Supported input plugins:
   kmvid      Klondike Moon VID
   koda       Sonic CD video
   lair       Dragon's Lair PC port scene
+  lmf        Powerslave LMF
   lms        Ecco the Dolphin LMS
   lotr-av    Lord of the Rings AV
+  lsd        Whale's Voyage II LSD
   m95        Interplay M95
   maelstrom-anm Maelstrom ANM
   mfilm      Murder FILM
@@ -9227,21 +9239,25 @@ Supported input plugins:
   mux        Infogrames MUX video
   mvi1       Ikarion MVI1
   mvi2       Ikarion MVI2
+  mvpuz      Moving Puzzles MV
   naf        Ninell Animation File
   ninja-bin  Revenge of the Ninja BIN
   nl-fmv     Nightlong FMV (320x180)
   nl-fmv2    Nightlong FMV2 (640x360)
+  nsrs       Sirtech NSRS
   nxl        The Lawnmower Man NXL
   origin-fli Origin IFF FLI
   origin-sc  Shadowcaster cutscene
   origin-ssm System Shock movie
   paco       PACo
+  pcanim     PC-Animation
   ph         Total Multimedia PH video
   pmm        Psygnosis MultiMedia
   pmv        Infocom PMV
   psy-str    Psychic Detective STR
   ptf        Under a Killing Moon PTF
   q          Legend Entertainment Q
+  q3         Digital Integration Q3
   qrac-fmv   Network Q RAC Rally FMV
   rac        Spectrum Holobyte RAC
   ratvid     Ratvideo
@@ -9250,6 +9266,7 @@ Supported input plugins:
   reaper-fmv Reaper FMV
   rlf        Zork RLF
   roq        Trilobyte / id Software RoQ
+  sbv        Gunmetal SBV
   sdv        Stardock video
   sg_flc     Packed Stargunner FLC
   siff       Beam Software SIFF
@@ -9259,10 +9276,12 @@ Supported input plugins:
   spidy-ani  Spidy Animation v2
   ssstr      Sesame Street STR
   talisman   Talisman animation
+  tie-anm    Tie Break Tennis 98 intro
   tvi        Terminal Velocity video
   um         Dark Moon UM
   umv-afraid Are You Afraid of the Dark UMV
   umv-dracula Dracula Unleashed UMV
+  vas        Lords of the Realm animation
   vdo        Harrow Media VDO
   vdx        Trilobyte VDX
   vpx1       reLINE VPX1
@@ -9279,24 +9298,39 @@ Supported input plugins:
 Supported archive extractors:
   7lev_bin   7th Level BIN
   access_ap  Access Software AP
+  avi_obf    Obfuscated AVI
   b13_gl     Bureau 13 GL
   bd13_dat   Braid Dead 13 DAT
   beam_gob   Beam Software GOB
+  blah       Sirtech BLAH
   ce_wad     Conquest Earth WAD
   cryo_archive Cryo Archive
   egg        HotHouse EGG
   escal-z    Escal compressed
+  fcat       Digital Pictures FCAT
+  fl2        D.i.G (demo) FL2
+  frt        Eclipse FRT
+  fvt        Eclipse FVT
+  gg_        Guts'n'Garters compressed file
+  gg-archive Guts'n'Garters archive
   gjd        Trilobyte GJD
   gk3_barn   Gabriel Knight 3 Barn
   goosebumps Goosebumps CFS
   hell-lib   Hell: A Cyberpunk Thriller library
   horde-vdx  The Horde VDX
+  iavf       Take-Two Interactive AVI
+  kaa-old    Knowledge Adventure archive (old)
+  kaa-new    Knowledge Adventure archive (new)
+  lzh3       Knowledge Adventure movie/archive
   m88        M88 Movie
   mco        SouthPeak Interactive puzzle archive
+  mmf        Marco Polo MMF
   mng        Hostile Waters MNG
   rlb        Tsunami Media RLB
+  spp        Haynes Software sprite archive
   stk        Coktel Vision STK
   stk2       Coktel Vision STK2
+  vdf        Crusade VDF
 
 
 >>> nconvert ::: media-gfx/nconvert-6.88 ::: https://www.xnview.com/en/nconvert/

@@ -6,5 +6,5 @@ export class movingPuzzlesMV extends Format
 	ext            = [".mv"];
 	forbidExtMatch = true;
 	magic          = ["Moving Puzzles Video"];
-	converters     = ["vibe2avi"];
+	converters     = ["na_game_tool[format:mvpuz]", "vibe2avi"];
 }

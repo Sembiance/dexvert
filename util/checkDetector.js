@@ -7,6 +7,7 @@ import {DETECTOR_PROGRAMS} from "../src/Detection.js";
 import {initRegistry} from "../src/dexUtil.js";
 import {formats} from "../src/format/formats.js";
 import {path} from "std";
+import {C} from "../src/C.js";
 import {flexMatch} from "../src/identify.js";
 
 const argv = cmdUtil.cmdInit({
@@ -14,11 +15,12 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Test a new detector program and outputs all found non-weak magics that are not already in any formats magic list",
 	opts    :
 	{
-		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
-		showWeak : {desc : "If you set this to true, even matches marked 'weak' will show up"},
-		unique   : {desc : "Set this to filter out duplicated magic values and only show 1 of each magic string"},
-		program  : {desc : "Which program to run (or all)", required : true, hasValue : true, allowed : [...DETECTOR_PROGRAMS, "all"]},
-		format   : {desc : "Specify one or more formats. Can specify 'all' or an entire family like 'image' or partials like 'image/a'", required : true, hasValue : true, multiple : true}
+		logLevel     : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
+		showWeak     : {desc : "If you set this to true, even matches marked 'weak' will show up"},
+		showExisting : {desc : "If you set this to true, even matches that are already in a format's magic list will show up"},
+		unique       : {desc : "Set this to filter out duplicated magic values and only show 1 of each magic string"},
+		program      : {desc : "Which program to run (or all)", required : true, hasValue : true, allowed : [...DETECTOR_PROGRAMS, "all"]},
+		format       : {desc : "Specify one or more formats. Can specify 'all' or an entire family like 'image' or partials like 'image/a'", required : true, hasValue : true, multiple : true}
 	}});
 
 const detectorsToTest = argv.program==="all" ? Array.from(DETECTOR_PROGRAMS) : [argv.program];
@@ -77,7 +79,11 @@ async function checkDetector(detectorid)
 	const matches = [];
 	await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	{
-		const r = await Program.runProgram(detectorid, await FileSet.create(path.dirname(sampleFilePath), "input", sampleFilePath), {xlog : xlog.atLeast("debug") ? xlog : new XLog("error")});
+		const detectTmpFilePath = await fileUtil.genTempPath(C.DEXVERT_TMP_DIR);
+		await Deno.copyFile(sampleFilePath, detectTmpFilePath);	// can't use a symlink as that changes the file type, hard link can't be used across different filesystems, so we have to copy. sad.
+
+		const r = await Program.runProgram(detectorid, await FileSet.create(path.dirname(sampleFilePath), "input", detectTmpFilePath), {flags : {detectTmpFilePath }, xlog : xlog.atLeast("debug") ? xlog : new XLog("error")});
+		await fileUtil.unlink(detectTmpFilePath);
 		bar.increment();
 		if(!r?.meta?.detections?.length)
 			return;
@@ -87,7 +93,7 @@ async function checkDetector(detectorid)
 			return;
 
 		const magic = detection.value.trim();
-		if(isExistingMagic(magic))
+		if(isExistingMagic(magic) && !argv.showExisting)
 			return;
 
 		if(detectorid==="soxiID" && magic===`soxi: ${path.extname(sampleFilePath).toLowerCase().substring(1)}`)

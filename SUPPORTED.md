@@ -1,11 +1,11 @@
-# Supported File Formats (3,869)
+# Supported File Formats (3,871)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (705)
+## Archive (707)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 0000 Package Archive | .0000 | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/package0000Archive/)
@@ -132,6 +132,7 @@ archive | cloop Image |  | [extractCompressedFS](https://launchpad.net/ubuntu/+s
 archive | [CMZ Compressed Archive](http://fileformats.archiveteam.org/wiki/CMZ_(archive_format)) | .cmz | [deark](https://entropymine.com/deark/) [uncmz](https://github.com/sourcekris/uncmz) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/cmz/)
 archive | Coktel Vision STK Archive | .stk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK/)
 archive | Coktel Vision STK2 Archive  | .itk | [na_game_tool_extract](https://nihav.org/game_tool.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/coktelVisionSTK2/)
+archive | Colin McRae Rally 2 Archive |  | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/colinMcRaeRally2Archive/)
 archive | com RLE packer Packed | .exe .com | cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/comRLEPackerPacked/)
 archive | [COM2TXT Packed](http://fileformats.archiveteam.org/wiki/Com2txt) | .com | [com2txt](http://fileformats.archiveteam.org/wiki/Com2txt) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/com2txtPacked/)
 archive | Comanche Video Data archive | .kdv | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/comancheVideoDataArchive/)
@@ -175,7 +176,7 @@ archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark
 archive | Dark Reign 2 game data archive | .zwp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/darkReign2GameDataArchive/)
 archive | [Dark Reign Game Archive](http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)) | .ftg | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkReignGameArchive/)
 archive | [Delphi Borland Form](http://fileformats.archiveteam.org/wiki/Borland_Delphi_form) | .dfm | [dfm2txt](http://github.com/Sembiance/dexvert) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/borlandDelphiForm/)
-archive | Demon Star GLB Archive | .glb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/demonStarGLB/)
+archive | Demon Star GLB Archive | .glb | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/demonStarGLB/)
 archive | DeployMaster Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/deployMaster/)
 archive | DeployMaster Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/myriadInstall/)
 archive | Descent Game Archive | .hog | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) [gamearch](https://github.com/Malvineous/libgamearchive) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/descentGameArchive/)
@@ -356,7 +357,7 @@ archive | [LIMIT Archive](http://fileformats.archiveteam.org/wiki/LIMIT) | .lin 
 archive | Linux Extended Filesystem | .img .ext2 .ext3 .ext4 | [sevenZip](http://p7zip.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/linuxEXTFilesystem/)
 archive | Lionhead Studios game archive | .sad | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/lionheadStudiosGameArchive/)
 archive | Liquid Entertainment H2O game data archive | .h2o | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/h2oGameDataArchive/)
-archive | LithTech Resource data | .rez | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/lithTechResourceData/)
+archive | LithTech Resource data | .rez | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lithTechResourceData/)
 archive | LM-T2E Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [12 sample files](https://sembiance.com/fileFormatSamples/archive/lmt2ePacked/)
 archive | LOB Compressed |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [27 sample files](https://sembiance.com/fileFormatSamples/archive/lobCompressed/)
 archive | Logitech Compress Archive |  | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/logitechCompress/)
@@ -428,9 +429,10 @@ archive | NeoBook Cartoon | .car | [foremost](http://foremost.sourceforge.net/) 
 archive | Neobook Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [10 sample files](https://sembiance.com/fileFormatSamples/archive/neobookPacked/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [aaruConvert](https://github.com/aaru-dps/Aaru) [dd](https://www.gnu.org/software/coreutils/) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/nrg/)
 archive | Netscape SNM Archive | .snm | [vibeExtract](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/)
-archive | Neverwinter Nights MOD | .mod .nwm | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsMOD/)
+archive | Neverwinter Nights HAK archive | .hak | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsHAK/)
+archive | Neverwinter Nights MOD | .mod .nwm | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/neverwinterNightsMOD/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/news/) - Converter currently doesn't handle when just a single newsgroup message is saved in a file
-archive | Newton Package | .pkg | [vibeExtract](https://github.com/Sembiance/dexvert) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
+archive | Newton Package | .pkg | [vibeExtract](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/newtonPackage/)
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImage/)
 archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/nextDiskImageDump/)
 archive | Nibiru GRP Archive | .grp | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/nibiruGRP/)
@@ -570,7 +572,7 @@ archive | SGA game data archive | .sga | [gameextractor](https://sourceforge.net
 archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sgiVolumeImage/)
 archive | SGS.DAT File |  | [decomposeSGS](https://www.logipole.com/konvertor-en.htm) [GARbro](https://github.com/shiikwi/GARbro) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/sgsDAT/)
 archive | SHD MRTS Archive | .str .shd .ffs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/shdMRTS/)
-archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
+archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
 archive | [Shockwave/Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/swf/)
 archive | Shrink Archive | .shr | [unar](https://github.com/incbee/Unarchiver) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkArchive/)
 archive | Shrink Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [13 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkPacked/)
@@ -1551,7 +1553,7 @@ image | [GX1 Bitmap](http://fileformats.archiveteam.org/wiki/GX1) | .gx1 | [abyd
 image | [GX2 Bitmap](http://fileformats.archiveteam.org/wiki/GX2) | .gx2 | [abydosconvert](http://snisurset.net/code/abydos/) | [27 sample files](https://sembiance.com/fileFormatSamples/image/gx2/)
 image | HAG SS4M Archive | .ss | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/image/hagSS4M/)
 image | [Haiku Vector Icon Format](http://fileformats.archiveteam.org/wiki/Haiku_Vector_Icon_Format) | .hvif | [abydosconvert](http://snisurset.net/code/abydos/) | [4 sample files](https://sembiance.com/fileFormatSamples/image/hvif/)
-image | Half-Life MIP | .mip | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [7 sample files](https://sembiance.com/fileFormatSamples/image/halfLifeMIP/)
+image | Half-Life MIP | .mip | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/halfLifeMIP/)
 image | Hard Color Map | .hcm | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/hcm/)
 image | [Hard Interlace Picture](http://fileformats.archiveteam.org/wiki/Hard_Interlace_Picture) | .hip .hps | [recoil2png](http://recoil.sourceforge.net) | [44 sample files](https://sembiance.com/fileFormatSamples/image/hip/) - Sample file AGA2.HPS converts to just static noise. Not sure if this is an error in recoil2png or a fault in the file or expected output.
 image | [Harvard Graphics Chart](http://fileformats.archiveteam.org/wiki/Harvard_Graphics) | .ch3 .sy3 .cht .tp3 | [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [10 sample files](https://sembiance.com/fileFormatSamples/image/harvardGraphicsChart/)
@@ -2497,7 +2499,7 @@ other | VideoArchiv Data base | .vad | [strings](https://www.gnu.org/software/bi
 other | [Vim Swap](http://fileformats.archiveteam.org/wiki/Vim_swap_file) | .swp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/vimSwap/)
 other | [Visual Basic Form](http://fileformats.archiveteam.org/wiki/VisualBasic_form) | .frm .frx | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/other/visualBasicForm/)
 other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/VisualBasic_project) | .mak | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/visualBasicProject/)
-other | [WarCraft 2 Map](http://fileformats.archiveteam.org/wiki/Warcraft_II_PUD) | .pud | [pud](https://github.com/war2/war2tools/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/warCraftMap/)
+other | [WarCraft 2 Map](http://fileformats.archiveteam.org/wiki/Warcraft_II_PUD) | .pud | [pud](https://github.com/war2/war2tools/) | [12 sample files](https://sembiance.com/fileFormatSamples/other/warCraftMap/)
 other | WhereIsIt? catalog | .ctf | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/other/whereIsItCatalog/)
 other | [Windows Program Group](http://fileformats.archiveteam.org/wiki/Windows_program_group) | .grp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/windowsProgramGroup/)
 other | Windows Registry Hive | .hiv .dat | [hivexml](https://libguestfs.org) | [10 sample files](https://sembiance.com/fileFormatSamples/other/registryHive/)
@@ -2587,7 +2589,7 @@ poly | Superscape Do 3D VCA | .vca | [vibe2glb](https://github.com/Sembiance/dex
 poly | [TDDD TurboSilver/Imagine 3D Object](http://fileformats.archiveteam.org/wiki/TDDD) | .iob .tdd .tddd .cel .obj | [AccuTrans3D](http://www.micromouse.ca/) [blender](https://www.blender.org) [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [19 sample files](https://sembiance.com/fileFormatSamples/poly/iffTDDD/) - The import script does not handle many of the tags from the TDDD format (Spitfire.iob). An initial stab at handling some of the color info (CLST, RLST, TLST) didn't provide any results (see sandbox/legacy/blender/io_import_scene_tddd.py)
 poly | [Valve Studiomdl Data](http://fileformats.archiveteam.org/wiki/Studiomdl_Data) | .smd | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/valveSMD/)
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [AccuTrans3D](http://www.micromouse.ca/) [blender](https://www.blender.org) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/vrml/)
-poly | [Wavefront OBJ](http://fileformats.archiveteam.org/wiki/Wavefront_OBJ) | .obj | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [milkShape3D](http://www.milkshape3d.com/) | [16 sample files](https://sembiance.com/fileFormatSamples/poly/wavefrontOBJ/)
+poly | [Wavefront OBJ](http://fileformats.archiveteam.org/wiki/Wavefront_OBJ) | .obj | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) [milkShape3D](http://www.milkshape3d.com/) | [18 sample files](https://sembiance.com/fileFormatSamples/poly/wavefrontOBJ/)
 poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [3 sample files](https://sembiance.com/fileFormatSamples/poly/xgl/)
 
 

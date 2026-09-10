@@ -27,9 +27,6 @@ export const TEXT_MAGIC_WEAK = [
 	// perlTextCheck
 	"Likely Text (Perl)",
 
-	// GT2
-	"Textdatei",
-
 	// file
 	"Microsoft HTML Help Project, ISO-8859 text, with CRLF line terminators", /^text\/plain/, "TEXT/PLAIN; CHARSET=us-ascii", /^Unicode text, UTF-8 (\(with BOM\) )?text/,
 

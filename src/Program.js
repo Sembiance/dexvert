@@ -154,7 +154,7 @@ export class Program
 		if(this.mirrorInToCWD)
 		{
 			xlog.debug`Program ${fg.orange(this.programid)} mirroring in to CWD`;
-			if(this.mirrorInToCWD==="copy")	// eslint-disable-line unicorn/prefer-ternary
+			if(this.mirrorInToCWD==="copy")
 				await runUtil.run("rsync", [path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile()))]);
 			else
 				await Deno.symlink(path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile())));
@@ -346,7 +346,7 @@ export class Program
 				// some programs (such as mounting archive/rawPartition/Madame X Game.bin) leaves files with an epoch timestamp. If this happens reset it to input file date
 				if(newFile.ts===0)
 				{
-					if(newFile.isSymlink)	// eslint-disable-line unicorn/prefer-ternary
+					if(newFile.isSymlink)
 						await runUtil.run("touch", ["-h", "-d", new Date((originalInput || f.input).ts).toISOString(), newFile.absolute]);	// to change symlink date we have leave deno and touch it
 					else
 						await newFile.setTS((originalInput || f.input).ts);
@@ -536,7 +536,7 @@ export class Program
 
 			if(chainParts.length>0)
 			{
-				for(const [, progRaw] of Object.entries(chainParts.map(v => v.trim())))
+				for(const progRaw of Object.values(chainParts.map(v => v.trim())))
 				{
 					// if any program in the chain marked it's state as processed, stop now
 					if(r.processed)

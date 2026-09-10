@@ -135,7 +135,7 @@ export const WEAK_VALUES =
 	/^fmt\/(111|114|134|135|208|304|328|347|452|473|583|584|625|639|659|683|691|692|819|869|973)( |$)/,
 	/^fmt\/(1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1198|1241|1260|1276|1280|1381|1385|1396|1439|1461|1488|1489|1491)( |$)/,
 	/^fmt\/(1555|1556|1562|1575|1651|1672|1737|1740|1742|1751|1812|1856|1874|1885|1902|1904|1968)( |$)/,
-	/^fmt\/(2014|2025|2035)( |$)/,
+	/^fmt\/(2014|2025|2035|2037)( |$)/,
 	/^x-fmt\/(8|10|53|101|123|157|168|195|222|324|325|342)( |$)/,
 
 	// ancientID
@@ -385,7 +385,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
-	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Dogenzaka.BinOpener
+	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Dogenzaka.BinOpener, archive:Elf.DatAI5Opener
 	// SEEN TWICE:
 	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, archive:Mokopro.NNNNOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
@@ -431,10 +431,11 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, SND_3
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX
+	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, SND_3, HNK, GLB, RDBDATA_RDB0
+	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX,
+	//		BOB_FILE
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, CAR_RAC, CWG_VW, FLX, WAD_WAD, LIB_5, SAD_SAUD
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, CAR_RAC, FLX, WAD_WAD, LIB_5, SAD_SAUD
 	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
@@ -475,6 +476,7 @@ export const WEAK_VALUES =
 	/^geArchive: CON( |$)/,
 	/^geArchive: CPN( |$)/,
 	/^geArchive: CRH_MDMD( |$)/,
+	/^geArchive: CWG_VW( |$)/,
 	/^geArchive: DATA_KAPL( |$)/,
 	/^geArchive: DBS( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
@@ -555,7 +557,6 @@ export const WEAK_VALUES =
 	/^Crypt! [v\d.]+/,
 	/^Cube$/,
 	/^Cygwin Symbolischer Link$/,
-	/^DOS COM Executable Datei$/,
 	/^DOS Ger.tetreiber/,
 	/^ELI Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Eudora Werbungsdatei$/,
@@ -565,7 +566,6 @@ export const WEAK_VALUES =
 	/^FPK Pascal Object Datei$/,
 	/^Fractal Extreme Filemdatei$/,
 	/^Keine Datei gefunden/,
-	/^Kopftext:/,
 	/^Java Source Code$/,
 	/^JPG Bild/,
 	/^IBM Hilfedatei$/,
@@ -762,8 +762,10 @@ export const WEAK_VALUES =
 	/^text\/slint$/,
 	/^text\/vnd\.graphviz$/,
 	/^text\/x-csrc$/,
+	/^text\/x-cython$/,
 	/^text\/x-devicetree-source$/,
 	/^text\/x-emacs-lisp$/,
+	/^text\/x-go$/,
 	/^text\/x-groovy$/,
 	/^text\/x-kotlin$/,
 	/^text\/x-makefile$/,
@@ -837,6 +839,7 @@ export const WEAK_VALUES =
 	/^amd 29k /,
 	/^Amiga Workbench$/,
 	/^AmigaOS bitmap font/,
+	/^Andrew Toolkit data/,
 	/^Android ART profile$/,
 	/^Android (binary XML|package resource table|vdex)/,
 	/^Apache Avro/,
@@ -1034,7 +1037,7 @@ export const WEAK_VALUES =
 	/^Gentoo Manifest/,
 	/^GEOS VMFile/,
 	/^GeoSwath RDF/,
-	/^Git (blob|commit|index|pack|tree)/,
+	/^Git (blob|commit|HEAD|index|pack|tree)/,
 	/^GKS Metafile/,
 	/^GLF_BINARY_[LM]SB_FIRST/,
 	/^GNOME Catalogue/,
@@ -1880,6 +1883,7 @@ export const WEAK_VALUES =
 	/^Dr\. Halo Font$/,
 	/^Dyalog APL transfer$/,
 	/^Dynamic Auto-Painter profile$/,
+	/^eCover Engineer Model$/,
 	/^EndNote Style \(v3\)$/,
 	/^Epic Pinball table data$/,
 	/^EPOC Data \(gen\)$/,
@@ -1995,6 +1999,7 @@ export const WEAK_VALUES =
 	/^Toys for Bob data$/,
 	/^TrendMicro AntiVirus database$/,
 	/^Turbo Pascal Map/,
+	/^Twinsen's Odyssey - Little Big Adventure 2 save game$/,
 	/^UbiArt Framework Cooked Asset$/,
 	/^Ulead color Map$/,	// Often matches to this are correct, but it's not a useful file
 	/^UMV Video$/,
@@ -2157,6 +2162,7 @@ export const WEAK_VALUES =
 	/^Clan Lord movie - Visiostone$/,
 	/^Clangd Index$/,
 	/^ClariSSA internal edit format$/,
+	/^Classic 0xEFBEADDE magic/,
 	/^CloudCompare BIN V2 format$/,
 	/^CMU format - Andrew Toolkit$/,
 	/^CodeView 4 Symbolic debug information$/,

@@ -299,6 +299,7 @@ const DEXMAGIC_CHECKS = {
 	"Starbreeze Model"      : [{offset : 0, match : "MOS DATAFILE"}, {offset : 0x30, match : ["EXTENDEDMODEL"]}],
 
 	// text
+	"Borland Linker Mapping Data" : [{offset : 3, match : "Start"}],
 	"Gentoo ebuild"               : [{offset : 0, match : "EAPI="}],
 	"HP ME10 Database"            : [{offset : 0, match : "#~"}, {offset : 2, match : [["1", "2"]]}],
 	"KDE KXML GUI RC"             : [{offset : 0, match : "<!DOCTYPE kpartgui"}],

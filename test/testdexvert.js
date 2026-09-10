@@ -233,6 +233,7 @@ const SUPPORTING_FILES = {
 		cloneCDImage            : /\.ccd$/i,
 		pog                     : /\.pnm$/i,
 		redArchive              : /TIMETREK\.001$/,
+		setupSpecialist         : /SETUP\.\d$/,
 		softdiskForWindowsSetup : /\.w02$/i
 	},
 	audio :

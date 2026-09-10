@@ -7,6 +7,7 @@ import {DexFile} from "./DexFile.js";
 import {Identification} from "./Identification.js";
 import {getDetections} from "./Detection.js";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
+import {C} from "./C.js";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
 function flexMatch(value, matcher, fullStringMatch)
@@ -389,8 +390,12 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 					continue;
 				}
 
-				if(auxFiles && Array.isArray(auxFiles) && auxFiles.length && xlog.atLeast("debug"))
-					xlog.debug`Identify identified auxFiles for ${formatid}:\n\t${auxFiles.map(v => v.base).join("\n\t")}`;
+				if(auxFiles && Array.isArray(auxFiles) && auxFiles.length)
+				{
+					if(xlog.atLeast("debug"))
+						xlog.debug`Identify identified ${auxFiles.length.toLocaleString()} auxFiles (only first ${C.MAX_AUX_FILE_COUNT.toLocaleString()} will be used) for ${formatid}:\n\t${auxFiles.map(v => v.base).join("\n\t")}`;
+					auxFiles = auxFiles.slice(0, C.MAX_AUX_FILE_COUNT);
+				}
 			}
 			if(auxFiles)
 				baseMatch.auxFiles = auxFiles;

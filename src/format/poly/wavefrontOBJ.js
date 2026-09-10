@@ -16,6 +16,10 @@ export class wavefrontOBJ extends Format
 	auxFiles = (input, otherFiles) =>
 	{
 		const supportFiles = otherFiles.filter(o => [".mtl", ".tiff", ".tif"].includes(o.ext.toLowerCase()));
+		const exactSupports = supportFiles.filter(o => o.name.toLowerCase()===input.name.toLowerCase());
+		if(exactSupports.length)
+			return exactSupports;
+		
 		return supportFiles.length===0 ? false : supportFiles;
 	};
 	keepFilename = true;

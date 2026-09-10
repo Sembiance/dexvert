@@ -6,6 +6,6 @@ export class bsaArchive extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/BSArc_and_BSA";
 	ext            = [".bsa", ".bsn", ".bs2"];
 	forbidExtMatch = true;
-	magic          = ["BSA Packing program compressed archive", "BSArc compressed archive", /^(BSArc|BSN) archive data/, /^idarc: BSN \(BSA\/PTS-DOS\)( |$)/];
+	magic          = ["BSA Packing program compressed archive", "BSArc compressed archive", "BSN Archiv gefunden", /^(BSArc|BSN) archive data/, /^idarc: BSN \(BSA\/PTS-DOS\)( |$)/];
 	converters     = ["bsa"];
 }

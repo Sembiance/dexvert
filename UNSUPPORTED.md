@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,947)
+# Unsupported File Formats (3,949)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -726,7 +726,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (187)
+## Image (188)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -911,6 +911,7 @@ Family/Format | Name | Extensions | Notes
 [image/versaCAD2DDrawing](https://discmaster.textfiles.com/search?format=versaCAD2DDrawing) | VersaCAD 2D drawing | .2d | 
 [image/visualCADDDrawing](https://discmaster.textfiles.com/search?format=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
 [image/visualCADDSymbol](https://discmaster.textfiles.com/search?format=visualCADDSymbol) | Visual CADD Symbol | .vcs | 
+[image/warhammer40kTexture](https://discmaster.textfiles.com/search?format=warhammer40kTexture) | Warhammer 40K Texture | .rsh | 
 [image/werescCADEDrawing](https://discmaster.textfiles.com/search?format=werescCADEDrawing) | Weresc CADE drawing | .dtc | 
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?format=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?format=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
@@ -1092,7 +1093,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,773)
+## Other (2,774)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2496,6 +2497,7 @@ Family/Format | Name | Extensions | Notes
 [other/magicScoreSymbol](https://discmaster.textfiles.com/search?format=magicScoreSymbol) | MagicScore Symbol | .smb | 
 [other/magicScoreTemplate](https://discmaster.textfiles.com/search?format=magicScoreTemplate) | MagicScore Template | .ctf | 
 [other/magicScoreTransport](https://discmaster.textfiles.com/search?format=magicScoreTransport) | MagicScore Transport | .trn | 
+[other/magixAudioEditProxyCache](https://discmaster.textfiles.com/search?format=magixAudioEditProxyCache) | MAGIX audio edit proxy/cache | .hdp | 
 [other/magixHardDiskProjectAudio](https://discmaster.textfiles.com/search?format=magixHardDiskProjectAudio) | MAGIX Hard Disk Project Audio | .hdp | 
 [other/magixLibrary](https://discmaster.textfiles.com/search?format=magixLibrary) | MAGIX library | .mxm | 
 [other/magixMovieEditVideo](https://discmaster.textfiles.com/search?format=magixMovieEditVideo) | Magix Movie Edit video | .vip | 
@@ -3331,6 +3333,7 @@ Family/Format | Name | Extensions | Notes
 [other/sqliteWriteAheadLog](https://discmaster.textfiles.com/search?format=sqliteWriteAheadLog) | SQLite Write-Ahead Log | .db-wal | 
 [other/sqliteWriteAheadLogSharedMemory](https://discmaster.textfiles.com/search?format=sqliteWriteAheadLogSharedMemory) | SQLite Write-Ahead Log shared memory | .db-shm | 
 [other/sqlite2Database](https://discmaster.textfiles.com/search?format=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
+[other/ssiShapesData](https://discmaster.textfiles.com/search?format=ssiShapesData) | SSI Shapes data | .shp | 
 [other/stCADSymbol](https://discmaster.textfiles.com/search?format=stCADSymbol) | ST-CAD Symbol | .sym | 
 [other/stacElectronicsArchiveFormat](https://discmaster.textfiles.com/search?format=stacElectronicsArchiveFormat) | Stac Electronics Archive Format | .saf | 
 [other/standardACISBinary](https://discmaster.textfiles.com/search?format=standardACISBinary) | Standard ACIS Binary | .sab | 
@@ -3368,7 +3371,6 @@ Family/Format | Name | Extensions | Notes
 [other/statisticalAnalysisSystemData](https://discmaster.textfiles.com/search?format=statisticalAnalysisSystemData) | Statistical Analysis System Data | .sas7bdat .sd7 | 
 [other/steamDepotCacheManifest](https://discmaster.textfiles.com/search?format=steamDepotCacheManifest) | Steam Depot Cache Manifest | .csm | 
 [other/steamRegistry](https://discmaster.textfiles.com/search?format=steamRegistry) | Steam Registry | .blob | 
-[other/steelPanthersShapesData](https://discmaster.textfiles.com/search?format=steelPanthersShapesData) | Steel Panthers Shapes data | .shp | 
 [other/steinbergPlugIn](https://discmaster.textfiles.com/search?format=steinbergPlugIn) | Steinberg Plug-in | .fxp | 
 [other/steinbergResourceFile](https://discmaster.textfiles.com/search?format=steinbergResourceFile) | Steinberg Resource File | .srf | 
 [other/steinbergStudioModuleDriver](https://discmaster.textfiles.com/search?format=steinbergStudioModuleDriver) | Steinberg Studio Module Driver | .d | 

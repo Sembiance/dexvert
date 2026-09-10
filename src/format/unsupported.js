@@ -798,6 +798,7 @@ export default
 		versaCAD2DDrawing              : {name : "VersaCAD 2D drawing", ext : [".2d"], magic : ["VersaCAD 2D drawing"], weakMagic : true},
 		visualCADDDrawing              : {name : "Visual CADD Drawing", ext : [".vcd"], magic : ["Visual CADD Drawing"]},
 		visualCADDSymbol               : {name : "Visual CADD Symbol", ext : [".vcs"], magic : ["Visual CADD Symbol"], weakMagic : true},
+		warhammer40kTexture            : {name : "Warhammer 40K Texture", ext : [".rsh"], magic : ["Warhammer 40K textures"]},
 		werescCADEDrawing              : {name : "Weresc CADE drawing", ext : [".dtc"], magic : ["Weresc CADE drawing"]},
 		winFaxCoverPage                : {name : "WinFax CoverPage Image", ext : [".cvp", ".cv"], magic : ["WinFax CoverPage image"]},
 		xboxXPR0Texture                : {name : "Microsoft Xbox XPR0 texture", ext : [".xbx"], magic : [/^Microsoft Xbox XPR0 texture/, /^geArchive: XPR_XPR0( |$)/], weakMagic : true},
@@ -1026,9 +1027,11 @@ export default
 	
 	other :
 	{
-		// Game - These actually work with gameextractor but produce game-specific worthless files
+		// Game - These actually work with gameextractor but produce game-specific worthless files that can't be converted further at this time
 		albionGameDataArchive : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
+		chalkGameDataArchive  : {name : "Chalk game data archive", ext : [".wgm"], magic : ["Chalk game data archive", /^geArchive: WGM_WGM1( |$)/]},
 		panzersPhase2Map      : {name : "Panzers - Phase 2 Map", ext : [".map"], magic : [/^geArchive: MAP_SR( |$)/]},
+		ssiShapesData         : {name : "SSI Shapes data", ext : [".shp"], magic : ["Steel Panthers Shapes data", "SSI Shapes data", /^geArchive: SHP_110( |$)/], weakMagic : true},
 
 		//////////
 		// Game //
@@ -1124,7 +1127,6 @@ export default
 		cavewarsDialog                                : {name : "Cavewars dialog", ext : [".fdg"], magic : ["Cavewars dialog"]},
 		cedarLakeSoftwareGameData                     : {name : "Cedar Lake Software game data", ext : [".cl1"], magic : ["Cedar Lake Software game data"], weakMagic : true},
 		centurionDefenderOfRomeGameData               : {name : "Centurion: Defender of Rome game data", ext : [".dat", ".cat"], magic : ["Centurion: Defender of Rome game data"], weakMagic : true},
-		chalkGameDataArchive                          : {name : "Chalk game data archive", ext : [".wgm"], magic : ["Chalk game data archive"]},
 		chessAssistant                                : {name : "Chess Assistant File", ext : [".bic", ".bid", ".bim", ".bis", ".lib", ".bfi", ".dsc", ".ndx", ".bdy"], magic : ["Chess Assistant "]},
 		chessBaseArchiveFile                          : {name : "ChessBase Archive file", ext : [".cbv"], magic : ["ChessBase Archive file"], weakMagic : true},
 		chessBaseLightDatabaseHeader                  : {name : "ChessBase Light database Header", ext : [".cbh"], magic : ["ChessBase Light database Header"]},
@@ -1613,7 +1615,6 @@ export default
 		starWarsJediKnightBotNavigationRoutes         : {name : "Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info", ext : [".nav"], magic : ["Star Wars Jedi Knight: Jedi Academy bot Navigation/routes info"], weakMagic : true},
 		starWarsJediKnightDarkForces2SaveGame         : {name : "Star Wars: Jedi Knight - Dark Forces II save game", ext : [".jks"], magic : ["Star Wars: Jedi Knight - Dark Forces II save game"]},
 		starWarsJediKnight2SaveGame                   : {name : "Star Wars: Jedi Knight II - Jedi Outcast save game", ext : [".sav"], magic : ["Star Wars: Jedi Knight II - Jedi Outcast save game"]},
-		steelPanthersShapesData                       : {name : "Steel Panthers Shapes data", ext : [".shp"], magic : ["Steel Panthers Shapes data"], weakMagic : true},
 		stepManiaCourse                               : {name : "StepMania Course", ext : [".crs"], magic : ["StepMania Course"], weakMagic : true},
 		stormRegionGameDataArchive                    : {name : "Storm Region game data archive", ext : [".pak"], magic : ["Storm Region game data archive"], weakMagic : true},
 		strandedIIMapfile                             : {name : "Stranded II Mapfile", ext : [".sav", ".s2"], magic : ["Stranded II Mapfile"]},
@@ -1829,7 +1830,7 @@ export default
 		eclipseHelp                        : {name : "Eclipse Help", ext : [".hlp"], magic : ["Eclipse Help"]},
 		eclipseImage                       : {name : "Eclipse Image", ext : [".img"], magic : ["Eclipse Image"]},
 		eclipseTutorial                    : {name : "Eclipse Tutorial", ext : [".tut"], magic : ["Eclipse Tutorial"]},
-		emacsCompiledLisp                  : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp/], notes : "Could decompile it with (maybe): https://github.com/rocky/elisp-decompile"},
+		emacsCompiledLisp                  : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp/, "Emacs Lisp byte-compiled Code"], notes : "Could decompile it with (maybe): https://github.com/rocky/elisp-decompile"},
 		erlangJAMFile                      : {name : "Erlang JAM file", ext : [".jam"], magic : [/^Erlang JAM file/], weakMagic : true},
 		gccGCNOCoverageFtestCoverage       : {name : "GCC gcno coverage", ext : [".gcno"], magic : [/^GCC gcno coverage/], weakMagic : true},
 		glBasic3DData                      : {name : "GLBasic 3D data", ext : [".ddd"], magic : ["GLBasic 3D data"], weakMagic : true},
@@ -2925,6 +2926,7 @@ export default
 		magicScoreSymbol                         : {name : "MagicScore Symbol", ext : [".smb"], magic : ["MagicScore Maestro Symbol"]},
 		magicScoreTemplate                       : {name : "MagicScore Template", ext : [".ctf"], magic : ["MagicScore Maestro Template"]},
 		magicScoreTransport                      : {name : "MagicScore Transport", ext : [".trn"], magic : ["MagicScore Transport"]},
+		magixAudioEditProxyCache                 : {name : "MAGIX audio edit proxy/cache", ext : [".hdp"], magic : ["MAGIX audio edit proxy/cache"]},
 		magicWorkstationDeck                     : {name : "Magic Workstation Deck", ext : [".mwdeck"], magic : ["Magic Workstation Deck"]},
 		magixHardDiskProjectAudio                : {name : "MAGIX Hard Disk Project Audio", ext : [".hdp"], magic : ["MAGIX Hard Disk Project Audio"]},
 		magixMovieEditVideo                      : {name : "Magix Movie Edit video", ext : [".vip"], magic : ["Magix Movie Edit video"]},

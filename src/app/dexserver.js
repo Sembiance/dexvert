@@ -22,7 +22,7 @@ const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["dexrpc", "gameextractor", "dragonUnpacker", "GARbro", "binwalkServer", "tridServer", "siegfried", "os", "wine", "classify"];
+const SERVER_ORDER = ["dexrpc", "gt2", "gameextractor", "dragonUnpacker", "GARbro", "binwalkServer", "tridServer", "siegfried", "os", "wine", "classify"];
 
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {
@@ -52,7 +52,7 @@ const serverProcs = {};
 async function stopDexserver()
 {
 	xlog.info`Stopping ${SERVER_ORDER.length} servers...`;
-	for(const serverid of Array.from(SERVER_ORDER).reverse())
+	for(const serverid of Array.from(SERVER_ORDER.flat()).reverse())
 	{
 		xlog.info`Stopping server ${fg.peach(serverid)}...`;
 		const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);

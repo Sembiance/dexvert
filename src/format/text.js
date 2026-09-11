@@ -259,7 +259,7 @@ export default
 		pacificCCompilerProject                  : {name : "Pacific C Compiler Project", ext : [".prj"], magic : ["Pacific C Compiler Project"], weakMagic : true},
 		pas                                      : {name : "Pascal/Delphi Source File", website : "http://fileformats.archiveteam.org/wiki/Pascal", ext : [".pas", ".tp5"], magic : [...TEXT_MAGIC, "Pascal Programm", "Pascal Source Code 'DOS'", "Pascal source"], weakMagic : true},
 		pellesCProject                           : {name : "Pelles C Project", ext : [".ppj"], magic : ["Pelles C Project"], weakMagic : true},
-		perlPODDocument                          : {name : "Perl POD Document", ext : [".pm"], magic : ["Perl POD document", "Perl Packet", "Plain Old Documentation format"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Perl"},
+		perlPODDocument                          : {name : "Perl POD Document", ext : [".pm"], magic : ["Perl POD document", "Perl Packet", "Plain Old Documentation format", "Perl5 module"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Perl"},
 		php                                      : {name : "PHP Script", website : "http://fileformats.archiveteam.org/wiki/PHP", ext : [".php", ".phps", ".php3t", ".tst"], magic : ["PHP source", "PHP script", "Smarty compiled template", "application/x-php", /^PHP core test/], weakMagic : true},
 		phpMyAdminSQLDump                        : {name : "phpMyAdmin SQL dump", ext : [".sql"], magic : ["phpMyAdmin SQL dump"]},
 		piXCLSource                              : {name : "PiXCL source", ext : [".pxl", ".px"], magic : ["PiXCL source"], weakMagic : true},

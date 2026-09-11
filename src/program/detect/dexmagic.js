@@ -47,6 +47,8 @@ const DEXMAGIC_CHECKS = {
 	"Inno Setup Setup Data"              : [{offset : 0, match : "Inno Setup Setup Data"}],
 	"Inno Setup Data iPrefix #.#.#"      : [{offset : 0, match : "i"}, {offset : 1, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}, {offset : 2, match : "."}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}, {offset : 4, match : "."}, {offset : 5, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
 	"Inno Setup Data iPrefix ###"        : [{offset : 0, match : "i"}, {offset : 1, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}, {offset : 2, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
+	"Installer VISE (MacBinary)"         : [{offset : 128, match : "SVCT"}],
+	"Installer VISE (MacBinary Wrapped)" : [{offset : 256, match : "SVCT"}],
 	"InstallShield Self-Extractor"       : [{size : 2048, match : "InstallShield Self-Extracting"}],
 	"IFF CAT file"                       : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"                      : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],

@@ -231,6 +231,7 @@ const SUPPORTING_FILES = {
 	archive :
 	{
 		cloneCDImage            : /\.ccd$/i,
+		installerVISE           : /Tropico Demo Installer\.data$/,
 		pog                     : /\.pnm$/i,
 		redArchive              : /TIMETREK\.001$/,
 		setupSpecialist         : /SETUP\.\d$/,
@@ -628,6 +629,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/poly\/povRay\/.+/i, "text", true],
 	[/poly\/vrml\/.+/i, "text", true],
 	[/poly\/ydl\/.+/i, "text", true],
+	[/text\/javaSource\/(IdenticalTo|Printing|PriorityQueue|Transforming)\.java$/, "text", "txt"],
 	[/unsupported\/emacsCompiledLisp\/FILES\.ELC/i, "text", true],
 	[/video\/acornReplayVideo\/(ducks2|bluegreen|parrot)/, "text", true],
 	[/video\/avi\/pcpos\.avi/, "audio", "aviAudio"],

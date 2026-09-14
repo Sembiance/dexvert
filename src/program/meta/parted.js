@@ -6,7 +6,7 @@ export class parted extends Program
 	website = "https://www.gnu.org/software/parted/";
 	package = "sys-block/parted";
 	bin     = "parted";
-	args    = r => ["--machine", "--json", r.inFile(), "print"];
+	args    = r => ["--machine", "--json", r.inFile(), "unit", "B", "print"];
 	post    = r =>
 	{
 		const imageInfo = xu.parseJSON(r.stdout.trim());
@@ -22,6 +22,7 @@ export class parted extends Program
 			{
 				case "B":
 					return sizeNum;
+				// Since switching to "unit B" then these other sizes should no longer be used, which is good because they ended up losing precision (see rawPartition/Warez 3.img)
 				case "kB":
 					return sizeNum*1000;
 				case "MB":

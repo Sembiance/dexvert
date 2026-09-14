@@ -1,0 +1,3043 @@
+MACDRAW DRAWING FORMATS
+MD revision 4, DRWGMD revision 6, MacDraw II, Pro and MacDraw-wrapped PICT
+Research specification and implementation boundary
+
+STATUS
+
+This is an incomplete reverse-engineering specification. It describes the
+native data-fork families and wrapped PICT command streams, their recognized
+object/opcode types, their exact
+framing, and the implemented SVG interpretation. It is not a claim that every
+field or every rendering behavior has been established. Unresolved fields are
+identified explicitly below. A byte being read, assigned to a structure, or
+preserved in output is not equivalent to understanding its meaning.
+
+The accompanying macDraw.py attempts best-effort conversion and recovery of
+recognized native MacDraw documents and MacDraw-wrapped PICT drawings by
+default. Its interface is:
+
+    python3 macDraw.py inputFile outputFile
+
+Successful conversions, including recovered drawings, return status 0. Recovery
+or approximation emits a diagnostic on stderr and records its limitations in
+the SVG. Successful output does not certify that a damaged drawing is complete.
+Use the strict mode to reject damaged or unsupported drawing data:
+
+    python3 macDraw.py --strict inputFile outputFile
+
+On failure it returns status 2, emits a diagnostic on stderr, emits nothing on
+stdout, and neither creates nor modifies the requested output file. Validation
+and rendering precede any output operation. Successful writes use a temporary
+file and atomic replacement. Existing output files are retained on failure.
+Input and output must not refer to the same file. Output directories must
+already exist. Written files have mode 0664. Python 3.10 or later is required;
+there are no nonstandard Python modules. Keep macDrawII.py, macDrawPro.py, macDrawText.py,
+macDrawContainer.py, macDrawPICT.py and macDraw-fonts.json beside macDraw.py:
+these are supporting files. Wrapped PICT bitmaps additionally require the
+deark executable on PATH. Vector-only PICT drawings and the native document
+formats do not invoke deark. No other executable is required for conversion.
+The resulting SVGs contain their glyph outlines and do not depend on installed
+browser fonts, the Python modules, or the font bundle when viewed.
+The default display size maps one drawing unit to one CSS pixel, and bitmap
+glyph paths request crisp-edge rendering. See SVG RENDERING for the display
+policy and its distinction from physical print size.
+
+The legacy research-rendering mode remains available:
+
+    python3 macDraw.py --preview inputFile outputFile
+
+This mode is NOT an implementation of the strict completeness requirement. It
+permits only the documented interpretation choices described under PREVIEW
+RENDERING. It continues to reject broken framing, unknown record types, unknown
+structural encodings, count/size inconsistencies, and unassigned trailing bytes.
+Revision 4's documented inactive saved-file suffix is allowed in all modes. It does
+not search for a plausible next record, repair files, infer structure from a
+filename, copy content from another document, or invoke LibreOffice.
+
+STRICT ACCEPTANCE BOUNDARY
+
+MacDraw II and Pro have separate acceptance boundaries in their native-document
+chapters below. For the older formats, strict mode supports native revision-4 and revision-6 drawings whose visible features are
+implemented: ordinary geometry, the five pen selections, both unit-dependent
+corner tables, fixed-point smooth curves, ordinary/picture groups, pattern
+fills, monochrome srcOr bitmap composition, native arrow sectors and shaft
+shortening, and resource-based text glyphs, metrics, wrapping and styling.
+Unavailable font families automatically use Geneva, as specified below.
+It validates the entire stream
+before writing. Nonzero revision-4 unused header storage, nondefault origin/scales, unrecognized
+print versions, unsupported external-font encodings,
+degenerate smoothed polygons and unknown ruler units needed for rounded
+corners prevent strict
+output. Text is supported under the explicit font/environment profile below;
+text options, alignment, spacing and all eight transforms are implemented. --preview permits the explicitly listed drawing
+approximations; it never relaxes structural validation.
+
+Even strict conversion is NOT a certificate that every application-state byte has
+been semantically decoded. TPrint driver extensions and some editor preference
+bits remain opaque. Their original program paths establish their separation
+from illustration content; the one editor preference used by rounded geometry,
+the ruler-unit selector, is interpreted. The original bytes are preserved.
+Both the audit and SVG metadata explicitly set full_format_semantics_established
+false. This distinction is part of the implementation boundary, not a claim
+of satisfying complete byte-by-byte reverse engineering.
+
+The API's historical require_complete name means complete support for the
+implemented drawing interpretation, subject to the above metadata limitation.
+Exact QuickDraw pixel coverage is not an SVG guarantee: output uses continuous
+geometry and native curve vertices before device rounding, while its consumer
+chooses antialiasing and rasterization.
+
+DEFAULT RECOVERY POLICY
+
+For revisions 4 and 6, recovery starts only after recognizing one of the exact
+eight-byte native signatures and reading its complete 512-byte header.
+MacDraw II recovery uses its separate 500-byte header and bounded storage
+zones; Pro uses a 468-byte header and its own zone/record layout, as described
+in the corresponding chapters. It does not relax format
+identification, search for a displaced header, inspect filenames,
+or use another document to fill holes. A truncated header, an absent declared
+payload, or damage leaving no recoverable leaf objects still causes failure
+without output. An intentionally empty valid document remains convertible.
+
+Recovery uses the documented record framing, with these explicit exceptions
+to strict validation:
+
+  * Missing terminators: retain the decoded objects, including children of a
+    partially surviving group. A damaged group does not discard good children.
+  * Contradictory document/group counts and allocation totals: report the
+    disagreement and retain the decoded object hierarchy. Read actual lists
+    to their terminators rather than truncating them to a corrupt count.
+  * Unreadable record with a known length: omit that record and resume at its
+    format-defined end. Shapes have fixed lengths; text uses its character
+    count; polygons require agreement of stored block size and point count;
+    bitmap extents require a valid storage rectangle and row stride.
+  * Unknown type, contradictory variable-length framing, or damaged delimiter:
+    retain preceding objects and omit the remaining suffix. Groups have no
+    serialized subtree length. No search for a plausible next record is used:
+    arbitrary vertex, pixel or text bytes can imitate object headers.
+  * Truncated text at EOF: retain the available characters and lay them out
+    using the selected recovery font/style. Missing characters are not invented.
+  * Truncated polygon at EOF with otherwise consistent framing: retain complete
+    vertices, discard an incomplete vertex/delta, and draw an open unsmoothed
+    path. Missing closing edges or spline controls are not invented. Its
+    drawing bounds come from the retained coordinates.
+  * Truncated bitmap at EOF: retain complete storage rows intersecting its
+    source rectangle. Crop the destination proportionally so surviving rows
+    keep their original scale. An incomplete row is omitted, not zero-filled.
+  * Invalid non-rendering lock/state fields: preserve them and ignore their
+    invalid values for drawing. An invalid list terminator instead ends
+    recovery because it cannot reliably establish enclosing-list boundaries.
+  * Extra revision-6 bytes after a valid document terminator: preserve and
+    report them as an omitted suffix. Revision 4 uses its separate inactive
+    saved-file suffix rule and does not need a recovery warning for that case.
+
+For a record whose geometry or text framing is known, invalid rendering
+selections use the following fixed recovery defaults. These are conversion
+policy, not newly inferred meanings for previously unsupported format values:
+
+  Invalid pen-width menu item        item 2: one-point pen
+  Invalid pen-pattern item           item 3: black
+  Invalid fill-pattern item          item 1: no fill
+  Arrow flags with undefined bits    retain only the two defined low bits
+  Invalid rounded-corner item        item 1: square corners
+  Invalid point-size item            item 3: 12 points
+  Invalid spacing item               item 1: single spacing
+  Invalid alignment item             item 1: left alignment
+  Invalid transform code             code 0: identity
+  Undefined text-face bit 0x80        discard that bit; preserve the other bits
+  Invalid font-menu index            unknown family; use Geneva
+
+Valid selections remain unchanged. Every ignored or substituted field is
+reported with its original byte offset and the action taken. Unsupported text
+control bytes still cause omission of the text record, with continuation at
+its declared end if available. Inconsistent polygon mode/type or unknown
+polygon flag encodings likewise omit the polygon rather than guessing curves.
+Other unresolved drawing environments use the explicitly documented PREVIEW
+RENDERING approximations in default mode; --strict rejects them.
+
+Recovery does not prove that surviving values are undamaged: altered text,
+coordinates or bitmap pixels may still be valid encodings. It cannot recreate
+overwritten bytes uniquely. Where damage no longer determines the next record
+boundary, additional content beyond that gap needs a sound external source of
+framing information or original data. This implementation deliberately does
+not claim full reconstruction in those cases.
+
+Recovered SVGs have a recovery title/description, conversion_status=recovered,
+recovery_events, and omitted_byte_ranges in metadata. The original source is
+embedded unchanged, including all damaged and omitted bytes. An approximation
+without structural recovery has conversion_status=approximate; an issue-free
+drawing has conversion_status=converted. The report distinguishes these states.
+
+The grammar below describes well-formed files. Rejection/validation rules refer
+to the strict decoder unless this recovery policy explicitly permits retaining,
+substituting or omitting the affected data. Recovery does not redefine the
+valid byte encodings or make unresolved format semantics complete.
+
+MACDRAW PRO NATIVE DOCUMENTS
+
+MacDraw Pro is a separate native drawing family. macDrawPro.py decodes its
+bounded data-fork structures and drawing resources; macDraw.py selects that
+module from the signature. No LibreOffice executable or parser is called.
+The generic handle-heap reader and basic SVG primitives are shared with this
+project's MacDraw II implementation. This chapter states the implemented
+layout and its unresolved semantics; it is not a complete proprietary format
+specification. In particular, absent resource forks cannot be reconstructed
+from their numeric references in a data fork.
+
+Pro identification and framing
+
+The supported eight-byte signatures are:
+
+    64 44 6F 63 44 32 FF FF     dDocD2, signed subversion -1: drawing
+    64 4C 69 62 44 32 FF FF     dLibD2, signed subversion -1: stationery
+
+Other subversions are rejected. These signatures do not designate PICT data.
+A native document can contain raster objects as well as editable vectors.
+Finding a bitmap object does not make its document a PICT-only wrapper.
+
+Numbers are big-endian. Fixed is signed 16.16, RectFixed is four Fixed values
+(top,left,bottom,right), and PointFixed is two (y,x). Geometry is not rounded
+to integer pixels on input. Header and zone offsets below are relative to the
+start of the data fork, excluding any MacBinary header/secondary header.
+
+The complete 468-byte header is followed, without inserted alignment, by
+fourteen zones whose lengths are declared in the header. Then follow fixed
+34-byte object records, with their count obtained from the layer table. Bytes
+beyond the counted object table are preserved as unreferenced trailing storage.
+They are not searched for additional objects. All zones and complete records
+must fit their enclosing stream; no signature or object resynchronization
+scan is performed.
+
+Pro header map
+
+Offset    Bytes    Interpretation
+0x000       8     signature and subversion
+0x008     120     Printing Manager TPrint, printer state
+0x080     128     saved editor preferences
+0x100       2     document/editor flags; individual bits unresolved
+0x102       2     u16 number of layers
+0x104      12     six u16 style counts in HEADER order:
+                  ruler, pen, FONT, PARAGRAPH, arrow, DASH
+0x110       2     saved active layer
+0x112      10     saved flags/editor state; individual semantics unresolved
+0x11C     120     three 40-byte saved-state blocks; the u16 at 0x11E
+                  is the library count; remaining editor/library state
+                  is preserved without complete semantic interpretation
+0x194      24     six u32 style-zone byte lengths in STORAGE order:
+                  ruler, pen, DASH, arrow, FONT, PARAGRAPH
+0x1AC      32     eight u32 storage-zone byte lengths, in the order below
+0x1CC       8     saved identifier and two words; unresolved application state
+0x1D4       -     first zone
+
+Style-zone storage order and fixed entry sizes:
+
+    ruler         24 bytes
+    pen           12 bytes
+    dash          28 bytes
+    arrow         14 bytes
+    font          22 bytes
+    paragraph    238 bytes
+
+Other-zone storage order:
+
+    layers, layer names, layer/library handle heap, libraries,
+    library names, geometry handle heap, text handle heap, free storage
+
+A zone begins at 468 plus the lengths of every preceding zone. The object
+table begins at 468 plus the sum of all fourteen lengths. Header counts and
+style table extents are checked independently. Default recovery uses complete
+entries when a count is stale and records recovery_macdrawpro_style_count;
+it does not shorten the following zone based on that count. Partial style
+entries or out-of-file zone extents fail validation.
+
+Pro shared styles and layer records
+
+Ruler entries are u32 usage state, two big-endian 64-bit floating-point
+scales, and two u16 words. Their units/editor behavior is not fully decoded.
+Geometry already carries drawing-space coordinates.
+
+Pen entries are u32 usage state, u32 16.16 logical width, u16 cached vertical
+pixel width, u16 cached horizontal pixel width. SVG uses the logical width;
+zoom-dependent integer cache dimensions are retained. Unequal cached axes
+are reported because a single SVG stroke cannot reproduce a rectangular pen.
+Pen references in objects are one-based; zero uses one drawing unit.
+
+Dash entries are u32 usage state followed by six signed Fixed values, forming
+three on/off pairs. Zero pairs are omitted from the SVG dash list. Object dash
+references are one-based; zero is solid. Arrow style entries contain u32 usage
+state, u16 flags and two Fixed parameters. Rendered line heads use the explicit
+cached vertices described below; unused arrow style/editor semantics remain
+unresolved.
+
+Each layer is 130 bytes. At +0 is u16 flags (0x8000 means saved hidden), +2
+u16 layer ID, +4 u32 relative offset into the layer-name zone, +8 u32 object
+record count. Remaining 118 bytes hold saved layer/editor state, bounds and
+additional words whose complete meanings are not established. Names are
+Pascal MacRoman strings, bounded by the name zone. Layer counts partition
+the object table in layer order. Groups and end records are included in these
+counts. The library zone has ten-byte records; its editor/catalog fields and
+the layer/library heap are framed and preserved, not completely interpreted.
+Visible objects come from the layer-partitioned object table.
+
+--layer N selects a one-based layer, including one saved hidden. Normal output
+retains hidden groups with display="none" and excludes them from visible
+canvas bounds. Explicit layer exports display the requested hidden artwork.
+
+Pro handle heaps
+
+Geometry, characters and layer/library associations use the same handle-heap
+framing as MacDraw II. At zone+0 is u32 T, the handle table's byte size, and
+at +4 u32 free-list/bookkeeping state. T must be at least 8 and divisible by
+4. The (T-8)/4 u32 slot offsets follow. At zone+T is u32 S, heap byte size
+including its four-byte size field. Both T+S and all allocations must remain
+within the declared zone. A zero slot has no allocation. Nonzero offsets are
+relative to zone+T and at least 4.
+
+An allocation starts with u32 usage/bookkeeping and u32 allocation size B,
+including its eight-byte header. B is at least 8. Slots can alias the same
+allocation; distinct allocations cannot overlap. Object handle value H is
+8+4*slot, not a file offset. Free entries, heap gaps, unused allocations and
+zone tails are preserved. Their detailed allocator state remains unresolved.
+
+Pro object records
+
+Offset    Bytes    Interpretation within a 34-byte record
++0         16     RectFixed cached drawing bounds
++16         1     flags: 0x40 has geometry allocation; 0x80 has rotation
++17         1     low nibble: type; 0x20/0x40: line endpoint direction bits
++18         1     object/editor state
++19         1     one-based pen style
++20         2     additional Pro object/editor state
++22         2     stroke pattern reference
++24         2     fill pattern reference
++26         1     one-based dash style
++27         1     signed auxiliary state, or start of inline corner parameter
++28         2     geometry handle, or group allocation/count cache
++30         2     stroke color/gradient reference
++32         2     fill color/gradient reference
+
+Type values:
+
+    1 text                 2 line                3 rectangle
+    4 rounded rectangle    5 ellipse             6 arc
+    7 smooth path          8 polygon             9 Bezier path
+   10 group or note       11 group end          12 bitmap/PixMap
+
+A rotation flag without an allocation is invalid. Inline types 2 through 5
+need no geometry heap allocation. Type 10 without 0x40 starts a group; with
+0x40 it is a note. Group nesting follows explicit type-11 end records. The
+inline group count retains a legacy 32-byte allocation convention and can
+be an upper bound; it is not a Pro on-disk byte length. Missing group ends
+or unmatched ends are reported, retaining complete children in recovery mode.
+
+A geometry allocation has its standard eight-byte heap header, then two
+u16 words at +8 and +10. Their meanings depend on type: +10 is a character
+handle for text and note objects, or line flags for lines. If rotated, the
+next 28 bytes are Fixed angle in radians, local RectFixed, and two additional
+Fixed saved pivot/state coordinates. The shape's local box is relative to
+its cached outer origin. Basic shape/text transforms use the local box center.
+The extra saved pivot values and general editor flags are not fully decoded.
+
+Line data contains Fixed angle and a relative RectFixed of endpoints (20
+bytes). Flags in allocation word +10 select first/second cached arrow data
+with bits 0/1. Each head occupies three PointFixed vertices (24 bytes): one
+edge of its base, shaft termination at the base, and the opposite base edge.
+The endpoint rectangle provides the tip. Bit 2 adds a 44-byte measurement
+label: relative RectFixed, two state bytes, Pascal length and up to 25 bytes.
+The implicit label font uses the documented Geneva 9 fallback. Unknown flag
+bits are reported even when the ordinary shaft/head geometry is renderable.
+
+Arc data contains two Fixed angles in degrees, relative arc endpoint rectangle
+and relative parent-ellipse rectangle (40 bytes). A rotated arc adds eight
+cached PointFixed positions. Rotated ellipses have eight cached points and
+rotated rounded rectangles have sixteen. SVG uses mathematical ellipses and
+arcs with the saved transform; cached points remain in the source. Rounded
+corner units are still approximate: inline signed Fixed at +27 is divided by
+36; an allocated corner combines the first two words and divides by 4096.
+These are explicitly declared rendering profiles, not verified original
+rounding/corner algorithms. Strict mode rejects these corner approximations.
+
+Pro typed paths
+
+The type-specific payload for types 7, 8 and 9 begins with u16 node count.
+Each node has a u16 tag, followed by:
+
+    tags 0,1,2,3,6,7    three PointFixed values:
+                       incoming control, anchor, outgoing control
+    tags 8,9           one PointFixed anchor
+    other tags         unsupported; point count not inferred
+
+Stored points are relative to the cached outer bounds' top-left origin and
+already expressed in drawing axes. Applying the record's rotation to these
+points again is incorrect. The SVG moves to the first anchor, then uses a
+cubic segment whenever either adjacent node has controls. A one-point node
+contributes its anchor as its missing control. Two one-point nodes form a
+straight segment. A final anchor exactly equal to the first closes the path.
+Fills use even-odd winding. No smoothing is invented from the node count or
+shape name. Odd tag editing/closure bits are not completely understood; their
+presence is reported. The coordinates themselves are retained and rendered.
+
+Pro font and paragraph records
+
+A 22-byte font style contains:
+
++0   u16       usage state
++2   Fixed     cached total line height
++6   Fixed     cached nominal vertical font metric; exact meaning unresolved
++10  u16       Font Manager family ID
++12  u16       face flags
++14  u16       quarter-point size (divide by four; fractions are significant)
++16  s16       letter-spacing/effect field; exact units unresolved
++18  u16       text paint/pattern selector
++20  u16       text color reference
+
+Low seven face bits select the existing QuickDraw font styles. Bits 0x0100,
+0x0200 and 0x0800 designate superscript, subscript and small capitals. Their
+exact Pro sizing/placement is not established. The fallback retains size for
+scripts and shifts baseline by one third of point size; small lowercase
+letters use upper-case glyphs at 0.8 times the size. These effects are marked
+approximate. Nonzero tracking/effect values are retained, reported and not
+silently treated as known tracking distances. Plain text paint 0xC006 uses
+the selected color and 0xC005 uses white. Other pattern effects are reported
+when the font renderer reduces them to a solid foreground.
+
+Font resolution uses the same bundled original FONT/NFNT resources and FOND
+family mappings as other supported MacDraw families. Missing families use
+Geneva and retain their requested size/face in the audit. Fractional sizes
+select a strike using the documented lookup order and a rounded 8.8 scale.
+The implementation's character/glyph environment is Roman. A missing font
+substitution cannot restore a non-Roman script, its original multi-byte text
+encoding, or an unavailable outline font's fractional advance table. These
+are limits of this rendering profile, not evidence that the source text is
+Roman or originally used Geneva.
+
+A 238-byte paragraph style contains:
+
++0   u16       usage state
++2   s16       alignment: -1 right, 0 left, 1 centered, 2 full justification
++4   s16       saved state
++6   Fixed     left margin
++10  Fixed     first-line indentation relative to left margin
++14  Fixed     signed right-edge adjustment
++18  Fixed     line spacing
++22  Fixed     space before paragraph
++26  Fixed     space after paragraph
++30  3*s16     corresponding spacing modes; -1 is relative, others absolute
++36  s16       number of active tab slots (0..20)
++38  200       twenty ten-byte tab slots, including inactive slots
+
+Each tab slot is s16 alignment (0 left,1 right,2 centered,3 decimal), u16 leader
+character, Fixed position, u16 decimal character. Tab positions are relative
+to the text-box origin. The renderer supports those four alignments and
+repeated leaders, measuring all font runs in the following field. A tab beyond
+the explicit stops uses reported 36-unit fallback stops. In uncached layout,
+relative line spacing uses height*(1+value); absolute spacing is at least the
+font's natural line height. Relative before/after spacing uses the current
+line height. These uncached typesetting choices are reported approximations.
+Saved line tables take precedence over reflow and paragraph vertical spacing.
+
+Pro text allocations
+
+After the common allocation words and optional rotation, text has:
+
+    u32 character count
+    u32 saved line count L
+    u32 modification count M
+    two u16 state words
+    twenty extra state bytes for notes only
+    M+1 modification entries, each (u16 character position, u16 selector)
+    optional L+1 line-cache records, 26 bytes each
+    zero or two residual allocation bytes
+
+Selector 0xFFFF is an end marker, often positioned at characterCount+1.
+Selectors with bit 0x8000 choose a zero-based paragraph style using the lower
+15 bits. Other selectors choose a zero-based font style. Paragraph and font
+changes can share a position. Positions must be nondecreasing and no greater
+than characterCount+1. Characters are in a separate text-heap allocation,
+starting eight bytes after that allocation's header. The explicit character
+count bounds the text; unused allocation tail bytes are preserved separately.
+
+A saved line-cache record is:
+
++0   u16       start character position
++2   u16       saved line state (ordinary line or sentinel)
++4   Fixed     line height
++8   Fixed     ascent
++12  Fixed     horizontal offset
++16  Fixed     cached line width
++20  u16       saved line state
++22  Fixed     vertical top offset relative to the text box
+
+The baseline is textBoxTop + verticalOffset + ascent. Cached character
+positions select line ranges. Alignment uses the paragraph style; the cached
+horizontal offset participates in the origin. When bitmap font advances differ
+from the saved line width, the converter reports that difference and preserves
+line breaks/baselines without stretching bitmap glyphs to fit a guessed width.
+CR bytes select paragraph boundaries; trailing line controls are not glyphs.
+
+The line cache can be absent, even when L is nonzero. This is distinguished by
+exact enclosing allocation length: after the modifications, either 0/2 bytes
+remain or exactly 26*(L+1) plus 0/2 bytes remain. No search or guessed record
+boundary is used. Other extents are rejected for that object. An absent cache
+causes explicit paragraph reflow from surviving text and available font metrics.
+A stale cache that fails to cover current text is discarded in recovery mode,
+reported as recovery_macdrawpro_stale_text_cache, and the full text is laid
+out again. Such a cache must not cause otherwise readable characters to vanish.
+
+Pro raster objects
+
+Type 12's payload, after the common allocation/rotation header:
+
++0    8    Rect16 source crop
++8    4    saved baseAddr/handle, not an on-disk offset
++12   2    rowBytes flags/stride: 0x8000 denotes PixMap, low 14 bits stride
++14   8    Rect16 storage bounds
++22  42    extended PixMap state, also reserved in monochrome objects
++64   -    raw pixel rows, rowStride*(storageBottom-storageTop) bytes
+
+Extended state, relative to +22:
+
++0   u16      pmVersion
++2   u16      packType
++4   u32      packSize
++8   Fixed    horizontal resolution
++12  Fixed    vertical resolution
++16  u16      pixelType
++18  u16      pixelSize
++20  u16      component count
++22  u16      component size
++24  u32      planeBytes
++28  u32      saved color-table pointer
++32  u32      pmReserved
++36  s16      resource-fork clut ID
++38  2*u16    saved extra state
+
+A monochrome record uses one MSB-first bit per pixel. Indexed PixMaps support
+1,2,4,8 bits per index, one component, high-order bits first in each byte.
+Direct pixelType 16 supports 16-bit xRRRRRGGGGGBBBBB and 32-bit unused,R,G,B
+storage. Eight-bit output expands five-bit components across 0..255. Planar
+layouts are not implemented. Source crops must lie within the storage bounds,
+and the bit count must fit rowBytes. Every stored row and padding bit is kept
+in the embedded source even if the source crop does not display it.
+
+packType values 0..4 are retained as QuickDraw picture-recording hints; the
+Pro allocation stores unpacked pixel memory. They do not introduce PICT
+opcodes or PackBits lengths into these rows. Apple's Inside Macintosh,
+Imaging With QuickDraw, Appendix A, documents that in-memory PixMap data is
+unpacked regardless of packType, which selects how picture recording packs it:
+https://dev.os9.ca/techpubs/mac/QuickDraw/QuickDraw-461.html
+
+Indexed colors come from the signed-ID clut resource. Without that exact
+resource, the converter emits a conspicuously documented inverted grayscale
+index preview (index zero white, maximum index black). This is a way to inspect
+pixel structure, not a reconstruction of the missing palette. Missing entries
+in a present palette use the same neutral fallback and emit an issue. Direct
+RGB objects do not require a palette. Output embeds cropped RGB PNG data;
+there are no external image assets needed to view the SVG.
+
+Pro resource forks and paint references
+
+MacBinary resource forks are loaded automatically for Pro documents. A raw
+Pro data fork can be paired explicitly with its own resource fork:
+
+    python3 macDraw.py --resource-fork original.rsrc inputFile outputFile
+
+The resource input can be a raw Resource Manager fork or an AppleDouble
+resource-fork entry. The option is specific to Pro drawing resources and is
+separate from --font-resource, which adds original bitmap font suitcases.
+It does not search neighboring documents, borrow palettes, depend on filenames,
+or infer custom colors from unrelated installations. External resource bytes
+are embedded separately in SVG metadata with their length and checksum;
+MacBinary already preserves both forks in the embedded original input.
+
+drawing_resources metadata records the original resource types, signed IDs,
+names, byte lengths and SHA-256 hashes. decoded_counts additionally records
+the decoded color, pattern, gradient and bitmap-palette counts. A supplied
+resource fork may contain unsupported definitions; its mere presence does not
+establish that every paint was decoded. Paint-reference diagnostics identify
+the referencing field in the data fork, rebased to its MacBinary offset when
+contained. Font color diagnostics refer to font-style +20, independently of
+the different pattern/color separation in object records.
+
+Resource Manager data/map extents, type lists, reference lists, signed IDs,
+names and length-prefixed resource payloads are bounds checked. Complete raw
+forks remain preserved, including unrecognized resource types, map attributes,
+padding and allocator fields. Their presence does not imply complete semantic
+interpretation of every resource.
+
+The drawing's palette maps are DPCo ID 0 (20-byte entries), DPPa ID 1
+(18-byte entries), DPRa ID 2 (56-byte entries). An 80-byte PaDB descriptor of
+the corresponding ID declares its map type at +48, entry stride at +52 and
+entry count at +54. Empty maps use a ten-byte placeholder. Exact descriptor
+and payload extents are checked; with no PaDB the known fixed stride still
+bounds entries. Mismatching descriptors/maps are reported and not guessed.
+
+DPCo entry: four u16 saved/usage words, u16 color model, four u16 components,
+s16 catalog identity. Low model bits 1=RGB, 2=CMYK, 3=HSL; model zero remains
+unresolved and uses an explicit RGB fallback. RGB uses each component's high
+byte. CMYK uses multiplicative (1-component)*(1-black); HSL uses normalized
+components. CMYK/HSL monitor/profile fidelity is not established and is reported
+when the corresponding entry is used by the drawing. Unused palette entries do not
+create rendering warnings. Unknown color-model entries retain their components
+and likewise report their fallback only when referenced.
+
+DPPa entry: ten bytes of usage/editor state, then eight MSB-first pattern
+bytes. The pattern repeats every eight drawing units, with white zero bits
+and selected-foreground one bits. A solid black mask becomes the foreground
+color and an empty mask becomes white. Pattern backgrounds are opaque.
+
+DPRa entry: eight saved/usage bytes, s16 kind at +8 (0 linear,1 radial,2
+rectangular), four bytes of center/offset data at +10, two saved bytes at +14,
+four eight-byte color records at +16 (u16 R,G,B,extra), u16 selector at +48,
+and six saved bytes at +50. Selector high bits 0x8000..0x1000 enable the four
+colors; low twelve bits store angle. A linear center value is Fixed; radial
+and rectangular centers use four u8 percentages (top,left,bottom,right).
+The SVG profile uses evenly spaced enabled colors, the linear reversal point,
+angle and center. Radial and rectangular sequences run from reversed inner
+colors to outer colors. Rectangular gradients are four clipped linear wedges.
+Gradient interpolation, center-region extent and native color management are
+not fully established; every used gradient is reported as approximate. Internal
+wedge edges disable antialiasing so their common boundaries do not leak the
+background through the paint tile; the outline of the painted shape remains
+normally antialiased.
+
+A present gradient with an unsupported kind is distinguished from an absent
+resource. If it has enabled colors, the converter retains its first enabled
+color as a flat paint and emits macdrawpro_gradient_type. It does not mask
+unknown kind bits or infer an interpolation type from the other parameters.
+All original gradient colors, the raw kind and parameters remain in the
+embedded input. A gradient with no enabled colors emits macdrawpro_gradient_stops
+and uses neutral inspection paint. Strict mode rejects both fallbacks.
+
+clut entries have u32 seed, u16 flags, u16 last index (0xFFFF empty), then
+lastIndex+1 ColorSpec entries, each u16 pixel index and three u16 RGB values.
+Flag 0x8000 uses table order as the pixel index; otherwise the saved index
+selects each color. Duplicate indices and size discrepancies are invalid.
+
+Object pattern zero disables paint. Pattern 0xC006 is solid foreground and
+0xC005 white; 0x8000|index selects a zero-based DPPa entry. Other pattern
+references are explicitly unresolved and fall back to solid foreground.
+A missing DPPa entry never selects an unrelated built-in or another file's
+pattern by numeric coincidence.
+
+Color zero is implicit black; 0x4000 selects white/paper. Nonzero low bits
+under the 0x4000 prefix have unresolved semantics and use a reported white
+fallback. 0x8000|index selects DPCo, and 0xC000|index selects DPRa. Nonzero
+references with neither high category bit set have unresolved encoding,
+distinct from a missing resource. They emit macdrawpro_color_encoding and use
+neutral inspection paint. Missing resources
+use reported neutral inspection paints, not inferred original RGB values.
+Unresolved strokes use gray (#808080). Unresolved fills use gray (#888888),
+and an absent or unresolved outline becomes dark gray (#303030); a newly
+introduced outline is 0.75 drawing units wide. This fixed preview policy
+keeps adjacent objects visible when their original colors are unavailable.
+The original paint references remain preserved. Missing text paint colors
+use black. The macdrawpro_paint_preview issue marks these substitutions. Font
+paints follow their separately stored pattern and color selectors. Resource/editor catalogs such as UPDL, CoEL, PaEL, RaEL,
+DPFa and application preference/font-name lists are preserved; their full
+behavior is not implemented by this decoder.
+
+Pro recovery, fidelity boundary and next steps
+
+The decoder frames every supplied data-fork byte through header, zones,
+allocations, records or saved trailing storage. An audit's accounted_bytes
+therefore measures coverage and preservation, not complete understanding.
+Unknown bounded records are reported and omitted; their 34-byte records
+appear in omitted_byte_ranges while their allocation data remains preserved.
+Damage that prevents locating subsequent zones is fatal. Native Pro decoding does not search for or fall back to a PICT stream.
+Recognized MacDraw-wrapped PICT inputs have their own decoder chapter below.
+
+Supported drawing interpretation includes ordinary shapes, fractional pens,
+dashes, saved arrowheads, grouped/layered artwork, typed Bezier control points,
+text font/paragraph changes, saved line positions, source-cropped monochrome,
+indexed and direct-color bitmaps, and the resource maps described above.
+Strict mode rejects all reported recovery or rendering approximations. It
+cannot certify original printer/editor metadata, exact QuickDraw pixel coverage
+or missing original font provenance even for an issue-free drawing.
+
+The following work is still required for full format/rendering semantics:
+
+* Recover each document's own resource fork or original MacBinary container
+  to restore its custom colors, patterns, gradients and indexed-image palette.
+  Data-fork numeric references do not encode the missing definitions.
+* Trace an original Pro loader and drawing engine, with controlled saves, to
+  establish tracking units, non-Roman text handling, exact outline-font widths,
+  script/small-cap metrics, rounded-corner units, odd vertex flags, remaining
+  line/paper-color bits, note decoration and unknown object-data extensions.
+* Validate gradients and CMYK/HSL output against the original application's
+  screen/print color paths and profiles, including rectangular center regions.
+* Decode remaining header/editor/library fields, palette catalogs, font-name
+  resources, allocation free lists and unused saved storage. Keeping these
+  bytes intact is not a substitute for explaining their semantics.
+
+The included synthetic Pro fixtures test independent framing, typed control
+points, stale text recovery, tabs, fractional sizes, layers, RGB palette crops,
+raw direct pixels, external/MacBinary resources and failure without output.
+Corpus rasterization and source round-trip tests support the implementation
+boundary; they are not a comparison with an original Pro renderer.
+
+MACDRAW-WRAPPED PICT DRAWINGS
+
+PICT is a recorded QuickDraw drawing, not a synonym for a raster image. One
+PICT stream can contain vector shapes, multiple text runs and zero, one or many
+bitmaps. A bitmap opcode carries its own source rectangle, destination rectangle
+and transfer mode. Text and shapes elsewhere in the stream are also PICT data;
+they are not a separate native MacDraw object list. MacDraw's export wrapper
+contains print/editor preferences followed by this stream. Saving as a picture
+can preserve appearance without preserving native editable object records.
+
+Identification and file structure
+
+macDrawPICT.py is selected by macDraw.py for the three anchored export prefixes:
+
+  Offset  Length  Value / interpretation
+  0       8       DRWG D2 00 06, DRWG MD 00 06, or DRWG 00 00 00 00
+  8       504     saved MacDraw print/editor wrapper; original bytes preserved
+  512     2       unsigned picture-size word; not a reliable stream length
+  514     8       signed Rect16: top, left, bottom, right (picFrame)
+  522     2 / 4   11 01 for v1; 00 11 02 FF for v2
+  following      state and drawing opcodes through EndPic
+  after EndPic   optional inactive storage; preserved, reported, never scanned
+
+For unversioned DRWG, header bytes 256..499 must be zero; nonzero native
+layer/storage state instead selects the native MacDraw II validation path.
+The older DRWGMD signature can also describe a native drawing: the anchored
+PICT marker is checked, including the native parser's payload check, before
+choosing the PICT decoder. Arbitrary files with a PICT somewhere inside them
+are not accepted. A plain PICT with a zero-filled file header is not accepted
+as a MacDraw file. One validated outer MacBinary container is supported.
+
+The 16-bit size word can be zero, truncated or stale. Opcode-defined lengths
+and EndPic establish the logical stream end. The original size word is recorded
+but never used to truncate the drawing. Version 1 opcodes are unsigned bytes;
+version 2 opcodes are unsigned 16-bit words, aligned on even offsets. An odd
+operand length in v2 is followed by one alignment byte. Nonzero alignment is
+reported as recovery; it does not change the known opcode boundary. All
+multibyte integers are big-endian. Point stores vertical before horizontal;
+Origin instead stores dh then dv. Signed Fixed values use 16.16 representation.
+
+Implemented opcode framing
+
+The table lists hexadecimal opcodes and operand lengths, excluding the opcode
+itself and any v2 alignment byte. State is applied in stream order.
+
+  00        0        NOP
+  01        region   replace clipping region
+  02/09/0A  8        background, pen, fill 8-by-8 bit patterns
+  03        2        saved font family ID
+  04        1        font face bits
+  05/08     2        text/pen transfer mode
+  06        4        signed Fixed extra width of a space
+  07/0B     4        pen size / rounded-corner oval size (Point)
+  0C        4        signed dh,dv origin change
+  0D        2        signed point size; zero uses the declared 12-point system size
+  0E/0F     4        legacy foreground/background color constant
+  10        8        text scale numerator Point and denominator Point
+  11        1 / 2    version 01 / 02 FF
+  12..14    variable background, pen, fill PixPat (see boundary below)
+  15        2        unsigned fractional horizontal text position
+  16        2        signed extra nonspace-character width
+  1A/1B     6        foreground/background RGBColor: three unsigned 16-bit values
+  1C/1E     0        highlight-mode / default-highlight state
+  1D/1F     6        highlight/arithmetic color; preserved with an effect warning
+  20        8        line start Point and endpoint Point
+  21        4        line endpoint from saved line endpoint
+  22        6        start Point followed by signed byte dh,dv
+  23        2        signed byte dh,dv from saved line endpoint
+  28        5+n      text start Point, unsigned byte length n, n text bytes
+  29/2A     2+n      unsigned byte horizontal/vertical delta, length n, text
+  2B        3+n      unsigned byte dh,dv, length n, text
+  2C        2+n      unsigned word size n, old font ID, Pascal font name
+  2D        10       size=8, Fixed intercharacter spacing, Fixed total run slop
+  2E        2+n      size n, glyph-state bytes
+  30..34    8        frame/paint/erase/invert/fill rectangle
+  38..3C    0        corresponding operation on saved rectangle
+  40..44    8        rounded rectangle, using saved oval size
+  48..4C    0        same rounded rectangle
+  50..54    8        oval
+  58..5C    0        same oval
+  60..64    12       Rect16, signed start angle, signed arc angle
+  68..6C    4        same rectangle, new start/arc angles
+  70..74    polygon  frame/paint/erase/invert/fill polygon
+  80..84    region   frame/paint/erase/invert/fill region
+  90/91     bitmap   unpacked bitmap/PixMap, Rect / region mask
+  98/99     bitmap   PackBits bitmap/PixMap, Rect / region mask
+  9A/9B     bitmap   direct-pixel PixMap, Rect / region mask
+  A0        2        unsigned comment kind
+  A1        4+n      unsigned comment kind, unsigned size n, n comment bytes
+  FF        0        EndPic (one-byte opcode in v1, two-byte opcode in v2)
+  0C00      24       version-2 header record
+  8200/8201 4+n      QuickTime record length n and payload; drawing unsupported
+
+Apple's reserved opcode lengths are honored without interpreting their data:
+24..27, 2F, 92..97, 9C..9F and A2..AF have a word length plus that many bytes;
+B0..CF and 8000..80FF have no operands; D0..FE and 8100..FFFF have a long
+length plus payload, except the explicitly defined opcodes above. Codes
+0100..7FFF carry twice their high byte in data bytes, with HeaderOp separately
+decoded. Reserved shape verbs 5..7 carry the same structural operands as the
+neighboring real verbs but perform no drawing. They do not replace the saved
+rectangle. SamePoly/SameRgn (78..7C, 88..8C) are marked unimplemented by Apple;
+the zero-length opcodes are preserved without drawing, with a warning.
+Undefined low opcodes 17..19 have no established operand length and stop the
+parser; no opcode-looking bytes later in the file are searched for.
+
+HeaderOp -1 begins with signed long -1, then four signed Fixed values in
+left, top, right, bottom order, and a reserved long. HeaderOp -2 instead holds
+signed word -2, reserved word, unsigned Fixed horizontal/vertical resolution,
+Rect16 optimal source rectangle, and a reserved long. These fields are recorded
+alongside their raw bytes. A nonmatching source rectangle and initial picFrame
+currently produces an explicit mapping warning; resolution-aware remapping is
+not implemented. The SVG canvas uses picFrame and one coordinate unit per CSS
+pixel. Unknown HeaderOp versions are preserved with a warning.
+
+State, shapes, clipping and text
+
+Rectangles, rounded rectangles, ovals and arcs share ONE saved Rect16, initially
+zero. A SameRect/SameOval/SameArc command can reuse a rectangle last supplied
+by a different shape family. Rounded-corner oval size starts at zero. Line
+endpoint and text start position are separate saved Points, initially zero.
+Short line deltas are signed; compressed text deltas are unsigned. Each is
+added with signed 16-bit wraparound. Relative text positions refer to the
+previous text run's START, not to the advanced glyph pen. PnLocHFrac applies to
+the next text command and resets to 0x8000; subpixel width behavior is covered
+by the declared bitmap-font approximation.
+
+An Origin change subtracts dh,dv from subsequent rendered coordinates and
+remaps the current clip. Clips are replaced, not cumulatively intersected,
+apart from the output canvas and any bitmap-specific mask. A Region begins
+with its unsigned total size (including the size word), followed by Rect16.
+Size 10 denotes a rectangular region. A complex region has signed y values,
+each followed by sorted x transitions terminated by 0x7FFF; another 0x7FFF ends
+the region. Transitions XOR into the active boundary set; alternating x pairs
+bound filled spans until the next y. The decoder validates ordered scanlines,
+unique transitions, even active boundary counts and closure. SVG paths retain
+these scan bands for fills and clips. A polygon begins with its total size,
+Rect16 bounds, then signed Points; (size-10) must be divisible by four.
+
+FrameRect is an interior ring using the separate horizontal/vertical pen
+sizes. Lines retain their QuickDraw pen origin and width; adjacent line
+commands with unchanged paint state can share one SVG path. Empty or negative
+pen dimensions draw no line. Pattern bits use bit 7 as the leftmost pixel.
+Bit zero selects background and bit one foreground; patterns remain eight
+units wide/high even on thick lines. Standard legacy color constants are
+30 white, 33 black, 69 yellow, 137 magenta, 205 red, 273 cyan, 341 green,
+and 409 blue. RGBColor uses the high byte of each 16-bit component.
+
+Text uses the recorded start positions, point size, style and scale, without
+reflowing the PICT's runs. Font-name records override saved numeric IDs by exact
+case-insensitive family-name matching against bundled/supplied font resources.
+An unavailable named or numbered font substitutes Geneva. Glyphs are embedded
+as crisp SVG paths; viewing requires no browser fonts. Space and nonspace
+spacing fields affect advances. Original TrueType/fractional metrics,
+Script Manager run-slop distribution and non-Roman fonts/scripts remain
+approximate and are reported. The byte strings are preserved without trying
+to infer their language from filenames or character frequencies.
+
+Bitmap framing and Deark boundary
+
+BitsRect/PackBitsRect start with unsigned rowBytes and bounds Rect16. The high
+bit of rowBytes distinguishes a PixMap; its low 14 bits are the byte stride.
+DirectBits first adds the four-byte baseAddr placeholder. A PixMap adds:
+
+  u16 pmVersion, u16 packType, u32 packSize, u32 hRes, u32 vRes,
+  u16 pixelType, u16 pixelSize, u16 cmpCount, u16 cmpSize,
+  u32 planeBytes, u32 pmTable, u32 pmReserved.
+
+An indexed PixMap then stores a ColorTable: u32 seed, u16 flags, u16 lastIndex,
+followed by lastIndex+1 eight-byte entries (value,u16 red,u16 green,u16 blue).
+LastIndex 0xFFFF means zero entries. DirectBits has no ColorTable. Next are
+source Rect16, destination Rect16, unsigned transfer mode, and an optional
+Region for the odd-numbered masked opcode. Pixels follow, one scanline at a
+time. Unpacked opcodes, rowBytes below eight, or packType=1 store rowBytes times
+height bytes. PackType=2 stores three quarters of rowBytes times height and
+requires 32-bit pixels. Other packed rows have a length byte if rowBytes<=250,
+or a length word otherwise, followed by that many compressed bytes. Encoded
+row lengths establish boundaries independently of their decoded contents.
+
+Each framed bitmap is placed in a temporary, complete PICT v2 containing its
+foreground/background color and HeaderOp. Deark receives a separate temporary
+folder for that one bitmap. The command is an argument list, never a shell:
+
+  deark -m pict -od <temporary-directory> <temporary-directory>/bitmap.pict
+
+Exactly one PNG and matching bitmap dimensions are required. Failures or
+warnings become explicit per-bitmap issues; later bitmaps keep their own
+identities and positions. No mapping from Deark's debug text or numbered
+whole-file extraction order is used. Temporary files are removed. The SVG
+embeds the PNG as a data URI inside a viewport with the saved source rectangle,
+positioned/scaled to the destination rectangle and intersected with the current
+clip/mask. Multiple images remain separate and retain their paint order with
+text and geometry. The output has no external image-file dependency.
+
+SrcCopy is ordinary image replacement. Black/white srcOr uses multiply blending,
+which makes white transparent and black opaque against the destination.
+Color srcOr also uses multiply, with an explicit warning that it is not exact
+bitwise QuickDraw color composition. Other bitmap transfer modes use a reported
+source-copy fallback. Deark currently warns about four-component direct-pixel
+transparency; that warning remains attached to the image. Exact color transfer,
+alpha interpretation and other compositing effects require further work.
+
+Support boundary and remaining work
+
+This profile renders the screen QuickDraw opcode sequence. Printer comments
+can describe a different representation: rotated text, smooth curves, fractional
+or dashed lines, PostScript and application-specific printing data. Screen
+QuickDraw generally ignores these comments and uses companion drawing opcodes.
+They are retained and flagged; the converter does not execute PostScript,
+open referenced files or claim a printer-identical result. Private application
+comments also remain semantically incomplete.
+
+SVG vector rasterization differs from QuickDraw's historical rasterizer, and
+text metrics use the declared font environment. Nonstandard pen modes,
+region frame outlines, non-square pen projection on curved shapes, highlight
+effects, SamePoly/SameRgn, nonmatching
+HeaderOp mapping and unknown color constants have explicit limitations.
+PixPat types 0 (bit pattern) and 2 (dither RGB) are supported; indexed PixPat
+type 1 stops decoding because that operand profile is not implemented.
+QuickTime opcode payloads are bounded and preserved but not drawn. Exact
+printer-comment playback, region-border geometry, origin-dependent pattern
+phase, non-square curved pens, indexed PixPat/QuickTime,
+font/script and transfer-mode behavior are the next implementation steps;
+compare controlled QuickDraw screen and printer output to establish fidelity.
+
+Default mode can retain complete prior commands when a later operand is
+truncated or has unknown framing. The undecodable suffix is recorded as an
+omitted byte range; no recovery scan guesses the next opcode. Missing EndPic
+is recoverable only after at least one complete drawing object. An incomplete
+header/version-only stream fails. A correctly terminated empty picture remains
+valid. Strict mode rejects every reported approximation or recovery before
+writing. As elsewhere, complete source-byte preservation does not certify
+complete semantic reverse engineering.
+
+Audit metadata includes picture version, initial frame, declared size,
+HeaderOp fields, logical end offset, opcode/comment counts and counts of
+vector/text batches and bitmap objects. MacBinary offsets are rebased to the
+original input. Byte coverage separates the wrapper, picture header, validated
+opcode stream, inactive suffix and any undecodable suffix. The entire original
+input, including both MacBinary forks when present, remains embedded in SVG.
+
+Primary format and decoder references:
+  Apple, Imaging With QuickDraw, Appendix A: Picture Opcodes
+  https://developer.apple.com/library/archive/documentation/mac/pdf/Imaging_With_QuickDraw/Appendix_A.pdf
+  Apple, Imaging With QuickDraw, Appendix B: Using Picture Comments for Printing
+  https://developer.apple.com/library/archive/documentation/mac/pdf/Imaging_With_QuickDraw/Appendix_B.pdf
+  Apple's original QuickDraw Pictures.a, preserved source mirror (state confirmation)
+  https://github.com/elliotnunn/mac-rom/blob/master/QuickDraw/Pictures.a
+  Deark's supported-format description (bitmap extraction, not PICT rendering)
+  https://github.com/jsummers/deark/blob/master/formats.txt
+
+MACDRAW II NATIVE DOCUMENTS
+
+This chapter describes the MacDraw II data-fork family separately from the
+older MD/4 and DRWGMD/6 formats. It does not describe MacDraw Pro. The native
+MacDraw II decoder is macDrawII.py, loaded by macDraw.py automatically after
+format identification. It uses the same font engine and standard-library SVG
+and PNG facilities as the older decoder. It does not invoke an office suite.
+
+Identification and outer structure
+
+All integers are big-endian. Fixed is a signed 32-bit 16.16 number. A FixedRect
+is four Fixed values in top, left, bottom, right order. A FixedPoint stores
+vertical coordinate before horizontal coordinate. Coordinates use a downward
+positive vertical axis. A serialized application pointer is never dereferenced
+as a process address.
+
+Recognized native eight-byte signatures are:
+
+  DRWG D2 00 00       drawing, subversion 0
+  DRWG D2 00 01       drawing, subversion +1
+  DRWG D2 FF FF       drawing, subversion -1
+  DRWG 00 00 00 00    older unversioned drawing wrapper
+
+The four-byte DRWG marker may be STAT for stationery. Native parsing also
+requires a complete 500-byte header, at least one layer, consistent bounded
+storage zones and a framed object table. A signature alone does not establish
+that the remaining bytes form a valid drawing.
+
+The D2 subversion 0 uses the same header, thirteen storage zones, handle
+tables and 32-byte object records described in this chapter. Its layout is
+validated with the same bounds and reference checks as subversions +1 and -1.
+Do not classify all D2-prefixed documents as PICT exports or infer a layout
+for other subversion values; the native decoder accepts only those listed.
+
+DRWG D2 00 06 identifies a MacDraw PICT-export wrapper, not this native format.
+An older PICT-export wrapper retains DRWG MD 00 06, the native 1.x signature;
+the version marker at offset 522 distinguishes its PICT payload. The helper
+also recognizes this signature. Another PICT-export wrapper begins with DRWG followed by four zero bytes,
+with a PICT at offset 512. Its 512-byte header is largely zero-filled, but may
+contain nonzero saved preference words; do not require bytes 8..511 to be zero. A PICT has its size word at 512, frame rectangle at 514,
+and version marker at 522: 11 01 for PICT v1 or 00 11 02 FF for v2. These
+wrappers use the separate wrapped-PICT decoder. The anchored version test distinguishes
+this older export from a native unversioned document. The public helper
+wrapped_pict_version(data) returns 1, 2, or None using only the first 526 bytes:
+it requires one of these three export signatures AND the version marker at 522.
+This is prefix detection, not a full PICT validity check. For the older shared
+signature, the native parser additionally checks that header bytes 256..499
+(counts and native-zone sizes) are zero before routing it as an export.
+No filename extension participates in identification.
+
+Rectangles, rounded rectangles, ellipses and bitmap destinations with a
+nonpositive width or height are empty. Their records remain preserved, but
+they emit no painted shape and do not expand the exported SVG canvas. For a
+rotated object, this emptiness test applies to the saved local shape rectangle.
+In particular, an inverted empty rectangle must not stretch the canvas across
+its reversed endpoints and make the other drawing objects appear invisible.
+
+Separate PICT extraction
+
+macDrawPICTExtract.py is a standalone, standard-library-only utility:
+
+    python3 macDrawPICTExtract.py inputFile output.pict
+
+It accepts the three PICT-export wrappers and version markers described above.
+For the unversioned signature, it also requires bytes 256..499 to be zero so
+that native layer/storage state is not mistaken for an export. Other saved
+wrapper preferences need not be zero. The utility replaces the MacDraw header
+with 512 zero bytes, as required for a conventional standalone PICT file, and
+copies every byte from input offset 512 to end-of-file unchanged. Output length
+therefore equals input length. It does not trust the 16-bit picture-size word
+to bound or truncate the payload. It neither interprets picture opcodes nor
+repairs damaged PICT data; successful extraction is not full PICT validation.
+
+The extractor needs no converter modules, fonts, or third-party libraries.
+Unrecognized input returns exit status 2 without creating or replacing output;
+success returns 0 and writes atomically with permissions 0664. Input/output
+aliases are rejected. macDraw.py does not call this extractor: its separate
+macDrawPICT.py module interprets the PICT command stream for SVG conversion.
+
+PICT file-header reference:
+  https://developer.apple.com/documentation/appkit/nspictimagerep/pictrepresentation
+
+The native header ends at decimal 500 (0x1F4), not 512. Thirteen zones follow
+in the order given below. Each zone begins immediately after the preceding
+zone, even when that puts it at an odd address. The sum of all thirteen byte
+sizes, plus 500, is the start of the object table. Every object table record
+is exactly 32 bytes. The sum of the layer object counts determines how many
+records belong to the current document. Group end markers count as records.
+
+Bytes after that table are retained as unreferenced trailing storage. They
+are not searched for additional objects, and are not treated as a second
+picture. Their complete save-history/allocation semantics remain unresolved.
+
+Header map
+
+  Offset  Size  Meaning
+  0000       8  Signature and subversion, above.
+  0008     120  Classic Printing Manager TPrint; same external record layout
+                as the older formats. Printer-driver fields remain opaque.
+  0080     128  Saved editor/display state. Individual field and flag
+                meanings, including all zoom/display interactions, are not
+                completely established.
+  0100       2  Application-state word; individual bits unresolved.
+  0102       2  Number of 128-byte layer records.
+  0104      10  Five u16 counts: rulers, pens, FONTS, arrows, DASHES.
+                This order differs from the style-zone size order.
+  010E      14  Seven u16 words: pattern-tool count, monochrome-pattern
+                count, color count, color-pattern count, three state words.
+  011C       2  Current layer selection, one-based.
+  011E      10  Editor/selection words; full semantics unresolved.
+  0128     120  Three 40-byte saved-state/rectangle groups. The u16 at 012A
+                is the saved library count. Remaining saved rectangle and
+                selection fields are preserved but not fully interpreted.
+  01A0      20  Five u32 byte sizes: rulers, pens, DASHES, arrows, FONTS.
+  01B4      20  Five reserved/application-state u32 words.
+  01C8      32  Eight u32 byte sizes for the remaining zones:
+                layers, layer names, layer/library correspondence,
+                library records, library names, geometry heap, text heap,
+                free storage.
+  01E8      12  Three reserved/application-state u32 words.
+
+Every byte in the header is retained. Labeling a region as editor state or
+reserved storage is not a claim that its complete semantics are known.
+
+Style tables
+
+The first five zones hold fixed-size records. Their extents are authoritative
+for table framing; header counts are checked against them. References to pens,
+dash patterns and the application color/pattern palette are one-based. Text
+font-run references are zero-based indices into the font-style table.
+
+Ruler record, 24 bytes:
+  +00 u32 usage/bookkeeping; +04 IEEE 754 double unit conversion;
+  +12 IEEE 754 double division quantity; +20 u16 division count;
+  +22 u16 flags/state. Rulers affect editor presentation; the SVG uses saved
+  coordinates. Complete ruler flag semantics are not established.
+
+Pen record, 12 bytes:
+  +00 u32 usage count; +04 unsigned 16.16 logical width;
+  +08 u16 saved QuickDraw vertical pen size; +10 u16 horizontal pen size.
+  Rendering uses the mean of the saved vertical and horizontal sizes as its
+  SVG stroke width. Unequal dimensions, or a logical width different from that
+  mean, produce an explicit approximation issue. The relationship among logical
+  width, saved display scale and print scale needs original-program validation.
+
+Dash record, 28 bytes:
+  +00 u32 usage count; +04 six signed Fixed values, three on/off pairs.
+  All-zero pairs are unused. The remaining pairs become SVG stroke-dasharray.
+
+Arrow style record, 14 bytes:
+  +00 u32 usage count; +04 u16 style identifier; +06 two Fixed values storing
+  the style's vertical/horizontal size parameters. These are read and retained
+  as table data. Existing arrow-bearing line objects carry their own computed
+  geometry, which the renderer uses instead of regenerating a head from the
+  style menu selection.
+
+Font-style record, 18 bytes:
+  +00 u16 usage count; +02 u16 saved line height; +04 u16 saved ascent;
+  +06 u16 Macintosh font-family ID; +08 u8 QuickDraw face; +09 u8 padding;
+  +10 u16 point size; +12, +14, +16 u16 red, green, blue components.
+  SVG color takes the high byte of each 16-bit component. Glyphs, face effects
+  and advances use the bundled FONT/NFNT engine. Missing families substitute
+  Geneva at the requested size and face, with the substitution recorded.
+
+Paint selectors
+
+Zero disables the corresponding outline or fill. Selectors 1 through 59
+refer to the fixed 8-by-8 monochrome application patterns listed below. Rows
+run top to bottom, most significant bit first; one is black and zero is white.
+Selectors 0x4001 through 0x4008 are the default palette, in this order:
+
+  white FFFFFF, black 000000, red DD0806, green 008011,
+  blue 0000D4, yellow FCF305, cyan 02ABEB, magenta F20885.
+
+Selectors with 0x8000 set refer to custom color patterns. Other monochrome
+pattern indices may require resource-fork definitions. The data fork does not
+supply those definitions in the decoded style zones. The present converter
+substitutes black and emits macdraw2_pattern_resource. It does not pretend to
+have recovered missing colors or patterns. --font-resource supplies font data
+only; it does not add support for pattern resources or a custom palette.
+
+Default monochrome pattern rows (one 64-bit hexadecimal string per entry):
+   1: f0f03c3c0f0fc3c3
+   2: 1111444411114444
+   3: 7777bbbb7777bbbb
+   4: 9999cccc9999cccc
+   5: 0000000000000000
+   6: ffffffffffffffff
+   7: 7f7ffffff7f7ffff
+   8: 7f7ff7f77f7ff7f7
+   9: 7777dddd7777dddd
+  10: 7777777777777777
+  11: aaaaaaaaaaaaaaaa
+  12: 8888888888888888
+  13: 8888222288882222
+  14: 8080080880800808
+  15: 8080000008080000
+  16: 8080414108081414
+  17: ffff8080ffff0808
+  18: 8181242481812424
+  19: 8080202008080202
+  20: e0e038380e0e8383
+  21: 7777dddd7777dddd
+  22: 8888222288882222
+  23: 9999666699996666
+  24: 2020808008080202
+  25: ffffffffffffffff
+  26: ffff0000ffff0000
+  27: cccc000033330000
+  28: f0f0f0f00f0f0f0f
+  29: ffff8888ffff8888
+  30: aaaaaaaaaaaaaaaa
+  31: 0101040410104040
+  32: 83830e0e3838e0e0
+  33: eeeebbbbeeeebbbb
+  34: 1111444411114444
+  35: 3333cccc3333cccc
+  36: 4040000004040000
+  37: aaaaaaaaaaaaaaaa
+  38: 8888888888888888
+  39: 0101101001011010
+  40: 0000141455551414
+  41: ffff808080808080
+  42: 8282282828288282
+  43: 8080000000000000
+  44: 8080020201014040
+  45: aaaaaaaaaaaaaaaa
+  46: 5555555555555555
+  47: dddd7777dddd7777
+  48: aaaa808088888080
+  49: 0808222280800202
+  50: b1b10303d8d80c0c
+  51: 888822228888aaaa
+  52: 8282393982820101
+  53: 030348480c0c0101
+  54: 5555404055550404
+  55: 10105454ffff0404
+  56: 2020888888880505
+  57: bfbfbfbfb0b0b0b0
+  58: f8f822228f8f2222
+  59: 77778f8f7777f8f8
+
+Layers and libraries
+
+Layer records are 128 bytes. Their first fields are:
+  +00 u16 flags (0x8000 means saved hidden);
+  +02 u16 layer identifier;
+  +04 u32 offset into the layer-name zone;
+  +08 u32 count of consecutive object records belonging to the layer;
+  +12 through +127 saved layer/editor bounds and allocation state.
+
+A layer name is an unsigned byte length followed by that many MacRoman bytes.
+Its offset is relative to the layer-name zone. Layer object runs occur in layer
+order. Within each run, native object order is also paint order. Groups may be
+nested within a layer; a group does not change the coordinate system of its
+children. The remaining layer-state fields do not have complete bit meanings.
+
+The layer/library correspondence zone uses the heap structure below. Its
+blocks contain 8-byte association entries following the block header:
+  s32 one-based object position within the layer, u16 state, u16 library ID.
+Library records are 8 bytes: u32 offset into the library-name zone and a u32
+state word. Names are Pascal strings. Associations and saved library editing
+state are not used to reorganize the illustration. All layer object records,
+including library groups, are still decoded and retained at their saved
+coordinates. The original bytes remain available in SVG source metadata.
+
+Default conversion shows the layers saved as visible. Hidden artwork remains
+in SVG groups with display="none", and does not enlarge the visible viewBox.
+The optional interface
+
+    python3 macDraw.py --layer 2 inputFile outputFile
+
+renders only layer 2, even if it was saved hidden. Layer numbers are one-based
+positions in the layer table. This is an isolated layer export, not a composite
+with the other layers. An invalid layer number or use with an older document
+fails without writing. SVG metadata records the selected layer and the complete
+layer inventory. The gallery may link several such exports under one source.
+
+Handle tables and heaps
+
+The geometry, character-text and layer/library zones share this storage form:
+  +00 u32 handle-table byte size T, including the eight-byte header;
+  +04 u32 allocation/free-list bookkeeping, not fully decoded;
+  +08 (T-8)/4 u32 handle entries.
+
+T must be at least 8 and divisible by 4. Immediately after the table is the
+heap's u32 byte size S, including that size word. A nonzero handle entry is a
+byte offset from this size word to the start of an allocation. A zero entry
+is unused. Each allocation begins with:
+  +00 u32 usage/reference count;
+  +04 u32 allocation byte size B, including this eight-byte prefix;
+  +08 B-8 payload bytes.
+
+Blocks must fit within S and distinct live block extents must not overlap.
+Multiple handles may refer to an identical block. Allocation gaps and unused
+zone bytes are retained. Complete free-list semantics are not implemented.
+An object's u16 handle reference R refers to an entry in the TABLE, so its
+zero-based index is (R-8)/4; R must be at least 8 and a multiple of four.
+It is not an offset into the geometry bytes themselves. Text object data
+contains a second handle reference selecting a character allocation in the
+separate text heap.
+
+Object table records
+
+  +00 16 bytes FixedRect enclosing the object, including saved pen bounds.
+  +16 u8 flags: 0x08 selected, 0x20 locked, 0x40 has geometry/text-layout data,
+             0x80 has rotation data. Other bits are saved application state.
+  +17 u8 low nibble type; 0x20 and 0x40 select endpoint orientation for lines.
+             Group markers commonly carry 0x10. For polygons, orientation
+             changes are already represented by stored vertices. Complete
+             meanings of the other type-byte flags remain unresolved.
+  +18 u8 saved state.
+  +19 u8 pen-style reference; zero uses the default one-point pen profile.
+  +20 u16 outline paint selector.
+  +22 u16 fill paint selector.
+  +24 u8 dash-style reference, zero for no dash.
+  +25 u8 auxiliary state, except the inline rounded-rectangle field below.
+  +26 u16 geometry-heap handle, or group subtree byte count.
+  +28 u32 saved state, except the overlapping rounded-rectangle field.
+
+Types: 1 text, 2 line, 3 rectangle, 4 rounded rectangle, 5 ellipse, 6 arc,
+7 smoothed freehand path, 8 polygon/polyline, 9 monochrome bitmap,
+10 group begin (no data flag) or note (data flag set), 11 group end.
+Unknown types are rejected in strict mode and omitted as bounded 32-byte
+records during best-effort recovery. Rotation requires the data flag.
+
+Group begin records have no data block. The u16 at +26 is the serialized byte
+length from the begin record through its matching end record, including both
+markers and all descendants. Nesting is also checked from the begin/end types.
+End records draw nothing. Children use absolute document coordinates.
+
+For type 4 without a data block, the four bytes starting at +25 contain the
+inline corner parameter rather than the ordinary auxiliary/handle fields.
+Its unit conversion is not proven. The current approximation reads it as
+signed Fixed and divides by 36; a nonpositive result uses radius 25. SVG
+clamps the result to half the rectangle's respective dimensions. This fallback
+is always reported and is not allowed by --strict.
+
+A type requiring object data must reference a valid allocation. Rectangles,
+lines, rounded rectangles and ellipses may also use their inline geometry.
+For an inline line, the record rectangle encloses the square pen: subtract
+the selected pen dimensions from the bottom/right endpoints, then apply the
+line orientation bits. SVG centers the stroke by adding half its width. A
+negative residual extent is clamped to zero. This uses the saved-pen profile
+above; unusual logical/display scaling is reported separately.
+
+Object-data allocation prefix and rotation
+
+After the shared eight-byte allocation header are two u16 values at +08 and
++10. They hold type-specific auxiliary data. For text/notes, +10 is the text
+heap reference. For lines, +10 holds arrow/dimension flags. For rotated rounded
+rectangles the pair also supplies the corner parameter used by the preview.
+
+If object flag 0x80 is set, a 28-byte rotation record follows at +12:
+  +00 signed Fixed angle in radians;
+  +04 FixedRect describing the unrotated local rectangle;
+  +20 FixedPoint of saved rotation bookkeeping, not completely interpreted.
+
+The local rectangle is relative to the original object rectangle's top-left.
+Render rectangles, ellipses, text and bitmaps by rotating about the center of
+that local rectangle. A positive angle rotates clockwise in downward-positive
+SVG coordinates. Polygon vertices are already transformed; do not rotate them
+again. The stored ellipse point caches independently corroborate this rotation
+sign and center. The additional point is retained but does not drive placement.
+
+Type-specific data begins after the optional rotation record.
+
+Lines and arrow geometry
+
+A data-bearing line stores a Fixed angle in radians, then a local FixedRect
+bounding the path endpoints. The object type-byte orientation bits select the
+actual first and second endpoints from that rectangle. The angle is retained;
+it is not needed to approximate endpoint positions or to regenerate arrows.
+
+Data-prefix flag bit 1 supplies a head at the first endpoint; bit 2 supplies
+one at the second endpoint. For each set bit in that order, read three local
+FixedPoints: first base edge, base center, second base edge. These are not a
+triangle by themselves. The arrow polygon is first edge, the corresponding
+line endpoint (tip), second edge. The shaft stops at the stored base center.
+All these coordinates are relative to the object rectangle's top-left, with
+the same SVG pen-center adjustment as the line. No trigonometric guess about
+head length, angle, or shaft shortening is required.
+
+Flag bit 4 adds a 44-byte dimension-label block: local FixedRect (16 bytes),
+u16 state, u8 character count, and up to 25 MacRoman bytes in a fixed-width
+storage field. The renderer uses the stored text, centered in its stored box,
+on white, with Geneva 9. The original label-font selection is not established;
+this produces macdraw2_dimension_font. Other flag bits produce an unresolved
+line-flags issue instead of silently certifying them.
+
+Rectangles, rounded rectangles and ellipses
+
+A rotated rectangle needs no further geometry. A rotated rounded rectangle
+adds 16 FixedPoints (128 bytes) of cached curve representation; a rotated
+ellipse adds eight FixedPoints (64 bytes). These caches are parsed. Ordinary
+rectangles/ellipses use their saved local bounds and rotation for SVG geometry.
+For a data-bearing rounded rectangle, the current preview interprets the two
+u16 prefix values as one u32 divided by 4096 to obtain the corner radius. This
+matches the scale of the stored rounded-curve controls, but its complete native
+unit semantics are not verified; strict conversion rejects this approximation.
+
+Arcs
+
+Read two Fixed angles in degrees (start and sweep), four Fixed values of cached
+local endpoint bounds, and a local FixedRect of the complete ellipse. This is
+40 bytes. A rotated arc adds eight FixedPoints (64 bytes) of ellipse cache.
+Use the stored COMPLETE ellipse rectangle, translated by the original object
+origin, to construct the arc. Do not infer an ellipse from the smaller object
+bounding rectangle. Zero degrees points upward; positive sweep is clockwise.
+An outline-only arc remains open. A filled arc has a pie-sector fill and an
+open curved outline, following the common SVG arc renderer. Rotation, when
+present, applies about the saved unrotated object center described above.
+
+Polygons and freehand paths
+
+All remaining payload bytes are FixedPoints, so their count is implied by
+allocation size. Each point is relative to the original object's top-left.
+At least one complete point is required. Type 8 draws the stored segments;
+repeated first/last vertices close the path. Fill follows the even-odd rule.
+Type 7 uses the older documented open fixed-point spline iterator as a preview
+profile. MacDraw II's original smoothing kernel has NOT been established;
+every such object produces macdraw2_smooth_curve and prevents strict output.
+
+Monochrome bitmaps
+
+Read a 16-bit-coordinate source Rect (8 bytes), serialized u32 base address,
+u16 rowBytes, and a 16-bit-coordinate storage Rect (8 bytes): 22 bytes total.
+Then read rowBytes * storage-height bytes. Bits are uncompressed, most
+significant bit first. The source rectangle must be within the storage
+rectangle; rowBytes must cover its width. The base address is saved state, not
+a file offset. Crop to the source rectangle and scale to the destination box.
+A one bit is opaque black and a zero bit is transparent, reproducing srcOr
+composition through an embedded PNG. Optional rotation uses the local rectangle.
+The decoder does not treat a color PixMap flag as a monochrome rowBytes value.
+
+Text, notes and saved metrics
+
+A text data block references its character allocation through prefix word +10.
+The character allocation has the common eight-byte header followed by raw
+Macintosh character bytes. The length is taken from the text-layout record,
+not from any null terminator.
+
+After the optional rotation data, the layout record begins:
+  +00 s8 spacing mode; +01 s8 spacing amount;
+  +02 s8 justification state; +03 s8 alignment;
+  +04 u16 character count; +06 u16 line count L; +08 u16 font-run count F.
+
+Alignment values are -1 right, 0 left, 1 centered, 2 fully justified. The saved
+per-line heights below are used directly, so line spacing is not recomputed
+from an assumed system font or from the spacing mode alone.
+
+Notes insert 68 bytes after this header: two u16 state words, two u32 saved
+values, eight u16 state words, a fixed 32-byte Pascal-string field (maximum
+31 characters), and four u16 state words. Their exact author/date/window-state
+semantics are not fully interpreted. Note text is rendered at its saved
+location. The original sticky-note decoration and author/date presentation
+are not reproduced and produce macdraw2_note_appearance.
+
+Then read:
+  (L+1) u16 character offsets delimiting lines;
+  (F+1) records of u16 character offset, s16 font-style index;
+  (L+1) records of u16 line height, u16 ascent.
+
+The final entries are sentinels. Line positions begin at zero and are monotone.
+The first font run begins at zero; subsequent runs apply from their saved
+character offsets. A run may begin within a line. Strip trailing carriage
+returns from displayed line content; retain those bytes in the source.
+The first baseline is box-top plus the first saved ascent. Advance by each
+saved line height before placing the next line's ascent. Zero saved heights
+or ascents use the corresponding resolved font metrics as an explicit layout
+profile. Saved nonzero metrics take precedence over substitution-font metrics.
+
+Horizontal placement uses resource-based glyph advances and the selected
+alignment. Fully justified soft lines distribute positive remaining width
+among literal spaces. Hard-terminated and final lines are not expanded.
+Font substitution can change widths and letterforms, but does not reflow the
+saved line boundaries. Tab controls use 36-point stops from the text-box left
+edge; native tab-stop behavior is not yet verified and is explicitly reported
+as macdraw2_tab_stops. Tabs do not become missing-glyph boxes.
+
+Glyphs are emitted as SVG paths in each font run's color, so no browser font
+installation is required. Control bytes that name Macintosh keyboard glyphs
+can remain drawable through their font resources. XML titles use safe Unicode
+text (including U+2318 for byte 0x11) rather than illegal XML control bytes.
+Original character bytes are preserved unchanged in embedded source metadata.
+
+Object allocation padding and unknown extensions
+
+Up to three bytes after a decoded type-specific payload are allocation padding.
+They may be nonzero and are retained. A larger residual payload produces
+macdraw2_object_extension; it is not silently labeled padding. Cached curve
+points, bitmap storage beyond the cropped rectangle, text sentinels and shared
+allocations remain covered even when they do not draw independent SVG objects.
+
+In particular, text allocations can retain four bytes beyond the complete
+line-offset, font-run and line-metric tables. Their meaning is unresolved;
+zero values do not establish that the field is padding, and coordinate-like
+values do not establish that it is an origin. The converter preserves this
+tail, renders the decoded text using the saved line boundaries and metrics,
+and reports macdraw2_object_extension. Strict mode rejects it. Establishing
+whether this tail is cached editor state or affects text rendering requires
+tracing the native text loader and renderer; it must not be used to override
+the saved text layout without that evidence.
+
+MacDraw II recovery, audit and current limits
+
+A damaged geometry/text heap can be isolated because its zone extent still
+locates the later object table. Default recovery retains inline objects and
+objects whose other references remain usable. A broken individual handle or
+object omits that bounded 32-byte record and continues at the next declared
+record; unreadable record bytes appear in omitted_byte_ranges. Complete group
+children survive missing group ends. An overdeclared object count retains
+only complete available records and emits a recovery issue. No byte scanning,
+filename-based behavior, cross-file copying, or guessed object boundaries are
+used. If no drawing objects survive a nonempty table, conversion fails.
+
+Strict mode rejects damaged structures and every reported drawing
+approximation. Within the implemented profile it supports the fixed object
+and heap framing, ordinary shapes, stored arc ellipses, rotations, saved arrow
+geometry, shared styles, layer visibility/selection, monochrome bitmaps, and
+text with saved line boundaries/metrics and automatic missing-font substitution.
+It does not certify complete knowledge of editor metadata or native rasterizer
+pixel coverage. Unknown object types and unknown drawing-data extensions are
+not accepted silently.
+
+The known remaining drawing limitations are custom resource-fork patterns or
+palettes, logical-versus-display pen scaling, rounded-corner parameter units,
+MacDraw II freehand smoothing, tab stops, note decoration and the dimension
+label's implicit font. The documented previews let their native documents
+produce useful SVGs, but do not constitute full implementation of those
+features. Printer/editor state, library allocation state, heap free lists and
+unreferenced trailing storage also need additional semantic decoding.
+
+Next steps toward a complete MacDraw II specification are to inspect and trace
+an original MacDraw II loader/renderer, recover associated document resource
+forks, isolate the corner/pen/spline/tab routines, and compare controlled files
+and their display/print results with the converter. Saved geometry caches and
+record extents can then serve as independent checks of those routines. The
+older MacDraw executables do not establish the behavior of the newer engine.
+No claim of 100-percent byte-semantic understanding is made by this chapter,
+the audit, or the converter.
+
+LEGACY MD/4 AND DRWGMD/6 CHAPTER
+
+The following field maps and executable evidence concern MacDraw 0.9 and 1.x.
+They do not change the separate MacDraw II layout described above.
+
+CONVENTIONS
+
+All multi-byte numeric fields are big-endian. Byte offsets below are absolute
+unless explicitly described as relative to a record or subrecord.
+
+  u8/u16/u32    unsigned 8/16/32-bit integer
+  s8/s16/s32    signed two's-complement integer
+  Fixed        signed s32 divided by 65536 (16.16 fixed point)
+  Rect16       four s16 values: top, left, bottom, right (8 bytes)
+  RectFixed    four Fixed values in the same order (16 bytes)
+  PointFixed   vertical Fixed followed by horizontal Fixed (8 bytes)
+
+Coordinates use a downward-positive vertical axis. The usual scale is 72
+coordinate units per inch. Fractions are significant; they must not be rounded
+to whole pixels while decoding. The freehand delta encoding is an exception to
+the vertical-first point convention: its delta pair is horizontal, vertical.
+
+There is no implicit word or longword alignment between serialized objects.
+A text object with an odd number of character bytes makes the next record
+start at an odd address. There is no trailing text NUL or text padding byte.
+Zero is an ordinary numeric value, not a general end marker. Only a type-0
+record at an object boundary terminates a list.
+
+MACBINARY INPUT
+
+macDrawContainer.py accepts one MacBinary I, II or III wrapper around a
+supported native drawing. This transport layer does not change the enclosed
+MacDraw format. Its declared data fork is passed to native signature and
+structure validation; nesting and searches for a displaced signature are not
+implemented. Finder filename, type and creator do not authorize conversion.
+The exact native signature inside the bounded data fork remains mandatory.
+An enclosed recognized MacDraw-wrapped PICT drawing uses macDrawPICT.py.
+A bare PICT lacking a MacDraw export signature is still outside the converter
+input profile. MacBinary transport alone does not authorize arbitrary formats.
+
+The 128-byte MacBinary header uses big-endian integers:
+
+  Offset   Size    Field
+  0        1       zero, original version
+  1        1       filename length, 1..63
+  2        63      filename storage; only the declared prefix is significant
+  65       4       Finder type
+  69       4       Finder creator
+  73       1       Finder flags, high byte
+  74       1       zero
+  75       2       icon vertical position
+  77       2       icon horizontal position
+  79       2       folder identifier
+  81       1       protection flag
+  82       1       zero
+  83       4       data-fork length
+  87       4       resource-fork length
+  91       4       creation timestamp
+  95       4       modification timestamp
+  99       2       Finder-comment length
+  101      1       low Finder flags, II/III
+  102      4       mBIN signature, III; reserved otherwise
+  106      1       script, III
+  107      1       extended Finder flags, III
+  108      8       reserved
+  116      4       expanded file length, II/III
+  120      2       secondary-header length, II/III
+  122      1       version: 129 for II, 130 for III
+  123      1       minimum reader version, II/III
+  124      2       header CRC, II/III
+  126      2       reserved platform/OS identifier
+
+Version I has zero at 122 and does not interpret the II/III extension fields.
+Macintosh timestamps count seconds from January 1, 1904. The II/III CRC covers
+bytes 0..123 using polynomial 0x1021, initial value zero, no reflection and no
+final XOR. It is stored big-endian. Header identification requires bytes 0, 74
+and 82 to be zero, a bounded filename length and a complete 128-byte header.
+The implementation accepts minimum reader versions 129 through the declared
+II/III version; unsupported versions fail. III additionally requires mBIN.
+
+For II/III, an optional secondary header follows byte 127. Its length is
+rounded up to the next multiple of 128 to locate the data fork. For version I,
+the data fork begins at 128. The resource fork follows the data fork rounded
+up to 128 bytes. A Finder comment, if declared, follows the resource fork at
+the next 128-byte boundary. Zero-length sections consume no payload bytes.
+Padding to each boundary is zero in a conforming container. Fork lengths do
+not include padding and must not exceed 0x7fffffff. Declared contents must fit
+in the input. The converter never substitutes a scanned boundary for a stored
+length. The standalone PICT extractor does not unwrap MacBinary containers.
+
+Default recovery can retain a correctly framed native drawing when the outer
+header CRC disagrees, version-I reserved fields are nonzero, padding contains
+nonzero bytes, final padding is incomplete, or bytes remain after the declared
+sections. Each condition receives a recovery_macbinary_* diagnostic. Such
+bytes remain embedded unchanged. Strict mode rejects these conditions.
+A missing part of either declared fork is not repaired by guessing its length.
+A malformed container or non-native data fork fails before output is written.
+
+input_container in the audit and SVG metadata records the version, stored
+name/type/creator, fork offsets and lengths, fork SHA-256 hashes, secondary
+header and comment extents, and both stored and calculated CRCs. The embedded
+source is the entire original container, including the resource fork and
+padding. Object offsets, issue offsets, storage-zone offsets and byte-coverage
+spans refer to the original input file; native-format offsets in this document
+remain relative to the data fork. Coordinates and handle identifiers do not
+acquire the container offset.
+
+The outer resource fork is retained. Pro drawing colors, patterns, gradients
+and clut resources are interpreted as described in its chapter. Other formats
+retain their existing resource boundary; font suitcases still require explicit
+--font-resource input. Container framing and full source preservation do not
+imply that all resource payload semantics are known.
+
+Transport specification: Dennis F. Brothers, Macintosh Binary Transfer Format
+proposal (1985), the MacBinary II conference proposal (1987), and MacBinary III
+specification, preserved at:
+https://github.com/MacPaw/XADMaster/wiki/MacBinarySpecs
+
+CONTAINER
+
+The native stream is a 512-byte header followed by a depth-first serialized
+object list, including group terminators and a final document terminator.
+These legacy streams are distinct from the MacDraw II format documented above.
+Neither native family is a PICT opcode stream or a MacDraw Pro document.
+MacBinary I/II/III containers can enclose these streams, MacDraw II or Pro data
+forks, as described under MACBINARY INPUT above. AppleSingle/AppleDouble drawing
+wrappers and archives are not decoded. A resource-only sidecar cannot supply
+the missing native drawing data fork. MacDraw Pro dDoc/dLib streams use the
+separate format described in the Pro chapter.
+
+Revision 6 signature, bytes 0..7:
+
+    44 52 57 47 4D 44 00 06       ASCII DRWGMD, u16 revision 6
+
+Revision 4 signature, bytes 0..7:
+
+    4D 44 00 04 00 00 00 00       ASCII MD, u16 revision 4, four zero bytes
+
+Other signatures/revisions are outside this specification's implemented scope.
+The distinction between application version numbers and file revision numbers
+is essential: 4 and 6 are disk-format revisions, not MacDraw 4 and MacDraw 6.
+
+Some MacDraw PICT exports retain a native-looking header. At byte 512, a PICT
+starts with a u16 picture-size field and a Rect16, followed by the version
+opcode. At byte 522, 11 01 identifies the usual version-1 start; 00 11 02 FF
+identifies the usual version-2 start. A correctly ordered frame and either of
+these anchored markers route a recognized export wrapper to macDrawPICT.py.
+The converter does not search later in a file for a displaced PICT signature.
+A PICT signature check is not a complete PICT validity test. This check applies
+only when the header declares an active object payload. In revision 4, an
+allocation-block value of one declares an empty drawing; bytes after that
+header are inactive saved-file contents, not a new active payload.
+
+HEADER: SHARED PRINTING RECORD
+
+Bytes 8..127 contain a 120-byte classic Printing Manager TPrint record. The
+first word is its version, not the drawing revision or length. Its recognized
+structure is:
+
+Offset  Size  Type             Meaning
+0x008      2  s16              iPrVersion: Printing Manager record version
+0x00A      2  s16              prInfo.iDev: device identifier
+0x00C      2  s16              prInfo.iVRes: vertical device resolution
+0x00E      2  s16              prInfo.iHRes: horizontal device resolution
+0x010      8  Rect16           prInfo.rPage: printable-page rectangle
+0x018      8  Rect16           rPaper: physical paper rectangle
+0x020      2  s16              prStl.wDev: style/device selector
+0x022      2  s16              prStl.iPageV: page height
+0x024      2  s16              prStl.iPageH: page width
+0x026      1  u8               prStl.bPort: printer port
+0x027      1  u8               prStl.feed: feed selector
+0x028     14  TPrInfo          prInfoPT: second device/resolution/page record
+0x036      2  s16              prXInfo.iRowBytes
+0x038      2  s16              prXInfo.iBandV
+0x03A      2  s16              prXInfo.iBandH
+0x03C      2  s16              prXInfo.iDevBytes
+0x03E      2  s16              prXInfo.iBands
+0x040      1  s8               prXInfo.bPatScale
+0x041      1  s8               prXInfo.bUlThick
+0x042      1  s8               prXInfo.bUlOffset
+0x043      1  s8               prXInfo.bUlShadow
+0x044      1  s8               prXInfo.scan
+0x045      1  s8               prXInfo.bXInfoX
+0x046      2  s16              prJob.iFstPage
+0x048      2  s16              prJob.iLstPage
+0x04A      2  s16              prJob.iCopies
+0x04C      1  u8               prJob.bJDocLoop
+0x04D      1  u8               prJob.fFromUsr
+0x04E      4  u32              prJob.pIdleProc: saved runtime pointer
+0x052      4  u32              prJob.pFileName: saved runtime pointer
+0x056      2  s16              prJob.iFileVol
+0x058      1  s8               prJob.bFileVers
+0x059      1  s8               prJob.bJobX
+0x05A     38  19 words         printX: driver-dependent/private extension
+
+TPrInfo at 0x028 repeats the device, vertical resolution, horizontal resolution,
+and Rect16 layout at 0x00A. These are print settings, not SVG drawing commands.
+Runtime pointers are retained as values and never dereferenced. Private
+printer-extension values are not all semantically decoded. Rendering the
+illustration does not require executing a printer job or replaying pointers.
+Output uses an illustration bounding box rather than printer pagination.
+The original writer copies exactly 120 bytes from the Printing Manager handle;
+the native reader copies those bytes back into that handle. The driver-private
+38 bytes are neither object records nor extra coordinates. They are preserved
+as an opaque, driver-owned payload in normal conversion as well as previews.
+
+HEADER: REVISION 6
+
+Offset  Size  Type             Meaning
+0x080      4  Fixed            xOrigin
+0x084      4  Fixed            yOrigin
+0x088      4  Fixed            xScale; normally 72.0
+0x08C      4  Fixed            yScale; normally 72.0
+0x090     62  attribute state  saved editor/drawing attributes; incomplete below
+0x0CE      2  u16              lCnt: immediate objects in document list
+0x0D0      2  u16              lTot: all objects including nested groups
+0x0D2      4  u32              lSiz: list memory allocation size, not disk length
+0x0D6     16  RectFixed        cached bounds of the complete list
+0x0E6    282  up to 141 u16s   saved font-menu entries and unused tail
+0x200      -  object stream   first object or final type-0 terminator
+
+The original application copies exactly 62 bytes of saved editor state. Its
+substructure, relative to 0x090, is:
+
+  +0     8   current common drawing attributes (same layout as object header)
+  +8     1   current tool selector
+  +9     1   alignment/storage byte
+  +10    6   current text style, same six-byte layout as text record +12
+  +16    6   page/view flags, not all individual meanings established
+  +22   16   four vertical,horizontal s16 pairs: page/view sizes and position
+  +38    8   ruler/grid preference bytes
+  +46   16   two vertical,horizontal Fixed pairs for ruler state
+
+Ruler/grid byte +39 (absolute 0x0B7) is the unit selector used by the rounded
+rectangle renderer: 1 means inches and 2 means centimeters. A different value
+prevents conversion when a nonzero corner diameter is needed. The other saved
+style selections do not override attributes of serialized objects. An editor's
+current pen, tool, font or view window is not an additional drawing object.
+The application defaults establish byte +2 as 1 and byte +3 as 0; they do not
+encode selection of a stored object. Some page/ruler bits still lack individual
+names and remain explicitly opaque metadata; the block is not described as
+padding or fully decoded state.
+
+Text uses a one-based font menu index: the family resource ID for index i is
+the u16 at 0x0E6+2*(i-1). There is NO separately stored active-count field or
+terminating sentinel. The writer clears the 512-byte header, then copies font
+IDs into this area. Earlier 1.x writers copy eleven slots; a later 1.x writer
+copies its installed-font count. Remaining slots are the initialized header
+tail. Reading all 141 slots and using the directly referenced slot avoids
+inventing an active length or treating a valid ID zero as a terminator.
+A text index must be in 1..141 for this layout. Unreferenced entries do not
+affect drawing geometry. The IDs are not font names, glyphs, character maps or
+metrics. Custom IDs can have machine-specific meanings; assigning a generic
+font cannot recover the missing font resource.
+
+HEADER: REVISION 4
+
+Offset  Size  Type             Meaning
+0x080      2  u16              allocation-block estimate
+0x082      4  Fixed            drawing x origin
+0x086      4  Fixed            drawing y origin
+0x08A      4  Fixed            x scale
+0x08E      4  Fixed            y scale
+0x092     62  attribute state  older editor-state block
+0x0D0    304  bytes            zero-initialized unused header storage
+0x200      -  object stream
+
+There is no verified revision-6 document-list descriptor or revision-6 font
+lookup at the corresponding revision-4 offsets. The parser must not apply the
+newer offset map to this header. Revision-4 object lists are delimited by their
+terminators; nested groups still carry child counts and allocation sizes.
+The 62-byte editor-state block uses the same relative field offsets listed
+above; its absolute offsets are two bytes later. In particular, the ruler-unit
+selector is at 0x0B9. The writer clears all 512 header bytes before populating
+the known fields. Nonzero bytes in 0x0D0..0x1FF are outside the implemented
+header profile and prevent normal conversion. Other unresolved editor bits
+have the same explicit metadata limitation described for revision 6.
+
+The allocation-block word is 1+ceil(M/512), where M is the original revision-4
+object-list allocation total. The writer derives it from the in-memory list
+size before serialization. It is not an object count, an exact file length,
+or a padded file length. Valid supported values are 1..32767: the native loader
+uses a signed-word comparison and reads the object list only when the word is
+greater than one. For one, the active drawing ends at byte 512 without a list
+terminator. For greater values, the loader reads through the document's type-0
+terminator. The parser exposes allocation_blocks and validates the formula
+against the complete revision-4 allocation total described below.
+
+Revision 4 has no persisted font-family table. At startup, the application
+constructs the Font menu from installed FONT resources, limits it to ten
+families, and resolves menu names to family IDs in an in-memory table. That
+table is not written into the document. A text record's font-menu index must
+be in 1..10; its original family identity cannot be recovered from that index
+or the document bytes. Without an explicitly supplied --font-menu, the
+converter records family=null and the original menu_index, then applies the
+declared Geneva substitution. With that external evidence it records the
+mapped family and the menu provenance. It never treats the menu index as a
+family ID or assumes an author's font-menu ordering.
+
+REVISION-4 INACTIVE SAVED-FILE SUFFIX
+
+The original 0.9 save path opens the data fork at its beginning and rewrites
+the header and active object lists. It does not truncate the existing file
+with SetEOF. Saving a smaller drawing can therefore leave prior file contents
+after the new logical end. These bytes are outside the drawing: the native
+loader neither interprets nor displays them. They can contain partial obsolete
+records, complete obsolete records, zero bytes, or arbitrary prior contents;
+their appearance does not define an additional record grammar.
+
+The boundary is determined solely by the header's empty-list indicator or by
+successfully parsing the entire active list through its valid terminator.
+Every byte from that boundary to physical EOF belongs to the inactive suffix.
+Its length is not rounded to the allocation-block estimate. The converter
+records its offset, length and SHA-256 under inactive_suffix in the audit and
+SVG metadata, and preserves the bytes in the embedded original source. They
+never contribute objects or geometry. Recovering their prior history is not
+possible from the current file alone.
+
+This rule does not allow recovery from a corrupt active record, a missing
+terminator, or a contradictory allocation total. It is specific to revision 4;
+revision 6 continues to require physical EOF at the end of its active drawing.
+
+LIST FRAMING AND MEMORY SIZE
+
+An object list consists of its immediate objects in back-to-front painting
+order, followed by exactly one type-0 record. A group occurs as an object in
+its enclosing list, immediately followed by its child list and that child's
+type-0 record. Nested coordinates are already document coordinates: grouping
+alone does not apply an additional translation, scaling, or clipping operation.
+
+lCnt counts the immediate nonterminator objects. lTot includes all descendant
+nonterminator objects, with each group counted once. Terminators are excluded
+from both counts. lSiz is not a stream cursor or a byte offset. It sums the
+in-memory allocation contributions of the objects in that list.
+
+For revision 6, let D be an object's own serialized size, excluding a group's descendants and
+terminator. Let S be the sum of the contributions in a group's child list.
+
+  Type 0       0 bytes: not counted in lSiz
+  Type 1       D+30 or D+46, i.e. 58+N or 74+N for N character bytes
+  Types 2..7   D+22
+  Types 8,9    D+30
+  Type 10      62+S, i.e. 40-byte group header +22 + child allocations
+  Type 11      D+30
+
+The two allocation layouts differ by sixteen bytes per text object. They have
+identical serialized text-record framing. A list must match the complete
+small-text or complete large-text sum. No filename or printer-version guess is
+used to choose one: both are explicitly validated allowed allocation layouts.
+The particular application/build change introducing the extra allocation is
+not established. For a group, its embedded list size describes S, whereas the
+group's contribution to its enclosing list is 62+S.
+
+Revision 4 has a different, single allocation layout, recovered from the
+original object-size table and allocation-size routine:
+
+  Type 0       0 bytes: not counted
+  Type 1       D+10 = 38+N
+  Types 2..7   D+10 (34 bytes, or 38 for an arc)
+  Types 8,9    D+10 = 22+B, where B is the stored polygon-block size
+  Type 10      50+S (40-byte group header +10 + child allocations)
+
+Type 11 is not a revision-4 object type. Group child counts, descendant counts
+and allocation sums are checked using the correct revision's sizes. A
+revision-6 allocation sum must not be accepted for a revision-4 group.
+
+These exact relationships are stronger validation than treating lSiz as an
+approximation or skipping to a guessed end offset. A valid count does not
+excuse extra bytes after the final terminator. The implementation rejects a
+missing terminator, a premature terminator, mismatched group totals, and an
+unexpected record following the final terminator.
+
+An empty-document header with lCnt=lTot=lSiz=0 may end at byte 512. The native
+writer omits the list when its memory-size field is zero. This is a supported
+empty drawing. A present type-0 terminator is also accepted for an empty list.
+A header-only file with any nonzero declared count or memory size is truncated
+and must be rejected; it must not be displayed as an empty drawing.
+
+COMMON OBJECT HEADER
+
+Every object, including a terminator, starts with eight bytes:
+
+Relative  Size  Type   Meaning
++0           1  u8     object type, 0..11
++1           1  u8     lock state: 0 unlocked, 1 locked
++2           1  u8     initialized attribute byte, accepted values 0 or 1
++3           1  u8     zero storage/alignment byte
++4           1  u8     pen-width menu item, 1..5
++5           1  u8     pen-pattern menu item, 1..36
++6           1  u8     fill-pattern menu item, 1..36
++7           1  u8     type-specific option byte
+
+Width/pattern/option attributes are persisted even for records where they do
+not visibly draw a pen or fill. A lock affects editing, not visibility.
+
+The option byte is a shared attribute slot with these type-dependent meanings:
+
+    Type             Meaning of +7
+    0                unused, any u8 value
+    1                zero: CR-only; nonzero: wrap to text rectangle width
+    2,3              endpoint arrow flags, values 0..3
+    4                unused, any u8 value
+    5                rounded-corner menu item, values 1..6
+    6,7              unused, any u8 value
+    8,9              unused, any u8 value
+    10               zero: ordinary group; nonzero: picture-group comments
+    11               unused, any u8 value
+
+The native object constructor copies the complete current eight-byte attribute
+record and then changes the type and selected type-specific fields. Consequently
+the option slot can retain a nonzero current selection even when the new type
+does not use it. Rectangle, ellipse, arc, freehand, polygon and bitmap drawing
+paths do not read this byte. Their geometry, fill, outline and composition are
+unchanged for all values 0..255. The converter accepts and preserves the byte
+without applying arrow flags, corner choices or polygon flags from another
+record type. This is recovered inactive state, not an unknown drawing feature.
+Polygon closure/smoothing comes from the separate mode word at +30; bitmap
+composition comes from the native CopyBits path. The active option fields of
+other record types retain their own validation and rendering rules.
+Unrecognized attribute-byte encodings or out-of-range style values are rejected.
+The common +2 byte is initialized to 1 by the original default-style setter;
++3 is initialized to zero. The drawing dispatcher does not test either byte.
+Selection instead occupies a byte in the in-memory object prefix, outside the
+serialized common header. The original purpose/name of +2 remains uncertain;
+it is accepted as a non-rendering stored attribute, not called a visibility
+flag or discarded as an inferred alignment word.
+
+The pen menu table, in drawing units, is:
+
+  item      1       2       3       4       5
+  width     0       1       2       4       6
+
+Item 1 disables outlining. It is NOT a hairline. An outline is enabled only
+when width > 1 and pen-pattern > 1. Fill selection is independent. The original
+initialization and drawing code establish both this table and the no-pen test.
+
+Pattern 1 means no paint, pattern 2 opaque white, pattern 3 opaque black. White
+must not be confused with transparency; it occludes earlier drawing content.
+Patterned fills and pens are opaque black/white repeating 8-by-8 patterns.
+Their phase is anchored to drawing coordinates in the preview. Pattern phase
+under nondefault origins/scales has not been verified.
+
+RECORD TYPES
+
+0: LIST TERMINATOR
+
+Total serialized size: 8 bytes. No body. The remaining seven common-header
+bytes contain saved style/state, not another record. The enclosing list ends
+here, and only the enclosing group's parent list may then continue.
+
+1: TEXT
+
+Relative  Size  Type     Meaning
++8           4  u32      saved text memory handle
++12          1  u8       QuickDraw font-face bits
++13          1  u8       one-based font menu index
++14          1  u8       point-size menu item
++15          1  u8       line-spacing item
++16          1  u8       alignment/flags
++17          1  u8       rotation/reflection code
++18          2  u16      N: number of character bytes
++20          8  Rect16   text bounding rectangle
++28          N  bytes    character data; no terminator or alignment padding
+
+Total serialized size: 28+N.
+
+Face bits: 0x01 bold, 0x02 italic, 0x04 underline, 0x08 outline, 0x10 shadow,
+0x20 condensed, 0x40 extended. Combinations are permitted. Bit 0x80 is unsupported.
+These bits are passed unchanged to QuickDraw TextFace. They do not imply a
+change to the serialized point-size or rectangle representation.
+
+Point-size menu items 1..8 are 9, 10, 12, 14, 18, 24, 36, and 48 points.
+Other items are unsupported in strict mode. Default recovery uses the explicit
+12-point fallback, rather than inferring a size from the drawing rectangle.
+Spacing items 1, 2, 3 mean single, one-and-a-half, and double spacing.
+Alignment low bits 1, 2, 3 mean left, centered, and right. Bit 0x04 is used in
+exported PICT TextBegin information. Native TextEdit positioning masks it off.
+Revision 6 accepts values 1,2,3,5,6,7. Revision 4 uses the raw alignment index
+without masking that export bit and accepts only 1,2,3.
+
+The common option byte at +7 controls line breaking. Zero sets TEcrOnly=-1:
+only CR ends a line. Any nonzero value sets TEcrOnly=0: automatic word wrapping
+is enabled as well. This is a byte-valued Boolean test, not a bit field.
+
+The +17 transform is an enumeration, not independently composable rotate and
+mirror bits. Around the text rectangle center, local coordinates (x,y) map to:
+
+    0    ( x, y)     identity
+    1    (-y, x)     clockwise 90 degrees in downward-positive coordinates
+    2    (-x,-y)     180 degrees
+    3    ( y,-x)     counterclockwise 90 degrees
+    4    (-x, y)     horizontal reflection
+    5    ( x,-y)     vertical reflection
+    6    ( y, x)     exchange coordinates
+    7    (-y,-x)     reflect across the other diagonal
+
+The center is ((left+right)/2,(top+bottom)/2), in fixed-point precision. The
+original generic point transform uses signed 16.16 arithmetic. Transform the
+recomputed rectangle and glyph positions together. Values above 7 are invalid.
+
+The character payload is a sequence of font character codes, not Unicode and
+not necessarily Roman text. The renderer indexes the selected FONT/NFNT glyphs
+with the original byte values. Symbol and decorative fonts therefore retain
+their font-specific pictures. A substituted family uses the same raw character
+codes with its own glyphs; it cannot recover unavailable custom symbols. Mac
+Roman decoding is used only for SVG titles and the explicitly incomplete
+browser-text preview of unsupported external font environments.
+
+CR (0x0D) is the line separator and has zero measured advance regardless of
+face. A final CR creates an additional empty line when calculating object
+height. Consecutive CRs create empty lines. LF (0x0A) is an ordinary font code:
+it does not form a second kind of newline and CR/LF is not collapsed. TAB
+(0x09) uses its actual font advance and glyph; there are no eight-space tab
+stops. A SPACE (0x20) advances without drawing a glyph, as in QuickDraw's
+special space-character path. Other control bytes below 0x20 are outside the
+implemented drawing character profile and are rejected.
+
+The text handle is a persisted runtime value, not a file offset. Rendering
+must read the N immediately following bytes, not seek to that handle.
+
+TEXT ENVIRONMENT AND FONT RESOURCES
+
+Revision 6 stores a font family number and size/style selections. Revision 4
+stores only a font-menu index and size/style selections. Neither revision stores
+the original System/ROM version, FONT/NFNT bytes, Font Manager settings,
+printer fonts, or proof that a family number had its conventional system name.
+The application archive alone cannot reconstruct an author's installed fonts.
+A complete reconstruction of that historical environment is therefore not
+recoverable from the drawing stream alone.
+
+The converter uses a declared classic monochrome, integer-width rendering
+profile. Its stock resource set is the Macintosh System 6.0.8 bitmap fonts,
+with Toronto and a New York 36-point strike from an older font resource set,
+and the original bitmap strikes in Apple's LaserWriter font suitcases.
+These are actual bitmap glyphs and metrics, not modern names used to request
+substitute system fonts. SVG metadata and the audit identify every selected
+resource by family, size, face, provenance and SHA-256, and record the text
+environment. This profile does not certify that an author's machine had these
+exact font-resource versions. Different ROM/System versions, font revisions,
+Font Manager scaling settings, fractional widths and printer environments can
+produce different wrapping, widths or pixels. These historical environment
+limits are separate from the now implemented MacDraw text fields and formulas.
+
+The shipped resources contain these plain bitmap strikes, in points:
+
+    ID  Family          Sizes
+     0  Chicago         12
+     2  New York        9,10,12,14,18,20,24,36
+     3  Geneva          9,10,12,14,18,20,24
+     4  Monaco          9,12
+     5  Venice          14
+     6  London          18
+     7  Athens          18
+     8  San Francisco   18
+     9  Toronto         9,12,14,18,24
+    11  Cairo           18
+    12  Los Angeles     12,24
+    13  Zapf Dingbats    10,12,14,18,24
+    14  Bookman          10,12,14,18,24
+    15  N Helvetica Narrow 10,12,14,18,24
+    16  Palatino        10,12,14,18,24
+    18  Zapf Chancery    10,12,14,18,24
+    20  Times           9,10,12,14,18,24
+    21  Helvetica       9,10,12,14,18,24
+    22  Courier         9,10,12,14,18,24
+    23  Symbol          9,10,12,14,18,24
+    24  Mobile          18
+    33  Avant Garde      10,12,14,18,24
+    34  New Century Schlbk 10,12,14,18,24
+
+Helvetica additionally has original condensed (face 0x20) strikes at
+10,12,14,18,24 points. Their FOND associations share NFNT resources with
+Helvetica Narrow. This is an original resource association, not an inferred
+alias based on similar font names. The bundle contains 95 bitmap strikes.
+The LaserWriter additions retain the source FOND bodies, resource IDs, raw
+bitmap bodies, archive URLs and SHA-256 digests so the mappings can be checked.
+
+Family 1 denotes the application font. This declared Roman environment uses
+Geneva (family 3) for that alias. The original family value 1 remains in the
+audit with family_alias="application font"; it is not reported as a missing
+font. A different original application's low-memory application-font setting
+is not recoverable from a drawing's family value alone.
+
+A missing family automatically resolves to Geneva (family 3), preserving the
+requested point size and face. Geneva follows the same bitmap-strike selection,
+scaling, glyph layout and styling rules as an explicitly requested available
+family. This is a fixed conversion policy, not a recovered original-family
+identity or a claim of matching the author's missing font. It does not depend
+on the drawing filename, text content, numerical proximity of family IDs, or
+fonts installed on the SVG viewer's computer. Substitution is allowed in normal
+conversion and needs no --preview option. Different glyphs, advances and line
+breaks are possible, especially for unavailable symbolic or decorative fonts.
+
+The original family selection remains unchanged in the parsed document.
+Each font_resources audit entry contains the requested family, menu_index, resolved_family,
+substituted Boolean, requested size and face, selected strike, and provenance.
+font_substitutions lists just the substituted selections in both the audit
+and SVG metadata. Text groups also record data-rendered-font-family and
+data-font-substituted, as well as data-font-menu-index. A revision-4 family is
+null when no original menu is supplied because its identity was not saved;
+distinct menu indices are retained as distinct audit selections. An explicit
+menu supplies the family identity separately from the drawing bytes.
+The HTML inspection report identifies substitutions.
+An absent character within an available family instead uses that resource's
+own missing-character glyph. An unsupported resource encoding is not treated
+as an absent family. Built-in strike face and remaining synthesized_face are
+recorded separately, so an already styled bitmap is not styled twice.
+
+Original installed-font menus for revision 4
+
+MacDraw 0.9 invokes AddResMenu for FONT resources, takes at most ten family
+names, and resolves each displayed name through GetFNum. The resulting table
+exists only in application memory. Resource-map order and installed fonts
+therefore matter. Later Menu Manager versions added FOND entries and sorted
+resource names; sorting an arbitrary modern font catalog cannot reconstruct
+an unknown author's original menu. An application archive containing only
+MacDraw's resources also lacks that System/ROM font environment.
+
+When the original menu order is known, supply it explicitly:
+
+    python3 macDraw.py --font-menu original-menu.json inputFile outputFile
+
+The JSON grammar is:
+
+    {"format":"macDraw font menu 1", "families":[0,2,3],
+     "source":"Description of the original menu evidence"}
+
+The example lists Chicago, New York and Geneva in that order; it is an example
+of the schema, not a default or a proposed universal installed menu. families
+must contain one to ten distinct integer family IDs, each in 0..65535. Position
+one maps font-menu item 1, position two maps item 2, and so on. Boolean, string,
+duplicate and out-of-range IDs are rejected. The optional source string records
+provenance; the converter also records the exact JSON file's SHA-256 digest.
+The menu and its provenance appear in original_font_menu in the audit and SVG.
+
+Only revision 4 uses this external menu. Revision 6, MacDraw II and Pro use their
+saved family IDs. An index beyond the explicitly supplied menu remains unknown
+and uses the documented Geneva substitution. Supplying a menu never changes
+the saved bytes. Combine --font-menu with --font-resource for the original
+custom families; no family name or menu order is guessed from a drawing's
+filename, text, apparent glyph shapes, or unrelated sample documents.
+
+An empty text object with no background fill draws nothing and needs no font
+resource; its serialized selections and byte framing are still validated.
+
+To supply an original font resource fork or AppleDouble resource-fork file:
+
+    python3 macDraw.py --font-resource font.rsrc inputFile outputFile
+
+The option can be repeated. Supplied original families take precedence over
+substitution. Later supplied resources override matching family, point-size
+and face entries. Raw resource forks, including resource-map dfont
+containers with bitmap strikes, and AppleDouble resource-fork entries are
+accepted. Font resource input is independent of the drawing data-fork parser;
+it does not add support for drawing files in other formats. MacBinary, archives,
+TrueType/OpenType/sfnt outlines, color fonts, script-system shaping, fractional
+FOND-width layout are not font
+input features of this implementation.
+
+FOND headers identify family IDs; their association table starts at byte 52
+with a u16 count-minus-one followed by triples of u16 point size, u16 face,
+and s16 resource ID. Bitmap associations resolve NFNT first, then FONT. A
+zero point size is a scalable-font association and is not used as bitmap data.
+For old FONT resources without FOND associations, resource ID bits 7..15 give
+the nine-bit family, and bits 0..6 give the point size. Size-zero FONT entries
+are not glyph strikes. Duplicate type/ID entries, invalid map bounds, missing
+referenced bitmap resources and malformed FONT tables cause rejection of the
+supplied resource file. Unrelated resource payloads are not interpreted as fonts.
+
+For bitmap families, the original Font Manager size search order is applied: exact size,
+twice requested size, half requested size when integral, smallest larger size,
+and largest smaller size. This is a specified lookup order, not nearest-font
+matching. Some later Font Manager versions changed the final size search;
+that alternate environment is not selected by examining the drawing content.
+Size is selected before face. Among the resources at that size, an exact face
+match wins. Otherwise a face whose set bits are a subset of the requested face
+is ranked by these original Font Manager weights:
+
+    bold 4; italic 8; underline 1; outline 3; shadow 3;
+    condensed 2; extended 1.
+
+The greatest sum wins; a tie retains the first FOND association. If there is
+no qualifying subset, the first available strike at that size is retained,
+as in the native fallback. QuickDraw synthesizes requested_face AND NOT
+strike_face. It cannot remove an already built-in face. Association order is
+preserved when loading resources. These weights and the fallback are explicit
+native selection rules, not nearest-font or visual-similarity heuristics.
+
+FONT/NFNT ONE-BIT STRIKE DATA
+
+This is the external font input structure, not an additional drawing record.
+Its 26-byte big-endian header is:
+
+    +0   u16 fontType        +2   s16 firstChar      +4   s16 lastChar
+    +6   s16 widMax          +8   s16 kernMax       +10   s16 nDescent
+   +12   s16 fRectWidth     +14   s16 fRectHeight   +16   u16 owTLoc
+   +18   s16 ascent         +20   s16 descent      +22   s16 leading
+   +24   s16 rowWords
+
+The profile accepts monochrome flags formed from 0x9000 and low bits 0/1;
+other flag bits are rejected. Characters must be within the one-byte code
+space. nDescent is stored but is not used to replace ascent/descent. Modern
+extended-offset and color variants are not implemented.
+
+A bitmap of fRectHeight rows follows the header, each row 2*rowWords bytes.
+Pixels are most-significant-bit first. With C=lastChar-firstChar+1, the bitmap
+is followed by C+2 unsigned location words. Adjacent location words give the
+horizontal bitmap limits of C normal glyphs and one missing-character glyph.
+The final word is the end position. Empty glyph spans are permitted.
+
+The offset/width table begins at 16+2*owTLoc. Its C+1 used words describe the
+normal glyphs and missing glyph. Each word has an offset byte and an unsigned
+advance byte. A negative word denotes an unavailable glyph; the last glyph
+is used instead. At pen position (x,baseline), a glyph bitmap pixel at local
+column c and row r draws at (x+kernMax+offset+c,baseline-ascent+r).
+
+Optional tables begin after C+2 offset/width words: there is an extra unused
+word when further tables are present. fontType bit 1 supplies C+2 fractional
+8.8 width words. They are parsed, but the declared integer-width profile uses
+the offset/width table's integer advances. fontType bit 0 supplies C+2 height
+words, each a top-row byte and a row-count byte. Only those rows participate in
+glyph drawing; height ranges outside the bitmap are invalid. Location tables
+must be monotone and lie inside the row stride. All required tables must lie
+inside the resource. Any resource-allocation tail beyond these tables remains
+external resource data, not glyphs or drawing-file content; it is preserved
+inside the font resource's checksum and bundled raw bytes.
+
+The bundle macDraw-fonts.json stores zlib-compressed, base64-encoded original
+resource bodies, family/size/face mappings and provenance. Every resource body
+is checksum-validated before use. This is font data, not executable platform
+code. It does not grant a new license to the original font designs.
+
+TEXT METRICS, BOXES AND WRAPPING
+
+The synthesized style advance adjustment, at the selected strike's size, is:
+
+    extra = bold + outline + 2*shadow - condensed + extended
+
+Each term is 0 or 1 according to its face bit. Italic and underline do not
+add advance in this screen profile. CR's advance remains zero. The outline/
+shadow expansion count is outline+2*shadow. GetFontInfo adds one to ascent
+when this count is nonzero, adds the count to descent, and adds extra to
+widMax. Leading comes from the resource. A pre-styled exact-match resource
+already contains its style; these synthetic adjustments are not applied again.
+
+Let requested point size be P and selected strike size S. Font Manager's size
+scale is represented as numerator round(256*P/S), denominator 256. Each
+GetFontInfo value is scaled upward to an integer. TextWidth sums unscaled
+integer character advances, multiplies by that ratio, and rounds to the
+nearest integer, with half increments upward. Glyph shapes use the same ratio.
+No text is stretched to fit the stored rectangle. Condense/extend modify
+advances; they do not horizontally scale individual glyph pictures.
+
+The original loader recalculates the text rectangle from these metrics:
+
+  1. Ensure its width is at least widMax+5, using the horizontal resize rule
+     below. The TextEdit view/destination rectangle has minimum width 7 and
+     minimum height 1.
+  2. Compute line starts. In CR-only mode each CR ends a line. In wrapped mode,
+     use the destination width minus the one-pixel caret inset, measure with
+     the selected font, and break before the word that would overflow. Roman
+     break characters are bytes <=0x20. Break separators stay with the preceding
+     line; a CR ends it immediately. A word longer than the line is split at
+     the character boundary, always consuming at least one character.
+  3. In CR-only mode only, revision 6 sets the object width to
+     max(widMax+5,maximum line TextWidth+5). Revision 4 instead sets it to
+     maximum line TextWidth, with no added margin or minimum-width clamp at
+     this step. Thus an empty CR-only revision-4 line can have zero width.
+     The stored width is not an instruction to fit substitute glyphs to it.
+  4. Set lineHeight = trunc((spacingItem+1)*(ascent+descent+leading)/2).
+     Set bottom = top + lineHeight*lineCount. An empty object counts as one
+     line, and a trailing CR supplies one additional empty line.
+
+Horizontal resizing holds the left edge for left alignment and the right edge
+for right alignment. For centered alignment, middle=trunc((left+right)/2),
+half=trunc((newWidth+1)/2), left=middle-half, right=middle+half. These operations
+use the original signed-16-bit additions and truncation toward zero; centered
+widths round to an even number. The implementation rejects text beyond the
+classic signed TextEdit length or rectangle limits rather than wrapping layout
+into a misleading output image.
+
+For a line with measured width W in (left,right), the pen X is left+1 for left
+alignment; left+1+floor((right-left-1-W)/2) for centered alignment; right-W for
+right alignment. The right-aligned measurement trims trailing break characters,
+retaining at least the first character of a nonempty line. The initial baseline
+is top+ascent in revision 6 and top+ascent+leading in revision 4; subsequent
+baselines add lineHeight. Baselines are not inferred
+from rectangle height. These are the declared Roman TextEdit positioning rules;
+alternate script managers and historical changes to line-breaking behavior
+are outside this environment profile.
+
+TEXT GLYPH COMPOSITION
+
+Text uses black foreground, independent of the object's pen pattern. The fill
+selection supplies QuickDraw's BackPat during TextEdit erasure. Fill 1 disables
+background erasure. Other fills paint the text rectangle's background before
+the glyphs. The rectangle transforms with the text, but its pattern remains
+anchored in destination coordinates, as with EraseRect after rectangle mapping.
+
+MacDraw's text capture splits a line into chunks of at most 34 bytes, reduced
+to 13 when outlined, shadowed or transformed. Each chunk is painted at its
+current integer pen position; its rounded TextWidth advances to the next.
+Styles operate on the chunk's monochrome bitmap:
+
+  * Bold ORs a one-pixel copy to the right.
+  * Italic shifts rows to the right by floor((fRectHeight-row)/2), starting
+    from the bottom of the strike. This is the original 8/16 slant increment.
+  * Underline draws at baseline+1 when descent is at least two. Existing ink
+    on baseline, baseline+1 and (if present) baseline+2 excludes underline
+    pixels within one horizontal pixel. Its extent is the chunk advance.
+  * Outline/shadow expands the styled ink over the rectangle of offsets
+    dx,dy=-1..expansionCount, then removes the original ink with QuickDraw's
+    XOR interior pass. The SVG represents the resulting black outline and
+    white interior explicitly for untransformed text. Condense/extend change
+    pen advances only.
+
+QuickDraw's chunk transfer rectangle limits horizontal ink; it includes
+32 pixels of slop beyond the advance for styles and one additional pixel to
+the left in the shifted shadow pass. Transformed text takes an additional native
+off-screen bitmap path: its source rectangle is limited to the measured chunk
+advance and the font ascent/descent. CopyBits then uses srcOr, so the outlined
+interior becomes transparent in that case. The SVG applies this clipping and
+composition before the transform. The converter includes actual transformed
+ink bounds in the canvas so rotated or styled text is not cropped by its
+unrotated stored rectangle. Glyph pixels become filled SVG paths, with repeated
+chunks referenced inside the SVG. Browser antialiasing is permitted when these
+native pixels are displayed at nonintegral scale; exact device pixel coverage
+is not an SVG portability guarantee.
+
+2: AXIS-CONSTRAINED LINE; 3: GENERAL LINE
+
+Body at +8: four Fixed values y1,x1,y2,x2 (16 bytes).
+Total serialized size: 24 bytes.
+
+Use the endpoints in their stored order, including reversed directions.
+The option byte's bit 0x01 requests an arrow at the second endpoint; bit 0x02
+requests an arrow at the first endpoint. Bits above 0x03 are unsupported.
+The fill selection is not a closed-area fill for a line. Arrowheads use the
+pen pattern, including its white pixels, and have no separately framed border.
+No-pen width selection 1 or no-paint pen pattern 1 suppresses both shaft and
+heads. These rules apply to both line record types.
+
+ARROW GEOMETRY
+
+The head is a filled circular sector of sweep 48 degrees. The circle's center
+is the arrow tip before the revision-specific adjustment below. Its radius is
+selected by the pen menu, not derived from the stored line length:
+
+    pen menu item       1       2       3       4       5
+    pen width           0       1       2       4       6
+    arrow radius       none    10      15      20      25
+
+All these values use native 72-unit drawing coordinates. The following is the
+unscaled drawing path; printer-device mapping and QuickDraw pixel coverage are
+outside the illustration profile. Its integer arithmetic matters even when
+the input endpoints are fractional Fixed coordinates.
+
+1. Convert each endpoint component from signed 16.16 Fixed to a signed 16-bit
+   integer. Revision 6 adds 0x8000 and takes the signed high word, rounding
+   half ties toward positive infinity. Revision 4 rounds the absolute value
+   this way and restores its sign, rounding negative ties away from zero.
+   Integer overflow wraps at the relevant 16- or 32-bit boundary.
+
+2. Subtract endpoints using signed 16-bit arithmetic. Heads are drawn only
+   if abs(dx)>radius OR abs(dy)>radius; equality suppresses them. This is an
+   axis-distance test, not a Euclidean-length test. The original word-sized
+   negation leaves -32768 negative, so that component alone cannot pass the
+   comparison. A suppressed head also leaves its shaft endpoint unshortened.
+
+3. Process the second-endpoint head first if bit 0 is set, then the first-
+   endpoint head if bit 1 is set. Both heads refer to the original opposite
+   endpoint, even if the other shaft endpoint was already shortened. For each
+   head, construct Rect16 (tipY-radius, tipX-radius, tipY+radius, tipX+radius)
+   with word wrapping. Obtain the integer bearing A of the opposite endpoint
+   with the PtToAngle rule below. PaintArc starts at A-24 and sweeps +48.
+   Angles are clockwise from twelve o'clock. Revision 6 shifts the painted
+   rectangle one unit right; revision 4 leaves it unshifted. This correction
+   changes neither the bearing nor the circle used for shaft shortening.
+
+4. Inset the original unshifted circle by two units on every side. Let its
+   Fixed center be C and its Fixed radii be Rx,Ry. Move the shaft endpoint to
+   C+(Rx*sin(A), Ry*sin(A-90)), using the historical Fixed sine table below,
+   Fixed multiplication, and the same revision-specific integer rounding as
+   step 1. In ordinary nonoverflowing coordinates the shortening distance is
+   radius-2 along the quantized bearing. Do not clamp two shortened endpoints
+   to preserve their order: very short two-headed shafts can cross.
+
+5. After painting all requested heads, subtract floor(penWidth/2) from both
+   coordinates of both shaft endpoints, with word wrapping, then MoveTo and
+   LineTo. These are the top-left origins of QuickDraw's rectangular pen. To
+   render their continuous SVG equivalent, add penWidth/2 to each coordinate
+   and draw the centered square-capped stroke. The half-unit shift for the
+   one-unit pen is intentional.
+
+PtToAngle uses signed 16-bit center coordinates:
+
+    centerX = signed16(left+right) >> 1
+    centerY = signed16(top+bottom) >> 1
+    dx = signed16(pointX-centerX)
+    dy = signed16(pointY-centerY)
+
+Here >> is arithmetic shift. If dx is zero, the angle is 180 when dy>0 and
+zero otherwise. Otherwise form the signed 16.16 value
+
+    S = FixMul(FixRatio(dx,dy),
+               FixRatio(signed16(bottom-top),signed16(right-left))).
+
+FixRatio(n,d) returns truncTowardZero(65536*n/d), saturated to signed 32-bit
+range. Division by zero returns -0x80000000 for negative n and 0x7fffffff
+otherwise. FixMul(a,b) returns floor((a*b+32768)/65536), saturated to that
+range. This is the declared integer Toolbox profile. The circle aspect ratio
+is one for ordinary arrow rectangles, so it introduces no additional error.
+
+Find the smallest index I in the following slope table whose value is at
+least signed32(abs(S)-500). If S>=0, set A=180-I; otherwise A=I. Add 180 when
+dx<0, then reduce A modulo 360. The bias of 500 and the table values are
+historical constants, not a modern atan2-and-round approximation. Values are
+positive Fixed slopes for indices 0 through 90 in order:
+
+    0,1144,2289,3435,4583,5734,6888,8047,9210,10380,
+    11556,12739,13930,15130,16340,17560,18792,20036,21294,22566,
+    23853,25157,26478,27818,29179,30560,31964,33392,34846,36327,
+    37837,39378,40951,42560,44205,45889,47615,49385,51202,53070,
+    54991,56970,59009,61113,63287,65536,67865,70279,72785,75391,
+    78103,80930,83882,86969,90203,93595,97161,100917,104879,109070,
+    113512,118230,123255,128622,134369,140542,147196,154393,162207,170727,
+    180059,190330,201699,214358,228551,244584,262850,283867,308322,337153,
+    371673,413777,466312,533747,623533,749079,937205,1250493,1876695,3754544,
+    2147483647
+
+The sine lookup for shaft shortening has the following signed 16.16 values
+for angles 0 through 90. Extend it to other integer angles by ordinary sine
+quadrant symmetry and reduction modulo 360. In particular the 14-degree
+entry is 15854, differing from a freshly rounded mathematical sine.
+
+    0,1144,2287,3430,4572,5712,6850,7987,9121,10252,
+    11380,12505,13626,14742,15854,16962,18064,19161,20252,21336,
+    22415,23486,24550,25607,26656,27697,28729,29753,30767,31772,
+    32768,33754,34729,35693,36647,37590,38521,39441,40348,41243,
+    42126,42995,43852,44695,45525,46341,47143,47930,48703,49461,
+    50203,50931,51643,52339,53020,53684,54332,54963,55578,56175,
+    56756,57319,57865,58393,58903,59396,59870,60326,60764,61183,
+    61584,61966,62328,62672,62997,63303,63589,63856,64104,64332,
+    64540,64729,64898,65048,65177,65287,65376,65446,65496,65526,
+    65536
+
+For overflow-sensitive shaft shortening, convert each inset Rect16 edge to
+Fixed by multiplying by 65536. For each axis, add the two Fixed edges with
+signed 32-bit wrapping, divide by two toward zero to obtain C, and subtract
+the lower edge with wrapping to obtain the radius. Apply FixMul to the radius
+and sine, then add C with signed 32-bit wrapping before integer rounding.
+This center calculation differs from the word-sized PtToAngle center above.
+
+SVG represents the painted sector as a circular arc bounded by two radii. Its
+continuous arc endpoints use the exact integer start/sweep angles, while the
+shaft shortening uses the historical sine lookup. QuickDraw's raster arc
+edges, rectangular pen coverage and device clipping are not emulated.
+The renderer applies this integer-aligned path to lines with nonzero arrow
+flags, including those whose heads are suppressed by the short-line test.
+Unflagged lines retain the converter's continuous Fixed-coordinate SVG path.
+
+4: RECTANGLE; 5: ROUNDED RECTANGLE
+
+Body at +8: RectFixed (16 bytes). Total serialized size: 24 bytes.
+Inverted QuickDraw rectangles are empty; they are not silently normalized.
+Type 4 is an ordinary rectangle; its common option byte is unused.
+Type 5 selects an oval diameter using option 1..6 and the saved
+ruler unit at header 0x0B7 (0x0B9 in the shifted revision-4 header):
+
+  option             1     2     3     4     5     6
+  inches (unit 1)    0    18    27    36    45    54
+  cm     (unit 2)    0    22    28    34    45    56
+
+These are oval DIAMETERS in 72-unit drawing coordinates, not radii or lengths
+in inches/centimeters. Unit-1 entries 2..6 are floor(2*option*72/16). Unit-2
+entries derive from 40,50,60,80,100 tenths of millimeters using
+floor(2*value*72/254). Option 1 gives square corners. SVG rx and ry are half the
+diameter, each capped at half its corresponding rectangle dimension. These
+integer tables are initialized by the original application, not fitted to
+illustration data.
+
+6: ELLIPSE
+
+Body at +8: RectFixed (16 bytes). Total serialized size: 24 bytes.
+The ellipse is inscribed in the rectangle. Its common option byte is unused.
+Inverted rectangles have no visible ellipse.
+
+7: ELLIPTICAL ARC / FILLED SECTOR
+
+Relative  Size  Type        Meaning
++8          16  RectFixed   rectangle of the complete parent ellipse
++24          2  s16         start angle, degrees clockwise from 12 o'clock
++26          2  s16         signed sweep angle in degrees
+
+Total serialized size: 28 bytes. The ellipse rectangle is not the bounding box
+of only the arc. For center (cx,cy), radii (rx,ry), and angle a:
+
+    x = cx + rx*sin(a)
+    y = cy - ry*cos(a)
+
+An unfilled object draws the open elliptical arc. A filled arc draws a sector
+closed to the ellipse center, while the outline follows only the elliptical
+edge; the two radial sides are not stroked. A zero sweep draws nothing; a sweep of magnitude
+at least 360 draws the full ellipse. Negative sweeps run counterclockwise.
+The common option byte is unused; the two signed angle fields define the arc.
+
+8: DELTA-ENCODED FREEHAND POLYGON/POLYLINE
+
+Relative  Size    Type          Meaning
++8           4   u32           B: polygon block length, excluding this u32
++12          2   u16           N: point count, at least one
++14         16   RectFixed     cached bounds
++30          2   u16           high-byte flags; low byte must equal 8
++32          8   PointFixed    initial y,x coordinate
++40     2*(N-1)  s8 pairs      dx,dy displacements from preceding point
+
+B must equal 26+2*N. Total serialized size: 12+B = 38+2*N.
+Each signed delta is an integral drawing-unit displacement. It is not scaled
+by the bounding rectangle, multiplied by the count, or applied vertically
+first. The fractional part of the initial point is retained through additions.
+High-byte bit 0x01 requests a closed outline. Other high-byte bits are outside
+the implemented freehand encoding. The common option byte is unused.
+
+9: FIXED-POINT POLYGON / SMOOTHED CONTROL POLYGON
+
+Relative  Size    Type          Meaning
++8           4   u32           B: polygon block length, excluding this u32
++12          2   u16           N: point count, at least one
++14         16   RectFixed     cached bounds/control-point bounds
++30          2   u16           high-byte flags; low byte must equal 9
++32         8*N  PointFixed[]  explicit vertices, y then x
+
+B must equal 20+8*N. Total serialized size: 12+B = 32+8*N.
+High-byte bit 0x01 marks closed treatment; bit 0x02 selects smoothing.
+High-byte values above 3 are unsupported. The duplicated low-byte type is
+validated, not discarded. A smoothed polygon stores control points; simply
+connecting them by straight segments changes the drawing.
+The common option byte at +7 is unused and does not override this mode word.
+
+Smoothing is a quadratic construction evaluated by the original application
+with an integer forward-difference iterator. It produces 16 subdivisions per
+quadratic section, with endpoint adjustments. Repeated controls, including a
+last control equal to the first, are significant and must not be removed.
+The implementation reproduces the iterator rather than fitting SVG Beziers.
+
+Exact iterator, applied to both coordinate components independently:
+
+  W(v) = signed 32-bit wraparound of v.
+  A(a,b) and S(a,b) = componentwise wrapped add and subtract.
+  D(a,k) = componentwise signed division by k, truncating toward zero.
+  points[i] is indexed modulo N. Require N >= 3 for supported smoothing.
+
+  a,b,c = points[0], points[1], points[2]
+  if open: a = S(a, S(b,a))
+  position = D(A(a,b), 2)
+  output position as the initial MoveTo vertex
+  delta = D(S(b,a), 16)
+  position = A(position, D(delta,2))
+  limit = N+2 if closed, otherwise N
+  segment = 3; step = 0
+
+  while segment <= limit:
+      if segment == 3 and step == 0:
+          step = 1
+      else:
+          if step == 1:
+              if segment == limit and open: c = S(c,S(b,c))
+              acceleration = D(S(S(A(c,a),b),b), 256)
+          delta = A(delta,acceleration)
+          position = A(position,delta)
+          step += 1
+          if step > 16:
+              if segment == limit: position = S(position,D(delta,2))
+              a,b,c = b,c,points[segment mod N]
+              step = 1
+              segment += 1
+      output position as the next LineTo vertex
+
+All arithmetic above uses the stored signed 16.16 integers. Divide final
+vertices by 65536 for SVG coordinates. The count including MoveTo is
+16*(N-2)+2 for open curves and 16*N+2 for closed curves. Truncation can leave
+small endpoint discrepancies; forcing equality would alter the native result.
+A closed outline additionally closes to its first vertex. Open fills close
+implicitly without adding that edge to their outline. The SVG retains native
+fractional vertices before device scaling, pen positioning and pixel rounding;
+it does not emulate a particular printer or Macintosh display rasterizer.
+
+An open outlined polygon stays open even when a fill is present. Its fill is
+closed implicitly; its outline is closed only by the explicit closed flag.
+Preview uses the even-odd fill rule.
+
+10: GROUP
+
+Revision 6 body:
+
+Relative  Size  Type        Meaning
++8          16  RectFixed   cached group bounds
++24          2  u16         immediate child count
++26          2  u16         total descendant object count
++28          4  u32         child-list memory size
++32          8  2*u32      saved list memory handles
++40          -  list        children followed by their type-0 terminator
+
+Revision 4 body:
+
+Relative  Size  Type        Meaning
++8           2  u16         immediate child count
++10          2  u16         total descendant object count
++12          4  u32         child-list memory size
++16         16  RectFixed   cached group bounds
++32          8  2*u32      saved list memory handles
++40          -  list        children followed by their type-0 terminator
+
+In both revisions, the group's own serialized header is exactly 40 bytes.
+Its serialized subtree also includes every child and an 8-byte terminator.
+The list handles are runtime values, never offsets into the input. The exact
+role of each saved handle is inferred from list structure, not a recovered
+public declaration. A zero common option requests ordinary group picture
+comments (140/141); a nonzero option requests picture-group comments (142/143)
+when exporting PICT. The native drawing dispatcher traverses the same children
+in the same order in both cases. Neither value changes SVG grouping geometry.
+No additional group transform is inferred from the difference between cached
+bounds and children. The implementation caps nesting depth at 128 as a
+resource limit; this cap is not a claimed historical file-format limit.
+
+11: MONOCHROME BITMAP
+
+Relative  Size  Type        Meaning
++8           4  u32         saved bitmap handle
++12          8  Rect16      source rectangle to display
++20         16  RectFixed   destination rectangle in drawing coordinates
++36          4  u32         saved BitMap base address
++40          2  u16         bytes per stored row
++42          8  Rect16      stored bitmap bounds
++50          K  bytes       uncompressed bitmap rows
+
+K = rowBytes * (storedBottom - storedTop).
+Total serialized size: 50+K. This is not PackBits compression or a PICT PixMap.
+
+Storage is top-to-bottom. Each row's most significant bit is its leftmost
+pixel. A set bit is black and a clear bit is white in the bitmap's own plane.
+The native drawing operation is CopyBits with mode srcOr (1), so clear bits
+leave the existing drawing unchanged and set bits paint black. In SVG this is
+represented by a transparent white palette entry and an opaque black entry.
+It must not place an opaque white rectangle over earlier objects. The row may contain
+unused bits or complete padding bytes beyond its logical right edge. These
+bytes still belong to the bitmap record and are included in K. A source
+rectangle may crop the stored bitmap. Bits outside that rectangle must not
+appear in the rendered destination. Source bounds must be contained within
+stored bounds, and rowBytes*8 must cover the logical stored width. The
+implementation requires 0 < rowBytes < 0x4000, rejecting PixMap-style flag bits.
+
+Coordinates for locating bit (x,y) are relative to storedLeft and storedTop:
+
+    byteIndex = (y-storedTop)*rowBytes + floor((x-storedLeft)/8)
+    bitMask   = 0x80 >> ((x-storedLeft) mod 8)
+
+The source rectangle maps linearly to the destination rectangle. No aspect
+ratio correction is inferred. The SVG contains a lossless, cropped 1-bit
+indexed PNG generated with standard-library zlib and CRC32. PNG index zero is
+white and index one is black, with a tRNS chunk containing 00 FF to establish
+their respective alpha values. There are no linked external bitmap files.
+Runtime addresses are not followed. The common bitmap option byte is unused
+and does not change the source rectangle, destination rectangle or srcOr mode.
+
+PATTERN TABLES
+
+Each following hexadecimal string is eight bytes in top-to-bottom row order;
+within a byte, bit 7 is leftmost. Indices are menu items. Item 1 has no bitmap
+because it means transparent/no paint. Item 2 is opaque white. These are fixed
+application palette data; the native object stores the index, not eight bytes
+of pattern data. Tables differ by revision.
+
+Item  Revision 6         Revision 4
+  2   0000000000000000   0000000000000000
+  3   ffffffffffffffff   ffffffffffffffff
+  4   77dd77dd77dd77dd   bbeebbeebbeebbee
+  5   aa55aa55aa55aa55   55aa55aa55aa55aa
+  6   8822882288228822   8822882288228822
+  7   8800220088002200   8800220088002200
+  8   8000080080000800   8000080080000800
+  9   8000000008000000   0800000080000000
+ 10   8080413e080814e3   8080413e080814e3
+ 11   ff808080ff080808   081c224180010204
+ 12   8142241881422418   ff808080ff080808
+ 13   8040201008040201   0180402010080402
+ 14   e070381c0e0783c1   81c06030180c0603
+ 15   77bbddee77bbddee   1188440011884400
+ 16   8844221188442211   1188442211884422
+ 17   99cc663399cc6633   3399cc663399cc66
+ 18   2040800008040200   0180400002040800
+ 19   ff00ff00ff00ff00   6600000099000000
+ 20   ff000000ff000000   ff000000ff000000
+ 21   cc00000033000000   5020202050882788
+ 22   f0f0f0f00f0f0f0f   849f80800404e784
+ 23   ff888888ff888888   010101ff010101ff
+ 24   aa44aa11aa44aa11   5588552255885522
+ 25   0102040810204080   8001020408102040
+ 26   83070e1c3870e0c1   c08103060c183060
+ 27   eeddbb77eeddbb77   8811220088112200
+ 28   1122448811224488   8811224488112244
+ 29   3366cc993366cc99   cc993366cc993366
+ 30   40a00000040a0000   2050000002050000
+ 31   aaaaaaaaaaaaaaaa   0808080808080808
+ 32   8888888888888888   0404404004044040
+ 33   0101101001011010   038448300c020101
+ 34   0008142a552a1408   0a11a04000b14a4a
+ 35   ff80808080808080   404040ff40404040
+ 36   8244281028448201   4122140814224180
+
+SVG RENDERING AND EXPLICIT PREVIEW LIMITATIONS
+
+All modes paint objects in serialized order with SVG geometry and repeating
+black/white patterns. Groups preserve nesting and order. Bitmap data is decoded
+without image approximations, although resampling at a chosen display size
+belongs to the SVG viewer. Every object receives an SVG ID containing its
+source offset. Images use a white background and one canvas covering the
+stored object/control bounds, with a four-unit margin plus arrow allowance.
+This is an illustration view, not a reconstruction of printer pages, paper
+margins, selected printing range, or the saved zoom/scroll window.
+
+The root SVG width and height equal the viewBox width and height in CSS px:
+one drawing unit displays as one CSS pixel at the intrinsic size. The viewBox,
+including any fractional origin, and all saved drawing coordinates are
+preserved. This is a screen-display policy; the width and height do not specify
+the original physical point dimensions. Physical-size printing requires an
+explicit page/print scale.
+
+All resource-based bitmap glyph definitions use shape-rendering="crispEdges",
+including legacy, MacDraw II and Pro text, built-in font styles, and synthesized
+styles. The hint is scoped to text glyphs; continuous vector shapes retain
+their normal rendering. It asks the viewer to favor sharp device-pixel edges
+over antialiasing. This does not change glyph outlines, advances, line breaks,
+text positions, or drawing bounds. Fractional zoom or device scaling can still
+produce uneven pixel widths. Exact original QuickDraw rasterization is not
+established by this display preference. Gallery thumbnails additionally scale
+the SVG to fit their preview boxes.
+
+Non-rendering metadata is preserved in all modes under the acceptance boundary
+above. Visible features with unresolved interpretation require --preview.
+Its remaining approximation choices are:
+
+  * Unknown ruler units: fallback corner radius min((menuItem+1)*4.5,
+    half width, half height). Known units always use the exact native table.
+  * Degenerate smooth polygons with fewer than three controls: straight points.
+  * Text with unsupported external font environments:
+    known numeric family IDs select conventional browser family names; unknown
+    IDs use a named placeholder plus a generic fallback. This fallback alone
+    decodes glyphs as Mac Roman, fits single lines to stored width, distributes
+    explicit CR/LF lines over stored height and expands tabs. It cannot recover
+    font-specific glyphs or wrapping and remains explicitly incomplete.
+    Missing families ordinarily use the deterministic Geneva substitution
+    described above, with the implemented resource text engine. Text whose
+    environment is supported uses that engine even inside a preview with
+    unrelated drawing issues.
+  * Unsupported-environment preview styling uses browser bold/italic/underline and SVG
+    stroke/shadow approximations. All text, including this fallback, uses the
+    recovered eight-value transform enumeration.
+All modes use SVG square caps, round joins and even-odd fills. Pen width and
+native curve vertices are recovered; QuickDraw's discrete rectangular pen
+footprint and printer pixel coverage are not emulated. This limits raster
+identity even for supported illustration geometry.
+
+These are deliberate, visible research choices, not silent heuristics in the
+strict conversion path. The generated SVG title, description, and metadata
+identify incomplete output. Metadata contains the issue list and a zlib-
+compressed, base64-encoded original data fork. That embedded source makes byte
+preservation verifiable but does not establish semantic completeness.
+
+BYTE ACCOUNTING AND VALIDATION
+
+The parser records consecutive, nonoverlapping spans for each header field,
+record header, body field, text payload, vertex array, bitmap payload, and
+revision-4 inactive saved-file suffix.
+Recovery additionally records opaque spans for omitted bytes; it does not
+misreport these as successfully decoded records. Partial-record parsing is
+rolled back before omitting an entire record, so its bytes are accounted once.
+For accepted framing, these spans partition [0,fileLength) exactly. There is
+no unassigned trailer, uncounted text pad, guessed skip length, or out-of-band
+continuation. Large arrays can be one span with a count-defined element layout.
+Every record boundary follows field-defined lengths and list structure.
+
+For backward compatibility, the public parse_document() function defaults to
+strict structural decoding while returning semantic issues. Passing
+require_complete=True also stops at the first unsupported semantic issue, as
+used by --strict. The default CLI instead passes recover=True. Recovery and
+require_complete=True are mutually exclusive. render_svg() refuses a document
+with issues unless recover=True or preview=True is explicitly passed. Document.audit()
+checks the span partition and returns counts, a SHA-256 digest, issue offsets,
+and the number of bytes affected by the union of limitation ranges. That last
+number is not a claim that every affected coordinate value is unknown: it
+includes ranges whose rendering depends on unresolved behavior or external
+font resources. It does not include every opaque metadata byte: those separate
+limitations are listed under metadata_limitations and full-format semantics
+remain explicitly unestablished even when drawing issues is an empty list.
+
+accounted_bytes includes all source bytes, including opaque omissions.
+framed_bytes excludes the opaque omitted spans; uninterpreted_bytes is their
+total length, and omitted_byte_ranges gives their exact offsets and lengths.
+Thus framed_bytes+uninterpreted_bytes=accounted_bytes=fileLength for every
+produced document. Framed bytes can still carry explicitly reported substituted
+fields or unresolved metadata. Object and record counts describe retained
+objects/decoded records, not a guessed count of lost objects. Recovery events
+can have length zero at EOF when a required terminator is missing.
+
+The strict command fails before output creation. Preview also fails on invalid
+syntax, unknown encodings, or a structural validation failure anywhere in the
+stream. Default recovery may output surviving objects, explicitly marked as a
+recovered drawing. A valid embedded prefix is never labelled a complete file.
+
+WHAT REMAINS TO COMPLETE THE FORMAT
+
+1. Complete individual names/bit meanings for saved editor preferences, the
+   common initialized attribute byte. The supported older header tail is known
+   zero-initialized unused storage; other values remain unsupported. Continue tracing
+   setters and loading/saving in the
+   original applications; controlled documents changing one UI option at a
+   time can distinguish editor state from persistent drawing behavior.
+
+2. Obtain the original installed-font menu and unavailable original
+   FONT/NFNT/FOND resources when historical font identity is required.
+   Revision 4 does not save that mapping; it cannot be reverse engineered
+   from the document alone. Supply an evidenced external menu-to-family mapping
+   with --font-menu to select original families for revision-4 text instead of
+   Geneva. Standard LaserWriter families and Helvetica's condensed strikes are
+   bundled with their original FOND associations. Numeric custom-font IDs alone cannot determine
+   glyphs or metrics. The documented resource text engine now handles native
+   metrics, baselines, spacing, wrapping, raw glyph codes, styling, alignment
+   and transforms. Remaining work is exact historical environment matching,
+   additional script/font technologies, fractional FOND-width environments,
+   and original resources for the unresolved custom families. Partial styled
+   bitmap selection is implemented with the native size-first and weighted
+   face-subset rules above.
+   For revision 6, supply original bitmap resources with --font-resource where
+   available to restore the intended family in place of Geneva substitution.
+   Missing original resources no longer prevent normal conversion.
+
+3. Trace printer-dependent pattern/pen behavior and remaining editor state.
+   Compare complete displays and printer exports as well as isolated routines.
+   Arrow sectors and line shortening, smooth-curve integer behavior, pen widths,
+   unit-dependent corner sizes, palette and bitmap
+   composition have direct program evidence; this does not establish exact
+   QuickDraw raster coverage for all combinations of clipping and pens.
+
+4. Establish nondefault origin/scale and pagination behavior and correlate all
+   application revisions with text memory-allocation layouts. Do not extrapolate
+   new serialized structures from a matching native signature alone.
+
+5. Investigate unsupported menu encodings by controlled reproduction when
+   needed. Corrupt/truncated streams now support the explicit recovery policy
+   above, but missing bytes cannot be uniquely reconstructed from declared
+   lengths. Complete reconstruction needs original data where available, not
+   another image's guessed content or unreported record-boundary guesses.
+
+6. Extend support with evidence and regression checks. Full format completion
+   still requires decoding the opaque metadata acknowledged by the default
+   acceptance boundary, in addition to resolving unsupported visible features.
+
+REFERENCES AND EVIDENCE PROVENANCE
+
+The binary grammar and count/allocation relationships are implemented in
+independently written Python. Existing importer source was examined as a
+research reference, not imported, executed as a conversion engine, linked, or
+translated wholesale. In particular, fixed palette rows and standard platform
+record definitions are format facts; the converter has its own validation,
+object model, byte accounting, error behavior, and SVG rendering.
+
+* Apple, Inside Macintosh, Volume II, Printing Manager: TPrint and subrecords.
+  https://ftp3.us.freebsd.org/pub/misc/bitsavers/pdf/apple/mac/Inside_Macintosh_Vol_2_1984.pdf
+
+* Apple, Inside Macintosh: Imaging with QuickDraw, "Using Graphics Picture
+  Comments": PolySmooth and quadratic B-splines. This documents the platform
+  model; it does not by itself prove native MacDraw endpoint semantics.
+  https://leopard-adc.pepas.com/documentation/mac/QuickDraw/QuickDraw-470.html
+
+* MacTech/MacTutor, Volume 3, Number 10, "MacDraw Files": historical header
+  layout, font/size and pattern information, and distinction between native
+  DRWG objects and MacDraw's PICT export format.
+  https://preserve.mactech.com/articles/mactech/Vol.03/03.10/MacDrawFiles/index.html
+
+* libmwaw, MacDrawParser.cxx: reference identification of native record
+  families and revision-specific ordering; also contains incompletely decoded
+  fields, so it is not treated as a complete native-format specification.
+  https://raw.githubusercontent.com/Distrotech/libmwaw/master/src/lib/MacDrawParser.cxx
+
+* libmwaw, MWAWFontConverter.cxx: reference names for conventional Macintosh
+  font-family IDs. Custom IDs still require their original resources.
+  https://raw.githubusercontent.com/Distrotech/libmwaw/master/src/lib/MWAWFontConverter.cxx
+
+ORIGINAL-APPLICATION EVIDENCE
+
+The supplied classic application resource forks were examined independently of
+existing importer code. Resource offsets below are offsets inside a CODE
+resource, including its four-byte segment header; they are not file offsets in
+an archive. They are evidence anchors, not runtime dependencies or document
+recognition signatures.
+
+MacDraw 1.7:
+  CODE 17, 0x003E..0x0100: zeroed header, 120-byte printing-record copy,
+      62-byte editor-state copy, list descriptor and eleven font slots.
+  CODE 16, 0x0004..0x0136: native header loading and state copies.
+  CODE 6, 0x03F4..0x0536: both unit-dependent corner tables and pen widths.
+  CODE 6, 0x0538..0x054A: arrow radius bytes 10,15,20,25.
+  CODE 6, 0x05FE..0x0730: initial editor/common-attribute structures.
+  CODE 2, 0x2DBA..0x2DEC: outline requires width>1 and pen-pattern>1;
+      fill is enabled independently when fill-pattern is not 1.
+  CODE 2, 0x25A0..0x28C0: fixed-point curve arithmetic, initialization
+      and iterator; point lookup at 0x0C4E indexes controls modulo N.
+  CODE 2, 0x2CD8..0x2D34: bitmap CopyBits source-OR drawing.
+  CODE 2, 0x3086..0x30E4: ordinary/picture-group comments and identical
+      recursive child drawing.
+  CODE 2, 0x23EE..0x24A8: head circle, PtToAngle, horizontal adjustment,
+      PaintArc(angle-24,48), inset-two circle and shortened endpoint.
+  CODE 2, 0x24AA..0x257A: axis-distance threshold, head flags and order,
+      original opposite endpoint, and shaft pen-origin compensation.
+  CODE 2, 0x658C..0x661A: Fixed circle-point helper; 0x0072 and table at
+      0x00CE: integer-angle sine lookup; 0x5FFC: Fixed-to-word rounding.
+  CODE 2, 0x0D12..0x0D7E: object construction copies all eight current
+      attribute bytes before replacing the type-specific fields.
+  CODE 2, 0x233A..0x23B4, 0x2B94..0x2D46 and 0x2D5E..0x31FA:
+      pen setup, outline/bitmap drawing and complete fill/outline dispatch.
+      The common option is read only in text, line, rounded-rectangle and
+      group paths; other types preserve the inherited byte without using it.
+      Polygon helpers receive the separately allocated polygon block, which
+      has its own mode word and contains no common option byte.
+  PAT# resource 100: 36 eight-byte patterns, including no-paint slot;
+      its palette bytes agree with the revision-6 table printed above.
+
+MacDraw 1.9.8:
+  CODE 25 (SEGWRITE), 0x0046..0x011C: same header framing, variable number
+      of font-ID entries copied after zero initialization. No active font
+      count is serialized into the header.
+  CODE 3, 0x294E and 0x2A08: the same 48-degree head construction,
+      one-unit horizontal adjustment, two-unit inset and line shortening.
+  CODE 3, 0x30E8 and the following complete drawing dispatcher: the same
+      separation of active and unused common option bytes.
+
+MacDraw 0.9:
+  CODE 7, 0x0796..0x07A8: the same four arrow radius constants.
+  CODE 2, 0x200C..0x20BA: arrow head with no horizontal adjustment.
+  CODE 2, 0x20BC..0x218C: head suppression, flags and shaft adjustment.
+  CODE 2, 0x5E94: circle-point helper; 0x000C and table at 0x0068:
+      sine lookup; 0x01FA: rounding with negative half ties away from zero.
+  CODE 15, 0x0230..0x026E: computes the allocation-block estimate from the
+      native list allocation total; 0x0038..0x00D0 writes it at header 0x080.
+  CODE 14, 0x0344..0x0354: tests that estimate against one before loading
+      the object list. It is not a serialized object count or trailer size.
+  CODE 7, 0x0612..0x064C: native object-size table; CODE 2,
+      0x063A..0x06A4: adds text, polygon and child-list allocations.
+  CODE 15, 0x02DA..0x0400: save over an existing file, write and close,
+      without truncation. CODE 1, 0x0588 and 0x05C2: Open and Close;
+      0x05E4: read/write at the current file mark. No SetEOF call occurs.
+      CODE 14, 0x01BA: list reading stops at its type-0 terminator.
+  CODE 7, 0x04D4..0x0598: build FONT menu, limit to ten families and
+      resolve their resource IDs; this table is absent from the saved header.
+  CODE 5, 0x0372..0x04F4: text setup, including ascent+leading for the
+      TextEdit baseline and the unmasked alignment index. 0x025E: horizontal
+      resize; 0x0512..0x05D0: CR-only maximum width without an added margin.
+
+Executing the original 0.9 text setup with 108 combinations of font metrics,
+spacing, alignment and wrap selections confirmed the revision-4 baseline,
+minimum width, justification, line height and CR-only flag. Executing its
+size-table initialization independently confirmed all eleven object sizes.
+
+The original 1.7 fill/outline dispatcher was executed with every possible
+common option byte for types 4,6,7,8,9,11. Memory-read tracing found no reads
+of that slot, and every value produced identical geometry/pattern/CopyBits
+calls to the zero-value case. The constructor and the other supplied program
+revisions were also inspected. These checks establish the inactive attribute's
+meaning; they do not certify a complete Macintosh rasterizer or printer.
+
+The native arrow routines were executed in isolation and compared with the
+Python geometry over integer bearings, all pen selections, endpoint flags,
+short-line boundaries and signed-coordinate overflow cases. Arbitrary bearings
+were injected at the PtToAngle call so the geometry checks did not merely
+repeat the Python angle calculation. These comparisons verify native head
+rectangles, arc angles, drawing order and shortened pen-origin endpoints.
+Toolbox traps were supplied by a small test harness; this is not a complete
+ROM, QuickDraw rasterizer or original-machine display comparison. The angle
+quantizer was independently traced from QuickDraw's published Angles.a:
+
+  https://github.com/jrk/QuickDraw/blob/master/Angles.a
+
+The curve iterator was additionally executed in isolation as 68000 machine
+code, comparing every emitted integer coordinate against the independently
+written Python iterator for generated open/closed inputs with negative and
+fractional coordinates. Tests retain output digests from the original routine,
+including repeated controls and endpoint truncation. This verifies the
+iterator, not the entire Macintosh graphics environment. Disassembly/emulation
+were development tools; macDraw.py and its regression tests require only the
+Python standard library and do not execute or load any original program.
+
+Apple's published Traps.h constants were used to identify Toolbox calls:
+  https://raw.githubusercontent.com/nuigroup/ccv-tbeta/master/trunk/tbeta/Windows/libs/QTDevWin/CIncludes/Traps.h
+
+SHA-256 of the CODE resources used as evidence anchors:
+  1.7 CODE 2:  9946026ba3ac878ca348649b30c2a7070013eb908572ad6182ea6c2d39ceac39
+  1.7 CODE 6:  93edb1d89882498a5d44ba1ee1a0107952e41ff0590bb7b5781a3cdecd2e27b6
+  1.7 CODE 17: 49102f48f4ea49a542131cc5e002c7523bcacd02b687425ec5f2c1619b8b9d6b
+  1.9.8 CODE 25:
+      da8550886b5466be47c3ccbe5a449f7710a4927bb1bf5ca3fa17972bb12377d0
+
+TEXT IMPLEMENTATION EVIDENCE AND FONT PROVENANCE
+
+The native application's CODE 4 routine at 0x374 initializes TextEdit metrics,
+justification and CR-only state; 0x51C recalculates width and height on loading.
+The width setter at 0x222 and height setter at 0x2A6 establish rectangle
+rounding. CODE 2 at 0x6892 implements the eight point transformations. Isolated
+execution of these routines can verify setup and transforms independently of
+the Python renderer. Such verification does not emulate a complete Macintosh
+System, printer or all of TextEdit.
+
+QuickDraw's published Text.a and DrawText.a establish GetFontInfo/TextWidth
+scaling, glyph extraction and monochrome style operations. Font Manager and
+Roman TextEdit sources document the resource lookup and line-layout behavior;
+OS revisions differ, which is why the environment is recorded explicitly.
+These sources were examined as references. No LibreOffice, QuickDraw or Apple
+machine-code routines are executed or imported by the delivered converter.
+
+  https://github.com/jrk/QuickDraw
+  https://github.com/elliotnunn/supermario/tree/master/base/SuperMarioProj.1994-02-09/Toolbox/FontMgr
+  https://github.com/elliotnunn/supermario/tree/master/base/SuperMarioProj.1994-02-09/Toolbox/TextEdit
+
+Original font-resource collection and archive provenance:
+
+  https://github.com/JohnDDuncanIII/macfonts/tree/master/Macintosh%20OS%201-6/Originals
+
+The font bundle records the archive digest and every raw resource digest.
+FONT/NFNT data remains copyright its respective owners; the converter's
+provenance fields are not a statement that those fonts are public domain.
+
+Additional original LaserWriter font suitcases:
+  https://www.vintageapplemac.com/files/misc/LW_Dk1%20TT%20Fonts%20Folder.sit
+  https://www.vintageapplemac.com/files/misc/LW_Dk2%20TT%20Fonts%20Folder.sit
+  https://www.vintageapplemac.com/files/misc/LW_Dk3%20TT%20Fonts%20Folder.sit
+
+Only their bitmap NFNT strikes and FOND mapping data are bundled. The scalable
+sfnt outlines in these suitcases are not used. Existing stock plain strikes
+are not replaced with different resource revisions merely because they occur
+in an additional suitcase. Full source archive, resource-fork, FOND and bitmap
+checksums are recorded alongside the added resources in macDraw-fonts.json.
+
+Apple's LaserWriter and LaserWriter Plus manual describes installation of the
+screen-font families, including their 10,12,14,18,24-point bitmap strikes:
+  https://vintageapple.org/laserwriter/pdf/LaserWriter_and_LaserWriter_Plus_manual_030-1296-A_1986.pdf
+
+Apple's Font Manager source, StyleWeights and GotEntry, establishes the
+weighted subset selection and suppression of already built-in face bits:
+  https://github.com/elliotnunn/supermario/blob/master/base/SuperMarioProj.1994-02-09/Toolbox/FontMgr/FontMgr.a
+
+The Menu Manager change history records addition of FOND menu entries on
+1985-04-23 and sorting on 1985-05-21. This rules out a single font-menu order
+that can be inferred solely from MacDraw's executable or a collection of fonts:
+  https://github.com/elliotnunn/supermario/blob/master/base/SuperMarioProj.1994-02-09/Toolbox/MenuMgr/MenuMgr.a
+
+MACDRAW II AND PRO RESEARCH REFERENCES
+
+The native field map was checked against independent structural measurements
+and the public libmwaw MacDraw Pro/II format research. The new Python decoder
+was written independently; it does not call or import LibreOffice/libmwaw.
+The default palette/pattern values are fixed application data, not per-document
+constants. Reference implementations are incomplete, especially for smoothing,
+corner dimensions and application metadata; their guesses are not proof.
+
+  https://github.com/Distrotech/libmwaw/blob/master/src/lib/MacDrawProParser.cxx
+  https://github.com/Distrotech/libmwaw/blob/master/src/lib/MacDrawProStyleManager.cxx
+
+Regression fixtures construct independent binary documents to check header
+count order, handle addressing, shared font runs, saved baselines, arc bounds,
+arrow bases versus tips, hidden-layer extents, monochrome cropping, corrupt
+heap isolation and atomic failure. Complete source-byte preservation and SVG
+rasterization are also checked separately. Those tests verify the declared
+implementation boundary, not unresolved original-application behavior.

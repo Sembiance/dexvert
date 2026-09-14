@@ -223,7 +223,7 @@ export const WEAK_VALUES =
 	// SEEN ONCE:
 	//		???
 	// SEEN TWICE:
-	//		Format: Video and Media Data
+	//		???
 	/^Archive: André Osterhues's Code Compression Algorithm \(ACCA\.\)$/,
 	/^Archive: (DCL|INSA|LZMA|Resources)$/,
 	/^Archive: Index of packed git objects/,
@@ -258,6 +258,7 @@ export const WEAK_VALUES =
 	/^Format: Unknown$/,
 	/^Format: Universal Binary$/,
 	/^Format: UPC$/,
+	/^Format: Video and Media Data/,
 	/^Format: Windows Minidump \(\.DMP\)$/,
 	/^Format: Windows Write document$/,
 	/^Format: XPAT Compiled Script \(\.XCS\)\(MA\)$/,
@@ -314,9 +315,9 @@ export const WEAK_VALUES =
 	/^dragon: PACK /,
 	/^dragon: SLF /,
 
-	// ffmpeg/ffprobeID
+	// ffmpeg/ffprobeID librempeg
 	// SEEN ONCE:
-	//		Sega Dreamcast KAT (kat)
+	//		Sega Dreamcast KAT (kat), PS2 SMPL (smpl)
 	// SEEN TWICE:
 	//		???
 	/^3DO PONA \(pona\)$/,
@@ -387,7 +388,7 @@ export const WEAK_VALUES =
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Dogenzaka.BinOpener, archive:Elf.DatAI5Opener
 	// SEEN TWICE:
-	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, archive:Mokopro.NNNNOpener, StudioSakura.DatOpener
+	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -399,6 +400,7 @@ export const WEAK_VALUES =
 	/^archive:FrontWing\.DatOpener /,
 	/^archive:Guyzware.GdpOpener /,
 	/^archive:Mink\.GrpOpener /,
+	/^archive:Mokopro\.NNNNOpener /,
 	/^archive:Xuse\.BinOpener /,
 	/^archive:Youkai\.VoiceDatOpener /,
 
@@ -407,7 +409,7 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
-	//		image:RSystem.RsgFormat, image:Herb.GrpFormat
+	//		image:RSystem.RsgFormat, image:Herb.GrpFormat, image:Prime.ThpFormat, image:Desire.DpcFormat
 	// SEEN TWICE:
 	//		image:Discovery.Pr1Format
 	/^image:Adobe\.PsdFormat /,
@@ -427,15 +429,15 @@ export const WEAK_VALUES =
 	/^image:TifFormat /,
 
 	// gameextractor - Real but output files are useless
-	/^geArchive: PRM( |$)/,
+	/^geArchive: (BIN_18|CGF_CRYTEK|PRM)( |$)/,
 
 	// gameextractor
 	// SEEN  ONCE:
 	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, SND_3, HNK, GLB, RDBDATA_RDB0
-	//		BIN_18, LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX,
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX, GOB_STBL
 	//		BOB_FILE
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, CAR_RAC, FLX, WAD_WAD, LIB_5, SAD_SAUD
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, CAR_RAC, FLX, WAD_WAD, SAD_SAUD
 	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
@@ -494,6 +496,7 @@ export const WEAK_VALUES =
 	/^geArchive: JFL_2( |$)/,
 	/^geArchive: KDT( |$)/,
 	/^geArchive: LBM_FORM( |$)/,
+	/^geArchive: LIB_5( |$)/,
 	/^geArchive: LINK_LINK( |$)/,
 	/^geArchive: M02( |$)/,
 	/^geArchive: MEGA_MEGA( |$)/,
@@ -530,7 +533,7 @@ export const WEAK_VALUES =
 	/^geArchive: XFS( |$)/,
 
 	// SEEN ONCE:
-	//
+	//		???
 	// SEEN TWICE:
 	//		DAT_KYRA_TEX
 	/^geViewer: AFS_AFS_WE00( |$)/,
@@ -548,7 +551,7 @@ export const WEAK_VALUES =
 	/^AMG Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^ARM64EC COFF object/,
 	/^ASD Archiv gefunden \(Auflistung ist deaktiviert\)$/,
-	/^Bitmap BildException/,
+	/^Bitmap (BildException|BildTruncated)/,
 	/^BMF .\.. Bild/,
 	/^Borland Object Datei/,
 	/^BSA Archiv gefunden \(Auflistung ist deaktiviert\)$/,
@@ -610,8 +613,10 @@ export const WEAK_VALUES =
 	/^Wordperfect (Block|Dokument|Makro|Prefix Information|spalten-Block) Datei/,
 
 	// idarc
-	// SEEN  ONCE: Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, BMF
-	// SEEN TWICE: QuArk, Blink (D.T.S.), ELI 5750, Codec
+	// SEEN  ONCE:
+	// 		Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, BMF, CMP
+	// SEEN TWICE:
+	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -647,6 +652,10 @@ export const WEAK_VALUES =
 	/^Tar$/,
 
 	// nconvertID
+	// SEEN  ONCE:
+	//		byusir
+	// SEEN TWICE:
+	//		???
 	/^ADEX :adex:$/,
 	/^Airnav :anv:$/,
 	/^Amiga icon :info:$/,
@@ -738,7 +747,9 @@ export const WEAK_VALUES =
 	/^application\/x-shellscript$/,
 	/^application\/x-spectrum-tap$/,
 	/^application\/x-spectrum-z80$/,
+	/^application\/x-starmail$/,
 	/^application\/x-subrip$/,
+	/^application\/x-sylk$/,
 	/^application\/x-wii-wad$/,
 	/^application\/xhtml\+xml$/,	// only cheks for the top header which oddly is all that's in some text files out there that should remain as text
 	/^audio\/vnd\.dts$/,
@@ -901,6 +912,7 @@ export const WEAK_VALUES =
 	/^BTS archive data$/,
 	/^Byte-compiled Python module/,
 	/^C64 PCLink Image$/,
+	/^Camellia with \d+-bit key$/,
 	/^CAST5 \(128 bit key\)/,
 	/^CBM BASIC, SYS/,
 	/^CCP4 Electron Density Map/,
@@ -947,7 +959,7 @@ export const WEAK_VALUES =
 	/^CSArc compressed archive$/,
 	/^cscope reference data/,
 	/^(CSV )?((ISO-8859|Non-ISO extended-ASCII|Unicode) text,? ?)+/,
-	/^Cytovision FISH Probe file/,
+	/^Cytovision (Metaphases|Karyotype|FISH Probe|FLEX|RATS) file/,
 	/^ctab data/,
 	/^DataBaseContainer, no records/,
 	/^DB PalmOS document "[^"]+"$/,
@@ -1002,6 +1014,7 @@ export const WEAK_VALUES =
 	/^Erlang BEAM file$/,
 	/^ERROR: \(null\)/,
 	/^ESP archive data/,
+	/^ESP firmware image,/,
 	/^ESP Image segment/,
 	/^ESP-IDF partition table entry/,
 	/^ESRI Shapefile/,
@@ -1323,6 +1336,7 @@ export const WEAK_VALUES =
 	/^shared library$/,
 	/^shared library, at/,
 	/^shared library TTComp archive data/,
+	/^hared library : UNKNOWN/,
 	/^Sibelius(,|$)/,
 	/^SIMH tape data/,
 	/^Sky archive data/,
@@ -1445,6 +1459,7 @@ export const WEAK_VALUES =
 
 	// TRID: Checks just 1-3 bytes:
 	/^1ST Word Plus Document$/,
+	/^1st Word Plus file$/,
 	/^22DISK format Definition \(tokenized\)$/,
 	/^3D-Calc spreadsheet$/,
 	/^3D CAD Studio object$/,
@@ -1606,6 +1621,7 @@ export const WEAK_VALUES =
 	/^GLF 3D Font File Format$/,
 	/^GNU Info document/,
 	/^GNU Privacy Guard public keyring \(generic\)$/,
+	/^GoatTracker Song \(generic\)$/,
 	/^GP32 Free eXecutable Encrypted$/,
 	/^Graham Systems Disk Sqeezer disk image$/,
 	/^Grapher for DOS Symbol$/,
@@ -1747,6 +1763,7 @@ export const WEAK_VALUES =
 	/^Quarterback backup$/,
 	/^Quarterdeck Mosaic History$/,
 	/^Quick Help$/,
+	/^Quickbasic Coordinates File$/,
 	/^RASTER Music Tracker Instrument$/,
 	/^raw Group 3 FAX bitmap$/,
 	/^RealFlight Radio Control Flying Site - Airport$/,
@@ -2118,6 +2135,7 @@ export const WEAK_VALUES =
 	/^Axon Text File format$/,
 	/^Balance of Power: The 1990 Ed\. saved game$/,
 	/^Bandai Namco game data archive$/,
+	/^BASIC09 source$/,
 	/^BassBox speaker design \(v6\)$/,
 	/^Beam Software SIFF container \(generic\)$/,
 	/^Beetris high scores$/,	// Other files use the same magic from this publisher
@@ -2397,6 +2415,7 @@ export const WEAK_VALUES =
 	/^KBOOM11 compressed$/,
 	/^Kega Fusion Save State$/,
 	/^Kelly Slater's Pro Surfer textures$/,
+	/^Kerbal Space Program part Configuration/,
 	/^Keynote presentation$/,
 	/^Kingsoft WPS Office document \(alt\.\)$/,
 	/^Korg Trinity\/Triton instruments bank \(generic\)$/,

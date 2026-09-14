@@ -6,5 +6,6 @@ export class demonStarGLB extends Format
 	ext            = [".glb"];
 	forbidExtMatch = true;
 	magic          = [/^geArchive: GLB_GLB2( |$)/];
+	weakMagic      = true;
 	converters     = ["gameextractor[codes:GLB_GLB2]"];
 }

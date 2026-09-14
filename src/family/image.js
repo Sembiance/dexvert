@@ -134,7 +134,7 @@ export class image extends Family
 				const info = await imageUtil.getInfo(inputFile.absolute);
 				if(info.err)
 				{
-					xlog.warn`imageUtil.getInfo() returned an err ${info.err}`;
+					xlog.info`imageUtil.getInfo() returned an err ${info.err}`;
 					delete info.err;
 				}
 				delete info.size;

@@ -178,7 +178,7 @@ export class iso extends Format
 		// If it's a VideoCD, prefer to rip it as video using 'vcdxrip'
 		if(dexState.meta?.vcd?.isVCD && cueFile)
 			return ["vcdxrip", "aaru", "IsoBuster", `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
-		else if(fuseTree.some(v => v.toLowerCase().startsWith("mpegav/avseq")))
+		if(fuseTree.some(v => v.toLowerCase().startsWith("mpegav/avseq")))
 			return ["vcdxrip[reRip]", "aaru"];
 
 		// If it's a PhotoCD, rip using fuseiso (this is because regular mount doesn't work with bin/cue and bchunk produces tracks seperately which has images merged together and invalid dir structure for this format)

@@ -8,7 +8,7 @@ const _WEAK_PREFIX_CODES =
 {
 	40 : ["NoExt_"],
 	30 : ["BIN_", "DAT_", "NoExt_", "PAK_"],
-	25 : ["RES_", "WAD_", "U_Texture"]
+	25 : ["RES_", "WAD_", "U_Texture", "UE4_Texture"]
 };
 const _SKIP_CODES = new Set([][
 	"AFS_AFS_WE00", "AMM_FORM", "ARC_ARC", "ARK_2", "CEG_GEKV", "BMP_BMP", "DBS", "DLL_MZ",

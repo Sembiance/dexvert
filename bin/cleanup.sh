@@ -58,6 +58,7 @@ fi
 rm -f OSL_PIPE*
 rm -f file??????
 rm -rf grasp*
+rm -rf pymp*
 rm -rf .org.chromium*
 fd magick -x rm {} \;
 rm -rf ge-server* Ay_Emul* cxf-tmp* ./*.tmp xf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp* folio* .folio*

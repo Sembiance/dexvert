@@ -27,7 +27,7 @@ const _INSTALLER_MAGICS = [
 	"Installer: VMWare Software Installer", "Installer: Smart Install Maker", "Installer: Sony Windows Installer", "Installer: Autorun Pro Enterprise II", "Installer: Adobe SVG Installer", "Installer: NOS Installer",
 	"Installer: BulletProofSoft installer", "Installer: distutils", "Installer: CrypKey", "Installer: I-D Media installer",
 	"Installer: SwiftView Inc. installer", "Installer: Autorun Pro Enterprise", "Installer: Quick Install", "Installer: custom installer with SZDD-archives", "Installer: VMWare Installation Launcher",
-	"Installer: Sax Software installer",
+	"Installer: Sax Software installer", "Microsoft Visual Basic Setup Kit installer",
 	
 	/^NSIS$/
 ];

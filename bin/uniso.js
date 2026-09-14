@@ -190,7 +190,8 @@ async function extractHFSISO()
 		}
 	};
 
-	await runUtil.run("hmount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
+	if((await runUtil.run("hmount", [IN_FILE_PATH], HFS_RUN_OPTIONS))?.stderr?.includes("must specify partition number"))
+		await runUtil.run("hmount", [IN_FILE_PATH, "1"], HFS_RUN_OPTIONS);
 
 	// Get our volume creation year to use as the default year as some files only specify the time and not the year (WWDC.iso)
 	const {stdout : volInfo} = await runUtil.run("hvol", [], HFS_RUN_OPTIONS);
@@ -209,7 +210,7 @@ async function extractHFSISO()
 }
 
 // main
-if(argv.hfs)	// eslint-disable-line unicorn/prefer-ternary
+if(argv.hfs)
 	await extractHFSISO();
 else
 	await extractNormalISO();

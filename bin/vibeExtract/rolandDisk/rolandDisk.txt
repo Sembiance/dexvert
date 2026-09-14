@@ -1,0 +1,609 @@
+ROLAND S-7xx FIXED-LAYOUT DISK IMAGE FORMAT
+========================================
+Version of this document: 2026-09-11
+
+SCOPE AND COMPLETENESS
+
+This document describes the flat, byte-addressable SCSI disk/CD filesystem
+used by the Roland S-750/S-760/S-770 family with the "S770 MR25A" identifier.
+It describes the extraction rules implemented by rolandDisk.py. A filename
+extension does not identify this format. A file named .iso need not contain
+ISO 9660, and a file named .dat may contain only a prefix of a disk.
+
+THIS IS NOT A COMPLETE SEMANTIC SPECIFICATION OF EVERY BYTE. The record and
+allocation layout, PCM encoding, rate codes, resource locations and playback
+address fields are implemented. Other fields are located but only partially
+decoded; firmware, device settings, several flags, and some parameter bytes
+remain opaque. These limitations are explicit below. An exhaustive physical
+byte map and lossless preservation must not be confused with complete reverse
+engineering. In particular, naming a region "reserved" does not prove that
+the sampler never uses it.
+
+Raw floppy/system-update disks with this same identifier use a different
+layout and are outside this specification. Continuation floppy sets, older
+S-5xx disks, raw 2352-byte CD sectors, HFE/MFM track containers, ISO 9660 and
+other archive/container formats are not decoded. No signature scan, sector
+size guess, relocation search, name-based stereo matching, guessed sample
+rate or audio-silence trimming is used.
+
+NUMBERS, TEXT AND ADDRESSING
+
+Offsets below are hexadecimal byte offsets unless expressly labelled
+decimal. Multi-byte integers are little-endian unless otherwise stated.
+u8/u16/u32 are unsigned; s8/s16 are signed two's-complement integers.
+Intervals are half-open: [start, end) includes start and excludes end.
+
+One logical block is 512 bytes. One sample allocation cluster is 18 blocks,
+or 9,216 bytes, holding 4,608 signed 16-bit mono sample words. The first
+addressable data cluster is number 2. For cluster number c:
+
+    byte_offset(c) = 0x2B5800 + (c - 2) * 0x2400
+
+Names occupy 16 bytes, with space or NUL padding. The parameter and directory
+copies of a name may differ; the physical directory slot determines the
+parameter record, not equality of the names. Byte 0x7F is a Roland display
+glyph and is sometimes used before L/R channel suffixes. Its presence does
+not establish a machine-readable pairing between two sample objects.
+
+An extractor must sanitize separators and control characters before using
+names as host filenames. rolandDisk.py keeps the original name in metadata,
+uses ASCII-safe names for output, and prefixes each with the physical slot
+number. Name sanitization affects output naming only, never format detection
+or the interpretation of resource data.
+
+WHOLE-DISK LAYOUT
+
+Start      End        Length     Contents
+00000000   00000200   00000200   Identification / disk descriptor
+00000200   00000800   00000600   Device / loader / reserved area
+00000800   00080800   00080000   System program area
+00080800   000A0800   00020000   65,536-entry allocation table
+000A0800   000A1800   00001000   Volume directory
+000A1800   000A5800   00004000   Performance directory
+000A5800   000AD800   00008000   Patch directory
+000AD800   000CD800   00020000   Partial directory
+000CD800   0010D800   00040000   Sample directory
+0010D800   00115800   00008000   Volume parameters
+00115800   00155800   00040000   Performance parameters
+00155800   001D5800   00080000   Patch parameters
+001D5800   00255800   00080000   Partial parameters
+00255800   002B5800   00060000   Sample parameters
+002B5800   variable   variable   Cluster-addressed PCM allocation area
+
+The layout is fixed. There is no ISO volume descriptor, DOS boot parameter
+block or partition-table indirection used to locate these structures. The
+directory and parameter tables have fixed capacities even if few objects
+are present. Do not calculate the start of a later table using the number of
+active objects in an earlier one.
+
+Files may end inside any of these ranges. Bytes after the addressable cluster
+area may exist, including a partial-cluster tail and material beyond the
+header's capacity bound. They do not automatically belong to a sample. No
+secondary filesystem or further file structure is inferred from such bytes.
+
+IDENTIFICATION / DISK DESCRIPTOR: 512 BYTES
+
+Offset  Size  Type       Meaning / interpretation status
+00      4     u32        Revision field; revision semantics unresolved.
+04      10    bytes      Exact signature: ten ASCII bytes "S770 MR25A".
+0E      1     u8         Unassigned header byte, generally zero.
+0F      1     u8         Media/system profile byte; full enumeration unresolved.
+10      15    text       Additional text field, often spaces.
+1F      1     u8         Text terminator / unassigned byte.
+20      31    text       System description and version; informational text.
+3F      1     u8         Text terminator.
+40      31    text       Manufacturer copyright text.
+5F      1     u8         Text terminator.
+60      160   bytes      Unassigned area, often FF fill.
+100     16    text       Device ID and disk label: "IDn:" + twelve characters.
+110     4     u32        Capacity value in units of 512-byte sectors; see below.
+114     2     u16        Number of volumes.
+116     2     u16        Number of performances.
+118     2     u16        Number of patches.
+11A     2     u16        Number of partials.
+11C     2     u16        Number of samples.
+11E     226   bytes      Unassigned descriptor remainder, often FF fill.
+
+There is no NUL inside the ten signature bytes. The following byte at offset
+0E is normally NUL. The signature, rather than a free-text system/version
+description, is the recognition key. Its hexadecimal bytes are
+
+    53 37 37 30 20 4D 52 32 35 41
+
+The disk label's device ID digit is in the range 0..7 for the supported
+descriptor profile. The label and counts may survive in a prefix dump even
+when the directories and sample data they describe are no longer present.
+
+Capacity caveat: the capacity field agrees with a last-LBA convention on
+removable media, while maximum-sized filesystem images also use a fixed
+allocation-table capacity boundary. Its final-sector convention is not fully
+established across writers. The extractor uses the raw value C as a
+conservative exclusive sector bound when the descriptor is valid:
+
+    highest_cluster = min(0xFFF5, 1 + floor((C*512 - 0x2B5800)/9216))
+
+This explicitly leaves a final partial cluster or final sector outside sample
+allocations. Such bytes are preserved by --all. Do not describe C as an exact
+host-file byte length or discard material beyond it. No sample read extends
+beyond the actual input length.
+
+RECOGNITION AND DAMAGED HEADERS
+
+The extractor first requires all ten signature bytes at offset 4 and enough
+header bytes through offset 11D. It then requires either:
+
+  * A supported disk descriptor: ID0: through ID7: followed by twelve ASCII
+    display bytes, capacity at least 5,548 blocks, and all five counts within
+    the fixed table capacities; or
+  * The u16 FAT identifier FFFA at absolute offset 80800.
+
+The second condition permits recovery with a damaged disk descriptor. If the
+descriptor exists but the FAT is missing/damaged, fixed-address native
+parameter records and the system area can still be extracted. Audio chains
+are not guessed without the FAT identifier.
+
+The shared signature alone does not authorize interpretation as this layout.
+For example, a system-floppy header can contain the signature but neither the
+disk descriptor nor the FAT at the fixed SCSI location. Such inputs fail
+before creating an output directory. If damage removes all independent
+layout evidence, the format cannot safely be identified and is rejected.
+
+DEVICE / LOADER AREA: [200, 800)
+
+This region is not always padding. A device descriptor may occur at 200,
+including readable drive/model/revision text and numeric fields, sometimes
+with byte order different from the main header. The region at 400 may hold a
+loader/block table, a repeated formatting byte or zero fill.
+
+The descriptor, loader table structure, checksums if any, and all remaining
+fields in these 1,536 bytes are unresolved. The extractor does not infer a
+second allocation layout from them. --all preserves the whole range exactly.
+
+SYSTEM PROGRAM AREA: [800, 80800)
+
+This fixed 524,288-byte region contains the installed system's program and
+associated data, or fill when no installed program is retained. It can also
+contain data left over from memory. There is no verified executable length,
+resource subdirectory, compression method or internal checksum field for
+this region in this specification. Preserve its full fixed extent rather
+than trimming a run of zeroes or FF bytes.
+
+The extractor writes the available region to system/program.bin, including
+when the image ends inside it. This is an extracted native region, not a
+claim that it is a loadable standalone firmware file. No disassembly or
+separation of internal code, strings, graphics or tables is performed.
+
+FILE ALLOCATION TABLE: [80800, A0800)
+
+The table comprises 65,536 little-endian u16 words indexed by cluster number.
+
+Index / value         Meaning
+FAT[0] = FFFA         Allocation-table identifier.
+FAT[1]                Free-cluster count, not a sample-chain link.
+Indices 2..FFF5       Potential sample cluster entries, bounded by capacity.
+Indices FFF6..FFFF    Table trailer / reserved words, not sample clusters.
+
+For a data-cluster entry:
+
+  0000                Free cluster; it is not part of a live chain.
+  0001                Reserved cluster.
+  0002..FFF5          Next data-cluster index, subject to capacity bounds.
+  FFF6                Reserved/unresolved marker; do not follow it.
+  FFF7                Bad-cluster marker; do not treat its content as valid PCM.
+  FFF8..FFFF          Terminal marker when used as a chain-entry value.
+
+The same FFFF value in table positions beyond the media capacity can be
+formatting/reserved fill. Context matters; it does not establish an allocated
+file there. The last two words, FAT[FFFE] and FAT[FFFF], have been described
+by another implementation as directory-version flags (FFFF for version 1,
+FFFE for version 2). Their raw values are preserved. The complete version
+transition behavior is not implemented or claimed to be understood.
+
+The directory gives the first cluster and the declared cluster count of a
+sample. Follow FAT links, not physical adjacency. Stop at a terminal marker,
+the declared count, a cycle, a bad/free/reserved entry, an unavailable table
+entry or an out-of-capacity index. The cluster count is a bound, not a reason
+to follow a corrupt chain into neighboring resources. A chain continuing
+past that count is reported. A chain ending early is reported and its valid
+prefix can be extracted. Missing bytes in a cluster end recovery of the
+contiguous logical prefix; later clusters are not spliced across that gap.
+
+Cross-linked allocations are reported rather than silently counted as
+independent physical bytes. On-disk images have no established per-sample
+checksums in this specification, so in-range corruption of PCM itself may
+be undetectable.
+
+DIRECTORY RECORDS: 32 BYTES EACH
+
+Every object class has the same directory record shape.
+
+Offset  Size  Type       Meaning
+00      16    bytes      Directory name.
+10      1     u8         Object tag: 40 volume, 41 performance, 42 patch,
+                        43 partial, 44 sample.
+11      1     u8         Attributes; bit meanings unresolved.
+12      2     u16        Forward linked-list pointer, raw encoding.
+14      2     u16        Backward linked-list pointer, raw encoding.
+16      2     u16        Link ID / ordering identifier; not necessarily the
+                        physical slot number and not a parameter pointer.
+18      4     bytes      Auxiliary / reserved data; sometimes nonzero.
+1C      2     u16        First FAT cluster for sample objects.
+1E      2     u16        Allocated cluster count for sample objects; parent
+                        objects carry a resource-size aggregate here.
+
+The object tag selects active entries in the table for that class. Inactive
+slots can contain zeroes, deleted-entry data or a deletion mark; they are
+not live resources. Their bytes remain in the --all directory audit.
+
+Links commonly have bit 15 set, with the lower 15 bits selecting the next or
+previous physical directory slot; FFFF denotes a missing link. Sort order
+and the link ID are distinct from physical placement. The exact behavior of
+all directory versions and deleted-link chains is not fully established.
+The extractor does not need these links to enumerate the fixed tables.
+
+Class        Tag  Capacity  Directory base  Parameter base  Parameter size
+Volume       40      128   0A0800          10D800          256
+Performance  41      512   0A1800          115800          512
+Patch        42    1,024   0A5800          155800          512
+Partial      43    4,096   0AD800          1D5800          128
+Sample       44    8,192   0CD800          255800           48
+
+Sizes and capacities in this table are decimal. For physical slot i:
+
+    directory_record = directory_base + 32*i
+    parameter_record = parameter_base + parameter_size*i
+
+Scan only these fixed slots; do not scan arbitrarily for plausible names.
+Header counts are consistency checks, not a substitute for slot validity.
+This also permits recovery when records are deleted, the count is damaged,
+or a corrupt slot occurs before a readable one.
+
+OBJECT RELATIONSHIPS
+
+The hierarchy is volume -> performance -> patch -> partial -> sample.
+It is a reference graph: a resource can be shared by several parents.
+Signed 16-bit reference arrays use negative values for empty slots. Keep
+slot order and repeated references; neither sorting nor deduplication is
+appropriate when interpreting an instrument's assignments.
+
+References select physical records in the next class's table. An unavailable
+or inactive target is reported as unresolved. The extractor does not repair
+it by comparing names, guessing a relocation, or substituting a link ID.
+It extracts readable resources regardless of whether a parent reaches them.
+Thus a damaged performance does not hide otherwise readable samples.
+
+The native resource outputs preserve the source records. The optional JSON
+describes references and many raw controls. No SFZ, SoundFont, MIDI program
+or virtual-instrument behavior is generated.
+
+VOLUME PARAMETERS: 256 BYTES
+
+Offset  Length  Meaning
+00      16      Parameter name.
+10      16      Unassigned / reserved bytes.
+20      128     64 little-endian s16 performance slots.
+A0      96      Unassigned / reserved bytes.
+
+PERFORMANCE PARAMETERS: 512 BYTES
+
+Offset  Length  Meaning
+00      16      Parameter name.
+10      32      Part patch selectors, s8 values indexing patch slots.
+30      16      Packed MIDI-channel controls; detailed bit encoding unresolved.
+40      32      Part level / enabled controls, raw bytes.
+60      32      Part lower key limits.
+80      32      Part upper key limits.
+A0      32      Part lower fade widths.
+C0      32      Part upper fade widths.
+E0      16      Eight u16 control-switch fields: program change, pitch bend,
+                modulation, hold pedal, bend range, MIDI volume,
+                aftertouch switch, aftertouch mode, in that order.
+F0      16      Packed velocity-curve data; detailed bit encoding unresolved.
+100     64      32 little-endian s16 patch slots.
+140     192     Unassigned / reserved bytes.
+
+The part-level byte has been described as a 7-bit level and a 1-bit switch;
+the original bits are exported. The full MIDI/channel and velocity packing,
+switch coverage over 32 parts, special values and firmware differences need
+additional verification. Raw values are not advertised as physical units.
+
+PATCH PARAMETERS: 512 BYTES
+
+Offset  Length  Meaning
+00      16      Parameter name.
+10      15      Byte controls listed below.
+1F      1       Unassigned.
+20      88      Key-to-partial selectors, one byte per key.
+78      8       Unassigned.
+80      88      Key assignment types, raw bytes.
+D8      8       Unassigned.
+E0      4       Bender: pitch up, pitch down, TVA, TVF controls.
+E4      7       Aftertouch: pitch, TVA, TVF, LFO rate, LFO pitch,
+                LFO TVA depth, LFO TVF depth.
+EB      4       Modulation: LFO rate, pitch, TVA depth, TVF depth.
+EF      1       Unassigned.
+F0      8       Controller number, pitch, TVA, TVF, LFO rate, LFO pitch,
+                LFO TVA depth, LFO TVF depth.
+F8      8       Unassigned.
+100     176     88 little-endian s16 partial slots.
+1B0     80      Unassigned / reserved bytes.
+
+The 15 control bytes at 10..1E are, in order: program change number, stereo
+mix level, total pan, patch level, eight-output assignment, priority, cutoff,
+velocity sensitivity, octave shift, coarse tune, fine tune, sample-mix-table
+control selection, sample-mix-table sensitivity, output assignment, analog
+feel. The extractor exposes original numeric bytes, not undocumented
+physical mappings. In particular, the 88 key positions and partial selector
+values are not used to invent a full keyboard mapping in another format.
+
+PARTIAL PARAMETERS: 128 BYTES
+
+Offset  Length  Meaning
+00      16      Parameter name.
+10      11      Sample-mix slot 1, structure below.
+1B      1       Unassigned.
+1C      4       Eight-output assignment, stereo mix level, partial level,
+                six-output assignment.
+20      11      Sample-mix slot 2.
+2B      1       Unassigned.
+2C      4       Pan, signed coarse tune, signed fine tune, breath control.
+30      11      Sample-mix slot 3.
+3B      5       Unassigned.
+40      11      Sample-mix slot 4.
+4B      21      TVF/filter controls.
+60      16      TVA/amplifier controls.
+70      9       LFO controls.
+79      7       Unassigned / reserved bytes.
+
+Each 11-byte sample-mix slot has:
+
+  +0  s16 sample reference; negative means empty
+  +2  u8 pitch key follow
+  +3  u8 level
+  +4  s8 pan
+  +5  s8 coarse tune
+  +6  s8 fine tune
+  +7  u8 velocity lower bound
+  +8  u8 lower fade width
+  +9  u8 velocity upper bound
+  +A  u8 upper fade width
+
+TVF bytes, relative to 4B:
+  0 filter mode, 1 cutoff, 2 resonance, 3 velocity curve,
+  4 velocity-curve ratio, 5 time velocity sensitivity,
+  6 cutoff velocity sensitivity, 7..10 four envelope levels,
+  11..14 four envelope times, 15 envelope TVF depth,
+  16 envelope pitch depth, 17 TVF key-follow point,
+  18 envelope-time key follow, 19 envelope-depth key follow,
+  20 cutoff key follow. These relative offsets are decimal.
+
+TVA bytes, relative to 60:
+  0 velocity curve, 1 velocity-curve ratio, 2 time velocity sensitivity,
+  3..6 four envelope levels, 7..10 four envelope times,
+  11 unassigned, 12 TVA key-follow point, 13 envelope-time key follow,
+  14 unassigned, 15 level key follow. Relative offsets are decimal.
+
+LFO bytes, relative to 70:
+  0 waveform, 1 rate, 2 key sync, 3 delay, 4 delay key follow,
+  5 detune, 6 pitch depth, 7 TVF modulation depth, 8 TVA modulation depth.
+
+Control positions are known; complete enum definitions, time/frequency/level
+scales and synthesis behavior are not. JSON retains TVF/TVA/LFO arrays as raw
+bytes, including the unassigned bytes inside the TVA group.
+
+SAMPLE PARAMETERS: 48 BYTES
+
+Offset  Size  Type       Meaning
+00      16    bytes      Parameter name.
+10      4     u32        Playback start, unsigned 24.8 fixed-point sample address.
+14      4     u32        Sustain-loop start, same encoding.
+18      4     u32        Sustain-loop end, same encoding.
+1C      4     u32        Release-loop start, same encoding.
+20      4     u32        Release-loop end, same encoding.
+24      1     u8         Loop/playback mode, enumeration below.
+25      1     u8         Sustain enable/control byte; full semantics unresolved.
+26      1     s8         Sustain-loop tuning byte; exact units unresolved.
+27      1     s8         Release-loop tuning byte; exact units unresolved.
+28      2     u16        Cluster offset within the directory's chain.
+2A      2     u16        Cluster count; normally agrees with directory count.
+2C      1     bits       Low nibble: rate code. High nibble: sample-mode flag.
+2D      1     u8         Original MIDI key.
+2E      2     bytes      Unassigned trailing bytes; not necessarily zero.
+
+The integer sample address is raw_u32 >> 8. The low eight bits encode a
+fraction in 1/256-sample units. Fractional loop positions and tuning bytes
+must be preserved even though a plain WAV cannot reproduce their sampler
+playback semantics. The record has no independent exact PCM byte-length
+field. Allocation length and playback region are different concepts.
+
+Rate code (low nibble at 2C):
+
+  0 = 48,000 Hz        1 = 44,100 Hz        2 = 24,000 Hz
+  3 = 22,050 Hz        4 = 30,000 Hz        5 = 15,000 Hz
+  6..15 are unresolved and must not silently default to 44,100 Hz.
+
+The high nibble is labelled mono/stereo in an existing parser (0/1), but a
+single directory entry still addresses one mono word stream. The data and
+allocation shape do not justify interleaving that stream into two channels.
+Its exact relationship to stereo recording/import and partner objects is
+unresolved. Values 0 and 1 are retained while extracting the addressed mono
+stream; other values suppress WAV conversion and retain recoverable raw PCM.
+
+Loop/playback modes at 24, and finite playback endpoints:
+
+Value  Name                 Endpoint             Direction
+0      Forward end          Sustain-loop end     Forward
+1      Forward release      Release-loop end     Forward
+2      One-shot             Sustain-loop end     Forward
+3      Forward one-shot     Release-loop end     Forward
+4      Alternate            Sustain-loop end     Forward finite preview
+5      Reverse one-shot     Sustain-loop end     Reverse
+6      Reverse loop         Sustain-loop end     Reverse
+
+Mode zero is NOT a "no sample rate" or "no loop" flag. Likewise a rate code
+of zero means 48 kHz, not a disabled loop. The two bytes are independent.
+
+Endpoint addresses are treated as inclusive, consistent with the independent
+S-7xx parser's extraction model. A WAV contains the integer-address region
+from start through the selected endpoint, inclusive. For reverse modes the
+order of 16-bit words is reversed; byte order inside a word is unchanged.
+Alternate and sustain/release modes require sampler behavior that a finite
+WAV preview does not implement. No repeated loop cycles are manufactured.
+The original loop/tune/address data remain in the native sample .prm record.
+
+To locate PCM, skip the declared number of whole clusters at sample-parameter
+offset 28 within the already-resolved chain, then interpret the address
+fields relative to the remaining stream. The parameter cluster count is
+retained and checked against the directory. If they disagree, extraction is
+bounded by the directory chain and the disagreement is reported.
+
+PCM is signed little-endian 16-bit linear audio. The extractor writes one
+mono WAV for each readable sample entry, without resampling, normalization,
+silence detection or name-based stereo joining. Rate comes from the record.
+WAV contains only the mandatory RIFF/WAVE, fmt and data structures. No smpl,
+INFO or other optional generated metadata chunks are written by default.
+
+For invalid rate/mode codes, incomplete parameters, reversed bounds or an
+unavailable start address, a WAV cannot be justified; the available chain
+payload is saved as .recovered.pcm instead. If only the end is beyond the
+readable payload, the available prefix after the valid start is extracted
+and marked as truncated. Invalid bounds are never extended into another
+object's allocation.
+
+ALLOCATED TAILS, UNUSED RECORDS AND FREE SPACE
+
+The finite WAV region does not necessarily occupy every allocated sample
+word. Data before the playback start, data after the selected playback end,
+other loop regions and allocation slack remain part of the disk and are
+preserved in the physical audit. They are not silently declared silence.
+Unused parameter slots and deleted directory entries may contain old data;
+they are preserved but not presented as live instruments.
+
+--all groups consecutive physical clusters by their established allocation
+status: sample allocations, free, reserved, bad, unreferenced or unavailable
+allocation information. It also saves any unaddressable tail and bytes
+outside the conservative capacity bound. Classification is based on FAT
+entries and exact source positions, never on whether the contents look like
+audio or contain printable text. Each group has an explicit offset/length.
+
+EXTRACTOR INTERFACE AND OUTPUT
+
+    python3 rolandDisk.py <inputFile> <outputDir>
+    python3 rolandDisk.py --all <inputFile> <outputDir>
+
+Python 3.9 or later is required. Only Python standard-library modules are
+used. There are no external programs, packages, source repositories, manuals,
+schemas or other supporting files required at runtime. The optional report
+generator and tests are separate development tools, not runtime dependencies.
+
+Default output:
+
+  system/program.bin
+      The available fixed system-program region, including fill if present.
+  resources/{volume,performance,patch,partial,sample}/NNNN_name.prm
+      Original parameter-record bytes, copied without any invented header.
+      These are native resource fragments, not an official standalone Roland
+      interchange format. The prefix NNNN is the physical directory slot.
+      A shortened record has suffix .partial.prm.
+  audio/NNNN_name.wav
+      The converted finite playback region for each justified audio resource.
+  resources/sample/NNNN_name.recovered.pcm
+      Available raw stream when damage or an unknown code prevents WAV output.
+
+The .prm files are source metadata extracted verbatim. They are not metadata
+generated by the extractor. No JSON, HTML or analysis sidecars are generated
+by the default command. All synthetic metadata is gated behind --all.
+
+Additional --all output:
+
+  metadata.json
+      Header values, directory records, decoded/raw parameter fields,
+      reference graph, per-object issues, exact cluster chains, WAV properties,
+      output paths, SHA-256 of the source, and the physical byte map.
+  audit/<hex-offset>_<classification>.bin
+      Unmodified source intervals, including the entire header, reserved
+      area, FAT, directory tables, parameter tables and physical data regions.
+      The existing system/program.bin is reused in the byte map.
+
+Sort the audit's pieces by offset and concatenate each referenced file.
+Their intervals cover [0, input_length) once, with no gaps or overlaps; their
+concatenation reproduces the source exactly. The native records and WAVs
+are useful duplicate views and are not additional pieces of this byte map.
+metadata.json stores a snapshot of the output inventory before metadata.json
+itself is written; files_before_metadata excludes that file. The command's
+printed total includes it. The metadata itself is generated, so it has no
+source-byte interval. SHA-256 values are generated verification aids, not
+on-disk checksums.
+
+Existing output directories are accepted. Existing files are preserved;
+collisions receive ~2, ~3, etc. before the extension. The writer rejects
+symlink directory traversal and uses exclusive file creation. Created files
+are mode 0644 and created directories are mode 0755, including under a
+restrictive umask. User and group can read all generated outputs.
+
+Exit status:
+  0   Recognized layout extracted without detected structural/resource issues.
+      This does not assert complete semantic understanding of the format.
+  1   I/O or operational failure. Earlier successfully written files may exist.
+  2   Unsupported/unidentifiable input. No output files/directories are created.
+  3   Recognized layout recovered with damage, missing structures, broken
+      references or an unsupported per-resource audio encoding. Available
+      resources have been written; inspect diagnostics or --all metadata.
+
+The input is read-only. A truncated image is not automatically a wrong
+format. Valid independent identification permits recovery of available
+fixed records and chains. Recovery never fabricates missing bytes. --all is
+not a flag to guess more aggressively; it adds preservation and metadata.
+
+UNRESOLVED WORK REQUIRED FOR A COMPLETE SPECIFICATION
+
+1. Obtain controlled disk writes from actual hardware or a verified emulator:
+   format media at multiple capacities, alter one setting at a time, sort,
+   delete, save, and compare every changed byte. Establish the precise
+   capacity/last-LBA convention, directory-version flags, link IDs, attributes,
+   auxiliary directory bytes and deletion semantics.
+2. Decode the device/loader area, including any endian exceptions, block maps
+   and checksum mechanisms. Recover the system-floppy loader layout as a
+   separate future format project; it is intentionally not implemented here.
+3. Identify the program area's executable architecture and actual subregion
+   boundaries using service documentation and disassembly. Decode embedded
+   strings/graphics/tables if a resource-level firmware extraction is needed.
+   A raw program-area extraction does not accomplish this.
+4. Verify all performance packing and every instrument parameter's enum,
+   signedness, scale, special values and firmware-version behavior with
+   controlled settings and manufacturer MIDI/parameter documentation.
+5. Determine sample-mode high-nibble semantics and an explicit stereo partner
+   mechanism, if any. Verify cluster-offset cases, sustain-enable behavior,
+   fractional endpoints and tune units, and all loop modes on hardware.
+   A finite preview is not proof of exact sustain/release synthesis behavior.
+6. Assign meanings to every currently unassigned parameter byte, including
+   nonzero sample trailer bytes, and characterize unused/deleted table data.
+   Do not assume that zero-valued observations prove a field is padding.
+
+Until these steps are completed, neither the extractor nor this document
+should be represented as handling every semantic detail of the format.
+
+REFERENCE IMPLEMENTATIONS AND EVIDENCE
+
+The fixed structures and PCM interpretation were checked directly against
+binary field relationships, allocation chains, record spans and source/output
+byte comparisons. These checks are distinct from external implementation
+agreement. The following public primary sources are useful cross-references:
+
+  https://github.com/transverberate/smpl_extract/tree/main/smpl_extract/roland/s7xx
+  https://github.com/transverberate/smpl_extract/blob/main/ksy/roland/s770.ksy
+      Source definitions for the S-7xx structures, sample-rate nibble and
+      playback modes. The extractor does not import or require this project.
+
+  https://github.com/bmxcode/samplerdisc/blob/main/docs/formats/roland-s7xx.md
+      Independent filesystem investigation. Its rate/loop interpretation
+      conflicts with the parameter definitions above and is not adopted.
+      A fixed 44.1 kHz assumption is not suitable for a general extractor.
+
+  https://cdn.roland.com/assets/media/pdf/S-760_OM.pdf
+      Manufacturer user documentation for the sampler's resource hierarchy
+      and controls; not a complete on-disk binary specification.
+
+This document is standalone and intentionally contains no inventory or
+sample-specific filenames. Extraction results belong in the separate HTML
+report and optional per-image metadata, not in the format definition.

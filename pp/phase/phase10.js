@@ -49,7 +49,11 @@ export default async function phase10({item, itemDirPath, itemWebDirPath, itemTh
 				const sparkeyKey = type==="web" ? path.join(path.dirname(relPath), path.basename(relPath, ".json")).strip(C.UTFCHAR) || "/" : relPath.strip(C.UTFCHAR);
 				if(type==="web" || !isFileBlocked(item, sparkeyKey.strip(C.UTFCHAR)))
 				{
-					if(fileInfo.size>LARGE_FILE_THRESHOLD)
+					if(fileInfo.isDirectory)
+					{
+						taskRunner.addError(`Unexpected directory found in ${type} sparkey file path: ${filePath}`);
+					}
+					else if(fileInfo.size>LARGE_FILE_THRESHOLD)
 					{
 						largeFiles.push({sparkeyKey, filePath});
 					}

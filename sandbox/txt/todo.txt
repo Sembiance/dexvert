@@ -28,7 +28,9 @@
 | Vibe Viable |
 \-------------/
 >>> wip
-
+* MacDraw Pro: https://discmaster.textfiles.com/search?detection=64446F634432FFFF*
+	It's also fmt/1428  dDoc/dPro
+  Maybe makes sense to start with fmt/1425 macdraw samples and work up in the versions 1426, 1427, etc
 <<<
 
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
@@ -59,13 +61,18 @@
 
 * Add support for "database" (as a new family), converting various databases into sqlite3 databases
   * First task is to add sqlite3 support to dexvert.
-    It should "extract" all binary data columns as "files" so that embedded images and what not are "visible" in a recurse.
+    It should "extract" all binary data columns as "files" so that embedded images and what not are "visible" in a recurse
+	This way if the database has a zip or exe or something else in it, dexvert will continue to handle them
 	These extracted "files" should sit alongside the .sqlite3 db, possibly a subdir per "table" and then a col_row#.png so if table was pics, col was pic, you'd have pics/pic_1.png ...
 	Then add support for 'viewing' an sqlite3 database on discmaster, show metadata about the database along with a list of tables and metadata about each table (# rows, total size, etc)
 	Then show each table as a <table>, extracted binary data show as links to the file (unless it was converted as image/audio/video then inline it in the <table> csv)
+	This should probably be done via a client-side viewer, that simply downloads the full sqlite database into browser storage and everything operates there
+	That way for very large databases I can provide a "quick search" box that will "live filter" the results below, pagination for huge tables, etc
+	In pp, it should take ALL strings and text and ensure it gets indexed so it's fully searchable
   * Now create a vibe2sqlite converter and support then vibe-convert the following:
     - sqlite2 (and sqlite 1?)
-    - document/fileMakerPro databases converting, give this to vibe code to help it write a converter to sqlite:  https://github.com/evanmiller/fmptools
+    - CSV, TSV, other delimited text formats
+	- document/fileMakerPro databases converting, give this to vibe code to help it write a converter to sqlite:  https://github.com/evanmiller/fmptools
 	  Can use this one as a test: https://discmaster.textfiles.com/view/6284/PD-ROM%20F95.toast/Telecom/Info/Info%20A-J/Internet%20Index
 	  Someone on discord discovered an old copy of the microsoft.com webpage as HTML in this: https://discord.com/channels/1140706605789368492/1297670690295517266/1502881381087444993
 	- MySQL
@@ -81,6 +88,13 @@
 	- Add 'proper' AskSam support for the ~460 files: https://discmaster.textfiles.com/search?format=askSamDatabase
   	  https://preservation.tylerthorsted.com/2024/01/26/asksam/
   	  Right now I just have it as a 'simple' file using strings, of which I already have some samples for
+	- Look at every single "serial number" database I can find (Mac AND PC) from every hacker/cracks/serialz CD I can find on discmaster
+	  Add a new "Hack & Crack" Genre and for each CD that I fully vibed extensively and completely and have reprocessed, set genre to Hack & Crack
+	  After all done with hacks and cracks I can find on discmaster, go find more CDs on archive
+	  Examine my dexvert/sandbox/serials/ folder and identify their CD sources and ensure the serials I see there can be found via dismcaster search then delete that serial file and move to the next
+	  After ALL done, search for "microangelo" with the genre pre-selected and respond to: https://c.im/@rootcompute/117248323730596903
+	- Possible various other "text" formats should be sqlite?
+	- Make a news about full support for database files
 
 * The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
   After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile

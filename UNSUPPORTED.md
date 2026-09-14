@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,949)
+# Unsupported File Formats (3,957)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -339,7 +339,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (189)
+## Document (190)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -368,6 +368,7 @@ Family/Format | Name | Extensions | Notes
 [document/bdcHelpSystem](https://discmaster.textfiles.com/search?format=bdcHelpSystem) | BDC HelpSystem | .hlp | 
 [document/beagleWorksDocument](https://discmaster.textfiles.com/search?format=beagleWorksDocument) | BeagleWorks Word Processing document |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/beagleWorksDocument/)
 [document/blackMagicHypertext](https://discmaster.textfiles.com/search?format=blackMagicHypertext) | Black Magic hypertext document | .mag | 
+[document/blaiseComputingHelp](https://discmaster.textfiles.com/search?format=blaiseComputingHelp) | Blaise Computing Help | .hlp | 
 [document/bookBrowserEBook](https://discmaster.textfiles.com/search?format=bookBrowserEBook) | BookBrowser eBook | .ebk | 
 [document/borlandSprint](https://discmaster.textfiles.com/search?format=borlandSprint) | [Borland Sprint](https://winworldpc.com/product/borland-sprint) | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/document/borlandSprint/) - DOS based word processor. Haven't investigated it for magic. Not 100% sure my sample file is Borland Sprint, but couldn't find another WordProcessor called sprint.
 [document/calamusDocument](https://discmaster.textfiles.com/search?format=calamusDocument) | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://sembiance.com/fileFormatSamples/document/calamusDocument/)
@@ -1093,7 +1094,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,774)
+## Other (2,781)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1163,6 +1164,7 @@ Family/Format | Name | Extensions | Notes
 [other/actGroupLayoutV30](https://discmaster.textfiles.com/search?format=actGroupLayoutV30) | ACT! Group Layout | .gly | 
 [other/actPrinterDriver](https://discmaster.textfiles.com/search?format=actPrinterDriver) | ACT! Printer driver | .apd | 
 [other/actReportV30](https://discmaster.textfiles.com/search?format=actReportV30) | ACT! Report | .rep | 
+[other/actWinQuery](https://discmaster.textfiles.com/search?format=actWinQuery) | ACT! Win Query | .qry | 
 [other/actionTemplate](https://discmaster.textfiles.com/search?format=actionTemplate) | Action! Template | .tpl | 
 [other/activInspireFlipchart](https://discmaster.textfiles.com/search?format=activInspireFlipchart) | ActivInspire Flipchart | .flipchart | 
 [other/actorImageSnapshot](https://discmaster.textfiles.com/search?format=actorImageSnapshot) | Actor Image Snapshot | .ima | 
@@ -1212,7 +1214,7 @@ Family/Format | Name | Extensions | Notes
 [other/afterlifeSavedGame](https://discmaster.textfiles.com/search?format=afterlifeSavedGame) | Afterlife saved game |  | 
 [other/agathaChristieMurderOnTheOrientExpressSave](https://discmaster.textfiles.com/search?format=agathaChristieMurderOnTheOrientExpressSave) | Agatha Christie: Murder on the Orient Express save game | .ac2 | 
 [other/ageOfEmpiresScenario](https://discmaster.textfiles.com/search?format=ageOfEmpiresScenario) | Age of Empires Scenario | .scn | 
-[other/ageOfMythologySaveOrScenario](https://discmaster.textfiles.com/search?format=ageOfMythologySaveOrScenario) | Age of Mythology: The Titans save game or scenario | .scn .svx | 
+[other/ageOfMythologySaveOrScenario](https://discmaster.textfiles.com/search?format=ageOfMythologySaveOrScenario) | Age of Mythology - Save game or scenario | .scn .svx | 
 [other/ageOfWondersDictionaryData](https://discmaster.textfiles.com/search?format=ageOfWondersDictionaryData) | Age of Wonders Dictionary data | .mld | 
 [other/ageOfWondersEffects](https://discmaster.textfiles.com/search?format=ageOfWondersEffects) | Age of Wonders Effects | .fx | 
 [other/ageOfWondersShadowMagicEffects](https://discmaster.textfiles.com/search?format=ageOfWondersShadowMagicEffects) | Age of Wonders: Shadow Magic Effects | .fx | 
@@ -1410,6 +1412,7 @@ Family/Format | Name | Extensions | Notes
 [other/babbleData](https://discmaster.textfiles.com/search?format=babbleData) | Babble! Data | .bab | 
 [other/babylonDictionary](https://discmaster.textfiles.com/search?format=babylonDictionary) | Babylon Dictionary | .bdc | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?format=babylonGlossary) | Babylon Glossary | .bgl | 
+[other/backItDeviceDefinition](https://discmaster.textfiles.com/search?format=backItDeviceDefinition) | Back-It device definition | .cfg | 
 [other/backItPreset](https://discmaster.textfiles.com/search?format=backItPreset) | Back-It Preset | .prs | 
 [other/balabolkaSkin](https://discmaster.textfiles.com/search?format=balabolkaSkin) | Balabolka Skin | .asz | 
 [other/bananaAccountingData](https://discmaster.textfiles.com/search?format=bananaAccountingData) | Banana accounting data | .ac2 | 
@@ -1768,6 +1771,7 @@ Family/Format | Name | Extensions | Notes
 [other/deepPaint3DProject](https://discmaster.textfiles.com/search?format=deepPaint3DProject) | Deep Paint 3D Project | .dp3 | 
 [other/deHackEdPatch](https://discmaster.textfiles.com/search?format=deHackEdPatch) | DeHackEd Patch | .deh | 
 [other/dellSystemBIOS](https://discmaster.textfiles.com/search?format=dellSystemBIOS) | Dell system BIOS version | .hdr | 
+[other/deLormeVectorSymbolData](https://discmaster.textfiles.com/search?format=deLormeVectorSymbolData) | DeLorme vector Symbol data | .sym | 
 [other/delphiCompiledPackage](https://discmaster.textfiles.com/search?format=delphiCompiledPackage) | Delphi Compiled Package | .dcp | 
 [other/delphiDiagramPortfolio](https://discmaster.textfiles.com/search?format=delphiDiagramPortfolio) | Delphi Diagram Portfolio | .ddp | 
 [other/deluxeSkiJump2Replay](https://discmaster.textfiles.com/search?format=deluxeSkiJump2Replay) | Deluxe Ski Jump 2 Replay | .rpl | 
@@ -1957,6 +1961,7 @@ Family/Format | Name | Extensions | Notes
 [other/extraForWindowsBinaryCompiledMacro](https://discmaster.textfiles.com/search?format=extraForWindowsBinaryCompiledMacro) | Extra! for Windows Binary/compiled Macro | .ebm | 
 [other/extraForWindowsSmartpadDefinition](https://discmaster.textfiles.com/search?format=extraForWindowsSmartpadDefinition) | Extra! for Windows smartpad definition | .ewp | 
 [other/extraForWindowsSnapShot](https://discmaster.textfiles.com/search?format=extraForWindowsSnapShot) | Extra! for Windows SnapShot | .pss | 
+[other/f1ChallengeMAS](https://discmaster.textfiles.com/search?format=f1ChallengeMAS) | F1 Challenge MAS | .mas | 
 [other/f1gpEdData](https://discmaster.textfiles.com/search?format=f1gpEdData) | F1GP-Ed Data | .events .settings | 
 [other/fableSaveGame](https://discmaster.textfiles.com/search?format=fableSaveGame) | Fable save game | .sav | 
 [other/fabricDesign](https://discmaster.textfiles.com/search?format=fabricDesign) | Fabric design | .fab | 
@@ -2114,7 +2119,9 @@ Family/Format | Name | Extensions | Notes
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?format=gettextMachineObject) | Gettext Machine Object | .gmo .mo | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?format=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
 [other/gfxLab24Filter](https://discmaster.textfiles.com/search?format=gfxLab24Filter) | GfxLab24 Filter |  | 
+[other/ghostReconEngineAnimation](https://discmaster.textfiles.com/search?format=ghostReconEngineAnimation) | Ghost Recon Engine Animation | .anm | 
 [other/ghostReconEngineCharacterModel](https://discmaster.textfiles.com/search?format=ghostReconEngineCharacterModel) | Ghost Recon Engine Character model | .chr | 
+[other/ghostReconEngineMap](https://discmaster.textfiles.com/search?format=ghostReconEngineMap) | Ghost Recon Engine Map | .map | 
 [other/ghostReconEngineModel](https://discmaster.textfiles.com/search?format=ghostReconEngineModel) | Ghost Recon Engine model | .qob | 
 [other/ghostReconEnginePersistentModel](https://discmaster.textfiles.com/search?format=ghostReconEnginePersistentModel) | Ghost Recon Engine Persistent model | .pob | 
 [other/gizmozCalendarData](https://discmaster.textfiles.com/search?format=gizmozCalendarData) | Gizmoz Calendar data |  | 
@@ -3111,7 +3118,6 @@ Family/Format | Name | Extensions | Notes
 [other/radixLevelGameDesign](https://discmaster.textfiles.com/search?format=radixLevelGameDesign) | Radix Level Game Design | .lgd | 
 [other/raimaDataManagerLock](https://discmaster.textfiles.com/search?format=raimaDataManagerLock) | Raima Data Manager lock | .taf | 
 [other/rapidFileData](https://discmaster.textfiles.com/search?format=rapidFileData) | RapidFile Data | .rpd | 
-[other/raptorGLBEncryptedContainer](https://discmaster.textfiles.com/search?format=raptorGLBEncryptedContainer) | Raptor GLB Encrypted Container | .glb | 
 [other/rarConfiguration](https://discmaster.textfiles.com/search?format=rarConfiguration) | RAR Configuration | .cfg | 
 [other/raveReportsProject](https://discmaster.textfiles.com/search?format=raveReportsProject) | Rave Reports Project | .rav | 
 [other/ravenObjectFileFormat](https://discmaster.textfiles.com/search?format=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | 
@@ -3246,6 +3252,7 @@ Family/Format | Name | Extensions | Notes
 [other/siegfriedData](https://discmaster.textfiles.com/search?format=siegfriedData) | Siegfried data | .data | 
 [other/siemensTIAPLCFile](https://discmaster.textfiles.com/search?format=siemensTIAPLCFile) | Siemens TIA PLC File | .plf | 
 [other/sciDriver](https://discmaster.textfiles.com/search?format=sciDriver) | Sierra Creative Interpreter Driver | .drv | 
+[other/sierraSCI](https://discmaster.textfiles.com/search?format=sierraSCI) | Sierra SCI | .000 | 
 [other/sigfriedAntivirusPreferences](https://discmaster.textfiles.com/search?format=sigfriedAntivirusPreferences) | Sigfried Antivirus Professional Preferences | .prefs | 
 [other/signum3DocumentEditorParams](https://discmaster.textfiles.com/search?format=signum3DocumentEditorParams) | Signum 3 Document Editor Params | .inf | 
 [other/signum3ElementList](https://discmaster.textfiles.com/search?format=signum3ElementList) | Signum 3 Element List | .eli | 
@@ -3804,6 +3811,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordStarPrinterDescFile](https://discmaster.textfiles.com/search?format=wordStarPrinterDescFile) | WordStar Printer Description File | .pdf | 
 [other/wordWorthPreferences](https://discmaster.textfiles.com/search?format=wordWorthPreferences) | WordWorth Preferences |  | 
 [other/workingModel2DData](https://discmaster.textfiles.com/search?format=workingModel2DData) | Working Model 2D data | .wm .wm2d | 
+[other/worksheetBuilderWorksheet](https://discmaster.textfiles.com/search?format=worksheetBuilderWorksheet) | Worksheet Builder Worksheet |  | 
 [other/worldClassSoccerSavedGame](https://discmaster.textfiles.com/search?format=worldClassSoccerSavedGame) | World Class Soccer Saved game | .sav | 
 [other/worldConstructionSetElevationData](https://discmaster.textfiles.com/search?format=worldConstructionSetElevationData) | World Construction Set Elevation data | .elev | 
 [other/worldConstructionSetObject](https://discmaster.textfiles.com/search?format=worldConstructionSetObject) | World Construction Set Object | .obj | 

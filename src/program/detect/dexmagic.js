@@ -79,6 +79,7 @@ const DEXMAGIC_CHECKS = {
 	"PFS Filesystem"                     : [{offset : 0, match : "PFS/"}],
 	"Picture Catalog Spinnaker"          : [{offset : 0, match : "CAT "}, {offset : 8, match : "CLIPFORM"}],
 	"QWK Messages"                       : [{offset : 0, match : "Produced by Qmail"}],
+	"Roland Disk Format"                 : [{offset : 4, match : "S770"}],
 	"SAVERAM Data"                       : [{offset : 0, match : [0x02, 0x00, 0xFE, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 92, match : "SaveRam"}],
 	"SCR Package"                        : [{offset : 0, match : "This is SCR Package File"}],
 	"SGS.DAT"                            : [{offset : 0, match : "SGS.DAT "}],

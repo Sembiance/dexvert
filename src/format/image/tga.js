@@ -16,12 +16,26 @@ export class tga extends Format
 	// picturePublisher also supports TGA but bad TGA's have a tendency to cause the program to freeze so bad that the AutoIt script freezes up too (see sandbox/samples/HangsPicturePublisher.tga)
 	// abydosconvert sometimes takes garbage files like 'HangsPicturePublisher.tga' and produces garbage output, so we skip that converter too
 	// iio2png works really well, except when it doesn't. like 648.TGA and several other hundred TGA's like it, convert as just a transparent image
-	converters = [
-		"deark[module:tga][matchType:magic][opt:tga:trans=0]", "deark[module:tga][matchType:magic][hasExtMatch][opt:tga:trans=0]", "wuimg[format:tga]", "imconv[format:tga][matchType:magic]", "iconvert",
-		...["imageAlchemy", "paintDotNet[hasExtMatch]", "keyViewPro", "corelDRAW[hasExtMatch]", "pv", "photoDraw"].map(v => `${v}[noPrevFailedVerify]`),
-		"nconvert[format:tga]", "gimp", "iio2png", "tkimgConvert", "gameextractor[renameOut][codes:TGA]",
-		...["GARbro[types:image:TgaFormat][matchType:magic]", "noesis[type:image][matchType:magic]", "hiJaakExpress", "canvas5", "canvas"].map(v => `${v}[hasExtMatch][noPrevFailedVerify]`)
-	].map(converter => (["deark", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
+	converters = dexState =>
+	{
+		const r = ["deark[module:tga][matchType:magic][opt:tga:trans=0]", "deark[module:tga][matchType:magic][hasExtMatch][opt:tga:trans=0]", "wuimg[format:tga]", "imconv[format:tga][matchType:magic]", "iconvert"];
+		
+		if([dexState.meta?.width, dexState.meta?.height].every(v => v && typeof v==="number" && v>1 && v<10000))
+			r.push(...["imageAlchemy", "paintDotNet[hasExtMatch]", "keyViewPro", "corelDRAW[hasExtMatch]", "pv", "photoDraw"].map(v => `${v}[noPrevFailedVerify]`));
+		
+		if(dexState.meta?.width && dexState.meta?.height)
+			r.push("nconvert[format:tga]", "gimp");
+		
+		r.push("iio2png");
+		
+		if(dexState.meta?.width && dexState.meta?.height)
+			r.push("tkimgConvert", "gameextractor[renameOut][codes:TGA]");
+		
+		if([dexState.meta?.width, dexState.meta?.height].every(v => v && typeof v==="number" && v>1 && v<10000))
+			r.push(...["GARbro[types:image:TgaFormat][matchType:magic]", "noesis[type:image][matchType:magic]", "hiJaakExpress", "canvas5", "canvas"].map(v => `${v}[hasExtMatch][noPrevFailedVerify]`));
+
+		return r.map(converter => (["deark", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
+	};
 	// many converters will produce garbage with weak TGA magics. deark too, but if we have an extension+magic match, make an exception. recoil2png and iio2png seem to be pretty strict, so allow those as-is
 
 	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy (but do from crunchDXT ?), require more than 1 color

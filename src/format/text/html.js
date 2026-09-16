@@ -7,7 +7,7 @@ const WEAK_MAGIC = [
 	/^fmt\/(96|97|98|99|100|102|103|471|1132)( |$)/,
 
 	// app specific HTML
-	"Microsoft HTML Application (HTA)"
+	"Microsoft HTML Application (HTA)", "application/hta"
 ];
 
 const STRONG_MAGIC = [

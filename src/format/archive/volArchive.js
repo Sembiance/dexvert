@@ -6,5 +6,6 @@ export class volArchive extends Format
 	ext            = [".vol"];
 	forbidExtMatch = true;
 	magic          = [/^geArchive: VOL_VOL( |$)/];
+	weakMagic      = true;
 	converters     = ["gameextractor[codes:VOL_VOL]"];
 }

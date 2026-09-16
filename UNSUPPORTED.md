@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,957)
+# Unsupported File Formats (3,967)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -339,7 +339,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (190)
+## Document (191)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?format=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -461,6 +461,7 @@ Family/Format | Name | Extensions | Notes
 [document/pSuite](https://discmaster.textfiles.com/search?format=pSuite) | P-Suite |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/pSuite/)
 [document/palmListDatabase](https://discmaster.textfiles.com/search?format=palmListDatabase) | Palm List database | .pdb | 
 [document/palmQuicksheet](https://discmaster.textfiles.com/search?format=palmQuicksheet) | Palm Quicksheet | .pdb | 
+[document/pcFileHelp](https://discmaster.textfiles.com/search?format=pcFileHelp) | PC-File Help | .hlp | 
 [document/peachCalcSpreadsheet](https://discmaster.textfiles.com/search?format=peachCalcSpreadsheet) | PeachCalc spreadsheet | .cal | 
 [document/penPalDatabase](https://discmaster.textfiles.com/search?format=penPalDatabase) | Pen Pal Database | .flr | 
 [document/penPalDocument](https://discmaster.textfiles.com/search?format=penPalDocument) | Pen Pal Document | .wtr | 
@@ -1094,7 +1095,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,781)
+## Other (2,790)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1319,6 +1320,7 @@ Family/Format | Name | Extensions | Notes
 [other/appleInterfaceBuilderNIBArchive](https://discmaster.textfiles.com/search?format=appleInterfaceBuilderNIBArchive) | Apple Interface Builder NIB archive | .nib | 
 [other/appleITunesPhotoDatabase](https://discmaster.textfiles.com/search?format=appleITunesPhotoDatabase) | Apple iTunes Photo Database |  | 
 [other/appleQuickTimeCompressedArchive](https://discmaster.textfiles.com/search?format=appleQuickTimeCompressedArchive) | Apple QuickTime compressed archive | .qup | 
+[other/appleSpotlightDataBaseStreamsMapHeader](https://discmaster.textfiles.com/search?format=appleSpotlightDataBaseStreamsMapHeader) | Apple Spotlight Data Base Streams Map Header | .header | 
 [other/appleSpotlightStoreDataBase](https://discmaster.textfiles.com/search?format=appleSpotlightStoreDataBase) | Apple Spotlight Store Data Base | .db | 
 [other/applicationObjectTemplate](https://discmaster.textfiles.com/search?format=applicationObjectTemplate) | Application Object Template | .aot | 
 [other/appliedBiosystemsIncFormat](https://discmaster.textfiles.com/search?format=appliedBiosystemsIncFormat) | Applied Biosystems Inc. Format (ABIF) | .s1 .ab1 .fsa | 
@@ -1429,6 +1431,7 @@ Family/Format | Name | Extensions | Notes
 [other/battery2QuickLoadSampleData](https://discmaster.textfiles.com/search?format=battery2QuickLoadSampleData) | Battery 2 quick load sample data | .nov | 
 [other/battery3DrumKit](https://discmaster.textfiles.com/search?format=battery3DrumKit) | Battery 3 Drum Kit | .kt3 | 
 [other/battleMoonWarsGameData](https://discmaster.textfiles.com/search?format=battleMoonWarsGameData) | Battle Moon Wars game data | .dat | 
+[other/bdPatchDriver](https://discmaster.textfiles.com/search?format=bdPatchDriver) | BD/Patch driver | .fs .prn .ctl | 
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?format=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
 [other/berkeleyDB](https://discmaster.textfiles.com/search?format=berkeleyDB) | Berkeley DB | .db | 
 [other/bethesdaGameMap](https://discmaster.textfiles.com/search?format=bethesdaGameMap) | Bethesda game Map | .mif | 
@@ -1477,7 +1480,6 @@ Family/Format | Name | Extensions | Notes
 [other/bnuportPatchTable](https://discmaster.textfiles.com/search?format=bnuportPatchTable) | BNUPORT Patch Table | .pat | 
 [other/bobTheAmazingLemonLevel](https://discmaster.textfiles.com/search?format=bobTheAmazingLemonLevel) | Bob the Amazing Lemon Level | .blv | 
 [other/bodypaint3D](https://discmaster.textfiles.com/search?format=bodypaint3D) | Bodypaint 3D | .b3d | 
-[other/bohemiaGameArchive](https://discmaster.textfiles.com/search?format=bohemiaGameArchive) | Bohemia game archive | .pbo | 
 [other/bohemiaInteractivePAA](https://discmaster.textfiles.com/search?format=bohemiaInteractivePAA) | Bohemia Interactive PAA | .paa | 
 [other/bohemiaInteractivePAC](https://discmaster.textfiles.com/search?format=bohemiaInteractivePAC) | Bohemia Interactive PAC | .pac | 
 [other/boloMap](https://discmaster.textfiles.com/search?format=boloMap) | Bolo Map |  | 
@@ -1981,7 +1983,9 @@ Family/Format | Name | Extensions | Notes
 [other/falloutTacticsCampaign](https://discmaster.textfiles.com/search?format=falloutTacticsCampaign) | Fallout Tactics Campaign | .cam | 
 [other/falloutTacticsEntity](https://discmaster.textfiles.com/search?format=falloutTacticsEntity) | Fallout Tactics Entity | .ent | 
 [other/falloutTacticsImage](https://discmaster.textfiles.com/search?format=falloutTacticsImage) | Fallout Tactics image | .zar | 
+[other/falloutTacticsMission](https://discmaster.textfiles.com/search?format=falloutTacticsMission) | Fallout Tactics Mission | .mis | 
 [other/falloutTacticsSprite](https://discmaster.textfiles.com/search?format=falloutTacticsSprite) | Fallout Tactics Sprite | .spr | 
+[other/familyTreeLegendsData](https://discmaster.textfiles.com/search?format=familyTreeLegendsData) | Family Tree Legends data | .ftl | 
 [other/familyTreeMakerFamilyTree](https://discmaster.textfiles.com/search?format=familyTreeMakerFamilyTree) | Family Tree Maker Family Tree | .fbk .ftw | 
 [other/farCry2SaveGame](https://discmaster.textfiles.com/search?format=farCry2SaveGame) | Far Cry 2 save game | .sav | 
 [other/farmingSimulatorTerreinData](https://discmaster.textfiles.com/search?format=farmingSimulatorTerreinData) | Farming Simulator terrein data | .grle | 
@@ -2466,6 +2470,7 @@ Family/Format | Name | Extensions | Notes
 [other/lotusSmartPicLibrary](https://discmaster.textfiles.com/search?format=lotusSmartPicLibrary) | Lotus SmartPic library | .sy1 | 
 [other/lotusSymphonyConfiguration](https://discmaster.textfiles.com/search?format=lotusSymphonyConfiguration) | Lotus Symphony configuration | .cnf | 
 [other/lotusTranslationTable](https://discmaster.textfiles.com/search?format=lotusTranslationTable) | Lotus Translation Table | .xlt | 
+[other/lotusScriptObjectCode](https://discmaster.textfiles.com/search?format=lotusScriptObjectCode) | LotusScript Object code | .lso | 
 [other/lplCompiledCode](https://discmaster.textfiles.com/search?format=lplCompiledCode) | LPL Compiled code | .plc | 
 [other/luaBytecode](https://discmaster.textfiles.com/search?format=luaBytecode) | Lua bytecode |  | 
 [other/lucasArtsIMUSEDrivers](https://discmaster.textfiles.com/search?format=lucasArtsIMUSEDrivers) | Lucas Arts iMUSE drivers | .ims | 
@@ -2482,6 +2487,7 @@ Family/Format | Name | Extensions | Notes
 [other/machOM68kObject](https://discmaster.textfiles.com/search?format=machOM68kObject) | Mach-O m68k Object | .o | 
 [other/machOObject](https://discmaster.textfiles.com/search?format=machOObject) | Mach-O Object | .o | 
 [other/machOSparcObject](https://discmaster.textfiles.com/search?format=machOSparcObject) | Mach-O SPARC Object | .o | 
+[other/macOSFSEventsLog](https://discmaster.textfiles.com/search?format=macOSFSEventsLog) | macOS FSEvents log |  | 
 [other/macroExpressMacro](https://discmaster.textfiles.com/search?format=macroExpressMacro) | Macro Express Macro | .mex | 
 [other/macromediaFlashColorTableFile](https://discmaster.textfiles.com/search?format=macromediaFlashColorTableFile) | Macromedia Flash Color Table File | .clr | 
 [other/macromediaXtraCache](https://discmaster.textfiles.com/search?format=macromediaXtraCache) | Macromedia Xtra Cache | .mch | 
@@ -2947,6 +2953,7 @@ Family/Format | Name | Extensions | Notes
 [other/perFormPROLOCKEDFS](https://discmaster.textfiles.com/search?format=perFormPROLOCKEDFS) | PerForm PRO LOCKEDFS | .lib .fap .fal | 
 [other/perryMasonTheCaseOfTheMandarinMurderGameData](https://discmaster.textfiles.com/search?format=perryMasonTheCaseOfTheMandarinMurderGameData) | Perry Mason: The Case of the Mandarin Murder game data | .cst | 
 [other/perryMasonTheCaseOfTheMandarinMurderGameLogic](https://discmaster.textfiles.com/search?format=perryMasonTheCaseOfTheMandarinMurderGameLogic) | Perry Mason: The Case of the Mandarin Murder game logic |  | 
+[other/personalAncestralFile](https://discmaster.textfiles.com/search?format=personalAncestralFile) | Personal Ancestral File | .paf | 
 [other/personalCADPCCAPSDatabase](https://discmaster.textfiles.com/search?format=personalCADPCCAPSDatabase) | Personal CAD PC-CAPS Database | .sch | 
 [other/personalFinanceManagerPlusData](https://discmaster.textfiles.com/search?format=personalFinanceManagerPlusData) | Personal Finance Manager Plus data | .mny | 
 [other/personalPearlDataBase](https://discmaster.textfiles.com/search?format=personalPearlDataBase) | Personal Pearl data base | .d00 .d01 | 
@@ -3073,6 +3080,7 @@ Family/Format | Name | Extensions | Notes
 [other/psionPrinterDriver](https://discmaster.textfiles.com/search?format=psionPrinterDriver) | Psion Printer Driver | .wdr | 
 [other/psm2Configuration](https://discmaster.textfiles.com/search?format=psm2Configuration) | PSM 2 configuration | .dat | 
 [other/pspMetadataFile](https://discmaster.textfiles.com/search?format=pspMetadataFile) | PSP metadata file | .psf .sfo | 
+[other/publisherSPaintbrushVideoDriver](https://discmaster.textfiles.com/search?format=publisherSPaintbrushVideoDriver) | Publisher's Paintbrush Video Driver | .dev | 
 [other/pureCProjectDB](https://discmaster.textfiles.com/search?format=pureCProjectDB) | Pure C Project DB | .pdb | 
 [other/pureBasicLibrary](https://discmaster.textfiles.com/search?format=pureBasicLibrary) | PureBasic library |  | 
 [other/pureBasicResidentData](https://discmaster.textfiles.com/search?format=pureBasicResidentData) | PureBasic resident data |  | 
@@ -3808,6 +3816,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectWordlist](https://discmaster.textfiles.com/search?format=wordPerfectWordlist) | WordPerfect Wordlist | .spw | 
 [other/wordPerfectWritingTools](https://discmaster.textfiles.com/search?format=wordPerfectWritingTools) | WordPerfect Writing Tools | .cbt .cbd | 
 [other/wordsearchManiaConfiguration](https://discmaster.textfiles.com/search?format=wordsearchManiaConfiguration) | Wordsearch Mania! Configuration | .cfg | 
+[other/wordStar2000PrinterDefinition](https://discmaster.textfiles.com/search?format=wordStar2000PrinterDefinition) | WordStar 2000 Printer definition | .prn | 
 [other/wordStarPrinterDescFile](https://discmaster.textfiles.com/search?format=wordStarPrinterDescFile) | WordStar Printer Description File | .pdf | 
 [other/wordWorthPreferences](https://discmaster.textfiles.com/search?format=wordWorthPreferences) | WordWorth Preferences |  | 
 [other/workingModel2DData](https://discmaster.textfiles.com/search?format=workingModel2DData) | Working Model 2D data | .wm .wm2d | 
@@ -3863,6 +3872,7 @@ Family/Format | Name | Extensions | Notes
 [other/zBrushMatCap](https://discmaster.textfiles.com/search?format=zBrushMatCap) | ZBrush MatCap | .ztl | 
 [other/zBrushMaterial](https://discmaster.textfiles.com/search?format=zBrushMaterial) | ZBrush Material | .zmt | 
 [other/zBrushPreset](https://discmaster.textfiles.com/search?format=zBrushPreset) | ZBrush Preset | .zbp | 
+[other/zCalcData](https://discmaster.textfiles.com/search?format=zCalcData) | zCalc data | .tax | 
 [other/zCTSystemsGroupVideoDriver](https://discmaster.textfiles.com/search?format=zCTSystemsGroupVideoDriver) | ZCT Systems Group video Driver | .drv | 
 [other/zdaGameDataArchive](https://discmaster.textfiles.com/search?format=zdaGameDataArchive) | ZDA game data archive | .zda | 
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?format=zeldaClassicQuest) | Zelda Classic Quest | .qst | 

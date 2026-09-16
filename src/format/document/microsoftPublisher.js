@@ -7,7 +7,7 @@ export class microsoftPublisher extends Format
 	ext            = [".pub"];
 	forbidExtMatch = true;
 	magic          = [
-		"Microsoft Publisher document", /^OLE 2 Compound Document.+Microsoft$/, /^OLE 2 Compound Document.+Microsoft Publisher$/, "Microsoft Publisher v1", /^Microsoft Publisher \([\d.]+\)$/,
+		"Microsoft Publisher document", /^OLE 2 Compound Document.+Microsoft$/, /^OLE 2 Compound Document.+Microsoft Publisher$/, "Microsoft Publisher v1", /^Microsoft Publisher \([\d.]+\)$/, "application/vnd.ms-publisher",
 		/^fmt\/(1511|1512|1513|1514|1515)( |$)/, /^x-fmt\/(252|253|254|255|256|257)( |$)/
 	];
 	converters     = ["soffice[format:PublisherDocument]"];

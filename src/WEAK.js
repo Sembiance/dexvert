@@ -384,11 +384,11 @@ export const WEAK_VALUES =
 	/^archive:Macromedia.DxrOpener /,
 
 	// SEEN  ONCE:
-	// 		archive:Entis.EriOpener, archive:Cri.SpcOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
+	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Dogenzaka.BinOpener, archive:Elf.DatAI5Opener
 	// SEEN TWICE:
-	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener
+	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Cri.SpcOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -433,12 +433,12 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, SND_3, HNK, GLB, RDBDATA_RDB0
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, UOP_MYP, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX, GOB_STBL
-	//		BOB_FILE
+	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX, GOB_STBL
+	//		BOB_FILE, PRS, HDD
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, VOL_VOL_3, CAR_RAC, FLX, WAD_WAD, SAD_SAUD
-	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3
+	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, UOP_MYP
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -470,6 +470,7 @@ export const WEAK_VALUES =
 	/^geArchive: BUNDLE_BNDL( |$)/,
 	/^geArchive: CACHE_3( |$)/,
 	/^geArchive: CAR_FRAC( |$)/,
+	/^geArchive: CAR_RAC( |$)/,
 	/^geArchive: CAS( |$)/,
 	/^geArchive: CEG_GEKV( |$)/,
 	/^geArchive: CDF_TXTR( |$)/,
@@ -527,6 +528,7 @@ export const WEAK_VALUES =
 	/^geArchive: TXD_2( |$)/,
 	/^geArchive: U_Generic( |$)/,
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
+	/^geArchive: VOL_VOL_3( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
 	/^geArchive: WD_WD( |$)/,
@@ -564,7 +566,7 @@ export const WEAK_VALUES =
 	/^ELI Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Eudora Werbungsdatei$/,
 	/^Exception in der Quelldatei$/,
-	/^Fehler beim/,
+	/^Fehler:? (beim|JPG|Ungültige)/,
 	/^FINISH Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^FPK Pascal Object Datei$/,
 	/^Fractal Extreme Filemdatei$/,
@@ -614,9 +616,9 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, DZip (Nolan Pflug), ZPack, ZZip (Damien Debin), PSA, BMF, CMP
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, BMF, CMP
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec
+	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug)
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -739,6 +741,7 @@ export const WEAK_VALUES =
 	/^application\/x-ms-ne-executable$/,
 	/^application\/x-msdownload$/,
 	/^application\/x-navi-animation$/,
+	/^application\/x-ns-proxy-autoconfig$/,
 	/^application\/x-nzb$/,
 	/^application\/x-object$/,
 	/^application\/x-ole-storage$/,
@@ -891,6 +894,7 @@ export const WEAK_VALUES =
 	/^Bagpipe$/,
 	/^Bagpipe, /,
 	/^BALANCE NS32000/,
+	/^Bars & Pipes Professional$/,
 	/^basic-16 executable/,
 	/^BBC Micro ROM /,
 	/^BCache (backing|cache) device/,
@@ -1943,6 +1947,7 @@ export const WEAK_VALUES =
 	/^Kidproof settings \(v1\.0\)$/,
 	/^Kotlin info \(generic\)$/,
 	/^KT-Tech compressed audio$/,
+	/^KyPlot document$/,
 	/^Lombard RAC Rally Track$/,
 	/^Lotus 123 configuration/,
 	/^Lotus 123\/Symphony worksheet\/format\/configuration \(V1-V2\)$/,

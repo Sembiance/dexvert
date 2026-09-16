@@ -1080,6 +1080,7 @@ export default
 		turboprintDriver                           : {name : "Turboprint driver", ext : [".tpp"], magic : ["Turboprint driver (v4)"]},
 		turboprintColorInfo                        : {name : "Turboprint color info", ext : [".tpm"], magic : ["Turboprint color info"]},
 		turboSilverScript                          : {name : "Turbo Silver Script", ext : [".scr"], magic : ["Turbo Silver v3 Script"]},
+		tutorialWriterMenu                         : {name : "TutorialWriter Menu", ext : [".mnu"], magic : ["TutorialWriter Menu"], weakMagic : true},
 		twentyTwoDisk                              : {name : "22DISK", ext : [".def"], magic : ["22DISK format Definition"], weakMagic : true},
 		twistForm                                  : {name : "Twist Form", ext : [".frm", ".bak"], magic : ["Twist Form"], weakMagic : true},
 		twistImportScript                          : {name : "Twist Import script", ext : [".i"], magic : ["Twist Import script"], weakMagic : true},

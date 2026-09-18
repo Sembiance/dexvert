@@ -5,6 +5,6 @@ export class geoWorksGEOSApplication extends Format
 	name           = "GeoWorks GEOS application";
 	ext            = [".geo"];
 	forbidExtMatch = true;
-	magic          = ["GeoWorks GEOS application", "GeoWorks GEOS executable", "GeoWorks GEOS utility", /^GEOS executable,/];
+	magic          = ["GeoWorks GEOS application", "GeoWorks GEOS executable", "GeoWorks GEOS utility", /^GEOS executable,/, /^GeoWorks GEOS (socket|URL) driver/];
 	converters     = ["vibeExtract"];
 }

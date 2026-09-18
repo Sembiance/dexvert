@@ -386,9 +386,9 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
-	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Dogenzaka.BinOpener, archive:Elf.DatAI5Opener
+	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:FVP.Bin2Opener, archive:Ffa.JDatOpener
 	// SEEN TWICE:
-	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Cri.SpcOpener
+	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Cri.SpcOpener, archive:Dogenzaka.BinOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -409,7 +409,7 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
-	//		image:RSystem.RsgFormat, image:Herb.GrpFormat, image:Prime.ThpFormat, image:Desire.DpcFormat
+	//		image:RSystem.RsgFormat, image:Herb.GrpFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat
 	// SEEN TWICE:
 	//		image:Discovery.Pr1Format
 	/^image:Adobe\.PsdFormat /,
@@ -434,10 +434,10 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, PAC_DPAC, FUK_XV4, SKX_SKEX, GOB_STBL
-	//		BOB_FILE, PRS, HDD
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
+	//		BOB_FILE, PRS, HDD, PHK_PAK
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC
 	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, UOP_MYP
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
@@ -810,6 +810,7 @@ export const WEAK_VALUES =
 	/^/,	// eslint-disable-line no-control-regex
 	/^device=/,
 	/^ERROR: /,
+	/^multipart\//,
 	/^NTFS$/,
 	/^Invalid name\.$/,
 	/^P;/,
@@ -1209,7 +1210,6 @@ export const WEAK_VALUES =
 	/^MSX2\/2\+\/TR SubROM$/,
 	/^MSXiE archive data/,
 	/^MTZ reflection file/,
-	/^multipart\/mixed; /,
 	/^MultiTrack sound data/,
 	/^mumps (avl|blt) global/,
 	/^MySQL (MyISAM|ISAM|Maria) (compressed data|index) file Version [\d.-]+$/,

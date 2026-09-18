@@ -8,7 +8,7 @@ export class xls extends Format
 	magic      = [
 		"Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet", "Excel Microsoft Office Open XML Format document", "Microsoft Excel for Mac", "CDFV2 Microsoft Excel", /^OLE 2 Compound Document.*Excel 97-2003/,
 		"Excel Binary workbook",
-		/^Microsoft Office XML Flat File Format Excel worksheet/, /^fmt\/(55|56|57|58|59|61|62|214|445|555|556|598)( |$)/, /^x-fmt\/17( |$)/,
+		/^Microsoft Office XML Flat File Format Excel worksheet/, /^fmt\/(55|56|57|58|59|61|62|214|445|555|556|598|1858)( |$)/, /^x-fmt\/17( |$)/,
 
 		// these are actually a sperate formats, but only ever encountered a few of these, they also matches against excel magics, and convert with same tools, so just stick it in here
 		"Visual Tools Spreadsheet", "PlanMaker spreadsheet Document", "SoftMaker PlanMaker Document/template"

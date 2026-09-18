@@ -33,6 +33,10 @@
   Maybe makes sense to start with fmt/1425 macdraw samples and work up in the versions 1426, 1427, etc
 <<<
 
+* teenyWeenyGamesBMVVideo	https://discmaster.textfiles.com/search?extension=bmv&detection=2b%3F%3F%3F%3F%3F%3F3a*
+
+* Other videos in unsupported.js video
+
 * Start tackling various installers. Probably vibe them (previous plan was to launch in QEMU, auto-it figure it out, run, shutdown, compare filesystem to before)
   NOTE: If I come across ones that have consistent "metadata" on the exe, I can use an agent with running "exiftool -quiet -json" to find what to reprocess
   Right now installers (including Wise) are not detected as such, just treatest as an EXE where wise/defactory/nsis/etc are just "tried"
@@ -98,6 +102,9 @@
 
 * The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
   After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile
+
+* Various "msCompound" specific file types
+
 
 
 /---------------\

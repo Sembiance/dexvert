@@ -13,6 +13,7 @@ export class jpg extends Format
 		/^idarc: JPG /,	// trailing space intentional
 		"Pegasus JPEG bitmap",	// supposedly a variant of JPEG but it seems to work just fine as a normal JPEG
 		"OpalVision JPEG bitmap", // some sort of JPG variant, but seems to convert just fine (VPRNCE07.jpeg)
+		"JPEG 8BIM header (Mac) :mjpg:",	// this is usually caught and handled by archive/rsrc first, which works just fine as the image gets extracted there fine (see archive/rsrc/applefile)
 		/^fmt\/(41|42|43|44|645|1507)( |$)/, /^x-fmt\/(390|391|398)( |$)/];
 	idMeta           = ({macFileType}) => ["JFIF", "JPEG", "jpeg"].includes(macFileType);
 	fallback         = true;	// Some other formats such as image/a4r can be mistaken for JPEG data by 'file' command, so we ensure we try other formats first before falling back to this
@@ -44,6 +45,8 @@ export class jpg extends Format
 
 		if(dexState.hasMagics("Macintosh JPEG bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.jpg]");
+		if(dexState.hasMagics("JPEG 8BIM header (Mac) :mjpg:"))
+			r.push("nconvert[format:mjpg]");
 		r.push("iconvert", "iio2png", "wuimg[format:jpeg]");
 
 		// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but these programs can handle it. 'canvas5' yields static garbage, don't use that.

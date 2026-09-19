@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class pivotalPSFBank extends Format
 {
 	name           = "Pivotal PSF Bank Audio";
-	ext            = [".wss"];
+	ext            = [".wss", ".psf"];
 	forbidExtMatch = true;
 	magic          = ["Pivotal PSF Bank (psfb)"];
 	metaProvider   = ["ffprobe[libre]"];

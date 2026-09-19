@@ -5,7 +5,7 @@ Others are not converted because it was deemed low priority, or there are no kno
 
 
 
-## Archive (263)
+## Archive (262)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -202,7 +202,6 @@ Family/Format | Name | Extensions | Notes
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
 [archive/relicChunkyContainerGameData](https://discmaster.textfiles.com/search?format=relicChunkyContainerGameData) | Relic Chunky container - game data | .sgb .whm .whe .rsh .wtp | [2 sample files](https://sembiance.com/fileFormatSamples/archive/relicChunkyContainerGameData/)
 [archive/relpackPacked](https://discmaster.textfiles.com/search?format=relpackPacked) | Relpack Packed |  | 
-[archive/renPyArchive](https://discmaster.textfiles.com/search?format=renPyArchive) | Ren'Py Archive | .rpa | 
 [archive/repiPack](https://discmaster.textfiles.com/search?format=repiPack) | RepiPack archive | .dat | 
 [archive/rerpPacked](https://discmaster.textfiles.com/search?format=rerpPacked) | RERP Packed | .exe | 
 [archive/rlPackPacked](https://discmaster.textfiles.com/search?format=rlPackPacked) | RLPack Packed | .exe .dll | 
@@ -1096,7 +1095,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,797)
+## Other (2,798)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3639,6 +3638,7 @@ Family/Format | Name | Extensions | Notes
 [other/v12DataBaseEngineDB](https://discmaster.textfiles.com/search?format=v12DataBaseEngineDB) | V12 Data Base Engine DB | .db .v12 | 
 [other/vallenJPeggerIndex](https://discmaster.textfiles.com/search?format=vallenJPeggerIndex) | Vallen JPegger index | .dat | 
 [other/valveParticleStorage](https://discmaster.textfiles.com/search?format=valveParticleStorage) | Valve particle storage | .pcf | 
+[other/valveSourceEngineClosedCaption](https://discmaster.textfiles.com/search?format=valveSourceEngineClosedCaption) | Valve Source Engine Closed Caption | .dat | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?format=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vampireTheMasqueradeRedemptionSaveGame](https://discmaster.textfiles.com/search?format=vampireTheMasqueradeRedemptionSaveGame) | Vampire: The Masquerade - Redemption save game | .nsw | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?format=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 

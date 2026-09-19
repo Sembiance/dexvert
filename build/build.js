@@ -21,8 +21,9 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.silent ? "none" : "info");
 
 const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES.subtractOnce(ALL_EXEMPT) : argv.target);
-for(const [i, targetid] of Object.entries(targetids))
+await targetids.parallelMap(async targetid =>
 {
-	xlog.info`${printUtil.majorHeader(targetid, +i>0 ? {prefix : "\n"} : {})}`;
+	xlog.info`${targetid.padStart(TARGET_NAMES.map(v => v.length).max())} ::: Building...`;
 	await (await import(path.join(import.meta.dirname, "targets", `${targetid}.js`))).default(xlog);
-}
+	xlog.info`${targetid.padStart(TARGET_NAMES.map(v => v.length).max())} ::: Complete!`;
+});

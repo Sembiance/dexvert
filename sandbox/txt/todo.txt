@@ -11,6 +11,7 @@
 * These appear to already be supported, just need to add a 'dexmagic' match for them: https://github.com/Sembiance/dexvert/issues/45
   See: https://discmaster.textfiles.com/search?detection=434f50594449534b*
 
+* Add support for EMU3 disk images (archive/emu3Filesystem.js  (already exists)): https://github.com/dagargo/emu3fs
 
 * ANSI files (and other ANSI-like files, ICE, etc) are just treated as "images" in terms of fetching content text and just use OCR.
   But that OCR just isn't very reliable, infact you can see that in pp/phase/phase#.js with the TEXT_IMAGE_FORMATS exceptions

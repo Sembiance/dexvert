@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {printUtil, cmdUtil} from "xutil";
+import {cmdUtil} from "xutil";
 import {path} from "std";
 
 const TARGET_NAMES = ["README", "SUPPORTED", "UNSUPPORTED", "programsFormats"];

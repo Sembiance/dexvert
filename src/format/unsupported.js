@@ -636,6 +636,7 @@ export default
 		serverNaturalFormatFont          : {name : "X11 Server Natural Format font", ext : [".snf"], magic : ["X11 Server Natural Format font", "X11 SNF font data"], weakMagic : true},
 		signumPrinterFont                : {name : "Signum! Printer Font", ext : [".p24", ".p9", ".l30"], magic : [/^Bitmapped Signum!2 printer font \([^s]/]},
 		signum3CompressedFont            : {name : "Signum! 3 Compressed Font", ext : [".s01", ".24n", ".9p", ".30l"], magic : ["Signum 3 Compressed Font"]},
+		softLogikBitmapFont              : {name : "Soft-Logik bitmap Font", ext : [".fm", ".14h", ".12h", ".18h", ".24h", ".36h", ".10h", ".14i", ".dmf", ".psf"], magic : ["Soft-Logik bitmap Font"]},
 		takeTwoInteractiveSoftwareFont   : {name : "Take-Two Interactive Software Font", ext : [".fnt"], magic : ["Take-Two Interactive Software Font"], weakMagic : true},
 		telepaintFont                    : {name : "Telepaint Font", ext : [".fnt"], magic : ["Telepaint Font"]},
 		texPackedFont                    : {name : "TeX Packed Font", ext : [".pf"], magic : [/^TeX [Pp]acked font/]},

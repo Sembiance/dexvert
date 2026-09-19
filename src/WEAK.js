@@ -435,10 +435,10 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
 	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
-	//		BOB_FILE, PRS, HDD, PHK_PAK, DDV_MOIR, ASF_SCHI, BIG_SCHL
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, ASF_SCHI, BIG_SCHL
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC
-	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, UOP_MYP
+	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, UOP_MYP, HDD
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -2471,6 +2471,7 @@ export const WEAK_VALUES =
 	/^Master Tracker module/,
 	/^Mathematical Markup Language$/,
 	/^Mathematical Programming System format$/,
+	/^MathVISION REXX script$/,
 	/^Mech Commander game data archive$/,
 	/^Mechwarrior FIT data$/,
 	/^MEGA data format$/,
@@ -2522,6 +2523,7 @@ export const WEAK_VALUES =
 	/^Name Maker Studio Name$/,
 	/^Nastran input data$/,
 	/^Navitel/,
+	/^NComm Rexx script$/,
 	/^Neko bytecode$/,
 	/^NEOchrome Master bitmap$/,	// Many IFF ILBM files share the same keywords
 	/^NeoDraw Palette$/,

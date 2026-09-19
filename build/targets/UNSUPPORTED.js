@@ -11,7 +11,6 @@ export default async function UNSUPPORTED(xlog)
 	
 	const unsupportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => format.unsupported));
 
-	xlog.info`Writing UNSUPPORTED.md to disk...`;
 	await fileUtil.writeTextFile(path.join(import.meta.dirname, "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>

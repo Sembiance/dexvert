@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,976)
+# Unsupported File Formats (3,978)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (262)
+## Archive (263)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -87,6 +87,7 @@ Family/Format | Name | Extensions | Notes
 [archive/dreamloadFileArchiveImage](https://discmaster.textfiles.com/search?format=dreamloadFileArchiveImage) | Dreamload File Archive image | .dfi | 
 [archive/dryArchiveData](https://discmaster.textfiles.com/search?format=dryArchiveData) | DRY archive data | .dry | 
 [archive/dshieldProtected](https://discmaster.textfiles.com/search?format=dshieldProtected) | DSHIELD Protected | .exe | 
+[archive/emu3Filesystem](https://discmaster.textfiles.com/search?format=emu3Filesystem) | E-Mu III Filesystem |  | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?format=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?format=emmaCompress) | EmmaCompress |  | 
 [archive/emtcopyDiskImage](https://discmaster.textfiles.com/search?format=emtcopyDiskImage) | EMTCOPY disk image | .emt | 
@@ -600,7 +601,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (121)
+## Font (122)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?format=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -703,6 +704,7 @@ Family/Format | Name | Extensions | Notes
 [font/saxonPublisherFont](https://discmaster.textfiles.com/search?format=saxonPublisherFont) | Saxon Publisher Font | .sxf .sx | 
 [font/signum3CompressedFont](https://discmaster.textfiles.com/search?format=signum3CompressedFont) | Signum! 3 Compressed Font | .s01 .24n .9p .30l | 
 [font/signumPrinterFont](https://discmaster.textfiles.com/search?format=signumPrinterFont) | Signum! Printer Font | .p24 .p9 .l30 | 
+[font/softLogikBitmapFont](https://discmaster.textfiles.com/search?format=softLogikBitmapFont) | Soft-Logik bitmap Font | .fm .14h .12h .18h .24h .36h .10h .14i .dmf .psf | 
 [font/speedo](https://discmaster.textfiles.com/search?format=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 [font/takeTwoInteractiveSoftwareFont](https://discmaster.textfiles.com/search?format=takeTwoInteractiveSoftwareFont) | Take-Two Interactive Software Font | .fnt | 
 [font/telepaintFont](https://discmaster.textfiles.com/search?format=telepaintFont) | Telepaint Font | .fnt | 

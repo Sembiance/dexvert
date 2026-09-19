@@ -23,7 +23,6 @@ export default async function SUPPORTED(xlog)
 
 	const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 
-	xlog.info`Writing SUPPORTED.md to disk...`;
 	await fileUtil.writeTextFile(path.join(import.meta.dirname, "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
@@ -60,7 +59,7 @@ ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sort
 			converters = converters.map(converter => (typeof converter==="function" ? converter(dexState) : converter));
 			converters = converters.map(converter => converter.split("->")[0].trim().split("[")[0].trim());	// get rid of chains
 			converters = converters.flatMap(converter => converter.split("&").map(v => v.trim())).unique();	// expand out those that call multiple programs at once and remove duplicates (image/fig (XFig) for example)
-			converters = converters.map(programid => (programs[programid] ? (programs[programid].website ? `[${programid}](${programs[programid].website})` : programid) : programid));
+			converters = converters.map(programid => (programs[programid]?.website ? `[${programid}](${programs[programid].website})` : programid));
 		}
 		
 		const noteText = (f.notes || "").replaceAll("\n", " ").trim();
@@ -71,7 +70,6 @@ ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sort
 `)).join("\n")}
 `);
 
-	xlog.info`Cleaning up...`;
 	await fileUtil.unlink(DUMMY_FILE_PATH);
 	await fileUtil.unlink(DUMMY_DIR_PATH);
 }

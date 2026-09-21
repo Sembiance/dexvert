@@ -6,5 +6,6 @@ export class tiareGRA extends Format
 	ext            = [".gra"];
 	forbidExtMatch = true;
 	magic          = ["image:Tiare.GraFormat"];
+	weakMagic      = true;	// converter will convert almost anything
 	converters     = ["GARbro[types:image:Tiare.GraFormat]"];
 }

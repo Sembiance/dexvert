@@ -63,6 +63,7 @@
   Can give it code to existing converters to 'learn' about particular formats
   Then handle the "unsupported" fonts. Search dexvert for "unsupported" in src/format/font/
   Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
+  Add support for NFNT and FOND mac resources: https://discmaster.textfiles.com/browse/46647/GA2%2033%20-%202ad31mtj.img/%E2%80%A2Fonts/Rubino%20Sans%20ICG/Rubino%20Sans%20ICG.rsrc
 
 * Add support for "database" (as a new family), converting various databases into sqlite3 databases
   * First task is to add sqlite3 support to dexvert.

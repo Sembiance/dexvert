@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,978)
+# Unsupported File Formats (3,980)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (263)
+## Archive (264)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -158,6 +158,7 @@ Family/Format | Name | Extensions | Notes
 [archive/mskn2Archive](https://discmaster.textfiles.com/search?format=mskn2Archive) | MSKN 2 Archive | .mskn | 
 [archive/msxCassetteTape](https://discmaster.textfiles.com/search?format=msxCassetteTape) | MSX Cassette Tape | .cas | 
 [archive/multiMediaFusionApplication](https://discmaster.textfiles.com/search?format=multiMediaFusionApplication) | MultiMedia Fusion Application | .mfa | 
+[archive/namcoAllStarsGameDataArchive](https://discmaster.textfiles.com/search?format=namcoAllStarsGameDataArchive) | Namco All-Stars game data archive | .pak | 
 [archive/neoLitePacked](https://discmaster.textfiles.com/search?format=neoLitePacked) | NeoLite Packed |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/neoLitePacked/) - Tried (see sandbox/app): RL!dePacker 1.4 & Neo-Executable-Decompressor & neolte20.zip
 [archive/neophyteGameDataArchive](https://discmaster.textfiles.com/search?format=neophyteGameDataArchive) | Neophyte game data archive | .stuff | 
 [archive/nortonBackupFile](https://discmaster.textfiles.com/search?format=nortonBackupFile) | Norton Backup file | .001 | 
@@ -1097,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,798)
+## Other (2,799)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -3749,6 +3750,7 @@ Family/Format | Name | Extensions | Notes
 [other/whoFramedRogerRabbitMenu](https://discmaster.textfiles.com/search?format=whoFramedRogerRabbitMenu) | Who Framed Roger Rabbit Menu | .mnu | 
 [other/wiScanLog](https://discmaster.textfiles.com/search?format=wiScanLog) | wi-scan log | .std .sum .txt | 
 [other/wiiTPLImagesContainer](https://discmaster.textfiles.com/search?format=wiiTPLImagesContainer) | Wii TPL images container | .tpl | 
+[other/willMaker5Project](https://discmaster.textfiles.com/search?format=willMaker5Project) | WillMaker 5 project | .ww5 | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?format=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 
 [other/winampEQLibrary](https://discmaster.textfiles.com/search?format=winampEQLibrary) | Winamp EQ library |  | 
 [other/winAPEPOKFormat](https://discmaster.textfiles.com/search?format=winAPEPOKFormat) | WinAPE POK format | .wps .pok | 

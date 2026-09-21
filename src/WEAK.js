@@ -233,6 +233,7 @@ export const WEAK_VALUES =
 	/^Archive: SHP\(v2\.0 \[1995]\)$/,
 	/^Archive: Unity\/Unity Asset/,
 	/^Archive: XFL game resource file/,
+	/^Archive: Unity\/UnityRaw/,
 	/^Format: Amiga loadable file$/,
 	/^Format: Arobas Music Guitar Pro Soundbank\(6\.x\)$/,
 	/^Format: AutoIt$/,
@@ -240,7 +241,7 @@ export const WEAK_VALUES =
 	/^Format: CFBF/,
 	/^Format: COFF Library \(\.LIB\)/,
 	/^Format: Collision Data$/,
-	/^Format: CTRK$/,
+	/^Format: CTRK/,
 	/^Format: dBase Database \(\.DBF\)/,
 	/^Format: empty file$/,
 	/^Format: GPG$/,
@@ -317,9 +318,9 @@ export const WEAK_VALUES =
 
 	// ffmpeg/ffprobeID librempeg
 	// SEEN ONCE:
-	//		Sega Dreamcast KAT (kat), PS2 SMPL (smpl)
+	//		Sega Dreamcast KAT (kat)
 	// SEEN TWICE:
-	//		???
+	//		PS2 SMPL (smpl)
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
 	/^AGSC Bank \(Metroid Prime 1\/2 GC\) \(agsc\)$/,
@@ -434,11 +435,11 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
-	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, ASF_SCHI, BIG_SCHL
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL, 001_TCLF
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, ASF_SCHI, BIG_SCHL, RSR_RSRC
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, SFX_DSFX, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC
-	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, UOP_MYP, HDD
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC
+	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, HDD
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -520,6 +521,7 @@ export const WEAK_VALUES =
 	/^geArchive: SCH_SND( |$)/,
 	/^geArchive: SHD( |$)/,
 	/^geArchive: SFS_AAMVHFSS( |$)/,
+	/^geArchive: SFX_DSFX( |$)/,
 	/^geArchive: SLV_DATA( |$)/,
 	/^geArchive: SND_SND2( |$)/,
 	/^geArchive: SOL_DISK( |$)/,
@@ -527,6 +529,7 @@ export const WEAK_VALUES =
 	/^geArchive: TXD_2( |$)/,
 	/^geArchive: U_Generic( |$)/,
 	/^geArchive: UE\d_(Generic|\d)( |$)/,
+	/^geArchive: UOP_MYP( |$)/,
 	/^geArchive: VOL_VOL_3( |$)/,
 	/^geArchive: W32_ESPX( |$)/,
 	/^geArchive: WBK_WAVEBK11( |$)/,
@@ -615,7 +618,7 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, BMF, CMP
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, BMF, CMP, HPA
 	// SEEN TWICE:
 	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug)
 	/^idarc: 777( |$)/,
@@ -654,7 +657,7 @@ export const WEAK_VALUES =
 
 	// nconvertID
 	// SEEN  ONCE:
-	//		byusir
+	//		byusir, aurora
 	// SEEN TWICE:
 	//		???
 	/^ADEX :adex:$/,
@@ -693,6 +696,10 @@ export const WEAK_VALUES =
 	/^soxi: mpc2k$/,
 
 	// xdgMime
+	// SEEN  ONCE:
+	//		audio/x-mtm
+	// SEEN TWICE:
+	//		???
 	/^application\/buildstream\+yaml$/,
 	/^application\/its\+xml$/,
 	/^application\/mathematica$/,

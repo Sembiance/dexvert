@@ -15,4 +15,4 @@ dra testMany.js --format=document	# 25m 46s
 dra testMany.js --format=image		# 42m 58s
 dra testMany.js --format=archive	# 43m 10s
 
-# dra testMany.js --format=all  #  2h 55m 10s
+# dra testMany.js --format=all  #  2h 59m 10s

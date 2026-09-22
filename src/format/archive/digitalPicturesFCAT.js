@@ -6,6 +6,6 @@ export class digitalPicturesFCAT extends Format
 	ext            = [".gam"];
 	forbidExtMatch = true;
 	magic          = ["Digital Pictures FCAT"];
-	converters     = ["na_game_tool_extract[format:blah]"];
+	converters     = ["na_game_tool_extract[format:fcat]"];
 }
 

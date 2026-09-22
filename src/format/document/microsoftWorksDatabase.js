@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _MS_WORKS_DB_MAGIC = ["Microsoft Works for DOS DataBase", "Microsoft Works Database", "application/vnd.ms-works"];
+const _MS_WORKS_DB_MAGIC = ["Microsoft Works for DOS DataBase", "Microsoft Works Database"];
 export {_MS_WORKS_DB_MAGIC};
 
 export class microsoftWorksDatabase extends Format

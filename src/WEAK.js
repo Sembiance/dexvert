@@ -717,6 +717,7 @@ export const WEAK_VALUES =
 	/^application\/vnd\.framemaker$/,
 	/^application\/vnd\.microsoft\.portable-executable$/,
 	/^application\/vnd\.ms-excel$/,
+	/^application\/vnd\.ms-works$/,
 	/^application\/vnd\.wordperfect$/,
 	/^application\/wasm$/,
 	/^application\/x-alz$/,

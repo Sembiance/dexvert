@@ -1,0 +1,56 @@
+floppyDiskFile.py - EZ-DisKlone Plus FDF to raw floppy image converter
+
+Usage:
+    python3 floppyDiskFile.py input.fdf output.img
+
+Example:
+    python3 floppyDiskFile.py sample0/43420/UNINVIT1.FDF uninvited.img
+
+Requirements:
+    Python 3.8 or later, standard library only.
+    No pip packages, external executables, 86Box installation/source tree,
+    network connection, or supporting files are needed at runtime.
+    This text file and the tests are optional documentation/development files.
+
+Behavior:
+    Reads the 128-byte FDF header and stored (method 0) or RLE-compressed
+    (method 1) blocks. Checks every block's CRC-16/ARC over its encoded payload.
+    Accepts EOF at a block boundary or a five-byte end-of-data block (0xFF).
+    Preserves decompressed sector bytes in their original order. The output
+    contains no FDF headers, descriptions, checksums, or compression data.
+
+    Determines full disk capacity from the boot sector's BIOS Parameter Block
+    (BPB). Verifies decoded length against the saved cylinder count at FDF
+    offset 0x50. Restores omitted trailing tracks with 0xF6 bytes, the floppy
+    format fill byte used by EZ-DisKlone. For example, a partially saved
+    1.44 MB disk produces a full 1,474,560-byte raw image.
+
+    Existing output files are replaced after the input has been validated.
+    Input and output cannot refer to the same file. Invalid input does not
+    leave a partial output or overwrite an existing destination.
+    Errors are printed to stderr and return exit status 1; success returns 0.
+
+Limitations:
+    Requires a valid DOS-style BPB with a whole number of cylinders, one or
+    two heads, and a capacity of at most 16 MiB. Does not guess disk capacity
+    for images with missing or damaged geometry information.
+    Rejects bad CRCs, truncated records, unknown compression methods, and
+    inconsistent saved cylinder counts. If the saved count is zero, only
+    images containing the full BPB capacity are accepted.
+    The special Windows NT 3.1 beta variant mentioned in 86Box, which needs
+    an extra byte removed from each block, is not supported.
+
+Validation:
+    All 100 supplied samples convert with valid block checksums: 92 images
+    of 1,474,560 bytes, seven of 737,280 bytes, and one of 368,640 bytes.
+    The 14,538 input blocks include both stored and compressed data.
+    Representative outputs of all three sizes are recognized as FAT12.
+    The converter preserves existing boot-sector labels and filesystem flags;
+    it does not repair filesystem inconsistencies reported by disk checkers.
+
+    Run the 17 standard-library regression tests from this directory:
+        python3 -m unittest discover -s tests -v
+
+Format references:
+    http://fileformats.archiveteam.org/wiki/FDF_Image
+    https://github.com/86Box/86Box/blob/master/src/floppy/fdd_img.c

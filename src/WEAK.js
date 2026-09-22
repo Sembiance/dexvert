@@ -387,7 +387,7 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
-	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:FVP.Bin2Opener, archive:Ffa.JDatOpener
+	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener
 	// SEEN TWICE:
 	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Cri.SpcOpener, archive:Dogenzaka.BinOpener
 	/^archive:Ail\.DatOpener /,
@@ -436,10 +436,10 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
 	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL, 001_TCLF
-	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, ASF_SCHI, BIG_SCHL, RSR_RSRC
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC
-	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, HDD
+	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, ASF_SCHI, BIG_SCHL
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -493,6 +493,7 @@ export const WEAK_VALUES =
 	/^geArchive: GJD( |$)/,
 	/^geArchive: GME( |$)/,
 	/^geArchive: GUT( |$)/,
+	/^geArchive: HDD( |$)/,
 	/^geArchive: ISO( |$)/,
 	/^geArchive: JFL_2( |$)/,
 	/^geArchive: KDT( |$)/,
@@ -697,7 +698,7 @@ export const WEAK_VALUES =
 
 	// xdgMime
 	// SEEN  ONCE:
-	//		audio/x-mtm
+	//		audio/x-mtm, application/x-spectrum-d80
 	// SEEN TWICE:
 	//		???
 	/^application\/buildstream\+yaml$/,

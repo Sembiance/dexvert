@@ -1,4 +1,4 @@
-Generated on: 2026-09-06
+Generated on: 2026-09-22
 
 /-------\
 | Linux |
@@ -1245,7 +1245,7 @@ extension  type
 .jpx       auto-detected
 
 
->>> deark ::: app-arch/deark-1.7.3_p20260807 ::: https://entropymine.com/deark/
+>>> deark ::: app-arch/deark-1.7.3_p20260920 ::: https://entropymine.com/deark/
 Deark -- Information about supported formats
 
 
@@ -1404,6 +1404,9 @@ Deark -- Information about supported formats
 * CD-I IFF-IMAG (module="cdi_imag") (experimental/incomplete)
   A format used on some CD-i discs.
 
+* CDView encrypted image (module="cdview_enc")
+  - Decrypt to the original format, usually JPEG.
+
 * COKE (Atari Falcon) (*.tg1) (module="coke")
 
 * ColoRIX (*.sc?, etc.) (module="colorix")
@@ -1493,6 +1496,10 @@ Deark -- Information about supported formats
 
 * Esm Software PIX (module="esm_pix")
   - Extract embedded JPEG file.
+
+* EZ-Art Professional .EZA (module="eza")
+  A paint program for Atari ST, by Floppyshop.
+  - File extension must be ".eza" (or use "-m eza").
 
 * Falcon True Color (module="ftc")
 
@@ -1588,6 +1595,7 @@ Deark -- Information about supported formats
 
 * ILBM and related IFF-based images (module="ilbm")
   - Supports ILBM, ACBM, PBM, RGBN, RGB8
+  - Supports MLDF (Mean Streets), if a palette is present
   - Supports 1-8 bit paletted, 24-bit truecolor
   - Supports HAM6, HAM8, Halfbrite
   - Supports color-keyed and bitmask transparency
@@ -2037,7 +2045,6 @@ Deark -- Information about supported formats
    -opt atari:respectpal - Don't ignore a seemingly bad 2-color palette
 
 * VBM (VDC BitMap) (module="vbm")
-  - Version 2 only
 
 * Video Master (.flm/.vid/.vsq) (module="videomaster") (experimental)
   - Minimal support. Extracts the video frames.
@@ -2195,6 +2202,9 @@ in the readme file.)
    -opt arj:reloc[=<n>] : Move the ARJ data, and disable some types of
      security/protection. Use with "-m arj" to convert most any self-extracting
      ARJ archive to plain ARJ.
+
+* ARTIPACK (module="artipack") (experimental)
+  Artisoft "INSTALL.PAK" format.
 
 * ARX (module="arx")
   Variant of LHA. Deark tries to convert it to LHA.
@@ -2461,6 +2471,10 @@ in the readme file.)
 * OS/2 PACK archive (module="os2pack") (experimental)
   - Supports the versions with signatures 0xa5961400, 0xa596140a, 0xa596ffff,
     0xa596feff.
+
+* OS/2 PACK2 archive (module="os2pack2") (experimental)
+  Signature 0xa596fdff. Also known as FTCOMP.
+  - Supports both known variants, "fT19" and "fT21".
 
 * Pack (module="pack")
   Old Unix compressed file format (.z).
@@ -2958,7 +2972,6 @@ is_sfx - Helper module for InstallShield SFX EXE.
 officeart - Microsoft Office Art, etc., for internal use.
 ole1 - Windows OLE1, for internal use.
 olepropset - OLE Property Sets.
-os2pack2 - OS/2 PACK2 ("FTCOMP") compressed archive.
 pegasus_pic2 - Pegasus PIC2/ePIC image.
 rgfx - RGFX Amiga image.
 rm - RealMedia.
@@ -6387,7 +6400,7 @@ tls-zone66           Zone 66 tileset
 tls-zone66-map       Zone 66 Map Tileset
 
 
->>> GARbro ::: app-arch/GARbroserver-1.0.8 ::: https://github.com/shiikwi/GARbro
+>>> GARbro ::: app-arch/GARbroserver-1.0.9 ::: https://github.com/shiikwi/GARbro
 ID                                     Tag                                      Type     R/W   Description                                                          Signature   Extensions
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

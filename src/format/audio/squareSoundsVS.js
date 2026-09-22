@@ -6,6 +6,7 @@ export class squareSoundsVS extends Format
 	ext            = [".vs"];
 	forbidExtMatch = true;
 	magic          = ["Square Sounds VS (vs00)"];
+	weakMagic      = true;
 	metaProvider   = ["ffprobe[libre]"];
 	converters     = ["ffmpeg[libre][format:vs00][outType:mp3]"];
 }

@@ -736,6 +736,7 @@ export default
 		mapleHelpFile                              : {name : "Maple help file", ext : [".mhp"], magic : [/^Maple help file/], weakMagic : true},
 		marcelPrinterDriver                        : {name : "Marcel Printer Driver", ext : [".prd"], magic : ["Marcel Printer Driver"]},
 		marxMenuScript                             : {name : "MarxMenu script", ext : [".mnu", ".inc"], magic : ["MarxMenu script"], weakMagic : true},
+		mathematicaMl                              : {name : "Mathematica .ml", ext : [".ml"], magic : [/^MAthematica .ml file/]},
 		mathematicaNotebook                        : {name : "Mathematica notebook", ext : [".nb", ".nbp", ".ma"], magic : ["Mathematica notebook", "Mathematica for Windows notebook", /^Mathematica notebook/], weakMagic : true},
 		mathCADFont                                : {name : "MathCAD Font", ext : [".mcf"], magic : ["MathCAD Font"], weakMagic : true},
 		mathCADPrinterSettings                     : {name : "MathCAD Printer settings", ext : [".mcp"], magic : ["MathCAD Printer settings"], weakMagic : true},

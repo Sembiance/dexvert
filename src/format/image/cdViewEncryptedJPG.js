@@ -7,5 +7,5 @@ export class cdViewEncryptedJPG extends Format
 	forbidExtMatch = true;
 	magic          = ["CDView Encrypted JPG"];
 	weakMagic      = true;
-	converters     = ["CDView2001"];
+	converters     = ["deark[module:cdview_enc]", "CDView2001"];
 }

@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,980)
+# Unsupported File Formats (3,979)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (264)
+## Archive (262)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -27,7 +27,6 @@ Family/Format | Name | Extensions | Notes
 [archive/apple2DiskImage](https://discmaster.textfiles.com/search?format=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
 [archive/sparseImage](https://discmaster.textfiles.com/search?format=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Only *1* of these on discmaster, so not really worth bothering with, but I could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 [archive/PizazzCompressed](https://discmaster.textfiles.com/search?format=PizazzCompressed) | Application Techniques Pizazz compressed | ~ | 
-[archive/artisoftInstallationPackage](https://discmaster.textfiles.com/search?format=artisoftInstallationPackage) | Artisoft installation Package | .pak | 
 [archive/artsAndLettersClipArtLibrary](https://discmaster.textfiles.com/search?format=artsAndLettersClipArtLibrary) | Arts and Letters Clip Art Library | .yal | 
 [archive/asarElectronArchive](https://discmaster.textfiles.com/search?format=asarElectronArchive) | asar Electron Archive | .asar | 
 [archive/asdgFileSplit](https://discmaster.textfiles.com/search?format=asdgFileSplit) | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
@@ -101,7 +100,6 @@ Family/Format | Name | Extensions | Notes
 [archive/fcdVirtualCDROMFile](https://discmaster.textfiles.com/search?format=fcdVirtualCDROMFile) | FCD Virtual CD-ROM File | .fcd | 
 [archive/finearCompressedData](https://discmaster.textfiles.com/search?format=finearCompressedData) | FINEAR compressed data | _ | 
 [archive/flinkGameDataArchive](https://discmaster.textfiles.com/search?format=flinkGameDataArchive) | Flink game data archive | .wld | 
-[archive/floppyDiskFileImage](https://discmaster.textfiles.com/search?format=floppyDiskFileImage) | Floppy Disk File image | .fdf | 
 [archive/floppyDiskManagerDiskImage](https://discmaster.textfiles.com/search?format=floppyDiskManagerDiskImage) | Floppy Disk Manager disk image | .fdm | [1 sample file](https://sembiance.com/fileFormatSamples/archive/floppyDiskManagerDiskImage/)
 [archive/foxProArchive](https://discmaster.textfiles.com/search?format=foxProArchive) | FoxPro Archive | .pak | 
 [archive/fsgPacked](https://discmaster.textfiles.com/search?format=fsgPacked) | FSG Packed | .exe | 
@@ -1098,7 +1096,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,799)
+## Other (2,800)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1301,6 +1299,7 @@ Family/Format | Name | Extensions | Notes
 [other/aniMouseTutorial](https://discmaster.textfiles.com/search?format=aniMouseTutorial) | AniMouse Tutorial | .sdemo | 
 [other/ansiINCIT378FingerprintsFormat](https://discmaster.textfiles.com/search?format=ansiINCIT378FingerprintsFormat) | ANSI/INCIT 378 fingerprints format (gen) | .dat .fmrpiv | 
 [other/anytimeOrganizerForWindowsData](https://discmaster.textfiles.com/search?format=anytimeOrganizerForWindowsData) | Anytime Organizer for Windows data | .atw .org | 
+[other/aolInstantMessengerBuddyList](https://discmaster.textfiles.com/search?format=aolInstantMessengerBuddyList) | AOL Instant Messenger buddy list | .bag | 
 [other/aolPreferencesOrFilingCabinet](https://discmaster.textfiles.com/search?format=aolPreferencesOrFilingCabinet) | AOL Preferences/Personal Filing Cabinet | .pfc .org | 
 [other/aolThumbnailsIndex](https://discmaster.textfiles.com/search?format=aolThumbnailsIndex) | AOL thumbnails index | .ind | [1 sample file](https://sembiance.com/fileFormatSamples/other/aolThumbnailsIndex/)
 [other/apadanaProject](https://discmaster.textfiles.com/search?format=apadanaProject) | Apadana Project | .apr | 

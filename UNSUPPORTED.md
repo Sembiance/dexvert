@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,979)
+# Unsupported File Formats (3,987)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -728,10 +728,11 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (189)
+## Image (190)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
+[image/threeDWorldStudioMaterial](https://discmaster.textfiles.com/search?format=threeDWorldStudioMaterial) | 3D World Studio material | .stf | 
 [image/abcFlowCharterChart](https://discmaster.textfiles.com/search?format=abcFlowCharterChart) | ABC FlowCharter chart | .af3 | 
 [image/abcSnapGraphixGraph](https://discmaster.textfiles.com/search?format=abcSnapGraphixGraph) | ABC SnapGraphix Graph | .sg | 
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?format=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -1096,7 +1097,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,800)
+## Other (2,806)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1632,6 +1633,10 @@ Family/Format | Name | Extensions | Notes
 [other/cloantoAmigaOSEncryptedROM](https://discmaster.textfiles.com/search?format=cloantoAmigaOSEncryptedROM) | Cloanto Amiga OS encrypted ROM | .rom | 
 [other/cloneCDSubChannelData](https://discmaster.textfiles.com/search?format=cloneCDSubChannelData) | CloneCD CDImage SubChannel Data | .sub | 
 [other/cloneCDLanguageFile](https://discmaster.textfiles.com/search?format=cloneCDLanguageFile) | CloneCD Language File | .lng | 
+[other/closeCombatAZP](https://discmaster.textfiles.com/search?format=closeCombatAZP) | Close Combat AZP | .azp | 
+[other/closeCombatGDG](https://discmaster.textfiles.com/search?format=closeCombatGDG) | Close Combat GDG | .gdg | 
+[other/closeCombatPIX](https://discmaster.textfiles.com/search?format=closeCombatPIX) | Close Combat PIX | .pix | 
+[other/closeCombatSeriesMap](https://discmaster.textfiles.com/search?format=closeCombatSeriesMap) | Close Combat series map | .bgm | 
 [other/cobraAdressPlusFormat](https://discmaster.textfiles.com/search?format=cobraAdressPlusFormat) | Cobra Adress Plus Format | .fme .fmk .fmu .fml .fmb .fmp .fmv .fms | 
 [other/cocktailFileModule](https://discmaster.textfiles.com/search?format=cocktailFileModule) | Cocktail File Module |  | 
 [other/codesysLibrary](https://discmaster.textfiles.com/search?format=codesysLibrary) | CODESYS Library | .lib .lb6 .lbx | 
@@ -2132,6 +2137,7 @@ Family/Format | Name | Extensions | Notes
 [other/ghostReconEngineCharacterModel](https://discmaster.textfiles.com/search?format=ghostReconEngineCharacterModel) | Ghost Recon Engine Character model | .chr | 
 [other/ghostReconEngineMap](https://discmaster.textfiles.com/search?format=ghostReconEngineMap) | Ghost Recon Engine Map | .map | 
 [other/ghostReconEngineModel](https://discmaster.textfiles.com/search?format=ghostReconEngineModel) | Ghost Recon Engine model | .qob | 
+[other/ghostReconEngineMotionData](https://discmaster.textfiles.com/search?format=ghostReconEngineMotionData) | Ghost Recon Engine Motion data | .bmf | 
 [other/ghostReconEnginePersistentModel](https://discmaster.textfiles.com/search?format=ghostReconEnginePersistentModel) | Ghost Recon Engine Persistent model | .pob | 
 [other/gizmozCalendarData](https://discmaster.textfiles.com/search?format=gizmozCalendarData) | Gizmoz Calendar data |  | 
 [other/gizmozRollodexData](https://discmaster.textfiles.com/search?format=gizmozRollodexData) | Gizmoz Rollodex data |  | 
@@ -2561,6 +2567,7 @@ Family/Format | Name | Extensions | Notes
 [other/mcAfeeAVPatternUpdate](https://discmaster.textfiles.com/search?format=mcAfeeAVPatternUpdate) | McAfee AV Pattern update | .gem | 
 [other/mcAfeeVirusScanData](https://discmaster.textfiles.com/search?format=mcAfeeVirusScanData) | McAfee VirusScan data | .dat | 
 [other/mcAfeeVShieldData](https://discmaster.textfiles.com/search?format=mcAfeeVShieldData) | McAfee VShield data | .dat | 
+[other/mckoiSQLDatabaseStorageContainer](https://discmaster.textfiles.com/search?format=mckoiSQLDatabaseStorageContainer) | Mckoi SQL Database storage container | .koi | 
 [other/mdiffPatchFile](https://discmaster.textfiles.com/search?format=mdiffPatchFile) | MDIFF Patch File | .mdf | 
 [other/mealMasterPrinterDefinition](https://discmaster.textfiles.com/search?format=mealMasterPrinterDefinition) | Meal-Master Printer definition | .mmp | 
 [other/mECCDataContainer](https://discmaster.textfiles.com/search?format=mECCDataContainer) | MECC data Container | .mcl | 
@@ -3902,13 +3909,14 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (93)
+## Poly (94)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalObject](https://discmaster.textfiles.com/search?format=threeDProfessionalObject) | 3-D Professional object |  | 
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?format=threeDProfessionalScene) | 3-D Professional Scene |  | 
 [poly/threeDDGFModel](https://discmaster.textfiles.com/search?format=threeDDGFModel) | 3D Dgf Model | .dgf .3dgfo | 
 [poly/threeDStudioLoftObject](https://discmaster.textfiles.com/search?format=threeDStudioLoftObject) | 3D Studio Loft Object | .lft | 
+[poly/threeDWorldStudioMesh](https://discmaster.textfiles.com/search?format=threeDWorldStudioMesh) | 3D World Studio mesh | .smf | 
 [poly/threeDWorldStudioModel](https://discmaster.textfiles.com/search?format=threeDWorldStudioModel) | 3D World Studio model | .3dw | 
 [poly/threeDXMLFile](https://discmaster.textfiles.com/search?format=threeDXMLFile) | 3D XML file | .3dxml | 
 [poly/threeDCoreObjDef](https://discmaster.textfiles.com/search?format=threeDCoreObjDef) | 3D_Core ObjDef | .data | 

@@ -101,6 +101,7 @@
 	  After ALL done, search for "microangelo" with the genre pre-selected and respond to: https://c.im/@rootcompute/117248323730596903
 	- Possible various other "text" formats should be sqlite?
 	- Make a news about full support for database files
+	- Search unsupported.js for "database" or "db" or "sql"
 
 * The output files from allegroPackfile could be further converted and improved based on data: https://liballeg.org/stabledocs/en/datafile.html
   After reprocess: https://discmaster.textfiles.com/search?format=allegroPackfile

@@ -434,12 +434,12 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, WSAD_WLD3, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL, 001_TCLF
-	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC
+	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC
-	//		BIG, BNK, BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, ASF_SCHI, BIG_SCHL
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC, WSAD_WLD3
+	//		BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, ASF_SCHI, BIG_SCHL
 	/^geArchive: 0000?_(5|PCW|package)( |$)/,
 	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -463,9 +463,11 @@ export const WEAK_VALUES =
 	/^geArchive: BANK_QL( |$)/,
 	/^geArchive: BBA_BAF( |$)/,
 	/^geArchive: BDF( |$)/,
+	/^geArchive: BIG( |$)/,
 	/^geArchive: BIN_P00P( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
+	/^geArchive: BNK( |$)/,
 	/^geArchive: BOX_BOX( |$)/,
 	/^geArchive: BUNDLE_BNDL( |$)/,
 	/^geArchive: CACHE_3( |$)/,
@@ -619,7 +621,7 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, BMF, CMP, HPA
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, BMF, CMP, HPA, Gather
 	// SEEN TWICE:
 	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug)
 	/^idarc: 777( |$)/,
@@ -698,7 +700,7 @@ export const WEAK_VALUES =
 
 	// xdgMime
 	// SEEN  ONCE:
-	//		audio/x-mtm, application/x-spectrum-d80
+	//		audio/x-mtm, application/x-spectrum-d80, application/vnd.apache.parquet, application/x-cif
 	// SEEN TWICE:
 	//		???
 	/^application\/buildstream\+yaml$/,
@@ -898,7 +900,6 @@ export const WEAK_VALUES =
 	/^ASCII font (bits|metrics)/,
 	/^ASCII vfont/,
 	/^AVR firmware/,
-	/^assembler source/,
 	/^b\.out/,
 	/^Bagpipe$/,
 	/^Bagpipe, /,
@@ -2548,6 +2549,7 @@ export const WEAK_VALUES =
 	/^Nintendo 3DS container format \(generic\)$/,
 	/^Nintendo Binary Revolution SEQuence$/,
 	/^Nintendo compressed disk image$/,
+	/^Nintendo Chord Information Table$/,
 	/^Nintendo (Yay0|Yaz0) compressed data$/,
 	/^Nitro game data archive$/,
 	/^NTFS INDX data$/,

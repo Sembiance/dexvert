@@ -6,5 +6,6 @@ export class killSwitchDAT extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	magic          = [/^geArchive: DAT_100( |$)/];
+	weakMagic      = true;
 	converters     = ["gameextractor[codes:DAT_100]"];
 }

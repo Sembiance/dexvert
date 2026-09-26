@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class projectAftermathDAT extends Format
@@ -6,6 +7,7 @@ export class projectAftermathDAT extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	magic          = [/^geArchive: DAT_46( |$)/];
+	idCheck        = inputFile => inputFile.size>(xu.KB*4);
 	priority       = this.PRIORITY.LOW;
 	converters     = ["gameextractor[codes:DAT_46]"];
 }

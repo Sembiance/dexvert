@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 import {TEXT_MAGIC} from "../../Detection.js";
 import {fileUtil} from "xutil";
@@ -13,7 +14,7 @@ export class qrt extends Format
 	converters     = ["qrttoppm"];	// nconvert and tomsViewer also handle these, but they will take almost anything and produce garbage. qrttoppm does some sanity checks at least snce we don't have magic for this
 	verify         = async ({inputFile, meta}) =>
 	{
-		if(inputFile.size<6)
+		if(inputFile.size<6 || inputFile.size>xu.MB)
 			return false;
 
 		// Since this format has no magic and can match against .raw extension and convert garbage, we need to do some sanity checks
@@ -21,7 +22,7 @@ export class qrt extends Format
 			return false;
 
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 6);
-		if(meta.width!==header.getUInt16LE(0) || meta.height!==header.getUInt16LE(2) || header.getUInt16LE(4)!==0)
+		if(meta.width!==header.getUInt16LE(0) || meta.height!==header.getUInt16LE(2) || header.getUInt16LE(4)!==0)	// eslint-disable-line unicorn/prefer-boolean-return
 			return false;
 
 		return true;

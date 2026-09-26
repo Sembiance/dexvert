@@ -307,9 +307,9 @@ export const WEAK_VALUES =
 
 	// dragonUnpackerID
 	// SEEN  ONCE:
-	//		???, ???
+	//		???
 	// SEEN TWICE:
-	//		???, ???
+	//		???
 	/^dragon: DNI /,
 	/^dragon: FPK /,	// multi-versioned, so it detects as FPK but must pass like FPK4. This produces garbage though on non FPK4 archives. gameextractor handles these fine and much better, see sidMeiserFPK
 	/^dragon: GTEX /,
@@ -320,7 +320,7 @@ export const WEAK_VALUES =
 	// SEEN ONCE:
 	//		Sega Dreamcast KAT (kat)
 	// SEEN TWICE:
-	//		PS2 SMPL (smpl)
+	//		???
 	/^3DO PONA \(pona\)$/,
 	/^ADP \(adp\)$/,
 	/^AGSC Bank \(Metroid Prime 1\/2 GC\) \(agsc\)$/,
@@ -358,6 +358,7 @@ export const WEAK_VALUES =
 	/^Nullsoft Streaming Video \(nsv\)$/,
 	/^Ogg \(ogg\)$/,
 	/^PJS \(Phoenix Japanimation Society\) subtitles \(pjs\)$/,
+	/^PS2 SMPL \(smpl\)$/,
 	/^piped (gem|jpeg|tiff) sequence \((gem|jpeg|tiff)_pipe\)$/,
 	/^QuickTime \/ MacBinary \(macbinary\)$/,	// librempeg
 	/^QuickTime \/ MOV \(mov,mp4,m4a,3gp,3g2,mj2\)$/,
@@ -387,15 +388,18 @@ export const WEAK_VALUES =
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
-	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener
+	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
+	//		archive:Kid.DATRAWOpener
 	// SEEN TWICE:
-	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Cri.SpcOpener, archive:Dogenzaka.BinOpener
+	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
 	/^archive:Broccoli\.MpegVideoOpener /,
 	/^archive:CandySoft\.FpkOpener /,
 	/^archive:Circus\.DatOpener /,
+	/^archive:Cri\.SpcOpener /,
+	/^archive:Dogenzaka\.BinOpener /,
 	/^archive:Dogenzaka\.GamedatOpener /,
 	/^archive:Electriciteit\.DatOpener /,
 	/^archive:FrontWing\.DatOpener /,
@@ -434,21 +438,19 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		WAV, WAV_2, RAW_MHWANH, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, ANI, SAR_SARC, DSK_SPIS, ARC_4, DAT_CMP, 000_8, HNK, GLB, RDBDATA_RDB0
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, SPR_3, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
-	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF
+	// 		WAV, WAV_2, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB, RDBDATA_RDB0
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, WIN_FORM, ZBD_2, FTR_MFIL
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, 000_10, PAK_50, SMA_SMA, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, SND_3, PAC_DPAC, WSAD_WLD3
-	//		BIN_LINK, BIN_LINK_2, BIN_7L, DSRES_DSIGTANK, SHP_110, ARC_A20, ASF_SCHI, BIG_SCHL
-	/^geArchive: 0000?_(5|PCW|package)( |$)/,
-	/^geArchive: ARC_(6|8|10|11|13|ARC)( |$)/,
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, PAC_DPAC, WSAD_WLD3
+	//		BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, SPR_3, ARC_4, ANI, RAW_MHWANH, GSC_NU20_2, HNK
+	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
+	/^geArchive: ARC_(6|8|10|11|13|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
 	/^geArchive: DAT_(11|42|48|53|57|DG|RES|PAK)( |$)/,
 	/^geArchive: IMG(_(4|LINK|DAVILEX_2))?( |$)/,
-	/^geArchive: PAK_(7|11|30|41|42|49|DATA|FORM)( |$)/,
-	/^geArchive: PAK_PAK_2( |$)/,
-	/^geArchive: PAK_PACK_[26]( |$)/,
+	/^geArchive: PAK_(7|11|30|41|42|49|50|DATA|FORM|PAK_2|PACK_[26])( |$)/,
 	/^geArchive: PCK_([256]|PACK)( |$)/,
 	/^geArchive: PCK5( |$)/,
 	/^geArchive: WAD_([48]|WAD)( |$)/,
@@ -459,11 +461,13 @@ export const WEAK_VALUES =
 	/^geArchive: AR_DAVE( |$)/,
 	/^geArchive: ARF_AR( |$)/,
 	/^geArchive: AQA( |$)/,
+	/^geArchive: ASF_SCHI( |$)/,
 	/^geArchive: ASNCDAT( |$)/,
 	/^geArchive: BANK_QL( |$)/,
 	/^geArchive: BBA_BAF( |$)/,
 	/^geArchive: BDF( |$)/,
 	/^geArchive: BIG( |$)/,
+	/^geArchive: BIG_SCHL( |$)/,
 	/^geArchive: BIN_P00P( |$)/,
 	/^geArchive: BKF_2( |$)/,
 	/^geArchive: BKS( |$)/,
@@ -486,6 +490,7 @@ export const WEAK_VALUES =
 	/^geArchive: DBS( |$)/,
 	/^geArchive: DNI_DIRT( |$)/,
 	/^geArchive: DTA(_DTA)?( |$)/,
+	/^geArchive: DSRES_DSIGTANK( |$)/,
 	/^geArchive: FBZ_PK( |$)/,
 	/^geArchive: FLA( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
@@ -526,6 +531,8 @@ export const WEAK_VALUES =
 	/^geArchive: SFS_AAMVHFSS( |$)/,
 	/^geArchive: SFX_DSFX( |$)/,
 	/^geArchive: SLV_DATA( |$)/,
+	/^geArchive: SMA_SMA( |$)/,
+	/^geArchive: SND_3( |$)/,
 	/^geArchive: SND_SND2( |$)/,
 	/^geArchive: SOL_DISK( |$)/,
 	/^geArchive: TEXTURE( |$)/,
@@ -621,9 +628,9 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, BMF, CMP, HPA, Gather
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, CMP, HPA, Gather
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug)
+	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -1722,6 +1729,7 @@ export const WEAK_VALUES =
 	/^Nokia Logo Manager bitmap$/,
 	/^NoteCenter encrypted notes$/,
 	/^null bytes$/,
+	/^Oberon data \(generic\)$/,
 	/^Oberon V4 Symbol data$/,
 	/^OCAD map$/,
 	/^OMF - Relocatable Object Module Format$/,
@@ -1733,6 +1741,7 @@ export const WEAK_VALUES =
 	/^Orao Tape image$/,
 	/^Oric Raw Tape format$/,
 	/^Ortho 3D Model$/,
+	/^OS-9 executable module$/,
 	/^OS\/2 Bitmap Graphics Array \(generic\)$/,
 	/^PA-RISC .*/,
 	/^Pack compressed data/,

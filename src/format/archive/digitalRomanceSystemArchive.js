@@ -6,6 +6,7 @@ export class digitalRomanceSystemArchive extends Format
 	name           = "Digital Romance System Archive";
 	ext            = [".dat", ".snr"];
 	forbidExtMatch = true;
+	forbiddenExt   = [".image"];
 	magic          = ["archive:Ikura.DrsOpener"];
 	idCheck        = inputFile => inputFile.size>xu.KB*4;
 	converters     = ["GARbro[types:archive:Ikura.DrsOpener]"];

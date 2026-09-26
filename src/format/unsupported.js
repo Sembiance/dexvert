@@ -1032,7 +1032,8 @@ export default
 	
 	other :
 	{
-		// Game - These actually work with gameextractor but produce game-specific worthless files that can't be converted further at this time
+		// Game - These actually work with gameextractor but produce game-specific worthless files that can't be converted further at this time. Could vibe-code further support for the extracted files
+		aesopEngineResourceData      : {name : "AESOP engine Resource data", ext : [".res"], magic : ["AESOP engine Resource data", /^geArchive: RES_AEPOS( |$)/], weakMagic : true},
 		ageOfMythologySaveOrScenario : {name : "Age of Mythology - Save game or scenario", ext : [".scn", ".svx"], magic : ["Age of Mythology: The Titans save game", "Age of Mythology save game", /^geArchive: AGE3SCN_L33T( |$)/]},
 		albionGameDataArchive        : {name : "Albion game data archive", ext : [".xld"], magic : ["Albion game data archive", /^geArchive: XLD_XLD0( |$)/]},
 		chalkGameDataArchive         : {name : "Chalk game data archive", ext : [".wgm"], magic : ["Chalk game data archive", /^geArchive: WGM_WGM1( |$)/]},
@@ -1040,12 +1041,21 @@ export default
 		closeCombatGDG               : {name : "Close Combat GDG", ext : [".gdg"], magic : [/^geArchive: GDG_GADG( |$)/]},
 		closeCombatPIX               : {name : "Close Combat PIX", ext : [".pix"], magic : [/^geArchive: PIX_PICS( |$)/]},
 		cyclonesGLBArchive           : {name : "Cyclones GLB Archive", ext : [".glb"], magic : [/^geArchive: GLB_GOBJ( |$)/]},
+		descent2PIG                  : {name : "Descent 2 PIG", ext : [".pig"], magic : [/^geArchive: PIG_PPIG( |$)/]},
+		descent2DSND                 : {name : "Descent 2 DSND", ext : [".s11", ".s22"], magic : [/^geArchive: S11_DSND( |$)/]},
+		falloutTacticsMission        : {name : "Fallout Tactics Mission", ext : [".mis"], magic : [/^geArchive: MIS_WORLD( |$)/]},
 		f1ChallengeMAS               : {name : "F1 Challenge MAS", ext : [".mas"], magic : ["F1 Challenge MAS", /^geArchive: MAS_CUBEMAS( |$)/]},
+		gexLEV                       : {name : "GEX LEV", ext : [".lev"], magic : [/^geArchive: LEV( |$)/]},
+		lucasFilmData                : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel", /^geArchive: LFD_RMAP( |$)/]},
+		normalityDAS                 : {name : "Normality DAS", ext : [".das"], magic : [/^geArchive: DAS_DASP( |$)/]},
 		panzersPhase2Map             : {name : "Panzers - Phase 2 Map", ext : [".map"], magic : [/^geArchive: MAP_SR( |$)/]},
+		rockmanX4ARC                 : {name : "Rockman/Mega Man X4 ARC", ext : [".arc"], magic : [/^geArchive: ARC_12( |$)/]},
 		sierraSCI                    : {name : "Sierra SCI", ext : [".000"], magic : [/^geArchive: 000_11( |$)/]},
 		ssiShapesData                : {name : "SSI Shapes data", ext : [".shp"], magic : ["Steel Panthers Shapes data", "SSI Shapes data", /^geArchive: SHP_110( |$)/], weakMagic : true},
-		falloutTacticsMission        : {name : "Fallout Tactics Mission", ext : [".mis"], magic : [/^geArchive: MIS_WORLD( |$)/]},
-
+		valveSourceMap               : {name : "Valve Source Map", ext : [".bsp"], magic : ["Valve Source BSP format", "Valve Source map", /^geArchive: BSP_VBSP( |$)/]},
+		wormsDIR                     : {name : "Worms DIR", ext : [".dir"], magic : [/^geArchive: DIR_DIR( |$)/]},
+		zipperInteractiveZBD         : {name : "Zipper Interactive ZBD", ext : [".zbd"], magic : [/^geArchive: ZBD( |$)/]},
+		
 		//////////
 		// Game //
 		//////////
@@ -1060,7 +1070,6 @@ export default
 		adventureGameStudio                           : {name : "Adventure Game Studio", ext : [".dat"], magic : ["AGS game data"]},
 		adventureGameStudioSavedGame                  : {name : "Adventure Game Studio saved game", magic : ["Adventure Game Studio saved game"]},
 		adventureGameStudioTranslationData            : {name : "Adventure Game Studio Translation data", ext : [".tra"], magic : ["Adventure Game Studio Translation data"], weakMagic : true},
-		aesopEngineResourceData                       : {name : "AESOP engine Resource data", ext : [".res"], magic : ["AESOP engine Resource data"], weakMagic : true},
 		afterlifeSavedGame                            : {name : "Afterlife saved game", magic : ["Afterlife saved game"]},
 		agathaChristieMurderOnTheOrientExpressSave    : {name : "Agatha Christie: Murder on the Orient Express save game", ext : [".ac2"], magic : ["Agatha Christie: Murder on the Orient Express save game"]},
 		ageOfEmpiresScenario                          : {name : "Age of Empires Scenario", ext : [".scn"], magic : ["Age of Empires Scenario"], weakMagic : true},
@@ -1404,7 +1413,6 @@ export default
 		lomaxWorldGameData                            : {name : "Lomax World game data", ext : [".wld"], magic : ["Lomax World game data"]},
 		lostFilesOfSherlockHolmesResourcs             : {name : "The Lost Files of Sherlock Holmes Resources", ext : [".rrm"], magic : ["The Lost Files of Sherlock Holmes Resource data"]},
 		isigMotorMASType1GameDataArchive              : {name : "ISI gMotor MAS type 1 game data archive", ext : [".mas", ".mas_2", ".mas_1", ".mas_3"], magic : ["ISI gMotor MAS type 1 game data archive"]},
-		lucasFilmData                                 : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel"]},
 		lureOfTheTemptressGameDataArchive             : {name : "Lure of the Temptress game data archive", ext : [".vga"], magic : ["Lure of the Temptress game data archive"], weakMagic : true},
 		madden2004DataFile                            : {name : "Madden 2004 data file", ext : [".dat"], magic : ["Madden 2004 data file"]},
 		madeEngineDB                                  : {name : "MADE Engine DB", ext : [".dat"], magic : ["MADE Engine DB"], weakMagic : true},
@@ -1592,6 +1600,7 @@ export default
 		silentHunterWorldData                         : {name : "Silent Hunter World data", ext : [".wld"], magic : ["Silent Hunter World data"], weakMagic : true},
 		silkRoadMesh                                  : {name : "SilkRoad mesh", ext : [".bms"], magic : ["SilkRoad mesh"], weakMagic : true},
 		simCity2000SaveGameData                       : {name : "SimCity 2000 Save Game Data", ext : [".sc", ".sc2"], magic : ["SimCity 2000 save game/map data"]},
+		simCity4ExemplarBinary                        : {name : "SimCity 4 Exemplar Binary", ext : [".ezmp", ".eqzb"], magic : ["SimCity 4 Exemplar (binary)"]},
 		simCity4SavedGame                             : {name : "SimCity 4 Saved game", ext : [".sc4"], magic : ["SimCity 4 Saved game"], weakMagic : true},
 		simLifeAnimal                                 : {name : "SimLife Animal", ext : [".anl"], magic : ["SimLife Animal"]},
 		simulmondoLocalizedGameStrings                : {name : "Simulmondo localized game strings", ext : [".kfr", ".ksp", ".kgr", ".kuk", ".kit"], magic : ["Simulmondo localized game strings"]},
@@ -1717,7 +1726,6 @@ export default
 		utopiaTechnologiesGameDataPackage             : {name : "Utopia Technologies game data package", ext : [".wpr"], magic : ["Utopia Technologies game data package"]},
 		valveParticleStorage                          : {name : "Valve particle storage", ext : [".pcf"], magic : ["Valve particle storage"]},
 		valveSourceEngineClosedCaption                : {name : "Valve Source Engine Closed Caption", ext : [".dat"], magic : ["Valve Source Engine Closed Caption"]},
-		valveSourceMap                                : {name : "Valve Source Map", ext : [".bsp"], magic : ["Valve Source BSP format", "Valve Source map", /^geArchive: BSP_VBSP( |$)/]},
 		vampireTheMasqueradeRedemptionSaveGame        : {name : "Vampire: The Masquerade - Redemption save game", ext : [".nsw"], magic : ["Vampire: The Masquerade - Redemption save game"], weakMagic : true},
 		virtualBusMap                                 : {name : "VirtualBus Map", ext : [".ms1"], magic : ["VirtualBus Map"], weakMagic : true},
 		virtualChess2Game                             : {name : "Virtual Chess 2 game", ext : [".eck"], magic : ["Virtual Chess 2 game"], weakMagic : true},

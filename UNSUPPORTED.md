@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,987)
+# Unsupported File Formats (3,995)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1097,7 +1097,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,806)
+## Other (2,814)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1797,6 +1797,8 @@ Family/Format | Name | Extensions | Notes
 [other/derEncodedData](https://discmaster.textfiles.com/search?format=derEncodedData) | DER Encoded Data | .rsa | 
 [other/deriveForWindows](https://discmaster.textfiles.com/search?format=deriveForWindows) | Derive for Windows | .dfw | 
 [other/descent2AlternativeTextureSet](https://discmaster.textfiles.com/search?format=descent2AlternativeTextureSet) | Descent 2 alternative texture set | .pog | 
+[other/descent2DSND](https://discmaster.textfiles.com/search?format=descent2DSND) | Descent 2 DSND | .s11 .s22 | 
+[other/descent2PIG](https://discmaster.textfiles.com/search?format=descent2PIG) | Descent 2 PIG | .pig | 
 [other/descentGameSave](https://discmaster.textfiles.com/search?format=descentGameSave) | Descent Game Save | .sg0 | 
 [other/descentLevel](https://discmaster.textfiles.com/search?format=descentLevel) | Descent Level | .rdl | 
 [other/descentPlayer](https://discmaster.textfiles.com/search?format=descentPlayer) | Descent Player | .plr | 
@@ -2131,6 +2133,7 @@ Family/Format | Name | Extensions | Notes
 [other/geoWorksGEOSScreenSaver](https://discmaster.textfiles.com/search?format=geoWorksGEOSScreenSaver) | GeoWorks GEOS screen saver | .geo | 
 [other/geoWorksWriterScrapbook](https://discmaster.textfiles.com/search?format=geoWorksWriterScrapbook) | GeoWorks Writer scrapbook | .000 | 
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?format=gettextMachineObject) | Gettext Machine Object | .gmo .mo | 
+[other/gexLEV](https://discmaster.textfiles.com/search?format=gexLEV) | GEX LEV | .lev | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?format=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
 [other/gfxLab24Filter](https://discmaster.textfiles.com/search?format=gfxLab24Filter) | GfxLab24 Filter |  | 
 [other/ghostReconEngineAnimation](https://discmaster.textfiles.com/search?format=ghostReconEngineAnimation) | Ghost Recon Engine Animation | .anm | 
@@ -2810,6 +2813,7 @@ Family/Format | Name | Extensions | Notes
 [other/noLimitsTrack](https://discmaster.textfiles.com/search?format=noLimitsTrack) | NoLimits Track | .nltrack | 
 [other/nomadSaveGame](https://discmaster.textfiles.com/search?format=nomadSaveGame) | Nomad Save game | .sav | 
 [other/nordModularG2Patch](https://discmaster.textfiles.com/search?format=nordModularG2Patch) | Nord Modular G2 Patch | .pch2 | 
+[other/normalityDAS](https://discmaster.textfiles.com/search?format=normalityDAS) | Normality DAS | .das | 
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?format=normalityGameDataArchive) | Normality game data archive | .das | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?format=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
 [other/nortonCommanderConfiguration](https://discmaster.textfiles.com/search?format=nortonCommanderConfiguration) | Norton Commander configuration | .ini | 
@@ -3201,6 +3205,7 @@ Family/Format | Name | Extensions | Notes
 [other/risingLandsWorldData](https://discmaster.textfiles.com/search?format=risingLandsWorldData) | Rising Lands world data | .eta .net | 
 [other/robotArenaBot](https://discmaster.textfiles.com/search?format=robotArenaBot) | Robot Arena bot | .bot | 
 [other/robouldixLevelData](https://discmaster.textfiles.com/search?format=robouldixLevelData) | Robouldix level data |  | 
+[other/rockmanX4ARC](https://discmaster.textfiles.com/search?format=rockmanX4ARC) | Rockman/Mega Man X4 ARC | .arc | 
 [other/rogueTheAdventureGameSavedGame](https://discmaster.textfiles.com/search?format=rogueTheAdventureGameSavedGame) | Rogue: The Adventure Game Saved game | .sav | 
 [other/rolandSMFPlayerLanguage](https://discmaster.textfiles.com/search?format=rolandSMFPlayerLanguage) | Roland SMF Player Language | .rlg | 
 [other/rollerCoasterTycoon2Scenario](https://discmaster.textfiles.com/search?format=rollerCoasterTycoon2Scenario) | RollerCoaster Tycoon 2 scenario | .sc6 | 
@@ -3286,6 +3291,7 @@ Family/Format | Name | Extensions | Notes
 [other/silentHunterWorldData](https://discmaster.textfiles.com/search?format=silentHunterWorldData) | Silent Hunter World data | .wld | 
 [other/silkRoadMesh](https://discmaster.textfiles.com/search?format=silkRoadMesh) | SilkRoad mesh | .bms | 
 [other/simCity2000SaveGameData](https://discmaster.textfiles.com/search?format=simCity2000SaveGameData) | SimCity 2000 Save Game Data | .sc .sc2 | 
+[other/simCity4ExemplarBinary](https://discmaster.textfiles.com/search?format=simCity4ExemplarBinary) | SimCity 4 Exemplar Binary | .ezmp .eqzb | 
 [other/simCity4SavedGame](https://discmaster.textfiles.com/search?format=simCity4SavedGame) | SimCity 4 Saved game | .sc4 | 
 [other/simCityCity](https://discmaster.textfiles.com/search?format=simCityCity) | SimCity City | .cty | 
 [other/simLifeAnimal](https://discmaster.textfiles.com/search?format=simLifeAnimal) | SimLife Animal | .anl | 
@@ -3844,6 +3850,7 @@ Family/Format | Name | Extensions | Notes
 [other/worldConstructionSetObject](https://discmaster.textfiles.com/search?format=worldConstructionSetObject) | World Construction Set Object | .obj | 
 [other/worldConstructionSetParameters](https://discmaster.textfiles.com/search?format=worldConstructionSetParameters) | World Construction Set Parameters | .par | 
 [other/worldMachineDocument](https://discmaster.textfiles.com/search?format=worldMachineDocument) | WorldMachine document | .tmd | 
+[other/wormsDIR](https://discmaster.textfiles.com/search?format=wormsDIR) | Worms DIR | .dir | 
 [other/wpSpellDictionary](https://discmaster.textfiles.com/search?format=wpSpellDictionary) | WPSpell Dictionary |  | 
 [other/wreckinCrewLevelMap](https://discmaster.textfiles.com/search?format=wreckinCrewLevelMap) | Wreckin Crew level Map | .map | 
 [other/wsusPatchStorageFile](https://discmaster.textfiles.com/search?format=wsusPatchStorageFile) | WSUS Patch Storage File | .psf .p | 
@@ -3896,6 +3903,7 @@ Family/Format | Name | Extensions | Notes
 [other/zeldaClassicQuest](https://discmaster.textfiles.com/search?format=zeldaClassicQuest) | Zelda Classic Quest | .qst | 
 [other/zeroXBeatSlicerGroove](https://discmaster.textfiles.com/search?format=zeroXBeatSlicerGroove) | Zero-X BeatSlicer Groove | .zgr | 
 [other/zickyZicksMilkcapsGameData](https://discmaster.textfiles.com/search?format=zickyZicksMilkcapsGameData) | Zicky Zick's Milkcaps game data | .tub | 
+[other/zipperInteractiveZBD](https://discmaster.textfiles.com/search?format=zipperInteractiveZBD) | Zipper Interactive ZBD | .zbd | 
 [other/zmcVisualTabletData](https://discmaster.textfiles.com/search?format=zmcVisualTabletData) | ZMC VisualTablet data | .ekb | 
 [other/zodbFileStorage](https://discmaster.textfiles.com/search?format=zodbFileStorage) | ZODB File Storage | .fs | 
 [other/zonerDraw](https://discmaster.textfiles.com/search?format=zonerDraw) | Zoner Draw | .zmf | 

@@ -1,4 +1,4 @@
-# Unsupported File Formats (3,995)
+# Unsupported File Formats (3,999)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1097,11 +1097,10 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,814)
+## Other (2,818)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
-[other/theSimsObject](https://discmaster.textfiles.com/search?format=theSimsObject) | "The Sims" object | .flr .wll .iff | 
 [other/zeroOneZeroEditorBookmark](https://discmaster.textfiles.com/search?format=zeroOneZeroEditorBookmark) | 010 Editor bookmark | .1bk | 
 [other/oneDirPlusData](https://discmaster.textfiles.com/search?format=oneDirPlusData) | 1dir+ data | .1dr .1dl | 
 [other/oneDirPlusHelp](https://discmaster.textfiles.com/search?format=oneDirPlusHelp) | 1dir+ Help | .hlp .hll | 
@@ -2379,7 +2378,11 @@ Family/Format | Name | Extensions | Notes
 [other/kasperskyAntiVirusDatabase](https://discmaster.textfiles.com/search?format=kasperskyAntiVirusDatabase) | Kaspersky Anti-virus data base | .avc | 
 [other/kasperskyAntiVirusSignatureBases](https://discmaster.textfiles.com/search?format=kasperskyAntiVirusSignatureBases) | Kaspersky Anti-Virus signature bases | .kdc | 
 [other/kasperskyAntiVirusUpdateDiff](https://discmaster.textfiles.com/search?format=kasperskyAntiVirusUpdateDiff) | Kaspersky Anti-Virus update diff | .dif | 
+[other/kasperskyAntiVirusUpdateModule](https://discmaster.textfiles.com/search?format=kasperskyAntiVirusUpdateModule) | Kaspersky Anti-Virus update module | .krg | 
+[other/kasperskyAntiVirusUpdateVerification](https://discmaster.textfiles.com/search?format=kasperskyAntiVirusUpdateVerification) | Kaspersky Anti-Virus update verification | .pbv | 
+[other/kasperskyKFBContainer](https://discmaster.textfiles.com/search?format=kasperskyKFBContainer) | Kaspersky KFB container | .kfb | 
 [other/kasperskyLabBlackListFile](https://discmaster.textfiles.com/search?format=kasperskyLabBlackListFile) | Kaspersky Lab black list file | .lst | 
+[other/kasperskyLabData](https://discmaster.textfiles.com/search?format=kasperskyLabData) | Kaspersky Lab Data | .dat .dt | 
 [other/kasperskyLabKeyFile](https://discmaster.textfiles.com/search?format=kasperskyLabKeyFile) | Kaspersky Lab Key file | .key | 
 [other/kbdMapFile](https://discmaster.textfiles.com/search?format=kbdMapFile) | kbd map file |  | 
 [other/keaColoringBookPage](https://discmaster.textfiles.com/search?format=keaColoringBookPage) | Kea Coloring Book page | .kcx | 
@@ -3718,6 +3721,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?format=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 
 [other/visualSourceSafeControlFile](https://discmaster.textfiles.com/search?format=visualSourceSafeControlFile) | Visual SourceSafe Control File | .scc | [1 sample file](https://sembiance.com/fileFormatSamples/other/visualSourceSafeControlFile/)
 [other/visualToolsVTSpellDictionary](https://discmaster.textfiles.com/search?format=visualToolsVTSpellDictionary) | VisualTools VT Spell Dictionary | .vtd .vt | 
+[other/vivadoDesignCheckpointNetlist](https://discmaster.textfiles.com/search?format=vivadoDesignCheckpointNetlist) | Vivado Design Checkpoint internal netlist/design data |  | 
 [other/vizastarSpreadsheet](https://discmaster.textfiles.com/search?format=vizastarSpreadsheet) | Vizastar spreadsheet | .wks .seq | 
 [other/vmWareNVRAM](https://discmaster.textfiles.com/search?format=vmWareNVRAM) | VMware NVRAM | .nvram | 
 [other/vocalEyesHelp](https://discmaster.textfiles.com/search?format=vocalEyesHelp) | Vocal-Eyes Help | .hlp | 

@@ -1165,6 +1165,7 @@ export default
 		xilinxASCIIBitstream                       : {name : "Xilinx ASCII Bitstream", ext : [".rbt"], magic : ["Xilinx ASCII Bitstream"], weakMagic : true},
 		xilinxBlockMemoryMap                       : {name : "Xilinx Block Memory Map", ext : [".bmm"], magic : ["Xilinx Block Memory Map"], weakMagic : true},
 		xilinxCoreGeneratorSystemProject           : {name : "Xilinx Core Generator System Project", ext : [".cgp"], magic : ["Xilinx Core Generator System Project"], weakMagic : true},
+		xilinxInstantiationTemplate                : {name : "Xilinx instantiation template", ext : [".vho"], magic : ["Xilinx instantiation template"]},
 		xilinxIntegratedSoftwareEnvironmentProject : {name : "Xilinx Integrated Software Environment Project", ext : [".npl"], magic : ["Xilinx Integrated Software Environment Project"], weakMagic : true},
 		xilinxNetlist                              : {name : "Xilinx Netlist", ext : [".ngc", ".ngd", ".ncd", ".ngm", ".ngr"], magic : ["Xilinx Netlist"]},
 		xmcdCDInformation                          : {name : "XMCD CD information", ext : [".db", ".z", ".xmcd"], magic : [/^xmcd database file/, /^CDDB\(tm\) format CD text data/, "XMCD CD information", "text/xmcd"]},

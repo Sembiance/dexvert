@@ -389,7 +389,7 @@ export const WEAK_VALUES =
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener
 	// SEEN TWICE:
 	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
@@ -438,14 +438,15 @@ export const WEAK_VALUES =
 
 	// gameextractor
 	// SEEN  ONCE:
-	// 		WAV, WAV_2, FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB, RDBDATA_RDB0
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP, FUK_XV4, SKX_SKEX, GOB_STBL
-	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, WIN_FORM, ZBD_2, FTR_MFIL
+	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB
+	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, WIN_FORM
+	//		ZBD_2, FTR_MFIL, LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, DWX_DELPHIXWAVE
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, PAC_DPAC, WSAD_WLD3
-	//		BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, SPR_3, ARC_4, ANI, RAW_MHWANH, GSC_NU20_2, HNK
+	//		WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, SPR_3, ANI, RAW_MHWANH, GSC_NU20_2, HNK
 	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
-	/^geArchive: ARC_(6|8|10|11|13|A20|ARC)( |$)/,
+	/^geArchive: ARC_(4|6|8|10|11|13|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
 	/^geArchive: BAG_(5|GABA_2)( |$)/,
 	/^geArchive: DAT_(11|42|48|53|57|DG|RES|PAK)( |$)/,
@@ -547,7 +548,7 @@ export const WEAK_VALUES =
 	/^geArchive: XFS( |$)/,
 
 	// SEEN ONCE:
-	//		???
+	//		DIR_DIR_IMG
 	// SEEN TWICE:
 	//		DAT_KYRA_TEX
 	/^geViewer: AFS_AFS_WE00( |$)/,
@@ -628,7 +629,7 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, CMP, HPA, Gather
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, CMP, HPA, Gather, SBC
 	// SEEN TWICE:
 	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF
 	/^idarc: 777( |$)/,
@@ -707,7 +708,7 @@ export const WEAK_VALUES =
 
 	// xdgMime
 	// SEEN  ONCE:
-	//		audio/x-mtm, application/x-spectrum-d80, application/vnd.apache.parquet, application/x-cif
+	//		audio/x-mtm, application/x-spectrum-d80, application/vnd.apache.parquet
 	// SEEN TWICE:
 	//		???
 	/^application\/buildstream\+yaml$/,

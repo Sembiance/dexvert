@@ -7,6 +7,7 @@ export class projectAftermathDAT extends Format
 	ext            = [".dat"];
 	forbidExtMatch = true;
 	magic          = [/^geArchive: DAT_46( |$)/];
+	weakMagic      = true;
 	idCheck        = inputFile => inputFile.size>(xu.KB*4);
 	priority       = this.PRIORITY.LOW;
 	converters     = ["gameextractor[codes:DAT_46]"];

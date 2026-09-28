@@ -5,6 +5,6 @@ export class yaneuraoArchive extends Format
 	name           = "Yaneurao Archive";
 	ext            = [".dat"];
 	forbidExtMatch = true;
-	magic          = ["archive:Yaneurao.PackOpener"];
-	converters     = ["GARbro[types:archive:Yaneurao.PackOpener]"];
+	magic          = ["archive:Yaneurao.PackOpener", "archive:Yaneurao.PackExOpener"];
+	converters     = ["GARbro[types:archive:Yaneurao.PackExOpener,archive:Yaneurao.PackOpener]"];
 }

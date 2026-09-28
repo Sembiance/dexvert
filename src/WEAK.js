@@ -207,6 +207,7 @@ export const WEAK_VALUES =
 	/^deark: mpegaudio( \(MP[12] audio\))?$/,
 	/^deark: ogg \(Ogg (Vorbis|\(other\))\)$/,
 	/^deark: palmdb \(Palm PDB\)$/,
+	/^deark: pcx \(PCX\)$/,
 	/^deark: png \(CgBI\)$/,
 	/^deark: pnm/,
 	/^deark: printshop \(The Print Shop \(DAT\/NAM\)\)$/,
@@ -414,9 +415,9 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
-	//		image:RSystem.RsgFormat, image:Herb.GrpFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat
+	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat
 	// SEEN TWICE:
-	//		image:Discovery.Pr1Format
+	//		image:Discovery.Pr1Format, image:Herb.GrpFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
@@ -441,10 +442,10 @@ export const WEAK_VALUES =
 	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB
 	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, WIN_FORM
-	//		ZBD_2, FTR_MFIL, LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, DWX_DELPHIXWAVE
+	//		ZBD_2, FTR_MFIL, LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, DWX_DELPHIXWAVE, XXX
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, PAC_DPAC, WSAD_WLD3
-	//		WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, SPR_3, ANI, RAW_MHWANH, GSC_NU20_2, HNK
+	//		WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, RAW_MHWANH, GSC_NU20_2, HNK
 	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -536,6 +537,7 @@ export const WEAK_VALUES =
 	/^geArchive: SND_3( |$)/,
 	/^geArchive: SND_SND2( |$)/,
 	/^geArchive: SOL_DISK( |$)/,
+	/^geArchive: SPR_3( |$)/,
 	/^geArchive: TEXTURE( |$)/,
 	/^geArchive: TXD_2( |$)/,
 	/^geArchive: U_Generic( |$)/,

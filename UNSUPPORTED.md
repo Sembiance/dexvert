@@ -1,11 +1,11 @@
-# Unsupported File Formats (3,999)
+# Unsupported File Formats (4,003)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (262)
+## Archive (261)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/dotNETZPacked](https://discmaster.textfiles.com/search?format=dotNETZPacked) | .NETZ Packed | .exe | 
@@ -196,7 +196,6 @@ Family/Format | Name | Extensions | Notes
 [archive/pyInstallerPacked](https://discmaster.textfiles.com/search?format=pyInstallerPacked) | PyInstaller Packed | .exe | 
 [archive/qemuQCOWImage](https://discmaster.textfiles.com/search?format=qemuQCOWImage) | QEMU QCOW Image | .qcow2 .qcow .img | 
 [archive/qnxVolumeDiskImage](https://discmaster.textfiles.com/search?format=qnxVolumeDiskImage) | QNX volume disk image | .img | 
-[archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?format=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
 [archive/questPowerGUIPacked](https://discmaster.textfiles.com/search?format=questPowerGUIPacked) | Quest PowerGUI Packed | .dll | 
 [archive/realArcadeGameInstaller](https://discmaster.textfiles.com/search?format=realArcadeGameInstaller) | RealArcade Game Installer | .rgs | [2 sample files](https://sembiance.com/fileFormatSamples/archive/realArcadeGameInstaller/)
 [archive/reiserFSFileSystem](https://discmaster.textfiles.com/search?format=reiserFSFileSystem) | ReiserFS file system | .img | 
@@ -535,7 +534,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (59)
+## Executable (60)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?format=aDotOutExecutable) | a.out Executable | .o | 
@@ -553,6 +552,7 @@ Family/Format | Name | Extensions | Notes
 [executable/dalvikExecutable](https://discmaster.textfiles.com/search?format=dalvikExecutable) | Dalvik Executable | .odex | 
 [executable/digiPAKAudioDriver](https://discmaster.textfiles.com/search?format=digiPAKAudioDriver) | DIGIPAK audio driver | .com | 
 [executable/elf](https://discmaster.textfiles.com/search?format=elf) | ELF Executable/Library |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
+[executable/embeddedVisualBasicBinary](https://discmaster.textfiles.com/search?format=embeddedVisualBasicBinary) | Embedded Visual Basic Binary | .vb | 
 [executable/fmTownsOSApp](https://discmaster.textfiles.com/search?format=fmTownsOSApp) | FM-TownsOS App | .exp | [9 sample files](https://sembiance.com/fileFormatSamples/executable/fmTownsOSApp/)
 [executable/hpPalmtopExecutable](https://discmaster.textfiles.com/search?format=hpPalmtopExecutable) | HP Palmtop Executable | .exm | [2 sample files](https://sembiance.com/fileFormatSamples/executable/hpPalmtopExecutable/)
 [executable/linux8086Exe](https://discmaster.textfiles.com/search?format=linux8086Exe) | Linux 8086 Executable |  | 
@@ -1097,7 +1097,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,818)
+## Other (2,822)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1704,6 +1704,7 @@ Family/Format | Name | Extensions | Notes
 [other/cricketGraphTemplate](https://discmaster.textfiles.com/search?format=cricketGraphTemplate) | Cricket Graph Template | .cgt | 
 [other/crimsonFieldsLevelData](https://discmaster.textfiles.com/search?format=crimsonFieldsLevelData) | Crimson Fields Level data | .lev | 
 [other/criwareCPKGameDataContainer](https://discmaster.textfiles.com/search?format=criwareCPKGameDataContainer) | CRIWARE CPK game data container | .cpk | 
+[other/croc2WAD](https://discmaster.textfiles.com/search?format=croc2WAD) | Croc 2 WAD | .wad | 
 [other/crocodilePhysicsSimulation](https://discmaster.textfiles.com/search?format=crocodilePhysicsSimulation) | Crocodile Physics Simulation | .cyp | 
 [other/crosstalkDriver](https://discmaster.textfiles.com/search?format=crosstalkDriver) | Crosstalk Driver | .xtd | 
 [other/crosstalkFilter](https://discmaster.textfiles.com/search?format=crosstalkFilter) | Crosstalk Filter | .xtf | 
@@ -2243,6 +2244,7 @@ Family/Format | Name | Extensions | Notes
 [other/houdiniProject](https://discmaster.textfiles.com/search?format=houdiniProject) | Houdini Project | .hip .hipnc | 
 [other/houghtonMifflinCompanyData](https://discmaster.textfiles.com/search?format=houghtonMifflinCompanyData) | Houghton Mifflin Company data | .dct .dic .hyp | 
 [other/hoverMazeData](https://discmaster.textfiles.com/search?format=hoverMazeData) | Hover! maze data | .maz | 
+[other/hoyleCasinoPRF](https://discmaster.textfiles.com/search?format=hoyleCasinoPRF) | Hoyle Casino PRF | .prf | 
 [other/hp4x3xBinary](https://discmaster.textfiles.com/search?format=hp4x3xBinary) | HP 49/48/39/38 binary | .hp49 .hp48 .49 .hp39 .hp38 | 
 [other/hpFirmware](https://discmaster.textfiles.com/search?format=hpFirmware) | HP firmware | .img | 
 [other/hpLaserJetPrinterCartridgeMetric](https://discmaster.textfiles.com/search?format=hpLaserJetPrinterCartridgeMetric) | HP LaserJet Printer Cartridge Metric | .pcm | 
@@ -2686,6 +2688,7 @@ Family/Format | Name | Extensions | Notes
 [other/mioMotionMovie](https://discmaster.textfiles.com/search?format=mioMotionMovie) | MioMotion movie | .mio | 
 [other/mirandaIMDatabaseArchive](https://discmaster.textfiles.com/search?format=mirandaIMDatabaseArchive) | MirandaIM database-archive | .dat | 
 [other/mirrorIIEmulationFile](https://discmaster.textfiles.com/search?format=mirrorIIEmulationFile) | Mirror II Emulation File | .mef | 
+[other/mirrorMagicLevel](https://discmaster.textfiles.com/search?format=mirrorMagicLevel) | Mirror Magic Level | .level | 
 [other/mirrorsEdgeSaveGame](https://discmaster.textfiles.com/search?format=mirrorsEdgeSaveGame) | Mirror's Edge save game | .dat | 
 [other/missionPatch](https://discmaster.textfiles.com/search?format=missionPatch) | Mission Patch | .pat | 
 [other/mksSpellHashList](https://discmaster.textfiles.com/search?format=mksSpellHashList) | MKS Spell hash list |  | 
@@ -3181,6 +3184,7 @@ Family/Format | Name | Extensions | Notes
 [other/rendezvousWithRamaGameLogic](https://discmaster.textfiles.com/search?format=rendezvousWithRamaGameLogic) | Rendezvous with Rama game logic |  | 
 [other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?format=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 
 [other/reportSmithReport](https://discmaster.textfiles.com/search?format=reportSmithReport) | ReportSmith report | .rpt | 
+[other/resDDRV](https://discmaster.textfiles.com/search?format=resDDRV) | RES DDRV Game Archive | .res .a .o .lvl | 
 [other/retro64GameData](https://discmaster.textfiles.com/search?format=retro64GameData) | Retro64 game data | .wld | 
 [other/retroPlatformLibrary](https://discmaster.textfiles.com/search?format=retroPlatformLibrary) | RetroPlatform Library | .rp-lib | 
 [other/returnToCastleWolfensteinSaveGame](https://discmaster.textfiles.com/search?format=returnToCastleWolfensteinSaveGame) | Return to Castle Wolfenstein save game | .svg | 

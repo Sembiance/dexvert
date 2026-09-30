@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,003)
+# Unsupported File Formats (4,005)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -644,7 +644,7 @@ Family/Format | Name | Extensions | Notes
 [font/epocFont](https://discmaster.textfiles.com/search?format=epocFont) | EPOC/Psion Font | .gdr | 
 [font/expertDrawFont](https://discmaster.textfiles.com/search?format=expertDrawFont) | ExpertDraw Font | .expf | 
 [font/f3Font](https://discmaster.textfiles.com/search?format=f3Font) | [F3 Font](http://fileformats.archiveteam.org/wiki/F3_font) | .f3b | 
-[font/fnxFont](https://discmaster.textfiles.com/search?format=fnxFont) | FNX Font) | .fnx | 
+[font/fnxFont](https://discmaster.textfiles.com/search?format=fnxFont) | FNX Font | .fnx | 
 [font/fontLabFont](https://discmaster.textfiles.com/search?format=fontLabFont) | FontLab Font | .vfb | 
 [font/fontographer](https://discmaster.textfiles.com/search?format=fontographer) | [Fontographer](http://fileformats.archiveteam.org/wiki/Fontographer) | .fog | [10 sample files](https://sembiance.com/fileFormatSamples/font/fontographer/) - The Fontographer program is CRAZY sensitive to register. It was working, but a 86Box update changed hardware and Fontographer no longer registers. Meh, only 533 unique files have been found on discmaster, so just disable support for this
 [font/fontrixFontSet](https://discmaster.textfiles.com/search?format=fontrixFontSet) | Fontrix Font Set | .set | 
@@ -728,7 +728,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (190)
+## Image (191)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?format=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -773,6 +773,7 @@ Family/Format | Name | Extensions | Notes
 [image/comicSetterProject](https://discmaster.textfiles.com/search?format=comicSetterProject) | Comic Setter project |  | 
 [image/condensedEmbroidery](https://discmaster.textfiles.com/search?format=condensedEmbroidery) | Condensed embroidery format | .cnd | 
 [image/crayolaArtStudio](https://discmaster.textfiles.com/search?format=crayolaArtStudio) | Crayola Art Studio | .art | 
+[image/creativeEdgeStudiosImage](https://discmaster.textfiles.com/search?format=creativeEdgeStudiosImage) | Creative Edge Studios Image | .img8 .img16 | 
 [image/dataCADDrawing](https://discmaster.textfiles.com/search?format=dataCADDrawing) | DataCAD Drawing | .dc5 | 
 [image/daubDrawing](https://discmaster.textfiles.com/search?format=daubDrawing) | DAUB Drawing | .dob | [1 sample file](https://sembiance.com/fileFormatSamples/image/daubDrawing/)
 [image/desiIIIDrawing](https://discmaster.textfiles.com/search?format=desiIIIDrawing) | DESI-III drawing | .bin .din | 
@@ -1097,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,822)
+## Other (2,823)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1756,6 +1757,7 @@ Family/Format | Name | Extensions | Notes
 [other/dataStoreDatabase](https://discmaster.textfiles.com/search?format=dataStoreDatabase) | Datastore Database |  | 
 [other/dateBookArchive](https://discmaster.textfiles.com/search?format=dateBookArchive) | DateBook Archive | .dba | 
 [other/datelActionReplay](https://discmaster.textfiles.com/search?format=datelActionReplay) | Datel Action Replay cheat data | .dc | 
+[other/daveMirraFreestyleBMXZMD](https://discmaster.textfiles.com/search?format=daveMirraFreestyleBMXZMD) | Dave Mirra Freestyle BMX ZMD | .zmd | 
 [other/davilexGamesGameDataFormat](https://discmaster.textfiles.com/search?format=davilexGamesGameDataFormat) | Davilex Games game data format | .idx .img | 
 [other/dayOfTheTentacleSaveGame](https://discmaster.textfiles.com/search?format=dayOfTheTentacleSaveGame) | Day of the Tentacle save game |  | 
 [other/dazPackGameDataArchive](https://discmaster.textfiles.com/search?format=dazPackGameDataArchive) | DAZ Pack game data archive | .res .aud .msc .int | 

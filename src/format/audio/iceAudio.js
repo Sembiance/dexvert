@@ -6,5 +6,6 @@ export class iceAudio extends Format
 	ext            = [".cr"];
 	forbidExtMatch = true;
 	magic          = ["audio:Ice.IceAudio"];
+	weakMagic      = true;
 	converters     = ["GARbro[types:audio:Ice.IceAudio]"];
 }

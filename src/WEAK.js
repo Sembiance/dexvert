@@ -222,7 +222,7 @@ export const WEAK_VALUES =
 
 	// detectItEasy
 	// SEEN ONCE:
-	//		???
+	//		FNX(1996)
 	// SEEN TWICE:
 	//		???
 	/^Archive: André Osterhues's Code Compression Algorithm \(ACCA\.\)$/,
@@ -308,7 +308,7 @@ export const WEAK_VALUES =
 
 	// dragonUnpackerID
 	// SEEN  ONCE:
-	//		???
+	//		BFPAK
 	// SEEN TWICE:
 	//		???
 	/^dragon: DNI /,
@@ -390,9 +390,9 @@ export const WEAK_VALUES =
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
 	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
-	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener
+	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:Key.PakOpener
 	// SEEN TWICE:
-	//		archive:Parsley.CgV1Opener, archive:Will.ArcOpener, StudioSakura.DatOpener
+	//		archive:Will.ArcOpener, StudioSakura.DatOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -407,6 +407,7 @@ export const WEAK_VALUES =
 	/^archive:Guyzware.GdpOpener /,
 	/^archive:Mink\.GrpOpener /,
 	/^archive:Mokopro\.NNNNOpener /,
+	/^archive:Parsley\.CgV1Opener /,
 	/^archive:Xuse\.BinOpener /,
 	/^archive:Youkai\.VoiceDatOpener /,
 
@@ -414,10 +415,10 @@ export const WEAK_VALUES =
 	/^audio:WaveAudio \(WAV\)/,
 
 	// SEEN  ONCE:
-	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:Silky.IgfFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat
-	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat
+	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
+	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat
 	// SEEN TWICE:
-	//		image:Discovery.Pr1Format, image:Herb.GrpFormat
+	//		image:Discovery.Pr1Format, image:Herb.GrpFormat, image:Silky.IgfFormat
 	/^image:Adobe\.PsdFormat /,
 	/^image:CrossNet\.GrbFormat /,
 	/^image:CsWare\.BpcFormat /,
@@ -440,12 +441,13 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB
-	//		LIB_DBIN, VPPPC, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
+	//		LIB_DBIN, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
 	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, WIN_FORM
-	//		ZBD_2, FTR_MFIL, LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, DWX_DELPHIXWAVE, XXX, PC_2, RDT_RDA2
+	//		ZBD_2, FTR_MFIL, LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, DWX_DELPHIXWAVE, XXX, PC_2, RDT_RDA2, PKR_PKR1
+	//		PCDAT
 	// SEEN TWICE:
-	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, FLX, WAD_WAD, SAD_SAUD, PAC_DPAC, WSAD_WLD3
-	//		WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, RAW_MHWANH, GSC_NU20_2, HNK
+	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, PAC_DPAC, WSAD_WLD3
+	//		WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, RAW_MHWANH, GSC_NU20_2, HNK, VPPPC
 	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,
@@ -497,6 +499,7 @@ export const WEAK_VALUES =
 	/^geArchive: FLA( |$)/,
 	/^geArchive: FMF_FMF( |$)/,
 	/^geArchive: FSB_FSB5( |$)/,
+	/^geArchive: FLX( |$)/,
 	/^geArchive: FOG( |$)/,
 	/^geArchive: G00S000( |$)/,
 	/^geArchive: GJD( |$)/,
@@ -631,9 +634,9 @@ export const WEAK_VALUES =
 
 	// idarc
 	// SEEN  ONCE:
-	// 		Terse, ZPack, ZZip (Damien Debin), PSA, CMP, HPA, Gather, SBC
+	// 		Terse, ZPack, ZZip (Damien Debin), PSA, HPA, Gather, SBC
 	// SEEN TWICE:
-	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF
+	// 		QuArk, Blink (D.T.S.), ELI 5750, Codec, DZip (Nolan Pflug), BMF, CMP
 	/^idarc: 777( |$)/,
 	/^idarc: ACB( |$)/,
 	/^idarc: ARG( |$)/,
@@ -710,7 +713,7 @@ export const WEAK_VALUES =
 
 	// xdgMime
 	// SEEN  ONCE:
-	//		audio/x-mtm, application/x-spectrum-d80, application/vnd.apache.parquet
+	//		application/x-spectrum-d80, application/vnd.apache.parquet
 	// SEEN TWICE:
 	//		???
 	/^application\/buildstream\+yaml$/,
@@ -760,6 +763,7 @@ export const WEAK_VALUES =
 	/^application\/x-mozilla-bookmarks$/,
 	/^application\/x-ms-ne-executable$/,
 	/^application\/x-msdownload$/,
+	/^audio\/x-mtm$/,
 	/^application\/x-navi-animation$/,
 	/^application\/x-ns-proxy-autoconfig$/,
 	/^application\/x-nzb$/,
@@ -2498,6 +2502,7 @@ export const WEAK_VALUES =
 	/^Mechwarrior FIT data$/,
 	/^MEGA data format$/,
 	/^MegaCAD (Macro|Projec)$/,
+	/^MegaPaint Bitmap$/,
 	/^MegaZeux game$/,
 	/^MegaZeux MZMX image$/,
 	/^MEMU Floppy image$/,

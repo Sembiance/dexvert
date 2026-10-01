@@ -14,7 +14,7 @@ export class qtPicViewer extends Program
 			$mainWindow = WindowRequire("${path.basename(r.inFile())}", "", 10)
 
 			Send("^e")
-			$saveImageWindow = WindowRequire("Save Image as:", "":, 10)
+			$saveImageWindow = WindowRequire("Save Image as:", "", 10)
 			Send("c:\\out\\out.png{ENTER}")
 			WinWaitClose($saveImageWindow, "", 10)
 			SendSlow("!fx")`});

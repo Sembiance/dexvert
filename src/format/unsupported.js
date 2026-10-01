@@ -3420,7 +3420,6 @@ export default
 		relocatableObjectModule                  : {name : "Relocatable Object Module", ext : [".obj", ".o"], magic : ["8086 relocatable", /^Microsoft .*compiled object code$/, "Oberon-M Object", /^Microsoft .*DOS Object module/]},
 		renderStar2Materials                     : {name : "RenderStar-2 Materials", ext : [".mat"], magic : ["RenderStar-2 Materials"]},
 		renderStar2PaletteGradients              : {name : "RenderStar-2 Palette/gradients", ext : [".pal"], magic : ["RenderStar-2 Palette/gradients"]},
-		renderwareTeXtureDictionary              : {name : "Renderware TeXture Dictionary", ext : [".txd"], magic : ["Renderware TeXture Dictionary"], weakMagic : true},
 		repliGoVirtualPrint                      : {name : "RepliGo virtual print", ext : [".rgo"], magic : ["RepliGo virtual print"]},
 		reportSmithReport                        : {name : "ReportSmith report", ext : [".rpt"], magic : ["ReportSmith report"]},
 		retroPlatformLibrary                     : {name : "RetroPlatform Library", ext : [".rp-lib"], magic : ["RetroPlatform Library"]},

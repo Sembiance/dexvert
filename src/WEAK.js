@@ -388,11 +388,11 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		archive:Entis.EriOpener, archive:Liddell.FlkOpener, archive:Broccoli.MpegVideoOpener, archive:CandySoft.FpkOpener, archive:BlackRainbow.ImpOpener, archive:Pinky.A5rOpener
-	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:Yatagarasu.PkgOpener, archive:UMeSoft.BinOpener
+	//      archive:Nekopunch.PakOpener, archive:NScripter.SarOpener, archive:Cri.AfsOpener, archive:Abogado.PakOpener, archive:UMeSoft.BinOpener
 	//		archive:WestGate.UsfOpener, archive:Silky.Ai6Opener, archive:Ikura.GanOpener, image:Tanuki.AmapFormat, archive:Elf.DatAI5Opener, archive:Ffa.JDatOpener, archive:Misc.BinOpener
 	//		archive:Kid.DATRAWOpener, archive:Ego.DatOpener, archive:Ego.OldDatOpener, archive:Key.PakOpener
 	// SEEN TWICE:
-	//		archive:Will.ArcOpener, StudioSakura.DatOpener
+	//		archive:Will.ArcOpener, StudioSakura.DatOpener, archive:Yatagarasu.PkgOpener
 	/^archive:Ail\.DatOpener /,
 	/^archive:Ankh\.GrpOpener /,
 	/^archive:BlackRainbow\.DatOpener /,
@@ -416,7 +416,7 @@ export const WEAK_VALUES =
 
 	// SEEN  ONCE:
 	// 		image:Sony.TimFormat, image:Elf.RmtFormat, image:MAGES.BinFormat, image:FC01.TilFormat, image:Nekotaro.NcgFormat, image:Entis.EriFormat, image:Paprika.NpFormat
-	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat
+	//		image:RSystem.RsgFormat, image:Prime.ThpFormat, image:Desire.DpcFormat, image:Tail.CfpFormat, image:Uran.DarFormat, image:Ikura.TanFormat, image:BGI.BgiFormat
 	// SEEN TWICE:
 	//		image:Discovery.Pr1Format, image:Herb.GrpFormat, image:Silky.IgfFormat
 	/^image:Adobe\.PsdFormat /,
@@ -441,13 +441,12 @@ export const WEAK_VALUES =
 	// gameextractor
 	// SEEN  ONCE:
 	// 		FST_FAST_2_FSAMPLE, BFL_CMPR, PACK_PACK, RPK_RPAK, SDAT_SDAT, VFS0, BIG_5, ARC_ARC0, SAR_SARC, DSK_SPIS, DAT_CMP, 000_8, 000_2, GLB
-	//		LIB_DBIN, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
-	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS, WIN_FORM
-	//		ZBD_2, FTR_MFIL, LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, DWX_DELPHIXWAVE, XXX, PC_2, RDT_RDA2, PKR_PKR1
-	//		PCDAT
+	//		LIB_DBIN, DAM_RZ, TOD_TOD2, LEV, RWS_2, MAP, MAP_2, ARC_9, DAV_SLIB, XPR_XPR2, VOL, WAD_18, NPK_MPAK, XBR_XOBX, BNK_KNAB, 003_MUSX, DAT_PCMP
+	//		BOB_FILE, PRS, PHK_PAK, DDV_MOIR, RSR_RSRC, H2O, RBH_PIFF, RBH_PIFF_2, VRAM_PIFF, GRA, 001_TCLF, BIO_BRGR, WLD_WRLD, SCW_COTS
+	//		LUG_LIONHEAD, FUK_XV4, SKX_SKEX, GOB_STBL, RDBDATA_RDB0, DAT_FAR, DAT_ARC, XXX, PC_2, RDT_RDA2, PKR_PKR1, BF_BANKFILEV113, PCDAT, TEX_4
 	// SEEN TWICE:
 	// 		SOL_DISK, PCK_5, PACK_3, PAK_PACK_3, PAK_PACK_4, TEXS_SXET, BANK_RIFF, DAT_100, 000_SFDX, WAD_WAD, SAD_SAUD, PAC_DPAC, WSAD_WLD3
-	//		WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, RAW_MHWANH, GSC_NU20_2, HNK, VPPPC
+	//		ZBD_2, WAV, WAV_2, BIN_LINK, BIN_LINK_2, BIN_7L, SHP_110, ANI, RAW_MHWANH, GSC_NU20_2, HNK, VPPPC, FTR_MFIL, DWX_DELPHIXWAVE, WIN_FORM
 	/^geArchive: 0000?_(5|10|PCW|package)( |$)/,
 	/^geArchive: ARC_(4|6|8|10|11|13|A20|ARC)( |$)/,
 	/^geArchive: ARK_2( |$)/,

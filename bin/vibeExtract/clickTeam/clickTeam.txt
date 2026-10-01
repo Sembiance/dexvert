@@ -1,5 +1,5 @@
-CLICKTEAM SELF-CONTAINED INSTALLER CONTAINER FORMATS
-====================================================
+CLICKTEAM INSTALLER AND PATCH CONTAINER FORMATS
+================================================
 
 Scope
 -----
@@ -9,8 +9,9 @@ by three Clickteam generations: Install Maker, early Install Creator, and the
 later Install Creator 2 family whose overlay signature is ASCII "wwgT)H". It
 covers single- and multi-product installers, including recovery from truncated
 payload pools and products containing deltas against pre-existing files.
-Clickteam Patch Maker packages are identified separately; without their target
-files they contain no independently recoverable installed payloads.
+It also describes Patch Maker catalogs, which may contain complete replacement
+files, external-base deltas, or both. Complete replacements and literal-only
+patches can be extracted without an original installation.
 
 All integers are unsigned little-endian unless stated otherwise. Offsets in a
 decoded file-list node are relative to the beginning of that node. "Physical"
@@ -198,7 +199,11 @@ Layout 17 (early narrow node with variable attribute vector)
           path field (section 5)
 
 A no-time layout-17 record whose attribute bytes are `00 E0 07 00 00 00 00 00`
-has its path at +30. An empty layout-17 record can instead use the fourteen-byte
+has its path at +30. The second byte may be E2 for an empty file, and the
+last four attribute bytes may carry destination-directory flags rather than
+being zero. A string such as #InstallDir# after the primary NUL path belongs to
+the destination metadata, not a second candidate filename. An empty layout-17
+record can instead use the fourteen-byte
 vector `E2 07` followed by twelve zero bytes and put its path at +36. In both
 empty representations offset, compressed size and uncompressed size are zero.
 
@@ -227,6 +232,11 @@ Layout 21 (wide node with variable attribute vector)
           u64 created FILETIME
           0 to 2 zero alignment bytes
           path field
+
+The non-indexed no-time variant with bytes +9..+11 equal to E0 07 00 and
+timestamp-presence bit 0x08 clear at +8 has no post-core attribute extension;
+its path begins at +32. This applies to nonempty files as well as zero-length
+records. A destination-directory string after the path is not a filename.
 
 Layout 24 (narrow fixed node)
 
@@ -257,9 +267,12 @@ The u32 checksum/attribute word at +14 is reserved zero in this grammar. This
 distinguishes layout 25 from layout 17 even when an encoded file payload cannot
 be decompressed for grammar selection.
 
-A payload-free layout-25 action record has zero offset and sizes, no FILETIMEs,
-a 22-byte attribute vector, and its first action path at +44. It can describe a
-shortcut or launch action but emits no installed payload file.
+A payload-free layout-25 record has zero offset and sizes and no FILETIMEs.
+Its attribute vector is 16 bytes, with the path at +38, or 22 bytes with a
+six-zero-byte extension and the path at +44. An installed-file node with zero
+length emits an empty file; non-file control/action kinds emit no installed
+payload. Do not interpret a suffix of the +38 filename as a second +44 grammar:
+the six intervening bytes must be zero for the extension form.
 
 A layout-25 record with offset 0xFFFFFFFF, compressed size zero and reserved
 word zero references a source file external to the executable. Its remaining
@@ -350,7 +363,10 @@ empty components, dot components and parent components are invalid.
 
 Bytes after the first NUL contain optional shortcut/display-name strings and
 zero terminators. They are installation metadata, not part of the output path.
-The final byte of a path field is NUL.
+The final byte of a path field is NUL. Flexible-node string suffixes cannot
+contain binary control bytes (text whitespace TAB, CR and LF is permitted).
+This is a structural check: bytes from a timestamp or attribute vector cannot
+be accepted as a short filename followed by a binary string suffix.
 
 FILETIME values are 100-nanosecond ticks since 1601-01-01 UTC. A value of zero
 means absent. The three values are modification, access and creation time in
@@ -374,7 +390,8 @@ being recovered. Partial bytes are never emitted as an installed file.
 When an otherwise exact variable-layout catalog contains an unsupported or
 encrypted payload encoding, layout selection may use the structural grammar
 alone only if exactly one grammar remains after node sizes, reserved fields,
-ranges, zero-length representation, timestamps and paths are all validated.
+ranges (including absence of partial overlaps), zero-length representation,
+timestamps and paths are all validated.
 The undecodable record is then marked unavailable; its bytes are never treated
 as proof for a grammar and are never emitted.
 
@@ -399,14 +416,16 @@ explicit metadata/debug option such as --all.
 7. Known semantic limits
 ------------------------
 
-The physical boundaries and installed-file payloads described above are fully
-handled. Some installer-only fields are deliberately named attribute/reserved
+The implemented grammars recover complete, independently decodable payloads;
+this is not a claim to support every Clickteam version or encoded payload.
+Unknown file-encoding markers are reported and skipped. Some installer-only
+fields are deliberately named attribute/reserved
 rather than assigned speculative meanings: the internal schemas of blocks
 0x1435-0x1446, control-node kinds 2 and above, shortcut suffix fields, and
 the individual members of variable install-condition vectors are not completely
 decoded here. They are byte-for-byte preserved by forensic output. Therefore
-this is a complete extraction specification for installed payload files, but it
-is not a complete reimplementation of the installer's UI, registry, shortcut,
+this specifies the supported extraction grammars, but it is not a complete
+reimplementation of the installer's UI, registry, shortcut,
 uninstall, or product-selection UI behavior.
 
 The original ANSI path code page is also external context rather than a stored
@@ -443,7 +462,7 @@ are 4 and 12. For P=4 the payload is one installer configuration or
 product-count u32. The P=12 form contains three bounded configuration words.
 Other sizes are invalid.
 
-A compact Install Maker header variant uses C as the length of an
+A compact Install Maker/Patch Maker header variant uses C as the length of an
 unsentinelled Clickteam-deflate stream plus the four-byte tag of the first
 block. Consequently bytes +12 through +(C+7) consist of C-4 compressed bytes
 followed by that first 0x000112xx block tag. There is no two-u32 prefix. The two
@@ -608,13 +627,18 @@ ranges need not be adjacent because products may be interleaved physically.
 Self-contained products are extracted below the same `product_NNN` directories
 defined in section 6.
 
-In this generation, file flag bit 0x10 marks a binary delta. The compressed
-record is an edit program whose source is the exact pre-existing destination
-file on the user's machine; that source is not necessarily another product's
-payload and is not stored in the installer. A product containing this flag is
-therefore not self-contained. Without an independently authenticated base-file
-interface, that record is skipped while ordinary and provably decryptable
-records from every product are still extracted.
+In the standard-node grammar, bit 0x10 of the flags byte at +22 marks a binary
+delta. This offset must not be applied to the extended or compact grammar,
+where +22 belongs to other fields. The standard attribute vector contains a
+u32 node reference at +32. For an ordinary stream it identifies that stream's
+node or a deduplicated earlier node. For an embedded-base delta it identifies
+an earlier node in the same product. Resolve that node's complete bytes first,
+then apply the two-section edit program below. References must be backward,
+base copies must remain in bounds, both sections must end exactly, and the
+output must have precisely the target's declared size. A self reference is not
+an embedded original; it cannot be replaced by a file with a similar name or
+by a different product's installed file. If the required base or patch cannot
+be decoded, skip that target and continue extracting independent files.
 
 Some early multi-product records are encrypted before being placed in 0x7F7F.
 The cipher is symmetric and restarts for every record. Its key has 1 through 31
@@ -668,24 +692,87 @@ command section, literal section and declared output length must all be
 consumed exactly; base references must remain in bounds once a base is supplied.
 
 
-13. Exact detection and unsupported Clickteam products
+13. Patch Maker catalogs
+-------------------------
+
+Generation tag 0x00011241 uses the old container and compression in sections
+8-10. Its file catalog block is 0x00011242, not the Install Maker catalog tag
+0x00011243. The final 0x7F7F block is a shared compressed-file/patch pool.
+
+The decoded catalog starts with u32 node count followed by exactly that many
+size-bounded nodes. Full-file/patch nodes have:
+
+    +0   u32  node size, including this field
+    +4   u16  installation flags (not the full-file/delta discriminator)
+    +6   u16  additional installation flags
+    +8   u16  record encoding: 0x22 full file, 0x21 delta
+    +10  u32  target checksum (older variant) or target size (newer variant)
+    +14  u32  target size (older variant) or target checksum (newer variant)
+    +18  u16  zero (older variant) or descriptor count (newer variant)
+    +20  u16  descriptor count (older variant) or zero (newer variant)
+    +22  u32  descriptor table offset T, relative to the node
+    +26  4 bytes installation attributes
+    +30  u64  modified FILETIME
+    +38  u64  accessed FILETIME
+    +46  u64  created FILETIME
+    +54  relative NUL-terminated path and NUL string terminators, ending at T
+    +T   descriptor_count consecutive 16-byte descriptors
+
+The unique valid variant has a nonzero descriptor count, its other count word
+zero, and T + 16 * descriptor_count equal to node size. This exact table bound
+selects the size/checksum ordering; there is no filename or size-based guess.
+
+Each descriptor is four u32 words:
+
+    +0   original-file checksum
+    +4   original-file size
+    +8   offset into the shared 0x7F7F data pool
+    +12  stored byte count
+
+Several descriptors are alternatives for different original versions of one
+target, not separate output files. Identical pool ranges may be reused; partial
+overlaps are invalid. Each complete mode-0x22 stream uses Clickteam-deflate
+without a sentinel and must decode to the target size. If several complete
+alternatives decode successfully, their target bytes must agree. A failed or
+missing alternative does not prevent recovery through another complete one.
+
+Mode 0x21 is the two-section command/literal format in section 12. Validate both
+sections, exact command/literal consumption, target output length and original
+size bounds. A patch with no base-copy operations is independently recoverable
+from its literals. Other patches require the exact original file and are not
+emitted as target files in its absence. Original files are not inferred from
+other catalogs, output directory contents or similar paths.
+
+Action/deletion nodes use encoding zero at +8, installation flags 0x0101 at
++6, twenty zero bytes at +10..+29, and a NUL-terminated relative action path
+beginning at +30. They contain no FILETIMEs, descriptor table or payload and
+do not create output files. No installer-generated deletion/action is executed.
+
+Checksum words and the remaining installation attributes are retained in --all
+metadata. Their checksum algorithm and complete installation-policy semantics
+are not specified here, and checksum words are not currently verified. Stream
+boundaries and decoded lengths are validated independently. Accepting external
+originals safely would require implementing those identity checks first.
+
+
+14. Exact detection and unsupported Clickteam products
 -------------------------------------------------------
 
 At the calculated PE boundary, "wwgT)H" selects Part I. Otherwise, u32 0x11242
-selects section 11 and u32 0x11239 selects section 12. No scanning or fallback
-probing is used. Every other value is rejected before output.
+selects section 11, u32 0x11239 selects section 12, and u32 0x11241 selects
+section 13. No signature scanning is used. Every other value is rejected
+before output.
 
 Earlier paths obey section 5's external ANSI-code-page rule. The container has
 no authoritative code-page field, so --encoding must be supplied when
 Windows-1252 is wrong; the extractor does not guess from filename bytes.
 
-Tag 0x11241 is Patch Maker rather than an installer generation. Its records are
-deltas requiring exact original files, so installed bytes cannot be recovered
-from the package alone. Self-contained multi-product containers repeat
-product/file-list groups and all products are extracted by default. An early
-multi-product installer containing file flag 0x10 skips that record because its
-exact installed bytes depend on an external base file; unaffected records are
-still recovered.
+Patch Maker full replacements and literal-only patches are extracted; patches
+requiring an external original are skipped. Self-contained multi-product
+containers repeat product/file-list groups and all products are extracted by
+default. Standard early embedded-base delta chains are resolved through their
+explicit node references. External-base or undecodable deltas are skipped;
+unaffected records are still recovered.
 
 Likewise, an external-source offset of 0xFFFFFFFF is Clickteam format but is not
 a self-contained payload. Declared block lengths that exceed the available

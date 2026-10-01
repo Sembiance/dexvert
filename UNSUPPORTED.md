@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,005)
+# Unsupported File Formats (4,007)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,823)
+## Other (2,825)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1608,6 +1608,7 @@ Family/Format | Name | Extensions | Notes
 [other/chessBaseLightDatabaseHeader](https://discmaster.textfiles.com/search?format=chessBaseLightDatabaseHeader) | ChessBase Light database Header | .cbh | 
 [other/chiefArchitectPlan](https://discmaster.textfiles.com/search?format=chiefArchitectPlan) | Chief Architect plan | .plan | 
 [other/childrenOfTheNileCampaign](https://discmaster.textfiles.com/search?format=childrenOfTheNileCampaign) | Children of the Nile campaign | .ssa | 
+[other/childrenOfTheNileScenario](https://discmaster.textfiles.com/search?format=childrenOfTheNileScenario) | Children of the Nile Scenario | .scn | 
 [other/chipSChallengeLevelPack](https://discmaster.textfiles.com/search?format=chipSChallengeLevelPack) | Chip's Challenge level pack | .dat | 
 [other/chromeDictionary](https://discmaster.textfiles.com/search?format=chromeDictionary) | Chrome dictionary | .bdic | 
 [other/chromeSavedSessions](https://discmaster.textfiles.com/search?format=chromeSavedSessions) | Chrome saved sessions |  | 
@@ -3642,6 +3643,7 @@ Family/Format | Name | Extensions | Notes
 [other/ultiboardLibrary](https://discmaster.textfiles.com/search?format=ultiboardLibrary) | ULTIboard Library | .hlp | 
 [other/ulticapLibrary](https://discmaster.textfiles.com/search?format=ulticapLibrary) | ULTIcap Library | .lib | 
 [other/ultimateFootball95Playbook](https://discmaster.textfiles.com/search?format=ultimateFootball95Playbook) | Ultimate Football '95 Playbook | .pbk | 
+[other/ultimateRaceProDCR](https://discmaster.textfiles.com/search?format=ultimateRaceProDCR) | Ultimate Race Pro DCR | .dcr | 
 [other/ultimateStuntsReplay](https://discmaster.textfiles.com/search?format=ultimateStuntsReplay) | Ultimate Stunts Replay | .repl | 
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?format=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
 [other/uniCodeExtensions](https://discmaster.textfiles.com/search?format=uniCodeExtensions) | UniCode Extensions | .uce | 

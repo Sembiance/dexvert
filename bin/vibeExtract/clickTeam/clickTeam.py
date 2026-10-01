@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Vibe coded by Codex
-"""Strict extractor for self-contained Clickteam installer generations."""
+"""Extract complete recoverable files from Clickteam installers and updates."""
 
 from __future__ import annotations
 
@@ -517,7 +517,7 @@ def parse_old_blocks(data: bytes, overlay: int, issues: list[str] | None = None)
     except FormatError:
         pass
     compact = None
-    if generation_tag == 0x11242 and compressed_size >= 5:
+    if generation_tag in (0x11242, 0x11241) and compressed_size >= 5:
         try:
             initial, used = decompress_clickteam(
                 data[stream_start:stream_end - 4], decoded_size, sentinel=False)
@@ -828,6 +828,7 @@ def parse_early_creator(file_list: bytes, file_data: bytes, encoding: str,
             "special_uninstaller": special,
             "attribute_vector_hex": attributes.hex(),
             "old_compression": True,
+            "old_record_layout": record_layout,
             "decoded_check": decoded_size,
         })
         ranges.append((offset, offset + compressed))
@@ -930,7 +931,8 @@ def signed_bits(value: int, width: int) -> int:
 
 
 def validate_patch_program(commands: bytes, literals: bytes,
-                           expected_size: int) -> tuple[int, int]:
+                           expected_size: int, base: bytes | None = None,
+                           output: bytearray | None = None) -> tuple[int, int]:
     command_at = 0
     literal_at = 0
     output_size = 0
@@ -965,6 +967,8 @@ def validate_patch_program(commands: bytes, literals: bytes,
                 copy_size = (low | command_byte() << 8) + 0x81
         if literal_at + literal_size > len(literals):
             raise FormatError("old-generation delta consumes beyond its literal stream")
+        if output is not None:
+            output.extend(literals[literal_at:literal_at + literal_size])
         literal_at += literal_size
         output_size += literal_size
         if copy_size:
@@ -987,6 +991,10 @@ def validate_patch_program(commands: bytes, literals: bytes,
             source_at += delta
             if source_at < 0:
                 raise FormatError("old-generation delta references before its base file")
+            if output is not None:
+                if base is None or source_at + copy_size > len(base):
+                    raise FormatError("old-generation delta exceeds its embedded base file")
+                output.extend(base[source_at:source_at + copy_size])
             source_min = min(source_min, source_at)
             source_max = max(source_max, source_at + copy_size)
             source_at += copy_size
@@ -996,6 +1004,109 @@ def validate_patch_program(commands: bytes, literals: bytes,
     if command_at != len(commands) or literal_at != len(literals):
         raise FormatError("old-generation delta does not consume both sections exactly")
     return source_min, source_max
+
+
+def parse_patch_maker(file_list: bytes, file_data: bytes, encoding: str,
+                      issues: list[str]) -> list[dict]:
+    """Patch Maker catalogs contain full streams as well as external-base patches."""
+    count = u32(file_list, 0)
+    if not 0 < count <= 1_000_000:
+        raise FormatError("invalid Patch Maker file count")
+    position = 4
+    entries = []
+    dependent = damaged = 0
+    ranges = []
+    for index in range(count):
+        size = u32(file_list, position)
+        node = file_list[position:position + size]
+        if size < 32 or len(node) != size:
+            raise FormatError("Patch Maker node exceeds its catalog")
+        mode = u16(node, 8)
+        entry = {"node": index, "node_start": position, "node_size": size,
+                 "node_raw": node, "kind": 0, "old_compression": True,
+                 "special_uninstaller": False, "times": [], "empty": False,
+                 "recoverable": False, "extract": True}
+        if mode == 0:
+            if node[10:30] != bytes(20) or u16(node, 6) != 0x101:
+                raise FormatError("unsupported Patch Maker action record")
+            path, suffix = old_path(node, 30, encoding)
+            entry.update(path=path, path_suffix_hex=suffix.hex(), extract=False,
+                         offset=0, compressed_size=0, uncompressed_size=0)
+        elif mode in (0x21, 0x22):
+            table = u32(node, 22)
+            variants = []
+            for count_at, zero_at, size_at, checksum_at in ((20, 18, 14, 10), (18, 20, 10, 14)):
+                n = u16(node, count_at)
+                if n and u16(node, zero_at) == 0 and table >= 56 and table + 16 * n == size:
+                    variants.append((n, size_at, checksum_at))
+            if len(variants) != 1:
+                raise FormatError("Patch Maker descriptor table has no unique layout")
+            n, size_at, checksum_at = variants[0]
+            path, suffix = decode_install_path(node[54:table], encoding)
+            times = [u64(node, at) for at in (30, 38, 46)]
+            if not all(valid_filetime(value) for value in times):
+                raise FormatError("invalid Patch Maker timestamps")
+            expected = u32(node, size_at)
+            descriptors = [struct.unpack_from("<IIII", node, table + 16 * i) for i in range(n)]
+            entry.update(path=path, path_suffix_hex=suffix.hex(), times=times,
+                         uncompressed_size=expected, checksum=u32(node, checksum_at),
+                         patch_mode=mode, patch_descriptors=descriptors,
+                         offset=descriptors[0][2], compressed_size=descriptors[0][3])
+            full = []
+            valid_delta = False
+            for base_checksum, base_size, offset, compressed in descriptors:
+                if compressed == 0:
+                    raise FormatError("empty Patch Maker descriptor")
+                ranges.append((offset, offset + compressed))
+                if offset + compressed > len(file_data):
+                    continue
+                record = file_data[offset:offset + compressed]
+                try:
+                    if mode == 0x22:
+                        content, _ = decompress_clickteam(record, expected, sentinel=False)
+                        full.append((offset, compressed, content))
+                    else:
+                        commands, at = patch_section(record, 0)
+                        literals, at = patch_section(record, at)
+                        if at != len(record):
+                            raise FormatError("bytes follow Patch Maker delta sections")
+                        _, source_max = validate_patch_program(commands, literals, expected)
+                        if source_max > base_size:
+                            raise FormatError("Patch Maker delta exceeds declared original file size")
+                        valid_delta = True
+                        if source_max == 0:
+                            content = bytearray()
+                            validate_patch_program(commands, literals, expected, b"", content)
+                            full.append((offset, compressed, bytes(content)))
+                except FormatError:
+                    continue
+            if full:
+                if any(item[2] != full[0][2] for item in full[1:]):
+                    raise FormatError("Patch Maker full-file alternatives disagree")
+                offset, compressed, content = full[0]
+                entry.update(offset=offset, compressed_size=compressed, recoverable=True)
+                if mode == 0x21:
+                    entry["decoded_payload"] = content
+            elif mode == 0x21 and valid_delta:
+                entry["unavailable_reason"] = "exact original target file is not embedded"
+                dependent += 1
+            else:
+                entry["unavailable_reason"] = "no complete, exactly decodable payload alternative"
+                damaged += 1
+        else:
+            raise FormatError(f"unsupported Patch Maker record encoding 0x{mode:x}")
+        entries.append(entry)
+        position += size
+    if position != len(file_list):
+        raise FormatError("Patch Maker nodes do not consume their catalog")
+    ordered = sorted(set(ranges))
+    if any(a[1] > b[0] for a, b in zip(ordered, ordered[1:])):
+        raise FormatError("overlapping Patch Maker payload descriptors")
+    if dependent:
+        issues.append(f"{dependent} Patch Maker delta file(s) require original target files")
+    if damaged:
+        issues.append(f"{damaged} Patch Maker file/patch record(s) are incomplete or fail exact decoding")
+    return entries
 
 
 def validate_old_multi_payloads(products: list[dict], file_data: bytes,
@@ -1011,7 +1122,8 @@ def validate_old_multi_payloads(products: list[dict], file_data: bytes,
                 continue
             start = entry["offset"]
             record = file_data[start:start + entry["compressed_size"]]
-            is_delta = len(entry["node_raw"]) > 22 and bool(entry["node_raw"][22] & 0x10)
+            is_delta = (entry.get("old_record_layout") == "standard"
+                        and bool(entry["node_raw"][22] & 0x10))
             entry["old_delta"] = is_delta
             if not is_delta and try_old_stream(record, entry["uncompressed_size"]):
                 identity = (entry["path"].casefold(), entry["compressed_size"],
@@ -1026,7 +1138,7 @@ def validate_old_multi_payloads(products: list[dict], file_data: bytes,
                 continue
             start = entry["offset"]
             record = file_data[start:start + entry["compressed_size"]]
-            if try_old_stream(record, entry["uncompressed_size"]):
+            if entry.get("decoded_check") is not None:
                 continue
             identity = (entry["path"].casefold(), entry["compressed_size"],
                         entry["uncompressed_size"])
@@ -1042,7 +1154,7 @@ def validate_old_multi_payloads(products: list[dict], file_data: bytes,
                     continue
                 start = entry["offset"]
                 record = file_data[start:start + entry["compressed_size"]]
-                if (not try_old_stream(record, entry["uncompressed_size"])
+                if (entry.get("decoded_check") is None
                         and not try_old_stream(clickteam_crypt(record, key), entry["uncompressed_size"])):
                     valid = False
                     break
@@ -1055,7 +1167,7 @@ def validate_old_multi_payloads(products: list[dict], file_data: bytes,
             start = entry["offset"]
             record = file_data[start:start + entry["compressed_size"]]
             if not entry.get("old_delta"):
-                if try_old_stream(record, entry["uncompressed_size"]):
+                if entry.get("decoded_check") is not None:
                     continue
                 if key is None or not try_old_stream(clickteam_crypt(record, key),
                                                      entry["uncompressed_size"]):
@@ -1090,10 +1202,62 @@ def validate_old_multi_payloads(products: list[dict], file_data: bytes,
                 entry["delta_source_range"] = list(source_range)
     if unavailable:
         issues.append(
-            f"{unavailable} encrypted early multi-product file record(s) have no provable cipher key"
+            f"{unavailable} early file record(s) fail exact decoding and have no provable cipher key"
         )
     return sorted({product["index"] for product in products
                    if any(entry.get("old_delta") for entry in product["entries"])})
+
+
+def resolve_embedded_old_deltas(products: list[dict], file_data: bytes,
+                                issues: list[str]) -> None:
+    """Resolve standard-node backreferences; never substitute a similarly named file."""
+    unavailable = 0
+    for product in products:
+        entries = product["entries"]
+        cache: dict[int, bytes] = {}
+
+        def content(index: int) -> bytes:
+            if index in cache:
+                return cache[index]
+            entry = entries[index]
+            record = file_data[entry["offset"]:entry["offset"] + entry["compressed_size"]]
+            if entry.get("old_cipher_key_hex"):
+                record = clickteam_crypt(record, bytes.fromhex(entry["old_cipher_key_hex"]))
+            if entry.get("old_delta"):
+                if (entry.get("old_record_layout") != "standard"
+                        or len(bytes.fromhex(entry["attribute_vector_hex"])) < 18):
+                    raise FormatError("delta has no supported embedded-base index field")
+                base_index = u32(entry["node_raw"], 32)
+                # Standard catalogs use backward node references for embedded
+                # bases. Self references require the external destination file.
+                if base_index >= index:
+                    raise FormatError("delta does not reference an earlier embedded node")
+                base = content(base_index)
+                commands, at = patch_section(record, 0)
+                literals, at = patch_section(record, at)
+                if at != len(record):
+                    raise FormatError("bytes follow embedded delta sections")
+                decoded = bytearray()
+                validate_patch_program(commands, literals, entry["uncompressed_size"], base, decoded)
+                result = bytes(decoded)
+                entry["delta_base_node"] = base_index
+                entry["decoded_payload"] = result
+            else:
+                result, _ = decompress_clickteam(record, entry["uncompressed_size"], sentinel=False)
+            cache[index] = result
+            return result
+
+        for index, entry in enumerate(entries):
+            if not entry.get("old_delta"):
+                continue
+            try:
+                content(index)
+                entry["recoverable"] = True
+            except (FormatError, RecursionError):
+                entry["recoverable"] = False
+                unavailable += 1
+    if unavailable:
+        issues.append(f"{unavailable} early delta file(s) lack a decodable embedded base or patch stream")
 
 
 def valid_filetime(value: int) -> bool:
@@ -1303,6 +1467,13 @@ def parse_flexible_candidate(file_list: bytes, file_data: bytes, layout: int,
     wide = layout in (21, 26)
     position = 4
     entries: list[dict] = []
+
+    def text_path(raw: bytes) -> tuple[str, bytes]:
+        path, suffix = decode_install_path(raw, encoding)
+        if any(0 < value < 32 and value not in (9, 10, 13) for value in suffix):
+            raise FormatError("non-text bytes in a flexible node's string suffix")
+        return path, suffix
+
     for node_index in range(count):
         start = position
         if wide:
@@ -1382,7 +1553,7 @@ def parse_flexible_candidate(file_list: bytes, file_data: bytes, layout: int,
                 if path_start >= end or any(file_list[times_start + 24:path_start]):
                     continue
                 try:
-                    path, suffix = decode_install_path(file_list[path_start:end], encoding)
+                    path, suffix = text_path(file_list[path_start:end])
                 except FormatError:
                     continue
                 matches.append((times_start, padding, times, path, suffix))
@@ -1391,14 +1562,23 @@ def parse_flexible_candidate(file_list: bytes, file_data: bytes, layout: int,
             attributes_end = times_start
         elif not matches:
             fixed_path_start = None
-            if layout == 17 and file_list[attributes_start:attributes_start + 8] == b"\0\xe0\x07\0\0\0\0\0":
+            if (layout == 17 and file_list[attributes_start] == 0
+                    and file_list[attributes_start + 1] in (0xE0, 0xE2)
+                    and file_list[attributes_start + 2:attributes_start + 4] == b"\x07\0"):
                 fixed_path_start = attributes_start + 8
             elif (layout == 17 and empty
                   and file_list[attributes_start:attributes_start + 14]
                   == b"\xe2\x07" + b"\0" * 12):
                 fixed_path_start = attributes_start + 14
             elif layout == 25 and empty:
-                fixed_path_start = attributes_start + 22
+                # No-time nodes have a 16-byte attribute vector, optionally
+                # followed by the six-byte all-zero index/reserved extension.
+                fixed_path_start = attributes_start + 16
+                if file_list[fixed_path_start:fixed_path_start + 6] == bytes(6):
+                    fixed_path_start += 6
+            elif (layout == 21 and not file_list[start + 8] & 8
+                  and file_list[start + 9:start + 12] == b"\xe0\x07\0"):
+                fixed_path_start = attributes_start
             elif layout == 26:
                 fixed_path_start = attributes_start + 4
             boundaries = ([fixed_path_start] if fixed_path_start is not None
@@ -1409,7 +1589,7 @@ def parse_flexible_candidate(file_list: bytes, file_data: bytes, layout: int,
                         and file_list[path_start - 1] != 0):
                     continue
                 try:
-                    path, suffix = decode_install_path(file_list[path_start:end], encoding)
+                    path, suffix = text_path(file_list[path_start:end])
                 except FormatError:
                     continue
                 path_matches.append((path_start, path, suffix))
@@ -1439,6 +1619,11 @@ def parse_flexible_candidate(file_list: bytes, file_data: bytes, layout: int,
         position = end
     if position != len(file_list):
         raise FormatError("flexible records do not consume the decoded block exactly")
+    ranges = sorted({(e["offset"], e["offset"] + e["compressed_size"])
+                     for e in entries if e["kind"] in (0, 1)
+                     and not e["empty"] and not e.get("external")})
+    if any(a[1] > b[0] for a, b in zip(ranges, ranges[1:])):
+        raise FormatError("flexible record payload ranges overlap")
     return entries
 
 
@@ -1449,6 +1634,7 @@ def validate_ranges(entries: list[dict], file_data: bytes,
     methods: dict[int | str, int] = {0: 0, 1: 0, 2: 0, "zlib-implicit": 0}
     unavailable = 0
     deltas = 0
+    unsupported_encodings: dict[int, int] = {}
     for entry in entries:
         if entry["kind"] not in (0, 1) or entry["empty"] or entry["uncompressed_size"] == 0:
             continue
@@ -1474,8 +1660,12 @@ def validate_ranges(entries: list[dict], file_data: bytes,
                 continue
             _, method = decompress_file_record(
                 file_data[start:end], entry["uncompressed_size"])
-        except FormatError:
+        except FormatError as exc:
             entry["recoverable"] = False
+            entry["unavailable_reason"] = str(exc)
+            if str(exc).startswith("unsupported compression method"):
+                marker = file_data[start]
+                unsupported_encodings[marker] = unsupported_encodings.get(marker, 0) + 1
             unavailable += 1
             continue
         entry["recoverable"] = True
@@ -1484,8 +1674,12 @@ def validate_ranges(entries: list[dict], file_data: bytes,
     for previous, current in zip(ranges, ranges[1:]):
         if current[0] < previous[1] and current[:2] != previous[:2]:
             raise FormatError(f"overlapping file-data records {previous[2]!r} and {current[2]!r}")
-    if unavailable:
-        issues.append(f"{unavailable} installed-file record(s) are incomplete or fail exact decompression")
+    unsupported = sum(unsupported_encodings.values())
+    if unavailable > unsupported:
+        issues.append(f"{unavailable - unsupported} installed-file record(s) are incomplete or fail exact decompression")
+    if unsupported:
+        markers = ", ".join(f"0x{marker:02x}" for marker in sorted(unsupported_encodings))
+        issues.append(f"{unsupported} installed-file record(s) use unsupported payload-encoding markers: {markers}")
     if deltas:
         issues.append(
             f"{deltas} binary-delta file record(s) require exact pre-existing destination files"
@@ -1510,17 +1704,21 @@ def parse_installer(input_path: Path, encoding: str = "cp1252") -> dict:
     overlay = pe_overlay_offset(data)
     issues: list[str] = []
     if data[overlay:overlay + len(MAGIC)] != MAGIC:
-        if u32(data, overlay) == 0x11241:
-            raise FormatError("Clickteam Patch Maker package requires original target files; it is not a self-contained installer")
         generation_tag, initial, prefix, blocks, trailing = parse_old_blocks(data, overlay, issues)
-        expected_list = 0x11243 if generation_tag == 0x11242 else 0x1123A
+        expected_list = {0x11242: 0x11243, 0x11241: 0x11242, 0x11239: 0x1123A}[generation_tag]
         lists = [block for block in blocks if block["id"] == expected_list]
         file_blocks = [block for block in blocks if block["id"] == FILE_DATA]
         if not lists or len(file_blocks) != 1:
             raise FormatError("old-generation container has no unique file-data block")
         file_data = file_blocks[0]["decoded"]
         products = []
-        if generation_tag == 0x11242:
+        if generation_tag == 0x11241:
+            layout = "patch-maker"
+            for index, item in enumerate(lists):
+                entries = parse_patch_maker(item["decoded"], file_data, encoding, issues)
+                products.append({"index": index, "directory": product_directory(index),
+                                 "layout": layout, "entries": entries})
+        elif generation_tag == 0x11242:
             if len(lists) != 1:
                 raise FormatError("multi-product Install Maker layout is unsupported")
             entries = parse_install_maker(lists[0]["decoded"], file_data, encoding, issues)
@@ -1555,11 +1753,14 @@ def parse_installer(input_path: Path, encoding: str = "cp1252") -> dict:
                         "that are not embedded in the executable"
                     )
             if len(lists) == 1:
-                entries = parse_early_creator(lists[0]["decoded"], file_data, encoding)
+                entries = parse_early_creator(lists[0]["decoded"], file_data, encoding,
+                                              validate_streams=False)
                 for entry in entries:
                     entry["extract"] = not entry["special_uninstaller"]
                 products.append({"index": 0, "directory": product_directory(0),
                                  "layout": layout, "entries": entries})
+                validate_old_multi_payloads(products, file_data, skip_deltas=True, issues=issues)
+                resolve_embedded_old_deltas(products, file_data, issues)
             else:
                 variants = []
                 for record_layout in ("standard", "extended", "compact"):
@@ -1588,26 +1789,9 @@ def parse_installer(input_path: Path, encoding: str = "cp1252") -> dict:
                     names = ", ".join(item[0] for item in variants)
                     raise FormatError(f"ambiguous early multi-product node layout ({names})")
                 _, products = variants[0]
-                delta_products = sorted({
-                    product["index"] for product in products
-                    if any(len(entry["node_raw"]) > 22 and entry["node_raw"][22] & 0x10
-                           for entry in product["entries"])
-                })
-                if delta_products:
-                    labels = ", ".join(product_directory(index) for index in delta_products)
-                    skipped = 0
-                    for product in products:
-                        for entry in product["entries"]:
-                            if (len(entry["node_raw"]) > 22
-                                    and entry["node_raw"][22] & 0x10):
-                                entry["recoverable"] = False
-                                skipped += 1
-                    issues.append(
-                        f"{skipped} binary-delta file(s) in {labels} require an exact "
-                        "pre-existing installed base file"
-                    )
                 validate_old_multi_payloads(
                     products, file_data, skip_deltas=True, issues=issues)
+                resolve_embedded_old_deltas(products, file_data, issues)
         entries = [entry for product in products for entry in product["entries"]]
         for product in products:
             validate_product_paths(product["entries"], True)
@@ -1693,6 +1877,9 @@ def extract_product(parsed: dict, product: dict, root: Path, report_prefix: str)
         if entry["empty"] or entry["uncompressed_size"] == 0:
             target.write_bytes(b"")
             method = None
+        elif "decoded_payload" in entry:
+            target.write_bytes(entry["decoded_payload"])
+            method = "clickteam-delta"
         elif entry.get("old_compression"):
             start = entry["offset"]
             record = file_data[start:start + entry["compressed_size"]]
@@ -1765,7 +1952,7 @@ def stage_extraction(parsed: dict, staging: Path, include_all: bool) -> list[dic
             block_rows.append({key: value for key, value in block.items() if key not in ("raw", "decoded")})
         manifest_entries = []
         for entry in parsed["entries"]:
-            row = {key: value for key, value in entry.items() if key != "node_raw"}
+            row = {key: value for key, value in entry.items() if key not in ("node_raw", "decoded_payload")}
             row["node_raw_hex"] = entry["node_raw"].hex()
             manifest_entries.append(row)
         manifest = {

@@ -5,7 +5,7 @@ export class crunchMania extends Format
 	name       = "Crunch-Mania Archive";
 	ext        = [".crm", ".crm2"];
 	website    = "http://fileformats.archiveteam.org/wiki/Crunch-Mania";
-	magic      = ["Crunch-Mania compressed data", "CrM2: Crunch-Mania", "CrM!: Crunch-Mania", "Archive: Crunch-Mania", /^Crunch-Mania data, LZH/];
+	magic      = ["Crunch-Mania compressed data", "CrM2: Crunch-Mania", "CrM!: Crunch-Mania", "Archive: Crunch-Mania", /^Crunch-Mania data, (LZH|standard)/];
 	packed     = true;
 	converters = ["decrmtool", "ancient", "xfdDecrunch"];
 }

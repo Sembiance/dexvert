@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,006)
+# Unsupported File Formats (4,009)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,824)
+## Other (2,827)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -1595,6 +1595,8 @@ Family/Format | Name | Extensions | Notes
 [other/chaosToyUniversePalette](https://discmaster.textfiles.com/search?format=chaosToyUniversePalette) | CHAOS Toy Universe Palette | .frt | 
 [other/chaosultdGEMParameters](https://discmaster.textfiles.com/search?format=chaosultdGEMParameters) | CHAOSultdGEM Parameters | .chs | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 [other/characterTableLibrary](https://discmaster.textfiles.com/search?format=characterTableLibrary) | Character Table Library | .tlb | 
+[other/charisma3DAnimationSystemAnimation](https://discmaster.textfiles.com/search?format=charisma3DAnimationSystemAnimation) | Charisma 3D Animation System Animation | .cha | 
+[other/charisma3DAnimationSystemObject](https://discmaster.textfiles.com/search?format=charisma3DAnimationSystemObject) | Charisma 3D Animation System Object | .cho | 
 [other/cheatEngineCheatTable](https://discmaster.textfiles.com/search?format=cheatEngineCheatTable) | Cheat Engine Cheat Table | .ct | 
 [other/checkItProData](https://discmaster.textfiles.com/search?format=checkItProData) | CheckIt Pro Data | .ckd | 
 [other/checksAndBalances](https://discmaster.textfiles.com/search?format=checksAndBalances) | Checks and Balances data |  | 
@@ -2868,6 +2870,7 @@ Family/Format | Name | Extensions | Notes
 [other/oCamlNativeLibrary](https://discmaster.textfiles.com/search?format=oCamlNativeLibrary) | OCaml native library | .cmxa | 
 [other/oCamlNativeObject](https://discmaster.textfiles.com/search?format=oCamlNativeObject) | OCaml native object | .cmx | 
 [other/oCamlObject](https://discmaster.textfiles.com/search?format=oCamlObject) | OCaml object | .cmo | 
+[other/oddworldAbesOddyseeLvl](https://discmaster.textfiles.com/search?format=oddworldAbesOddyseeLvl) | Oddworld: Abes Odyssee LVL | .lvl | 
 [other/officeAutoCorrectList](https://discmaster.textfiles.com/search?format=officeAutoCorrectList) | Office AutoCorrect List | .acl | 
 [other/officeProfileSettings](https://discmaster.textfiles.com/search?format=officeProfileSettings) | Office Profile-Settings |  | 
 [other/ogreSkeleton](https://discmaster.textfiles.com/search?format=ogreSkeleton) | OGRE Skeleton |  | 

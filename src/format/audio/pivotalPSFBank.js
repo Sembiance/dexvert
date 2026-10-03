@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_FFMPEG_CONVERTERS_BUILDER} from "../../program/video/ffmpeg.js";
 
 export class pivotalPSFBank extends Format
 {
@@ -7,5 +8,5 @@ export class pivotalPSFBank extends Format
 	forbidExtMatch = true;
 	magic          = ["Pivotal PSF Bank (psfb)"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = dexState => ([[].pushSequence(0, (dexState.meta.nbStreams || 0)).map(i => `ffmpeg[libre][format:psfb][outType:mp3][numStreams:${dexState.meta.nbStreams}][streamNum:${i}]`).join(" & ")]);
+	converters     = dexState => ([_FFMPEG_CONVERTERS_BUILDER({dexState, format : "psfb", outType : "mp3", libre : true})]);
 }

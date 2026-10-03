@@ -261,7 +261,8 @@ export class iso extends Format
 						r.push("IsoBuster[matchType:magic]");
 				}
 
-				r.push("cabextract[strongMatch]");	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
+				if(!dexState.hasMagics(["MacBinary 2"]))	// Otherwise cabextract produces junk files for certain files like archive/macBinary/3D_ARCHIVE•image
+					r.push("cabextract[strongMatch]");	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
 				
 				r.push("uniso", "uniso[block:512]");	// Fall back to uniso even with read/write errors
 

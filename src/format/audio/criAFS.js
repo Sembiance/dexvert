@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_FFMPEG_CONVERTERS_BUILDER} from "../../program/video/ffmpeg.js";
 
 export class criAFS extends Format
 {
@@ -7,5 +8,5 @@ export class criAFS extends Format
 	forbidExtMatch = true;
 	magic          = ["CRI AFS (afs)"];
 	metaProvider   = ["ffprobe[libre]"];
-	converters     = dexState => ([[].pushSequence(0, (dexState.meta.nbStreams || 0)).map(i => `ffmpeg[libre][format:afs][outType:mp3][numStreams:${dexState.meta.nbStreams}][streamNum:${i}]`).join(" & ")]);
+	converters     = dexState => ([_FFMPEG_CONVERTERS_BUILDER({dexState, format : "afs", outType : "mp3", libre : true})]);
 }

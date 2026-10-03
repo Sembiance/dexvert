@@ -2,6 +2,16 @@ import {Program} from "../../Program.js";
 import {fileUtil, imageUtil} from "xutil";
 import {C} from "../../C.js";
 
+export const _FFMPEG_CONVERTERS_BUILDER = ({dexState, format, outType, libre}) =>
+{
+	const prefix = `ffmpeg${libre ? "[libre]" : ""}[format:${format}][outType:${outType}]`;
+
+	if(outType==="pngFrame")
+		return [].pushSequence(0, (dexState.meta.nbReadFrames || 0)).map(i => `${prefix}[numFrames:${dexState.meta.nbReadFrames}][frameNum:${i}]`).join(" & ");
+
+	return [].pushSequence(0, (dexState.meta.nbStreams || 0)).map(i => `${prefix}[numStreams:${dexState.meta.nbStreams}][streamNum:${i}]`).join(" & ");
+};
+
 export class ffmpeg extends Program
 {
 	website = "https://ffmpeg.org/";
@@ -12,8 +22,10 @@ export class ffmpeg extends Program
 		codec       : "Specify which codec to treat the input file as. Run `ffmpeg -codecs` for a list. Default: Let ffmpeg decide",
 		fps         : "What frame rate to specify for conversion. Default: Let ffmpeg decide",
 		rate        : "What rate to set for the output. Default: Let ffmpeg decide",
-		numStreams  : "Total number of sterams available",
 		streamNum   : "Which stream num to extract. Default: Let ffmpeg decide",
+		numStreams  : "How many streams are in the file, used to format output filename leading zeros",
+		frameNum	: "Which frame num to extract. Default: Let ffmpeg decide",
+		numFrames   : "How many frames are in the file, used to format output filename leading zeros",
 		maxDuration : "Maximum duration (in seconds) to allow the output file to be",
 		libre       : "Use librempeg instead of ffmpeg"
 	};
@@ -55,6 +67,10 @@ export class ffmpeg extends Program
 		{
 			case "png":
 				a.push(...inFileArgs, "-frames:v", "1", ...noMeta, `file:${await r.outFile("out.png")}`);
+				break;
+
+			case "pngFrame":
+				a.push("-reinit_filter", "0", ...inFileArgs, "-vf", `select=eq(n\\,${r.flags.frameNum})`, "-frames:v", "1", "-fps_mode", "passthrough", "-noautoscale", ...noMeta, `file:${await r.outFile("out.png")}`);
 				break;
 
 			case "wav":
@@ -114,6 +130,15 @@ export class ffmpeg extends Program
 
 	renameOut = {
 		alwaysRename : true,
-		renamer      : [({r, newName, newExt}) => (Object.hasOwn(r.flags, "streamNum") ? [newName, r.flags.streamNum.toString().padStart(r.flags.numStreams.toString().length, "0"), newExt] : [newName, newExt])]
+		renamer      : [({r, newName, newExt}) =>
+		{
+			if(r.flags.outType==="pngFrame")
+				return [newName, r.flags.frameNum.toString().padStart(r.flags.numFrames.toString().length, "0"), newExt];
+
+			if(Object.hasOwn(r.flags, "streamNum"))
+				return [newName, r.flags.streamNum.toString().padStart(r.flags.numStreams.toString().length, "0"), newExt];
+			
+			return [newName, newExt];
+		}]
 	};
 }

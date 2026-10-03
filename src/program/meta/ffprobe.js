@@ -6,22 +6,23 @@ export class ffprobe extends Program
 	website = "https://ffmpeg.org/";
 	package = "media-video/ffmpeg";
 	flags   = {
-		libre : "Use librempegprobe instead of ffprobe"
+		libre       : "Use librempegprobe instead of ffprobe",
+		countFrames : "Count the number of frames in the input file"
 	};
 	bin  = r => (r.flags.libre ? "librempegprobe" : "ffprobe");
-	args = r => ["-show_streams", "-show_format", r.inFile()];
+	args = r => ["-v", "error", ...(r.flags.countFrames ? ["-select_streams", "v:0", "-count_frames", "-show_entries", "stream=nb_read_frames"] : ["-show_streams", "-show_format"]), r.inFile()];
 	post = r =>
 	{
-		let seenFormatSection = false;
+		let seenSectionHeader = false;
 		r.stdout.trim().split("\n").forEach(line =>
 		{
-			if(line.trim()==="[FORMAT]")
+			if(line.trim()===(r.flags.countFrames ? "[STREAM]" : "[FORMAT]"))
 			{
-				seenFormatSection = true;
+				seenSectionHeader = true;
 				return;
 			}
 
-			if(!seenFormatSection)
+			if(!seenSectionHeader)
 				return;
 			
 			const tag = (line.trim().match(/^(?<tag>TAG:)?(?<key>[^=]+)=(?<value>.+)$/) || {groups : {}}).groups;
@@ -35,7 +36,7 @@ export class ffprobe extends Program
 				if(value==="N/A")
 					return;
 
-				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? (key==="duration" ? (+value)*xu.SECOND : +value) : value;
+				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms", "nbReadFrames"].includes(key) ? (key==="duration" ? (+value)*xu.SECOND : +value) : value;
 				if(key==="startTime" && r.meta.startTime<0)
 					r.meta.startTime = 0;
 			}

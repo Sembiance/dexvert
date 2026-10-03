@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_FFMPEG_CONVERTERS_BUILDER} from "../../program/video/ffmpeg.js";
 
 export class proPinballSoundbank extends Format
 {
@@ -6,5 +7,5 @@ export class proPinballSoundbank extends Format
 	ext          = [".22c", ".11c", ".5c"];
 	magic        = ["Pro Pinball Series Soundbank (pp_bnk)"];
 	metaProvider = ["ffprobe"];
-	converters   = dexState => ([[].pushSequence(0, (dexState.meta.nbStreams || 0)).map(i => `ffmpeg[format:pp_bnk][outType:mp3][numStreams:${dexState.meta.nbStreams}][streamNum:${i}]`).join(" & ")]);
+	converters   = dexState => ([_FFMPEG_CONVERTERS_BUILDER({dexState, format : "pp_bnk", outType : "mp3"})]);
 }

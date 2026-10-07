@@ -34,6 +34,10 @@
   Maybe makes sense to start with fmt/1425 macdraw samples and work up in the versions 1426, 1427, etc
 <<<
 
+* Check to see if any of these can be converted with gameextractor vibe: https://discmaster.textfiles.com/search?extension=txd_tex&family=unknown
+
+* ADX files that didn't convert: https://discmaster.textfiles.com/browse/46309/Fights%202005.bin/TeenageMutantNinjaTurtles/Setup.rar/bgm.afs
+
 * teenyWeenyGamesBMVVideo	https://discmaster.textfiles.com/search?extension=bmv&detection=2b%3F%3F%3F%3F%3F%3F3a*
 
 * Other videos in unsupported.js video
@@ -68,6 +72,7 @@
   Then handle the "unsupported" fonts. Search dexvert for "unsupported" in src/format/font/
   Then vibe support for any KNOWN unsupported formats. If it's gonna stay unsupported, add a comment on the unsupported line // explaining why
   Add support for NFNT and FOND mac resources: https://discmaster.textfiles.com/browse/46647/GA2%2033%20-%202ad31mtj.img/%E2%80%A2Fonts/Rubino%20Sans%20ICG/Rubino%20Sans%20ICG.rsrc
+	FOND: https://discmaster.textfiles.com/browse/46896/howard-the-duck-tremors-2-hi-res-art-logos.iso/trem2bd01_typefaces.hqx/TREM2BD01_TYPEFACES/gathered%20fonts/Futura%20Medium%2024.rsrc
 
 * Add support for "database" (as a new family), converting various databases into sqlite3 databases
   * First task is to add sqlite3 support to dexvert.
@@ -112,6 +117,7 @@
 
 * Various "msCompound" specific file types
 
+* Create a script that will get from discmaster search JSON how many sample files (unique) there are for every unsupported format (see how unsupported.md is generated) and produce a 1 time HTML report grouped family, sorted in family by # of samples descending, and use that to guide what formats are most important to vibe code support for
 
 
 /---------------\

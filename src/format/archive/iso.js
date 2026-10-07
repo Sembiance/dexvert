@@ -50,7 +50,7 @@ export class iso extends Format
 	];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
-	idMeta = ({macFileType, macFileCreator}) => (["GImg", "HImg", "hImg"].includes(macFileType) && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
+	idMeta = ({macFileType, macFileCreator}) => (["GImg", "HImg", "hImg", "iImg"].includes(macFileType) && macFileCreator==="CDr3") || (macFileType==="DOCI" && macFileCreator==="CDWr");
 	confidenceAdjust = (inputfile, matchType, curConfidence, {idMetaData, xlog}) => ((idMetaData.macFileType==="rohd" && idMetaData.macFileCreator==="ddsk") ? -2 : 0);	// allow appleDiskCopyNDIF to handle these
 	idCheck = async (inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog}) =>
 	{

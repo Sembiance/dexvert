@@ -8,5 +8,5 @@ export class mdx extends Format
 	magic      = ["Media Descriptor", "application/x-mdx"];
 	weakMagic  = true;
 	priority   = this.PRIORITY.TOP;
-	converters = ["iat"];
+	converters = ["iat"];	// iat doesn't support "compressed" mdx images (for those, could vibe code a pythong scrupt using libMirage and bchunk) sample compressed mdx: https://archive.org/download/Triada_Russian_CD_Fights_2005/Fights%202005.mdx
 }

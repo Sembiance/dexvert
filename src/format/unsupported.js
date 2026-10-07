@@ -1049,6 +1049,7 @@ export default
 		falloutTacticsMission           : {name : "Fallout Tactics Mission", ext : [".mis"], magic : [/^geArchive: MIS_WORLD( |$)/]},
 		f1ChallengeMAS                  : {name : "F1 Challenge MAS", ext : [".mas"], magic : ["F1 Challenge MAS", /^geArchive: MAS_CUBEMAS( |$)/]},
 		gexLEV                          : {name : "GEX LEV", ext : [".lev"], magic : [/^geArchive: LEV( |$)/]},
+		gPoliceGameData                 : {name : "G-Police game data", ext : [".rdt"], magic : ["G-Police game data", /^geArchive: RDT_RDA2( |$)/]},
 		houseOfTheDeadGameDataContainer : {name : "The House of the Dead game data container", ext : [".rbh"], magic : [/^geArchive: VRAM_PIFF( |$)/, "The House of the Dead game data container"]},
 		hoyleCasinoPRF                  : {name : "Hoyle Casino PRF", ext : [".prf"], magic : [/^geArchive: PRF_PRF( |$)/]},
 		lucasFilmData                   : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel", /^geArchive: LFD_RMAP( |$)/]},
@@ -1327,7 +1328,6 @@ export default
 		godotCompiledScript                           : {name : "Godot Compiled script", ext : [".gdc"], magic : ["Godot Engine Compiled script"], weakMagic : true},
 		godotResourceData                             : {name : "Godot Resource data", ext : [".res"], magic : ["Godot Resource data"], weakMagic : true},
 		gothic3GameDataArchive                        : {name : "Gothic 3 game data archive", ext : [".p00", ".pak", ".p01"], magic : ["Gothic 3 game data archive"]},
-		gPoliceGameData                               : {name : "G-Police game data", ext : [".rdt"], magic : ["G-Police game data"]},
 		grandPrix5002GameData                         : {name : "Grand Prix 500 2 game data", ext : [".cpv"], magic : ["Grand Prix 500 2 game data"], weakMagic : true},
 		grandPrixCircuitSavedSlot                     : {name : "Grand Prix Circuit Saved slot", ext : [".stm"], magic : ["Grand Prix Circuit Saved slot"], weakMagic : true},
 		grandTheftAuto2MapLayout                      : {name : "Grand Theft Auto 2 Map Layout", ext : [".gmp"], magic : ["GTA2/GBH map layout (GMP), version 500", "Grand Theft Auto 2 map"], weakMagic : true},
@@ -2085,6 +2085,11 @@ export default
 		segaSaturnROM          : {name : "Sega Saturn ROM", ext : [".bin"], magic : [/^Sega Saturn disc image/, "application/x-saturn-rom"]},
 		superNintendoROM       : {name : "Super Nintendo ROM", ext : [".sfc", ".smc"], magic : ["Super Nintendo game - ROM Image", /^Super NES ROM image/], weakMagic : [/^Super NES ROM image/]},
 		vectrexROM             : {name : "Vectrex ROM", ext : [".vec", ".gam", ".bin"], magic : ["Vectrex game ROM", "Vectrex ROM image"]},
+
+		////////////////
+		// Supporting //
+		////////////////
+		fractalImageFormatDecodingTemplate : {name : "Fractal Image Format Decoding Template", ext : [".ftt"], magic : ["Fractal Image Format decoding Template"], weakMagic : true},
 
 		///////////
 		// Other //

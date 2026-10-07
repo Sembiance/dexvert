@@ -1,4 +1,4 @@
-# Unsupported File Formats (4,009)
+# Unsupported File Formats (4,010)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -1098,7 +1098,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (2,827)
+## Other (2,828)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/dotNETPortablePDB](https://discmaster.textfiles.com/search?format=dotNETPortablePDB) | .NET portable PDB | .pdb | 
@@ -2077,6 +2077,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalExplorerViewData](https://discmaster.textfiles.com/search?format=fractalExplorerViewData) | Fractal Explorer View data | .fev | 
 [other/fractalExtremePalette](https://discmaster.textfiles.com/search?format=fractalExtremePalette) | Fractal Extreme Paletten Datei | .fxp | 
 [other/fractalForgeParameters](https://discmaster.textfiles.com/search?format=fractalForgeParameters) | Fractal Forge parameters | .mnd | 
+[other/fractalImageFormatDecodingTemplate](https://discmaster.textfiles.com/search?format=fractalImageFormatDecodingTemplate) | Fractal Image Format Decoding Template | .ftt | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?format=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
 [other/frameworkIVSerialNumber](https://discmaster.textfiles.com/search?format=frameworkIVSerialNumber) | Framework IV Serial number | .ser | 
 [other/freeCADAssembly](https://discmaster.textfiles.com/search?format=freeCADAssembly) | freeCAD assembly | .asm | 

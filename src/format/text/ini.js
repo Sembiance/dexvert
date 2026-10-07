@@ -35,7 +35,7 @@ export class ini extends Format
 		"Unreal Engine Crash report", /^application\/x-godot-(resource|scene)/, /^Godot Engine Text (Resource|Scene)/, "Godot Engine Import settings", /^Total Annihilation (features data|GUI definition|map data|unit)/, "CAMtastic Aperture Wizard template",
 		"NCSA Mosaic configuration", /^LICQ configuration file, ASCII text$/, "TOPBENCH database", "Twistpad Syntax highlight script", "ARCsolo Host Adapter Configuration", "ARCsolo Host Adapters List", "Format: Mesh configuration (.CURE)",
 		"Format: CloneCD Control", "blueMSX Shortcuts", "Quartus Workspace", /^Format: FST$/, "Geany theme", "Total Annihilation campaigns data", "AutoCAD LT settings", "Microsoft Media Browser config", "jEEPers Program Configuration file",
-		"Doomsday Engine (jDoom) addon manifest",
+		"Doomsday Engine (jDoom) addon manifest", "K-Chess Elite game",
 		/^fmt\/(1212|1456|1614|1760)( |$)/
 	];
 	idMeta         = ({macFileType, macFileCreator}) => (macFileType==="INI " && ["MzIn", "NSIn"].includes(macFileCreator)) || (macFileType==="mINF" && macFileCreator==="T$2c");

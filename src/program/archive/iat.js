@@ -11,7 +11,7 @@ export class iat extends Program
 	unsafe     = true;
 	args       = r => ["-i", r.inFile(), "--cue", "-o", "out"];
 	cwd        = r => r.outDir();
-	runOptions = ({timeout : xu.MINUTE*10});	// can hang on things
+	runOptions = ({timeout : xu.MINUTE*15});	// can hang on things
 
 	postExec = async r =>
 	{

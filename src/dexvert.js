@@ -73,7 +73,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, prete
 	if(getIdentifications)
 	{
 		xlog.info`Getting identifications for ${inputFile.pretty()}`;
-		const identifyResult = await identify(inputFile, {xlog : xlog.clone("error")});
+		const identifyResult = await identify(inputFile, {fromDexvert : true, xlog : xlog.clone("error")});
 		if(identifyResult.idMeta)
 			idMeta = identifyResult.idMeta;
 		ids.push(...identifyResult.ids);

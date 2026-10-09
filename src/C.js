@@ -79,6 +79,8 @@ C.POLY_THUMB_COUNT_LOCK_FILE_PATH = "/mnt/ram/tmp/buildThumbPoly.lock";
 C.POLY_THUMB_COUNT_FILE_PATH = "/mnt/ram/tmp/buildThumbPoly.count";
 C.MAX_POLY_THUMB_ACTIVE = 15;
 
+C.IDENTIFY_DIR_CACHE_MAX_COUNT = 10;
+
 C.BROKEN_IMAGE_FILE_PATH = path.join(import.meta.dirname, "..", "pp", "aux", "broken.png");
 
 C.BROWSE_THUMB_WIDTH = 175;

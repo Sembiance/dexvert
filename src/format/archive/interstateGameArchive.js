@@ -5,7 +5,7 @@ export class interstateGameArchive extends Format
 	name           = "Interstate Series Game Archive";
 	ext            = [".zfs"];
 	forbidExtMatch = true;
+	priority       = this.PRIORITY.LOW;
 	magic          = ["Interstate serie game data archive", "Zork FileSystem game data archive", /^geArchive: ZFS_ZFS( |$)/, "dragon: ZFS "];
-	forbiddenMagic = [/^geArchive: ZFS_ZFS3( |$)/];
 	converters     = ["gameextractor[codes:ZFS_ZFS]", "dragonUnpacker[types:ZFS]"];
 }

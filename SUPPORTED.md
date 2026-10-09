@@ -1,11 +1,11 @@
-# Supported File Formats (3,929)
+# Supported File Formats (3,928)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (739)
+## Archive (738)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | "The Sims" object | .flr .wll .iff | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/theSimsObject/)
@@ -207,7 +207,6 @@ archive | [DOS BACKUP file](http://fileformats.archiveteam.org/wiki/BACKUP_(MS-D
 archive | [DOSIMG Disk Image](http://fileformats.archiveteam.org/wiki/IMG_(DOSIMG)) | .img | [aaru](https://github.com/aaru-dps/Aaru) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/dosimg/)
 archive | [Dr. Riptide Game Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/drRiptideGameArchive/)
 archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php?title=Tape%5CDisk_Preservation#VDK_File_Format) | .vdk | [dcopy](https://github.com/pulkomandy/ddosutils) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/dragonVDK/)
-archive | Drakan: Order Of The Flame Saved Game | .rsg .rlt | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/drakanOrderOfTheFlameSavedGame/)
 archive | Dreamfall Archive | .pak | [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dreamfallPAKArchive/)
 archive | DRPK Archive | .dat | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/drpkArchive/)
 archive | dump File |  | [restore](https://dump.sourceforge.io/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dumpFile/)
@@ -337,7 +336,7 @@ archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShi
 archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldInstallerArchive/)
 archive | [InstallShield Self-Extractor](http://justsolve.archiveteam.org/wiki/InstallShield_Self-Extracting_EXE) | .exe | [unISV3](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [39 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldZ/)
-archive | InstallUs Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/installUs/)
+archive | InstallUs Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/installUs/)
 archive | INTENIUM Installer | .exe | [vibeExtract](https://github.com/Sembiance/dexvert) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/intenium/)
 archive | [Interchangeable Preservation Format Floppy Disk Image](http://fileformats.archiveteam.org/wiki/IPF) | .ipf | [uaeunp](https://www.winuae.net/download/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ipfFloppyDiskImage/)
 archive | Interstate Series Game Archive | .zfs | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/interstateGameArchive/)
@@ -643,7 +642,7 @@ archive | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X)
 archive | Sun Package Data Stream | .pkg | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sunPackageDataStream/)
 archive | [SuperJPG Thumbnail Cache](http://fileformats.archiveteam.org/wiki/SuperJPG_thumbnail_cache) | .tnc | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/superJPGThumbnailCache/)
 archive | [Superscape World](https://archive.superscape.org/About%20Superscape.txt) | .vrt .xvr .svr | [superscapeVRT](https://archive.superscape.org/Software/VRT/VRT_5.60.0.4112.iso) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/superscapeWorld/)
-archive | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/surrealSoftwareGameArchive/)
+archive | Surreal Software Game Archive | .adu .sdu .tdu .gdu .vdu .mdu .xdu .wdu .odu .qdu1 .ldu .lvl1 .qdu .lvl .rrc .rsg .rlt | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/surrealSoftwareGameArchive/)
 archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [swagReader](http://fileformats.archiveteam.org/wiki/SWG) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/swagPacket/)
 archive | [SWiSH Movie](http://fileformats.archiveteam.org/wiki/SWiSH_Movie) | .swi | [swish](https://archive.org/details/onyxdvd-16) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/swish/)
 archive | SYN Archive | .syn | [gameextractor](https://sourceforge.net/projects/gameextractor/files/) [dragonUnpacker](https://github.com/elbereth/DragonUnPACKer) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/synArchive/)
@@ -1452,7 +1451,7 @@ image | [Degas Elite Brush](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_
 image | [DEGAS Elite Icon](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_icon) | .icn | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) | [13 sample files](https://sembiance.com/fileFormatSamples/image/degasEliteIcon/)
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](http://snisurset.net/code/abydos/) [nconvert](https://www.xnview.com/en/nconvert/) | [18 sample files](https://sembiance.com/fileFormatSamples/image/degasHi/)
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 .suh | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](http://snisurset.net/code/abydos/) [nconvert](https://www.xnview.com/en/nconvert/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/degasHiPI/)
-image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](http://snisurset.net/code/abydos/) [nconvert](https://www.xnview.com/en/nconvert/) | [52 sample files](https://sembiance.com/fileFormatSamples/image/degasLow/)
+image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](http://snisurset.net/code/abydos/) [nconvert](https://www.xnview.com/en/nconvert/) | [51 sample files](https://sembiance.com/fileFormatSamples/image/degasLow/)
 image | [Degas Low Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi1 | [recoil2png](http://recoil.sourceforge.net) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](http://snisurset.net/code/abydos/) [nconvert](https://www.xnview.com/en/nconvert/) | [24 sample files](https://sembiance.com/fileFormatSamples/image/degasLowPI/)
 image | [Degas Medium Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc2 | [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [abydosconvert](http://snisurset.net/code/abydos/) [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://sembiance.com/fileFormatSamples/image/degasMed/)
 image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi2 | [nconvert](https://www.xnview.com/en/nconvert/) [wuimg](https://codeberg.org/kaleido/wuimg) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](http://snisurset.net/code/abydos/) | [15 sample files](https://sembiance.com/fileFormatSamples/image/degasMedPI/)
@@ -2729,7 +2728,7 @@ text | ASP Control Directive | .ascx |  | [10 sample files](https://sembiance.co
 text | ASP WebService Directive File | .asmx |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/aspWebServiceDirectiveFile/)
 text | ASP.NET Web Form |  |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/aspNETWebForm/)
 text | aspell Personal dictionary | .per .pws |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/aspellPersonalDictionary/)
-text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm .s |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/asm/)
+text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm .s |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/asm/)
 text | Atari CardFile PIM data | .dat |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/atariCardFilePIMData/)
 text | Atari800 emulator Configuration | .cfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/atari800EmulatorConfiguration/)
 text | ATK Data Flow Diagram | .dfd |  | [16 sample files](https://sembiance.com/fileFormatSamples/text/atkDataFlowDiagram/)
@@ -3088,7 +3087,7 @@ text | Imageworks 3D LUT format | .spi3d |  | [10 sample files](https://sembianc
 text | ImgBurn Graph data | .ibg |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/imgBurnGraphData/)
 text | iMovie Project |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/iMovieProject/)
 text | Impatica OnCue Project | .ipj |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/impaticaOnCueProject/)
-text | Indiana Jones and the Infernal Machine keys configuration | .kfg |  | 
+text | Indiana Jones and the Infernal Machine keys configuration | .kfg |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/indianaInfernalMachineKeyConfig/)
 text | IndyCar Racing drivers info | .txt |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingDriversInfo/)
 text | IndyCar Racing track info | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingTrackInfo/)
 text | IndyCar Racing track record info | .txt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/indyCarRacingTrackRecordInfo/)
@@ -3577,7 +3576,7 @@ text | Sprint converter Definition | .def |  | [10 sample files](https://sembian
 text | SPSS Portable Data Format | .por |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/portableDataFormat/)
 text | Spybot Search'n'Destroy process data | .tnfo |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/spybotSearchNDestroyProcessData/)
 text | SQR script | .sqr .sqc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/sqrScript/)
-text | Sscriptlet | .htc |  | 
+text | Sscriptlet | .htc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/scriptlet/)
 text | SSH Public key | .pub |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sshPublicKey/)
 text | ST-6 color Table | .tbl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/st6ColorTable/)
 text | Standard ACIS Text | .sat |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/standardACISText/)
@@ -3621,7 +3620,7 @@ text | TeX font aliases | .map |  | [12 sample files](https://sembiance.com/file
 text | TeX transcript | .log |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/texTranscript/)
 text | Texinfo index | .cps .kys .vrs .fns .pgs .tps |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/texinfoIndex/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [108 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [109 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | Text602 document | .602 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/text602Document/)
 text | Text602 printer Driver | .dst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/text602PrinterDriver/)
 text | TextGrid annotation | .textgrid |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/textGridAnnotation/)

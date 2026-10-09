@@ -74,7 +74,7 @@
   Add support for NFNT and FOND mac resources: https://discmaster.textfiles.com/browse/46647/GA2%2033%20-%202ad31mtj.img/%E2%80%A2Fonts/Rubino%20Sans%20ICG/Rubino%20Sans%20ICG.rsrc
 	FOND: https://discmaster.textfiles.com/browse/46896/howard-the-duck-tremors-2-hi-res-art-logos.iso/trem2bd01_typefaces.hqx/TREM2BD01_TYPEFACES/gathered%20fonts/Futura%20Medium%2024.rsrc
 
-* Add support for "database" (as a new family), converting various databases into sqlite3 databases
+* Add support for "database" (as a new family), converting various databases into sqlite3 databases, test: https://discmaster.textfiles.com/view/12118/FreelogNo100-NovembreDecembre2010.iso/Programmation/BASIC-256/BASIC256-0.9.6.42_Win32_Install.exe/Examples/quotations.sqlite3
   * First task is to add sqlite3 support to dexvert.
     It should "extract" all binary data columns as "files" so that embedded images and what not are "visible" in a recurse
 	This way if the database has a zip or exe or something else in it, dexvert will continue to handle them
@@ -119,11 +119,14 @@
 
 * Create a script that will get from discmaster search JSON how many sample files (unique) there are for every unsupported format (see how unsupported.md is generated) and produce a 1 time HTML report grouped family, sorted in family by # of samples descending, and use that to guide what formats are most important to vibe code support for
 
+* Game map viewing could be greatly improved, doom, quake, etc etc to where it could be all textured and more of a "fly around" the map rather than the roate the 3D model it is now
+
 
 /---------------\
 | High Priority |
 \---------------/
-
+* Source code files in general do not have the best detection. For example text/asm isn't detected properly at all
+  Finding a fast, performant source code detector would be nice. Would then want to selective reprocess *.asm and also text/asm
 
 
 /-----------------\

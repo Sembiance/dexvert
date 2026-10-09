@@ -38,10 +38,14 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 
 // These converters are a bit flaky, not sure why yet or maybe I do, see program/*/converter.js for more info
 const FLAKY_CONVERTERS = [
+	"adobeIllustrator",
 	"canvas5",
 	"cinema4D82",
 	"corelDRAW",
 	"Crowbar & noesis",
+	"kwikDraw",
+	"kwikDraw130",
+	"MPG_T2G",
 	"noesis",
 	"paintDotNet",
 	"pageMaker4",
@@ -49,6 +53,8 @@ const FLAKY_CONVERTERS = [
 	"pageMaker7",
 	"quarkXPress6",
 	"threeDObjectConverter",
+	"T2G_T3G",
+	"T3G_T4G",
 	"vcdxrip"
 ];
 
@@ -180,9 +186,10 @@ const FORMAT_PROGRAM_FLAG = {
 	}
 };
 
-// these formats produce a files, but the names are always different
+// these formats produce a files, but the names are always or sometimes different
 const FILE_DYNAMIC_NAMES = [
-	"document/ibmBookManagerBook"
+	"document/ibmBookManagerBook",
+	"image/micrografxDraw"	// BLAKE06.DRW sometimes produces an .svg, sometimes a .png
 ];
 
 const FLEX_SIZE_PROGRAMS = {
@@ -442,7 +449,7 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS = {
 	},
 	other :
 	{
-		microsoftAgentCharacter : ["sample0_12093_Reaper_audio_fallback.acs"]	// the render warning is diffrent each time
+		microsoftAgentCharacter : ["sample0_12093_Reaper_audio_fallback.acs", "sample1_VDA5_Shrek_large_audio.acs"]	// the render warning is diffrent each time
 	},
 	video :
 	{
@@ -621,6 +628,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/image\/graphSaurus\/SNAT-2.SR5/, "image", "msxBASIC"],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
+	[/image\/pixit\/PIX640\.EXX$/, "executable", "exe"],
 	[/image\/teletextPackets\/TETRIS\.T42/, "text", "txt"],
 	[/music\/renoise\/.+/i, "archive", "zip"],
 	[/music\/tss\/.+/i, "text", true],
@@ -629,6 +637,7 @@ const DISK_FAMILY_FORMAT_MAP = [
 	[/poly\/povRay\/.+/i, "text", true],
 	[/poly\/vrml\/.+/i, "text", true],
 	[/poly\/ydl\/.+/i, "text", true],
+	[/text\/asm\/.*$/, "text", true],
 	[/text\/javaSource\/(IdenticalTo|Printing|PriorityQueue|Transforming)\.java$/, "text", "txt"],
 	[/unsupported\/emacsCompiledLisp\/FILES\.ELC/i, "text", true],
 	[/video\/acornReplayVideo\/(ducks2|bluegreen|parrot)/, "text", true],

@@ -116,6 +116,8 @@ Specify that this match should be processed DEAD LAST as a match of last resort,
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
 
+>>> customMatch = async ({inputFile, otherFiles, otherDirs, xlog})
+If a file can only match based on crazy criteria, such as other files in the dir (see image/doomPicture.js) then you can match this way
 
 >>> unsupported = true
 If set to true, then this file can only be identified by not processed.

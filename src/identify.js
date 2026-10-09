@@ -205,7 +205,36 @@ export async function getIdMeta(inputFile)
 	return idMeta;
 }
 
-export async function identify(inputFileRaw, {xlog=new XLog()}={})
+const DIR_CACHE_HOT = new Map();
+const DIR_CACHE_COLD = new Map();
+
+function dirCacheGet(root)
+{
+	const value = DIR_CACHE_HOT.get(root) || DIR_CACHE_COLD.get(root);
+	if(!value)
+		return;
+
+	DIR_CACHE_COLD.delete(root);
+	DIR_CACHE_HOT.delete(root);
+	DIR_CACHE_HOT.set(root, value);
+	if(DIR_CACHE_HOT.size>Math.floor(C.IDENTIFY_DIR_CACHE_MAX_COUNT*0.7))
+	{
+		const oldest = DIR_CACHE_HOT.keys().next().value;
+		DIR_CACHE_COLD.set(oldest, DIR_CACHE_HOT.get(oldest));
+		DIR_CACHE_HOT.delete(oldest);
+	}
+
+	return value;
+}
+
+function dirCachePut(root, value)
+{
+	DIR_CACHE_COLD.set(root, value);
+	if(DIR_CACHE_COLD.size+DIR_CACHE_HOT.size>C.IDENTIFY_DIR_CACHE_MAX_COUNT)
+		DIR_CACHE_COLD.delete(DIR_CACHE_COLD.keys().next().value);
+}
+
+export async function identify(inputFileRaw, {fromDexvert, xlog=new XLog()}={})
 {
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
 	xlog.debug`Identify starting identification for: ${inputFile.pretty()}`;
@@ -222,8 +251,22 @@ export async function identify(inputFileRaw, {xlog=new XLog()}={})
 	const detections = await getDetections(f, {xlog});
 	xlog.debug`Identify raw detections:\n${detections.map(v => v?.pretty("\t") || v).join("\n")}`;
 
-	const otherFiles = (await (await fileUtil.tree(f.root, {depth : 1, nodir : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file && file.absolute!==f.input.absolute);
-	const otherDirs = (await (await fileUtil.tree(f.root, {depth : 1, nofile : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file);
+	let otherFiles, otherDirs;
+	const dirCache = dirCacheGet(f.root);
+	if(dirCache)
+	{
+		({otherFiles, otherDirs} = dirCache);
+	}
+	else
+	{
+		otherFiles = (await (await fileUtil.tree(f.root, {depth : 1, nodir : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file);
+		otherDirs = (await (await fileUtil.tree(f.root, {depth : 1, nofile : true})).filter(v => !v.endsWith("§")).parallelMap(async v => await DexFile.create(v))).filter(file => !!file);
+
+		if(fromDexvert)
+			dirCachePut(f.root, {otherFiles, otherDirs});
+	}
+
+	otherFiles = otherFiles.filter(file => file.absolute!==f.input.absolute);
 
 	// find the largest byteChecks check and read that many bytes in
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => Array.force(format.byteCheck || [])).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
